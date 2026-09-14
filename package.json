@@ -1,0 +1,27 @@
+{
+  "name": "findmyinvite",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node --preserve-symlinks --preserve-symlinks-main run.mjs",
+    "build": "node --preserve-symlinks --preserve-symlinks-main node_modules/typescript/bin/tsc --noEmit && node --preserve-symlinks --preserve-symlinks-main run.mjs --build",
+    "preview": "node --preserve-symlinks --preserve-symlinks-main preview.mjs",
+    "test:server": "node --preserve-symlinks --preserve-symlinks-main --test tests/server*.mjs"
+  },
+  "dependencies": {
+    "@vercel/blob": "^2.8.0",
+    "lucide-react": "^0.468.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "three": "^0.180.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@types/three": "^0.180.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "typescript": "^5.7.0",
+    "vite": "^6.0.0"
+  }
+}

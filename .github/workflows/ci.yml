@@ -1,0 +1,41 @@
+name: Verify and deploy
+on:
+  pull_request:
+  push:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: findmyinvite-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run test:server
+      - run: npm run build
+  production:
+    if: github.ref_name == github.event.repository.default_branch && github.event_name != 'pull_request'
+    needs: verify
+    runs-on: ubuntu-latest
+    environment: production
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npx --yes vercel@50.0.0 pull --yes --environment=production --token="$VERCEL_TOKEN"
+      - run: npx --yes vercel@50.0.0 build --prod --token="$VERCEL_TOKEN"
+      - run: npx --yes vercel@50.0.0 deploy --prebuilt --prod --token="$VERCEL_TOKEN"

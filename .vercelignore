@@ -1,0 +1,7 @@
+node_modules
+work
+public/review
+dist/review
+.env*
+*.md
+tests

@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.env*
+!.env.example
+*.log
+.vercel/
+
+.vercel
+public/review/

@@ -1,0 +1,119 @@
+[
+  {
+    "id": "rose-gold-blush-royal",
+    "name": "Royal Imperial",
+    "description": "Cinematic rose-gold opening with luxurious motion storytelling",
+    "collection": "royal",
+    "badge": "Cinematic",
+    "sort_order": 0,
+    "published": false
+  },
+  {
+    "id": "royal-majesty",
+    "name": "Royal Majesty",
+    "description": "Porcelain blue ballroom romance with painterly cinematic grandeur",
+    "collection": "royal",
+    "badge": "New",
+    "sort_order": 1,
+    "published": false
+  },
+  {
+    "id": "modern-minimal-royal",
+    "name": "Royal Elegance",
+    "description": "Velvet cream and crimson cinematic experience with palace motifs",
+    "collection": "royal",
+    "badge": "Premium",
+    "sort_order": 2,
+    "published": false
+  },
+  {
+    "id": "royal-prestige",
+    "name": "Royal Prestige",
+    "description": "Prestigious cinematic opening with refined elegance and grandeur",
+    "collection": "royal",
+    "badge": "New",
+    "sort_order": 3,
+    "published": false
+  },
+  {
+    "id": "royal-heritage",
+    "name": "Royal Heritage",
+    "description": "Timeless cinematic opening with regal heritage storytelling",
+    "collection": "royal",
+    "badge": "New",
+    "sort_order": 4,
+    "published": false
+  },
+  {
+    "id": "royal-grace",
+    "name": "Royal Grace",
+    "description": "Sage garden serenity with pearl drapes and graceful cinematic reveal",
+    "collection": "royal",
+    "badge": "New",
+    "sort_order": 5,
+    "published": false
+  },
+  {
+    "id": "royal-crest",
+    "name": "Royal Crest",
+    "description": "Warm ivory florals, antique burgundy wax seal, and lakeside cinematic romance",
+    "collection": "royal",
+    "badge": "New",
+    "sort_order": 6,
+    "published": false
+  },
+  {
+    "id": "royal-legacy",
+    "name": "Royal Legacy",
+    "description": "Burgundy velvet curtains, antique gold ornament, and a timeless cinematic reveal",
+    "collection": "royal",
+    "badge": "New",
+    "sort_order": 7,
+    "published": false
+  },
+  {
+    "id": "emerald-noir",
+    "name": "Emerald Noir",
+    "description": "Deep green and gold with ornate corner accents and luxury door opening",
+    "collection": "classic",
+    "badge": "",
+    "sort_order": 8,
+    "published": false
+  },
+  {
+    "id": "ivory-elegance",
+    "name": "Crimson Royale",
+    "description": "Dark charcoal base with gold and deep red accents, luxury card reveal",
+    "collection": "classic",
+    "badge": "",
+    "sort_order": 9,
+    "published": false
+  },
+  {
+    "id": "rose-gold-blush",
+    "name": "Rose Gold Blush",
+    "description": "Blush pink and rose gold with ornate floral door animation",
+    "collection": "classic",
+    "badge": "",
+    "sort_order": 10,
+    "published": false
+  },
+  {
+    "id": "modern-minimal",
+    "name": "Modern Minimal",
+    "description": "Deep navy and gold with geometric patterns and book-style opening",
+    "collection": "classic",
+    "badge": "New",
+    "sort_order": 11,
+    "published": false
+  },
+  {
+    "id": "royal-elegance",
+    "name": "Majestic Love",
+    "description": "Classic ivory and gold with palace motifs and velvet curtain reveal",
+    "collection": "classic",
+    "badge": "New",
+    "sort_order": 12,
+    "published": false
+  }
+]

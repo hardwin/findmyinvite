@@ -1,0 +1,40 @@
+/* Values matched to the source DOM captured in iteration 3. */
+.fmi-storefront .hero-fade{inset:auto 0 0;height:160px;background:linear-gradient(to bottom,transparent,hsl(var(--background)))}
+.fmi-storefront .hero:after{content:'';position:absolute;pointer-events:none;width:800px;height:800px;left:50%;top:50%;transform:translate(-50%,-50%);border-radius:50%;opacity:.08;background:radial-gradient(circle,hsl(var(--primary)),transparent 70%)}
+.fmi-storefront .hero .fmi-button{height:44px;min-height:44px;min-width:0;padding:0 40px;font-size:16px;font-weight:500;border-radius:6px}
+.fmi-storefront .hero .fmi-button.outline{padding:0 32px;border-color:hsl(var(--primary)/.3);background:hsl(var(--background))}
+.fmi-storefront .invitation-preview img{width:100%;height:100%;object-fit:cover}
+.fmi-storefront .invitation-preview{border-radius:16px;box-shadow:0 10px 30px #0002,inset 0 0 0 1px hsl(var(--primary)/.55)}
+.fmi-storefront .invitation-preview:after{content:'';position:absolute;inset:8px;border:1px solid hsl(var(--primary)/.5);border-radius:12px;pointer-events:none}
+.fmi-gallery .type-select{height:44px;width:260px;padding:8px 12px;font-size:14px;font-weight:500;border-radius:16px;border:1px solid #ffffff40;background:#ffffff1a;backdrop-filter:blur(24px);box-shadow:0 8px 30px -12px #0007,inset 0 1px #ffffff59}
+.fmi-gallery .collection-tabs{width:max-content;max-width:100%;margin:0 auto 44px;gap:0;padding:4px;border:1px solid #ffffff40;background:#ffffff1a;border-radius:999px;backdrop-filter:blur(24px);box-shadow:0 10px 35px -12px #0007,inset 0 1px #ffffff59}
+.fmi-gallery .collection-tabs button{padding:10px 20px;font-size:14px;font-weight:500;min-height:40px;border:none;color:hsl(var(--muted-foreground));white-space:nowrap;justify-content:center}
+.fmi-gallery .collection-tabs button.selected{color:hsl(20 30% 10%);background:linear-gradient(90deg,hsl(45 90% 64%/.9),hsl(40 85% 55%/.9),hsl(32 78% 46%/.9));box-shadow:0 10px 28px -8px hsl(45 80% 50%/.6),inset 0 1px hsl(45 100% 88%/.6)}
+.fmi-gallery .template-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;max-width:1280px;margin:auto;padding-right:8px}
+.fmi-gallery .template-card{background-position:center top;border:1px solid hsl(var(--border)/.6);box-shadow:0 4px 18px #0000002e,0 1px 4px #0000001f}
+.fmi-gallery .template-art{height:144px;padding:8px;position:relative}
+.fmi-gallery .view-demo{background:#0000008c;backdrop-filter:blur(12px);padding:4px 12px;font-size:11px;color:white;border-color:#ffffff66;box-shadow:0 4px 6px #0002}
+.fmi-gallery .template-description{padding:12px;background:linear-gradient(#00000059,#000000b8);backdrop-filter:blur(2px)}
+.fmi-gallery .template-description h3{color:white;text-shadow:0 1px 6px #000c}
+.fmi-gallery .template-description p{font-size:11px;line-height:1.625;color:#ffffffd9;opacity:1;min-height:0;text-shadow:0 1px 4px #000c}
+.fmi-gallery .design-button{height:32px;min-height:32px;padding:0 4px;font:12px Cinzel,serif;letter-spacing:.14em;background:linear-gradient(135deg,#191410,#2b2115 55%,#141009);border-color:#d4af378c;color:#d4af37;box-shadow:inset 0 1px #d4af3740,0 2px 10px #0007;text-shadow:0 1px 4px #000b}
+.fmi-gallery .template-badge{top:8px;left:8px;background:#f59e0be6;color:white;font-size:10px;padding:2px 8px;border-radius:999px}
+.fmi-gallery .classic-card{background:hsl(var(--card))!important;color:hsl(var(--foreground));box-shadow:0 2px 12px #0000000f,0 1px 3px #0000000a}
+.fmi-gallery .classic-card .template-description{background:none;backdrop-filter:none}
+.fmi-gallery .classic-card .template-description h3{color:hsl(var(--foreground));text-shadow:none}
+.fmi-gallery .classic-card .template-description p{color:hsl(var(--muted-foreground));text-shadow:none}
+.fmi-gallery .classic-card .design-button{font:500 12px Lora,serif;letter-spacing:normal;text-transform:none;background:hsl(var(--primary));color:hsl(var(--primary-foreground));border:none;box-shadow:none;text-shadow:none}
+.fmi-gallery .classic-template-name{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:18px 'Cormorant Garamond',serif;color:#fcd34d;opacity:.6;pointer-events:none}
+.fmi-gallery .card-emerald-noir .template-art{background:linear-gradient(135deg,#022c22,#14532d)}
+.fmi-gallery .card-ivory-elegance .template-art{background:linear-gradient(135deg,#0c0a09,#450a0acc,#1c1917)}
+.fmi-gallery .card-ivory-elegance .template-badge{background:#f43f5ee6}
+.fmi-gallery .card-rose-gold-blush .template-art{background:linear-gradient(135deg,#ffe4e6,#fbcfe8)}
+.fmi-gallery .card-rose-gold-blush .classic-template-name{color:#e11d48}
+.fmi-gallery .card-modern-minimal .template-art{background:linear-gradient(135deg,#1e293b,#0f172a)}
+.fmi-gallery .card-royal-elegance .template-art{background:linear-gradient(135deg,#fffbeb,#fef3c7)}
+.fmi-gallery .card-royal-elegance .classic-template-name{color:#b45309}
+@media(min-width:640px){.fmi-gallery .template-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(min-width:768px){.fmi-storefront .hero-fade{height:224px}.fmi-gallery .type-select{width:300px}.fmi-gallery .collection-tabs button{font-size:16px;padding:10px 28px}.fmi-gallery .template-grid{gap:20px;padding-right:16px}.fmi-gallery .template-art{height:176px}.fmi-gallery .template-description{padding:16px}.fmi-gallery .template-description p{font-size:12px}.fmi-gallery .classic-template-name{font-size:20px}}
+@media(min-width:1024px){.fmi-gallery .template-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(min-width:1280px){.fmi-gallery .template-grid{grid-template-columns:repeat(5,minmax(0,1fr))}}
+@media(max-width:400px){.fmi-gallery .collection-tabs button{padding-left:12px;padding-right:12px;font-size:13px}}

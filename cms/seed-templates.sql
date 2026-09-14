@@ -1,0 +1,16 @@
+-- Import as unpublished. Review media permissions before publication.
+insert into public.template_catalog(id,name,description,collection,badge,sort_order,published) values
+('rose-gold-blush-royal','Royal Imperial','Cinematic rose-gold opening with luxurious motion storytelling','royal','Cinematic',0,false),
+('royal-majesty','Royal Majesty','Porcelain blue ballroom romance with painterly cinematic grandeur','royal','New',1,false),
+('modern-minimal-royal','Royal Elegance','Velvet cream and crimson cinematic experience with palace motifs','royal','Premium',2,false),
+('royal-prestige','Royal Prestige','Prestigious cinematic opening with refined elegance and grandeur','royal','New',3,false),
+('royal-heritage','Royal Heritage','Timeless cinematic opening with regal heritage storytelling','royal','New',4,false),
+('royal-grace','Royal Grace','Sage garden serenity with pearl drapes and graceful cinematic reveal','royal','New',5,false),
+('royal-crest','Royal Crest','Warm ivory florals, antique burgundy wax seal, and lakeside cinematic romance','royal','New',6,false),
+('royal-legacy','Royal Legacy','Burgundy velvet curtains, antique gold ornament, and a timeless cinematic reveal','royal','New',7,false),
+('emerald-noir','Emerald Noir','Deep green and gold with ornate corner accents and luxury door opening','classic','',8,false),
+('ivory-elegance','Crimson Royale','Dark charcoal base with gold and deep red accents, luxury card reveal','classic','',9,false),
+('rose-gold-blush','Rose Gold Blush','Blush pink and rose gold with ornate floral door animation','classic','',10,false),
+('modern-minimal','Modern Minimal','Deep navy and gold with geometric patterns and book-style opening','classic','New',11,false),
+('royal-elegance','Majestic Love','Classic ivory and gold with palace motifs and velvet curtain reveal','classic','New',12,false)
+on conflict(id) do nothing;
