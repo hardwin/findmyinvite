@@ -1,0 +1,127 @@
+{
+  "checkedAt": "2026-09-14T14:42:48.914Z",
+  "note": "Project promotion variables updated for FUTURE deployments. Current deployed runtime shown separately; no deployment or catalog publication performed.",
+  "teamPlan": "hobby",
+  "projectPromotion": [
+    {
+      "key": "PROMOTION_START_AT",
+      "value": "2026-09-14T23:59:00+05:30",
+      "target": [
+        "production",
+        "preview",
+        "development"
+      ]
+    },
+    {
+      "key": "PROMOTION_END_AT",
+      "value": "2026-10-14T23:59:00+05:30",
+      "target": [
+        "production",
+        "preview",
+        "development"
+      ]
+    }
+  ],
+  "deployedConfig": {
+    "configured": true,
+    "serverNow": "2026-09-14T14:42:43.601Z",
+    "promotion": {
+      "startsAt": "2026-09-14T21:00:00+05:30",
+      "endsAt": "2026-10-14T21:00:00+05:30",
+      "active": false
+    },
+    "prices": {
+      "classic": 1199,
+      "royal": 1499
+    },
+    "uploadsConfigured": true
+  },
+  "publishedTemplateCount": 0,
+  "productionDeployGate": "false",
+  "domains": [
+    {
+      "name": "findmyinvite.com",
+      "misconfigured": true,
+      "aValues": [
+        "2.57.91.91"
+      ],
+      "cnames": [],
+      "recommendedIPv4": [
+        {
+          "rank": 1,
+          "value": [
+            "216.198.79.1",
+            "64.29.17.1"
+          ]
+        },
+        {
+          "rank": 2,
+          "value": [
+            "76.76.21.21"
+          ]
+        }
+      ],
+      "recommendedCNAME": [
+        {
+          "rank": 1,
+          "value": "add4a49499e0845e.vercel-dns-017.com."
+        },
+        {
+          "rank": 2,
+          "value": "cname.vercel-dns.com."
+        }
+      ]
+    },
+    {
+      "name": "www.findmyinvite.com",
+      "misconfigured": true,
+      "aValues": [
+        "2.57.91.91"
+      ],
+      "cnames": [
+        "findmyinvite.com."
+      ],
+      "recommendedIPv4": [
+        {
+          "rank": 1,
+          "value": [
+            "216.198.79.1",
+            "64.29.17.1"
+          ]
+        },
+        {
+          "rank": 2,
+          "value": [
+            "76.76.21.21"
+          ]
+        }
+      ],
+      "recommendedCNAME": [
+        {
+          "rank": 1,
+          "value": "add4a49499e0845e.vercel-dns-017.com."
+        },
+        {
+          "rank": 2,
+          "value": "cname.vercel-dns.com."
+        }
+      ]
+    }
+  ],
+  "deployments": [
+    {
+      "id": "dpl_HcvePisRCop2EMkoS4Tj8K8iZmQh",
+      "url": "findmyinvite-iyigoqwyx-hardwins-projects.vercel.app",
+      "state": "READY",
+      "target": null,
+      "commit": "6a6a61df04e073291c61e648ce38adec162b321e"
+    },
+    {
+      "id": "dpl_D3AXQwNR2EtRUaRJaXQAFStQVH9x",
+      "url": "findmyinvite-67vcpguro-hardwins-projects.vercel.app",
+      "state": "READY",
+      "target": "production",
+      "commit": "309662f929f8dbf00bb9d43c0261f8cf91b3d257"
+    }
+  ]
+}

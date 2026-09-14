@@ -1,0 +1,15 @@
+{
+  "at": "2026-09-14T10:26:56.173Z",
+  "checks": [
+    "Production creation correctly blocked before 9pm",
+    "Private draft and management key enforcement",
+    "Private Blob upload and unpublished photo protection",
+    "Online publish, public guest data and exact photo delivery",
+    "Durable guest RSVP and private host inbox",
+    "Removed photo cannot be read publicly",
+    "Unpublishing revokes guest access",
+    "Invitation deletion",
+    "Anonymous direct database access denied"
+  ],
+  "note": "Existing draft seeded administratively for pre-launch testing; successful public creation remains gated by the scheduled offer and unpublished catalog."
+}

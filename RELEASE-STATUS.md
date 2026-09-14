@@ -1,3 +1,5 @@
+> Historical record. The authoritative v0.9 handoff and postponed 11:59 PM IST release instructions are in [docs/handoff/index.md](docs/handoff/index.md). Older schedules, setup status, and verification statements below describe their original point in time.
+
 # Launch candidate status — 14 September 2026
 
 ## Running services

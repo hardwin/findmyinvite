@@ -1,3 +1,5 @@
+> Historical record. The authoritative v0.9 handoff and postponed 11:59 PM IST release instructions are in [docs/handoff/index.md](docs/handoff/index.md). Older schedules, setup status, and verification statements below describe their original point in time.
+
 # FindMyInvite v1 — guest launch, 14 September 2026
 
 This replaces the authenticated paid-launch proposal in LAUNCH-PLAN.md. Target release is 9:00 PM IST. The user supplied a 1:30 PM start, giving a planning window of 7.5 hours. This is a launch sequence, not a guarantee of external provisioning or approval time.
