@@ -14,10 +14,12 @@ Open **`/grand-launch`** on the newest preview deployment to rehearse. Once the 
 
 ## Record from the phone
 
+**Recording window:** unlimited replays until **15 September 2026 at 03:00 AM IST** (`2026-09-14T21:30:00Z`), end exclusive. There is no completion lock, usage counter, or saved one-time flag. After that time the separate ceremony route shows a premiere-ended message and Home button; the storefront stays at `/` and is unaffected. This presentation cutoff uses the device clock and is not a backend publication gate.
+
 - Open the production ceremony only after following the release runbook. Verify the URL and fresh deployment first.
 - Use portrait orientation for social stories/reels. Close notifications and start the phone's screen recorder; test whether it captures browser audio on that device. Browser/audio capture policies vary, so do one short rehearsal.
 - Keep the first screen visible briefly, tap the seal, then scratch in broad strokes across the gold. Pause on the revealed date to capture confetti. Continue to the finale, pause on the brand, and press **Home** to show the product.
-- The sound button sits at top right. **Replay the magic** resets the three chapters without reloading or altering data. Refresh also starts from chapter one. The ceremony does not remember completion, so every take is repeatable.
+- The sound button sits at top right. **Replay the magic** resets the three chapters without reloading or altering data. Refresh also starts from chapter one during the recording window. The ceremony does not remember completion, so every take is repeatable until the 3 AM cutoff.
 - For a longer demo, use **Experience a full invitation** and its opening, scratch, calendar, slideshow and RSVP controls. This is the pre-existing demo/local flow; do not describe a demo RSVP as live cloud publication.
 
 ## Implementation / handoff

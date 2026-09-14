@@ -2,6 +2,7 @@ import {lazy,Suspense,useEffect,useRef,useState} from 'react';
 import {ArrowRight,Home,RotateCcw,Sparkles,Volume2,VolumeX} from 'lucide-react';
 import './grand-launch.css';
 const InvitationScene=lazy(()=>import('./three/InvitationScene'));
+const CEREMONY_END=Date.parse('2026-09-15T03:00:00+05:30');
 
 function GoldenAtmosphere({burst}:{burst:number}){
  const canvas=useRef<HTMLCanvasElement>(null);
@@ -48,13 +49,16 @@ function ScratchLaunch({onReveal}:{onReveal:()=>void}){
 }
 
 export default function GrandLaunch(){
+ const [ended,setEnded]=useState(()=>Date.now()>=CEREMONY_END);
  const [stage,setStage]=useState(0),[opening,setOpening]=useState(false),[revealed,setRevealed]=useState(false),[burst,setBurst]=useState(0),[sound,setSound]=useState(false),[audioUnavailable,setAudioUnavailable]=useState(false);
  const audio=useRef<HTMLAudioElement>(null),timer=useRef<ReturnType<typeof setTimeout>|null>(null),heading=useRef<HTMLElement>(null);
  useEffect(()=>{document.title='The Grand Launch · FindMyInvite.com';return()=>{if(timer.current)clearTimeout(timer.current)}},[]);
+ useEffect(()=>{if(ended){audio.current?.pause();return}const remaining=CEREMONY_END-Date.now();const expiry=setTimeout(()=>setEnded(true),Math.max(0,Math.min(remaining,2147483647)));const check=()=>{if(Date.now()>=CEREMONY_END)setEnded(true)};window.addEventListener('focus',check);return()=>{clearTimeout(expiry);window.removeEventListener('focus',check)}},[ended]);
  useEffect(()=>{if(stage>0)heading.current?.focus({preventScroll:true})},[stage]);
  const play=()=>{const el=audio.current;if(!el)return;el.volume=.55;void el.play().then(()=>{setSound(true);setAudioUnavailable(false)}).catch(()=>setSound(false))};
  const open=()=>{if(opening)return;setOpening(true);play();timer.current=setTimeout(()=>{setStage(1);setOpening(false)},matchMedia('(prefers-reduced-motion: reduce)').matches?100:1900)};
  const replay=()=>{if(timer.current)clearTimeout(timer.current);setStage(0);setOpening(false);setRevealed(false);setBurst(0)};
+ if(ended)return <main className="grand-launch gl-step-2"><div className="gl-background"/><div className="gl-vignette"/><GoldenAtmosphere burst={0}/><div className="gl-frame" aria-hidden="true"><i/><i/><i/><i/></div><section className="gl-stage gl-finale"><p className="gl-eyebrow">THE PREMIERE HAS ENDED</p><p className="gl-script">The celebrations continue.</p><h1 className="gl-wordmark">FindMyInvite<span>.com</span></h1><p className="gl-description">Our launch ceremony closed at<br/>3:00 AM IST · 15 September 2026.<br/>Your unforgettable moments are just beginning.</p><a className="gl-button" href="/"><Home size={17}/> Home <ArrowRight size={17}/></a></section></main>;
  return <main className={'grand-launch gl-step-'+stage}>
   <div className="gl-background"/><div className="gl-vignette"/>
   {stage===0&&<div className={'gl-gate '+(opening?'is-open':'')} aria-hidden="true"><div className="gl-gate-fallback gl-left"/><div className="gl-gate-fallback gl-right"/><Suspense fallback={null}><InvitationScene open={opening}/></Suspense></div>}
