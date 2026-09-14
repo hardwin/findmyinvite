@@ -1,0 +1,120 @@
+[
+  {
+    "width": 390,
+    "stage": 1,
+    "overflow": false,
+    "bodyHeight": 844,
+    "buttons": [
+      {
+        "text": "FMI\nTAP TO OPEN",
+        "top": 481.7874755859375,
+        "bottom": 596.7874755859375
+      }
+    ]
+  },
+  {
+    "width": 390,
+    "stage": 2,
+    "overflow": false,
+    "bodyHeight": 844,
+    "buttons": [
+      {
+        "text": "Or tap to reveal",
+        "top": 622.734375,
+        "bottom": 666.734375
+      }
+    ]
+  },
+  {
+    "width": 390,
+    "stage": "reveal",
+    "overflow": false,
+    "bodyHeight": 844,
+    "buttons": [
+      {
+        "text": "LET THE CELEBRATION BEGIN",
+        "top": 627.234375,
+        "bottom": 677.234375
+      }
+    ]
+  },
+  {
+    "width": 390,
+    "stage": 3,
+    "overflow": false,
+    "bodyHeight": 844,
+    "buttons": [
+      {
+        "text": "HOME",
+        "top": 566.265625,
+        "bottom": 615.265625
+      },
+      {
+        "text": "EXPERIENCE A FULL INVITATION",
+        "top": 623.265625,
+        "bottom": 688.265625
+      }
+    ]
+  },
+  {
+    "width": 1440,
+    "stage": 1,
+    "overflow": false,
+    "bodyHeight": 900,
+    "buttons": [
+      {
+        "text": "FMI\nTAP TO OPEN",
+        "top": 571.734619140625,
+        "bottom": 697.734619140625
+      }
+    ]
+  },
+  {
+    "width": 1440,
+    "stage": 2,
+    "overflow": false,
+    "bodyHeight": 900,
+    "buttons": [
+      {
+        "text": "Or tap to reveal",
+        "top": 725.796875,
+        "bottom": 769.796875
+      }
+    ]
+  },
+  {
+    "width": 1440,
+    "stage": "reveal",
+    "overflow": false,
+    "bodyHeight": 900,
+    "buttons": [
+      {
+        "text": "LET THE CELEBRATION BEGIN",
+        "top": 737.796875,
+        "bottom": 787.796875
+      }
+    ]
+  },
+  {
+    "width": 1440,
+    "stage": 3,
+    "overflow": false,
+    "bodyHeight": 900,
+    "buttons": [
+      {
+        "text": "HOME",
+        "top": 716.078125,
+        "bottom": 766.078125
+      },
+      {
+        "text": "EXPERIENCE A FULL INVITATION",
+        "top": 713.078125,
+        "bottom": 763.078125
+      }
+    ]
+  },
+  {
+    "reducedMotion": true,
+    "homeNavigation": true
+  }
+]

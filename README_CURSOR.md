@@ -1,5 +1,7 @@
 # Cursor takeover · read this first
 
+**Grand-launch ceremony added after the v0.9.0 tag:** latest `main` includes `/grand-launch`, a three-chapter emerald/gold opening, scratch-to-launch, confetti, Home and full-invitation demo. Read [ceremony instructions](docs/handoff/GRAND-LAUNCH.md) for rehearsal and phone recording. This is presentation only; its button does not deploy or publish the catalog. Include it in the approved v1.0 production build.
+
 You are taking over FindMyInvite from Codex at **v0.9.0**, before the intended v1.0 release on **14 September 2026, 23:59 IST (18:29 UTC)**. The founder will use a mobile phone and will not have this laptop or ChatGPT. GitHub is the durable handoff; do not depend on this conversation, Windows paths, `work/`, localhost, or a running desktop session.
 
 ## First actions

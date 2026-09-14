@@ -4,6 +4,8 @@
 
 ## Read in this order
 
+**New:** [Grand-launch ceremony and phone-recording guide](GRAND-LAUNCH.md) — three chapters at `/grand-launch`, with scratch reveal, confetti, Home and a full invitation demo. Presentation does not deploy the application.
+
 1. [Cursor entry point](../../README_CURSOR.md) — vision, implementation history, takeover prompt and constraints.
 2. [Current status and evidence](STATUS.md) — what is live, what was verified, what remains blocked.
 3. [Access and laptop-independent takeover](ACCESS-AND-TAKEOVER.md) — prove cloud/mobile permissions before leaving.
