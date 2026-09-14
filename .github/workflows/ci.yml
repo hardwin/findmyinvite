@@ -21,7 +21,7 @@ jobs:
       - run: npm run test:server
       - run: npm run build
   production:
-    if: github.ref_name == github.event.repository.default_branch && github.event_name != 'pull_request'
+    if: github.ref_name == github.event.repository.default_branch && github.event_name != 'pull_request' && vars.ENABLE_PRODUCTION_DEPLOY == 'true'
     needs: verify
     runs-on: ubuntu-latest
     environment: production
@@ -36,6 +36,6 @@ jobs:
           node-version: '22'
           cache: npm
       - run: npm ci
-      - run: npx --yes vercel@50.0.0 pull --yes --environment=production --token="$VERCEL_TOKEN"
-      - run: npx --yes vercel@50.0.0 build --prod --token="$VERCEL_TOKEN"
-      - run: npx --yes vercel@50.0.0 deploy --prebuilt --prod --token="$VERCEL_TOKEN"
+      - run: npx --yes vercel@59.16.0 pull --yes --environment=production --token="$VERCEL_TOKEN"
+      - run: npx --yes vercel@59.16.0 build --prod --token="$VERCEL_TOKEN"
+      - run: npx --yes vercel@59.16.0 deploy --prebuilt --prod --token="$VERCEL_TOKEN"
