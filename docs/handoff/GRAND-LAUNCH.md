@@ -1,5 +1,7 @@
 # Grand-launch ceremony · recording guide
 
+**Hosted rehearsal:** [Open the grand-launch preview](https://findmyinvite-5umqoipue-hardwins-projects.vercel.app/grand-launch). Vercel reports READY for code commit `d65ae855137cf63e98e81dfcb35818578783e7c4`. This is a preview deployment; Vercel sign-in may be required. [GitHub verify/deploy run](https://github.com/hardwin/findmyinvite/actions/runs/34862816209). Verify phone access before leaving the laptop.
+
 Open **`/grand-launch`** on the newest preview deployment to rehearse. Once the approved v1.0 release is live, open **`https://findmyinvite.com/grand-launch`**. The older production candidate does not include this route until redeployed. Use latest `main`, which contains this addition after the frozen `v0.9.0` handoff tag.
 
 ## Three chapters
