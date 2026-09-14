@@ -1,5 +1,7 @@
 # FindMyInvite — v0.9 pre-deployment handoff
 
+**Latest production update:** the homepage and `/grand-launch` are now publicly deployed at `findmyinvite.vercel.app`, including unlimited ceremony replays until 15 September at 3 AM IST. See [PRODUCTION-UPDATE.md](docs/handoff/PRODUCTION-UPDATE.md); it supersedes older deployed-candidate status below. Custom-domain DNS and catalog publication remain outstanding.
+
 **Start with [README_CURSOR.md](README_CURSOR.md) for the mobile/cloud takeover.** The [team documentation index](docs/handoff/index.md) contains 26 separate role documents, architecture, release/rollback procedures, risks and [15 pre-deployment test cases](docs/handoff/PREDEPLOY-15.md).
 
 The candidate is deployed at [findmyinvite.vercel.app](https://findmyinvite.vercel.app). Guest v1 adds Supabase persistence, private Vercel Blob uploads, recovery links, online RSVP and GitHub Actions deployment. Planned v1.0 launch: **14 September 2026, 11:59 PM IST**, subject to release gates. Free creation is planned until 14 October, 11:59 PM IST; no card collection or automatic charge. [STATUS.md](docs/handoff/STATUS.md) distinguishes verified infrastructure from remaining domain, catalog, rights, policy and operating blockers. Checked-in code and project variables now use 11:59 PM; the old production deployment retains 9 PM until redeployed. Keep its catalog closed.

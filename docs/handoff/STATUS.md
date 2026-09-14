@@ -1,5 +1,7 @@
 # v0.9 status · authoritative release baseline
 
+**Superseded deployment status:** see [the subsequent production update](PRODUCTION-UPDATE.md). The founder requested and received a public production deployment of the homepage and ceremony, including the 3 AM replay window. The inspection below is the preserved pre-deployment baseline, not the latest serving commit.
+
 Prepared 14 September 2026. Infrastructure inspected **14:42 UTC / 20:12 IST**; see [machine-readable snapshot](evidence/handoff-state.json). This is a **pre-deployment handoff, not v1.0 approval**. Replace dated observations with fresh evidence in [RELEASE-RECORD.md](RELEASE-RECORD.md) as work proceeds.
 
 ## Release identity
