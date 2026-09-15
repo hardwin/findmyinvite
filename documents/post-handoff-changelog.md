@@ -133,11 +133,9 @@ Exit: Live pages accepted by Ashok; MX optional if contact is WhatsApp/Gmail.
 
 Outcome: WhatsApp/Instagram previews show a hero image; campaign traffic is countable.
 
-Needs from Ashok: GA4 measurement ID or "use Vercel Analytics."
+**Status 2026-09-15:** Share loop in progress on branch `cursor/share-loop-7845`. Storefront `og:image` uses Royal Imperial still. Social crawlers hitting `/:slug` are rewritten to `/api/share`, which returns couple names + that invitation's template still (not guest photos). Host dashboard and published guest pages get **Share on WhatsApp**. Guest footer: **Made with FindMyInvite — create yours**. `/akay` already counts traffic. GA4/Vercel Analytics still not requested.
 
-How: Add `og:image` / `twitter:image` (reuse a Classic or Royal still); wire analytics; same gated deploy as Iteration 2.
-
-Exit: Link unfurl works on a real phone share; one pageview visible in the analytics UI.
+Exit: Link unfurl works on a real phone share; one pageview visible in `/akay`.
 
 ### Iteration 4 — Hygiene that protects the campaign
 
