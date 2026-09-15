@@ -3,5 +3,6 @@ import invitations from '../api/invitations.mjs';
 import media from '../api/media.mjs';
 import content from '../api/content.mjs';
 import analytics from '../api/analytics.mjs';
+import share from '../api/share.mjs';
 export function localApi(){return {name:'local-functions',configureServer(server){server.middlewares.use(route)},configurePreviewServer(server){server.middlewares.use(route)}}}
-async function route(req,res,next){const path=new URL(req.url,'http://localhost').pathname;const handler={'/api/invitations':invitations,'/api/media':media,'/api/content':content,'/api/analytics':analytics}[path];if(!handler)return next();res.status=code=>{res.statusCode=code;return res};res.json=value=>{res.setHeader('Content-Type','application/json');res.end(JSON.stringify(value))};await handler(req,res);}
+async function route(req,res,next){const path=new URL(req.url,'http://localhost').pathname;const handler={'/api/invitations':invitations,'/api/media':media,'/api/content':content,'/api/analytics':analytics,'/api/share':share}[path];if(!handler)return next();res.status=code=>{res.statusCode=code;return res};res.json=value=>{res.setHeader('Content-Type','application/json');res.end(JSON.stringify(value))};await handler(req,res);}
