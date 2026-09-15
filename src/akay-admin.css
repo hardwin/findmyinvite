@@ -2,7 +2,6 @@
 .akay-shell *{box-sizing:border-box}
 .akay-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;align-items:flex-end;margin-bottom:28px}
 .akay-shell h1{font:600 34px/1.1 'Playfair Display',Georgia,serif;color:#e8c98a;margin:0}
-.akay-shell p.lead{margin:8px 0 0;color:#cbbba0;max-width:42rem;line-height:1.6}
 .akay-actions{display:flex;flex-wrap:wrap;gap:8px}
 .akay-actions button,.akay-gate button{min-height:40px;padding:8px 16px;border-radius:8px;border:1px solid #b88e40;background:#b88e40;color:#fff8ea;font:600 13px Lora,serif}
 .akay-actions button[aria-pressed="false"],.akay-actions button.quiet{background:transparent;color:#e8c98a}

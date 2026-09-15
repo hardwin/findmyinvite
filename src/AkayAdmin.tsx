@@ -104,7 +104,7 @@ export default function AkayAdmin(){
  const totals=insights?.totals;
  return <main className="akay-shell">
   <div className="akay-top">
-   <div><h1>Traffic & journeys</h1><p className="lead">Anonymous page views, time on page, and the path people take through FindMyInvite.</p></div>
+   <div><h1>Traffic & journeys</h1></div>
    <div className="akay-actions">
     {[1,7,30].map(n=><button key={n} type="button" aria-pressed={days===n} onClick={()=>setDays(n)}>{n===1?'24 hours':n+' days'}</button>)}
     <button type="button" className="quiet" onClick={()=>void load(days)}>Refresh</button>
