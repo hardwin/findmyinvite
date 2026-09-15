@@ -11,9 +11,8 @@ Written 2026-09-15. Overwrite in place when facts change.
 | Repo | https://github.com/hardwin/findmyinvite.git — **public**, `main` only |
 | Live | https://findmyinvite.com (= https://findmyinvite.vercel.app) |
 | v0.9.0 handoff SHA | tag `v0.9.0` → `84416179b8d85486eea0fcc0e219f994be9bf3ab` |
-| main tip (docs-only after grand-launch) | `5282ff075ce11b72120da7ed804c3e247b835920` |
-| Serving production commit | `6db0d12c2b0f9e97ebc82f78420bd54e25b90796` |
-| Live bundle | `/assets/index-79Usa2fE.js` |
+| Serving production commit (2026-09-15 18:10 UTC) | `09971d52244b04bb0238b0691675777d61b2174d` — `/akay` desk live |
+| Live bundle | `/assets/index-TRMUVIGW.js` (changes with every push to `main`) |
 | Prod Supabase | `qqvcptjkfcjkwbkookcm` (Mumbai) |
 | Not this product | Zareqia Supabase `ganphjxofavzmxzsecij` |
 | Vercel project (handoff) | `prj_ZPOw3XYQTehO9AVbkp8JyZEhke76` / team `team_xFQvLGR6rRhSUyAtItzx8b24` |
@@ -35,10 +34,10 @@ Written 2026-09-15. Overwrite in place when facts change.
 
 ## Deploy path
 
-- `ENABLE_PRODUCTION_DEPLOY` is `false`.
-- Pushes to `main` run verify only.
-- Prod deploy needs the variable flipped or a manual `workflow_dispatch` preview.
+- **Every push to `main` deploys production** via Vercel's Git integration. Ashok's word 2026-09-15: leave it as is.
+- `ENABLE_PRODUCTION_DEPLOY` is `false` and only affects the GitHub Actions `deploy` job (manual `workflow_dispatch` previews). It does not gate production.
 - See `.github/workflows/ci.yml`.
+- `/akay` access code is hardcoded in `server/akay-gate.mjs` (public repo). Ashok accepted 2026-09-15; change to an env var later.
 
 ## What this conversation did not change
 

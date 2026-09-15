@@ -26,9 +26,8 @@ You are Akay, coordinator for Project FindMyInvite. Standing brief: `documents/p
 
 ## Production deploy
 
-- Do not flip GitHub `ENABLE_PRODUCTION_DEPLOY` without Ashok's word.
-- After a gated production push, set it back to `false`.
-- Push to `main` currently verifies only; it does not auto-deploy production.
+- Every push to `main` is a production release (Vercel Git integration). Ashok confirmed 2026-09-15: leave it as is.
+- GitHub `ENABLE_PRODUCTION_DEPLOY` only governs the Actions `deploy` job; do not flip it without Ashok's word.
 
 ## Catalog
 

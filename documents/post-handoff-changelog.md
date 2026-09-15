@@ -17,16 +17,21 @@ Read this before `docs/handoff/STATUS.md`. The v0.9.0 handoff is the frozen base
 | All 13 `template_catalog` rows → `published = true` | Prod Supabase `qqvcptjkfcjkwbkookcm` | PostgREST PATCH with `service_role` (Ashok pasted key in chat) | No | No — API is `no-store`; live instantly |
 | Ashok accepted the fix live | findmyinvite.com/templates + publish path | Human verification | — | — |
 
-### Local / this session (2026-09-15 evening) — not in production yet
+### `/akay` traffic desk — LIVE in production (verified 2026-09-15 18:10 UTC)
 
 | Change | Where | Code? | Deploy? |
 | --- | --- | --- | --- |
-| Operator analytics dashboard at `/akay` | SPA + `api/analytics.mjs` | Yes | No — needs Ashok YES ×2, then gated production push |
-| Anonymous pageview / dwell / journey events | `analytics_events` table (`supabase/002_analytics.sql`) | Yes | SQL must run on prod Supabase `qqvcptjkfcjkwbkookcm` |
-| Access code in server code only (`server/akay-gate.mjs`); HttpOnly cookie; no UI/DB password change | Gate | Yes | Same deploy |
-| No `/akay` link on home, header, footer, or any public page | Storefront | Yes | Same deploy |
+| Operator analytics dashboard at `/akay` | SPA + `api/analytics.mjs` | `09971d5` | Live — bundle `index-TRMUVIGW.js` byte-matches a clean build of `09971d5` |
+| Anonymous pageview / dwell / journey events | `analytics_events` table (`supabase/002_analytics.sql`) | Yes | Table exists in prod `qqvcptjkfcjkwbkookcm`; `POST ?action=collect` returns 202 |
+| Access code in server code only (`server/akay-gate.mjs`); HttpOnly cookie; no UI/DB password change | Gate | Yes | Live. Code is hardcoded in a public repo — **Ashok accepted this 2026-09-15; change later** |
+| No `/akay` link on home, header, footer, or any public page | Storefront | Yes | Live |
+| Helper line under the "Traffic & journeys" title removed | `src/AkayAdmin.tsx` | Yes | Pushed to `main` 2026-09-15 on Ashok's word |
 
-Password is not in the frontend bundle. Tests cover gate, reserved slug, no public link, and journey summary. Live production still serves `6db0d12` until a gated deploy.
+Password is not in the frontend bundle. Tests cover gate, reserved slug, no public link, and journey summary. One probe row with path `/akay-smoke-probe` exists in prod `analytics_events` from Akay's live check; ignore or delete.
+
+### Deploy path correction (2026-09-15)
+
+The GitHub Actions `deploy` job for `09971d5` was **skipped** (`ENABLE_PRODUCTION_DEPLOY` false), yet production updated anyway. **Vercel's Git integration auto-deploys every push to `main`.** The GitHub variable does not gate production; only the push rule does. Ashok's word 2026-09-15: *"Push to main is prod, it's okay, leave it as is."* Treat every `git push origin main` as a production release.
 
 
 ### Discovered / verified (no write)
@@ -35,7 +40,7 @@ Password is not in the frontend bundle. Tests cover gate, reserved slug, no publ
 - `main` tip: `5282ff075ce11b72120da7ed804c3e247b835920` (docs-only `[skip ci]` after grand-launch)
 - Last Vercel Production deploy: `6db0d12…` — "Keep launch ceremony replayable until September 15 at 3 AM IST" — Ready, serves both domains
 - Live bundle: `/assets/index-79Usa2fE.js` — byte-matches a clean build of `main`
-- Push ≠ auto-deploy today: GitHub variable `ENABLE_PRODUCTION_DEPLOY` is `false`. Pushes to `main` run verify (tests + build) only. Prod deploy needs the variable flipped or a manual `workflow_dispatch` preview. See CI in `.github/workflows/ci.yml`.
+- ~~Push ≠ auto-deploy today~~ — **superseded 2026-09-15**: Vercel Git integration deploys `main` to production on every push regardless of `ENABLE_PRODUCTION_DEPLOY` (still `false`; the Actions `deploy` job only matters for `workflow_dispatch` previews). See "Deploy path correction" above.
 - `akayatgit` was briefly considered then dropped — Cursor bot cannot create repos under `akayatgit`; remote is `hardwin` only.
 - Zareqia Supabase (`ganphjxofavzmxzsecij`) is **not** this product's DB. FindMyInvite prod = `qqvcptjkfcjkwbkookcm`.
 
