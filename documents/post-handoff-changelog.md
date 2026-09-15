@@ -1,0 +1,151 @@
+# FindMyInvite — post-handoff change log + next 5 iterations
+
+Audience: the next agent picking up this Project.
+Written: 2026-09-15 · coordinator Akay (Project FindMyInvite)
+Repo: https://github.com/hardwin/findmyinvite.git (public) · branch `main` only
+Live: https://findmyinvite.com (= findmyinvite.vercel.app)
+Soul: [akay-soul.md](akay-soul.md) · standing facts: [project-context.md](project-context.md) · analytics: [analytics-decision.md](analytics-decision.md)
+
+Read this before `docs/handoff/STATUS.md`. The v0.9.0 handoff is the frozen baseline; this file is the current truth after that tag.
+
+## What this conversation changed after the v0.9.0 handoff
+
+### Applied in production (real change)
+
+| Change | Where | How | Code? | Deploy? |
+| --- | --- | --- | --- | --- |
+| All 13 `template_catalog` rows → `published = true` | Prod Supabase `qqvcptjkfcjkwbkookcm` | PostgREST PATCH with `service_role` (Ashok pasted key in chat) | No | No — API is `no-store`; live instantly |
+| Ashok accepted the fix live | findmyinvite.com/templates + publish path | Human verification | — | — |
+
+### Local / this session (2026-09-15 evening) — not in production yet
+
+| Change | Where | Code? | Deploy? |
+| --- | --- | --- | --- |
+| Operator analytics dashboard at `/akay` | SPA + `api/analytics.mjs` | Yes | No — needs Ashok YES ×2, then gated production push |
+| Anonymous pageview / dwell / journey events | `analytics_events` table (`supabase/002_analytics.sql`) | Yes | SQL must run on prod Supabase `qqvcptjkfcjkwbkookcm` |
+| Access code in server code only (`server/akay-gate.mjs`); HttpOnly cookie; no UI/DB password change | Gate | Yes | Same deploy |
+| No `/akay` link on home, header, footer, or any public page | Storefront | Yes | Same deploy |
+
+Password is not in the frontend bundle. Tests cover gate, reserved slug, no public link, and journey summary. Live production still serves `6db0d12` until a gated deploy.
+
+
+### Discovered / verified (no write)
+
+- v0.9.0 handoff SHA: tag `v0.9.0` → `84416179b8d85486eea0fcc0e219f994be9bf3ab`
+- `main` tip: `5282ff075ce11b72120da7ed804c3e247b835920` (docs-only `[skip ci]` after grand-launch)
+- Last Vercel Production deploy: `6db0d12…` — "Keep launch ceremony replayable until September 15 at 3 AM IST" — Ready, serves both domains
+- Live bundle: `/assets/index-79Usa2fE.js` — byte-matches a clean build of `main`
+- Push ≠ auto-deploy today: GitHub variable `ENABLE_PRODUCTION_DEPLOY` is `false`. Pushes to `main` run verify (tests + build) only. Prod deploy needs the variable flipped or a manual `workflow_dispatch` preview. See CI in `.github/workflows/ci.yml`.
+- `akayatgit` was briefly considered then dropped — Cursor bot cannot create repos under `akayatgit`; remote is `hardwin` only.
+- Zareqia Supabase (`ganphjxofavzmxzsecij`) is **not** this product's DB. FindMyInvite prod = `qqvcptjkfcjkwbkookcm`.
+
+### Git / Vercel / code changes in that conversation
+
+None. No commits, no PRs, no branch pushes, no Vercel redeploys, no edits under `hardwin/findmyinvite` application source. Watch Tower checkout was never touched.
+
+### Project-store artifacts (may not be in git)
+
+These were created in the prior Project store, not necessarily this checkout:
+
+| Path | Purpose |
+| --- | --- |
+| project-context.md | Standing facts — **now also** [project-context.md](project-context.md) in this folder |
+| akay-soul.md | Soul — **now also** [akay-soul.md](akay-soul.md) |
+| v0.9-deploy-plan.md | Deploy path + blockers |
+| templates-publishing-fix.md | Catalog gate fix (applied) |
+| launch-morning-checklist.md | 26-item live-verified readiness |
+| test-cases-manual.md | All 15 cases as phone steps |
+
+If those Project-store files are missing in a new session, use this changelog + `docs/handoff/PREDEPLOY-15.md` + `docs/handoff/RELEASE-RUNBOOK.md`.
+
+## Manual test progress (Ashok on phone)
+
+| Case | Result |
+| --- | --- |
+| 1 What is live is the right build | 4/6 PASS — config, 13 templates, GitHub Actions green, Vercel Ready/`6db0d12`. Open: Vercel plan (Pro vs Hobby), Settings → Git Production Branch |
+| 2 Nothing private leaks | PASS 3/3 |
+| 3 Domain, padlock, www | Sent — waiting on Ashok **phone**. Desktop re-check 2026-09-15 21:16 IST below |
+| 4–5 | Written, not started |
+| 6 Create + publish (`akay-test-1`) | Needs explicit YES — writes real data |
+| 7–15 | Written; Case 14 cleans up `akay-test-1` |
+
+### Desktop Case 3 re-check (Akay, 2026-09-15 ~15:46 UTC) — not a phone PASS
+
+From this Siemens Energy network, public DNS lookups are rewritten to `*.prod.sgre.one`; **Ashok's phone on mobile data is still the Case 3 authority**. HTTP to the public host did reach Vercel `bom1`:
+
+| Check | Result |
+| --- | --- |
+| `https://findmyinvite.com/` | 200, `Server: Vercel`, HSTS, Mumbai (`bom1`) |
+| `http://findmyinvite.com/` | 308 → `https://findmyinvite.com/` |
+| `https://www.findmyinvite.com/` | 308 → `https://findmyinvite.com/` |
+| `http://www.findmyinvite.com/` | 308 → https www → 308 → https apex |
+| `/templates`, `/blog`, `/contact`, unknown slug | 200 SPA `index.html` (client routing) |
+| `GET /api/content?kind=templates` | JSON, **13 templates** + Classic/Royal SKUs |
+| `GET /api/invitations?action=config` | `configured: true`, `promotion.active: true`, uploads true, offer 14 Sep 23:59 → 14 Oct 23:59 IST |
+| Vercel MCP `list_teams` | team `hardwins-projects` **plan = hobby** (P0 still open) |
+
+## Outstanding Ashok actions
+
+1. Confirm Vercel Billing = **Pro** (P0 — Hobby can pause commercial traffic). MCP still reports Hobby.
+2. Rotate the `service_role` key that was pasted in chat (Supabase → API → Reset).
+3. Finish Case 3+ from the manual; **YES** before Case 6.
+4. Send support email/WhatsApp + business name before contact/policy copy can ship.
+
+## Laws the next agent must keep
+
+See [akay-soul.md](akay-soul.md). Short form:
+
+- Soul: WAKEUP first reply; every Ashok reply ends with 🎯 YOUR ACTION + ❓ DECISION.
+- Source safety: commit locally OK; ask twice before push; never force-push.
+- Prod deploy: respect `ENABLE_PRODUCTION_DEPLOY`; do not flip it without Ashok's word.
+- Catalog: `published` is the intentional CMS gate — do not remove it in code to "fix" emptiness.
+- Done = Ashok accepts live, not "tests green."
+- Keys: never store `service_role` / tokens in the Project store or the repo.
+
+## Plan — next 5 iterations
+
+### Iteration 1 — Close P0: prove the money path (Case 3 → Case 6 → 7 → 12 → 14)
+
+Outcome: One full live create → publish → guest RSVP → delete on findmyinvite.com, recorded as PASS.
+
+How: Continue Ashok phone walkthrough from Case 3. On Case 6 YES, use slug `akay-test-1`; Case 14 deletes it. Optionally Akay runs a synthetic smoke if Ashok says YES and is busy.
+
+Exit: Case 1 plan = Pro (or Pro upgrade done); Cases 3, 6, 7, 12, 14 PASS; smoke row deleted.
+
+**Status 2026-09-15 session:** Iteration 1 in progress. Case 3 phone confirmation still required. Case 6 blocked on YES. Hobby still reported.
+
+### Iteration 2 — Trust surface (contact + policies)
+
+Outcome: `/contact` shows a real channel; Privacy/Terms drop "launch draft" and say the real business name.
+
+Needs from Ashok: support email or WhatsApp + legal business name (+ one retention sentence if he has it).
+
+How: Code change on branch → draft PR → Ashok YES ×2 → flip `ENABLE_PRODUCTION_DEPLOY` for one `main` push → set variable back to `false`.
+
+Exit: Live pages accepted by Ashok; MX optional if contact is WhatsApp/Gmail.
+
+### Iteration 3 — Share + measure (og:image + analytics)
+
+Outcome: WhatsApp/Instagram previews show a hero image; campaign traffic is countable.
+
+Needs from Ashok: GA4 measurement ID or "use Vercel Analytics."
+
+How: Add `og:image` / `twitter:image` (reuse a Classic or Royal still); wire analytics; same gated deploy as Iteration 2.
+
+Exit: Link unfurl works on a real phone share; one pageview visible in the analytics UI.
+
+### Iteration 4 — Hygiene that protects the campaign
+
+Outcome: Harder to lose data / get paused / get indexed wrong.
+
+Items: Supabase backup/export or Pro backups; `robots.txt` + `sitemap.xml` as real static files (today they serve SPA HTML); rotate any chat-pasted Vercel CI token; one-line rights acceptance for Royal videos (G03).
+
+Exit: Checklist P1 #10–14 closed or explicitly deferred with Ashok's word.
+
+### Iteration 5 — First real user loop + retention
+
+Outcome: One real customer journey observed end-to-end; one retention hook ready.
+
+How: Watch first organic create after Cases pass; fix any live friction the same day; optional: publish one `blog_posts` row or hide `/blog` footer link; optional Classic vs Royal merchandising polish.
+
+Exit: Ashok says the morning experience is usable with real traffic — not just "checklist green."

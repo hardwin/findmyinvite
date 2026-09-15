@@ -1,6 +1,6 @@
 # Cursor takeover · read this first
 
-**Read the newer [production update](docs/handoff/PRODUCTION-UPDATE.md) first.** The founder has now deployed code commit `6db0d12` to the public Vercel production alias. The homepage stays at `/`; `/grand-launch` supports repeat recording until 15 September at 3 AM IST. Earlier old-production/9 PM status in this handoff is historical; do not redeploy the old candidate.
+**Read [documents/post-handoff-changelog.md](documents/post-handoff-changelog.md) first** — current truth after `v0.9.0` (catalog published, `findmyinvite.com` live, Iteration 1). Then the [production update](docs/handoff/PRODUCTION-UPDATE.md). Serving commit is `6db0d12`. The homepage stays at `/`. `/grand-launch` replay ended 15 September 2026, 03:00 IST. Earlier old-production/9 PM status in this handoff is historical; do not redeploy the old candidate.
 
 **Grand-launch ceremony added after the v0.9.0 tag:** latest `main` includes `/grand-launch`, a three-chapter emerald/gold opening, scratch-to-launch, confetti, Home and full-invitation demo. Read [ceremony instructions](docs/handoff/GRAND-LAUNCH.md) for rehearsal and phone recording. This is presentation only; its button does not deploy or publish the catalog. Include it in the approved v1.0 production build.
 
@@ -23,9 +23,9 @@ The founder selected Vercel hosting/private Blob, Supabase data/operator CMS, Gi
 ## Critical facts
 
 - Code and Vercel project variables now use **23:59 IST**, ending **14 October 23:59 IST**. Old production still uses **21:00** until redeployed. Never publish the shared catalog while that old deployment can accept creation at 9 PM.
-- All 13 template rows are unpublished. Downloaded reference media rights and embedded branding are unresolved; prototype distribution also matters. Obtain actual rights decisions before catalog release.
-- DNS still pointed to Hostinger parking at handoff inspection. Both domains are attached to Vercel. Follow the recorded DNS instructions and preserve mail records.
-- Vercel team was Hobby; commercial-use suitability remains unresolved. No paid upgrade was performed in this handoff.
+- **Post-handoff (2026-09-15):** all 13 template rows are published in prod. Rights/G03 for original media is still an open business gate — do not treat catalog publication as rights clearance. The `published` filter stays in API code.
+- **Post-handoff:** `findmyinvite.com` and `www` serve this Vercel project (HTTPS, www→apex 308). Phone Case 3 on mobile data is still required. Handoff-era parking IP is historical.
+- Vercel team was Hobby at handoff and still Hobby on 2026-09-15 MCP (`hardwins-projects`). Commercial-use suitability remains P0. No paid upgrade was performed in this session.
 - Development, preview and production share Supabase and Blob. A preview URL is not an isolated database. Do not casually change shared catalog rows or run destructive tests.
 - A successful fresh public create during an active offer is still unverified live. Historical cloud checks seeded a temporary draft, then exercised real management, photos, RSVP and deletion.
 - Guest recovery keys are bearer credentials. There is no account, email recovery or key-reset UI. Do not request private management URLs in support tickets.

@@ -1,0 +1,11 @@
+---
+description: FindMyInvite product/UX standing preferences from Ashok
+alwaysApply: true
+---
+
+# Product / UX standing preferences
+
+- Use open source (or a reputable free tier of an OSS product) before building commodity systems: analytics, charts, email, CMS, search, observability.
+- Custom code is for FindMyInvite-specific invitation experience, not Mixpanel clones.
+- Keep `/akay` unlinked from public pages if it remains.
+- Do not store analytics events in the guest invitations database.

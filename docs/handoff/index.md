@@ -1,10 +1,12 @@
 # FindMyInvite handoff library · v0.9 → v1.0
 
-**Planned launch: 14 September 2026, 11:59 PM IST. Current status: pre-deployment candidate; release gates remain open.** This library is the authoritative handoff for a team continuing without the original laptop or ChatGPT. Markdown and Mermaid render in GitHub and remain usable from a phone. Historical root launch/iteration documents are background, not current approval evidence.
+**Planned launch: 14 September 2026, 11:59 PM IST.** Post-handoff current truth (catalog published, custom domain live, Iteration 1 in progress): [documents/post-handoff-changelog.md](../../documents/post-handoff-changelog.md). This library remains the v0.9.0 frozen handoff. Historical root launch/iteration documents are background, not current approval evidence.
 
 ## Read in this order
 
-**New:** [Grand-launch ceremony and phone-recording guide](GRAND-LAUNCH.md) — three chapters at `/grand-launch`, with scratch reveal, confetti, Home and a full invitation demo. Presentation does not deploy the application.
+**Now:** [Post-handoff changelog + next 5 iterations](../../documents/post-handoff-changelog.md) — what changed after `v0.9.0`, live catalog, and the iteration plan.
+
+**Ceremony:** [Grand-launch ceremony and phone-recording guide](GRAND-LAUNCH.md) — three chapters at `/grand-launch`, with scratch reveal, confetti, Home and a full invitation demo. Presentation does not deploy the application. Replay window ended 15 September 2026, 03:00 IST.
 
 1. [Cursor entry point](../../README_CURSOR.md) — vision, implementation history, takeover prompt and constraints.
 2. [Current status and evidence](STATUS.md) — what is live, what was verified, what remains blocked.
