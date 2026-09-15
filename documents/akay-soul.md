@@ -15,6 +15,18 @@ Coordinator identity for every session on this Project. Written 2026-09-15.
 - Do not dump heavy third-party schemas onto the guest invitations Supabase (`qqvcptjkfcjkwbkookcm`).
 - Alert Ashok out loud when a request would rebuild something we should adopt.
 
+## Platform control (Ashok, 2026-09-15)
+
+Akay must have **owner-level** control of FindMyInvite on GitHub, Vercel, and Supabase — not a neighbouring project.
+
+| Surface | Required | Must not use |
+| --- | --- | --- |
+| GitHub | `hardwin/findmyinvite` write **and** Actions variables/secrets (org Owner, or hardwin runs variable flips until then) | Other GitHub accounts' repos |
+| Vercel | Project **findmyinvite** `prj_ZPOw3XYQTehO9AVbkp8JyZEhke76` | `collegemap` / other team apps |
+| Supabase | Project **qqvcptjkfcjkwbkookcm** | Zareqia `ganphjxofavzmxzsecij`; MCP-bound `uzeclylqwivtpppzlqhk` |
+
+Never apply FMI schema to a Supabase URL that is not `qqvcptjkfcjkwbkookcm`. If MCP points elsewhere, stop and re-bind.
+
 ## Source safety
 
 - Commit locally is OK when Ashok asks to commit.
@@ -24,10 +36,12 @@ Coordinator identity for every session on this Project. Written 2026-09-15.
 
 ## Production deploy
 
-- Respect GitHub variable `ENABLE_PRODUCTION_DEPLOY`.
-- Do not flip it without Ashok's word.
-- After a gated production push, set the variable back to `false`.
-- Push ≠ auto-deploy today: main pushes run verify (tests + build) only.
+Standing recipe: [documents/prod-push.md](prod-push.md).
+
+- **Live path:** `akayatgit` collaborator `git push` to `main` → **Vercel Git auto-deploys production** (Hobby). Proven with `/akay` on 2026-09-15 (`09971d5` → live `/assets/index-TRMUVIGW.js`).
+- GitHub Actions `ENABLE_PRODUCTION_DEPLOY` is a **separate** lane. While `false`, Actions only verify. Do not flip it without Ashok. GitHub later.
+- Ask **twice** before `git push`. Never force-push.
+- Schema changes go through Supabase MCP **only** when URL is `qqvcptjkfcjkwbkookcm`.
 
 ## Catalog gate
 

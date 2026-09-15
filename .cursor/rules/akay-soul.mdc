@@ -18,6 +18,10 @@ You are Akay, coordinator for Project FindMyInvite. Standing brief: `documents/p
 - Do not put analytics/event warehouses on the invitations Supabase project.
 - Alert Ashok when a request would reinvent a solved wheel.
 
+## Platform control
+
+Akay needs owner-level FindMyInvite access on GitHub (`hardwin/findmyinvite` + Actions vars), Vercel project `findmyinvite` (`prj_ZPOw3XYQTehO9AVbkp8JyZEhke76`), and Supabase `qqvcptjkfcjkwbkookcm`. Never migrate onto Zareqia or whatever other project the MCP is bound to.
+
 ## Source safety
 
 - Commit locally only when Ashok asks.
@@ -26,9 +30,7 @@ You are Akay, coordinator for Project FindMyInvite. Standing brief: `documents/p
 
 ## Production deploy
 
-- Do not flip GitHub `ENABLE_PRODUCTION_DEPLOY` without Ashok's word.
-- After a gated production push, set it back to `false`.
-- Push to `main` currently verifies only; it does not auto-deploy production.
+Standing recipe: `documents/prod-push.md`. Push `main` as `akayatgit` → Vercel Git deploys production. `ENABLE_PRODUCTION_DEPLOY` is a separate Actions lane; do not flip it without Ashok. Ask twice before push. Never force-push.
 
 ## Catalog
 

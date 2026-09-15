@@ -4,7 +4,7 @@ Audience: the next agent picking up this Project.
 Written: 2026-09-15 · coordinator Akay (Project FindMyInvite)
 Repo: https://github.com/hardwin/findmyinvite.git (public) · branch `main` only
 Live: https://findmyinvite.com (= findmyinvite.vercel.app)
-Soul: [akay-soul.md](akay-soul.md) · standing facts: [project-context.md](project-context.md) · analytics: [analytics-decision.md](analytics-decision.md)
+Soul: [akay-soul.md](akay-soul.md) · standing facts: [project-context.md](project-context.md) · analytics: [analytics-decision.md](analytics-decision.md) · prod push: [prod-push.md](prod-push.md)
 
 Read this before `docs/handoff/STATUS.md`. The v0.9.0 handoff is the frozen baseline; this file is the current truth after that tag.
 

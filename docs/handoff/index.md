@@ -4,7 +4,7 @@
 
 ## Read in this order
 
-**Now:** [Post-handoff changelog + next 5 iterations](../../documents/post-handoff-changelog.md) — what changed after `v0.9.0`, live catalog, and the iteration plan.
+**Now:** [How to push to production](../../documents/prod-push.md) — Vercel Git on `main` is the live ship path. Then [Post-handoff changelog](../../documents/post-handoff-changelog.md).
 
 **Ceremony:** [Grand-launch ceremony and phone-recording guide](GRAND-LAUNCH.md) — three chapters at `/grand-launch`, with scratch reveal, confetti, Home and a full invitation demo. Presentation does not deploy the application. Replay window ended 15 September 2026, 03:00 IST.
 
