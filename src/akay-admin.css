@@ -30,8 +30,8 @@
 .akay-error{color:#e8a0a8;background:#3a1c20;border:1px solid #8a3a44;padding:10px 12px;border-radius:8px}
 .akay-notice{color:#d7e8b4;background:#243318;border:1px solid #4d6a2e;padding:10px 12px;border-radius:8px}
 .akay-empty{color:#cbbba0;padding:12px 0}
-.akay-nav{position:fixed;left:0;right:0;bottom:0;z-index:50;display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:8px 6px calc(8px + env(safe-area-inset-bottom));background:#16120e;border-top:1px solid #3d3327}
-.akay-nav a{min-height:52px;display:flex;align-items:center;justify-content:center;color:#cbbba0;text-decoration:none;font:600 12px/1.2 Lora,serif;border-radius:10px;padding:6px 4px;text-align:center}
+.akay-nav{position:fixed;left:0;right:0;bottom:0;z-index:50;display:flex;gap:4px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:8px 6px calc(8px + env(safe-area-inset-bottom));background:#16120e;border-top:1px solid #3d3327}
+.akay-nav a{flex:0 0 auto;min-width:72px;min-height:52px;display:flex;align-items:center;justify-content:center;color:#cbbba0;text-decoration:none;font:600 12px/1.2 Lora,serif;border-radius:10px;padding:6px 8px;text-align:center}
 .akay-nav a[aria-current="page"]{background:#2a2218;color:#e8c98a}
 .akay-chips{display:flex;gap:8px;overflow:auto;padding:8px 14px 12px;margin:0 -14px;-webkit-overflow-scrolling:touch;position:sticky;top:0;z-index:8;background:#16120e}
 .akay-chips button{flex:0 0 auto;background:transparent;color:#e8c98a}
@@ -44,6 +44,8 @@
 .akay-filters .akay-search{grid-column:1/-1}
 .akay-cards{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
 .akay-candidate{display:grid;grid-template-columns:36px 1fr;gap:8px;background:#1b1713cc;border:1px solid #3d3327;border-radius:16px;padding:12px}
+.akay-candidate.plain{grid-template-columns:1fr}
+.akay-gaps{margin:0 0 12px;padding-left:18px;color:#cbbba0;font-size:13px;line-height:1.45}
 .akay-candidate.selected{border-color:#b88e40}
 .akay-pick{display:flex;align-items:flex-start;padding-top:6px}
 .akay-pick input{width:22px;height:22px}
