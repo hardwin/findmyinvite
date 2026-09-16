@@ -1,6 +1,8 @@
 import {Component,useEffect,useMemo,useState,type FormEvent,type MouseEvent,type ReactNode} from 'react';
 import './akay-admin.css';
 import AkayShortlist from './AkayShortlist';
+import AkayCompetitors from './AkayCompetitors';
+import AkayUpcoming from './AkayUpcoming';
 
 type Insights={
  totals:{pageviews:number;sessions:number;visitors:number;avgDwellMs:number;events:number};
@@ -11,20 +13,25 @@ type Insights={
  funnel:{step:string;count:number}[];
  recent:{at:string;path:string;type:string;dwellMs:number}[];
 };
-type Section='traffic'|'journeys'|'live'|'shortlist';
+type Section='traffic'|'journeys'|'live'|'shortlist'|'competitors'|'upcoming';
 const nav: {id:Section;href:string;label:string}[]=[
  {id:'traffic',href:'/akay',label:'Traffic'},
  {id:'journeys',href:'/akay/journeys',label:'Journeys'},
  {id:'live',href:'/akay/live',label:'Live'},
- {id:'shortlist',href:'/akay/shortlist',label:'Shortlist'}
+ {id:'shortlist',href:'/akay/shortlist',label:'Shortlist'},
+ {id:'competitors',href:'/akay/competitors',label:'Competitors'},
+ {id:'upcoming',href:'/akay/upcoming',label:'Upcoming'}
 ];
 function sectionOf(path=location.pathname):Section{
  const rest=path.replace(/^\/akay\/?/,'').replace(/\/$/,'');
  if(rest==='shortlist'||rest.startsWith('shortlist?'))return 'shortlist';
+ if(rest==='competitors'||rest.startsWith('competitors?'))return 'competitors';
+ if(rest==='upcoming'||rest.startsWith('upcoming?'))return 'upcoming';
  if(rest==='journeys')return 'journeys';
  if(rest==='live')return 'live';
  return 'traffic';
 }
+function isOps(section:Section){return section==='shortlist'||section==='competitors'||section==='upcoming';}
 function formatMs(ms:number){
  if(ms<1000)return ms+' ms';
  if(ms<60000)return (ms/1000).toFixed(1)+' s';
@@ -138,7 +145,7 @@ export default function AkayAdmin(){
  const title=nav.find(item=>item.id===section)?.label||'Operator';
  return <div className="akay-app">
   <main className="akay-shell">
-   {section!=='shortlist'&&<div className="akay-top">
+   {!isOps(section)&&<div className="akay-top">
     <div><h1>{title}</h1></div>
     <div className="akay-actions">
      {[1,7,30].map(n=><button key={n} type="button" aria-pressed={days===n} onClick={()=>setDays(n)}>{n===1?'24 h':n+'d'}</button>)}
@@ -146,9 +153,9 @@ export default function AkayAdmin(){
      <button type="button" className="quiet" onClick={()=>void leave()}>Lock</button>
     </div>
    </div>}
-   {section==='shortlist'&&<div className="akay-lock-row"><button type="button" className="quiet" onClick={()=>void leave()}>Lock</button></div>}
-   {error&&section!=='shortlist'&&<p className="akay-error" role="alert">{error}</p>}
-   {section!=='shortlist'&&loading&&!insights&&<p className="akay-empty">Loading insights…</p>}
+   {isOps(section)&&<div className="akay-lock-row"><button type="button" className="quiet" onClick={()=>void leave()}>Lock</button></div>}
+   {error&&!isOps(section)&&<p className="akay-error" role="alert">{error}</p>}
+   {!isOps(section)&&loading&&!insights&&<p className="akay-empty">Loading insights…</p>}
    {section==='traffic'&&insights&&<DeskPanel>
     <section className="akay-kpis" aria-label="Totals">
      <div className="akay-card akay-kpi"><span>Page views</span><strong>{totals?.pageviews??0}</strong></div>
@@ -182,6 +189,8 @@ export default function AkayAdmin(){
     {recent.length?recent.map((row,i)=><div className="akay-recent" key={String(row.at)+row.path+i}><span>{formatTime(String(row.at))}</span><span>{row.type}</span><span>{row.path}</span><span>{row.dwellMs?formatMs(row.dwellMs):'—'}</span></div>):<p className="akay-empty">No events recorded yet.</p>}
    </section></DeskPanel>}
    {section==='shortlist'&&<DeskPanel><AkayShortlist/></DeskPanel>}
+   {section==='competitors'&&<DeskPanel><AkayCompetitors/></DeskPanel>}
+   {section==='upcoming'&&<DeskPanel><AkayUpcoming/></DeskPanel>}
   </main>
   <nav className="akay-nav" aria-label="Operator">
    {nav.map(item=><a key={item.id} href={item.href} aria-current={section===item.id?'page':undefined} onClick={e=>go(e,item.href,item.id)}>{item.label}</a>)}

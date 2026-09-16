@@ -125,6 +125,8 @@ test('operator desk splits traffic journeys live and shortlist and stays unlinke
  assert.match(admin,/\/akay\/shortlist/);
  assert.match(admin,/\/akay\/journeys/);
  assert.match(admin,/\/akay\/live/);
+ assert.match(admin,/\/akay\/competitors/);
+ assert.match(admin,/\/akay\/upcoming/);
  assert.equal(admin.includes('Traffic & journeys'),false);
  const vite=await readFile(new URL('../run.mjs',import.meta.url),'utf8');
  assert.match(vite,/base:'\/'/);
