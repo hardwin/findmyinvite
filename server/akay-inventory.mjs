@@ -1,4 +1,6 @@
 import {HttpError,configured} from './core.mjs';
+import {httpUrl,pagePreview} from './akay-preview.mjs';
+export {httpUrl,pagePreview} from './akay-preview.mjs';
 const relations=new Set(['direct','indirect']);
 const codes=new Set(['classic','royal']);
 const statuses=new Set(['queued','in_progress','shipped']);
@@ -12,11 +14,6 @@ function page(url){
   offset:Math.min(5000,Math.max(0,Number(q.get('offset')||0)||0)),
   q:token(q.get('q'))
  };
-}
-export function httpUrl(value){
- if(typeof value!=='string')return '';
- const text=value.trim();
- return /^https?:\/\//i.test(text)?text:'';
 }
 export function parseCompetitorQuery(url){
  const q=new URL(url,'https://findmyinvite.com').searchParams;
@@ -50,7 +47,7 @@ export function mapCompetitor(row,counts={}){
   catalogue_count:urls.length,category:row.category||'',geography:row.geography||'',
   price_notes:row.price_notes||'',product_type:row.product_type||'',notes:row.notes||'',
   is_direct:Boolean(row.is_direct)||row.relation==='direct',relation:row.relation||null,
-  badge:relationBadge(row),created_at:row.created_at,updated_at:row.updated_at,
+  badge:relationBadge(row),preview:pagePreview(row.homepage)||pagePreview(urls[0]),created_at:row.created_at,updated_at:row.updated_at,
   shortlist_counts:{
    proposed:Number(counts.proposed)||0,
    approved:Number(counts.approved)||0,
@@ -61,7 +58,7 @@ export function mapCompetitor(row,counts={}){
 export function mapUpcoming(row){
  return {
   id:row.id,name:row.name||'',slug:row.slug||'',source_competitor:row.source_competitor||'',
-  source_url:httpUrl(row.source_url),design_code:row.design_code||'',category_hint:row.category_hint||'',
+  source_url:httpUrl(row.source_url),preview:pagePreview(row.source_url),design_code:row.design_code||'',category_hint:row.category_hint||'',
   intended_use:row.intended_use||'',status:row.status||'',notes:row.notes||'',
   created_at:row.created_at,updated_at:row.updated_at
  };

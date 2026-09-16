@@ -1,4 +1,5 @@
 import {HttpError,configured} from './core.mjs';
+import {pagePreview} from './akay-preview.mjs';
 const uuid=/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 const statuses=new Set(['proposed','approved','rejected']);
 const tiers=new Set(['classic','royal']);
@@ -45,7 +46,7 @@ function queue(row){const value=row?.replication_queue;const item=Array.isArray(
 export function mapItem(row){
  const c=competitor(row),r=queue(row);
  return {
-  id:row.id,title:row.title,url:row.url,reason:row.reason||'',suggested_tier:row.suggested_tier,
+  id:row.id,title:row.title,url:row.url,preview:pagePreview(row.url),reason:row.reason||'',suggested_tier:row.suggested_tier,
   batch:row.batch||'',status:row.status,created_at:row.created_at,updated_at:row.updated_at,competitor_id:row.competitor_id,
   competitor_name:c.name||'',competitor_slug:c.slug||'',is_direct:Boolean(c.is_direct)||c.relation==='direct',
   relation:c.relation||null,category:c.category||'',homepage:c.homepage||'',catalogue_urls:Array.isArray(c.catalogue_urls)?c.catalogue_urls:[],
