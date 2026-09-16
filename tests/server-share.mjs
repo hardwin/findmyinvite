@@ -64,6 +64,8 @@ test('every catalog template has a share still and the storefront HTML advertise
  const invitation=await readFile(new URL('../src/Invitation.tsx',import.meta.url),'utf8');
  assert.match(invitation,/Made with/);
  assert.match(invitation,/Share on WhatsApp/);
+ assert.match(invitation,/!cloudData&&<a className="use-design"/);
+ assert.match(invitation,/Use this Design/);
  const guest=await readFile(new URL('../src/GuestPages.tsx',import.meta.url),'utf8');
  assert.equal(guest.includes('Share on WhatsApp'),true);
  assert.equal(escapeHtml('A & B <C>'),'A &amp; B &lt;C&gt;');
