@@ -1,4 +1,5 @@
 import {useEffect,useMemo,useState} from 'react';
+import {payloadFrom} from './akay-shortlist-payload.mjs';
 
 export type ShortlistItem={
  id:string;title:string;url:string;reason:string;suggested_tier:string;batch:string;status:string;
@@ -6,7 +7,8 @@ export type ShortlistItem={
  is_direct:boolean;relation:string|null;category:string;homepage:string;catalogue_urls:string[];
  replication_id:string|null;replication_status:string|null;
 };
-type Payload={items:ShortlistItem[];total:number;status_counts:{proposed:number;approved:number;rejected:number;all:number};competitors:{id:string;name:string}[];batches:string[]};
+export type Payload={items:ShortlistItem[];total:number;status_counts:{proposed:number;approved:number;rejected:number;all:number};competitors:{id:string;name:string}[];batches:string[]};
+const emptyCounts={proposed:0,approved:0,rejected:0,all:0};
 
 function ist(value:string){
  const date=new Date(value);
@@ -18,6 +20,7 @@ export default function AkayShortlist(){
   const q=new URLSearchParams(location.search);
   return {status:q.get('status')||'proposed',tier:q.get('tier')||'',competitor_id:q.get('competitor_id')||'',batch:q.has('batch')?String(q.get('batch')||''):null,direct:q.get('direct')==='1',q:q.get('q')||''};
  });
+ const [query,setQuery]=useState(()=>filters.q);
  const [data,setData]=useState<Payload|null>(null);
  const [error,setError]=useState('');
  const [notice,setNotice]=useState('');
@@ -45,13 +48,15 @@ export default function AkayShortlist(){
    if(!q.get('status'))q.set('status','proposed');
    const res=await fetch('/api/akay-shortlist?action=list&'+q.toString(),{credentials:'same-origin'});
    if(res.status===401){location.assign('/akay');return;}
-   const body=await res.json().catch(()=>({}));
-   if(!res.ok)throw new Error(body.error||'Could not load the shortlist.');
-   setData(body);
+   const body=await res.json().catch(()=>null);
+   if(!res.ok)throw new Error((body&&typeof body==='object'&&typeof (body as {error?:unknown}).error==='string'&&(body as {error:string}).error)||'Could not load the shortlist.');
+   const payload=payloadFrom(body);
+   if(!payload)throw new Error('Could not load the shortlist.');
+   setData(payload);
   }catch(err){setError(err instanceof Error?err.message:'Could not load the shortlist.');}
   finally{setLoading(false);}
  }
- const [query,setQuery]=useState(filters.q);
+
  useEffect(()=>{setQuery(filters.q);},[filters.q]);
  useEffect(()=>{
   const timer=window.setTimeout(()=>{if(query!==filters.q)writeFilters({...filters,q:query});},400);
@@ -66,9 +71,10 @@ export default function AkayShortlist(){
    const action=ids.length===1?'decide':'bulk';
    const res=await fetch('/api/akay-shortlist?action='+action,{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify(ids.length===1?{id:ids[0],status}:{ids,status})});
    const body=await res.json().catch(()=>({}));
-   if(!res.ok)throw new Error(body.error||'Could not save that decision.');
-   if(body.failed?.length)setError(body.failed.map((row:{id:string;reason:string})=>row.reason).join(' '));
-   const ok=ids.length===1?1:(body.ok||[]).length;
+   if(!res.ok)throw new Error((body as {error?:string}).error||'Could not save that decision.');
+   const failed=Array.isArray((body as {failed?:{reason:string}[]}).failed)?(body as {failed:{reason:string}[]}).failed:[];
+   if(failed.length)setError(failed.map(row=>row.reason).join(' '));
+   const ok=ids.length===1?1:(Array.isArray((body as {ok?:string[]}).ok)?(body as {ok:string[]}).ok:[]).length;
    setNotice(ok?(status==='approved'?ok+' approved and queued.':ok+' rejected.'):'');
    setSelected([]);
    if(open&&ids.includes(open.id))setOpen(null);
@@ -77,8 +83,10 @@ export default function AkayShortlist(){
   finally{setBusy('');}
  }
 
- const counts=data?.status_counts||{proposed:0,approved:0,rejected:0,all:0};
- const proposed=useMemo(()=>new Set((data?.items||[]).filter(item=>item.status==='proposed').map(item=>item.id)),[data]);
+ const items=data?.items||[];
+ const counts=data?.status_counts||emptyCounts;
+ const catalogs=open?.catalogue_urls||[];
+ const proposed=useMemo(()=>new Set(items.filter(item=>item.status==='proposed').map(item=>item.id)),[items]);
  const selectable=selected.filter(id=>proposed.has(id));
 
  return <div className="akay-shortlist">
@@ -106,9 +114,9 @@ export default function AkayShortlist(){
    <button type="button" className="quiet" disabled={Boolean(busy)} onClick={()=>void decide(selectable,'rejected')}>Reject selected</button>
   </div>}
   {loading&&!data&&<p className="akay-empty">Loading candidates…</p>}
-  {data&&data.items.length===0&&<p className="akay-empty">{filters.status==='approved'?'Nothing approved yet. Clear Proposed first.':filters.status==='rejected'?'Nothing rejected yet.':(filters.q||filters.tier||filters.competitor_id||filters.direct||filters.batch!==null)?'No candidates match — reset filters.':'No proposed candidates.'}</p>}
+  {data&&items.length===0&&<p className="akay-empty">{filters.status==='approved'?'Nothing approved yet. Clear Proposed first.':filters.status==='rejected'?'Nothing rejected yet.':(filters.q||filters.tier||filters.competitor_id||filters.direct||filters.batch!==null)?'No candidates match — reset filters.':'No proposed candidates.'}</p>}
   <ul className="akay-cards">
-   {(data?.items||[]).map(item=>{
+   {items.map(item=>{
     const can=item.status==='proposed';
     return <li key={item.id} className={'akay-candidate'+(open?.id===item.id?' selected':'')}>
      <label className="akay-pick">{can?<input type="checkbox" checked={selected.includes(item.id)} onChange={e=>setSelected(e.target.checked?[...selected,item.id]:selected.filter(id=>id!==item.id))}/>:<input type="checkbox" disabled/>}</label>
@@ -133,9 +141,9 @@ export default function AkayShortlist(){
    <button type="button" className="akay-scrim" aria-label="Close" onClick={()=>setOpen(null)}/>
    <div className="akay-sheet">
     <header><h2 id="akay-drawer-title">{open.title}</h2><i className={'akay-chip status-'+open.status}>{open.status}</i><button type="button" className="quiet" onClick={()=>setOpen(null)}>Close</button></header>
-    <p className="akay-meta">{open.competitor_name} · {open.category.replaceAll('_',' ')||'—'} · {open.is_direct?'Direct':'Indirect'}{open.homepage&&<> · <a href={open.homepage} target="_blank" rel="noopener">Homepage</a></>}</p>
+    <p className="akay-meta">{open.competitor_name} · {(open.category||'').replaceAll('_',' ')||'—'} · {open.is_direct?'Direct':'Indirect'}{open.homepage&&<> · <a href={open.homepage} target="_blank" rel="noopener">Homepage</a></>}</p>
     <p><a className="akay-link" href={open.url} target="_blank" rel="noopener">Open template</a></p>
-    {open.catalogue_urls.length>0&&<ul className="akay-catalogs">{open.catalogue_urls.map(url=><li key={url}><a href={url} target="_blank" rel="noopener">{url}</a></li>)}</ul>}
+    {catalogs.length>0&&<ul className="akay-catalogs">{catalogs.map(url=><li key={url}><a href={url} target="_blank" rel="noopener">{url}</a></li>)}</ul>}
     <p className="akay-meta">Tier {open.suggested_tier} · Batch {open.batch||'—'}</p>
     <p className="akay-full-reason">{open.reason||'No reason yet.'}</p>
     <p className="akay-meta">Created {ist(open.created_at)} · Updated {ist(open.updated_at)}</p>

@@ -1,4 +1,4 @@
-import {useEffect,useMemo,useState,type FormEvent,type MouseEvent} from 'react';
+import {Component,useEffect,useMemo,useState,type FormEvent,type MouseEvent,type ReactNode} from 'react';
 import './akay-admin.css';
 import AkayShortlist from './AkayShortlist';
 
@@ -40,6 +40,11 @@ const emptyInsights:Insights={
  funnel:[{step:'Home',count:0},{step:'Templates',count:0},{step:'Create',count:0},{step:'Guest invitation',count:0},{step:'Content pages',count:0}],
  recent:[]
 };
+class DeskPanel extends Component<{children:ReactNode},{message:string}>{
+ state={message:''};
+ static getDerivedStateFromError(error:Error){return {message:error.message||'This panel failed to load.'};}
+ render(){return this.state.message?<p className="akay-error" role="alert">{this.state.message}</p>:this.props.children;}
+}
 
 export default function AkayAdmin(){
  const [gate,setGate]=useState('');
@@ -98,9 +103,15 @@ export default function AkayAdmin(){
   setSection(id);
  }
 
- const maxViews=Math.max(1,...(insights?.byDay.map(d=>d.pageviews)||[1]));
- const maxPage=Math.max(1,...(insights?.pages.map(p=>p.views)||[1]));
- const maxFunnel=Math.max(1,...(insights?.funnel.map(f=>f.count)||[1]));
+ const byDay=insights?.byDay||[];
+ const pages=insights?.pages||[];
+ const funnel=insights?.funnel||[];
+ const flow=insights?.flow||[];
+ const journeys=insights?.journeys||[];
+ const recent=insights?.recent||[];
+ const maxViews=Math.max(1,...byDay.map(d=>d.pageviews),1);
+ const maxPage=Math.max(1,...pages.map(p=>p.views),1);
+ const maxFunnel=Math.max(1,...funnel.map(f=>f.count),1);
  const chart=useMemo(()=>{
   const series=insights?.byDay||[];
   if(!series.length)return '';
@@ -138,7 +149,7 @@ export default function AkayAdmin(){
    {section==='shortlist'&&<div className="akay-lock-row"><button type="button" className="quiet" onClick={()=>void leave()}>Lock</button></div>}
    {error&&section!=='shortlist'&&<p className="akay-error" role="alert">{error}</p>}
    {section!=='shortlist'&&loading&&!insights&&<p className="akay-empty">Loading insights…</p>}
-   {section==='traffic'&&insights&&<>
+   {section==='traffic'&&insights&&<DeskPanel>
     <section className="akay-kpis" aria-label="Totals">
      <div className="akay-card akay-kpi"><span>Page views</span><strong>{totals?.pageviews??0}</strong></div>
      <div className="akay-card akay-kpi"><span>Visitors</span><strong>{totals?.visitors??0}</strong></div>
@@ -146,31 +157,31 @@ export default function AkayAdmin(){
      <div className="akay-card akay-kpi"><span>Avg time</span><strong>{formatMs(totals?.avgDwellMs||0)}</strong></div>
     </section>
     <section className="akay-card"><h2>Traffic over time</h2>
-     {insights.byDay.length?<svg className="akay-chart" viewBox="0 0 600 160" role="img" aria-label="Page views over time"><path d={chart} fill="#e0c07833" stroke="#e0c078" strokeWidth="2"/>{insights.byDay.map((d,i)=>{const x=insights.byDay.length===1?300:(i/(insights.byDay.length-1))*600;const y=150-10-((d.pageviews/maxViews)*126);return <circle key={d.day} cx={x} cy={y} r="4" fill="#e8c98a"/>})}</svg>:<p className="akay-empty">No page views in this range yet.</p>}
-     <p className="akay-empty">{insights.byDay.map(d=>d.day.slice(5)+' · '+d.pageviews).join('   ')}</p>
+     {byDay.length?<svg className="akay-chart" viewBox="0 0 600 160" role="img" aria-label="Page views over time"><path d={chart} fill="#e0c07833" stroke="#e0c078" strokeWidth="2"/>{byDay.map((d,i)=>{const x=byDay.length===1?300:(i/(byDay.length-1))*600;const y=150-10-((d.pageviews/maxViews)*126);return <circle key={d.day} cx={x} cy={y} r="4" fill="#e8c98a"/>})}</svg>:<p className="akay-empty">No page views in this range yet.</p>}
+     <p className="akay-empty">{byDay.map(d=>d.day.slice(5)+' · '+d.pageviews).join('   ')}</p>
     </section>
     <section className="akay-card"><h2>Where they go</h2>
-     {insights.funnel.map(step=><div className="akay-bar" key={step.step}><span>{step.step}</span><i style={{width:Math.max(8,(step.count/maxFunnel)*100)+'%'}}/><span>{step.count}</span></div>)}
+     {funnel.map(step=><div className="akay-bar" key={step.step}><span>{step.step}</span><i style={{width:Math.max(8,(step.count/maxFunnel)*100)+'%'}}/><span>{step.count}</span></div>)}
     </section>
     <section className="akay-card"><h2>Time on each page</h2>
-     {insights.pages.length?insights.pages.map(page=><div className="akay-bar" key={page.path}><span>{page.path}</span><i style={{width:Math.max(8,(page.views/maxPage)*100)+'%'}}/><span>{page.views} · {formatMs(page.avgDwellMs)}</span></div>):<p className="akay-empty">No page timings yet.</p>}
+     {pages.length?pages.map(page=><div className="akay-bar" key={page.path}><span>{page.path}</span><i style={{width:Math.max(8,(page.views/maxPage)*100)+'%'}}/><span>{page.views} · {formatMs(page.avgDwellMs)}</span></div>):<p className="akay-empty">No page timings yet.</p>}
     </section>
-   </>}
-   {section==='journeys'&&insights&&<>
+   </DeskPanel>}
+   {section==='journeys'&&insights&&<DeskPanel>
     <section className="akay-card"><h2>Navigation flows</h2>
-     {insights.flow.length?insights.flow.map(item=><div className="akay-flow" key={item.from+item.to}><span className="akay-chip">{item.from}</span><span className="akay-arrow">→</span><span className="akay-chip">{item.to}</span><strong>{item.count}</strong></div>):<p className="akay-empty">Flows appear after someone opens more than one page in a session.</p>}
+     {flow.length?flow.map(item=><div className="akay-flow" key={item.from+item.to}><span className="akay-chip">{item.from}</span><span className="akay-arrow">→</span><span className="akay-chip">{item.to}</span><strong>{item.count}</strong></div>):<p className="akay-empty">Flows appear after someone opens more than one page in a session.</p>}
     </section>
     <section className="akay-card"><h2>User journeys</h2>
-     {insights.journeys.length?insights.journeys.map(j=><div className="akay-journey" key={j.session+String(j.lastSeen)}>
-      {j.steps.map((step,i)=><span key={step+i}>{i>0&&<span className="akay-arrow"> → </span>}<span className="akay-chip">{step}</span></span>)}
+     {journeys.length?journeys.map(j=><div className="akay-journey" key={j.session+String(j.lastSeen)}>
+      {(j.steps||[]).map((step,i)=><span key={step+i}>{i>0&&<span className="akay-arrow"> → </span>}<span className="akay-chip">{step}</span></span>)}
       <span>{formatMs(j.durationMs)} · {formatTime(String(j.lastSeen))}</span>
      </div>):<p className="akay-empty">Journeys appear as sessions collect page views.</p>}
     </section>
-   </>}
-   {section==='live'&&insights&&<section className="akay-card"><h2>Live activity</h2>
-    {insights.recent.length?insights.recent.map((row,i)=><div className="akay-recent" key={String(row.at)+row.path+i}><span>{formatTime(String(row.at))}</span><span>{row.type}</span><span>{row.path}</span><span>{row.dwellMs?formatMs(row.dwellMs):'—'}</span></div>):<p className="akay-empty">No events recorded yet.</p>}
-   </section>}
-   {section==='shortlist'&&<AkayShortlist/>}
+   </DeskPanel>}
+   {section==='live'&&insights&&<DeskPanel><section className="akay-card"><h2>Live activity</h2>
+    {recent.length?recent.map((row,i)=><div className="akay-recent" key={String(row.at)+row.path+i}><span>{formatTime(String(row.at))}</span><span>{row.type}</span><span>{row.path}</span><span>{row.dwellMs?formatMs(row.dwellMs):'—'}</span></div>):<p className="akay-empty">No events recorded yet.</p>}
+   </section></DeskPanel>}
+   {section==='shortlist'&&<DeskPanel><AkayShortlist/></DeskPanel>}
   </main>
   <nav className="akay-nav" aria-label="Operator">
    {nav.map(item=><a key={item.id} href={item.href} aria-current={section===item.id?'page':undefined} onClick={e=>go(e,item.href,item.id)}>{item.label}</a>)}

@@ -99,7 +99,7 @@ From this Siemens Energy network, public DNS lookups are rewritten to `*.prod.sg
 
 ## Admin shortlist + split desk (2026-09-16)
 
-`/akay` is a mobile operator shell with bottom nav: Traffic, Journeys, Live, Shortlist. Shortlist at `/akay/shortlist` approves/rejects `shortlist_candidates` and enqueues `replication_queue` on approve. Forgot password still backlog.
+`/akay` is a mobile operator shell with bottom nav: Traffic, Journeys, Live, Shortlist. Shortlist at `/akay/shortlist` approves/rejects `shortlist_candidates` and enqueues `replication_queue` on approve. Missing list payloads no longer unmount the desk. Forgot password still backlog.
 
 ## Backlog
 

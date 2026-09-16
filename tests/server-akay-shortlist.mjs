@@ -5,6 +5,7 @@ import handler from '../api/akay-shortlist.mjs';
 import analytics from '../api/analytics.mjs';
 import {issueSession} from '../server/akay-gate.mjs';
 import {parseListQuery,mapItem,decideStatus} from '../server/akay-shortlist.mjs';
+import {payloadFrom} from '../src/akay-shortlist-payload.mjs';
 const id='11111111-1111-4111-8111-111111111111';
 const other='22222222-2222-4222-8222-222222222222';
 const competitor='33333333-3333-4333-8333-333333333333';
@@ -23,6 +24,15 @@ function row(overrides={}){
   ...overrides
  };
 }
+test('shortlist payloadFrom keeps a missing items array from crashing the desk',()=>{
+ assert.equal(payloadFrom({error:'Publishing is not configured yet.'}),null);
+ assert.equal(payloadFrom({}),null);
+ const payload=payloadFrom({items:[{id,title:'Royal foil suite',catalogue_urls:null,category:null}],status_counts:{proposed:1},competitors:[{id:competitor,name:'Varumo'}],batches:['A']});
+ assert.ok(payload);
+ assert.equal(payload.items.length,1);
+ assert.deepEqual(payload.items[0].catalogue_urls,[]);
+ assert.equal(payload.status_counts.proposed,1);
+});
 test('shortlist list defaults to proposed and maps competitor plus queue',()=>{
  const query=parseListQuery('/api/akay-shortlist');
  assert.equal(query.status,'proposed');
@@ -121,6 +131,10 @@ test('operator desk splits traffic journeys live and shortlist and stays unlinke
  const shortlist=await readFile(new URL('../src/AkayShortlist.tsx',import.meta.url),'utf8');
  assert.equal(shortlist.toLowerCase().includes('forgot'),false);
  assert.match(shortlist,/Approve/);
+ assert.match(shortlist,/akay-shortlist-payload/);
+ assert.match(shortlist,/data\?\.items/);
+ assert.equal(shortlist.includes('data.items.length'),false);
+ assert.match(admin,/DeskPanel/);
  const app=await readFile(new URL('../src/App.tsx',import.meta.url),'utf8');
  assert.match(app,/path\.startsWith\('\/akay'\)/);
  const home=await readFile(new URL('../src/Home.tsx',import.meta.url),'utf8');
