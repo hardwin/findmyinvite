@@ -73,12 +73,14 @@ export default function AkayShortlist(){
    const res=await fetch('/api/akay-shortlist?action='+action,{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify(ids.length===1?{id:ids[0],status}:{ids,status})});
    const body=await res.json().catch(()=>({}));
    if(!res.ok)throw new Error((body as {error?:string}).error||'Could not save that decision.');
-   const failed=Array.isArray((body as {failed?:{reason:string}[]}).failed)?(body as {failed:{reason:string}[]}).failed:[];
-   if(failed.length)setError(failed.map(row=>row.reason).join(' '));
+   const failed=Array.isArray((body as {failed?:{id?:string;reason:string}[]}).failed)?(body as {failed:{id?:string;reason:string}[]}).failed:[];
+   if(failed.length)setError(failed.map(row=>(row.id?row.id.slice(0,8)+' · ':'')+row.reason).join(' '));
    const ok=ids.length===1?1:(Array.isArray((body as {ok?:string[]}).ok)?(body as {ok:string[]}).ok:[]).length;
    setNotice(ok?(status==='approved'?ok+' approved and queued.':ok+' rejected.'):'');
    setSelected([]);
-   if(open&&ids.includes(open.id))setOpen(null);
+   const candidate=(body as {candidate?:ShortlistItem}).candidate;
+   if(candidate&&ids.length===1)setOpen(candidate);
+   else if(open&&ids.includes(open.id))setOpen(null);
    await load();
   }catch(err){setError(err instanceof Error?err.message:'Could not save that decision.');}
   finally{setBusy('');}
@@ -110,29 +112,29 @@ export default function AkayShortlist(){
    <label className="akay-search">Search<input type="search" enterKeyHint="search" placeholder="Title or URL" value={query} onChange={e=>setQuery(e.target.value)}/></label>
   </form>
   {selectable.length>0&&<div className="akay-bulk">
-   <span>{selectable.length} selected</span>
+   <span>{selectable.length} selected{selectable.length>=50?' · max 50':''}</span>
    <button type="button" disabled={Boolean(busy)} onClick={()=>void decide(selectable,'approved')}>Approve selected</button>
    <button type="button" className="quiet" disabled={Boolean(busy)} onClick={()=>void decide(selectable,'rejected')}>Reject selected</button>
   </div>}
   {loading&&!data&&<p className="akay-empty">Loading candidates…</p>}
-  {data&&items.length===0&&<p className="akay-empty">{filters.status==='approved'?'Nothing approved yet. Clear Proposed first.':filters.status==='rejected'?'Nothing rejected yet.':(filters.q||filters.tier||filters.competitor_id||filters.direct||filters.batch!==null)?'No candidates match — reset filters.':'No proposed candidates.'}</p>}
+  {data&&items.length===0&&<p className="akay-empty">{filters.status==='approved'?'Nothing approved yet. Approve a Proposed card to queue designer work.':filters.status==='rejected'?'Nothing rejected yet.':(filters.q||filters.tier||filters.competitor_id||filters.direct||filters.batch!==null)?'No candidates match — reset filters.':'No proposed candidates.'}</p>}
   <ul className="akay-cards">
    {items.map(item=>{
     const can=item.status==='proposed';
     return <li key={item.id} className={'akay-candidate'+(open?.id===item.id?' selected':'')}>
-     <label className="akay-pick">{can?<input type="checkbox" checked={selected.includes(item.id)} onChange={e=>setSelected(e.target.checked?[...selected,item.id]:selected.filter(id=>id!==item.id))}/>:<input type="checkbox" disabled/>}</label>
+     <label className="akay-pick">{can?<input type="checkbox" checked={selected.includes(item.id)} onChange={e=>setSelected(e.target.checked?(selected.length>=50?selected:[...selected,item.id]):selected.filter(id=>id!==item.id))}/>:<input type="checkbox" disabled/>}</label>
      <button type="button" className="akay-candidate-main" onClick={()=>setOpen(item)}>
-      <AkayPagePreview src={item.preview||''} alt={item.title}/>
+      <AkayPagePreview src={item.preview||''} alt={item.title} className="card"/>
       <strong>{item.title}</strong>
       <span className="akay-meta">{item.competitor_name}{item.is_direct&&<i className="akay-badge">Direct</i>}</span>
       <span className="akay-meta"><i className={'akay-chip tier-'+item.suggested_tier}>{item.suggested_tier}</i><i className={'akay-chip status-'+item.status}>{item.status}</i>{item.batch||'—'}</span>
+      <span className="akay-reason">{item.reason||'No reason yet.'}</span>
+      <span className="akay-meta">{ist(item.updated_at)}</span>
      </button>
      <div className="akay-row-actions">
-      <a className="akay-link" href={item.url} target="_blank" rel="noopener">Open</a>
-      {can&&<>
-       <button type="button" disabled={Boolean(busy)} onClick={()=>void decide([item.id],'approved')}>Approve</button>
-       <button type="button" className="quiet" disabled={Boolean(busy)} onClick={()=>void decide([item.id],'rejected')}>Reject</button>
-      </>}
+      <a className="akay-link" href={item.url} target="_blank" rel="noopener">Open template</a>
+      <button type="button" className="quiet" disabled={!can||Boolean(busy)} onClick={()=>can&&void decide([item.id],'rejected')}>Reject</button>
+      <button type="button" disabled={!can||Boolean(busy)} onClick={()=>can&&void decide([item.id],'approved')}>Approve</button>
      </div>
     </li>;
    })}
@@ -144,17 +146,15 @@ export default function AkayShortlist(){
     <AkayPagePreview src={open.preview||''} alt={open.title} className="sheet"/>
     <p className="akay-meta">{open.competitor_name} · {(open.category||'').replaceAll('_',' ')||'—'} · {open.is_direct?'Direct':'Indirect'}{open.homepage&&<> · <a href={open.homepage} target="_blank" rel="noopener">Homepage</a></>}</p>
     <p><a className="akay-link" href={open.url} target="_blank" rel="noopener">Open template</a></p>
-    {catalogs.length>0&&<ul className="akay-catalogs">{catalogs.map(url=><li key={url}><a href={url} target="_blank" rel="noopener">{url}</a></li>)}</ul>}
+    {catalogs.length>0&&<><p className="akay-meta">Catalogues</p><ul className="akay-catalogs">{catalogs.map(url=><li key={url}><a href={url} target="_blank" rel="noopener">{url}</a></li>)}</ul></>}
     <p className="akay-meta">Tier {open.suggested_tier} · Batch {open.batch||'—'}</p>
     <p className="akay-full-reason">{open.reason||'No reason yet.'}</p>
     <p className="akay-meta">Created {ist(open.created_at)} · Updated {ist(open.updated_at)}</p>
     {open.status==='approved'&&<p className="akay-meta">In queue · {open.replication_status||'queued'}</p>}
     {open.status==='rejected'&&<p className="akay-meta">Decided · rejected</p>}
     <footer>
-     {open.status==='proposed'?<>
-      <button type="button" className="quiet" disabled={Boolean(busy)} onClick={()=>void decide([open.id],'rejected')}>Reject</button>
-      <button type="button" disabled={Boolean(busy)} onClick={()=>void decide([open.id],'approved')}>Approve</button>
-     </>:<p className="akay-empty">Decided · {open.status}</p>}
+     <button type="button" className="quiet" disabled={open.status!=='proposed'||Boolean(busy)} onClick={()=>open.status==='proposed'&&void decide([open.id],'rejected')}>Reject</button>
+     <button type="button" disabled={open.status!=='proposed'||Boolean(busy)} onClick={()=>open.status==='proposed'&&void decide([open.id],'approved')}>Approve</button>
     </footer>
    </div>
   </div>}
