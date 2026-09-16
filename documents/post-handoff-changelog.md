@@ -101,6 +101,12 @@ From this Siemens Energy network, public DNS lookups are rewritten to `*.prod.sg
 
 `/akay` is a mobile operator shell with bottom nav: Traffic, Journeys, Live, Shortlist, Competitors, Upcoming. Shortlist at `/akay/shortlist` approves/rejects `shortlist_candidates` and enqueues `replication_queue` on approve. Epic 1 adds read-only `/akay/competitors` (20) and `/akay/upcoming` (361; chips 140/106/78/37). Cards lead with WordPress mshots page previews of the existing http(s) links (no screenshot warehouse on the invitations DB). Missing list payloads no longer unmount the desk. Forgot password still backlog.
 
+## Epic 2 — Shortlist gap-fill (2026-09-16)
+
+Harden live `/akay/shortlist` only — list/filters stay. Approve + Reject stay on every card (disabled when not `proposed`); bulk bar still max 50 with per-id ok/fail. Approve uses privileged RPC `approve_shortlist_candidate` so `status=approved` and `replication_queue` (`queued`, empty assignee) happen in one transaction with `ON CONFLICT (candidate_id) DO NOTHING`. Reject uses `reject_shortlist_candidate` and never touches the queue. Re-approve is 409. Drawer keeps full reason, competitor/catalogue links, Open template, and replication status after approve. Card preview is cropped so actions stay above the fold.
+
+Prod baseline at start of this pass: 22 proposed / 3 rejected (video templates Ashok already parked) / 0 approved / `replication_queue` 0. Do not treat those 3 rejects as QA.
+
 ## Backlog
 
 - Forgot password / email reset (explicitly deferred 2026-09-16).

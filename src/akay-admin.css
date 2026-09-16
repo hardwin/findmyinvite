@@ -50,6 +50,7 @@
 .akay-pick{position:absolute;top:16px;left:16px;z-index:3;display:flex;background:#16120ed9;border-radius:10px;padding:8px}
 .akay-pick input{width:22px;height:22px}
 .akay-preview{width:100%;aspect-ratio:3/4;border-radius:12px;overflow:hidden;background:#241e18;margin:0 0 8px}
+.akay-preview.card{aspect-ratio:390/220;max-height:220px}
 .akay-preview img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
 .akay-preview.empty{display:grid;place-items:center;color:#8a7b68;font-size:12px}
 .akay-preview.sheet{max-height:52svh;margin-bottom:12px}
@@ -59,6 +60,9 @@
 .akay-reason{font-size:13px;color:#e4d8c4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .akay-badge{font-style:normal;font-size:11px;border:1px solid #b88e40;border-radius:999px;padding:2px 8px;color:#e8c98a}
 .akay-row-actions{justify-content:flex-end}
+.akay-candidate .akay-row-actions{display:grid;grid-template-columns:1fr 1fr;justify-content:stretch}
+.akay-candidate .akay-row-actions .akay-link{grid-column:1/-1;justify-content:center}
+.akay-candidate .akay-row-actions button{width:100%;display:inline-flex;align-items:center;justify-content:center}
 .akay-link,.akay-catalogs a{color:#e8c98a;min-height:44px;display:inline-flex;align-items:center;word-break:break-all}
 .akay-chip.tier-royal,.akay-chip.status-approved{border-color:#b88e40;color:#e8c98a}
 .akay-chip.status-rejected{border-color:#8a3a44;color:#e8a0a8}
