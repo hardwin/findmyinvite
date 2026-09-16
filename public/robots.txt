@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Disallow: /akay
+Disallow: /akay/
+
+Sitemap: https://findmyinvite.com/sitemap.xml

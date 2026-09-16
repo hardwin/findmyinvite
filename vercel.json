@@ -4,14 +4,16 @@
   "outputDirectory": "dist",
   "rewrites": [
     {"source":"/:slug","has":[{"type":"header","key":"user-agent","value":"(?i).*(WhatsApp|facebookexternalhit|Facebot|Twitterbot|Slackbot|TelegramBot|LinkedInBot|Discordbot|Pinterest|SkypeUriPreview|Iframely|redditbot|Embedly).*"}],"destination":"/api/share?slug=:slug"},
-    {"source":"/((?!api/|assets/|review/).*)","destination":"/index.html"}
+    {"source":"/((?!api/|assets/|review/|robots\\.txt$|sitemap\\.xml$).*)","destination":"/index.html"}
   ],
   "headers": [
+    {"source":"/robots.txt","headers":[{"key":"Content-Type","value":"text/plain; charset=utf-8"}]},
+    {"source":"/sitemap.xml","headers":[{"key":"Content-Type","value":"application/xml; charset=utf-8"}]},
     {"source":"/(.*)","headers":[{"key":"X-Content-Type-Options","value":"nosniff"},{"key":"Referrer-Policy","value":"no-referrer"},{"key":"X-Frame-Options","value":"DENY"}]},
     {"source":"/manage/(.*)","headers":[{"key":"X-Robots-Tag","value":"noindex, nofollow"},{"key":"Cache-Control","value":"no-store"}]},
     {"source":"/api/(.*)","headers":[{"key":"X-Robots-Tag","value":"noindex, nofollow"},{"key":"Cache-Control","value":"no-store"}]},
     {"source":"/akay","headers":[{"key":"X-Robots-Tag","value":"noindex, nofollow"},{"key":"Cache-Control","value":"no-store"}]},
     {"source":"/akay/(.*)","headers":[{"key":"X-Robots-Tag","value":"noindex, nofollow"},{"key":"Cache-Control","value":"no-store"}]},
-    {"source":"/((?!$|templates$|blog(?:/.*)?$|about$|contact$|terms$|privacy-policy$|refund-policy$|shipping-policy$|assets/).*)","headers":[{"key":"X-Robots-Tag","value":"noindex, nofollow"}]}
+    {"source":"/((?!$|templates$|blog(?:/.*)?$|about$|contact$|terms$|privacy-policy$|refund-policy$|shipping-policy$|assets/|robots\\.txt$|sitemap\\.xml$).*)","headers":[{"key":"X-Robots-Tag","value":"noindex, nofollow"}]}
   ]
 }
