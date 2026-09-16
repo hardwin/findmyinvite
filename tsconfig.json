@@ -3,6 +3,7 @@
     "target": "ES2022", "useDefineForClassFields": true,
     "lib": ["ES2022", "DOM", "DOM.Iterable"], "module": "ESNext",
     "skipLibCheck": true, "moduleResolution": "Bundler", "allowImportingTsExtensions": true,
+    "allowJs": true,
     "resolveJsonModule": true, "isolatedModules": true, "verbatimModuleSyntax": true,
     "noEmit": true, "jsx": "react-jsx", "strict": true
   },
