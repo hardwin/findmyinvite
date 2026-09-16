@@ -16,7 +16,28 @@ export function clientRateKey(req,scope){const ip=req.headers['x-vercel-forwarde
 export async function db(path,{method='GET',body,headers={}}={}){if(!configured())throw new HttpError(503,'Publishing is not configured yet.');const response=await fetch(process.env.SUPABASE_URL.replace(/\/$/,'')+'/rest/v1/'+path,{method,headers:{apikey:process.env.SUPABASE_SERVICE_ROLE_KEY,Authorization:'Bearer '+process.env.SUPABASE_SERVICE_ROLE_KEY,'Content-Type':'application/json',...headers},body:body===undefined?undefined:JSON.stringify(body)});if(!response.ok){if(response.status===409)throw new HttpError(409,'This address is already in use.');console.error('Database request failed',response.status);throw new HttpError(503,'Could not save your changes. Please try again.');}const raw=await response.text();return raw?JSON.parse(raw):null;}
 export async function bodyJson(req,max=65536){if(Number(req.headers['content-length']||0)>max)throw new HttpError(413,'Request too large.');if(req.body!==undefined){let body;try{body=typeof req.body==='string'?JSON.parse(req.body):req.body;}catch{throw new HttpError(400,'Invalid JSON.');}if(!body||typeof body!=='object'||Array.isArray(body))throw new HttpError(400,'JSON object required.');if(Buffer.byteLength(JSON.stringify(body))>max)throw new HttpError(413,'Request too large.');return body;}let size=0,chunks=[];for await(const chunk of req){size+=chunk.length;if(size>max)throw new HttpError(413,'Request too large.');chunks.push(chunk);}try{const body=JSON.parse(Buffer.concat(chunks).toString());if(!body||typeof body!=='object'||Array.isArray(body))throw new Error();return body;}catch{throw new HttpError(400,'Invalid JSON.');}}
 export function bearer(req){return String(req.headers.authorization||'').replace(/^Bearer /,'');}
-export async function invitation(slug,token){const rows=await db('invitations?slug=eq.'+encodeURIComponent(slug)+'&select=*&limit=1');const row=rows[0];if(!row)throw new HttpError(404,'Invitation not found.');if(token!==undefined)verifyToken(token,row.management_hash);else if(!row.published||Date.parse(row.expires_at)<=Date.now())throw new HttpError(404,'Invitation is unavailable or expired.');return row;}
+export function isManagementToken(token){return typeof token==='string'&&/^[a-f0-9]{64}$/.test(token);}
+export function hostId(data){return typeof data?._host==='string'?data._host:'';}
+export function publicData(data){if(!data||typeof data!=='object'||Array.isArray(data))return data;const {_host,...rest}=data;return rest;}
+export async function authUser(token){
+ if(!token||isManagementToken(token))return null;
+ if(!configured())throw new HttpError(503,'Publishing is not configured yet.');
+ const response=await fetch(process.env.SUPABASE_URL.replace(/\/$/,'')+'/auth/v1/user',{headers:{apikey:process.env.SUPABASE_SERVICE_ROLE_KEY,Authorization:'Bearer '+token}});
+ if(!response.ok)throw new HttpError(401,'Sign in to continue.');
+ const user=await response.json();
+ if(!user||typeof user.id!=='string'||!user.id)throw new HttpError(401,'Sign in to continue.');
+ return {id:user.id,email:typeof user.email==='string'?user.email:''};
+}
+export async function invitation(slug,token){
+ const rows=await db('invitations?slug=eq.'+encodeURIComponent(slug)+'&select=*&limit=1');
+ const row=rows[0];if(!row)throw new HttpError(404,'Invitation not found.');
+ if(token===undefined){if(!row.published||Date.parse(row.expires_at)<=Date.now())throw new HttpError(404,'Invitation is unavailable or expired.');return row;}
+ if(!token)throw new HttpError(401,'Sign in or use your private recovery link.');
+ if(isManagementToken(token)){verifyToken(token,row.management_hash);return row;}
+ const user=await authUser(token);
+ if(!user||hostId(row.data)!==user.id)throw new HttpError(403,'This account cannot manage that invitation.');
+ return row;
+}
 export async function rate(req,scope,limit,seconds){const result=await db('rpc/consume_rate_limit',{method:'POST',body:{p_key:clientRateKey(req,scope),p_limit:limit,p_seconds:seconds}});if(result!==true)throw new HttpError(429,'Too many requests. Please try again later.');}
 export function respond(res,status,body){res.setHeader('Cache-Control','no-store');res.setHeader('X-Content-Type-Options','nosniff');res.status(status).json(body);}
 export function fail(res,error){if(!(error instanceof HttpError))console.error('Request failed',error?.name);respond(res,error.status||500,{error:error instanceof HttpError?error.message:'Something went wrong. Please retry.'});}

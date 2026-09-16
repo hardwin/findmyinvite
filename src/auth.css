@@ -1,0 +1,10 @@
+.auth-overlay{position:fixed;inset:0;z-index:80;background:#1a171080;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
+.auth-modal{width:min(440px,100%);background:#fffcf7;border:1px solid #d5be90;border-radius:16px;padding:28px 24px 24px;box-shadow:0 18px 50px #0003}
+.auth-modal h2{font:600 26px 'Playfair Display',serif;margin:8px 0 10px}
+.auth-modal>p{color:#858184;font-size:14px;line-height:1.6;margin-bottom:18px}
+.auth-tabs{display:flex;gap:8px;margin-bottom:8px}
+.auth-tabs button{border:1px solid #d7c7a6;border-radius:20px;padding:7px 14px;font-size:13px;color:#93723c;background:transparent}
+.auth-tabs button.selected{background:#b99149;color:#fff;border-color:#b99149}
+.nav-text{background:none;border:0;padding:0;font:inherit;color:inherit}
+.site-nav .nav-account{display:flex;align-items:center;gap:16px}
+@media(max-width:640px){.site-nav .nav-account{gap:10px}.auth-modal{padding:22px 16px}}

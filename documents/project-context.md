@@ -38,6 +38,7 @@ Written 2026-09-15. Overwrite in place when facts change.
 - `ENABLE_PRODUCTION_DEPLOY` is `false` and only affects the GitHub Actions `deploy` job (manual `workflow_dispatch` previews). It does not gate production.
 - See `.github/workflows/ci.yml`.
 - `/akay` access code is hardcoded in `server/akay-gate.mjs` (public repo). Ashok accepted 2026-09-15; change to an env var later.
+- Hosts sign in with email and password (Supabase Auth, no OTP). Forgot password is backlog.
 
 ## What this conversation did not change
 

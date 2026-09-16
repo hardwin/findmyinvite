@@ -95,6 +95,15 @@ From this Siemens Energy network, public DNS lookups are rewritten to `*.prod.sg
 2. Rotate the `service_role` key that was pasted in chat (Supabase → API → Reset).
 3. Finish Case 3+ from the manual; **YES** before Case 6.
 4. Send support email/WhatsApp + business name before contact/policy copy can ship.
+5. **Forgot password** — deferred. Email/password accounts have no reset flow yet.
+
+## Host accounts (2026-09-16, awaiting merge)
+
+Email/password host accounts via Supabase Auth (no OTP). Save draft and Publish require a session. Homepage **Sign in** opens a popup. **My Templates** lists invitations owned by `data._host`. Legacy 64-hex recovery links still work. **Forgot password is backlog** — do not build it until Ashok asks.
+
+## Backlog
+
+- Forgot password / email reset (explicitly deferred 2026-09-16).
 
 ## Laws the next agent must keep
 
