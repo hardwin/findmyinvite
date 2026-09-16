@@ -42,6 +42,7 @@ test('shortlist list defaults to proposed and maps competitor plus queue',()=>{
  assert.equal(item.is_direct,true);
  assert.equal(item.replication_status,'queued');
  assert.equal(item.catalogue_urls[0],'https://varumo.example/all');
+ assert.match(item.preview,/mshots\/v1\/https%3A%2F%2Fvarumo.example%2Ftemplate/);
  assert.throws(()=>decideStatus('queued'));
 });
 test('shortlist mutations require the operator session and skip public analytics',async()=>{
@@ -134,6 +135,7 @@ test('operator desk splits traffic journeys live and shortlist and stays unlinke
  assert.equal(shortlist.toLowerCase().includes('forgot'),false);
  assert.match(shortlist,/Approve/);
  assert.match(shortlist,/akay-shortlist-payload/);
+ assert.match(shortlist,/AkayPagePreview/);
  assert.match(shortlist,/data\?\.items/);
  assert.equal(shortlist.includes('data.items.length'),false);
  assert.match(admin,/DeskPanel/);

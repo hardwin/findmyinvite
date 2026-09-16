@@ -8,6 +8,7 @@ export function payloadFrom(body){
    reason:item.reason||'',
    batch:item.batch||'',
    category:item.category||'',
+   preview:typeof item.preview==='string'&&/^https:\/\//i.test(item.preview)?item.preview:'',
    catalogue_urls:Array.isArray(item.catalogue_urls)?item.catalogue_urls.filter(url=>typeof url==='string'):[],
    competitor_name:item.competitor_name||''
   })),

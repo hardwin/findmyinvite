@@ -1,8 +1,9 @@
 import {useEffect,useState} from 'react';
+import AkayPagePreview from './AkayPagePreview';
 
 type Counts={proposed:number;approved:number;rejected:number};
 type Competitor={
- id:string;name:string;slug:string;homepage:string;catalogue_urls:string[];catalogue_count:number;
+ id:string;name:string;slug:string;homepage:string;preview:string;catalogue_urls:string[];catalogue_count:number;
  category:string;geography:string;notes:string;is_direct:boolean;relation:string|null;badge:string;
  created_at:string;updated_at:string;shortlist_counts:Counts;
 };
@@ -72,11 +73,11 @@ export default function AkayCompetitors(){
     const counts=item.shortlist_counts||{proposed:0,approved:0,rejected:0};
     return <li key={item.id} className={'akay-candidate plain'+(open?.id===item.id?' selected':'')}>
      <button type="button" className="akay-candidate-main" onClick={()=>setOpen(item)}>
+      <AkayPagePreview src={item.preview||''} alt={item.name}/>
       <strong>{item.name}</strong>
       <span className="akay-meta">{label(item.category)}{item.badge==='direct'&&<i className="akay-badge">Direct</i>}{item.badge==='indirect'&&<i className="akay-badge">Indirect</i>}</span>
       <span className="akay-meta">{item.geography||'—'}</span>
       <span className="akay-meta">{item.catalogue_count} catalogues · Shortlist {counts.proposed}/{counts.approved}/{counts.rejected}</span>
-      <span className="akay-meta">{ist(item.updated_at)}</span>
      </button>
      <div className="akay-row-actions">{item.homepage&&<a className="akay-link" href={item.homepage} target="_blank" rel="noopener">Homepage</a>}</div>
     </li>;
@@ -86,6 +87,7 @@ export default function AkayCompetitors(){
    <button type="button" className="akay-scrim" aria-label="Close" onClick={()=>setOpen(null)}/>
    <div className="akay-sheet">
     <header><h2 id="akay-comp-title">{open.name}</h2>{open.badge&&<i className="akay-chip">{open.badge}</i>}<button type="button" className="quiet" onClick={()=>setOpen(null)}>Close</button></header>
+    <AkayPagePreview src={open.preview||''} alt={open.name} className="sheet"/>
     <p className="akay-meta">{label(open.category)} · {open.geography||'—'}</p>
     {open.homepage&&<p><a className="akay-link" href={open.homepage} target="_blank" rel="noopener">Open homepage</a></p>}
     {open.catalogue_urls.length>0&&<ul className="akay-catalogs">{open.catalogue_urls.map(url=><li key={url}><a href={url} target="_blank" rel="noopener">{url}</a></li>)}</ul>}

@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import handler from '../api/akay-inventory.mjs';
 import {issueSession} from '../server/akay-gate.mjs';
-import {parseCompetitorQuery,parseUpcomingQuery,httpUrl,relationBadge,mapCompetitor,mapUpcoming,upcomingChips,tierNote} from '../server/akay-inventory.mjs';
+import {parseCompetitorQuery,parseUpcomingQuery,httpUrl,pagePreview,relationBadge,mapCompetitor,mapUpcoming,upcomingChips,tierNote} from '../server/akay-inventory.mjs';
 const ayozan='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa';
 const riwaaz='bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb';
 function cookie(){return 'fmi_akay='+issueSession();}
@@ -18,6 +18,10 @@ test('inventory HTTP URLs stay verified and junk is dropped',()=>{
  assert.equal(httpUrl('javascript:alert(1)'),'');
  assert.equal(httpUrl('/templates/foo'),'');
  assert.equal(httpUrl(''),'');
+ assert.match(pagePreview('https://ayozan.com/'),/mshots\/v1\/https%3A%2F%2Fayozan.com%2F/);
+ assert.match(pagePreview('https://ayozan.com/'),/vpw=390/);
+ assert.equal(pagePreview('javascript:alert(1)'),'');
+ assert.equal(pagePreview('/templates/foo'),'');
 });
 test('Ayozan is Direct, Riwaaz is Indirect, others have no relation badge',()=>{
  assert.equal(relationBadge({is_direct:true,relation:'direct'}),'direct');
@@ -27,7 +31,9 @@ test('Ayozan is Direct, Riwaaz is Indirect, others have no relation badge',()=>{
  assert.equal(mapped.badge,'direct');
  assert.equal(mapped.catalogue_count,1);
  assert.equal(mapped.shortlist_counts.proposed,2);
+ assert.match(mapped.preview,/mshots/);
  assert.equal(mapUpcoming({id:riwaaz,source_url:'ftp://x',name:'Card'}).source_url,'');
+ assert.equal(mapUpcoming({id:riwaaz,source_url:'ftp://x',name:'Card'}).preview,'');
 });
 test('upcoming chips match Ayozan 140/106 and Riwaaz 78/37',()=>{
  const chips=upcomingChips([
@@ -91,6 +97,7 @@ test('list competitors joins shortlist counts; upcoming chips stay unfiltered',a
   assert.equal(listed.body.items.find(item=>item.name==='Ayozan').badge,'direct');
   assert.equal(listed.body.items.find(item=>item.name==='Riwaaz').badge,'indirect');
   assert.equal(listed.body.items.find(item=>item.name==='Ayozan').shortlist_counts.proposed,1);
+  assert.match(listed.body.items.find(item=>item.name==='Ayozan').preview,/mshots/);
   const upcoming=await request('/api/akay-inventory?view=upcoming');
   assert.equal(upcoming.code,200);
   assert.equal(upcoming.body.total,361);
@@ -108,11 +115,15 @@ test('operator desk adds competitors and upcoming without inventing a combined i
  const api=await readFile(new URL('../api/akay-inventory.mjs',import.meta.url),'utf8');
  const upcoming=await readFile(new URL('../src/AkayUpcoming.tsx',import.meta.url),'utf8');
  const competitors=await readFile(new URL('../src/AkayCompetitors.tsx',import.meta.url),'utf8');
+ const preview=await readFile(new URL('../src/AkayPagePreview.tsx',import.meta.url),'utf8');
  assert.match(admin,/\/akay\/competitors/);
  assert.match(admin,/\/akay\/upcoming/);
  assert.equal(admin.includes('Traffic & journeys'),false);
  assert.equal(upcoming.includes('Approve'),false);
  assert.equal(competitors.includes('Approve'),false);
  assert.match(upcoming,/Ayozan Classic/);
+ assert.match(upcoming,/AkayPagePreview/);
+ assert.match(competitors,/AkayPagePreview/);
+ assert.match(preview,/mshots|page preview|Preview unavailable/);
  assert.match(api,/method\(req,\['GET'\]\)/);
 });

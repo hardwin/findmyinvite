@@ -1,7 +1,8 @@
 import {useEffect,useState} from 'react';
+import AkayPagePreview from './AkayPagePreview';
 
 type Upcoming={
- id:string;name:string;slug:string;source_competitor:string;source_url:string;design_code:string;
+ id:string;name:string;slug:string;source_competitor:string;source_url:string;preview:string;design_code:string;
  category_hint:string;intended_use:string;status:string;notes:string;created_at:string;updated_at:string;
 };
 type Chips={ayozan_classic:number;ayozan_royal:number;riwaaz_classic:number;riwaaz_royal:number;all:number};
@@ -104,10 +105,10 @@ export default function AkayUpcoming(){
    {items.map(item=>
     <li key={item.id} className={'akay-candidate plain'+(open?.id===item.id?' selected':'')}>
      <button type="button" className="akay-candidate-main" onClick={()=>setOpen(item)}>
+      <AkayPagePreview src={item.preview||''} alt={item.name}/>
       <strong>{item.name}</strong>
       <span className="akay-meta">{item.source_competitor} · {item.slug}</span>
       <span className="akay-meta"><i className={'akay-chip tier-'+item.design_code}>{item.design_code||'—'}</i><i className="akay-chip">{label(item.intended_use)}</i><i className={'akay-chip status-'+item.status}>{item.status||'—'}</i></span>
-      <span className="akay-meta">{ist(item.updated_at)}</span>
      </button>
      <div className="akay-row-actions">{item.source_url&&<a className="akay-link" href={item.source_url} target="_blank" rel="noopener">Open source</a>}</div>
     </li>
@@ -118,6 +119,7 @@ export default function AkayUpcoming(){
    <button type="button" className="akay-scrim" aria-label="Close" onClick={()=>setOpen(null)}/>
    <div className="akay-sheet">
     <header><h2 id="akay-up-title">{open.name}</h2><i className={'akay-chip tier-'+open.design_code}>{open.design_code}</i><button type="button" className="quiet" onClick={()=>setOpen(null)}>Close</button></header>
+    <AkayPagePreview src={open.preview||''} alt={open.name} className="sheet"/>
     <p className="akay-meta">{open.source_competitor} · {label(open.intended_use)} · {open.status}</p>
     {open.source_url&&<p><a className="akay-link" href={open.source_url} target="_blank" rel="noopener">Open source</a></p>}
     <p className="akay-full-reason">{open.notes||'No notes yet.'}</p>

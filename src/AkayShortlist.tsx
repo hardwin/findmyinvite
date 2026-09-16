@@ -1,8 +1,9 @@
 import {useEffect,useMemo,useState} from 'react';
 import {payloadFrom} from './akay-shortlist-payload.mjs';
+import AkayPagePreview from './AkayPagePreview';
 
 export type ShortlistItem={
- id:string;title:string;url:string;reason:string;suggested_tier:string;batch:string;status:string;
+ id:string;title:string;url:string;preview:string;reason:string;suggested_tier:string;batch:string;status:string;
  created_at:string;updated_at:string;competitor_id:string;competitor_name:string;competitor_slug:string;
  is_direct:boolean;relation:string|null;category:string;homepage:string;catalogue_urls:string[];
  replication_id:string|null;replication_status:string|null;
@@ -121,11 +122,10 @@ export default function AkayShortlist(){
     return <li key={item.id} className={'akay-candidate'+(open?.id===item.id?' selected':'')}>
      <label className="akay-pick">{can?<input type="checkbox" checked={selected.includes(item.id)} onChange={e=>setSelected(e.target.checked?[...selected,item.id]:selected.filter(id=>id!==item.id))}/>:<input type="checkbox" disabled/>}</label>
      <button type="button" className="akay-candidate-main" onClick={()=>setOpen(item)}>
+      <AkayPagePreview src={item.preview||''} alt={item.title}/>
       <strong>{item.title}</strong>
       <span className="akay-meta">{item.competitor_name}{item.is_direct&&<i className="akay-badge">Direct</i>}</span>
       <span className="akay-meta"><i className={'akay-chip tier-'+item.suggested_tier}>{item.suggested_tier}</i><i className={'akay-chip status-'+item.status}>{item.status}</i>{item.batch||'—'}</span>
-      <span className="akay-reason">{item.reason||'No reason yet.'}</span>
-      <span className="akay-meta">{ist(item.updated_at)}</span>
      </button>
      <div className="akay-row-actions">
       <a className="akay-link" href={item.url} target="_blank" rel="noopener">Open</a>
@@ -141,6 +141,7 @@ export default function AkayShortlist(){
    <button type="button" className="akay-scrim" aria-label="Close" onClick={()=>setOpen(null)}/>
    <div className="akay-sheet">
     <header><h2 id="akay-drawer-title">{open.title}</h2><i className={'akay-chip status-'+open.status}>{open.status}</i><button type="button" className="quiet" onClick={()=>setOpen(null)}>Close</button></header>
+    <AkayPagePreview src={open.preview||''} alt={open.title} className="sheet"/>
     <p className="akay-meta">{open.competitor_name} · {(open.category||'').replaceAll('_',' ')||'—'} · {open.is_direct?'Direct':'Indirect'}{open.homepage&&<> · <a href={open.homepage} target="_blank" rel="noopener">Homepage</a></>}</p>
     <p><a className="akay-link" href={open.url} target="_blank" rel="noopener">Open template</a></p>
     {catalogs.length>0&&<ul className="akay-catalogs">{catalogs.map(url=><li key={url}><a href={url} target="_blank" rel="noopener">{url}</a></li>)}</ul>}
