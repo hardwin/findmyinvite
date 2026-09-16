@@ -1,4 +1,4 @@
-.auth-overlay{position:fixed;inset:0;z-index:80;background:#1a171080;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
+.auth-overlay{position:fixed;inset:0;z-index:80;background:#1a171080;display:flex;align-items:center;justify-content:center;padding:20px;overflow:auto;backdrop-filter:blur(4px)}
 .auth-modal{width:min(440px,100%);background:#fffcf7;border:1px solid #d5be90;border-radius:16px;padding:28px 24px 24px;box-shadow:0 18px 50px #0003}
 .auth-modal h2{font:600 26px 'Playfair Display',serif;margin:8px 0 10px}
 .auth-modal>p{color:#858184;font-size:14px;line-height:1.6;margin-bottom:18px}

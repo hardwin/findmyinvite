@@ -64,6 +64,7 @@ test('navbar and save/publish copy require accounts; forgot password stays out o
  const header=await readFile(new URL('../src/components.tsx',import.meta.url),'utf8');
  assert.match(header,/Sign in/);
  assert.match(header,/My Templates/);
+ assert.match(header,/<\/nav>\{authMode&&<AuthModal/);
  const modal=await readFile(new URL('../src/AuthModal.tsx',import.meta.url),'utf8');
  assert.equal(modal.toLowerCase().includes('forgot'),false);
  const editor=await readFile(new URL('../src/App.tsx',import.meta.url),'utf8');
