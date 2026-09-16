@@ -97,9 +97,9 @@ From this Siemens Energy network, public DNS lookups are rewritten to `*.prod.sg
 4. Send support email/WhatsApp + business name before contact/policy copy can ship.
 5. **Forgot password** — deferred. Email/password accounts have no reset flow yet.
 
-## Host accounts (2026-09-16, awaiting merge)
+## Admin shortlist + split desk (2026-09-16)
 
-Email/password host accounts via Supabase Auth (no OTP). Save draft and Publish require a session. Homepage **Sign in** opens a popup. **My Templates** lists invitations owned by `data._host`. Legacy 64-hex recovery links still work. **Forgot password is backlog** — do not build it until Ashok asks.
+`/akay` is a mobile operator shell with bottom nav: Traffic, Journeys, Live, Shortlist. Shortlist at `/akay/shortlist` approves/rejects `shortlist_candidates` and enqueues `replication_queue` on approve. Forgot password still backlog.
 
 ## Backlog
 

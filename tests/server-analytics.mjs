@@ -58,6 +58,8 @@ test('insights require a valid session; collect validates and skips the operator
   assert.equal(open.body.insights.totals.pageviews,0);
   const skip=await request('/api/analytics?action=collect',{method:'POST',body:{type:'pageview',path:'/akay',session,visitor,dwell:0,viewport:'390x844',referrer:''}});
   assert.equal(skip.code,202);assert.equal(stored.length,0);
+  const skipChild=await request('/api/analytics?action=collect',{method:'POST',body:{type:'pageview',path:'/akay/shortlist',session,visitor,dwell:0,viewport:'390x844',referrer:''}});
+  assert.equal(skipChild.code,202);assert.equal(stored.length,0);
   const bad=await request('/api/analytics?action=collect',{method:'POST',body:{type:'pageview',path:'/templates',session:'nope',visitor,dwell:0}});
   assert.equal(bad.code,400);
   const ok=await request('/api/analytics?action=collect',{method:'POST',body:{type:'pageview',path:'/templates',session,visitor,dwell:0,viewport:'1440x900',referrer:'https://findmyinvite.com/'}});
