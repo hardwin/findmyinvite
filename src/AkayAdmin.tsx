@@ -93,7 +93,9 @@ export default function AkayAdmin(){
 
  function go(event:MouseEvent<HTMLAnchorElement>,href:string,id:Section){
   event.preventDefault();
-  if(location.pathname!==href){history.pushState({},'',href);setSection(id);}
+  event.stopPropagation();
+  if(location.pathname!==href)history.pushState({},'',href);
+  setSection(id);
  }
 
  const maxViews=Math.max(1,...(insights?.byDay.map(d=>d.pageviews)||[1]));
