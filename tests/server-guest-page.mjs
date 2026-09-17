@@ -29,12 +29,14 @@ async function api(url,method='GET'){
  return res;
 }
 test('storefront, reserved and asset paths are not treated as guest invitations',()=>{
- for(const path of ['/','/templates','/create','/dashboard','/login','/signup','/forgot-password','/about','/contact','/blog','/terms','/privacy-policy','/refund-policy','/shipping-policy','/akay','/grand-launch','/manage/test-couple','/invite/demo','/api/invitations','/assets/track1.mp3','/robots.txt','/sitemap.xml']){
+ for(const path of ['/','/templates','/create','/dashboard','/login','/signup','/forgot-password','/about','/contact','/blog','/terms','/privacy-policy','/refund-policy','/shipping-policy','/akay','/grand-launch','/manage/test-couple','/invite/demo','/api/invitations','/assets/track1.mp3','/robots.txt','/sitemap.xml','/invitations','/invitations/haldi']){
   assert.equal(isGuestInvitationPath(path),false,path);
  }
  assert.equal(isGuestInvitationPath('/wedding-invitation-classic-does-not-exist-xyz'),true);
  assert.equal(isGuestInvitationPath('/test-couple/'),true);
+ assert.equal(isGuestInvitationPath('/haldi'),true);
  assert.equal(reserved.has('templates'),true);
+ assert.equal(reserved.has('invitations'),true);
 });
 test('unknown unpublished and expired guest slugs are missing; live published slugs are not',async()=>{
  await withDb([],async()=>{
@@ -101,7 +103,7 @@ test('guest lookup does not require RATE_LIMIT_SECRET',async()=>{
 });
 test('SPA catch-all stays after the guest-page rewrite and client still mounts PublicInvitation',async()=>{
  const app=await readFile(new URL('../src/App.tsx',import.meta.url),'utf8');
- assert.match(app,/\/\^\\\/\[a-z0-9\]\[a-z0-9-\]\{2,47\}\$\/\.test\(path\)\?<PublicInvitation slug=\{path\.slice\(1\)}\/>/);
+ assert.match(app,/path\.startsWith\('\/invitations'\)\?<OccasionLanding\/>:\/\^\\\/\[a-z0-9\]\[a-z0-9-\]\{2,47\}\$\/\.test\(path\)\?<PublicInvitation slug=\{path\.slice\(1\)}\/>/);
  const vercel=JSON.parse(await readFile(new URL('../vercel.json',import.meta.url),'utf8'));
  assert.equal(vercel.proxy,undefined);
  const destinations=vercel.rewrites.map(rule=>rule.destination);

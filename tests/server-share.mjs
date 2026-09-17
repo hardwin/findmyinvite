@@ -77,6 +77,9 @@ test('every catalog template has a share still and the storefront HTML advertise
  const sitemap=await readFile(new URL('../public/sitemap.xml',import.meta.url),'utf8');
  assert.match(sitemap,/^<\?xml |^<urlset /);
  assert.match(sitemap,/https:\/\/findmyinvite.com\/templates/);
+ assert.match(sitemap,/https:\/\/findmyinvite.com\/invitations\/haldi/);
+ assert.match(sitemap,/https:\/\/findmyinvite.com\/invitations\/nikah/);
+ assert.match(sitemap,/https:\/\/findmyinvite.com\/invitations\/nikkah/);
  assert.equal(sitemap.includes('vercel.app'),false);
  assert.equal(sitemap.includes('/akay'),false);
  assert.equal(sitemap.includes('/create'),false);
