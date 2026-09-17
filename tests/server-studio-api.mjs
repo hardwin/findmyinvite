@@ -26,7 +26,7 @@ test('two edits reuse one workspace and save versions without Git calls',async t
   await request('prepare');
   for(const revision of [2,3]){
    const run=await request('run',{message:'Change groom name',section:'hero',revision});assert.equal(run.code,202);
-   const result=await request('poll');assert.equal(result.code,200);assert.equal(result.body.done,true);assert.equal(result.body.data.groom,'Updated Groom');
+   const result=await request('poll');assert.equal(result.code,200);assert.equal(result.body.done,true);assert.equal(result.body.data.groom,'Updated Groom '+revision);
    assert.equal(row().workspace_revision,revision+1);assert.equal(row().workspace_id,'session-warm');
   }
   assert.equal(calls.filter(c=>c.url.pathname.endsWith('/sessions')&&c.method==='POST').length,1);
@@ -66,7 +66,7 @@ async function harness(t, changes, run, controls={}) {
         if(parsed.pathname.endsWith('/events'))return json({});
         if(parsed.pathname.endsWith('/turns'))return json({data:[{status:'completed'}]});
         if(parsed.pathname.endsWith('/artifacts'))return json({data:[{id:'artifact-current',path:`/workspace/outputs/result-${row.run_revision}.json`,size_bytes:1000}]});
-        if(parsed.pathname.includes('/artifacts/artifact-current/content'))return json({html:row.html,data:{...row.data,groom:'Updated Groom'},revision:row.run_revision,message:'Name updated.'});
+        if(parsed.pathname.includes('/artifacts/artifact-current/content'))return json({html:row.html,data:controls.noChange?row.data:{...row.data,groom:'Updated Groom '+row.run_revision},revision:row.run_revision,message:'Name updated.'});
         if(controls.expired&&parsed.pathname.endsWith('/session-expired'))return json({error:{message:'Gone'}},404);
         return json({status:'idle',environment:{id:'env-warm'}});
       }
@@ -247,4 +247,15 @@ test('Studio access needs no team cookie but still requires the private draft to
   assert.equal(row().lock_until,null);
   assert.ok(!calls.some(c=>c.url.hostname==='api.openai.com'));
  },{rateLimited:true});
+});
+
+test('unchanged agent output cannot report a successful edit',async t=>{
+ const html=readFileSync(new URL('../public/studio/templates/emerald-noir.html',import.meta.url),'utf8');
+ await harness(t,{html},async({request,row})=>{
+  await request('prepare');
+  await request('run',{message:'Uppercase the greeting',section:'welcome',revision:2});
+  const result=await request('poll');
+  assert.equal(result.code,422);assert.match(result.body.error,/no changes/);
+  assert.equal(row().revision,2);assert.equal(row().session_id,null);assert.equal(row().workspace_id,null);
+ },{agent:true,noChange:true});
 });

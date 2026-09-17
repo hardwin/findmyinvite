@@ -15,7 +15,7 @@ export async function workspaceReady(id){
  }catch(e){if(e.status===404||e.status===410)return {usable:false,ready:false};throw e;}
 }
 export async function continueAgent(id,project,message,section){
- const input=`Revision ${project.revision}. Selected section: ${section}. Request: ${JSON.stringify(message)}. The authoritative content.json is ${JSON.stringify(project.data)}; synchronize it before applying this edit if different. After editing, run python /workspace/finish.py ${project.revision} with a short summary as the second argument. Output must be /workspace/outputs/result-${project.revision}.json. Do not reuse an old result.`;
+ const input=`Revision ${project.revision}. Selected section: ${section}. Request: ${JSON.stringify(message)}. The authoritative content.json is ${JSON.stringify(project.data)}; synchronize it before applying this edit if different. After editing, run python /workspace/finish.py ${project.revision} with a short summary as the second argument. Output must be /workspace/outputs/result-${project.revision}.json. Do not reuse an old result. For a literal text or case change, edit template.html unless the target is a data-field binding. Assert the requested replacement actually exists in the edited file before running finish.py; never claim success for unchanged files.`;
  await client().beta.agents.sessions.events.create(id,{events:[{type:'agent.session.input.message',input:[{role:'user',content:[{type:'input_text',text:input}]}]}],'Idempotency-Key':project.id+'-'+project.revision});
 }
 export async function startAgent(project,message,section){const session=await prepareAgent(project);try{await continueAgent(session.id,project,message,section);return session;}catch(e){await closeAgent(session.id);throw e;}}

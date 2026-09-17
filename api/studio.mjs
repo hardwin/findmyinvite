@@ -1,5 +1,6 @@
 import {readFile} from 'node:fs/promises';
 import {randomUUID} from 'node:crypto';
+import {isDeepStrictEqual} from 'node:util';
 import {db,HttpError,bodyJson,respond,fail,method,bearer,tokenHash,verifyToken,rate,slugValue,validateData,promotion,invitation} from '../server/core.mjs';
 import {sameOrigin} from '../server/studio-auth.mjs';
 import {PILOT_TEMPLATES,SECTIONS,draftData,validateTemplate,genericCode} from '../server/studio-policy.mjs';
@@ -53,6 +54,7 @@ export default async function handler(req,res){let locked=null;
   if(!result.done)return await finish(res,200,{...view(p),done:false,status:result.status});
   try{if(result.cancelled){await closeAgent(sessionId);return await finish(res,200,{...view(await update(p,{session_id:null,run_started_at:null,run_revision:null,workspace_id:null,workspace_revision:null})),done:true,message:'Change cancelled.'});}
    if(p.run_revision!==p.revision)throw new HttpError(409,'Your draft changed during generation. The newer draft was preserved.');
+   if(genericCode(result.result.html)===genericCode(p.html)&&isDeepStrictEqual(draftData(result.result.data,p.template_id),draftData(p.data,p.template_id)))throw new HttpError(422,'Lovebot returned no changes. Your draft is unchanged. Please rephrase the request.');
    let next=await checkpoint(p,result.result.data,result.result.html,String(result.result.message||'Invitation updated.').slice(0,1000));
    if(p.workspace_id===sessionId)next=await update(next,{workspace_id:sessionId,workspace_revision:next.revision});
    return await finish(res,200,{...view(next),done:true,message:String(result.result.message||'Invitation updated.').slice(0,1000),usage:result.usage});
