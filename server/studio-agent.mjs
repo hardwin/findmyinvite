@@ -1,7 +1,7 @@
 import {readFile} from 'node:fs/promises';
 import OpenAI from 'openai';
 import {HttpError} from './core.mjs';
-const client=()=>new OpenAI({apiKey:process.env.OPENAI_API_KEY,timeout:30000,maxRetries:1});
+const client=()=>new OpenAI({apiKey:process.env.OPENAI_API_KEY,timeout:12000,maxRetries:0});
 const file=(path,text)=>({type:'inline',path:'/workspace/'+path,data:Buffer.from(text).toString('base64')});
 export async function prepareAgent(project){
  if(!process.env.OPENAI_API_KEY)throw new HttpError(503,'OpenAI is not configured. Your draft is safe.');

@@ -97,7 +97,7 @@ async function harness(t, changes, run, controls={}) {
     assert.equal(method,'PATCH');
     if(parsed.searchParams.has('or')) {
       if(controls.lockBusy)return json([]);
-      row={...row,...body};acquiredLease=row.lock_until;return json([row]);
+      assert.ok(Date.parse(body.lock_until)-Date.now()<=75000,'A killed function must not leave a five-minute lease');row={...row,...body};acquiredLease=row.lock_until;return json([row]);
     }
     const leaseFilters=parsed.searchParams.getAll('lock_until');
     assert.ok(leaseFilters.includes('eq.'+acquiredLease),'Every update/release must target its own lease');
@@ -124,7 +124,7 @@ test('read DTO hides team/owner secrets and enforces the draft management key',a
 
 test('a competing lock rejects mutation without attempting to release that lease',async t=>{
   await harness(t,{},async({request,calls})=>{
-    assert.equal((await request('save',{revision:2})).code,409);
+    assert.equal((await request('save',{revision:2})).code,423);
     assert.equal(calls.filter(c=>c.method==='PATCH').length,1);
   },{lockBusy:true});
 });

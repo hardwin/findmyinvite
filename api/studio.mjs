@@ -10,7 +10,7 @@ const baseline=id=>readFile(new URL(`../public/studio/templates/${id}.html`,impo
 const view=p=>({id:p.id,template:p.template_id,data:p.data,html:p.html,revision:p.revision,gitSha:p.git_sha,busy:Boolean(p.session_id),workspacePrepared:Boolean(p.workspace_id&&p.workspace_revision===p.revision),publishedSlug:p.published_slug});
 async function project(req,id){if(!uuid.test(id||''))throw new HttpError(400,'Invalid draft.');const rows=await db('studio_projects?id=eq.'+id+'&select=*&limit=1');if(!rows[0])throw new HttpError(404,'Draft not found.');verifyToken(bearer(req),rows[0].owner_hash);return rows[0];}
 async function update(p,body){const rows=await db('studio_projects?id=eq.'+p.id+'&lock_until=eq.'+encodeURIComponent(p.lock_until)+'&lock_until=gt.'+encodeURIComponent(new Date().toISOString()),{method:'PATCH',headers:{Prefer:'return=representation'},body});if(!rows[0])throw new HttpError(409,'This operation expired. Reload the latest draft.');return rows[0];}
-async function lock(id){const now=new Date().toISOString();const rows=await db('studio_projects?id=eq.'+id+'&or='+encodeURIComponent(`(lock_until.is.null,lock_until.lt.${now})`),{method:'PATCH',headers:{Prefer:'return=representation'},body:{lock_until:new Date(Date.now()+300000).toISOString()}});if(!rows.length)throw new HttpError(409,'Another change is finishing. Please try again shortly.');return rows[0];}
+async function lock(id){const now=new Date().toISOString();const rows=await db('studio_projects?id=eq.'+id+'&or='+encodeURIComponent(`(lock_until.is.null,lock_until.lt.${now})`),{method:'PATCH',headers:{Prefer:'return=representation'},body:{lock_until:new Date(Date.now()+75000).toISOString()}});if(!rows.length)throw new HttpError(423,'Your workspace is getting ready. Your change will start automatically.');return rows[0];}
 async function release(p){await db('studio_projects?id=eq.'+p.id+'&lock_until=eq.'+encodeURIComponent(p.lock_until),{method:'PATCH',body:{lock_until:null}});}
 async function stopAndClose(id){await stopAgent(id).catch(()=>{});await closeAgent(id);}
 async function checkpoint(p,data,html,message,publishCode=false){
@@ -28,7 +28,7 @@ async function ensureWorkspace(p){
  try{return {project:await update(p,{workspace_id:session.id,workspace_revision:p.revision}),ready:session.environment?.status==='connected'};}catch(e){await closeAgent(session.id);throw e;}
 }
 export default async function handler(req,res){let locked=null;
- const finish=async(res,status,body)=>{if(locked){const lease=locked;locked=null;await release(lease);}return respond(res,status,body);};
+ const finish=async(res,status,body)=>{if(locked){const lease=locked;await release(lease);locked=null;}return respond(res,status,body);};
  try{
  const q=new URL(req.url,'https://findmyinvite.com').searchParams,action=q.get('action')||'config';
  if(action==='config'){method(req,['GET']);return await finish(res,200,{authenticated:true,configured:Boolean(process.env.OPENAI_API_KEY&&process.env.STUDIO_GITHUB_TOKEN),templates:PILOT_TEMPLATES});}
