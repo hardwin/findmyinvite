@@ -79,7 +79,7 @@ export default async function handler(req,res){let locked=null;
  const valid=validateData(input,slug);valid.data.template=p.template_id;valid.data.studioId=p.id;
  if(Date.parse(p.data.date+'T'+p.data.time+':00+05:30')<=Date.now())throw new HttpError(400,'Choose an upcoming event before publishing.');
  if(!p.git_sha)p=await checkpoint(p,p.data,p.html,'Verified publication checkpoint.',true);
- await db('rpc/studio_publish',{method:'POST',body:{p_id:p.id,p_revision:p.revision,p_lock_until:p.lock_until,p_slug:slug,p_hash:hash,p_data:{...valid.data,photos:p.data.photos,music:p.data.music},p_expires:valid.expires_at}});
+ await db('rpc/studio_publish',{method:'POST',body:{p_id:p.id,p_revision:p.revision,p_lock_until:p.lock_until,p_slug:slug,p_hash:hash,p_data:{...valid.data,photos:p.data.photos,music:p.data.music,textOverrides:p.data.textOverrides||{}},p_expires:valid.expires_at}});
  let archivePending=false;try{await archiveBranch({studioId:p.id,commit:p.git_sha})}catch{archivePending=true;}
  return await finish(res,200,{...view(p),publishedSlug:slug,url:'/'+slug,archivePending});
  }

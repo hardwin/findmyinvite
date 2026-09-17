@@ -269,3 +269,11 @@ test('provider failures identify the cause and preserve the saved draft',async t
   },{agent:true,failure:code});
  }
 });
+
+test('publishing preserves direct Editor wording overrides for guests',async t=>{
+ await harness(t,{data:{...original().data,textOverrides:{'text-0':'WITH THE HEAVENLY BLESSINGS OF'}}},async({request,calls})=>{
+  const result=await request('publish',{revision:2,slug:'editor-text-test',managementToken:token});assert.equal(result.code,200);
+  const publication=calls.find(c=>c.url.pathname.endsWith('/rpc/studio_publish'));
+  assert.equal(publication.body.p_data.textOverrides['text-0'],'WITH THE HEAVENLY BLESSINGS OF');
+ });
+});
