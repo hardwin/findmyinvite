@@ -1,5 +1,7 @@
 import {parse,serialize} from 'parse5';
+import {templates as catalogueTemplates} from './core.mjs';
 import {HttpError} from './core.mjs';
+export const EDITOR_TEMPLATES=[...catalogueTemplates];
 export const PILOT_TEMPLATES=['royal-temple','emerald-noir'];
 export const SECTIONS=['hero','welcome','timeline','gallery','venue','rsvp'];
 const stringLimits={bride:100,groom:100,date:10,time:5,venue:200,address:600,welcome:2000,brideDetails:1000,groomDetails:1000,dressWomen:500,dressMen:500,transport:1500,accommodation:1500,gifts:1500,music:100};

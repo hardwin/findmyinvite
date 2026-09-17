@@ -3,11 +3,11 @@ import {randomUUID} from 'node:crypto';
 import {isDeepStrictEqual} from 'node:util';
 import {db,HttpError,bodyJson,respond,fail,method,bearer,tokenHash,verifyToken,rate,slugValue,validateData,promotion,invitation} from '../server/core.mjs';
 import {sameOrigin} from '../server/studio-auth.mjs';
-import {PILOT_TEMPLATES,SECTIONS,draftData,validateTemplate,genericCode} from '../server/studio-policy.mjs';
+import {PILOT_TEMPLATES,EDITOR_TEMPLATES,SECTIONS,draftData,validateTemplate,genericCode} from '../server/studio-policy.mjs';
 import {prepareAgent,continueAgent,workspaceReady,readAgent,stopAgent,closeAgent} from '../server/studio-agent.mjs';
 import {checkpointCode,archiveBranch} from '../server/studio-git.mjs';
 const uuid=/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/;
-const baseline=id=>readFile(new URL(`../public/studio/templates/${id}.html`,import.meta.url),'utf8');
+const baseline=id=>PILOT_TEMPLATES.includes(id)?readFile(new URL(`../public/studio/templates/${id}.html`,import.meta.url),'utf8'):Promise.resolve('<html><head></head><body>'+SECTIONS.map(section=>'<section data-section="'+section+'"></section>').join('')+['bride','groom','date','venue'].map(field=>'<span data-field="'+field+'"></span>').join('')+'</body></html>');
 const view=p=>({id:p.id,template:p.template_id,data:p.data,html:p.html,revision:p.revision,gitSha:p.git_sha,busy:Boolean(p.session_id),workspacePrepared:Boolean(p.workspace_id&&p.workspace_revision===p.revision),publishedSlug:p.published_slug});
 async function project(req,id){if(!uuid.test(id||''))throw new HttpError(400,'Invalid draft.');const rows=await db('studio_projects?id=eq.'+id+'&select=*&limit=1');if(!rows[0])throw new HttpError(404,'Draft not found.');verifyToken(bearer(req),rows[0].owner_hash);return rows[0];}
 async function update(p,body){const rows=await db('studio_projects?id=eq.'+p.id+'&lock_until=eq.'+encodeURIComponent(p.lock_until)+'&lock_until=gt.'+encodeURIComponent(new Date().toISOString()),{method:'PATCH',headers:{Prefer:'return=representation'},body});if(!rows[0])throw new HttpError(409,'This operation expired. Reload the latest draft.');return rows[0];}
@@ -35,7 +35,7 @@ export default async function handler(req,res){let locked=null;
  if(action==='config'){method(req,['GET']);return await finish(res,200,{authenticated:true,configured:Boolean(process.env.OPENAI_API_KEY&&process.env.STUDIO_GITHUB_TOKEN),templates:PILOT_TEMPLATES});}
  if(action==='public'){method(req,['GET']);const slug=slugValue(q.get('slug'));const current=await invitation(slug);const rows=await db('studio_publications?slug=eq.'+slug+'&select=html,data,revision&limit=1');if(!rows[0])throw new HttpError(404,'No studio publication.');return await finish(res,200,{...rows[0],data:{...rows[0].data,sections:current.data.sections}});}
  if(req.method!=='GET')sameOrigin(req);
- if(action==='create'){method(req,['POST']);await rate(req,'studio-create',10,3600);const body=await bodyJson(req);if(!PILOT_TEMPLATES.includes(body.template))throw new HttpError(400,'Choose a pilot template.');const id=randomUUID(),data=draftData(body.data,body.template),html=validateTemplate(await baseline(body.template),await baseline(body.template));
+ if(action==='create'){method(req,['POST']);await rate(req,'studio-create',10,3600);const body=await bodyJson(req);if(!EDITOR_TEMPLATES.includes(body.template))throw new HttpError(400,'Choose an available template.');const id=randomUUID(),data=draftData(body.data,body.template),html=validateTemplate(await baseline(body.template),await baseline(body.template));
  const rows=await db('studio_projects',{method:'POST',headers:{Prefer:'return=representation'},body:{id,owner_hash:tokenHash(body.token),template_id:body.template,data,html}});
  await db('studio_versions',{method:'POST',body:{project_id:id,revision:0,data,html,message:'Original template'}});return await finish(res,201,view(rows[0]));}
  let p=await project(req,q.get('id'));
@@ -62,6 +62,7 @@ export default async function handler(req,res){let locked=null;
  }
  if(action==='cancel'){const next=await update(p,{session_id:null,run_started_at:null,run_revision:null,workspace_id:null,workspace_revision:null});if(p.session_id)await stopAndClose(p.session_id);return await finish(res,200,view(next));}
  if(p.session_id)throw new HttpError(409,'Wait for the current change or cancel it first.');
+ if(['prepare','run'].includes(action)&&!PILOT_TEMPLATES.includes(p.template_id))throw new HttpError(400,'Use Form or Editor to personalize this design.');
  if(action==='prepare'){await rate(req,'studio-prepare',60,3600);const warm=await ensureWorkspace(p);return await finish(res,200,{...view(warm.project),ready:warm.ready});}
  if(action==='save'){let next=await checkpoint(p,body.data,p.html,'Updated invitation details.');if(p.workspace_id&&p.workspace_revision===p.revision)next=await update(next,{workspace_revision:next.revision});return await finish(res,200,view(next));}
  if(action==='restore'){const target=body.target;if(!Number.isInteger(target)||target<0)throw new HttpError(400,'Choose a saved version.');const rows=await db('studio_versions?project_id=eq.'+p.id+'&revision=eq.'+target+'&select=data,html&limit=1');if(!rows[0])throw new HttpError(404,'Version not found.');return await finish(res,200,view(await checkpoint(p,rows[0].data,rows[0].html,`Restored version ${target}.`)));}

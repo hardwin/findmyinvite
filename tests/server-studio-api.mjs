@@ -277,3 +277,15 @@ test('publishing preserves direct Editor wording overrides for guests',async t=>
   assert.equal(publication.body.p_data.textOverrides['text-0'],'WITH THE HEAVENLY BLESSINGS OF');
  });
 });
+
+
+test('catalogue Form and Editor save the same native draft without an AI workspace',async t=>{
+ const template='royal-prestige';
+ const html='<html><head></head><body>'+['hero','welcome','timeline','venue','gallery','rsvp'].map(section=>'<section data-section="'+section+'"></section>').join('')+['bride','groom','date','venue'].map(field=>'<span data-field="'+field+'"></span>').join('')+'</body></html>';
+ await harness(t,{template_id:template,html,data:draftData({bride:'Bride',groom:'Groom',date:'2099-12-12',time:'18:00',venue:'Garden'},template)},async({request,row,calls})=>{
+  const data={...row().data,bride:'New Bride',venue:'New Venue',textOverrides:{'text-9004':'Our celebration'}};
+  const saved=await request('save',{revision:2,data});assert.equal(saved.code,200);assert.equal(saved.body.data.bride,'New Bride');assert.equal(saved.body.data.venue,'New Venue');assert.equal(saved.body.data.textOverrides['text-9004'],'Our celebration');
+  assert.equal((await request('prepare')).code,400);
+  assert.ok(!calls.some(c=>c.url.hostname==='api.openai.com'));
+ });
+});
