@@ -55,7 +55,7 @@ async function harness(t, changes, run, controls={}) {
   });
   async function request(action,body={},options={}) {
     const res={headers:{},setHeader(k,v){this.headers[k]=v;},status(code){this.code=code;return this;},json(data){this.body=data;}};
-    const headers={cookie:teamCookie().split(';')[0],authorization:'Bearer '+(options.token||token),origin:'https://findmyinvite.com',host:'findmyinvite.com'};
+    const headers={cookie:options.anonymous?'':teamCookie().split(';')[0],authorization:'Bearer '+(options.token||token),origin:'https://findmyinvite.com',host:'findmyinvite.com'};
     await handler({url:`/api/studio?action=${action}&id=${id}`,method:options.method||'POST',headers,body},res);return res;
   }
   try{await run({request,calls,row:()=>row});}
@@ -179,4 +179,12 @@ test('publishing requires the schema venue and address even when every other fie
       assert.ok(!calls.some(call=>call.url.pathname.endsWith('/rpc/studio_publish')||call.url.hostname==='api.github.com'));
     });
   }
+});
+
+test('Studio access needs no team cookie but still requires the private draft token',async t=>{
+ await harness(t,{},async({request})=>{
+  const config=await request('config',{}, {method:'GET',anonymous:true});assert.equal(config.body.authenticated,true);
+  assert.equal((await request('read',{}, {method:'GET',anonymous:true})).code,200);
+  assert.equal((await request('read',{}, {method:'GET',anonymous:true,token:'cd'.repeat(32)})).code,403);
+ });
 });

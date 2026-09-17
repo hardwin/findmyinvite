@@ -1,7 +1,7 @@
 import {readFile} from 'node:fs/promises';
 import {randomUUID} from 'node:crypto';
 import {db,HttpError,bodyJson,respond,fail,method,bearer,tokenHash,verifyToken,rate,slugValue,validateData,promotion,invitation} from '../server/core.mjs';
-import {isTeam,requireTeam,sameOrigin,equalSecret,teamCookie} from '../server/studio-auth.mjs';
+import {sameOrigin} from '../server/studio-auth.mjs';
 import {PILOT_TEMPLATES,SECTIONS,draftData,validateTemplate,genericCode} from '../server/studio-policy.mjs';
 import {startAgent,readAgent,stopAgent,closeAgent} from '../server/studio-agent.mjs';
 import {checkpointCode,archiveBranch} from '../server/studio-git.mjs';
@@ -22,11 +22,9 @@ async function checkpoint(p,data,html,message){
 }
 export default async function handler(req,res){let locked=null;try{
  const q=new URL(req.url,'https://findmyinvite.com').searchParams,action=q.get('action')||'config';
- if(action==='config'){method(req,['GET']);return respond(res,200,{authenticated:isTeam(req),configured:Boolean(process.env.OPENAI_API_KEY&&process.env.STUDIO_TEAM_KEY&&process.env.STUDIO_GITHUB_TOKEN),templates:PILOT_TEMPLATES});}
+ if(action==='config'){method(req,['GET']);return respond(res,200,{authenticated:true,configured:Boolean(process.env.OPENAI_API_KEY&&process.env.STUDIO_GITHUB_TOKEN),templates:PILOT_TEMPLATES});}
  if(action==='public'){method(req,['GET']);const slug=slugValue(q.get('slug'));const current=await invitation(slug);const rows=await db('studio_publications?slug=eq.'+slug+'&select=html,data,revision&limit=1');if(!rows[0])throw new HttpError(404,'No studio publication.');return respond(res,200,{...rows[0],data:{...rows[0].data,sections:current.data.sections}});}
  if(req.method!=='GET')sameOrigin(req);
- if(action==='login'){method(req,['POST']);await rate(req,'studio-login',10,900);const body=await bodyJson(req,2048);if(!equalSecret(body.key,process.env.STUDIO_TEAM_KEY))throw new HttpError(401,'That team access key is not valid.');res.setHeader('Set-Cookie',teamCookie());return respond(res,200,{ok:true});}
- requireTeam(req);
  if(action==='create'){method(req,['POST']);await rate(req,'studio-create',10,3600);const body=await bodyJson(req);if(!PILOT_TEMPLATES.includes(body.template))throw new HttpError(400,'Choose a pilot template.');const id=randomUUID(),data=draftData(body.data,body.template),html=validateTemplate(await baseline(body.template),await baseline(body.template));
  const rows=await db('studio_projects',{method:'POST',headers:{Prefer:'return=representation'},body:{id,owner_hash:tokenHash(body.token),template_id:body.template,data,html}});
  await db('studio_versions',{method:'POST',body:{project_id:id,revision:0,data,html,message:'Original template'}});return respond(res,201,view(rows[0]));}
@@ -63,7 +61,7 @@ export default async function handler(req,res){let locked=null;try{
  const schema=JSON.parse(await readFile(new URL('../public/studio/fields.json',import.meta.url),'utf8'));for(const field of schema.fields.filter(f=>f.required))if(!p.data[field.key]?.trim())throw new HttpError(400,'Complete '+field.label+' in Details before publishing.');
  const slug=slugValue(body.slug),hash=tokenHash(body.managementToken);
  if(p.published_slug&&p.published_slug!==slug)throw new HttpError(409,'A published invitation address cannot change.');
- // Studio is an internal pilot; its two templates are explicitly gated by team access.
+ // Studio publishes only its allowlisted templates; draft ownership is verified above.
  const input={...p.data,template:p.template_id==='royal-temple'?'emerald-noir':p.template_id,music:['/assets/track1.mp3','/assets/track3.mp3'].includes(p.data.music)?p.data.music:'',photos:p.data.photos.filter(x=>/^\/assets\/[\w.-]+$/.test(x))};
  const valid=validateData(input,slug);valid.data.template=p.template_id;valid.data.studioId=p.id;
  if(Date.parse(p.data.date+'T'+p.data.time+':00+05:30')<=Date.now())throw new HttpError(400,'Choose an upcoming event before publishing.');
