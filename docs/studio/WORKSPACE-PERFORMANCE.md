@@ -4,7 +4,7 @@ Studio retains its template picker. Opening a selected draft starts preparation 
 the background, before the first message. Every chat edit still runs in an actual
 OpenAI-hosted coding workspace; there is no separate text-only model path.
 
-The model defaults to `gpt-5.6-luna` with low reasoning. Override it with the
+The model defaults to `gpt-5.6-luna` with reasoning disabled. Override it with the
 server-only `STUDIO_WORKSPACE_MODEL` variable. The previous `STUDIO_AGENT_MODEL`
 setting belongs to the retired create-per-message implementation and is ignored.
 
@@ -38,3 +38,8 @@ name edits plus a CSS edit after preparation; confirm the same workspace ID in
 server-side state, saved revisions, reload persistence, undo, cancellation and
 publication. Local direct OpenAI benchmarking was blocked by sandbox network
 access; use the deployed UI to complete measurement.
+
+Live preview measurements before disabling reasoning: first name edit 40.3s,
+second name edit 22.3s in the same retained workspace. Both saved and rendered
+correctly. These do not meet the target. The final configuration also instructs
+field-only edits to use one shell command, including export.

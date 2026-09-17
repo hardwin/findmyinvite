@@ -10,7 +10,7 @@ test('prepare is ownership protected and reuses the workspace without a model tu
  await harness(t,{},async({request,calls,row})=>{
   assert.equal((await request('prepare',{}, {token:'cd'.repeat(32)})).code,403);
   assert.ok(!calls.some(c=>c.url.hostname==='api.openai.com'));
-  assert.equal((await request('prepare')).body.ready,true);
+  assert.equal((await request('prepare')).body.ready,false);
   assert.equal((await request('prepare')).body.ready,true);
   assert.equal(row().workspace_id,'session-warm');
   const creates=calls.filter(c=>c.url.pathname.endsWith('/sessions')&&c.method==='POST');
@@ -61,14 +61,14 @@ async function harness(t, changes, run, controls={}) {
     if(parsed.hostname==='api.openai.com') {
       if(controls.agent){
         if(parsed.pathname.includes('/environments/'))return json({status:'connected'});
-        if(parsed.pathname.endsWith('/sessions')&&method==='POST')return json({id:'session-warm',status:'idle',environment:{id:'env-warm',status:'connected'}});
+        if(parsed.pathname.endsWith('/sessions')&&method==='POST')return json({id:'session-warm',status:'idle',environment:{id:'env-warm'}});
         if(method==='DELETE')return json({deleted:true});
         if(parsed.pathname.endsWith('/events'))return json({});
         if(parsed.pathname.endsWith('/turns'))return json({data:[{status:'completed'}]});
         if(parsed.pathname.endsWith('/artifacts'))return json({data:[{id:'artifact-current',path:`/workspace/outputs/result-${row.run_revision}.json`,size_bytes:1000}]});
         if(parsed.pathname.includes('/artifacts/artifact-current/content'))return json({html:row.html,data:{...row.data,groom:'Updated Groom'},revision:row.run_revision,message:'Name updated.'});
         if(controls.expired&&parsed.pathname.endsWith('/session-expired'))return json({error:{message:'Gone'}},404);
-        return json({status:'idle',environment:{id:'env-warm',status:'connected'}});
+        return json({status:'idle',environment:{id:'env-warm'}});
       }
 
       assert.match(parsed.pathname,/\/agents\/sessions\/session-test(?:\/events)?$/);
@@ -106,7 +106,7 @@ async function harness(t, changes, run, controls={}) {
     row={...row,...body};return json([row]);
   });
   async function request(action,body={},options={}) {
-    const res={headers:{},setHeader(k,v){this.headers[k]=v;},status(code){this.code=code;return this;},json(data){this.body=data;}};
+    const res={headers:{},setHeader(k,v){this.headers[k]=v;},status(code){this.code=code;return this;},json(data){if(this.code>=200&&this.code<300&&options.method!=='GET')assert.equal(row.lock_until,null,'Release the lease before responding');this.body=data;}};
     const headers={cookie:options.anonymous?'':teamCookie().split(';')[0],authorization:'Bearer '+(options.token||token),origin:'https://findmyinvite.com',host:'findmyinvite.com'};
     await handler({url:`/api/studio?action=${action}&id=${id}`,method:options.method||'POST',headers,body},res);return res;
   }
