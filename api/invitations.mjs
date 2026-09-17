@@ -59,7 +59,13 @@ export default async function handler(req,res){try{
  }
  if(action==='update'){
   method(req,['POST','PUT']);
-  const body=await bodyJson(req);const valid=validateData(body.data,slug);
+  const body=await bodyJson(req);
+  if(row.data.studioId){
+   if(body.data!==undefined||typeof body.published!=='boolean')throw new HttpError(400,'Edit this invitation in Love Studio.');
+   const rows=await db('invitations?id=eq.'+row.id,{method:'PATCH',headers:{Prefer:'return=representation'},body:{published:body.published,updated_at:new Date().toISOString()}});
+   return respond(res,200,view(rows[0]));
+  }
+  const valid=validateData(body.data,slug);
   if(valid.data.template!==row.data.template)await availableTemplate(valid.data.template);
   for(const photo of valid.data.photos.filter(p=>p.startsWith('/api/media'))){
    if(!process.env.BLOB_READ_WRITE_TOKEN)throw new HttpError(503,'Photo storage is unavailable.');
