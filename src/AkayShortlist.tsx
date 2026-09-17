@@ -78,7 +78,9 @@ export default function AkayShortlist(){
    const ok=ids.length===1?1:(Array.isArray((body as {ok?:string[]}).ok)?(body as {ok:string[]}).ok:[]).length;
    setNotice(ok?(status==='approved'?ok+' approved and queued.':ok+' rejected.'):'');
    setSelected([]);
-   if(open&&ids.includes(open.id))setOpen(null);
+   const candidate=(body as {candidate?:ShortlistItem}).candidate;
+   if(candidate&&ids.length===1)setOpen(candidate);
+   else if(open&&ids.includes(open.id))setOpen(null);
    await load();
   }catch(err){setError(err instanceof Error?err.message:'Could not save that decision.');}
   finally{setBusy('');}
@@ -110,9 +112,9 @@ export default function AkayShortlist(){
    <label className="akay-search">Search<input type="search" enterKeyHint="search" placeholder="Title or URL" value={query} onChange={e=>setQuery(e.target.value)}/></label>
   </form>
   {selectable.length>0&&<div className="akay-bulk">
-   <span>{selectable.length} selected</span>
-   <button type="button" disabled={Boolean(busy)} onClick={()=>void decide(selectable,'approved')}>Approve selected</button>
-   <button type="button" className="quiet" disabled={Boolean(busy)} onClick={()=>void decide(selectable,'rejected')}>Reject selected</button>
+   <span>{selectable.length} selected{selectable.length>=50?' · max 50':''}</span>
+   <button type="button" disabled={Boolean(busy)} onClick={()=>void decide(selectable.slice(0,50),'approved')}>Approve selected</button>
+   <button type="button" className="quiet" disabled={Boolean(busy)} onClick={()=>void decide(selectable.slice(0,50),'rejected')}>Reject selected</button>
   </div>}
   {loading&&!data&&<p className="akay-empty">Loading candidates…</p>}
   {data&&items.length===0&&<p className="akay-empty">{filters.status==='approved'?'Nothing approved yet. Clear Proposed first.':filters.status==='rejected'?'Nothing rejected yet.':(filters.q||filters.tier||filters.competitor_id||filters.direct||filters.batch!==null)?'No candidates match — reset filters.':'No proposed candidates.'}</p>}
@@ -120,19 +122,17 @@ export default function AkayShortlist(){
    {items.map(item=>{
     const can=item.status==='proposed';
     return <li key={item.id} className={'akay-candidate'+(open?.id===item.id?' selected':'')}>
-     <label className="akay-pick">{can?<input type="checkbox" checked={selected.includes(item.id)} onChange={e=>setSelected(e.target.checked?[...selected,item.id]:selected.filter(id=>id!==item.id))}/>:<input type="checkbox" disabled/>}</label>
+     <label className="akay-pick">{can?<input type="checkbox" checked={selected.includes(item.id)} onChange={e=>setSelected(e.target.checked?(selected.length>=50?selected:[...selected,item.id]):selected.filter(id=>id!==item.id))}/>:<input type="checkbox" disabled/>}</label>
      <button type="button" className="akay-candidate-main" onClick={()=>setOpen(item)}>
-      <AkayPagePreview src={item.preview||''} alt={item.title}/>
+      <AkayPagePreview src={item.preview||''} alt={item.title} className="card"/>
       <strong>{item.title}</strong>
       <span className="akay-meta">{item.competitor_name}{item.is_direct&&<i className="akay-badge">Direct</i>}</span>
       <span className="akay-meta"><i className={'akay-chip tier-'+item.suggested_tier}>{item.suggested_tier}</i><i className={'akay-chip status-'+item.status}>{item.status}</i>{item.batch||'—'}</span>
      </button>
      <div className="akay-row-actions">
       <a className="akay-link" href={item.url} target="_blank" rel="noopener">Open</a>
-      {can&&<>
-       <button type="button" disabled={Boolean(busy)} onClick={()=>void decide([item.id],'approved')}>Approve</button>
-       <button type="button" className="quiet" disabled={Boolean(busy)} onClick={()=>void decide([item.id],'rejected')}>Reject</button>
-      </>}
+      <button type="button" disabled={!can||Boolean(busy)} onClick={()=>can&&void decide([item.id],'approved')}>Approve</button>
+      <button type="button" className="quiet" disabled={!can||Boolean(busy)} onClick={()=>can&&void decide([item.id],'rejected')}>Reject</button>
      </div>
     </li>;
    })}
