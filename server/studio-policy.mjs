@@ -9,7 +9,7 @@ const validDate=value=>{if(!/^\d{4}-\d{2}-\d{2}$/.test(value))return false;const
 const validTime=value=>/^([01]\d|2[0-3]):[0-5]\d$/.test(value);
 export function draftData(input,template){
  if(!input||typeof input!=='object'||Array.isArray(input))throw new HttpError(400,'Invitation details are required.');
- const data={template,type:'wedding',id:typeof input.id==='string'?input.id.slice(0,60):'draft'};
+ const data={template,type:typeof input.type==='string'&&input.type.length<=40?input.type:'wedding',id:typeof input.id==='string'?input.id.slice(0,60):'draft'};
  for(const [key,max] of Object.entries(stringLimits)){const v=input[key]??'';if(typeof v!=='string'||v.length>max||/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/.test(v))throw new HttpError(400,`Check ${key}.`);data[key]=v;}
  if(data.date&&!validDate(data.date))throw new HttpError(400,'Use a valid date.');
  if(data.time&&!validTime(data.time))throw new HttpError(400,'Use a valid time.');
