@@ -297,7 +297,7 @@ test('catalogue creation uses bounded lightweight limits and never starts AI',as
   const result=await request('create',{template:'rose-gold-blush-royal',token,data:original().data});
   assert.equal(result.code,201);assert.equal(result.body.template,'rose-gold-blush-royal');
   const limits=calls.filter(c=>c.url.pathname.endsWith('/consume_rate_limit')).map(c=>[c.body.p_limit,c.body.p_seconds]);
-  assert.deepEqual(limits,[[6,60],[30,3600]]);assert.ok(!calls.some(c=>c.url.hostname==='api.openai.com'));
+  assert.deepEqual(limits,[[6,60],[500,3600]]);assert.ok(!calls.some(c=>c.url.hostname==='api.openai.com'));
  });
 });
 test('creation throttling returns recovery guidance without creating a draft',async t=>{
