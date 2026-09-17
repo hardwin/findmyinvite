@@ -1,0 +1,85 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFile,access} from 'node:fs/promises';
+import handler from '../api/invitation-page.mjs';
+import {CANONICAL_ORIGIN,NOT_FOUND_HTML,PAGE_HEADER,invitationDecision,invitationPageHtml,invitationSlugFromRequest} from '../server/invitation-page.mjs';
+import {OCCASION_SLUGS,occasionBySlug} from '../server/occasion-landings.mjs';
+import {isGuestInvitationPath} from '../server/guest-page.mjs';
+async function api(url,method='GET'){
+ const res={headers:{},body:'',code:0,setHeader(k,v){this.headers[k]=v;},status(n){this.code=n;return this;},end(b){this.body=b||'';if(!this.code)this.code=this.statusCode||200;}};
+ await handler({url,method,headers:{host:'findmyinvite.com','x-forwarded-proto':'https'}},res);
+ return res;
+}
+test('known invitation slugs return unique 200 HTML with brief title, H1 and body',async()=>{
+ assert.equal(OCCASION_SLUGS.length,21);
+ const home='Create Invitation Webpage Online for All Events';
+ for(const slug of OCCASION_SLUGS){
+  const page=occasionBySlug[slug];
+  const res=await api('/api/invitation-page?slug='+slug);
+  assert.equal(res.code,200,slug);
+  assert.equal(res.headers[PAGE_HEADER],'hit');
+  assert.equal(res.headers['Content-Type'],'text/html; charset=utf-8');
+  assert.equal(res.headers['X-Robots-Tag'],undefined);
+  assert.equal(String(res.body).includes('<title>'+page.title+'</title>'),true,slug+' title');
+  assert.equal(String(res.body).includes('<meta name="description" content="'+page.description+'"'),true,slug+' description');
+  assert.equal(String(res.body).includes('<link rel="canonical" href="'+CANONICAL_ORIGIN+'/invitations/'+slug+'"'),true,slug+' canonical');
+  assert.equal(String(res.body).includes('<h1>'+page.h1+'</h1>'),true,slug+' h1');
+  assert.equal(String(res.body).includes(page.hero),true,slug+' hero');
+  assert.equal(String(res.body).includes(page.includes),true,slug+' includes');
+  assert.equal(String(res.body).includes(page.cta),true,slug+' cta');
+  assert.equal(String(res.body).includes(page.switchCopy),true,slug+' switch');
+  assert.equal(String(res.body).includes(home),false,slug);
+  assert.equal(String(res.body).includes('vercel.app'),false);
+ }
+ const haldi=await api('/invitations/haldi');
+ assert.equal(haldi.code,200);
+ assert.match(String(haldi.body),/<title>Haldi Digital Wedding Invitation \| FindMyInvite<\/title>/);
+ assert.match(String(haldi.body),/<h1>Haldi Digital Wedding Invitation<\/h1>/);
+ assert.match(String(haldi.body),/collection=classic/);
+ const nikah=await api('/api/invitation-page?slug=nikah');
+ const nikkah=await api('/api/invitation-page?slug=nikkah');
+ assert.match(String(nikah.body),/<h1>Nikah Royal Wedding Invitation<\/h1>/);
+ assert.match(String(nikkah.body),/<h1>Nikkah Digital Wedding Invitation<\/h1>/);
+ assert.notEqual(String(nikah.body),String(nikkah.body));
+});
+test('unknown invitation slugs return HTTP 404 HTML and stay off the guest gate',async()=>{
+ const missing=await api('/api/invitation-page?slug=this-should-404');
+ assert.equal(missing.code,404);
+ assert.equal(missing.headers[PAGE_HEADER],'404');
+ assert.equal(missing.headers['X-Robots-Tag'],'noindex, nofollow');
+ assert.equal(missing.body,NOT_FOUND_HTML);
+ assert.match(NOT_FOUND_HTML,/noindex/);
+ assert.match(NOT_FOUND_HTML,/https:\/\/findmyinvite.com\/templates/);
+ assert.equal(invitationDecision('this-should-404').found,false);
+ assert.equal(invitationDecision('haldi').found,true);
+ assert.equal(isGuestInvitationPath('/invitations/this-should-404'),false);
+ assert.equal(isGuestInvitationPath('/this-should-404'),true);
+ const pathMissing=await api('/invitations/this-should-404');
+ assert.equal(pathMissing.code,404);
+ const head=await api('/api/invitation-page?slug=this-should-404','HEAD');
+ assert.equal(head.code,404);
+ assert.equal(head.body,'');
+});
+test('Vercel rewrites invitations to invitation-page HTML and never through guest-page or middleware',async()=>{
+ const vercel=JSON.parse(await readFile(new URL('../vercel.json',import.meta.url),'utf8'));
+ assert.equal(vercel.proxy,undefined);
+ assert.equal(JSON.stringify(vercel).includes('middleware'),false);
+ await assert.rejects(()=>access(new URL('../middleware.js',import.meta.url)));
+ const destinations=vercel.rewrites.map(rule=>rule.destination);
+ assert.equal(destinations[0],'/api/share?slug=:slug');
+ assert.equal(destinations[1],'/api/guest-page?slug=:slug');
+ assert.equal(vercel.rewrites[1].source,'/:slug([a-z0-9][a-z0-9-]{2,47})');
+ assert.equal(destinations[2],'/api/invitation-page');
+ assert.equal(destinations[3],'/api/invitation-page?slug=:slug');
+ assert.equal(vercel.rewrites[3].source,'/invitations/:slug');
+ assert.equal(destinations[4],'/index.html');
+ const spa=vercel.rewrites.find(rule=>rule.destination==='/index.html');
+ const spaPattern=new RegExp(`^${spa.source}$`);
+ assert.equal(spaPattern.test('/templates'),true);
+ assert.equal(spaPattern.test('/invitations/haldi'),false);
+ assert.equal(spaPattern.test('/invitations/this-should-404'),false);
+ assert.equal(invitationSlugFromRequest({url:'/api/invitation-page?slug=haldi'}),'haldi');
+ const html=invitationPageHtml(occasionBySlug.haldi);
+ assert.match(html,/Haldi Digital Wedding Invitation/);
+ assert.equal(html.includes('monthly searches'),false);
+});

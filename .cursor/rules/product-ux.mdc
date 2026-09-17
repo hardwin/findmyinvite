@@ -9,3 +9,5 @@ alwaysApply: true
 - Custom code is for FindMyInvite-specific invitation experience, not Mixpanel clones.
 - Keep `/akay` unlinked from public pages if it remains.
 - Do not store analytics events in the guest invitations database.
+- Hosts sign in with email and password to save a draft or publish. Forgot password is backlog; do not build it until Ashok asks.
+- Operator Shortlist, Competitors, and Upcoming cards lead with a page preview of the existing http(s) link. Do not make those desks text-only.

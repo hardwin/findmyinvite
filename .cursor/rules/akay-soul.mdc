@@ -30,7 +30,7 @@ Akay needs owner-level FindMyInvite access on GitHub (`hardwin/findmyinvite` + A
 
 ## Production deploy
 
-Standing recipe: `documents/prod-push.md`. Push `main` as `akayatgit` → Vercel Git deploys production. `ENABLE_PRODUCTION_DEPLOY` is a separate Actions lane; do not flip it without Ashok. Ask twice before push. Never force-push.
+Standing recipe: `documents/prod-push.md`. Push `main` as `akayatgit` → Vercel Git deploys production. Ashok confirmed 2026-09-15: leave it as is. `ENABLE_PRODUCTION_DEPLOY` only governs the Actions `deploy` job; do not flip it without Ashok. Ask twice before push. Never force-push.
 
 ## Catalog
 

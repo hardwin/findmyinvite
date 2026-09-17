@@ -1,4 +1,5 @@
 import type {InviteData} from './Invitation';
+import {accessToken,readSession} from './auth-session';
 
 export type GuestKey={slug:string;token:string};
 export type CloudInvite={invitation:InviteData;slug:string;expiresAt:string;published?:boolean};
@@ -7,12 +8,19 @@ export function guestKeys():GuestKey[]{try{const value=JSON.parse(localStorage.g
 export function rememberGuest(item:GuestKey){localStorage.setItem(key,JSON.stringify([...guestKeys().filter(x=>x.slug!==item.slug),item]));}
 export function forgetGuest(slug:string){localStorage.setItem(key,JSON.stringify(guestKeys().filter(x=>x.slug!==slug)));}
 export function recoveryURL(item:GuestKey){return `${location.origin}/manage/${encodeURIComponent(item.slug)}#${item.token}`;}
+export function isRecoveryToken(token:string){return /^[a-f0-9]{64}$/.test(token);}
+export function newGuestKey(slug:string):GuestKey{return {slug,token:Array.from(crypto.getRandomValues(new Uint8Array(32)),b=>b.toString(16).padStart(2,'0')).join('')};}
 export async function api<T>(action:string,slug='',token='',body?:unknown,method?:string):Promise<T>{
- const response=await fetch(`/api/invitations?action=${encodeURIComponent(action)}&slug=${encodeURIComponent(slug)}`,{method:method||(body?'POST':'GET'),headers:{...(body?{'Content-Type':'application/json'}:{}),...(token?{Authorization:`Bearer ${token}`}:{})},body:body?JSON.stringify(body):undefined,cache:'no-store'});
+ const secret=token||accessToken();
+ const response=await fetch(`/api/invitations?action=${encodeURIComponent(action)}&slug=${encodeURIComponent(slug)}`,{method:method||(body?'POST':'GET'),headers:{...(body?{'Content-Type':'application/json'}:{}),...(secret?{Authorization:`Bearer ${secret}`}:{})},body:body?JSON.stringify(body):undefined,cache:'no-store'});
  let value;try{value=await response.json()}catch{throw new Error('Publishing is not configured on this preview. Your local draft is safe.');}
  if(!response.ok)throw new Error(value.error||'The request could not be completed. Please try again.');return value;
 }
-export function newGuestKey(slug:string):GuestKey{return {slug,token:Array.from(crypto.getRandomValues(new Uint8Array(32)),b=>b.toString(16).padStart(2,'0')).join('')};}
+export function suggestedSlug(data:InviteData){
+ const base=(data.groom+' '+data.bride).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,40);
+ if(/^[a-z0-9](?:[a-z0-9-]{1,46}[a-z0-9])$/.test(base))return base;
+ return 'invite-'+Date.now().toString(36);
+}
 export async function uploadPhotos(data:InviteData,credentials:GuestKey):Promise<InviteData>{
  const photos=[];
  for(const [slot,url] of data.photos.entries()){
@@ -22,19 +30,17 @@ export async function uploadPhotos(data:InviteData,credentials:GuestKey):Promise
  }
  return {...data,photos};
 }
-export async function publishDraft(data:InviteData,slug:string):Promise<GuestKey>{
+export async function saveCloud(data:InviteData,slug:string,published:boolean):Promise<GuestKey>{
+ const session=readSession();
+ if(!session?.access_token)throw new Error('Sign in to save or publish.');
  const existing=guestKeys().find(x=>x.slug===slug);
  const credentials=existing||newGuestKey(slug);
- // Retain the key before the request so a lost response cannot strand a created draft.
  rememberGuest(credentials);
- if(!existing)await api<CloudInvite>('create','',credentials.token,{slug,data:{...data,photos:data.photos.filter(x=>!x.startsWith('data:'))},managementToken:credentials.token});
- else {
-  try{await api<CloudInvite>('manage',slug,credentials.token)}catch(error){
-   // Retrying creation with the same secret is safe; a taken slug must never be overwritten.
-   await api<CloudInvite>('create','',credentials.token,{slug,data:{...data,photos:data.photos.filter(x=>!x.startsWith('data:'))},managementToken:credentials.token});
-  }
- }
- const uploaded=await uploadPhotos(data,credentials);
- await api('update',slug,credentials.token,{data:uploaded,published:true});
+ await api<CloudInvite>('create','',session.access_token,{slug,data:{...data,photos:data.photos.filter(x=>!x.startsWith('data:'))},managementToken:credentials.token});
+ const uploaded=await uploadPhotos(data,{slug,token:session.access_token});
+ await api('update',slug,session.access_token,{data:uploaded,published});
  return credentials;
+}
+export async function publishDraft(data:InviteData,slug:string):Promise<GuestKey>{
+ return saveCloud(data,slug,true);
 }

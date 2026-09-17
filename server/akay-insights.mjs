@@ -1,5 +1,5 @@
 const content=new Set(['/about','/contact','/terms','/privacy-policy','/refund-policy','/shipping-policy']);
-const reserved=new Set(['grand-launch','create','dashboard','gallery','templates','login','signup','forgot-password','about','contact','privacy-policy','terms','refund-policy','shipping-policy','blog','demo','admin','manage','invite','akay']);
+const reserved=new Set(['grand-launch','create','dashboard','gallery','templates','login','signup','forgot-password','about','contact','privacy-policy','terms','refund-policy','shipping-policy','blog','demo','admin','manage','invite','akay','invitations']);
 function guestPath(path){return typeof path==='string'&&/^\/[a-z0-9][a-z0-9-]{2,47}$/.test(path)&&!reserved.has(path.slice(1));}
 export function summarize(rows){
  const events=Array.isArray(rows)?rows.filter(e=>e&&typeof e==='object'):[];

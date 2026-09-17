@@ -11,9 +11,8 @@ Written 2026-09-15. Overwrite in place when facts change.
 | Repo | https://github.com/hardwin/findmyinvite.git — **public**, `main` only |
 | Live | https://findmyinvite.com (= https://findmyinvite.vercel.app) |
 | v0.9.0 handoff SHA | tag `v0.9.0` → `84416179b8d85486eea0fcc0e219f994be9bf3ab` |
-| main tip (docs-only after grand-launch) | `5282ff075ce11b72120da7ed804c3e247b835920` |
-| Serving production commit | `09971d5` (`Ship the hidden /akay traffic desk…`) |
-| Live bundle | `/assets/index-TRMUVIGW.js` |
+| Serving production commit (2026-09-15 18:10 UTC) | `09971d52244b04bb0238b0691675777d61b2174d` — `/akay` desk live; later `main` pushes also deploy |
+| Live bundle | `/assets/index-TRMUVIGW.js` (changes with every push to `main`) |
 | Prod Supabase | `qqvcptjkfcjkwbkookcm` (Mumbai) |
 | Not this product | Zareqia Supabase `ganphjxofavzmxzsecij` |
 | Vercel project (handoff) | `prj_ZPOw3XYQTehO9AVbkp8JyZEhke76` / team `team_xFQvLGR6rRhSUyAtItzx8b24` |
@@ -45,9 +44,11 @@ Written 2026-09-15. Overwrite in place when facts change.
 
 **Authoritative:** [prod-push.md](prod-push.md).
 
-- Lane A (live): push `main` as `akayatgit` → Vercel Git production. Hobby. No member admin required.
-- Lane B (later): GitHub Actions deploy job needs `ENABLE_PRODUCTION_DEPLOY=true`. Currently `false` = verify only. Do not use this to “fix” Vercel.
+- Lane A (live): push `main` as `akayatgit` → Vercel Git production. Every push to `main` deploys production. Hobby. No member admin required. Ashok's word 2026-09-15: leave it as is.
+- Lane B (later): GitHub Actions deploy job needs `ENABLE_PRODUCTION_DEPLOY=true`. Currently `false` = verify only. See `.github/workflows/ci.yml`. It does not gate production.
 - DDL: Supabase MCP on `qqvcptjkfcjkwbkookcm` only.
+- `/akay` access code is hardcoded in `server/akay-gate.mjs` (public repo). Ashok accepted 2026-09-15; change to an env var later.
+- Hosts sign in with email and password (Supabase Auth, no OTP). Forgot password is backlog.
 
 ## What this conversation did not change
 
