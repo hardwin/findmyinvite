@@ -6,6 +6,46 @@ import {tokenHash} from '../server/core.mjs';
 import {teamCookie} from '../server/studio-auth.mjs';
 import {draftData} from '../server/studio-policy.mjs';
 
+test('prepare is ownership protected and reuses the workspace without a model turn',async t=>{
+ await harness(t,{},async({request,calls,row})=>{
+  assert.equal((await request('prepare',{}, {token:'cd'.repeat(32)})).code,403);
+  assert.ok(!calls.some(c=>c.url.hostname==='api.openai.com'));
+  assert.equal((await request('prepare')).body.ready,true);
+  assert.equal((await request('prepare')).body.ready,true);
+  assert.equal(row().workspace_id,'session-warm');
+  const creates=calls.filter(c=>c.url.pathname.endsWith('/sessions')&&c.method==='POST');
+  assert.equal(creates.length,1);assert.equal(creates[0].body.input,undefined);
+  assert.equal(creates[0].body.agent.model,'gpt-5.6-luna');
+  assert.ok(!calls.some(c=>c.url.pathname.endsWith('/events')));
+ },{agent:true});
+});
+
+test('two edits reuse one workspace and save versions without Git calls',async t=>{
+ const html=readFileSync(new URL('../public/studio/templates/emerald-noir.html',import.meta.url),'utf8');
+ await harness(t,{html,git_sha:null},async({request,calls,row})=>{
+  await request('prepare');
+  for(const revision of [2,3]){
+   const run=await request('run',{message:'Change groom name',section:'hero',revision});assert.equal(run.code,202);
+   const result=await request('poll');assert.equal(result.code,200);assert.equal(result.body.done,true);assert.equal(result.body.data.groom,'Updated Groom');
+   assert.equal(row().workspace_revision,revision+1);assert.equal(row().workspace_id,'session-warm');
+  }
+  assert.equal(calls.filter(c=>c.url.pathname.endsWith('/sessions')&&c.method==='POST').length,1);
+  assert.equal(calls.filter(c=>c.url.pathname.endsWith('/events')).length,2);
+  assert.ok(!calls.some(c=>c.url.hostname==='api.github.com'||c.method==='DELETE'));
+ },{agent:true});
+});
+
+test('expired and out-of-sync workspaces rebuild from the saved draft',async t=>{
+ for(const initial of [{workspace_id:'session-expired',workspace_revision:2},{workspace_id:'session-stale',workspace_revision:1}]){
+  await harness(t,initial,async({request,calls,row})=>{
+   assert.equal((await request('prepare')).code,200);assert.equal(row().workspace_revision,2);
+   const created=calls.find(c=>c.url.pathname.endsWith('/sessions')&&c.method==='POST');assert.ok(created);
+   const data=created.body.environment.files.find(f=>f.path.endsWith('/content.json'));
+   assert.equal(JSON.parse(Buffer.from(data.data,'base64')).groom,'Groom');
+  },{agent:true,expired:true});
+ }
+});
+
 const id='11111111-2222-4333-8444-555555555555', token='ab'.repeat(32), gitSha='c'.repeat(40);
 const original=()=>({id,template_id:'emerald-noir',owner_hash:tokenHash(token),revision:2,git_sha:gitSha,
   data:draftData({bride:'Bride',groom:'Groom',date:'2099-12-12',time:'18:00',venue:'Garden',address:'Mumbai, India'},'emerald-noir'),
@@ -19,6 +59,17 @@ async function harness(t, changes, run, controls={}) {
     const parsed=new URL(String(url)),body=options.body?JSON.parse(options.body):undefined,method=options.method||'GET';
     calls.push({url:parsed,body,method});
     if(parsed.hostname==='api.openai.com') {
+      if(controls.agent){
+        if(parsed.pathname.endsWith('/sessions')&&method==='POST')return json({id:'session-warm',status:'idle',environment:{status:'connected'}});
+        if(method==='DELETE')return json({deleted:true});
+        if(parsed.pathname.endsWith('/events'))return json({});
+        if(parsed.pathname.endsWith('/turns'))return json({data:[{status:'completed'}]});
+        if(parsed.pathname.endsWith('/artifacts'))return json({data:[{id:'artifact-current',path:`/workspace/outputs/result-${row.run_revision}.json`,size_bytes:1000}]});
+        if(parsed.pathname.includes('/artifacts/artifact-current/content'))return json({html:row.html,data:{...row.data,groom:'Updated Groom'},revision:row.run_revision,message:'Name updated.'});
+        if(controls.expired&&parsed.pathname.endsWith('/session-expired'))return json({error:{message:'Gone'}},404);
+        return json({status:'idle',environment:{status:'connected'}});
+      }
+
       assert.match(parsed.pathname,/\/agents\/sessions\/session-test(?:\/events)?$/);
       if(method==='POST')return json({error:{message:'Upstream cancellation unavailable',type:'invalid_request_error'}},403);
       assert.equal(method,'DELETE');return json({deleted:true});
