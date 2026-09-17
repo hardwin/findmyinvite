@@ -58,9 +58,27 @@ test('approve enqueues once; re-approve is 409; reject leaves queue empty',async
  const env={...process.env};Object.assign(process.env,{SUPABASE_URL:'https://example.supabase.co',SUPABASE_SERVICE_ROLE_KEY:'test',RATE_LIMIT_SECRET:'012345678901234567890123456789012345'});
  const candidates=[row()];const queue=[];
  const originalFetch=global.fetch;
+ const posted=[];
  global.fetch=async(url,options={})=>{
   const parsed=new URL(url),path=parsed.pathname.replace('/rest/v1/',''),method=options.method||'GET',payload=options.body?JSON.parse(options.body):null;
+  posted.push({path,method,payload});
   if(path==='rpc/consume_rate_limit')return new Response('true',{status:200});
+  if(path==='rpc/approve_shortlist_candidate'){
+   const match=candidates.find(c=>c.id===payload.p_id);
+   if(!match)return new Response(JSON.stringify({ok:false,error:'not_found'}),{status:200});
+   if(match.status!=='proposed')return new Response(JSON.stringify({ok:false,error:'already_decided'}),{status:200});
+   match.status='approved';match.updated_at=new Date().toISOString();
+   if(!queue.some(q=>q.candidate_id===payload.p_id))queue.push({id:'44444444-4444-4444-8444-444444444444',status:'queued',candidate_id:payload.p_id});
+   const queued=queue.find(q=>q.candidate_id===payload.p_id);
+   return new Response(JSON.stringify({ok:true,queue_id:queued.id,queue_status:queued.status}),{status:200});
+  }
+  if(path==='rpc/reject_shortlist_candidate'){
+   const match=candidates.find(c=>c.id===payload.p_id);
+   if(!match)return new Response(JSON.stringify({ok:false,error:'not_found'}),{status:200});
+   if(match.status!=='proposed')return new Response(JSON.stringify({ok:false,error:'already_decided'}),{status:200});
+   match.status='rejected';match.updated_at=new Date().toISOString();
+   return new Response(JSON.stringify({ok:true}),{status:200});
+  }
   if(path==='shortlist_candidates'){
    if(method==='GET'){
     const select=parsed.searchParams.get('select')||'';
@@ -72,24 +90,9 @@ test('approve enqueues once; re-approve is 409; reject leaves queue empty',async
     const filtered=idFilter&&idFilter.startsWith('eq.')?rows.filter(c=>c.id===idFilter.slice(3)):rows;
     return new Response(JSON.stringify(filtered.map(c=>({...c,replication_queue:queue.filter(q=>q.candidate_id===c.id)}))),{status:200,headers:{'content-range':'0-'+(filtered.length-1)+'/'+filtered.length}});
    }
-   if(method==='PATCH'){
-    const idFilter=parsed.searchParams.get('id')?.replace('eq.','');
-    const statusFilter=parsed.searchParams.get('status')?.replace('eq.','');
-    const match=candidates.find(c=>c.id===idFilter&&(!statusFilter||c.status===statusFilter));
-    if(!match)return new Response('[]',{status:200});
-    Object.assign(match,payload);
-    return new Response(JSON.stringify([match]),{status:200});
-   }
+   throw new Error('Decide must not PATCH shortlist_candidates '+method);
   }
-  if(path==='replication_queue'){
-   if(method==='POST'){
-    if(queue.some(q=>q.candidate_id===payload.candidate_id))return new Response('[]',{status:200});
-    const created={id:'44444444-4444-4444-8444-444444444444',status:payload.status||'queued',candidate_id:payload.candidate_id};
-    queue.push(created);return new Response(JSON.stringify([created]),{status:201});
-   }
-   const candidate=parsed.searchParams.get('candidate_id')?.replace('eq.','');
-   return new Response(JSON.stringify(queue.filter(q=>q.candidate_id===candidate)),{status:200});
-  }
+  if(path==='replication_queue')throw new Error('Decide must not touch replication_queue '+method);
   throw new Error('Unexpected '+path+' '+method);
  };
  try{
@@ -102,6 +105,7 @@ test('approve enqueues once; re-approve is 409; reject leaves queue empty',async
   assert.equal(approved.body.candidate.status,'approved');
   assert.equal(approved.body.replication_queue.status,'queued');
   assert.equal(queue.length,1);
+  assert.equal(posted.some(row=>row.path==='rpc/approve_shortlist_candidate'&&row.method==='POST'),true);
   const again=await request('/api/akay-shortlist?action=decide',{method:'POST',body:{id,status:'approved'}});
   assert.equal(again.code,409);
   assert.equal(queue.length,1);
@@ -110,11 +114,15 @@ test('approve enqueues once; re-approve is 409; reject leaves queue empty',async
   assert.equal(rejected.code,200);
   assert.equal(rejected.body.candidate.status,'rejected');
   assert.equal(queue.length,0);
+  assert.equal(posted.some(row=>row.path==='replication_queue'),false);
+  assert.equal(posted.some(row=>row.path==='rpc/reject_shortlist_candidate'&&row.method==='POST'),true);
   candidates[0].status='proposed';
   const bulk=await request('/api/akay-shortlist?action=bulk',{method:'POST',body:{ids:[id],status:'approved'}});
   assert.equal(bulk.code,200);
   assert.deepEqual(bulk.body.ok,[id]);
   assert.equal(queue.length,1);
+  const tooMany=await request('/api/akay-shortlist?action=bulk',{method:'POST',body:{ids:Array.from({length:51},()=>id),status:'approved'}});
+  assert.equal(tooMany.code,400);
  }finally{
   global.fetch=originalFetch;
   for(const key of Object.keys(process.env))if(!(key in env))delete process.env[key];
@@ -132,8 +140,16 @@ test('operator desk splits traffic journeys live and shortlist and stays unlinke
  const vite=await readFile(new URL('../run.mjs',import.meta.url),'utf8');
  assert.match(vite,/base:'\/'/);
  const shortlist=await readFile(new URL('../src/AkayShortlist.tsx',import.meta.url),'utf8');
+ const api=await readFile(new URL('../server/akay-shortlist.mjs',import.meta.url),'utf8');
  assert.equal(shortlist.toLowerCase().includes('forgot'),false);
  assert.match(shortlist,/Approve/);
+ assert.match(shortlist,/selected.length>=50/);
+ assert.match(shortlist,/Nothing approved yet/);
+ assert.match(api,/rpc\/'\+fn/);
+ assert.match(api,/approve_shortlist_candidate/);
+ assert.match(api,/reject_shortlist_candidate/);
+ assert.equal(api.includes("rest('replication_queue'"),false);
+ assert.equal(api.includes("method:'PATCH'"),false);
  assert.match(shortlist,/akay-shortlist-payload/);
  assert.match(shortlist,/AkayPagePreview/);
  assert.match(shortlist,/data\?\.items/);

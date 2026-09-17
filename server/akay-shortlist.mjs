@@ -96,40 +96,34 @@ export async function listCandidates(query){
   batches:[...batches].sort((a,b)=>a.localeCompare(b))
  };
 }
-async function current(id){
- const found=await rest('shortlist_candidates?id=eq.'+id+'&select=id,status&limit=1');
- return found.data?.[0]||null;
-}
 async function readItem(id){
  const found=await rest('shortlist_candidates?id=eq.'+id+'&select='+select+'&limit=1');
  const row=found.data?.[0];if(!row)throw new HttpError(404,'Candidate not found.');
  return mapItem(row);
 }
-async function enqueue(id){
- try{
-  const created=await rest('replication_queue',{method:'POST',body:{candidate_id:id,status:'queued',assignee:'',notes:''},prefer:'return=representation,resolution=ignore-duplicates',conflict:'Queue row already exists.'});
-  const row=Array.isArray(created.data)?created.data[0]:created.data;
-  if(row?.id)return {id:row.id,status:row.status||'queued'};
- }catch(error){if(error.status!==409)throw error;}
- const existing=await rest('replication_queue?candidate_id=eq.'+id+'&select=id,status&limit=1');
- const row=existing.data?.[0];
- if(!row)throw new HttpError(503,'Could not queue this design.');
- return {id:row.id,status:row.status||'queued'};
+function rpcPayload(data){
+ const row=Array.isArray(data)?data[0]:data;
+ return row&&typeof row==='object'&&!Array.isArray(row)?row:null;
+}
+async function decideRpc(id,status){
+ const fn=status==='approved'?'approve_shortlist_candidate':'reject_shortlist_candidate';
+ const result=await rest('rpc/'+fn,{method:'POST',body:{p_id:id}});
+ const payload=rpcPayload(result.data);
+ if(!payload||payload.ok===false){
+  if(payload?.error==='not_found')throw new HttpError(404,'Candidate not found.');
+  if(payload?.error==='already_decided')throw new HttpError(409,'This candidate is already decided.');
+  throw new HttpError(503,'Could not save your changes. Please try again.');
+ }
+ if(status==='rejected')return {candidate:await readItem(id),replication_queue:null};
+ const queueId=payload.queue_id||payload.queueId;
+ if(!queueId)throw new HttpError(503,'Could not queue this design.');
+ return {
+  candidate:await readItem(id),
+  replication_queue:{id:queueId,status:payload.queue_status||payload.queueStatus||'queued'}
+ };
 }
 export async function decideCandidate(id,status){
- const row=await current(id);
- if(!row)throw new HttpError(404,'Candidate not found.');
- if(row.status!=='proposed')throw new HttpError(409,'This candidate is already decided.');
- const updated=await rest('shortlist_candidates?id=eq.'+id+'&status=eq.proposed',{method:'PATCH',body:{status,updated_at:new Date().toISOString()}});
- if(!updated.data?.length)throw new HttpError(409,'This candidate is already decided.');
- if(status==='rejected')return {candidate:await readItem(id),replication_queue:null};
- try{
-  const replication_queue=await enqueue(id);
-  return {candidate:await readItem(id),replication_queue};
- }catch(error){
-  await rest('shortlist_candidates?id=eq.'+id,{method:'PATCH',body:{status:'proposed',updated_at:new Date().toISOString()}});
-  throw error;
- }
+ return decideRpc(id,status);
 }
 export async function bulkDecide(ids,status){
  if(!Array.isArray(ids)||!ids.length)throw new HttpError(400,'Select at least one candidate.');
