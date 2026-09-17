@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFile,access} from 'node:fs/promises';
 import handler from '../api/invitation-page.mjs';
 import {CANONICAL_ORIGIN,NOT_FOUND_HTML,PAGE_HEADER,invitationDecision,invitationPageHtml,invitationSlugFromRequest} from '../server/invitation-page.mjs';
-import {OCCASION_SLUGS,occasionBySlug} from '../server/occasion-landings.mjs';
+import {DESIGN_SLUGS,LANDING_SLUGS,OCCASION_SLUGS,ctaHref,occasionBySlug} from '../server/occasion-landings.mjs';
 import {isGuestInvitationPath} from '../server/guest-page.mjs';
 async function api(url,method='GET'){
  const res={headers:{},body:'',code:0,setHeader(k,v){this.headers[k]=v;},status(n){this.code=n;return this;},end(b){this.body=b||'';if(!this.code)this.code=this.statusCode||200;}};
@@ -12,8 +12,10 @@ async function api(url,method='GET'){
 }
 test('known invitation slugs return unique 200 HTML with brief title, H1 and body',async()=>{
  assert.equal(OCCASION_SLUGS.length,21);
+ assert.equal(DESIGN_SLUGS.length,13);
+ assert.equal(LANDING_SLUGS.length,34);
  const home='Create Invitation Webpage Online for All Events';
- for(const slug of OCCASION_SLUGS){
+ for(const slug of LANDING_SLUGS){
   const page=occasionBySlug[slug];
   const res=await api('/api/invitation-page?slug='+slug);
   assert.equal(res.code,200,slug);
@@ -28,14 +30,31 @@ test('known invitation slugs return unique 200 HTML with brief title, H1 and bod
   assert.equal(String(res.body).includes(page.includes),true,slug+' includes');
   assert.equal(String(res.body).includes(page.cta),true,slug+' cta');
   assert.equal(String(res.body).includes(page.switchCopy),true,slug+' switch');
+  assert.equal(String(res.body).includes(ctaHref(page).replaceAll('&','&amp;')),true,slug+' cta href');
   assert.equal(String(res.body).includes(home),false,slug);
   assert.equal(String(res.body).includes('vercel.app'),false);
+  assert.equal(String(res.body).includes('Royal Temple'),false,slug);
  }
  const haldi=await api('/invitations/haldi');
  assert.equal(haldi.code,200);
  assert.match(String(haldi.body),/<title>Haldi Digital Wedding Invitation \| FindMyInvite<\/title>/);
  assert.match(String(haldi.body),/<h1>Haldi Digital Wedding Invitation<\/h1>/);
  assert.match(String(haldi.body),/collection=classic/);
+ const imperial=await api('/invitations/royal-imperial');
+ assert.equal(imperial.code,200);
+ assert.match(String(imperial.body),/<title>Royal Imperial Wedding Invitation \| FindMyInvite<\/title>/);
+ assert.match(String(imperial.body),/<h1>Royal Imperial Wedding Invitation<\/h1>/);
+ assert.match(String(imperial.body),/\/create\?template=rose-gold-blush-royal&amp;type=wedding/);
+ const crimson=await api('/api/invitation-page?slug=crimson-royale');
+ assert.match(String(crimson.body),/<h1>Crimson Royale Wedding Invitation<\/h1>/);
+ assert.match(String(crimson.body),/\/create\?template=ivory-elegance&amp;type=wedding/);
+ const majestic=await api('/api/invitation-page?slug=majestic-love');
+ assert.match(String(majestic.body),/<h1>Majestic Love Digital Wedding Invitation<\/h1>/);
+ assert.match(String(majestic.body),/\/create\?template=royal-elegance&amp;type=wedding/);
+ const elegance=await api('/api/invitation-page?slug=royal-elegance');
+ assert.match(String(elegance.body),/<h1>Royal Elegance Wedding Invitation<\/h1>/);
+ assert.match(String(elegance.body),/\/create\?template=modern-minimal-royal&amp;type=wedding/);
+ assert.notEqual(String(elegance.body),String(majestic.body));
  const nikah=await api('/api/invitation-page?slug=nikah');
  const nikkah=await api('/api/invitation-page?slug=nikkah');
  assert.match(String(nikah.body),/<h1>Nikah Royal Wedding Invitation<\/h1>/);

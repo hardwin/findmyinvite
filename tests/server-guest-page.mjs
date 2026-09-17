@@ -29,7 +29,7 @@ async function api(url,method='GET'){
  return res;
 }
 test('storefront, reserved and asset paths are not treated as guest invitations',()=>{
- for(const path of ['/','/templates','/create','/dashboard','/login','/signup','/forgot-password','/about','/contact','/blog','/terms','/privacy-policy','/refund-policy','/shipping-policy','/akay','/grand-launch','/manage/test-couple','/invite/demo','/api/invitations','/assets/track1.mp3','/robots.txt','/sitemap.xml','/invitations','/invitations/haldi']){
+ for(const path of ['/','/templates','/create','/dashboard','/login','/signup','/forgot-password','/about','/contact','/blog','/terms','/privacy-policy','/refund-policy','/shipping-policy','/akay','/grand-launch','/manage/test-couple','/invite/demo','/api/invitations','/assets/track1.mp3','/robots.txt','/sitemap.xml','/invitations','/invitations/haldi','/invitations/royal-imperial']){
   assert.equal(isGuestInvitationPath(path),false,path);
  }
  assert.equal(isGuestInvitationPath('/wedding-invitation-classic-does-not-exist-xyz'),true);

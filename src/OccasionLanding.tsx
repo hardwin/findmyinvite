@@ -1,6 +1,6 @@
 import {useEffect} from 'react';
 import {Header,Footer,Button,Heading,Icon} from './components';
-import {occasionBySlug,relatedLabel,templatesHref} from './occasion-landings';
+import {ctaHref,demoHref,occasionBySlug,relatedLabel,templatesHref} from './occasion-landings';
 import './storefront3.css';
 import './launch.css';
 
@@ -44,8 +44,8 @@ export default function OccasionLanding({path=location.pathname}:{path?:string})
     <h1 className="font-display text-4xl md:text-6xl font-bold tracking-tight mb-6 text-foreground leading-[1.1]">{page.h1}</h1>
     <p className="font-body text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">{page.hero}</p>
     <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-     <Button href={templatesHref(page.tier)} className="px-10">{page.cta} <Icon name="arrow" size={16}/></Button>
-     <Button href={'/invite/demo?template='+(page.tier==='royal'?'royal-prestige':'emerald-noir')+'&type=wedding'} outline>View live demo</Button>
+     <Button href={ctaHref(page)} className="px-10">{page.cta} <Icon name="arrow" size={16}/></Button>
+     <Button href={demoHref(page)} outline>View live demo</Button>
     </div>
     <p className="text-xs text-muted-foreground mt-6">Personalise, preview, and share the public link on WhatsApp. Guests open it with no account.</p>
    </div>
@@ -67,7 +67,7 @@ export default function OccasionLanding({path=location.pathname}:{path?:string})
    </div>
   </div></section>
   <section className="py-16 md:py-24 cream-bg"><div className="container mx-auto px-6 max-w-3xl text-center">
-   <Heading eyebrow="Related occasions" title="Keep planning the wedding"/>
+   <Heading eyebrow={page.kind==='design'?'Related designs':'Related occasions'} title="Keep planning the wedding"/>
    <div className="related-links">{page.related.map(href=><a className="occasion-chip" href={href} key={href}>{relatedLabel(href)}</a>)}</div>
   </div></section>
   <section className="py-16 md:py-24"><div className="container mx-auto px-6">
@@ -77,8 +77,8 @@ export default function OccasionLanding({path=location.pathname}:{path?:string})
   <section className="py-24 md:py-32 text-center cta"><div className="container mx-auto px-6">
    <Icon name="sparkles" size={30} className="text-primary mx-auto mb-6"/>
    <h2 className="font-display text-3xl md:text-4xl font-bold mb-6">{page.cta}</h2>
-   <p className="text-muted-foreground mb-8">Start from {page.tier==='royal'?'Royal':'Classic'} templates, then switch collections if you want a different look — without a second landing URL.</p>
-   <Button href={templatesHref(page.tier)}>{page.cta} <Icon name="arrow" size={16}/></Button>
+   <p className="text-muted-foreground mb-8">{page.templateId?'Start from this live FindMyInvite template, then switch collections if you want a different look — without a second landing URL.':`Start from ${page.tier==='royal'?'Royal':'Classic'} templates, then switch collections if you want a different look — without a second landing URL.`}</p>
+   <Button href={ctaHref(page)}>{page.cta} <Icon name="arrow" size={16}/></Button>
   </div></section>
  </main><Footer/></>;
 }

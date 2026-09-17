@@ -1,3 +1,6 @@
+import {designPages,DESIGN_SLUGS} from './design-landings.mjs';
+export {designPages,DESIGN_SLUGS};
+
 export const occasionPages=[
  {
   slug:'anand-karaj',
@@ -358,15 +361,25 @@ export const occasionPages=[
  }
 ];
 
-
-export const occasionBySlug=Object.fromEntries(occasionPages.map(page=>[page.slug,page]));
+export const landingPages=[...occasionPages,...designPages];
+export const occasionBySlug=Object.fromEntries(landingPages.map(page=>[page.slug,page]));
+export const landingBySlug=occasionBySlug;
 export const OCCASION_SLUGS=occasionPages.map(page=>page.slug);
+export const LANDING_SLUGS=landingPages.map(page=>page.slug);
 export function templatesHref(tier){
  return '/templates?collection='+tier+'&type=wedding';
+}
+export function ctaHref(page){
+ return page.templateId?'/create?template='+page.templateId+'&type=wedding':templatesHref(page.tier);
+}
+export function demoHref(page){
+ return '/invite/demo?template='+(page.templateId||(page.tier==='royal'?'royal-prestige':'emerald-noir'))+'&type=wedding';
 }
 export function relatedLabel(href){
  if(href==='/')return 'FindMyInvite home';
  if(href==='/templates')return 'Invitation templates';
  const slug=href.replace(/^\/invitations\//,'');
- return occasionBySlug[slug]?occasionBySlug[slug].name+' invitations':slug;
+ const page=occasionBySlug[slug];
+ if(!page)return slug;
+ return page.kind==='design'?page.name:page.name+' invitations';
 }

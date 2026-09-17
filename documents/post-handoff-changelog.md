@@ -107,6 +107,10 @@ List, filters, and chips stay. Live main still PATCHed `shortlist_candidates` th
 
 Prod baseline at this pass: 22 proposed / 3 rejected / 0 approved / `replication_queue` 0.
 
+## P1 live FMI design landing pages (2026-09-17)
+
+13 signed-off catalogue design LPs share the occasion `/invitations/{slug}` server HTML path (`/api/invitation-page`). Copy lives in `server/design-landings.mjs` and is merged into `occasionBySlug` so SPA `OccasionLanding` stays in sync. Primary CTA uses the existing editor pattern `/create?template={template_catalog id}&type=wedding` (Gallery "Use This Design"), not a collection browse link. SKU mismatches from the brief are wired as-is: Royal Imperial → `rose-gold-blush-royal`, Crimson Royale → `ivory-elegance`, Majestic Love → `royal-elegance`, Royal Elegance → `modern-minimal-royal`. Guest gate `/api/guest-page` and `robots.txt` Disallow `/akay` are unchanged.
+
 ## Backlog
 
 - Forgot password / email reset (explicitly deferred 2026-09-16).
