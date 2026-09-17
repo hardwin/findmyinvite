@@ -5,7 +5,7 @@ import {isGuestInvitationPath} from '../server/guest-page.mjs';
 import {reserved,slugValue} from '../server/core.mjs';
 const slugs=['anand-karaj','ardas','baraat','biya','biye','garba','haldi','hukamnama','kalyanam','lagan','lagna','maduve','mehndi','muhurtham','nikah','nikkah','pelli','punjabi','sangeet','shaadi','vivah'];
 test('21 P1 occasion LPs live under /invitations/{slug}, not apex guest paths',async()=>{
- const pages=await readFile(new URL('../src/occasion-landings.ts',import.meta.url),'utf8');
+ const pages=await readFile(new URL('../server/occasion-landings.mjs',import.meta.url),'utf8');
  const app=await readFile(new URL('../src/App.tsx',import.meta.url),'utf8');
  const sitemap=await readFile(new URL('../public/sitemap.xml',import.meta.url),'utf8');
  const vercel=JSON.parse(await readFile(new URL('../vercel.json',import.meta.url),'utf8'));
@@ -36,8 +36,10 @@ test('21 P1 occasion LPs live under /invitations/{slug}, not apex guest paths',a
  assert.equal(guestRewrite.source.includes('*'),false);
  const spa=vercel.rewrites.find(rule=>rule.destination==='/index.html');
  const spaPattern=new RegExp(`^${spa.source}$`);
- assert.equal(spaPattern.test('/invitations/haldi'),true);
- assert.equal(spaPattern.test('/invitations/nikkah'),true);
+ assert.equal(spaPattern.test('/invitations/haldi'),false);
+ assert.equal(spaPattern.test('/invitations/nikkah'),false);
+ const invitationRewrite=vercel.rewrites.find(rule=>rule.destination==='/api/invitation-page?slug=:slug');
+ assert.equal(invitationRewrite.source,'/invitations/:slug');
  const noindex=vercel.headers.find(rule=>rule.headers?.some(header=>header.key==='X-Robots-Tag'&&header.value.includes('noindex')&&rule.source.includes('templates')));
  assert.match(noindex.source,/invitations\(\?:\/\.\*\)\?\$/);
  const landing=await readFile(new URL('../src/OccasionLanding.tsx',import.meta.url),'utf8');

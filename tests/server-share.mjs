@@ -70,6 +70,7 @@ test('every catalog template has a share still and the storefront HTML advertise
  assert.equal(spaPattern.test('/sitemap.xml'),false);
  assert.equal(spaPattern.test('/api/content'),false);
  assert.equal(spaPattern.test('/assets/logo.png'),false);
+ assert.equal(spaPattern.test('/invitations/haldi'),false);
  const robots=await readFile(new URL('../public/robots.txt',import.meta.url),'utf8');
  assert.match(robots,/^User-agent:/);
  assert.match(robots,/Disallow: \/akay/);
