@@ -142,3 +142,12 @@ test('secret comparison and same-origin checks reject missing keys and foreign h
   assert.doesNotThrow(() => sameOrigin({headers: {host: 'findmyinvite.com', origin: 'https://findmyinvite.com'}}));
   assert.throws(() => sameOrigin({headers: {host: 'findmyinvite.com', origin: 'https://evil.example'}}), {status: 403});
 });
+
+test('Editor overrides stay bounded plain data and survive normalization',()=>{
+ const d=draftData({textOverrides:{'text-0':'WITH THE HEAVENLY BLESSINGS OF','text-1':'<img src=x onerror=alert(1)>'}},'royal-temple');
+ assert.equal(d.textOverrides['text-0'],'WITH THE HEAVENLY BLESSINGS OF');
+ assert.equal(d.textOverrides['text-1'],'<img src=x onerror=alert(1)>');
+ assert.throws(()=>draftData({textOverrides:{'__proto__':'bad','style':'color:red'}},'royal-temple'));
+ assert.throws(()=>draftData({textOverrides:{'text-0':'a'.repeat(2001)}},'royal-temple'));
+ assert.throws(()=>draftData({textOverrides:[]},'royal-temple'));
+});
