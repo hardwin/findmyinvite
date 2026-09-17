@@ -80,7 +80,7 @@ async function harness(t, changes, run, controls={}) {
       assert.equal(method,'GET');return json({object:{sha:gitSha}});
     }
     assert.equal(parsed.hostname,'studio-test.supabase.co','Unexpected provider request');
-    if(parsed.pathname.endsWith('/rpc/consume_rate_limit'))return json(true);
+    if(parsed.pathname.endsWith('/rpc/consume_rate_limit'))return json(!controls.rateLimited);
     if(parsed.pathname.endsWith('/rpc/studio_publish')) {
       assert.equal(body.p_lock_until,acquiredLease);
       assert.equal(body.p_revision,row.revision);
@@ -106,7 +106,7 @@ async function harness(t, changes, run, controls={}) {
     row={...row,...body};return json([row]);
   });
   async function request(action,body={},options={}) {
-    const res={headers:{},setHeader(k,v){this.headers[k]=v;},status(code){this.code=code;return this;},json(data){if(this.code>=200&&this.code<300&&options.method!=='GET')assert.equal(row.lock_until,null,'Release the lease before responding');this.body=data;}};
+    const res={headers:{},setHeader(k,v){this.headers[k]=v;},status(code){this.code=code;return this;},json(data){if(acquiredLease&&row.lock_until===acquiredLease&&options.method!=='GET')assert.equal(row.lock_until,null,'Release the lease before responding');this.body=data;}};
     const headers={cookie:options.anonymous?'':teamCookie().split(';')[0],authorization:'Bearer '+(options.token||token),origin:'https://findmyinvite.com',host:'findmyinvite.com'};
     await handler({url:`/api/studio?action=${action}&id=${id}`,method:options.method||'POST',headers,body},res);return res;
   }
@@ -239,4 +239,12 @@ test('Studio access needs no team cookie but still requires the private draft to
   assert.equal((await request('read',{}, {method:'GET',anonymous:true})).code,200);
   assert.equal((await request('read',{}, {method:'GET',anonymous:true,token:'cd'.repeat(32)})).code,403);
  });
+});
+
+ test('rate-limited preparation releases its lease before the error response',async t=>{
+ await harness(t,{},async({request,row,calls})=>{
+  assert.equal((await request('prepare')).code,429);
+  assert.equal(row().lock_until,null);
+  assert.ok(!calls.some(c=>c.url.hostname==='api.openai.com'));
+ },{rateLimited:true});
 });

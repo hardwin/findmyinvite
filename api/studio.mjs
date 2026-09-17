@@ -82,6 +82,6 @@ export default async function handler(req,res){let locked=null;
  return await finish(res,200,{...view(p),publishedSlug:slug,url:'/'+slug,archivePending});
  }
  throw new HttpError(404,'Unknown studio action.');
- }catch(e){if(e.status===401||e.status===403||e.status===429||e instanceof HttpError)fail(res,e);else{console.error('Studio operation failed',e.name,e.status||'');fail(res,new HttpError(502,'The studio service could not complete this step. Your saved version is safe.'));}}
+ }catch(e){if(locked){const lease=locked;try{await release(lease);locked=null;}catch{}}if(e.status===401||e.status===403||e.status===429||e instanceof HttpError)fail(res,e);else{console.error('Studio operation failed',e.name,e.status||'');fail(res,new HttpError(502,'The studio service could not complete this step. Your saved version is safe.'));}}
  finally{if(locked)await release(locked).catch(()=>{});}
 }
