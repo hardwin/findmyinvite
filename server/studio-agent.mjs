@@ -22,7 +22,12 @@ export async function startAgent(project,message,section){const session=await pr
 export async function readAgent(id,revision){
  const api=client();
  const [session,turns]=await Promise.all([api.beta.agents.sessions.retrieve(id),api.beta.agents.sessions.turns.list(id,{limit:1,order:'desc'})]);const turn=turns.data[0];
- if(turn?.status==='failed'||session.status==='failed')throw new HttpError(502,'The coding agent could not finish. Your last working version is safe.');
+ if(turn?.status==='failed'||session.status==='failed'){
+  const code=turn?.error?.code||session.error?.code||'unknown';
+  console.error('Studio agent failure',JSON.stringify({session:id,turn:turn?.id,code}));
+  const reasons={credit_balance_exhausted:'The AI service has no API credits remaining.',usage_limit_exceeded:'The AI service has reached its usage limit.',rate_limit_exceeded:'The AI service is temporarily rate limited.',authentication_error:'The AI service credentials need attention.',resource_not_found:'The configured AI model or workspace is unavailable.',invalid_request:'The AI service rejected the workspace configuration.',sandbox_error:'The editing workspace failed.',server_overloaded:'The AI service is temporarily overloaded.',connection_failed:'The editing workspace could not reach the AI service.',request_timeout:'The AI service timed out.',server_error:'The AI service encountered a temporary error.',internal_error:'The AI service encountered an internal error.',context_length_exceeded:'This editing session reached its context limit.',session_budget_exceeded:'This editing session reached its usage budget.',executor_version_incompatible:'The editing workspace needs a runtime update.'};
+  throw new HttpError(502,(reasons[code]||'The coding agent could not finish.')+' Your draft is unchanged. Reference: '+code+'.');
+ }
  if(turn?.status==='cancelled')return {done:true,cancelled:true,usage:session.usage};
  if(turn?.status!=='completed')return {done:false,status:'Editing and checking your invitation…'};
  const artifacts=await api.beta.agents.sessions.artifacts.list(id,{limit:100});const artifact=artifacts.data.find(x=>x.path===(revision===undefined?'/workspace/outputs/result.json':`/workspace/outputs/result-${revision}.json`));
