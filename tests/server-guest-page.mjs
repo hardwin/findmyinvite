@@ -1,7 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFile} from 'node:fs/promises';
-import middleware,{config} from '../middleware.js';
+import {readFile,access} from 'node:fs/promises';
 import handler from '../api/guest-page.mjs';
 import {GATE_HEADER,guestDecision,guestPageNotFound,isGuestInvitationPath,NOT_FOUND_HTML,writeNotFound} from '../server/guest-page.mjs';
 import {reserved} from '../server/core.mjs';
@@ -63,27 +62,13 @@ test('unconfigured or database errors fail open so published guest links keep wo
   assert.equal((await guestDecision('/test-couple')).gate,'open');
  });
 });
-test('Vercel middleware returns HTTP 404 HTML for unknown slugs and continues for published invites',async()=>{
- assert.equal(config.runtime,'nodejs');
- assert.equal(config.matcher,'/:slug');
- await withDb([],async()=>{
-  const missing=await middleware(new Request('https://findmyinvite.com/wedding-invitation-classic-7'));
-  assert.equal(missing.status,404);
-  assert.equal(missing.headers.get(GATE_HEADER),'404');
-  assert.equal(await missing.text(),NOT_FOUND_HTML);
-  assert.match(NOT_FOUND_HTML,/https:\/\/findmyinvite.com\/templates/);
- });
- await withDb(live,async()=>{
-  assert.equal(await middleware(new Request('https://findmyinvite.com/test-couple')),undefined);
-  assert.equal(await middleware(new Request('https://findmyinvite.com/templates')),undefined);
- });
-});
 test('guest-page API returns real 404 HTML for dead slugs and 200 SPA for published or reserved paths',async()=>{
  await withDb([],async()=>{
   const missing=await api('/api/guest-page?slug=zzzz-not-a-real-invite-999');
   assert.equal(missing.code,404);
   assert.equal(missing.headers[GATE_HEADER],'404');
   assert.equal(missing.body,NOT_FOUND_HTML);
+  assert.match(NOT_FOUND_HTML,/https:\/\/findmyinvite.com\/templates/);
   assert.equal(missing.headers['Content-Type'],'text/html; charset=utf-8');
  });
  await withDb(live,async()=>{
@@ -105,7 +90,7 @@ test('guest-page API returns real 404 HTML for dead slugs and 200 SPA for publis
  assert.equal(res.headers[GATE_HEADER],'404');
  assert.equal(chunks.join(''),NOT_FOUND_HTML);
 });
-test('guest lookup does not require RATE_LIMIT_SECRET so middleware can 404 without that env',async()=>{
+test('guest lookup does not require RATE_LIMIT_SECRET',async()=>{
  await withDb([],async()=>{
   delete process.env.RATE_LIMIT_SECRET;
   assert.equal((await guestDecision('/zzzz-not-a-real-invite-999')).gate,'404');
@@ -118,12 +103,15 @@ test('SPA catch-all stays after the guest-page rewrite and client still mounts P
  const app=await readFile(new URL('../src/App.tsx',import.meta.url),'utf8');
  assert.match(app,/\/\^\\\/\[a-z0-9\]\[a-z0-9-\]\{2,47\}\$\/\.test\(path\)\?<PublicInvitation slug=\{path\.slice\(1\)}\/>/);
  const vercel=JSON.parse(await readFile(new URL('../vercel.json',import.meta.url),'utf8'));
- assert.equal(vercel.proxy.entrypoint,'middleware.js');
- assert.equal(vercel.proxy.matcher,'/:slug');
+ assert.equal(vercel.proxy,undefined);
  const destinations=vercel.rewrites.map(rule=>rule.destination);
  assert.equal(destinations[0],'/api/share?slug=:slug');
  assert.equal(destinations[1],'/api/guest-page?slug=:slug');
  assert.equal(vercel.rewrites[1].source,'/:slug([a-z0-9][a-z0-9-]{2,47})');
  assert.equal(destinations[2],'/index.html');
+ assert.match(destinations[2]=== '/index.html' ? vercel.rewrites[2].source : '',/robots/);
  assert.ok(vercel.functions['api/guest-page.mjs'].includeFiles.includes('index.html'));
+ const files=await readFile(new URL('../vercel.json',import.meta.url),'utf8');
+ assert.equal(files.includes('middleware'),false);
+ await assert.rejects(()=>access(new URL('../middleware.js',import.meta.url)));
 });
