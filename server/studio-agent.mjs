@@ -9,7 +9,10 @@ export async function prepareAgent(project){
  return client().beta.agents.sessions.create({agent:{model:process.env.STUDIO_WORKSPACE_MODEL||'gpt-5.6-luna',reasoning:{effort:'low'},instructions,multi_agent:{enabled:false}},environment:{type:'openai_hosted',network:{access:'disabled'},files:[file('finish.py',await readFile(new URL('../public/studio/finish.py',import.meta.url),'utf8')),file('template.html',project.html),file('content.json',JSON.stringify(project.data)),file('fields.json',await readFile(new URL('../public/studio/fields.json',import.meta.url),'utf8')),file('README.txt','Edit the template and data, preserve its contracts. Use finish.py to export the revision-specific result under /workspace/outputs. No deployment or Git credentials are provided.')]},metadata:{studio_id:project.id,revision:String(project.revision)}});
 }
 export async function workspaceReady(id){
- try{const s=await client().beta.agents.sessions.retrieve(id);return {usable:s.status==='idle'&&!['failed','disconnected','expired','terminated'].includes(s.environment?.status),ready:s.status==='idle'&&s.environment?.status==='connected'};}catch(e){if(e.status===404||e.status===410)return {usable:false,ready:false};throw e;}
+ try{const api=client(),s=await api.beta.agents.sessions.retrieve(id);
+  const env=await api.beta.agents.environments.retrieve(s.environment.id);
+  return {usable:s.status==='idle'&&!['failed','disconnected','expired'].includes(env.status),ready:s.status==='idle'&&env.status==='connected'};
+ }catch(e){if(e.status===404||e.status===410)return {usable:false,ready:false};throw e;}
 }
 export async function continueAgent(id,project,message,section){
  const input=`Revision ${project.revision}. Selected section: ${section}. Request: ${JSON.stringify(message)}. The authoritative content.json is ${JSON.stringify(project.data)}; synchronize it before applying this edit if different. After editing, run python /workspace/finish.py ${project.revision} with a short summary as the second argument. Output must be /workspace/outputs/result-${project.revision}.json. Do not reuse an old result.`;

@@ -60,14 +60,15 @@ async function harness(t, changes, run, controls={}) {
     calls.push({url:parsed,body,method});
     if(parsed.hostname==='api.openai.com') {
       if(controls.agent){
-        if(parsed.pathname.endsWith('/sessions')&&method==='POST')return json({id:'session-warm',status:'idle',environment:{status:'connected'}});
+        if(parsed.pathname.includes('/environments/'))return json({status:'connected'});
+        if(parsed.pathname.endsWith('/sessions')&&method==='POST')return json({id:'session-warm',status:'idle',environment:{id:'env-warm',status:'connected'}});
         if(method==='DELETE')return json({deleted:true});
         if(parsed.pathname.endsWith('/events'))return json({});
         if(parsed.pathname.endsWith('/turns'))return json({data:[{status:'completed'}]});
         if(parsed.pathname.endsWith('/artifacts'))return json({data:[{id:'artifact-current',path:`/workspace/outputs/result-${row.run_revision}.json`,size_bytes:1000}]});
         if(parsed.pathname.includes('/artifacts/artifact-current/content'))return json({html:row.html,data:{...row.data,groom:'Updated Groom'},revision:row.run_revision,message:'Name updated.'});
         if(controls.expired&&parsed.pathname.endsWith('/session-expired'))return json({error:{message:'Gone'}},404);
-        return json({status:'idle',environment:{status:'connected'}});
+        return json({status:'idle',environment:{id:'env-warm',status:'connected'}});
       }
 
       assert.match(parsed.pathname,/\/agents\/sessions\/session-test(?:\/events)?$/);
