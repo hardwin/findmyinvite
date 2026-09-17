@@ -29,7 +29,7 @@ async function api(url,method='GET'){
  return res;
 }
 test('storefront, reserved and asset paths are not treated as guest invitations',()=>{
- for(const path of ['/','/templates','/create','/dashboard','/login','/signup','/forgot-password','/about','/contact','/blog','/terms','/privacy-policy','/refund-policy','/shipping-policy','/akay','/grand-launch','/manage/test-couple','/invite/demo','/api/invitations','/assets/track1.mp3','/robots.txt','/sitemap.xml','/invitations','/invitations/haldi','/invitations/royal-imperial','/studio']){
+ for(const path of ['/','/templates','/create','/dashboard','/login','/signup','/forgot-password','/about','/contact','/blog','/terms','/privacy-policy','/refund-policy','/shipping-policy','/akay','/grand-launch','/manage/test-couple','/invite/demo','/api/invitations','/assets/track1.mp3','/robots.txt','/sitemap.xml','/invitations','/invitations/haldi','/invitations/royal-imperial']){
   assert.equal(isGuestInvitationPath(path),false,path);
  }
  assert.equal(isGuestInvitationPath('/wedding-invitation-classic-does-not-exist-xyz'),true);
@@ -37,14 +37,12 @@ test('storefront, reserved and asset paths are not treated as guest invitations'
  assert.equal(isGuestInvitationPath('/haldi'),true);
  assert.equal(reserved.has('templates'),true);
  assert.equal(reserved.has('invitations'),true);
- assert.equal(reserved.has('studio'),true);
 });
 test('unknown unpublished and expired guest slugs are missing; live published slugs are not',async()=>{
  await withDb([],async()=>{
   assert.equal((await guestDecision('/wedding-invitation-classic-7')).gate,'404');
   assert.equal(await guestPageNotFound('/templates'),false);
   assert.equal((await guestDecision('/templates')).gate,'skip');
-  assert.equal((await guestDecision('/studio')).gate,'skip');
  });
  await withDb([{...live[0],published:false}],async()=>{
   assert.equal((await guestDecision('/test-couple')).gate,'404');
@@ -86,9 +84,6 @@ test('guest-page API returns real 404 HTML for dead slugs and 200 SPA for publis
   assert.equal(templates.code,200);
   assert.equal(templates.headers[GATE_HEADER],'skip');
   assert.equal(templates.headers['X-Robots-Tag'],undefined);
-  const studio=await api('/api/guest-page?slug=studio');
-  assert.equal(studio.code,200);
-  assert.equal(studio.headers[GATE_HEADER],'skip');
  });
  const chunks=[];
  const res={statusCode:0,headers:{},setHeader(k,v){this.headers[k]=v;},end(body){chunks.push(body||'');}};

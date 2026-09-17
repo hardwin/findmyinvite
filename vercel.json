@@ -5,9 +5,6 @@
   "functions": {
     "api/guest-page.mjs": {
       "includeFiles": "dist/index.html"
-    },
-    "api/studio.mjs": {
-      "includeFiles": "studio-snapshots/**"
     }
   },
   "rewrites": [

@@ -59,23 +59,17 @@ export default async function handler(req,res){try{
  }
  if(action==='update'){
   method(req,['POST','PUT']);
-  const body=await bodyJson(req);
-  if(body.published!==undefined&&typeof body.published!=='boolean')throw new HttpError(400,'Invalid publication status.');
-  if(row.data?.studioId&&body.data===undefined){
-   const rows=await db('invitations?id=eq.'+row.id,{method:'PATCH',headers:{Prefer:'return=representation'},body:{published:body.published??row.published,updated_at:new Date().toISOString()}});
-   return respond(res,200,view(rows[0]));
-  }
-  const valid=validateData(body.data,slug);
-  if(valid.data.template!==row.data.template&&!row.data?.studioId)await availableTemplate(valid.data.template);
+  const body=await bodyJson(req);const valid=validateData(body.data,slug);
+  if(valid.data.template!==row.data.template)await availableTemplate(valid.data.template);
   for(const photo of valid.data.photos.filter(p=>p.startsWith('/api/media'))){
    if(!process.env.BLOB_READ_WRITE_TOKEN)throw new HttpError(503,'Photo storage is unavailable.');
    const slot=new URL(photo,'https://findmyinvite.com').searchParams.get('slot');
    try{await head('invitations/'+row.id+'/'+slot);}catch{throw new HttpError(400,'A photo is missing. Upload it again before saving.');}
   }
+  if(body.published!==undefined&&typeof body.published!=='boolean')throw new HttpError(400,'Invalid publication status.');
   let host=hostId(row.data);
   if(!host&&!isManagementToken(bearer(req))){const user=await authUser(bearer(req));if(user)host=user.id;}
-  const next={...valid.data,...(row.data?.studioId?{studioId:row.data.studioId}:{})};
-  const rows=await db('invitations?id=eq.'+row.id,{method:'PATCH',headers:{Prefer:'return=representation'},body:{data:withHost(next,host),expires_at:valid.expires_at,published:body.published??row.published,updated_at:new Date().toISOString()}});
+  const rows=await db('invitations?id=eq.'+row.id,{method:'PATCH',headers:{Prefer:'return=representation'},body:{data:withHost(valid.data,host),expires_at:valid.expires_at,published:body.published??row.published,updated_at:new Date().toISOString()}});
   return respond(res,200,view(rows[0]));
  }
  if(action==='delete'){

@@ -111,17 +111,6 @@ Prod baseline at this pass: 22 proposed / 3 rejected / 0 approved / `replication
 
 13 signed-off catalogue design LPs share the occasion `/invitations/{slug}` server HTML path (`/api/invitation-page`). Copy lives in `server/design-landings.mjs` and is merged into `occasionBySlug` so SPA `OccasionLanding` stays in sync. Primary CTA uses the existing editor pattern `/create?template={template_catalog id}&type=wedding` (Gallery "Use This Design"), not a collection browse link. SKU mismatches from the brief are wired as-is: Royal Imperial → `rose-gold-blush-royal`, Crimson Royale → `ivory-elegance`, Majestic Love → `royal-elegance`, Royal Elegance → `modern-minimal-royal`. Guest gate `/api/guest-page` and `robots.txt` Disallow `/akay` are unchanged.
 
-## Love Studio recovered + opened (2026-09-17)
-
-GitHub `main` after PR #15 (`7e5d4c7`) had **no** `/studio` route and **no** `api/studio.mjs`. Production had been serving a Cursor overlay: SPA lazy-loaded `/assets/Studio-D-qPq3xL.js` at `/studio`, with `/api/studio?action=…` and a **PRIVATE PILOT / Team access key / Enter the studio →** gate (`That team access key is not valid.`). That overlay is not on GitHub `main`.
-
-This recovery:
-
-- Merges studio-archive snapshots from `studio/3e37f0f7-61ba-4511-a932-81d4556d2726` (Royal Temple `3e37f0f7-…`) plus Emerald Noir (`f5e8e703-…` from tag `studio-archive/f5e8e703-…/80643e9`).
-- Reconstructs open-access Love Studio (`src/Studio.tsx`, `api/studio.mjs`) from the live bundle + prod schema (`studio_projects` / `studio_versions` / `studio_publications`, RPCs already on `qqvcptjkfcjkwbkookcm`). **Do not re-apply `supabase/004_studio.sql`.**
-- Removes the team-access-key gate: `GET ?action=config` always `{authenticated:true}`; `POST ?action=login` is a no-op 200. Canvas picker is the first screen. `/akay` 1414 is unchanged (`server/akay-gate.mjs`).
-- Reserves slug `studio` so `/api/guest-page` skips and the SPA mounts. Published studio guests render snapshot HTML via `StudioGuest`; manage shows **Open Love Studio**.
-
 ## Backlog
 
 - Forgot password / email reset (explicitly deferred 2026-09-16).
