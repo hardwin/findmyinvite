@@ -2,10 +2,6 @@
   "framework": "vite",
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "proxy": {
-    "entrypoint": "middleware.js",
-    "matcher": "/:slug"
-  },
   "functions": {
     "api/guest-page.mjs": {
       "includeFiles": "dist/index.html"
