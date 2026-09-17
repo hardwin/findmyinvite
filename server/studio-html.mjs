@@ -79,7 +79,7 @@ export function applyStudioMessage(data,message,section){
  const next={...data,sections:{...data.sections},timeline:[...(data.timeline||[])],preEvents:[...(data.preEvents||[])],photos:[...(data.photos||[])]};
  const text=String(message||'').trim();
  const notes=[];
- const names=text.match(/(?:names?|we)(?:\s+are|\s+is|:)\s+([^&\n,]+)(?:\s*(?:and|&)\s+([^.!\n,]+))?/i);
+ const names=text.match(/(?:names?|we)(?:\s+are|\s+is|:)\s+([^&\n,]+?)\s+(?:and|&)\s+([^.!\n,]+)/i);
  if(names){
   next.groom=names[1].trim().slice(0,100);
   if(names[2])next.bride=names[2].trim().slice(0,100);

@@ -175,7 +175,8 @@ export default function Studio(){
     if(value.done){
      setDraft(value);
      setStatus('Your preview is up to date');
-     if(value.message)setMessages(list=>[...list,{role:'assistant',text:value.message}]);
+     const reply=value.message;
+     if(reply)setMessages(list=>[...list,{role:'assistant',text:reply}]);
      setDirty(false);
      return;
     }
