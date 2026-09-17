@@ -1,0 +1,269 @@
+{
+  "source": "https://www.dreamsinvite.com/akshar-weds-priya",
+  "assets": [
+    {
+      "source": "https://www.dreamsinvite.com/_next/static/media/leaf.0cz-7-hb3q95h.png?dpl=dpl_7YWXWjHxeMUwBg6kAKhwPP4WB9Zm",
+      "file": "7f83c6d8c3935816.png",
+      "sha256": "357df3b1d130ab2c3a22ae5033bca8bed136fa3bff0308e2453e8a3c1fa6a712",
+      "local": "/assets/royal-sanctuary/7f83c6d8c3935816.png"
+    },
+    {
+      "source": "https://www.dreamsinvite.com/templates/wedding/akshar-weds-priya/preview-image.jpg",
+      "file": "0746f651bbbdcaf6.jpg",
+      "sha256": "e08a79a16c724c0f792998b64c2d6308306df55be89d5f73f4f5f85d754d94de",
+      "local": "/assets/royal-sanctuary/0746f651bbbdcaf6.jpg"
+    },
+    {
+      "source": "https://www.dreamsinvite.com/templates/wedding/nitin-weds-rita/flower-3.png",
+      "file": "70a5086831bf8fed.png",
+      "sha256": "d9cbe086c230df07c7e5514e90ff4416e51ecffc50a334976736757b89ff86ea",
+      "local": "/assets/royal-sanctuary/70a5086831bf8fed.png"
+    },
+    {
+      "source": "https://www.dreamsinvite.com/templates/wedding/akshar-weds-priya/groom.jpg",
+      "file": "e056ef0295a9f521.jpg",
+      "sha256": "1314b0599c980bc7ba9775ad45d7213916e1a4fe4f48d463ffbeb583dd423446",
+      "local": "/assets/royal-sanctuary/e056ef0295a9f521.jpg"
+    },
+    {
+      "source": "https://www.dreamsinvite.com/templates/wedding/akshar-weds-priya/bride.jpg",
+      "file": "6f1b7a62e09fbd9b.jpg",
+      "sha256": "5613428e53221252ef67493455f48997e26b859a80b9ab21b15f69b61aa23d8f",
+      "local": "/assets/royal-sanctuary/6f1b7a62e09fbd9b.jpg"
+    },
+    {
+      "source": "https://www.dreamsinvite.com/templates/wedding/akshar-weds-priya/bell.png",
+      "file": "b9bada2de88b955c.png",
+      "sha256": "09238d798ee28c2cc90f7fa8a5701453fb94786e8d776b53a5172469061affe3",
+      "local": "/assets/royal-sanctuary/b9bada2de88b955c.png"
+    },
+    {
+      "source": "https://www.dreamsinvite.com/templates/wedding/akshar-weds-priya/round-mondal.png",
+      "file": "794c335338c62a09.png",
+      "sha256": "809f221e393b2baa51bd6c1e6dd3deb240eb1b65e0ae466436ef7d395ea2bd30",
+      "local": "/assets/royal-sanctuary/794c335338c62a09.png"
+    },
+    {
+      "source": "https://www.dreamsinvite.com/templates/wedding/akshar-weds-priya/couple-1.png",
+      "file": "248db91646970ab8.png",
+      "sha256": "9e1db5e7cbcbebb223435ce10c40c941ac3c59387fa1cf9f1e582631b9adc63f",
+      "local": "/assets/royal-sanctuary/248db91646970ab8.png"
+    },
+    {
+      "source": "https://www.dreamsinvite.com/templates/wedding/akshar-weds-priya/bottom-temple.png",
+      "file": "8a62648d8ac34a8e.png",
+      "sha256": "1717f540b853d056c1156896ce70e01f3e6c02e5a312065e4cb1b178189e2def",
+      "local": "/assets/royal-sanctuary/8a62648d8ac34a8e.png"
+    },
+    {
+      "source": "https://www.dreamsinvite.com/templates/wedding/akshar-weds-priya/center-diya.png",
+      "file": "b109c420caf71448.png",
+      "sha256": "3e7228030591e3226ca4b1c817d2a542d442c3cd9cf61279e6957630b1a0119f",
+      "local": "/assets/royal-sanctuary/b109c420caf71448.png"
+    },
+    {
+      "source": "https://www.dreamsinvite.com/templates/wedding/akshar-weds-priya/diya.png",
+      "file": "1f7828b010641502.png",
+      "sha256": "7a49ae127b95e85811caee51ca01a29679245ea9b03239589846c2ccb85f10b1",
+      "local": "/assets/royal-sanctuary/1f7828b010641502.png"
+    },
+    {
+      "source": "https://www.dreamsinvite.com/templates/wedding/akshar-weds-priya/wedding-bg.png",
+      "file": "736d04684675c914.png",
+      "sha256": "ba1ceedd14fdac51501bbea1137a79db07e1ae4e94c350a1aa5012038df6936d",
+      "local": "/assets/royal-sanctuary/736d04684675c914.png"
+    },
+    {
+      "source": "https://www.dreamsinvite.com/templates/wedding/akshar-weds-priya/ring-bg.png",
+      "file": "8b88e66c9959f69f.png",
+      "sha256": "3b9ee978b6b42644d34d67fa25359339598c97d74db7d3f951f035ab74ef7f67",
+      "local": "/assets/royal-sanctuary/8b88e66c9959f69f.png"
+    },
+    {
+      "source": "https://www.dreamsinvite.com/templates/wedding/akshar-weds-priya/elephent.png",
+      "file": "781e11a0c42846f3.png",
+      "sha256": "3642c8e1d5caac9d84484fb34fd63d7c4a28fb296dee1af71d72a4d3a437e203",
+      "local": "/assets/royal-sanctuary/781e11a0c42846f3.png"
+    },
+    {
+      "source": "https://www.dreamsinvite.com/templates/wedding/akshar-weds-priya/couple-2.png",
+      "file": "114a52820de82cdc.png",
+      "sha256": "9abb1297c7405548d7da28d369ab4ce1b341db46deb40495a306f57528b5f94d",
+      "local": "/assets/royal-sanctuary/114a52820de82cdc.png"
+    },
+    {
+      "source": "https://www.dreamsinvite.com/templates/wedding/akshar-weds-priya/temple-flower-urn.png",
+      "file": "ef9d9869311ceb31.png",
+      "sha256": "cf9bef2c71268bb734b93243efe3def127c072e20cdf78b00a89118b6329f49b",
+      "local": "/assets/royal-sanctuary/ef9d9869311ceb31.png"
+    },
+    {
+      "source": "https://www.dreamsinvite.com/templates/wedding/akshar-weds-priya/temple-gift-chest.png",
+      "file": "fc09d5363a27b0d0.png",
+      "sha256": "2b29ad610dd7473e824f01483bc5be07bedcd117ccee06c76da43baac9c79a3f",
+      "local": "/assets/royal-sanctuary/fc09d5363a27b0d0.png"
+    },
+    {
+      "source": "https://www.dreamsinvite.com/templates/wedding/akshar-weds-priya/temple-sacred-kalash.png",
+      "file": "429b35eee6806036.png",
+      "sha256": "d18408e2d8477eec6f4e1254c986d96ea7da5647e0a22d017e6267218c5f3add",
+      "local": "/assets/royal-sanctuary/429b35eee6806036.png"
+    },
+    {
+      "source": "https://www.dreamsinvite.com/templates/wedding/akshar-weds-priya/reception-bg.png",
+      "file": "4083fec16c37be30.png",
+      "sha256": "fd5e03dbf44afc700718050dad48ba02db897c82fce655c3bcb49ac9af9faf31",
+      "local": "/assets/royal-sanctuary/4083fec16c37be30.png"
+    },
+    {
+      "source": "https://www.dreamsinvite.com/templates/wedding/akshar-weds-priya/story-luxury-bg.jpg",
+      "file": "d262e57cd01f16f6.jpg",
+      "sha256": "4d438936bb1a95c0f40d7094bd551e6ad87720d6c21cf0750e7ad5f56da89a73",
+      "local": "/assets/royal-sanctuary/d262e57cd01f16f6.jpg"
+    },
+    {
+      "source": "https://www.dreamsinvite.com/_next/static/media/temple-bg.15oulsz4uecu-.png?dpl=dpl_7YWXWjHxeMUwBg6kAKhwPP4WB9Zm",
+      "file": "6c313182b4e356d4.png",
+      "sha256": "9c49ad0e166164dba90f12d7bd4e91e50b2dc33aa8845fd5202f5d48fe6e3108",
+      "local": "/assets/royal-sanctuary/6c313182b4e356d4.png"
+    },
+    {
+      "source": "https://www.dreamsinvite.com/templates/wedding/akshar-weds-priya/pankh.png",
+      "file": "70ee37e3ea529861.png",
+      "sha256": "736454cc4c99a05f08563e4aadf6144c6b660209b15f17e3b1fb32179c7b62b1",
+      "local": "/assets/royal-sanctuary/70ee37e3ea529861.png"
+    },
+    {
+      "source": "https://www.dreamsinvite.com/templates/wedding/akshar-weds-priya/registry-temple-bg.jpg",
+      "file": "1851360a9a964184.jpg",
+      "sha256": "3bab6e08521365e46c6eb60fbdcf34cd68b63bbf4b4c688890e0e699d1f4e97f",
+      "local": "/assets/royal-sanctuary/1851360a9a964184.jpg"
+    },
+    {
+      "source": "https://www.dreamsinvite.com/templates/wedding/nitin-weds-rita/flower-1.png",
+      "file": "7e38939159649f42.png",
+      "sha256": "f1b6cbf020a8827109f48546d0f9ccaab807b25ca75b70bd8f0779857b9bfc62",
+      "local": "/assets/royal-sanctuary/7e38939159649f42.png"
+    },
+    {
+      "source": "https://www.dreamsinvite.com/templates/wedding/akshar-weds-priya/eliment.png",
+      "file": "3ae8d67b937c098e.png",
+      "sha256": "54e6f0ebf3670655e117528cc29d7d57f841ff6a1c9967bc3cb74e5e9792590c",
+      "local": "/assets/royal-sanctuary/3ae8d67b937c098e.png"
+    },
+    {
+      "source": "https://www.dreamsinvite.com/templates/wedding/akshar-weds-priya/top-2.png",
+      "file": "c7aa541e1dc7fd9b.png",
+      "sha256": "ae20028d7dfbd89501b57d81483167de89c8f24ff9d2dc5edc41a28d35454897",
+      "local": "/assets/royal-sanctuary/c7aa541e1dc7fd9b.png"
+    },
+    {
+      "source": "https://www.dreamsinvite.com/templates/wedding/akshar-weds-priya/temple.png",
+      "file": "933d03bbc866d8d7.png",
+      "sha256": "9284526e6b11a0a823886ed9af5679e688d0f459d551d1f9add69eba9b3d39c4",
+      "local": "/assets/royal-sanctuary/933d03bbc866d8d7.png"
+    },
+    {
+      "source": "https://www.dreamsinvite.com/templates/wedding/nitin-weds-rita/flower-2.png",
+      "file": "35fd2b9e37dd8330.png",
+      "sha256": "529e0bfe09176ed5eec462505a18a578342ff3e31d7a26958c0ebc246e5f0307",
+      "local": "/assets/royal-sanctuary/35fd2b9e37dd8330.png"
+    },
+    {
+      "source": "https://www.dreamsinvite.com/templates/wedding/akshar-weds-priya/gallery-luxury-bg.jpg",
+      "file": "5317906f46b6eeda.jpg",
+      "sha256": "5678033eacb78b7c44d7b17beacfc435b8891410e396fe684367a84dd800cf6d",
+      "local": "/assets/royal-sanctuary/5317906f46b6eeda.jpg"
+    },
+    {
+      "source": "https://www.dreamsinvite.com/_next/static/media/01e4147cff8141ee-s.p.10ked.7w885.g.woff2?dpl=dpl_7YWXWjHxeMUwBg6kAKhwPP4WB9Zm",
+      "local": "/assets/fonts/royal-sanctuary-72e0a877ae7f7070.woff2",
+      "sha256": "5d618c462b7a5b74f442e1548880086af71764d9cc7d35c16ab45353da934621"
+    },
+    {
+      "source": "https://www.dreamsinvite.com/_next/static/media/2a65768255d6b625-s.p.14by5b4al-y~f.woff2?dpl=dpl_7YWXWjHxeMUwBg6kAKhwPP4WB9Zm",
+      "local": "/assets/fonts/royal-sanctuary-5e3a40e528a22c9c.woff2",
+      "sha256": "5d91eb5d522a03081946c44c8ca17c902230dfed5f0f9b5014262135d47b15b2"
+    },
+    {
+      "source": "https://www.dreamsinvite.com/_next/static/media/47fe1b7cd6e6ed85-s.p.0~mcdl10zdfb3.woff2?dpl=dpl_7YWXWjHxeMUwBg6kAKhwPP4WB9Zm",
+      "local": "/assets/fonts/royal-sanctuary-44a5fe5267fa2a52.woff2",
+      "sha256": "197a3cbd7290c242c5c765268cdd69a9a39867fdc80cd13071f243a81c56fb76"
+    },
+    {
+      "source": "https://www.dreamsinvite.com/_next/static/media/70e3db2de7f94926-s.p.0~0iy9faq3424.woff2?dpl=dpl_7YWXWjHxeMUwBg6kAKhwPP4WB9Zm",
+      "local": "/assets/fonts/royal-sanctuary-085c136fbe9b25cc.woff2",
+      "sha256": "c68530044e7c4ce6cd3c1c239d0a93be71af53821574714f83e1380d8b393d14"
+    },
+    {
+      "source": "https://www.dreamsinvite.com/_next/static/media/8bd76523131fa0fc-s.p.0jox806dnq5~c.woff2?dpl=dpl_7YWXWjHxeMUwBg6kAKhwPP4WB9Zm",
+      "local": "/assets/fonts/royal-sanctuary-5a95fdd3c85103a6.woff2",
+      "sha256": "e6d6d1d73858aa9b66f3a3539f9dec22faab2276e61ad1d813bc04dd59c9c122"
+    },
+    {
+      "source": "https://www.dreamsinvite.com/_next/static/media/8e6fa89aa22d24ec-s.p.0uvzar8hswo3p.woff2?dpl=dpl_7YWXWjHxeMUwBg6kAKhwPP4WB9Zm",
+      "local": "/assets/fonts/royal-sanctuary-f79133a9357c44f1.woff2",
+      "sha256": "289e0afc8be731a86822349e54557296f145926496bd2138db1bac0db77f77a2"
+    },
+    {
+      "source": "https://www.dreamsinvite.com/_next/static/media/a218039a3287bcfd-s.p.17-1enzs_j91b.woff2?dpl=dpl_7YWXWjHxeMUwBg6kAKhwPP4WB9Zm",
+      "local": "/assets/fonts/royal-sanctuary-22d8121b1ea68305.woff2",
+      "sha256": "3dc5d0c52428fe1696264907a1054ebbaac07f8cbe45832c105f819c2ae397c0"
+    },
+    {
+      "source": "https://www.dreamsinvite.com/_next/static/media/c875c6f5d3e977ac-s.p.0g_ng0t~d_b9n.woff2?dpl=dpl_7YWXWjHxeMUwBg6kAKhwPP4WB9Zm",
+      "local": "/assets/fonts/royal-sanctuary-86e1636d2c99d8e7.woff2",
+      "sha256": "643e38d8c288a1da34a14a68a5012441929108d50054414ce8cc33fad36a2354"
+    },
+    {
+      "source": "https://www.dreamsinvite.com/_next/static/media/cc014fcb166cf364-s.p.0rbrcy8kuidpb.woff2?dpl=dpl_7YWXWjHxeMUwBg6kAKhwPP4WB9Zm",
+      "local": "/assets/fonts/royal-sanctuary-00f615968e80ee7d.woff2",
+      "sha256": "ef95296c778719c3d658a8284d65078100450948851b9114485ada01d9d3d3f8"
+    },
+    {
+      "source": "https://www.dreamsinvite.com/_next/static/media/e2334d715941921e-s.p.12skym0rqknxy.woff2?dpl=dpl_7YWXWjHxeMUwBg6kAKhwPP4WB9Zm",
+      "local": "/assets/fonts/royal-sanctuary-5889abfb7aa007a4.woff2",
+      "sha256": "872e862918591a9e824dc03ed92f05729435ffbb8ebbb10eff7eda26592b1798"
+    },
+    {
+      "source": "https://www.dreamsinvite.com/templates/wedding/advait-weds-ishani/couple-1.png",
+      "local": "/assets/royal-sanctuary/dd7ba39d6b68d440.png",
+      "sha256": "90e090768a60106c1337d5e40f6fc43cb1d81632dd0876010d0bf93aab7f6b95"
+    },
+    {
+      "source": "https://www.dreamsinvite.com/templates/wedding/advait-weds-ishani/couple-2.png",
+      "local": "/assets/royal-sanctuary/8e6a74a9039fab67.png",
+      "sha256": "681b1adeb69bd3f8ba7119f2505256cb245e2e3cc2ecd860ded2753052d6bac4"
+    },
+    {
+      "source": "https://www.dreamsinvite.com/templates/wedding/advait-weds-ishani/couple-3.png",
+      "local": "/assets/royal-sanctuary/9f39e4b06877c36a.png",
+      "sha256": "fb0b6af369ec9d91512fc3fddacfbaf000c0b1398680fb755f5bac2d4c1ee417"
+    },
+    {
+      "source": "https://res.cloudinary.com/dlmuywxpn/video/upload/q_auto/f_auto/v1779790720/Green_White_Floral_Traditional_Indian_Wedding_Invitation_Mobile_Video_2_tmsmb6.mp4",
+      "local": "/assets/royal-sanctuary/d5471ef0bcaa126a.webm",
+      "sha256": "180fc256d3e135fde68b5178ff702f381499e285417cbe2f7eb264c6b7bc19c5"
+    },
+    {
+      "source": "User supplied original template-hero_jkhh3t.webm",
+      "local": "/assets/royal-sanctuary/hero.webm",
+      "sha256": "383da0535dda183e7dd96860a74a913cef102a96ff7566065a72557999a3268d"
+    },
+    {
+      "source": "User supplied original temple_intro_ltitzq.webm",
+      "local": "/assets/royal-sanctuary/opening.webm",
+      "sha256": "65c50b58559f4d57c91b2ea224cebc5142363b2860f8f2ef09e4fdc57bfa5cae"
+    },
+    {
+      "source": "https://www.dreamsinvite.com/templates/wedding/advait-weds-ishani/couple-4.png",
+      "local": "/assets/royal-sanctuary/c2c8899ba86596dd.png",
+      "sha256": "d05a644e593275f2ad2ff84ddb870c6e64266c97f0ced7c585a6500d45a532ab"
+    },
+    {
+      "source": "https://www.dreamsinvite.com/templates/wedding/advait-weds-ishani/couple-5.png",
+      "local": "/assets/royal-sanctuary/7a990971260c926f.png",
+      "sha256": "2cd66fb916a1eeae75ffd38ec29973cd5b39a1d6faded1ffda6364c24515cc10"
+    }
+  ]
+}

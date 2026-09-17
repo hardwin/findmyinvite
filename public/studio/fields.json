@@ -93,6 +93,11 @@
       "name": "Royal Heritage Wedding",
       "tier": "royal",
       "renderer": "html-v1"
+    },
+    "royal-sanctuary": {
+      "name": "Royal Sanctuary",
+      "tier": "royal",
+      "renderer": "html-v1"
     }
   }
 }
