@@ -24,7 +24,7 @@ export async function readAgent(id,revision){
  const [session,turns]=await Promise.all([api.beta.agents.sessions.retrieve(id),api.beta.agents.sessions.turns.list(id,{limit:1,order:'desc'})]);const turn=turns.data[0];
  if(turn?.status==='failed'||session.status==='failed')throw new HttpError(502,'The coding agent could not finish. Your last working version is safe.');
  if(turn?.status==='cancelled')return {done:true,cancelled:true,usage:session.usage};
- if(turn?.status!=='completed')return {done:false,status:session.environment?.status==='connected'?'Editing and checking your invitation…':'Preparing a private workspace…'};
+ if(turn?.status!=='completed')return {done:false,status:'Editing and checking your invitation…'};
  const artifacts=await api.beta.agents.sessions.artifacts.list(id,{limit:100});const artifact=artifacts.data.find(x=>x.path===(revision===undefined?'/workspace/outputs/result.json':`/workspace/outputs/result-${revision}.json`));
  if(!artifact&&revision!==undefined)return {done:false,status:'Editing your invitation…'};
  if(!artifact||artifact.size_bytes>500000)throw new HttpError(502,'The agent did not produce a valid preview. Your draft is unchanged.');

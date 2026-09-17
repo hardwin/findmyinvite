@@ -1,3 +1,5 @@
+> Current performance architecture: see [Reusable Studio workspace](WORKSPACE-PERFORMANCE.md). This supersedes the create-per-edit model and Git checkpoint behavior described in the original handoff below.
+
 > Access update: the owner requested removal of the shared team-key gate. Studio now opens directly. Draft capability tokens, revisions, sandbox validation and existing agent quotas remain enforced. References below to team-only access describe the earlier pilot. Removing the gate does not bypass network filtering of API requests.
 
 # Love Studio — production pilot handoff

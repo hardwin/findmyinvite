@@ -43,3 +43,17 @@ Live preview measurements before disabling reasoning: first name edit 40.3s,
 second name edit 22.3s in the same retained workspace. Both saved and rendered
 correctly. These do not meet the target. The final configuration also instructs
 field-only edits to use one shell command, including export.
+
+Final preview benchmark (17 September 2026), Royal Temple, reasoning disabled:
+first warm edit **27.4s**, second edit in the same workspace **23.1s**, measured
+from Send to the saved response in the browser. Both names appeared in the preview.
+The 5–10s acceptance target remains unmet; do not market these edits as instant.
+Next work should instrument provider execution and artifact retrieval separately
+before changing infrastructure or increasing spending. SSE is not implemented.
+
+Validation: production build and 98 server tests pass. Tests cover reuse, expired
+workspaces, stale revisions, ownership, cancellation and releasing leases before
+responses. Live browser checks confirmed both templates edit and preserve changes.
+Git changes were delivered through the authenticated GitHub connector because
+this session blocks command-line network access; the local checkout retains the
+same file changes but cannot fetch the remote commits under those restrictions.
