@@ -28,6 +28,14 @@ FMI ID: `royal-heritage-wedding`, collection Royal. It is distinct from the olde
 
 ## Verification record
 
-Local production build passed. Existing server tests and the two focused import tests passed before final deployment work. Desktop opening/reveal and recovered artwork were inspected in the built preview. Production and final interaction results should be read alongside the delivery message; do not infer unrecorded test coverage from successful compilation.
+- Production deployment of commit `9effb86` was Ready on Vercel; catalogue DML was executed and its published Royal row verified.
+- All 108 server tests passed. Final TypeScript/Vite production build passed; focused import tests passed again after the wording fix.
+- At 390 x 844, opening, hero, countdown and about presentation were inspected locally; document width matched viewport width.
+- At 1440 x 900, the production published hero showed edited names/heading with zero broken images and no document horizontal overflow.
+- Live catalogue -> Form -> change names/message -> Editor -> change heading -> Form retained the same draft and values. A timeline title was changed; reloading preserved all edits.
+- Published synthetic sample: https://findmyinvite.com/royal-heritage-demo-2026. The public page displayed Aarav/Meera, custom heading/message and Welcome drinks event.
+- Submitted one synthetic RSVP (`FMI Template QA`); success appeared and host management showed one attending guest and the test message.
+- Original music playback is not available. Calendar file import into an external calendar, device-native sharing and a complete regression sweep of unrelated designs were not performed.
+- A follow-up bridge fix preserves explicitly editable countdown headings while excluding the gallery status counter from editing in newly created drafts.
 
 See `../TEMPLATE-IMPORT-WORKFLOW.md` for the full architecture, exact registration checklist, deployment process and acceptance checks.
