@@ -3,11 +3,11 @@ import {randomUUID} from 'node:crypto';
 import {isDeepStrictEqual} from 'node:util';
 import {db,HttpError,bodyJson,respond,fail,method,bearer,tokenHash,verifyToken,rate,slugValue,validateData,promotion,invitation} from '../server/core.mjs';
 import {sameOrigin} from '../server/studio-auth.mjs';
-import {PILOT_TEMPLATES,EDITOR_TEMPLATES,SECTIONS,draftData,validateTemplate,genericCode} from '../server/studio-policy.mjs';
+import {PILOT_TEMPLATES,HTML_TEMPLATES,EDITOR_TEMPLATES,SECTIONS,draftData,validateTemplate,genericCode} from '../server/studio-policy.mjs';
 import {prepareAgent,continueAgent,workspaceReady,readAgent,stopAgent,closeAgent} from '../server/studio-agent.mjs';
 import {checkpointCode,archiveBranch} from '../server/studio-git.mjs';
 const uuid=/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/;
-const baseline=id=>PILOT_TEMPLATES.includes(id)?readFile(new URL(`../public/studio/templates/${id}.html`,import.meta.url),'utf8'):Promise.resolve('<html><head></head><body>'+SECTIONS.map(section=>'<section data-section="'+section+'"></section>').join('')+['bride','groom','date','venue'].map(field=>'<span data-field="'+field+'"></span>').join('')+'</body></html>');
+const baseline=id=>HTML_TEMPLATES.includes(id)?readFile(new URL(`../public/studio/templates/${id}.html`,import.meta.url),'utf8'):Promise.resolve('<html><head></head><body>'+SECTIONS.map(section=>'<section data-section="'+section+'"></section>').join('')+['bride','groom','date','venue'].map(field=>'<span data-field="'+field+'"></span>').join('')+'</body></html>');
 const view=p=>({id:p.id,template:p.template_id,data:p.data,html:p.html,revision:p.revision,gitSha:p.git_sha,busy:Boolean(p.session_id),workspacePrepared:Boolean(p.workspace_id&&p.workspace_revision===p.revision),publishedSlug:p.published_slug});
 async function project(req,id){if(!uuid.test(id||''))throw new HttpError(400,'Invalid draft.');const rows=await db('studio_projects?id=eq.'+id+'&select=*&limit=1');if(!rows[0])throw new HttpError(404,'Draft not found.');verifyToken(bearer(req),rows[0].owner_hash);return rows[0];}
 async function update(p,body){const rows=await db('studio_projects?id=eq.'+p.id+'&lock_until=eq.'+encodeURIComponent(p.lock_until)+'&lock_until=gt.'+encodeURIComponent(new Date().toISOString()),{method:'PATCH',headers:{Prefer:'return=representation'},body});if(!rows[0])throw new HttpError(409,'This operation expired. Reload the latest draft.');return rows[0];}
