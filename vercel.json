@@ -4,10 +4,16 @@
   "outputDirectory": "dist",
   "proxy": {
     "entrypoint": "middleware.js",
-    "matcher": ["/((?!templates$|create$|dashboard$|login$|signup$|forgot-password$|about$|contact$|blog$|terms$|privacy-policy$|refund-policy$|shipping-policy$|akay$|grand-launch$|api$|assets$|manage$|invite$|gallery$|edit$|checkout$|demo$|admin$|reviews$|affiliate$|reset-password$|privacy$|refund$|shipping$|www$|review$)[a-z0-9][a-z0-9-]{2,47})"]
+    "matcher": "/:slug"
+  },
+  "functions": {
+    "api/guest-page.mjs": {
+      "includeFiles": "dist/index.html"
+    }
   },
   "rewrites": [
     {"source":"/:slug","has":[{"type":"header","key":"user-agent","value":"(?i).*(WhatsApp|facebookexternalhit|Facebot|Twitterbot|Slackbot|TelegramBot|LinkedInBot|Discordbot|Pinterest|SkypeUriPreview|Iframely|redditbot|Embedly).*"}],"destination":"/api/share?slug=:slug"},
+    {"source":"/:slug([a-z0-9][a-z0-9-]{2,47})","destination":"/api/guest-page?slug=:slug"},
     {"source":"/((?!api/|assets/|review/|robots\\.txt$|sitemap\\.xml$).*)","destination":"/index.html"}
   ],
   "headers": [
