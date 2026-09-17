@@ -1,5 +1,5 @@
 import {escapeHtml,STOREFRONT_STILL} from './share-card.mjs';
-import {occasionBySlug,relatedLabel,templatesHref} from './occasion-landings.mjs';
+import {ctaHref,demoHref,occasionBySlug,relatedLabel,templatesHref} from './occasion-landings.mjs';
 export const CANONICAL_ORIGIN='https://findmyinvite.com';
 export const PAGE_HEADER='x-fmi-invitation-page';
 const slugPattern=/^[a-z0-9](?:[a-z0-9-]{1,46}[a-z0-9])?$/;
@@ -36,7 +36,7 @@ export function invitationPageHtml(page){
 <p class="tier">FindMyInvite ${escapeHtml(page.tier==='royal'?'Royal':'Classic')}</p>
 <h1>${h1}</h1>
 <p>${escapeHtml(page.hero)}</p>
-<p><a class="cta" href="${escapeHtml(templatesHref(page.tier))}">${cta}</a><a class="cta outline" href="/invite/demo?template=${page.tier==='royal'?'royal-prestige':'emerald-noir'}&type=wedding">View live demo</a></p>
+<p><a class="cta" href="${escapeHtml(ctaHref(page))}">${cta}</a><a class="cta outline" href="${escapeHtml(demoHref(page))}">View live demo</a></p>
 <p>Personalise, preview, and share the public link on WhatsApp. Guests open it with no account.</p>
 <section><h2>What a ${escapeHtml(page.name)} invitation webpage includes</h2><p>${escapeHtml(page.includes)}</p></section>
 <section><h2>Who this ${escapeHtml(page.name)} invitation is for</h2><p>${escapeHtml(page.who)}</p></section>
@@ -44,7 +44,7 @@ export function invitationPageHtml(page){
 <div class="switch"><p>${escapeHtml(page.switchCopy)}</p><p><a class="cta outline" href="${escapeHtml(templatesHref(other))}">Browse ${other==='royal'?'Royal':'Classic'} templates</a></p></div></section>
 <section class="related"><h2>Keep planning the wedding</h2><p>${related}</p></section>
 <section><h2>Frequently asked questions</h2>${faqs}</section>
-<section><h2>${cta}</h2><p>Start from ${page.tier==='royal'?'Royal':'Classic'} templates, then switch collections if you want a different look — without a second landing URL.</p><p><a class="cta" href="${escapeHtml(templatesHref(page.tier))}">${cta}</a></p></section>
+<section><h2>${cta}</h2><p>${page.templateId?'Start from this live FindMyInvite template, then switch collections if you want a different look — without a second landing URL.':'Start from '+(page.tier==='royal'?'Royal':'Classic')+' templates, then switch collections if you want a different look — without a second landing URL.'}</p><p><a class="cta" href="${escapeHtml(ctaHref(page))}">${cta}</a></p></section>
 </main>
 <footer><p><a href="/">FindMyInvite home</a> · <a href="/templates">Invitation templates</a></p></footer>
 </body></html>`;
