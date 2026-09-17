@@ -94,6 +94,7 @@ async function harness(t, changes, run, controls={}) {
     if(parsed.pathname.endsWith('/studio_versions'))return json([]);
     assert.ok(parsed.pathname.endsWith('/studio_projects'));
     if(method==='GET')return json([row]);
+    if(method==='POST'){row={...row,...body};return json([row]);}
     assert.equal(method,'PATCH');
     if(parsed.searchParams.has('or')) {
       if(controls.lockBusy)return json([]);
@@ -288,4 +289,21 @@ test('catalogue Form and Editor save the same native draft without an AI workspa
   assert.equal((await request('prepare')).code,400);
   assert.ok(!calls.some(c=>c.url.hostname==='api.openai.com'));
  });
+});
+
+
+test('catalogue creation uses bounded lightweight limits and never starts AI',async t=>{
+ await harness(t,{},async({request,calls})=>{
+  const result=await request('create',{template:'rose-gold-blush-royal',token,data:original().data});
+  assert.equal(result.code,201);assert.equal(result.body.template,'rose-gold-blush-royal');
+  const limits=calls.filter(c=>c.url.pathname.endsWith('/consume_rate_limit')).map(c=>[c.body.p_limit,c.body.p_seconds]);
+  assert.deepEqual(limits,[[6,60],[30,3600]]);assert.ok(!calls.some(c=>c.url.hostname==='api.openai.com'));
+ });
+});
+test('creation throttling returns recovery guidance without creating a draft',async t=>{
+ await harness(t,{},async({request,calls})=>{
+  const result=await request('create',{template:'rose-gold-blush-royal',token,data:original().data});
+  assert.equal(result.code,429);assert.equal(result.headers['Retry-After'],'60');assert.match(result.body.error,/reopen your saved drafts/);
+  assert.ok(!calls.some(c=>c.url.pathname.endsWith('/studio_projects')&&c.method==='POST'));
+ },{rateLimited:true});
 });
