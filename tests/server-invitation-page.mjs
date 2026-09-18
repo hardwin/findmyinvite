@@ -84,13 +84,15 @@ test('Vercel rewrites invitations to invitation-page HTML and never through gues
  assert.equal(vercel.proxy,undefined);
  assert.equal(JSON.stringify(vercel).includes('middleware'),false);
  await assert.rejects(()=>access(new URL('../middleware.js',import.meta.url)));
- const destinations=vercel.rewrites.map(rule=>rule.destination);
+ const routes=vercel.rewrites.filter(rule=>rule.source!=='/assets/workspace/:id');
+ assert.equal(vercel.rewrites.find(rule=>rule.source==='/assets/workspace/:id')?.destination,'/api/workspace?action=asset&id=:id');
+ const destinations=routes.map(rule=>rule.destination);
  assert.equal(destinations[0],'/api/share?slug=:slug');
  assert.equal(destinations[1],'/api/guest-page?slug=:slug');
- assert.equal(vercel.rewrites[1].source,'/:slug([a-z0-9][a-z0-9-]{2,47})');
+ assert.equal(routes[1].source,'/:slug([a-z0-9][a-z0-9-]{2,47})');
  assert.equal(destinations[2],'/api/invitation-page');
  assert.equal(destinations[3],'/api/invitation-page?slug=:slug');
- assert.equal(vercel.rewrites[3].source,'/invitations/:slug');
+ assert.equal(routes[3].source,'/invitations/:slug');
  assert.equal(destinations[4],'/index.html');
  const spa=vercel.rewrites.find(rule=>rule.destination==='/index.html');
  const spaPattern=new RegExp(`^${spa.source}$`);
