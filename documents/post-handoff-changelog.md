@@ -111,6 +111,10 @@ Prod baseline at this pass: 22 proposed / 3 rejected / 0 approved / `replication
 
 13 signed-off catalogue design LPs share the occasion `/invitations/{slug}` server HTML path (`/api/invitation-page`). Copy lives in `server/design-landings.mjs` and is merged into `occasionBySlug` so SPA `OccasionLanding` stays in sync. Primary CTA uses the existing editor pattern `/create?template={template_catalog id}&type=wedding` (Gallery "Use This Design"), not a collection browse link. SKU mismatches from the brief are wired as-is: Royal Imperial → `rose-gold-blush-royal`, Crimson Royale → `ivory-elegance`, Majestic Love → `royal-elegance`, Royal Elegance → `modern-minimal-royal`. Guest gate `/api/guest-page` and `robots.txt` Disallow `/akay` are unchanged.
 
+## P1 +3 live FMI design landing pages (2026-09-18)
+
+Three more published Royal catalogue LPs use the same `/api/invitation-page` + sitemap path: `/invitations/royal-temple` → `royal-temple`, `/invitations/royal-heritage-wedding` → `royal-heritage-wedding`, `/invitations/royal-sanctuary` → `royal-sanctuary`. `royal-heritage-wedding` is a separate slug and catalog id from existing `/invitations/royal-heritage` (`royal-heritage`). Unknown `/invitations/{slug}` still 404s. Guest `/api/guest-page`, `/akay` gate, and `robots.txt` are unchanged. Total design LPs: 16; sitemap invitation URLs: 37.
+
 ## Backlog
 
 - Forgot password / email reset (explicitly deferred 2026-09-16).

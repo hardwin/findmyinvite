@@ -12,8 +12,8 @@ async function api(url,method='GET'){
 }
 test('known invitation slugs return unique 200 HTML with brief title, H1 and body',async()=>{
  assert.equal(OCCASION_SLUGS.length,21);
- assert.equal(DESIGN_SLUGS.length,13);
- assert.equal(LANDING_SLUGS.length,34);
+ assert.equal(DESIGN_SLUGS.length,16);
+ assert.equal(LANDING_SLUGS.length,37);
  const home='Create Invitation Webpage Online for All Events';
  for(const slug of LANDING_SLUGS){
   const page=occasionBySlug[slug];
@@ -33,7 +33,6 @@ test('known invitation slugs return unique 200 HTML with brief title, H1 and bod
   assert.equal(String(res.body).includes(ctaHref(page).replaceAll('&','&amp;')),true,slug+' cta href');
   assert.equal(String(res.body).includes(home),false,slug);
   assert.equal(String(res.body).includes('vercel.app'),false);
-  assert.equal(String(res.body).includes('Royal Temple'),false,slug);
  }
  const haldi=await api('/invitations/haldi');
  assert.equal(haldi.code,200);
@@ -55,6 +54,27 @@ test('known invitation slugs return unique 200 HTML with brief title, H1 and bod
  assert.match(String(elegance.body),/<h1>Royal Elegance Wedding Invitation<\/h1>/);
  assert.match(String(elegance.body),/\/create\?template=modern-minimal-royal&amp;type=wedding/);
  assert.notEqual(String(elegance.body),String(majestic.body));
+ const temple=await api('/invitations/royal-temple');
+ assert.equal(temple.code,200);
+ assert.match(String(temple.body),/<title>Royal Temple Wedding Invitation \| FindMyInvite<\/title>/);
+ assert.match(String(temple.body),/<h1>Royal Temple Wedding Invitation<\/h1>/);
+ assert.match(String(temple.body),/\/create\?template=royal-temple&amp;type=wedding/);
+ const sanctuary=await api('/invitations/royal-sanctuary');
+ assert.equal(sanctuary.code,200);
+ assert.match(String(sanctuary.body),/<title>Royal Sanctuary Wedding Invitation \| FindMyInvite<\/title>/);
+ assert.match(String(sanctuary.body),/<h1>Royal Sanctuary Wedding Invitation<\/h1>/);
+ assert.match(String(sanctuary.body),/\/create\?template=royal-sanctuary&amp;type=wedding/);
+ const heritage=await api('/invitations/royal-heritage');
+ const heritageWedding=await api('/invitations/royal-heritage-wedding');
+ assert.equal(heritage.code,200);
+ assert.equal(heritageWedding.code,200);
+ assert.match(String(heritage.body),/\/create\?template=royal-heritage&amp;type=wedding/);
+ assert.match(String(heritageWedding.body),/<title>Royal Heritage Wedding Invitation \| FindMyInvite<\/title>/);
+ assert.match(String(heritageWedding.body),/<h1>Royal Heritage Wedding Invitation<\/h1>/);
+ assert.match(String(heritageWedding.body),/\/create\?template=royal-heritage-wedding&amp;type=wedding/);
+ assert.notEqual(String(heritage.body),String(heritageWedding.body));
+ assert.equal(String(heritage.body).includes('/create?template=royal-heritage-wedding&amp;type=wedding'),false);
+ assert.equal(String(heritageWedding.body).includes('distinct from Royal Heritage'),true);
  const nikah=await api('/api/invitation-page?slug=nikah');
  const nikkah=await api('/api/invitation-page?slug=nikkah');
  assert.match(String(nikah.body),/<h1>Nikah Royal Wedding Invitation<\/h1>/);
