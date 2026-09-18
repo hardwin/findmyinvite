@@ -69,8 +69,8 @@ If those Project-store files are missing in a new session, use this changelog + 
 | --- | --- |
 | 1 What is live is the right build | 4/6 PASS — config, 13 templates, GitHub Actions green, Vercel Ready/`6db0d12`. Open: Vercel plan (Pro vs Hobby), Settings → Git Production Branch |
 | 2 Nothing private leaks | PASS 3/3 |
-| 3 Domain, padlock, www | Sent — waiting on Ashok **phone**. Desktop re-check 2026-09-15 21:16 IST below |
-| 4–5 | Written, not started |
+| 3 Domain, padlock, www | **PASS** — Ashok phone, 2026-09-15 ~23:02 IST (mobile data). Desktop re-check below is supporting, not the authority. |
+| 4–5 | Written, not started (offer bounds + catalog; not on the money-path critical path) |
 | 6 Create + publish (`akay-test-1`) | Needs explicit YES — writes real data |
 | 7–15 | Written; Case 14 cleans up `akay-test-1` |
 
@@ -93,7 +93,7 @@ From this Siemens Energy network, public DNS lookups are rewritten to `*.prod.sg
 
 1. Confirm Vercel Billing = **Pro** (P0 — Hobby can pause commercial traffic). MCP still reports Hobby.
 2. Rotate the `service_role` key that was pasted in chat (Supabase → API → Reset).
-3. Finish Case 3+ from the manual; **YES** before Case 6.
+3. **YES** before Case 6 (create + publish `akay-test-1` on live). Case 3 phone PASS recorded 2026-09-15 ~23:02 IST.
 4. Send support email/WhatsApp + business name before contact/policy copy can ship.
 5. **Forgot password** — deferred. Email/password accounts have no reset flow yet.
 
@@ -140,7 +140,7 @@ How: Continue Ashok phone walkthrough from Case 3. On Case 6 YES, use slug `akay
 
 Exit: Case 1 plan = Pro (or Pro upgrade done); Cases 3, 6, 7, 12, 14 PASS; smoke row deleted.
 
-**Status 2026-09-15 session:** Iteration 1 in progress. Case 3 phone confirmation still required. Case 6 blocked on YES. Hobby still reported.
+**Status 2026-09-15 23:02 IST:** Iteration 1 in progress. Case 3 phone **PASS**. Case 6 blocked on YES. Hobby still reported.
 
 ### Iteration 2 — Trust surface (contact + policies)
 
