@@ -6,7 +6,7 @@ import {reserved,slugValue} from '../server/core.mjs';
 import {designPages} from '../server/design-landings.mjs';
 import {ctaHref} from '../server/occasion-landings.mjs';
 const slugs=['anand-karaj','ardas','baraat','biya','biye','garba','haldi','hukamnama','kalyanam','lagan','lagna','maduve','mehndi','muhurtham','nikah','nikkah','pelli','punjabi','sangeet','shaadi','vivah'];
-const designSlugs=['royal-imperial','royal-majesty','royal-elegance','royal-prestige','royal-heritage','royal-grace','royal-crest','royal-legacy','emerald-noir','crimson-royale','rose-gold-blush','modern-minimal','majestic-love'];
+const designSlugs=['royal-imperial','royal-majesty','royal-elegance','royal-prestige','royal-heritage','royal-grace','royal-crest','royal-legacy','royal-temple','royal-heritage-wedding','royal-sanctuary','emerald-noir','crimson-royale','rose-gold-blush','modern-minimal','majestic-love'];
 const skuBySlug={
  'royal-imperial':'rose-gold-blush-royal',
  'royal-majesty':'royal-majesty',
@@ -16,6 +16,9 @@ const skuBySlug={
  'royal-grace':'royal-grace',
  'royal-crest':'royal-crest',
  'royal-legacy':'royal-legacy',
+ 'royal-temple':'royal-temple',
+ 'royal-heritage-wedding':'royal-heritage-wedding',
+ 'royal-sanctuary':'royal-sanctuary',
  'emerald-noir':'emerald-noir',
  'crimson-royale':'ivory-elegance',
  'rose-gold-blush':'rose-gold-blush',
@@ -42,7 +45,7 @@ test('21 P1 occasion LPs live under /invitations/{slug}, not apex guest paths',a
  assert.equal(pages.includes('monthly searches'),false);
  assert.equal(pages.includes('search volume'),false);
  assert.equal(sitemap.includes('vercel.app'),false);
- assert.equal([...sitemap.matchAll(/https:\/\/findmyinvite.com\/invitations\/[a-z0-9-]+/g)].length,34);
+ assert.equal([...sitemap.matchAll(/https:\/\/findmyinvite.com\/invitations\/[a-z0-9-]+/g)].length,37);
  assert.match(app,/path\.startsWith\('\/invitations'\)\?<OccasionLanding\/>:\/\^\\\/\[a-z0-9\]\[a-z0-9-\]\{2,47\}\$\/\.test\(path\)\?<PublicInvitation slug=\{path\.slice\(1\)}\/>/);
  assert.match(app,/import OccasionLanding from '\.\/OccasionLanding'/);
  assert.equal(reserved.has('invitations'),true);
@@ -68,14 +71,18 @@ test('21 P1 occasion LPs live under /invitations/{slug}, not apex guest paths',a
  assert.match(landing,/page\.switchCopy/);
  assert.equal(landing.includes('PublicInvitation'),false);
 });
-test('13 live FMI design LPs share /invitations/{slug} HTML, sitemap, and catalog SKU CTAs',async()=>{
+test('16 live FMI design LPs share /invitations/{slug} HTML, sitemap, and catalog SKU CTAs',async()=>{
  const designs=await readFile(new URL('../server/design-landings.mjs',import.meta.url),'utf8');
  const data=await readFile(new URL('../src/data.ts',import.meta.url),'utf8');
  const sitemap=await readFile(new URL('../public/sitemap.xml',import.meta.url),'utf8');
  const robots=await readFile(new URL('../public/robots.txt',import.meta.url),'utf8');
- assert.equal(designSlugs.length,13);
- assert.equal(designPages.length,13);
- assert.equal(designs.includes('Royal Temple'),false);
+ assert.equal(designSlugs.length,16);
+ assert.equal(designPages.length,16);
+ assert.equal(new Set(designSlugs).size,16);
+ assert.notEqual(designSlugs.indexOf('royal-heritage'),designSlugs.indexOf('royal-heritage-wedding'));
+ assert.match(designs,/slug:'royal-temple'/);
+ assert.match(designs,/slug:'royal-heritage-wedding'/);
+ assert.match(designs,/slug:'royal-sanctuary'/);
  assert.match(robots,/Disallow: \/akay/);
  for(const slug of designSlugs){
   const page=designPages.find(item=>item.slug===slug);
@@ -89,5 +96,11 @@ test('13 live FMI design LPs share /invitations/{slug} HTML, sitemap, and catalo
   assert.equal(ctaHref(page),'/create?template='+page.templateId+'&type=wedding',slug);
   assert.match(data,new RegExp("id:'"+page.templateId+"'"));
  }
+ const heritage=designPages.find(item=>item.slug==='royal-heritage');
+ const heritageWedding=designPages.find(item=>item.slug==='royal-heritage-wedding');
+ assert.equal(heritage.templateId,'royal-heritage');
+ assert.equal(heritageWedding.templateId,'royal-heritage-wedding');
+ assert.notEqual(heritage.slug,heritageWedding.slug);
+ assert.notEqual(ctaHref(heritage),ctaHref(heritageWedding));
  assert.equal(ctaHref({tier:'classic'}),'/templates?collection=classic&type=wedding');
 });
