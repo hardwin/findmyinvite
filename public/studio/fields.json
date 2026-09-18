@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "fields": [
+    {
+      "key": "groom",
+      "label": "First partner's name",
+      "section": "hero",
+      "type": "text",
+      "required": true,
+      "max": 100
+    },
+    {
+      "key": "bride",
+      "label": "Second partner's name",
+      "section": "hero",
+      "type": "text",
+      "required": true,
+      "max": 100
+    },
+    {
+      "key": "date",
+      "label": "Wedding date",
+      "section": "hero",
+      "type": "date",
+      "required": true,
+      "max": 10
+    },
+    {
+      "key": "time",
+      "label": "Wedding time (India)",
+      "section": "hero",
+      "type": "time",
+      "required": true,
+      "max": 5
+    },
+    {
+      "key": "welcome",
+      "label": "Your invitation message",
+      "section": "welcome",
+      "type": "textarea",
+      "required": false,
+      "max": 2000
+    },
+    {
+      "key": "groomDetails",
+      "label": "First partner & family",
+      "section": "welcome",
+      "type": "textarea",
+      "required": false,
+      "max": 1000
+    },
+    {
+      "key": "brideDetails",
+      "label": "Second partner & family",
+      "section": "welcome",
+      "type": "textarea",
+      "required": false,
+      "max": 1000
+    },
+    {
+      "key": "venue",
+      "label": "Wedding venue",
+      "section": "venue",
+      "type": "text",
+      "required": true,
+      "max": 200
+    },
+    {
+      "key": "address",
+      "label": "Venue address",
+      "section": "venue",
+      "type": "textarea",
+      "required": true,
+      "max": 600
+    }
+  ],
+  "skipPolicy": {
+    "optional": "postpone; explicit hide uses section visibility",
+    "required": "postpone; block publishing until completed"
+  },
+  "templates": {
+    "royal-temple": {
+      "name": "Royal Temple",
+      "tier": "royal",
+      "renderer": "html-v1"
+    },
+    "emerald-noir": {
+      "name": "Emerald Noir",
+      "tier": "classic",
+      "renderer": "html-v1"
+    },
+    "royal-heritage-wedding": {
+      "name": "Royal Heritage Wedding",
+      "tier": "royal",
+      "renderer": "html-v1"
+    },
+    "royal-sanctuary": {
+      "name": "Royal Sanctuary",
+      "tier": "royal",
+      "renderer": "html-v1"
+    }
+  }
+}

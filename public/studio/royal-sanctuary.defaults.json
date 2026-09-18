@@ -1,0 +1,32 @@
+{
+  "groom": "Aarav Patel",
+  "bride": "Meera Sharma",
+  "date": "2026-10-18",
+  "time": "16:00",
+  "groomDetails": "Son of Mr. Rajesh Patel & Mrs. Neha Patel",
+  "brideDetails": "Daughter of Mr. Sanjay Sharma & Mrs. Kavita Sharma",
+  "welcome": "Under the beautiful canopy of divine grace, two hearts unite in holy matrimony. A sacred covenant of eternal love, happiness, and shared dreams.",
+  "venue": "The Royal Gardens, The Leela",
+  "address": "Chanakyapuri, New Delhi, India",
+  "gifts": "Your presence on our special day is the greatest gift of all. However, should you wish to bless us with a gift, a contribution towards our dream home and future together would be sincerely appreciated.",
+  "photos": [],
+  "music": "",
+  "preEvents": [],
+  "timeline": [
+    {
+      "title": "Ring Ceremony & Sangeet",
+      "time": "2026-10-18T18:30",
+      "description": "Grand Ballroom, The Leela · Chanakyapuri, New Delhi, India"
+    },
+    {
+      "title": "Wedding Ceremony",
+      "time": "2026-10-18T16:00",
+      "description": "The Royal Gardens, The Leela · Chanakyapuri, New Delhi, India"
+    },
+    {
+      "title": "Grand Reception",
+      "time": "2026-10-18T20:00",
+      "description": "Grand Ballroom, The Leela · Chanakyapuri, New Delhi, India"
+    }
+  ]
+}

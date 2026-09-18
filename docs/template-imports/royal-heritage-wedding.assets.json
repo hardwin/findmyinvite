@@ -1,0 +1,66 @@
+{
+  "source": "https://bigdate.events/wd-bgifh?force_device_type=mobile",
+  "assets": [
+    {
+      "source": "https://bigdate.events/nocode_website____RJA_Countdown__BEAVO~~~~webweaver/RJA_Countdown__BEAVO/component_assets/royal_hindu_1.webp",
+      "local": "/assets/royal-heritage-wedding/84e3f51895a068b5.webp",
+      "sha256": "cb798edbcaf55661076ba0ca9e0e3dcd3d49f622a8aa5f18f4687c0c20adb0a7"
+    },
+    {
+      "source": "https://bigdate.events/nocode_website____BC_Landing_BC_royal_hindu_wedding_1__BEAVF~~~~webweaver/BC_Landing_BC_royal_hindu_wedding_1__BEAVF/component_assets/chirad1.webp",
+      "local": "/assets/royal-heritage-wedding/451507af5120d4a1.webp",
+      "sha256": "1dea0191692a61c9f212cce47e55edc54a826a63357bbe81f9a0839fd1050934"
+    },
+    {
+      "source": "https://bigdate.events/nocode_website____RJA_Countdown__BEAVO~~~~webweaver/RJA_Countdown__BEAVO/component_assets/vinayak.webp",
+      "local": "/assets/royal-heritage-wedding/04ba7c1e19dc3fd7.webp",
+      "sha256": "e9548d2b14408ded1fb4f8f425cb44f6521d78a83e3fa3304da59f49b9fe6a93"
+    },
+    {
+      "source": "https://bigdate.events/nocode_website____RJA_Countdown__BEAVO~~~~webweaver/RJA_Countdown__BEAVO/component_assets/count_frame.webp",
+      "local": "/assets/royal-heritage-wedding/3ed997b683cb34ea.webp",
+      "sha256": "335822f788dab746a71fa6d4e820cb3b6596ba2352a1d2189463752e26a44903"
+    },
+    {
+      "source": "https://bigdate.events/nocode_website____BC_Thank_You_BC_royal_hindu_wedding_1__BEAVI~~~~webweaver/BC_Thank_You_BC_royal_hindu_wedding_1__BEAVI/component_assets/chirad1.webp",
+      "local": "/assets/royal-heritage-wedding/1e19c777454a9cf0.webp",
+      "sha256": "1dea0191692a61c9f212cce47e55edc54a826a63357bbe81f9a0839fd1050934"
+    },
+    {
+      "source": "https://bigdate.events/nocode_website____BC_Landing_BC_royal_hindu_wedding_1__BEAVF~~~~webweaver/BC_Landing_BC_royal_hindu_wedding_1__BEAVF/component_assets/royal%20hindu%201.webp",
+      "local": "/assets/royal-heritage-wedding/364e5ed899368f4d.webp",
+      "sha256": "6abf381b6389d67fd2f641462a098b77e26525d0f54e43ed1f7f95ca97017c02"
+    },
+    {
+      "source": "https://bigdate.events/nocode_website____BC_About_BC_royal_hindu_wedding_1__BEAVG~~~~webweaver/BC_About_BC_royal_hindu_wedding_1__BEAVG/component_assets/royal%20hindu%201.webp",
+      "local": "/assets/royal-heritage-wedding/5d045cfc0988f127.webp",
+      "sha256": "6abf381b6389d67fd2f641462a098b77e26525d0f54e43ed1f7f95ca97017c02"
+    },
+    {
+      "source": "https://bigdate.events/nocode_website____BC_About_BC_royal_hindu_wedding_1__BEAVG~~~~webweaver/BC_About_BC_royal_hindu_wedding_1__BEAVG/component_assets/about%20frame.webp",
+      "local": "/assets/royal-heritage-wedding/6d1822e816435fa6.webp",
+      "sha256": "415b6bd6c7f5009eb9106237eb45dd34f06001565c933912348688dfce987103"
+    },
+    {
+      "source": "https://bigdate.events/nocode_website____BC_Event_Details_BC_royal_hindu_wedding_1__BEAVH~~~~webweaver/BC_Event_Details_BC_royal_hindu_wedding_1__BEAVH/component_assets/hindu%20royal%201.webp",
+      "local": "/assets/royal-heritage-wedding/31f3f003b0bc4486.webp",
+      "sha256": "6abf381b6389d67fd2f641462a098b77e26525d0f54e43ed1f7f95ca97017c02"
+    },
+    {
+      "source": "https://bigdate.events/nocode_website____BC_Event_Details_BC_royal_hindu_wedding_1__BEAVH~~~~webweaver/BC_Event_Details_BC_royal_hindu_wedding_1__BEAVH/component_assets/about%20frame.webp",
+      "local": "/assets/royal-heritage-wedding/721e82c2a9dcaf45.webp",
+      "sha256": "38e2bd7fc2c0ba705b567364f37c6c8405ffdf9e40ef18d670c2b55795a16f8a"
+    },
+    {
+      "source": "https://bigdate.events/nocode_website____BC_Royal_hindu_Gallery__BEAVN~~~~webweaver/BC_Royal_hindu_Gallery__BEAVN/component_assets/royal%20hindu%201.webp",
+      "local": "/assets/royal-heritage-wedding/de981d8ffc24a741.webp",
+      "sha256": "6abf381b6389d67fd2f641462a098b77e26525d0f54e43ed1f7f95ca97017c02"
+    }
+  ],
+  "notes": [
+    "Public demo artwork recovered via browser pageAssets.",
+    "Original component CSS is in recovered.css; URLs localized, remote imports removed.",
+    "Matching fonts reused from existing local fonts.css.",
+    "Source JavaScript runtime and music were not recovered."
+  ]
+}

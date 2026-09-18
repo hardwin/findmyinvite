@@ -1,0 +1,357 @@
+{
+  "source": "https://www.lovlio.in/embed/wedding-royal-temple-premium",
+  "retrievedAt": "2026-09-17T07:47:04.781Z",
+  "permissionStatus": "Third-party asset reuse permission has not been independently established. Internal team pilot; confirm rights before public catalogue promotion.",
+  "notes": [
+    "Original asset files preserved without regeneration.",
+    "No third-party scripts, trackers or iframe integration.",
+    "Native motion reimplementation; precise original JavaScript timings are not reproduced."
+  ],
+  "entries": [
+    {
+      "url": "https://www.lovlio.in/_next/static/media/024ead497118aa23-s.woff2",
+      "file": "/assets/temple/024ead497118aa23-s.woff2",
+      "status": "downloaded",
+      "bytes": 11556,
+      "sha256": "3512ad3b4ddd21fa75ab44296867da1f82948350ffba678a04afbb511015cb08"
+    },
+    {
+      "url": "https://www.lovlio.in/_next/static/media/162bae04ee86dd69-s.woff2",
+      "file": "/assets/temple/162bae04ee86dd69-s.woff2",
+      "status": "downloaded",
+      "bytes": 1116,
+      "sha256": "258135d94cae32ef5544db62669f0ca21fd86cc696ba846a2cfa6c292e143c68"
+    },
+    {
+      "url": "https://www.lovlio.in/_next/static/media/1f173e5e25f3efee-s.woff2",
+      "file": "/assets/temple/1f173e5e25f3efee-s.woff2",
+      "status": "downloaded",
+      "bytes": 68224,
+      "sha256": "920711de9ae96c18970fa4faca73cd302b93ac5ed57ebeb6bfec2ddeff930082"
+    },
+    {
+      "url": "https://www.lovlio.in/_next/static/media/393d45a2251e223a-s.woff2",
+      "file": "/assets/temple/393d45a2251e223a-s.woff2",
+      "status": "downloaded",
+      "bytes": 23408,
+      "sha256": "d04439363ec805132dc6c6e6a925f76efe17646f9811af8e10e218ea3dba5335"
+    },
+    {
+      "url": "https://www.lovlio.in/_next/static/media/48410f3df60da620-s.woff2",
+      "file": "/assets/temple/48410f3df60da620-s.woff2",
+      "status": "downloaded",
+      "bytes": 33740,
+      "sha256": "9dc38267bdee93a653200ef3c1e8060e3f1399073432c415c683b419d3b50464"
+    },
+    {
+      "url": "https://www.lovlio.in/_next/static/media/48e2044251ef3125-s.woff2",
+      "file": "/assets/temple/48e2044251ef3125-s.woff2",
+      "status": "downloaded",
+      "bytes": 21492,
+      "sha256": "0b00fbd6edcc84cd5f77364bbeb06b75ed263c740061eba34511f1e2ac1a82d3"
+    },
+    {
+      "url": "https://www.lovlio.in/_next/static/media/536d9d896eaf4f3f-s.woff2",
+      "file": "/assets/temple/536d9d896eaf4f3f-s.woff2",
+      "status": "downloaded",
+      "bytes": 46188,
+      "sha256": "9db6e80f3c2cda14250c3ee41e5bf1b68280b95c00a54d994a42e845fb0da7ba"
+    },
+    {
+      "url": "https://www.lovlio.in/_next/static/media/67d172d8d0152ee1-s.woff2",
+      "file": "/assets/temple/67d172d8d0152ee1-s.woff2",
+      "status": "downloaded",
+      "bytes": 7652,
+      "sha256": "93e47792ff812a0776ac0b3c4dd88b608d96524342706e40b074a9368179e8b3"
+    },
+    {
+      "url": "https://www.lovlio.in/_next/static/media/76d65646da49a987-s.woff2",
+      "file": "/assets/temple/76d65646da49a987-s.woff2",
+      "status": "downloaded",
+      "bytes": 13816,
+      "sha256": "d81a013359dce135281a51a45918b6527e39ff27c085b5d5260df9ad0b4a4a8c"
+    },
+    {
+      "url": "https://www.lovlio.in/_next/static/media/7b89a4fd5e90ede0-s.p.woff2",
+      "file": "/assets/temple/7b89a4fd5e90ede0-s.p.woff2",
+      "status": "downloaded",
+      "bytes": 37776,
+      "sha256": "5d618c462b7a5b74f442e1548880086af71764d9cc7d35c16ab45353da934621"
+    },
+    {
+      "url": "https://www.lovlio.in/_next/static/media/85ec3505000466ce-s.p.woff2",
+      "file": "/assets/temple/85ec3505000466ce-s.p.woff2",
+      "status": "downloaded",
+      "bytes": 25316,
+      "sha256": "908ea550433276ce2ff423f086abac22a78caf4d033c11ba8ba2f0ca981ef676"
+    },
+    {
+      "url": "https://www.lovlio.in/_next/static/media/87069f06a4f1ee13-s.p.woff2",
+      "file": "/assets/temple/87069f06a4f1ee13-s.p.woff2",
+      "status": "downloaded",
+      "bytes": 29596,
+      "sha256": "0237c8316409c1e4c267156adcc6b17a1d5573320efa45b707fe39989ac3874b"
+    },
+    {
+      "url": "https://www.lovlio.in/_next/static/media/8715d2ed531152f4-s.woff2",
+      "file": "/assets/temple/8715d2ed531152f4-s.woff2",
+      "status": "downloaded",
+      "bytes": 21132,
+      "sha256": "d81372bae1f872f1418c0b7eb412f8a92a156a950fda8d2383701c75d38969df"
+    },
+    {
+      "url": "https://www.lovlio.in/_next/static/media/904be59b21bd51cb-s.p.woff2",
+      "file": "/assets/temple/904be59b21bd51cb-s.p.woff2",
+      "status": "downloaded",
+      "bytes": 35508,
+      "sha256": "6438d7b8ea9c7c3992d5e2fd2afdb1ff948570a3ef0bedae76247b51632960ba"
+    },
+    {
+      "url": "https://www.lovlio.in/_next/static/media/b1f344208eb4edfe-s.woff2",
+      "file": "/assets/temple/b1f344208eb4edfe-s.woff2",
+      "status": "downloaded",
+      "bytes": 24072,
+      "sha256": "744830a0e77dd14dd543a4230d6e3ce67ca961634074b5d536ebafc66c732301"
+    },
+    {
+      "url": "https://www.lovlio.in/_next/static/media/bf24a9759715e608-s.woff2",
+      "file": "/assets/temple/bf24a9759715e608-s.woff2",
+      "status": "downloaded",
+      "bytes": 10620,
+      "sha256": "9e2672d100bc36a37073fb250abfaa7394f5151bf5dda3f4d5fc281345eb391b"
+    },
+    {
+      "url": "https://www.lovlio.in/_next/static/media/c48b38fe8bb532f3-s.woff2",
+      "file": "/assets/temple/c48b38fe8bb532f3-s.woff2",
+      "status": "downloaded",
+      "bytes": 11264,
+      "sha256": "826f73ca737feec0eb1004808629973d6b611fddc2bd2a689b5fe331f6be6427"
+    },
+    {
+      "url": "https://www.lovlio.in/_next/static/media/ca60b95d975a0530-s.p.woff2",
+      "file": "/assets/temple/ca60b95d975a0530-s.p.woff2",
+      "status": "downloaded",
+      "bytes": 121188,
+      "sha256": "12223f2beeb4752c6fe7662550978ee22be4d56e49a8f937c324b015ac5ef77a"
+    },
+    {
+      "url": "https://www.lovlio.in/_next/static/media/dad5af6a451969b9-s.woff2",
+      "file": "/assets/temple/dad5af6a451969b9-s.woff2",
+      "status": "downloaded",
+      "bytes": 1940,
+      "sha256": "bad8bd8b77395c78e79cf5dd883b07c180632828b1e712088f19d771df994283"
+    },
+    {
+      "url": "https://www.lovlio.in/_next/static/media/e18f83c737786aa7-s.p.woff2",
+      "file": "/assets/temple/e18f83c737786aa7-s.p.woff2",
+      "status": "downloaded",
+      "bytes": 39304,
+      "sha256": "e6d6d1d73858aa9b66f3a3539f9dec22faab2276e61ad1d813bc04dd59c9c122"
+    },
+    {
+      "url": "https://www.lovlio.in/_next/static/media/e74f24ed7f0e4323-s.woff2",
+      "file": "/assets/temple/e74f24ed7f0e4323-s.woff2",
+      "status": "downloaded",
+      "bytes": 34444,
+      "sha256": "06bc9a8c179afaf7dd5d3b4987ad2f4a82ca85a542c9e498b18bf32ad0257d8e"
+    },
+    {
+      "url": "https://www.lovlio.in/_next/static/media/ea896c3885e026c1-s.woff2",
+      "file": "/assets/temple/ea896c3885e026c1-s.woff2",
+      "status": "downloaded",
+      "bytes": 21264,
+      "sha256": "3170a883f1968a2d1135259e40fd88508da70c20337e491f171f9405d0749053"
+    },
+    {
+      "url": "https://www.lovlio.in/_next/static/media/f751862dd005bbab-s.woff2",
+      "file": "/assets/temple/f751862dd005bbab-s.woff2",
+      "status": "downloaded",
+      "bytes": 28504,
+      "sha256": "7d8e55f33a5a625f5a6b8e39def8de8b7c1e3427931edd5cecf037aaea04aa9f"
+    },
+    {
+      "url": "https://www.lovlio.in/_next/static/media/fd3893c623c32b6d-s.woff2",
+      "file": "/assets/temple/fd3893c623c32b6d-s.woff2",
+      "status": "downloaded",
+      "bytes": 25196,
+      "sha256": "919a7720ae1671f06ebdd4f65bb9c2f0d619f81f805d85aec025c89139536292"
+    },
+    {
+      "url": "https://www.lovlio.in/templates/wedding-royal-temple-premium/BlackFrame.webp",
+      "file": "/assets/temple/BlackFrame.webp",
+      "status": "downloaded",
+      "bytes": 839910,
+      "sha256": "957e421c52d10fccb6d76315288cdabefe1618d3fe39243c845197065858c2b3"
+    },
+    {
+      "url": "https://www.lovlio.in/templates/wedding-royal-temple-premium/PhotoFrame.webp",
+      "file": "/assets/temple/PhotoFrame.webp",
+      "status": "downloaded",
+      "bytes": 162316,
+      "sha256": "d51d6e7235bb2f58fd6cc5fda9e7859df34639c58f018832240a184ea967c0c9"
+    },
+    {
+      "url": "https://www.lovlio.in/templates/wedding-royal-temple-premium/Same_image_2K_202607162224.webp",
+      "file": "/assets/temple/Same_image_2K_202607162224.webp",
+      "status": "downloaded",
+      "bytes": 693602,
+      "sha256": "9e3f2d648688f788d472e95d973d01681278007dd3cd8f1d0e9c16e7758c21c8"
+    },
+    {
+      "url": "https://www.lovlio.in/templates/wedding-royal-temple-premium/Same_image_2K_202607181943.webp",
+      "file": "/assets/temple/Same_image_2K_202607181943.webp",
+      "status": "downloaded",
+      "bytes": 381554,
+      "sha256": "aa2880a0a2a158c03354e482b483f31f7e8ccc3f9d78b71abd91d616c1a2bcef"
+    },
+    {
+      "url": "https://www.lovlio.in/templates/wedding-royal-temple-premium/Scene5.webp",
+      "file": "/assets/temple/Scene5.webp",
+      "status": "downloaded",
+      "bytes": 686128,
+      "sha256": "a34121e6e28b93520fe0c3811d7ac8bd757b0ff669522da7f08ca83780dc75a0"
+    },
+    {
+      "url": "https://www.lovlio.in/templates/wedding-royal-temple-premium/bg3.webp",
+      "file": "/assets/temple/bg3.webp",
+      "status": "downloaded",
+      "bytes": 637264,
+      "sha256": "7318bd250687ddd3fedc39dbfb47d28cecc454adc978718ed80ffbc252ca1464"
+    },
+    {
+      "url": "https://www.lovlio.in/templates/wedding-royal-temple-premium/bird-cells-new.svg",
+      "file": "/assets/temple/bird-cells-new.svg",
+      "status": "downloaded",
+      "bytes": 7969,
+      "sha256": "5c10a3a3bb1ee00f5f3e1588b4ac23988e4dd6b4ca81a7d46fab70dc153ece98"
+    },
+    {
+      "url": "https://www.lovlio.in/templates/wedding-royal-temple-premium/cloud1.webp",
+      "file": "/assets/temple/cloud1.webp",
+      "status": "downloaded",
+      "bytes": 83172,
+      "sha256": "a944d812193788ebbdcd06804c8c022e4d3c0fd66fd7cd703c03cf99f5fdbb56"
+    },
+    {
+      "url": "https://www.lovlio.in/templates/wedding-royal-temple-premium/cloud2.webp",
+      "file": "/assets/temple/cloud2.webp",
+      "status": "downloaded",
+      "bytes": 44928,
+      "sha256": "29438259f85c470c8fc95c2c0949647b3742dde5faca06225927274baf491c74"
+    },
+    {
+      "url": "https://www.lovlio.in/templates/wedding-royal-temple-premium/couple.webp",
+      "file": "/assets/temple/couple.webp",
+      "status": "downloaded",
+      "bytes": 524418,
+      "sha256": "3db9ecc37b4e03cbf42a5e48ad92a6cc047609fa420ed5e6f05833f4679373f4"
+    },
+    {
+      "url": "https://www.lovlio.in/templates/wedding-royal-temple-premium/event_frame.webp",
+      "file": "/assets/temple/event_frame.webp",
+      "status": "downloaded",
+      "bytes": 801768,
+      "sha256": "2b4f9f3ef8368c57c558cf077561c3759ad27aa0ec0361c4501e161a58c402ab"
+    },
+    {
+      "url": "https://www.lovlio.in/templates/wedding-royal-temple-premium/frame1_bg.webp",
+      "file": "/assets/temple/frame1_bg.webp",
+      "status": "downloaded",
+      "bytes": 423748,
+      "sha256": "978d43086179050cb4fb66f4484fc5bc303bcd025632bb68caa1ab1c51605549"
+    },
+    {
+      "url": "https://www.lovlio.in/templates/wedding-royal-temple-premium/ganesha_gold.webp",
+      "file": "/assets/temple/ganesha_gold.webp",
+      "status": "downloaded",
+      "bytes": 80720,
+      "sha256": "febd008bb5ee800455ac751f04e53a024aceba37a8b3f10fa739a61b96db7cf9"
+    },
+    {
+      "url": "https://www.lovlio.in/templates/wedding-royal-temple-premium/invite-bg.mp3",
+      "file": "/assets/temple/invite-bg.mp3",
+      "status": "downloaded",
+      "bytes": 729942,
+      "sha256": "4f4b1450be5cb5c7964dbd1e985a2a102f72d36311440650a09a43671ac7d73f"
+    },
+    {
+      "url": "https://www.lovlio.in/templates/wedding-royal-temple-premium/sample_bride.webp",
+      "file": "/assets/temple/sample_bride.webp",
+      "status": "downloaded",
+      "bytes": 204920,
+      "sha256": "63d05562f70a6c7034ac225d2e3b9a1e2955bd756ddb0ec656ba0ef5e194ca33"
+    },
+    {
+      "url": "https://www.lovlio.in/templates/wedding-royal-temple-premium/sample_couple.webp",
+      "file": "/assets/temple/sample_couple.webp",
+      "status": "downloaded",
+      "bytes": 224904,
+      "sha256": "97f53bad3705362c9a6a728d815ac99f554407917cc9e03597c16e18f274b369"
+    },
+    {
+      "url": "https://www.lovlio.in/templates/wedding-royal-temple-premium/sample_groom.webp",
+      "file": "/assets/temple/sample_groom.webp",
+      "status": "downloaded",
+      "bytes": 175150,
+      "sha256": "e87a19ddadcf0607d6ee2beb9afbc959f340e924aefa85a532aebb627157ec63"
+    },
+    {
+      "url": "https://www.lovlio.in/templates/wedding-royal-temple-premium/temple_foreground.webp",
+      "file": "/assets/temple/temple_foreground.webp",
+      "status": "downloaded",
+      "bytes": 622146,
+      "sha256": "c24975684791dba01bb1f424ec3895f0306f494f926674e8b581f9ea88b44481"
+    },
+    {
+      "url": "https://www.lovlio.in/templates/wedding-royal-temple-premium/tree_canopy_cluster.webp",
+      "file": "/assets/temple/tree_canopy_cluster.webp",
+      "status": "downloaded",
+      "bytes": 420732,
+      "sha256": "34b375e18c99e98fdf59ee784e1e5355b113024a209f9002671c53e9aada5808"
+    },
+    {
+      "url": "https://www.lovlio.in/templates/wedding-royal-temple-premium/tree_foreground_close.webp",
+      "file": "/assets/temple/tree_foreground_close.webp",
+      "status": "downloaded",
+      "bytes": 514602,
+      "sha256": "2792edc8262c47a01e42cddcc50fe83ae72130535a68b38b34fe788f4ce8dac2"
+    },
+    {
+      "url": "https://www.lovlio.in/templates/wedding-royal-temple-premium/tree_large_single.webp",
+      "file": "/assets/temple/tree_large_single.webp",
+      "status": "downloaded",
+      "bytes": 445404,
+      "sha256": "13bec12f3789e9f50911360987981cbab801a53edfae514cee63a35a17353526"
+    },
+    {
+      "url": "https://www.lovlio.in/templates/wedding-royal-temple-premium/tree_with_trunk.webp",
+      "file": "/assets/temple/tree_with_trunk.webp",
+      "status": "downloaded",
+      "bytes": 428240,
+      "sha256": "2747a514d92e37ce0c82e1fe7396d99f083657ab163600311e420a188f395267"
+    },
+    {
+      "url": "https://www.lovlio.in/templates/wedding-royal-temple-premium/wedding_frame.webp",
+      "file": "/assets/temple/wedding_frame.webp",
+      "status": "downloaded",
+      "bytes": 890994,
+      "sha256": "d201fdfca791b29d85c33a593c3034f8cf44aaee6774146edffc86dfc4a9be6b"
+    }
+  ],
+  "implementationNotes": [
+    "Standalone local template derived from observed public scene layout and CSS; no third-party runtime JavaScript retained.",
+    "Bells use reconstructed inline SVG and native CSS motion. Exact original sound/choreography is not claimed.",
+    "Original social/hashtag scene is repurposed for editable FMI venue details.",
+    "Original contact/WhatsApp RSVP replaced with FMI-owned accessible form dialog.",
+    "Scene geometry is preserved: skipping a section hides its editable content but retains the decorative background scene.",
+    "Original canvas countdown is replaced by accessible text countdown.",
+    "Royal Temple and Emerald Noir share six data-section bindings, named data-field text bindings, four data-photo slots and two data-events containers."
+  ],
+  "verification": {
+    "date": "2026-09-17",
+    "templatePolicy": "Both baseline templates accepted by validateTemplate(source,source).",
+    "nativeScriptSyntax": "Both inline scripts parsed by Node VM.",
+    "browser": "Royal Temple desktop hero and mobile RSVP inspected; Emerald opening button and accessible scratch reveal exercised. Both templates at 390px have no document horizontal overflow or broken img elements.",
+    "pending": "Full parent Studio live binding, authorization, AI edit and published RSVP verification belongs to the integration pass."
+  }
+}
