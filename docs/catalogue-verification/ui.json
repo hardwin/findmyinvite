@@ -1,0 +1,16 @@
+{
+  "checks": [
+    "offscreen unloading and resume 390",
+    "Page Visibility pause and resume 390",
+    "pause, modal, navigation, Classics, overflow, errors 390",
+    "offscreen unloading and resume 1440",
+    "Page Visibility pause and resume 1440",
+    "pause, modal, navigation, Classics, overflow, errors 1440",
+    "reduced motion",
+    "autoplay rejection poster fallback",
+    "failed media retains poster",
+    "Save-Data disables autoplay",
+    "24-card batches and SKU poster fallback"
+  ],
+  "samples": []
+}

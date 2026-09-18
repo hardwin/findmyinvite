@@ -1,0 +1,101 @@
+{
+  "royal-sanctuary": {
+    "src": "/assets/catalogue/v1/royal-sanctuary.mp4",
+    "poster": "/assets/catalogue/v1/royal-sanctuary.webp",
+    "width": 480,
+    "height": 854,
+    "duration": 7.958333,
+    "bytes": 465963,
+    "version": 1
+  },
+  "royal-heritage-wedding": {
+    "src": "/assets/catalogue/v1/royal-heritage-wedding.mp4",
+    "poster": "/assets/catalogue/v1/royal-heritage-wedding.webp",
+    "width": 480,
+    "height": 854,
+    "duration": 8,
+    "bytes": 180553,
+    "version": 1
+  },
+  "royal-temple": {
+    "src": "/assets/catalogue/v1/royal-temple.mp4",
+    "poster": "/assets/catalogue/v1/royal-temple.webp",
+    "width": 480,
+    "height": 854,
+    "duration": 8,
+    "bytes": 238165,
+    "version": 1
+  },
+  "rose-gold-blush-royal": {
+    "src": "/assets/catalogue/v1/rose-gold-blush-royal.mp4",
+    "poster": "/assets/catalogue/v1/rose-gold-blush-royal.webp",
+    "width": 480,
+    "height": 854,
+    "duration": 12.25,
+    "bytes": 907065,
+    "version": 1
+  },
+  "royal-majesty": {
+    "src": "/assets/catalogue/v1/royal-majesty.mp4",
+    "poster": "/assets/catalogue/v1/royal-majesty.webp",
+    "width": 480,
+    "height": 854,
+    "duration": 12.25,
+    "bytes": 941759,
+    "version": 1
+  },
+  "modern-minimal-royal": {
+    "src": "/assets/catalogue/v1/modern-minimal-royal.mp4",
+    "poster": "/assets/catalogue/v1/modern-minimal-royal.webp",
+    "width": 480,
+    "height": 854,
+    "duration": 12.25,
+    "bytes": 928942,
+    "version": 1
+  },
+  "royal-prestige": {
+    "src": "/assets/catalogue/v1/royal-prestige.mp4",
+    "poster": "/assets/catalogue/v1/royal-prestige.webp",
+    "width": 480,
+    "height": 854,
+    "duration": 14.958333,
+    "bytes": 1145624,
+    "version": 1
+  },
+  "royal-heritage": {
+    "src": "/assets/catalogue/v1/royal-heritage.mp4",
+    "poster": "/assets/catalogue/v1/royal-heritage.webp",
+    "width": 480,
+    "height": 854,
+    "duration": 12.25,
+    "bytes": 948872,
+    "version": 1
+  },
+  "royal-grace": {
+    "src": "/assets/catalogue/v1/royal-grace.mp4",
+    "poster": "/assets/catalogue/v1/royal-grace.webp",
+    "width": 480,
+    "height": 854,
+    "duration": 12.25,
+    "bytes": 918208,
+    "version": 1
+  },
+  "royal-crest": {
+    "src": "/assets/catalogue/v1/royal-crest.mp4",
+    "poster": "/assets/catalogue/v1/royal-crest.webp",
+    "width": 480,
+    "height": 854,
+    "duration": 12.25,
+    "bytes": 907176,
+    "version": 1
+  },
+  "royal-legacy": {
+    "src": "/assets/catalogue/v1/royal-legacy.mp4",
+    "poster": "/assets/catalogue/v1/royal-legacy.webp",
+    "width": 480,
+    "height": 854,
+    "duration": 10.625,
+    "bytes": 432010,
+    "version": 1
+  }
+}

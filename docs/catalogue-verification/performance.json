@@ -1,0 +1,50 @@
+[
+  {
+    "width": 390,
+    "motion": false,
+    "lcp": 3364,
+    "cls": 0.19679904785731342,
+    "events": [
+      272,
+      272,
+      272
+    ],
+    "mediaRequests": 0
+  },
+  {
+    "width": 390,
+    "motion": true,
+    "lcp": 2656,
+    "cls": 0.1967656098863098,
+    "events": [
+      288,
+      288,
+      288
+    ],
+    "mediaRequests": 6
+  },
+  {
+    "width": 1440,
+    "motion": false,
+    "lcp": 3496,
+    "cls": 0.29598227632833934,
+    "events": [
+      208,
+      208,
+      208
+    ],
+    "mediaRequests": 0
+  },
+  {
+    "width": 1440,
+    "motion": true,
+    "lcp": 3416,
+    "cls": 0.29601306229370283,
+    "events": [
+      448,
+      440,
+      440
+    ],
+    "mediaRequests": 8
+  }
+]
