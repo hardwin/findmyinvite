@@ -1,0 +1,85 @@
+{
+  "checks": [
+    "200 cards / five-minute scroll / bounded players / disposal"
+  ],
+  "samples": [
+    {
+      "seconds": 0,
+      "attached": 6,
+      "playing": 4,
+      "heap": 885996,
+      "browserWorkingSet": 694419456
+    },
+    {
+      "seconds": 30,
+      "attached": 6,
+      "playing": 4,
+      "heap": 911384,
+      "browserWorkingSet": 634949632
+    },
+    {
+      "seconds": 60,
+      "attached": 6,
+      "playing": 4,
+      "heap": 911856,
+      "browserWorkingSet": 656457728
+    },
+    {
+      "seconds": 90,
+      "attached": 6,
+      "playing": 4,
+      "heap": 911916,
+      "browserWorkingSet": 681484288
+    },
+    {
+      "seconds": 120,
+      "attached": 6,
+      "playing": 4,
+      "heap": 918252,
+      "browserWorkingSet": 722763776
+    },
+    {
+      "seconds": 150,
+      "attached": 6,
+      "playing": 4,
+      "heap": 919584,
+      "browserWorkingSet": 743690240
+    },
+    {
+      "seconds": 180,
+      "attached": 6,
+      "playing": 4,
+      "heap": 919560,
+      "browserWorkingSet": 764571648
+    },
+    {
+      "seconds": 210,
+      "attached": 6,
+      "playing": 4,
+      "heap": 945712,
+      "browserWorkingSet": 793796608
+    },
+    {
+      "seconds": 240,
+      "attached": 6,
+      "playing": 4,
+      "heap": 945816,
+      "browserWorkingSet": 809975808
+    },
+    {
+      "seconds": 270,
+      "attached": 6,
+      "playing": 4,
+      "heap": 945808,
+      "browserWorkingSet": 836665344
+    },
+    {
+      "seconds": 300,
+      "attached": 6,
+      "playing": 4,
+      "heap": 945808,
+      "browserWorkingSet": 851767296
+    }
+  ],
+  "memoryGate": false
+}
