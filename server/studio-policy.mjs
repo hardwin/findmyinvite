@@ -30,7 +30,7 @@ function walk(node,fn){fn(node);for(const child of node.childNodes||[])walk(chil
 const textOf=node=>(node.childNodes||[]).map(n=>n.value||'').join('');
 const attributeSignature=node=>JSON.stringify((node.attrs||[]).map(a=>[a.namespace||'',a.prefix||'',a.name,a.value]).sort((a,b)=>JSON.stringify(a).localeCompare(JSON.stringify(b))));
 const scriptSignature=node=>JSON.stringify([node.namespaceURI,attributeSignature(node),textOf(node)]);
-const localAsset=value=>/^\/assets\/[a-zA-Z0-9_./-]+$/.test(value)&&!value.split('/').some(part=>part==='.'||part==='..');
+const localAsset=value=>/^\/assets\/[a-zA-Z0-9_./-]+(?:#t=[0-9.]+)?$/.test(value)&&!value.split('/').some(part=>part==='.'||part==='..');
 function safeLink(value){
  if(value.startsWith('#')||localAsset(value))return true;
  try{const url=new URL(value);return url.protocol==='https:'&&!url.username&&!url.password&&!url.port&&((['google.com','www.google.com'].includes(url.hostname)&&(url.pathname==='/maps'||url.pathname.startsWith('/maps/')))||url.hostname==='maps.google.com');}catch{return false;}

@@ -9,9 +9,17 @@
     "api/studio.mjs": {
       "includeFiles": "public/studio/**",
       "maxDuration": 60
+    },
+    "api/workspace.mjs": {
+      "includeFiles": "public/studio/**",
+      "maxDuration": 60
     }
   },
   "rewrites": [
+    {
+      "source": "/assets/workspace/:id",
+      "destination": "/api/workspace?action=asset&id=:id"
+    },
     {
       "source": "/:slug",
       "has": [

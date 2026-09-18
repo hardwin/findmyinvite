@@ -1,3 +1,4 @@
+import {isSku,liveDesign} from '../server/workspace.mjs';
 import {readFile} from 'node:fs/promises';
 import {randomUUID} from 'node:crypto';
 import {isDeepStrictEqual} from 'node:util';
@@ -7,7 +8,7 @@ import {PILOT_TEMPLATES,HTML_TEMPLATES,EDITOR_TEMPLATES,SECTIONS,draftData,valid
 import {prepareAgent,continueAgent,workspaceReady,readAgent,stopAgent,closeAgent} from '../server/studio-agent.mjs';
 import {checkpointCode,archiveBranch} from '../server/studio-git.mjs';
 const uuid=/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/;
-const baseline=id=>HTML_TEMPLATES.includes(id)?readFile(new URL(`../public/studio/templates/${id}.html`,import.meta.url),'utf8'):Promise.resolve('<html><head></head><body>'+SECTIONS.map(section=>'<section data-section="'+section+'"></section>').join('')+['bride','groom','date','venue'].map(field=>'<span data-field="'+field+'"></span>').join('')+'</body></html>');
+const baseline=id=>isSku(id)?liveDesign(id).then(d=>d.html):HTML_TEMPLATES.includes(id)?readFile(new URL(`../public/studio/templates/${id}.html`,import.meta.url),'utf8'):Promise.resolve('<html><head></head><body>'+SECTIONS.map(section=>'<section data-section="'+section+'"></section>').join('')+['bride','groom','date','venue'].map(field=>'<span data-field="'+field+'"></span>').join('')+'</body></html>');
 const view=p=>({id:p.id,template:p.template_id,data:p.data,html:p.html,revision:p.revision,gitSha:p.git_sha,busy:Boolean(p.session_id),workspacePrepared:Boolean(p.workspace_id&&p.workspace_revision===p.revision),publishedSlug:p.published_slug});
 async function project(req,id){if(!uuid.test(id||''))throw new HttpError(400,'Invalid draft.');const rows=await db('studio_projects?id=eq.'+id+'&select=*&limit=1');if(!rows[0])throw new HttpError(404,'Draft not found.');verifyToken(bearer(req),rows[0].owner_hash);return rows[0];}
 async function update(p,body){const rows=await db('studio_projects?id=eq.'+p.id+'&lock_until=eq.'+encodeURIComponent(p.lock_until)+'&lock_until=gt.'+encodeURIComponent(new Date().toISOString()),{method:'PATCH',headers:{Prefer:'return=representation'},body});if(!rows[0])throw new HttpError(409,'This operation expired. Reload the latest draft.');return rows[0];}
@@ -15,7 +16,7 @@ async function lock(id){const now=new Date().toISOString();const rows=await db('
 async function release(p){await db('studio_projects?id=eq.'+p.id+'&lock_until=eq.'+encodeURIComponent(p.lock_until),{method:'PATCH',body:{lock_until:null}});}
 async function stopAndClose(id){await stopAgent(id).catch(()=>{});await closeAgent(id);}
 async function checkpoint(p,data,html,message,publishCode=false){
- const normalized=draftData(data,p.template_id),source=validateTemplate(html,await baseline(p.template_id));
+ const normalized=draftData(data,p.template_id),source=validateTemplate(html,isSku(p.template_id)?p.html:await baseline(p.template_id));
  const generic=genericCode(source);
  for(const [k,v] of Object.entries(normalized)){if(typeof v==='string'&&v.length>=5&&!['id','template','type','music'].includes(k)&&!p.html.includes(v)&&generic.includes(v))throw new HttpError(400,'Personal details must stay in editable fields, not template code.');}
  const unchanged=generic===genericCode(p.html);
@@ -35,7 +36,7 @@ export default async function handler(req,res){let locked=null;
  if(action==='config'){method(req,['GET']);return await finish(res,200,{authenticated:true,configured:Boolean(process.env.OPENAI_API_KEY&&process.env.STUDIO_GITHUB_TOKEN),templates:PILOT_TEMPLATES});}
  if(action==='public'){method(req,['GET']);const slug=slugValue(q.get('slug'));const current=await invitation(slug);const rows=await db('studio_publications?slug=eq.'+slug+'&select=html,data,revision&limit=1');if(!rows[0])throw new HttpError(404,'No studio publication.');return await finish(res,200,{...rows[0],data:{...rows[0].data,sections:current.data.sections}});}
  if(req.method!=='GET')sameOrigin(req);
- if(action==='create'){method(req,['POST']);const body=await bodyJson(req);if(!EDITOR_TEMPLATES.includes(body.template))throw new HttpError(400,'Choose an available template.');const ownerHash=tokenHash(body.token);const data=draftData(body.data,body.template);try{await rate(req,'invitation-draft-create-burst',6,60);await rate(req,'invitation-draft-create-hour',500,3600)}catch(e){if(e.status===429){res.setHeader('Retry-After','60');throw new HttpError(429,'New invitation creation is temporarily limited on this network. You can still reopen your saved drafts. Please try again later.')}throw e;}const id=randomUUID(),html=validateTemplate(await baseline(body.template),await baseline(body.template));
+ if(action==='create'){method(req,['POST']);const body=await bodyJson(req);if(!EDITOR_TEMPLATES.includes(body.template)&&!isSku(body.template))throw new HttpError(400,'Choose an available template.');const ownerHash=tokenHash(body.token);const live=isSku(body.template)?await liveDesign(body.template):null;const data=draftData(body.data,body.template);if(live?.base_id==='royal-sanctuary'){Object.assign(data,JSON.parse(await readFile(new URL('../public/studio/royal-sanctuary.defaults.json',import.meta.url),'utf8')));}try{await rate(req,'invitation-draft-create-burst',6,60);await rate(req,'invitation-draft-create-hour',500,3600)}catch(e){if(e.status===429){res.setHeader('Retry-After','60');throw new HttpError(429,'New invitation creation is temporarily limited on this network. You can still reopen your saved drafts. Please try again later.')}throw e;}const id=randomUUID(),html=validateTemplate(await baseline(body.template),await baseline(body.template));
  const rows=await db('studio_projects',{method:'POST',headers:{Prefer:'return=representation'},body:{id,owner_hash:ownerHash,template_id:body.template,data,html}});
  await db('studio_versions',{method:'POST',body:{project_id:id,revision:0,data,html,message:'Original template'}});return await finish(res,201,view(rows[0]));}
  let p=await project(req,q.get('id'));
@@ -76,7 +77,7 @@ export default async function handler(req,res){let locked=null;
  const slug=slugValue(body.slug),hash=tokenHash(body.managementToken);
  if(p.published_slug&&p.published_slug!==slug)throw new HttpError(409,'A published invitation address cannot change.');
  // Studio publishes only its allowlisted templates; draft ownership is verified above.
- const input={...p.data,template:p.template_id==='royal-temple'?'emerald-noir':p.template_id,music:['/assets/track1.mp3','/assets/track3.mp3'].includes(p.data.music)?p.data.music:'',photos:p.data.photos.filter(x=>/^\/assets\/[\w.-]+$/.test(x))};
+ const input={...p.data,template:isSku(p.template_id)?'emerald-noir':p.template_id==='royal-temple'?'emerald-noir':p.template_id,music:['/assets/track1.mp3','/assets/track3.mp3'].includes(p.data.music)?p.data.music:'',photos:p.data.photos.filter(x=>/^\/assets\/[\w.-]+$/.test(x))};
  const valid=validateData(input,slug);valid.data.template=p.template_id;valid.data.studioId=p.id;
  if(Date.parse(p.data.date+'T'+p.data.time+':00+05:30')<=Date.now())throw new HttpError(400,'Choose an upcoming event before publishing.');
  if(!p.git_sha)p=await checkpoint(p,p.data,p.html,'Verified publication checkpoint.',true);

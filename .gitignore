@@ -9,3 +9,6 @@ dist/
 public/review/
 .env*.local
 .env*
+
+public/vendor/grapesjs/grapes.min.js
+workspace-grapes*

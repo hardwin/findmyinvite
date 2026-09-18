@@ -1,3 +1,6 @@
+import {readFile,writeFile} from 'node:fs/promises';
+import {gunzipSync} from 'node:zlib';
+await writeFile(new URL('./public/vendor/grapesjs/grapes.min.js',import.meta.url),gunzipSync(await readFile(new URL('./public/vendor/grapesjs/grapes.min.js.gz',import.meta.url))));
 import {createServer,build,loadEnv} from 'vite';
 import {localApi} from './server/local-api.mjs';
 import {rm} from 'node:fs/promises';
