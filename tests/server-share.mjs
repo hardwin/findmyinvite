@@ -71,6 +71,8 @@ test('every catalog template has a share still and the storefront HTML advertise
  assert.equal(spaPattern.test('/api/content'),false);
  assert.equal(spaPattern.test('/assets/logo.png'),false);
  assert.equal(spaPattern.test('/invitations/haldi'),false);
+ assert.equal(spaPattern.test('/blog'),false);
+ assert.equal(spaPattern.test('/blog/halloween-invitation-webpage'),false);
  const robots=await readFile(new URL('../public/robots.txt',import.meta.url),'utf8');
  assert.match(robots,/^User-agent:/);
  assert.match(robots,/Disallow: \/akay/);
@@ -81,6 +83,8 @@ test('every catalog template has a share still and the storefront HTML advertise
  assert.match(sitemap,/https:\/\/findmyinvite.com\/invitations\/haldi/);
  assert.match(sitemap,/https:\/\/findmyinvite.com\/invitations\/nikah/);
  assert.match(sitemap,/https:\/\/findmyinvite.com\/invitations\/nikkah/);
+ assert.match(sitemap,/https:\/\/findmyinvite.com\/blog</);
+ assert.match(sitemap,/https:\/\/findmyinvite.com\/blog\/halloween-invitation-webpage/);
  assert.equal(sitemap.includes('vercel.app'),false);
  assert.equal(sitemap.includes('/akay'),false);
  assert.equal(sitemap.includes('/create'),false);
