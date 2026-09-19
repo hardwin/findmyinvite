@@ -110,8 +110,12 @@ test('SPA catch-all stays after the guest-page rewrite and client still mounts P
  assert.equal(vercel.rewrites.find(rule=>rule.source==='/assets/workspace/:id')?.destination,'/api/workspace?action=asset&id=:id');
  const destinations=routes.map(rule=>rule.destination);
  assert.equal(destinations[0],'/api/share?slug=:slug');
- assert.equal(destinations[1],'/api/guest-page?slug=:slug');
- assert.equal(routes[1].source,'/:slug([a-z0-9][a-z0-9-]{2,47})');
+ assert.equal(destinations.includes('/api/blog-page'),true);
+ assert.equal(destinations.includes('/api/blog-page?slug=:slug'),true);
+ const guestAt=destinations.indexOf('/api/guest-page?slug=:slug');
+ assert.ok(destinations.indexOf('/api/blog-page')<guestAt);
+ assert.equal(destinations[guestAt],'/api/guest-page?slug=:slug');
+ assert.equal(routes[guestAt].source,'/:slug([a-z0-9][a-z0-9-]{2,47})');
  assert.equal(destinations.includes('/api/invitation-page?slug=:slug'),true);
  assert.equal(destinations.at(-1),'/index.html');
  assert.match(destinations.at(-1)==='/index.html' ? vercel.rewrites.at(-1).source : '',/robots/);

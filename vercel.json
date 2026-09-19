@@ -13,6 +13,12 @@
     "api/workspace.mjs": {
       "includeFiles": "public/studio/**",
       "maxDuration": 60
+    },
+    "api/blog-page.mjs": {
+      "includeFiles": "content/blog/**"
+    },
+    "api/content.mjs": {
+      "includeFiles": "content/blog/**"
     }
   },
   "rewrites": [
@@ -32,6 +38,14 @@
       "destination": "/api/share?slug=:slug"
     },
     {
+      "source": "/blog",
+      "destination": "/api/blog-page"
+    },
+    {
+      "source": "/blog/:slug",
+      "destination": "/api/blog-page?slug=:slug"
+    },
+    {
       "source": "/:slug([a-z0-9][a-z0-9-]{2,47})",
       "destination": "/api/guest-page?slug=:slug"
     },
@@ -44,7 +58,7 @@
       "destination": "/api/invitation-page?slug=:slug"
     },
     {
-      "source": "/((?!api/|assets/|review/|robots\\.txt$|sitemap\\.xml$|invitations(?:/.*)?$).*)",
+      "source": "/((?!api/|assets/|review/|robots\\.txt$|sitemap\\.xml$|invitations(?:/.*)?$|blog(?:/.*)?$).*)",
       "destination": "/index.html"
     }
   ],

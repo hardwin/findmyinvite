@@ -115,6 +115,19 @@ Prod baseline at this pass: 22 proposed / 3 rejected / 0 approved / `replication
 
 Three more published Royal catalogue LPs use the same `/api/invitation-page` + sitemap path: `/invitations/royal-temple` → `royal-temple`, `/invitations/royal-heritage-wedding` → `royal-heritage-wedding`, `/invitations/royal-sanctuary` → `royal-sanctuary`. `royal-heritage-wedding` is a separate slug and catalog id from existing `/invitations/royal-heritage` (`royal-heritage`). Unknown `/invitations/{slug}` still 404s. Guest `/api/guest-page`, `/akay` gate, and `robots.txt` are unchanged. Total design LPs: 16; sitemap invitation URLs: 37.
 
+## Halloween blog SSR (2026-09-19)
+
+`/blog` and `/blog/{slug}` now follow the invitation landing-page pattern: Vercel rewrites to `api/blog-page.mjs` → `server/blog-page.mjs`, unique HTML (`title`, description, canonical, H1, body), HTTP 404 for unknown slugs. Rewrites sit **before** the guest `/:slug` gate so `/blog` is not swallowed as a reserved SPA path. Published posts load from `content/blog/*.md` (and `*.json`) and merge published `blog_posts` rows when Supabase is configured; file posts win on slug conflict.
+
+### How Content / SEO Lead adds a daily Halloween post through 19 Oct
+
+1. Add `content/blog/{kebab-slug}.md` with frontmatter: `slug`, `title` (include `| FindMyInvite`), `h1`, `description`, `excerpt`, `published: true`, `published_at` (ISO, already reached). Body is plaintext paragraphs separated by a blank line — not raw HTML.
+2. Add `<loc>https://findmyinvite.com/blog/{kebab-slug}</loc>` to `public/sitemap.xml`. Never use `vercel.app` URLs.
+3. Merge to `main` (Vercel Git deploys production). Curl `/blog/{slug}` and confirm the title/H1 are unique and not the homepage shell.
+4. Optional: also insert the same row into prod `blog_posts` (`published=true`). Not required; files are enough for SSR and `/api/content?kind=blog`.
+
+Seed post (marked `seed: true` in frontmatter only): `/blog/halloween-invitation-webpage`.
+
 ## Backlog
 
 - Forgot password / email reset (explicitly deferred 2026-09-16).
