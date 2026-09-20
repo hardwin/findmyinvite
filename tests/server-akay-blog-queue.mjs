@@ -100,10 +100,8 @@ test('blog queue API requires session; pulse requires cron secret; run is sessio
   assert.match(api,/action==='run'/);
   assert.match(api,/runManualPulse/);
   const ui=await readFile(new URL('../src/AkayBlogQueue.tsx',import.meta.url),'utf8');
-  assert.match(ui,/Run pulse/);
   assert.match(ui,/action=run/);
-  assert.match(ui,/akay-blog-queue/);
-  assert.match(ui,/akay-blog-grid/);
+  assert.match(ui,/aria-label="Approve"/);
   assert.equal(ui.includes('3× daily IST'),false);
  }finally{
   if(prev===undefined)delete process.env.BLOG_PULSE_CRON_SECRET;
@@ -114,7 +112,6 @@ test('blog queue API requires session; pulse requires cron secret; run is sessio
 test('AkayAdmin registers Blog queue and stays unlinked from public pages',async()=>{
  const admin=await readFile(new URL('../src/AkayAdmin.tsx',import.meta.url),'utf8');
  assert.match(admin,/blog-queue/);
- assert.match(admin,/Blog queue/);
  assert.match(admin,/AkayBlogQueue/);
  for(const file of ['Home.tsx','components.tsx']){
   const source=await readFile(new URL('../src/'+file,import.meta.url),'utf8');

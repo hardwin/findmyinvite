@@ -1,4 +1,10 @@
 import {useEffect,useState} from 'react';
+import {Check,Loader2,Play,RefreshCw,X} from 'lucide-react';
+import {Badge} from '@/akay/ui/badge';
+import {Button} from '@/akay/ui/button';
+import {Card,CardContent} from '@/akay/ui/card';
+import {Input,Select} from '@/akay/ui/input';
+import {Sheet,SheetContent,SheetHeader,SheetTitle} from '@/akay/ui/sheet';
 
 type Topic={
  id:string;title:string;slug_hint:string;primary_keyword:string;signal_lanes:string[];
@@ -53,7 +59,7 @@ export default function AkayBlogQueue(){
    const res=await fetch('/api/akay-blog-queue?action=list&'+q.toString(),{credentials:'same-origin'});
    if(res.status===401){location.assign('/akay');return;}
    const body=await res.json().catch(()=>null);
-   if(!res.ok||!body||!Array.isArray(body.items))throw new Error(body?.error||'Could not load the blog queue.');
+   if(!res.ok||!body||!Array.isArray(body.items))throw new Error(body?.error||'Load failed.');
    const payload:Payload={
     items:body.items,
     total:Number(body.total)||body.items.length,
@@ -66,7 +72,7 @@ export default function AkayBlogQueue(){
    };
    setData(current=>nextOffset&&current?{...payload,items:[...current.items,...payload.items]}:payload);
    setOffset(nextOffset);
-  }catch(err){setError(err instanceof Error?err.message:'Could not load the blog queue.');}
+  }catch(err){setError(err instanceof Error?err.message:'Load failed.');}
   finally{setLoading(false);}
  }
 
@@ -85,17 +91,17 @@ export default function AkayBlogQueue(){
     body:JSON.stringify({id,status})
    });
    const body=await res.json().catch(()=>({}));
-   if(!res.ok)throw new Error((body as {error?:string}).error||'Could not save that decision.');
+   if(!res.ok)throw new Error((body as {error?:string}).error||'Save failed.');
    const slug=(body as {blog_slug?:string}).blog_slug;
-   setNotice(status==='approved'?(slug?'Approved · draft blog/'+slug:'Approved.'):'Rejected.');
+   setNotice(status==='approved'?(slug?'Draft '+slug:'Approved'):'Rejected');
    if((body as {item?:Topic}).item)setOpen((body as {item:Topic}).item);
    await load(0);
-  }catch(err){setError(err instanceof Error?err.message:'Could not save that decision.');}
+  }catch(err){setError(err instanceof Error?err.message:'Save failed.');}
   finally{setBusy('');}
  }
 
  async function runPulseNow(){
-  setBusy('pulse');setError('');setNotice('Running… ≥50 topics (~3 min)');
+  setBusy('pulse');setError('');setNotice('Running…');
   try{
    const res=await fetch('/api/akay-blog-queue?action=run',{
     method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},
@@ -104,13 +110,7 @@ export default function AkayBlogQueue(){
    if(res.status===401){location.assign('/akay');return;}
    const body=await res.json().catch(()=>({}));
    if(!res.ok)throw new Error((body as {error?:string}).error||'Pulse failed.');
-   const inserted=Number((body as {inserted?:number}).inserted)||0;
-   const skipped=Number((body as {skipped?:number}).skipped)||0;
-   const slot=String((body as {slot?:string}).slot||'pulse');
-   const duplicate=Boolean((body as {duplicate?:boolean}).duplicate);
-   setNotice(duplicate
-    ?('Already ran '+slot+' today.')
-    :('Pulse '+slot+': +'+inserted+' / skip '+skipped));
+   setNotice('+'+(Number((body as {inserted?:number}).inserted)||0)+' / skip '+(Number((body as {skipped?:number}).skipped)||0));
    await load(0);
   }catch(err){setError(err instanceof Error?err.message:'Pulse failed.');setNotice('');}
   finally{setBusy('');}
@@ -122,70 +122,75 @@ export default function AkayBlogQueue(){
  const more=Boolean(data&&items.length<data.total);
  const pulsing=busy==='pulse';
 
- return <div className="akay-shortlist akay-blog-queue">
-  <div className="akay-blog-row akay-blog-row-title">
-   <h1>Blog queue</h1>
-   <div className="akay-actions">
-    <button type="button" disabled={Boolean(busy)} onClick={()=>void runPulseNow()}>{pulsing?'Running…':'Run pulse'}</button>
-    <button type="button" className="quiet" disabled={pulsing} onClick={()=>void load(0)}>Refresh</button>
+ return <div className="space-y-2">
+  <div className="flex items-center justify-between gap-2">
+   <h1 className="text-base font-semibold">Blog</h1>
+   <div className="flex items-center gap-1">
+    <Button type="button" size="sm" disabled={Boolean(busy)} onClick={()=>void runPulseNow()}>
+     {pulsing?<Loader2 className="size-3.5 animate-spin"/>:<Play className="size-3.5"/>}
+     {pulsing?'…':'Run'}
+    </Button>
+    <Button type="button" size="icon" variant="outline" disabled={pulsing} aria-label="Refresh" onClick={()=>void load(0)}><RefreshCw className="size-3.5"/></Button>
    </div>
   </div>
-  <div className="akay-blog-row akay-blog-row-filters" role="toolbar" aria-label="Blog queue filters">
-   <div className="akay-chips" role="tablist" aria-label="Today pulses">
-    <button type="button" role="tab" aria-selected={filters.pulse_slot==='morning'} onClick={()=>writeFilters({...filters,pulse_slot:filters.pulse_slot==='morning'?'':'morning'})}>AM {today.morning}</button>
-    <button type="button" role="tab" aria-selected={filters.pulse_slot==='afternoon'} onClick={()=>writeFilters({...filters,pulse_slot:filters.pulse_slot==='afternoon'?'':'afternoon'})}>PM {today.afternoon}</button>
-    <button type="button" role="tab" aria-selected={filters.pulse_slot==='evening'} onClick={()=>writeFilters({...filters,pulse_slot:filters.pulse_slot==='evening'?'':'evening'})}>Eve {today.evening}</button>
-    <button type="button" role="tab" aria-selected={!filters.pulse_slot} onClick={()=>writeFilters({...filters,pulse_slot:''})}>Slots</button>
-   </div>
-   <div className="akay-chips" role="tablist" aria-label="Status">
-    {([['queued','Q'],['approved','Ok'],['rejected','No'],['all','All']] as const).map(([value,text])=>
-     <button key={value} type="button" role="tab" aria-selected={filters.status===value} title={value} onClick={()=>writeFilters({...filters,status:value})}>{text} {value==='all'?counts.all:counts[value]}</button>
-    )}
-   </div>
-   <form className="akay-filters" onSubmit={e=>e.preventDefault()}>
-    <label><span className="akay-sr">Lane</span><select aria-label="Lane" value={filters.lane} onChange={e=>writeFilters({...filters,lane:e.target.value})}><option value="">Lane</option>{(data?.facets.lanes||[]).map(lane=><option key={lane} value={lane}>{label(lane)}</option>)}</select></label>
-    <label className="akay-search"><span className="akay-sr">Search</span><input type="search" enterKeyHint="search" aria-label="Search" placeholder="Search" value={query} onChange={e=>setQuery(e.target.value)}/></label>
-   </form>
+
+  <div className="flex flex-wrap items-center gap-1.5">
+   {([['','All'],['morning','AM '+today.morning],['afternoon','PM '+today.afternoon],['evening','Eve '+today.evening]] as const).map(([value,text])=>(
+    <Button key={value||'all'} type="button" size="sm" variant={(filters.pulse_slot||'')===value?'default':'outline'} onClick={()=>writeFilters({...filters,pulse_slot:value})}>{text}</Button>
+   ))}
+   <span className="mx-1 h-4 w-px bg-border"/>
+   {([['queued','Q '+counts.queued],['approved','Ok '+counts.approved],['rejected','No '+counts.rejected],['all','All '+counts.all]] as const).map(([value,text])=>(
+    <Button key={value} type="button" size="sm" variant={filters.status===value?'default':'outline'} onClick={()=>writeFilters({...filters,status:value})}>{text}</Button>
+   ))}
+   <Select className="ml-auto w-28" aria-label="Lane" value={filters.lane} onChange={e=>writeFilters({...filters,lane:e.target.value})}>
+    <option value="">Lane</option>
+    {(data?.facets.lanes||[]).map(lane=><option key={lane} value={lane}>{label(lane)}</option>)}
+   </Select>
+   <Input className="w-36" type="search" placeholder="Search" value={query} onChange={e=>setQuery(e.target.value)}/>
   </div>
-  {(notice||error)&&<p className={error?'akay-error':'akay-notice akay-blog-status'} role={error?'alert':'status'}>{error||notice}</p>}
-  {loading&&!data&&<p className="akay-empty">Loading…</p>}
-  {data&&items.length===0&&<p className="akay-empty">{filters.q||filters.lane||filters.pulse_slot||filters.status!=='queued'?'No topics match — reset filters.':'No queued topics yet.'}</p>}
-  <ul className="akay-cards akay-blog-grid">
-   {items.map(item=>
-    <li key={item.id} className={'akay-candidate plain akay-blog-card'+(open?.id===item.id?' selected':'')}>
-     <button type="button" className="akay-candidate-main" onClick={()=>setOpen(item)}>
-      <strong>{item.title}</strong>
-      <span className="akay-meta">{item.primary_keyword||'—'}</span>
-      <span className="akay-meta">
-       <i className={'akay-chip status-'+item.status}>{item.status}</i>
-       {item.seo_volume!=null&&<i className="akay-chip">vol {item.seo_volume}</i>}
-       <i className="akay-chip">{item.pulse_slot||'—'}</i>
-      </span>
+
+  {(notice||error)&&<p className={'rounded-md border px-2 py-1 text-xs '+(error?'border-red-200 bg-red-50 text-red-700':'border-emerald-200 bg-emerald-50 text-emerald-800')} role={error?'alert':'status'}>{error||notice}</p>}
+  {loading&&!data&&<p className="text-xs text-muted-foreground">Loading…</p>}
+  {data&&items.length===0&&<p className="text-xs text-muted-foreground">No topics</p>}
+
+  <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
+   {items.map(item=>(
+    <Card key={item.id} className={open?.id===item.id?'ring-1 ring-foreground':''}>
+     <button type="button" className="w-full p-2 text-left" onClick={()=>setOpen(item)}>
+      <p className="line-clamp-3 text-xs font-semibold leading-snug">{item.title}</p>
+      <p className="mt-1 truncate text-[10px] text-muted-foreground">{item.primary_keyword||'—'}</p>
+      <div className="mt-1.5 flex flex-wrap gap-1">
+       <Badge variant={item.status==='approved'?'success':item.status==='rejected'?'danger':'secondary'}>{item.status}</Badge>
+       {item.seo_volume!=null&&<Badge variant="outline">vol {item.seo_volume}</Badge>}
+       <Badge variant="outline">{item.pulse_slot||'—'}</Badge>
+      </div>
      </button>
-     {item.status==='queued'&&<div className="akay-row-actions">
-      <button type="button" disabled={Boolean(busy)} onClick={()=>void decide(item.id,'approved')}>Approve</button>
-      <button type="button" className="quiet" disabled={Boolean(busy)} onClick={()=>void decide(item.id,'rejected')}>Reject</button>
+     {item.status==='queued'&&<div className="flex gap-1 border-t p-1.5">
+      <Button type="button" size="icon" className="flex-1" disabled={Boolean(busy)} aria-label="Approve" onClick={()=>void decide(item.id,'approved')}><Check/></Button>
+      <Button type="button" size="icon" variant="outline" className="flex-1" disabled={Boolean(busy)} aria-label="Reject" onClick={()=>void decide(item.id,'rejected')}><X/></Button>
      </div>}
-    </li>
-   )}
-  </ul>
-  {more&&<div className="akay-actions"><button type="button" className="quiet" disabled={loading} onClick={()=>void load(offset+25)}>Load more</button></div>}
-  {open&&<div className="akay-drawer" role="dialog" aria-modal="true" aria-labelledby="akay-blog-title">
-   <button type="button" className="akay-scrim" aria-label="Close" onClick={()=>setOpen(null)}/>
-   <div className="akay-sheet">
-    <header><h2 id="akay-blog-title">{open.title}</h2><i className={'akay-chip status-'+open.status}>{open.status}</i><button type="button" className="quiet" onClick={()=>setOpen(null)}>Close</button></header>
-    <p className="akay-meta">{open.primary_keyword} · {open.pulse_slot} · {open.pulse_date} · SEO vol {open.seo_volume??'—'}</p>
-    <p className="akay-meta">{(open.signal_lanes||[]).map(label).join(' · ')||'—'}</p>
-    <p className="akay-full-reason"><strong>Angle</strong> — {open.angle||'—'}</p>
-    <p className="akay-full-reason"><strong>Evidence</strong> — {open.evidence_summary||'—'}</p>
-    {open.supports_topic_id&&<p className="akay-meta">Supports topic {open.supports_topic_id}</p>}
-    {(open.source_urls||[]).length>0&&<ul className="akay-gaps">{open.source_urls.map(url=><li key={url}><a className="akay-link" href={url} target="_blank" rel="noopener">{url}</a></li>)}</ul>}
-    <p className="akay-meta">Updated {ist(open.updated_at)}</p>
-    {open.status==='queued'&&<footer className="akay-row-actions">
-     <button type="button" disabled={Boolean(busy)} onClick={()=>void decide(open.id,'approved')}>Approve → draft</button>
-     <button type="button" className="quiet" disabled={Boolean(busy)} onClick={()=>void decide(open.id,'rejected')}>Reject</button>
-    </footer>}
-   </div>
-  </div>}
+    </Card>
+   ))}
+  </div>
+
+  {more&&<Button type="button" variant="outline" size="sm" disabled={loading} onClick={()=>void load(offset+25)}>More</Button>}
+
+  <Sheet open={Boolean(open)} onOpenChange={v=>{if(!v)setOpen(null);}}>
+   {open&&<SheetContent>
+    <SheetHeader>
+     <SheetTitle>{open.title}</SheetTitle>
+     <Badge variant="secondary">{open.status}</Badge>
+    </SheetHeader>
+    <p className="text-xs text-muted-foreground">{open.primary_keyword} · {open.pulse_slot} · {open.pulse_date}</p>
+    <p className="text-xs"><span className="font-medium">Angle</span> — {open.angle||'—'}</p>
+    <p className="text-xs"><span className="font-medium">Evidence</span> — {open.evidence_summary||'—'}</p>
+    <ul className="space-y-1 text-xs">{(open.source_urls||[]).map(url=><li key={url}><a className="text-blue-600 underline break-all" href={url} target="_blank" rel="noopener">{url}</a></li>)}</ul>
+    <p className="text-[10px] text-muted-foreground">{ist(open.updated_at)}</p>
+    {open.status==='queued'&&<div className="mt-auto flex gap-2 pt-2">
+     <Button type="button" className="flex-1" disabled={Boolean(busy)} onClick={()=>void decide(open.id,'approved')}><Check className="size-3.5"/> Approve</Button>
+     <Button type="button" variant="outline" className="flex-1" disabled={Boolean(busy)} onClick={()=>void decide(open.id,'rejected')}><X className="size-3.5"/> Reject</Button>
+    </div>}
+   </SheetContent>}
+  </Sheet>
  </div>;
 }

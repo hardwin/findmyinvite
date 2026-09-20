@@ -42,7 +42,7 @@ export function styleSlugHint(name){
 export function buildStyleReferenceUrls({primary_keyword,style_name}={}){
  const q=String(primary_keyword||style_name||'south indian wedding invitation').trim().slice(0,80);
  if(!q)return [];
- const pinQ=encodeURIComponent(q+' wedding invitation aesthetic');
+ const pinQ=encodeURIComponent(q+' aesthetic');
  const unsplashQ=encodeURIComponent(q.replace(/\s+/g,'-').toLowerCase().slice(0,60)||'south-indian-wedding');
  return [
   'https://www.pinterest.com/search/pins/?q='+pinQ,

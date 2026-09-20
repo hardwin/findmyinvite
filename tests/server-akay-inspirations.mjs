@@ -108,7 +108,8 @@ test('inspirations API requires session; pulse requires cron; run is session-gat
   assert.equal(runDenied.statusCode,401);
   const ui=await readFile(new URL('../src/AkayInspirations.tsx',import.meta.url),'utf8');
   assert.match(ui,/blog_title/);
-  assert.match(ui,/akay-blog-backlink|Blog backlink/);
+  assert.match(ui,/PinterestEmbed/);
+  assert.match(ui,/aria-label="Approve"/);
  }finally{
   if(prev===undefined)delete process.env.BLOG_PULSE_CRON_SECRET;
   else process.env.BLOG_PULSE_CRON_SECRET=prev;
@@ -119,6 +120,7 @@ test('AkayAdmin registers Inspirations; vercel cron is +1 min after blog',async(
  const admin=await readFile(new URL('../src/AkayAdmin.tsx',import.meta.url),'utf8');
  assert.match(admin,/inspirations/);
  assert.match(admin,/AkayInspirations/);
+ assert.match(admin,/akay\.css/);
  const vercel=await readFile(new URL('../vercel.json',import.meta.url),'utf8');
  assert.match(vercel,/"31 2 \* \* \*"/);
  const sql=await readFile(new URL('../supabase/012_inspiration_blog_backlink.sql',import.meta.url),'utf8');

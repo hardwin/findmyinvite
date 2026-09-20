@@ -131,6 +131,10 @@ SQL: `supabase/011_inspiration_queue.sql`. Same env as Blog queue; optional `PIN
 
 **2026-09-20 follow-up:** Hallucinated `/pin/{id}` URLs rejected. Refs are deterministic Pinterest + Unsplash **search** URLs. Each style requires an exact `blog_title` / `blog_topic_id` backlink (`012_inspiration_blog_backlink.sql`). Desk shows Blog · title with link into Blog queue search.
 
+## /akay light shadcn desk (2026-09-20)
+
+Operator desk restyled to a **light shadcn-style** UI (Tailwind v4 + Radix primitives under `src/akay/ui`). Traffic uses Recharts; Blog/Inspirations use compact grids with icon Approve/Reject. Inspirations cards embed Pinterest search in an iframe, falling back to Unsplash mshots + Open link when framing is blocked (Pinterest login wall). Public site CSS unchanged.
+
 ## Backlog
 
 - Forgot password / email reset (explicitly deferred 2026-09-16).
