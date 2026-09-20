@@ -10,7 +10,10 @@ import {
  laneMix,
  buildPulsePrompt,
  SIGNAL_LANES,
- PULSE_SLOTS
+ PULSE_SLOTS,
+ PULSE_TARGET_MIN,
+ PULSE_BATCH_SIZE,
+ PULSE_MAX_BATCHES
 } from '../server/south-pulse.mjs';
 import {parseListQuery,cleanId,decideStatus} from '../server/akay-blog-queue.mjs';
 import handler from '../api/akay-blog-queue.mjs';
@@ -38,28 +41,35 @@ test('near-paraphrase gate rejects duplicates and rephrases',()=>{
  assert.equal(titleFingerprint('Hello').length,64);
 });
 
-test('filterNovelTopics drops insufficient and paraphrase rows',()=>{
- const result=filterNovelTopics([
+test('filterNovelTopics soft-keeps thin evidence; hard mode drops it',()=>{
+ const soft=filterNovelTopics([
   {title:'Fresh Coimbatore temple wedding invite ideas',primary_keyword:'coimbatore temple wedding',validation:'SUPPORTED'},
   {title:'Chennai wedding invitation trends for 2026',primary_keyword:'chennai wedding',validation:'SUPPORTED'},
-  {title:'Weak signal',primary_keyword:'x',validation:'INSUFFICIENT_DATA'}
- ],['Chennai wedding invitation trends 2026']);
- assert.equal(result.accepted.length,1);
- assert.equal(result.accepted[0].title,'Fresh Coimbatore temple wedding invite ideas');
- assert.ok(result.skipped.some(s=>s.reason==='near_paraphrase'));
- assert.ok(result.skipped.some(s=>s.reason==='insufficient_evidence'));
+  {title:'Weak signal Madurai mehendi invite playlist',primary_keyword:'madurai mehendi',validation:'INSUFFICIENT_DATA'}
+ ],['Chennai wedding invitation trends 2026'],{softEvidence:true});
+ assert.equal(soft.accepted.length,2);
+ assert.ok(soft.skipped.some(s=>s.reason==='near_paraphrase'));
+ const hard=filterNovelTopics([
+  {title:'Weak signal Madurai mehendi invite playlist',primary_keyword:'madurai mehendi',validation:'INSUFFICIENT_DATA'}
+ ],[],{softEvidence:false});
+ assert.equal(hard.accepted.length,0);
+ assert.ok(hard.skipped.some(s=>s.reason==='insufficient_evidence'));
 });
 
-test('South India pulse slots and lanes stay locked',()=>{
+test('South Pulse targets ≥50 topics across invent batches',()=>{
+ assert.equal(PULSE_TARGET_MIN,50);
+ assert.equal(PULSE_BATCH_SIZE,20);
+ assert.ok(PULSE_MAX_BATCHES*PULSE_BATCH_SIZE>=PULSE_TARGET_MIN);
  assert.deepEqual(Object.keys(PULSE_SLOTS).sort(),['afternoon','evening','morning']);
  assert.ok(SIGNAL_LANES.includes('tamil_cinema'));
  assert.ok(SIGNAL_LANES.includes('occasion'));
  const morning=laneMix('morning');
  assert.ok(morning.includes('occasion'));
  assert.ok(morning.includes('news'));
- const prompt=buildPulsePrompt({slot:'morning',date:'2026-09-20',lanes:morning,existingTitles:['Old topic']});
+ const prompt=buildPulsePrompt({slot:'morning',date:'2026-09-20',lanes:morning,existingTitles:['Old topic'],targetCount:20,batchIndex:1,batchTotal:4});
  assert.match(prompt,/SOUTH INDIA ONLY/i);
  assert.match(prompt,/Never Worldwide|Worldwide/i);
+ assert.match(prompt,/exactly 20 topics/i);
  assert.match(prompt,/Old topic/);
  assert.ok(['morning','afternoon','evening'].includes(pulseSlotFor(new Date('2026-09-20T02:30:00Z'))));
 });
@@ -92,6 +102,7 @@ test('blog queue API requires session; pulse requires cron secret; run is sessio
   const ui=await readFile(new URL('../src/AkayBlogQueue.tsx',import.meta.url),'utf8');
   assert.match(ui,/Run pulse now/);
   assert.match(ui,/action=run/);
+  assert.match(ui,/≥50|Target ≥50/);
  }finally{
   if(prev===undefined)delete process.env.BLOG_PULSE_CRON_SECRET;
   else process.env.BLOG_PULSE_CRON_SECRET=prev;

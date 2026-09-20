@@ -96,7 +96,7 @@ export default function AkayBlogQueue(){
  }
 
  async function runPulseNow(){
-  setBusy('pulse');setError('');setNotice('Running South Pulse… this can take up to a minute.');
+  setBusy('pulse');setError('');setNotice('Running South Pulse… targeting ≥50 topics (up to ~3 minutes).');
   try{
    const res=await fetch('/api/akay-blog-queue?action=run',{
     method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},
@@ -109,9 +109,11 @@ export default function AkayBlogQueue(){
    const skipped=Number((body as {skipped?:number}).skipped)||0;
    const slot=String((body as {slot?:string}).slot||'pulse');
    const duplicate=Boolean((body as {duplicate?:boolean}).duplicate);
+   const limits=Array.isArray((body as {limitations?:string[]}).limitations)?(body as {limitations:string[]}).limitations:[];
+   const hint=limits.filter(line=>!line.startsWith('Forced re-run')).slice(0,3).join(' · ');
    setNotice(duplicate
-    ?('Already ran '+slot+' today — force cleared and re-ran, or nothing new passed novelty/SEO.')
-    :('Pulse '+slot+': inserted '+inserted+', skipped '+skipped+'.'));
+    ?('Already ran '+slot+' today — force cleared and re-ran, or nothing new passed novelty/SEO.'+(hint?' '+hint:''))
+    :('Pulse '+slot+': inserted '+inserted+', skipped '+skipped+'.'+(hint?' '+hint:'')));
    await load(0);
   }catch(err){setError(err instanceof Error?err.message:'Pulse failed.');setNotice('');}
   finally{setBusy('');}
@@ -131,7 +133,7 @@ export default function AkayBlogQueue(){
     <button type="button" className="quiet" disabled={pulsing} onClick={()=>void load(0)}>Refresh</button>
    </div>
   </div>
-  <p className="akay-notice">South Pulse · 3× daily IST (08:00 / 14:00 / 20:00) plus manual start. Occasions + Tamil cinema, songs, celebs, entertainment, news — South India only. Novel supporting topics; never paraphrases of the queue. Manual runs capped at 3/hour.</p>
+  <p className="akay-notice">South Pulse · 3× daily IST (08:00 / 14:00 / 20:00) plus manual start. Target ≥50 novel topics per run (multi-batch invent). Occasions + Tamil cinema, songs, celebs, entertainment, news — South India only. Soft SEO/evidence gates keep thin-volume rows with notes. Manual runs capped at 3/hour.</p>
   {notice&&<p className="akay-notice" role="status">{notice}</p>}
   {error&&<p className="akay-error" role="alert">{error}</p>}
   <div className="akay-chips" role="tablist" aria-label="Today pulses">

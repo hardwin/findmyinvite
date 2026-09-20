@@ -10,6 +10,12 @@ export const PULSE_SLOTS={
  afternoon:{primary:['tamil_cinema','songs'],supporting:['celebrity']},
  evening:{primary:['celebrity','entertainment'],supporting:['occasion','news']}
 };
+/** Minimum novel topics inserted (or queued after soft gates) per pulse run. */
+export const PULSE_TARGET_MIN=50;
+/** Topics requested from the model per invent batch. */
+export const PULSE_BATCH_SIZE=20;
+/** Max invent batches before stopping (covers novelty attrition). */
+export const PULSE_MAX_BATCHES=4;
 const STOP=new Set(['the','and','for','with','from','that','this','into','your','our','how','why','what','when','who','a','an','in','on','to','of','is','are','be','as','at','by','or','it']);
 const JACCARD_REJECT=0.55;
 
@@ -89,8 +95,8 @@ async function rest(path,{method='GET',body,prefer,conflict}={}){
 
 export async function loadNoveltyCorpus(){
  const [queue,posts]=await Promise.all([
-  rest('blog_topic_queue?select=id,title,status&status=in.(queued,approved,published)&limit=500'),
-  rest('blog_posts?select=slug,title&limit=200')
+  rest('blog_topic_queue?select=id,title,status&status=in.(queued,approved,published)&limit=800'),
+  rest('blog_posts?select=slug,title&limit=300')
  ]);
  const rows=Array.isArray(queue)?queue:[];
  const blogRows=Array.isArray(posts)?posts:[];
@@ -120,22 +126,25 @@ function extractOutputText(response){
  return chunks.join('\n').trim();
 }
 
-export function buildPulsePrompt({slot,date,lanes,existingTitles}){
- const avoid=existingTitles.slice(0,40).map((t,i)=>`${i+1}. ${t}`).join('\n')||'(queue empty)';
+export function buildPulsePrompt({slot,date,lanes,existingTitles,targetCount=PULSE_BATCH_SIZE,batchIndex=1,batchTotal=1}){
+ const avoid=existingTitles.slice(0,80).map((t,i)=>`${i+1}. ${t}`).join('\n')||'(queue empty)';
  return [
-  'You are South Pulse for FindMyInvite — evidence-aware blog topic research for SOUTH INDIA ONLY.',
+  'You are South Pulse for FindMyInvite — high-volume blog topic research for SOUTH INDIA ONLY.',
   'Geography lock: Tamil Nadu, Karnataka, Andhra Pradesh, Telangana, Kerala and their metros. Never Worldwide or North-India-only angles.',
-  `Pulse slot: ${slot}. IST date: ${date}.`,
+  `Pulse slot: ${slot}. IST date: ${date}. Invent batch ${batchIndex}/${batchTotal}.`,
   `Signal lanes to cover this run: ${lanes.join(', ')}.`,
   'Business niche: digital wedding invitations + South Indian wedding / celebration culture for FindMyInvite hosts.',
   'Return STRICT JSON only with shape:',
   '{"limitations":string[],"topics":[{"title":string,"primary_keyword":string,"lanes":string[],"angle":string,"evidence_summary":string,"source_urls":string[],"supports_existing_title":string|null,"validation":"SUPPORTED"|"REVISE"|"INSUFFICIENT_DATA"}]}',
   'Rules:',
-  '- 6 to 8 topics max.',
+  `- Return exactly ${targetCount} topics in this batch (not fewer).`,
   '- Topics must be NEW — not duplicates or paraphrases of existing queue/blog titles listed below.',
+  '- Vary metros, occasions, cinema titles, songs, celebs, and news hooks so titles stay distinct.',
   '- If a topic extends an existing title, set supports_existing_title to that exact title and explain the NEW supporting angle in "angle" (never a rephrase).',
   '- Prefer live South Indian signals: wedding occasions, Tamil cinema, songs, celebrities, entertainment, regional news.',
-  '- source_urls must be real http(s) URLs from research; if unknown use [] and validation INSUFFICIENT_DATA.',
+  '- primary_keyword must be a short 2–4 word search phrase hosts might type (e.g. "tamil wedding invitation"), not a long sentence.',
+  '- source_urls: real http(s) URLs when known; else [] and validation REVISE (preferred) or INSUFFICIENT_DATA.',
+  '- Prefer validation REVISE over INSUFFICIENT_DATA when the angle is usable but sources are thin.',
   '- Never invent metrics, follower counts, or rankings.',
   '',
   'Existing titles to avoid / only support (not rephrase):',
@@ -143,15 +152,15 @@ export function buildPulsePrompt({slot,date,lanes,existingTitles}){
  ].join('\n');
 }
 
-export async function researchTopics({slot,date,lanes,existingTitles,openaiClient}){
+export async function researchTopics({slot,date,lanes,existingTitles,openaiClient,targetCount=PULSE_BATCH_SIZE,batchIndex=1,batchTotal=1}){
  if(!process.env.OPENAI_API_KEY)throw new HttpError(503,'OpenAI is not configured.');
  const client=openaiClient||new OpenAI({apiKey:process.env.OPENAI_API_KEY,timeout:90000,maxRetries:1});
- const prompt=buildPulsePrompt({slot,date,lanes,existingTitles});
+ const prompt=buildPulsePrompt({slot,date,lanes,existingTitles,targetCount,batchIndex,batchTotal});
  let response;
  try{
+  // Volume invent: JSON only (no web_search) so we can hit ≥50 within the function budget.
   response=await client.responses.create({
    model:process.env.BLOG_PULSE_MODEL||'gpt-4.1-mini',
-   tools:[{type:'web_search_preview'}],
    input:prompt
   });
  }catch(error){
@@ -161,7 +170,8 @@ export async function researchTopics({slot,date,lanes,existingTitles,openaiClien
  const parsed=parseModelJson(extractOutputText(response));
  if(!parsed||!Array.isArray(parsed.topics))throw new HttpError(502,'Trend research returned unusable JSON.');
  const limitations=Array.isArray(parsed.limitations)?parsed.limitations.map(String).slice(0,20):[];
- const topics=parsed.topics.slice(0,8).map(row=>({
+ const cap=Math.max(targetCount,PULSE_BATCH_SIZE);
+ const topics=parsed.topics.slice(0,cap).map(row=>({
   title:String(row.title||'').trim().slice(0,160),
   primary_keyword:String(row.primary_keyword||'').trim().slice(0,80),
   lanes:(Array.isArray(row.lanes)?row.lanes:[]).map(String).filter(l=>SIGNAL_LANES.includes(l)).slice(0,4),
@@ -169,17 +179,24 @@ export async function researchTopics({slot,date,lanes,existingTitles,openaiClien
   evidence_summary:String(row.evidence_summary||'').trim().slice(0,600),
   source_urls:(Array.isArray(row.source_urls)?row.source_urls:[]).map(u=>String(u||'').trim()).filter(u=>/^https?:\/\//i.test(u)).slice(0,5),
   supports_existing_title:row.supports_existing_title?String(row.supports_existing_title).trim().slice(0,160):null,
-  validation:['SUPPORTED','REVISE','INSUFFICIENT_DATA'].includes(row.validation)?row.validation:'INSUFFICIENT_DATA'
+  validation:['SUPPORTED','REVISE','INSUFFICIENT_DATA'].includes(row.validation)?row.validation:'REVISE'
  })).filter(t=>t.title&&t.primary_keyword);
  return {topics,limitations};
 }
 
-export function filterNovelTopics(topics,existingTitles){
+/**
+ * Novelty filter. Soft evidence (default): keep INSUFFICIENT_DATA with a skip note only for paraphrases.
+ * Hard evidence: also skip INSUFFICIENT_DATA.
+ */
+export function filterNovelTopics(topics,existingTitles,{softEvidence=true}={}){
  const accepted=[];
  const skipped=[];
  const seen=[...existingTitles];
  for(const topic of topics){
-  if(topic.validation==='INSUFFICIENT_DATA'){skipped.push({title:topic.title,reason:'insufficient_evidence'});continue;}
+  if(!softEvidence&&topic.validation==='INSUFFICIENT_DATA'){
+   skipped.push({title:topic.title,reason:'insufficient_evidence'});
+   continue;
+  }
   if(isNearParaphrase(topic.title,seen)){skipped.push({title:topic.title,reason:'near_paraphrase'});continue;}
   seen.push(topic.title);
   accepted.push(topic);
@@ -196,15 +213,21 @@ export async function enrichWithSeo(topics,{fetchImpl=fetch,env=process.env}={})
   const map=await keywordOpportunity(topics.map(t=>t.primary_keyword),{fetchImpl,env});
   const enriched=[];
   const limitations=[];
+  let lowVolume=0;
+  let missingSeo=0;
   for(const topic of topics){
    const seo=map.get(topic.primary_keyword.toLowerCase())||null;
+   // Soft gate: keep topics even when Ads volume is 0 / missing.
    if(seo&&!hasSearchInterest(seo)){
-    limitations.push('Rejected SEO: '+topic.primary_keyword+' (no South India search interest).');
+    lowVolume+=1;
+    enriched.push({...topic,seo});
     continue;
    }
-   if(!seo)limitations.push('INSUFFICIENT_DATA SEO for keyword: '+topic.primary_keyword);
+   if(!seo)missingSeo+=1;
    enriched.push({...topic,seo});
   }
+  if(lowVolume)limitations.push('Low/zero Ads volume (kept): '+lowVolume+' keywords');
+  if(missingSeo)limitations.push('INSUFFICIENT_DATA SEO (kept): '+missingSeo+' keywords');
   return {topics:enriched,limitations};
  }catch(error){
   return {
@@ -220,7 +243,46 @@ function resolveSupportsId(topic,queued){
  return hit?.id||null;
 }
 
-export async function runSouthPulse({now=new Date(),openaiClient,fetchImpl=fetch,env=process.env,forceSlot,force=false}={}){
+/** Multi-batch invent until we have ≥ target novel candidates (or batches exhausted). */
+export async function collectPulseCandidates({slot,date,lanes,existingTitles,openaiClient,target=PULSE_TARGET_MIN,batchSize=PULSE_BATCH_SIZE,maxBatches=PULSE_MAX_BATCHES}){
+ const pool=[];
+ const skipped=[];
+ const limitations=[];
+ const avoid=[...existingTitles];
+ let batches=0;
+ while(pool.length<target&&batches<maxBatches){
+  batches+=1;
+  const remaining=target-pool.length;
+  const need=Math.min(batchSize,Math.max(remaining+5,10));
+  const researched=await researchTopics({
+   slot,date,lanes,
+   existingTitles:avoid,
+   openaiClient,
+   targetCount:need,
+   batchIndex:batches,
+   batchTotal:maxBatches
+  });
+  limitations.push(...researched.limitations);
+  if(researched.topics.length<need){
+   limitations.push('Batch '+batches+' returned '+researched.topics.length+'/'+need+' topics.');
+  }
+  const novel=filterNovelTopics(researched.topics,avoid,{softEvidence:true});
+  skipped.push(...novel.skipped);
+  for(const topic of novel.accepted){
+   pool.push(topic);
+   avoid.push(topic.title);
+   if(pool.length>=target)break;
+  }
+ }
+ if(pool.length<target){
+  limitations.push('Below invent target after '+batches+' batches: '+pool.length+'/'+target+' novel candidates.');
+ }else{
+  limitations.push('Invent complete: '+pool.length+' novel candidates across '+batches+' batch(es); target '+target+'.');
+ }
+ return {topics:pool.slice(0,Math.max(target,pool.length)),skipped,limitations,batches};
+}
+
+export async function runSouthPulse({now=new Date(),openaiClient,fetchImpl=fetch,env=process.env,forceSlot,force=false,targetMin=PULSE_TARGET_MIN}={}){
  const {date}=istParts(now);
  const slot=forceSlot&&PULSE_SLOTS[forceSlot]?forceSlot:pulseSlotFor(now);
  const lanes=laneMix(slot);
@@ -252,15 +314,22 @@ export async function runSouthPulse({now=new Date(),openaiClient,fetchImpl=fetch
 
  try{
   const corpus=await loadNoveltyCorpus();
-  const researched=await researchTopics({slot,date,lanes,existingTitles:corpus.titles,openaiClient});
-  limitations.push(...researched.limitations);
-  const novel=filterNovelTopics(researched.topics,corpus.titles);
-  const seo=await enrichWithSeo(novel.accepted,{fetchImpl,env});
+  const collected=await collectPulseCandidates({
+   slot,date,lanes,
+   existingTitles:corpus.titles,
+   openaiClient,
+   target:targetMin
+  });
+  limitations.push(...collected.limitations);
+  limitations.push('No worldwide or North-India-only angles; focus exclusively on South India and its metros.');
+  const seo=await enrichWithSeo(collected.topics,{fetchImpl,env});
   limitations.push(...seo.limitations);
-  limitations.push(...novel.skipped.map(s=>'Skipped '+s.title+': '+s.reason));
+  limitations.push(...collected.skipped.slice(0,15).map(s=>'Skipped '+s.title+': '+s.reason));
+  if(collected.skipped.length>15)limitations.push('…and '+(collected.skipped.length-15)+' more novelty skips.');
+  if(!collected.topics.length)limitations.push('Research returned zero novel topics.');
 
   let inserted=0;
-  const skippedRows=[...novel.skipped];
+  const skippedRows=[...collected.skipped];
   for(const topic of seo.topics){
    const row={
     title:topic.title,
@@ -293,12 +362,18 @@ export async function runSouthPulse({now=new Date(),openaiClient,fetchImpl=fetch
   }
 
   const skipped=skippedRows.length;
+  if(inserted<targetMin){
+   limitations.push('Below insert target: '+inserted+'/'+targetMin+' queued this pulse.');
+  }else{
+   limitations.push('Insert target met: '+inserted+'/'+targetMin+'.');
+  }
+
   await rest('blog_pulse_runs?id=eq.'+runId,{
    method:'PATCH',
    body:{finished_at:new Date().toISOString(),inserted_count:inserted,skipped_count:skipped,limitations}
   });
 
-  return {ok:true,slot,date,runId,inserted,skipped,limitations,duplicate:false};
+  return {ok:true,slot,date,runId,inserted,skipped,limitations,target:targetMin,duplicate:false};
  }catch(error){
   await rest('blog_pulse_runs?id=eq.'+runId,{
    method:'PATCH',

@@ -23,11 +23,9 @@ function authHeader(env=process.env){
  * Returns Map(keyword -> {volume, competition, location}) or empty on soft failure.
  * Never invents metrics — missing data stays null / omitted.
  */
-export async function keywordOpportunity(keywords,{fetchImpl=fetch,env=process.env,locationCode=SOUTH_INDIA_LOCATIONS[0].location_code}={}){
- const list=[...new Set((keywords||[]).map(k=>String(k||'').trim().toLowerCase()).filter(k=>k.length>=3))].slice(0,20);
- if(!list.length)return new Map();
- if(!dataforseoConfigured(env))throw new HttpError(503,'DataForSEO is not configured.');
+const ADS_KEYWORD_CHUNK=20;
 
+async function keywordOpportunityChunk(list,{fetchImpl,env,locationCode}){
  const body=[{
   keywords:list,
   location_code:locationCode||INDIA_FALLBACK,
@@ -68,6 +66,20 @@ export async function keywordOpportunity(keywords,{fetchImpl=fetch,env=process.e
     status:volume===null?'INSUFFICIENT_DATA':'VERIFIED'
    });
   }
+ }
+ return out;
+}
+
+export async function keywordOpportunity(keywords,{fetchImpl=fetch,env=process.env,locationCode=SOUTH_INDIA_LOCATIONS[0].location_code}={}){
+ const list=[...new Set((keywords||[]).map(k=>String(k||'').trim().toLowerCase()).filter(k=>k.length>=3))];
+ if(!list.length)return new Map();
+ if(!dataforseoConfigured(env))throw new HttpError(503,'DataForSEO is not configured.');
+
+ const out=new Map();
+ for(let i=0;i<list.length;i+=ADS_KEYWORD_CHUNK){
+  const chunk=list.slice(i,i+ADS_KEYWORD_CHUNK);
+  const part=await keywordOpportunityChunk(chunk,{fetchImpl,env,locationCode});
+  for(const [key,value] of part)out.set(key,value);
  }
  return out;
 }

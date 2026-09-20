@@ -15,7 +15,7 @@
       "maxDuration": 60
     },
     "api/akay-blog-queue.mjs": {
-      "maxDuration": 120
+      "maxDuration": 300
     }
   },
   "crons": [
