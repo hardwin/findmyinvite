@@ -37,4 +37,4 @@
 @media(min-width:768px){.fmi-storefront .hero-fade{height:224px}.fmi-gallery .type-select{width:300px}.fmi-gallery .collection-tabs button{font-size:16px;padding:10px 28px}.fmi-gallery .template-grid{gap:20px;padding-right:16px}.fmi-gallery .template-art{height:176px}.fmi-gallery .template-description{padding:16px}.fmi-gallery .template-description p{font-size:12px}.fmi-gallery .classic-template-name{font-size:20px}}
 @media(min-width:1024px){.fmi-gallery .template-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media(min-width:1280px){.fmi-gallery .template-grid{grid-template-columns:repeat(5,minmax(0,1fr))}}
-@media(max-width:400px){.fmi-gallery .collection-tabs button{padding-left:12px;padding-right:12px;font-size:13px}}
+@media(max-width:400px){.fmi-gallery .collection-tabs button{padding-left:10px;padding-right:10px;font-size:12px}}

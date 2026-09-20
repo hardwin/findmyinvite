@@ -23,6 +23,7 @@ export default function OccasionLanding({path=location.pathname}:{path?:string})
  const parts=path.replace(/\/+$/,'').split('/').filter(Boolean);
  const page=parts.length===2&&parts[0]==='invitations'?occasionBySlug[parts[1]]:undefined;
  const otherTier=page?(page.tier==='royal'?'classic':'royal'):'classic';
+ const otherLabel=otherTier==='royal'?'Premium':'Free';
  useEffect(()=>{
   if(!page){document.title='Page not found | FindMyInvite';return;}
   setMeta(page.title,page.description,'https://findmyinvite.com/invitations/'+page.slug);
@@ -63,7 +64,7 @@ export default function OccasionLanding({path=location.pathname}:{path?:string})
    <p className="text-muted-foreground leading-relaxed mb-8">{page.how}</p>
    <div className="switch-note">
     <p>{page.switchCopy}</p>
-    <Button href={templatesHref(otherTier)} outline>Browse {otherTier==='royal'?'Royal':'Classic'} templates</Button>
+    <Button href={templatesHref(otherTier)} outline>Browse {otherLabel} templates</Button>
    </div>
   </div></section>
   <section className="py-16 md:py-24 cream-bg"><div className="container mx-auto px-6 max-w-3xl text-center">

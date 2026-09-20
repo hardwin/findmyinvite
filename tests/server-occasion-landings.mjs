@@ -106,5 +106,6 @@ test('20 live FMI design LPs share /invitations/{slug} HTML, sitemap, and catalo
  assert.equal(heritageWedding.templateId,'royal-heritage-wedding');
  assert.notEqual(heritage.slug,heritageWedding.slug);
  assert.notEqual(ctaHref(heritage),ctaHref(heritageWedding));
- assert.equal(ctaHref({tier:'classic'}),'/templates?collection=classic&type=wedding');
+ assert.equal(ctaHref({tier:'classic'}),'/templates?collection=free&type=wedding');
+ assert.equal(ctaHref({tier:'royal'}),'/templates?collection=premium&type=wedding');
 });

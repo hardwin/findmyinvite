@@ -11,3 +11,4 @@ alwaysApply: true
 - Do not store analytics events in the guest invitations database.
 - Hosts sign in with email and password to save a draft or publish. Forgot password is backlog; do not build it until Ashok asks.
 - Operator Shortlist, Competitors, and Upcoming cards lead with a page preview of the existing http(s) link. Do not make those desks text-only.
+- Gallery collection tabs are Premium, Elite, Free (not Royal/Classics). Premium: Royal Imperial, Royal Majesty, Royal Elegance, Royal Prestige, Royal Heritage, Royal Crest, Royal Heritage 1–3. Elite: remaining Royal designs. Free: all Classics.

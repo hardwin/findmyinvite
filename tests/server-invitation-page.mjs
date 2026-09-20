@@ -12,8 +12,8 @@ async function api(url,method='GET'){
 }
 test('known invitation slugs return unique 200 HTML with brief title, H1 and body',async()=>{
  assert.equal(OCCASION_SLUGS.length,21);
- assert.equal(DESIGN_SLUGS.length,16);
- assert.equal(LANDING_SLUGS.length,37);
+ assert.equal(DESIGN_SLUGS.length,20);
+ assert.equal(LANDING_SLUGS.length,41);
  const home='Create Invitation Webpage Online for All Events';
  for(const slug of LANDING_SLUGS){
   const page=occasionBySlug[slug];
@@ -38,7 +38,7 @@ test('known invitation slugs return unique 200 HTML with brief title, H1 and bod
  assert.equal(haldi.code,200);
  assert.match(String(haldi.body),/<title>Haldi Digital Wedding Invitation \| FindMyInvite<\/title>/);
  assert.match(String(haldi.body),/<h1>Haldi Digital Wedding Invitation<\/h1>/);
- assert.match(String(haldi.body),/collection=classic/);
+ assert.match(String(haldi.body),/collection=free/);
  const imperial=await api('/invitations/royal-imperial');
  assert.equal(imperial.code,200);
  assert.match(String(imperial.body),/<title>Royal Imperial Wedding Invitation \| FindMyInvite<\/title>/);

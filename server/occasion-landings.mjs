@@ -367,7 +367,8 @@ export const landingBySlug=occasionBySlug;
 export const OCCASION_SLUGS=occasionPages.map(page=>page.slug);
 export const LANDING_SLUGS=landingPages.map(page=>page.slug);
 export function templatesHref(tier){
- return '/templates?collection='+tier+'&type=wedding';
+ const collection=tier==='classic'||tier==='free'?'free':tier==='elite'?'elite':'premium';
+ return '/templates?collection='+collection+'&type=wedding';
 }
 export function ctaHref(page){
  return page.templateId?'/create?template='+page.templateId+'&type=wedding':templatesHref(page.tier);

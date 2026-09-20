@@ -41,7 +41,7 @@ export function invitationPageHtml(page){
 <section><h2>What a ${escapeHtml(page.name)} invitation webpage includes</h2><p>${escapeHtml(page.includes)}</p></section>
 <section><h2>Who this ${escapeHtml(page.name)} invitation is for</h2><p>${escapeHtml(page.who)}</p></section>
 <section><h2>How to personalise, preview, and share on WhatsApp</h2><p>${escapeHtml(page.how)}</p>
-<div class="switch"><p>${escapeHtml(page.switchCopy)}</p><p><a class="cta outline" href="${escapeHtml(templatesHref(other))}">Browse ${other==='royal'?'Royal':'Classic'} templates</a></p></div></section>
+<div class="switch"><p>${escapeHtml(page.switchCopy)}</p><p><a class="cta outline" href="${escapeHtml(templatesHref(other))}">Browse ${other==='royal'?'Premium':'Free'} templates</a></p></div></section>
 <section class="related"><h2>Keep planning the wedding</h2><p>${related}</p></section>
 <section><h2>Frequently asked questions</h2>${faqs}</section>
 <section><h2>${cta}</h2><p>${page.templateId?'Start from this live FindMyInvite template, then switch collections if you want a different look — without a second landing URL.':'Start from '+(page.tier==='royal'?'Royal':'Classic')+' templates, then switch collections if you want a different look — without a second landing URL.'}</p><p><a class="cta" href="${escapeHtml(ctaHref(page))}">${cta}</a></p></section>

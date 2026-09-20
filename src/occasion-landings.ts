@@ -37,7 +37,7 @@ export const occasionBySlug=catalogBySlug as Record<string,OccasionLandingPage>;
 export const OCCASION_SLUGS=catalogSlugs as string[];
 export const DESIGN_SLUGS=catalogDesignSlugs as string[];
 export const LANDING_SLUGS=catalogLandingSlugs as string[];
-export const templatesHref=catalogTemplatesHref as (tier:'royal'|'classic')=>string;
+export const templatesHref=catalogTemplatesHref as (tier:'royal'|'classic'|'premium'|'elite'|'free')=>string;
 export const ctaHref=catalogCtaHref as (page:OccasionLandingPage)=>string;
 export const demoHref=catalogDemoHref as (page:OccasionLandingPage)=>string;
 export const relatedLabel=catalogRelatedLabel as (href:string)=>string;

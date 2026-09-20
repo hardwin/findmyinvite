@@ -31,7 +31,7 @@ const counts=p=>p.evaluate(()=>({attached:document.querySelectorAll('video[src]'
    await p.evaluate(()=>{Object.defineProperty(document,'hidden',{configurable:true,value:true});document.dispatchEvent(new Event('visibilitychange'));});assert.equal((await counts(p)).attached,0);
    await p.evaluate(()=>{delete document.hidden;document.dispatchEvent(new Event('visibilitychange'));});await sleep(300);report.checks.push('Page Visibility pause and resume '+viewport.width);
    await p.getByRole('button',{name:'Use This Design',exact:false}).first().click();await sleep(100);assert.equal((await counts(p)).playing,0);assert.ok(await p.getByRole('link',{name:/Fill a Form/}).isVisible());assert.ok(await p.getByRole('link',{name:/Use the Editor/}).isVisible());await p.getByRole('button',{name:'Close editing options'}).click();
-   await p.getByRole('tab',{name:'FindMyInvite Classics'}).click();await sleep(100);assert.equal((await counts(p)).attached,0);
+   await p.getByRole('tab',{name:'Free'}).click();await sleep(100);assert.equal((await counts(p)).attached,0);
    assert.deepEqual(errors,[]);assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);report.checks.push('pause, modal, navigation, Classics, overflow, errors '+viewport.width);await p.close();
   }
   const reduced=await browser.newPage({reducedMotion:'reduce'});await reduced.goto(origin+'/templates');await reduced.waitForSelector('.template-card');await sleep(300);assert.equal((await counts(reduced)).attached,0);report.checks.push('reduced motion');await reduced.close();

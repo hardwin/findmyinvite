@@ -1,25 +1,45 @@
 export const occasions = [['wedding','Wedding Invitation'],['engagement','Engagement Invitation'],['wedding-reception','Wedding & Reception Invitation'],['reception','Reception only invitation'],['birthday','Birthday Invitation'],['opening-ceremony','Opening Ceremony Invitation'],['anniversary','Anniversary Invitation'],['housewarming','Housewarming Invitations'],['party','Party Invitations'],['baby-shower','Baby shower'],['custom','Custom invitation']];
+export type GalleryTier='premium'|'elite'|'free';
+export const galleryTiers:GalleryTier[]=['premium','elite','free'];
+export const galleryTierLabels:Record<GalleryTier,string>={premium:'Premium',elite:'Elite',free:'Free'};
+export const galleryTierBlurb:Record<GalleryTier,string>={
+ premium:'Flagship cinematic invitations with the richest motion openings.',
+ elite:'Elevated Royal designs with distinctive ceremony atmospheres.',
+ free:'Elegant animated Classic invitations for every occasion.'
+};
+const premiumIds=new Set(['rose-gold-blush-royal','royal-majesty','modern-minimal-royal','royal-prestige','royal-heritage','royal-crest','royal-heritage-1','royal-heritage-2','royal-heritage-3']);
+export function galleryTierFor(id:string,royal=false):GalleryTier{
+ if(premiumIds.has(id))return 'premium';
+ if(royal)return 'elite';
+ return 'free';
+}
+export function normalizeGalleryCollection(value:string|null|undefined):GalleryTier{
+ if(value==='elite'||value==='free'||value==='premium')return value;
+ if(value==='classic')return 'free';
+ if(value==='royal')return 'premium';
+ return 'premium';
+}
 export const templates = [
-{id:'royal-sanctuary',name:'Royal Sanctuary',description:'A sacred temple opening, golden sanctuary gates and a celebration framed in ivory and gold',image:'royal-sanctuary/0746f651bbbdcaf6.jpg',video:'',badge:'New',royal:true,color:'#fdf6e2'},
-{id:'royal-heritage-wedding',name:'Royal Heritage Wedding',description:'Regal arches, glowing lamps and golden frames for a timeless celebration',image:'royal-heritage-wedding/364e5ed899368f4d.webp',video:'',badge:'New',royal:true,color:'#2a1408'},
- {id:'royal-temple',name:'Royal Temple',description:'A grand temple celebration with floating clouds, ringing bells and rich gold details',image:'temple/bg3.webp',video:'',badge:'New',royal:true,color:'#bd985b'},
- {id:'rose-gold-blush-royal',name:'Royal Imperial',description:'Cinematic rose-gold opening with luxurious motion storytelling',image:'50122aee9f7395c4.jpg',video:'0cfccffffc862729.mp4',badge:'Cinematic',royal:true,color:'#8b2337'},
- {id:'royal-majesty',name:'Royal Majesty',description:'Porcelain blue ballroom romance with painterly cinematic grandeur',image:'5a3bf145f59aa9c7.jpg',video:'royal-majesty.mp4',badge:'New',royal:true,color:'#536e83'},
- {id:'modern-minimal-royal',name:'Royal Elegance',description:'Velvet cream and crimson cinematic experience with palace motifs',image:'15b12cdf24c3ee92.jpg',video:'royal-elegance-royal.mp4',badge:'Premium',royal:true,color:'#6c1826'},
- {id:'royal-prestige',name:'Royal Prestige',description:'Prestigious cinematic opening with refined elegance and grandeur',image:'9b73577a4b10e8db.jpg',video:'c7238b2b655c3014.mp4',badge:'New',royal:true,color:'#8b2337'},
- {id:'royal-heritage',name:'Royal Heritage',description:'Timeless cinematic opening with regal heritage storytelling',image:'3c934c61dec8899c.jpg',video:'royal-heritage.mp4',badge:'New',royal:true,color:'#884936'},
- {id:'royal-heritage-1',name:'Royal Heritage 1',description:'Timeless cinematic opening with regal heritage storytelling',image:'royal-heritage-1.jpg',video:'royal-heritage-1.mp4',badge:'New',royal:true,color:'#884936'},
- {id:'royal-heritage-2',name:'Royal Heritage 2',description:'Timeless cinematic opening with regal heritage storytelling',image:'royal-heritage-2.jpg',video:'royal-heritage-2.mp4',badge:'New',royal:true,color:'#884936'},
- {id:'royal-heritage-3',name:'Royal Heritage 3',description:'Timeless cinematic opening with regal heritage storytelling',image:'royal-heritage-3.jpg',video:'royal-heritage-3.mp4',badge:'New',royal:true,color:'#884936'},
- {id:'royal-grace',name:'Royal Grace',description:'Sage garden serenity with pearl drapes and graceful cinematic reveal',image:'eaaba0b5d7aeba99.jpg',video:'royal-grace.mp4',badge:'New',royal:true,color:'#59634b'},
- {id:'royal-crest',name:'Royal Crest',description:'Warm ivory florals, antique burgundy wax seal, and lakeside cinematic romance',image:'15cbf1df9056e121.jpg',video:'royal-crest.mp4',badge:'New',royal:true,color:'#713647'},
- {id:'royal-legacy',name:'Royal Legacy',description:'Burgundy velvet curtains, antique gold ornament, and a timeless cinematic reveal',image:'58bf76a6b043df9f.jpg',video:'royal-legacy.mp4',badge:'New',royal:true,color:'#581d2c'},
- {id:'emerald-noir',name:'Emerald Noir',description:'Deep green and gold with ornate corner accents and luxury door opening',image:'4cfcddd6f8996fe3.png',video:'',badge:'Limited Edition',royal:false,color:'#123d32'},
- {id:'luxury-pink',name:'Luxury Pink',description:'Cream card with dusty rose florals, muted gold and romantic serif names',image:'4cfcddd6f8996fe3.png',video:'',badge:'New',royal:false,color:'#b05e77'},
- {id:'ivory-elegance',name:'Crimson Royale',description:'Dark charcoal base with gold and deep red accents, luxury card reveal',image:'',video:'',badge:'Most Liked',royal:false,color:'#451d26'},
- {id:'rose-gold-blush',name:'Rose Gold Blush',description:'Blush pink and rose gold with ornate floral door animation',image:'',video:'',badge:'',royal:false,color:'#a86675'},
- {id:'modern-minimal',name:'Modern Minimal',description:'Deep navy and gold with geometric patterns and book-style opening',image:'',video:'',badge:'New',royal:false,color:'#182d46'},
- {id:'royal-elegance',name:'Majestic Love',description:'Classic ivory and gold with palace motifs and velvet curtain reveal',image:'',video:'',badge:'New',royal:false,color:'#a88643'},
+{id:'royal-sanctuary',name:'Royal Sanctuary',description:'A sacred temple opening, golden sanctuary gates and a celebration framed in ivory and gold',image:'royal-sanctuary/0746f651bbbdcaf6.jpg',video:'',badge:'New',royal:true,tier:'elite' as GalleryTier,color:'#fdf6e2'},
+{id:'royal-heritage-wedding',name:'Royal Heritage Wedding',description:'Regal arches, glowing lamps and golden frames for a timeless celebration',image:'royal-heritage-wedding/364e5ed899368f4d.webp',video:'',badge:'New',royal:true,tier:'elite' as GalleryTier,color:'#2a1408'},
+ {id:'royal-temple',name:'Royal Temple',description:'A grand temple celebration with floating clouds, ringing bells and rich gold details',image:'temple/bg3.webp',video:'',badge:'New',royal:true,tier:'elite' as GalleryTier,color:'#bd985b'},
+ {id:'rose-gold-blush-royal',name:'Royal Imperial',description:'Cinematic rose-gold opening with luxurious motion storytelling',image:'50122aee9f7395c4.jpg',video:'0cfccffffc862729.mp4',badge:'Cinematic',royal:true,tier:'premium' as GalleryTier,color:'#8b2337'},
+ {id:'royal-majesty',name:'Royal Majesty',description:'Porcelain blue ballroom romance with painterly cinematic grandeur',image:'5a3bf145f59aa9c7.jpg',video:'royal-majesty.mp4',badge:'New',royal:true,tier:'premium' as GalleryTier,color:'#536e83'},
+ {id:'modern-minimal-royal',name:'Royal Elegance',description:'Velvet cream and crimson cinematic experience with palace motifs',image:'15b12cdf24c3ee92.jpg',video:'royal-elegance-royal.mp4',badge:'Premium',royal:true,tier:'premium' as GalleryTier,color:'#6c1826'},
+ {id:'royal-prestige',name:'Royal Prestige',description:'Prestigious cinematic opening with refined elegance and grandeur',image:'9b73577a4b10e8db.jpg',video:'c7238b2b655c3014.mp4',badge:'New',royal:true,tier:'premium' as GalleryTier,color:'#8b2337'},
+ {id:'royal-heritage',name:'Royal Heritage',description:'Timeless cinematic opening with regal heritage storytelling',image:'3c934c61dec8899c.jpg',video:'royal-heritage.mp4',badge:'New',royal:true,tier:'premium' as GalleryTier,color:'#884936'},
+ {id:'royal-heritage-1',name:'Royal Heritage 1',description:'Timeless cinematic opening with regal heritage storytelling',image:'royal-heritage-1.jpg',video:'royal-heritage-1.mp4',badge:'New',royal:true,tier:'premium' as GalleryTier,color:'#884936'},
+ {id:'royal-heritage-2',name:'Royal Heritage 2',description:'Timeless cinematic opening with regal heritage storytelling',image:'royal-heritage-2.jpg',video:'royal-heritage-2.mp4',badge:'New',royal:true,tier:'premium' as GalleryTier,color:'#884936'},
+ {id:'royal-heritage-3',name:'Royal Heritage 3',description:'Timeless cinematic opening with regal heritage storytelling',image:'royal-heritage-3.jpg',video:'royal-heritage-3.mp4',badge:'New',royal:true,tier:'premium' as GalleryTier,color:'#884936'},
+ {id:'royal-grace',name:'Royal Grace',description:'Sage garden serenity with pearl drapes and graceful cinematic reveal',image:'eaaba0b5d7aeba99.jpg',video:'royal-grace.mp4',badge:'New',royal:true,tier:'elite' as GalleryTier,color:'#59634b'},
+ {id:'royal-crest',name:'Royal Crest',description:'Warm ivory florals, antique burgundy wax seal, and lakeside cinematic romance',image:'15cbf1df9056e121.jpg',video:'royal-crest.mp4',badge:'New',royal:true,tier:'premium' as GalleryTier,color:'#713647'},
+ {id:'royal-legacy',name:'Royal Legacy',description:'Burgundy velvet curtains, antique gold ornament, and a timeless cinematic reveal',image:'58bf76a6b043df9f.jpg',video:'royal-legacy.mp4',badge:'New',royal:true,tier:'elite' as GalleryTier,color:'#581d2c'},
+ {id:'emerald-noir',name:'Emerald Noir',description:'Deep green and gold with ornate corner accents and luxury door opening',image:'4cfcddd6f8996fe3.png',video:'',badge:'Limited Edition',royal:false,tier:'free' as GalleryTier,color:'#123d32'},
+ {id:'luxury-pink',name:'Luxury Pink',description:'Cream card with dusty rose florals, muted gold and romantic serif names',image:'4cfcddd6f8996fe3.png',video:'',badge:'New',royal:false,tier:'free' as GalleryTier,color:'#b05e77'},
+ {id:'ivory-elegance',name:'Crimson Royale',description:'Dark charcoal base with gold and deep red accents, luxury card reveal',image:'',video:'',badge:'Most Liked',royal:false,tier:'free' as GalleryTier,color:'#451d26'},
+ {id:'rose-gold-blush',name:'Rose Gold Blush',description:'Blush pink and rose gold with ornate floral door animation',image:'',video:'',badge:'',royal:false,tier:'free' as GalleryTier,color:'#a86675'},
+ {id:'modern-minimal',name:'Modern Minimal',description:'Deep navy and gold with geometric patterns and book-style opening',image:'',video:'',badge:'New',royal:false,tier:'free' as GalleryTier,color:'#182d46'},
+ {id:'royal-elegance',name:'Majestic Love',description:'Classic ivory and gold with palace motifs and velvet curtain reveal',image:'',video:'',badge:'New',royal:false,tier:'free' as GalleryTier,color:'#a88643'},
 ];
 export const features=[['infinity','Share to Unlimited Guests','One link, infinite reach — no per-guest charges, ever.'],['pen','Unlimited Edits Until the Event Date','Refine every detail right up to your big day.'],['hand','Scratch to Reveal Date','Interactive scratch card reveals the event date with a delightful surprise.'],['timer','Live Countdown','Animated countdown timer to your special day.'],['inbox','Guest Messaging & Inbox','Receive messages, attendance confirmations & guest counts.'],['music','Background Music','Romantic instrumentals with elegant mute toggle.'],['map','Venue with Maps','Embedded Google Maps for seamless directions.'],['wand','Premium Animations','3D door reveals, curtains, sparkles & more.'],['image','Custom Image Upload','Upload slideshow photos & hero background images.'],['brush','Full Customization','Toggle sections, dress codes, events & more.']];
 export const classicBenefits=['Access to FindMyInvite Classic Invitations','5 Premium Animated Templates','1 Invitation Webpage','Unlimited Edits Until Event Date','Buy More Invitations Anytime (Add-On)','Guest Messaging & Inbox','Music, Photos & Custom Uploads','Google Maps & Multi-Language Support','Analytics & Page View Tracking','Automatic Privacy Protection After the Event'];
