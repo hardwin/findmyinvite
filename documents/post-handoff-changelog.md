@@ -8,6 +8,19 @@ Soul: [akay-soul.md](akay-soul.md) · standing facts: [project-context.md](proje
 
 Read this before `docs/handoff/STATUS.md`. The v0.9.0 handoff is the frozen baseline; this file is the current truth after that tag.
 
+## /assembly — Premium intro clone desk (Approach B, local repo writes)
+
+Operator-only desk at `/assembly` (same Akay gate cookie as `/akay`). Clones a Premium cinematic template with 1..N alternate intro videos into the git tree the same way `royal-heritage-1/2/3` were made by hand:
+
+- Encodes `public/assets/{id}.mp4` + first-frame `{id}.jpg` + catalogue preview under `public/assets/catalogue/v1/`
+- Patches `src/data.ts` (`premiumIds` + row), `server/core.mjs` allowlist, `server/share-card.mjs` stills, `cms/templates.json`, `cms/seed-templates.sql`, catalogue `manifest.json`, and a new idempotent `supabase/013_assembly_*.sql`
+- Next ids stay on the lineage root integer sequence (`royal-heritage-4`, not nested `-4-1`)
+- Writes only when local (`ASSEMBLY_FS=1` or non-Vercel). Never auto-pushes.
+- CLI: `npm run assemble:premium -- --parent royal-heritage --videos a.mp4,b.mp4`
+- Inbox: `work/assembly-inbox/` (gitignored except `.gitkeep`)
+
+Done when Ashok assembles one clone locally, opens `/invite/demo?template=…`, then commits/pushes on his word.
+
 ## What this conversation changed after the v0.9.0 handoff
 
 ### Applied in production (real change)

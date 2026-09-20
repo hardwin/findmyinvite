@@ -12,3 +12,6 @@ public/review/
 
 public/vendor/grapesjs/grapes.min.js
 workspace-grapes*
+
+work/assembly-inbox/*
+!work/assembly-inbox/.gitkeep

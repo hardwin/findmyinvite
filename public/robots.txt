@@ -3,5 +3,7 @@ Allow: /
 
 Disallow: /akay
 Disallow: /akay/
+Disallow: /assembly
+Disallow: /assembly/
 
 Sitemap: https://findmyinvite.com/sitemap.xml

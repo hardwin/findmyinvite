@@ -19,6 +19,10 @@
     },
     "api/akay-inspirations.mjs": {
       "maxDuration": 300
+    },
+    "api/assembly.mjs": {
+      "maxDuration": 300,
+      "memory": 1024
     }
   },
   "crons": [
@@ -83,7 +87,12 @@
   "headers": [
     {
       "source": "/assets/catalogue/(.*)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
     },
     {
       "source": "/robots.txt",
@@ -135,6 +144,32 @@
     },
     {
       "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        }
+      ]
+    },
+    {
+      "source": "/assembly",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        }
+      ]
+    },
+    {
+      "source": "/assembly/(.*)",
       "headers": [
         {
           "key": "X-Robots-Tag",

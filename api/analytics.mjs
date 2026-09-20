@@ -10,7 +10,7 @@ function cleanPath(value){
 }
 function collectBody(body){
  const path=cleanPath(body.path);
- if(path==='/akay'||path.startsWith('/akay/'))return null;
+ if(path==='/akay'||path.startsWith('/akay/')||path==='/assembly'||path.startsWith('/assembly/'))return null;
  const type=body.type;
  if(!['pageview','heartbeat','leave'].includes(type))throw new HttpError(400,'Unknown event.');
  const dwell=Number(body.dwell||0);
