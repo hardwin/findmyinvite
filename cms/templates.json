@@ -45,6 +45,33 @@
     "published": false
   },
   {
+    "id": "royal-heritage-1",
+    "name": "Royal Heritage 1",
+    "description": "Timeless cinematic opening with regal heritage storytelling",
+    "collection": "royal",
+    "badge": "New",
+    "sort_order": 21,
+    "published": true
+  },
+  {
+    "id": "royal-heritage-2",
+    "name": "Royal Heritage 2",
+    "description": "Timeless cinematic opening with regal heritage storytelling",
+    "collection": "royal",
+    "badge": "New",
+    "sort_order": 22,
+    "published": true
+  },
+  {
+    "id": "royal-heritage-3",
+    "name": "Royal Heritage 3",
+    "description": "Timeless cinematic opening with regal heritage storytelling",
+    "collection": "royal",
+    "badge": "New",
+    "sort_order": 23,
+    "published": true
+  },
+  {
     "id": "royal-grace",
     "name": "Royal Grace",
     "description": "Sage garden serenity with pearl drapes and graceful cinematic reveal",
@@ -79,6 +106,15 @@
     "badge": "",
     "sort_order": 8,
     "published": false
+  },
+  {
+    "id": "luxury-pink",
+    "name": "Luxury Pink",
+    "description": "Cream card with dusty rose florals, muted gold and romantic serif names",
+    "collection": "classic",
+    "badge": "New",
+    "sort_order": 14,
+    "published": true
   },
   {
     "id": "ivory-elegance",

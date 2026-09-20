@@ -6,7 +6,7 @@ const path=require('node:path');
 const {execFileSync}=require('node:child_process');
 const origin=process.env.CAPTURE_ORIGIN||'http://127.0.0.1:5173';
 const out=path.resolve('public/assets/catalogue/v1'),raw=path.resolve('../../work/catalogue-capture');
-const ids=['royal-sanctuary','royal-heritage-wedding','royal-temple','rose-gold-blush-royal','royal-majesty','modern-minimal-royal','royal-prestige','royal-heritage','royal-grace','royal-crest','royal-legacy'];
+const ids=['royal-sanctuary','royal-heritage-wedding','royal-temple','rose-gold-blush-royal','royal-majesty','modern-minimal-royal','royal-prestige','royal-heritage','royal-heritage-1','royal-heritage-2','royal-heritage-3','royal-grace','royal-crest','royal-legacy'];
 fs.mkdirSync(out,{recursive:true});fs.mkdirSync(raw,{recursive:true});
 const probe=file=>JSON.parse(execFileSync('ffprobe',['-v','error','-show_streams','-show_format','-of','json',file],{encoding:'utf8'}));
 (async()=>{const browser=await chromium.launch({channel:'msedge',headless:true});const manifest={};try{for(const id of ids){

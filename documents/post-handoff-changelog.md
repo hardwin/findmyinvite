@@ -113,7 +113,11 @@ Prod baseline at this pass: 22 proposed / 3 rejected / 0 approved / `replication
 
 ## P1 +3 live FMI design landing pages (2026-09-18)
 
-Three more published Royal catalogue LPs use the same `/api/invitation-page` + sitemap path: `/invitations/royal-temple` → `royal-temple`, `/invitations/royal-heritage-wedding` → `royal-heritage-wedding`, `/invitations/royal-sanctuary` → `royal-sanctuary`. `royal-heritage-wedding` is a separate slug and catalog id from existing `/invitations/royal-heritage` (`royal-heritage`). Unknown `/invitations/{slug}` still 404s. Guest `/api/guest-page`, `/akay` gate, and `robots.txt` are unchanged. Total design LPs: 16; sitemap invitation URLs: 37.
+Three more published Royal catalogue LPs use the same `/api/invitation-page` + sitemap path: `/invitations/royal-temple` → `royal-temple`, `/invitations/royal-heritage-wedding` → `royal-heritage-wedding`, `/invitations/royal-sanctuary` → `royal-sanctuary`. `royal-heritage-wedding` is a separate slug and catalog id from existing `/invitations/royal-heritage` (`royal-heritage`). Unknown `/invitations/{slug}` still 404s. Guest `/api/guest-page`, `/akay` gate, and `robots.txt` are unchanged.
+
+### Royal Heritage cinematic variants (local + catalog DML)
+
+Three clones of cinematic `royal-heritage` with alternate intro videos only (`royal-heritage-1` ← temple_in_heaven, `royal-heritage-2` ← vdd09…, `royal-heritage-3` ← replicate-prediction…). Same poster/still, royal collection, native Invitation renderer. Assets under `public/assets/` + catalogue previews; DML `supabase/010_royal_heritage_variants.sql` applied to prod `qqvcptjkfcjkwbkookcm` with `published=true`. Total design LPs: 20; sitemap invitation URLs: 41. Code must be pushed before live demos use the new mp4s.
 
 ## /akay Blog queue + South Pulse (2026-09-20)
 

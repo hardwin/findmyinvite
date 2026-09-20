@@ -97,5 +97,32 @@
     "duration": 10.625,
     "bytes": 432010,
     "version": 1
+  },
+  "royal-heritage-1": {
+    "src": "/assets/catalogue/v1/royal-heritage-1.mp4",
+    "poster": "/assets/catalogue/v1/royal-heritage-1.webp",
+    "width": 480,
+    "height": 854,
+    "duration": 10,
+    "bytes": 846219,
+    "version": 1
+  },
+  "royal-heritage-2": {
+    "src": "/assets/catalogue/v1/royal-heritage-2.mp4",
+    "poster": "/assets/catalogue/v1/royal-heritage-2.webp",
+    "width": 480,
+    "height": 854,
+    "duration": 10,
+    "bytes": 846472,
+    "version": 1
+  },
+  "royal-heritage-3": {
+    "src": "/assets/catalogue/v1/royal-heritage-3.mp4",
+    "poster": "/assets/catalogue/v1/royal-heritage-3.webp",
+    "width": 480,
+    "height": 854,
+    "duration": 10,
+    "bytes": 825307,
+    "version": 1
   }
 }
