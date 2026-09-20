@@ -115,6 +115,14 @@ Prod baseline at this pass: 22 proposed / 3 rejected / 0 approved / `replication
 
 Three more published Royal catalogue LPs use the same `/api/invitation-page` + sitemap path: `/invitations/royal-temple` → `royal-temple`, `/invitations/royal-heritage-wedding` → `royal-heritage-wedding`, `/invitations/royal-sanctuary` → `royal-sanctuary`. `royal-heritage-wedding` is a separate slug and catalog id from existing `/invitations/royal-heritage` (`royal-heritage`). Unknown `/invitations/{slug}` still 404s. Guest `/api/guest-page`, `/akay` gate, and `robots.txt` are unchanged. Total design LPs: 16; sitemap invitation URLs: 37.
 
+## /akay Blog queue + South Pulse (2026-09-20)
+
+New operator tab **Blog queue** at `/akay/blog-queue` (bottom nav; still unlinked from public pages).
+
+**South Pulse** runs 3× daily IST (08:00 / 14:00 / 20:00 → Vercel cron `30 2,8,14 * * *` UTC) via `GET/POST /api/akay-blog-queue?action=pulse` authenticated with `CRON_SECRET` or `BLOG_PULSE_CRON_SECRET`. Research adapts [hardwin/trend-to-blog](https://github.com/hardwin/trend-to-blog) evidence rules with South-India-only geography and lanes: occasion, Tamil cinema, songs, celebrity, entertainment, news. Keyword opportunity uses DataForSEO directly (OpenSEO patterns; no OpenSEO host). Novelty gate blocks duplicates/near-paraphrases against queue + `blog_posts`. Approve creates an unpublished `blog_posts` draft.
+
+SQL: `supabase/010_blog_topic_queue.sql` (`blog_topic_queue`, `blog_pulse_runs`) — apply on prod Supabase before first pulse. Env needed: `OPENAI_API_KEY`, `DATAFORSEO_LOGIN`, `DATAFORSEO_PASSWORD`, `CRON_SECRET` (or `BLOG_PULSE_CRON_SECRET`).
+
 ## Backlog
 
 - Forgot password / email reset (explicitly deferred 2026-09-16).
