@@ -100,9 +100,11 @@ test('blog queue API requires session; pulse requires cron secret; run is sessio
   assert.match(api,/action==='run'/);
   assert.match(api,/runManualPulse/);
   const ui=await readFile(new URL('../src/AkayBlogQueue.tsx',import.meta.url),'utf8');
-  assert.match(ui,/Run pulse now/);
+  assert.match(ui,/Run pulse/);
   assert.match(ui,/action=run/);
-  assert.match(ui,/≥50|Target ≥50/);
+  assert.match(ui,/akay-blog-queue/);
+  assert.match(ui,/akay-blog-grid/);
+  assert.equal(ui.includes('3× daily IST'),false);
  }finally{
   if(prev===undefined)delete process.env.BLOG_PULSE_CRON_SECRET;
   else process.env.BLOG_PULSE_CRON_SECRET=prev;

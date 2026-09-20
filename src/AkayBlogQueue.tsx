@@ -1,5 +1,4 @@
 import {useEffect,useState} from 'react';
-import AkayPagePreview from './AkayPagePreview';
 
 type Topic={
  id:string;title:string;slug_hint:string;primary_keyword:string;signal_lanes:string[];
@@ -96,7 +95,7 @@ export default function AkayBlogQueue(){
  }
 
  async function runPulseNow(){
-  setBusy('pulse');setError('');setNotice('Running South Pulse… targeting ≥50 topics (up to ~3 minutes).');
+  setBusy('pulse');setError('');setNotice('Running… ≥50 topics (~3 min)');
   try{
    const res=await fetch('/api/akay-blog-queue?action=run',{
     method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},
@@ -109,11 +108,9 @@ export default function AkayBlogQueue(){
    const skipped=Number((body as {skipped?:number}).skipped)||0;
    const slot=String((body as {slot?:string}).slot||'pulse');
    const duplicate=Boolean((body as {duplicate?:boolean}).duplicate);
-   const limits=Array.isArray((body as {limitations?:string[]}).limitations)?(body as {limitations:string[]}).limitations:[];
-   const hint=limits.filter(line=>!line.startsWith('Forced re-run')).slice(0,3).join(' · ');
    setNotice(duplicate
-    ?('Already ran '+slot+' today — force cleared and re-ran, or nothing new passed novelty/SEO.'+(hint?' '+hint:''))
-    :('Pulse '+slot+': inserted '+inserted+', skipped '+skipped+'.'+(hint?' '+hint:'')));
+    ?('Already ran '+slot+' today.')
+    :('Pulse '+slot+': +'+inserted+' / skip '+skipped));
    await load(0);
   }catch(err){setError(err instanceof Error?err.message:'Pulse failed.');setNotice('');}
   finally{setBusy('');}
@@ -125,45 +122,44 @@ export default function AkayBlogQueue(){
  const more=Boolean(data&&items.length<data.total);
  const pulsing=busy==='pulse';
 
- return <div className="akay-shortlist">
-  <div className="akay-top">
+ return <div className="akay-shortlist akay-blog-queue">
+  <div className="akay-blog-row akay-blog-row-title">
    <h1>Blog queue</h1>
    <div className="akay-actions">
-    <button type="button" disabled={Boolean(busy)} onClick={()=>void runPulseNow()}>{pulsing?'Running…':'Run pulse now'}</button>
+    <button type="button" disabled={Boolean(busy)} onClick={()=>void runPulseNow()}>{pulsing?'Running…':'Run pulse'}</button>
     <button type="button" className="quiet" disabled={pulsing} onClick={()=>void load(0)}>Refresh</button>
    </div>
   </div>
-  <p className="akay-notice">South Pulse · 3× daily IST (08:00 / 14:00 / 20:00) plus manual start. Target ≥50 novel topics per run (multi-batch invent). Occasions + Tamil cinema, songs, celebs, entertainment, news — South India only. Soft SEO/evidence gates keep thin-volume rows with notes. Manual runs capped at 3/hour.</p>
-  {notice&&<p className="akay-notice" role="status">{notice}</p>}
-  {error&&<p className="akay-error" role="alert">{error}</p>}
-  <div className="akay-chips" role="tablist" aria-label="Today pulses">
-   <button type="button" role="tab" aria-selected={filters.pulse_slot==='morning'} onClick={()=>writeFilters({...filters,pulse_slot:filters.pulse_slot==='morning'?'':'morning'})}>Morning {today.morning}</button>
-   <button type="button" role="tab" aria-selected={filters.pulse_slot==='afternoon'} onClick={()=>writeFilters({...filters,pulse_slot:filters.pulse_slot==='afternoon'?'':'afternoon'})}>Afternoon {today.afternoon}</button>
-   <button type="button" role="tab" aria-selected={filters.pulse_slot==='evening'} onClick={()=>writeFilters({...filters,pulse_slot:filters.pulse_slot==='evening'?'':'evening'})}>Evening {today.evening}</button>
-   <button type="button" role="tab" aria-selected={!filters.pulse_slot} onClick={()=>writeFilters({...filters,pulse_slot:''})}>All slots</button>
+  <div className="akay-blog-row akay-blog-row-filters" role="toolbar" aria-label="Blog queue filters">
+   <div className="akay-chips" role="tablist" aria-label="Today pulses">
+    <button type="button" role="tab" aria-selected={filters.pulse_slot==='morning'} onClick={()=>writeFilters({...filters,pulse_slot:filters.pulse_slot==='morning'?'':'morning'})}>AM {today.morning}</button>
+    <button type="button" role="tab" aria-selected={filters.pulse_slot==='afternoon'} onClick={()=>writeFilters({...filters,pulse_slot:filters.pulse_slot==='afternoon'?'':'afternoon'})}>PM {today.afternoon}</button>
+    <button type="button" role="tab" aria-selected={filters.pulse_slot==='evening'} onClick={()=>writeFilters({...filters,pulse_slot:filters.pulse_slot==='evening'?'':'evening'})}>Eve {today.evening}</button>
+    <button type="button" role="tab" aria-selected={!filters.pulse_slot} onClick={()=>writeFilters({...filters,pulse_slot:''})}>Slots</button>
+   </div>
+   <div className="akay-chips" role="tablist" aria-label="Status">
+    {([['queued','Q'],['approved','Ok'],['rejected','No'],['all','All']] as const).map(([value,text])=>
+     <button key={value} type="button" role="tab" aria-selected={filters.status===value} title={value} onClick={()=>writeFilters({...filters,status:value})}>{text} {value==='all'?counts.all:counts[value]}</button>
+    )}
+   </div>
+   <form className="akay-filters" onSubmit={e=>e.preventDefault()}>
+    <label><span className="akay-sr">Lane</span><select aria-label="Lane" value={filters.lane} onChange={e=>writeFilters({...filters,lane:e.target.value})}><option value="">Lane</option>{(data?.facets.lanes||[]).map(lane=><option key={lane} value={lane}>{label(lane)}</option>)}</select></label>
+    <label className="akay-search"><span className="akay-sr">Search</span><input type="search" enterKeyHint="search" aria-label="Search" placeholder="Search" value={query} onChange={e=>setQuery(e.target.value)}/></label>
+   </form>
   </div>
-  <div className="akay-chips" role="tablist" aria-label="Status">
-   {([['queued','Queued'],['approved','Approved'],['rejected','Rejected'],['all','All']] as const).map(([value,text])=>
-    <button key={value} type="button" role="tab" aria-selected={filters.status===value} onClick={()=>writeFilters({...filters,status:value})}>{text} {value==='all'?counts.all:counts[value]}</button>
-   )}
-  </div>
-  <form className="akay-filters" onSubmit={e=>e.preventDefault()}>
-   <label>Lane<select value={filters.lane} onChange={e=>writeFilters({...filters,lane:e.target.value})}><option value="">All lanes</option>{(data?.facets.lanes||[]).map(lane=><option key={lane} value={lane}>{label(lane)}</option>)}</select></label>
-   <label className="akay-search">Search<input type="search" enterKeyHint="search" placeholder="Title or keyword" value={query} onChange={e=>setQuery(e.target.value)}/></label>
-  </form>
-  {loading&&!data&&<p className="akay-empty">Loading South Pulse topics…</p>}
-  {data&&items.length===0&&<p className="akay-empty">{filters.q||filters.lane||filters.pulse_slot||filters.status!=='queued'?'No topics match — reset filters.':'No queued topics yet. Next pulse at 08:00 / 14:00 / 20:00 IST.'}</p>}
-  <ul className="akay-cards">
+  {(notice||error)&&<p className={error?'akay-error':'akay-notice akay-blog-status'} role={error?'alert':'status'}>{error||notice}</p>}
+  {loading&&!data&&<p className="akay-empty">Loading…</p>}
+  {data&&items.length===0&&<p className="akay-empty">{filters.q||filters.lane||filters.pulse_slot||filters.status!=='queued'?'No topics match — reset filters.':'No queued topics yet.'}</p>}
+  <ul className="akay-cards akay-blog-grid">
    {items.map(item=>
-    <li key={item.id} className={'akay-candidate plain'+(open?.id===item.id?' selected':'')}>
+    <li key={item.id} className={'akay-candidate plain akay-blog-card'+(open?.id===item.id?' selected':'')}>
      <button type="button" className="akay-candidate-main" onClick={()=>setOpen(item)}>
-      <AkayPagePreview src={item.preview||''} alt={item.title}/>
       <strong>{item.title}</strong>
-      <span className="akay-meta">{item.primary_keyword||'—'} · {item.pulse_slot} · {item.pulse_date}</span>
+      <span className="akay-meta">{item.primary_keyword||'—'}</span>
       <span className="akay-meta">
-       {(item.signal_lanes||[]).slice(0,3).map(lane=><i key={lane} className="akay-chip">{label(lane)}</i>)}
        <i className={'akay-chip status-'+item.status}>{item.status}</i>
        {item.seo_volume!=null&&<i className="akay-chip">vol {item.seo_volume}</i>}
+       <i className="akay-chip">{item.pulse_slot||'—'}</i>
       </span>
      </button>
      {item.status==='queued'&&<div className="akay-row-actions">
@@ -178,7 +174,6 @@ export default function AkayBlogQueue(){
    <button type="button" className="akay-scrim" aria-label="Close" onClick={()=>setOpen(null)}/>
    <div className="akay-sheet">
     <header><h2 id="akay-blog-title">{open.title}</h2><i className={'akay-chip status-'+open.status}>{open.status}</i><button type="button" className="quiet" onClick={()=>setOpen(null)}>Close</button></header>
-    <AkayPagePreview src={open.preview||''} alt={open.title} className="sheet"/>
     <p className="akay-meta">{open.primary_keyword} · {open.pulse_slot} · {open.pulse_date} · SEO vol {open.seo_volume??'—'}</p>
     <p className="akay-meta">{(open.signal_lanes||[]).map(label).join(' · ')||'—'}</p>
     <p className="akay-full-reason"><strong>Angle</strong> — {open.angle||'—'}</p>
