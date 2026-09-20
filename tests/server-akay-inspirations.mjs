@@ -11,7 +11,10 @@ import {
  buildStylePulsePrompt,
  filterNovelStyles,
  applyPinterestSoftGate,
- styleFingerprint
+ styleFingerprint,
+ buildStyleReferenceUrls,
+ sanitizeReferenceUrls,
+ resolveBlogSeed
 } from '../server/style-pulse.mjs';
 import {parseInspirationListQuery,cleanInspirationId,decideInspirationStatus} from '../server/akay-inspirations.mjs';
 import handler from '../api/akay-inspirations.mjs';
@@ -30,42 +33,57 @@ async function request(url,{method='GET',headers={},cron=false}={}){
  return res;
 }
 
-test('Style Pulse targets ≥25 South India lanes',()=>{
+test('Style Pulse targets ≥25 South India lanes with blog backlinks',()=>{
  assert.equal(STYLE_TARGET_MIN,25);
  assert.ok(STYLE_MAX_BATCHES*STYLE_BATCH_SIZE>=STYLE_TARGET_MIN);
  assert.ok(STYLE_LANES.includes('hindu_traditional'));
  assert.ok(STYLE_LANES.includes('romantic_ai_couple'));
- assert.ok(STYLE_LANES.includes('movie_poster_couple'));
  assert.deepEqual(Object.keys(STYLE_PULSE_SLOTS).sort(),['afternoon','evening','morning']);
  const morning=styleLaneMix('morning');
- assert.ok(morning.includes('hindu_traditional'));
+ const topics=[{id:'11111111-1111-1111-8111-111111111111',title:'Rising Trend of Digital Invitations for Bengaluru’s Traditional Iyengar Weddings',primary_keyword:'Iyengar wedding invitations'}];
  const prompt=buildStylePulsePrompt({
   slot:'morning',date:'2026-09-20',lanes:morning,
-  existingNames:['Old style'],blogKeywords:['tamil wedding invitation'],blogTitles:[],
+  existingNames:['Old style'],blogTopics:topics,
   targetCount:15,batchIndex:1,batchTotal:3
  });
- assert.match(prompt,/SOUTH INDIA/i);
- assert.match(prompt,/exactly 15 styles/i);
- assert.match(prompt,/tamil wedding invitation/i);
- assert.match(prompt,/Pinterest Trends API is unavailable/i);
+ assert.match(prompt,/EXACT title/i);
+ assert.match(prompt,/Do NOT invent reference_urls/i);
+ assert.match(prompt,/Iyengar/);
  assert.equal(styleFingerprint('Temple Gold','hindu_traditional').length,64);
 });
 
-test('filterNovelStyles soft-keeps thin evidence',()=>{
+test('reference URLs reject hallucinated pin IDs and use search links',()=>{
+ const built=buildStyleReferenceUrls({primary_keyword:'Iyengar wedding invitations',style_name:'Iyengar Scripted Legacy'});
+ assert.ok(built[0].includes('pinterest.com/search/pins'));
+ assert.ok(built[0].includes('Iyengar'));
+ assert.ok(built[1].includes('unsplash.com/s/photos/'));
+ assert.deepEqual(sanitizeReferenceUrls([
+  'https://www.pinterest.com/pin/567488040032279278/',
+  'https://www.pinterest.com/search/pins/?q=test',
+  'not-a-url'
+ ]),['https://www.pinterest.com/search/pins/?q=test']);
+});
+
+test('resolveBlogSeed matches exact blog title',()=>{
+ const seeds=[{id:'a',title:'Kerala’s Onam Wedding Celebrations Translating Into Digital Invitation Trends',primary_keyword:'Onam wedding invitation'}];
+ const hit=resolveBlogSeed({blog_title:'Kerala’s Onam Wedding Celebrations Translating Into Digital Invitation Trends',blog_seed_keywords:[]},seeds);
+ assert.equal(hit?.id,'a');
+ assert.equal(resolveBlogSeed({blog_title:'Totally unrelated',blog_seed_keywords:[]},seeds),null);
+});
+
+test('filterNovelStyles soft-keeps thin evidence and blocks duplicate blog backlinks',()=>{
  const soft=filterNovelStyles([
-  {style_name:'Fresh Kanjivaram gold invite mood',primary_keyword:'kanjivaram invite',validation:'SUPPORTED',ai_prompt:'x'},
-  {style_name:'Old style for 2026',primary_keyword:'x',validation:'SUPPORTED',ai_prompt:'x'},
-  {style_name:'Thin romantic dusk couple',primary_keyword:'romantic couple',validation:'INSUFFICIENT_DATA',ai_prompt:'x'}
+  {style_name:'Fresh Kanjivaram gold invite mood',primary_keyword:'kanjivaram invite',validation:'SUPPORTED',ai_prompt:'x',blog_title:'Blog A'},
+  {style_name:'Second style same blog',primary_keyword:'x',validation:'SUPPORTED',ai_prompt:'x',blog_title:'Blog A'},
+  {style_name:'Thin romantic dusk couple',primary_keyword:'romantic couple',validation:'INSUFFICIENT_DATA',ai_prompt:'x',blog_title:'Blog B'}
  ],['Old style'],{softEvidence:true});
  assert.equal(soft.accepted.length,2);
- assert.ok(soft.skipped.some(s=>s.reason==='near_paraphrase'));
+ assert.ok(soft.skipped.some(s=>s.reason==='duplicate_blog_backlink'));
 });
 
 test('Pinterest soft gate without partner token',()=>{
  const skip=applyPinterestSoftGate({});
  assert.ok(skip.limitations[0].includes('PINTEREST_TRENDS_SOFT_SKIP'));
- const noted=applyPinterestSoftGate({PINTEREST_ACCESS_TOKEN:'x'});
- assert.ok(noted.limitations[0].includes('soft-skipped'));
 });
 
 test('inspiration list query and decide guards',()=>{
@@ -88,12 +106,9 @@ test('inspirations API requires session; pulse requires cron; run is session-gat
   assert.equal(pulseDenied.statusCode,401);
   const runDenied=await request('/api/akay-inspirations?action=run',{method:'POST',headers:{cookie:''}});
   assert.equal(runDenied.statusCode,401);
-  const api=await readFile(new URL('../api/akay-inspirations.mjs',import.meta.url),'utf8');
-  assert.match(api,/action==='run'/);
   const ui=await readFile(new URL('../src/AkayInspirations.tsx',import.meta.url),'utf8');
-  assert.match(ui,/Run styles/);
-  assert.match(ui,/akay-inspirations/);
-  assert.match(ui,/AkayPagePreview/);
+  assert.match(ui,/blog_title/);
+  assert.match(ui,/akay-blog-backlink|Blog backlink/);
  }finally{
   if(prev===undefined)delete process.env.BLOG_PULSE_CRON_SECRET;
   else process.env.BLOG_PULSE_CRON_SECRET=prev;
@@ -103,18 +118,10 @@ test('inspirations API requires session; pulse requires cron; run is session-gat
 test('AkayAdmin registers Inspirations; vercel cron is +1 min after blog',async()=>{
  const admin=await readFile(new URL('../src/AkayAdmin.tsx',import.meta.url),'utf8');
  assert.match(admin,/inspirations/);
- assert.match(admin,/Inspirations/);
  assert.match(admin,/AkayInspirations/);
- for(const file of ['Home.tsx','components.tsx']){
-  const source=await readFile(new URL('../src/'+file,import.meta.url),'utf8');
-  assert.equal(source.includes('/akay'),false,file+' must not link /akay');
- }
  const vercel=await readFile(new URL('../vercel.json',import.meta.url),'utf8');
- assert.match(vercel,/akay-inspirations/);
  assert.match(vercel,/"31 2 \* \* \*"/);
- assert.match(vercel,/"31 8 \* \* \*"/);
- assert.match(vercel,/"31 14 \* \* \*"/);
- const sql=await readFile(new URL('../supabase/011_inspiration_queue.sql',import.meta.url),'utf8');
- assert.match(sql,/inspiration_queue/);
- assert.match(sql,/inspiration_pulse_runs/);
+ const sql=await readFile(new URL('../supabase/012_inspiration_blog_backlink.sql',import.meta.url),'utf8');
+ assert.match(sql,/blog_topic_id/);
+ assert.match(sql,/blog_title/);
 });

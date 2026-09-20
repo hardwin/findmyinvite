@@ -23,6 +23,7 @@ export const STYLE_TARGET_MIN=25;
 export const STYLE_BATCH_SIZE=15;
 export const STYLE_MAX_BATCHES=3;
 const JACCARD_REJECT=0.55;
+const HALLUCINATED_PIN=/pinterest\.com\/pin\/\d+/i;
 
 export function styleLaneMix(slot){
  const plan=STYLE_PULSE_SLOTS[slot]||STYLE_PULSE_SLOTS.morning;
@@ -35,6 +36,42 @@ export function styleFingerprint(styleName,lane){
 
 export function styleSlugHint(name){
  return baseSlug(name);
+}
+
+/** Deterministic moodboard refs — never invent /pin/{id} (LLMs hallucinate those). */
+export function buildStyleReferenceUrls({primary_keyword,style_name}={}){
+ const q=String(primary_keyword||style_name||'south indian wedding invitation').trim().slice(0,80);
+ if(!q)return [];
+ const pinQ=encodeURIComponent(q+' wedding invitation aesthetic');
+ const unsplashQ=encodeURIComponent(q.replace(/\s+/g,'-').toLowerCase().slice(0,60)||'south-indian-wedding');
+ return [
+  'https://www.pinterest.com/search/pins/?q='+pinQ,
+  'https://unsplash.com/s/photos/'+unsplashQ
+ ];
+}
+
+export function sanitizeReferenceUrls(urls){
+ return (Array.isArray(urls)?urls:[])
+  .map(u=>String(u||'').trim())
+  .filter(u=>/^https?:\/\//i.test(u))
+  .filter(u=>!HALLUCINATED_PIN.test(u))
+  .slice(0,6);
+}
+
+export function resolveBlogSeed(style,seeds){
+ const list=Array.isArray(seeds)?seeds:[];
+ const wanted=normalizeTitle(style.blog_title||'');
+ if(wanted){
+  const exact=list.find(s=>normalizeTitle(s.title)===wanted);
+  if(exact)return exact;
+ }
+ const kw=(style.blog_seed_keywords||[]).map(k=>normalizeTitle(k)).filter(Boolean);
+ for(const seed of list){
+  const titleN=normalizeTitle(seed.title);
+  const keyN=normalizeTitle(seed.primary_keyword);
+  if(kw.some(k=>k&&(titleN.includes(k)||keyN.includes(k)||k.includes(keyN))))return seed;
+ }
+ return null;
 }
 
 async function rest(path,{method='GET',body,prefer,conflict}={}){
@@ -59,26 +96,23 @@ async function rest(path,{method='GET',body,prefer,conflict}={}){
  return data;
 }
 
-export async function loadBlogSeeds({limit=40}={}){
- const rows=await rest('blog_topic_queue?select=title,primary_keyword,status&status=in.(queued,approved)&order=updated_at.desc&limit='+limit);
- const list=Array.isArray(rows)?rows:[];
- const keywords=[];
- const titles=[];
- for(const row of list){
-  if(row.primary_keyword)keywords.push(String(row.primary_keyword).trim());
-  if(row.title)titles.push(String(row.title).trim());
- }
+export async function loadBlogSeeds({limit=50}={}){
+ const rows=await rest('blog_topic_queue?select=id,title,primary_keyword,status&status=in.(queued,approved)&order=updated_at.desc&limit='+limit);
+ const list=(Array.isArray(rows)?rows:[]).map(row=>({
+  id:row.id,
+  title:String(row.title||'').trim(),
+  primary_keyword:String(row.primary_keyword||'').trim()
+ })).filter(r=>r.id&&r.title);
  return {
-  keywords:[...new Set(keywords.filter(Boolean))].slice(0,40),
-  titles:titles.slice(0,40),
+  topics:list,
+  keywords:[...new Set(list.map(r=>r.primary_keyword).filter(Boolean))].slice(0,50),
+  titles:list.map(r=>r.title),
   count:list.length
  };
 }
 
 export async function loadStyleNoveltyCorpus(){
- const [queue]=await Promise.all([
-  rest('inspiration_queue?select=id,style_name,status&status=in.(queued,approved,published)&limit=800')
- ]);
+ const queue=await rest('inspiration_queue?select=id,style_name,status&status=in.(queued,approved,published)&limit=800');
  const rows=Array.isArray(queue)?queue:[];
  return {names:rows.map(r=>r.style_name).filter(Boolean),queued:rows};
 }
@@ -103,31 +137,31 @@ function extractOutputText(response){
  return chunks.join('\n').trim();
 }
 
-export function buildStylePulsePrompt({slot,date,lanes,existingNames,blogKeywords,blogTitles,targetCount=STYLE_BATCH_SIZE,batchIndex=1,batchTotal=1}){
+export function buildStylePulsePrompt({slot,date,lanes,existingNames,blogTopics,targetCount=STYLE_BATCH_SIZE,batchIndex=1,batchTotal=1}){
  const avoid=existingNames.slice(0,60).map((t,i)=>`${i+1}. ${t}`).join('\n')||'(queue empty)';
- const seeds=(blogKeywords.length?blogKeywords:blogTitles).slice(0,30).map((t,i)=>`${i+1}. ${t}`).join('\n')||'(no blog seeds yet — invent from South Indian culture)';
+ const seeds=blogTopics.slice(0,40).map((t,i)=>`${i+1}. [${t.id}] ${t.title} · keyword: ${t.primary_keyword||'—'}`).join('\n')||'(no blog seeds — STOP and return empty styles with a limitation)';
  return [
   'You are Style Pulse for FindMyInvite — South India invitation DESIGN STYLE research for SKU variations.',
   'Geography lock: Tamil Nadu, Karnataka, Andhra Pradesh, Telangana, Kerala and metros. Never Worldwide or North-India-only.',
   `Pulse slot: ${slot}. IST date: ${date}. Invent batch ${batchIndex}/${batchTotal}.`,
   `Style lanes to cover: ${lanes.join(', ')}.`,
-  'Goal: identify trending visual styles so FMI templates can be restyled into multiple SKUs.',
-  'Lanes mean: hindu_traditional, spiritual_ritual, regional_culture, romantic_ai_couple, movie_poster_couple, creative_ai, modern_minimal.',
+  'Goal: one visual style SKU angle PER blog topic seed — invitation aesthetics only (not food blogs, not random festivals unless the blog title is about invitations).',
+  'Lanes: hindu_traditional, spiritual_ritual, regional_culture, romantic_ai_couple, movie_poster_couple, creative_ai, modern_minimal.',
   'Return STRICT JSON only:',
-  '{"limitations":string[],"styles":[{"style_name":string,"primary_keyword":string,"lanes":string[],"angle":string,"evidence_summary":string,"reference_urls":string[],"ai_prompt":string,"sku_hint":string,"blog_seed_keywords":string[],"validation":"SUPPORTED"|"REVISE"|"INSUFFICIENT_DATA"}]}',
+  '{"limitations":string[],"styles":[{"style_name":string,"primary_keyword":string,"lanes":string[],"angle":string,"evidence_summary":string,"ai_prompt":string,"sku_hint":string,"blog_title":string,"blog_seed_keywords":string[],"validation":"SUPPORTED"|"REVISE"|"INSUFFICIENT_DATA"}]}',
   'Rules:',
-  `- Return exactly ${targetCount} styles in this batch (not fewer).`,
-  '- style_name must be NEW — not duplicates/paraphrases of existing names below.',
-  '- Use blog seed keywords/titles when possible; set blog_seed_keywords to the seeds you used.',
-  '- primary_keyword: short 2–5 word search phrase for the visual style (hosts / designers might type).',
-  '- ai_prompt: a concrete image-generation prompt for a South Indian wedding couple / invitation moodboard in that style (no celebrity real names).',
-  '- sku_hint: short catalogue SKU label e.g. "temple-gold-kanjivaram-v1".',
-  '- reference_urls: 3–6 real http(s) URLs to public mood/reference pages when known (Pinterest pin, Unsplash, Wikimedia); else [] and validation REVISE.',
-  '- Prefer REVISE over INSUFFICIENT_DATA when the style is usable but refs are thin.',
+  `- Return exactly ${targetCount} styles (or fewer only if fewer unused blog seeds remain).`,
+  '- EVERY style MUST set blog_title to the EXACT title string from the blog seed list below (copy-paste exact).',
+  '- Prefer one style per blog seed; do not reuse the same blog_title twice in this batch.',
+  '- style_name must describe an INVITATION / couple visual style derived from that blog title — not a paraphrase of the blog title.',
+  '- primary_keyword: short 2–5 word visual-search phrase for that invitation style.',
+  '- ai_prompt: concrete image-gen prompt for South Indian wedding couple / invitation moodboard (no real celebrity names).',
+  '- sku_hint: short catalogue label e.g. "iyengar-kanjivaram-v1".',
+  '- Do NOT invent reference_urls or Pinterest pin IDs — the server attaches search URLs.',
   '- Never invent metrics, follower counts, or rankings.',
   '- Soft note: Pinterest Trends API is unavailable; do not claim live Pinterest ranks.',
   '',
-  'Blog seeds (titles/keywords from South Pulse queue):',
+  'Blog seeds (must backlink via blog_title):',
   seeds,
   '',
   'Existing style names to avoid:',
@@ -135,10 +169,11 @@ export function buildStylePulsePrompt({slot,date,lanes,existingNames,blogKeyword
  ].join('\n');
 }
 
-export async function researchStyles({slot,date,lanes,existingNames,blogKeywords,blogTitles,openaiClient,targetCount=STYLE_BATCH_SIZE,batchIndex=1,batchTotal=1}){
+export async function researchStyles({slot,date,lanes,existingNames,blogTopics,openaiClient,targetCount=STYLE_BATCH_SIZE,batchIndex=1,batchTotal=1}){
  if(!process.env.OPENAI_API_KEY)throw new HttpError(503,'OpenAI is not configured.');
+ if(!blogTopics?.length)return {styles:[],limitations:['No blog queue seeds — Style Pulse requires blog titles to backlink.']};
  const client=openaiClient||new OpenAI({apiKey:process.env.OPENAI_API_KEY,timeout:90000,maxRetries:1});
- const prompt=buildStylePulsePrompt({slot,date,lanes,existingNames,blogKeywords,blogTitles,targetCount,batchIndex,batchTotal});
+ const prompt=buildStylePulsePrompt({slot,date,lanes,existingNames,blogTopics,targetCount,batchIndex,batchTotal});
  let response;
  try{
   response=await client.responses.create({
@@ -159,12 +194,13 @@ export async function researchStyles({slot,date,lanes,existingNames,blogKeywords
   lanes:(Array.isArray(row.lanes)?row.lanes:[]).map(String).filter(l=>STYLE_LANES.includes(l)).slice(0,4),
   angle:String(row.angle||'').trim().slice(0,400),
   evidence_summary:String(row.evidence_summary||'').trim().slice(0,600),
-  reference_urls:(Array.isArray(row.reference_urls)?row.reference_urls:[]).map(u=>String(u||'').trim()).filter(u=>/^https?:\/\//i.test(u)).slice(0,6),
+  reference_urls:[],
   ai_prompt:String(row.ai_prompt||'').trim().slice(0,1200),
   sku_hint:String(row.sku_hint||'').trim().slice(0,80),
+  blog_title:String(row.blog_title||'').trim().slice(0,200),
   blog_seed_keywords:(Array.isArray(row.blog_seed_keywords)?row.blog_seed_keywords:[]).map(String).map(s=>s.trim()).filter(Boolean).slice(0,6),
   validation:['SUPPORTED','REVISE','INSUFFICIENT_DATA'].includes(row.validation)?row.validation:'REVISE'
- })).filter(t=>t.style_name&&t.primary_keyword&&t.ai_prompt);
+ })).filter(t=>t.style_name&&t.primary_keyword&&t.ai_prompt&&t.blog_title);
  return {styles,limitations};
 }
 
@@ -172,6 +208,7 @@ export function filterNovelStyles(styles,existingNames,{softEvidence=true}={}){
  const accepted=[];
  const skipped=[];
  const seen=[...existingNames];
+ const seenBlog=new Set();
  for(const style of styles){
   if(!softEvidence&&style.validation==='INSUFFICIENT_DATA'){
    skipped.push({title:style.style_name,reason:'insufficient_evidence'});
@@ -181,6 +218,12 @@ export function filterNovelStyles(styles,existingNames,{softEvidence=true}={}){
    skipped.push({title:style.style_name,reason:'near_paraphrase'});
    continue;
   }
+  const blogKey=normalizeTitle(style.blog_title||'');
+  if(blogKey&&seenBlog.has(blogKey)){
+   skipped.push({title:style.style_name,reason:'duplicate_blog_backlink'});
+   continue;
+  }
+  if(blogKey)seenBlog.add(blogKey);
   seen.push(style.style_name);
   accepted.push(style);
  }
@@ -215,40 +258,63 @@ export async function enrichStylesWithSeo(styles,{fetchImpl=fetch,env=process.en
  }
 }
 
-/** Soft Pinterest gate — partner Trends API not affordable; always note and continue. */
 export function applyPinterestSoftGate(env=process.env){
  if(env.PINTEREST_ACCESS_TOKEN){
-  return {limitations:['PINTEREST_TOKEN_PRESENT but Trends partner access not wired in v1 — soft-skipped.']};
+  return {limitations:['PINTEREST_TOKEN_PRESENT but Trends partner access not wired — using search URLs only (no invented pin IDs).']};
  }
- return {limitations:['PINTEREST_TRENDS_SOFT_SKIP — no partner token; styles seeded from blog queue + DataForSEO + South India culture invent.']};
+ return {limitations:['PINTEREST_TRENDS_SOFT_SKIP — attaching deterministic Pinterest/Unsplash search URLs; never invent /pin/{id}.']};
 }
 
-export async function collectStyleCandidates({slot,date,lanes,existingNames,blogKeywords,blogTitles,openaiClient,target=STYLE_TARGET_MIN,batchSize=STYLE_BATCH_SIZE,maxBatches=STYLE_MAX_BATCHES}){
+export async function collectStyleCandidates({slot,date,lanes,existingNames,blogTopics,openaiClient,target=STYLE_TARGET_MIN,batchSize=STYLE_BATCH_SIZE,maxBatches=STYLE_MAX_BATCHES}){
  const pool=[];
  const skipped=[];
  const limitations=[];
  const avoid=[...existingNames];
+ const usedBlog=new Set();
  let batches=0;
- while(pool.length<target&&batches<maxBatches){
+ const hardTarget=Math.min(target,Math.max(blogTopics.length,1));
+ while(pool.length<hardTarget&&batches<maxBatches){
   batches+=1;
-  const remaining=target-pool.length;
-  const need=Math.min(batchSize,Math.max(remaining+3,10));
+  const remaining=hardTarget-pool.length;
+  const need=Math.min(batchSize,Math.max(remaining+2,8));
+  const openSeeds=blogTopics.filter(t=>!usedBlog.has(normalizeTitle(t.title)));
+  if(!openSeeds.length){
+   limitations.push('All blog seeds already backlinked in this pulse.');
+   break;
+  }
   const researched=await researchStyles({
-   slot,date,lanes,existingNames:avoid,blogKeywords,blogTitles,openaiClient,
-   targetCount:need,batchIndex:batches,batchTotal:maxBatches
+   slot,date,lanes,existingNames:avoid,blogTopics:openSeeds,openaiClient,
+   targetCount:Math.min(need,openSeeds.length),batchIndex:batches,batchTotal:maxBatches
   });
   limitations.push(...researched.limitations);
-  if(researched.styles.length<need)limitations.push('Batch '+batches+' returned '+researched.styles.length+'/'+need+' styles.');
   const novel=filterNovelStyles(researched.styles,avoid,{softEvidence:true});
   skipped.push(...novel.skipped);
   for(const style of novel.accepted){
-   pool.push(style);
+   const seed=resolveBlogSeed(style,blogTopics);
+   if(!seed){
+    skipped.push({title:style.style_name,reason:'missing_blog_backlink'});
+    continue;
+   }
+   const blogKey=normalizeTitle(seed.title);
+   if(usedBlog.has(blogKey)){
+    skipped.push({title:style.style_name,reason:'duplicate_blog_backlink'});
+    continue;
+   }
+   usedBlog.add(blogKey);
+   const attached={
+    ...style,
+    blog_title:seed.title,
+    blog_topic_id:seed.id,
+    blog_seed_keywords:style.blog_seed_keywords.length?style.blog_seed_keywords:[seed.primary_keyword].filter(Boolean),
+    reference_urls:buildStyleReferenceUrls({primary_keyword:style.primary_keyword||seed.primary_keyword,style_name:style.style_name})
+   };
+   pool.push(attached);
    avoid.push(style.style_name);
-   if(pool.length>=target)break;
+   if(pool.length>=hardTarget)break;
   }
  }
- if(pool.length<target)limitations.push('Below invent target after '+batches+' batches: '+pool.length+'/'+target+' novel styles.');
- else limitations.push('Invent complete: '+pool.length+' novel styles across '+batches+' batch(es); target '+target+'.');
+ if(pool.length<hardTarget)limitations.push('Below invent target after '+batches+' batches: '+pool.length+'/'+hardTarget+' novel styles with blog backlinks.');
+ else limitations.push('Invent complete: '+pool.length+' styles with blog backlinks across '+batches+' batch(es); target '+hardTarget+'.');
  return {styles:pool,skipped,limitations,batches};
 }
 
@@ -283,17 +349,23 @@ export async function runStylePulse({now=new Date(),openaiClient,fetchImpl=fetch
 
  try{
   const seeds=await loadBlogSeeds();
-  if(!seeds.count)limitations.push('No blog queue seeds yet — inventing from South India culture only.');
-  else limitations.push('Blog seeds loaded: '+seeds.count+' topics ('+seeds.keywords.length+' keywords).');
+  if(!seeds.count){
+   limitations.push('No blog queue seeds — cannot run Style Pulse without blog titles to backlink.');
+   await rest('inspiration_pulse_runs?id=eq.'+runId,{
+    method:'PATCH',
+    body:{finished_at:new Date().toISOString(),inserted_count:0,skipped_count:0,limitations}
+   });
+   return {ok:true,slot,date,runId,inserted:0,skipped:0,limitations,target:targetMin,duplicate:false};
+  }
+  limitations.push('Blog seeds loaded: '+seeds.count+' topics for required backlinks.');
   limitations.push(...applyPinterestSoftGate(env).limitations);
-  limitations.push('No worldwide or North-India-only styles; South India culture / spiritual / romantic / creative AI only.');
+  limitations.push('Reference URLs are deterministic Pinterest/Unsplash searches — hallucinated /pin/{id} links are rejected.');
 
   const corpus=await loadStyleNoveltyCorpus();
   const collected=await collectStyleCandidates({
    slot,date,lanes,
    existingNames:corpus.names,
-   blogKeywords:seeds.keywords,
-   blogTitles:seeds.titles,
+   blogTopics:seeds.topics,
    openaiClient,
    target:targetMin
   });
@@ -307,6 +379,7 @@ export async function runStylePulse({now=new Date(),openaiClient,fetchImpl=fetch
   const skippedRows=[...collected.skipped];
   for(const style of seo.styles){
    const primaryLane=style.lanes[0]||lanes[0];
+   const refs=sanitizeReferenceUrls(style.reference_urls?.length?style.reference_urls:buildStyleReferenceUrls(style));
    const row={
     style_name:style.style_name,
     slug_hint:styleSlugHint(style.style_name),
@@ -314,10 +387,12 @@ export async function runStylePulse({now=new Date(),openaiClient,fetchImpl=fetch
     style_lanes:style.lanes.length?style.lanes:lanes.slice(0,2),
     angle:style.angle||'South India invitation style variation.',
     evidence_summary:style.evidence_summary||'',
-    reference_urls:style.reference_urls,
+    reference_urls:refs,
     ai_prompt:style.ai_prompt,
     sku_hint:style.sku_hint||styleSlugHint(style.style_name),
-    blog_seed_keywords:style.blog_seed_keywords.length?style.blog_seed_keywords:seeds.keywords.slice(0,3),
+    blog_seed_keywords:style.blog_seed_keywords,
+    blog_topic_id:style.blog_topic_id||null,
+    blog_title:style.blog_title||'',
     seo_volume:style.seo?.volume??null,
     seo_competition:style.seo?.competition??null,
     seo_locale:'south_india',
@@ -340,14 +415,15 @@ export async function runStylePulse({now=new Date(),openaiClient,fetchImpl=fetch
   }
 
   const skipped=skippedRows.length;
-  if(inserted<targetMin)limitations.push('Below insert target: '+inserted+'/'+targetMin+' inspirations this pulse.');
-  else limitations.push('Insert target met: '+inserted+'/'+targetMin+'.');
+  const effectiveTarget=Math.min(targetMin,seeds.count);
+  if(inserted<effectiveTarget)limitations.push('Below insert target: '+inserted+'/'+effectiveTarget+' inspirations this pulse.');
+  else limitations.push('Insert target met: '+inserted+'/'+effectiveTarget+'.');
 
   await rest('inspiration_pulse_runs?id=eq.'+runId,{
    method:'PATCH',
    body:{finished_at:new Date().toISOString(),inserted_count:inserted,skipped_count:skipped,limitations}
   });
-  return {ok:true,slot,date,runId,inserted,skipped,limitations,target:targetMin,duplicate:false};
+  return {ok:true,slot,date,runId,inserted,skipped,limitations,target:effectiveTarget,duplicate:false};
  }catch(error){
   await rest('inspiration_pulse_runs?id=eq.'+runId,{
    method:'PATCH',
@@ -358,7 +434,7 @@ export async function runStylePulse({now=new Date(),openaiClient,fetchImpl=fetch
 }
 
 export function mapInspirationItem(row){
- const urls=Array.isArray(row.reference_urls)?row.reference_urls.filter(u=>/^https?:\/\//i.test(String(u||''))):[];
+ const urls=sanitizeReferenceUrls(row.reference_urls);
  return {
   id:row.id,
   style_name:row.style_name||'',
@@ -372,6 +448,8 @@ export function mapInspirationItem(row){
   ai_prompt:row.ai_prompt||'',
   sku_hint:row.sku_hint||'',
   blog_seed_keywords:Array.isArray(row.blog_seed_keywords)?row.blog_seed_keywords:[],
+  blog_topic_id:row.blog_topic_id||null,
+  blog_title:row.blog_title||'',
   seo_volume:row.seo_volume??null,
   seo_competition:row.seo_competition??null,
   seo_locale:row.seo_locale||'south_india',

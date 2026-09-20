@@ -4,7 +4,8 @@ import AkayPagePreview from './AkayPagePreview';
 type Item={
  id:string;style_name:string;slug_hint:string;primary_keyword:string;style_lanes:string[];
  angle:string;evidence_summary:string;reference_urls:string[];preview:string;ai_prompt:string;
- sku_hint:string;blog_seed_keywords:string[];seo_volume:number|null;seo_competition:number|null;
+ sku_hint:string;blog_seed_keywords:string[];blog_topic_id:string|null;blog_title:string;
+ seo_volume:number|null;seo_competition:number|null;
  seo_locale:string;pulse_slot:string;pulse_date:string;fingerprint:string;status:string;
  run_id:string|null;created_at:string;updated_at:string;
 };
@@ -157,6 +158,7 @@ export default function AkayInspirations(){
       <AkayPagePreview src={item.preview||''} alt={item.style_name} className="card"/>
       <strong>{item.style_name}</strong>
       <span className="akay-meta">{item.sku_hint||item.primary_keyword||'—'}</span>
+      {item.blog_title&&<span className="akay-meta akay-blog-backlink" title={item.blog_title}>Blog · {item.blog_title}</span>}
       <span className="akay-meta">
        <i className={'akay-chip status-'+item.status}>{item.status}</i>
        {(item.style_lanes||[]).slice(0,1).map(lane=><i key={lane} className="akay-chip">{label(lane)}</i>)}
@@ -178,6 +180,7 @@ export default function AkayInspirations(){
     <AkayPagePreview src={open.preview||''} alt={open.style_name} className="sheet"/>
     <p className="akay-meta">{open.sku_hint} · {open.primary_keyword} · {open.pulse_slot} · SEO vol {open.seo_volume??'—'}</p>
     <p className="akay-meta">{(open.style_lanes||[]).map(label).join(' · ')||'—'}</p>
+    {open.blog_title&&<p className="akay-full-reason"><strong>Blog backlink</strong> — <a className="akay-link" href={'/akay/blog-queue?q='+encodeURIComponent(open.blog_title)}>{open.blog_title}</a></p>}
     <p className="akay-full-reason"><strong>Angle</strong> — {open.angle||'—'}</p>
     <p className="akay-full-reason"><strong>Evidence</strong> — {open.evidence_summary||'—'}</p>
     <p className="akay-full-reason"><strong>AI prompt</strong> — {open.ai_prompt||'—'}</p>
