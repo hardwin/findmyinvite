@@ -19,8 +19,9 @@ export const STYLE_PULSE_SLOTS={
  evening:{primary:['romantic_ai_couple','regional_culture'],supporting:['spiritual_ritual','hindu_traditional']}
 };
 export const STYLE_TARGET_MIN=25;
-export const STYLE_BATCH_SIZE=15;
-export const STYLE_MAX_BATCHES=3;
+/** Smaller batches keep model JSON under output limits (15×long ai_prompt was truncating). */
+export const STYLE_BATCH_SIZE=8;
+export const STYLE_MAX_BATCHES=4;
 const JACCARD_REJECT=0.55;
 const HALLUCINATED_PIN=/pinterest\.com\/pin\/\d+/i;
 const SKIP_STYLE_WORDS=/\b(food|culinary|biryani|feast|recipe|menu|dessert|cafe|restaurant)\b/i;
@@ -137,11 +138,57 @@ export async function loadStyleNoveltyCorpus(){
  return {names:rows.map(r=>r.style_name).filter(Boolean),queued:rows};
 }
 
-function parseModelJson(text){
+/** Pull complete `{...}` objects from a (possibly truncated) `"styles":[...]` array. */
+function recoverTruncatedStyles(body){
+ const marker=body.match(/"styles"\s*:\s*\[/);
+ if(!marker)return null;
+ let i=body.indexOf(marker[0])+marker[0].length;
+ const styles=[];
+ while(i<body.length){
+  while(i<body.length&&/[\s,]/.test(body[i]))i+=1;
+  if(body[i]===']'||body[i]==='}')break;
+  if(body[i]!=='{')break;
+  let depth=0,inStr=false,esc=false,start=i;
+  for(;i<body.length;i+=1){
+   const c=body[i];
+   if(inStr){
+    if(esc)esc=false;
+    else if(c==='\\')esc=true;
+    else if(c==='"')inStr=false;
+    continue;
+   }
+   if(c==='"')inStr=true;
+   else if(c==='{')depth+=1;
+   else if(c==='}'){
+    depth-=1;
+    if(depth===0){
+     i+=1;
+     try{styles.push(JSON.parse(body.slice(start,i)));}catch{return styles.length?{styles,limitations:['Recovered truncated style JSON']}:null;}
+     break;
+    }
+   }
+  }
+  if(depth!==0)break;
+ }
+ return styles.length?{styles,limitations:['Recovered truncated style JSON']}:null;
+}
+
+export function parseModelJson(text){
  const raw=String(text||'').trim();
+ if(!raw)return null;
  const fence=raw.match(/```(?:json)?\s*([\s\S]*?)```/);
- const body=fence?fence[1].trim():raw;
- try{return JSON.parse(body);}catch{return null;}
+ let body=fence?fence[1].trim():raw;
+ const start=body.indexOf('{');
+ if(start<0)return null;
+ body=body.slice(start);
+ body=body.replace(/[\u201C\u201D]/g,'"').replace(/[\u2018\u2019]/g,"'");
+ body=body.replace(/,\s*([}\]])/g,'$1');
+ try{return JSON.parse(body);}catch{/* fall through */}
+ const end=body.lastIndexOf('}');
+ if(end>0){
+  try{return JSON.parse(body.slice(0,end+1));}catch{/* fall through */}
+ }
+ return recoverTruncatedStyles(body);
 }
 
 function extractOutputText(response){
@@ -176,8 +223,9 @@ export function buildStylePulsePrompt({slot,date,lanes,existingNames,blogTopics,
   '- Prefer one style per blog seed; do not reuse the same blog_title twice in this batch.',
   '- style_name must describe an INVITATION / couple visual style derived from that blog title — romantic couple OR traditional ritual/temple/silk.',
   '- primary_keyword: short 2–5 word phrase; include "wedding invitation" at most once; never append "aesthetic".',
-  '- ai_prompt: concrete image-gen prompt for South Indian wedding couple OR traditional invitation look (no real celebrity names).',
-  '- sku_hint: short catalogue label e.g. "iyengar-kanjivaram-v1".',
+  '- ai_prompt: ONE short sentence ≤180 chars for South Indian wedding couple OR traditional invite (no celebrity names).',
+  '- angle ≤120 chars; evidence_summary ≤160 chars; sku_hint e.g. "iyengar-kanjivaram-v1".',
+  '- Keep JSON compact — no markdown, no prose outside the JSON object.',
   '- Do NOT invent reference_urls or Pinterest pin IDs — the server attaches search URLs.',
   '- Never invent metrics, follower counts, or rankings.',
   '- Soft note: Pinterest Trends API is unavailable; do not claim live Pinterest ranks.',
@@ -190,39 +238,68 @@ export function buildStylePulsePrompt({slot,date,lanes,existingNames,blogTopics,
  ].join('\n');
 }
 
-export async function researchStyles({slot,date,lanes,existingNames,blogTopics,openaiClient,targetCount=STYLE_BATCH_SIZE,batchIndex=1,batchTotal=1}){
- if(!process.env.OPENAI_API_KEY)throw new HttpError(503,'OpenAI is not configured.');
- if(!blogTopics?.length)return {styles:[],limitations:['No blog queue seeds — Style Pulse requires blog titles to backlink.']};
- const client=openaiClient||new OpenAI({apiKey:process.env.OPENAI_API_KEY,timeout:90000,maxRetries:1});
- const prompt=buildStylePulsePrompt({slot,date,lanes,existingNames,blogTopics,targetCount,batchIndex,batchTotal});
- let response;
+async function callStyleModel(client,prompt){
  try{
-  response=await client.responses.create({
+  return await client.responses.create({
    model:process.env.STYLE_PULSE_MODEL||process.env.BLOG_PULSE_MODEL||'gpt-4.1-mini',
-   input:prompt
+   input:prompt,
+   text:{format:{type:'json_object'}}
   });
  }catch(error){
-  console.error('Style Pulse OpenAI failed',error?.message||error);
-  throw new HttpError(502,'Style research service failed.');
+  // Older SDK / model may reject text.format — retry plain.
+  if(String(error?.message||'').toLowerCase().includes('format')||error?.status===400){
+   return client.responses.create({
+    model:process.env.STYLE_PULSE_MODEL||process.env.BLOG_PULSE_MODEL||'gpt-4.1-mini',
+    input:prompt
+   });
+  }
+  throw error;
  }
- const parsed=parseModelJson(extractOutputText(response));
- if(!parsed||!Array.isArray(parsed.styles))throw new HttpError(502,'Style research returned unusable JSON.');
+}
+
+function mapParsedStyles(parsed,targetCount){
  const limitations=Array.isArray(parsed.limitations)?parsed.limitations.map(String).slice(0,20):[];
  const cap=Math.max(targetCount,STYLE_BATCH_SIZE);
  const styles=parsed.styles.slice(0,cap).map(row=>({
   style_name:String(row.style_name||'').trim().slice(0,160),
   primary_keyword:String(row.primary_keyword||'').trim().slice(0,80),
   lanes:(Array.isArray(row.lanes)?row.lanes:[]).map(String).filter(l=>STYLE_LANES.includes(l)).slice(0,4),
-  angle:String(row.angle||'').trim().slice(0,400),
-  evidence_summary:String(row.evidence_summary||'').trim().slice(0,600),
+  angle:String(row.angle||'').trim().slice(0,120),
+  evidence_summary:String(row.evidence_summary||'').trim().slice(0,160),
   reference_urls:[],
-  ai_prompt:String(row.ai_prompt||'').trim().slice(0,1200),
+  ai_prompt:String(row.ai_prompt||'').trim().slice(0,220),
   sku_hint:String(row.sku_hint||'').trim().slice(0,80),
   blog_title:String(row.blog_title||'').trim().slice(0,200),
-  blog_seed_keywords:(Array.isArray(row.blog_seed_keywords)?row.blog_seed_keywords:[]).map(String).map(s=>s.trim()).filter(Boolean).slice(0,6),
+  blog_seed_keywords:(Array.isArray(row.blog_seed_keywords)?row.blog_seed_keywords:[]).map(String).map(s=>s.trim()).filter(Boolean).slice(0,4),
   validation:['SUPPORTED','REVISE','INSUFFICIENT_DATA'].includes(row.validation)?row.validation:'REVISE'
  })).filter(t=>t.style_name&&t.primary_keyword&&t.ai_prompt&&t.blog_title);
  return {styles,limitations};
+}
+
+export async function researchStyles({slot,date,lanes,existingNames,blogTopics,openaiClient,targetCount=STYLE_BATCH_SIZE,batchIndex=1,batchTotal=1}){
+ if(!process.env.OPENAI_API_KEY)throw new HttpError(503,'OpenAI is not configured.');
+ if(!blogTopics?.length)return {styles:[],limitations:['No blog queue seeds — Style Pulse requires blog titles to backlink.']};
+ const client=openaiClient||new OpenAI({apiKey:process.env.OPENAI_API_KEY,timeout:90000,maxRetries:1});
+ const attempts=[targetCount,Math.min(5,targetCount)].filter((n,i,a)=>n>0&&a.indexOf(n)===i);
+ let lastRaw='';
+ for(const count of attempts){
+  const prompt=buildStylePulsePrompt({slot,date,lanes,existingNames,blogTopics,targetCount:count,batchIndex,batchTotal});
+  let response;
+  try{
+   response=await callStyleModel(client,prompt);
+  }catch(error){
+   console.error('Style Pulse OpenAI failed',error?.message||error);
+   throw new HttpError(502,'Style research service failed.');
+  }
+  lastRaw=extractOutputText(response);
+  const parsed=parseModelJson(lastRaw);
+  if(parsed&&Array.isArray(parsed.styles)&&parsed.styles.length){
+   const mapped=mapParsedStyles(parsed,count);
+   if(mapped.styles.length)return mapped;
+  }
+ }
+ console.error('Style Pulse unusable JSON',{chars:lastRaw.length,head:lastRaw.slice(0,280)});
+ throw new HttpError(502,'Style research returned unusable JSON.');
 }
 
 export function filterNovelStyles(styles,existingNames,{softEvidence=true}={}){

@@ -129,7 +129,7 @@ New operator tab **Inspirations** at `/akay/inspirations` (bottom nav; unlinked 
 
 SQL: `supabase/011_inspiration_queue.sql` + `012_inspiration_blog_backlink.sql`.
 
-**2026-09-20 follow-ups:** Hallucinated `/pin/{id}` rejected; refs are clean Pinterest **search** only (no Unsplash — BotStopper blocks mshots). Desk is a **list + detail sheet** (no card previews). Query builder collapses doubled “wedding invitation” and strips “aesthetic”. Pulse skips non-romantic/non-traditional styles.
+**2026-09-20 follow-ups:** Hallucinated `/pin/{id}` rejected; refs are clean Pinterest **search** only (no Unsplash — BotStopper blocks mshots). Desk is a **list + detail sheet** (no card previews). Query builder collapses doubled “wedding invitation” and strips “aesthetic”. Pulse skips non-romantic/non-traditional styles. JSON harden: smaller batches (8×4), `json_object` format, truncated-array recovery, compact prompts — fixes “Style research returned unusable JSON”.
 
 ## /akay light shadcn desk (2026-09-20)
 

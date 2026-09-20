@@ -14,7 +14,8 @@ import {
  styleFingerprint,
  buildStyleReferenceUrls,
  sanitizeReferenceUrls,
- resolveBlogSeed
+ resolveBlogSeed,
+ parseModelJson
 } from '../server/style-pulse.mjs';
 import {parseInspirationListQuery,cleanInspirationId,decideInspirationStatus} from '../server/akay-inspirations.mjs';
 import handler from '../api/akay-inspirations.mjs';
@@ -36,6 +37,7 @@ async function request(url,{method='GET',headers={},cron=false}={}){
 test('Style Pulse targets ≥25 South India lanes with blog backlinks',()=>{
  assert.equal(STYLE_TARGET_MIN,25);
  assert.ok(STYLE_MAX_BATCHES*STYLE_BATCH_SIZE>=STYLE_TARGET_MIN);
+ assert.equal(STYLE_BATCH_SIZE,8);
  assert.ok(STYLE_LANES.includes('hindu_traditional'));
  assert.ok(STYLE_LANES.includes('romantic_ai_couple'));
  assert.equal(STYLE_LANES.includes('creative_ai'),false);
@@ -46,12 +48,21 @@ test('Style Pulse targets ≥25 South India lanes with blog backlinks',()=>{
  const prompt=buildStylePulsePrompt({
   slot:'morning',date:'2026-09-20',lanes:morning,
   existingNames:['Old style'],blogTopics:topics,
-  targetCount:15,batchIndex:1,batchTotal:3
+  targetCount:8,batchIndex:1,batchTotal:4
  });
  assert.match(prompt,/EXACT title/i);
  assert.match(prompt,/romantic\/cute couple|ALLOWED lanes only/i);
+ assert.match(prompt,/compact/i);
  assert.match(prompt,/Iyengar/);
  assert.equal(styleFingerprint('Temple Gold','hindu_traditional').length,64);
+});
+
+test('parseModelJson recovers truncated styles arrays',()=>{
+ const truncated='{"limitations":[],"styles":[{"style_name":"Temple Gold","primary_keyword":"temple invite","lanes":["hindu_traditional"],"angle":"a","evidence_summary":"e","ai_prompt":"p","sku_hint":"t-v1","blog_title":"Blog A","blog_seed_keywords":[],"validation":"SUPPORTED"},{"style_name":"Cut Off';
+ const parsed=parseModelJson(truncated);
+ assert.ok(parsed);
+ assert.equal(parsed.styles.length,1);
+ assert.equal(parsed.styles[0].style_name,'Temple Gold');
 });
 
 test('reference URLs are clean Pinterest search (no doubled wedding invitation, no Unsplash)',()=>{
