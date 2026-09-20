@@ -2,7 +2,6 @@ import {createHash,randomUUID} from 'node:crypto';
 import OpenAI from 'openai';
 import {HttpError,configured} from './core.mjs';
 import {keywordOpportunity,hasSearchInterest,dataforseoConfigured} from './dataforseo.mjs';
-import {pagePreview} from './akay-preview.mjs';
 import {istParts,pulseSlotFor,normalizeTitle,isNearParaphrase,slugHint as baseSlug} from './south-pulse.mjs';
 
 export const STYLE_LANES=[
@@ -10,20 +9,21 @@ export const STYLE_LANES=[
  'spiritual_ritual',
  'regional_culture',
  'romantic_ai_couple',
- 'movie_poster_couple',
- 'creative_ai',
- 'modern_minimal'
+ 'movie_poster_couple'
 ];
+/** Kept only when romantic/cute-couple OR traditional — skip creative/modern/food noise. */
+export const STYLE_LANES_ALLOWED=new Set(STYLE_LANES);
 export const STYLE_PULSE_SLOTS={
  morning:{primary:['hindu_traditional','spiritual_ritual'],supporting:['regional_culture']},
- afternoon:{primary:['romantic_ai_couple','movie_poster_couple'],supporting:['creative_ai']},
- evening:{primary:['creative_ai','modern_minimal'],supporting:['regional_culture','hindu_traditional']}
+ afternoon:{primary:['romantic_ai_couple','movie_poster_couple'],supporting:['hindu_traditional']},
+ evening:{primary:['romantic_ai_couple','regional_culture'],supporting:['spiritual_ritual','hindu_traditional']}
 };
 export const STYLE_TARGET_MIN=25;
 export const STYLE_BATCH_SIZE=15;
 export const STYLE_MAX_BATCHES=3;
 const JACCARD_REJECT=0.55;
 const HALLUCINATED_PIN=/pinterest\.com\/pin\/\d+/i;
+const SKIP_STYLE_WORDS=/\b(food|culinary|biryani|feast|recipe|menu|dessert|cafe|restaurant)\b/i;
 
 export function styleLaneMix(slot){
  const plan=STYLE_PULSE_SLOTS[slot]||STYLE_PULSE_SLOTS.morning;
@@ -38,16 +38,36 @@ export function styleSlugHint(name){
  return baseSlug(name);
 }
 
-/** Deterministic moodboard refs — never invent /pin/{id} (LLMs hallucinate those). */
+/** Collapse duplicated "wedding invitation" and build a single clean search phrase. */
+export function buildStyleSearchQuery({primary_keyword,style_name}={}){
+ let q=String(primary_keyword||style_name||'south indian wedding').trim().replace(/\s+/g,' ');
+ if(!q)return 'south indian wedding';
+ // Collapse consecutive "wedding invitation(s)" → one phrase (fixes Yakshagana wedding invitation wedding invitation …)
+ q=q.replace(/(?:\bwedding\s+invitations?\b\s*)+/gi,'wedding invitation ').replace(/\s+/g,' ').trim();
+ // Drop filler SEO fluff that bloated older Pinterest URLs
+ q=q.replace(/\b(aesthetic|moodboard|vibes?|inspo)\b/gi,' ').replace(/\s+/g,' ').trim();
+ if(!/\b(wedding|invite|invitation|couple|bride|groom|mandap|temple|mehendi|sangeet)\b/i.test(q)){
+  q=q+' wedding invite';
+ }
+ return q.slice(0,80);
+}
+
+/** Deterministic Pinterest search only — never invent /pin/{id}; no Unsplash (bot-blocked). */
 export function buildStyleReferenceUrls({primary_keyword,style_name}={}){
- const q=String(primary_keyword||style_name||'south indian wedding invitation').trim().slice(0,80);
+ const q=buildStyleSearchQuery({primary_keyword,style_name});
  if(!q)return [];
- const pinQ=encodeURIComponent(q+' aesthetic');
- const unsplashQ=encodeURIComponent(q.replace(/\s+/g,'-').toLowerCase().slice(0,60)||'south-indian-wedding');
- return [
-  'https://www.pinterest.com/search/pins/?q='+pinQ,
-  'https://unsplash.com/s/photos/'+unsplashQ
- ];
+ return ['https://www.pinterest.com/search/pins/?q='+encodeURIComponent(q)];
+}
+
+export function isEligibleStyleLane(lanes){
+ const list=Array.isArray(lanes)?lanes:[];
+ return list.some(l=>STYLE_LANES_ALLOWED.has(l));
+}
+
+export function isEligibleStyleContent(style){
+ const blob=[style?.style_name,style?.primary_keyword,style?.angle,style?.sku_hint].filter(Boolean).join(' ');
+ if(SKIP_STYLE_WORDS.test(blob))return false;
+ return isEligibleStyleLane(style?.lanes||style?.style_lanes);
 }
 
 export function sanitizeReferenceUrls(urls){
@@ -145,17 +165,18 @@ export function buildStylePulsePrompt({slot,date,lanes,existingNames,blogTopics,
   'Geography lock: Tamil Nadu, Karnataka, Andhra Pradesh, Telangana, Kerala and metros. Never Worldwide or North-India-only.',
   `Pulse slot: ${slot}. IST date: ${date}. Invent batch ${batchIndex}/${batchTotal}.`,
   `Style lanes to cover: ${lanes.join(', ')}.`,
-  'Goal: one visual style SKU angle PER blog topic seed — invitation aesthetics only (not food blogs, not random festivals unless the blog title is about invitations).',
-  'Lanes: hindu_traditional, spiritual_ritual, regional_culture, romantic_ai_couple, movie_poster_couple, creative_ai, modern_minimal.',
+  'Goal: one INVITATION visual style per blog seed — ONLY romantic/cute couple looks OR traditional South Indian wedding looks.',
+  'ALLOWED lanes only: hindu_traditional, spiritual_ritual, regional_culture, romantic_ai_couple, movie_poster_couple.',
+  'SKIP / never invent: creative_ai, modern_minimal, food, culinary, biryani, feast, festival-only, abstract art — unless romantic couple OR traditional wedding invite.',
   'Return STRICT JSON only:',
   '{"limitations":string[],"styles":[{"style_name":string,"primary_keyword":string,"lanes":string[],"angle":string,"evidence_summary":string,"ai_prompt":string,"sku_hint":string,"blog_title":string,"blog_seed_keywords":string[],"validation":"SUPPORTED"|"REVISE"|"INSUFFICIENT_DATA"}]}',
   'Rules:',
   `- Return exactly ${targetCount} styles (or fewer only if fewer unused blog seeds remain).`,
   '- EVERY style MUST set blog_title to the EXACT title string from the blog seed list below (copy-paste exact).',
   '- Prefer one style per blog seed; do not reuse the same blog_title twice in this batch.',
-  '- style_name must describe an INVITATION / couple visual style derived from that blog title — not a paraphrase of the blog title.',
-  '- primary_keyword: short 2–5 word visual-search phrase for that invitation style.',
-  '- ai_prompt: concrete image-gen prompt for South Indian wedding couple / invitation moodboard (no real celebrity names).',
+  '- style_name must describe an INVITATION / couple visual style derived from that blog title — romantic couple OR traditional ritual/temple/silk.',
+  '- primary_keyword: short 2–5 word phrase; include "wedding invitation" at most once; never append "aesthetic".',
+  '- ai_prompt: concrete image-gen prompt for South Indian wedding couple OR traditional invitation look (no real celebrity names).',
   '- sku_hint: short catalogue label e.g. "iyengar-kanjivaram-v1".',
   '- Do NOT invent reference_urls or Pinterest pin IDs — the server attaches search URLs.',
   '- Never invent metrics, follower counts, or rankings.',
@@ -210,6 +231,10 @@ export function filterNovelStyles(styles,existingNames,{softEvidence=true}={}){
  const seen=[...existingNames];
  const seenBlog=new Set();
  for(const style of styles){
+  if(!isEligibleStyleContent(style)){
+   skipped.push({title:style.style_name,reason:'not_romantic_or_traditional'});
+   continue;
+  }
   if(!softEvidence&&style.validation==='INSUFFICIENT_DATA'){
    skipped.push({title:style.style_name,reason:'insufficient_evidence'});
    continue;
@@ -262,7 +287,7 @@ export function applyPinterestSoftGate(env=process.env){
  if(env.PINTEREST_ACCESS_TOKEN){
   return {limitations:['PINTEREST_TOKEN_PRESENT but Trends partner access not wired — using search URLs only (no invented pin IDs).']};
  }
- return {limitations:['PINTEREST_TRENDS_SOFT_SKIP — attaching deterministic Pinterest/Unsplash search URLs; never invent /pin/{id}.']};
+ return {limitations:['PINTEREST_TRENDS_SOFT_SKIP — attaching deterministic Pinterest search URLs; never invent /pin/{id}.']};
 }
 
 export async function collectStyleCandidates({slot,date,lanes,existingNames,blogTopics,openaiClient,target=STYLE_TARGET_MIN,batchSize=STYLE_BATCH_SIZE,maxBatches=STYLE_MAX_BATCHES}){
@@ -434,7 +459,11 @@ export async function runStylePulse({now=new Date(),openaiClient,fetchImpl=fetch
 }
 
 export function mapInspirationItem(row){
- const urls=sanitizeReferenceUrls(row.reference_urls);
+ // Always rebuild clean Pinterest search URLs (fixes doubled "wedding invitation" in old rows).
+ const urls=sanitizeReferenceUrls(buildStyleReferenceUrls({
+  primary_keyword:row.primary_keyword,
+  style_name:row.style_name
+ }));
  return {
   id:row.id,
   style_name:row.style_name||'',
@@ -444,7 +473,7 @@ export function mapInspirationItem(row){
   angle:row.angle||'',
   evidence_summary:row.evidence_summary||'',
   reference_urls:urls,
-  preview:pagePreview(urls[0]||''),
+  preview:'',
   ai_prompt:row.ai_prompt||'',
   sku_hint:row.sku_hint||'',
   blog_seed_keywords:Array.isArray(row.blog_seed_keywords)?row.blog_seed_keywords:[],

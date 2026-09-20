@@ -80,7 +80,9 @@ export async function listInspirations(query){
  const today={morning:0,afternoon:0,evening:0};
  const todayIst=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Kolkata',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
  for(const row of facets.data||[]){
-  for(const lane of row.style_lanes||[])laneSet.add(lane);
+  for(const lane of row.style_lanes||[]){
+   if(STYLE_LANES.includes(lane))laneSet.add(lane);
+  }
   if(row.pulse_date===todayIst&&row.status==='queued'&&today[row.pulse_slot]!==undefined)today[row.pulse_slot]+=1;
  }
  return {

@@ -125,15 +125,15 @@ SQL: `supabase/010_blog_topic_queue.sql` (`blog_topic_queue`, `blog_pulse_runs`)
 
 ## /akay Inspirations + Style Pulse (2026-09-20)
 
-New operator tab **Inspirations** at `/akay/inspirations` (bottom nav; unlinked from public pages). **Style Pulse** invents South-India design styles for future multi-SKU template variations: hindu/spiritual/regional, romantic AI couple, movie-poster couple, creative AI, modern minimal. Seeds from `blog_topic_queue` keywords; soft DataForSEO SEO; **Pinterest Trends soft-skipped** (no partner token). Target ≥25 styles/run. Cron **1 minute after Blog pulse** (`31 2,8,14 * * *` UTC). Manual **Run styles**. Approve marks ready for SKU spawn (phase 2 — not auto-generating SKUs yet).
+New operator tab **Inspirations** at `/akay/inspirations` (bottom nav; unlinked from public pages). **Style Pulse** invents South-India design styles for future multi-SKU template variations. Allowed lanes only: hindu/spiritual/regional, romantic AI couple, movie-poster couple — **skips** creative_ai, modern_minimal, food/feast. Seeds from `blog_topic_queue`; soft DataForSEO SEO; **Pinterest Trends soft-skipped**. Target ≥25 styles/run. Cron **1 minute after Blog pulse** (`31 2,8,14 * * *` UTC). Manual **Run**. Approve marks ready for SKU spawn (phase 2).
 
-SQL: `supabase/011_inspiration_queue.sql`. Same env as Blog queue; optional `PINTEREST_ACCESS_TOKEN` noted but unused in v1.
+SQL: `supabase/011_inspiration_queue.sql` + `012_inspiration_blog_backlink.sql`.
 
-**2026-09-20 follow-up:** Hallucinated `/pin/{id}` URLs rejected. Refs are deterministic Pinterest + Unsplash **search** URLs. Each style requires an exact `blog_title` / `blog_topic_id` backlink (`012_inspiration_blog_backlink.sql`). Desk shows Blog · title with link into Blog queue search.
+**2026-09-20 follow-ups:** Hallucinated `/pin/{id}` rejected; refs are clean Pinterest **search** only (no Unsplash — BotStopper blocks mshots). Desk is a **list + detail sheet** (no card previews). Query builder collapses doubled “wedding invitation” and strips “aesthetic”. Pulse skips non-romantic/non-traditional styles.
 
 ## /akay light shadcn desk (2026-09-20)
 
-Operator desk restyled to a **light shadcn-style** UI (Tailwind v4 + Radix primitives under `src/akay/ui`). Traffic uses Recharts; Blog/Inspirations use compact grids with icon Approve/Reject. Inspirations cards embed Pinterest search in an iframe, falling back to Unsplash mshots + Open link when framing is blocked (Pinterest login wall). Public site CSS unchanged.
+Operator desk restyled to a **light shadcn-style** UI (Tailwind v4 + Radix primitives under `src/akay/ui`). Traffic uses Recharts; Blog/Inspirations use compact tables with icon Approve/Reject. Public site CSS unchanged.
 
 ## Backlog
 

@@ -38,6 +38,8 @@ test('Style Pulse targets ≥25 South India lanes with blog backlinks',()=>{
  assert.ok(STYLE_MAX_BATCHES*STYLE_BATCH_SIZE>=STYLE_TARGET_MIN);
  assert.ok(STYLE_LANES.includes('hindu_traditional'));
  assert.ok(STYLE_LANES.includes('romantic_ai_couple'));
+ assert.equal(STYLE_LANES.includes('creative_ai'),false);
+ assert.equal(STYLE_LANES.includes('modern_minimal'),false);
  assert.deepEqual(Object.keys(STYLE_PULSE_SLOTS).sort(),['afternoon','evening','morning']);
  const morning=styleLaneMix('morning');
  const topics=[{id:'11111111-1111-1111-8111-111111111111',title:'Rising Trend of Digital Invitations for Bengaluru’s Traditional Iyengar Weddings',primary_keyword:'Iyengar wedding invitations'}];
@@ -47,16 +49,24 @@ test('Style Pulse targets ≥25 South India lanes with blog backlinks',()=>{
   targetCount:15,batchIndex:1,batchTotal:3
  });
  assert.match(prompt,/EXACT title/i);
- assert.match(prompt,/Do NOT invent reference_urls/i);
+ assert.match(prompt,/romantic\/cute couple|ALLOWED lanes only/i);
  assert.match(prompt,/Iyengar/);
  assert.equal(styleFingerprint('Temple Gold','hindu_traditional').length,64);
 });
 
-test('reference URLs reject hallucinated pin IDs and use search links',()=>{
- const built=buildStyleReferenceUrls({primary_keyword:'Iyengar wedding invitations',style_name:'Iyengar Scripted Legacy'});
+test('reference URLs are clean Pinterest search (no doubled wedding invitation, no Unsplash)',()=>{
+ const built=buildStyleReferenceUrls({primary_keyword:'Yakshagana wedding invitation',style_name:'Yakshagana Folk'});
+ assert.equal(built.length,1);
  assert.ok(built[0].includes('pinterest.com/search/pins'));
- assert.ok(built[0].includes('Iyengar'));
- assert.ok(built[1].includes('unsplash.com/s/photos/'));
+ const q=decodeURIComponent(built[0].split('q=')[1]||'');
+ assert.equal((q.match(/wedding invitation/gi)||[]).length,1);
+ assert.equal(q.includes('aesthetic'),false);
+ const messy=buildStyleReferenceUrls({
+  primary_keyword:'Yakshagana wedding invitation wedding invitation aesthetic',
+  style_name:'Yakshagana Folk'
+ });
+ const messyQ=decodeURIComponent(messy[0].split('q=')[1]||'');
+ assert.equal(messyQ,'Yakshagana wedding invitation');
  assert.deepEqual(sanitizeReferenceUrls([
   'https://www.pinterest.com/pin/567488040032279278/',
   'https://www.pinterest.com/search/pins/?q=test',
@@ -64,21 +74,14 @@ test('reference URLs reject hallucinated pin IDs and use search links',()=>{
  ]),['https://www.pinterest.com/search/pins/?q=test']);
 });
 
-test('resolveBlogSeed matches exact blog title',()=>{
- const seeds=[{id:'a',title:'Kerala’s Onam Wedding Celebrations Translating Into Digital Invitation Trends',primary_keyword:'Onam wedding invitation'}];
- const hit=resolveBlogSeed({blog_title:'Kerala’s Onam Wedding Celebrations Translating Into Digital Invitation Trends',blog_seed_keywords:[]},seeds);
- assert.equal(hit?.id,'a');
- assert.equal(resolveBlogSeed({blog_title:'Totally unrelated',blog_seed_keywords:[]},seeds),null);
-});
-
-test('filterNovelStyles soft-keeps thin evidence and blocks duplicate blog backlinks',()=>{
+test('filterNovelStyles skips non-romantic non-traditional styles',()=>{
  const soft=filterNovelStyles([
-  {style_name:'Fresh Kanjivaram gold invite mood',primary_keyword:'kanjivaram invite',validation:'SUPPORTED',ai_prompt:'x',blog_title:'Blog A'},
-  {style_name:'Second style same blog',primary_keyword:'x',validation:'SUPPORTED',ai_prompt:'x',blog_title:'Blog A'},
-  {style_name:'Thin romantic dusk couple',primary_keyword:'romantic couple',validation:'INSUFFICIENT_DATA',ai_prompt:'x',blog_title:'Blog B'}
+  {style_name:'Fresh Kanjivaram gold invite mood',primary_keyword:'kanjivaram invite',lanes:['hindu_traditional'],validation:'SUPPORTED',ai_prompt:'x',blog_title:'Blog A'},
+  {style_name:'Hyderabad Biryani Feast',primary_keyword:'biryani invite',lanes:['creative_ai'],validation:'SUPPORTED',ai_prompt:'x',blog_title:'Blog Food'},
+  {style_name:'Romantic dusk couple',primary_keyword:'romantic couple',lanes:['romantic_ai_couple'],validation:'INSUFFICIENT_DATA',ai_prompt:'x',blog_title:'Blog B'}
  ],['Old style'],{softEvidence:true});
  assert.equal(soft.accepted.length,2);
- assert.ok(soft.skipped.some(s=>s.reason==='duplicate_blog_backlink'));
+ assert.ok(soft.skipped.some(s=>s.reason==='not_romantic_or_traditional'));
 });
 
 test('Pinterest soft gate without partner token',()=>{
@@ -87,9 +90,10 @@ test('Pinterest soft gate without partner token',()=>{
 });
 
 test('inspiration list query and decide guards',()=>{
- const q=parseInspirationListQuery('/api/akay-inspirations?action=list&status=queued&lane=creative_ai&limit=10');
+ const q=parseInspirationListQuery('/api/akay-inspirations?action=list&status=queued&lane=romantic_ai_couple&limit=10');
  assert.equal(q.status,'queued');
- assert.equal(q.lane,'creative_ai');
+ assert.equal(q.lane,'romantic_ai_couple');
+ assert.throws(()=>parseInspirationListQuery('/api/akay-inspirations?lane=creative_ai'));
  assert.throws(()=>parseInspirationListQuery('/api/akay-inspirations?lane=bollywood'));
  assert.throws(()=>cleanInspirationId('nope'));
  assert.equal(decideInspirationStatus('approved'),'approved');
@@ -108,8 +112,9 @@ test('inspirations API requires session; pulse requires cron; run is session-gat
   assert.equal(runDenied.statusCode,401);
   const ui=await readFile(new URL('../src/AkayInspirations.tsx',import.meta.url),'utf8');
   assert.match(ui,/blog_title/);
-  assert.match(ui,/PinterestEmbed/);
   assert.match(ui,/aria-label="Approve"/);
+  assert.match(ui,/Table/);
+  assert.equal(ui.includes('PinterestEmbed'),false);
  }finally{
   if(prev===undefined)delete process.env.BLOG_PULSE_CRON_SECRET;
   else process.env.BLOG_PULSE_CRON_SECRET=prev;

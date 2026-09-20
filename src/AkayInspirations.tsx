@@ -1,15 +1,14 @@
 import {useEffect,useState} from 'react';
-import {Check,Loader2,Play,RefreshCw,X} from 'lucide-react';
-import PinterestEmbed from '@/akay/PinterestEmbed';
+import {Check,ExternalLink,Loader2,Play,RefreshCw,X} from 'lucide-react';
 import {Badge} from '@/akay/ui/badge';
 import {Button} from '@/akay/ui/button';
-import {Card,CardContent} from '@/akay/ui/card';
 import {Input,Select} from '@/akay/ui/input';
 import {Sheet,SheetContent,SheetHeader,SheetTitle} from '@/akay/ui/sheet';
+import {Table,TableBody,TableCell,TableHead,TableHeader,TableRow} from '@/akay/ui/table';
 
-type Item={
+ type Item={
  id:string;style_name:string;slug_hint:string;primary_keyword:string;style_lanes:string[];
- angle:string;evidence_summary:string;reference_urls:string[];preview:string;ai_prompt:string;
+ angle:string;evidence_summary:string;reference_urls:string[];ai_prompt:string;
  sku_hint:string;blog_seed_keywords:string[];blog_topic_id:string|null;blog_title:string;
  seo_volume:number|null;seo_competition:number|null;
  seo_locale:string;pulse_slot:string;pulse_date:string;fingerprint:string;status:string;
@@ -26,7 +25,6 @@ const emptyToday={morning:0,afternoon:0,evening:0};
 
 function label(value:string){return (value||'').replaceAll('_',' ')||'—';}
 function pinUrl(item:Item){return item.reference_urls.find(u=>/pinterest\.com\/search/i.test(u))||item.reference_urls[0]||'';}
-function unsplashUrl(item:Item){return item.reference_urls.find(u=>/unsplash\.com/i.test(u))||'';}
 
 export default function AkayInspirations(){
  const [filters,setFilters]=useState(()=>{
@@ -154,27 +152,52 @@ export default function AkayInspirations(){
   {loading&&!data&&<p className="text-xs text-muted-foreground">Loading…</p>}
   {data&&items.length===0&&<p className="text-xs text-muted-foreground">No styles</p>}
 
-  <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
-   {items.map(item=>(
-    <Card key={item.id} className={'overflow-hidden '+(open?.id===item.id?'ring-1 ring-foreground':'')}>
-     <button type="button" className="w-full text-left" onClick={()=>setOpen(item)}>
-      <PinterestEmbed pinterestUrl={pinUrl(item)} unsplashUrl={unsplashUrl(item)} title={item.style_name} className="rounded-none border-0 border-b"/>
-      <CardContent className="space-y-1 p-2">
-       <p className="line-clamp-2 text-xs font-semibold leading-snug">{item.style_name}</p>
-       <p className="truncate text-[10px] text-muted-foreground">{item.sku_hint||item.primary_keyword}</p>
-       {item.blog_title&&<p className="line-clamp-2 text-[10px] text-blue-600">Blog · {item.blog_title}</p>}
-       <div className="flex flex-wrap gap-1">
-        <Badge variant={item.status==='approved'?'success':item.status==='rejected'?'danger':'secondary'}>{item.status}</Badge>
-        {(item.style_lanes||[]).slice(0,1).map(lane=><Badge key={lane} variant="outline">{label(lane)}</Badge>)}
-       </div>
-      </CardContent>
-     </button>
-     {item.status==='queued'&&<div className="flex gap-1 border-t p-1.5">
-      <Button type="button" size="icon" className="flex-1" disabled={Boolean(busy)} aria-label="Approve" onClick={()=>void decide(item.id,'approved')}><Check/></Button>
-      <Button type="button" size="icon" variant="outline" className="flex-1" disabled={Boolean(busy)} aria-label="Reject" onClick={()=>void decide(item.id,'rejected')}><X/></Button>
-     </div>}
-    </Card>
-   ))}
+  <div className="overflow-hidden rounded-md border">
+   <Table>
+    <TableHeader>
+     <TableRow>
+      <TableHead>Style</TableHead>
+      <TableHead className="hidden md:table-cell">Blog</TableHead>
+      <TableHead>Lane</TableHead>
+      <TableHead className="w-[1%]"></TableHead>
+     </TableRow>
+    </TableHeader>
+    <TableBody>
+     {items.map(item=>{
+      const pin=pinUrl(item);
+      return <TableRow key={item.id} className={open?.id===item.id?'bg-muted/40':''}>
+       <TableCell>
+        <button type="button" className="text-left" onClick={()=>setOpen(item)}>
+         <p className="text-sm font-medium leading-snug">{item.style_name}</p>
+         <p className="text-[11px] text-muted-foreground">{item.sku_hint||item.primary_keyword}</p>
+        </button>
+       </TableCell>
+       <TableCell className="hidden max-w-[14rem] md:table-cell">
+        {item.blog_title?(
+         <a className="line-clamp-2 text-xs text-blue-600 hover:underline" href={'/akay/blog-queue?q='+encodeURIComponent(item.blog_title)}>{item.blog_title}</a>
+        ):<span className="text-xs text-muted-foreground">—</span>}
+       </TableCell>
+       <TableCell>
+        <div className="flex flex-wrap gap-1">
+         <Badge variant={item.status==='approved'?'success':item.status==='rejected'?'danger':'secondary'}>{item.status}</Badge>
+         {(item.style_lanes||[]).slice(0,1).map(lane=><Badge key={lane} variant="outline">{label(lane)}</Badge>)}
+        </div>
+       </TableCell>
+       <TableCell>
+        <div className="flex items-center gap-1">
+         {pin&&<Button type="button" size="icon" variant="ghost" aria-label="Open Pinterest" asChild>
+          <a href={pin} target="_blank" rel="noopener noreferrer"><ExternalLink className="size-3.5"/></a>
+         </Button>}
+         {item.status==='queued'&&<>
+          <Button type="button" size="icon" disabled={Boolean(busy)} aria-label="Approve" onClick={()=>void decide(item.id,'approved')}><Check/></Button>
+          <Button type="button" size="icon" variant="outline" disabled={Boolean(busy)} aria-label="Reject" onClick={()=>void decide(item.id,'rejected')}><X/></Button>
+         </>}
+        </div>
+       </TableCell>
+      </TableRow>;
+     })}
+    </TableBody>
+   </Table>
   </div>
 
   {more&&<Button type="button" variant="outline" size="sm" disabled={loading} onClick={()=>void load(offset+25)}>More</Button>}
@@ -185,12 +208,11 @@ export default function AkayInspirations(){
      <SheetTitle>{open.style_name}</SheetTitle>
      <Badge variant="secondary">{open.status}</Badge>
     </SheetHeader>
-    <PinterestEmbed pinterestUrl={pinUrl(open)} unsplashUrl={unsplashUrl(open)} title={open.style_name}/>
     <p className="text-xs text-muted-foreground">{open.sku_hint} · {open.primary_keyword}</p>
     {open.blog_title&&<a className="text-xs text-blue-600 underline" href={'/akay/blog-queue?q='+encodeURIComponent(open.blog_title)}>Blog · {open.blog_title}</a>}
     <p className="text-xs"><span className="font-medium">Angle</span> — {open.angle||'—'}</p>
     <p className="text-xs"><span className="font-medium">Prompt</span> — {open.ai_prompt||'—'}</p>
-    <ul className="space-y-1 text-xs">{open.reference_urls.map(url=><li key={url}><a className="text-blue-600 underline break-all" href={url} target="_blank" rel="noopener">{url}</a></li>)}</ul>
+    {pinUrl(open)&&<a className="inline-flex items-center gap-1 text-xs text-blue-600 underline" href={pinUrl(open)} target="_blank" rel="noopener">Pinterest search <ExternalLink className="size-3"/></a>}
     {open.status==='queued'&&<div className="mt-auto flex gap-2 pt-2">
      <Button type="button" className="flex-1" disabled={Boolean(busy)} onClick={()=>void decide(open.id,'approved')}><Check className="size-3.5"/> Approve</Button>
      <Button type="button" variant="outline" className="flex-1" disabled={Boolean(busy)} onClick={()=>void decide(open.id,'rejected')}><X className="size-3.5"/> Reject</Button>
