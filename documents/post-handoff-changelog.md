@@ -123,6 +123,12 @@ New operator tab **Blog queue** at `/akay/blog-queue` (bottom nav; still unlinke
 
 SQL: `supabase/010_blog_topic_queue.sql` (`blog_topic_queue`, `blog_pulse_runs`) — applied on prod 2026-09-20. Env: `OPENAI_API_KEY`, `DATAFORSEO_LOGIN`, `DATAFORSEO_PASSWORD`, `CRON_SECRET`. Manual **Run pulse now** on the desk (`action=run`, session gate, 3/hour, force re-run clears today’s slot record).
 
+## /akay Inspirations + Style Pulse (2026-09-20)
+
+New operator tab **Inspirations** at `/akay/inspirations` (bottom nav; unlinked from public pages). **Style Pulse** invents South-India design styles for future multi-SKU template variations: hindu/spiritual/regional, romantic AI couple, movie-poster couple, creative AI, modern minimal. Seeds from `blog_topic_queue` keywords; soft DataForSEO SEO; **Pinterest Trends soft-skipped** (no partner token). Target ≥25 styles/run. Cron **1 minute after Blog pulse** (`31 2,8,14 * * *` UTC). Manual **Run styles**. Approve marks ready for SKU spawn (phase 2 — not auto-generating SKUs yet).
+
+SQL: `supabase/011_inspiration_queue.sql`. Same env as Blog queue; optional `PINTEREST_ACCESS_TOKEN` noted but unused in v1.
+
 ## Backlog
 
 - Forgot password / email reset (explicitly deferred 2026-09-16).

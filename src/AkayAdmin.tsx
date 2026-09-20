@@ -4,6 +4,7 @@ import AkayShortlist from './AkayShortlist';
 import AkayCompetitors from './AkayCompetitors';
 import AkayUpcoming from './AkayUpcoming';
 import AkayBlogQueue from './AkayBlogQueue';
+import AkayInspirations from './AkayInspirations';
 
 type Insights={
  totals:{pageviews:number;sessions:number;visitors:number;avgDwellMs:number;events:number};
@@ -14,7 +15,7 @@ type Insights={
  funnel:{step:string;count:number}[];
  recent:{at:string;path:string;type:string;dwellMs:number}[];
 };
-type Section='traffic'|'journeys'|'live'|'shortlist'|'competitors'|'upcoming'|'blog-queue';
+type Section='traffic'|'journeys'|'live'|'shortlist'|'competitors'|'upcoming'|'blog-queue'|'inspirations';
 const nav: {id:Section;href:string;label:string}[]=[
  {id:'traffic',href:'/akay',label:'Traffic'},
  {id:'journeys',href:'/akay/journeys',label:'Journeys'},
@@ -22,7 +23,8 @@ const nav: {id:Section;href:string;label:string}[]=[
  {id:'shortlist',href:'/akay/shortlist',label:'Shortlist'},
  {id:'competitors',href:'/akay/competitors',label:'Competitors'},
  {id:'upcoming',href:'/akay/upcoming',label:'Upcoming'},
- {id:'blog-queue',href:'/akay/blog-queue',label:'Blog queue'}
+ {id:'blog-queue',href:'/akay/blog-queue',label:'Blog queue'},
+ {id:'inspirations',href:'/akay/inspirations',label:'Inspirations'}
 ];
 function sectionOf(path=location.pathname):Section{
  const rest=path.replace(/^\/akay\/?/,'').replace(/\/$/,'');
@@ -30,11 +32,12 @@ function sectionOf(path=location.pathname):Section{
  if(rest==='competitors'||rest.startsWith('competitors?'))return 'competitors';
  if(rest==='upcoming'||rest.startsWith('upcoming?'))return 'upcoming';
  if(rest==='blog-queue'||rest.startsWith('blog-queue?'))return 'blog-queue';
+ if(rest==='inspirations'||rest.startsWith('inspirations?'))return 'inspirations';
  if(rest==='journeys')return 'journeys';
  if(rest==='live')return 'live';
  return 'traffic';
 }
-function isOps(section:Section){return section==='shortlist'||section==='competitors'||section==='upcoming'||section==='blog-queue';}
+function isOps(section:Section){return section==='shortlist'||section==='competitors'||section==='upcoming'||section==='blog-queue'||section==='inspirations';}
 function formatMs(ms:number){
  if(ms<1000)return ms+' ms';
  if(ms<60000)return (ms/1000).toFixed(1)+' s';
@@ -195,6 +198,7 @@ export default function AkayAdmin(){
    {section==='competitors'&&<DeskPanel><AkayCompetitors/></DeskPanel>}
    {section==='upcoming'&&<DeskPanel><AkayUpcoming/></DeskPanel>}
    {section==='blog-queue'&&<DeskPanel><AkayBlogQueue/></DeskPanel>}
+   {section==='inspirations'&&<DeskPanel><AkayInspirations/></DeskPanel>}
   </main>
   <nav className="akay-nav" aria-label="Operator">
    {nav.map(item=><a key={item.id} href={item.href} aria-current={section===item.id?'page':undefined} onClick={e=>go(e,item.href,item.id)}>{item.label}</a>)}

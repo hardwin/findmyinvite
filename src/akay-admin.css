@@ -104,6 +104,8 @@
 .akay-blog-queue .akay-blog-row-filters .akay-filters input{min-height:26px;padding:2px 8px;font:12px Lora,serif;border-radius:6px;width:auto}
 .akay-blog-queue .akay-blog-row-filters .akay-filters select{max-width:7rem;flex:0 0 auto}
 .akay-blog-queue .akay-blog-status,.akay-blog-queue .akay-error{margin:0;padding:4px 8px;font-size:12px;line-height:1.3;border-radius:6px}
+.akay-inspirations .akay-blog-card .akay-preview{aspect-ratio:16/10;max-height:88px;border-radius:8px;margin:0}
+.akay-inspirations .akay-blog-card .akay-preview.empty{font-size:10px}
 .akay-blog-queue .akay-blog-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
 .akay-blog-queue .akay-blog-card{padding:8px;border-radius:10px;gap:6px;min-width:0}
 .akay-blog-queue .akay-blog-card .akay-candidate-main{gap:4px}
