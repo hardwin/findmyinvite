@@ -76,7 +76,7 @@ test('list query parsing and decide guards',()=>{
  assert.throws(()=>decideStatus('queued'));
 });
 
-test('blog queue API requires session; pulse requires cron secret',async()=>{
+test('blog queue API requires session; pulse requires cron secret; run is session-gated',async()=>{
  const prev=process.env.BLOG_PULSE_CRON_SECRET;
  process.env.BLOG_PULSE_CRON_SECRET='test-cron-secret';
  try{
@@ -84,6 +84,14 @@ test('blog queue API requires session; pulse requires cron secret',async()=>{
   assert.equal(open.statusCode,401);
   const pulseDenied=await request('/api/akay-blog-queue?action=pulse',{method:'POST',headers:{cookie:''}});
   assert.equal(pulseDenied.statusCode,401);
+  const runDenied=await request('/api/akay-blog-queue?action=run',{method:'POST',headers:{cookie:''}});
+  assert.equal(runDenied.statusCode,401);
+  const api=await readFile(new URL('../api/akay-blog-queue.mjs',import.meta.url),'utf8');
+  assert.match(api,/action==='run'/);
+  assert.match(api,/runManualPulse/);
+  const ui=await readFile(new URL('../src/AkayBlogQueue.tsx',import.meta.url),'utf8');
+  assert.match(ui,/Run pulse now/);
+  assert.match(ui,/action=run/);
  }finally{
   if(prev===undefined)delete process.env.BLOG_PULSE_CRON_SECRET;
   else process.env.BLOG_PULSE_CRON_SECRET=prev;

@@ -95,14 +95,43 @@ export default function AkayBlogQueue(){
   finally{setBusy('');}
  }
 
+ async function runPulseNow(){
+  setBusy('pulse');setError('');setNotice('Running South Pulse… this can take up to a minute.');
+  try{
+   const res=await fetch('/api/akay-blog-queue?action=run',{
+    method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({force:true})
+   });
+   if(res.status===401){location.assign('/akay');return;}
+   const body=await res.json().catch(()=>({}));
+   if(!res.ok)throw new Error((body as {error?:string}).error||'Pulse failed.');
+   const inserted=Number((body as {inserted?:number}).inserted)||0;
+   const skipped=Number((body as {skipped?:number}).skipped)||0;
+   const slot=String((body as {slot?:string}).slot||'pulse');
+   const duplicate=Boolean((body as {duplicate?:boolean}).duplicate);
+   setNotice(duplicate
+    ?('Already ran '+slot+' today — force cleared and re-ran, or nothing new passed novelty/SEO.')
+    :('Pulse '+slot+': inserted '+inserted+', skipped '+skipped+'.'));
+   await load(0);
+  }catch(err){setError(err instanceof Error?err.message:'Pulse failed.');setNotice('');}
+  finally{setBusy('');}
+ }
+
  const items=data?.items||[];
  const counts=data?.status_counts||emptyCounts;
  const today=data?.today_pulses||emptyToday;
  const more=Boolean(data&&items.length<data.total);
+ const pulsing=busy==='pulse';
 
  return <div className="akay-shortlist">
-  <div className="akay-top"><h1>Blog queue</h1><div className="akay-actions"><button type="button" className="quiet" onClick={()=>void load(0)}>Refresh</button></div></div>
-  <p className="akay-notice">South Pulse · 3× daily IST (08:00 / 14:00 / 20:00). Occasions + Tamil cinema, songs, celebs, entertainment, news — South India only. Novel supporting topics; never paraphrases of the queue.</p>
+  <div className="akay-top">
+   <h1>Blog queue</h1>
+   <div className="akay-actions">
+    <button type="button" disabled={Boolean(busy)} onClick={()=>void runPulseNow()}>{pulsing?'Running…':'Run pulse now'}</button>
+    <button type="button" className="quiet" disabled={pulsing} onClick={()=>void load(0)}>Refresh</button>
+   </div>
+  </div>
+  <p className="akay-notice">South Pulse · 3× daily IST (08:00 / 14:00 / 20:00) plus manual start. Occasions + Tamil cinema, songs, celebs, entertainment, news — South India only. Novel supporting topics; never paraphrases of the queue. Manual runs capped at 3/hour.</p>
   {notice&&<p className="akay-notice" role="status">{notice}</p>}
   {error&&<p className="akay-error" role="alert">{error}</p>}
   <div className="akay-chips" role="tablist" aria-label="Today pulses">

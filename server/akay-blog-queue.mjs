@@ -149,4 +149,8 @@ export async function runPulse(options={}){
  return runSouthPulse(options);
 }
 
+export async function runManualPulse({force=true,forceSlot}={}){
+ return runSouthPulse({force:Boolean(force),forceSlot:forceSlot||undefined});
+}
+
 export {pagePreview,SIGNAL_LANES};

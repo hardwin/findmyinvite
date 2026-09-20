@@ -1,6 +1,6 @@
 import {respond,fail,method,bodyJson,rate,HttpError,bearer} from '../server/core.mjs';
 import {sessionOk} from '../server/akay-gate.mjs';
-import {parseListQuery,cleanId,decideStatus,listTopics,decideTopic,runPulse} from '../server/akay-blog-queue.mjs';
+import {parseListQuery,cleanId,decideStatus,listTopics,decideTopic,runPulse,runManualPulse} from '../server/akay-blog-queue.mjs';
 import {timingSafeEqual} from 'node:crypto';
 
 function cronAuthorized(req){
@@ -32,6 +32,15 @@ export default async function handler(req,res){
   if(action==='list'){
    method(req,['GET']);
    return respond(res,200,await listTopics(parseListQuery(req.url)));
+  }
+
+  if(action==='run'){
+   method(req,['POST']);
+   await rate(req,'akay-blog-pulse-manual',3,3600);
+   const body=await bodyJson(req,4096).catch(()=>({}));
+   const force=body.force!==false;
+   const forceSlot=typeof body.slot==='string'?body.slot:undefined;
+   return respond(res,200,await runManualPulse({force,forceSlot}));
   }
 
   if(action==='decide'){

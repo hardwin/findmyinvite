@@ -220,11 +220,19 @@ function resolveSupportsId(topic,queued){
  return hit?.id||null;
 }
 
-export async function runSouthPulse({now=new Date(),openaiClient,fetchImpl=fetch,env=process.env,forceSlot}={}){
+export async function runSouthPulse({now=new Date(),openaiClient,fetchImpl=fetch,env=process.env,forceSlot,force=false}={}){
  const {date}=istParts(now);
  const slot=forceSlot&&PULSE_SLOTS[forceSlot]?forceSlot:pulseSlotFor(now);
  const lanes=laneMix(slot);
  const limitations=[];
+
+ if(force){
+  await rest('blog_pulse_runs?pulse_date=eq.'+encodeURIComponent(date)+'&pulse_slot=eq.'+encodeURIComponent(slot),{
+   method:'DELETE',
+   prefer:'return=minimal'
+  });
+  limitations.push('Forced re-run: cleared prior '+slot+' pulse record for '+date+'.');
+ }
 
  let run;
  try{
@@ -235,7 +243,7 @@ export async function runSouthPulse({now=new Date(),openaiClient,fetchImpl=fetch
   });
  }catch(error){
   if(error instanceof HttpError&&error.status===409){
-   return {ok:true,slot,date,inserted:0,skipped:0,limitations:['Pulse already completed for this IST slot.'],duplicate:true};
+   return {ok:true,slot,date,inserted:0,skipped:0,limitations:['Pulse already completed for this IST slot. Use Force re-run to spend another pass.'],duplicate:true};
   }
   throw error;
  }
