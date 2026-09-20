@@ -17,6 +17,7 @@ test('share cards escape names and use a public template still, never guest phot
  assert.match(html,/og:image" content="https:\/\/findmyinvite.com\/assets\/9b73577a4b10e8db\.jpg"/);
  assert.equal(html.includes('/api/media'),false);
  assert.equal(stillFor('emerald-noir'),'/assets/emerald-hero.jpg');
+ assert.equal(stillFor('luxury-pink'),'/assets/emerald-hero.jpg');
  assert.equal(stillFor('unknown-design'),STOREFRONT_STILL);
 });
 test('unpublished or unknown slugs fall back to the storefront card',async()=>{

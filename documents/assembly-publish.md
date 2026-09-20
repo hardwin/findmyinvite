@@ -4,6 +4,10 @@ Audience: Akay (this Project), when Ashok says **Publish** after a local `/assem
 Standing loop (confirmed 2026-09-20): **assemble locally → Ashok previews → Ashok says Publish → Akay applies Supabase + commit + push `main`.**  
 Ashok does **not** run SQL himself.
 
+## Parent is read-only
+
+`/assembly` never overwrites a parent template. Opening + hero picks apply only to the **new clone**. Parent preview is reference only.
+
 ## Check URL after Assemble (before Publish)
 
 Local preview only (files on disk, may not show in Premium gallery yet):

@@ -1,7 +1,7 @@
 import {Icon} from './components';
 import type {InviteData} from './Invitation';
 export default function InvitationHero({data,template,language}:{data:InviteData;template:string;language:boolean}){
- const dark=template==='ivory-elegance'||template==='emerald-noir';
+ const dark=template==='ivory-elegance'||template==='emerald-noir'||template==='luxury-pink';
  return <><div className={'hero-copy '+(dark?'hero-copy-dark':'hero-copy-romantic')}>
  {!dark&&<Icon name="heart" size={template==='royal-prestige'?24:28} className="hero-heart"/>}
  <p className="welcome-title">{language?'ہم آپ کو شادی کی تقریب میں خوش آمدید کہتے ہیں':'We are honored to welcome you to the Wedding ceremony of..'}</p>

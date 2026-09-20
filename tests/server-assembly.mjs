@@ -70,6 +70,69 @@ test('registry patch helpers insert premium ids without duplicating',async()=>{
  assert.equal(fsWritesAllowed({}),true);
 });
 
+test('loadPremiumParents keeps optional heroVideo on clones that have it',async()=>{
+ const {loadPremiumParents}=await import('../server/assembly.mjs');
+ const parents=await loadPremiumParents();
+ const h4=parents.find(item=>item.id==='royal-heritage-4');
+ const h5=parents.find(item=>item.id==='royal-heritage-5');
+ assert.ok(h4);
+ assert.equal(h4.video,'royal-heritage-4.mp4');
+ assert.equal(h4.heroVideo||'','');
+ assert.ok(h5);
+ assert.equal(h5.heroVideo,'royal-heritage-5-hero.mp4');
+ assert.equal(h5.heroUrl,'/assets/royal-heritage-5-hero.mp4');
+});
+
+test('patchHeroVideo inserts or replaces heroVideo on a premium row',async()=>{
+ const {patchHeroVideo,heroVideoName}=await import('../server/assembly.mjs');
+ const data=await readFile(new URL('../src/data.ts',import.meta.url),'utf8');
+ assert.equal(heroVideoName('royal-heritage-4'),'royal-heritage-4-hero.mp4');
+ const withHero=patchHeroVideo(data.replace(/,heroVideo:'royal-heritage-4-hero\.mp4'/,''),'royal-heritage-4','royal-heritage-4-hero.mp4');
+ assert.match(withHero,/id:'royal-heritage-4'[^}]*heroVideo:'royal-heritage-4-hero\.mp4'/);
+ const replaced=patchHeroVideo(withHero,'royal-heritage-4','royal-heritage-4-hero.mp4');
+ assert.equal([...replaced.matchAll(/heroVideo:'royal-heritage-4-hero\.mp4'/g)].length,1);
+});
+
+test('set-intro targets the parent video filename, not the template id',async()=>{
+ const {loadPremiumParents}=await import('../server/assembly.mjs');
+ const parents=await loadPremiumParents();
+ const imperial=parents.find(item=>item.id==='rose-gold-blush-royal');
+ assert.ok(imperial);
+ assert.equal(imperial.video,'0cfccffffc862729.mp4');
+ assert.notEqual(imperial.video,'rose-gold-blush-royal.mp4');
+ assert.equal(imperial.introUrl,'/assets/0cfccffffc862729.mp4');
+});
+
+test('assemble dry-run requires opening for a new clone and never mutates parent mode',async()=>{
+ const {assemblePremium}=await import('../server/assembly.mjs');
+ await assert.rejects(
+  ()=>assemblePremium({parentId:'royal-heritage-4',videos:[],names:['X'],dryRun:true}),
+  /opening video/i
+ );
+ const result=await assemblePremium({
+  parentId:'royal-heritage-4',
+  opening:'alt-a.mp4',
+  hero:'smoke-alt.mp4',
+  names:['Royal Heritage Next'],
+  dryRun:true
+ });
+ assert.equal(result.dryRun,true);
+ assert.equal(result.mode,'clone');
+ assert.equal(result.opening,'alt-a.mp4');
+ assert.equal(result.hero,'smoke-alt.mp4');
+ assert.equal(result.clones.length,1);
+ assert.match(result.clones[0].id,/^royal-heritage-\d+$/);
+});
+
+test('resolveInboxPreview only serves safe inbox filenames',async()=>{
+ const {resolveInboxPreview}=await import('../server/assembly.mjs');
+ await assert.rejects(()=>resolveInboxPreview('../package.json'),/video files|Invalid/i);
+ const preview=await resolveInboxPreview('alt-a.mp4');
+ assert.equal(preview.name,'alt-a.mp4');
+ assert.ok(preview.bytes>0);
+ assert.match(preview.type,/video\//);
+});
+
 test('assembly API requires Akay session',async()=>{
  const open=await request('/api/assembly?action=parents',{cookie:''});
  assert.equal(open.statusCode,401);

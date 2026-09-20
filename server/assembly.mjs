@@ -83,22 +83,33 @@ async function probe(path){
 export async function loadPremiumParents(root=ROOT){
  const source=await readFile(join(root,'src','data.ts'),'utf8');
  const parents=[];
- const re=/\{id:'([a-z0-9-]+)',name:'((?:\\'|[^'])*)',description:'((?:\\'|[^'])*)',image:'((?:\\'|[^'])*)',video:'((?:\\'|[^'])*)',badge:'((?:\\'|[^'])*)',royal:(true|false),tier:'(premium|elite|free)' as GalleryTier,color:'(#[0-9a-fA-F]+)'\}/g;
+ const blockRe=/\{id:'([a-z0-9-]+)',([^{}]*?)\}/g;
  let m;
- while((m=re.exec(source))){
-  const [,id,name,description,image,video,badge,,tier,color]=m;
-  if(tier!=='premium'||!video)continue;
+ while((m=blockRe.exec(source))){
+  const id=m[1];
+  const body=m[2];
+  const take=(key)=>{
+   const hit=body.match(new RegExp("(?:^|,)"+key+":'((?:\\\\'|[^'])*)'"));
+   return hit?hit[1].replace(/\\'/g,"'"):'';
+  };
+  const royal=/,royal:true/.test(body);
+  const tier=(body.match(/tier:'(premium|elite|free)'/)||[])[1]||'';
+  const video=take('video');
+  if(tier!=='premium'||!video||!royal)continue;
+  const color=(body.match(/color:'(#[0-9a-fA-F]+)'/)||[])[1]||'#884936';
   parents.push({
    id,
-   name:name.replace(/\\'/g,"'"),
-   description:description.replace(/\\'/g,"'"),
-   image,
+   name:take('name'),
+   description:take('description'),
+   image:take('image'),
    video,
-   badge:badge.replace(/\\'/g,"'"),
+   heroVideo:take('heroVideo'),
+   badge:take('badge'),
    color,
    root:lineageRoot(id),
    introUrl:'/assets/'+video,
-   posterUrl:'/assets/'+image
+   posterUrl:'/assets/'+take('image'),
+   heroUrl:take('heroVideo')?'/assets/'+take('heroVideo'):''
   });
  }
  return parents;
@@ -128,12 +139,14 @@ export function planClones(parent,count,existingIds,names=[]){
  });
 }
 
-export async function encodeCloneAssets({sourceVideo,id,root=ROOT}){
+export async function encodeCloneAssets({sourceVideo,id,root=ROOT,videoFile='',imageFile=''}){
  const assets=join(root,'public','assets');
  const catalogue=join(assets,'catalogue','v1');
  await mkdir(catalogue,{recursive:true});
- const intro=join(assets,id+'.mp4');
- const poster=join(assets,id+'.jpg');
+ const mp4Name=safeAssetFile(videoFile||(id+'.mp4'),'.mp4');
+ const jpgName=safeAssetFile(imageFile||(id+'.jpg'),'.jpg');
+ const intro=join(assets,mp4Name);
+ const poster=join(assets,jpgName);
  const catMp4=join(catalogue,id+'.mp4');
  const catWebp=join(catalogue,id+'.webp');
 
@@ -145,11 +158,13 @@ export async function encodeCloneAssets({sourceVideo,id,root=ROOT}){
  const meta=await probe(catMp4);
  return {
   files:[
-   'public/assets/'+id+'.mp4',
-   'public/assets/'+id+'.jpg',
+   'public/assets/'+mp4Name,
+   'public/assets/'+jpgName,
    'public/assets/catalogue/v1/'+id+'.mp4',
    'public/assets/catalogue/v1/'+id+'.webp'
   ],
+  videoFile:mp4Name,
+  imageFile:jpgName,
   catalogue:{
    src:'/assets/catalogue/v1/'+id+'.mp4',
    poster:'/assets/catalogue/v1/'+id+'.webp',
@@ -160,6 +175,41 @@ export async function encodeCloneAssets({sourceVideo,id,root=ROOT}){
    version:1
   }
  };
+}
+
+function safeAssetFile(name,ext){
+ const base=basename(String(name||''));
+ if(!base||base==='.'||base==='..'||base.includes('/')||base.includes('\\')||base.includes('\0'))throw new Error('Invalid asset filename.');
+ if(!base.toLowerCase().endsWith(ext))throw new Error('Asset must end with '+ext);
+ return base.slice(0,160);
+}
+
+export function heroVideoName(id){
+ return String(id||'').trim()+'-hero.mp4';
+}
+
+export async function encodeHeroAsset({sourceVideo,id,root=ROOT}){
+ const assets=join(root,'public','assets');
+ await mkdir(assets,{recursive:true});
+ const file=heroVideoName(id);
+ const target=join(assets,file);
+ await run('ffmpeg',['-y','-i',sourceVideo,'-vf','scale=720:1280:force_original_aspect_ratio=decrease,pad=720:1280:(ow-iw)/2:(oh-ih)/2','-c:v','libx264','-profile:v','main','-pix_fmt','yuv420p','-movflags','+faststart','-an',target]);
+ return {file,path:'public/assets/'+file};
+}
+
+export function patchHeroVideo(source,id,heroFile){
+ const needle="id:'"+id+"'";
+ const idx=source.indexOf(needle);
+ if(idx<0)throw new Error('Template not found: '+id);
+ const blockStart=source.lastIndexOf('{',idx);
+ const blockEnd=source.indexOf('}',idx);
+ if(blockStart<0||blockEnd<0)throw new Error('Could not locate template block for '+id);
+ const block=source.slice(blockStart,blockEnd+1);
+ if(!/video:'[^']*'/.test(block))throw new Error('Template has no opening video: '+id);
+ let nextBlock=block;
+ if(/,heroVideo:'[^']*'/.test(block))nextBlock=block.replace(/,heroVideo:'[^']*'/,",heroVideo:'"+esc(heroFile)+"'");
+ else nextBlock=block.replace(/(video:'[^']*')/,"$1,heroVideo:'"+esc(heroFile)+"'");
+ return source.slice(0,blockStart)+nextBlock+source.slice(blockEnd+1);
 }
 
 function esc(value){
@@ -290,6 +340,18 @@ export function safeInboxName(name){
  return base.slice(0,120);
 }
 
+export async function resolveInboxPreview(name,root=ROOT){
+ const safe=safeInboxName(name);
+ const full=resolve(join(root,'work','assembly-inbox',safe));
+ const inboxNorm=resolve(join(root,'work','assembly-inbox'))+sep;
+ if(!full.startsWith(inboxNorm))throw new Error('Invalid inbox path.');
+ const info=await stat(full);
+ if(!info.isFile())throw new Error('Inbox video not found.');
+ const ext=extname(safe).toLowerCase();
+ const type=ext==='.webm'?'video/webm':ext==='.mov'?'video/quicktime':'video/mp4';
+ return {path:full,name:safe,bytes:info.size,type};
+}
+
 export async function stageInboxFile(name,buffer,root=ROOT){
  const safe=safeInboxName(name);
  const dir=join(root,'work','assembly-inbox');
@@ -313,11 +375,16 @@ function resolveVideoPath(input,root=ROOT){
  return normalized;
 }
 
-export async function assemblePremium({parentId,videos,names=[],root=ROOT,dryRun=false}){
+export async function assemblePremium({parentId,videos=[],names=[],opening='',hero='',root=ROOT,dryRun=false}){
  if(!fsWritesAllowed())throw new Error('Assembly filesystem writes are local-only. Run on this machine (npm run dev / CLI), then commit and push.');
  if(!parentId)throw new Error('Pick a Premium parent template.');
- if(!Array.isArray(videos)||!videos.length)throw new Error('Add at least one alternate intro video.');
- if(videos.length>12)throw new Error('Assemble at most 12 videos per run.');
+
+ const batch=Array.isArray(videos)?videos.map(v=>String(v||'').trim()).filter(Boolean):[];
+ const openingFile=String(opening||'').trim();
+ const heroFile=String(hero||'').trim();
+ if(batch.length&&(openingFile||heroFile))throw new Error('Use clone opening/hero for one clone, or multiple inbox videos — not both.');
+ if(batch.length>12)throw new Error('Assemble at most 12 videos per run.');
+ if(!batch.length&&!openingFile)throw new Error('Pick an opening video for the new clone. The parent template is never changed.');
 
  await ensureFfmpeg();
  const parents=await loadPremiumParents(root);
@@ -327,18 +394,26 @@ export async function assemblePremium({parentId,videos,names=[],root=ROOT,dryRun
  const dataPath=join(root,'src','data.ts');
  const dataSource=await readFile(dataPath,'utf8');
  const existing=knownTemplateIds(dataSource);
- const planned=planClones(parent,videos.length,existing,names);
- const videoPaths=videos.map(v=>resolveVideoPath(v,root));
+ const single=!batch.length;
+ const planned=planClones(parent,single?1:batch.length,existing,names);
+ const videoPaths=single
+  ?[resolveVideoPath(openingFile,root)]
+  :batch.map(v=>resolveVideoPath(v,root));
  for(const path of videoPaths)await access(path);
+ const heroPath=single&&heroFile?resolveVideoPath(heroFile,root):'';
+ if(heroPath)await access(heroPath);
 
  if(dryRun){
   return {
    dryRun:true,
-   parent,
+   mode:single?'clone':'batch',
+   parent:{id:parent.id,name:parent.name},
+   opening:single?openingFile:'',
+   hero:single?heroFile:'',
    clones:planned,
    demos:planned.map(c=>({id:c.id,name:c.name,demo:'/invite/demo?template='+c.id}))
   };
-}
+ }
 
  const written=[];
  const catalogueEntries={};
@@ -363,7 +438,16 @@ export async function assemblePremium({parentId,videos,names=[],root=ROOT,dryRun
  const migrationRel='supabase/013_assembly_'+stamp+'_'+hash+'.sql';
  const migrationPath=join(root,migrationRel);
 
- await writeFile(dataPath,patchDataTs(dataSource,created));
+ let nextData=patchDataTs(dataSource,created);
+ if(heroPath){
+  for(const clone of created){
+   const encodedHero=await encodeHeroAsset({sourceVideo:heroPath,id:clone.id,root});
+   written.push(encodedHero.path);
+   nextData=patchHeroVideo(nextData,clone.id,encodedHero.file);
+  }
+ }
+
+ await writeFile(dataPath,nextData);
  written.push('src/data.ts');
  await writeFile(corePath,patchCoreTemplates(await readFile(corePath,'utf8'),created.map(c=>c.id)));
  written.push('server/core.mjs');
@@ -380,12 +464,16 @@ export async function assemblePremium({parentId,videos,names=[],root=ROOT,dryRun
 
  return {
   dryRun:false,
-  parent,
+  mode:single?'clone':'batch',
+  parent:{id:parent.id,name:parent.name},
+  opening:single?openingFile:'',
+  hero:single?heroFile:'',
   clones:created,
   demos:created.map(c=>({
    id:c.id,
    name:c.name,
    demo:'/invite/demo?template='+c.id
-  }))
+  })),
+  written
  };
 }

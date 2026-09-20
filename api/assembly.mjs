@@ -8,10 +8,12 @@ import {
  planClones,
  knownTemplateIds,
  stageInboxFile,
+ resolveInboxPreview,
  INBOX_DIR,
  ROOT
 } from '../server/assembly.mjs';
 import {readFile} from 'node:fs/promises';
+import {createReadStream} from 'node:fs';
 import {join} from 'node:path';
 
 async function rawBody(req,max=120*1024*1024){
@@ -69,6 +71,36 @@ export default async function handler(req,res){
    });
   }
 
+  if(action==='preview'){
+   method(req,['GET']);
+   if(!sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
+   if(!fsWritesAllowed())throw new HttpError(503,'Inbox preview is local-only.');
+   const file=String(url.searchParams.get('file')||'');
+   const info=await resolveInboxPreview(file);
+   const size=info.bytes;
+   const range=String(req.headers.range||'');
+   res.setHeader('Accept-Ranges','bytes');
+   res.setHeader('Content-Type',info.type);
+   res.setHeader('Cache-Control','no-store');
+   if(range.startsWith('bytes=')){
+    const part=range.replace(/bytes=/,'').split('-');
+    const start=Number(part[0])||0;
+    const end=part[1]?Number(part[1]):size-1;
+    if(start>=size||end>=size||start>end){
+     res.statusCode=416;
+     res.setHeader('Content-Range',`bytes */${size}`);
+     return res.end();
+    }
+    res.statusCode=206;
+    res.setHeader('Content-Range',`bytes ${start}-${end}/${size}`);
+    res.setHeader('Content-Length',String(end-start+1));
+    return createReadStream(info.path,{start,end}).pipe(res);
+   }
+   res.statusCode=200;
+   res.setHeader('Content-Length',String(size));
+   return createReadStream(info.path).pipe(res);
+  }
+
   if(action==='plan'){
    method(req,['POST']);
    if(!sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
@@ -101,8 +133,10 @@ export default async function handler(req,res){
    const parentId=String(body.parentId||'');
    const videos=Array.isArray(body.videos)?body.videos.map(v=>String(v||'').trim()).filter(Boolean):[];
    const names=Array.isArray(body.names)?body.names.map(v=>String(v??'')):[];
+   const opening=String(body.opening||'');
+   const hero=String(body.hero||'');
    const dryRun=Boolean(body.dryRun);
-   return respond(res,200,await assemblePremium({parentId,videos,names,dryRun}));
+   return respond(res,200,await assemblePremium({parentId,videos,names,opening,hero,dryRun}));
   }
 
   throw new HttpError(404,'Not found.');
