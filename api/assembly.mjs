@@ -12,6 +12,7 @@ import {
  INBOX_DIR,
  ROOT
 } from '../server/assembly.mjs';
+import {startGeneratePair,getGenerateJob} from '../server/assembly-ai.mjs';
 import {readFile} from 'node:fs/promises';
 import {createReadStream} from 'node:fs';
 import {join} from 'node:path';
@@ -137,6 +138,26 @@ export default async function handler(req,res){
    const hero=String(body.hero||'');
    const dryRun=Boolean(body.dryRun);
    return respond(res,200,await assemblePremium({parentId,videos,names,opening,hero,dryRun}));
+  }
+
+  if(action==='generate-pair'){
+   method(req,['POST']);
+   if(!sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
+   if(!fsWritesAllowed())throw new HttpError(503,'AI generate is local-only. Use this desk on your Cursor machine.');
+   const body=await bodyJson(req,8192);
+   const imageUrl=String(body.imageUrl||body.url||'').trim();
+   if(!imageUrl)throw new HttpError(400,'Paste a Pinterest or image URL.');
+   return respond(res,200,startGeneratePair({imageUrl}));
+  }
+
+  if(action==='generate-status'){
+   method(req,['GET']);
+   if(!sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
+   if(!fsWritesAllowed())throw new HttpError(503,'AI generate status is local-only.');
+   const jobId=String(url.searchParams.get('jobId')||'');
+   const job=getGenerateJob(jobId);
+   if(!job)throw new HttpError(404,'Generate job not found.');
+   return respond(res,200,job);
   }
 
   throw new HttpError(404,'Not found.');

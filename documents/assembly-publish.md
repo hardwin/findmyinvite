@@ -52,8 +52,25 @@ Do all of the following without asking him to touch Supabase:
 
 Assembly step 3 has editable **Name** fields. Those names are written into `data.ts` / CMS / SQL at assemble time. If Ashok wants a rename after assemble but before Publish, edit the name in those registries (or re-assemble) before the Publish commit.
 
+## AI opening + hero (local)
+
+Inbox can generate the pair from a Pinterest/image URL:
+
+1. Paste URL → **Generate opening + hero** (progress bar).
+2. Astra (`gpt-6-astra`, low effort; override `ASSEMBLY_PROMPT_MODEL`) writes MAIN + NEGATIVE from the stored cinematic base prompt.
+3. Replicate `xai/grok-imagine-video-1.5` (9:16, 720p) makes opening (10s) and hero loop (6s).
+4. Preview each inbox file, pick Opening/Hero, **Assemble into repo**, then Publish as usual.
+
+Local `.env.local` required (never commit):
+
+- `OPENAI_API_KEY`
+- `REPLICATE_API_TOKEN`
+
+Optional: `ASSEMBLY_PROMPT_MODEL` (default `gpt-6-astra`).
+
 ## Out of scope
 
 - Auto-push from the Assembly button  
 - Writing the git tree from Vercel production  
 - Asking Ashok to open the Supabase SQL editor
+- Running AI generate on Vercel (filesystem + long Replicate polls stay local)

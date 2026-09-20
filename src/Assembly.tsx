@@ -1,9 +1,10 @@
-import {useEffect,useState,type FormEvent} from 'react';
+import {useEffect,useRef,useState,type FormEvent} from 'react';
 import {ExternalLink,RefreshCw} from 'lucide-react';
 import './akay.css';
 import {Button} from '@/akay/ui/button';
 import {Card,CardContent,CardDescription,CardHeader,CardTitle} from '@/akay/ui/card';
 import {Input,Select} from '@/akay/ui/input';
+import {Progress} from '@/akay/ui/progress';
 import {Separator} from '@/akay/ui/separator';
 
 type Parent={
@@ -23,6 +24,16 @@ type AssembleResult={
  clones:ClonePlan[];
  demos:{id:string;name:string;demo:string}[];
  mode?:string;
+};
+type GenerateStatus={
+ jobId:string;
+ status:string;
+ stage:string;
+ percent:number;
+ label:string;
+ opening?:string|null;
+ hero?:string|null;
+ error?:string|null;
 };
 
 function kb(bytes:number){return Math.round(bytes/1024)+' KB'}
@@ -48,6 +59,14 @@ function PhoneVideo({src,poster,label,loop=false}:{src:string;poster?:string;lab
  );
 }
 
+const ASSEMBLE_STAGES=[
+ {at:8,label:'Preparing clone…'},
+ {at:28,label:'Encoding opening…'},
+ {at:55,label:'Encoding hero loop…'},
+ {at:78,label:'Patching registries…'},
+ {at:92,label:'Writing catalogue assets…'}
+];
+
 export default function Assembly(){
  const [code,setCode]=useState('');
  const [authed,setAuthed]=useState(false);
@@ -63,6 +82,11 @@ export default function Assembly(){
  const [cloneName,setCloneName]=useState('');
  const [plan,setPlan]=useState<ClonePlan|null>(null);
  const [result,setResult]=useState<AssembleResult|null>(null);
+ const [imageUrl,setImageUrl]=useState('');
+ const [previewFile,setPreviewFile]=useState('');
+ const [genJob,setGenJob]=useState<GenerateStatus|null>(null);
+ const [assembleProgress,setAssembleProgress]=useState<{percent:number;label:string}|null>(null);
+ const assembleTimer=useRef<ReturnType<typeof setInterval>|null>(null);
 
  useEffect(()=>{
   document.title='Assembly · FindMyInvite';
@@ -71,6 +95,10 @@ export default function Assembly(){
   meta.content='noindex,nofollow';
   document.head.appendChild(meta);
   return()=>{meta.remove();};
+ },[]);
+
+ useEffect(()=>()=>{
+  if(assembleTimer.current)clearInterval(assembleTimer.current);
  },[]);
 
  async function loadInbox(){
@@ -141,6 +169,31 @@ export default function Assembly(){
   void loadPlan(parentId).catch(err=>setError(err instanceof Error?err.message:'Plan failed.'));
  },[authed,parentId]);
 
+ useEffect(()=>{
+  if(!genJob||genJob.status==='done'||genJob.status==='error')return;
+  const timer=setInterval(()=>{
+   void (async()=>{
+    try{
+     const res=await fetch('/api/assembly?action=generate-status&jobId='+encodeURIComponent(genJob.jobId),{credentials:'same-origin'});
+     const body=await res.json().catch(()=>({}));
+     if(res.status===401){setAuthed(false);return;}
+     if(!res.ok)throw new Error(body.error||'Generate status failed.');
+     setGenJob(body);
+     if(body.status==='done'){
+      await loadInbox();
+      if(body.opening)setOpening(body.opening);
+      if(body.hero)setHero(body.hero);
+      setPreviewFile(body.opening||'');
+     }
+     if(body.status==='error')setError(body.error||'Generate failed.');
+    }catch(err){
+     setError(err instanceof Error?err.message:'Generate status failed.');
+    }
+   })();
+  },1500);
+  return()=>clearInterval(timer);
+ },[genJob?.jobId,genJob?.status]);
+
  async function onGate(event:FormEvent){
   event.preventDefault();
   setBusy(true);
@@ -192,6 +245,58 @@ export default function Assembly(){
   }
  }
 
+ function clearAssembleProgress(){
+  if(assembleTimer.current){
+   clearInterval(assembleTimer.current);
+   assembleTimer.current=null;
+  }
+  setAssembleProgress(null);
+ }
+
+ function startAssembleProgress(dryRun:boolean){
+  clearAssembleProgress();
+  if(dryRun){
+   setAssembleProgress({percent:40,label:'Dry run…'});
+   return;
+  }
+  let step=0;
+  setAssembleProgress({percent:ASSEMBLE_STAGES[0].at,label:ASSEMBLE_STAGES[0].label});
+  assembleTimer.current=setInterval(()=>{
+   step=Math.min(step+1,ASSEMBLE_STAGES.length-1);
+   setAssembleProgress({percent:ASSEMBLE_STAGES[step].at,label:ASSEMBLE_STAGES[step].label});
+  },2800);
+ }
+
+ async function onGenerate(){
+  const url=imageUrl.trim();
+  if(!url){setError('Paste a Pinterest or image URL.');return;}
+  setBusy(true);
+  setError('');
+  setGenJob(null);
+  try{
+   const res=await fetch('/api/assembly?action=generate-pair',{
+    method:'POST',
+    credentials:'same-origin',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({imageUrl:url})
+   });
+   const body=await res.json().catch(()=>({}));
+   if(res.status===401){setAuthed(false);return;}
+   if(!res.ok)throw new Error(body.error||'Could not start generate.');
+   setGenJob({
+    jobId:body.jobId,
+    status:'running',
+    stage:'queued',
+    percent:0,
+    label:'Queued…'
+   });
+  }catch(err){
+   setError(err instanceof Error?err.message:'Could not start generate.');
+  }finally{
+   setBusy(false);
+  }
+ }
+
  async function onAssemble(dryRun:boolean){
   if(!parentId){setError('Pick a Premium parent.');return;}
   if(!opening){setError('Pick an opening video for the new clone.');return;}
@@ -199,6 +304,7 @@ export default function Assembly(){
   setBusy(true);
   setError('');
   setResult(null);
+  startAssembleProgress(dryRun);
   try{
    const res=await fetch('/api/assembly?action=assemble',{
     method:'POST',
@@ -215,6 +321,7 @@ export default function Assembly(){
    const body=await res.json().catch(()=>({}));
    if(res.status===401){setAuthed(false);return;}
    if(!res.ok)throw new Error(body.error||'Assemble failed.');
+   setAssembleProgress({percent:100,label:dryRun?'Dry run ready':'Loaded into clone'});
    setResult(body);
    if(!dryRun){
     await loadParents(parentId);
@@ -224,13 +331,21 @@ export default function Assembly(){
    }
   }catch(err){
    setError(err instanceof Error?err.message:'Assemble failed.');
+   clearAssembleProgress();
   }finally{
+   if(assembleTimer.current){
+    clearInterval(assembleTimer.current);
+    assembleTimer.current=null;
+   }
    setBusy(false);
+   if(!dryRun)setTimeout(()=>setAssembleProgress(null),1600);
+   else setTimeout(()=>setAssembleProgress(null),900);
   }
  }
 
  const parent=parents.find(item=>item.id===parentId);
- const canAssemble=Boolean(writable&&!busy&&parentId&&opening&&plan);
+ const generating=Boolean(genJob&&genJob.status!=='done'&&genJob.status!=='error');
+ const canAssemble=Boolean(writable&&!busy&&!generating&&parentId&&opening&&plan);
 
  if(!authed){
   return (
@@ -313,26 +428,63 @@ export default function Assembly(){
      <CardHeader className="flex-row items-start justify-between gap-2 space-y-0">
       <div className="space-y-1">
        <CardTitle>2. Inbox</CardTitle>
-       <CardDescription>Upload videos here (<code className="text-[11px]">{inboxPath}</code>), then pick them for the clone below.</CardDescription>
+       <CardDescription>Generate from a Pinterest/image URL, or upload videos into <code className="text-[11px]">{inboxPath}</code>.</CardDescription>
       </div>
-      <Button type="button" size="icon" variant="outline" disabled={!writable||busy} aria-label="Refresh inbox" onClick={()=>void loadInbox().catch(err=>setError(err instanceof Error?err.message:'Inbox refresh failed.'))}>
+      <Button type="button" size="icon" variant="outline" disabled={!writable||busy||generating} aria-label="Refresh inbox" onClick={()=>void loadInbox().catch(err=>setError(err instanceof Error?err.message:'Inbox refresh failed.'))}>
        <RefreshCw className="size-3.5"/>
       </Button>
      </CardHeader>
      <CardContent className="space-y-3">
+      <div className="space-y-2 rounded-md border p-2">
+       <p className="text-xs font-medium">AI opening + hero</p>
+       <Input
+        type="url"
+        placeholder="https://www.pinterest.com/pin/… or direct image URL"
+        value={imageUrl}
+        disabled={!writable||busy||generating}
+        onChange={e=>setImageUrl(e.target.value)}
+        aria-label="Pinterest or image URL"
+       />
+       <Button type="button" disabled={!writable||busy||generating||!imageUrl.trim()} onClick={()=>void onGenerate()}>
+        {generating?'Generating…':'Generate opening + hero'}
+       </Button>
+       {genJob&&(
+        <Progress value={genJob.percent} label={genJob.label+(genJob.status==='done'?' · saved to inbox':'')}/>
+       )}
+      </div>
+
       <Input
        type="file"
        accept="video/mp4,video/quicktime,video/webm,.mp4,.mov,.webm,.mkv"
        multiple
-       disabled={!writable||busy}
+       disabled={!writable||busy||generating}
        onChange={e=>void onUpload(e.currentTarget.files)}
       />
       <Separator/>
-      <ul className="space-y-1">
+      <ul className="space-y-2">
        {inbox.map(file=>(
-        <li key={file.name} className="flex items-center justify-between gap-2 rounded-md border px-2 py-1.5 text-sm">
-         <span className="min-w-0 truncate font-medium">{file.name}</span>
-         <span className="shrink-0 text-xs text-muted-foreground">{kb(file.bytes)}</span>
+        <li key={file.name} className="space-y-2 rounded-md border px-2 py-1.5 text-sm">
+         <div className="flex items-center justify-between gap-2">
+          <span className="min-w-0 truncate font-medium">{file.name}</span>
+          <div className="flex shrink-0 items-center gap-2">
+           <span className="text-xs text-muted-foreground">{kb(file.bytes)}</span>
+           <Button
+            type="button"
+            size="sm"
+            variant="outline"
+            onClick={()=>setPreviewFile(current=>current===file.name?'':file.name)}
+           >
+            {previewFile===file.name?'Hide':'Preview'}
+           </Button>
+          </div>
+         </div>
+         {previewFile===file.name&&(
+          <PhoneVideo
+           label={file.name.includes('-hero')?'Hero preview':'Opening preview'}
+           src={inboxPreviewUrl(file.name)}
+           loop={file.name.includes('-hero')}
+          />
+         )}
         </li>
        ))}
        {!inbox.length&&<li className="text-xs text-muted-foreground">No videos in inbox yet.</li>}
@@ -382,9 +534,13 @@ export default function Assembly(){
        </div>
       </div>
 
+      {assembleProgress&&(
+       <Progress value={assembleProgress.percent} label={assembleProgress.label}/>
+      )}
+
       <div className="flex flex-wrap gap-2">
        <Button type="button" variant="outline" disabled={!canAssemble} onClick={()=>void onAssemble(true)}>Dry run</Button>
-       <Button type="button" disabled={!canAssemble} onClick={()=>void onAssemble(false)}>{busy?'Working…':'Assemble into repo'}</Button>
+       <Button type="button" disabled={!canAssemble} onClick={()=>void onAssemble(false)}>{busy&&!generating?'Loading into clone…':'Assemble into repo'}</Button>
       </div>
      </CardContent>
     </Card>

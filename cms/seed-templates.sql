@@ -20,4 +20,5 @@ insert into public.template_catalog(id,name,description,collection,badge,sort_or
 ('royal-heritage-4','Royal Heritage 4','Timeless cinematic opening with regal heritage storytelling','royal','New',24,true),
 ('royal-heritage-5','Blue & Pink Palace','Timeless cinematic opening with regal heritage storytelling','royal','New',25,true),
 ('royal-heritage-6','Pink Farm','Timeless cinematic opening with regal heritage storytelling','royal','New',26,true),
+('royal-heritage-7','Traditional Anime South','Timeless cinematic opening with regal heritage storytelling','royal','New',27,true),
 on conflict(id) do nothing;

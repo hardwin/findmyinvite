@@ -98,6 +98,11 @@
       "name": "Royal Sanctuary",
       "tier": "royal",
       "renderer": "html-v1"
+    },
+    "luxury-pink": {
+      "name": "Luxury Pink",
+      "tier": "classic",
+      "renderer": "html-v1"
     }
   }
 }
