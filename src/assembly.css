@@ -132,6 +132,33 @@
  font-size:12px;
 }
 .assembly-upload{margin-top:8px}
+.assembly-name{
+ display:grid;
+ gap:6px;
+}
+.assembly-name span{
+ color:#c4a090;
+ font-size:12px;
+ font-family:ui-monospace,Consolas,monospace;
+}
+.assembly-name input{
+ padding:10px 12px;
+ border:1px solid rgba(240,194,168,.28);
+ background:#221814;
+ color:#f4ece6;
+ font:inherit;
+}
+.assembly-previews{
+ list-style:none;
+ padding:0;
+ margin:12px 0 0;
+ display:grid;
+ gap:10px;
+}
+.assembly-previews a{
+ color:#f0c2a8;
+ font-size:1.05rem;
+}
 @media (max-width:720px){
  .assembly-header{flex-direction:column;}
 }

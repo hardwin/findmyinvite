@@ -19,7 +19,7 @@ Operator-only desk at `/assembly` (same Akay gate cookie as `/akay`). Clones a P
 - CLI: `npm run assemble:premium -- --parent royal-heritage --videos a.mp4,b.mp4`
 - Inbox: `work/assembly-inbox/` (gitignored except `.gitkeep`)
 
-Done when Ashok assembles one clone locally, opens `/invite/demo?template=…`, then commits/pushes on his word.
+Done when Ashok assembles one clone locally, opens `/invite/demo?template=…`, then says **Publish** — Akay applies Supabase SQL + commit + push (see [assembly-publish.md](assembly-publish.md)). Assembly UI shows preview links only; editable display names are set before assemble.
 
 ## What this conversation changed after the v0.9.0 handoff
 

@@ -1,4 +1,4 @@
-import {spawn} from 'node:child_process';
+﻿import {spawn} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {access,mkdir,readdir,readFile,stat,writeFile} from 'node:fs/promises';
 import {basename,extname,join,resolve,sep} from 'node:path';
@@ -104,14 +104,20 @@ export async function loadPremiumParents(root=ROOT){
  return parents;
 }
 
-export function planClones(parent,count,existingIds){
+export function cleanCloneName(value,fallback){
+ const text=String(value??'').replace(/\s+/g,' ').trim().slice(0,80);
+ return text||fallback;
+}
+
+export function planClones(parent,count,existingIds,names=[]){
  const ids=nextCloneIds(parent.id,count,existingIds);
  const base=titleBase(parent.name);
- return ids.map(id=>{
+ return ids.map((id,index)=>{
   const num=Number(id.match(/-(\d+)$/)[1]);
+  const fallback=base+' '+num;
   return {
    id,
-   name:base+' '+num,
+   name:cleanCloneName(names[index],fallback),
    description:parent.description,
    image:id+'.jpg',
    video:id+'.mp4',
@@ -307,7 +313,7 @@ function resolveVideoPath(input,root=ROOT){
  return normalized;
 }
 
-export async function assemblePremium({parentId,videos,root=ROOT,dryRun=false}){
+export async function assemblePremium({parentId,videos,names=[],root=ROOT,dryRun=false}){
  if(!fsWritesAllowed())throw new Error('Assembly filesystem writes are local-only. Run on this machine (npm run dev / CLI), then commit and push.');
  if(!parentId)throw new Error('Pick a Premium parent template.');
  if(!Array.isArray(videos)||!videos.length)throw new Error('Add at least one alternate intro video.');
@@ -321,7 +327,7 @@ export async function assemblePremium({parentId,videos,root=ROOT,dryRun=false}){
  const dataPath=join(root,'src','data.ts');
  const dataSource=await readFile(dataPath,'utf8');
  const existing=knownTemplateIds(dataSource);
- const planned=planClones(parent,videos.length,existing);
+ const planned=planClones(parent,videos.length,existing,names);
  const videoPaths=videos.map(v=>resolveVideoPath(v,root));
  for(const path of videoPaths)await access(path);
 
@@ -330,10 +336,9 @@ export async function assemblePremium({parentId,videos,root=ROOT,dryRun=false}){
    dryRun:true,
    parent,
    clones:planned,
-   files:[],
    demos:planned.map(c=>({id:c.id,name:c.name,demo:'/invite/demo?template='+c.id}))
   };
- }
+}
 
  const written=[];
  const catalogueEntries={};
@@ -377,15 +382,10 @@ export async function assemblePremium({parentId,videos,root=ROOT,dryRun=false}){
   dryRun:false,
   parent,
   clones:created,
-  files:[...new Set(written)],
-  migration:migrationRel,
   demos:created.map(c=>({
    id:c.id,
    name:c.name,
-   demo:'/invite/demo?template='+c.id,
-   poster:'/assets/'+c.image,
-   video:'/assets/'+c.video
-  })),
-  next:'Review the working tree, then commit and push main when ready. Assembly never auto-pushes.'
+   demo:'/invite/demo?template='+c.id
+  }))
  };
 }

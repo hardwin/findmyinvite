@@ -75,11 +75,12 @@ export default async function handler(req,res){
    const body=await bodyJson(req,8192);
    const parentId=String(body.parentId||'');
    const count=Math.min(12,Math.max(1,Number(body.count)||1));
+   const names=Array.isArray(body.names)?body.names.map(v=>String(v??'')):[] ;
    const parents=await loadPremiumParents();
    const parent=parents.find(item=>item.id===parentId);
    if(!parent)throw new HttpError(400,'Pick a Premium cinematic parent.');
    const existing=knownTemplateIds(await readFile(join(ROOT,'src','data.ts'),'utf8'));
-   return respond(res,200,{parent,clones:planClones(parent,count,existing)});
+   return respond(res,200,{parent,clones:planClones(parent,count,existing,names)});
   }
 
   if(action==='stage'){
@@ -99,8 +100,9 @@ export default async function handler(req,res){
    const body=await bodyJson(req,65536);
    const parentId=String(body.parentId||'');
    const videos=Array.isArray(body.videos)?body.videos.map(v=>String(v||'').trim()).filter(Boolean):[];
+   const names=Array.isArray(body.names)?body.names.map(v=>String(v??'')):[];
    const dryRun=Boolean(body.dryRun);
-   return respond(res,200,await assemblePremium({parentId,videos,dryRun}));
+   return respond(res,200,await assemblePremium({parentId,videos,names,dryRun}));
   }
 
   throw new HttpError(404,'Not found.');

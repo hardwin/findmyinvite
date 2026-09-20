@@ -1,4 +1,4 @@
-import {useEffect,useState,type FormEvent} from 'react'
+import {useEffect,useState,type FormEvent} from 'react';
 import './assembly.css';
 
 type Parent={
@@ -13,10 +13,7 @@ type ClonePlan={id:string;name:string;image:string;video:string;n:number};
 type AssembleResult={
  dryRun:boolean;
  clones:ClonePlan[];
- files:string[];
- migration?:string;
  demos:{id:string;name:string;demo:string}[];
- next?:string;
 };
 
 export default function Assembly(){
@@ -51,18 +48,24 @@ export default function Assembly(){
   if(body.path)setInboxPath(String(body.path));
  }
 
- async function loadPlan(id:string,count:number){
+ async function loadPlan(id:string,count:number,names:string[]=[]){
   if(!id)return;
   const res=await fetch('/api/assembly?action=plan',{
    method:'POST',
    credentials:'same-origin',
    headers:{'Content-Type':'application/json'},
-   body:JSON.stringify({parentId:id,count:Math.max(1,count)})
+   body:JSON.stringify({parentId:id,count:Math.max(1,count),names})
   });
   const body=await res.json().catch(()=>({}));
   if(res.status===401){setAuthed(false);return;}
   if(!res.ok)throw new Error(body.error||'Could not plan clones.');
-  setPlan(body.clones||[]);
+  const clones:ClonePlan[]=body.clones||[];
+  setPlan(current=>{
+   if(current.length===clones.length&&current.every((item,index)=>item.id===clones[index].id)){
+    return clones.map((clone,index)=>({...clone,name:current[index]?.name||clone.name}));
+   }
+   return clones;
+  });
  }
 
  async function bootstrap(){
@@ -127,6 +130,10 @@ export default function Assembly(){
   setSelected(current=>current.includes(name)?current.filter(item=>item!==name):[...current,name]);
  }
 
+ function onRename(id:string,name:string){
+  setPlan(current=>current.map(item=>item.id===id?{...item,name}:item));
+ }
+
  async function onUpload(files:FileList|null){
   if(!files?.length)return;
   setBusy(true);
@@ -166,7 +173,12 @@ export default function Assembly(){
     method:'POST',
     credentials:'same-origin',
     headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({parentId,videos:selected,dryRun})
+    body:JSON.stringify({
+     parentId,
+     videos:selected,
+     names:plan.slice(0,selected.length).map(item=>item.name),
+     dryRun
+    })
    });
    const body=await res.json().catch(()=>({}));
    if(res.status===401){setAuthed(false);return;}
@@ -203,7 +215,7 @@ export default function Assembly(){
     <div>
      <p className="assembly-kicker">Operator · Repo filesystem</p>
      <h1>Assembly</h1>
-     <p>Pick a Premium parent, drop alternate intros, encode assets, and patch registries for Cursor vibecode.</p>
+     <p>Pick a Premium parent, drop alternate intros, set names, then assemble locally.</p>
     </div>
     <a href="/akay">Back to Akay</a>
    </header>
@@ -250,10 +262,17 @@ export default function Assembly(){
     </div>
 
     <div className="assembly-panel">
-     <h2>3. Planned clones</h2>
+     <h2>3. Names & assemble</h2>
      <ol className="assembly-plan">
-      {plan.map(item=><li key={item.id}><strong>{item.id}</strong> · {item.name}</li>)}
-      {!plan.length&&<li className="assembly-empty">Select videos to preview ids.</li>}
+      {plan.map(item=>(
+       <li key={item.id}>
+        <label className="assembly-name">
+         <span>{item.id}</span>
+         <input type="text" maxLength={80} value={item.name} onChange={e=>onRename(item.id,e.target.value)} aria-label={'Display name for '+item.id}/>
+        </label>
+       </li>
+      ))}
+      {!plan.length&&<li className="assembly-empty">Select videos to preview and rename clones.</li>}
      </ol>
      <div className="assembly-actions">
       <button type="button" className="assembly-secondary" disabled={!writable||busy||!selected.length} onClick={()=>void onAssemble(true)}>Dry run</button>
@@ -264,16 +283,15 @@ export default function Assembly(){
 
    {result&&(
     <section className="assembly-result">
-     <h2>{result.dryRun?'Dry run':'Assembled'}</h2>
-     {result.next&&<p>{result.next}</p>}
-     {result.migration&&<p>Migration: <code>{result.migration}</code></p>}
-     <ul>{result.demos.map(demo=><li key={demo.id}><a href={demo.demo}>{demo.name}</a> · <code>{demo.id}</code></li>)}</ul>
-     {!!result.files.length&&(
-      <details>
-       <summary>{result.files.length} files</summary>
-       <ul>{result.files.map(file=><li key={file}><code>{file}</code></li>)}</ul>
-      </details>
-     )}
+     <h2>{result.dryRun?'Dry run ready':'Assembled — preview'}</h2>
+     <p className="assembly-help">{result.dryRun?'Names and ids look good. Assemble when ready.':'Open the preview. When it looks right, tell Akay: Publish.'}</p>
+     <ul className="assembly-previews">
+      {result.demos.map(demo=>(
+       <li key={demo.id}>
+        <a href={demo.demo}>{demo.name}</a>
+       </li>
+      ))}
+     </ul>
     </section>
    )}
   </main>
