@@ -18,6 +18,7 @@ Operator-only desk at `/assembly` (same Akay gate cookie as `/akay`). Clones a P
 - Writes only when local (`ASSEMBLY_FS=1` or non-Vercel). Never auto-pushes.
 - CLI: `npm run assemble:premium -- --parent royal-heritage --videos a.mp4,b.mp4`
 - Inbox: `work/assembly-inbox/` (gitignored except `.gitkeep`)
+- Opening generate (2026-09-21): xAI REST `last_frame` (pin as **final** frame). Hero still Replicate. Needs `XAI_API_KEY` + `OPENAI_API_KEY` + `REPLICATE_API_TOKEN`.
 
 Done when Ashok assembles one clone locally, opens `/invite/demo?template=…`, then says **Publish** — Akay applies Supabase SQL + commit + push (see [assembly-publish.md](assembly-publish.md)). Assembly UI shows preview links only; editable display names are set before assemble.
 

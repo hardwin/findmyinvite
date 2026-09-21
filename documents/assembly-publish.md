@@ -58,13 +58,15 @@ Inbox can generate the pair from a Pinterest/image URL:
 
 1. Paste URL → **Generate opening + hero** (progress bar).
 2. Astra (`gpt-6-astra`, low effort; override `ASSEMBLY_PROMPT_MODEL`) writes MAIN + NEGATIVE from the stored cinematic base prompt.
-3. Replicate `xai/grok-imagine-video-1.5` (9:16, 720p) makes opening (10s) and hero loop (6s).
-4. Preview each inbox file, pick Opening/Hero, **Assemble into repo**, then Publish as usual.
+3. **Opening (10s, 9:16, 720p):** xAI Videos API `grok-imagine-video-1.5` with `last_frame` set to the pin image (the clip must *end* on that frame). Replicate’s `image` input is start-frame only, so opening does **not** go through Replicate.
+4. **Hero loop (6s):** still Replicate `xai/grok-imagine-video-1.5` with the static-camera loop prompt.
+5. Preview each inbox file, pick Opening/Hero, **Assemble into repo**, then Publish as usual.
 
 Local `.env.local` required (never commit):
 
-- `OPENAI_API_KEY`
-- `REPLICATE_API_TOKEN`
+- `OPENAI_API_KEY` (prompt writer)
+- `XAI_API_KEY` (opening, last_frame)
+- `REPLICATE_API_TOKEN` (hero loop)
 
 Optional: `ASSEMBLY_PROMPT_MODEL` (default `gpt-6-astra`).
 
@@ -73,4 +75,4 @@ Optional: `ASSEMBLY_PROMPT_MODEL` (default `gpt-6-astra`).
 - Auto-push from the Assembly button  
 - Writing the git tree from Vercel production  
 - Asking Ashok to open the Supabase SQL editor
-- Running AI generate on Vercel (filesystem + long Replicate polls stay local)
+- Running AI generate on Vercel (filesystem + long xAI/Replicate polls stay local)

@@ -106,3 +106,137 @@ test('generate-status 404 for unknown job',async()=>{
  const res=await request('/api/assembly?action=generate-status&jobId=does-not-exist');
  assert.equal(res.statusCode,404);
 });
+
+test('lastFrameFromImage prefers public pinimg URL then data URI',async()=>{
+ const {lastFrameFromImage,normalizeReferenceImage}=await import('../server/assembly-ai.mjs');
+ const jpeg=Buffer.from([0xff,0xd8,0xff,0xe0,0x00,0x10,0x4a,0x46,0x49,0x46]);
+ const publicFrame=lastFrameFromImage(normalizeReferenceImage({
+  buffer:jpeg,
+  contentType:'image/jpeg',
+  ext:'.jpg',
+  sourceUrl:'https://i.pinimg.com/736x/ab/cd/ef/abcd.jpg'
+ }));
+ assert.deepEqual(publicFrame,{url:'https://i.pinimg.com/736x/ab/cd/ef/abcd.jpg'});
+ const dataFrame=lastFrameFromImage({
+  buffer:jpeg,
+  contentType:'image/jpeg',
+  ext:'.jpg',
+  sourceUrl:'https://www.pinterest.com/pin/123/'
+ });
+ assert.match(dataFrame.url,/^data:image\/jpeg;base64,/);
+});
+
+test('startGeneratePair requires XAI_API_KEY for opening last_frame',async()=>{
+ const {startGeneratePair}=await import('../server/assembly-ai.mjs');
+ assert.throws(
+  ()=>startGeneratePair({
+   imageUrl:'https://example.com/a.jpg',
+   env:{OPENAI_API_KEY:'k',REPLICATE_API_TOKEN:'r',ASSEMBLY_FS:'1'}
+  }),
+  /XAI_API_KEY/
+ );
+ assert.throws(
+  ()=>startGeneratePair({
+   imageUrl:'https://example.com/a.jpg',
+   env:{OPENAI_API_KEY:'k',XAI_API_KEY:'x',ASSEMBLY_FS:'1'}
+  }),
+  /REPLICATE_API_TOKEN/
+ );
+});
+
+test('runXaiImagineVideo posts last_frame and polls until done',async()=>{
+ const {runXaiImagineVideo,XAI_VIDEO_GENERATIONS,XAI_VIDEO_MODEL}=await import('../server/assembly-ai.mjs');
+ const calls=[];
+ let polls=0;
+ const mp4=Buffer.from('fake-mp4');
+ const fetchImpl=async(url,opts={})=>{
+  calls.push({url,method:opts.method||'GET',body:opts.body,headers:opts.headers});
+  if(url===XAI_VIDEO_GENERATIONS){
+   const body=JSON.parse(opts.body);
+   assert.equal(body.model,XAI_VIDEO_MODEL);
+   assert.deepEqual(body.last_frame,{url:'https://i.pinimg.com/last.jpg'});
+   assert.equal(body.duration,10);
+   assert.equal(body.aspect_ratio,'9:16');
+   assert.equal(body.resolution,'720p');
+   assert.equal(body.image,undefined);
+   assert.match(body.prompt,/gates open/i);
+   assert.match(String(opts.headers.Authorization||''),/^Bearer xai-test$/);
+   return {ok:true,status:200,json:async()=>({request_id:'req-open-1'})};
+  }
+  if(url==='https://api.x.ai/v1/videos/req-open-1'){
+   polls+=1;
+   if(polls===1)return {ok:true,status:200,json:async()=>({status:'pending',progress:40})};
+   return {ok:true,status:200,json:async()=>({status:'done',video:{url:'https://vidgen.x.ai/out.mp4'}})};
+  }
+  if(url==='https://vidgen.x.ai/out.mp4'){
+   return {ok:true,status:200,arrayBuffer:async()=>mp4};
+  }
+  throw new Error('unexpected fetch '+url);
+ };
+ const result=await runXaiImagineVideo({
+  lastFrameUrl:'https://i.pinimg.com/last.jpg',
+  prompt:'Closed gates open toward the final pin frame.',
+  duration:10,
+  env:{XAI_API_KEY:'xai-test'},
+  fetchImpl,
+  sleepImpl:async()=>{}
+ });
+ assert.equal(result.requestId,'req-open-1');
+ assert.equal(result.url,'https://vidgen.x.ai/out.mp4');
+ assert.equal(Buffer.compare(result.buffer,mp4),0);
+ assert.equal(polls,2);
+ assert.equal(calls[0].url,XAI_VIDEO_GENERATIONS);
+ assert.equal(calls[0].method,'POST');
+});
+
+test('runXaiImagineVideo fails on expired and failed statuses',async()=>{
+ const {runXaiImagineVideo}=await import('../server/assembly-ai.mjs');
+ const expiredFetch=async(url)=>{
+  if(url.includes('/generations'))return {ok:true,status:200,json:async()=>({request_id:'r1'})};
+  return {ok:true,status:200,json:async()=>({status:'expired'})};
+ };
+ await assert.rejects(
+  ()=>runXaiImagineVideo({
+   lastFrame:{url:'https://i.pinimg.com/last.jpg'},
+   prompt:'x',
+   env:{XAI_API_KEY:'k'},
+   fetchImpl:expiredFetch,
+   sleepImpl:async()=>{}
+  }),
+  /expired/i
+ );
+ const failedFetch=async(url)=>{
+  if(url.includes('/generations'))return {ok:true,status:200,json:async()=>({request_id:'r2'})};
+  return {ok:true,status:200,json:async()=>({status:'failed',error:{message:'engine down'}})};
+ };
+ await assert.rejects(
+  ()=>runXaiImagineVideo({
+   lastFrame:{url:'https://i.pinimg.com/last.jpg'},
+   prompt:'x',
+   env:{XAI_API_KEY:'k'},
+   fetchImpl:failedFetch,
+   sleepImpl:async()=>{}
+  }),
+  /engine down/
+ );
+});
+
+test('resolveXaiLastFrame uses Files API when the buffer is too large for a data URI',async()=>{
+ const {resolveXaiLastFrame}=await import('../server/assembly-ai.mjs');
+ const jpegHead=Buffer.from([0xff,0xd8,0xff,0xe0]);
+ const huge=Buffer.concat([jpegHead,Buffer.alloc(4*1024*1024+16,0x11)]);
+ const fetchImpl=async(url,opts={})=>{
+  assert.equal(url,'https://api.x.ai/v1/files');
+  assert.equal(opts.method,'POST');
+  assert.match(String(opts.headers.Authorization||''),/^Bearer xai-test$/);
+  assert.ok(opts.body instanceof FormData);
+  return {ok:true,status:200,json:async()=>({id:'file_abc'})};
+ };
+ const frame=await resolveXaiLastFrame({
+  buffer:huge,
+  contentType:'image/jpeg',
+  ext:'.jpg',
+  sourceUrl:'https://www.pinterest.com/pin/no-direct/'
+ },{env:{XAI_API_KEY:'xai-test'},fetchImpl});
+ assert.deepEqual(frame,{file_id:'file_abc'});
+});
