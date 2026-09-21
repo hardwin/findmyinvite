@@ -20,7 +20,7 @@
  --rh8-wine-wash:#F4E4E6;
  --rh8-green-wash:#E4F0EA;
  --rh8-ink:#3A1A18;
- --rh8-scrim:linear-gradient(180deg,rgba(0,0,0,.12) 0%,rgba(0,0,0,.04) 24%,rgba(0,0,0,.04) 76%,rgba(0,0,0,.14) 100%);
+ --rh8-scrim:linear-gradient(180deg,rgba(0,0,0,.08) 0%,rgba(0,0,0,0) 10%,rgba(0,0,0,0) 90%,rgba(0,0,0,.08) 100%),linear-gradient(90deg,rgba(0,0,0,.06) 0%,rgba(0,0,0,0) 10%,rgba(0,0,0,0) 90%,rgba(0,0,0,.06) 100%);
  --invite-color:#6E1A28;
  --invite-paper:#F7ECD6;
  --invite-ink:#3A1A18;

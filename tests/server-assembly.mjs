@@ -160,7 +160,7 @@ test('royal-heritage-8 parks hero copy in the sky without restyling parent-7',as
  assert.match(css,/#165A4A/);
  assert.match(css,/#C9A24A/);
  assert.match(css,/#F7ECD6/);
- assert.match(css,/--rh8-scrim:linear-gradient\(180deg,rgba\(0,0,0,\.12\)/);
+ assert.match(css,/--rh8-scrim:linear-gradient\(180deg,rgba\(0,0,0,\.08\) 0%,rgba\(0,0,0,0\) 10%/);
  assert.match(css,/royal-heritage-8-section-1\.jpg/);
  assert.match(css,/royal-heritage-8-section-5\.jpg/);
  assert.match(css,/\.invitation-page\.theme-royal-heritage-8 \.invite-plate-1/);
