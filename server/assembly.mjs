@@ -386,7 +386,6 @@ export async function assemblePremium({parentId,videos=[],names=[],opening='',he
  if(batch.length>12)throw new Error('Assemble at most 12 videos per run.');
  if(!batch.length&&!openingFile)throw new Error('Pick an opening video for the new clone. The parent template is never changed.');
 
- await ensureFfmpeg();
  const parents=await loadPremiumParents(root);
  const parent=parents.find(item=>item.id===parentId);
  if(!parent)throw new Error('Parent must be a Premium cinematic template with an intro video.');
@@ -415,6 +414,8 @@ export async function assemblePremium({parentId,videos=[],names=[],opening='',he
   };
  }
 
+ // Encode only — dry-run plans clones without spawning ffmpeg (CI runners have none).
+ await ensureFfmpeg();
  const written=[];
  const catalogueEntries={};
  const created=[];

@@ -189,6 +189,37 @@ test('runXaiImagineVideo posts last_frame and polls until done',async()=>{
  assert.equal(calls[0].method,'POST');
 });
 
+test('runXaiImagineVideo posts image plus last_frame when a first still is given',async()=>{
+ const {runXaiImagineVideo,XAI_VIDEO_GENERATIONS}=await import('../server/assembly-ai.mjs');
+ const mp4=Buffer.from('fake-mp4');
+ const fetchImpl=async(url,opts={})=>{
+  if(url===XAI_VIDEO_GENERATIONS){
+   const body=JSON.parse(opts.body);
+   assert.deepEqual(body.image,{url:'https://i.pinimg.com/first.jpg'});
+   assert.deepEqual(body.last_frame,{url:'https://i.pinimg.com/last.jpg'});
+   assert.equal(body.duration,12);
+   return {ok:true,status:200,json:async()=>({request_id:'req-open-2'})};
+  }
+  if(url==='https://api.x.ai/v1/videos/req-open-2'){
+   return {ok:true,status:200,json:async()=>({status:'done',video:{url:'https://vidgen.x.ai/out2.mp4'}})};
+  }
+  if(url==='https://vidgen.x.ai/out2.mp4'){
+   return {ok:true,status:200,arrayBuffer:async()=>mp4};
+  }
+  throw new Error('unexpected fetch '+url);
+ };
+ const result=await runXaiImagineVideo({
+  imageUrl:'https://i.pinimg.com/first.jpg',
+  lastFrameUrl:'https://i.pinimg.com/last.jpg',
+  prompt:'Window opens onto the couple.',
+  duration:12,
+  env:{XAI_API_KEY:'xai-test'},
+  fetchImpl,
+  sleepImpl:async()=>{}
+ });
+ assert.equal(result.requestId,'req-open-2');
+});
+
 test('runXaiImagineVideo fails on expired and failed statuses',async()=>{
  const {runXaiImagineVideo}=await import('../server/assembly-ai.mjs');
  const expiredFetch=async(url)=>{

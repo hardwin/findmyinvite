@@ -207,3 +207,103 @@
 .invitation-page.theme-royal-heritage-9 .invite-credit{background:#F7F1E8;color:#9B2158;border-color:#C45A8A}
 .invitation-page.theme-royal-heritage-9 .invite-credit-line,
 .invitation-page.theme-royal-heritage-9 .invite-credit-line a{color:#3F5C55}
+/* royal-heritage-10 / Spiderverse: neon magenta+cyan from pin rain street, mid-sky overlay, thin plates. */
+.invitation-page.theme-royal-heritage-10{
+ --rh10-magenta:#E11D8F;
+ --rh10-magenta-deep:#9B1264;
+ --rh10-cyan:#12C4D8;
+ --rh10-cyan-deep:#0A7A88;
+ --rh10-red:#C41E3A;
+ --rh10-navy:#0E1A2E;
+ --rh10-mist:#E8EEF6;
+ --rh10-magenta-wash:#F4D7E8;
+ --rh10-cyan-wash:#D7EEF2;
+ --rh10-ink:#0E1A2E;
+ --rh10-scrim:linear-gradient(180deg,rgba(0,0,0,.08) 0%,rgba(0,0,0,0) 10%,rgba(0,0,0,0) 90%,rgba(0,0,0,.08) 100%),linear-gradient(90deg,rgba(0,0,0,.06) 0%,rgba(0,0,0,0) 10%,rgba(0,0,0,0) 90%,rgba(0,0,0,.06) 100%);
+ --invite-color:#E11D8F;
+ --invite-paper:#E8EEF6;
+ --invite-ink:#0E1A2E;
+ background:#E8EEF6;
+ color:#0E1A2E;
+}
+.invitation-page.theme-royal-heritage-10 .invitation-hero{height:100svh;min-height:100svh}
+.invitation-page.theme-royal-heritage-10 .couple-overlay{justify-content:center;align-items:center;text-align:center;padding:4svh 13% 50svh 13%;overflow:hidden;background:transparent;box-sizing:border-box;color:#E11D8F;text-shadow:0 1px 0 rgba(14,26,46,.72),0 2px 12px rgba(14,26,46,.55),0 0 22px rgba(18,196,216,.28)}
+.invitation-page.theme-royal-heritage-10 .hero-copy{width:100%;max-width:100%;margin:0;padding:8px 10px;display:flex;flex-direction:column;align-items:center;text-align:center;box-sizing:border-box;background:radial-gradient(ellipse at 50% 42%,rgba(14,26,46,.42) 0%,rgba(14,26,46,.16) 46%,rgba(14,26,46,0) 74%)}
+.invitation-page.theme-royal-heritage-10 .hero-person{width:100%;text-align:center}
+.invitation-page.theme-royal-heritage-10 .hero-heart{display:block;width:20px;height:20px;margin:0 auto 8px;color:#12C4D8;fill:#12C4D8}
+.invitation-page.theme-royal-heritage-10 .hero-copy .welcome-title{font-size:clamp(18px,5.4vw,26px);line-height:1.25;margin:0 auto 6px;max-width:20em;text-align:center;color:#12C4D8}
+.invitation-page.theme-royal-heritage-10 .hero-divider{margin:6px auto 10px;gap:10px;justify-content:center;color:#E11D8F}
+.invitation-page.theme-royal-heritage-10 .hero-divider i{width:40px;background:#12C4D8;opacity:.9}
+.invitation-page.theme-royal-heritage-10 .couple-overlay h1,.invitation-page.theme-royal-heritage-10 .hero-person h1{font-size:clamp(52px,16vw,76px);line-height:.95;margin:0;width:100%;text-align:center;color:#E11D8F}
+.invitation-page.theme-royal-heritage-10 .hero-person .couple-subtext{color:#12C4D8}
+.invitation-page.theme-royal-heritage-10 .bride-person h1{color:#12C4D8}
+.invitation-page.theme-royal-heritage-10 .bride-person .couple-subtext{color:#E11D8F}
+.invitation-page.theme-royal-heritage-10 .hero-copy .couple-subtext,.invitation-page.theme-royal-heritage-10 .couple-subtext{font-size:clamp(14px,3.8vw,17px);line-height:1.3;margin:4px auto 8px;padding:0;max-width:22em;text-align:center}
+.invitation-page.theme-royal-heritage-10 .hero-copy .couple-amp,.invitation-page.theme-royal-heritage-10 .couple-amp{font-size:clamp(24px,7vw,34px);line-height:1;margin:4px 0 8px;text-align:center;color:#12C4D8;opacity:1}
+.invitation-page.theme-royal-heritage-10 .hero-scroll{position:absolute;bottom:44svh;left:50%;right:auto;translate:-50% 0;margin:0;font-size:11px;color:#12C4D8}
+@media(max-width:480px){
+ .invitation-page.theme-royal-heritage-10 .couple-overlay{padding:5svh 14% 50svh 14%}
+ .invitation-page.theme-royal-heritage-10 .couple-overlay h1,.invitation-page.theme-royal-heritage-10 .hero-person h1{font-size:clamp(48px,15.5vw,68px)}
+ .invitation-page.theme-royal-heritage-10 .hero-copy .welcome-title{font-size:clamp(17px,5.2vw,22px)}
+ .invitation-page.theme-royal-heritage-10 .hero-copy .couple-subtext,.invitation-page.theme-royal-heritage-10 .couple-subtext{font-size:clamp(14px,3.9vw,16px)}
+}
+@media(min-aspect-ratio:3/4){.invitation-page.theme-royal-heritage-10 .couple-overlay{padding:4svh 18% 46svh 18%}}
+@media(max-height:640px){
+ .invitation-page.theme-royal-heritage-10 .couple-overlay{padding:3svh 12% 48svh 12%}
+ .invitation-page.theme-royal-heritage-10 .couple-overlay h1,.invitation-page.theme-royal-heritage-10 .hero-person h1{font-size:clamp(40px,11vw,56px)}
+ .invitation-page.theme-royal-heritage-10 .hero-copy .welcome-title{font-size:16px}
+ .invitation-page.theme-royal-heritage-10 .hero-copy .couple-subtext{font-size:13px}
+}
+.invitation-page.theme-royal-heritage-10>.sound-toggle,
+.invitation-page.theme-royal-heritage-10>.language-toggle,
+.invitation-page.theme-royal-heritage-10>.use-design{background:rgba(14,26,46,.88);color:#12C4D8;border-color:rgba(225,29,143,.55)}
+.invitation-page.theme-royal-heritage-10 .invite-welcome,
+.invitation-page.theme-royal-heritage-10 .invite-section{
+ max-width:none;width:100%;margin:0;box-sizing:border-box;position:relative;
+ background-color:#E8EEF6;background-size:cover;background-position:center;background-repeat:no-repeat;
+ color:#0E1A2E;padding:72px 24px
+}
+.invitation-page.theme-royal-heritage-10 .invite-welcome{padding:80px 24px;background-image:none;background:#E8EEF6;color:#0E1A2E}
+.invitation-page.theme-royal-heritage-10 .invite-plate-1{background-image:var(--rh10-scrim),url('/assets/royal-heritage-10-section-1.jpg')}
+.invitation-page.theme-royal-heritage-10 .invite-plate-2{background-image:var(--rh10-scrim),url('/assets/royal-heritage-10-section-2.jpg')}
+.invitation-page.theme-royal-heritage-10 .invite-plate-3{background-image:var(--rh10-scrim),url('/assets/royal-heritage-10-section-3.jpg')}
+.invitation-page.theme-royal-heritage-10 .invite-plate-4{background-image:var(--rh10-scrim),url('/assets/royal-heritage-10-section-4.jpg')}
+.invitation-page.theme-royal-heritage-10 .invite-plate-5{background-image:var(--rh10-scrim),url('/assets/royal-heritage-10-section-5.jpg')}
+.invitation-page.theme-royal-heritage-10 .invite-cluster{max-width:none;width:100%;background-color:#E8EEF6;background-size:cover;background-position:center;background-repeat:no-repeat;background-image:var(--rh10-scrim),url('/assets/royal-heritage-10-section-4.jpg')}
+.invitation-page.theme-royal-heritage-10 .invite-cluster .invite-section{background-image:none;background-color:transparent;padding:40px max(28px,12%)}
+.invitation-page.theme-royal-heritage-10 .invite-cluster .invite-section:first-child{padding-top:80px}
+.invitation-page.theme-royal-heritage-10 .invite-cluster .invite-section:last-child{padding-bottom:80px}
+.invitation-page.theme-royal-heritage-10 .invite-section h2{color:#E11D8F;text-shadow:0 1px 2px rgba(232,238,246,.7)}
+.invitation-page.theme-royal-heritage-10 .invite-plate-3 h2,
+.invitation-page.theme-royal-heritage-10 .invite-plate-5 h2{color:#0A7A88}
+.invitation-page.theme-royal-heritage-10 .invite-welcome p,
+.invitation-page.theme-royal-heritage-10 .invite-section p,
+.invitation-page.theme-royal-heritage-10 .invite-section small{color:#0E1A2E;text-shadow:0 1px 2px rgba(232,238,246,.55)}
+.invitation-page.theme-royal-heritage-10 .invite-divider{color:#12C4D8;opacity:.95}
+.invitation-page.theme-royal-heritage-10 .invite-section h3,
+.invitation-page.theme-royal-heritage-10 .timeline h3{color:#E11D8F}
+.invitation-page.theme-royal-heritage-10 .invite-plate-3 h3,
+.invitation-page.theme-royal-heritage-10 .invite-plate-5 h3{color:#0A7A88}
+.invitation-page.theme-royal-heritage-10 .fmi-button{background:#E11D8F;border-color:#12C4D8;color:#E8EEF6}
+.invitation-page.theme-royal-heritage-10 .fmi-button:hover{background:#0A7A88;border-color:#0A7A88;color:#E8EEF6}
+.invitation-page.theme-royal-heritage-10 .fmi-button.outline{background:transparent;color:#E11D8F;border-color:#12C4D8}
+.invitation-page.theme-royal-heritage-10 .scratch-heart{background:#F4D7E8}
+.invitation-page.theme-royal-heritage-10 .scratch-date{color:#E11D8F}
+.invitation-page.theme-royal-heritage-10 .scratch-date em{color:#0A7A88}
+.invitation-page.theme-royal-heritage-10 .calendar-menu{background:#E8EEF6;border-color:#12C4D8;color:#0E1A2E}
+.invitation-page.theme-royal-heritage-10 .calendar-menu a:hover,
+.invitation-page.theme-royal-heritage-10 .calendar-menu button:hover{background:#D7EEF2}
+.invitation-page.theme-royal-heritage-10 .countdown>div{background:rgba(232,238,246,.94);border:1px solid #12C4D8;border-radius:10px;padding:12px 14px;color:#E11D8F}
+.invitation-page.theme-royal-heritage-10 .countdown strong{color:#E11D8F}
+.invitation-page.theme-royal-heritage-10 .countdown span{color:#0A7A88}
+.invitation-page.theme-royal-heritage-10 .timeline{border-left-color:#12C4D8}
+.invitation-page.theme-royal-heritage-10 .timeline>div:before{background:#E11D8F}
+.invitation-page.theme-royal-heritage-10 .photo-slideshow{box-shadow:0 12px 36px rgba(225,29,143,.18);border:1px solid rgba(18,196,216,.45)}
+.invitation-page.theme-royal-heritage-10 .fmi-form input,
+.invitation-page.theme-royal-heritage-10 .fmi-form select,
+.invitation-page.theme-royal-heritage-10 .fmi-form textarea{background:#E8EEF6;border-color:#12C4D8;color:#0E1A2E}
+.invitation-page.theme-royal-heritage-10 .fmi-form label{color:#9B1264}
+.invitation-page.theme-royal-heritage-10 .form-success{background:rgba(215,238,242,.92);border-color:#12C4D8;color:#0A7A88}
+.invitation-page.theme-royal-heritage-10 .invite-credit{background:#E8EEF6;color:#E11D8F;border-color:#12C4D8}
+.invitation-page.theme-royal-heritage-10 .invite-credit-line,
+.invitation-page.theme-royal-heritage-10 .invite-credit-line a{color:#0A7A88}
