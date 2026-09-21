@@ -58,19 +58,32 @@ Inbox can generate the pair from a Pinterest/image URL:
 
 1. Paste URL → **Generate opening + hero** (progress bar).
 2. Astra (`gpt-6-astra`, low effort; override `ASSEMBLY_PROMPT_MODEL`) writes MAIN + NEGATIVE from the stored cinematic base prompt.
-3. Replicate `xai/grok-imagine-video-1.5` (9:16, 720p) makes opening (10s) and hero loop (6s).
-4. Preview each inbox file, pick Opening/Hero, **Assemble into repo**, then Publish as usual.
+3. **Opening (10s, 9:16, 720p):** xAI Videos API `grok-imagine-video-1.5` with `last_frame` set to the pin image (the clip must *end* on that frame). Replicate’s `image` input is start-frame only, so opening does **not** go through Replicate.
+4. **Hero loop (6s):** still Replicate `xai/grok-imagine-video-1.5` with the static-camera loop prompt.
+5. Preview each inbox file, pick Opening/Hero, **Assemble into repo**, then Publish as usual.
 
 Local `.env.local` required (never commit):
 
-- `OPENAI_API_KEY`
-- `REPLICATE_API_TOKEN`
+- `OPENAI_API_KEY` (prompt writer)
+- `XAI_API_KEY` (opening, last_frame)
+- `REPLICATE_API_TOKEN` (hero loop)
 
 Optional: `ASSEMBLY_PROMPT_MODEL` (default `gpt-6-astra`).
+
+## Section plates (thin-border / text-safe)
+
+Section plates are **borders around copy**, not theater scenery. When generating or swapping a plate:
+
+- Borders stay **thin** — vine / flower / delicate filigree only, about **8–12% inset** on each edge. Prefer thin vine/flower over heavy curtains or columns.
+- Center is empty sky (cream/peach/gold gradient). Body copy must never sit under the frame.
+- Do **not** generate thick draped curtains, fat pillars, jeweled bezels, or architecture that eats the sides.
+- If copy still clips, add inner padding (`max(28px, 12%)`) — do not thicken the art.
+
+Transport + Accommodation + Gifts share **one** clustered plate. Do not put plates on Welcome / Our Moments / Timeline / Dress Code / RSVP / footer unless Ashok asks.
 
 ## Out of scope
 
 - Auto-push from the Assembly button  
 - Writing the git tree from Vercel production  
 - Asking Ashok to open the Supabase SQL editor
-- Running AI generate on Vercel (filesystem + long Replicate polls stay local)
+- Running AI generate on Vercel (filesystem + long xAI/Replicate polls stay local)

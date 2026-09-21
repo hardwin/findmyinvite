@@ -1,6 +1,6 @@
 import renderers from '../public/studio/renderers.json' with {type:'json'};
 import {parse,serialize} from 'parse5';
-import {templates as catalogueTemplates} from './core.mjs';
+import {templates as catalogueTemplates,musicTracks} from './core.mjs';
 import {HttpError} from './core.mjs';
 export const EDITOR_TEMPLATES=[...catalogueTemplates];
 export const HTML_TEMPLATES=renderers.htmlTemplates;
@@ -15,7 +15,7 @@ export function draftData(input,template){
  for(const [key,max] of Object.entries(stringLimits)){const v=input[key]??'';if(typeof v!=='string'||v.length>max||/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/.test(v))throw new HttpError(400,`Check ${key}.`);data[key]=v;}
  if(data.date&&!validDate(data.date))throw new HttpError(400,'Use a valid date.');
  if(data.time&&!validTime(data.time))throw new HttpError(400,'Use a valid time.');
- if(!['','/assets/track1.mp3','/assets/track3.mp3','/assets/temple/invite-bg.mp3'].includes(data.music))throw new HttpError(400,'Choose an available music track.');
+ if(!musicTracks.has(data.music)&&data.music!=='/assets/temple/invite-bg.mp3')throw new HttpError(400,'Choose an available music track.');
  const photos=input.photos===undefined?[]:input.photos;
  if(!Array.isArray(photos)||photos.length>4)throw new HttpError(400,'Use up to four library photos.');
  data.photos=photos.map(p=>{if(typeof p!=='string'||!/^\/assets\/(?:temple\/)?[a-zA-Z0-9_.-]+\.(?:jpg|jpeg|png|webp)$/.test(p))throw new HttpError(400,'Choose a library photo for this pilot.');return p;});

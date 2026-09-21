@@ -11,6 +11,9 @@ export const OPENING_DURATION=10;
 export const HERO_DURATION=6;
 export const HERO_LOOP_PROMPT='static camera shot, the couple looks at each other, wind moving, eyes blink in love, hair and clothes slightly sway with wind, lights shine, petals fall, no body movements or hand movements';
 export const REPLICATE_MODEL='xai/grok-imagine-video-1.5';
+export const XAI_VIDEO_MODEL='grok-imagine-video-1.5';
+export const XAI_VIDEO_GENERATIONS='https://api.x.ai/v1/videos/generations';
+const XAI_DATA_URI_MAX=4*1024*1024;
 
 export const CINEMATIC_PROMPT_WRITER=`Act as a cinematic invitation-video prompt writer. Study the attached image and produce a Gemini video-generation prompt tailored to it.
 
@@ -221,6 +224,12 @@ async function replicateAuth(env=process.env){
  return token;
 }
 
+function xaiAuth(env=process.env){
+ const key=env.XAI_API_KEY||'';
+ if(!key)throw new HttpError(503,'xAI is not configured (XAI_API_KEY). Opening generate requires it.');
+ return key;
+}
+
 function mimeFromExt(ext){
  const e=String(ext||'').toLowerCase();
  if(e==='.png')return 'image/png';
@@ -294,7 +303,121 @@ export async function resolveReplicateImageUrl(image,{env=process.env,fetchImpl=
  });
 }
 
+/** Public HTTPS for xAI last_frame, else a data URI the API can ingest. */
+export function lastFrameFromImage(image){
+ const normalized=normalizeReferenceImage(image);
+ const publicUrl=preferPublicImageUrl(normalized);
+ if(publicUrl)return {url:publicUrl};
+ const mime=normalized.contentType||'image/jpeg';
+ return {url:'data:'+mime+';base64,'+normalized.buffer.toString('base64')};
+}
+
+export async function uploadXaiImageFile(buffer,filename,{contentType,env=process.env,fetchImpl=fetch}={}){
+ const key=xaiAuth(env);
+ const name=filename||'reference.jpg';
+ const mime=contentType||mimeFromExt(extnameSafe(name));
+ const form=new FormData();
+ form.append('file',new Blob([new Uint8Array(buffer)],{type:mime}),name);
+ form.append('purpose','assistants');
+ const res=await fetchImpl('https://api.x.ai/v1/files',{
+  method:'POST',
+  headers:{Authorization:'Bearer '+key},
+  body:form
+ });
+ const body=await res.json().catch(()=>({}));
+ if(!res.ok){
+  console.error('xAI file upload failed',res.status);
+  throw new HttpError(502,'Could not upload reference image to xAI.');
+ }
+ const id=body?.id||body?.file_id||'';
+ if(!id)throw new HttpError(502,'xAI file upload returned no file_id.');
+ return id;
+}
+
+export async function resolveXaiLastFrame(image,{env=process.env,fetchImpl=fetch}={}){
+ const normalized=normalizeReferenceImage(image);
+ const publicUrl=preferPublicImageUrl(normalized);
+ if(publicUrl)return {url:publicUrl};
+ if(normalized.buffer.length<=XAI_DATA_URI_MAX)return lastFrameFromImage(normalized);
+ const fileId=await uploadXaiImageFile(normalized.buffer,'reference'+normalized.ext,{
+  contentType:normalized.contentType,
+  env,
+  fetchImpl
+ });
+ return {file_id:fileId};
+}
+
 async function sleep(ms){return new Promise(r=>setTimeout(r,ms));}
+
+export async function downloadVideoBuffer(url,{fetchImpl=fetch,headers}={}){
+ const file=await fetchImpl(url,headers?{headers}:{});
+ if(!file.ok)throw new HttpError(502,'Could not download generated video.');
+ const buffer=Buffer.from(await file.arrayBuffer());
+ if(!buffer.length)throw new HttpError(502,'Generated video was empty.');
+ return buffer;
+}
+
+export async function runXaiImagineVideo({lastFrame,lastFrameUrl,prompt,duration,env=process.env,fetchImpl=fetch,onTick,sleepImpl=sleep}={}){
+ const key=xaiAuth(env);
+ const frame=lastFrame&&(lastFrame.url||lastFrame.file_id)
+  ?lastFrame
+  :(lastFrameUrl?{url:String(lastFrameUrl)}:null);
+ if(!frame?.url&&!frame?.file_id)throw new HttpError(400,'Opening last_frame image is missing.');
+ const create=await fetchImpl(XAI_VIDEO_GENERATIONS,{
+  method:'POST',
+  headers:{
+   Authorization:'Bearer '+key,
+   'Content-Type':'application/json'
+  },
+  body:JSON.stringify({
+   model:XAI_VIDEO_MODEL,
+   prompt:String(prompt||'').trim(),
+   last_frame:frame.url?{url:frame.url}:{file_id:frame.file_id},
+   duration:Number(duration)||OPENING_DURATION,
+   aspect_ratio:'9:16',
+   resolution:'720p'
+  })
+ });
+ const created=await create.json().catch(()=>({}));
+ if(!create.ok){
+  console.error('xAI video create failed',create.status,created?.error||created?.message||created?.status);
+  throw new HttpError(502,'Opening video generation failed to start.');
+ }
+ const requestId=created.request_id||created.id||'';
+ if(!requestId)throw new HttpError(502,'Opening video generation returned no request_id.');
+ const started=Date.now();
+ let status=created.status||'pending';
+ let result=created;
+ while(status!=='done'&&status!=='failed'&&status!=='expired'){
+  if(typeof onTick==='function')onTick(result);
+  if(Date.now()-started>12*60*1000)throw new HttpError(504,'Opening video generation timed out.');
+  await sleepImpl(5000);
+  const poll=await fetchImpl('https://api.x.ai/v1/videos/'+encodeURIComponent(requestId),{
+   headers:{Authorization:'Bearer '+key}
+  });
+  result=await poll.json().catch(()=>({}));
+  if(!poll.ok){
+   console.error('xAI video poll failed',poll.status,result?.error||result?.message||result?.status);
+   throw new HttpError(502,'Opening video status check failed.');
+  }
+  status=String(result.status||'');
+ }
+ if(status!=='done'){
+  const detail=result.error?.message||result.error||status||'unknown';
+  console.error('xAI video generation failed',detail);
+  throw new HttpError(502,'Opening video generation failed: '+detail);
+ }
+ const videoUrl=result.video?.url||result.url||'';
+ if(!videoUrl){
+  if(result.video&&result.video.respect_moderation===false)throw new HttpError(502,'Opening video was blocked by moderation.');
+  throw new HttpError(502,'Opening video generation returned no file.');
+ }
+ const buffer=await downloadVideoBuffer(videoUrl,{
+  fetchImpl,
+  headers:{Authorization:'Bearer '+key}
+ });
+ return {buffer,url:videoUrl,requestId};
+}
 
 export async function runGrokImagineVideo({imageUrl,prompt,duration,env=process.env,fetchImpl=fetch,onTick}={}){
  const token=await replicateAuth(env);
@@ -342,10 +465,10 @@ export async function runGrokImagineVideo({imageUrl,prompt,duration,env=process.
  const out=prediction.output;
  const videoUrl=typeof out==='string'?out:Array.isArray(out)?out[0]:out?.url||'';
  if(!videoUrl)throw new HttpError(502,'Video generation returned no file.');
- const file=await fetchImpl(videoUrl,{headers:{Authorization:'Bearer '+token}});
- if(!file.ok)throw new HttpError(502,'Could not download generated video.');
- const buffer=Buffer.from(await file.arrayBuffer());
- if(!buffer.length)throw new HttpError(502,'Generated video was empty.');
+ const buffer=await downloadVideoBuffer(videoUrl,{
+  fetchImpl,
+  headers:{Authorization:'Bearer '+token}
+ });
  return {buffer,url:videoUrl,predictionId:id};
 }
 
@@ -382,9 +505,10 @@ export function getGenerateJob(jobId){
  };
 }
 
-export function startGeneratePair({imageUrl,env=process.env,openaiClient,fetchImpl=fetch}={}){
+export function startGeneratePair({imageUrl,env=process.env,openaiClient,fetchImpl=fetch,sleepImpl}={}){
  if(!fsWritesAllowed(env))throw new HttpError(503,'AI generate is local-only. Run Assembly on your Cursor machine.');
  if(!env.OPENAI_API_KEY)throw new HttpError(503,'OpenAI is not configured (OPENAI_API_KEY).');
+ if(!env.XAI_API_KEY)throw new HttpError(503,'xAI is not configured (XAI_API_KEY). Opening generate requires it.');
  if(!(env.REPLICATE_API_TOKEN||env.REPLICATE_API_KEY))throw new HttpError(503,'Replicate is not configured (REPLICATE_API_TOKEN).');
  assertHttpUrl(imageUrl);
  const id=randomBytes(8).toString('hex');
@@ -416,16 +540,18 @@ export function startGeneratePair({imageUrl,env=process.env,openaiClient,fetchIm
    job.negativePrompt=prompts.negative;
 
    updateJob(job,{stage:'generating_opening'});
-   const replicateImage=await resolveReplicateImageUrl(image,{env,fetchImpl});
-   const opening=await runGrokImagineVideo({
-    imageUrl:replicateImage,
+   const lastFrame=await resolveXaiLastFrame(image,{env,fetchImpl});
+   const opening=await runXaiImagineVideo({
+    lastFrame,
     prompt:prompts.openingPrompt,
     duration:OPENING_DURATION,
     env,
-    fetchImpl
+    fetchImpl,
+    sleepImpl
    });
 
    updateJob(job,{stage:'generating_hero'});
+   const replicateImage=await resolveReplicateImageUrl(image,{env,fetchImpl});
    const hero=await runGrokImagineVideo({
     imageUrl:replicateImage,
     prompt:HERO_LOOP_PROMPT,

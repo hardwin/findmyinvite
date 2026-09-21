@@ -60,6 +60,8 @@ test('registry patch helpers insert premium ids without duplicating',async()=>{
  const core=await readFile(new URL('../server/core.mjs',import.meta.url),'utf8');
  const ids=knownTemplateIds(data);
  assert.equal(ids.has('royal-heritage'),true);
+ assert.match(data,/id:'royal-heritage-8',name:'Sita Kalyanam'/);
+ assert.match(data,/id:'royal-heritage-8'[^}]*music:'royal-heritage-8-music\.mp3'/);
  const clone={id:'royal-heritage-99',name:'Royal Heritage 99',description:'Test',image:'royal-heritage-99.jpg',video:'royal-heritage-99.mp4',badge:'New',color:'#884936',n:99};
  const patchedData=patchDataTs(data,[clone]);
  assert.match(patchedData,/royal-heritage-99/);
@@ -75,12 +77,16 @@ test('loadPremiumParents keeps optional heroVideo on clones that have it',async(
  const parents=await loadPremiumParents();
  const h4=parents.find(item=>item.id==='royal-heritage-4');
  const h5=parents.find(item=>item.id==='royal-heritage-5');
+ const h8=parents.find(item=>item.id==='royal-heritage-8');
  assert.ok(h4);
  assert.equal(h4.video,'royal-heritage-4.mp4');
  assert.equal(h4.heroVideo||'','');
  assert.ok(h5);
  assert.equal(h5.heroVideo,'royal-heritage-5-hero.mp4');
  assert.equal(h5.heroUrl,'/assets/royal-heritage-5-hero.mp4');
+ assert.ok(h8);
+ assert.equal(h8.name,'Sita Kalyanam');
+ assert.equal(h8.heroVideo,'royal-heritage-8-hero.mp4');
 });
 
 test('patchHeroVideo inserts or replaces heroVideo on a premium row',async()=>{
@@ -140,6 +146,44 @@ test('assembly API requires Akay session',async()=>{
  assert.equal(ok.statusCode,200);
  assert.equal(Array.isArray(ok.body.parents),true);
  assert.equal(ok.body.parents.some(item=>item.id==='royal-heritage'),true);
+});
+
+test('royal-heritage-8 parks hero copy in the sky without restyling parent-7',async()=>{
+ const css=await readFile(new URL('../src/invitation3.css',import.meta.url),'utf8');
+ const invite=await readFile(new URL('../src/Invitation.tsx',import.meta.url),'utf8');
+ const data=await readFile(new URL('../src/data.ts',import.meta.url),'utf8');
+ const playbook=await readFile(new URL('../documents/assembly-publish.md',import.meta.url),'utf8');
+ assert.match(css,/\.invitation-page\.theme-royal-heritage-8 \.couple-overlay\{[^}]*justify-content:center/);
+ assert.match(css,/\.invitation-page\.theme-royal-heritage-8 \.couple-overlay\{[^}]*text-align:center/);
+ assert.match(css,/\.invitation-page\.theme-royal-heritage-8 \.couple-overlay\{[^}]*padding:4svh 13% 50svh 13%/);
+ assert.match(css,/\.invitation-page\.theme-royal-heritage-8 \.couple-overlay h1/);
+ assert.match(css,/#6E1A28/);
+ assert.match(css,/#165A4A/);
+ assert.match(css,/#C9A24A/);
+ assert.match(css,/#F7ECD6/);
+ assert.match(css,/--rh8-scrim:linear-gradient\(180deg,rgba\(0,0,0,\.08\) 0%,rgba\(0,0,0,0\) 10%/);
+ assert.match(css,/royal-heritage-8-section-1\.jpg/);
+ assert.match(css,/royal-heritage-8-section-5\.jpg/);
+ assert.match(css,/\.invitation-page\.theme-royal-heritage-8 \.invite-plate-1/);
+ assert.match(css,/\.invitation-page\.theme-royal-heritage-8 \.invite-cluster/);
+ assert.match(css,/\.invite-cluster \.invite-section\{[^}]*padding:40px max\(28px,12%\)/);
+ assert.match(invite,/invite-cluster invite-plate-4/);
+ assert.match(invite,/framedPlates/);
+ assert.equal(invite.includes('invite-welcome invite-plate'),false);
+ assert.equal(/invite-credit\{[^}]*royal-heritage-8-section/.test(css),false);
+ assert.match(data,/id:'royal-heritage-8'[^}]*color:'#6E1A28'/);
+ assert.equal(css.includes('theme-royal-heritage-7'),false);
+ assert.match(playbook,/Section plates \(thin-border \/ text-safe\)/);
+ assert.match(playbook,/Prefer thin vine\/flower over heavy curtains or columns/);
+});
+
+test('royal-heritage-8 section plates are jpeg stills',async()=>{
+ for(const n of [1,2,3,4,5]){
+  const buf=await readFile(new URL('../public/assets/royal-heritage-8-section-'+n+'.jpg',import.meta.url));
+  assert.equal(buf[0],0xff);
+  assert.equal(buf[1],0xd8);
+  assert.ok(buf.length>80000,'section-'+n+' too small');
+ }
 });
 
 test('assembly route is reserved, gated, and unlinked from public pages',async()=>{

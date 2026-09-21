@@ -7,7 +7,7 @@ export const galleryTierBlurb:Record<GalleryTier,string>={
  elite:'Elevated Royal designs with distinctive ceremony atmospheres.',
  free:'Elegant animated Classic invitations for every occasion.'
 };
-const premiumIds=new Set(['rose-gold-blush-royal','royal-majesty','modern-minimal-royal','royal-prestige','royal-heritage','royal-crest','royal-heritage-1','royal-heritage-2','royal-heritage-3','royal-heritage-4','royal-heritage-5','royal-heritage-6','royal-heritage-7']);
+const premiumIds=new Set(['rose-gold-blush-royal','royal-majesty','modern-minimal-royal','royal-prestige','royal-heritage','royal-crest','royal-heritage-1','royal-heritage-2','royal-heritage-3','royal-heritage-4','royal-heritage-5','royal-heritage-6','royal-heritage-7','royal-heritage-8']);
 export function galleryTierFor(id:string,royal=false):GalleryTier{
  if(premiumIds.has(id))return 'premium';
  if(royal)return 'elite';
@@ -35,6 +35,7 @@ export const templates = [
  {id:'royal-heritage-5',name:'Blue & Pink Palace',description:'Timeless cinematic opening with regal heritage storytelling',image:'royal-heritage-5.jpg',video:'royal-heritage-5.mp4',heroVideo:'royal-heritage-5-hero.mp4',badge:'New',royal:true,tier:'premium' as GalleryTier,color:'#884936'},
  {id:'royal-heritage-6',name:'Pink Farm',description:'Timeless cinematic opening with regal heritage storytelling',image:'royal-heritage-6.jpg',video:'royal-heritage-6.mp4',heroVideo:'royal-heritage-6-hero.mp4',badge:'New',royal:true,tier:'premium' as GalleryTier,color:'#884936'},
  {id:'royal-heritage-7',name:'Traditional Anime South',description:'Timeless cinematic opening with regal heritage storytelling',image:'royal-heritage-7.jpg',video:'royal-heritage-7.mp4',heroVideo:'royal-heritage-7-hero.mp4',badge:'New',royal:true,tier:'premium' as GalleryTier,color:'#884936'},
+ {id:'royal-heritage-8',name:'Sita Kalyanam',description:'Timeless cinematic opening with regal heritage storytelling',image:'royal-heritage-8.jpg',video:'royal-heritage-8.mp4',heroVideo:'royal-heritage-8-hero.mp4',music:'royal-heritage-8-music.mp3',badge:'New',royal:true,tier:'premium' as GalleryTier,color:'#6E1A28'},
  {id:'royal-grace',name:'Royal Grace',description:'Sage garden serenity with pearl drapes and graceful cinematic reveal',image:'eaaba0b5d7aeba99.jpg',video:'royal-grace.mp4',badge:'New',royal:true,tier:'elite' as GalleryTier,color:'#59634b'},
  {id:'royal-crest',name:'Royal Crest',description:'Warm ivory florals, antique burgundy wax seal, and lakeside cinematic romance',image:'15cbf1df9056e121.jpg',video:'royal-crest.mp4',badge:'New',royal:true,tier:'premium' as GalleryTier,color:'#713647'},
  {id:'royal-legacy',name:'Royal Legacy',description:'Burgundy velvet curtains, antique gold ornament, and a timeless cinematic reveal',image:'58bf76a6b043df9f.jpg',video:'royal-legacy.mp4',badge:'New',royal:true,tier:'elite' as GalleryTier,color:'#581d2c'},
@@ -45,6 +46,10 @@ export const templates = [
  {id:'modern-minimal',name:'Modern Minimal',description:'Deep navy and gold with geometric patterns and book-style opening',image:'',video:'',badge:'New',royal:false,tier:'free' as GalleryTier,color:'#182d46'},
  {id:'royal-elegance',name:'Majestic Love',description:'Classic ivory and gold with palace motifs and velvet curtain reveal',image:'',video:'',badge:'New',royal:false,tier:'free' as GalleryTier,color:'#a88643'},
 ];
+export function catalogMusicUrl(template:{id:string;royal?:boolean;music?:string}){
+ if(template.music)return template.music.startsWith('/')?template.music:'/assets/'+template.music;
+ return template.royal||template.id==='ivory-elegance'?'/assets/track3.mp3':'/assets/track1.mp3';
+}
 export const features=[['infinity','Share to Unlimited Guests','One link, infinite reach — no per-guest charges, ever.'],['pen','Unlimited Edits Until the Event Date','Refine every detail right up to your big day.'],['hand','Scratch to Reveal Date','Interactive scratch card reveals the event date with a delightful surprise.'],['timer','Live Countdown','Animated countdown timer to your special day.'],['inbox','Guest Messaging & Inbox','Receive messages, attendance confirmations & guest counts.'],['music','Background Music','Romantic instrumentals with elegant mute toggle.'],['map','Venue with Maps','Embedded Google Maps for seamless directions.'],['wand','Premium Animations','3D door reveals, curtains, sparkles & more.'],['image','Custom Image Upload','Upload slideshow photos & hero background images.'],['brush','Full Customization','Toggle sections, dress codes, events & more.']];
 export const classicBenefits=['Access to FindMyInvite Classic Invitations','5 Premium Animated Templates','1 Invitation Webpage','Unlimited Edits Until Event Date','Buy More Invitations Anytime (Add-On)','Guest Messaging & Inbox','Music, Photos & Custom Uploads','Google Maps & Multi-Language Support','Analytics & Page View Tracking','Automatic Privacy Protection After the Event'];
 export const royalBenefits=['Access to ALL Classic + Royal Invitations','13 Premium Animated Templates','Cinematic Royal Invitation Experience','Luxury Video-Based Opening Experience','3D Door & Curtain Reveal Animations','Cinematic Hero Backgrounds','Premium Motion Storytelling','Exclusive Royal Template Collection','“Save the Date” — one-tap add to Google, Apple, Outlook & Yahoo calendars'];
