@@ -164,7 +164,11 @@ test('royal-heritage-8 parks hero copy in the sky without restyling parent-7',as
  assert.match(css,/royal-heritage-8-section-1\.jpg/);
  assert.match(css,/royal-heritage-8-section-5\.jpg/);
  assert.match(css,/\.invitation-page\.theme-royal-heritage-8 \.invite-plate-1/);
- assert.match(invite,/invite-plate-/);
+ assert.match(css,/\.invitation-page\.theme-royal-heritage-8 \.invite-cluster/);
+ assert.match(invite,/invite-cluster invite-plate-4/);
+ assert.match(invite,/framedPlates/);
+ assert.equal(invite.includes('invite-welcome invite-plate'),false);
+ assert.equal(/invite-credit\{[^}]*royal-heritage-8-section/.test(css),false);
  assert.match(data,/id:'royal-heritage-8'[^}]*color:'#6E1A28'/);
  assert.equal(css.includes('theme-royal-heritage-7'),false);
 });
