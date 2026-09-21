@@ -9,20 +9,29 @@
 .hero-copy-dark .welcome-title{max-width:none}.hero-copy-dark .couple-subtext{letter-spacing:6px}.theme-emerald-noir .hero-copy-dark .couple-subtext{letter-spacing:6px}.theme-rose-gold-blush .bride-person h1{margin-bottom:24px}.theme-ivory-elegance>.use-design,.theme-emerald-noir>.use-design{background:#f8f6f1e6;color:#b48c40;border-color:#b48c404d}.theme-ivory-elegance>.language-toggle,.theme-emerald-noir>.language-toggle{background:#191e24e6;color:#e4ddcd}.invitation-page .invite-welcome p{max-width:512px;font:italic 24px/1.625 'Cormorant Garamond',serif}.invitation-page .timeline{max-width:448px}.invitation-page .timeline h3{font:600 18px/1.25 'Playfair Display',serif}.invitation-page .timeline p,.invitation-page .timeline small{font-size:14px;line-height:1.625}
 @media(max-width:767px){.hero-copy-dark .couple-subtext,.theme-emerald-noir .hero-copy-dark .couple-subtext{letter-spacing:3.6px}.invitation-page .invite-welcome p{font-size:20px}}
 .invite-share-wrap{margin:18px 0 6px}.invite-credit-line{font-size:12px;margin-top:10px;opacity:.82;letter-spacing:.02em}.invite-credit-line a{text-decoration:underline;text-underline-offset:3px}
-/* royal-heritage-8 / Sita Kalyanam: park every invite line in the empty upper/center sky.
-   Couple heads sit ~52% down the 9:16 hero; 34svh bottom padding still covered them. Do not reuse for parent-7. */
+/* royal-heritage-8 / Sita Kalyanam: larger mid-sky stack, true center, clear of the couple. */
 .invitation-page.theme-royal-heritage-8 .invitation-hero{height:100svh;min-height:100svh}
-.invitation-page.theme-royal-heritage-8 .couple-overlay{justify-content:flex-start;align-items:center;padding:15% 12% 50% 12%;overflow:hidden;background:linear-gradient(180deg,rgba(20,12,4,.16) 0%,rgba(20,12,4,.05) 38%,transparent 52%)}
-.invitation-page.theme-royal-heritage-8 .hero-copy{max-width:min(78%,420px);display:flex;flex-direction:column;align-items:center}
-.invitation-page.theme-royal-heritage-8 .hero-heart{display:none}
-.invitation-page.theme-royal-heritage-8 .hero-copy .welcome-title{font-size:clamp(15px,4.1vw,20px);line-height:1.2;margin:0 auto 4px;max-width:92%}
-.invitation-page.theme-royal-heritage-8 .hero-divider{margin:4px auto 6px;gap:8px}
-.invitation-page.theme-royal-heritage-8 .hero-divider i{width:28px}
-.invitation-page.theme-royal-heritage-8 .couple-overlay h1,.invitation-page.theme-royal-heritage-8 .hero-person h1{font-size:clamp(36px,10vw,52px);line-height:.95;margin:0}
-.invitation-page.theme-royal-heritage-8 .hero-copy .couple-subtext,.invitation-page.theme-royal-heritage-8 .couple-subtext{font-size:clamp(11px,3vw,13px);line-height:1.2;margin:1px auto 4px;padding:0 4px;max-width:100%}
-.invitation-page.theme-royal-heritage-8 .hero-copy .couple-amp,.invitation-page.theme-royal-heritage-8 .couple-amp{font-size:clamp(16px,4.4vw,22px);line-height:1;margin:1px 0 3px}
-.invitation-page.theme-royal-heritage-8 .hero-scroll{position:relative;bottom:auto;left:auto;translate:none;margin-top:6px;gap:2px;font-size:10px;letter-spacing:.1em;opacity:.85}
-.invitation-page.theme-royal-heritage-8 .hero-scroll svg{width:14px;height:14px}
-@media(max-width:480px){.invitation-page.theme-royal-heritage-8 .couple-overlay{padding:16% 11% 51% 11%}.invitation-page.theme-royal-heritage-8 .couple-overlay h1,.invitation-page.theme-royal-heritage-8 .hero-person h1{font-size:clamp(34px,11.5vw,46px)}.invitation-page.theme-royal-heritage-8 .hero-copy .welcome-title{font-size:clamp(14px,4.4vw,18px)}.invitation-page.theme-royal-heritage-8 .hero-copy .couple-subtext,.invitation-page.theme-royal-heritage-8 .couple-subtext{font-size:clamp(11px,3.3vw,13px)}}
-@media(min-aspect-ratio:3/4){.invitation-page.theme-royal-heritage-8 .couple-overlay{padding:8% 16% 44% 16%}}
-@media(max-height:640px){.invitation-page.theme-royal-heritage-8 .couple-overlay{padding:10% 12% 46% 12%}.invitation-page.theme-royal-heritage-8 .couple-overlay h1,.invitation-page.theme-royal-heritage-8 .hero-person h1{font-size:clamp(28px,7vw,40px)}.invitation-page.theme-royal-heritage-8 .hero-copy .welcome-title{font-size:14px}.invitation-page.theme-royal-heritage-8 .hero-copy .couple-subtext{font-size:11px;line-height:1.15}.invitation-page.theme-royal-heritage-8 .hero-scroll{display:none}}
+.invitation-page.theme-royal-heritage-8 .couple-overlay{justify-content:center;align-items:center;text-align:center;padding:10% 13% 44% 13%;overflow:hidden;background:transparent;box-sizing:border-box}
+.invitation-page.theme-royal-heritage-8 .hero-copy{width:100%;max-width:100%;margin:0;padding:0;display:flex;flex-direction:column;align-items:center;text-align:center;box-sizing:border-box}
+.invitation-page.theme-royal-heritage-8 .hero-person{width:100%;text-align:center}
+.invitation-page.theme-royal-heritage-8 .hero-heart{display:block;width:20px;height:20px;margin:0 auto 8px}
+.invitation-page.theme-royal-heritage-8 .hero-copy .welcome-title{font-size:clamp(18px,5.4vw,26px);line-height:1.25;margin:0 auto 6px;max-width:20em;text-align:center}
+.invitation-page.theme-royal-heritage-8 .hero-divider{margin:6px auto 10px;gap:10px;justify-content:center}
+.invitation-page.theme-royal-heritage-8 .hero-divider i{width:40px}
+.invitation-page.theme-royal-heritage-8 .couple-overlay h1,.invitation-page.theme-royal-heritage-8 .hero-person h1{font-size:clamp(52px,16vw,76px);line-height:.95;margin:0;width:100%;text-align:center}
+.invitation-page.theme-royal-heritage-8 .hero-copy .couple-subtext,.invitation-page.theme-royal-heritage-8 .couple-subtext{font-size:clamp(14px,3.8vw,17px);line-height:1.3;margin:4px auto 8px;padding:0;max-width:22em;text-align:center}
+.invitation-page.theme-royal-heritage-8 .hero-copy .couple-amp,.invitation-page.theme-royal-heritage-8 .couple-amp{font-size:clamp(24px,7vw,34px);line-height:1;margin:4px 0 8px;text-align:center}
+.invitation-page.theme-royal-heritage-8 .hero-scroll{position:absolute;bottom:28%;left:50%;right:auto;translate:-50% 0;margin:0;font-size:11px}
+@media(max-width:480px){
+ .invitation-page.theme-royal-heritage-8 .couple-overlay{padding:11% 14% 44% 14%}
+ .invitation-page.theme-royal-heritage-8 .couple-overlay h1,.invitation-page.theme-royal-heritage-8 .hero-person h1{font-size:clamp(48px,15.5vw,68px)}
+ .invitation-page.theme-royal-heritage-8 .hero-copy .welcome-title{font-size:clamp(17px,5.2vw,22px)}
+ .invitation-page.theme-royal-heritage-8 .hero-copy .couple-subtext,.invitation-page.theme-royal-heritage-8 .couple-subtext{font-size:clamp(14px,3.9vw,16px)}
+}
+@media(min-aspect-ratio:3/4){.invitation-page.theme-royal-heritage-8 .couple-overlay{padding:8% 18% 40% 18%}}
+@media(max-height:640px){
+ .invitation-page.theme-royal-heritage-8 .couple-overlay{padding:8% 12% 40% 12%}
+ .invitation-page.theme-royal-heritage-8 .couple-overlay h1,.invitation-page.theme-royal-heritage-8 .hero-person h1{font-size:clamp(40px,11vw,56px)}
+ .invitation-page.theme-royal-heritage-8 .hero-copy .welcome-title{font-size:16px}
+ .invitation-page.theme-royal-heritage-8 .hero-copy .couple-subtext{font-size:13px}
+}

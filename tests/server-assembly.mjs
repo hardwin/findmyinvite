@@ -150,8 +150,9 @@ test('assembly API requires Akay session',async()=>{
 
 test('royal-heritage-8 parks hero copy in the sky without restyling parent-7',async()=>{
  const css=await readFile(new URL('../src/invitation3.css',import.meta.url),'utf8');
- assert.match(css,/\.invitation-page\.theme-royal-heritage-8 \.couple-overlay\{[^}]*justify-content:flex-start/);
- assert.match(css,/\.invitation-page\.theme-royal-heritage-8 \.couple-overlay\{[^}]*padding:15% 12% 50% 12%/);
+ assert.match(css,/\.invitation-page\.theme-royal-heritage-8 \.couple-overlay\{[^}]*justify-content:center/);
+ assert.match(css,/\.invitation-page\.theme-royal-heritage-8 \.couple-overlay\{[^}]*text-align:center/);
+ assert.match(css,/\.invitation-page\.theme-royal-heritage-8 \.couple-overlay\{[^}]*padding:10% 13% 44% 13%/);
  assert.match(css,/\.invitation-page\.theme-royal-heritage-8 \.couple-overlay h1/);
  assert.equal(css.includes('theme-royal-heritage-7'),false);
 });
