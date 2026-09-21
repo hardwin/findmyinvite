@@ -9,3 +9,19 @@
 .hero-copy-dark .welcome-title{max-width:none}.hero-copy-dark .couple-subtext{letter-spacing:6px}.theme-emerald-noir .hero-copy-dark .couple-subtext{letter-spacing:6px}.theme-rose-gold-blush .bride-person h1{margin-bottom:24px}.theme-ivory-elegance>.use-design,.theme-emerald-noir>.use-design{background:#f8f6f1e6;color:#b48c40;border-color:#b48c404d}.theme-ivory-elegance>.language-toggle,.theme-emerald-noir>.language-toggle{background:#191e24e6;color:#e4ddcd}.invitation-page .invite-welcome p{max-width:512px;font:italic 24px/1.625 'Cormorant Garamond',serif}.invitation-page .timeline{max-width:448px}.invitation-page .timeline h3{font:600 18px/1.25 'Playfair Display',serif}.invitation-page .timeline p,.invitation-page .timeline small{font-size:14px;line-height:1.625}
 @media(max-width:767px){.hero-copy-dark .couple-subtext,.theme-emerald-noir .hero-copy-dark .couple-subtext{letter-spacing:3.6px}.invitation-page .invite-welcome p{font-size:20px}}
 .invite-share-wrap{margin:18px 0 6px}.invite-credit-line{font-size:12px;margin-top:10px;opacity:.82;letter-spacing:.02em}.invite-credit-line a{text-decoration:underline;text-underline-offset:3px}
+/* Sita Kalyanam: pack the full name stack into the empty sky above the couple. */
+.invitation-page.theme-royal-heritage-8 .invitation-hero{height:100svh;min-height:100svh}
+.invitation-page.theme-royal-heritage-8 .couple-overlay{justify-content:flex-start;padding:10svh 12% 34svh;background:transparent;overflow:hidden}
+.invitation-page.theme-royal-heritage-8 .hero-copy{max-width:min(520px,86%)}
+.invitation-page.theme-royal-heritage-8 .hero-heart{width:14px;height:14px;margin:0 auto 4px}
+.invitation-page.theme-royal-heritage-8 .hero-copy .welcome-title{font-size:clamp(15px,3.8vw,20px);line-height:1.2;margin:0 auto 2px;max-width:24em}
+.invitation-page.theme-royal-heritage-8 .hero-divider{gap:8px;margin:2px auto 6px}
+.invitation-page.theme-royal-heritage-8 .hero-divider i{width:28px}
+.invitation-page.theme-royal-heritage-8 .couple-overlay h1,.invitation-page.theme-royal-heritage-8 .hero-person h1{font-size:clamp(36px,10.5vw,54px);line-height:.92;margin:0}
+.invitation-page.theme-royal-heritage-8 .hero-copy .couple-subtext{font-size:clamp(11px,2.8vw,13px);line-height:1.2;margin:1px auto 4px;padding:0 4px;max-width:22em}
+.invitation-page.theme-royal-heritage-8 .hero-copy .couple-amp{font-size:clamp(16px,4.5vw,22px);line-height:1;margin:0}
+.invitation-page.theme-royal-heritage-8 .hero-scroll{bottom:12svh}
+@media (max-height:700px){
+ .invitation-page.theme-royal-heritage-8 .couple-overlay{padding:8svh 11% 36svh}
+ .invitation-page.theme-royal-heritage-8 .couple-overlay h1,.invitation-page.theme-royal-heritage-8 .hero-person h1{font-size:clamp(32px,9vw,46px)}
+}
