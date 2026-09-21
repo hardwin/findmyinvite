@@ -152,6 +152,7 @@ test('royal-heritage-8 parks hero copy in the sky without restyling parent-7',as
  const css=await readFile(new URL('../src/invitation3.css',import.meta.url),'utf8');
  const invite=await readFile(new URL('../src/Invitation.tsx',import.meta.url),'utf8');
  const data=await readFile(new URL('../src/data.ts',import.meta.url),'utf8');
+ const playbook=await readFile(new URL('../documents/assembly-publish.md',import.meta.url),'utf8');
  assert.match(css,/\.invitation-page\.theme-royal-heritage-8 \.couple-overlay\{[^}]*justify-content:center/);
  assert.match(css,/\.invitation-page\.theme-royal-heritage-8 \.couple-overlay\{[^}]*text-align:center/);
  assert.match(css,/\.invitation-page\.theme-royal-heritage-8 \.couple-overlay\{[^}]*padding:4svh 13% 50svh 13%/);
@@ -165,12 +166,15 @@ test('royal-heritage-8 parks hero copy in the sky without restyling parent-7',as
  assert.match(css,/royal-heritage-8-section-5\.jpg/);
  assert.match(css,/\.invitation-page\.theme-royal-heritage-8 \.invite-plate-1/);
  assert.match(css,/\.invitation-page\.theme-royal-heritage-8 \.invite-cluster/);
+ assert.match(css,/\.invite-cluster \.invite-section\{[^}]*padding:40px max\(28px,12%\)/);
  assert.match(invite,/invite-cluster invite-plate-4/);
  assert.match(invite,/framedPlates/);
  assert.equal(invite.includes('invite-welcome invite-plate'),false);
  assert.equal(/invite-credit\{[^}]*royal-heritage-8-section/.test(css),false);
  assert.match(data,/id:'royal-heritage-8'[^}]*color:'#6E1A28'/);
  assert.equal(css.includes('theme-royal-heritage-7'),false);
+ assert.match(playbook,/Section plates \(thin-border \/ text-safe\)/);
+ assert.match(playbook,/Prefer thin vine\/flower over heavy curtains or columns/);
 });
 
 test('royal-heritage-8 section plates are jpeg stills',async()=>{

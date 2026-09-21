@@ -71,9 +71,9 @@
 .invitation-page.theme-royal-heritage-8 .invite-plate-4{background-image:var(--rh8-scrim),url('/assets/royal-heritage-8-section-4.jpg')}
 .invitation-page.theme-royal-heritage-8 .invite-plate-5{background-image:var(--rh8-scrim),url('/assets/royal-heritage-8-section-5.jpg')}
 .invitation-page.theme-royal-heritage-8 .invite-cluster{max-width:none;width:100%;background-color:#F7ECD6;background-size:cover;background-position:center;background-repeat:no-repeat;background-image:var(--rh8-scrim),url('/assets/royal-heritage-8-section-4.jpg')}
-.invitation-page.theme-royal-heritage-8 .invite-cluster .invite-section{background-image:none;background-color:transparent;padding-top:40px;padding-bottom:40px}
-.invitation-page.theme-royal-heritage-8 .invite-cluster .invite-section:first-child{padding-top:72px}
-.invitation-page.theme-royal-heritage-8 .invite-cluster .invite-section:last-child{padding-bottom:72px}
+.invitation-page.theme-royal-heritage-8 .invite-cluster .invite-section{background-image:none;background-color:transparent;padding:40px max(28px,12%)}
+.invitation-page.theme-royal-heritage-8 .invite-cluster .invite-section:first-child{padding-top:80px}
+.invitation-page.theme-royal-heritage-8 .invite-cluster .invite-section:last-child{padding-bottom:80px}
 .invitation-page.theme-royal-heritage-8 .invite-section h2{color:#6E1A28;text-shadow:0 1px 2px rgba(0,0,0,.16)}
 .invitation-page.theme-royal-heritage-8 .invite-plate-3 h2,
 .invitation-page.theme-royal-heritage-8 .invite-plate-5 h2{color:#165A4A}

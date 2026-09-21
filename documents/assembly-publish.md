@@ -70,6 +70,17 @@ Local `.env.local` required (never commit):
 
 Optional: `ASSEMBLY_PROMPT_MODEL` (default `gpt-6-astra`).
 
+## Section plates (thin-border / text-safe)
+
+Section plates are **borders around copy**, not theater scenery. When generating or swapping a plate:
+
+- Borders stay **thin** — vine / flower / delicate filigree only, about **8–12% inset** on each edge. Prefer thin vine/flower over heavy curtains or columns.
+- Center is empty sky (cream/peach/gold gradient). Body copy must never sit under the frame.
+- Do **not** generate thick draped curtains, fat pillars, jeweled bezels, or architecture that eats the sides.
+- If copy still clips, add inner padding (`max(28px, 12%)`) — do not thicken the art.
+
+Transport + Accommodation + Gifts share **one** clustered plate. Do not put plates on Welcome / Our Moments / Timeline / Dress Code / RSVP / footer unless Ashok asks.
+
 ## Out of scope
 
 - Auto-push from the Assembly button  
