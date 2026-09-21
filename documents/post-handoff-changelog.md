@@ -19,6 +19,7 @@ Operator-only desk at `/assembly` (same Akay gate cookie as `/akay`). Clones a P
 - CLI: `npm run assemble:premium -- --parent royal-heritage --videos a.mp4,b.mp4`
 - Inbox: `work/assembly-inbox/` (gitignored except `.gitkeep`)
 - Opening generate (2026-09-21): xAI REST `last_frame` (pin as **final** frame). Hero still Replicate. Needs `XAI_API_KEY` + `OPENAI_API_KEY` + `REPLICATE_API_TOKEN`.
+- RH8 opening regen (2026-09-21, PR #22, **not published**): generated FIRST still (closed grand door) + LAST still (couple facing, eye contact) via xAI `grok-imagine-image-2.0` edits of pin `https://pin.it/6sh37rSvu`, then `grok-imagine-video-1.5` interpolate 12s 9:16 720p (`image` + `last_frame`). Encoded into `royal-heritage-8.mp4` / `.jpg` / catalogue. Hero reused. Parent-7 untouched. STOPPED before Publish.
 
 Done when Ashok assembles one clone locally, opens `/invite/demo?template=…`, then says **Publish** — Akay applies Supabase SQL + commit + push (see [assembly-publish.md](assembly-publish.md)). Assembly UI shows preview links only; editable display names are set before assemble.
 
