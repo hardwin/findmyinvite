@@ -137,6 +137,7 @@ test('assemble dry-run requires opening for a new clone and never mutates parent
  const {assemblePremium}=await import('../server/assembly.mjs');
  await ensureInboxStub('alt-a.mp4');
  await ensureInboxStub('smoke-alt.mp4');
+ // Dry-run must plan without spawning ffmpeg (GitHub Actions verify has none).
  await assert.rejects(
   ()=>assemblePremium({parentId:'royal-heritage-4',videos:[],names:['X'],dryRun:true}),
   /opening video/i
