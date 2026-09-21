@@ -62,6 +62,8 @@ test('registry patch helpers insert premium ids without duplicating',async()=>{
  assert.equal(ids.has('royal-heritage'),true);
  assert.match(data,/id:'royal-heritage-8',name:'Sita Kalyanam'/);
  assert.match(data,/id:'royal-heritage-8'[^}]*music:'royal-heritage-8-music\.mp3'/);
+ assert.match(data,/id:'royal-heritage-9',name:'Velicha Poove'/);
+ assert.match(data,/id:'royal-heritage-9'[^}]*music:'royal-heritage-9-music\.mp3'/);
  const clone={id:'royal-heritage-99',name:'Royal Heritage 99',description:'Test',image:'royal-heritage-99.jpg',video:'royal-heritage-99.mp4',badge:'New',color:'#884936',n:99};
  const patchedData=patchDataTs(data,[clone]);
  assert.match(patchedData,/royal-heritage-99/);
@@ -78,6 +80,7 @@ test('loadPremiumParents keeps optional heroVideo on clones that have it',async(
  const h4=parents.find(item=>item.id==='royal-heritage-4');
  const h5=parents.find(item=>item.id==='royal-heritage-5');
  const h8=parents.find(item=>item.id==='royal-heritage-8');
+ const h9=parents.find(item=>item.id==='royal-heritage-9');
  assert.ok(h4);
  assert.equal(h4.video,'royal-heritage-4.mp4');
  assert.equal(h4.heroVideo||'','');
@@ -87,6 +90,9 @@ test('loadPremiumParents keeps optional heroVideo on clones that have it',async(
  assert.ok(h8);
  assert.equal(h8.name,'Sita Kalyanam');
  assert.equal(h8.heroVideo,'royal-heritage-8-hero.mp4');
+ assert.ok(h9);
+ assert.equal(h9.name,'Velicha Poove');
+ assert.equal(h9.heroVideo,'royal-heritage-9-hero.mp4');
 });
 
 test('patchHeroVideo inserts or replaces heroVideo on a premium row',async()=>{
@@ -175,6 +181,39 @@ test('royal-heritage-8 parks hero copy in the sky without restyling parent-7',as
  assert.equal(css.includes('theme-royal-heritage-7'),false);
  assert.match(playbook,/Section plates \(thin-border \/ text-safe\)/);
  assert.match(playbook,/Prefer thin vine\/flower over heavy curtains or columns/);
+});
+
+test('royal-heritage-9 parks Velicha Poove overlay in the sky with pin palette plates',async()=>{
+ const css=await readFile(new URL('../src/invitation3.css',import.meta.url),'utf8');
+ const invite=await readFile(new URL('../src/Invitation.tsx',import.meta.url),'utf8');
+ const data=await readFile(new URL('../src/data.ts',import.meta.url),'utf8');
+ assert.match(css,/\.invitation-page\.theme-royal-heritage-9 \.couple-overlay\{[^}]*justify-content:center/);
+ assert.match(css,/\.invitation-page\.theme-royal-heritage-9 \.couple-overlay\{[^}]*text-align:center/);
+ assert.match(css,/\.invitation-page\.theme-royal-heritage-9 \.couple-overlay\{[^}]*padding:4svh 13% 50svh 13%/);
+ assert.match(css,/\.invitation-page\.theme-royal-heritage-9 \.couple-overlay h1/);
+ assert.match(css,/#9B2158/);
+ assert.match(css,/#3F5C55/);
+ assert.match(css,/#F7F1E8/);
+ assert.match(css,/--rh9-scrim:linear-gradient\(180deg,rgba\(0,0,0,\.08\) 0%,rgba\(0,0,0,0\) 10%/);
+ assert.match(css,/royal-heritage-9-section-1\.jpg/);
+ assert.match(css,/royal-heritage-9-section-5\.jpg/);
+ assert.match(css,/\.invitation-page\.theme-royal-heritage-9 \.invite-plate-1/);
+ assert.match(css,/\.invitation-page\.theme-royal-heritage-9 \.invite-cluster/);
+ assert.match(css,/\.theme-royal-heritage-9 \.invite-cluster \.invite-section\{[^}]*padding:40px max\(28px,12%\)/);
+ assert.match(invite,/invite-cluster invite-plate-4/);
+ assert.match(invite,/'royal-heritage-9':\{groom:'Ashok',bride:'Supriya'/);
+ assert.equal(/invite-credit\{[^}]*royal-heritage-9-section/.test(css),false);
+ assert.match(data,/id:'royal-heritage-9'[^}]*color:'#9B2158'/);
+ assert.equal(css.includes('theme-royal-heritage-7'),false);
+});
+
+test('royal-heritage-9 section plates are jpeg stills',async()=>{
+ for(const n of [1,2,3,4,5]){
+  const buf=await readFile(new URL('../public/assets/royal-heritage-9-section-'+n+'.jpg',import.meta.url));
+  assert.equal(buf[0],0xff);
+  assert.equal(buf[1],0xd8);
+  assert.ok(buf.length>80000,'section-'+n+' too small');
+ }
 });
 
 test('royal-heritage-8 section plates are jpeg stills',async()=>{

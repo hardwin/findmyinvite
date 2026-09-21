@@ -196,5 +196,14 @@
     "badge": "New",
     "sort_order": 28,
     "published": true
+  },
+  {
+    "id": "royal-heritage-9",
+    "name": "Velicha Poove",
+    "description": "Timeless cinematic opening with regal heritage storytelling",
+    "collection": "royal",
+    "badge": "New",
+    "sort_order": 29,
+    "published": true
   }
 ]

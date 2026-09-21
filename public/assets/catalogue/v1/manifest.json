@@ -169,5 +169,14 @@
     "duration": 12.041667,
     "bytes": 2333435,
     "version": 1
+  },
+  "royal-heritage-9": {
+    "src": "/assets/catalogue/v1/royal-heritage-9.mp4",
+    "poster": "/assets/catalogue/v1/royal-heritage-9.webp",
+    "width": 480,
+    "height": 854,
+    "duration": 15.041667,
+    "bytes": 1438961,
+    "version": 1
   }
 }
