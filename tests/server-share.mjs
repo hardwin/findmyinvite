@@ -69,9 +69,30 @@ test('every catalog template has a share still and the storefront HTML advertise
  assert.equal(spaPattern.test('/about'),true);
  assert.equal(spaPattern.test('/robots.txt'),false);
  assert.equal(spaPattern.test('/sitemap.xml'),false);
+ assert.equal(spaPattern.test('/llm.txt'),false);
+ assert.equal(spaPattern.test('/llms.txt'),false);
  assert.equal(spaPattern.test('/api/content'),false);
  assert.equal(spaPattern.test('/assets/logo.png'),false);
  assert.equal(spaPattern.test('/invitations/haldi'),false);
+ assert.ok(vercel.rewrites.some(rule=>rule.source==='/llms.txt'&&rule.destination==='/llm.txt'));
+ const share=vercel.rewrites.find(rule=>rule.destination==='/api/share?slug=:slug');
+ assert.equal(share.source,'/:slug([a-z0-9][a-z0-9-]{2,47})');
+ for(const headerSource of ['/llm.txt','/llms.txt']){
+  const header=vercel.headers.find(rule=>rule.source===headerSource);
+  assert.equal(header?.headers?.some(item=>item.key==='Content-Type'&&item.value==='text/plain; charset=utf-8'),true,headerSource);
+ }
+ const noindex=vercel.headers.find(rule=>rule.headers?.some(item=>item.key==='X-Robots-Tag'&&item.value.includes('noindex')&&rule.source.includes('robots')));
+ const noindexPattern=new RegExp(`^${noindex.source}$`);
+ assert.equal(noindexPattern.test('/llm.txt'),false);
+ assert.equal(noindexPattern.test('/llms.txt'),false);
+ assert.equal(noindexPattern.test('/create'),true);
+ const llm=await readFile(new URL('../public/llm.txt',import.meta.url),'utf8');
+ assert.match(llm,/^# FindMyInvite\n/);
+ assert.match(llm,/https:\/\/findmyinvite.com/);
+ assert.match(llm,/https:\/\/findmyinvite.com\/templates/);
+ assert.match(llm,/https:\/\/findmyinvite.com\/sitemap.xml/);
+ assert.equal(llm.includes('vercel.app'),false);
+ assert.equal(llm.includes('<!doctype html'),false);
  const robots=await readFile(new URL('../public/robots.txt',import.meta.url),'utf8');
  assert.match(robots,/^User-agent:/);
  assert.match(robots,/Disallow: \/akay/);

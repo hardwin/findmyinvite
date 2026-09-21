@@ -29,7 +29,7 @@ async function api(url,method='GET'){
  return res;
 }
 test('storefront, reserved and asset paths are not treated as guest invitations',()=>{
- for(const path of ['/','/templates','/create','/dashboard','/login','/signup','/forgot-password','/about','/contact','/blog','/terms','/privacy-policy','/refund-policy','/shipping-policy','/akay','/grand-launch','/manage/test-couple','/invite/demo','/api/invitations','/assets/track1.mp3','/robots.txt','/sitemap.xml','/invitations','/invitations/haldi','/invitations/royal-imperial']){
+ for(const path of ['/','/templates','/create','/dashboard','/login','/signup','/forgot-password','/about','/contact','/blog','/terms','/privacy-policy','/refund-policy','/shipping-policy','/akay','/grand-launch','/manage/test-couple','/invite/demo','/api/invitations','/assets/track1.mp3','/robots.txt','/sitemap.xml','/llm.txt','/llms.txt','/invitations','/invitations/haldi','/invitations/royal-imperial']){
   assert.equal(isGuestInvitationPath(path),false,path);
  }
  assert.equal(isGuestInvitationPath('/wedding-invitation-classic-does-not-exist-xyz'),true);
@@ -37,6 +37,8 @@ test('storefront, reserved and asset paths are not treated as guest invitations'
  assert.equal(isGuestInvitationPath('/haldi'),true);
  assert.equal(reserved.has('templates'),true);
  assert.equal(reserved.has('invitations'),true);
+ assert.equal(reserved.has('llm.txt'),true);
+ assert.equal(reserved.has('llms.txt'),true);
 });
 test('unknown unpublished and expired guest slugs are missing; live published slugs are not',async()=>{
  await withDb([],async()=>{
@@ -106,15 +108,19 @@ test('SPA catch-all stays after the guest-page rewrite and client still mounts P
  assert.match(app,/path\.startsWith\('\/invitations'\)\?<OccasionLanding\/>:\/\^\\\/\[a-z0-9\]\[a-z0-9-\]\{2,47\}\$\/\.test\(path\)\?<PublicInvitation slug=\{path\.slice\(1\)}\/>/);
  const vercel=JSON.parse(await readFile(new URL('../vercel.json',import.meta.url),'utf8'));
  assert.equal(vercel.proxy,undefined);
- const routes=vercel.rewrites.filter(rule=>rule.source!=='/assets/workspace/:id');
+ const routes=vercel.rewrites.filter(rule=>rule.source!=='/assets/workspace/:id'&&rule.source!=='/llms.txt');
  assert.equal(vercel.rewrites.find(rule=>rule.source==='/assets/workspace/:id')?.destination,'/api/workspace?action=asset&id=:id');
+ assert.equal(vercel.rewrites.find(rule=>rule.source==='/llms.txt')?.destination,'/llm.txt');
  const destinations=routes.map(rule=>rule.destination);
  assert.equal(destinations[0],'/api/share?slug=:slug');
  assert.equal(destinations[1],'/api/guest-page?slug=:slug');
+ assert.equal(routes[0].source,'/:slug([a-z0-9][a-z0-9-]{2,47})');
  assert.equal(routes[1].source,'/:slug([a-z0-9][a-z0-9-]{2,47})');
  assert.equal(destinations.includes('/api/invitation-page?slug=:slug'),true);
  assert.equal(destinations.at(-1),'/index.html');
- assert.match(destinations.at(-1)==='/index.html' ? vercel.rewrites.at(-1).source : '',/robots/);
+ const spaSource=vercel.rewrites.find(rule=>rule.destination==='/index.html')?.source||'';
+ assert.match(spaSource,/robots/);
+ assert.match(spaSource,/llm/);
  assert.ok(vercel.functions['api/guest-page.mjs'].includeFiles.includes('index.html'));
  const files=await readFile(new URL('../vercel.json',import.meta.url),'utf8');
  assert.equal(files.includes('middleware'),false);

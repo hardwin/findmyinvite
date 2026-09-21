@@ -21,6 +21,25 @@ Operator-only desk at `/assembly` (same Akay gate cookie as `/akay`). Clones a P
 
 Done when Ashok assembles one clone locally, opens `/invite/demo?template=…`, then says **Publish** — Akay applies Supabase SQL + commit + push (see [assembly-publish.md](assembly-publish.md)). Assembly UI shows preview links only; editable display names are set before assemble.
 
+## `/llm.txt` LLM discovery file (2026-09-21)
+
+Same static-file pattern as `robots.txt` / `sitemap.xml` so crawlers do not get the SPA `index.html` shell:
+
+- Source of truth: `public/llm.txt` (plain UTF-8; canonical URLs on findmyinvite.com)
+- Alias: Vercel rewrite `/llms.txt` → `/llm.txt` (one body)
+- `vercel.json` SPA catch-all and catch-all `X-Robots-Tag: noindex` exclude both paths; `Content-Type: text/plain; charset=utf-8` on both
+- Share-card `/:slug` bot rewrite uses the same guest-slug regex so `llm.txt` cannot be treated as an invitation
+
+After merge+deploy, curl:
+
+```bash
+curl -sI https://findmyinvite.com/llm.txt
+curl -sI https://findmyinvite.com/llms.txt
+curl -s https://findmyinvite.com/llm.txt | head
+```
+
+Expect 200, `text/plain; charset=utf-8`, body starting with `# FindMyInvite` — not homepage HTML.
+
 ## What this conversation changed after the v0.9.0 handoff
 
 ### Applied in production (real change)

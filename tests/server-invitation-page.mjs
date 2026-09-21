@@ -104,11 +104,13 @@ test('Vercel rewrites invitations to invitation-page HTML and never through gues
  assert.equal(vercel.proxy,undefined);
  assert.equal(JSON.stringify(vercel).includes('middleware'),false);
  await assert.rejects(()=>access(new URL('../middleware.js',import.meta.url)));
- const routes=vercel.rewrites.filter(rule=>rule.source!=='/assets/workspace/:id');
+ const routes=vercel.rewrites.filter(rule=>rule.source!=='/assets/workspace/:id'&&rule.source!=='/llms.txt');
  assert.equal(vercel.rewrites.find(rule=>rule.source==='/assets/workspace/:id')?.destination,'/api/workspace?action=asset&id=:id');
+ assert.equal(vercel.rewrites.find(rule=>rule.source==='/llms.txt')?.destination,'/llm.txt');
  const destinations=routes.map(rule=>rule.destination);
  assert.equal(destinations[0],'/api/share?slug=:slug');
  assert.equal(destinations[1],'/api/guest-page?slug=:slug');
+ assert.equal(routes[0].source,'/:slug([a-z0-9][a-z0-9-]{2,47})');
  assert.equal(routes[1].source,'/:slug([a-z0-9][a-z0-9-]{2,47})');
  assert.equal(destinations[2],'/api/invitation-page');
  assert.equal(destinations[3],'/api/invitation-page?slug=:slug');
@@ -119,6 +121,8 @@ test('Vercel rewrites invitations to invitation-page HTML and never through gues
  assert.equal(spaPattern.test('/templates'),true);
  assert.equal(spaPattern.test('/invitations/haldi'),false);
  assert.equal(spaPattern.test('/invitations/this-should-404'),false);
+ assert.equal(spaPattern.test('/llm.txt'),false);
+ assert.equal(spaPattern.test('/llms.txt'),false);
  assert.equal(invitationSlugFromRequest({url:'/api/invitation-page?slug=haldi'}),'haldi');
  const html=invitationPageHtml(occasionBySlug.haldi);
  assert.match(html,/Haldi Digital Wedding Invitation/);
