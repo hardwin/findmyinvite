@@ -24,7 +24,7 @@ Operator-only desk at `/assembly` (same Akay gate cookie as `/akay`). Clones a P
 - RH8 display rename (2026-09-21, PR #22, **not published**): clone id `royal-heritage-8` display name → **Sita Kalyanam**. Opening KEEP. Hero KEEP. Videos/assets unchanged. STOPPED before Publish.
 - RH8 music mux on mp4s (2026-09-21, PR #22): **not the product music path**. Videos stay muted. AAC already in opening/hero is ignored. STOPPED before Publish.
 - RH8 **separate** demo music (2026-09-21, PR #22, **not published**): Instagram reel (`DS15ecUkpOA`) extracted to `public/assets/royal-heritage-8-music.mp3` and mapped on the Sita Kalyanam catalog row (`music` field + `catalogMusicUrl()`). Demo `/invite/demo?template=royal-heritage-8` tap/toggle plays that `<audio>` track, not parent `/assets/track3.mp3`. Videos remain muted. STOPPED before Publish.
-- RH8 hero overlay (2026-09-21, PR #22, **not published**): scoped `.theme-royal-heritage-8` CSS packs welcome + names + details into the empty upper/center sky so Zara no longer overlaps the couple. Parent-7 and other Premium themes unchanged. STOPPED before Publish.
+- RH8 hero text overlay (2026-09-21, PR #22, **not published**): `.theme-royal-heritage-8` couple-overlay parks welcome + both names + both details in the empty upper/center sky (`flex-start`, ~50% bottom padding) so Zara no longer covers the couple. Parent-7 / global overlay untouched. STOPPED before Publish.
 
 Done when Ashok assembles one clone locally, opens `/invite/demo?template=…`, then says **Publish** — Akay applies Supabase SQL + commit + push (see [assembly-publish.md](assembly-publish.md)). Assembly UI shows preview links only; editable display names are set before assemble.
 

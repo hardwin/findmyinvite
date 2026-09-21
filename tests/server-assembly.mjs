@@ -148,6 +148,14 @@ test('assembly API requires Akay session',async()=>{
  assert.equal(ok.body.parents.some(item=>item.id==='royal-heritage'),true);
 });
 
+test('royal-heritage-8 parks hero copy in the sky without restyling parent-7',async()=>{
+ const css=await readFile(new URL('../src/invitation3.css',import.meta.url),'utf8');
+ assert.match(css,/\.invitation-page\.theme-royal-heritage-8 \.couple-overlay\{[^}]*justify-content:flex-start/);
+ assert.match(css,/\.invitation-page\.theme-royal-heritage-8 \.couple-overlay\{[^}]*padding:15% 12% 50% 12%/);
+ assert.match(css,/\.invitation-page\.theme-royal-heritage-8 \.couple-overlay h1/);
+ assert.equal(css.includes('theme-royal-heritage-7'),false);
+});
+
 test('assembly route is reserved, gated, and unlinked from public pages',async()=>{
  const core=await readFile(new URL('../server/core.mjs',import.meta.url),'utf8');
  const app=await readFile(new URL('../src/App.tsx',import.meta.url),'utf8');
