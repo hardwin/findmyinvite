@@ -357,26 +357,33 @@ export async function downloadVideoBuffer(url,{fetchImpl=fetch,headers}={}){
  return buffer;
 }
 
-export async function runXaiImagineVideo({lastFrame,lastFrameUrl,prompt,duration,env=process.env,fetchImpl=fetch,onTick,sleepImpl=sleep}={}){
+function frameInput(frame,url){
+ if(frame&&(frame.url||frame.file_id))return frame;
+ if(url)return {url:String(url)};
+ return null;
+}
+
+export async function runXaiImagineVideo({lastFrame,lastFrameUrl,image,imageUrl,prompt,duration,env=process.env,fetchImpl=fetch,onTick,sleepImpl=sleep}={}){
  const key=xaiAuth(env);
- const frame=lastFrame&&(lastFrame.url||lastFrame.file_id)
-  ?lastFrame
-  :(lastFrameUrl?{url:String(lastFrameUrl)}:null);
+ const frame=frameInput(lastFrame,lastFrameUrl);
  if(!frame?.url&&!frame?.file_id)throw new HttpError(400,'Opening last_frame image is missing.');
+ const first=frameInput(image,imageUrl);
+ const payload={
+  model:XAI_VIDEO_MODEL,
+  prompt:String(prompt||'').trim(),
+  last_frame:frame.url?{url:frame.url}:{file_id:frame.file_id},
+  duration:Number(duration)||OPENING_DURATION,
+  aspect_ratio:'9:16',
+  resolution:'720p'
+ };
+ if(first?.url||first?.file_id)payload.image=first.url?{url:first.url}:{file_id:first.file_id};
  const create=await fetchImpl(XAI_VIDEO_GENERATIONS,{
   method:'POST',
   headers:{
    Authorization:'Bearer '+key,
    'Content-Type':'application/json'
   },
-  body:JSON.stringify({
-   model:XAI_VIDEO_MODEL,
-   prompt:String(prompt||'').trim(),
-   last_frame:frame.url?{url:frame.url}:{file_id:frame.file_id},
-   duration:Number(duration)||OPENING_DURATION,
-   aspect_ratio:'9:16',
-   resolution:'720p'
-  })
+  body:JSON.stringify(payload)
  });
  const created=await create.json().catch(()=>({}));
  if(!create.ok){
