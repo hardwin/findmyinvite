@@ -60,6 +60,8 @@ test('registry patch helpers insert premium ids without duplicating',async()=>{
  const core=await readFile(new URL('../server/core.mjs',import.meta.url),'utf8');
  const ids=knownTemplateIds(data);
  assert.equal(ids.has('royal-heritage'),true);
+ assert.match(data,/id:'royal-heritage-8',name:'Sita Kalyanam'/);
+ assert.match(data,/id:'royal-heritage-8'[^}]*music:'royal-heritage-8-music\.mp3'/);
  const clone={id:'royal-heritage-99',name:'Royal Heritage 99',description:'Test',image:'royal-heritage-99.jpg',video:'royal-heritage-99.mp4',badge:'New',color:'#884936',n:99};
  const patchedData=patchDataTs(data,[clone]);
  assert.match(patchedData,/royal-heritage-99/);
@@ -75,12 +77,16 @@ test('loadPremiumParents keeps optional heroVideo on clones that have it',async(
  const parents=await loadPremiumParents();
  const h4=parents.find(item=>item.id==='royal-heritage-4');
  const h5=parents.find(item=>item.id==='royal-heritage-5');
+ const h8=parents.find(item=>item.id==='royal-heritage-8');
  assert.ok(h4);
  assert.equal(h4.video,'royal-heritage-4.mp4');
  assert.equal(h4.heroVideo||'','');
  assert.ok(h5);
  assert.equal(h5.heroVideo,'royal-heritage-5-hero.mp4');
  assert.equal(h5.heroUrl,'/assets/royal-heritage-5-hero.mp4');
+ assert.ok(h8);
+ assert.equal(h8.name,'Sita Kalyanam');
+ assert.equal(h8.heroVideo,'royal-heritage-8-hero.mp4');
 });
 
 test('patchHeroVideo inserts or replaces heroVideo on a premium row',async()=>{
