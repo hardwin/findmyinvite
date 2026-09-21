@@ -1,6 +1,18 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFile} from 'node:fs/promises';
+import {mkdir,readFile,writeFile} from 'node:fs/promises';
+import {join} from 'node:path';
+import {fileURLToPath} from 'node:url';
+
+const inboxDir=fileURLToPath(new URL('../work/assembly-inbox',import.meta.url));
+async function ensureInboxStub(name){
+ await mkdir(inboxDir,{recursive:true});
+ const path=join(inboxDir,name);
+ try{await readFile(path);}catch{
+  await writeFile(path,Buffer.from('ftypisom'));
+ }
+ return path;
+}
 import {
  knownTemplateIds,
  lineageRoot,
@@ -123,6 +135,8 @@ test('set-intro targets the parent video filename, not the template id',async()=
 
 test('assemble dry-run requires opening for a new clone and never mutates parent mode',async()=>{
  const {assemblePremium}=await import('../server/assembly.mjs');
+ await ensureInboxStub('alt-a.mp4');
+ await ensureInboxStub('smoke-alt.mp4');
  await assert.rejects(
   ()=>assemblePremium({parentId:'royal-heritage-4',videos:[],names:['X'],dryRun:true}),
   /opening video/i
@@ -144,6 +158,7 @@ test('assemble dry-run requires opening for a new clone and never mutates parent
 
 test('resolveInboxPreview only serves safe inbox filenames',async()=>{
  const {resolveInboxPreview}=await import('../server/assembly.mjs');
+ await ensureInboxStub('alt-a.mp4');
  await assert.rejects(()=>resolveInboxPreview('../package.json'),/video files|Invalid/i);
  const preview=await resolveInboxPreview('alt-a.mp4');
  assert.equal(preview.name,'alt-a.mp4');
