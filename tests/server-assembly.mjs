@@ -154,12 +154,13 @@ test('royal-heritage-8 parks hero copy in the sky without restyling parent-7',as
  const data=await readFile(new URL('../src/data.ts',import.meta.url),'utf8');
  assert.match(css,/\.invitation-page\.theme-royal-heritage-8 \.couple-overlay\{[^}]*justify-content:center/);
  assert.match(css,/\.invitation-page\.theme-royal-heritage-8 \.couple-overlay\{[^}]*text-align:center/);
- assert.match(css,/\.invitation-page\.theme-royal-heritage-8 \.couple-overlay\{[^}]*padding:10% 13% 44% 13%/);
+ assert.match(css,/\.invitation-page\.theme-royal-heritage-8 \.couple-overlay\{[^}]*padding:5% 13% 54% 13%/);
  assert.match(css,/\.invitation-page\.theme-royal-heritage-8 \.couple-overlay h1/);
  assert.match(css,/#6E1A28/);
  assert.match(css,/#165A4A/);
  assert.match(css,/#C9A24A/);
  assert.match(css,/#F7ECD6/);
+ assert.match(css,/--rh8-scrim:linear-gradient\(180deg,rgba\(0,0,0,\.12\)/);
  assert.match(css,/royal-heritage-8-section-1\.jpg/);
  assert.match(css,/royal-heritage-8-section-5\.jpg/);
  assert.match(css,/\.invitation-page\.theme-royal-heritage-8 \.invite-plate-1/);
