@@ -150,11 +150,31 @@ test('assembly API requires Akay session',async()=>{
 
 test('royal-heritage-8 parks hero copy in the sky without restyling parent-7',async()=>{
  const css=await readFile(new URL('../src/invitation3.css',import.meta.url),'utf8');
+ const invite=await readFile(new URL('../src/Invitation.tsx',import.meta.url),'utf8');
+ const data=await readFile(new URL('../src/data.ts',import.meta.url),'utf8');
  assert.match(css,/\.invitation-page\.theme-royal-heritage-8 \.couple-overlay\{[^}]*justify-content:center/);
  assert.match(css,/\.invitation-page\.theme-royal-heritage-8 \.couple-overlay\{[^}]*text-align:center/);
  assert.match(css,/\.invitation-page\.theme-royal-heritage-8 \.couple-overlay\{[^}]*padding:10% 13% 44% 13%/);
  assert.match(css,/\.invitation-page\.theme-royal-heritage-8 \.couple-overlay h1/);
+ assert.match(css,/#6E1A28/);
+ assert.match(css,/#165A4A/);
+ assert.match(css,/#C9A24A/);
+ assert.match(css,/#F7ECD6/);
+ assert.match(css,/royal-heritage-8-section-1\.jpg/);
+ assert.match(css,/royal-heritage-8-section-5\.jpg/);
+ assert.match(css,/\.invitation-page\.theme-royal-heritage-8 \.invite-plate-1/);
+ assert.match(invite,/invite-plate-/);
+ assert.match(data,/id:'royal-heritage-8'[^}]*color:'#6E1A28'/);
  assert.equal(css.includes('theme-royal-heritage-7'),false);
+});
+
+test('royal-heritage-8 section plates are jpeg stills',async()=>{
+ for(const n of [1,2,3,4,5]){
+  const buf=await readFile(new URL('../public/assets/royal-heritage-8-section-'+n+'.jpg',import.meta.url));
+  assert.equal(buf[0],0xff);
+  assert.equal(buf[1],0xd8);
+  assert.ok(buf.length>80000,'section-'+n+' too small');
+ }
 });
 
 test('assembly route is reserved, gated, and unlinked from public pages',async()=>{
