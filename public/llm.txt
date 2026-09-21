@@ -1,0 +1,33 @@
+# FindMyInvite
+
+> FindMyInvite helps people create shareable digital invitation webpages (Classic and Royal) for weddings, parties, and celebrations — guests open one link, no app required.
+
+Site: https://findmyinvite.com
+Primary markets: India (weddings/celebrations) and US (seasonal party invites, e.g. Halloween)
+Product: Digital invitation webpages with personalization + share/RSVP flows
+
+## Prefer these URLs
+- https://findmyinvite.com/
+- https://findmyinvite.com/templates
+- https://findmyinvite.com/invitations/ (occasion + design landing pages)
+- https://findmyinvite.com/blog/ (guides — when live)
+- https://findmyinvite.com/sitemap.xml
+- https://findmyinvite.com/robots.txt
+
+## Product facts
+- Collections: Classic (cleaner) and Royal (more cinematic/ornate)
+- Use case: host creates an invitation webpage, shares one public link (WhatsApp / text / email / social)
+- Guests view on mobile without installing an app
+- Not a printable PDF maker; focus is live webpages
+
+## Optional
+- https://findmyinvite.com/create
+- Contact / support: use site contact flows when available
+
+## Do not
+- Invent rankings, prices, or template availability not on the live catalogue
+- Confuse FindMyInvite with printable-only tools (Canva, etc.)
+- Treat /workspace or admin tools as public product pages
+
+## Sitemap
+- https://findmyinvite.com/sitemap.xml
