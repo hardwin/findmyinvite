@@ -11,7 +11,7 @@ test('client cannot override ownership or attach other invite media',()=>{const 
 test('invitation music allowlist includes heritage reel tracks',()=>{
  assert.equal(validateData({...data,music:'/assets/royal-heritage-8-music.mp3'},'ashoksupriya').data.music,'/assets/royal-heritage-8-music.mp3');
  assert.equal(validateData({...data,music:'/assets/royal-heritage-9-music.mp3'},'ashoksupriya').data.music,'/assets/royal-heritage-9-music.mp3');
- assert.equal(validateData({...data,music:'/assets/vazhithunaiye.mp3'},'ashoksupriya').data.music,'/assets/vazhithunaiye.mp3');
+ assert.equal(validateData({...data,music:'/assets/royal-heritage-12-music.mp3'},'ashoksupriya').data.music,'/assets/royal-heritage-12-music.mp3');
  assert.throws(()=>validateData({...data,music:'/assets/evil.mp3'},'ashoksupriya'));
 });
 test('RSVP validated and server metadata not trusted',()=>{const result=validateRsvp({name:'Guest',email:'guest@example.com',attendance:'no',guests:999,message:'Hello',invitation_id:'other'});assert.equal(result.guests,0);assert.equal(result.invitation_id,undefined);assert.throws(()=>validateRsvp({name:'Guest',email:'invalid',attendance:'yes'}));assert.throws(()=>validateRsvp({name:'Guest',email:'a@b.com',attendance:'yes',guests:-1}));});
