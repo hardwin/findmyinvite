@@ -1,12 +1,13 @@
 # Template 1 (Kaatrukulle) — Gen prompts + image model
 # For coding agents / CloudAgent. Source of truth: wire-proven iter 1.
-# NOT in git yet — lives on Grok Bot box until Ashok greenlights ship.
+# Also in git: `KT_Assembly/docs/` on branch `cursor/docs-kt-assembly-template1-4b17` (PR #27).
 # Do NOT Publish. Do NOT invent MAIN/NEGATIVE prompt fields.
+# STYLE DRIFT: read `TEMPLATE1-STYLE-DRIFT-TRAPS.md` — hero still from LAST URL; pad 720×1280; force theme CSS (parent tokens drift).
 
 ## How to get this pack
-1. Prefer this file (or /workspace/assembly-template1/TEMPLATE1-GEN-BOT-MACHINE-PACK.md on Tech Architect box).
-2. Full Gen pack + manifests + raw assets: /workspace/kaatrukulle/ on that same box.
-3. Until committed to hardwin/findmyinvite, paste this .me into the coding-agent chat or copy via Grok Bot attach.
+1. Prefer `KT_Assembly/docs/TEMPLATE1-GEN-PROMPTS-AND-IMAGE-MODEL.md` in `hardwin/findmyinvite`.
+2. Full fixtures: `KT_Assembly/assets/` + `KT_Assembly/manifests/`.
+3. Traps / worker locks: `KT_Assembly/docs/TEMPLATE1-STYLE-DRIFT-TRAPS.md`.
 
 ## Image model (stills: FIRST / LAST / hero-still / plates)
 - Provider: Replicate
@@ -108,7 +109,7 @@ Vertical 9:16 cinematic watercolor invitation opening, 12 seconds. FIRST: closed
 - Clone: royal-heritage-12 (Runner allocates — Gen does not create id)
 - Parent: royal-heritage-7 (read-only)
 - Couple: Ashok & Supriya
-- Theme: magenta #9B2158, sage #3F5C55, cream #F7F1E8
+- Theme: magenta #9B2158, sage #3F5C55, cream #F7F1E8 — **force on clone**; parent `royal-heritage-7` tokens also cause drift if left inherited
 - Budget: $4.00 · used ~$2.30
 
 ## Hard routing

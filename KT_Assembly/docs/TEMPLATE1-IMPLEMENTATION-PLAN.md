@@ -95,11 +95,24 @@ Refuse next gen if `spend_remaining < estimated_next`.
 
 ---
 
-## 6. Prompt / motif system
+## 6. Prompt / motif system (LOCKED — no style drift)
 
-Repo file e.g. `server/assembly-template1-prompts.mjs` seeded from Gen Bot machine pack.  
-Params: `{style}, {palette}, {couple_desc}, {motif_ornament}, {first_scene}, {last_pose}`.  
-Plate `ornament` required from pin-notes; soft non-IP blocklist before API.
+**Template 1 recreate MUST use the exact full prompt strings** from `TEMPLATE1-GEN-PROMPTS-AND-IMAGE-MODEL.md` / Gen Bot machine pack.  
+Do **not** rebuild prompts from `{style}`, `{palette}`, `{couple_desc}`, `{motif_ornament}` placeholders for Kaatrukulle — that caused Ashok’s style drift.
+
+Repo file e.g. `server/assembly-template1-prompts.mjs` should export **verbatim** constants:
+
+- `PROMPT_FIRST`, `PROMPT_LAST`, `PROMPT_HERO_STILL`, `PROMPT_PLATE1`, `PROMPT_PLATE2`
+- `PROMPT_HERO_VIDEO`, `PROMPT_OPENING_VIDEO`
+- `STILL_MODEL = "xai/grok-imagine-image"`
+- `HERO_VIDEO_MODEL = "xai/grok-imagine-video-1.5"`
+- `OPENING_MODEL = "grok-imagine-video-1.5"` (xAI direct)
+- `HERO_STILL_IMAGE_SOURCE = "last_output_url"` (never pin)
+- `STILL_DELIVERABLE = "720x1280_padded"`
+- `THEME = { magenta: "#9B2158", sage: "#3F5C55", cream: "#F7F1E8" }` — force on clone; parent RH7 tokens drift
+
+For **future** Template 2+ only, a parameterized motif system may be introduced. Template 1 stays bit-identical to wire.  
+See `TEMPLATE1-STYLE-DRIFT-TRAPS.md`. Soft non-IP blocklist before API still applies.
 
 ---
 

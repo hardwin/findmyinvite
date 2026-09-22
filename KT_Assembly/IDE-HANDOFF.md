@@ -23,6 +23,7 @@ Everything you need is under `KT_Assembly/`. Do **not** ask Ashok for box-only p
 
 Read in the order listed in `README.md`. Especially:
 
+- **Style-drift traps / gen locks:** `docs/TEMPLATE1-STYLE-DRIFT-TRAPS.md`
 - **Prompts + image model:** `docs/TEMPLATE1-GEN-PROMPTS-AND-IMAGE-MODEL.md`
 - **Wire body shapes / prediction ids:** `docs/TEMPLATE1-GEN-BOT-MACHINE-PACK.md` + `manifests/`
 - **ffmpeg craft contract:** `docs/TEMPLATE1-CRAFTER-MACHINE-PACK.md`

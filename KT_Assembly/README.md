@@ -36,13 +36,15 @@ KT_Assembly/
 
 1. `IDE-HANDOFF.md`
 2. `docs/TEMPLATE1-WORKFLOW-OUTLINE.md`
-3. `docs/TEMPLATE1-GEN-PROMPTS-AND-IMAGE-MODEL.md` ← **prompts + Replicate image model**
-4. `docs/TEMPLATE1-GEN-BOT-MACHINE-PACK.md`
-5. `docs/TEMPLATE1-CRAFTER-MACHINE-PACK.md`
-6. `docs/TEMPLATE1-RUNNER-MACHINE-PACK.md`
-7. `docs/TEMPLATE1-PUBLISHER-MACHINE-PACK.md` (separate lane; not auto)
-8. `docs/TEMPLATE1-IMPLEMENTATION-PLAN.md` ← `/api/assembly/jobs` slices A–F
-9. `manifests/*.json` + spot-check `assets/`
+3. `docs/TEMPLATE1-STYLE-DRIFT-TRAPS.md` ← **gen worker locks (Ashok style-drift)**
+4. `docs/TEMPLATE1-GEN-PROMPTS-AND-IMAGE-MODEL.md` ← **prompts + Replicate image model**
+5. `docs/TEMPLATE1-GEN-BOT-MACHINE-PACK.md`
+6. `docs/TEMPLATE1-CRAFTER-MACHINE-PACK.md`
+7. `docs/TEMPLATE1-RUNNER-MACHINE-PACK.md`
+8. `docs/TEMPLATE1-PUBLISHER-MACHINE-PACK.md` (separate lane; not auto)
+9. `docs/TEMPLATE1-IMPLEMENTATION-PLAN.md` ← `/api/assembly/jobs` slices A–F
+10. `manifests/*.json` + spot-check `assets/`
+
 
 ## Identity lock (iter 1)
 
