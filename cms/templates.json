@@ -51,7 +51,7 @@
     "collection": "royal",
     "badge": "New",
     "sort_order": 21,
-    "published": true
+    "published": false
   },
   {
     "id": "royal-heritage-2",
@@ -60,7 +60,7 @@
     "collection": "royal",
     "badge": "New",
     "sort_order": 22,
-    "published": true
+    "published": false
   },
   {
     "id": "royal-heritage-3",
@@ -69,7 +69,7 @@
     "collection": "royal",
     "badge": "New",
     "sort_order": 23,
-    "published": true
+    "published": false
   },
   {
     "id": "royal-grace",
@@ -159,7 +159,7 @@
     "collection": "royal",
     "badge": "New",
     "sort_order": 24,
-    "published": true
+    "published": false
   },
   {
     "id": "royal-heritage-5",
@@ -168,7 +168,7 @@
     "collection": "royal",
     "badge": "New",
     "sort_order": 25,
-    "published": true
+    "published": false
   },
   {
     "id": "royal-heritage-6",
@@ -177,7 +177,7 @@
     "collection": "royal",
     "badge": "New",
     "sort_order": 26,
-    "published": true
+    "published": false
   },
   {
     "id": "royal-heritage-7",
@@ -186,7 +186,7 @@
     "collection": "royal",
     "badge": "New",
     "sort_order": 27,
-    "published": true
+    "published": false
   },
   {
     "id": "royal-heritage-8",
@@ -213,6 +213,42 @@
     "collection": "royal",
     "badge": "New",
     "sort_order": 30,
+    "published": false
+  },
+  {
+    "id": "royal-heritage-13",
+    "name": "Kayil Midhakkum Kaatra nee",
+    "description": "Timeless cinematic opening with regal heritage storytelling",
+    "collection": "royal",
+    "badge": "New",
+    "sort_order": 31,
+    "published": false
+  },
+  {
+    "id": "royal-heritage-14",
+    "name": "Kadhal Lights",
+    "description": "Timeless cinematic opening with regal heritage storytelling",
+    "collection": "royal",
+    "badge": "New",
+    "sort_order": 32,
+    "published": false
+  },
+  {
+    "id": "royal-prestige-1",
+    "name": "Kavidhaye Theriyuma",
+    "description": "Prestigious cinematic opening with refined elegance and grandeur",
+    "collection": "royal",
+    "badge": "New",
+    "sort_order": 33,
+    "published": false
+  },
+  {
+    "id": "royal-prestige-2",
+    "name": "Rosu Rosu Rosu",
+    "description": "Prestigious cinematic opening with refined elegance and grandeur",
+    "collection": "royal",
+    "badge": "New",
+    "sort_order": 34,
     "published": true
   }
 ]

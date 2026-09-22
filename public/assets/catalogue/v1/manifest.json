@@ -187,5 +187,14 @@
     "duration": 15.041667,
     "bytes": 1595974,
     "version": 1
+  },
+  "royal-prestige-2": {
+    "src": "/assets/catalogue/v1/royal-prestige-2.mp4",
+    "poster": "/assets/catalogue/v1/royal-prestige-2.webp",
+    "width": 480,
+    "height": 854,
+    "duration": 15.041667,
+    "bytes": 1723805,
+    "version": 1
   }
 }

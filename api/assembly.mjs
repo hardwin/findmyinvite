@@ -13,9 +13,9 @@ import {
  ROOT
 } from '../server/assembly.mjs';
 import {startGeneratePair,getGenerateJob} from '../server/assembly-ai.mjs';
-import {startTemplate1Job,getTemplate1Job,listTemplate1Jobs,cancelTemplate1Job} from '../server/assembly-template1.mjs';
+import {startTemplate1Job,listTemplate1JobsResolved,loadTemplate1Job,cancelTemplate1Job,proceedTemplate1Job,jobsDir} from '../server/assembly-template1.mjs';
 import {listMusicLibrary} from '../server/music-library.mjs';
-import {readFile} from 'node:fs/promises';
+import {readFile,stat} from 'node:fs/promises';
 import {createReadStream} from 'node:fs';
 import {join} from 'node:path';
 
@@ -180,8 +180,8 @@ export default async function handler(req,res){
    method(req,['GET']);
    if(!sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
    const jobId=String(url.searchParams.get('jobId')||'');
-   if(!jobId)return respond(res,200,{jobs:listTemplate1Jobs()});
-   const job=getTemplate1Job(jobId);
+   if(!jobId)return respond(res,200,{jobs:await listTemplate1JobsResolved()});
+   const job=await loadTemplate1Job(jobId);
    if(!job)throw new HttpError(404,'Template 1 job not found.');
    return respond(res,200,job);
   }
@@ -191,6 +191,30 @@ export default async function handler(req,res){
    if(!sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
    const body=await bodyJson(req,4096);
    return respond(res,200,cancelTemplate1Job(String(body.jobId||'')));
+  }
+
+  if(action==='template1-proceed'){
+   method(req,['POST']);
+   if(!sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
+   const body=await bodyJson(req,4096);
+   return respond(res,200,await proceedTemplate1Job(String(body.jobId||'')));
+  }
+
+  if(action==='template1-asset'){
+   method(req,['GET']);
+   if(!sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
+   const jobId=String(url.searchParams.get('jobId')||'');
+   const role=String(url.searchParams.get('role')||'');
+   if(!/^[a-f0-9]{8,16}$/.test(jobId))throw new HttpError(400,'Invalid job.');
+   if(role!=='opening-first'&&role!=='opening-last')throw new HttpError(400,'Unknown still.');
+   const path=join(jobsDir(),jobId,'gen',role+'-720.jpg');
+   let info;
+   try{info=await stat(path);}catch{throw new HttpError(404,'Still not ready.');}
+   res.statusCode=200;
+   res.setHeader('Content-Type','image/jpeg');
+   res.setHeader('Cache-Control','no-store');
+   res.setHeader('Content-Length',String(info.size));
+   return createReadStream(path).pipe(res);
   }
 
   throw new HttpError(404,'Not found.');

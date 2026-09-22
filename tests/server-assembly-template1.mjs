@@ -1,10 +1,18 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFile} from 'node:fs/promises';
+import {mkdir,readFile,writeFile} from 'node:fs/promises';
+import {tmpdir} from 'node:os';
+import {join} from 'node:path';
 import {
  buildPrompts,
+ BASE_PROMPTS,
  DEFAULT_PARAMS,
+ DEFAULT_STYLE_CARD,
+ DEFAULT_PROMPT_MODEL,
  softNonIp,
+ fillBasePrompts,
+ parsePromptWriterJson,
+ writeTemplate1PromptsFromPin,
  IMAGE_MODEL,
  OPENING_SECONDS
 } from '../server/assembly-template1-prompts.mjs';
@@ -26,7 +34,7 @@ import {
  patchDataRow,
  patchAppMusicOption
 } from '../server/assembly-template1-theme.mjs';
-import {validateTemplate1Input,slugify,startTemplate1Job,getTemplate1Job} from '../server/assembly-template1.mjs';
+import {validateTemplate1Input,slugify,startTemplate1Job,getTemplate1Job,proceedTemplate1Job,hydrateLiveJob} from '../server/assembly-template1.mjs';
 import {listMusicLibrary} from '../server/music-library.mjs';
 import handler from '../api/assembly.mjs';
 import {issueSession} from '../server/akay-gate.mjs';
@@ -47,22 +55,94 @@ async function request(url,opts={}){
 }
 
 const WIRE={
- first:'Edit pin into FIRST FRAME: FULLY CLOSED opaque carved wooden double garden doors, panels meet with no gap. 9:16. Same modern 2D watercolor paper-texture, cream handmade paper, magenta + sage washes, floral vines on an arch, trees behind. Door fills frame. No people/faces/text/watermark.',
  last:'Edit this pin into a romantic closing frame: same two people (man in white shirt, woman in magenta dress with purple flower in hair), modern 2D watercolor paper-texture. Facing each other, holding both hands, CLEAR eye contact. Cream handmade paper, magenta and sage washes. Soft non-IP. Absolutely no text, no letters, no watermark, no labels.',
  heroStill:'Edit into hero invitation still: same couple SMALL at BOTTOM (~20% height), looking at each other with CLEAR eye contact, holding hands. Man white shirt, woman magenta dress + purple flower in hair. CENTER and UPPER ~70% EMPTY cream watercolor sky for text. Thin ornamental watercolor borders 8–12% inset only — no thick curtains or pillars. Paper texture, pigment drips under couple. Soft romantic modern 2D watercolor. Soft non-IP. 9:16.',
  plate1:'Thin ornamental watercolor borders only 8–12% inset. Empty cream handmade paper center for text. Delicate magenta–sage watercolor filigree, tiny blossoms, paper-edge pigment matching romantic garden pin palette. Modern 2D watercolor paper-texture. Unique plate A. No people, no faces, no text, no watermark, no thick curtains or pillars. 9:16.',
  plate2:'Thin ornamental watercolor borders only 8–12% inset. Empty cream handmade paper center for text. Different unique arrangement: delicate magenta–sage watercolor filigree corners, tiny blossom clusters, soft paper-edge pigment drips matching same romantic pin palette. Modern 2D watercolor paper-texture. Unique plate B. No people, no faces, no text, no watermark, no thick curtains or pillars. 9:16.',
- heroVideo:'static camera, couple looks at each other, blink, hair/clothes slight wind sway, petals fall, no body/hand acting, no zoom, watercolor paper ambient flicker only',
- opening:'Vertical 9:16 cinematic watercolor invitation opening, 12 seconds. FIRST: closed grand watercolor garden doors (no people), hold ~1s → doors open, glide through watercolor forest (sage trees, magenta wildflowers, cream paper) → arrive at couple facing, holding hands, CLEAR eye contact. LAST ~3s hold on eye contact. Static on that beat; petals/paper flicker only. No zoom, no new poses, no text.'
+ heroVideo:'static camera, couple looks at each other, blink, hair/clothes slight wind sway, petals fall, no body/hand acting, no zoom, watercolor paper ambient flicker only'
 };
 
-test('Template 1 default prompts are bit-identical to the wire-proven Kaatrukulle pack',()=>{
+test('Template 1 default first still demands a frame-filling fortune door',()=>{
  const p=buildPrompts();
+ assert.match(p.first,/FILL the entire 9:16 frame/);
+ assert.match(p.first,/Handle is the MAIN FOCUS/);
+ assert.match(p.first,/fortune/);
+ assert.match(p.opening,/FILL the entire frame/);
  for(const key of Object.keys(WIRE))assert.equal(p[key],WIRE[key],key);
  assert.equal(IMAGE_MODEL,'xai/grok-imagine-image');
  assert.equal(OPENING_SECONDS,12);
  assert.match(p.lastRegen,/ABSOLUTELY NO TEXT/);
  assert.deepEqual(p.params,DEFAULT_PARAMS);
+});
+
+test('BASE prompts keep slots; style-card fill + Astra JSON parse work',()=>{
+ assert.match(BASE_PROMPTS.first,/\{DOOR_MATERIAL\}/);
+ assert.match(BASE_PROMPTS.first,/\{DOOR_HANDLE\}/);
+ assert.match(BASE_PROMPTS.first,/FILL the entire 9:16 frame/);
+ assert.match(BASE_PROMPTS.opening,/\{WORLD_SETTING\}/);
+ assert.match(BASE_PROMPTS.heroVideo,/\{AMBIENT_MOTION\}/);
+ const {styleCard,prompts}=fillBasePrompts(DEFAULT_STYLE_CARD);
+ assert.equal(styleCard.PALETTE,'magenta + sage washes');
+ assert.match(prompts.first,/modern 2D watercolor paper-texture/);
+ assert.match(prompts.first,/magenta \+ sage washes/);
+ assert.equal(prompts.first.includes('{'),false);
+ assert.match(prompts.heroStill,/delicate magenta–sage watercolor filigree/);
+ assert.match(prompts.opening,/romantic garden/);
+ const parsed=parsePromptWriterJson(JSON.stringify({
+  styleCard:DEFAULT_STYLE_CARD,
+  prompts:{
+   first:'Edit pin into FIRST FRAME: closed doors. Soft non-IP. 9:16.',
+   last:'last',
+   lastRegen:'lastRegen',
+   heroStill:'heroStill',
+   plate1:'plate1',
+   plate2:'plate2',
+   heroVideo:'heroVideo',
+   opening:'opening'
+  }
+ }));
+ assert.equal(parsed.source,'astra');
+ assert.equal(parsed.prompts.first,'Edit pin into FIRST FRAME: closed doors. Soft non-IP. 9:16.');
+ assert.equal(DEFAULT_PROMPT_MODEL,'gpt-6-astra');
+});
+
+test('Astra Light prompt writer reads the pin and returns filled prompts',async()=>{
+ const jpeg=Buffer.from([0xff,0xd8,0xff,0xe0,1,2,3]);
+ const calls=[];
+ const openaiClient={
+  responses:{
+   create:async(payload)=>{
+    calls.push(payload);
+    return {output_text:JSON.stringify({
+     styleCard:DEFAULT_STYLE_CARD,
+     prompts:{
+      first:'FIRST filled from pin',
+      last:'LAST filled',
+      lastRegen:'LAST regen',
+      heroStill:'HERO still',
+      plate1:'PLATE1',
+      plate2:'PLATE2',
+      heroVideo:'HERO video',
+      opening:'OPENING video'
+     }
+    })};
+   }
+  }
+ };
+ const out=await writeTemplate1PromptsFromPin({
+  image:{buffer:jpeg,contentType:'image/jpeg'},
+  env:{OPENAI_API_KEY:'sk-test'},
+  openaiClient
+ });
+ assert.equal(out.source,'astra');
+ assert.equal(out.prompts.first,'FIRST filled from pin');
+ assert.equal(out.styleCard.STYLE_MEDIUM,'modern 2D watercolor paper-texture');
+ assert.equal(calls[0].model,'gpt-6-astra');
+ assert.equal(calls[0].input[0].content.some(c=>c.type==='input_image'),true);
+ assert.match(calls[0].input[0].content.find(c=>c.type==='input_text').text,/BASE templates/);
+ const override=await writeTemplate1PromptsFromPin({promptParams:{paletteA:'wine',paletteB:'peacock'},env:{}});
+ assert.match(override.first,/wine \+ peacock/);
+ assert.equal(override.source,'defaults');
 });
 
 test('prompt params substitute and soft non-IP strips franchise words',()=>{
@@ -72,7 +152,7 @@ test('prompt params substitute and soft non-IP strips franchise words',()=>{
  assert.match(p.plate1,/wine–peacock watercolor filigree, jasmine buds, gold leaf matching/);
  assert.equal(p.plate1.includes('Marvel'),false);
  const ignored=buildPrompts({notAParam:'x',paletteA:''});
- assert.equal(ignored.first,WIRE.first);
+ assert.equal(ignored.first,buildPrompts().first);
 });
 
 test('spend ledger charges, refuses over budget, and estimates match the packs',()=>{
@@ -108,7 +188,7 @@ test('runReplicateImage posts edit-mode body to xai/grok-imagine-image and downl
   if(url==='https://replicate.delivery/out.jpg')return {ok:true,status:200,arrayBuffer:async()=>jpeg};
   throw new Error('unexpected '+url);
  };
- const result=await runReplicateImage({prompt:WIRE.first,image:'https://i.pinimg.com/originals/x.jpg',env:{REPLICATE_API_TOKEN:'r8'},fetchImpl,sleepImpl:async()=>{},role:'opening-first'});
+ const result=await runReplicateImage({prompt:buildPrompts().first,image:'https://i.pinimg.com/originals/x.jpg',env:{REPLICATE_API_TOKEN:'r8'},fetchImpl,sleepImpl:async()=>{},role:'opening-first'});
  assert.equal(result.predictionId,'pred1');
  assert.equal(result.url,'https://replicate.delivery/out.jpg');
  assert.equal(Buffer.compare(result.buffer,jpeg),0);
@@ -223,18 +303,19 @@ test('validateTemplate1Input enforces pin, name, music, budget and defaults the 
  assert.throws(()=>validateTemplate1Input({pinUrl:'https://pin.it/x',displayName:'K'}),/music library/);
  assert.throws(()=>validateTemplate1Input({pinUrl:'https://pin.it/x',displayName:'K',musicId:'v',budgetUsd:0}),/Budget/);
  const ok=validateTemplate1Input({pinUrl:'https://pin.it/330nC70it',displayName:'Kaatrukulle',musicId:'vazhithunaiye'});
- assert.equal(ok.parentId,'royal-heritage-7');
+ assert.equal(ok.parentId,'royal-prestige-2');
  assert.equal(ok.budgetUsd,4);
  assert.deepEqual([ok.couple.groom,ok.couple.bride],['Ashok','Supriya']);
  assert.equal(slugify('Kaatrukulle Two!'),'kaatrukulle-two');
 });
 
 test('startTemplate1Job requires keys and local writes; API gates + 404s',async()=>{
- assert.throws(()=>startTemplate1Job({pinUrl:'https://pin.it/x',displayName:'K',musicId:'vazhithunaiye'},{env:{ASSEMBLY_FS:'1',REPLICATE_API_TOKEN:'r'},run:false}),/XAI_API_KEY/);
- assert.throws(()=>startTemplate1Job({pinUrl:'https://pin.it/x',displayName:'K',musicId:'vazhithunaiye'},{env:{ASSEMBLY_FS:'1',XAI_API_KEY:'x'},run:false}),/REPLICATE_API_TOKEN/);
- assert.throws(()=>startTemplate1Job({pinUrl:'https://pin.it/x',displayName:'K',musicId:'vazhithunaiye'},{env:{VERCEL:'1',XAI_API_KEY:'x',REPLICATE_API_TOKEN:'r'},run:false}),/locally/);
- const started=startTemplate1Job({pinUrl:'https://pin.it/x',displayName:'K',musicId:'vazhithunaiye'},{env:{ASSEMBLY_FS:'1',XAI_API_KEY:'x',REPLICATE_API_TOKEN:'r'},run:false});
- assert.equal(started.prompts.first,WIRE.first);
+ assert.throws(()=>startTemplate1Job({pinUrl:'https://pin.it/x',displayName:'K',musicId:'vazhithunaiye'},{env:{ASSEMBLY_FS:'1',REPLICATE_API_TOKEN:'r',OPENAI_API_KEY:'o'},run:false}),/XAI_API_KEY/);
+ assert.throws(()=>startTemplate1Job({pinUrl:'https://pin.it/x',displayName:'K',musicId:'vazhithunaiye'},{env:{ASSEMBLY_FS:'1',XAI_API_KEY:'x',OPENAI_API_KEY:'o'},run:false}),/REPLICATE_API_TOKEN/);
+ assert.throws(()=>startTemplate1Job({pinUrl:'https://pin.it/x',displayName:'K',musicId:'vazhithunaiye'},{env:{ASSEMBLY_FS:'1',XAI_API_KEY:'x',REPLICATE_API_TOKEN:'r'},run:false}),/OPENAI_API_KEY/);
+ assert.throws(()=>startTemplate1Job({pinUrl:'https://pin.it/x',displayName:'K',musicId:'vazhithunaiye'},{env:{VERCEL:'1',XAI_API_KEY:'x',REPLICATE_API_TOKEN:'r',OPENAI_API_KEY:'o'},run:false}),/locally/);
+ const started=startTemplate1Job({pinUrl:'https://pin.it/x',displayName:'K',musicId:'vazhithunaiye'},{env:{ASSEMBLY_FS:'1',XAI_API_KEY:'x',REPLICATE_API_TOKEN:'r',OPENAI_API_KEY:'o'},run:false});
+ assert.equal(started.prompts,null);
  assert.equal(getTemplate1Job(started.jobId).status,'running');
  assert.equal(getTemplate1Job(started.jobId).spend.budget,4);
 
@@ -248,4 +329,31 @@ test('startTemplate1Job requires keys and local writes; API gates + 404s',async(
  const music=await request('/api/assembly?action=music-library');
  assert.equal(music.statusCode,200);
  assert.equal(music.body.tracks.some(t=>t.id==='vazhithunaiye'),true);
+ await assert.rejects(()=>proceedTemplate1Job('missing'),/not found/i);
+ const early=await request('/api/assembly?action=template1-proceed',{method:'POST',body:JSON.stringify({jobId:'deadbeefdead'}),headers:{'Content-Type':'application/json'}});
+ assert.equal(early.statusCode,404);
+});
+
+test('hydrateLiveJob rebuilds stillsWave from a review manifest',async()=>{
+ const root=join(tmpdir(),'fmi-t1-'+Date.now());
+ const id='aabbccddeeff';
+ const workdir=join(root,'work','assembly-jobs',id);
+ const firstJpg=join(workdir,'gen','opening-first-720.jpg');
+ const lastJpg=join(workdir,'gen','opening-last-720.jpg');
+ await mkdir(join(workdir,'gen'),{recursive:true});
+ await writeFile(firstJpg,Buffer.from([0xff,0xd8,0xff]));
+ await writeFile(lastJpg,Buffer.from([0xff,0xd8,0xff]));
+ await writeFile(join(workdir,'manifest.json'),JSON.stringify({
+  jobId:id,
+  status:'review',
+  phase:'review',
+  input:{pinUrl:'https://pin.it/x',displayName:'K',parentId:'royal-heritage-12',musicId:'vazhithunaiye',budgetUsd:4},
+  assets:{'opening-first':{jpg:firstJpg},'opening-last':{jpg:lastJpg}},
+  spend:{budget:4,used:0.04,remaining:3.96,entries:[{role:'opening-first',usd:0.02},{role:'opening-last',usd:0.02}]}
+ }));
+ const job=await hydrateLiveJob(id,root);
+ assert.equal(job.status,'review');
+ assert.equal(job.stillsWave.first.jpg,firstJpg);
+ assert.equal(job.stillsWave.last.jpg,lastJpg);
+ assert.equal(job.ledger.used,0.04);
 });

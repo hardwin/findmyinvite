@@ -84,22 +84,23 @@ async function probe(path){
 
 export async function loadPremiumParents(root=ROOT){
  const source=await readFile(join(root,'src','data.ts'),'utf8');
- const parents=[];
+ const allowed=[...(source.match(/const premiumIds=new Set\(\[([^\]]*)\]\)/)||['',''])[1].match(/'([^']+)'/g)||[]].map(s=>s.slice(1,-1));
+ const byId=new Map();
  const blockRe=/\{id:'([a-z0-9-]+)',([^{}]*?)\}/g;
  let m;
  while((m=blockRe.exec(source))){
   const id=m[1];
+  if(!allowed.includes(id)||byId.has(id))continue;
   const body=m[2];
   const take=(key)=>{
    const hit=body.match(new RegExp("(?:^|,)"+key+":'((?:\\\\'|[^'])*)'"));
    return hit?hit[1].replace(/\\'/g,"'"):'';
   };
   const royal=/,royal:true/.test(body);
-  const tier=(body.match(/tier:'(premium|elite|free)'/)||[])[1]||'';
   const video=take('video');
-  if(tier!=='premium'||!video||!royal)continue;
+  if(!video||!royal)continue;
   const color=(body.match(/color:'(#[0-9a-fA-F]+)'/)||[])[1]||'#884936';
-  parents.push({
+  byId.set(id,{
    id,
    name:take('name'),
    description:take('description'),
@@ -114,7 +115,7 @@ export async function loadPremiumParents(root=ROOT){
    heroUrl:take('heroVideo')?'/assets/'+take('heroVideo'):''
   });
  }
- return parents;
+ return allowed.map(id=>byId.get(id)).filter(Boolean);
 }
 
 export function cleanCloneName(value,fallback){

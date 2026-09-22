@@ -7,11 +7,16 @@ export const galleryTierBlurb:Record<GalleryTier,string>={
  elite:'Elevated Royal designs with distinctive ceremony atmospheres.',
  free:'Elegant animated Classic invitations for every occasion.'
 };
-const premiumIds=new Set(['rose-gold-blush-royal','royal-majesty','modern-minimal-royal','royal-prestige','royal-heritage','royal-crest','royal-heritage-1','royal-heritage-2','royal-heritage-3','royal-heritage-4','royal-heritage-5','royal-heritage-6','royal-heritage-7','royal-heritage-8','royal-heritage-9','royal-heritage-12']);
+const premiumIds=new Set(['royal-heritage-8','royal-heritage-9','royal-prestige-2']);
+const retiredPremiumIds=new Set(['rose-gold-blush-royal','royal-majesty','modern-minimal-royal','royal-prestige','royal-heritage','royal-crest','royal-heritage-1','royal-heritage-2','royal-heritage-3','royal-heritage-4','royal-heritage-5','royal-heritage-6','royal-heritage-7','royal-heritage-12','royal-heritage-13','royal-heritage-14','royal-prestige-1']);
 export function galleryTierFor(id:string,royal=false):GalleryTier{
+ if(retiredPremiumIds.has(id))return 'premium';
  if(premiumIds.has(id))return 'premium';
  if(royal)return 'elite';
  return 'free';
+}
+export function isPublicGalleryTemplate(id:string){
+ return !retiredPremiumIds.has(id);
 }
 export function normalizeGalleryCollection(value:string|null|undefined):GalleryTier{
  if(value==='elite'||value==='free'||value==='premium')return value;
@@ -27,6 +32,8 @@ export const templates = [
  {id:'royal-majesty',name:'Royal Majesty',description:'Porcelain blue ballroom romance with painterly cinematic grandeur',image:'5a3bf145f59aa9c7.jpg',video:'royal-majesty.mp4',badge:'New',royal:true,tier:'premium' as GalleryTier,color:'#536e83'},
  {id:'modern-minimal-royal',name:'Royal Elegance',description:'Velvet cream and crimson cinematic experience with palace motifs',image:'15b12cdf24c3ee92.jpg',video:'royal-elegance-royal.mp4',badge:'Premium',royal:true,tier:'premium' as GalleryTier,color:'#6c1826'},
  {id:'royal-prestige',name:'Royal Prestige',description:'Prestigious cinematic opening with refined elegance and grandeur',image:'9b73577a4b10e8db.jpg',video:'c7238b2b655c3014.mp4',badge:'New',royal:true,tier:'premium' as GalleryTier,color:'#8b2337'},
+ {id:'royal-prestige-1',name:'Kavidhaye Theriyuma',description:'Prestigious cinematic opening with refined elegance and grandeur',image:'royal-prestige-1.jpg',video:'royal-prestige-1.mp4',heroVideo:'royal-prestige-1-hero.mp4',music:'vazhithunaiye.mp3',musicName:'Vazhithunaiye',badge:'New',royal:true,tier:'premium' as GalleryTier,color:'#A16948'},
+ {id:'royal-prestige-2',name:'Rosu Rosu Rosu',description:'Prestigious cinematic opening with refined elegance and grandeur',image:'royal-prestige-2.jpg',video:'royal-prestige-2.mp4',heroVideo:'royal-prestige-2-hero.mp4',music:'vazhithunaiye.mp3',musicName:'Vazhithunaiye',badge:'New',royal:true,tier:'premium' as GalleryTier,color:'#957A41'},
  {id:'royal-heritage',name:'Royal Heritage',description:'Timeless cinematic opening with regal heritage storytelling',image:'3c934c61dec8899c.jpg',video:'royal-heritage.mp4',badge:'New',royal:true,tier:'premium' as GalleryTier,color:'#884936'},
  {id:'royal-heritage-1',name:'Royal Heritage 1',description:'Timeless cinematic opening with regal heritage storytelling',image:'royal-heritage-1.jpg',video:'royal-heritage-1.mp4',badge:'New',royal:true,tier:'premium' as GalleryTier,color:'#884936'},
  {id:'royal-heritage-2',name:'Royal Heritage 2',description:'Timeless cinematic opening with regal heritage storytelling',image:'royal-heritage-2.jpg',video:'royal-heritage-2.mp4',badge:'New',royal:true,tier:'premium' as GalleryTier,color:'#884936'},
@@ -39,6 +46,8 @@ export const templates = [
  {id:'royal-heritage-9',name:'Velicha Poove',description:'Timeless cinematic opening with regal heritage storytelling',image:'royal-heritage-9.jpg',video:'royal-heritage-9.mp4',heroVideo:'royal-heritage-9-hero.mp4',music:'royal-heritage-9-music.mp3',badge:'New',royal:true,tier:'premium' as GalleryTier,color:'#9B2158'},
  // reserved: royal-heritage-10 (Spiderverse, draft PR #24), royal-heritage-11 (KTM couple White, draft PR #25) — held off the allocator until those land or close.
  {id:'royal-heritage-12',name:'Kaatrukulle',description:'Timeless cinematic opening with regal heritage storytelling',image:'royal-heritage-12.jpg',video:'royal-heritage-12.mp4',heroVideo:'royal-heritage-12-hero.mp4',music:'vazhithunaiye.mp3',musicName:'Vazhithunaiye',badge:'New',royal:true,tier:'premium' as GalleryTier,color:'#9B2158'},
+ {id:'royal-heritage-13',name:'Kayil Midhakkum Kaatra nee',description:'Timeless cinematic opening with regal heritage storytelling',image:'royal-heritage-13.jpg',video:'royal-heritage-13.mp4',heroVideo:'royal-heritage-13-hero.mp4',music:'vazhithunaiye.mp3',musicName:'Vazhithunaiye',badge:'New',royal:true,tier:'premium' as GalleryTier,color:'#A16948'},
+ {id:'royal-heritage-14',name:'Kadhal Lights',description:'Timeless cinematic opening with regal heritage storytelling',image:'royal-heritage-14.jpg',video:'royal-heritage-14.mp4',heroVideo:'royal-heritage-14-hero.mp4',music:'vazhithunaiye.mp3',musicName:'Vazhithunaiye',badge:'New',royal:true,tier:'premium' as GalleryTier,color:'#A16948'},
  {id:'royal-grace',name:'Royal Grace',description:'Sage garden serenity with pearl drapes and graceful cinematic reveal',image:'eaaba0b5d7aeba99.jpg',video:'royal-grace.mp4',badge:'New',royal:true,tier:'elite' as GalleryTier,color:'#59634b'},
  {id:'royal-crest',name:'Royal Crest',description:'Warm ivory florals, antique burgundy wax seal, and lakeside cinematic romance',image:'15cbf1df9056e121.jpg',video:'royal-crest.mp4',badge:'New',royal:true,tier:'premium' as GalleryTier,color:'#713647'},
  {id:'royal-legacy',name:'Royal Legacy',description:'Burgundy velvet curtains, antique gold ornament, and a timeless cinematic reveal',image:'58bf76a6b043df9f.jpg',video:'royal-legacy.mp4',badge:'New',royal:true,tier:'elite' as GalleryTier,color:'#581d2c'},

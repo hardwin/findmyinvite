@@ -83,13 +83,14 @@ Transport + Accommodation + Gifts share **one** clustered plate. Do not put plat
 
 ## Template 1 — one pin → preview clone (programmatic lane)
 
-`/assembly` top card **Template 1**. Inputs: pin URL, display name, couple names, parent (default `royal-heritage-7`), music-library track, budget (default $4). One click runs:
+`/assembly` is a one-viewport mobile wizard: **Pinterest URL → song → first/last stills → Proceed to generate (Rs. 499) → preview**. Parent is always the newest Premium clone (v1.0: `royal-prestige-2` Rosu Rosu Rosu). No payment gateway yet — the Rs. 499 button continues generation only.
 
 1. **pin** — resolve pin → `pin-ref.jpg`, sample palette (primary / secondary / paper) for the theme.
-2. **gen** — Replicate `xai/grok-imagine-image` stills (FIRST, LAST + no-text QA with one regen, plate1, plate2 in parallel), then hero still → Replicate `xai/grok-imagine-video-1.5` 6s loop **in parallel with** xAI `grok-imagine-video-1.5` 12s opening (`image`=FIRST, `last_frame`=LAST). Prompts: `server/assembly-template1-prompts.mjs` (defaults are the wire-proven Kaatrukulle strings). Budget gate before every call; **first moderated video stops the job** (no auto-retry).
-3. **craft** — mute (`-an`), +3s last-frame hold, plates → `{id}-section-1..5.jpg`, music copied from `cms/music-library.json` (never muxed). ffprobe must show 0 audio streams or craft fails closed.
-4. **assemble** — dry-run then real `assemblePremium`, theme CSS block, `previewDefaults`, `music` + `musicName`, `musicTracks`, editor option. Reserved slots come from the `// reserved:` line in `src/data.ts`.
-5. **preview** — demo link + spend line. Publish stays with Akay per this playbook.
+2. **stills** — FIRST + LAST only (`xai/grok-imagine-image`). FIRST door must fill the 9:16 frame (handle = hero). Job pauses at **review**. Guest taps **Proceed to generate (Rs. 499)**.
+3. **gen** — plates, hero still → Replicate `xai/grok-imagine-video-1.5` 6s, xAI opening 12s (`image`=FIRST, `last_frame`=LAST). **Prompts:** `gpt-6-astra` fills BASE templates in `documents/template1-base-prompts.md` from the pin (includes `DOOR_MATERIAL` / `DOOR_HANDLE` / `DOOR_CHARMS`). No MAIN/NEGATIVE. Soft non-IP. Budget gate; **first moderated video stops the job**.
+4. **craft** — mute (`-an`), +3s last-frame hold, plates → `{id}-section-1..5.jpg`, music copied from `cms/music-library.json` (never muxed). ffprobe must show 0 audio streams or craft fails closed.
+5. **assemble** — dry-run then real `assemblePremium`, theme CSS block, `previewDefaults`, `music` + `musicName`, `musicTracks`, editor option. Reserved slots come from the `// reserved:` line in `src/data.ts`.
+6. **preview** — demo link + spend line. Publish stays with Akay per this playbook.
 
 Local / CloudAgent only (`fsWritesAllowed()`, ffmpeg, `XAI_API_KEY`, `REPLICATE_API_TOKEN`; `OPENAI_API_KEY` optional for the no-text QA). Job scratch under `work/assembly-jobs/{jobId}/` (gitignored). Headless: `node scripts/assemble-template1.mjs --pin … --name … --music vazhithunaiye`.
 
@@ -99,11 +100,11 @@ Local / CloudAgent only (`fsWritesAllowed()`, ffmpeg, `XAI_API_KEY`, `REPLICATE_
 git checkout main && git pull origin main
 npm ci
 ffmpeg -version && ffprobe -version        # install ffmpeg if missing
-printf 'XAI_API_KEY=…\nREPLICATE_API_TOKEN=…\nOPENAI_API_KEY=…\n' >> .env.local   # never commit
+printf 'XAI_API_KEY=…\nREPLICATE_API_TOKEN=…\nOPENAI_API_KEY=…\nASSEMBLY_PROMPT_MODEL=gpt-6-astra\n' >> .env.local   # never commit
 npm run dev                                 # or: node run.mjs
 ```
 
-Open `http://127.0.0.1:5173/assembly` → same code as `/akay` → **Template 1** card: pin `https://pin.it/330nC70it`, display name, Ashok / Supriya, music **Vazhithunaiye**, budget 4 → **Run Template 1**. Progress, spend and palette update live; a moderation stop ends the job with no retry. Preview link appears at the end (`/invite/demo?template=royal-heritage-N`).
+Open `http://127.0.0.1:5173/assembly` → same code as `/akay` → paste pin → pick song → **Show opening stills**. Approve first/last frames → **Proceed to generate (Rs. 499)** (no payment redirect). Preview link appears at the end (`/invite/demo?template=royal-heritage-N`).
 
 Then hand the result to Akay for the PR: `git status` shows the new `public/assets/{id}*`, registries and `supabase/013_assembly_*.sql`. Commit those only (never `work/assembly-inbox`, `work/assembly-jobs`, `.env*`), push a branch, and say **Publish** when the preview is accepted.
 

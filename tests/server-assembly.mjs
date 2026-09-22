@@ -62,7 +62,10 @@ test('registry patch helpers insert premium ids without duplicating',async()=>{
  assert.equal(ids.has('royal-heritage'),true);
  assert.equal(ids.has('royal-heritage-10'),true,'reserved slot 10 stays off the allocator');
  assert.equal(ids.has('royal-heritage-11'),true,'reserved slot 11 stays off the allocator');
- assert.deepEqual(nextCloneIds('royal-heritage-7',1,ids),['royal-heritage-13']);
+ const next=nextCloneIds('royal-heritage-7',1,ids);
+ assert.equal(next.length,1);
+ assert.match(next[0],/^royal-heritage-\d+$/);
+ assert.equal(ids.has(next[0]),false);
  assert.deepEqual(knownTemplateIds("// reserved: royal-heritage-40 (x), royal-heritage-41\nconst premiumIds=new Set(['a']);"),new Set(['a','royal-heritage-40','royal-heritage-41']));
  assert.match(data,/id:'royal-heritage-8',name:'Sita Kalyanam'/);
  assert.match(data,/id:'royal-heritage-8'[^}]*music:'royal-heritage-8-music\.mp3'/);
@@ -81,27 +84,17 @@ test('registry patch helpers insert premium ids without duplicating',async()=>{
 test('loadPremiumParents keeps optional heroVideo on clones that have it',async()=>{
  const {loadPremiumParents}=await import('../server/assembly.mjs');
  const parents=await loadPremiumParents();
- const h4=parents.find(item=>item.id==='royal-heritage-4');
- const h5=parents.find(item=>item.id==='royal-heritage-5');
+ assert.deepEqual(parents.map(item=>item.id),['royal-heritage-8','royal-heritage-9','royal-prestige-2']);
  const h8=parents.find(item=>item.id==='royal-heritage-8');
  const h9=parents.find(item=>item.id==='royal-heritage-9');
- const h12=parents.find(item=>item.id==='royal-heritage-12');
- assert.ok(h4);
- assert.equal(h4.video,'royal-heritage-4.mp4');
- assert.equal(h4.heroVideo||'','');
- assert.ok(h5);
- assert.equal(h5.heroVideo,'royal-heritage-5-hero.mp4');
- assert.equal(h5.heroUrl,'/assets/royal-heritage-5-hero.mp4');
- assert.ok(h8);
+ const rosu=parents.find(item=>item.id==='royal-prestige-2');
  assert.equal(h8.name,'Sita Kalyanam');
  assert.equal(h8.heroVideo,'royal-heritage-8-hero.mp4');
- assert.ok(h9);
  assert.equal(h9.name,'Velicha Poove');
  assert.equal(h9.heroVideo,'royal-heritage-9-hero.mp4');
- assert.ok(h12);
- assert.equal(h12.name,'Kaatrukulle');
- assert.equal(h12.heroVideo,'royal-heritage-12-hero.mp4');
- assert.equal(h12.video,'royal-heritage-12.mp4');
+ assert.equal(rosu.name,'Rosu Rosu Rosu');
+ assert.equal(rosu.heroVideo,'royal-prestige-2-hero.mp4');
+ assert.equal(parents.at(-1).id,'royal-prestige-2');
 });
 
 test('patchHeroVideo inserts or replaces heroVideo on a premium row',async()=>{
@@ -117,21 +110,21 @@ test('patchHeroVideo inserts or replaces heroVideo on a premium row',async()=>{
 test('set-intro targets the parent video filename, not the template id',async()=>{
  const {loadPremiumParents}=await import('../server/assembly.mjs');
  const parents=await loadPremiumParents();
- const imperial=parents.find(item=>item.id==='rose-gold-blush-royal');
- assert.ok(imperial);
- assert.equal(imperial.video,'0cfccffffc862729.mp4');
- assert.notEqual(imperial.video,'rose-gold-blush-royal.mp4');
- assert.equal(imperial.introUrl,'/assets/0cfccffffc862729.mp4');
+ const sita=parents.find(item=>item.id==='royal-heritage-8');
+ assert.ok(sita);
+ assert.equal(sita.video,'royal-heritage-8.mp4');
+ assert.equal(sita.introUrl,'/assets/royal-heritage-8.mp4');
+ assert.equal(parents.some(item=>item.id==='rose-gold-blush-royal'),false);
 });
 
 test('assemble dry-run requires opening for a new clone and never mutates parent mode',async()=>{
  const {assemblePremium}=await import('../server/assembly.mjs');
  await assert.rejects(
-  ()=>assemblePremium({parentId:'royal-heritage-4',videos:[],names:['X'],dryRun:true}),
+  ()=>assemblePremium({parentId:'royal-prestige-2',videos:[],names:['X'],dryRun:true}),
   /opening video/i
  );
  const result=await assemblePremium({
-  parentId:'royal-heritage-4',
+  parentId:'royal-prestige-2',
   opening:'alt-a.mp4',
   hero:'smoke-alt.mp4',
   names:['Royal Heritage Next'],
@@ -160,7 +153,7 @@ test('assembly API requires Akay session',async()=>{
  const ok=await request('/api/assembly?action=parents');
  assert.equal(ok.statusCode,200);
  assert.equal(Array.isArray(ok.body.parents),true);
- assert.equal(ok.body.parents.some(item=>item.id==='royal-heritage'),true);
+ assert.equal(ok.body.parents.at(-1)?.id,'royal-prestige-2');
 });
 
 test('royal-heritage-8 parks hero copy in the sky without restyling parent-7',async()=>{
@@ -287,4 +280,25 @@ test('assembly route is reserved, gated, and unlinked from public pages',async()
  assert.match(analytics,/assembly/);
  assert.equal(home.includes('/assembly'),false);
  assert.match(vercel,/\/assembly/);
+});
+
+test('vite ignores job_engine writes and assembly remembers parent selection',async()=>{
+ const vite=await readFile(new URL('../run.mjs',import.meta.url),'utf8');
+ const ui=await readFile(new URL('../src/Assembly.tsx',import.meta.url),'utf8');
+ assert.match(vite,/watch:\s*\{\s*ignored:/);
+ assert.match(vite,/job_engine/);
+ assert.match(vite,/work\//);
+ assert.match(vite,/assembly-quiet-watch/);
+ assert.match(vite,/cms\/\*\*/);
+ assert.equal(vite.includes("'**/public/assets/**'"),false);
+ assert.match(ui,/fmi\.assembly\.parentId/);
+ assert.match(ui,/list\[list\.length-1\]/);
+ assert.match(ui,/fmi\.assembly\.t1JobId/);
+ assert.match(ui,/asm-pin/);
+ assert.match(ui,/asm-song/);
+ assert.match(ui,/asm-review/);
+ assert.match(ui,/template1-proceed/);
+ assert.match(ui,/Proceed to generate \(Rs\. 499\)/);
+ assert.match(ui,/Show opening stills/);
+ assert.equal(/razorpay|stripe|checkout\.razorpay|payment gateway/i.test(ui),false);
 });

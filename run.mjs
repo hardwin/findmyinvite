@@ -8,8 +8,21 @@ import tailwindcss from '@tailwindcss/vite';
 import {localApi} from './server/local-api.mjs';
 Object.assign(process.env,loadEnv('development',process.cwd(),''));
 const srcRoot=fileURLToPath(new NodeURL('./src',import.meta.url));
+
+/** Assembly / Template 1 writes these paths at the end of a job. Suppress Vite full-reload so /assembly keeps the preview card. */
+function assemblyQuietWatch(){
+ const quiet=/(^|\/)(cms|supabase|work|job_engine)(\/|$)|\/public\/assets\/|\/(data\.ts|invitation3\.css|Invitation\.tsx|App\.tsx|core\.mjs|share-card\.mjs|templates\.json|seed-templates\.sql|manifest\.json)$/;
+ return {
+  name:'assembly-quiet-watch',
+  handleHotUpdate({file}){
+   const norm=String(file||'').replace(/\\/g,'/');
+   if(quiet.test(norm))return [];
+  }
+ };
+}
+
 const config={
- plugins:[react(),tailwindcss(),localApi()],
+ plugins:[react(),tailwindcss(),localApi(),assemblyQuietWatch()],
  configFile:false,
  base:'/',
  appType:'spa',
@@ -19,7 +32,20 @@ const config={
  },
  root:process.cwd(),
  esbuild:{jsx:'automatic'},
- server:{host:'127.0.0.1',port:5173},
+ server:{
+  host:'127.0.0.1',
+  port:5173,
+  // Keep /assembly stable. Do NOT ignore public/assets — Vite then misses files written mid-session and SPA-falls-back HTML for new mp4s.
+  watch:{ignored:[
+   '**/job_engine/**',
+   '**/work/**',
+   '**/cms/**',
+   '**/supabase/**',
+   '**/.git/**',
+   '**/node_modules/**',
+   '**/dist/**'
+  ]}
+ },
  optimizeDeps:{
   esbuildOptions:{preserveSymlinks:true},
   include:['react','react-dom/client','react/jsx-runtime','lucide-react','three','recharts','class-variance-authority','clsx','tailwind-merge']

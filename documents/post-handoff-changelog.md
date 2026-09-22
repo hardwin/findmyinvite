@@ -8,6 +8,14 @@ Soul: [akay-soul.md](akay-soul.md) · standing facts: [project-context.md](proje
 
 Read this before `docs/handoff/STATUS.md`. The v0.9.0 handoff is the frozen baseline; this file is the current truth after that tag.
 
+## FMI v1.0 close (2026-09-23)
+
+Ashok closed v1.0 on `main`. Next public train is 1.9 or 2.0.
+
+- Premium gallery: **Sita Kalyanam** (`royal-heritage-8`), **Velicha Poove** (`royal-heritage-9`), **Rosu Rosu Rosu** (`royal-prestige-2`) only. Retired cinematic iterations unpublished in prod `template_catalog`. Elite + Free unchanged.
+- `/assembly` wizard: pin → song → first/last stills → **Proceed to generate (Rs. 499)** (no payment gateway yet) → preview. Newest Premium clone is always the default parent.
+- FIRST still: frame-filling pin-true door; handle is the hero.
+
 ## /assembly — Premium intro clone desk (Approach B, local repo writes)
 
 Operator-only desk at `/assembly` (same Akay gate cookie as `/akay`). Clones a Premium cinematic template with 1..N alternate intro videos into the git tree the same way `royal-heritage-1/2/3` were made by hand:
