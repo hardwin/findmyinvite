@@ -1,0 +1,134 @@
+{
+  "project": "Kaatrukulle",
+  "iteration": 1,
+  "budget_usd": 4.0,
+  "approx_image_unit_cost_usd": 0.02,
+  "stills": [
+    {
+      "role": "opening-first",
+      "prediction_id": "t3380h5x49rmy0d0s7sb2kfngm",
+      "model": "xai/grok-imagine-image",
+      "mode": "edit",
+      "source_image": "https://i.pinimg.com/originals/81/3e/6d/813e6da50c26413706bc159ab4228d42.jpg",
+      "output_url": "https://replicate.delivery/xezq/80Sk92YUmSKgKVEyHHfp4QOf3yjpSDi0cvCQ4q5r6H9F7FQXA/tmppj5qwyev.jpg",
+      "paths": {
+        "raw_jpg": "/workspace/kaatrukulle/opening-first-raw.jpg",
+        "png_720": "/workspace/kaatrukulle/opening-first.png",
+        "jpg_720": "/workspace/kaatrukulle/opening-first-720.jpg"
+      },
+      "native_dims": [
+        768,
+        1360
+      ],
+      "final_dims": [
+        720,
+        1280
+      ],
+      "approx_cost_usd": 0.02,
+      "status": "succeeded",
+      "moderated": false
+    },
+    {
+      "role": "opening-last",
+      "prediction_id": "k9ck2gmvhdrmy0d0s7ss29vz34",
+      "supersedes_prediction_id": "qcjcsbnxf5rmt0d0s7s94v81dg",
+      "regen_reason": "v1 baked 'LAST FRAME' label text into image",
+      "model": "xai/grok-imagine-image",
+      "mode": "edit",
+      "source_image": "https://i.pinimg.com/originals/81/3e/6d/813e6da50c26413706bc159ab4228d42.jpg",
+      "output_url": "https://replicate.delivery/xezq/qxcHia5d7cLUBlsKe6Bh2oFUSpOL8xADsaZjA7Vi9Nwf7FQXA/tmpq8bp2uty.jpg",
+      "paths": {
+        "raw_jpg": "/workspace/kaatrukulle/opening-last-raw.jpg",
+        "v2_raw_jpg": "/workspace/kaatrukulle/opening-last-v2-raw.jpg",
+        "png_720": "/workspace/kaatrukulle/opening-last.png",
+        "jpg_720": "/workspace/kaatrukulle/opening-last-720.jpg"
+      },
+      "native_dims": [
+        768,
+        1360
+      ],
+      "final_dims": [
+        720,
+        1280
+      ],
+      "approx_cost_usd": 0.04,
+      "status": "succeeded",
+      "moderated": false,
+      "qa": "v2: no text; couple facing, holding hands, eye contact, magenta dress + purple flower, white shirt"
+    },
+    {
+      "role": "hero-still",
+      "prediction_id": "8fvrgd1f5nrmr0d0s7srxpqgsg",
+      "model": "xai/grok-imagine-image",
+      "mode": "edit",
+      "source_image": "https://replicate.delivery/xezq/cWTiRA4OEeQ4TSnf2UPIxkM7sFTA7alBeDZSpDkvlz9L2LguA/tmp3imp5smz.jpg",
+      "output_url": "https://replicate.delivery/xezq/Du3eG95zOtXsLiL1HeljvuVAerVIjUoUevCqP01ST3eLcvA6C/tmpm2att6rs.jpg",
+      "paths": {
+        "raw_jpg": "/workspace/kaatrukulle/hero-still-raw.jpg",
+        "png": "/workspace/kaatrukulle/hero-still.png",
+        "png_720": "/workspace/kaatrukulle/hero-still-720.png"
+      },
+      "native_dims": [
+        768,
+        1360
+      ],
+      "final_dims": [
+        720,
+        1280
+      ],
+      "approx_cost_usd": 0.02,
+      "status": "succeeded",
+      "moderated": false,
+      "qa": "Couple ~lower 25-30% (brief ~20%); empty cream upper sky; thin 8-12% floral borders; pigment drips OK"
+    },
+    {
+      "role": "plate1",
+      "prediction_id": "1tw05x1ef9rmt0d0s7sr1qft38",
+      "model": "xai/grok-imagine-image",
+      "mode": "edit",
+      "output_url": "https://replicate.delivery/xezq/bBK39fhYhhTiJ69DuP2F4k718LyRxsl8MmDe6ZPNl0nj7FQXA/tmpb1t0kevs.jpg",
+      "paths": {
+        "raw_jpg": "/workspace/kaatrukulle/plate1-raw.jpg",
+        "png_720": "/workspace/kaatrukulle/plate1.png"
+      },
+      "native_dims": [
+        768,
+        1360
+      ],
+      "final_dims": [
+        720,
+        1280
+      ],
+      "approx_cost_usd": 0.02,
+      "status": "succeeded",
+      "moderated": false
+    },
+    {
+      "role": "plate2",
+      "prediction_id": "qyafc8setsrmt0d0s7svzayb2r",
+      "model": "xai/grok-imagine-image",
+      "mode": "edit",
+      "output_url": "https://replicate.delivery/xezq/eBIyAguqePvn7k5ziWZ9SSOOsUu5ViRDjCP4wAJpLfHD3LguA/tmp7ftn91qh.jpg",
+      "paths": {
+        "raw_jpg": "/workspace/kaatrukulle/plate2-raw.jpg",
+        "png_720": "/workspace/kaatrukulle/plate2.png"
+      },
+      "native_dims": [
+        768,
+        1360
+      ],
+      "final_dims": [
+        720,
+        1280
+      ],
+      "approx_cost_usd": 0.02,
+      "status": "succeeded",
+      "moderated": false
+    }
+  ],
+  "spend_stills_approx_usd": 0.12,
+  "spend_used_approx_usd": 2.3,
+  "spend_remaining_approx_usd": 1.7,
+  "note": "6 image predictions billed (incl. superseded last v1); unit ~$0.02 list",
+  "note_total": "Includes hero+opening after pipeline complete"
+}
