@@ -36,7 +36,25 @@ type GenerateStatus={
  error?:string|null;
 };
 
+type MusicTrack={id:string;displayName:string;url:string;durationS:number};
+type Template1Status={
+ jobId:string;
+ status:string;
+ phase:string;
+ percent:number;
+ label:string;
+ detail?:string;
+ displayName?:string;
+ cloneId?:string|null;
+ demo?:string|null;
+ spend?:{budget:number;used:number;remaining:number};
+ palette?:{primary:string;secondary:string;cream:string}|null;
+ moderationStop?:boolean;
+ error?:string|null;
+};
+
 function kb(bytes:number){return Math.round(bytes/1024)+' KB'}
+function usd(value:number|undefined){return '$'+(Number(value)||0).toFixed(2)}
 function inboxPreviewUrl(name:string){return '/api/assembly?action=preview&file='+encodeURIComponent(name)}
 function PhoneVideo({src,poster,label,loop=false}:{src:string;poster?:string;label:string;loop?:boolean}){
  return (
@@ -87,6 +105,14 @@ export default function Assembly(){
  const [genJob,setGenJob]=useState<GenerateStatus|null>(null);
  const [assembleProgress,setAssembleProgress]=useState<{percent:number;label:string}|null>(null);
  const assembleTimer=useRef<ReturnType<typeof setInterval>|null>(null);
+ const [tracks,setTracks]=useState<MusicTrack[]>([]);
+ const [t1Pin,setT1Pin]=useState('');
+ const [t1Name,setT1Name]=useState('');
+ const [t1Groom,setT1Groom]=useState('Ashok');
+ const [t1Bride,setT1Bride]=useState('Supriya');
+ const [t1Music,setT1Music]=useState('');
+ const [t1Budget,setT1Budget]=useState('4');
+ const [t1Job,setT1Job]=useState<Template1Status|null>(null);
 
  useEffect(()=>{
   document.title='Assembly · FindMyInvite';
@@ -108,6 +134,16 @@ export default function Assembly(){
   if(!res.ok)throw new Error(body.error||'Could not list inbox.');
   setInbox(body.inbox||[]);
   if(body.path)setInboxPath(String(body.path));
+ }
+
+ async function loadTracks(){
+  const res=await fetch('/api/assembly?action=music-library',{credentials:'same-origin'});
+  const body=await res.json().catch(()=>({}));
+  if(res.status===401){setAuthed(false);return;}
+  if(!res.ok)throw new Error(body.error||'Could not load music library.');
+  const list:MusicTrack[]=body.tracks||[];
+  setTracks(list);
+  setT1Music(current=>current&&list.some(t=>t.id===current)?current:(list[0]?.id||''));
  }
 
  async function loadParents(preferId=''){
@@ -153,11 +189,84 @@ export default function Assembly(){
    setWritable(Boolean(status.writable));
    if(status.inbox)setInboxPath(String(status.inbox));
    await loadParents();
+   await loadTracks();
    if(status.writable)await loadInbox();
   }catch(err){
    setError(err instanceof Error?err.message:'Could not open Assembly.');
   }finally{
    setBusy(false);
+  }
+ }
+
+ useEffect(()=>{
+  if(!t1Job||t1Job.status!=='running')return;
+  const timer=setInterval(()=>{
+   void (async()=>{
+    try{
+     const res=await fetch('/api/assembly?action=template1-status&jobId='+encodeURIComponent(t1Job.jobId),{credentials:'same-origin'});
+     const body=await res.json().catch(()=>({}));
+     if(res.status===401){setAuthed(false);return;}
+     if(!res.ok)throw new Error(body.error||'Template 1 status failed.');
+     setT1Job(body);
+     if(body.status==='preview'){
+      await loadParents(parentId);
+      await loadPlan(parentId);
+     }
+     if(body.status==='failed')setError(body.error||'Template 1 failed.');
+    }catch(err){
+     setError(err instanceof Error?err.message:'Template 1 status failed.');
+    }
+   })();
+  },2500);
+  return()=>clearInterval(timer);
+ },[t1Job?.jobId,t1Job?.status]);
+
+ async function onTemplate1Start(){
+  const pin=t1Pin.trim();
+  if(!pin){setError('Paste the Pinterest pin URL.');return;}
+  if(!t1Name.trim()){setError('Give the clone a display name.');return;}
+  if(!t1Music){setError('Pick a tap track from the music library.');return;}
+  setBusy(true);
+  setError('');
+  try{
+   const res=await fetch('/api/assembly?action=template1-start',{
+    method:'POST',
+    credentials:'same-origin',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({
+     pinUrl:pin,
+     displayName:t1Name.trim(),
+     coupleNames:[t1Groom.trim(),t1Bride.trim()],
+     parentId,
+     musicId:t1Music,
+     budgetUsd:Number(t1Budget)||4
+    })
+   });
+   const body=await res.json().catch(()=>({}));
+   if(res.status===401){setAuthed(false);return;}
+   if(!res.ok)throw new Error(body.error||'Could not start Template 1.');
+   setT1Job({jobId:body.jobId,status:'running',phase:'queued',percent:0,label:'Queued…',spend:body.spend});
+  }catch(err){
+   setError(err instanceof Error?err.message:'Could not start Template 1.');
+  }finally{
+   setBusy(false);
+  }
+ }
+
+ async function onTemplate1Cancel(){
+  if(!t1Job)return;
+  try{
+   const res=await fetch('/api/assembly?action=template1-cancel',{
+    method:'POST',
+    credentials:'same-origin',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({jobId:t1Job.jobId})
+   });
+   const body=await res.json().catch(()=>({}));
+   if(!res.ok)throw new Error(body.error||'Cancel failed.');
+   setT1Job(body);
+  }catch(err){
+   setError(err instanceof Error?err.message:'Cancel failed.');
   }
  }
 
@@ -345,7 +454,9 @@ export default function Assembly(){
 
  const parent=parents.find(item=>item.id===parentId);
  const generating=Boolean(genJob&&genJob.status!=='done'&&genJob.status!=='error');
- const canAssemble=Boolean(writable&&!busy&&!generating&&parentId&&opening&&plan);
+ const t1Running=Boolean(t1Job&&t1Job.status==='running');
+ const canAssemble=Boolean(writable&&!busy&&!generating&&!t1Running&&parentId&&opening&&plan);
+ const canRunT1=Boolean(writable&&!busy&&!generating&&!t1Running&&parentId&&t1Pin.trim()&&t1Name.trim()&&t1Music);
 
  if(!authed){
   return (
@@ -420,6 +531,62 @@ export default function Assembly(){
          </Button>
         </div>
        </>
+      )}
+     </CardContent>
+    </Card>
+
+    <Card>
+     <CardHeader>
+      <CardTitle>Template 1 — one pin → preview clone</CardTitle>
+      <CardDescription>Pin → stills + videos (Replicate / xAI) → mute + 3s hold → assemble on the parent above. Stops at preview. Publish stays with Akay.</CardDescription>
+     </CardHeader>
+     <CardContent className="space-y-3">
+      <Input
+       type="url"
+       placeholder="https://pin.it/… or https://www.pinterest.com/pin/…"
+       value={t1Pin}
+       disabled={!writable||busy||t1Running}
+       onChange={e=>setT1Pin(e.target.value)}
+       aria-label="Template 1 pin URL"
+      />
+      <div className="grid gap-2 sm:grid-cols-2">
+       <Input maxLength={80} placeholder="Display name (e.g. Kaatrukulle)" value={t1Name} disabled={!writable||busy||t1Running} onChange={e=>setT1Name(e.target.value)} aria-label="Template 1 display name"/>
+       <Select value={t1Music} disabled={!writable||busy||t1Running} onChange={e=>setT1Music(e.target.value)} aria-label="Template 1 tap music">
+        {!tracks.length&&<option value="">No library tracks</option>}
+        {tracks.map(track=><option key={track.id} value={track.id}>{track.displayName}{track.durationS?' · '+Math.round(track.durationS)+'s':''}</option>)}
+       </Select>
+      </div>
+      <div className="grid gap-2 sm:grid-cols-3">
+       <Input maxLength={40} placeholder="Groom" value={t1Groom} disabled={!writable||busy||t1Running} onChange={e=>setT1Groom(e.target.value)} aria-label="Template 1 groom name"/>
+       <Input maxLength={40} placeholder="Bride" value={t1Bride} disabled={!writable||busy||t1Running} onChange={e=>setT1Bride(e.target.value)} aria-label="Template 1 bride name"/>
+       <Input type="number" min={0.5} max={50} step={0.5} value={t1Budget} disabled={!writable||busy||t1Running} onChange={e=>setT1Budget(e.target.value)} aria-label="Template 1 budget USD"/>
+      </div>
+      <div className="flex flex-wrap gap-2">
+       <Button type="button" disabled={!canRunT1} onClick={()=>void onTemplate1Start()}>{t1Running?'Running…':'Run Template 1'}</Button>
+       {t1Running&&<Button type="button" variant="outline" onClick={()=>void onTemplate1Cancel()}>Cancel after current step</Button>}
+      </div>
+      {t1Job&&(
+       <div className="space-y-2 rounded-md border p-2" role="status" data-testid="template1-status">
+        <Progress value={t1Job.percent} label={t1Job.label}/>
+        {t1Job.detail&&<p className="text-xs text-muted-foreground">{t1Job.detail}</p>}
+        <p className="text-xs">
+         Spend {usd(t1Job.spend?.used)} of {usd(t1Job.spend?.budget)} · remaining {usd(t1Job.spend?.remaining)}
+         {t1Job.palette&&<span className="ml-2 inline-flex items-center gap-1 align-middle">
+          <i className="inline-block size-3 rounded-full border" style={{background:t1Job.palette.primary}} aria-label={'Primary '+t1Job.palette.primary}/>
+          <i className="inline-block size-3 rounded-full border" style={{background:t1Job.palette.secondary}} aria-label={'Secondary '+t1Job.palette.secondary}/>
+          <i className="inline-block size-3 rounded-full border" style={{background:t1Job.palette.cream}} aria-label={'Paper '+t1Job.palette.cream}/>
+         </span>}
+        </p>
+        {t1Job.moderationStop&&<p className="text-xs text-amber-800">Moderation stop — no auto-retry. Adjust the brief and run again.</p>}
+        {t1Job.status==='preview'&&t1Job.demo&&(
+         <div className="flex flex-wrap items-center gap-2">
+          <Button type="button" size="sm" asChild>
+           <a href={t1Job.demo} target="_blank" rel="noreferrer">{t1Job.displayName||t1Job.cloneId} preview <ExternalLink className="size-3.5"/></a>
+          </Button>
+          <span className="text-xs text-muted-foreground">Preview the clone, then tell Akay: notes / regen / Publish.</span>
+         </div>
+        )}
+       </div>
       )}
      </CardContent>
     </Card>

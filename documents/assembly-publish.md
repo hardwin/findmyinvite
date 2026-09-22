@@ -81,6 +81,18 @@ Section plates are **borders around copy**, not theater scenery. When generating
 
 Transport + Accommodation + Gifts share **one** clustered plate. Do not put plates on Welcome / Our Moments / Timeline / Dress Code / RSVP / footer unless Ashok asks.
 
+## Template 1 — one pin → preview clone (programmatic lane)
+
+`/assembly` top card **Template 1**. Inputs: pin URL, display name, couple names, parent (default `royal-heritage-7`), music-library track, budget (default $4). One click runs:
+
+1. **pin** — resolve pin → `pin-ref.jpg`, sample palette (primary / secondary / paper) for the theme.
+2. **gen** — Replicate `xai/grok-imagine-image` stills (FIRST, LAST + no-text QA with one regen, plate1, plate2 in parallel), then hero still → Replicate `xai/grok-imagine-video-1.5` 6s loop **in parallel with** xAI `grok-imagine-video-1.5` 12s opening (`image`=FIRST, `last_frame`=LAST). Prompts: `server/assembly-template1-prompts.mjs` (defaults are the wire-proven Kaatrukulle strings). Budget gate before every call; **first moderated video stops the job** (no auto-retry).
+3. **craft** — mute (`-an`), +3s last-frame hold, plates → `{id}-section-1..5.jpg`, music copied from `cms/music-library.json` (never muxed). ffprobe must show 0 audio streams or craft fails closed.
+4. **assemble** — dry-run then real `assemblePremium`, theme CSS block, `previewDefaults`, `music` + `musicName`, `musicTracks`, editor option. Reserved slots come from the `// reserved:` line in `src/data.ts`.
+5. **preview** — demo link + spend line. Publish stays with Akay per this playbook.
+
+Local / CloudAgent only (`fsWritesAllowed()`, ffmpeg, `XAI_API_KEY`, `REPLICATE_API_TOKEN`; `OPENAI_API_KEY` optional for the no-text QA). Job scratch under `work/assembly-jobs/{jobId}/` (gitignored). Headless: `node scripts/assemble-template1.mjs --pin … --name … --music vazhithunaiye`.
+
 ## Out of scope
 
 - Auto-push from the Assembly button  

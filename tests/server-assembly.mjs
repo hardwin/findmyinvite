@@ -60,6 +60,10 @@ test('registry patch helpers insert premium ids without duplicating',async()=>{
  const core=await readFile(new URL('../server/core.mjs',import.meta.url),'utf8');
  const ids=knownTemplateIds(data);
  assert.equal(ids.has('royal-heritage'),true);
+ assert.equal(ids.has('royal-heritage-10'),true,'reserved slot 10 stays off the allocator');
+ assert.equal(ids.has('royal-heritage-11'),true,'reserved slot 11 stays off the allocator');
+ assert.deepEqual(nextCloneIds('royal-heritage-7',1,ids),['royal-heritage-13']);
+ assert.deepEqual(knownTemplateIds("// reserved: royal-heritage-40 (x), royal-heritage-41\nconst premiumIds=new Set(['a']);"),new Set(['a','royal-heritage-40','royal-heritage-41']));
  assert.match(data,/id:'royal-heritage-8',name:'Sita Kalyanam'/);
  assert.match(data,/id:'royal-heritage-8'[^}]*music:'royal-heritage-8-music\.mp3'/);
  assert.match(data,/id:'royal-heritage-9',name:'Velicha Poove'/);

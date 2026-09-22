@@ -8,7 +8,8 @@
     "build": "node --use-system-ca --preserve-symlinks --preserve-symlinks-main node_modules/typescript/bin/tsc --noEmit && node --use-system-ca --preserve-symlinks --preserve-symlinks-main run.mjs --build",
     "preview": "node --use-system-ca --preserve-symlinks --preserve-symlinks-main preview.mjs",
     "test:server": "node --use-system-ca --preserve-symlinks --preserve-symlinks-main --test tests/server*.mjs",
-    "assemble:premium": "node --use-system-ca --preserve-symlinks --preserve-symlinks-main scripts/assemble-premium.mjs"
+    "assemble:premium": "node --use-system-ca --preserve-symlinks --preserve-symlinks-main scripts/assemble-premium.mjs",
+    "assemble:template1": "node --preserve-symlinks --preserve-symlinks-main scripts/assemble-template1.mjs"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.23",

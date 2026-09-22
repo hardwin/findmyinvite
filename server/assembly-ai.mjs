@@ -357,26 +357,29 @@ export async function downloadVideoBuffer(url,{fetchImpl=fetch,headers}={}){
  return buffer;
 }
 
-export async function runXaiImagineVideo({lastFrame,lastFrameUrl,prompt,duration,env=process.env,fetchImpl=fetch,onTick,sleepImpl=sleep}={}){
+export async function runXaiImagineVideo({lastFrame,lastFrameUrl,image,prompt,duration,env=process.env,fetchImpl=fetch,onTick,sleepImpl=sleep}={}){
  const key=xaiAuth(env);
  const frame=lastFrame&&(lastFrame.url||lastFrame.file_id)
   ?lastFrame
   :(lastFrameUrl?{url:String(lastFrameUrl)}:null);
  if(!frame?.url&&!frame?.file_id)throw new HttpError(400,'Opening last_frame image is missing.');
+ const body={
+  model:XAI_VIDEO_MODEL,
+  prompt:String(prompt||'').trim(),
+  last_frame:frame.url?{url:frame.url}:{file_id:frame.file_id},
+  duration:Number(duration)||OPENING_DURATION,
+  aspect_ratio:'9:16',
+  resolution:'720p'
+ };
+ // Template 1 sends the FIRST still as `image` so the clip starts on closed doors and ends on the pin frame.
+ if(image&&(image.url||image.file_id))body.image=image.url?{url:image.url}:{file_id:image.file_id};
  const create=await fetchImpl(XAI_VIDEO_GENERATIONS,{
   method:'POST',
   headers:{
    Authorization:'Bearer '+key,
    'Content-Type':'application/json'
   },
-  body:JSON.stringify({
-   model:XAI_VIDEO_MODEL,
-   prompt:String(prompt||'').trim(),
-   last_frame:frame.url?{url:frame.url}:{file_id:frame.file_id},
-   duration:Number(duration)||OPENING_DURATION,
-   aspect_ratio:'9:16',
-   resolution:'720p'
-  })
+  body:JSON.stringify(body)
  });
  const created=await create.json().catch(()=>({}));
  if(!create.ok){
@@ -408,15 +411,18 @@ export async function runXaiImagineVideo({lastFrame,lastFrameUrl,prompt,duration
   throw new HttpError(502,'Opening video generation failed: '+detail);
  }
  const videoUrl=result.video?.url||result.url||'';
+ const respectModeration=result.video?.respect_moderation??result.respect_moderation;
  if(!videoUrl){
-  if(result.video&&result.video.respect_moderation===false)throw new HttpError(502,'Opening video was blocked by moderation.');
+  if(respectModeration===false)throw new HttpError(502,'Opening video was blocked by moderation.');
   throw new HttpError(502,'Opening video generation returned no file.');
  }
+ if(respectModeration===false)throw new HttpError(502,'Opening video was blocked by moderation.');
  const buffer=await downloadVideoBuffer(videoUrl,{
   fetchImpl,
   headers:{Authorization:'Bearer '+key}
  });
- return {buffer,url:videoUrl,requestId};
+ const ticks=Number(result.usage?.cost_in_usd_ticks);
+ return {buffer,url:videoUrl,requestId,costUsd:Number.isFinite(ticks)&&ticks>0?ticks/1e10:null,respectModeration};
 }
 
 export async function runGrokImagineVideo({imageUrl,prompt,duration,env=process.env,fetchImpl=fetch,onTick}={}){

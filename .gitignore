@@ -15,3 +15,4 @@ workspace-grapes*
 
 work/assembly-inbox/*
 !work/assembly-inbox/.gitkeep
+work/assembly-jobs/

@@ -13,6 +13,8 @@ import {
  ROOT
 } from '../server/assembly.mjs';
 import {startGeneratePair,getGenerateJob} from '../server/assembly-ai.mjs';
+import {startTemplate1Job,getTemplate1Job,listTemplate1Jobs,cancelTemplate1Job} from '../server/assembly-template1.mjs';
+import {listMusicLibrary} from '../server/music-library.mjs';
 import {readFile} from 'node:fs/promises';
 import {createReadStream} from 'node:fs';
 import {join} from 'node:path';
@@ -158,6 +160,37 @@ export default async function handler(req,res){
    const job=getGenerateJob(jobId);
    if(!job)throw new HttpError(404,'Generate job not found.');
    return respond(res,200,job);
+  }
+
+  if(action==='music-library'){
+   method(req,['GET']);
+   if(!sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
+   return respond(res,200,{tracks:await listMusicLibrary()});
+  }
+
+  if(action==='template1-start'){
+   method(req,['POST']);
+   if(!sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
+   if(!fsWritesAllowed())throw new HttpError(503,'Template 1 runs locally only. Use this desk on your Cursor machine or CloudAgent.');
+   const body=await bodyJson(req,16384);
+   return respond(res,200,startTemplate1Job(body));
+  }
+
+  if(action==='template1-status'){
+   method(req,['GET']);
+   if(!sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
+   const jobId=String(url.searchParams.get('jobId')||'');
+   if(!jobId)return respond(res,200,{jobs:listTemplate1Jobs()});
+   const job=getTemplate1Job(jobId);
+   if(!job)throw new HttpError(404,'Template 1 job not found.');
+   return respond(res,200,job);
+  }
+
+  if(action==='template1-cancel'){
+   method(req,['POST']);
+   if(!sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
+   const body=await bodyJson(req,4096);
+   return respond(res,200,cancelTemplate1Job(String(body.jobId||'')));
   }
 
   throw new HttpError(404,'Not found.');

@@ -28,6 +28,8 @@ export function knownTemplateIds(source){
  const premium=source.match(/premiumIds\s*=\s*new Set\(\[([^\]]*)\]\)/);
  if(premium)for(const m of premium[1].matchAll(/'([a-z0-9-]+)'/g))ids.add(m[1]);
  for(const m of source.matchAll(/\bid:'([a-z0-9-]+)'/g))ids.add(m[1]);
+ // `// reserved: royal-heritage-10 (PR #24), royal-heritage-11 (PR #25)` keeps slots held by open draft PRs off the allocator.
+ for(const line of source.matchAll(/\/\/\s*reserved:\s*([^\n]*)/gi))for(const m of line[1].matchAll(/\b([a-z0-9]+(?:-[a-z0-9]+)*-\d+)\b/g))ids.add(m[1]);
  return ids;
 }
 
