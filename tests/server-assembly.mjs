@@ -123,28 +123,40 @@ test('assemble dry-run requires opening for a new clone and never mutates parent
   ()=>assemblePremium({parentId:'royal-prestige-2',videos:[],names:['X'],dryRun:true}),
   /opening video/i
  );
+ const opening='public/assets/royal-prestige-2.mp4';
+ const hero='public/assets/royal-prestige-2-hero.mp4';
  const result=await assemblePremium({
   parentId:'royal-prestige-2',
-  opening:'alt-a.mp4',
-  hero:'smoke-alt.mp4',
+  opening,
+  hero,
   names:['Royal Heritage Next'],
   dryRun:true
  });
  assert.equal(result.dryRun,true);
  assert.equal(result.mode,'clone');
- assert.equal(result.opening,'alt-a.mp4');
- assert.equal(result.hero,'smoke-alt.mp4');
+ assert.equal(result.opening,opening);
+ assert.equal(result.hero,hero);
  assert.equal(result.clones.length,1);
- assert.match(result.clones[0].id,/^royal-heritage-\d+$/);
+ assert.match(result.clones[0].id,/^royal-prestige-\d+$/);
 });
 
 test('resolveInboxPreview only serves safe inbox filenames',async()=>{
- const {resolveInboxPreview}=await import('../server/assembly.mjs');
+ const {mkdir,writeFile,unlink}=await import('node:fs/promises');
+ const {join}=await import('node:path');
+ const {resolveInboxPreview,INBOX_DIR}=await import('../server/assembly.mjs');
  await assert.rejects(()=>resolveInboxPreview('../package.json'),/video files|Invalid/i);
- const preview=await resolveInboxPreview('alt-a.mp4');
- assert.equal(preview.name,'alt-a.mp4');
- assert.ok(preview.bytes>0);
- assert.match(preview.type,/video\//);
+ await mkdir(INBOX_DIR,{recursive:true});
+ const name='ci-preview.mp4';
+ const path=join(INBOX_DIR,name);
+ await writeFile(path,Buffer.from('ci'));
+ try{
+  const preview=await resolveInboxPreview(name);
+  assert.equal(preview.name,name);
+  assert.ok(preview.bytes>0);
+  assert.match(preview.type,/video\//);
+ }finally{
+  await unlink(path).catch(()=>{});
+ }
 });
 
 test('assembly API requires Akay session',async()=>{

@@ -11,8 +11,8 @@ Written 2026-09-15. Overwrite in place when facts change.
 | Repo | https://github.com/hardwin/findmyinvite.git — **public**, `main` only |
 | Live | https://findmyinvite.com (= https://findmyinvite.vercel.app) |
 | v0.9.0 handoff SHA | tag `v0.9.0` → `84416179b8d85486eea0fcc0e219f994be9bf3ab` |
-| Serving production commit (2026-09-15 18:10 UTC) | `09971d52244b04bb0238b0691675777d61b2174d` — `/akay` desk live; later `main` pushes also deploy |
-| Live bundle | `/assets/index-TRMUVIGW.js` (changes with every push to `main`) |
+| Serving production commit (2026-09-23) | `51ed3f8` FMI v1.0 — Premium is Sita / Velicha / Rosu; later `main` pushes also deploy |
+| Live bundle | `/assets/index-fwDriuoe.js` (changes with every push to `main`) |
 | Prod Supabase | `qqvcptjkfcjkwbkookcm` (Mumbai) |
 | Not this product | Zareqia Supabase `ganphjxofavzmxzsecij` |
 | Vercel project (handoff) | `prj_ZPOw3XYQTehO9AVbkp8JyZEhke76` / team `team_xFQvLGR6rRhSUyAtItzx8b24` |
