@@ -541,6 +541,11 @@ export default function Assembly(){
       <CardDescription>Pin → stills + videos (Replicate / xAI) → mute + 3s hold → assemble on the parent above. Stops at preview. Publish stays with Akay.</CardDescription>
      </CardHeader>
      <CardContent className="space-y-3">
+      {!writable&&(
+       <p className="rounded-md border border-amber-200 bg-amber-50 px-2 py-1.5 text-xs text-amber-900" role="status">
+        Template 1 needs ffmpeg + repo writes, so it runs on Akay's CloudAgent or your Cursor machine — not on findmyinvite.com. This card is a read-only view of the flow here; tell Akay “run Template 1” with a pin to start a job.
+       </p>
+      )}
       <Input
        type="url"
        placeholder="https://pin.it/… or https://www.pinterest.com/pin/…"
