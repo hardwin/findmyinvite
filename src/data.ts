@@ -39,7 +39,7 @@ export const templates = [
  {id:'royal-heritage-9',name:'Velicha Poove',description:'Timeless cinematic opening with regal heritage storytelling',image:'royal-heritage-9.jpg',video:'royal-heritage-9.mp4',heroVideo:'royal-heritage-9-hero.mp4',music:'royal-heritage-9-music.mp3',badge:'New',royal:true,tier:'premium' as GalleryTier,color:'#9B2158'},
  // Reserved lineage slot id:'royal-heritage-10' — Spiderverse (PR #24, not on main).
  // Reserved lineage slot id:'royal-heritage-11' — KTM couple White (PR #25, not on main). Next heritage clone is 12.
- {id:'royal-heritage-12',name:'Kaatrukulle',description:'Timeless cinematic opening with regal heritage storytelling',image:'royal-heritage-12.jpg',video:'royal-heritage-12.mp4',heroVideo:'royal-heritage-12-hero.mp4',music:'royal-heritage-12-music.mp3',badge:'New',royal:true,tier:'premium' as GalleryTier,color:'#9B2158'},
+ {id:'royal-heritage-12',name:'Kaatrukulle',description:'Timeless cinematic opening with regal heritage storytelling',image:'royal-heritage-12.jpg',video:'royal-heritage-12.mp4',heroVideo:'royal-heritage-12-hero.mp4',music:'royal-heritage-12-music.mp3',musicName:'Vazhithunaiye',badge:'New',royal:true,tier:'premium' as GalleryTier,color:'#9B2158'},
  {id:'royal-grace',name:'Royal Grace',description:'Sage garden serenity with pearl drapes and graceful cinematic reveal',image:'eaaba0b5d7aeba99.jpg',video:'royal-grace.mp4',badge:'New',royal:true,tier:'elite' as GalleryTier,color:'#59634b'},
  {id:'royal-crest',name:'Royal Crest',description:'Warm ivory florals, antique burgundy wax seal, and lakeside cinematic romance',image:'15cbf1df9056e121.jpg',video:'royal-crest.mp4',badge:'New',royal:true,tier:'premium' as GalleryTier,color:'#713647'},
  {id:'royal-legacy',name:'Royal Legacy',description:'Burgundy velvet curtains, antique gold ornament, and a timeless cinematic reveal',image:'58bf76a6b043df9f.jpg',video:'royal-legacy.mp4',badge:'New',royal:true,tier:'elite' as GalleryTier,color:'#581d2c'},
@@ -53,6 +53,9 @@ export const templates = [
 export function catalogMusicUrl(template:{id:string;royal?:boolean;music?:string}){
  if(template.music)return template.music.startsWith('/')?template.music:'/assets/'+template.music;
  return template.royal||template.id==='ivory-elegance'?'/assets/track3.mp3':'/assets/track1.mp3';
+}
+export function catalogMusicName(template:{musicName?:string;name?:string}){
+ return String(template.musicName||'').trim()||'';
 }
 export const features=[['infinity','Share to Unlimited Guests','One link, infinite reach — no per-guest charges, ever.'],['pen','Unlimited Edits Until the Event Date','Refine every detail right up to your big day.'],['hand','Scratch to Reveal Date','Interactive scratch card reveals the event date with a delightful surprise.'],['timer','Live Countdown','Animated countdown timer to your special day.'],['inbox','Guest Messaging & Inbox','Receive messages, attendance confirmations & guest counts.'],['music','Background Music','Romantic instrumentals with elegant mute toggle.'],['map','Venue with Maps','Embedded Google Maps for seamless directions.'],['wand','Premium Animations','3D door reveals, curtains, sparkles & more.'],['image','Custom Image Upload','Upload slideshow photos & hero background images.'],['brush','Full Customization','Toggle sections, dress codes, events & more.']];
 export const classicBenefits=['Access to FindMyInvite Classic Invitations','5 Premium Animated Templates','1 Invitation Webpage','Unlimited Edits Until Event Date','Buy More Invitations Anytime (Add-On)','Guest Messaging & Inbox','Music, Photos & Custom Uploads','Google Maps & Multi-Language Support','Analytics & Page View Tracking','Automatic Privacy Protection After the Event'];
