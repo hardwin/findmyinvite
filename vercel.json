@@ -21,6 +21,7 @@
       "maxDuration": 300
     },
     "api/assembly.mjs": {
+      "includeFiles": "{src/data.ts,cms/music-library.json}",
       "maxDuration": 300,
       "memory": 1024
     }
