@@ -93,6 +93,20 @@ Transport + Accommodation + Gifts share **one** clustered plate. Do not put plat
 
 Local / CloudAgent only (`fsWritesAllowed()`, ffmpeg, `XAI_API_KEY`, `REPLICATE_API_TOKEN`; `OPENAI_API_KEY` optional for the no-text QA). Job scratch under `work/assembly-jobs/{jobId}/` (gitignored). Headless: `node scripts/assemble-template1.mjs --pin … --name … --music vazhithunaiye`.
 
+### Run Template 1 on Ashok's machine
+
+```bash
+git checkout main && git pull origin main
+npm ci
+ffmpeg -version && ffprobe -version        # install ffmpeg if missing
+printf 'XAI_API_KEY=…\nREPLICATE_API_TOKEN=…\nOPENAI_API_KEY=…\n' >> .env.local   # never commit
+npm run dev                                 # or: node run.mjs
+```
+
+Open `http://127.0.0.1:5173/assembly` → same code as `/akay` → **Template 1** card: pin `https://pin.it/330nC70it`, display name, Ashok / Supriya, music **Vazhithunaiye**, budget 4 → **Run Template 1**. Progress, spend and palette update live; a moderation stop ends the job with no retry. Preview link appears at the end (`/invite/demo?template=royal-heritage-N`).
+
+Then hand the result to Akay for the PR: `git status` shows the new `public/assets/{id}*`, registries and `supabase/013_assembly_*.sql`. Commit those only (never `work/assembly-inbox`, `work/assembly-jobs`, `.env*`), push a branch, and say **Publish** when the preview is accepted.
+
 ## Out of scope
 
 - Auto-push from the Assembly button  
