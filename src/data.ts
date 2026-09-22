@@ -7,7 +7,8 @@ export const galleryTierBlurb:Record<GalleryTier,string>={
  elite:'Elevated Royal designs with distinctive ceremony atmospheres.',
  free:'Elegant animated Classic invitations for every occasion.'
 };
-const premiumIds=new Set(['rose-gold-blush-royal','royal-majesty','modern-minimal-royal','royal-prestige','royal-heritage','royal-crest','royal-heritage-1','royal-heritage-2','royal-heritage-3','royal-heritage-4','royal-heritage-5','royal-heritage-6','royal-heritage-7','royal-heritage-8','royal-heritage-9']);
+const premiumIds=new Set(['rose-gold-blush-royal','royal-majesty','modern-minimal-royal','royal-prestige','royal-heritage','royal-crest','royal-heritage-1','royal-heritage-2','royal-heritage-3','royal-heritage-4','royal-heritage-5','royal-heritage-6','royal-heritage-7','royal-heritage-8','royal-heritage-9','royal-heritage-11']);
+// Reserved lineage slot id:'royal-heritage-10' — Spiderverse (PR #24, not on main). Next heritage clone is 11.
 export function galleryTierFor(id:string,royal=false):GalleryTier{
  if(premiumIds.has(id))return 'premium';
  if(royal)return 'elite';
@@ -37,6 +38,8 @@ export const templates = [
  {id:'royal-heritage-7',name:'Traditional Anime South',description:'Timeless cinematic opening with regal heritage storytelling',image:'royal-heritage-7.jpg',video:'royal-heritage-7.mp4',heroVideo:'royal-heritage-7-hero.mp4',badge:'New',royal:true,tier:'premium' as GalleryTier,color:'#884936'},
  {id:'royal-heritage-8',name:'Sita Kalyanam',description:'Timeless cinematic opening with regal heritage storytelling',image:'royal-heritage-8.jpg',video:'royal-heritage-8.mp4',heroVideo:'royal-heritage-8-hero.mp4',music:'royal-heritage-8-music.mp3',badge:'New',royal:true,tier:'premium' as GalleryTier,color:'#6E1A28'},
  {id:'royal-heritage-9',name:'Velicha Poove',description:'Timeless cinematic opening with regal heritage storytelling',image:'royal-heritage-9.jpg',video:'royal-heritage-9.mp4',heroVideo:'royal-heritage-9-hero.mp4',music:'royal-heritage-9-music.mp3',badge:'New',royal:true,tier:'premium' as GalleryTier,color:'#9B2158'},
+ // TODO music pending from Crafter — add music:'royal-heritage-11-music.mp3' when public/assets/royal-heritage-11-music.mp3 arrives. Do not mux into videos.
+ {id:'royal-heritage-11',name:'KTM couple White',description:'Timeless cinematic opening with regal heritage storytelling',image:'royal-heritage-11.jpg',video:'royal-heritage-11.mp4',heroVideo:'royal-heritage-11-hero.mp4',badge:'New',royal:true,tier:'premium' as GalleryTier,color:'#FF4EB8'},
  {id:'royal-grace',name:'Royal Grace',description:'Sage garden serenity with pearl drapes and graceful cinematic reveal',image:'eaaba0b5d7aeba99.jpg',video:'royal-grace.mp4',badge:'New',royal:true,tier:'elite' as GalleryTier,color:'#59634b'},
  {id:'royal-crest',name:'Royal Crest',description:'Warm ivory florals, antique burgundy wax seal, and lakeside cinematic romance',image:'15cbf1df9056e121.jpg',video:'royal-crest.mp4',badge:'New',royal:true,tier:'premium' as GalleryTier,color:'#713647'},
  {id:'royal-legacy',name:'Royal Legacy',description:'Burgundy velvet curtains, antique gold ornament, and a timeless cinematic reveal',image:'58bf76a6b043df9f.jpg',video:'royal-legacy.mp4',badge:'New',royal:true,tier:'elite' as GalleryTier,color:'#581d2c'},
