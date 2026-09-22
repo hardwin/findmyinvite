@@ -111,7 +111,7 @@ test('draft rejects unsupported music and oversized text fields', () => {
   assert.equal(draftData({...partial, music: '/assets/temple/invite-bg.mp3'}, 'royal-temple').music, '/assets/temple/invite-bg.mp3');
   assert.equal(draftData({...partial, music: '/assets/royal-heritage-8-music.mp3'}, 'royal-heritage-8').music, '/assets/royal-heritage-8-music.mp3');
   assert.equal(draftData({...partial, music: '/assets/royal-heritage-9-music.mp3'}, 'royal-heritage-9').music, '/assets/royal-heritage-9-music.mp3');
-  assert.equal(draftData({...partial, music: '/assets/royal-heritage-12-music.mp3'}, 'royal-heritage-12').music, '/assets/royal-heritage-12-music.mp3');
+  assert.equal(draftData({...partial, music: '/assets/vazhithunaiye.mp3'}, 'royal-heritage-12').music, '/assets/vazhithunaiye.mp3');
   invalid(() => draftData({...partial, music: 'https://evil.example/a.mp3'}, 'emerald-noir'));
   invalid(() => draftData({...partial, bride: 'x'.repeat(101)}, 'emerald-noir'));
 });

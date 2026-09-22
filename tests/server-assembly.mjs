@@ -226,12 +226,12 @@ test('royal-heritage-12 parks Kaatrukulle overlay in the sky with Velicha palett
  const invite=await readFile(new URL('../src/Invitation.tsx',import.meta.url),'utf8');
  const data=await readFile(new URL('../src/data.ts',import.meta.url),'utf8');
  assert.match(data,/id:'royal-heritage-12',name:'Kaatrukulle'/);
- assert.match(data,/id:'royal-heritage-12'[^}]*music:'royal-heritage-12-music\.mp3'/);
+ assert.match(data,/id:'royal-heritage-12'[^}]*music:'vazhithunaiye\.mp3'/);
  assert.match(data,/id:'royal-heritage-12'[^}]*musicName:'Vazhithunaiye'/);
  const app=await readFile(new URL('../src/App.tsx',import.meta.url),'utf8');
  assert.match(app,/catalogMusicName/);
  assert.match(app,/Vazhithunaiye/);
- assert.equal(app.includes('value="/assets/royal-heritage-12-music.mp3"'),true);
+ assert.equal(app.includes('value="/assets/vazhithunaiye.mp3"'),true);
  assert.match(css,/\.invitation-page\.theme-royal-heritage-12 \.couple-overlay\{[^}]*justify-content:center/);
  assert.match(css,/\.invitation-page\.theme-royal-heritage-12 \.couple-overlay\{[^}]*text-align:center/);
  assert.match(css,/\.invitation-page\.theme-royal-heritage-12 \.couple-overlay\{[^}]*padding:4svh 13% 50svh 13%/);
