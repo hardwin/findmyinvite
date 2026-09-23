@@ -8,6 +8,10 @@ Soul: [akay-soul.md](akay-soul.md) · standing facts: [project-context.md](proje
 
 Read this before `docs/handoff/STATUS.md`. The v0.9.0 handoff is the frozen baseline; this file is the current truth after that tag.
 
+## Hero name blur-in (2026-09-24)
+
+Couple names on the hero video overlay use Magic UI `TextAnimate` (`blurIn`, character stagger) when the overlay mounts after opening→hero handoff. Lazy-loaded; skipped for reduced-motion.
+
 ## Scratch reveal confetti + HyperText (2026-09-24)
 
 On Scratch-to-Reveal clear: theme-colored side cannons (3s, `canvas-confetti`) + gold star/circle bursts. Colors from `--invite-color`. After reveal, Magic UI `HyperText` scramble draws attention to the date (lazy-loaded; skipped for reduced-motion).

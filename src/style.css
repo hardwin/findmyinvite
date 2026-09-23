@@ -69,3 +69,5 @@ html{scroll-behavior:smooth;scroll-padding-top:80px}body{margin:0;background:#f8
 .invitation-page.invitation-open .invite-motifs{opacity:1}
 .invitation-page .sound-toggle,.invitation-page .language-toggle,.invitation-page .use-design{z-index:40}
 @media(prefers-reduced-motion:reduce){.invite-motifs{opacity:.4}}
+
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
