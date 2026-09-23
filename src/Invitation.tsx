@@ -21,7 +21,8 @@ const previewDefaults:Record<string,Partial<InviteData>>={
  'royal-prestige-1':{groom:'Ashok',bride:'Supriya',groomDetails:'Son of Mr. & Mrs. Hardwin',brideDetails:'Daughter of Mr. & Mrs. Rao'},
  'royal-prestige-2':{groom:'Ashok',bride:'Supriya',groomDetails:'Son of Mr. & Mrs. Hardwin',brideDetails:'Daughter of Mr. & Mrs. Rao'},
  'royal-prestige-3':{groom:'Ashok',bride:'Supriya',groomDetails:'Son of Mr. & Mrs. Hardwin',brideDetails:'Daughter of Mr. & Mrs. Rao'},
- 'royal-prestige-4':{groom:'Ashok',bride:'Supriya',groomDetails:'Son of Mr. & Mrs. Hardwin',brideDetails:'Daughter of Mr. & Mrs. Rao'}
+ 'royal-prestige-4':{groom:'Ashok',bride:'Supriya',groomDetails:'Son of Mr. & Mrs. Hardwin',brideDetails:'Daughter of Mr. & Mrs. Rao'},
+ 'royal-prestige-5':{groom:'Ashok',bride:'Supriya',groomDetails:'Son of Mr. & Mrs. Hardwin',brideDetails:'Daughter of Mr. & Mrs. Rao'}
 };
 const invitationKey='findmyinvite-invitations';
 function storedInvites(): unknown[]{const raw=JSON.parse(localStorage.getItem(invitationKey)||'[]');if(!Array.isArray(raw))throw new Error('Saved invitations could not be read. Existing data has been preserved.');return raw;}
