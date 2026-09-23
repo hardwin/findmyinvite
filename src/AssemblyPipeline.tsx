@@ -247,7 +247,16 @@ export default function AssemblyPipeline(){
       <p className="pipe-brand">Job {selected.jobId}</p>
       <h2>{selected.displayName||selected.cloneId||'Pipeline job'}</h2>
       <p className="lead">{selected.label} — {selected.detail}</p>
-      {selected.error&&<p className="pipe-alert" role="alert">{selected.error}</p>}
+      {selected.error&&(
+       <div className="pipe-section">
+        <h3>Error log</h3>
+        <pre className="pipe-error-log" role="alert">{selected.error}</pre>
+        <button type="button" className="pipe-ghost" style={{height:36}} onClick={()=>{
+         void navigator.clipboard?.writeText(String(selected.error||''));
+        }}>Copy error</button>
+       </div>
+      )}
+      {selected.error&&<p className="pipe-alert" role="alert" style={{display:'none'}}>{selected.error}</p>}
       <div className="pipe-links">
        {selected.previewUrl&&<a href={selected.previewUrl} target="_blank" rel="noreferrer">Preview (Vercel branch)</a>}
        {selected.githubUrl&&<a href={selected.githubUrl} target="_blank" rel="noreferrer">{selected.branch||'GitHub compare'}</a>}

@@ -377,14 +377,14 @@ export function applyWorkerPatch(body={}){
  if(typeof body.phase==='string')patch.phase=body.phase;
  if(Number.isFinite(Number(body.percent)))patch.percent=Math.max(0,Math.min(100,Number(body.percent)));
  if(typeof body.label==='string')patch.label=body.label.slice(0,200);
- if(typeof body.detail==='string')patch.detail=body.detail.slice(0,500);
+ if(typeof body.detail==='string')patch.detail=body.detail.slice(0,700);
  if(body.spend&&typeof body.spend==='object')patch.spend=body.spend;
  if(body.palette&&typeof body.palette==='object')patch.palette=body.palette;
  if(typeof body.cloneId==='string')patch.cloneId=body.cloneId;
  if(typeof body.demo==='string')patch.demo=body.demo;
  if(Array.isArray(body.written))patch.written=body.written.slice(0,80);
  if(body.moderationStop!=null)patch.moderationStop=Boolean(body.moderationStop);
- if(body.error===null||typeof body.error==='string')patch.error=body.error;
+ if(body.error===null||typeof body.error==='string')patch.error=body.error===null?null:body.error.slice(0,900);
  if(typeof body.branch==='string')patch.branch=body.branch;
  if(typeof body.githubUrl==='string')patch.githubUrl=body.githubUrl;
  if(typeof body.previewUrl==='string')patch.previewUrl=body.previewUrl;

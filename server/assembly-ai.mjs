@@ -15,6 +15,27 @@ export const XAI_VIDEO_MODEL='grok-imagine-video-1.5';
 export const XAI_VIDEO_GENERATIONS='https://api.x.ai/v1/videos/generations';
 const XAI_DATA_URI_MAX=4*1024*1024;
 
+function formatReplicateFailure(status,body){
+ const parts=[];
+ if(status)parts.push('HTTP '+status);
+ if(!body||typeof body!=='object'){
+  if(typeof body==='string'&&body.trim())parts.push(body.trim().slice(0,300));
+  return (parts.join(' — ')||'no provider body').slice(0,450);
+ }
+ if(typeof body.detail==='string')parts.push(body.detail);
+ else if(Array.isArray(body.detail)){
+  parts.push(body.detail.map(item=>{
+   if(typeof item==='string')return item;
+   if(item&&typeof item==='object')return String(item.msg||item.message||item.type||JSON.stringify(item));
+   return String(item);
+  }).filter(Boolean).join('; '));
+ }
+ if(typeof body.error==='string')parts.push(body.error);
+ if(typeof body.title==='string')parts.push(body.title);
+ if(typeof body.message==='string')parts.push(body.message);
+ return (parts.filter(Boolean).join(' — ')||'no provider body').slice(0,450);
+}
+
 export const CINEMATIC_PROMPT_WRITER=`Act as a cinematic invitation-video prompt writer. Study the attached image and produce a Gemini video-generation prompt tailored to it.
 
 OUTPUT
@@ -452,10 +473,12 @@ export async function runGrokImagineVideo({imageUrl,prompt,duration,env=process.
  });
  let prediction=await create.json().catch(()=>({}));
  if(!create.ok&&create.status!==201){
-  console.error('Replicate create failed',create.status,prediction);
-  throw new HttpError(502,'Video generation failed to start.');
+  const detail=formatReplicateFailure(create.status,prediction);
+  console.error('Replicate create failed',detail);
+  throw new HttpError(502,'Video generation failed to start: '+detail);
  }
  const id=prediction.id;
+ if(!id)throw new HttpError(502,'Video generation returned no prediction id: '+formatReplicateFailure(create.status,prediction));
  const started=Date.now();
  while(prediction.status==='starting'||prediction.status==='processing'||prediction.status==='queued'){
   if(typeof onTick==='function')onTick(prediction);
@@ -467,11 +490,11 @@ export async function runGrokImagineVideo({imageUrl,prompt,duration,env=process.
   prediction=await poll.json().catch(()=>({}));
   if(!poll.ok){
    console.error('Replicate poll failed',poll.status,prediction);
-   throw new HttpError(502,'Video generation status check failed.');
+   throw new HttpError(502,'Video generation status check failed: '+formatReplicateFailure(poll.status,prediction));
   }
  }
  if(prediction.status!=='succeeded'){
-  const detail=prediction.error||prediction.status||'unknown';
+  const detail=formatReplicateFailure(0,{error:prediction.error,status:prediction.status,detail:prediction.detail});
   console.error('Replicate prediction failed',detail);
   throw new HttpError(502,'Video generation failed: '+detail);
  }

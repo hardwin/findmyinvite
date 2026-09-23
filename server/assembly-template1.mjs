@@ -94,6 +94,7 @@ function view(job){
   spend:job.ledger?.snapshot?job.ledger.snapshot():(job.spend||null),
   palette:job.palette||null,
   assets:job.assets||{},
+  prompts:promptsForView(job.prompts),
   written:job.written||[],
   stills:stillsFromAssets(job),
   moderationStop:Boolean(job.moderationStop),
@@ -101,6 +102,15 @@ function view(job){
   createdAt:job.createdAt,
   updatedAt:job.updatedAt
  };
+}
+
+function promptsForView(prompts){
+ if(!prompts||typeof prompts!=='object')return null;
+ const out={};
+ for(const key of ['first','last','lastRegen','plate1','plate2','heroStill','heroVideo','opening','source']){
+  if(typeof prompts[key]==='string'&&prompts[key])out[key]=prompts[key];
+ }
+ return Object.keys(out).length?out:null;
 }
 
 function viewFromManifest(raw={}){

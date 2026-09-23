@@ -54,6 +54,30 @@ function replicateToken(env){
  return token;
 }
 
+/** Flatten Replicate / provider error bodies into an operator-readable snippet. */
+export function formatProviderError(status,body){
+ const parts=[];
+ if(status)parts.push('HTTP '+status);
+ if(!body||typeof body!=='object'){
+  if(typeof body==='string'&&body.trim())parts.push(body.trim().slice(0,300));
+  return (parts.join(' — ')||'no provider body').slice(0,450);
+ }
+ if(typeof body.detail==='string')parts.push(body.detail);
+ else if(Array.isArray(body.detail)){
+  parts.push(body.detail.map(item=>{
+   if(typeof item==='string')return item;
+   if(item&&typeof item==='object')return String(item.msg||item.message||item.type||JSON.stringify(item));
+   return String(item);
+  }).filter(Boolean).join('; '));
+ }
+ if(typeof body.error==='string')parts.push(body.error);
+ else if(body.error&&typeof body.error==='object')parts.push(String(body.error.message||JSON.stringify(body.error)));
+ if(typeof body.title==='string')parts.push(body.title);
+ if(typeof body.message==='string')parts.push(body.message);
+ if(typeof body.status==='string'&&body.status!=='succeeded')parts.push(body.status);
+ return (parts.filter(Boolean).join(' — ')||'no provider body').slice(0,450);
+}
+
 /** Replicate image edit (xai/grok-imagine-image): single prompt + source image URL, 9:16. */
 export async function runReplicateImage({prompt,image,env=process.env,fetchImpl=fetch,sleepImpl=sleep,onTick,role='still'}={}){
  const token=replicateToken(env);
@@ -65,30 +89,36 @@ export async function runReplicateImage({prompt,image,env=process.env,fetchImpl=
  });
  let prediction=await create.json().catch(()=>({}));
  if(!create.ok&&create.status!==201){
-  console.error('Replicate image create failed',create.status,prediction?.detail||prediction?.error||'');
-  throw new HttpError(502,role+' image generation failed to start.');
+  const detail=formatProviderError(create.status,prediction);
+  console.error('Replicate image create failed',role,detail);
+  throw new HttpError(502,role+' image generation failed to start: '+detail);
  }
  const id=prediction.id;
+ if(!id){
+  const detail=formatProviderError(create.status,prediction);
+  throw new HttpError(502,role+' image generation returned no prediction id: '+detail);
+ }
  const started=Date.now();
  while(prediction.status==='starting'||prediction.status==='processing'||prediction.status==='queued'){
   if(typeof onTick==='function')onTick(prediction);
-  if(Date.now()-started>8*60*1000)throw new HttpError(504,role+' image generation timed out.');
+  if(Date.now()-started>8*60*1000)throw new HttpError(504,role+' image generation timed out after 8m (last status: '+String(prediction.status||'?')+').');
   await sleepImpl(2000);
   const poll=await fetchImpl('https://api.replicate.com/v1/predictions/'+encodeURIComponent(id),{headers:{Authorization:'Bearer '+token}});
   prediction=await poll.json().catch(()=>({}));
   if(!poll.ok){
-   console.error('Replicate image poll failed',poll.status);
-   throw new HttpError(502,role+' image status check failed.');
+   const detail=formatProviderError(poll.status,prediction);
+   console.error('Replicate image poll failed',role,detail);
+   throw new HttpError(502,role+' image status check failed: '+detail);
   }
  }
  if(prediction.status!=='succeeded'){
-  const detail=String(prediction.error||prediction.status||'unknown');
+  const detail=formatProviderError(0,{error:prediction.error,status:prediction.status,detail:prediction.detail});
   if(/moderat|nsfw|safety|flagged|sensitive/i.test(detail))throw new ModerationError(role+' image was blocked by moderation: '+detail,role);
   throw new HttpError(502,role+' image generation failed: '+detail);
  }
  const out=prediction.output;
  const url=typeof out==='string'?out:Array.isArray(out)?out[0]:out?.url||'';
- if(!url)throw new HttpError(502,role+' image generation returned no file.');
+ if(!url)throw new HttpError(502,role+' image generation returned no file (prediction '+id+').');
  const buffer=await downloadVideoBuffer(url,{fetchImpl});
  return {buffer,url,predictionId:id,costUsd:COSTS.still};
 }

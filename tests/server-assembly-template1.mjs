@@ -224,6 +224,18 @@ test('runReplicateImage posts edit-mode body to xai/grok-imagine-image and downl
  assert.equal(result.costUsd,0.02);
 });
 
+test('runReplicateImage surfaces provider HTTP detail when create fails',async()=>{
+ const fetchImpl=async()=>({
+  ok:false,
+  status:422,
+  json:async()=>({detail:'Invalid input: image could not be downloaded from URL'})
+ });
+ await assert.rejects(
+  ()=>runReplicateImage({prompt:'x',image:'https://i.pinimg.com/a.jpg',env:{REPLICATE_API_TOKEN:'t'},fetchImpl,sleepImpl:async()=>{},role:'opening-first'}),
+  err=>/opening-first image generation failed to start:/.test(err.message)&&/HTTP 422/.test(err.message)&&/could not be downloaded/.test(err.message)
+ );
+});
+
 test('moderation on Replicate or xAI becomes a ModerationError (stop, no retry)',async()=>{
  const modFetch=async(url)=>{
   if(url.endsWith('/predictions'))return {ok:true,status:201,json:async()=>({id:'m1',status:'processing'})};

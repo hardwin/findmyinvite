@@ -96,6 +96,12 @@
 }
 .pipe-actions button.pipe-ghost{background:transparent;color:#8C4D90;border:1px solid rgba(140,77,144,.25)}
 .pipe-actions button:disabled{opacity:.45;cursor:not-allowed}
+.pipe-error-log{
+  margin:0;padding:12px;border-radius:12px;background:#fff;
+  border:1px solid rgba(155,33,88,.25);color:#9B2158;
+  font:12px/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  white-space:pre-wrap;word-break:break-word;max-height:220px;overflow:auto;
+}
 .pipe-pill-link{
   display:flex;align-items:center;justify-content:center;height:46px;border-radius:999px;
   background:#fff;color:#623325;border:1px solid rgba(140,77,144,.25);
