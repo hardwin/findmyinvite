@@ -103,8 +103,9 @@ test('GitHub lineage names stay on assembly/{cloneId}',()=>{
 
 test('worker boot installs ffmpeg then detaches the Template 1 worker',()=>{
  const cmd=workerBootCommand();
- assert.match(cmd,/apt-get install/);
- assert.match(cmd,/ffmpeg-release-amd64-static/);
+ assert.match(cmd,/ffmpeg-static/);
+ assert.match(cmd,/ffprobe-static/);
+ assert.match(cmd,/npm ci --omit=dev/);
  assert.match(cmd,/assembly-cloud-worker/);
  assert.match(cmd,/nohup/);
  assert.match(cmd,/heartbeat/);

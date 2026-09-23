@@ -33,7 +33,7 @@ After the `v1.5` tag: `/api/assembly` starts Template 1 on Vercel when `ASSEMBLY
 
 **2026-09-23 stall fix:** first live Ponmaalai jobs stuck at “worker starting” because the boot used silent `nohup` with no heartbeats and the serverless launch had no failure path. Fix: bash heartbeats during ffmpeg/npm boot, verify the worker PID stays alive, early progress callbacks from `assembly-cloud-worker.mjs`, return the job id under `waitUntil` while the sandbox stays up for the detached worker (sandbox timeout 2h — not the 800s function limit).
 
-**2026-09-23 ffmpeg boot:** Sandbox images lack `xz`, so the static `.tar.xz` extract failed (`Cannot exec: No such file or directory`). Boot now `apt-get install ffmpeg` first, then falls back to the static tarball after installing `xz-utils`.
+**2026-09-23 ffmpeg boot:** Sandbox images have no `apt`/`xz`, so both the apt path and the `.tar.xz` extract failed. Boot now `npm ci`s `ffmpeg-static` + `ffprobe-static` and links them onto `PATH`.
 
 ## /assembly — Premium intro clone desk (Approach B, local repo writes)
 

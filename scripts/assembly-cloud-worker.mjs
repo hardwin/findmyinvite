@@ -97,7 +97,11 @@ async function pushBranch(cloneId,written){
  return lineage;
 }
 
-const workerEnv={...env,ASSEMBLY_FS:'1'};
+const workerEnv={
+ ...env,
+ ASSEMBLY_FS:'1',
+ PATH:(env.HOME?env.HOME+'/bin:':'')+(env.PATH||'/usr/bin:/bin')
+};
 delete workerEnv.VERCEL;
 
 let started;
