@@ -9,7 +9,7 @@ Written 2026-09-15 after `/akay` shipped live. **This is the path that actually 
 | Site | https://findmyinvite.com (= https://findmyinvite.vercel.app) |
 | Repo | https://github.com/hardwin/findmyinvite.git · `main` only |
 | GitHub push identity | `akayatgit` (collaborator). Owner remains `hardwin`. |
-| Vercel | Hobby team `hardwins-projects`. No Pro, **cannot manage members**. Do not wait on Vercel MCP — it only sees `collegemap`. |
+| Vercel | **Pro** team `hardwins-projects` (confirmed Ashok 2026-09-23). Project `findmyinvite` `prj_ZPOw3XYQTehO9AVbkp8JyZEhke76`. Use Sandbox + longer functions for cloud Assembly. |
 | Prod Supabase | `qqvcptjkfcjkwbkookcm` (MCP must show this URL). Never Zareqia `ganphjxofavzmxzsecij`. |
 | Operator desk | https://findmyinvite.com/akay — not linked from public pages |
 
@@ -17,7 +17,7 @@ Written 2026-09-15 after `/akay` shipped live. **This is the path that actually 
 
 ## Two deploy lanes (do not confuse them)
 
-1. **Lane A — Vercel Git (use this).** GitHub repo is connected to the Vercel project. A push to `main` builds and aliases **production**. Hobby is enough. This is how `/akay` went live.
+1. **Lane A — Vercel Git (use this).** GitHub repo is connected to the Vercel project. A push to `main` builds and aliases **production**. Pro. This is how `/akay` went live. Cloud Assembly pushes `assembly/{cloneId}` only — that gets a **preview** deploy, not production.
 2. **Lane B — GitHub Actions `ci.yml` (later).** `ENABLE_PRODUCTION_DEPLOY` must be `true` for the Actions *deploy* job. While it is `false`, Actions only `npm ci`, `test:server`, and `build`. Leave this alone until GitHub access is finished. Do not flip the variable “to make Vercel work” — Vercel already works.
 
 A `[skip ci]` commit skips Actions verify; Vercel Git may still deploy it. Prefer a normal commit so tests run.
@@ -47,7 +47,7 @@ Catalog publish is a `template_catalog.published` flag, not a deploy.
 
 ## Do not
 
-- Deploy via Vercel MCP file-upload (`deploy_to_vercel`) — wrong project / Hobby, and it bypasses git.
+- Deploy via Vercel MCP file-upload (`deploy_to_vercel`) — wrong project risk, and it bypasses git.
 - Apply FMI SQL to `uzeclylqwivtpppzlqhk` or Zareqia.
 - Flip `ENABLE_PRODUCTION_DEPLOY` without Ashok (Lane B only).
 - Put `/akay` links on Home, header, or footer.

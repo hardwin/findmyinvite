@@ -16,6 +16,21 @@ Ashok closed v1.0 on `main`. Next public train is 1.9 or 2.0.
 - `/assembly` wizard: pin → song → first/last stills → **Proceed to generate (Rs. 499)** (no payment gateway yet) → preview. Newest Premium clone is always the default parent.
 - FIRST still: frame-filling pin-true door; handle is the hero.
 
+## v1.5 locked (2026-09-23)
+
+Laptop-era Assembly is a **success**. Tag `v1.5` on `main` at lock time. Do not treat unpublished RH8–RH12 clones as a v1.5 failure.
+
+- Premium clone desk + Template 1 run on the ThinkPad / Cursor / CloudAgent (`ffmpeg` + git tree writes).
+- Several cinematic clones sit assembled locally and **not published** (no `main` push, no Supabase apply) until Ashok says Publish.
+- **GTM blocker / v1.6:** `/assembly` on findmyinvite.com must run the same pipeline in a Vercel Pro Sandbox, push `assembly/{cloneId}` to GitHub, and open a Vercel preview — no ThinkPad.
+- **Vercel is Pro** (Ashok 2026-09-23). Hobby notes in older MCP dumps are stale.
+- GitHub `hardwin/findmyinvite` stays the template lineage (branch / fork / later vibe-code). GitHub Pro is optional, not a gate.
+- v1.6 is Akay's first reward. Soul: [akay-soul.md](akay-soul.md).
+
+## v1.6 cloud Assembly (code in tree, not live until push)
+
+After the `v1.5` tag: `/api/assembly` can start Template 1 on Vercel when `ASSEMBLY_CLOUD=1`. A Pro Sandbox runs the existing Template 1 pipeline, then pushes `assembly/{cloneId}` (never `main`). Progress lives in `assembly_jobs` (`supabase/014_assembly_jobs.sql`). Playbook: [assembly-publish.md](assembly-publish.md). Live prove on findmyinvite.com waits for SQL apply + Vercel keys + a `main` push (ask twice).
+
 ## /assembly — Premium intro clone desk (Approach B, local repo writes)
 
 Operator-only desk at `/assembly` (same Akay gate cookie as `/akay`). Clones a Premium cinematic template with 1..N alternate intro videos into the git tree the same way `royal-heritage-1/2/3` were made by hand:

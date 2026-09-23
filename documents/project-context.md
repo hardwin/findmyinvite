@@ -16,7 +16,8 @@ Written 2026-09-15. Overwrite in place when facts change.
 | Prod Supabase | `qqvcptjkfcjkwbkookcm` (Mumbai) |
 | Not this product | Zareqia Supabase `ganphjxofavzmxzsecij` |
 | Vercel project (handoff) | `prj_ZPOw3XYQTehO9AVbkp8JyZEhke76` / team `team_xFQvLGR6rRhSUyAtItzx8b24` |
-| Vercel team plan (2026-09-15 MCP) | **hobby** — P0 |
+| Vercel team plan (Ashok 2026-09-23) | **Pro** — Hobby notes from 2026-09-15 MCP are stale |
+| Product lock | **v1.5** (2026-09-23) · next **v1.6** cloud Assembly |
 
 ## Offer (live config 2026-09-15)
 
@@ -35,15 +36,15 @@ Written 2026-09-15. Overwrite in place when facts change.
 
 | MCP | Bound to now | FindMyInvite target | Gap |
 | --- | --- | --- | --- |
-| Supabase | **qqvcptjkfcjkwbkookcm** — `analytics_events` created 2026-09-15, RLS on, 0 rows | same | Bound. Hobby Vercel: no member admin. GitHub later. |
-| Vercel | team `hardwins-projects`, MCP still only **collegemap** | `prj_ZPOw3XYQTehO9AVbkp8JyZEhke76` findmyinvite | Work with Git GitHub→Vercel. No Pro members. |
+| Supabase | **qqvcptjkfcjkwbkookcm** | same | Bound. Operator tables stay off the guest invitation model. |
+| Vercel | team `hardwins-projects` **Pro** | `prj_ZPOw3XYQTehO9AVbkp8JyZEhke76` findmyinvite | GitHub→Vercel. Sandbox + preview deploys for Assembly. |
 | GitHub | git push as collaborator `akayatgit` works | Owner-level Actions variables | Later. |
 
 ## Deploy path
 
 **Authoritative:** [prod-push.md](prod-push.md).
 
-- Lane A (live): push `main` as `akayatgit` → Vercel Git production. Every push to `main` deploys production. Hobby. No member admin required. Ashok's word 2026-09-15: leave it as is.
+- Lane A (live): push `main` as `akayatgit` → Vercel Git production. Every push to `main` deploys production. **Pro**. Ashok's word 2026-09-15: leave the Git path as is. `assembly/*` branches preview only.
 - Lane B (later): GitHub Actions deploy job needs `ENABLE_PRODUCTION_DEPLOY=true`. Currently `false` = verify only. See `.github/workflows/ci.yml`. It does not gate production.
 - DDL: Supabase MCP on `qqvcptjkfcjkwbkookcm` only.
 - `/akay` access code is hardcoded in `server/akay-gate.mjs` (public repo). Ashok accepted 2026-09-15; change to an env var later.
