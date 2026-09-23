@@ -13,11 +13,12 @@ export function videoTransitionFor(templateId: string, hasHeroLoop: boolean): Vi
   return VIDEO_TRANSITION_PRESETS[hash % VIDEO_TRANSITION_PRESETS.length];
 }
 
-/** Handoff starts with 1s of opening left; copy waits this long after handoff. */
-export const VIDEO_TRANSITION_MS = 1000;
+/**
+ * Opening masters hold ~2s at the end. Start handoff at -2s and run the
+ * transition for those 2s so the pause is covered, then reveal couple copy.
+ */
+export const HANDOFF_LEAD_S = 2;
+export const VIDEO_TRANSITION_MS = 2000;
 
-/** Start priming the hero this many seconds before opening ends. */
-export const HERO_PRIME_S = 2.5;
-
-/** Start the CSS handoff this many seconds before opening ends. */
-export const HANDOFF_LEAD_S = 1;
+/** Prime hero under the opening before handoff begins. */
+export const HERO_PRIME_S = 3.5;

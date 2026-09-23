@@ -33,12 +33,12 @@ html{scroll-behavior:smooth;scroll-padding-top:80px}body{margin:0;background:#f8
 .invitation-hero.vt-wipe-up .cinematic-opening{transition:clip-path .75s cubic-bezier(.4,0,.2,1);clip-path:inset(0 0 0 0)}
 .invitation-hero.vt-wipe-up .cinematic-opening.is-spent{clip-path:inset(0 0 100% 0);opacity:1}
 .invitation-hero.vt-wipe-up .cinematic-hero-loop.is-live{opacity:1;transition:none}
-.invitation-hero.vt-iris .cinematic-opening{transition:clip-path 1s cubic-bezier(.4,0,.2,1);clip-path:circle(140% at 50% 50%)}
+.invitation-hero.vt-iris .cinematic-opening{transition:clip-path 2s cubic-bezier(.4,0,.2,1);clip-path:circle(140% at 50% 50%)}
 .invitation-hero.vt-iris .cinematic-opening.is-spent{clip-path:circle(0% at 50% 50%);opacity:1}
 .invitation-hero.vt-iris .cinematic-hero-loop.is-live{opacity:1;transition:none}
-.invitation-hero.vt-zoom-cross .cinematic-opening{transition:opacity 1s ease,transform 1s ease;transform-origin:center}
+.invitation-hero.vt-zoom-cross .cinematic-opening{transition:opacity 2s ease,transform 2s ease;transform-origin:center}
 .invitation-hero.vt-zoom-cross .cinematic-opening.is-spent{opacity:0;transform:scale(1.12)}
-.invitation-hero.vt-zoom-cross .cinematic-hero-loop{transition:opacity 1s ease,transform 1s ease;transform:scale(1.08)}
+.invitation-hero.vt-zoom-cross .cinematic-hero-loop{transition:opacity 2s ease,transform 2s ease;transform:scale(1.08)}
 .invitation-hero.vt-zoom-cross .cinematic-hero-loop.is-live{opacity:1;transform:scale(1)}
 .invitation-hero.vt-curtain .cinematic-opening{transition:clip-path .8s cubic-bezier(.4,0,.2,1);clip-path:inset(0 0 0 0)}
 .invitation-hero.vt-curtain .cinematic-opening.is-spent{clip-path:inset(0 50% 0 50%);opacity:1}
@@ -51,9 +51,9 @@ html{scroll-behavior:smooth;scroll-padding-top:80px}body{margin:0;background:#f8
 .invitation-hero.vt-slide-left .cinematic-opening.is-spent{transform:translateX(-28%);opacity:0}
 .invitation-hero.vt-slide-left .cinematic-hero-loop{transition:opacity .7s ease,transform .7s cubic-bezier(.4,0,.2,1);transform:translateX(12%)}
 .invitation-hero.vt-slide-left .cinematic-hero-loop.is-live{opacity:1;transform:translateX(0)}
-.invitation-hero.vt-slide-up .cinematic-opening{transition:transform 1s cubic-bezier(.4,0,.2,1),opacity .7s ease}
+.invitation-hero.vt-slide-up .cinematic-opening{transition:transform 2s cubic-bezier(.4,0,.2,1),opacity 1.4s ease}
 .invitation-hero.vt-slide-up .cinematic-opening.is-spent{transform:translateY(-22%);opacity:0}
-.invitation-hero.vt-slide-up .cinematic-hero-loop{transition:opacity 1s ease,transform 1s cubic-bezier(.4,0,.2,1);transform:translateY(14%)}
+.invitation-hero.vt-slide-up .cinematic-hero-loop{transition:opacity 2s ease,transform 2s cubic-bezier(.4,0,.2,1);transform:translateY(14%)}
 .invitation-hero.vt-slide-up .cinematic-hero-loop.is-live{opacity:1;transform:translateY(0)}
 /* opening-only royals (no hero loop): still fade opening when couple overlay arrives */.invitation-hero:not(.has-hero-loop).vt-fade-black .cinematic-opening,.invitation-hero:not(.has-hero-loop).vt-crossfade .cinematic-opening{transition:opacity .75s ease}
 .invitation-hero:not(.has-hero-loop):has(.couple-overlay) .cinematic-opening{opacity:.35}
