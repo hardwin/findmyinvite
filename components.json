@@ -16,5 +16,8 @@
     "lib": "@/akay/lib",
     "hooks": "@/akay/hooks"
   },
-  "iconLibrary": "lucide"
+  "iconLibrary": "lucide",
+  "registries": {
+    "@magicui": "https://magicui.design/r/{name}"
+  }
 }

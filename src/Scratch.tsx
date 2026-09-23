@@ -1,15 +1,21 @@
-import {useEffect, useRef, useState} from 'react';
+import {lazy, Suspense, useEffect, useRef, useState} from 'react';
 import type {PointerEvent} from 'react';
 import confetti from 'canvas-confetti';
 
+const HyperText = lazy(() =>
+  import('@/akay/ui/hyper-text').then((m) => ({default: m.HyperText})),
+);
+
 const STAR_COLORS = ['#FFE400', '#FFBD00', '#E89400', '#FFCA6C', '#FDFFB8'];
+const DATE_CHARS = Object.freeze(
+  'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789,'.split(''),
+) as readonly string[];
 
 function themeCannonColors(root: HTMLElement | null): string[] {
   const page = root?.closest('.invitation-page') as HTMLElement | null;
   const accent =
     (page && getComputedStyle(page).getPropertyValue('--invite-color').trim()) ||
     '#c9a24a';
-  // Theme accent + paper highlights (side-cannon pair like the Buckeyes recipe)
   return [accent, '#ffffff', '#fff6d8', accent];
 }
 
@@ -18,7 +24,7 @@ function celebrateReveal(root: HTMLElement | null) {
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   const colors = themeCannonColors(root);
-  const end = Date.now() + 15_000;
+  const end = Date.now() + 3_000;
 
   (function frame() {
     confetti({
@@ -77,6 +83,17 @@ export function Scratch({date, time}: {date: string; time: string}) {
   const cells = useRef(new Set<string>());
   const celebrated = useRef(false);
   const [revealed, setRevealed] = useState(false);
+  const dateLabel = new Date(date + 'T12:00').toLocaleDateString('en-US', {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+  });
+  const weekday = new Date(date + 'T12:00').toLocaleDateString('en-US', {
+    weekday: 'long',
+  });
+  const reduceMotion =
+    typeof matchMedia === 'function' &&
+    matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   useEffect(() => {
     const context = canvas.current?.getContext('2d');
@@ -122,16 +139,23 @@ export function Scratch({date, time}: {date: string; time: string}) {
     <div className="scratch-heart" ref={wrap}>
       <div className="scratch-date" aria-live="polite" aria-hidden={!revealed}>
         <em>You’re Invited!</em>
-        <strong>
-          {new Date(date + 'T12:00').toLocaleDateString('en-US', {
-            month: 'long',
-            day: 'numeric',
-            year: 'numeric',
-          })}
-        </strong>
-        <span>
-          {new Date(date + 'T12:00').toLocaleDateString('en-US', {weekday: 'long'})}
-        </span>
+        {revealed && !reduceMotion ? (
+          <Suspense fallback={<strong>{dateLabel}</strong>}>
+            <HyperText
+              as="span"
+              className="scratch-hyper-date"
+              duration={1100}
+              delay={180}
+              animateOnHover={false}
+              characterSet={DATE_CHARS}
+            >
+              {dateLabel}
+            </HyperText>
+          </Suspense>
+        ) : (
+          <strong>{dateLabel}</strong>
+        )}
+        <span>{weekday}</span>
         <small>{time}</small>
       </div>
       {!revealed && (
