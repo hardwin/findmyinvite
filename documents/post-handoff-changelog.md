@@ -8,6 +8,10 @@ Soul: [akay-soul.md](akay-soul.md) · standing facts: [project-context.md](proje
 
 Read this before `docs/handoff/STATUS.md`. The v0.9.0 handoff is the frozen baseline; this file is the current truth after that tag.
 
+## Scratch reveal confetti (2026-09-24)
+
+On Scratch-to-Reveal clear: theme-colored side cannons (15s, `canvas-confetti`) + gold star/circle bursts. Colors from `--invite-color`. Honors `prefers-reduced-motion`.
+
 ## Launch 2.0 #1 — runtime CSS video transitions (2026-09-23)
 
 Ashok locked **A. CSS / WAAPI dual-video** (not Three.js). Shipped on `main`:
