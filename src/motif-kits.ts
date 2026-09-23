@@ -1,12 +1,30 @@
-/** Per-template floating motif kits for Launch 2.0 #2. */
+/** Per-template motif kits — shapes map to SVG files in /assets/motifs/. */
 
-export type MotifShape = 'petal' | 'jasmine' | 'spark' | 'leaf' | 'lantern' | 'dot';
+export type MotifShape =
+  | 'petal'
+  | 'jasmine'
+  | 'vine-leaf'
+  | 'foil'
+  | 'lucide-flower'
+  | 'lucide-leaf'
+  | 'lucide-sparkles';
 
 export type MotifKit = {
   shapes: MotifShape[];
   colors: string[];
   density: number;
   drift: number;
+};
+
+/** File basename under /assets/motifs/ (no .svg). */
+export const MOTIF_SVG: Record<MotifShape, string> = {
+  petal: 'petal',
+  jasmine: 'jasmine',
+  'vine-leaf': 'vine-leaf',
+  foil: 'foil',
+  'lucide-flower': 'lucide-flower',
+  'lucide-leaf': 'lucide-leaf',
+  'lucide-sparkles': 'lucide-sparkles',
 };
 
 const GOLD = ['#f5e0a8', '#e8c56a', '#c9a24a', '#fff6d8'];
@@ -16,30 +34,26 @@ const WINE = ['#c9a0a8', '#8b3a4a', '#6e1a28', '#f0d8dc'];
 const CREAM = ['#f7f0e4', '#e8dcc8', '#d4c4a8', '#fffaf0'];
 const SKY = ['#a8c4e8', '#d4e4f7', '#f5e0a8', '#ffe8ef'];
 
-const DEFAULT: MotifKit = {
-  shapes: ['petal', 'spark', 'dot'],
-  colors: GOLD,
-  density: 28,
-  drift: 1,
-};
+const FLORAL: MotifShape[] = ['petal', 'jasmine', 'lucide-flower', 'foil'];
+const BOTANICAL: MotifShape[] = ['vine-leaf', 'lucide-leaf', 'petal', 'foil'];
+const SPARKLY: MotifShape[] = ['foil', 'lucide-sparkles', 'petal', 'lucide-flower'];
 
-/** Explicit kits for cinematic templates (ids match `src/data.ts`). */
 export const MOTIF_KIT_BY_TEMPLATE: Record<string, MotifKit> = {
-  'rose-gold-blush-royal': {shapes: ['petal', 'spark', 'dot'], colors: ROSE, density: 30, drift: 1},
-  'royal-heritage-5': {shapes: ['petal', 'spark', 'lantern'], colors: SKY, density: 28, drift: 1},
-  'royal-heritage-6': {shapes: ['petal', 'leaf', 'dot'], colors: ROSE, density: 28, drift: .95},
-  'royal-heritage-7': {shapes: ['jasmine', 'petal', 'spark'], colors: [...ROSE, ...GOLD.slice(0, 2)], density: 30, drift: 1},
-  'royal-heritage-8': {shapes: ['jasmine', 'petal', 'spark', 'leaf'], colors: WINE, density: 32, drift: 1},
-  'royal-heritage-9': {shapes: ['petal', 'jasmine', 'spark'], colors: ROSE, density: 34, drift: 1.1},
-  'royal-heritage-12': {shapes: ['petal', 'leaf', 'spark'], colors: ROSE, density: 30, drift: 1},
-  'royal-heritage-13': {shapes: ['leaf', 'petal', 'dot'], colors: [...SAGE, ...GOLD.slice(0, 2)], density: 28, drift: .95},
-  'royal-heritage-14': {shapes: ['spark', 'dot', 'petal'], colors: [...GOLD, '#ffd9a0'], density: 36, drift: 1.15},
-  'royal-prestige-1': {shapes: ['petal', 'spark', 'lantern'], colors: [...GOLD, ...CREAM], density: 30, drift: 1},
-  'royal-prestige-2': {shapes: ['petal', 'jasmine', 'spark'], colors: ROSE, density: 32, drift: 1.05},
-  'royal-prestige-3': {shapes: ['spark', 'dot', 'petal'], colors: GOLD, density: 28, drift: 1},
-  'royal-prestige-4': {shapes: ['spark', 'lantern', 'petal'], colors: GOLD, density: 34, drift: 1.1},
-  'royal-prestige-5': {shapes: ['petal', 'leaf', 'jasmine'], colors: [...GOLD, ...SAGE.slice(0, 2)], density: 30, drift: 1},
-  'royal-prestige-6': {shapes: ['petal', 'jasmine', 'spark'], colors: [...GOLD, '#f0d48a'], density: 32, drift: 1.05},
+  'rose-gold-blush-royal': {shapes: FLORAL, colors: ROSE, density: 36, drift: 1},
+  'royal-heritage-5': {shapes: SPARKLY, colors: SKY, density: 34, drift: 1},
+  'royal-heritage-6': {shapes: BOTANICAL, colors: ROSE, density: 34, drift: .95},
+  'royal-heritage-7': {shapes: FLORAL, colors: [...ROSE, ...GOLD.slice(0, 2)], density: 36, drift: 1},
+  'royal-heritage-8': {shapes: FLORAL, colors: WINE, density: 38, drift: 1},
+  'royal-heritage-9': {shapes: FLORAL, colors: ROSE, density: 40, drift: 1.05},
+  'royal-heritage-12': {shapes: BOTANICAL, colors: ROSE, density: 36, drift: 1},
+  'royal-heritage-13': {shapes: BOTANICAL, colors: [...SAGE, ...GOLD.slice(0, 2)], density: 34, drift: .95},
+  'royal-heritage-14': {shapes: SPARKLY, colors: [...GOLD, '#ffd9a0'], density: 42, drift: 1.1},
+  'royal-prestige-1': {shapes: SPARKLY, colors: [...GOLD, ...CREAM], density: 36, drift: 1},
+  'royal-prestige-2': {shapes: FLORAL, colors: ROSE, density: 38, drift: 1.05},
+  'royal-prestige-3': {shapes: SPARKLY, colors: GOLD, density: 34, drift: 1},
+  'royal-prestige-4': {shapes: SPARKLY, colors: GOLD, density: 40, drift: 1.1},
+  'royal-prestige-5': {shapes: BOTANICAL, colors: [...GOLD, ...SAGE.slice(0, 2)], density: 36, drift: 1},
+  'royal-prestige-6': {shapes: FLORAL, colors: [...GOLD, '#f0d48a'], density: 38, drift: 1.05},
 };
 
 export function motifKitFor(templateId: string, accent = '#c9a24a'): MotifKit {
@@ -48,18 +62,11 @@ export function motifKitFor(templateId: string, accent = '#c9a24a'): MotifKit {
   let hash = 0;
   for (let i = 0; i < templateId.length; i++) hash = (hash + templateId.charCodeAt(i) * (i + 1)) % 997;
   const palettes = [GOLD, ROSE, SAGE, WINE, CREAM];
-  const shapeSets: MotifShape[][] = [
-    ['petal', 'spark', 'dot'],
-    ['jasmine', 'petal', 'leaf'],
-    ['spark', 'lantern', 'dot'],
-    ['leaf', 'petal', 'spark'],
-  ];
+  const shapeSets = [FLORAL, BOTANICAL, SPARKLY];
   return {
     shapes: shapeSets[hash % shapeSets.length],
     colors: [accent, ...palettes[hash % palettes.length]].slice(0, 5),
-    density: 24 + (hash % 12),
+    density: 30 + (hash % 10),
     drift: .9 + (hash % 5) * .05,
   };
 }
-
-export {DEFAULT as DEFAULT_MOTIF_KIT};

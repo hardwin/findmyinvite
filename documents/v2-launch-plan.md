@@ -227,6 +227,9 @@ Prime hero ~1–2s before opening ends; start `hero.play()`; run 400–800ms tra
 
 ## Decision log
 
+| 2026-09-24 | **#2** Motifs use vendored SVG pack (Lucide ISC + FMI silhouettes), smaller + semi-transparent; research: Lucide / Kalocsai Unlicense / VectorBloom MIT | Ashok |
+
+
 | Date | Decision | Call |
 | --- | --- | --- |
 | 2026-09-23 | 14-task priority list locked from notebook | Ashok |
