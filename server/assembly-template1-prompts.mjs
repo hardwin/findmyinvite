@@ -9,6 +9,33 @@ export const HERO_SECONDS=6;
 export const HOLD_SECONDS=3;
 export const DEFAULT_PROMPT_MODEL='gpt-6-astra';
 
+export const DOOR_STILL_PREFIX='Make the door as a 10ft-tall, opaque solid-gold double door with an elegant arched top, intricate gold carvings, colorful gemstones, diamonds, and sparkling reflections. Build a seamless ivory textured marble wall around it, with a larger decorative marble arch supported by ornate pillars, gold accents, and flowering vines. Replace the floor with a lush green lawn, stepping stones, and rose petals. Add multiple layers of warm glowing lanterns, from blurred foreground standing lamps to midground and background lights, creating cinematic depth. Frame the scene with softly blurred trees and flowers. Symmetrical composition, magical golden-hour lighting, photorealistic luxury fantasy aesthetic, no humans.';
+
+export const OPENING_MOTION_PREFIX='8k high quality, Cinematic motion graphics with Parallax camera movement, 2.5D scene setup, Planes at different long Z-depths with camera animation, always there is Ethereal atmospheric scene with organic ambient motion, floating natural motifs like butterflies, leaves, and petals drifting in layered parallax, soft lighting, depth-rich composition, cinematic fast glide camera movement, 2.5D multiplane effect, minimal and modern aesthetic.';
+
+export const OPENING_MOTION_SUFFIX='Overall vibe should be Ethereal atmospheric scene with organic ambient motion, floating natural motifs like butterflies, leaves, and petals drifting in layered parallax, soft lighting, depth-rich composition, cinematic fast and ease camera movement, 2.5D multiplane effect, minimal and modern aesthetic.';
+
+export const OPENING_SAVE_THE_DATE='when the door opens show a bullet time camera ultra slowmo at the levitating bold big white text in wedding stylish 3d handwritten font which says "SAVE THE DATE" in the middle';
+
+export function ensurePromptAffixes(key,text){
+ let out=String(text||'').trim();
+ if(key==='first'&&!out.includes('10ft-tall, opaque solid-gold double door'))out=DOOR_STILL_PREFIX+' '+out;
+ if(key==='opening'){
+  if(!out.includes('8k high quality, Cinematic motion graphics'))out=OPENING_MOTION_PREFIX+' '+out;
+  if(!out.includes('SAVE THE DATE')){
+   const doorOpen=out.search(/doors open(?: from the handle)?/i);
+   if(doorOpen>=0){
+    const cut=out.indexOf(',',doorOpen);
+    const at=cut>=0?cut+1:doorOpen;
+    out=out.slice(0,at)+' '+OPENING_SAVE_THE_DATE+','+out.slice(at);
+   }else out=out.replace(OPENING_MOTION_SUFFIX, OPENING_SAVE_THE_DATE+'. '+OPENING_MOTION_SUFFIX);
+   if(!out.includes('SAVE THE DATE'))out=out+' '+OPENING_SAVE_THE_DATE;
+  }
+  if(!out.includes('Overall vibe should be Ethereal atmospheric scene'))out=out+' '+OPENING_MOTION_SUFFIX;
+ }
+ return out.replace(/\s{2,}/g,' ').trim();
+}
+
 export const STYLE_CARD_KEYS=Object.freeze([
  'STYLE_MEDIUM','PAPER_GROUND','PALETTE','MOTIF_ORNAMENT','WORLD_SETTING','COUPLE_LOOKS','AMBIENT_MOTION',
  'DOOR_MATERIAL','DOOR_HANDLE','DOOR_CHARMS'
@@ -16,14 +43,14 @@ export const STYLE_CARD_KEYS=Object.freeze([
 
 /** BASE prompts — slots only; never bake a fixed palette/style into these. */
 export const BASE_PROMPTS=Object.freeze({
- first:'Edit pin into FIRST FRAME: monumental FULLY CLOSED double doors FILL the entire 9:16 frame edge-to-edge (90%+ of the picture — the door IS the shot, not a tiny cabinet in a room, no empty sky above). Panels meet with no gap. Unique {STYLE_MEDIUM} craftsmanship in {PALETTE} that would cost a fortune to commission: {DOOR_MATERIAL}. Handle is the MAIN FOCUS — unique oversized {DOOR_HANDLE} at center, detailed and lit. Adorn with {DOOR_CHARMS} and {MOTIF_ORNAMENT} from {WORLD_SETTING}. {PAPER_GROUND} ambience only at extreme edges. Extreme close-up, camera almost touching the door. No people/faces/text/watermark.',
+ first:DOOR_STILL_PREFIX+' Edit pin into FIRST FRAME: monumental FULLY CLOSED double doors FILL the entire 9:16 frame edge-to-edge (90%+ of the picture — the door IS the shot, not a tiny cabinet in a room, no empty sky above). Panels meet with no gap. Unique {STYLE_MEDIUM} craftsmanship in {PALETTE} that would cost a fortune to commission: {DOOR_MATERIAL}. Handle is the MAIN FOCUS — unique oversized {DOOR_HANDLE} at center, detailed and lit. Adorn with {DOOR_CHARMS} and {MOTIF_ORNAMENT} from {WORLD_SETTING}. {PAPER_GROUND} ambience only at extreme edges. Extreme close-up, camera almost touching the door. No people/faces/text/watermark.',
  last:'Edit this pin into a romantic closing frame: same two people ({COUPLE_LOOKS}), {STYLE_MEDIUM}. Facing each other, holding both hands, CLEAR eye contact. {PAPER_GROUND}, {PALETTE}. Soft non-IP. Absolutely no text, no letters, no watermark, no labels.',
  lastRegen:'Edit this pin into a romantic closing frame: same two people ({COUPLE_LOOKS}), {STYLE_MEDIUM}. Facing each other, holding both hands, CLEAR eye contact. {PAPER_GROUND}, {PALETTE}. Soft non-IP. ABSOLUTELY NO TEXT of any kind: no words, no letters, no captions, no labels, no titles, no watermark, no signage, blank surfaces only.',
  heroStill:'Edit into hero invitation still: same couple SMALL at BOTTOM (~20% height), looking at each other with CLEAR eye contact, holding hands. {COUPLE_LOOKS}. CENTER and UPPER ~70% EMPTY {PAPER_GROUND} sky for text. Thin ornamental borders 8–12% inset only — no thick curtains or pillars. {MOTIF_ORNAMENT}. Paper texture, pigment drips under couple. Soft romantic {STYLE_MEDIUM}. Soft non-IP. 9:16.',
  plate1:'Thin ornamental borders only 8–12% inset. Empty {PAPER_GROUND} center for text. {MOTIF_ORNAMENT} matching pin palette. {STYLE_MEDIUM}. Unique plate A. No people, no faces, no text, no watermark, no thick curtains or pillars. 9:16.',
  plate2:'Thin ornamental borders only 8–12% inset. Empty {PAPER_GROUND} center for text. Different unique arrangement: {MOTIF_ORNAMENT} (vary corners / clusters / drips vs plate A). {STYLE_MEDIUM}. Unique plate B. No people, no faces, no text, no watermark, no thick curtains or pillars. 9:16.',
  heroVideo:'static camera, couple looks at each other, blink, hair/clothes slight wind sway, {AMBIENT_MOTION}, no body/hand acting, no zoom, ambient flicker only',
- opening:'Vertical 9:16 cinematic invitation opening, '+OPENING_SECONDS+' seconds. FIRST: monumental closed doors FILL the entire frame (no people), hold ~1s → doors open from the handle, glide through {WORLD_SETTING} ({PALETTE}, {PAPER_GROUND}) → arrive at couple facing, holding hands, CLEAR eye contact. LAST ~'+HOLD_SECONDS+'s hold on eye contact. Static on that beat; {AMBIENT_MOTION} only. No zoom, no new poses, no text.'
+ opening:OPENING_MOTION_PREFIX+' Vertical 9:16 cinematic invitation opening, '+OPENING_SECONDS+' seconds. FIRST: monumental closed doors FILL the entire frame (no people), hold ~1s → doors open from the handle, '+OPENING_SAVE_THE_DATE+' → glide through {WORLD_SETTING} ({PALETTE}, {PAPER_GROUND}) → arrive at couple facing, holding hands, CLEAR eye contact. LAST ~'+HOLD_SECONDS+'s hold on eye contact. Static on that beat; {AMBIENT_MOTION} only. No zoom, no new poses, no extra titles besides SAVE THE DATE. '+OPENING_MOTION_SUFFIX
 });
 
 /** Kaatrukulle wire-proven defaults — fallback / tests only. Live jobs prefer Astra Light from the pin. */
@@ -97,14 +124,14 @@ export function buildPrompts(overrides={}){
  const and=p.paletteA+' and '+p.paletteB;
  const dash=p.paletteA+'–'+p.paletteB;
  return {
-  first:'Edit pin into FIRST FRAME: '+p.firstScene+'. Unique '+p.style+' craftsmanship in '+plus+' washes that would cost a fortune to commission. Handle is the MAIN FOCUS — '+p.firstProps+'. '+p.paper+' ambience only at extreme edges. Extreme close-up. No people/faces/text/watermark.',
+  first:ensurePromptAffixes('first','Edit pin into FIRST FRAME: '+p.firstScene+'. Unique '+p.style+' craftsmanship in '+plus+' washes that would cost a fortune to commission. Handle is the MAIN FOCUS — '+p.firstProps+'. '+p.paper+' ambience only at extreme edges. Extreme close-up. No people/faces/text/watermark.'),
   last:'Edit this pin into a romantic closing frame: same two people ('+p.coupleDesc+'), '+p.style+'. '+p.lastPose+'. '+cap(p.paper)+', '+and+' washes. Soft non-IP. Absolutely no text, no letters, no watermark, no labels.',
   lastRegen:'Edit this pin into a romantic closing frame: same two people ('+p.coupleDesc+'), '+p.style+'. '+p.lastPose+'. '+cap(p.paper)+', '+and+' washes. Soft non-IP. ABSOLUTELY NO TEXT of any kind: no words, no letters, no captions, no labels, no titles, no watermark, no signage, blank surfaces only.',
   heroStill:'Edit into hero invitation still: same couple SMALL at BOTTOM (~20% height), looking at each other with CLEAR eye contact, holding hands. '+p.coupleShort+'. CENTER and UPPER ~70% EMPTY '+p.paperColor+' watercolor sky for text. Thin ornamental watercolor borders 8–12% inset only — no thick curtains or pillars. Paper texture, pigment drips under couple. Soft romantic modern 2D watercolor. Soft non-IP. 9:16.',
   plate1:'Thin ornamental watercolor borders only 8–12% inset. Empty '+p.paper+' center for text. Delicate '+dash+' watercolor filigree, '+p.motifA+' matching '+p.pinPalette+'. '+cap(p.style)+'. Unique plate A. No people, no faces, no text, no watermark, no thick curtains or pillars. 9:16.',
   plate2:'Thin ornamental watercolor borders only 8–12% inset. Empty '+p.paper+' center for text. Different unique arrangement: delicate '+dash+' watercolor filigree corners, '+p.motifB+' matching same romantic pin palette. '+cap(p.style)+'. Unique plate B. No people, no faces, no text, no watermark, no thick curtains or pillars. 9:16.',
   heroVideo:'static camera, couple looks at each other, blink, hair/clothes slight wind sway, petals fall, no body/hand acting, no zoom, watercolor paper ambient flicker only',
-  opening:'Vertical 9:16 cinematic watercolor invitation opening, '+OPENING_SECONDS+' seconds. FIRST: '+p.openingFirst+', hold ~1s → doors open, '+p.openingRoute+' → '+p.openingLast+'. LAST ~'+HOLD_SECONDS+'s hold on eye contact. Static on that beat; petals/paper flicker only. No zoom, no new poses, no text.',
+  opening:ensurePromptAffixes('opening','Vertical 9:16 cinematic watercolor invitation opening, '+OPENING_SECONDS+' seconds. FIRST: '+p.openingFirst+', hold ~1s → doors open, '+OPENING_SAVE_THE_DATE+' → '+p.openingRoute+' → '+p.openingLast+'. LAST ~'+HOLD_SECONDS+'s hold on eye contact. Static on that beat; petals/paper flicker only. No zoom, no new poses, no extra titles besides SAVE THE DATE.'),
   params:p,
   source:'defaults'
  };
@@ -121,8 +148,8 @@ export function fillBasePrompts(styleCard={}){
   if(!(key in card))throw new Error('Unknown prompt slot {'+key+'}');
   return card[key];
  }));
- const prompts={};
- for(const [key,tpl] of Object.entries(BASE_PROMPTS))prompts[key]=fill(tpl);
+  const prompts={};
+ for(const [key,tpl] of Object.entries(BASE_PROMPTS))prompts[key]=ensurePromptAffixes(key,fill(tpl));
  return {styleCard:card,prompts,source:'style-card'};
 }
 
@@ -146,9 +173,12 @@ export function promptWriterInstructions(){
   'Hard rules that must remain in every filled prompt:',
   '- Soft non-IP (no franchise/brand names)',
   '- 9:16 where the BASE says so',
+  '- FIRST door PREFIX is locked verbatim (10ft-tall opaque solid-gold double door, marble arch, lawn, lanterns). Do not drop or rewrite it.',
   '- FIRST door FILLS the entire visible frame (90%+). Handle is the main focus. No tiny cabinet.',
+  '- OPENING PREFIX and SUFFIX are locked verbatim (8k / 2.5D parallax / ethereal overall vibe). Keep them exactly; fill only the middle BASE.',
+  '- OPENING middle beat is locked verbatim: when the door opens, bullet-time ultra slowmo on levitating bold big white 3D handwritten wedding text that says SAVE THE DATE. Stills stay text-free.',
   '- No people on FIRST / plates',
-  '- No text / letters / watermark / labels',
+  '- No text / letters / watermark / labels on stills and plates. Opening video keeps only the locked SAVE THE DATE title — nothing else.',
   '- Thin borders 8–12% only; empty center; no thick curtains or pillars',
   '- Hero: couple ~20% bottom; upper ~70% empty for text',
   'BASE templates:',
@@ -191,7 +221,7 @@ export function parsePromptWriterJson(text){
  const filled=fillBasePrompts(styleCard);
  // Prefer model-authored filled strings when present; still soft-non-IP them.
  const out={};
- for(const key of Object.keys(BASE_PROMPTS))out[key]=softNonIp(prompts[key])||filled.prompts[key];
+ for(const key of Object.keys(BASE_PROMPTS))out[key]=ensurePromptAffixes(key,softNonIp(prompts[key])||filled.prompts[key]);
  return {styleCard:filled.styleCard,prompts:out,source:'astra',raw};
 }
 

@@ -196,5 +196,23 @@
     "duration": 15.041667,
     "bytes": 1723805,
     "version": 1
+  },
+  "royal-prestige-3": {
+    "src": "/assets/catalogue/v1/royal-prestige-3.mp4",
+    "poster": "/assets/catalogue/v1/royal-prestige-3.webp",
+    "width": 480,
+    "height": 854,
+    "duration": 15.041667,
+    "bytes": 2155359,
+    "version": 1
+  },
+  "royal-prestige-4": {
+    "src": "/assets/catalogue/v1/royal-prestige-4.mp4",
+    "poster": "/assets/catalogue/v1/royal-prestige-4.webp",
+    "width": 480,
+    "height": 854,
+    "duration": 15.041667,
+    "bytes": 1719378,
+    "version": 1
   }
 }

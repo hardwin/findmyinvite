@@ -104,7 +104,7 @@ export async function runHeroVideo({imageUrl,prompt,env=process.env,fetchImpl=fe
  }
 }
 
-/** Opening: xAI direct with FIRST as image and LAST as last_frame, 12s 9:16 720p. Moderation → ModerationError. */
+/** Opening: xAI first+last only. Never fall back to Replicate without Ashok's permission. */
 export async function runOpeningVideo({firstDataUrl,lastDataUrl,prompt,env=process.env,fetchImpl=fetch,sleepImpl,onTick}={}){
  if(!firstDataUrl||!lastDataUrl)throw new HttpError(400,'Opening needs FIRST and LAST stills.');
  try{
@@ -118,7 +118,7 @@ export async function runOpeningVideo({firstDataUrl,lastDataUrl,prompt,env=proce
    sleepImpl,
    onTick
   });
-  return {...result,costUsd:result.costUsd??estimateCost('opening-video')};
+  return {...result,costUsd:result.costUsd??estimateCost('opening-video'),provider:'xai'};
  }catch(error){
   if(isModerationError(error))throw new ModerationError('opening video was blocked by moderation.','opening-video');
   throw error;

@@ -84,7 +84,7 @@ test('registry patch helpers insert premium ids without duplicating',async()=>{
 test('loadPremiumParents keeps optional heroVideo on clones that have it',async()=>{
  const {loadPremiumParents}=await import('../server/assembly.mjs');
  const parents=await loadPremiumParents();
- assert.deepEqual(parents.map(item=>item.id),['royal-heritage-8','royal-heritage-9','royal-prestige-2']);
+ assert.deepEqual(parents.map(item=>item.id),['royal-heritage-8','royal-heritage-9','royal-prestige-2','royal-prestige-4']);
  const h8=parents.find(item=>item.id==='royal-heritage-8');
  const h9=parents.find(item=>item.id==='royal-heritage-9');
  const rosu=parents.find(item=>item.id==='royal-prestige-2');
@@ -94,7 +94,8 @@ test('loadPremiumParents keeps optional heroVideo on clones that have it',async(
  assert.equal(h9.heroVideo,'royal-heritage-9-hero.mp4');
  assert.equal(rosu.name,'Rosu Rosu Rosu');
  assert.equal(rosu.heroVideo,'royal-prestige-2-hero.mp4');
- assert.equal(parents.at(-1).id,'royal-prestige-2');
+ assert.equal(parents.at(-1).id,'royal-prestige-4');
+ assert.equal(parents.at(-1).name,'Gold Dream');
 });
 
 test('patchHeroVideo inserts or replaces heroVideo on a premium row',async()=>{
@@ -165,7 +166,7 @@ test('assembly API requires Akay session',async()=>{
  const ok=await request('/api/assembly?action=parents');
  assert.equal(ok.statusCode,200);
  assert.equal(Array.isArray(ok.body.parents),true);
- assert.equal(ok.body.parents.at(-1)?.id,'royal-prestige-2');
+ assert.equal(ok.body.parents.at(-1)?.id,'royal-prestige-4');
 });
 
 test('royal-heritage-8 parks hero copy in the sky without restyling parent-7',async()=>{

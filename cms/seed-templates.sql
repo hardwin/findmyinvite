@@ -28,4 +28,6 @@ insert into public.template_catalog(id,name,description,collection,badge,sort_or
 ('royal-heritage-14','Kadhal Lights','Timeless cinematic opening with regal heritage storytelling','royal','New',34,false),
 ('royal-prestige-1','Kavidhaye Theriyuma','Prestigious cinematic opening with refined elegance and grandeur','royal','New',21,false),
 ('royal-prestige-2','Rosu Rosu Rosu','Prestigious cinematic opening with refined elegance and grandeur','royal','New',22,true),
+('royal-prestige-3','SAVE THE DATE test','Prestigious cinematic opening with refined elegance and grandeur','royal','New',23,false),
+('royal-prestige-4','Gold Dream','Prestigious cinematic opening with refined elegance and grandeur','royal','New',24,true),
 on conflict(id) do nothing;

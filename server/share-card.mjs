@@ -7,6 +7,8 @@ export const TEMPLATE_STILLS={
  'royal-prestige':'/assets/9b73577a4b10e8db.jpg',
  'royal-prestige-1':'/assets/royal-prestige-1.jpg',
  'royal-prestige-2':'/assets/royal-prestige-2.jpg',
+ 'royal-prestige-3':'/assets/royal-prestige-3.jpg',
+ 'royal-prestige-4':'/assets/royal-prestige-4.jpg',
  'royal-heritage':'/assets/3c934c61dec8899c.jpg',
  'royal-heritage-1':'/assets/royal-heritage-1.jpg',
  'royal-heritage-2':'/assets/royal-heritage-2.jpg',

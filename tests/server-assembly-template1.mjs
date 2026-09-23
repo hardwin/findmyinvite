@@ -9,6 +9,11 @@ import {
  DEFAULT_PARAMS,
  DEFAULT_STYLE_CARD,
  DEFAULT_PROMPT_MODEL,
+ DOOR_STILL_PREFIX,
+ OPENING_MOTION_PREFIX,
+ OPENING_MOTION_SUFFIX,
+ OPENING_SAVE_THE_DATE,
+ ensurePromptAffixes,
  softNonIp,
  fillBasePrompts,
  parsePromptWriterJson,
@@ -64,10 +69,15 @@ const WIRE={
 
 test('Template 1 default first still demands a frame-filling fortune door',()=>{
  const p=buildPrompts();
+ assert.equal(p.first.startsWith(DOOR_STILL_PREFIX),true);
  assert.match(p.first,/FILL the entire 9:16 frame/);
  assert.match(p.first,/Handle is the MAIN FOCUS/);
  assert.match(p.first,/fortune/);
+ assert.equal(p.opening.startsWith(OPENING_MOTION_PREFIX),true);
+ assert.equal(p.opening.endsWith(OPENING_MOTION_SUFFIX),true);
  assert.match(p.opening,/FILL the entire frame/);
+ assert.match(p.opening,/SAVE THE DATE/);
+ assert.ok(p.opening.includes(OPENING_SAVE_THE_DATE));
  for(const key of Object.keys(WIRE))assert.equal(p[key],WIRE[key],key);
  assert.equal(IMAGE_MODEL,'xai/grok-imagine-image');
  assert.equal(OPENING_SECONDS,12);
@@ -76,16 +86,24 @@ test('Template 1 default first still demands a frame-filling fortune door',()=>{
 });
 
 test('BASE prompts keep slots; style-card fill + Astra JSON parse work',()=>{
+ assert.equal(BASE_PROMPTS.first.startsWith(DOOR_STILL_PREFIX),true);
  assert.match(BASE_PROMPTS.first,/\{DOOR_MATERIAL\}/);
  assert.match(BASE_PROMPTS.first,/\{DOOR_HANDLE\}/);
  assert.match(BASE_PROMPTS.first,/FILL the entire 9:16 frame/);
+ assert.equal(BASE_PROMPTS.opening.startsWith(OPENING_MOTION_PREFIX),true);
+ assert.equal(BASE_PROMPTS.opening.endsWith(OPENING_MOTION_SUFFIX),true);
+ assert.ok(BASE_PROMPTS.opening.includes(OPENING_SAVE_THE_DATE));
  assert.match(BASE_PROMPTS.opening,/\{WORLD_SETTING\}/);
  assert.match(BASE_PROMPTS.heroVideo,/\{AMBIENT_MOTION\}/);
  const {styleCard,prompts}=fillBasePrompts(DEFAULT_STYLE_CARD);
  assert.equal(styleCard.PALETTE,'magenta + sage washes');
+ assert.equal(prompts.first.startsWith(DOOR_STILL_PREFIX),true);
  assert.match(prompts.first,/modern 2D watercolor paper-texture/);
  assert.match(prompts.first,/magenta \+ sage washes/);
  assert.equal(prompts.first.includes('{'),false);
+ assert.equal(prompts.opening.startsWith(OPENING_MOTION_PREFIX),true);
+ assert.equal(prompts.opening.endsWith(OPENING_MOTION_SUFFIX),true);
+ assert.ok(prompts.opening.includes(OPENING_SAVE_THE_DATE));
  assert.match(prompts.heroStill,/delicate magenta–sage watercolor filigree/);
  assert.match(prompts.opening,/romantic garden/);
  const parsed=parsePromptWriterJson(JSON.stringify({
@@ -102,8 +120,18 @@ test('BASE prompts keep slots; style-card fill + Astra JSON parse work',()=>{
   }
  }));
  assert.equal(parsed.source,'astra');
- assert.equal(parsed.prompts.first,'Edit pin into FIRST FRAME: closed doors. Soft non-IP. 9:16.');
+ assert.equal(parsed.prompts.first,ensurePromptAffixes('first','Edit pin into FIRST FRAME: closed doors. Soft non-IP. 9:16.'));
+ assert.equal(parsed.prompts.opening,ensurePromptAffixes('opening','opening'));
+ assert.ok(parsed.prompts.opening.includes(OPENING_SAVE_THE_DATE));
  assert.equal(DEFAULT_PROMPT_MODEL,'gpt-6-astra');
+});
+
+test('opening wrap injects SAVE THE DATE after the doors open if Astra drops it',()=>{
+ const out=ensurePromptAffixes('opening','Vertical 9:16. FIRST: doors FILL the entire frame, hold ~1s → doors open from the handle, glide through garden.');
+ assert.ok(out.includes(OPENING_SAVE_THE_DATE));
+ assert.match(out,/doors open from the handle, when the door opens show a bullet time/);
+ assert.equal(out.startsWith(OPENING_MOTION_PREFIX),true);
+ assert.equal(out.endsWith(OPENING_MOTION_SUFFIX),true);
 });
 
 test('Astra Light prompt writer reads the pin and returns filled prompts',async()=>{
@@ -135,7 +163,8 @@ test('Astra Light prompt writer reads the pin and returns filled prompts',async(
   openaiClient
  });
  assert.equal(out.source,'astra');
- assert.equal(out.prompts.first,'FIRST filled from pin');
+ assert.equal(out.prompts.first,ensurePromptAffixes('first','FIRST filled from pin'));
+ assert.equal(out.prompts.opening,ensurePromptAffixes('opening','OPENING video'));
  assert.equal(out.styleCard.STYLE_MEDIUM,'modern 2D watercolor paper-texture');
  assert.equal(calls[0].model,'gpt-6-astra');
  assert.equal(calls[0].input[0].content.some(c=>c.type==='input_image'),true);
@@ -232,6 +261,23 @@ test('runOpeningVideo sends image + last_frame at 12s and reads cost ticks',asyn
  assert.equal(posted.model,'grok-imagine-video-1.5');
  assert.equal(result.costUsd,1.7);
  assert.equal(result.respectModeration,true);
+ assert.equal(result.provider,'xai');
+});
+
+test('runOpeningVideo surfaces an xAI credit alert and does not fall back to Replicate',async()=>{
+ let replicateHit=false;
+ const fetchImpl=async(url)=>{
+  if(url==='https://api.x.ai/v1/videos/generations'){
+   return {ok:false,status:403,json:async()=>({error:'Your team has either used all available credits or reached its monthly spending limit.'})};
+  }
+  if(String(url).includes('replicate.com')){replicateHit=true;throw new Error('replicate fallback is not allowed');}
+  throw new Error('unexpected '+url);
+ };
+ await assert.rejects(
+  ()=>runOpeningVideo({firstDataUrl:'data:image/jpeg;base64,FIRST',lastDataUrl:'data:image/jpeg;base64,LAST',prompt:'x',env:{XAI_API_KEY:'k',REPLICATE_API_TOKEN:'r8'},fetchImpl,sleepImpl:async()=>{}}),
+  err=>/out of credits/i.test(err.message)&&err.status===403
+ );
+ assert.equal(replicateHit,false);
 });
 
 test('palette extraction picks a saturated primary, contrasting secondary, and light paper',()=>{
@@ -303,7 +349,7 @@ test('validateTemplate1Input enforces pin, name, music, budget and defaults the 
  assert.throws(()=>validateTemplate1Input({pinUrl:'https://pin.it/x',displayName:'K'}),/music library/);
  assert.throws(()=>validateTemplate1Input({pinUrl:'https://pin.it/x',displayName:'K',musicId:'v',budgetUsd:0}),/Budget/);
  const ok=validateTemplate1Input({pinUrl:'https://pin.it/330nC70it',displayName:'Kaatrukulle',musicId:'vazhithunaiye'});
- assert.equal(ok.parentId,'royal-prestige-2');
+ assert.equal(ok.parentId,'royal-prestige-4');
  assert.equal(ok.budgetUsd,4);
  assert.deepEqual([ok.couple.groom,ok.couple.bride],['Ashok','Supriya']);
  assert.equal(slugify('Kaatrukulle Two!'),'kaatrukulle-two');

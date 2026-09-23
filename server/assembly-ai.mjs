@@ -383,8 +383,15 @@ export async function runXaiImagineVideo({lastFrame,lastFrameUrl,image,prompt,du
  });
  const created=await create.json().catch(()=>({}));
  if(!create.ok){
-  console.error('xAI video create failed',create.status,created?.error||created?.message||created?.status);
-  throw new HttpError(502,'Opening video generation failed to start.');
+  const raw=created?.error?.message||created?.error||created?.message||created?.status||'';
+  const text=typeof raw==='object'?JSON.stringify(raw):String(raw);
+  const credit=create.status===403||/credit|spending limit|used all available/i.test(text);
+  console.error('xAI video create failed',create.status,text||created);
+  const err=new HttpError(credit?403:502,credit
+   ?'xAI opening video is out of credits. Add credits on xAI, then tap Retry generate.'
+   :('Opening video failed'+(text?': '+text:'.')));
+  err.xaiCredit=credit;
+  throw err;
  }
  const requestId=created.request_id||created.id||'';
  if(!requestId)throw new HttpError(502,'Opening video generation returned no request_id.');

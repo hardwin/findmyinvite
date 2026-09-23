@@ -57,6 +57,7 @@ export default function Assembly(){
  const [t1Job,setT1Job]=useState<Template1Status|null>(null);
  const [step,setStep]=useState<Wizard>('pin');
  const audio=useRef<HTMLAudioElement|null>(null);
+ const alerted=useRef('');
 
  useEffect(()=>{
   document.title='Assembly · FindMyInvite';
@@ -95,6 +96,7 @@ export default function Assembly(){
      const body=await res.json();
      setT1Job(body);
      setStep(wizardFromJob(body));
+     if(body.status==='failed'&&body.error)setError(body.error);
     }
    }
   }catch(err){
@@ -117,7 +119,12 @@ export default function Assembly(){
      writeStored(T1_JOB_STORAGE_KEY,body.jobId||t1Job.jobId);
      setT1Job(body);
      setStep(wizardFromJob(body));
-     if(body.status==='failed')setError(body.error||'Template 1 failed.');
+     if(body.status==='failed'){
+      const msg=body.error||'Template 1 failed.';
+      setError(msg);
+      const key=(body.jobId||t1Job.jobId)+'|'+msg;
+      if(alerted.current!==key){alerted.current=key;window.alert(msg);}
+     }
     }catch(err){
      setError(err instanceof Error?err.message:'Status failed.');
     }
@@ -284,9 +291,12 @@ export default function Assembly(){
       <p className="lead">{t1Job?.label||'Working…'}</p>
       <div className="asm-progress" aria-hidden="true"><i style={{width:(t1Job?.percent||8)+'%'}}/></div>
       {t1Job?.detail&&<p className="lead">{t1Job.detail}</p>}
-      {error&&<p className="asm-alert" role="alert">{error}</p>}
+      {(error||t1Job?.error)&&<p className="asm-alert" role="alert">{error||t1Job?.error}</p>}
+      {t1Job?.status==='failed'&&t1Job?.stills?.first&&t1Job?.stills?.last&&(
+       <button className="asm-pill" type="button" disabled={busy} onClick={()=>void onProceed()}>{busy?'Retrying…':'Retry generate'}</button>
+      )}
       {t1Job?.status==='failed'&&(
-       <button className="asm-pill" type="button" onClick={()=>{setT1Job(null);setStep('pin');setError('');}}>Start over</button>
+       <button className="asm-ghost" type="button" onClick={()=>{setT1Job(null);setStep('pin');setError('');}}>Start over</button>
       )}
      </section>
     )}

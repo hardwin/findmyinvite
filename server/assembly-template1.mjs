@@ -1,6 +1,6 @@
 // Template 1 job runner: pin → parallel gen → craft → assemble → preview. Never publishes.
 import {randomBytes} from 'node:crypto';
-import {mkdir,readFile,writeFile,readdir} from 'node:fs/promises';
+import {access,mkdir,readFile,writeFile,readdir} from 'node:fs/promises';
 import {join} from 'node:path';
 import {HttpError} from './core.mjs';
 import {ROOT,fsWritesAllowed,assemblePremium,loadPremiumParents,knownTemplateIds,nextCloneIds,cleanCloneName} from './assembly.mjs';
@@ -58,7 +58,7 @@ export function validateTemplate1Input(body={}){
  if(parsed.protocol!=='https:'&&parsed.protocol!=='http:')throw new HttpError(400,'Pin URL must be http(s).');
  const displayName=cleanCloneName(body.displayName||body.display_name,'');
  if(!displayName)throw new HttpError(400,'Give the clone a display name.');
- const parentId=String(body.parentId||body.parent_id||'royal-prestige-2').trim();
+ const parentId=String(body.parentId||body.parent_id||'royal-prestige-4').trim();
  if(!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(parentId))throw new HttpError(400,'Invalid parent id.');
  const musicId=String(body.musicId||body.music_library_id||'').trim();
  if(!musicId)throw new HttpError(400,'Pick a tap track from the music library.');
@@ -144,8 +144,10 @@ function stillsWaveFromJob(job){
 
 async function persist(job){
  try{
-  await mkdir(job.workdir,{recursive:true});
-  await writeFile(join(job.workdir,'manifest.json'),JSON.stringify({
+  const dir=job.workdir||join(jobsDir(job.root||ROOT),job.id||job.jobId||'');
+  if(!dir||dir.endsWith('assembly-jobs'))return;
+  await mkdir(dir,{recursive:true});
+  await writeFile(join(dir,'manifest.json'),JSON.stringify({
    ...view(job),
    input:job.input,
    prompts:job.prompts||null,
@@ -215,11 +217,34 @@ export function getTemplate1Job(jobId){
  return job?view(job):null;
 }
 
+function resumeOrphanedJob(job,{env=process.env,fetchImpl=fetch,sleepImpl,openaiClient,qaImpl}={}){
+ if(!job||!job.id||job.status!=='running'||job.workerAlive)return;
+ job.stillsWave=stillsWaveFromJob(job)||job.stillsWave;
+ job.workerAlive=true;
+ if(job.phase==='gen'||job.phase==='craft'||job.phase==='assemble'){
+  if(!job.stillsWave?.first?.jpg||!job.stillsWave?.last?.jpg)return;
+  update(job,{detail:'Resuming — opening on xAI (first + last frame)…'});
+  void continueTemplate1Job(job,{env,fetchImpl,sleepImpl,openaiClient,qaImpl});
+  return;
+ }
+ if(job.phase==='queued'||job.phase==='pin'||job.phase==='stills'){
+  void runTemplate1Job(job,{env,fetchImpl,sleepImpl,openaiClient,qaImpl});
+ }
+}
+
 export async function loadTemplate1Job(jobId,root=ROOT){
  const id=String(jobId||'');
  if(!id)return null;
- const mem=getTemplate1Job(id);
- if(mem)return mem;
+ const live=jobs.get(id);
+ if(live){
+  resumeOrphanedJob(live);
+  return view(live);
+ }
+ const job=await hydrateLiveJob(id,root);
+ if(job){
+  resumeOrphanedJob(job);
+  return view(job);
+ }
  try{
   const raw=JSON.parse(await readFile(join(jobsDir(root),id,'manifest.json'),'utf8'));
   return viewFromManifest(raw);
@@ -259,11 +284,15 @@ export function cancelTemplate1Job(jobId){
 export async function proceedTemplate1Job(jobId,{env=process.env,fetchImpl=fetch,sleepImpl,openaiClient,qaImpl,root=ROOT}={}){
  const job=await hydrateLiveJob(jobId,root);
  if(!job)throw new HttpError(404,'Job not found. Keep this tab open after stills, then tap Proceed to generate (Rs. 499).');
- if(job.status!=='review')throw new HttpError(409,'Approve intro & outro stills first.');
  job.stillsWave=stillsWaveFromJob(job);
+ const staleRunning=job.status==='running'&&!job.assets?.['opening-video']?.path;
+ const canRetry=(job.status==='failed'||job.status==='cancelled'||staleRunning)&&job.stillsWave?.first?.jpg&&job.stillsWave?.last?.jpg;
+ if(job.status!=='review'&&!canRetry)throw new HttpError(409,'Approve intro & outro stills first.');
  if(!job.stillsWave?.first?.jpg||!job.stillsWave?.last?.jpg)throw new HttpError(409,'Stills are not ready to continue.');
  job.status='running';
- update(job,{phase:'gen',detail:'Stills approved — generating videos…'});
+ job.error=null;
+ job.workerAlive=true;
+ update(job,{phase:'gen',detail:canRetry?'Retrying videos from approved stills…':'Stills approved — generating videos…'});
  void continueTemplate1Job(job,{env,fetchImpl,sleepImpl,openaiClient,qaImpl});
  return view(job);
 }
@@ -309,6 +338,13 @@ export async function runGenPhase(job,{env,fetchImpl,sleepImpl,openaiClient,qaIm
  return {first,last};
 }
 
+async function existingAsset(job,role,fileKey='jpg'){
+ const asset=job.assets?.[role];
+ const path=asset?.[fileKey]||asset?.path;
+ if(!path)return null;
+ try{await access(path);return asset;}catch{return null;}
+}
+
 export async function runRestGenPhase(job,{first,last},{env,fetchImpl,sleepImpl}){
  const {ledger,prompts,workdir}=job;
  const gen=join(workdir,'gen');
@@ -316,6 +352,8 @@ export async function runRestGenPhase(job,{first,last},{env,fetchImpl,sleepImpl}
  const setDetail=(text)=>update(job,{detail:text});
 
  const still=async(role,prompt,image,fileBase)=>{
+  const kept=await existingAsset(job,role);
+  if(kept){setDetail(role+' reused · $'+ledger.used.toFixed(2)+' used');return kept;}
   checkCancelled(job);
   ledger.reserve(role,estimateCost('still'));
   const result=await runReplicateImage({prompt,image,env,fetchImpl,sleepImpl,role});
@@ -334,6 +372,8 @@ export async function runRestGenPhase(job,{first,last},{env,fetchImpl,sleepImpl}
  ]);
 
  const heroChain=async()=>{
+  const kept=await existingAsset(job,'hero-video','path');
+  if(kept?.path){setDetail('hero video reused · $'+ledger.used.toFixed(2)+' used');return kept.path;}
   const heroStill=await still('hero-still',prompts.heroStill,last.url,'hero-still');
   checkCancelled(job);
   ledger.reserve('hero-video',estimateCost('hero-video',{duration:HERO_SECONDS}));
@@ -346,14 +386,27 @@ export async function runRestGenPhase(job,{first,last},{env,fetchImpl,sleepImpl}
   return path;
  };
  const openingChain=async()=>{
+  const kept=await existingAsset(job,'opening-video','path');
+  if(kept?.path&&kept.provider==='xai'){setDetail('opening video reused · $'+ledger.used.toFixed(2)+' used');return kept.path;}
   checkCancelled(job);
   ledger.reserve('opening-video',estimateCost('opening-video',{duration:OPENING_SECONDS}));
+  setDetail('Opening on xAI (first + last frame) — usually 1–3 min…');
   const [firstJpg,lastJpg]=await Promise.all([readFile(first.jpg),readFile(last.jpg)]);
-  const opening=await runOpeningVideo({firstDataUrl:dataUrlFromJpeg(firstJpg),lastDataUrl:dataUrlFromJpeg(lastJpg),prompt:prompts.opening,env,fetchImpl,sleepImpl});
-  ledger.charge('opening-video',opening.costUsd,{requestId:opening.requestId,ticks:opening.costUsd});
+  const opening=await runOpeningVideo({
+   firstDataUrl:dataUrlFromJpeg(firstJpg),
+   lastDataUrl:dataUrlFromJpeg(lastJpg),
+   firstUrl:first.url,
+   lastUrl:last.url,
+   prompt:prompts.opening,
+   env,
+   fetchImpl,
+   sleepImpl,
+   onTick:()=>setDetail('Opening on xAI — still rendering… $'+ledger.used.toFixed(2)+' used')
+  });
+  ledger.charge('opening-video',opening.costUsd,{requestId:opening.requestId||opening.predictionId,provider:opening.provider||'xai'});
   const path=join(gen,'opening-video.mp4');
   await writeFile(path,opening.buffer);
-  job.assets['opening-video']={url:opening.url,requestId:opening.requestId,path,costUsd:opening.costUsd,respectModeration:opening.respectModeration};
+  job.assets['opening-video']={url:opening.url,requestId:opening.requestId,predictionId:opening.predictionId,path,costUsd:opening.costUsd,respectModeration:opening.respectModeration,provider:opening.provider};
   setDetail('opening video ready · $'+ledger.used.toFixed(2)+' used');
   return path;
  };
@@ -440,6 +493,7 @@ export function startTemplate1Job(rawInput,{env=process.env,fetchImpl=fetch,slee
   updatedAt:Date.now()
  };
  jobs.set(id,job);
+ job.workerAlive=true;
  if(run)void runTemplate1Job(job,{env,fetchImpl,sleepImpl,openaiClient,qaImpl});
  return {jobId:id,prompts:job.prompts,spend:job.ledger.snapshot()};
 }
@@ -501,6 +555,8 @@ export async function runTemplate1Job(job,{env,fetchImpl,sleepImpl,openaiClient,
 export async function continueTemplate1Job(job,{env,fetchImpl,sleepImpl,openaiClient,qaImpl}){
  try{
   checkCancelled(job);
+  job.stillsWave=stillsWaveFromJob(job)||job.stillsWave;
+  if(!job.stillsWave?.first?.jpg||!job.stillsWave?.last?.jpg)throw new HttpError(409,'Stills are not ready to continue.');
   update(job,{status:'running',phase:'gen'});
   const genOut=await runRestGenPhase(job,job.stillsWave,{env,fetchImpl,sleepImpl,openaiClient,qaImpl});
   checkCancelled(job);
