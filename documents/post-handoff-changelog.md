@@ -37,7 +37,7 @@ After the `v1.5` tag: `/api/assembly` starts Template 1 on Vercel when `ASSEMBLY
 
 **2026-09-23 resume push:** If gen/craft/assemble succeed but `git push` 403s, `POST template1-resume-push` reuses the live Sandbox tree (no re-spend) once `ASSEMBLY_GITHUB_TOKEN` can write.
 
-**2026-09-23 pipeline desk:** `/assembly/pipeline` — live kanban of `assembly_jobs`, asset links on the assembly branch, prompt downloads (stored on new runs in `assets.prompts`), Resume push, Approve to catalogue (queues Publish for Akay; no auto-merge).
+**2026-09-23 pipeline desk:** `/assembly/pipeline` — live kanban of `assembly_jobs`, asset links on the assembly branch, prompt downloads (stored on new runs in `assets.prompts`), Resume push, **Merge to main (PR link)**, **Add to Catalog** (`template1-add-catalog` upserts `template_catalog` via Vercel service_role — no SQL paste).
 
 ## /assembly — Premium intro clone desk (Approach B, local repo writes)
 

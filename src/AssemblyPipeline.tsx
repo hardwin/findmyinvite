@@ -20,6 +20,8 @@ type Job={
  written?:string[];
  error?:string|null;
  publishRequested?:boolean;
+ catalogPublished?:boolean;
+ mergeUrl?:string|null;
  sandboxId?:string|null;
  updatedAt?:number;
 };
@@ -154,20 +156,20 @@ export default function AssemblyPipeline(){
   }
  }
 
- async function requestPublish(jobId:string){
+ async function addToCatalog(jobId:string){
   setActionBusy(true);
   setError('');
   try{
-   const res=await fetch('/api/assembly?action=template1-request-publish',{
+   const res=await fetch('/api/assembly?action=template1-add-catalog',{
     method:'POST',credentials:'same-origin',
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify({jobId})
    });
    const body=await res.json().catch(()=>({}));
-   if(!res.ok)throw new Error(body.error||'Could not request publish.');
+   if(!res.ok)throw new Error(body.error||'Could not add to catalogue.');
    await loadJobs();
   }catch(err){
-   setError(err instanceof Error?err.message:'Could not request publish.');
+   setError(err instanceof Error?err.message:'Could not add to catalogue.');
   }finally{
    setActionBusy(false);
   }
@@ -221,7 +223,8 @@ export default function AssemblyPipeline(){
          >
           <h3>
            {job.displayName||job.cloneId||job.jobId.slice(0,8)}
-           {job.publishRequested&&<span className="pipe-badge">Publish queued</span>}
+           {job.publishRequested&&!job.catalogPublished&&<span className="pipe-badge">Publish queued</span>}
+          {job.catalogPublished&&<span className="pipe-badge">In catalogue</span>}
           </h3>
           <p>{job.label}</p>
           <p>{job.detail}</p>
@@ -301,10 +304,23 @@ export default function AssemblyPipeline(){
          {actionBusy?'Pushing…':'Resume GitHub push'}
         </button>
        )}
-       {(selected.status==='preview'||(selected.cloneId&&selected.branch))&&(
-        <button type="button" disabled={actionBusy||selected.publishRequested} onClick={()=>void requestPublish(selected.jobId)}>
-         {selected.publishRequested?'Publish queued for Akay':'Approve to live catalogue'}
-        </button>
+       {(selected.status==='preview'||selected.cloneId)&&(
+        <>
+         <a
+          className="pipe-pill-link"
+          href={selected.mergeUrl||(selected.cloneId==='royal-prestige-5'?'https://github.com/hardwin/findmyinvite/pull/29':'https://github.com/hardwin/findmyinvite/pulls')}
+          target="_blank"
+          rel="noreferrer"
+         >
+          Merge to main (PR)
+         </a>
+         <button type="button" disabled={actionBusy||selected.catalogPublished} onClick={()=>void addToCatalog(selected.jobId)}>
+          {selected.catalogPublished?'Already in catalogue':'Add to Catalog'}
+         </button>
+         <p className="lead" style={{margin:0,fontSize:12}}>
+          1) Merge the PR so assets land on findmyinvite.com · 2) Add to Catalog writes `template_catalog` via API (no SQL paste).
+         </p>
+        </>
        )}
        <button type="button" className="pipe-ghost" onClick={()=>setSelectedId(null)}>Close</button>
       </div>

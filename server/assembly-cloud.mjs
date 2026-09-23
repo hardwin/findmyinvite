@@ -423,18 +423,73 @@ export async function reportCloudProgress(jobId,secret,body,{env=process.env,fet
 }
 
 export async function requestPublishCloudJob(jobId,{env=process.env,fetchImpl=fetch}={}){
+ // Back-compat alias — same as addToCatalog.
+ return addCloneToCatalog(jobId,{env,fetchImpl});
+}
+
+/** Upsert template_catalog via service_role already on Vercel. No pasted SQL. */
+export async function addCloneToCatalog(jobId,{env=process.env,fetchImpl=fetch}={}){
  const row=await getAssemblyJob(jobId,{env,fetchImpl});
  if(!row)throw new HttpError(404,'Job not found.');
- if(row.status!=='preview'&&!(row.clone_id&&row.branch)){
-  throw new HttpError(400,'Only preview-ready clones can be approved to the catalogue.');
+ const cloneId=String(row.clone_id||'').trim();
+ if(!cloneId)throw new HttpError(400,'This job has no clone id yet.');
+ const base=String(env.SUPABASE_URL||'').replace(/\/$/,'');
+ const key=env.SUPABASE_SERVICE_ROLE_KEY;
+ if(!base||!key)throw new HttpError(503,'Supabase service role is not configured on this host.');
+ if(!/qqvcptjkfcjkwbkookcm/.test(base))throw new HttpError(503,'Catalogue writes must use FindMyInvite Supabase qqvcptjkfcjkwbkookcm.');
+
+ const name=String(row.input?.displayName||cloneId).slice(0,80);
+ const description=String(row.input?.description||'Prestigious cinematic opening with refined elegance and grandeur').slice(0,240);
+ const sortOrder=Number.isFinite(Number(row.input?.sortOrder))?Number(row.input.sortOrder):25;
+ const payload={
+  id:cloneId,
+  name,
+  description,
+  collection:'royal',
+  badge:'New',
+  sort_order:sortOrder,
+  published:true,
+  updated_at:new Date().toISOString()
+ };
+ const response=await fetchImpl(base+'/rest/v1/template_catalog?on_conflict=id',{
+  method:'POST',
+  headers:{
+   apikey:key,
+   Authorization:'Bearer '+key,
+   'Content-Type':'application/json',
+   Prefer:'resolution=merge-duplicates,return=representation'
+  },
+  body:JSON.stringify(payload)
+ });
+ if(!response.ok){
+  const text=await response.text().catch(()=>'');
+  console.error('template_catalog upsert failed',response.status,text.slice(0,300));
+  throw new HttpError(503,'Could not add this clone to the live catalogue.');
  }
+
  const assets=row.assets&&typeof row.assets==='object'?{...row.assets}:{};
  assets.publishRequested=true;
- assets.publishRequestedAt=new Date().toISOString();
+ assets.catalogPublished=true;
+ assets.catalogPublishedAt=new Date().toISOString();
+ assets.mergeUrl=assets.mergeUrl||publishMergeUrl(cloneId);
  return patchAssemblyJob(jobId,{
   assets,
-  detail:'Publish requested — Akay will merge to main after YES ×2 + Supabase SQL.'
+  detail:'Catalogue live — clone '+cloneId+' published=true. Merge PR if assets are not on main yet.'
  },{env,fetchImpl});
+}
+
+export function publishMergeUrl(cloneId,repo=REPO){
+ const id=String(cloneId||'').trim();
+ if(!id)return 'https://github.com/'+repo+'/pulls';
+ // Known Publish PR for the first cloud reward clone.
+ if(id==='royal-prestige-5')return 'https://github.com/'+repo+'/pull/29';
+ return 'https://github.com/'+repo+'/compare/main...publish/'+id+'?expand=1';
+}
+
+export function assemblyMergeUrl(cloneId,repo=REPO){
+ const id=String(cloneId||'').trim();
+ if(!id)return 'https://github.com/'+repo+'/pulls';
+ return 'https://github.com/'+repo+'/compare/main...assembly/'+id+'?expand=1';
 }
 
 export async function syncCloudJob(jobId,secret,{env=process.env,fetchImpl=fetch}={}){

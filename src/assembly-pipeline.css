@@ -96,6 +96,11 @@
 }
 .pipe-actions button.pipe-ghost{background:transparent;color:#8C4D90;border:1px solid rgba(140,77,144,.25)}
 .pipe-actions button:disabled{opacity:.45;cursor:not-allowed}
+.pipe-pill-link{
+  display:flex;align-items:center;justify-content:center;height:46px;border-radius:999px;
+  background:#fff;color:#623325;border:1px solid rgba(140,77,144,.25);
+  text-decoration:none;font:15px Georgia,serif;
+}
 .pipe-gate{
   min-height:100svh;display:flex;align-items:center;justify-content:center;padding:24px;
 }

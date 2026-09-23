@@ -75,6 +75,8 @@ export function viewFromRow(row){
   error:row.error||null,
   cancelRequested:Boolean(row.cancel_requested),
   publishRequested:Boolean(assets.publishRequested),
+  catalogPublished:Boolean(assets.catalogPublished),
+  mergeUrl:typeof assets.mergeUrl==='string'?assets.mergeUrl:(row.clone_id==='royal-prestige-5'?'https://github.com/hardwin/findmyinvite/pull/29':(row.clone_id?('https://github.com/hardwin/findmyinvite/compare/main...publish/'+row.clone_id+'?expand=1'):null)),
   createdAt:row.created_at?Date.parse(row.created_at):0,
   updatedAt:row.updated_at?Date.parse(row.updated_at):0,
   sandboxId:row.sandbox_id||null
