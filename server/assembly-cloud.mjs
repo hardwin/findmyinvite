@@ -388,7 +388,17 @@ export function applyWorkerPatch(body={}){
  if(typeof body.branch==='string')patch.branch=body.branch;
  if(typeof body.githubUrl==='string')patch.githubUrl=body.githubUrl;
  if(typeof body.previewUrl==='string')patch.previewUrl=body.previewUrl;
+ if(body.prompts&&typeof body.prompts==='object')patch.prompts=sanitizePrompts(body.prompts);
+ if(body.assets&&typeof body.assets==='object')patch.assets=body.assets;
  return patch;
+}
+
+function sanitizePrompts(prompts){
+ const out={};
+ for(const key of ['first','last','lastRegen','plate1','plate2','heroStill','heroVideo','opening','source']){
+  if(typeof prompts[key]==='string'&&prompts[key])out[key]=prompts[key].slice(0,8000);
+ }
+ return Object.keys(out).length?out:null;
 }
 
 export async function reportCloudProgress(jobId,secret,body,{env=process.env,fetchImpl=fetch}={}){
@@ -402,7 +412,29 @@ export async function reportCloudProgress(jobId,secret,body,{env=process.env,fet
   patch.previewUrl=vercelPreviewUrl(body.cloneId,env)+'/invite/demo?template='+body.cloneId;
   patch.demo=patch.demo||'/invite/demo?template='+body.cloneId;
  }
+ if(patch.prompts||patch.assets){
+  const current=row.assets&&typeof row.assets==='object'?{...row.assets}:{};
+  if(patch.assets)Object.assign(current,patch.assets);
+  if(patch.prompts)current.prompts=patch.prompts;
+  patch.assets=current;
+  delete patch.prompts;
+ }
  return patchAssemblyJob(jobId,patch,{env,fetchImpl});
+}
+
+export async function requestPublishCloudJob(jobId,{env=process.env,fetchImpl=fetch}={}){
+ const row=await getAssemblyJob(jobId,{env,fetchImpl});
+ if(!row)throw new HttpError(404,'Job not found.');
+ if(row.status!=='preview'&&!(row.clone_id&&row.branch)){
+  throw new HttpError(400,'Only preview-ready clones can be approved to the catalogue.');
+ }
+ const assets=row.assets&&typeof row.assets==='object'?{...row.assets}:{};
+ assets.publishRequested=true;
+ assets.publishRequestedAt=new Date().toISOString();
+ return patchAssemblyJob(jobId,{
+  assets,
+  detail:'Publish requested — Akay will merge to main after YES ×2 + Supabase SQL.'
+ },{env,fetchImpl});
 }
 
 export async function syncCloudJob(jobId,secret,{env=process.env,fetchImpl=fetch}={}){

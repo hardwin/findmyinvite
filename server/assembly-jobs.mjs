@@ -49,6 +49,8 @@ export function vercelPreviewUrl(cloneId,env=process.env){
 
 export function viewFromRow(row){
  if(!row)return null;
+ const assets=row.assets&&typeof row.assets==='object'?row.assets:{};
+ const prompts=assets.prompts&&typeof assets.prompts==='object'?assets.prompts:null;
  return {
   jobId:row.id,
   status:row.status,
@@ -58,6 +60,7 @@ export function viewFromRow(row){
   detail:row.detail||'',
   displayName:row.input?.displayName||'',
   parentId:row.input?.parentId||'',
+  pinUrl:row.input?.pinUrl||'',
   cloneId:row.clone_id||null,
   demo:row.demo||null,
   branch:row.branch||null,
@@ -65,11 +68,13 @@ export function viewFromRow(row){
   previewUrl:row.preview_url||null,
   spend:row.spend||{budget:0,used:0,remaining:0},
   palette:row.palette||null,
-  assets:row.assets||{},
+  assets,
+  prompts,
   written:row.written||[],
   moderationStop:Boolean(row.moderation_stop),
   error:row.error||null,
   cancelRequested:Boolean(row.cancel_requested),
+  publishRequested:Boolean(assets.publishRequested),
   createdAt:row.created_at?Date.parse(row.created_at):0,
   updatedAt:row.updated_at?Date.parse(row.updated_at):0,
   sandboxId:row.sandbox_id||null

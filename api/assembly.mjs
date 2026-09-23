@@ -20,6 +20,7 @@ import {
  getCloudTemplate1Job,
  listCloudTemplate1Jobs,
  reportCloudProgress,
+ requestPublishCloudJob,
  resumeCloudPush,
  startCloudTemplate1Job,
  syncCloudJob
@@ -223,6 +224,14 @@ export default async function handler(req,res){
    const body=await bodyJson(req,4096);
    if(!cloudAssemblyEnabled())throw new HttpError(503,'Cloud Assembly is off.');
    return respond(res,200,await resumeCloudPush(String(body.jobId||'')));
+  }
+
+  if(action==='template1-request-publish'){
+   method(req,['POST']);
+   if(!sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
+   const body=await bodyJson(req,4096);
+   if(!cloudAssemblyEnabled())throw new HttpError(503,'Cloud Assembly is off.');
+   return respond(res,200,await requestPublishCloudJob(String(body.jobId||'')));
   }
 
   if(action==='template1-proceed'){

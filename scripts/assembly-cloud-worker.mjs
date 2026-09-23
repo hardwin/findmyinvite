@@ -108,6 +108,17 @@ let started;
 try{
  await earlyReport({status:'running',phase:'pin',percent:10,label:'Resolving Pinterest pin…',detail:'startTemplate1Job'});
  started=startTemplate1Job(input,{env:workerEnv,run:true,onUpdate:job=>{
+  const prompts=job.prompts&&typeof job.prompts==='object'?{
+   first:job.prompts.first,
+   last:job.prompts.last,
+   lastRegen:job.prompts.lastRegen,
+   plate1:job.prompts.plate1,
+   plate2:job.prompts.plate2,
+   heroStill:job.prompts.heroStill,
+   heroVideo:job.prompts.heroVideo,
+   opening:job.prompts.opening,
+   source:job.prompts.source
+  }:undefined;
   void report({
    status:job.status==='review'?'running':job.status,
    phase:job.phase==='review'?'gen':job.phase,
@@ -120,7 +131,8 @@ try{
    demo:job.demo,
    written:job.written,
    moderationStop:job.moderationStop,
-   error:job.error
+   error:job.error,
+   ...(prompts?{prompts}:{})
   });
  }});
 }catch(error){

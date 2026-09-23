@@ -37,6 +37,8 @@ After the `v1.5` tag: `/api/assembly` starts Template 1 on Vercel when `ASSEMBLY
 
 **2026-09-23 resume push:** If gen/craft/assemble succeed but `git push` 403s, `POST template1-resume-push` reuses the live Sandbox tree (no re-spend) once `ASSEMBLY_GITHUB_TOKEN` can write.
 
+**2026-09-23 pipeline desk:** `/assembly/pipeline` — live kanban of `assembly_jobs`, asset links on the assembly branch, prompt downloads (stored on new runs in `assets.prompts`), Resume push, Approve to catalogue (queues Publish for Akay; no auto-merge).
+
 ## /assembly — Premium intro clone desk (Approach B, local repo writes)
 
 Operator-only desk at `/assembly` (same Akay gate cookie as `/akay`). Clones a Premium cinematic template with 1..N alternate intro videos into the git tree the same way `royal-heritage-1/2/3` were made by hand:

@@ -263,6 +263,7 @@ export default function Assembly(){
       {error&&<p className="asm-alert" role="alert">{error}</p>}
       {!writable&&!cloud&&<p className="asm-alert">Run this on your local machine.</p>}
       {cloud&&<p className="lead">Cloud Assembly is on — no ThinkPad required.</p>}
+      <a className="asm-ghost" href="/assembly/pipeline" style={{textDecoration:'none'}}>Pipeline desk</a>
       <button className="asm-pill" type="button" disabled={!t1Pin.trim()||!t1Name.trim()} onClick={()=>setStep('song')}>Next</button>
      </section>
     )}
