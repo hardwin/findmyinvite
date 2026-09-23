@@ -21,8 +21,8 @@
       "maxDuration": 300
     },
     "api/assembly.mjs": {
-      "includeFiles": "{src/data.ts,cms/music-library.json}",
-      "maxDuration": 300,
+      "includeFiles": "{src/data.ts,cms/music-library.json,scripts/assembly-cloud-worker.mjs}",
+      "maxDuration": 800,
       "memory": 1024
     }
   },

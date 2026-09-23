@@ -1,8 +1,12 @@
 # Assembly → Publish playbook
 
 Audience: Akay (this Project), when Ashok says **Publish** after a local `/assembly` run.  
-Standing loop (confirmed 2026-09-20): **assemble locally → Ashok previews → Ashok says Publish → Akay applies Supabase + commit + push `main`.**  
-Ashok does **not** run SQL himself.
+Standing loop:
+
+- **v1.5 (laptop, locked 2026-09-23):** assemble locally → Ashok previews → Ashok says Publish → Akay applies Supabase + commit + push `main`.
+- **v1.6 (cloud):** `/assembly` on findmyinvite.com → Vercel Sandbox runs Template 1 → git push `assembly/{id}` only → Vercel preview. Ashok says Publish → Akay merges to `main` (ask twice) + applies SQL.
+
+Ashok does **not** run SQL himself. Cloud jobs never push `main`.
 
 ## Parent is read-only
 
@@ -92,7 +96,19 @@ Transport + Accommodation + Gifts share **one** clustered plate. Do not put plat
 5. **assemble** — dry-run then real `assemblePremium`, theme CSS block, `previewDefaults`, `music` + `musicName`, `musicTracks`, editor option. Reserved slots come from the `// reserved:` line in `src/data.ts`.
 6. **preview** — demo link + spend line. Publish stays with Akay per this playbook.
 
-Local / CloudAgent only (`fsWritesAllowed()`, ffmpeg, `XAI_API_KEY`, `REPLICATE_API_TOKEN`; `OPENAI_API_KEY` optional for the no-text QA). Job scratch under `work/assembly-jobs/{jobId}/` (gitignored). Headless: `node scripts/assemble-template1.mjs --pin … --name … --music vazhithunaiye`.
+Laptop / CloudAgent still work (`fsWritesAllowed()`, ffmpeg). **v1.6 cloud** on findmyinvite.com uses `ASSEMBLY_CLOUD=1` + a Vercel Pro Sandbox (ffmpeg snapshot optional via `ASSEMBLY_FFMPEG_SNAPSHOT_ID`) and durable rows in `assembly_jobs` (`supabase/014_assembly_jobs.sql`). Worker: `scripts/assembly-cloud-worker.mjs`. Snapshot helper: `node scripts/assembly-ffmpeg-snapshot.mjs`. Headless local: `node scripts/assemble-template1.mjs --pin … --name … --music vazhithunaiye`.
+
+Server-only Vercel env (never commit):
+
+- `ASSEMBLY_CLOUD=1`
+- `XAI_API_KEY`
+- `REPLICATE_API_TOKEN`
+- `OPENAI_API_KEY` (optional QA)
+- `ASSEMBLY_GITHUB_TOKEN` (fine-grained: contents write on `hardwin/findmyinvite`, branches `assembly/*` only if the token allows)
+- `VERCEL_TOKEN` + `VERCEL_TEAM_ID` + `VERCEL_PROJECT_ID` (OIDC is enough on Vercel; token is for snapshot script / local)
+- `ASSEMBLY_FFMPEG_SNAPSHOT_ID` (after the snapshot script)
+- Existing `SUPABASE_URL` + `SUPABASE_SERVICE_ROLE_KEY` on `qqvcptjkfcjkwbkookcm` only
+- Optional `ASSEMBLY_PREVIEW_HOST=https://findmyinvite-git-{branch}-hardwins-projects.vercel.app`
 
 ### Run Template 1 on Ashok's machine
 
@@ -110,7 +126,8 @@ Then hand the result to Akay for the PR: `git status` shows the new `public/asse
 
 ## Out of scope
 
-- Auto-push from the Assembly button  
-- Writing the git tree from Vercel production  
+- Auto-push / auto-merge to `main` from the Assembly button
 - Asking Ashok to open the Supabase SQL editor
-- Running AI generate on Vercel (filesystem + long xAI/Replicate polls stay local)
+- Moving catalog assets off git onto Blob-only rows (would break branch/fork/vibe-code)
+- Host-facing Rs. 499 wizard / payment
+- Buying GitHub Pro (optional later)

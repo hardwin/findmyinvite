@@ -14,6 +14,15 @@ import {
 } from '../server/assembly.mjs';
 import {startGeneratePair,getGenerateJob} from '../server/assembly-ai.mjs';
 import {startTemplate1Job,listTemplate1JobsResolved,loadTemplate1Job,cancelTemplate1Job,proceedTemplate1Job,jobsDir} from '../server/assembly-template1.mjs';
+import {
+ cancelCloudTemplate1Job,
+ cloudAssemblyEnabled,
+ getCloudTemplate1Job,
+ listCloudTemplate1Jobs,
+ reportCloudProgress,
+ startCloudTemplate1Job,
+ syncCloudJob
+} from '../server/assembly-cloud.mjs';
 import {listMusicLibrary} from '../server/music-library.mjs';
 import {readFile,stat} from 'node:fs/promises';
 import {createReadStream} from 'node:fs';
@@ -48,13 +57,19 @@ export default async function handler(req,res){
   if(action==='status'){
    method(req,['GET']);
    if(!sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
+   const cloud=cloudAssemblyEnabled();
+   const local=fsWritesAllowed();
    return respond(res,200,{
     ok:true,
-    writable:fsWritesAllowed(),
+    writable:local||cloud,
+    local,
+    cloud,
     inbox:INBOX_DIR.slice(ROOT.length).replace(/^[\\/]/,''),
-    note:fsWritesAllowed()
+    note:local
      ?'Local Assembly can write assets and registries into this repo.'
-     :'This host cannot write the git tree. Run Assembly on your Cursor machine.'
+     :cloud
+      ?'Cloud Assembly will run Template 1 in a Vercel Sandbox and push assembly/{id} for preview. Publish stays with Akay.'
+      :'This host cannot write the git tree. Set ASSEMBLY_CLOUD=1 and keys, or run on your Cursor machine.'
    });
   }
 
@@ -171,8 +186,9 @@ export default async function handler(req,res){
   if(action==='template1-start'){
    method(req,['POST']);
    if(!sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
-   if(!fsWritesAllowed())throw new HttpError(503,'Template 1 runs locally only. Use this desk on your Cursor machine or CloudAgent.');
    const body=await bodyJson(req,16384);
+   if(cloudAssemblyEnabled())return respond(res,200,await startCloudTemplate1Job(body));
+   if(!fsWritesAllowed())throw new HttpError(503,'Template 1 runs locally only. Use this desk on your Cursor machine or CloudAgent.');
    return respond(res,200,startTemplate1Job(body));
   }
 
@@ -180,6 +196,12 @@ export default async function handler(req,res){
    method(req,['GET']);
    if(!sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
    const jobId=String(url.searchParams.get('jobId')||'');
+   if(cloudAssemblyEnabled()){
+    if(!jobId)return respond(res,200,{jobs:await listCloudTemplate1Jobs()});
+    const job=await getCloudTemplate1Job(jobId);
+    if(!job)throw new HttpError(404,'Template 1 job not found.');
+    return respond(res,200,job);
+   }
    if(!jobId)return respond(res,200,{jobs:await listTemplate1JobsResolved()});
    const job=await loadTemplate1Job(jobId);
    if(!job)throw new HttpError(404,'Template 1 job not found.');
@@ -190,12 +212,14 @@ export default async function handler(req,res){
    method(req,['POST']);
    if(!sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
    const body=await bodyJson(req,4096);
+   if(cloudAssemblyEnabled())return respond(res,200,await cancelCloudTemplate1Job(String(body.jobId||'')));
    return respond(res,200,cancelTemplate1Job(String(body.jobId||'')));
   }
 
   if(action==='template1-proceed'){
    method(req,['POST']);
    if(!sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
+   if(cloudAssemblyEnabled())throw new HttpError(503,'Cloud Assembly auto-continues past stills. Wait for the preview.');
    const body=await bodyJson(req,4096);
    return respond(res,200,await proceedTemplate1Job(String(body.jobId||'')));
   }
@@ -203,6 +227,7 @@ export default async function handler(req,res){
   if(action==='template1-asset'){
    method(req,['GET']);
    if(!sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
+   if(cloudAssemblyEnabled())throw new HttpError(503,'Stills preview is local-only. Cloud Assembly streams progress without still assets.');
    const jobId=String(url.searchParams.get('jobId')||'');
    const role=String(url.searchParams.get('role')||'');
    if(!/^[a-f0-9]{8,16}$/.test(jobId))throw new HttpError(400,'Invalid job.');
@@ -215,6 +240,21 @@ export default async function handler(req,res){
    res.setHeader('Cache-Control','no-store');
    res.setHeader('Content-Length',String(info.size));
    return createReadStream(path).pipe(res);
+  }
+
+  if(action==='template1-progress'){
+   method(req,['POST']);
+   const body=await bodyJson(req,16384);
+   const jobId=String(req.headers['x-assembly-job-id']||body.jobId||'');
+   const secret=String(req.headers['x-assembly-job-secret']||body.secret||'');
+   return respond(res,200,await reportCloudProgress(jobId,secret,body));
+  }
+
+  if(action==='template1-sync'){
+   method(req,['GET']);
+   const jobId=String(req.headers['x-assembly-job-id']||url.searchParams.get('jobId')||'');
+   const secret=String(req.headers['x-assembly-job-secret']||url.searchParams.get('secret')||'');
+   return respond(res,200,await syncCloudJob(jobId,secret));
   }
 
   throw new HttpError(404,'Not found.');

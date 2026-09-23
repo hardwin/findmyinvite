@@ -9,7 +9,8 @@
     "preview": "node --use-system-ca --preserve-symlinks --preserve-symlinks-main preview.mjs",
     "test:server": "node --use-system-ca --preserve-symlinks --preserve-symlinks-main --test tests/server*.mjs",
     "assemble:premium": "node --use-system-ca --preserve-symlinks --preserve-symlinks-main scripts/assemble-premium.mjs",
-    "assemble:template1": "node --preserve-symlinks --preserve-symlinks-main scripts/assemble-template1.mjs"
+    "assemble:template1": "node --preserve-symlinks --preserve-symlinks-main scripts/assemble-template1.mjs",
+    "assemble:ffmpeg-snapshot": "node --preserve-symlinks --preserve-symlinks-main scripts/assembly-ffmpeg-snapshot.mjs"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.23",
@@ -19,6 +20,7 @@
     "@radix-ui/react-tabs": "^1.1.21",
     "@radix-ui/react-tooltip": "^1.2.16",
     "@vercel/blob": "^2.8.0",
+    "@vercel/sandbox": "^1.10.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.468.0",

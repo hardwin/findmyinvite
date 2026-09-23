@@ -205,6 +205,9 @@ function update(job,patch){
  if(patch.label)job.label=patch.label;
  job.updatedAt=Date.now();
  void persist(job);
+ if(typeof job.onUpdate==='function'){
+  try{job.onUpdate(view(job));}catch(error){console.error('Template 1 onUpdate failed',error?.message||error);}
+ }
  return job;
 }
 
@@ -467,7 +470,7 @@ export async function runAssemblePhase(job,{inbox,track}){
  return {id,demo:job.demo,written:job.written};
 }
 
-export function startTemplate1Job(rawInput,{env=process.env,fetchImpl=fetch,sleepImpl,openaiClient,qaImpl,run=true,root=ROOT}={}){
+export function startTemplate1Job(rawInput,{env=process.env,fetchImpl=fetch,sleepImpl,openaiClient,qaImpl,run=true,root=ROOT,onUpdate}={}){
  if(!fsWritesAllowed(env))throw new HttpError(503,'Template 1 runs locally only (repo writes + ffmpeg). Use this desk on your Cursor machine or CloudAgent.');
  if(!env.XAI_API_KEY)throw new HttpError(503,'xAI is not configured (XAI_API_KEY). Opening video requires it.');
  if(!(env.REPLICATE_API_TOKEN||env.REPLICATE_API_KEY))throw new HttpError(503,'Replicate is not configured (REPLICATE_API_TOKEN).');
@@ -490,7 +493,8 @@ export function startTemplate1Job(rawInput,{env=process.env,fetchImpl=fetch,slee
   root,
   workdir:join(jobsDir(root),id),
   createdAt:Date.now(),
-  updatedAt:Date.now()
+  updatedAt:Date.now(),
+  onUpdate:typeof onUpdate==='function'?onUpdate:null
  };
  jobs.set(id,job);
  job.workerAlive=true;
