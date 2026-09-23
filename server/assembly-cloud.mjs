@@ -84,15 +84,28 @@ export function workerBootCommand(){
   'ls -la scripts/assembly-cloud-worker.mjs',
   'heartbeat(){ curl -fsS -X POST "${ASSEMBLY_CALLBACK_URL}?action=template1-progress" -H "Content-Type: application/json" -H "X-Assembly-Job-Id: ${ASSEMBLY_JOB_ID}" -H "X-Assembly-Job-Secret: ${ASSEMBLY_CALLBACK_SECRET}" -d "$1" || true; }',
   'heartbeat \'{"status":"running","phase":"queued","percent":1,"label":"Sandbox up","detail":"sandbox boot started"}\'',
-  'export PATH="$HOME/bin:$PATH"',
+  'export PATH="$HOME/bin:/usr/local/bin:$PATH"',
   'if ! command -v ffmpeg >/dev/null 2>&1; then',
-  '  heartbeat \'{"status":"running","phase":"queued","percent":2,"label":"Installing ffmpeg…","detail":"downloading static ffmpeg"}\'',
-  '  curl -fsSL https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz | tar -xJ',
-  '  FFMPEG_DIR=$(echo ffmpeg-*-amd64-static)',
+  '  heartbeat \'{"status":"running","phase":"queued","percent":2,"label":"Installing ffmpeg…","detail":"apt-get install ffmpeg"}\'',
+  '  if command -v apt-get >/dev/null 2>&1; then',
+  '    sudo apt-get update -qq',
+  '    sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq ffmpeg xz-utils ca-certificates curl',
+  '  fi',
+  'fi',
+  'if ! command -v ffmpeg >/dev/null 2>&1; then',
+  '  heartbeat \'{"status":"running","phase":"queued","percent":3,"label":"Installing ffmpeg…","detail":"static ffmpeg tarball"}\'',
+  '  if ! command -v xz >/dev/null 2>&1 && command -v apt-get >/dev/null 2>&1; then',
+  '    sudo apt-get update -qq',
+  '    sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq xz-utils',
+  '  fi',
+  '  curl -fsSL https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz -o /tmp/ffmpeg.tar.xz',
+  '  tar -xJf /tmp/ffmpeg.tar.xz -C /tmp',
+  '  FFMPEG_DIR=$(echo /tmp/ffmpeg-*-amd64-static)',
   '  mkdir -p "$HOME/bin"',
   '  cp "$FFMPEG_DIR/ffmpeg" "$FFMPEG_DIR/ffprobe" "$HOME/bin/"',
   '  export PATH="$HOME/bin:$PATH"',
   'fi',
+  'command -v ffmpeg',
   'ffmpeg -version | head -1',
   'if [ ! -d node_modules ]; then',
   '  heartbeat \'{"status":"running","phase":"queued","percent":4,"label":"Installing npm deps…","detail":"npm ci --omit=dev"}\'',
@@ -224,7 +237,8 @@ export async function startCloudTemplate1Job(rawInput,{env=process.env,fetchImpl
   try{
    const sandboxId=await launchImpl({jobId:id,secret,input,env,fetchImpl});
    if(sandboxId){
-    await patchAssemblyJob(id,{sandboxId,status:'running',detail:'Sandbox '+sandboxId+' · worker starting'},{env,fetchImpl});
+    // Keep heartbeat label/detail; only ensure sandbox id + running status stick.
+    await patchAssemblyJob(id,{sandboxId,status:'running'},{env,fetchImpl});
    }
   }catch(error){
    const message=error instanceof Error?error.message:'Could not start Vercel Sandbox.';
