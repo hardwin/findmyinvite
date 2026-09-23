@@ -102,7 +102,7 @@ function spawn(kit: MotifKit, w: number, h: number, touch?: {x: number; y: numbe
     vy: (-.15 - Math.random() * .35) * kit.drift * depthScale,
     rot: Math.random() * Math.PI * 2,
     spin: (Math.random() - .5) * .02 * kit.drift,
-    size: (4 + Math.random() * 10) * depthScale * (fromTouch ? 1.15 : 1),
+    size: (7 + Math.random() * 14) * depthScale * (fromTouch ? 1.25 : 1),
     life: fromTouch ? 1 : 1,
     maxLife: fromTouch ? .9 + Math.random() * 1.4 : 1e9,
     shape,
@@ -134,7 +134,7 @@ export default function InviteMotifs({templateId, accent, active}: Props) {
     const resize = () => {
       const ratio = Math.min(devicePixelRatio || 1, 1.75);
       w = innerWidth;
-      h = Math.max(innerHeight, page?.scrollHeight || innerHeight);
+      h = innerHeight;
       canvas.width = Math.floor(w * ratio);
       canvas.height = Math.floor(h * ratio);
       canvas.style.width = w + 'px';
@@ -145,18 +145,18 @@ export default function InviteMotifs({templateId, accent, active}: Props) {
     const seed = () => {
       particles.length = 0;
       const kit = kitRef.current;
-      const count = reduced ? Math.min(10, Math.floor(kit.density * .35)) : kit.density;
+      const count = reduced ? Math.min(12, Math.floor(kit.density * .4)) : Math.floor(kit.density * 1.35);
       for (let i = 0; i < count; i++) particles.push(spawn(kit, w, Math.max(h, innerHeight * 2)));
     };
 
-    const onScroll = () => {scrollY = page?.scrollTop ?? window.scrollY; const next=Math.max(innerHeight, page?.scrollHeight || innerHeight); if(Math.abs(next-h)>80) resize();};
+    const onScroll = () => {scrollY = window.scrollY || page?.scrollTop || 0;};
 
     const onPointer = (e: PointerEvent) => {
       if (reduced) return;
       if ((e.target as HTMLElement | null)?.closest('button,a,input,textarea,select,label,.sound-toggle,.language-toggle,.use-design,.skip-opening,.royal-open-target')) return;
       const rect = canvas.getBoundingClientRect();
       const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top + (page?.scrollTop ?? 0);
+      const y = e.clientY - rect.top;
       const kit = kitRef.current;
       const n = 4 + Math.floor(Math.random() * 4);
       for (let i = 0; i < n; i++) {
@@ -172,7 +172,8 @@ export default function InviteMotifs({templateId, accent, active}: Props) {
     seed();
     onScroll();
     window.addEventListener('resize', resize);
-    (page || window).addEventListener('scroll', onScroll, {passive: true});
+    window.addEventListener('scroll', onScroll, {passive: true});
+    page?.addEventListener('scroll', onScroll, {passive: true});
     page?.addEventListener('pointerdown', onPointer);
 
     const draw = (now: number) => {
@@ -196,7 +197,7 @@ export default function InviteMotifs({templateId, accent, active}: Props) {
           }
         }
         const parallax = scrollY * (0.08 + p.z * 0.42);
-        const alpha = Math.max(0, Math.min(0.85, (p.fromTouch ? p.life : 0.35 + (1 - p.z) * 0.45)));
+        const alpha = Math.max(0, Math.min(0.95, (p.fromTouch ? p.life : 0.55 + (1 - p.z) * 0.4)));
         if (alpha <= 0.02) continue;
         ctx.save();
         ctx.translate(p.x, p.y - parallax);
@@ -215,7 +216,8 @@ export default function InviteMotifs({templateId, accent, active}: Props) {
     return () => {
       cancelAnimationFrame(frame);
       window.removeEventListener('resize', resize);
-      (page || window).removeEventListener('scroll', onScroll);
+      window.removeEventListener('scroll', onScroll);
+      page?.removeEventListener('scroll', onScroll);
       page?.removeEventListener('pointerdown', onPointer);
     };
   }, [active, templateId]);
