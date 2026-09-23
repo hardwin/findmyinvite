@@ -75,21 +75,75 @@ function sandboxEnv(jobId,secret,input,env){
 }
 
 export function workerBootCommand(){
+ // Heartbeats use env already injected into the sandbox. Detach the long Template 1
+ // worker so the serverless launch can finish; the sandbox itself stays up to 2h.
  return [
   'set -euo pipefail',
-  'if [ -d findmyinvite ]; then cd findmyinvite; fi',
+  'cd findmyinvite 2>/dev/null || true',
+  'pwd',
+  'ls -la scripts/assembly-cloud-worker.mjs',
+  'heartbeat(){ curl -fsS -X POST "${ASSEMBLY_CALLBACK_URL}?action=template1-progress" -H "Content-Type: application/json" -H "X-Assembly-Job-Id: ${ASSEMBLY_JOB_ID}" -H "X-Assembly-Job-Secret: ${ASSEMBLY_CALLBACK_SECRET}" -d "$1" || true; }',
+  'heartbeat \'{"status":"running","phase":"queued","percent":1,"label":"Sandbox up","detail":"sandbox boot started"}\'',
+  'export PATH="$HOME/bin:$PATH"',
   'if ! command -v ffmpeg >/dev/null 2>&1; then',
+  '  heartbeat \'{"status":"running","phase":"queued","percent":2,"label":"Installing ffmpeg…","detail":"downloading static ffmpeg"}\'',
   '  curl -fsSL https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz | tar -xJ',
   '  FFMPEG_DIR=$(echo ffmpeg-*-amd64-static)',
-  '  sudo cp "$FFMPEG_DIR/ffmpeg" "$FFMPEG_DIR/ffprobe" /usr/local/bin/',
+  '  mkdir -p "$HOME/bin"',
+  '  cp "$FFMPEG_DIR/ffmpeg" "$FFMPEG_DIR/ffprobe" "$HOME/bin/"',
+  '  export PATH="$HOME/bin:$PATH"',
   'fi',
-  'if [ ! -d node_modules ]; then npm ci --omit=dev; fi',
+  'ffmpeg -version | head -1',
+  'if [ ! -d node_modules ]; then',
+  '  heartbeat \'{"status":"running","phase":"queued","percent":4,"label":"Installing npm deps…","detail":"npm ci --omit=dev"}\'',
+  '  npm ci --omit=dev',
+  'fi',
+  'heartbeat \'{"status":"running","phase":"pin","percent":6,"label":"Starting Template 1 worker…","detail":"node scripts/assembly-cloud-worker.mjs"}\'',
   'nohup node scripts/assembly-cloud-worker.mjs > /tmp/assembly-worker.log 2>&1 &',
-  'echo $!'
+  'WORKER_PID=$!',
+  'echo "worker pid $WORKER_PID"',
+  'sleep 3',
+  'if ! kill -0 "$WORKER_PID" 2>/dev/null; then',
+  '  echo "worker died during boot:" >&2',
+  '  cat /tmp/assembly-worker.log >&2 || true',
+  '  heartbeat \'{"status":"failed","phase":"failed","percent":0,"label":"Failed","detail":"worker exited before first heartbeat","error":"worker exited before first heartbeat"}\'',
+  '  exit 1',
+  'fi',
+  'heartbeat \'{"status":"running","phase":"pin","percent":8,"label":"Worker alive","detail":"Template 1 worker detached"}\'',
+  'echo $WORKER_PID'
  ].join('\n');
 }
 
-export async function defaultLaunchSandbox({jobId,secret,input,env=process.env}){
+async function commandExitCode(result){
+ if(!result)return 0;
+ if(typeof result.exitCode==='number')return result.exitCode;
+ if(typeof result.exit==='number')return result.exit;
+ if(typeof result.wait==='function'){
+  const finished=await result.wait();
+  if(typeof finished?.exitCode==='number')return finished.exitCode;
+ }
+ return 0;
+}
+
+async function commandText(result,stream){
+ try{
+  if(typeof result?.[stream]==='function')return String(await result[stream]()||'');
+  return String(result?.[stream]||'');
+ }catch{
+  return '';
+ }
+}
+
+async function reportLaunchFailure(jobId,secret,message,{env,fetchImpl}){
+ try{
+  await reportCloudProgress(jobId,secret,{status:'failed',phase:'failed',percent:0,label:'Failed',detail:message,error:message},{env,fetchImpl});
+ }catch(error){
+  console.error('assembly launch failure report failed',error?.message||error);
+  await patchAssemblyJob(jobId,{status:'failed',phase:'failed',error:message,detail:message},{env,fetchImpl}).catch(()=>{});
+ }
+}
+
+export async function defaultLaunchSandbox({jobId,secret,input,env=process.env,fetchImpl=fetch}){
  const {Sandbox}=await import('@vercel/sandbox');
  const snapshotId=env.ASSEMBLY_FFMPEG_SNAPSHOT_ID;
  const sandbox=await Sandbox.create({
@@ -102,8 +156,48 @@ export async function defaultLaunchSandbox({jobId,secret,input,env=process.env})
    ?{type:'snapshot',snapshotId}
    :{type:'git',url:REPO_URL,depth:1,revision:'main'}
  });
- await sandbox.runCommand('bash',['-lc',workerBootCommand()]);
- return sandbox.sandboxId||sandbox.id||null;
+ const sandboxId=sandbox.sandboxId||null;
+ await patchAssemblyJob(jobId,{sandboxId,status:'running',detail:'Sandbox '+(sandboxId||'?')+' created · booting worker'},{env,fetchImpl});
+ try{
+  const result=await sandbox.runCommand({
+   cmd:'bash',
+   args:['-lc',workerBootCommand()],
+   env:sandboxEnv(jobId,secret,input,env)
+  });
+  const code=await commandExitCode(result);
+  if(code!==0){
+   const stderr=await commandText(result,'stderr');
+   const stdout=await commandText(result,'stdout');
+   throw new Error((stderr||stdout||'Sandbox boot exited '+code).slice(0,700));
+  }
+ }catch(error){
+  const message=error instanceof Error?error.message:'Sandbox boot failed.';
+  await reportLaunchFailure(jobId,secret,message,{env,fetchImpl});
+  try{await sandbox.stop();}catch{/* ignore */}
+  throw error;
+ }
+ // Leave the sandbox running — the detached worker owns the job for up to 2h.
+ return sandboxId;
+}
+
+const pendingLaunches=[];
+
+function schedule(promise){
+ const tracked=Promise.resolve(promise).catch(error=>{
+  console.error('cloud assembly scheduled launch failed',error?.message||error);
+ });
+ pendingLaunches.push(tracked);
+ try{
+  import('@vercel/functions').then(({waitUntil})=>{
+   if(typeof waitUntil==='function')waitUntil(tracked);
+  }).catch(()=>{});
+ }catch{/* local / tests */}
+ return tracked;
+}
+
+/** Test helper: flush waitUntil-scheduled sandbox launches. */
+export async function flushCloudLaunches(){
+ await Promise.all(pendingLaunches.splice(0,pendingLaunches.length));
 }
 
 export async function startCloudTemplate1Job(rawInput,{env=process.env,fetchImpl=fetch,launchImpl=defaultLaunchSandbox}={}){
@@ -124,14 +218,21 @@ export async function startCloudTemplate1Job(rawInput,{env=process.env,fetchImpl
   spend:{budget:input.budgetUsd,used:0,remaining:input.budgetUsd},
   callbackSecretHash:hashSecret(secret)
  },{env,fetchImpl});
- try{
-  const sandboxId=await launchImpl({jobId:id,secret,input,env});
-  if(sandboxId)await patchAssemblyJob(id,{sandboxId,status:'running',detail:'Sandbox '+sandboxId+' · worker starting'},{env,fetchImpl});
- }catch(error){
-  const message=error instanceof Error?error.message:'Could not start Vercel Sandbox.';
-  await patchAssemblyJob(id,{status:'failed',phase:'failed',error:message,detail:message},{env,fetchImpl});
-  throw new HttpError(503,'Could not start the Assembly sandbox.');
- }
+
+ // Return the job id immediately; boot the sandbox under waitUntil.
+ schedule((async()=>{
+  try{
+   const sandboxId=await launchImpl({jobId:id,secret,input,env,fetchImpl});
+   if(sandboxId){
+    await patchAssemblyJob(id,{sandboxId,status:'running',detail:'Sandbox '+sandboxId+' · worker starting'},{env,fetchImpl});
+   }
+  }catch(error){
+   const message=error instanceof Error?error.message:'Could not start Vercel Sandbox.';
+   console.error('cloud assembly launch failed',id,message);
+   await reportLaunchFailure(id,secret,message,{env,fetchImpl});
+  }
+ })());
+
  return {jobId:id,spend:view.spend,cloud:true};
 }
 

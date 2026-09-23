@@ -27,9 +27,11 @@ Laptop-era Assembly is a **success**. Tag `v1.5` on `main` at lock time. Do not 
 - GitHub `hardwin/findmyinvite` stays the template lineage (branch / fork / later vibe-code). GitHub Pro is optional, not a gate.
 - v1.6 is Akay's first reward. Soul: [akay-soul.md](akay-soul.md).
 
-## v1.6 cloud Assembly (code in tree, not live until push)
+## v1.6 cloud Assembly (live path + stall fix)
 
-After the `v1.5` tag: `/api/assembly` can start Template 1 on Vercel when `ASSEMBLY_CLOUD=1`. A Pro Sandbox runs the existing Template 1 pipeline, then pushes `assembly/{cloneId}` (never `main`). Progress lives in `assembly_jobs` (`supabase/014_assembly_jobs.sql`). Playbook: [assembly-publish.md](assembly-publish.md). Live prove on findmyinvite.com waits for SQL apply + Vercel keys + a `main` push (ask twice).
+After the `v1.5` tag: `/api/assembly` starts Template 1 on Vercel when `ASSEMBLY_CLOUD=1`. A Pro Sandbox runs the existing Template 1 pipeline, then pushes `assembly/{cloneId}` (never `main`). Progress lives in `assembly_jobs` (`supabase/014_assembly_jobs.sql`). Playbook: [assembly-publish.md](assembly-publish.md).
+
+**2026-09-23 stall fix:** first live Ponmaalai jobs stuck at “worker starting” because the boot used silent `nohup` with no heartbeats and the serverless launch had no failure path. Fix: bash heartbeats during ffmpeg/npm boot, verify the worker PID stays alive, early progress callbacks from `assembly-cloud-worker.mjs`, return the job id under `waitUntil` while the sandbox stays up for the detached worker (sandbox timeout 2h — not the 800s function limit).
 
 ## /assembly — Premium intro clone desk (Approach B, local repo writes)
 

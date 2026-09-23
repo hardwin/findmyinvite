@@ -5,6 +5,7 @@ import {
  attachLineage,
  cloudAssemblyEnabled,
  cloudMissing,
+ flushCloudLaunches,
  reportCloudProgress,
  startCloudTemplate1Job,
  syncCloudJob,
@@ -105,6 +106,8 @@ test('worker boot installs ffmpeg then detaches the Template 1 worker',()=>{
  assert.match(cmd,/ffmpeg-release-amd64-static/);
  assert.match(cmd,/assembly-cloud-worker/);
  assert.match(cmd,/nohup/);
+ assert.match(cmd,/heartbeat/);
+ assert.match(cmd,/Worker alive/);
 });
 
 test('callback secret is hashed and worker patches stay narrow',()=>{
@@ -134,6 +137,7 @@ test('startCloudTemplate1Job inserts a row then launches the sandbox',async()=>{
    return 'sbx_test';
   }
  });
+ await flushCloudLaunches();
  assert.equal(typeof started.jobId,'string');
  assert.equal(launched[0].jobId,started.jobId);
  assert.equal(launched[0].input.displayName,'Cloud Prove');
@@ -149,6 +153,7 @@ test('progress and sync require the job secret',async()=>{
   displayName:'Cloud Prove',
   musicId:'vazhithunaiye'
  },{env:cloudEnv,fetchImpl,launchImpl:async()=>'sbx'});
+ await flushCloudLaunches();
  const secret='wrong';
  await assert.rejects(()=>reportCloudProgress(started.jobId,secret,{status:'preview'},{env:cloudEnv,fetchImpl}),/Invalid Assembly job secret/);
  await assert.rejects(()=>syncCloudJob(started.jobId,secret,{env:cloudEnv,fetchImpl}),/Invalid Assembly job secret/);
@@ -166,6 +171,7 @@ test('progress callback writes lineage URLs from clone id',async()=>{
   fetchImpl,
   launchImpl:async(opts)=>{secret=opts.secret;return 'sbx';}
  });
+ await flushCloudLaunches();
  const view=await reportCloudProgress(started.jobId,secret,{
   status:'preview',
   phase:'preview',

@@ -8,15 +8,36 @@ const env=process.env;
 const jobId=String(env.ASSEMBLY_JOB_ID||'');
 const secret=String(env.ASSEMBLY_CALLBACK_SECRET||'');
 const callback=String(env.ASSEMBLY_CALLBACK_URL||'').replace(/\/$/,'');
+
+async function earlyReport(patch){
+ if(!jobId||!secret||!callback)return;
+ try{
+  await fetch(callback+'?action=template1-progress',{
+   method:'POST',
+   headers:{
+    'Content-Type':'application/json',
+    'X-Assembly-Job-Id':jobId,
+    'X-Assembly-Job-Secret':secret
+   },
+   body:JSON.stringify(patch)
+  });
+ }catch(error){
+  console.error('early progress callback failed',error?.message||error);
+ }
+}
+
 if(!jobId||!secret||!callback){
  console.error('ASSEMBLY_JOB_ID, ASSEMBLY_CALLBACK_SECRET, ASSEMBLY_CALLBACK_URL required.');
  process.exit(1);
 }
 
+await earlyReport({status:'running',phase:'pin',percent:9,label:'Worker process up',detail:'assembly-cloud-worker.mjs booted'});
+
 let input;
 try{input=JSON.parse(env.ASSEMBLY_INPUT||'{}');}
 catch{
  console.error('ASSEMBLY_INPUT is not JSON.');
+ await earlyReport({status:'failed',phase:'failed',percent:0,label:'Failed',detail:'ASSEMBLY_INPUT is not JSON.',error:'ASSEMBLY_INPUT is not JSON.'});
  process.exit(1);
 }
 
@@ -78,22 +99,32 @@ async function pushBranch(cloneId,written){
 
 const workerEnv={...env,ASSEMBLY_FS:'1'};
 delete workerEnv.VERCEL;
-const started=startTemplate1Job(input,{env:workerEnv,run:true,onUpdate:job=>{
- void report({
-  status:job.status==='review'?'running':job.status,
-  phase:job.phase==='review'?'gen':job.phase,
-  percent:job.percent,
-  label:job.label,
-  detail:job.detail,
-  spend:job.spend,
-  palette:job.palette,
-  cloneId:job.cloneId,
-  demo:job.demo,
-  written:job.written,
-  moderationStop:job.moderationStop,
-  error:job.error
- });
-}});
+
+let started;
+try{
+ await earlyReport({status:'running',phase:'pin',percent:10,label:'Resolving Pinterest pin…',detail:'startTemplate1Job'});
+ started=startTemplate1Job(input,{env:workerEnv,run:true,onUpdate:job=>{
+  void report({
+   status:job.status==='review'?'running':job.status,
+   phase:job.phase==='review'?'gen':job.phase,
+   percent:job.percent,
+   label:job.label,
+   detail:job.detail,
+   spend:job.spend,
+   palette:job.palette,
+   cloneId:job.cloneId,
+   demo:job.demo,
+   written:job.written,
+   moderationStop:job.moderationStop,
+   error:job.error
+  });
+ }});
+}catch(error){
+ const message=error instanceof Error?error.message:'startTemplate1Job failed';
+ console.error(message);
+ await earlyReport({status:'failed',phase:'failed',percent:0,label:'Failed',detail:message,error:message});
+ process.exit(2);
+}
 
 const cancelTimer=setInterval(()=>{
  void (async()=>{
