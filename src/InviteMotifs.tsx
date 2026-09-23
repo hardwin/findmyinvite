@@ -12,6 +12,7 @@ type Particle = {
   size: number;
   life: number;
   maxLife: number;
+  alpha: number; // base opacity 0.2–0.6
   shape: MotifShape;
   color: string;
   fromTouch: boolean;
@@ -23,7 +24,6 @@ function cacheKey(shape: MotifShape, color: string) {
   return shape + '|' + color;
 }
 
-/** Load /assets/motifs/{name}.svg and recolor for canvas drawImage. */
 function loadTintedMotif(shape: MotifShape, color: string): Promise<HTMLImageElement> {
   const key = cacheKey(shape, color);
   const hit = tintCache.get(key);
@@ -64,18 +64,23 @@ function spawn(kit: MotifKit, w: number, h: number, touch?: {x: number; y: numbe
   const shape = kit.shapes[Math.floor(Math.random() * kit.shapes.length)];
   const color = kit.colors[Math.floor(Math.random() * kit.colors.length)];
   const fromTouch = Boolean(touch);
-  const depthScale = .55 + (1 - z) * .7;
+  const depthScale = .6 + (1 - z) * .55;
+  // Mix up/down drift so density stays even (not all rising to the top)
+  const driftDir = Math.random() < .55 ? -1 : 1;
   return {
-    x: touch ? touch.x + (Math.random() - .5) * 18 : Math.random() * w,
-    y: touch ? touch.y + (Math.random() - .5) * 18 : Math.random() * h,
+    x: touch ? touch.x + (Math.random() - .5) * 14 : Math.random() * w,
+    // Uniform vertical seed — not clustered at top
+    y: touch ? touch.y + (Math.random() - .5) * 14 : Math.random() * h,
     z,
-    vx: (Math.random() - .5) * .2 * kit.drift * depthScale,
-    vy: (-.12 - Math.random() * .28) * kit.drift * depthScale,
+    vx: (Math.random() - .5) * .18 * kit.drift * depthScale,
+    vy: driftDir * (.08 + Math.random() * .22) * kit.drift * depthScale,
     rot: Math.random() * Math.PI * 2,
-    spin: (Math.random() - .5) * .015 * kit.drift,
-    size: (3.5 + Math.random() * 5.5) * depthScale * (fromTouch ? 1.2 : 1),
+    spin: (Math.random() - .5) * .012 * kit.drift,
+    // Slightly larger than previous tiny pass (~10–22px draw)
+    size: (6 + Math.random() * 8) * depthScale * (fromTouch ? 1.25 : 1),
     life: 1,
-    maxLife: fromTouch ? .8 + Math.random() * 1.2 : 1e9,
+    maxLife: fromTouch ? .9 + Math.random() * 1.1 : 1e9,
+    alpha: .2 + Math.random() * .4, // 20%–60%
     shape,
     color,
     fromTouch,
@@ -84,7 +89,10 @@ function spawn(kit: MotifKit, w: number, h: number, touch?: {x: number; y: numbe
 
 type Props = {templateId: string; accent?: string; active: boolean};
 
-/** Floating multi-depth SVG motifs (vendored pack) + scroll parallax + touch spawn. */
+/**
+ * Viewport-fixed SVG motifs. Positions stay in screen space so scroll does not
+ * shove them to the top; touch/click spawns at the finger.
+ */
 export default function InviteMotifs({templateId, accent, active}: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const kitRef = useRef<MotifKit>(motifKitFor(templateId, accent));
@@ -101,6 +109,8 @@ export default function InviteMotifs({templateId, accent, active}: Props) {
 
     let w = 0, h = 0, scrollY = 0, frame = 0, last = performance.now();
     const particles: Particle[] = [];
+    // Distinguish tap from scroll: only bloom if finger barely moved
+    let down: {x: number; y: number; id: number} | null = null;
 
     const kit = kitRef.current;
     for (const shape of kit.shapes) {
@@ -121,37 +131,70 @@ export default function InviteMotifs({templateId, accent, active}: Props) {
     const seed = () => {
       particles.length = 0;
       const k = kitRef.current;
-      const count = reduced ? Math.min(14, Math.floor(k.density * .4)) : Math.floor(k.density * 1.2);
+      const count = reduced ? Math.min(16, Math.floor(k.density * .45)) : Math.floor(k.density * 1.25);
       for (let i = 0; i < count; i++) particles.push(spawn(k, w, h));
     };
 
-    const onScroll = () => {scrollY = window.scrollY || page?.scrollTop || 0;};
-
-    const onPointer = (e: PointerEvent) => {
-      if (reduced) return;
-      if ((e.target as HTMLElement | null)?.closest('button,a,input,textarea,select,label,.sound-toggle,.language-toggle,.use-design,.skip-opening,.royal-open-target')) return;
+    const bloomAt = (clientX: number, clientY: number) => {
       const rect = canvas.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+      const x = clientX - rect.left;
+      const y = clientY - rect.top;
+      if (x < 0 || y < 0 || x > rect.width || y > rect.height) return;
       const k = kitRef.current;
       const n = 5 + Math.floor(Math.random() * 4);
       for (let i = 0; i < n; i++) {
         const p = spawn(k, w, h, {x, y});
-        p.vx += (Math.random() - .5) * 1.2;
-        p.vy -= .35 + Math.random() * 1;
+        p.vx += (Math.random() - .5) * 1.1;
+        p.vy += (Math.random() - .5) * 1.1;
         particles.push(p);
         void loadTintedMotif(p.shape, p.color);
       }
-      if (particles.length > 140) particles.splice(0, particles.length - 140);
+      if (particles.length > 150) particles.splice(0, particles.length - 150);
     };
+
+    const onPointerDown = (e: PointerEvent) => {
+      if (reduced) return;
+      if ((e.target as HTMLElement | null)?.closest('button,a,input,textarea,select,label,.sound-toggle,.language-toggle,.use-design,.skip-opening,.royal-open-target')) return;
+      down = {x: e.clientX, y: e.clientY, id: e.pointerId};
+    };
+
+    const onPointerUp = (e: PointerEvent) => {
+      if (!down || down.id !== e.pointerId) return;
+      const dx = e.clientX - down.x;
+      const dy = e.clientY - down.y;
+      const moved = Math.hypot(dx, dy);
+      // Treat as tap if finger moved < 14px (scroll gestures move more)
+      if (moved < 14) bloomAt(e.clientX, e.clientY);
+      down = null;
+    };
+
+    const onPointerCancel = () => {down = null;};
+
+    const onScroll = () => {scrollY = window.scrollY || page?.scrollTop || 0;};
 
     resize();
     seed();
     onScroll();
+    // Listen on page + window so taps on invite content register (canvas is pointer-events:none)
     window.addEventListener('resize', resize);
     window.addEventListener('scroll', onScroll, {passive: true});
     page?.addEventListener('scroll', onScroll, {passive: true});
-    page?.addEventListener('pointerdown', onPointer);
+    page?.addEventListener('pointerdown', onPointerDown, {passive: true});
+    page?.addEventListener('pointerup', onPointerUp, {passive: true});
+    page?.addEventListener('pointercancel', onPointerCancel, {passive: true});
+    window.addEventListener('pointerup', onPointerUp, {passive: true});
+
+    const wrap = (v: number, max: number) => {
+      if (v < -40) return max + 40;
+      if (v > max + 40) return -40;
+      return v;
+    };
+
+    /** Keep even top→bottom fill: parallax offset wraps inside the viewport. */
+    const wrapScreen = (v: number, max: number) => {
+      const m = max || 1;
+      return ((v % m) + m) % m;
+    };
 
     const draw = (now: number) => {
       const dt = Math.min((now - last) / 16.67, 2.5);
@@ -165,22 +208,23 @@ export default function InviteMotifs({templateId, accent, active}: Props) {
           p.rot += p.spin * dt;
           if (p.fromTouch) p.life -= dt / (p.maxLife * 60);
           if (!p.fromTouch) {
-            if (p.y < -30) p.y = h + 30;
-            if (p.y > h + 30) p.y = -30;
-            if (p.x < -30) p.x = w + 30;
-            if (p.x > w + 30) p.x = -30;
+            p.x = wrap(p.x, w);
+            p.y = wrap(p.y, h);
           }
         }
-        const parallax = scrollY * (0.06 + p.z * 0.38);
-        const alpha = Math.max(0, Math.min(0.5, p.fromTouch ? p.life * 0.5 : 0.16 + (1 - p.z) * 0.2));
+        const alpha = Math.max(0, Math.min(0.6, p.fromTouch ? p.life * p.alpha : p.alpha));
         if (alpha <= 0.02) continue;
+        // Touch blooms stay under the finger (viewport coords). Ambient gets wrapped parallax.
+        const drawY = p.fromTouch
+          ? p.y
+          : wrapScreen(p.y - scrollY * (0.05 + p.z * 0.22), h);
         const img = peekTinted(p.shape, p.color);
         ctx.save();
-        ctx.translate(p.x, p.y - parallax);
+        ctx.translate(p.x, drawY);
         ctx.rotate(p.rot);
         ctx.globalAlpha = alpha;
         if (img?.complete) {
-          const s = p.size * 2.2;
+          const s = p.size * 2.6;
           ctx.drawImage(img, -s / 2, -s / 2, s, s);
         }
         ctx.restore();
@@ -197,7 +241,10 @@ export default function InviteMotifs({templateId, accent, active}: Props) {
       window.removeEventListener('resize', resize);
       window.removeEventListener('scroll', onScroll);
       page?.removeEventListener('scroll', onScroll);
-      page?.removeEventListener('pointerdown', onPointer);
+      page?.removeEventListener('pointerdown', onPointerDown);
+      page?.removeEventListener('pointerup', onPointerUp);
+      page?.removeEventListener('pointercancel', onPointerCancel);
+      window.removeEventListener('pointerup', onPointerUp);
     };
   }, [active, templateId]);
 
