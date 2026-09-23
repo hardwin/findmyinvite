@@ -71,7 +71,8 @@ export function viewFromRow(row){
   error:row.error||null,
   cancelRequested:Boolean(row.cancel_requested),
   createdAt:row.created_at?Date.parse(row.created_at):0,
-  updatedAt:row.updated_at?Date.parse(row.updated_at):0
+  updatedAt:row.updated_at?Date.parse(row.updated_at):0,
+  sandboxId:row.sandbox_id||null
  };
 }
 

@@ -20,6 +20,7 @@ import {
  getCloudTemplate1Job,
  listCloudTemplate1Jobs,
  reportCloudProgress,
+ resumeCloudPush,
  startCloudTemplate1Job,
  syncCloudJob
 } from '../server/assembly-cloud.mjs';
@@ -214,6 +215,14 @@ export default async function handler(req,res){
    const body=await bodyJson(req,4096);
    if(cloudAssemblyEnabled())return respond(res,200,await cancelCloudTemplate1Job(String(body.jobId||'')));
    return respond(res,200,cancelTemplate1Job(String(body.jobId||'')));
+  }
+
+  if(action==='template1-resume-push'){
+   method(req,['POST']);
+   if(!sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
+   const body=await bodyJson(req,4096);
+   if(!cloudAssemblyEnabled())throw new HttpError(503,'Cloud Assembly is off.');
+   return respond(res,200,await resumeCloudPush(String(body.jobId||'')));
   }
 
   if(action==='template1-proceed'){

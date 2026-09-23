@@ -273,6 +273,104 @@ export async function cancelCloudTemplate1Job(jobId,{env=process.env,fetchImpl=f
  },{env,fetchImpl});
 }
 
+/** Resume after a git-push failure: reuse the live Sandbox tree (no re-gen). */
+export async function resumeCloudPush(jobId,{env=process.env,fetchImpl=fetch}={}){
+ if(!cloudAssemblyEnabled(env)){
+  throw new HttpError(503,'Cloud Assembly is not configured ('+cloudMissing(env).join(', ')+').');
+ }
+ const row=await getAssemblyJob(jobId,{env,fetchImpl});
+ if(!row)throw new HttpError(404,'Job not found.');
+ const cloneId=String(row.clone_id||'').trim();
+ const sandboxId=String(row.sandbox_id||'').trim();
+ if(!cloneId)throw new HttpError(400,'This job has no assembled clone to push.');
+ if(!sandboxId)throw new HttpError(400,'Sandbox id missing — cannot resume push. Re-run Template 1.');
+ const token=String(env.ASSEMBLY_GITHUB_TOKEN||'');
+ if(!token)throw new HttpError(503,'ASSEMBLY_GITHUB_TOKEN missing.');
+ const lineage=attachLineage(cloneId,env);
+ const written=Array.isArray(row.written)?row.written:[];
+
+ await patchAssemblyJob(jobId,{
+  status:'running',
+  phase:'assemble',
+  percent:95,
+  label:'Pushing GitHub branch…',
+  detail:'Resuming push on '+sandboxId,
+  error:null,
+  branch:lineage.branch,
+  githubUrl:lineage.githubUrl,
+  previewUrl:lineage.previewUrl,
+  demo:lineage.demo
+ },{env,fetchImpl});
+
+ const {Sandbox}=await import('@vercel/sandbox');
+ let sandbox;
+ try{
+  sandbox=await Sandbox.get({sandboxId,...sandboxCredentials(env)});
+ }catch(error){
+  const message=error instanceof Error?error.message:'Sandbox no longer available.';
+  await patchAssemblyJob(jobId,{status:'failed',phase:'failed',error:message,detail:message},{env,fetchImpl});
+  throw new HttpError(410,'Sandbox expired — re-run Template 1. ('+message.slice(0,120)+')');
+ }
+ try{
+  if(typeof sandbox.extendTimeout==='function'){
+   await sandbox.extendTimeout(30*60*1000).catch(()=>{});
+  }
+  const fileArgs=written
+   .filter(path=>path&&!String(path).startsWith('work/')&&!String(path).includes('.env'))
+   .slice(0,80);
+  const addCmd=fileArgs.length
+   ?('git add -- '+fileArgs.map(p=>"'"+String(p).replace(/'/g,"'\\''")+"'").join(' '))
+   :'git add -A';
+  const script=[
+   'set -euo pipefail',
+   'cd findmyinvite 2>/dev/null || true',
+   'pwd',
+   'git status --short | head -40',
+   'git checkout -B '+lineage.branch,
+   addCmd,
+   'git status --short | head -40',
+   'git commit -m "Assemble '+cloneId+' (Template 1 cloud preview)" || true',
+   'git push -u "https://x-access-token:${ASSEMBLY_GITHUB_TOKEN}@github.com/'+REPO+'.git" '+lineage.branch,
+   'echo PUSH_OK'
+  ].join('\n');
+  const result=await sandbox.runCommand({
+   cmd:'bash',
+   args:['-lc',script],
+   env:{
+    ASSEMBLY_GITHUB_TOKEN:token,
+    GIT_AUTHOR_NAME:'Akay Assembly',
+    GIT_AUTHOR_EMAIL:'akay-assembly@findmyinvite.com',
+    GIT_COMMITTER_NAME:'Akay Assembly',
+    GIT_COMMITTER_EMAIL:'akay-assembly@findmyinvite.com'
+   }
+  });
+  const code=typeof result?.exitCode==='number'?result.exitCode:(typeof result?.exit==='number'?result.exit:0);
+  if(code!==0){
+   const stderr=typeof result?.stderr==='function'?await result.stderr():String(result?.stderr||'');
+   const stdout=typeof result?.stdout==='function'?await result.stdout():String(result?.stdout||'');
+   throw new Error((stderr||stdout||'git push exited '+code).slice(0,700));
+  }
+ }catch(error){
+  const message=error instanceof Error?error.message:'Resume push failed.';
+  await patchAssemblyJob(jobId,{status:'failed',phase:'failed',error:message,detail:message},{env,fetchImpl});
+  throw new HttpError(503,message.slice(0,300));
+ }
+
+ return patchAssemblyJob(jobId,{
+  status:'preview',
+  phase:'preview',
+  percent:100,
+  label:'Preview ready — say notes / regen / Publish',
+  detail:'Clone '+cloneId+' on '+lineage.branch,
+  error:null,
+  cloneId,
+  demo:lineage.demo,
+  branch:lineage.branch,
+  githubUrl:lineage.githubUrl,
+  previewUrl:lineage.previewUrl
+ },{env,fetchImpl});
+}
+
 export function applyWorkerPatch(body={}){
  const patch={};
  if(typeof body.status==='string')patch.status=body.status;
