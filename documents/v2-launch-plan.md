@@ -45,7 +45,7 @@ Do not start 2.0 coding until Ashok says the train is open (or explicitly greenl
 **Scope:** Template CSS + optional light SVG/canvas motif layer driven by Assembly palette/motif fields already in `assembly-template1-prompts.mjs`.  
 **OSS first:** Prefer CSS + static SVG assets; do not invent a particle CMS.  
 **Done:** One Premium template shows motif system matching its pin palette across ≥3 sections.  
-**Open refine:** Global motif kit vs per-template assets? Recommend **per-template kit generated at Assembly**, shared CSS helpers.
+**Call (Ashok 2026-09-24):** **A** per-template kit. Motifs float at multiple depths with scroll parallax; some spawn from touch point on the invite.
 
 ### 3. Music library — LOCKED: IG extracts, no licensed packs
 **Intent:** Grow beyond the single seed track in `cms/music-library.json` (Vazhithunaiye).  
@@ -240,5 +240,6 @@ Prime hero ~1–2s before opening ends; start `hero.play()`; run 400–800ms tra
 | 2026-09-23 | **#9** Same ₹300 = **stills + video** (opening/hero), not stills-only | Ashok |
 | 2026-09-23 | **#14** Keep `/akay` basic; no PostHog revisit for 2.0 | Ashok |
 | | #11 Razorpay confirmed | pending |
-| | #2 motif kit global vs per-template | pending |
+| 2026-09-24 | **#2** Per-template floating motifs + parallax depths + touch-spawn | Ashok A |
+| | #2 motif kit global vs per-template | **A locked** |
 | | #6 pilot-first redesign | pending |

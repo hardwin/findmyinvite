@@ -62,3 +62,11 @@ html{scroll-behavior:smooth;scroll-padding-top:80px}body{margin:0;background:#f8
 .invitation-hero .cinematic-opening.is-spent{opacity:0}
 .invitation-hero .cinematic-hero-loop.is-live{opacity:1}
 }
+
+/* Launch 2.0 #2 — floating parallax motifs */
+.invitation-page{position:relative;isolation:isolate}
+.invite-motifs{position:absolute;left:0;top:0;width:100%;pointer-events:none;z-index:6;opacity:.95}
+.invitation-page.invitation-open .invite-motifs{opacity:1}
+.invitation-page .invite-section,.invitation-page .invitation-hero,.invitation-page .couple-overlay,.invitation-page .sound-toggle,.invitation-page .language-toggle,.invitation-page .use-design{position:relative;z-index:7}
+.invitation-page .sound-toggle,.invitation-page .language-toggle,.invitation-page .use-design{z-index:40}
+@media(prefers-reduced-motion:reduce){.invite-motifs{opacity:.45}}
