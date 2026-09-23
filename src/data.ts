@@ -7,7 +7,7 @@ export const galleryTierBlurb:Record<GalleryTier,string>={
  elite:'Elevated Royal designs with distinctive ceremony atmospheres.',
  free:'Elegant animated Classic invitations for every occasion.'
 };
-const premiumIds=new Set(['royal-heritage-8','royal-heritage-9','royal-prestige-2','royal-prestige-4']);
+const premiumIds=new Set(['royal-heritage-8','royal-heritage-9','royal-prestige-2','royal-prestige-4','royal-prestige-5']);
 const retiredPremiumIds=new Set(['rose-gold-blush-royal','royal-majesty','modern-minimal-royal','royal-prestige','royal-heritage','royal-crest','royal-heritage-1','royal-heritage-2','royal-heritage-3','royal-heritage-4','royal-heritage-5','royal-heritage-6','royal-heritage-7','royal-heritage-12','royal-heritage-13','royal-heritage-14','royal-prestige-1','royal-prestige-3']);
 export function galleryTierFor(id:string,royal=false):GalleryTier{
  if(retiredPremiumIds.has(id))return 'premium';
@@ -36,6 +36,7 @@ export const templates = [
  {id:'royal-prestige-2',name:'Rosu Rosu Rosu',description:'Prestigious cinematic opening with refined elegance and grandeur',image:'royal-prestige-2.jpg',video:'royal-prestige-2.mp4',heroVideo:'royal-prestige-2-hero.mp4',music:'vazhithunaiye.mp3',musicName:'Vazhithunaiye',badge:'New',royal:true,tier:'premium' as GalleryTier,color:'#957A41'},
  {id:'royal-prestige-3',name:'SAVE THE DATE test',description:'Prestigious cinematic opening with refined elegance and grandeur',image:'royal-prestige-3.jpg',video:'royal-prestige-3.mp4',heroVideo:'royal-prestige-3-hero.mp4',music:'vazhithunaiye.mp3',musicName:'Vazhithunaiye',badge:'New',royal:true,tier:'premium' as GalleryTier,color:'#957A41'},
  {id:'royal-prestige-4',name:'Gold Dream',description:'Prestigious cinematic opening with refined elegance and grandeur',image:'royal-prestige-4.jpg',video:'royal-prestige-4.mp4',heroVideo:'royal-prestige-4-hero.mp4',music:'vazhithunaiye.mp3',musicName:'Vazhithunaiye',badge:'New',royal:true,tier:'premium' as GalleryTier,color:'#8F4003'},
+ {id:'royal-prestige-5',name:'Ponmaalai',description:'Prestigious cinematic opening with refined elegance and grandeur',image:'royal-prestige-5.jpg',video:'royal-prestige-5.mp4',heroVideo:'royal-prestige-5-hero.mp4',music:'vazhithunaiye.mp3',musicName:'Vazhithunaiye',badge:'New',royal:true,tier:'premium' as GalleryTier,color:'#A26B48'},
  {id:'royal-heritage',name:'Royal Heritage',description:'Timeless cinematic opening with regal heritage storytelling',image:'3c934c61dec8899c.jpg',video:'royal-heritage.mp4',badge:'New',royal:true,tier:'premium' as GalleryTier,color:'#884936'},
  {id:'royal-heritage-1',name:'Royal Heritage 1',description:'Timeless cinematic opening with regal heritage storytelling',image:'royal-heritage-1.jpg',video:'royal-heritage-1.mp4',badge:'New',royal:true,tier:'premium' as GalleryTier,color:'#884936'},
  {id:'royal-heritage-2',name:'Royal Heritage 2',description:'Timeless cinematic opening with regal heritage storytelling',image:'royal-heritage-2.jpg',video:'royal-heritage-2.mp4',badge:'New',royal:true,tier:'premium' as GalleryTier,color:'#884936'},

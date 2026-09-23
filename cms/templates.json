@@ -268,5 +268,14 @@
     "badge": "New",
     "sort_order": 36,
     "published": true
+  },
+  {
+    "id": "royal-prestige-5",
+    "name": "Ponmaalai",
+    "description": "Prestigious cinematic opening with refined elegance and grandeur",
+    "collection": "royal",
+    "badge": "New",
+    "sort_order": 37,
+    "published": true
   }
 ]
