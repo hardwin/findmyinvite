@@ -122,6 +122,7 @@
 }
 .pipe-gate button[type="submit"]:disabled{opacity:.45;cursor:not-allowed}
 .pipe-gate .lead{font-size:14px;line-height:1.45}
+@media (max-width:720px){
   .pipe-board{grid-auto-columns:minmax(200px,78vw)}
   .pipe-top{flex-wrap:wrap}
 }
