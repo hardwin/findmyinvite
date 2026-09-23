@@ -39,6 +39,8 @@ After the `v1.5` tag: `/api/assembly` starts Template 1 on Vercel when `ASSEMBLY
 
 **2026-09-23 pipeline desk:** `/assembly/pipeline` — live kanban of `assembly_jobs`, asset links on the assembly branch, prompt downloads (stored on new runs in `assets.prompts`), Resume push, **Merge to main (PR link)**, **Add to Catalog** (`template1-add-catalog` upserts `template_catalog` via Vercel service_role — no SQL paste).
 
+**2026-09-23 v1.6 reward earned:** Ashok ran cloud Assembly end-to-end on findmyinvite.com (pin → gen → craft → assemble → GitHub branch → preview → pipeline Merge/Catalog). First reward locked. Next ships start from this train.
+
 ## /assembly — Premium intro clone desk (Approach B, local repo writes)
 
 Operator-only desk at `/assembly` (same Akay gate cookie as `/akay`). Clones a Premium cinematic template with 1..N alternate intro videos into the git tree the same way `royal-heritage-1/2/3` were made by hand:
