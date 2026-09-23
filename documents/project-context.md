@@ -17,7 +17,7 @@ Written 2026-09-15. Overwrite in place when facts change.
 | Not this product | Zareqia Supabase `ganphjxofavzmxzsecij` |
 | Vercel project (handoff) | `prj_ZPOw3XYQTehO9AVbkp8JyZEhke76` / team `team_xFQvLGR6rRhSUyAtItzx8b24` |
 | Vercel team plan (Ashok 2026-09-23) | **Pro** — Hobby notes from 2026-09-15 MCP are stale |
-| Product lock | **v1.5** (2026-09-23) · next **v1.6** cloud Assembly |
+| Product lock | **v1.5** locked · **v1.6** cloud Assembly earned · next public train **Launch 2.0** ([v2-launch-plan.md](v2-launch-plan.md)) |
 
 ## Offer (live config 2026-09-15)
 

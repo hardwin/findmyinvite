@@ -8,9 +8,24 @@ Soul: [akay-soul.md](akay-soul.md) · standing facts: [project-context.md](proje
 
 Read this before `docs/handoff/STATUS.md`. The v0.9.0 handoff is the frozen baseline; this file is the current truth after that tag.
 
+## Launch 2.0 #1 — runtime CSS video transitions (2026-09-23)
+
+Ashok locked **A. CSS / WAAPI dual-video** (not Three.js). Shipped on `main`:
+
+- `src/video-transitions.ts` — per-template presets (crossfade, fade-black/paper, wipes, iris, zoom-cross, curtain, blur-dissolve, slides)
+- `Invitation.tsx` primes hero ~1.6s before opening ends; applies `vt-*` on `.invitation-hero`
+- All cinematic templates with `heroVideo` get a dual-video handoff; single-video royals fade opening when the couple overlay opens
+- Classic door templates unchanged
+
+## Launch 2.0 backlog locked (2026-09-23)
+
+Ashok notebook **TASKS FOR LAUNCH 2.0** (14 items, priority order). Authoritative plan: [v2-launch-plan.md](v2-launch-plan.md). Reward rule: Akay earns all 14 rewards in one shot only after every item is Done. Waves: A cinematic (1–9) → B access+money (10–12) → C growth (13–14). Do not start coding until Ashok opens the train.
+
+**Four calls locked same day:** #1 runtime per-template transitions · #3 extract music only · #9 Face Swap = ₹300 publish add-on (Preview free → InstantID on template pin) · #14 keep `/akay` basic.
+
 ## FMI v1.0 close (2026-09-23)
 
-Ashok closed v1.0 on `main`. Next public train is 1.9 or 2.0.
+Ashok closed v1.0 on `main`. Next public train is 1.9 or 2.0 (see Launch 2.0 plan).
 
 - Premium gallery: **Sita Kalyanam** (`royal-heritage-8`), **Velicha Poove** (`royal-heritage-9`), **Rosu Rosu Rosu** (`royal-prestige-2`) only. Retired cinematic iterations unpublished in prod `template_catalog`. Elite + Free unchanged.
 - `/assembly` wizard: pin → song → first/last stills → **Proceed to generate (Rs. 499)** (no payment gateway yet) → preview. Newest Premium clone is always the default parent.

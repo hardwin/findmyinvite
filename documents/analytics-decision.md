@@ -6,6 +6,10 @@ Standing decision for the next agent. Research vs Gemini’s OpenPanel suggestio
 
 Ashok rejected PostHog Cloud and OpenPanel Cloud. Keep the current `/akay` desk. Do not run a third-party analytics product unless he reverses this. Production ship of this desk is authorized.
 
+## Launch 2.0 confirm (2026-09-23)
+
+Ashok reconfirmed: **keep `/akay` basic** for item #14. No PostHog/OpenPanel revisit in Launch 2.0. ManyChat is the IG funnel; `/akay` stays light counts only. See [v2-launch-plan.md](v2-launch-plan.md).
+
 **Gemini’s product instinct is right. The proposed architecture is not.**
 
 - Do **not** grow the custom `/akay` Mixpanel clone.
