@@ -277,5 +277,14 @@
     "badge": "New",
     "sort_order": 37,
     "published": true
+  },
+  {
+    "id": "royal-prestige-6",
+    "name": "Pookale Satru Oyvedungal",
+    "description": "Prestigious cinematic opening with refined elegance and grandeur",
+    "collection": "royal",
+    "badge": "New",
+    "sort_order": 38,
+    "published": true
   }
 ]
