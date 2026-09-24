@@ -17,9 +17,9 @@ export function draftData(input,template){
  if(data.time&&!validTime(data.time))throw new HttpError(400,'Use a valid time.');
  if(!musicTracks.has(data.music)&&data.music!=='/assets/temple/invite-bg.mp3')throw new HttpError(400,'Choose an available music track.');
  const photos=input.photos===undefined?[]:input.photos;
- if(!Array.isArray(photos)||photos.length>4)throw new HttpError(400,'Use up to four library photos.');
+ if(!Array.isArray(photos)||photos.length>8)throw new HttpError(400,'Use up to eight library photos.');
  data.photos=photos.map(p=>{if(typeof p!=='string'||!/^\/assets\/(?:temple\/)?[a-zA-Z0-9_.-]+\.(?:jpg|jpeg|png|webp)$/.test(p))throw new HttpError(400,'Choose a library photo for this pilot.');return p;});
- data.sections={};for(const key of ['welcome','scratch','gallery','countdown','timeline','venue','dress','preEvents','transport','accommodation','gifts','rsvp'])data.sections[key]=input.sections?.[key]!==false;
+ data.sections={};for(const key of ['welcome','scratch','bride','groom','gallery','countdown','timeline','venue','dress','preEvents','transport','accommodation','gifts','rsvp'])data.sections[key]=input.sections?.[key]!==false;
  for(const key of ['timeline','preEvents']){const events=input[key]===undefined?[]:input[key];if(!Array.isArray(events)||events.length>20)throw new HttpError(400,'Use up to 20 events.');data[key]=events.map(e=>{if(!e||typeof e!=='object'||Array.isArray(e)||typeof e.title!=='string'||e.title.length>150||typeof e.time!=='string'||e.time.length>16||typeof e.description!=='string'||e.description.length>1000)throw new HttpError(400,'Check event details.');if(e.time&&!(e.time.length===16&&e.time[10]==='T'&&validDate(e.time.slice(0,10))&&validTime(e.time.slice(11))))throw new HttpError(400,'Use a valid event date and time.');return {title:e.title,time:e.time,description:e.description};});}
  const overrides=input.textOverrides??{};
  if(!overrides||typeof overrides!=='object'||Array.isArray(overrides)||Object.keys(overrides).length>200)throw new HttpError(400,'Invalid text edits.');

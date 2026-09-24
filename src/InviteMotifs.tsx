@@ -171,9 +171,11 @@ function mediaRects(page: HTMLElement | null): DOMRect[] {
       '.invite-chapter-inner',
       '.scratch-heart',
       '.photo-slideshow',
+      // Punch only photo hearts — not the full Moments stage (that hid invite motifs).
+      '.moments-ig-photo',
+      '.invite-person-frame',
       '.classic-hero-photo',
       '.gallery',
-      '.moments-gallery',
       '.photo-grid',
     ].join(','),
   );

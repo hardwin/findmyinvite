@@ -102,7 +102,7 @@ test('draft event rows permit postponed empty time but reject malformed or impos
 test('draft photos are limited to four library assets with invalid supplied values rejected', () => {
   const photos = ['/assets/temple/couple.webp', '/assets/photo.jpg'];
   assert.deepEqual(draftData({...partial, photos}, 'emerald-noir').photos, photos);
-  for (const photos of [['https://evil.example/a.png'], ['data:image/png;base64,AAAA'], ['/api/media?slug=test&slot=0'], Array(5).fill('/assets/a.jpg'), 'not-an-array']) {
+  for (const photos of [['https://evil.example/a.png'], ['data:image/png;base64,AAAA'], ['/api/media?slug=test&slot=0'], Array(9).fill('/assets/a.jpg'), 'not-an-array']) {
     invalid(() => draftData({...partial, photos}, 'emerald-noir'));
   }
 });

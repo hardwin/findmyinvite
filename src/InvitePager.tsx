@@ -59,6 +59,12 @@ function wireNestedScroll(root: HTMLElement | null) {
     if (!el || el.scrollHeight <= el.clientHeight + 8) return;
     // Hero is always pager-owned — never nest-scroll it.
     if (el.querySelector('.invitation-hero')) return;
+    // Moments wall owns vertical scrub — never nest-scroll that slide.
+    if ((e.target as HTMLElement | null)?.closest?.('.moments-wall, .moments-wall-chapter')) {
+      e.stopPropagation();
+      return;
+    }
+
     // Active scratch brush owns the gesture — revealed / idle hearts do not.
     const scratch = (e.target as HTMLElement | null)?.closest?.('.scratch-heart') as HTMLElement | null;
     if (scratch && !scratch.classList.contains('is-revealed')) {
@@ -202,6 +208,19 @@ export default function InvitePager({enabled, children}: Props) {
     s.update();
   }, [enabled]);
 
+  useEffect(() => {
+    const onEdge = (e: Event) => {
+      if (!enabled) return;
+      const dir = (e as CustomEvent<{dir?: string}>).detail?.dir;
+      const s = swiperRef.current;
+      if (!s || transitioning.current) return;
+      if (dir === 'next') s.slideNext(420);
+      else if (dir === 'prev') s.slidePrev(260);
+    };
+    window.addEventListener('invite-moments-edge', onEdge);
+    return () => window.removeEventListener('invite-moments-edge', onEdge);
+  }, [enabled]);
+
   const slides = Children.toArray(children).filter(isSlideChild);
 
   if (reduced) {
@@ -285,15 +304,16 @@ export default function InvitePager({enabled, children}: Props) {
           if (Math.abs(diff) <= 6) return;
           transitioning.current = true;
           if (diff < 0) s.slideNext(420);
-          else s.slidePrev(420);
+          else s.slidePrev(260);
         }}
         onSlideChangeTransitionStart={(s) => {
           transitioning.current = true;
           const from = prevSlide.current;
           const to = s.activeIndex;
 
-          // Incomplete scratch: first leave attempt → bounce back + pulse; second → allow.
-          if (to !== from) {
+          // Incomplete scratch: first leave attempt → bounce + pulse; second → allow.
+          // Only gate when going deeper (to > from). Reverse toward top is free.
+          if (to > from) {
             const fromEl = s.slides[from] as HTMLElement | undefined;
             const heart = fromEl?.querySelector?.('.scratch-heart') as HTMLElement | null;
             if (
