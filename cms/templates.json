@@ -295,5 +295,14 @@
     "badge": "New",
     "sort_order": 39,
     "published": true
+  },
+  {
+    "id": "royal-prestige-8",
+    "name": "Melliname",
+    "description": "Prestigious cinematic opening with refined elegance and grandeur",
+    "collection": "royal",
+    "badge": "New",
+    "sort_order": 40,
+    "published": true
   }
 ]
