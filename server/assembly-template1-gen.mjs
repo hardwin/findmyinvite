@@ -17,10 +17,16 @@ export function isModerationError(error){
  return Boolean(error&&(error.moderated||error.name==='ModerationError'))||/moderat|nsfw|safety|flagged|blocked/i.test(String(error?.message||''));
 }
 
-/** Map Template 1 still roles → Replicate model. Plates stay on xAI Imagine; hero/opening stills on gpt-image-2.5-flare. */
+/** Map Template 1 still roles → Replicate model. Plates + chat mix stay on xAI Imagine; hero/opening stills on gpt-image-2.5-flare. */
 export function imageModelForRole(role){
  const raw=String(role||'').toLowerCase();
- if(raw==='plate1'||raw==='plate2'||raw.startsWith('plate')||raw.includes('section')||raw.includes('frame'))return PLATE_MODEL;
+ if(
+  raw==='mix'||
+  raw==='plate1'||raw==='plate2'||raw==='plate'||
+  raw.startsWith('plate')||
+  raw.includes('section')||
+  raw.includes('frame')
+ )return PLATE_MODEL;
  return STILL_MODEL;
 }
 
@@ -28,6 +34,7 @@ export function estimateCost(role,{duration}={}){
  switch(role){
   case 'hero-video':return +(COSTS.heroVideoPerSecond*(Number(duration)||HERO_SECONDS)).toFixed(2);
   case 'opening-video':return +(COSTS.openingPerSecond*(Number(duration)||OPENING_SECONDS)).toFixed(2);
+  case 'mix':
   case 'plate1':
   case 'plate2':
   case 'plate':return COSTS.plate;

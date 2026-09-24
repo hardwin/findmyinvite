@@ -89,6 +89,7 @@ test('Template 1 default first still demands a frame-filling fortune door',()=>{
  assert.equal(imageModelForRole('opening-first'),STILL_MODEL);
  assert.equal(imageModelForRole('hero-still'),STILL_MODEL);
  assert.equal(imageModelForRole('plate1'),PLATE_MODEL);
+ assert.equal(imageModelForRole('mix'),PLATE_MODEL);
  assert.equal(OPENING_SECONDS,12);
  assert.match(p.lastRegen,/ABSOLUTELY NO TEXT/);
  assert.deepEqual(p.params,DEFAULT_PARAMS);

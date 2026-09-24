@@ -65,7 +65,8 @@ export default async function handler(req,res){
 
   let modelMessages;
   try{
-   modelMessages=await convertToModelMessages(messages);
+   // Drop dangling tool calls (e.g. mix timed out mid-stream) so Retry / next turn works.
+   modelMessages=await convertToModelMessages(messages,{ignoreIncompleteToolCalls:true});
   }catch(error){
    console.error('assembly-chat convertToModelMessages',error);
    throw new HttpError(400,'Could not read chat messages. Refresh and try again.');

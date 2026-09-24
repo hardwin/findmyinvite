@@ -167,24 +167,34 @@ export function buildAssemblyChatTools({env=process.env,fetchImpl=fetch,parentId
     provider:z.enum(['auto','replicate','openai','xai']).optional()
    }),
    execute:async(input)=>{
-    const result=await mixAssemblyImage({
-     pinUrl:input.pinUrl,
-     referenceUrls:input.referenceUrls||[],
-     styleTwist:input.styleTwist||'',
-     peopleNote:input.peopleNote||'',
-     extraPrompt:input.extraPrompt||'',
-     provider:input.provider||'auto',
-     env,
-     fetchImpl
-    });
-    return {
-     ok:true,
-     urls:result.urls,
-     provider:result.provider,
-     predictionId:result.predictionId,
-     costUsd:result.costUsd,
-     message:'Candidate ready — ask Lock / Remix / Retry.'
-    };
+    try{
+     const result=await mixAssemblyImage({
+      pinUrl:input.pinUrl,
+      referenceUrls:input.referenceUrls||[],
+      styleTwist:input.styleTwist||'',
+      peopleNote:input.peopleNote||'',
+      extraPrompt:input.extraPrompt||'',
+      provider:input.provider||'auto',
+      env,
+      fetchImpl
+     });
+     return {
+      ok:true,
+      urls:result.urls,
+      provider:result.provider,
+      predictionId:result.predictionId,
+      costUsd:result.costUsd,
+      message:'Candidate ready — ask Lock / Remix / Retry.'
+     };
+    }catch(error){
+     // Always return a tool result so the UI never sticks on "input available" / MissingToolResultsError.
+     console.error('assembly-chat mix_image',error?.message||error);
+     return {
+      ok:false,
+      error:String(error?.message||error||'Image mix failed.').slice(0,400),
+      message:'Mix failed — try again or pick a different pin/style.'
+     };
+    }
    }
   }),
 

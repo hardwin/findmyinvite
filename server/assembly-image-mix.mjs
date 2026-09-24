@@ -2,6 +2,7 @@
 import {put} from '@vercel/blob';
 import {HttpError} from './core.mjs';
 import {resolveReferenceImage,normalizeReferenceImage,preferPublicImageUrl,resolveReplicateImageUrl} from './assembly-ai.mjs';
+import {PLATE_MODEL} from './assembly-template1-prompts.mjs';
 import {runReplicateImage} from './assembly-template1-gen.mjs';
 
 function assertHttpUrl(value,label='URL'){
@@ -35,9 +36,11 @@ async function ensurePublicImageUrl(imageUrl,{env,fetchImpl}={}){
 
 async function mixViaReplicate({baseImageUrl,prompt,env,fetchImpl,sleepImpl,onTick}){
  const {url}=await ensurePublicImageUrl(baseImageUrl,{env,fetchImpl});
+ // Chat mix must stay on xAI Imagine (PLATE_MODEL) — gpt-image-2.5-flare routinely blows the chat maxDuration and leaves a dangling tool call.
  const result=await runReplicateImage({
   prompt,
   image:url,
+  model:PLATE_MODEL,
   env,
   fetchImpl,
   sleepImpl,
