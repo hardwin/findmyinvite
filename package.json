@@ -13,6 +13,8 @@
     "assemble:ffmpeg-snapshot": "node --preserve-symlinks --preserve-symlinks-main scripts/assembly-ffmpeg-snapshot.mjs"
   },
   "dependencies": {
+    "@ai-sdk/openai": "^4.0.74",
+    "@ai-sdk/react": "^4.0.116",
     "@radix-ui/react-dialog": "^1.1.23",
     "@radix-ui/react-select": "^2.3.7",
     "@radix-ui/react-separator": "^1.1.15",
@@ -22,6 +24,7 @@
     "@vercel/blob": "^2.8.0",
     "@vercel/functions": "^3.9.9",
     "@vercel/sandbox": "^1.10.2",
+    "ai": "^7.0.113",
     "canvas-confetti": "^1.9.4",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -36,7 +39,8 @@
     "recharts": "^3.10.1",
     "swiper": "^11.2.10",
     "tailwind-merge": "^3.7.0",
-    "three": "^0.180.0"
+    "three": "^0.180.0",
+    "zod": "^4.6.5"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.3",

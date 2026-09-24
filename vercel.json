@@ -24,6 +24,10 @@
       "includeFiles": "{src/data.ts,cms/music-library.json,scripts/assembly-cloud-worker.mjs}",
       "maxDuration": 800,
       "memory": 1024
+    },
+    "api/assembly-chat.mjs": {
+      "maxDuration": 120,
+      "memory": 1024
     }
   },
   "crons": [
