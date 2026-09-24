@@ -88,7 +88,7 @@ async function mixViaOpenAI({baseImageUrl,prompt,env,fetchImpl}){
 
 async function mixViaXai({baseImageUrl,prompt,env,fetchImpl}){
  // xAI image path rides Replicate's xai/grok-imagine-image (same as Template 1 section plates).
- // Door-First / last / hero stills use openai/gpt-image-2 via role routing in runReplicateImage.
+ // Door-First / last / hero stills use openai/gpt-image-2.5-flare via role routing in runReplicateImage.
  return mixViaReplicate({baseImageUrl,prompt,env,fetchImpl});
 }
 

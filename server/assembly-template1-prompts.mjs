@@ -2,7 +2,7 @@
 // Recipe source of truth: documents/template1-base-prompts.md (from Example.md / wire-proven Kaatrukulle).
 
 /** Door-First, last, and hero stills — Replicate OpenAI. */
-export const STILL_MODEL='openai/gpt-image-2';
+export const STILL_MODEL='openai/gpt-image-2.5-flare';
 /** Section frame / plate backgrounds — Replicate xAI Imagine. */
 export const PLATE_MODEL='xai/grok-imagine-image';
 /** @deprecated Prefer STILL_MODEL / PLATE_MODEL. Kept as the primary still default. */

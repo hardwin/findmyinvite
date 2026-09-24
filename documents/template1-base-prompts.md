@@ -21,7 +21,7 @@ Wire-proven source: `/workspace/kaatrukulle/TEMPLATE1-GEN-PROMPTS-AND-IMAGE-MODE
    - AMBIENT_MOTION soft motion that matches the medium (petals, paper flicker, pigment drips)
 3. Substitute into each BASE prompt below → FILLED prompt
 4. Route:
-   - Stills FIRST/LAST/hero → Replicate `openai/gpt-image-2`, image = pin URL (or last still for hero)
+   - Stills FIRST/LAST/hero → Replicate `openai/gpt-image-2.5-flare`, image = pin URL (or last still for hero)
    - Section frame plates → Replicate `xai/grok-imagine-image`, image = pin URL
    - Hero still → same model, image = LAST output URL (never pin)
    - Hero video → Replicate xai/grok-imagine-video-1.5 from hero still

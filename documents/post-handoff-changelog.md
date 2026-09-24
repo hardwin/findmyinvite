@@ -8,10 +8,14 @@ Soul: [akay-soul.md](akay-soul.md) · standing facts: [project-context.md](proje
 
 Read this before `docs/handoff/STATUS.md`. The v0.9.0 handoff is the frozen baseline; this file is the current truth after that tag.
 
-## 2026-09-25 — Still model split (gpt-image-2 + xAI plates)
-- Door-First, last, and hero stills → Replicate **`openai/gpt-image-2`** (`STILL_MODEL`).
+## 2026-09-25 — Still model → gpt-image-2.5-flare (speed)
+- Door-First / last / hero stills switched from `openai/gpt-image-2` → **`openai/gpt-image-2.5-flare`** (faster). Plates stay on `xai/grok-imagine-image`.
+
+## 2026-09-25 — Still model split (gpt-image-2.5-flare + xAI plates)
+- Door-First, last, and hero stills → Replicate **`openai/gpt-image-2.5-flare`** (`STILL_MODEL`).
 - Section frame / plate backgrounds → Replicate **`xai/grok-imagine-image`** (`PLATE_MODEL`).
 - Routing: `imageModelForRole(role)` inside `runReplicateImage` (no caller changes required beyond role).
+- **Prod ship:** `aaa75e1` → Vercel READY · live bundle `/assets/index-P8NPzIOj.js` (2026-09-24 20:00 UTC).
 
 ## 2026-09-25 — Door-First / last still iterate → Approve
 - Local Template 1 review: iterate Door-First or last opening still (`regenTemplate1Still` / `template1-regen-still`), then Approve (`template1-proceed`).

@@ -4,7 +4,7 @@ import {runGrokImagineVideo,runXaiImagineVideo,downloadVideoBuffer} from './asse
 import {STILL_MODEL,PLATE_MODEL,HERO_SECONDS,OPENING_SECONDS} from './assembly-template1-prompts.mjs';
 
 export const COSTS=Object.freeze({
- still:0.08,       // openai/gpt-image-2 (Door-First / last / hero)
+ still:0.08,       // openai/gpt-image-2.5-flare (Door-First / last / hero)
  plate:0.02,       // xai/grok-imagine-image (section frame backgrounds)
  heroVideoPerSecond:0.08,
  openingPerSecond:0.14
@@ -17,7 +17,7 @@ export function isModerationError(error){
  return Boolean(error&&(error.moderated||error.name==='ModerationError'))||/moderat|nsfw|safety|flagged|blocked/i.test(String(error?.message||''));
 }
 
-/** Map Template 1 still roles → Replicate model. Plates stay on xAI Imagine; hero/opening stills on gpt-image-2. */
+/** Map Template 1 still roles → Replicate model. Plates stay on xAI Imagine; hero/opening stills on gpt-image-2.5-flare. */
 export function imageModelForRole(role){
  const raw=String(role||'').toLowerCase();
  if(raw==='plate1'||raw==='plate2'||raw.startsWith('plate')||raw.includes('section')||raw.includes('frame'))return PLATE_MODEL;
@@ -89,7 +89,7 @@ export function formatProviderError(status,body){
  return (parts.filter(Boolean).join(' — ')||'no provider body').slice(0,450);
 }
 
-/** Build Replicate image input for the chosen model (gpt-image-2 vs xAI Imagine). */
+/** Build Replicate image input for the chosen model (gpt-image-2.5-flare vs xAI Imagine). */
 export function buildReplicateImageInput(model,{prompt,image}={}){
  const text=String(prompt||'').trim();
  const src=image?String(image):'';
@@ -109,7 +109,7 @@ export function buildReplicateImageInput(model,{prompt,image}={}){
  return {prompt:text,image:src,aspect_ratio:'9:16'};
 }
 
-/** Replicate image: Door-First/last/hero → openai/gpt-image-2; plates → xai/grok-imagine-image. */
+/** Replicate image: Door-First/last/hero → openai/gpt-image-2.5-flare; plates → xai/grok-imagine-image. */
 export async function runReplicateImage({prompt,image,model,env=process.env,fetchImpl=fetch,sleepImpl=sleep,onTick,role='still'}={}){
  const token=replicateToken(env);
  const resolvedModel=model||imageModelForRole(role);

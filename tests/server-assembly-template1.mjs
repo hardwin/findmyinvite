@@ -83,7 +83,7 @@ test('Template 1 default first still demands a frame-filling fortune door',()=>{
  assert.match(p.opening,/SAVE THE DATE/);
  assert.ok(p.opening.includes(OPENING_SAVE_THE_DATE));
  for(const key of Object.keys(WIRE))assert.equal(p[key],WIRE[key],key);
- assert.equal(STILL_MODEL,'openai/gpt-image-2');
+ assert.equal(STILL_MODEL,'openai/gpt-image-2.5-flare');
  assert.equal(PLATE_MODEL,'xai/grok-imagine-image');
  assert.equal(IMAGE_MODEL,STILL_MODEL);
  assert.equal(imageModelForRole('opening-first'),STILL_MODEL);
@@ -211,10 +211,10 @@ test('spend ledger charges, refuses over budget, and estimates match the packs',
  assert.equal(ledger.snapshot().entries.length,2);
 });
 
-test('runReplicateImage posts Door-First to openai/gpt-image-2 and downloads output',async()=>{
+test('runReplicateImage posts Door-First to openai/gpt-image-2.5-flare and downloads output',async()=>{
  const jpeg=Buffer.from([0xff,0xd8,0xff,0xe0,1,2,3]);
  const fetchImpl=async(url,opts={})=>{
-  if(url==='https://api.replicate.com/v1/models/openai/gpt-image-2/predictions'){
+  if(url==='https://api.replicate.com/v1/models/openai/gpt-image-2.5-flare/predictions'){
    const body=JSON.parse(opts.body);
    assert.deepEqual(Object.keys(body.input).sort(),['aspect_ratio','input_images','number_of_images','output_format','prompt','quality']);
    assert.equal(body.input.aspect_ratio,'9:16');
@@ -231,7 +231,7 @@ test('runReplicateImage posts Door-First to openai/gpt-image-2 and downloads out
  assert.equal(result.url,'https://replicate.delivery/out.jpg');
  assert.equal(Buffer.compare(result.buffer,jpeg),0);
  assert.equal(result.costUsd,0.08);
- assert.equal(result.model,'openai/gpt-image-2');
+ assert.equal(result.model,'openai/gpt-image-2.5-flare');
 });
 
 test('runReplicateImage keeps section plates on xai/grok-imagine-image',async()=>{
