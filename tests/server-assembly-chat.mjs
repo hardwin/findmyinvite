@@ -6,15 +6,19 @@ import {assertHttpUrl,buildMixPrompt} from '../server/assembly-image-mix.mjs';
 import {HttpError} from '../server/core.mjs';
 
 test('assembly chat system prompt covers mission order',()=>{
- assert.match(ASSEMBLY_CHAT_SYSTEM,/Pinterest|Pin/i);
+ assert.match(ASSEMBLY_CHAT_SYSTEM,/FindMyInvite/i);
+ assert.match(ASSEMBLY_CHAT_SYSTEM,/digital wedding invitation/i);
+ assert.match(ASSEMBLY_CHAT_SYSTEM,/anime/i);
+ assert.match(ASSEMBLY_CHAT_SYSTEM,/Pinterest|Pin|Attach|Camera/i);
  assert.match(ASSEMBLY_CHAT_SYSTEM,/VIBE|display name/i);
- assert.match(ASSEMBLY_CHAT_SYSTEM,/Template 1/i);
- assert.match(ASSEMBLY_CHAT_SYSTEM,/xAI|xai/i);
+ assert.match(ASSEMBLY_CHAT_SYSTEM,/Template 1|start_template1/i);
  assert.match(ASSEMBLY_CHAT_SYSTEM,/Hi/i);
  assert.match(ASSEMBLY_CHAT_SYSTEM,/MUST use tools/i);
  assert.match(ASSEMBLY_CHAT_MODEL,/grok/i);
- assert.match(ASSEMBLY_CHAT_SYSTEM,/Grok|xAI/i);
- assert.match(ASSEMBLY_CHAT_SYSTEM,/Single Image|single hero|Chat/i);
+ assert.match(ASSEMBLY_CHAT_SYSTEM,/mix_image|lock_final_image/i);
+ assert.match(ASSEMBLY_CHAT_SYSTEM,/regen_opening_still|approve_stills/i);
+ assert.match(ASSEMBLY_CHAT_SYSTEM,/Door-First|Door-First|iterate/i);
+ assert.doesNotMatch(ASSEMBLY_CHAT_SYSTEM,/Grok Assembly Coach/i);
 });
 
 test('assemblyChatModel is xAI Grok only',async()=>{
@@ -66,7 +70,9 @@ test('buildAssemblyChatTools exposes the operator desk tools',()=>{
   'start_template1',
   'get_job_status',
   'cancel_job',
-  'retry_phase'
+  'retry_phase',
+  'regen_opening_still',
+  'approve_stills'
  ])assert.ok(tools[name],name);
 });
 

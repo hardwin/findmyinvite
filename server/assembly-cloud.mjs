@@ -11,6 +11,7 @@ import {
  newCallbackSecret,
  newJobId,
  patchAssemblyJob,
+ discardAssemblyJob,
  secretsMatch,
  vercelPreviewUrl,
  viewFromRow
@@ -271,6 +272,10 @@ export async function cancelCloudTemplate1Job(jobId,{env=process.env,fetchImpl=f
   cancelRequested:true,
   detail:'Cancel requested — worker will stop after the current inference call.'
  },{env,fetchImpl});
+}
+
+export async function discardCloudTemplate1Job(jobId,{env=process.env,fetchImpl=fetch}={}){
+ return discardAssemblyJob(jobId,{env,fetchImpl});
 }
 
 /** Resume after a git-push failure: reuse the live Sandbox tree (no re-gen). */

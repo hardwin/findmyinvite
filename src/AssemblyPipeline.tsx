@@ -1,4 +1,4 @@
-import {useEffect,useMemo,useState,type FormEvent} from 'react';
+import {useEffect,useMemo,useState,type FormEvent,type MouseEvent} from 'react';
 import './assembly-pipeline.css';
 
 type Job={
@@ -9,28 +9,28 @@ type Job={
  label:string;
  detail?:string;
  displayName?:string;
- pinUrl?:string;
  cloneId?:string|null;
  branch?:string|null;
  githubUrl?:string|null;
  previewUrl?:string|null;
- demo?:string|null;
+ pinUrl?:string;
  spend?:{budget?:number;used?:number;remaining?:number};
- prompts?:Record<string,string>|null;
- written?:string[];
+ stills?:{first?:string|null;last?:string|null};
+ regenRole?:string|null;
  error?:string|null;
- publishRequested?:boolean;
+ cancelRequested?:boolean;
  catalogPublished?:boolean;
  mergeUrl?:string|null;
  sandboxId?:string|null;
+ createdAt?:number;
  updatedAt?:number;
 };
 
 type ColumnId='queued'|'pin'|'gen'|'craft'|'assemble'|'preview'|'failed';
 
 const COLUMNS:Array<{id:ColumnId;title:string}>=[
- {id:'queued',title:'Queued / Boot'},
- {id:'pin',title:'Pin + prompts'},
+ {id:'queued',title:'Queued'},
+ {id:'pin',title:'Pin'},
  {id:'gen',title:'Gen'},
  {id:'craft',title:'Craft'},
  {id:'assemble',title:'Assemble'},
@@ -39,7 +39,7 @@ const COLUMNS:Array<{id:ColumnId;title:string}>=[
 ];
 
 function columnFor(job:Job):ColumnId{
- if(job.status==='failed')return 'failed';
+ if(job.status==='failed'||job.status==='cancelled')return 'failed';
  if(job.status==='preview')return 'preview';
  const phase=String(job.phase||'queued');
  if(phase==='pin')return 'pin';
@@ -47,21 +47,41 @@ function columnFor(job:Job):ColumnId{
  if(phase==='craft')return 'craft';
  if(phase==='assemble')return 'assemble';
  if(phase==='preview')return 'preview';
- if(phase==='failed')return 'failed';
+ if(phase==='failed'||phase==='cancelled')return 'failed';
  return 'queued';
 }
 
-function githubRaw(cloneId:string,path:string){
- const branch='assembly/'+cloneId;
- return 'https://raw.githubusercontent.com/hardwin/findmyinvite/'+encodeURIComponent(branch).replace(/%2F/g,'/')+'/'+path.split('/').map(encodeURIComponent).join('/');
+function jobTime(job:Job){
+ return Number(job.updatedAt||job.createdAt||0)||0;
 }
 
-function downloadText(filename:string,text:string){
- const blob=new Blob([text],{type:'text/plain;charset=utf-8'});
- const url=URL.createObjectURL(blob);
- const a=document.createElement('a');
- a.href=url;a.download=filename;a.click();
- URL.revokeObjectURL(url);
+function formatJobDate(ms:number){
+ if(!ms)return '—';
+ const d=new Date(ms);
+ if(Number.isNaN(d.getTime()))return '—';
+ const day=d.getDate();
+ const ord=day%10===1&&day%100!==11?'st':day%10===2&&day%100!==12?'nd':day%10===3&&day%100!==13?'rd':'th';
+ return day+ord+' '+d.toLocaleString('en-GB',{month:'short'})+' '+d.getFullYear();
+}
+
+function canDiscard(job:Job){
+ const col=columnFor(job);
+ return col==='queued'||col==='failed';
+}
+
+function needsApproval(job:Pick<Job,'status'|'phase'>&{stills?:{first?:string|null;last?:string|null}}){
+ const status=String(job.status||'');
+ const phase=String(job.phase||'');
+ if(status==='review'||phase==='review')return true;
+ const hasStills=Boolean(job.stills?.first&&job.stills?.last);
+ if((status==='failed'||status==='cancelled')&&hasStills)return true;
+ return false;
+}
+
+function spendLabel(job:Job){
+ const used=job.spend?.used;
+ if(used==null||Number.isNaN(Number(used)))return '$0.00';
+ return '$'+Number(used).toFixed(2);
 }
 
 export default function AssemblyPipeline(){
@@ -91,15 +111,15 @@ export default function AssemblyPipeline(){
   setJobs(Array.isArray(body.jobs)?body.jobs:[]);
  }
 
- async function bootstrap(){
-  setBusy(true);
-  setError('');
-  try{await loadJobs();}
-  catch(err){setError(err instanceof Error?err.message:'Could not open Pipeline.');}
-  finally{setBusy(false);}
- }
-
- useEffect(()=>{void bootstrap();},[]);
+ useEffect(()=>{
+  void (async()=>{
+   setBusy(true);
+   setError('');
+   try{await loadJobs();}
+   catch(err){setError(err instanceof Error?err.message:'Could not open Pipeline.');}
+   finally{setBusy(false);}
+  })();
+ },[]);
 
  useEffect(()=>{
   if(!authed)return;
@@ -133,8 +153,75 @@ export default function AssemblyPipeline(){
  const grouped=useMemo(()=>{
   const map:Record<ColumnId,Job[]>={queued:[],pin:[],gen:[],craft:[],assemble:[],preview:[],failed:[]};
   for(const job of jobs)map[columnFor(job)].push(job);
+  for(const id of Object.keys(map) as ColumnId[])map[id].sort((a,b)=>jobTime(b)-jobTime(a));
   return map;
  },[jobs]);
+
+ async function discardJob(jobId:string,event?:MouseEvent){
+  event?.stopPropagation();
+  event?.preventDefault();
+  if(!window.confirm('Discard this job from the board?'))return;
+  setActionBusy(true);
+  setError('');
+  try{
+   const res=await fetch('/api/assembly?action=template1-discard',{
+    method:'POST',
+    credentials:'same-origin',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({jobId})
+   });
+   const body=await res.json().catch(()=>({}));
+   if(!res.ok)throw new Error(body.error||'Discard failed.');
+   if(selectedId===jobId)setSelectedId(null);
+   await loadJobs();
+  }catch(err){
+   setError(err instanceof Error?err.message:'Discard failed.');
+  }finally{
+   setActionBusy(false);
+  }
+ }
+
+ async function approveJob(jobId:string,event?:MouseEvent){
+  event?.stopPropagation();
+  event?.preventDefault();
+  setActionBusy(true);
+  setError('');
+  try{
+   const res=await fetch('/api/assembly?action=template1-proceed',{
+    method:'POST',
+    credentials:'same-origin',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({jobId})
+   });
+   const body=await res.json().catch(()=>({}));
+   if(!res.ok)throw new Error(body.error||'Approve failed.');
+   await loadJobs();
+  }catch(err){
+   setError(err instanceof Error?err.message:'Approve failed.');
+  }finally{
+   setActionBusy(false);
+  }
+ }
+
+ async function iterateStill(jobId:string,role:'first'|'last'){
+  setActionBusy(true);
+  setError('');
+  try{
+   const res=await fetch('/api/assembly?action=template1-regen-still',{
+    method:'POST',
+    credentials:'same-origin',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({jobId,role})
+   });
+   const body=await res.json().catch(()=>({}));
+   if(!res.ok)throw new Error(body.error||'Iterate failed.');
+   await loadJobs();
+  }catch(err){
+   setError(err instanceof Error?err.message:'Iterate failed.');
+  }finally{
+   setActionBusy(false);
+  }
+ }
 
  async function resumePush(jobId:string){
   setActionBusy(true);
@@ -181,7 +268,7 @@ export default function AssemblyPipeline(){
     <form onSubmit={onGate}>
      <p className="pipe-brand">FindMyInvite</p>
      <h1 className="pipe-title">Pipeline</h1>
-     <p className="lead" style={{margin:0,color:'#8C4D90'}}>Operator desk — same access code as /akay.</p>
+     <p className="lead">Operator desk — same access code as /akay.</p>
      <input type="password" inputMode="numeric" autoComplete="off" placeholder="Access code" value={code} onChange={e=>setCode(e.target.value)} aria-label="Access code"/>
      {error&&<p className="pipe-alert" role="alert">{error}</p>}
      <button type="submit" disabled={busy||!code.trim()}>{busy?'Opening…':'Open pipeline'}</button>
@@ -203,6 +290,7 @@ export default function AssemblyPipeline(){
     </nav>
    </header>
    {error&&<p className="pipe-alert" role="alert">{error}</p>}
+
    <div className="pipe-board" role="list">
     {COLUMNS.map(col=>{
      const list=grouped[col.id];
@@ -213,28 +301,53 @@ export default function AssemblyPipeline(){
         <span>{list.length}</span>
        </div>
        <div className="pipe-col-body">
-        {list.length===0&&<p className="pipe-empty">Empty</p>}
-        {list.map(job=>(
-         <button
-          type="button"
-          key={job.jobId}
-          className={'pipe-card'+(selectedId===job.jobId?' is-on':'')}
-          onClick={()=>setSelectedId(job.jobId)}
-         >
-          <h3>
-           {job.displayName||job.cloneId||job.jobId.slice(0,8)}
-           {job.publishRequested&&!job.catalogPublished&&<span className="pipe-badge">Publish queued</span>}
-          {job.catalogPublished&&<span className="pipe-badge">In catalogue</span>}
-          </h3>
-          <p>{job.label}</p>
-          <p>{job.detail}</p>
-          <div className="pipe-meta">
-           <span>{job.percent||0}%</span>
-           <span>{job.spend?.used!=null?'$'+Number(job.spend.used).toFixed(2):''}</span>
+        {list.length===0&&<p className="pipe-empty">—</p>}
+        {list.map(job=>{
+         const name=job.displayName||job.cloneId||job.jobId.slice(0,8);
+         return (
+          <div
+           key={job.jobId}
+           className={'pipe-card'+(selectedId===job.jobId?' is-on':'')}
+           role="button"
+           tabIndex={0}
+           onClick={()=>setSelectedId(job.jobId)}
+           onKeyDown={e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();setSelectedId(job.jobId);}}}
+          >
+           <div className="pipe-card-row">
+            <strong className="pipe-name" title={name}>{name}</strong>
+            <span className="pipe-card-actions">
+             {needsApproval(job)&&(
+              <button
+               type="button"
+               className="pipe-approve"
+               disabled={actionBusy}
+               aria-label={'Approve '+name}
+               onClick={e=>void approveJob(job.jobId,e)}
+              >
+               Approve
+              </button>
+             )}
+             {canDiscard(job)&&(
+              <button
+               type="button"
+               className="pipe-discard"
+               disabled={actionBusy}
+               aria-label={'Discard '+name}
+               onClick={e=>void discardJob(job.jobId,e)}
+              >
+               Discard
+              </button>
+             )}
+            </span>
+           </div>
+           <div className="pipe-card-meta">
+            <span>{job.percent||0}%</span>
+            <span>{spendLabel(job)}</span>
+            <span>{formatJobDate(jobTime(job))}</span>
+           </div>
           </div>
-          <div className="pipe-bar" aria-hidden="true"><i style={{width:Math.max(4,job.percent||0)+'%'}}/></div>
-         </button>
-        ))}
+         );
+        })}
        </div>
       </section>
      );
@@ -247,67 +360,69 @@ export default function AssemblyPipeline(){
       <p className="pipe-brand">Job {selected.jobId}</p>
       <h2>{selected.displayName||selected.cloneId||'Pipeline job'}</h2>
       <p className="lead">{selected.label} — {selected.detail}</p>
+      <p className="pipe-card-meta" style={{marginBottom:12}}>
+       <span>{selected.percent||0}%</span>
+       <span>{spendLabel(selected)}</span>
+       <span>{formatJobDate(jobTime(selected))}</span>
+      </p>
       {selected.error&&(
        <div className="pipe-section">
         <h3>Error log</h3>
         <pre className="pipe-error-log" role="alert">{selected.error}</pre>
-        <button type="button" className="pipe-ghost" style={{height:36}} onClick={()=>{
-         void navigator.clipboard?.writeText(String(selected.error||''));
-        }}>Copy error</button>
        </div>
       )}
-      {selected.error&&<p className="pipe-alert" role="alert" style={{display:'none'}}>{selected.error}</p>}
+      {(selected.stills?.first||selected.stills?.last)&&(
+       <div className="pipe-stills" role="group" aria-label="Opening stills">
+        {selected.stills?.first&&(
+         <figure className="pipe-still">
+          <img src={selected.stills.first} alt="Door-First" loading="lazy"/>
+          <figcaption>Door-First</figcaption>
+          {needsApproval(selected)&&(
+           <button
+            type="button"
+            className="pipe-iterate"
+            disabled={actionBusy||Boolean(selected.regenRole)}
+            onClick={()=>void iterateStill(selected.jobId,'first')}
+           >
+            {selected.regenRole==='opening-first'?'Iterating…':'Iterate'}
+           </button>
+          )}
+         </figure>
+        )}
+        {selected.stills?.last&&(
+         <figure className="pipe-still">
+          <img src={selected.stills.last} alt="Last still" loading="lazy"/>
+          <figcaption>Last</figcaption>
+          {needsApproval(selected)&&(
+           <button
+            type="button"
+            className="pipe-iterate"
+            disabled={actionBusy||Boolean(selected.regenRole)}
+            onClick={()=>void iterateStill(selected.jobId,'last')}
+           >
+            {selected.regenRole==='opening-last'?'Iterating…':'Iterate'}
+           </button>
+          )}
+         </figure>
+        )}
+       </div>
+      )}
       <div className="pipe-links">
-       {selected.previewUrl&&<a href={selected.previewUrl} target="_blank" rel="noreferrer">Preview (Vercel branch)</a>}
-       {selected.githubUrl&&<a href={selected.githubUrl} target="_blank" rel="noreferrer">{selected.branch||'GitHub compare'}</a>}
-       {selected.pinUrl&&<a href={selected.pinUrl} target="_blank" rel="noreferrer">Pinterest pin</a>}
-       <span style={{fontSize:12,color:'#A16948'}}>
-        findmyinvite.com gets this clone only after Publish (merge to main + catalogue SQL).
-       </span>
+       {selected.previewUrl&&<a href={selected.previewUrl} target="_blank" rel="noreferrer">Preview</a>}
+       {selected.githubUrl&&<a href={selected.githubUrl} target="_blank" rel="noreferrer">{selected.branch||'GitHub'}</a>}
+       {selected.pinUrl&&<a href={selected.pinUrl} target="_blank" rel="noreferrer">Pin</a>}
       </div>
-
-      <div className="pipe-section">
-       <h3>Assets</h3>
-       {(selected.written||[]).length===0&&<p className="lead">No written paths yet.</p>}
-       <ul className="pipe-assets">
-        {(selected.written||[]).map(path=>{
-         const isMedia=/\.(mp4|jpg|jpeg|webp|png)$/i.test(path);
-         const href=selected.cloneId&&isMedia?githubRaw(selected.cloneId,path):selected.githubUrl||undefined;
-         return (
-          <li key={path}>
-           {href?<a href={href} target="_blank" rel="noreferrer">{path}</a>:<span>{path}</span>}
-           {href&&isMedia&&<> · <a href={href} download>download</a></>}
-          </li>
-         );
-        })}
-       </ul>
-      </div>
-
-      <div className="pipe-section">
-       <h3>Prompts</h3>
-       {!selected.prompts&&<p className="lead">No prompts stored on this job yet (new runs keep them). Slice 2 can recover from Sandbox when still alive.</p>}
-       {selected.prompts&&(
-        <div className="pipe-prompts">
-         {Object.entries(selected.prompts).filter(([,v])=>typeof v==='string'&&v).map(([role,text])=>(
-          <button
-           key={role}
-           type="button"
-           onClick={()=>downloadText((selected.cloneId||selected.jobId)+'-'+role+'.txt',String(text))}
-          >
-           Download {role}
-          </button>
-         ))}
-         <button
-          type="button"
-          onClick={()=>downloadText((selected.cloneId||selected.jobId)+'-prompts.json',JSON.stringify(selected.prompts,null,2))}
-         >
-          Download all JSON
-         </button>
-        </div>
-       )}
-      </div>
-
       <div className="pipe-actions">
+       {needsApproval(selected)&&(
+        <button type="button" disabled={actionBusy||Boolean(selected.regenRole)} onClick={()=>void approveJob(selected.jobId)}>
+         {actionBusy&&!selected.regenRole?'Approving…':'Approve'}
+        </button>
+       )}
+       {canDiscard(selected)&&(
+        <button type="button" className="pipe-danger" disabled={actionBusy} onClick={()=>void discardJob(selected.jobId)}>
+         Discard job
+        </button>
+       )}
        {selected.status==='failed'&&selected.cloneId&&selected.sandboxId&&(
         <button type="button" disabled={actionBusy} onClick={()=>void resumePush(selected.jobId)}>
          {actionBusy?'Pushing…':'Resume GitHub push'}
@@ -315,20 +430,12 @@ export default function AssemblyPipeline(){
        )}
        {(selected.status==='preview'||selected.cloneId)&&(
         <>
-         <a
-          className="pipe-pill-link"
-          href={selected.mergeUrl||(selected.cloneId==='royal-prestige-5'?'https://github.com/hardwin/findmyinvite/pull/29':'https://github.com/hardwin/findmyinvite/pulls')}
-          target="_blank"
-          rel="noreferrer"
-         >
+         <a className="pipe-pill-link" href={selected.mergeUrl||'https://github.com/hardwin/findmyinvite/pulls'} target="_blank" rel="noreferrer">
           Merge to main (PR)
          </a>
          <button type="button" disabled={actionBusy||selected.catalogPublished} onClick={()=>void addToCatalog(selected.jobId)}>
           {selected.catalogPublished?'Already in catalogue':'Add to Catalog'}
          </button>
-         <p className="lead" style={{margin:0,fontSize:12}}>
-          1) Merge the PR so assets land on findmyinvite.com · 2) Add to Catalog writes `template_catalog` via API (no SQL paste).
-         </p>
         </>
        )}
        <button type="button" className="pipe-ghost" onClick={()=>setSelectedId(null)}>Close</button>

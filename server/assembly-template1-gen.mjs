@@ -1,10 +1,11 @@
 // Template 1 generation workers: Replicate stills + hero video, xAI opening. Spend ledger + moderation stop.
 import {HttpError} from './core.mjs';
 import {runGrokImagineVideo,runXaiImagineVideo,downloadVideoBuffer} from './assembly-ai.mjs';
-import {IMAGE_MODEL,HERO_SECONDS,OPENING_SECONDS} from './assembly-template1-prompts.mjs';
+import {STILL_MODEL,PLATE_MODEL,HERO_SECONDS,OPENING_SECONDS} from './assembly-template1-prompts.mjs';
 
 export const COSTS=Object.freeze({
- still:0.02,
+ still:0.08,       // openai/gpt-image-2 (Door-First / last / hero)
+ plate:0.02,       // xai/grok-imagine-image (section frame backgrounds)
  heroVideoPerSecond:0.08,
  openingPerSecond:0.14
 });
@@ -16,10 +17,20 @@ export function isModerationError(error){
  return Boolean(error&&(error.moderated||error.name==='ModerationError'))||/moderat|nsfw|safety|flagged|blocked/i.test(String(error?.message||''));
 }
 
+/** Map Template 1 still roles → Replicate model. Plates stay on xAI Imagine; hero/opening stills on gpt-image-2. */
+export function imageModelForRole(role){
+ const raw=String(role||'').toLowerCase();
+ if(raw==='plate1'||raw==='plate2'||raw.startsWith('plate')||raw.includes('section')||raw.includes('frame'))return PLATE_MODEL;
+ return STILL_MODEL;
+}
+
 export function estimateCost(role,{duration}={}){
  switch(role){
   case 'hero-video':return +(COSTS.heroVideoPerSecond*(Number(duration)||HERO_SECONDS)).toFixed(2);
   case 'opening-video':return +(COSTS.openingPerSecond*(Number(duration)||OPENING_SECONDS)).toFixed(2);
+  case 'plate1':
+  case 'plate2':
+  case 'plate':return COSTS.plate;
   default:return COSTS.still;
  }
 }
@@ -78,19 +89,40 @@ export function formatProviderError(status,body){
  return (parts.filter(Boolean).join(' — ')||'no provider body').slice(0,450);
 }
 
-/** Replicate image edit (xai/grok-imagine-image): single prompt + source image URL, 9:16. */
-export async function runReplicateImage({prompt,image,env=process.env,fetchImpl=fetch,sleepImpl=sleep,onTick,role='still'}={}){
+/** Build Replicate image input for the chosen model (gpt-image-2 vs xAI Imagine). */
+export function buildReplicateImageInput(model,{prompt,image}={}){
+ const text=String(prompt||'').trim();
+ const src=image?String(image):'';
+ if(String(model||'').includes('gpt-image')){
+  const input={
+   prompt:text,
+   aspect_ratio:'9:16',
+   output_format:'jpeg',
+   number_of_images:1,
+   quality:'high'
+  };
+  if(src)input.input_images=[src];
+  return input;
+ }
+ // xai/grok-imagine-image (and similar edit models)
+ if(!src)throw new HttpError(400,'Replicate image edit needs a source image URL.');
+ return {prompt:text,image:src,aspect_ratio:'9:16'};
+}
+
+/** Replicate image: Door-First/last/hero → openai/gpt-image-2; plates → xai/grok-imagine-image. */
+export async function runReplicateImage({prompt,image,model,env=process.env,fetchImpl=fetch,sleepImpl=sleep,onTick,role='still'}={}){
  const token=replicateToken(env);
- if(!image)throw new HttpError(400,'Replicate image edit needs a source image URL.');
- const create=await fetchImpl('https://api.replicate.com/v1/models/'+IMAGE_MODEL+'/predictions',{
+ const resolvedModel=model||imageModelForRole(role);
+ const input=buildReplicateImageInput(resolvedModel,{prompt,image});
+ const create=await fetchImpl('https://api.replicate.com/v1/models/'+resolvedModel+'/predictions',{
   method:'POST',
   headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},
-  body:JSON.stringify({input:{prompt:String(prompt||'').trim(),image:String(image),aspect_ratio:'9:16'}})
+  body:JSON.stringify({input})
  });
  let prediction=await create.json().catch(()=>({}));
  if(!create.ok&&create.status!==201){
   const detail=formatProviderError(create.status,prediction);
-  console.error('Replicate image create failed',role,detail);
+  console.error('Replicate image create failed',role,resolvedModel,detail);
   throw new HttpError(502,role+' image generation failed to start: '+detail);
  }
  const id=prediction.id;
@@ -120,7 +152,7 @@ export async function runReplicateImage({prompt,image,env=process.env,fetchImpl=
  const url=typeof out==='string'?out:Array.isArray(out)?out[0]:out?.url||'';
  if(!url)throw new HttpError(502,role+' image generation returned no file (prediction '+id+').');
  const buffer=await downloadVideoBuffer(url,{fetchImpl});
- return {buffer,url,predictionId:id,costUsd:COSTS.still};
+ return {buffer,url,predictionId:id,costUsd:estimateCost(role),model:resolvedModel};
 }
 
 /** Hero loop: Replicate xai/grok-imagine-video-1.5 from the hero still URL. Moderation → ModerationError. */

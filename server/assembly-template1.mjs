@@ -1,6 +1,6 @@
 // Template 1 job runner: pin → parallel gen → craft → assemble → preview. Never publishes.
 import {randomBytes} from 'node:crypto';
-import {access,mkdir,readFile,writeFile,readdir} from 'node:fs/promises';
+import {access,mkdir,readFile,rm,writeFile,readdir} from 'node:fs/promises';
 import {join} from 'node:path';
 import {HttpError} from './core.mjs';
 import {ROOT,fsWritesAllowed,assemblePremium,loadPremiumParents,knownTemplateIds,nextCloneIds,cleanCloneName} from './assembly.mjs';
@@ -30,8 +30,10 @@ const PHASE_LABEL={
  cancelled:'Cancelled'
 };
 
-function stillAssetUrl(jobId,role){
- return '/api/assembly?action=template1-asset&jobId='+encodeURIComponent(jobId)+'&role='+encodeURIComponent(role);
+function stillAssetUrl(jobId,role,bust){
+ let url='/api/assembly?action=template1-asset&jobId='+encodeURIComponent(jobId)+'&role='+encodeURIComponent(role);
+ if(bust)url+='&v='+encodeURIComponent(String(bust));
+ return url;
 }
 
 function stillsFromAssets(job){
@@ -39,10 +41,18 @@ function stillsFromAssets(job){
  const assets=job.assets||{};
  const first=assets['opening-first'];
  const last=assets['opening-last'];
+ const bust=job.updatedAt||'';
  return {
-  first:first?.jpg||first?.png?stillAssetUrl(id,'opening-first'):null,
-  last:last?.jpg||last?.png?stillAssetUrl(id,'opening-last'):null
+  first:first?.jpg||first?.png?stillAssetUrl(id,'opening-first',bust):null,
+  last:last?.jpg||last?.png?stillAssetUrl(id,'opening-last',bust):null
  };
+}
+
+export function normalizeOpeningStillRole(role){
+ const raw=String(role||'').trim().toLowerCase();
+ if(raw==='first'||raw==='opening-first'||raw==='door'||raw==='door-first')return 'opening-first';
+ if(raw==='last'||raw==='opening-last')return 'opening-last';
+ throw new HttpError(400,'Iterate Door-First (first) or last still.');
 }
 
 export const DEFAULT_COUPLE={groom:'Ashok',bride:'Supriya',groomDetails:'Son of Mr. & Mrs. Hardwin',brideDetails:'Daughter of Mr. & Mrs. Rao'};
@@ -52,10 +62,26 @@ export function slugify(name){
 }
 
 export function validateTemplate1Input(body={}){
- const pinUrl=String(body.pinUrl||body.pin_url||'').trim();
- let parsed;
- try{parsed=new URL(pinUrl);}catch{throw new HttpError(400,'Paste a Pinterest pin or direct image URL.');}
- if(parsed.protocol!=='https:'&&parsed.protocol!=='http:')throw new HttpError(400,'Pin URL must be http(s).');
+ const heroImageUrl=String(body.heroImageUrl||body.hero_image_url||'').trim();
+ const pinUrlRaw=String(body.pinUrl||body.pin_url||'').trim();
+ const sourceRaw=heroImageUrl||pinUrlRaw;
+ let source;
+ try{source=new URL(sourceRaw);}catch{throw new HttpError(400,'Paste a Pinterest pin, direct image URL, or lock a hero image first.');}
+ if(source.protocol!=='https:'&&source.protocol!=='http:')throw new HttpError(400,'Image URL must be http(s).');
+ let pinUrl=source.toString();
+ if(pinUrlRaw){
+  try{
+   const pin=new URL(pinUrlRaw);
+   if(pin.protocol==='https:'||pin.protocol==='http:')pinUrl=pin.toString();
+  }catch{/* keep source */}
+ }
+ let heroUrl='';
+ if(heroImageUrl){
+  let hero;
+  try{hero=new URL(heroImageUrl);}catch{throw new HttpError(400,'Hero image URL must be http(s).');}
+  if(hero.protocol!=='https:'&&hero.protocol!=='http:')throw new HttpError(400,'Hero image URL must be http(s).');
+  heroUrl=hero.toString();
+ }
  const displayName=cleanCloneName(body.displayName||body.display_name,'');
  if(!displayName)throw new HttpError(400,'Give the clone a display name.');
  const parentId=String(body.parentId||body.parent_id||'royal-prestige-4').trim();
@@ -76,7 +102,7 @@ export function validateTemplate1Input(body={}){
  if(body.promptParams&&typeof body.promptParams==='object'){
   for(const [k,v] of Object.entries(body.promptParams))if(typeof v==='string' )promptParams[k]=v.slice(0,300);
  }
- return {pinUrl:parsed.toString(),displayName,parentId,musicId,budgetUsd,couple,promptParams};
+ return {pinUrl,heroImageUrl:heroUrl,displayName,parentId,musicId,budgetUsd,couple,promptParams};
 }
 
 function view(job){
@@ -97,6 +123,7 @@ function view(job){
   prompts:promptsForView(job.prompts),
   written:job.written||[],
   stills:stillsFromAssets(job),
+  regenRole:job.regenRole||null,
   moderationStop:Boolean(job.moderationStop),
   error:job.error||null,
   createdAt:job.createdAt,
@@ -132,6 +159,7 @@ function viewFromManifest(raw={}){
   assets:raw.assets||{},
   written:raw.written||[],
   stills:stillsFromAssets({id:jobId,assets:raw.assets||{}}),
+  regenRole:raw.regenRole||null,
   moderationStop:Boolean(raw.moderationStop),
   error:raw.error||null,
   createdAt:raw.createdAt||0,
@@ -294,9 +322,30 @@ export function cancelTemplate1Job(jobId){
  return view(job);
 }
 
+/** Permanently drop a queued / failed / cancelled local job from the pipeline board. */
+export async function discardTemplate1Job(jobId,root=ROOT){
+ const id=String(jobId||'');
+ if(!/^[a-f0-9]{8,32}$/i.test(id))throw new HttpError(400,'Invalid job.');
+ const live=jobs.get(id);
+ const snap=live?view(live):await loadTemplate1Job(id,root);
+ if(!snap)throw new HttpError(404,'Job not found.');
+ const status=String(snap.status||'');
+ const discardable=status==='queued'||status==='failed'||status==='cancelled'
+  ||(status==='running'&&Number(snap.percent||0)===0);
+ if(!discardable)throw new HttpError(409,'Only queued or failed jobs can be discarded.');
+ if(live){
+  live.cancelRequested=true;
+  jobs.delete(id);
+ }
+ const dir=join(jobsDir(root),id);
+ try{await rm(dir,{recursive:true,force:true});}catch{/* already gone */}
+ return {ok:true,discarded:true,jobId:id};
+}
+
 export async function proceedTemplate1Job(jobId,{env=process.env,fetchImpl=fetch,sleepImpl,openaiClient,qaImpl,root=ROOT}={}){
  const job=await hydrateLiveJob(jobId,root);
  if(!job)throw new HttpError(404,'Job not found. Keep this tab open after stills, then tap Proceed to generate (Rs. 499).');
+ if(job.regenRole)throw new HttpError(409,'Wait for the still iteration to finish before approving.');
  job.stillsWave=stillsWaveFromJob(job);
  const staleRunning=job.status==='running'&&!job.assets?.['opening-video']?.path;
  const canRetry=(job.status==='failed'||job.status==='cancelled'||staleRunning)&&job.stillsWave?.first?.jpg&&job.stillsWave?.last?.jpg;
@@ -307,6 +356,105 @@ export async function proceedTemplate1Job(jobId,{env=process.env,fetchImpl=fetch
  job.workerAlive=true;
  update(job,{phase:'gen',detail:canRetry?'Retrying videos from approved stills…':'Stills approved — generating videos…'});
  void continueTemplate1Job(job,{env,fetchImpl,sleepImpl,openaiClient,qaImpl});
+ return view(job);
+}
+
+/** Re-paint Door-First or last opening still while job is in review. Optional note steers the next take. */
+export async function regenTemplate1Still(jobId,{role,note}={},{env=process.env,fetchImpl=fetch,sleepImpl,openaiClient,qaImpl,root=ROOT}={}){
+ const job=await hydrateLiveJob(jobId,root);
+ if(!job)throw new HttpError(404,'Job not found.');
+ const which=normalizeOpeningStillRole(role);
+ if(job.status!=='review'&&job.phase!=='review')throw new HttpError(409,'Iterate Door-First / last only while reviewing stills.');
+ if(job.regenRole)throw new HttpError(409,'A still is already regenerating.');
+ if(!job.pinImageUrl)throw new HttpError(409,'Pin image missing — cannot regenerate.');
+ if(!job.prompts?.first||!job.prompts?.last)throw new HttpError(409,'Prompts missing — cannot regenerate.');
+ if(!job.ledger)throw new HttpError(409,'Spend ledger missing — cannot regenerate.');
+
+ const twist=String(note||'').trim().slice(0,300);
+ const label=which==='opening-first'?'Door-First':'last';
+ job.regenRole=which;
+ job.error=null;
+ update(job,{
+  status:'review',
+  phase:'review',
+  detail:'Iterating '+label+(twist?' — '+twist.slice(0,80):'')+'…'
+ });
+
+ void (async()=>{
+  try{
+   checkCancelled(job);
+   const {ledger,prompts,workdir}=job;
+   const gen=join(workdir,'gen');
+   await mkdir(gen,{recursive:true});
+   const fileBase=which;
+   let prompt=which==='opening-first'?prompts.first:prompts.last;
+   if(twist)prompt=String(prompt||'').trim()+' Operator note: '+twist;
+
+   ledger.reserve(which,estimateCost('still'));
+   const result=await runReplicateImage({prompt,image:job.pinImageUrl,env,fetchImpl,sleepImpl,role:which});
+   ledger.charge(which,result.costUsd,{predictionId:result.predictionId});
+   const raw=join(gen,fileBase+'-raw.jpg');
+   await writeFile(raw,result.buffer);
+   const out=await toStill720({input:raw,outPng:join(gen,fileBase+'.png'),outJpg:join(gen,fileBase+'-720.jpg')});
+   job.assets[which]={
+    url:result.url,
+    predictionId:result.predictionId,
+    png:out.png,
+    jpg:out.jpg,
+    costUsd:result.costUsd,
+    iterated:true,
+    note:twist||undefined
+   };
+
+   if(which==='opening-last'){
+    const qa=qaImpl?await qaImpl(result.buffer):await detectBakedText(result.buffer,{env,openaiClient,qaPrompt:TEXT_QA_PROMPT});
+    job.assets['opening-last'].qa=qa;
+    if(qa.hasText){
+     update(job,{detail:'LAST had baked text — one regen with stronger no-text clause'});
+     ledger.reserve('opening-last',estimateCost('still'));
+     const regenPrompt=(prompts.lastRegen||prompts.last)+(twist?' Operator note: '+twist:'');
+     const again=await runReplicateImage({prompt:regenPrompt,image:job.pinImageUrl,env,fetchImpl,sleepImpl,role:'opening-last'});
+     ledger.charge('opening-last',again.costUsd,{predictionId:again.predictionId});
+     await writeFile(raw,again.buffer);
+     const out2=await toStill720({input:raw,outPng:join(gen,fileBase+'.png'),outJpg:join(gen,fileBase+'-720.jpg')});
+     job.assets['opening-last']={
+      url:again.url,
+      predictionId:again.predictionId,
+      png:out2.png,
+      jpg:out2.jpg,
+      costUsd:again.costUsd,
+      iterated:true,
+      regen:true,
+      note:twist||undefined,
+      qa:{...qa,regenerated:true}
+     };
+    }
+   }
+
+   job.stillsWave=stillsWaveFromJob(job);
+   job.regenRole=null;
+   update(job,{
+    status:'review',
+    phase:'review',
+    detail:'Approve intro & outro stills, then proceed to videos. · $'+ledger.used.toFixed(2)+' used'
+   });
+  }catch(error){
+   const cancelled=error?.status===499||job.cancelRequested;
+   const moderated=isModerationError(error)&&!(error instanceof HttpError&&error.status===402);
+   const message=error instanceof HttpError||error?.message?String(error.message):'Still iteration failed.';
+   console.error('Template 1 still regen failed',job.id,message);
+   job.regenRole=null;
+   update(job,{
+    status:cancelled?'cancelled':(moderated?'failed':'review'),
+    phase:cancelled?'cancelled':(moderated?'failed':'review'),
+    moderationStop:moderated&&!cancelled,
+    error:cancelled||moderated?message:null,
+    detail:moderated?'Moderation stop — no auto-retry. Spend $'+job.ledger.used.toFixed(2)+'.'
+     :(cancelled?message:'Still iteration failed — try again. '+message)
+   });
+  }
+ })();
+
  return view(job);
 }
 
@@ -519,7 +667,8 @@ export async function runTemplate1Job(job,{env,fetchImpl,sleepImpl,openaiClient,
   const parents=await loadPremiumParents(job.root);
   if(!parents.some(p=>p.id===job.input.parentId))throw new HttpError(400,'Parent must be a Premium cinematic template with an intro video.');
   await getMusicTrack(job.input.musicId,job.root);
-  const image=normalizeReferenceImage(await resolveReferenceImage(job.input.pinUrl,{fetchImpl}));
+  const imageUrl=job.input.heroImageUrl||job.input.pinUrl;
+  const image=normalizeReferenceImage(await resolveReferenceImage(imageUrl,{fetchImpl}));
   const pinPath=join(job.workdir,'pin-ref'+image.ext);
   await writeFile(pinPath,image.buffer);
   job.assets.pin={sourceUrl:image.sourceUrl,path:pinPath,bytes:image.buffer.length};

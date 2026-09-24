@@ -19,6 +19,8 @@ import {
  parsePromptWriterJson,
  writeTemplate1PromptsFromPin,
  IMAGE_MODEL,
+ STILL_MODEL,
+ PLATE_MODEL,
  OPENING_SECONDS
 } from '../server/assembly-template1-prompts.mjs';
 import {
@@ -28,7 +30,9 @@ import {
  runOpeningVideo,
  runHeroVideo,
  isModerationError,
- ModerationError
+ ModerationError,
+ imageModelForRole,
+ buildReplicateImageInput
 } from '../server/assembly-template1-gen.mjs';
 import {paletteFromPixels,hex} from '../server/assembly-template1-craft.mjs';
 import {
@@ -79,7 +83,12 @@ test('Template 1 default first still demands a frame-filling fortune door',()=>{
  assert.match(p.opening,/SAVE THE DATE/);
  assert.ok(p.opening.includes(OPENING_SAVE_THE_DATE));
  for(const key of Object.keys(WIRE))assert.equal(p[key],WIRE[key],key);
- assert.equal(IMAGE_MODEL,'xai/grok-imagine-image');
+ assert.equal(STILL_MODEL,'openai/gpt-image-2');
+ assert.equal(PLATE_MODEL,'xai/grok-imagine-image');
+ assert.equal(IMAGE_MODEL,STILL_MODEL);
+ assert.equal(imageModelForRole('opening-first'),STILL_MODEL);
+ assert.equal(imageModelForRole('hero-still'),STILL_MODEL);
+ assert.equal(imageModelForRole('plate1'),PLATE_MODEL);
  assert.equal(OPENING_SECONDS,12);
  assert.match(p.lastRegen,/ABSOLUTELY NO TEXT/);
  assert.deepEqual(p.params,DEFAULT_PARAMS);
@@ -185,32 +194,32 @@ test('prompt params substitute and soft non-IP strips franchise words',()=>{
 });
 
 test('spend ledger charges, refuses over budget, and estimates match the packs',()=>{
- assert.equal(estimateCost('still'),0.02);
+ assert.equal(estimateCost('still'),0.08);
+ assert.equal(estimateCost('opening-first'),0.08);
+ assert.equal(estimateCost('plate1'),0.02);
  assert.equal(estimateCost('hero-video'),0.48);
  assert.equal(estimateCost('opening-video'),1.68);
  const ledger=createLedger(4);
- ledger.reserve('opening-first',0.02);
- ledger.charge('opening-first',0.02,{predictionId:'p1'});
+ ledger.reserve('opening-first',0.08);
+ ledger.charge('opening-first',0.08,{predictionId:'p1'});
  ledger.charge('opening-video',1.7,{ticks:17000000000});
- assert.equal(ledger.used,1.72);
- assert.equal(ledger.remaining,2.28);
- assert.equal(ledger.canAfford(2.28),true);
- assert.equal(ledger.canAfford(2.29),false);
+ assert.equal(ledger.used,1.78);
+ assert.equal(ledger.remaining,2.22);
+ assert.equal(ledger.canAfford(2.22),true);
+ assert.equal(ledger.canAfford(2.23),false);
  assert.throws(()=>ledger.reserve('hero-video',3),/Budget stop/);
  assert.equal(ledger.snapshot().entries.length,2);
 });
 
-test('runReplicateImage posts edit-mode body to xai/grok-imagine-image and downloads output',async()=>{
- const calls=[];
+test('runReplicateImage posts Door-First to openai/gpt-image-2 and downloads output',async()=>{
  const jpeg=Buffer.from([0xff,0xd8,0xff,0xe0,1,2,3]);
  const fetchImpl=async(url,opts={})=>{
-  calls.push({url,method:opts.method||'GET'});
-  if(url==='https://api.replicate.com/v1/models/xai/grok-imagine-image/predictions'){
+  if(url==='https://api.replicate.com/v1/models/openai/gpt-image-2/predictions'){
    const body=JSON.parse(opts.body);
-   assert.deepEqual(Object.keys(body.input).sort(),['aspect_ratio','image','prompt']);
+   assert.deepEqual(Object.keys(body.input).sort(),['aspect_ratio','input_images','number_of_images','output_format','prompt','quality']);
    assert.equal(body.input.aspect_ratio,'9:16');
-   assert.equal(body.input.image,'https://i.pinimg.com/originals/x.jpg');
-   assert.equal(body.input.mode,undefined);
+   assert.deepEqual(body.input.input_images,['https://i.pinimg.com/originals/x.jpg']);
+   assert.equal(body.input.quality,'high');
    return {ok:true,status:201,json:async()=>({id:'pred1',status:'starting'})};
   }
   if(url==='https://api.replicate.com/v1/predictions/pred1')return {ok:true,status:200,json:async()=>({id:'pred1',status:'succeeded',output:'https://replicate.delivery/out.jpg'})};
@@ -221,6 +230,28 @@ test('runReplicateImage posts edit-mode body to xai/grok-imagine-image and downl
  assert.equal(result.predictionId,'pred1');
  assert.equal(result.url,'https://replicate.delivery/out.jpg');
  assert.equal(Buffer.compare(result.buffer,jpeg),0);
+ assert.equal(result.costUsd,0.08);
+ assert.equal(result.model,'openai/gpt-image-2');
+});
+
+test('runReplicateImage keeps section plates on xai/grok-imagine-image',async()=>{
+ const jpeg=Buffer.from([0xff,0xd8,0xff,0xe0,1,2,3]);
+ const fetchImpl=async(url,opts={})=>{
+  if(url==='https://api.replicate.com/v1/models/xai/grok-imagine-image/predictions'){
+   const body=JSON.parse(opts.body);
+   assert.deepEqual(Object.keys(body.input).sort(),['aspect_ratio','image','prompt']);
+   assert.equal(body.input.aspect_ratio,'9:16');
+   assert.equal(body.input.image,'https://i.pinimg.com/originals/x.jpg');
+   return {ok:true,status:201,json:async()=>({id:'pred-plate',status:'starting'})};
+  }
+  if(url==='https://api.replicate.com/v1/predictions/pred-plate')return {ok:true,status:200,json:async()=>({id:'pred-plate',status:'succeeded',output:'https://replicate.delivery/plate.jpg'})};
+  if(url==='https://replicate.delivery/plate.jpg')return {ok:true,status:200,arrayBuffer:async()=>jpeg};
+  throw new Error('unexpected '+url);
+ };
+ assert.equal(imageModelForRole('plate1'),PLATE_MODEL);
+ const result=await runReplicateImage({prompt:'plate bg',image:'https://i.pinimg.com/originals/x.jpg',env:{REPLICATE_API_TOKEN:'r8'},fetchImpl,sleepImpl:async()=>{},role:'plate1'});
+ assert.equal(result.predictionId,'pred-plate');
+ assert.equal(result.model,'xai/grok-imagine-image');
  assert.equal(result.costUsd,0.02);
 });
 

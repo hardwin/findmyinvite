@@ -13,9 +13,10 @@ import {
  ROOT
 } from '../server/assembly.mjs';
 import {startGeneratePair,getGenerateJob} from '../server/assembly-ai.mjs';
-import {startTemplate1Job,listTemplate1JobsResolved,loadTemplate1Job,cancelTemplate1Job,proceedTemplate1Job,jobsDir} from '../server/assembly-template1.mjs';
+import {startTemplate1Job,listTemplate1JobsResolved,loadTemplate1Job,cancelTemplate1Job,discardTemplate1Job,proceedTemplate1Job,regenTemplate1Still,jobsDir} from '../server/assembly-template1.mjs';
 import {
  cancelCloudTemplate1Job,
+ discardCloudTemplate1Job,
  cloudAssemblyEnabled,
  getCloudTemplate1Job,
  listCloudTemplate1Jobs,
@@ -198,16 +199,25 @@ export default async function handler(req,res){
    method(req,['GET']);
    if(!sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
    const jobId=String(url.searchParams.get('jobId')||'');
-   if(cloudAssemblyEnabled()){
-    if(!jobId)return respond(res,200,{jobs:await listCloudTemplate1Jobs()});
-    const job=await getCloudTemplate1Job(jobId);
-    if(!job)throw new HttpError(404,'Template 1 job not found.');
-    return respond(res,200,job);
+   if(jobId){
+    if(cloudAssemblyEnabled()){
+     const cloud=await getCloudTemplate1Job(jobId);
+     if(cloud)return respond(res,200,cloud);
+    }
+    const local=await loadTemplate1Job(jobId);
+    if(!local)throw new HttpError(404,'Template 1 job not found.');
+    return respond(res,200,local);
    }
-   if(!jobId)return respond(res,200,{jobs:await listTemplate1JobsResolved()});
-   const job=await loadTemplate1Job(jobId);
-   if(!job)throw new HttpError(404,'Template 1 job not found.');
-   return respond(res,200,job);
+   const localJobs=await listTemplate1JobsResolved().catch(()=>[]);
+   if(cloudAssemblyEnabled()){
+    const cloudJobs=await listCloudTemplate1Jobs();
+    const byId=new Map();
+    for(const job of cloudJobs)byId.set(job.jobId,job);
+    for(const job of localJobs)if(!byId.has(job.jobId))byId.set(job.jobId,job);
+    const jobs=[...byId.values()].sort((a,b)=>(b.updatedAt||b.createdAt||0)-(a.updatedAt||a.createdAt||0));
+    return respond(res,200,{jobs});
+   }
+   return respond(res,200,{jobs:localJobs});
   }
 
   if(action==='template1-cancel'){
@@ -216,6 +226,20 @@ export default async function handler(req,res){
    const body=await bodyJson(req,4096);
    if(cloudAssemblyEnabled())return respond(res,200,await cancelCloudTemplate1Job(String(body.jobId||'')));
    return respond(res,200,cancelTemplate1Job(String(body.jobId||'')));
+  }
+
+  if(action==='template1-discard'){
+   method(req,['POST']);
+   if(!sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
+   const body=await bodyJson(req,4096);
+   const id=String(body.jobId||'');
+   if(cloudAssemblyEnabled()){
+    try{return respond(res,200,await discardCloudTemplate1Job(id));}
+    catch(error){
+     if(error?.status!==404)throw error;
+    }
+   }
+   return respond(res,200,await discardTemplate1Job(id));
   }
 
   if(action==='template1-resume-push'){
@@ -240,6 +264,18 @@ export default async function handler(req,res){
    if(cloudAssemblyEnabled())throw new HttpError(503,'Cloud Assembly auto-continues past stills. Wait for the preview.');
    const body=await bodyJson(req,4096);
    return respond(res,200,await proceedTemplate1Job(String(body.jobId||'')));
+  }
+
+  if(action==='template1-regen-still'){
+   method(req,['POST']);
+   if(!sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
+   if(cloudAssemblyEnabled())throw new HttpError(503,'Stills iteration is local-only. Cloud Assembly auto-continues past stills.');
+   if(!fsWritesAllowed())throw new HttpError(503,'Template 1 runs locally only. Use this desk on your Cursor machine or CloudAgent.');
+   const body=await bodyJson(req,8192);
+   return respond(res,200,await regenTemplate1Still(String(body.jobId||''),{
+    role:body.role||body.which,
+    note:body.note||body.twist||''
+   }));
   }
 
   if(action==='template1-asset'){

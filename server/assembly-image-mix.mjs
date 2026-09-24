@@ -14,9 +14,10 @@ function assertHttpUrl(value,label='URL'){
 
 function buildMixPrompt({styleTwist='',peopleNote='',extraPrompt='',refCount=0}={}){
  const parts=[
-  'Create a single premium South-Indian wedding invitation hero still in vertical 9:16.',
-  'Preserve the pin composition, palette, wardrobe, and floral language unless the style twist asks otherwise.',
-  'Photoreal cinematic lighting, no readable text, no watermark, no logo, no UI chrome.'
+  'Create a single premium wedding invitation hero still in vertical 9:16.',
+  'Default look: romantic anime / anime-cinematic illustration — soft light, expressive faces, elegant wardrobe, invitation-poster quality.',
+  'Keep the reference composition, palette, wardrobe, and floral language unless the style twist asks otherwise.',
+  'No readable text, no watermark, no logo, no UI chrome.'
  ];
  if(styleTwist)parts.push('Style twist: '+String(styleTwist).trim().slice(0,600));
  if(peopleNote)parts.push('People / occasion refs: '+String(peopleNote).trim().slice(0,600));
@@ -86,7 +87,8 @@ async function mixViaOpenAI({baseImageUrl,prompt,env,fetchImpl}){
 }
 
 async function mixViaXai({baseImageUrl,prompt,env,fetchImpl}){
- // xAI image path currently rides Replicate's xai/grok-imagine-image (same as Template 1 stills).
+ // xAI image path rides Replicate's xai/grok-imagine-image (same as Template 1 section plates).
+ // Door-First / last / hero stills use openai/gpt-image-2 via role routing in runReplicateImage.
  return mixViaReplicate({baseImageUrl,prompt,env,fetchImpl});
 }
 

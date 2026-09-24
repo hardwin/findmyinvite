@@ -1,12 +1,34 @@
 # Assembly → Publish playbook
 
-Audience: Akay (this Project), when Ashok says **Publish** after a local `/assembly` run.  
+Audience: Akay (this Project), when Ashok says **Publish** after a `/assembly` run.  
 Standing loop:
 
 - **v1.5 (laptop, locked 2026-09-23):** assemble locally → Ashok previews → Ashok says Publish → Akay applies Supabase + commit + push `main`.
 - **v1.6 (cloud):** `/assembly` on findmyinvite.com → Vercel Sandbox runs Template 1 → git push `assembly/{id}` only → Vercel preview. Ashok says Publish → Akay merges to `main` (ask twice) + applies SQL.
+- **Assembly Chat desk (2026-09-24):** `/assembly` is a ChatGPT-like operator chat (Akay-gated). Wizard steps are retired. Pipeline kanban stays at `/assembly/pipeline`.
 
 Ashok does **not** run SQL himself. Cloud jobs never push `main`.
+
+## Assembly Chat desk (operator)
+
+Surface: `/assembly` after the Akay gate.
+
+Flow in chat (skippable chips where noted):
+
+1. Pin (Pinterest / direct image URL) **or** uploaded / camera hero
+2. Style Twist (optional)
+3. Reference images — attach, camera, or more Pins (optional, multi-ref)
+4. Bride / Groom / Baby refs by occasion (optional)
+5. VIBE name (required before assemble)
+6. Music library pick (optional → default first track)
+7. Mix until a final hero is **locked**
+8. Start Template 1 — live job card with % / stills / preview + GitHub links
+
+Stack: Vite SPA + Vercel AI SDK (`useChat` → `/api/assembly-chat`) + OpenAI **`gpt-6-sol`** tools. Image mix adapters: Replicate / xAI / OpenAI (`server/assembly-image-mix.mjs`). Template 1 accepts `heroImageUrl` so a locked chat image can replace pin resolve.
+
+Operator controls in chat header / rail: Cancel job, Retry / resume, Pipeline link. Do **not** dump SQL, migrations, or file trees in the chat UI.
+
+Env: existing `OPENAI_API_KEY`, `XAI_API_KEY`, `REPLICATE_API_TOKEN`, `BLOB_READ_WRITE_TOKEN`; optional `ASSEMBLY_CHAT_MODEL` (default `gpt-6-sol`).
 
 ## Parent is read-only
 
@@ -74,13 +96,14 @@ Local `.env.local` required (never commit):
 
 Optional: `ASSEMBLY_PROMPT_MODEL` (default `gpt-6-astra`).
 
-## Section plates (thin-border / text-safe)
+## Section plates (luxurious stationery / text-safe)
 
-Section plates are **borders around copy**, not theater scenery. When generating or swapping a plate:
+Section plates are **premium cotton-rag invitation backgrounds**, not theater scenery. When generating or swapping a plate:
 
-- Borders stay **thin** — vine / flower / delicate filigree only, about **8–12% inset** on each edge. Prefer thin vine/flower over heavy curtains or columns.
-- Center is empty sky (cream/peach/gold gradient). Body copy must never sit under the frame.
-- Do **not** generate thick draped curtains, fat pillars, jeweled bezels, or architecture that eats the sides.
+- **Material:** close-up straight-on heavyweight cotton-rag paper — fine grain, delicate fibers, matte refined finish (not coarse, dirty, distressed, or noisy).
+- **Light:** soft diffused light from the upper left; extremely shallow embossing; delicate localized shadows; evenly lit center (no dramatic gradients, glare, or dark patches).
+- **Border:** exceptionally fine elegant border from the pin’s motifs/palette — restrained detail at outer edges and corners only. Antique foil accents OK; never bright yellow glitter. No thick frames, oversized flowers, heavy ornament, curtains, or pillars.
+- **Text-safe:** central **75–80%** width is a continuous quiet writing surface (near top to near bottom) — light, low-contrast, almost uniform paper with barely perceptible texture. No decoration behind copy. No separate white panel/inset box.
 - If copy still clips, add inner padding (`max(28px, 12%)`) — do not thicken the art.
 
 Transport + Accommodation + Gifts share **one** clustered plate. Do not put plates on Welcome / Our Moments / Timeline / Dress Code / RSVP / footer unless Ashok asks.
@@ -90,8 +113,8 @@ Transport + Accommodation + Gifts share **one** clustered plate. Do not put plat
 `/assembly` is a one-viewport mobile wizard: **Pinterest URL → song → first/last stills → Proceed to generate (Rs. 499) → preview**. Parent is always the newest Premium clone (`royal-prestige-4` Gold Dream). No payment gateway yet — the Rs. 499 button continues generation only.
 
 1. **pin** — resolve pin → `pin-ref.jpg`, sample palette (primary / secondary / paper) for the theme.
-2. **stills** — FIRST + LAST only (`xai/grok-imagine-image`). FIRST door must fill the 9:16 frame (handle = hero). Job pauses at **review**. Guest taps **Proceed to generate (Rs. 499)**.
-3. **gen** — plates, hero still → Replicate `xai/grok-imagine-video-1.5` 6s, xAI opening 12s (`image`=FIRST, `last_frame`=LAST). **Prompts:** `gpt-6-astra` fills BASE templates in `documents/template1-base-prompts.md` from the pin (includes `DOOR_MATERIAL` / `DOOR_HANDLE` / `DOOR_CHARMS`). FIRST still always starts with the locked 10ft solid-gold door prefix. Opening always starts/ends with the locked 8k 2.5D parallax wrap, and after the doors open keeps the locked bullet-time SAVE THE DATE title. No MAIN/NEGATIVE. Soft non-IP. Budget gate; **first moderated video stops the job**.
+2. **stills** — FIRST + LAST (`openai/gpt-image-2` on Replicate). FIRST door must fill the 9:16 frame (handle = hero). Job pauses at **review**. Guest taps **Proceed to generate (Rs. 499)**.
+3. **gen** — plates (`xai/grok-imagine-image`), hero still (`openai/gpt-image-2`) → Replicate `xai/grok-imagine-video-1.5` 6s, xAI opening 12s (`image`=FIRST, `last_frame`=LAST). **Prompts:** `gpt-6-astra` fills BASE templates in `documents/template1-base-prompts.md` from the pin (includes `DOOR_MATERIAL` / `DOOR_HANDLE` / `DOOR_CHARMS`). FIRST still always starts with the locked 10ft solid-gold door prefix. Opening always starts/ends with the locked 8k 2.5D parallax wrap, and after the doors open keeps the locked bullet-time SAVE THE DATE title. No MAIN/NEGATIVE. Soft non-IP. Budget gate; **first moderated video stops the job**.
 4. **craft** — mute (`-an`), +3s last-frame hold, plates → `{id}-section-1..5.jpg`, music copied from `cms/music-library.json` (never muxed). ffprobe must show 0 audio streams or craft fails closed.
 5. **assemble** — dry-run then real `assemblePremium`, theme CSS block, `previewDefaults`, `music` + `musicName`, `musicTracks`, editor option. Reserved slots come from the `// reserved:` line in `src/data.ts`.
 6. **preview** — demo link + spend line. Publish stays with Akay per this playbook.

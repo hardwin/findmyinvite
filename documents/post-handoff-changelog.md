@@ -8,6 +8,29 @@ Soul: [akay-soul.md](akay-soul.md) · standing facts: [project-context.md](proje
 
 Read this before `docs/handoff/STATUS.md`. The v0.9.0 handoff is the frozen baseline; this file is the current truth after that tag.
 
+## 2026-09-25 — Still model split (gpt-image-2 + xAI plates)
+- Door-First, last, and hero stills → Replicate **`openai/gpt-image-2`** (`STILL_MODEL`).
+- Section frame / plate backgrounds → Replicate **`xai/grok-imagine-image`** (`PLATE_MODEL`).
+- Routing: `imageModelForRole(role)` inside `runReplicateImage` (no caller changes required beyond role).
+
+## 2026-09-25 — Door-First / last still iterate → Approve
+- Local Template 1 review: iterate Door-First or last opening still (`regenTemplate1Still` / `template1-regen-still`), then Approve (`template1-proceed`).
+- Assembly Chat job card + Pipeline drawer: per-still **Iterate** + **Approve**. Agent tools: `regen_opening_still`, `approve_stills`.
+- Cloud Assembly still auto-continues past stills (iterate remains local-only).
+
+## 2026-09-24 — Akay = Grok; Chat → Single Image → Website
+
+- Standing lock: Akay brain is **xAI Grok only** (no OpenAI / Sol). Stored in `documents/akay_soul.md` + soul rules.
+- Assembly Chat stays **agentic** (AI SDK tools); provider forced to xAI.
+- Product north star for the desk: **chat → one locked hero → Template 1 website**.
+
+## 2026-09-24 — Assembly Chat desk (operator)
+- `/assembly` replaced the step wizard with a ChatGPT-like Akay-gated chat (`AssemblyChat` + `/api/assembly-chat`).
+- OpenAI `gpt-6-sol` agent tools: resolve pin, upload refs/camera, list music/parents, mix image (Replicate/xAI/OpenAI), lock hero, start/status/cancel/retry Template 1.
+- Template 1 accepts `heroImageUrl` so a locked mix can drive gen without re-resolving the pin.
+- Live job progress card in-thread (%, stills, preview/GitHub). Pipeline kanban unchanged at `/assembly/pipeline`.
+- Docs: `documents/assembly-publish.md` (Assembly Chat section). Tests: `tests/server-assembly-chat.mjs`.
+
 ## 2026-09-24 — Moments IG wall + fast reverse (`107463f`)
 - Our Moments → Instagram 1:1 carousel (`MomentsWall` / ribbon / MIT chrome); forward photo-stall, reverse exits immediately.
 - Bride + Groom person chapters; photo cap 4→8 (API slots `0-7`).

@@ -142,9 +142,33 @@ export async function getAssemblyJob(jobId,{env=process.env,fetchImpl=fetch}={})
  return Array.isArray(rows)&&rows[0]?rows[0]:null;
 }
 
-export async function listAssemblyJobs({env=process.env,fetchImpl=fetch,limit=20}={}){
- const rows=await jobsRequest('assembly_jobs?select=id,status,phase,percent,label,detail,input,spend,palette,assets,written,clone_id,demo,branch,github_url,preview_url,sandbox_id,cancel_requested,moderation_stop,error,created_at,updated_at&order=updated_at.desc&limit='+limit,{env,fetchImpl});
+export async function listAssemblyJobs({env=process.env,fetchImpl=fetch,limit=40}={}){
+ const rows=await jobsRequest('assembly_jobs?select=id,status,phase,percent,label,detail,input,spend,palette,assets,written,clone_id,demo,branch,github_url,preview_url,sandbox_id,cancel_requested,moderation_stop,error,created_at,updated_at&status=neq.discarded&order=updated_at.desc&limit='+limit,{env,fetchImpl});
  return (Array.isArray(rows)?rows:[]).map(viewFromRow);
+}
+
+export async function discardAssemblyJob(jobId,{env=process.env,fetchImpl=fetch}={}){
+ const row=await getAssemblyJob(jobId,{env,fetchImpl});
+ if(!row)throw new HttpError(404,'Job not found.');
+ const status=String(row.status||'');
+ const discardable=status==='queued'||status==='failed'||status==='cancelled'
+  ||(status==='running'&&Number(row.percent||0)===0)
+  ||Boolean(row.cancel_requested&&(status==='queued'||status==='running'));
+ if(!discardable)throw new HttpError(409,'Only queued or failed jobs can be discarded.');
+ const rows=await jobsRequest('assembly_jobs?id=eq.'+encodeURIComponent(jobId),{
+  method:'PATCH',
+  body:{
+   status:'discarded',
+   phase:'discarded',
+   label:'Discarded',
+   detail:'Removed from pipeline board.',
+   cancel_requested:true,
+   updated_at:new Date().toISOString()
+  },
+  env,
+  fetchImpl
+ });
+ return viewFromRow(Array.isArray(rows)?rows[0]:rows);
 }
 
 export async function patchAssemblyJob(jobId,patch,{env=process.env,fetchImpl=fetch}={}){
