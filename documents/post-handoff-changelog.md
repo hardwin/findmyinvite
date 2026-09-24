@@ -316,3 +316,14 @@ Outcome: One real customer journey observed end-to-end; one retention hook ready
 How: Watch first organic create after Cases pass; fix any live friction the same day; optional: publish one `blog_posts` row or hide `/blog` footer link; optional Classic vs Royal merchandising polish.
 
 Exit: Ashok says the morning experience is usable with real traffic — not just "checklist green."
+
+## 2026-09-24 — Immersive scroll fix (hero clean + section snap)
+
+Ashok QA: overlays on hero video, sticky mid-section scroll, dense motifs, gritty motion.
+
+- **Hero clean:** Removed `InviteScrollStage` WebGL overlay (fixed fullscreen planes sat on the hero loop). Immersion starts only below `.invitation-hero`.
+- **Section snap:** Replaced GSAP pin/scrub with Lenis + mandatory Snap — one flick → one full-viewport chapter (`height:100svh`). Small sections fill the viewport; no mid-stuck pins.
+- **Motifs:** Density halved in kits; smaller/thinner strokes; sparse third-grid spawn; draw skipped while hero owns the viewport.
+- **Smooth preload:** Lenis/Snap modules warm while opening/hero videos play (`playing`); dropped backdrop-filter blur on chapter cards (mobile grit).
+
+Pilot: `/invite/demo?template=royal-prestige-2`

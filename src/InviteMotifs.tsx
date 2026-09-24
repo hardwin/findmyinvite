@@ -36,7 +36,10 @@ function loadTintedMotif(shape: MotifShape, color: string): Promise<HTMLImageEle
     let svg = await res.text();
     svg = svg
       .replaceAll('stroke="#000"', `stroke="${color}"`)
-      .replaceAll('fill="#000"', `fill="${color}"`);
+      .replaceAll('fill="#000"', `fill="${color}"`)
+      .replaceAll('stroke-width="2"', 'stroke-width="0.9"')
+      .replaceAll('stroke-width="1.5"', 'stroke-width="0.75"')
+      .replaceAll('stroke-width="3"', 'stroke-width="1"');
     const blob = new Blob([svg], {type: 'image/svg+xml'});
     const url = URL.createObjectURL(blob);
     const img = await new Promise<HTMLImageElement>((resolve, reject) => {
@@ -64,20 +67,25 @@ function spawn(kit: MotifKit, w: number, h: number, touch?: {x: number; y: numbe
   const shape = kit.shapes[Math.floor(Math.random() * kit.shapes.length)];
   const color = kit.colors[Math.floor(Math.random() * kit.colors.length)];
   const fromTouch = Boolean(touch);
-  const depthScale = .6 + (1 - z) * .55;
+  const depthScale = .45 + (1 - z) * .4;
   const driftDir = Math.random() < .55 ? -1 : 1;
+  // Sparse random distribution — jitter into thirds so they feel scattered
+  const col = Math.floor(Math.random() * 3);
+  const row = Math.floor(Math.random() * 3);
+  const baseX = ((col + Math.random()) / 3) * w;
+  const baseY = ((row + Math.random()) / 3) * h;
   return {
-    x: touch ? touch.x + (Math.random() - .5) * 14 : Math.random() * w,
-    y: touch ? touch.y + (Math.random() - .5) * 14 : Math.random() * h,
+    x: touch ? touch.x + (Math.random() - .5) * 10 : baseX,
+    y: touch ? touch.y + (Math.random() - .5) * 10 : baseY,
     z,
-    vx: (Math.random() - .5) * .18 * kit.drift * depthScale,
-    vy: driftDir * (.08 + Math.random() * .22) * kit.drift * depthScale,
+    vx: (Math.random() - .5) * .1 * kit.drift * depthScale,
+    vy: driftDir * (.04 + Math.random() * .12) * kit.drift * depthScale,
     rot: Math.random() * Math.PI * 2,
-    spin: (Math.random() - .5) * .012 * kit.drift,
-    size: (6 + Math.random() * 8) * depthScale * (fromTouch ? 1.25 : 1),
+    spin: (Math.random() - .5) * .007 * kit.drift,
+    size: (2.5 + Math.random() * 3.5) * depthScale * (fromTouch ? 1.15 : 1),
     life: 1,
     maxLife: fromTouch ? .9 + Math.random() * 1.1 : 1e9,
-    alpha: .2 + Math.random() * .4,
+    alpha: .1 + Math.random() * .22,
     shape,
     color,
     fromTouch,
@@ -132,6 +140,7 @@ export default function InviteMotifs({templateId, accent, active}: Props) {
     if (!ctx) return;
     const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const page = canvas.closest('.invitation-page') as HTMLElement | null;
+    const hero = page?.querySelector('.invitation-hero') as HTMLElement | null;
 
     let w = 0, h = 0, scrollY = 0, frame = 0, last = performance.now();
     let holes: DOMRect[] = [];
@@ -163,36 +172,39 @@ export default function InviteMotifs({templateId, accent, active}: Props) {
     const seed = () => {
       particles.length = 0;
       const k = kitRef.current;
+      // Half the prior population — quiet, thin atmosphere
       const count = reduced
-        ? Math.min(16, Math.floor(k.density * .45))
-        : Math.floor(k.density * 1.25);
+        ? Math.min(8, Math.floor(k.density * .22))
+        : Math.floor(k.density * .55);
       for (let i = 0; i < count; i++) particles.push(spawn(k, w, h));
     };
 
     const bloomAt = (clientX: number, clientY: number) => {
       refreshHoles();
       if (pointInRects(clientX, clientY, holes)) return;
+      const hr = hero?.getBoundingClientRect();
+      if (hr && clientY >= hr.top && clientY <= hr.bottom) return;
       const rect = canvas.getBoundingClientRect();
       const x = clientX - rect.left;
       const y = clientY - rect.top;
       if (x < 0 || y < 0 || x > rect.width || y > rect.height) return;
       const k = kitRef.current;
-      const n = 5 + Math.floor(Math.random() * 4);
+      const n = 3 + Math.floor(Math.random() * 3);
       for (let i = 0; i < n; i++) {
         const p = spawn(k, w, h, {x, y});
-        p.vx += (Math.random() - .5) * 1.1;
-        p.vy += (Math.random() - .5) * 1.1;
+        p.vx += (Math.random() - .5) * .8;
+        p.vy += (Math.random() - .5) * .8;
         particles.push(p);
         void loadTintedMotif(p.shape, p.color);
       }
-      if (particles.length > 150) particles.splice(0, particles.length - 150);
+      if (particles.length > 80) particles.splice(0, particles.length - 80);
     };
 
     const onPointerDown = (e: PointerEvent) => {
       if (reduced) return;
       if (
         (e.target as HTMLElement | null)?.closest(
-          'button,a,input,textarea,select,label,.sound-toggle,.language-toggle,.use-design,.skip-opening,.royal-open-target',
+          'button,a,input,textarea,select,label,.sound-toggle,.language-toggle,.use-design,.skip-opening,.royal-open-target,.invitation-hero',
         )
       )
         return;
@@ -243,6 +255,14 @@ export default function InviteMotifs({templateId, accent, active}: Props) {
       last = now;
       if (holeTick++ % 6 === 0) refreshHoles();
       ctx.clearRect(0, 0, w, h);
+
+      // Hero still owns the viewport — draw nothing over videos
+      const hr = hero?.getBoundingClientRect();
+      if (hr && hr.bottom > h * 0.72) {
+        frame = requestAnimationFrame(draw);
+        return;
+      }
+
       const ordered = particles.slice().sort((a, b) => b.z - a.z);
       for (const p of ordered) {
         if (!reduced) {
@@ -255,18 +275,18 @@ export default function InviteMotifs({templateId, accent, active}: Props) {
             p.y = wrap(p.y, h);
           }
         }
-        const alpha = Math.max(0, Math.min(0.6, p.fromTouch ? p.life * p.alpha : p.alpha));
+        const alpha = Math.max(0, Math.min(0.4, p.fromTouch ? p.life * p.alpha : p.alpha));
         if (alpha <= 0.02) continue;
         const drawY = p.fromTouch
           ? p.y
-          : wrapScreen(p.y - scrollY * (0.05 + p.z * 0.22), h);
+          : wrapScreen(p.y - scrollY * (0.03 + p.z * 0.12), h);
         const img = peekTinted(p.shape, p.color);
         ctx.save();
         ctx.translate(p.x, drawY);
         ctx.rotate(p.rot);
         ctx.globalAlpha = alpha;
         if (img?.complete) {
-          const s = p.size * 2.6;
+          const s = p.size * 1.55;
           ctx.drawImage(img, -s / 2, -s / 2, s, s);
         }
         ctx.restore();

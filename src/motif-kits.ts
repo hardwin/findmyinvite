@@ -39,21 +39,21 @@ const BOTANICAL: MotifShape[] = ['vine-leaf', 'lucide-leaf', 'petal', 'foil'];
 const SPARKLY: MotifShape[] = ['foil', 'lucide-sparkles', 'petal', 'lucide-flower'];
 
 export const MOTIF_KIT_BY_TEMPLATE: Record<string, MotifKit> = {
-  'rose-gold-blush-royal': {shapes: FLORAL, colors: ROSE, density: 36, drift: 1},
-  'royal-heritage-5': {shapes: SPARKLY, colors: SKY, density: 34, drift: 1},
-  'royal-heritage-6': {shapes: BOTANICAL, colors: ROSE, density: 34, drift: .95},
-  'royal-heritage-7': {shapes: FLORAL, colors: [...ROSE, ...GOLD.slice(0, 2)], density: 36, drift: 1},
-  'royal-heritage-8': {shapes: FLORAL, colors: WINE, density: 38, drift: 1},
-  'royal-heritage-9': {shapes: FLORAL, colors: ROSE, density: 40, drift: 1.05},
-  'royal-heritage-12': {shapes: BOTANICAL, colors: ROSE, density: 36, drift: 1},
-  'royal-heritage-13': {shapes: BOTANICAL, colors: [...SAGE, ...GOLD.slice(0, 2)], density: 34, drift: .95},
-  'royal-heritage-14': {shapes: SPARKLY, colors: [...GOLD, '#ffd9a0'], density: 42, drift: 1.1},
-  'royal-prestige-1': {shapes: SPARKLY, colors: [...GOLD, ...CREAM], density: 36, drift: 1},
-  'royal-prestige-2': {shapes: FLORAL, colors: ROSE, density: 38, drift: 1.05},
-  'royal-prestige-3': {shapes: SPARKLY, colors: GOLD, density: 34, drift: 1},
-  'royal-prestige-4': {shapes: SPARKLY, colors: GOLD, density: 40, drift: 1.1},
-  'royal-prestige-5': {shapes: BOTANICAL, colors: [...GOLD, ...SAGE.slice(0, 2)], density: 36, drift: 1},
-  'royal-prestige-6': {shapes: FLORAL, colors: [...GOLD, '#f0d48a'], density: 38, drift: 1.05},
+  'rose-gold-blush-royal': {shapes: FLORAL, colors: ROSE, density: 18, drift: 0.85},
+  'royal-heritage-5': {shapes: SPARKLY, colors: SKY, density: 17, drift: 0.85},
+  'royal-heritage-6': {shapes: BOTANICAL, colors: ROSE, density: 17, drift: 0.81},
+  'royal-heritage-7': {shapes: FLORAL, colors: [...ROSE, ...GOLD.slice(0, 2)], density: 18, drift: 0.85},
+  'royal-heritage-8': {shapes: FLORAL, colors: WINE, density: 19, drift: 0.85},
+  'royal-heritage-9': {shapes: FLORAL, colors: ROSE, density: 20, drift: 0.89},
+  'royal-heritage-12': {shapes: BOTANICAL, colors: ROSE, density: 18, drift: 0.85},
+  'royal-heritage-13': {shapes: BOTANICAL, colors: [...SAGE, ...GOLD.slice(0, 2)], density: 17, drift: 0.81},
+  'royal-heritage-14': {shapes: SPARKLY, colors: [...GOLD, '#ffd9a0'], density: 21, drift: 0.94},
+  'royal-prestige-1': {shapes: SPARKLY, colors: [...GOLD, ...CREAM], density: 18, drift: 0.85},
+  'royal-prestige-2': {shapes: FLORAL, colors: ROSE, density: 19, drift: 0.89},
+  'royal-prestige-3': {shapes: SPARKLY, colors: GOLD, density: 17, drift: 0.85},
+  'royal-prestige-4': {shapes: SPARKLY, colors: GOLD, density: 20, drift: 0.94},
+  'royal-prestige-5': {shapes: BOTANICAL, colors: [...GOLD, ...SAGE.slice(0, 2)], density: 18, drift: 0.85},
+  'royal-prestige-6': {shapes: FLORAL, colors: [...GOLD, '#f0d48a'], density: 19, drift: 0.89},
 };
 
 export function motifKitFor(templateId: string, accent = '#c9a24a'): MotifKit {
@@ -66,7 +66,7 @@ export function motifKitFor(templateId: string, accent = '#c9a24a'): MotifKit {
   return {
     shapes: shapeSets[hash % shapeSets.length],
     colors: [accent, ...palettes[hash % palettes.length]].slice(0, 5),
-    density: 30 + (hash % 10),
-    drift: .9 + (hash % 5) * .05,
+    density: 15 + (hash % 10),
+    drift: 0.77 + (hash % 5) * .05,
   };
 }

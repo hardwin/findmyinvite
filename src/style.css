@@ -73,20 +73,18 @@ html{scroll-behavior:smooth;scroll-padding-top:80px}body{margin:0;background:#f8
 
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
-/* Immersive invite scroll (Boat-style hybrid) */
+/* Immersive invite scroll — section snap below hero only (no WebGL overlay) */
 .invite-scroll-root{position:relative;isolation:isolate}
-.invite-scroll-stage{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.9}
 .invite-scroll-body{position:relative;z-index:2}
-.invitation-page.invitation-open .invite-scroll-stage{opacity:1}
-.invite-chapter{position:relative;min-height:100svh;display:flex;align-items:center;justify-content:center;box-sizing:border-box;padding:clamp(32px,8vh,72px) 20px}
-.invite-chapter-inner{width:min(640px,100%);margin:0 auto;text-align:center;will-change:transform,opacity}
+.invite-chapter{position:relative;height:100svh;min-height:100svh;max-height:100svh;display:flex;align-items:center;justify-content:center;box-sizing:border-box;padding:clamp(24px,6vh,56px) 20px;scroll-snap-align:start;scroll-snap-stop:always;overflow:hidden}
+.invite-chapter-inner{width:min(640px,100%);max-height:100%;margin:0 auto;text-align:center;overflow:auto;-webkit-overflow-scrolling:touch}
 .invite-scroll-live .invite-chapter{background:transparent}
 .invite-scroll-live .invite-chapter.invite-plate-1,
 .invite-scroll-live .invite-chapter.invite-plate-2,
 .invite-scroll-live .invite-chapter.invite-plate-3,
 .invite-scroll-live .invite-chapter.invite-plate-4,
 .invite-scroll-live .invite-chapter.invite-plate-5{background-color:transparent}
-.invite-scroll-live .invite-chapter-inner{padding:28px 22px;border-radius:18px;background:color-mix(in srgb,var(--invite-paper,#f7f1e8) 88%,transparent);backdrop-filter:blur(10px);box-shadow:0 18px 50px rgba(40,24,8,.12)}
+.invite-scroll-live .invite-chapter-inner{padding:28px 22px;border-radius:18px;background:color-mix(in srgb,var(--invite-paper,#f7f1e8) 92%,transparent);box-shadow:0 14px 40px rgba(40,24,8,.1)}
 .invite-scroll-live .invite-welcome .invite-chapter-inner{padding:36px 28px}
 .invite-scroll-live .countdown{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;max-width:420px;margin:0 auto}
 .invite-scroll-live .countdown>div{padding:16px 8px;border-radius:14px;background:color-mix(in srgb,var(--invite-color,#c9a24a) 10%,#fff);border:1px solid color-mix(in srgb,var(--invite-color,#c9a24a) 28%,transparent)}
@@ -96,18 +94,18 @@ html{scroll-behavior:smooth;scroll-padding-top:80px}body{margin:0;background:#f8
 .invite-scroll-live .photo-slideshow img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s ease}
 .invite-scroll-live .photo-slideshow img.active{opacity:1}
 .invite-scroll-live .scratch-heart{margin:0 auto;transform:scale(1.05)}
-.invite-scroll-live .fmi-form,.invite-scroll-live .fmi-form{text-align:left}
+.invite-scroll-live .fmi-form{text-align:left}
 .invite-scroll-live .invite-cluster{display:flex;flex-direction:column;gap:0}
-.invite-scroll-static .invite-chapter{min-height:0;padding:48px 20px}
-.invite-scroll-static .invite-chapter-inner{backdrop-filter:none;background:transparent;box-shadow:none;padding:0}
+.invite-scroll-static .invite-chapter{height:auto;min-height:0;max-height:none;padding:48px 20px;overflow:visible}
+.invite-scroll-static .invite-chapter-inner{background:transparent;box-shadow:none;padding:0}
+.invite-snap-page .invitation-hero{scroll-snap-align:start;scroll-snap-stop:always;height:100svh;min-height:100svh}
 @media(max-width:767px){
-  .invite-chapter{padding:24px 16px;min-height:92svh}
+  .invite-chapter{padding:20px 16px}
   .invite-scroll-live .invite-chapter-inner{padding:22px 16px;border-radius:14px}
-  .invite-scroll-stage{opacity:.55}
 }
 @media(prefers-reduced-motion:reduce){
-  .invite-scroll-stage{display:none}
-  .invite-chapter{min-height:0;padding:48px 20px}
+  .invite-chapter{height:auto;min-height:0;max-height:none;padding:48px 20px;overflow:visible}
   .invite-chapter-inner{opacity:1!important;transform:none!important}
 }
+
 
