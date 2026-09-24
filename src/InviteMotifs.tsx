@@ -85,7 +85,7 @@ function spawn(kit: MotifKit, w: number, h: number, touch?: {x: number; y: numbe
     size: (2.5 + Math.random() * 3.5) * depthScale * (fromTouch ? 1.15 : 1),
     life: 1,
     maxLife: fromTouch ? .9 + Math.random() * 1.1 : 1e9,
-    alpha: .1 + Math.random() * .22,
+    alpha: .18 + Math.random() * .28,
     shape,
     color,
     fromTouch,
@@ -95,7 +95,10 @@ function spawn(kit: MotifKit, w: number, h: number, touch?: {x: number; y: numbe
 /** Videos, photos, and plate sections — motifs are punched out of these rects. */
 function mediaRects(page: HTMLElement | null): DOMRect[] {
   if (!page) return [];
-  const nodes = page.querySelectorAll(
+  // Swiper keeps every slide in the DOM; only punch the active (visible) slide.
+  const scope =
+    (page.querySelector('.swiper-slide-active') as HTMLElement | null) || page;
+  const nodes = scope.querySelectorAll(
     [
       'video',
       'img',
@@ -109,10 +112,15 @@ function mediaRects(page: HTMLElement | null): DOMRect[] {
       '.photo-grid',
     ].join(','),
   );
+  const vh = window.innerHeight || 1;
+  const vw = window.innerWidth || 1;
   const out: DOMRect[] = [];
   nodes.forEach((el) => {
     const r = (el as HTMLElement).getBoundingClientRect();
-    if (r.width > 12 && r.height > 12) out.push(r);
+    if (r.width <= 12 || r.height <= 12) return;
+    // Ignore off-screen rects so translated slides cannot erase the canvas.
+    if (r.bottom <= 0 || r.top >= vh || r.right <= 0 || r.left >= vw) return;
+    out.push(r);
   });
   return out;
 }
@@ -175,7 +183,7 @@ export default function InviteMotifs({templateId, accent, active}: Props) {
       // Half the prior population — quiet, thin atmosphere
       const count = reduced
         ? Math.min(8, Math.floor(k.density * .22))
-        : Math.floor(k.density * .55);
+        : Math.floor(k.density * .7);
       for (let i = 0; i < count; i++) particles.push(spawn(k, w, h));
     };
 
@@ -256,9 +264,13 @@ export default function InviteMotifs({templateId, accent, active}: Props) {
       if (holeTick++ % 6 === 0) refreshHoles();
       ctx.clearRect(0, 0, w, h);
 
-      // Hero still owns the viewport — draw nothing over videos
+      // Hero slide still owns the viewport — draw nothing over the opening/hero.
+      // With Swiper, inactive slides stay in the DOM; only gate on the active slide.
+      const heroSlide = hero?.closest('.swiper-slide');
+      const heroActive =
+        !heroSlide || heroSlide.classList.contains('swiper-slide-active');
       const hr = hero?.getBoundingClientRect();
-      if (hr && hr.bottom > h * 0.72) {
+      if (heroActive && hr && hr.bottom > h * 0.72) {
         frame = requestAnimationFrame(draw);
         return;
       }

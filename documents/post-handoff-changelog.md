@@ -327,3 +327,19 @@ Ashok QA: overlays on hero video, sticky mid-section scroll, dense motifs, gritt
 - **Smooth preload:** Lenis/Snap modules warm while opening/hero videos play (`playing`); dropped backdrop-filter blur on chapter cards (mobile grit).
 
 Pilot: `/invite/demo?template=royal-prestige-2`
+
+## 2026-09-24 — TikTok-style invite scroll (Swiper)
+
+Replaced Lenis+Snap document scroll with **Swiper** vertical full-viewport paging.
+
+- Short or long flick → exactly one section (never multi-page, never deny/reverse past threshold)
+- Height locked to `visualViewport` (address-bar safe; no next-section peek)
+- Hero = slide 0 (clean, no WebGL overlay); nested inner scroll for tall RSVP/timeline
+- Removed `lenis` / unused `gsap` from invite path
+
+## 2026-09-24 — Swiper pager QA fixes
+- Empty slide: `#invitation-details` moved outside `InvitePager`.
+- Opening video: hard lock (no touch/wheel/inner scroll) until `opened`.
+- Logistics: Transport / Accommodation / Gifts each own slide + plate-4; text stays inside chapter-inner cards.
+- Countdown: compact Hrs/Mins/Secs labels, ellipsis-safe cells.
+- Motifs: punch/gate only active Swiper slide; denser + higher alpha; z-index 25.
