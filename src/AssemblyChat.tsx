@@ -1,4 +1,5 @@
 import {useChat} from '@ai-sdk/react';
+import {upload as uploadBlob} from '@vercel/blob/client';
 import {DefaultChatTransport,getToolName,isToolUIPart,type UIMessage} from 'ai';
 import {
  useCallback,
@@ -484,17 +485,62 @@ function JobCard({jobId,onUpdate,onDismiss}:{jobId:string;onUpdate?:(job:JobStat
 type ChoiceOption={id:string;label:string;submit:string};
 
 
-function readFaceDataUrl(file:File){
- return new Promise<string>((resolve,reject)=>{
-  if(file.size>4*1024*1024){reject(new Error('Each face photo must be under 4 MB.'));return;}
-  const reader=new FileReader();
-  reader.onload=()=>typeof reader.result==='string'?resolve(reader.result):reject(new Error('Could not read face photo.'));
-  reader.onerror=()=>reject(new Error('Could not read face photo.'));
-  reader.readAsDataURL(file);
+/** Upload face photo straight to Vercel Blob (browser → Blob). Returns the public https URL. */
+async function uploadFacePhoto(file:File){
+ if(!file.type.startsWith('image/'))throw new Error('Use a JPEG, PNG, or WebP photo.');
+ if(file.size>12*1024*1024)throw new Error('Each face photo must be under 12 MB.');
+ const ext=(file.name.split('.').pop()||'jpg').toLowerCase().replace(/[^a-z0-9]/g,'')||'jpg';
+ const pathname='face-swap/'+Date.now()+'-'+Math.random().toString(36).slice(2,8)+'.'+ext;
+ const blob=await uploadBlob(pathname,file,{
+  access:'public',
+  handleUploadUrl:'/api/face-swap?action=blob',
+  contentType:file.type||'image/jpeg'
  });
+ if(!blob?.url)throw new Error('Face upload returned no URL.');
+ return blob.url;
 }
 
-/** Face Swap add-on before Lock — swap faces on the refined hero, then allow Lock → video. */
+function FaceUploadSlot({
+ label,
+ preview,
+ busy,
+ disabled,
+ onPick
+}:{
+ label:string;
+ preview:string;
+ busy:boolean;
+ disabled:boolean;
+ onPick:(file:File)=>void;
+}){
+ const inputId=useMemo(()=>'face-'+label.toLowerCase().replace(/\s+/g,'-')+'-'+Math.random().toString(36).slice(2,7),[label]);
+ return (
+  <div className={'asm-gpt-face-slot'+(preview?' has-preview':'')+(busy?' is-busy':'')}>
+   <p className="asm-gpt-face-slot-label">{label}</p>
+   <label className="asm-gpt-face-slot-card" htmlFor={inputId}>
+    {preview
+     ?<img src={preview} alt={label+' preview'}/>
+     :<span className="asm-gpt-face-slot-empty"><strong>Add photo</strong><em>Front-facing · well lit</em></span>}
+    {busy&&<span className="asm-gpt-face-slot-busy" aria-live="polite">Uploading…</span>}
+   </label>
+   <input
+    id={inputId}
+    className="asm-gpt-face-slot-input"
+    type="file"
+    accept="image/jpeg,image/png,image/webp"
+    disabled={disabled||busy}
+    onChange={e=>{
+     const f=e.currentTarget.files?.[0];
+     e.currentTarget.value='';
+     if(f)onPick(f);
+    }}
+   />
+   {preview&&!busy&&<p className="asm-gpt-face-slot-file">Uploaded</p>}
+  </div>
+ );
+}
+
+/** Face Swap add-on before Lock — upload faces to Blob URLs, swap, then Lock → video. */
 function FaceSwapBeforeLock({
  heroUrl,
  busy,
@@ -506,8 +552,11 @@ function FaceSwapBeforeLock({
 }){
  const [step,setStep]=useState<'offer'|'confirm'|'upload'|'running'|'ready'>('offer');
  const [cfg,setCfg]=useState<{stub:boolean;priceInr:number}|null>(null);
- const [brideFace,setBrideFace]=useState('');
- const [groomFace,setGroomFace]=useState('');
+ const [brideUrl,setBrideUrl]=useState('');
+ const [groomUrl,setGroomUrl]=useState('');
+ const [bridePreview,setBridePreview]=useState('');
+ const [groomPreview,setGroomPreview]=useState('');
+ const [uploading,setUploading]=useState<'bride'|'groom'|null>(null);
  const [progress,setProgress]=useState('');
  const [error,setError]=useState('');
  const [swappedUrl,setSwappedUrl]=useState('');
@@ -521,8 +570,28 @@ function FaceSwapBeforeLock({
    .catch(()=>setCfg({stub:false,priceInr:300}));
  },[]);
 
+ async function pickFace(role:'bride'|'groom',file:File){
+  setError('');
+  setUploading(role);
+  const local=URL.createObjectURL(file);
+  if(role==='bride'){setBridePreview(local);setBrideUrl('');}
+  else{setGroomPreview(local);setGroomUrl('');}
+  try{
+   const url=await uploadFacePhoto(file);
+   if(role==='bride'){setBrideUrl(url);setBridePreview(url);}
+   else{setGroomUrl(url);setGroomPreview(url);}
+  }catch(e){
+   setError((e as Error).message||'Face upload failed.');
+   if(role==='bride'){setBridePreview('');setBrideUrl('');}
+   else{setGroomPreview('');setGroomUrl('');}
+  }finally{
+   setUploading(null);
+   URL.revokeObjectURL(local);
+  }
+ }
+
  async function runSwap(){
-  if(!brideFace||!groomFace){setError('Upload both bride and groom face photos.');return;}
+  if(!brideUrl||!groomUrl){setError('Upload both bride and groom face photos first.');return;}
   setStep('running');setError('');setProgress('Starting Face Swap…');
   try{
    // wait:true keeps the job on one Vercel function (in-memory Map cannot poll across instances).
@@ -532,14 +601,17 @@ function FaceSwapBeforeLock({
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify({
      pinUrl:heroUrl,
-     brideFaceDataUrl:brideFace,
-     groomFaceDataUrl:groomFace,
+     brideFaceUrl:brideUrl,
+     groomFaceUrl:groomUrl,
      entitled:Boolean(cfg?.stub),
      wait:true
     })
    });
-   const job=await startRes.json();
-   if(!startRes.ok)throw new Error(job.error||'Face Swap failed to start.');
+   const raw=await startRes.text();
+   let job:any=null;
+   try{job=JSON.parse(raw);}catch{/* non-JSON platform errors */}
+   if(!startRes.ok)throw new Error((job&&job.error)||'Face Swap failed to start.');
+   if(!job)throw new Error('Face Swap returned an empty response.');
    if(job.status!=='done')throw new Error(job.error||'Face Swap failed.');
    const couple=job.result?.coupleUrl||'';
    if(!couple)throw new Error('Face Swap returned no couple still.');
@@ -594,33 +666,34 @@ function FaceSwapBeforeLock({
  }
 
  if(step==='upload'||step==='running'){
+  const blocked=busy||step==='running'||uploading!==null;
   return (
    <div className="asm-gpt-face-swap" role="group" aria-label="Upload faces for Face Swap">
     <p className="asm-gpt-choice-title">Upload bride &amp; groom faces</p>
-    <p className="asm-gpt-face-swap-copy">Clear face photos work best — front-facing, well lit, one person each.</p>
+    <p className="asm-gpt-face-swap-copy">Clear face photos work best — front-facing, well lit, one person each. Photos upload first, then we swap.</p>
     <div className="asm-gpt-face-uploads">
-     <label>Bride face
-      <input type="file" accept="image/jpeg,image/png,image/webp" disabled={busy||step==='running'}
-       onChange={e=>{const f=e.currentTarget.files?.[0];if(f)void readFaceDataUrl(f).then(setBrideFace).catch(err=>setError(err.message));}}/>
-     </label>
-     <label>Groom face
-      <input type="file" accept="image/jpeg,image/png,image/webp" disabled={busy||step==='running'}
-       onChange={e=>{const f=e.currentTarget.files?.[0];if(f)void readFaceDataUrl(f).then(setGroomFace).catch(err=>setError(err.message));}}/>
-     </label>
+     <FaceUploadSlot
+      label="Bride face"
+      preview={bridePreview}
+      busy={uploading==='bride'}
+      disabled={blocked&&uploading!=='bride'}
+      onPick={file=>void pickFace('bride',file)}
+     />
+     <FaceUploadSlot
+      label="Groom face"
+      preview={groomPreview}
+      busy={uploading==='groom'}
+      disabled={blocked&&uploading!=='groom'}
+      onPick={file=>void pickFace('groom',file)}
+     />
     </div>
-    {(brideFace||groomFace)&&(
-     <div className="asm-gpt-face-previews">
-      {brideFace&&<img src={brideFace} alt="Bride face"/>}
-      {groomFace&&<img src={groomFace} alt="Groom face"/>}
-     </div>
-    )}
     {error&&<p className="asm-gpt-alert" role="alert">{error}</p>}
     {progress&&<p role="status">{progress}</p>}
     <div className="asm-gpt-face-swap-actions">
-     <button type="button" className="asm-gpt-choice-submit" disabled={busy||step==='running'||!brideFace||!groomFace} onClick={()=>void runSwap()}>
-      {step==='running'?'Swapping faces…':'Run Face Swap'}
+     <button type="button" className="asm-gpt-choice-submit" disabled={blocked||!brideUrl||!groomUrl} onClick={()=>void runSwap()}>
+      {step==='running'?'Swapping faces…':uploading?'Uploading…':'Run Face Swap'}
      </button>
-     <button type="button" className="asm-gpt-chip" disabled={busy||step==='running'} onClick={()=>setStep('offer')}>Cancel</button>
+     <button type="button" className="asm-gpt-chip" disabled={blocked} onClick={()=>setStep('offer')}>Cancel</button>
     </div>
    </div>
   );
@@ -649,6 +722,7 @@ function FaceSwapBeforeLock({
   </div>
  );
 }
+
 
 function ChoicePrompt({
  title,

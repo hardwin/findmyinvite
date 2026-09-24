@@ -1,3 +1,4 @@
+import {handleUpload} from '@vercel/blob/client';
 import {HttpError, bodyJson, respond, fail, method} from '../server/core.mjs';
 import {
   faceSwapConfig,
@@ -32,9 +33,33 @@ export default async function handler(req, res) {
       return respond(res, 200, job);
     }
 
+    // Client Blob upload token — browser PUTs the file straight to Blob (no base64 through this function).
+    if (action === 'blob') {
+      method(req, ['POST']);
+      const body = await bodyJson(req, 256 * 1024);
+      const json = await handleUpload({
+        body,
+        request: req,
+        onBeforeGenerateToken: async (pathname) => {
+          const safe = String(pathname || '').replace(/[^a-zA-Z0-9._/-]/g, '_');
+          if (!safe.startsWith('face-swap/')) {
+            throw new HttpError(400, 'Face uploads must use the face-swap/ prefix.');
+          }
+          return {
+            allowedContentTypes: ['image/jpeg', 'image/png', 'image/webp', 'image/jpg'],
+            maximumSizeInBytes: 12 * 1024 * 1024,
+            addRandomSuffix: true,
+            tokenPayload: JSON.stringify({purpose: 'face-swap'})
+          };
+        }
+      });
+      return respond(res, 200, json);
+    }
+
     if (action === 'start') {
       method(req, ['POST']);
-      const body = await bodyJson(req, 12*1024*1024);
+      // URLs only — faces are uploaded to Blob first, so the start body stays small.
+      const body = await bodyJson(req, 256 * 1024);
       const wait = body.wait === true || url.searchParams.get('wait') === '1';
       const opts = {env: process.env, siteOrigin: siteOriginFrom(req)};
 
