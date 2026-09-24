@@ -100,6 +100,17 @@ test('sniff and public CDN URL prefer pinimg jpeg',async()=>{
  assert.equal(image.ext,'.jpg');
  assert.equal(preferPublicImageUrl(image),'https://i.pinimg.com/736x/ab/cd/ef/abcd.jpg');
  assert.equal(preferPublicImageUrl({sourceUrl:'https://www.pinterest.com/pin/123/'}), '');
+ // Face-swap proxy ends with …jpg in the query — must NOT be treated as a public image URL.
+ const proxy='https://findmyinvite.com/api/face-swap?action=file&url='+encodeURIComponent(
+  'https://0p000etsgn9iq7q1.private.blob.vercel-storage.com/face-swap/preview/abc/couple-1.jpg'
+ );
+ assert.equal(preferPublicImageUrl({sourceUrl:proxy}),'');
+ assert.equal(preferPublicImageUrl({
+  sourceUrl:'https://0p000etsgn9iq7q1.private.blob.vercel-storage.com/face-swap/preview/abc/couple-1.jpg'
+ }),'');
+ assert.equal(preferPublicImageUrl({
+  sourceUrl:'https://public.blob.vercel-storage.com/face-swap/couple-1.jpg'
+ }),'https://public.blob.vercel-storage.com/face-swap/couple-1.jpg');
 });
 
 test('generate-status 404 for unknown job',async()=>{

@@ -281,9 +281,15 @@ export function normalizeReferenceImage(image){
 export function preferPublicImageUrl(image){
  const url=String(image?.sourceUrl||'').trim();
  if(!/^https:\/\//i.test(url))return '';
- // Direct CDN / file URLs Grok can fetch. Avoid HTML pages.
- if(/\.(jpe?g|png|webp)(\?|#|$)/i.test(url))return url;
- if(/pinimg\.com\//i.test(url))return url;
+ let parsed;
+ try{parsed=new URL(url);}catch{return '';}
+ // Face-swap file proxy + private Blob look like “…jpg” in the query string but the
+ // pathname has no image ext — Replicate then errors: Invalid image format ''.
+ if(/\/api\/face-swap/i.test(parsed.pathname))return '';
+ if(/\.private\.blob\.vercel-storage\.com$/i.test(parsed.hostname))return '';
+ // Extension must live on the pathname, not buried in ?url=…jpg
+ if(/\.(jpe?g|png|webp)$/i.test(parsed.pathname))return url;
+ if(/(^|\.)pinimg\.com$/i.test(parsed.hostname))return url;
  return '';
 }
 

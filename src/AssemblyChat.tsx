@@ -575,19 +575,20 @@ function FaceSwapBeforeLock({
   setError('');
   setUploading(role);
   const local=URL.createObjectURL(file);
-  if(role==='bride'){setBridePreview(local);setBrideUrl('');}
-  else{setGroomPreview(local);setGroomUrl('');}
+  // Keep local object URL for <img> — private Blob URLs are not browser-fetchable.
+  if(role==='bride'){setBridePreview(prev=>{if(prev?.startsWith('blob:'))URL.revokeObjectURL(prev);return local;});setBrideUrl('');}
+  else{setGroomPreview(prev=>{if(prev?.startsWith('blob:'))URL.revokeObjectURL(prev);return local;});setGroomUrl('');}
   try{
    const url=await uploadFacePhoto(file);
-   if(role==='bride'){setBrideUrl(url);setBridePreview(url);}
-   else{setGroomUrl(url);setGroomPreview(url);}
+   if(role==='bride')setBrideUrl(url);
+   else setGroomUrl(url);
   }catch(e){
    setError((e as Error).message||'Face upload failed.');
    if(role==='bride'){setBridePreview('');setBrideUrl('');}
    else{setGroomPreview('');setGroomUrl('');}
+   URL.revokeObjectURL(local);
   }finally{
    setUploading(null);
-   URL.revokeObjectURL(local);
   }
  }
 
