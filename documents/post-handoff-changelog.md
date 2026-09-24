@@ -343,3 +343,8 @@ Replaced Lenis+Snap document scroll with **Swiper** vertical full-viewport pagin
 - Logistics: Transport / Accommodation / Gifts each own slide + plate-4; text stays inside chapter-inner cards.
 - Countdown: compact Hrs/Mins/Secs labels, ellipsis-safe cells.
 - Motifs: punch/gate only active Swiper slide; denser + higher alpha; z-index 25.
+
+## 2026-09-24 — Motifs visible again on idle sections
+- Particles were ~4–9px (invisible) and full `invite-plate-*` punches wiped every plate slide.
+- Size ~14–34px, denser seed, punch only media + `.invite-chapter-inner` (margins keep drifting), soft-light blend, slide-class observer.
+- Motifs still invisible on cream: soft-light + pastel wiped them. Switched to normal blend, darker rose/gold, larger particles (~22–50px), edge-biased spawn, canvas mounted after pager (z-index 30).

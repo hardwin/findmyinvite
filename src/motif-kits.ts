@@ -27,8 +27,8 @@ export const MOTIF_SVG: Record<MotifShape, string> = {
   'lucide-sparkles': 'lucide-sparkles',
 };
 
-const GOLD = ['#f5e0a8', '#e8c56a', '#c9a24a', '#fff6d8'];
-const ROSE = ['#f2c4d0', '#e8a0b4', '#c45a8a', '#ffe8ef'];
+const GOLD = ['#c9a24a', '#a67c2e', '#e0b85c', '#8a6420'];
+const ROSE = ['#c45a7a', '#a83d5c', '#d4789a', '#8b2f4a'];
 const SAGE = ['#c5d5c0', '#8fad8a', '#5c7a58', '#e8f0e4'];
 const WINE = ['#c9a0a8', '#8b3a4a', '#6e1a28', '#f0d8dc'];
 const CREAM = ['#f7f0e4', '#e8dcc8', '#d4c4a8', '#fffaf0'];

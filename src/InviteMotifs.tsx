@@ -33,13 +33,14 @@ function loadTintedMotif(shape: MotifShape, color: string): Promise<HTMLImageEle
   const job = (async () => {
     const file = MOTIF_SVG[shape];
     const res = await fetch('/assets/motifs/' + file + '.svg');
+    if (!res.ok) throw new Error('motif ' + file);
     let svg = await res.text();
+    // Tint both fill and stroke motifs (petal fill="#000", lucide stroke="#000").
     svg = svg
       .replaceAll('stroke="#000"', `stroke="${color}"`)
       .replaceAll('fill="#000"', `fill="${color}"`)
-      .replaceAll('stroke-width="2"', 'stroke-width="0.9"')
-      .replaceAll('stroke-width="1.5"', 'stroke-width="0.75"')
-      .replaceAll('stroke-width="3"', 'stroke-width="1"');
+      .replaceAll("stroke='#000'", `stroke='${color}'`)
+      .replaceAll("fill='#000'", `fill='${color}'`);
     const blob = new Blob([svg], {type: 'image/svg+xml'});
     const url = URL.createObjectURL(blob);
     const img = await new Promise<HTMLImageElement>((resolve, reject) => {
@@ -51,7 +52,10 @@ function loadTintedMotif(shape: MotifShape, color: string): Promise<HTMLImageEle
     URL.revokeObjectURL(url);
     tintCache.set(key, img);
     return img;
-  })();
+  })().catch((err) => {
+    tintCache.delete(key);
+    throw err;
+  });
 
   tintCache.set(key, job);
   return job;
@@ -62,40 +66,64 @@ function peekTinted(shape: MotifShape, color: string): HTMLImageElement | null {
   return hit instanceof HTMLImageElement ? hit : null;
 }
 
+/** Prefer edges/margins so motifs frame the paper card instead of covering copy. */
 function spawn(kit: MotifKit, w: number, h: number, touch?: {x: number; y: number}): Particle {
   const z = Math.random();
   const shape = kit.shapes[Math.floor(Math.random() * kit.shapes.length)];
   const color = kit.colors[Math.floor(Math.random() * kit.colors.length)];
   const fromTouch = Boolean(touch);
-  const depthScale = .45 + (1 - z) * .4;
-  const driftDir = Math.random() < .55 ? -1 : 1;
-  // Sparse random distribution — jitter into thirds so they feel scattered
-  const col = Math.floor(Math.random() * 3);
-  const row = Math.floor(Math.random() * 3);
-  const baseX = ((col + Math.random()) / 3) * w;
-  const baseY = ((row + Math.random()) / 3) * h;
+  const depthScale = 0.55 + (1 - z) * 0.45;
+  const driftDir = Math.random() < 0.55 ? -1 : 1;
+
+  let baseX: number;
+  let baseY: number;
+  if (touch) {
+    baseX = touch.x + (Math.random() - 0.5) * 12;
+    baseY = touch.y + (Math.random() - 0.5) * 12;
+  } else if (Math.random() < 0.7) {
+    // Band along edges — visible in cream margins around the card.
+    const band = Math.floor(Math.random() * 4);
+    if (band === 0) {
+      baseX = Math.random() * w;
+      baseY = Math.random() * h * 0.22;
+    } else if (band === 1) {
+      baseX = Math.random() * w;
+      baseY = h * 0.78 + Math.random() * h * 0.22;
+    } else if (band === 2) {
+      baseX = Math.random() * w * 0.18;
+      baseY = Math.random() * h;
+    } else {
+      baseX = w * 0.82 + Math.random() * w * 0.18;
+      baseY = Math.random() * h;
+    }
+  } else {
+    baseX = Math.random() * w;
+    baseY = Math.random() * h;
+  }
+
   return {
-    x: touch ? touch.x + (Math.random() - .5) * 10 : baseX,
-    y: touch ? touch.y + (Math.random() - .5) * 10 : baseY,
+    x: baseX,
+    y: baseY,
     z,
-    vx: (Math.random() - .5) * .1 * kit.drift * depthScale,
-    vy: driftDir * (.04 + Math.random() * .12) * kit.drift * depthScale,
+    vx: (Math.random() - 0.5) * 0.14 * kit.drift * depthScale,
+    vy: driftDir * (0.05 + Math.random() * 0.14) * kit.drift * depthScale,
     rot: Math.random() * Math.PI * 2,
-    spin: (Math.random() - .5) * .007 * kit.drift,
-    size: (2.5 + Math.random() * 3.5) * depthScale * (fromTouch ? 1.15 : 1),
+    spin: (Math.random() - 0.5) * 0.01 * kit.drift,
+    // Clearly visible idle layer (~22–50px).
+    size: (18 + Math.random() * 16) * depthScale * (fromTouch ? 1.25 : 1),
     life: 1,
-    maxLife: fromTouch ? .9 + Math.random() * 1.1 : 1e9,
-    alpha: .18 + Math.random() * .28,
+    maxLife: fromTouch ? 0.9 + Math.random() * 1.1 : 1e9,
+    // Pastel soft-light on cream was invisible — keep alpha strong with normal blend.
+    alpha: 0.4 + Math.random() * 0.35,
     shape,
     color,
     fromTouch,
   };
 }
 
-/** Videos, photos, and plate sections — motifs are punched out of these rects. */
+/** Punch only real media + paper cards so margins keep the drifting layer. */
 function mediaRects(page: HTMLElement | null): DOMRect[] {
   if (!page) return [];
-  // Swiper keeps every slide in the DOM; only punch the active (visible) slide.
   const scope =
     (page.querySelector('.swiper-slide-active') as HTMLElement | null) || page;
   const nodes = scope.querySelectorAll(
@@ -103,7 +131,7 @@ function mediaRects(page: HTMLElement | null): DOMRect[] {
       'video',
       'img',
       '.invitation-hero',
-      '[class*="invite-plate-"]',
+      '.invite-chapter-inner',
       '.scratch-heart',
       '.photo-slideshow',
       '.classic-hero-photo',
@@ -118,22 +146,17 @@ function mediaRects(page: HTMLElement | null): DOMRect[] {
   nodes.forEach((el) => {
     const r = (el as HTMLElement).getBoundingClientRect();
     if (r.width <= 12 || r.height <= 12) return;
-    // Ignore off-screen rects so translated slides cannot erase the canvas.
     if (r.bottom <= 0 || r.top >= vh || r.right <= 0 || r.left >= vw) return;
     out.push(r);
   });
   return out;
 }
 
-function pointInRects(x: number, y: number, rects: DOMRect[]) {
-  return rects.some((r) => x >= r.left && x <= r.right && y >= r.top && y <= r.bottom);
-}
-
 type Props = {templateId: string; accent?: string; active: boolean};
 
 /**
- * Viewport-fixed SVG motifs. Visible on text-only sections; hole-punched under
- * videos, images, and photo plates so they never sit on media.
+ * Viewport-fixed SVG motifs — soft drifting atmosphere on idle text sections.
+ * Hidden over hero/media; punched out of paper cards so copy stays clean.
  */
 export default function InviteMotifs({templateId, accent, active}: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -146,11 +169,16 @@ export default function InviteMotifs({templateId, accent, active}: Props) {
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
+
     const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const page = canvas.closest('.invitation-page') as HTMLElement | null;
     const hero = page?.querySelector('.invitation-hero') as HTMLElement | null;
 
-    let w = 0, h = 0, scrollY = 0, frame = 0, last = performance.now();
+    let w = 0;
+    let h = 0;
+    let scrollY = 0;
+    let frame = 0;
+    let last = performance.now();
     let holes: DOMRect[] = [];
     let holeTick = 0;
     const particles: Particle[] = [];
@@ -180,32 +208,32 @@ export default function InviteMotifs({templateId, accent, active}: Props) {
     const seed = () => {
       particles.length = 0;
       const k = kitRef.current;
-      // Half the prior population — quiet, thin atmosphere
       const count = reduced
-        ? Math.min(8, Math.floor(k.density * .22))
-        : Math.floor(k.density * .7);
+        ? Math.min(12, Math.floor(k.density * 0.5))
+        : Math.floor(k.density * 1.4);
       for (let i = 0; i < count; i++) particles.push(spawn(k, w, h));
     };
 
     const bloomAt = (clientX: number, clientY: number) => {
       refreshHoles();
-      if (pointInRects(clientX, clientY, holes)) return;
-      const hr = hero?.getBoundingClientRect();
-      if (hr && clientY >= hr.top && clientY <= hr.bottom) return;
+      if (holes.some((r) => clientX >= r.left && clientX <= r.right && clientY >= r.top && clientY <= r.bottom))
+        return;
+      const heroSlide = hero?.closest('.swiper-slide');
+      if (heroSlide?.classList.contains('swiper-slide-active')) return;
       const rect = canvas.getBoundingClientRect();
       const x = clientX - rect.left;
       const y = clientY - rect.top;
       if (x < 0 || y < 0 || x > rect.width || y > rect.height) return;
       const k = kitRef.current;
-      const n = 3 + Math.floor(Math.random() * 3);
+      const n = 4 + Math.floor(Math.random() * 3);
       for (let i = 0; i < n; i++) {
         const p = spawn(k, w, h, {x, y});
-        p.vx += (Math.random() - .5) * .8;
-        p.vy += (Math.random() - .5) * .8;
+        p.vx += (Math.random() - 0.5) * 0.9;
+        p.vy += (Math.random() - 0.5) * 0.9;
         particles.push(p);
         void loadTintedMotif(p.shape, p.color);
       }
-      if (particles.length > 80) particles.splice(0, particles.length - 80);
+      if (particles.length > 90) particles.splice(0, particles.length - 90);
     };
 
     const onPointerDown = (e: PointerEvent) => {
@@ -247,6 +275,11 @@ export default function InviteMotifs({templateId, accent, active}: Props) {
     page?.addEventListener('pointercancel', onPointerCancel, {passive: true});
     window.addEventListener('pointerup', onPointerUp, {passive: true});
 
+    const slideObserver = new MutationObserver(() => refreshHoles());
+    page?.querySelectorAll('.swiper-slide').forEach((el) => {
+      slideObserver.observe(el, {attributes: true, attributeFilter: ['class']});
+    });
+
     const wrap = (v: number, max: number) => {
       if (v < -40) return max + 40;
       if (v > max + 40) return -40;
@@ -264,13 +297,10 @@ export default function InviteMotifs({templateId, accent, active}: Props) {
       if (holeTick++ % 6 === 0) refreshHoles();
       ctx.clearRect(0, 0, w, h);
 
-      // Hero slide still owns the viewport — draw nothing over the opening/hero.
-      // With Swiper, inactive slides stay in the DOM; only gate on the active slide.
+      // Only skip drawing while the hero slide is the active Swiper slide.
       const heroSlide = hero?.closest('.swiper-slide');
-      const heroActive =
-        !heroSlide || heroSlide.classList.contains('swiper-slide-active');
-      const hr = hero?.getBoundingClientRect();
-      if (heroActive && hr && hr.bottom > h * 0.72) {
+      const heroActive = Boolean(heroSlide?.classList.contains('swiper-slide-active'));
+      if (heroActive) {
         frame = requestAnimationFrame(draw);
         return;
       }
@@ -287,8 +317,8 @@ export default function InviteMotifs({templateId, accent, active}: Props) {
             p.y = wrap(p.y, h);
           }
         }
-        const alpha = Math.max(0, Math.min(0.4, p.fromTouch ? p.life * p.alpha : p.alpha));
-        if (alpha <= 0.02) continue;
+        const alpha = Math.max(0, Math.min(0.75, p.fromTouch ? p.life * p.alpha : p.alpha));
+        if (alpha <= 0.03) continue;
         const drawY = p.fromTouch
           ? p.y
           : wrapScreen(p.y - scrollY * (0.03 + p.z * 0.12), h);
@@ -297,13 +327,18 @@ export default function InviteMotifs({templateId, accent, active}: Props) {
         ctx.translate(p.x, drawY);
         ctx.rotate(p.rot);
         ctx.globalAlpha = alpha;
-        if (img?.complete) {
-          const s = p.size * 1.55;
+        const s = p.size * 2;
+        if (img?.complete && img.naturalWidth > 0) {
           ctx.drawImage(img, -s / 2, -s / 2, s, s);
+        } else {
+          ctx.fillStyle = p.color;
+          ctx.beginPath();
+          ctx.ellipse(0, 0, s * 0.38, s * 0.24, 0, 0, Math.PI * 2);
+          ctx.fill();
         }
         ctx.restore();
       }
-      // Punch motifs out of media so they only show on text/paper sections
+
       if (holes.length) {
         ctx.save();
         ctx.globalCompositeOperation = 'destination-out';
@@ -311,6 +346,7 @@ export default function InviteMotifs({templateId, accent, active}: Props) {
         for (const r of holes) ctx.fillRect(r.left, r.top, r.width, r.height);
         ctx.restore();
       }
+
       for (let i = particles.length - 1; i >= 0; i--) {
         if (particles[i].fromTouch && particles[i].life <= 0) particles.splice(i, 1);
       }
@@ -327,6 +363,7 @@ export default function InviteMotifs({templateId, accent, active}: Props) {
       page?.removeEventListener('pointerup', onPointerUp);
       page?.removeEventListener('pointercancel', onPointerCancel);
       window.removeEventListener('pointerup', onPointerUp);
+      slideObserver.disconnect();
     };
   }, [active, templateId]);
 
