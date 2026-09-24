@@ -49,13 +49,17 @@ test('normalizeImageUrls de-dupes pin + face refs', () => {
   assert.equal(refs.length, 3);
 });
 
-test('face swap prompt pack labels roles and locks identity change scope', () => {
+test('face swap prompt pack: identity from refs, head pose from Image 1', () => {
   const couple = coupleSwapPrompt();
   assert.equal(couple, COUPLE_SWAP_PROMPT);
   assert.match(couple, /Image 1/);
   assert.match(couple, /Image 2/);
   assert.match(couple, /Image 3/);
-  assert.match(couple, /ONLY the faces/i);
+  assert.match(couple, /identity/i);
+  assert.match(couple, /head pose/i);
+  assert.match(couple, /Do NOT copy Image 2 head angle/i);
+  assert.match(couple, /Do NOT copy Image 3 head angle/i);
+  assert.match(couple, /neck/i);
   assert.match(brideSoloPrompt(), /ONLY the bride/i);
   assert.match(groomSoloPrompt(), /ONLY the groom/i);
   assert.match(BRIDE_SOLO_PROMPT, /bride/i);
