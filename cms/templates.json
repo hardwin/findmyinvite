@@ -286,5 +286,14 @@
     "badge": "New",
     "sort_order": 38,
     "published": true
+  },
+  {
+    "id": "royal-prestige-7",
+    "name": "Purple Haze",
+    "description": "Prestigious cinematic opening with refined elegance and grandeur",
+    "collection": "royal",
+    "badge": "New",
+    "sort_order": 39,
+    "published": true
   }
 ]
