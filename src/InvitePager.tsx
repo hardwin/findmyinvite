@@ -59,6 +59,17 @@ function wireNestedScroll(root: HTMLElement | null) {
     if (!el || el.scrollHeight <= el.clientHeight + 8) return;
     // Hero is always pager-owned — never nest-scroll it.
     if (el.querySelector('.invitation-hero')) return;
+    // Active scratch brush owns the gesture — revealed / idle hearts do not.
+    const scratch = (e.target as HTMLElement | null)?.closest?.('.scratch-heart') as HTMLElement | null;
+    if (scratch && !scratch.classList.contains('is-revealed')) {
+      // Only steal while foil canvas is being brushed (pointer capture path);
+      // otherwise let the leave-nudge / pager handle the swipe.
+      const foil = (e.target as HTMLElement | null)?.closest?.('.scratch-foil, .scratch-foil-layer');
+      if (foil) {
+        e.stopPropagation();
+        return;
+      }
+    }
     const y = e.touches[0]?.clientY ?? 0;
     const dy = y - startY;
     const atTop = startScroll <= 0;
@@ -97,6 +108,7 @@ export default function InvitePager({enabled, children}: Props) {
   const transitioning = useRef(false);
   const touching = useRef(false);
   const frozenHeight = useRef<number | null>(null);
+  const prevSlide = useRef(0);
   const [height, setHeight] = useState(() =>
     typeof window === 'undefined' ? 0 : readViewportHeight(),
   );
@@ -173,12 +185,18 @@ export default function InvitePager({enabled, children}: Props) {
     s.allowTouchMove = enabled;
     s.allowSlideNext = enabled;
     s.allowSlidePrev = enabled;
+    // Force-sync params — React props alone often stay stale after a locked mount.
+    if (s.params) {
+      s.params.touchRatio = enabled ? 1 : 0;
+      s.params.followFinger = enabled;
+      s.params.resistanceRatio = enabled ? 0.65 : 0;
+    }
     if (!enabled) {
       s.slideTo(0, 0, false);
       // Kill any in-flight free drag / momentum.
       s.setTranslate(0);
     } else {
-      // Re-arm swipe as soon as opening finishes (hero loop + couple copy).
+      // Re-arm swipe as soon as hero lands (skip or full opening).
       s.setTranslate(s.getTranslate());
     }
     s.update();
@@ -218,6 +236,8 @@ export default function InvitePager({enabled, children}: Props) {
         slidesPerGroup={1}
         freeMode={false}
         allowTouchMove={enabled}
+        noSwiping
+        noSwipingClass="invite-no-swipe"
         nested={false}
         cssMode={false}
         observer
@@ -241,6 +261,11 @@ export default function InvitePager({enabled, children}: Props) {
           s.allowTouchMove = enabled;
           s.allowSlideNext = enabled;
           s.allowSlidePrev = enabled;
+          if (s.params) {
+            s.params.touchRatio = enabled ? 1 : 0;
+            s.params.followFinger = enabled;
+            s.params.resistanceRatio = enabled ? 0.65 : 0;
+          }
           s.update();
         }}
         onTouchStart={() => {
@@ -262,8 +287,47 @@ export default function InvitePager({enabled, children}: Props) {
           if (diff < 0) s.slideNext(420);
           else s.slidePrev(420);
         }}
-        onSlideChangeTransitionStart={() => {
+        onSlideChangeTransitionStart={(s) => {
           transitioning.current = true;
+          const from = prevSlide.current;
+          const to = s.activeIndex;
+
+          // Incomplete scratch: first leave attempt → bounce back + pulse; second → allow.
+          if (to !== from) {
+            const fromEl = s.slides[from] as HTMLElement | undefined;
+            const heart = fromEl?.querySelector?.('.scratch-heart') as HTMLElement | null;
+            if (
+              heart &&
+              !heart.classList.contains('is-revealed') &&
+              !heart.classList.contains('is-bypass')
+            ) {
+              if (!heart.classList.contains('is-nudged')) {
+                heart.classList.add('is-nudged');
+                heart.classList.remove('is-attention');
+                // Retrigger CSS pulse.
+                void heart.offsetWidth;
+                heart.classList.add('is-attention');
+                window.setTimeout(() => heart.classList.remove('is-attention'), 1200);
+                s.slideTo(from, 320);
+                prevSlide.current = from;
+                return;
+              }
+              heart.classList.add('is-bypass');
+            }
+          }
+
+          // Motif parallax: surge along swipe, then settle into L→R wind.
+          const raw = s.touches?.diff;
+          const dy =
+            typeof raw === 'number' && Math.abs(raw) > 1
+              ? raw * 2.2
+              : from < to
+                ? -420
+                : 420;
+          prevSlide.current = to;
+          rootRef.current?.dispatchEvent(
+            new CustomEvent('invite-swipe', {bubbles: true, detail: {dy, dx: 0}}),
+          );
         }}
         onSlideChangeTransitionEnd={() => {
           transitioning.current = false;

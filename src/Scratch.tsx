@@ -1,88 +1,205 @@
-import {lazy, Suspense, useEffect, useRef, useState} from 'react';
-import type {PointerEvent} from 'react';
+import {lazy, Suspense, useCallback, useEffect, useRef, useState} from 'react';
+import type {PointerEvent as ReactPointerEvent, TouchEvent as ReactTouchEvent} from 'react';
 import confetti from 'canvas-confetti';
+import {motion, AnimatePresence} from 'motion/react';
 
 const HyperText = lazy(() =>
   import('@/akay/ui/hyper-text').then((m) => ({default: m.HyperText})),
 );
 
-const STAR_COLORS = ['#FFE400', '#FFBD00', '#E89400', '#FFCA6C', '#FDFFB8'];
+const W = 260;
+const H = 240;
+const REVEAL_RATIO = 0.45;
+const STAR_COLORS = ['#FFE400', '#FFBD00', '#E89400', '#FFCA6C', '#FDFFB8', '#FFF8E0'];
 const DATE_CHARS = Object.freeze(
   'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789,'.split(''),
 ) as readonly string[];
 
-function themeCannonColors(root: HTMLElement | null): string[] {
+type Glitter = {
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  life: number;
+  size: number;
+  color: string;
+};
+
+type SwiperHost = HTMLElement & {
+  swiper?: {allowTouchMove: boolean};
+};
+
+/** Remember allowTouchMove so unlock restores the pager’s real state. */
+let swiperTouchBeforeLock: boolean | null = null;
+
+function themeColors(root: HTMLElement | null): string[] {
   const page = root?.closest('.invitation-page') as HTMLElement | null;
   const accent =
     (page && getComputedStyle(page).getPropertyValue('--invite-color').trim()) ||
     '#c9a24a';
-  return [accent, '#ffffff', '#fff6d8', accent];
+  return [accent, '#ffffff', '#fff6d8', '#ffe4a0', accent];
 }
 
-/** Side cannons (theme colors) + star/circle bursts on reveal. */
+function lockSwiper(lock: boolean) {
+  const host = document.querySelector('.invite-swiper') as SwiperHost | null;
+  const s = host?.swiper;
+  if (!s) return;
+  if (lock) {
+    if (swiperTouchBeforeLock == null) swiperTouchBeforeLock = s.allowTouchMove;
+    s.allowTouchMove = false;
+    return;
+  }
+  const pager = host?.closest('.invite-pager-live');
+  const inviteOpen = pager?.classList.contains('is-enabled');
+  const restore =
+    swiperTouchBeforeLock != null ? swiperTouchBeforeLock : Boolean(inviteOpen);
+  swiperTouchBeforeLock = null;
+  s.allowTouchMove = restore;
+}
+
 function celebrateReveal(root: HTMLElement | null) {
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  const colors = themeCannonColors(root);
-  const end = Date.now() + 3_000;
+  const colors = themeColors(root);
+  const rect = root?.getBoundingClientRect();
+  const origin = rect
+    ? {
+        x: (rect.left + rect.width / 2) / window.innerWidth,
+        y: (rect.top + rect.height * 0.42) / window.innerHeight,
+      }
+    : {x: 0.5, y: 0.45};
 
-  (function frame() {
+  const burst = (scalar: number, count: number, shapes: ('star' | 'circle')[]) => {
     confetti({
-      particleCount: 2,
-      angle: 60,
-      spread: 55,
-      origin: {x: 0},
-      colors,
+      particleCount: count,
+      spread: 70,
+      startVelocity: 28,
+      decay: 0.92,
+      scalar,
+      origin,
+      colors: [...STAR_COLORS, ...colors],
+      shapes,
       zIndex: 80,
     });
+  };
+  burst(1.35, 55, ['star']);
+  burst(0.85, 28, ['circle']);
+  setTimeout(() => burst(1.1, 36, ['star']), 120);
+  setTimeout(() => burst(0.7, 18, ['circle']), 220);
+
+  const end = Date.now() + 1_600;
+  (function frame() {
     confetti({
-      particleCount: 2,
-      angle: 120,
-      spread: 55,
-      origin: {x: 1},
+      particleCount: 3,
+      angle: 60,
+      spread: 48,
+      origin: {x: 0.08, y: origin.y},
       colors,
       zIndex: 80,
+      scalar: 0.9,
+    });
+    confetti({
+      particleCount: 3,
+      angle: 120,
+      spread: 48,
+      origin: {x: 0.92, y: origin.y},
+      colors,
+      zIndex: 80,
+      scalar: 0.9,
     });
     if (Date.now() < end) requestAnimationFrame(frame);
   })();
 
-  const defaults = {
-    spread: 360,
-    ticks: 50,
-    gravity: 0,
-    decay: 0.94,
-    startVelocity: 30,
-    colors: STAR_COLORS,
-    zIndex: 80,
-  };
+  try {
+    navigator.vibrate?.(18);
+  } catch {
+    /* ignore */
+  }
+}
 
-  const shoot = () => {
-    confetti({
-      ...defaults,
-      particleCount: 40,
-      scalar: 1.2,
-      shapes: ['star'],
-    });
-    confetti({
-      ...defaults,
-      particleCount: 10,
-      scalar: 0.75,
-      shapes: ['circle'],
-    });
-  };
+function paintFoil(ctx: CanvasRenderingContext2D) {
+  const g = ctx.createLinearGradient(0, 0, W, H);
+  g.addColorStop(0, '#8a6420');
+  g.addColorStop(0.22, '#c9a24a');
+  g.addColorStop(0.48, '#f0d78a');
+  g.addColorStop(0.72, '#d4b05c');
+  g.addColorStop(1, '#7a5818');
+  ctx.globalCompositeOperation = 'source-over';
+  ctx.fillStyle = g;
+  ctx.fillRect(0, 0, W, H);
 
-  setTimeout(shoot, 0);
-  setTimeout(shoot, 100);
-  setTimeout(shoot, 200);
+  // Fine foil grain (Nicolas-style metal texture).
+  const grain = ctx.getImageData(0, 0, W, H);
+  const d = grain.data;
+  for (let i = 0; i < d.length; i += 16) {
+    const n = (Math.random() - 0.5) * 28;
+    d[i] = Math.max(0, Math.min(255, d[i] + n));
+    d[i + 1] = Math.max(0, Math.min(255, d[i + 1] + n * 0.92));
+    d[i + 2] = Math.max(0, Math.min(255, d[i + 2] + n * 0.7));
+  }
+  ctx.putImageData(grain, 0, 0);
+
+  // Soft baked highlight band (live sweep is CSS).
+  const shine = ctx.createLinearGradient(W * 0.15, 0, W * 0.7, H);
+  shine.addColorStop(0, 'rgba(255,255,255,0)');
+  shine.addColorStop(0.48, 'rgba(255,248,220,0.28)');
+  shine.addColorStop(0.52, 'rgba(255,255,255,0.42)');
+  shine.addColorStop(0.56, 'rgba(255,248,220,0.22)');
+  shine.addColorStop(1, 'rgba(255,255,255,0)');
+  ctx.fillStyle = shine;
+  ctx.fillRect(0, 0, W, H);
+
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillStyle = 'rgba(70,42,12,0.82)';
+  ctx.font = '600 17px Georgia, serif';
+  ctx.fillText('Scratch our forever', W / 2, H / 2 - 10);
+  ctx.font = '12px Georgia, serif';
+  ctx.fillStyle = 'rgba(90,55,18,0.72)';
+  ctx.fillText('peel the foil · reveal the day', W / 2, H / 2 + 16);
+}
+
+function sprayErase(ctx: CanvasRenderingContext2D, x: number, y: number) {
+  ctx.globalCompositeOperation = 'destination-out';
+  ctx.beginPath();
+  ctx.arc(x, y, 16, 0, Math.PI * 2);
+  ctx.fill();
+  const n = 18 + Math.floor(Math.random() * 10);
+  for (let i = 0; i < n; i++) {
+    const a = Math.random() * Math.PI * 2;
+    const r = 8 + Math.random() * 22;
+    const px = x + Math.cos(a) * r;
+    const py = y + Math.sin(a) * r;
+    const s = 1.2 + Math.random() * 3.2;
+    ctx.beginPath();
+    ctx.arc(px, py, s, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
+function clearedRatio(ctx: CanvasRenderingContext2D): number {
+  const data = ctx.getImageData(0, 0, W, H).data;
+  let clear = 0;
+  let total = 0;
+  const step = 4 * 6;
+  for (let i = 3; i < data.length; i += step) {
+    total++;
+    if (data[i] < 24) clear++;
+  }
+  return total ? clear / total : 0;
 }
 
 export function Scratch({date, time}: {date: string; time: string}) {
-  const canvas = useRef<HTMLCanvasElement>(null);
-  const wrap = useRef<HTMLDivElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const glitterRef = useRef<HTMLCanvasElement>(null);
+  const wrapRef = useRef<HTMLDivElement>(null);
   const dragging = useRef(false);
-  const cells = useRef(new Set<string>());
   const celebrated = useRef(false);
+  const glitter = useRef<Glitter[]>([]);
+  const raf = useRef(0);
+  const idleDust = useRef(0);
   const [revealed, setRevealed] = useState(false);
+
   const dateLabel = new Date(date + 'T12:00').toLocaleDateString('en-US', {
     month: 'long',
     day: 'numeric',
@@ -95,50 +212,153 @@ export function Scratch({date, time}: {date: string; time: string}) {
     typeof matchMedia === 'function' &&
     matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  useEffect(() => {
-    const context = canvas.current?.getContext('2d');
-    if (!context) return;
-    const gradient = context.createLinearGradient(0, 0, 260, 240);
-    gradient.addColorStop(0, '#c69b57');
-    gradient.addColorStop(0.45, '#efd493');
-    gradient.addColorStop(1, '#ac7d3c');
-    context.fillStyle = gradient;
-    context.fillRect(0, 0, 260, 240);
-    context.textAlign = 'center';
-    context.fillStyle = '#75562d';
-    context.font = '18px Georgia';
-    context.fillText('Scratch to reveal', 130, 116);
-    context.font = '13px Georgia';
-    context.fillText('our special day', 130, 139);
+  const rebuildFoil = useCallback(() => {
+    const canvas = canvasRef.current;
+    const ctx = canvas?.getContext('2d', {willReadFrequently: true});
+    if (!canvas || !ctx) return;
+    paintFoil(ctx);
   }, []);
+
+  const spawnGlitter = (x: number, y: number, count = 5) => {
+    if (reduceMotion) return;
+    const colors = ['#fff6d8', '#ffd76a', '#c9a24a', '#ffe9a8', '#ffffff'];
+    for (let i = 0; i < count; i++) {
+      glitter.current.push({
+        x: x + (Math.random() - 0.5) * 10,
+        y: y + (Math.random() - 0.5) * 10,
+        vx: (Math.random() - 0.5) * 2.4,
+        vy: -0.6 - Math.random() * 2.2,
+        life: 1,
+        size: 1.2 + Math.random() * 2.4,
+        color: colors[Math.floor(Math.random() * colors.length)],
+      });
+    }
+    if (glitter.current.length > 80) {
+      glitter.current.splice(0, glitter.current.length - 80);
+    }
+  };
+
+  const triggerReveal = useCallback(() => {
+    if (revealed) return;
+    lockSwiper(false);
+    setRevealed(true);
+  }, [revealed]);
+
+  useEffect(() => {
+    if (revealed) return;
+    rebuildFoil();
+
+    const tick = () => {
+      idleDust.current += 1;
+      if (!dragging.current && idleDust.current % 18 === 0 && !reduceMotion) {
+        spawnGlitter(
+          W * (0.28 + Math.random() * 0.44),
+          H * (0.28 + Math.random() * 0.4),
+          1,
+        );
+      }
+
+      const gCanvas = glitterRef.current;
+      const gctx = gCanvas?.getContext('2d');
+      if (gctx && gCanvas) {
+        gctx.clearRect(0, 0, W, H);
+        const next: Glitter[] = [];
+        for (const p of glitter.current) {
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += 0.06;
+          p.life -= 0.028;
+          if (p.life <= 0) continue;
+          gctx.globalAlpha = Math.max(0, p.life);
+          gctx.fillStyle = p.color;
+          gctx.beginPath();
+          gctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          gctx.fill();
+          gctx.strokeStyle = p.color;
+          gctx.lineWidth = 0.8;
+          gctx.beginPath();
+          gctx.moveTo(p.x - p.size * 1.6, p.y);
+          gctx.lineTo(p.x + p.size * 1.6, p.y);
+          gctx.moveTo(p.x, p.y - p.size * 1.6);
+          gctx.lineTo(p.x, p.y + p.size * 1.6);
+          gctx.stroke();
+          next.push(p);
+        }
+        glitter.current = next;
+      }
+      raf.current = requestAnimationFrame(tick);
+    };
+    raf.current = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf.current);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- idle trail only while foil lives
+  }, [revealed, rebuildFoil, reduceMotion]);
 
   useEffect(() => {
     if (!revealed || celebrated.current) return;
     celebrated.current = true;
-    celebrateReveal(wrap.current);
+    celebrateReveal(wrapRef.current);
   }, [revealed]);
 
-  const scratch = (event: PointerEvent<HTMLCanvasElement>) => {
-    const c = event.currentTarget;
-    const context = c.getContext('2d');
-    if (!context) return;
-    const rect = c.getBoundingClientRect();
-    const x = ((event.clientX - rect.left) * 260) / rect.width;
-    const y = ((event.clientY - rect.top) * 240) / rect.height;
-    context.globalCompositeOperation = 'destination-out';
-    context.beginPath();
-    context.arc(x, y, 24, 0, Math.PI * 2);
-    context.fill();
-    for (let dx = -1; dx <= 1; dx++)
-      for (let dy = -1; dy <= 1; dy++)
-        cells.current.add(`${Math.floor(x / 20) + dx},${Math.floor(y / 20) + dy}`);
-    if (cells.current.size > 65) setRevealed(true);
+  const scratchAt = (clientX: number, clientY: number, target: HTMLCanvasElement) => {
+    const ctx = target.getContext('2d', {willReadFrequently: true});
+    if (!ctx) return;
+    const rect = target.getBoundingClientRect();
+    const x = ((clientX - rect.left) * W) / rect.width;
+    const y = ((clientY - rect.top) * H) / rect.height;
+    sprayErase(ctx, x, y);
+    spawnGlitter(x, y);
+    if (clearedRatio(ctx) >= REVEAL_RATIO) triggerReveal();
+  };
+
+  const endScratch = (e?: ReactPointerEvent<HTMLCanvasElement>) => {
+    if (!dragging.current) {
+      lockSwiper(false);
+      return;
+    }
+    dragging.current = false;
+    lockSwiper(false);
+    e?.stopPropagation();
+  };
+
+  const onPointerDown = (e: ReactPointerEvent<HTMLCanvasElement>) => {
+    dragging.current = true;
+    lockSwiper(true);
+    e.currentTarget.setPointerCapture(e.pointerId);
+    e.stopPropagation();
+    scratchAt(e.clientX, e.clientY, e.currentTarget);
+  };
+
+  const onPointerMove = (e: ReactPointerEvent<HTMLCanvasElement>) => {
+    if (!dragging.current) return;
+    e.stopPropagation();
+    scratchAt(e.clientX, e.clientY, e.currentTarget);
+  };
+
+  // Trap touch only while the finger is scratching — idle pending hearts
+  // must let the pager see the swipe so the leave-nudge gate can run.
+  const blockTouch = (e: ReactTouchEvent) => {
+    if (revealed || !dragging.current) return;
+    e.stopPropagation();
   };
 
   return (
-    <div className="scratch-heart" ref={wrap}>
+    <div
+      className={'scratch-heart' + (revealed ? ' is-revealed' : '')}
+      ref={wrapRef}
+      data-scratch={revealed ? 'done' : 'pending'}
+      onTouchStart={blockTouch}
+      onTouchMove={blockTouch}
+      onTouchEnd={blockTouch}
+    >
+      <div className="scratch-glow" aria-hidden="true" />
       <div className="scratch-date" aria-live="polite" aria-hidden={!revealed}>
-        <em>You’re Invited!</em>
+        <motion.em
+          initial={reduceMotion ? false : {opacity: 0, y: 8}}
+          animate={revealed ? {opacity: 1, y: 0} : {opacity: 0.35, y: 0}}
+          transition={{type: 'spring', stiffness: 260, damping: 22, delay: 0.05}}
+        >
+          You’re Invited!
+        </motion.em>
         {revealed && !reduceMotion ? (
           <Suspense fallback={<strong>{dateLabel}</strong>}>
             <HyperText
@@ -153,41 +373,72 @@ export function Scratch({date, time}: {date: string; time: string}) {
             </HyperText>
           </Suspense>
         ) : (
-          <strong>{dateLabel}</strong>
+          <strong className="scratch-hyper-date">{dateLabel}</strong>
         )}
-        <span>{weekday}</span>
-        <small>{time}</small>
+        <motion.span
+          initial={false}
+          animate={revealed ? {opacity: 1} : {opacity: 0.4}}
+          transition={{delay: 0.35}}
+        >
+          {weekday}
+        </motion.span>
+        <motion.small
+          initial={false}
+          animate={revealed ? {opacity: 1} : {opacity: 0.4}}
+          transition={{delay: 0.45}}
+        >
+          {time}
+        </motion.small>
       </div>
-      {!revealed && (
-        <canvas
-          ref={canvas}
-          width={260}
-          height={240}
-          role="button"
-          tabIndex={0}
-          aria-label="Scratch to reveal the event date"
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              e.preventDefault();
-              setRevealed(true);
+
+      <AnimatePresence>
+        {!revealed && (
+          <motion.div
+            className="scratch-foil-layer"
+            key="foil"
+            initial={{opacity: 1, scale: 1, filter: 'blur(0px)'}}
+            exit={
+              reduceMotion
+                ? {opacity: 0, transition: {duration: 0.01}}
+                : {
+                    opacity: 0,
+                    scale: 1.08,
+                    filter: 'blur(6px)',
+                    transition: {type: 'spring', stiffness: 220, damping: 20},
+                  }
             }
-          }}
-          onPointerDown={(e) => {
-            dragging.current = true;
-            e.currentTarget.setPointerCapture(e.pointerId);
-            scratch(e);
-          }}
-          onPointerMove={(e) => {
-            if (dragging.current) scratch(e);
-          }}
-          onPointerUp={() => {
-            dragging.current = false;
-          }}
-          onPointerCancel={() => {
-            dragging.current = false;
-          }}
-        />
-      )}
+          >
+            <div className="scratch-foil-shine" aria-hidden="true" />
+            <canvas
+              ref={canvasRef}
+              className="scratch-foil"
+              width={W}
+              height={H}
+              role="button"
+              tabIndex={0}
+              aria-label="Scratch to reveal the event date"
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  triggerReveal();
+                }
+              }}
+              onPointerDown={onPointerDown}
+              onPointerMove={onPointerMove}
+              onPointerUp={endScratch}
+              onPointerCancel={endScratch}
+              onLostPointerCapture={() => endScratch()}
+            />
+            <canvas
+              ref={glitterRef}
+              className="scratch-glitter"
+              width={W}
+              height={H}
+              aria-hidden="true"
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

@@ -14,11 +14,11 @@ export function videoTransitionFor(templateId: string, hasHeroLoop: boolean): Vi
 }
 
 /**
- * Opening masters hold a long static tail. Start handoff at -4s and run a
- * 2s CSS transition over that hold, then reveal couple copy on the hero.
+ * Opening masters hold a static tail. Start handoff early (~3.5s before end)
+ * so the still frames are covered, with a very snappy 0.25s CSS cut into hero.
  */
-export const HANDOFF_LEAD_S = 4;
-export const VIDEO_TRANSITION_MS = 2000;
+export const HANDOFF_LEAD_S = 3.5;
+export const VIDEO_TRANSITION_MS = 250;
 
-/** Prime hero under the opening before handoff begins. */
-export const HERO_PRIME_S = 5.5;
+/** Prime hero under the opening shortly before handoff begins. */
+export const HERO_PRIME_S = 4.2;
