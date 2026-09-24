@@ -616,10 +616,15 @@ function FaceSwapBeforeLock({
    if(!job)throw new Error('Face Swap returned an empty response.');
    if(job.status!=='done')throw new Error(job.error||'Face Swap failed.');
    const couple=job.result?.coupleUrl||'';
+   const brideOut=job.result?.brideUrl||'';
+   const groomOut=job.result?.groomUrl||'';
    if(!couple)throw new Error('Face Swap returned no couple still.');
+   if(!brideOut||!groomOut){
+    throw new Error('Face Swap returned the couple still but missed bride/groom solos. Retry Face Swap.');
+   }
    setSwappedUrl(couple);
-   setBrideSolo(job.result?.brideUrl||'');
-   setGroomSolo(job.result?.groomUrl||'');
+   setBrideSolo(brideOut);
+   setGroomSolo(groomOut);
    setProgress('Face Swap ready — lock this still to start the video.');
    setStep('ready');
   }catch(e){
@@ -702,17 +707,31 @@ function FaceSwapBeforeLock({
  }
 
  // ready
+ const lockSwapped=brideSolo&&groomSolo
+  ?(
+    'Lock this final image: '+swappedUrl+'\n'+
+    'brideImageUrl: '+brideSolo+'\n'+
+    'groomImageUrl: '+groomSolo+'\n'+
+    'Bride solo: '+brideSolo+'\n'+
+    'Groom solo: '+groomSolo
+   )
+  :('Lock this final image: '+swappedUrl);
  return (
   <div className="asm-gpt-face-swap is-ready" role="group" aria-label="Face Swap result">
    <p className="asm-gpt-choice-title">Face Swap ready</p>
-   <p className="asm-gpt-face-swap-copy">Lock the swapped still to start the opening video. Bride / Groom solos are saved for chapters.</p>
+   <p className="asm-gpt-face-swap-copy">
+    {brideSolo&&groomSolo
+     ?'Lock the swapped still to start the opening video. Bride / Groom solos will update the invitation chapters.'
+     :'Lock the swapped still to start the opening video. Bride / Groom solos were missing — re-run Face Swap if chapters should show your faces.'}
+   </p>
    <Stills urls={[swappedUrl,brideSolo,groomSolo].filter(Boolean)} label="Face Swap"/>
    {progress&&<p role="status">{progress}</p>}
+   {!brideSolo||!groomSolo?(<p className="asm-gpt-alert" role="alert">Bride/Groom solo portraits did not return. Retry Face Swap before locking if you need chapter photos.</p>):null}
    <ChoicePrompt
     title="Lock Face-Swapped hero?"
     disabled={busy}
     options={[
-     {id:'lock-swapped',label:'Lock Face-Swapped still — start video',submit:'Lock this final image: '+swappedUrl},
+     {id:'lock-swapped',label:'Lock Face-Swapped still — start video',submit:lockSwapped},
      {id:'lock-original',label:'Lock original still instead',submit:'Lock this final image: '+heroUrl},
      {id:'retry-swap',label:'Retry Face Swap with different faces',submit:'__retry_face_swap__'}
     ]}

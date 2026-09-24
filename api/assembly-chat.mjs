@@ -14,6 +14,41 @@ import {
 import {uploadAssemblyChatImage} from '../server/assembly-image-mix.mjs';
 import {loadPremiumParents} from '../server/assembly.mjs';
 
+/** Pull Face Swap solo URLs from the host lock chip so the agent cannot drop them. */
+export function faceSwapLockHint(messages=[]){
+ const last=[...messages].reverse().find(m=>{
+  const role=m?.role||m?.from;
+  if(role!=='user')return false;
+  const text=typeof m.content==='string'?m.content
+   :(Array.isArray(m.parts)?m.parts.map(p=>p?.text||'').join('\n')
+    :Array.isArray(m.content)?m.content.map(p=>typeof p==='string'?p:(p?.text||'')).join('\n')
+    :String(m.text||m.message||''));
+  return /Lock this final image:/i.test(text)||/heroImageUrl:/i.test(text);
+ });
+ if(!last)return '';
+ const text=typeof last.content==='string'?last.content
+  :(Array.isArray(last.parts)?last.parts.map(p=>p?.text||'').join('\n')
+   :Array.isArray(last.content)?last.content.map(p=>typeof p==='string'?p:(p?.text||'')).join('\n')
+   :String(last.text||last.message||''));
+ const hero=(text.match(/(?:Lock this final image:|heroImageUrl:)\s*(\S+)/i)||[])[1]||'';
+ const bride=(text.match(/(?:Bride solo:|brideImageUrl:)\s*(\S+)/i)||[])[1]||'';
+ const groom=(text.match(/(?:Groom solo:|groomImageUrl:)\s*(\S+)/i)||[])[1]||'';
+ if(!hero||!/^https?:\/\//i.test(hero))return '';
+ if(bride&&groom&&/^https?:\/\//i.test(bride)&&/^https?:\/\//i.test(groom)){
+  return [
+   '',
+   'FACE SWAP LOCK (required tool args — do not drop solos):',
+   'Call lock_final_image with imageUrl="'+hero+'", brideImageUrl="'+bride+'", groomImageUrl="'+groom+'".',
+   'Later start_template1 MUST also pass brideImageUrl="'+bride+'" and groomImageUrl="'+groom+'" (and coupleImageUrl="'+hero+'") so Bride/Groom chapters update.'
+  ].join('\n');
+ }
+ return [
+  '',
+  'FACE SWAP LOCK:',
+  'Call lock_final_image with imageUrl="'+hero+'". Bride/groom solos were not in the host message.'
+ ].join('\n');
+}
+
 export default async function handler(req,res){
  try{
   if(!sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
@@ -76,9 +111,11 @@ export default async function handler(req,res){
   const modelId=process.env.ASSEMBLY_CHAT_MODEL||ASSEMBLY_CHAT_MODEL;
   console.info('assembly-chat provider',provider,modelId);
 
+  const system=ASSEMBLY_CHAT_SYSTEM+faceSwapLockHint(messages);
+
   const result=streamText({
    model:assemblyChatModel(process.env,provider),
-   system:ASSEMBLY_CHAT_SYSTEM,
+   system,
    messages:modelMessages,
    tools,
    stopWhen:stepCountIs(8),

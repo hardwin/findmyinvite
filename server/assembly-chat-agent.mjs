@@ -47,8 +47,8 @@ CONVERSATION ARC
 4) Optional Style Twist + extra refs (always offer Skip).
 5) VIBE name = invite display name (required before website).
 6) Music from library (optional — default first track — offer Skip).
-7) mix_image until ONE hero feels right → optional Face Swap add-on (bride+groom faces on that still; host confirms) → lock_final_image on the final (swapped or as-is) hero.
-8) start_template1 → that locked image becomes the invite website (preview + GitHub branch).
+7) mix_image until ONE hero feels right → optional Face Swap add-on (bride+groom faces on that still; host confirms) → lock_final_image on the final (swapped or as-is) hero. After Face Swap, ALWAYS pass brideImageUrl + groomImageUrl into lock_final_image and start_template1 (Bride/Groom chapter portraits).
+8) start_template1 → that locked image becomes the invite website (preview + GitHub branch). Include brideImageUrl + groomImageUrl whenever Face Swap produced them.
 9) When status is review: Door-First + last stills appear on the job card. Offer iterate (regen_opening_still) until they love both, then approve_stills (or they tap Approve). Do not skip straight to Approve if they dislike a still.
 
 FIRST MESSAGE / HELLOS
@@ -63,8 +63,8 @@ TOOL POLICY (agentic — you MUST use tools for real work; never pretend)
 - list_music — songs / library — call immediately when they want music
 - list_parents — Premium parent clones — call immediately when needed
 - mix_image — after a base image (+ optional refs/twist); lean **anime / cinematic wedding** unless they ask otherwise; then Lock / Remix / Retry. Default provider is Replicate. If it times out, WAIT for the host radio choice before calling mix_image again with provider "xai" (or retry Replicate). Never silently switch providers.
-- lock_final_image — when they confirm the ONE hero (after optional Face Swap on that still)
-- start_template1 — only after lock + VIBE (music optional)
+- lock_final_image — when they confirm the ONE hero (after optional Face Swap on that still). After Face Swap, pass brideImageUrl + groomImageUrl from the Face Swap result.
+- start_template1 — only after lock + VIBE (music optional). Pass brideImageUrl + groomImageUrl when Face Swap ran so Bride/Groom chapters update.
 - regen_opening_still — while reviewing: iterate Door-First (first) or last still; pass a short note when they say what to change
 - approve_stills — after they like both stills (or say Approve / proceed)
 - get_job_status / cancel_job / retry_phase — Template 1 ops
@@ -219,29 +219,47 @@ export function buildAssemblyChatTools({env=process.env,fetchImpl=fetch,parentId
   }),
 
   lock_final_image:tool({
-   description:'Lock the chosen hero image URL for Template 1. Call before start_template1.',
+   description:'Lock the chosen hero image URL for Template 1. After Face Swap, also pass brideImageUrl + groomImageUrl solos for Bride/Groom chapters.',
    inputSchema:z.object({
     imageUrl:z.string().url(),
+    brideImageUrl:z.string().url().optional().describe('Face Swap bride solo portrait URL (photos[0])'),
+    groomImageUrl:z.string().url().optional().describe('Face Swap groom solo portrait URL (photos[1])'),
     note:z.string().optional()
    }),
-   execute:async({imageUrl,note})=>{
+   execute:async({imageUrl,brideImageUrl,groomImageUrl,note})=>{
     assertHttpUrl(imageUrl);
+    // Host chip may put solos in the note: "Bride solo: https://…\nGroom solo: https://…"
+    const noteText=String(note||'');
+    const brideFromNote=(noteText.match(/(?:Bride solo:|brideImageUrl:)\s*(\S+)/i)||[])[1]||'';
+    const groomFromNote=(noteText.match(/(?:Groom solo:|groomImageUrl:)\s*(\S+)/i)||[])[1]||'';
+    const bride=brideImageUrl||brideFromNote||'';
+    const groom=groomImageUrl||groomFromNote||'';
+    if(bride)assertHttpUrl(bride);
+    if(groom)assertHttpUrl(groom);
     return {
      ok:true,
      locked:true,
      heroImageUrl:imageUrl,
+     brideImageUrl:bride,
+     groomImageUrl:groom,
+     coupleImageUrl:imageUrl,
      note:note||'',
-     message:'Final hero locked. Ask for VIBE name + music (or skip music), then start_template1.'
+     message:bride&&groom
+      ?'Final hero + Face Swap solos locked. Ask for VIBE name + music (or skip music), then start_template1 with heroImageUrl + brideImageUrl + groomImageUrl.'
+      :'Final hero locked. Ask for VIBE name + music (or skip music), then start_template1.'
     };
    }
   }),
 
   start_template1:tool({
-   description:'Start Template 1 after lock_final_image + VIBE name.',
+   description:'Start Template 1 after lock_final_image + VIBE name. Pass Face Swap brideImageUrl + groomImageUrl when available so Bride/Groom chapters get the solos.',
    inputSchema:z.object({
     displayName:z.string().min(2).max(80),
     heroImageUrl:z.string().url(),
     pinUrl:z.string().url().optional(),
+    brideImageUrl:z.string().url().optional().describe('Face Swap bride solo — becomes photos[0] / Bride chapter'),
+    groomImageUrl:z.string().url().optional().describe('Face Swap groom solo — becomes photos[1] / Groom chapter'),
+    coupleImageUrl:z.string().url().optional().describe('Face Swap couple still for hero poster (defaults to heroImageUrl)'),
     musicId:z.string().optional(),
     parentId:z.string().optional(),
     budgetUsd:z.number().min(0.01).max(50).optional(),
@@ -260,7 +278,10 @@ export function buildAssemblyChatTools({env=process.env,fetchImpl=fetch,parentId
      parentId:chosenParent,
      musicId,
      budgetUsd:input.budgetUsd??4,
-     promptParams:input.styleTwist?{styleTwist:String(input.styleTwist).slice(0,300)}:undefined
+     promptParams:input.styleTwist?{styleTwist:String(input.styleTwist).slice(0,300)}:undefined,
+     brideImageUrl:input.brideImageUrl||undefined,
+     groomImageUrl:input.groomImageUrl||undefined,
+     coupleImageUrl:input.coupleImageUrl||input.heroImageUrl||undefined
     };
     if(cloudAssemblyEnabled()){
      const started=await startCloudTemplate1Job(payload,{env,fetchImpl});

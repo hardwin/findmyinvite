@@ -134,7 +134,7 @@ export function patchThemeCss(source,id,palette,opts={}){
  return source.replace(/\s*$/,'\n')+themeCss(id,palette,opts);
 }
 
-export function patchPreviewDefaults(source,id,{groom,bride,groomDetails,brideDetails}){
+export function patchPreviewDefaults(source,id,{groom,bride,groomDetails,brideDetails,photos,faceSwap}={}){
  if(new RegExp("'"+id+"':\\{groom:").test(source))return source;
  const marker='const previewDefaults:Record<string,Partial<InviteData>>={';
  const start=source.indexOf(marker);
@@ -142,7 +142,19 @@ export function patchPreviewDefaults(source,id,{groom,bride,groomDetails,brideDe
  const end=source.indexOf('\n};',start);
  if(end<0)throw new Error('Could not find previewDefaults end');
  const esc=v=>String(v||'').replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/\n/g,'\\n');
- const line=",\n '"+id+"':{groom:'"+esc(groom)+"',bride:'"+esc(bride)+"',groomDetails:'"+esc(groomDetails)+"',brideDetails:'"+esc(brideDetails)+"'}";
+ let fields="groom:'"+esc(groom)+"',bride:'"+esc(bride)+"',groomDetails:'"+esc(groomDetails)+"',brideDetails:'"+esc(brideDetails)+"'";
+ if(Array.isArray(photos)&&photos.length>=2){
+  fields+=",photos:['"+esc(photos[0])+"','"+esc(photos[1])+"']";
+ }
+ if(faceSwap&&typeof faceSwap==='object'){
+  const couple=esc(faceSwap.coupleUrl||'');
+  const brideU=esc(faceSwap.brideUrl||photos?.[0]||'');
+  const groomU=esc(faceSwap.groomUrl||photos?.[1]||'');
+  if(couple||brideU||groomU){
+   fields+=",faceSwap:{status:'ready',coupleUrl:'"+couple+"',brideUrl:'"+brideU+"',groomUrl:'"+groomU+"'}";
+  }
+ }
+ const line=",\n '"+id+"':{"+fields+"}";
  return source.slice(0,end)+line+source.slice(end);
 }
 

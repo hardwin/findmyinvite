@@ -10,6 +10,7 @@ import {createLedger,estimateCost,runReplicateImage,runHeroVideo,runOpeningVideo
 import {toStill720,craftOpening,craftHero,stagePlates,copyInto,extractPalette,assertMuted} from './assembly-template1-craft.mjs';
 import {themeCss,patchThemeCss,patchPreviewDefaults,patchMusicTracks,patchDataRow,patchAppMusicOption} from './assembly-template1-theme.mjs';
 import {getMusicTrack} from './music-library.mjs';
+import {lookupFaceSwapSolos} from './face-swap.mjs';
 
 export function jobsDir(root=ROOT){return join(root,'work','assembly-jobs');}
 export const JOBS_DIR=jobsDir();
@@ -102,7 +103,40 @@ export function validateTemplate1Input(body={}){
  if(body.promptParams&&typeof body.promptParams==='object'){
   for(const [k,v] of Object.entries(body.promptParams))if(typeof v==='string' )promptParams[k]=v.slice(0,300);
  }
- return {pinUrl,heroImageUrl:heroUrl,displayName,parentId,musicId,budgetUsd,couple,promptParams};
+ // Optional Face Swap solos → Bride/Groom chapters (photos[0]/[1]).
+ let brideImageUrl=optionalHttpsUrl(body.brideImageUrl||body.bride_image_url||body.brideUrl,'Bride portrait');
+ let groomImageUrl=optionalHttpsUrl(body.groomImageUrl||body.groom_image_url||body.groomUrl,'Groom portrait');
+ let coupleImageUrl=optionalHttpsUrl(body.coupleImageUrl||body.couple_image_url||body.coupleUrl,'Couple still')||heroUrl||pinUrl;
+ // If the agent only locked the couple still, recover solos from the Face Swap cache.
+ if((!brideImageUrl||!groomImageUrl)&&coupleImageUrl){
+  const cached=lookupFaceSwapSolos(coupleImageUrl)||lookupFaceSwapSolos(heroUrl)||lookupFaceSwapSolos(pinUrl);
+  if(cached){
+   if(!brideImageUrl)brideImageUrl=cached.brideUrl||'';
+   if(!groomImageUrl)groomImageUrl=cached.groomUrl||'';
+   if(!coupleImageUrl)coupleImageUrl=cached.coupleUrl||coupleImageUrl;
+  }
+ }
+ return {pinUrl,heroImageUrl:heroUrl,displayName,parentId,musicId,budgetUsd,couple,promptParams,brideImageUrl,groomImageUrl,coupleImageUrl};
+}
+
+function optionalHttpsUrl(value,label){
+ const raw=String(value||'').trim();
+ if(!raw)return '';
+ let parsed;
+ try{parsed=new URL(raw);}catch{throw new HttpError(400,label+' must be http(s).');}
+ if(parsed.protocol!=='https:'&&parsed.protocol!=='http:')throw new HttpError(400,label+' must be http(s).');
+ return parsed.toString();
+}
+
+/** Download a Face Swap still into public/assets/{id}-{role}.jpg for Bride/Groom chapters. */
+export async function stageFaceSwapStill(url,id,role,{root=ROOT,fetchImpl=fetch}={}){
+ if(!url)return '';
+ const image=normalizeReferenceImage(await resolveReferenceImage(url,{fetchImpl}));
+ const assets=join(root,'public','assets');
+ await mkdir(assets,{recursive:true});
+ const name=id+'-'+role+'.jpg';
+ await writeFile(join(assets,name),image.buffer);
+ return '/assets/'+name;
 }
 
 function view(job){
@@ -660,11 +694,26 @@ export async function runAssemblePhase(job,{inbox,track}){
  const written=real.written.slice();
  written.push(...await stagePlates({plate1:join(inbox,'plate1.png'),plate2:join(inbox,'plate2.png'),id,root}));
 
+ // Face Swap solos → chapter portraits (photos[0]/[1]) + faceSwap blob for hero poster.
+ let previewExtras={};
+ if(job.input.brideImageUrl&&job.input.groomImageUrl){
+  update(job,{detail:'Staging Face Swap bride & groom portraits into the clone…'});
+  const bridePath=await stageFaceSwapStill(job.input.brideImageUrl,id,'bride',{root,fetchImpl:globalThis.fetch});
+  const groomPath=await stageFaceSwapStill(job.input.groomImageUrl,id,'groom',{root,fetchImpl:globalThis.fetch});
+  const couplePath=await stageFaceSwapStill(job.input.coupleImageUrl||job.input.heroImageUrl||job.input.pinUrl,id,'couple',{root,fetchImpl:globalThis.fetch});
+  written.push('public'+bridePath,'public'+groomPath,'public'+couplePath);
+  previewExtras={
+   photos:[bridePath,groomPath],
+   faceSwap:{status:'ready',coupleUrl:couplePath,brideUrl:bridePath,groomUrl:groomPath}
+  };
+  job.assets.faceSwap={bride:bridePath,groom:groomPath,couple:couplePath};
+ }
+
  const cssPath=join(root,'src','invitation3.css');
  await writeFile(cssPath,patchThemeCss(await readFile(cssPath,'utf8'),id,job.palette,{displayName:job.input.displayName}));
  written.push('src/invitation3.css');
  const invPath=join(root,'src','Invitation.tsx');
- await writeFile(invPath,patchPreviewDefaults(await readFile(invPath,'utf8'),id,job.input.couple));
+ await writeFile(invPath,patchPreviewDefaults(await readFile(invPath,'utf8'),id,{...job.input.couple,...previewExtras}));
  written.push('src/Invitation.tsx');
  const dataPath=join(root,'src','data.ts');
  await writeFile(dataPath,patchDataRow(await readFile(dataPath,'utf8'),id,{music:track.file,musicName:track.displayName,color:job.palette?.primary}));

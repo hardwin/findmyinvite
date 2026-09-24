@@ -86,6 +86,39 @@ function touch(job, patch) {
   return job;
 }
 
+/** Couple URL → {brideUrl, groomUrl, coupleUrl} so Template 1 can find solos even if the agent only locked the couple still. */
+const solosByCouple = new Map();
+
+export function rememberFaceSwapSolos({coupleUrl, brideUrl, groomUrl}) {
+  const couple = String(coupleUrl || '').trim();
+  const bride = String(brideUrl || '').trim();
+  const groom = String(groomUrl || '').trim();
+  if (!couple || !bride || !groom) return;
+  const entry = {coupleUrl: couple, brideUrl: bride, groomUrl: groom, savedAt: Date.now()};
+  solosByCouple.set(couple, entry);
+  // Also index by raw blob URL if the chat holds a proxy URL (and vice versa).
+  try {
+    const u = new URL(couple);
+    if (u.pathname.includes('/api/face-swap') && u.searchParams.get('url')) {
+      solosByCouple.set(u.searchParams.get('url'), entry);
+    }
+  } catch { /* ignore */ }
+}
+
+export function lookupFaceSwapSolos(coupleUrl) {
+  const key = String(coupleUrl || '').trim();
+  if (!key) return null;
+  const hit = solosByCouple.get(key);
+  if (hit) return hit;
+  try {
+    const u = new URL(key);
+    if (u.pathname.includes('/api/face-swap') && u.searchParams.get('url')) {
+      return solosByCouple.get(u.searchParams.get('url')) || null;
+    }
+  } catch { /* ignore */ }
+  return null;
+}
+
 /** True when URL is on this project's Vercel Blob host (private store). */
 export function isVercelBlobUrl(value) {
   try {
@@ -343,8 +376,16 @@ export async function startFaceSwapJob(body = {}, {env = process.env, fetchImpl 
       if (slug) {
         touch(job, {phase: 'apply', percent: 96, label: 'Saving portraits to your invitation…'});
         applied = await applyFaceSwapToInvitation({slug, token, inference, env});
-        // Couple still is private Blob — hand the chat a same-origin proxy URL for preview.
-        if (applied?.coupleUrl) applied = {...applied, coupleUrl: toFetchableUrl(applied.coupleUrl, origin)};
+        // Private Blob URLs — hand the chat same-origin proxy URLs for preview + Template 1.
+        applied = {
+          ...applied,
+          coupleUrl: applied?.coupleUrl ? toFetchableUrl(applied.coupleUrl, origin) : '',
+          brideUrl: applied?.brideUrl ? (applied.brideUrl.startsWith('http') ? toFetchableUrl(applied.brideUrl, origin) : (origin + applied.brideUrl)) : '',
+          groomUrl: applied?.groomUrl ? (applied.groomUrl.startsWith('http') ? toFetchableUrl(applied.groomUrl, origin) : (origin + applied.groomUrl)) : ''
+        };
+        if (!applied.coupleUrl || !applied.brideUrl || !applied.groomUrl) {
+          throw new HttpError(502, 'Face Swap saved the invitation but missing couple/bride/groom URLs.');
+        }
       } else {
         touch(job, {phase: 'upload', percent: 96, label: 'Uploading preview stills…'});
         const stamp = Date.now();
@@ -369,6 +410,9 @@ export async function startFaceSwapJob(body = {}, {env = process.env, fetchImpl 
             updatedAt: new Date().toISOString()
           })
         };
+        if (!coupleUrl || !brideUrl || !groomUrl) {
+          throw new HttpError(502, 'Face Swap upload missed couple/bride/groom preview URLs.');
+        }
       }
       touch(job, {
         status: 'done',
@@ -376,6 +420,11 @@ export async function startFaceSwapJob(body = {}, {env = process.env, fetchImpl 
         percent: 100,
         label: 'Face Swap ready',
         result: applied
+      });
+      rememberFaceSwapSolos({
+        coupleUrl: applied.coupleUrl,
+        brideUrl: applied.brideUrl,
+        groomUrl: applied.groomUrl
       });
     } catch (error) {
       touch(job, {
