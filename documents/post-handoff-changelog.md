@@ -9,6 +9,7 @@ Soul: [akay-soul.md](akay-soul.md) · standing facts: [project-context.md](proje
 Read this before `docs/handoff/STATUS.md`. The v0.9.0 handoff is the frozen baseline; this file is the current truth after that tag.
 
 ## 2026-09-25 — Face Swap before Lock (Assembly craft)
+- Face Swap Blob: store is **private** — client upload uses `access:"private"` (public caused CORS-masked 400). Same-origin `action=file` proxy for Replicate + previews.
 - Face Swap faces: **Blob client upload → https URL → start** (no base64 body; no compress). Upload cards fixed.
 - **Prod ship:** `2727bf9` → Vercel READY · live bundle `/assets/index-CR7En7My.js` · `FACE_SWAP_STUB=1` (redeployed).
 - Launch 2.0 #9 path for Assembly: after `mix_image`, offer Face Swap → confirm → bride+groom faces → `gpt-image-2.5-flare` swap on refined hero → Lock swapped still → then video.

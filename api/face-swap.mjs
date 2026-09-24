@@ -33,6 +33,31 @@ export default async function handler(req, res) {
       return respond(res, 200, job);
     }
 
+    // Stream a private Blob object (store is private — Replicate + <img> need a public fetch URL).
+    if (action === 'file') {
+      method(req, ['GET']);
+      const target = String(url.searchParams.get('url') || '').trim();
+      let parsed;
+      try { parsed = new URL(target); } catch { throw new HttpError(400, 'Invalid file URL.'); }
+      const host = parsed.hostname;
+      if (host !== 'blob.vercel-storage.com' && !host.endsWith('.blob.vercel-storage.com')) {
+        throw new HttpError(400, 'Only Vercel Blob file URLs can be proxied.');
+      }
+      if (!process.env.BLOB_READ_WRITE_TOKEN) throw new HttpError(503, 'Photo uploads are not configured.');
+      const upstream = await fetch(target, {
+        headers: {Authorization: 'Bearer ' + process.env.BLOB_READ_WRITE_TOKEN}
+      });
+      if (!upstream.ok) throw new HttpError(502, 'Could not load face file (' + upstream.status + ').');
+      const bytes = Buffer.from(await upstream.arrayBuffer());
+      const type = upstream.headers.get('content-type') || 'image/jpeg';
+      res.setHeader('Cache-Control', 'public, max-age=3600');
+      res.setHeader('Content-Type', type);
+      res.setHeader('X-Content-Type-Options', 'nosniff');
+      res.statusCode = 200;
+      res.end(bytes);
+      return;
+    }
+
     // Client Blob upload token — browser PUTs the file straight to Blob (no base64 through this function).
     if (action === 'blob') {
       method(req, ['POST']);

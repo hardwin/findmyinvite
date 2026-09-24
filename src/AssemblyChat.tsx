@@ -491,8 +491,9 @@ async function uploadFacePhoto(file:File){
  if(file.size>12*1024*1024)throw new Error('Each face photo must be under 12 MB.');
  const ext=(file.name.split('.').pop()||'jpg').toLowerCase().replace(/[^a-z0-9]/g,'')||'jpg';
  const pathname='face-swap/'+Date.now()+'-'+Math.random().toString(36).slice(2,8)+'.'+ext;
+ // Store is private — public access returns 400 without CORS (browser shows it as a CORS error).
  const blob=await uploadBlob(pathname,file,{
-  access:'public',
+  access:'private',
   handleUploadUrl:'/api/face-swap?action=blob',
   contentType:file.type||'image/jpeg'
  });

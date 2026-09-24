@@ -86,10 +86,31 @@ function touch(job, patch) {
   return job;
 }
 
-async function uploadPublicJpeg(buffer, pathname, {env = process.env} = {}) {
+/** True when URL is on this project's Vercel Blob host (private store). */
+export function isVercelBlobUrl(value) {
+  try {
+    const host = new URL(String(value || '')).hostname;
+    return host === 'blob.vercel-storage.com' || host.endsWith('.blob.vercel-storage.com');
+  } catch {
+    return false;
+  }
+}
+
+/** Same-origin proxy so Replicate (and <img>) can fetch private Blob objects. */
+export function blobProxyUrl(blobUrl, siteOrigin) {
+  const origin = String(siteOrigin || process.env.SITE_ORIGIN || 'https://findmyinvite.com').replace(/\/$/, '');
+  return origin + '/api/face-swap?action=file&url=' + encodeURIComponent(String(blobUrl));
+}
+
+export function toFetchableUrl(url, siteOrigin) {
+  return isVercelBlobUrl(url) ? blobProxyUrl(url, siteOrigin) : String(url || '');
+}
+
+async function uploadBlobJpeg(buffer, pathname, {env = process.env} = {}) {
   if (!env.BLOB_READ_WRITE_TOKEN) throw new HttpError(503, 'Photo uploads are not configured (BLOB_READ_WRITE_TOKEN).');
+  // Blob store is private — access:'public' is rejected.
   const blob = await put(pathname, buffer, {
-    access: 'public',
+    access: 'private',
     contentType: 'image/jpeg',
     token: env.BLOB_READ_WRITE_TOKEN
   });
@@ -117,13 +138,16 @@ export async function runFaceSwapInference({
   pinUrl,
   brideFaceUrl,
   groomFaceUrl,
+  siteOrigin,
   env = process.env,
   fetchImpl = fetch,
   onProgress
 } = {}) {
-  const pin = assertHttpUrl(pinUrl, 'Pin image');
-  const bride = assertHttpUrl(brideFaceUrl, 'Bride face');
-  const groom = assertHttpUrl(groomFaceUrl, 'Groom face');
+  const origin = siteOrigin || env.SITE_ORIGIN || 'https://findmyinvite.com';
+  // Private Blob URLs are not fetchable by Replicate — proxy through our domain.
+  const pin = toFetchableUrl(assertHttpUrl(pinUrl, 'Pin image'), origin);
+  const bride = toFetchableUrl(assertHttpUrl(brideFaceUrl, 'Bride face'), origin);
+  const groom = toFetchableUrl(assertHttpUrl(groomFaceUrl, 'Groom face'), origin);
   const tick = (phase, percent, label) => {
     if (typeof onProgress === 'function') onProgress({phase, percent, label});
   };
@@ -201,7 +225,7 @@ export async function applyFaceSwapToInvitation({
 } = {}) {
   const row = await invitation(slug, token);
   const stamp = Date.now();
-  const coupleUrl = await uploadPublicJpeg(
+  const coupleUrl = await uploadBlobJpeg(
     inference.couple.buffer,
     'face-swap/' + row.id + '/couple-' + stamp + '.jpg',
     {env}
@@ -255,7 +279,7 @@ async function resolveFaceRef(value, label, {env = process.env} = {}) {
     if (bytes.length < 64 || bytes.length > 8 * 1024 * 1024) throw new HttpError(413, label + ' must be between 64B and 8MB.');
     if (!env.BLOB_READ_WRITE_TOKEN) throw new HttpError(503, 'Photo uploads are not configured (BLOB_READ_WRITE_TOKEN).');
     const blob = await put('face-swap/refs/' + Date.now() + '-' + Math.random().toString(36).slice(2, 8) + '.' + ext, bytes, {
-      access: 'public',
+      access: 'private',
       contentType: 'image/' + ext,
       token: env.BLOB_READ_WRITE_TOKEN
     });
@@ -298,6 +322,7 @@ export async function startFaceSwapJob(body = {}, {env = process.env, fetchImpl 
   };
   jobs.set(id, job);
 
+  const origin = siteOrigin || env.SITE_ORIGIN || 'https://findmyinvite.com';
   const run = async () => {
     try {
       touch(job, {phase: 'couple', percent: 5, label: 'Swapping faces on the couple still…'});
@@ -305,6 +330,7 @@ export async function startFaceSwapJob(body = {}, {env = process.env, fetchImpl 
         pinUrl,
         brideFaceUrl,
         groomFaceUrl,
+        siteOrigin: origin,
         env,
         fetchImpl,
         onProgress: ({phase, percent, label}) => touch(job, {phase, percent, label})
@@ -313,12 +339,17 @@ export async function startFaceSwapJob(body = {}, {env = process.env, fetchImpl 
       if (slug) {
         touch(job, {phase: 'apply', percent: 96, label: 'Saving portraits to your invitation…'});
         applied = await applyFaceSwapToInvitation({slug, token, inference, env});
+        // Couple still is private Blob — hand the chat a same-origin proxy URL for preview.
+        if (applied?.coupleUrl) applied = {...applied, coupleUrl: toFetchableUrl(applied.coupleUrl, origin)};
       } else {
         touch(job, {phase: 'upload', percent: 96, label: 'Uploading preview stills…'});
         const stamp = Date.now();
-        const coupleUrl = await uploadPublicJpeg(inference.couple.buffer, 'face-swap/preview/' + id + '/couple-' + stamp + '.jpg', {env});
-        const brideUrl = await uploadPublicJpeg(inference.bride.buffer, 'face-swap/preview/' + id + '/bride-' + stamp + '.jpg', {env});
-        const groomUrl = await uploadPublicJpeg(inference.groom.buffer, 'face-swap/preview/' + id + '/groom-' + stamp + '.jpg', {env});
+        const coupleRaw = await uploadBlobJpeg(inference.couple.buffer, 'face-swap/preview/' + id + '/couple-' + stamp + '.jpg', {env});
+        const brideRaw = await uploadBlobJpeg(inference.bride.buffer, 'face-swap/preview/' + id + '/bride-' + stamp + '.jpg', {env});
+        const groomRaw = await uploadBlobJpeg(inference.groom.buffer, 'face-swap/preview/' + id + '/groom-' + stamp + '.jpg', {env});
+        const coupleUrl = toFetchableUrl(coupleRaw, origin);
+        const brideUrl = toFetchableUrl(brideRaw, origin);
+        const groomUrl = toFetchableUrl(groomRaw, origin);
         applied = {
           coupleUrl,
           brideUrl,
@@ -326,9 +357,9 @@ export async function startFaceSwapJob(body = {}, {env = process.env, fetchImpl 
           photos: [brideUrl, groomUrl],
           faceSwap: normalizeFaceSwap({
             status: 'ready',
-            coupleUrl,
-            brideUrl,
-            groomUrl,
+            coupleUrl: coupleRaw,
+            brideUrl: brideRaw,
+            groomUrl: groomRaw,
             model: FACE_SWAP_MODEL,
             stub: cfg.stub,
             updatedAt: new Date().toISOString()
