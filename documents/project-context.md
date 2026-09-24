@@ -11,8 +11,8 @@ Written 2026-09-15. Overwrite in place when facts change.
 | Repo | https://github.com/hardwin/findmyinvite.git — **public**, `main` only |
 | Live | https://findmyinvite.com (= https://findmyinvite.vercel.app) |
 | v0.9.0 handoff SHA | tag `v0.9.0` → `84416179b8d85486eea0fcc0e219f994be9bf3ab` |
-| Serving production commit (2026-09-24) | `c195193` invite UX polish — heart scratch, motif wind, 0.25s opening→hero handoff |
-| Live bundle | `/assets/index-DD2EX4HT.js` |
+| Serving production commit (2026-09-24) | `107463f` Moments IG wall, Bride/Groom chapters, 8 photos, fast reverse scroll |
+| Live bundle | `/assets/index-XX-MX8Y3.js` |
 | Prod Supabase | `qqvcptjkfcjkwbkookcm` (Mumbai) |
 | Not this product | Zareqia Supabase `ganphjxofavzmxzsecij` |
 | Vercel project (handoff) | `prj_ZPOw3XYQTehO9AVbkp8JyZEhke76` / team `team_xFQvLGR6rRhSUyAtItzx8b24` |

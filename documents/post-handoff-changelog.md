@@ -8,6 +8,12 @@ Soul: [akay-soul.md](akay-soul.md) · standing facts: [project-context.md](proje
 
 Read this before `docs/handoff/STATUS.md`. The v0.9.0 handoff is the frozen baseline; this file is the current truth after that tag.
 
+## 2026-09-24 — Moments IG wall + fast reverse (`107463f`)
+- Our Moments → Instagram 1:1 carousel (`MomentsWall` / ribbon / MIT chrome); forward photo-stall, reverse exits immediately.
+- Bride + Groom person chapters; photo cap 4→8 (API slots `0-7`).
+- Scratch leave-nudge forward-only; `slideNext(420)` / `slidePrev(260)`.
+- Live: `/assets/index-XX-MX8Y3.js` (+ `MomentsWall-azEKjHTz.js`). No SQL.
+
 ## 2026-09-24 — Invite UX polish live (`c195193`)
 - Golden Wish heart scratch + leave-nudge (first escape pulses, second allows).
 - Motif wind + swipe impulse; back/mid/front canvases.
