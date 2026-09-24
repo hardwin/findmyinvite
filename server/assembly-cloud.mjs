@@ -282,9 +282,10 @@ export async function discardCloudTemplate1Job(jobId,{env=process.env,fetchImpl=
 export function cloudJobCanRetry(row){
  if(!row)return false;
  const status=String(row.status||'');
- if(status==='failed'||status==='cancelled')return true;
+ // Preview/review are past the point of a full re-run; use Resume push / Approve instead.
  if(status==='preview'||status==='discarded'||status==='review')return false;
- if((status==='running'||status==='queued')&&(row.error||row.cancel_requested))return true;
+ // Failed/cancelled always. Running/queued also — sandbox can hang mid-pin with no error.
+ if(status==='failed'||status==='cancelled'||status==='running'||status==='queued')return true;
  return false;
 }
 

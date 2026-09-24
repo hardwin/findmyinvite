@@ -326,9 +326,9 @@ export function cancelTemplate1Job(jobId){
 export function localJobCanRetry(job){
  if(!job)return false;
  const status=String(job.status||'');
- if(status==='failed'||status==='cancelled')return true;
  if(status==='preview'||status==='review'||status==='discarded')return false;
- if((status==='running'||status==='queued')&&(job.error||job.cancelRequested))return true;
+ // Allow force-retry while running/queued — workers can hang after prompts with no error.
+ if(status==='failed'||status==='cancelled'||status==='running'||status==='queued')return true;
  return false;
 }
 

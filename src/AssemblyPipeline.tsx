@@ -65,14 +65,19 @@ function formatJobDate(ms:number){
 }
 
 function canDiscard(job:Job){
- const col=columnFor(job);
- return col==='queued'||col==='failed';
+ const status=String(job.status||'');
+ if(status==='failed'||status==='cancelled'||status==='queued')return true;
+ // Stuck running — allow discard without waiting for a hard fail.
+ if(status==='running')return true;
+ return false;
 }
 
 function canRetry(job:Job){
  const status=String(job.status||'');
- if(status==='failed'||status==='cancelled')return true;
- if((status==='running'||status==='queued')&&job.error)return true;
+ // Preview/review use Approve / Resume push — not a full re-run.
+ if(status==='preview'||status==='review')return false;
+ // Failed always. Running/queued too — cloud sandboxes can hang mid-pin with no error field.
+ if(status==='failed'||status==='cancelled'||status==='running'||status==='queued')return true;
  return false;
 }
 

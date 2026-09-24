@@ -137,14 +137,15 @@ function needsApproval(job:Pick<JobStatus,'status'|'phase'|'stills'>){
 }
 function canRetryJob(job:Pick<JobStatus,'status'|'error'>){
  const status=String(job.status||'');
- if(status==='failed'||status==='cancelled')return true;
- if((status==='running'||status==='queued')&&job.error)return true;
+ if(status==='preview'||status==='review')return false;
+ if(status==='failed'||status==='cancelled'||status==='running'||status==='queued')return true;
  return false;
 }
 function canDiscardJob(job:Pick<JobStatus,'status'|'percent'>){
  const status=String(job.status||'');
  if(status==='failed'||status==='cancelled'||status==='queued')return true;
- if(status==='running'&&Number(job.percent||0)===0)return true;
+ // Stuck mid-run (any %) — operator may discard without waiting for a hard fail.
+ if(status==='running')return true;
  return false;
 }
 function fileToDataUrl(file:File){

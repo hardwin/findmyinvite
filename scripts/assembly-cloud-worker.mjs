@@ -105,9 +105,17 @@ const workerEnv={
 delete workerEnv.VERCEL;
 
 let started;
+let lastProgressAt=Date.now();
+let lastFingerprint='';
 try{
  await earlyReport({status:'running',phase:'pin',percent:10,label:'Resolving Pinterest pin…',detail:'startTemplate1Job'});
+
  started=startTemplate1Job(input,{env:workerEnv,run:true,onUpdate:job=>{
+  const fingerprint=[job.status,job.phase,job.percent,job.detail,job.error].join('|');
+  if(fingerprint!==lastFingerprint){
+   lastFingerprint=fingerprint;
+   lastProgressAt=Date.now();
+  }
   const prompts=job.prompts&&typeof job.prompts==='object'?{
    first:job.prompts.first,
    last:job.prompts.last,
@@ -142,6 +150,7 @@ try{
  process.exit(2);
 }
 
+const STALE_MS=3*60*1000;
 const cancelTimer=setInterval(()=>{
  void (async()=>{
   const state=await sync();
@@ -152,6 +161,13 @@ const cancelTimer=setInterval(()=>{
 },4000);
 
 while(true){
+ if(Date.now()-lastProgressAt>STALE_MS){
+  const message='No progress for 3 minutes — worker watchdog stopped a stuck run. Tap Retry.';
+  console.error(message);
+  await report({status:'failed',phase:'failed',label:'Failed',detail:message,error:message});
+  clearInterval(cancelTimer);
+  process.exit(2);
+ }
  const job=getTemplate1Job(started.jobId);
  if(job.status==='review'){
   try{
