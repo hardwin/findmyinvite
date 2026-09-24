@@ -250,5 +250,14 @@
     "duration": 15.041992,
     "bytes": 1553511,
     "version": 1
+  },
+  "royal-prestige-9": {
+    "src": "/assets/catalogue/v1/royal-prestige-9.mp4",
+    "poster": "/assets/catalogue/v1/royal-prestige-9.webp",
+    "width": 480,
+    "height": 854,
+    "duration": 15.041992,
+    "bytes": 1623298,
+    "version": 1
   }
 }
