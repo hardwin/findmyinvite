@@ -304,5 +304,14 @@
     "badge": "New",
     "sort_order": 40,
     "published": true
+  },
+  {
+    "id": "royal-prestige-9",
+    "name": "ArmyMan & Wife",
+    "description": "Prestigious cinematic opening with refined elegance and grandeur",
+    "collection": "royal",
+    "badge": "New",
+    "sort_order": 41,
+    "published": true
   }
 ]
