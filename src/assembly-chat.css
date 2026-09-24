@@ -239,3 +239,15 @@
 @media (min-width:821px){
   .asm-gpt-side .asm-gpt-close{visibility:hidden}
 }
+
+/* Face Swap before Lock (Assembly craft) */
+.asm-gpt-face-swap{margin-top:10px;padding:14px;border:1px solid var(--border);border-radius:16px;background:#fafafa;display:grid;gap:10px;max-width:min(100%,420px)}
+.asm-gpt-face-swap-copy{margin:0;font-size:13px;line-height:1.55;color:var(--muted2)}
+.asm-gpt-face-uploads{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.asm-gpt-face-uploads label{display:grid;gap:6px;font-size:12px;color:var(--muted2)}
+.asm-gpt-face-uploads input{font-size:12px}
+.asm-gpt-face-previews{display:flex;gap:10px}
+.asm-gpt-face-previews img{width:72px;height:72px;object-fit:cover;border-radius:12px;border:1px solid var(--border)}
+.asm-gpt-face-swap-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.asm-gpt-face-swap .asm-gpt-choice{margin-top:4px}
+.asm-gpt-face-swap.is-ready{background:#f6fbf8;border-color:#cfe5d8}

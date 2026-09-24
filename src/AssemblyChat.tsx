@@ -483,6 +483,173 @@ function JobCard({jobId,onUpdate,onDismiss}:{jobId:string;onUpdate?:(job:JobStat
 
 type ChoiceOption={id:string;label:string;submit:string};
 
+
+function readFaceDataUrl(file:File){
+ return new Promise<string>((resolve,reject)=>{
+  if(file.size>4*1024*1024){reject(new Error('Each face photo must be under 4 MB.'));return;}
+  const reader=new FileReader();
+  reader.onload=()=>typeof reader.result==='string'?resolve(reader.result):reject(new Error('Could not read face photo.'));
+  reader.onerror=()=>reject(new Error('Could not read face photo.'));
+  reader.readAsDataURL(file);
+ });
+}
+
+/** Face Swap add-on before Lock — swap faces on the refined hero, then allow Lock → video. */
+function FaceSwapBeforeLock({
+ heroUrl,
+ busy,
+ onChip
+}:{
+ heroUrl:string;
+ busy:boolean;
+ onChip:(text:string)=>void;
+}){
+ const [step,setStep]=useState<'offer'|'confirm'|'upload'|'running'|'ready'>('offer');
+ const [cfg,setCfg]=useState<{stub:boolean;priceInr:number}|null>(null);
+ const [brideFace,setBrideFace]=useState('');
+ const [groomFace,setGroomFace]=useState('');
+ const [progress,setProgress]=useState('');
+ const [error,setError]=useState('');
+ const [swappedUrl,setSwappedUrl]=useState('');
+ const [brideSolo,setBrideSolo]=useState('');
+ const [groomSolo,setGroomSolo]=useState('');
+
+ useEffect(()=>{
+  void fetch('/api/face-swap?action=config')
+   .then(r=>r.json())
+   .then(j=>{if(j)setCfg({stub:Boolean(j.stub),priceInr:Number(j.priceInr)||300});})
+   .catch(()=>setCfg({stub:false,priceInr:300}));
+ },[]);
+
+ async function runSwap(){
+  if(!brideFace||!groomFace){setError('Upload both bride and groom face photos.');return;}
+  setStep('running');setError('');setProgress('Starting Face Swap…');
+  try{
+   // wait:true keeps the job on one Vercel function (in-memory Map cannot poll across instances).
+   setProgress('Swapping faces on the couple still… (1–3 min)');
+   const startRes=await fetch('/api/face-swap?action=start',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({
+     pinUrl:heroUrl,
+     brideFaceDataUrl:brideFace,
+     groomFaceDataUrl:groomFace,
+     entitled:Boolean(cfg?.stub),
+     wait:true
+    })
+   });
+   const job=await startRes.json();
+   if(!startRes.ok)throw new Error(job.error||'Face Swap failed to start.');
+   if(job.status!=='done')throw new Error(job.error||'Face Swap failed.');
+   const couple=job.result?.coupleUrl||'';
+   if(!couple)throw new Error('Face Swap returned no couple still.');
+   setSwappedUrl(couple);
+   setBrideSolo(job.result?.brideUrl||'');
+   setGroomSolo(job.result?.groomUrl||'');
+   setProgress('Face Swap ready — lock this still to start the video.');
+   setStep('ready');
+  }catch(e){
+   setError((e as Error).message);
+   setProgress('');
+   setStep('upload');
+  }
+ }
+
+ if(step==='offer'){
+  return (
+   <ChoicePrompt
+    title="Ready to lock this hero?"
+    disabled={busy}
+    options={[
+     {id:'swap',label:'Add Face Swap (Rs. '+(cfg?.priceInr||300)+') — put your faces on this still'+(cfg?.stub?' · stub, no charge':''),submit:'__face_swap__'},
+     {id:'lock',label:'Lock as-is — start video without Face Swap',submit:'Lock this final image: '+heroUrl},
+     {id:'remix',label:'Remix with a stronger style twist',submit:'Remix with a stronger style twist.'},
+     {id:'retry',label:'Retry the same mix again',submit:'Retry the image mix with Replicate.'}
+    ]}
+    onSubmit={option=>{
+     if(option.id==='swap')setStep('confirm');
+     else onChip(option.submit);
+    }}
+   />
+  );
+ }
+
+ if(step==='confirm'){
+  return (
+   <div className="asm-gpt-face-swap" role="group" aria-label="Confirm Face Swap">
+    <p className="asm-gpt-choice-title">Confirm Face Swap add-on</p>
+    <p className="asm-gpt-face-swap-copy">
+     We’ll replace the couple faces on this refined still with your bride &amp; groom photos
+     (Rs. {cfg?.priceInr||300}{cfg?.stub?' · stub — no charge':''}).
+     You review the swapped still, then Lock — only then does the opening video start.
+    </p>
+    <div className="asm-gpt-face-swap-actions">
+     <button type="button" className="asm-gpt-choice-submit" disabled={busy} onClick={()=>setStep('upload')}>
+      Yes — add Face Swap
+     </button>
+     <button type="button" className="asm-gpt-chip" disabled={busy} onClick={()=>setStep('offer')}>Back</button>
+    </div>
+   </div>
+  );
+ }
+
+ if(step==='upload'||step==='running'){
+  return (
+   <div className="asm-gpt-face-swap" role="group" aria-label="Upload faces for Face Swap">
+    <p className="asm-gpt-choice-title">Upload bride &amp; groom faces</p>
+    <p className="asm-gpt-face-swap-copy">Clear face photos work best — front-facing, well lit, one person each.</p>
+    <div className="asm-gpt-face-uploads">
+     <label>Bride face
+      <input type="file" accept="image/jpeg,image/png,image/webp" disabled={busy||step==='running'}
+       onChange={e=>{const f=e.currentTarget.files?.[0];if(f)void readFaceDataUrl(f).then(setBrideFace).catch(err=>setError(err.message));}}/>
+     </label>
+     <label>Groom face
+      <input type="file" accept="image/jpeg,image/png,image/webp" disabled={busy||step==='running'}
+       onChange={e=>{const f=e.currentTarget.files?.[0];if(f)void readFaceDataUrl(f).then(setGroomFace).catch(err=>setError(err.message));}}/>
+     </label>
+    </div>
+    {(brideFace||groomFace)&&(
+     <div className="asm-gpt-face-previews">
+      {brideFace&&<img src={brideFace} alt="Bride face"/>}
+      {groomFace&&<img src={groomFace} alt="Groom face"/>}
+     </div>
+    )}
+    {error&&<p className="asm-gpt-alert" role="alert">{error}</p>}
+    {progress&&<p role="status">{progress}</p>}
+    <div className="asm-gpt-face-swap-actions">
+     <button type="button" className="asm-gpt-choice-submit" disabled={busy||step==='running'||!brideFace||!groomFace} onClick={()=>void runSwap()}>
+      {step==='running'?'Swapping faces…':'Run Face Swap'}
+     </button>
+     <button type="button" className="asm-gpt-chip" disabled={busy||step==='running'} onClick={()=>setStep('offer')}>Cancel</button>
+    </div>
+   </div>
+  );
+ }
+
+ // ready
+ return (
+  <div className="asm-gpt-face-swap is-ready" role="group" aria-label="Face Swap result">
+   <p className="asm-gpt-choice-title">Face Swap ready</p>
+   <p className="asm-gpt-face-swap-copy">Lock the swapped still to start the opening video. Bride / Groom solos are saved for chapters.</p>
+   <Stills urls={[swappedUrl,brideSolo,groomSolo].filter(Boolean)} label="Face Swap"/>
+   {progress&&<p role="status">{progress}</p>}
+   <ChoicePrompt
+    title="Lock Face-Swapped hero?"
+    disabled={busy}
+    options={[
+     {id:'lock-swapped',label:'Lock Face-Swapped still — start video',submit:'Lock this final image: '+swappedUrl},
+     {id:'lock-original',label:'Lock original still instead',submit:'Lock this final image: '+heroUrl},
+     {id:'retry-swap',label:'Retry Face Swap with different faces',submit:'__retry_face_swap__'}
+    ]}
+    onSubmit={option=>{
+     if(option.id==='retry-swap'){setStep('upload');setProgress('');setError('');return;}
+     onChip(option.submit);
+    }}
+   />
+  </div>
+ );
+}
+
 function ChoicePrompt({
  title,
  options,
@@ -631,16 +798,11 @@ function MessageView({
    }
    if(name==='mix_image'&&urls[0]){
     nodes.push(
-     <ChoicePrompt
+     <FaceSwapBeforeLock
       key={message.id+'-mix-'+i}
-      title="What should we do with this image?"
-      disabled={busy}
-      options={[
-       {id:'lock',label:'Approve — lock this as the final hero',submit:'Lock this final image: '+urls[0]},
-       {id:'remix',label:'Retry with a stronger style twist',submit:'Remix with a stronger style twist.'},
-       {id:'retry',label:'Retry the same mix again',submit:'Retry the image mix with Replicate.'}
-      ]}
-      onSubmit={option=>onChip(option.submit)}
+      heroUrl={urls[0]}
+      busy={busy}
+      onChip={onChip}
      />
     );
    }

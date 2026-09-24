@@ -96,10 +96,25 @@ export function formatProviderError(status,body){
  return (parts.filter(Boolean).join(' — ')||'no provider body').slice(0,450);
 }
 
-/** Build Replicate image input for the chosen model (gpt-image-2.5-flare vs xAI Imagine). */
-export function buildReplicateImageInput(model,{prompt,image}={}){
+/** Normalize one or many image URL(s) into a de-duped http(s) list. */
+export function normalizeImageUrls(image,images){
+ const list=[];
+ for(const value of [...(Array.isArray(images)?images:[]),image]){
+  const src=String(value||'').trim();
+  if(!src||list.includes(src))continue;
+  list.push(src);
+ }
+ return list;
+}
+
+/**
+ * Build Replicate image input for the chosen model (gpt-image-2.5-flare vs xAI Imagine).
+ * gpt-image supports multi `input_images` (pin + face refs for Face Swap).
+ * `inputFidelity:'high'` is included when requested — omit on schema rejection at call site.
+ */
+export function buildReplicateImageInput(model,{prompt,image,images,inputFidelity}={}){
  const text=String(prompt||'').trim();
- const src=image?String(image):'';
+ const refs=normalizeImageUrls(image,images);
  if(String(model||'').includes('gpt-image')){
   const input={
    prompt:text,
@@ -108,25 +123,38 @@ export function buildReplicateImageInput(model,{prompt,image}={}){
    number_of_images:1,
    quality:'high'
   };
-  if(src)input.input_images=[src];
+  if(refs.length)input.input_images=refs;
+  if(inputFidelity==='high'||inputFidelity==='low')input.input_fidelity=inputFidelity;
   return input;
  }
- // xai/grok-imagine-image (and similar edit models)
- if(!src)throw new HttpError(400,'Replicate image edit needs a source image URL.');
- return {prompt:text,image:src,aspect_ratio:'9:16'};
+ // xai/grok-imagine-image (and similar edit models) — single source image only
+ if(!refs[0])throw new HttpError(400,'Replicate image edit needs a source image URL.');
+ return {prompt:text,image:refs[0],aspect_ratio:'9:16'};
 }
 
 /** Replicate image: Door-First/last/hero → openai/gpt-image-2.5-flare; plates → xai/grok-imagine-image. */
-export async function runReplicateImage({prompt,image,model,env=process.env,fetchImpl=fetch,sleepImpl=sleep,onTick,role='still'}={}){
+export async function runReplicateImage({prompt,image,images,model,inputFidelity,env=process.env,fetchImpl=fetch,sleepImpl=sleep,onTick,role='still'}={}){
  const token=replicateToken(env);
  const resolvedModel=model||imageModelForRole(role);
- const input=buildReplicateImageInput(resolvedModel,{prompt,image});
- const create=await fetchImpl('https://api.replicate.com/v1/models/'+resolvedModel+'/predictions',{
+ let fidelity=inputFidelity;
+ let input=buildReplicateImageInput(resolvedModel,{prompt,image,images,inputFidelity:fidelity});
+ let create=await fetchImpl('https://api.replicate.com/v1/models/'+resolvedModel+'/predictions',{
   method:'POST',
   headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},
   body:JSON.stringify({input})
  });
  let prediction=await create.json().catch(()=>({}));
+ // Replicate schema may not expose input_fidelity yet — retry once without it.
+ if(!create.ok&&create.status!==201&&fidelity&&/input_fidelity|unknown.?field|additional.?propert/i.test(formatProviderError(create.status,prediction))){
+  fidelity=undefined;
+  input=buildReplicateImageInput(resolvedModel,{prompt,image,images});
+  create=await fetchImpl('https://api.replicate.com/v1/models/'+resolvedModel+'/predictions',{
+   method:'POST',
+   headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},
+   body:JSON.stringify({input})
+  });
+  prediction=await create.json().catch(()=>({}));
+ }
  if(!create.ok&&create.status!==201){
   const detail=formatProviderError(create.status,prediction);
   console.error('Replicate image create failed',role,resolvedModel,detail);

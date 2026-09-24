@@ -29,6 +29,10 @@
       "includeFiles": "{src/data.ts,cms/music-library.json}",
       "maxDuration": 300,
       "memory": 1024
+    },
+    "api/face-swap.mjs": {
+      "maxDuration": 300,
+      "memory": 1024
     }
   },
   "crons": [

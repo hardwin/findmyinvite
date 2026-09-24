@@ -8,6 +8,19 @@ Soul: [akay-soul.md](akay-soul.md) · standing facts: [project-context.md](proje
 
 Read this before `docs/handoff/STATUS.md`. The v0.9.0 handoff is the frozen baseline; this file is the current truth after that tag.
 
+## 2026-09-25 — Face Swap before Lock (Assembly craft)
+- Launch 2.0 #9 path for Assembly: after `mix_image`, offer Face Swap → confirm → bride+groom faces → `gpt-image-2.5-flare` swap on refined hero → Lock swapped still → then video.
+- API `/api/face-swap` (config / start wait / status). `FACE_SWAP_STUB=1` skips ₹300 until payment (#11–12).
+- Preview→Publish Face Swap parked (template recreate later).
+- Assembly client uses `wait:true` so serverless stays on one function.
+
+## 2026-09-25 — ChoicePrompt + xAI fallback after Replicate timeout
+- Radio + Submit alert for timeout / mix fail / lock-retry / still approve-iterate.
+- Replicate timeout asks host before fallback: **xAI API** / **Retry Replicate** / **Wait**.
+- `auto` mix stays on Replicate only; approved fallback hits direct `api.x.ai` Imagine edits.
+- Agent waits for radio choice before `mix_image` with `provider: "xai"`.
+- **Prod ship:** `2ea65ef` → Vercel READY · live bundle `/assets/index-CNjWu9PB.js`.
+
 ## 2026-09-25 — Assembly Chat UX: elapsed timer, image timeout, pin size, labels
 - Live elapsed on every inference (`Thinking… 12s` / `Generating image… 1:32`).
 - Image tools hard-stop at **2:00** with apology + **Try Now**; server mix timeout ~110s.

@@ -1,0 +1,375 @@
+// Face Swap job: gpt-image-2.5-flare couple edit → bride/groom solos → photos[0]/[1] + couple pin override.
+import {randomBytes} from 'node:crypto';
+import {put} from '@vercel/blob';
+import {HttpError, db, invitation} from './core.mjs';
+import {runReplicateImage} from './assembly-template1-gen.mjs';
+import {
+  FACE_SWAP_MODEL,
+  coupleSwapPrompt,
+  brideSoloPrompt,
+  groomSoloPrompt
+} from './face-swap-prompts.mjs';
+
+const jobs = new Map();
+
+export function faceSwapStubEnabled(env = process.env) {
+  return env.FACE_SWAP_STUB === '1' || env.FACE_SWAP_STUB === 'true';
+}
+
+export function faceSwapConfig(env = process.env) {
+  return {
+    enabled: true,
+    stub: faceSwapStubEnabled(env),
+    priceInr: 300,
+    model: FACE_SWAP_MODEL,
+    note: faceSwapStubEnabled(env)
+      ? 'Stub mode: no Razorpay charge (FACE_SWAP_STUB=1).'
+      : 'Live charge waits for Launch 2.0 #11–12. Set FACE_SWAP_STUB=1 to test.'
+  };
+}
+
+function assertHttpUrl(value, label) {
+  const raw = String(value || '').trim();
+  let url;
+  try { url = new URL(raw); } catch { throw new HttpError(400, label + ' must be an http(s) URL.'); }
+  if (url.protocol !== 'https:' && url.protocol !== 'http:') throw new HttpError(400, label + ' must be an http(s) URL.');
+  return url.toString();
+}
+
+/** Resolve template pin / hero still to an absolute URL the flare model can fetch. */
+export function resolvePinUrl({pinUrl, templateId, siteOrigin, templates} = {}) {
+  const explicit = String(pinUrl || '').trim();
+  if (explicit) {
+    if (explicit.startsWith('/')) {
+      const origin = String(siteOrigin || '').replace(/\/$/, '');
+      if (!origin) throw new HttpError(400, 'Relative pin URL needs SITE_ORIGIN (or absolute pinUrl).');
+      return assertHttpUrl(origin + explicit, 'Pin image');
+    }
+    return assertHttpUrl(explicit, 'Pin image');
+  }
+  const id = String(templateId || '').trim();
+  const row = Array.isArray(templates) ? templates.find(t => t && t.id === id) : null;
+  const image = row && typeof row.image === 'string' ? row.image.trim() : '';
+  if (!image) throw new HttpError(400, 'Provide pinUrl or a template with a hero still.');
+  const path = image.startsWith('/') ? image : ('/assets/' + image.replace(/^\/+/, ''));
+  const origin = String(siteOrigin || process.env.SITE_ORIGIN || 'https://findmyinvite.com').replace(/\/$/, '');
+  return assertHttpUrl(origin + path, 'Template pin');
+}
+
+export function newFaceSwapJobId() {
+  return randomBytes(8).toString('hex');
+}
+
+function jobView(job) {
+  if (!job) return null;
+  return {
+    jobId: job.id,
+    status: job.status,
+    phase: job.phase,
+    percent: job.percent,
+    label: job.label,
+    error: job.error || null,
+    result: job.result || null,
+    stub: Boolean(job.stub),
+    createdAt: job.createdAt,
+    updatedAt: job.updatedAt
+  };
+}
+
+export function getFaceSwapJob(jobId) {
+  return jobView(jobs.get(String(jobId || '')));
+}
+
+function touch(job, patch) {
+  Object.assign(job, patch, {updatedAt: Date.now()});
+  jobs.set(job.id, job);
+  return job;
+}
+
+async function uploadPublicJpeg(buffer, pathname, {env = process.env} = {}) {
+  if (!env.BLOB_READ_WRITE_TOKEN) throw new HttpError(503, 'Photo uploads are not configured (BLOB_READ_WRITE_TOKEN).');
+  const blob = await put(pathname, buffer, {
+    access: 'public',
+    contentType: 'image/jpeg',
+    token: env.BLOB_READ_WRITE_TOKEN
+  });
+  return blob.url;
+}
+
+async function uploadPrivateSlot(invitationId, slot, buffer, {env = process.env} = {}) {
+  if (!env.BLOB_READ_WRITE_TOKEN) throw new HttpError(503, 'Photo uploads are not configured (BLOB_READ_WRITE_TOKEN).');
+  const pathname = 'invitations/' + invitationId + '/' + slot;
+  await put(pathname, buffer, {
+    access: 'private',
+    addRandomSuffix:false,
+    allowOverwrite:true,
+    contentType: 'image/jpeg',
+    cacheControlMaxAge:60,
+    token: env.BLOB_READ_WRITE_TOKEN
+  });
+}
+
+/**
+ * Core inference: couple edit → bride solo → groom solo.
+ * Returns buffers + replicate URLs (before invitation write-back).
+ */
+export async function runFaceSwapInference({
+  pinUrl,
+  brideFaceUrl,
+  groomFaceUrl,
+  env = process.env,
+  fetchImpl = fetch,
+  onProgress
+} = {}) {
+  const pin = assertHttpUrl(pinUrl, 'Pin image');
+  const bride = assertHttpUrl(brideFaceUrl, 'Bride face');
+  const groom = assertHttpUrl(groomFaceUrl, 'Groom face');
+  const tick = (phase, percent, label) => {
+    if (typeof onProgress === 'function') onProgress({phase, percent, label});
+  };
+
+  tick('couple', 8, 'Swapping faces on the couple still…');
+  const couple = await runReplicateImage({
+    prompt: coupleSwapPrompt(),
+    images: [pin, bride, groom],
+    model: FACE_SWAP_MODEL,
+    inputFidelity: 'high',
+    role: 'face-swap-couple',
+    env,
+    fetchImpl
+  });
+
+  tick('bride', 45, 'Crafting the bride portrait…');
+  const brideStill = await runReplicateImage({
+    prompt: brideSoloPrompt(),
+    images: [couple.url, bride],
+    model: FACE_SWAP_MODEL,
+    inputFidelity: 'high',
+    role: 'face-swap-bride',
+    env,
+    fetchImpl
+  });
+
+  tick('groom', 75, 'Crafting the groom portrait…');
+  const groomStill = await runReplicateImage({
+    prompt: groomSoloPrompt(),
+    images: [couple.url, groom],
+    model: FACE_SWAP_MODEL,
+    inputFidelity: 'high',
+    role: 'face-swap-groom',
+    env,
+    fetchImpl
+  });
+
+  tick('done', 95, 'Packaging portraits…');
+  return {
+    couple: {buffer: couple.buffer, url: couple.url, predictionId: couple.predictionId},
+    bride: {buffer: brideStill.buffer, url: brideStill.url, predictionId: brideStill.predictionId},
+    groom: {buffer: groomStill.buffer, url: groomStill.url, predictionId: groomStill.predictionId},
+    model: FACE_SWAP_MODEL
+  };
+}
+
+/** Normalize / persist faceSwap blob on invitation data (validateData must keep this). */
+export function normalizeFaceSwap(value) {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return undefined;
+  const coupleUrl = typeof value.coupleUrl === 'string' ? value.coupleUrl.trim() : '';
+  if (coupleUrl) {
+    try { assertHttpUrl(coupleUrl, 'Face Swap couple still'); } catch { return undefined; }
+  }
+  const out = {
+    status: typeof value.status === 'string' ? value.status.slice(0, 32) : 'ready',
+    model: typeof value.model === 'string' ? value.model.slice(0, 120) : FACE_SWAP_MODEL,
+    coupleUrl: coupleUrl || undefined,
+    brideUrl: typeof value.brideUrl === 'string' ? value.brideUrl.slice(0, 200) : undefined,
+    groomUrl: typeof value.groomUrl === 'string' ? value.groomUrl.slice(0, 200) : undefined,
+    updatedAt: typeof value.updatedAt === 'string' ? value.updatedAt.slice(0, 40) : undefined,
+    stub: Boolean(value.stub)
+  };
+  if (!out.coupleUrl && !out.brideUrl && !out.groomUrl) return undefined;
+  return out;
+}
+
+/**
+ * Apply inference outputs onto an invitation: photos[0]/[1] + faceSwap.coupleUrl override.
+ */
+export async function applyFaceSwapToInvitation({
+  slug,
+  token,
+  inference,
+  env = process.env
+} = {}) {
+  const row = await invitation(slug, token);
+  const stamp = Date.now();
+  const coupleUrl = await uploadPublicJpeg(
+    inference.couple.buffer,
+    'face-swap/' + row.id + '/couple-' + stamp + '.jpg',
+    {env}
+  );
+  await uploadPrivateSlot(row.id, 0, inference.bride.buffer, {env});
+  await uploadPrivateSlot(row.id, 1, inference.groom.buffer, {env});
+  const bridePath = '/api/media?slug=' + encodeURIComponent(slug) + '&slot=0';
+  const groomPath = '/api/media?slug=' + encodeURIComponent(slug) + '&slot=1';
+  const photos = Array.isArray(row.data.photos) ? row.data.photos.slice() : [];
+  while (photos.length < 2) photos.push(bridePath);
+  photos[0] = bridePath;
+  photos[1] = groomPath;
+  const faceSwap = normalizeFaceSwap({
+    status: 'ready',
+    model: inference.model || FACE_SWAP_MODEL,
+    coupleUrl,
+    brideUrl: bridePath,
+    groomUrl: groomPath,
+    updatedAt: new Date().toISOString(),
+    stub: faceSwapStubEnabled(env)
+  });
+  const nextData = {
+    ...row.data,
+    photos,
+    faceSwap
+  };
+  const rows = await db('invitations?id=eq.' + row.id, {
+    method: 'PATCH',
+    headers: {Prefer: 'return=representation'},
+    body: {data: nextData, updated_at: new Date().toISOString()}
+  });
+  return {
+    coupleUrl,
+    brideUrl: bridePath,
+    groomUrl: groomPath,
+    photos,
+    faceSwap,
+    invitation: rows?.[0] || row
+  };
+}
+
+
+async function resolveFaceRef(value, label, {env = process.env} = {}) {
+  const raw = String(value || '').trim();
+  if (!raw) throw new HttpError(400, label + ' is required.');
+  if (raw.startsWith('data:image/')) {
+    const match = /^data:image\/(jpeg|jpg|png|webp);base64,([A-Za-z0-9+/]+=*)$/i.exec(raw);
+    if (!match) throw new HttpError(400, label + ' must be a JPEG, PNG, or WebP data URL.');
+    const ext = match[1].toLowerCase() === 'jpg' ? 'jpeg' : match[1].toLowerCase();
+    const bytes = Buffer.from(match[2], 'base64');
+    if (bytes.length < 64 || bytes.length > 8 * 1024 * 1024) throw new HttpError(413, label + ' must be between 64B and 8MB.');
+    if (!env.BLOB_READ_WRITE_TOKEN) throw new HttpError(503, 'Photo uploads are not configured (BLOB_READ_WRITE_TOKEN).');
+    const blob = await put('face-swap/refs/' + Date.now() + '-' + Math.random().toString(36).slice(2, 8) + '.' + ext, bytes, {
+      access: 'public',
+      contentType: 'image/' + ext,
+      token: env.BLOB_READ_WRITE_TOKEN
+    });
+    return blob.url;
+  }
+  return assertHttpUrl(raw, label);
+}
+
+export async function startFaceSwapJob(body = {}, {env = process.env, fetchImpl = fetch, siteOrigin, templates} = {}) {
+  const cfg = faceSwapConfig(env);
+  if (!cfg.stub && !body.entitled) {
+    throw new HttpError(402, 'Face Swap is ₹300. Payment gateway ships with Launch 2.0 #11–12 — set FACE_SWAP_STUB=1 to test now.');
+  }
+  const pinUrl = resolvePinUrl({
+    pinUrl: body.pinUrl || body.pin_url,
+    templateId: body.templateId || body.template,
+    siteOrigin: siteOrigin || env.SITE_ORIGIN || body.siteOrigin,
+    templates
+  });
+  const brideFaceUrl = await resolveFaceRef(body.brideFaceUrl || body.bride_face_url || body.brideFaceDataUrl, 'Bride face', {env});
+  const groomFaceUrl = await resolveFaceRef(body.groomFaceUrl || body.groom_face_url || body.groomFaceDataUrl, 'Groom face', {env});
+  const slug = typeof body.slug === 'string' ? body.slug.trim() : '';
+  const token = typeof body.token === 'string' ? body.token.trim()
+    : (typeof body.managementToken === 'string' ? body.managementToken.trim() : '');
+  if (slug && !token) throw new HttpError(401, 'Management key required to write Face Swap onto the invitation.');
+
+  const id = newFaceSwapJobId();
+  const job = {
+    id,
+    status: 'running',
+    phase: 'queued',
+    percent: 1,
+    label: 'Queued…',
+    error: null,
+    result: null,
+    stub: cfg.stub,
+    createdAt: Date.now(),
+    updatedAt: Date.now(),
+    input: {pinUrl, brideFaceUrl, groomFaceUrl, slug: slug || null}
+  };
+  jobs.set(id, job);
+
+  const run = async () => {
+    try {
+      touch(job, {phase: 'couple', percent: 5, label: 'Swapping faces on the couple still…'});
+      const inference = await runFaceSwapInference({
+        pinUrl,
+        brideFaceUrl,
+        groomFaceUrl,
+        env,
+        fetchImpl,
+        onProgress: ({phase, percent, label}) => touch(job, {phase, percent, label})
+      });
+      let applied = null;
+      if (slug) {
+        touch(job, {phase: 'apply', percent: 96, label: 'Saving portraits to your invitation…'});
+        applied = await applyFaceSwapToInvitation({slug, token, inference, env});
+      } else {
+        touch(job, {phase: 'upload', percent: 96, label: 'Uploading preview stills…'});
+        const stamp = Date.now();
+        const coupleUrl = await uploadPublicJpeg(inference.couple.buffer, 'face-swap/preview/' + id + '/couple-' + stamp + '.jpg', {env});
+        const brideUrl = await uploadPublicJpeg(inference.bride.buffer, 'face-swap/preview/' + id + '/bride-' + stamp + '.jpg', {env});
+        const groomUrl = await uploadPublicJpeg(inference.groom.buffer, 'face-swap/preview/' + id + '/groom-' + stamp + '.jpg', {env});
+        applied = {
+          coupleUrl,
+          brideUrl,
+          groomUrl,
+          photos: [brideUrl, groomUrl],
+          faceSwap: normalizeFaceSwap({
+            status: 'ready',
+            coupleUrl,
+            brideUrl,
+            groomUrl,
+            model: FACE_SWAP_MODEL,
+            stub: cfg.stub,
+            updatedAt: new Date().toISOString()
+          })
+        };
+      }
+      touch(job, {
+        status: 'done',
+        phase: 'done',
+        percent: 100,
+        label: 'Face Swap ready',
+        result: applied
+      });
+    } catch (error) {
+      touch(job, {
+        status: 'failed',
+        phase: 'failed',
+        percent: job.percent || 0,
+        label: 'Face Swap failed',
+        error: error instanceof HttpError ? error.message : (error?.message || 'Face Swap failed')
+      });
+    }
+  };
+
+  const promise = run();
+  job.promise = promise;
+  return {job: jobView(job), promise};
+}
+
+export async function runFaceSwapJobAndWait(body = {}, opts = {}) {
+  const {job, promise} = await startFaceSwapJob(body, opts);
+  await promise;
+  const latest = getFaceSwapJob(job.jobId);
+  if (!latest || latest.status === 'failed') throw new HttpError(502, latest?.error || 'Face Swap failed');
+  return latest;
+}
+
+export {
+  coupleSwapPrompt,
+  brideSoloPrompt,
+  groomSoloPrompt,
+  FACE_SWAP_MODEL,
+  jobs as _faceSwapJobsForTests
+};
