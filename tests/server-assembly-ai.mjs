@@ -88,7 +88,7 @@ test('generate-pair requires session and imageUrl',async()=>{
 });
 
 test('sniff and public CDN URL prefer pinimg jpeg',async()=>{
- const {sniffImageFormat,preferPublicImageUrl,normalizeReferenceImage}=await import('../server/assembly-ai.mjs');
+ const {sniffImageFormat,preferPublicImageUrl,normalizeReferenceImage,rewritePrivateImageUrl}=await import('../server/assembly-ai.mjs');
  const jpeg=Buffer.from([0xff,0xd8,0xff,0xe0,0x00,0x10,0x4a,0x46,0x49,0x46]);
  assert.equal(sniffImageFormat(jpeg).ext,'.jpg');
  const image=normalizeReferenceImage({
@@ -100,17 +100,37 @@ test('sniff and public CDN URL prefer pinimg jpeg',async()=>{
  assert.equal(image.ext,'.jpg');
  assert.equal(preferPublicImageUrl(image),'https://i.pinimg.com/736x/ab/cd/ef/abcd.jpg');
  assert.equal(preferPublicImageUrl({sourceUrl:'https://www.pinterest.com/pin/123/'}), '');
- // Face-swap proxy ends with …jpg in the query — must NOT be treated as a public image URL.
- const proxy='https://findmyinvite.com/api/face-swap?action=file&url='+encodeURIComponent(
+ // Legacy Face-swap proxy (no ext on path) must not be treated as public.
+ const legacyProxy='https://findmyinvite.com/api/face-swap?action=file&url='+encodeURIComponent(
   'https://0p000etsgn9iq7q1.private.blob.vercel-storage.com/face-swap/preview/abc/couple-1.jpg'
  );
- assert.equal(preferPublicImageUrl({sourceUrl:proxy}),'');
+ assert.equal(preferPublicImageUrl({sourceUrl:legacyProxy}),'');
  assert.equal(preferPublicImageUrl({
   sourceUrl:'https://0p000etsgn9iq7q1.private.blob.vercel-storage.com/face-swap/preview/abc/couple-1.jpg'
  }),'');
+ // Replicate Files URLs end in .jpg but are auth-gated — never pass to xAI.
+ assert.equal(preferPublicImageUrl({
+  sourceUrl:'https://api.replicate.com/v1/files/ZDY4ODNlYjktNTg5ZS00YTA1LWEzZWQtYWUyODA3MDYwNDky.jpg'
+ }),'');
+ // New .jpg proxy is publicly fetchable and preferred.
+ const publicProxy='https://findmyinvite.com/api/face-swap/file.jpg?url='+encodeURIComponent(
+  'https://0p000etsgn9iq7q1.private.blob.vercel-storage.com/face-swap/preview/abc/couple-1.jpg'
+ );
+ assert.equal(preferPublicImageUrl({sourceUrl:publicProxy}),publicProxy);
  assert.equal(preferPublicImageUrl({
   sourceUrl:'https://public.blob.vercel-storage.com/face-swap/couple-1.jpg'
  }),'https://public.blob.vercel-storage.com/face-swap/couple-1.jpg');
+ assert.equal(
+  rewritePrivateImageUrl(legacyProxy,'https://findmyinvite.com'),
+  publicProxy
+ );
+ assert.equal(
+  rewritePrivateImageUrl(
+   'https://0p000etsgn9iq7q1.private.blob.vercel-storage.com/face-swap/preview/abc/couple-1.jpg',
+   'https://findmyinvite.com'
+  ),
+  publicProxy
+ );
 });
 
 test('generate-status 404 for unknown job',async()=>{

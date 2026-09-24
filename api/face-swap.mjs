@@ -19,7 +19,9 @@ function siteOriginFrom(req) {
 export default async function handler(req, res) {
   try {
     const url = new URL(req.url, 'https://findmyinvite.com');
-    const action = url.searchParams.get('action') || 'config';
+    // /api/face-swap/file.jpg?url=… (pathname has .jpg for xAI format sniff) → same as action=file
+    const action = url.searchParams.get('action')
+      || (/\/file\.(jpe?g|png|webp)$/i.test(url.pathname) ? 'file' : 'config');
 
     if (action === 'config') {
       method(req, ['GET']);

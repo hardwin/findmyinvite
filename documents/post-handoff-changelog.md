@@ -9,6 +9,7 @@ Soul: [akay-soul.md](akay-soul.md) · standing facts: [project-context.md](proje
 Read this before `docs/handoff/STATUS.md`. The v0.9.0 handoff is the frozen baseline; this file is the current truth after that tag.
 
 ## 2026-09-25 — Face Swap before Lock (Assembly craft)
+- **Template 1 plate1 fix (2):** Replicate Files URLs (`api.replicate.com/v1/files/….jpg`) are auth-gated — xAI grok-imagine fetches them bare and returns `Invalid image format ''`. Pins now use public `/api/face-swap/file.jpg?url=` (ext on path). Never hand Replicate Files URLs to xAI.
 - **Template 1 plate1 fix:** `preferPublicImageUrl` falsely accepted Face Swap proxy URLs (`.jpg` only in query). Replicate then saw path `/api/face-swap` → `Invalid image format ''`. Now reject `/api/face-swap` + private Blob; require ext on pathname so pin re-uploads to Replicate Files. Face upload cards keep local object URL for preview.
 - Face Swap Blob: store is **private** — client upload uses `access:"private"` (public caused CORS-masked 400). Same-origin `action=file` proxy for Replicate + previews.
 - Face Swap faces: **Blob client upload → https URL → start** (no base64 body; no compress). Upload cards fixed.

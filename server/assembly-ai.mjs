@@ -1,6 +1,7 @@
 import {createHash,randomBytes} from 'node:crypto';
 import {mkdir,writeFile} from 'node:fs/promises';
 import {join} from 'node:path';
+import {put} from '@vercel/blob';
 import OpenAI from 'openai';
 import {HttpError} from './core.mjs';
 import {fsWritesAllowed,INBOX_DIR} from './assembly.mjs';
@@ -278,13 +279,46 @@ export function normalizeReferenceImage(image){
  };
 }
 
+/** Public proxy path with a real image ext — xAI sniffs format from the URL path. */
+export function blobImageProxyUrl(blobUrl,siteOrigin){
+ const origin=String(siteOrigin||process.env.SITE_ORIGIN||'https://findmyinvite.com').replace(/\/$/,'');
+ return origin+'/api/face-swap/file.jpg?url='+encodeURIComponent(String(blobUrl||''));
+}
+
+/**
+ * Rewrite private Blob / legacy face-swap proxies into a publicly fetchable .jpg proxy URL.
+ * xAI grok-imagine cannot use Replicate Files API URLs (auth-gated → Invalid image format '').
+ */
+export function rewritePrivateImageUrl(url,siteOrigin){
+ const raw=String(url||'').trim();
+ if(!raw)return '';
+ let parsed;
+ try{parsed=new URL(raw);}catch{return '';}
+ const origin=String(siteOrigin||process.env.SITE_ORIGIN||'https://findmyinvite.com').replace(/\/$/,'');
+ // Already the public .jpg proxy
+ if(/\/api\/face-swap\/file\.(jpe?g|png|webp)$/i.test(parsed.pathname)&&parsed.searchParams.get('url'))return raw;
+ // Legacy proxy: /api/face-swap?action=file&url=…
+ if(/\/api\/face-swap$/i.test(parsed.pathname)&&parsed.searchParams.get('action')==='file'){
+  const target=parsed.searchParams.get('url');
+  if(target)return blobImageProxyUrl(target,origin);
+ }
+ // Vercel Blob (private or public host) — always proxy so xAI can fetch without a Blob token
+ if(parsed.hostname==='blob.vercel-storage.com'||/\.blob\.vercel-storage\.com$/i.test(parsed.hostname)){
+  return blobImageProxyUrl(raw,origin);
+ }
+ return '';
+}
+
 export function preferPublicImageUrl(image){
  const url=String(image?.sourceUrl||'').trim();
  if(!/^https:\/\//i.test(url))return '';
  let parsed;
  try{parsed=new URL(url);}catch{return '';}
- // Face-swap file proxy + private Blob look like “…jpg” in the query string but the
- // pathname has no image ext — Replicate then errors: Invalid image format ''.
+ // Replicate Files URLs look like …/files/{id}.jpg but require auth — xAI cannot fetch them.
+ if(/(^|\.)replicate\.com$/i.test(parsed.hostname))return '';
+ // Our public image proxy (pathname ends with file.jpg) is fetchable by xAI / Replicate.
+ if(/\/api\/face-swap\/file\.(jpe?g|png|webp)$/i.test(parsed.pathname)&&parsed.searchParams.get('url'))return url;
+ // Legacy face-swap proxy / other face-swap paths — no usable image ext on the path
  if(/\/api\/face-swap/i.test(parsed.pathname))return '';
  if(/\.private\.blob\.vercel-storage\.com$/i.test(parsed.hostname))return '';
  // Extension must live on the pathname, not buried in ?url=…jpg
@@ -319,15 +353,30 @@ function extnameSafe(name){
  return m?m[0]:'.jpg';
 }
 
+async function uploadPinToPublicProxy(image,{env=process.env}={}){
+ if(!env.BLOB_READ_WRITE_TOKEN){
+  throw new HttpError(503,'BLOB_READ_WRITE_TOKEN required to host pin images for xAI Imagine.');
+ }
+ const name='assembly-pins/'+Date.now()+'-'+randomBytes(4).toString('hex')+(image.ext||'.jpg');
+ const blob=await put(name,image.buffer,{
+  access:'private',
+  contentType:image.contentType||'image/jpeg',
+  token:env.BLOB_READ_WRITE_TOKEN
+ });
+ return blobImageProxyUrl(blob.url,env.SITE_ORIGIN||'https://findmyinvite.com');
+}
+
+/**
+ * Resolve a pin/reference to a URL xAI grok-imagine AND Replicate gpt-image can fetch.
+ * Never return auth-gated Replicate Files URLs — xAI sniffs them as format ''.
+ */
 export async function resolveReplicateImageUrl(image,{env=process.env,fetchImpl=fetch}={}){
  const normalized=normalizeReferenceImage(image);
  const publicUrl=preferPublicImageUrl(normalized);
  if(publicUrl)return publicUrl;
- return uploadReplicateFile(normalized.buffer,'reference'+normalized.ext,{
-  contentType:normalized.contentType,
-  env,
-  fetchImpl
- });
+ const rewritten=rewritePrivateImageUrl(normalized.sourceUrl,env.SITE_ORIGIN||'https://findmyinvite.com');
+ if(rewritten)return rewritten;
+ return uploadPinToPublicProxy(normalized,{env});
 }
 
 /** Public HTTPS for xAI last_frame, else a data URI the API can ingest. */

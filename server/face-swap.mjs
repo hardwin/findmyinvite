@@ -96,10 +96,14 @@ export function isVercelBlobUrl(value) {
   }
 }
 
-/** Same-origin proxy so Replicate (and <img>) can fetch private Blob objects. */
+/**
+ * Same-origin proxy so Replicate / xAI (and <img>) can fetch private Blob objects.
+ * Pathname MUST end with an image extension — grok-imagine sniffs format from the URL path
+ * (`Invalid image format ''` when the path is bare `/api/face-swap`).
+ */
 export function blobProxyUrl(blobUrl, siteOrigin) {
   const origin = String(siteOrigin || process.env.SITE_ORIGIN || 'https://findmyinvite.com').replace(/\/$/, '');
-  return origin + '/api/face-swap?action=file&url=' + encodeURIComponent(String(blobUrl));
+  return origin + '/api/face-swap/file.jpg?url=' + encodeURIComponent(String(blobUrl));
 }
 
 export function toFetchableUrl(url, siteOrigin) {

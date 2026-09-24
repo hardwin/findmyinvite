@@ -63,6 +63,10 @@
   ],
   "rewrites": [
     {
+      "source": "/api/face-swap/file.jpg",
+      "destination": "/api/face-swap?action=file"
+    },
+    {
       "source": "/assets/workspace/:id",
       "destination": "/api/workspace?action=asset&id=:id"
     },
