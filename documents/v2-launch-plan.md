@@ -227,6 +227,7 @@ Prime hero ~1–2s before opening ends; start `hero.play()`; run 400–800ms tra
 
 ## Decision log
 
+| 2026-09-24 | Overnight stop 02:56 IST. Morning EOD pack: **#6+#7 redesign/pages/widgets → #3 music library → #8 video prompts** | Ashok |
 | 2026-09-24 | **#2** Motifs use vendored SVG pack (Lucide ISC + FMI silhouettes), smaller + semi-transparent; research: Lucide / Kalocsai Unlicense / VectorBloom MIT | Ashok |
 
 

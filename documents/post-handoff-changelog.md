@@ -8,6 +8,16 @@ Soul: [akay-soul.md](akay-soul.md) · standing facts: [project-context.md](proje
 
 Read this before `docs/handoff/STATUS.md`. The v0.9.0 handoff is the frozen baseline; this file is the current truth after that tag.
 
+## Morning session lock — EOD 2026-09-24 (Ashok 02:56 IST)
+
+Stop for sleep. Next sit finishes **three slices by EOD**:
+
+1. **Redesign template + pages + widgets** (Launch 2.0 #6 + #7) — pilot Premium look, then pages/widgets
+2. **Music library** (Launch 2.0 #3, unlocks #4) — IG extracts, ≥5 tracks
+3. **Prompt improvement for videos** (Launch 2.0 #8) — FIRST/LAST/opening hit-rate
+
+Do not start coding until Ashok opens the morning session. **Order locked YES** (Ashok 02:58 IST).
+
 ## Hero name blur-in (2026-09-24)
 
 Couple names on the hero video overlay use Magic UI `TextAnimate` (`blurIn`, character stagger) when the overlay mounts after opening→hero handoff. Lazy-loaded; skipped for reduced-motion.

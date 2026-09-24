@@ -12,7 +12,7 @@ type Particle = {
   size: number;
   life: number;
   maxLife: number;
-  alpha: number; // base opacity 0.2–0.6
+  alpha: number;
   shape: MotifShape;
   color: string;
   fromTouch: boolean;
@@ -65,33 +65,59 @@ function spawn(kit: MotifKit, w: number, h: number, touch?: {x: number; y: numbe
   const color = kit.colors[Math.floor(Math.random() * kit.colors.length)];
   const fromTouch = Boolean(touch);
   const depthScale = .6 + (1 - z) * .55;
-  // Mix up/down drift so density stays even (not all rising to the top)
   const driftDir = Math.random() < .55 ? -1 : 1;
   return {
     x: touch ? touch.x + (Math.random() - .5) * 14 : Math.random() * w,
-    // Uniform vertical seed — not clustered at top
     y: touch ? touch.y + (Math.random() - .5) * 14 : Math.random() * h,
     z,
     vx: (Math.random() - .5) * .18 * kit.drift * depthScale,
     vy: driftDir * (.08 + Math.random() * .22) * kit.drift * depthScale,
     rot: Math.random() * Math.PI * 2,
     spin: (Math.random() - .5) * .012 * kit.drift,
-    // Slightly larger than previous tiny pass (~10–22px draw)
     size: (6 + Math.random() * 8) * depthScale * (fromTouch ? 1.25 : 1),
     life: 1,
     maxLife: fromTouch ? .9 + Math.random() * 1.1 : 1e9,
-    alpha: .2 + Math.random() * .4, // 20%–60%
+    alpha: .2 + Math.random() * .4,
     shape,
     color,
     fromTouch,
   };
 }
 
+/** Videos, photos, and plate sections — motifs are punched out of these rects. */
+function mediaRects(page: HTMLElement | null): DOMRect[] {
+  if (!page) return [];
+  const nodes = page.querySelectorAll(
+    [
+      'video',
+      'img',
+      '.invitation-hero',
+      '[class*="invite-plate-"]',
+      '.scratch-heart',
+      '.photo-slideshow',
+      '.classic-hero-photo',
+      '.gallery',
+      '.moments-gallery',
+      '.photo-grid',
+    ].join(','),
+  );
+  const out: DOMRect[] = [];
+  nodes.forEach((el) => {
+    const r = (el as HTMLElement).getBoundingClientRect();
+    if (r.width > 12 && r.height > 12) out.push(r);
+  });
+  return out;
+}
+
+function pointInRects(x: number, y: number, rects: DOMRect[]) {
+  return rects.some((r) => x >= r.left && x <= r.right && y >= r.top && y <= r.bottom);
+}
+
 type Props = {templateId: string; accent?: string; active: boolean};
 
 /**
- * Viewport-fixed SVG motifs. Positions stay in screen space so scroll does not
- * shove them to the top; touch/click spawns at the finger.
+ * Viewport-fixed SVG motifs. Visible on text-only sections; hole-punched under
+ * videos, images, and photo plates so they never sit on media.
  */
 export default function InviteMotifs({templateId, accent, active}: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -108,9 +134,14 @@ export default function InviteMotifs({templateId, accent, active}: Props) {
     const page = canvas.closest('.invitation-page') as HTMLElement | null;
 
     let w = 0, h = 0, scrollY = 0, frame = 0, last = performance.now();
+    let holes: DOMRect[] = [];
+    let holeTick = 0;
     const particles: Particle[] = [];
-    // Distinguish tap from scroll: only bloom if finger barely moved
     let down: {x: number; y: number; id: number} | null = null;
+
+    const refreshHoles = () => {
+      holes = mediaRects(page);
+    };
 
     const kit = kitRef.current;
     for (const shape of kit.shapes) {
@@ -126,16 +157,21 @@ export default function InviteMotifs({templateId, accent, active}: Props) {
       canvas.style.width = w + 'px';
       canvas.style.height = h + 'px';
       ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+      refreshHoles();
     };
 
     const seed = () => {
       particles.length = 0;
       const k = kitRef.current;
-      const count = reduced ? Math.min(16, Math.floor(k.density * .45)) : Math.floor(k.density * 1.25);
+      const count = reduced
+        ? Math.min(16, Math.floor(k.density * .45))
+        : Math.floor(k.density * 1.25);
       for (let i = 0; i < count; i++) particles.push(spawn(k, w, h));
     };
 
     const bloomAt = (clientX: number, clientY: number) => {
+      refreshHoles();
+      if (pointInRects(clientX, clientY, holes)) return;
       const rect = canvas.getBoundingClientRect();
       const x = clientX - rect.left;
       const y = clientY - rect.top;
@@ -154,28 +190,35 @@ export default function InviteMotifs({templateId, accent, active}: Props) {
 
     const onPointerDown = (e: PointerEvent) => {
       if (reduced) return;
-      if ((e.target as HTMLElement | null)?.closest('button,a,input,textarea,select,label,.sound-toggle,.language-toggle,.use-design,.skip-opening,.royal-open-target')) return;
+      if (
+        (e.target as HTMLElement | null)?.closest(
+          'button,a,input,textarea,select,label,.sound-toggle,.language-toggle,.use-design,.skip-opening,.royal-open-target',
+        )
+      )
+        return;
       down = {x: e.clientX, y: e.clientY, id: e.pointerId};
     };
 
     const onPointerUp = (e: PointerEvent) => {
       if (!down || down.id !== e.pointerId) return;
-      const dx = e.clientX - down.x;
-      const dy = e.clientY - down.y;
-      const moved = Math.hypot(dx, dy);
-      // Treat as tap if finger moved < 14px (scroll gestures move more)
+      const moved = Math.hypot(e.clientX - down.x, e.clientY - down.y);
       if (moved < 14) bloomAt(e.clientX, e.clientY);
       down = null;
     };
 
-    const onPointerCancel = () => {down = null;};
+    const onPointerCancel = () => {
+      down = null;
+    };
 
-    const onScroll = () => {scrollY = window.scrollY || page?.scrollTop || 0;};
+    const onScroll = () => {
+      scrollY = window.scrollY || page?.scrollTop || 0;
+      refreshHoles();
+    };
 
     resize();
     seed();
     onScroll();
-    // Listen on page + window so taps on invite content register (canvas is pointer-events:none)
+    refreshHoles();
     window.addEventListener('resize', resize);
     window.addEventListener('scroll', onScroll, {passive: true});
     page?.addEventListener('scroll', onScroll, {passive: true});
@@ -190,7 +233,6 @@ export default function InviteMotifs({templateId, accent, active}: Props) {
       return v;
     };
 
-    /** Keep even top→bottom fill: parallax offset wraps inside the viewport. */
     const wrapScreen = (v: number, max: number) => {
       const m = max || 1;
       return ((v % m) + m) % m;
@@ -199,6 +241,7 @@ export default function InviteMotifs({templateId, accent, active}: Props) {
     const draw = (now: number) => {
       const dt = Math.min((now - last) / 16.67, 2.5);
       last = now;
+      if (holeTick++ % 6 === 0) refreshHoles();
       ctx.clearRect(0, 0, w, h);
       const ordered = particles.slice().sort((a, b) => b.z - a.z);
       for (const p of ordered) {
@@ -214,7 +257,6 @@ export default function InviteMotifs({templateId, accent, active}: Props) {
         }
         const alpha = Math.max(0, Math.min(0.6, p.fromTouch ? p.life * p.alpha : p.alpha));
         if (alpha <= 0.02) continue;
-        // Touch blooms stay under the finger (viewport coords). Ambient gets wrapped parallax.
         const drawY = p.fromTouch
           ? p.y
           : wrapScreen(p.y - scrollY * (0.05 + p.z * 0.22), h);
@@ -227,6 +269,14 @@ export default function InviteMotifs({templateId, accent, active}: Props) {
           const s = p.size * 2.6;
           ctx.drawImage(img, -s / 2, -s / 2, s, s);
         }
+        ctx.restore();
+      }
+      // Punch motifs out of media so they only show on text/paper sections
+      if (holes.length) {
+        ctx.save();
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.fillStyle = '#000';
+        for (const r of holes) ctx.fillRect(r.left, r.top, r.width, r.height);
         ctx.restore();
       }
       for (let i = particles.length - 1; i >= 0; i--) {
@@ -249,5 +299,5 @@ export default function InviteMotifs({templateId, accent, active}: Props) {
   }, [active, templateId]);
 
   if (!active) return null;
-  return <canvas ref={canvasRef} className="invite-motifs" aria-hidden="true"/>;
+  return <canvas ref={canvasRef} className="invite-motifs" aria-hidden="true" />;
 }
