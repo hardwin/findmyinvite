@@ -8,6 +8,13 @@ Soul: [akay-soul.md](akay-soul.md) · standing facts: [project-context.md](proje
 
 Read this before `docs/handoff/STATUS.md`. The v0.9.0 handoff is the frozen baseline; this file is the current truth after that tag.
 
+## 2026-09-24 — Invite UX polish live (`c195193`)
+- Golden Wish heart scratch + leave-nudge (first escape pulses, second allows).
+- Motif wind + swipe impulse; back/mid/front canvases.
+- Pager unlock on `opened || heroLive` (not mid-opening).
+- Opening→hero: `HANDOFF_LEAD_S=3.5`, `VIDEO_TRANSITION_MS=250`, CSS `.25s` — covers opening still-tail.
+- Live: `/assets/index-DD2EX4HT.js` on findmyinvite.com. No SQL.
+
 ## Immersive invite scroll — Boat hybrid (2026-09-24)
 
 Below-hero invite body: Lenis + GSAP ScrollTrigger pinned chapters + Three.js depth stage (`InviteScrollStage`). DOM widgets stay interactive. Pilot feel for Premium (`royal-prestige-2`). Reduced-motion → static stack.
