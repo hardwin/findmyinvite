@@ -8,6 +8,10 @@ Soul: [akay-soul.md](akay-soul.md) · standing facts: [project-context.md](proje
 
 Read this before `docs/handoff/STATUS.md`. The v0.9.0 handoff is the frozen baseline; this file is the current truth after that tag.
 
+## Immersive invite scroll — Boat hybrid (2026-09-24)
+
+Below-hero invite body: Lenis + GSAP ScrollTrigger pinned chapters + Three.js depth stage (`InviteScrollStage`). DOM widgets stay interactive. Pilot feel for Premium (`royal-prestige-2`). Reduced-motion → static stack.
+
 ## Morning session lock — EOD 2026-09-24 (Ashok 02:56 IST)
 
 Stop for sleep. Next sit finishes **three slices by EOD**:
