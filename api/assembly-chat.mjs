@@ -100,7 +100,16 @@ export default async function handler(req,res){
   });
  }catch(error){
   console.error('assembly-chat handler',error?.status||error?.name,error?.message||error);
-  if(!res.headersSent)fail(res,error);
+  let out=error;
+  if(!(error instanceof HttpError)){
+   const msg=String(error?.message||error||'');
+   if(/data\.ts|ENOENT|no such file/i.test(msg)){
+    out=new HttpError(503,'Assembly chat is missing catalogue files on this host. Redeploy with src/data.ts included.');
+   }else if(msg){
+    out=new HttpError(500,msg.slice(0,300));
+   }
+  }
+  if(!res.headersSent)fail(res,out);
   else res.destroy();
  }
 }
