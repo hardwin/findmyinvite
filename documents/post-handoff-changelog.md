@@ -8,6 +8,11 @@ Soul: [akay-soul.md](akay-soul.md) · standing facts: [project-context.md](proje
 
 Read this before `docs/handoff/STATUS.md`. The v0.9.0 handoff is the frozen baseline; this file is the current truth after that tag.
 
+## 2026-09-25 — Fix prod mix_image “Tool result is missing”
+- Root cause: chat `mix` had fallen through to `gpt-image-2.5-flare`, blew the 120s chat limit, left a dangling tool call.
+- Fix: route `mix` → `xai/grok-imagine-image`; always return a tool result on mix failure; `ignoreIncompleteToolCalls` on convert; chat `maxDuration` 120→300.
+- **Prod ship:** `1104543` → Vercel READY · bundle still `/assets/index-P8NPzIOj.js` (API-only).
+
 ## 2026-09-25 — Still model → gpt-image-2.5-flare (speed)
 - Door-First / last / hero stills switched from `openai/gpt-image-2` → **`openai/gpt-image-2.5-flare`** (faster). Plates stay on `xai/grok-imagine-image`.
 

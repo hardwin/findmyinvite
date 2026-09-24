@@ -52,6 +52,44 @@ const SUGGESTIONS=[
  {emo:'🌸',text:'Talk me through the mood first — temple, garden, or modern glam?'}
 ];
 
+const IMAGE_TOOLS=new Set(['mix_image','regen_opening_still']);
+const IMAGE_TIMEOUT_MS=120_000;
+
+function formatElapsed(ms:number){
+ const total=Math.max(0,Math.floor(ms/1000));
+ const m=Math.floor(total/60);
+ const s=total%60;
+ if(m<=0)return s+'s';
+ return m+':'+String(s).padStart(2,'0');
+}
+
+function toolPartPending(part:Record<string,unknown>){
+ const state=String(part.state||'');
+ return !(
+  state==='output-available'||
+  state==='result'||
+  state==='output-error'||
+  state==='error'
+ );
+}
+
+function findPendingImageTool(messages:UIMessage[]){
+ for(let mi=messages.length-1;mi>=0;mi--){
+  const message=messages[mi];
+  if(message.role!=='assistant')continue;
+  const parts=message.parts||[];
+  for(let pi=parts.length-1;pi>=0;pi--){
+   const part=parts[pi] as Record<string,unknown> & {type:string};
+   if(!isToolUIPart(part as never))continue;
+   const name=getToolName(part as never);
+   if(!IMAGE_TOOLS.has(name))continue;
+   if(!toolPartPending(part))continue;
+   return {name,state:String(part.state||'running')};
+  }
+ }
+ return null;
+}
+
 function readSession(key:string){
  try{return sessionStorage.getItem(key)||'';}catch{return '';}
 }
@@ -153,15 +191,17 @@ function CameraIcon({size=20}:{size?:number}){
  );
 }
 
-function Stills({urls,label}:{urls:string[];label?:string}){
+function Stills({urls,label,size='default'}:{urls:string[];label?:string;size?:'default'|'pin'}){
  if(!urls.length)return null;
+ // iPhone 17 logical screen ≈ 402×874 CSS px; pin preview renders at 80% of that.
+ const pin=size==='pin';
  return (
-  <div className="asm-gpt-images" role="group" aria-label={label||'Images'}>
+  <div className={'asm-gpt-images'+(pin?' is-pin':'')} role="group" aria-label={label||'Images'}>
    {urls.map((url,i)=>(
-    <figure className="asm-gpt-still" key={url+'-'+i}>
+    <figure className={'asm-gpt-still'+(pin?' is-pin':'')} key={url+'-'+i}>
      <img src={url} alt={(label||'Image')+' '+(i+1)} loading="lazy"/>
      <figcaption>
-      <span>{label||'Image'}{urls.length>1?' '+(i+1):''}</span>
+      <span>{pin?'Pin preview':(label||'Image')}{!pin&&urls.length>1?' '+(i+1):''}</span>
       <a href={url} download target="_blank" rel="noreferrer">Download</a>
      </figcaption>
     </figure>
@@ -332,14 +372,38 @@ function JobCard({jobId,onUpdate}:{jobId:string;onUpdate?:(job:JobStatus)=>void}
  );
 }
 
+
+function toolStatusLabel(name:string,state:string,{pending,isImage,busy,elapsedMs}:{pending:boolean;isImage:boolean;busy:boolean;elapsedMs:number}){
+ const elapsed=busy&&elapsedMs?(' '+formatElapsed(elapsedMs)):'';
+ if(name==='mix_image'){
+  if(state==='input-available'||state==='input-streaming'||state==='partial-call'||state==='call'){
+   return 'Editing Image - Using Reference Image';
+  }
+  if(pending)return 'Editing Image - Generating'+elapsed;
+  return 'Editing Image - Done';
+ }
+ if(name==='resolve_pin'){
+  if(pending)return 'Importing from Pinterest'+elapsed;
+  return 'Importing from Pinterest - Done';
+ }
+ if(pending){
+  if(isImage)return name.replace(/_/g,' ')+' — generating'+elapsed;
+  return name.replace(/_/g,' ')+' — running'+elapsed;
+ }
+ if(state==='output-available'||state==='result')return name.replace(/_/g,' ')+' — done';
+ return name.replace(/_/g,' ')+' — '+(state.replace(/-/g,' ')||'done');
+}
+
 function MessageView({
  message,
  onChip,
- busy
+ busy,
+ elapsedMs=0
 }:{
  message:UIMessage;
  onChip:(text:string)=>void;
  busy:boolean;
+ elapsedMs?:number;
 }){
  const nodes:ReactNode[]=[];
  const parts=message.parts||[];
@@ -367,17 +431,23 @@ function MessageView({
   if(isToolUIPart(part as never)){
    const name=getToolName(part as never);
    const state=String(part.state||'');
+   const pending=toolPartPending(part);
    const output=toolPayload(part);
    const urls=[...new Set(collectUrls(output))];
    const foundJob=typeof output?.jobId==='string'?output.jobId:'';
+   const isImage=IMAGE_TOOLS.has(name);
    nodes.push(
-    <div className="asm-gpt-tool" key={message.id+'-tool-'+i}>
-     <strong>{name}</strong>
-     {' · '}
-     {state==='output-available'||state==='result'?'done':(state.replace(/-/g,' ')||'running')}
+    <div className={'asm-gpt-tool'+(pending&&isImage?' is-image':'')} key={message.id+'-tool-'+i}>
+     {toolStatusLabel(name,state,{pending,isImage,busy,elapsedMs})}
     </div>
    );
-   if(urls.length)nodes.push(<Stills key={message.id+'-img-'+i} urls={urls} label={name}/>);
+   if(urls.length){
+    const pinUrls=name==='resolve_pin'
+     ?([typeof output?.previewUrl==='string'?output.previewUrl:'',typeof output?.imageUrl==='string'?output.imageUrl:''].filter(Boolean) as string[])
+     :urls;
+    const show=pinUrls.length?pinUrls:urls;
+    nodes.push(<Stills key={message.id+'-img-'+i} urls={show} label={name} size={name==='resolve_pin'?'pin':'default'}/>);
+   }
    if(foundJob)nodes.push(<JobCard key={message.id+'-job-'+i} jobId={foundJob}/>);
    if(name==='list_music'&&Array.isArray(output?.tracks)){
     const tracks=output.tracks as Array<{id?:string;displayName?:string}>;
@@ -492,10 +562,37 @@ export default function AssemblyChat({
 
  const busy=status==='submitted'||status==='streaming';
  const hasThread=messages.some(m=>m.role==='user'||Boolean(messageText(m)));
+ const pendingImage=useMemo(()=>findPendingImageTool(messages),[messages]);
+ const [elapsedMs,setElapsedMs]=useState(0);
+ const [imageTimeout,setImageTimeout]=useState(false);
+ const inferStartedAt=useRef<number|null>(null);
+ const imageTimedOutRef=useRef(false);
+
+ useEffect(()=>{
+  if(busy){
+   if(!inferStartedAt.current)inferStartedAt.current=Date.now();
+   imageTimedOutRef.current=false;
+   setImageTimeout(false);
+   const tick=()=>setElapsedMs(Date.now()-(inferStartedAt.current||Date.now()));
+   tick();
+   const id=window.setInterval(tick,250);
+   return ()=>window.clearInterval(id);
+  }
+  inferStartedAt.current=null;
+  setElapsedMs(0);
+ },[busy]);
+
+ useEffect(()=>{
+  if(!busy||!pendingImage||imageTimedOutRef.current)return;
+  if(elapsedMs<IMAGE_TIMEOUT_MS)return;
+  imageTimedOutRef.current=true;
+  setImageTimeout(true);
+  try{stop();}catch{/* */}
+ },[busy,pendingImage,elapsedMs,stop]);
 
  useEffect(()=>{
   bottomRef.current?.scrollIntoView({behavior:'smooth',block:'end'});
- },[messages,status,attachments.length]);
+ },[messages,status,attachments.length,elapsedMs,imageTimeout]);
 
  useEffect(()=>{
   if(!error)return;
@@ -572,6 +669,8 @@ export default function AssemblyChat({
   setInput('');
   setAttachments([]);
   setLocalError('');
+  setImageTimeout(false);
+  imageTimedOutRef.current=false;
   setJobId('');
   writeSession(JOB_KEY,'');
   writeSession(CHAT_KEY,id);
@@ -592,6 +691,8 @@ export default function AssemblyChat({
   setInput('');
   setAttachments([]);
   setLocalError('');
+  setImageTimeout(false);
+  imageTimedOutRef.current=false;
   setNavOpen(false);
  }
 
@@ -734,7 +835,7 @@ export default function AssemblyChat({
          const text=messageText(message);
          return (
           <article className="asm-gpt-msg" data-role={message.role} key={message.id}>
-           <MessageView message={message} onChip={sendChip} busy={busy}/>
+           <MessageView message={message} onChip={sendChip} busy={busy} elapsedMs={elapsedMs}/>
            {message.role==='assistant'&&text&&(
             <div className="asm-gpt-actions">
              <button type="button" className="asm-gpt-act" aria-label="Copy" onClick={()=>void copyText(text)}>
@@ -749,7 +850,32 @@ export default function AssemblyChat({
          );
         })}
         {jobId&&<JobCard jobId={jobId} onUpdate={job=>{if(job.jobId)setJobId(job.jobId);}}/>}
-        {busy&&<p className="asm-gpt-status">Thinking…</p>}
+        {imageTimeout?(
+         <div className="asm-gpt-timeout" role="alert">
+          <p>Sorry, I am currently facing problem generating the images, you can resume again after some time.</p>
+          <button
+           type="button"
+           className="asm-gpt-try"
+           disabled={busy}
+           onClick={()=>{
+            setImageTimeout(false);
+            imageTimedOutRef.current=false;
+            sendChip('Try Now — please resume generating the image from where we left off.');
+           }}
+          >
+           Try Now
+          </button>
+         </div>
+        ):busy?(
+         <p className="asm-gpt-status" aria-live="polite">
+          {pendingImage?'Generating image…':'Thinking…'}
+          {' '}
+          <span className="asm-gpt-elapsed">{formatElapsed(elapsedMs)}</span>
+          {pendingImage&&elapsedMs>=90_000&&elapsedMs<IMAGE_TIMEOUT_MS?(
+           <span className="asm-gpt-elapsed-warn"> · almost at the 2 min limit</span>
+          ):null}
+         </p>
+        ):null}
         <div ref={bottomRef}/>
        </div>
        {composer}

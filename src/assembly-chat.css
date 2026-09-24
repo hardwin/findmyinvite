@@ -87,6 +87,22 @@
 .asm-gpt-still img{display:block;width:100%;aspect-ratio:9/16;object-fit:cover}
 .asm-gpt-still figcaption{display:flex;justify-content:space-between;gap:8px;padding:6px 8px;font-size:11px;color:var(--muted2)}
 .asm-gpt-still a{color:var(--text);text-decoration:none}
+
+/* Pin preview: 80% of iPhone 17 logical screen (402×874) */
+.asm-gpt-images.is-pin{
+  width:min(100%,calc(402px * 0.8));
+  max-width:calc(402px * 0.8);
+  grid-template-columns:1fr;
+  margin:0 auto 0 0;
+}
+.asm-gpt-still.is-pin img{
+  width:100%;
+  aspect-ratio:9/16;
+  max-height:calc(874px * 0.8);
+  object-fit:cover;
+  object-position:center;
+}
+
 .asm-gpt-iterate{appearance:none;border:0;border-top:1px solid var(--border);background:#fff;color:var(--text);padding:8px 10px;font:500 12px/1.2 var(--font);cursor:pointer;width:100%}
 .asm-gpt-iterate:hover:not(:disabled){background:var(--bubble)}
 .asm-gpt-iterate:disabled{opacity:.45;cursor:not-allowed}
@@ -103,6 +119,14 @@
 .asm-gpt-approve:disabled{opacity:.45;cursor:not-allowed}
 .asm-gpt-alert{margin:0;color:#b42318;font-size:13px}
 .asm-gpt-status{margin:0;font-size:13px;color:var(--muted)}
+.asm-gpt-elapsed{font-variant-numeric:tabular-nums;font-weight:500;color:var(--muted2)}
+.asm-gpt-elapsed-warn{color:#b54708}
+.asm-gpt-timeout{width:100%;max-width:560px;display:flex;flex-direction:column;gap:10px;padding:12px 14px;border:1px solid #fecdca;border-radius:14px;background:#fef3f2}
+.asm-gpt-timeout p{margin:0;font-size:14px;line-height:1.45;color:#b42318}
+.asm-gpt-try{appearance:none;align-self:flex-start;border:0;border-radius:9999px;padding:10px 16px;background:#0d0d0d;color:#fff;font:500 13px/1 var(--font);cursor:pointer}
+.asm-gpt-try:hover:not(:disabled){background:#222}
+.asm-gpt-try:disabled{opacity:.45;cursor:not-allowed}
+.asm-gpt-tool.is-image{background:#fff7ed;color:#9a3412}
 
 .asm-gpt-composer{flex:0 0 auto;padding:8px 16px calc(14px + env(safe-area-inset-bottom));display:flex;justify-content:center}
 .asm-gpt-composer-box{width:100%;max-width:720px;display:flex;flex-direction:column;gap:8px}

@@ -93,6 +93,18 @@ function assertHttpUrl(value){
  return parsed.toString();
 }
 
+const IMAGE_MIX_TIMEOUT_MS=Number(process.env.ASSEMBLY_CHAT_IMAGE_TIMEOUT_MS||110000);
+
+function withTimeout(promise,ms,label){
+ return new Promise((resolve,reject)=>{
+  const timer=setTimeout(()=>reject(new Error(label+' timed out after '+Math.round(ms/1000)+'s.')),ms);
+  Promise.resolve(promise).then(
+   value=>{clearTimeout(timer);resolve(value);},
+   error=>{clearTimeout(timer);reject(error);}
+  );
+ });
+}
+
 export function buildAssemblyChatTools({env=process.env,fetchImpl=fetch,parentId=''}={}){
  return {
   resolve_pin:tool({
@@ -168,7 +180,7 @@ export function buildAssemblyChatTools({env=process.env,fetchImpl=fetch,parentId
    }),
    execute:async(input)=>{
     try{
-     const result=await mixAssemblyImage({
+     const result=await withTimeout(mixAssemblyImage({
       pinUrl:input.pinUrl,
       referenceUrls:input.referenceUrls||[],
       styleTwist:input.styleTwist||'',
@@ -177,7 +189,7 @@ export function buildAssemblyChatTools({env=process.env,fetchImpl=fetch,parentId
       provider:input.provider||'auto',
       env,
       fetchImpl
-     });
+     }),IMAGE_MIX_TIMEOUT_MS,'Image mix');
      return {
       ok:true,
       urls:result.urls,
