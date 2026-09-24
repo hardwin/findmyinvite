@@ -135,6 +135,18 @@ function needsApproval(job:Pick<JobStatus,'status'|'phase'|'stills'>){
  const has=Boolean(job.stills?.first&&job.stills?.last);
  return (status==='failed'||status==='cancelled')&&has;
 }
+function canRetryJob(job:Pick<JobStatus,'status'|'error'>){
+ const status=String(job.status||'');
+ if(status==='failed'||status==='cancelled')return true;
+ if((status==='running'||status==='queued')&&job.error)return true;
+ return false;
+}
+function canDiscardJob(job:Pick<JobStatus,'status'|'percent'>){
+ const status=String(job.status||'');
+ if(status==='failed'||status==='cancelled'||status==='queued')return true;
+ if(status==='running'&&Number(job.percent||0)===0)return true;
+ return false;
+}
 function fileToDataUrl(file:File){
  return new Promise<string>((resolve,reject)=>{
   const reader=new FileReader();
@@ -191,17 +203,35 @@ function CameraIcon({size=20}:{size?:number}){
  );
 }
 
-function Stills({urls,label,size='default'}:{urls:string[];label?:string;size?:'default'|'pin'}){
+function isVideoUrl(url:string){
+ return /\.(mp4|webm|mov|m4v)(\?|$)/i.test(url)||/(^|\/)video([\/?]|$)/i.test(url);
+}
+
+function MediaPreview({url,label}:{url:string;label:string}){
+ if(isVideoUrl(url)){
+  return (
+   <video
+    src={url}
+    controls
+    playsInline
+    preload="metadata"
+    aria-label={label}
+   />
+  );
+ }
+ return <img src={url} alt={label} loading="lazy"/>;
+}
+
+function Stills({urls,label}:{urls:string[];label?:string}){
  if(!urls.length)return null;
- // iPhone 17 logical screen ≈ 402×874 CSS px; pin preview renders at 80% of that.
- const pin=size==='pin';
+ // Every preview (image or video) is 80% of iPhone 17 logical screen — see assembly-chat.css.
  return (
-  <div className={'asm-gpt-images'+(pin?' is-pin':'')} role="group" aria-label={label||'Images'}>
+  <div className="asm-gpt-images" role="group" aria-label={label||'Preview'}>
    {urls.map((url,i)=>(
-    <figure className={'asm-gpt-still'+(pin?' is-pin':'')} key={url+'-'+i}>
-     <img src={url} alt={(label||'Image')+' '+(i+1)} loading="lazy"/>
+    <figure className="asm-gpt-still" key={url+'-'+i}>
+     <MediaPreview url={url} label={(label||'Preview')+(urls.length>1?' '+(i+1):'')}/>
      <figcaption>
-      <span>{pin?'Pin preview':(label||'Image')}{!pin&&urls.length>1?' '+(i+1):''}</span>
+      <span>{label||(isVideoUrl(url)?'Video':'Image')}{urls.length>1?' '+(i+1):''}</span>
       <a href={url} download target="_blank" rel="noreferrer">Download</a>
      </figcaption>
     </figure>
@@ -227,7 +257,7 @@ function ReviewStills({
   <div className="asm-gpt-images" role="group" aria-label="Opening stills">
    {first&&(
     <figure className="asm-gpt-still">
-     <img src={first} alt="Door-First" loading="lazy"/>
+     <MediaPreview url={first} label="Door-First"/>
      <figcaption>
       <span>Door-First</span>
       <a href={first} download target="_blank" rel="noreferrer">Download</a>
@@ -246,7 +276,7 @@ function ReviewStills({
    )}
    {last&&(
     <figure className="asm-gpt-still">
-     <img src={last} alt="Last still" loading="lazy"/>
+     <MediaPreview url={last} label="Last still"/>
      <figcaption>
       <span>Last</span>
       <a href={last} download target="_blank" rel="noreferrer">Download</a>
@@ -267,7 +297,7 @@ function ReviewStills({
  );
 }
 
-function JobCard({jobId,onUpdate}:{jobId:string;onUpdate?:(job:JobStatus)=>void}){
+function JobCard({jobId,onUpdate,onDismiss}:{jobId:string;onUpdate?:(job:JobStatus)=>void;onDismiss?:()=>void}){
  const [job,setJob]=useState<JobStatus|null>(null);
  const [err,setErr]=useState('');
  const [busy,setBusy]=useState(false);
@@ -337,9 +367,55 @@ function JobCard({jobId,onUpdate}:{jobId:string;onUpdate?:(job:JobStatus)=>void}
   }
  }
 
+ async function retry(){
+  if(!job||busy)return;
+  setBusy(true);
+  setErr('');
+  try{
+   const res=await fetch('/api/assembly?action=template1-retry',{
+    method:'POST',
+    credentials:'same-origin',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({jobId:job.jobId||jobId})
+   });
+   const body=await res.json().catch(()=>({}));
+   if(!res.ok)throw new Error(body.error||'Retry failed.');
+   setJob(body);
+   onUpdate?.(body);
+  }catch(error){
+   setErr(error instanceof Error?error.message:'Retry failed.');
+  }finally{
+   setBusy(false);
+  }
+ }
+
+ async function discard(){
+  if(!job||busy)return;
+  if(!window.confirm('Discard this job?'))return;
+  setBusy(true);
+  setErr('');
+  try{
+   const res=await fetch('/api/assembly?action=template1-discard',{
+    method:'POST',
+    credentials:'same-origin',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({jobId:job.jobId||jobId})
+   });
+   const body=await res.json().catch(()=>({}));
+   if(!res.ok)throw new Error(body.error||'Discard failed.');
+   writeSession(JOB_KEY,'');
+   onDismiss?.();
+  }catch(error){
+   setErr(error instanceof Error?error.message:'Discard failed.');
+  }finally{
+   setBusy(false);
+  }
+ }
+
  const percent=Math.max(4,Math.min(100,Number(job?.percent)||4));
  const vibe=String(job?.displayName||'').trim();
  const reviewing=Boolean(job&&needsApproval(job));
+ const showOps=Boolean(job&&(canRetryJob(job)||canDiscardJob(job)||onDismiss));
 
  return (
   <div className="asm-gpt-job">
@@ -379,6 +455,25 @@ function JobCard({jobId,onUpdate}:{jobId:string;onUpdate?:(job:JobStatus)=>void}
     </div>
    )}
    {job?.error&&<p className="asm-gpt-alert" role="alert">{job.error}</p>}
+   {showOps&&(
+    <div className="asm-gpt-chips asm-gpt-job-ops">
+     {job&&canRetryJob(job)&&(
+      <button type="button" className="asm-gpt-chip" disabled={busy} onClick={()=>void retry()}>
+       {busy?'Retrying…':'Retry'}
+      </button>
+     )}
+     {job&&canDiscardJob(job)&&(
+      <button type="button" className="asm-gpt-chip asm-gpt-chip-danger" disabled={busy} onClick={()=>void discard()}>
+       Discard
+      </button>
+     )}
+     {onDismiss&&(
+      <button type="button" className="asm-gpt-chip" disabled={busy} onClick={()=>{writeSession(JOB_KEY,'');onDismiss();}}>
+       Close
+      </button>
+     )}
+    </div>
+   )}
   </div>
  );
 }
@@ -511,7 +606,7 @@ function MessageView({
      ?([typeof output?.previewUrl==='string'?output.previewUrl:'',typeof output?.imageUrl==='string'?output.imageUrl:''].filter(Boolean) as string[])
      :urls;
     const show=pinUrls.length?pinUrls:urls;
-    nodes.push(<Stills key={message.id+'-img-'+i} urls={show} label={name} size={name==='resolve_pin'?'pin':'default'}/>);
+    nodes.push(<Stills key={message.id+'-img-'+i} urls={show} label={name}/>);
    }
    if(foundJob)nodes.push(<JobCard key={message.id+'-job-'+i} jobId={foundJob}/>);
    if(name==='list_music'&&Array.isArray(output?.tracks)){
@@ -608,6 +703,10 @@ export default function AssemblyChat({
  });
 
  const bottomRef=useRef<HTMLDivElement|null>(null);
+ const scrollRef=useRef<HTMLDivElement|null>(null);
+ const fieldRef=useRef<HTMLTextAreaElement|null>(null);
+ const shellRef=useRef<HTMLDivElement|null>(null);
+ const stickToBottomRef=useRef(true);
  const fileRef=useRef<HTMLInputElement|null>(null);
  const cameraRef=useRef<HTMLInputElement|null>(null);
  const skipPersist=useRef(false);
@@ -677,9 +776,74 @@ export default function AssemblyChat({
   try{stop();}catch{/* */}
  },[busy,pendingImage,elapsedMs,stop]);
 
+ function isNearBottom(scroller:HTMLElement,slack=120){
+  return scroller.scrollHeight-scroller.scrollTop-scroller.clientHeight<=slack;
+ }
+
+ function scrollThreadToEnd(smooth=true,{force=false}:{force?:boolean}={}){
+  const scroller=scrollRef.current;
+  if(!scroller)return;
+  if(!force&&!stickToBottomRef.current)return;
+  scroller.scrollTo({top:scroller.scrollHeight,behavior:smooth?'smooth':'auto'});
+ }
+
+ function resizeComposerField(){
+  const el=fieldRef.current;
+  if(!el)return;
+  el.style.height='auto';
+  const max=Math.round(16*1.4*8); // 8 lines @ 16px/1.4
+  el.style.height=Math.min(el.scrollHeight,max)+'px';
+ }
+
  useEffect(()=>{
-  bottomRef.current?.scrollIntoView({behavior:'smooth',block:'end'});
- },[messages,status,attachments.length,elapsedMs,imageTimeout]);
+  const scroller=scrollRef.current;
+  if(!scroller)return;
+  const onScroll=()=>{
+   // User scrolled up to read history → stop yanking them to the bottom while Grok thinks.
+   stickToBottomRef.current=isNearBottom(scroller);
+  };
+  scroller.addEventListener('scroll',onScroll,{passive:true});
+  stickToBottomRef.current=isNearBottom(scroller);
+  return ()=>scroller.removeEventListener('scroll',onScroll);
+ },[chatId,hasThread]);
+
+ useEffect(()=>{
+  // Follow new tokens only if the reader is already parked near the bottom.
+  // Never depend on elapsedMs — that fired every 250ms and fought manual scroll-up.
+  scrollThreadToEnd(status==='streaming'?false:true);
+ },[messages,status,attachments.length]);
+
+ useEffect(()=>{
+  resizeComposerField();
+ },[input]);
+
+ useEffect(()=>{
+  const shell=shellRef.current;
+  const vv=window.visualViewport;
+  if(!shell)return;
+  const sync=()=>{
+   if(!vv){
+    shell.style.setProperty('--kb-inset','0px');
+    shell.style.setProperty('--vv-height',window.innerHeight+'px');
+    return;
+   }
+   // iOS/Android: layout viewport stays tall; visual viewport shrinks under the keyboard.
+   const inset=Math.max(0,window.innerHeight-vv.height-vv.offsetTop);
+   shell.style.setProperty('--kb-inset',inset+'px');
+   shell.style.setProperty('--vv-height',Math.round(vv.height)+'px');
+  };
+  sync();
+  vv?.addEventListener('resize',sync);
+  vv?.addEventListener('scroll',sync);
+  window.addEventListener('focusin',sync);
+  window.addEventListener('focusout',sync);
+  return ()=>{
+   vv?.removeEventListener('resize',sync);
+   vv?.removeEventListener('scroll',sync);
+   window.removeEventListener('focusin',sync);
+   window.removeEventListener('focusout',sync);
+  };
+ },[]);
 
  useEffect(()=>{
   if(!error)return;
@@ -707,7 +871,9 @@ export default function AssemblyChat({
 
  const sendChip=useCallback((text:string)=>{
   if(!text.trim()||busy)return;
+  stickToBottomRef.current=true;
   void sendMessage({text:text.trim()});
+  requestAnimationFrame(()=>scrollThreadToEnd(false,{force:true}));
  },[busy,sendMessage]);
 
  async function addFiles(list:FileList|null,kind:'ref'|'hero'='ref'){
@@ -737,6 +903,11 @@ export default function AssemblyChat({
   const payload=[text,lines].filter(Boolean).join('\n\n');
   setInput('');
   setAttachments([]);
+  stickToBottomRef.current=true;
+  requestAnimationFrame(()=>{
+   if(fieldRef.current)fieldRef.current.style.height='auto';
+   scrollThreadToEnd(false,{force:true});
+  });
   try{await sendMessage({text:payload});}
   catch(err){setLocalError(err instanceof Error?err.message:'Could not send.');}
  }
@@ -810,13 +981,33 @@ export default function AssemblyChat({
       <Icon d="M12 5v14M5 12h14" size={20}/>
      </button>
      <textarea
+      ref={fieldRef}
       className="asm-gpt-field"
       rows={1}
       placeholder={hasThread?'Ask Assembly':'Ask Assembly…'}
       value={input}
       disabled={busy}
-      onChange={(event:ChangeEvent<HTMLTextAreaElement>)=>setInput(event.target.value)}
+      enterKeyHint="send"
+      inputMode="text"
+      autoComplete="off"
+      autoCorrect="on"
+      autoCapitalize="sentences"
+      spellCheck
+      onChange={(event:ChangeEvent<HTMLTextAreaElement>)=>{
+       setInput(event.target.value);
+       // Grow immediately on the same tick (before React paint) for less friction.
+       const el=event.currentTarget;
+       el.style.height='auto';
+       el.style.height=Math.min(el.scrollHeight,Math.round(16*1.4*8))+'px';
+      }}
       onKeyDown={onKeyDown}
+      onFocus={()=>{
+       // Keyboard inset is handled by visualViewport. Only nudge the thread if
+       // the reader was already following the bottom — never yank them out of history.
+       if(!stickToBottomRef.current)return;
+       window.setTimeout(()=>scrollThreadToEnd(false),50);
+       window.setTimeout(()=>scrollThreadToEnd(false),300);
+      }}
       aria-label="Message"
      />
      <button type="button" className="asm-gpt-round asm-gpt-camera" aria-label="Camera" disabled={busy} onClick={()=>cameraRef.current?.click()}>
@@ -839,7 +1030,7 @@ export default function AssemblyChat({
  );
 
  return (
-  <div className={'asm-gpt'+(navOpen?' is-open':'')} data-testid="asm-chat">
+  <div ref={shellRef} className={'asm-gpt'+(navOpen?' is-open':'')} data-testid="asm-chat">
    <button type="button" className="asm-gpt-backdrop" aria-label="Close menu" onClick={()=>setNavOpen(false)}/>
 
    <aside className="asm-gpt-side" aria-label="Chat history">
@@ -897,12 +1088,11 @@ export default function AssemblyChat({
      </div>
     </header>
 
-    <div className="asm-gpt-scroll" role="log" aria-live="polite">
+        <div className="asm-gpt-scroll" ref={scrollRef} role="log" aria-live="polite">
      {!hasThread?(
       <div className="asm-gpt-home">
        <h1>What&apos;s on your mind today?</h1>
        <div className="asm-gpt-home-col">
-        {composer}
         <ul className="asm-gpt-suggestions">
          {SUGGESTIONS.map(item=>(
           <li key={item.text}>
@@ -916,8 +1106,8 @@ export default function AssemblyChat({
        </div>
       </div>
      ):(
-      <>
-       <div className="asm-gpt-thread">
+      <div className="asm-gpt-thread">
+
         {messages.map(message=>{
          const text=messageText(message);
          return (
@@ -936,7 +1126,7 @@ export default function AssemblyChat({
           </article>
          );
         })}
-        {jobId&&<JobCard jobId={jobId} onUpdate={job=>{if(job.jobId)setJobId(job.jobId);}}/>}
+        {jobId&&<JobCard jobId={jobId} onUpdate={job=>{if(job.jobId)setJobId(job.jobId);}} onDismiss={()=>setJobId('')}/>}
         {imageTimeout?(
          <ChoicePrompt
           tone="alert"
@@ -964,11 +1154,10 @@ export default function AssemblyChat({
          </p>
         ):null}
         <div ref={bottomRef}/>
-       </div>
-       {composer}
-      </>
+      </div>
      )}
     </div>
+    {composer}
    </section>
   </div>
  );

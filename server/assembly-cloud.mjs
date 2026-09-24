@@ -278,6 +278,71 @@ export async function discardCloudTemplate1Job(jobId,{env=process.env,fetchImpl=
  return discardAssemblyJob(jobId,{env,fetchImpl});
 }
 
+/** True when operator can re-launch the same job id from saved input. */
+export function cloudJobCanRetry(row){
+ if(!row)return false;
+ const status=String(row.status||'');
+ if(status==='failed'||status==='cancelled')return true;
+ if(status==='preview'||status==='discarded'||status==='review')return false;
+ if((status==='running'||status==='queued')&&(row.error||row.cancel_requested))return true;
+ return false;
+}
+
+/**
+ * Re-run a failed/stuck cloud Template 1 job with the same jobId + saved input.
+ * Resets progress, spins a fresh sandbox, continues the workflow from pin/prompts.
+ */
+export async function retryCloudTemplate1Job(jobId,{env=process.env,fetchImpl=fetch,launchImpl=defaultLaunchSandbox}={}){
+ if(!cloudAssemblyEnabled(env)){
+  throw new HttpError(503,'Cloud Assembly is not configured ('+cloudMissing(env).join(', ')+').');
+ }
+ const id=String(jobId||'');
+ const row=await getAssemblyJob(id,{env,fetchImpl});
+ if(!row)throw new HttpError(404,'Job not found.');
+ if(!cloudJobCanRetry(row)){
+  throw new HttpError(409,'Only failed or stuck jobs can be retried. Use Resume push if GitHub push stalled.');
+ }
+ const input=validateTemplate1Input(row.input||{});
+ const secret=newCallbackSecret();
+ const budget=Number(input.budgetUsd)||Number(row.spend?.budget)||4;
+ const view=await patchAssemblyJob(id,{
+  status:'queued',
+  phase:'queued',
+  percent:0,
+  label:'Retrying…',
+  detail:'Re-launching Vercel Sandbox…',
+  spend:{budget,used:0,remaining:budget},
+  palette:null,
+  assets:{},
+  written:[],
+  cloneId:null,
+  demo:null,
+  branch:null,
+  githubUrl:null,
+  previewUrl:null,
+  sandboxId:null,
+  cancelRequested:false,
+  moderationStop:false,
+  error:null,
+  callbackSecretHash:hashSecret(secret)
+ },{env,fetchImpl});
+
+ schedule((async()=>{
+  try{
+   const sandboxId=await launchImpl({jobId:id,secret,input,env,fetchImpl});
+   if(sandboxId){
+    await patchAssemblyJob(id,{sandboxId,status:'running'},{env,fetchImpl});
+   }
+  }catch(error){
+   const message=error instanceof Error?error.message:'Could not restart Vercel Sandbox.';
+   console.error('cloud assembly retry launch failed',id,message);
+   await reportLaunchFailure(id,secret,message,{env,fetchImpl});
+  }
+ })());
+
+ return {jobId:id,spend:view?.spend||{budget,used:0,remaining:budget},cloud:true,retried:true};
+}
+
 /** Resume after a git-push failure: reuse the live Sandbox tree (no re-gen). */
 export async function resumeCloudPush(jobId,{env=process.env,fetchImpl=fetch}={}){
  if(!cloudAssemblyEnabled(env)){

@@ -13,7 +13,7 @@ import {
  ROOT
 } from '../server/assembly.mjs';
 import {startGeneratePair,getGenerateJob} from '../server/assembly-ai.mjs';
-import {startTemplate1Job,listTemplate1JobsResolved,loadTemplate1Job,cancelTemplate1Job,discardTemplate1Job,proceedTemplate1Job,regenTemplate1Still,jobsDir} from '../server/assembly-template1.mjs';
+import {startTemplate1Job,listTemplate1JobsResolved,loadTemplate1Job,cancelTemplate1Job,discardTemplate1Job,proceedTemplate1Job,regenTemplate1Still,retryTemplate1Job,jobsDir} from '../server/assembly-template1.mjs';
 import {
  cancelCloudTemplate1Job,
  discardCloudTemplate1Job,
@@ -23,6 +23,7 @@ import {
  reportCloudProgress,
  addCloneToCatalog,
  resumeCloudPush,
+ retryCloudTemplate1Job,
  startCloudTemplate1Job,
  syncCloudJob
 } from '../server/assembly-cloud.mjs';
@@ -240,6 +241,20 @@ export default async function handler(req,res){
     }
    }
    return respond(res,200,await discardTemplate1Job(id));
+  }
+
+  if(action==='template1-retry'){
+   method(req,['POST']);
+   if(!sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
+   const body=await bodyJson(req,4096);
+   const id=String(body.jobId||'');
+   if(cloudAssemblyEnabled()){
+    try{return respond(res,200,await retryCloudTemplate1Job(id));}
+    catch(error){
+     if(error?.status!==404)throw error;
+    }
+   }
+   return respond(res,200,await retryTemplate1Job(id));
   }
 
   if(action==='template1-resume-push'){

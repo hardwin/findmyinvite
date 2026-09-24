@@ -11,14 +11,16 @@ import {
  loadTemplate1Job,
  cancelTemplate1Job,
  proceedTemplate1Job,
- regenTemplate1Still
+ regenTemplate1Still,
+ retryTemplate1Job
 } from './assembly-template1.mjs';
 import {
  cloudAssemblyEnabled,
  startCloudTemplate1Job,
  getCloudTemplate1Job,
  cancelCloudTemplate1Job,
- resumeCloudPush
+ resumeCloudPush,
+ retryCloudTemplate1Job
 } from './assembly-cloud.mjs';
 import {loadPremiumParents,fsWritesAllowed} from './assembly.mjs';
 
@@ -344,19 +346,23 @@ export function buildAssemblyChatTools({env=process.env,fetchImpl=fetch,parentId
   }),
 
   retry_phase:tool({
-   description:'Retry / resume after failure. Local proceed, or cloud resume-push.',
+   description:'Retry a failed/stuck Template 1 job from saved input, or resume a stalled GitHub push. Prefer retry for OpenAI/xAI/credit failures; resume-push only when clone+sandbox already exist.',
    inputSchema:z.object({
     jobId:z.string().min(6),
-    mode:z.enum(['proceed','resume-push']).optional()
+    mode:z.enum(['retry','proceed','resume-push']).optional()
    }),
    execute:async({jobId,mode})=>{
-    const useMode=mode||(cloudAssemblyEnabled()?'resume-push':'proceed');
+    const useMode=mode||'retry';
     if(useMode==='resume-push'){
      if(!cloudAssemblyEnabled())throw new HttpError(503,'Cloud Assembly is off.');
      return {ok:true,...await resumeCloudPush(jobId)};
     }
-    if(cloudAssemblyEnabled())throw new HttpError(503,'Cloud Assembly auto-continues past stills. Use resume-push if push stalled.');
-    return {ok:true,...await proceedTemplate1Job(jobId,{env,fetchImpl})};
+    if(useMode==='proceed'){
+     if(cloudAssemblyEnabled())throw new HttpError(503,'Cloud Assembly auto-continues past stills. Use retry or resume-push.');
+     return {ok:true,...await proceedTemplate1Job(jobId,{env,fetchImpl})};
+    }
+    if(cloudAssemblyEnabled())return {ok:true,...await retryCloudTemplate1Job(jobId)};
+    return {ok:true,...await retryTemplate1Job(jobId,{env,fetchImpl})};
    }
   })
  };

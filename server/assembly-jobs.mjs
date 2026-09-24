@@ -191,6 +191,7 @@ export async function patchAssemblyJob(jobId,patch,{env=process.env,fetchImpl=fe
  if(patch.cancelRequested!=null)body.cancel_requested=Boolean(patch.cancelRequested);
  if(patch.moderationStop!=null)body.moderation_stop=Boolean(patch.moderationStop);
  if(patch.error!==undefined)body.error=patch.error;
+ if(patch.callbackSecretHash!=null)body.callback_secret=patch.callbackSecretHash;
  const rows=await jobsRequest('assembly_jobs?id=eq.'+encodeURIComponent(jobId),{method:'PATCH',body,env,fetchImpl});
  return viewFromRow(Array.isArray(rows)?rows[0]:rows);
 }

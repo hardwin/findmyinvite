@@ -110,6 +110,13 @@
 }
 .pipe-discard:hover{background:rgba(155,33,88,.08)}
 .pipe-discard:disabled{opacity:.4;cursor:not-allowed}
+.pipe-retry{
+  flex:0 0 auto;
+  appearance:none;border:0;background:transparent;color:#623325;
+  font:10px Georgia,serif;cursor:pointer;padding:2px 4px;border-radius:6px;
+}
+.pipe-retry:hover{background:rgba(98,51,37,.08)}
+.pipe-retry:disabled{opacity:.4;cursor:not-allowed}
 .pipe-card-actions{display:flex;align-items:center;gap:2px;flex:0 0 auto}
 .pipe-approve{
   flex:0 0 auto;

@@ -69,6 +69,13 @@ function canDiscard(job:Job){
  return col==='queued'||col==='failed';
 }
 
+function canRetry(job:Job){
+ const status=String(job.status||'');
+ if(status==='failed'||status==='cancelled')return true;
+ if((status==='running'||status==='queued')&&job.error)return true;
+ return false;
+}
+
 function needsApproval(job:Pick<Job,'status'|'phase'>&{stills?:{first?:string|null;last?:string|null}}){
  const status=String(job.status||'');
  const phase=String(job.phase||'');
@@ -176,6 +183,29 @@ export default function AssemblyPipeline(){
    await loadJobs();
   }catch(err){
    setError(err instanceof Error?err.message:'Discard failed.');
+  }finally{
+   setActionBusy(false);
+  }
+ }
+
+ async function retryJob(jobId:string,event?:MouseEvent){
+  event?.stopPropagation();
+  event?.preventDefault();
+  setActionBusy(true);
+  setError('');
+  try{
+   const res=await fetch('/api/assembly?action=template1-retry',{
+    method:'POST',
+    credentials:'same-origin',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({jobId})
+   });
+   const body=await res.json().catch(()=>({}));
+   if(!res.ok)throw new Error(body.error||'Retry failed.');
+   setSelectedId(body.jobId||jobId);
+   await loadJobs();
+  }catch(err){
+   setError(err instanceof Error?err.message:'Retry failed.');
   }finally{
    setActionBusy(false);
   }
@@ -327,6 +357,17 @@ export default function AssemblyPipeline(){
                Approve
               </button>
              )}
+             {canRetry(job)&&(
+              <button
+               type="button"
+               className="pipe-retry"
+               disabled={actionBusy}
+               aria-label={'Retry '+name}
+               onClick={e=>void retryJob(job.jobId,e)}
+              >
+               Retry
+              </button>
+             )}
              {canDiscard(job)&&(
               <button
                type="button"
@@ -416,6 +457,11 @@ export default function AssemblyPipeline(){
        {needsApproval(selected)&&(
         <button type="button" disabled={actionBusy||Boolean(selected.regenRole)} onClick={()=>void approveJob(selected.jobId)}>
          {actionBusy&&!selected.regenRole?'Approving…':'Approve'}
+        </button>
+       )}
+       {canRetry(selected)&&(
+        <button type="button" disabled={actionBusy} onClick={()=>void retryJob(selected.jobId)}>
+         {actionBusy?'Retrying…':'Retry job'}
         </button>
        )}
        {canDiscard(selected)&&(

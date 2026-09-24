@@ -8,6 +8,7 @@ import {
  flushCloudLaunches,
  reportCloudProgress,
  startCloudTemplate1Job,
+ retryCloudTemplate1Job,
  syncCloudJob,
  workerBootCommand
 } from '../server/assembly-cloud.mjs';
@@ -146,6 +147,41 @@ test('startCloudTemplate1Job inserts a row then launches the sandbox',async()=>{
  const row=rows.get(started.jobId);
  assert.equal(row.sandbox_id,'sbx_test');
  assert.equal(row.status,'running');
+});
+
+test('retryCloudTemplate1Job reuses jobId and relaunches from saved input',async()=>{
+ const {rows,fetchImpl}=memoryStore();
+ const started=await startCloudTemplate1Job({
+  pinUrl:'https://pin.it/330nC70it',
+  displayName:'Melliname',
+  musicId:'vazhithunaiye'
+ },{env:cloudEnv,fetchImpl,launchImpl:async()=>'sbx_old'});
+ await flushCloudLaunches();
+ const jobId=started.jobId;
+ rows.get(jobId).status='failed';
+ rows.get(jobId).error='429 You have no credits remaining.';
+ rows.get(jobId).phase='failed';
+ rows.get(jobId).percent=0;
+ const launched=[];
+ const retried=await retryCloudTemplate1Job(jobId,{
+  env:cloudEnv,
+  fetchImpl,
+  launchImpl:async({jobId:id,secret,input})=>{
+   launched.push({jobId:id,secret:Boolean(secret),displayName:input.displayName});
+   return 'sbx_retry';
+  }
+ });
+ await flushCloudLaunches();
+ assert.equal(retried.jobId,jobId);
+ assert.equal(retried.retried,true);
+ assert.equal(launched[0].jobId,jobId);
+ assert.equal(launched[0].displayName,'Melliname');
+ assert.equal(launched[0].secret,true);
+ const row=rows.get(jobId);
+ assert.equal(row.status,'running');
+ assert.equal(row.sandbox_id,'sbx_retry');
+ assert.equal(row.error,null);
+ assert.equal(row.percent,0);
 });
 
 test('progress and sync require the job secret',async()=>{

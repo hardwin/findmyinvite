@@ -322,6 +322,57 @@ export function cancelTemplate1Job(jobId){
  return view(job);
 }
 
+/** True when operator can retry a local Template 1 job. */
+export function localJobCanRetry(job){
+ if(!job)return false;
+ const status=String(job.status||'');
+ if(status==='failed'||status==='cancelled')return true;
+ if(status==='preview'||status==='review'||status==='discarded')return false;
+ if((status==='running'||status==='queued')&&(job.error||job.cancelRequested))return true;
+ return false;
+}
+
+/**
+ * Retry a failed/stuck local job. If opening stills already exist, continue from videos;
+ * otherwise re-run pin → prompts → stills on the same job id.
+ */
+export async function retryTemplate1Job(jobId,{env=process.env,fetchImpl=fetch,sleepImpl,openaiClient,qaImpl,root=ROOT}={}){
+ if(!fsWritesAllowed(env))throw new HttpError(503,'Template 1 runs locally only (repo writes + ffmpeg). Use this desk on your Cursor machine or CloudAgent.');
+ const job=await hydrateLiveJob(jobId,root);
+ if(!job)throw new HttpError(404,'Job not found.');
+ if(!localJobCanRetry(job))throw new HttpError(409,'Only failed or stuck jobs can be retried.');
+ if(job.regenRole)throw new HttpError(409,'Wait for the still iteration to finish before retrying.');
+
+ job.stillsWave=stillsWaveFromJob(job);
+ if(job.stillsWave?.first?.jpg&&job.stillsWave?.last?.jpg){
+  return proceedTemplate1Job(jobId,{env,fetchImpl,sleepImpl,openaiClient,qaImpl,root});
+ }
+
+ job.cancelRequested=false;
+ job.error=null;
+ job.moderationStop=false;
+ job.workerAlive=true;
+ job.assets={};
+ job.stillsWave=null;
+ job.prompts=Object.keys(job.input?.promptParams||{}).length?buildPrompts(job.input.promptParams):null;
+ job.styleCard=null;
+ job.pinImageUrl=null;
+ job.palette=null;
+ job.cloneId=null;
+ job.demo=null;
+ job.written=[];
+ job.ledger=createLedger(job.input?.budgetUsd||4);
+ job.status='running';
+ update(job,{
+  phase:'queued',
+  percent:0,
+  label:PHASE_LABEL.queued,
+  detail:'Retrying from pin + prompts…'
+ });
+ void runTemplate1Job(job,{env,fetchImpl,sleepImpl,openaiClient,qaImpl});
+ return view(job);
+}
+
 /** Permanently drop a queued / failed / cancelled local job from the pipeline board. */
 export async function discardTemplate1Job(jobId,root=ROOT){
  const id=String(jobId||'');
