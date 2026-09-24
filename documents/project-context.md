@@ -11,8 +11,8 @@ Written 2026-09-15. Overwrite in place when facts change.
 | Repo | https://github.com/hardwin/findmyinvite.git — **public**, `main` only |
 | Live | https://findmyinvite.com (= https://findmyinvite.vercel.app) |
 | v0.9.0 handoff SHA | tag `v0.9.0` → `84416179b8d85486eea0fcc0e219f994be9bf3ab` |
-| Serving production commit (2026-09-25) | `1104543` Assembly Chat mix_image fix (xAI Imagine + dangling tool results) |
-| Live bundle | `/assets/index-P8NPzIOj.js` (API-only ship; hash unchanged from prior) |
+| Serving production commit (2026-09-25) | `b2660c2` Assembly Chat UX (timer, 2‑min image timeout, pin size, labels) |
+| Live bundle | `/assets/index-DdAwhfxg.js` |
 | Prod Supabase | `qqvcptjkfcjkwbkookcm` (Mumbai) |
 | Not this product | Zareqia Supabase `ganphjxofavzmxzsecij` |
 | Vercel project (handoff) | `prj_ZPOw3XYQTehO9AVbkp8JyZEhke76` / team `team_xFQvLGR6rRhSUyAtItzx8b24` |

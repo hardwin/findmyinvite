@@ -8,6 +8,13 @@ Soul: [akay-soul.md](akay-soul.md) · standing facts: [project-context.md](proje
 
 Read this before `docs/handoff/STATUS.md`. The v0.9.0 handoff is the frozen baseline; this file is the current truth after that tag.
 
+## 2026-09-25 — Assembly Chat UX: elapsed timer, image timeout, pin size, labels
+- Live elapsed on every inference (`Thinking… 12s` / `Generating image… 1:32`).
+- Image tools hard-stop at **2:00** with apology + **Try Now**; server mix timeout ~110s.
+- `resolve_pin` preview sized to **80% of iPhone 17** (~322×699, 9:16).
+- Friendly tool labels: `Editing Image - Using Reference Image`, `Importing from Pinterest - Done`.
+- **Prod ship:** `b2660c2` → Vercel READY · live bundle `/assets/index-DdAwhfxg.js`.
+
 ## 2026-09-25 — Fix prod mix_image “Tool result is missing”
 - Root cause: chat `mix` had fallen through to `gpt-image-2.5-flare`, blew the 120s chat limit, left a dangling tool call.
 - Fix: route `mix` → `xai/grok-imagine-image`; always return a tool result on mix failure; `ignoreIncompleteToolCalls` on convert; chat `maxDuration` 120→300.

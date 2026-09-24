@@ -355,9 +355,20 @@ function JobCard({jobId,onUpdate}:{jobId:string;onUpdate?:(job:JobStatus)=>void}
     )
    )}
    {job&&reviewing&&(
-    <button type="button" className="asm-gpt-approve" disabled={busy||Boolean(job.regenRole)} onClick={()=>void approve()}>
-     {busy&&!job.regenRole?'Approving…':'Approve'}
-    </button>
+    <ChoicePrompt
+     title="Review opening stills"
+     disabled={busy||Boolean(job.regenRole)}
+     options={[
+      {id:'approve',label:'Approve — continue to video + site',submit:'__approve__'},
+      {id:'first',label:'Retry Door-First still',submit:'__iterate_first__'},
+      {id:'last',label:'Retry last still',submit:'__iterate_last__'}
+     ]}
+     onSubmit={option=>{
+      if(option.id==='approve')void approve();
+      else if(option.id==='first')void iterate('first');
+      else if(option.id==='last')void iterate('last');
+     }}
+    />
    )}
    {(job?.previewUrl||job?.demo||job?.githubUrl)&&(
     <div className="asm-gpt-chips">
@@ -372,6 +383,60 @@ function JobCard({jobId,onUpdate}:{jobId:string;onUpdate?:(job:JobStatus)=>void}
  );
 }
 
+
+
+type ChoiceOption={id:string;label:string;submit:string};
+
+function ChoicePrompt({
+ title,
+ options,
+ submitLabel='Submit',
+ disabled=false,
+ tone='default',
+ onSubmit
+}:{
+ title:string;
+ options:ChoiceOption[];
+ submitLabel?:string;
+ disabled?:boolean;
+ tone?:'default'|'alert';
+ onSubmit:(option:ChoiceOption)=>void;
+}){
+ const [selected,setSelected]=useState(options[0]?.id||'');
+ const name=useMemo(()=>'choice-'+Math.random().toString(36).slice(2,8),[]);
+ return (
+  <form
+   className={'asm-gpt-choice'+(tone==='alert'?' is-alert':'')}
+   role="group"
+   aria-label={title}
+   onSubmit={event=>{
+    event.preventDefault();
+    const option=options.find(item=>item.id===selected);
+    if(option)onSubmit(option);
+   }}
+  >
+   <p className="asm-gpt-choice-title">{title}</p>
+   <div className="asm-gpt-choice-list" role="radiogroup" aria-label={title}>
+    {options.map(option=>(
+     <label key={option.id} className={'asm-gpt-choice-opt'+(selected===option.id?' is-on':'')}>
+      <input
+       type="radio"
+       name={name}
+       value={option.id}
+       checked={selected===option.id}
+       disabled={disabled}
+       onChange={()=>setSelected(option.id)}
+      />
+      <span>{option.label}</span>
+     </label>
+    ))}
+   </div>
+   <button type="submit" className="asm-gpt-choice-submit" disabled={disabled||!selected}>
+    {submitLabel}
+   </button>
+  </form>
+ );
+}
 
 function toolStatusLabel(name:string,state:string,{pending,isImage,busy,elapsedMs}:{pending:boolean;isImage:boolean;busy:boolean;elapsedMs:number}){
  const elapsed=busy&&elapsedMs?(' '+formatElapsed(elapsedMs)):'';
@@ -470,11 +535,33 @@ function MessageView({
    }
    if(name==='mix_image'&&urls[0]){
     nodes.push(
-     <div className="asm-gpt-chips" key={message.id+'-mix-'+i}>
-      <button type="button" className="asm-gpt-chip" disabled={busy} onClick={()=>onChip('Lock this final image: '+urls[0])}>Lock this image</button>
-      <button type="button" className="asm-gpt-chip" disabled={busy} onClick={()=>onChip('Remix with a stronger style twist.')}>Remix</button>
-      <button type="button" className="asm-gpt-chip" disabled={busy} onClick={()=>onChip('Retry the image mix.')}>Retry</button>
-     </div>
+     <ChoicePrompt
+      key={message.id+'-mix-'+i}
+      title="What should we do with this image?"
+      disabled={busy}
+      options={[
+       {id:'lock',label:'Approve — lock this as the final hero',submit:'Lock this final image: '+urls[0]},
+       {id:'remix',label:'Retry with a stronger style twist',submit:'Remix with a stronger style twist.'},
+       {id:'retry',label:'Retry the same mix again',submit:'Retry the image mix with Replicate.'}
+      ]}
+      onSubmit={option=>onChip(option.submit)}
+     />
+    );
+   }
+   if(name==='mix_image'&&output&&output.ok===false&&(output.timedOut||output.canFallbackXai)){
+    nodes.push(
+     <ChoicePrompt
+      key={message.id+'-mix-fallback-'+i}
+      tone="alert"
+      title="Replicate timed out. How should we continue?"
+      disabled={busy}
+      options={[
+       {id:'xai',label:'Fall back to xAI image API',submit:'Approved — fall back to xAI. Call mix_image again with provider "xai" using the same pin and style.'},
+       {id:'retry',label:'Retry with Replicate',submit:'Retry the image mix with Replicate (provider replicate).'},
+       {id:'wait',label:'Wait — I will try again later',submit:'Hold off on image generation for now. I will ask again later.'}
+      ]}
+      onSubmit={option=>onChip(option.submit)}
+     />
     );
    }
    continue;
@@ -851,21 +938,21 @@ export default function AssemblyChat({
         })}
         {jobId&&<JobCard jobId={jobId} onUpdate={job=>{if(job.jobId)setJobId(job.jobId);}}/>}
         {imageTimeout?(
-         <div className="asm-gpt-timeout" role="alert">
-          <p>Sorry, I am currently facing problem generating the images, you can resume again after some time.</p>
-          <button
-           type="button"
-           className="asm-gpt-try"
-           disabled={busy}
-           onClick={()=>{
-            setImageTimeout(false);
-            imageTimedOutRef.current=false;
-            sendChip('Try Now — please resume generating the image from where we left off.');
-           }}
-          >
-           Try Now
-          </button>
-         </div>
+         <ChoicePrompt
+          tone="alert"
+          title="Sorry, I am currently facing problem generating the images. Replicate may have timed out — how should we continue?"
+          disabled={busy}
+          options={[
+           {id:'xai',label:'Fall back to xAI image API',submit:'Approved — fall back to xAI. Call mix_image again with provider "xai" using the same pin and style.'},
+           {id:'retry',label:'Retry with Replicate',submit:'Try Now — retry the image mix with Replicate (provider replicate).'},
+           {id:'wait',label:'Wait — try again later',submit:'Hold off on image generation for now. I will ask again later.'}
+          ]}
+          onSubmit={option=>{
+           setImageTimeout(false);
+           imageTimedOutRef.current=false;
+           if(option.id!=='wait')sendChip(option.submit);
+          }}
+         />
         ):busy?(
          <p className="asm-gpt-status" aria-live="polite">
           {pendingImage?'Generating image…':'Thinking…'}

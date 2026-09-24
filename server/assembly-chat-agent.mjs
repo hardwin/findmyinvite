@@ -60,7 +60,7 @@ TOOL POLICY (agentic — you MUST use tools for real work; never pretend)
 - upload_ref — only for pasted data-URLs (UI uploads are already hosted)
 - list_music — songs / library — call immediately when they want music
 - list_parents — Premium parent clones — call immediately when needed
-- mix_image — after a base image (+ optional refs/twist); lean **anime / cinematic wedding** unless they ask otherwise; then Lock / Remix / Retry
+- mix_image — after a base image (+ optional refs/twist); lean **anime / cinematic wedding** unless they ask otherwise; then Lock / Remix / Retry. Default provider is Replicate. If it times out, WAIT for the host radio choice before calling mix_image again with provider "xai" (or retry Replicate). Never silently switch providers.
 - lock_final_image — when they confirm the ONE hero
 - start_template1 — only after lock + VIBE (music optional)
 - regen_opening_still — while reviewing: iterate Door-First (first) or last still; pass a short note when they say what to change
@@ -169,7 +169,7 @@ export function buildAssemblyChatTools({env=process.env,fetchImpl=fetch,parentId
   }),
 
   mix_image:tool({
-   description:'Mix the pin/base image with optional refs and a style twist into a new hero candidate.',
+   description:'Mix the pin/base image with optional refs and a style twist into a new hero candidate. Default provider is Replicate. Only pass provider "xai" after the host explicitly approves xAI fallback via the radio choice.',
    inputSchema:z.object({
     pinUrl:z.string().url().describe('Base pin or image URL'),
     referenceUrls:z.array(z.string().url()).optional(),
@@ -201,10 +201,16 @@ export function buildAssemblyChatTools({env=process.env,fetchImpl=fetch,parentId
     }catch(error){
      // Always return a tool result so the UI never sticks on "input available" / MissingToolResultsError.
      console.error('assembly-chat mix_image',error?.message||error);
+     const msg=String(error?.message||error||'Image mix failed.').slice(0,400);
+     const timedOut=/timed out|timeout/i.test(msg);
      return {
       ok:false,
-      error:String(error?.message||error||'Image mix failed.').slice(0,400),
-      message:'Mix failed — try again or pick a different pin/style.'
+      timedOut,
+      canFallbackXai:timedOut,
+      error:msg,
+      message:timedOut
+       ?'Replicate timed out. Ask the host (radio choice) whether to fall back to the xAI image API, retry Replicate, or wait.'
+       :'Mix failed — try again or pick a different pin/style.'
      };
     }
    }

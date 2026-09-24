@@ -90,9 +90,43 @@ async function mixViaOpenAI({baseImageUrl,prompt,env,fetchImpl}){
 }
 
 async function mixViaXai({baseImageUrl,prompt,env,fetchImpl}){
- // xAI image path rides Replicate's xai/grok-imagine-image (same as Template 1 section plates).
- // Door-First / last / hero stills use openai/gpt-image-2.5-flare via role routing in runReplicateImage.
- return mixViaReplicate({baseImageUrl,prompt,env,fetchImpl});
+ // Direct xAI Imagine API (not Replicate) — used only after the host approves fallback.
+ if(!env.XAI_API_KEY)throw new HttpError(503,'xAI is not configured (XAI_API_KEY).');
+ const {url}=await ensurePublicImageUrl(baseImageUrl,{env,fetchImpl});
+ const model=env.ASSEMBLY_CHAT_XAI_IMAGE_MODEL||'grok-imagine-image';
+ const res=await fetchImpl('https://api.x.ai/v1/images/edits',{
+  method:'POST',
+  headers:{
+   Authorization:'Bearer '+env.XAI_API_KEY,
+   'Content-Type':'application/json'
+  },
+  body:JSON.stringify({
+   model,
+   prompt:String(prompt||'').slice(0,4000),
+   image:{url,type:'image_url'},
+   aspect_ratio:'9:16',
+   n:1
+  })
+ });
+ const body=await res.json().catch(()=>({}));
+ if(!res.ok){
+  const detail=String(body?.error?.message||body?.error||body?.detail||res.status);
+  throw new HttpError(502,'xAI image mix failed: '+detail.slice(0,300));
+ }
+ const item=Array.isArray(body.data)?body.data[0]:null;
+ let outUrl=item?.url||'';
+ if(!outUrl&&item?.b64_json){
+  const buf=Buffer.from(item.b64_json,'base64');
+  if(!env.BLOB_READ_WRITE_TOKEN)throw new HttpError(503,'xAI returned inline image data but BLOB_READ_WRITE_TOKEN is missing.');
+  const blob=await put('assembly-chat/mix-xai-'+Date.now()+'.png',buf,{
+   access:'public',
+   contentType:'image/png',
+   token:env.BLOB_READ_WRITE_TOKEN
+  });
+  outUrl=blob.url;
+ }
+ if(!outUrl)throw new HttpError(502,'xAI image mix returned no file.');
+ return {urls:[outUrl],provider:'xai',predictionId:null,costUsd:null};
 }
 
 /**
@@ -116,7 +150,7 @@ export async function mixAssemblyImage({
  const prompt=buildMixPrompt({styleTwist,peopleNote,extraPrompt,refCount:refs.length});
  const wanted=String(provider||'auto').toLowerCase();
  const order=wanted==='auto'
-  ?['replicate','xai','openai']
+  ?['replicate']
   :[wanted];
 
  let lastError=null;
