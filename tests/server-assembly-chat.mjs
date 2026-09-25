@@ -14,9 +14,10 @@ test('assembly chat system prompt covers Photographer Sell Path',()=>{
  assert.match(ASSEMBLY_CHAT_SYSTEM,/VIBE|display name/i);
  assert.match(ASSEMBLY_CHAT_SYSTEM,/Template 1|start_template1/i);
  assert.match(ASSEMBLY_CHAT_SYSTEM,/Hi/i);
- assert.match(ASSEMBLY_CHAT_SYSTEM,/flare_edit|lock_final_image/i);
+ assert.match(ASSEMBLY_CHAT_SYSTEM,/flare_edit|lock_final_image|craft_storyboard_stills|craft_chapter_solos/i);
  assert.match(ASSEMBLY_CHAT_SYSTEM,/set_sell_stage|update_theme_search/i);
  assert.match(ASSEMBLY_CHAT_SYSTEM,/reveal hook|door|envelope/i);
+ assert.match(ASSEMBLY_CHAT_SYSTEM,/CREATIVE LAW|Never ask again for a Pinterest/i);
  assert.match(ASSEMBLY_CHAT_MODEL,/grok/i);
  assert.doesNotMatch(ASSEMBLY_CHAT_SYSTEM,/Grok Assembly Coach/i);
 });
@@ -66,6 +67,12 @@ test('buildAssemblyChatTools exposes the operator desk tools',()=>{
   'list_music',
   'list_parents',
   'mix_image',
+  'flare_edit',
+  'craft_storyboard_stills',
+  'craft_chapter_solos',
+  'propose_storyboard',
+  'lock_storyboard',
+  'save_invite_details',
   'lock_final_image',
   'start_template1',
   'get_job_status',

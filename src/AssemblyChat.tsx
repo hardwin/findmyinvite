@@ -65,7 +65,7 @@ const SUGGESTIONS=[
  {emo:'🌸',text:"I'm a photographer — walk me through creating an invite today"}
 ];
 
-const IMAGE_TOOLS=new Set(['mix_image','regen_opening_still','flare_edit']);
+const IMAGE_TOOLS=new Set(['mix_image','regen_opening_still','flare_edit','craft_storyboard_stills','craft_chapter_solos']);
 const IMAGE_TIMEOUT_MS=120_000;
 const SELL_KEY='fmi.assembly.sell.v1';
 
@@ -649,7 +649,7 @@ function FaceSwapBeforeLock({
     disabled={busy}
     options={[
      {id:'swap',label:'Add Face Swap (Rs. '+(cfg?.priceInr||300)+') — put your faces on this still'+(cfg?.stub?' · stub, no charge':''),submit:'__face_swap__'},
-     {id:'lock',label:'Lock as-is — start video without Face Swap',submit:'Lock this final image: '+heroUrl},
+     {id:'lock',label:'Skip Face Swap — craft Bride & Groom chapter portraits from this still',submit:'Skip Face Swap. Call craft_chapter_solos on this Last couple still, show Bride + Groom solos, then lock_final_image with hero + brideImageUrl + groomImageUrl.\ncoupleImageUrl: '+heroUrl},
      {id:'remix',label:'Remix with a stronger style twist',submit:'Remix with a stronger style twist.'},
      {id:'retry',label:'Retry the same mix again',submit:'Retry the image mix with Replicate.'}
     ]}
@@ -806,11 +806,19 @@ function ChoicePrompt({
 
 function toolStatusLabel(name:string,state:string,{pending,isImage,busy,elapsedMs}:{pending:boolean;isImage:boolean;busy:boolean;elapsedMs:number}){
  const elapsed=busy&&elapsedMs?(' '+formatElapsed(elapsedMs)):'';
- if(name==='mix_image'||name==='flare_edit'){
+ if(name==='mix_image'||name==='flare_edit'||name==='craft_storyboard_stills'||name==='craft_chapter_solos'){
   if(state==='input-available'||state==='input-streaming'||state==='partial-call'||state==='call'){
+   if(name==='craft_storyboard_stills')return 'Crafting First + Last previews…';
+   if(name==='craft_chapter_solos')return 'Crafting Bride + Groom portraits…';
    return name==='flare_edit'?'Flare edit — preparing':'Editing Image - Using Reference Image';
   }
-  if(pending)return (name==='flare_edit'?'Flare edit — generating':'Editing Image - Generating')+elapsed;
+  if(pending){
+   if(name==='craft_storyboard_stills')return 'Crafting First + Last previews'+elapsed;
+   if(name==='craft_chapter_solos')return 'Crafting Bride + Groom portraits'+elapsed;
+   return (name==='flare_edit'?'Flare edit — generating':'Editing Image - Generating')+elapsed;
+  }
+  if(name==='craft_storyboard_stills')return 'First + Last previews ready';
+  if(name==='craft_chapter_solos')return 'Bride + Groom portraits ready';
   return name==='flare_edit'?'Flare edit — done':'Editing Image - Done';
  }
  if(name==='resolve_pin'||name==='lock_theme_pin'){
@@ -927,19 +935,46 @@ function MessageView({
      />
     );
    }
+   if(name==='craft_storyboard_stills'&&output?.ok!==false&&(output?.firstImageUrl||output?.lastImageUrl)){
+    nodes.push(
+     <StoryboardCard
+      key={message.id+'-craft-board-'+i}
+      pinUrl={typeof output?.pinUrl==='string'?output.pinUrl:undefined}
+      storyboard={{
+       revealType:String(output?.revealType||'door'),
+       firstBrief:'',
+       middleBeats:[],
+       lastBrief:'',
+       firstImageUrl:typeof output?.firstImageUrl==='string'?output.firstImageUrl:undefined,
+       lastImageUrl:typeof output?.lastImageUrl==='string'?output.lastImageUrl:undefined,
+       locked:false
+      }}
+      busy={busy}
+      onChip={onChip}
+     />
+    );
+   }
+   if(name==='craft_chapter_solos'&&output?.ok!==false&&urls.length){
+    nodes.push(
+     <p className="asm-sell-eta" key={message.id+'-solos-'+i}>Bride + Groom chapter portraits ready — lock them with the Last couple still.</p>
+    );
+   }
    if((name==='propose_storyboard'||name==='lock_storyboard')&&output?.storyboard&&typeof output.storyboard==='object'){
+    const board=output.storyboard as {
+     revealType:string;
+     firstBrief:string;
+     middleBeats:string[];
+     lastBrief:string;
+     firstImageUrl?:string;
+     lastImageUrl?:string;
+     pinUrl?:string;
+     locked?:boolean;
+    };
     nodes.push(
      <StoryboardCard
       key={message.id+'-board-'+i}
-      storyboard={output.storyboard as {
-       revealType:string;
-       firstBrief:string;
-       middleBeats:string[];
-       lastBrief:string;
-       firstImageUrl?:string;
-       lastImageUrl?:string;
-       locked?:boolean;
-      }}
+      pinUrl={board.pinUrl}
+      storyboard={board}
       busy={busy}
       onChip={onChip}
      />
@@ -1315,7 +1350,12 @@ export default function AssemblyChat({
  }
 
  const ready=Boolean(input.trim()||attachments.length);
- const canGenerate=sell.stage==='generate'&&Boolean(sell.heroUrl)&&Boolean(sell.details.displayName||sell.details.complete);
+ const heroForGen=sell.heroUrl||sell.storyboard?.lastImageUrl||sell.pinPreview||'';
+ const canGenerate=sell.stage==='generate'
+  &&Boolean(heroForGen)
+  &&Boolean(sell.brideImageUrl)
+  &&Boolean(sell.groomImageUrl)
+  &&Boolean(sell.details.displayName||sell.details.complete);
 
  function requestGenerate(){
   if(busy||!canGenerate)return;
@@ -1323,12 +1363,17 @@ export default function AssemblyChat({
   const lines=[
    'Generate confirmed. Start Template 1 now with start_template1.',
    'displayName: '+(sell.details.displayName||'Wedding Invite'),
-   'heroImageUrl: '+sell.heroUrl,
+   'heroImageUrl: '+heroForGen,
    sell.pinUrl?('pinUrl: '+sell.pinUrl):'',
-   sell.brideImageUrl?('brideImageUrl: '+sell.brideImageUrl):'',
-   sell.groomImageUrl?('groomImageUrl: '+sell.groomImageUrl):'',
+   board?.firstImageUrl?('firstImageUrl: '+board.firstImageUrl):'',
+   board?.lastImageUrl?('lastImageUrl: '+board.lastImageUrl):(heroForGen?('lastImageUrl: '+heroForGen):''),
+   'brideImageUrl: '+sell.brideImageUrl,
+   'groomImageUrl: '+sell.groomImageUrl,
    sell.details.brideName?('brideName: '+sell.details.brideName):'',
    sell.details.groomName?('groomName: '+sell.details.groomName):'',
+   sell.details.eventDate?('eventDate: '+sell.details.eventDate):'',
+   sell.details.venue?('venue: '+sell.details.venue):'',
+   sell.details.city?('city: '+sell.details.city):'',
    sell.details.musicId?('musicId: '+sell.details.musicId):'',
    board?('storyboard revealType: '+board.revealType):'',
    board?('storyboard firstBrief: '+board.firstBrief):'',

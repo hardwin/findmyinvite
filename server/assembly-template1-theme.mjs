@@ -134,7 +134,7 @@ export function patchThemeCss(source,id,palette,opts={}){
  return source.replace(/\s*$/,'\n')+themeCss(id,palette,opts);
 }
 
-export function patchPreviewDefaults(source,id,{groom,bride,groomDetails,brideDetails,photos,faceSwap}={}){
+export function patchPreviewDefaults(source,id,{groom,bride,groomDetails,brideDetails,date,venue,address,photos,faceSwap}={}){
  if(new RegExp("'"+id+"':\\{groom:").test(source))return source;
  const marker='const previewDefaults:Record<string,Partial<InviteData>>={';
  const start=source.indexOf(marker);
@@ -143,6 +143,9 @@ export function patchPreviewDefaults(source,id,{groom,bride,groomDetails,brideDe
  if(end<0)throw new Error('Could not find previewDefaults end');
  const esc=v=>String(v||'').replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/\n/g,'\\n');
  let fields="groom:'"+esc(groom)+"',bride:'"+esc(bride)+"',groomDetails:'"+esc(groomDetails)+"',brideDetails:'"+esc(brideDetails)+"'";
+ if(date)fields+=",date:'"+esc(date)+"'";
+ if(venue)fields+=",venue:'"+esc(venue)+"'";
+ if(address)fields+=",address:'"+esc(address)+"'";
  if(Array.isArray(photos)&&photos.length>=2){
   fields+=",photos:['"+esc(photos[0])+"','"+esc(photos[1])+"']";
  }

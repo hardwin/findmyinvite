@@ -6,6 +6,7 @@ import {
  pinterestSearchUrl,
  storyboardToPromptParams,
  buildStoryboardStillPrompt,
+ buildSoloStillPrompt,
  revealOpenBeat,
  themeSuggestionsForQuery
 } from '../server/assembly-sell-path.mjs';
@@ -44,6 +45,15 @@ test('storyboard maps to First / Middle / Last prompt params',()=>{
  assert.match(params.openingRoute,/seal breaks/i);
  assert.match(params.lastPose,/laughing/i);
  assert.match(revealOpenBeat('envelope'),/envelope/i);
+});
+
+test('solo prompts isolate bride or groom',()=>{
+ const bride=buildSoloStillPrompt({which:'bride',brief:'silk saree'});
+ assert.match(bride,/BRIDE|bride/i);
+ assert.match(bride,/Only the bride|remove the groom/i);
+ const groom=buildSoloStillPrompt({which:'groom'});
+ assert.match(groom,/GROOM|groom/i);
+ assert.match(groom,/Only the groom|remove the bride/i);
 });
 
 test('flare first prompt uses reveal prefix without people',()=>{

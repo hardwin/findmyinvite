@@ -100,6 +100,13 @@ export function validateTemplate1Input(body={}){
  };
  if(typeof body.groomDetails==='string'&&body.groomDetails.trim())couple.groomDetails=body.groomDetails.trim().slice(0,200);
  if(typeof body.brideDetails==='string'&&body.brideDetails.trim())couple.brideDetails=body.brideDetails.trim().slice(0,200);
+ const eventDate=String(body.eventDate||body.date||'').trim().slice(0,40);
+ const venue=String(body.venue||'').trim().slice(0,120);
+ const city=String(body.city||'').trim().slice(0,80);
+ const address=String(body.address||city||'').trim().slice(0,200);
+ if(eventDate)couple.date=eventDate;
+ if(venue)couple.venue=venue;
+ if(address)couple.address=address;
  const promptParams={};
  if(body.promptParams&&typeof body.promptParams==='object'){
   for(const [k,v] of Object.entries(body.promptParams)){
@@ -114,6 +121,9 @@ export function validateTemplate1Input(body={}){
  let brideImageUrl=optionalHttpsUrl(body.brideImageUrl||body.bride_image_url||body.brideUrl,'Bride portrait');
  let groomImageUrl=optionalHttpsUrl(body.groomImageUrl||body.groom_image_url||body.groomUrl,'Groom portrait');
  let coupleImageUrl=optionalHttpsUrl(body.coupleImageUrl||body.couple_image_url||body.coupleUrl,'Couple still')||heroUrl||pinUrl;
+ // Chat-crafted First / Last stills (Photographer Sell Path creative iteration).
+ const firstImageUrl=optionalHttpsUrl(body.firstImageUrl||body.first_image_url||body.openingFirstUrl,'First still');
+ const lastImageUrl=optionalHttpsUrl(body.lastImageUrl||body.last_image_url||body.openingLastUrl,'Last still')||coupleImageUrl||'';
  // If the agent only locked the couple still, recover solos from the Face Swap cache.
  if((!brideImageUrl||!groomImageUrl)&&coupleImageUrl){
   const cached=lookupFaceSwapSolos(coupleImageUrl)||lookupFaceSwapSolos(heroUrl)||lookupFaceSwapSolos(pinUrl);
@@ -123,7 +133,7 @@ export function validateTemplate1Input(body={}){
    if(!coupleImageUrl)coupleImageUrl=cached.coupleUrl||coupleImageUrl;
   }
  }
- return {pinUrl,heroImageUrl:heroUrl,displayName,parentId,musicId,budgetUsd,couple,promptParams,brideImageUrl,groomImageUrl,coupleImageUrl};
+ return {pinUrl,heroImageUrl:heroUrl,displayName,parentId,musicId,budgetUsd,couple,promptParams,brideImageUrl,groomImageUrl,coupleImageUrl,firstImageUrl,lastImageUrl};
 }
 
 function optionalHttpsUrl(value,label){
@@ -556,6 +566,28 @@ export async function runGenPhase(job,{env,fetchImpl,sleepImpl,openaiClient,qaIm
  const gen=join(workdir,'gen');
  await mkdir(gen,{recursive:true});
  const setDetail=(text)=>update(job,{detail:text});
+
+ // Photographer Sell Path: reuse chat-crafted First/Last stills instead of regenerating.
+ const chatFirst=job.input?.firstImageUrl||'';
+ const chatLast=job.input?.lastImageUrl||'';
+ if(chatFirst&&chatLast){
+  setDetail('Using chat-crafted First + Last stills…');
+  const stageFromUrl=async(role,url,fileBase)=>{
+   checkCancelled(job);
+   const image=normalizeReferenceImage(await resolveReferenceImage(url,{fetchImpl}));
+   const raw=join(gen,fileBase+'-raw.jpg');
+   await writeFile(raw,image.buffer);
+   const out=await toStill720({input:raw,outPng:join(gen,fileBase+'.png'),outJpg:join(gen,fileBase+'-720.jpg')});
+   job.assets[role]={url,png:out.png,jpg:out.jpg,costUsd:0,fromChat:true};
+   setDetail(role+' from chat · $'+ledger.used.toFixed(2)+' used');
+   return {url,...out};
+  };
+  const [first,last]=await Promise.all([
+   stageFromUrl('opening-first',chatFirst,'opening-first'),
+   stageFromUrl('opening-last',chatLast,'opening-last')
+  ]);
+  return {first,last};
+ }
 
  const still=async(role,prompt,image,fileBase)=>{
   checkCancelled(job);

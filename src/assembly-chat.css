@@ -333,6 +333,8 @@
 .asm-sell-board-frames strong{font-size:13px}
 .asm-sell-board-frames span{font-size:13px;color:var(--muted2);line-height:1.45}
 .asm-sell-board-frames img{width:120px;border-radius:10px;margin-top:6px;border:1px solid var(--border)}
+.asm-sell-board-missing{display:block;margin-top:6px;font-size:12px;font-style:normal;color:var(--muted2);padding:10px 12px;border-radius:10px;border:1px dashed var(--border);background:#fff}
+.asm-gpt-chip-primary{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
 
 .asm-sell-details{margin-top:8px;padding:14px;border:1px solid var(--border);border-radius:16px;background:#fafafa;display:grid;gap:12px;width:100%;max-width:min(100%,520px)}
 .asm-sell-details-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}

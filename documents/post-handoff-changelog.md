@@ -8,6 +8,12 @@ Soul: [akay-soul.md](akay-soul.md) · standing facts: [project-context.md](proje
 
 Read this before `docs/handoff/STATUS.md`. The v0.9.0 handoff is the frozen baseline; this file is the current truth after that tag.
 
+## 2026-09-25 — Sell Path creative iteration fix (mid-chat Flare)
+- **Problem:** Generate dumped stills at the end; no First/Last previews in chat; pin re-asked after moodboard; details + Bride/Groom solos missing on clone.
+- **Fix:** `craft_storyboard_stills` + `craft_chapter_solos`; lock_storyboard requires First+Last URLs; lock_final_image requires solos; details (date/venue/names) → `patchPreviewDefaults`; chat First/Last reused as opening stills.
+- CREATIVE LAW in system prompt: every visual change generates a preview this turn until Lock. Never re-ask Pinterest after theme lock.
+- UI: Generate First & Last previews CTA; Lock disabled until both stills exist; Skip Face Swap → craft chapter solos.
+
 ## 2026-09-25 — Photographer Sell Path (life-changing Co-Pilot)
 - **Akay persona:** invitation-store sales guide — understand style → show options → confirm → next. Always names the step.
 - **Orchestration:** `/manager` chat + **on-page Pinterest iframe** (right Theme desk). Paste pin to lock without leaving FMI.

@@ -142,6 +142,31 @@ export function buildStoryboardStillPrompt({
  ].filter(Boolean).join(' ');
 }
 
+/** Bride / Groom chapter solos from the locked Last couple still. */
+export function buildSoloStillPrompt({which='bride',brief='',pinStyleNote=''}={}){
+ const role=String(which||'bride').toLowerCase()==='groom'?'groom':'bride';
+ const note=String(brief||'').trim().slice(0,400);
+ const style=String(pinStyleNote||'').trim().slice(0,300);
+ if(role==='groom'){
+  return [
+   'Edit this couple still into a vertical 9:16 GROOM solo portrait for a wedding invitation chapter.',
+   'Only the groom — remove the bride. Same man, same wardrobe, face, and palette as the couple still.',
+   'Elegant standing portrait, soft eye contact toward camera, cinematic invitation quality.',
+   note?('Note: '+note):'',
+   style?('Style: '+style):'',
+   'Absolutely no readable text, letters, watermark, or labels.'
+  ].filter(Boolean).join(' ');
+ }
+ return [
+  'Edit this couple still into a vertical 9:16 BRIDE solo portrait for a wedding invitation chapter.',
+  'Only the bride — remove the groom. Same woman, same wardrobe, face, and palette as the couple still.',
+  'Elegant standing portrait, soft eye contact toward camera, cinematic invitation quality.',
+  note?('Note: '+note):'',
+  style?('Style: '+style):'',
+  'Absolutely no readable text, letters, watermark, or labels.'
+ ].filter(Boolean).join(' ');
+}
+
 /**
  * Map locked storyboard → Template 1 promptParams overrides
  * (firstScene / openingRoute / lastPose / openingFirst / openingLast / revealType).

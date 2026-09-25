@@ -144,7 +144,11 @@ export function mergeSellFromTool(
   if(typeof output.pinUrl==='string')next.pinUrl=output.pinUrl;
   if(typeof output.previewUrl==='string')next.pinPreview=output.previewUrl;
   if(typeof output.styleNote==='string')next.styleNote=output.styleNote;
-  if(name==='lock_theme_pin')next.stage='storyboard';
+  if(name==='lock_theme_pin'){
+   next.stage='storyboard';
+   // Locked moodboard pin IS the base image — never re-ask.
+   if(next.pinPreview&&!next.heroUrl)next.heroUrl=next.pinPreview;
+  }
  }
  if(name==='propose_storyboard'||name==='lock_storyboard'){
   const sb=output.storyboard as StoryboardState|undefined;
@@ -159,7 +163,36 @@ export function mergeSellFromTool(
     locked:name==='lock_storyboard'||Boolean(output.locked)
    };
   }
-  if(name==='lock_storyboard')next.stage='face_swap';
+  if(name==='lock_storyboard'){
+   next.stage='face_swap';
+   if(typeof output.heroImageUrl==='string')next.heroUrl=output.heroImageUrl;
+   else if(next.storyboard?.lastImageUrl)next.heroUrl=next.storyboard.lastImageUrl;
+  }
+ }
+ if(name==='craft_storyboard_stills'&&output.ok!==false){
+  if(!next.storyboard){
+   next.storyboard={
+    revealType:String(output.revealType||'door'),
+    firstBrief:'',
+    middleBeats:[],
+    lastBrief:'',
+    locked:false
+   };
+  }
+  if(typeof output.firstImageUrl==='string'){
+   next.storyboard={...next.storyboard,firstImageUrl:output.firstImageUrl};
+  }
+  if(typeof output.lastImageUrl==='string'){
+   next.storyboard={...next.storyboard,lastImageUrl:output.lastImageUrl};
+   next.heroUrl=output.lastImageUrl;
+  }
+  next.stage='storyboard';
+ }
+ if(name==='craft_chapter_solos'&&output.ok!==false){
+  if(typeof output.brideImageUrl==='string')next.brideImageUrl=output.brideImageUrl;
+  if(typeof output.groomImageUrl==='string')next.groomImageUrl=output.groomImageUrl;
+  if(typeof output.coupleImageUrl==='string'&&!next.heroUrl)next.heroUrl=output.coupleImageUrl;
+  next.stage='lock';
  }
  if(name==='flare_edit'&&output.ok!==false){
   const url=typeof output.url==='string'?output.url
@@ -170,7 +203,9 @@ export function mergeSellFromTool(
    else if(which==='last'&&next.storyboard){
     next.storyboard={...next.storyboard,lastImageUrl:url};
     next.heroUrl=url;
-   }else if(which==='hero')next.heroUrl=url;
+   }else if(which==='bride')next.brideImageUrl=url;
+   else if(which==='groom')next.groomImageUrl=url;
+   else if(which==='hero')next.heroUrl=url;
   }
  }
  if(name==='lock_final_image'&&output.ok!==false){
@@ -268,7 +303,10 @@ export function ThemePane({
       role="listitem"
       className={'asm-sell-card'+(picked?.id===item.id?' is-on':'')}
       disabled={busy}
-      onClick={()=>setPicked(item)}
+      onClick={()=>{
+       setPicked(item);
+       onLockPin(item.pinUrl);
+      }}
       title={item.label}
      >
       <img src={item.thumb} alt={item.label} loading="lazy"/>
@@ -276,12 +314,9 @@ export function ThemePane({
      </button>
     ))}
    </div>
-   {picked&&(
+   {picked&&!state.pinUrl&&(
     <div className="asm-sell-picked">
-     <p>Selected: <strong>{picked.label}</strong></p>
-     <button type="button" className="asm-gpt-choice-submit" disabled={busy} onClick={()=>onLockPin(picked.pinUrl)}>
-      Use this theme
-     </button>
+     <p>Selected: <strong>{picked.label}</strong> — locking theme…</p>
     </div>
    )}
    <form className="asm-sell-pin-form" onSubmit={submitPin}>
@@ -306,14 +341,30 @@ export function ThemePane({
 
 export function StoryboardCard({
  storyboard,
+ pinUrl,
  busy,
  onChip
 }:{
  storyboard:StoryboardState;
+ pinUrl?:string;
  busy:boolean;
  onChip:(text:string)=>void;
 }){
  const reveal=String(storyboard.revealType||'door').replace(/_/g,' ');
+ const hasFirst=Boolean(storyboard.firstImageUrl);
+ const hasLast=Boolean(storyboard.lastImageUrl);
+ const hasPreviews=hasFirst&&hasLast;
+ const craftPrompt=[
+  'Generate First and Last still previews now with craft_storyboard_stills.',
+  'Use the locked theme pin — do NOT ask for another Pinterest URL.',
+  pinUrl?('pinUrl: '+pinUrl):'',
+  'revealType: '+String(storyboard.revealType||'door'),
+  'firstBrief: '+String(storyboard.firstBrief||''),
+  'lastBrief: '+String(storyboard.lastBrief||''),
+  storyboard.firstImageUrl?('firstBaseUrl: '+storyboard.firstImageUrl):'',
+  storyboard.lastImageUrl?('lastBaseUrl: '+storyboard.lastImageUrl):'',
+  'Show both images in chat, then ask confirm / tweak / Lock.'
+ ].filter(Boolean).join('\n');
  return (
   <div className="asm-sell-board" role="group" aria-label="Entrance storyboard">
    <p className="asm-gpt-choice-title">Entrance storyboard {storyboard.locked?'· locked':''}</p>
@@ -321,7 +372,9 @@ export function StoryboardCard({
     <li>
      <strong>First · {reveal}</strong>
      <span>{storyboard.firstBrief}</span>
-     {storyboard.firstImageUrl&&<img src={storyboard.firstImageUrl} alt="First reveal still"/>}
+     {hasFirst
+      ?<img src={storyboard.firstImageUrl} alt="First reveal still"/>
+      :<em className="asm-sell-board-missing">Preview not generated yet</em>}
     </li>
     <li>
      <strong>Middle · video journey</strong>
@@ -330,22 +383,36 @@ export function StoryboardCard({
     <li>
      <strong>Last · couple freeze</strong>
      <span>{storyboard.lastBrief}</span>
-     {storyboard.lastImageUrl&&<img src={storyboard.lastImageUrl} alt="Last couple still"/>}
+     {hasLast
+      ?<img src={storyboard.lastImageUrl} alt="Last couple still"/>
+      :<em className="asm-sell-board-missing">Preview not generated yet</em>}
     </li>
    </ol>
    {!storyboard.locked&&(
     <div className="asm-gpt-chips">
-     <button type="button" className="asm-gpt-chip" disabled={busy} onClick={()=>onChip('Lock this storyboard — First, Middle, and Last look right.')}>
+     <button type="button" className="asm-gpt-chip asm-gpt-chip-primary" disabled={busy} onClick={()=>onChip(craftPrompt)}>
+      {hasPreviews?'Regenerate First & Last previews':'Generate First & Last previews'}
+     </button>
+     <button
+      type="button"
+      className="asm-gpt-chip"
+      disabled={busy||!hasPreviews}
+      onClick={()=>onChip(
+       'Lock this storyboard — First, Middle, and Last look right.\n'+
+       'firstImageUrl: '+storyboard.firstImageUrl+'\n'+
+       'lastImageUrl: '+storyboard.lastImageUrl
+      )}
+     >
       Lock storyboard
      </button>
-     <button type="button" className="asm-gpt-chip" disabled={busy} onClick={()=>onChip('Change the First reveal type — show Door, Envelope, Building frame, Arches, or Windows.')}>
+     <button type="button" className="asm-gpt-chip" disabled={busy} onClick={()=>onChip('Change the First reveal type — show Door, Envelope, Building frame, Arches, or Windows. Then craft new First + Last previews.')}>
       Change reveal
      </button>
-     <button type="button" className="asm-gpt-chip" disabled={busy} onClick={()=>onChip('Edit the Last couple freeze with Flare — make it happier and more cinematic.')}>
-      Edit Last with Flare
+     <button type="button" className="asm-gpt-chip" disabled={busy||!hasLast} onClick={()=>onChip('Edit the Last couple freeze with Flare — make it happier and more cinematic. Show the new image.')}>
+      Edit Last
      </button>
-     <button type="button" className="asm-gpt-chip" disabled={busy} onClick={()=>onChip('Edit the First reveal with Flare using our storyboard brief.')}>
-      Edit First with Flare
+     <button type="button" className="asm-gpt-chip" disabled={busy||!hasFirst} onClick={()=>onChip('Edit the First reveal with Flare using our storyboard brief. Show the new image.')}>
+      Edit First
      </button>
     </div>
    )}
