@@ -118,7 +118,7 @@ export default async function handler(req,res){
    system,
    messages:modelMessages,
    tools,
-   stopWhen:stepCountIs(8),
+   stopWhen:stepCountIs(12),
    maxRetries:1,
    onError({error}){
     console.error('assembly-chat streamText',provider,error);

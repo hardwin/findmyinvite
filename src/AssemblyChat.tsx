@@ -14,6 +14,17 @@ import {
 } from 'react';
 import './assembly-chat.css';
 import {managerFetch,managerHeaders} from './manager-api';
+import {
+ defaultSellState,
+ mergeSellFromTool,
+ ThemePane,
+ StoryboardCard,
+ ProcessChip,
+ GenerateBar,
+ ReadyBanner,
+ DetailsFields,
+ type SellDeskState
+} from './AssemblySellDesk';
 
 type JobStatus={
  jobId:string;
@@ -49,13 +60,14 @@ const CHATS_KEY='fmi.assembly.chats.v1';
 const ACTIVE_KEY='fmi.assembly.activeChatId';
 
 const SUGGESTIONS=[
- {emo:'💍',text:'We are planning our wedding — help me shape the digital invite'},
- {emo:'✨',text:'I want a dreamy anime-style couple portrait for the opening'},
- {emo:'🌸',text:'Talk me through the mood first — temple, garden, or modern glam?'}
+ {emo:'💍',text:'I need a cinematic digital wedding invitation for my client'},
+ {emo:'✨',text:'Help me pick a romantic theme — temple garden glam'},
+ {emo:'🌸',text:"I'm a photographer — walk me through creating an invite today"}
 ];
 
-const IMAGE_TOOLS=new Set(['mix_image','regen_opening_still']);
+const IMAGE_TOOLS=new Set(['mix_image','regen_opening_still','flare_edit']);
 const IMAGE_TIMEOUT_MS=120_000;
+const SELL_KEY='fmi.assembly.sell.v1';
 
 function formatElapsed(ms:number){
  const total=Math.max(0,Math.floor(ms/1000));
@@ -794,16 +806,24 @@ function ChoicePrompt({
 
 function toolStatusLabel(name:string,state:string,{pending,isImage,busy,elapsedMs}:{pending:boolean;isImage:boolean;busy:boolean;elapsedMs:number}){
  const elapsed=busy&&elapsedMs?(' '+formatElapsed(elapsedMs)):'';
- if(name==='mix_image'){
+ if(name==='mix_image'||name==='flare_edit'){
   if(state==='input-available'||state==='input-streaming'||state==='partial-call'||state==='call'){
-   return 'Editing Image - Using Reference Image';
+   return name==='flare_edit'?'Flare edit — preparing':'Editing Image - Using Reference Image';
   }
-  if(pending)return 'Editing Image - Generating'+elapsed;
-  return 'Editing Image - Done';
+  if(pending)return (name==='flare_edit'?'Flare edit — generating':'Editing Image - Generating')+elapsed;
+  return name==='flare_edit'?'Flare edit — done':'Editing Image - Done';
  }
- if(name==='resolve_pin'){
+ if(name==='resolve_pin'||name==='lock_theme_pin'){
   if(pending)return 'Importing from Pinterest'+elapsed;
   return 'Importing from Pinterest - Done';
+ }
+ if(name==='update_theme_search'){
+  if(pending)return 'Updating Pinterest desk'+elapsed;
+  return 'Pinterest desk updated';
+ }
+ if(name==='propose_storyboard'||name==='lock_storyboard'){
+  if(pending)return 'Storyboard…'+elapsed;
+  return name==='lock_storyboard'?'Storyboard locked':'Storyboard ready';
  }
  if(pending){
   if(isImage)return name.replace(/_/g,' ')+' — generating'+elapsed;
@@ -897,6 +917,39 @@ function MessageView({
      />
     );
    }
+   if(name==='flare_edit'&&urls[0]&&String(output?.which||'')==='last'){
+    nodes.push(
+     <FaceSwapBeforeLock
+      key={message.id+'-flare-'+i}
+      heroUrl={urls[0]}
+      busy={busy}
+      onChip={onChip}
+     />
+    );
+   }
+   if((name==='propose_storyboard'||name==='lock_storyboard')&&output?.storyboard&&typeof output.storyboard==='object'){
+    nodes.push(
+     <StoryboardCard
+      key={message.id+'-board-'+i}
+      storyboard={output.storyboard as {
+       revealType:string;
+       firstBrief:string;
+       middleBeats:string[];
+       lastBrief:string;
+       firstImageUrl?:string;
+       lastImageUrl?:string;
+       locked?:boolean;
+      }}
+      busy={busy}
+      onChip={onChip}
+     />
+    );
+   }
+   if(name==='save_invite_details'&&output?.complete){
+    nodes.push(
+     <p className="asm-sell-eta" key={message.id+'-det-'+i}>Details saved — tap Generate when you are ready. Estimated time: about 15 minutes.</p>
+    );
+   }
    if(name==='mix_image'&&output&&output.ok===false&&(output.timedOut||output.canFallbackXai)){
     nodes.push(
      <ChoicePrompt
@@ -939,10 +992,20 @@ export default function AssemblyChat({
  onUnauth:()=>void;
 }){
  const [navOpen,setNavOpen]=useState(false);
+ const [themeOpen,setThemeOpen]=useState(true);
  const [input,setInput]=useState('');
  const [attachments,setAttachments]=useState<Attachment[]>([]);
  const [localError,setLocalError]=useState('');
  const [jobId,setJobId]=useState(()=>readSession(JOB_KEY));
+ const [sell,setSell]=useState<SellDeskState>(()=>{
+  try{
+   const raw=sessionStorage.getItem(SELL_KEY);
+   if(raw)return {...defaultSellState(),...JSON.parse(raw)};
+  }catch{/* */}
+  return defaultSellState();
+ });
+ const [readyBanner,setReadyBanner]=useState(false);
+ const [readyPreview,setReadyPreview]=useState('');
  const [chats,setChats]=useState<ChatRecord[]>(()=>readChats());
  const [chatId,setChatId]=useState(()=>{
   let active='';
@@ -1124,6 +1187,40 @@ export default function AssemblyChat({
   try{localStorage.setItem(ACTIVE_KEY,chatId);}catch{/* */}
  },[messages,chatId,jobId]);
 
+ // Mirror agent tools into the sell desk (Pinterest iframe, storyboard, details, stage).
+ useEffect(()=>{
+  let next=defaultSellState();
+  for(const message of messages){
+   if(message.role!=='assistant')continue;
+   for(const part of message.parts||[]){
+    if(!isToolUIPart(part as never))continue;
+    const name=getToolName(part as never);
+    const output=toolPayload(part as Record<string,unknown>);
+    next=mergeSellFromTool(next,name,output);
+   }
+  }
+  setSell(next);
+  try{sessionStorage.setItem(SELL_KEY,JSON.stringify(next));}catch{/* */}
+ },[messages]);
+
+ useEffect(()=>{
+  if(!jobId)return;
+  let cancelled=false;
+  void (async()=>{
+   try{
+    const res=await managerFetch('/api/assembly?action=template1-status&jobId='+encodeURIComponent(jobId));
+    const job=await res.json().catch(()=>({}));
+    if(cancelled||!res.ok)return;
+    if(String(job.status||'')==='preview'||String(job.phase||'')==='preview'){
+     setReadyBanner(true);
+     setReadyPreview(String(job.previewUrl||job.demo||''));
+     setSell(prev=>({...prev,stage:'ready'}));
+    }
+   }catch{/* */}
+  })();
+  return ()=>{cancelled=true;};
+ },[jobId,messages.length]);
+
  const sendChip=useCallback((text:string)=>{
   if(!text.trim()||busy)return;
   stickToBottomRef.current=true;
@@ -1185,7 +1282,11 @@ export default function AssemblyChat({
   setImageTimeout(false);
   imageTimedOutRef.current=false;
   setJobId('');
+  setSell(defaultSellState());
+  setReadyBanner(false);
+  setReadyPreview('');
   writeSession(JOB_KEY,'');
+  try{sessionStorage.removeItem(SELL_KEY);}catch{/* */}
   writeSession(CHAT_KEY,id);
   try{localStorage.setItem(ACTIVE_KEY,id);}catch{/* */}
   setNavOpen(false);
@@ -1214,6 +1315,29 @@ export default function AssemblyChat({
  }
 
  const ready=Boolean(input.trim()||attachments.length);
+ const canGenerate=sell.stage==='generate'&&Boolean(sell.heroUrl)&&Boolean(sell.details.displayName||sell.details.complete);
+
+ function requestGenerate(){
+  if(busy||!canGenerate)return;
+  const board=sell.storyboard;
+  const lines=[
+   'Generate confirmed. Start Template 1 now with start_template1.',
+   'displayName: '+(sell.details.displayName||'Wedding Invite'),
+   'heroImageUrl: '+sell.heroUrl,
+   sell.pinUrl?('pinUrl: '+sell.pinUrl):'',
+   sell.brideImageUrl?('brideImageUrl: '+sell.brideImageUrl):'',
+   sell.groomImageUrl?('groomImageUrl: '+sell.groomImageUrl):'',
+   sell.details.brideName?('brideName: '+sell.details.brideName):'',
+   sell.details.groomName?('groomName: '+sell.details.groomName):'',
+   sell.details.musicId?('musicId: '+sell.details.musicId):'',
+   board?('storyboard revealType: '+board.revealType):'',
+   board?('storyboard firstBrief: '+board.firstBrief):'',
+   board?('storyboard middleBeats: '+(board.middleBeats||[]).join(' | ')):'',
+   board?('storyboard lastBrief: '+board.lastBrief):'',
+   'Estimated time reminder: about 15 minutes. Credit charge later — do not invent a charge.'
+  ].filter(Boolean);
+  sendChip(lines.join('\n'));
+ }
 
  const composer=(
   <div className="asm-gpt-composer">
@@ -1239,7 +1363,7 @@ export default function AssemblyChat({
       ref={fieldRef}
       className="asm-gpt-field"
       rows={1}
-      placeholder={hasThread?'Ask Assembly':'Ask Assembly…'}
+      placeholder={hasThread?'Reply to Akay…':'Tell Akay what you want to create…'}
       value={input}
       disabled={busy}
       enterKeyHint="send"
@@ -1250,15 +1374,12 @@ export default function AssemblyChat({
       spellCheck
       onChange={(event:ChangeEvent<HTMLTextAreaElement>)=>{
        setInput(event.target.value);
-       // Grow immediately on the same tick (before React paint) for less friction.
        const el=event.currentTarget;
        el.style.height='auto';
        el.style.height=Math.min(el.scrollHeight,Math.round(16*1.4*8))+'px';
       }}
       onKeyDown={onKeyDown}
       onFocus={()=>{
-       // Keyboard inset is handled by visualViewport. Only nudge the thread if
-       // the reader was already following the bottom — never yank them out of history.
        if(!stickToBottomRef.current)return;
        window.setTimeout(()=>scrollThreadToEnd(false),50);
        window.setTimeout(()=>scrollThreadToEnd(false),300);
@@ -1285,7 +1406,7 @@ export default function AssemblyChat({
  );
 
  return (
-  <div ref={shellRef} className={'asm-gpt'+(navOpen?' is-open':'')} data-testid="asm-chat">
+  <div ref={shellRef} className={'asm-gpt'+(navOpen?' is-open':'')+(themeOpen?' has-theme':'')} data-testid="asm-chat">
    <button type="button" className="asm-gpt-backdrop" aria-label="Close menu" onClick={()=>setNavOpen(false)}/>
 
    <aside className="asm-gpt-side" aria-label="Chat history">
@@ -1321,9 +1442,9 @@ export default function AssemblyChat({
      <div className="asm-gpt-ava" aria-hidden="true">FM</div>
      <div className="asm-gpt-user">
       <strong>FindMyInvite</strong>
-      <span>{cloud?'Cloud · Assembly':'Local · Assembly'}</span>
+      <span>{cloud?'Cloud · Co-Pilot':'Local · Co-Pilot'}</span>
      </div>
-     <a className="asm-gpt-icon" href="/assembly/pipeline" title="Pipeline" aria-label="Pipeline">
+     <a className="asm-gpt-icon" href="/manager/pipeline" title="Pipeline" aria-label="Pipeline">
       <Icon d="M4 10h16M6 10V7a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v3M5 10v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8"/>
      </a>
     </div>
@@ -1331,38 +1452,46 @@ export default function AssemblyChat({
 
    <section className="asm-gpt-main">
     <header className="asm-gpt-top">
-     <div style={{display:'flex',alignItems:'center',gap:4}}>
+     <div style={{display:'flex',alignItems:'center',gap:4,flexWrap:'wrap'}}>
       <button type="button" className="asm-gpt-icon asm-gpt-menu" aria-label="Open sidebar" onClick={()=>setNavOpen(true)}>
        <Icon d="M4 6h16M4 12h16M4 18h16"/>
       </button>
-      <span className="asm-gpt-model">Assembly</span>
+      <span className="asm-gpt-model">Akay · Invite Studio</span>
+      <ProcessChip stage={sell.stage}/>
      </div>
      <div className="asm-gpt-top-actions">
-      <a className="asm-gpt-pill ghost" href="/assembly/pipeline">Pipeline</a>
+      <button type="button" className="asm-gpt-pill ghost" onClick={()=>setThemeOpen(v=>!v)}>
+       {themeOpen?'Hide Pinterest':'Show Pinterest'}
+      </button>
+      <a className="asm-gpt-pill ghost" href="/manager/pipeline">Pipeline</a>
       <button type="button" className="asm-gpt-pill solid" onClick={startNewChat}>New chat</button>
      </div>
     </header>
 
-        <div className="asm-gpt-scroll" ref={scrollRef} role="log" aria-live="polite">
-     {!hasThread?(
-      <div className="asm-gpt-home">
-       <h1>What&apos;s on your mind today?</h1>
-       <div className="asm-gpt-home-col">
-        <ul className="asm-gpt-suggestions">
-         {SUGGESTIONS.map(item=>(
-          <li key={item.text}>
-           <button type="button" className="asm-gpt-suggestion" disabled={busy} onClick={()=>sendChip(item.text)}>
-            <span className="emo" aria-hidden="true">{item.emo}</span>
-            <span className="txt">{item.text}</span>
-           </button>
-          </li>
-         ))}
-        </ul>
+    <div className="asm-sell-workspace">
+     <div className="asm-gpt-scroll" ref={scrollRef} role="log" aria-live="polite">
+      {readyBanner&&(
+       <ReadyBanner previewUrl={readyPreview} onDismiss={()=>setReadyBanner(false)}/>
+      )}
+      {!hasThread?(
+       <div className="asm-gpt-home">
+        <h1>What are we creating today?</h1>
+        <p className="asm-sell-home-sub">I&apos;m Akay — I&apos;ll walk you through theme, storyboard, faces, details, then Generate.</p>
+        <div className="asm-gpt-home-col">
+         <ul className="asm-gpt-suggestions">
+          {SUGGESTIONS.map(item=>(
+           <li key={item.text}>
+            <button type="button" className="asm-gpt-suggestion" disabled={busy} onClick={()=>sendChip(item.text)}>
+             <span className="emo" aria-hidden="true">{item.emo}</span>
+             <span className="txt">{item.text}</span>
+            </button>
+           </li>
+          ))}
+         </ul>
+        </div>
        </div>
-      </div>
-     ):(
-      <div className="asm-gpt-thread">
-
+      ):(
+       <div className="asm-gpt-thread">
         {messages.map(message=>{
          const text=messageText(message);
          return (
@@ -1381,11 +1510,34 @@ export default function AssemblyChat({
           </article>
          );
         })}
-        {jobId&&<JobCard jobId={jobId} onUpdate={job=>{if(job.jobId)setJobId(job.jobId);}} onDismiss={()=>setJobId('')}/>}
+        {sell.stage==='face_swap'&&(sell.heroUrl||sell.storyboard?.lastImageUrl)&&(
+         <FaceSwapBeforeLock
+          heroUrl={sell.heroUrl||sell.storyboard?.lastImageUrl||''}
+          busy={busy}
+          onChip={sendChip}
+         />
+        )}
+        {sell.stage==='details'&&!sell.details.complete&&(
+         <DetailsFields busy={busy} onSubmit={sendChip}/>
+        )}
+        <GenerateBar ready={canGenerate} busy={busy} details={sell.details} onGenerate={requestGenerate}/>
+        {jobId&&(
+         <JobCard
+          jobId={jobId}
+          onUpdate={job=>{
+           if(job.jobId)setJobId(job.jobId);
+           if(job.status==='preview'||job.phase==='preview'){
+            setReadyBanner(true);
+            setReadyPreview(String(job.previewUrl||job.demo||''));
+           }
+          }}
+          onDismiss={()=>setJobId('')}
+         />
+        )}
         {imageTimeout?(
          <ChoicePrompt
           tone="alert"
-          title="Sorry, I am currently facing problem generating the images. Replicate may have timed out — how should we continue?"
+          title="Sorry, image generation hit a snag. How should we continue?"
           disabled={busy}
           options={[
            {id:'xai',label:'Fall back to xAI image API',submit:'Approved — fall back to xAI. Call mix_image again with provider "xai" using the same pin and style.'},
@@ -1409,10 +1561,20 @@ export default function AssemblyChat({
          </p>
         ):null}
         <div ref={bottomRef}/>
-      </div>
-     )}
+       </div>
+      )}
+     </div>
+     {composer}
     </div>
-    {composer}
+
+    {themeOpen&&(
+     <ThemePane
+      state={sell}
+      busy={busy}
+      onLockPin={url=>sendChip('Lock this Pinterest theme pin: '+url+'\nCall resolve_pin then lock_theme_pin.')}
+      onChip={sendChip}
+     />
+    )}
    </section>
   </div>
  );

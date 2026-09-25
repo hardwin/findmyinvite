@@ -8,6 +8,14 @@ Soul: [akay-soul.md](akay-soul.md) · standing facts: [project-context.md](proje
 
 Read this before `docs/handoff/STATUS.md`. The v0.9.0 handoff is the frozen baseline; this file is the current truth after that tag.
 
+## 2026-09-25 — Photographer Sell Path (life-changing Co-Pilot)
+- **Akay persona:** invitation-store sales guide — understand style → show options → confirm → next. Always names the step.
+- **Orchestration:** `/manager` chat + **on-page Pinterest iframe** (right Theme desk). Paste pin to lock without leaving FMI.
+- **Storyboard:** First = reveal hook (door / envelope / building frame / arches / windows); Middle = opening-video journey; Last = happy romantic couple freeze. Edits via **`flare_edit`** (gpt-image-2.5-flare).
+- **Close the sale:** Face Swap → lock hero → details widgets → **Generate** (~15 min ETA, credit stub) → Ready banner on return.
+- Files: `server/assembly-sell-path.mjs`, `server/assembly-chat-agent.mjs`, `src/AssemblySellDesk.tsx`, `src/AssemblyChat.tsx`, prompt wiring in `assembly-template1-prompts.mjs` + `assembly-template1.mjs`.
+- Tests: `tests/server-assembly-sell-path.mjs`.
+
 ## 2026-09-25 — Photographer Co-Pilot (/manager)
 - Assembly rebranded for **Event Planners & Photographers**: landing CTA → `/manager`, permanent redirect `/assembly` → `/manager`.
 - Login: painterly Co-Pilot page (`ManagerLogin` + `manager-login-bg.png`) — Modern Photographer Co-Pilot for Generating Invitation Websites · ₹999 platform credit copy.

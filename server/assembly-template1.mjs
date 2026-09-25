@@ -11,6 +11,7 @@ import {toStill720,craftOpening,craftHero,stagePlates,copyInto,extractPalette,as
 import {themeCss,patchThemeCss,patchPreviewDefaults,patchMusicTracks,patchDataRow,patchAppMusicOption} from './assembly-template1-theme.mjs';
 import {getMusicTrack} from './music-library.mjs';
 import {lookupFaceSwapSolos} from './face-swap.mjs';
+import {storyboardToPromptParams} from './assembly-sell-path.mjs';
 
 export function jobsDir(root=ROOT){return join(root,'work','assembly-jobs');}
 export const JOBS_DIR=jobsDir();
@@ -101,7 +102,13 @@ export function validateTemplate1Input(body={}){
  if(typeof body.brideDetails==='string'&&body.brideDetails.trim())couple.brideDetails=body.brideDetails.trim().slice(0,200);
  const promptParams={};
  if(body.promptParams&&typeof body.promptParams==='object'){
-  for(const [k,v] of Object.entries(body.promptParams))if(typeof v==='string' )promptParams[k]=v.slice(0,300);
+  for(const [k,v] of Object.entries(body.promptParams)){
+   if(typeof v==='string'&&v.trim())promptParams[k]=v.trim().slice(0,400);
+  }
+ }
+ // Sell-path storyboard may arrive nested — flatten into promptParams.
+ if(body.storyboard&&typeof body.storyboard==='object'){
+  Object.assign(promptParams,storyboardToPromptParams(body.storyboard));
  }
  // Optional Face Swap solos → Bride/Groom chapters (photos[0]/[1]).
  let brideImageUrl=optionalHttpsUrl(body.brideImageUrl||body.bride_image_url||body.brideUrl,'Bride portrait');

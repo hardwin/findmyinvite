@@ -100,7 +100,8 @@ Do not start 2.0 coding until Ashok says the train is open (or explicitly greenl
 **OSS first:** InstantID / IP-Adapter (and a video-capable face pipeline) on Replicate as glue — do **not** train custom faces.  
 **Done:** Host previews without faces → pays ₹300 → published invite shows swapped faces on stills **and** opening/hero video Ashok accepts.  
 **Depends on:** #11–12 for charge; can stub UX with a feature flag before live money.  
-**Risk:** Likeness consent; fail closed on moderation; never charge without verified capture; video inference cost/latency — set clear progress UI.
+**Risk:** Likeness consent; fail closed on moderation; never charge without verified capture; video inference cost/latency — set clear progress UI.  
+**Note (2026-09-25):** Photographer Co-Pilot Sell Path on `/manager` uses Face Swap after storyboard (Assembly craft). Official host publish upsell above remains the #9 Done gate.
 
 ### 10. Login — guests / admin / mod
 **Intent:** Roles beyond host email+password.  

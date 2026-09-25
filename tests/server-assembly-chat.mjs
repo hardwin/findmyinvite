@@ -5,19 +5,19 @@ import {buildAssemblyChatTools,ASSEMBLY_CHAT_SYSTEM,ASSEMBLY_CHAT_MODEL} from '.
 import {assertHttpUrl,buildMixPrompt} from '../server/assembly-image-mix.mjs';
 import {HttpError} from '../server/core.mjs';
 
-test('assembly chat system prompt covers mission order',()=>{
+test('assembly chat system prompt covers Photographer Sell Path',()=>{
  assert.match(ASSEMBLY_CHAT_SYSTEM,/FindMyInvite/i);
- assert.match(ASSEMBLY_CHAT_SYSTEM,/digital wedding invitation/i);
- assert.match(ASSEMBLY_CHAT_SYSTEM,/anime/i);
- assert.match(ASSEMBLY_CHAT_SYSTEM,/Pinterest|Pin|Attach|Camera/i);
+ assert.match(ASSEMBLY_CHAT_SYSTEM,/digital (wedding )?invitation/i);
+ assert.match(ASSEMBLY_CHAT_SYSTEM,/sales person|Sell Path/i);
+ assert.match(ASSEMBLY_CHAT_SYSTEM,/Pinterest/i);
+ assert.match(ASSEMBLY_CHAT_SYSTEM,/storyboard/i);
  assert.match(ASSEMBLY_CHAT_SYSTEM,/VIBE|display name/i);
  assert.match(ASSEMBLY_CHAT_SYSTEM,/Template 1|start_template1/i);
  assert.match(ASSEMBLY_CHAT_SYSTEM,/Hi/i);
- assert.match(ASSEMBLY_CHAT_SYSTEM,/MUST use tools/i);
+ assert.match(ASSEMBLY_CHAT_SYSTEM,/flare_edit|lock_final_image/i);
+ assert.match(ASSEMBLY_CHAT_SYSTEM,/set_sell_stage|update_theme_search/i);
+ assert.match(ASSEMBLY_CHAT_SYSTEM,/reveal hook|door|envelope/i);
  assert.match(ASSEMBLY_CHAT_MODEL,/grok/i);
- assert.match(ASSEMBLY_CHAT_SYSTEM,/mix_image|lock_final_image/i);
- assert.match(ASSEMBLY_CHAT_SYSTEM,/regen_opening_still|approve_stills/i);
- assert.match(ASSEMBLY_CHAT_SYSTEM,/Door-First|Door-First|iterate/i);
  assert.doesNotMatch(ASSEMBLY_CHAT_SYSTEM,/Grok Assembly Coach/i);
 });
 
