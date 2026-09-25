@@ -8,6 +8,12 @@ Soul: [akay-soul.md](akay-soul.md) · standing facts: [project-context.md](proje
 
 Read this before `docs/handoff/STATUS.md`. The v0.9.0 handoff is the frozen baseline; this file is the current truth after that tag.
 
+## 2026-09-25 — Walkthrough v2: real webpage sections + kinetic transitions
+- Playwright full-viewport capture of invite slides (text, motifs, scratched date). Skips hero + Moments.
+- No couple/poster stills (already in Opening/Hero videos).
+- Stronger zoom/pan/shake per section; rotating fast xfade (slide/wipe/radial/dissolve/…) between pages.
+- Rebake: `FORCE=1 CAPTURE_ORIGIN=https://findmyinvite.com node scripts/invite-walkthrough.mjs royal-prestige-12`.
+
 ## 2026-09-25 — Invite Download Pack (marketing walkthrough video)
 - **Not AI video.** ffmpeg stitch: Opening → Transition (xfade) → Hero → pages @1.5s (gentle motion). Scratch revealed in export mode; Moments omitted.
 - Prebaked Temple Wedding (`royal-prestige-12`) under `public/assets/catalogue/v1/*-walkthrough.{mp4,png,pdf}`.
