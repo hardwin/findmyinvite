@@ -42,7 +42,7 @@ Guest footer stays Letter PDF + Image only.
 ```
 FORCE=1 FORMATS=video node scripts/invite-walkthrough.mjs royal-prestige-12
 CAPTURE_ONLY=1 node scripts/invite-walkthrough.mjs royal-prestige-12   # stills only
-POST /api/invite-export?action=bake   # empty Sandbox, curl main, Chrome screenshots (not Sparticuz)
+POST /api/invite-export?action=bake   # empty Amazon Linux Sandbox, dnf nss/gtk, Sparticuz screenshots
 ```
 
 Git never gets `*-walkthrough.mp4`. Manifest + Blob URLs only.

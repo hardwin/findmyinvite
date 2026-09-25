@@ -70,11 +70,11 @@ test('Export Video accepts clone ids and Vercel preview origins',()=>{
  assert.match(publicBakeError('browserType.launch: Target page, context or browser has been closed'),/Cloud capture/i);
 });
 
-test('Walkthrough sandbox boots empty VM + Chrome, not Sparticuz or git source',async()=>{
+test('Walkthrough sandbox boots Amazon Linux Chrome libs + Sparticuz',async()=>{
  const {walkthroughWorkerBootCommand}=await import('../server/walkthrough-cloud.mjs');
  const boot=walkthroughWorkerBootCommand();
  assert.match(boot,/codeload.github.com\/hardwin\/findmyinvite/);
- assert.match(boot,/playwright install chrome/);
- assert.doesNotMatch(boot,/CHROMIUM_PACK=1/);
- assert.doesNotMatch(boot,/install chromium/);
+ assert.match(boot,/dnf install -y nss/);
+ assert.match(boot,/CHROMIUM_PACK=1/);
+ assert.doesNotMatch(boot,/playwright install chrome/);
 });

@@ -10,8 +10,8 @@ Read this before `docs/handoff/STATUS.md`. The v0.9.0 handoff is the frozen base
 
 ## 2026-09-26 — Generate Video: empty Sandbox + Chrome
 - Failed jobs had `sandboxId: null` — `Sandbox.create({source: git})` never created a VM.
-- Empty Sandbox, curl `main` tarball, `playwright install chrome` (not headless-shell, not Sparticuz).
-- Sparticuz stays Lambda-only. Job `debugError` is stored, not shown in studio.
+- Empty Sandbox, curl `main` tarball. Playwright `install chrome` dies on Amazon Linux (`amzn` only allows Ubuntu).
+- Proven on live `sbx_rYdTJzp4DTqhSCg8xpf9gM9p20gl`: `dnf install nss gtk3…` then Sparticuz + puppeteer-core opens the invite.
 
 ## 2026-09-25 — Sandbox video capture: screenshots only
 - Vercel Sandbox chrome-headless-shell dies on Playwright `recordVideo`. Capture is now hero + chapter screenshots (hero still → 6s clip), then Flare / Imagine as before.

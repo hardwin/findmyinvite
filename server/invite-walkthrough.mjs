@@ -267,28 +267,21 @@ async function launchBrowser(pw){
   const {chromium}=await import('playwright-core');
   return chromium.connectOverCDP(process.env.BROWSER_WS_ENDPOINT);
  }
- // Vercel function (Lambda): Sparticuz. Never use it in Sandbox — wrong binary.
- if(process.env.CHROMIUM_PACK==='1'&&process.env.WALKTHROUGH_CLOUD_WORKER!=='1'){
+ // Amazon Linux (Vercel Sandbox + Lambda): Sparticuz + puppeteer-core.
+ // Playwright `install chrome` only supports Ubuntu. Need dnf nss/gtk on Sandbox.
+ if(process.env.WALKTHROUGH_CLOUD_WORKER==='1'||process.env.CHROMIUM_PACK==='1'){
   const chromium=(await import('@sparticuz/chromium')).default;
   try{chromium.setGraphicsMode(false);}catch{/* */}
   const executablePath=await chromium.executablePath();
-  const args=[...chromium.args,'--disable-dev-shm-usage'];
+  const libDir=dirname(executablePath);
+  process.env.LD_LIBRARY_PATH=[libDir,process.env.LD_LIBRARY_PATH||''].filter(Boolean).join(':');
   const puppeteer=await import('puppeteer-core');
   return wrapPuppeteerBrowser(await puppeteer.default.launch({
-   args,
+   args:[...chromium.args,'--disable-dev-shm-usage'],
    executablePath,
    headless:true,
    dumpio:false
   }));
- }
- // Sandbox VM: full Chrome (not chromium_headless_shell — that dies here).
- if(process.env.WALKTHROUGH_CLOUD_WORKER==='1'){
-  try{
-   return await pw.chromium.launch({...launchOpts,channel:'chrome'});
-  }catch(error){
-   console.warn('playwright chrome channel failed',error?.message||error);
-   return pw.chromium.launch(launchOpts);
-  }
  }
  if(process.env.PLAYWRIGHT_CHANNEL){
   return pw.chromium.launch({...launchOpts,channel:process.env.PLAYWRIGHT_CHANNEL});
