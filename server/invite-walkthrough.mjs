@@ -1,14 +1,10 @@
 /**
- * Invite walkthrough — live webpage VIDEO (not stills).
- * Opening (asset mp4, hold trimmed, 3% zoom) → fade → Hero live record
- * → fadewhite → each slide live record (motifs + motion).
- * Capture viewport AND recordVideo both 720×1280 (must match — larger record
- * size with smaller viewport paints the page in a tiny corner).
- * Mobile layout forced via .invitation-export CSS (full-bleed cards).
- * Encode CRF17 medium, lanczos. Work clips under work/exports/ are intermediates.
- * Media ships on Vercel Blob only (git = website + template code).
- * Live manifest: Blob walkthrough/manifest.json (merged over shipped JSON).
- * Skips Moments, RSVP, Transport, Accommodation, Gifts.
+ * Invite walkthrough — Export Video (₹400 add-on).
+ * Opening (asset mp4) → fade → Hero live (names on page) → fadewhite →
+ * Imagine chapters: screenshot → Flare recreate → xAI 4s bullet-time.
+ * Playbook: documents/export-video.md
+ * Capture viewport AND recordVideo both 720×1280 (must match).
+ * Media ships on Vercel Blob only. Live manifest: Blob walkthrough/manifest.json.
  */
 import {createRequire} from 'node:module';
 import {mkdir,rm,writeFile,access,copyFile,readFile} from 'node:fs/promises';
@@ -19,6 +15,7 @@ import {put} from '@vercel/blob';
 import {run,probeMedia,assertMuted} from './assembly-template1-craft.mjs';
 import {HOLD_SECONDS} from './assembly-template1-prompts.mjs';
 import {HttpError} from './core.mjs';
+import {generateImagineChapters,pickExportChapters} from './invite-walkthrough-imagine.mjs';
 
 const require=createRequire(import.meta.url);
 const ROOT=fileURLToPath(new URL('..',import.meta.url));
@@ -43,8 +40,6 @@ const MASTER_H=1280;
 const CRF=17;
 const PRESET='medium';
 const OPEN_ZOOM=0.03;
-
-const SKIP_SECTIONS=new Set(['gallery','rsvp','transport','accommodation','gifts']);
 
 const ENCODE_COMMON=['-an','-c:v','libx264','-crf',String(CRF),'-preset',PRESET,'-pix_fmt','yuv420p','-r',String(FPS),'-movflags','+faststart'];
 
@@ -184,6 +179,8 @@ export async function uploadWalkthroughBlob({templateId,format,filePath,duration
  row.viewport='720x1280';
  row.deliver='720x1280';
  row.record='720x1280';
+ row.workflow='imagine-4s';
+ row.priceInr=400;
  manifest[p.id]=row;
  await writeLiveWalkthroughManifest(manifest);
  return {url:serve,blobUrl:blob.url,pathname,format:formatKey,id:p.id};
@@ -398,23 +395,22 @@ export async function captureInviteMedia({templateId,origin,outDir}){
   await prepExportPage(page);
   await page.waitForTimeout(800);
 
-  const slideMeta=await page.evaluate((skip)=>{
-   const skipTitle=/transportation|accommodation|gifts|rsvp|our moments/i;
+  const slideMeta=await page.evaluate(()=>{
    const slides=[...document.querySelectorAll('.invite-swiper .swiper-slide')];
    return slides.map((slide,i)=>{
     const hero=!!slide.querySelector('.invitation-hero');
     const section=slide.querySelector('[data-section]')?.getAttribute('data-section')||'';
     const heading=(slide.querySelector('h2')?.textContent||'').trim();
-    const blob=((slide.querySelector('.invite-chapter-inner')||slide).textContent||'').slice(0,160);
-    const skipSection=(section&&skip.includes(section))||skipTitle.test(heading)||skipTitle.test(blob);
-    return {i,hero,section,heading,ok:!(hero||skipSection)};
+    const text=((slide.querySelector('.invite-chapter-inner')||slide).innerText||'').replace(/\s+/g,' ').trim().slice(0,420);
+    return {i,hero,section,heading,text};
    });
-  },[...SKIP_SECTIONS]);
+  });
 
   const heroIndex=slideMeta.findIndex(s=>s.hero);
-  const targets=slideMeta.filter(s=>s.ok);
+  const chapterPlan=pickExportChapters(slideMeta.filter(s=>!s.hero));
+  console.log('export-chapters',chapterPlan.map(c=>c.id+':'+c.heading).join(', ')||'(none)');
 
-  // --- Hero live ---
+  // --- Hero live (couple names already on the page) ---
   if(heroIndex>=0){
    await slideTo(page,heroIndex);
    await prepExportPage(page);
@@ -433,10 +429,10 @@ export async function captureInviteMedia({templateId,origin,outDir}){
    segments.push({kind:'hero',start,end:mark(),label:'hero'});
   }
 
-  // --- Content slides live ---
-  for(let n=0;n<targets.length;n++){
-   const t=targets[n];
-   await slideTo(page,t.i);
+  // --- Chapter stills only (Imagine, not live record) ---
+  const chapterShots=[];
+  for(const t of chapterPlan){
+   await slideTo(page,t.slideIndex);
    await page.evaluate(()=>{
     document.querySelectorAll('.scratch-heart').forEach(el=>{
      el.classList.add('is-revealed');
@@ -445,14 +441,17 @@ export async function captureInviteMedia({templateId,origin,outDir}){
     });
    });
    await waitImages(page);
-   await page.waitForTimeout(350);
-   const start=mark();
-   await page.waitForTimeout(Math.round(PAGE_SECONDS*1000));
-   segments.push({
-    kind:'page',
-    start,
-    end:mark(),
-    label:'page-'+String(n).padStart(2,'0')+(t.section?'-'+t.section:'')
+   await page.waitForTimeout(400);
+   const png=join(outDir,t.id+'.png');
+   const jpg=join(outDir,t.id+'.jpg');
+   await page.screenshot({path:png,type:'png',fullPage:false});
+   await ffmpeg(['-i',png,'-vf',`${scaleFill().replace(',fps='+FPS,'')},format=yuvj420p`,'-q:v','2',jpg]);
+   chapterShots.push({
+    ...t,
+    heading:t.label,
+    text:[t.heading,t.text].filter(Boolean).join(' — '),
+    still:jpg,
+    png
    });
   }
 
@@ -475,30 +474,30 @@ export async function captureInviteMedia({templateId,origin,outDir}){
   }catch{/* */}
 
   let heroClip='';
-  const pageClips=[];
-  const pageFrames=[];
   let heroFrame='';
-
   for(const seg of segments){
    const dur=Math.max(0.4,seg.end-seg.start);
    const out=join(outDir,seg.label+'.mp4');
-   // Small pad back so we don't clip the first frame after slide settle
    const ss=Math.max(0,seg.start);
    await ffmpeg(['-ss',String(ss),'-i',rawMaster,'-t',String(dur),...ENCODE_COMMON,out]);
    if(seg.kind==='hero'){
     heroClip=out;
     heroFrame=join(outDir,'hero-frame.png');
     await extractFrame(out,heroFrame,Math.min(0.5,dur/3));
-   }else{
-    pageClips.push(out);
-    const frame=join(outDir,seg.label+'.png');
-    await extractFrame(out,frame,0.25);
-    pageFrames.push(frame);
    }
   }
 
+  const pageFrames=chapterShots.map(c=>c.png);
   await rm(rawPath,{force:true}).catch(()=>{});
-  return {heroClip,pageClips,heroFrame,pageFrames,pageStills:pageFrames,heroStill:heroFrame};
+  return {
+   heroClip,
+   heroFrame,
+   pageClips:[],
+   pageFrames,
+   pageStills:pageFrames,
+   heroStill:heroFrame,
+   chapters:chapterShots
+  };
  }finally{
   await browser.close();
  }
@@ -510,7 +509,7 @@ export async function captureViewportChapters(opts){
  return pageFrames;
 }
 
-export async function buildWalkthroughVideo({templateId,heroClip,pageClips,outPath,workDir}){
+export async function buildWalkthroughVideo({templateId,heroClip,pageClips,chapters,outPath,workDir,onProgress}){
  const p=walkthroughPaths(templateId);
  if(!(await exists(p.opening)))throw new HttpError(404,'Opening video missing for '+p.id);
  const dir=workDir||join(WORK,p.id+'-'+Date.now());
@@ -524,25 +523,37 @@ export async function buildWalkthroughVideo({templateId,heroClip,pageClips,outPa
   await openingMaster(p.opening,openingZ);
 
   let hClip=heroClip;
-  let pClips=pageClips;
-  if(!hClip||!pClips?.length){
+  let chaps=chapters;
+  if(!hClip||!chaps?.length){
    const captured=await captureInviteMedia({
     templateId:p.id,
     origin:process.env.CAPTURE_ORIGIN||'https://findmyinvite.com',
     outDir:join(dir,'capture')
    });
    hClip=hClip||captured.heroClip;
-   pClips=(pClips&&pClips.length)?pClips:captured.pageClips;
+   chaps=(chaps&&chaps.length)?chaps:captured.chapters;
   }
   if(!hClip||!(await exists(hClip)))throw new HttpError(500,'Hero live clip missing.');
-  if(!pClips?.length)throw new HttpError(500,'No live page clips.');
+  if(!chaps?.length)throw new HttpError(500,'No Export Video chapter stills.');
 
-  // Ensure master geometry (clips already master from trim, but normalize)
   await toMaster(hClip,heroZ);
+
+  const imagineDir=join(dir,'imagine');
+  const reused=pageClips?.filter(c=>/imagine-/.test(String(c)))||[];
+  let imaginePaths=reused;
+  if(!imaginePaths.length){
+   const generated=await generateImagineChapters({
+    templateId:p.id,
+    chapters:chaps,
+    outDir:imagineDir,
+    onProgress
+   });
+   imaginePaths=generated.map(c=>c.path);
+  }
   const normalizedPages=[];
-  for(let i=0;i<pClips.length;i++){
+  for(let i=0;i<imaginePaths.length;i++){
    const out=join(dir,'page-n-'+String(i).padStart(2,'0')+'.mp4');
-   await toMaster(pClips[i],out);
+   await toMaster(imaginePaths[i],out);
    normalizedPages.push(out);
   }
   await chainSoftFades(normalizedPages,pagesJoined,dir);
@@ -556,10 +567,9 @@ export async function buildWalkthroughVideo({templateId,heroClip,pageClips,outPa
   await xfadePair(head,pagesJoined,master,'fadewhite',SOFT_XFADE,Math.max(0,headDur-SOFT_XFADE));
 
   await mkdir(dirname(outPath),{recursive:true});
-  // Deliver 1080×1920 directly (no 4K/8K upscale).
   await copyFile(master,outPath);
   await assertMuted(outPath,'walkthrough.mp4');
-  return {path:outPath,pages:pClips.length,master,...await probeMedia(outPath)};
+  return {path:outPath,pages:normalizedPages.length,workflow:'imagine-4s',master,...await probeMedia(outPath)};
  }finally{
   if(!workDir)await rm(dir,{recursive:true,force:true}).catch(()=>{});
  }
@@ -658,7 +668,7 @@ export async function buildWalkthroughPdf({pageFrames,pageClips,outPath,template
  }
 }
 
-export async function resolveExport({templateId,format,heroClip,pageClips,heroFrame,pageFrames,forceRebuild=false}){
+export async function resolveExport({templateId,format,heroClip,pageClips,heroFrame,pageFrames,chapters,forceRebuild=false,onProgress}={}){
  const p=walkthroughPaths(templateId);
  const formatKey=format==='pdf'?'pdf':format==='image'?'image':'video';
  const manifest=await readWalkthroughManifest();
@@ -676,25 +686,32 @@ export async function resolveExport({templateId,format,heroClip,pageClips,heroFr
  await mkdir(outDir,{recursive:true});
  const out=formatKey==='video'?p.workVideo:formatKey==='image'?p.workImage:p.workPdf;
 
- let hClip=heroClip,pClips=pageClips,hFrame=heroFrame,pFrames=pageFrames;
- if(formatKey==='video'||!hClip||!pClips?.length){
-  if(!hClip||!pClips?.length){
-   const c=await captureInviteMedia({
-    templateId:p.id,
-    origin:process.env.CAPTURE_ORIGIN||'https://findmyinvite.com',
-    outDir:join(outDir,'capture')
-   });
-   hClip=hClip||c.heroClip;
-   pClips=pClips?.length?pClips:c.pageClips;
-   hFrame=hFrame||c.heroFrame;
-   pFrames=pFrames?.length?pFrames:c.pageFrames;
-  }
+ let hClip=heroClip,pClips=pageClips,hFrame=heroFrame,pFrames=pageFrames,chaps=chapters;
+ if(!hClip||(formatKey==='video'? !chaps?.length : !pFrames?.length)){
+  const c=await captureInviteMedia({
+   templateId:p.id,
+   origin:process.env.CAPTURE_ORIGIN||'https://findmyinvite.com',
+   outDir:join(outDir,'capture')
+  });
+  hClip=hClip||c.heroClip;
+  pClips=pClips?.length?pClips:c.pageClips;
+  hFrame=hFrame||c.heroFrame;
+  pFrames=pFrames?.length?pFrames:c.pageFrames;
+  chaps=chaps?.length?chaps:c.chapters;
  }
 
  let built;
  if(formatKey==='video'){
   if(forceRebuild||!(await exists(out))){
-   built=await buildWalkthroughVideo({templateId:p.id,heroClip:hClip,pageClips:pClips,outPath:out,workDir:join(outDir,'build')});
+   built=await buildWalkthroughVideo({
+    templateId:p.id,
+    heroClip:hClip,
+    pageClips:pClips,
+    chapters:chaps,
+    outPath:out,
+    workDir:join(outDir,'build'),
+    onProgress
+   });
   }else{
    built=await probeMedia(out).catch(()=>({}));
   }

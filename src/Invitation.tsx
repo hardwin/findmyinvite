@@ -42,7 +42,7 @@ export function readInvites():InviteData[]{try{return storedInvites().filter((x)
 export function saveInvite(inv:InviteData){const list=storedInvites();localStorage.setItem(invitationKey,JSON.stringify([inv,...list.filter(x=>!x||typeof x!=='object'||(x as InviteData).id!==inv.id)]));}
 function Divider(){return <div className="invite-divider"><i/><Icon name="heart" size={13}/><i/></div>}
 const TextContext=createContext<Record<string,string>>({});
-const sectionIds:Record<string,string>={'The Bride':'bride','The Groom':'groom','Program Timeline':'timeline','Venue':'venue','Our Moments':'gallery','RSVP':'rsvp','Pre-Wedding Events':'timeline'};
+const sectionIds:Record<string,string>={'Scratch to Reveal':'date','The Bride':'bride','The Groom':'groom','Program Timeline':'timeline','Venue':'venue','Our Moments':'gallery','RSVP':'rsvp','Pre-Wedding Events':'preevents',"We can't wait to celebrate with you!":'finale'};
 const headingIds=['Scratch to Reveal','The Bride','The Groom','Our Moments','Counting Down to Forever','Program Timeline','Venue','Dress Code','Pre-Wedding Events','Transportation','Accommodation','Gifts','RSVP',"We can't wait to celebrate with you!"];
 const framedPlates:Record<string,number>={'Scratch to Reveal':1,'تاریخ دیکھیں':1,'The Bride':2,'The Groom':2,'Our Moments':2,'Counting Down to Forever':2,Venue:3,Transportation:4,Accommodation:4,Gifts:4,'Pre-Wedding Events':5};
 

@@ -8,6 +8,11 @@ Soul: [akay-soul.md](akay-soul.md) · standing facts: [project-context.md](proje
 
 Read this before `docs/handoff/STATUS.md`. The v0.9.0 handoff is the frozen baseline; this file is the current truth after that tag.
 
+## 2026-09-25 — Export Video = Flare + 4s Imagine chapters (₹400)
+- Standard workflow: screenshot Bride / Groom / Date / Program Timeline / Venue / Pre-Wedding Events / Finale → **Flare** recreates (not a photocopy) with levitating 3D pastel-paint type → **xAI grok-imagine-video-1.5** 4s bullet-time (`image` + `last_frame` = Flare still).
+- Stitch after Opening + live Hero-with-text. Playbook: [export-video.md](export-video.md). Price **₹400** add-on (gateway still Launch 2.0 locked).
+- Live Playwright chapter recordings are no longer the video deliverable. PDF/Image still use site stills.
+
 ## 2026-09-25 — Walkthrough: full-frame 720p (no corner letterbox)
 - Chapter cards were off-screen (`top: -7652`) because export CSS forced `height:100%` on the swiper stack — motifs stayed, content vanished. Removed that.
 - Attempted `recordVideo` larger than viewport (780×1688 vs 390 CSS) painted the page in a tiny corner of a black canvas. Fix: **viewport = recordVideo = 720×1280**; mobile full-bleed via `.invitation-export` CSS. Intermediate `work/exports/*-pages/page-*.mp4` are trim clips only — deliverable is Blob `walkthrough.mp4`.

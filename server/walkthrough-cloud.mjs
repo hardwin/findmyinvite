@@ -1,7 +1,7 @@
 /**
  * Walkthrough cloud bake — Vercel Pro Sandbox (same pattern as Assembly).
- * Operator POST /api/invite-export?action=bake → Sandbox captures phone viewport,
- * stitches 720p, uploads private Blob, updates walkthrough/manifest.json.
+ * Operator POST /api/invite-export?action=bake → Sandbox captures hero + chapter stills,
+ * Flare recreate → xAI 4s Imagine clips, stitches 720p, uploads private Blob.
  */
 import {HttpError} from './core.mjs';
 import {hashSecret,newCallbackSecret,newJobId,secretsMatch} from './assembly-jobs.mjs';

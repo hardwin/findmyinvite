@@ -54,17 +54,17 @@ if(!env.BLOB_READ_WRITE_TOKEN){
 }
 
 try{
- await report({status:'running',percent:30,label:'Capturing…',detail:'Playwright 720×1280 (viewport=record)'});
+ await report({status:'running',percent:22,label:'Capturing…',detail:'Hero live + chapter stills'});
  const outDir=join(ROOT,'work','exports',templateId+'-pages');
  await mkdir(outDir,{recursive:true});
- const {heroClip,pageClips,heroFrame,pageFrames}=await captureInviteMedia({
+ const {heroClip,pageClips,heroFrame,pageFrames,chapters}=await captureInviteMedia({
   templateId,
   origin,
   outDir
  });
- console.log('captured pages',pageClips.length);
+ console.log('captured chapters',(chapters||[]).map(c=>c.id).join(','));
 
- await report({status:'running',percent:55,label:'Encoding video…',detail:'720×1280 soft fades'});
+ await report({status:'running',percent:40,label:'Imagine chapters…',detail:'Flare recreate → xAI 4s bullet-time'});
  const video=await resolveExport({
   templateId,
   format:'video',
@@ -72,7 +72,14 @@ try{
   pageClips,
   heroFrame,
   pageFrames,
-  forceRebuild:true
+  chapters,
+  forceRebuild:true,
+  onProgress:p=>report({
+   status:'running',
+   percent:Math.min(74,40+Math.round((p.percent||0)*0.3)),
+   label:p.phase==='imagine'?'Imagine '+p.label:'Flare '+p.label,
+   detail:(p.phase||'')+' '+(p.id||'')+' '+(p.index+1)+'/'+p.total
+  })
  });
  console.log('video',video.url);
 

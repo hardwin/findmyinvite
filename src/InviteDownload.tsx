@@ -73,7 +73,7 @@ export function ExportVideoButton({template,className}:{template:string;classNam
      catch(err){setError(err instanceof Error?err.message:'Export failed');}
      finally{setBusy(false);}
     }}
-   >{busy?'Exporting…':'Export Video'}</button>
+   >{busy?'Exporting…':'Export Video · ₹400'}</button>
    {error&&<p className="export-error" role="alert">{error}</p>}
   </>
  );
@@ -94,7 +94,7 @@ export function InviteDownloadMenu({template}:{template:string}){
   <div className="invite-download-menu">
    <p className="invite-download-label">Download</p>
    <div className="invite-download-actions">
-    <button type="button" className="fmi-button outline small" disabled={!!busy} onClick={()=>run('video')}>{busy==='video'?'…':'Video'}</button>
+    <button type="button" className="fmi-button outline small" disabled={!!busy} onClick={()=>run('video')}>{busy==='video'?'…':'Video · ₹400'}</button>
     <button type="button" className="fmi-button outline small" disabled={!!busy} onClick={()=>run('pdf')}>{busy==='pdf'?'…':'Letter PDF'}</button>
     <button type="button" className="fmi-button outline small" disabled={!!busy} onClick={()=>run('image')}>{busy==='image'?'…':'Image'}</button>
    </div>
