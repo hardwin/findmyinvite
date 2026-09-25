@@ -9,6 +9,8 @@ import {
  flareChapterPrompt,
  imagineChapterPrompt,
  isExportTemplateId,
+ inviteCaptureUrls,
+ isVercelLoginUrl,
  allowCaptureOrigin,
  captureOriginFromPreview,
  publicBakeError
@@ -68,6 +70,11 @@ test('Export Video accepts clone ids and Vercel preview origins',()=>{
  );
  assert.match(publicBakeError('npm notice playwright chromium launch failed'),/Cloud capture/i);
  assert.match(publicBakeError('browserType.launch: Target page, context or browser has been closed'),/Cloud capture/i);
+ assert.match(publicBakeError('Waiting for selector `.invitation-page` failed'),/invitation page/i);
+ assert.equal(isVercelLoginUrl('https://vercel.com/login?next=/sso-api'),true);
+ const urls=inviteCaptureUrls('royal-prestige-13','https://findmyinvite-git-assembly-royal-prestige-13-hardwins-projects.vercel.app');
+ assert.ok(urls[0].includes('assembly-royal-prestige-13'));
+ assert.ok(urls.some(u=>u.startsWith('https://findmyinvite.com/invite/demo')));
 });
 
 test('Walkthrough sandbox boots Amazon Linux Chrome libs + Sparticuz',async()=>{

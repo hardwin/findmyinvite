@@ -43,6 +43,9 @@ export function publicBakeError(raw){
  if(/failed to create sandbox|sandbox\.create|codeload|git source/i.test(text)){
   return 'Cloud bake could not start. Tap Generate Video to retry.';
  }
+ if(/invitation-page|Waiting for selector/i.test(text)){
+  return 'Could not open the invitation page. Tap Generate Video to retry.';
+ }
  return text.slice(0,180);
 }
 
@@ -54,6 +57,42 @@ export function captureOriginFromPreview(previewUrl){
  }catch{
   return '';
  }
+}
+
+export function protectionBypassSecret(env=process.env){
+ return String(env.VERCEL_AUTOMATION_BYPASS_SECRET||env.VERCEL_PROTECTION_BYPASS||'').trim();
+}
+
+export function isVercelLoginUrl(value){
+ try{
+  const host=new URL(String(value||'')).hostname.toLowerCase();
+  return host==='vercel.com'||host.endsWith('.vercel.com');
+ }catch{
+  return /vercel\.com\/login|sso-api/i.test(String(value||''));
+ }
+}
+
+/** Preview first (clone names), then production. Previews are SSO-locked without bypass. */
+export function inviteCaptureUrls(templateId,origin,env=process.env){
+ const id=String(templateId||'').replace(/[^a-z0-9-]/gi,'');
+ const path='/invite/demo?template='+encodeURIComponent(id)+'&export=1';
+ const prod='https://findmyinvite.com';
+ const bases=[];
+ try{
+  const raw=String(origin||'').replace(/\/$/,'');
+  if(raw&&allowCaptureOrigin(raw)&&!/findmyinvite\.com$/i.test(new URL(raw).hostname.replace(/^www\./,''))){
+   bases.push(raw);
+  }
+ }catch{/* */}
+ bases.push(prod);
+ const bypass=protectionBypassSecret(env);
+ const urls=[];
+ for(const base of bases){
+  const href=base+path;
+  if(bypass)urls.push(href+'&x-vercel-protection-bypass='+encodeURIComponent(bypass));
+  urls.push(href);
+ }
+ return [...new Set(urls)];
 }
 
 /** Locked chapter order for Export Video. Match heading and/or data-section. */

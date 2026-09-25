@@ -12,6 +12,7 @@ Read this before `docs/handoff/STATUS.md`. The v0.9.0 handoff is the frozen base
 - Failed jobs had `sandboxId: null` — `Sandbox.create({source: git})` never created a VM.
 - Empty Sandbox, curl `main` tarball. Playwright `install chrome` dies on Amazon Linux (`amzn` only allows Ubuntu).
 - Proven on live `sbx_rYdTJzp4DTqhSCg8xpf9gM9p20gl`: `dnf install nss gtk3…` then Sparticuz + puppeteer-core opens the invite.
+- Assembly preview URLs hit Vercel SSO. Capture tries preview (bypass header if set), then findmyinvite.com.
 
 ## 2026-09-25 — Sandbox video capture: screenshots only
 - Vercel Sandbox chrome-headless-shell dies on Playwright `recordVideo`. Capture is now hero + chapter screenshots (hero still → 6s clip), then Flare / Imagine as before.

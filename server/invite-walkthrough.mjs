@@ -15,7 +15,7 @@ import {put} from '@vercel/blob';
 import {run,probeMedia,assertMuted} from './assembly-template1-craft.mjs';
 import {HOLD_SECONDS} from './assembly-template1-prompts.mjs';
 import {HttpError} from './core.mjs';
-import {generateImagineChapters,pickExportChapters} from './invite-walkthrough-imagine.mjs';
+import {generateImagineChapters,inviteCaptureUrls,isVercelLoginUrl,pickExportChapters,protectionBypassSecret} from './invite-walkthrough-imagine.mjs';
 
 const require=createRequire(import.meta.url);
 const ROOT=fileURLToPath(new URL('..',import.meta.url));
@@ -241,6 +241,8 @@ function wrapPuppeteerBrowser(browser){
        });
       },
       goto:(url,opts)=>page.goto(url,opts),
+      url:()=>page.url(),
+      setExtraHTTPHeaders:headers=>page.setExtraHTTPHeaders(headers),
       waitForSelector:(sel,opts)=>page.waitForSelector(sel,opts),
       waitForFunction:(fn,opts)=>page.waitForFunction(fn,opts||{}),
       waitForTimeout:ms=>new Promise(r=>setTimeout(r,ms)),
@@ -405,11 +407,19 @@ async function stillToClip(png,outMp4,seconds=6){
  * Screenshot hero (names on page) + chapter stills. No recordVideo —
  * chrome-headless-shell in Vercel Sandbox dies on video recording.
  */
+async function applyProtectionBypass(page){
+ const bypass=protectionBypassSecret();
+ if(!bypass||typeof page.setExtraHTTPHeaders!=='function')return;
+ await page.setExtraHTTPHeaders({
+  'x-vercel-protection-bypass':bypass,
+  'x-vercel-set-bypass-cookie':'true'
+ });
+}
+
 export async function captureInviteMedia({templateId,origin,outDir}){
  const pw=loadPlaywright();
  const id=walkthroughPaths(templateId).id;
- const base=(origin||process.env.CAPTURE_ORIGIN||'https://findmyinvite.com').replace(/\/$/,'');
- const url=base+'/invite/demo?template='+encodeURIComponent(id)+'&export=1';
+ const preferred=(origin||process.env.CAPTURE_ORIGIN||'https://findmyinvite.com').replace(/\/$/,'');
  await mkdir(outDir,{recursive:true});
 
  const browser=await launchBrowser(pw);
@@ -424,8 +434,25 @@ export async function captureInviteMedia({templateId,origin,outDir}){
   const page=await context.newPage();
 
   await page.route('**/api/analytics**',r=>r.fulfill({status:204}));
-  await page.goto(url,{waitUntil:'domcontentloaded',timeout:120000});
-  await page.waitForSelector('.invitation-page',{timeout:45000});
+  await applyProtectionBypass(page);
+  let opened=null;
+  for(const href of inviteCaptureUrls(id,preferred)){
+   console.log('capture-try',href.replace(/x-vercel-protection-bypass=[^&]+/,'x-vercel-protection-bypass=***'));
+   await page.goto(href,{waitUntil:'domcontentloaded',timeout:60000});
+   const loc=typeof page.url==='function'?page.url():'';
+   if(isVercelLoginUrl(loc)){
+    console.warn('capture-sso',loc);
+    continue;
+   }
+   const ready=await page.waitForSelector('.invitation-page',{timeout:18000}).catch(()=>null);
+   if(ready){
+    opened=href;
+    break;
+   }
+  }
+  if(!opened)throw new Error('Could not open the invitation page. Tap Generate Video to retry.');
+  const usedOrigin=new URL(opened).origin;
+  console.log('capture-origin',usedOrigin);
   await prepExportPage(page);
   await page.waitForTimeout(800);
 
@@ -499,7 +526,8 @@ export async function captureInviteMedia({templateId,origin,outDir}){
    pageFrames,
    pageStills:pageFrames,
    heroStill:heroFrame,
-   chapters:chapterShots
+   chapters:chapterShots,
+   captureOrigin:usedOrigin
   };
  }finally{
   await browser.close();
@@ -521,10 +549,16 @@ export async function ensureTemplateVideos({templateId,origin,destDir}){
   if(await exists(localPath))return localPath;
   const dest=join(destDir,remoteName);
   if(await exists(dest))return dest;
-  const res=await fetch(base+'/assets/'+remoteName);
-  if(!res.ok)throw new HttpError(404,'Missing '+remoteName+' on '+base+' — wait until the website preview is live.');
-  await writeFile(dest,Buffer.from(await res.arrayBuffer()));
-  return dest;
+  const origins=[base,'https://findmyinvite.com'].filter((v,i,a)=>a.indexOf(v)===i);
+  let last='';
+  for(const origin of origins){
+   const res=await fetch(origin+'/assets/'+remoteName);
+   last=origin+' '+res.status;
+   if(!res.ok)continue;
+   await writeFile(dest,Buffer.from(await res.arrayBuffer()));
+   return dest;
+  }
+  throw new HttpError(404,'Missing '+remoteName+' ('+last+') — wait until the website is live.');
  }
  return {
   opening:await pull(p.opening,p.id+'.mp4'),
