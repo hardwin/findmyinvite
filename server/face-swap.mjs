@@ -1,4 +1,4 @@
-// Face Swap job: gpt-image-2.5-flare couple edit → bride/groom solos → photos[0]/[1] + couple pin override.
+// Face Swap job: split girl/boy from couple → single-face swaps → couple dual swap → chapter solos.
 import {randomBytes} from 'node:crypto';
 import {put} from '@vercel/blob';
 import {HttpError, db, invitation} from './core.mjs';
@@ -6,6 +6,10 @@ import {runReplicateImage} from './assembly-template1-gen.mjs';
 import {
   FACE_SWAP_MODEL,
   coupleSwapPrompt,
+  splitGirlPrompt,
+  splitBoyPrompt,
+  brideFaceSwapPrompt,
+  groomFaceSwapPrompt,
   brideSoloPrompt,
   groomSoloPrompt
 } from './face-swap-prompts.mjs';
@@ -168,7 +172,10 @@ async function uploadPrivateSlot(invitationId, slot, buffer, {env = process.env}
 }
 
 /**
- * Core inference: couple edit → bride solo → groom solo.
+ * Core inference (Ashok 2026-09-25):
+ * 1) Split girl + boy bodies from the couple still (stops cross-person confusion)
+ * 2) Classic single-face swap: bride upload → girl body; groom upload → boy body
+ * 3) Dual-face couple edit with explicit Image2=girl / Image3=boy mapping
  * Returns buffers + replicate URLs (before invitation write-back).
  */
 export async function runFaceSwapInference({
@@ -189,35 +196,57 @@ export async function runFaceSwapInference({
     if (typeof onProgress === 'function') onProgress({phase, percent, label});
   };
 
-  tick('couple', 8, 'Swapping faces on the couple still…');
+  tick('split', 6, 'Separating girl and boy from the couple still…');
+  const [girlBase, boyBase] = await Promise.all([
+    runReplicateImage({
+      prompt: splitGirlPrompt(),
+      images: [pin],
+      model: FACE_SWAP_MODEL,
+      inputFidelity: 'high',
+      role: 'face-swap-split-girl',
+      env,
+      fetchImpl
+    }),
+    runReplicateImage({
+      prompt: splitBoyPrompt(),
+      images: [pin],
+      model: FACE_SWAP_MODEL,
+      inputFidelity: 'high',
+      role: 'face-swap-split-boy',
+      env,
+      fetchImpl
+    })
+  ]);
+
+  tick('solos', 35, 'Placing bride face on the girl, groom face on the boy…');
+  const [brideStill, groomStill] = await Promise.all([
+    runReplicateImage({
+      prompt: brideFaceSwapPrompt(),
+      images: [girlBase.url, bride],
+      model: FACE_SWAP_MODEL,
+      inputFidelity: 'high',
+      role: 'face-swap-bride',
+      env,
+      fetchImpl
+    }),
+    runReplicateImage({
+      prompt: groomFaceSwapPrompt(),
+      images: [boyBase.url, groom],
+      model: FACE_SWAP_MODEL,
+      inputFidelity: 'high',
+      role: 'face-swap-groom',
+      env,
+      fetchImpl
+    })
+  ]);
+
+  tick('couple', 70, 'Swapping both faces onto the couple still…');
   const couple = await runReplicateImage({
     prompt: coupleSwapPrompt(),
     images: [pin, bride, groom],
     model: FACE_SWAP_MODEL,
     inputFidelity: 'high',
     role: 'face-swap-couple',
-    env,
-    fetchImpl
-  });
-
-  tick('bride', 45, 'Crafting the bride portrait…');
-  const brideStill = await runReplicateImage({
-    prompt: brideSoloPrompt(),
-    images: [couple.url, bride],
-    model: FACE_SWAP_MODEL,
-    inputFidelity: 'high',
-    role: 'face-swap-bride',
-    env,
-    fetchImpl
-  });
-
-  tick('groom', 75, 'Crafting the groom portrait…');
-  const groomStill = await runReplicateImage({
-    prompt: groomSoloPrompt(),
-    images: [couple.url, groom],
-    model: FACE_SWAP_MODEL,
-    inputFidelity: 'high',
-    role: 'face-swap-groom',
     env,
     fetchImpl
   });
@@ -452,6 +481,10 @@ export async function runFaceSwapJobAndWait(body = {}, opts = {}) {
 
 export {
   coupleSwapPrompt,
+  splitGirlPrompt,
+  splitBoyPrompt,
+  brideFaceSwapPrompt,
+  groomFaceSwapPrompt,
   brideSoloPrompt,
   groomSoloPrompt,
   FACE_SWAP_MODEL,

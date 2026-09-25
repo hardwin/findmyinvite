@@ -619,7 +619,7 @@ function FaceSwapBeforeLock({
   setStep('running');setError('');setProgress('Starting Face Swap…');
   try{
    // wait:true keeps the job on one Vercel function (in-memory Map cannot poll across instances).
-   setProgress('Swapping faces on the couple still… (1–3 min)');
+   setProgress('Separating girl & boy, then placing your faces…');
    const startRes=await fetch('/api/face-swap?action=start',{
     method:'POST',
     headers:{'Content-Type':'application/json'},
@@ -699,17 +699,17 @@ function FaceSwapBeforeLock({
   return (
    <div className="asm-gpt-face-swap" role="group" aria-label="Upload faces for Face Swap">
     <p className="asm-gpt-choice-title">Upload bride &amp; groom faces</p>
-    <p className="asm-gpt-face-swap-copy">Clear face photos work best — front-facing, well lit, one person each. Photos upload first, then we swap.</p>
+    <p className="asm-gpt-face-swap-copy">Bride = girl/woman photo · Groom = boy/man photo. Front-facing, well lit, one person each. We split the couple first, then place each face on the matching body.</p>
     <div className="asm-gpt-face-uploads">
      <FaceUploadSlot
-      label="Bride face"
+      label="Bride · girl/woman"
       preview={bridePreview}
       busy={uploading==='bride'}
       disabled={blocked&&uploading!=='bride'}
       onPick={file=>void pickFace('bride',file)}
      />
      <FaceUploadSlot
-      label="Groom face"
+      label="Groom · boy/man"
       preview={groomPreview}
       busy={uploading==='groom'}
       disabled={blocked&&uploading!=='groom'}

@@ -8,6 +8,11 @@ Soul: [akay-soul.md](akay-soul.md) · standing facts: [project-context.md](proje
 
 Read this before `docs/handoff/STATUS.md`. The v0.9.0 handoff is the frozen baseline; this file is the current truth after that tag.
 
+## 2026-09-25 — Face Swap: split girl/boy then classic face place
+- Cross-swap bug: bride slot was getting the groom face. Prompts now lock **Bride = girl/woman**, **Groom = boy/man**.
+- Pipeline: split girl + boy from Last couple (2 Flare) → classic “face from Image 2 onto person in Image 1” singles → dual couple swap with Never-cross rules.
+- UI copy: “Bride · girl/woman” / “Groom · boy/man”. Craft chapter solos also use girl/boy language.
+
 ## 2026-09-25 — Face Swap upload scroll jump fix
 - After picking bride/groom face photos, mobile gallery return was inventing empty space and scrolling the Co-Pilot away (fake keyboard inset + file-input scrollIntoView + unconstrained preview `<img>`).
 - Fix: contain preview imgs absolutely, full-card file input (no 1px clipped orphan), blur+restore scroll on change, clamp visualViewport keyboard inset, lock `html/body` overflow under `.asm-gpt`.

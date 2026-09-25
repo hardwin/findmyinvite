@@ -49,11 +49,11 @@ test('storyboard maps to First / Middle / Last prompt params',()=>{
 
 test('solo prompts isolate bride or groom',()=>{
  const bride=buildSoloStillPrompt({which:'bride',brief:'silk saree'});
- assert.match(bride,/BRIDE|bride/i);
- assert.match(bride,/Only the bride|remove the groom/i);
+ assert.match(bride,/BRIDE|bride|girl/i);
+ assert.match(bride,/girl\/woman|remove the boy/i);
  const groom=buildSoloStillPrompt({which:'groom'});
- assert.match(groom,/GROOM|groom/i);
- assert.match(groom,/Only the groom|remove the bride/i);
+ assert.match(groom,/GROOM|groom|boy/i);
+ assert.match(groom,/boy\/man|remove the girl/i);
 });
 
 test('flare first prompt uses reveal prefix without people',()=>{

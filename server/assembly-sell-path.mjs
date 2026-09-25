@@ -150,7 +150,8 @@ export function buildSoloStillPrompt({which='bride',brief='',pinStyleNote=''}={}
  if(role==='groom'){
   return [
    'Edit this couple still into a vertical 9:16 GROOM solo portrait for a wedding invitation chapter.',
-   'Only the groom — remove the bride. Same man, same wardrobe, face, and palette as the couple still.',
+   'Image has one girl/woman and one boy/man — keep ONLY the boy/man (groom). Completely remove the girl/woman.',
+   'Same boy/man, same wardrobe, face, and palette as the couple still. Do not show a female face.',
    'Elegant standing portrait, soft eye contact toward camera, cinematic invitation quality.',
    note?('Note: '+note):'',
    style?('Style: '+style):'',
@@ -159,7 +160,8 @@ export function buildSoloStillPrompt({which='bride',brief='',pinStyleNote=''}={}
  }
  return [
   'Edit this couple still into a vertical 9:16 BRIDE solo portrait for a wedding invitation chapter.',
-  'Only the bride — remove the groom. Same woman, same wardrobe, face, and palette as the couple still.',
+  'Image has one girl/woman and one boy/man — keep ONLY the girl/woman (bride). Completely remove the boy/man.',
+  'Same girl/woman, same wardrobe, face, and palette as the couple still. Do not show a male face.',
   'Elegant standing portrait, soft eye contact toward camera, cinematic invitation quality.',
   note?('Note: '+note):'',
   style?('Style: '+style):'',
