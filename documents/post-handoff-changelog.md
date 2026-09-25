@@ -8,6 +8,10 @@ Soul: [akay-soul.md](akay-soul.md) · standing facts: [project-context.md](proje
 
 Read this before `docs/handoff/STATUS.md`. The v0.9.0 handoff is the frozen baseline; this file is the current truth after that tag.
 
+## 2026-09-25 — Face Swap upload scroll jump fix
+- After picking bride/groom face photos, mobile gallery return was inventing empty space and scrolling the Co-Pilot away (fake keyboard inset + file-input scrollIntoView + unconstrained preview `<img>`).
+- Fix: contain preview imgs absolutely, full-card file input (no 1px clipped orphan), blur+restore scroll on change, clamp visualViewport keyboard inset, lock `html/body` overflow under `.asm-gpt`.
+
 ## 2026-09-25 — Sell Path creative iteration fix (mid-chat Flare)
 - **Problem:** Generate dumped stills at the end; no First/Last previews in chat; pin re-asked after moodboard; details + Bride/Groom solos missing on clone.
 - **Fix:** `craft_storyboard_stills` + `craft_chapter_solos`; lock_storyboard requires First+Last URLs; lock_final_image requires solos; details (date/venue/names) → `patchPreviewDefaults`; chat First/Last reused as opening stills.

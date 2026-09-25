@@ -245,16 +245,18 @@
 .asm-gpt-face-swap{margin-top:10px;padding:14px;border:1px solid var(--border);border-radius:16px;background:#fafafa;display:grid;gap:12px;width:100%;max-width:min(100%,420px);box-sizing:border-box}
 .asm-gpt-face-swap-copy{margin:0;font-size:13px;line-height:1.55;color:var(--muted2)}
 .asm-gpt-face-uploads{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start}
-.asm-gpt-face-slot{display:grid;gap:6px;min-width:0}
+.asm-gpt-face-slot{position:relative;display:grid;gap:6px;min-width:0}
 .asm-gpt-face-slot-label{margin:0;font-size:12px;font-weight:500;color:var(--muted2)}
-.asm-gpt-face-slot-card{position:relative;display:grid;place-items:center;aspect-ratio:1;width:100%;border:1px dashed #cfcfcf;border-radius:14px;background:#fff;overflow:hidden;cursor:pointer}
+.asm-gpt-face-slot-card{position:relative;display:block;aspect-ratio:1;width:100%;border:1px dashed #cfcfcf;border-radius:14px;background:#fff;overflow:hidden;cursor:pointer;isolation:isolate}
 .asm-gpt-face-slot.has-preview .asm-gpt-face-slot-card{border-style:solid;border-color:var(--border)}
-.asm-gpt-face-slot-card img{width:100%;height:100%;object-fit:cover;display:block}
-.asm-gpt-face-slot-empty{display:grid;gap:4px;text-align:center;padding:10px;color:var(--muted2)}
+/* Absolute cover — never let intrinsic photo size expand the chat scroll height. */
+.asm-gpt-face-slot-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;z-index:0}
+.asm-gpt-face-slot-empty{position:absolute;inset:0;display:grid;place-content:center;gap:4px;text-align:center;padding:10px;color:var(--muted2);z-index:0}
 .asm-gpt-face-slot-empty strong{font-size:13px;color:var(--text);font-weight:500}
 .asm-gpt-face-slot-empty em{font-size:11px;font-style:normal}
-.asm-gpt-face-slot-busy{position:absolute;inset:0;display:grid;place-items:center;background:rgba(255,255,255,.72);font-size:12px;font-weight:500;color:var(--text)}
-.asm-gpt-face-slot-input{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;clip:rect(0 0 0 0)}
+.asm-gpt-face-slot-busy{position:absolute;inset:0;display:grid;place-items:center;background:rgba(255,255,255,.72);font-size:12px;font-weight:500;color:var(--text);z-index:3}
+/* Full-card hit target (not a 1px clipped input — that scrollIntoView-jumps the page). */
+.asm-gpt-face-slot-input{position:absolute;inset:0;width:100%;height:100%;margin:0;padding:0;opacity:0;cursor:pointer;font-size:0;border:0;z-index:2}
 .asm-gpt-face-slot-file{margin:0;font-size:11px;color:#3d7a57}
 .asm-gpt-face-swap-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 .asm-gpt-face-swap .asm-gpt-choice{margin-top:4px}
@@ -262,6 +264,14 @@
 @media (max-width:420px){
   .asm-gpt-face-uploads{grid-template-columns:1fr 1fr;gap:8px}
   .asm-gpt-face-slot-empty em{display:none}
+}
+
+/* Keep document from scrolling under the Co-Pilot shell (file-picker return bump). */
+html:has(.asm-gpt),body:has(.asm-gpt){
+  overflow:hidden!important;
+  height:100%;
+  overscroll-behavior:none;
+  touch-action:manipulation;
 }
 
 /* Photographer Sell Path — theme desk + storyboard + generate */

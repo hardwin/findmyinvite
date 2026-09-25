@@ -522,28 +522,42 @@ function FaceUploadSlot({
  disabled:boolean;
  onPick:(file:File)=>void;
 }){
- const inputId=useMemo(()=>'face-'+label.toLowerCase().replace(/\s+/g,'-')+'-'+Math.random().toString(36).slice(2,7),[label]);
  return (
   <div className={'asm-gpt-face-slot'+(preview?' has-preview':'')+(busy?' is-busy':'')}>
    <p className="asm-gpt-face-slot-label">{label}</p>
-   <label className="asm-gpt-face-slot-card" htmlFor={inputId}>
+   <label className="asm-gpt-face-slot-card">
     {preview
-     ?<img src={preview} alt={label+' preview'}/>
+     ?<img src={preview} alt={label+' preview'} draggable={false}/>
      :<span className="asm-gpt-face-slot-empty"><strong>Add photo</strong><em>Front-facing · well lit</em></span>}
     {busy&&<span className="asm-gpt-face-slot-busy" aria-live="polite">Uploading…</span>}
+    <input
+     className="asm-gpt-face-slot-input"
+     type="file"
+     accept="image/jpeg,image/png,image/webp"
+     disabled={disabled||busy}
+     aria-label={'Upload '+label+' photo'}
+     onChange={e=>{
+      const input=e.currentTarget;
+      const f=input.files?.[0];
+      input.value='';
+      // After mobile gallery closes, browsers focus the file input and scrollIntoView —
+      // that jumps the Co-Pilot shell and invents empty space under the thread.
+      try{input.blur();}catch{/* */}
+      const scroller=input.closest('.asm-gpt-scroll') as HTMLElement|null;
+      const keepTop=scroller?.scrollTop??0;
+      if(f)onPick(f);
+      const restore=()=>{
+       try{window.scrollTo(0,0);}catch{/* */}
+       if(document.documentElement)document.documentElement.scrollTop=0;
+       if(document.body)document.body.scrollTop=0;
+       if(scroller)scroller.scrollTop=keepTop;
+      };
+      requestAnimationFrame(restore);
+      window.setTimeout(restore,50);
+      window.setTimeout(restore,300);
+     }}
+    />
    </label>
-   <input
-    id={inputId}
-    className="asm-gpt-face-slot-input"
-    type="file"
-    accept="image/jpeg,image/png,image/webp"
-    disabled={disabled||busy}
-    onChange={e=>{
-     const f=e.currentTarget.files?.[0];
-     e.currentTarget.value='';
-     if(f)onPick(f);
-    }}
-   />
    {preview&&!busy&&<p className="asm-gpt-face-slot-file">Uploaded</p>}
   </div>
  );
@@ -1180,21 +1194,39 @@ export default function AssemblyChat({
     shell.style.setProperty('--vv-height',window.innerHeight+'px');
     return;
    }
-   // iOS/Android: layout viewport stays tall; visual viewport shrinks under the keyboard.
-   const inset=Math.max(0,window.innerHeight-vv.height-vv.offsetTop);
-   shell.style.setProperty('--kb-inset',inset+'px');
-   shell.style.setProperty('--vv-height',Math.round(vv.height)+'px');
+   // After the mobile photo picker closes, offsetTop/height often lie and invent a
+   // huge "keyboard" inset — that pads the shell and scrolls the Face Swap UI away.
+   const shrink=window.innerHeight-vv.height;
+   const looksLikeKeyboard=shrink>80&&vv.height<window.innerHeight*0.92;
+   const inset=looksLikeKeyboard
+    ?Math.max(0,Math.min(window.innerHeight*0.45,shrink-Math.max(0,vv.offsetTop)))
+    :0;
+   shell.style.setProperty('--kb-inset',Math.round(inset)+'px');
+   shell.style.setProperty('--vv-height',Math.round(looksLikeKeyboard?vv.height:window.innerHeight)+'px');
   };
   sync();
   vv?.addEventListener('resize',sync);
   vv?.addEventListener('scroll',sync);
   window.addEventListener('focusin',sync);
   window.addEventListener('focusout',sync);
+  window.addEventListener('orientationchange',sync);
   return ()=>{
    vv?.removeEventListener('resize',sync);
    vv?.removeEventListener('scroll',sync);
    window.removeEventListener('focusin',sync);
    window.removeEventListener('focusout',sync);
+   window.removeEventListener('orientationchange',sync);
+  };
+ },[]);
+
+ useEffect(()=>{
+  const prevHtml=document.documentElement.style.overflow;
+  const prevBody=document.body.style.overflow;
+  document.documentElement.style.overflow='hidden';
+  document.body.style.overflow='hidden';
+  return ()=>{
+   document.documentElement.style.overflow=prevHtml;
+   document.body.style.overflow=prevBody;
   };
  },[]);
 
