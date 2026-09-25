@@ -64,7 +64,45 @@ export function normalizeRevealType(value){
 
 export function pinterestSearchUrl(query=''){
  const q=String(query||'indian wedding invitation cinematic couple').trim().slice(0,120)||'indian wedding invitation cinematic';
+ // Note: pinterest.com / in.pinterest.com set X-Frame-Options and refuse iframes.
+ // Keep the search URL for "open externally" only — Theme desk uses themeSuggestionsForQuery.
  return 'https://www.pinterest.com/search/pins/?q='+encodeURIComponent(q)+'&rs=typed';
+}
+
+/**
+ * Curated invitation-theme pins shown inside our Theme desk (Pinterest blocks site iframes).
+ * Tags drive filtering as Akay updates the search query from conversation.
+ */
+export const THEME_BANK=Object.freeze([
+ {id:'velicha',label:'Ethereal watercolor',tags:['watercolor','garden','romantic','magenta','ethereal','couple'],pinUrl:'https://pin.it/330nC70it',thumb:'https://i.pinimg.com/originals/81/3e/6d/813e6da50c26413706bc159ab4228d42.jpg'},
+ {id:'kaatrukulle',label:'Garden door romance',tags:['garden','door','watercolor','romantic','sage','couple'],pinUrl:'https://pin.it/6sh37rSvu',thumb:'/assets/4cfcddd6f8996fe3.png'},
+ {id:'temple-gold',label:'Temple gold glam',tags:['temple','gold','royal','regal','traditional','hindu'],pinUrl:'https://pin.it/330nC70it',thumb:'/assets/4cfcddd6f8996fe3.png'},
+ {id:'royal-cream',label:'Royal cream couple',tags:['royal','cream','elegant','regal','couple','cinematic'],pinUrl:'https://www.pinterest.com/pin/567488040032279278/',thumb:'/assets/ad64264e60445499.jpg'},
+ {id:'modern-glam',label:'Modern glam night',tags:['modern','glam','night','city','sleek','couple'],pinUrl:'https://pin.it/330nC70it',thumb:'/assets/e4e5ca7a8c0c7b74.jpg'},
+ {id:'meadow',label:'Soft meadow light',tags:['meadow','outdoor','soft','pastel','garden','couple'],pinUrl:'https://pin.it/6sh37rSvu',thumb:'/assets/15cbf1df9056e121.jpg'},
+ {id:'floral-arch',label:'Floral arch ceremony',tags:['floral','arch','ceremony','flowers','romantic'],pinUrl:'https://pin.it/330nC70it',thumb:'/assets/3c934c61dec8899c.jpg'},
+ {id:'palace',label:'Palace grandeur',tags:['palace','heritage','royal','dramatic','cinematic'],pinUrl:'https://pin.it/6sh37rSvu',thumb:'/assets/50122aee9f7395c4.jpg'},
+ {id:'pastel-invite',label:'Pastel invitation art',tags:['pastel','invitation','art','paper','watercolor'],pinUrl:'https://pin.it/330nC70it',thumb:'/assets/863e1b3374bb313a.jpg'},
+ {id:'sunset',label:'Golden hour sunset',tags:['sunset','golden','hour','warm','cinematic','couple'],pinUrl:'https://pin.it/6sh37rSvu',thumb:'/assets/9b73577a4b10e8db.jpg'},
+ {id:'minimal',label:'Minimal modern paper',tags:['minimal','modern','paper','clean','simple'],pinUrl:'https://pin.it/330nC70it',thumb:'/assets/ea523b0f4336159d.jpg'},
+ {id:'south-indian',label:'South Indian festive',tags:['south','indian','tamil','festive','temple','traditional'],pinUrl:'https://pin.it/330nC70it',thumb:'/assets/e4e5ca7a8c0c7b74.jpg'}
+]);
+
+export function themeSuggestionsForQuery(query='',limit=9){
+ const q=String(query||'').toLowerCase();
+ const tokens=q.split(/[^a-z0-9]+/).filter(t=>t.length>2);
+ const scored=THEME_BANK.map(item=>{
+  let score=0;
+  for(const tag of item.tags){
+   if(q.includes(tag))score+=3;
+   for(const t of tokens)if(tag.includes(t)||t.includes(tag))score+=2;
+  }
+  if(!tokens.length)score=1;
+  return {...item,score};
+ });
+ scored.sort((a,b)=>b.score-a.score||a.label.localeCompare(b.label));
+ const top=scored.filter(s=>s.score>0).slice(0,limit);
+ return (top.length?top:scored.slice(0,limit)).map(({score,...rest})=>rest);
 }
 
 export function revealPrefix(revealType='door'){

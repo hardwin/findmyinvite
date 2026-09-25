@@ -300,6 +300,21 @@
   border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 8px 24px rgba(0,0,0,.04);
 }
 .asm-sell-iframe{width:100%;height:100%;min-height:280px;border:0;display:block;background:#fff}
+.asm-sell-style-chips{display:flex;flex-wrap:wrap;gap:6px;padding:0 12px 8px}
+.asm-sell-grid{
+  flex:1;min-height:0;overflow:auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:8px;padding:0 10px 8px;align-content:start;
+}
+.asm-sell-card{
+  appearance:none;border:1px solid var(--border);border-radius:12px;background:#fff;
+  padding:0;overflow:hidden;cursor:pointer;text-align:left;display:grid;
+  box-shadow:0 4px 14px rgba(0,0,0,.04);
+}
+.asm-sell-card img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block;background:#f3f3f3}
+.asm-sell-card span{display:block;padding:6px 7px 8px;font-size:11px;line-height:1.25;color:var(--text)}
+.asm-sell-card.is-on,.asm-sell-card:hover{border-color:#111;box-shadow:0 6px 18px rgba(0,0,0,.08)}
+.asm-sell-picked{padding:0 12px 8px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.asm-sell-picked p{margin:0;font-size:12px;color:var(--muted2)}
 .asm-sell-pin-form{padding:10px 12px 14px;display:grid;gap:6px}
 .asm-sell-pin-form label{font-size:12px;color:var(--muted2)}
 .asm-sell-pin-row{display:flex;gap:8px}

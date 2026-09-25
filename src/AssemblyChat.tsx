@@ -818,8 +818,8 @@ function toolStatusLabel(name:string,state:string,{pending,isImage,busy,elapsedM
   return 'Importing from Pinterest - Done';
  }
  if(name==='update_theme_search'){
-  if(pending)return 'Updating Pinterest desk'+elapsed;
-  return 'Pinterest desk updated';
+  if(pending)return 'Updating Theme desk'+elapsed;
+  return 'Theme desk updated';
  }
  if(name==='propose_storyboard'||name==='lock_storyboard'){
   if(pending)return 'Storyboard…'+elapsed;
@@ -1461,7 +1461,7 @@ export default function AssemblyChat({
      </div>
      <div className="asm-gpt-top-actions">
       <button type="button" className="asm-gpt-pill ghost" onClick={()=>setThemeOpen(v=>!v)}>
-       {themeOpen?'Hide Pinterest':'Show Pinterest'}
+       {themeOpen?'Hide Theme':'Show Theme'}
       </button>
       <a className="asm-gpt-pill ghost" href="/manager/pipeline">Pipeline</a>
       <button type="button" className="asm-gpt-pill solid" onClick={startNewChat}>New chat</button>

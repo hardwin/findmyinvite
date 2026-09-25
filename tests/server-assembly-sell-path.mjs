@@ -6,7 +6,8 @@ import {
  pinterestSearchUrl,
  storyboardToPromptParams,
  buildStoryboardStillPrompt,
- revealOpenBeat
+ revealOpenBeat,
+ themeSuggestionsForQuery
 } from '../server/assembly-sell-path.mjs';
 import {buildPrompts,ensurePromptAffixes} from '../server/assembly-template1-prompts.mjs';
 
@@ -17,10 +18,18 @@ test('sell stages and reveal types normalize',()=>{
  assert.equal(normalizeRevealType('door'),'door');
 });
 
-test('pinterest search stays on-page iframe friendly',()=>{
+test('pinterest search URL is external-only (site blocks iframes)',()=>{
  const url=pinterestSearchUrl('temple gold wedding watercolor');
  assert.match(url,/pinterest\.com\/search\/pins/);
  assert.match(url,/temple/);
+});
+
+test('theme suggestions rank by query tags',()=>{
+ const temple=themeSuggestionsForQuery('temple gold royal hindu',9);
+ assert.ok(temple.length>=1);
+ assert.ok(temple.some(t=>/temple|royal|gold/i.test(t.label+t.tags.join(' '))));
+ const water=themeSuggestionsForQuery('watercolor garden magenta',3);
+ assert.equal(water[0].id,'velicha');
 });
 
 test('storyboard maps to First / Middle / Last prompt params',()=>{

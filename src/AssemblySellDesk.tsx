@@ -32,10 +32,19 @@ export type InviteDetails={
  complete?:boolean;
 };
 
+export type ThemeSuggestion={
+ id:string;
+ label:string;
+ tags:string[];
+ pinUrl:string;
+ thumb:string;
+};
+
 export type SellDeskState={
  stage:SellStage;
  themeQuery:string;
  iframeUrl:string;
+ suggestions:ThemeSuggestion[];
  pinUrl:string;
  pinPreview:string;
  styleNote:string;
@@ -45,6 +54,39 @@ export type SellDeskState={
  brideImageUrl:string;
  groomImageUrl:string;
 };
+
+/** Client-side theme bank (mirrors server) — Pinterest site cannot iframe. */
+export const THEME_BANK:ThemeSuggestion[]=[
+ {id:'velicha',label:'Ethereal watercolor',tags:['watercolor','garden','romantic','magenta','ethereal','couple'],pinUrl:'https://pin.it/330nC70it',thumb:'https://i.pinimg.com/originals/81/3e/6d/813e6da50c26413706bc159ab4228d42.jpg'},
+ {id:'kaatrukulle',label:'Garden door romance',tags:['garden','door','watercolor','romantic','sage','couple'],pinUrl:'https://pin.it/6sh37rSvu',thumb:'/assets/4cfcddd6f8996fe3.png'},
+ {id:'temple-gold',label:'Temple gold glam',tags:['temple','gold','royal','regal','traditional','hindu'],pinUrl:'https://pin.it/330nC70it',thumb:'/assets/4cfcddd6f8996fe3.png'},
+ {id:'royal-cream',label:'Royal cream couple',tags:['royal','cream','elegant','regal','couple','cinematic'],pinUrl:'https://www.pinterest.com/pin/567488040032279278/',thumb:'/assets/ad64264e60445499.jpg'},
+ {id:'modern-glam',label:'Modern glam night',tags:['modern','glam','night','city','sleek','couple'],pinUrl:'https://pin.it/330nC70it',thumb:'/assets/e4e5ca7a8c0c7b74.jpg'},
+ {id:'meadow',label:'Soft meadow light',tags:['meadow','outdoor','soft','pastel','garden','couple'],pinUrl:'https://pin.it/6sh37rSvu',thumb:'/assets/15cbf1df9056e121.jpg'},
+ {id:'floral-arch',label:'Floral arch ceremony',tags:['floral','arch','ceremony','flowers','romantic'],pinUrl:'https://pin.it/330nC70it',thumb:'/assets/3c934c61dec8899c.jpg'},
+ {id:'palace',label:'Palace grandeur',tags:['palace','heritage','royal','dramatic','cinematic'],pinUrl:'https://pin.it/6sh37rSvu',thumb:'/assets/50122aee9f7395c4.jpg'},
+ {id:'pastel-invite',label:'Pastel invitation art',tags:['pastel','invitation','art','paper','watercolor'],pinUrl:'https://pin.it/330nC70it',thumb:'/assets/863e1b3374bb313a.jpg'},
+ {id:'sunset',label:'Golden hour sunset',tags:['sunset','golden','hour','warm','cinematic','couple'],pinUrl:'https://pin.it/6sh37rSvu',thumb:'/assets/9b73577a4b10e8db.jpg'},
+ {id:'minimal',label:'Minimal modern paper',tags:['minimal','modern','paper','clean','simple'],pinUrl:'https://pin.it/330nC70it',thumb:'/assets/ea523b0f4336159d.jpg'},
+ {id:'south-indian',label:'South Indian festive',tags:['south','indian','tamil','festive','temple','traditional'],pinUrl:'https://pin.it/330nC70it',thumb:'/assets/e4e5ca7a8c0c7b74.jpg'}
+];
+
+export function themeSuggestionsForQuery(query='',limit=9):ThemeSuggestion[]{
+ const q=String(query||'').toLowerCase();
+ const tokens=q.split(/[^a-z0-9]+/).filter(t=>t.length>2);
+ const scored=THEME_BANK.map(item=>{
+  let score=0;
+  for(const tag of item.tags){
+   if(q.includes(tag))score+=3;
+   for(const t of tokens)if(tag.includes(t)||t.includes(tag))score+=2;
+  }
+  if(!tokens.length)score=1;
+  return {...item,score};
+ });
+ scored.sort((a,b)=>b.score-a.score||a.label.localeCompare(b.label));
+ const top=scored.filter(s=>s.score>0).slice(0,limit);
+ return (top.length?top:scored.slice(0,limit)).map(({score: _s,...rest})=>rest);
+}
 
 export const STAGE_LABELS:Record<SellStage,string>={
  welcome:'Welcome',
@@ -60,10 +102,12 @@ export const STAGE_LABELS:Record<SellStage,string>={
 const STAGE_ORDER:SellStage[]=['welcome','theme','storyboard','face_swap','lock','details','generate','ready'];
 
 export function defaultSellState():SellDeskState{
+ const themeQuery='indian wedding invitation cinematic couple';
  return {
   stage:'welcome',
-  themeQuery:'indian wedding invitation cinematic couple',
-  iframeUrl:'https://www.pinterest.com/search/pins/?q='+encodeURIComponent('indian wedding invitation cinematic couple')+'&rs=typed',
+  themeQuery,
+  iframeUrl:'https://www.pinterest.com/search/pins/?q='+encodeURIComponent(themeQuery)+'&rs=typed',
+  suggestions:themeSuggestionsForQuery(themeQuery,9),
   pinUrl:'',
   pinPreview:'',
   styleNote:'',
@@ -89,6 +133,11 @@ export function mergeSellFromTool(
   if(typeof output.query==='string')next.themeQuery=output.query;
   if(typeof output.iframeUrl==='string')next.iframeUrl=output.iframeUrl;
   if(typeof output.styleNote==='string')next.styleNote=output.styleNote;
+  if(Array.isArray(output.suggestions)&&output.suggestions.length){
+   next.suggestions=output.suggestions as ThemeSuggestion[];
+  }else if(typeof output.query==='string'){
+   next.suggestions=themeSuggestionsForQuery(output.query,9);
+  }
   if(next.stage==='welcome')next.stage='theme';
  }
  if(name==='resolve_pin'||name==='lock_theme_pin'){
@@ -154,11 +203,18 @@ export function ThemePane({
  onChip:(text:string)=>void;
 }){
  const [paste,setPaste]=useState('');
+ const [picked,setPicked]=useState<ThemeSuggestion|null>(null);
  const browsing=state.stage==='welcome'||state.stage==='theme'||!state.pinUrl;
+ const ideas=useMemo(()=>{
+  if(state.suggestions?.length)return state.suggestions.slice(0,9);
+  return themeSuggestionsForQuery(state.themeQuery,9);
+ },[state.suggestions,state.themeQuery]);
+
+ const STYLE_CHIPS=['temple','garden','watercolor','royal','modern','south indian','pastel','cinematic'];
 
  function submitPin(event?:FormEvent){
   event?.preventDefault();
-  const url=paste.trim();
+  const url=paste.trim()||picked?.pinUrl||'';
   if(!url||busy)return;
   onLockPin(url);
   setPaste('');
@@ -185,24 +241,51 @@ export function ThemePane({
  }
 
  return (
-  <aside className="asm-sell-theme" aria-label="Pinterest theme desk">
+  <aside className="asm-sell-theme" aria-label="Theme planning desk">
    <header className="asm-sell-theme-head">
     <strong>Theme planning</strong>
-    <span>Browse here — stay on FindMyInvite</span>
+    <span>Ideas update as you talk — stay on FindMyInvite</span>
    </header>
    <p className="asm-sell-theme-query">{state.themeQuery}</p>
-   <div className="asm-sell-iframe-wrap">
-    <iframe
-     key={state.iframeUrl}
-     title="Pinterest theme ideas"
-     src={state.iframeUrl}
-     className="asm-sell-iframe"
-     referrerPolicy="no-referrer-when-downgrade"
-     sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-popups-to-escape-sandbox"
-    />
+   <div className="asm-sell-style-chips" role="group" aria-label="Style shortcuts">
+    {STYLE_CHIPS.map(chip=>(
+     <button
+      key={chip}
+      type="button"
+      className="asm-gpt-chip"
+      disabled={busy}
+      onClick={()=>onChip('I like a '+chip+' wedding invite theme. Update the Theme desk for that.')}
+     >
+      {chip}
+     </button>
+    ))}
    </div>
+   <div className="asm-sell-grid" role="list">
+    {ideas.map(item=>(
+     <button
+      key={item.id}
+      type="button"
+      role="listitem"
+      className={'asm-sell-card'+(picked?.id===item.id?' is-on':'')}
+      disabled={busy}
+      onClick={()=>setPicked(item)}
+      title={item.label}
+     >
+      <img src={item.thumb} alt={item.label} loading="lazy"/>
+      <span>{item.label}</span>
+     </button>
+    ))}
+   </div>
+   {picked&&(
+    <div className="asm-sell-picked">
+     <p>Selected: <strong>{picked.label}</strong></p>
+     <button type="button" className="asm-gpt-choice-submit" disabled={busy} onClick={()=>onLockPin(picked.pinUrl)}>
+      Use this theme
+     </button>
+    </div>
+   )}
    <form className="asm-sell-pin-form" onSubmit={submitPin}>
-    <label htmlFor="asm-sell-pin">Paste the pin URL when you find it</label>
+    <label htmlFor="asm-sell-pin">Or paste any Pinterest pin URL</label>
     <div className="asm-sell-pin-row">
      <input
       id="asm-sell-pin"
@@ -212,7 +295,7 @@ export function ThemePane({
       disabled={busy}
       onChange={e=>setPaste(e.target.value)}
      />
-     <button type="submit" className="asm-gpt-choice-submit" disabled={busy||!paste.trim()}>
+     <button type="submit" className="asm-gpt-choice-submit" disabled={busy||!(paste.trim()||picked)}>
       Lock pin
      </button>
     </div>

@@ -30,6 +30,7 @@ import {
  STAGE_LABELS,
  buildStoryboardStillPrompt,
  storyboardToPromptParams,
+ themeSuggestionsForQuery,
  REVEAL_TYPES
 } from './assembly-sell-path.mjs';
 import {STILL_MODEL} from './assembly-template1-prompts.mjs';
@@ -56,7 +57,7 @@ Never stall. Always play for the confirmation.
 
 PHOTOGRAPHER SELL PATH (locked order)
 1) welcome — Hi, what are we creating today? (wedding invite / save-the-date / etc.) No tools on bare hello.
-2) theme — Learn mood/colors/culture. Call update_theme_search often so the right-side Pinterest iframe stays on our page and updates. Keep them browsing INSIDE FindMyInvite. When they paste a pin URL → resolve_pin + lock_theme_pin → confirm theme.
+2) theme — Learn mood/colors/culture. Call update_theme_search often so the right-side Theme desk grid updates (Pinterest.com refuses iframes — never rely on embedding their site). Keep them browsing INSIDE FindMyInvite. They tap a suggestion or paste a pin URL → resolve_pin + lock_theme_pin → confirm theme.
 3) storyboard — Entrance opening for the invite video:
    - FIRST = always a reveal hook (door / envelope / building frame / arches / windows). No people.
    - MIDDLE = 2–4 journey beats (these become the opening video prompt middle).
@@ -136,19 +137,21 @@ export function buildAssemblyChatTools({env=process.env,fetchImpl=fetch,parentId
   }),
 
   update_theme_search:tool({
-   description:'Update the on-page Pinterest iframe search query from the photographer style talk. Call often during theme planning.',
+   description:'Update the on-page Theme desk search from photographer style talk. Pinterest.com cannot load in iframes — this refreshes our in-page suggestion grid. Call often during theme planning.',
    inputSchema:z.object({
-    query:z.string().min(2).max(120).describe('Pinterest search phrase matching their style'),
+    query:z.string().min(2).max(120).describe('Theme search phrase matching their style'),
     styleNote:z.string().max(200).optional()
    }),
    execute:async({query,styleNote})=>{
     const q=String(query||'').trim().slice(0,120);
+    const suggestions=themeSuggestionsForQuery(q,9);
     return {
      ok:true,
      query:q,
      styleNote:styleNote||'',
      iframeUrl:pinterestSearchUrl(q),
-     message:'Pinterest desk updated — keep them browsing on our page.'
+     suggestions,
+     message:'Theme desk updated with '+suggestions.length+' on-page ideas. Keep them browsing inside FindMyInvite — Pinterest website blocks iframes.'
     };
    }
   }),
