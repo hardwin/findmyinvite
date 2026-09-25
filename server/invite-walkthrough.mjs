@@ -2,8 +2,10 @@
  * Invite walkthrough — live webpage VIDEO (not stills).
  * Opening (asset mp4, hold trimmed, 3% zoom) → fade → Hero live record
  * → fadewhite → each slide live record (motifs + motion).
- * Capture at phone CSS viewport 390×844 (matches live mobile layout).
- * Deliver 720×1280 @30 CRF20 — fill frame, no letterbox.
+ * Capture viewport AND recordVideo both 720×1280 (must match — larger record
+ * size with smaller viewport paints the page in a tiny corner).
+ * Mobile layout forced via .invitation-export CSS (full-bleed cards).
+ * Encode CRF17 medium, lanczos. Work clips under work/exports/ are intermediates.
  * Media ships on Vercel Blob only (git = website + template code).
  * Live manifest: Blob walkthrough/manifest.json (merged over shipped JSON).
  * Skips Moments, RSVP, Transport, Accommodation, Gifts.
@@ -29,23 +31,26 @@ const WORK=join(ROOT,'work','exports');
 const PAGE_SECONDS=1.65;
 const SOFT_XFADE=0.55;
 const FPS=30;
-/** CSS pixels — iPhone-class so chapter cards fill like the real site. */
-const VIEW_W=390;
-const VIEW_H=844;
-/** Deliver 720p vertical (9:16). */
+/**
+ * Viewport CSS = recordVideo size = deliver size.
+ * Playwright paints the page into recordVideo.size; if record > viewport,
+ * content sits in a corner of a black canvas (what you saw in page-07.mp4).
+ */
+const VIEW_W=720;
+const VIEW_H=1280;
 const MASTER_W=720;
 const MASTER_H=1280;
-const CRF=20;
-const PRESET='veryfast';
+const CRF=17;
+const PRESET='medium';
 const OPEN_ZOOM=0.03;
 
 const SKIP_SECTIONS=new Set(['gallery','rsvp','transport','accommodation','gifts']);
 
 const ENCODE_COMMON=['-an','-c:v','libx264','-crf',String(CRF),'-preset',PRESET,'-pix_fmt','yuv420p','-r',String(FPS),'-movflags','+faststart'];
 
-/** Fill 9:16 canvas (crop), never letterbox/pad black bars. */
+/** Fill 9:16 canvas (crop) with lanczos — never letterbox. */
 function scaleFill(w=MASTER_W,h=MASTER_H){
- return `scale=${w}:${h}:force_original_aspect_ratio=increase,crop=${w}:${h},fps=${FPS}`;
+ return `scale=${w}:${h}:force_original_aspect_ratio=increase:flags=lanczos,crop=${w}:${h},fps=${FPS}`;
 }
 
 export function ffmpegBin(){
@@ -176,8 +181,9 @@ export async function uploadWalkthroughBlob({templateId,format,filePath,duration
  row.blob[formatKey]=blob.url;
  if(formatKey==='video'&&duration!=null)row.duration=Number(duration)||row.duration;
  row.updatedAt=new Date().toISOString();
- row.viewport='390x844';
+ row.viewport='720x1280';
  row.deliver='720x1280';
+ row.record='720x1280';
  manifest[p.id]=row;
  await writeLiveWalkthroughManifest(manifest);
  return {url:serve,blobUrl:blob.url,pathname,format:formatKey,id:p.id};
@@ -253,15 +259,17 @@ async function launchBrowser(pw){
 async function prepExportPage(page){
  await page.addStyleTag({content:`
   .sound-toggle,.language-toggle,.use-design,.skip-opening,.invite-download-menu{visibility:hidden!important}
-  body{background:#0a0a0a!important;margin:0!important}
-  html,body,.invitation-page,.invite-pager-live,.invite-swiper,.invite-slide,.invite-slide-shell,.invite-slide-scroll{width:100%!important;max-width:100%!important;height:100%!important;min-height:100%!important}
+  html,body{margin:0!important;background:#0a0a0a!important}
+  /* Do NOT force height:100% on swiper/slide stack — that yeets chapter cards off-screen. */
+  /* At 720 CSS width, force phone-like full-bleed cards (same as ~390 mobile). */
   .invitation-export .invite-pager-live .invite-chapter-inner,
   .invitation-export.invitation-page .invite-chapter-inner,
   .invitation-export .invite-pager-live .invite-section:has(.invite-guest-stack) .invite-chapter-inner,
   .invitation-export .invite-pager-live .invite-chapter:has(.invite-guest-stack) .invite-chapter-inner{
    width:100%!important;max-width:none!important;min-width:0!important;margin:0!important;box-sizing:border-box!important
   }
-  .invitation-export .invite-pager-live .invite-person-stage{width:min(280px,78vw)!important}
+  .invitation-export .invite-pager-live .invite-person-stage{width:min(420px,72vw)!important}
+  .invitation-export .reveal{opacity:1!important;visibility:visible!important;transform:none!important}
  `});
  await page.evaluate(()=>document.fonts.ready).catch(()=>{});
  await page.evaluate(()=>{
@@ -314,7 +322,7 @@ async function openingMaster(openingPath,outMp4){
  const trimTo=Math.max(SOFT_XFADE+1,info.duration-HOLD_SECONDS);
  const frames=Math.max(2,Math.round(trimTo*FPS));
  const z=`zoompan=z='1+${OPEN_ZOOM}*on/${frames}':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=1:s=${MASTER_W}x${MASTER_H}:fps=${FPS}`;
- const prep=`scale=${MASTER_W}:${MASTER_H}:force_original_aspect_ratio=increase,crop=${MASTER_W}:${MASTER_H}`;
+ const prep=`scale=${MASTER_W}:${MASTER_H}:force_original_aspect_ratio=increase:flags=lanczos,crop=${MASTER_W}:${MASTER_H}`;
  await ffmpeg(['-i',openingPath,'-t',String(trimTo),'-an','-vf',`${prep},${z}`,...ENCODE_COMMON,outMp4]);
 }
 
@@ -373,10 +381,11 @@ export async function captureInviteMedia({templateId,origin,outDir}){
  try{
   const context=await browser.newContext({
    viewport:{width:VIEW_W,height:VIEW_H},
-   deviceScaleFactor:2,
+   deviceScaleFactor:1,
    isMobile:true,
    hasTouch:true,
    reducedMotion:'no-preference',
+   // MUST equal viewport — larger size = page painted in a corner of black canvas.
    recordVideo:{dir:rawDir,size:{width:VIEW_W,height:VIEW_H}}
   });
   const page=await context.newPage();
@@ -452,9 +461,18 @@ export async function captureInviteMedia({templateId,origin,outDir}){
   const rawPath=videoObj?await videoObj.path():'';
   if(!rawPath||!(await exists(rawPath)))throw new Error('Playwright recordVideo produced no file.');
 
-  // Normalize raw → intermediate HQ, then trim segments
+  // Keep session at native capture resolution (matches VIEW_W×VIEW_H). toMaster fills deliver size.
   const rawMaster=join(outDir,'session-master.mp4');
-  await toMaster(rawPath,rawMaster);
+  await ffmpeg([
+   '-i',rawPath,
+   '-vf',`fps=${FPS}`,
+   '-an','-c:v','libx264','-crf','14','-preset','ultrafast','-pix_fmt','yuv420p','-r',String(FPS),'-movflags','+faststart',
+   rawMaster
+  ]);
+  try{
+   const info=await probeMedia(rawMaster);
+   console.log('session-master',info.width+'x'+info.height);
+  }catch{/* */}
 
   let heroClip='';
   const pageClips=[];

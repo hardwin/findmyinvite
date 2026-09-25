@@ -54,7 +54,7 @@ if(!env.BLOB_READ_WRITE_TOKEN){
 }
 
 try{
- await report({status:'running',percent:30,label:'Capturing…',detail:'Playwright phone viewport 390×844'});
+ await report({status:'running',percent:30,label:'Capturing…',detail:'Playwright 720×1280 (viewport=record)'});
  const outDir=join(ROOT,'work','exports',templateId+'-pages');
  await mkdir(outDir,{recursive:true});
  const {heroClip,pageClips,heroFrame,pageFrames}=await captureInviteMedia({

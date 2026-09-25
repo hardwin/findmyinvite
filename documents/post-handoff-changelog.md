@@ -8,6 +8,10 @@ Soul: [akay-soul.md](akay-soul.md) · standing facts: [project-context.md](proje
 
 Read this before `docs/handoff/STATUS.md`. The v0.9.0 handoff is the frozen baseline; this file is the current truth after that tag.
 
+## 2026-09-25 — Walkthrough: full-frame 720p (no corner letterbox)
+- Chapter cards were off-screen (`top: -7652`) because export CSS forced `height:100%` on the swiper stack — motifs stayed, content vanished. Removed that.
+- Attempted `recordVideo` larger than viewport (780×1688 vs 390 CSS) painted the page in a tiny corner of a black canvas. Fix: **viewport = recordVideo = 720×1280**; mobile full-bleed via `.invitation-export` CSS. Intermediate `work/exports/*-pages/page-*.mp4` are trim clips only — deliverable is Blob `walkthrough.mp4`.
+
 ## 2026-09-25 — Walkthrough 720p on Vercel Sandbox (phone frame fix)
 - Root cause: capture at 1080 CSS width left chapter cards at `min(640px)` → tiny content.
 - Fix: Playwright viewport **390×844** (mobile layout) + export CSS full-bleed cards; deliver **720×1280** fill/crop (no letterbox).

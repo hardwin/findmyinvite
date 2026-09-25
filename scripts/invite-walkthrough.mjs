@@ -28,7 +28,7 @@ if(process.env.REUSE_CLIPS==='1'){
  console.log('reusing clips from',pagesDir,'pages=',pageClips.length);
  if(!heroClip||!pageClips.length)throw new Error('REUSE_CLIPS=1 but clips missing in '+pagesDir);
 }else{
- console.log('live-capturing',id,'from',origin,'(390×844 → 720×1280 → Blob)');
+ console.log('live-capturing',id,'from',origin,'(720×1280 capture → Blob)');
  const captured=await captureInviteMedia({templateId:id,origin,outDir:pagesDir});
  heroClip=captured.heroClip;
  pageClips=captured.pageClips;
