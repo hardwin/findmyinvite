@@ -25,6 +25,9 @@ jobs:
           node-version: '22'
           cache: npm
       - run: npm ci
+      - name: Add bundled media tools to PATH
+        run: |
+          node --input-type=module -e 'import fs from "node:fs"; import path from "node:path"; import ffmpeg from "ffmpeg-static"; import ffprobe from "ffprobe-static"; fs.appendFileSync(process.env.GITHUB_PATH, [path.dirname(ffmpeg), path.dirname(ffprobe.path)].join("\n") + "\n");'
       - run: npm run test:server
       - run: npm run build
   deploy:
