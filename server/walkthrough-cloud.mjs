@@ -8,7 +8,6 @@ import {publicBakeError} from './invite-walkthrough-imagine.mjs';
 import {hashSecret,newCallbackSecret,newJobId,secretsMatch} from './assembly-jobs.mjs';
 import {put} from '@vercel/blob';
 
-const REPO_URL='https://github.com/hardwin/findmyinvite.git';
 const JOB_PREFIX='walkthrough/jobs/';
 
 export function walkthroughCloudEnabled(env=process.env){
@@ -105,7 +104,7 @@ function sandboxEnv(jobId,secret,templateId,env,extra={}){
   XAI_API_KEY:env.XAI_API_KEY||'',
   REPLICATE_API_TOKEN:env.REPLICATE_API_TOKEN||env.REPLICATE_API_KEY||'',
   PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS:'1',
-  CHROMIUM_PACK:'1',
+  ASSEMBLY_GITHUB_TOKEN:env.ASSEMBLY_GITHUB_TOKEN||env.GITHUB_TOKEN||'',
   BROWSER_WS_ENDPOINT:env.BROWSER_WS_ENDPOINT||''
  };
 }
@@ -113,21 +112,35 @@ function sandboxEnv(jobId,secret,templateId,env,extra={}){
 export function walkthroughWorkerBootCommand(){
  return [
   'set -euo pipefail',
-  'cd findmyinvite 2>/dev/null || true',
-  'pwd',
-  'ls -la scripts/walkthrough-cloud-worker.mjs',
   'heartbeat(){ curl -fsS -X POST "${WALKTHROUGH_CALLBACK_URL}?action=bake-progress" -H "Content-Type: application/json" -H "X-Walkthrough-Job-Id: ${WALKTHROUGH_JOB_ID}" -H "X-Walkthrough-Job-Secret: ${WALKTHROUGH_CALLBACK_SECRET}" -d "$1" || true; }',
   'heartbeat \'{"status":"running","percent":2,"label":"Sandbox up","detail":"boot started"}\'',
-  'mkdir -p "$HOME/bin"',
+  // Detach the long clone+npm+chrome+worker so the function can finish.
+  // Empty Sandbox (no git source) — private-repo git source never got a sandboxId.
+  'cat > /tmp/walkthrough-boot.sh <<\'EOS\'',
+  'set -euo pipefail',
+  'heartbeat(){ curl -fsS -X POST "${WALKTHROUGH_CALLBACK_URL}?action=bake-progress" -H "Content-Type: application/json" -H "X-Walkthrough-Job-Id: ${WALKTHROUGH_JOB_ID}" -H "X-Walkthrough-Job-Secret: ${WALKTHROUGH_CALLBACK_SECRET}" -d "$1" || true; }',
+  'trap \'heartbeat "{\\"status\\":\\"failed\\",\\"percent\\":0,\\"label\\":\\"Failed\\",\\"error\\":\\"boot failed\\",\\"detail\\":\\"boot failed\\"}"\' ERR',
+  'WORKDIR="$HOME/fmi"',
+  'mkdir -p "$WORKDIR" "$HOME/bin"',
   'export PATH="$HOME/bin:$PATH"',
   'export PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS=1',
-  'if [ ! -d node_modules ]; then',
-  '  heartbeat \'{"status":"running","percent":8,"label":"npm ci…","detail":"installing deps"}\'',
-  '  npm ci --omit=dev',
+  'heartbeat \'{"status":"running","percent":6,"label":"Fetching main…","detail":"codeload tarball"}\'',
+  'if [ -n "${ASSEMBLY_GITHUB_TOKEN:-}" ]; then',
+  '  curl -fsSL -H "Authorization: Bearer ${ASSEMBLY_GITHUB_TOKEN}" "https://codeload.github.com/hardwin/findmyinvite/tar.gz/refs/heads/main" | tar -xz -C "$WORKDIR" --strip-components=1',
+  'else',
+  '  curl -fsSL "https://codeload.github.com/hardwin/findmyinvite/tar.gz/refs/heads/main" | tar -xz -C "$WORKDIR" --strip-components=1',
   'fi',
-  'heartbeat \'{"status":"running","percent":12,"label":"Chromium pack…","detail":"@sparticuz/chromium (screenshots only)"}\'',
+  'cd "$WORKDIR"',
+  'test -f scripts/walkthrough-cloud-worker.mjs',
+  'if [ ! -d node_modules ]; then',
+  '  heartbeat \'{"status":"running","percent":10,"label":"npm ci…","detail":"installing deps"}\'',
+  '  npm ci --omit=dev --loglevel=error',
+  'fi',
+  'heartbeat \'{"status":"running","percent":16,"label":"Installing Chrome…","detail":"playwright chrome (not headless-shell)"}\'',
+  'npm install playwright@1.49.1 --no-save --no-fund --no-audit --loglevel=error',
+  'npx playwright install chrome',
   'if ! command -v ffmpeg >/dev/null 2>&1; then',
-  '  heartbeat \'{"status":"running","percent":18,"label":"Linking ffmpeg…","detail":"ffmpeg-static"}\'',
+  '  heartbeat \'{"status":"running","percent":20,"label":"Linking ffmpeg…","detail":"ffmpeg-static"}\'',
   '  node --input-type=module <<\'NODE\'',
   'import {copyFileSync,chmodSync,mkdirSync} from "node:fs";',
   'import {join} from "node:path";',
@@ -143,18 +156,21 @@ export function walkthroughWorkerBootCommand(){
   'try{const ffprobe=require("ffprobe-static").path;copyFileSync(ffprobe,join(bin,"ffprobe"));chmodSync(join(bin,"ffprobe"),0o755);}catch{}',
   'NODE',
   'fi',
-  'heartbeat \'{"status":"running","percent":22,"label":"Starting worker…","detail":"screenshot capture"}\'',
-  'nohup env PATH="$HOME/bin:$PATH" WALKTHROUGH_CLOUD_WORKER=1 CHROMIUM_PACK=1 node scripts/walkthrough-cloud-worker.mjs > /tmp/walkthrough-worker.log 2>&1 &',
-  'WORKER_PID=$!',
-  'echo "worker pid $WORKER_PID"',
-  'sleep 6',
-  'if ! kill -0 "$WORKER_PID" 2>/dev/null; then',
-  '  cat /tmp/walkthrough-worker.log >&2 || true',
-  '  heartbeat \'{"status":"failed","percent":0,"label":"Failed","detail":"worker exited early","error":"worker exited early"}\'',
+  'heartbeat \'{"status":"running","percent":24,"label":"Capturing…","detail":"Chrome screenshots"}\'',
+  'exec env PATH="$HOME/bin:$PATH" WALKTHROUGH_CLOUD_WORKER=1 node scripts/walkthrough-cloud-worker.mjs',
+  'EOS',
+  'chmod +x /tmp/walkthrough-boot.sh',
+  'nohup bash /tmp/walkthrough-boot.sh > /tmp/walkthrough-boot.log 2>&1 &',
+  'BOOT_PID=$!',
+  'echo "boot pid $BOOT_PID"',
+  'sleep 4',
+  'if ! kill -0 "$BOOT_PID" 2>/dev/null; then',
+  '  cat /tmp/walkthrough-boot.log >&2 || true',
+  '  heartbeat \'{"status":"failed","percent":0,"label":"Failed","detail":"boot exited early","error":"boot exited early"}\'',
   '  exit 1',
   'fi',
-  'heartbeat \'{"status":"running","percent":25,"label":"Worker alive","detail":"capturing"}\'',
-  'echo $WORKER_PID'
+  'heartbeat \'{"status":"running","percent":4,"label":"Booting…","detail":"clone + Chrome in background"}\'',
+  'echo $BOOT_PID'
  ].join('\n');
 }
 
@@ -201,9 +217,8 @@ export async function launchWalkthroughSandbox({jobId,secret,templateId,captureO
   runtime:'node24',
   timeout:45*60*1000,
   resources:{vcpus:4},
-  env:sandboxEnv(jobId,secret,templateId,env,extra),
-  // Never reuse Assembly ffmpeg snapshot — it is stale and still recordVideo/Playwright.
-  source:{type:'git',url:REPO_URL,depth:1,revision:'main'}
+  env:sandboxEnv(jobId,secret,templateId,env,extra)
+  // Empty VM — git source never assigned a sandboxId (clone/auth). Boot curls main.
  });
  const sandboxId=sandbox.sandboxId||null;
  await patchWalkthroughJob(jobId,{sandboxId,status:'running',percent:3,label:'Sandbox created',detail:sandboxId||''},env);
@@ -217,11 +232,14 @@ export async function launchWalkthroughSandbox({jobId,secret,templateId,captureO
   if(code!==0){
    const stderr=await commandText(result,'stderr');
    const stdout=await commandText(result,'stdout');
-   throw new Error(publicBakeError(stderr||stdout||'Sandbox boot exited '+code));
+   const raw=stderr||stdout||'Sandbox boot exited '+code;
+   throw Object.assign(new Error(publicBakeError(raw)),{debugError:raw.slice(0,2000)});
   }
  }catch(error){
-  const message=publicBakeError(error instanceof Error?error.message:'Sandbox boot failed.');
-  await patchWalkthroughJob(jobId,{status:'failed',percent:0,label:'Failed',error:message,detail:message},env).catch(()=>{});
+  const raw=error instanceof Error?error.message:'Sandbox boot failed.';
+  const debugError=String(error?.debugError||raw).slice(0,2000);
+  const message=publicBakeError(raw);
+  await patchWalkthroughJob(jobId,{status:'failed',percent:0,label:'Failed',error:message,detail:message,debugError},env).catch(()=>{});
   try{await sandbox.stop();}catch{/* */}
   throw error;
  }
@@ -255,8 +273,9 @@ export async function startWalkthroughBake(templateId,{env=process.env,captureOr
  };
  await putJob(job);
  schedule(launchWalkthroughSandbox({jobId,secret,templateId:id,captureOrigin:origin,formats:job.formats,env}).catch(async error=>{
-  const message=publicBakeError(error instanceof Error?error.message:'Launch failed');
-  await patchWalkthroughJob(jobId,{status:'failed',percent:0,label:'Failed',error:message,detail:message},env).catch(()=>{});
+  const raw=error instanceof Error?error.message:'Launch failed';
+  const message=publicBakeError(raw);
+  await patchWalkthroughJob(jobId,{status:'failed',percent:0,label:'Failed',error:message,detail:message,debugError:raw.slice(0,2000)},env).catch(()=>{});
  }));
  return {jobId,status:'queued',templateId:id,secret};
 }

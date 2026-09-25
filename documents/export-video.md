@@ -42,7 +42,7 @@ Guest footer stays Letter PDF + Image only.
 ```
 FORCE=1 FORMATS=video node scripts/invite-walkthrough.mjs royal-prestige-12
 CAPTURE_ONLY=1 node scripts/invite-walkthrough.mjs royal-prestige-12   # stills only
-POST /api/invite-export?action=bake   # Vercel Sandbox clones git main (never Assembly ffmpeg snapshot)
+POST /api/invite-export?action=bake   # empty Sandbox, curl main, Chrome screenshots (not Sparticuz)
 ```
 
 Git never gets `*-walkthrough.mp4`. Manifest + Blob URLs only.

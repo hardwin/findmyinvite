@@ -37,8 +37,11 @@ export function allowCaptureOrigin(value){
 export function publicBakeError(raw){
  const text=String(raw||'').replace(/\s+/g,' ').trim();
  if(!text)return 'Video generation failed. Tap Generate Video to retry.';
- if(/npm notice|playwright|chromium|headless_shell|sparticuz|sandbox|browserType|Target page/i.test(text)){
+ if(/npm notice|playwright|chromium|headless_shell|sparticuz|browserType|Target page/i.test(text)){
   return 'Cloud capture could not start. Tap Generate Video to retry.';
+ }
+ if(/failed to create sandbox|sandbox\.create|codeload|git source/i.test(text)){
+  return 'Cloud bake could not start. Tap Generate Video to retry.';
  }
  return text.slice(0,180);
 }

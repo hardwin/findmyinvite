@@ -214,10 +214,6 @@ function loadPlaywright(){
  throw last||new Error('playwright not found');
 }
 
-function safeChromiumArgs(args){
- return (args||[]).filter(a=>!/--single-process|--no-zygote/.test(String(a)));
-}
-
 function wrapPuppeteerBrowser(browser){
  return {
   async newContext(opts={}){
@@ -271,26 +267,27 @@ async function launchBrowser(pw){
   const {chromium}=await import('playwright-core');
   return chromium.connectOverCDP(process.env.BROWSER_WS_ENDPOINT);
  }
- // Sandbox: screenshots only — @sparticuz/chromium + puppeteer-core.
- // Never launch chrome-headless-shell (recordVideo / version mismatch dumps).
- if(process.env.WALKTHROUGH_CLOUD_WORKER==='1'||process.env.CHROMIUM_PACK==='1'){
+ // Vercel function (Lambda): Sparticuz. Never use it in Sandbox — wrong binary.
+ if(process.env.CHROMIUM_PACK==='1'&&process.env.WALKTHROUGH_CLOUD_WORKER!=='1'){
   const chromium=(await import('@sparticuz/chromium')).default;
   try{chromium.setGraphicsMode(false);}catch{/* */}
   const executablePath=await chromium.executablePath();
-  const args=[...safeChromiumArgs(chromium.args),'--disable-dev-shm-usage','--no-sandbox'];
+  const args=[...chromium.args,'--disable-dev-shm-usage'];
+  const puppeteer=await import('puppeteer-core');
+  return wrapPuppeteerBrowser(await puppeteer.default.launch({
+   args,
+   executablePath,
+   headless:true,
+   dumpio:false
+  }));
+ }
+ // Sandbox VM: full Chrome (not chromium_headless_shell — that dies here).
+ if(process.env.WALKTHROUGH_CLOUD_WORKER==='1'){
   try{
-   const puppeteer=await import('puppeteer-core');
-   const browser=await puppeteer.default.launch({
-    args,
-    executablePath,
-    headless:true,
-    dumpio:false
-   });
-   return wrapPuppeteerBrowser(browser);
+   return await pw.chromium.launch({...launchOpts,channel:'chrome'});
   }catch(error){
-   console.warn('puppeteer-core + sparticuz failed, trying playwright-core',error?.message||error);
-   const {chromium:pwChromium}=await import('playwright-core');
-   return pwChromium.launch({args,executablePath,headless:true});
+   console.warn('playwright chrome channel failed',error?.message||error);
+   return pw.chromium.launch(launchOpts);
   }
  }
  if(process.env.PLAYWRIGHT_CHANNEL){
