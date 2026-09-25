@@ -8,6 +8,10 @@ Soul: [akay-soul.md](akay-soul.md) · standing facts: [project-context.md](proje
 
 Read this before `docs/handoff/STATUS.md`. The v0.9.0 handoff is the frozen baseline; this file is the current truth after that tag.
 
+## 2026-09-25 — Generate Video lives in Assembly chat, not the guest invite
+- Guest footer no longer offers Video (that 404 was wrong). Letter PDF + Image only.
+- After website Ready, `/manager` shows a **Generate Video** card (same layout as Generate) with percent, in-chat preview, and Download.
+
 ## 2026-09-25 — Export Video auto-starts after website preview
 - After Template 1 Ready (preview URL live), `/manager` kicks Sandbox bake: capture that preview → Flare → 4s Imagine → Blob.
 - New clones are valid export ids. Opening/Hero downloaded from the preview deploy when missing on main.

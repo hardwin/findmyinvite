@@ -21,6 +21,7 @@ import {
  StoryboardCard,
  ProcessChip,
  GenerateBar,
+ GenerateVideoBar,
  ReadyBanner,
  DetailsFields,
  type SellDeskState
@@ -1308,66 +1309,6 @@ export default function AssemblyChat({
   return ()=>{cancelled=true;};
  },[jobId,messages.length]);
 
- useEffect(()=>{
-  const template=cloneId||(()=>{
-   try{return new URL(readyPreview,'https://findmyinvite.com').searchParams.get('template')||'';}
-   catch{return '';}
-  })();
-  if(!readyBanner||!readyPreview||!template)return;
-  if(!/^https?:\/\//i.test(readyPreview))return;
-  const key=template+'|'+readyPreview;
-  if(videoKickoffRef.current===key)return;
-  let cancelled=false;
-  void (async()=>{
-   try{
-    const statusRes=await managerFetch('/api/invite-export?action=status&template='+encodeURIComponent(template));
-    const status=await statusRes.json().catch(()=>({}));
-    if(cancelled)return;
-    if(status.video){
-     videoKickoffRef.current=key;
-     setVideoJob({status:'ready',percent:100,label:'Ready',url:status.video});
-     return;
-    }
-    const start=await managerFetch('/api/invite-export?action=bake',{
-     method:'POST',
-     headers:{'Content-Type':'application/json'},
-     body:JSON.stringify({template,previewUrl:readyPreview,formats:'video'})
-    });
-    const started=await start.json().catch(()=>({}));
-    if(!start.ok)throw new Error(started.error||started.message||'Video bake failed to start.');
-    videoKickoffRef.current=key;
-    const bakeId=String(started.jobId||'');
-    setVideoJob({jobId:bakeId,status:started.status||'queued',percent:0,label:'Queued'});
-    if(!bakeId)return;
-    const poll=async()=>{
-     const res=await managerFetch('/api/invite-export?action=bake-status&jobId='+encodeURIComponent(bakeId));
-     const body=await res.json().catch(()=>({}));
-     if(cancelled||!res.ok)return;
-     const url=body.urls?.video||(body.status==='ready'
-      ?'/api/invite-export?action=file&template='+encodeURIComponent(template)+'&format=video'
-      :null);
-     setVideoJob({
-      jobId:bakeId,
-      status:body.status,
-      percent:Number(body.percent)||0,
-      label:body.label||body.status,
-      url,
-      error:body.error||null
-     });
-     if(body.status==='ready'||body.status==='failed')return;
-     window.setTimeout(()=>void poll(),4000);
-    };
-    window.setTimeout(()=>void poll(),2500);
-   }catch(err){
-    if(!cancelled)setVideoJob({
-     status:'failed',
-     error:err instanceof Error?err.message:'Video bake failed to start.'
-    });
-   }
-  })();
-  return ()=>{cancelled=true;};
- },[readyBanner,readyPreview,cloneId]);
-
  const sendChip=useCallback((text:string)=>{
   if(!text.trim()||busy)return;
   stickToBottomRef.current=true;
@@ -1497,6 +1438,71 @@ export default function AssemblyChat({
    'Estimated time reminder: about 15 minutes. Credit charge later — do not invent a charge.'
   ].filter(Boolean);
   sendChip(lines.join('\n'));
+ }
+
+ function resolveVideoTemplate(){
+  if(cloneId)return cloneId;
+  try{return new URL(readyPreview,location.origin).searchParams.get('template')||'';}
+  catch{return '';}
+ }
+
+ function resolveVideoPreviewUrl(){
+  if(/^https?:\/\//i.test(readyPreview))return readyPreview;
+  if(readyPreview)return location.origin+readyPreview;
+  return location.origin;
+ }
+
+ async function requestGenerateVideo(){
+  const template=resolveVideoTemplate();
+  if(!template||videoJob&&videoJob.status!=='ready'&&videoJob.status!=='failed')return;
+  const key=template+'|'+resolveVideoPreviewUrl();
+  if(videoKickoffRef.current===key&&videoJob?.status==='ready')return;
+  videoKickoffRef.current=key;
+  setVideoJob({status:'queued',percent:1,label:'Starting…'});
+  try{
+   const statusRes=await managerFetch('/api/invite-export?action=status&template='+encodeURIComponent(template));
+   const status=await statusRes.json().catch(()=>({}));
+   if(status.video){
+    setVideoJob({status:'ready',percent:100,label:'Ready',url:status.video});
+    return;
+   }
+   const start=await managerFetch('/api/invite-export?action=bake',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({template,previewUrl:resolveVideoPreviewUrl(),formats:'video'})
+   });
+   const started=await start.json().catch(()=>({}));
+   if(!start.ok)throw new Error(started.error||started.message||'Video bake failed to start.');
+   const bakeId=String(started.jobId||'');
+   setVideoJob({jobId:bakeId,status:started.status||'queued',percent:4,label:'Queued'});
+   if(!bakeId)return;
+   const poll=async()=>{
+    const res=await managerFetch('/api/invite-export?action=bake-status&jobId='+encodeURIComponent(bakeId));
+    const body=await res.json().catch(()=>({}));
+    if(!res.ok)throw new Error(body.error||'Video status failed.');
+    const url=body.urls?.video||(body.status==='ready'
+     ?'/api/invite-export?action=file&template='+encodeURIComponent(template)+'&format=video'
+     :null);
+    setVideoJob({
+     jobId:bakeId,
+     status:body.status,
+     percent:Number(body.percent)||0,
+     label:body.label||body.status,
+     url,
+     error:body.error||null
+    });
+    if(body.status==='ready'||body.status==='failed')return;
+    window.setTimeout(()=>void poll(),4000);
+   };
+   window.setTimeout(()=>void poll(),2500);
+  }catch(err){
+   videoKickoffRef.current='';
+   setVideoJob({
+    status:'failed',
+    percent:0,
+    error:err instanceof Error?err.message:'Video bake failed to start.'
+   });
+  }
  }
 
  const composer=(
@@ -1633,7 +1639,6 @@ export default function AssemblyChat({
       {readyBanner&&(
        <ReadyBanner
         previewUrl={readyPreview}
-        video={videoJob}
         onDismiss={()=>setReadyBanner(false)}
        />
       )}
@@ -1685,6 +1690,12 @@ export default function AssemblyChat({
          <DetailsFields busy={busy} onSubmit={sendChip}/>
         )}
         <GenerateBar ready={canGenerate} busy={busy} details={sell.details} onGenerate={requestGenerate}/>
+        <GenerateVideoBar
+         ready={(readyBanner||sell.stage==='ready')&&Boolean(resolveVideoTemplate())}
+         details={sell.details}
+         video={videoJob}
+         onGenerate={()=>void requestGenerateVideo()}
+        />
         {jobId&&(
          <JobCard
           jobId={jobId}

@@ -368,6 +368,11 @@ html:has(.asm-gpt),body:has(.asm-gpt){
   background:var(--yellow);color:#111;font:600 14px/1 var(--font);cursor:pointer;
 }
 .asm-sell-generate-btn:disabled{opacity:.45;cursor:not-allowed}
+.asm-sell-generate a.asm-sell-generate-btn{display:inline-flex;align-items:center;text-decoration:none}
+.asm-sell-video-meter{height:6px;margin-top:10px;border-radius:999px;background:#2a2a2a;overflow:hidden}
+.asm-sell-video-meter span{display:block;height:100%;background:var(--yellow);transition:width .4s ease}
+.asm-sell-video-preview{margin-top:12px;display:grid;gap:10px;max-width:280px}
+.asm-sell-video-preview video{width:100%;border-radius:12px;background:#000}
 
 .asm-sell-ready{
   margin:12px 16px 0;padding:14px 16px;border-radius:14px;border:1px solid #cfe5d8;

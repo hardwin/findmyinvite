@@ -73,17 +73,17 @@ export function ExportVideoButton({template,className}:{template:string;classNam
      catch(err){setError(err instanceof Error?err.message:'Export failed');}
      finally{setBusy(false);}
     }}
-   >{busy?'Exporting…':'Export Video · ₹400'}</button>
+   >{busy?'Exporting…':'Export Video'}</button>
    {error&&<p className="export-error" role="alert">{error}</p>}
   </>
  );
 }
 
-/** Guest footer / manage — Video, Letter PDF, Image. */
+/** Guest footer / manage — Letter PDF and Image only. Cinematic video lives in Assembly studio. */
 export function InviteDownloadMenu({template}:{template:string}){
  const [busy,setBusy]=useState<Format|null>(null);
  const [error,setError]=useState('');
- const run=async(format:Format)=>{
+ const run=async(format:Exclude<Format,'video'>)=>{
   setError('');
   setBusy(format);
   try{await requestExport(template,format);}
@@ -94,7 +94,6 @@ export function InviteDownloadMenu({template}:{template:string}){
   <div className="invite-download-menu">
    <p className="invite-download-label">Download</p>
    <div className="invite-download-actions">
-    <button type="button" className="fmi-button outline small" disabled={!!busy} onClick={()=>run('video')}>{busy==='video'?'…':'Video · ₹400'}</button>
     <button type="button" className="fmi-button outline small" disabled={!!busy} onClick={()=>run('pdf')}>{busy==='pdf'?'…':'Letter PDF'}</button>
     <button type="button" className="fmi-button outline small" disabled={!!busy} onClick={()=>run('image')}>{busy==='image'?'…':'Image'}</button>
    </div>

@@ -464,46 +464,90 @@ export function GenerateBar({
 
 export function ReadyBanner({
  previewUrl,
- onDismiss,
- video
+ onDismiss
 }:{
  previewUrl?:string|null;
  onDismiss:()=>void;
- video?:{
-  status?:string;
-  percent?:number;
-  label?:string;
-  url?:string|null;
-  error?:string|null;
- }|null;
 }){
- const videoReady=video?.status==='ready'&&video.url;
- const videoBusy=video&&!videoReady&&video.status!=='failed';
  return (
   <div className="asm-sell-ready" role="status">
    <div>
     <strong>Your invitation is ready</strong>
-    <p>Open the preview — we start the ₹400 cinematic video as soon as that site is live.</p>
-    {videoBusy&&(
-     <p className="asm-sell-video-eta">
-      {video.label||'Crafting video…'}
-      {typeof video.percent==='number'?' · '+video.percent+'%':''}
-      {' '}(~12 min, Flare + 4s Imagine chapters)
-     </p>
-    )}
-    {video?.status==='failed'&&(
-     <p className="asm-sell-video-eta" role="alert">{video.error||'Video bake failed.'}</p>
-    )}
+    <p>Open the website preview, then Generate Video in this chat when you want the reel.</p>
    </div>
    <div className="asm-gpt-chips">
     {previewUrl&&(
      <a className="asm-gpt-chip" href={previewUrl} target="_blank" rel="noreferrer">Open preview</a>
     )}
-    {videoReady&&(
-     <a className="asm-gpt-chip" href={video.url||'#'} download>Download video</a>
-    )}
     <button type="button" className="asm-gpt-chip" onClick={onDismiss}>Dismiss</button>
    </div>
+  </div>
+ );
+}
+
+export type StudioVideoJob={
+ jobId?:string;
+ status?:string;
+ percent?:number;
+ label?:string;
+ url?:string|null;
+ error?:string|null;
+};
+
+export function GenerateVideoBar({
+ ready,
+ details,
+ video,
+ onGenerate
+}:{
+ ready:boolean;
+ details:InviteDetails;
+ video?:StudioVideoJob|null;
+ onGenerate:()=>void;
+}){
+ if(!ready&&!video)return null;
+ const names=[details.groomName,details.brideName].filter(Boolean).join(' & ');
+ const busy=video&&video.status!=='ready'&&video.status!=='failed';
+ const done=video?.status==='ready'&&video.url;
+ const pct=Math.max(0,Math.min(100,Number(video?.percent)||0));
+ return (
+  <div className="asm-sell-generate" role="region" aria-label="Generate video">
+   <div>
+    <strong>{done?'Video ready':busy?'Generating video':'Ready to generate video'}</strong>
+    <p>
+     {names||details.displayName||'Your invitation'}
+     {details.eventDate?' · '+details.eventDate:''}
+     {details.venue?' · '+details.venue:''}
+    </p>
+    {busy?(
+     <p className="asm-sell-eta" aria-live="polite">
+      {video?.label||'Crafting…'} · {pct}%
+     </p>
+    ):done?(
+     <p className="asm-sell-eta">Preview below — download when you like.</p>
+    ):(
+     <p className="asm-sell-eta">Estimated time: about 12 minutes · ₹400 add-on</p>
+    )}
+    {video?.status==='failed'&&(
+     <p className="asm-sell-eta" role="alert">{video.error||'Video failed. Tap Generate Video to retry.'}</p>
+    )}
+    {busy&&(
+     <div className="asm-sell-video-meter" aria-hidden="true">
+      <span style={{width:pct+'%'}}/>
+     </div>
+    )}
+    {done&&(
+     <div className="asm-sell-video-preview">
+      <video src={video.url||undefined} controls playsInline preload="metadata"/>
+      <a className="asm-sell-generate-btn" href={video.url||'#'} download>Download</a>
+     </div>
+    )}
+   </div>
+   {!done&&(
+    <button type="button" className="asm-sell-generate-btn" disabled={!!busy||!ready} onClick={onGenerate}>
+     {busy?pct+'%':'Generate Video'}
+    </button>
+   )}
   </div>
  );
 }

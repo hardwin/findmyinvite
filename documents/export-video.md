@@ -27,16 +27,15 @@ Skip Moments, RSVP, Transport, Accommodation, Gifts, Welcome, Dress.
 3. **Grok Imagine** (`grok-imagine-video-1.5`, xAI first) — 4s **bullet-time**, parallax around that Flare still as `image` **and** `last_frame`. If the API rejects 4s, retry 6s.
 4. Stitch. Upload `walkthrough/{id}-walkthrough.mp4` to private Blob.
 
-## After Generate Website
+## After Generate Website (Assembly studio only)
 
-When Template 1 hits **preview** and the photographer sees the Ready banner:
+Video is **not** on the guest invitation. After the website preview is live, the photographer taps **Generate Video** in `/manager` chat (same card layout as Generate).
 
-1. `/manager` POSTs `/api/invite-export?action=bake` with `{template: cloneId, previewUrl}` (signed-in manager — no bake secret).
-2. Sandbox captures that **Vercel preview** (not production catalog).
-3. Opening/Hero mp4s are pulled from the preview `/assets/{cloneId}*.mp4` when they are not on `main` yet.
-4. Flare + 4s Imagine stitch uploads to Blob. Ready banner shows progress, then **Download video**.
+1. POST `/api/invite-export?action=bake` with `{template: cloneId, previewUrl}`.
+2. Sandbox captures that preview → Flare → 4s Imagine → Blob.
+3. Chat shows percent, then an in-thread video preview + Download.
 
-Do not start Imagine during Generate. Website first, preview live, then video (~12 min).
+Guest footer stays Letter PDF + Image only.
 
 ## Operator bake
 
