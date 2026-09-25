@@ -14,13 +14,26 @@ type Access={id:string;token:string;template?:string;type?:string};
 type Draft={id:string;template:string;data:InviteData;html:string;revision:number;busy:boolean;publishedSlug?:string};
 type Selection={key:string;value:string;section?:string;label?:string;type?:string;max?:number};
 const storage='findmyinvite-editor-v1';
-const readAccess=():Access|null=>{try{const q=new URLSearchParams(location.search);const current=JSON.parse(localStorage.getItem(storage)||'null');const saved=JSON.parse(localStorage.getItem(storage+'-history')||'[]');if(q.get('new')==='1'){return [current,...saved.slice().reverse()].find((x:Access|null)=>x?.template===q.get('template')&&(!x.type||x.type===(q.get('type')||'wedding')))||null;}if(!q.get('draft')||current?.id===q.get('draft'))return current;return saved.find((x:Access)=>x.id===q.get('draft'))||null}catch{return null}};
+const readAccess=():Access|null=>{try{
+ const q=new URLSearchParams(location.search);
+ // Catalogue "Use this design" always starts a fresh draft — do not reopen an old template match.
+ if(q.get('new')==='1')return null;
+ const current=JSON.parse(localStorage.getItem(storage)||'null');
+ const saved=JSON.parse(localStorage.getItem(storage+'-history')||'[]');
+ if(!q.get('draft')||current?.id===q.get('draft'))return current;
+ return saved.find((x:Access)=>x.id===q.get('draft'))||null;
+}catch{return null}};
 async function api<T>(action:string,key:Access|null,body?:unknown):Promise<T>{
  for(let n=0;n<20;n++){
   const r=await fetch('/api/studio?action='+action+(key?'&id='+key.id:''),{method:body===undefined?'GET':'POST',headers:{...(key?{Authorization:'Bearer '+key.token}:{}),...(body===undefined?{}:{'Content-Type':'application/json'})},body:body===undefined?undefined:JSON.stringify(body)});
   if(r.status===423){await new Promise(resolve=>setTimeout(resolve,1000));continue;}
   let j;try{j=await r.json()}catch{throw Error('The connection was interrupted. Your edits are kept on this device. Try saving again.');}
-  if(!r.ok)throw Error(j.error||'Could not save. Please try again.');return j;
+  if(!r.ok){
+   const err=Error(j.error||'Could not save. Please try again.') as Error & {status?:number};
+   err.status=r.status;
+   throw err;
+  }
+  return j;
  }throw Error('This draft is busy in another tab. Close that tab and try saving again.');
 }
 export default function TextEditor(){
@@ -33,12 +46,56 @@ export default function TextEditor(){
  useEffect(()=>{const pop=()=>setMode(location.pathname.startsWith('/form')?'form':'editor');addEventListener('popstate',pop);return()=>removeEventListener('popstate',pop)},[]);
  async function switchMode(next:'form'|'editor'){done();try{await save();setMode(next);history.pushState({},'',`/${next}?draft=${current.current!.id}`)}catch{/* Preserve unsaved draft and stay in this mode. */}}
  function adopt(d:Draft){current.current=d;setDraft(d);}
- useEffect(()=>{if(!access)return;let active=true;setLoading(true);api<Draft>('read',access).then(d=>{if(!active)return;keyRef.current=access;const remembered={...access,template:d.template,type:d.data.type};localStorage.setItem(storage,JSON.stringify(remembered));history.replaceState({},'',`/${mode}?draft=${d.id}`);const backup=localStorage.getItem(storage+'-'+d.id);if(backup){try{const b=JSON.parse(backup);if(b.revision===d.revision){d.data=b.data;dirty.current=true;setStatus('Recovered unsaved edits · tap Save');}else setError('A newer version exists online. Your older local recovery copy has been retained.');}catch{/* keep online version */}}adopt(d);setSlug(d.publishedSlug||'');if(!dirty.current)setStatus('All changes saved');}).catch(e=>setError(e.message)).finally(()=>{if(active)setLoading(false)});return()=>{active=false}},[access]);
+ useEffect(()=>{if(!access)return;let active=true;setLoading(true);api<Draft>('read',access).then(d=>{if(!active)return;keyRef.current=access;const remembered={...access,template:d.template,type:d.data.type};localStorage.setItem(storage,JSON.stringify(remembered));history.replaceState({},'',`/${mode}?draft=${d.id}`);const backup=localStorage.getItem(storage+'-'+d.id);if(backup){try{const b=JSON.parse(backup);if(b?.data&&typeof b.data==='object'){// Always re-apply local recovery onto the latest online revision (never leave dirty=false with a stuck error).
+ d={...d,data:b.data as InviteData};dirty.current=true;backup({...d,revision:d.revision,data:d.data});setStatus(b.revision===d.revision?'Recovered unsaved edits · tap Save':'Recovered your edits onto the latest draft · tap Save');} }catch{/* keep online version */}}adopt(d);setSlug(d.publishedSlug||'');setError('');if(!dirty.current)setStatus('All changes saved');}).catch(e=>setError(e.message)).finally(()=>{if(active)setLoading(false)});return()=>{active=false}},[access]);
  useEffect(()=>{const protect=(e:BeforeUnloadEvent)=>{if(dirty.current){e.preventDefault();e.returnValue=''}};window.addEventListener('beforeunload',protect);const viewport=window.visualViewport;const resize=()=>setKeyboard(Math.max(0,window.innerHeight-(viewport?.height||window.innerHeight)-(viewport?.offsetTop||0)));viewport?.addEventListener('resize',resize);return()=>{window.removeEventListener('beforeunload',protect);viewport?.removeEventListener('resize',resize);if(timer.current)clearTimeout(timer.current)}},[]);
  useEffect(()=>{if(selection){input.current?.focus();input.current?.select();}},[selection?.key]);
  function backup(d:Draft){try{localStorage.setItem(storage+'-'+d.id,JSON.stringify({revision:d.revision,data:d.data}))}catch{setError('Device backup is unavailable. Keep this tab open until saving completes.')}}
- async function save():Promise<void>{if(saveTask.current)return saveTask.current;if(!current.current||!keyRef.current||!dirty.current)return;if(timer.current)clearTimeout(timer.current);
- const task=(async()=>{while(dirty.current&&current.current&&keyRef.current){const sent=current.current,version=generation.current;setStatus('Saving…');const saved=await api<Draft>('save',keyRef.current,{revision:sent.revision,data:sent.data});const latest={...saved,data:current.current!.data};adopt(latest);if(version===generation.current){dirty.current=false;localStorage.removeItem(storage+'-'+saved.id);setStatus('All changes saved');}else backup(latest);}})();saveTask.current=task;try{await task;setError('')}catch(e){setStatus('Not saved · retry');setError((e as Error).message);throw e}finally{saveTask.current=null}}
+ async function save():Promise<void>{if(saveTask.current)return saveTask.current;if(!current.current||!keyRef.current)return;if(!dirty.current){setError('');setStatus('All changes saved');return;}if(timer.current)clearTimeout(timer.current);
+ const task=(async()=>{
+  let conflicts=0;
+  while(dirty.current&&current.current&&keyRef.current){
+   const sent=current.current,version=generation.current;setStatus('Saving…');
+   try{
+    const saved=await api<Draft>('save',keyRef.current,{revision:sent.revision,data:sent.data});
+    const latest={...saved,data:current.current!.data};adopt(latest);
+    if(version===generation.current){dirty.current=false;localStorage.removeItem(storage+'-'+saved.id);setStatus('All changes saved');}
+    else backup(latest);
+   }catch(e){
+    const err=e as Error & {status?:number};
+    const conflict=err.status===409||/changed elsewhere|Reload to use|changed\. Reload/i.test(err.message||'');
+    if(conflict&&conflicts<2&&keyRef.current){
+     conflicts++;
+     const fresh=await api<Draft>('read',keyRef.current);
+     const localData=current.current!.data;
+     adopt({...fresh,data:localData});
+     dirty.current=true;
+     backup(current.current!);
+     setStatus('Synced to latest draft · saving your edits…');
+     continue;
+    }
+    throw err;
+   }
+  }
+ })();
+ saveTask.current=task;try{await task;setError('')}catch(e){setStatus('Not saved · retry');setError((e as Error).message);throw e}finally{saveTask.current=null}}
+ async function retrySave(){
+  try{
+   if(!dirty.current&&current.current&&keyRef.current){
+    // Stale toast with nothing dirty — re-read then save if recovery still pending.
+    const fresh=await api<Draft>('read',keyRef.current);
+    const backupRaw=localStorage.getItem(storage+'-'+fresh.id);
+    if(backupRaw){
+     try{
+      const b=JSON.parse(backupRaw);
+      if(b?.data){adopt({...fresh,data:b.data});dirty.current=true;backup(current.current!);}
+      else adopt(fresh);
+     }catch{adopt(fresh);}
+    }else adopt(fresh);
+   }
+   await save();
+  }catch{/* toast already set */}
+ }
  function schedule(){if(timer.current)clearTimeout(timer.current);timer.current=setTimeout(()=>{void save().catch(()=>{})},850)}
  function commit(data:InviteData){if(!current.current)return;generation.current++;dirty.current=true;const next={...current.current,data};adopt(next);backup(next);setStatus('Unsaved changes');setPublished('');schedule();}
  function select(s:Selection){if(!current.current||preview)return;if(selection)done();const field=s.key.startsWith('field:')?[...schema.fields,...['dressWomen','dressMen','transport','accommodation','gifts'].map(key=>({key,label:key.replace(/([A-Z])/g,' $1'),type:'textarea',max:key.startsWith('dress')?500:1500}))].find(f=>f.key===s.key.slice(6)):undefined;let value=s.value,type='textarea',label='Invitation wording',max=2000;if(field){value=String(current.current.data[field.key as keyof InviteData]||'');type=field.type;label=field.label;max=field.max;}else if(s.key.startsWith('event:')){const [list,index,part]=s.key.slice(6).split('.');if(!['timeline','preEvents'].includes(list))return;const event=current.current.data[list as 'timeline'|'preEvents'][Number(index)];if(!event||!['title','time','description'].includes(part))return;value=event[part as keyof typeof event];type=part==='time'?'datetime-local':'textarea';label=part==='time'?'Event date & time':part==='title'?'Event title':'Event description';max=part==='title'?150:1000;}else if(!/^text-\d{1,4}$/.test(s.key))return;
@@ -60,7 +117,7 @@ async function publish(e:React.FormEvent){e.preventDefault();done();setPublishin
  {mode==='form'&&<section className="te-form-panel"><div className="te-form-intro"><span className="te-eyebrow">YOUR INVITATION, YOUR WAY</span><h1>Every little detail.</h1><p>The same invitation, in a familiar form. Switch to Editor whenever you like.</p></div><form onSubmit={e=>{e.preventDefault();void save().catch(()=>{})}}>{schema.fields.map(f=><label key={f.key}>{f.label}{f.required?' *':''}{f.type==='textarea'?<textarea rows={3} maxLength={f.max} value={String(draft.data[f.key as keyof InviteData]||'')} onChange={e=>commit({...draft.data,[f.key]:e.target.value})}/>:<input type={f.type} required={f.required} maxLength={f.max} value={String(draft.data[f.key as keyof InviteData]||'')} onChange={e=>commit({...draft.data,[f.key]:e.target.value})}/>}</label>)}{(['timeline','preEvents'] as const).map(list=><fieldset key={list}><legend>{list==='timeline'?'Program timeline':'Pre-wedding events'}</legend>{draft.data[list].map((event,i)=><div className="te-form-event" key={i}>{(['title','time','description'] as const).map(field=><label key={field}>{field==='time'?'Date & time':field==='title'?'Event name':'Description'}<input type={field==='time'?'datetime-local':'text'} maxLength={field==='title'?150:1000} value={event[field]} onChange={e=>commit({...draft.data,[list]:draft.data[list].map((x,n)=>n===i?{...x,[field]:e.target.value}:x)})}/></label>)}</div>)}</fieldset>)}{Object.keys(draft.data.textOverrides||{}).length>0&&<fieldset><legend>Wording customized in Editor</legend>{Object.entries(draft.data.textOverrides||{}).map(([key,value],i)=><label key={key}>Custom wording {i+1}<textarea rows={2} maxLength={2000} value={value} onChange={e=>commit({...draft.data,textOverrides:{...draft.data.textOverrides,[key]:e.target.value}})}/></label>)}</fieldset>}{!(renderers.htmlTemplates.includes(draft.template)||draft.template.startsWith('sku-'))&&(['dressWomen','dressMen','transport','accommodation','gifts'] as const).map(field=><label key={field}>{field.replace(/([A-Z])/g,' $1')}<textarea value={draft.data[field]} onChange={e=>commit({...draft.data,[field]:e.target.value})}/></label>)}<div className="te-form-footer"><button className="te-publish" type="submit">Save changes</button><button type="button" onClick={()=>void switchMode('editor')}>Continue in Editor →</button><span role="status">{status}</span></div></form></section>}
  {mode==='editor'&&!selection&&<footer className="te-dock"><button aria-label="Previous section" disabled={position<=0} onClick={()=>setSection(studioSections[position-1].id)}><ChevronLeft size={20}/></button><div><PenLine size={15}/><span>{preview?'Guest preview · editing hidden':status==='Saving…'?'Saving your words…':status==='All changes saved'?'Tap text to edit · saved':'Tap any outlined text to edit'}</span></div><button aria-label="Next section" disabled={position===studioSections.length-1} onClick={()=>setSection(studioSections[position+1].id)}><ChevronRight size={20}/></button></footer>}
  {selection&&<section className="te-edit-panel" aria-label="Edit selected text" style={{bottom:keyboard+12}}><header><div><span className="te-eyebrow">MAKE IT YOURS</span><h2>{selection.label}</h2></div><button aria-label="Done editing" onClick={done}><Check size={21}/></button></header>{selection.type==='textarea'?<textarea ref={el=>{input.current=el}} aria-label={selection.label} rows={3} maxLength={selection.max} value={selection.value} onChange={e=>change(e.target.value)} onKeyDown={e=>{if(e.key==='Escape'||(e.key==='Enter'&&(e.ctrlKey||e.metaKey)))done()}}/>:<input ref={el=>{input.current=el}} aria-label={selection.label} type={selection.type} maxLength={selection.max} value={selection.value} onChange={e=>change(e.target.value)} onKeyDown={e=>{if(e.key==='Enter'||e.key==='Escape')done()}}/>}<footer><span>Changes appear as you type</span><span>{selection.value.length} / {selection.max}</span></footer></section>}
- {error&&<div className="te-error-toast" role="alert"><span>{error}</span><button onClick={()=>void save().catch(()=>{})}>Retry save</button><button aria-label="Dismiss error" onClick={()=>setError('')}><X size={16}/></button></div>}
+ {error&&<div className="te-error-toast" role="alert"><span>{error}</span><button onClick={()=>void retrySave()}>Retry save</button><button aria-label="Dismiss error" onClick={()=>setError('')}><X size={16}/></button></div>}
  {draft.busy&&<div className="te-error-toast">This invitation is being edited in Studio. Finish or cancel that change before editing here.</div>}
  {showPublish&&<div className="te-modal-backdrop"><section className="te-modal" role="dialog" aria-modal="true" aria-label="Publish invitation"><button className="te-modal-close" aria-label="Close publish dialog" disabled={publishing} onClick={()=>setShowPublish(false)}><X size={20}/></button><span className="te-eyebrow">READY FOR YOUR GUESTS</span><h2>A little link.<br/><em>A big celebration.</em></h2><p>Your edits stay private until you publish. Share this link with everyone you love.</p><form onSubmit={publish}><label>Your invitation address<div className="te-address"><span>findmyinvite.com/</span><input autoFocus required minLength={3} maxLength={48} pattern="[a-z0-9][a-z0-9-]{1,46}[a-z0-9]" placeholder="ashok-and-supriya" aria-label="Invitation address" value={slug} readOnly={Boolean(draft.publishedSlug)} onChange={e=>setSlug(e.target.value.toLowerCase().replace(/[^a-z0-9-]/g,''))}/></div></label><button className="te-publish te-wide" disabled={publishing}>{publishing?'Publishing…':draft.publishedSlug?'Publish updates':'Publish invitation'}<ArrowUpRight size={17}/></button></form>{published&&<div className="te-success"><Check size={18}/><span>Your invitation is live. <a href={published} target="_blank" rel="noreferrer">Open invitation ↗</a></span></div>}<p className="te-private-note">Keep this browser’s data to return to your private draft.</p></section></div>}
  </main>;

@@ -8,6 +8,10 @@ Soul: [akay-soul.md](akay-soul.md) · standing facts: [project-context.md](proje
 
 Read this before `docs/handoff/STATUS.md`. The v0.9.0 handoff is the frozen baseline; this file is the current truth after that tag.
 
+## 2026-09-25 — Form/Editor draft conflict unlock
+- Catalogue `?new=1` was reopening an old draft for the same template → revision 409 “changed elsewhere” / stuck Retry.
+- Fix: `?new=1` always creates a fresh draft; recovery reapplies local edits onto the latest online revision; save 409 re-reads + retries; Retry save never no-ops.
+
 ## 2026-09-25 — Chat "Forbidden" = xAI out of credits
 - New `/manager` chats failed with bare **Forbidden** because xAI returned HTTP 403 (team spending limit / no credits) and the UI only surfaced statusText.
 - `formatAssemblyChatError` + chat fetch now map 403/credit bodies to: top up https://console.x.ai.
