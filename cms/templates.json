@@ -313,5 +313,14 @@
     "badge": "New",
     "sort_order": 41,
     "published": true
+  },
+  {
+    "id": "royal-prestige-10",
+    "name": "StudioGen",
+    "description": "Prestigious cinematic opening with refined elegance and grandeur",
+    "collection": "royal",
+    "badge": "New",
+    "sort_order": 42,
+    "published": true
   }
 ]
