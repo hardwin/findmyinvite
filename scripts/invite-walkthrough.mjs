@@ -1,9 +1,14 @@
 #!/usr/bin/env node
-// Bake catalogue walkthrough v3 (soft wedding motion).
+// Bake 1080p live walkthrough → Vercel Blob (git never gets the binaries).
+// REUSE_CLIPS=1 skips Playwright when work/exports/{id}-pages already has clips.
 // FORCE=1 CAPTURE_ORIGIN=https://findmyinvite.com node scripts/invite-walkthrough.mjs royal-prestige-12
-import {captureInviteMedia,resolveExport,walkthroughPaths} from '../server/invite-walkthrough.mjs';
+import {loadEnv} from 'vite';
+import {readdir} from 'node:fs/promises';
 import {join} from 'node:path';
 import {fileURLToPath} from 'node:url';
+import {captureInviteMedia,resolveExport,walkthroughPaths,readWalkthroughManifest} from '../server/invite-walkthrough.mjs';
+
+Object.assign(process.env,loadEnv('development',process.cwd(),''));
 
 const id=process.argv[2]||'royal-prestige-12';
 const force=process.env.FORCE==='1'||process.argv.includes('--force');
@@ -12,20 +17,38 @@ const origin=(process.env.CAPTURE_ORIGIN||'https://findmyinvite.com').replace(/\
 const ROOT=fileURLToPath(new URL('..',import.meta.url));
 const pagesDir=join(ROOT,'work','exports',id+'-pages');
 
-console.log('capturing',id,'from',origin);
-const {heroStill,pageStills}=await captureInviteMedia({templateId:id,origin,outDir:pagesDir});
-console.log('hero',heroStill||'(none)');
-console.log('sections',pageStills.length);
-pageStills.forEach(s=>console.log(' ',s));
+let heroClip,pageClips,heroFrame,pageFrames;
+
+if(process.env.REUSE_CLIPS==='1'){
+ const names=await readdir(pagesDir).catch(()=>[]);
+ heroClip=names.includes('hero.mp4')?join(pagesDir,'hero.mp4'):null;
+ heroFrame=names.includes('hero-frame.png')?join(pagesDir,'hero-frame.png'):null;
+ pageClips=names.filter(n=>/^page-\d+.*\.mp4$/i.test(n)).sort().map(n=>join(pagesDir,n));
+ pageFrames=names.filter(n=>/^page-\d+.*\.png$/i.test(n)).sort().map(n=>join(pagesDir,n));
+ console.log('reusing clips from',pagesDir,'pages=',pageClips.length);
+ if(!heroClip||!pageClips.length)throw new Error('REUSE_CLIPS=1 but clips missing in '+pagesDir);
+}else{
+ console.log('live-capturing',id,'from',origin,'(1080×1920 → Blob)');
+ const captured=await captureInviteMedia({templateId:id,origin,outDir:pagesDir});
+ heroClip=captured.heroClip;
+ pageClips=captured.pageClips;
+ heroFrame=captured.heroFrame;
+ pageFrames=captured.pageFrames;
+}
+console.log('heroClip',heroClip||'(none)');
+pageClips.forEach(s=>console.log(' ',s));
 
 for(const format of formats){
  const r=await resolveExport({
   templateId:id,
   format,
-  pageStills,
-  heroStill,
-  forceRebuild:force||true
+  heroClip,
+  pageClips,
+  heroFrame,
+  pageFrames,
+  forceRebuild:force
  });
- console.log(format,r.cached?'cached':'built',r.url||r.path);
+ console.log(format,r.cached?'cached':'built+blob',r.url||r.path);
 }
-console.log('public',walkthroughPaths(id).publicVideo);
+console.log('manifest',JSON.stringify((await readWalkthroughManifest())[id]||{},null,2));
+console.log('blob paths',walkthroughPaths(id).blobVideo);

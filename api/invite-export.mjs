@@ -1,7 +1,7 @@
 import {createReadStream} from 'node:fs';
 import {stat} from 'node:fs/promises';
 import {HttpError,bodyJson,respond,fail,method,templates} from '../server/core.mjs';
-import {resolveExport,walkthroughPaths} from '../server/invite-walkthrough.mjs';
+import {resolveExport,readWalkthroughManifest,fetchWalkthroughBlob,walkthroughServeUrl} from '../server/invite-walkthrough.mjs';
 
 export const config={maxDuration:300,memory:1024};
 
@@ -24,6 +24,12 @@ function filenameFor(id,format){
  return id+'-walkthrough.mp4';
 }
 
+function absoluteUrl(req,url){
+ if(!url)return null;
+ if(/^https?:\/\//i.test(url))return url;
+ return siteOrigin(req)+url;
+}
+
 export default async function handler(req,res){
  try{
   const url=new URL(req.url,'https://findmyinvite.com');
@@ -33,16 +39,32 @@ export default async function handler(req,res){
    method(req,['GET']);
    const template=String(url.searchParams.get('template')||'').trim();
    if(!templates.has(template))throw new HttpError(404,'Unknown template.');
-   const p=walkthroughPaths(template);
-   const {access}=await import('node:fs/promises');
-   const {constants}=await import('node:fs');
-   const has=async(path)=>{try{await access(path,constants.R_OK);return true;}catch{return false;}};
+   const row=(await readWalkthroughManifest())[template]||{};
    return respond(res,200,{
     template,
-    video:await has(p.prebakedVideo)?p.publicVideo:null,
-    image:await has(p.prebakedImage)?p.publicImage:null,
-    pdf:await has(p.prebakedPdf)?p.publicPdf:null
+    video:row.blob?.video?walkthroughServeUrl(template,'video'):null,
+    image:row.blob?.image?walkthroughServeUrl(template,'image'):null,
+    pdf:row.blob?.pdf?walkthroughServeUrl(template,'pdf'):null
    });
+  }
+
+  // Stream private Blob → browser (marketing download).
+  if(action==='file'){
+   method(req,['GET','HEAD']);
+   const template=String(url.searchParams.get('template')||'').trim();
+   const format=String(url.searchParams.get('format')||'video').trim().toLowerCase();
+   if(!template||!templates.has(template))throw new HttpError(400,'Valid template id required.');
+   if(!['video','pdf','image'].includes(format))throw new HttpError(400,'format must be video, pdf, or image.');
+   const file=await fetchWalkthroughBlob(template,format);
+   if(!file)throw new HttpError(404,'Walkthrough not baked yet.');
+   res.statusCode=200;
+   res.setHeader('Content-Type',file.contentType||mimeFor(format));
+   res.setHeader('Content-Length',String(file.buf.length));
+   res.setHeader('Content-Disposition','attachment; filename="'+filenameFor(template,format)+'"');
+   res.setHeader('Cache-Control','public, max-age=86400');
+   if(req.method==='HEAD'){res.end();return;}
+   res.end(file.buf);
+   return;
   }
 
   method(req,['POST','GET']);
@@ -54,22 +76,36 @@ export default async function handler(req,res){
   if(!['video','pdf','image'].includes(format))throw new HttpError(400,'format must be video, pdf, or image.');
 
   const result=await resolveExport({templateId:template,format,forceRebuild:force});
-  // Prefer public URL redirect when cached under /assets (CDN-friendly for marketing).
   if(result.url&&result.cached&&req.method==='GET'){
    res.statusCode=302;
-   res.setHeader('Location',result.url);
+   res.setHeader('Location',absoluteUrl(req,result.url));
    res.end();
    return;
   }
   if(result.url&&!force){
+   const abs=absoluteUrl(req,result.url);
    return respond(res,200,{
     ok:true,
     format:result.format,
     template:result.id,
     url:result.url,
-    absoluteUrl:siteOrigin(req)+result.url,
+    absoluteUrl:abs,
     cached:result.cached
    });
+  }
+  if(!result.path){
+   if(result.url){
+    const abs=absoluteUrl(req,result.url);
+    return respond(res,200,{
+     ok:true,
+     format:result.format,
+     template:result.id,
+     url:result.url,
+     absoluteUrl:abs,
+     cached:result.cached
+    });
+   }
+   throw new HttpError(500,'Export produced no file.');
   }
   const info=await stat(result.path);
   res.statusCode=200;

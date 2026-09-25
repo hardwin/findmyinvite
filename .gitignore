@@ -16,3 +16,9 @@ workspace-grapes*
 work/assembly-inbox/*
 !work/assembly-inbox/.gitkeep
 work/assembly-jobs/
+work/exports/
+
+# Walkthrough media lives on Vercel Blob — never git (manifest JSON only).
+public/assets/catalogue/v1/*-walkthrough.mp4
+public/assets/catalogue/v1/*-walkthrough.png
+public/assets/catalogue/v1/*-walkthrough.pdf

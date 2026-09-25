@@ -8,6 +8,12 @@ Soul: [akay-soul.md](akay-soul.md) · standing facts: [project-context.md](proje
 
 Read this before `docs/handoff/STATUS.md`. The v0.9.0 handoff is the frozen baseline; this file is the current truth after that tag.
 
+## 2026-09-25 — Walkthrough media = Vercel Blob only (not git)
+- Git is for website + template code only. Walkthrough video/image/PDF never land in `public/assets/catalogue`.
+- Deliver **1080×1920 @30** (not 4K/8K). Private Blob store → `/api/invite-export?action=file` streams downloads.
+- Bake uploads to `walkthrough/{id}-walkthrough.{mp4,png,pdf}`; `walkthrough-manifest.json` stores serve URLs + blob URLs.
+- Temple Wedding (`royal-prestige-12`) live bake on Blob (~29s, soft fades). Bake: `REUSE_CLIPS=1 node scripts/invite-walkthrough.mjs royal-prestige-12`.
+
 ## 2026-09-25 — Walkthrough v3: soft wedding motion
 - No shake. Gentle zoom in/out on pages; fade / fadewhite between every beat.
 - Opening trimmed (drop 3s hold) so open→hero fades early; opening 3% zoom, hero-with-names 5% zoom.

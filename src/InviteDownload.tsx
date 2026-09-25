@@ -1,12 +1,20 @@
 import {useState} from 'react';
+import walkthroughs from '../public/assets/catalogue/v1/walkthrough-manifest.json';
 
 type Format='video'|'pdf'|'image';
 
-function staticExportUrl(template:string,format:Format){
- const base='/assets/catalogue/v1/'+template+'-walkthrough';
- if(format==='pdf')return base+'.pdf';
- if(format==='image')return base+'.png';
- return base+'.mp4';
+const walkthroughManifest=walkthroughs as Record<string,{
+ video?:string;image?:string;pdf?:string;
+ blob?:{video?:string;image?:string;pdf?:string};
+}>;
+
+function manifestUrl(template:string,format:Format){
+ const row=walkthroughManifest[template];
+ if(!row)return '';
+ // Prefer same-origin API proxy (private Blob store).
+ if(format==='pdf')return row.pdf||'';
+ if(format==='image')return row.image||'';
+ return row.video||'';
 }
 
 function downloadUrl(url:string,filename:string){
@@ -21,11 +29,11 @@ function downloadUrl(url:string,filename:string){
 
 async function requestExport(template:string,format:Format){
  const filename=template+'-'+(format==='video'?'walkthrough.mp4':format==='pdf'?'letter.pdf':'invite.png');
- const staticUrl=staticExportUrl(template,format);
- try{
-  const head=await fetch(staticUrl,{method:'HEAD'});
-  if(head.ok){downloadUrl(staticUrl,filename);return;}
- }catch{/* fall through to API */}
+ const ready=manifestUrl(template,format);
+ if(ready){
+  downloadUrl(ready,filename);
+  return;
+ }
 
  const res=await fetch('/api/invite-export',{
   method:'POST',

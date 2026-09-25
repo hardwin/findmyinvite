@@ -1,8 +1,14 @@
 {
   "royal-prestige-12": {
-    "video": "/assets/catalogue/v1/royal-prestige-12-walkthrough.mp4",
-    "image": "/assets/catalogue/v1/royal-prestige-12-walkthrough.png",
-    "pdf": "/assets/catalogue/v1/royal-prestige-12-walkthrough.pdf",
-    "duration": 35.2
+    "video": "/api/invite-export?action=file&template=royal-prestige-12&format=video",
+    "blob": {
+      "video": "https://0p000etsgn9iq7q1.private.blob.vercel-storage.com/walkthrough/royal-prestige-12-walkthrough.mp4",
+      "image": "https://0p000etsgn9iq7q1.private.blob.vercel-storage.com/walkthrough/royal-prestige-12-walkthrough.png",
+      "pdf": "https://0p000etsgn9iq7q1.private.blob.vercel-storage.com/walkthrough/royal-prestige-12-walkthrough.pdf"
+    },
+    "duration": 28.633333,
+    "updatedAt": "2026-09-25T13:38:54.328Z",
+    "image": "/api/invite-export?action=file&template=royal-prestige-12&format=image",
+    "pdf": "/api/invite-export?action=file&template=royal-prestige-12&format=pdf"
   }
 }
