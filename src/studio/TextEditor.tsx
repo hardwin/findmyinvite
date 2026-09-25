@@ -46,11 +46,11 @@ export default function TextEditor(){
  useEffect(()=>{const pop=()=>setMode(location.pathname.startsWith('/form')?'form':'editor');addEventListener('popstate',pop);return()=>removeEventListener('popstate',pop)},[]);
  async function switchMode(next:'form'|'editor'){done();try{await save();setMode(next);history.pushState({},'',`/${next}?draft=${current.current!.id}`)}catch{/* Preserve unsaved draft and stay in this mode. */}}
  function adopt(d:Draft){current.current=d;setDraft(d);}
- useEffect(()=>{if(!access)return;let active=true;setLoading(true);api<Draft>('read',access).then(d=>{if(!active)return;keyRef.current=access;const remembered={...access,template:d.template,type:d.data.type};localStorage.setItem(storage,JSON.stringify(remembered));history.replaceState({},'',`/${mode}?draft=${d.id}`);const backup=localStorage.getItem(storage+'-'+d.id);if(backup){try{const b=JSON.parse(backup);if(b?.data&&typeof b.data==='object'){// Always re-apply local recovery onto the latest online revision (never leave dirty=false with a stuck error).
- d={...d,data:b.data as InviteData};dirty.current=true;backup({...d,revision:d.revision,data:d.data});setStatus(b.revision===d.revision?'Recovered unsaved edits · tap Save':'Recovered your edits onto the latest draft · tap Save');} }catch{/* keep online version */}}adopt(d);setSlug(d.publishedSlug||'');setError('');if(!dirty.current)setStatus('All changes saved');}).catch(e=>setError(e.message)).finally(()=>{if(active)setLoading(false)});return()=>{active=false}},[access]);
+ useEffect(()=>{if(!access)return;let active=true;setLoading(true);api<Draft>('read',access).then(d=>{if(!active)return;keyRef.current=access;const remembered={...access,template:d.template,type:d.data.type};localStorage.setItem(storage,JSON.stringify(remembered));history.replaceState({},'',`/${mode}?draft=${d.id}`);const backupRaw=localStorage.getItem(storage+'-'+d.id);if(backupRaw){try{const b=JSON.parse(backupRaw);if(b?.data&&typeof b.data==='object'){// Always re-apply local recovery onto the latest online revision (never leave dirty=false with a stuck error).
+ d={...d,data:b.data as InviteData};dirty.current=true;persistBackup({...d,revision:d.revision,data:d.data});setStatus(b.revision===d.revision?'Recovered unsaved edits · tap Save':'Recovered your edits onto the latest draft · tap Save');} }catch{/* keep online version */}}adopt(d);setSlug(d.publishedSlug||'');setError('');if(!dirty.current)setStatus('All changes saved');}).catch(e=>setError(e.message)).finally(()=>{if(active)setLoading(false)});return()=>{active=false}},[access]);
  useEffect(()=>{const protect=(e:BeforeUnloadEvent)=>{if(dirty.current){e.preventDefault();e.returnValue=''}};window.addEventListener('beforeunload',protect);const viewport=window.visualViewport;const resize=()=>setKeyboard(Math.max(0,window.innerHeight-(viewport?.height||window.innerHeight)-(viewport?.offsetTop||0)));viewport?.addEventListener('resize',resize);return()=>{window.removeEventListener('beforeunload',protect);viewport?.removeEventListener('resize',resize);if(timer.current)clearTimeout(timer.current)}},[]);
  useEffect(()=>{if(selection){input.current?.focus();input.current?.select();}},[selection?.key]);
- function backup(d:Draft){try{localStorage.setItem(storage+'-'+d.id,JSON.stringify({revision:d.revision,data:d.data}))}catch{setError('Device backup is unavailable. Keep this tab open until saving completes.')}}
+ function persistBackup(d:Draft){try{localStorage.setItem(storage+'-'+d.id,JSON.stringify({revision:d.revision,data:d.data}))}catch{setError('Device backup is unavailable. Keep this tab open until saving completes.')}}
  async function save():Promise<void>{if(saveTask.current)return saveTask.current;if(!current.current||!keyRef.current)return;if(!dirty.current){setError('');setStatus('All changes saved');return;}if(timer.current)clearTimeout(timer.current);
  const task=(async()=>{
   let conflicts=0;
@@ -60,7 +60,7 @@ export default function TextEditor(){
     const saved=await api<Draft>('save',keyRef.current,{revision:sent.revision,data:sent.data});
     const latest={...saved,data:current.current!.data};adopt(latest);
     if(version===generation.current){dirty.current=false;localStorage.removeItem(storage+'-'+saved.id);setStatus('All changes saved');}
-    else backup(latest);
+    else persistBackup(latest);
    }catch(e){
     const err=e as Error & {status?:number};
     const conflict=err.status===409||/changed elsewhere|Reload to use|changed\. Reload/i.test(err.message||'');
@@ -70,7 +70,7 @@ export default function TextEditor(){
      const localData=current.current!.data;
      adopt({...fresh,data:localData});
      dirty.current=true;
-     backup(current.current!);
+     persistBackup(current.current!);
      setStatus('Synced to latest draft · saving your edits…');
      continue;
     }
@@ -88,7 +88,7 @@ export default function TextEditor(){
     if(backupRaw){
      try{
       const b=JSON.parse(backupRaw);
-      if(b?.data){adopt({...fresh,data:b.data});dirty.current=true;backup(current.current!);}
+      if(b?.data){adopt({...fresh,data:b.data});dirty.current=true;persistBackup(current.current!);}
       else adopt(fresh);
      }catch{adopt(fresh);}
     }else adopt(fresh);
@@ -97,7 +97,7 @@ export default function TextEditor(){
   }catch{/* toast already set */}
  }
  function schedule(){if(timer.current)clearTimeout(timer.current);timer.current=setTimeout(()=>{void save().catch(()=>{})},850)}
- function commit(data:InviteData){if(!current.current)return;generation.current++;dirty.current=true;const next={...current.current,data};adopt(next);backup(next);setStatus('Unsaved changes');setPublished('');schedule();}
+ function commit(data:InviteData){if(!current.current)return;generation.current++;dirty.current=true;const next={...current.current,data};adopt(next);persistBackup(next);setStatus('Unsaved changes');setPublished('');schedule();}
  function select(s:Selection){if(!current.current||preview)return;if(selection)done();const field=s.key.startsWith('field:')?[...schema.fields,...['dressWomen','dressMen','transport','accommodation','gifts'].map(key=>({key,label:key.replace(/([A-Z])/g,' $1'),type:'textarea',max:key.startsWith('dress')?500:1500}))].find(f=>f.key===s.key.slice(6)):undefined;let value=s.value,type='textarea',label='Invitation wording',max=2000;if(field){value=String(current.current.data[field.key as keyof InviteData]||'');type=field.type;label=field.label;max=field.max;}else if(s.key.startsWith('event:')){const [list,index,part]=s.key.slice(6).split('.');if(!['timeline','preEvents'].includes(list))return;const event=current.current.data[list as 'timeline'|'preEvents'][Number(index)];if(!event||!['title','time','description'].includes(part))return;value=event[part as keyof typeof event];type=part==='time'?'datetime-local':'textarea';label=part==='time'?'Event date & time':part==='title'?'Event title':'Event description';max=part==='title'?150:1000;}else if(!/^text-\d{1,4}$/.test(s.key))return;
  editingStart.current=structuredClone(current.current.data);setSelection({...s,value,label,type,max});if(s.section)setSection(s.section);
  }
