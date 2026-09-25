@@ -200,6 +200,7 @@ function loadPlaywright(){
  const candidates=[
   process.env.PLAYWRIGHT_MODULE,
   'playwright',
+  'playwright-core',
   '/home/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright',
   '/home/user/.hermes/hermes-agent/node_modules/playwright'
  ].filter(Boolean);
@@ -208,6 +209,28 @@ function loadPlaywright(){
   try{return require(mod);}catch(e){last=e;}
  }
  throw last||new Error('playwright not found');
+}
+
+async function launchBrowser(pw){
+ const launchOpts={headless:true,args:['--no-sandbox','--disable-dev-shm-usage','--disable-gpu']};
+ // Vercel Sandbox / serverless: bundled Chromium (no apt / install-deps).
+ if(process.env.WALKTHROUGH_CLOUD_WORKER==='1'||process.env.CHROMIUM_PACK==='1'){
+  const chromium=(await import('@sparticuz/chromium')).default;
+  const {chromium:pwChromium}=await import('playwright-core');
+  return pwChromium.launch({
+   args:[...chromium.args,'--disable-dev-shm-usage'],
+   executablePath:await chromium.executablePath(),
+   headless:true
+  });
+ }
+ if(process.env.PLAYWRIGHT_CHANNEL){
+  return pw.chromium.launch({...launchOpts,channel:process.env.PLAYWRIGHT_CHANNEL});
+ }
+ try{
+  return await pw.chromium.launch({...launchOpts,channel:'chrome'});
+ }catch{
+  return pw.chromium.launch(launchOpts);
+ }
 }
 
 async function prepExportPage(page){
@@ -327,17 +350,7 @@ export async function captureInviteMedia({templateId,origin,outDir}){
   if(hi.duration>1)heroDur=hi.duration;
  }catch{/* default */}
 
- const launchOpts={headless:true,args:['--no-sandbox','--disable-dev-shm-usage']};
- let browser;
- if(process.env.PLAYWRIGHT_CHANNEL){
-  browser=await pw.chromium.launch({...launchOpts,channel:process.env.PLAYWRIGHT_CHANNEL});
- }else{
-  try{
-   browser=await pw.chromium.launch({...launchOpts,channel:'chrome'});
-  }catch{
-   browser=await pw.chromium.launch(launchOpts);
-  }
- }
+ const browser=await launchBrowser(pw);
 
  const segments=[]; // {kind,start,end,label}
  try{
