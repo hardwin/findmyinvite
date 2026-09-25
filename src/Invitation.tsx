@@ -31,7 +31,8 @@ const previewDefaults:Record<string,Partial<InviteData>>={
  'royal-prestige-7':{groom:'Ashok',bride:'Supriya',groomDetails:'Son of Mr. & Mrs. Hardwin',brideDetails:'Daughter of Mr. & Mrs. Rao'},
  'royal-prestige-8':{groom:'Ashok',bride:'Supriya',groomDetails:'Son of Mr. & Mrs. Hardwin',brideDetails:'Daughter of Mr. & Mrs. Rao'},
  'royal-prestige-9':{groom:'Ashok',bride:'Supriya',groomDetails:'Son of Mr. & Mrs. Hardwin',brideDetails:'Daughter of Mr. & Mrs. Rao'},
- 'royal-prestige-10':{groom:'Ashok',bride:'Supriya',groomDetails:'Son of Mr. & Mrs. Hardwin',brideDetails:'Daughter of Mr. & Mrs. Rao'}
+ 'royal-prestige-10':{groom:'Ashok',bride:'Supriya',groomDetails:'Son of Mr. & Mrs. Hardwin',brideDetails:'Daughter of Mr. & Mrs. Rao'},
+ 'royal-prestige-11':{groom:'Ashok',bride:'Supriya',groomDetails:'Son of Mr. & Mrs. Hardwin',brideDetails:'Daughter of Mr. & Mrs. Rao',photos:['/assets/royal-prestige-11-bride.jpg','/assets/royal-prestige-11-groom.jpg'],faceSwap:{status:'ready',coupleUrl:'/assets/royal-prestige-11-couple.jpg',brideUrl:'/assets/royal-prestige-11-bride.jpg',groomUrl:'/assets/royal-prestige-11-groom.jpg'}}
 };
 const invitationKey='findmyinvite-invitations';
 function storedInvites(): unknown[]{const raw=JSON.parse(localStorage.getItem(invitationKey)||'[]');if(!Array.isArray(raw))throw new Error('Saved invitations could not be read. Existing data has been preserved.');return raw;}
