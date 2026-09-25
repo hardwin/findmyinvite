@@ -831,18 +831,36 @@ export function assemblyChatModel(env=process.env,_provider='xai'){
 
 export function formatAssemblyChatError(error,env=process.env){
  const raw=error&&typeof error==='object'?error:{};
- const msg=String(
-  raw.data?.error?.message||
-  raw.cause?.message||
-  raw.message||
-  error||
-  'Chat failed.'
- );
- if(/credit|quota|billing|insufficient/i.test(msg)){
+ const chunks=[
+  raw.data?.error?.message,
+  typeof raw.data?.error==='string'?raw.data.error:'',
+  raw.data?.message,
+  raw.responseBody,
+  raw.cause?.message,
+  raw.message,
+  raw.statusText,
+  typeof error==='string'?error:''
+ ].filter(Boolean).map(v=>String(v));
+ // AI SDK sometimes only surfaces HTTP statusText "Forbidden" — dig nested JSON bodies.
+ for(const chunk of chunks.slice()){
+  if(typeof chunk==='string'&&chunk.trim().startsWith('{')){
+   try{
+    const parsed=JSON.parse(chunk);
+    if(parsed?.error)chunks.push(typeof parsed.error==='string'?parsed.error:(parsed.error.message||''));
+    if(parsed?.message)chunks.push(String(parsed.message));
+   }catch{/* not JSON */}
+  }
+ }
+ const msg=chunks.filter(Boolean).join(' | ')||'Chat failed.';
+ const status=Number(raw.statusCode||raw.status||raw.cause?.statusCode||0);
+ if(/credit|quota|billing|insufficient|spending limit|used all available/i.test(msg)||(status===403&&/permission-denied|Forbidden/i.test(msg))){
   return 'xAI is out of credits for Grok. Top up https://console.x.ai then retry.';
  }
  if(/model|not found|does not exist/i.test(msg)){
   return 'Grok model unavailable ('+(env.ASSEMBLY_CHAT_MODEL||ASSEMBLY_CHAT_MODEL)+'). Check ASSEMBLY_CHAT_MODEL / xAI access.';
+ }
+ if(status===403||/^Forbidden$/i.test(msg.trim())){
+  return 'xAI blocked this chat (403). Usually out of credits — top up https://console.x.ai then retry.';
  }
  return msg.slice(0,400);
 }

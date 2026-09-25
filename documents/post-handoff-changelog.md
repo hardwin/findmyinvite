@@ -8,6 +8,11 @@ Soul: [akay-soul.md](akay-soul.md) · standing facts: [project-context.md](proje
 
 Read this before `docs/handoff/STATUS.md`. The v0.9.0 handoff is the frozen baseline; this file is the current truth after that tag.
 
+## 2026-09-25 — Chat "Forbidden" = xAI out of credits
+- New `/manager` chats failed with bare **Forbidden** because xAI returned HTTP 403 (team spending limit / no credits) and the UI only surfaced statusText.
+- `formatAssemblyChatError` + chat fetch now map 403/credit bodies to: top up https://console.x.ai.
+- **Action for Ashok:** buy/raise xAI credits — chat cannot run without them.
+
 ## 2026-09-25 — Face Swap: split girl/boy then classic face place
 - Cross-swap bug: bride slot was getting the groom face. Prompts now lock **Bride = girl/woman**, **Groom = boy/man**.
 - Pipeline: split girl + boy from Last couple (2 Flare) → classic “face from Image 2 onto person in Image 1” singles → dual couple swap with Never-cross rules.

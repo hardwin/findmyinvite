@@ -1095,12 +1095,21 @@ export default function AssemblyChat({
      const type=res.headers.get('content-type')||'';
      if(type.includes('application/json')){
       const body=await res.clone().json();
-      detail=String(body.error||body.message||'');
+      detail=String(body.error||body.message||body.code||'');
      }else detail=(await res.clone().text()).slice(0,240);
     }catch{/* */}
     if(res.status===404)throw new Error(detail||'Chat API not found (404).');
     if(res.status===503)throw new Error(detail||'Chat backend not ready (missing XAI_API_KEY?).');
     if(res.status===401)throw new Error(detail||'Session expired — sign in again at /manager/login.');
+    if(res.status===403||/credit|spending limit|permission-denied|Forbidden/i.test(detail)){
+     throw new Error(
+      /credit|spending limit|used all available/i.test(detail)
+       ?'xAI is out of credits for Grok. Top up https://console.x.ai then retry.'
+       :(detail&&detail!=='Forbidden'
+        ?detail
+        :'xAI blocked this chat (403). Usually out of credits — top up https://console.x.ai then retry.')
+     );
+    }
     throw new Error(detail||('Chat failed ('+res.status+').'));
    }
    return res;

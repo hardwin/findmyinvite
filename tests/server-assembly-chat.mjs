@@ -22,6 +22,22 @@ test('assembly chat system prompt covers Photographer Sell Path',()=>{
  assert.doesNotMatch(ASSEMBLY_CHAT_SYSTEM,/Grok Assembly Coach/i);
 });
 
+test('formatAssemblyChatError maps xAI 403 credits to a clear top-up message',async()=>{
+ const {formatAssemblyChatError}=await import('../server/assembly-chat-agent.mjs');
+ assert.match(
+  formatAssemblyChatError({
+   statusCode:403,
+   message:'Forbidden',
+   data:{error:'Your team has either used all available credits or reached its monthly spending limit.'}
+  }),
+  /out of credits|console\.x\.ai/i
+ );
+ assert.match(
+  formatAssemblyChatError({status:403,message:'Forbidden',statusText:'Forbidden'}),
+  /out of credits|console\.x\.ai|403/i
+ );
+});
+
 test('assemblyChatModel is xAI Grok only',async()=>{
  const {assemblyChatModel,resolveAssemblyChatProvider,ASSEMBLY_CHAT_PROVIDER}=await import('../server/assembly-chat-agent.mjs');
  assert.equal(ASSEMBLY_CHAT_PROVIDER,'xai');
