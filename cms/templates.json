@@ -322,5 +322,14 @@
     "badge": "New",
     "sort_order": 42,
     "published": true
+  },
+  {
+    "id": "royal-prestige-11",
+    "name": "Tamil Ponnu Daww",
+    "description": "Prestigious cinematic opening with refined elegance and grandeur",
+    "collection": "royal",
+    "badge": "New",
+    "sort_order": 43,
+    "published": true
   }
 ]
