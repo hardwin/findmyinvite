@@ -8,6 +8,12 @@ Soul: [akay-soul.md](akay-soul.md) · standing facts: [project-context.md](proje
 
 Read this before `docs/handoff/STATUS.md`. The v0.9.0 handoff is the frozen baseline; this file is the current truth after that tag.
 
+## 2026-09-25 — Walkthrough v3: soft wedding motion
+- No shake. Gentle zoom in/out on pages; fade / fadewhite between every beat.
+- Opening trimmed (drop 3s hold) so open→hero fades early; opening 3% zoom, hero-with-names 5% zoom.
+- Hero segment is webpage capture (Ashok & Supriya + details), not raw mp4 alone.
+- Skip RSVP, Transportation, Accommodation, Gifts (+ Moments).
+
 ## 2026-09-25 — Walkthrough v2: real webpage sections + kinetic transitions
 - Playwright full-viewport capture of invite slides (text, motifs, scratched date). Skips hero + Moments.
 - No couple/poster stills (already in Opening/Hero videos).
