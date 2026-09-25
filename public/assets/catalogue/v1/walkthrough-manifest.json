@@ -6,9 +6,11 @@
       "image": "https://0p000etsgn9iq7q1.private.blob.vercel-storage.com/walkthrough/royal-prestige-12-walkthrough.png",
       "pdf": "https://0p000etsgn9iq7q1.private.blob.vercel-storage.com/walkthrough/royal-prestige-12-walkthrough.pdf"
     },
-    "duration": 28.633333,
-    "updatedAt": "2026-09-25T13:38:54.328Z",
+    "duration": 28.8,
+    "updatedAt": "2026-09-25T13:57:33.242Z",
     "image": "/api/invite-export?action=file&template=royal-prestige-12&format=image",
-    "pdf": "/api/invite-export?action=file&template=royal-prestige-12&format=pdf"
+    "pdf": "/api/invite-export?action=file&template=royal-prestige-12&format=pdf",
+    "viewport": "390x844",
+    "deliver": "720x1280"
   }
 }

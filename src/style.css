@@ -101,6 +101,12 @@ html{scroll-behavior:smooth;scroll-padding-top:80px}body{margin:0;background:#f8
 .invite-pager-live .invite-welcome,
 .invite-pager-live .invite-credit{position:relative;flex:1;min-height:0;width:100%;max-width:none;height:100%;max-height:none;display:flex;flex-direction:column;align-items:center;justify-content:center;box-sizing:border-box;padding:clamp(20px,5vh,48px) 20px;overflow:hidden;scroll-snap-align:unset;scroll-snap-stop:normal;margin:0}
 .invite-pager-live .invite-chapter-inner{width:min(640px,100%);max-width:100%;margin:0 auto;text-align:center;padding:28px 22px;border-radius:18px;background:color-mix(in srgb,var(--invite-paper,#f7f1e8) 92%,transparent);box-shadow:0 14px 40px rgba(40,24,8,.1);overflow:visible;box-sizing:border-box;flex:0 1 auto}
+/* Walkthrough / export capture — cards fill the phone viewport (no desktop 640px gutter). */
+.invitation-export .invite-pager-live .invite-chapter-inner,
+.invitation-export .invite-pager-live .invite-welcome .invite-chapter-inner,
+.invitation-export .invite-pager-live .invite-section:has(.invite-guest-stack) .invite-chapter-inner,
+.invitation-export .invite-pager-live .invite-chapter:has(.invite-guest-stack) .invite-chapter-inner{width:100%;max-width:none;margin:0;box-sizing:border-box}
+.invitation-export .invite-pager-live .invite-person-stage{width:min(280px,78vw)}
 .invite-pager-live .invite-welcome .invite-chapter-inner{padding:36px 28px}
 .invite-pager-live .countdown{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(6px,2vw,12px);width:100%;max-width:420px;margin:0 auto;box-sizing:border-box}
 .invite-pager-live .countdown>div{min-width:0;padding:14px 4px;border-radius:14px;background:color-mix(in srgb,var(--invite-color,#c9a24a) 10%,#fff);border:1px solid color-mix(in srgb,var(--invite-color,#c9a24a) 28%,transparent);box-sizing:border-box;overflow:hidden}
@@ -110,20 +116,69 @@ html{scroll-behavior:smooth;scroll-padding-top:80px}body{margin:0;background:#f8
 /* Bride / Groom portrait chapters — before Our Moments */
 .invite-pager-live .invite-person-card{display:flex;flex-direction:column;align-items:center;gap:12px;padding:26px 20px 30px;text-align:center}
 .invite-pager-live .invite-person-kicker{margin:0;font:600 11px/1 Cinzel,serif;letter-spacing:.32em;text-transform:uppercase;color:color-mix(in srgb,var(--invite-ink,#3a2a22) 55%,transparent)}
-.invite-pager-live .invite-person-frame{margin:6px 0 2px;width:min(268px,70vw);aspect-ratio:3/4;border-radius:140px 140px 18px 18px;overflow:hidden;box-shadow:0 18px 48px rgba(40,24,8,.22),0 0 0 1px rgba(184,142,64,.28);background:#e8dfd2}
-.invite-pager-live .invite-person-frame img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 20%}
+.invite-pager-live .invite-person-stage{position:relative;margin:6px 0 2px;width:min(268px,70vw);isolation:isolate}
+.invite-pager-live .invite-person-aura{position:absolute;inset:-10% -8%;border-radius:50% 50% 28% 28%;background:radial-gradient(ellipse at 50% 40%,rgba(201,162,74,.34),rgba(201,162,74,.08) 46%,transparent 72%);pointer-events:none;z-index:0;animation:invite-person-aura 4.8s ease-in-out infinite}
+.invite-pager-live .invite-person-frame{position:relative;z-index:1;margin:0;width:100%;aspect-ratio:3/4;border-radius:140px 140px 18px 18px;overflow:hidden;box-shadow:0 18px 48px rgba(40,24,8,.22),0 0 0 1px rgba(184,142,64,.28),0 0 28px rgba(201,162,74,.18);background:#e8dfd2;transform:translateY(0);transition:box-shadow .6s ease}
+.invite-pager-live .invite-person-photo{display:block;width:100%;height:100%;object-fit:cover;object-position:center 14%;transform:scale(1) translate3d(0,0,0);transform-origin:center 16%;will-change:transform}
+.invite-pager-live .invite-person-stage.is-landed .invite-person-frame{animation:invite-person-float 5.6s ease-in-out 1.15s infinite;box-shadow:0 22px 56px rgba(40,24,8,.28),0 0 0 1px rgba(184,142,64,.4),0 0 36px rgba(201,162,74,.32)}
+.invite-pager-live .invite-person-stage.is-landed .invite-person-photo{animation:invite-person-face-in 1.15s cubic-bezier(.14,.9,.2,1) forwards}
+.invite-pager-live .invite-person-stage.is-landed .invite-person-aura{animation:invite-person-aura 4.8s ease-in-out .2s infinite}
+.invite-pager-live .invite-person-sparkles{position:absolute;inset:0;z-index:2;pointer-events:none;opacity:0;transition:opacity .4s ease}
+.invite-pager-live .invite-person-stage.is-landed .invite-person-sparkles{opacity:1}
+.invite-pager-live .invite-person-sparkle{position:absolute;width:9px;height:9px;background:radial-gradient(circle,#fff 0 28%,#f0d27a 40%,transparent 70%);border-radius:50%;filter:drop-shadow(0 0 4px rgba(240,210,122,.85));animation:invite-person-twinkle 2.4s ease-in-out infinite}
+.invite-pager-live .invite-person-sparkle--a{top:12%;left:4%;animation-delay:0s}
+.invite-pager-live .invite-person-sparkle--b{top:28%;right:2%;width:7px;height:7px;animation-delay:.7s}
+.invite-pager-live .invite-person-sparkle--c{bottom:18%;left:8%;width:6px;height:6px;animation-delay:1.3s}
+.invite-pager-live .invite-person-crown{position:absolute;top:-2%;right:14%;width:18px;height:14px;background:linear-gradient(180deg,#ffe7a0,#c9a24a);clip-path:polygon(0 100%,0 42%,20% 68%,50% 8%,80% 68%,100% 42%,100% 100%);filter:drop-shadow(0 2px 4px rgba(120,80,10,.35));animation:invite-person-crown 3.2s ease-in-out infinite}
+.invite-pager-live .invite-person-stage--groom .invite-person-crown{right:auto;left:16%;animation-delay:.4s}
+.invite-pager-live .invite-person-stage--bride .invite-person-photo{transform-origin:center 17%}
+.invite-pager-live .invite-person-stage--groom .invite-person-photo{transform-origin:center 20%}
 .invite-pager-live .invite-person-card h2{margin:4px 0 0;font:clamp(40px,11vw,56px)/1.05 'Great Vibes',cursive;font-weight:400;color:var(--invite-ink,#3a2a22)}
 .invite-pager-live .invite-person-bio{margin:0;max-width:28ch;font:italic 16px/1.65 'Cormorant Garamond',serif;color:color-mix(in srgb,var(--invite-ink,#3a2a22) 78%,transparent);white-space:pre-line}
 .invite-pager-live .invite-person-bio span{display:block}
+@keyframes invite-person-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@keyframes invite-person-face-in{
+  0%{transform:scale(1) translate3d(0,4%,0)}
+  62%{transform:scale(1.34) translate3d(0,-2%,0)}
+  100%{transform:scale(1.28) translate3d(0,-1%,0)}
+}
+@keyframes invite-person-aura{0%,100%{opacity:.55;transform:scale(.96)}50%{opacity:1;transform:scale(1.04)}}
+@keyframes invite-person-twinkle{0%,100%{opacity:.25;transform:scale(.7)}40%{opacity:1;transform:scale(1.15)}70%{opacity:.45;transform:scale(.85)}}
+@keyframes invite-person-crown{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-4px) rotate(5deg)}}
 @media (max-width:420px){
-  .invite-pager-live .invite-person-frame{width:min(240px,68vw)}
+  .invite-pager-live .invite-person-stage{width:min(240px,68vw)}
   .invite-pager-live .invite-person-card{padding:20px 14px 24px}
   .invite-pager-live .invite-person-bio{font-size:15px}
+}
+@media (prefers-reduced-motion:reduce){
+  .invite-pager-live .invite-person-frame,
+  .invite-pager-live .invite-person-photo,
+  .invite-pager-live .invite-person-aura,
+  .invite-pager-live .invite-person-sparkle,
+  .invite-pager-live .invite-person-crown{animation:none!important}
+  .invite-pager-live .invite-person-sparkles{opacity:1}
+  .invite-pager-live .invite-person-photo{transform:scale(1.08)}
 }
 
 
 
 
+
+/* Guest info — transport + stay + gifts on one pager slide */
+.invite-pager-live .invite-section:has(.invite-guest-stack),
+.invite-pager-live .invite-chapter:has(.invite-guest-stack){justify-content:safe center;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.invite-pager-live .invite-section:has(.invite-guest-stack) .invite-chapter-inner,
+.invite-pager-live .invite-chapter:has(.invite-guest-stack) .invite-chapter-inner{padding:18px 16px 20px;width:min(480px,100%)}
+
+.invite-pager-live .invite-guest-stack{display:flex;flex-direction:column;gap:18px;width:min(420px,100%);margin:0 auto;text-align:left}
+.invite-pager-live .invite-guest-block{padding:14px 16px 16px;border-radius:14px;background:color-mix(in srgb,var(--invite-paper,#f7f1e8) 70%,#fff);border:1px solid color-mix(in srgb,var(--invite-color,#c9a24a) 22%,transparent);box-shadow:0 8px 22px rgba(40,24,8,.06)}
+.invite-pager-live .invite-guest-label{margin:0 0 8px;font:600 11px/1 Cinzel,serif;letter-spacing:.28em;text-transform:uppercase;color:color-mix(in srgb,var(--invite-ink,#3a2a22) 58%,var(--invite-color,#c9a24a))}
+.invite-pager-live .invite-guest-copy{margin:0;font:italic 15px/1.65 'Cormorant Garamond',serif;color:color-mix(in srgb,var(--invite-ink,#3a2a22) 82%,transparent);white-space:pre-line}
+@media (max-width:420px){
+  .invite-pager-live .invite-guest-stack{gap:12px}
+  .invite-pager-live .invite-guest-block{padding:12px 14px 14px}
+  .invite-pager-live .invite-guest-copy{font-size:14px}
+}
 
 /* Moments — cream stage + Instagram 1:1 carousel (MIT chrome) */
 .invite-pager-live .invite-slide-scroll:has(.moments-wall){overflow:hidden!important;touch-action:none}

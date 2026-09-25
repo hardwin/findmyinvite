@@ -2,6 +2,15 @@ import {createReadStream} from 'node:fs';
 import {stat} from 'node:fs/promises';
 import {HttpError,bodyJson,respond,fail,method,templates} from '../server/core.mjs';
 import {resolveExport,readWalkthroughManifest,fetchWalkthroughBlob,walkthroughServeUrl} from '../server/invite-walkthrough.mjs';
+import {
+ assertBakeOperator,
+ startWalkthroughBake,
+ getWalkthroughJob,
+ reportWalkthroughProgress,
+ completeWalkthroughBake,
+ walkthroughCloudEnabled,
+ walkthroughCloudMissing
+} from '../server/walkthrough-cloud.mjs';
 
 export const config={maxDuration:300,memory:1024};
 
@@ -44,7 +53,10 @@ export default async function handler(req,res){
     template,
     video:row.blob?.video?walkthroughServeUrl(template,'video'):null,
     image:row.blob?.image?walkthroughServeUrl(template,'image'):null,
-    pdf:row.blob?.pdf?walkthroughServeUrl(template,'pdf'):null
+    pdf:row.blob?.pdf?walkthroughServeUrl(template,'pdf'):null,
+    deliver:row.deliver||null,
+    viewport:row.viewport||null,
+    cloud:walkthroughCloudEnabled()
    });
   }
 
@@ -67,6 +79,63 @@ export default async function handler(req,res){
    return;
   }
 
+  // Operator: start Sandbox bake (phone viewport → 720p → Blob).
+  if(action==='bake'){
+   method(req,['POST']);
+   const body=await bodyJson(req,64*1024);
+   assertBakeOperator(req,body);
+   const template=String(body.template||url.searchParams.get('template')||'').trim();
+   if(!template||!templates.has(template))throw new HttpError(400,'Valid template id required.');
+   if(!walkthroughCloudEnabled()){
+    throw new HttpError(503,'Cloud bake unavailable: '+walkthroughCloudMissing().join(', '));
+   }
+   const job=await startWalkthroughBake(template);
+   return respond(res,202,{
+    ok:true,
+    jobId:job.jobId,
+    templateId:job.templateId,
+    status:job.status,
+    // One-time secret for local polling helpers (not stored client-side in UI).
+    poll:'/api/invite-export?action=bake-status&jobId='+job.jobId
+   });
+  }
+
+  if(action==='bake-status'){
+   method(req,['GET']);
+   const jobId=String(url.searchParams.get('jobId')||'').trim();
+   const job=await getWalkthroughJob(jobId);
+   if(!job)throw new HttpError(404,'Bake job not found.');
+   return respond(res,200,{
+    jobId:job.id,
+    templateId:job.templateId,
+    status:job.status,
+    percent:job.percent,
+    label:job.label,
+    detail:job.detail,
+    error:job.error,
+    urls:job.urls,
+    sandboxId:job.sandboxId
+   });
+  }
+
+  if(action==='bake-progress'){
+   method(req,['POST']);
+   const jobId=String(req.headers['x-walkthrough-job-id']||url.searchParams.get('jobId')||'').trim();
+   const secret=String(req.headers['x-walkthrough-job-secret']||'').trim();
+   const body=await bodyJson(req,64*1024);
+   const job=await reportWalkthroughProgress(jobId,secret,body);
+   return respond(res,200,{ok:true,jobId:job.id,status:job.status,percent:job.percent});
+  }
+
+  if(action==='bake-done'){
+   method(req,['POST']);
+   const jobId=String(req.headers['x-walkthrough-job-id']||url.searchParams.get('jobId')||'').trim();
+   const secret=String(req.headers['x-walkthrough-job-secret']||'').trim();
+   const body=await bodyJson(req,256*1024);
+   const job=await completeWalkthroughBake(jobId,secret,body);
+   return respond(res,200,{ok:true,jobId:job.id,status:job.status,urls:job.urls});
+  }
+
   method(req,['POST','GET']);
   const body=req.method==='POST'?await bodyJson(req,64*1024):{};
   const template=String(body.template||url.searchParams.get('template')||'').trim();
@@ -74,6 +143,9 @@ export default async function handler(req,res){
   const force=body.force===true||url.searchParams.get('force')==='1';
   if(!template||!templates.has(template))throw new HttpError(400,'Valid template id required.');
   if(!['video','pdf','image'].includes(format))throw new HttpError(400,'format must be video, pdf, or image.');
+  if(force&&process.env.VERCEL&&process.env.WALKTHROUGH_CLOUD_WORKER!=='1'){
+   throw new HttpError(400,'Use POST ?action=bake for cloud rebuild (Sandbox).');
+  }
 
   const result=await resolveExport({templateId:template,format,forceRebuild:force});
   if(result.url&&result.cached&&req.method==='GET'){

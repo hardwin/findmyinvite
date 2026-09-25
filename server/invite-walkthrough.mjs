@@ -2,9 +2,10 @@
  * Invite walkthrough — live webpage VIDEO (not stills).
  * Opening (asset mp4, hold trimmed, 3% zoom) → fade → Hero live record
  * → fadewhite → each slide live record (motifs + motion).
- * Deliver 1080×1920 @30 CRF18 (marketing download — not 4K/8K).
+ * Capture at phone CSS viewport 390×844 (matches live mobile layout).
+ * Deliver 720×1280 @30 CRF20 — fill frame, no letterbox.
  * Media ships on Vercel Blob only (git = website + template code).
- * Manifest JSON keeps Blob URLs; never commit walkthrough binaries.
+ * Live manifest: Blob walkthrough/manifest.json (merged over shipped JSON).
  * Skips Moments, RSVP, Transport, Accommodation, Gifts.
  */
 import {createRequire} from 'node:module';
@@ -22,22 +23,30 @@ const ROOT=fileURLToPath(new URL('..',import.meta.url));
 const ASSETS=join(ROOT,'public','assets');
 const CATALOGUE=join(ASSETS,'catalogue','v1');
 const MANIFEST_PATH=join(CATALOGUE,'walkthrough-manifest.json');
+const LIVE_MANIFEST_BLOB='walkthrough/manifest.json';
 const WORK=join(ROOT,'work','exports');
 
 const PAGE_SECONDS=1.65;
 const SOFT_XFADE=0.55;
 const FPS=30;
-const VIEW_W=1080;
-const VIEW_H=1920;
-const MASTER_W=1080;
-const MASTER_H=1920;
-const CRF=18;
+/** CSS pixels — iPhone-class so chapter cards fill like the real site. */
+const VIEW_W=390;
+const VIEW_H=844;
+/** Deliver 720p vertical (9:16). */
+const MASTER_W=720;
+const MASTER_H=1280;
+const CRF=20;
 const PRESET='veryfast';
 const OPEN_ZOOM=0.03;
 
 const SKIP_SECTIONS=new Set(['gallery','rsvp','transport','accommodation','gifts']);
 
 const ENCODE_COMMON=['-an','-c:v','libx264','-crf',String(CRF),'-preset',PRESET,'-pix_fmt','yuv420p','-r',String(FPS),'-movflags','+faststart'];
+
+/** Fill 9:16 canvas (crop), never letterbox/pad black bars. */
+function scaleFill(w=MASTER_W,h=MASTER_H){
+ return `scale=${w}:${h}:force_original_aspect_ratio=increase,crop=${w}:${h},fps=${FPS}`;
+}
 
 export function ffmpegBin(){
  try{const p=require('ffmpeg-static');if(p)return p;}catch{/* */}
@@ -72,7 +81,7 @@ export function walkthroughPaths(templateId){
  };
 }
 
-export async function readWalkthroughManifest(){
+export async function readShippedWalkthroughManifest(){
  try{
   return JSON.parse(await readFile(MANIFEST_PATH,'utf8'));
  }catch{
@@ -80,9 +89,49 @@ export async function readWalkthroughManifest(){
  }
 }
 
+async function readLiveWalkthroughManifest(){
+ try{
+  const token=process.env.BLOB_READ_WRITE_TOKEN;
+  if(!token)return {};
+  const {get}=await import('@vercel/blob');
+  const res=await get(LIVE_MANIFEST_BLOB,{access:'private',token});
+  if(!res||res.statusCode!==200)return {};
+  const text=await new Response(res.stream).text();
+  return JSON.parse(text||'{}');
+ }catch{
+  return {};
+ }
+}
+
+/** Shipped git JSON merged under live Blob overrides (Blob wins). */
+export async function readWalkthroughManifest(){
+ const shipped=await readShippedWalkthroughManifest();
+ const live=await readLiveWalkthroughManifest();
+ const out={...shipped};
+ for(const [id,row] of Object.entries(live||{})){
+  out[id]={...(out[id]||{}),...row,blob:{...(out[id]?.blob||{}),...(row?.blob||{})}};
+ }
+ return out;
+}
+
 export async function writeWalkthroughManifest(data){
  await mkdir(CATALOGUE,{recursive:true});
  await writeFile(MANIFEST_PATH,JSON.stringify(data,null,2)+'\n');
+}
+
+/** Persist live catalog to Blob so rebakes do not need a git push. */
+export async function writeLiveWalkthroughManifest(data){
+ const body=JSON.stringify(data,null,2)+'\n';
+ await put(LIVE_MANIFEST_BLOB,body,{
+  access:'private',
+  contentType:'application/json',
+  token:blobToken(),
+  addRandomSuffix:false,
+  allowOverwrite:true,
+  cacheControlMaxAge:60
+ });
+ try{await writeWalkthroughManifest(data);}catch{/* sandbox has no need to ship */}
+ return data;
 }
 
 function mimeForFormat(format){
@@ -127,8 +176,10 @@ export async function uploadWalkthroughBlob({templateId,format,filePath,duration
  row.blob[formatKey]=blob.url;
  if(formatKey==='video'&&duration!=null)row.duration=Number(duration)||row.duration;
  row.updatedAt=new Date().toISOString();
+ row.viewport='390x844';
+ row.deliver='720x1280';
  manifest[p.id]=row;
- await writeWalkthroughManifest(manifest);
+ await writeLiveWalkthroughManifest(manifest);
  return {url:serve,blobUrl:blob.url,pathname,format:formatKey,id:p.id};
 }
 
@@ -162,7 +213,15 @@ function loadPlaywright(){
 async function prepExportPage(page){
  await page.addStyleTag({content:`
   .sound-toggle,.language-toggle,.use-design,.skip-opening,.invite-download-menu{visibility:hidden!important}
-  body{background:#0a0a0a!important}
+  body{background:#0a0a0a!important;margin:0!important}
+  html,body,.invitation-page,.invite-pager-live,.invite-swiper,.invite-slide,.invite-slide-shell,.invite-slide-scroll{width:100%!important;max-width:100%!important;height:100%!important;min-height:100%!important}
+  .invitation-export .invite-pager-live .invite-chapter-inner,
+  .invitation-export.invitation-page .invite-chapter-inner,
+  .invitation-export .invite-pager-live .invite-section:has(.invite-guest-stack) .invite-chapter-inner,
+  .invitation-export .invite-pager-live .invite-chapter:has(.invite-guest-stack) .invite-chapter-inner{
+   width:100%!important;max-width:none!important;min-width:0!important;margin:0!important;box-sizing:border-box!important
+  }
+  .invitation-export .invite-pager-live .invite-person-stage{width:min(280px,78vw)!important}
  `});
  await page.evaluate(()=>document.fonts.ready).catch(()=>{});
  await page.evaluate(()=>{
@@ -202,14 +261,14 @@ async function waitImages(page){
  },{timeout:10000}).catch(()=>{});
 }
 
-/** Scale any clip to master 1080×1920 @30. */
+/** Scale any clip to master 720×1280 @30 — fill/crop, no black bars. */
 async function toMaster(input,outMp4,extraVf=''){
- const scale=`scale=${MASTER_W}:${MASTER_H}:force_original_aspect_ratio=decrease,pad=${MASTER_W}:${MASTER_H}:(ow-iw)/2:(oh-ih)/2:black,fps=${FPS}`;
+ const scale=scaleFill();
  const vf=extraVf?`${extraVf},${scale}`:scale;
  await ffmpeg(['-i',input,'-vf',vf,...ENCODE_COMMON,outMp4]);
 }
 
-/** Opening asset: trim hold + 3% steady zoom → master. */
+/** Opening asset: trim hold + 3% steady zoom → master (fill). */
 async function openingMaster(openingPath,outMp4){
  const info=await probeMedia(openingPath);
  const trimTo=Math.max(SOFT_XFADE+1,info.duration-HOLD_SECONDS);
@@ -268,16 +327,25 @@ export async function captureInviteMedia({templateId,origin,outDir}){
   if(hi.duration>1)heroDur=hi.duration;
  }catch{/* default */}
 
- const browser=await pw.chromium.launch({
-  channel:process.env.PLAYWRIGHT_CHANNEL||'chrome',
-  headless:true
- });
+ const launchOpts={headless:true,args:['--no-sandbox','--disable-dev-shm-usage']};
+ let browser;
+ if(process.env.PLAYWRIGHT_CHANNEL){
+  browser=await pw.chromium.launch({...launchOpts,channel:process.env.PLAYWRIGHT_CHANNEL});
+ }else{
+  try{
+   browser=await pw.chromium.launch({...launchOpts,channel:'chrome'});
+  }catch{
+   browser=await pw.chromium.launch(launchOpts);
+  }
+ }
 
  const segments=[]; // {kind,start,end,label}
  try{
   const context=await browser.newContext({
    viewport:{width:VIEW_W,height:VIEW_H},
    deviceScaleFactor:2,
+   isMobile:true,
+   hasTouch:true,
    reducedMotion:'no-preference',
    recordVideo:{dir:rawDir,size:{width:VIEW_W,height:VIEW_H}}
   });
@@ -466,7 +534,7 @@ export async function buildWalkthroughImage({templateId,heroFrame,heroClip,pageF
  }
  if(!frame||!(await exists(frame)))throw new HttpError(404,'No image frame.');
  await mkdir(dirname(outPath),{recursive:true});
- await ffmpeg(['-i',frame,'-vf',`scale=${MASTER_W}:${MASTER_H}:force_original_aspect_ratio=decrease,pad=${MASTER_W}:${MASTER_H}:(ow-iw)/2:(oh-ih)/2`,'-frames:v','1','-update','1',outPath]);
+ await ffmpeg(['-i',frame,'-vf',scaleFill(),'-frames:v','1','-update','1',outPath]);
  return {path:outPath};
 }
 
@@ -498,7 +566,7 @@ export async function buildWalkthroughPdf({pageFrames,pageClips,outPath,template
   const jpgs=[];
   for(let i=0;i<frames.length;i++){
    const jpg=join(dir,'j'+i+'.jpg');
-   await ffmpeg(['-i',frames[i],'-vf',`scale=${MASTER_W}:${MASTER_H}:force_original_aspect_ratio=decrease,pad=${MASTER_W}:${MASTER_H}:(ow-iw)/2:(oh-ih)/2`,'-q:v','2',jpg]);
+   await ffmpeg(['-i',frames[i],'-vf',`${scaleFill().replace(',fps='+FPS,'')},format=yuvj420p`,'-q:v','2',jpg]);
    jpgs.push(await readFile(jpg));
   }
   const letterW=612,letterH=792;
@@ -550,6 +618,11 @@ export async function resolveExport({templateId,format,heroClip,pageClips,heroFr
  const cachedBlob=manifest?.[p.id]?.blob?.[formatKey];
  if(!forceRebuild&&cachedBlob){
   return {path:null,url:cachedServe||walkthroughServeUrl(p.id,formatKey),cached:true,format:formatKey,id:p.id};
+ }
+ // On Vercel serverless: never run Playwright — operator must POST action=bake (Sandbox).
+ // Sandbox worker sets WALKTHROUGH_CLOUD_WORKER=1 and is allowed to bake.
+ if(process.env.VERCEL&&process.env.WALKTHROUGH_CLOUD_WORKER!=='1'){
+  throw new HttpError(404,'Walkthrough not baked yet. Operator: POST /api/invite-export?action=bake');
  }
  const outDir=join(WORK,p.id);
  await mkdir(outDir,{recursive:true});

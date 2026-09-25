@@ -8,11 +8,17 @@ Soul: [akay-soul.md](akay-soul.md) · standing facts: [project-context.md](proje
 
 Read this before `docs/handoff/STATUS.md`. The v0.9.0 handoff is the frozen baseline; this file is the current truth after that tag.
 
+## 2026-09-25 — Walkthrough 720p on Vercel Sandbox (phone frame fix)
+- Root cause: capture at 1080 CSS width left chapter cards at `min(640px)` → tiny content.
+- Fix: Playwright viewport **390×844** (mobile layout) + export CSS full-bleed cards; deliver **720×1280** fill/crop (no letterbox).
+- Bake on **Vercel Pro Sandbox** (not laptop): `POST /api/invite-export?action=bake` with `X-Walkthrough-Bake-Secret`.
+- Live catalog: Blob `walkthrough/manifest.json` merged over shipped JSON (git stays code-only).
+
 ## 2026-09-25 — Walkthrough media = Vercel Blob only (not git)
 - Git is for website + template code only. Walkthrough video/image/PDF never land in `public/assets/catalogue`.
-- Deliver **1080×1920 @30** (not 4K/8K). Private Blob store → `/api/invite-export?action=file` streams downloads.
-- Bake uploads to `walkthrough/{id}-walkthrough.{mp4,png,pdf}`; `walkthrough-manifest.json` stores serve URLs + blob URLs.
-- Temple Wedding (`royal-prestige-12`) live bake on Blob (~29s, soft fades). Bake: `REUSE_CLIPS=1 node scripts/invite-walkthrough.mjs royal-prestige-12`.
+- Deliver **720×1280** phone frame. Private Blob store → `/api/invite-export?action=file` streams downloads.
+- Bake uploads to `walkthrough/{id}-walkthrough.{mp4,png,pdf}`; `walkthrough-manifest.json` + Blob live manifest store serve URLs.
+- Temple Wedding cloud bake: `POST /api/invite-export?action=bake` body `{"template":"royal-prestige-12"}`.
 
 ## 2026-09-25 — Walkthrough v3: soft wedding motion
 - No shake. Gentle zoom in/out on pages; fade / fadewhite between every beat.

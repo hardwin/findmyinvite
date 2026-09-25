@@ -1,7 +1,6 @@
 #!/usr/bin/env node
-// Bake 1080p live walkthrough → Vercel Blob (git never gets the binaries).
-// REUSE_CLIPS=1 skips Playwright when work/exports/{id}-pages already has clips.
-// FORCE=1 CAPTURE_ORIGIN=https://findmyinvite.com node scripts/invite-walkthrough.mjs royal-prestige-12
+// Local bake helper (dev). Production rebakes: POST /api/invite-export?action=bake on Vercel Sandbox.
+// REUSE_CLIPS=1 FORCE=1 node scripts/invite-walkthrough.mjs royal-prestige-12
 import {loadEnv} from 'vite';
 import {readdir} from 'node:fs/promises';
 import {join} from 'node:path';
@@ -9,6 +8,7 @@ import {fileURLToPath} from 'node:url';
 import {captureInviteMedia,resolveExport,walkthroughPaths,readWalkthroughManifest} from '../server/invite-walkthrough.mjs';
 
 Object.assign(process.env,loadEnv('development',process.cwd(),''));
+delete process.env.VERCEL; // allow local Playwright bake
 
 const id=process.argv[2]||'royal-prestige-12';
 const force=process.env.FORCE==='1'||process.argv.includes('--force');
@@ -28,7 +28,7 @@ if(process.env.REUSE_CLIPS==='1'){
  console.log('reusing clips from',pagesDir,'pages=',pageClips.length);
  if(!heroClip||!pageClips.length)throw new Error('REUSE_CLIPS=1 but clips missing in '+pagesDir);
 }else{
- console.log('live-capturing',id,'from',origin,'(1080×1920 → Blob)');
+ console.log('live-capturing',id,'from',origin,'(390×844 → 720×1280 → Blob)');
  const captured=await captureInviteMedia({templateId:id,origin,outDir:pagesDir});
  heroClip=captured.heroClip;
  pageClips=captured.pageClips;
