@@ -189,7 +189,16 @@ function clearedRatio(ctx: CanvasRenderingContext2D): number {
   return total ? clear / total : 0;
 }
 
-export function Scratch({date, time}: {date: string; time: string}) {
+export function Scratch({
+  date,
+  time,
+  forceRevealed = false,
+}: {
+  date: string;
+  time: string;
+  /** Export / walkthrough capture — date already scratched. */
+  forceRevealed?: boolean;
+}) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const glitterRef = useRef<HTMLCanvasElement>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -198,7 +207,11 @@ export function Scratch({date, time}: {date: string; time: string}) {
   const glitter = useRef<Glitter[]>([]);
   const raf = useRef(0);
   const idleDust = useRef(0);
-  const [revealed, setRevealed] = useState(false);
+  const [revealed, setRevealed] = useState(forceRevealed);
+
+  useEffect(() => {
+    if (forceRevealed) setRevealed(true);
+  }, [forceRevealed]);
 
   const dateLabel = new Date(date + 'T12:00').toLocaleDateString('en-US', {
     month: 'long',

@@ -8,6 +8,14 @@ Soul: [akay-soul.md](akay-soul.md) · standing facts: [project-context.md](proje
 
 Read this before `docs/handoff/STATUS.md`. The v0.9.0 handoff is the frozen baseline; this file is the current truth after that tag.
 
+## 2026-09-25 — Invite Download Pack (marketing walkthrough video)
+- **Not AI video.** ffmpeg stitch: Opening → Transition (xfade) → Hero → pages @1.5s (gentle motion). Scratch revealed in export mode; Moments omitted.
+- Prebaked Temple Wedding (`royal-prestige-12`) under `public/assets/catalogue/v1/*-walkthrough.{mp4,png,pdf}`.
+- `/templates` card: **Export Video** beside Use This Design (manifest-gated).
+- Guest invite footer + `/manage`: Video / Letter PDF / Image via `InviteDownloadMenu` + `/api/invite-export`.
+- `?export=1` on invite: opened, scratch forced revealed, gallery off, chrome hidden.
+- Bake: `node scripts/invite-walkthrough.mjs royal-prestige-12 --force`.
+
 ## 2026-09-25 — Form/Editor draft conflict unlock
 - Catalogue `?new=1` was reopening an old draft for the same template → revision 409 “changed elsewhere” / stuck Retry.
 - Fix: `?new=1` always creates a fresh draft; recovery reapplies local edits onto the latest online revision; save 409 re-reads + retries; Retry save never no-ops.

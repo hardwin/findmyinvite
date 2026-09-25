@@ -33,6 +33,11 @@
     "api/face-swap.mjs": {
       "maxDuration": 300,
       "memory": 1024
+    },
+    "api/invite-export.mjs": {
+      "includeFiles": "{public/assets/catalogue/v1/*-walkthrough.*,node_modules/ffmpeg-static/**,node_modules/ffprobe-static/**}",
+      "maxDuration": 300,
+      "memory": 1024
     }
   },
   "crons": [

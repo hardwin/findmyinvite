@@ -9,6 +9,11 @@
 .hero-copy-dark .welcome-title{max-width:none}.hero-copy-dark .couple-subtext{letter-spacing:6px}.theme-emerald-noir .hero-copy-dark .couple-subtext{letter-spacing:6px}.theme-rose-gold-blush .bride-person h1{margin-bottom:24px}.theme-ivory-elegance>.use-design,.theme-emerald-noir>.use-design{background:#f8f6f1e6;color:#b48c40;border-color:#b48c404d}.theme-ivory-elegance>.language-toggle,.theme-emerald-noir>.language-toggle{background:#191e24e6;color:#e4ddcd}.invitation-page .invite-welcome p{max-width:512px;font:italic 24px/1.625 'Cormorant Garamond',serif}.invitation-page .timeline{max-width:448px}.invitation-page .timeline h3{font:600 18px/1.25 'Playfair Display',serif}.invitation-page .timeline p,.invitation-page .timeline small{font-size:14px;line-height:1.625}
 @media(max-width:767px){.hero-copy-dark .couple-subtext,.theme-emerald-noir .hero-copy-dark .couple-subtext{letter-spacing:3.6px}.invitation-page .invite-welcome p{font-size:20px}}
 .invite-share-wrap{margin:18px 0 6px}.invite-credit-line{font-size:12px;margin-top:10px;opacity:.82;letter-spacing:.02em}.invite-credit-line a{text-decoration:underline;text-underline-offset:3px}
+.invitation-export>.sound-toggle,.invitation-export>.language-toggle,.invitation-export>.use-design,.invitation-export .skip-opening{visibility:hidden!important}
+.invite-download-menu{margin:14px 0 8px;text-align:center}
+.invite-download-label{font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.7;margin:0 0 8px}
+.invite-download-actions{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.export-error{color:#a33;font-size:12px;margin-top:8px}
 /* royal-heritage-8 / Sita Kalyanam: larger mid-sky stack, true center, dress palette, themed sections. */
 .invitation-page.theme-royal-heritage-8{
  --rh8-wine:#6E1A28;

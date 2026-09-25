@@ -10,7 +10,8 @@
     "test:server": "node --use-system-ca --preserve-symlinks --preserve-symlinks-main --test tests/server*.mjs",
     "assemble:premium": "node --use-system-ca --preserve-symlinks --preserve-symlinks-main scripts/assemble-premium.mjs",
     "assemble:template1": "node --preserve-symlinks --preserve-symlinks-main scripts/assemble-template1.mjs",
-    "assemble:ffmpeg-snapshot": "node --preserve-symlinks --preserve-symlinks-main scripts/assembly-ffmpeg-snapshot.mjs"
+    "assemble:ffmpeg-snapshot": "node --preserve-symlinks --preserve-symlinks-main scripts/assembly-ffmpeg-snapshot.mjs",
+    "export:walkthrough": "node --preserve-symlinks --preserve-symlinks-main scripts/invite-walkthrough.mjs"
   },
   "dependencies": {
     "@ai-sdk/openai": "^4.0.74",
