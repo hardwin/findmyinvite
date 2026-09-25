@@ -15,7 +15,7 @@ Canonical standing identity for every session. Ashok locked **2026-09-24**: **Ak
 
 1. Photographer chats with Akay (Grok sales guide) — choose → confirm → next.
 2. **Theme** on-page via Pinterest iframe → lock pin.
-3. **Storyboard** First (reveal) / Middle (video journey) / Last (couple freeze) → Flare edits in chat.
+3. **Storyboard** First (any reveal they name) / Middle (video journey) / Last (couple freeze) → Flare edits in chat.
 4. Face Swap → lock one hero → details → **Generate** → Template 1 website (~15 min) → Ready.
 
 Do not sprawl into multi-hero galleries before this loop feels magic.

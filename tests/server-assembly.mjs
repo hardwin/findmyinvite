@@ -84,7 +84,8 @@ test('registry patch helpers insert premium ids without duplicating',async()=>{
 test('loadPremiumParents keeps optional heroVideo on clones that have it',async()=>{
  const {loadPremiumParents}=await import('../server/assembly.mjs');
  const parents=await loadPremiumParents();
- assert.deepEqual(parents.map(item=>item.id),['royal-heritage-8','royal-heritage-9','royal-prestige-2','royal-prestige-4']);
+ for(const id of ['royal-heritage-8','royal-heritage-9','royal-prestige-2','royal-prestige-4'])assert.ok(parents.some(item=>item.id===id),id);
+ assert.equal(new Set(parents.map(item=>item.id)).size,parents.length);
  const h8=parents.find(item=>item.id==='royal-heritage-8');
  const h9=parents.find(item=>item.id==='royal-heritage-9');
  const rosu=parents.find(item=>item.id==='royal-prestige-2');
@@ -94,8 +95,8 @@ test('loadPremiumParents keeps optional heroVideo on clones that have it',async(
  assert.equal(h9.heroVideo,'royal-heritage-9-hero.mp4');
  assert.equal(rosu.name,'Rosu Rosu Rosu');
  assert.equal(rosu.heroVideo,'royal-prestige-2-hero.mp4');
- assert.equal(parents.at(-1).id,'royal-prestige-4');
- assert.equal(parents.at(-1).name,'Gold Dream');
+ assert.equal(parents.at(-1).id,'royal-prestige-14');
+ assert.equal(parents.find(item=>item.id==='royal-prestige-4').name,'Gold Dream');
 });
 
 test('patchHeroVideo inserts or replaces heroVideo on a premium row',async()=>{
@@ -166,7 +167,7 @@ test('assembly API requires Akay session',async()=>{
  const ok=await request('/api/assembly?action=parents');
  assert.equal(ok.statusCode,200);
  assert.equal(Array.isArray(ok.body.parents),true);
- assert.equal(ok.body.parents.at(-1)?.id,'royal-prestige-4');
+ assert.equal(ok.body.parents.at(-1)?.id,'royal-prestige-14');
 });
 
 test('royal-heritage-8 parks hero copy in the sky without restyling parent-7',async()=>{
@@ -188,14 +189,15 @@ test('royal-heritage-8 parks hero copy in the sky without restyling parent-7',as
  assert.match(css,/\.invitation-page\.theme-royal-heritage-8 \.invite-plate-1/);
  assert.match(css,/\.invitation-page\.theme-royal-heritage-8 \.invite-cluster/);
  assert.match(css,/\.invite-cluster \.invite-section\{[^}]*padding:40px max\(28px,12%\)/);
- assert.match(invite,/invite-cluster invite-plate-4/);
+ assert.match(invite,/Transportation:4,Accommodation:4,Gifts:4/);
+ for(const title of ['Transportation','Accommodation','Gifts'])assert.ok(invite.includes('<Section title="'+title+'">'));
  assert.match(invite,/framedPlates/);
  assert.equal(invite.includes('invite-welcome invite-plate'),false);
  assert.equal(/invite-credit\{[^}]*royal-heritage-8-section/.test(css),false);
  assert.match(data,/id:'royal-heritage-8'[^}]*color:'#6E1A28'/);
  assert.equal(css.includes('theme-royal-heritage-7'),false);
- assert.match(playbook,/Section plates \(thin-border \/ text-safe\)/);
- assert.match(playbook,/Prefer thin vine\/flower over heavy curtains or columns/);
+ assert.match(playbook,/Section plates \(luxurious stationery \/ text-safe\)/);
+ assert.match(playbook,/No thick frames, oversized flowers, heavy ornament, curtains, or pillars/);
 });
 
 test('royal-heritage-9 parks Velicha Poove overlay in the sky with pin palette plates',async()=>{
@@ -215,7 +217,8 @@ test('royal-heritage-9 parks Velicha Poove overlay in the sky with pin palette p
  assert.match(css,/\.invitation-page\.theme-royal-heritage-9 \.invite-plate-1/);
  assert.match(css,/\.invitation-page\.theme-royal-heritage-9 \.invite-cluster/);
  assert.match(css,/\.theme-royal-heritage-9 \.invite-cluster \.invite-section\{[^}]*padding:40px max\(28px,12%\)/);
- assert.match(invite,/invite-cluster invite-plate-4/);
+ assert.match(invite,/Transportation:4,Accommodation:4,Gifts:4/);
+ for(const title of ['Transportation','Accommodation','Gifts'])assert.ok(invite.includes('<Section title="'+title+'">'));
  assert.match(invite,/'royal-heritage-9':\{groom:'Ashok',bride:'Supriya'/);
  assert.equal(/invite-credit\{[^}]*royal-heritage-9-section/.test(css),false);
  assert.match(data,/id:'royal-heritage-9'[^}]*color:'#9B2158'/);
@@ -255,7 +258,8 @@ test('royal-heritage-12 parks Kaatrukulle overlay in the sky with Velicha palett
  assert.match(css,/\.invitation-page\.theme-royal-heritage-12 \.invite-plate-1/);
  assert.match(css,/\.invitation-page\.theme-royal-heritage-12 \.invite-cluster/);
  assert.match(css,/\.theme-royal-heritage-12 \.invite-cluster \.invite-section\{[^}]*padding:40px max\(28px,12%\)/);
- assert.match(invite,/invite-cluster invite-plate-4/);
+ assert.match(invite,/Transportation:4,Accommodation:4,Gifts:4/);
+ for(const title of ['Transportation','Accommodation','Gifts'])assert.ok(invite.includes('<Section title="'+title+'">'));
  assert.match(invite,/'royal-heritage-12':\{groom:'Ashok',bride:'Supriya'/);
  assert.equal(/invite-credit\{[^}]*royal-heritage-12-section/.test(css),false);
  assert.match(data,/id:'royal-heritage-12'[^}]*color:'#9B2158'/);
@@ -306,12 +310,9 @@ test('vite ignores job_engine writes and assembly remembers parent selection',as
  assert.equal(vite.includes("'**/public/assets/**'"),false);
  assert.match(ui,/fmi\.assembly\.parentId/);
  assert.match(ui,/list\[list\.length-1\]/);
- assert.match(ui,/fmi\.assembly\.t1JobId/);
- assert.match(ui,/asm-pin/);
- assert.match(ui,/asm-song/);
- assert.match(ui,/asm-review/);
- assert.match(ui,/template1-proceed/);
- assert.match(ui,/Proceed to generate \(Rs\. 499\)/);
- assert.match(ui,/Show opening stills/);
+ assert.match(ui,/<AssemblyChat/);
+ assert.match(ui,/managerFetch/);
+ assert.match(ui,/clearSession/);
+ assert.match(ui,/manager\/login/);
  assert.equal(/razorpay|stripe|checkout\.razorpay|payment gateway/i.test(ui),false);
 });

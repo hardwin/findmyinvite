@@ -108,7 +108,7 @@ test('SPA catch-all stays after the guest-page rewrite and client still mounts P
  assert.match(app,/path\.startsWith\('\/invitations'\)\?<OccasionLanding\/>:\/\^\\\/\[a-z0-9\]\[a-z0-9-\]\{2,47\}\$\/\.test\(path\)\?<PublicInvitation slug=\{path\.slice\(1\)}\/>/);
  const vercel=JSON.parse(await readFile(new URL('../vercel.json',import.meta.url),'utf8'));
  assert.equal(vercel.proxy,undefined);
- const routes=vercel.rewrites.filter(rule=>rule.source!=='/assets/workspace/:id'&&rule.source!=='/llms.txt');
+ const routes=vercel.rewrites.filter(rule=>rule.source!=='/assets/workspace/:id'&&rule.source!=='/llms.txt'&&rule.source!=='/api/face-swap/file.jpg');
  assert.equal(vercel.rewrites.find(rule=>rule.source==='/assets/workspace/:id')?.destination,'/api/workspace?action=asset&id=:id');
  assert.equal(vercel.rewrites.find(rule=>rule.source==='/llms.txt')?.destination,'/llm.txt');
  const destinations=routes.map(rule=>rule.destination);

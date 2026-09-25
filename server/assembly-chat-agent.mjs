@@ -29,13 +29,19 @@ import {
  pinterestSearchUrl,
  STAGE_LABELS,
  buildStoryboardStillPrompt,
+ buildStoryboardSheetPrompt,
  buildSoloStillPrompt,
+ shotsToStoryboard,
  storyboardToPromptParams,
  themeSuggestionsForQuery,
  REVEAL_TYPES
 } from './assembly-sell-path.mjs';
 import {STILL_MODEL} from './assembly-template1-prompts.mjs';
 import {runReplicateImage} from './assembly-template1-gen.mjs';
+
+const revealTypeField=z.string().min(2).max(40).describe(
+ 'First reveal in the photographer\'s words. Optional presets: door, envelope, clouds, building_frame, arches, windows. Never remap their choice to another type.'
+);
 
 /** Locked brain: xAI Grok only. No OpenAI / Sol. */
 export const ASSEMBLY_CHAT_PROVIDER='xai';
@@ -52,9 +58,9 @@ WHO YOU ARE
 CREATIVE LAW (non-negotiable)
 - Every visual change happens IN the conversation with a NEW image preview — never text-only and dump images at Generate.
 - After theme is locked, that pin IS the base image forever. NEVER ask again for a Pinterest URL, "first image", hero pin, or moodboard pick.
-- After propose_storyboard (or any First/Last edit), IMMEDIATELY call craft_storyboard_stills (or flare_edit) so First and Last appear as real previews before you ask Lock.
-- Do NOT call lock_storyboard until firstImageUrl AND lastImageUrl exist.
-- Whatever they change ("redder envelope", "happier couple", "more gold") → generate a new still THIS turn, show it, ask confirm. Iterate until they Lock.
+- After theme lock: ASK them for storyboard shots. Do NOT invent a door, cinematic entrance, or any scene. Do NOT call propose_storyboard until they typed their shots.
+- Storyboard is ONE sheet image (numbered panels like a film board). craft_storyboard_sheet after they give shots. Iterate the SHEET with flare_edit (which=sheet) until they say Lock.
+- Do NOT craft First/Last stills and do NOT call lock_storyboard until they lock the sheet. lock_storyboard then pulls First from panel 1 and Last from the final panel.
 - Bride and Groom chapter portraits MUST exist before lock_final_image: Face Swap solos OR craft_chapter_solos from the Last couple still. Never skip solos.
 
 SALES RHYTHM (every step)
@@ -67,11 +73,10 @@ Never stall. Always play for the confirmation.
 PHOTOGRAPHER SELL PATH (locked order)
 1) welcome — Hi, what are we creating today? (wedding invite / save-the-date / etc.) No tools on bare hello.
 2) theme — Learn mood/colors/culture. Call update_theme_search so the Theme desk grid updates. They tap a suggestion or paste a pin → resolve_pin + lock_theme_pin. After lock: never re-ask for a pin.
-3) storyboard — Entrance opening:
-   - FIRST = reveal hook (door / envelope / building frame / arches / windows). No people.
-   - MIDDLE = 2–4 journey beats (opening video middle).
-   - LAST = happy couple romantic cinematic dramatic freeze.
-   propose_storyboard → craft_storyboard_stills (show First + Last) → iterate with flare_edit / craft again → lock_storyboard only when both previews exist and they confirm.
+3) storyboard — Ask for their shots (theme + reveal already known). Never assume a door.
+   - Collect 3–5 scenes they write. Shot 1 = their reveal. Last shot = couple freeze. Middle = journey.
+   - propose_storyboard (their words only) → craft_storyboard_sheet (ONE storyboard image) → iterate sheet until they Lock.
+   - lock_storyboard then creates First + Last frames from the locked sheet. Only then Face Swap.
 4) face_swap — Offer Face Swap on the Last still. If they skip: craft_chapter_solos on Last, then lock.
 5) lock — lock_final_image with hero (= Last) + brideImageUrl + groomImageUrl.
 6) details — Collect one-by-one (groom, bride, display/VIBE name, date, venue, city, RSVP, music optional). Call save_invite_details as fields land. Confirm each.
@@ -84,7 +89,7 @@ STYLE MEMORY
 TOOL POLICY
 - set_sell_stage — whenever the step changes
 - update_theme_search / resolve_pin / lock_theme_pin — theme only
-- propose_storyboard / craft_storyboard_stills / flare_edit / lock_storyboard — creative stills during chat
+- propose_storyboard / craft_storyboard_sheet / flare_edit / lock_storyboard — sheet first; First/Last only after Lock
 - craft_chapter_solos — bride + groom portraits from Last (required if Face Swap skipped)
 - save_invite_details / lock_final_image / start_template1 — close the sale
 - Never invent URLs. Never ask "shall I call the tool?" — just call it.
@@ -200,44 +205,128 @@ export function buildAssemblyChatTools({env=process.env,fetchImpl=fetch,parentId
      pinUrl,
      previewUrl:preview,
      styleNote:styleNote||'',
-     message:'Theme locked. Move to Storyboarding (First reveal / Middle / Last couple).'
+     message:'Theme locked. Ask them to write 3–5 storyboard shots (shot 1 = their reveal if they named one). Do NOT propose a door or any entrance. Do not call propose_storyboard until they answer.'
     };
    }
   }),
 
   propose_storyboard:tool({
-   description:'Propose or update the entrance storyboard: reveal First, middle journey beats, Last couple freeze.',
+   description:'Save the photographer\'s storyboard shots (their words only). Never invent a door. Then call craft_storyboard_sheet — not First/Last stills.',
    inputSchema:z.object({
-    revealType:z.enum(['door','envelope','building_frame','arches','windows']),
-    firstBrief:z.string().min(8).max(400),
-    middleBeats:z.array(z.string().min(4).max(200)).min(1).max(6),
-    lastBrief:z.string().min(8).max(400),
+    revealType:revealTypeField,
+    title:z.string().min(2).max(80).optional(),
+    shots:z.array(z.object({
+     scene:z.string().min(4).max(280),
+     camera:z.string().max(80).optional(),
+     movement:z.string().max(80).optional(),
+     emotion:z.string().max(80).optional(),
+     transition:z.string().max(80).optional()
+    })).min(3).max(6).optional(),
+    firstBrief:z.string().min(8).max(400).optional(),
+    middleBeats:z.array(z.string().min(4).max(200)).min(1).max(6).optional(),
+    lastBrief:z.string().min(8).max(400).optional(),
     pinUrl:z.string().url().optional()
    }),
    execute:async(input)=>{
-    const revealType=normalizeRevealType(input.revealType);
+    const fromShots=input.shots?.length
+     ?shotsToStoryboard(input.revealType,input.shots)
+     :shotsToStoryboard(input.revealType,[
+      input.firstBrief,
+      ...(input.middleBeats||[]),
+      input.lastBrief
+     ].filter(Boolean));
+    if(!fromShots.firstBrief||!fromShots.lastBrief){
+     throw new HttpError(400,'Need their shots first — do not invent an entrance.');
+    }
     const storyboard={
-     revealType,
-     firstBrief:String(input.firstBrief||'').trim(),
-     middleBeats:(input.middleBeats||[]).map(s=>String(s).trim()).filter(Boolean).slice(0,6),
-     lastBrief:String(input.lastBrief||'').trim(),
-     pinUrl:input.pinUrl||''
+     ...fromShots,
+     title:String(input.title||'').trim(),
+     pinUrl:input.pinUrl||'',
+     locked:false
     };
     return {
      ok:true,
      locked:false,
+     stage:'storyboard',
      storyboard,
      promptParams:storyboardToPromptParams(storyboard),
-     message:'Show the storyboard text, then IMMEDIATELY call craft_storyboard_stills with the locked theme pin so First + Last image previews appear before asking Lock. Reveal types: '+REVEAL_TYPES.join(', ')+'.'
+     message:'Shots saved. IMMEDIATELY call craft_storyboard_sheet. Do NOT craft First/Last and do NOT propose a door.'
     };
    }
   }),
 
+  craft_storyboard_sheet:tool({
+   description:'Paint ONE film storyboard sheet (numbered panels) from the photographer\'s shots. Call after propose_storyboard. Iterate until they Lock — then lock_storyboard pulls First/Last.',
+   inputSchema:z.object({
+    pinUrl:z.string().url().describe('Locked theme pin or previous sheet URL'),
+    revealType:revealTypeField,
+    title:z.string().min(2).max(80).optional(),
+    shots:z.array(z.object({
+     scene:z.string().min(4).max(280),
+     camera:z.string().max(80).optional(),
+     movement:z.string().max(80).optional(),
+     emotion:z.string().max(80).optional(),
+     transition:z.string().max(80).optional()
+    })).min(3).max(6),
+    styleNote:z.string().max(300).optional(),
+    sheetBaseUrl:z.string().url().optional().describe('Prior sheet to iterate')
+   }),
+   execute:async(input)=>{
+    try{
+     const revealType=normalizeRevealType(input.revealType);
+     const packed=shotsToStoryboard(revealType,input.shots);
+     const prompt=buildStoryboardSheetPrompt({
+      title:input.title||'Wedding invitation opening',
+      revealType,
+      shots:input.shots,
+      pinStyleNote:input.styleNote||'',
+      brief:packed.firstBrief+' → '+packed.lastBrief
+     });
+     const base=input.sheetBaseUrl||input.pinUrl;
+     const resolved=normalizeReferenceImage(await resolveReferenceImage(base,{fetchImpl}));
+     let imageUrl=preferPublicImageUrl(resolved);
+     if(!imageUrl||!/^https?:\/\//i.test(imageUrl)){
+      const {resolveReplicateImageUrl}=await import('./assembly-ai.mjs');
+      imageUrl=await resolveReplicateImageUrl(resolved,{env,fetchImpl});
+     }
+     const result=await withTimeout(runReplicateImage({
+      prompt,
+      image:imageUrl,
+      model:STILL_MODEL,
+      env,
+      fetchImpl,
+      role:'storyboard-sheet'
+     }),IMAGE_MIX_TIMEOUT_MS,'Craft storyboard sheet');
+     return {
+      ok:true,
+      stage:'storyboard',
+      sheetUrl:result.url,
+      urls:[result.url],
+      revealType,
+      storyboard:{...packed,title:input.title||'',sheetUrl:result.url,locked:false,pinUrl:input.pinUrl},
+      provider:'flare',
+      model:STILL_MODEL,
+      message:'Storyboard sheet ready — show the ONE image. Iterate until they Lock. Do not craft First/Last yet.'
+     };
+    }catch(error){
+     console.error('assembly-chat craft_storyboard_sheet',error?.message||error);
+     const msg=String(error?.message||error||'Sheet craft failed.').slice(0,400);
+     const timedOut=/timed out|timeout/i.test(msg);
+     return {
+      ok:false,
+      timedOut,
+      error:msg,
+      message:timedOut?'Storyboard sheet timed out. Retry craft_storyboard_sheet.':'Could not paint the storyboard sheet. Retry.'
+     };
+    }
+   }
+  }),
+
   craft_storyboard_stills:tool({
-   description:'Generate First (reveal) + Last (couple) still previews in one turn from the locked theme pin. Call after propose_storyboard and after any visual change until lock.',
+   description:'Regenerate First (reveal) + Last (couple) frames only after the photographer has locked the storyboard sheet. Never call immediately after propose_storyboard; use craft_storyboard_sheet first.',
    inputSchema:z.object({
     pinUrl:z.string().url().describe('Locked theme pin / previous still URL — never ask for a new pin'),
-    revealType:z.enum(['door','envelope','building_frame','arches','windows']),
+    revealType:revealTypeField,
     firstBrief:z.string().min(4).max(800),
     lastBrief:z.string().min(4).max(800),
     styleNote:z.string().max(300).optional(),
@@ -360,49 +449,79 @@ export function buildAssemblyChatTools({env=process.env,fetchImpl=fetch,parentId
   }),
 
   lock_storyboard:tool({
-   description:'Lock storyboard ONLY after First + Last image previews exist and the host confirms.',
+   description:'Lock the storyboard SHEET after they confirm it. Then craft First (panel 1) and Last (final panel) from that sheet.',
    inputSchema:z.object({
-    revealType:z.enum(['door','envelope','building_frame','arches','windows']),
+    revealType:revealTypeField,
+    sheetUrl:z.string().url().describe('Locked storyboard sheet image'),
     firstBrief:z.string().min(8).max(400),
-    middleBeats:z.array(z.string().min(4).max(200)).min(1).max(6),
+    middleBeats:z.array(z.string().min(4).max(200)).min(1).max(6).optional(),
     lastBrief:z.string().min(8).max(400),
-    firstImageUrl:z.string().url().describe('Crafted First reveal still — required'),
-    lastImageUrl:z.string().url().describe('Crafted Last couple still — required'),
-    pinUrl:z.string().url().optional()
+    pinUrl:z.string().url().optional(),
+    styleNote:z.string().max(300).optional()
    }),
    execute:async(input)=>{
-    if(!input.firstImageUrl||!input.lastImageUrl){
-     throw new HttpError(400,'Lock storyboard needs firstImageUrl and lastImageUrl — craft previews first.');
-    }
-    assertHttpUrl(input.firstImageUrl);
-    assertHttpUrl(input.lastImageUrl);
+    assertHttpUrl(input.sheetUrl);
+    const revealType=normalizeRevealType(input.revealType);
+    const pin=input.pinUrl||input.sheetUrl;
+    const runOne=async(which,brief)=>{
+     const prompt='Use only '+(which==='first'?'panel 1':'the final panel')+' of the supplied storyboard sheet. Recreate that panel as a single full-bleed 9:16 still, preserving its composition. Remove all sheet borders, labels, and production notes. '+buildStoryboardStillPrompt({
+      which,
+      revealType,
+      brief,
+      pinStyleNote:input.styleNote||''
+     });
+     const resolved=normalizeReferenceImage(await resolveReferenceImage(input.sheetUrl,{fetchImpl}));
+     let imageUrl=preferPublicImageUrl(resolved);
+     if(!imageUrl||!/^https?:\/\//i.test(imageUrl)){
+      const {resolveReplicateImageUrl}=await import('./assembly-ai.mjs');
+      imageUrl=await resolveReplicateImageUrl(resolved,{env,fetchImpl});
+     }
+     const result=await withTimeout(runReplicateImage({
+      prompt,
+      image:imageUrl,
+      model:STILL_MODEL,
+      env,
+      fetchImpl,
+      role:which==='first'?'opening-first':'opening-last'
+     }),IMAGE_MIX_TIMEOUT_MS,'Lock '+which);
+     return result.url;
+    };
+    const [firstImageUrl,lastImageUrl]=await Promise.all([
+     runOne('first',input.firstBrief),
+     runOne('last',input.lastBrief)
+    ]);
     const storyboard={
-     revealType:normalizeRevealType(input.revealType),
+     revealType,
      firstBrief:String(input.firstBrief||'').trim(),
      middleBeats:(input.middleBeats||[]).map(s=>String(s).trim()).filter(Boolean).slice(0,6),
      lastBrief:String(input.lastBrief||'').trim(),
-     firstImageUrl:input.firstImageUrl,
-     lastImageUrl:input.lastImageUrl,
-     pinUrl:input.pinUrl||''
+     sheetUrl:input.sheetUrl,
+     firstImageUrl,
+     lastImageUrl,
+     pinUrl:pin,
+     locked:true
     };
     return {
      ok:true,
      locked:true,
      stage:'face_swap',
      storyboard,
-     heroImageUrl:storyboard.lastImageUrl,
+     firstImageUrl,
+     lastImageUrl,
+     heroImageUrl:lastImageUrl,
+     urls:[input.sheetUrl,firstImageUrl,lastImageUrl],
      promptParams:storyboardToPromptParams(storyboard),
-     message:'Storyboard locked with First + Last stills. Offer Face Swap on Last, or skip → craft_chapter_solos, then lock_final_image.'
+     message:'Sheet locked. First + Last frames pulled from the board. Offer Face Swap on Last, or skip → craft_chapter_solos.'
     };
    }
   }),
 
   flare_edit:tool({
-   description:'Edit First, Last, hero, or a single bride/groom solo with Flare from conversation. Use for one-frame tweaks after craft_storyboard_stills.',
+   description:'Edit the storyboard SHEET, or First/Last/hero/solos. Use which=sheet while iterating the board.',
    inputSchema:z.object({
     imageUrl:z.string().url().describe('Base pin or previous still URL'),
-    which:z.enum(['first','last','hero','bride','groom']).describe('first=reveal, last=couple, hero=entry, bride/groom=chapter solos'),
-    revealType:z.enum(['door','envelope','building_frame','arches','windows']).optional(),
+    which:z.enum(['sheet','first','last','hero','bride','groom']).describe('sheet=full storyboard page; first/last only after the sheet is locked'),
+    revealType:revealTypeField.optional(),
     brief:z.string().min(4).max(800),
     styleNote:z.string().max(300).optional()
    }),
@@ -410,7 +529,9 @@ export function buildAssemblyChatTools({env=process.env,fetchImpl=fetch,parentId
     try{
      const which=input.which||'hero';
      let prompt;
-     if(which==='bride'||which==='groom'){
+     if(which==='sheet'){
+      prompt='Edit the supplied storyboard sheet in place. Preserve its panel count, panel order, scene continuity, camera notes, and labels unless the requested edit changes them. Do not invent new scenes or replace the reveal. Requested edit: '+input.brief+(input.styleNote?' Style: '+input.styleNote:'');
+     }else if(which==='bride'||which==='groom'){
       prompt=buildSoloStillPrompt({which,brief:input.brief,pinStyleNote:input.styleNote||''});
      }else if(which==='hero'){
       prompt=[
@@ -434,7 +555,8 @@ export function buildAssemblyChatTools({env=process.env,fetchImpl=fetch,parentId
       imageUrl=await resolveReplicateImageUrl(resolved,{env,fetchImpl});
      }
      const role=
-      which==='first'?'opening-first'
+      which==='sheet'?'storyboard-sheet'
+      :which==='first'?'opening-first'
       :which==='last'?'opening-last'
       :which==='bride'?'bride-solo'
       :which==='groom'?'groom-solo'
@@ -453,6 +575,7 @@ export function buildAssemblyChatTools({env=process.env,fetchImpl=fetch,parentId
       revealType:normalizeRevealType(input.revealType||'door'),
       urls:[result.url],
       url:result.url,
+      sheetUrl:which==='sheet'?result.url:undefined,
       brideImageUrl:which==='bride'?result.url:undefined,
       groomImageUrl:which==='groom'?result.url:undefined,
       provider:'flare',
@@ -658,7 +781,7 @@ export function buildAssemblyChatTools({env=process.env,fetchImpl=fetch,parentId
     city:z.string().max(80).optional(),
     address:z.string().max(200).optional(),
     storyboard:z.object({
-     revealType:z.enum(['door','envelope','building_frame','arches','windows']).optional(),
+     revealType:revealTypeField.optional(),
      firstBrief:z.string().optional(),
      middleBeats:z.array(z.string()).optional(),
      lastBrief:z.string().optional()

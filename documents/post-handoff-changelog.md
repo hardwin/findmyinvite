@@ -8,6 +8,17 @@ Soul: [akay-soul.md](akay-soul.md) · standing facts: [project-context.md](proje
 
 Read this before `docs/handoff/STATUS.md`. The v0.9.0 handoff is the frozen baseline; this file is the current truth after that tag.
 
+## 2026-09-26 — Recovery release: photographer storyboard sheets
+- Recovered the previous session's uncommitted storyboard work and image assets; incorporated the already-published royal-prestige-14 merge.
+- Photographer writes shots → one storyboard sheet → sheet edits → Lock → First/Last frames → existing Face Swap / generation path.
+- Reveal hooks accept photographer wording, including clouds; sheet edits preserve panels and frame extraction identifies the first/final panel.
+- Updated stale regression expectations for the expanded catalogue, manager chat, stationery prompts, separate logistics slides, and face-swap file rewrite.
+- Production uses the existing main → Vercel Git lane. No new SQL or payment enablement in this release. Live acceptance and paid generation verification remain separate from build checks.
+
+## 2026-09-26 — First reveal is free (clouds, or anything they name)
+- Tool enum had locked door / envelope / building_frame / arches / windows, so “cloud reveal” was forced into a stone arch.
+- `revealType` is now their words. Presets stay suggestions. Clouds is a real type.
+
 ## 2026-09-26 — Generate Video: empty Sandbox + Chrome
 - Failed jobs had `sandboxId: null` — `Sandbox.create({source: git})` never created a VM.
 - Empty Sandbox, curl `main` tarball. Playwright `install chrome` dies on Amazon Linux (`amzn` only allows Ubuntu).
@@ -95,7 +106,7 @@ Read this before `docs/handoff/STATUS.md`. The v0.9.0 handoff is the frozen base
 ## 2026-09-25 — Photographer Sell Path (life-changing Co-Pilot)
 - **Akay persona:** invitation-store sales guide — understand style → show options → confirm → next. Always names the step.
 - **Orchestration:** `/manager` chat + **on-page Pinterest iframe** (right Theme desk). Paste pin to lock without leaving FMI.
-- **Storyboard:** First = reveal hook (door / envelope / building frame / arches / windows); Middle = opening-video journey; Last = happy romantic couple freeze. Edits via **`flare_edit`** (gpt-image-2.5-flare).
+- **Storyboard:** First = photographer-named reveal hook (clouds, curtain, door, or anything); Middle = opening-video journey; Last = happy romantic couple freeze. Edits via **`flare_edit`** (gpt-image-2.5-flare).
 - **Close the sale:** Face Swap → lock hero → details widgets → **Generate** (~15 min ETA, credit stub) → Ready banner on return.
 - Files: `server/assembly-sell-path.mjs`, `server/assembly-chat-agent.mjs`, `src/AssemblySellDesk.tsx`, `src/AssemblyChat.tsx`, prompt wiring in `assembly-template1-prompts.mjs` + `assembly-template1.mjs`.
 - Tests: `tests/server-assembly-sell-path.mjs`.

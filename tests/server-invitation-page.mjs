@@ -104,7 +104,7 @@ test('Vercel rewrites invitations to invitation-page HTML and never through gues
  assert.equal(vercel.proxy,undefined);
  assert.equal(JSON.stringify(vercel).includes('middleware'),false);
  await assert.rejects(()=>access(new URL('../middleware.js',import.meta.url)));
- const routes=vercel.rewrites.filter(rule=>rule.source!=='/assets/workspace/:id'&&rule.source!=='/llms.txt');
+ const routes=vercel.rewrites.filter(rule=>rule.source!=='/assets/workspace/:id'&&rule.source!=='/llms.txt'&&rule.source!=='/api/face-swap/file.jpg');
  assert.equal(vercel.rewrites.find(rule=>rule.source==='/assets/workspace/:id')?.destination,'/api/workspace?action=asset&id=:id');
  assert.equal(vercel.rewrites.find(rule=>rule.source==='/llms.txt')?.destination,'/llm.txt');
  const destinations=routes.map(rule=>rule.destination);

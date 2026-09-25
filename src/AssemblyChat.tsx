@@ -19,6 +19,7 @@ import {
  mergeSellFromTool,
  ThemePane,
  StoryboardCard,
+ StoryScenesForm,
  ProcessChip,
  GenerateBar,
  GenerateVideoBar,
@@ -66,7 +67,7 @@ const SUGGESTIONS=[
  {emo:'🌸',text:"I'm a photographer — walk me through creating an invite today"}
 ];
 
-const IMAGE_TOOLS=new Set(['mix_image','regen_opening_still','flare_edit','craft_storyboard_stills','craft_chapter_solos']);
+const IMAGE_TOOLS=new Set(['mix_image','regen_opening_still','flare_edit','craft_storyboard_sheet','craft_storyboard_stills','craft_chapter_solos']);
 const IMAGE_TIMEOUT_MS=120_000;
 const SELL_KEY='fmi.assembly.sell.v1';
 
@@ -821,18 +822,21 @@ function ChoicePrompt({
 
 function toolStatusLabel(name:string,state:string,{pending,isImage,busy,elapsedMs}:{pending:boolean;isImage:boolean;busy:boolean;elapsedMs:number}){
  const elapsed=busy&&elapsedMs?(' '+formatElapsed(elapsedMs)):'';
- if(name==='mix_image'||name==='flare_edit'||name==='craft_storyboard_stills'||name==='craft_chapter_solos'){
+ if(name==='mix_image'||name==='flare_edit'||name==='craft_storyboard_sheet'||name==='craft_storyboard_stills'||name==='craft_chapter_solos'){
   if(state==='input-available'||state==='input-streaming'||state==='partial-call'||state==='call'){
-   if(name==='craft_storyboard_stills')return 'Crafting First + Last previews…';
+   if(name==='craft_storyboard_sheet')return 'Painting storyboard sheet…';
+   if(name==='craft_storyboard_stills')return 'Crafting First + Last from the sheet…';
    if(name==='craft_chapter_solos')return 'Crafting Bride + Groom portraits…';
    return name==='flare_edit'?'Flare edit — preparing':'Editing Image - Using Reference Image';
   }
   if(pending){
-   if(name==='craft_storyboard_stills')return 'Crafting First + Last previews'+elapsed;
+   if(name==='craft_storyboard_sheet')return 'Painting storyboard sheet'+elapsed;
+   if(name==='craft_storyboard_stills')return 'Crafting First + Last from the sheet'+elapsed;
    if(name==='craft_chapter_solos')return 'Crafting Bride + Groom portraits'+elapsed;
    return (name==='flare_edit'?'Flare edit — generating':'Editing Image - Generating')+elapsed;
   }
-  if(name==='craft_storyboard_stills')return 'First + Last previews ready';
+  if(name==='craft_storyboard_sheet')return 'Storyboard sheet ready';
+  if(name==='craft_storyboard_stills')return 'First + Last frames ready';
   if(name==='craft_chapter_solos')return 'Bride + Groom portraits ready';
   return name==='flare_edit'?'Flare edit — done':'Editing Image - Done';
  }
@@ -945,6 +949,30 @@ function MessageView({
      <FaceSwapBeforeLock
       key={message.id+'-flare-'+i}
       heroUrl={urls[0]}
+      busy={busy}
+      onChip={onChip}
+     />
+    );
+   }
+   if((name==='craft_storyboard_sheet'||name==='flare_edit')&&output?.ok!==false&&(output?.sheetUrl||(name==='flare_edit'&&String(output?.which||'')==='sheet'&&urls[0]))){
+    const sheet=typeof output?.sheetUrl==='string'?output.sheetUrl:urls[0];
+    const board=output?.storyboard&&typeof output.storyboard==='object'?output.storyboard as {
+     revealType?:string;firstBrief?:string;middleBeats?:string[];lastBrief?:string;shots?:{scene:string}[];title?:string;
+    }:{};
+    nodes.push(
+     <StoryboardCard
+      key={message.id+'-sheet-'+i}
+      pinUrl={typeof output?.pinUrl==='string'?output.pinUrl:undefined}
+      storyboard={{
+       revealType:String(board.revealType||output?.revealType||'custom'),
+       firstBrief:String(board.firstBrief||''),
+       middleBeats:Array.isArray(board.middleBeats)?board.middleBeats.map(String):[],
+       lastBrief:String(board.lastBrief||''),
+       shots:board.shots,
+       title:board.title,
+       sheetUrl:sheet,
+       locked:false
+      }}
       busy={busy}
       onChip={onChip}
      />
@@ -1690,6 +1718,9 @@ export default function AssemblyChat({
           busy={busy}
           onChip={sendChip}
          />
+        )}
+        {sell.stage==='storyboard'&&!sell.storyboard?.sheetUrl&&!sell.storyboard?.firstBrief&&(
+         <StoryScenesForm busy={busy} onSubmit={sendChip}/>
         )}
         {sell.stage==='details'&&!sell.details.complete&&(
          <DetailsFields busy={busy} onSubmit={sendChip}/>

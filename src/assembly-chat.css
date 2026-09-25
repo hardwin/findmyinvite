@@ -337,13 +337,15 @@ html:has(.asm-gpt),body:has(.asm-gpt){
 .asm-sell-theme-locked img{width:100%;border-radius:12px;border:1px solid var(--border);aspect-ratio:3/4;object-fit:cover;background:#fff}
 .asm-sell-theme-pin{margin:0;font-size:11px;color:var(--muted);word-break:break-all}
 
-.asm-sell-board{margin-top:8px;padding:14px;border:1px solid var(--border);border-radius:16px;background:#fafafa;display:grid;gap:12px;width:100%;max-width:min(100%,520px)}
+.asm-sell-board{margin-top:8px;padding:14px;border:1px solid var(--border);border-radius:16px;background:#fafafa;display:grid;gap:12px;width:100%;max-width:min(100%,640px)}
+.asm-sell-board-sheet{width:100%;border-radius:12px;border:1px solid var(--border);background:#fff;display:block}
 .asm-sell-board-frames{margin:0;padding:0;list-style:none;display:grid;gap:10px}
 .asm-sell-board-frames li{display:grid;gap:4px;padding:10px;border-radius:12px;background:#fff;border:1px solid var(--border)}
 .asm-sell-board-frames strong{font-size:13px}
 .asm-sell-board-frames span{font-size:13px;color:var(--muted2);line-height:1.45}
 .asm-sell-board-frames img{width:120px;border-radius:10px;margin-top:6px;border:1px solid var(--border)}
 .asm-sell-board-missing{display:block;margin-top:6px;font-size:12px;font-style:normal;color:var(--muted2);padding:10px 12px;border-radius:10px;border:1px dashed var(--border);background:#fff}
+.asm-sell-details textarea{width:100%;min-height:64px;resize:vertical;padding:8px 10px;border:1px solid var(--border);border-radius:10px;font:inherit}
 .asm-gpt-chip-primary{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
 
 .asm-sell-details{margin-top:8px;padding:14px;border:1px solid var(--border);border-radius:16px;background:#fafafa;display:grid;gap:12px;width:100%;max-width:min(100%,520px)}

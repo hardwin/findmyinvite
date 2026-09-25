@@ -12,13 +12,16 @@ export const SELL_STAGES=Object.freeze([
  'ready'
 ]);
 
-export const REVEAL_TYPES=Object.freeze([
+/** Suggested hooks only — photographer may name any First reveal. */
+export const REVEAL_PRESETS=Object.freeze([
  'door',
  'envelope',
+ 'clouds',
  'building_frame',
  'arches',
  'windows'
 ]);
+export const REVEAL_TYPES=REVEAL_PRESETS;
 
 export const STAGE_LABELS=Object.freeze({
  welcome:'Welcome',
@@ -34,6 +37,7 @@ export const STAGE_LABELS=Object.freeze({
 const REVEAL_PREFIXES=Object.freeze({
  door:'Make the door as a 10ft-tall, opaque solid-gold double door with an elegant arched top, intricate gold carvings, colorful gemstones, diamonds, and sparkling reflections. Build a seamless ivory textured marble wall around it, with a larger decorative marble arch supported by ornate pillars, gold accents, and flowering vines. Replace the floor with a lush green lawn, stepping stones, and rose petals. Add multiple layers of warm glowing lanterns, from blurred foreground standing lamps to midground and background lights, creating cinematic depth. Frame the scene with softly blurred trees and flowers. Symmetrical composition, magical golden-hour lighting, photorealistic luxury fantasy aesthetic, no humans.',
  envelope:'Make a monumental closed luxury wedding envelope FILL the entire 9:16 frame edge-to-edge — sealed, unopened, heirloom paper with pin-true wax seal and motif. Extreme close-up, the envelope IS the shot. No people, no faces, no text, no watermark.',
+ clouds:'Make a wall of cinematic clouds FILL the entire 9:16 frame — dense, pin-true sky, nothing beyond visible yet. The clouds ARE the reveal hook. No stone arch, no building frame, no door unless the brief asks. Extreme close-up. No people, no faces, no text, no watermark.',
  building_frame:'Make an aesthetic architectural building frame / portal FILL the entire 9:16 frame — closed or fully blocking the view beyond, pin-true material and ornament. Extreme close-up reveal hook. No people, no faces, no text, no watermark.',
  arches:'Make aesthetic closed arches FILL the entire 9:16 frame — monumental, ornate, pin-true palette and craftsmanship, nothing beyond visible yet. Extreme close-up reveal hook. No people, no faces, no text, no watermark.',
  windows:'Make artistic closed windows FILL the entire 9:16 frame — panes closed, light and motif pin-true, the window IS the shot. Extreme close-up reveal hook. No people, no faces, no text, no watermark.'
@@ -42,10 +46,19 @@ const REVEAL_PREFIXES=Object.freeze({
 const REVEAL_OPEN_BEATS=Object.freeze({
  door:'doors open from the handle',
  envelope:'the envelope seal breaks and the flap opens',
+ clouds:'the clouds part and reveal the world beyond',
  building_frame:'the building frame reveals the path beyond',
  arches:'the arches part and reveal the path beyond',
  windows:'the windows open and reveal the world beyond'
 });
+
+function revealSlug(value){
+ return String(value||'').trim().toLowerCase().replace(/[\s-]+/g,'_').replace(/[^a-z0-9_]/g,'').slice(0,40);
+}
+
+function revealLabel(type){
+ return String(type||'reveal').replace(/_/g,' ');
+}
 
 export function normalizeSellStage(value){
  const stage=String(value||'').trim().toLowerCase();
@@ -53,13 +66,16 @@ export function normalizeSellStage(value){
 }
 
 export function normalizeRevealType(value){
- const raw=String(value||'').trim().toLowerCase().replace(/\s+/g,'_');
- if(REVEAL_TYPES.includes(raw))return raw;
- if(/envelope|letter|seal/i.test(raw))return 'envelope';
- if(/build|portal|gate|facade/i.test(raw))return 'building_frame';
- if(/arch/i.test(raw))return 'arches';
- if(/window/i.test(raw))return 'windows';
- return 'door';
+ const raw=revealSlug(value);
+ if(!raw)return 'door';
+ if(REVEAL_PRESETS.includes(raw))return raw;
+ if(/cloud|sky|mist|fog|nimbus/.test(raw))return 'clouds';
+ if(/envelope|letter|wax_seal|seal/.test(raw)&&!/clouds/.test(raw))return 'envelope';
+ if(/window/.test(raw))return 'windows';
+ if(/arch/.test(raw)&&!/clouds/.test(raw))return 'arches';
+ if(/^doors?$|double_door|gold_door/.test(raw))return 'door';
+ if(/building_frame|portal|gate|facade/.test(raw)&&!/cloud/.test(raw))return 'building_frame';
+ return raw;
 }
 
 export function pinterestSearchUrl(query=''){
@@ -105,12 +121,76 @@ export function themeSuggestionsForQuery(query='',limit=9){
  return (top.length?top:scored.slice(0,limit)).map(({score,...rest})=>rest);
 }
 
-export function revealPrefix(revealType='door'){
- return REVEAL_PREFIXES[normalizeRevealType(revealType)]||REVEAL_PREFIXES.door;
+export function revealPrefix(revealType='door',brief=''){
+ const type=normalizeRevealType(revealType);
+ if(REVEAL_PREFIXES[type])return REVEAL_PREFIXES[type];
+ const hook=String(brief||revealLabel(type)).trim().slice(0,160)||revealLabel(type);
+ return 'Make a cinematic first-frame reveal of '+hook+' FILL the entire 9:16 frame — the reveal IS the shot, nothing beyond visible yet. Do not substitute a door, arch, or building frame unless the brief asks. Extreme close-up. No people, no faces, no text, no watermark.';
 }
 
 export function revealOpenBeat(revealType='door'){
- return REVEAL_OPEN_BEATS[normalizeRevealType(revealType)]||REVEAL_OPEN_BEATS.door;
+ const type=normalizeRevealType(revealType);
+ if(REVEAL_OPEN_BEATS[type])return REVEAL_OPEN_BEATS[type];
+ return 'the '+revealLabel(type)+' parts and reveals the world beyond';
+}
+
+export function shotsToStoryboard(revealType='door',shots=[]){
+ const rows=(Array.isArray(shots)?shots:[]).map((shot,i)=>{
+  if(typeof shot==='string')return {n:i+1,scene:shot.trim(),camera:'',movement:'',emotion:'',transition:''};
+  return {
+   n:i+1,
+   scene:String(shot.scene||shot.description||'').trim(),
+   camera:String(shot.camera||'').trim(),
+   movement:String(shot.movement||'').trim(),
+   emotion:String(shot.emotion||'').trim(),
+   transition:String(shot.transition||'').trim()
+  };
+ }).filter(row=>row.scene);
+ const first=rows[0]||{scene:''};
+ const last=rows.length?rows[rows.length-1]:{scene:''};
+ const middle=rows.slice(1,-1).map(row=>row.scene);
+ return {
+  revealType:normalizeRevealType(revealType),
+  firstBrief:first.scene,
+  middleBeats:middle,
+  lastBrief:last.scene,
+  shots:rows
+ };
+}
+
+/** One production sheet — numbered rows like a film storyboard, not three loose stills. */
+export function buildStoryboardSheetPrompt({
+ title='Wedding invitation opening',
+ revealType='door',
+ shots=[],
+ pinStyleNote='',
+ brief=''
+}={}){
+ const type=normalizeRevealType(revealType);
+ const rows=shotsToStoryboard(type,shots).shots;
+ const lines=rows.map(row=>{
+  return [
+   'Panel '+row.n+':',
+   row.camera?('camera: '+row.camera):'',
+   row.movement?('movement: '+row.movement):'',
+   'scene: '+row.scene,
+   row.emotion?('emotion: '+row.emotion):'',
+   row.transition?('transition: '+row.transition):''
+  ].filter(Boolean).join(' ');
+ });
+ return [
+  'Redraw as ONE professional film STORYBOARD SHEET — a single document image, not one photo.',
+  'Layout like a production board: title bar "STORYBOARD – '+String(title||'Opening').slice(0,80)+'".',
+  'Then '+Math.max(3,rows.length||5)+' stacked numbered rows (1 at top). Each row: LEFT column (camera angle, camera movement, scene, emotion), CENTER a cinematic still of that beat, RIGHT transition to next.',
+  'Footer director notes. Clean white paper, black hairline rules, readable production typography.',
+  'Panel 1 is the FIRST REVEAL ('+type+') — honor that hook. Do not swap it for a door, arch, or building frame unless the brief is that hook.',
+  'Last panel is the couple freeze (people allowed only here). Middle panels are the journey — no extra architecture unless the scenes ask.',
+  'Pin-true palette and costume. Vertical or tall page. Photoreal cinematic stills inside the frames.',
+  lines.join(' | '),
+  brief?('Director notes: '+String(brief).slice(0,400)):'',
+  pinStyleNote?('Style from locked theme: '+pinStyleNote):'',
+  'No watermark, no brand logos, no extra titles besides the storyboard header and panel labels.'
+ ].filter(Boolean).join(' ');
 }
 
 /** Build Flare edit prompt for storyboard First or Last still. */
@@ -134,9 +214,9 @@ export function buildStoryboardStillPrompt({
  }
  const type=normalizeRevealType(revealType);
  return [
-  revealPrefix(type),
+  revealPrefix(type,note),
   'Edit pin into FIRST FRAME reveal hook — vertical 9:16. The reveal fills the frame. No people, no faces, no text, no watermark.',
-  'Reveal type: '+type+'.',
+  'Reveal type: '+type+'. Honor this type — do not swap it for a door, arch, or building frame.',
   note?('Storyboard first brief: '+note):'',
   style?('Style from theme: '+style):''
  ].filter(Boolean).join(' ');
@@ -205,20 +285,24 @@ export function storyboardToPromptParams(storyboard={}){
 function defaultFirstScene(revealType){
  switch(revealType){
   case 'envelope':return 'monumental FULLY CLOSED luxury wedding envelope that FILLS the entire 9:16 frame, sealed';
+  case 'clouds':return 'a wall of cinematic clouds that FILLS the entire 9:16 frame, nothing beyond visible yet';
   case 'building_frame':return 'aesthetic architectural building frame / portal that FILLS the entire 9:16 frame, closed reveal';
   case 'arches':return 'aesthetic closed arches that FILL the entire 9:16 frame';
   case 'windows':return 'artistic closed windows that FILL the entire 9:16 frame';
-  default:return 'monumental FULLY CLOSED heirloom double doors that FILL the entire 9:16 frame, panels meet with no gap';
+  case 'door':return 'monumental FULLY CLOSED heirloom double doors that FILL the entire 9:16 frame, panels meet with no gap';
+  default:return revealLabel(revealType)+' FILLS the entire 9:16 frame as the closed reveal hook (no people)';
  }
 }
 
 function defaultOpeningFirst(revealType){
  switch(revealType){
   case 'envelope':return 'monumental closed luxury envelope FILLS the entire frame (no people)';
+  case 'clouds':return 'dense cinematic clouds FILL the entire frame (no people)';
   case 'building_frame':return 'closed building frame / portal FILLS the entire frame (no people)';
   case 'arches':return 'closed aesthetic arches FILL the entire frame (no people)';
   case 'windows':return 'closed artistic windows FILL the entire frame (no people)';
-  default:return 'monumental closed doors FILL the entire frame (no people)';
+  case 'door':return 'monumental closed doors FILL the entire frame (no people)';
+  default:return revealLabel(revealType)+' FILLS the entire frame as the closed reveal (no people)';
  }
 }
 
@@ -230,7 +314,7 @@ export function applyRevealAffixes(key,text,revealType='door'){
   const prefix=revealPrefix(type);
   if(type==='door'){
    if(!out.includes('10ft-tall, opaque solid-gold double door'))out=prefix+' '+out;
-  }else if(!out.includes(prefix.slice(0,48))){
+  }else if(!out.includes(prefix.slice(0,40))){
    out=prefix+' '+out;
   }
  }

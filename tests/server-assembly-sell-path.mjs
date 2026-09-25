@@ -17,6 +17,10 @@ test('sell stages and reveal types normalize',()=>{
  assert.equal(normalizeSellStage('nope'),'welcome');
  assert.equal(normalizeRevealType('Artistic Windows'),'windows');
  assert.equal(normalizeRevealType('door'),'door');
+ assert.equal(normalizeRevealType('Clouds'),'clouds');
+ assert.equal(normalizeRevealType('cloud reveal'),'clouds');
+ assert.equal(normalizeRevealType('silk curtain'),'silk_curtain');
+ assert.equal(normalizeRevealType('building_frame'),'building_frame');
 });
 
 test('pinterest search URL is external-only (site blocks iframes)',()=>{
@@ -64,6 +68,14 @@ test('flare first prompt uses reveal prefix without people',()=>{
  });
  assert.match(prompt,/arches/i);
  assert.match(prompt,/No people/i);
+ const clouds=buildStoryboardStillPrompt({
+  which:'first',
+  revealType:'clouds',
+  brief:'dramatic sunset clouds fill the sky'
+ });
+ assert.match(clouds,/clouds/i);
+ assert.doesNotMatch(clouds,/Make an aesthetic architectural building frame/i);
+ assert.match(revealOpenBeat('clouds'),/clouds part/i);
 });
 
 test('buildPrompts respects non-door revealType',()=>{

@@ -1,6 +1,8 @@
 // Template 1 prompt pack: BASE templates (any pin) + optional Kaatrukulle defaults + Astra Light pin filler.
 // Recipe source of truth: documents/template1-base-prompts.md (from Example.md / wire-proven Kaatrukulle).
 
+import {normalizeRevealType,revealOpenBeat} from './assembly-sell-path.mjs';
+
 /** Door-First, last, and hero stills — Replicate OpenAI. */
 export const STILL_MODEL='openai/gpt-image-2.5-flare';
 /** Section frame / plate backgrounds — Replicate xAI Imagine. */
@@ -34,7 +36,7 @@ export function ensurePromptAffixes(key,text,revealType='door'){
  if(key==='opening'){
   if(!out.includes('8k high quality, Cinematic motion graphics'))out=OPENING_MOTION_PREFIX+' '+out;
   if(!out.includes('SAVE THE DATE')){
-   const revealOpen=out.search(/doors open(?: from the handle)?|envelope seal breaks|building frame reveals|arches part|windows open/i);
+   const revealOpen=out.search(/doors open(?: from the handle)?|envelope seal breaks|building frame reveals|arches part|windows open|clouds part|parts and reveals/i);
    if(revealOpen>=0){
     const cut=out.indexOf(',',revealOpen);
     const at=cut>=0?cut+1:revealOpen;
@@ -135,16 +137,11 @@ export function resolveParams(overrides={}){
 /** Legacy slot filler used by tests / operator promptParams overrides (incl. sell-path storyboard). */
 export function buildPrompts(overrides={}){
  const p=resolveParams(overrides);
- const revealType=String(overrides.revealType||overrides.reveal_type||p.revealType||'door').toLowerCase()||'door';
+ const revealType=normalizeRevealType(overrides.revealType||overrides.reveal_type||p.revealType||'door');
  const plus=p.paletteA+' + '+p.paletteB;
  const and=p.paletteA+' and '+p.paletteB;
  const dash=p.paletteA+'–'+p.paletteB;
- const openBeat=revealType==='door'?'doors open from the handle'
-  :revealType==='envelope'?'the envelope seal breaks and the flap opens'
-  :revealType==='building_frame'?'the building frame reveals the path beyond'
-  :revealType==='arches'?'the arches part and reveal the path beyond'
-  :revealType==='windows'?'the windows open and reveal the world beyond'
-  :'doors open from the handle';
+ const openBeat=revealOpenBeat(revealType);
  const firstBody=revealType==='door'
   ?('Edit pin into FIRST FRAME: '+p.firstScene+'. Unique '+p.style+' craftsmanship in '+plus+' washes that would cost a fortune to commission. Handle is the MAIN FOCUS — '+p.firstProps+'. '+p.paper+' ambience only at extreme edges. Extreme close-up. No people/faces/text/watermark.')
   :('Edit pin into FIRST FRAME reveal hook ('+revealType+'): '+p.firstScene+'. Unique '+p.style+' craftsmanship in '+plus+' washes. '+p.firstProps+'. '+p.paper+' ambience only at extreme edges. Extreme close-up. No people/faces/text/watermark.');

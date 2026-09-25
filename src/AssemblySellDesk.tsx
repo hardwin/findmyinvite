@@ -19,11 +19,23 @@ export type SellStage=
  |'generate'
  |'ready';
 
+export type StoryboardShot={
+ n?:number;
+ scene:string;
+ camera?:string;
+ movement?:string;
+ emotion?:string;
+ transition?:string;
+};
+
 export type StoryboardState={
  revealType:string;
  firstBrief:string;
  middleBeats:string[];
  lastBrief:string;
+ title?:string;
+ shots?:StoryboardShot[];
+ sheetUrl?:string;
  firstImageUrl?:string;
  lastImageUrl?:string;
  locked?:boolean;
@@ -159,23 +171,38 @@ export function mergeSellFromTool(
    if(next.pinPreview&&!next.heroUrl)next.heroUrl=next.pinPreview;
   }
  }
- if(name==='propose_storyboard'||name==='lock_storyboard'){
+ if(name==='propose_storyboard'||name==='lock_storyboard'||name==='craft_storyboard_sheet'){
   const sb=output.storyboard as StoryboardState|undefined;
   if(sb&&typeof sb==='object'){
    next.storyboard={
-    revealType:String(sb.revealType||'door'),
-    firstBrief:String(sb.firstBrief||''),
-    middleBeats:Array.isArray(sb.middleBeats)?sb.middleBeats.map(String):[],
-    lastBrief:String(sb.lastBrief||''),
+    revealType:String(sb.revealType||next.storyboard?.revealType||'custom'),
+    firstBrief:String(sb.firstBrief||next.storyboard?.firstBrief||''),
+    middleBeats:Array.isArray(sb.middleBeats)?sb.middleBeats.map(String):(next.storyboard?.middleBeats||[]),
+    lastBrief:String(sb.lastBrief||next.storyboard?.lastBrief||''),
+    title:sb.title?String(sb.title):next.storyboard?.title,
+    shots:Array.isArray(sb.shots)?sb.shots:next.storyboard?.shots,
+    sheetUrl:sb.sheetUrl?String(sb.sheetUrl):next.storyboard?.sheetUrl,
     firstImageUrl:sb.firstImageUrl?String(sb.firstImageUrl):next.storyboard?.firstImageUrl,
     lastImageUrl:sb.lastImageUrl?String(sb.lastImageUrl):next.storyboard?.lastImageUrl,
     locked:name==='lock_storyboard'||Boolean(output.locked)
    };
   }
+  if(typeof output.sheetUrl==='string'){
+   next.storyboard=next.storyboard||{
+    revealType:'custom',firstBrief:'',middleBeats:[],lastBrief:'',locked:false
+   };
+   next.storyboard={...next.storyboard,sheetUrl:String(output.sheetUrl)};
+  }
   if(name==='lock_storyboard'){
    next.stage='face_swap';
    if(typeof output.heroImageUrl==='string')next.heroUrl=output.heroImageUrl;
    else if(next.storyboard?.lastImageUrl)next.heroUrl=next.storyboard.lastImageUrl;
+   if(typeof output.firstImageUrl==='string'&&next.storyboard){
+    next.storyboard={...next.storyboard,firstImageUrl:String(output.firstImageUrl)};
+   }
+   if(typeof output.lastImageUrl==='string'&&next.storyboard){
+    next.storyboard={...next.storyboard,lastImageUrl:String(output.lastImageUrl)};
+   }
   }
  }
  if(name==='craft_storyboard_stills'&&output.ok!==false){
@@ -208,7 +235,8 @@ export function mergeSellFromTool(
    :(Array.isArray(output.urls)&&typeof output.urls[0]==='string'?output.urls[0]:'');
   const which=String(output.which||'hero');
   if(url){
-   if(which==='first'&&next.storyboard)next.storyboard={...next.storyboard,firstImageUrl:url};
+   if(which==='sheet'&&next.storyboard)next.storyboard={...next.storyboard,sheetUrl:url};
+   else if(which==='first'&&next.storyboard)next.storyboard={...next.storyboard,firstImageUrl:url};
    else if(which==='last'&&next.storyboard){
     next.storyboard={...next.storyboard,lastImageUrl:url};
     next.heroUrl=url;
@@ -348,6 +376,54 @@ export function ThemePane({
  );
 }
 
+export function StoryScenesForm({
+ busy,
+ onSubmit
+}:{
+ busy:boolean;
+ onSubmit:(text:string)=>void;
+}){
+ const [reveal,setReveal]=useState('');
+ const [shot1,setShot1]=useState('');
+ const [shot2,setShot2]=useState('');
+ const [shot3,setShot3]=useState('');
+ const [shot4,setShot4]=useState('');
+ const [shot5,setShot5]=useState('');
+ const canSend=useMemo(()=>Boolean(shot1&&shot2&&shot5),[shot1,shot2,shot5]);
+ return (
+  <form
+   className="asm-sell-details"
+   onSubmit={e=>{
+    e.preventDefault();
+    if(!canSend||busy)return;
+    onSubmit([
+     'Here are my storyboard shots. Do NOT invent a door or cinematic entrance.',
+     reveal?('revealType: '+reveal):'revealType: custom',
+     '1: '+shot1,
+     '2: '+shot2,
+     shot3?('3: '+shot3):'',
+     shot4?('4: '+shot4):'',
+     '5: '+shot5,
+     'Call propose_storyboard with these shots, then craft_storyboard_sheet.',
+     'Do not craft First/Last stills until I lock the sheet.'
+    ].filter(Boolean).join('\n'));
+   }}
+  >
+   <p className="asm-gpt-choice-title">Your storyboard shots</p>
+   <p className="asm-sell-eta">Write the scenes. Shot 1 is the reveal. Last shot is the couple. We paint one sheet, then iterate.</p>
+   <div className="asm-sell-details-grid">
+    <label className="is-wide">Reveal hook<input value={reveal} disabled={busy} onChange={e=>setReveal(e.target.value)} placeholder="clouds, curtain, door…"/></label>
+    <label className="is-wide">1 · First reveal<textarea value={shot1} disabled={busy} onChange={e=>setShot1(e.target.value)} placeholder="What we see first — your reveal"/></label>
+    <label className="is-wide">2 · Journey<textarea value={shot2} disabled={busy} onChange={e=>setShot2(e.target.value)} placeholder="Next beat"/></label>
+    <label className="is-wide">3 · Journey<textarea value={shot3} disabled={busy} onChange={e=>setShot3(e.target.value)} placeholder="Optional"/></label>
+    <label className="is-wide">4 · Journey<textarea value={shot4} disabled={busy} onChange={e=>setShot4(e.target.value)} placeholder="Optional"/></label>
+    <label className="is-wide">5 · Couple freeze<textarea value={shot5} disabled={busy} onChange={e=>setShot5(e.target.value)} placeholder="Happy couple last frame"/></label>
+   </div>
+   <button type="submit" className="asm-gpt-choice-submit" disabled={busy||!canSend}>Paint storyboard sheet</button>
+  </form>
+ );
+}
+
 export function StoryboardCard({
  storyboard,
  pinUrl,
@@ -359,69 +435,72 @@ export function StoryboardCard({
  busy:boolean;
  onChip:(text:string)=>void;
 }){
- const reveal=String(storyboard.revealType||'door').replace(/_/g,' ');
+ const reveal=String(storyboard.revealType||'custom').replace(/_/g,' ');
+ const hasSheet=Boolean(storyboard.sheetUrl);
  const hasFirst=Boolean(storyboard.firstImageUrl);
  const hasLast=Boolean(storyboard.lastImageUrl);
- const hasPreviews=hasFirst&&hasLast;
- const craftPrompt=[
-  'Generate First and Last still previews now with craft_storyboard_stills.',
-  'Use the locked theme pin — do NOT ask for another Pinterest URL.',
+ const shots=storyboard.shots?.length
+  ?storyboard.shots
+  :[
+   {n:1,scene:storyboard.firstBrief},
+   ...(storyboard.middleBeats||[]).map((scene,i)=>({n:i+2,scene})),
+   {n:99,scene:storyboard.lastBrief}
+  ].filter(row=>row.scene);
+ const sheetPrompt=[
+  'Paint ONE film storyboard sheet with craft_storyboard_sheet.',
+  'Do NOT invent a door. Do NOT craft First/Last yet.',
   pinUrl?('pinUrl: '+pinUrl):'',
-  'revealType: '+String(storyboard.revealType||'door'),
+  storyboard.sheetUrl?('sheetBaseUrl: '+storyboard.sheetUrl):'',
+  'revealType: '+String(storyboard.revealType||'custom'),
+  'title: '+(storyboard.title||'Wedding invitation opening'),
+  ...shots.map((row,i)=>String(i+1)+': '+row.scene)
+ ].filter(Boolean).join('\n');
+ const lockPrompt=[
+  'Lock this storyboard sheet. Then pull First from panel 1 and Last from the final panel.',
+  'sheetUrl: '+storyboard.sheetUrl,
+  'revealType: '+String(storyboard.revealType||'custom'),
   'firstBrief: '+String(storyboard.firstBrief||''),
   'lastBrief: '+String(storyboard.lastBrief||''),
-  storyboard.firstImageUrl?('firstBaseUrl: '+storyboard.firstImageUrl):'',
-  storyboard.lastImageUrl?('lastBaseUrl: '+storyboard.lastImageUrl):'',
-  'Show both images in chat, then ask confirm / tweak / Lock.'
+  pinUrl?('pinUrl: '+pinUrl):''
  ].filter(Boolean).join('\n');
  return (
-  <div className="asm-sell-board" role="group" aria-label="Entrance storyboard">
-   <p className="asm-gpt-choice-title">Entrance storyboard {storyboard.locked?'· locked':''}</p>
+  <div className="asm-sell-board" role="group" aria-label="Storyboard sheet">
+   <p className="asm-gpt-choice-title">Storyboard {storyboard.locked?'· locked':''} · {reveal}</p>
+   {hasSheet?(
+    <img className="asm-sell-board-sheet" src={storyboard.sheetUrl} alt="Storyboard sheet"/>
+   ):(
+    <em className="asm-sell-board-missing">Sheet not painted yet — write your shots first</em>
+   )}
    <ol className="asm-sell-board-frames">
-    <li>
-     <strong>First · {reveal}</strong>
-     <span>{storyboard.firstBrief}</span>
-     {hasFirst
-      ?<img src={storyboard.firstImageUrl} alt="First reveal still"/>
-      :<em className="asm-sell-board-missing">Preview not generated yet</em>}
-    </li>
-    <li>
-     <strong>Middle · video journey</strong>
-     <span>{(storyboard.middleBeats||[]).join(' → ')}</span>
-    </li>
-    <li>
-     <strong>Last · couple freeze</strong>
-     <span>{storyboard.lastBrief}</span>
-     {hasLast
-      ?<img src={storyboard.lastImageUrl} alt="Last couple still"/>
-      :<em className="asm-sell-board-missing">Preview not generated yet</em>}
-    </li>
+    {shots.map((row,i)=>(
+     <li key={i}>
+      <strong>{i+1}</strong>
+      <span>{row.scene}</span>
+     </li>
+    ))}
    </ol>
+   {storyboard.locked&&(hasFirst||hasLast)&&(
+    <ol className="asm-sell-board-frames">
+     <li>
+      <strong>First frame</strong>
+      {hasFirst?<img src={storyboard.firstImageUrl} alt="First reveal still"/>:null}
+     </li>
+     <li>
+      <strong>Last frame</strong>
+      {hasLast?<img src={storyboard.lastImageUrl} alt="Last couple still"/>:null}
+     </li>
+    </ol>
+   )}
    {!storyboard.locked&&(
     <div className="asm-gpt-chips">
-     <button type="button" className="asm-gpt-chip asm-gpt-chip-primary" disabled={busy} onClick={()=>onChip(craftPrompt)}>
-      {hasPreviews?'Regenerate First & Last previews':'Generate First & Last previews'}
+     <button type="button" className="asm-gpt-chip asm-gpt-chip-primary" disabled={busy||!shots.length} onClick={()=>onChip(sheetPrompt)}>
+      {hasSheet?'Repaint sheet':'Paint storyboard sheet'}
      </button>
-     <button
-      type="button"
-      className="asm-gpt-chip"
-      disabled={busy||!hasPreviews}
-      onClick={()=>onChip(
-       'Lock this storyboard — First, Middle, and Last look right.\n'+
-       'firstImageUrl: '+storyboard.firstImageUrl+'\n'+
-       'lastImageUrl: '+storyboard.lastImageUrl
-      )}
-     >
+     <button type="button" className="asm-gpt-chip" disabled={busy||!hasSheet} onClick={()=>onChip(lockPrompt)}>
       Lock storyboard
      </button>
-     <button type="button" className="asm-gpt-chip" disabled={busy} onClick={()=>onChip('Change the First reveal type — show Door, Envelope, Building frame, Arches, or Windows. Then craft new First + Last previews.')}>
-      Change reveal
-     </button>
-     <button type="button" className="asm-gpt-chip" disabled={busy||!hasLast} onClick={()=>onChip('Edit the Last couple freeze with Flare — make it happier and more cinematic. Show the new image.')}>
-      Edit Last
-     </button>
-     <button type="button" className="asm-gpt-chip" disabled={busy||!hasFirst} onClick={()=>onChip('Edit the First reveal with Flare using our storyboard brief. Show the new image.')}>
-      Edit First
+     <button type="button" className="asm-gpt-chip" disabled={busy||!hasSheet} onClick={()=>onChip('Edit the storyboard SHEET with flare_edit which=sheet. Keep my shots. Do not swap in a door. Show the new sheet.')}>
+      Edit sheet
      </button>
     </div>
    )}

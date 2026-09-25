@@ -66,8 +66,6 @@ async function request(url,opts={}){
 const WIRE={
  last:'Edit this pin into a romantic closing frame: same two people (man in white shirt, woman in magenta dress with purple flower in hair), modern 2D watercolor paper-texture. Facing each other, holding both hands, CLEAR eye contact. Cream handmade paper, magenta and sage washes. Soft non-IP. Absolutely no text, no letters, no watermark, no labels.',
  heroStill:'Edit into hero invitation still: same couple SMALL at BOTTOM (~20% height), looking at each other with CLEAR eye contact, holding hands. Man white shirt, woman magenta dress + purple flower in hair. CENTER and UPPER ~70% EMPTY cream watercolor sky for text. Thin ornamental watercolor borders 8–12% inset only — no thick curtains or pillars. Paper texture, pigment drips under couple. Soft romantic modern 2D watercolor. Soft non-IP. 9:16.',
- plate1:'Thin ornamental watercolor borders only 8–12% inset. Empty cream handmade paper center for text. Delicate magenta–sage watercolor filigree, tiny blossoms, paper-edge pigment matching romantic garden pin palette. Modern 2D watercolor paper-texture. Unique plate A. No people, no faces, no text, no watermark, no thick curtains or pillars. 9:16.',
- plate2:'Thin ornamental watercolor borders only 8–12% inset. Empty cream handmade paper center for text. Different unique arrangement: delicate magenta–sage watercolor filigree corners, tiny blossom clusters, soft paper-edge pigment drips matching same romantic pin palette. Modern 2D watercolor paper-texture. Unique plate B. No people, no faces, no text, no watermark, no thick curtains or pillars. 9:16.',
  heroVideo:'static camera, couple looks at each other, blink, hair/clothes slight wind sway, petals fall, no body/hand acting, no zoom, watercolor paper ambient flicker only'
 };
 
@@ -83,6 +81,12 @@ test('Template 1 default first still demands a frame-filling fortune door',()=>{
  assert.match(p.opening,/SAVE THE DATE/);
  assert.ok(p.opening.includes(OPENING_SAVE_THE_DATE));
  for(const key of Object.keys(WIRE))assert.equal(p[key],WIRE[key],key);
+ for(const key of ['plate1','plate2']){
+  assert.match(p[key],/BACKGROUND ONLY/);
+  assert.match(p[key],/central 75–80%/);
+  assert.match(p[key],/Exclude: text, letters, numbers/);
+  assert.match(p[key],/Full-bleed 9:16/);
+ }
  assert.equal(STILL_MODEL,'openai/gpt-image-2.5-flare');
  assert.equal(PLATE_MODEL,'xai/grok-imagine-image');
  assert.equal(IMAGE_MODEL,STILL_MODEL);
@@ -92,7 +96,7 @@ test('Template 1 default first still demands a frame-filling fortune door',()=>{
  assert.equal(imageModelForRole('mix'),PLATE_MODEL);
  assert.equal(OPENING_SECONDS,12);
  assert.match(p.lastRegen,/ABSOLUTELY NO TEXT/);
- assert.deepEqual(p.params,DEFAULT_PARAMS);
+ assert.deepEqual(p.params,{...DEFAULT_PARAMS,revealType:'door'});
 });
 
 test('BASE prompts keep slots; style-card fill + Astra JSON parse work',()=>{
