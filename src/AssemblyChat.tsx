@@ -1055,6 +1055,16 @@ export default function AssemblyChat({
  });
  const [readyBanner,setReadyBanner]=useState(false);
  const [readyPreview,setReadyPreview]=useState('');
+ const [cloneId,setCloneId]=useState('');
+ const [videoJob,setVideoJob]=useState<{
+  jobId?:string;
+  status?:string;
+  percent?:number;
+  label?:string;
+  url?:string|null;
+  error?:string|null;
+ }|null>(null);
+ const videoKickoffRef=useRef('');
  const [chats,setChats]=useState<ChatRecord[]>(()=>readChats());
  const [chatId,setChatId]=useState(()=>{
   let active='';
@@ -1290,12 +1300,73 @@ export default function AssemblyChat({
     if(String(job.status||'')==='preview'||String(job.phase||'')==='preview'){
      setReadyBanner(true);
      setReadyPreview(String(job.previewUrl||job.demo||''));
+     if(job.cloneId)setCloneId(String(job.cloneId));
      setSell(prev=>({...prev,stage:'ready'}));
     }
    }catch{/* */}
   })();
   return ()=>{cancelled=true;};
  },[jobId,messages.length]);
+
+ useEffect(()=>{
+  const template=cloneId||(()=>{
+   try{return new URL(readyPreview,'https://findmyinvite.com').searchParams.get('template')||'';}
+   catch{return '';}
+  })();
+  if(!readyBanner||!readyPreview||!template)return;
+  if(!/^https?:\/\//i.test(readyPreview))return;
+  const key=template+'|'+readyPreview;
+  if(videoKickoffRef.current===key)return;
+  let cancelled=false;
+  void (async()=>{
+   try{
+    const statusRes=await managerFetch('/api/invite-export?action=status&template='+encodeURIComponent(template));
+    const status=await statusRes.json().catch(()=>({}));
+    if(cancelled)return;
+    if(status.video){
+     videoKickoffRef.current=key;
+     setVideoJob({status:'ready',percent:100,label:'Ready',url:status.video});
+     return;
+    }
+    const start=await managerFetch('/api/invite-export?action=bake',{
+     method:'POST',
+     headers:{'Content-Type':'application/json'},
+     body:JSON.stringify({template,previewUrl:readyPreview,formats:'video'})
+    });
+    const started=await start.json().catch(()=>({}));
+    if(!start.ok)throw new Error(started.error||started.message||'Video bake failed to start.');
+    videoKickoffRef.current=key;
+    const bakeId=String(started.jobId||'');
+    setVideoJob({jobId:bakeId,status:started.status||'queued',percent:0,label:'Queued'});
+    if(!bakeId)return;
+    const poll=async()=>{
+     const res=await managerFetch('/api/invite-export?action=bake-status&jobId='+encodeURIComponent(bakeId));
+     const body=await res.json().catch(()=>({}));
+     if(cancelled||!res.ok)return;
+     const url=body.urls?.video||(body.status==='ready'
+      ?'/api/invite-export?action=file&template='+encodeURIComponent(template)+'&format=video'
+      :null);
+     setVideoJob({
+      jobId:bakeId,
+      status:body.status,
+      percent:Number(body.percent)||0,
+      label:body.label||body.status,
+      url,
+      error:body.error||null
+     });
+     if(body.status==='ready'||body.status==='failed')return;
+     window.setTimeout(()=>void poll(),4000);
+    };
+    window.setTimeout(()=>void poll(),2500);
+   }catch(err){
+    if(!cancelled)setVideoJob({
+     status:'failed',
+     error:err instanceof Error?err.message:'Video bake failed to start.'
+    });
+   }
+  })();
+  return ()=>{cancelled=true;};
+ },[readyBanner,readyPreview,cloneId]);
 
  const sendChip=useCallback((text:string)=>{
   if(!text.trim()||busy)return;
@@ -1361,6 +1432,9 @@ export default function AssemblyChat({
   setSell(defaultSellState());
   setReadyBanner(false);
   setReadyPreview('');
+  setCloneId('');
+  setVideoJob(null);
+  videoKickoffRef.current='';
   writeSession(JOB_KEY,'');
   try{sessionStorage.removeItem(SELL_KEY);}catch{/* */}
   writeSession(CHAT_KEY,id);
@@ -1557,7 +1631,11 @@ export default function AssemblyChat({
     <div className="asm-sell-workspace">
      <div className="asm-gpt-scroll" ref={scrollRef} role="log" aria-live="polite">
       {readyBanner&&(
-       <ReadyBanner previewUrl={readyPreview} onDismiss={()=>setReadyBanner(false)}/>
+       <ReadyBanner
+        previewUrl={readyPreview}
+        video={videoJob}
+        onDismiss={()=>setReadyBanner(false)}
+       />
       )}
       {!hasThread?(
        <div className="asm-gpt-home">
@@ -1615,6 +1693,7 @@ export default function AssemblyChat({
            if(job.status==='preview'||job.phase==='preview'){
             setReadyBanner(true);
             setReadyPreview(String(job.previewUrl||job.demo||''));
+            if(job.cloneId)setCloneId(String(job.cloneId));
            }
           }}
           onDismiss={()=>setJobId('')}

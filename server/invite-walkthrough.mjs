@@ -509,9 +509,28 @@ export async function captureViewportChapters(opts){
  return pageFrames;
 }
 
-export async function buildWalkthroughVideo({templateId,heroClip,pageClips,chapters,outPath,workDir,onProgress}){
+/** Local catalogue first; unpublished clones pull Opening/Hero from the preview deploy. */
+export async function ensureTemplateVideos({templateId,origin,destDir}){
  const p=walkthroughPaths(templateId);
- if(!(await exists(p.opening)))throw new HttpError(404,'Opening video missing for '+p.id);
+ const base=String(origin||process.env.CAPTURE_ORIGIN||'https://findmyinvite.com').replace(/\/$/,'');
+ await mkdir(destDir,{recursive:true});
+ async function pull(localPath,remoteName){
+  if(await exists(localPath))return localPath;
+  const dest=join(destDir,remoteName);
+  if(await exists(dest))return dest;
+  const res=await fetch(base+'/assets/'+remoteName);
+  if(!res.ok)throw new HttpError(404,'Missing '+remoteName+' on '+base+' — wait until the website preview is live.');
+  await writeFile(dest,Buffer.from(await res.arrayBuffer()));
+  return dest;
+ }
+ return {
+  opening:await pull(p.opening,p.id+'.mp4'),
+  hero:await pull(p.hero,p.id+'-hero.mp4')
+ };
+}
+
+export async function buildWalkthroughVideo({templateId,heroClip,pageClips,chapters,outPath,workDir,onProgress,origin}={}){
+ const p=walkthroughPaths(templateId);
  const dir=workDir||join(WORK,p.id+'-'+Date.now());
  await mkdir(dir,{recursive:true});
  const openingZ=join(dir,'opening-z.mp4');
@@ -519,15 +538,17 @@ export async function buildWalkthroughVideo({templateId,heroClip,pageClips,chapt
  const pagesJoined=join(dir,'pages-joined.mp4');
  const head=join(dir,'head.mp4');
  const master=join(dir,'master-4k.mp4');
+ const captureOrigin=origin||process.env.CAPTURE_ORIGIN||'https://findmyinvite.com';
  try{
-  await openingMaster(p.opening,openingZ);
+  const media=await ensureTemplateVideos({templateId:p.id,origin:captureOrigin,destDir:join(dir,'media')});
+  await openingMaster(media.opening,openingZ);
 
   let hClip=heroClip;
   let chaps=chapters;
   if(!hClip||!chaps?.length){
    const captured=await captureInviteMedia({
     templateId:p.id,
-    origin:process.env.CAPTURE_ORIGIN||'https://findmyinvite.com',
+    origin:captureOrigin,
     outDir:join(dir,'capture')
    });
    hClip=hClip||captured.heroClip;

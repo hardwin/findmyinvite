@@ -16,6 +16,33 @@ export const CHAPTER_SECONDS=4;
 export const CHAPTER_SECONDS_FALLBACK=6;
 export const EXPORT_VIDEO_PRICE_INR=400;
 
+export function isExportTemplateId(value){
+ const id=String(value||'').trim();
+ return /^[a-z][a-z0-9-]{2,63}$/i.test(id);
+}
+
+/** Playwright capture host — production or this project's Vercel preview. */
+export function allowCaptureOrigin(value){
+ try{
+  const host=new URL(String(value||'')).hostname.toLowerCase();
+  return host==='findmyinvite.com'
+   ||host==='www.findmyinvite.com'
+   ||host.endsWith('.vercel.app');
+ }catch{
+  return false;
+ }
+}
+
+export function captureOriginFromPreview(previewUrl){
+ try{
+  const url=new URL(String(previewUrl||''), 'https://findmyinvite.com');
+  if(!allowCaptureOrigin(url.origin))return '';
+  return url.origin;
+ }catch{
+  return '';
+ }
+}
+
 /** Locked chapter order for Export Video. Match heading and/or data-section. */
 export const EXPORT_VIDEO_CHAPTERS=Object.freeze([
  {id:'bride',label:'The Bride',section:'bride',match:/the bride/i},

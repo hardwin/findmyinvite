@@ -1,7 +1,9 @@
 import {createReadStream} from 'node:fs';
 import {stat} from 'node:fs/promises';
-import {HttpError,bodyJson,respond,fail,method,templates} from '../server/core.mjs';
+import {HttpError,bodyJson,respond,fail,method} from '../server/core.mjs';
 import {resolveExport,readWalkthroughManifest,fetchWalkthroughBlob,walkthroughServeUrl} from '../server/invite-walkthrough.mjs';
+import {isExportTemplateId,captureOriginFromPreview} from '../server/invite-walkthrough-imagine.mjs';
+import {requireManager} from '../server/manager-auth.mjs';
 import {
  assertBakeOperator,
  startWalkthroughBake,
@@ -11,6 +13,25 @@ import {
  walkthroughCloudEnabled,
  walkthroughCloudMissing
 } from '../server/walkthrough-cloud.mjs';
+
+function assertExportId(template){
+ const id=String(template||'').trim();
+ if(!isExportTemplateId(id))throw new HttpError(400,'Valid template id required.');
+ return id;
+}
+
+async function assertCanBake(req,body){
+ try{
+  await requireManager(req);
+  return;
+ }catch(error){
+  if(error instanceof HttpError&&error.status===401){
+   assertBakeOperator(req,body);
+   return;
+  }
+  throw error;
+ }
+}
 
 export const config={maxDuration:300,memory:1024};
 
@@ -47,7 +68,7 @@ export default async function handler(req,res){
   if(action==='status'){
    method(req,['GET']);
    const template=String(url.searchParams.get('template')||'').trim();
-   if(!templates.has(template))throw new HttpError(404,'Unknown template.');
+   if(!isExportTemplateId(template))throw new HttpError(404,'Unknown template.');
    const row=(await readWalkthroughManifest())[template]||{};
    return respond(res,200,{
     template,
@@ -65,7 +86,7 @@ export default async function handler(req,res){
    method(req,['GET','HEAD']);
    const template=String(url.searchParams.get('template')||'').trim();
    const format=String(url.searchParams.get('format')||'video').trim().toLowerCase();
-   if(!template||!templates.has(template))throw new HttpError(400,'Valid template id required.');
+   if(!template||!isExportTemplateId(template))throw new HttpError(400,'Valid template id required.');
    if(!['video','pdf','image'].includes(format))throw new HttpError(400,'format must be video, pdf, or image.');
    const file=await fetchWalkthroughBlob(template,format);
    if(!file)throw new HttpError(404,'Walkthrough not baked yet.');
@@ -79,23 +100,28 @@ export default async function handler(req,res){
    return;
   }
 
-  // Operator: start Sandbox bake (phone viewport → 720p → Blob).
+  // Photographer (signed in) or operator: start Sandbox Imagine bake after website preview.
   if(action==='bake'){
    method(req,['POST']);
    const body=await bodyJson(req,64*1024);
-   assertBakeOperator(req,body);
-   const template=String(body.template||url.searchParams.get('template')||'').trim();
-   if(!template||!templates.has(template))throw new HttpError(400,'Valid template id required.');
+   await assertCanBake(req,body);
+   const template=assertExportId(body.template||url.searchParams.get('template')||'');
    if(!walkthroughCloudEnabled()){
     throw new HttpError(503,'Cloud bake unavailable: '+walkthroughCloudMissing().join(', '));
    }
-   const job=await startWalkthroughBake(template);
+   const captureOrigin=captureOriginFromPreview(body.previewUrl||body.origin)
+    ||String(process.env.CAPTURE_ORIGIN||'https://findmyinvite.com').replace(/\/$/,'');
+   if(!captureOrigin)throw new HttpError(400,'previewUrl must be findmyinvite.com or a Vercel preview.');
+   const job=await startWalkthroughBake(template,{
+    captureOrigin,
+    formats:String(body.formats||'video')
+   });
    return respond(res,202,{
     ok:true,
     jobId:job.jobId,
     templateId:job.templateId,
     status:job.status,
-    // One-time secret for local polling helpers (not stored client-side in UI).
+    captureOrigin,
     poll:'/api/invite-export?action=bake-status&jobId='+job.jobId
    });
   }
@@ -141,7 +167,7 @@ export default async function handler(req,res){
   const template=String(body.template||url.searchParams.get('template')||'').trim();
   const format=String(body.format||url.searchParams.get('format')||'video').trim().toLowerCase();
   const force=body.force===true||url.searchParams.get('force')==='1';
-  if(!template||!templates.has(template))throw new HttpError(400,'Valid template id required.');
+  if(!template||!isExportTemplateId(template))throw new HttpError(400,'Valid template id required.');
   if(!['video','pdf','image'].includes(format))throw new HttpError(400,'format must be video, pdf, or image.');
   if(force&&process.env.VERCEL&&process.env.WALKTHROUGH_CLOUD_WORKER!=='1'){
    throw new HttpError(400,'Use POST ?action=bake for cloud rebuild (Sandbox).');

@@ -83,25 +83,34 @@ try{
  });
  console.log('video',video.url);
 
- await report({status:'running',percent:75,label:'Image + PDF…',detail:'still exports'});
- const image=await resolveExport({
-  templateId,
-  format:'image',
-  heroClip,
-  pageClips,
-  heroFrame,
-  pageFrames,
-  forceRebuild:true
- });
- const pdf=await resolveExport({
-  templateId,
-  format:'pdf',
-  heroClip,
-  pageClips,
-  heroFrame,
-  pageFrames,
-  forceRebuild:true
- });
+ const formats=String(env.WALKTHROUGH_FORMATS||'video').split(',').map(s=>s.trim()).filter(Boolean);
+ let image={url:null};
+ let pdf={url:null};
+ if(formats.includes('image')||formats.includes('pdf')){
+  await report({status:'running',percent:75,label:'Image + PDF…',detail:'still exports'});
+ }
+ if(formats.includes('image')){
+  image=await resolveExport({
+   templateId,
+   format:'image',
+   heroClip,
+   pageClips,
+   heroFrame,
+   pageFrames,
+   forceRebuild:true
+  });
+ }
+ if(formats.includes('pdf')){
+  pdf=await resolveExport({
+   templateId,
+   format:'pdf',
+   heroClip,
+   pageClips,
+   heroFrame,
+   pageFrames,
+   forceRebuild:true
+  });
+ }
 
  const row=(await readWalkthroughManifest())[templateId]||{};
  const urls={

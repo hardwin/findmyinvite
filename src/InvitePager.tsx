@@ -349,8 +349,11 @@ export default function InvitePager({enabled, children}: Props) {
             new CustomEvent('invite-swipe', {bubbles: true, detail: {dy, dx: 0}}),
           );
         }}
-        onSlideChangeTransitionEnd={() => {
+        onSlideChangeTransitionEnd={(s) => {
           transitioning.current = false;
+          // Bride/Groom portraits listen for this to zoom into the face on land.
+          const slide = s.slides[s.activeIndex] as HTMLElement | undefined;
+          slide?.dispatchEvent(new CustomEvent('invite-slide-landed', {bubbles: false}));
         }}
         onTransitionStart={() => {
           transitioning.current = true;

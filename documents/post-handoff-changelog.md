@@ -8,6 +8,11 @@ Soul: [akay-soul.md](akay-soul.md) · standing facts: [project-context.md](proje
 
 Read this before `docs/handoff/STATUS.md`. The v0.9.0 handoff is the frozen baseline; this file is the current truth after that tag.
 
+## 2026-09-25 — Export Video auto-starts after website preview
+- After Template 1 Ready (preview URL live), `/manager` kicks Sandbox bake: capture that preview → Flare → 4s Imagine → Blob.
+- New clones are valid export ids. Opening/Hero downloaded from the preview deploy when missing on main.
+- Photographer session can start bake (no operator secret). Ready banner shows video progress + download.
+
 ## 2026-09-25 — Export Video = Flare + 4s Imagine chapters (₹400)
 - Standard workflow: screenshot Bride / Groom / Date / Program Timeline / Venue / Pre-Wedding Events / Finale → **Flare** recreates (not a photocopy) with levitating 3D pastel-paint type → **xAI grok-imagine-video-1.5** 4s bullet-time (`image` + `last_frame` = Flare still).
 - Stitch after Opening + live Hero-with-text. Playbook: [export-video.md](export-video.md). Price **₹400** add-on (gateway still Launch 2.0 locked).

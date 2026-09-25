@@ -89,15 +89,20 @@ export async function patchWalkthroughJob(jobId,patch,env=process.env){
  return next;
 }
 
-function sandboxEnv(jobId,secret,templateId,env){
+function sandboxEnv(jobId,secret,templateId,env,extra={}){
+ const capture=String(extra.captureOrigin||env.CAPTURE_ORIGIN||'https://findmyinvite.com').replace(/\/$/,'');
  return {
   WALKTHROUGH_CLOUD_WORKER:'1',
   WALKTHROUGH_JOB_ID:jobId,
   WALKTHROUGH_CALLBACK_SECRET:secret,
   WALKTHROUGH_CALLBACK_URL:callbackUrl(env),
   WALKTHROUGH_TEMPLATE:templateId,
-  CAPTURE_ORIGIN:String(env.CAPTURE_ORIGIN||'https://findmyinvite.com').replace(/\/$/,''),
+  WALKTHROUGH_FORMATS:String(extra.formats||env.WALKTHROUGH_FORMATS||'video'),
+  CAPTURE_ORIGIN:capture,
+  SITE_ORIGIN:String(env.SITE_ORIGIN||'https://findmyinvite.com').replace(/\/$/,''),
   BLOB_READ_WRITE_TOKEN:env.BLOB_READ_WRITE_TOKEN,
+  XAI_API_KEY:env.XAI_API_KEY||'',
+  REPLICATE_API_TOKEN:env.REPLICATE_API_TOKEN||env.REPLICATE_API_KEY||'',
   PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS:'1',
   BROWSER_WS_ENDPOINT:env.BROWSER_WS_ENDPOINT||''
  };
@@ -189,7 +194,8 @@ function schedule(promise){
  return tracked;
 }
 
-export async function launchWalkthroughSandbox({jobId,secret,templateId,env=process.env}){
+export async function launchWalkthroughSandbox({jobId,secret,templateId,captureOrigin,formats,env=process.env}){
+ const extra={captureOrigin,formats};
  const {Sandbox}=await import('@vercel/sandbox');
  const snapshotId=env.ASSEMBLY_FFMPEG_SNAPSHOT_ID;
  const sandbox=await Sandbox.create({
@@ -197,7 +203,7 @@ export async function launchWalkthroughSandbox({jobId,secret,templateId,env=proc
   runtime:'node24',
   timeout:45*60*1000,
   resources:{vcpus:4},
-  env:sandboxEnv(jobId,secret,templateId,env),
+  env:sandboxEnv(jobId,secret,templateId,env,extra),
   source:snapshotId
    ?{type:'snapshot',snapshotId}
    :{type:'git',url:REPO_URL,depth:1,revision:'main'}
@@ -208,7 +214,7 @@ export async function launchWalkthroughSandbox({jobId,secret,templateId,env=proc
   const result=await sandbox.runCommand({
    cmd:'bash',
    args:['-lc',walkthroughWorkerBootCommand()],
-   env:sandboxEnv(jobId,secret,templateId,env)
+   env:sandboxEnv(jobId,secret,templateId,env,extra)
   });
   const code=await commandExitCode(result);
   if(code!==0){
@@ -225,17 +231,20 @@ export async function launchWalkthroughSandbox({jobId,secret,templateId,env=proc
  return sandboxId;
 }
 
-export async function startWalkthroughBake(templateId,{env=process.env}={}){
+export async function startWalkthroughBake(templateId,{env=process.env,captureOrigin,formats}={}){
  if(!walkthroughCloudEnabled(env)){
   throw new HttpError(503,'Walkthrough cloud bake not configured: '+walkthroughCloudMissing(env).join(', '));
  }
  const id=String(templateId||'').replace(/[^a-z0-9-]/gi,'');
  if(!id)throw new HttpError(400,'Valid template id required.');
+ const origin=String(captureOrigin||env.CAPTURE_ORIGIN||'https://findmyinvite.com').replace(/\/$/,'');
  const jobId=newJobId();
  const secret=newCallbackSecret();
  const job={
   id:jobId,
   templateId:id,
+  captureOrigin:origin,
+  formats:formats||'video',
   status:'queued',
   percent:0,
   label:'Queued',
@@ -248,7 +257,7 @@ export async function startWalkthroughBake(templateId,{env=process.env}={}){
   updatedAt:new Date().toISOString()
  };
  await putJob(job);
- schedule(launchWalkthroughSandbox({jobId,secret,templateId:id,env}).catch(async error=>{
+ schedule(launchWalkthroughSandbox({jobId,secret,templateId:id,captureOrigin:origin,formats:job.formats,env}).catch(async error=>{
   const message=error instanceof Error?error.message:'Launch failed';
   await patchWalkthroughJob(jobId,{status:'failed',percent:0,label:'Failed',error:message,detail:message},env).catch(()=>{});
  }));

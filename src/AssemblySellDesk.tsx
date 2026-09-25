@@ -464,20 +464,43 @@ export function GenerateBar({
 
 export function ReadyBanner({
  previewUrl,
- onDismiss
+ onDismiss,
+ video
 }:{
  previewUrl?:string|null;
  onDismiss:()=>void;
+ video?:{
+  status?:string;
+  percent?:number;
+  label?:string;
+  url?:string|null;
+  error?:string|null;
+ }|null;
 }){
+ const videoReady=video?.status==='ready'&&video.url;
+ const videoBusy=video&&!videoReady&&video.status!=='failed';
  return (
   <div className="asm-sell-ready" role="status">
    <div>
     <strong>Your invitation is ready</strong>
-    <p>Open the preview whenever you like — the cinematic invite is waiting.</p>
+    <p>Open the preview — we start the ₹400 cinematic video as soon as that site is live.</p>
+    {videoBusy&&(
+     <p className="asm-sell-video-eta">
+      {video.label||'Crafting video…'}
+      {typeof video.percent==='number'?' · '+video.percent+'%':''}
+      {' '}(~12 min, Flare + 4s Imagine chapters)
+     </p>
+    )}
+    {video?.status==='failed'&&(
+     <p className="asm-sell-video-eta" role="alert">{video.error||'Video bake failed.'}</p>
+    )}
    </div>
    <div className="asm-gpt-chips">
     {previewUrl&&(
      <a className="asm-gpt-chip" href={previewUrl} target="_blank" rel="noreferrer">Open preview</a>
+    )}
+    {videoReady&&(
+     <a className="asm-gpt-chip" href={video.url||'#'} download>Download video</a>
     )}
     <button type="button" className="asm-gpt-chip" onClick={onDismiss}>Dismiss</button>
    </div>
