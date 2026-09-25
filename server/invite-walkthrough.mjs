@@ -212,13 +212,30 @@ function loadPlaywright(){
 }
 
 async function launchBrowser(pw){
- const launchOpts={headless:true,args:['--no-sandbox','--disable-dev-shm-usage','--disable-gpu']};
- // Vercel Sandbox / serverless: bundled Chromium (no apt / install-deps).
+ const launchOpts={
+  headless:true,
+  args:['--no-sandbox','--disable-setuid-sandbox','--disable-dev-shm-usage','--disable-gpu','--single-process','--no-zygote']
+ };
+ // Optional remote browser (Browserless / Browserbase) — Sandbox-friendly.
+ if(process.env.BROWSER_WS_ENDPOINT){
+  const {chromium}=await import('playwright-core');
+  return chromium.connectOverCDP(process.env.BROWSER_WS_ENDPOINT);
+ }
+ // Prefer full Playwright chromium when installed (recordVideo works).
+ if(process.env.WALKTHROUGH_CLOUD_WORKER==='1'&&process.env.CHROMIUM_PACK!=='1'){
+  try{
+   return await pw.chromium.launch(launchOpts);
+  }catch(error){
+   console.warn('playwright chromium launch failed, trying @sparticuz/chromium',error?.message||error);
+  }
+ }
+ // Bundled Chromium fallback (may not support recordVideo on all hosts).
  if(process.env.WALKTHROUGH_CLOUD_WORKER==='1'||process.env.CHROMIUM_PACK==='1'){
   const chromium=(await import('@sparticuz/chromium')).default;
+  try{chromium.setGraphicsMode(false);}catch{/* */}
   const {chromium:pwChromium}=await import('playwright-core');
   return pwChromium.launch({
-   args:[...chromium.args,'--disable-dev-shm-usage'],
+   args:[...chromium.args,'--disable-dev-shm-usage','--single-process','--no-zygote'],
    executablePath:await chromium.executablePath(),
    headless:true
   });

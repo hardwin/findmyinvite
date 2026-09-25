@@ -98,7 +98,8 @@ function sandboxEnv(jobId,secret,templateId,env){
   WALKTHROUGH_TEMPLATE:templateId,
   CAPTURE_ORIGIN:String(env.CAPTURE_ORIGIN||'https://findmyinvite.com').replace(/\/$/,''),
   BLOB_READ_WRITE_TOKEN:env.BLOB_READ_WRITE_TOKEN,
-  PLAYWRIGHT_BROWSERS_PATH:'0'
+  PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS:'1',
+  BROWSER_WS_ENDPOINT:env.BROWSER_WS_ENDPOINT||''
  };
 }
 
@@ -112,12 +113,16 @@ export function walkthroughWorkerBootCommand(){
   'heartbeat \'{"status":"running","percent":2,"label":"Sandbox up","detail":"boot started"}\'',
   'mkdir -p "$HOME/bin"',
   'export PATH="$HOME/bin:$PATH"',
-  'if [ ! -d node_modules/@sparticuz/chromium ] || [ ! -d node_modules ]; then',
-  '  heartbeat \'{"status":"running","percent":8,"label":"npm ci…","detail":"includes @sparticuz/chromium"}\'',
+  'export PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS=1',
+  'if [ ! -d node_modules ]; then',
+  '  heartbeat \'{"status":"running","percent":8,"label":"npm ci…","detail":"installing deps"}\'',
   '  npm ci --omit=dev',
   'fi',
+  'heartbeat \'{"status":"running","percent":12,"label":"Playwright chromium…","detail":"skip host deps validation"}\'',
+  'npm install playwright@1.49.1 --no-save --no-fund --no-audit',
+  'npx playwright install chromium',
   'if ! command -v ffmpeg >/dev/null 2>&1; then',
-  '  heartbeat \'{"status":"running","percent":16,"label":"Linking ffmpeg…","detail":"ffmpeg-static"}\'',
+  '  heartbeat \'{"status":"running","percent":18,"label":"Linking ffmpeg…","detail":"ffmpeg-static"}\'',
   '  node --input-type=module <<\'NODE\'',
   'import {copyFileSync,chmodSync,mkdirSync} from "node:fs";',
   'import {join} from "node:path";',
@@ -133,11 +138,12 @@ export function walkthroughWorkerBootCommand(){
   'try{const ffprobe=require("ffprobe-static").path;copyFileSync(ffprobe,join(bin,"ffprobe"));chmodSync(join(bin,"ffprobe"),0o755);}catch{}',
   'NODE',
   'fi',
-  'heartbeat \'{"status":"running","percent":22,"label":"Starting worker…","detail":"sparticuz chromium + walkthrough worker"}\'',
-  'nohup env PATH="$HOME/bin:$PATH" WALKTHROUGH_CLOUD_WORKER=1 CHROMIUM_PACK=1 node scripts/walkthrough-cloud-worker.mjs > /tmp/walkthrough-worker.log 2>&1 &',
+  'heartbeat \'{"status":"running","percent":22,"label":"Starting worker…","detail":"playwright chromium + walkthrough worker"}\'',
+  // Prefer stock Playwright chromium in Sandbox (recordVideo). Sparticuz is fallback if PLAYWRIGHT fails.
+  'nohup env PATH="$HOME/bin:$PATH" PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS=1 WALKTHROUGH_CLOUD_WORKER=1 node scripts/walkthrough-cloud-worker.mjs > /tmp/walkthrough-worker.log 2>&1 &',
   'WORKER_PID=$!',
   'echo "worker pid $WORKER_PID"',
-  'sleep 5',
+  'sleep 6',
   'if ! kill -0 "$WORKER_PID" 2>/dev/null; then',
   '  cat /tmp/walkthrough-worker.log >&2 || true',
   '  heartbeat \'{"status":"failed","percent":0,"label":"Failed","detail":"worker exited early","error":"worker exited early"}\'',
