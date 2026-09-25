@@ -340,5 +340,14 @@
     "badge": "New",
     "sort_order": 44,
     "published": true
+  },
+  {
+    "id": "royal-prestige-13",
+    "name": "Indian Cindrella",
+    "description": "Prestigious cinematic opening with refined elegance and grandeur",
+    "collection": "royal",
+    "badge": "New",
+    "sort_order": 45,
+    "published": true
   }
 ]
