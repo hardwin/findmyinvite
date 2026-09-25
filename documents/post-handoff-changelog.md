@@ -8,6 +8,20 @@ Soul: [akay-soul.md](akay-soul.md) · standing facts: [project-context.md](proje
 
 Read this before `docs/handoff/STATUS.md`. The v0.9.0 handoff is the frozen baseline; this file is the current truth after that tag.
 
+## 2026-09-25 — Photographer Co-Pilot (/manager)
+- Assembly rebranded for **Event Planners & Photographers**: landing CTA → `/manager`, permanent redirect `/assembly` → `/manager`.
+- Login: painterly Co-Pilot page (`ManagerLogin` + `manager-login-bg.png`) — Modern Photographer Co-Pilot for Generating Invitation Websites · ₹999 platform credit copy.
+- Auth: Supabase email/password via `/api/auth` (signin/signup/recover/refresh); Remember me → localStorage vs sessionStorage; `requireManager` accepts Akay cookie **or** bearer.
+- Docs: [manager-auth.md](manager-auth.md) (Hostinger SMTP caveats → prefer Resend/Brevo if Hostinger 500s).
+- Payment for credits still Launch 2.0 #11–12 locked.
+
+## 2026-09-25 — Photographer Co-Pilot (/manager)
+- Assembly rebranded for **Event Planners & Photographers**: landing CTA → `/manager`, permanent redirect `/assembly` → `/manager`.
+- Login: painterly Co-Pilot page (`ManagerLogin` + Unsplash 4K meadow bg) — Modern Photographer Co-Pilot for Generating Invitation Websites · ₹999 platform credit copy.
+- Auth: Supabase email/password via `/api/auth` (signin/signup/recover/refresh); Remember me → localStorage vs sessionStorage; `requireManager` accepts Akay cookie **or** bearer.
+- Docs: [manager-auth.md](manager-auth.md) (Hostinger SMTP caveats → prefer Resend/Brevo if Hostinger 500s).
+- Payment for credits still Launch 2.0 #11–12 locked.
+
 ## 2026-09-25 — Face Swap before Lock (Assembly craft)
 - **Bride/Groom chapters:** Face Swap solos now flow into Template 1 — lock chip carries `brideImageUrl`/`groomImageUrl`, chat injects a FACE SWAP LOCK hint, solos cache recovers if the agent only locked the couple, assemble stages `/assets/{id}-bride.jpg` + `-groom.jpg` into `previewDefaults.photos` + `faceSwap`.
 - **Swap prompt:** Identity (face details / shape / skin) from bride+groom refs; head pose, neck length, and attachment locked to Image 1. Stops “swan neck” from pasting ref face angles onto the base body.

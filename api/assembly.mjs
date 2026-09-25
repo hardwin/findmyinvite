@@ -1,5 +1,5 @@
 import {respond,fail,method,HttpError,bodyJson} from '../server/core.mjs';
-import {sessionOk} from '../server/akay-gate.mjs';
+import {requireManager} from '../server/manager-auth.mjs';
 import {
  assemblePremium,
  fsWritesAllowed,
@@ -60,7 +60,7 @@ export default async function handler(req,res){
 
   if(action==='status'){
    method(req,['GET']);
-   if(!sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
+   await requireManager(req);
    const cloud=cloudAssemblyEnabled();
    const local=fsWritesAllowed();
    return respond(res,200,{
@@ -79,13 +79,13 @@ export default async function handler(req,res){
 
   if(action==='parents'){
    method(req,['GET']);
-   if(!sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
+   await requireManager(req);
    return respond(res,200,{parents:await loadPremiumParents()});
   }
 
   if(action==='inbox'){
    method(req,['GET']);
-   if(!sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
+   await requireManager(req);
    if(!fsWritesAllowed())throw new HttpError(503,'Inbox listing is local-only.');
    return respond(res,200,{
     inbox:await listInbox(),
@@ -95,7 +95,7 @@ export default async function handler(req,res){
 
   if(action==='preview'){
    method(req,['GET']);
-   if(!sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
+   await requireManager(req);
    if(!fsWritesAllowed())throw new HttpError(503,'Inbox preview is local-only.');
    const file=String(url.searchParams.get('file')||'');
    const info=await resolveInboxPreview(file);
@@ -125,7 +125,7 @@ export default async function handler(req,res){
 
   if(action==='plan'){
    method(req,['POST']);
-   if(!sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
+   await requireManager(req);
    const body=await bodyJson(req,8192);
    const parentId=String(body.parentId||'');
    const count=Math.min(12,Math.max(1,Number(body.count)||1));
@@ -139,7 +139,7 @@ export default async function handler(req,res){
 
   if(action==='stage'){
    method(req,['POST']);
-   if(!sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
+   await requireManager(req);
    if(!fsWritesAllowed())throw new HttpError(503,'Staging videos is local-only.');
    const filename=String(req.headers['x-assembly-filename']||url.searchParams.get('filename')||'');
    const buffer=await rawBody(req);
@@ -149,7 +149,7 @@ export default async function handler(req,res){
 
   if(action==='assemble'){
    method(req,['POST']);
-   if(!sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
+   await requireManager(req);
    if(!fsWritesAllowed())throw new HttpError(503,'Assemble writes are local-only. Use this desk on your Cursor machine.');
    const body=await bodyJson(req,65536);
    const parentId=String(body.parentId||'');
@@ -163,7 +163,7 @@ export default async function handler(req,res){
 
   if(action==='generate-pair'){
    method(req,['POST']);
-   if(!sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
+   await requireManager(req);
    if(!fsWritesAllowed())throw new HttpError(503,'AI generate is local-only. Use this desk on your Cursor machine.');
    const body=await bodyJson(req,8192);
    const imageUrl=String(body.imageUrl||body.url||'').trim();
@@ -173,7 +173,7 @@ export default async function handler(req,res){
 
   if(action==='generate-status'){
    method(req,['GET']);
-   if(!sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
+   await requireManager(req);
    if(!fsWritesAllowed())throw new HttpError(503,'AI generate status is local-only.');
    const jobId=String(url.searchParams.get('jobId')||'');
    const job=getGenerateJob(jobId);
@@ -183,13 +183,13 @@ export default async function handler(req,res){
 
   if(action==='music-library'){
    method(req,['GET']);
-   if(!sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
+   await requireManager(req);
    return respond(res,200,{tracks:await listMusicLibrary()});
   }
 
   if(action==='template1-start'){
    method(req,['POST']);
-   if(!sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
+   await requireManager(req);
    const body=await bodyJson(req,16384);
    if(cloudAssemblyEnabled())return respond(res,200,await startCloudTemplate1Job(body));
    if(!fsWritesAllowed())throw new HttpError(503,'Template 1 runs locally only. Use this desk on your Cursor machine or CloudAgent.');
@@ -198,7 +198,7 @@ export default async function handler(req,res){
 
   if(action==='template1-status'){
    method(req,['GET']);
-   if(!sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
+   await requireManager(req);
    const jobId=String(url.searchParams.get('jobId')||'');
    if(jobId){
     if(cloudAssemblyEnabled()){
@@ -223,7 +223,7 @@ export default async function handler(req,res){
 
   if(action==='template1-cancel'){
    method(req,['POST']);
-   if(!sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
+   await requireManager(req);
    const body=await bodyJson(req,4096);
    if(cloudAssemblyEnabled())return respond(res,200,await cancelCloudTemplate1Job(String(body.jobId||'')));
    return respond(res,200,cancelTemplate1Job(String(body.jobId||'')));
@@ -231,7 +231,7 @@ export default async function handler(req,res){
 
   if(action==='template1-discard'){
    method(req,['POST']);
-   if(!sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
+   await requireManager(req);
    const body=await bodyJson(req,4096);
    const id=String(body.jobId||'');
    if(cloudAssemblyEnabled()){
@@ -245,7 +245,7 @@ export default async function handler(req,res){
 
   if(action==='template1-retry'){
    method(req,['POST']);
-   if(!sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
+   await requireManager(req);
    const body=await bodyJson(req,4096);
    const id=String(body.jobId||'');
    if(cloudAssemblyEnabled()){
@@ -259,7 +259,7 @@ export default async function handler(req,res){
 
   if(action==='template1-resume-push'){
    method(req,['POST']);
-   if(!sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
+   await requireManager(req);
    const body=await bodyJson(req,4096);
    if(!cloudAssemblyEnabled())throw new HttpError(503,'Cloud Assembly is off.');
    return respond(res,200,await resumeCloudPush(String(body.jobId||'')));
@@ -267,7 +267,7 @@ export default async function handler(req,res){
 
   if(action==='template1-add-catalog'||action==='template1-request-publish'){
    method(req,['POST']);
-   if(!sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
+   await requireManager(req);
    const body=await bodyJson(req,4096);
    if(!cloudAssemblyEnabled())throw new HttpError(503,'Cloud Assembly is off.');
    return respond(res,200,await addCloneToCatalog(String(body.jobId||'')));
@@ -275,7 +275,7 @@ export default async function handler(req,res){
 
   if(action==='template1-proceed'){
    method(req,['POST']);
-   if(!sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
+   await requireManager(req);
    if(cloudAssemblyEnabled())throw new HttpError(503,'Cloud Assembly auto-continues past stills. Wait for the preview.');
    const body=await bodyJson(req,4096);
    return respond(res,200,await proceedTemplate1Job(String(body.jobId||'')));
@@ -283,7 +283,7 @@ export default async function handler(req,res){
 
   if(action==='template1-regen-still'){
    method(req,['POST']);
-   if(!sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
+   await requireManager(req);
    if(cloudAssemblyEnabled())throw new HttpError(503,'Stills iteration is local-only. Cloud Assembly auto-continues past stills.');
    if(!fsWritesAllowed())throw new HttpError(503,'Template 1 runs locally only. Use this desk on your Cursor machine or CloudAgent.');
    const body=await bodyJson(req,8192);
@@ -295,7 +295,7 @@ export default async function handler(req,res){
 
   if(action==='template1-asset'){
    method(req,['GET']);
-   if(!sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
+   await requireManager(req);
    if(cloudAssemblyEnabled())throw new HttpError(503,'Stills preview is local-only. Cloud Assembly streams progress without still assets.');
    const jobId=String(url.searchParams.get('jobId')||'');
    const role=String(url.searchParams.get('role')||'');

@@ -1,0 +1,184 @@
+.mgr-login{
+ min-height:100svh;
+ display:grid;
+ place-items:center;
+ padding:clamp(1.25rem,4vw,2.5rem);
+ position:relative;
+ isolation:isolate;
+ font-family:"Segoe UI",system-ui,sans-serif;
+ color:#111;
+}
+.mgr-login-bg{
+ position:absolute;inset:0;z-index:0;
+ background:#1a3a4a center/cover no-repeat;
+ filter:saturate(1.05) contrast(1.02);
+}
+.mgr-login-bg::after{
+ content:"";position:absolute;inset:0;
+ background:linear-gradient(120deg,rgba(8,20,28,.35),rgba(8,20,28,.15) 45%,rgba(8,20,28,.45));
+}
+.mgr-login-shell{
+ position:relative;z-index:1;
+ width:min(1120px,100%);
+ display:grid;
+ grid-template-columns:1.1fr minmax(300px,420px);
+ gap:clamp(1.5rem,4vw,3rem);
+ align-items:center;
+}
+@media (max-width:860px){
+ .mgr-login-shell{grid-template-columns:1fr;max-width:440px;}
+ .mgr-login-copy{text-align:center;}
+}
+.mgr-login-copy h1{
+ margin:0 0 .75rem;
+ font-size:clamp(1.85rem,4vw,2.75rem);
+ line-height:1.15;
+ font-weight:700;
+ color:#fff;
+ text-shadow:0 2px 24px rgba(0,0,0,.35);
+ letter-spacing:-.02em;
+}
+.mgr-login-copy p{
+ margin:0;
+ color:rgba(255,255,255,.92);
+ font-size:1.05rem;
+ line-height:1.55;
+ max-width:34ch;
+ text-shadow:0 1px 12px rgba(0,0,0,.3);
+}
+.mgr-login-copy .mgr-kicker{
+ display:inline-block;
+ margin-bottom:.85rem;
+ padding:.35rem .75rem;
+ border-radius:999px;
+ background:rgba(255,255,255,.16);
+ border:1px solid rgba(255,255,255,.28);
+ color:#fff;
+ font-size:.72rem;
+ letter-spacing:.08em;
+ text-transform:uppercase;
+ font-weight:600;
+}
+.mgr-login-card{
+ background:#fff;
+ border-radius:28px;
+ padding:clamp(1.4rem,3vw,2rem);
+ box-shadow:0 24px 60px rgba(0,0,0,.28);
+}
+.mgr-login-card h2{
+ margin:0 0 .35rem;
+ font-size:1.55rem;
+ font-weight:700;
+}
+.mgr-login-card .mgr-lead{
+ margin:0 0 1.25rem;
+ color:#5a6570;
+ font-size:.95rem;
+ line-height:1.45;
+}
+.mgr-tabs{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:.35rem;
+ margin-bottom:1.1rem;
+ padding:.3rem;
+ border-radius:14px;
+ background:#f2f4f6;
+}
+.mgr-tabs button{
+ border:0;background:transparent;border-radius:10px;
+ padding:.65rem .5rem;font-weight:600;cursor:pointer;color:#5a6570;
+}
+.mgr-tabs button.is-on{
+ background:#111;color:#fff;
+}
+.mgr-lead{
+ margin:0 0 1.25rem;
+ color:#5a6570;
+ font-size:.95rem;
+ line-height:1.45;
+}
+.mgr-linkish{
+ border:0;background:none;cursor:pointer;font:inherit;font-weight:600;color:#111;padding:0;
+}
+.mgr-alert{
+ margin:0 0 .9rem;padding:.7rem .85rem;
+ border-radius:12px;background:#fff1f1;color:#8a1f2b;
+ font-size:.88rem;
+}
+.mgr-ok{
+ margin:0 0 .9rem;padding:.7rem .85rem;
+ border-radius:12px;background:#eefaf1;color:#14532d;
+ font-size:.88rem;
+}
+.mgr-credits{
+ margin-top:1.1rem;padding-top:1rem;
+ border-top:1px solid #e8ecf0;
+ font-size:.82rem;color:#5a6570;line-height:1.45;
+}
+.mgr-credits strong{color:#111;}
+.mgr-kicker{
+ display:inline-block;
+ margin-bottom:.85rem;
+ padding:.35rem .75rem;
+ border-radius:999px;
+ background:rgba(255,255,255,.16);
+ border:1px solid rgba(255,255,255,.28);
+ color:#fff;
+ font-size:.72rem;
+ letter-spacing:.08em;
+ text-transform:uppercase;
+ font-weight:600;
+}
+.mgr-login-card label{
+ display:grid;gap:.35rem;
+ margin-bottom:.85rem;
+ font-size:.82rem;font-weight:600;color:#334;
+}
+.mgr-login-card input[type=email],
+.mgr-login-card input[type=password]{
+ width:100%;box-sizing:border-box;
+ border:1px solid #d7dde3;border-radius:12px;
+ padding:.8rem .9rem;font:inherit;color:#111;
+}
+.mgr-login-card input:focus{
+ outline:2px solid #111;outline-offset:1px;
+}
+.mgr-row{
+ display:flex;align-items:center;justify-content:space-between;
+ gap:1rem;margin:.2rem 0 1rem;
+ font-size:.85rem;color:#445;
+}
+.mgr-row label{
+ display:flex;align-items:center;gap:.45rem;
+ margin:0;font-weight:500;cursor:pointer;
+}
+.mgr-row a{color:#111;font-weight:600;}
+.mgr-submit{
+ width:100%;border:0;border-radius:14px;
+ background:#111;color:#fff;
+ padding:.95rem 1rem;font:inherit;font-weight:700;
+ cursor:pointer;
+}
+.mgr-submit:disabled{opacity:.55;cursor:wait;}
+.mgr-alert{
+ margin:0 0 .9rem;padding:.7rem .85rem;
+ border-radius:12px;background:#fff1f1;color:#8a1f2b;
+ font-size:.88rem;
+}
+.mgr-ok{
+ margin:0 0 .9rem;padding:.7rem .85rem;
+ border-radius:12px;background:#eefaf1;color:#14532d;
+ font-size:.88rem;
+}
+.mgr-foot{
+ margin:1rem 0 0;text-align:center;
+ font-size:.8rem;color:#6b7785;
+}
+.mgr-foot a{color:#111;font-weight:600;}
+.mgr-credits{
+ margin-top:1.1rem;padding-top:1rem;
+ border-top:1px solid #e8ecf0;
+ font-size:.82rem;color:#5a6570;line-height:1.45;
+}
+.mgr-credits strong{color:#111;}

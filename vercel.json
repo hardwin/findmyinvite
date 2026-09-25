@@ -102,6 +102,28 @@
       "destination": "/index.html"
     }
   ],
+  "redirects": [
+    {
+      "source": "/assembly",
+      "destination": "/manager",
+      "permanent": true
+    },
+    {
+      "source": "/assembly/",
+      "destination": "/manager",
+      "permanent": true
+    },
+    {
+      "source": "/assembly/pipeline",
+      "destination": "/manager/pipeline",
+      "permanent": true
+    },
+    {
+      "source": "/assembly/pipeline/",
+      "destination": "/manager/pipeline",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/assets/catalogue/(.*)",
@@ -206,6 +228,32 @@
     },
     {
       "source": "/assembly/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        }
+      ]
+    },
+    {
+      "source": "/manager",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        }
+      ]
+    },
+    {
+      "source": "/manager/(.*)",
       "headers": [
         {
           "key": "X-Robots-Tag",

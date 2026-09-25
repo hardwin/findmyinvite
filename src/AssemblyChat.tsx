@@ -13,6 +13,7 @@ import {
  type ReactNode
 } from 'react';
 import './assembly-chat.css';
+import {managerFetch,managerHeaders} from './manager-api';
 
 type JobStatus={
  jobId:string;
@@ -158,9 +159,8 @@ function fileToDataUrl(file:File){
  });
 }
 async function uploadImage(dataUrl:string,kind:'ref'|'hero'='ref'){
- const res=await fetch('/api/assembly-chat?action=upload',{
+ const res=await managerFetch('/api/assembly-chat?action=upload',{
   method:'POST',
-  credentials:'same-origin',
   headers:{'Content-Type':'application/json'},
   body:JSON.stringify({dataUrl,kind})
  });
@@ -308,7 +308,7 @@ function JobCard({jobId,onUpdate,onDismiss}:{jobId:string;onUpdate?:(job:JobStat
   let alive=true;
   async function poll(){
    try{
-    const res=await fetch('/api/assembly?action=template1-status&jobId='+encodeURIComponent(jobId),{credentials:'same-origin'});
+    const res=await managerFetch('/api/assembly?action=template1-status&jobId='+encodeURIComponent(jobId));
     const body=await res.json().catch(()=>({}));
     if(!res.ok)throw new Error(body.error||'Status failed.');
     if(!alive)return;
@@ -330,9 +330,8 @@ function JobCard({jobId,onUpdate,onDismiss}:{jobId:string;onUpdate?:(job:JobStat
   setBusy(true);
   setErr('');
   try{
-   const res=await fetch('/api/assembly?action=template1-proceed',{
+   const res=await managerFetch('/api/assembly?action=template1-proceed',{
     method:'POST',
-    credentials:'same-origin',
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify({jobId:job.jobId||jobId})
    });
@@ -352,9 +351,8 @@ function JobCard({jobId,onUpdate,onDismiss}:{jobId:string;onUpdate?:(job:JobStat
   setBusy(true);
   setErr('');
   try{
-   const res=await fetch('/api/assembly?action=template1-regen-still',{
+   const res=await managerFetch('/api/assembly?action=template1-regen-still',{
     method:'POST',
-    credentials:'same-origin',
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify({jobId:job.jobId||jobId,role})
    });
@@ -374,9 +372,8 @@ function JobCard({jobId,onUpdate,onDismiss}:{jobId:string;onUpdate?:(job:JobStat
   setBusy(true);
   setErr('');
   try{
-   const res=await fetch('/api/assembly?action=template1-retry',{
+   const res=await managerFetch('/api/assembly?action=template1-retry',{
     method:'POST',
-    credentials:'same-origin',
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify({jobId:job.jobId||jobId})
    });
@@ -397,9 +394,8 @@ function JobCard({jobId,onUpdate,onDismiss}:{jobId:string;onUpdate?:(job:JobStat
   setBusy(true);
   setErr('');
   try{
-   const res=await fetch('/api/assembly?action=template1-discard',{
+   const res=await managerFetch('/api/assembly?action=template1-discard',{
     method:'POST',
-    credentials:'same-origin',
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify({jobId:job.jobId||jobId})
    });
@@ -977,9 +973,10 @@ export default function AssemblyChat({
  const transport=useMemo(()=>new DefaultChatTransport({
   api:'/api/assembly-chat',
   credentials:'include',
+  headers:managerHeaders(),
   body:{parentId,chatId},
   fetch:async(input,init)=>{
-   const res=await fetch(input,init);
+   const res=await managerFetch(input,init||{});
    if(!res.ok){
     let detail='';
     try{
@@ -991,7 +988,7 @@ export default function AssemblyChat({
     }catch{/* */}
     if(res.status===404)throw new Error(detail||'Chat API not found (404).');
     if(res.status===503)throw new Error(detail||'Chat backend not ready (missing XAI_API_KEY?).');
-    if(res.status===401)throw new Error(detail||'Session expired — open /akay and enter the access code.');
+    if(res.status===401)throw new Error(detail||'Session expired — sign in again at /manager/login.');
     throw new Error(detail||('Chat failed ('+res.status+').'));
    }
    return res;
@@ -1105,7 +1102,7 @@ export default function AssemblyChat({
 
  useEffect(()=>{
   if(!error)return;
-  if(/401|access code|akay|session expired/i.test(error.message))onUnauth();
+  if(/401|access code|akay|session expired|sign in again|manager\/login/i.test(error.message))onUnauth();
  },[error,onUnauth]);
 
  useEffect(()=>{

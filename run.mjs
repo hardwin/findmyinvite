@@ -48,7 +48,7 @@ const config={
  },
  optimizeDeps:{
   esbuildOptions:{preserveSymlinks:true},
-  include:['react','react-dom/client','react/jsx-runtime','lucide-react','three','swiper','recharts','class-variance-authority','clsx','tailwind-merge']
+  include:['react','react-dom/client','react/jsx-runtime','lucide-react','three','swiper','recharts','class-variance-authority','clsx','tailwind-merge',"ai","@ai-sdk/react","@ai-sdk/openai"]
  }
 };
 if(process.argv.includes('--build')){await build(config);await rm(new URL('./dist/review',import.meta.url),{recursive:true,force:true});}else{const server=await createServer(config);await server.listen();server.printUrls();}

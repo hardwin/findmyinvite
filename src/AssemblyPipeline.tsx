@@ -1,5 +1,7 @@
 import {useEffect,useMemo,useState,type FormEvent,type MouseEvent} from 'react';
 import './assembly-pipeline.css';
+import {managerFetch} from './manager-api';
+import {readSession} from './auth-session';
 
 type Job={
  jobId:string;
@@ -115,7 +117,7 @@ export default function AssemblyPipeline(){
  },[]);
 
  async function loadJobs(){
-  const res=await fetch('/api/assembly?action=template1-status',{credentials:'same-origin'});
+  const res=await managerFetch('/api/assembly?action=template1-status');
   if(res.status===401){setAuthed(false);return;}
   const body=await res.json().catch(()=>({}));
   if(!res.ok)throw new Error(body.error||'Could not load pipelines.');
@@ -146,7 +148,6 @@ export default function AssemblyPipeline(){
   try{
    const res=await fetch('/api/analytics?action=gate',{
     method:'POST',
-    credentials:'same-origin',
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify({gate:code})
    });
@@ -176,9 +177,8 @@ export default function AssemblyPipeline(){
   setActionBusy(true);
   setError('');
   try{
-   const res=await fetch('/api/assembly?action=template1-discard',{
+   const res=await managerFetch('/api/assembly?action=template1-discard',{
     method:'POST',
-    credentials:'same-origin',
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify({jobId})
    });
@@ -199,9 +199,8 @@ export default function AssemblyPipeline(){
   setActionBusy(true);
   setError('');
   try{
-   const res=await fetch('/api/assembly?action=template1-retry',{
+   const res=await managerFetch('/api/assembly?action=template1-retry',{
     method:'POST',
-    credentials:'same-origin',
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify({jobId})
    });
@@ -222,9 +221,8 @@ export default function AssemblyPipeline(){
   setActionBusy(true);
   setError('');
   try{
-   const res=await fetch('/api/assembly?action=template1-proceed',{
+   const res=await managerFetch('/api/assembly?action=template1-proceed',{
     method:'POST',
-    credentials:'same-origin',
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify({jobId})
    });
@@ -242,9 +240,8 @@ export default function AssemblyPipeline(){
   setActionBusy(true);
   setError('');
   try{
-   const res=await fetch('/api/assembly?action=template1-regen-still',{
+   const res=await managerFetch('/api/assembly?action=template1-regen-still',{
     method:'POST',
-    credentials:'same-origin',
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify({jobId,role})
    });
@@ -262,9 +259,8 @@ export default function AssemblyPipeline(){
   setActionBusy(true);
   setError('');
   try{
-   const res=await fetch('/api/assembly?action=template1-resume-push',{
-    method:'POST',credentials:'same-origin',
-    headers:{'Content-Type':'application/json'},
+   const res=await managerFetch('/api/assembly?action=template1-resume-push',{
+    method:'POST',headers:{'Content-Type':'application/json'},
     body:JSON.stringify({jobId})
    });
    const body=await res.json().catch(()=>({}));
@@ -282,9 +278,8 @@ export default function AssemblyPipeline(){
   setActionBusy(true);
   setError('');
   try{
-   const res=await fetch('/api/assembly?action=template1-add-catalog',{
-    method:'POST',credentials:'same-origin',
-    headers:{'Content-Type':'application/json'},
+   const res=await managerFetch('/api/assembly?action=template1-add-catalog',{
+    method:'POST',headers:{'Content-Type':'application/json'},
     body:JSON.stringify({jobId})
    });
    const body=await res.json().catch(()=>({}));
@@ -302,11 +297,21 @@ export default function AssemblyPipeline(){
    <main className="pipe-shell pipe-gate">
     <form onSubmit={onGate}>
      <p className="pipe-brand">FindMyInvite</p>
-     <h1 className="pipe-title">Pipeline</h1>
-     <p className="lead">Operator desk — same access code as /akay.</p>
-     <input type="password" inputMode="numeric" autoComplete="off" placeholder="Access code" value={code} onChange={e=>setCode(e.target.value)} aria-label="Access code"/>
-     {error&&<p className="pipe-alert" role="alert">{error}</p>}
-     <button type="submit" disabled={busy||!code.trim()}>{busy?'Opening…':'Open pipeline'}</button>
+     <h1 className="pipe-title">Manager Pipeline</h1>
+     <p className="lead">Event planners & photographers: <a href="/manager/login">sign in</a>. Operators may still use the /akay access code.</p>
+     {!readSession()?.access_token&&(
+      <>
+       <input type="password" inputMode="numeric" autoComplete="off" placeholder="Operator access code" value={code} onChange={e=>setCode(e.target.value)} aria-label="Access code"/>
+       {error&&<p className="pipe-alert" role="alert">{error}</p>}
+       <button type="submit" disabled={busy||!code.trim()}>{busy?'Opening…':'Open with code'}</button>
+      </>
+     )}
+     {readSession()?.access_token&&(
+      <>
+       {error&&<p className="pipe-alert" role="alert">{error}</p>}
+       <button type="button" disabled={busy} onClick={()=>{void loadJobs();}}>{busy?'Opening…':'Retry session'}</button>
+      </>
+     )}
     </form>
    </main>
   );
@@ -320,7 +325,7 @@ export default function AssemblyPipeline(){
      <h1 className="pipe-title">Assembly pipeline</h1>
     </div>
     <nav className="pipe-nav">
-     <a className="pipe-ghost" href="/assembly">New invite</a>
+     <a className="pipe-ghost" href="/manager">New invite</a>
      <button type="button" className="pipe-ghost" disabled={busy} onClick={()=>void loadJobs()}>{busy?'Refreshing…':'Refresh'}</button>
     </nav>
    </header>

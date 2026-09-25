@@ -1,7 +1,9 @@
-import {useCallback,useEffect,useState,type FormEvent} from 'react';
+import {useCallback,useEffect,useState} from 'react';
 import './akay.css';
 import './assembly-wizard.css';
 import AssemblyChat from './AssemblyChat';
+import {clearSession,readSession} from './auth-session';
+import {managerFetch} from './manager-api';
 
 const PARENT_KEY='fmi.assembly.parentId';
 
@@ -16,16 +18,16 @@ function writeStore(key:string,value:string){
 }
 
 export default function Assembly(){
- const [code,setCode]=useState('');
  const [authed,setAuthed]=useState(false);
  const [error,setError]=useState('');
- const [busy,setBusy]=useState(false);
+ const [busy,setBusy]=useState(true);
  const [writable,setWritable]=useState(false);
  const [cloud,setCloud]=useState(false);
  const [parentId,setParentId]=useState(()=>readStore(PARENT_KEY));
+ const [email,setEmail]=useState('');
 
  useEffect(()=>{
-  document.title='Assembly · FindMyInvite';
+  document.title='Photographer Co-Pilot · FindMyInvite';
   const meta=document.createElement('meta');
   meta.name='robots';
   meta.content='noindex,nofollow';
@@ -37,21 +39,31 @@ export default function Assembly(){
   setBusy(true);
   setError('');
   try{
-   const statusRes=await fetch('/api/assembly?action=status',{credentials:'same-origin'});
-   if(statusRes.status===401){setAuthed(false);return;}
+   const session=readSession();
+   if(!session?.access_token){
+    location.replace('/manager/login');
+    return;
+   }
+   setEmail(session.user?.email||'');
+   const statusRes=await managerFetch('/api/assembly?action=status');
+   if(statusRes.status===401){
+    clearSession();
+    location.replace('/manager/login');
+    return;
+   }
    const status=await statusRes.json().catch(()=>({}));
-   if(!statusRes.ok)throw new Error(status.error||'Could not open Assembly.');
+   if(!statusRes.ok)throw new Error(status.error||'Could not open Co-Pilot.');
    setAuthed(true);
    setWritable(Boolean(status.writable));
    setCloud(Boolean(status.cloud));
-   const parentsRes=await fetch('/api/assembly?action=parents',{credentials:'same-origin'});
+   const parentsRes=await managerFetch('/api/assembly?action=parents');
    const parentsBody=await parentsRes.json().catch(()=>({}));
    const list=parentsBody.parents||[];
    const next=readStore(PARENT_KEY)||(list[list.length-1]||list[0])?.id||'';
    setParentId(next);
    writeStore(PARENT_KEY,next);
   }catch(err){
-   setError(err instanceof Error?err.message:'Could not open Assembly.');
+   setError(err instanceof Error?err.message:'Could not open Co-Pilot.');
   }finally{
    setBusy(false);
   }
@@ -59,27 +71,18 @@ export default function Assembly(){
 
  useEffect(()=>{void bootstrap();},[bootstrap]);
 
- async function onGate(event:FormEvent){
-  event.preventDefault();
-  setBusy(true);
-  setError('');
-  try{
-   const res=await fetch('/api/analytics?action=gate',{
-    method:'POST',
-    credentials:'same-origin',
-    headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({gate:code})
-   });
-   const body=await res.json().catch(()=>({}));
-   if(!res.ok)throw new Error(body.error||'Access denied.');
-   setCode('');
-   await bootstrap();
-  }catch(err){
-   setError(err instanceof Error?err.message:'Access denied.');
-   setAuthed(false);
-  }finally{
-   setBusy(false);
-  }
+ if(busy&&!authed){
+  return (
+   <main className="asm-shell">
+    <div className="asm-phone">
+     <p className="asm-brand">FindMyInvite</p>
+     <div className="asm-stage">
+      <h1>Photographer Co-Pilot</h1>
+      <p className="lead">Opening your generation desk…</p>
+     </div>
+    </div>
+   </main>
+  );
  }
 
  if(!authed){
@@ -88,13 +91,10 @@ export default function Assembly(){
     <div className="asm-phone">
      <p className="asm-brand">FindMyInvite</p>
      <div className="asm-stage">
-      <h1>Assembly</h1>
-      <p className="lead">Same code as /akay. Chat desk for pin → mix → Template 1.</p>
-      <form className="asm-gate" onSubmit={onGate} autoComplete="off">
-       <input className="asm-field" type="password" placeholder="Access code" value={code} onChange={e=>setCode(e.target.value)} autoFocus required/>
-       {error&&<p className="asm-alert" role="alert">{error}</p>}
-       <button className="asm-pill" type="submit" disabled={busy}>{busy?'…':'Enter'}</button>
-      </form>
+      <h1>Photographer Co-Pilot</h1>
+      <p className="lead">Event planners & photographers — Chat → Single Image → Website.</p>
+      {error&&<p className="asm-alert" role="alert">{error}</p>}
+      <a className="asm-pill" href="/manager/login">Sign in</a>
      </div>
     </div>
    </main>
@@ -102,11 +102,18 @@ export default function Assembly(){
  }
 
  return (
-  <AssemblyChat
-   parentId={parentId}
-   cloud={cloud}
-   writable={writable}
-   onUnauth={()=>setAuthed(false)}
-  />
+  <>
+   <div style={{position:'fixed',top:8,right:12,zIndex:40,display:'flex',gap:8,alignItems:'center',fontSize:12,color:'#445'}}>
+    <span title="Signed in">{email||'Manager'}</span>
+    <span style={{opacity:.7}}>₹999 / build</span>
+    <button type="button" style={{border:'1px solid #ccd',background:'#fff',borderRadius:8,padding:'4px 8px',cursor:'pointer'}} onClick={()=>{clearSession();location.href='/manager/login';}}>Sign out</button>
+   </div>
+   <AssemblyChat
+    parentId={parentId}
+    cloud={cloud}
+    writable={writable}
+    onUnauth={()=>{clearSession();location.replace('/manager/login');}}
+   />
+  </>
  );
 }

@@ -1,5 +1,5 @@
 import {respond,fail,method,HttpError,bodyJson} from '../server/core.mjs';
-import {sessionOk} from '../server/akay-gate.mjs';
+import {requireManager} from '../server/manager-auth.mjs';
 import {convertToModelMessages,streamText} from 'ai';
 import {
  ASSEMBLY_CHAT_SYSTEM,
@@ -51,7 +51,7 @@ export function faceSwapLockHint(messages=[]){
 
 export default async function handler(req,res){
  try{
-  if(!sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
+  await requireManager(req);
 
   const url=new URL(req.url,'https://findmyinvite.com');
   const action=url.searchParams.get('action')||'chat';
