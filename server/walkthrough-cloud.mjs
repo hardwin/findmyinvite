@@ -4,6 +4,7 @@
  * Flare recreate → xAI 4s Imagine clips, stitches 720p, uploads private Blob.
  */
 import {HttpError} from './core.mjs';
+import {publicBakeError} from './invite-walkthrough-imagine.mjs';
 import {hashSecret,newCallbackSecret,newJobId,secretsMatch} from './assembly-jobs.mjs';
 import {put} from '@vercel/blob';
 
@@ -124,7 +125,7 @@ export function walkthroughWorkerBootCommand(){
   '  npm ci --omit=dev',
   'fi',
   'heartbeat \'{"status":"running","percent":12,"label":"Playwright chromium…","detail":"skip host deps validation"}\'',
-  'npm install playwright@1.49.1 --no-save --no-fund --no-audit',
+  'npm install playwright@1.49.1 --no-save --no-fund --no-audit --loglevel=error',
   'npx playwright install chromium',
   'if ! command -v ffmpeg >/dev/null 2>&1; then',
   '  heartbeat \'{"status":"running","percent":18,"label":"Linking ffmpeg…","detail":"ffmpeg-static"}\'',
@@ -220,7 +221,7 @@ export async function launchWalkthroughSandbox({jobId,secret,templateId,captureO
   if(code!==0){
    const stderr=await commandText(result,'stderr');
    const stdout=await commandText(result,'stdout');
-   throw new Error((stderr||stdout||'Sandbox boot exited '+code).slice(0,700));
+   throw new Error(publicBakeError(stderr||stdout||'Sandbox boot exited '+code));
   }
  }catch(error){
   const message=error instanceof Error?error.message:'Sandbox boot failed.';

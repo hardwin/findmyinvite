@@ -10,7 +10,8 @@ import {
  imagineChapterPrompt,
  isExportTemplateId,
  allowCaptureOrigin,
- captureOriginFromPreview
+ captureOriginFromPreview,
+ publicBakeError
 } from '../server/invite-walkthrough-imagine.mjs';
 
 test('Export Video locks seven chapters and ₹400',()=>{
@@ -65,4 +66,5 @@ test('Export Video accepts clone ids and Vercel preview origins',()=>{
   captureOriginFromPreview('https://findmyinvite-git-assembly-rp13.vercel.app/invite/demo?template=royal-prestige-13'),
   'https://findmyinvite-git-assembly-rp13.vercel.app'
  );
+ assert.match(publicBakeError('npm notice playwright chromium launch failed'),/Cloud capture/i);
 });

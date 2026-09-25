@@ -33,6 +33,16 @@ export function allowCaptureOrigin(value){
  }
 }
 
+/** Photographer-facing bake errors — never dump npm / Playwright / Sandbox logs. */
+export function publicBakeError(raw){
+ const text=String(raw||'').replace(/\s+/g,' ').trim();
+ if(!text)return 'Video generation failed. Tap Generate Video to retry.';
+ if(/npm notice|playwright|chromium|headless_shell|sparticuz|sandbox|browserType|Target page/i.test(text)){
+  return 'Cloud capture could not start. Tap Generate Video to retry.';
+ }
+ return text.slice(0,180);
+}
+
 export function captureOriginFromPreview(previewUrl){
  try{
   const url=new URL(String(previewUrl||''), 'https://findmyinvite.com');

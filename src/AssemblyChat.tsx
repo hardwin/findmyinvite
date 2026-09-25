@@ -1472,7 +1472,12 @@ export default function AssemblyChat({
     body:JSON.stringify({template,previewUrl:resolveVideoPreviewUrl(),formats:'video'})
    });
    const started=await start.json().catch(()=>({}));
-   if(!start.ok)throw new Error(started.error||started.message||'Video bake failed to start.');
+    if(!start.ok){
+     const raw=String(started.error||started.message||'Video bake failed to start.');
+     throw new Error(/npm notice|playwright|chromium|headless|sandbox/i.test(raw)
+      ?'Cloud capture could not start. Tap Generate Video to retry.'
+      :raw.slice(0,180));
+    }
    const bakeId=String(started.jobId||'');
    setVideoJob({jobId:bakeId,status:started.status||'queued',percent:4,label:'Queued'});
    if(!bakeId)return;

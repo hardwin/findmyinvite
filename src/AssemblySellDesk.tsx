@@ -1,5 +1,14 @@
 import {useMemo,useState,type FormEvent} from 'react';
 
+function friendlyVideoError(raw?:string|null){
+ const text=String(raw||'').replace(/\s+/g,' ').trim();
+ if(!text)return 'Video failed. Tap Generate Video to retry.';
+ if(/npm notice|playwright|chromium|headless|sparticuz|sandbox|browserType|Target page/i.test(text)){
+  return 'Cloud capture could not start. Tap Generate Video to retry.';
+ }
+ return text.slice(0,180);
+}
+
 export type SellStage=
  |'welcome'
  |'theme'
@@ -529,7 +538,7 @@ export function GenerateVideoBar({
      <p className="asm-sell-eta">Estimated time: about 12 minutes · ₹400 add-on</p>
     )}
     {video?.status==='failed'&&(
-     <p className="asm-sell-eta" role="alert">{video.error||'Video failed. Tap Generate Video to retry.'}</p>
+     <p className="asm-sell-eta" role="alert">{friendlyVideoError(video.error)}</p>
     )}
     {busy&&(
      <div className="asm-sell-video-meter" aria-hidden="true">

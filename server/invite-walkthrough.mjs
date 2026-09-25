@@ -217,7 +217,8 @@ function loadPlaywright(){
 async function launchBrowser(pw){
  const launchOpts={
   headless:true,
-  args:['--no-sandbox','--disable-setuid-sandbox','--disable-dev-shm-usage','--disable-gpu','--single-process','--no-zygote']
+  // Avoid --single-process/--no-zygote — they crash chrome-headless-shell in Vercel Sandbox.
+  args:['--no-sandbox','--disable-setuid-sandbox','--disable-dev-shm-usage','--disable-gpu']
  };
  // Optional remote browser (Browserless / Browserbase) — Sandbox-friendly.
  if(process.env.BROWSER_WS_ENDPOINT){
@@ -238,7 +239,7 @@ async function launchBrowser(pw){
   try{chromium.setGraphicsMode(false);}catch{/* */}
   const {chromium:pwChromium}=await import('playwright-core');
   return pwChromium.launch({
-   args:[...chromium.args,'--disable-dev-shm-usage','--single-process','--no-zygote'],
+   args:[...chromium.args,'--disable-dev-shm-usage'],
    executablePath:await chromium.executablePath(),
    headless:true
   });
@@ -352,42 +353,36 @@ async function extractFrame(videoPath,outPng,atSec=0.3){
  await ffmpeg(['-ss',String(atSec),'-i',videoPath,'-frames:v','1','-update','1',outPng]);
 }
 
+async function stillToClip(png,outMp4,seconds=6){
+ await ffmpeg([
+  '-loop','1','-i',png,'-t',String(seconds),
+  '-vf',scaleFill(),
+  ...ENCODE_COMMON,
+  outMp4
+ ]);
+}
+
 /**
- * Live Playwright record of hero + content slides (continuous session, then trim).
- * Returns { heroClip, pageClips, heroFrame, pageFrames }.
+ * Screenshot hero (names on page) + chapter stills. No recordVideo —
+ * chrome-headless-shell in Vercel Sandbox dies on video recording.
  */
 export async function captureInviteMedia({templateId,origin,outDir}){
  const pw=loadPlaywright();
  const id=walkthroughPaths(templateId).id;
- const p=walkthroughPaths(id);
  const base=(origin||process.env.CAPTURE_ORIGIN||'https://findmyinvite.com').replace(/\/$/,'');
  const url=base+'/invite/demo?template='+encodeURIComponent(id)+'&export=1';
  await mkdir(outDir,{recursive:true});
- const rawDir=join(outDir,'raw');
- await mkdir(rawDir,{recursive:true});
-
- let heroDur=6;
- try{
-  const hi=await probeMedia(p.hero);
-  if(hi.duration>1)heroDur=hi.duration;
- }catch{/* default */}
 
  const browser=await launchBrowser(pw);
-
- const segments=[]; // {kind,start,end,label}
  try{
   const context=await browser.newContext({
    viewport:{width:VIEW_W,height:VIEW_H},
    deviceScaleFactor:1,
    isMobile:true,
    hasTouch:true,
-   reducedMotion:'no-preference',
-   // MUST equal viewport — larger size = page painted in a corner of black canvas.
-   recordVideo:{dir:rawDir,size:{width:VIEW_W,height:VIEW_H}}
+   reducedMotion:'no-preference'
   });
   const page=await context.newPage();
-  const recStart=Date.now();
-  const mark=()=>(Date.now()-recStart)/1000;
 
   await page.route('**/api/analytics**',r=>r.fulfill({status:204}));
   await page.goto(url,{waitUntil:'domcontentloaded',timeout:120000});
@@ -410,7 +405,8 @@ export async function captureInviteMedia({templateId,origin,outDir}){
   const chapterPlan=pickExportChapters(slideMeta.filter(s=>!s.hero));
   console.log('export-chapters',chapterPlan.map(c=>c.id+':'+c.heading).join(', ')||'(none)');
 
-  // --- Hero live (couple names already on the page) ---
+  let heroClip='';
+  let heroFrame='';
   if(heroIndex>=0){
    await slideTo(page,heroIndex);
    await prepExportPage(page);
@@ -423,13 +419,13 @@ export async function captureInviteMedia({templateId,origin,outDir}){
     const v=document.querySelector('.cinematic-hero-loop');
     if(v){v.muted=true;v.currentTime=0;v.play().catch(()=>{});}
    });
-   await page.waitForTimeout(250);
-   const start=mark();
-   await page.waitForTimeout(Math.round(heroDur*1000));
-   segments.push({kind:'hero',start,end:mark(),label:'hero'});
+   await page.waitForTimeout(600);
+   heroFrame=join(outDir,'hero-frame.png');
+   await page.screenshot({path:heroFrame,type:'png',fullPage:false});
+   heroClip=join(outDir,'hero.mp4');
+   await stillToClip(heroFrame,heroClip,6);
   }
 
-  // --- Chapter stills only (Imagine, not live record) ---
   const chapterShots=[];
   for(const t of chapterPlan){
    await slideTo(page,t.slideIndex);
@@ -455,40 +451,8 @@ export async function captureInviteMedia({templateId,origin,outDir}){
    });
   }
 
-  const videoObj=page.video();
   await context.close();
-  const rawPath=videoObj?await videoObj.path():'';
-  if(!rawPath||!(await exists(rawPath)))throw new Error('Playwright recordVideo produced no file.');
-
-  // Keep session at native capture resolution (matches VIEW_W×VIEW_H). toMaster fills deliver size.
-  const rawMaster=join(outDir,'session-master.mp4');
-  await ffmpeg([
-   '-i',rawPath,
-   '-vf',`fps=${FPS}`,
-   '-an','-c:v','libx264','-crf','14','-preset','ultrafast','-pix_fmt','yuv420p','-r',String(FPS),'-movflags','+faststart',
-   rawMaster
-  ]);
-  try{
-   const info=await probeMedia(rawMaster);
-   console.log('session-master',info.width+'x'+info.height);
-  }catch{/* */}
-
-  let heroClip='';
-  let heroFrame='';
-  for(const seg of segments){
-   const dur=Math.max(0.4,seg.end-seg.start);
-   const out=join(outDir,seg.label+'.mp4');
-   const ss=Math.max(0,seg.start);
-   await ffmpeg(['-ss',String(ss),'-i',rawMaster,'-t',String(dur),...ENCODE_COMMON,out]);
-   if(seg.kind==='hero'){
-    heroClip=out;
-    heroFrame=join(outDir,'hero-frame.png');
-    await extractFrame(out,heroFrame,Math.min(0.5,dur/3));
-   }
-  }
-
   const pageFrames=chapterShots.map(c=>c.png);
-  await rm(rawPath,{force:true}).catch(()=>{});
   return {
    heroClip,
    heroFrame,

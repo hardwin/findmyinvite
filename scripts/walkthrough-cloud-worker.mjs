@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // Runs inside a Vercel Sandbox: live phone capture → 720p → private Blob.
 import {captureInviteMedia,resolveExport,readWalkthroughManifest,walkthroughServeUrl} from '../server/invite-walkthrough.mjs';
+import {publicBakeError} from '../server/invite-walkthrough-imagine.mjs';
 import {join} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {mkdir} from 'node:fs/promises';
@@ -127,6 +128,7 @@ try{
 }catch(error){
  const message=error instanceof Error?error.message:String(error);
  console.error('walkthrough bake failed',message);
- await report({status:'failed',percent:0,label:'Failed',error:message,detail:message});
+ const safe=publicBakeError(message);
+ await report({status:'failed',percent:0,label:'Failed',error:safe,detail:safe});
  process.exit(1);
 }

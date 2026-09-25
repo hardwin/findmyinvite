@@ -8,6 +8,10 @@ Soul: [akay-soul.md](akay-soul.md) · standing facts: [project-context.md](proje
 
 Read this before `docs/handoff/STATUS.md`. The v0.9.0 handoff is the frozen baseline; this file is the current truth after that tag.
 
+## 2026-09-25 — Sandbox video capture: screenshots only
+- Vercel Sandbox chrome-headless-shell dies on Playwright `recordVideo`. Capture is now hero + chapter screenshots (hero still → 6s clip), then Flare / Imagine as before.
+- Generate Video card never shows npm/Playwright dumps — short retry line only.
+
 ## 2026-09-25 — Generate Video lives in Assembly chat, not the guest invite
 - Guest footer no longer offers Video (that 404 was wrong). Letter PDF + Image only.
 - After website Ready, `/manager` shows a **Generate Video** card (same layout as Generate) with percent, in-chat preview, and Download.
