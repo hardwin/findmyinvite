@@ -349,5 +349,14 @@
     "badge": "New",
     "sort_order": 45,
     "published": true
+  },
+  {
+    "id": "royal-prestige-14",
+    "name": "White Beach",
+    "description": "Prestigious cinematic opening with refined elegance and grandeur",
+    "collection": "royal",
+    "badge": "New",
+    "sort_order": 46,
+    "published": true
   }
 ]
