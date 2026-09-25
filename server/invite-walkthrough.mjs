@@ -214,6 +214,52 @@ function loadPlaywright(){
  throw last||new Error('playwright not found');
 }
 
+function safeChromiumArgs(args){
+ return (args||[]).filter(a=>!/--single-process|--no-zygote/.test(String(a)));
+}
+
+function wrapPuppeteerBrowser(browser){
+ return {
+  async newContext(opts={}){
+   const page=await browser.newPage();
+   const vp=opts.viewport||{};
+   await page.setViewport({
+    width:vp.width||VIEW_W,
+    height:vp.height||VIEW_H,
+    deviceScaleFactor:opts.deviceScaleFactor||1,
+    isMobile:!!opts.isMobile,
+    hasTouch:!!opts.hasTouch
+   });
+   return {
+    async newPage(){
+     return {
+      async route(pattern,handler){
+       await page.setRequestInterception(true);
+       page.on('request',req=>{
+        const url=req.url();
+        const glob=String(pattern).replace(/^\*\*/,'');
+        if(url.includes(glob.replace(/\*$/,''))||/\/api\/analytics/.test(url)){
+         return handler({fulfill:p=>req.respond({status:p.status||204,body:p.body||''})});
+        }
+        req.continue().catch(()=>{});
+       });
+      },
+      goto:(url,opts)=>page.goto(url,opts),
+      waitForSelector:(sel,opts)=>page.waitForSelector(sel,opts),
+      waitForFunction:(fn,opts)=>page.waitForFunction(fn,opts||{}),
+      waitForTimeout:ms=>new Promise(r=>setTimeout(r,ms)),
+      addStyleTag:opts=>page.addStyleTag(opts),
+      evaluate:(fn,arg)=>page.evaluate(fn,arg),
+      screenshot:opts=>page.screenshot(opts)
+     };
+    },
+    close:()=>page.close()
+   };
+  },
+  close:()=>browser.close()
+ };
+}
+
 async function launchBrowser(pw){
  const launchOpts={
   headless:true,
@@ -225,24 +271,27 @@ async function launchBrowser(pw){
   const {chromium}=await import('playwright-core');
   return chromium.connectOverCDP(process.env.BROWSER_WS_ENDPOINT);
  }
- // Prefer full Playwright chromium when installed (recordVideo works).
- if(process.env.WALKTHROUGH_CLOUD_WORKER==='1'&&process.env.CHROMIUM_PACK!=='1'){
-  try{
-   return await pw.chromium.launch(launchOpts);
-  }catch(error){
-   console.warn('playwright chromium launch failed, trying @sparticuz/chromium',error?.message||error);
-  }
- }
- // Bundled Chromium fallback (may not support recordVideo on all hosts).
+ // Sandbox: screenshots only — @sparticuz/chromium + puppeteer-core.
+ // Never launch chrome-headless-shell (recordVideo / version mismatch dumps).
  if(process.env.WALKTHROUGH_CLOUD_WORKER==='1'||process.env.CHROMIUM_PACK==='1'){
   const chromium=(await import('@sparticuz/chromium')).default;
   try{chromium.setGraphicsMode(false);}catch{/* */}
-  const {chromium:pwChromium}=await import('playwright-core');
-  return pwChromium.launch({
-   args:[...chromium.args,'--disable-dev-shm-usage'],
-   executablePath:await chromium.executablePath(),
-   headless:true
-  });
+  const executablePath=await chromium.executablePath();
+  const args=[...safeChromiumArgs(chromium.args),'--disable-dev-shm-usage','--no-sandbox'];
+  try{
+   const puppeteer=await import('puppeteer-core');
+   const browser=await puppeteer.default.launch({
+    args,
+    executablePath,
+    headless:true,
+    dumpio:false
+   });
+   return wrapPuppeteerBrowser(browser);
+  }catch(error){
+   console.warn('puppeteer-core + sparticuz failed, trying playwright-core',error?.message||error);
+   const {chromium:pwChromium}=await import('playwright-core');
+   return pwChromium.launch({args,executablePath,headless:true});
+  }
  }
  if(process.env.PLAYWRIGHT_CHANNEL){
   return pw.chromium.launch({...launchOpts,channel:process.env.PLAYWRIGHT_CHANNEL});

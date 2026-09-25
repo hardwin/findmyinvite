@@ -67,4 +67,13 @@ test('Export Video accepts clone ids and Vercel preview origins',()=>{
   'https://findmyinvite-git-assembly-rp13.vercel.app'
  );
  assert.match(publicBakeError('npm notice playwright chromium launch failed'),/Cloud capture/i);
+ assert.match(publicBakeError('browserType.launch: Target page, context or browser has been closed'),/Cloud capture/i);
+});
+
+test('Walkthrough sandbox boots Sparticuz screenshots — no Playwright install',async()=>{
+ const {walkthroughWorkerBootCommand}=await import('../server/walkthrough-cloud.mjs');
+ const boot=walkthroughWorkerBootCommand();
+ assert.doesNotMatch(boot,/playwright install/i);
+ assert.match(boot,/CHROMIUM_PACK=1/);
+ assert.match(boot,/screenshot capture/);
 });

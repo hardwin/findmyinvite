@@ -8,6 +8,10 @@ Soul: [akay-soul.md](akay-soul.md) · standing facts: [project-context.md](proje
 
 Read this before `docs/handoff/STATUS.md`. The v0.9.0 handoff is the frozen baseline; this file is the current truth after that tag.
 
+## 2026-09-26 — Walkthrough Sandbox uses git main + Sparticuz
+- Do not boot from `ASSEMBLY_FFMPEG_SNAPSHOT_ID` (stale recordVideo + Playwright). Clone `main`.
+- `CHROMIUM_PACK=1` — no `npx playwright install`. Errors sanitized on bake-status.
+
 ## 2026-09-25 — Sandbox video capture: screenshots only
 - Vercel Sandbox chrome-headless-shell dies on Playwright `recordVideo`. Capture is now hero + chapter screenshots (hero still → 6s clip), then Flare / Imagine as before.
 - Generate Video card never shows npm/Playwright dumps — short retry line only.

@@ -105,6 +105,7 @@ function sandboxEnv(jobId,secret,templateId,env,extra={}){
   XAI_API_KEY:env.XAI_API_KEY||'',
   REPLICATE_API_TOKEN:env.REPLICATE_API_TOKEN||env.REPLICATE_API_KEY||'',
   PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS:'1',
+  CHROMIUM_PACK:'1',
   BROWSER_WS_ENDPOINT:env.BROWSER_WS_ENDPOINT||''
  };
 }
@@ -124,9 +125,7 @@ export function walkthroughWorkerBootCommand(){
   '  heartbeat \'{"status":"running","percent":8,"label":"npm ci…","detail":"installing deps"}\'',
   '  npm ci --omit=dev',
   'fi',
-  'heartbeat \'{"status":"running","percent":12,"label":"Playwright chromium…","detail":"skip host deps validation"}\'',
-  'npm install playwright@1.49.1 --no-save --no-fund --no-audit --loglevel=error',
-  'npx playwright install chromium',
+  'heartbeat \'{"status":"running","percent":12,"label":"Chromium pack…","detail":"@sparticuz/chromium (screenshots only)"}\'',
   'if ! command -v ffmpeg >/dev/null 2>&1; then',
   '  heartbeat \'{"status":"running","percent":18,"label":"Linking ffmpeg…","detail":"ffmpeg-static"}\'',
   '  node --input-type=module <<\'NODE\'',
@@ -144,9 +143,8 @@ export function walkthroughWorkerBootCommand(){
   'try{const ffprobe=require("ffprobe-static").path;copyFileSync(ffprobe,join(bin,"ffprobe"));chmodSync(join(bin,"ffprobe"),0o755);}catch{}',
   'NODE',
   'fi',
-  'heartbeat \'{"status":"running","percent":22,"label":"Starting worker…","detail":"playwright chromium + walkthrough worker"}\'',
-  // Prefer stock Playwright chromium in Sandbox (recordVideo). Sparticuz is fallback if PLAYWRIGHT fails.
-  'nohup env PATH="$HOME/bin:$PATH" PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS=1 WALKTHROUGH_CLOUD_WORKER=1 node scripts/walkthrough-cloud-worker.mjs > /tmp/walkthrough-worker.log 2>&1 &',
+  'heartbeat \'{"status":"running","percent":22,"label":"Starting worker…","detail":"screenshot capture"}\'',
+  'nohup env PATH="$HOME/bin:$PATH" WALKTHROUGH_CLOUD_WORKER=1 CHROMIUM_PACK=1 node scripts/walkthrough-cloud-worker.mjs > /tmp/walkthrough-worker.log 2>&1 &',
   'WORKER_PID=$!',
   'echo "worker pid $WORKER_PID"',
   'sleep 6',
@@ -198,16 +196,14 @@ function schedule(promise){
 export async function launchWalkthroughSandbox({jobId,secret,templateId,captureOrigin,formats,env=process.env}){
  const extra={captureOrigin,formats};
  const {Sandbox}=await import('@vercel/sandbox');
- const snapshotId=env.ASSEMBLY_FFMPEG_SNAPSHOT_ID;
  const sandbox=await Sandbox.create({
   ...sandboxCredentials(env),
   runtime:'node24',
   timeout:45*60*1000,
   resources:{vcpus:4},
   env:sandboxEnv(jobId,secret,templateId,env,extra),
-  source:snapshotId
-   ?{type:'snapshot',snapshotId}
-   :{type:'git',url:REPO_URL,depth:1,revision:'main'}
+  // Never reuse Assembly ffmpeg snapshot — it is stale and still recordVideo/Playwright.
+  source:{type:'git',url:REPO_URL,depth:1,revision:'main'}
  });
  const sandboxId=sandbox.sandboxId||null;
  await patchWalkthroughJob(jobId,{sandboxId,status:'running',percent:3,label:'Sandbox created',detail:sandboxId||''},env);
@@ -224,7 +220,7 @@ export async function launchWalkthroughSandbox({jobId,secret,templateId,captureO
    throw new Error(publicBakeError(stderr||stdout||'Sandbox boot exited '+code));
   }
  }catch(error){
-  const message=error instanceof Error?error.message:'Sandbox boot failed.';
+  const message=publicBakeError(error instanceof Error?error.message:'Sandbox boot failed.');
   await patchWalkthroughJob(jobId,{status:'failed',percent:0,label:'Failed',error:message,detail:message},env).catch(()=>{});
   try{await sandbox.stop();}catch{/* */}
   throw error;
@@ -259,7 +255,7 @@ export async function startWalkthroughBake(templateId,{env=process.env,captureOr
  };
  await putJob(job);
  schedule(launchWalkthroughSandbox({jobId,secret,templateId:id,captureOrigin:origin,formats:job.formats,env}).catch(async error=>{
-  const message=error instanceof Error?error.message:'Launch failed';
+  const message=publicBakeError(error instanceof Error?error.message:'Launch failed');
   await patchWalkthroughJob(jobId,{status:'failed',percent:0,label:'Failed',error:message,detail:message},env).catch(()=>{});
  }));
  return {jobId,status:'queued',templateId:id,secret};
@@ -273,8 +269,8 @@ export async function reportWalkthroughProgress(jobId,secret,patch,env=process.e
   status:patch.status||job.status,
   percent:typeof patch.percent==='number'?patch.percent:job.percent,
   label:patch.label||job.label,
-  detail:patch.detail!=null?String(patch.detail):job.detail,
-  error:patch.error!=null?String(patch.error):job.error,
+  detail:patch.detail!=null?publicBakeError(patch.detail):job.detail,
+  error:patch.error!=null?publicBakeError(patch.error):job.error,
   urls:patch.urls||job.urls
  };
  return patchWalkthroughJob(jobId,next,env);

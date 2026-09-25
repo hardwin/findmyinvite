@@ -2,7 +2,7 @@ import {createReadStream} from 'node:fs';
 import {stat} from 'node:fs/promises';
 import {HttpError,bodyJson,respond,fail,method} from '../server/core.mjs';
 import {resolveExport,readWalkthroughManifest,fetchWalkthroughBlob,walkthroughServeUrl} from '../server/invite-walkthrough.mjs';
-import {isExportTemplateId,captureOriginFromPreview} from '../server/invite-walkthrough-imagine.mjs';
+import {isExportTemplateId,captureOriginFromPreview,publicBakeError} from '../server/invite-walkthrough-imagine.mjs';
 import {requireManager} from '../server/manager-auth.mjs';
 import {
  assertBakeOperator,
@@ -136,9 +136,10 @@ export default async function handler(req,res){
     templateId:job.templateId,
     status:job.status,
     percent:job.percent,
-    label:job.label,
-    detail:job.detail,
-    error:job.error,
+    label:job.label&&/npm notice|playwright|chromium|headless|sparticuz|browserType/i.test(String(job.label))
+     ?publicBakeError(job.label):job.label,
+    detail:job.detail?publicBakeError(job.detail):job.detail,
+    error:job.error?publicBakeError(job.error):job.error,
     urls:job.urls,
     sandboxId:job.sandboxId
    });
