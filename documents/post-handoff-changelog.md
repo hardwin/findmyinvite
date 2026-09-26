@@ -581,3 +581,10 @@ Replaced Lenis+Snap document scroll with **Swiper** vertical full-viewport pagin
 - Added the user's forward low-skim, fly-through, foreground-reveal, orbit and fast-approach camera patterns. Starting/final stills must depict distinct spatial setups; final orbit speed ramps into the best hero composition rather than enforcing constant angular velocity.
 - Updated author, compiler, sheet renderer, chat guidance and prompt compression. The compact essential photoshoot constraints survive compression unchanged within the existing 4,096-character provider limit. Versioned the direction; older boards must be rebuilt and reapproved rather than silently changing an approved story.
 - No tests or generation runs performed, per user request. Only supplied media inspected and source reviewed; deployment requested by user.
+
+## 2026-09-26 — Opening approval before remaining generation
+
+- Split opening generation from plates/hero generation and enforce approval before the rest phase. Generate pauses at opening-review with a playable video in Chat and Pipeline.
+- Save opening media, endpoint stills, prompt state and spend to private Blob; stop the review sandbox. Explicit approval claims the job atomically and starts a fresh worker from that checkpoint, reusing the exact video without an opening inference or prompt rewrite.
+- Authenticated video streaming, retry protection for unapproved openings, discard support, and serialized progress callbacks preserve the review state across refreshes. No schema migration; existing running status plus opening-review phase is used.
+- Updated workflow guidance and Generate copy. No tests, builds or generation runs performed, per photographer's request; source review only before deployment.

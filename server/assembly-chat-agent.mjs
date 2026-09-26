@@ -77,7 +77,7 @@ PHOTOGRAPHER SELL PATH (adapt to the conversation)
 4) face_swap — Offer Face Swap on the Last still. If they skip: craft_chapter_solos on Last, then lock.
 5) lock — lock_final_image with hero (= Last) + brideImageUrl + groomImageUrl.
 6) details — Collect one-by-one (groom, bride, display/VIBE name, date, venue, city, RSVP, music optional). Call save_invite_details as fields land. Confirm each.
-7) generate — When details complete, tell them to tap Generate. Do NOT call start_template1 until Generate confirm. Pass displayName, hero, pinUrl, storyboard, firstImageUrl, lastImageUrl, bride/groom names + date + venue + city, and solos. ~15 min. No invented charges.
+7) generate — When details complete, tell them to tap Generate. Do NOT call start_template1 until Generate confirm. Pass displayName, hero, pinUrl, storyboard, firstImageUrl, lastImageUrl, bride/groom names + date + venue + city, and solos. Generate creates ONLY the opening video first. Direct them to watch it and click Approve opening in the job card; only then do the remaining video and website build. Never approve an opening automatically. No invented charges.
 8) ready — Celebrate when the job is done / they return.
 
 STYLE MEMORY
@@ -625,7 +625,7 @@ export function buildAssemblyChatTools({env=process.env,fetchImpl=fetch,parentId
      complete,
      stage:complete?'generate':'details',
      message:complete
-      ?'Details complete — ask them to tap Generate. Estimated time ~15 minutes.'
+      ?'Details complete — ask them to tap Generate. Opening video first; review and approve it before the rest of the invitation builds.'
       :('Still need: '+missing.join(', ')+'.')
     };
    }
@@ -842,7 +842,7 @@ export function buildAssemblyChatTools({env=process.env,fetchImpl=fetch,parentId
      jobId:started.jobId,
      spend:started.spend||null,
      stage:'generate',
-     message:'Template 1 started locally. Estimated time ~15 minutes. Poll get_job_status for live percent/label.'
+     message:'Template 1 started locally. Opening video first; review and approve it before the rest of the invitation builds. Poll get_job_status for live percent/label.'
     };
    }
   }),
@@ -903,7 +903,7 @@ export function buildAssemblyChatTools({env=process.env,fetchImpl=fetch,parentId
    description:'Approve Door-First + last stills and continue Template 1 into videos (local review only).',
    inputSchema:z.object({jobId:z.string().min(6)}),
    execute:async({jobId})=>{
-    if(cloudAssemblyEnabled())throw new HttpError(503,'Cloud Assembly auto-continues past stills. Wait for the preview.');
+    if(cloudAssemblyEnabled())throw new HttpError(503,'Cloud stills are already approved. Watch the opening video and use Approve opening in the job card to continue.');
     return {ok:true,...await proceedTemplate1Job(jobId,{env,fetchImpl})};
    }
   }),
@@ -921,7 +921,7 @@ export function buildAssemblyChatTools({env=process.env,fetchImpl=fetch,parentId
      return {ok:true,...await resumeCloudPush(jobId)};
     }
     if(useMode==='proceed'){
-     if(cloudAssemblyEnabled())throw new HttpError(503,'Cloud Assembly auto-continues past stills. Use retry or resume-push.');
+     if(cloudAssemblyEnabled())throw new HttpError(503,'Use Approve opening in the job card after watching it. Retry cannot bypass opening review.');
      return {ok:true,...await proceedTemplate1Job(jobId,{env,fetchImpl})};
     }
     if(cloudAssemblyEnabled())return {ok:true,...await retryCloudTemplate1Job(jobId)};

@@ -1,9 +1,11 @@
+import {OpeningVideoReview} from './OpeningVideoReview';
 import {useEffect,useMemo,useState,type FormEvent,type MouseEvent} from 'react';
 import './assembly-pipeline.css';
 import {managerFetch} from './manager-api';
 import {readSession} from './auth-session';
 
 type Job={
+ openingVideoUrl?:string|null;
  jobId:string;
  status:string;
  phase:string;
@@ -45,7 +47,7 @@ function columnFor(job:Job):ColumnId{
  if(job.status==='preview')return 'preview';
  const phase=String(job.phase||'queued');
  if(phase==='pin')return 'pin';
- if(phase==='gen'||phase==='review')return 'gen';
+ if(phase==='gen'||phase==='review'||phase==='opening'||phase==='opening-review')return 'gen';
  if(phase==='craft')return 'craft';
  if(phase==='assemble')return 'assemble';
  if(phase==='preview')return 'preview';
@@ -67,6 +69,7 @@ function formatJobDate(ms:number){
 }
 
 function canDiscard(job:Job){
+ if(job.phase==='opening-review')return true;
  const status=String(job.status||'');
  if(status==='failed'||status==='cancelled'||status==='queued')return true;
  // Stuck running — allow discard without waiting for a hard fail.
@@ -77,7 +80,7 @@ function canDiscard(job:Job){
 function canRetry(job:Job){
  const status=String(job.status||'');
  // Preview/review use Approve / Resume push — not a full re-run.
- if(status==='preview'||status==='review')return false;
+ if(job.phase==='opening-review'||status==='preview'||status==='review')return false;
  // Failed always. Running/queued too — cloud sandboxes can hang mid-pin with no error field.
  if(status==='failed'||status==='cancelled'||status==='running'||status==='queued')return true;
  return false;
@@ -86,7 +89,7 @@ function canRetry(job:Job){
 function needsApproval(job:Pick<Job,'status'|'phase'>&{stills?:{first?:string|null;last?:string|null}}){
  const status=String(job.status||'');
  const phase=String(job.phase||'');
- if(status==='review'||phase==='review')return true;
+ if(phase==='opening-review'||status==='review'||phase==='review')return true;
  const hasStills=Boolean(job.stills?.first&&job.stills?.last);
  if((status==='failed'||status==='cancelled')&&hasStills)return true;
  return false;
@@ -458,6 +461,7 @@ export default function AssemblyPipeline(){
         )}
        </div>
       )}
+      {selected.phase==='opening-review'&&selected.openingVideoUrl&&<OpeningVideoReview url={selected.openingVideoUrl}/>}
       <div className="pipe-links">
        {selected.previewUrl&&<a href={selected.previewUrl} target="_blank" rel="noreferrer">Preview</a>}
        {selected.githubUrl&&<a href={selected.githubUrl} target="_blank" rel="noreferrer">{selected.branch||'GitHub'}</a>}
@@ -466,7 +470,7 @@ export default function AssemblyPipeline(){
       <div className="pipe-actions">
        {needsApproval(selected)&&(
         <button type="button" disabled={actionBusy||Boolean(selected.regenRole)} onClick={()=>void approveJob(selected.jobId)}>
-         {actionBusy&&!selected.regenRole?'Approving…':'Approve'}
+         {actionBusy&&!selected.regenRole?'Approving…':selected.phase==='opening-review'?'Approve opening → build invitation':'Approve'}
         </button>
        )}
        {canRetry(selected)&&(

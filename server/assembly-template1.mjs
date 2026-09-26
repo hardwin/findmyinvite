@@ -17,14 +17,16 @@ export function jobsDir(root=ROOT){return join(root,'work','assembly-jobs');}
 export const JOBS_DIR=jobsDir();
 const jobs=new Map();
 
-export const PHASES=['queued','pin','stills','review','gen','craft','assemble','preview'];
-const PHASE_PERCENT={queued:0,pin:6,stills:18,review:36,gen:48,craft:78,assemble:90,preview:100,failed:0,cancelled:0};
+export const PHASES=['queued','pin','stills','review','opening','opening-review','gen','craft','assemble','preview'];
+const PHASE_PERCENT={queued:0,pin:6,stills:18,review:36,opening:40,'opening-review':55,gen:60,craft:78,assemble:90,preview:100,failed:0,cancelled:0};
 const PHASE_LABEL={
  queued:'Queued…',
  pin:'Reading pin + writing prompts…',
  stills:'Painting intro & outro stills…',
  review:'Approve intro & outro stills',
- gen:'Generating videos + plates…',
+ opening:'Generating opening video…',
+ 'opening-review':'Approve opening video',
+ gen:'Building the rest of your invitation…',
  craft:'Crafting: mute, +3s hold, plates, music…',
  assemble:'Assembling clone into repo…',
  preview:'Your invite is ready',
@@ -174,6 +176,7 @@ function view(job){
   spend:job.ledger?.snapshot?job.ledger.snapshot():(job.spend||null),
   palette:job.palette||null,
   assets:job.assets||{},
+  openingVideoUrl:job.assets?.['opening-video']?.path?stillAssetUrl(job.id,'opening-video',job.updatedAt):null,
   prompts:promptsForView(job.prompts),
   written:job.written||[],
   stills:stillsFromAssets(job),
@@ -211,6 +214,7 @@ function viewFromManifest(raw={}){
   spend:raw.spend||null,
   palette:raw.palette||null,
   assets:raw.assets||{},
+  openingVideoUrl:raw.assets?.['opening-video']?.path?stillAssetUrl(jobId,'opening-video'):null,
   written:raw.written||[],
   stills:stillsFromAssets({id:jobId,assets:raw.assets||{}}),
   regenRole:raw.regenRole||null,
@@ -316,7 +320,7 @@ function resumeOrphanedJob(job,{env=process.env,fetchImpl=fetch,sleepImpl,openai
  if(!job||!job.id||job.status!=='running'||job.workerAlive)return;
  job.stillsWave=stillsWaveFromJob(job)||job.stillsWave;
  job.workerAlive=true;
- if(job.phase==='gen'||job.phase==='craft'||job.phase==='assemble'){
+ if(job.phase==='opening'||job.phase==='gen'||job.phase==='craft'||job.phase==='assemble'){
   if(!job.stillsWave?.first?.jpg||!job.stillsWave?.last?.jpg)return;
   update(job,{detail:'Resuming — opening on xAI (first + last frame)…'});
   void continueTemplate1Job(job,{env,fetchImpl,sleepImpl,openaiClient,qaImpl});
@@ -380,7 +384,7 @@ export function cancelTemplate1Job(jobId){
 export function localJobCanRetry(job){
  if(!job)return false;
  const status=String(job.status||'');
- if(status==='preview'||status==='review'||status==='discarded')return false;
+ if(job.phase==='opening-review'||status==='preview'||status==='review'||status==='discarded')return false;
  // Allow force-retry while running/queued — workers can hang after prompts with no error.
  if(status==='failed'||status==='cancelled'||status==='running'||status==='queued')return true;
  return false;
@@ -435,7 +439,7 @@ export async function discardTemplate1Job(jobId,root=ROOT){
  const snap=live?view(live):await loadTemplate1Job(id,root);
  if(!snap)throw new HttpError(404,'Job not found.');
  const status=String(snap.status||'');
- const discardable=status==='queued'||status==='failed'||status==='cancelled'
+ const discardable=snap.phase==='opening-review'||status==='queued'||status==='failed'||status==='cancelled'
   ||(status==='running'&&Number(snap.percent||0)===0);
  if(!discardable)throw new HttpError(409,'Only queued or failed jobs can be discarded.');
  if(live){
@@ -452,14 +456,18 @@ export async function proceedTemplate1Job(jobId,{env=process.env,fetchImpl=fetch
  if(!job)throw new HttpError(404,'Job not found. Keep this tab open after stills, then tap Proceed to generate (Rs. 499).');
  if(job.regenRole)throw new HttpError(409,'Wait for the still iteration to finish before approving.');
  job.stillsWave=stillsWaveFromJob(job);
+ if(job.phase==='opening-review'){
+  if(!job.assets?.['opening-video']?.path)throw new HttpError(409,'Opening video is not ready.');
+  job.assets.openingApproved=true;
+ }
  const staleRunning=job.status==='running'&&!job.assets?.['opening-video']?.path;
  const canRetry=(job.status==='failed'||job.status==='cancelled'||staleRunning)&&job.stillsWave?.first?.jpg&&job.stillsWave?.last?.jpg;
- if(job.status!=='review'&&!canRetry)throw new HttpError(409,'Approve intro & outro stills first.');
+ if(job.status!=='review'&&job.phase!=='opening-review'&&!canRetry)throw new HttpError(409,'Approve intro & outro stills first.');
  if(!job.stillsWave?.first?.jpg||!job.stillsWave?.last?.jpg)throw new HttpError(409,'Stills are not ready to continue.');
  job.status='running';
  job.error=null;
  job.workerAlive=true;
- update(job,{phase:'gen',detail:canRetry?'Retrying videos from approved stills…':'Stills approved — generating videos…'});
+ update(job,{phase:job.assets.openingApproved?'gen':'opening',detail:job.assets.openingApproved?'Opening approved — building the invitation…':'Generating opening video for your review…'});
  void continueTemplate1Job(job,{env,fetchImpl,sleepImpl,openaiClient,qaImpl});
  return view(job);
 }
@@ -469,7 +477,7 @@ export async function regenTemplate1Still(jobId,{role,note}={},{env=process.env,
  const job=await hydrateLiveJob(jobId,root);
  if(!job)throw new HttpError(404,'Job not found.');
  const which=normalizeOpeningStillRole(role);
- if(job.status!=='review'&&job.phase!=='review')throw new HttpError(409,'Iterate Door-First / last only while reviewing stills.');
+ if(job.phase!=='review')throw new HttpError(409,'Iterate Door-First / last only while reviewing stills.');
  if(job.regenRole)throw new HttpError(409,'A still is already regenerating.');
  if(!job.pinImageUrl)throw new HttpError(409,'Pin image missing — cannot regenerate.');
  if(!job.prompts?.first||!job.prompts?.last)throw new HttpError(409,'Prompts missing — cannot regenerate.');
@@ -634,6 +642,7 @@ async function existingAsset(job,role,fileKey='jpg'){
 }
 
 export async function runRestGenPhase(job,{first,last},{env,fetchImpl,sleepImpl}){
+ if(!job.assets?.openingApproved||!job.assets?.['opening-video']?.path)throw new HttpError(409,'Approve the opening video before building the invitation.');
  const {ledger,prompts,workdir}=job;
  const gen=join(workdir,'gen');
  await mkdir(gen,{recursive:true});
@@ -673,7 +682,17 @@ export async function runRestGenPhase(job,{first,last},{env,fetchImpl,sleepImpl}
   setDetail('hero video ready · $'+ledger.used.toFixed(2)+' used');
   return path;
  };
- const openingChain=async()=>{
+ const heroPath=await heroChain();
+ const openingPath=job.assets['opening-video'].path;
+ return {heroPath,openingPath,gen};
+}
+
+export async function runOpeningPhase(job,{first,last},{env,fetchImpl,sleepImpl}){
+ const {ledger,prompts,workdir}=job;
+ const gen=join(workdir,'gen');
+ await mkdir(gen,{recursive:true});
+ const setDetail=text=>update(job,{detail:text});
+
   const kept=await existingAsset(job,'opening-video','path');
   if(kept?.path&&kept.provider==='xai'){setDetail('opening video reused · $'+ledger.used.toFixed(2)+' used');return kept.path;}
   checkCancelled(job);
@@ -698,9 +717,7 @@ export async function runRestGenPhase(job,{first,last},{env,fetchImpl,sleepImpl}
   job.assets['opening-video']={url:opening.url,requestId:opening.requestId,predictionId:opening.predictionId,path,costUsd:opening.costUsd,respectModeration:opening.respectModeration,provider:opening.provider};
   setDetail('opening video ready · $'+ledger.used.toFixed(2)+' used');
   return path;
- };
- const [heroPath,openingPath]=await Promise.all([heroChain(),openingChain()]);
- return {heroPath,openingPath,gen};
+
 }
 
 export async function runCraftPhase(job,{heroPath,openingPath,gen}){
@@ -863,6 +880,13 @@ export async function continueTemplate1Job(job,{env,fetchImpl,sleepImpl,openaiCl
   checkCancelled(job);
   job.stillsWave=stillsWaveFromJob(job)||job.stillsWave;
   if(!job.stillsWave?.first?.jpg||!job.stillsWave?.last?.jpg)throw new HttpError(409,'Stills are not ready to continue.');
+  if(!job.assets?.openingApproved){
+   update(job,{status:'running',phase:'opening'});
+   await runOpeningPhase(job,job.stillsWave,{env,fetchImpl,sleepImpl});
+   checkCancelled(job);
+   update(job,{status:'review',phase:'opening-review',detail:'Watch the opening video. Approve it to build the remaining video and website; the remaining video and site have not been generated.'});
+   return;
+  }
   update(job,{status:'running',phase:'gen'});
   const genOut=await runRestGenPhase(job,job.stillsWave,{env,fetchImpl,sleepImpl,openaiClient,qaImpl});
   checkCancelled(job);
@@ -889,3 +913,25 @@ export async function continueTemplate1Job(job,{env,fetchImpl,sleepImpl,openaiCl
 
 /** Test/CLI helper: theme + registry patch for an already-assembled clone (no gen spend). */
 export {themeCss,nextCloneIds,knownTemplateIds};
+
+/** Cloud checkpoint helpers. Resume data comes only from the authenticated worker. */
+export function template1Checkpoint(jobId){
+ const job=jobs.get(jobId);
+ if(!job||job.phase!=='opening-review')throw new HttpError(409,'Opening is not awaiting review.');
+ return {...view(job),input:job.input,prompts:job.prompts,pinImageUrl:job.pinImageUrl,styleCard:job.styleCard};
+}
+export async function resumeTemplate1Checkpoint(checkpoint,{env=process.env,onUpdate,fetchImpl=fetch}={}){
+ const started=startTemplate1Job(checkpoint.input,{env,onUpdate,run:false});
+ const job=jobs.get(started.jobId);
+ job.prompts=checkpoint.prompts;
+ job.pinImageUrl=checkpoint.pinImageUrl;
+ job.palette=checkpoint.palette;
+ job.styleCard=checkpoint.styleCard;
+ for(const entry of checkpoint.spend?.entries||[])job.ledger.charge(entry.role,entry.usd,entry);
+ const {restoreCheckpointAssets}=await import('./assembly-opening-checkpoint.mjs');
+ job.assets=await restoreCheckpointAssets(checkpoint,job.workdir,env);
+ job.assets.openingApproved=true;
+ job.stillsWave=stillsWaveFromJob(job);
+ void continueTemplate1Job(job,{env,fetchImpl});
+ return started;
+}

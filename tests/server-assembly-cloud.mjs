@@ -76,7 +76,7 @@ function memoryStore(){
 }
 
 const cloudEnv={
- ASSEMBLY_CLOUD:'1',
+ ASSEMBLY_CLOUD:'1',BLOB_READ_WRITE_TOKEN:'blob-test-token',
  XAI_API_KEY:'x',
  REPLICATE_API_TOKEN:'r',
  OPENAI_API_KEY:'o',

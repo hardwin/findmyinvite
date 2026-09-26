@@ -1,5 +1,10 @@
 # FindMyInvite — Launch 2.0 plan
 
+## Opening video approval gate — 2026-09-26
+
+Generate renders the opening video first and pauses for explicit approval in the job card. No plates, hero video, crafting or site assembly runs until **Approve opening → build invitation**. A private durable checkpoint keeps the exact opening, endpoint stills, prompts and spend; the first sandbox stops while the photographer reviews. Approval atomically starts a new sandbox using the saved opening without regenerating it. Discard lets the photographer revise the storyboard and start again. The existing preview/publish/reel workflow follows after approval.
+
+
 ## Current opening direction — 2026-09-26
 
 **Latest correction — FPV photoshoot:** All five frames are moments in a grand photoshoot world spanning at least 1 km. The camera moves superfast FORWARD to distant portrait locations, eases hard into ultra slow motion, then accelerates forward again. No reverse flight, pull-backs, walking, steps, foot sliding, normal activities, crowds or extra people. The same couple intentionally reappears already posed after occlusion or empty-landscape travel; physical walking continuity is not required. Do not constrain all setups to one terrace, adjoining alcoves or a small radius. Use forward low skims, fly-throughs, foreground reveals and fast approaches. Final full 360-degree orbit speed-ramps into the strongest hero frame in the grandest remote setting, with fifteen airborne layers. This correction supersedes any older adjacent-site or literal-continuity wording below.

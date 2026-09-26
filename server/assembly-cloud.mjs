@@ -5,6 +5,7 @@ import {
  githubCompareUrl,
  githubTreeUrl,
  hashSecret,
+ claimOpeningApproval,
  insertAssemblyJob,
  getAssemblyJob,
  listAssemblyJobs,
@@ -68,6 +69,7 @@ function sandboxEnv(jobId,secret,input,env){
   XAI_API_KEY:env.XAI_API_KEY,
   REPLICATE_API_TOKEN:env.REPLICATE_API_TOKEN||env.REPLICATE_API_KEY||'',
   OPENAI_API_KEY:env.OPENAI_API_KEY||'',
+  BLOB_READ_WRITE_TOKEN:env.BLOB_READ_WRITE_TOKEN||'',
   ASSEMBLY_PROMPT_MODEL:env.ASSEMBLY_PROMPT_MODEL||'',
   GIT_AUTHOR_NAME:'Akay Assembly',
   GIT_AUTHOR_EMAIL:'akay-assembly@findmyinvite.com',
@@ -238,6 +240,7 @@ export async function startCloudTemplate1Job(rawInput,{env=process.env,fetchImpl
  if(!cloudAssemblyEnabled(env)){
   throw new HttpError(503,'Cloud Assembly is not configured ('+cloudMissing(env).join(', ')+').');
  }
+ if(!env.BLOB_READ_WRITE_TOKEN)throw new HttpError(503,'Opening review storage is not configured.');
  const input=validateTemplate1Input(rawInput);
  const id=newJobId();
  const secret=newCallbackSecret();
@@ -299,7 +302,7 @@ export function cloudJobCanRetry(row){
  if(!row)return false;
  const status=String(row.status||'');
  // Preview/review are past the point of a full re-run; use Resume push / Approve instead.
- if(status==='preview'||status==='discarded'||status==='review')return false;
+ if(row.phase==='opening-review'||status==='preview'||status==='discarded'||status==='review')return false;
  // Failed/cancelled always. Running/queued also — sandbox can hang mid-pin with no error.
  if(status==='failed'||status==='cancelled'||status==='running'||status==='queued')return true;
  return false;
@@ -320,6 +323,7 @@ export async function retryCloudTemplate1Job(jobId,{env=process.env,fetchImpl=fe
   throw new HttpError(409,'Only failed or stuck jobs can be retried. Use Resume push if GitHub push stalled.');
  }
  const input=validateTemplate1Input(row.input||{});
+ if(row.assets?.checkpointUrl)input._openingCheckpoint=row.assets.checkpointUrl;
  const secret=newCallbackSecret();
  const budget=Number(input.budgetUsd)||Number(row.spend?.budget)||4;
  const view=await patchAssemblyJob(id,{
@@ -328,9 +332,9 @@ export async function retryCloudTemplate1Job(jobId,{env=process.env,fetchImpl=fe
   percent:0,
   label:'Retrying…',
   detail:'Re-launching Vercel Sandbox…',
-  spend:{budget,used:0,remaining:budget},
+  spend:row.assets?.checkpointUrl?row.spend:{budget,used:0,remaining:budget},
   palette:null,
-  assets:{},
+  assets:row.assets?.checkpointUrl?row.assets:{},
   written:[],
   cloneId:null,
   demo:null,
@@ -492,6 +496,8 @@ export async function reportCloudProgress(jobId,secret,body,{env=process.env,fet
  const row=await getAssemblyJob(jobId,{env,fetchImpl});
  if(!row)throw new HttpError(404,'Job not found.');
  if(!secretsMatch(secret,row.callback_secret))throw new HttpError(401,'Invalid Assembly job secret.');
+ if(row.status==='discarded')return viewFromRow(row);
+ if(row.phase==='opening-review'&&body.phase!=='opening-review')return viewFromRow(row);
  const patch=applyWorkerPatch(body);
  if(typeof body.cloneId==='string'&&body.cloneId&&!patch.branch){
   patch.branch=assemblyBranchName(body.cloneId);
@@ -506,7 +512,16 @@ export async function reportCloudProgress(jobId,secret,body,{env=process.env,fet
   patch.assets=current;
   delete patch.prompts;
  }
- return patchAssemblyJob(jobId,patch,{env,fetchImpl});
+ const result=await patchAssemblyJob(jobId,patch,{env,fetchImpl});
+ if(patch.phase==='opening-review'&&row.sandbox_id){
+  // Media and checkpoint are durable now; don't pay for an idle review sandbox.
+  schedule((async()=>{
+   const {Sandbox}=await import('@vercel/sandbox');
+   const sandbox=await Sandbox.get({sandboxId:row.sandbox_id,...sandboxCredentials(env)});
+   await sandbox.stop();
+  })());
+ }
+ return result;
 }
 
 export async function requestPublishCloudJob(jobId,{env=process.env,fetchImpl=fetch}={}){
@@ -596,4 +611,19 @@ export function attachLineage(cloneId,env=process.env){
   previewUrl:vercelPreviewUrl(cloneId,env)+'/invite/demo?template='+cloneId,
   demo:'/invite/demo?template='+cloneId
  };
+}
+
+export async function approveCloudOpening(jobId,{env=process.env,fetchImpl=fetch,launchImpl=defaultLaunchSandbox}={}){
+ const row=await getAssemblyJob(jobId,{env,fetchImpl});
+ if(!row)throw new HttpError(404,'Job not found.');
+ if(row.phase!=='opening-review'||!row.assets?.checkpointUrl||!row.assets?.openingBlobUrl)throw new HttpError(409,'Wait for the opening video to be ready for approval.');
+ const secret=newCallbackSecret();
+ const view=await claimOpeningApproval(jobId,hashSecret(secret),{env,fetchImpl});
+ if(!view)throw new HttpError(409,'This opening has already been approved or discarded.');
+ const input={...validateTemplate1Input(row.input),_openingCheckpoint:row.assets.checkpointUrl};
+ schedule((async()=>{
+  try{await launchImpl({jobId,secret,input,env,fetchImpl});}
+  catch(error){await reportLaunchFailure(jobId,secret,sandboxLaunchError(error,env),{env,fetchImpl});}
+ })());
+ return view;
 }

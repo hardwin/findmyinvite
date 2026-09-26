@@ -1,3 +1,4 @@
+import {OpeningVideoReview} from './OpeningVideoReview';
 import {useChat} from '@ai-sdk/react';
 import {upload as uploadBlob} from '@vercel/blob/client';
 import {DefaultChatTransport,getToolName,isToolUIPart,type UIMessage} from 'ai';
@@ -29,6 +30,7 @@ import {
 } from './AssemblySellDesk';
 
 type JobStatus={
+ openingVideoUrl?:string|null;
  jobId:string;
  status:string;
  phase:string;
@@ -147,17 +149,18 @@ function titleFrom(messages:UIMessage[]){
 function needsApproval(job:Pick<JobStatus,'status'|'phase'|'stills'>){
  const status=String(job.status||'');
  const phase=String(job.phase||'');
- if(status==='review'||phase==='review')return true;
+ if(phase==='opening-review'||status==='review'||phase==='review')return true;
  const has=Boolean(job.stills?.first&&job.stills?.last);
  return (status==='failed'||status==='cancelled')&&has;
 }
-function canRetryJob(job:Pick<JobStatus,'status'|'error'>){
+function canRetryJob(job:Pick<JobStatus,'status'|'error'|'phase'>){
  const status=String(job.status||'');
- if(status==='preview'||status==='review')return false;
+ if(job.phase==='opening-review'||status==='preview'||status==='review')return false;
  if(status==='failed'||status==='cancelled'||status==='running'||status==='queued')return true;
  return false;
 }
-function canDiscardJob(job:Pick<JobStatus,'status'|'percent'>){
+function canDiscardJob(job:Pick<JobStatus,'status'|'percent'|'phase'>){
+ if(job.phase==='opening-review')return true;
  const status=String(job.status||'');
  if(status==='failed'||status==='cancelled'||status==='queued')return true;
  // Stuck mid-run (any %) — operator may discard without waiting for a hard fail.
@@ -426,7 +429,8 @@ function JobCard({jobId,onUpdate,onDismiss}:{jobId:string;onUpdate?:(job:JobStat
 
  const percent=Math.max(0,Math.min(100,Number(job?.percent)||0));
  const vibe=String(job?.displayName||'').trim();
- const reviewing=Boolean(job&&needsApproval(job));
+ const openingReview=job?.phase==='opening-review';
+ const reviewing=Boolean(job&&!openingReview&&needsApproval(job));
  const showOps=Boolean(job&&(canRetryJob(job)||canDiscardJob(job)||onDismiss));
 
  return (
@@ -435,6 +439,8 @@ function JobCard({jobId,onUpdate,onDismiss}:{jobId:string;onUpdate?:(job:JobStat
    <p>{job?.detail||err||'Live Template 1 progress'}</p>
    <div className="asm-gpt-meter" aria-hidden="true"><i style={{width:percent+'%'}}/></div>
    <p>{percent}% · {job?.phase||'…'}{job?.status?' · '+job.status:''}</p>
+   {openingReview&&job?.openingVideoUrl&&<OpeningVideoReview url={job.openingVideoUrl}/>}
+   {openingReview&&<button className="asm-gpt-choice-submit" disabled={busy||!job?.openingVideoUrl} onClick={()=>void approve()}>Approve opening → build invitation</button>}
    {job&&reviewing?(
     <ReviewStills job={job} busy={busy} onIterate={role=>void iterate(role)}/>
    ):(
@@ -447,7 +453,7 @@ function JobCard({jobId,onUpdate,onDismiss}:{jobId:string;onUpdate?:(job:JobStat
      title="Review opening stills"
      disabled={busy||Boolean(job.regenRole)}
      options={[
-      {id:'approve',label:'Approve — continue to video + site',submit:'__approve__'},
+      {id:'approve',label:'Approve stills — generate opening',submit:'__approve__'},
       {id:'first',label:'Retry Door-First still',submit:'__iterate_first__'},
       {id:'last',label:'Retry last still',submit:'__iterate_last__'}
      ]}

@@ -483,7 +483,7 @@ export function GenerateBar({
      {details.eventDate?' · '+details.eventDate:''}
      {details.venue?' · '+details.venue:''}
     </p>
-    <p className="asm-sell-eta">Estimated time: about 15 minutes</p>
+    <p className="asm-sell-eta">First, review your opening video. Approve it to build the rest of your invitation.</p>
    </div>
    <button type="button" className="asm-sell-generate-btn" disabled={busy} onClick={onGenerate}>
     Generate

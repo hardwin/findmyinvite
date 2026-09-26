@@ -69,6 +69,7 @@ export function viewFromRow(row){
   spend:row.spend||{budget:0,used:0,remaining:0},
   palette:row.palette||null,
   assets,
+  openingVideoUrl:assets.openingBlobUrl?'/api/assembly?action=template1-opening-video&jobId='+row.id:null,
   prompts,
   written:row.written||[],
   moderationStop:Boolean(row.moderation_stop),
@@ -151,7 +152,7 @@ export async function discardAssemblyJob(jobId,{env=process.env,fetchImpl=fetch}
  const row=await getAssemblyJob(jobId,{env,fetchImpl});
  if(!row)throw new HttpError(404,'Job not found.');
  const status=String(row.status||'');
- const discardable=status==='queued'||status==='failed'||status==='cancelled'
+ const discardable=row.phase==='opening-review'||status==='queued'||status==='failed'||status==='cancelled'
   ||(status==='running'&&Number(row.percent||0)===0)
   ||Boolean(row.cancel_requested&&(status==='queued'||status==='running'));
  if(!discardable)throw new HttpError(409,'Only queued or failed jobs can be discarded.');
@@ -194,4 +195,12 @@ export async function patchAssemblyJob(jobId,patch,{env=process.env,fetchImpl=fe
  if(patch.callbackSecretHash!=null)body.callback_secret=patch.callbackSecretHash;
  const rows=await jobsRequest('assembly_jobs?id=eq.'+encodeURIComponent(jobId),{method:'PATCH',body,env,fetchImpl});
  return viewFromRow(Array.isArray(rows)?rows[0]:rows);
+}
+
+/** Atomic claim prevents double approval from launching duplicate paid workers. */
+export async function claimOpeningApproval(jobId,secretHash,{env=process.env,fetchImpl=fetch}={}){
+ const rows=await jobsRequest('assembly_jobs?id=eq.'+encodeURIComponent(jobId)+'&phase=eq.opening-review&status=eq.running',{
+  method:'PATCH',body:{phase:'queued',cancel_requested:false,label:'Opening approved — continuing…',detail:'Starting the remaining invitation work.',callback_secret:secretHash,updated_at:new Date().toISOString()},env,fetchImpl
+ });
+ return Array.isArray(rows)&&rows[0]?viewFromRow(rows[0]):null;
 }

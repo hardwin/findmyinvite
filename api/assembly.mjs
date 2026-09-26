@@ -15,6 +15,7 @@ import {
 import {startGeneratePair,getGenerateJob} from '../server/assembly-ai.mjs';
 import {startTemplate1Job,listTemplate1JobsResolved,loadTemplate1Job,cancelTemplate1Job,discardTemplate1Job,proceedTemplate1Job,regenTemplate1Still,retryTemplate1Job,jobsDir} from '../server/assembly-template1.mjs';
 import {
+ approveCloudOpening,
  cancelCloudTemplate1Job,
  discardCloudTemplate1Job,
  cloudAssemblyEnabled,
@@ -276,8 +277,8 @@ export default async function handler(req,res){
   if(action==='template1-proceed'){
    method(req,['POST']);
    await requireManager(req);
-   if(cloudAssemblyEnabled())throw new HttpError(503,'Cloud Assembly auto-continues past stills. Wait for the preview.');
    const body=await bodyJson(req,4096);
+   if(cloudAssemblyEnabled())return respond(res,200,await approveCloudOpening(String(body.jobId||'')));
    return respond(res,200,await proceedTemplate1Job(String(body.jobId||'')));
   }
 
@@ -293,6 +294,21 @@ export default async function handler(req,res){
    }));
   }
 
+  if(action==='template1-opening-video'){
+   method(req,['GET']);
+   await requireManager(req);
+   const job=await getCloudTemplate1Job(String(url.searchParams.get('jobId')||''));
+   if(!job?.assets?.openingBlobUrl)throw new HttpError(404,'Opening video is not ready.');
+   const {get}=await import('@vercel/blob');
+   const file=await get(job.assets.openingBlobUrl,{access:'private'});
+   if(!file||file.statusCode!==200)throw new HttpError(404,'Opening video is unavailable.');
+   const {Readable}=await import('node:stream');
+   const {pipeline}=await import('node:stream/promises');
+   res.setHeader('Content-Type','video/mp4');
+   res.setHeader('Cache-Control','private, no-store');
+   return await pipeline(Readable.fromWeb(file.stream),res);
+  }
+
   if(action==='template1-asset'){
    method(req,['GET']);
    await requireManager(req);
@@ -300,12 +316,12 @@ export default async function handler(req,res){
    const jobId=String(url.searchParams.get('jobId')||'');
    const role=String(url.searchParams.get('role')||'');
    if(!/^[a-f0-9]{8,16}$/.test(jobId))throw new HttpError(400,'Invalid job.');
-   if(role!=='opening-first'&&role!=='opening-last')throw new HttpError(400,'Unknown still.');
-   const path=join(jobsDir(),jobId,'gen',role+'-720.jpg');
+   if(role!=='opening-first'&&role!=='opening-last'&&role!=='opening-video')throw new HttpError(400,'Unknown still.');
+   const path=join(jobsDir(),jobId,'gen',role+(role==='opening-video'?'.mp4':'-720.jpg'));
    let info;
    try{info=await stat(path);}catch{throw new HttpError(404,'Still not ready.');}
    res.statusCode=200;
-   res.setHeader('Content-Type','image/jpeg');
+   res.setHeader('Content-Type',role==='opening-video'?'video/mp4':'image/jpeg');
    res.setHeader('Cache-Control','no-store');
    res.setHeader('Content-Length',String(info.size));
    return createReadStream(path).pipe(res);
@@ -313,7 +329,7 @@ export default async function handler(req,res){
 
   if(action==='template1-progress'){
    method(req,['POST']);
-   const body=await bodyJson(req,16384);
+   const body=await bodyJson(req,65536);
    const jobId=String(req.headers['x-assembly-job-id']||body.jobId||'');
    const secret=String(req.headers['x-assembly-job-secret']||body.secret||'');
    return respond(res,200,await reportCloudProgress(jobId,secret,body));

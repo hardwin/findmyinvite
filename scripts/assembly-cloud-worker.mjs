@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 // Runs inside a Vercel Sandbox. Reuses Template 1, then pushes assembly/{id} only.
-import {startTemplate1Job,getTemplate1Job,cancelTemplate1Job,proceedTemplate1Job} from '../server/assembly-template1.mjs';
+import {startTemplate1Job,getTemplate1Job,cancelTemplate1Job,proceedTemplate1Job,template1Checkpoint,resumeTemplate1Checkpoint} from '../server/assembly-template1.mjs';
 import {attachLineage} from '../server/assembly-cloud.mjs';
+import {saveOpeningCheckpoint,readOpeningCheckpoint} from '../server/assembly-opening-checkpoint.mjs';
 import {spawn} from 'node:child_process';
 import {loadAssemblyWorkerInput} from '../server/assembly-worker-input.mjs';
 
@@ -53,7 +54,12 @@ function run(cmd,args,opts={}){
  });
 }
 
-async function report(patch){
+let reportQueue=Promise.resolve();
+function report(patch){
+ reportQueue=reportQueue.catch(()=>{}).then(()=>sendReport(patch));
+ return reportQueue;
+}
+async function sendReport(patch){
  const res=await fetch(callback+'?action=template1-progress',{
   method:'POST',
   headers:{
@@ -63,7 +69,7 @@ async function report(patch){
   },
   body:JSON.stringify(patch)
  });
- if(!res.ok)console.error('progress callback',res.status,await res.text().catch(()=>''));
+ if(!res.ok)throw new Error('Progress callback failed ('+res.status+').');
 }
 
 async function sync(){
@@ -111,7 +117,7 @@ let lastFingerprint='';
 try{
  await earlyReport({status:'running',phase:'pin',percent:10,label:'Resolving Pinterest pin…',detail:'startTemplate1Job'});
 
- started=startTemplate1Job(input,{env:workerEnv,run:true,onUpdate:job=>{
+ const options={env:workerEnv,run:true,onUpdate:job=>{
   const fingerprint=[job.status,job.phase,job.percent,job.detail,job.error].join('|');
   if(fingerprint!==lastFingerprint){
    lastFingerprint=fingerprint;
@@ -130,7 +136,7 @@ try{
   }:undefined;
   void report({
    status:job.status==='review'?'running':job.status,
-   phase:job.phase==='review'?'gen':job.phase,
+   phase:job.phase==='opening-review'?'opening':job.phase==='review'?'opening':job.phase,
    percent:job.percent,
    label:job.label,
    detail:job.detail,
@@ -142,8 +148,11 @@ try{
    moderationStop:job.moderationStop,
    error:job.error,
    ...(prompts?{prompts}:{})
-  });
- }});
+  }).catch(error=>console.error(error.message));
+ }};
+ started=input._openingCheckpoint
+  ?await resumeTemplate1Checkpoint(await readOpeningCheckpoint(input._openingCheckpoint,env),options)
+  :startTemplate1Job(input,options);
 }catch(error){
  const message=error instanceof Error?error.message:'startTemplate1Job failed';
  console.error(message);
@@ -170,10 +179,21 @@ while(true){
   process.exit(2);
  }
  const job=getTemplate1Job(started.jobId);
+ if(job.phase==='opening-review'){
+  clearInterval(cancelTimer);
+  try{
+   const saved=await saveOpeningCheckpoint(template1Checkpoint(started.jobId),jobId,env);
+   await report({status:'running',phase:'opening-review',percent:55,label:'Approve opening video',detail:'Watch the opening. Approve to build the rest of the invitation, or discard and revise your storyboard.',assets:saved,spend:job.spend,error:null});
+   process.exit(0);
+  }catch(error){
+   await report({status:'failed',phase:'failed',error:error.message,detail:'Could not save opening review: '+error.message});
+   process.exit(2);
+  }
+ }
  if(job.status==='review'){
   try{
    await proceedTemplate1Job(started.jobId,{env:workerEnv});
-   await report({status:'running',phase:'gen',percent:40,label:'Stills approved — generating videos…',detail:'Cloud auto-continue past stills review'});
+   await report({status:'running',phase:'opening',percent:40,label:'Generating opening video…',detail:'The remaining invitation waits for opening approval.'});
   }catch(error){
    const message=error instanceof Error?error.message:'Could not continue past stills.';
    await report({status:'failed',phase:'failed',error:message,detail:message});
