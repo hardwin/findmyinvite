@@ -603,3 +603,10 @@ Replaced Lenis+Snap document scroll with **Swiper** vertical full-viewport pagin
 - One shared storyboard attempt per chat turn, including compatibility aliases; stop the AI tool loop when the storyboard tool finishes. Failures expose writing versus painting and never auto-retry.
 - Aligned route/client time allowances, removed false two-minute-limit copy, stopped old dangling tools from driving current-turn progress, hid the starter form during work, reset its draft across chats, and added explicit Retry storyboard controls.
 - Source reviewed only. No tests/builds or paid generations run, following the photographer's existing preference.
+
+## 2026-09-26 — Strict rear views, natural necks, footwear and no extras
+
+- Supplied screenshots show side-profile faces, an unnatural head turn, a barefoot groom and an extra running figure. Replaced flexible middle-scene concealment options with strict rear-only views of both heads/torsos and natural forward head/neck alignment.
+- Require an opaque non-human wipe before the camera reaches either person's side; no runners, passersby, foreground humans or duplicate bride. Keep the forward FPV route and closing reference-face reveal.
+- Explicitly specify both pairs of wedding footwear, groom in matching closed-toe formal shoes, in the board, compiler/compression and final-still instructions. Correct barefoot source drafts before approval.
+- Direction v4 requires board revision/reapproval. No tests, builds or paid generations run per the existing request.

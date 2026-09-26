@@ -1,5 +1,8 @@
 # Template 1 — Base prompts → pin-styled prompts
 
+**Latest correction: strict rear views.** Scenes 3–4 show only the backs of BOTH heads and torsos, looking straight away with natural neck alignment. No side profiles, glances, facial reflections or forehead leans; previous flexible concealment examples are superseded. Use an opaque non-human wipe before the camera reaches their side. No running extras, passersby, foreground people or duplicate brides. Both retain wedding footwear in every setup; groom wears matching closed-toe formal shoes, never bare feet. Vary rear poses and props while keeping the existing FPV motion and final identity reveal.
+
+
 ## Current correction — human-free reveal and concealed identities
 
 Preserve the approved forward FPV motion, >=1 km journey, speed ramps, five beats and 360-degree finale. Frames 1–2 (0–6s) are completely human-free and the reveal opens automatically. Its payoff is **Save the Date** at 3–6s. Frame 3 (6–9s) has no text and conceals both bride/groom faces through a sharp theme-specific composition. Frame 4 (9–12s) uses a different concealment technique with **We're getting married**. Both titles are large ultra-bold levitating 3D with theme/outfit-derived materials, colors and textures. Explicitly preserve each person's distinct final-reference wardrobe, body, hair and identity. Design varied poses and meaningful props; no default facing/handholding. The finale pair is already present on approach and uncovered by the camera, never spawned or dissolved in. Only the closing hero composition reveals the reference faces sharply. This supersedes older title timing, clear-middle-face and reappearance instructions below. Existing boards need revision and reapproval; opening-video approval remains separate.
