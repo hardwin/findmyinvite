@@ -34,6 +34,10 @@ export type StoryboardState={
  middleBeats:string[];
  lastBrief:string;
  title?:string;
+ continuity?:string;
+ revision?:number;
+ revisionPending?:boolean;
+ history?:{url:string;revision:number}[];
  shots?:StoryboardShot[];
  sheetUrl?:string;
  firstImageUrl?:string;
@@ -146,6 +150,10 @@ export function mergeSellFromTool(
  output:Record<string,unknown>|null
 ):SellDeskState{
  if(!output)return prev;
+ if(output.ok===false){
+  if(output.revisionPending&&prev.storyboard)return {...prev,stage:'storyboard',storyboard:{...prev.storyboard,locked:false,revisionPending:true}};
+  return prev;
+ }
  let next={...prev,details:{...prev.details}};
  if(typeof output.stage==='string'&&STAGE_ORDER.includes(output.stage as SellStage)){
   next.stage=output.stage as SellStage;
@@ -180,10 +188,16 @@ export function mergeSellFromTool(
     middleBeats:Array.isArray(sb.middleBeats)?sb.middleBeats.map(String):(next.storyboard?.middleBeats||[]),
     lastBrief:String(sb.lastBrief||next.storyboard?.lastBrief||''),
     title:sb.title?String(sb.title):next.storyboard?.title,
+    continuity:sb.continuity??next.storyboard?.continuity,
+    revision:sb.revision||next.storyboard?.revision||1,
+    revisionPending:false,
+    history:sb.sheetUrl&&next.storyboard?.sheetUrl&&sb.sheetUrl!==next.storyboard.sheetUrl
+     ?[...(next.storyboard.history||[]),{url:next.storyboard.sheetUrl,revision:next.storyboard.revision||1}].slice(-10)
+     :next.storyboard?.history,
     shots:Array.isArray(sb.shots)?sb.shots:next.storyboard?.shots,
     sheetUrl:sb.sheetUrl?String(sb.sheetUrl):next.storyboard?.sheetUrl,
-    firstImageUrl:sb.firstImageUrl?String(sb.firstImageUrl):next.storyboard?.firstImageUrl,
-    lastImageUrl:sb.lastImageUrl?String(sb.lastImageUrl):next.storyboard?.lastImageUrl,
+    firstImageUrl:sb.firstImageUrl?String(sb.firstImageUrl):undefined,
+    lastImageUrl:sb.lastImageUrl?String(sb.lastImageUrl):undefined,
     locked:name==='lock_storyboard'||Boolean(output.locked)
    };
   }
@@ -235,7 +249,7 @@ export function mergeSellFromTool(
    :(Array.isArray(output.urls)&&typeof output.urls[0]==='string'?output.urls[0]:'');
   const which=String(output.which||'hero');
   if(url){
-   if(which==='sheet'&&next.storyboard)next.storyboard={...next.storyboard,sheetUrl:url};
+   if(which==='sheet'&&next.storyboard)next.storyboard={...next.storyboard,sheetUrl:url,locked:false,firstImageUrl:undefined,lastImageUrl:undefined};
    else if(which==='first'&&next.storyboard)next.storyboard={...next.storyboard,firstImageUrl:url};
    else if(which==='last'&&next.storyboard){
     next.storyboard={...next.storyboard,lastImageUrl:url};
@@ -260,6 +274,7 @@ export function mergeSellFromTool(
   const url=Array.isArray(output.urls)&&typeof output.urls[0]==='string'?output.urls[0]:'';
   if(url)next.heroUrl=url;
  }
+ if(next.storyboard&&!next.storyboard.sheetUrl){next.storyboard={...next.storyboard,locked:false};if(!['welcome','theme'].includes(next.stage))next.stage='storyboard';}
  return next;
 }
 
@@ -376,137 +391,53 @@ export function ThemePane({
  );
 }
 
-export function StoryScenesForm({
- busy,
- onSubmit
-}:{
- busy:boolean;
- onSubmit:(text:string)=>void;
-}){
- const [reveal,setReveal]=useState('');
- const [shot1,setShot1]=useState('');
- const [shot2,setShot2]=useState('');
- const [shot3,setShot3]=useState('');
- const [shot4,setShot4]=useState('');
- const [shot5,setShot5]=useState('');
- const canSend=useMemo(()=>Boolean(shot1&&shot2&&shot5),[shot1,shot2,shot5]);
- return (
-  <form
-   className="asm-sell-details"
-   onSubmit={e=>{
-    e.preventDefault();
-    if(!canSend||busy)return;
-    onSubmit([
-     'Here are my storyboard shots. Do NOT invent a door or cinematic entrance.',
-     reveal?('revealType: '+reveal):'revealType: custom',
-     '1: '+shot1,
-     '2: '+shot2,
-     shot3?('3: '+shot3):'',
-     shot4?('4: '+shot4):'',
-     '5: '+shot5,
-     'Call propose_storyboard with these shots, then craft_storyboard_sheet.',
-     'Do not craft First/Last stills until I lock the sheet.'
-    ].filter(Boolean).join('\n'));
-   }}
-  >
-   <p className="asm-gpt-choice-title">Your storyboard shots</p>
-   <p className="asm-sell-eta">Write the scenes. Shot 1 is the reveal. Last shot is the couple. We paint one sheet, then iterate.</p>
-   <div className="asm-sell-details-grid">
-    <label className="is-wide">Reveal hook<input value={reveal} disabled={busy} onChange={e=>setReveal(e.target.value)} placeholder="clouds, curtain, door…"/></label>
-    <label className="is-wide">1 · First reveal<textarea value={shot1} disabled={busy} onChange={e=>setShot1(e.target.value)} placeholder="What we see first — your reveal"/></label>
-    <label className="is-wide">2 · Journey<textarea value={shot2} disabled={busy} onChange={e=>setShot2(e.target.value)} placeholder="Next beat"/></label>
-    <label className="is-wide">3 · Journey<textarea value={shot3} disabled={busy} onChange={e=>setShot3(e.target.value)} placeholder="Optional"/></label>
-    <label className="is-wide">4 · Journey<textarea value={shot4} disabled={busy} onChange={e=>setShot4(e.target.value)} placeholder="Optional"/></label>
-    <label className="is-wide">5 · Couple freeze<textarea value={shot5} disabled={busy} onChange={e=>setShot5(e.target.value)} placeholder="Happy couple last frame"/></label>
-   </div>
-   <button type="submit" className="asm-gpt-choice-submit" disabled={busy||!canSend}>Paint storyboard sheet</button>
-  </form>
- );
+export function StoryScenesForm({busy,onSubmit}:{busy:boolean;onSubmit:(text:string)=>void}){
+ const [idea,setIdea]=useState('');
+ return <form className="asm-sell-details" onSubmit={e=>{e.preventDefault();if(idea.trim()&&!busy)onSubmit(idea.trim());}}>
+  <p className="asm-gpt-choice-title">Start with a moment</p>
+  <p className="asm-sell-eta">Describe what happens. We’ll turn it into a visual storyboard together — two shots can be enough.</p>
+  <label>Your idea<textarea value={idea} disabled={busy} onChange={e=>setIdea(e.target.value)} placeholder="An oyster is half closed. Same camera, same place: it opens to reveal the couple sitting on the pearl."/></label>
+  <button className="asm-gpt-choice-submit" disabled={busy||!idea.trim()}>Visualize my idea</button>
+ </form>;
 }
 
-export function StoryboardCard({
- storyboard,
- pinUrl,
- busy,
- onChip
-}:{
- storyboard:StoryboardState;
- pinUrl?:string;
- busy:boolean;
- onChip:(text:string)=>void;
-}){
- const reveal=String(storyboard.revealType||'custom').replace(/_/g,' ');
- const hasSheet=Boolean(storyboard.sheetUrl);
- const hasFirst=Boolean(storyboard.firstImageUrl);
- const hasLast=Boolean(storyboard.lastImageUrl);
- const shots=storyboard.shots?.length
-  ?storyboard.shots
-  :[
-   {n:1,scene:storyboard.firstBrief},
-   ...(storyboard.middleBeats||[]).map((scene,i)=>({n:i+2,scene})),
-   {n:99,scene:storyboard.lastBrief}
-  ].filter(row=>row.scene);
- const sheetPrompt=[
-  'Paint ONE film storyboard sheet with craft_storyboard_sheet.',
-  'Do NOT invent a door. Do NOT craft First/Last yet.',
-  pinUrl?('pinUrl: '+pinUrl):'',
-  storyboard.sheetUrl?('sheetBaseUrl: '+storyboard.sheetUrl):'',
-  'revealType: '+String(storyboard.revealType||'custom'),
-  'title: '+(storyboard.title||'Wedding invitation opening'),
-  ...shots.map((row,i)=>String(i+1)+': '+row.scene)
- ].filter(Boolean).join('\n');
- const lockPrompt=[
-  'Lock this storyboard sheet. Then pull First from panel 1 and Last from the final panel.',
-  'sheetUrl: '+storyboard.sheetUrl,
-  'revealType: '+String(storyboard.revealType||'custom'),
-  'firstBrief: '+String(storyboard.firstBrief||''),
-  'lastBrief: '+String(storyboard.lastBrief||''),
-  pinUrl?('pinUrl: '+pinUrl):''
- ].filter(Boolean).join('\n');
- return (
-  <div className="asm-sell-board" role="group" aria-label="Storyboard sheet">
-   <p className="asm-gpt-choice-title">Storyboard {storyboard.locked?'· locked':''} · {reveal}</p>
-   {hasSheet?(
-    <img className="asm-sell-board-sheet" src={storyboard.sheetUrl} alt="Storyboard sheet"/>
-   ):(
-    <em className="asm-sell-board-missing">Sheet not painted yet — write your shots first</em>
-   )}
-   <ol className="asm-sell-board-frames">
-    {shots.map((row,i)=>(
-     <li key={i}>
-      <strong>{i+1}</strong>
-      <span>{row.scene}</span>
-     </li>
-    ))}
-   </ol>
-   {storyboard.locked&&(hasFirst||hasLast)&&(
-    <ol className="asm-sell-board-frames">
-     <li>
-      <strong>First frame</strong>
-      {hasFirst?<img src={storyboard.firstImageUrl} alt="First reveal still"/>:null}
-     </li>
-     <li>
-      <strong>Last frame</strong>
-      {hasLast?<img src={storyboard.lastImageUrl} alt="Last couple still"/>:null}
-     </li>
-    </ol>
-   )}
-   {!storyboard.locked&&(
-    <div className="asm-gpt-chips">
-     <button type="button" className="asm-gpt-chip asm-gpt-chip-primary" disabled={busy||!shots.length} onClick={()=>onChip(sheetPrompt)}>
-      {hasSheet?'Repaint sheet':'Paint storyboard sheet'}
-     </button>
-     <button type="button" className="asm-gpt-chip" disabled={busy||!hasSheet} onClick={()=>onChip(lockPrompt)}>
-      Lock storyboard
-     </button>
-     <button type="button" className="asm-gpt-chip" disabled={busy||!hasSheet} onClick={()=>onChip('Edit the storyboard SHEET with flare_edit which=sheet. Keep my shots. Do not swap in a door. Show the new sheet.')}>
-      Edit sheet
-     </button>
+export function StoryboardPreview({state,busy,onChip,onClose}:{state:SellDeskState;busy:boolean;onChip:(text:string)=>void;onClose:()=>void}){
+ const [change,setChange]=useState('');
+ const [shot,setShot]=useState('all');
+ const [previous,setPrevious]=useState('');
+ const [loadedSheet,setLoadedSheet]=useState('');
+ const [failedSheet,setFailedSheet]=useState('');
+ const [loadAttempt,setLoadAttempt]=useState(0);
+ const board=state.storyboard;
+ const shots:StoryboardShot[]=board?.shots?.length?board.shots:[
+  {scene:board?.firstBrief||''},...(board?.middleBeats||[]).map(scene=>({scene})),{scene:board?.lastBrief||''}
+ ].filter(item=>item.scene);
+ const old=(board?.history||[]).find(item=>item.url===previous);
+ return <aside className="asm-sell-theme asm-story-preview" aria-label="Storyboard preview">
+  <div className="asm-sell-theme-head"><strong>Storyboard preview</strong><button className="asm-gpt-chip" onClick={onClose}>Back to chat</button><span>{busy?'Updating your story…':board?.locked?'Approved · frames ready':'Draft · keep shaping the story'}</span></div>
+  <div className="asm-story-preview-body">
+   {board?.sheetUrl?<>
+    <div className="asm-gpt-chips"><button className="asm-gpt-chip" aria-pressed={!old} onClick={()=>setPrevious('')}>Current · v{board.revision||1}</button>
+     {(board.history||[]).map(item=><button className="asm-gpt-chip" key={item.url} aria-pressed={old?.url===item.url} onClick={()=>setPrevious(item.url)}>View v{item.revision}</button>)}
     </div>
-   )}
+    {old&&<p>Earlier version · edits and approval apply to the current version.</p>}
+    <a href={old?.url||board.sheetUrl} target="_blank" rel="noreferrer" aria-label="Open full storyboard"><img key={(old?.url||board.sheetUrl)+loadAttempt} onLoad={()=>{setLoadedSheet(old?.url||board.sheetUrl||'');setFailedSheet('');}} onError={()=>setFailedSheet(old?.url||board.sheetUrl||'')} className="asm-sell-board-sheet" src={old?.url||board.sheetUrl} alt={old?'Earlier storyboard':'Current visual storyboard'}/></a>
+   </>:<p>Your visual storyboard will appear here. Tell Akay what happens, or ask for ideas.</p>}
+   {failedSheet&&(failedSheet===(old?.url||board?.sheetUrl))&&<p role="alert">Preview could not load. <button className="asm-gpt-chip" onClick={()=>{setFailedSheet('');setLoadAttempt(n=>n+1);}}>Reload preview</button></p>}
+   {board?.revisionPending&&<p role="alert">The latest edit could not be painted. This is the previous image. Retry your edit before approving.</p>}
+   {board?.continuity&&<div className="asm-story-continuity"><strong>Keep consistent</strong><p>{board.continuity}</p></div>}
+   <ol className="asm-sell-board-frames">{shots.map((row,i)=><li key={i}><strong>Shot {i+1}</strong><span>{row.scene}</span>{'camera' in row&&row.camera?<small>{row.camera}</small>:null}</li>)}</ol>
+   <form className="asm-story-edit" onSubmit={e=>{e.preventDefault();if(!change.trim()||busy)return;onChip('Revise '+(shot==='all'?'the storyboard':'shot '+shot)+' of the CURRENT storyboard: '+change.trim()+'\nPreserve all unmentioned scenes and continuity. Show the updated visual storyboard.');setChange('');setPrevious('');}}>
+    <label>Edit<select value={shot} onChange={e=>setShot(e.target.value)}><option value="all">Whole story</option>{shots.map((_,i)=><option key={i} value={String(i+1)}>Shot {i+1}</option>)}</select></label>
+    <label>What should change?<textarea value={change} onChange={e=>setChange(e.target.value)} placeholder="Keep the oyster half closed. Same camera angle in both shots; only the shell opens." disabled={busy}/></label>
+    <button className="asm-gpt-choice-submit" disabled={busy||!change.trim()}>Update storyboard</button>
+   </form>
+   {board?.sheetUrl&&!board.locked&&<button className="asm-gpt-choice-submit" disabled={busy||board.revisionPending||Boolean(old)||loadedSheet!==board.sheetUrl||failedSheet===board.sheetUrl} onClick={()=>onChip('Approve storyboard\nsheetUrl: '+board.sheetUrl+'\nExtract the first and final panels from this approved sheet. Preserve composition and camera angle.')}>Approve storyboard → create final frames</button>}
+   {board?.locked&&<div className="asm-story-final"><strong>Approved first & final images</strong>{board.firstImageUrl&&<img src={board.firstImageUrl} alt="Approved first frame"/>}{board.lastImageUrl&&<img src={board.lastImageUrl} alt="Approved final frame"/>}</div>}
   </div>
- );
+ </aside>;
 }
+
 
 export function ProcessChip({stage}:{stage:SellStage}){
  const label=STAGE_LABELS[stage]||stage;

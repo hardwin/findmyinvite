@@ -18,7 +18,7 @@ import {
  defaultSellState,
  mergeSellFromTool,
  ThemePane,
- StoryboardCard,
+ StoryboardPreview,
  StoryScenesForm,
  ProcessChip,
  GenerateBar,
@@ -67,7 +67,7 @@ const SUGGESTIONS=[
  {emo:'🌸',text:"I'm a photographer — walk me through creating an invite today"}
 ];
 
-const IMAGE_TOOLS=new Set(['mix_image','regen_opening_still','flare_edit','craft_storyboard_sheet','craft_storyboard_stills','craft_chapter_solos']);
+const IMAGE_TOOLS=new Set(['propose_storyboard','lock_storyboard','mix_image','regen_opening_still','flare_edit','craft_storyboard_sheet','craft_storyboard_stills','craft_chapter_solos']);
 const IMAGE_TIMEOUT_MS=120_000;
 const SELL_KEY='fmi.assembly.sell.v1';
 
@@ -849,8 +849,8 @@ function toolStatusLabel(name:string,state:string,{pending,isImage,busy,elapsedM
   return 'Theme desk updated';
  }
  if(name==='propose_storyboard'||name==='lock_storyboard'){
-  if(pending)return 'Storyboard…'+elapsed;
-  return name==='lock_storyboard'?'Storyboard locked':'Storyboard ready';
+  if(pending)return (name==='lock_storyboard'?'Creating approved frames…':'Painting storyboard…')+elapsed;
+  return name==='lock_storyboard'?'Approved frames ready':'Storyboard updated';
  }
  if(pending){
   if(isImage)return name.replace(/_/g,' ')+' — generating'+elapsed;
@@ -904,15 +904,15 @@ function MessageView({
    const isImage=IMAGE_TOOLS.has(name);
    nodes.push(
     <div className={'asm-gpt-tool'+(pending&&isImage?' is-image':'')} key={message.id+'-tool-'+i}>
-     {toolStatusLabel(name,state,{pending,isImage,busy,elapsedMs})}
+     {output?.ok===false?'Could not complete this step':toolStatusLabel(name,state,{pending,isImage,busy,elapsedMs})}
     </div>
    );
-   if(urls.length){
-    const pinUrls=name==='resolve_pin'
+   if(urls.length&&output?.ok!==false){
+    const pinUrls=typeof output?.sheetUrl==='string'&&name!=='lock_storyboard'?[output.sheetUrl]:name==='resolve_pin'
      ?([typeof output?.previewUrl==='string'?output.previewUrl:'',typeof output?.imageUrl==='string'?output.imageUrl:''].filter(Boolean) as string[])
      :urls;
     const show=pinUrls.length?pinUrls:urls;
-    nodes.push(<Stills key={message.id+'-img-'+i} urls={show} label={name}/>);
+    nodes.push(<Stills key={message.id+'-img-'+i} urls={show} label={output?.sheetUrl?'Storyboard':name.replace(/_/g,' ')}/>);
    }
    if(foundJob)nodes.push(<JobCard key={message.id+'-job-'+i} jobId={foundJob}/>);
    if(name==='list_music'&&Array.isArray(output?.tracks)){
@@ -934,94 +934,11 @@ function MessageView({
      </div>
     );
    }
-   if(name==='mix_image'&&urls[0]){
-    nodes.push(
-     <FaceSwapBeforeLock
-      key={message.id+'-mix-'+i}
-      heroUrl={urls[0]}
-      busy={busy}
-      onChip={onChip}
-     />
-    );
+   if(output?.ok===false){
+    nodes.push(<p className="asm-alert" role="alert" key={message.id+'-failure-'+i}>{String(output.error||output.message||'Could not update the image. Try again.')}</p>);
    }
-   if(name==='flare_edit'&&urls[0]&&String(output?.which||'')==='last'){
-    nodes.push(
-     <FaceSwapBeforeLock
-      key={message.id+'-flare-'+i}
-      heroUrl={urls[0]}
-      busy={busy}
-      onChip={onChip}
-     />
-    );
-   }
-   if((name==='craft_storyboard_sheet'||name==='flare_edit')&&output?.ok!==false&&(output?.sheetUrl||(name==='flare_edit'&&String(output?.which||'')==='sheet'&&urls[0]))){
-    const sheet=typeof output?.sheetUrl==='string'?output.sheetUrl:urls[0];
-    const board=output?.storyboard&&typeof output.storyboard==='object'?output.storyboard as {
-     revealType?:string;firstBrief?:string;middleBeats?:string[];lastBrief?:string;shots?:{scene:string}[];title?:string;
-    }:{};
-    nodes.push(
-     <StoryboardCard
-      key={message.id+'-sheet-'+i}
-      pinUrl={typeof output?.pinUrl==='string'?output.pinUrl:undefined}
-      storyboard={{
-       revealType:String(board.revealType||output?.revealType||'custom'),
-       firstBrief:String(board.firstBrief||''),
-       middleBeats:Array.isArray(board.middleBeats)?board.middleBeats.map(String):[],
-       lastBrief:String(board.lastBrief||''),
-       shots:board.shots,
-       title:board.title,
-       sheetUrl:sheet,
-       locked:false
-      }}
-      busy={busy}
-      onChip={onChip}
-     />
-    );
-   }
-   if(name==='craft_storyboard_stills'&&output?.ok!==false&&(output?.firstImageUrl||output?.lastImageUrl)){
-    nodes.push(
-     <StoryboardCard
-      key={message.id+'-craft-board-'+i}
-      pinUrl={typeof output?.pinUrl==='string'?output.pinUrl:undefined}
-      storyboard={{
-       revealType:String(output?.revealType||'door'),
-       firstBrief:'',
-       middleBeats:[],
-       lastBrief:'',
-       firstImageUrl:typeof output?.firstImageUrl==='string'?output.firstImageUrl:undefined,
-       lastImageUrl:typeof output?.lastImageUrl==='string'?output.lastImageUrl:undefined,
-       locked:false
-      }}
-      busy={busy}
-      onChip={onChip}
-     />
-    );
-   }
-   if(name==='craft_chapter_solos'&&output?.ok!==false&&urls.length){
-    nodes.push(
-     <p className="asm-sell-eta" key={message.id+'-solos-'+i}>Bride + Groom chapter portraits ready — lock them with the Last couple still.</p>
-    );
-   }
-   if((name==='propose_storyboard'||name==='lock_storyboard')&&output?.storyboard&&typeof output.storyboard==='object'){
-    const board=output.storyboard as {
-     revealType:string;
-     firstBrief:string;
-     middleBeats:string[];
-     lastBrief:string;
-     firstImageUrl?:string;
-     lastImageUrl?:string;
-     pinUrl?:string;
-     locked?:boolean;
-    };
-    nodes.push(
-     <StoryboardCard
-      key={message.id+'-board-'+i}
-      pinUrl={board.pinUrl}
-      storyboard={board}
-      busy={busy}
-      onChip={onChip}
-     />
-    );
+   if(output?.sheetUrl&&output.ok!==false){
+    nodes.push(<p className="asm-sell-eta" key={message.id+'-version-'+i}>Visual storyboard updated. Review the current version in Preview.</p>);
    }
    if(name==='save_invite_details'&&output?.complete){
     nodes.push(
@@ -1336,6 +1253,8 @@ export default function AssemblyChat({
   })();
   return ()=>{cancelled=true;};
  },[jobId,messages.length]);
+
+ useEffect(()=>{if(sell.storyboard?.sheetUrl)setThemeOpen(true);},[sell.storyboard?.sheetUrl]);
 
  const sendChip=useCallback((text:string)=>{
   if(!text.trim()||busy)return;
@@ -1660,7 +1579,7 @@ export default function AssemblyChat({
      </div>
      <div className="asm-gpt-top-actions">
       <button type="button" className="asm-gpt-pill ghost" onClick={()=>setThemeOpen(v=>!v)}>
-       {themeOpen?'Hide Theme':'Show Theme'}
+       {themeOpen?'Hide Preview':'Show Preview'}
       </button>
       <a className="asm-gpt-pill ghost" href="/manager/pipeline">Pipeline</a>
       <button type="button" className="asm-gpt-pill solid" onClick={startNewChat}>New chat</button>
@@ -1749,9 +1668,12 @@ export default function AssemblyChat({
         {imageTimeout?(
          <ChoicePrompt
           tone="alert"
-          title="Sorry, image generation hit a snag. How should we continue?"
+          title="Image generation is taking longer than expected."
           disabled={busy}
-          options={[
+          options={sell.stage==='storyboard'?[
+           {id:'retry',label:'Retry storyboard',submit:'Retry my latest storyboard request and paint the visual sheet. Preserve the scenes and continuity. Do not generate First/Last yet.'},
+           {id:'wait',label:'Keep editing later',submit:'Hold off on image generation for now.'}
+          ]:[
            {id:'xai',label:'Fall back to xAI image API',submit:'Approved — fall back to xAI. Call mix_image again with provider "xai" using the same pin and style.'},
            {id:'retry',label:'Retry with Replicate',submit:'Try Now — retry the image mix with Replicate (provider replicate).'},
            {id:'wait',label:'Wait — try again later',submit:'Hold off on image generation for now. I will ask again later.'}
@@ -1779,8 +1701,8 @@ export default function AssemblyChat({
      {composer}
     </div>
 
-    {themeOpen&&(
-     <ThemePane
+    {themeOpen&&(sell.stage!=='welcome'&&sell.stage!=='theme'&&sell.pinUrl?
+     <StoryboardPreview key={chatId} state={sell} busy={busy} onChip={sendChip} onClose={()=>setThemeOpen(false)}/>:<ThemePane
       state={sell}
       busy={busy}
       onLockPin={url=>sendChip('Lock this Pinterest theme pin: '+url+'\nCall resolve_pin then lock_theme_pin.')}

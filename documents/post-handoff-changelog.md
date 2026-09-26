@@ -8,6 +8,14 @@ Soul: [akay-soul.md](akay-soul.md) · standing facts: [project-context.md](proje
 
 Read this before `docs/handoff/STATUS.md`. The v0.9.0 handoff is the frozen baseline; this file is the current truth after that tag.
 
+## 2026-09-26 — Visual storyboard collaboration and approval enforcement
+- Chat now develops ideas into 2–6 shots; no forced three-to-five-shot entrance or compulsory door. `propose_storyboard` saves and paints in one action. Revisions anchor to the previous sheet and keep explicit continuity (camera, framing, location, subject placement).
+- Preview shows the current sheet, version history, scene descriptions, continuity notes, per-shot revision composer and approval. Historical messages no longer expose stale approval buttons. Image load failures block approval; failed generation preserves the previous preview and marks it stale.
+- Request-scoped workflow reconstructs the latest board from conversation results. Separate explicit approval of that exact rendered sheet is required before First/Last extraction; revisions invalidate approval. Text-only legacy locks cannot bypass this.
+- Extraction references approved panels, preserving openness and composition without reapplying fully-closed / frame-filling reveal presets.
+- Validation: all 28 server test files and production build pass. Browser component checks cover selected-shot messages, version switching, failed revision/recovery, approval target and phone layout. Bounded real xAI + Replicate test produced an oyster sheet, revised sheet and approved First/Last frames; outputs visually inspected. This is a provider/tool integration test plus UI component verification, not a claim of user acceptance of the production conversation.
+- Local evidence: `work/assembly-jobs/storyboard-qa/live-result.json`, `oyster-v2.jpg`, `oyster-first.jpg`, `oyster-final.jpg` (ignored test artifacts). No migrations or payment changes.
+
 ## 2026-09-26 — Recovery release: photographer storyboard sheets
 - Recovered the previous session's uncommitted storyboard work and image assets; incorporated the already-published royal-prestige-14 merge.
 - Photographer writes shots → one storyboard sheet → sheet edits → Lock → First/Last frames → existing Face Swap / generation path.

@@ -164,7 +164,8 @@ export function buildStoryboardSheetPrompt({
  revealType='door',
  shots=[],
  pinStyleNote='',
- brief=''
+ brief='',
+ continuity=''
 }={}){
  const type=normalizeRevealType(revealType);
  const rows=shotsToStoryboard(type,shots).shots;
@@ -179,12 +180,14 @@ export function buildStoryboardSheetPrompt({
   ].filter(Boolean).join(' ');
  });
  return [
-  'Redraw as ONE professional film STORYBOARD SHEET — a single document image, not one photo.',
+  'Redraw as ONE professional film STORYBOARD SHEET — a single document image, not one photo. On revisions use the supplied previous sheet as the visual anchor; preserve unchanged panels and edit only the requested differences.',
   'Layout like a production board: title bar "STORYBOARD – '+String(title||'Opening').slice(0,80)+'".',
-  'Then '+Math.max(3,rows.length||5)+' stacked numbered rows (1 at top). Each row: LEFT column (camera angle, camera movement, scene, emotion), CENTER a cinematic still of that beat, RIGHT transition to next.',
+  'Then '+Math.max(2,rows.length||2)+' stacked numbered rows (1 at top). Each row: LEFT column (camera angle, camera movement, scene, emotion), CENTER a cinematic still of that beat, RIGHT transition to next.',
   'Footer director notes. Clean white paper, black hairline rules, readable production typography.',
   'Panel 1 is the FIRST REVEAL ('+type+') — honor that hook. Do not swap it for a door, arch, or building frame unless the brief is that hook.',
-  'Last panel is the couple freeze (people allowed only here). Middle panels are the journey — no extra architecture unless the scenes ask.',
+  'Honor exactly the described subject visibility and object openness in EVERY panel. Half closed means half closed, not sealed. People may appear in any panel where requested. Do not invent extra scenes.',
+  'For continuous reveals, use identical location, framing, lens, camera angle, lighting and subject placement across panels. Change only the described action. Camera movement is permitted only when explicitly requested.',
+  continuity?('CONTINUITY — applies to every panel: '+continuity):'',
   'Pin-true palette and costume. Vertical or tall page. Photoreal cinematic stills inside the frames.',
   lines.join(' | '),
   brief?('Director notes: '+String(brief).slice(0,400)):'',
