@@ -610,3 +610,10 @@ Replaced Lenis+Snap document scroll with **Swiper** vertical full-viewport pagin
 - Require an opaque non-human wipe before the camera reaches either person's side; no runners, passersby, foreground humans or duplicate bride. Keep the forward FPV route and closing reference-face reveal.
 - Explicitly specify both pairs of wedding footwear, groom in matching closed-toe formal shoes, in the board, compiler/compression and final-still instructions. Correct barefoot source drafts before approval.
 - Direction v4 requires board revision/reapproval. No tests, builds or paid generations run per the existing request.
+
+## 2026-09-26 — Ground theme in the actual pin; fully closed starting reveal
+
+- Pin resolution previously returned only a preview URL, and theme lock accepted the chat-generated styleNote without visual verification. Added concise image-based observations, reused on lock; theme notes now come from those observations rather than a guessed description.
+- Astra storyboard writing receives the selected pin image as well as photographer context. Pin-grounded creative direction allows any supported setting/motif and separates the reveal prop from the overall theme. A changed/legacy board restarts painting from the selected pin rather than its incorrect old sheet.
+- Frame 1 must always be fully closed/sealed/opaque with no opening gap or visible interior. Removed conflicting half-open instructions and versioned the board direction. Existing boards require revision and approval.
+- Source review only; no tests/builds or paid generation/vision calls run.

@@ -188,7 +188,7 @@ export function buildStoryboardSheetPrompt({
   'Then '+5+' stacked numbered rows with timestamps 0–3s, 3–6s, 6–9s, 9–12s, 12–15s (1 at top); five beats of ONE 15-second video. Each row: LEFT column (camera angle, camera movement, scene, emotion), CENTER a cinematic still of that beat, RIGHT transition to next.',
   'Footer director notes. Clean white paper, black hairline rules, readable production typography.',
   'Panel 1 is the FIRST REVEAL ('+type+') — honor that hook. Do not swap it for a door, arch, or building frame unless the brief is that hook.',
-  'Honor exactly the described subject visibility and object openness in EVERY panel. Half closed means half closed, not sealed. Panels 1 and 2 contain absolutely no humans, hands, human shadows or reflections; the reveal opens automatically. Do not invent extra scenes.',
+  'Panel 1 ALWAYS shows the chosen reveal fully closed/sealed/opaque, no slit, gap, ajar edge or view inside; override old half-open drafts. Preserve the reveal type. Honor subject visibility in every panel. Panels 1 and 2 contain absolutely no humans, hands, human shadows or reflections; the reveal opens automatically. Do not invent extra scenes.',
   'These panels are keyframes of one continuous FPV flight: 1–2 share the reveal geography; 3 and 4 show geographically distant themed locations hundreds of metres apart with different already-held REAR bride/groom poses showing ONLY the backs of BOTH heads and torsos, no profiles, natural neck alignment, both pairs of footwear present; only panel 4 has its exact in-scene title; 5 shows a spectacular remote site at least 1 km along the route, captured at the best endpoint after a speed-ramped full 360-degree orbit. No walking, steps, sliding feet, crowds or other people. Panels 3–5 show exactly one bride and one groom in distinct preserved outfits matching panel 5; they are already there before the camera uncovers them, never popping into view. Maintain identity and theme, NOT identical framing or location across all five panels. Document fast FORWARD transits, abrupt smooth easing into ultra slow-motion portraits and forward reacceleration in the camera notes. Use dramatically different foreground architecture, terrain and depth at each location, not the same terrace seen from different angles. First image must invite forward flight; final image must clearly belong to the remote final location. Honor each camera path. Panel 5 is the most spectacular wide layered hero composition, with clear couple faces.',
   IDENTITY_REVEAL_RULES,
   airborneLayers.length?('FINAL PANEL airborne depth layers: '+airborneLayers.map((layer,i)=>(i+1)+'. '+layer).join(' | ')):'',
@@ -223,7 +223,7 @@ export function buildStoryboardStillPrompt({
  const type=normalizeRevealType(revealType);
  return [
   revealPrefix(type,note),
-  'Edit pin into FIRST FRAME reveal hook — vertical 9:16. The reveal fills the frame. No people, no faces, no text, no watermark.',
+  'Edit pin into FIRST FRAME reveal hook — vertical 9:16. The reveal fills the frame and is FULLY CLOSED/SEALED with no gap or interior visible. No people, no faces, no text, no watermark.',
   'Reveal type: '+type+'. Honor this type — do not swap it for a door, arch, or building frame.',
   note?('Storyboard first brief: '+note):'',
   style?('Style from theme: '+style):''

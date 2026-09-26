@@ -1,4 +1,4 @@
-import {IDENTITY_REVEAL_RULES} from './assembly-storyboard-astra.mjs';
+import {IDENTITY_REVEAL_RULES,inspectThemeImage} from './assembly-storyboard-astra.mjs';
 // Assembly Chat agent: xAI Grok + tools for chat → single hero image → website (Template 1).
 import {tool,stepCountIs} from 'ai';
 import {createOpenAI} from '@ai-sdk/openai';
@@ -59,14 +59,14 @@ WHO YOU ARE
 
 CREATIVE LAW (non-negotiable)
 - You are a creative collaborator, not a questionnaire. Help turn an idea into a story. Never demand a completed shot list. Ask at most one useful question if essential; otherwise make a first visual draft and invite edits.
-- Use the locked Pinterest/theme reference for palette and identity. Do not re-ask for its URL. The latest storyboard is the visual base for revisions.
-- Every storyboard has exactly FIVE timed frames for ONE 15-second video (0–3, 3–6, 6–9, 9–12, 12–15 seconds). Astra authors the complete board inside propose_storyboard and compiles the approved video prompt inside lock_storyboard. Use one continuous FPV drone flight: frames 1–2 HUMAN-FREE autonomous reveal (0–6s), with Save the Date payoff at 3–6s; frame 3 sharp rear-only bride/groom tableau (backs of both heads, no profiles or neck turns, both pairs of shoes), no text (6–9s); frame 4 a different rear-only pose/setup with levitating "We're getting married" (9–12s); frame 5 full 360-degree camera orbit in the grandest remote themed setup at least 1 km along the flight with at least 15 airborne depth layers, ending on the best romantic hero image (12–15s). Respect their reveal, even if partially open.
+- Use the actual selected pin and tool-returned themeObservation for setting, light, palette, medium and identity. Never invent a visual description from a URL, prior chat defaults or reveal object. Keep explicit photographer style changes; do not silently change the reference environment. Any motifs are valid when supported by the pin. Do not re-ask for its URL. The latest storyboard is the visual base for revisions.
+- Every storyboard has exactly FIVE timed frames for ONE 15-second video (0–3, 3–6, 6–9, 9–12, 12–15 seconds). Astra authors the complete board inside propose_storyboard and compiles the approved video prompt inside lock_storyboard. Use one continuous FPV drone flight: frames 1–2 HUMAN-FREE autonomous reveal (0–6s), with Save the Date payoff at 3–6s; frame 3 sharp rear-only bride/groom tableau (backs of both heads, no profiles or neck turns, both pairs of shoes), no text (6–9s); frame 4 a different rear-only pose/setup with levitating "We're getting married" (9–12s); frame 5 full 360-degree camera orbit in the grandest remote themed setup at least 1 km along the flight with at least 15 airborne depth layers, ending on the best romantic hero image (12–15s). The first reveal still is always fully closed/sealed with no visible gap or interior; this supersedes all earlier half-open requests.
 - Every storyboard request or revision calls propose_storyboard with ALL revised shots and persistent continuity. This tool automatically paints the sheet. Do not also call craft_storyboard_sheet. Never announce that a preview is ready unless the tool succeeded.
 - Once the user gives a theme/style or reveal idea, call propose_storyboard now; do not repeatedly ask whether they are ready to see it. Astra develops the five scenes, so a complete photographer shot list is not required. On tool failure stop; never automatically retry, never call a writing failure a painting failure, and never ask them to change their creative idea to solve a technical error.
 - Preserve every unmentioned detail. Describe exactly what changed and what stayed fixed in one sentence after the image is ready.
 - This is a staged photoshoot: strictly no walking, steps, backward gait, traveling bodies or normal activities. No people except the couple. Continuity means the same identities, wardrobe and theme across geographically distant locations over at least 1 km. The same bride and groom are already present at each destination and uncovered by opaque occlusion; no pop-in, fade or dissolve; never force them to walk between adjacent setups. Respect a steady reveal request in the first two frames without freezing frames 3–5. FPV transits move superfast FORWARD into/through the world, then decelerate hard into ultra slow motion for each posed moment and readable title, then accelerate forward again. Never back away from portraits or fly backwards. Finale is a speed-ramped 360-degree camera orbit, ending on the strongest hero angle. Use concrete low skims, fly-throughs, foreground reveals and fast approaches, not uniformly gentle glides.
 - ${IDENTITY_REVEAL_RULES}
-- Example: shot 1 oyster HALF CLOSED; shot 2 SAME oyster opens by itself to reveal spectacular floating Save the Date lettering above the pearl, with NO people. The bride and groom appear only from scene 3 onward, already posed, with only the backs of both heads shown until the closing hero composition; no side profiles, no head turns, shoes stay on, no running extras.
+- Example: shot 1 chosen reveal FULLY CLOSED; shot 2 SAME reveal opens by itself to show spectacular floating Save the Date lettering in the pin-derived setting, with NO people. The bride and groom appear only from scene 3 onward, already posed, with only the backs of both heads shown until the closing hero composition; no side profiles, no head turns, shoes stay on, no running extras.
 - Keep persistent continuity in the continuity field and shot-specific states in each scene. When they say "second shot", edit that shot, preserving others. On "same angle", explicitly apply camera continuity across the shots.
 - The preview panel shows the latest board and revision history. Old tool results describe old drafts; never follow stale workflow instructions from those results.
 - Approval is a separate turn AFTER a rendered sheet. Never generate First/Last from descriptions alone. Only lock_storyboard may extract frames from the latest approved sheet.
@@ -131,6 +131,21 @@ function withTimeout(promise,ms,label){
 }
 
 export function buildAssemblyChatTools({env=process.env,fetchImpl=fetch,parentId='',messages=[],imageRunner=runReplicateImage,openaiClient}={}){
+ const observedPins=new Map();
+ for(const message of messages){
+  for(const part of message.role==='assistant'?message.parts||[]:[]){
+   const out=part.output||part.result;
+   if(out?.ok&&out.themeGrounded===true&&out.pinUrl&&out.themeObservation)observedPins.set(out.pinUrl,{previewUrl:out.previewUrl,themeObservation:out.themeObservation});
+  }
+ }
+ async function observePin(pinUrl){
+  if(observedPins.has(pinUrl))return observedPins.get(pinUrl);
+  const resolved=normalizeReferenceImage(await resolveReferenceImage(pinUrl,{fetchImpl}));
+  const observation=await inspectThemeImage({image:resolved,env,openaiClient});
+  const result={previewUrl:previewFromResolved(resolved),sourceUrl:resolved.sourceUrl||pinUrl,bytes:resolved.buffer?.length||0,contentType:resolved.contentType||'image/jpeg',themeObservation:observation};
+  observedPins.set(pinUrl,result);
+  return result;
+ }
  const tools={
   set_sell_stage:tool({
    description:'Advance the Photographer Sell Path stage. Call whenever the photographer confirms a step.',
@@ -165,20 +180,13 @@ export function buildAssemblyChatTools({env=process.env,fetchImpl=fetch,parentId
   }),
 
   resolve_pin:tool({
-   description:'Resolve a Pinterest pin or direct image URL into a previewable https image.',
+   description:'Resolve and visually read the selected pin. Returns the image preview plus grounded theme observations; use these observations instead of guessing from the URL.',
    inputSchema:z.object({
     pinUrl:z.string().url().describe('Pinterest or direct https image URL')
    }),
    execute:async({pinUrl})=>{
-    const resolved=normalizeReferenceImage(await resolveReferenceImage(pinUrl,{fetchImpl}));
-    return {
-     ok:true,
-     pinUrl,
-     sourceUrl:resolved.sourceUrl||pinUrl,
-     previewUrl:previewFromResolved(resolved),
-     bytes:resolved.buffer?.length||0,
-     contentType:resolved.contentType||'image/jpeg'
-    };
+    const observed=await observePin(pinUrl);
+    return {ok:true,pinUrl,...observed,themeGrounded:true,message:'Describe this pin using themeObservation only. Do not infer a different setting from the URL or prior examples. Ask only about uncertain details that matter.'};
    }
   }),
 
@@ -189,22 +197,20 @@ export function buildAssemblyChatTools({env=process.env,fetchImpl=fetch,parentId
     previewUrl:z.string().url().optional(),
     styleNote:z.string().max(200).optional()
    }),
-   execute:async({pinUrl,previewUrl,styleNote})=>{
+   execute:async({pinUrl})=>{
     assertHttpUrl(pinUrl);
-    let preview=previewUrl||'';
-    if(!preview){
-     try{
-      const resolved=normalizeReferenceImage(await resolveReferenceImage(pinUrl,{fetchImpl}));
-      preview=previewFromResolved(resolved);
-     }catch{/* keep empty */}
-    }
+    const observed=await observePin(pinUrl);
+    const preview=observed.previewUrl;
+    const groundedStyle=observed.themeObservation.description+(observed.themeObservation.uncertainties?' Uncertain: '+observed.themeObservation.uncertainties:'');
     return {
      ok:true,
      locked:true,
      stage:'storyboard',
      pinUrl,
      previewUrl:preview,
-     styleNote:styleNote||'',
+     styleNote:groundedStyle,
+     themeGrounded:true,
+     themeObservation:observed.themeObservation,
      message:'Theme locked. Help develop their idea into five timed frames for one 15-second video. If they already described an idea, paint it now with propose_storyboard. Otherwise ask what should happen; offer to help invent a story, without assuming a door.'
     };
    }
@@ -469,7 +475,7 @@ export function buildAssemblyChatTools({env=process.env,fetchImpl=fetch,parentId
     const revealType=normalizeRevealType(input.revealType);
     const pin=input.pinUrl||input.sheetUrl;
     const runOne=async(which,brief)=>{
-     const prompt='Extract only '+(which==='first'?'panel 1':'the final panel')+' from the supplied APPROVED storyboard as one full-bleed vertical 9:16 image. Preserve the exact camera angle, subject scale, placement, location, lighting, shell/door openness and visible characters. Do not redesign the scene or close an object further. Remove panel labels, borders, text and production notes only. Continuity: '+(input.continuity||'Preserve the approved board')+'. Scene: '+brief;
+     const prompt='Extract only '+(which==='first'?'panel 1':'the final panel')+' from the supplied APPROVED storyboard as one full-bleed vertical 9:16 image. Preserve the exact camera angle, subject scale, placement, location, lighting and visible characters. Panel 1 must be fully closed/sealed with no gap or view inside. Preserve the approved reveal type and pin theme; do not redesign other details. Remove panel labels, borders, text and production notes only. Continuity: '+(input.continuity||'Preserve the approved board')+'. Scene: '+brief;
      const resolved=normalizeReferenceImage(await resolveReferenceImage(input.sheetUrl,{fetchImpl}));
      let imageUrl=preferPublicImageUrl(resolved);
      if(!imageUrl||!/^https?:\/\//i.test(imageUrl)){
@@ -932,7 +938,7 @@ export function buildAssemblyChatTools({env=process.env,fetchImpl=fetch,parentId
    }
   })
  };
- return createStoryboardWorkflow(tools,{messages,env,openaiClient});
+ return createStoryboardWorkflow(tools,{messages,env,fetchImpl,openaiClient});
 }
 
 function xaiClient(env){

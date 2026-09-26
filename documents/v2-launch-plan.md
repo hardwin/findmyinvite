@@ -1,5 +1,8 @@
 # FindMyInvite — Launch 2.0 plan
 
+**Latest correction: visually grounded theme and fully closed start.** Read the actual selected pin; derive setting, lighting/time, palette, medium and motifs from visible evidence plus explicit photographer choices. No setting or motif blacklist: any is valid when supported. A reveal prop does not determine the overall environment. The first still always shows that reveal fully closed/sealed/opaque with no gap or view inside, superseding all older half-open instructions. New theme locks use image observations and Astra receives the actual pin while writing.
+
+
 **Latest correction: strict rear views.** Scenes 3–4 show only the backs of BOTH heads and torsos, looking straight away with natural neck alignment. No side profiles, glances, facial reflections or forehead leans; previous flexible concealment examples are superseded. Use an opaque non-human wipe before the camera reaches their side. No running extras, passersby, foreground people or duplicate brides. Both retain wedding footwear in every setup; groom wears matching closed-toe formal shoes, never bare feet. Vary rear poses and props while keeping the existing FPV motion and final identity reveal.
 
 

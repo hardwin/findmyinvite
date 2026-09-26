@@ -9,7 +9,7 @@ export function storyboardConversation(messages=[]){
    const out=part.output||part.result;
    if(!out)continue;
    if(out.ok===false){if(out.revisionPending)board={...board,locked:false,revisionPending:true};continue;}
-   if(name==='lock_theme_pin'){pinUrl=out.pinUrl||pinUrl;styleNote=out.styleNote||styleNote;board=null;}
+   if(name==='lock_theme_pin'){pinUrl=out.pinUrl||pinUrl;styleNote=out.themeGrounded===true?(out.styleNote||''):'';board=null;}
    if(out.storyboard){
     const previous=board;
     board={...board,...out.storyboard};
@@ -31,7 +31,7 @@ export function storyboardConversation(messages=[]){
  return {board,pinUrl,styleNote,approvedSheet};
 }
 
-export function createStoryboardWorkflow(tools,{messages=[],env=process.env,openaiClient,author=authorStoryboard,compile=compileStoryboard}={}){
+export function createStoryboardWorkflow(tools,{messages=[],env=process.env,fetchImpl=fetch,openaiClient,author=authorStoryboard,compile=compileStoryboard}={}){
  const state=storyboardConversation(messages);
  const denied=message=>({ok:false,error:message,message,stage:'storyboard'});
  let paintedSignature='',paintedResult=null;
@@ -46,13 +46,13 @@ export function createStoryboardWorkflow(tools,{messages=[],env=process.env,open
   if(!pinUrl)return denied('Choose a theme reference before painting the storyboard.');
   let authored;
   state.approvedSheet='';
-  try{authored=validateTimedStoryboard(await author({request,creativeContext,previous,draft:input,styleNote:state.styleNote,env,openaiClient}));}
+  try{authored=validateTimedStoryboard(await author({request,creativeContext,previous,draft:input,styleNote:state.styleNote,pinUrl,fetchImpl,env,openaiClient}));}
   catch(error){
    if(previous)state.board={...previous,locked:false,revisionPending:true};
    const timedOut=/timed out|timeout/i.test(String(error.message));
    return {...denied(timedOut?'Storyboard writing timed out before image rendering started. Your theme and idea are preserved. Retry when ready.':'Could not write the five-frame storyboard: '+error.message),failedStage:'writing',timedOut,revisionPending:true,retryable:true,message:'Stop this turn. Storyboard writing failed before painting began. Do not retry automatically or ask for a different idea; let the photographer retry.'};
   }
-  const draft={...input,...authored,pinUrl,styleNote:state.styleNote,sheetBaseUrl:previous?.sheetUrl||input.sheetBaseUrl};
+  const draft={...input,...authored,pinUrl,styleNote:state.styleNote,sheetBaseUrl:previous?.direction===STORYBOARD_DIRECTION?previous.sheetUrl:undefined};
   const signature=JSON.stringify({shots:draft.shots,continuity:draft.continuity,pinUrl:draft.pinUrl,revealType:draft.revealType});
   if(signature===paintedSignature&&paintedResult)return paintedResult;
   state.approvedSheet='';
