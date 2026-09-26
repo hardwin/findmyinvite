@@ -127,9 +127,9 @@ test('an older five-frame static board must be revised before approval',async()=
 });
 
 test('sheet includes both in-scene titles and all finale layers without locking every camera',()=>{
- const layered=shots.map((shot,i)=>({...shot,titleText:['','','SAVE THE DATE',"We're getting married",''][i]}));
+ const layered=shots.map((shot,i)=>({...shot,titleText:['','Save the Date','',"We're getting married",''][i]}));
  const prompt=buildStoryboardSheetPrompt({shots:layered,airborneLayers:['Near-lens pearl dust drifting left','Distant silk canopy undulating']});
- assert.match(prompt,/In-scene title: SAVE THE DATE/);
+ assert.match(prompt,/In-scene title: Save the Date/);
  assert.match(prompt,/In-scene title: We're getting married/);
  assert.match(prompt,/Distant silk canopy undulating/);
  assert.match(prompt,/360-degree orbit/);

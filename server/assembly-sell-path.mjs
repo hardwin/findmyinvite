@@ -1,3 +1,4 @@
+import {IDENTITY_REVEAL_RULES} from './assembly-storyboard-astra.mjs';
 // Photographer Sell Path — storyboard + theme helpers for Assembly Chat.
 // First = reveal hook · Middle = opening-video journey · Last = couple freeze.
 
@@ -44,8 +45,8 @@ const REVEAL_PREFIXES=Object.freeze({
 });
 
 const REVEAL_OPEN_BEATS=Object.freeze({
- door:'doors open from the handle',
- envelope:'the envelope seal breaks and the flap opens',
+ door:'doors open automatically by concealed mechanisms with no human operator or hands',
+ envelope:'the envelope seal releases and the flap opens automatically without hands',
  clouds:'the clouds part and reveal the world beyond',
  building_frame:'the building frame reveals the path beyond',
  arches:'the arches part and reveal the path beyond',
@@ -187,15 +188,16 @@ export function buildStoryboardSheetPrompt({
   'Then '+5+' stacked numbered rows with timestamps 0–3s, 3–6s, 6–9s, 9–12s, 12–15s (1 at top); five beats of ONE 15-second video. Each row: LEFT column (camera angle, camera movement, scene, emotion), CENTER a cinematic still of that beat, RIGHT transition to next.',
   'Footer director notes. Clean white paper, black hairline rules, readable production typography.',
   'Panel 1 is the FIRST REVEAL ('+type+') — honor that hook. Do not swap it for a door, arch, or building frame unless the brief is that hook.',
-  'Honor exactly the described subject visibility and object openness in EVERY panel. Half closed means half closed, not sealed. People may appear in any panel where requested. Do not invent extra scenes.',
-  'These panels are keyframes of one continuous FPV flight: 1–2 share the reveal geography; 3 and 4 show geographically distant themed locations hundreds of metres apart with different already-held couple poses and their exact in-scene titles; 5 shows a spectacular remote site at least 1 km along the route, captured at the best endpoint after a speed-ramped full 360-degree orbit. No walking, steps, sliding feet, crowds or other people. Show one couple only, planted naturally in each pose; their artistic reappearance across panels is intentional. Maintain identity and theme, NOT identical framing or location across all five panels. Document fast FORWARD transits, abrupt smooth easing into ultra slow-motion portraits and forward reacceleration in the camera notes. Use dramatically different foreground architecture, terrain and depth at each location, not the same terrace seen from different angles. First image must invite forward flight; final image must clearly belong to the remote final location. Honor each camera path. Panel 5 is the most spectacular wide layered hero composition, with clear couple faces.',
+  'Honor exactly the described subject visibility and object openness in EVERY panel. Half closed means half closed, not sealed. Panels 1 and 2 contain absolutely no humans, hands, human shadows or reflections; the reveal opens automatically. Do not invent extra scenes.',
+  'These panels are keyframes of one continuous FPV flight: 1–2 share the reveal geography; 3 and 4 show geographically distant themed locations hundreds of metres apart with different already-held bride/groom poses with both faces concealed; only panel 4 has its exact in-scene title; 5 shows a spectacular remote site at least 1 km along the route, captured at the best endpoint after a speed-ramped full 360-degree orbit. No walking, steps, sliding feet, crowds or other people. Panels 3–5 show exactly one bride and one groom in distinct preserved outfits matching panel 5; they are already there before the camera uncovers them, never popping into view. Maintain identity and theme, NOT identical framing or location across all five panels. Document fast FORWARD transits, abrupt smooth easing into ultra slow-motion portraits and forward reacceleration in the camera notes. Use dramatically different foreground architecture, terrain and depth at each location, not the same terrace seen from different angles. First image must invite forward flight; final image must clearly belong to the remote final location. Honor each camera path. Panel 5 is the most spectacular wide layered hero composition, with clear couple faces.',
+  IDENTITY_REVEAL_RULES,
   airborneLayers.length?('FINAL PANEL airborne depth layers: '+airborneLayers.map((layer,i)=>(i+1)+'. '+layer).join(' | ')):'',
   continuity?('CONTINUITY — applies to every panel: '+continuity):'',
   'Pin-true palette and costume. Vertical or tall page. Photoreal cinematic stills inside the frames.',
   lines.join(' | '),
   brief?('Director notes: '+String(brief).slice(0,400)):'',
   pinStyleNote?('Style from locked theme: '+pinStyleNote):'',
-  'No watermark or brand logos. Besides the storyboard header and panel labels, render only the prescribed in-scene title in panels 3 and 4. First and final panel images have no in-scene text.'
+  'No watermark or brand logos. Besides the storyboard header and panel labels, render only the prescribed in-scene title in panels 2 and 4. Panel 2 reads Save the Date in its human-free setting; panel 3 has no text. First and final panel images have no in-scene text.'
  ].filter(Boolean).join(' ');
 }
 
@@ -211,7 +213,7 @@ export function buildStoryboardStillPrompt({
  if(which==='last'){
   return [
    'Edit this pin into the LAST FRAME of a cinematic wedding invitation opening — vertical 9:16.',
-   'Both people in frame, happy, romantic, dramatic freeze moment — soft eye contact, invitation-poster quality.',
+   'Exactly one adult bride and one adult groom, both recognizable with sharp faces and all identity/wardrobe details preserved. Use the approved theme-specific pose and accessories; no default facing-each-other handholding. Invitation-poster quality.',
    'Cinematic lighting, pin-true wardrobe and palette.',
    note?('Storyboard last brief: '+note):'Happy couple romantic freeze.',
    style?('Style from theme: '+style):'',

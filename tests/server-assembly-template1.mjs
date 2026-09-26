@@ -78,7 +78,7 @@ test('Template 1 default first still demands a frame-filling fortune door',()=>{
  assert.equal(p.opening.startsWith(OPENING_MOTION_PREFIX),true);
  assert.equal(p.opening.endsWith(OPENING_MOTION_SUFFIX),true);
  assert.match(p.opening,/FILL the entire frame/);
- assert.match(p.opening,/SAVE THE DATE/);
+ assert.match(p.opening,/Save the Date/);
  assert.ok(p.opening.includes(OPENING_SAVE_THE_DATE));
  for(const key of Object.keys(WIRE))assert.equal(p[key],WIRE[key],key);
  for(const key of ['plate1','plate2']){

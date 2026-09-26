@@ -588,3 +588,10 @@ Replaced Lenis+Snap document scroll with **Swiper** vertical full-viewport pagin
 - Save opening media, endpoint stills, prompt state and spend to private Blob; stop the review sandbox. Explicit approval claims the job atomically and starts a fresh worker from that checkpoint, reusing the exact video without an opening inference or prompt rewrite.
 - Authenticated video streaming, retry protection for unapproved openings, discard support, and serialized progress callbacks preserve the review state across refreshes. No schema migration; existing running status plus opening-review phase is used.
 - Updated workflow guidance and Generate copy. No tests, builds or generation runs performed, per photographer's request; source review only before deployment.
+
+## 2026-09-26 — Human-free reveal, concealed middle identities, themed typography
+
+- Inspected the supplied opening as half-second frames and read only its creative prompt. Kept the successful forward FPV/speed-ramp direction; did not approve the defective opening or start downstream generation.
+- New direction v3 moves Save the Date to the autonomous human-free reveal at 3–6s, leaves scene 3 text-free, and retains We're getting married at 9–12s. Both titles use large ultra-bold themed floating 3D typography.
+- Added sharp, varied concealment of both faces in scenes 3–4, explicit separate bride/groom reference wardrobe/physical anchors, creative pose/prop direction, and already-present finale staging without pop-in/fades/dissolves. Removed repetitive opening final-pose defaults.
+- Updated author, sheet painter, compiler/compressor, fallback prompts, chat and board migration action together. Essential identity/reveal constraints remain fixed under prompt compression; required titles must survive in the correct timed beat. Updated existing fixtures to the new title map; no tests/builds or generation runs performed per user preference.

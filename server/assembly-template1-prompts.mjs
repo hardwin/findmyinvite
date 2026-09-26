@@ -1,7 +1,7 @@
 // Template 1 prompt pack: BASE templates (any pin) + optional Kaatrukulle defaults + Astra Light pin filler.
 // Recipe source of truth: documents/template1-base-prompts.md (from Example.md / wire-proven Kaatrukulle).
 
-import {OPENING_DIRECTION} from './assembly-storyboard-astra.mjs';
+import {OPENING_DIRECTION,IDENTITY_REVEAL_RULES} from './assembly-storyboard-astra.mjs';
 import {normalizeRevealType,revealOpenBeat} from './assembly-sell-path.mjs';
 
 /** Door-First, last, and hero stills — Replicate OpenAI. */
@@ -23,7 +23,7 @@ export const OPENING_MOTION_PREFIX='8k high quality, Cinematic motion graphics w
 
 export const OPENING_MOTION_SUFFIX='Overall vibe should be Ethereal atmospheric scene with organic ambient motion, floating natural motifs like butterflies, leaves, and petals drifting in layered parallax, soft lighting, depth-rich composition, cinematic fast and ease camera movement, deep multiplane parallax, continuous FPV drone flight, spectacular bespoke theme architecture and premium cinematic lighting.';
 
-export const OPENING_SAVE_THE_DATE='after the reveal is complete at 6s, the FPV camera enters a new themed couple setup with levitating bold white 3D handwritten wedding text "SAVE THE DATE", readable during 6–9s';
+export const OPENING_SAVE_THE_DATE='the HUMAN-FREE reveal opens automatically with no hands or operator; its payoff is large ULTRA-BOLD levitating 3D "Save the Date" at 3–6s, with theme/outfit-derived color, texture and material, cleared before 6s; no text at 6–9s';
 
 export function ensurePromptAffixes(key,text,revealType='door'){
  let out=String(text||'').trim();
@@ -36,7 +36,7 @@ export function ensurePromptAffixes(key,text,revealType='door'){
  }
  if(key==='opening'){
   if(!out.includes('8k high quality, Cinematic motion graphics'))out=OPENING_MOTION_PREFIX+' '+out;
-  if(!out.includes('SAVE THE DATE')){
+  if(!out.includes('Save the Date')){
    const revealOpen=out.search(/doors open(?: from the handle)?|envelope seal breaks|building frame reveals|arches part|windows open|clouds part|parts and reveals/i);
    if(revealOpen>=0){
     const cut=out.indexOf(',',revealOpen);
@@ -47,7 +47,7 @@ export function ensurePromptAffixes(key,text,revealType='door'){
      :OPENING_SAVE_THE_DATE.replace(/when the door opens/i,'when the reveal opens');
     out=out.slice(0,at)+' '+saveBeat+','+out.slice(at);
    }else out=out.replace(OPENING_MOTION_SUFFIX, OPENING_SAVE_THE_DATE+'. '+OPENING_MOTION_SUFFIX);
-   if(!out.includes('SAVE THE DATE'))out=out+' '+OPENING_SAVE_THE_DATE;
+   if(!out.includes('Save the Date'))out=out+' '+OPENING_SAVE_THE_DATE;
   }
   if(!out.includes('Overall vibe should be Ethereal atmospheric scene'))out=out+' '+OPENING_MOTION_SUFFIX;
  }
@@ -62,9 +62,9 @@ export const STYLE_CARD_KEYS=Object.freeze([
 /** BASE prompts — slots only; never bake a fixed palette/style into these. */
 export const BASE_PROMPTS=Object.freeze({
  first:DOOR_STILL_PREFIX+' Edit pin into FIRST FRAME: monumental FULLY CLOSED double doors FILL the entire 9:16 frame edge-to-edge (90%+ of the picture — the door IS the shot, not a tiny cabinet in a room, no empty sky above). Panels meet with no gap. Unique {STYLE_MEDIUM} craftsmanship in {PALETTE} that would cost a fortune to commission: {DOOR_MATERIAL}. Handle is the MAIN FOCUS — unique oversized {DOOR_HANDLE} at center, detailed and lit. Adorn with {DOOR_CHARMS} and {MOTIF_ORNAMENT} from {WORLD_SETTING}. {PAPER_GROUND} ambience only at extreme edges. Extreme close-up, camera almost touching the door. No people/faces/text/watermark.',
- last:'Edit this pin into a romantic closing frame: same two people ({COUPLE_LOOKS}), {STYLE_MEDIUM}. Facing each other, holding both hands, CLEAR eye contact. {PAPER_GROUND}, {PALETTE}. Soft non-IP. Absolutely no text, no letters, no watermark, no labels.',
- lastRegen:'Edit this pin into a romantic closing frame: same two people ({COUPLE_LOOKS}), {STYLE_MEDIUM}. Facing each other, holding both hands, CLEAR eye contact. {PAPER_GROUND}, {PALETTE}. Soft non-IP. ABSOLUTELY NO TEXT of any kind: no words, no letters, no captions, no labels, no titles, no watermark, no signage, blank surfaces only.',
- heroStill:'Edit into hero invitation still: same couple SMALL at BOTTOM (~20% height), looking at each other with CLEAR eye contact, holding hands. {COUPLE_LOOKS}. CENTER and UPPER ~70% EMPTY {PAPER_GROUND} sky for text. Thin ornamental borders 8–12% inset only — no thick curtains or pillars. {MOTIF_ORNAMENT}. Paper texture, pigment drips under couple. Soft romantic {STYLE_MEDIUM}. Soft non-IP. 9:16.',
+ last:'Edit this pin into a romantic closing frame: same two people ({COUPLE_LOOKS}), {STYLE_MEDIUM}. A unique theme-specific held romantic pose with a meaningful accessory or architectural feature and a creative camera angle; no default face-to-face handholding; sharp distinct bride and groom identities. {PAPER_GROUND}, {PALETTE}. Soft non-IP. Absolutely no text, no letters, no watermark, no labels.',
+ lastRegen:'Edit this pin into a romantic closing frame: same two people ({COUPLE_LOOKS}), {STYLE_MEDIUM}. A unique theme-specific held romantic pose with a meaningful accessory or architectural feature and a creative camera angle; no default face-to-face handholding; sharp distinct bride and groom identities. {PAPER_GROUND}, {PALETTE}. Soft non-IP. ABSOLUTELY NO TEXT of any kind: no words, no letters, no captions, no labels, no titles, no watermark, no signage, blank surfaces only.',
+ heroStill:'Edit into hero invitation still: same couple SMALL at BOTTOM (~20% height), preserving the unique approved final pose and theme accessory, with sharp distinct bride/groom identities. {COUPLE_LOOKS}. CENTER and UPPER ~70% EMPTY {PAPER_GROUND} sky for text. Thin ornamental borders 8–12% inset only — no thick curtains or pillars. {MOTIF_ORNAMENT}. Paper texture, pigment drips under couple. Soft romantic {STYLE_MEDIUM}. Soft non-IP. 9:16.',
  plate1:'Luxurious wedding stationery BACKGROUND ONLY, using the attached pin for palette, artistic style, and decorative motifs. Material: close-up straight-on view of premium heavyweight cotton-rag invitation paper — fine tactile grain, delicate fibers, subtle natural irregularities; matte, refined finish (not coarse, dirty, distressed, or visibly noisy). Light: soft diffused light from the upper left revealing paper texture and extremely shallow embossing; delicate localized shadows only around embossing; central surface evenly illuminated — no dramatic gradients, glare, or dark patches. Border: interpret the pin’s decoration as an exceptionally fine elegant border with restrained detail concentrated at the outer edges and corners — {MOTIF_ORNAMENT} in {PALETTE}; preserve the pin’s distinctive colors and artistic character. Avoid thick frames, oversized flowers, or heavy ornament. Any metallic accents resemble subtle antique foil, never bright yellow glitter. Text-safe: reserve the central 75–80% of canvas width as a continuous quiet writing surface from near the top to near the bottom — light, low-contrast, almost uniform {PAPER_GROUND} with only barely perceptible paper texture. No flowers, lines, shadows, speckles, or decorative details behind future text. Do not create a separate white panel or inset box. Carry the pin’s richer colors into the fine border and corner details; use a pale warm variation of its background color for the writing surface. Output: full-bleed high-resolution background only, 9:16, edge-to-edge paper viewed straight on — not a card photographed on a table. Fine material detail without sharpening halos or repetitive texture patterns. {STYLE_MEDIUM}. Unique plate A. Exclude: text, letters, numbers, monograms, logos, watermarks, people, objects, mockup scenery, perspective distortion, heavy shadows, grunge, chunky borders, excessive glitter, and decoration in the writing area. Tactile richness at the edges; effortless readability in the center.',
  plate2:'Luxurious wedding stationery BACKGROUND ONLY, using the attached pin for palette, artistic style, and decorative motifs. Material: close-up straight-on view of premium heavyweight cotton-rag invitation paper — fine tactile grain, delicate fibers, subtle natural irregularities; matte, refined finish (not coarse, dirty, distressed, or visibly noisy). Light: soft diffused light from the upper left revealing paper texture and extremely shallow embossing; delicate localized shadows only around embossing; central surface evenly illuminated — no dramatic gradients, glare, or dark patches. Border: different unique arrangement of an exceptionally fine elegant border with restrained detail at outer edges and corners (vary corners / clusters vs plate A) — {MOTIF_ORNAMENT} in {PALETTE}; preserve the pin’s distinctive colors and artistic character. Avoid thick frames, oversized flowers, or heavy ornament. Any metallic accents resemble subtle antique foil, never bright yellow glitter. Text-safe: reserve the central 75–80% of canvas width as a continuous quiet writing surface from near the top to near the bottom — light, low-contrast, almost uniform {PAPER_GROUND} with only barely perceptible paper texture. No flowers, lines, shadows, speckles, or decorative details behind future text. Do not create a separate white panel or inset box. Carry the pin’s richer colors into the fine border and corner details; use a pale warm variation of its background color for the writing surface. Output: full-bleed high-resolution background only, 9:16, edge-to-edge paper viewed straight on — not a card photographed on a table. Fine material detail without sharpening halos or repetitive texture patterns. {STYLE_MEDIUM}. Unique plate B. Exclude: text, letters, numbers, monograms, logos, watermarks, people, objects, mockup scenery, perspective distortion, heavy shadows, grunge, chunky borders, excessive glitter, and decoration in the writing area. Tactile richness at the edges; effortless readability in the center.',
  heroVideo:'static camera, couple looks at each other, blink, hair/clothes slight wind sway, {AMBIENT_MOTION}, no body/hand acting, no zoom, ambient flicker only',
@@ -82,13 +82,13 @@ export const DEFAULT_PARAMS=Object.freeze({
  firstProps:'oversized unique pin-true handle at center, fortune-cost carved material, hanging charms',
  coupleDesc:'man in white shirt, woman in magenta dress with purple flower in hair',
  coupleShort:'Man white shirt, woman magenta dress + purple flower in hair',
- lastPose:'Facing each other, holding both hands, CLEAR eye contact',
+ lastPose:'A unique theme-specific held romantic pose with a meaningful accessory or architectural feature and a creative camera angle; no default face-to-face handholding; sharp distinct bride and groom identities',
  motifA:'tiny blossoms, paper-edge pigment',
  motifB:'tiny blossom clusters, soft paper-edge pigment drips',
  pinPalette:'romantic garden pin palette',
  openingFirst:'monumental closed doors FILL the entire frame (no people)',
  openingRoute:'glide through watercolor forest (sage trees, magenta wildflowers, cream paper)',
- openingLast:'arrive at couple facing, holding hands, CLEAR eye contact'
+ openingLast:'uncover the already-present bride and groom in their unique approved theme-specific pose; no pop-in or face-to-face handholding default'
 });
 
 export const DEFAULT_STYLE_CARD=Object.freeze({
@@ -150,7 +150,7 @@ export function buildPrompts(overrides={}){
   first:ensurePromptAffixes('first',firstBody,revealType),
   last:'Edit this pin into a romantic closing frame: same two people ('+p.coupleDesc+'), '+p.style+'. '+p.lastPose+'. '+cap(p.paper)+', '+and+' washes. Soft non-IP. Absolutely no text, no letters, no watermark, no labels.',
   lastRegen:'Edit this pin into a romantic closing frame: same two people ('+p.coupleDesc+'), '+p.style+'. '+p.lastPose+'. '+cap(p.paper)+', '+and+' washes. Soft non-IP. ABSOLUTELY NO TEXT of any kind: no words, no letters, no captions, no labels, no titles, no watermark, no signage, blank surfaces only.',
-  heroStill:'Edit into hero invitation still: same couple SMALL at BOTTOM (~20% height), looking at each other with CLEAR eye contact, holding hands. '+p.coupleShort+'. CENTER and UPPER ~70% EMPTY '+p.paperColor+' watercolor sky for text. Thin ornamental watercolor borders 8–12% inset only — no thick curtains or pillars. Paper texture, pigment drips under couple. Soft romantic modern 2D watercolor. Soft non-IP. 9:16.',
+  heroStill:'Edit into hero invitation still: same couple SMALL at BOTTOM (~20% height), preserving the unique approved final pose and theme accessory, with sharp distinct bride/groom identities. '+p.coupleShort+'. CENTER and UPPER ~70% EMPTY '+p.paperColor+' watercolor sky for text. Thin ornamental watercolor borders 8–12% inset only — no thick curtains or pillars. Paper texture, pigment drips under couple. Soft romantic modern 2D watercolor. Soft non-IP. 9:16.',
   plate1:'Luxurious wedding stationery BACKGROUND ONLY, using the attached pin for palette, artistic style, and decorative motifs. Material: close-up straight-on view of premium heavyweight cotton-rag invitation paper — fine tactile grain, delicate fibers, subtle natural irregularities; matte, refined finish (not coarse, dirty, distressed, or visibly noisy). Light: soft diffused light from the upper left revealing paper texture and extremely shallow embossing; delicate localized shadows only around embossing; central surface evenly illuminated — no dramatic gradients, glare, or dark patches. Border: interpret the pin’s decoration as an exceptionally fine elegant border with restrained detail at outer edges and corners — delicate '+dash+' watercolor filigree, '+p.motifA+' matching '+p.pinPalette+'. Avoid thick frames, oversized flowers, or heavy ornament. Metallic accents resemble subtle antique foil, never bright yellow glitter. Text-safe: reserve the central 75–80% of canvas width as a continuous quiet writing surface from near the top to near the bottom — light, low-contrast, almost uniform '+p.paper+' with only barely perceptible paper texture. No flowers, lines, shadows, speckles, or decorative details behind future text. No separate white panel or inset box. Carry richer pin colors into the fine border and corners; pale warm writing surface. Full-bleed 9:16, edge-to-edge paper straight on — not a card on a table. Fine material detail without sharpening halos or repetitive texture patterns. '+cap(p.style)+'. Unique plate A. Exclude: text, letters, numbers, monograms, logos, watermarks, people, objects, mockup scenery, perspective distortion, heavy shadows, grunge, chunky borders, excessive glitter, and decoration in the writing area.',
   plate2:'Luxurious wedding stationery BACKGROUND ONLY, using the attached pin for palette, artistic style, and decorative motifs. Material: close-up straight-on view of premium heavyweight cotton-rag invitation paper — fine tactile grain, delicate fibers, subtle natural irregularities; matte, refined finish (not coarse, dirty, distressed, or visibly noisy). Light: soft diffused light from the upper left revealing paper texture and extremely shallow embossing; delicate localized shadows only around embossing; central surface evenly illuminated — no dramatic gradients, glare, or dark patches. Border: different unique arrangement of an exceptionally fine elegant border at outer edges and corners (vary corners / clusters vs plate A) — delicate '+dash+' watercolor filigree corners, '+p.motifB+' matching same romantic pin palette. Avoid thick frames, oversized flowers, or heavy ornament. Metallic accents resemble subtle antique foil, never bright yellow glitter. Text-safe: reserve the central 75–80% of canvas width as a continuous quiet writing surface from near the top to near the bottom — light, low-contrast, almost uniform '+p.paper+' with only barely perceptible paper texture. No flowers, lines, shadows, speckles, or decorative details behind future text. No separate white panel or inset box. Carry richer pin colors into the fine border and corners; pale warm writing surface. Full-bleed 9:16, edge-to-edge paper straight on — not a card on a table. Fine material detail without sharpening halos or repetitive texture patterns. '+cap(p.style)+'. Unique plate B. Exclude: text, letters, numbers, monograms, logos, watermarks, people, objects, mockup scenery, perspective distortion, heavy shadows, grunge, chunky borders, excessive glitter, and decoration in the writing area.',
   heroVideo:'static camera, couple looks at each other, blink, hair/clothes slight wind sway, petals fall, no body/hand acting, no zoom, watercolor paper ambient flicker only',
@@ -194,12 +194,13 @@ export function promptWriterInstructions(){
   '- DOOR_HANDLE    unique handle material/shape that is the visual hero of FIRST',
   '- DOOR_CHARMS    hanging charms / tokens / ornaments that belong to the pin world',
   'Hard rules that must remain in every filled prompt:',
+  IDENTITY_REVEAL_RULES,
   '- Soft non-IP (no franchise/brand names)',
   '- 9:16 where the BASE says so',
   '- FIRST door PREFIX is locked verbatim (10ft-tall opaque solid-gold double door, marble arch, lawn, lanterns). Do not drop or rewrite it.',
   '- FIRST door FILLS the entire visible frame (90%+). Handle is the main focus. No tiny cabinet.',
   '- OPENING PREFIX and SUFFIX are locked verbatim (8k / 2.5D parallax / ethereal overall vibe). Keep them exactly; fill only the middle BASE.',
-  '- OPENING follows the five timed FPV beats: reveal 0–6s, SAVE THE DATE 6–9s, We are getting married title as prescribed 9–12s, full 360-degree orbit 12–15s with fifteen airborne layers. No static final hold. Stills stay text-free.',
+  '- OPENING follows the five timed FPV beats: autonomous human-free reveal 0–6s, Save the Date payoff 3–6s, face-concealed bride/groom and no text 6–9s, We are getting married title as prescribed 9–12s, full 360-degree orbit 12–15s with fifteen airborne layers. No static final hold. Stills stay text-free.',
   '- No people on FIRST / plates',
   '- No text / letters / watermark / labels on stills and plates. Opening video has exactly the two titles prescribed by the director structure, each at its assigned time.',
   '- Plates: luxurious cotton-rag stationery backgrounds — fine embossed border at edges/corners only; central 75–80% quiet text-safe writing surface; no thick curtains, pillars, chunky frames, or decoration behind text',
@@ -320,6 +321,6 @@ export function styleCardToParams(styleCard={}){
   pinPalette:card.WORLD_SETTING,
   openingFirst:'monumental closed doors FILL the entire frame (no people)',
   openingRoute:'glide through '+card.WORLD_SETTING+' ('+card.PALETTE+', '+card.PAPER_GROUND+')',
-  openingLast:'arrive at couple facing, holding hands, CLEAR eye contact'
+  openingLast:'uncover the already-present bride and groom in their unique approved theme-specific pose; no pop-in or face-to-face handholding default'
  };
 }

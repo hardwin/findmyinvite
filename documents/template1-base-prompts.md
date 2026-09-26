@@ -1,5 +1,10 @@
 # Template 1 — Base prompts → pin-styled prompts
 
+## Current correction — human-free reveal and concealed identities
+
+Preserve the approved forward FPV motion, >=1 km journey, speed ramps, five beats and 360-degree finale. Frames 1–2 (0–6s) are completely human-free and the reveal opens automatically. Its payoff is **Save the Date** at 3–6s. Frame 3 (6–9s) has no text and conceals both bride/groom faces through a sharp theme-specific composition. Frame 4 (9–12s) uses a different concealment technique with **We're getting married**. Both titles are large ultra-bold levitating 3D with theme/outfit-derived materials, colors and textures. Explicitly preserve each person's distinct final-reference wardrobe, body, hair and identity. Design varied poses and meaningful props; no default facing/handholding. The finale pair is already present on approach and uncovered by the camera, never spawned or dissolved in. Only the closing hero composition reveals the reference faces sharply. This supersedes older title timing, clear-middle-face and reappearance instructions below. Existing boards need revision and reapproval; opening-video approval remains separate.
+
+
 ## Opening video approval gate — 2026-09-26
 
 Generate renders the opening video first and pauses for explicit approval in the job card. No plates, hero video, crafting or site assembly runs until **Approve opening → build invitation**. A private durable checkpoint keeps the exact opening, endpoint stills, prompts and spend; the first sandbox stops while the photographer reviews. Approval atomically starts a new sandbox using the saved opening without regenerating it. Discard lets the photographer revise the storyboard and start again. The existing preview/publish/reel workflow follows after approval.
