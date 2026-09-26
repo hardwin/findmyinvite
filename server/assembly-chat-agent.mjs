@@ -831,7 +831,7 @@ export function buildAssemblyChatTools({env=process.env,fetchImpl=fetch,parentId
       jobId:started.jobId,
       spend:started.spend||null,
       stage:'generate',
-      message:'Cloud Template 1 started. Estimated time ~15 minutes. Poll get_job_status for live percent/label.'
+      message:'Generation job queued; cloud worker startup is not confirmed yet. Call get_job_status now and report its actual status. If failed, show the error and recovery action; never say generation is running or ask them to wait 15 minutes after a failure.'
      };
     }
     if(!fsWritesAllowed(env))throw new HttpError(503,'Template 1 needs local writes or Cloud Assembly (ASSEMBLY_CLOUD=1).');

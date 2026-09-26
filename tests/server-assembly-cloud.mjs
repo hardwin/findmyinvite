@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {
+ sandboxLaunchError,
  applyWorkerPatch,
  attachLineage,
  cloudAssemblyEnabled,
@@ -238,4 +239,9 @@ test('API progress is unauthenticated but secret-gated; status reports cloud off
  assert.equal(status.body.cloud,false);
  assert.equal(status.body.local,true);
  assert.equal(status.body.writable,true);
+});
+
+test('sandbox startup errors retain the provider reason and redact secrets',()=>{
+ const message=sandboxLaunchError({message:'Status code 400 is not ok',response:{status:400},json:{error:{code:'bad_request',message:'runtime cannot be used with snapshot token-123'}}},{VERCEL_TOKEN:'token-123'});
+ assert.match(message,/HTTP 400/);assert.match(message,/runtime cannot be used with snapshot/);assert.doesNotMatch(message,/token-123/);
 });

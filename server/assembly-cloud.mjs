@@ -161,6 +161,18 @@ async function reportLaunchFailure(jobId,secret,message,{env,fetchImpl}){
  }
 }
 
+export function sandboxLaunchError(error,env=process.env){
+ const detail=error?.json?.error;
+ const message=typeof detail==='string'?detail:(detail?.message||error?.json?.message||error?.message||'Could not start Vercel Sandbox.');
+ const code=detail?.code||error?.json?.code;
+ const status=error?.response?.status;
+ let safe='Cloud worker startup failed'+(status?' (HTTP '+status+')':'')+': '+(code?code+' — ':'')+message;
+ for(const [key,value] of Object.entries(env)){
+  if(/TOKEN|SECRET|KEY|PASSWORD/i.test(key)&&typeof value==='string'&&value.length>=6)safe=safe.split(value).join('[redacted]');
+ }
+ return safe.slice(0,900);
+}
+
 export async function defaultLaunchSandbox({jobId,secret,input,env=process.env,fetchImpl=fetch}){
  const {Sandbox}=await import('@vercel/sandbox');
  const snapshotId=env.ASSEMBLY_FFMPEG_SNAPSHOT_ID;
@@ -246,7 +258,7 @@ export async function startCloudTemplate1Job(rawInput,{env=process.env,fetchImpl
     await patchAssemblyJob(id,{sandboxId,status:'running'},{env,fetchImpl});
    }
   }catch(error){
-   const message=error instanceof Error?error.message:'Could not start Vercel Sandbox.';
+   const message=sandboxLaunchError(error,env);
    console.error('cloud assembly launch failed',id,message);
    await reportLaunchFailure(id,secret,message,{env,fetchImpl});
   }
@@ -335,7 +347,7 @@ export async function retryCloudTemplate1Job(jobId,{env=process.env,fetchImpl=fe
     await patchAssemblyJob(id,{sandboxId,status:'running'},{env,fetchImpl});
    }
   }catch(error){
-   const message=error instanceof Error?error.message:'Could not restart Vercel Sandbox.';
+   const message=sandboxLaunchError(error,env);
    console.error('cloud assembly retry launch failed',id,message);
    await reportLaunchFailure(id,secret,message,{env,fetchImpl});
   }
