@@ -1,4 +1,4 @@
-import {HttpError} from './core.mjs';
+import {HttpError,templates as deployedTemplates} from './core.mjs';
 import {validateTemplate1Input} from './assembly-template1.mjs';
 import {
  assemblyBranchName,
@@ -538,6 +538,7 @@ export async function addCloneToCatalog(jobId,{env=process.env,fetchImpl=fetch}=
  if(!row)throw new HttpError(404,'Job not found.');
  const cloneId=String(row.clone_id||'').trim();
  if(!cloneId)throw new HttpError(400,'This job has no clone id yet.');
+ if(!deployedTemplates.has(cloneId))throw new HttpError(409,'This design is still a preview. Merge its GitHub branch to main and wait for production deployment, then add it to the catalog.');
  const base=String(env.SUPABASE_URL||'').replace(/\/$/,'');
  const key=env.SUPABASE_SERVICE_ROLE_KEY;
  if(!base||!key)throw new HttpError(503,'Supabase service role is not configured on this host.');
@@ -576,10 +577,10 @@ export async function addCloneToCatalog(jobId,{env=process.env,fetchImpl=fetch}=
  assets.publishRequested=true;
  assets.catalogPublished=true;
  assets.catalogPublishedAt=new Date().toISOString();
- assets.mergeUrl=assets.mergeUrl||publishMergeUrl(cloneId);
+ assets.mergeUrl=row.github_url||assets.mergeUrl||publishMergeUrl(cloneId);
  return patchAssemblyJob(jobId,{
   assets,
-  detail:'Catalogue live — clone '+cloneId+' published=true. Merge PR if assets are not on main yet.'
+  detail:'Catalogue published — '+name+' is available in Templates.'
  },{env,fetchImpl});
 }
 
