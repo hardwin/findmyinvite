@@ -138,7 +138,7 @@ export function shotsToStoryboard(revealType='door',shots=[]){
  const rows=(Array.isArray(shots)?shots:[]).map((shot,i)=>{
   if(typeof shot==='string')return {n:i+1,scene:shot.trim(),camera:'',movement:'',emotion:'',transition:''};
   return {
-   n:i+1,
+   n:i+1,start:shot.start,end:shot.end,
    scene:String(shot.scene||shot.description||'').trim(),
    camera:String(shot.camera||'').trim(),
    movement:String(shot.movement||'').trim(),
@@ -171,7 +171,7 @@ export function buildStoryboardSheetPrompt({
  const rows=shotsToStoryboard(type,shots).shots;
  const lines=rows.map(row=>{
   return [
-   'Panel '+row.n+':',
+   'Panel '+row.n+' ['+row.start+'–'+row.end+'s]:',
    row.camera?('camera: '+row.camera):'',
    row.movement?('movement: '+row.movement):'',
    'scene: '+row.scene,
@@ -182,7 +182,7 @@ export function buildStoryboardSheetPrompt({
  return [
   'Redraw as ONE professional film STORYBOARD SHEET — a single document image, not one photo. On revisions use the supplied previous sheet as the visual anchor; preserve unchanged panels and edit only the requested differences.',
   'Layout like a production board: title bar "STORYBOARD – '+String(title||'Opening').slice(0,80)+'".',
-  'Then '+Math.max(2,rows.length||2)+' stacked numbered rows (1 at top). Each row: LEFT column (camera angle, camera movement, scene, emotion), CENTER a cinematic still of that beat, RIGHT transition to next.',
+  'Then '+5+' stacked numbered rows with timestamps 0–3s, 3–6s, 6–9s, 9–12s, 12–15s (1 at top); five beats of ONE 15-second video. Each row: LEFT column (camera angle, camera movement, scene, emotion), CENTER a cinematic still of that beat, RIGHT transition to next.',
   'Footer director notes. Clean white paper, black hairline rules, readable production typography.',
   'Panel 1 is the FIRST REVEAL ('+type+') — honor that hook. Do not swap it for a door, arch, or building frame unless the brief is that hook.',
   'Honor exactly the described subject visibility and object openness in EVERY panel. Half closed means half closed, not sealed. People may appear in any panel where requested. Do not invent extra scenes.',
@@ -267,6 +267,7 @@ export function storyboardToPromptParams(storyboard={}){
  const openBeat=revealOpenBeat(revealType);
 
  return {
+  ...(storyboard.openingPrompt?{approvedOpeningPrompt:storyboard.openingPrompt}:{}),
   revealType,
   firstScene:firstBrief||defaultFirstScene(revealType),
   firstProps:revealType==='door'

@@ -68,7 +68,7 @@ const SUGGESTIONS=[
 ];
 
 const IMAGE_TOOLS=new Set(['propose_storyboard','lock_storyboard','mix_image','regen_opening_still','flare_edit','craft_storyboard_sheet','craft_storyboard_stills','craft_chapter_solos']);
-const IMAGE_TIMEOUT_MS=120_000;
+const IMAGE_TIMEOUT_MS=240_000;
 const SELL_KEY='fmi.assembly.sell.v1';
 
 function formatElapsed(ms:number){

@@ -8,6 +8,8 @@ const shots=[
  {scene:'Oyster HALF CLOSED on the beach; pearl partially concealed.',camera:'Locked tripod, eye level, 50mm, identical framing'},
  {scene:'Same oyster opens to reveal the couple sitting ON the pearl. Same beach, same angle.',camera:'Locked tripod, eye level, 50mm, identical framing'}
 ];
+shots.push(...Array.from({length:3},()=>({...shots[1]})));
+shots.forEach((s,i)=>{s.start=i*3;s.end=(i+1)*3;});
 const board={...shotsToStoryboard('oyster',shots),continuity:'Same beach, same oyster, same pearl, locked camera; only shell opens.',sheetUrl:'https://example.com/board-v1.jpg',revision:1,locked:false};
 const output=(name,out)=>({role:'assistant',parts:[{type:'tool-'+name,state:'output-available',output:out}]});
 const history=[output('lock_theme_pin',{ok:true,pinUrl:'https://example.com/pin.jpg'}),output('propose_storyboard',{ok:true,storyboard:board})];
@@ -21,10 +23,10 @@ function harness(messages=history,{fail=false}={}){
   if(name==='lock_storyboard')return {ok:true,storyboard:{...input,locked:true,firstImageUrl:'https://example.com/first.jpg',lastImageUrl:'https://example.com/last.jpg'}};
   return {ok:true,...input};
  }}]));
- return {tools:createStoryboardWorkflow(tools,{messages}),calls};
+ return {tools:createStoryboardWorkflow(tools,{messages,author:async()=>({...board,authorModel:'gpt-6-astra'}),compile:async()=> 'Approved timeline'}),calls};
 }
 
-test('two-shot oyster story paints automatically, preserves continuity, and uses previous sheet',async()=>{
+test('five-frame oyster story paints automatically, preserves continuity, and uses previous sheet',async()=>{
  const {tools,calls}=harness();
  const revised=await tools.propose_storyboard.execute({revealType:'oyster',shots});
  assert.equal(revised.ok,true);
@@ -33,7 +35,7 @@ test('two-shot oyster story paints automatically, preserves continuity, and uses
  const paint=calls.find(c=>c.name==='craft_storyboard_sheet').input;
  assert.equal(paint.sheetBaseUrl,board.sheetUrl);
  assert.equal(paint.continuity,board.continuity);
- assert.equal(paint.shots.length,2);
+ assert.equal(paint.shots.length,5);
  assert.match(paint.shots[0].scene,/HALF CLOSED/);
  assert.match(paint.shots[1].scene,/ON the pearl/);
  assert.equal((await tools.craft_storyboard_stills.execute({})).ok,false);
@@ -88,13 +90,13 @@ test('theme can be locked and storyboard painted in same request',async()=>{
  assert.equal(calls.find(c=>c.name==='craft_storyboard_sheet').input.pinUrl,'https://example.com/new-pin.jpg');
 });
 
-test('real tool schemas accept two shots and continuity; prompt does not force hidden first scene',()=>{
+test('real tool schemas accept five shots and continuity; prompt does not force hidden first scene',()=>{
  const tools=buildAssemblyChatTools();
  for(const name of ['propose_storyboard','craft_storyboard_sheet']){
   assert.ok(tools[name].inputSchema.parse({pinUrl:'https://example.com/pin.jpg',revealType:'oyster',shots,continuity:board.continuity}));
  }
  const prompt=buildStoryboardSheetPrompt({revealType:'oyster',shots,continuity:board.continuity});
- assert.match(prompt,/2 stacked numbered rows/);
+ assert.match(prompt,/5 stacked numbered rows/);
  assert.match(prompt,/HALF CLOSED/);
  assert.match(prompt,/ON the pearl/);
  assert.match(prompt,/locked camera/);
@@ -104,4 +106,12 @@ test('real tool schemas accept two shots and continuity; prompt does not force h
  test('legacy text-only locks do not count as visual approval',()=>{
  const state=storyboardConversation([output('lock_storyboard',{ok:true,storyboard:{firstBrief:'door',lastBrief:'couple',locked:true}})]);
  assert.equal(state.board.locked,false);
+ });
+
+ test('approval compiles once and generation receives the authoritative prompt',async()=>{
+ const {tools}=harness([...history,{role:'user',content:'Approve storyboard'}]);
+ const approved=await tools.lock_storyboard.execute({sheetUrl:board.sheetUrl});
+ assert.equal(approved.storyboard.openingPrompt,'Approved timeline');
+ const job=await tools.start_template1.execute({storyboard:{openingPrompt:'wrong'}});
+ assert.equal(job.storyboard.openingPrompt,'Approved timeline');
  });

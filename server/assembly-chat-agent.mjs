@@ -59,7 +59,7 @@ WHO YOU ARE
 CREATIVE LAW (non-negotiable)
 - You are a creative collaborator, not a questionnaire. Help turn an idea into a story. Never demand a completed shot list. Ask at most one useful question if essential; otherwise make a first visual draft and invite edits.
 - Use the locked Pinterest/theme reference for palette and identity. Do not re-ask for its URL. The latest storyboard is the visual base for revisions.
-- A story can have TWO shots. Never pad it with hallways, arches, petals or extra camera cuts. Respect their reveal, even if partially open.
+- Every storyboard has exactly FIVE timed frames for ONE 15-second video (0–3, 3–6, 6–9, 9–12, 12–15 seconds). Astra authors the complete board inside propose_storyboard and compiles the approved video prompt inside lock_storyboard. Five beats can share one locked camera; never pad it with hallways, arches, petals or extra camera cuts. Respect their reveal, even if partially open.
 - Every storyboard request or revision calls propose_storyboard with ALL revised shots and persistent continuity. This tool automatically paints the sheet. Do not also call craft_storyboard_sheet. Never announce that a preview is ready unless the tool succeeded.
 - Preserve every unmentioned detail. Describe exactly what changed and what stayed fixed in one sentence after the image is ready.
 - For a steady-camera reveal, repeat the identical location, lens, camera position, angle, framing, lighting, subject scale and placement in each shot. ONLY the named object/action changes. No camera travel, reframing or surprise scenery.
@@ -73,7 +73,7 @@ CREATIVE LAW (non-negotiable)
 PHOTOGRAPHER SELL PATH (adapt to the conversation)
 1) welcome — Hi, what are we creating? No tools on bare hello.
 2) theme — Learn style, use update_theme_search, resolve_pin and lock_theme_pin after selection.
-3) storyboard — Develop their idea together. 2–6 shots, no minimum journey or compulsory door. propose_storyboard saves AND paints. Iterate visually until approval. If painting fails, show the error and retry the same board; never skip to First/Last. lock_storyboard extracts the approved first/final panels.
+3) storyboard — Develop their idea together. five timed frames for one 15-second video, no minimum journey or compulsory door. propose_storyboard saves AND paints. Iterate visually until approval. If painting fails, show the error and retry the same board; never skip to First/Last. lock_storyboard extracts the approved first/final panels.
 4) face_swap — Offer Face Swap on the Last still. If they skip: craft_chapter_solos on Last, then lock.
 5) lock — lock_final_image with hero (= Last) + brideImageUrl + groomImageUrl.
 6) details — Collect one-by-one (groom, bride, display/VIBE name, date, venue, city, RSVP, music optional). Call save_invite_details as fields land. Confirm each.
@@ -127,7 +127,7 @@ function withTimeout(promise,ms,label){
  });
 }
 
-export function buildAssemblyChatTools({env=process.env,fetchImpl=fetch,parentId='',messages=[],imageRunner=runReplicateImage}={}){
+export function buildAssemblyChatTools({env=process.env,fetchImpl=fetch,parentId='',messages=[],imageRunner=runReplicateImage,openaiClient}={}){
  const tools={
   set_sell_stage:tool({
    description:'Advance the Photographer Sell Path stage. Call whenever the photographer confirms a step.',
@@ -202,7 +202,7 @@ export function buildAssemblyChatTools({env=process.env,fetchImpl=fetch,parentId
      pinUrl,
      previewUrl:preview,
      styleNote:styleNote||'',
-     message:'Theme locked. Help develop their idea into 2–6 shots. If they already described an idea, paint it now with propose_storyboard. Otherwise ask what should happen; offer to help invent a story, without assuming a door.'
+     message:'Theme locked. Help develop their idea into five timed frames for one 15-second video. If they already described an idea, paint it now with propose_storyboard. Otherwise ask what should happen; offer to help invent a story, without assuming a door.'
     };
    }
   }),
@@ -219,7 +219,7 @@ export function buildAssemblyChatTools({env=process.env,fetchImpl=fetch,parentId
      movement:z.string().max(80).optional(),
      emotion:z.string().max(80).optional(),
      transition:z.string().max(80).optional()
-    })).min(2).max(6).optional(),
+    })).length(5).optional(),
     firstBrief:z.string().min(4).max(1200).optional(),
     middleBeats:z.array(z.string().min(4).max(1200)).min(0).max(6).optional(),
     lastBrief:z.string().min(4).max(1200).optional(),
@@ -267,7 +267,7 @@ export function buildAssemblyChatTools({env=process.env,fetchImpl=fetch,parentId
      movement:z.string().max(80).optional(),
      emotion:z.string().max(80).optional(),
      transition:z.string().max(80).optional()
-    })).min(2).max(6),
+    })).length(5),
     styleNote:z.string().max(300).optional(),
     sheetBaseUrl:z.string().url().optional().describe('Prior sheet to iterate')
    }),
@@ -929,7 +929,7 @@ export function buildAssemblyChatTools({env=process.env,fetchImpl=fetch,parentId
    }
   })
  };
- return createStoryboardWorkflow(tools,{messages});
+ return createStoryboardWorkflow(tools,{messages,env,openaiClient});
 }
 
 function xaiClient(env){

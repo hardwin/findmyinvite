@@ -545,3 +545,11 @@ Replaced Lenis+Snap document scroll with **Swiper** vertical full-viewport pagin
 - Particles were ~4–9px (invisible) and full `invite-plate-*` punches wiped every plate slide.
 - Size ~14–34px, denser seed, punch only media + `.invite-chapter-inner` (margins keep drifting), soft-light blend, slide-class observer.
 - Motifs still invisible on cream: soft-light + pastel wiped them. Switched to normal blend, darker rose/gold, larger particles (~22–50px), edge-biased spawn, canvas mounted after pager (z-index 30).
+
+## 2026-09-26 — Five-frame Astra storyboard / 15-second opening
+
+- Supersedes the variable two-to-six-shot flow: every new/revised storyboard contains exactly five timed frames (0–3, 3–6, 6–9, 9–12, 12–15 seconds). These are action beats of one video, not five mandatory cuts.
+- GPT-6 Astra authors/revises the complete board from the photographer's latest request and previous board. The current sheet remains the image edit reference; fixed-camera continuity is explicit. Provider errors stop the step without switching models.
+- Approval of the visible current sheet invokes Astra to compile its timestamped opening prompt and extracts the first/final panels. Revisions invalidate approval and the compiled prompt. Existing non-five-frame boards must be rebuilt before approval.
+- The approved prompt survives input validation and reaches xAI unchanged, bypassing generic camera-travel prompt affixes. The opening requests 15 seconds and craft adds no extra hold. Other invitation chapters retain their existing path.
+- Preview displays frame timings and the approved prompt. Live Astra author/compiler and actual sheet rendering verified with the oyster/pearl example; browser component verified with a fixture; ffmpeg confirmed exactly 15 seconds. Full opening video generation was not run for QA.

@@ -94,7 +94,7 @@ test('Template 1 default first still demands a frame-filling fortune door',()=>{
  assert.equal(imageModelForRole('hero-still'),STILL_MODEL);
  assert.equal(imageModelForRole('plate1'),PLATE_MODEL);
  assert.equal(imageModelForRole('mix'),PLATE_MODEL);
- assert.equal(OPENING_SECONDS,12);
+ assert.equal(OPENING_SECONDS,15);
  assert.match(p.lastRegen,/ABSOLUTELY NO TEXT/);
  assert.deepEqual(p.params,{...DEFAULT_PARAMS,revealType:'door'});
 });
@@ -203,7 +203,7 @@ test('spend ledger charges, refuses over budget, and estimates match the packs',
  assert.equal(estimateCost('opening-first'),0.08);
  assert.equal(estimateCost('plate1'),0.02);
  assert.equal(estimateCost('hero-video'),0.48);
- assert.equal(estimateCost('opening-video'),1.68);
+ assert.equal(estimateCost('opening-video'),2.1);
  const ledger=createLedger(4);
  ledger.reserve('opening-first',0.08);
  ledger.charge('opening-first',0.08,{predictionId:'p1'});
@@ -289,7 +289,7 @@ test('moderation on Replicate or xAI becomes a ModerationError (stop, no retry)'
  await assert.rejects(()=>runOpeningVideo({firstDataUrl:'data:image/jpeg;base64,AA==',lastDataUrl:'data:image/jpeg;base64,BB==',prompt:'x',env:{XAI_API_KEY:'k'},fetchImpl:xaiFetch,sleepImpl:async()=>{}}),err=>isModerationError(err)&&err.role==='opening-video');
 });
 
-test('runOpeningVideo sends image + last_frame at 12s and reads cost ticks',async()=>{
+test('runOpeningVideo sends image + last_frame at 15s and reads cost ticks',async()=>{
  const mp4=Buffer.from('mp4');
  let posted=null;
  const fetchImpl=async(url,opts={})=>{
@@ -304,7 +304,7 @@ test('runOpeningVideo sends image + last_frame at 12s and reads cost ticks',asyn
  const result=await runOpeningVideo({firstDataUrl:'data:image/jpeg;base64,FIRST',lastDataUrl:'data:image/jpeg;base64,LAST',prompt:WIRE.opening,env:{XAI_API_KEY:'k'},fetchImpl,sleepImpl:async()=>{}});
  assert.deepEqual(posted.image,{url:'data:image/jpeg;base64,FIRST'});
  assert.deepEqual(posted.last_frame,{url:'data:image/jpeg;base64,LAST'});
- assert.equal(posted.duration,12);
+ assert.equal(posted.duration,15);
  assert.equal(posted.resolution,'720p');
  assert.equal(posted.model,'grok-imagine-video-1.5');
  assert.equal(result.costUsd,1.7);

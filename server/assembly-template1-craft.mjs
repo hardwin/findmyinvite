@@ -58,6 +58,7 @@ export async function craftOpening({sourceVideo,outDir,holdSeconds=HOLD_SECONDS}
  const out=join(outDir,'opening.mp4');
  try{
   await run('ffmpeg',['-hide_banner','-y','-i',sourceVideo,'-map','0:v:0','-an','-c:v','libx264','-pix_fmt','yuv420p','-r','24',body]);
+  if(holdSeconds<=0){await copyFile(body,out);return {path:out,...await assertMuted(out,'opening.mp4')};}
   await run('ffmpeg',['-hide_banner','-y','-sseof','-0.05','-i',body,'-map','0:v:0','-frames:v','1','-update','1',frame]);
   await run('ffmpeg',['-hide_banner','-y','-loop','1','-i',frame,'-t',String(holdSeconds),'-r','24','-an','-c:v','libx264','-pix_fmt','yuv420p',hold]);
   await writeFile(list,"file '"+body.replace(/'/g,"'\\''")+"'\nfile '"+hold.replace(/'/g,"'\\''")+"'\n");

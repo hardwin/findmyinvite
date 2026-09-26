@@ -20,6 +20,8 @@ export type SellStage=
  |'ready';
 
 export type StoryboardShot={
+ start?:number;
+ end?:number;
  n?:number;
  scene:string;
  camera?:string;
@@ -35,6 +37,7 @@ export type StoryboardState={
  lastBrief:string;
  title?:string;
  continuity?:string;
+ openingPrompt?:string;
  revision?:number;
  revisionPending?:boolean;
  history?:{url:string;revision:number}[];
@@ -189,6 +192,7 @@ export function mergeSellFromTool(
     lastBrief:String(sb.lastBrief||next.storyboard?.lastBrief||''),
     title:sb.title?String(sb.title):next.storyboard?.title,
     continuity:sb.continuity??next.storyboard?.continuity,
+    openingPrompt:sb.openingPrompt,
     revision:sb.revision||next.storyboard?.revision||1,
     revisionPending:false,
     history:sb.sheetUrl&&next.storyboard?.sheetUrl&&sb.sheetUrl!==next.storyboard.sheetUrl
@@ -395,7 +399,7 @@ export function StoryScenesForm({busy,onSubmit}:{busy:boolean;onSubmit:(text:str
  const [idea,setIdea]=useState('');
  return <form className="asm-sell-details" onSubmit={e=>{e.preventDefault();if(idea.trim()&&!busy)onSubmit(idea.trim());}}>
   <p className="asm-gpt-choice-title">Start with a moment</p>
-  <p className="asm-sell-eta">Describe what happens. We’ll turn it into a visual storyboard together — two shots can be enough.</p>
+  <p className="asm-sell-eta">Describe what happens. We’ll turn it into a visual storyboard together — five timed frames will plan one 15-second video.</p>
   <label>Your idea<textarea value={idea} disabled={busy} onChange={e=>setIdea(e.target.value)} placeholder="An oyster is half closed. Same camera, same place: it opens to reveal the couple sitting on the pearl."/></label>
   <button className="asm-gpt-choice-submit" disabled={busy||!idea.trim()}>Visualize my idea</button>
  </form>;
@@ -425,14 +429,16 @@ export function StoryboardPreview({state,busy,onChip,onClose}:{state:SellDeskSta
    </>:<p>Your visual storyboard will appear here. Tell Akay what happens, or ask for ideas.</p>}
    {failedSheet&&(failedSheet===(old?.url||board?.sheetUrl))&&<p role="alert">Preview could not load. <button className="asm-gpt-chip" onClick={()=>{setFailedSheet('');setLoadAttempt(n=>n+1);}}>Reload preview</button></p>}
    {board?.revisionPending&&<p role="alert">The latest edit could not be painted. This is the previous image. Retry your edit before approving.</p>}
+   {board?.sheetUrl&&shots.length!==5&&<button className="asm-gpt-choice-submit" disabled={busy} onClick={()=>onChip("Rebuild this storyboard as exactly five timed frames for one 15-second opening. Preserve my story and camera continuity, then show the revised sheet.")}>Update to five timed frames</button>}
    {board?.continuity&&<div className="asm-story-continuity"><strong>Keep consistent</strong><p>{board.continuity}</p></div>}
-   <ol className="asm-sell-board-frames">{shots.map((row,i)=><li key={i}><strong>Shot {i+1}</strong><span>{row.scene}</span>{'camera' in row&&row.camera?<small>{row.camera}</small>:null}</li>)}</ol>
+   <ol className="asm-sell-board-frames">{shots.map((row,i)=><li key={i}><strong>Frame {i+1}{shots.length===5?` · ${i*3}–${(i+1)*3}s`:""}</strong><span>{row.scene}</span>{'camera' in row&&row.camera?<small>{row.camera}</small>:null}</li>)}</ol>
+   {board?.locked&&board.openingPrompt&&<details><summary>Approved 15-second video prompt</summary><pre style={{whiteSpace:'pre-wrap'}}>{board.openingPrompt}</pre></details>}
    <form className="asm-story-edit" onSubmit={e=>{e.preventDefault();if(!change.trim()||busy)return;onChip('Revise '+(shot==='all'?'the storyboard':'shot '+shot)+' of the CURRENT storyboard: '+change.trim()+'\nPreserve all unmentioned scenes and continuity. Show the updated visual storyboard.');setChange('');setPrevious('');}}>
     <label>Edit<select value={shot} onChange={e=>setShot(e.target.value)}><option value="all">Whole story</option>{shots.map((_,i)=><option key={i} value={String(i+1)}>Shot {i+1}</option>)}</select></label>
-    <label>What should change?<textarea value={change} onChange={e=>setChange(e.target.value)} placeholder="Keep the oyster half closed. Same camera angle in both shots; only the shell opens." disabled={busy}/></label>
+    <label>What should change?<textarea value={change} onChange={e=>setChange(e.target.value)} placeholder="Keep the oyster half closed. Same camera angle across all five frames; only the shell opens." disabled={busy}/></label>
     <button className="asm-gpt-choice-submit" disabled={busy||!change.trim()}>Update storyboard</button>
    </form>
-   {board?.sheetUrl&&!board.locked&&<button className="asm-gpt-choice-submit" disabled={busy||board.revisionPending||Boolean(old)||loadedSheet!==board.sheetUrl||failedSheet===board.sheetUrl} onClick={()=>onChip('Approve storyboard\nsheetUrl: '+board.sheetUrl+'\nExtract the first and final panels from this approved sheet. Preserve composition and camera angle.')}>Approve storyboard → create final frames</button>}
+   {board?.sheetUrl&&!board.locked&&<button className="asm-gpt-choice-submit" disabled={busy||shots.length!==5||board.revisionPending||Boolean(old)||loadedSheet!==board.sheetUrl||failedSheet===board.sheetUrl} onClick={()=>onChip('Approve storyboard\nsheetUrl: '+board.sheetUrl+'\nCompile the approved 15-second timestamped video prompt and extract the first and final panels from this approved sheet. Preserve composition and camera angle.')}>Approve storyboard → prepare video & frames</button>}
    {board?.locked&&<div className="asm-story-final"><strong>Approved first & final images</strong>{board.firstImageUrl&&<img src={board.firstImageUrl} alt="Approved first frame"/>}{board.lastImageUrl&&<img src={board.lastImageUrl} alt="Approved final frame"/>}</div>}
   </div>
  </aside>;

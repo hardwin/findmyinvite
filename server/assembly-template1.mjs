@@ -110,7 +110,10 @@ export function validateTemplate1Input(body={}){
  const promptParams={};
  if(body.promptParams&&typeof body.promptParams==='object'){
   for(const [k,v] of Object.entries(body.promptParams)){
-   if(typeof v==='string'&&v.trim())promptParams[k]=v.trim().slice(0,400);
+   if(typeof v==='string'&&v.trim()){
+    if(k==='approvedOpeningPrompt'&&v.length>16000)throw new HttpError(400,'Approved opening prompt exceeds 16000 characters.');
+    promptParams[k]=k==='approvedOpeningPrompt'?v.trim():v.trim().slice(0,400);
+   }
   }
  }
  // Sell-path storyboard may arrive nested — flatten into promptParams.
@@ -703,7 +706,7 @@ export async function runCraftPhase(job,{heroPath,openingPath,gen}){
  const slug=slugify(job.input.displayName);
  const inbox=join(job.root,'work','assembly-inbox',slug);
  await mkdir(inbox,{recursive:true});
- const opening=await craftOpening({sourceVideo:openingPath,outDir:inbox});
+ const opening=await craftOpening({sourceVideo:openingPath,outDir:inbox,holdSeconds:0});
  const hero=await craftHero({sourceVideo:heroPath,outDir:inbox});
  for(const name of ['opening-first','opening-last','hero-still','plate1','plate2']){
   await copyInto(join(gen,name+'.png'),inbox,name+'.png');

@@ -1,3 +1,4 @@
+import {authorStoryboard,compileStoryboard,validateTimedStoryboard} from './assembly-storyboard-astra.mjs';
 // Request-scoped storyboard state reconstructed from this conversation, never global.
 export function storyboardConversation(messages=[]){
  let board=null,pinUrl='',styleNote='';
@@ -20,7 +21,7 @@ export function storyboardConversation(messages=[]){
    }
   }
  }
- if(board&&!board.sheetUrl)board.locked=false;
+ if(board){try{validateTimedStoryboard(board);if(!board.sheetUrl||!board.openingPrompt)board.locked=false;}catch{board.locked=false;}}
  const last=messages.at(-1);
  const text=last?.role==='user'?(typeof last.content==='string'?last.content:(last.parts||[]).filter(p=>p.type==='text').map(p=>p.text||'').join('\n')):'';
  // Explicit approval must refer to the board already visible BEFORE this turn.
@@ -30,17 +31,22 @@ export function storyboardConversation(messages=[]){
  return {board,pinUrl,styleNote,approvedSheet};
 }
 
-export function createStoryboardWorkflow(tools,{messages=[]}={}){
+export function createStoryboardWorkflow(tools,{messages=[],env=process.env,openaiClient,author=authorStoryboard,compile=compileStoryboard}={}){
  const state=storyboardConversation(messages);
  const denied=message=>({ok:false,error:message,message,stage:'storyboard'});
  let paintedSignature='',paintedResult=null;
  const paint=tools.craft_storyboard_sheet.execute;
- const propose=tools.propose_storyboard.execute;
+ const last=messages.at(-1);
+ const request=last?.role==='user'?(last.content||(last.parts||[]).filter(p=>p.type==='text').map(p=>p.text).join('\n')):'';
  async function paintBoard(input){
   const previous=state.board;
   const pinUrl=state.pinUrl||previous?.pinUrl||input.pinUrl;
   if(!pinUrl)return denied('Choose a theme reference before painting the storyboard.');
-  const draft={...input,pinUrl,continuity:input.continuity??previous?.continuity??'',styleNote:input.styleNote||state.styleNote,sheetBaseUrl:previous?.sheetUrl||input.sheetBaseUrl};
+  let authored;
+  state.approvedSheet='';
+  try{authored=validateTimedStoryboard(await author({request,previous,draft:input,styleNote:state.styleNote,env,openaiClient}));}
+  catch(error){if(previous)state.board={...previous,locked:false,revisionPending:true};return {...denied('Could not write the five-frame storyboard: '+error.message),revisionPending:true};}
+  const draft={...input,...authored,pinUrl,styleNote:state.styleNote,sheetBaseUrl:previous?.sheetUrl||input.sheetBaseUrl};
   const signature=JSON.stringify({shots:draft.shots,continuity:draft.continuity,pinUrl:draft.pinUrl,revealType:draft.revealType});
   if(signature===paintedSignature&&paintedResult)return paintedResult;
   state.approvedSheet='';
@@ -50,15 +56,12 @@ export function createStoryboardWorkflow(tools,{messages=[]}={}){
    state.board={...previous,...draft,sheetUrl:previous?.sheetUrl||'',locked:false,revisionPending:true};
    return {...result,stage:'storyboard',revisionPending:true};
   }
-  state.board={...result.storyboard,revision:(previous?.revision||0)+1,locked:false,revisionPending:false,firstImageUrl:'',lastImageUrl:''};
+  state.board={...result.storyboard,authorModel:authored.authorModel,duration:15,openingPrompt:'',revision:(previous?.revision||0)+1,locked:false,revisionPending:false,firstImageUrl:'',lastImageUrl:''};
   paintedSignature=signature;
   paintedResult={...result,storyboard:state.board,message:'Updated visual storyboard is ready in Preview. Describe another change or approve this exact sheet. Stop here; do not generate frames this turn.'};
   return paintedResult;
  }
- tools.propose_storyboard.execute=async input=>{
-  const saved=await propose(input);
-  return paintBoard({...input,shots:saved.storyboard.shots});
- };
+ tools.propose_storyboard.execute=paintBoard;
  tools.craft_storyboard_sheet.execute=paintBoard;
  const lock=tools.lock_storyboard.execute;
  tools.lock_storyboard.execute=async input=>{
@@ -67,10 +70,12 @@ export function createStoryboardWorkflow(tools,{messages=[]}={}){
    return denied('Show the latest painted storyboard and ask the photographer to use Approve storyboard. No First/Last frames have been generated.');
   }
   try{
+   validateTimedStoryboard(board);
+   const openingPrompt=await compile({board,env,openaiClient});
    const result=await lock({...input,...board,pinUrl:board.pinUrl||state.pinUrl,sheetUrl:board.sheetUrl});
-   if(result.ok)state.board={...board,...result.storyboard,locked:true};
+   if(result.ok)state.board={...board,...result.storyboard,openingPrompt,promptModel:'gpt-6-astra',locked:true};
    return {...result,storyboard:state.board};
-  }catch(error){return denied('Could not extract the approved frames: '+String(error.message||error).slice(0,350)+'. Retry approval; your sheet is preserved.');}
+  }catch(error){return denied('Could not prepare the approved video prompt and frames: '+String(error.message||error).slice(0,350)+'. Retry approval; your sheet is preserved.');}
  };
  const lockTheme=tools.lock_theme_pin.execute;
  tools.lock_theme_pin.execute=async input=>{
@@ -93,6 +98,10 @@ export function createStoryboardWorkflow(tools,{messages=[]}={}){
   const execute=tools[name].execute;
   tools[name].execute=async input=>{
    if((state.pinUrl||state.board)&&!state.board?.locked)return denied('Approve the current visual storyboard and extract its frames before continuing.');
+   if(name==='start_template1'&&state.board){
+    if(!state.board.openingPrompt)return denied('Approve the five-frame storyboard to prepare its timed opening prompt.');
+    return execute({...input,storyboard:state.board,promptParams:{...input.promptParams,approvedOpeningPrompt:state.board.openingPrompt}});
+   }
    return execute(input);
   };
  }
