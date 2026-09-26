@@ -35,6 +35,8 @@ export function createStoryboardWorkflow(tools,{messages=[],env=process.env,open
  const state=storyboardConversation(messages);
  const denied=message=>({ok:false,error:message,message,stage:'storyboard'});
  let paintedSignature='',paintedResult=null;
+ let storyboardAttempt;
+ const creativeContext=messages.filter(m=>m.role==='user').slice(-10).map(m=>(typeof m.content==='string'?m.content:(m.parts||[]).filter(p=>p.type==='text').map(p=>p.text).join('\n')).slice(0,1600));
  const paint=tools.craft_storyboard_sheet.execute;
  const last=messages.at(-1);
  const request=last?.role==='user'?(last.content||(last.parts||[]).filter(p=>p.type==='text').map(p=>p.text).join('\n')):'';
@@ -44,8 +46,12 @@ export function createStoryboardWorkflow(tools,{messages=[],env=process.env,open
   if(!pinUrl)return denied('Choose a theme reference before painting the storyboard.');
   let authored;
   state.approvedSheet='';
-  try{authored=validateTimedStoryboard(await author({request,previous,draft:input,styleNote:state.styleNote,env,openaiClient}));}
-  catch(error){if(previous)state.board={...previous,locked:false,revisionPending:true};return {...denied('Could not write the five-frame storyboard: '+error.message),revisionPending:true};}
+  try{authored=validateTimedStoryboard(await author({request,creativeContext,previous,draft:input,styleNote:state.styleNote,env,openaiClient}));}
+  catch(error){
+   if(previous)state.board={...previous,locked:false,revisionPending:true};
+   const timedOut=/timed out|timeout/i.test(String(error.message));
+   return {...denied(timedOut?'Storyboard writing timed out before image rendering started. Your theme and idea are preserved. Retry when ready.':'Could not write the five-frame storyboard: '+error.message),failedStage:'writing',timedOut,revisionPending:true,retryable:true,message:'Stop this turn. Storyboard writing failed before painting began. Do not retry automatically or ask for a different idea; let the photographer retry.'};
+  }
   const draft={...input,...authored,pinUrl,styleNote:state.styleNote,sheetBaseUrl:previous?.sheetUrl||input.sheetBaseUrl};
   const signature=JSON.stringify({shots:draft.shots,continuity:draft.continuity,pinUrl:draft.pinUrl,revealType:draft.revealType});
   if(signature===paintedSignature&&paintedResult)return paintedResult;
@@ -54,15 +60,15 @@ export function createStoryboardWorkflow(tools,{messages=[],env=process.env,open
   if(!result.ok){
    // Keep the last visible board; it cannot be approved after an unrendered revision.
    state.board={...previous,...draft,sheetUrl:previous?.sheetUrl||'',locked:false,revisionPending:true};
-   return {...result,stage:'storyboard',revisionPending:true};
+   return {...result,stage:'storyboard',failedStage:'painting',revisionPending:true,message:'Stop this turn. The sheet could not be painted. Do not retry automatically; let the photographer retry.'};
   }
   state.board={...result.storyboard,authorModel:authored.authorModel,direction:authored.direction,airborneLayers:authored.airborneLayers,duration:15,openingPrompt:'',revision:(previous?.revision||0)+1,locked:false,revisionPending:false,firstImageUrl:'',lastImageUrl:''};
   paintedSignature=signature;
   paintedResult={...result,storyboard:state.board,message:'Updated visual storyboard is ready in Preview. Describe another change or approve this exact sheet. Stop here; do not generate frames this turn.'};
   return paintedResult;
  }
- tools.propose_storyboard.execute=paintBoard;
- tools.craft_storyboard_sheet.execute=paintBoard;
+ tools.propose_storyboard.execute=input=>(storyboardAttempt||=paintBoard(input));
+ tools.craft_storyboard_sheet.execute=input=>(storyboardAttempt||=paintBoard(input));
  const lock=tools.lock_storyboard.execute;
  tools.lock_storyboard.execute=async input=>{
   const board=state.board;

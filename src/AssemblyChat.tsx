@@ -71,6 +71,7 @@ const SUGGESTIONS=[
 
 const IMAGE_TOOLS=new Set(['propose_storyboard','lock_storyboard','mix_image','regen_opening_still','flare_edit','craft_storyboard_sheet','craft_storyboard_stills','craft_chapter_solos']);
 const IMAGE_TIMEOUT_MS=240_000;
+const STORYBOARD_TIMEOUT_MS=420_000;
 const SELL_KEY='fmi.assembly.sell.v1';
 
 function formatElapsed(ms:number){
@@ -94,6 +95,7 @@ function toolPartPending(part:Record<string,unknown>){
 function findPendingImageTool(messages:UIMessage[]){
  for(let mi=messages.length-1;mi>=0;mi--){
   const message=messages[mi];
+  if(message.role==='user')break;
   if(message.role!=='assistant')continue;
   const parts=message.parts||[];
   for(let pi=parts.length-1;pi>=0;pi--){
@@ -828,15 +830,17 @@ function ChoicePrompt({
 
 function toolStatusLabel(name:string,state:string,{pending,isImage,busy,elapsedMs}:{pending:boolean;isImage:boolean;busy:boolean;elapsedMs:number}){
  const elapsed=busy&&elapsedMs?(' '+formatElapsed(elapsedMs)):'';
+ if(state==='output-error'||state==='error')return 'Could not complete this step';
+ if(pending&&!busy)return 'Step interrupted — retry when ready';
  if(name==='mix_image'||name==='flare_edit'||name==='craft_storyboard_sheet'||name==='craft_storyboard_stills'||name==='craft_chapter_solos'){
   if(state==='input-available'||state==='input-streaming'||state==='partial-call'||state==='call'){
-   if(name==='craft_storyboard_sheet')return 'Painting storyboard sheet…';
+   if(name==='craft_storyboard_sheet')return 'Writing and painting storyboard…';
    if(name==='craft_storyboard_stills')return 'Crafting First + Last from the sheet…';
    if(name==='craft_chapter_solos')return 'Crafting Bride + Groom portraits…';
    return name==='flare_edit'?'Flare edit — preparing':'Editing Image - Using Reference Image';
   }
   if(pending){
-   if(name==='craft_storyboard_sheet')return 'Painting storyboard sheet'+elapsed;
+   if(name==='craft_storyboard_sheet')return 'Writing and painting storyboard'+elapsed;
    if(name==='craft_storyboard_stills')return 'Crafting First + Last from the sheet'+elapsed;
    if(name==='craft_chapter_solos')return 'Crafting Bride + Groom portraits'+elapsed;
    return (name==='flare_edit'?'Flare edit — generating':'Editing Image - Generating')+elapsed;
@@ -855,7 +859,7 @@ function toolStatusLabel(name:string,state:string,{pending,isImage,busy,elapsedM
   return 'Theme desk updated';
  }
  if(name==='propose_storyboard'||name==='lock_storyboard'){
-  if(pending)return (name==='lock_storyboard'?'Creating approved frames…':'Painting storyboard…')+elapsed;
+  if(pending)return (name==='lock_storyboard'?'Preparing video prompt and approved frames…':'Writing and painting storyboard…')+elapsed;
   return name==='lock_storyboard'?'Approved frames ready':'Storyboard updated';
  }
  if(pending){
@@ -942,6 +946,7 @@ function MessageView({
    }
    if(output?.ok===false){
     nodes.push(<p className="asm-alert" role="alert" key={message.id+'-failure-'+i}>{String(output.error||output.message||'Could not update the image. Try again.')}</p>);
+    if(name==='propose_storyboard'||name==='craft_storyboard_sheet')nodes.push(<button type="button" className="asm-gpt-chip" key={message.id+'-retry-board-'+i} disabled={busy} onClick={()=>onChip('Retry my current storyboard using my latest reveal idea and all theme/style choices from this conversation. Write the five frames with Astra and show the visual sheet. Do not ask me to repeat the idea.')}>Retry storyboard</button>);
    }
    if(output?.sheetUrl&&output.ok!==false){
     nodes.push(<p className="asm-sell-eta" key={message.id+'-version-'+i}>Visual storyboard updated. Review the current version in Preview.</p>);
@@ -1087,6 +1092,8 @@ export default function AssemblyChat({
  const busy=status==='submitted'||status==='streaming';
  const hasThread=messages.some(m=>m.role==='user'||Boolean(messageText(m)));
  const pendingImage=useMemo(()=>findPendingImageTool(messages),[messages]);
+ const pendingStoryboard=Boolean(pendingImage&&['propose_storyboard','craft_storyboard_sheet','lock_storyboard'].includes(pendingImage.name));
+ const imageTimeoutMs=pendingStoryboard?STORYBOARD_TIMEOUT_MS:IMAGE_TIMEOUT_MS;
  const [elapsedMs,setElapsedMs]=useState(0);
  const [imageTimeout,setImageTimeout]=useState(false);
  const inferStartedAt=useRef<number|null>(null);
@@ -1108,11 +1115,11 @@ export default function AssemblyChat({
 
  useEffect(()=>{
   if(!busy||!pendingImage||imageTimedOutRef.current)return;
-  if(elapsedMs<IMAGE_TIMEOUT_MS)return;
+  if(elapsedMs<imageTimeoutMs)return;
   imageTimedOutRef.current=true;
   setImageTimeout(true);
   try{stop();}catch{/* */}
- },[busy,pendingImage,elapsedMs,stop]);
+ },[busy,pendingImage,elapsedMs,imageTimeoutMs,stop]);
 
  function isNearBottom(scroller:HTMLElement,slack=120){
   return scroller.scrollHeight-scroller.scrollTop-scroller.clientHeight<=slack;
@@ -1644,8 +1651,8 @@ export default function AssemblyChat({
           onChip={sendChip}
          />
         )}
-        {sell.stage==='storyboard'&&!sell.storyboard?.sheetUrl&&!sell.storyboard?.firstBrief&&(
-         <StoryScenesForm busy={busy} onSubmit={sendChip}/>
+        {!busy&&sell.stage==='storyboard'&&!sell.storyboard?.sheetUrl&&!sell.storyboard?.firstBrief&&(
+         <StoryScenesForm key={chatId} busy={busy} onSubmit={sendChip}/>
         )}
         {sell.stage==='details'&&!sell.details.complete&&(
          <DetailsFields busy={busy} onSubmit={sendChip}/>
@@ -1692,11 +1699,11 @@ export default function AssemblyChat({
          />
         ):busy?(
          <p className="asm-gpt-status" aria-live="polite">
-          {pendingImage?'Generating image…':'Thinking…'}
+          {pendingStoryboard?'Writing and painting your storyboard…':pendingImage?'Generating image…':'Thinking…'}
           {' '}
           <span className="asm-gpt-elapsed">{formatElapsed(elapsedMs)}</span>
-          {pendingImage&&elapsedMs>=90_000&&elapsedMs<IMAGE_TIMEOUT_MS?(
-           <span className="asm-gpt-elapsed-warn"> · almost at the 2 min limit</span>
+          {pendingImage&&elapsedMs>=90_000&&elapsedMs<imageTimeoutMs?(
+           <span className="asm-gpt-elapsed-warn">{pendingStoryboard?' · writing comes before image rendering':' · still working'}</span>
           ):null}
          </p>
         ):null}

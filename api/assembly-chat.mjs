@@ -122,7 +122,7 @@ export default async function handler(req,res){
    system,
    messages:modelMessages,
    tools,
-   stopWhen:stepCountIs(12),
+   stopWhen:[stepCountIs(12),({steps})=>steps.at(-1)?.toolResults?.some(result=>['propose_storyboard','craft_storyboard_sheet'].includes(result.toolName))===true],
    maxRetries:1,
    onError({error}){
     console.error('assembly-chat streamText',provider,error);

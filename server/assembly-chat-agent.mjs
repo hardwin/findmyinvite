@@ -62,6 +62,7 @@ CREATIVE LAW (non-negotiable)
 - Use the locked Pinterest/theme reference for palette and identity. Do not re-ask for its URL. The latest storyboard is the visual base for revisions.
 - Every storyboard has exactly FIVE timed frames for ONE 15-second video (0–3, 3–6, 6–9, 9–12, 12–15 seconds). Astra authors the complete board inside propose_storyboard and compiles the approved video prompt inside lock_storyboard. Use one continuous FPV drone flight: frames 1–2 HUMAN-FREE autonomous reveal (0–6s), with Save the Date payoff at 3–6s; frame 3 sharp face-concealed bride/groom tableau, no text (6–9s); frame 4 a different face-concealed pose/setup with levitating "We're getting married" (9–12s); frame 5 full 360-degree camera orbit in the grandest remote themed setup at least 1 km along the flight with at least 15 airborne depth layers, ending on the best romantic hero image (12–15s). Respect their reveal, even if partially open.
 - Every storyboard request or revision calls propose_storyboard with ALL revised shots and persistent continuity. This tool automatically paints the sheet. Do not also call craft_storyboard_sheet. Never announce that a preview is ready unless the tool succeeded.
+- Once the user gives a theme/style or reveal idea, call propose_storyboard now; do not repeatedly ask whether they are ready to see it. Astra develops the five scenes, so a complete photographer shot list is not required. On tool failure stop; never automatically retry, never call a writing failure a painting failure, and never ask them to change their creative idea to solve a technical error.
 - Preserve every unmentioned detail. Describe exactly what changed and what stayed fixed in one sentence after the image is ready.
 - This is a staged photoshoot: strictly no walking, steps, backward gait, traveling bodies or normal activities. No people except the couple. Continuity means the same identities, wardrobe and theme across geographically distant locations over at least 1 km. The same bride and groom are already present at each destination and uncovered by opaque occlusion; no pop-in, fade or dissolve; never force them to walk between adjacent setups. Respect a steady reveal request in the first two frames without freezing frames 3–5. FPV transits move superfast FORWARD into/through the world, then decelerate hard into ultra slow motion for each posed moment and readable title, then accelerate forward again. Never back away from portraits or fly backwards. Finale is a speed-ramped 360-degree camera orbit, ending on the strongest hero angle. Use concrete low skims, fly-throughs, foreground reveals and fast approaches, not uniformly gentle glides.
 - ${IDENTITY_REVEAL_RULES}
@@ -210,7 +211,7 @@ export function buildAssemblyChatTools({env=process.env,fetchImpl=fetch,parentId
   }),
 
   propose_storyboard:tool({
-   description:'Create or revise the visual storyboard in ONE call: saves the complete revised shots and paints the sheet automatically. Supply all shots, carry forward unchanged scenes and continuity. No separate craft call needed.',
+   description:'Create or revise a visual storyboard in ONE call. Astra writes five timed frames then paints the sheet. Pass the photographer idea in firstBrief/continuity; shots are optional, do not write five elaborate scenes yourself. Carry forward style/identity. Call immediately once an idea is given. Never automatically retry a failed call.',
    inputSchema:z.object({
     revealType:revealTypeField,
     title:z.string().min(2).max(80).optional(),
@@ -257,7 +258,7 @@ export function buildAssemblyChatTools({env=process.env,fetchImpl=fetch,parentId
   }),
 
   craft_storyboard_sheet:tool({
-   description:'Paint ONE film storyboard sheet (numbered panels) from the photographer\'s shots. Call after propose_storyboard. Iterate until they Lock — then lock_storyboard pulls First/Last.',
+   description:'Compatibility alias for propose_storyboard: writes and paints the complete board. Do NOT call after propose_storyboard; that already paints it. Never retry within the same turn.',
    inputSchema:z.object({
     pinUrl:z.string().url().describe('Locked theme pin or previous sheet URL'),
     revealType:revealTypeField,

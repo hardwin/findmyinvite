@@ -595,3 +595,11 @@ Replaced Lenis+Snap document scroll with **Swiper** vertical full-viewport pagin
 - New direction v3 moves Save the Date to the autonomous human-free reveal at 3–6s, leaves scene 3 text-free, and retains We're getting married at 9–12s. Both titles use large ultra-bold themed floating 3D typography.
 - Added sharp, varied concealment of both faces in scenes 3–4, explicit separate bride/groom reference wardrobe/physical anchors, creative pose/prop direction, and already-present finale staging without pop-in/fades/dissolves. Removed repetitive opening final-pose defaults.
 - Updated author, sheet painter, compiler/compressor, fallback prompts, chat and board migration action together. Essential identity/reveal constraints remain fixed under prompt compression; required titles must survive in the correct timed beat. Updated existing fixtures to the new title map; no tests/builds or generation runs performed per user preference.
+
+## 2026-09-26 — Storyboard writing timeout and retry-loop repair
+
+- Reported failures occur in Astra writing before sheet rendering. Increased that explicit 60s SDK deadline to 180s, bounded structured field lengths/output size and requested concise notes. Astra remains the author; no model fallback.
+- Pass recent photographer messages as creative context and trim previous-board data to creative fields, retaining style choices when the latest request only changes the reveal. Sheet instructions honor anime rather than forcing photorealism.
+- One shared storyboard attempt per chat turn, including compatibility aliases; stop the AI tool loop when the storyboard tool finishes. Failures expose writing versus painting and never auto-retry.
+- Aligned route/client time allowances, removed false two-minute-limit copy, stopped old dangling tools from driving current-turn progress, hid the starter form during work, reset its draft across chats, and added explicit Retry storyboard controls.
+- Source reviewed only. No tests/builds or paid generations run, following the photographer's existing preference.

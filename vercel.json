@@ -27,7 +27,7 @@
     },
     "api/assembly-chat.mjs": {
       "includeFiles": "{src/data.ts,cms/music-library.json}",
-      "maxDuration": 300,
+      "maxDuration": 600,
       "memory": 1024
     },
     "api/face-swap.mjs": {

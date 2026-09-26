@@ -193,7 +193,7 @@ export function buildStoryboardSheetPrompt({
   IDENTITY_REVEAL_RULES,
   airborneLayers.length?('FINAL PANEL airborne depth layers: '+airborneLayers.map((layer,i)=>(i+1)+'. '+layer).join(' | ')):'',
   continuity?('CONTINUITY — applies to every panel: '+continuity):'',
-  'Pin-true palette and costume. Vertical or tall page. Photoreal cinematic stills inside the frames.',
+  'Pin-true palette and costume. Vertical or tall page. Cinematic stills in the photographer-selected medium inside the frames: honor anime/illustration when requested, never override it with photorealism.',
   lines.join(' | '),
   brief?('Director notes: '+String(brief).slice(0,400)):'',
   pinStyleNote?('Style from locked theme: '+pinStyleNote):'',
