@@ -143,7 +143,7 @@ test('BASE prompts keep slots; style-card fill + Astra JSON parse work',()=>{
 test('opening wrap injects SAVE THE DATE after the doors open if Astra drops it',()=>{
  const out=ensurePromptAffixes('opening','Vertical 9:16. FIRST: doors FILL the entire frame, hold ~1s → doors open from the handle, glide through garden.');
  assert.ok(out.includes(OPENING_SAVE_THE_DATE));
- assert.match(out,/doors open from the handle, when the door opens show a bullet time/);
+ assert.match(out,/doors open from the handle, after the reveal is complete at 6s/);
  assert.equal(out.startsWith(OPENING_MOTION_PREFIX),true);
  assert.equal(out.endsWith(OPENING_MOTION_SUFFIX),true);
 });

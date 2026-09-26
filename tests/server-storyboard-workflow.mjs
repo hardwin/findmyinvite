@@ -10,7 +10,7 @@ const shots=[
 ];
 shots.push(...Array.from({length:3},()=>({...shots[1]})));
 shots.forEach((s,i)=>{s.start=i*3;s.end=(i+1)*3;});
-const board={...shotsToStoryboard('oyster',shots),continuity:'Same beach, same oyster, same pearl, locked camera; only shell opens.',sheetUrl:'https://example.com/board-v1.jpg',revision:1,locked:false};
+const board={direction:'fpv-five-beat-v1',...shotsToStoryboard('oyster',shots),continuity:'Same beach, same oyster, same pearl, locked camera; only shell opens.',sheetUrl:'https://example.com/board-v1.jpg',revision:1,locked:false};
 const output=(name,out)=>({role:'assistant',parts:[{type:'tool-'+name,state:'output-available',output:out}]});
 const history=[output('lock_theme_pin',{ok:true,pinUrl:'https://example.com/pin.jpg'}),output('propose_storyboard',{ok:true,storyboard:board})];
 function harness(messages=history,{fail=false}={}){
@@ -115,3 +115,22 @@ test('real tool schemas accept five shots and continuity; prompt does not force 
  const job=await tools.start_template1.execute({storyboard:{openingPrompt:'wrong'}});
  assert.equal(job.storyboard.openingPrompt,'Approved timeline');
  });
+
+test('an older five-frame static board must be revised before approval',async()=>{
+ const old={...board,direction:undefined};
+ const {tools,calls}=harness([output('propose_storyboard',{ok:true,storyboard:old}),{role:'user',content:'Approve storyboard'}]);
+ const result=await tools.lock_storyboard.execute({sheetUrl:old.sheetUrl});
+ assert.equal(result.ok,false);
+ assert.match(result.message,/five-scene FPV/);
+ assert.equal(calls.length,0);
+});
+
+test('sheet includes both in-scene titles and all finale layers without locking every camera',()=>{
+ const layered=shots.map((shot,i)=>({...shot,titleText:['','','SAVE THE DATE',"We're getting married",''][i]}));
+ const prompt=buildStoryboardSheetPrompt({shots:layered,airborneLayers:['Near-lens pearl dust drifting left','Distant silk canopy undulating']});
+ assert.match(prompt,/In-scene title: SAVE THE DATE/);
+ assert.match(prompt,/In-scene title: We're getting married/);
+ assert.match(prompt,/Distant silk canopy undulating/);
+ assert.match(prompt,/360-degree orbit/);
+ assert.doesNotMatch(prompt,/use identical location, framing/);
+});

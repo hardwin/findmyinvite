@@ -553,3 +553,10 @@ Replaced Lenis+Snap document scroll with **Swiper** vertical full-viewport pagin
 - Approval of the visible current sheet invokes Astra to compile its timestamped opening prompt and extracts the first/final panels. Revisions invalidate approval and the compiled prompt. Existing non-five-frame boards must be rebuilt before approval.
 - The approved prompt survives input validation and reaches xAI unchanged, bypassing generic camera-travel prompt affixes. The opening requests 15 seconds and craft adds no extra hold. Other invitation chapters retain their existing path.
 - Preview displays frame timings and the approved prompt. Live Astra author/compiler and actual sheet rendering verified with the oyster/pearl example; browser component verified with a fixture; ffmpeg confirmed exactly 15 seconds. Full opening video generation was not run for QA.
+
+## 2026-09-26 — Reveal is only the first six seconds; continuous FPV journey
+
+- Replaced the full-video locked-camera reveal with the requested five-beat direction: reveal 0–6s; parallax into SAVE THE DATE setup 6–9s; different pose/setup with We're getting married 9–12s; full 360-degree orbit in the grandest themed finale 12–15s.
+- Astra returns exactly 15 named airborne layers, describing depth and motion; both title positions and the layer count are validated. Sheet rendering permits those two in-scene titles and depicts distinct connected setups. Preview exposes motion notes and the layer list.
+- Identity/theme continuity no longer forces identical framing across all scenes. Finale remains dynamic and ends on its strongest hero image without a static hold. Updated the legacy default prompt path as well as Astra's storyboard/compiler instructions.
+- Older direction versions require repainting and fresh approval; they remain in conversation history. Live Astra test revised the earlier static oyster board and compiled a 9,685-character prompt including all fifteen layers and an explicit full 360-degree orbit. Full video generation was not run for QA.

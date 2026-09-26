@@ -1,4 +1,4 @@
-import {authorStoryboard,compileStoryboard,validateTimedStoryboard} from './assembly-storyboard-astra.mjs';
+import {authorStoryboard,compileStoryboard,validateTimedStoryboard,STORYBOARD_DIRECTION} from './assembly-storyboard-astra.mjs';
 // Request-scoped storyboard state reconstructed from this conversation, never global.
 export function storyboardConversation(messages=[]){
  let board=null,pinUrl='',styleNote='';
@@ -21,7 +21,7 @@ export function storyboardConversation(messages=[]){
    }
   }
  }
- if(board){try{validateTimedStoryboard(board);if(!board.sheetUrl||!board.openingPrompt)board.locked=false;}catch{board.locked=false;}}
+ if(board){try{validateTimedStoryboard(board);if(!board.sheetUrl||!board.openingPrompt||board.direction!==STORYBOARD_DIRECTION)board.locked=false;}catch{board.locked=false;}}
  const last=messages.at(-1);
  const text=last?.role==='user'?(typeof last.content==='string'?last.content:(last.parts||[]).filter(p=>p.type==='text').map(p=>p.text||'').join('\n')):'';
  // Explicit approval must refer to the board already visible BEFORE this turn.
@@ -56,7 +56,7 @@ export function createStoryboardWorkflow(tools,{messages=[],env=process.env,open
    state.board={...previous,...draft,sheetUrl:previous?.sheetUrl||'',locked:false,revisionPending:true};
    return {...result,stage:'storyboard',revisionPending:true};
   }
-  state.board={...result.storyboard,authorModel:authored.authorModel,duration:15,openingPrompt:'',revision:(previous?.revision||0)+1,locked:false,revisionPending:false,firstImageUrl:'',lastImageUrl:''};
+  state.board={...result.storyboard,authorModel:authored.authorModel,direction:authored.direction,airborneLayers:authored.airborneLayers,duration:15,openingPrompt:'',revision:(previous?.revision||0)+1,locked:false,revisionPending:false,firstImageUrl:'',lastImageUrl:''};
   paintedSignature=signature;
   paintedResult={...result,storyboard:state.board,message:'Updated visual storyboard is ready in Preview. Describe another change or approve this exact sheet. Stop here; do not generate frames this turn.'};
   return paintedResult;
@@ -70,6 +70,7 @@ export function createStoryboardWorkflow(tools,{messages=[],env=process.env,open
    return denied('Show the latest painted storyboard and ask the photographer to use Approve storyboard. No First/Last frames have been generated.');
   }
   try{
+   if(board.direction!==STORYBOARD_DIRECTION)return denied('Update this board to the five-scene FPV story before approving; the previous direction is preserved for reference.');
    validateTimedStoryboard(board);
    const openingPrompt=await compile({board,env,openaiClient});
    const result=await lock({...input,...board,pinUrl:board.pinUrl||state.pinUrl,sheetUrl:board.sheetUrl});

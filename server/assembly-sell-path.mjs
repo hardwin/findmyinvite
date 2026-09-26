@@ -138,7 +138,7 @@ export function shotsToStoryboard(revealType='door',shots=[]){
  const rows=(Array.isArray(shots)?shots:[]).map((shot,i)=>{
   if(typeof shot==='string')return {n:i+1,scene:shot.trim(),camera:'',movement:'',emotion:'',transition:''};
   return {
-   n:i+1,start:shot.start,end:shot.end,
+   n:i+1,start:shot.start,end:shot.end,titleText:shot.titleText||'',
    scene:String(shot.scene||shot.description||'').trim(),
    camera:String(shot.camera||'').trim(),
    movement:String(shot.movement||'').trim(),
@@ -165,7 +165,8 @@ export function buildStoryboardSheetPrompt({
  shots=[],
  pinStyleNote='',
  brief='',
- continuity=''
+ continuity='',
+ airborneLayers=[]
 }={}){
  const type=normalizeRevealType(revealType);
  const rows=shotsToStoryboard(type,shots).shots;
@@ -175,6 +176,7 @@ export function buildStoryboardSheetPrompt({
    row.camera?('camera: '+row.camera):'',
    row.movement?('movement: '+row.movement):'',
    'scene: '+row.scene,
+   'In-scene title: '+(row.titleText||'none'),
    row.emotion?('emotion: '+row.emotion):'',
    row.transition?('transition: '+row.transition):''
   ].filter(Boolean).join(' ');
@@ -186,13 +188,14 @@ export function buildStoryboardSheetPrompt({
   'Footer director notes. Clean white paper, black hairline rules, readable production typography.',
   'Panel 1 is the FIRST REVEAL ('+type+') — honor that hook. Do not swap it for a door, arch, or building frame unless the brief is that hook.',
   'Honor exactly the described subject visibility and object openness in EVERY panel. Half closed means half closed, not sealed. People may appear in any panel where requested. Do not invent extra scenes.',
-  'For continuous reveals, use identical location, framing, lens, camera angle, lighting and subject placement across panels. Change only the described action. Camera movement is permitted only when explicitly requested.',
+  'These panels are keyframes of one continuous FPV flight: 1–2 share the reveal geography; 3 and 4 show distinct connected themed setups with different couple poses and their exact in-scene titles; 5 shows the best endpoint after a full 360-degree orbit. Maintain identity and theme, NOT identical framing or location across all five panels. Honor each camera path. Panel 5 is the most spectacular wide layered hero composition, with clear couple faces.',
+  airborneLayers.length?('FINAL PANEL airborne depth layers: '+airborneLayers.map((layer,i)=>(i+1)+'. '+layer).join(' | ')):'',
   continuity?('CONTINUITY — applies to every panel: '+continuity):'',
   'Pin-true palette and costume. Vertical or tall page. Photoreal cinematic stills inside the frames.',
   lines.join(' | '),
   brief?('Director notes: '+String(brief).slice(0,400)):'',
   pinStyleNote?('Style from locked theme: '+pinStyleNote):'',
-  'No watermark, no brand logos, no extra titles besides the storyboard header and panel labels.'
+  'No watermark or brand logos. Besides the storyboard header and panel labels, render only the prescribed in-scene title in panels 3 and 4. First and final panel images have no in-scene text.'
  ].filter(Boolean).join(' ');
 }
 

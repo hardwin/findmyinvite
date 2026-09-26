@@ -1,5 +1,20 @@
 # Template 1 — Base prompts → pin-styled prompts
 
+## Current opening direction — 2026-09-26
+
+This supersedes the earlier whole-video reveal, locked-camera and final three-second hold recipes.
+GPT-6 Astra writes exactly five timed frames, then compiles the approved board into one timestamped prompt for one 15-second xAI generation. The approved first and last panels supply its endpoint images.
+
+| Time | Required scene |
+| --- | --- |
+| 0–3s | FPV approach to the chosen reveal hook; preserve its specified starting state. |
+| 3–6s | Complete that same door, envelope, oyster or other reveal; enter its world continuously. |
+| 6–9s | Advanced depth/parallax transition into a different themed couple setup, with levitating **SAVE THE DATE**. |
+| 9–12s | Another connected themed setup and romantic pose, with levitating **We're getting married**. |
+| 12–15s | Full 360-degree FPV orbit in the grandest theme-specific environment, with at least 15 explicitly choreographed airborne depth layers; end on the strongest romantic hero composition. |
+
+One continuous flight, spatially motivated transitions, recognizable couple and wardrobe, clear faces and readable titles. Production ambition is bespoke, monumental fantasy scenery with exquisite materials and rich lighting, not generic decorations. First/final stills are text-free; moving elements remain alive through the final orbit. No appended freeze. Preview includes movement notes and the 15-layer plan. Old boards require an explicit visual revision and fresh approval.
+
 How Kaatrukulle (Vazhithunaiye / royal-heritage-12) image + video prompts were built.
 A coding agent should: (1) read the pin, (2) fill `{…}` slots from the pin, (3) emit the filled prompts. Never invent MAIN/NEGATIVE — one `prompt` string only.
 
@@ -137,7 +152,7 @@ image: pinimg · pred: qyafc8setsrmt0d0s7svzayb2r
 
 ---
 
-## 7. Opening video (xAI, 12s, image=FIRST JPEG + last_frame=LAST JPEG)
+## 7. Historical opening video recipe (superseded by current direction above)
 
 ### BASE
 ```
