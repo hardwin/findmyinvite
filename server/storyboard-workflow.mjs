@@ -70,7 +70,7 @@ export function createStoryboardWorkflow(tools,{messages=[],env=process.env,open
    return denied('Show the latest painted storyboard and ask the photographer to use Approve storyboard. No First/Last frames have been generated.');
   }
   try{
-   if(board.direction!==STORYBOARD_DIRECTION)return denied('Update this board to the five-scene FPV story before approving; the previous direction is preserved for reference.');
+   if(board.direction!==STORYBOARD_DIRECTION)return denied('Rebuild this board as the new FPV photoshoot before approving; the previous direction is preserved for reference.');
    validateTimedStoryboard(board);
    const openingPrompt=await compile({board,env,openaiClient});
    const result=await lock({...input,...board,pinUrl:board.pinUrl||state.pinUrl,sheetUrl:board.sheetUrl});

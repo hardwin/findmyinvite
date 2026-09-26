@@ -1,4 +1,5 @@
 import test from 'node:test';
+import {STORYBOARD_DIRECTION} from '../server/assembly-storyboard-astra.mjs';
 import assert from 'node:assert/strict';
 import {createStoryboardWorkflow,storyboardConversation} from '../server/storyboard-workflow.mjs';
 import {buildStoryboardSheetPrompt,shotsToStoryboard} from '../server/assembly-sell-path.mjs';
@@ -10,7 +11,7 @@ const shots=[
 ];
 shots.push(...Array.from({length:3},()=>({...shots[1]})));
 shots.forEach((s,i)=>{s.start=i*3;s.end=(i+1)*3;});
-const board={direction:'fpv-five-beat-v1',...shotsToStoryboard('oyster',shots),continuity:'Same beach, same oyster, same pearl, locked camera; only shell opens.',sheetUrl:'https://example.com/board-v1.jpg',revision:1,locked:false};
+const board={direction:STORYBOARD_DIRECTION,...shotsToStoryboard('oyster',shots),continuity:'Same beach, same oyster, same pearl, locked camera; only shell opens.',sheetUrl:'https://example.com/board-v1.jpg',revision:1,locked:false};
 const output=(name,out)=>({role:'assistant',parts:[{type:'tool-'+name,state:'output-available',output:out}]});
 const history=[output('lock_theme_pin',{ok:true,pinUrl:'https://example.com/pin.jpg'}),output('propose_storyboard',{ok:true,storyboard:board})];
 function harness(messages=history,{fail=false}={}){
@@ -121,7 +122,7 @@ test('an older five-frame static board must be revised before approval',async()=
  const {tools,calls}=harness([output('propose_storyboard',{ok:true,storyboard:old}),{role:'user',content:'Approve storyboard'}]);
  const result=await tools.lock_storyboard.execute({sheetUrl:old.sheetUrl});
  assert.equal(result.ok,false);
- assert.match(result.message,/five-scene FPV/);
+ assert.match(result.message,/FPV photoshoot/);
  assert.equal(calls.length,0);
 });
 

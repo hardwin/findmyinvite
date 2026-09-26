@@ -573,3 +573,11 @@ Replaced Lenis+Snap document scroll with **Swiper** vertical full-viewport pagin
 - Recovered job startup, then xAI returned `Prompt length exceeds the maximum allowed length of 4096`.
 - Astra now writes concise timed prompts and compresses oversized approved prompts to a 3,800-character target. The generation boundary rejects anything exceeding 4,096 characters and checks required timeline/title/orbit content before sending. No string truncation; original approved wording is retained alongside the effective prompt when compression occurs.
 - Applies to saved jobs on Retry as well as newly approved boards. Further test runs and job retries stopped at the user's request; user will test production.
+
+## 2026-09-26 — FPV photoshoot, not walking-tour continuity
+
+- Reviewed the supplied 15-second output as a half-second frame sequence and extracted only the prompt from the supplied request metadata. The sent prompt explicitly constrained travel to the same terrace, said never cross the valley, and directed visible walking/steps. Those instructions caused the wrong creative structure.
+- Replaced that direction with a >=1 km apparent continuous forward FPV journey: widely separated portrait locations, superfast transit -> dramatic ease into ultra slowmo -> forward reacceleration. Couple is planted in composed poses, may artistically reappear after occlusion/empty landscape, and never walks, steps, slides or travels between setups. No other people or simultaneous duplicate couples. Retained five timed frames, two title beats, 360-degree finale and fifteen airborne layers.
+- Added the user's forward low-skim, fly-through, foreground-reveal, orbit and fast-approach camera patterns. Starting/final stills must depict distinct spatial setups; final orbit speed ramps into the best hero composition rather than enforcing constant angular velocity.
+- Updated author, compiler, sheet renderer, chat guidance and prompt compression. The compact essential photoshoot constraints survive compression unchanged within the existing 4,096-character provider limit. Versioned the direction; older boards must be rebuilt and reapproved rather than silently changing an approved story.
+- No tests or generation runs performed, per user request. Only supplied media inspected and source reviewed; deployment requested by user.

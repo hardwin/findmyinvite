@@ -206,7 +206,7 @@ export function mergeSellFromTool(
     sheetUrl:sb.sheetUrl?String(sb.sheetUrl):next.storyboard?.sheetUrl,
     firstImageUrl:sb.firstImageUrl?String(sb.firstImageUrl):undefined,
     lastImageUrl:sb.lastImageUrl?String(sb.lastImageUrl):undefined,
-    locked:(name==='lock_storyboard'||Boolean(output.locked))&&sb.direction==='fpv-five-beat-v1'
+    locked:(name==='lock_storyboard'||Boolean(output.locked))&&sb.direction==='fpv-photoshoot-v2'
    };
   }
   if(typeof output.sheetUrl==='string'){
@@ -433,17 +433,17 @@ export function StoryboardPreview({state,busy,onChip,onClose}:{state:SellDeskSta
    </>:<p>Your visual storyboard will appear here. Tell Akay what happens, or ask for ideas.</p>}
    {failedSheet&&(failedSheet===(old?.url||board?.sheetUrl))&&<p role="alert">Preview could not load. <button className="asm-gpt-chip" onClick={()=>{setFailedSheet('');setLoadAttempt(n=>n+1);}}>Reload preview</button></p>}
    {board?.revisionPending&&<p role="alert">The latest edit could not be painted. This is the previous image. Retry your edit before approving.</p>}
-   {board?.sheetUrl&&(shots.length!==5||board.direction!=='fpv-five-beat-v1')&&<button className="asm-gpt-choice-submit" disabled={busy} onClick={()=>onChip("Rebuild this storyboard with the new five-scene FPV direction: reveal 0–6s, SAVE THE DATE in a new setup 6–9s, We're getting married in another setup 9–12s, then a 360-degree orbit with fifteen airborne depth layers in the grandest themed finale 12–15s. Preserve my theme and couple identity. Show the revised sheet.")}>Update to five-scene FPV story</button>}
+   {board?.sheetUrl&&(shots.length!==5||board.direction!=='fpv-photoshoot-v2')&&<button className="asm-gpt-choice-submit" disabled={busy} onClick={()=>onChip("Rebuild this as a five-scene FPV photoshoot spanning at least 1 km. Strictly no walking, steps, sliding feet, backwards flight or other people. The same couple reappears already posed at widely separated sites after fast forward flight/occlusion. Repeat superfast forward travel, hard ease into ultra slow-motion portrait, then forward reacceleration. Structure: reveal 0–6s, SAVE THE DATE in a new setup 6–9s, We're getting married in another setup 9–12s, then a 360-degree orbit with fifteen airborne depth layers in the grandest themed finale 12–15s. Preserve my theme and couple identity. Show the revised sheet.")}>Rebuild as FPV photoshoot</button>}
    {board?.continuity&&<div className="asm-story-continuity"><strong>Keep consistent</strong><p>{board.continuity}</p></div>}
    <ol className="asm-sell-board-frames">{shots.map((row,i)=><li key={i}><strong>Frame {i+1}{shots.length===5?` · ${i*3}–${(i+1)*3}s`:""}</strong><span>{row.scene}</span>{'camera' in row&&row.camera?<small>{row.camera}</small>:null}{row.movement&&<small>Motion: {row.movement}</small>}</li>)}</ol>
    {Boolean(board?.airborneLayers?.length)&&<details><summary>Finale · {board?.airborneLayers?.length} airborne layers</summary><ol>{board?.airborneLayers?.map((layer,i)=><li key={i}>{layer}</li>)}</ol></details>}
    {board?.locked&&board.openingPrompt&&<details><summary>Approved 15-second video prompt</summary><pre style={{whiteSpace:'pre-wrap'}}>{board.openingPrompt}</pre></details>}
    <form className="asm-story-edit" onSubmit={e=>{e.preventDefault();if(!change.trim()||busy)return;onChip('Revise '+(shot==='all'?'the storyboard':'shot '+shot)+' of the CURRENT storyboard: '+change.trim()+'\nPreserve all unmentioned scenes and continuity. Show the updated visual storyboard.');setChange('');setPrevious('');}}>
     <label>Edit<select value={shot} onChange={e=>setShot(e.target.value)}><option value="all">Whole story</option>{shots.map((_,i)=><option key={i} value={String(i+1)}>Shot {i+1}</option>)}</select></label>
-    <label>What should change?<textarea value={change} onChange={e=>setChange(e.target.value)} placeholder="Keep the oyster half closed in frame 1. Make the finale orbit through floating pearls and silk, with clear faces." disabled={busy}/></label>
+    <label>What should change?<textarea value={change} onChange={e=>setChange(e.target.value)} placeholder="Fly forward across the valley to a new portrait location. Keep the couple posed; slow time around drifting petals." disabled={busy}/></label>
     <button className="asm-gpt-choice-submit" disabled={busy||!change.trim()}>Update storyboard</button>
    </form>
-   {board?.sheetUrl&&!board.locked&&<button className="asm-gpt-choice-submit" disabled={busy||shots.length!==5||board.direction!=='fpv-five-beat-v1'||board.revisionPending||Boolean(old)||loadedSheet!==board.sheetUrl||failedSheet===board.sheetUrl} onClick={()=>onChip('Approve storyboard\nsheetUrl: '+board.sheetUrl+'\nCompile the approved 15-second timestamped video prompt and extract the first and final panels from this approved sheet. Preserve composition and camera angle.')}>Approve storyboard → prepare video & frames</button>}
+   {board?.sheetUrl&&!board.locked&&<button className="asm-gpt-choice-submit" disabled={busy||shots.length!==5||board.direction!=='fpv-photoshoot-v2'||board.revisionPending||Boolean(old)||loadedSheet!==board.sheetUrl||failedSheet===board.sheetUrl} onClick={()=>onChip('Approve storyboard\nsheetUrl: '+board.sheetUrl+'\nCompile the approved 15-second timestamped video prompt and extract the first and final panels from this approved sheet. Preserve composition and camera angle.')}>Approve storyboard → prepare video & frames</button>}
    {board?.locked&&<div className="asm-story-final"><strong>Approved first & final images</strong>{board.firstImageUrl&&<img src={board.firstImageUrl} alt="Approved first frame"/>}{board.lastImageUrl&&<img src={board.lastImageUrl} alt="Approved final frame"/>}</div>}
   </div>
  </aside>;

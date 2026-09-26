@@ -2,6 +2,8 @@
 
 ## Current opening direction — 2026-09-26
 
+**Latest correction — FPV photoshoot:** All five frames are moments in a grand photoshoot world spanning at least 1 km. The camera moves superfast FORWARD to distant portrait locations, eases hard into ultra slow motion, then accelerates forward again. No reverse flight, pull-backs, walking, steps, foot sliding, normal activities, crowds or extra people. The same couple intentionally reappears already posed after occlusion or empty-landscape travel; physical walking continuity is not required. Do not constrain all setups to one terrace, adjoining alcoves or a small radius. Use forward low skims, fly-throughs, foreground reveals and fast approaches. Final full 360-degree orbit speed-ramps into the strongest hero frame in the grandest remote setting, with fifteen airborne layers. This correction supersedes any older adjacent-site or literal-continuity wording below.
+
 This supersedes the earlier whole-video reveal, locked-camera and final three-second hold recipes.
 GPT-6 Astra writes exactly five timed frames, then compiles the approved board into one timestamped prompt for one 15-second xAI generation. The approved first and last panels supply its endpoint images.
 
