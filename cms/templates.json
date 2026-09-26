@@ -358,5 +358,14 @@
     "badge": "New",
     "sort_order": 46,
     "published": true
+  },
+  {
+    "id": "royal-prestige-15",
+    "name": "Tiruvannamalai - A wedding Journey",
+    "description": "Prestigious cinematic opening with refined elegance and grandeur",
+    "collection": "royal",
+    "badge": "New",
+    "sort_order": 47,
+    "published": true
   }
 ]
