@@ -1,5 +1,8 @@
 # FindMyInvite — Launch 2.0 plan
 
+**Latest correction: wide overhead middle scenes and simple poses.** Scenes 3–4 now use a 90-degree straight-down drone view with the pair no more than 15% of frame width; crowns only, no visible faces. Both stand side by side facing the same direction, heads aligned naturally, arms relaxed separately, shoes on. No complex limbs, opposed orientations or seated-to-standing changes. Distinguish the middle frames through distant locations, geometric layout, scale and pair placement; scene-4 lettering faces upward toward the overhead camera. The final reference also uses a simple stable side-by-side standing pose; interest comes from the setting, light and camera. This supersedes earlier rear-view-only middle angles and demands for different body poses in every scene.
+
+
 **Latest correction: visually grounded theme and fully closed start.** Read the actual selected pin; derive setting, lighting/time, palette, medium and motifs from visible evidence plus explicit photographer choices. No setting or motif blacklist: any is valid when supported. A reveal prop does not determine the overall environment. The first still always shows that reveal fully closed/sealed/opaque with no gap or view inside, superseding all older half-open instructions. New theme locks use image observations and Astra receives the actual pin while writing.
 
 

@@ -617,3 +617,10 @@ Replaced Lenis+Snap document scroll with **Swiper** vertical full-viewport pagin
 - Astra storyboard writing receives the selected pin image as well as photographer context. Pin-grounded creative direction allows any supported setting/motif and separates the reveal prop from the overall theme. A changed/legacy board restarts painting from the selected pin rather than its incorrect old sheet.
 - Frame 1 must always be fully closed/sealed/opaque with no opening gap or visible interior. Removed conflicting half-open instructions and versioned the board direction. Existing boards require revision and approval.
 - Source review only; no tests/builds or paid generation/vision calls run.
+
+## 2026-09-27 — Wide top-down middle scenes and simpler held poses
+
+- Supplied frames show opposite body orientations and a standing-to-seated pose change. Replaced mid-scene rear portrait direction with 90-degree straight-down wide drone views, pair <=15% frame width and no visible faces.
+- Both people stand side by side facing the same direction with naturally aligned heads/torsos and separate relaxed arms. Removed difficult pose defaults from the final still too; keep one held pose throughout each scene/orbit.
+- Middle-frame variety comes from distinct locations, geometry, scale and composition. Scene-4 lettering faces upward for readability without exposing faces. Existing reveal/title/identity/footwear/approval rules remain.
+- Versioned the board direction and updated author, painter, compiler, compression, fallback prompts and UI revision action. Source review only; no tests/builds or paid generations run.
