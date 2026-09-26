@@ -1,6 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {
+ ASSEMBLY_INPUT_FILE,
+ defaultLaunchSandbox,
  sandboxLaunchError,
  applyWorkerPatch,
  attachLineage,
@@ -21,6 +23,7 @@ import {
  vercelPreviewUrl
 } from '../server/assembly-jobs.mjs';
 import handler from '../api/assembly.mjs';
+import {loadAssemblyWorkerInput} from '../server/assembly-worker-input.mjs';
 import {issueSession} from '../server/akay-gate.mjs';
 
 function cookie(){return 'fmi_akay='+issueSession();}
@@ -244,4 +247,31 @@ test('API progress is unauthenticated but secret-gated; status reports cloud off
 test('sandbox startup errors retain the provider reason and redact secrets',()=>{
  const message=sandboxLaunchError({message:'Status code 400 is not ok',response:{status:400},json:{error:{code:'bad_request',message:'runtime cannot be used with snapshot token-123'}}},{VERCEL_TOKEN:'token-123'});
  assert.match(message,/HTTP 400/);assert.match(message,/runtime cannot be used with snapshot/);assert.doesNotMatch(message,/token-123/);
+});
+
+
+test('large approved prompts travel intact through a sandbox file before worker startup',async()=>{
+ const {rows,fetchImpl}=memoryStore();rows.set('large',{id:'large'});
+ const input={promptParams:{approvedOpeningPrompt:'[0–3s] '+ 'Detailed airborne layer. '.repeat(700)}};
+ let createArgs,runArgs,file;const order=[];
+ const createSandbox=async args=>{createArgs=args;order.push('create');return {
+  sandboxId:'sbx_large',writeFiles:async files=>{file=files[0];order.push('write');},
+  runCommand:async args=>{runArgs=args;order.push('run');return {exitCode:0};}
+ };};
+ const result=await defaultLaunchSandbox({jobId:'large',secret:'callback',input,env:cloudEnv,fetchImpl,createSandbox});
+ assert.equal(result,'sbx_large');assert.deepEqual(order,['create','write','run']);
+ for(const args of [createArgs,runArgs]){
+  assert.equal(args.env.ASSEMBLY_INPUT,undefined);
+  assert.equal(args.env.ASSEMBLY_INPUT_FILE,ASSEMBLY_INPUT_FILE);
+  assert.ok(Buffer.byteLength(JSON.stringify(args.env))<4096);
+ }
+ const loaded=await loadAssemblyWorkerInput(runArgs.env,{readFileImpl:async path=>{assert.equal(path,file.path);return file.content.toString();}});
+ assert.deepEqual(loaded,input);
+});
+
+test('worker input read failures do not silently replace the approved storyboard',async()=>{
+ await assert.rejects(loadAssemblyWorkerInput({}),/missing/);
+ await assert.rejects(loadAssemblyWorkerInput({ASSEMBLY_INPUT_FILE:'/tmp/missing'},{readFileImpl:async()=>{throw new Error('missing file');}}),/missing file/);
+ await assert.rejects(loadAssemblyWorkerInput({ASSEMBLY_INPUT:'broken'}),SyntaxError);
+ assert.deepEqual(await loadAssemblyWorkerInput({ASSEMBLY_INPUT:'{"legacy":true}'}),{legacy:true});
 });

@@ -424,7 +424,7 @@ function JobCard({jobId,onUpdate,onDismiss}:{jobId:string;onUpdate?:(job:JobStat
   }
  }
 
- const percent=Math.max(4,Math.min(100,Number(job?.percent)||4));
+ const percent=Math.max(0,Math.min(100,Number(job?.percent)||0));
  const vibe=String(job?.displayName||'').trim();
  const reviewing=Boolean(job&&needsApproval(job));
  const showOps=Boolean(job&&(canRetryJob(job)||canDiscardJob(job)||onDismiss));

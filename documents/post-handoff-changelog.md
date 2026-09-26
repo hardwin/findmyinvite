@@ -560,3 +560,10 @@ Replaced Lenis+Snap document scroll with **Swiper** vertical full-viewport pagin
 - Astra returns exactly 15 named airborne layers, describing depth and motion; both title positions and the layer count are validated. Sheet rendering permits those two in-scene titles and depicts distinct connected setups. Preview exposes motion notes and the layer list.
 - Identity/theme continuity no longer forces identical framing across all scenes. Finale remains dynamic and ends on its strongest hero image without a static hold. Updated the legacy default prompt path as well as Astra's storyboard/compiler instructions.
 - Older direction versions require repainting and fresh approval; they remain in conversation history. Live Astra test revised the earlier static oyster board and compiled a 9,685-character prompt including all fifteen layers and an explicit full 360-degree orbit. Full video generation was not run for QA.
+
+## 2026-09-26 — Recover generation startup for detailed storyboard prompts
+
+- Job 670c2d26b640 failed before sandbox creation. Instrumented the SDK's structured error field; production reported `env payload too large (13868 bytes). Maximum allowed size is 4096 bytes.` No generation spend was recorded.
+- Replaced serialized ASSEMBLY_INPUT in sandbox/command environments with an ASSEMBLY_INPUT_FILE path. The full saved input is written into the sandbox before starting the worker and read as JSON, preserving the approved timestamped prompt without truncation. Legacy environment input remains readable for compatibility.
+- Startup failures now retain the provider's reason with credential values redacted. Chat reports queued status honestly and is instructed to check live state; job cards no longer invent a minimum 4% progress.
+- Regression covers a >16KB prompt crossing the file boundary unchanged with <4KB environment payload, plus missing/malformed input errors.

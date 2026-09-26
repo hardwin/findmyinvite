@@ -3,6 +3,7 @@
 import {startTemplate1Job,getTemplate1Job,cancelTemplate1Job,proceedTemplate1Job} from '../server/assembly-template1.mjs';
 import {attachLineage} from '../server/assembly-cloud.mjs';
 import {spawn} from 'node:child_process';
+import {loadAssemblyWorkerInput} from '../server/assembly-worker-input.mjs';
 
 const env=process.env;
 const jobId=String(env.ASSEMBLY_JOB_ID||'');
@@ -34,10 +35,10 @@ if(!jobId||!secret||!callback){
 await earlyReport({status:'running',phase:'pin',percent:9,label:'Worker process up',detail:'assembly-cloud-worker.mjs booted'});
 
 let input;
-try{input=JSON.parse(env.ASSEMBLY_INPUT||'{}');}
+try{input=await loadAssemblyWorkerInput(env);}
 catch{
- console.error('ASSEMBLY_INPUT is not JSON.');
- await earlyReport({status:'failed',phase:'failed',percent:0,label:'Failed',detail:'ASSEMBLY_INPUT is not JSON.',error:'ASSEMBLY_INPUT is not JSON.'});
+ console.error('Assembly job input is missing or invalid JSON.');
+ await earlyReport({status:'failed',phase:'failed',percent:0,label:'Failed',detail:'Assembly job input is missing or invalid JSON.',error:'Assembly job input is missing or invalid JSON.'});
  process.exit(1);
 }
 

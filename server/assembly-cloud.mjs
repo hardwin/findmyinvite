@@ -17,6 +17,7 @@ import {
  viewFromRow
 } from './assembly-jobs.mjs';
 
+export const ASSEMBLY_INPUT_FILE='/tmp/assembly-input.json';
 const REPO='hardwin/findmyinvite';
 const REPO_URL='https://github.com/hardwin/findmyinvite.git';
 
@@ -61,7 +62,7 @@ function sandboxEnv(jobId,secret,input,env){
   ASSEMBLY_JOB_ID:jobId,
   ASSEMBLY_CALLBACK_SECRET:secret,
   ASSEMBLY_CALLBACK_URL:callbackUrl(env),
-  ASSEMBLY_INPUT:JSON.stringify(input),
+  ASSEMBLY_INPUT_FILE,
   ASSEMBLY_GITHUB_TOKEN:env.ASSEMBLY_GITHUB_TOKEN,
   ASSEMBLY_GITHUB_REPO:REPO,
   XAI_API_KEY:env.XAI_API_KEY,
@@ -173,10 +174,10 @@ export function sandboxLaunchError(error,env=process.env){
  return safe.slice(0,900);
 }
 
-export async function defaultLaunchSandbox({jobId,secret,input,env=process.env,fetchImpl=fetch}){
- const {Sandbox}=await import('@vercel/sandbox');
+export async function defaultLaunchSandbox({jobId,secret,input,env=process.env,fetchImpl=fetch,createSandbox}){
+ const create=createSandbox||((await import('@vercel/sandbox')).Sandbox.create);
  const snapshotId=env.ASSEMBLY_FFMPEG_SNAPSHOT_ID;
- const sandbox=await Sandbox.create({
+ const sandbox=await create({
   ...sandboxCredentials(env),
   runtime:'node24',
   timeout:2*60*60*1000,
@@ -189,6 +190,9 @@ export async function defaultLaunchSandbox({jobId,secret,input,env=process.env,f
  const sandboxId=sandbox.sandboxId||null;
  await patchAssemblyJob(jobId,{sandboxId,status:'running',detail:'Sandbox '+(sandboxId||'?')+' created · booting worker'},{env,fetchImpl});
  try{
+  // Detailed approved prompts exceed Sandbox's 4KB environment limit. Transfer
+  // job data intact via its filesystem, before the worker can start.
+  await sandbox.writeFiles([{path:ASSEMBLY_INPUT_FILE,content:Buffer.from(JSON.stringify(input))}]);
   const result=await sandbox.runCommand({
    cmd:'bash',
    args:['-lc',workerBootCommand()],
