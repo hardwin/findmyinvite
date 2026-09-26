@@ -567,3 +567,9 @@ Replaced Lenis+Snap document scroll with **Swiper** vertical full-viewport pagin
 - Replaced serialized ASSEMBLY_INPUT in sandbox/command environments with an ASSEMBLY_INPUT_FILE path. The full saved input is written into the sandbox before starting the worker and read as JSON, preserving the approved timestamped prompt without truncation. Legacy environment input remains readable for compatibility.
 - Startup failures now retain the provider's reason with credential values redacted. Chat reports queued status honestly and is instructed to check live state; job cards no longer invent a minimum 4% progress.
 - Regression covers a >16KB prompt crossing the file boundary unchanged with <4KB environment payload, plus missing/malformed input errors.
+
+## 2026-09-26 — Opening prompt provider limit
+
+- Recovered job startup, then xAI returned `Prompt length exceeds the maximum allowed length of 4096`.
+- Astra now writes concise timed prompts and compresses oversized approved prompts to a 3,800-character target. The generation boundary rejects anything exceeding 4,096 characters and checks required timeline/title/orbit content before sending. No string truncation; original approved wording is retained alongside the effective prompt when compression occurs.
+- Applies to saved jobs on Retry as well as newly approved boards. Further test runs and job retries stopped at the user's request; user will test production.

@@ -689,6 +689,7 @@ export async function runRestGenPhase(job,{first,last},{env,fetchImpl,sleepImpl}
    env,
    fetchImpl,
    sleepImpl,
+   onPrompt:effective=>{if(effective!==prompts.opening){prompts.openingApproved=prompts.opening;prompts.opening=effective;}},
    onTick:()=>setDetail('Opening on xAI — still rendering… $'+ledger.used.toFixed(2)+' used')
   });
   ledger.charge('opening-video',opening.costUsd,{requestId:opening.requestId||opening.predictionId,provider:opening.provider||'xai'});

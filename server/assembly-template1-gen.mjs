@@ -1,4 +1,5 @@
 // Template 1 generation workers: Replicate stills + hero video, xAI opening. Spend ledger + moderation stop.
+import {fitOpeningVideoPrompt} from './assembly-storyboard-astra.mjs';
 import {HttpError} from './core.mjs';
 import {runGrokImagineVideo,runXaiImagineVideo,downloadVideoBuffer} from './assembly-ai.mjs';
 import {STILL_MODEL,PLATE_MODEL,HERO_SECONDS,OPENING_SECONDS} from './assembly-template1-prompts.mjs';
@@ -202,13 +203,15 @@ export async function runHeroVideo({imageUrl,prompt,env=process.env,fetchImpl=fe
 }
 
 /** Opening: xAI first+last only. Never fall back to Replicate without Ashok's permission. */
-export async function runOpeningVideo({firstDataUrl,lastDataUrl,prompt,env=process.env,fetchImpl=fetch,sleepImpl,onTick}={}){
+export async function runOpeningVideo({firstDataUrl,lastDataUrl,prompt,env=process.env,fetchImpl=fetch,sleepImpl,onTick,onPrompt,openaiClient}={}){
  if(!firstDataUrl||!lastDataUrl)throw new HttpError(400,'Opening needs FIRST and LAST stills.');
  try{
+  const effectivePrompt=await fitOpeningVideoPrompt({prompt,env,openaiClient});
+  onPrompt?.(effectivePrompt);
   const result=await runXaiImagineVideo({
    image:{url:firstDataUrl},
    lastFrame:{url:lastDataUrl},
-   prompt,
+   prompt:effectivePrompt,
    duration:OPENING_SECONDS,
    env,
    fetchImpl,
