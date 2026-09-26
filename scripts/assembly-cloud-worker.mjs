@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Runs inside a Vercel Sandbox. Reuses Template 1, then pushes assembly/{id} only.
+// Runs inside a Vercel Sandbox. Reuses Template 1, then pushes a job-specific assembly branch.
 import {startTemplate1Job,getTemplate1Job,cancelTemplate1Job,proceedTemplate1Job,template1Checkpoint,resumeTemplate1Checkpoint} from '../server/assembly-template1.mjs';
 import {attachLineage} from '../server/assembly-cloud.mjs';
 import {saveOpeningCheckpoint,readOpeningCheckpoint} from '../server/assembly-opening-checkpoint.mjs';
@@ -84,7 +84,7 @@ async function sync(){
 }
 
 async function pushBranch(cloneId,written){
- const lineage=attachLineage(cloneId,env);
+ const lineage=attachLineage(cloneId,env,jobId);
  const token=env.ASSEMBLY_GITHUB_TOKEN;
  const repo=env.ASSEMBLY_GITHUB_REPO||'hardwin/findmyinvite';
  if(!token)throw new Error('ASSEMBLY_GITHUB_TOKEN missing inside sandbox.');

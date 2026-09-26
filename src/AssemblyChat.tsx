@@ -479,7 +479,7 @@ function JobCard({jobId,onUpdate,onDismiss}:{jobId:string;onUpdate?:(job:JobStat
     <div className="asm-gpt-chips asm-gpt-job-ops">
      {job&&canRetryJob(job)&&(
       <button type="button" className="asm-gpt-chip" disabled={busy} onClick={()=>void retry()}>
-       {busy?'Retrying…':'Retry'}
+       {busy?'Retrying…':job.cloneId?'Resume GitHub push':'Retry'}
       </button>
      )}
      {job&&canDiscardJob(job)&&(

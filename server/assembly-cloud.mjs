@@ -322,6 +322,8 @@ export async function retryCloudTemplate1Job(jobId,{env=process.env,fetchImpl=fe
  if(!cloudJobCanRetry(row)){
   throw new HttpError(409,'Only failed or stuck jobs can be retried. Use Resume push if GitHub push stalled.');
  }
+ // Completed media must never be regenerated just because the Git push failed.
+ if(row.clone_id&&row.status==='failed')return resumeCloudPush(id,{env,fetchImpl});
  const input=validateTemplate1Input(row.input||{});
  if(row.assets?.checkpointUrl)input._openingCheckpoint=row.assets.checkpointUrl;
  const secret=newCallbackSecret();
@@ -374,10 +376,10 @@ export async function resumeCloudPush(jobId,{env=process.env,fetchImpl=fetch}={}
  const cloneId=String(row.clone_id||'').trim();
  const sandboxId=String(row.sandbox_id||'').trim();
  if(!cloneId)throw new HttpError(400,'This job has no assembled clone to push.');
- if(!sandboxId)throw new HttpError(400,'Sandbox id missing — cannot resume push. Re-run Template 1.');
+ if(!sandboxId)throw new HttpError(400,'Sandbox id missing — cannot recover the assembled files. Nothing was regenerated.');
  const token=String(env.ASSEMBLY_GITHUB_TOKEN||'');
  if(!token)throw new HttpError(503,'ASSEMBLY_GITHUB_TOKEN missing.');
- const lineage=attachLineage(cloneId,env);
+ const lineage=attachLineage(cloneId,env,jobId);
  const written=Array.isArray(row.written)?row.written:[];
 
  await patchAssemblyJob(jobId,{
@@ -400,7 +402,7 @@ export async function resumeCloudPush(jobId,{env=process.env,fetchImpl=fetch}={}
  }catch(error){
   const message=error instanceof Error?error.message:'Sandbox no longer available.';
   await patchAssemblyJob(jobId,{status:'failed',phase:'failed',error:message,detail:message},{env,fetchImpl});
-  throw new HttpError(410,'Sandbox expired — re-run Template 1. ('+message.slice(0,120)+')');
+  throw new HttpError(410,'Sandbox unavailable — cannot recover the assembled files. Nothing was regenerated. ('+message.slice(0,120)+')');
  }
  try{
   if(typeof sandbox.extendTimeout==='function'){
@@ -500,9 +502,10 @@ export async function reportCloudProgress(jobId,secret,body,{env=process.env,fet
  if(row.phase==='opening-review'&&body.phase!=='opening-review')return viewFromRow(row);
  const patch=applyWorkerPatch(body);
  if(typeof body.cloneId==='string'&&body.cloneId&&!patch.branch){
-  patch.branch=assemblyBranchName(body.cloneId);
-  patch.githubUrl=githubCompareUrl(body.cloneId,REPO);
-  patch.previewUrl=vercelPreviewUrl(body.cloneId,env)+'/invite/demo?template='+body.cloneId;
+  const lineage=attachLineage(body.cloneId,env,jobId);
+  patch.branch=lineage.branch;
+  patch.githubUrl=lineage.githubUrl;
+  patch.previewUrl=lineage.previewUrl;
   patch.demo=patch.demo||'/invite/demo?template='+body.cloneId;
  }
  if(patch.prompts||patch.assets){
@@ -601,14 +604,14 @@ export async function syncCloudJob(jobId,secret,{env=process.env,fetchImpl=fetch
  return {cancelRequested:Boolean(row.cancel_requested),status:row.status};
 }
 
-export function attachLineage(cloneId,env=process.env){
- const branch=assemblyBranchName(cloneId);
+export function attachLineage(cloneId,env=process.env,jobId=''){
+ const branch=assemblyBranchName(cloneId,jobId);
  return {
   cloneId,
   branch,
-  githubUrl:githubCompareUrl(cloneId,REPO),
-  githubTree:githubTreeUrl(cloneId,REPO),
-  previewUrl:vercelPreviewUrl(cloneId,env)+'/invite/demo?template='+cloneId,
+  githubUrl:githubCompareUrl(cloneId,REPO,jobId),
+  githubTree:githubTreeUrl(cloneId,REPO,jobId),
+  previewUrl:vercelPreviewUrl(cloneId,env,jobId)+'/invite/demo?template='+cloneId,
   demo:'/invite/demo?template='+cloneId
  };
 }

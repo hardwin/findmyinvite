@@ -23,22 +23,26 @@ export function secretsMatch(provided,storedHash){
  }
 }
 
-export function assemblyBranchName(cloneId){
+export function assemblyBranchName(cloneId,jobId=''){
  const id=String(cloneId||'').trim();
  if(!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(id))throw new HttpError(400,'Invalid clone id for branch.');
+ if(jobId){
+  if(!/^[a-f0-9]{12}$/.test(String(jobId)))throw new HttpError(400,'Invalid assembly job id for branch.');
+  return 'assembly/job-'+jobId;
+ }
  return 'assembly/'+id;
 }
 
-export function githubTreeUrl(cloneId,repo='hardwin/findmyinvite'){
- return 'https://github.com/'+repo+'/tree/'+assemblyBranchName(cloneId);
+export function githubTreeUrl(cloneId,repo='hardwin/findmyinvite',jobId=''){
+ return 'https://github.com/'+repo+'/tree/'+assemblyBranchName(cloneId,jobId);
 }
 
-export function githubCompareUrl(cloneId,repo='hardwin/findmyinvite'){
- return 'https://github.com/'+repo+'/compare/main...'+assemblyBranchName(cloneId);
+export function githubCompareUrl(cloneId,repo='hardwin/findmyinvite',jobId=''){
+ return 'https://github.com/'+repo+'/compare/main...'+assemblyBranchName(cloneId,jobId);
 }
 
-export function vercelPreviewUrl(cloneId,env=process.env){
- const branch=assemblyBranchName(cloneId).replace(/\//g,'-');
+export function vercelPreviewUrl(cloneId,env=process.env,jobId=''){
+ const branch=assemblyBranchName(cloneId,jobId).replace(/\//g,'-');
  const template=String(env.ASSEMBLY_PREVIEW_HOST||'');
  if(template.includes('{branch}'))return template.replaceAll('{branch}',branch);
  if(template)return template.replace(/\/$/,'')+'/invite/demo?template='+cloneId;
@@ -77,7 +81,7 @@ export function viewFromRow(row){
   cancelRequested:Boolean(row.cancel_requested),
   publishRequested:Boolean(assets.publishRequested),
   catalogPublished:Boolean(assets.catalogPublished),
-  mergeUrl:typeof assets.mergeUrl==='string'?assets.mergeUrl:(row.clone_id==='royal-prestige-5'?'https://github.com/hardwin/findmyinvite/pull/29':(row.clone_id?('https://github.com/hardwin/findmyinvite/compare/main...publish/'+row.clone_id+'?expand=1'):null)),
+  mergeUrl:typeof assets.mergeUrl==='string'?assets.mergeUrl:(row.clone_id==='royal-prestige-5'?'https://github.com/hardwin/findmyinvite/pull/29':(row.branch?('https://github.com/hardwin/findmyinvite/compare/main...'+row.branch+'?expand=1'):null)),
   createdAt:row.created_at?Date.parse(row.created_at):0,
   updatedAt:row.updated_at?Date.parse(row.updated_at):0,
   sandboxId:row.sandbox_id||null

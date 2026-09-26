@@ -80,7 +80,7 @@ function canDiscard(job:Job){
 function canRetry(job:Job){
  const status=String(job.status||'');
  // Preview/review use Approve / Resume push — not a full re-run.
- if(job.phase==='opening-review'||status==='preview'||status==='review')return false;
+ if(job.phase==='opening-review'||status==='preview'||status==='review'||(status==='failed'&&job.cloneId&&job.sandboxId))return false;
  // Failed always. Running/queued too — cloud sandboxes can hang mid-pin with no error field.
  if(status==='failed'||status==='cancelled'||status==='running'||status==='queued')return true;
  return false;
