@@ -1,4 +1,6 @@
 // Template 1 job runner: pin → parallel gen → craft → assemble → preview. Never publishes.
+import {validateManifest} from './assembly-story-session.mjs';
+import {runSegmentedOpening} from './assembly-segmented-video.mjs';
 import {randomBytes} from 'node:crypto';
 import {access,mkdir,readFile,rm,writeFile,readdir} from 'node:fs/promises';
 import {join} from 'node:path';
@@ -94,11 +96,11 @@ export function validateTemplate1Input(body={}){
  if(!musicId)throw new HttpError(400,'Pick a tap track from the music library.');
  const budgetUsd=Number(body.budgetUsd??body.budget_usd??4);
  if(!Number.isFinite(budgetUsd)||budgetUsd<=0||budgetUsd>50)throw new HttpError(400,'Budget must be between $0.01 and $50.');
- const names=Array.isArray(body.coupleNames)?body.coupleNames.map(v=>String(v||'').trim()).filter(Boolean):[];
+ const names=body.openingManifest?.names?[body.openingManifest.names.groomName,body.openingManifest.names.brideName]:Array.isArray(body.coupleNames)?body.coupleNames.map(v=>String(v||'').trim()).filter(Boolean):[];
  const couple={
-  ...DEFAULT_COUPLE,
-  groom:names[0]||DEFAULT_COUPLE.groom,
-  bride:names[1]||DEFAULT_COUPLE.bride
+  ...DEFAULT_COUPLE,...body.couple,
+  groom:names[0]||body.couple?.groom||DEFAULT_COUPLE.groom,
+  bride:names[1]||body.couple?.bride||DEFAULT_COUPLE.bride
  };
  if(typeof body.groomDetails==='string'&&body.groomDetails.trim())couple.groomDetails=body.groomDetails.trim().slice(0,200);
  if(typeof body.brideDetails==='string'&&body.brideDetails.trim())couple.brideDetails=body.brideDetails.trim().slice(0,200);
@@ -138,7 +140,8 @@ export function validateTemplate1Input(body={}){
    if(!coupleImageUrl)coupleImageUrl=cached.coupleUrl||coupleImageUrl;
   }
  }
- return {pinUrl,heroImageUrl:heroUrl,displayName,parentId,musicId,budgetUsd,couple,promptParams,brideImageUrl,groomImageUrl,coupleImageUrl,firstImageUrl,lastImageUrl};
+ const openingManifest=body.openingManifest?validateManifest(body.openingManifest):undefined;
+ return {openingManifest,storySessionKey:body.storySessionKey,segmentedRunId:body.segmentedRunId,pinUrl,heroImageUrl:heroUrl,displayName,parentId,musicId,budgetUsd,couple,promptParams,brideImageUrl,groomImageUrl,coupleImageUrl,firstImageUrl,lastImageUrl};
 }
 
 function optionalHttpsUrl(value,label){
@@ -692,6 +695,11 @@ export async function runOpeningPhase(job,{first,last},{env,fetchImpl,sleepImpl}
  const gen=join(workdir,'gen');
  await mkdir(gen,{recursive:true});
  const setDetail=text=>update(job,{detail:text});
+ if(job.input.openingManifest){
+  const opening=await runSegmentedOpening(job,{env,fetchImpl,sleepImpl,onProgress:setDetail,checkCancelled:()=>checkCancelled(job)});
+  job.assets['opening-video']=opening;
+  return opening.path;
+ }
 
   const kept=await existingAsset(job,'opening-video','path');
   if(kept?.path&&kept.provider==='xai'){setDetail('opening video reused · $'+ledger.used.toFixed(2)+' used');return kept.path;}
@@ -724,7 +732,9 @@ export async function runCraftPhase(job,{heroPath,openingPath,gen}){
  const slug=slugify(job.input.displayName);
  const inbox=join(job.root,'work','assembly-inbox',slug);
  await mkdir(inbox,{recursive:true});
- const opening=await craftOpening({sourceVideo:openingPath,outDir:inbox,holdSeconds:0});
+ const opening=job.input.openingManifest
+  ?{path:await copyInto(openingPath,inbox,'opening.mp4'),...await assertMuted(openingPath,'segmented opening')}
+  :await craftOpening({sourceVideo:openingPath,outDir:inbox,holdSeconds:0});
  const hero=await craftHero({sourceVideo:heroPath,outDir:inbox});
  for(const name of ['opening-first','opening-last','hero-still','plate1','plate2']){
   await copyInto(join(gen,name+'.png'),inbox,name+'.png');
@@ -920,8 +930,8 @@ export function template1Checkpoint(jobId){
  if(!job||job.phase!=='opening-review')throw new HttpError(409,'Opening is not awaiting review.');
  return {...view(job),input:job.input,prompts:job.prompts,pinImageUrl:job.pinImageUrl,styleCard:job.styleCard};
 }
-export async function resumeTemplate1Checkpoint(checkpoint,{env=process.env,onUpdate,fetchImpl=fetch}={}){
- const started=startTemplate1Job(checkpoint.input,{env,onUpdate,run:false});
+export async function resumeTemplate1Checkpoint(checkpoint,{env=process.env,onUpdate,fetchImpl=fetch,openingApproved=true,inputOverride}={}){
+ const started=startTemplate1Job(inputOverride||checkpoint.input,{env,onUpdate,run:false});
  const job=jobs.get(started.jobId);
  job.prompts=checkpoint.prompts;
  job.pinImageUrl=checkpoint.pinImageUrl;
@@ -930,7 +940,8 @@ export async function resumeTemplate1Checkpoint(checkpoint,{env=process.env,onUp
  for(const entry of checkpoint.spend?.entries||[])job.ledger.charge(entry.role,entry.usd,entry);
  const {restoreCheckpointAssets}=await import('./assembly-opening-checkpoint.mjs');
  job.assets=await restoreCheckpointAssets(checkpoint,job.workdir,env);
- job.assets.openingApproved=true;
+ job.assets.openingApproved=openingApproved;
+ if(!openingApproved)delete job.assets['opening-video'];
  job.stillsWave=stillsWaveFromJob(job);
  void continueTemplate1Job(job,{env,fetchImpl});
  return started;

@@ -39,6 +39,7 @@ import {
 } from './assembly-sell-path.mjs';
 import {STILL_MODEL} from './assembly-template1-prompts.mjs';
 import {createStoryboardWorkflow} from './storyboard-workflow.mjs';
+import {createSegmentedWorkflow} from './assembly-segmented-workflow.mjs';
 import {runReplicateImage} from './assembly-template1-gen.mjs';
 
 const revealTypeField=z.string().min(2).max(40).describe(
@@ -130,7 +131,7 @@ function withTimeout(promise,ms,label){
  });
 }
 
-export function buildAssemblyChatTools({env=process.env,fetchImpl=fetch,parentId='',messages=[],imageRunner=runReplicateImage,openaiClient}={}){
+export function buildAssemblyChatTools({env=process.env,fetchImpl=fetch,parentId='',messages=[],imageRunner=runReplicateImage,openaiClient,sessionKey}={}){
  const observedPins=new Map();
  for(const message of messages){
   for(const part of message.role==='assistant'?message.parts||[]:[]){
@@ -818,6 +819,8 @@ export function buildAssemblyChatTools({env=process.env,fetchImpl=fetch,parentId
     const venue=input.venue?String(input.venue).trim():'';
     const address=input.address?String(input.address).trim():(city||'');
     const payload={
+     openingManifest:input.openingManifest,
+     storySessionKey:input.storySessionKey,
      pinUrl:input.pinUrl||input.heroImageUrl,
      heroImageUrl:input.heroImageUrl,
      firstImageUrl:input.firstImageUrl||undefined,
@@ -942,7 +945,7 @@ export function buildAssemblyChatTools({env=process.env,fetchImpl=fetch,parentId
    }
   })
  };
- return createStoryboardWorkflow(tools,{messages,env,fetchImpl,openaiClient});
+ return sessionKey?createSegmentedWorkflow(tools,{sessionKey,messages,env,fetchImpl,openaiClient,imageRunner}):createStoryboardWorkflow(tools,{messages,env,fetchImpl,openaiClient});
 }
 
 function xaiClient(env){

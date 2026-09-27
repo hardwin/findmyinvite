@@ -13,7 +13,6 @@ import {join,dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {put} from '@vercel/blob';
 import {run,probeMedia,assertMuted} from './assembly-template1-craft.mjs';
-import {HOLD_SECONDS} from './assembly-template1-prompts.mjs';
 import {HttpError} from './core.mjs';
 import {generateImagineChapters,inviteCaptureUrls,isVercelLoginUrl,pickExportChapters,protectionBypassSecret} from './invite-walkthrough-imagine.mjs';
 
@@ -39,7 +38,6 @@ const MASTER_W=720;
 const MASTER_H=1280;
 const CRF=17;
 const PRESET='medium';
-const OPEN_ZOOM=0.03;
 
 const ENCODE_COMMON=['-an','-c:v','libx264','-crf',String(CRF),'-preset',PRESET,'-pix_fmt','yuv420p','-r',String(FPS),'-movflags','+faststart'];
 
@@ -355,14 +353,9 @@ async function toMaster(input,outMp4,extraVf=''){
  await ffmpeg(['-i',input,'-vf',vf,...ENCODE_COMMON,outMp4]);
 }
 
-/** Opening asset: trim hold + 3% steady zoom → master (fill). */
+/** Preserve every opening frame; the hero follows its completed timeline. */
 async function openingMaster(openingPath,outMp4){
- const info=await probeMedia(openingPath);
- const trimTo=Math.max(SOFT_XFADE+1,info.duration-HOLD_SECONDS);
- const frames=Math.max(2,Math.round(trimTo*FPS));
- const z=`zoompan=z='1+${OPEN_ZOOM}*on/${frames}':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=1:s=${MASTER_W}x${MASTER_H}:fps=${FPS}`;
- const prep=`scale=${MASTER_W}:${MASTER_H}:force_original_aspect_ratio=increase:flags=lanczos,crop=${MASTER_W}:${MASTER_H}`;
- await ffmpeg(['-i',openingPath,'-t',String(trimTo),'-an','-vf',`${prep},${z}`,...ENCODE_COMMON,outMp4]);
+ await toMaster(openingPath,outMp4);
 }
 
 async function xfadePair(a,b,out,transition,duration,offset){
@@ -616,9 +609,7 @@ export async function buildWalkthroughVideo({templateId,heroClip,pageClips,chapt
   }
   await chainSoftFades(normalizedPages,pagesJoined,dir);
 
-  const openInfo=await probeMedia(openingZ);
-  const openDur=Math.max(SOFT_XFADE+0.2,openInfo.duration||1);
-  await xfadePair(openingZ,heroZ,head,'fade',SOFT_XFADE,Math.max(0,openDur-SOFT_XFADE));
+  await ffmpeg(['-i',openingZ,'-i',heroZ,'-filter_complex','[0:v]setpts=PTS-STARTPTS[a];[1:v]setpts=PTS-STARTPTS[b];[a][b]concat=n=2:v=1:a=0[v]','-map','[v]',...ENCODE_COMMON,head]);
 
   const headInfo=await probeMedia(head);
   const headDur=Math.max(SOFT_XFADE+0.2,headInfo.duration||1);

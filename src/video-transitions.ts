@@ -13,12 +13,5 @@ export function videoTransitionFor(templateId: string, hasHeroLoop: boolean): Vi
   return VIDEO_TRANSITION_PRESETS[hash % VIDEO_TRANSITION_PRESETS.length];
 }
 
-/**
- * Opening masters hold a static tail. Start handoff early (~3.5s before end)
- * so the still frames are covered, with a very snappy 0.25s CSS cut into hero.
- */
-export const HANDOFF_LEAD_S = 3.5;
+/** Transition starts only after the opening ended event. */
 export const VIDEO_TRANSITION_MS = 250;
-
-/** Prime hero under the opening shortly before handoff begins. */
-export const HERO_PRIME_S = 4.2;

@@ -1,3 +1,4 @@
+import {OpeningSceneRevision} from './OpeningSceneRevision';
 import {OpeningVideoReview} from './OpeningVideoReview';
 import {useEffect,useMemo,useState,type FormEvent,type MouseEvent} from 'react';
 import './assembly-pipeline.css';
@@ -5,6 +6,7 @@ import {managerFetch} from './manager-api';
 import {readSession} from './auth-session';
 
 type Job={
+ openingMode?:string;
  openingVideoUrl?:string|null;
  jobId:string;
  status:string;
@@ -462,6 +464,7 @@ export default function AssemblyPipeline(){
        </div>
       )}
       {selected.phase==='opening-review'&&selected.openingVideoUrl&&<OpeningVideoReview url={selected.openingVideoUrl}/>}
+      {selected.openingMode==='five-clips-v1'&&(selected.phase==='opening-review'||selected.status==='failed')&&<OpeningSceneRevision jobId={selected.jobId} disabled={actionBusy} onBusy={setActionBusy}/>}
       <div className="pipe-links">
        {selected.previewUrl&&<a href={selected.previewUrl} target="_blank" rel="noreferrer">Preview</a>}
        {selected.githubUrl&&<a href={selected.githubUrl} target="_blank" rel="noreferrer">{selected.branch||'GitHub'}</a>}

@@ -1,3 +1,6 @@
+import {digest,loadStory,saveStory,validateManifest} from './assembly-story-session.mjs';
+import {assertSceneReplacementAllowed} from './assembly-segmented-video.mjs';
+import {reviseSegmentMotion} from './assembly-storyboard-astra.mjs';
 import {HttpError,templates as deployedTemplates} from './core.mjs';
 import {validateTemplate1Input} from './assembly-template1.mjs';
 import {
@@ -6,6 +9,7 @@ import {
  githubTreeUrl,
  hashSecret,
  claimOpeningApproval,
+ claimOpeningRevision,
  insertAssemblyJob,
  getAssemblyJob,
  listAssemblyJobs,
@@ -241,10 +245,29 @@ export async function startCloudTemplate1Job(rawInput,{env=process.env,fetchImpl
   throw new HttpError(503,'Cloud Assembly is not configured ('+cloudMissing(env).join(', ')+').');
  }
  if(!env.BLOB_READ_WRITE_TOKEN)throw new HttpError(503,'Opening review storage is not configured.');
- const input=validateTemplate1Input(rawInput);
+ if(!rawInput.storySessionKey||!rawInput.openingManifest)throw new HttpError(409,'New invitations require ten approved endpoints. Open the chat to prepare them.');
+ const session=await loadStory(rawInput.storySessionKey,env);
+ const approved=validateManifest(session.value.approval);
+ if(!session.value.board?.locked||approved.approvalRevision!==rawInput.openingManifest.approvalRevision)throw new HttpError(409,'The approved storyboard changed. Refresh before generating.');
+ const input=validateTemplate1Input({...rawInput,openingManifest:approved,firstImageUrl:approved.scenes[0].first.url,lastImageUrl:approved.scenes[4].last.url,heroImageUrl:approved.scenes[4].last.url,coupleImageUrl:approved.scenes[4].last.url,coupleNames:[approved.names.groomName,approved.names.brideName]});
+ const prior=session.value.generation;
+ if(prior){
+  const existing=await getAssemblyJob(prior.jobId,{env,fetchImpl});
+  if(prior.approvalRevision===approved.approvalRevision){
+   if(!existing)throw new HttpError(409,'The generation is being saved. Retry shortly.');
+   return {jobId:existing.id,spend:existing.spend,cloud:true};
+  }
+  if(existing&&!['failed','cancelled','done','complete','completed','preview','discarded'].includes(existing.status)&&existing.phase!=='opening-review')throw new HttpError(409,'Finish or cancel the current opening before launching a changed board.');
+ }
  const id=newJobId();
+ input.segmentedRunId=session.value.segmentedRunId||id;
+ session.value.segmentedRunId=input.segmentedRunId;
+ session.value.generation={jobId:id,approvalRevision:approved.approvalRevision};
+ // Conditional write claims this approval before any worker can spend.
+ await saveStory(rawInput.storySessionKey,session,env);
  const secret=newCallbackSecret();
- const view=await insertAssemblyJob({
+ let view;
+ try{view=await insertAssemblyJob({
   id,
   status:'queued',
   phase:'queued',
@@ -255,6 +278,12 @@ export async function startCloudTemplate1Job(rawInput,{env=process.env,fetchImpl
   spend:{budget:input.budgetUsd,used:0,remaining:input.budgetUsd},
   callbackSecretHash:hashSecret(secret)
  },{env,fetchImpl});
+ }catch(error){
+  // An insert can succeed even when its response is lost. Preserve its claim if present.
+  const inserted=await getAssemblyJob(id,{env,fetchImpl});
+  if(!inserted){delete session.value.generation;await saveStory(rawInput.storySessionKey,session,env);throw error;}
+  view=viewFromRow(inserted);
+ }
 
  // Return the job id immediately; boot the sandbox under waitUntil.
  schedule((async()=>{
@@ -325,7 +354,7 @@ export async function retryCloudTemplate1Job(jobId,{env=process.env,fetchImpl=fe
  // Completed media must never be regenerated just because the Git push failed.
  if(row.clone_id&&row.status==='failed')return resumeCloudPush(id,{env,fetchImpl});
  const input=validateTemplate1Input(row.input||{});
- if(row.assets?.checkpointUrl)input._openingCheckpoint=row.assets.checkpointUrl;
+ if(row.assets?.checkpointUrl){input._openingCheckpoint=row.assets.checkpointUrl;if(input.openingManifest&&row.assets.openingApproved===false)input._reviseOpening=true;}
  const secret=newCallbackSecret();
  const budget=Number(input.budgetUsd)||Number(row.spend?.budget)||4;
  const view=await patchAssemblyJob(id,{
@@ -629,5 +658,27 @@ export async function approveCloudOpening(jobId,{env=process.env,fetchImpl=fetch
   try{await launchImpl({jobId,secret,input,env,fetchImpl});}
   catch(error){await reportLaunchFailure(jobId,secret,sandboxLaunchError(error,env),{env,fetchImpl});}
  })());
+ return view;
+}
+
+export async function reviseCloudOpening(jobId,sceneIndex,feedback,{env=process.env,fetchImpl=fetch,launchImpl=defaultLaunchSandbox,owner}={}){
+ const row=await getAssemblyJob(jobId,{env,fetchImpl});
+ if(!row)throw new HttpError(404,'Job not found.');
+ if(owner&&row.input?.storySessionKey&&!row.input.storySessionKey.startsWith('assembly-stories/'+digest(owner).slice(0,32)+'/'))throw new HttpError(403,'This opening belongs to another invitation owner.');
+ if(row.phase!=='opening-review'&&row.status!=='failed')throw new HttpError(409,'Wait for the opening review or failure before retrying a scene.');
+ if(!Number.isInteger(sceneIndex)||sceneIndex<1||sceneIndex>5)throw new HttpError(400,'Select scene 1 through 5.');
+ const input=validateTemplate1Input(row.input);
+ if(!input.openingManifest)throw new HttpError(409,'This older job has one generated video. Prepare ten endpoints for the new workflow.');
+ const scene=input.openingManifest.scenes[sceneIndex-1];
+ await assertSceneReplacementAllowed(input.segmentedRunId||jobId,scene,env);
+ scene.prompt=await reviseSegmentMotion({scene,feedback:String(feedback||'').slice(0,1600),env});
+ scene.take=(scene.take||0)+1;
+ input.segmentedRunId=input.segmentedRunId||jobId;
+ const secret=newCallbackSecret();
+ const assets={...row.assets,openingApproved:false,openingBlobUrl:null};
+ const view=await claimOpeningRevision(row,{input,assets,secretHash:hashSecret(secret)},{env,fetchImpl});
+ if(!view)throw new HttpError(409,'This opening changed while you were revising it. Refresh before retrying.');
+ const launchInput={...input,_reviseOpening:true,...(row.assets?.checkpointUrl?{_openingCheckpoint:row.assets.checkpointUrl}:{})};
+ schedule((async()=>{try{await launchImpl({jobId,secret,input:launchInput,env,fetchImpl});}catch(error){await reportLaunchFailure(jobId,secret,sandboxLaunchError(error,env),{env,fetchImpl});}})());
  return view;
 }

@@ -16,6 +16,7 @@ import {startGeneratePair,getGenerateJob} from '../server/assembly-ai.mjs';
 import {startTemplate1Job,listTemplate1JobsResolved,loadTemplate1Job,cancelTemplate1Job,discardTemplate1Job,proceedTemplate1Job,regenTemplate1Still,retryTemplate1Job,jobsDir} from '../server/assembly-template1.mjs';
 import {
  approveCloudOpening,
+ reviseCloudOpening,
  cancelCloudTemplate1Job,
  discardCloudTemplate1Job,
  cloudAssemblyEnabled,
@@ -191,10 +192,7 @@ export default async function handler(req,res){
   if(action==='template1-start'){
    method(req,['POST']);
    await requireManager(req);
-   const body=await bodyJson(req,16384);
-   if(cloudAssemblyEnabled())return respond(res,200,await startCloudTemplate1Job(body));
-   if(!fsWritesAllowed())throw new HttpError(503,'Template 1 runs locally only. Use this desk on your Cursor machine or CloudAgent.');
-   return respond(res,200,startTemplate1Job(body));
+   throw new HttpError(409,'Start new invitations from the chat after confirming names and approving all ten endpoints.');
   }
 
   if(action==='template1-status'){
@@ -272,6 +270,12 @@ export default async function handler(req,res){
    const body=await bodyJson(req,4096);
    if(!cloudAssemblyEnabled())throw new HttpError(503,'Cloud Assembly is off.');
    return respond(res,200,await addCloneToCatalog(String(body.jobId||'')));
+  }
+
+  if(action==='template1-revise-scene'){
+   method(req,['POST']);const manager=await requireManager(req);
+   const body=await bodyJson(req,4096);
+   return respond(res,200,await reviseCloudOpening(String(body.jobId||''),Number(body.scene),body.feedback,{owner:manager.user?.id||'akay'}));
   }
 
   if(action==='template1-proceed'){

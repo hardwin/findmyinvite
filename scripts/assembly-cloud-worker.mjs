@@ -4,6 +4,7 @@ import {startTemplate1Job,getTemplate1Job,cancelTemplate1Job,proceedTemplate1Job
 import {attachLineage} from '../server/assembly-cloud.mjs';
 import {saveOpeningCheckpoint,readOpeningCheckpoint} from '../server/assembly-opening-checkpoint.mjs';
 import {spawn} from 'node:child_process';
+import {readSegmentedCheckpoint} from '../server/assembly-segmented-video.mjs';
 import {loadAssemblyWorkerInput} from '../server/assembly-worker-input.mjs';
 
 const env=process.env;
@@ -150,9 +151,10 @@ try{
    ...(prompts?{prompts}:{})
   }).catch(error=>console.error(error.message));
  }};
+ const partial=input.openingManifest&&!input._openingCheckpoint?await readSegmentedCheckpoint(input.segmentedRunId||jobId,env):null;
  started=input._openingCheckpoint
-  ?await resumeTemplate1Checkpoint(await readOpeningCheckpoint(input._openingCheckpoint,env),options)
-  :startTemplate1Job(input,options);
+  ?await resumeTemplate1Checkpoint(await readOpeningCheckpoint(input._openingCheckpoint,env),{...options,openingApproved:!input._reviseOpening,inputOverride:input})
+  :partial?.input?.openingManifest?.approvalRevision===input.openingManifest?.approvalRevision?await resumeTemplate1Checkpoint(partial,{...options,openingApproved:false,inputOverride:input}):startTemplate1Job(input,options);
 }catch(error){
  const message=error instanceof Error?error.message:'startTemplate1Job failed';
  console.error(message);

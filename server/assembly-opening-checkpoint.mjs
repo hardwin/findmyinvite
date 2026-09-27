@@ -14,7 +14,7 @@ export async function saveOpeningCheckpoint(checkpoint,cloudId,env=process.env){
  const assets={};
  for(const role of ['opening-first','opening-last','opening-video']){
   const asset=checkpoint.assets[role];
-  if(!asset)throw new Error('Missing checkpoint asset: '+role);
+  if(!asset){if(role==='opening-video')continue;throw new Error('Missing checkpoint asset: '+role);}
   const files={};
   for(const key of ['jpg','png','path']){
    if(!asset[key])continue;
@@ -31,7 +31,7 @@ export async function saveOpeningCheckpoint(checkpoint,cloudId,env=process.env){
  const blob=await put('assembly-openings/'+cloudId+'/checkpoint.json',JSON.stringify(saved),{
   access:'private',addRandomSuffix:true,token:env.BLOB_READ_WRITE_TOKEN,contentType:'application/json'
  });
- return {checkpointUrl:blob.url,openingBlobUrl:assets['opening-video'].files.path};
+ return {checkpointUrl:blob.url,openingBlobUrl:assets['opening-video']?.files.path||null};
 }
 export async function readOpeningCheckpoint(url,env=process.env){
  return JSON.parse((await readBlob(url,env)).toString('utf8'));
@@ -41,6 +41,7 @@ export async function restoreCheckpointAssets(checkpoint,workdir,env){
  await mkdir(dir,{recursive:true});
  const assets={};
  for(const role of ['opening-first','opening-last','opening-video']){
+  if(!checkpoint.assets[role])continue;
   const {files,...metadata}=checkpoint.assets[role];
   const asset={...metadata};
   for(const [key,url] of Object.entries(files)){

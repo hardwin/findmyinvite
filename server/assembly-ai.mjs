@@ -433,7 +433,7 @@ export async function downloadVideoBuffer(url,{fetchImpl=fetch,headers}={}){
  return buffer;
 }
 
-export async function runXaiImagineVideo({lastFrame,lastFrameUrl,image,prompt,duration,env=process.env,fetchImpl=fetch,onTick,sleepImpl=sleep}={}){
+export async function runXaiImagineVideo({lastFrame,lastFrameUrl,image,prompt,duration,env=process.env,fetchImpl=fetch,onTick,sleepImpl=sleep,resumeRequestId,onSubmitted,onSubmitting}={}){
  const key=xaiAuth(env);
  const frame=lastFrame&&(lastFrame.url||lastFrame.file_id)
   ?lastFrame
@@ -449,6 +449,9 @@ export async function runXaiImagineVideo({lastFrame,lastFrameUrl,image,prompt,du
  };
  // Template 1 sends the FIRST still as `image` so the clip starts on closed doors and ends on the pin frame.
  if(image&&(image.url||image.file_id))body.image=image.url?{url:image.url}:{file_id:image.file_id};
+ let created;
+ if(resumeRequestId){created={request_id:resumeRequestId,status:'pending'};}else{
+ await onSubmitting?.();
  const create=await fetchImpl(XAI_VIDEO_GENERATIONS,{
   method:'POST',
   headers:{
@@ -457,7 +460,7 @@ export async function runXaiImagineVideo({lastFrame,lastFrameUrl,image,prompt,du
   },
   body:JSON.stringify(body)
  });
- const created=await create.json().catch(()=>({}));
+ created=await create.json().catch(()=>({}));
  if(!create.ok){
   const raw=created?.error?.message||created?.error||created?.message||created?.status||'';
   const text=typeof raw==='object'?JSON.stringify(raw):String(raw);
@@ -466,11 +469,14 @@ export async function runXaiImagineVideo({lastFrame,lastFrameUrl,image,prompt,du
   const err=new HttpError(credit?403:502,credit
    ?'xAI opening video is out of credits. Add credits on xAI, then tap Retry generate.'
    :('Opening video failed'+(text?': '+text:'.')));
+  err.submissionRejected=create.status>=400&&create.status<500;
   err.xaiCredit=credit;
   throw err;
  }
+ }
  const requestId=created.request_id||created.id||'';
  if(!requestId)throw new HttpError(502,'Opening video generation returned no request_id.');
+ if(!resumeRequestId)await onSubmitted?.(requestId);
  const started=Date.now();
  let status=created.status||'pending';
  let result=created;
@@ -491,7 +497,7 @@ export async function runXaiImagineVideo({lastFrame,lastFrameUrl,image,prompt,du
  if(status!=='done'){
   const detail=result.error?.message||result.error||status||'unknown';
   console.error('xAI video generation failed',detail);
-  throw new HttpError(502,'Opening video generation failed: '+detail);
+  const error=new HttpError(502,'Opening video generation failed: '+detail);error.providerTerminal=true;throw error;
  }
  const videoUrl=result.video?.url||result.url||'';
  const respectModeration=result.video?.respect_moderation??result.respect_moderation;

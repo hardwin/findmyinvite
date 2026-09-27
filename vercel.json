@@ -26,7 +26,7 @@
       "memory": 1024
     },
     "api/assembly-chat.mjs": {
-      "includeFiles": "{src/data.ts,cms/music-library.json}",
+      "includeFiles": "{src/data.ts,cms/music-library.json,node_modules/ffmpeg-static/**}",
       "maxDuration": 600,
       "memory": 1024
     },

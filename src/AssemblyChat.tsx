@@ -1,3 +1,5 @@
+import {OpeningSceneRevision} from './OpeningSceneRevision';
+import {OpeningNamesForm} from './OpeningNamesForm';
 import {OpeningVideoReview} from './OpeningVideoReview';
 import {useChat} from '@ai-sdk/react';
 import {upload as uploadBlob} from '@vercel/blob/client';
@@ -26,10 +28,12 @@ import {
  GenerateVideoBar,
  ReadyBanner,
  DetailsFields,
+ type StoryboardState,
  type SellDeskState
 } from './AssemblySellDesk';
 
 type JobStatus={
+ openingMode?:string;
  openingVideoUrl?:string|null;
  jobId:string;
  status:string;
@@ -474,6 +478,7 @@ function JobCard({jobId,onUpdate,onDismiss}:{jobId:string;onUpdate?:(job:JobStat
      {job.githubUrl&&<a className="asm-gpt-chip" href={job.githubUrl} target="_blank" rel="noreferrer">{job.branch||'GitHub'}</a>}
     </div>
    )}
+   {job?.openingMode==='five-clips-v1'&&(job.phase==='opening-review'||job.status==='failed')&&<OpeningSceneRevision jobId={job.jobId} disabled={busy} onBusy={setBusy}/>}
    {job?.error&&<p className="asm-gpt-alert" role="alert">{job.error}</p>}
    {showOps&&(
     <div className="asm-gpt-chips asm-gpt-job-ops">
@@ -997,6 +1002,8 @@ export default function AssemblyChat({
  writable:boolean;
  onUnauth:()=>void;
 }){
+ const [confirmedNames,setConfirmedNames]=useState<{groomName:string;brideName:string;revision:string}|null>(null);
+ const [serverBoard,setServerBoard]=useState<StoryboardState|null>(null);
  const [navOpen,setNavOpen]=useState(false);
  const [themeOpen,setThemeOpen]=useState(true);
  const [input,setInput]=useState('');
@@ -1232,6 +1239,14 @@ export default function AssemblyChat({
   try{localStorage.setItem(ACTIVE_KEY,chatId);}catch{/* */}
  },[messages,chatId,jobId]);
 
+ useEffect(()=>{
+  let active=true;
+  setConfirmedNames(null);setServerBoard(null);
+  if(status==='streaming'||status==='submitted')return;
+  void managerFetch('/api/assembly-chat?action=story-state&chatId='+encodeURIComponent(chatId)).then(async r=>{if(!r.ok)throw new Error('Could not load confirmed storyboard state.');return r.json();}).then(body=>{if(active){setConfirmedNames(body.names);setServerBoard(body.storyboard);}}).catch(error=>{if(active)setLocalError(error.message);});
+  return()=>{active=false;};
+ },[chatId,status,messages.length]);
+
  // Mirror agent tools into the sell desk (Pinterest iframe, storyboard, details, stage).
  useEffect(()=>{
   let next=defaultSellState();
@@ -1244,9 +1259,14 @@ export default function AssemblyChat({
     next=mergeSellFromTool(next,name,output);
    }
   }
+  if(confirmedNames)next.details={...next.details,groomName:confirmedNames.groomName,brideName:confirmedNames.brideName};
+  if(serverBoard&&(!next.storyboard?.revision||(serverBoard.revision||0)>=next.storyboard.revision)){
+   next.storyboard=serverBoard;
+   if(!serverBoard.locked)next.stage='storyboard';
+  }
   setSell(next);
   try{sessionStorage.setItem(SELL_KEY,JSON.stringify(next));}catch{/* */}
- },[messages]);
+ },[messages,confirmedNames,serverBoard]);
 
  useEffect(()=>{
   if(!jobId)return;
@@ -1369,6 +1389,7 @@ export default function AssemblyChat({
  const heroForGen=sell.heroUrl||sell.storyboard?.lastImageUrl||sell.pinPreview||'';
  const canGenerate=sell.stage==='generate'
   &&Boolean(heroForGen)
+  &&Boolean(sell.storyboard?.locked&&sell.storyboard?.direction==='five-clips-v1'&&confirmedNames)
   &&Boolean(sell.brideImageUrl)
   &&Boolean(sell.groomImageUrl)
   &&Boolean(sell.details.displayName||sell.details.complete);
@@ -1382,7 +1403,7 @@ export default function AssemblyChat({
    'heroImageUrl: '+heroForGen,
    sell.pinUrl?('pinUrl: '+sell.pinUrl):'',
    board?.firstImageUrl?('firstImageUrl: '+board.firstImageUrl):'',
-   board?.lastImageUrl?('lastImageUrl: '+board.lastImageUrl):(heroForGen?('lastImageUrl: '+heroForGen):''),
+   heroForGen?('lastImageUrl: '+heroForGen):'',
    'brideImageUrl: '+sell.brideImageUrl,
    'groomImageUrl: '+sell.groomImageUrl,
    sell.details.brideName?('brideName: '+sell.details.brideName):'',
@@ -1651,11 +1672,16 @@ export default function AssemblyChat({
           onChip={sendChip}
          />
         )}
-        {!busy&&sell.stage==='storyboard'&&!sell.storyboard?.sheetUrl&&!sell.storyboard?.firstBrief&&(
+        {['theme','storyboard','details'].includes(sell.stage)&&<OpeningNamesForm key={chatId+(confirmedNames?.revision||'')} names={confirmedNames||undefined} busy={busy} onConfirm={async names=>{
+         const res=await managerFetch('/api/assembly-chat?action=confirm-names',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chatId,...names})});
+         const body=await res.json();if(!res.ok)throw new Error(body.error||'Could not confirm names.');setConfirmedNames(body.names);setServerBoard(body.storyboard);
+         sendChip('I confirmed our names using the invitation form. Continue the current storyboard idea with those exact names; prepare the endpoint images for review.');
+        }}/>}
+        {!busy&&confirmedNames&&sell.stage==='storyboard' &&!sell.storyboard?.sheetUrl&&!sell.storyboard?.firstBrief&&(
          <StoryScenesForm key={chatId} busy={busy} onSubmit={sendChip}/>
         )}
         {sell.stage==='details'&&!sell.details.complete&&(
-         <DetailsFields busy={busy} onSubmit={sendChip}/>
+         <DetailsFields key={confirmedNames?.revision} initialNames={confirmedNames||undefined} busy={busy} onSubmit={sendChip}/>
         )}
         <GenerateBar ready={canGenerate} busy={busy} details={sell.details} onGenerate={requestGenerate}/>
         <GenerateVideoBar

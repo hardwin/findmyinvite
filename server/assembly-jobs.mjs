@@ -57,6 +57,7 @@ export function viewFromRow(row){
  const prompts=assets.prompts&&typeof assets.prompts==='object'?assets.prompts:null;
  return {
   jobId:row.id,
+  openingMode:row.input?.openingManifest?.version||'legacy',
   status:row.status,
   phase:row.phase,
   percent:row.percent,
@@ -207,4 +208,12 @@ export async function claimOpeningApproval(jobId,secretHash,{env=process.env,fet
   method:'PATCH',body:{phase:'queued',cancel_requested:false,label:'Opening approved — continuing…',detail:'Starting the remaining invitation work.',callback_secret:secretHash,updated_at:new Date().toISOString()},env,fetchImpl
  });
  return Array.isArray(rows)&&rows[0]?viewFromRow(rows[0]):null;
+}
+
+/** Atomic revision claim: prevents two clicks from launching duplicate paid replacements. */
+export async function claimOpeningRevision(row,{input,assets,secretHash},{env=process.env,fetchImpl=fetch}={}){
+ const rows=await jobsRequest('assembly_jobs?id=eq.'+encodeURIComponent(row.id)+'&updated_at=eq.'+encodeURIComponent(row.updated_at),{
+  method:'PATCH',body:{input,assets,status:'running',cancel_requested:false,phase:'opening',percent:40,label:'Revising opening scene…',detail:'Reusing all unchanged clips.',error:null,callback_secret:secretHash,updated_at:new Date().toISOString()},env,fetchImpl
+ });
+ return viewFromRow(rows[0]||null);
 }
