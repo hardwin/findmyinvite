@@ -9,8 +9,11 @@ test('segmented author rules use single still + floating elements for scenes 2â€
  assert.match(SEGMENTED_AUTHOR_RULES,/floating\/airborne|floating\/airborne elements|abundant floating/i);
  assert.match(SEGMENTED_AUTHOR_RULES,/bullet-time/i);
  assert.match(SEGMENTED_AUTHOR_RULES,/clear recognizable faces/i);
- assert.match(BULLET_TIME_BASE,/360-degree orbit/i);
- assert.match(BULLET_TIME_BASE,/frozen mid-motion/i);
+ assert.match(BULLET_TIME_BASE,/ONLY the CAMERA moves/i);
+ assert.match(BULLET_TIME_BASE,/30 percent|30%/i);
+ assert.match(BULLET_TIME_BASE,/ultra-slow|ultra slow/i);
+ assert.match(BULLET_TIME_BASE,/must NOT rotate|NOT rotate/i);
+ assert.doesNotMatch(BULLET_TIME_BASE,/360-degree orbit around/);
 });
 
 test('assertSegmentedBoardMotion accepts single-still boards with float cues',()=>{
@@ -44,11 +47,12 @@ test('buildBulletTimePrompt customizes the generic base per scene',()=>{
   firstBrief:'editorial still with floating petals',
   titleText:"We're getting married"
  });
- assert.match(prompt,/360-degree orbit/i);
+ assert.match(prompt,/ONLY the CAMERA|Camera-only|camera arcs/i);
  assert.match(prompt,/frozen/i);
  assert.match(prompt,/couple under pillars/);
  assert.match(prompt,/We're getting married/);
- assert.match(prompt,/bride and groom/i);
+ assert.match(prompt,/30%|30 percent/i);
+ assert.doesNotMatch(prompt,/full 360-degree orbit around the frozen subject/i);
 });
 
 test('author repair injects titles and float cues without throwing on Astra drift',()=>{

@@ -111,25 +111,25 @@ function controlledScenePrompt(prompt,index,title){
 }
 
 /** Generic base — assembly customizes per scene via buildBulletTimePrompt. */
-export const BULLET_TIME_BASE=`Animate this image into a cinematic bullet-time action sequence. The central subject remains completely frozen mid-motion, preserving their exact pose from the input image. The camera executes a seamless, ultra-smooth 360-degree orbit around the frozen subject. Instantly fill the surrounding air with thousands of highly detailed airborne particles—including shattering glass fragments, floating dust motes, suspended raindrops, and billowing smoke trails—all frozen perfectly in mid-air. The camera movement must reveal a full three-dimensional perspective of the scene, with crisp focus on the subject, dramatic volumetric rim lighting catching the airborne particles, high-shutter speed look, and a hyper-realistic 8k time-stop visual effect.`;
+export const BULLET_TIME_BASE=`Animate this image as a cinematic ultra-slow-motion bullet-time shot. CRITICAL: ONLY the CAMERA moves. The central subject stays completely frozen in the exact pose from the input image — they must NOT rotate, spin, turn, or orbit. Motifs, petals, foil, particles, text and props stay locked in world space, frozen mid-air — they must NOT spin with the subject or tumble as a group. The camera alone executes a gentle seamless arc of about 30 percent of a full circle (roughly 90–110 degrees maximum), ultra slow motion, revealing slight parallax and three-dimensional depth. Crisp focus on the subject, dramatic volumetric rim lighting catching the frozen airborne particles, high-shutter-speed time-stop look, hyper-realistic 8k. Never full 360. Never rotate the couple or the motif field.`;
 
 export function buildBulletTimePrompt(scene){
  const index=Number(scene.index)||0;
  const brief=String(scene.firstBrief||scene.lastBrief||'').trim();
  const subject=index===2
-  ?'the macro wedding accessory / fabric detail as the frozen central subject'
-  :'the bride and groom frozen in their exact editorial photoshoot pose (no walking, no pose change)';
+  ?'the macro wedding accessory / fabric detail — frozen solid, no spin'
+  :'the bride and groom — frozen in their exact editorial pose, feet planted, NO rotation, NO turning, NO walking';
  const particles=index===2
-  ?'Theme motifs already in the still (petals, foil, sparkles, fabric wisps) plus dust motes and fine debris — amplify and suspend them in bullet-time air'
-  :'Theme motifs already painted in the still (petals, foil, blossoms, fabric wisps, sparkles) plus volumetric dust and light-catching particles — keep them suspended while the camera orbits';
- const title=scene.titleText?`Keep exact text "${scene.titleText}" sharply readable and locked in world space throughout the orbit.`:'No lettering or titles.';
+  ?'Theme motifs already in the still stay suspended and spatially fixed; camera parallax only — do not swirl motifs around the subject'
+  :'Theme motifs already painted in the still (petals, foil, blossoms, fabric wisps, sparkles) stay suspended and fixed in space; only the camera arcs so parallax reveals depth — never rotate motifs with the couple';
+ const title=scene.titleText?`Keep exact text "${scene.titleText}" sharply readable and locked in world space (letters do not spin).`:'No lettering or titles.';
  return [
   BULLET_TIME_BASE,
   `Scene ${index} context: ${scene.scene||''}. ${brief}`,
   `Frozen subject: ${subject}. Preserve identity, wardrobe, footwear and exact pose from the input still.`,
   `Airborne field: ${particles}. Prefer pin-true materials over generic glass if the still already shows wedding motifs.`,
   title,
-  'Exactly 3 seconds, local 0–3s. Continuous orbit only — no reverse, no back-and-forth wobble, no morphing bodies or activity changes.'
+  'Exactly 3 seconds, local 0–3s. Camera-only ~30% arc, ultra slow motion. Forbidden: subject spin, motif carousel, full 360, reverse wobble, morphing bodies.'
  ].join('\n').slice(0,4096);
 }
 
@@ -208,7 +208,7 @@ export async function authorSegmentedStoryboard({request,creativeContext,previou
 export async function reviseSegmentMotion({scene,feedback,env=process.env,openaiClient}){
  if(!String(feedback||'').trim())return scene.prompt;
  if((scene.index||0)>=2){
-  const result=await ask({env,openaiClient,name:'revise_bullet_time',instructions:'Revise only the bullet-time MOTION prompt for ONE 3-second clip from a single approved still. Preserve frozen subject pose, identity, wardrobe, exact text, and floating elements already in the still. Camera must stay a smooth continuous orbit (customize direction/speed wording if asked). Do not require a second endpoint image. If the change needs a new still, set requiresNewEndpoints=true. Return prompt under 1800 characters that still includes bullet-time / frozen subject / orbit language.',data:{scene,feedback,base:BULLET_TIME_BASE},schema:{type:'object',additionalProperties:false,properties:{requiresNewEndpoints:{type:'boolean'},reason:{type:'string'},prompt:{type:'string',maxLength:1800}},required:['requiresNewEndpoints','reason','prompt']}});
+  const result=await ask({env,openaiClient,name:'revise_bullet_time',instructions:'Revise only the bullet-time MOTION prompt for ONE 3-second clip from a single approved still. Preserve frozen subject pose, identity, wardrobe, exact text, and floating elements already in the still. ONLY the camera may move — a gentle ~30% arc (about 90–110 degrees max), ultra slow motion. Subject and motifs must NOT rotate or spin. Never full 360. Do not require a second endpoint image. If the change needs a new still, set requiresNewEndpoints=true. Return prompt under 1800 characters that still includes camera-only / frozen subject / ultra-slow language.',data:{scene,feedback,base:BULLET_TIME_BASE},schema:{type:'object',additionalProperties:false,properties:{requiresNewEndpoints:{type:'boolean'},reason:{type:'string'},prompt:{type:'string',maxLength:1800}},required:['requiresNewEndpoints','reason','prompt']}});
   if(result.requiresNewEndpoints)throw new Error('Update and approve the storyboard still first: '+result.reason);
   if(!result.prompt.trim())throw new Error('No revised motion prompt returned.');
   if(scene.titleText&&!result.prompt.includes(scene.titleText))throw new Error('Revised motion omitted the exact approved text. Retry the revision.');

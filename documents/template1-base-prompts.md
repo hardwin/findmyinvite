@@ -1,5 +1,8 @@
 # Template 1 — Base prompts → pin-styled prompts
 
+**Latest correction: camera-only ~30% ultra-slow bullet-time (2026-09-27).** Scenes 2–5 video: ONLY the camera arcs (~30% of a circle, ultra slow motion). Subject and motifs stay frozen in world space — no subject spin, no motif carousel, no full 360. Still painting unchanged (one editorial still with floaters).
+
+
 **Latest correction: single-still bullet-time for scenes 2–5 (2026-09-27).** Scene 1 keeps closed→open Start/End. Scenes 2–5 paint ONE editorial still each with floating airborne elements already in frame; video is a customized bullet-time 360 orbit with the subject frozen (same image as image + last_frame). Manifest still stores first=last for those scenes. Art medium stays pin-true. Name wiring unchanged.
 
 
