@@ -1,5 +1,8 @@
 # Template 1 — Base prompts → pin-styled prompts
 
+**Latest correction: hard Start/End motion gate (2026-09-27).** Scenes 2–5 must have different Start vs End briefs (concrete camera delta + flying motifs mid-flight). Scenes 3–5 each need a different location and held pose — scene 4 cannot be scene 3 plus a title. Endpoint painting contrasts Start vs End in the End prompt and retries once if End bytes hash-match Start; duplicate Start/End never ships. Art medium stays pin-true (#5). Name wiring unchanged (#8).
+
+
 **Latest correction: editorial faces + bullet-time endpoints (2026-09-27).** Live path is five independent 3-second clips with ten Start/End endpoints. Scenes 3–4 show glamorous editorial photoshoot images with **clear couple faces** and neat held poses — no walking, no overhead crowns-only face hiding. Scenes 2–4 must use **different** Start vs End camera angles for a smooth continuous bullet-time move with glamorous flying motifs/objects; never identical stills and never reverse/back-and-forth. Scene 5 keeps the **same activity/pose family** on both ends (camera + floating SAVE THE DATE + motifs only) — never standing→driving or other morph collapses the video model cannot interpolate. This supersedes overhead-crowns-only, tiny-pair, and identical Start/End middle-scene rules.
 
 

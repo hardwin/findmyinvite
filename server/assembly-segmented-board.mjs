@@ -7,6 +7,7 @@ import {runReplicateImage} from './assembly-template1-gen.mjs';
 import {STILL_MODEL} from './assembly-template1-prompts.mjs';
 import {digest,readPrivate,SEGMENTED_VERSION} from './assembly-story-session.mjs';
 const escape=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c]));
+const STRONG_END_DELTA='HARD DELTA RETRY: camera about 30 degrees left and closer than Start; glamorous motifs mid-arc in DIFFERENT airborne positions than Start. Do not reproduce the Start composition.';
 export async function storeEndpoint(url,{env=process.env,fetchImpl=fetch,source='generated'}={}){
  const image=normalizeReferenceImage(await resolveReferenceImage(url,{fetchImpl}));
  const sha256=digest(image.buffer);
@@ -25,6 +26,35 @@ export async function renderBoardSheet(board,env=process.env){
  const blob=await put('assembly-storyboards/'+randomUUID()+'.svg',svg,{access:'private',contentType:'image/svg+xml',token:env.BLOB_READ_WRITE_TOKEN});
  return blobImageProxyUrl(blob.url,env.SITE_ORIGIN||'https://findmyinvite.com');
 }
+export function buildEndpointPrompt(board,index,side,{strongDelta=false}={}){
+ const scene=board.scenes[index];
+ const brief=side==='first'?scene.firstBrief:scene.lastBrief;
+ const people=index===0
+  ?'This endpoint contains no people, human body parts, shadows or reflections. No humans or hands.'
+  :index===1
+  ?'Match the reference accessory and clothing detail only; no full person in this macro. Macro detail already physically present; no loose floating garment that invents a new object.'
+  :'Preserve the supplied couple reference: ONE bride and ONE groom with clear recognizable faces, neat editorial photoshoot poses, individual gender, outfit, shoes and anatomy; no extra person. Do NOT hide faces or force overhead crowns-only. NO walking or traveling bodies.';
+ const camera=index===0
+  ?(side==='first'
+   ?'Fully closed reveal at 0s; sealed/opaque, no gap.'
+   :'Opened reveal state after automatic open; names readable; continuous from the closed Start — not a reverse close.')
+  :index===1
+  ?(side==='first'
+   ?'Macro Start angle. Include pin-true motifs ready to drift.'
+   :'Macro End angle: DIFFERENT camera position from Start (gentle bullet-time orbit/push/slide). Same object. Glamorous theme motifs mid-flight through the air. Not a duplicate of Start.')
+  :index<4
+  ?(side==='first'
+   ?'Editorial photoshoot Start angle with clear faces and a neat held pose. Motifs ready to fly. This setup/pose must read distinct from the other couple scenes.'
+   :'Editorial End angle: DIFFERENT camera from Start for a smooth continuous bullet-time arc (orbit/push/slide — never reverse). Same couple pose and activity as Start. Glamorous airborne motifs, petals, foil and theme objects mid-flight. Not a still duplicate of Start.')
+  :(side==='first'
+   ?'Hero Start: sharp faces, held editorial pose distinct from scenes 3 and 4, SAVE THE DATE present if titled. Motifs ready to drift.'
+   :'Hero End: SAME activity and pose family as Start (never standing→driving, posing→walking, standing↔sitting). Only camera angle, depth, floating SAVE THE DATE and airborne motifs differ. Smooth continuous move — no morphable body/prop transformations.');
+ const contrast=side==='last'&&index>=1
+  ?` Start was: ${scene.firstBrief}. End must be: ${scene.lastBrief}. Do not reproduce the Start composition. Visible camera change and motifs at different airborne positions vs Start are mandatory.`
+  :'';
+ const retry=strongDelta&&side==='last'&&index>=1?' '+STRONG_END_DELTA:'';
+ return `Render ONE standalone vertical 9:16 endpoint, no sheet/borders/labels. Exact approved scene: ${brief}. ${board.continuity}. ${people} ${camera}${contrast}${retry} Text: ${index===0&&side==='first'?'NONE; fully closed reveal at 0s':scene.titleText||'NONE'}. Exact spelling, no extra letters. Retain pin medium and theme. No costume transformations.`;
+}
 export async function paintEndpoints(board,{env=process.env,fetchImpl=fetch,imageRunner=runReplicateImage,save,identity,previous}={}){
  const persist=save;let saveQueue=Promise.resolve();
  save=b=>(saveQueue=saveQueue.then(()=>persist(b)));
@@ -40,34 +70,26 @@ export async function paintEndpoints(board,{env=process.env,fetchImpl=fetch,imag
   })());
   return referenceCache.get(url);
  };
+ const paintOnce=async(index,side,reference,{strongDelta=false}={})=>{
+  const scene=board.scenes[index];
+  const prompt=buildEndpointPrompt(board,index,side,{strongDelta});
+  const result=await imageRunner({prompt,image:await providerReference(reference),model:STILL_MODEL,role:'storyboard-endpoint',env,fetchImpl});
+  scene[side]=await storeEndpoint(result.url,{env,fetchImpl,source:'scene-'+(index+1)+'-'+side+(strongDelta?'-retry':'')});
+  await save(board);
+ };
  const make=async(index,side,reference)=>{
   const scene=board.scenes[index];
   if(scene[side])return;
-  const brief=side==='first'?scene.firstBrief:scene.lastBrief;
-  const people=index===0
-   ?'This endpoint contains no people, human body parts, shadows or reflections. No humans or hands.'
-   :index===1
-   ?'Match the reference accessory and clothing detail only; no full person in this macro. Macro detail already physically present; no loose floating garment that invents a new object.'
-   :'Preserve the supplied couple reference: ONE bride and ONE groom with clear recognizable faces, neat editorial photoshoot poses, individual gender, outfit, shoes and anatomy; no extra person. Do NOT hide faces or force overhead crowns-only. NO walking or traveling bodies.';
-  const camera=index===0
-   ?(side==='first'
-    ?'Fully closed reveal at 0s; sealed/opaque, no gap.'
-    :'Opened reveal state after automatic open; names readable; continuous from the closed Start — not a reverse close.')
-   :index===1
-   ?(side==='first'
-    ?'Macro Start angle. Include pin-true motifs ready to drift.'
-    :'Macro End angle: DIFFERENT camera position from Start (gentle bullet-time orbit/push/slide). Same object. Glamorous theme motifs mid-flight through the air. Not a duplicate of Start.')
-   :index<4
-   ?(side==='first'
-    ?'Editorial photoshoot Start angle with clear faces and a neat held pose. Motifs ready to fly.'
-    :'Editorial End angle: DIFFERENT camera from Start for a smooth continuous bullet-time arc (orbit/push/slide — never reverse). Same couple pose and activity as Start. Glamorous airborne motifs, petals, foil and theme objects mid-flight. Not a still duplicate of Start.')
-   :(side==='first'
-    ?'Hero Start: sharp faces, held editorial pose, SAVE THE DATE present if titled. Motifs ready to drift.'
-    :'Hero End: SAME activity and pose family as Start (never standing→driving, posing→walking, standing↔sitting). Only camera angle, depth, floating SAVE THE DATE and airborne motifs differ. Smooth continuous move — no morphable body/prop transformations.');
-  const prompt=`Render ONE standalone vertical 9:16 endpoint, no sheet/borders/labels. Exact approved scene: ${brief}. ${board.continuity}. ${people} ${camera} Text: ${index===0&&side==='first'?'NONE; fully closed reveal at 0s':scene.titleText||'NONE'}. Exact spelling, no extra letters. Retain pin medium and theme. No costume transformations.`;
-  const result=await imageRunner({prompt,image:await providerReference(reference),model:STILL_MODEL,role:'storyboard-endpoint',env,fetchImpl});
-  scene[side]=await storeEndpoint(result.url,{env,fetchImpl,source:'scene-'+(index+1)+'-'+side});
-  await save(board);
+  await paintOnce(index,side,reference);
+  // Scenes 2–5 must never ship identical Start/End bytes (static video).
+  if(side==='last'&&index>=1&&scene.first?.sha256&&scene.last?.sha256===scene.first.sha256){
+   delete scene.last;
+   await save(board);
+   await paintOnce(index,'last',reference,{strongDelta:true});
+   if(scene.last?.sha256===scene.first?.sha256){
+    throw new Error('Scene '+(index+1)+' End still matches Start after retry. Re-propose the storyboard so End can change camera and motifs.');
+   }
+  }
  };
  // Final hero is the shared identity source. On face swap it is copied, never repainted.
  if(identity)board.scenes[4].last=identity;
@@ -75,7 +97,13 @@ export async function paintEndpoints(board,{env=process.env,fetchImpl=fetch,imag
  const master=board.scenes[4].last.url;
  await make(0,'first',board.pinUrl);
  const tasks=[];
- for(let i=0;i<5;i++)tasks.push(async()=>{await make(i,'first',i===0?board.pinUrl:master);await make(i,'last',board.scenes[i].first.url);});
+ for(let i=0;i<5;i++)tasks.push(async()=>{
+  await make(i,'first',i===0?board.pinUrl:master);
+  // Scene 5 last was painted early as the identity master. Once Start exists, repaint End
+  // from Start so bullet-time Start≠End (unless Face Swap locked the identity asset).
+  if(i===4&&!identity)delete board.scenes[4].last;
+  await make(i,'last',board.scenes[i].first.url);
+ });
  let cursor=0,failed=false;
  const worker=async()=>{while(!failed){const task=tasks[cursor++];if(!task)return;try{await task();}catch(error){failed=true;throw error;}}};
  const results=await Promise.allSettled([worker(),worker()]);

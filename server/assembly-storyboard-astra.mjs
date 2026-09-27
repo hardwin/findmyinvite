@@ -108,22 +108,49 @@ function controlledScenePrompt(prompt,index,title){
  const motion=index===1
   ?'No humans. At 0s fully closed; open automatically during 0–1s, then hold the complete names readable during 1–3s. Smooth continuous open only — no reverse close.'
   :index===2
-  ?'Same macro subject in both endpoints. Smooth continuous bullet-time camera move from Start to End only (orbit/slide/push-in). Motifs and theme objects drift glamorous through the air. No faces required. No reverse or back-and-forth.'
+  ?'Same macro subject in both endpoints. Smooth continuous bullet-time camera move from Start to End only (orbit/slide/push-in). Motifs and theme objects drift glamorous through the air at different positions than Start. No faces required. No reverse or back-and-forth.'
   :index<5
-  ?'Editorial photoshoot of exactly one bride and one groom with clear recognizable faces and neat held poses. NO walking/steps. Smooth continuous bullet-time camera arc from Start angle to End angle only — never reverse. Glamorous airborne motifs, petals, foil, fabric wisps and theme objects fly through the 3s. Same pose family in both endpoints; only camera + flying motifs change.'
-  :'Gentle continuous hero camera move only. Same couple activity and pose family as Start — never change standing↔sitting↔driving↔posing. End differs only by camera angle, floating SAVE THE DATE, and airborne motifs. No morphable body or prop transformations.';
+  ?'Editorial photoshoot of exactly one bride and one groom with clear recognizable faces and neat held poses. NO walking/steps. This scene uses a location and held pose distinct from the other couple scenes. Smooth continuous bullet-time camera arc from Start angle to End angle only — never reverse. Glamorous airborne motifs fly through the 3s. Same pose family within THIS scene Start→End; only camera + flying motifs change between endpoints.'
+  :'Gentle continuous hero camera move only. Location and held pose for this hero beat must differ from scenes 3 and 4. Same couple activity and pose family as THIS scene Start — never change standing↔sitting↔driving↔posing. End differs only by camera angle, floating SAVE THE DATE, and airborne motifs. No morphable body or prop transformations.';
  return [prompt,'Exactly 3 seconds, local 0–3s. Preserve both supplied endpoint compositions, identities, distinct outfits, footwear and objects. No morphing people into a different activity, no walking, no new people. '+motion,title?'Exact text "'+title+'" remains sharply readable for at least two seconds.':'No lettering.'].join('\n');
 }
 export const SEGMENTED_DIRECTION='five-clips-v1';
-export const SEGMENTED_AUTHOR_RULES=`Create five independently controlled THREE-second wedding invitation clips, joined with clean editorial cuts. This supersedes continuous-flight, 1km, 360-orbit, overhead-crowns-only and face-hiding middle-scene instructions. Exactly five scenes with TWO standalone endpoint descriptions each (firstBrief=Start at local 0s, lastBrief=End at local 3s). Each clip stays in ONE location. Start and End MUST be DIFFERENT camera angles of a smooth continuous bullet-time move — never identical stills, never reverse/back-and-forth wobble. Between Start and End, choreograph glamorous airborne motifs and theme objects flying through the air (petals, foil scraps, blossoms, fabric wisps, sparkles, pin-true ornaments) while the couple holds a neat poseshoot pose with NO walking.
+const CAMERA_CUE=/\b(camera|angle|orbit|push[- ]?in|slide|arc|dolly|pan|tilt|closer|wider|low|eye[- ]?level|three[- ]?quarter|side|front|25|30|degree|°)\b/i;
+const MOTIF_CUE=/\b(motif|petal|foil|blossom|sparkle|airborne|flying|mid[- ]?(flight|air|arc)|drift|wisps?|ornament)\b/i;
+const normalizeBrief=s=>String(s||'').toLowerCase().replace(/[^\p{L}\p{N}\s]/gu,' ').replace(/\s+/g,' ').trim();
+const stripTitleNoise=s=>normalizeBrief(s).replace(/\b(we're getting married|save the date|weds)\b/g,' ').replace(/\s+/g,' ').trim();
+const alike=(a,b)=>{
+ const x=stripTitleNoise(a),y=stripTitleNoise(b);
+ if(!x||!y)return false;
+ if(x===y)return true;
+ const shorter=x.length<=y.length?x:y,longer=x.length<=y.length?y:x;
+ return longer.includes(shorter)&&shorter.length>=40;
+};
+/** Reject boards that would paint static posters or clone the same couple setup across scenes 3–5. */
+export function assertSegmentedBoardMotion(board){
+ const scenes=board?.scenes;
+ if(!Array.isArray(scenes)||scenes.length!==5)throw new Error('Storyboard must contain exactly five scenes.');
+ for(let i=1;i<5;i++){
+  const scene=scenes[i],first=String(scene.firstBrief||'').trim(),last=String(scene.lastBrief||'').trim();
+  if(!first||!last)throw new Error('Scene '+(i+1)+' needs both Start and End briefs.');
+  if(normalizeBrief(first)===normalizeBrief(last))throw new Error('Scene '+(i+1)+' Start and End briefs are identical — describe a different camera angle and motif flight for End.');
+  if(!CAMERA_CUE.test(last))throw new Error('Scene '+(i+1)+' End brief must name a concrete camera delta (orbit, push-in, slide, angle change).');
+  if(!MOTIF_CUE.test(last))throw new Error('Scene '+(i+1)+' End brief must place flying motifs mid-flight at different positions than Start.');
+ }
+ for(const [a,b] of [[2,3],[2,4],[3,4]]){
+  if(alike(scenes[a].scene,scenes[b].scene)||alike(scenes[a].firstBrief,scenes[b].firstBrief)){
+   throw new Error('Scenes '+(a+1)+' and '+(b+1)+' reuse the same setup/pose. Each couple beat needs a different location and held pose (scene 4 cannot be scene 3 plus a title).');
+  }
+ }
+ return board;
+}
+export const SEGMENTED_AUTHOR_RULES=`Create five independently controlled THREE-second wedding invitation clips, joined with clean editorial cuts. This supersedes continuous-flight, 1km, 360-orbit, overhead-crowns-only and face-hiding middle-scene instructions. Exactly five scenes with TWO standalone endpoint descriptions each (firstBrief=Start at local 0s, lastBrief=End at local 3s). Each clip stays in ONE location. Start and End MUST be DIFFERENT camera angles of a smooth continuous bullet-time move — never identical stills, never reverse/back-and-forth wobble. Between Start and End, choreograph glamorous airborne motifs and theme objects flying through the air (petals, foil scraps, blossoms, fabric wisps, sparkles, pin-true ornaments) while subjects hold a neat photoshoot pose with NO walking. Every lastBrief MUST explicitly name the camera delta (e.g. push-in, 25° orbit, low→eye) AND where motifs sit mid-flight at End.
 
 Scene 1: human-free. Starts fully sealed/closed. Opens AUTOMATICALLY within local 0–1s to exact confirmed names from coupleTitle, clearly readable through 1–3s. lastBrief includes the complete names. End is the opened reveal state, not a reverse close.
 
-Scene 2: theme-specific macro (accessory/embroidery/ring or naturally resting hand). Object already present in BOTH endpoints. No full faces required. firstBrief and lastBrief are DIFFERENT camera angles of the same object (push-in, gentle orbit, or slide) with flying motifs; no text.
+Scene 2: theme-specific macro (accessory/embroidery/ring or naturally resting hand). Object already present in BOTH endpoints. No full faces required. firstBrief and lastBrief are DIFFERENT camera angles of the same object (push-in, gentle orbit, or slide) with flying motifs at different airborne positions; no text.
 
-Scenes 3 and 4: glamorous editorial photoshoot tableaux of the SAME bride and groom. Clear recognizable faces and neat held poses are REQUIRED — do NOT hide faces, do NOT force overhead crowns-only, do NOT keep the pair tiny. Feet planted, no walking. Each scene is a different location/setup. firstBrief and lastBrief MUST differ by camera angle only (smooth bullet-time arc / orbit / push) with many flying motifs; same pose and activity in both endpoints. Scene 3 no text. Scene 4 exact We're getting married appears in BOTH endpoints, readable >=2 seconds, clear of faces.
-
-Scene 5: gentle hero arc (NOT 360). Sharp reference faces. Exact SAVE THE DATE in BOTH endpoints, readable >=2 seconds. CRITICAL: firstBrief and lastBrief keep the SAME activity and pose family — only camera angle, depth, floating title and airborne motifs may change. NEVER transform standing↔driving, posing↔walking, standing↔sitting, or any body/prop action the video model cannot interpolate; that causes morph collapse. Prefer a held editorial pose both ends with a smooth glamorous camera move and flying motifs.
+Scenes 3, 4 and 5: glamorous editorial photoshoot tableaux of the SAME bride and groom. Clear recognizable faces and neat held poses are REQUIRED — do NOT hide faces, do NOT force overhead crowns-only, do NOT keep the pair tiny. Feet planted, no walking. HARD VARIETY: scenes 3, 4 and 5 each use a DIFFERENT location/setup AND a DIFFERENT neat held pose (e.g. side-by-side vs slight turn vs balcony lean). Scene 4 must NOT be scene 3 plus a title — different backdrop and framing required. Scene 5 Start must not reuse scene 3 or 4 composition. Within each scene, firstBrief and lastBrief differ by camera angle + motif flight only (same pose/activity inside that scene). Scene 3 no text. Scene 4 exact We're getting married in BOTH endpoints, readable >=2 seconds, clear of faces. Scene 5 exact SAVE THE DATE in BOTH endpoints, readable >=2 seconds. CRITICAL for scene 5 Start→End: NEVER transform standing↔driving, posing↔walking, standing↔sitting; that causes morph collapse.
 
 Use themed large bold floating 3D lettering, clear of faces, in the pin medium. No invented names, letters or extra titles. Pin is source of setting, medium, palette and motif; a reveal prop is not the whole theme. In continuity explicitly distinguish ONE bride and ONE groom, each separate outfit, hair, body, height and shoes. Final hero defines shared identity for all couple endpoints. Existing board is revision data only; preserve unaffected scene descriptions. For each scene return firstBrief, lastBrief, scene, camera, titleText and a concise self-contained prompt using LOCAL 0–3s timing and that scene's exact text/motion only. Prompts under 1800 characters. Do not generate transition travel between scenes.`;
 export async function authorSegmentedStoryboard({request,creativeContext,previous,pinUrl,names,env,fetchImpl=fetch,openaiClient}){
@@ -132,6 +159,7 @@ export async function authorSegmentedStoryboard({request,creativeContext,previou
  const board=await ask({env,openaiClient,referenceImage,name:'five_controlled_shots',instructions:SEGMENTED_AUTHOR_RULES,data:{request,creativeContext,coupleTitle,previous:previous?{title:previous.title,continuity:previous.continuity,scenes:previous.scenes?.map(({first,last,...s})=>s)}:null},schema:{type:'object',additionalProperties:false,properties:{title:{type:'string',maxLength:100},revealType:{type:'string',maxLength:80},continuity:{type:'string',maxLength:1800},scenes:{type:'array',minItems:5,maxItems:5,items:{type:'object',additionalProperties:false,properties:{scene:{type:'string',maxLength:700},camera:{type:'string',maxLength:200},firstBrief:{type:'string',maxLength:1000},lastBrief:{type:'string',maxLength:1000},titleText:{type:'string',maxLength:170},prompt:{type:'string',maxLength:1800}},required:['scene','camera','firstBrief','lastBrief','titleText','prompt']}}},required:['title','revealType','continuity','scenes']}});
  const titles=[coupleTitle,'','',"We're getting married",'SAVE THE DATE'];
  if(board.scenes.some((s,i)=>s.titleText!==titles[i]||(titles[i]&&!s.prompt.includes(titles[i]))))throw new Error('Scene titles differ from confirmed names or approved structure.');
+ assertSegmentedBoardMotion(board);
  return {...board,pinUrl,direction:SEGMENTED_DIRECTION,authorModel:STORYBOARD_MODEL,coupleNames:{groomName:names.groomName,brideName:names.brideName},namesRevision:names.revision,scenes:board.scenes.map((s,i)=>({...s,index:i+1,duration:3,prompt:controlledScenePrompt(s.prompt,i+1,s.titleText)})),revision:Date.now(),locked:false};
 }
 
