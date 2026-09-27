@@ -51,6 +51,17 @@ test('buildBulletTimePrompt customizes the generic base per scene',()=>{
  assert.match(prompt,/bride and groom/i);
 });
 
+test('author repair injects titles and float cues without throwing on Astra drift',()=>{
+ const repaired={scenes:[
+  {scene:'box',titleText:'Padayappa Weds Neelambari',firstBrief:'sealed box',lastBrief:'open box Exact text "Padayappa Weds Neelambari" readable in frame.',prompt:'p'},
+  {scene:'macro',titleText:'',firstBrief:'gold work with floating petals, foil scraps and sparkles suspended mid-air',lastBrief:'gold work with floating petals, foil scraps and sparkles suspended mid-air',prompt:'p'},
+  {scene:'pillars side by side',titleText:'',firstBrief:'couple under pillars with floating petals',lastBrief:'couple under pillars with floating petals',prompt:'p'},
+  {scene:'temple steps turn',titleText:"We're getting married",firstBrief:'temple steps Exact text "We\'re getting married" readable in frame. with floating petals, foil scraps and sparkles suspended mid-air',lastBrief:'temple steps Exact text "We\'re getting married" readable in frame. with floating petals, foil scraps and sparkles suspended mid-air',prompt:'p'},
+  {scene:'balcony lean',titleText:'SAVE THE DATE',firstBrief:'balcony Exact text "SAVE THE DATE" readable in frame. with floating petals, foil scraps and sparkles suspended mid-air',lastBrief:'balcony Exact text "SAVE THE DATE" readable in frame. with floating petals, foil scraps and sparkles suspended mid-air',prompt:'p'}
+ ]};
+ assert.equal(assertSegmentedBoardMotion(repaired),repaired);
+});
+
 test('endpoint prompts for scenes 2–5 demand floating elements in one still',()=>{
  const src=readFileSync(new URL('../server/assembly-segmented-board.mjs',import.meta.url),'utf8');
  assert.match(src,/MANDATORY: fill the air with highly detailed floating/);

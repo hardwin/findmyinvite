@@ -177,9 +177,24 @@ export async function authorSegmentedStoryboard({request,creativeContext,previou
  const coupleTitle=names.groomName+' Weds '+names.brideName;
  const board=await ask({env,openaiClient,referenceImage,name:'five_controlled_shots',instructions:SEGMENTED_AUTHOR_RULES,data:{request,creativeContext,coupleTitle,previous:previous?{title:previous.title,continuity:previous.continuity,scenes:previous.scenes?.map(({first,last,...s})=>s)}:null},schema:{type:'object',additionalProperties:false,properties:{title:{type:'string',maxLength:100},revealType:{type:'string',maxLength:80},continuity:{type:'string',maxLength:1800},scenes:{type:'array',minItems:5,maxItems:5,items:{type:'object',additionalProperties:false,properties:{scene:{type:'string',maxLength:700},camera:{type:'string',maxLength:200},firstBrief:{type:'string',maxLength:1000},lastBrief:{type:'string',maxLength:1000},titleText:{type:'string',maxLength:170},prompt:{type:'string',maxLength:1800}},required:['scene','camera','firstBrief','lastBrief','titleText','prompt']}}},required:['title','revealType','continuity','scenes']}});
  const titles=[coupleTitle,'','',"We're getting married",'SAVE THE DATE'];
- // Scenes 2–5 are single-still: force lastBrief = firstBrief before validation.
- board.scenes=board.scenes.map((s,i)=>i===0?s:{...s,firstBrief:s.firstBrief||s.lastBrief,lastBrief:s.firstBrief||s.lastBrief});
- if(board.scenes.some((s,i)=>s.titleText!==titles[i]||(titles[i]&&!s.prompt.includes(titles[i])&&!String(s.firstBrief||'').includes(titles[i]))))throw new Error('Scene titles differ from confirmed names or approved structure.');
+ const ensureTitle=(brief,title)=>{
+  const text=String(brief||'').trim();
+  if(!title||text.includes(title))return text;
+  return (text+(text?' ':'')+'Exact text "'+title+'" readable in frame.').slice(0,1000);
+ };
+ const ensureFloat=brief=>{
+  const text=String(brief||'').trim();
+  if(FLOAT_CUE.test(text))return text;
+  return (text+(text?' ':'')+'with floating petals, foil scraps and sparkles suspended mid-air.').slice(0,1000);
+ };
+ // Force approved title texts + single-still shape. Never fail the photographer on Astra title drift.
+ board.scenes=board.scenes.map((s,i)=>{
+  if(i===0){
+   return {...s,titleText:titles[0],firstBrief:String(s.firstBrief||'').trim(),lastBrief:ensureTitle(s.lastBrief,coupleTitle)};
+  }
+  const still=ensureTitle(ensureFloat(s.firstBrief||s.lastBrief),titles[i]);
+  return {...s,titleText:titles[i],firstBrief:still,lastBrief:still};
+ });
  assertSegmentedBoardMotion(board);
  return {...board,pinUrl,direction:SEGMENTED_DIRECTION,authorModel:STORYBOARD_MODEL,coupleNames:{groomName:names.groomName,brideName:names.brideName},namesRevision:names.revision,scenes:board.scenes.map((s,i)=>{
   const index=i+1;

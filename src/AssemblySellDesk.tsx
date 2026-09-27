@@ -416,7 +416,7 @@ export function StoryScenesForm({busy,onSubmit}:{busy:boolean;onSubmit:(text:str
  const [idea,setIdea]=useState('');
  return <form className="asm-sell-details" onSubmit={e=>{e.preventDefault();if(idea.trim()&&!busy)onSubmit(idea.trim());}}>
   <p className="asm-gpt-choice-title">Start with a moment</p>
-  <p className="asm-sell-eta">Describe what happens. We’ll turn it into a visual storyboard together — five scenes with Start and End images will control five short clips.</p>
+  <p className="asm-sell-eta">Describe what happens. We’ll turn it into a visual storyboard — scene 1 opens to your names; scenes 2–5 are editorial stills with floating elements for bullet-time clips.</p>
   <label>Your idea<textarea value={idea} disabled={busy} onChange={e=>setIdea(e.target.value)} placeholder="A sealed treasure box opens by itself to our names. Then a macro detail of the gold embroidery."/></label>
   <button className="asm-gpt-choice-submit" disabled={busy||!idea.trim()}>Visualize my idea</button>
  </form>;
