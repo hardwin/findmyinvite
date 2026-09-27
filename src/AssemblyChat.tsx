@@ -254,7 +254,9 @@ function Stills({urls,label}:{urls:string[];label?:string}){
   <div className="asm-gpt-images" role="group" aria-label={label||'Preview'}>
    {urls.map((url,i)=>(
     <figure className="asm-gpt-still" key={url+'-'+i}>
-     <MediaPreview url={url} label={(label||'Preview')+(urls.length>1?' '+(i+1):'')}/>
+     <a href={url} target="_blank" rel="noreferrer" aria-label="Open full-size preview">
+      <MediaPreview url={url} label={(label||'Preview')+(urls.length>1?' '+(i+1):'')}/>
+     </a>
      <figcaption>
       <span>{label||(isVideoUrl(url)?'Video':'Image')}{urls.length>1?' '+(i+1):''}</span>
       <a href={url} download target="_blank" rel="noreferrer">Download</a>
@@ -992,6 +994,20 @@ function MessageView({
  return <>{nodes}</>;
 }
 
+function StoryboardDecisionWidget({board,busy,onChip}:{board:StoryboardState;busy:boolean;onChip:(text:string)=>void}){
+ const [request,setRequest]=useState('');
+ if(!board.sheetUrl)return null;
+ return <div className="asm-gpt-choice asm-storyboard-widget" role="group" aria-label="Storyboard review actions">
+  <p className="asm-gpt-choice-title">Review the storyboard preview</p>
+  <p className="asm-sell-eta">The preview panel is read-only. Make changes here, then approve all ten endpoint images.</p>
+  {!board.locked&&<>
+   <label>What should change?<textarea value={request} onChange={e=>setRequest(e.target.value)} placeholder="Change scene 2 accessories or revise the overhead pose…" disabled={busy}/></label>
+   <div className="asm-gpt-chips"><button className="asm-gpt-chip" disabled={busy||!request.trim()} onClick={()=>{onChip('Revise the CURRENT storyboard: '+request.trim()+'\nPreserve all unmentioned scenes and continuity. Show the updated visual storyboard.');setRequest('');}}>Revise storyboard</button>
+   <button className="asm-gpt-choice-submit" disabled={busy||Boolean(board.revisionPending)} onClick={()=>onChip('Approve storyboard\nsheetUrl: '+board.sheetUrl+'\nApprove these exact ten endpoint images and five local 0–3-second motion prompts. Do not redraw or extract panels.')}>Approve all ten endpoints</button></div>
+  </>}
+ </div>;
+}
+
 export default function AssemblyChat({
  parentId,
  cloud,
@@ -1687,6 +1703,7 @@ export default function AssemblyChat({
          sendChip('I confirmed our names using the invitation form. Continue the current storyboard idea with those exact names; prepare the endpoint images for review.');
         }}/>}
         {!busy&&confirmedNames&&sell.stage==='storyboard'&&sell.storyboard?.revisionPending&&<div className="asm-sell-details"><p>Your scene plan is saved. Resume the missing endpoint images.</p><button className="asm-gpt-choice-submit" onClick={()=>sendChip('Retry my saved storyboard now. Call propose_storyboard to resume all ten endpoint images, reusing completed images and the saved plan.')}>Resume storyboard</button></div>}
+        {!busy&&sell.stage==='storyboard'&&sell.storyboard?.sheetUrl&&<StoryboardDecisionWidget board={sell.storyboard} busy={busy} onChip={sendChip}/>}
         {!busy&&confirmedNames&&sell.stage==='storyboard' &&!sell.storyboard?.sheetUrl&&!sell.storyboard?.firstBrief&&!sell.storyboard?.revisionPending&&(
          <StoryScenesForm key={chatId} busy={busy} onSubmit={sendChip}/>
         )}

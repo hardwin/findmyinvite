@@ -63,6 +63,8 @@ export function createSegmentedWorkflow(tools,{sessionKey,messages=[],env=proces
  };
  const lockTheme=tools.lock_theme_pin.execute;
  tools.lock_theme_pin.execute=async input=>{
+  const existing=await loadStory(sessionKey,env);
+  if(existing.value.pinUrl===input.pinUrl)return {ok:true,locked:true,stage:'storyboard',pinUrl:input.pinUrl,previewUrl:existing.value.board?.pinPreview||input.pinUrl,themeGrounded:true,message:'Theme already locked. Continue the current storyboard.'};
   const result=await lockTheme(input);
   if(!result.ok)return result;
   const record=await loadStory(sessionKey,env);

@@ -20,9 +20,26 @@ export async function loadStory(key,env=process.env){
  return {value:JSON.parse(await new Response(result.stream).text()),etag:result.blob.etag};
 }
 export async function saveStory(key,record,env=process.env){
- const result=await put(key,JSON.stringify(record.value),{access:'private',addRandomSuffix:false,contentType:'application/json',token:env.BLOB_READ_WRITE_TOKEN,...(record.etag?{ifMatch:record.etag}:{allowOverwrite:false})});
- record.etag=result.etag;
- return record.value;
+ try{
+  const result=await put(key,JSON.stringify(record.value),{access:'private',addRandomSuffix:false,contentType:'application/json',token:env.BLOB_READ_WRITE_TOKEN,...(record.etag?{ifMatch:record.etag}:{allowOverwrite:false})});
+  record.etag=result.etag;
+  return record.value;
+ }catch(error){
+  // Endpoint workers can finish at the same time. Merge their scene assets onto
+  // the latest state and retry once so a completed image is never lost to a
+  // stale ETag.
+  if(!/precondition|etag|412/i.test(String(error?.message||'')))throw error;
+  const latest=await loadStory(key,env);
+  const local=record.value,remote=latest.value;
+  if(local.board?.scenes&&remote.board?.scenes){
+   remote.board={...remote.board,...local.board,scenes:remote.board.scenes.map((scene,index)=>({...scene,...local.board.scenes[index]}))};
+  }
+  for(const field of ['names','pinUrl','identity','approval','generation','segmentedRunId'])if(local[field]!==undefined)remote[field]=local[field];
+  record.value=remote;record.etag=latest.etag;
+  const retry=await put(key,JSON.stringify(remote),{access:'private',addRandomSuffix:false,contentType:'application/json',token:env.BLOB_READ_WRITE_TOKEN,ifMatch:record.etag});
+  record.etag=retry.etag;
+  return record.value;
+ }
 }
 export async function confirmStoryNames(key,names,env=process.env){
  const groomName=String(names.groomName||'').trim(),brideName=String(names.brideName||'').trim();
