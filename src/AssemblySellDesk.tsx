@@ -214,6 +214,8 @@ export function mergeSellFromTool(
     lastImageUrl:sb.lastImageUrl?String(sb.lastImageUrl):undefined,
     locked:Boolean(sb.locked)&&sb.direction==='five-clips-v1'
    };
+   // Painted Last must win over the theme-pin heroUrl so Lock/Generate never pin-mismatch.
+   if(next.storyboard?.lastImageUrl)next.heroUrl=next.storyboard.lastImageUrl;
   }
   if(typeof output.sheetUrl==='string'){
    next.storyboard=next.storyboard||{

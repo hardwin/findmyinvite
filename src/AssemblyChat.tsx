@@ -1423,14 +1423,14 @@ export default function AssemblyChat({
  function requestGenerate(){
   if(busy||!canGenerate)return;
   const board=sell.storyboard;
+  // Server start_template1 auto-approves complete endpoints — keep the chip unambiguous.
   const lines=[
-   ...(board&&!board.locked&&board.sheetUrl?['Approve storyboard','sheetUrl: '+board.sheetUrl,'Approve these exact ten endpoint images and five local 0–3-second motion prompts. Do not redraw or extract panels.']:[]),
    'Generate confirmed. Start Template 1 now with start_template1.',
    'displayName: '+(sell.details.displayName||'Wedding Invite'),
-   'heroImageUrl: '+heroForGen,
+   'heroImageUrl: '+(board?.lastImageUrl||heroForGen),
    sell.pinUrl?('pinUrl: '+sell.pinUrl):'',
    board?.firstImageUrl?('firstImageUrl: '+board.firstImageUrl):'',
-   heroForGen?('lastImageUrl: '+heroForGen):'',
+   (board?.lastImageUrl||heroForGen)?('lastImageUrl: '+(board?.lastImageUrl||heroForGen)):'',
    'brideImageUrl: '+sell.brideImageUrl,
    'groomImageUrl: '+sell.groomImageUrl,
    sell.details.brideName?('brideName: '+sell.details.brideName):'',
@@ -1692,9 +1692,9 @@ export default function AssemblyChat({
           </article>
          );
         })}
-        {(sell.stage==='face_swap'||(sell.storyboard?.locked&&!sell.details.complete&&!sell.brideImageUrl))&&(sell.heroUrl||sell.storyboard?.lastImageUrl)&&(
+        {(sell.stage==='face_swap'||((sell.storyboard?.locked||endpointsReady)&&!sell.details.complete&&!sell.brideImageUrl))&&(sell.storyboard?.lastImageUrl||sell.heroUrl)&&(
          <FaceSwapBeforeLock
-          heroUrl={sell.heroUrl||sell.storyboard?.lastImageUrl||''}
+          heroUrl={sell.storyboard?.lastImageUrl||sell.heroUrl||''}
           busy={busy}
          onChip={sendChip}
         />
@@ -1703,7 +1703,10 @@ export default function AssemblyChat({
          <div className="asm-gpt-choice" role="group" aria-label="Lock final identity">
           <p className="asm-gpt-choice-title">Bride and Groom portraits are ready</p>
           <p className="asm-sell-eta">Lock these portraits with the approved Last image to continue.</p>
-          <button className="asm-gpt-choice-submit" disabled={busy} onClick={()=>sendChip('Lock this final image: '+(sell.heroUrl||sell.storyboard?.lastImageUrl||'')+'\nbrideImageUrl: '+sell.brideImageUrl+'\ngroomImageUrl: '+sell.groomImageUrl+'\ncoupleImageUrl: '+(sell.heroUrl||sell.storyboard?.lastImageUrl||''))}>Lock final image</button>
+          <button className="asm-gpt-choice-submit" disabled={busy} onClick={()=>{
+           const last=sell.storyboard?.lastImageUrl||sell.heroUrl||'';
+           sendChip('Lock this final image: '+last+'\nbrideImageUrl: '+sell.brideImageUrl+'\ngroomImageUrl: '+sell.groomImageUrl+'\ncoupleImageUrl: '+last);
+          }}>Lock final image</button>
          </div>
         )}
         {!sell.details.complete&&((Boolean(nameDraft)&&!confirmedNames)||['theme','storyboard','details'].includes(sell.stage))&&<OpeningNamesForm key={chatId+(confirmedNames?.revision||JSON.stringify(nameDraft)||'')} names={confirmedNames||undefined} draft={nameDraft} busy={busy} onConfirm={async names=>{

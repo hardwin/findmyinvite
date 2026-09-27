@@ -1,11 +1,14 @@
 import {tool} from 'ai';
 import {z} from 'zod';
 import {randomUUID} from 'node:crypto';
-import {loadStory,saveStory,validateManifest,SEGMENTED_VERSION} from './assembly-story-session.mjs';
+import {loadStory as loadStoryDefault,saveStory as saveStoryDefault,validateManifest,SEGMENTED_VERSION} from './assembly-story-session.mjs';
 import {authorSegmentedStoryboard} from './assembly-storyboard-astra.mjs';
 import {paintEndpoints,storeEndpoint} from './assembly-segmented-board.mjs';
 const text=m=>typeof m?.content==='string'?m.content:(m?.parts||[]).filter(p=>p.type==='text').map(p=>p.text).join('\n');
-export function createSegmentedWorkflow(tools,{sessionKey,messages=[],env=process.env,fetchImpl=fetch,openaiClient,imageRunner}={}){
+const endpointsReady=board=>Boolean(board?.scenes?.length===5&&board.scenes.every(scene=>scene.first&&scene.last)&&board.sheetUrl);
+const wantsApprove=/^Approve storyboard(?:\n|$)/i;
+const wantsGenerate=/\bGenerate confirmed\./;
+export function createSegmentedWorkflow(tools,{sessionKey,messages=[],env=process.env,fetchImpl=fetch,openaiClient,imageRunner,loadStory=loadStoryDefault,saveStory=saveStoryDefault}={}){
  const fail=message=>({ok:false,stage:'storyboard',error:message,message});
  const latest=text(messages.at(-1));
  tools.prefill_invite_names=tool({
@@ -18,6 +21,35 @@ export function createSegmentedWorkflow(tools,{sessionKey,messages=[],env=proces
  });
  let attempt;
  const output=(board,message)=>({ok:true,stage:'storyboard',storyboard:board,sheetUrl:board.sheetUrl,urls:board.sheetUrl?[board.sheetUrl]:[],message});
+ /** Persist approval when all ten endpoints exist. Demo-safe repair for lost ETag races / LLM skip. */
+ async function ensureApproved(record,{requireExplicit=false}={}){
+  const board=record.value.board,names=record.value.names;
+  if(!names||!endpointsReady(board))return null;
+  if(requireExplicit&&!wantsApprove.test(latest)&&!wantsGenerate.test(latest)&&!/^Lock this final image:/m.test(latest))return null;
+  const approvalFresh=board.locked&&record.value.approval?.names?.revision===names.revision;
+  if(approvalFresh){
+   board.revisionPending=false;
+   board.namesRevision=names.revision;
+   return record.value.approval;
+  }
+  const revision=randomUUID();
+  const final=record.value.identity?.asset||board.scenes[4].last;
+  record.value.approval=validateManifest({
+   version:SEGMENTED_VERSION,
+   approvalRevision:revision,
+   names,
+   identityRevision:record.value.identity?.revision||final.revision,
+   finalAssetHash:final.sha256,
+   scenes:board.scenes.map(s=>({index:s.index,duration:3,scene:s.scene,firstBrief:s.firstBrief,lastBrief:s.lastBrief,titleText:s.titleText,prompt:s.prompt,first:s.first,last:s.last,approvalRevision:revision}))
+  });
+  board.locked=true;
+  board.revisionPending=false;
+  board.namesRevision=names.revision;
+  board.approvalRevision=revision;
+  board.openingPrompt=board.scenes.map((s,i)=>'Scene '+(i+1)+' (local 0–3s): '+s.prompt).join('\n\n');
+  await saveStory(sessionKey,record,env);
+  return record.value.approval;
+ }
  async function paint(input){
   const record=await loadStory(sessionKey,env);
   if(!record.value.names)return fail('Confirm both names in the invitation names form before painting. Names supplied by the model are not accepted.');
@@ -78,33 +110,40 @@ export function createSegmentedWorkflow(tools,{sessionKey,messages=[],env=proces
  };
  tools.lock_storyboard.execute=async input=>{
   const record=await loadStory(sessionKey,env),board=record.value.board;
-  if(!/^Approve storyboard\n/.test(latest)||!board?.sheetUrl||!latest.includes('sheetUrl: '+board.sheetUrl)||input.sheetUrl!==board.sheetUrl||board.revisionPending||board.namesRevision!==record.value.names?.revision)return fail('Review and approve the current ten endpoint images using the approval button.');
-  const revision=randomUUID();
-  const final=record.value.identity?.asset||board.scenes[4].last;
-  if(final.sha256!==board.scenes[4].last.sha256)return fail('The locked identity differs from the displayed final image. Refresh the storyboard.');
-  record.value.approval=validateManifest({version:SEGMENTED_VERSION,approvalRevision:revision,names:record.value.names,identityRevision:record.value.identity?.revision||final.revision,finalAssetHash:final.sha256,scenes:board.scenes.map(s=>({index:s.index,duration:3,scene:s.scene,firstBrief:s.firstBrief,lastBrief:s.lastBrief,titleText:s.titleText,prompt:s.prompt,first:s.first,last:s.last,approvalRevision:revision}))});
-  board.locked=true;board.approvalRevision=revision;
-  board.openingPrompt=board.scenes.map((s,i)=>'Scene '+(i+1)+' (local 0–3s): '+s.prompt).join('\n\n');
-  await saveStory(sessionKey,record,env);
+  if(!wantsApprove.test(latest)&&!wantsGenerate.test(latest))return fail('Review and approve the current ten endpoint images using the approval button.');
+  if(!endpointsReady(board))return fail('Review and approve the current ten endpoint images using the approval button.');
+  const chipSheet=(latest.match(/^sheetUrl:\s*(\S+)/m)||[])[1]||'';
+  const inputSheet=String(input?.sheetUrl||'');
+  // Accept chip/board/model sheetUrl as long as one matches the durable board.
+  if(chipSheet&&chipSheet!==board.sheetUrl&&inputSheet&&inputSheet!==board.sheetUrl){
+   return fail('Review and approve the current ten endpoint images using the approval button.');
+  }
+  await ensureApproved(record);
   return {...output(board,'All ten endpoints approved. Use Face Swap or keep this identity; generate only after details are confirmed.'),stage:record.value.identity?'details':'face_swap',heroImageUrl:board.lastImageUrl,firstImageUrl:board.firstImageUrl,lastImageUrl:board.lastImageUrl};
  };
  const lockFinal=tools.lock_final_image.execute;
  tools.lock_final_image.execute=async input=>{
   const record=await loadStory(sessionKey,env),board=record.value.board;
-  // A prior approval response may have reached the chat after its state write
-  // lost a concurrent ETag race. If all ten canonical endpoints are present,
-  // the user's Lock action is an explicit approval retry; repair the durable
-  // approval before selecting the identity.
-  if(board&&!board.locked&&board.scenes?.length===5&&board.scenes.every(scene=>scene.first&&scene.last)){
-   const revision=randomUUID(),final=board.scenes[4].last;
-   record.value.approval=validateManifest({version:SEGMENTED_VERSION,approvalRevision:revision,names:record.value.names,identityRevision:record.value.identity?.revision||final.revision,finalAssetHash:final.sha256,scenes:board.scenes.map(s=>({index:s.index,duration:3,scene:s.scene,firstBrief:s.firstBrief,lastBrief:s.lastBrief,titleText:s.titleText,prompt:s.prompt,first:s.first,last:s.last,approvalRevision:revision}))});
-   board.locked=true;board.approvalRevision=revision;await saveStory(sessionKey,record,env);
+  if(!await ensureApproved(record,{requireExplicit:false})&&!board?.locked){
+   return fail('Approve the current endpoints before selecting the final identity.');
   }
-  if(!board?.locked)return fail('Approve the current endpoints before selecting the final identity.');
-  // The user-owned face-swap Lock button identifies the selected asset, not a model guess.
+  // Prefer the durable Last endpoint over a stale theme-pin heroUrl from the client.
   const selected=latest.match(/^Lock this final image:\s*(https?:\/\/\S+)/m)?.[1];
-  if(!selected&&input.imageUrl!==board.lastImageUrl)return fail('Use the Face Swap Lock button to select this final image.');
-  const authoritative=selected||board.lastImageUrl;
+  const boardLast=board.lastImageUrl;
+  let authoritative=boardLast;
+  if(selected&&selected===boardLast)authoritative=boardLast;
+  else if(selected&&input.imageUrl===boardLast)authoritative=boardLast;
+  else if(selected&&selected!==boardLast&&selected!==record.value.pinUrl&&!/pinimg\.com|i\.pinimg\.com/i.test(selected)){
+   // Real face-swap / remix still — accept the photographer's Lock choice.
+   authoritative=selected;
+  }else if(input.imageUrl&&input.imageUrl===boardLast){
+   authoritative=boardLast;
+  }else if(selected&&(selected===record.value.pinUrl||/pinimg\.com|i\.pinimg\.com/i.test(selected))){
+   // Skip-to-solos path often locks the original pin; keep the painted Last.
+   authoritative=boardLast;
+  }else if(selected){
+   authoritative=selected;
+  }
   const asset=authoritative===board.lastImageUrl?board.scenes[4].last:await storeEndpoint(authoritative,{env,fetchImpl,source:'face-swap-lock'});
   const result=await lockFinal({...input,imageUrl:asset.url});
   if(!result.ok)return result;
@@ -127,15 +166,33 @@ export function createSegmentedWorkflow(tools,{sessionKey,messages=[],env=proces
  const start=tools.start_template1.execute;
  tools.start_template1.execute=async input=>{
   const record=await loadStory(sessionKey,env);
-  if(!/^Generate confirmed\./.test(latest)&&!/^Approve storyboard\n/.test(latest))return fail('Use Generate after approving the endpoints and confirming details.');
-  if(!record.value.board?.locked||record.value.approval?.names.revision!==record.value.names?.revision)return fail('Approve the current endpoints before generating.');
+  if(!wantsGenerate.test(latest)&&!wantsApprove.test(latest))return fail('Use Generate after approving the endpoints and confirming details.');
+  // Generate is the hard gate — auto-approve complete endpoints so a lost lock cannot stall the demo.
+  if(!await ensureApproved(record))return fail('Approve the current endpoints before generating.');
   const manifest=validateManifest(record.value.approval),last=manifest.scenes[4].last;
-  return start({...input,revealType:'custom',openingManifest:manifest,storySessionKey:sessionKey,storyboard:{...record.value.board,revealType:'custom'},firstImageUrl:manifest.scenes[0].first.url,lastImageUrl:last.url,heroImageUrl:last.url,coupleImageUrl:last.url,groomName:manifest.names.groomName,brideName:manifest.names.brideName,brideImageUrl:record.value.identity?.brideImageUrl||input.brideImageUrl,groomImageUrl:record.value.identity?.groomImageUrl||input.groomImageUrl});
+  return start({
+   ...input,
+   revealType:'custom',
+   openingManifest:manifest,
+   storySessionKey:sessionKey,
+   storyboard:{...record.value.board,revealType:'custom'},
+   firstImageUrl:manifest.scenes[0].first.url,
+   lastImageUrl:last.url,
+   heroImageUrl:last.url,
+   coupleImageUrl:last.url,
+   groomName:manifest.names.groomName,
+   brideName:manifest.names.brideName,
+   brideImageUrl:record.value.identity?.brideImageUrl||input.brideImageUrl,
+   groomImageUrl:record.value.identity?.groomImageUrl||input.groomImageUrl
+  });
  };
  const stage=tools.set_sell_stage.execute;
  tools.set_sell_stage.execute=async input=>{
   const record=await loadStory(sessionKey,env);
-  if(record.value.board&&!record.value.board.locked&&!['welcome','theme','storyboard'].includes(input.stage))return fail('Review and approve the current endpoint images first.');
+  if(record.value.board&&!record.value.board.locked&&!['welcome','theme','storyboard'].includes(input.stage)){
+   if(endpointsReady(record.value.board)&&record.value.names)await ensureApproved(record);
+   else return fail('Review and approve the current endpoint images first.');
+  }
   return stage(input);
  };
  tools.craft_storyboard_stills.execute=async()=>fail('Use the ten saved endpoints; do not regenerate or extract a storyboard sheet.');

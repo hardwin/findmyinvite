@@ -137,13 +137,30 @@ export default async function handler(req,res){
   const lastUser=[...messages].reverse().find(message=>message.role==='user');
   const latestText=typeof lastUser?.content==='string'?lastUser.content:(lastUser?.parts||[]).filter(part=>part.type==='text').map(part=>part.text).join('\n');
   const resumeStoryboard=Boolean(savedStory.names&&/^Retry (?:my (?:saved|current|latest)(?: five-scene)? )?storyboard\b/i.test(latestText));
+  // Demo-critical: photographer chips must hit the durable tools — never leave to freeform chat.
+  const generateConfirmed=/\bGenerate confirmed\./.test(latestText);
+  const approveStoryboard=/^Approve storyboard(?:\n|$)/i.test(latestText)&&!generateConfirmed;
+  const lockFinalChip=/^Lock this final image:/m.test(latestText);
+  const skipSolosChip=/Skip Face Swap|craft_chapter_solos/i.test(latestText)&&!lockFinalChip&&!generateConfirmed;
+  const forcedTool=resumeStoryboard?'propose_storyboard'
+   :generateConfirmed?'start_template1'
+   :approveStoryboard?'lock_storyboard'
+   :lockFinalChip?'lock_final_image'
+   :skipSolosChip?'craft_chapter_solos'
+   :'';
   const result=streamText({
    model:assemblyChatModel(process.env,provider),
    system,
    messages:modelMessages,
    tools,
-   toolChoice:resumeStoryboard?{type:'tool',toolName:'propose_storyboard'}:'auto',
-   stopWhen:[stepCountIs(12),({steps})=>steps.at(-1)?.toolResults?.some(result=>['propose_storyboard','craft_storyboard_sheet','lock_storyboard','lock_final_image','craft_chapter_solos'].includes(result.toolName))===true],
+   toolChoice:forcedTool?{type:'tool',toolName:forcedTool}:'auto',
+   // On Generate, never stop after lock_storyboard — start_template1 auto-approves then starts.
+   stopWhen:[stepCountIs(12),({steps})=>{
+    const names=generateConfirmed
+     ?['propose_storyboard','craft_storyboard_sheet','start_template1']
+     :['propose_storyboard','craft_storyboard_sheet','lock_storyboard','lock_final_image','craft_chapter_solos'];
+    return steps.at(-1)?.toolResults?.some(result=>names.includes(result.toolName))===true;
+   }],
    maxRetries:1,
    onError({error}){
     console.error('assembly-chat streamText',provider,error);
