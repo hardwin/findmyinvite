@@ -91,6 +91,15 @@ export function createSegmentedWorkflow(tools,{sessionKey,messages=[],env=proces
  const lockFinal=tools.lock_final_image.execute;
  tools.lock_final_image.execute=async input=>{
   const record=await loadStory(sessionKey,env),board=record.value.board;
+  // A prior approval response may have reached the chat after its state write
+  // lost a concurrent ETag race. If all ten canonical endpoints are present,
+  // the user's Lock action is an explicit approval retry; repair the durable
+  // approval before selecting the identity.
+  if(board&&!board.locked&&board.scenes?.length===5&&board.scenes.every(scene=>scene.first&&scene.last)){
+   const revision=randomUUID(),final=board.scenes[4].last;
+   record.value.approval=validateManifest({version:SEGMENTED_VERSION,approvalRevision:revision,names:record.value.names,identityRevision:record.value.identity?.revision||final.revision,finalAssetHash:final.sha256,scenes:board.scenes.map(s=>({index:s.index,duration:3,scene:s.scene,firstBrief:s.firstBrief,lastBrief:s.lastBrief,titleText:s.titleText,prompt:s.prompt,first:s.first,last:s.last,approvalRevision:revision}))});
+   board.locked=true;board.approvalRevision=revision;await saveStory(sessionKey,record,env);
+  }
   if(!board?.locked)return fail('Approve the current endpoints before selecting the final identity.');
   // The user-owned face-swap Lock button identifies the selected asset, not a model guess.
   const selected=latest.match(/^Lock this final image:\s*(https?:\/\/\S+)/m)?.[1];

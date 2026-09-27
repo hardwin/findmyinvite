@@ -143,7 +143,7 @@ export default async function handler(req,res){
    messages:modelMessages,
    tools,
    toolChoice:resumeStoryboard?{type:'tool',toolName:'propose_storyboard'}:'auto',
-   stopWhen:[stepCountIs(12),({steps})=>steps.at(-1)?.toolResults?.some(result=>['propose_storyboard','craft_storyboard_sheet','lock_final_image'].includes(result.toolName))===true],
+   stopWhen:[stepCountIs(12),({steps})=>steps.at(-1)?.toolResults?.some(result=>['propose_storyboard','craft_storyboard_sheet','lock_storyboard','lock_final_image','craft_chapter_solos'].includes(result.toolName))===true],
    maxRetries:1,
    onError({error}){
     console.error('assembly-chat streamText',provider,error);

@@ -1692,12 +1692,19 @@ export default function AssemblyChat({
           </article>
          );
         })}
-        {sell.stage==='face_swap'&&(sell.heroUrl||sell.storyboard?.lastImageUrl)&&(
+        {(sell.stage==='face_swap'||(sell.storyboard?.locked&&!sell.details.complete&&!sell.brideImageUrl))&&(sell.heroUrl||sell.storyboard?.lastImageUrl)&&(
          <FaceSwapBeforeLock
           heroUrl={sell.heroUrl||sell.storyboard?.lastImageUrl||''}
           busy={busy}
-          onChip={sendChip}
-         />
+         onChip={sendChip}
+        />
+        )}
+        {sell.brideImageUrl&&sell.groomImageUrl&&!sell.details.complete&&(
+         <div className="asm-gpt-choice" role="group" aria-label="Lock final identity">
+          <p className="asm-gpt-choice-title">Bride and Groom portraits are ready</p>
+          <p className="asm-sell-eta">Lock these portraits with the approved Last image to continue.</p>
+          <button className="asm-gpt-choice-submit" disabled={busy} onClick={()=>sendChip('Lock this final image: '+(sell.heroUrl||sell.storyboard?.lastImageUrl||'')+'\nbrideImageUrl: '+sell.brideImageUrl+'\ngroomImageUrl: '+sell.groomImageUrl+'\ncoupleImageUrl: '+(sell.heroUrl||sell.storyboard?.lastImageUrl||''))}>Lock final image</button>
+         </div>
         )}
         {!sell.details.complete&&((Boolean(nameDraft)&&!confirmedNames)||['theme','storyboard','details'].includes(sell.stage))&&<OpeningNamesForm key={chatId+(confirmedNames?.revision||JSON.stringify(nameDraft)||'')} names={confirmedNames||undefined} draft={nameDraft} busy={busy} onConfirm={async names=>{
          const res=await managerFetch('/api/assembly-chat?action=confirm-names',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chatId,...names})});
