@@ -999,11 +999,11 @@ function StoryboardDecisionWidget({board,busy,onChip}:{board:StoryboardState;bus
  if(!board.sheetUrl)return null;
  return <div className="asm-gpt-choice asm-storyboard-widget" role="group" aria-label="Storyboard review actions">
   <p className="asm-gpt-choice-title">Review the storyboard preview</p>
-  <p className="asm-sell-eta">The preview panel is read-only. Make changes here, then approve all ten endpoint images.</p>
+  <p className="asm-sell-eta">The preview panel is read-only. Make changes here, then approve the stills (scene 1 Start/End + scenes 2–5 bullet-time stills).</p>
   {!board.locked&&<>
    <label>What should change?<textarea value={request} onChange={e=>setRequest(e.target.value)} placeholder="Change scene 2 accessories or revise the overhead pose…" disabled={busy}/></label>
    <div className="asm-gpt-chips"><button className="asm-gpt-chip" disabled={busy||!request.trim()} onClick={()=>{onChip('Revise the CURRENT storyboard: '+request.trim()+'\nPreserve all unmentioned scenes and continuity. Show the updated visual storyboard.');setRequest('');}}>Revise storyboard</button>
-   <button className="asm-gpt-choice-submit" disabled={busy||Boolean(board.revisionPending)} onClick={()=>onChip('Approve storyboard\nsheetUrl: '+board.sheetUrl+'\nApprove these exact ten endpoint images and five local 0–3-second motion prompts. Do not redraw or extract panels.')}>Approve all ten endpoints</button></div>
+   <button className="asm-gpt-choice-submit" disabled={busy||Boolean(board.revisionPending)} onClick={()=>onChip('Approve storyboard\nsheetUrl: '+board.sheetUrl+'\nApprove these storyboard stills and five local 0–3-second motion prompts. Do not redraw or extract panels.')}>Approve storyboard stills</button></div>
   </>}
  </div>;
 }

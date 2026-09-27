@@ -1,5 +1,8 @@
 # Template 1 — Base prompts → pin-styled prompts
 
+**Latest correction: single-still bullet-time for scenes 2–5 (2026-09-27).** Scene 1 keeps closed→open Start/End. Scenes 2–5 paint ONE editorial still each with floating airborne elements already in frame; video is a customized bullet-time 360 orbit with the subject frozen (same image as image + last_frame). Manifest still stores first=last for those scenes. Art medium stays pin-true. Name wiring unchanged.
+
+
 **Latest correction: hard Start/End motion gate (2026-09-27).** Scenes 2–5 must have different Start vs End briefs (concrete camera delta + flying motifs mid-flight). Scenes 3–5 each need a different location and held pose — scene 4 cannot be scene 3 plus a title. Endpoint painting contrasts Start vs End in the End prompt and retries once if End bytes hash-match Start; duplicate Start/End never ships. Art medium stays pin-true (#5). Name wiring unchanged (#8).
 
 

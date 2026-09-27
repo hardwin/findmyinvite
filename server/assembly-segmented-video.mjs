@@ -68,7 +68,14 @@ export async function runSegmentedOpening(job,{env=process.env,fetchImpl=fetch,s
     return 'data:'+asset.contentType+';base64,'+buffer.toString('base64');
    }));
    try{
-    const result=await runXaiImagineVideo({image:{url:buffers[0]},lastFrame:{url:buffers[1]},duration:3,prompt:scene.prompt,env,fetchImpl,sleepImpl,resumeRequestId:record.value.requestId,
+    // Scenes 2–5: single still (first===last). Drive bullet-time from one image as both image + last_frame.
+    const single=scene.first.sha256===scene.last.sha256;
+    const result=await runXaiImagineVideo({
+     image:{url:buffers[0]},
+     lastFrame:{url:single?buffers[0]:buffers[1]},
+     duration:3,
+     prompt:scene.prompt,
+     env,fetchImpl,sleepImpl,resumeRequestId:record.value.requestId,
      onSubmitting:async()=>{checkCancelled();record.value={...record.value,status:'submitting',signature,startedAt:new Date().toISOString()};await saveState(key,record,env);},
      onSubmitted:async requestId=>{record.value={...record.value,status:'rendering',requestId};await saveState(key,record,env);},
      onTick:()=>{checkCancelled();onProgress('Creating opening: '+completed+' of 5 scenes ready. Scene '+scene.index+' rendering.');}
