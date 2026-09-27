@@ -497,7 +497,7 @@ export function GenerateBar({
      {details.eventDate?' · '+details.eventDate:''}
      {details.venue?' · '+details.venue:''}
     </p>
-    <p className="asm-sell-eta">First, review your opening video. Approve it to build the rest of your invitation.</p>
+    <p className="asm-sell-eta">Generate the opening video first. You’ll review and approve it before the rest of your invitation is built.</p>
    </div>
    <button type="button" className="asm-sell-generate-btn" disabled={busy||!ready} onClick={onGenerate}>
     Generate

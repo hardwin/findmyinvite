@@ -1412,9 +1412,10 @@ export default function AssemblyChat({
 
  const ready=Boolean(input.trim()||attachments.length);
  const heroForGen=sell.heroUrl||sell.storyboard?.lastImageUrl||sell.pinPreview||'';
+ const endpointsReady=Boolean(sell.storyboard?.scenes?.length===5&&sell.storyboard.scenes.every(scene=>scene.first&&scene.last));
  const canGenerate=(sell.stage==='generate'||sell.details.complete===true)
   &&Boolean(heroForGen)
-  &&Boolean(sell.storyboard?.locked&&sell.storyboard?.direction==='five-clips-v1'&&confirmedNames)
+  &&Boolean((sell.storyboard?.locked||endpointsReady)&&sell.storyboard?.direction==='five-clips-v1'&&confirmedNames)
   &&Boolean(sell.brideImageUrl)
   &&Boolean(sell.groomImageUrl)
   &&Boolean(sell.details.displayName||sell.details.complete);
@@ -1423,6 +1424,7 @@ export default function AssemblyChat({
   if(busy||!canGenerate)return;
   const board=sell.storyboard;
   const lines=[
+   ...(board&&!board.locked&&board.sheetUrl?['Approve storyboard','sheetUrl: '+board.sheetUrl,'Approve these exact ten endpoint images and five local 0–3-second motion prompts. Do not redraw or extract panels.']:[]),
    'Generate confirmed. Start Template 1 now with start_template1.',
    'displayName: '+(sell.details.displayName||'Wedding Invite'),
    'heroImageUrl: '+heroForGen,
