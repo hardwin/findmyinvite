@@ -2,7 +2,7 @@ import {get,put} from '@vercel/blob';
 import {mkdir,writeFile} from 'node:fs/promises';
 import {join} from 'node:path';
 import {digest,readPrivate,validateManifest} from './assembly-story-session.mjs';
-import {runXaiImagineVideo} from './assembly-ai.mjs';
+import {runXaiImagineVideo,runGrokImagineVideo,normalizeReferenceImage,resolveReplicateImageUrl} from './assembly-ai.mjs';
 import {estimateCost} from './assembly-template1-gen.mjs';
 import {run,probeMedia} from './assembly-template1-craft.mjs';
 import {saveOpeningCheckpoint,readOpeningCheckpoint} from './assembly-opening-checkpoint.mjs';
@@ -68,18 +68,42 @@ export async function runSegmentedOpening(job,{env=process.env,fetchImpl=fetch,s
     return 'data:'+asset.contentType+';base64,'+buffer.toString('base64');
    }));
    try{
-    // Scenes 2–5: single still (first===last). Drive bullet-time from one image as both image + last_frame.
+    // Scene 1: xAI first+last (closed→open). Scenes 2–5: ONE reference image only — hero-style
+    // Replicate `image` field (same as heroVideo). Same still as image+last_frame causes motif ping-pong.
     const single=scene.first.sha256===scene.last.sha256;
-    const result=await runXaiImagineVideo({
-     image:{url:buffers[0]},
-     lastFrame:{url:single?buffers[0]:buffers[1]},
-     duration:3,
-     prompt:scene.prompt,
-     env,fetchImpl,sleepImpl,resumeRequestId:record.value.requestId,
-     onSubmitting:async()=>{checkCancelled();record.value={...record.value,status:'submitting',signature,startedAt:new Date().toISOString()};await saveState(key,record,env);},
-     onSubmitted:async requestId=>{record.value={...record.value,status:'rendering',requestId};await saveState(key,record,env);},
-     onTick:()=>{checkCancelled();onProgress('Creating opening: '+completed+' of 5 scenes ready. Scene '+scene.index+' rendering.');}
-    });
+    let result;
+    if(single){
+     checkCancelled();
+     record.value={...record.value,status:'submitting',signature,startedAt:new Date().toISOString()};
+     await saveState(key,record,env);
+     const buffer=Buffer.from(buffers[0].replace(/^data:[^;]+;base64,/,''),'base64');
+     const imageUrl=await resolveReplicateImageUrl(normalizeReferenceImage({
+      buffer,
+      contentType:scene.first.contentType||'image/jpeg',
+      sourceUrl:scene.first.url||scene.first.blobUrl
+     }),{env,fetchImpl});
+     const video=await runGrokImagineVideo({
+      imageUrl,
+      duration:3,
+      prompt:scene.prompt,
+      env,fetchImpl,
+      onTick:()=>{checkCancelled();onProgress('Creating opening: '+completed+' of 5 scenes ready. Scene '+scene.index+' rendering.');}
+     });
+     result={buffer:video.buffer,requestId:video.predictionId,costUsd:estimate};
+     record.value={...record.value,status:'rendering',requestId:result.requestId};
+     await saveState(key,record,env);
+    }else{
+     result=await runXaiImagineVideo({
+      image:{url:buffers[0]},
+      lastFrame:{url:buffers[1]},
+      duration:3,
+      prompt:scene.prompt,
+      env,fetchImpl,sleepImpl,resumeRequestId:record.value.requestId,
+      onSubmitting:async()=>{checkCancelled();record.value={...record.value,status:'submitting',signature,startedAt:new Date().toISOString()};await saveState(key,record,env);},
+      onSubmitted:async requestId=>{record.value={...record.value,status:'rendering',requestId};await saveState(key,record,env);},
+      onTick:()=>{checkCancelled();onProgress('Creating opening: '+completed+' of 5 scenes ready. Scene '+scene.index+' rendering.');}
+     });
+    }
     const blob=await put(root+'/'+scene.index+'-'+signature+'.mp4',result.buffer,{access:'private',addRandomSuffix:true,contentType:'video/mp4',token:env.BLOB_READ_WRITE_TOKEN});
     record.value={...record.value,status:'ready',blobUrl:blob.url,requestId:result.requestId,costUsd:result.costUsd??estimate};
     await saveState(key,record,env);

@@ -45,18 +45,20 @@ export async function renderBoardSheet(board,env=process.env){
 export function buildEndpointPrompt(board,index,side){
  const scene=board.scenes[index];
  const brief=side==='first'?scene.firstBrief:scene.lastBrief;
- // Scenes 2–5: one editorial still with floating elements already in-frame for bullet-time.
+ // Scenes 2–5: one editorial GlamBOT still with floating elements already in-frame.
  if(index>=1){
   const people=index===1
    ?'Macro accessory/embroidery/ring or fabric detail only; no full faces required. Match the couple reference materials when relevant.'
-   :'Preserve the supplied couple reference: ONE bride and ONE groom with clear recognizable faces, neat editorial high-budget photoshoot poses, individual gender, outfit, shoes and anatomy; no extra person. NO walking.';
+   :index===4
+    ?'Preserve the supplied couple IDENTITY (who they are, wardrobe, hair, shoes): ONE bride and ONE groom. Faces must ADAPT naturally to THIS scene\'s body angle and camera — do NOT copy a locked frontal pin face angle onto a turned/leaning body. Alive hero finish, not a dead freeze. No extra person. NO walking.'
+    :'Preserve the supplied couple IDENTITY (who they are, wardrobe, hair, shoes): ONE bride and ONE groom. Faces must ADAPT naturally to THIS scene\'s body angle, head turn and camera — do NOT lock the pin\'s face angle; re-pose head/gaze/expression to match the body. CAUGHT-IN-ACTION mid-motion pose (fabric flare, lean, twirl pause, embrace mid-move) — not a standard stiff standing photoshoot pose. No extra person. NO walking.';
   return [
-   'Render ONE standalone vertical 9:16 editorial still, no sheet/borders/labels.',
+   'Render ONE standalone vertical 9:16 GlamBOT editorial still, no sheet/borders/labels.',
    'Exact approved scene: '+brief+'.',
    board.continuity||'',
    people,
-   'MANDATORY: fill the air with highly detailed floating/airborne elements already frozen mid-air in this still (petals, foil scraps, blossoms, fabric wisps, sparkles, dust motes, pin-true motifs). Bullet-time video will orbit this frame — particles must be visible now.',
-   'Big-budget editorial quality, crisp focus, dramatic rim light catching airborne elements, pin medium retained.',
+   'MANDATORY: fill the air with highly detailed floating/airborne elements already mid-flight in this still (petals, foil scraps, blossoms, fabric wisps, sparkles, dust motes, pin-true motifs). Video will drift these UNIDIRECTIONALLY — particles must be visible and directional now.',
+   'Big-budget GlamBOT / high-fashion editorial quality, crisp focus, dramatic rim light catching airborne elements, pin medium retained.',
    'Text: '+(scene.titleText||'NONE')+'. Exact spelling, no extra letters. No costume transformations.'
   ].filter(Boolean).join(' ');
  }

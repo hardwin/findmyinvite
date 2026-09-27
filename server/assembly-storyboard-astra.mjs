@@ -110,26 +110,30 @@ function controlledScenePrompt(prompt,index,title){
  return [prompt,'Exactly 3 seconds, local 0–3s. Preserve both supplied endpoint compositions. '+motion,title?'Exact text "'+title+'" remains sharply readable for at least two seconds.':'No lettering.'].join('\n');
 }
 
-/** Generic base — assembly customizes per scene via buildBulletTimePrompt. */
-export const BULLET_TIME_BASE=`Animate this image as a cinematic ultra-slow-motion bullet-time shot. CRITICAL: ONLY the CAMERA moves. The central subject stays completely frozen in the exact pose from the input image — they must NOT rotate, spin, turn, or orbit. Motifs, petals, foil, particles, text and props stay locked in world space, frozen mid-air — they must NOT spin with the subject or tumble as a group. The camera alone executes a gentle seamless arc of about 30 percent of a full circle (roughly 90–110 degrees maximum), ultra slow motion, revealing slight parallax and three-dimensional depth. Crisp focus on the subject, dramatic volumetric rim lighting catching the frozen airborne particles, high-shutter-speed time-stop look, hyper-realistic 8k. Never full 360. Never rotate the couple or the motif field.`;
+/**
+ * Generic GlamBOT base — assembly customizes per scene via buildBulletTimePrompt.
+ * Declared here; also wired in authorSegmentedStoryboard + reviseSegmentMotion.
+ * Hero wind/blink language: server/assembly-template1-prompts.mjs BASE_PROMPTS.heroVideo
+ */
+export const BULLET_TIME_BASE=`GLAMBOT feel: a high-speed GlamBOT video capturing a celebrity couple on a luxury wedding editorial set. The camera aggressively but smoothly sweeps inward along a gentle arc of about 30 percent of a full circle (roughly 90–110 degrees maximum) as luxurious fabric and hair flare. Shot at 1000 frames per second, transitioning into crisp ultra slow-motion where floating fabric, petals, foil, blossoms and motifs drift UNIDIRECTIONALLY through the frame from start to end — never reverse, never ping-pong, never return to their starting positions, never orbit the couple as a carousel. Subjects stay planted in the still's pose (no walking, no body spin, no turning in place) but are ALIVE with subtle ultra-cinematic micro-motion: blink, soft gaze shifts, hair and clothes slight wind sway. Flashing high-fashion sparkle / paparazzi-like bokeh in the depth. Ultra-realistic skin textures, high fashion aesthetics, dramatic volumetric rim light. Continuous motion from the first frame to the last second — never a static hold, freeze-frame, or boring stillness at the beginning or end. The input image is a REFERENCE for look/identity/pose — animate FROM it; do not treat it as a matched first-and-last frame. Never full 360. Never rotate the couple.`;
 
 export function buildBulletTimePrompt(scene){
  const index=Number(scene.index)||0;
  const brief=String(scene.firstBrief||scene.lastBrief||'').trim();
  const subject=index===2
-  ?'the macro wedding accessory / fabric detail — frozen solid, no spin'
-  :'the bride and groom — frozen in their exact editorial pose, feet planted, NO rotation, NO turning, NO walking';
+  ?'the macro wedding accessory / fabric detail — keep identity of materials; allow fabric/embroidery micro-flutter in wind, no spin'
+  :'the bride and groom — feet planted in the still pose, NO walking, NO body spin; soft living motion only (blink, hair/clothes wind sway, micro expression)';
  const particles=index===2
-  ?'Theme motifs already in the still stay suspended and spatially fixed; camera parallax only — do not swirl motifs around the subject'
-  :'Theme motifs already painted in the still (petals, foil, blossoms, fabric wisps, sparkles) stay suspended and fixed in space; only the camera arcs so parallax reveals depth — never rotate motifs with the couple';
- const title=scene.titleText?`Keep exact text "${scene.titleText}" sharply readable and locked in world space (letters do not spin).`:'No lettering or titles.';
+  ?'Theme motifs already in the still drift UNIDIRECTIONALLY start→end through the frame (parallax + slow drift); never reverse or loop back'
+  :'Theme motifs already painted in the still (petals, foil, blossoms, fabric wisps, sparkles) drift UNIDIRECTIONALLY start→end; camera arc + one-way particle travel — never reverse, never motif carousel around the couple';
+ const title=scene.titleText?`Keep exact text "${scene.titleText}" sharply readable; letters may have subtle parallax but must not spin or reverse.`:'No lettering or titles.';
  return [
   BULLET_TIME_BASE,
   `Scene ${index} context: ${scene.scene||''}. ${brief}`,
-  `Frozen subject: ${subject}. Preserve identity, wardrobe, footwear and exact pose from the input still.`,
+  `Subject: ${subject}. Preserve identity, wardrobe and footwear from the reference still; faces already match this scene's body angle.`,
   `Airborne field: ${particles}. Prefer pin-true materials over generic glass if the still already shows wedding motifs.`,
   title,
-  'Exactly 3 seconds, local 0–3s. Camera-only ~30% arc, ultra slow motion. Forbidden: subject spin, motif carousel, full 360, reverse wobble, morphing bodies.'
+  'Exactly 3 seconds, local 0–3s. GlamBOT ultra slow motion, continuous through the last frame. Forbidden: motif ping-pong, reverse wobble, static hold, subject spin, full 360, morphing bodies.'
  ].join('\n').slice(0,4096);
 }
 
@@ -165,11 +169,11 @@ export function assertSegmentedBoardMotion(board){
 }
 export const SEGMENTED_AUTHOR_RULES=`Create five independently controlled THREE-second wedding invitation clips, joined with clean editorial cuts. This supersedes dual Start/End painting for scenes 2–5 and all overhead-crowns-only / face-hiding instructions.
 
-Scene 1 ONLY uses two endpoint descriptions (firstBrief=Start closed, lastBrief=End opened). Scenes 2–5 use ONE still each: put the full editorial description in firstBrief; set lastBrief to the exact same string (single reference image). Video for scenes 2–5 is bullet-time orbit from that one still — do not invent a second composition.
+Scene 1 ONLY uses two endpoint descriptions (firstBrief=Start closed, lastBrief=End opened). Scenes 2–5 use ONE still each: put the full editorial description in firstBrief; set lastBrief to the exact same string (single REFERENCE image for GlamBOT video — not a matched first/last pair). Video for scenes 2–5 is GlamBOT ultra-slow from that one reference — do not invent a second composition.
 
 Scene 1: human-free. firstBrief = fully sealed/closed reveal. lastBrief = opened reveal with exact confirmed names from coupleTitle readable. Automatic open within local 0–1s.
 
-Scenes 2–5: ONE glamorous editorial high-quality big-budget still each (pin medium). MUST paint abundant floating/airborne elements already in the still (petals, foil, blossoms, fabric wisps, sparkles, dust motes suspended mid-air) so bullet-time video has particles to orbit through. Scene 2 = theme macro accessory/embroidery/ring (no full faces required) with floating motifs. Scenes 3–5 = SAME bride and groom with CLEAR recognizable faces, neat held poses, NO walking. HARD VARIETY: scenes 3, 4, 5 each DIFFERENT location/setup AND DIFFERENT held pose. Scene 4 is not scene 3 plus a title. Scene 3 no text. Scene 4 exact We're getting married in the still. Scene 5 exact SAVE THE DATE in the still. Never standing↔driving morphs in the still.
+Scenes 2–5: ONE glamorous high-budget GLAMBOT editorial still each (pin medium). MUST paint abundant floating/airborne elements already mid-flight in the still (petals, foil, blossoms, fabric wisps, sparkles) so video can drift them unidirectionally. Scene 2 = theme macro accessory/embroidery/ring (no full faces required) with floating motifs. Scenes 3–5 = SAME bride and groom with CLEAR recognizable faces, NO walking. FACE RULE: preserve who they are (identity, wardrobe, hair) but DO NOT lock the pin's face angle — head turn, gaze and expression MUST adapt naturally to THIS scene's body pose and camera. Scenes 3 and 4 especially: CAUGHT-IN-ACTION mid-motion stills (twirl mid-flare, lean into wind, fabric caught mid-sweep, spin pause, embrace mid-step) — never a standard standing back-to-back or stiff posed portrait. Scene 5 may be a strong hero finish but still alive, not a dead freeze. HARD VARIETY: scenes 3, 4, 5 each DIFFERENT location/setup AND DIFFERENT action pose. Scene 4 is not scene 3 plus a title. Scene 3 no text. Scene 4 exact We're getting married in the still. Scene 5 exact SAVE THE DATE in the still. Never standing↔driving morphs in the still.
 
 Return scene, camera, firstBrief, lastBrief, titleText, and a short prompt seed. Prompts under 1800 characters. Pin is source of setting, medium, palette and motif. Continuity must distinguish ONE bride and ONE groom.`;
 export async function authorSegmentedStoryboard({request,creativeContext,previous,pinUrl,names,env,fetchImpl=fetch,openaiClient}){
@@ -208,7 +212,7 @@ export async function authorSegmentedStoryboard({request,creativeContext,previou
 export async function reviseSegmentMotion({scene,feedback,env=process.env,openaiClient}){
  if(!String(feedback||'').trim())return scene.prompt;
  if((scene.index||0)>=2){
-  const result=await ask({env,openaiClient,name:'revise_bullet_time',instructions:'Revise only the bullet-time MOTION prompt for ONE 3-second clip from a single approved still. Preserve frozen subject pose, identity, wardrobe, exact text, and floating elements already in the still. ONLY the camera may move — a gentle ~30% arc (about 90–110 degrees max), ultra slow motion. Subject and motifs must NOT rotate or spin. Never full 360. Do not require a second endpoint image. If the change needs a new still, set requiresNewEndpoints=true. Return prompt under 1800 characters that still includes camera-only / frozen subject / ultra-slow language.',data:{scene,feedback,base:BULLET_TIME_BASE},schema:{type:'object',additionalProperties:false,properties:{requiresNewEndpoints:{type:'boolean'},reason:{type:'string'},prompt:{type:'string',maxLength:1800}},required:['requiresNewEndpoints','reason','prompt']}});
+  const result=await ask({env,openaiClient,name:'revise_bullet_time',instructions:'Revise only the GlamBOT MOTION prompt for ONE 3-second clip from a single REFERENCE still (not a matched first/last pair). Preserve identity, wardrobe, exact text, and floating elements already in the still. Keep GLAMBOT ultra-slow language: camera ~30% arc, unidirectional motif drift start→end (never reverse/ping-pong), soft living subject micro-motion (blink, hair/clothes wind), continuous motion through the last frame, no static hold. Subject must NOT spin or walk. Never full 360. Do not require a second endpoint image. If the change needs a new still, set requiresNewEndpoints=true. Return prompt under 1800 characters.',data:{scene,feedback,base:BULLET_TIME_BASE},schema:{type:'object',additionalProperties:false,properties:{requiresNewEndpoints:{type:'boolean'},reason:{type:'string'},prompt:{type:'string',maxLength:1800}},required:['requiresNewEndpoints','reason','prompt']}});
   if(result.requiresNewEndpoints)throw new Error('Update and approve the storyboard still first: '+result.reason);
   if(!result.prompt.trim())throw new Error('No revised motion prompt returned.');
   if(scene.titleText&&!result.prompt.includes(scene.titleText))throw new Error('Revised motion omitted the exact approved text. Retry the revision.');
