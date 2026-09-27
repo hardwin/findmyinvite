@@ -1,5 +1,8 @@
 # Template 1 — Base prompts → pin-styled prompts
 
+**Latest correction: scenes 3–5 on openai/gpt-image-2 high (2026-09-27).** Dropped nano-banana. `COUPLE_STILL_MODEL='openai/gpt-image-2'` with `quality:'high'` and portrait `2:3` (model has no 9:16). Scenes 1–2 stay on `openai/gpt-image-2.5-flare` at 9:16.
+
+
 **Latest correction: nano-banana-2 at 4K (2026-09-27).** Couple stills (`google/nano-banana-2`) request `resolution:'4K'` in `buildReplicateImageInput` (`server/assembly-template1-gen.mjs`).
 
 

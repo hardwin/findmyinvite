@@ -75,7 +75,7 @@ test('endpoint prompts for scenes 2–5 demand floating elements and face adapt'
  assert.match(src,/MANDATORY: fill the air with highly detailed floating/);
  assert.match(src,/ADAPT naturally|faces must ADAPT/i);
  assert.match(src,/CAUGHT-IN-ACTION/i);
- assert.match(src,/COUPLE_STILL_MODEL|nano-banana-2|storyboardStillModel/);
+ assert.match(src,/COUPLE_STILL_MODEL|gpt-image-2|storyboardStillModel/);
  assert.doesNotMatch(src,/HARD DELTA RETRY/);
 
  const board={
@@ -92,21 +92,24 @@ test('endpoint prompts for scenes 2–5 demand floating elements and face adapt'
  assert.match(p,/ADAPT|caught-in-action|CAUGHT-IN-ACTION/i);
 });
 
-test('scenes 3–5 stills use google/nano-banana-2',async()=>{
+test('scenes 3–5 stills use openai/gpt-image-2 at high quality',async()=>{
  const {storyboardStillModel}=await import('../server/assembly-segmented-board.mjs');
  const {COUPLE_STILL_MODEL,STILL_MODEL}=await import('../server/assembly-template1-prompts.mjs');
  const {buildReplicateImageInput}=await import('../server/assembly-template1-gen.mjs');
- assert.equal(COUPLE_STILL_MODEL,'google/nano-banana-2');
+ assert.equal(COUPLE_STILL_MODEL,'openai/gpt-image-2');
  assert.equal(storyboardStillModel(0),STILL_MODEL);
  assert.equal(storyboardStillModel(1),STILL_MODEL);
  assert.equal(storyboardStillModel(2),COUPLE_STILL_MODEL);
  assert.equal(storyboardStillModel(3),COUPLE_STILL_MODEL);
  assert.equal(storyboardStillModel(4),COUPLE_STILL_MODEL);
  const input=buildReplicateImageInput(COUPLE_STILL_MODEL,{prompt:'test',image:'https://example.com/a.jpg'});
- assert.deepEqual(input.image_input,['https://example.com/a.jpg']);
- assert.equal(input.aspect_ratio,'9:16');
- assert.equal(input.output_format,'jpg');
- assert.equal(input.resolution,'4K');
+ assert.deepEqual(input.input_images,['https://example.com/a.jpg']);
+ assert.equal(input.aspect_ratio,'2:3');
+ assert.equal(input.quality,'high');
+ assert.equal(input.output_format,'jpeg');
+ const flare=buildReplicateImageInput(STILL_MODEL,{prompt:'door',image:'https://example.com/a.jpg'});
+ assert.equal(flare.aspect_ratio,'9:16');
+ assert.equal(flare.quality,'high');
 });
 
 test('segmented video uses hero-style single reference for scenes 2–5',()=>{

@@ -7,7 +7,7 @@ import {runReplicateImage} from './assembly-template1-gen.mjs';
 import {STILL_MODEL,COUPLE_STILL_MODEL} from './assembly-template1-prompts.mjs';
 import {digest,readPrivate,SEGMENTED_VERSION} from './assembly-story-session.mjs';
 const escape=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c]));
-/** Scenes 3–5 (0-based index ≥2) use Nano Banana 2; scenes 1–2 stay on flare. */
+/** Scenes 3–5 (0-based index ≥2) use GPT Image 2 high; scenes 1–2 stay on flare. */
 export function storyboardStillModel(index){
  return Number(index)>=2?COUPLE_STILL_MODEL:STILL_MODEL;
 }

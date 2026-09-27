@@ -109,8 +109,9 @@ export function normalizeImageUrls(image,images){
 }
 
 /**
- * Build Replicate image input for the chosen model (gpt-image-2.5-flare vs nano-banana-2 vs xAI Imagine).
+ * Build Replicate image input for the chosen model (gpt-image-2 / gpt-image-2.5-flare / nano-banana / xAI).
  * gpt-image supports multi `input_images` (pin + face refs for Face Swap).
+ * gpt-image-2 portrait is 2:3 (no 9:16); flare keeps 9:16. Always quality high for gpt-image.
  * nano-banana-2 uses `image_input` (array, up to 14).
  * `inputFidelity:'high'` is included when requested — omit on schema rejection at call site.
  */
@@ -119,9 +120,11 @@ export function buildReplicateImageInput(model,{prompt,image,images,inputFidelit
  const refs=normalizeImageUrls(image,images);
  const id=String(model||'');
  if(id.includes('gpt-image')){
+  // openai/gpt-image-2: 1:1 | 3:2 | 2:3. Flare / 2.5 line: named ratios incl. 9:16.
+  const flareLike=id.includes('2.5')||id.includes('flare');
   const input={
    prompt:text,
-   aspect_ratio:'9:16',
+   aspect_ratio:flareLike?'9:16':'2:3',
    output_format:'jpeg',
    number_of_images:1,
    quality:'high'

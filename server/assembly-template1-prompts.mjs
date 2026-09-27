@@ -4,10 +4,10 @@
 import {OPENING_DIRECTION,IDENTITY_REVEAL_RULES} from './assembly-storyboard-astra.mjs';
 import {normalizeRevealType,revealOpenBeat} from './assembly-sell-path.mjs';
 
-/** Door-First, last, and hero stills — Replicate OpenAI. */
+/** Door-First, last, and hero stills — Replicate OpenAI Flare. */
 export const STILL_MODEL='openai/gpt-image-2.5-flare';
-/** Couple storyboard stills (scenes 3–5) — Replicate Google Nano Banana 2. */
-export const COUPLE_STILL_MODEL='google/nano-banana-2';
+/** Couple storyboard stills (scenes 3–5) — Replicate GPT Image 2 at high quality. */
+export const COUPLE_STILL_MODEL='openai/gpt-image-2';
 /** Section frame / plate backgrounds — Replicate xAI Imagine. */
 export const PLATE_MODEL='xai/grok-imagine-image';
 /** @deprecated Prefer STILL_MODEL / PLATE_MODEL. Kept as the primary still default. */
