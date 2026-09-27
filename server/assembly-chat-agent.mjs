@@ -42,7 +42,7 @@ import {createStoryboardWorkflow} from './storyboard-workflow.mjs';
 import {createSegmentedWorkflow} from './assembly-segmented-workflow.mjs';
 import {runReplicateImage} from './assembly-template1-gen.mjs';
 
-const revealTypeField=z.string().min(2).max(40).describe(
+const revealTypeField=z.string().min(2).max(2000).describe(
  'First reveal in the photographer\'s words. Optional presets: door, envelope, clouds, building_frame, arches, windows. Never remap their choice to another type.'
 );
 
@@ -77,11 +77,11 @@ CREATIVE LAW (non-negotiable)
 PHOTOGRAPHER SELL PATH (adapt to the conversation)
 1) welcome — Hi, what are we creating? No tools on bare hello.
 2) theme — Learn style, use update_theme_search, resolve_pin and lock_theme_pin after selection.
-3) storyboard — Develop their idea together. five timed frames for one 15-second video, no minimum journey or compulsory door. propose_storyboard saves AND paints. Iterate visually until approval. If painting fails, show the error and retry the same board; never skip to First/Last. lock_storyboard extracts the approved first/final panels.
+3) storyboard — Develop their idea together. five timed frames for one 15-second video, no minimum journey or compulsory door. propose_storyboard saves AND paints ten endpoint images. Iterate visually until approval. If painting fails, show the error and retry the same board; never skip to First/Last. lock_storyboard approves the ten saved endpoints.
 4) face_swap — Offer Face Swap on the Last still. If they skip: craft_chapter_solos on Last, then lock.
 5) lock — lock_final_image with hero (= Last) + brideImageUrl + groomImageUrl.
 6) details — Reuse names already confirmed for the storyboard; collect remaining details one-by-one (display/VIBE name, date, venue, city, RSVP, music optional). Call save_invite_details as fields land. Confirm each.
-7) generate — When details complete, tell them to tap Generate. Do NOT call start_template1 until Generate confirm. Pass displayName, hero, pinUrl, storyboard, firstImageUrl, lastImageUrl, bride/groom names + date + venue + city, and solos. Generate creates ONLY the opening video first. Direct them to watch it and click Approve opening in the job card; only then do the remaining video and website build. Never approve an opening automatically. No invented charges.
+7) generate — When details complete, the Generate widget is the explicit approval gate. On its message, approve the saved endpoints if needed, then call start_template1. Pass displayName, hero, pinUrl, storyboard, firstImageUrl, lastImageUrl, bride/groom names + date + venue + city, and solos. Generate creates ONLY the opening video first. Show the opening approval card when it arrives; only then do the remaining video and website build. Never approve an opening automatically. No invented charges.
 8) ready — Celebrate when the job is done / they return.
 
 STYLE MEMORY
@@ -99,7 +99,7 @@ RULES
 - One clear question at a time.
 - Music is optional (offer Skip). Face Swap is optional but solos are NOT — craft them if skipped.
 - Opening video is xAI-only — say so clearly on xAI failure.
-- After start_template1, point at the live job card.`;
+- After start_template1, report the actual opening job status and show its approval card when it arrives.`;
 
 function previewFromResolved(resolved){
  const preferred=preferPublicImageUrl(resolved);

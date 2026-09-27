@@ -118,10 +118,10 @@ export function createSegmentedWorkflow(tools,{sessionKey,messages=[],env=proces
  const start=tools.start_template1.execute;
  tools.start_template1.execute=async input=>{
   const record=await loadStory(sessionKey,env);
-  if(!/^Generate confirmed\./.test(latest))return fail('Use Generate after approving the endpoints and confirming details.');
+  if(!/^Generate confirmed\./.test(latest)&&!/^Approve storyboard\n/.test(latest))return fail('Use Generate after approving the endpoints and confirming details.');
   if(!record.value.board?.locked||record.value.approval?.names.revision!==record.value.names?.revision)return fail('Approve the current endpoints before generating.');
   const manifest=validateManifest(record.value.approval),last=manifest.scenes[4].last;
-  return start({...input,openingManifest:manifest,storySessionKey:sessionKey,storyboard:record.value.board,firstImageUrl:manifest.scenes[0].first.url,lastImageUrl:last.url,heroImageUrl:last.url,coupleImageUrl:last.url,groomName:manifest.names.groomName,brideName:manifest.names.brideName,brideImageUrl:record.value.identity?.brideImageUrl||input.brideImageUrl,groomImageUrl:record.value.identity?.groomImageUrl||input.groomImageUrl});
+  return start({...input,revealType:'custom',openingManifest:manifest,storySessionKey:sessionKey,storyboard:{...record.value.board,revealType:'custom'},firstImageUrl:manifest.scenes[0].first.url,lastImageUrl:last.url,heroImageUrl:last.url,coupleImageUrl:last.url,groomName:manifest.names.groomName,brideName:manifest.names.brideName,brideImageUrl:record.value.identity?.brideImageUrl||input.brideImageUrl,groomImageUrl:record.value.identity?.groomImageUrl||input.groomImageUrl});
  };
  const stage=tools.set_sell_stage.execute;
  tools.set_sell_stage.execute=async input=>{
