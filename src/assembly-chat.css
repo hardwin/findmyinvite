@@ -406,3 +406,10 @@ html:has(.asm-gpt),body:has(.asm-gpt){
 .asm-story-final strong{grid-column:1/-1}
 .asm-story-final img{width:100%;border-radius:12px}
 .asm-story-preview button[aria-pressed=true]{background:#222;color:white}
+
+/* Explicit form controls: these names fields are outside the details grid. */
+.asm-opening-names label{display:grid;gap:6px;font-size:14px;font-weight:600;color:#222}
+.asm-opening-names input{box-sizing:border-box;width:100%;min-height:44px;border:1px solid #8a8a8a;border-radius:10px;padding:10px 12px;background:#fff;color:#171717;font:400 16px/1.4 var(--font)}
+.asm-opening-names input:focus{outline:2px solid #262626;outline-offset:2px}
+.asm-opening-names .asm-gpt-choice-submit{min-height:44px;border:1px solid #171717;border-radius:10px;padding:10px 16px;background:#171717;color:#fff;font-weight:600}
+.asm-opening-names .asm-gpt-choice-submit:disabled{background:#595959;border-color:#595959;color:#fff;cursor:not-allowed}

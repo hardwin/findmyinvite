@@ -2,7 +2,7 @@ import {put} from '@vercel/blob';
 import ffmpegPath from 'ffmpeg-static';
 import {run} from './assembly-template1-craft.mjs';
 import {randomUUID} from 'node:crypto';
-import {resolveReferenceImage,normalizeReferenceImage,blobImageProxyUrl} from './assembly-ai.mjs';
+import {resolveReferenceImage,normalizeReferenceImage,resolveReplicateImageUrl,blobImageProxyUrl} from './assembly-ai.mjs';
 import {runReplicateImage} from './assembly-template1-gen.mjs';
 import {STILL_MODEL} from './assembly-template1-prompts.mjs';
 import {digest,readPrivate,SEGMENTED_VERSION} from './assembly-story-session.mjs';
@@ -30,12 +30,22 @@ export async function paintEndpoints(board,{env=process.env,fetchImpl=fetch,imag
  save=b=>(saveQueue=saveQueue.then(()=>persist(b)));
  board.version=SEGMENTED_VERSION;
  board.scenes=board.scenes||[];
+ // Resolve and validate reference bytes before any paid image request. A pin is a
+ // web page, not an image; reuse the existing provider-safe image resolver.
+ const referenceCache=new Map();
+ const providerReference=url=>{
+  if(!referenceCache.has(url))referenceCache.set(url,(async()=>{
+   const image=normalizeReferenceImage(await resolveReferenceImage(url,{fetchImpl}));
+   return resolveReplicateImageUrl(image,{env,fetchImpl});
+  })());
+  return referenceCache.get(url);
+ };
  const make=async(index,side,reference)=>{
   const scene=board.scenes[index];
   if(scene[side])return;
   const brief=side==='first'?scene.firstBrief:scene.lastBrief;
   const prompt=`Render ONE standalone vertical 9:16 endpoint, no sheet/borders/labels. Exact approved scene: ${brief}. ${board.continuity}. ${index===0?'This endpoint contains no people, human body parts, shadows or reflections.':index===1?'Match the reference accessory and clothing detail only; no full person in this macro.':'Preserve the supplied couple reference: ONE bride and ONE groom, their individual gender, outfit, shoes and anatomy; no extra person.'} ${index===0?'No humans or hands.':index===1?'Macro detail already physically present, no faces or loose floating garment.':index<4?'Wide 90-degree overhead, crowns only, no faces; fixed side-by-side stance.':'Gentle hero framing, natural stable pose, preserve reference identities.'} Text: ${index===0&&side==='first'?'NONE; fully closed reveal at 0s':scene.titleText||'NONE'}. Exact spelling, no extra letters. Retain pin medium and theme. No new objects or costume transformations.`;
-  const result=await imageRunner({prompt,image:reference,model:STILL_MODEL,role:'storyboard-endpoint',env,fetchImpl});
+  const result=await imageRunner({prompt,image:await providerReference(reference),model:STILL_MODEL,role:'storyboard-endpoint',env,fetchImpl});
   scene[side]=await storeEndpoint(result.url,{env,fetchImpl,source:'scene-'+(index+1)+'-'+side});
   await save(board);
  };

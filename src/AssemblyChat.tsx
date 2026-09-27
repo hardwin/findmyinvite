@@ -951,7 +951,7 @@ function MessageView({
    }
    if(output?.ok===false){
     nodes.push(<p className="asm-alert" role="alert" key={message.id+'-failure-'+i}>{String(output.error||output.message||'Could not update the image. Try again.')}</p>);
-    if(name==='propose_storyboard'||name==='craft_storyboard_sheet')nodes.push(<button type="button" className="asm-gpt-chip" key={message.id+'-retry-board-'+i} disabled={busy} onClick={()=>onChip('Retry my current storyboard using my latest reveal idea and all theme/style choices from this conversation. Write the five frames with Astra and show the visual sheet. Do not ask me to repeat the idea.')}>Retry storyboard</button>);
+    if(name==='propose_storyboard'||name==='craft_storyboard_sheet')nodes.push(<button type="button" className="asm-gpt-chip" key={message.id+'-retry-board-'+i} disabled={busy} onClick={()=>onChip('Retry my saved five-scene storyboard now. Call propose_storyboard to resume the ten Start/End endpoint images, reusing every completed image and the saved plan. Do not ask me to repeat my idea.')}>Retry storyboard</button>);
    }
    if(output?.sheetUrl&&output.ok!==false){
     nodes.push(<p className="asm-sell-eta" key={message.id+'-version-'+i}>Visual storyboard updated. Review the current version in Preview.</p>);
@@ -1099,6 +1099,15 @@ export default function AssemblyChat({
  const busy=status==='submitted'||status==='streaming';
  const hasThread=messages.some(m=>m.role==='user'||Boolean(messageText(m)));
  const pendingImage=useMemo(()=>findPendingImageTool(messages),[messages]);
+ const nameDraft=useMemo(()=>{
+  let draft:{groomName:string;brideName:string}|undefined;
+  for(const message of messages)if(message.role==='assistant')for(const part of message.parts||[]){
+   if(!isToolUIPart(part as never)||getToolName(part as never)!=='prefill_invite_names')continue;
+   const value=toolPayload(part as Record<string,unknown>)?.nameDraft as {groomName?:string;brideName?:string}|undefined;
+   if(value?.groomName&&value?.brideName)draft={groomName:value.groomName,brideName:value.brideName};
+  }
+  return draft;
+ },[messages]);
  const pendingStoryboard=Boolean(pendingImage&&['propose_storyboard','craft_storyboard_sheet','lock_storyboard'].includes(pendingImage.name));
  const imageTimeoutMs=pendingStoryboard?STORYBOARD_TIMEOUT_MS:IMAGE_TIMEOUT_MS;
  const [elapsedMs,setElapsedMs]=useState(0);
@@ -1239,9 +1248,9 @@ export default function AssemblyChat({
   try{localStorage.setItem(ACTIVE_KEY,chatId);}catch{/* */}
  },[messages,chatId,jobId]);
 
+ useEffect(()=>{setConfirmedNames(null);setServerBoard(null);},[chatId]);
  useEffect(()=>{
   let active=true;
-  setConfirmedNames(null);setServerBoard(null);
   if(status==='streaming'||status==='submitted')return;
   void managerFetch('/api/assembly-chat?action=story-state&chatId='+encodeURIComponent(chatId)).then(async r=>{if(!r.ok)throw new Error('Could not load confirmed storyboard state.');return r.json();}).then(body=>{if(active){setConfirmedNames(body.names);setServerBoard(body.storyboard);}}).catch(error=>{if(active)setLocalError(error.message);});
   return()=>{active=false;};
@@ -1672,12 +1681,13 @@ export default function AssemblyChat({
           onChip={sendChip}
          />
         )}
-        {['theme','storyboard','details'].includes(sell.stage)&&<OpeningNamesForm key={chatId+(confirmedNames?.revision||'')} names={confirmedNames||undefined} busy={busy} onConfirm={async names=>{
+        {((Boolean(nameDraft)&&!confirmedNames)||['theme','storyboard','details'].includes(sell.stage))&&<OpeningNamesForm key={chatId+(confirmedNames?.revision||JSON.stringify(nameDraft)||'')} names={confirmedNames||undefined} draft={nameDraft} busy={busy} onConfirm={async names=>{
          const res=await managerFetch('/api/assembly-chat?action=confirm-names',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chatId,...names})});
          const body=await res.json();if(!res.ok)throw new Error(body.error||'Could not confirm names.');setConfirmedNames(body.names);setServerBoard(body.storyboard);
          sendChip('I confirmed our names using the invitation form. Continue the current storyboard idea with those exact names; prepare the endpoint images for review.');
         }}/>}
-        {!busy&&confirmedNames&&sell.stage==='storyboard' &&!sell.storyboard?.sheetUrl&&!sell.storyboard?.firstBrief&&(
+        {!busy&&confirmedNames&&sell.stage==='storyboard'&&sell.storyboard?.revisionPending&&<div className="asm-sell-details"><p>Your scene plan is saved. Resume the missing endpoint images.</p><button className="asm-gpt-choice-submit" onClick={()=>sendChip('Retry my saved storyboard now. Call propose_storyboard to resume all ten endpoint images, reusing completed images and the saved plan.')}>Resume storyboard</button></div>}
+        {!busy&&confirmedNames&&sell.stage==='storyboard' &&!sell.storyboard?.sheetUrl&&!sell.storyboard?.firstBrief&&!sell.storyboard?.revisionPending&&(
          <StoryScenesForm key={chatId} busy={busy} onSubmit={sendChip}/>
         )}
         {sell.stage==='details'&&!sell.details.complete&&(
@@ -1710,7 +1720,7 @@ export default function AssemblyChat({
           title="Image generation is taking longer than expected."
           disabled={busy}
           options={sell.stage==='storyboard'?[
-           {id:'retry',label:'Retry storyboard',submit:'Retry my latest storyboard request and paint the visual sheet. Preserve the scenes and continuity. Do not generate First/Last yet.'},
+           {id:'retry',label:'Retry storyboard',submit:'Retry my saved storyboard now. Call propose_storyboard to resume the ten Start/End endpoint images, reusing completed images and the saved scene plan.'},
            {id:'wait',label:'Keep editing later',submit:'Hold off on image generation for now.'}
           ]:[
            {id:'xai',label:'Fall back to xAI image API',submit:'Approved — fall back to xAI. Call mix_image again with provider "xai" using the same pin and style.'},

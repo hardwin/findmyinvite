@@ -1,3 +1,5 @@
+import {tool} from 'ai';
+import {z} from 'zod';
 import {randomUUID} from 'node:crypto';
 import {loadStory,saveStory,validateManifest,SEGMENTED_VERSION} from './assembly-story-session.mjs';
 import {authorSegmentedStoryboard} from './assembly-storyboard-astra.mjs';
@@ -6,6 +8,14 @@ const text=m=>typeof m?.content==='string'?m.content:(m?.parts||[]).filter(p=>p.
 export function createSegmentedWorkflow(tools,{sessionKey,messages=[],env=process.env,fetchImpl=fetch,openaiClient,imageRunner}={}){
  const fail=message=>({ok:false,stage:'storyboard',error:message,message});
  const latest=text(messages.at(-1));
+ tools.prefill_invite_names=tool({
+  description:'Prefill the visible confirmation form with names explicitly typed by the user. This NEVER confirms or locks names. Ask the user to review the bride/groom assignment and click Confirm names.',
+  inputSchema:z.object({groomName:z.string().min(1).max(80),brideName:z.string().min(1).max(80)}),
+  execute:async names=>{
+   if(!latest.includes(names.groomName)||!latest.includes(names.brideName))return {ok:false,message:'Only prefill names explicitly present in the latest user message; never invent names.'};
+   return {ok:true,nameDraft:names,requiresNameConfirmation:true,message:'The names form is prefilled, not confirmed. Ask the photographer to review both fields and click Confirm names.'};
+  }
+ });
  let attempt;
  const output=(board,message)=>({ok:true,stage:'storyboard',storyboard:board,sheetUrl:board.sheetUrl,urls:board.sheetUrl?[board.sheetUrl]:[],message});
  async function paint(input){
@@ -36,8 +46,14 @@ export function createSegmentedWorkflow(tools,{sessionKey,messages=[],env=proces
    return output(board,'Ten endpoint images are ready. Review every Start and End before approving. No video has been generated.');
   }catch(error){return {...fail('Endpoint preparation stopped: '+error.message+'. Completed endpoints are saved; retry to resume.'),revisionPending:true,storyboard:record.value.board};}
  }
- tools.propose_storyboard.execute=input=>(attempt||=paint(input));
- tools.craft_storyboard_sheet.execute=input=>(attempt||=paint(input));
+ tools.propose_storyboard=tool({
+  description:'Prepare or resume the ten Start/End endpoint images for the five-scene storyboard. Uses the saved theme pin, form-confirmed names and latest user request. Astra authors the plan. No model-supplied URLs, names or scene drafts are needed. Completed endpoints are reused on retry.',
+  inputSchema:z.object({}),execute:()=>(attempt||=paint())
+ });
+ tools.craft_storyboard_sheet=tool({
+  description:'Alias for propose_storyboard. Prepare or resume the same ten endpoints from saved state; never call both tools in one turn.',
+  inputSchema:z.object({}),execute:()=>(attempt||=paint())
+ });
  const saveDetails=tools.save_invite_details.execute;
  tools.save_invite_details.execute=async input=>{
   const record=await loadStory(sessionKey,env),names=record.value.names;
@@ -48,8 +64,15 @@ export function createSegmentedWorkflow(tools,{sessionKey,messages=[],env=proces
  const lockTheme=tools.lock_theme_pin.execute;
  tools.lock_theme_pin.execute=async input=>{
   const result=await lockTheme(input);
-  if(result.ok){const record=await loadStory(sessionKey,env);if(record.value.pinUrl===result.pinUrl)return result;record.value.pinUrl=result.pinUrl;delete record.value.board;delete record.value.approval;delete record.value.identity;delete record.value.generation;delete record.value.segmentedRunId;await saveStory(sessionKey,record,env);}
-  return result;
+  if(!result.ok)return result;
+  const record=await loadStory(sessionKey,env);
+  if(record.value.pinUrl!==result.pinUrl){
+   record.value.pinUrl=result.pinUrl;
+   delete record.value.board;delete record.value.approval;delete record.value.identity;delete record.value.generation;delete record.value.segmentedRunId;
+   await saveStory(sessionKey,record,env);
+  }
+  const names=record.value.names;
+  return {...result,requiresNameConfirmation:!names,message:names?'Theme locked. Continue the saved storyboard idea; prepare ten endpoint images for review.':'Theme locked. Names are NOT confirmed. Direct the photographer to the visible names form; names typed in chat may only prefill it.'};
  };
  tools.lock_storyboard.execute=async input=>{
   const record=await loadStory(sessionKey,env),board=record.value.board;
