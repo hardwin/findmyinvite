@@ -135,7 +135,7 @@ export function buildReplicateImageInput(model,{prompt,image,images,inputFidelit
    prompt:text,
    aspect_ratio:'9:16',
    output_format:'jpg',
-   resolution:'1K'
+   resolution:'4K'
   };
   if(refs.length)input.image_input=refs;
   return input;

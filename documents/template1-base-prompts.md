@@ -1,5 +1,8 @@
 # Template 1 — Base prompts → pin-styled prompts
 
+**Latest correction: nano-banana-2 at 4K (2026-09-27).** Couple stills (`google/nano-banana-2`) request `resolution:'4K'` in `buildReplicateImageInput` (`server/assembly-template1-gen.mjs`).
+
+
 **Latest correction: scenes 3–5 stills on google/nano-banana-2 (2026-09-27).** `COUPLE_STILL_MODEL` in `server/assembly-template1-prompts.mjs`; `storyboardStillModel(index)` in `server/assembly-segmented-board.mjs` routes scenes 3–5 paint to Nano Banana 2 (`image_input`). Scenes 1–2 stay on `openai/gpt-image-2.5-flare`.
 
 

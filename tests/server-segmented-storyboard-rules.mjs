@@ -106,6 +106,7 @@ test('scenes 3–5 stills use google/nano-banana-2',async()=>{
  assert.deepEqual(input.image_input,['https://example.com/a.jpg']);
  assert.equal(input.aspect_ratio,'9:16');
  assert.equal(input.output_format,'jpg');
+ assert.equal(input.resolution,'4K');
 });
 
 test('segmented video uses hero-style single reference for scenes 2–5',()=>{
