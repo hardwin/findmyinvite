@@ -41,4 +41,5 @@ insert into public.template_catalog(id,name,description,collection,badge,sort_or
 ('royal-prestige-13','Indian Cindrella','Prestigious cinematic opening with refined elegance and grandeur','royal','New',33,true),
 ('royal-prestige-14','White Beach','Prestigious cinematic opening with refined elegance and grandeur','royal','New',34,true),
 ('royal-prestige-15','Nisariza','Prestigious cinematic opening with refined elegance and grandeur','royal','New',35,true),
+('royal-prestige-16','kjk','Prestigious cinematic opening with refined elegance and grandeur','royal','New',36,true),
 on conflict(id) do nothing;
