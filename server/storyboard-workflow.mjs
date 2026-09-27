@@ -1,7 +1,7 @@
 import {authorStoryboard,compileStoryboard,validateTimedStoryboard,STORYBOARD_DIRECTION} from './assembly-storyboard-astra.mjs';
 // Request-scoped storyboard state reconstructed from this conversation, never global.
 export function storyboardConversation(messages=[]){
- let board=null,pinUrl='',styleNote='';
+ let board=null,pinUrl='',styleNote='',coupleNames={};
  for(const message of messages){
   if(message.role!=='assistant')continue;
   for(const part of message.parts||[]){
@@ -9,6 +9,7 @@ export function storyboardConversation(messages=[]){
    const out=part.output||part.result;
    if(!out)continue;
    if(out.ok===false){if(out.revisionPending)board={...board,locked:false,revisionPending:true};continue;}
+   if(name==='save_invite_details'&&out.details)for(const key of ['groomName','brideName'])if(out.details[key])coupleNames[key]=out.details[key];
    if(name==='lock_theme_pin'){pinUrl=out.pinUrl||pinUrl;styleNote=out.themeGrounded===true?(out.styleNote||''):'';board=null;}
    if(out.storyboard){
     const previous=board;
@@ -28,7 +29,7 @@ export function storyboardConversation(messages=[]){
  const explicit=/^(?:approve|lock)(?: this| the| current)? storyboard(?: sheet)?[.!]?(?:\n|$)/i.test(text.trim())||/^(?:yes[,! ]*)?(?:I )?approve (?:this|the|current) (?:storyboard|sheet)[.! ]*$/i.test(text.trim());
  const target=(text.match(/^sheetUrl:\s*(\S+)/m)||[])[1];
  const approvedSheet=explicit&&!/\b(?:but|change|revise|instead|except|not yet)\b/i.test(text)&&!board?.revisionPending&&board?.sheetUrl&&(!target||target===board.sheetUrl)?board.sheetUrl:'';
- return {board,pinUrl,styleNote,approvedSheet};
+ return {board,pinUrl,styleNote,approvedSheet,coupleNames};
 }
 
 export function createStoryboardWorkflow(tools,{messages=[],env=process.env,fetchImpl=fetch,openaiClient,author=authorStoryboard,compile=compileStoryboard}={}){
@@ -38,15 +39,26 @@ export function createStoryboardWorkflow(tools,{messages=[],env=process.env,fetc
  let storyboardAttempt;
  const creativeContext=messages.filter(m=>m.role==='user').slice(-10).map(m=>(typeof m.content==='string'?m.content:(m.parts||[]).filter(p=>p.type==='text').map(p=>p.text).join('\n')).slice(0,1600));
  const paint=tools.craft_storyboard_sheet.execute;
+ if(tools.save_invite_details){
+  const save=tools.save_invite_details.execute;
+  tools.save_invite_details.execute=async input=>{
+   const result=await save(input);
+   if(result.ok)for(const key of ['groomName','brideName'])if(result.details?.[key])state.coupleNames[key]=result.details[key];
+   return result;
+  };
+ }
  const last=messages.at(-1);
  const request=last?.role==='user'?(last.content||(last.parts||[]).filter(p=>p.type==='text').map(p=>p.text).join('\n')):'';
  async function paintBoard(input){
   const previous=state.board;
   const pinUrl=state.pinUrl||previous?.pinUrl||input.pinUrl;
   if(!pinUrl)return denied('Choose a theme reference before painting the storyboard.');
+  const coupleNames={...previous?.coupleNames,...state.coupleNames};
+  for(const key of ['groomName','brideName'])if(input[key]?.trim())coupleNames[key]=input[key].trim();
+  if(!coupleNames.groomName||!coupleNames.brideName)return denied('Ask for the missing groom and bride names for the opening title, then propose the storyboard. Do not invent names or paint placeholders.');
   let authored;
   state.approvedSheet='';
-  try{authored=validateTimedStoryboard(await author({request,creativeContext,previous,draft:input,styleNote:state.styleNote,pinUrl,fetchImpl,env,openaiClient}));}
+  try{authored=validateTimedStoryboard(await author({request,creativeContext,coupleNames,previous,draft:input,styleNote:state.styleNote,pinUrl,fetchImpl,env,openaiClient}));}
   catch(error){
    if(previous)state.board={...previous,locked:false,revisionPending:true};
    const timedOut=/timed out|timeout/i.test(String(error.message));
@@ -62,7 +74,7 @@ export function createStoryboardWorkflow(tools,{messages=[],env=process.env,fetc
    state.board={...previous,...draft,sheetUrl:previous?.sheetUrl||'',locked:false,revisionPending:true};
    return {...result,stage:'storyboard',failedStage:'painting',revisionPending:true,message:'Stop this turn. The sheet could not be painted. Do not retry automatically; let the photographer retry.'};
   }
-  state.board={...result.storyboard,authorModel:authored.authorModel,direction:authored.direction,airborneLayers:authored.airborneLayers,duration:15,openingPrompt:'',revision:(previous?.revision||0)+1,locked:false,revisionPending:false,firstImageUrl:'',lastImageUrl:''};
+  state.board={...result.storyboard,coupleTitle:authored.coupleTitle,coupleNames,authorModel:authored.authorModel,direction:authored.direction,airborneLayers:authored.airborneLayers,duration:15,openingPrompt:'',revision:(previous?.revision||0)+1,locked:false,revisionPending:false,firstImageUrl:'',lastImageUrl:''};
   paintedSignature=signature;
   paintedResult={...result,storyboard:state.board,message:'Updated visual storyboard is ready in Preview. Describe another change or approve this exact sheet. Stop here; do not generate frames this turn.'};
   return paintedResult;

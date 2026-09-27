@@ -31,6 +31,7 @@ export type StoryboardShot={
 };
 
 export type StoryboardState={
+ coupleNames?:{groomName?:string;brideName?:string};
  revealType:string;
  firstBrief:string;
  middleBeats:string[];
@@ -187,7 +188,9 @@ export function mergeSellFromTool(
  if(name==='propose_storyboard'||name==='lock_storyboard'||name==='craft_storyboard_sheet'){
   const sb=output.storyboard as StoryboardState|undefined;
   if(sb&&typeof sb==='object'){
+   if(sb.coupleNames)next.details={...next.details,...sb.coupleNames};
    next.storyboard={
+    coupleNames:sb.coupleNames||next.storyboard?.coupleNames,
     revealType:String(sb.revealType||next.storyboard?.revealType||'custom'),
     firstBrief:String(sb.firstBrief||next.storyboard?.firstBrief||''),
     middleBeats:Array.isArray(sb.middleBeats)?sb.middleBeats.map(String):(next.storyboard?.middleBeats||[]),
@@ -206,7 +209,7 @@ export function mergeSellFromTool(
     sheetUrl:sb.sheetUrl?String(sb.sheetUrl):next.storyboard?.sheetUrl,
     firstImageUrl:sb.firstImageUrl?String(sb.firstImageUrl):undefined,
     lastImageUrl:sb.lastImageUrl?String(sb.lastImageUrl):undefined,
-    locked:(name==='lock_storyboard'||Boolean(output.locked))&&sb.direction==='fpv-overhead-v6'
+    locked:(name==='lock_storyboard'||Boolean(output.locked))&&sb.direction==='fpv-name-macro-v7'
    };
   }
   if(typeof output.sheetUrl==='string'){
@@ -433,7 +436,7 @@ export function StoryboardPreview({state,busy,onChip,onClose}:{state:SellDeskSta
    </>:<p>Your visual storyboard will appear here. Tell Akay what happens, or ask for ideas.</p>}
    {failedSheet&&(failedSheet===(old?.url||board?.sheetUrl))&&<p role="alert">Preview could not load. <button className="asm-gpt-chip" onClick={()=>{setFailedSheet('');setLoadAttempt(n=>n+1);}}>Reload preview</button></p>}
    {board?.revisionPending&&<p role="alert">The latest edit could not be painted. This is the previous image. Retry your edit before approving.</p>}
-   {board?.sheetUrl&&(shots.length!==5||board.direction!=='fpv-overhead-v6')&&<button className="asm-gpt-choice-submit" disabled={busy} onClick={()=>onChip("Read the currently selected pin visually and rebuild this as a five-scene FPV photoshoot spanning at least 1 km. Derive setting, time/light, palette, style and motifs from the actual image and my explicit choices, not prior guesses or the reveal prop. Frame 1 is ALWAYS fully closed/sealed with no gap or view inside, overriding older half-open instructions. Strictly no walking, steps, sliding feet, backwards flight or other people. The same bride and groom are already present at distant sites, uncovered by the camera; no pop-in, dissolve or morph. Preserve each exact final-frame outfit and identity. Scenes 3 and 4: WIDE directly overhead drone, lens 90 degrees down, pair at most 15% frame width, crowns only/no visible faces. Both stand side by side facing the SAME direction, heads and torsos aligned, relaxed separate arms, shoes on. Hold that simple pose throughout; no sitting/standing changes, opposed orientations or difficult limbs. Distinguish the two middle frames through different distant sites, geometry, scale and framing. Scene 4 title faces upward so the top-down camera reads it. Finale also uses a simple stable side-by-side standing pose; create interest through scenery and framing. No extra people. Repeat superfast forward travel, hard ease into ultra slow-motion portrait, then forward reacceleration. Structure: zero humans or hands throughout the automatic reveal 0–6s; Save the Date payoff 3–6s; no text 6–9s; We're getting married 9–12s. Both titles large ultra-bold levitating 3D with themed materials and colors, then a 360-degree orbit with fifteen airborne depth layers in the grandest themed finale 12–15s. Preserve my theme and couple identity. Show the revised sheet.")}>Update overhead views & simple poses</button>}
+   {board?.sheetUrl&&(shots.length!==5||board.direction!=='fpv-name-macro-v7')&&<button className="asm-gpt-choice-submit" disabled={busy} onClick={()=>onChip("Read the currently selected pin visually and rebuild this as a five-scene FPV photoshoot spanning at least 1 km. Derive setting, time/light, palette, style and motifs from the actual image and my explicit choices, not prior guesses or the reveal prop. Frame 1 is ALWAYS fully closed/sealed with no gap or view inside, overriding older half-open instructions. Strictly no walking, steps, sliding feet, backwards flight or other people. The same bride and groom are already present at distant sites, uncovered by the camera; no pop-in, dissolve or morph. Preserve each exact final-frame outfit and identity. Scenes 3 and 4: WIDE directly overhead drone, lens 90 degrees down, pair at most 15% frame width, crowns only/no visible faces. Both stand side by side facing the SAME direction, heads and torsos aligned, relaxed separate arms, shoes on. Hold that simple pose throughout; no sitting/standing changes, opposed orientations or difficult limbs. Distinguish the two middle frames through different distant sites, geometry, scale and framing. Scene 4 title faces upward so the top-down camera reads it. Finale also uses a simple stable side-by-side standing pose; create interest through scenery and framing. No extra people. Repeat superfast forward travel, hard ease into ultra slow-motion portrait, then forward reacceleration. Structure: start fully closed at 0s; automatic human-free reveal opens immediately to our confirmed names as GroomName Weds BrideName, readable by 3s (ask for missing names, never invent). 3–6s is an extreme macro of a theme/outfit accessory, embroidery, ring or naturally resting hand, sharp tactile focal detail, faces and heads outside the crop, no text or complex finger action; no text 6–9s; We're getting married 9–12s. All titles large ultra-bold levitating 3D with themed materials and colors, then a 360-degree orbit with fifteen airborne depth layers in the grandest themed finale 12–15s with SAVE THE DATE visible in the final image. Preserve my theme and couple identity. Show the revised sheet.")}>Update name reveal, macro & finale</button>}
    {board?.continuity&&<div className="asm-story-continuity"><strong>Keep consistent</strong><p>{board.continuity}</p></div>}
    <ol className="asm-sell-board-frames">{shots.map((row,i)=><li key={i}><strong>Frame {i+1}{shots.length===5?` · ${i*3}–${(i+1)*3}s`:""}</strong><span>{row.scene}</span>{'camera' in row&&row.camera?<small>{row.camera}</small>:null}{row.movement&&<small>Motion: {row.movement}</small>}</li>)}</ol>
    {Boolean(board?.airborneLayers?.length)&&<details><summary>Finale · {board?.airborneLayers?.length} airborne layers</summary><ol>{board?.airborneLayers?.map((layer,i)=><li key={i}>{layer}</li>)}</ol></details>}
@@ -443,7 +446,7 @@ export function StoryboardPreview({state,busy,onChip,onClose}:{state:SellDeskSta
     <label>What should change?<textarea value={change} onChange={e=>setChange(e.target.value)} placeholder="Fly forward across the valley to a new portrait location. Keep the couple posed; slow time around drifting petals." disabled={busy}/></label>
     <button className="asm-gpt-choice-submit" disabled={busy||!change.trim()}>Update storyboard</button>
    </form>
-   {board?.sheetUrl&&!board.locked&&<button className="asm-gpt-choice-submit" disabled={busy||shots.length!==5||board.direction!=='fpv-overhead-v6'||board.revisionPending||Boolean(old)||loadedSheet!==board.sheetUrl||failedSheet===board.sheetUrl} onClick={()=>onChip('Approve storyboard\nsheetUrl: '+board.sheetUrl+'\nCompile the approved 15-second timestamped video prompt and extract the first and final panels from this approved sheet. Preserve composition and camera angle.')}>Approve storyboard → prepare video & frames</button>}
+   {board?.sheetUrl&&!board.locked&&<button className="asm-gpt-choice-submit" disabled={busy||shots.length!==5||board.direction!=='fpv-name-macro-v7'||board.revisionPending||Boolean(old)||loadedSheet!==board.sheetUrl||failedSheet===board.sheetUrl} onClick={()=>onChip('Approve storyboard\nsheetUrl: '+board.sheetUrl+'\nCompile the approved 15-second timestamped video prompt and extract the first and final panels from this approved sheet. Preserve composition and camera angle.')}>Approve storyboard → prepare video & frames</button>}
    {board?.locked&&<div className="asm-story-final"><strong>Approved first & final images</strong>{board.firstImageUrl&&<img src={board.firstImageUrl} alt="Approved first frame"/>}{board.lastImageUrl&&<img src={board.lastImageUrl} alt="Approved final frame"/>}</div>}
   </div>
  </aside>;
