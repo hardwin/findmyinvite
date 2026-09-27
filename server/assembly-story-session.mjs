@@ -19,27 +19,50 @@ export async function loadStory(key,env=process.env){
  if(result.statusCode!==200)throw new HttpError(503,'Could not load invitation state.');
  return {value:JSON.parse(await new Response(result.stream).text()),etag:result.blob.etag};
 }
-export async function saveStory(key,record,env=process.env){
- try{
-  const result=await put(key,JSON.stringify(record.value),{access:'private',addRandomSuffix:false,contentType:'application/json',token:env.BLOB_READ_WRITE_TOKEN,...(record.etag?{ifMatch:record.etag}:{allowOverwrite:false})});
-  record.etag=result.etag;
-  return record.value;
- }catch(error){
-  // Endpoint workers can finish at the same time. Merge their scene assets onto
-  // the latest state and retry once so a completed image is never lost to a
-  // stale ETag.
-  if(!/precondition|etag|412/i.test(String(error?.message||'')))throw error;
-  const latest=await loadStory(key,env);
-  const local=record.value,remote=latest.value;
-  if(local.board?.scenes&&remote.board?.scenes){
-   remote.board={...remote.board,...local.board,scenes:remote.board.scenes.map((scene,index)=>({...scene,...local.board.scenes[index]}))};
-  }
-  for(const field of ['names','pinUrl','identity','approval','generation','segmentedRunId'])if(local[field]!==undefined)remote[field]=local[field];
-  record.value=remote;record.etag=latest.etag;
-  const retry=await put(key,JSON.stringify(remote),{access:'private',addRandomSuffix:false,contentType:'application/json',token:env.BLOB_READ_WRITE_TOKEN,ifMatch:record.etag});
-  record.etag=retry.etag;
-  return record.value;
+function mergeStory(local,remote){
+ const next={...remote,...local};
+ if(local.board?.scenes&&remote.board?.scenes){
+  next.board={
+   ...remote.board,
+   ...local.board,
+   scenes:remote.board.scenes.map((scene,index)=>({...scene,...(local.board.scenes[index]||{})}))
+  };
+ }else if(local.board){
+  next.board=local.board;
  }
+ // Explicit durable claims always win when the writer set them.
+ for(const field of ['names','pinUrl','identity','approval','generation','segmentedRunId']){
+  if(local[field]!==undefined)next[field]=local[field];
+ }
+ return next;
+}
+export async function saveStory(key,record,env=process.env,{attempts=6}={}){
+ let lastError;
+ for(let attempt=1;attempt<=attempts;attempt++){
+  try{
+   const force=attempt===attempts;
+   const result=await put(key,JSON.stringify(record.value),{
+    access:'private',
+    addRandomSuffix:false,
+    contentType:'application/json',
+    token:env.BLOB_READ_WRITE_TOKEN,
+    ...(force
+     ?{allowOverwrite:true}
+     :(record.etag?{ifMatch:record.etag}:{allowOverwrite:false}))
+   });
+   record.etag=result.etag;
+   return record.value;
+  }catch(error){
+   lastError=error;
+   const race=/precondition|etag|412|conflict|already exists|overwrite/i.test(String(error?.message||error||''));
+   if(!race&&attempt===1)throw error;
+   if(!race&&attempt>1)throw error;
+   const latest=await loadStory(key,env);
+   record.value=mergeStory(record.value,latest.value);
+   record.etag=latest.etag;
+  }
+ }
+ throw lastError;
 }
 export async function confirmStoryNames(key,names,env=process.env){
  const groomName=String(names.groomName||'').trim(),brideName=String(names.brideName||'').trim();

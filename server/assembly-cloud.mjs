@@ -247,8 +247,30 @@ export async function startCloudTemplate1Job(rawInput,{env=process.env,fetchImpl
  if(!env.BLOB_READ_WRITE_TOKEN)throw new HttpError(503,'Opening review storage is not configured.');
  if(!rawInput.storySessionKey||!rawInput.openingManifest)throw new HttpError(409,'New invitations require ten approved endpoints. Open the chat to prepare them.');
  const session=await loadStory(rawInput.storySessionKey,env);
- const approved=validateManifest(session.value.approval);
- if(!session.value.board?.locked||approved.approvalRevision!==rawInput.openingManifest.approvalRevision)throw new HttpError(409,'The approved storyboard changed. Refresh before generating.');
+ const board=session.value.board;
+ const endpointsReady=Boolean(board?.scenes?.length===5&&board.scenes.every(scene=>scene.first&&scene.last));
+ let approved=null;
+ try{approved=session.value.approval?validateManifest(session.value.approval):null;}catch{approved=null;}
+ // Generate may race a prior Approve write. Prefer the durable board + supplied
+ // manifest over a stale unlocked blob row so opening launch is not blocked.
+ if((!board?.locked||!approved||approved.approvalRevision!==rawInput.openingManifest.approvalRevision)&&endpointsReady&&session.value.names){
+  const incoming=validateManifest(rawInput.openingManifest);
+  for(let i=0;i<5;i++){
+   if(incoming.scenes[i].first.sha256!==board.scenes[i].first.sha256||incoming.scenes[i].last.sha256!==board.scenes[i].last.sha256){
+    throw new HttpError(409,'The approved storyboard changed. Refresh before generating.');
+   }
+  }
+  approved=incoming;
+  session.value.approval=approved;
+  board.locked=true;
+  board.revisionPending=false;
+  board.namesRevision=session.value.names.revision;
+  board.approvalRevision=approved.approvalRevision;
+  board.openingPrompt=board.openingPrompt||board.scenes.map((s,i)=>'Scene '+(i+1)+' (local 0–3s): '+s.prompt).join('\n\n');
+ }
+ if(!board?.locked||!approved||approved.approvalRevision!==rawInput.openingManifest.approvalRevision){
+  throw new HttpError(409,'The approved storyboard changed. Refresh before generating.');
+ }
  const input=validateTemplate1Input({...rawInput,openingManifest:approved,firstImageUrl:approved.scenes[0].first.url,lastImageUrl:approved.scenes[4].last.url,heroImageUrl:approved.scenes[4].last.url,coupleImageUrl:approved.scenes[4].last.url,coupleNames:[approved.names.groomName,approved.names.brideName]});
  const prior=session.value.generation;
  if(prior){
@@ -263,8 +285,19 @@ export async function startCloudTemplate1Job(rawInput,{env=process.env,fetchImpl
  input.segmentedRunId=session.value.segmentedRunId||id;
  session.value.segmentedRunId=input.segmentedRunId;
  session.value.generation={jobId:id,approvalRevision:approved.approvalRevision};
- // Conditional write claims this approval before any worker can spend.
- await saveStory(rawInput.storySessionKey,session,env);
+ // One durable write claims approval + generation together (retries inside saveStory).
+ try{
+  await saveStory(rawInput.storySessionKey,session,env);
+ }catch(error){
+  // Another Generate may have claimed the same approval first — reuse it.
+  const latest=await loadStory(rawInput.storySessionKey,env);
+  const claim=latest.value.generation;
+  if(claim?.approvalRevision===approved.approvalRevision&&claim.jobId){
+   const existing=await getAssemblyJob(claim.jobId,{env,fetchImpl});
+   if(existing)return {jobId:existing.id,spend:existing.spend,cloud:true};
+  }
+  throw new HttpError(409,'Could not claim generation state ('+String(error?.message||error).slice(0,160)+'). Tap Generate once more.');
+ }
  const secret=newCallbackSecret();
  let view;
  try{view=await insertAssemblyJob({

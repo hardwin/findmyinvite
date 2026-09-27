@@ -22,7 +22,7 @@ export function createSegmentedWorkflow(tools,{sessionKey,messages=[],env=proces
  let attempt;
  const output=(board,message)=>({ok:true,stage:'storyboard',storyboard:board,sheetUrl:board.sheetUrl,urls:board.sheetUrl?[board.sheetUrl]:[],message});
  /** Persist approval when all ten endpoints exist. Demo-safe repair for lost ETag races / LLM skip. */
- async function ensureApproved(record,{requireExplicit=false}={}){
+ async function ensureApproved(record,{requireExplicit=false,persist=true}={}){
   const board=record.value.board,names=record.value.names;
   if(!names||!endpointsReady(board))return null;
   if(requireExplicit&&!wantsApprove.test(latest)&&!wantsGenerate.test(latest)&&!/^Lock this final image:/m.test(latest))return null;
@@ -47,7 +47,13 @@ export function createSegmentedWorkflow(tools,{sessionKey,messages=[],env=proces
   board.namesRevision=names.revision;
   board.approvalRevision=revision;
   board.openingPrompt=board.scenes.map((s,i)=>'Scene '+(i+1)+' (local 0–3s): '+s.prompt).join('\n\n');
-  await saveStory(sessionKey,record,env);
+  if(persist){
+   try{await saveStory(sessionKey,record,env);}
+   catch(error){
+    // Generate still carries openingManifest; cloud claims approval+job in one write.
+    console.error('ensureApproved saveStory',error?.message||error);
+   }
+  }
   return record.value.approval;
  }
  async function paint(input){
@@ -165,26 +171,34 @@ export function createSegmentedWorkflow(tools,{sessionKey,messages=[],env=proces
  };
  const start=tools.start_template1.execute;
  tools.start_template1.execute=async input=>{
-  const record=await loadStory(sessionKey,env);
-  if(!wantsGenerate.test(latest)&&!wantsApprove.test(latest))return fail('Use Generate after approving the endpoints and confirming details.');
-  // Generate is the hard gate — auto-approve complete endpoints so a lost lock cannot stall the demo.
-  if(!await ensureApproved(record))return fail('Approve the current endpoints before generating.');
-  const manifest=validateManifest(record.value.approval),last=manifest.scenes[4].last;
-  return start({
-   ...input,
-   revealType:'custom',
-   openingManifest:manifest,
-   storySessionKey:sessionKey,
-   storyboard:{...record.value.board,revealType:'custom'},
-   firstImageUrl:manifest.scenes[0].first.url,
-   lastImageUrl:last.url,
-   heroImageUrl:last.url,
-   coupleImageUrl:last.url,
-   groomName:manifest.names.groomName,
-   brideName:manifest.names.brideName,
-   brideImageUrl:record.value.identity?.brideImageUrl||input.brideImageUrl,
-   groomImageUrl:record.value.identity?.groomImageUrl||input.groomImageUrl
-  });
+  try{
+   const record=await loadStory(sessionKey,env);
+   if(!wantsGenerate.test(latest)&&!wantsApprove.test(latest))return fail('Use Generate after approving the endpoints and confirming details.');
+   // Build the manifest in-memory; cloud start claims approval+generation in one blob write.
+   if(!await ensureApproved(record,{persist:false}))return fail('Approve the current endpoints before generating.');
+   const manifest=validateManifest(record.value.approval),last=manifest.scenes[4].last;
+   return await start({
+    ...input,
+    revealType:'custom',
+    openingManifest:manifest,
+    storySessionKey:sessionKey,
+    storyboard:{...record.value.board,revealType:'custom'},
+    firstImageUrl:manifest.scenes[0].first.url,
+    lastImageUrl:last.url,
+    heroImageUrl:last.url,
+    coupleImageUrl:last.url,
+    groomName:manifest.names.groomName,
+    brideName:manifest.names.brideName,
+    brideImageUrl:record.value.identity?.brideImageUrl||input.brideImageUrl,
+    groomImageUrl:record.value.identity?.groomImageUrl||input.groomImageUrl
+   });
+  }catch(error){
+   const message=String(error?.message||error||'Generation failed.').slice(0,300);
+   console.error('start_template1',message);
+   return fail(/etag|precondition|412|claim generation/i.test(message)
+    ?'Generation state was busy — tap Generate once more.'
+    :message);
+  }
  };
  const stage=tools.set_sell_stage.execute;
  tools.set_sell_stage.execute=async input=>{
