@@ -1412,7 +1412,7 @@ export default function AssemblyChat({
 
  const ready=Boolean(input.trim()||attachments.length);
  const heroForGen=sell.heroUrl||sell.storyboard?.lastImageUrl||sell.pinPreview||'';
- const canGenerate=sell.stage==='generate'
+ const canGenerate=(sell.stage==='generate'||sell.details.complete===true)
   &&Boolean(heroForGen)
   &&Boolean(sell.storyboard?.locked&&sell.storyboard?.direction==='five-clips-v1'&&confirmedNames)
   &&Boolean(sell.brideImageUrl)
@@ -1697,20 +1697,20 @@ export default function AssemblyChat({
           onChip={sendChip}
          />
         )}
-        {((Boolean(nameDraft)&&!confirmedNames)||['theme','storyboard','details'].includes(sell.stage))&&<OpeningNamesForm key={chatId+(confirmedNames?.revision||JSON.stringify(nameDraft)||'')} names={confirmedNames||undefined} draft={nameDraft} busy={busy} onConfirm={async names=>{
+        {!sell.details.complete&&((Boolean(nameDraft)&&!confirmedNames)||['theme','storyboard','details'].includes(sell.stage))&&<OpeningNamesForm key={chatId+(confirmedNames?.revision||JSON.stringify(nameDraft)||'')} names={confirmedNames||undefined} draft={nameDraft} busy={busy} onConfirm={async names=>{
          const res=await managerFetch('/api/assembly-chat?action=confirm-names',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chatId,...names})});
          const body=await res.json();if(!res.ok)throw new Error(body.error||'Could not confirm names.');setConfirmedNames(body.names);setServerBoard(body.storyboard);
          sendChip('I confirmed our names using the invitation form. Continue the current storyboard idea with those exact names; prepare the endpoint images for review.');
         }}/>}
         {!busy&&confirmedNames&&sell.stage==='storyboard'&&sell.storyboard?.revisionPending&&<div className="asm-sell-details"><p>Your scene plan is saved. Resume the missing endpoint images.</p><button className="asm-gpt-choice-submit" onClick={()=>sendChip('Retry my saved storyboard now. Call propose_storyboard to resume all ten endpoint images, reusing completed images and the saved plan.')}>Resume storyboard</button></div>}
-        {!busy&&sell.stage==='storyboard'&&sell.storyboard?.sheetUrl&&<StoryboardDecisionWidget board={sell.storyboard} busy={busy} onChip={sendChip}/>}
+        {!sell.details.complete&&!busy&&sell.stage==='storyboard'&&sell.storyboard?.sheetUrl&&<StoryboardDecisionWidget board={sell.storyboard} busy={busy} onChip={sendChip}/>}
         {!busy&&confirmedNames&&sell.stage==='storyboard' &&!sell.storyboard?.sheetUrl&&!sell.storyboard?.firstBrief&&!sell.storyboard?.revisionPending&&(
          <StoryScenesForm key={chatId} busy={busy} onSubmit={sendChip}/>
         )}
         {sell.stage==='details'&&!sell.details.complete&&(
          <DetailsFields key={confirmedNames?.revision} initialNames={confirmedNames||undefined} busy={busy} onSubmit={sendChip}/>
         )}
-        <GenerateBar ready={canGenerate} busy={busy} details={sell.details} onGenerate={requestGenerate}/>
+        <GenerateBar ready={canGenerate} show={sell.details.complete===true} busy={busy} details={sell.details} onGenerate={requestGenerate}/>
         <GenerateVideoBar
          ready={(readyBanner||sell.stage==='ready')&&Boolean(resolveVideoTemplate())}
          details={sell.details}

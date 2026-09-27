@@ -279,6 +279,11 @@ export function mergeSellFromTool(
   if(typeof output.groomImageUrl==='string')next.groomImageUrl=output.groomImageUrl;
   next.stage=output.stage==='storyboard'?'storyboard':'details';
  }
+ if(name==='craft_chapter_solos'&&output.ok!==false){
+  if(typeof output.brideImageUrl==='string')next.brideImageUrl=output.brideImageUrl;
+  if(typeof output.groomImageUrl==='string')next.groomImageUrl=output.groomImageUrl;
+  next.stage='lock';
+ }
  if(name==='save_invite_details'&&output.details&&typeof output.details==='object'){
   next.details={...next.details,...(output.details as InviteDetails)};
   if(output.complete)next.stage='generate';
@@ -470,16 +475,18 @@ export function ProcessChip({stage}:{stage:SellStage}){
 
 export function GenerateBar({
  ready,
+ show,
  busy,
  details,
  onGenerate
 }:{
  ready:boolean;
+ show?:boolean;
  busy:boolean;
  details:InviteDetails;
  onGenerate:()=>void;
 }){
- if(!ready)return null;
+ if(!ready&&!show)return null;
  const names=[details.groomName,details.brideName].filter(Boolean).join(' & ');
  return (
   <div className="asm-sell-generate" role="region" aria-label="Generate invitation">
@@ -492,7 +499,7 @@ export function GenerateBar({
     </p>
     <p className="asm-sell-eta">First, review your opening video. Approve it to build the rest of your invitation.</p>
    </div>
-   <button type="button" className="asm-sell-generate-btn" disabled={busy} onClick={onGenerate}>
+   <button type="button" className="asm-sell-generate-btn" disabled={busy||!ready} onClick={onGenerate}>
     Generate
    </button>
   </div>
