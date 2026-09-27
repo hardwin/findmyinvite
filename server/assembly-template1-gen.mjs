@@ -109,14 +109,16 @@ export function normalizeImageUrls(image,images){
 }
 
 /**
- * Build Replicate image input for the chosen model (gpt-image-2.5-flare vs xAI Imagine).
+ * Build Replicate image input for the chosen model (gpt-image-2.5-flare vs nano-banana-2 vs xAI Imagine).
  * gpt-image supports multi `input_images` (pin + face refs for Face Swap).
+ * nano-banana-2 uses `image_input` (array, up to 14).
  * `inputFidelity:'high'` is included when requested — omit on schema rejection at call site.
  */
 export function buildReplicateImageInput(model,{prompt,image,images,inputFidelity}={}){
  const text=String(prompt||'').trim();
  const refs=normalizeImageUrls(image,images);
- if(String(model||'').includes('gpt-image')){
+ const id=String(model||'');
+ if(id.includes('gpt-image')){
   const input={
    prompt:text,
    aspect_ratio:'9:16',
@@ -126,6 +128,16 @@ export function buildReplicateImageInput(model,{prompt,image,images,inputFidelit
   };
   if(refs.length)input.input_images=refs;
   if(inputFidelity==='high'||inputFidelity==='low')input.input_fidelity=inputFidelity;
+  return input;
+ }
+ if(id.includes('nano-banana')){
+  const input={
+   prompt:text,
+   aspect_ratio:'9:16',
+   output_format:'jpg',
+   resolution:'1K'
+  };
+  if(refs.length)input.image_input=refs;
   return input;
  }
  // xai/grok-imagine-image (and similar edit models) — single source image only

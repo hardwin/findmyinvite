@@ -6,6 +6,8 @@ import {normalizeRevealType,revealOpenBeat} from './assembly-sell-path.mjs';
 
 /** Door-First, last, and hero stills — Replicate OpenAI. */
 export const STILL_MODEL='openai/gpt-image-2.5-flare';
+/** Couple storyboard stills (scenes 3–5) — Replicate Google Nano Banana 2. */
+export const COUPLE_STILL_MODEL='google/nano-banana-2';
 /** Section frame / plate backgrounds — Replicate xAI Imagine. */
 export const PLATE_MODEL='xai/grok-imagine-image';
 /** @deprecated Prefer STILL_MODEL / PLATE_MODEL. Kept as the primary still default. */

@@ -4,9 +4,13 @@ import {run} from './assembly-template1-craft.mjs';
 import {randomUUID} from 'node:crypto';
 import {resolveReferenceImage,normalizeReferenceImage,resolveReplicateImageUrl,blobImageProxyUrl} from './assembly-ai.mjs';
 import {runReplicateImage} from './assembly-template1-gen.mjs';
-import {STILL_MODEL} from './assembly-template1-prompts.mjs';
+import {STILL_MODEL,COUPLE_STILL_MODEL} from './assembly-template1-prompts.mjs';
 import {digest,readPrivate,SEGMENTED_VERSION} from './assembly-story-session.mjs';
 const escape=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c]));
+/** Scenes 3–5 (0-based index ≥2) use Nano Banana 2; scenes 1–2 stay on flare. */
+export function storyboardStillModel(index){
+ return Number(index)>=2?COUPLE_STILL_MODEL:STILL_MODEL;
+}
 export async function storeEndpoint(url,{env=process.env,fetchImpl=fetch,source='generated'}={}){
  const image=normalizeReferenceImage(await resolveReferenceImage(url,{fetchImpl}));
  const sha256=digest(image.buffer);
@@ -84,7 +88,7 @@ export async function paintEndpoints(board,{env=process.env,fetchImpl=fetch,imag
  const paintOnce=async(index,side,reference)=>{
   const scene=board.scenes[index];
   const prompt=buildEndpointPrompt(board,index,side);
-  const result=await imageRunner({prompt,image:await providerReference(reference),model:STILL_MODEL,role:'storyboard-endpoint',env,fetchImpl});
+  const result=await imageRunner({prompt,image:await providerReference(reference),model:storyboardStillModel(index),role:'storyboard-endpoint',env,fetchImpl});
   scene[side]=await storeEndpoint(result.url,{env,fetchImpl,source:'scene-'+(index+1)+'-'+side});
   await save(board);
  };

@@ -1,5 +1,8 @@
 # Template 1 — Base prompts → pin-styled prompts
 
+**Latest correction: scenes 3–5 stills on google/nano-banana-2 (2026-09-27).** `COUPLE_STILL_MODEL` in `server/assembly-template1-prompts.mjs`; `storyboardStillModel(index)` in `server/assembly-segmented-board.mjs` routes scenes 3–5 paint to Nano Banana 2 (`image_input`). Scenes 1–2 stay on `openai/gpt-image-2.5-flare`.
+
+
 **Latest correction: GlamBOT + hero-style reference (2026-09-27).** Scenes 2–5 video prompts = `BULLET_TIME_BASE` / `buildBulletTimePrompt` in `server/assembly-storyboard-astra.mjs` (GlamBOT ultra-slow, unidirectional motifs, blink/hair/clothes wind like `BASE_PROMPTS.heroVideo` in `server/assembly-template1-prompts.mjs`). API: one REFERENCE image via Replicate `image` (hero path) — never the same still as xAI image+last_frame (that caused motif ping-pong). Still paint: faces adapt to body/scene angle; scenes 3–4 caught-in-action poses. Continuous motion through the last frame.
 
 
