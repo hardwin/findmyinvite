@@ -4,12 +4,12 @@ import {SEGMENTED_AUTHOR_RULES,assertSegmentedBoardMotion,buildBulletTimePrompt,
 import {buildEndpointPrompt} from '../server/assembly-segmented-board.mjs';
 import {readFileSync} from 'node:fs';
 
-test('segmented author rules use GlamBOT single still + face adapt + action poses',()=>{
+test('segmented author separates concise image edits from GlamBOT motion',()=>{
  assert.match(SEGMENTED_AUTHOR_RULES,/ONE still|ONE glamorous/i);
- assert.match(SEGMENTED_AUTHOR_RULES,/floating\/airborne|abundant floating/i);
+ assert.match(SEGMENTED_AUTHOR_RULES,/airborne motifs/i);
  assert.match(SEGMENTED_AUTHOR_RULES,/GLAMBOT|GlamBOT/i);
- assert.match(SEGMENTED_AUTHOR_RULES,/CAUGHT-IN-ACTION|caught-in-action/i);
- assert.match(SEGMENTED_AUTHOR_RULES,/DO NOT lock the pin/i);
+ assert.match(SEGMENTED_AUTHOR_RULES,/No video motion/);
+ assert.match(SEGMENTED_AUTHOR_RULES,/only the visual change/);
  assert.match(BULLET_TIME_BASE,/GLAMBOT/i);
  assert.match(BULLET_TIME_BASE,/UNIDIRECTIONALLY|unidirectional/i);
  assert.match(BULLET_TIME_BASE,/blink|hair and clothes/i);
@@ -70,11 +70,8 @@ test('author repair injects titles and float cues without throwing on Astra drif
  assert.equal(assertSegmentedBoardMotion(repaired),repaired);
 });
 
-test('endpoint prompts for scenes 2–5 demand floating elements and face adapt',()=>{
+test('endpoint prompts rely on the reference without copying scene or motion prose',()=>{
  const src=readFileSync(new URL('../server/assembly-segmented-board.mjs',import.meta.url),'utf8');
- assert.match(src,/MANDATORY: fill the air with highly detailed floating/);
- assert.match(src,/ADAPT naturally|faces must ADAPT/i);
- assert.match(src,/CAUGHT-IN-ACTION/i);
  assert.match(src,/COUPLE_STILL_MODEL|gpt-image-2|storyboardStillModel/);
  assert.doesNotMatch(src,/HARD DELTA RETRY/);
 
@@ -87,9 +84,10 @@ test('endpoint prompts for scenes 2–5 demand floating elements and face adapt'
   ]
  };
  const p=buildEndpointPrompt(board,2,'first');
- assert.match(p,/floating\/airborne|floating/);
- assert.match(p,/GlamBOT|editorial still/i);
- assert.match(p,/ADAPT|caught-in-action|CAUGHT-IN-ACTION/i);
+ assert.match(p,/levitating/);
+ assert.match(p,/high-fashion editorial quality/i);
+ assert.match(p,/Preserve exact facial identities/);
+ assert.doesNotMatch(p,/mid-twirl|same couple|UNIDIRECTIONALLY|Video will/);
 });
 
 test('scenes 3–5 stills use openai/gpt-image-2 at high quality',async()=>{

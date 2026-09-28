@@ -7,6 +7,7 @@ import {
   useState,
   type ReactNode,
   type CSSProperties,
+  type MouseEvent,
 } from 'react';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import {Mousewheel} from 'swiper/modules';
@@ -143,7 +144,12 @@ export default function InvitePager({enabled, children}: Props) {
   }, [applyHeight]);
 
   useEffect(() => {
-    if (reduced) return;
+    if (reduced) {
+      if (enabled) return;
+      const previous = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      return () => { document.body.style.overflow = previous; };
+    }
 
     const prevHtmlOverflow = document.documentElement.style.overflow;
     const prevBodyOverflow = document.body.style.overflow;
@@ -191,6 +197,10 @@ export default function InvitePager({enabled, children}: Props) {
     s.allowTouchMove = enabled;
     s.allowSlideNext = enabled;
     s.allowSlidePrev = enabled;
+    // Mousewheel is a Swiper module with its own listeners. Updating the
+    // React prop after a locked mount does not attach those listeners.
+    if (enabled) s.mousewheel?.enable();
+    else s.mousewheel?.disable();
     // Force-sync params — React props alone often stay stale after a locked mount.
     if (s.params) {
       s.params.touchRatio = enabled ? 1 : 0;
@@ -223,8 +233,17 @@ export default function InvitePager({enabled, children}: Props) {
 
   const slides = Children.toArray(children).filter(isSlideChild);
 
+  const explore = (event: MouseEvent<HTMLDivElement>) => {
+    if (!(event.target as HTMLElement).closest('a[href="#invitation-details"]')) return;
+    event.preventDefault();
+    if (!enabled) return;
+    if (reduced) {
+      rootRef.current?.querySelector('.invitation-hero')?.nextElementSibling?.scrollIntoView({behavior: 'instant'});
+    } else swiperRef.current?.slideNext();
+  };
+
   if (reduced) {
-    return <div className="invite-pager invite-pager-static">{children}</div>;
+    return <div ref={rootRef} onClick={explore} className="invite-pager invite-pager-static">{children}</div>;
   }
 
   const style = {
@@ -235,6 +254,7 @@ export default function InvitePager({enabled, children}: Props) {
   return (
     <div
       ref={rootRef}
+      onClick={explore}
       className={'invite-pager invite-pager-live' + (enabled ? ' is-enabled' : ' is-locked')}
       style={style}
     >
@@ -262,17 +282,14 @@ export default function InvitePager({enabled, children}: Props) {
         observer
         observeParents
         watchOverflow
-        mousewheel={
-          enabled
-            ? {
-                forceToAxis: true,
-                sensitivity: 1,
-                releaseOnEdges: false,
-                thresholdDelta: 20,
-                thresholdTime: 400,
-              }
-            : false
-        }
+        mousewheel={{
+          enabled,
+          forceToAxis: true,
+          sensitivity: 1,
+          releaseOnEdges: false,
+          thresholdDelta: 20,
+          thresholdTime: 400,
+        }}
         className="invite-swiper"
         style={{height: '100%', width: '100%'}}
         onSwiper={(s) => {

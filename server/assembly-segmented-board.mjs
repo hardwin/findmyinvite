@@ -1,3 +1,5 @@
+import {buildEndpointPrompt} from './assembly-storyboard-image-prompts.mjs';
+export {buildEndpointPrompt} from './assembly-storyboard-image-prompts.mjs';
 import {put} from '@vercel/blob';
 import ffmpegPath from 'ffmpeg-static';
 import {run} from './assembly-template1-craft.mjs';
@@ -45,32 +47,6 @@ export async function renderBoardSheet(board,env=process.env){
  const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="660" height="${y+40}" viewBox="0 0 660 ${y+40}"><rect width="100%" height="100%" fill="white"/><g font-family="sans-serif" fill="#171717"><text x="20" y="40" font-size="26">${escape(String(board.title||'').slice(0,100))}</text>${rows.join('')}</g></svg>`;
  const blob=await put('assembly-storyboards/'+randomUUID()+'.svg',svg,{access:'private',contentType:'image/svg+xml',token:env.BLOB_READ_WRITE_TOKEN});
  return blobImageProxyUrl(blob.url,env.SITE_ORIGIN||'https://findmyinvite.com');
-}
-export function buildEndpointPrompt(board,index,side){
- const scene=board.scenes[index];
- const brief=side==='first'?scene.firstBrief:scene.lastBrief;
- // Scenes 2–5: one editorial GlamBOT still with floating elements already in-frame.
- if(index>=1){
-  const people=index===1
-   ?'Macro accessory/embroidery/ring or fabric detail only; no full faces required. Match the couple reference materials when relevant.'
-   :index===4
-    ?'Preserve the supplied couple IDENTITY (who they are, wardrobe, hair, shoes): ONE bride and ONE groom. Faces must ADAPT naturally to THIS scene\'s body angle and camera — do NOT copy a locked frontal pin face angle onto a turned/leaning body. Alive hero finish, not a dead freeze. No extra person. NO walking.'
-    :'Preserve the supplied couple IDENTITY (who they are, wardrobe, hair, shoes): ONE bride and ONE groom. Faces must ADAPT naturally to THIS scene\'s body angle, head turn and camera — do NOT lock the pin\'s face angle; re-pose head/gaze/expression to match the body. CAUGHT-IN-ACTION mid-motion pose (fabric flare, lean, twirl pause, embrace mid-move) — not a standard stiff standing photoshoot pose. No extra person. NO walking.';
-  return [
-   'Render ONE standalone vertical 9:16 GlamBOT editorial still, no sheet/borders/labels.',
-   'Exact approved scene: '+brief+'.',
-   board.continuity||'',
-   people,
-   'MANDATORY: fill the air with highly detailed floating/airborne elements already mid-flight in this still (petals, foil scraps, blossoms, fabric wisps, sparkles, dust motes, pin-true motifs). Video will drift these UNIDIRECTIONALLY — particles must be visible and directional now.',
-   'Big-budget GlamBOT / high-fashion editorial quality, crisp focus, dramatic rim light catching airborne elements, pin medium retained.',
-   'Text: '+(scene.titleText||'NONE')+'. Exact spelling, no extra letters. No costume transformations.'
-  ].filter(Boolean).join(' ');
- }
- const people='This endpoint contains no people, human body parts, shadows or reflections. No humans or hands.';
- const camera=side==='first'
-  ?'Fully closed reveal at 0s; sealed/opaque, no gap.'
-  :'Opened reveal state after automatic open; names readable; continuous from the closed Start — not a reverse close.';
- return `Render ONE standalone vertical 9:16 endpoint, no sheet/borders/labels. Exact approved scene: ${brief}. ${board.continuity}. ${people} ${camera} Text: ${side==='first'?'NONE; fully closed reveal at 0s':scene.titleText||'NONE'}. Exact spelling, no extra letters. Retain pin medium and theme. No costume transformations.`;
 }
 export async function paintEndpoints(board,{env=process.env,fetchImpl=fetch,imageRunner=runReplicateImage,save,identity,previous}={}){
  const persist=save;let saveQueue=Promise.resolve();

@@ -1,4 +1,5 @@
 import OpenAI from 'openai';
+import {buildEndpointPrompt} from './assembly-storyboard-image-prompts.mjs';
 import {resolveReferenceImage,normalizeReferenceImage} from './assembly-ai.mjs';
 
 export const STORYBOARD_MODEL='gpt-6-astra';
@@ -138,7 +139,7 @@ export function buildBulletTimePrompt(scene){
 }
 
 export const SEGMENTED_DIRECTION='five-clips-v1';
-const FLOAT_CUE=/\b(float(?:ing)?|flying|airborne|mid[- ]?(air|flight)|petals?|foil|blossoms?|sparkles?|dust|particles?|wisps?|suspended|orbit)\b/i;
+const FLOAT_CUE=/\b(float(?:ing)?|levitating|flying|airborne|mid[- ]?(air|flight)|petals?|foil|blossoms?|sparkles?|dust|particles?|wisps?|suspended|orbit)\b/i;
 const normalizeBrief=s=>String(s||'').toLowerCase().replace(/[^\p{L}\p{N}\s]/gu,' ').replace(/\s+/g,' ').trim();
 const stripTitleNoise=s=>normalizeBrief(s).replace(/\b(we're getting married|save the date|weds)\b/g,' ').replace(/\s+/g,' ').trim();
 const alike=(a,b)=>{
@@ -167,15 +168,16 @@ export function assertSegmentedBoardMotion(board){
  }
  return board;
 }
-export const SEGMENTED_AUTHOR_RULES=`Create five independently controlled THREE-second wedding invitation clips, joined with clean editorial cuts. This supersedes dual Start/End painting for scenes 2–5 and all overhead-crowns-only / face-hiding instructions.
-
-Scene 1 ONLY uses two endpoint descriptions (firstBrief=Start closed, lastBrief=End opened). Scenes 2–5 use ONE still each: put the full editorial description in firstBrief; set lastBrief to the exact same string (single REFERENCE image for GlamBOT video — not a matched first/last pair). Video for scenes 2–5 is GlamBOT ultra-slow from that one reference — do not invent a second composition.
-
-Scene 1: human-free. firstBrief = fully sealed/closed reveal. lastBrief = opened reveal with exact confirmed names from coupleTitle readable. Automatic open within local 0–1s.
-
-Scenes 2–5: ONE glamorous high-budget GLAMBOT editorial still each (pin medium). MUST paint abundant floating/airborne elements already mid-flight in the still (petals, foil, blossoms, fabric wisps, sparkles) so video can drift them unidirectionally. Scene 2 = theme macro accessory/embroidery/ring (no full faces required) with floating motifs. Scenes 3–5 = SAME bride and groom with CLEAR recognizable faces, NO walking. FACE RULE: preserve who they are (identity, wardrobe, hair) but DO NOT lock the pin's face angle — head turn, gaze and expression MUST adapt naturally to THIS scene's body pose and camera. Scenes 3 and 4 especially: CAUGHT-IN-ACTION mid-motion stills (twirl mid-flare, lean into wind, fabric caught mid-sweep, spin pause, embrace mid-step) — never a standard standing back-to-back or stiff posed portrait. Scene 5 may be a strong hero finish but still alive, not a dead freeze. HARD VARIETY: scenes 3, 4, 5 each DIFFERENT location/setup AND DIFFERENT action pose. Scene 4 is not scene 3 plus a title. Scene 3 no text. Scene 4 exact We're getting married in the still. Scene 5 exact SAVE THE DATE in the still. Never standing↔driving morphs in the still.
-
-Return scene, camera, firstBrief, lastBrief, titleText, and a short prompt seed. Prompts under 1800 characters. Pin is source of setting, medium, palette and motif. Continuity must distinguish ONE bride and ONE groom.`;
+export const SEGMENTED_AUTHOR_RULES=`Create five independently controlled THREE-second wedding invitation clips joined with editorial cuts.
+Scene 1 uses closed and open double-door images. Scenes 2–5 use ONE still each as the REFERENCE for GlamBOT video.
+Image briefs describe only the visual change to the supplied reference. Do not inventory existing scenery, colors, wardrobe or props. No video motion, timing, camera travel or animation instructions in image briefs. Use a few levitating motifs, crisp editorial focus, rim light and shallow depth of field.
+Scene 1: human-free glossy cinematic rich double-door, fully closed and opaque, filling the frame, intact artistic knob, no interior or names visible. End image: same doors open, confirmed coupleTitle visible inside. No humans, body parts, human shadows or reflections.
+Scene 2: macro of one reference accessory or embroidery detail, no faces or text.
+Scene 3: relaxed editorial couple pose from a three-quarter camera angle, no text.
+Scene 4: close editorial embrace from a side camera angle, both faces visible, levitating 3d text We're getting married partly behind the couple.
+Scene 5: preserve the reference couple composition, add levitating 3d SAVE THE DATE angled slightly left and partly behind the couple. No invented date or additional wording.
+Preserve exact facial identities, wardrobe, hair and shoes: ONE bride and ONE groom. Few airborne motifs, some near the camera, without covering faces; remaining background heavily gaussian blurred.
+Return scene, camera, firstBrief, lastBrief, titleText, and a short video prompt seed. Keep all animation instructions in prompt only. Use concise change-only image briefs; repeat firstBrief as lastBrief for scenes 2–5. Scene descriptions must match these image edits; do not invent different locations or activities.`;
 export async function authorSegmentedStoryboard({request,creativeContext,previous,pinUrl,names,env,fetchImpl=fetch,openaiClient}){
  const referenceImage=normalizeReferenceImage(await resolveReferenceImage(pinUrl,{fetchImpl}));
  const coupleTitle=names.groomName+' Weds '+names.brideName;
@@ -199,6 +201,9 @@ export async function authorSegmentedStoryboard({request,creativeContext,previou
   const still=ensureTitle(ensureFloat(s.firstBrief||s.lastBrief),titles[i]);
   return {...s,titleText:titles[i],firstBrief:still,lastBrief:still};
  });
+ // Keep stored briefs and downstream video context faithful to the actual edits.
+ board.revealType='door';
+ board.scenes=board.scenes.map((s,i)=>({...s,firstBrief:buildEndpointPrompt(board,i,'first'),lastBrief:buildEndpointPrompt(board,i,'last')}));
  assertSegmentedBoardMotion(board);
  return {...board,pinUrl,direction:SEGMENTED_DIRECTION,authorModel:STORYBOARD_MODEL,coupleNames:{groomName:names.groomName,brideName:names.brideName},namesRevision:names.revision,scenes:board.scenes.map((s,i)=>{
   const index=i+1;
