@@ -1,0 +1,12 @@
+{
+  "model": "grok-imagine-video-1.5",
+  "duration": 5,
+  "aspect_ratio": "9:16",
+  "resolution": "720p",
+  "firstImage": "output/mysore-palace-royal-v1/clip-8-take-1-first.jpg",
+  "lastImage": "output/mysore-palace-royal-v1/clip-8-take-1-last.jpg",
+  "firstImageSha256": "54bb16a509770351c462abb09c13236436839bbb0a1258a4442c520a6e12cef1",
+  "lastImageSha256": "93779df2db8dfc7796220a54e5b8c8f8ffb290dbc998ee3860ad07b2d85739e6",
+  "keyframes": [],
+  "sourceVideoFramesSent": false
+}

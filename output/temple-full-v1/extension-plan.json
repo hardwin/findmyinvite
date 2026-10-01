@@ -1,0 +1,140 @@
+{
+  "content": {
+    "bride_title": "Chi. Lau. Sow.",
+    "bride_name": "Mounica",
+    "family_lines": "Mounica\nSecond Daughter\nof\nSri Geddam\nVenkata Ratnam\n& Smt.\nNagamani",
+    "ceremony_lines": "Sumuhurtham:\nOn Saturday\n11th April, 2026\nat 12:15 hrs\n(Early Hours\nOf Sunday)",
+    "venue_lines": "Venue:\nSri Vishnu Sadan\nKalyana\nMandapam,\nSri Veera Venkata\nSatyanarayana\nSwamyvari\nDevasthanam,\nAnnavaram.",
+    "reception_lines": "Reception - Dinner:\nOn Monday 13 April, 2026\nFrom 7:30 p.m. Onwards\nat Venkatadri Gardens,\nNear 4th Bridge, Katheru,\nRajahmundry Rural.",
+    "host_lines": "Invited By:\nSmt. Bodha\nLakshmi,\nW/o (Late) Bodha\nChallarao (Yesu)",
+    "save_date_lines": "SAVE\nTHE\nDATE\n11-04-2026,\n13-04-2026"
+  },
+  "copy_note": "Sample invitation wording is transcribed from the user-supplied reference images. Ceremony copy retains the source's Saturday/early-hours-of-Sunday ambiguity; it has not been silently corrected. Replace sample details before using the template for a real invitation.",
+  "image_style": "One full-bleed portrait 9:16 frame from a premium dimensional storybook-animation South Indian wedding invitation film. Intricate lifelike carved sandstone architecture, polished stone reflections and soft cinematic atmospheric depth; people are unmistakably elegant 3D animated adult characters with sculpted faces and expressive eyes, never photographic people or flat drawings. Honey-beige aged stone, dark brown carving recesses, ivory silk, deep vermilion red, antique gold, orange marigolds, white jasmine and green mango leaves. Dense layered wedding garlands, brass lamps, rangoli and tiny falling individual petals. Warm directional light from camera-left, delicate bloom, metallic bevel highlights with readable details. Multiple depth layers with close carved foreground elements and distant architecture. Generate ONLY from this written prompt. No input image, screenshot or source-video frame. No watermark, interface, border, collage, duplicate character or text beyond the exact copy specified for this scene. All signs have legible centered lettering, generous margins and a physical supporting plinth or stand. Avoid whole airborne flowers: floating motifs are small individual curled petals, generally under 3 percent of frame width.",
+  "groom_identity": "Adult Indian groom, visibly polished storybook 3D animation, warm medium-brown skin, slender adult oval face, large dark-brown almond eyes, thick dark eyebrows, smooth clean-shaven cheeks and chin, swept wavy black hair with a prominent side part and raised quiff, small relaxed smile. No moustache or beard. Natural adult proportions, not a child. Ivory silk dhoti with a broad antique-gold border, bare upper chest and an ivory gold-bordered angavastram over his left shoulder crossing his torso, two fine gold necklaces. Keep this face, hair, body and outfit consistent in every couple scene.",
+  "bride_identity": "Adult Indian bride, visibly polished storybook 3D animation, warm medium-brown skin, graceful oval face, large dark-brown almond eyes, gently arched black eyebrows, small red bindi, warm reserved smile. Center-parted dark hair swept into a low bun ringed with white jasmine, antique-gold maang tikka, round jhumka earrings, layered gold necklaces, stacks of red-and-gold bangles and a slender gold waist belt. Deep vermilion-red Kanchipuram silk sari with fine gold brocade and a broad antique-gold border, matching short-sleeved red blouse. Natural adult proportions and a consistent face, hairstyle, jewelry and sari in every later scene.",
+  "scenes": [
+    {
+      "index": 5,
+      "name": "Bride name in the east archway",
+      "identity": ["bride"],
+      "text_fields": ["bride_title", "bride_name"],
+      "prompt_template": "A distinct OPEN ARCHWAY beside the long groom corridor, viewed at standing eye height. Two richly carved square columns frame the extreme foreground, broad marigold-jasmine swags and mango leaves hang overhead, and the decorated gopuram is visible OUTSIDE beyond a stepped courtyard in warm sunrise. The bride stands full-length in the LEFT third, hands gently clasped at her waist, body angled slightly inward, adult figure approximately 62 percent of frame height with ample head and foot margins. On the RIGHT, suspended in air at chest height, delicate dimensional beveled champagne-GOLD CALLIGRAPHY reads exactly '{{bride_title}}' in a small first line, then '{{bride_name}}' large below. Elegant thin flourishing strokes like fine jewelry, warm bright edge glints and restrained bloom. Clear name area with no board and no smoke coming from lettering. Brass diyas line the floor and steps. Many tiny white and orange petals rotate at near, middle and distant depths, leaving the face and letters clear. Warm sun enters from the left across silk and gold. A near column is visible at camera-right, providing a route around it toward a neighboring family-information sign. No groom in this image; no other prominent people."
+    },
+    {
+      "index": 6,
+      "name": "Bride family plaque beside a carved pillar",
+      "identity": [],
+      "text_fields": ["family_lines"],
+      "prompt_template": "A new three-quarter LOW-ANGLE view along an outer temple colonnade. An ivory rectangular invitation plaque leans securely on an antique-gold low stone-and-brass plinth beside the massive carved pillar at camera-right. Its plane is turned about 12 degrees from frontal, so its right edge and frame depth catch a bright sun glint. The plaque occupies roughly 70 percent of frame width and 62 percent of frame height, centered with all corners visible; allow a large clean ivory text field. An embossed thin gold floral border, a tiny temple emblem above, white-orange flower arrangements at the feet and garlands around the adjacent pillar. Render these exact lines in elegant large readable gold-brown serif lettering, with the name in fine gold calligraphy: '{{family_lines}}'. Preserve spelling and line order; no additional words. Behind and to the LEFT, only part of the distant gopuram and a sunlit courtyard are visible, naturally blurred. The columned aisle continues behind the RIGHT edge of the plaque toward a richly dressed ceremony mandap. Brass lamps, clear polished floor reflections and layered tiny drifting petals. No bride or groom visible here. Keep the text clear and large, not a tiny sign lost in architecture."
+    },
+    {
+      "index": 7,
+      "name": "Wedding ritual and ceremony timing",
+      "identity": ["groom", "bride"],
+      "text_fields": ["ceremony_lines"],
+      "prompt_template": "Inside a richly decorated roofed wedding mandap in the same sandstone temple. Eye-level with a seated couple, intimate but wide enough to include the complete ceremony arrangement. Thick layered orange-white-green garlands across the top, carved columns receding into a dim hall, brass lamps and small flower arrangements. The groom and bride sit on the LEFT half of a patterned ceremonial rug, groom on the left and bride immediately to his right. They are the adults described in the identity blocks. Both now wear red-white-green wedding flower garlands in addition to their unchanged outfits. The groom gently raises his right hand over the bride's hair in a tender ceremonial blessing gesture; the bride bows her head slightly with a small smile. A small contained ritual fire burns in a square copper havan kund in the lower left, with fruit, coconuts and brass offering bowls neatly nearby. A small priest is seated farther back at the extreme left, secondary and softly focused. On the RIGHT half, a tall dark-chocolate wood ceremony sign in an ornate antique-gold frame stands independently on the floor, richly edged with orange and white flowers. The sign spans about 40 percent of image width, leaving the couple's faces and hands fully unobscured. Exact centered ivory-gold lettering: '{{ceremony_lines}}'. Every line readable, generous interior margins, small floral finial above. Subtle incense rises from the ritual area only. Warm side light and tiny white-orange petals throughout. No outdoor gopuram behind the couple; this is a deep interior mandap, not the bride's archway or the family plaque location."
+    },
+    {
+      "index": 8,
+      "name": "Venue in the flower-framed courtyard",
+      "identity": [],
+      "text_fields": ["venue_lines"],
+      "prompt_template": "Eye-level frontal composition in an OPEN ceremonial courtyard adjoining the ritual mandap. A dark-chocolate rectangular venue board in an ornate antique-gold frame is centered on a decorated square pedestal, with white jasmine and orange marigolds around its lower edge. Board and pedestal occupy the middle 52 percent of image width; board text field is tall, approximately 52 percent of image height, large enough for every line. Render exact centered legible warm ivory-gold serif text: '{{venue_lines}}'. The SAME decorated tall gopuram stands outside directly behind at a believable distance. Broad flower swags and mango leaves frame the top, a close garlanded pillar frames camera-right, warm sunrise enters from camera-left. A colorful circular flower rangoli and brass offerings sit at the board's feet. Rows of brass lamps, polished warm floor reflections, a few small traditionally dressed adult guests at the far sides, no foreground couple. Tiny white and orange petals are abundant in several depth layers. An open route around the right pillar leads toward a flower-draped reception garden; preserve clear aisles."
+    },
+    {
+      "index": 9,
+      "name": "Reception garden at blue hour",
+      "identity": [],
+      "text_fields": ["reception_lines"],
+      "prompt_template": "A richly decorated wedding reception garden connected to the temple's outer colonnade, now at BLUE HOUR. A small band of deep midnight-blue sky appears above a broad floral arch. The rest is warm amber light: hundreds of small distant lamp points and glowing brass diyas, gold-toned fabric drapes, thick orange-white-red flower swags, leafy greenery and softly blurred adult guests in the background. Keep the same illustrated materials and warm palette; only the far sky and garden are evening. Center a large ivory reception sign in a delicately carved antique-gold frame on a three-legged gold easel. Its whole frame is visible; the text field spans about 61 percent of frame width and 47 percent of frame height, with plentiful margins. Exact dark-gold centered readable lettering: '{{reception_lines}}'. The first line is a little larger; all details remain legible. Jasmine garlands curve from the top finial to the lower sides without crossing any words. Two tall brass lamps flank the aisle, flower petals cover the floor edges, and small individual petals drift through warm light. Keep an open path to a carved sandstone colonnade at camera-left. No couple, no giant tower filling the background, no additional signs."
+    },
+    {
+      "index": 10,
+      "name": "Hosts in the inner lamp hall",
+      "identity": [],
+      "text_fields": ["host_lines"],
+      "prompt_template": "A frontal eye-level view down a SHORT INNER TEMPLE HALL, intensely warm with many small hanging brass oil lamps. Layered orange, white, dark-red and green flower swags overhead; carved sandstone square columns on both sides. At the far end of three shallow steps is one tall ivory host plaque in a richly ornate antique-gold rectangular frame with tiny pink-red flowers worked into its corners. The plaque fills the central 57 percent of frame width and about 52 percent of frame height; every word must be large and clear. Exact centered dark-gold serif lettering: '{{host_lines}}'. The frame is supported on a substantial low gold pedestal, never floating. Symmetrical rows of diyas line the steps and corridor; a circular floral rangoli in the foreground and scattered loose petals give depth. Warm amber shadows, shifting-reflection potential on the polished floor, subtle distant incense away from the writing. The corridor runs straight backward toward the viewer and out through a wide gateway; it has ample clearance for a backward camera flight. No people or couple visible in this shot. No outdoor sky or gopuram visible from this interior angle."
+    },
+    {
+      "index": 11,
+      "name": "Couple reveal and save the date",
+      "identity": ["groom", "bride"],
+      "text_fields": ["save_date_lines"],
+      "prompt_template": "Standing eye-level full-body wedding-couple reveal beneath a wide carved gateway opening onto the same sunrise temple courtyard. The decorated gopuram is outside behind them, centered beyond a low flower arch; matching left-right colonnades and lines of diyas create strong deep perspective. The bride stands slightly LEFT of center and the groom immediately to her RIGHT, both the consistent adult animated characters described in the identity blocks, wearing their unchanged red-gold sari and ivory-gold dhoti-and-angavastram. Add matching red-white-green wedding flower garlands to both. They stand close, relaxed and facing mostly toward the camera, with small warm smiles and hands naturally together at waist level. The groom remains CLEAN-SHAVEN and bare-chested beneath his diagonal drape; no jacket, kurta, moustache or beard. Their entire bodies and bare feet are visible, occupying approximately 58 percent of frame height. On the far RIGHT, slightly behind their plane but fully inside the frame, an ornate antique-gold easel supports a dark-chocolate sign reading exactly in centered gold lettering: '{{save_date_lines}}'. Do not overlap the couple with the sign. Dense orange-white flower garlands on the gateway, scattered petals and rows of small brass lamps on the floor, subtle side incense. A few tiny individual petals float at near and far depths. Sunrise light comes from camera-left. This is an affectionate standing reveal; their foreheads are not touching yet."
+    },
+    {
+      "index": 12,
+      "name": "Quiet romantic pullback under the gateway lamp",
+      "identity": ["groom", "bride"],
+      "text_fields": ["save_date_lines"],
+      "prompt_template": "The final affectionate moment in the SAME gateway and courtyard arrangement described here: decorated gopuram centered outside, low flower arch behind the couple, identical side colonnades, lines of brass diyas, petal-strewn polished floor and a dark-chocolate SAVE THE DATE sign on an ornate gold easel at the RIGHT. Camera is now a little farther back and slightly higher under the gateway so its full carved top beam and one large hanging brass oil lamp enter the upper center of the picture. Bride stays left of the groom; both are the consistent adult animated characters in the identity blocks, same wedding clothes, jewelry and red-white-green garlands. Groom remains clean-shaven and wears ivory dhoti and diagonal angavastram with bare chest. The couple occupies about 46 percent of frame height, head to bare feet visible. They have gently turned toward each other and their foreheads touch softly, with relaxed closed or lowered eyes and small smiles. Hands remain naturally joined at waist level, adult proportions and believable anatomy, no dramatic bend or embrace obscuring outfits. They remain in the same place on the courtyard axis while the camera is farther away. Keep the gold-framed right-side sign in the same physical position; exact readable gold text: '{{save_date_lines}}'. Warm sunrise from left, gentle amber lamp glow overhead, a few petals floating in layered depth, rich garlands across the gateway and a peaceful cinematic finish. No new room, no wardrobe change, no additional people in the foreground, no new text."
+    }
+  ],
+  "clips": [
+    {
+      "index": 4,
+      "from": 4,
+      "to": 5,
+      "duration": 5,
+      "camera": "Leftward whip around a near column into the bride archway, then a small inward arc",
+      "prompt_template": "LEFTWARD WHIP INTO THE BRIDE ARCHWAY. 0.00–0.35s: inherit the groom shot's gentle drift for a short anticipation. 0.35–1.35s: accelerate into a decisive LEFTWARD curving camera turn through the adjacent open column bay. The groom and his gold name exit SCREEN RIGHT through perspective; they do not dissolve or become the bride. A very close carved column wipes across the lens with strong directional blur and parallax. 1.35–2.20s: the bride is already standing beyond that column, uncovered on the LEFT as the camera brakes into the open archway. The distant exterior tower enters the newly revealed view. Her floating gold title on the RIGHT appears first foreshortened, then resolves into '{{bride_title}}' above '{{bride_name}}' as fine glints run along its curved metal strokes. Any tracing light stays inside the lettering area, with no vertical floor beam, smoke or liquid. 2.20–5.00s: a small smooth inward arc and slow forward creep give changing reflections across the jewelry, silk and gold name. One restrained blink and tiny smile; hands stay gently clasped. A fresh shower of white-orange petals becomes prominent during deceleration. Keep the exact final name stable and readable. End in the supplied bride composition with living motion, not a frozen hold."
+    },
+    {
+      "index": 5,
+      "from": 5,
+      "to": 6,
+      "duration": 5,
+      "camera": "Rightward curved dolly with a modest downward dip and upward-looking plaque arrival",
+      "prompt_template": "RIGHTWARD CURVED DOLLY TO THE FAMILY PLAQUE. 0.00–0.30s: continue a tiny forward drift at the bride. 0.30–1.30s: accelerate RIGHT around the near garlanded square column; the bride and her floating title slide out SCREEN LEFT through real perspective, unchanged until occluded. Translate a few meters into the next colonnade bay while dipping camera height slightly, not a flat panorama. The near column edge passes rapidly and briefly fills the frame. 1.30–2.00s: uncover the already-standing ivory family plaque from its left edge, with a modest upward-looking three-quarter angle. Gently counter-steer to align its text plane while retaining frame depth. 2.00–5.00s: ease into a very slow oblique push that slides a sun glint along the gold frame and makes floor reflections shift. Exact stable sign copy: '{{family_lines}}'. No writing-on effect or word changes: these are printed letters on a solid plaque. Tiny loose petals rotate independently, with a denser arrival gust and quieter drift afterward. No bride morphing into a board, no extra plaque, no long uniform right slide."
+    },
+    {
+      "index": 6,
+      "from": 6,
+      "to": 7,
+      "duration": 5,
+      "camera": "Forward approach, tight left swerve past the plaque edge, low ceremony arrival",
+      "prompt_template": "FORWARD SWERVE PAST THE PLAQUE INTO THE CEREMONY. 0.00–0.40s: gently approach the existing family plaque so its beveled edge grows. 0.40–1.40s: accelerate FORWARD and swerve LEFT around the plaque's left edge into the adjacent open aisle. The plaque sweeps close past SCREEN RIGHT; its back and the nearby column occlude the view briefly with a motivated wipe. Never fly through the board, pillar or wall. 1.40–2.15s: reveal the ceremony mandap already arranged beyond, with groom and bride seated to the LEFT and the timing sign to the RIGHT. Camera levels at seated-couple height and brakes smoothly; a small fire and offering bowls pass low in foreground without the camera crossing the flame. 2.15–5.00s: slow diagonal creep toward the couple and sign. The groom's raised hand makes only a small gentle ceremonial movement; bride lowers her gaze slightly. Keep identity, fingers, garlands and costume stable. The fire flickers, brass reflects its light, and a rich shower of small petals floats at multiple depths. The sign copy '{{ceremony_lines}}' remains exactly readable. Smoke is a delicate wisp from the ritual fire or incense, not from letters or people."
+    },
+    {
+      "index": 7,
+      "from": 7,
+      "to": 8,
+      "duration": 5,
+      "camera": "Rightward arc out of the ceremony with a slight rise, then frontal venue settle",
+      "prompt_template": "RIGHTWARD ARC FROM THE CEREMONY TO THE VENUE COURTYARD. 0.00–0.35s: retain a small living drift with the seated ritual. 0.35–1.45s: accelerate RIGHT around the outer stage column, simultaneously rising gently from seated-eye height to standing-eye height. The seated couple, ritual fire and timing sign move toward SCREEN LEFT and remain solid until the column occludes them. Pass through an already-open side bay into the adjoining courtyard; never morph the ceremony board into the venue board. 1.45–2.20s: the separate ornate venue board comes into frontal view with the gopuram behind it. Strongly ease the arc into a level centered composition; keep the board grounded on its pedestal. 2.20–5.00s: slow forward creep with slight lateral parallax across nearby lamps, lively highlights on the frame, and layered white-orange petals released as the camera slows. Guests remain small at the sides. Exact readable venue copy: '{{venue_lines}}'. No extra rooms or tower duplication."
+    },
+    {
+      "index": 8,
+      "from": 8,
+      "to": 9,
+      "duration": 5,
+      "camera": "Forward-right burst through a flower-framed passage, concealed reveal into the blue-hour reception",
+      "prompt_template": "FORWARD-RIGHT PASSAGE REVEAL INTO THE RECEPTION GARDEN. 0.00–0.35s: a short slow approach to the venue arrangement. 0.35–1.40s: accelerate diagonally FORWARD-RIGHT through the clear side aisle beside the venue board. The board recedes SCREEN LEFT. A very near garlanded pillar and then a hanging edge of gold drape sweep across the lens in succession, creating a brief complete foreground occlusion. Do not fly through objects. This stylized invitation moves to the evening reception scene behind that occlusion; do not visibly dissolve the sunlit sky into night. 1.40–2.20s: emerge beneath the reception floral arch into warm golden lamps against the small deep-blue sky area, revealing the separate ivory reception sign on its gold easel. Smooth firm braking, with strong near-lamp parallax becoming gentle. 2.20–5.00s: a slow slightly leftward correcting arc makes the gold frame catch changing warm reflections while all exact copy stays legible: '{{reception_lines}}'. Petals briefly swirl from the passage gust, then drift richly through the warm light. Background guests make tiny natural movements. No board morph, no text rewriting, no full orbit or continuing high-speed movement during the reading time."
+    },
+    {
+      "index": 9,
+      "from": 9,
+      "to": 10,
+      "duration": 5,
+      "camera": "Leftward return around a near pillar, then a gentle upward glide toward the hosts' steps",
+      "prompt_template": "LEFTWARD RETURN FROM THE RECEPTION TO THE HOSTS' LAMP HALL. 0.00–0.35s: a tiny moving pause on the reception easel. 0.35–1.35s: swing decisively LEFT into the nearby sandstone colonnade. Reception sign and blue-hour garden move SCREEN RIGHT and disappear behind a close carved pillar and floral drape; the setting changes through real occlusion rather than a dissolve. Keep the easel intact until offscreen. 1.35–2.20s: glide forward and slightly upward toward the inner hall's three shallow steps; the richly framed host plaque is already centered beyond the lamps. Decelerate strongly before the stairs, staying in the open aisle. 2.20–5.00s: a slow forward creep with minute changing angle brings warm glints across the elaborate gold frame and hanging lamps. The exact host copy '{{host_lines}}' stays still and readable. Layered small petals settle onto the flower rangoli; flame flicker and subtle floor reflections continue. No floating sign, no letters turning into particles, no smoke burst. End ready for a fast backward departure down this same clear corridor."
+    },
+    {
+      "index": 10,
+      "from": 10,
+      "to": 11,
+      "duration": 5,
+      "camera": "Fast backward corridor flight through the gap between the waiting couple, then full-body reveal",
+      "prompt_template": "BACKWARD FLIGHT THROUGH THE COUPLE'S GAP, THEN BRAKE TO A FULL-BODY REVEAL. 0.00–0.35s: start moving gently BACKWARD from the host plaque. 0.35–1.35s: accelerate straight BACKWARD down the existing lamp-lined corridor; the plaque rapidly shrinks, roof beams and close pillars sweep toward and past the lens, strong forward-facing parallax. The couple is ALREADY waiting near the open gateway behind the camera, not created from the plaque. 1.35–1.85s: pass backward through the clear gap between their shoulders and heads. Very close, softly motion-blurred profiles and garlands briefly enter at the extreme LEFT and RIGHT edges, framing the corridor; the center gap remains open. The camera passes BETWEEN them, never through a face or body. They make only a small natural turn as the camera clears them. The close profiles and gateway pillars provide brief foreground occlusion for the courtyard reveal. 1.85–2.65s: smoothly brake while continuing backward, revealing their full bodies standing close together, bride left and groom right, and the separate SAVE THE DATE sign on the right with the gopuram beyond. There is no 360-degree camera spin, no couple materializing and no wardrobe or identity change. 2.65–5.00s: slow backward drift, warm smiles and one restrained blink, garlands swaying gently, petals floating richly as travel slows. Exact sign copy '{{save_date_lines}}'. Keep the centerline composition and finish at the supplied full-body couple frame."
+    },
+    {
+      "index": 11,
+      "from": 11,
+      "to": 12,
+      "duration": 5,
+      "camera": "Continuous gentle backward glide and slight rise as the couple turn inward and touch foreheads",
+      "prompt_template": "QUIET ROMANTIC FINISH — NO NEW WHIP TRANSITION. Continue the preceding backward drift as one gentle, controlled move throughout these five seconds. 0.00–1.25s: the couple remains in exactly the same physical place, bride left and groom right, smiling softly. Camera glides BACKWARD and rises slightly under the existing gateway, slowly widening the view and admitting more of its top beam. 1.25–3.25s: they turn their heads and upper bodies a few degrees inward toward each other, lower their eyes and gently bring their foreheads together. Small believable motion only; no sweeping spin, kiss, dramatic bend or costume change. Keep joined hands stable at waist height and both feet planted. Their necklaces and red-white-green garlands sway subtly. 3.25–5.00s: continue easing the camera backward and slightly upward until the existing hanging brass lamp enters the upper-center composition as in the final image. Preserve the same gopuram, flower arch, floor lamps and right-side date board; exact copy '{{save_date_lines}}' remains unchanged. A gentle fall of individual white-orange petals and restrained lamp flicker keeps the final moment alive. Camera velocity tapers smoothly without a frozen frame or sudden stop. End in the supplied affectionate forehead-touch composition."
+    }
+  ]
+}

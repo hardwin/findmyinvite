@@ -1,0 +1,134 @@
+{
+  "programs": [],
+  "streams": [
+    {
+      "codec_name": "h264",
+      "codec_type": "video",
+      "width": 720,
+      "height": 1280,
+      "r_frame_rate": "24/1",
+      "nb_read_frames": "1307"
+    }
+  ],
+  "format": {
+    "duration": "54.459000",
+    "size": "50868857"
+  },
+  "full_decode": "passed",
+  "baseline_template_unchanged": true,
+  "opening_clip_unchanged": true,
+  "text_only_new_images": 9,
+  "selected_new_videos": 10,
+  "final_clip_uses_single_first_frame": true,
+  "application_code_changed": false,
+  "prompts": {
+    "images": [
+      {
+        "scene": 3,
+        "text_only": true,
+        "exact_prompt": true
+      },
+      {
+        "scene": 4,
+        "text_only": true,
+        "exact_prompt": true
+      },
+      {
+        "scene": 5,
+        "text_only": true,
+        "exact_prompt": true
+      },
+      {
+        "scene": 6,
+        "text_only": true,
+        "exact_prompt": true
+      },
+      {
+        "scene": 7,
+        "text_only": true,
+        "exact_prompt": true
+      },
+      {
+        "scene": 8,
+        "text_only": true,
+        "exact_prompt": true
+      },
+      {
+        "scene": 9,
+        "text_only": true,
+        "exact_prompt": true
+      },
+      {
+        "scene": 10,
+        "text_only": true,
+        "exact_prompt": true
+      },
+      {
+        "scene": 11,
+        "text_only": true,
+        "exact_prompt": true
+      }
+    ],
+    "videos": [
+      {
+        "clip": 2,
+        "exact_prompt": true,
+        "last_frame_provided": true
+      },
+      {
+        "clip": 3,
+        "exact_prompt": true,
+        "last_frame_provided": true
+      },
+      {
+        "clip": 4,
+        "exact_prompt": true,
+        "last_frame_provided": true
+      },
+      {
+        "clip": 5,
+        "exact_prompt": true,
+        "last_frame_provided": true
+      },
+      {
+        "clip": 6,
+        "exact_prompt": true,
+        "last_frame_provided": true
+      },
+      {
+        "clip": 7,
+        "exact_prompt": true,
+        "last_frame_provided": true
+      },
+      {
+        "clip": 8,
+        "exact_prompt": true,
+        "last_frame_provided": true
+      },
+      {
+        "clip": 9,
+        "exact_prompt": true,
+        "last_frame_provided": true
+      },
+      {
+        "clip": 10,
+        "exact_prompt": true,
+        "last_frame_provided": true
+      },
+      {
+        "clip": 11,
+        "exact_prompt": true,
+        "last_frame_provided": false
+      }
+    ]
+  },
+  "costs": {
+    "scope": "master-v1 only; reused opening and previous iterations excluded",
+    "imageRequests": 9,
+    "videoRequests": 10,
+    "xaiCompletedCostUsd": 7.05,
+    "pendingVideos": [],
+    "replicateCostUsd": null,
+    "replicateCostNote": "Provider prediction responses do not include monetary charges."
+  }
+}

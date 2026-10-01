@@ -1,0 +1,12 @@
+{
+  "requestId": "1ad0eda6-8f0c-9f7b-a37e-1975790d9bb0",
+  "status": "done",
+  "model": "grok-imagine-video-1.5",
+  "firstImage": "output/temple-prototype/clip-1-handoff.jpg",
+  "lastImage": "output/temple-prototype/image-3-720.jpg",
+  "createdAt": "2026-09-28T17:37:10.152Z",
+  "usage": {
+    "cost_in_usd_ticks": 7200000000
+  },
+  "outputUrl": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-1ad0eda6-8f0c-9f7b-a37e-1975790d9bb0.mp4"
+}

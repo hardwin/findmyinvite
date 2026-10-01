@@ -1,0 +1,1000 @@
+{
+  "schema_version": "1.1",
+  "iteration": "mysore-palace-royal-v1",
+  "name": "Mysore Palace Royal Wedding",
+  "status": "complete-first-version",
+  "assets_root": "output/mysore-palace-royal-v1",
+  "locked_baseline": {
+    "path": "master_template_v1.json",
+    "sha256": "d99ecbf7e19c0332a51053bca81070dce7101dceeb416e771d3a312067e182aa",
+    "snapshot": "locked-master-template-v1.json"
+  },
+  "scene_count": 12,
+  "connecting_clip_count": 11,
+  "models": {
+    "image": {
+      "provider": "replicate",
+      "id": "openai/gpt-image-2.5-flare",
+      "credentials_env": "REPLICATE_API_TOKEN"
+    },
+    "video": {
+      "provider": "xai",
+      "id": "grok-imagine-video-1.5",
+      "credentials_env": "XAI_API_KEY",
+      "resolution": "720p"
+    }
+  },
+  "parameters": {
+    "invitation_lines": "Sounder & Mohan\nFamily\nWedding Invitation",
+    "groom_title": "Sri.",
+    "groom_name": "Ashok Kumar",
+    "bride_title": "Srmt.",
+    "bride_name": "Supriya",
+    "family_lines": "With the Blessings of\nGroom's Parents\nMr. Sounder Rajan\n& Mrs. Punitha\nBride's Parents\nMr. Mohan Krishna\n& Mrs. Prema",
+    "ceremony_lines": "Wedding Ceremony\n7th February 2020\n8:00 a.m.\nIn the Morning",
+    "venue_lines": "Wedding Venue\nLeela Channaiah\nKalyana Mandapa\nVontikoppal\nMysore",
+    "reception_lines": "Reception - Dinner\n6th February 2020\n7:30 p.m. onwards\nLeela Channaiah\nKalyana Mandapa\nVontikoppal, Mysore",
+    "host_lines": "Invited By\nMr. BalaSubramanian\nMrs. Jeevitha\nBaby. Yazhini & Suhas\nWith Love & Blessings",
+    "save_date_lines": "SAVE THE DATE\n6 & 7 FEBRUARY\n2020",
+    "devotional_line_1": "Om Shree",
+    "devotional_line_2": "Ganeshaya Namah",
+    "save_date_inline": "SAVE THE DATE / 6 & 7 FEBRUARY / 2020"
+  },
+  "copy_assumptions": [
+    "Reception uses the same venue as the wedding because no separate reception venue was provided.",
+    "Bride honorific Srmt. is preserved exactly as requested.",
+    "The ceremony date and morning time are 7 February 2020 at 8:00 a.m.; reception is 6 February 2020 at 7:30 p.m.",
+    "Both families are represented together on the blessing plaque to retain twelve visual scenes.",
+    "Mysore Palace is the visual theme; the supplied Leela Channaiah Kalyana Mandapa venue and all wedding details remain unchanged."
+  ],
+  "style": "A full-bleed portrait 9:16 frame of a richly cinematic dimensional storybook-animation Mysore Palace royal wedding invitation. Warm ivory granite with intricate turquoise-gold carved recesses, deep amber shadows, ruby brocade, ivory, aged gold, ruby roses, white jasmine and emerald foliage. Premium animated adult characters with regal expressive faces, never photographic people. DRAMATIC CHIAROSCURO: strong warm back-and-side sunlight streams diagonally through open stone bays and roof gaps, clearly visible volumetric god rays cutting through thin atmospheric incense haze; luminous rim light on silk, jewelry and gold frames against darker shade. Preserve readable highlights, not a flat uniformly bright golden wash. Very fine dust motes sparkle only inside the sunbeams. Floor is subtly reflective inlaid marble, not a mirror. Gold lettering has illuminated beveled edges, warm restrained emissive bloom, luminous hairline flourishes and discrete pinpoint highlights; sharp readable counters. Dense fixed wedding garlands, gilded lamps and flower rangoli. Roughly 12 to 20 tiny separate white, pale gold and ruby petals already scattered irregularly through the whole depth volume: a few soft near-lens edge petals, crisp midground petals, tiny distant petals. No confetti cannon, solid flower bunches in the air, symmetrical particle rows or dense shower from one point. All bouquets and garlands are fixed to their supports. Generate only from this text, no reference image. No watermark, interface, duplicate people, extra signs or unintended words.",
+  "characters": {
+    "groom": "Adult Indian king-groom, visibly polished storybook 3D animation, warm medium-brown skin, dignified adult angular face, large dark-brown almond eyes, thick dark eyebrows, smooth clean-shaven cheeks and chin, swept black hair beneath a jeweled ivory Mysore peta with raised ornament, small relaxed smile. No moustache or beard. Natural adult proportions, not a child. Ivory brocade royal achkan with a broad antique-gold border, covered upper chest and an ivory gold-embroidered sash over his left shoulder crossing his torso, two fine pearl necklaces. Keep this face, headdress, body and outfit consistent in every couple scene.",
+    "bride": "Adult Indian queen-bride, visibly polished storybook 3D animation, warm medium-brown skin, regal heart-shaped face, large dark-brown almond eyes, gently arched black eyebrows, small red bindi, warm reserved smile. Center-parted dark hair swept into a low bun beneath a jeweled gold tiara, antique-gold maang tikka, ruby jhumka earrings, layered pearl necklaces, stacks of ruby-and-gold bangles and a slender gold waist belt. Deep ruby-red Mysore silk sari with fine gold brocade and a broad antique-gold border, matching short-sleeved ruby blouse. Natural adult proportions and a consistent face, headdress, jewelry and sari in every later scene."
+  },
+  "particle_motion": "PETALS AND LIGHT: continuous distributed slow-motion drift is present from the first frame, not triggered as a burst when the camera stops. Keep about 12-20 separate visible petals at irregular heights and depths. Petals flutter with independent phase, soft air resistance and a little side-to-side wobble; nearby petals drift roughly one tenth of picture height per second in the settled view, distant ones slower. Camera rotation produces the brief directional streaks; after braking the SAME scattered petals become calmly visible, with no sudden emission, rain sheet, confetti explosion or synchronized falling. Bouquets and garlands never detach. Fine dust motes drift inside diagonal volumetric sunrays. Gold edges and jewelry catch moving specular glints; text itself emits no smoke, gold liquid or floor beam.",
+  "generation_policy": {
+    "images": "Text-only Flare; no source or generated reference images.",
+    "video": "Grok Imagine only. Prior generated final frame as first anchor; next generated scene image as last anchor, except final clip.",
+    "ending": "First-frame-only animation preserves one existing board and the same physical scene. No independent final-frame composition.",
+    "initial_new_image_requests": 11,
+    "initial_new_video_requests": 11,
+    "planned_xai_usd": 7.77,
+    "automatic_paid_retries": false,
+    "download_outputs_immediately": true,
+    "visual_review": false,
+    "video_tests": false,
+    "retakes": false
+  },
+  "output": {
+    "video": "mysore-palace-royal-v1-final.mp4",
+    "width": 720,
+    "height": 1280,
+    "fps": 24,
+    "aspect_ratio": "9:16",
+    "audio": "silent",
+    "assembly": "Concatenate generated clips in order; no transition overlays, global retiming or crossfades.",
+    "actual_duration_seconds": 54.458333333333336,
+    "frame_count": 1307
+  },
+  "scenes": [
+    {
+      "index": 1,
+      "id": "scene-01",
+      "name": "Distant high aerial hook",
+      "status": "generated-first-take",
+      "image_prompt_template": "A high oblique DRONE establishing shot of a lavishly decorated Mysore Palace at sunrise, portrait 9:16. The camera floats about 40 meters ABOVE the courtyard and well BACK from the foreground pavilion, around the height of the main domed clock-tower's upper half. It looks diagonally DOWN across the palace at roughly 20–25 degrees below horizontal with a wide 24 mm lens. A lavender-peach sunrise sky, low sun at left and distant misty palm horizon remain clearly visible in the upper third. The composition must immediately read as a flying drone looking down into a palace compound.\n\nShow broad TOP SURFACES of both long side-colonnade roofs and the small central pavilion roof. See DOWN into the rectangular water tank, over its near parapet, with paving and steps receding away below the camera. People are tiny figures seen from above. The front boundary occupies a narrow foreground strip. The complete tall domed clock-tower stands in the background, with sky around its finials. The small four-column Ganesha pavilion is well below the camera, its roof about one quarter of frame width, with open courtyard separating it from the tower. Its roof partly occludes the tiny seated idol. This is a grand view of the whole courtyard, not a close shrine portrait. Keep the sky and horizon while retaining clear downward perspective; neither an eye-level facade view nor a vertical overhead map.\n\nIvory-granite intricately gilded palace stone, one domed palace clock-tower, one small square four-column pavilion with a small domed roof, peacock front beam and three steps. All pavilion sides are open, including the rear. A tiny ruby-ivory, gold-crowned Ganesha occupies its flower-covered pedestal between two lamps; facial details are not resolved from this height. No closed inner sanctuary or back wall.\n\nLavish wedding decoration is distributed across the entire aerial view: three broad tiers of ruby-ivory-gold floral swags on the tower, layered garlands and mango leaves along BOTH colonnades, floral trim on the pavilion's outer beam and columns, white kolam and flower rangoli in the side courtyards, rows of brass diyas, petal borders along steps and tank edges, and floating flower bowls on the water. These details stay small in the landscape; never lower or move the camera closer to show them. The central forward-down flight route remains clear. Warm sunrise, long shadows, subtle reflections, atmospheric depth and premium dimensional storybook illustration. No text, watermark or additional shrine.",
+      "image_prompt": "A high oblique DRONE establishing shot of a lavishly decorated Mysore Palace at sunrise, portrait 9:16. The camera floats about 40 meters ABOVE the courtyard and well BACK from the foreground pavilion, around the height of the main domed clock-tower's upper half. It looks diagonally DOWN across the palace at roughly 20–25 degrees below horizontal with a wide 24 mm lens. A lavender-peach sunrise sky, low sun at left and distant misty palm horizon remain clearly visible in the upper third. The composition must immediately read as a flying drone looking down into a palace compound.\n\nShow broad TOP SURFACES of both long side-colonnade roofs and the small central pavilion roof. See DOWN into the rectangular water tank, over its near parapet, with paving and steps receding away below the camera. People are tiny figures seen from above. The front boundary occupies a narrow foreground strip. The complete tall domed clock-tower stands in the background, with sky around its finials. The small four-column Ganesha pavilion is well below the camera, its roof about one quarter of frame width, with open courtyard separating it from the tower. Its roof partly occludes the tiny seated idol. This is a grand view of the whole courtyard, not a close shrine portrait. Keep the sky and horizon while retaining clear downward perspective; neither an eye-level facade view nor a vertical overhead map.\n\nIvory-granite intricately gilded palace stone, one domed palace clock-tower, one small square four-column pavilion with a small domed roof, peacock front beam and three steps. All pavilion sides are open, including the rear. A tiny ruby-ivory, gold-crowned Ganesha occupies its flower-covered pedestal between two lamps; facial details are not resolved from this height. No closed inner sanctuary or back wall.\n\nLavish wedding decoration is distributed across the entire aerial view: three broad tiers of ruby-ivory-gold floral swags on the tower, layered garlands and mango leaves along BOTH colonnades, floral trim on the pavilion's outer beam and columns, white kolam and flower rangoli in the side courtyards, rows of brass diyas, petal borders along steps and tank edges, and floating flower bowls on the water. These details stay small in the landscape; never lower or move the camera closer to show them. The central forward-down flight route remains clear. Warm sunrise, long shadows, subtle reflections, atmospheric depth and premium dimensional storybook illustration. No text, watermark or additional shrine.",
+      "text_fields": [],
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-1.jpg",
+      "generation": "text-only",
+      "selected_take": 1,
+      "review_note": "No visual review or retake, as requested."
+    },
+    {
+      "index": 2,
+      "id": "scene-02",
+      "name": "Open mandap with dimensional blessing",
+      "status": "generated-first-take",
+      "image_prompt_template": "Create one full-bleed portrait 9:16 frame from a premium dimensional storybook Mysore Palace royal wedding invitation film, solely from this written description. Intricately carved lifelike architecture with the refined illustrative finish of a cinematic animation, rich depth and atmospheric perspective. Ivory-granite palace stone with dark teal gilded recesses; ivory, deep red and antique gold accents. One warm sunrise from camera-left throughout, soft amber bloom with readable highlight detail, long diagonal shadows. Ruby roses, white jasmine, emerald foliage, gilded lamps, inlaid marble with warm directional reflections. No photographic humans, no watermark, no interface, no frame. Render only the exact text requested for this image. Materials and lighting stay consistent between an aerial view and a close view of the same site.\n\nONE Mysore Palace complex with ONE dominant domed Mysore Palace clock-tower with gilded finials at the far end of its central axis. In front of it is ONE much smaller freestanding square Ganesha mandap, with four carved square corner columns, a shallow gilded roof with a low scalloped domed cap, a peacock relief on the front roof beam, three shallow front steps, and ruby-ivory garland scallops. All four sides of the pavilion are OPEN BETWEEN THE COLUMNS, including the rear: clear daylight and the distant domed clock-tower are visible through the rear gaps from a frontal low viewpoint. There is no masonry rear wall, inner sanctuary box, door panel, nested doorway, or second shrine inside. A single stationary Ganesha idol stands on the central low square peacock-carved pedestal. Its identity, when close enough to resolve, is warm peach-toned elephant face and hands, an antique-gold high crown, four arms, a trunk curling toward screen-right in frontal view, ruby and ivory-gold draped cloth, white jasmine and ruby rose garlands; front hand at screen-left raised in blessing, front hand at screen-right holding a bowl. Two gilded lamps stand to either side of the pedestal. Keep the roof, corner columns, steps, pedestal and rear opening physically consistent. The tower remains outside beyond the rear columns. The open left side connects directly to the adjacent invitation courtyard bay.\n\nSHOT: Eye-level camera inside the SAME small four-column open mandap, facing the seated Ganesha and the distant domed clock-tower beyond the open rear side. Two front columns frame the extreme edges, rear columns are visible farther away, and a shallow carved roof with the peacock beam sits overhead. Daylight remains visible on both sides of the idol, continuing uninterrupted into the exterior courtyard behind it. No solid backdrop or inner doorway. The single Ganesha described in the continuity block is clearly visible, with face, crown, trunk, arms, cloth and garlands intact. Idol and pedestal together occupy approximately 40 percent of image height in the lower middle, with polished foreground floor still visible. Above the crown, a LARGE two-line floating devotional title reads exactly '{{devotional_line_1}}' / '{{devotional_line_2}}'. Exquisite ornate devotional display lettering with graceful curved serifs, a gently arched first line, elegant varied stroke widths and modest flourishes. The title spans approximately 65-70 percent of frame width, in the upper-middle quarter, separated clearly from the roof beam and the crown. These are freestanding dimensional letters suspended in the open air, with luminous champagne-gold faces, antique-gold beveled edges, subtle amber halos and tiny bright edge glints. Rich gold, not brown engraving. No rectangular nameplate, printed wall text or letters attached to stone. Readable counters and gaps between words, full title inside the frame. Warm sunrise strikes the letters obliquely and reflects softly in the inlaid marble. Abundant individual white jasmine and ruby rose petals in three depths: softly defocused small near-lens petals at the edges, sharp rotating midground petals and tiny background petals. Keep all lettering and the idol face unobscured. A few delicate incense wisps originate ONLY at a visible low incense bowl beside a lamp; the title emits no smoke. Leave the left-side exit open and visible.",
+      "image_prompt": "Create one full-bleed portrait 9:16 frame from a premium dimensional storybook Mysore Palace royal wedding invitation film, solely from this written description. Intricately carved lifelike architecture with the refined illustrative finish of a cinematic animation, rich depth and atmospheric perspective. Ivory-granite palace stone with dark teal gilded recesses; ivory, deep red and antique gold accents. One warm sunrise from camera-left throughout, soft amber bloom with readable highlight detail, long diagonal shadows. Ruby roses, white jasmine, emerald foliage, gilded lamps, inlaid marble with warm directional reflections. No photographic humans, no watermark, no interface, no frame. Render only the exact text requested for this image. Materials and lighting stay consistent between an aerial view and a close view of the same site.\n\nONE Mysore Palace complex with ONE dominant domed Mysore Palace clock-tower with gilded finials at the far end of its central axis. In front of it is ONE much smaller freestanding square Ganesha mandap, with four carved square corner columns, a shallow gilded roof with a low scalloped domed cap, a peacock relief on the front roof beam, three shallow front steps, and ruby-ivory garland scallops. All four sides of the pavilion are OPEN BETWEEN THE COLUMNS, including the rear: clear daylight and the distant domed clock-tower are visible through the rear gaps from a frontal low viewpoint. There is no masonry rear wall, inner sanctuary box, door panel, nested doorway, or second shrine inside. A single stationary Ganesha idol stands on the central low square peacock-carved pedestal. Its identity, when close enough to resolve, is warm peach-toned elephant face and hands, an antique-gold high crown, four arms, a trunk curling toward screen-right in frontal view, ruby and ivory-gold draped cloth, white jasmine and ruby rose garlands; front hand at screen-left raised in blessing, front hand at screen-right holding a bowl. Two gilded lamps stand to either side of the pedestal. Keep the roof, corner columns, steps, pedestal and rear opening physically consistent. The tower remains outside beyond the rear columns. The open left side connects directly to the adjacent invitation courtyard bay.\n\nSHOT: Eye-level camera inside the SAME small four-column open mandap, facing the seated Ganesha and the distant domed clock-tower beyond the open rear side. Two front columns frame the extreme edges, rear columns are visible farther away, and a shallow carved roof with the peacock beam sits overhead. Daylight remains visible on both sides of the idol, continuing uninterrupted into the exterior courtyard behind it. No solid backdrop or inner doorway. The single Ganesha described in the continuity block is clearly visible, with face, crown, trunk, arms, cloth and garlands intact. Idol and pedestal together occupy approximately 40 percent of image height in the lower middle, with polished foreground floor still visible. Above the crown, a LARGE two-line floating devotional title reads exactly 'Om Shree' / 'Ganeshaya Namah'. Exquisite ornate devotional display lettering with graceful curved serifs, a gently arched first line, elegant varied stroke widths and modest flourishes. The title spans approximately 65-70 percent of frame width, in the upper-middle quarter, separated clearly from the roof beam and the crown. These are freestanding dimensional letters suspended in the open air, with luminous champagne-gold faces, antique-gold beveled edges, subtle amber halos and tiny bright edge glints. Rich gold, not brown engraving. No rectangular nameplate, printed wall text or letters attached to stone. Readable counters and gaps between words, full title inside the frame. Warm sunrise strikes the letters obliquely and reflects softly in the inlaid marble. Abundant individual white jasmine and ruby rose petals in three depths: softly defocused small near-lens petals at the edges, sharp rotating midground petals and tiny background petals. Keep all lettering and the idol face unobscured. A few delicate incense wisps originate ONLY at a visible low incense bowl beside a lamp; the title emits no smoke. Leave the left-side exit open and visible.",
+      "text_fields": [],
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-2.jpg",
+      "generation": "text-only",
+      "selected_take": 1,
+      "review_note": "No visual review or retake, as requested."
+    },
+    {
+      "index": 3,
+      "name": "Family invitation in the side courtyard",
+      "status": "generated-first-take",
+      "generation": "text-only",
+      "image_prompt_template": "A full-bleed portrait 9:16 frame of a richly cinematic dimensional storybook-animation Mysore Palace royal wedding invitation. Warm ivory granite with intricate turquoise-gold carved recesses, deep amber shadows, ruby brocade, ivory, aged gold, ruby roses, white jasmine and emerald foliage. Premium animated adult characters with regal expressive faces, never photographic people. DRAMATIC CHIAROSCURO: strong warm back-and-side sunlight streams diagonally through open stone bays and roof gaps, clearly visible volumetric god rays cutting through thin atmospheric incense haze; luminous rim light on silk, jewelry and gold frames against darker shade. Preserve readable highlights, not a flat uniformly bright golden wash. Very fine dust motes sparkle only inside the sunbeams. Floor is subtly reflective inlaid marble, not a mirror. Gold lettering has illuminated beveled edges, warm restrained emissive bloom, luminous hairline flourishes and discrete pinpoint highlights; sharp readable counters. Dense fixed wedding garlands, gilded lamps and flower rangoli. Roughly 12 to 20 tiny separate white, pale gold and ruby petals already scattered irregularly through the whole depth volume: a few soft near-lens edge petals, crisp midground petals, tiny distant petals. No confetti cannon, solid flower bunches in the air, symmetrical particle rows or dense shower from one point. All bouquets and garlands are fixed to their supports. Generate only from this text, no reference image. No watermark, interface, duplicate people, extra signs or unintended words.\n\nSCENE COMPOSITION:\nEye-level view into a richly decorated SIDE courtyard bay beside the open Ganesha pavilion. One ivory invitation board stands on a low antique-gold plinth, centered in the lower two thirds, occupying 55 percent of frame width. Gold peacock border and a tiny gold Gandabherunda emblem. Readable large luminous gold display lettering, exact lines: '{{invitation_lines}}'. The first line is graceful expressive calligraphy, the lower lines elegant wedding display lettering, all fully within generous margins. A close garlanded square pillar occupies the extreme left foreground. The courtyard extends diagonally behind the board with an offset partial domed clock-tower far to the right, not a straight tunnel centered behind the sign. Strong angled sunrise shafts enter from upper left. Brass diyas, rangoli, fixed flowers on the plinth, floating small separated petals. No Ganesha or little shrine is visible here. This view is reached by turning left out of the shrine, not flying forward through it.",
+      "image_prompt": "A full-bleed portrait 9:16 frame of a richly cinematic dimensional storybook-animation Mysore Palace royal wedding invitation. Warm ivory granite with intricate turquoise-gold carved recesses, deep amber shadows, ruby brocade, ivory, aged gold, ruby roses, white jasmine and emerald foliage. Premium animated adult characters with regal expressive faces, never photographic people. DRAMATIC CHIAROSCURO: strong warm back-and-side sunlight streams diagonally through open stone bays and roof gaps, clearly visible volumetric god rays cutting through thin atmospheric incense haze; luminous rim light on silk, jewelry and gold frames against darker shade. Preserve readable highlights, not a flat uniformly bright golden wash. Very fine dust motes sparkle only inside the sunbeams. Floor is subtly reflective inlaid marble, not a mirror. Gold lettering has illuminated beveled edges, warm restrained emissive bloom, luminous hairline flourishes and discrete pinpoint highlights; sharp readable counters. Dense fixed wedding garlands, gilded lamps and flower rangoli. Roughly 12 to 20 tiny separate white, pale gold and ruby petals already scattered irregularly through the whole depth volume: a few soft near-lens edge petals, crisp midground petals, tiny distant petals. No confetti cannon, solid flower bunches in the air, symmetrical particle rows or dense shower from one point. All bouquets and garlands are fixed to their supports. Generate only from this text, no reference image. No watermark, interface, duplicate people, extra signs or unintended words.\n\nSCENE COMPOSITION:\nEye-level view into a richly decorated SIDE courtyard bay beside the open Ganesha pavilion. One ivory invitation board stands on a low antique-gold plinth, centered in the lower two thirds, occupying 55 percent of frame width. Gold peacock border and a tiny gold Gandabherunda emblem. Readable large luminous gold display lettering, exact lines: 'Sounder & Mohan\nFamily\nWedding Invitation'. The first line is graceful expressive calligraphy, the lower lines elegant wedding display lettering, all fully within generous margins. A close garlanded square pillar occupies the extreme left foreground. The courtyard extends diagonally behind the board with an offset partial domed clock-tower far to the right, not a straight tunnel centered behind the sign. Strong angled sunrise shafts enter from upper left. Brass diyas, rangoli, fixed flowers on the plinth, floating small separated petals. No Ganesha or little shrine is visible here. This view is reached by turning left out of the shrine, not flying forward through it.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-3.jpg",
+      "selected_take": 1,
+      "review_note": "No visual review or retake, as requested."
+    },
+    {
+      "index": 4,
+      "name": "Groom in the shaded stone hall",
+      "status": "generated-first-take",
+      "generation": "text-only",
+      "image_prompt_template": "A full-bleed portrait 9:16 frame of a richly cinematic dimensional storybook-animation Mysore Palace royal wedding invitation. Warm ivory granite with intricate turquoise-gold carved recesses, deep amber shadows, ruby brocade, ivory, aged gold, ruby roses, white jasmine and emerald foliage. Premium animated adult characters with regal expressive faces, never photographic people. DRAMATIC CHIAROSCURO: strong warm back-and-side sunlight streams diagonally through open stone bays and roof gaps, clearly visible volumetric god rays cutting through thin atmospheric incense haze; luminous rim light on silk, jewelry and gold frames against darker shade. Preserve readable highlights, not a flat uniformly bright golden wash. Very fine dust motes sparkle only inside the sunbeams. Floor is subtly reflective inlaid marble, not a mirror. Gold lettering has illuminated beveled edges, warm restrained emissive bloom, luminous hairline flourishes and discrete pinpoint highlights; sharp readable counters. Dense fixed wedding garlands, gilded lamps and flower rangoli. Roughly 12 to 20 tiny separate white, pale gold and ruby petals already scattered irregularly through the whole depth volume: a few soft near-lens edge petals, crisp midground petals, tiny distant petals. No confetti cannon, solid flower bunches in the air, symmetrical particle rows or dense shower from one point. All bouquets and garlands are fixed to their supports. Generate only from this text, no reference image. No watermark, interface, duplicate people, extra signs or unintended words.\n\nAdult Indian king-groom, visibly polished storybook 3D animation, warm medium-brown skin, dignified adult angular face, large dark-brown almond eyes, thick dark eyebrows, smooth clean-shaven cheeks and chin, swept black hair beneath a jeweled ivory Mysore peta with raised ornament, small relaxed smile. No moustache or beard. Natural adult proportions, not a child. Ivory brocade royal achkan with a broad antique-gold border, covered upper chest and an ivory gold-embroidered sash over his left shoulder crossing his torso, two fine pearl necklaces. Keep this face, headdress, body and outfit consistent in every couple scene.\n\nSCENE COMPOSITION:\nInside a shaded long turquoise-gold Durbar hall with no outdoor tower visible. The consistent animated groom stands full-length in the LEFT third, natural adult proportions, all feet and hair inside frame with generous margins, occupying 62 percent of frame height. His ivory achkan and diagonal gold-embroidered royal sash cover the chest fully; jeweled Mysore peta. Floating on the RIGHT at chest height, spectacular fine champagne-gold calligraphy reads exactly '{{groom_title}}' on a small first line, '{{groom_name}}' on two graceful large lines below. The gold letters have bright rim-lit beveled edges, gentle amber halos and a few tiny star-like glints along the flourishes, not a signboard. Strong sunrays enter through high LEFT wall apertures, illuminating dusty air and the groom's rim against dark columns. Near columns frame the sides, lamps and garlands recede in layers, sparse slow-looking individual petals are distributed throughout the hall. There is no outdoor courtyard at the vanishing point.",
+      "image_prompt": "A full-bleed portrait 9:16 frame of a richly cinematic dimensional storybook-animation Mysore Palace royal wedding invitation. Warm ivory granite with intricate turquoise-gold carved recesses, deep amber shadows, ruby brocade, ivory, aged gold, ruby roses, white jasmine and emerald foliage. Premium animated adult characters with regal expressive faces, never photographic people. DRAMATIC CHIAROSCURO: strong warm back-and-side sunlight streams diagonally through open stone bays and roof gaps, clearly visible volumetric god rays cutting through thin atmospheric incense haze; luminous rim light on silk, jewelry and gold frames against darker shade. Preserve readable highlights, not a flat uniformly bright golden wash. Very fine dust motes sparkle only inside the sunbeams. Floor is subtly reflective inlaid marble, not a mirror. Gold lettering has illuminated beveled edges, warm restrained emissive bloom, luminous hairline flourishes and discrete pinpoint highlights; sharp readable counters. Dense fixed wedding garlands, gilded lamps and flower rangoli. Roughly 12 to 20 tiny separate white, pale gold and ruby petals already scattered irregularly through the whole depth volume: a few soft near-lens edge petals, crisp midground petals, tiny distant petals. No confetti cannon, solid flower bunches in the air, symmetrical particle rows or dense shower from one point. All bouquets and garlands are fixed to their supports. Generate only from this text, no reference image. No watermark, interface, duplicate people, extra signs or unintended words.\n\nAdult Indian king-groom, visibly polished storybook 3D animation, warm medium-brown skin, dignified adult angular face, large dark-brown almond eyes, thick dark eyebrows, smooth clean-shaven cheeks and chin, swept black hair beneath a jeweled ivory Mysore peta with raised ornament, small relaxed smile. No moustache or beard. Natural adult proportions, not a child. Ivory brocade royal achkan with a broad antique-gold border, covered upper chest and an ivory gold-embroidered sash over his left shoulder crossing his torso, two fine pearl necklaces. Keep this face, headdress, body and outfit consistent in every couple scene.\n\nSCENE COMPOSITION:\nInside a shaded long turquoise-gold Durbar hall with no outdoor tower visible. The consistent animated groom stands full-length in the LEFT third, natural adult proportions, all feet and hair inside frame with generous margins, occupying 62 percent of frame height. His ivory achkan and diagonal gold-embroidered royal sash cover the chest fully; jeweled Mysore peta. Floating on the RIGHT at chest height, spectacular fine champagne-gold calligraphy reads exactly 'Sri.' on a small first line, 'Ashok Kumar' on two graceful large lines below. The gold letters have bright rim-lit beveled edges, gentle amber halos and a few tiny star-like glints along the flourishes, not a signboard. Strong sunrays enter through high LEFT wall apertures, illuminating dusty air and the groom's rim against dark columns. Near columns frame the sides, lamps and garlands recede in layers, sparse slow-looking individual petals are distributed throughout the hall. There is no outdoor courtyard at the vanishing point.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-4.jpg",
+      "selected_take": 1,
+      "review_note": "No visual review or retake, as requested."
+    },
+    {
+      "index": 5,
+      "name": "Bride beside the sunlit transverse archway",
+      "status": "generated-first-take",
+      "generation": "text-only",
+      "image_prompt_template": "A full-bleed portrait 9:16 frame of a richly cinematic dimensional storybook-animation Mysore Palace royal wedding invitation. Warm ivory granite with intricate turquoise-gold carved recesses, deep amber shadows, ruby brocade, ivory, aged gold, ruby roses, white jasmine and emerald foliage. Premium animated adult characters with regal expressive faces, never photographic people. DRAMATIC CHIAROSCURO: strong warm back-and-side sunlight streams diagonally through open stone bays and roof gaps, clearly visible volumetric god rays cutting through thin atmospheric incense haze; luminous rim light on silk, jewelry and gold frames against darker shade. Preserve readable highlights, not a flat uniformly bright golden wash. Very fine dust motes sparkle only inside the sunbeams. Floor is subtly reflective inlaid marble, not a mirror. Gold lettering has illuminated beveled edges, warm restrained emissive bloom, luminous hairline flourishes and discrete pinpoint highlights; sharp readable counters. Dense fixed wedding garlands, gilded lamps and flower rangoli. Roughly 12 to 20 tiny separate white, pale gold and ruby petals already scattered irregularly through the whole depth volume: a few soft near-lens edge petals, crisp midground petals, tiny distant petals. No confetti cannon, solid flower bunches in the air, symmetrical particle rows or dense shower from one point. All bouquets and garlands are fixed to their supports. Generate only from this text, no reference image. No watermark, interface, duplicate people, extra signs or unintended words.\n\nAdult Indian queen-bride, visibly polished storybook 3D animation, warm medium-brown skin, regal heart-shaped face, large dark-brown almond eyes, gently arched black eyebrows, small red bindi, warm reserved smile. Center-parted dark hair swept into a low bun beneath a jeweled gold tiara, antique-gold maang tikka, ruby jhumka earrings, layered pearl necklaces, stacks of ruby-and-gold bangles and a slender gold waist belt. Deep ruby-red Mysore silk sari with fine gold brocade and a broad antique-gold border, matching short-sleeved ruby blouse. Natural adult proportions and a consistent face, headdress, jewelry and sari in every later scene.\n\nSCENE COMPOSITION:\nA different open cross-passage at a RIGHT ANGLE to the groom's enclosed hall. The bride stands full-length in the LEFT third, hands gently clasped, dressed in the same ruby-gold sari and tiara bun described in the identity block. Natural adult proportions, figure about 62 percent of frame height. On the RIGHT floats a large exquisite luminous gold calligraphic title, exactly '{{bride_title}}' in small type above '{{bride_name}}' in large flowing thin strokes. Bright golden bevels and soft amber halo, sharp readable letters. Two foreground carved pillars frame the archway. Beyond is a SIDE VIEW across broad courtyard steps and a LOW roofed palace wing, with only an offset small portion of the tall tower near the far LEFT edge. Do not put a giant frontal domed clock-tower centrally behind the bride. Blazing oblique sunbeams come through the far side opening, creating dramatic light shafts and glowing sari and jewelry edges against shaded stone. Garlands above, fixed lamp rows, small independent petals at varied heights. The family plaque is outside this view around the right corner.",
+      "image_prompt": "A full-bleed portrait 9:16 frame of a richly cinematic dimensional storybook-animation Mysore Palace royal wedding invitation. Warm ivory granite with intricate turquoise-gold carved recesses, deep amber shadows, ruby brocade, ivory, aged gold, ruby roses, white jasmine and emerald foliage. Premium animated adult characters with regal expressive faces, never photographic people. DRAMATIC CHIAROSCURO: strong warm back-and-side sunlight streams diagonally through open stone bays and roof gaps, clearly visible volumetric god rays cutting through thin atmospheric incense haze; luminous rim light on silk, jewelry and gold frames against darker shade. Preserve readable highlights, not a flat uniformly bright golden wash. Very fine dust motes sparkle only inside the sunbeams. Floor is subtly reflective inlaid marble, not a mirror. Gold lettering has illuminated beveled edges, warm restrained emissive bloom, luminous hairline flourishes and discrete pinpoint highlights; sharp readable counters. Dense fixed wedding garlands, gilded lamps and flower rangoli. Roughly 12 to 20 tiny separate white, pale gold and ruby petals already scattered irregularly through the whole depth volume: a few soft near-lens edge petals, crisp midground petals, tiny distant petals. No confetti cannon, solid flower bunches in the air, symmetrical particle rows or dense shower from one point. All bouquets and garlands are fixed to their supports. Generate only from this text, no reference image. No watermark, interface, duplicate people, extra signs or unintended words.\n\nAdult Indian queen-bride, visibly polished storybook 3D animation, warm medium-brown skin, regal heart-shaped face, large dark-brown almond eyes, gently arched black eyebrows, small red bindi, warm reserved smile. Center-parted dark hair swept into a low bun beneath a jeweled gold tiara, antique-gold maang tikka, ruby jhumka earrings, layered pearl necklaces, stacks of ruby-and-gold bangles and a slender gold waist belt. Deep ruby-red Mysore silk sari with fine gold brocade and a broad antique-gold border, matching short-sleeved ruby blouse. Natural adult proportions and a consistent face, headdress, jewelry and sari in every later scene.\n\nSCENE COMPOSITION:\nA different open cross-passage at a RIGHT ANGLE to the groom's enclosed hall. The bride stands full-length in the LEFT third, hands gently clasped, dressed in the same ruby-gold sari and tiara bun described in the identity block. Natural adult proportions, figure about 62 percent of frame height. On the RIGHT floats a large exquisite luminous gold calligraphic title, exactly 'Srmt.' in small type above 'Supriya' in large flowing thin strokes. Bright golden bevels and soft amber halo, sharp readable letters. Two foreground carved pillars frame the archway. Beyond is a SIDE VIEW across broad courtyard steps and a LOW roofed palace wing, with only an offset small portion of the tall tower near the far LEFT edge. Do not put a giant frontal domed clock-tower centrally behind the bride. Blazing oblique sunbeams come through the far side opening, creating dramatic light shafts and glowing sari and jewelry edges against shaded stone. Garlands above, fixed lamp rows, small independent petals at varied heights. The family plaque is outside this view around the right corner.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-5.jpg",
+      "selected_take": 1,
+      "review_note": "No visual review or retake, as requested."
+    },
+    {
+      "index": 6,
+      "name": "Both families' blessing plaque in the west colonnade",
+      "status": "generated-first-take",
+      "generation": "text-only",
+      "image_prompt_template": "A full-bleed portrait 9:16 frame of a richly cinematic dimensional storybook-animation Mysore Palace royal wedding invitation. Warm ivory granite with intricate turquoise-gold carved recesses, deep amber shadows, ruby brocade, ivory, aged gold, ruby roses, white jasmine and emerald foliage. Premium animated adult characters with regal expressive faces, never photographic people. DRAMATIC CHIAROSCURO: strong warm back-and-side sunlight streams diagonally through open stone bays and roof gaps, clearly visible volumetric god rays cutting through thin atmospheric incense haze; luminous rim light on silk, jewelry and gold frames against darker shade. Preserve readable highlights, not a flat uniformly bright golden wash. Very fine dust motes sparkle only inside the sunbeams. Floor is subtly reflective inlaid marble, not a mirror. Gold lettering has illuminated beveled edges, warm restrained emissive bloom, luminous hairline flourishes and discrete pinpoint highlights; sharp readable counters. Dense fixed wedding garlands, gilded lamps and flower rangoli. Roughly 12 to 20 tiny separate white, pale gold and ruby petals already scattered irregularly through the whole depth volume: a few soft near-lens edge petals, crisp midground petals, tiny distant petals. No confetti cannon, solid flower bunches in the air, symmetrical particle rows or dense shower from one point. All bouquets and garlands are fixed to their supports. Generate only from this text, no reference image. No watermark, interface, duplicate people, extra signs or unintended words.\n\nSCENE COMPOSITION:\nLOW three-quarter view of an ivory family blessing plaque beside a massive carved pillar, a completely new viewing direction along the palace's WEST colonnade. Camera sees the plaque plane turned 15 degrees, its thick antique-gold frame edge catching a bright sun streak. Plaque occupies about 65 percent of image width and 64 percent of height with all corners visible. Exact gold-brown readable serif lines with glowing gold headings: '{{family_lines}}'. Both parents' groups get clear spacing. Thin embossed peacock gold border and a small royal peacock emblem above. A compact ivory-ruby bouquet is already grounded against the plinth at its base, below all text; it is attached and stationary. The background looks SIDEWAYS across rows of columns, receding horizontally toward screen left, not through a centered aisle. No domed clock-tower in the center, no person here. Deep shaded carved ceiling above, dramatic sunrise shafts entering from left across warm dust motes and the plaque frame. Sparse individual drifting petals are separated from the grounded bouquet.",
+      "image_prompt": "A full-bleed portrait 9:16 frame of a richly cinematic dimensional storybook-animation Mysore Palace royal wedding invitation. Warm ivory granite with intricate turquoise-gold carved recesses, deep amber shadows, ruby brocade, ivory, aged gold, ruby roses, white jasmine and emerald foliage. Premium animated adult characters with regal expressive faces, never photographic people. DRAMATIC CHIAROSCURO: strong warm back-and-side sunlight streams diagonally through open stone bays and roof gaps, clearly visible volumetric god rays cutting through thin atmospheric incense haze; luminous rim light on silk, jewelry and gold frames against darker shade. Preserve readable highlights, not a flat uniformly bright golden wash. Very fine dust motes sparkle only inside the sunbeams. Floor is subtly reflective inlaid marble, not a mirror. Gold lettering has illuminated beveled edges, warm restrained emissive bloom, luminous hairline flourishes and discrete pinpoint highlights; sharp readable counters. Dense fixed wedding garlands, gilded lamps and flower rangoli. Roughly 12 to 20 tiny separate white, pale gold and ruby petals already scattered irregularly through the whole depth volume: a few soft near-lens edge petals, crisp midground petals, tiny distant petals. No confetti cannon, solid flower bunches in the air, symmetrical particle rows or dense shower from one point. All bouquets and garlands are fixed to their supports. Generate only from this text, no reference image. No watermark, interface, duplicate people, extra signs or unintended words.\n\nSCENE COMPOSITION:\nLOW three-quarter view of an ivory family blessing plaque beside a massive carved pillar, a completely new viewing direction along the palace's WEST colonnade. Camera sees the plaque plane turned 15 degrees, its thick antique-gold frame edge catching a bright sun streak. Plaque occupies about 65 percent of image width and 64 percent of height with all corners visible. Exact gold-brown readable serif lines with glowing gold headings: 'With the Blessings of\nGroom's Parents\nMr. Sounder Rajan\n& Mrs. Punitha\nBride's Parents\nMr. Mohan Krishna\n& Mrs. Prema'. Both parents' groups get clear spacing. Thin embossed peacock gold border and a small royal peacock emblem above. A compact ivory-ruby bouquet is already grounded against the plinth at its base, below all text; it is attached and stationary. The background looks SIDEWAYS across rows of columns, receding horizontally toward screen left, not through a centered aisle. No domed clock-tower in the center, no person here. Deep shaded carved ceiling above, dramatic sunrise shafts entering from left across warm dust motes and the plaque frame. Sparse individual drifting petals are separated from the grounded bouquet.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-6.jpg",
+      "selected_take": 1,
+      "review_note": "No visual review or retake, as requested."
+    },
+    {
+      "index": 7,
+      "name": "Wedding ceremony in the inner mandap",
+      "status": "generated-first-take",
+      "generation": "text-only",
+      "image_prompt_template": "A full-bleed portrait 9:16 frame of a richly cinematic dimensional storybook-animation Mysore Palace royal wedding invitation. Warm ivory granite with intricate turquoise-gold carved recesses, deep amber shadows, ruby brocade, ivory, aged gold, ruby roses, white jasmine and emerald foliage. Premium animated adult characters with regal expressive faces, never photographic people. DRAMATIC CHIAROSCURO: strong warm back-and-side sunlight streams diagonally through open stone bays and roof gaps, clearly visible volumetric god rays cutting through thin atmospheric incense haze; luminous rim light on silk, jewelry and gold frames against darker shade. Preserve readable highlights, not a flat uniformly bright golden wash. Very fine dust motes sparkle only inside the sunbeams. Floor is subtly reflective inlaid marble, not a mirror. Gold lettering has illuminated beveled edges, warm restrained emissive bloom, luminous hairline flourishes and discrete pinpoint highlights; sharp readable counters. Dense fixed wedding garlands, gilded lamps and flower rangoli. Roughly 12 to 20 tiny separate white, pale gold and ruby petals already scattered irregularly through the whole depth volume: a few soft near-lens edge petals, crisp midground petals, tiny distant petals. No confetti cannon, solid flower bunches in the air, symmetrical particle rows or dense shower from one point. All bouquets and garlands are fixed to their supports. Generate only from this text, no reference image. No watermark, interface, duplicate people, extra signs or unintended words.\n\nAdult Indian king-groom, visibly polished storybook 3D animation, warm medium-brown skin, dignified adult angular face, large dark-brown almond eyes, thick dark eyebrows, smooth clean-shaven cheeks and chin, swept black hair beneath a jeweled ivory Mysore peta with raised ornament, small relaxed smile. No moustache or beard. Natural adult proportions, not a child. Ivory brocade royal achkan with a broad antique-gold border, covered upper chest and an ivory gold-embroidered sash over his left shoulder crossing his torso, two fine pearl necklaces. Keep this face, headdress, body and outfit consistent in every couple scene.\n\nAdult Indian queen-bride, visibly polished storybook 3D animation, warm medium-brown skin, regal heart-shaped face, large dark-brown almond eyes, gently arched black eyebrows, small red bindi, warm reserved smile. Center-parted dark hair swept into a low bun beneath a jeweled gold tiara, antique-gold maang tikka, ruby jhumka earrings, layered pearl necklaces, stacks of ruby-and-gold bangles and a slender gold waist belt. Deep ruby-red Mysore silk sari with fine gold brocade and a broad antique-gold border, matching short-sleeved ruby blouse. Natural adult proportions and a consistent face, headdress, jewelry and sari in every later scene.\n\nSCENE COMPOSITION:\nSeated-eye-level THREE-QUARTER view of the wedding ritual mandap, reached by turning LEFT at a right-angle corner of the colonnade. The consistent groom and bride sit on the LEFT half on a ruby-red patterned royal rug, groom left and bride next to him. Both now wear ruby-ivory-gold flower garlands over unchanged clothes. Groom gently raises his right hand over the bride's hair, bride lowers her eyes and smiles. A small contained copper ritual fire and gilded offerings are low at left, not dominating the foreground. On the RIGHT is ONE independent dark rosewood timing sign in an ornate antique-gold frame, generously sized and easy to read, exact illuminated gold lettering: '{{ceremony_lines}}'. The background is an intimate turquoise-gold Kalyana Mantapa with deep shadow, NOT a distant straight corridor. Thick garlands hang overhead and diagonal SUNRAYS from a side opening rake across the couple, haze and carved columns; warm firelight gives subtle secondary highlights. A priest is a small secondary figure far left. Quietly suspended individual petals are distributed at several depths, never a mass burst. All flower arrangements are grounded.",
+      "image_prompt": "A full-bleed portrait 9:16 frame of a richly cinematic dimensional storybook-animation Mysore Palace royal wedding invitation. Warm ivory granite with intricate turquoise-gold carved recesses, deep amber shadows, ruby brocade, ivory, aged gold, ruby roses, white jasmine and emerald foliage. Premium animated adult characters with regal expressive faces, never photographic people. DRAMATIC CHIAROSCURO: strong warm back-and-side sunlight streams diagonally through open stone bays and roof gaps, clearly visible volumetric god rays cutting through thin atmospheric incense haze; luminous rim light on silk, jewelry and gold frames against darker shade. Preserve readable highlights, not a flat uniformly bright golden wash. Very fine dust motes sparkle only inside the sunbeams. Floor is subtly reflective inlaid marble, not a mirror. Gold lettering has illuminated beveled edges, warm restrained emissive bloom, luminous hairline flourishes and discrete pinpoint highlights; sharp readable counters. Dense fixed wedding garlands, gilded lamps and flower rangoli. Roughly 12 to 20 tiny separate white, pale gold and ruby petals already scattered irregularly through the whole depth volume: a few soft near-lens edge petals, crisp midground petals, tiny distant petals. No confetti cannon, solid flower bunches in the air, symmetrical particle rows or dense shower from one point. All bouquets and garlands are fixed to their supports. Generate only from this text, no reference image. No watermark, interface, duplicate people, extra signs or unintended words.\n\nAdult Indian king-groom, visibly polished storybook 3D animation, warm medium-brown skin, dignified adult angular face, large dark-brown almond eyes, thick dark eyebrows, smooth clean-shaven cheeks and chin, swept black hair beneath a jeweled ivory Mysore peta with raised ornament, small relaxed smile. No moustache or beard. Natural adult proportions, not a child. Ivory brocade royal achkan with a broad antique-gold border, covered upper chest and an ivory gold-embroidered sash over his left shoulder crossing his torso, two fine pearl necklaces. Keep this face, headdress, body and outfit consistent in every couple scene.\n\nAdult Indian queen-bride, visibly polished storybook 3D animation, warm medium-brown skin, regal heart-shaped face, large dark-brown almond eyes, gently arched black eyebrows, small red bindi, warm reserved smile. Center-parted dark hair swept into a low bun beneath a jeweled gold tiara, antique-gold maang tikka, ruby jhumka earrings, layered pearl necklaces, stacks of ruby-and-gold bangles and a slender gold waist belt. Deep ruby-red Mysore silk sari with fine gold brocade and a broad antique-gold border, matching short-sleeved ruby blouse. Natural adult proportions and a consistent face, headdress, jewelry and sari in every later scene.\n\nSCENE COMPOSITION:\nSeated-eye-level THREE-QUARTER view of the wedding ritual mandap, reached by turning LEFT at a right-angle corner of the colonnade. The consistent groom and bride sit on the LEFT half on a ruby-red patterned royal rug, groom left and bride next to him. Both now wear ruby-ivory-gold flower garlands over unchanged clothes. Groom gently raises his right hand over the bride's hair, bride lowers her eyes and smiles. A small contained copper ritual fire and gilded offerings are low at left, not dominating the foreground. On the RIGHT is ONE independent dark rosewood timing sign in an ornate antique-gold frame, generously sized and easy to read, exact illuminated gold lettering: 'Wedding Ceremony\n7th February 2020\n8:00 a.m.\nIn the Morning'. The background is an intimate turquoise-gold Kalyana Mantapa with deep shadow, NOT a distant straight corridor. Thick garlands hang overhead and diagonal SUNRAYS from a side opening rake across the couple, haze and carved columns; warm firelight gives subtle secondary highlights. A priest is a small secondary figure far left. Quietly suspended individual petals are distributed at several depths, never a mass burst. All flower arrangements are grounded.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-7.jpg",
+      "selected_take": 1,
+      "review_note": "No visual review or retake, as requested."
+    },
+    {
+      "index": 8,
+      "name": "Venue at the north courtyard corner",
+      "status": "generated-first-take",
+      "generation": "text-only",
+      "image_prompt_template": "A full-bleed portrait 9:16 frame of a richly cinematic dimensional storybook-animation Mysore Palace royal wedding invitation. Warm ivory granite with intricate turquoise-gold carved recesses, deep amber shadows, ruby brocade, ivory, aged gold, ruby roses, white jasmine and emerald foliage. Premium animated adult characters with regal expressive faces, never photographic people. DRAMATIC CHIAROSCURO: strong warm back-and-side sunlight streams diagonally through open stone bays and roof gaps, clearly visible volumetric god rays cutting through thin atmospheric incense haze; luminous rim light on silk, jewelry and gold frames against darker shade. Preserve readable highlights, not a flat uniformly bright golden wash. Very fine dust motes sparkle only inside the sunbeams. Floor is subtly reflective inlaid marble, not a mirror. Gold lettering has illuminated beveled edges, warm restrained emissive bloom, luminous hairline flourishes and discrete pinpoint highlights; sharp readable counters. Dense fixed wedding garlands, gilded lamps and flower rangoli. Roughly 12 to 20 tiny separate white, pale gold and ruby petals already scattered irregularly through the whole depth volume: a few soft near-lens edge petals, crisp midground petals, tiny distant petals. No confetti cannon, solid flower bunches in the air, symmetrical particle rows or dense shower from one point. All bouquets and garlands are fixed to their supports. Generate only from this text, no reference image. No watermark, interface, duplicate people, extra signs or unintended words.\n\nSCENE COMPOSITION:\nEye-level courtyard CORNER view facing an ornate dark-rosewood venue board on a low square gold-trimmed stone pedestal. Board is centered, about 56 percent of image width and 56 percent of height. Exact large gold serif copy with gently luminous bevel highlights: '{{venue_lines}}'. All text readable with generous margins. A CLOSE square carved column frames the extreme RIGHT foreground, side face strongly visible. The architecture behind forms an L-shaped courtyard: a low decorated palace wing stretches across the background and the tall domed clock-tower appears only off-axis in the distant LEFT quarter. This is a sideways courtyard view, never a straight forward aisle ending at a central tower. Rich flower swags, fixed lamps, a flower rangoli beneath the board. Low sunlight cuts diagonally across haze from left, with dark sculpted shade on the near pillar and radiant gold sign edges. Small slow-looking petals distributed at different heights. No foreground couple.",
+      "image_prompt": "A full-bleed portrait 9:16 frame of a richly cinematic dimensional storybook-animation Mysore Palace royal wedding invitation. Warm ivory granite with intricate turquoise-gold carved recesses, deep amber shadows, ruby brocade, ivory, aged gold, ruby roses, white jasmine and emerald foliage. Premium animated adult characters with regal expressive faces, never photographic people. DRAMATIC CHIAROSCURO: strong warm back-and-side sunlight streams diagonally through open stone bays and roof gaps, clearly visible volumetric god rays cutting through thin atmospheric incense haze; luminous rim light on silk, jewelry and gold frames against darker shade. Preserve readable highlights, not a flat uniformly bright golden wash. Very fine dust motes sparkle only inside the sunbeams. Floor is subtly reflective inlaid marble, not a mirror. Gold lettering has illuminated beveled edges, warm restrained emissive bloom, luminous hairline flourishes and discrete pinpoint highlights; sharp readable counters. Dense fixed wedding garlands, gilded lamps and flower rangoli. Roughly 12 to 20 tiny separate white, pale gold and ruby petals already scattered irregularly through the whole depth volume: a few soft near-lens edge petals, crisp midground petals, tiny distant petals. No confetti cannon, solid flower bunches in the air, symmetrical particle rows or dense shower from one point. All bouquets and garlands are fixed to their supports. Generate only from this text, no reference image. No watermark, interface, duplicate people, extra signs or unintended words.\n\nSCENE COMPOSITION:\nEye-level courtyard CORNER view facing an ornate dark-rosewood venue board on a low square gold-trimmed stone pedestal. Board is centered, about 56 percent of image width and 56 percent of height. Exact large gold serif copy with gently luminous bevel highlights: 'Wedding Venue\nLeela Channaiah\nKalyana Mandapa\nVontikoppal\nMysore'. All text readable with generous margins. A CLOSE square carved column frames the extreme RIGHT foreground, side face strongly visible. The architecture behind forms an L-shaped courtyard: a low decorated palace wing stretches across the background and the tall domed clock-tower appears only off-axis in the distant LEFT quarter. This is a sideways courtyard view, never a straight forward aisle ending at a central tower. Rich flower swags, fixed lamps, a flower rangoli beneath the board. Low sunlight cuts diagonally across haze from left, with dark sculpted shade on the near pillar and radiant gold sign edges. Small slow-looking petals distributed at different heights. No foreground couple.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-8.jpg",
+      "selected_take": 1,
+      "review_note": "No visual review or retake, as requested."
+    },
+    {
+      "index": 9,
+      "name": "Reception at the evening garden pavilion",
+      "status": "generated-first-take",
+      "generation": "text-only",
+      "image_prompt_template": "A full-bleed portrait 9:16 frame of a richly cinematic dimensional storybook-animation Mysore Palace royal wedding invitation. Warm ivory granite with intricate turquoise-gold carved recesses, deep amber shadows, ruby brocade, ivory, aged gold, ruby roses, white jasmine and emerald foliage. Premium animated adult characters with regal expressive faces, never photographic people. DRAMATIC CHIAROSCURO: strong warm back-and-side sunlight streams diagonally through open stone bays and roof gaps, clearly visible volumetric god rays cutting through thin atmospheric incense haze; luminous rim light on silk, jewelry and gold frames against darker shade. Preserve readable highlights, not a flat uniformly bright golden wash. Very fine dust motes sparkle only inside the sunbeams. Floor is subtly reflective inlaid marble, not a mirror. Gold lettering has illuminated beveled edges, warm restrained emissive bloom, luminous hairline flourishes and discrete pinpoint highlights; sharp readable counters. Dense fixed wedding garlands, gilded lamps and flower rangoli. Roughly 12 to 20 tiny separate white, pale gold and ruby petals already scattered irregularly through the whole depth volume: a few soft near-lens edge petals, crisp midground petals, tiny distant petals. No confetti cannon, solid flower bunches in the air, symmetrical particle rows or dense shower from one point. All bouquets and garlands are fixed to their supports. Generate only from this text, no reference image. No watermark, interface, duplicate people, extra signs or unintended words.\n\nSCENE COMPOSITION:\nAn intimate evening reception pavilion beside the palace garden, BLUE HOUR sky only in a small upper background band. Warm brass-lamp pools illuminate ruby velvet and dense ruby-ivory-gold flower garlands; narrow cinematic shafts from warm lights pass through faint haze, preserving deep blue shadows. An ivory reception board on a delicate antique-gold three-legged easel occupies the central 60 percent of width, all frame and legs visible. Large sharp dark-gold lettering, luminous gold title and frame edges, exact text: '{{reception_lines}}'. A carved near pillar frames camera LEFT and the garden extends sideways toward camera RIGHT, not a long centered runway. Gilded lamps at varied depths, softly blurred secondary guests at the far side, fixed low flower borders. Quiet suspended ivory-ruby individual petals and tiny warm dust motes spread irregularly through the depth. Exactly one reception board and no other signs.",
+      "image_prompt": "A full-bleed portrait 9:16 frame of a richly cinematic dimensional storybook-animation Mysore Palace royal wedding invitation. Warm ivory granite with intricate turquoise-gold carved recesses, deep amber shadows, ruby brocade, ivory, aged gold, ruby roses, white jasmine and emerald foliage. Premium animated adult characters with regal expressive faces, never photographic people. DRAMATIC CHIAROSCURO: strong warm back-and-side sunlight streams diagonally through open stone bays and roof gaps, clearly visible volumetric god rays cutting through thin atmospheric incense haze; luminous rim light on silk, jewelry and gold frames against darker shade. Preserve readable highlights, not a flat uniformly bright golden wash. Very fine dust motes sparkle only inside the sunbeams. Floor is subtly reflective inlaid marble, not a mirror. Gold lettering has illuminated beveled edges, warm restrained emissive bloom, luminous hairline flourishes and discrete pinpoint highlights; sharp readable counters. Dense fixed wedding garlands, gilded lamps and flower rangoli. Roughly 12 to 20 tiny separate white, pale gold and ruby petals already scattered irregularly through the whole depth volume: a few soft near-lens edge petals, crisp midground petals, tiny distant petals. No confetti cannon, solid flower bunches in the air, symmetrical particle rows or dense shower from one point. All bouquets and garlands are fixed to their supports. Generate only from this text, no reference image. No watermark, interface, duplicate people, extra signs or unintended words.\n\nSCENE COMPOSITION:\nAn intimate evening reception pavilion beside the palace garden, BLUE HOUR sky only in a small upper background band. Warm brass-lamp pools illuminate ruby velvet and dense ruby-ivory-gold flower garlands; narrow cinematic shafts from warm lights pass through faint haze, preserving deep blue shadows. An ivory reception board on a delicate antique-gold three-legged easel occupies the central 60 percent of width, all frame and legs visible. Large sharp dark-gold lettering, luminous gold title and frame edges, exact text: 'Reception - Dinner\n6th February 2020\n7:30 p.m. onwards\nLeela Channaiah\nKalyana Mandapa\nVontikoppal, Mysore'. A carved near pillar frames camera LEFT and the garden extends sideways toward camera RIGHT, not a long centered runway. Gilded lamps at varied depths, softly blurred secondary guests at the far side, fixed low flower borders. Quiet suspended ivory-ruby individual petals and tiny warm dust motes spread irregularly through the depth. Exactly one reception board and no other signs.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-9.jpg",
+      "selected_take": 1,
+      "review_note": "No visual review or retake, as requested."
+    },
+    {
+      "index": 10,
+      "name": "Hosts in the lamp-lit side shrine hall",
+      "status": "generated-first-take",
+      "generation": "text-only",
+      "image_prompt_template": "A full-bleed portrait 9:16 frame of a richly cinematic dimensional storybook-animation Mysore Palace royal wedding invitation. Warm ivory granite with intricate turquoise-gold carved recesses, deep amber shadows, ruby brocade, ivory, aged gold, ruby roses, white jasmine and emerald foliage. Premium animated adult characters with regal expressive faces, never photographic people. DRAMATIC CHIAROSCURO: strong warm back-and-side sunlight streams diagonally through open stone bays and roof gaps, clearly visible volumetric god rays cutting through thin atmospheric incense haze; luminous rim light on silk, jewelry and gold frames against darker shade. Preserve readable highlights, not a flat uniformly bright golden wash. Very fine dust motes sparkle only inside the sunbeams. Floor is subtly reflective inlaid marble, not a mirror. Gold lettering has illuminated beveled edges, warm restrained emissive bloom, luminous hairline flourishes and discrete pinpoint highlights; sharp readable counters. Dense fixed wedding garlands, gilded lamps and flower rangoli. Roughly 12 to 20 tiny separate white, pale gold and ruby petals already scattered irregularly through the whole depth volume: a few soft near-lens edge petals, crisp midground petals, tiny distant petals. No confetti cannon, solid flower bunches in the air, symmetrical particle rows or dense shower from one point. All bouquets and garlands are fixed to their supports. Generate only from this text, no reference image. No watermark, interface, duplicate people, extra signs or unintended words.\n\nSCENE COMPOSITION:\nA richly decorated INNER Durbar hall viewed frontally at eye height after a 90 degree left turn from the garden. ONE tall ivory host plaque supported on a low ornate gold pedestal at the top of three shallow steps. The frame is carved antique gold with tiny pink flowers at the corners. Exact large readable gold-brown lettering: '{{host_lines}}'. Plaque fills 60 percent of frame width and 57 percent of height. Symmetrical close carved pillars, numerous small hanging brass oil lamps and flower swags, dark recesses and strong warm angled shafts from high side openings. The words glow delicately at their gold edges while their faces remain crisp. The space behind the plaque is SHALLOW and shaded, no long visible tunnel behind it. The open corridor extends from the plaque back toward the camera for the backward departure. Petals are sparse, individual and evenly scattered through depth; lamps flicker warmly, rangoli and bouquets stay on the floor. No people visible.",
+      "image_prompt": "A full-bleed portrait 9:16 frame of a richly cinematic dimensional storybook-animation Mysore Palace royal wedding invitation. Warm ivory granite with intricate turquoise-gold carved recesses, deep amber shadows, ruby brocade, ivory, aged gold, ruby roses, white jasmine and emerald foliage. Premium animated adult characters with regal expressive faces, never photographic people. DRAMATIC CHIAROSCURO: strong warm back-and-side sunlight streams diagonally through open stone bays and roof gaps, clearly visible volumetric god rays cutting through thin atmospheric incense haze; luminous rim light on silk, jewelry and gold frames against darker shade. Preserve readable highlights, not a flat uniformly bright golden wash. Very fine dust motes sparkle only inside the sunbeams. Floor is subtly reflective inlaid marble, not a mirror. Gold lettering has illuminated beveled edges, warm restrained emissive bloom, luminous hairline flourishes and discrete pinpoint highlights; sharp readable counters. Dense fixed wedding garlands, gilded lamps and flower rangoli. Roughly 12 to 20 tiny separate white, pale gold and ruby petals already scattered irregularly through the whole depth volume: a few soft near-lens edge petals, crisp midground petals, tiny distant petals. No confetti cannon, solid flower bunches in the air, symmetrical particle rows or dense shower from one point. All bouquets and garlands are fixed to their supports. Generate only from this text, no reference image. No watermark, interface, duplicate people, extra signs or unintended words.\n\nSCENE COMPOSITION:\nA richly decorated INNER Durbar hall viewed frontally at eye height after a 90 degree left turn from the garden. ONE tall ivory host plaque supported on a low ornate gold pedestal at the top of three shallow steps. The frame is carved antique gold with tiny pink flowers at the corners. Exact large readable gold-brown lettering: 'Invited By\nMr. BalaSubramanian\nMrs. Jeevitha\nBaby. Yazhini & Suhas\nWith Love & Blessings'. Plaque fills 60 percent of frame width and 57 percent of height. Symmetrical close carved pillars, numerous small hanging brass oil lamps and flower swags, dark recesses and strong warm angled shafts from high side openings. The words glow delicately at their gold edges while their faces remain crisp. The space behind the plaque is SHALLOW and shaded, no long visible tunnel behind it. The open corridor extends from the plaque back toward the camera for the backward departure. Petals are sparse, individual and evenly scattered through depth; lamps flicker warmly, rangoli and bouquets stay on the floor. No people visible.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-10.jpg",
+      "selected_take": 1,
+      "review_note": "No visual review or retake, as requested."
+    },
+    {
+      "index": 11,
+      "name": "Single couple and single date board",
+      "status": "generated-first-take",
+      "generation": "text-only",
+      "image_prompt_template": "A full-bleed portrait 9:16 frame of a richly cinematic dimensional storybook-animation Mysore Palace royal wedding invitation. Warm ivory granite with intricate turquoise-gold carved recesses, deep amber shadows, ruby brocade, ivory, aged gold, ruby roses, white jasmine and emerald foliage. Premium animated adult characters with regal expressive faces, never photographic people. DRAMATIC CHIAROSCURO: strong warm back-and-side sunlight streams diagonally through open stone bays and roof gaps, clearly visible volumetric god rays cutting through thin atmospheric incense haze; luminous rim light on silk, jewelry and gold frames against darker shade. Preserve readable highlights, not a flat uniformly bright golden wash. Very fine dust motes sparkle only inside the sunbeams. Floor is subtly reflective inlaid marble, not a mirror. Gold lettering has illuminated beveled edges, warm restrained emissive bloom, luminous hairline flourishes and discrete pinpoint highlights; sharp readable counters. Dense fixed wedding garlands, gilded lamps and flower rangoli. Roughly 12 to 20 tiny separate white, pale gold and ruby petals already scattered irregularly through the whole depth volume: a few soft near-lens edge petals, crisp midground petals, tiny distant petals. No confetti cannon, solid flower bunches in the air, symmetrical particle rows or dense shower from one point. All bouquets and garlands are fixed to their supports. Generate only from this text, no reference image. No watermark, interface, duplicate people, extra signs or unintended words.\n\nAdult Indian king-groom, visibly polished storybook 3D animation, warm medium-brown skin, dignified adult angular face, large dark-brown almond eyes, thick dark eyebrows, smooth clean-shaven cheeks and chin, swept black hair beneath a jeweled ivory Mysore peta with raised ornament, small relaxed smile. No moustache or beard. Natural adult proportions, not a child. Ivory brocade royal achkan with a broad antique-gold border, covered upper chest and an ivory gold-embroidered sash over his left shoulder crossing his torso, two fine pearl necklaces. Keep this face, headdress, body and outfit consistent in every couple scene.\n\nAdult Indian queen-bride, visibly polished storybook 3D animation, warm medium-brown skin, regal heart-shaped face, large dark-brown almond eyes, gently arched black eyebrows, small red bindi, warm reserved smile. Center-parted dark hair swept into a low bun beneath a jeweled gold tiara, antique-gold maang tikka, ruby jhumka earrings, layered pearl necklaces, stacks of ruby-and-gold bangles and a slender gold waist belt. Deep ruby-red Mysore silk sari with fine gold brocade and a broad antique-gold border, matching short-sleeved ruby blouse. Natural adult proportions and a consistent face, headdress, jewelry and sari in every later scene.\n\nSCENE COMPOSITION:\nThe same animated bride and groom stand close together beneath a wide stone gateway in a sunrise courtyard, bride LEFT of groom. Both retain their exact sari, achkan, diagonal royal sash, headdresses, jewelry and ruby-ivory-gold wedding garlands. Groom clean-shaven. Full bodies and bare feet visible, couple occupies about 57 percent of image height and the middle-left 48 percent of width. They face mostly toward the camera with small smiles, their hands gently joined at waist height, calm and affectionate. A low flower arch and the distant domed clock-tower sit behind them on the courtyard axis. EXACTLY ONE SAVE THE DATE BOARD: a simple dark-rosewood rectangular plaque with a thin ornate gold frame on ONE fixed gold easel, standing on the far RIGHT with clear space between it and the groom. Entire board visible, about 24 percent of frame width, tilted no more than 5 degrees, with no overlapping frame, extra panel, backing sign, mirrored copy or second easel anywhere. Its exact stable gold lettering is '{{save_date_lines}}'. No other written text in the whole image. Board design is deliberately simple so it can stay rigid during animation. One hanging gilded lamp is already attached to the gateway at the upper center and partly visible along the top edge. Strong diagonal sunrise god rays through the gateway, glowing rim light on the couple, deep carved shadows, subtle floor reflections. Around 12 tiny separate petals suspended at irregular heights and depths. All bouquets, garlands, columns, lamps and the single board are fixed scenery.",
+      "image_prompt": "A full-bleed portrait 9:16 frame of a richly cinematic dimensional storybook-animation Mysore Palace royal wedding invitation. Warm ivory granite with intricate turquoise-gold carved recesses, deep amber shadows, ruby brocade, ivory, aged gold, ruby roses, white jasmine and emerald foliage. Premium animated adult characters with regal expressive faces, never photographic people. DRAMATIC CHIAROSCURO: strong warm back-and-side sunlight streams diagonally through open stone bays and roof gaps, clearly visible volumetric god rays cutting through thin atmospheric incense haze; luminous rim light on silk, jewelry and gold frames against darker shade. Preserve readable highlights, not a flat uniformly bright golden wash. Very fine dust motes sparkle only inside the sunbeams. Floor is subtly reflective inlaid marble, not a mirror. Gold lettering has illuminated beveled edges, warm restrained emissive bloom, luminous hairline flourishes and discrete pinpoint highlights; sharp readable counters. Dense fixed wedding garlands, gilded lamps and flower rangoli. Roughly 12 to 20 tiny separate white, pale gold and ruby petals already scattered irregularly through the whole depth volume: a few soft near-lens edge petals, crisp midground petals, tiny distant petals. No confetti cannon, solid flower bunches in the air, symmetrical particle rows or dense shower from one point. All bouquets and garlands are fixed to their supports. Generate only from this text, no reference image. No watermark, interface, duplicate people, extra signs or unintended words.\n\nAdult Indian king-groom, visibly polished storybook 3D animation, warm medium-brown skin, dignified adult angular face, large dark-brown almond eyes, thick dark eyebrows, smooth clean-shaven cheeks and chin, swept black hair beneath a jeweled ivory Mysore peta with raised ornament, small relaxed smile. No moustache or beard. Natural adult proportions, not a child. Ivory brocade royal achkan with a broad antique-gold border, covered upper chest and an ivory gold-embroidered sash over his left shoulder crossing his torso, two fine pearl necklaces. Keep this face, headdress, body and outfit consistent in every couple scene.\n\nAdult Indian queen-bride, visibly polished storybook 3D animation, warm medium-brown skin, regal heart-shaped face, large dark-brown almond eyes, gently arched black eyebrows, small red bindi, warm reserved smile. Center-parted dark hair swept into a low bun beneath a jeweled gold tiara, antique-gold maang tikka, ruby jhumka earrings, layered pearl necklaces, stacks of ruby-and-gold bangles and a slender gold waist belt. Deep ruby-red Mysore silk sari with fine gold brocade and a broad antique-gold border, matching short-sleeved ruby blouse. Natural adult proportions and a consistent face, headdress, jewelry and sari in every later scene.\n\nSCENE COMPOSITION:\nThe same animated bride and groom stand close together beneath a wide stone gateway in a sunrise courtyard, bride LEFT of groom. Both retain their exact sari, achkan, diagonal royal sash, headdresses, jewelry and ruby-ivory-gold wedding garlands. Groom clean-shaven. Full bodies and bare feet visible, couple occupies about 57 percent of image height and the middle-left 48 percent of width. They face mostly toward the camera with small smiles, their hands gently joined at waist height, calm and affectionate. A low flower arch and the distant domed clock-tower sit behind them on the courtyard axis. EXACTLY ONE SAVE THE DATE BOARD: a simple dark-rosewood rectangular plaque with a thin ornate gold frame on ONE fixed gold easel, standing on the far RIGHT with clear space between it and the groom. Entire board visible, about 24 percent of frame width, tilted no more than 5 degrees, with no overlapping frame, extra panel, backing sign, mirrored copy or second easel anywhere. Its exact stable gold lettering is 'SAVE THE DATE\n6 & 7 FEBRUARY\n2020'. No other written text in the whole image. Board design is deliberately simple so it can stay rigid during animation. One hanging gilded lamp is already attached to the gateway at the upper center and partly visible along the top edge. Strong diagonal sunrise god rays through the gateway, glowing rim light on the couple, deep carved shadows, subtle floor reflections. Around 12 tiny separate petals suspended at irregular heights and depths. All bouquets, garlands, columns, lamps and the single board are fixed scenery.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-11.jpg",
+      "selected_take": 1,
+      "review_note": "No visual review or retake, as requested."
+    },
+    {
+      "index": 12,
+      "name": "Gentle forehead touch beneath the same gateway",
+      "status": "video-derived-first-take",
+      "generation": "Final decoded frame of clip 11; no new still-image API call",
+      "image_prompt": null,
+      "image_prompt_template": null,
+      "image_path": "image-12.jpg",
+      "reason": "Avoid competing independent board/gateway layouts. Keep one date board from scene 11 throughout."
+    }
+  ],
+  "clips": [
+    {
+      "index": 1,
+      "from": 1,
+      "to": 2,
+      "duration": 5,
+      "prompt": "HIGH AERIAL HOOK, FAST FORWARD-DOWN DIVE, THEN A CONTINUING DEVOTIONAL PUSH. 0.00-0.65s: gently advance from the high distant full-complex opening. The tiny existing mandap below the giant tower is the destination. 0.65-1.85s: accelerate hard FORWARD AND DOWN along that axis. The compound, water tank and paving expand with strong parallax; skim over the tank toward the small mandap. Keep the giant tower behind the destination, moving toward the upper edge. The camera never heads into the tower and no replacement palace appears. 1.85-2.20s: descend below the existing mandap roof and pass between its front corner columns above the three steps. The beam passes overhead and the columns whip past the edges in brief directional blur. These are open column bays, not a dark doorway in a closed shrine. The roof initially occludes the idol; the first resolved view of Ganesha reveals the SAME face, crown, trunk, arms, cloth and pedestal as the supplied final image. From the moment the rear side is visible it is already open to the exterior domed clock-tower. No back wall appears or disappears. 2.20-2.70s: level out and smoothly brake without stopping. Reveal the large champagne-gold devotional lettering in the open air above the idol as the camera clears the front beam, its metal catching the changing light. The text reads 'Om Shree' above 'Ganeshaya Namah'; it belongs to a fixed position in the pavilion rather than following the screen. 2.70-5.00s: CONTINUE A VISIBLE SLOW FORWARD PUSH into the final image, approximately another 10 percent increase in idol scale, with column-edge parallax, shifting reflections and rich falling petals. End still moving gently forward, ready to turn left immediately in the next clip. Do not stop on a Ganesha tableau. Keep a single stationary idol throughout and a persistent open view behind it. The title remains large, stable and legible, with restrained traveling edge glints and no smoke, droplets or sweeping light beam. The small distant idol is shaded beneath the existing roof; as the camera descends, warm sunlight reveals the same peach face, gold crown and ruby-ivory cloth. Preserve its silhouette and garlands, with no statue replacement or material morph. Exterior floral swags and column wraps remain attached to their original surfaces as they pass out of view; never dissolve the decorations.",
+      "id": "clip-01",
+      "status": "generated-first-take",
+      "camera": "Forward-down dive, then continuing slow push",
+      "video_prompt_template": "A single continuous physically motivated cinematic camera move in the same dimensional illustrated Mysore Palace. Use the supplied first and final images as visual anchors. Solid fixed architecture with real translation, occlusion, perspective and foreground parallax. Preserve identity, lighting, materials and exact final lettering. A short energetic travel burst with directional edge blur must ease decisively into a slower continuously moving arrival; never distribute the travel uniformly over the duration. In the slower passage, gilded highlights and floor reflections shift with camera angle and individual petals rotate independently. Release a denser shower of small white jasmine and ruby rose petals during deceleration, with near, middle and far depth layers. Each visible petal is a single loose curled petal, generally under 3 percent of frame width; no whole flowers, discs or objects covering faces and words. Preserve clear readability. No cuts, crossfades, room dissolves, statue swaps, frozen holds, uniform sideways slides or full orbits. Glowing lettering is solid beveled metal with light on its surface: no liquid gold, dripping strokes, ceiling-to-floor beams, explosive firework bursts or smoke emitted by text. A warm floor reflection is reflected light, not a physical stream connecting the title to the floor. Existing incense, where visible, comes only from a floor-level incense vessel and stays separate from lettering.\n\nEXACT SHOT CHOREOGRAPHY: HIGH AERIAL HOOK, FAST FORWARD-DOWN DIVE, THEN A CONTINUING DEVOTIONAL PUSH. 0.00-0.65s: gently advance from the high distant full-complex opening. The tiny existing mandap below the giant tower is the destination. 0.65-1.85s: accelerate hard FORWARD AND DOWN along that axis. The compound, water tank and paving expand with strong parallax; skim over the tank toward the small mandap. Keep the giant tower behind the destination, moving toward the upper edge. The camera never heads into the tower and no replacement palace appears. 1.85-2.20s: descend below the existing mandap roof and pass between its front corner columns above the three steps. The beam passes overhead and the columns whip past the edges in brief directional blur. These are open column bays, not a dark doorway in a closed shrine. The roof initially occludes the idol; the first resolved view of Ganesha reveals the SAME face, crown, trunk, arms, cloth and pedestal as the supplied final image. From the moment the rear side is visible it is already open to the exterior domed clock-tower. No back wall appears or disappears. 2.20-2.70s: level out and smoothly brake without stopping. Reveal the large champagne-gold devotional lettering in the open air above the idol as the camera clears the front beam, its metal catching the changing light. The text reads '{{devotional_line_1}}' above '{{devotional_line_2}}'; it belongs to a fixed position in the pavilion rather than following the screen. 2.70-5.00s: CONTINUE A VISIBLE SLOW FORWARD PUSH into the final image, approximately another 10 percent increase in idol scale, with column-edge parallax, shifting reflections and rich falling petals. End still moving gently forward, ready to turn left immediately in the next clip. Do not stop on a Ganesha tableau. Keep a single stationary idol throughout and a persistent open view behind it. The title remains large, stable and legible, with restrained traveling edge glints and no smoke, droplets or sweeping light beam. The small distant idol is shaded beneath the existing roof; as the camera descends, warm sunlight reveals the same peach face, gold crown and ruby-ivory cloth. Preserve its silhouette and garlands, with no statue replacement or material morph. Exterior floral swags and column wraps remain attached to their original surfaces as they pass out of view; never dissolve the decorations.",
+      "video_prompt": "A single continuous physically motivated cinematic camera move in the same dimensional illustrated Mysore Palace. Use the supplied first and final images as visual anchors. Solid fixed architecture with real translation, occlusion, perspective and foreground parallax. Preserve identity, lighting, materials and exact final lettering. A short energetic travel burst with directional edge blur must ease decisively into a slower continuously moving arrival; never distribute the travel uniformly over the duration. In the slower passage, gilded highlights and floor reflections shift with camera angle and individual petals rotate independently. Release a denser shower of small white jasmine and ruby rose petals during deceleration, with near, middle and far depth layers. Each visible petal is a single loose curled petal, generally under 3 percent of frame width; no whole flowers, discs or objects covering faces and words. Preserve clear readability. No cuts, crossfades, room dissolves, statue swaps, frozen holds, uniform sideways slides or full orbits. Glowing lettering is solid beveled metal with light on its surface: no liquid gold, dripping strokes, ceiling-to-floor beams, explosive firework bursts or smoke emitted by text. A warm floor reflection is reflected light, not a physical stream connecting the title to the floor. Existing incense, where visible, comes only from a floor-level incense vessel and stays separate from lettering.\n\nEXACT SHOT CHOREOGRAPHY: HIGH AERIAL HOOK, FAST FORWARD-DOWN DIVE, THEN A CONTINUING DEVOTIONAL PUSH. 0.00-0.65s: gently advance from the high distant full-complex opening. The tiny existing mandap below the giant tower is the destination. 0.65-1.85s: accelerate hard FORWARD AND DOWN along that axis. The compound, water tank and paving expand with strong parallax; skim over the tank toward the small mandap. Keep the giant tower behind the destination, moving toward the upper edge. The camera never heads into the tower and no replacement palace appears. 1.85-2.20s: descend below the existing mandap roof and pass between its front corner columns above the three steps. The beam passes overhead and the columns whip past the edges in brief directional blur. These are open column bays, not a dark doorway in a closed shrine. The roof initially occludes the idol; the first resolved view of Ganesha reveals the SAME face, crown, trunk, arms, cloth and pedestal as the supplied final image. From the moment the rear side is visible it is already open to the exterior domed clock-tower. No back wall appears or disappears. 2.20-2.70s: level out and smoothly brake without stopping. Reveal the large champagne-gold devotional lettering in the open air above the idol as the camera clears the front beam, its metal catching the changing light. The text reads 'Om Shree' above 'Ganeshaya Namah'; it belongs to a fixed position in the pavilion rather than following the screen. 2.70-5.00s: CONTINUE A VISIBLE SLOW FORWARD PUSH into the final image, approximately another 10 percent increase in idol scale, with column-edge parallax, shifting reflections and rich falling petals. End still moving gently forward, ready to turn left immediately in the next clip. Do not stop on a Ganesha tableau. Keep a single stationary idol throughout and a persistent open view behind it. The title remains large, stable and legible, with restrained traveling edge glints and no smoke, droplets or sweeping light beam. The small distant idol is shaded beneath the existing roof; as the camera descends, warm sunlight reveals the same peach face, gold crown and ruby-ivory cloth. Preserve its silhouette and garlands, with no statue replacement or material morph. Exterior floral swags and column wraps remain attached to their original surfaces as they pass out of view; never dissolve the decorations.",
+      "video_path": "clip-1.mp4",
+      "final_frame_path": "clip-1-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "scene-image",
+          "scene": 1
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 2
+        },
+        "interior_keyframes": []
+      },
+      "request_metadata": {
+        "requestId": "b65d9f5e-1bdd-91cf-bf4a-fbe341835a69",
+        "status": "done",
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "usage": {
+          "cost_in_usd_ticks": 7200000000
+        },
+        "outputUrl": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-b65d9f5e-1bdd-91cf-bf4a-fbe341835a69.mp4"
+      },
+      "selected_take": 1,
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "121"
+          }
+        ],
+        "format": {
+          "duration": "5.042000"
+        }
+      },
+      "actual_input": {
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "aspect_ratio": "9:16",
+        "resolution": "720p",
+        "firstImage": "output/mysore-palace-royal-v1/clip-1-take-1-first.jpg",
+        "lastImage": "output/mysore-palace-royal-v1/clip-1-take-1-last.jpg",
+        "firstImageSha256": "8d448dc583d9787f2afce4000b6f66561a78e8f5ef4d19aed90e19d9975ce432",
+        "lastImageSha256": "6d8c7b2cb1f7232fc65561a5f8d1b32e44464a7c625602dc80ec14b49d361215",
+        "keyframes": [],
+        "sourceVideoFramesSent": false
+      },
+      "review_note": "No visual review, testing or retake, as requested.",
+      "timeline": {
+        "start_seconds": 0,
+        "end_seconds": 5.041666666666667
+      }
+    },
+    {
+      "index": 2,
+      "from": 2,
+      "to": 3,
+      "duration": 4,
+      "status": "generated-first-take",
+      "camera": "LEFT 90-degree pivot; a tiny counterclockwise arc at constant subject distance",
+      "video_prompt_template": "Portrait cinematic storybook wedding film, same animated characters and gilded palace stone. Preserve supplied first-frame content until it is physically hidden by a foreground column; uncover the separately staged final scene. Strong diagonal volumetric sunbeams and deep warm shade, bright champagne-gold title bevels with fine glints. PETALS AND LIGHT: continuous distributed slow-motion drift is present from the first frame, not triggered as a burst when the camera stops. Keep about 12-20 separate visible petals at irregular heights and depths. Petals flutter with independent phase, soft air resistance and a little side-to-side wobble; nearby petals drift roughly one tenth of picture height per second in the settled view, distant ones slower. Camera rotation produces the brief directional streaks; after braking the SAME scattered petals become calmly visible, with no sudden emission, rain sheet, confetti explosion or synchronized falling. Bouquets and garlands never detach. Fine dust motes drift inside diagonal volumetric sunrays. Gold edges and jewelry catch moving specular glints; text itself emits no smoke, gold liquid or floor beam.\n\nPRIMARY ACTION: A FULL 90-DEGREE LEFT WHIP-PAN / CAMERA PIVOT INTO THE INVITATION SIDE COURTYARD. This is a quarter-turn in camera HEADING, not a forward dolly followed by a tiny steering correction. The optical axis rotates through roughly 90 degrees; architecture sweeps laterally across the entire frame. Keep forward camera travel below half a meter during the main turn. A very close carved pillar sweeps across the lens with strong directional motion blur and depth parallax. The next subject starts OFFSCREEN AT THE SIDE and is discovered around the corner, never far ahead down the current central aisle.\n\nTIMING: 0.00-0.20s anticipate; 0.20-1.20s turn; 1.20-1.60s brake; 1.60-4.00s settle. Fast angular travel during the middle of the whip, strong cubic ease-out in the final 25 degrees; stop the rotation cleanly at the new viewing direction. Reveal the destination already at readable medium distance by 1.85 seconds, with no prolonged approach. After braking: a tiny counterclockwise arc at constant subject distance. Do not substitute a push-in or zoom for the pivot. Keep live subtle motion rather than a frozen end frame.\n\nThe same Ganesha idol stays intact and stationary until it leaves screen right behind a near pillar. The rear of the open pavilion stays open. Reveal a separate family invitation board, never transform the idol into the sign.\n\nThe final subject, people, physical sign and all exact lettering match the supplied last image. Fixed scenery remains rigid. No crossfade, text morph, duplicate board or foreground/background copies of people.",
+      "video_prompt": "Portrait cinematic storybook wedding film, same animated characters and gilded palace stone. Preserve supplied first-frame content until it is physically hidden by a foreground column; uncover the separately staged final scene. Strong diagonal volumetric sunbeams and deep warm shade, bright champagne-gold title bevels with fine glints. PETALS AND LIGHT: continuous distributed slow-motion drift is present from the first frame, not triggered as a burst when the camera stops. Keep about 12-20 separate visible petals at irregular heights and depths. Petals flutter with independent phase, soft air resistance and a little side-to-side wobble; nearby petals drift roughly one tenth of picture height per second in the settled view, distant ones slower. Camera rotation produces the brief directional streaks; after braking the SAME scattered petals become calmly visible, with no sudden emission, rain sheet, confetti explosion or synchronized falling. Bouquets and garlands never detach. Fine dust motes drift inside diagonal volumetric sunrays. Gold edges and jewelry catch moving specular glints; text itself emits no smoke, gold liquid or floor beam.\n\nPRIMARY ACTION: A FULL 90-DEGREE LEFT WHIP-PAN / CAMERA PIVOT INTO THE INVITATION SIDE COURTYARD. This is a quarter-turn in camera HEADING, not a forward dolly followed by a tiny steering correction. The optical axis rotates through roughly 90 degrees; architecture sweeps laterally across the entire frame. Keep forward camera travel below half a meter during the main turn. A very close carved pillar sweeps across the lens with strong directional motion blur and depth parallax. The next subject starts OFFSCREEN AT THE SIDE and is discovered around the corner, never far ahead down the current central aisle.\n\nTIMING: 0.00-0.20s anticipate; 0.20-1.20s turn; 1.20-1.60s brake; 1.60-4.00s settle. Fast angular travel during the middle of the whip, strong cubic ease-out in the final 25 degrees; stop the rotation cleanly at the new viewing direction. Reveal the destination already at readable medium distance by 1.85 seconds, with no prolonged approach. After braking: a tiny counterclockwise arc at constant subject distance. Do not substitute a push-in or zoom for the pivot. Keep live subtle motion rather than a frozen end frame.\n\nThe same Ganesha idol stays intact and stationary until it leaves screen right behind a near pillar. The rear of the open pavilion stays open. Reveal a separate family invitation board, never transform the idol into the sign.\n\nThe final subject, people, physical sign and all exact lettering match the supplied last image. Fixed scenery remains rigid. No crossfade, text morph, duplicate board or foreground/background copies of people.",
+      "video_path": "clip-2.mp4",
+      "final_frame_path": "clip-2-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 1
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 3
+        }
+      },
+      "request_metadata": {
+        "requestId": "8a2af803-7ec8-9922-83b8-0f57e1bfd28d",
+        "status": "done",
+        "model": "grok-imagine-video-1.5",
+        "duration": 4,
+        "usage": {
+          "cost_in_usd_ticks": 5800000000
+        },
+        "outputUrl": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-8a2af803-7ec8-9922-83b8-0f57e1bfd28d.mp4"
+      },
+      "selected_take": 1,
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "97"
+          }
+        ],
+        "format": {
+          "duration": "4.042000"
+        }
+      },
+      "actual_input": {
+        "model": "grok-imagine-video-1.5",
+        "duration": 4,
+        "aspect_ratio": "9:16",
+        "resolution": "720p",
+        "firstImage": "output/mysore-palace-royal-v1/clip-2-take-1-first.jpg",
+        "lastImage": "output/mysore-palace-royal-v1/clip-2-take-1-last.jpg",
+        "firstImageSha256": "7ead3a51aa4d74b57d3079a57b85e96e9fc3c72e285cdb48320cda6b0f6d3b8e",
+        "lastImageSha256": "dfa2fd883bdaa8a5839597b02a5f9a901c41140fd5256397dfd8d1c9cff96334",
+        "keyframes": [],
+        "sourceVideoFramesSent": false
+      },
+      "review_note": "No visual review, testing or retake, as requested.",
+      "timeline": {
+        "start_seconds": 5.041666666666667,
+        "end_seconds": 9.083333333333334
+      }
+    },
+    {
+      "index": 3,
+      "from": 3,
+      "to": 4,
+      "duration": 5,
+      "status": "generated-first-take",
+      "camera": "RIGHT 90-degree pivot; a small upward tilt, then a quiet lateral drift",
+      "video_prompt_template": "Portrait cinematic storybook wedding film, same animated characters and gilded palace stone. Preserve supplied first-frame content until it is physically hidden by a foreground column; uncover the separately staged final scene. Strong diagonal volumetric sunbeams and deep warm shade, bright champagne-gold title bevels with fine glints. PETALS AND LIGHT: continuous distributed slow-motion drift is present from the first frame, not triggered as a burst when the camera stops. Keep about 12-20 separate visible petals at irregular heights and depths. Petals flutter with independent phase, soft air resistance and a little side-to-side wobble; nearby petals drift roughly one tenth of picture height per second in the settled view, distant ones slower. Camera rotation produces the brief directional streaks; after braking the SAME scattered petals become calmly visible, with no sudden emission, rain sheet, confetti explosion or synchronized falling. Bouquets and garlands never detach. Fine dust motes drift inside diagonal volumetric sunrays. Gold edges and jewelry catch moving specular glints; text itself emits no smoke, gold liquid or floor beam.\n\nPRIMARY ACTION: A FULL 90-DEGREE RIGHT WHIP-PAN / CAMERA PIVOT INTO THE SHADED GROOM HALL. This is a quarter-turn in camera HEADING, not a forward dolly followed by a tiny steering correction. The optical axis rotates through roughly 90 degrees; architecture sweeps laterally across the entire frame. Keep forward camera travel below half a meter during the main turn. A very close carved pillar sweeps across the lens with strong directional motion blur and depth parallax. The next subject starts OFFSCREEN AT THE SIDE and is discovered around the corner, never far ahead down the current central aisle.\n\nTIMING: 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Fast angular travel during the middle of the whip, strong cubic ease-out in the final 25 degrees; stop the rotation cleanly at the new viewing direction. Reveal the destination already at readable medium distance by 1.85 seconds, with no prolonged approach. After braking: a small upward tilt, then a quiet lateral drift. Do not substitute a push-in or zoom for the pivot. Keep live subtle motion rather than a frozen end frame.\n\nInvitation board exits screen left behind a close pillar. Reveal the already-standing groom and luminous name in the side hall. The title catches fine bright glints on its strokes; no gold liquid or smoke.\n\nThe final subject, people, physical sign and all exact lettering match the supplied last image. Fixed scenery remains rigid. No crossfade, text morph, duplicate board or foreground/background copies of people.",
+      "video_prompt": "Portrait cinematic storybook wedding film, same animated characters and gilded palace stone. Preserve supplied first-frame content until it is physically hidden by a foreground column; uncover the separately staged final scene. Strong diagonal volumetric sunbeams and deep warm shade, bright champagne-gold title bevels with fine glints. PETALS AND LIGHT: continuous distributed slow-motion drift is present from the first frame, not triggered as a burst when the camera stops. Keep about 12-20 separate visible petals at irregular heights and depths. Petals flutter with independent phase, soft air resistance and a little side-to-side wobble; nearby petals drift roughly one tenth of picture height per second in the settled view, distant ones slower. Camera rotation produces the brief directional streaks; after braking the SAME scattered petals become calmly visible, with no sudden emission, rain sheet, confetti explosion or synchronized falling. Bouquets and garlands never detach. Fine dust motes drift inside diagonal volumetric sunrays. Gold edges and jewelry catch moving specular glints; text itself emits no smoke, gold liquid or floor beam.\n\nPRIMARY ACTION: A FULL 90-DEGREE RIGHT WHIP-PAN / CAMERA PIVOT INTO THE SHADED GROOM HALL. This is a quarter-turn in camera HEADING, not a forward dolly followed by a tiny steering correction. The optical axis rotates through roughly 90 degrees; architecture sweeps laterally across the entire frame. Keep forward camera travel below half a meter during the main turn. A very close carved pillar sweeps across the lens with strong directional motion blur and depth parallax. The next subject starts OFFSCREEN AT THE SIDE and is discovered around the corner, never far ahead down the current central aisle.\n\nTIMING: 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Fast angular travel during the middle of the whip, strong cubic ease-out in the final 25 degrees; stop the rotation cleanly at the new viewing direction. Reveal the destination already at readable medium distance by 1.85 seconds, with no prolonged approach. After braking: a small upward tilt, then a quiet lateral drift. Do not substitute a push-in or zoom for the pivot. Keep live subtle motion rather than a frozen end frame.\n\nInvitation board exits screen left behind a close pillar. Reveal the already-standing groom and luminous name in the side hall. The title catches fine bright glints on its strokes; no gold liquid or smoke.\n\nThe final subject, people, physical sign and all exact lettering match the supplied last image. Fixed scenery remains rigid. No crossfade, text morph, duplicate board or foreground/background copies of people.",
+      "video_path": "clip-3.mp4",
+      "final_frame_path": "clip-3-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 2
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 4
+        }
+      },
+      "request_metadata": {
+        "requestId": "47df6b0b-e8bb-9a33-a9ba-66aeb4f26e3d",
+        "status": "done",
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "usage": {
+          "cost_in_usd_ticks": 7200000000
+        },
+        "outputUrl": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-47df6b0b-e8bb-9a33-a9ba-66aeb4f26e3d.mp4"
+      },
+      "selected_take": 1,
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "121"
+          }
+        ],
+        "format": {
+          "duration": "5.042000"
+        }
+      },
+      "actual_input": {
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "aspect_ratio": "9:16",
+        "resolution": "720p",
+        "firstImage": "output/mysore-palace-royal-v1/clip-3-take-1-first.jpg",
+        "lastImage": "output/mysore-palace-royal-v1/clip-3-take-1-last.jpg",
+        "firstImageSha256": "37db60775819ff221bd6a77fd2982aaedf6706154f20717bd057142c9c6383ce",
+        "lastImageSha256": "fc84f4c24faf149d8f8b8df9d2e56e669cc6af3f5c8f64e811cdf8e21d070b5a",
+        "keyframes": [],
+        "sourceVideoFramesSent": false
+      },
+      "review_note": "No visual review, testing or retake, as requested.",
+      "timeline": {
+        "start_seconds": 9.083333333333334,
+        "end_seconds": 14.125
+      }
+    },
+    {
+      "index": 4,
+      "from": 4,
+      "to": 5,
+      "duration": 5,
+      "status": "generated-first-take",
+      "camera": "LEFT 90-degree pivot; a tiny downward tilt to settle at the bride's eye level",
+      "video_prompt_template": "Portrait cinematic storybook wedding film, same animated characters and gilded palace stone. Preserve supplied first-frame content until it is physically hidden by a foreground column; uncover the separately staged final scene. Strong diagonal volumetric sunbeams and deep warm shade, bright champagne-gold title bevels with fine glints. PETALS AND LIGHT: continuous distributed slow-motion drift is present from the first frame, not triggered as a burst when the camera stops. Keep about 12-20 separate visible petals at irregular heights and depths. Petals flutter with independent phase, soft air resistance and a little side-to-side wobble; nearby petals drift roughly one tenth of picture height per second in the settled view, distant ones slower. Camera rotation produces the brief directional streaks; after braking the SAME scattered petals become calmly visible, with no sudden emission, rain sheet, confetti explosion or synchronized falling. Bouquets and garlands never detach. Fine dust motes drift inside diagonal volumetric sunrays. Gold edges and jewelry catch moving specular glints; text itself emits no smoke, gold liquid or floor beam.\n\nPRIMARY ACTION: A FULL 90-DEGREE LEFT WHIP-PAN / CAMERA PIVOT INTO THE BRIDE CROSS-PASSAGE. This is a quarter-turn in camera HEADING, not a forward dolly followed by a tiny steering correction. The optical axis rotates through roughly 90 degrees; architecture sweeps laterally across the entire frame. Keep forward camera travel below half a meter during the main turn. A very close carved pillar sweeps across the lens with strong directional motion blur and depth parallax. The next subject starts OFFSCREEN AT THE SIDE and is discovered around the corner, never far ahead down the current central aisle.\n\nTIMING: 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Fast angular travel during the middle of the whip, strong cubic ease-out in the final 25 degrees; stop the rotation cleanly at the new viewing direction. Reveal the destination already at readable medium distance by 1.85 seconds, with no prolonged approach. After braking: a tiny downward tilt to settle at the bride's eye level. Do not substitute a push-in or zoom for the pivot. Keep live subtle motion rather than a frozen end frame.\n\nGroom and his entire name disappear behind the near column BEFORE the bride and her name are revealed; never overlap old and new titles. Fine golden glints run along the bride title as the turn brakes.\n\nThe final subject, people, physical sign and all exact lettering match the supplied last image. Fixed scenery remains rigid. No crossfade, text morph, duplicate board or foreground/background copies of people.",
+      "video_prompt": "Portrait cinematic storybook wedding film, same animated characters and gilded palace stone. Preserve supplied first-frame content until it is physically hidden by a foreground column; uncover the separately staged final scene. Strong diagonal volumetric sunbeams and deep warm shade, bright champagne-gold title bevels with fine glints. PETALS AND LIGHT: continuous distributed slow-motion drift is present from the first frame, not triggered as a burst when the camera stops. Keep about 12-20 separate visible petals at irregular heights and depths. Petals flutter with independent phase, soft air resistance and a little side-to-side wobble; nearby petals drift roughly one tenth of picture height per second in the settled view, distant ones slower. Camera rotation produces the brief directional streaks; after braking the SAME scattered petals become calmly visible, with no sudden emission, rain sheet, confetti explosion or synchronized falling. Bouquets and garlands never detach. Fine dust motes drift inside diagonal volumetric sunrays. Gold edges and jewelry catch moving specular glints; text itself emits no smoke, gold liquid or floor beam.\n\nPRIMARY ACTION: A FULL 90-DEGREE LEFT WHIP-PAN / CAMERA PIVOT INTO THE BRIDE CROSS-PASSAGE. This is a quarter-turn in camera HEADING, not a forward dolly followed by a tiny steering correction. The optical axis rotates through roughly 90 degrees; architecture sweeps laterally across the entire frame. Keep forward camera travel below half a meter during the main turn. A very close carved pillar sweeps across the lens with strong directional motion blur and depth parallax. The next subject starts OFFSCREEN AT THE SIDE and is discovered around the corner, never far ahead down the current central aisle.\n\nTIMING: 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Fast angular travel during the middle of the whip, strong cubic ease-out in the final 25 degrees; stop the rotation cleanly at the new viewing direction. Reveal the destination already at readable medium distance by 1.85 seconds, with no prolonged approach. After braking: a tiny downward tilt to settle at the bride's eye level. Do not substitute a push-in or zoom for the pivot. Keep live subtle motion rather than a frozen end frame.\n\nGroom and his entire name disappear behind the near column BEFORE the bride and her name are revealed; never overlap old and new titles. Fine golden glints run along the bride title as the turn brakes.\n\nThe final subject, people, physical sign and all exact lettering match the supplied last image. Fixed scenery remains rigid. No crossfade, text morph, duplicate board or foreground/background copies of people.",
+      "video_path": "clip-4.mp4",
+      "final_frame_path": "clip-4-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 3
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 5
+        }
+      },
+      "request_metadata": {
+        "requestId": "98b7d8b6-b00e-9d11-98da-e86b89e3d7f2",
+        "status": "done",
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "usage": {
+          "cost_in_usd_ticks": 7200000000
+        },
+        "outputUrl": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-98b7d8b6-b00e-9d11-98da-e86b89e3d7f2.mp4"
+      },
+      "selected_take": 1,
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "121"
+          }
+        ],
+        "format": {
+          "duration": "5.042000"
+        }
+      },
+      "actual_input": {
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "aspect_ratio": "9:16",
+        "resolution": "720p",
+        "firstImage": "output/mysore-palace-royal-v1/clip-4-take-1-first.jpg",
+        "lastImage": "output/mysore-palace-royal-v1/clip-4-take-1-last.jpg",
+        "firstImageSha256": "a6c573586144a6fad5bdecd5012655e63319c8fb6683573c08103b4520dbed56",
+        "lastImageSha256": "00c0a6dcc937eeb869a0d4ae1e3731dd4405b7223ff93880b4afc104f48d55f3",
+        "keyframes": [],
+        "sourceVideoFramesSent": false
+      },
+      "review_note": "No visual review, testing or retake, as requested.",
+      "timeline": {
+        "start_seconds": 14.125,
+        "end_seconds": 19.166666666666668
+      }
+    },
+    {
+      "index": 5,
+      "from": 5,
+      "to": 6,
+      "duration": 5,
+      "status": "generated-first-take",
+      "camera": "RIGHT 90-degree pivot; a slow eight-degree ORBIT across the plaque's bevel at CONSTANT distance, not a push-in",
+      "video_prompt_template": "Portrait cinematic storybook wedding film, same animated characters and gilded palace stone. Preserve supplied first-frame content until it is physically hidden by a foreground column; uncover the separately staged final scene. Strong diagonal volumetric sunbeams and deep warm shade, bright champagne-gold title bevels with fine glints. PETALS AND LIGHT: continuous distributed slow-motion drift is present from the first frame, not triggered as a burst when the camera stops. Keep about 12-20 separate visible petals at irregular heights and depths. Petals flutter with independent phase, soft air resistance and a little side-to-side wobble; nearby petals drift roughly one tenth of picture height per second in the settled view, distant ones slower. Camera rotation produces the brief directional streaks; after braking the SAME scattered petals become calmly visible, with no sudden emission, rain sheet, confetti explosion or synchronized falling. Bouquets and garlands never detach. Fine dust motes drift inside diagonal volumetric sunrays. Gold edges and jewelry catch moving specular glints; text itself emits no smoke, gold liquid or floor beam.\n\nPRIMARY ACTION: A FULL 90-DEGREE RIGHT WHIP-PAN / CAMERA PIVOT INTO THE FAMILY PLAQUE ON THE PERPENDICULAR WEST COLONNADE. This is a quarter-turn in camera HEADING, not a forward dolly followed by a tiny steering correction. The optical axis rotates through roughly 90 degrees; architecture sweeps laterally across the entire frame. Keep forward camera travel below half a meter during the main turn. A very close carved pillar sweeps across the lens with strong directional motion blur and depth parallax. The next subject starts OFFSCREEN AT THE SIDE and is discovered around the corner, never far ahead down the current central aisle.\n\nTIMING: 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Fast angular travel during the middle of the whip, strong cubic ease-out in the final 25 degrees; stop the rotation cleanly at the new viewing direction. Reveal the destination already at readable medium distance by 1.85 seconds, with no prolonged approach. After braking: a slow eight-degree ORBIT across the plaque's bevel at CONSTANT distance, not a push-in. Do not substitute a push-in or zoom for the pivot. Keep live subtle motion rather than a frozen end frame.\n\nPivot RIGHT through a full quarter-turn about a nearby pillar. The plaque is positioned beside the camera's original direction, never straight ahead. The bride exits left. The grounded flower bouquet is already at the plaque base when first revealed and never moves. Finish low and three-quarter, with changed frame-edge reflections.\n\nThe final subject, people, physical sign and all exact lettering match the supplied last image. Fixed scenery remains rigid. No crossfade, text morph, duplicate board or foreground/background copies of people.",
+      "video_prompt": "Portrait cinematic storybook wedding film, same animated characters and gilded palace stone. Preserve supplied first-frame content until it is physically hidden by a foreground column; uncover the separately staged final scene. Strong diagonal volumetric sunbeams and deep warm shade, bright champagne-gold title bevels with fine glints. PETALS AND LIGHT: continuous distributed slow-motion drift is present from the first frame, not triggered as a burst when the camera stops. Keep about 12-20 separate visible petals at irregular heights and depths. Petals flutter with independent phase, soft air resistance and a little side-to-side wobble; nearby petals drift roughly one tenth of picture height per second in the settled view, distant ones slower. Camera rotation produces the brief directional streaks; after braking the SAME scattered petals become calmly visible, with no sudden emission, rain sheet, confetti explosion or synchronized falling. Bouquets and garlands never detach. Fine dust motes drift inside diagonal volumetric sunrays. Gold edges and jewelry catch moving specular glints; text itself emits no smoke, gold liquid or floor beam.\n\nPRIMARY ACTION: A FULL 90-DEGREE RIGHT WHIP-PAN / CAMERA PIVOT INTO THE FAMILY PLAQUE ON THE PERPENDICULAR WEST COLONNADE. This is a quarter-turn in camera HEADING, not a forward dolly followed by a tiny steering correction. The optical axis rotates through roughly 90 degrees; architecture sweeps laterally across the entire frame. Keep forward camera travel below half a meter during the main turn. A very close carved pillar sweeps across the lens with strong directional motion blur and depth parallax. The next subject starts OFFSCREEN AT THE SIDE and is discovered around the corner, never far ahead down the current central aisle.\n\nTIMING: 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Fast angular travel during the middle of the whip, strong cubic ease-out in the final 25 degrees; stop the rotation cleanly at the new viewing direction. Reveal the destination already at readable medium distance by 1.85 seconds, with no prolonged approach. After braking: a slow eight-degree ORBIT across the plaque's bevel at CONSTANT distance, not a push-in. Do not substitute a push-in or zoom for the pivot. Keep live subtle motion rather than a frozen end frame.\n\nPivot RIGHT through a full quarter-turn about a nearby pillar. The plaque is positioned beside the camera's original direction, never straight ahead. The bride exits left. The grounded flower bouquet is already at the plaque base when first revealed and never moves. Finish low and three-quarter, with changed frame-edge reflections.\n\nThe final subject, people, physical sign and all exact lettering match the supplied last image. Fixed scenery remains rigid. No crossfade, text morph, duplicate board or foreground/background copies of people.",
+      "video_path": "clip-5.mp4",
+      "final_frame_path": "clip-5-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 4
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 6
+        }
+      },
+      "request_metadata": {
+        "requestId": "105ca741-8846-95b9-b297-650a17384977",
+        "status": "done",
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "usage": {
+          "cost_in_usd_ticks": 7200000000
+        },
+        "outputUrl": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-105ca741-8846-95b9-b297-650a17384977.mp4"
+      },
+      "selected_take": 1,
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "121"
+          }
+        ],
+        "format": {
+          "duration": "5.042000"
+        }
+      },
+      "actual_input": {
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "aspect_ratio": "9:16",
+        "resolution": "720p",
+        "firstImage": "output/mysore-palace-royal-v1/clip-5-take-1-first.jpg",
+        "lastImage": "output/mysore-palace-royal-v1/clip-5-take-1-last.jpg",
+        "firstImageSha256": "cd3f4b98cdad86b1f24b44241326c2a7737cae8fd4e6de2111612df949d19ec1",
+        "lastImageSha256": "0d17a438bb541486d20a173a72bb4eaede08ba782bee85313fa8eb2b92642173",
+        "keyframes": [],
+        "sourceVideoFramesSent": false
+      },
+      "review_note": "No visual review, testing or retake, as requested.",
+      "timeline": {
+        "start_seconds": 19.166666666666668,
+        "end_seconds": 24.208333333333332
+      }
+    },
+    {
+      "index": 6,
+      "from": 6,
+      "to": 7,
+      "duration": 5,
+      "status": "generated-first-take",
+      "camera": "LEFT 90-degree pivot; a slow slight crane DOWN toward seated eye height, with almost no forward translation",
+      "video_prompt_template": "Portrait cinematic storybook wedding film, same animated characters and gilded palace stone. Preserve supplied first-frame content until it is physically hidden by a foreground column; uncover the separately staged final scene. Strong diagonal volumetric sunbeams and deep warm shade, bright champagne-gold title bevels with fine glints. PETALS AND LIGHT: continuous distributed slow-motion drift is present from the first frame, not triggered as a burst when the camera stops. Keep about 12-20 separate visible petals at irregular heights and depths. Petals flutter with independent phase, soft air resistance and a little side-to-side wobble; nearby petals drift roughly one tenth of picture height per second in the settled view, distant ones slower. Camera rotation produces the brief directional streaks; after braking the SAME scattered petals become calmly visible, with no sudden emission, rain sheet, confetti explosion or synchronized falling. Bouquets and garlands never detach. Fine dust motes drift inside diagonal volumetric sunrays. Gold edges and jewelry catch moving specular glints; text itself emits no smoke, gold liquid or floor beam.\n\nPRIMARY ACTION: A FULL 90-DEGREE LEFT WHIP-PAN / CAMERA PIVOT INTO THE CEREMONY MANDAP HIDDEN ROUND THE CORNER. This is a quarter-turn in camera HEADING, not a forward dolly followed by a tiny steering correction. The optical axis rotates through roughly 90 degrees; architecture sweeps laterally across the entire frame. Keep forward camera travel below half a meter during the main turn. A very close carved pillar sweeps across the lens with strong directional motion blur and depth parallax. The next subject starts OFFSCREEN AT THE SIDE and is discovered around the corner, never far ahead down the current central aisle.\n\nTIMING: 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Fast angular travel during the middle of the whip, strong cubic ease-out in the final 25 degrees; stop the rotation cleanly at the new viewing direction. Reveal the destination already at readable medium distance by 1.85 seconds, with no prolonged approach. After braking: a slow slight crane DOWN toward seated eye height, with almost no forward translation. Do not substitute a push-in or zoom for the pivot. Keep live subtle motion rather than a frozen end frame.\n\nThe family plaque sweeps screen right and exits. Rotate LEFT about 90 degrees around the pillar to reveal the SIDE room holding the seated couple. Do not travel forward along an aisle. The ceremony sign is a physically separate sign already in place. Groom's hand makes only a tiny tender ritual motion.\n\nThe final subject, people, physical sign and all exact lettering match the supplied last image. Fixed scenery remains rigid. No crossfade, text morph, duplicate board or foreground/background copies of people.",
+      "video_prompt": "Portrait cinematic storybook wedding film, same animated characters and gilded palace stone. Preserve supplied first-frame content until it is physically hidden by a foreground column; uncover the separately staged final scene. Strong diagonal volumetric sunbeams and deep warm shade, bright champagne-gold title bevels with fine glints. PETALS AND LIGHT: continuous distributed slow-motion drift is present from the first frame, not triggered as a burst when the camera stops. Keep about 12-20 separate visible petals at irregular heights and depths. Petals flutter with independent phase, soft air resistance and a little side-to-side wobble; nearby petals drift roughly one tenth of picture height per second in the settled view, distant ones slower. Camera rotation produces the brief directional streaks; after braking the SAME scattered petals become calmly visible, with no sudden emission, rain sheet, confetti explosion or synchronized falling. Bouquets and garlands never detach. Fine dust motes drift inside diagonal volumetric sunrays. Gold edges and jewelry catch moving specular glints; text itself emits no smoke, gold liquid or floor beam.\n\nPRIMARY ACTION: A FULL 90-DEGREE LEFT WHIP-PAN / CAMERA PIVOT INTO THE CEREMONY MANDAP HIDDEN ROUND THE CORNER. This is a quarter-turn in camera HEADING, not a forward dolly followed by a tiny steering correction. The optical axis rotates through roughly 90 degrees; architecture sweeps laterally across the entire frame. Keep forward camera travel below half a meter during the main turn. A very close carved pillar sweeps across the lens with strong directional motion blur and depth parallax. The next subject starts OFFSCREEN AT THE SIDE and is discovered around the corner, never far ahead down the current central aisle.\n\nTIMING: 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Fast angular travel during the middle of the whip, strong cubic ease-out in the final 25 degrees; stop the rotation cleanly at the new viewing direction. Reveal the destination already at readable medium distance by 1.85 seconds, with no prolonged approach. After braking: a slow slight crane DOWN toward seated eye height, with almost no forward translation. Do not substitute a push-in or zoom for the pivot. Keep live subtle motion rather than a frozen end frame.\n\nThe family plaque sweeps screen right and exits. Rotate LEFT about 90 degrees around the pillar to reveal the SIDE room holding the seated couple. Do not travel forward along an aisle. The ceremony sign is a physically separate sign already in place. Groom's hand makes only a tiny tender ritual motion.\n\nThe final subject, people, physical sign and all exact lettering match the supplied last image. Fixed scenery remains rigid. No crossfade, text morph, duplicate board or foreground/background copies of people.",
+      "video_path": "clip-6.mp4",
+      "final_frame_path": "clip-6-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 5
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 7
+        }
+      },
+      "request_metadata": {
+        "requestId": "a06ff183-b902-9d27-9388-67377dc2fcc3",
+        "status": "done",
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "usage": {
+          "cost_in_usd_ticks": 7200000000
+        },
+        "outputUrl": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-a06ff183-b902-9d27-9388-67377dc2fcc3.mp4"
+      },
+      "selected_take": 1,
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "121"
+          }
+        ],
+        "format": {
+          "duration": "5.042000"
+        }
+      },
+      "actual_input": {
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "aspect_ratio": "9:16",
+        "resolution": "720p",
+        "firstImage": "output/mysore-palace-royal-v1/clip-6-take-1-first.jpg",
+        "lastImage": "output/mysore-palace-royal-v1/clip-6-take-1-last.jpg",
+        "firstImageSha256": "6ce2bc91b78533e9e17dba837e0d43804586657db2874dd056d6b96e7c6848c6",
+        "lastImageSha256": "2512efde27537ce36c2bd39978ff918095cf0dc07646c74f1df309a6be46a96c",
+        "keyframes": [],
+        "sourceVideoFramesSent": false
+      },
+      "review_note": "No visual review, testing or retake, as requested.",
+      "timeline": {
+        "start_seconds": 24.208333333333332,
+        "end_seconds": 29.25
+      }
+    },
+    {
+      "index": 7,
+      "from": 7,
+      "to": 8,
+      "duration": 5,
+      "status": "generated-first-take",
+      "camera": "RIGHT 90-degree pivot; a small upward crane to standing eye height while yaw eases to a stop",
+      "video_prompt_template": "Portrait cinematic storybook wedding film, same animated characters and gilded palace stone. Preserve supplied first-frame content until it is physically hidden by a foreground column; uncover the separately staged final scene. Strong diagonal volumetric sunbeams and deep warm shade, bright champagne-gold title bevels with fine glints. PETALS AND LIGHT: continuous distributed slow-motion drift is present from the first frame, not triggered as a burst when the camera stops. Keep about 12-20 separate visible petals at irregular heights and depths. Petals flutter with independent phase, soft air resistance and a little side-to-side wobble; nearby petals drift roughly one tenth of picture height per second in the settled view, distant ones slower. Camera rotation produces the brief directional streaks; after braking the SAME scattered petals become calmly visible, with no sudden emission, rain sheet, confetti explosion or synchronized falling. Bouquets and garlands never detach. Fine dust motes drift inside diagonal volumetric sunrays. Gold edges and jewelry catch moving specular glints; text itself emits no smoke, gold liquid or floor beam.\n\nPRIMARY ACTION: A FULL 90-DEGREE RIGHT WHIP-PAN / CAMERA PIVOT INTO THE NORTH COURTYARD VENUE VIEW. This is a quarter-turn in camera HEADING, not a forward dolly followed by a tiny steering correction. The optical axis rotates through roughly 90 degrees; architecture sweeps laterally across the entire frame. Keep forward camera travel below half a meter during the main turn. A very close carved pillar sweeps across the lens with strong directional motion blur and depth parallax. The next subject starts OFFSCREEN AT THE SIDE and is discovered around the corner, never far ahead down the current central aisle.\n\nTIMING: 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Fast angular travel during the middle of the whip, strong cubic ease-out in the final 25 degrees; stop the rotation cleanly at the new viewing direction. Reveal the destination already at readable medium distance by 1.85 seconds, with no prolonged approach. After braking: a small upward crane to standing eye height while yaw eases to a stop. Do not substitute a push-in or zoom for the pivot. Keep live subtle motion rather than a frozen end frame.\n\nThe seated ceremony and its board sweep screen left. Pivot RIGHT 90 degrees about the corner column; the venue board is in the perpendicular courtyard, not further ahead. The tower stays off-axis to the left in the new view. No forward flight through the ceremony or a doorway tunnel.\n\nThe final subject, people, physical sign and all exact lettering match the supplied last image. Fixed scenery remains rigid. No crossfade, text morph, duplicate board or foreground/background copies of people.",
+      "video_prompt": "Portrait cinematic storybook wedding film, same animated characters and gilded palace stone. Preserve supplied first-frame content until it is physically hidden by a foreground column; uncover the separately staged final scene. Strong diagonal volumetric sunbeams and deep warm shade, bright champagne-gold title bevels with fine glints. PETALS AND LIGHT: continuous distributed slow-motion drift is present from the first frame, not triggered as a burst when the camera stops. Keep about 12-20 separate visible petals at irregular heights and depths. Petals flutter with independent phase, soft air resistance and a little side-to-side wobble; nearby petals drift roughly one tenth of picture height per second in the settled view, distant ones slower. Camera rotation produces the brief directional streaks; after braking the SAME scattered petals become calmly visible, with no sudden emission, rain sheet, confetti explosion or synchronized falling. Bouquets and garlands never detach. Fine dust motes drift inside diagonal volumetric sunrays. Gold edges and jewelry catch moving specular glints; text itself emits no smoke, gold liquid or floor beam.\n\nPRIMARY ACTION: A FULL 90-DEGREE RIGHT WHIP-PAN / CAMERA PIVOT INTO THE NORTH COURTYARD VENUE VIEW. This is a quarter-turn in camera HEADING, not a forward dolly followed by a tiny steering correction. The optical axis rotates through roughly 90 degrees; architecture sweeps laterally across the entire frame. Keep forward camera travel below half a meter during the main turn. A very close carved pillar sweeps across the lens with strong directional motion blur and depth parallax. The next subject starts OFFSCREEN AT THE SIDE and is discovered around the corner, never far ahead down the current central aisle.\n\nTIMING: 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Fast angular travel during the middle of the whip, strong cubic ease-out in the final 25 degrees; stop the rotation cleanly at the new viewing direction. Reveal the destination already at readable medium distance by 1.85 seconds, with no prolonged approach. After braking: a small upward crane to standing eye height while yaw eases to a stop. Do not substitute a push-in or zoom for the pivot. Keep live subtle motion rather than a frozen end frame.\n\nThe seated ceremony and its board sweep screen left. Pivot RIGHT 90 degrees about the corner column; the venue board is in the perpendicular courtyard, not further ahead. The tower stays off-axis to the left in the new view. No forward flight through the ceremony or a doorway tunnel.\n\nThe final subject, people, physical sign and all exact lettering match the supplied last image. Fixed scenery remains rigid. No crossfade, text morph, duplicate board or foreground/background copies of people.",
+      "video_path": "clip-7.mp4",
+      "final_frame_path": "clip-7-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 6
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 8
+        }
+      },
+      "request_metadata": {
+        "requestId": "8f93dc57-546a-9357-aa68-6a5ecd85a2f9",
+        "status": "done",
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "usage": {
+          "cost_in_usd_ticks": 7200000000
+        },
+        "outputUrl": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-8f93dc57-546a-9357-aa68-6a5ecd85a2f9.mp4"
+      },
+      "selected_take": 1,
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "121"
+          }
+        ],
+        "format": {
+          "duration": "5.042000"
+        }
+      },
+      "actual_input": {
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "aspect_ratio": "9:16",
+        "resolution": "720p",
+        "firstImage": "output/mysore-palace-royal-v1/clip-7-take-1-first.jpg",
+        "lastImage": "output/mysore-palace-royal-v1/clip-7-take-1-last.jpg",
+        "firstImageSha256": "d7d866816c453d59bd33c2b47adb5505a031a4628c661db57a6092442ff52264",
+        "lastImageSha256": "9db1f7b3d8051a4f9004bb24aa91cd36d6637fed5d15ab230d859711cc0e679d",
+        "keyframes": [],
+        "sourceVideoFramesSent": false
+      },
+      "review_note": "No visual review, testing or retake, as requested.",
+      "timeline": {
+        "start_seconds": 29.25,
+        "end_seconds": 34.291666666666664
+      }
+    },
+    {
+      "index": 8,
+      "from": 8,
+      "to": 9,
+      "duration": 5,
+      "status": "generated-first-take",
+      "camera": "RIGHT 90-degree pivot; a very slow leftward correcting arc at fixed distance",
+      "video_prompt_template": "Portrait cinematic storybook wedding film, same animated characters and gilded palace stone. Preserve supplied first-frame content until it is physically hidden by a foreground column; uncover the separately staged final scene. Strong diagonal volumetric sunbeams and deep warm shade, bright champagne-gold title bevels with fine glints. PETALS AND LIGHT: continuous distributed slow-motion drift is present from the first frame, not triggered as a burst when the camera stops. Keep about 12-20 separate visible petals at irregular heights and depths. Petals flutter with independent phase, soft air resistance and a little side-to-side wobble; nearby petals drift roughly one tenth of picture height per second in the settled view, distant ones slower. Camera rotation produces the brief directional streaks; after braking the SAME scattered petals become calmly visible, with no sudden emission, rain sheet, confetti explosion or synchronized falling. Bouquets and garlands never detach. Fine dust motes drift inside diagonal volumetric sunrays. Gold edges and jewelry catch moving specular glints; text itself emits no smoke, gold liquid or floor beam.\n\nPRIMARY ACTION: A FULL 90-DEGREE RIGHT WHIP-PAN / CAMERA PIVOT INTO THE BLUE-HOUR RECEPTION PAVILION AT THE SIDE. This is a quarter-turn in camera HEADING, not a forward dolly followed by a tiny steering correction. The optical axis rotates through roughly 90 degrees; architecture sweeps laterally across the entire frame. Keep forward camera travel below half a meter during the main turn. A very close carved pillar sweeps across the lens with strong directional motion blur and depth parallax. The next subject starts OFFSCREEN AT THE SIDE and is discovered around the corner, never far ahead down the current central aisle.\n\nTIMING: 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Fast angular travel during the middle of the whip, strong cubic ease-out in the final 25 degrees; stop the rotation cleanly at the new viewing direction. Reveal the destination already at readable medium distance by 1.85 seconds, with no prolonged approach. After braking: a very slow leftward correcting arc at fixed distance. Do not substitute a push-in or zoom for the pivot. Keep live subtle motion rather than a frozen end frame.\n\nRotate RIGHT through the side opening, almost on the spot, to face a completely different wall of the courtyard. A near pillar and gold drape briefly fill the view and conceal the change to evening. No long forward approach to a distant easel. The reception easel is already near when uncovered.\n\nThe final subject, people, physical sign and all exact lettering match the supplied last image. Fixed scenery remains rigid. No crossfade, text morph, duplicate board or foreground/background copies of people.",
+      "video_prompt": "Portrait cinematic storybook wedding film, same animated characters and gilded palace stone. Preserve supplied first-frame content until it is physically hidden by a foreground column; uncover the separately staged final scene. Strong diagonal volumetric sunbeams and deep warm shade, bright champagne-gold title bevels with fine glints. PETALS AND LIGHT: continuous distributed slow-motion drift is present from the first frame, not triggered as a burst when the camera stops. Keep about 12-20 separate visible petals at irregular heights and depths. Petals flutter with independent phase, soft air resistance and a little side-to-side wobble; nearby petals drift roughly one tenth of picture height per second in the settled view, distant ones slower. Camera rotation produces the brief directional streaks; after braking the SAME scattered petals become calmly visible, with no sudden emission, rain sheet, confetti explosion or synchronized falling. Bouquets and garlands never detach. Fine dust motes drift inside diagonal volumetric sunrays. Gold edges and jewelry catch moving specular glints; text itself emits no smoke, gold liquid or floor beam.\n\nPRIMARY ACTION: A FULL 90-DEGREE RIGHT WHIP-PAN / CAMERA PIVOT INTO THE BLUE-HOUR RECEPTION PAVILION AT THE SIDE. This is a quarter-turn in camera HEADING, not a forward dolly followed by a tiny steering correction. The optical axis rotates through roughly 90 degrees; architecture sweeps laterally across the entire frame. Keep forward camera travel below half a meter during the main turn. A very close carved pillar sweeps across the lens with strong directional motion blur and depth parallax. The next subject starts OFFSCREEN AT THE SIDE and is discovered around the corner, never far ahead down the current central aisle.\n\nTIMING: 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Fast angular travel during the middle of the whip, strong cubic ease-out in the final 25 degrees; stop the rotation cleanly at the new viewing direction. Reveal the destination already at readable medium distance by 1.85 seconds, with no prolonged approach. After braking: a very slow leftward correcting arc at fixed distance. Do not substitute a push-in or zoom for the pivot. Keep live subtle motion rather than a frozen end frame.\n\nRotate RIGHT through the side opening, almost on the spot, to face a completely different wall of the courtyard. A near pillar and gold drape briefly fill the view and conceal the change to evening. No long forward approach to a distant easel. The reception easel is already near when uncovered.\n\nThe final subject, people, physical sign and all exact lettering match the supplied last image. Fixed scenery remains rigid. No crossfade, text morph, duplicate board or foreground/background copies of people.",
+      "video_path": "clip-8.mp4",
+      "final_frame_path": "clip-8-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 7
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 9
+        }
+      },
+      "request_metadata": {
+        "requestId": "38c4cb1c-3892-94c3-a461-f255a6e2dcd1",
+        "status": "done",
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "usage": {
+          "cost_in_usd_ticks": 7200000000
+        },
+        "outputUrl": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-38c4cb1c-3892-94c3-a461-f255a6e2dcd1.mp4"
+      },
+      "selected_take": 1,
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "121"
+          }
+        ],
+        "format": {
+          "duration": "5.042000"
+        }
+      },
+      "actual_input": {
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "aspect_ratio": "9:16",
+        "resolution": "720p",
+        "firstImage": "output/mysore-palace-royal-v1/clip-8-take-1-first.jpg",
+        "lastImage": "output/mysore-palace-royal-v1/clip-8-take-1-last.jpg",
+        "firstImageSha256": "54bb16a509770351c462abb09c13236436839bbb0a1258a4442c520a6e12cef1",
+        "lastImageSha256": "93779df2db8dfc7796220a54e5b8c8f8ffb290dbc998ee3860ad07b2d85739e6",
+        "keyframes": [],
+        "sourceVideoFramesSent": false
+      },
+      "review_note": "No visual review, testing or retake, as requested.",
+      "timeline": {
+        "start_seconds": 34.291666666666664,
+        "end_seconds": 39.333333333333336
+      }
+    },
+    {
+      "index": 9,
+      "from": 9,
+      "to": 10,
+      "duration": 5,
+      "status": "generated-first-take",
+      "camera": "LEFT 90-degree pivot; a gentle lateral drift over 20 centimetres at constant distance from the plaque",
+      "video_prompt_template": "Portrait cinematic storybook wedding film, same animated characters and gilded palace stone. Preserve supplied first-frame content until it is physically hidden by a foreground column; uncover the separately staged final scene. Strong diagonal volumetric sunbeams and deep warm shade, bright champagne-gold title bevels with fine glints. PETALS AND LIGHT: continuous distributed slow-motion drift is present from the first frame, not triggered as a burst when the camera stops. Keep about 12-20 separate visible petals at irregular heights and depths. Petals flutter with independent phase, soft air resistance and a little side-to-side wobble; nearby petals drift roughly one tenth of picture height per second in the settled view, distant ones slower. Camera rotation produces the brief directional streaks; after braking the SAME scattered petals become calmly visible, with no sudden emission, rain sheet, confetti explosion or synchronized falling. Bouquets and garlands never detach. Fine dust motes drift inside diagonal volumetric sunrays. Gold edges and jewelry catch moving specular glints; text itself emits no smoke, gold liquid or floor beam.\n\nPRIMARY ACTION: A FULL 90-DEGREE LEFT WHIP-PAN / CAMERA PIVOT INTO THE INNER HOSTS' LAMP HALL AT A RIGHT ANGLE. This is a quarter-turn in camera HEADING, not a forward dolly followed by a tiny steering correction. The optical axis rotates through roughly 90 degrees; architecture sweeps laterally across the entire frame. Keep forward camera travel below half a meter during the main turn. A very close carved pillar sweeps across the lens with strong directional motion blur and depth parallax. The next subject starts OFFSCREEN AT THE SIDE and is discovered around the corner, never far ahead down the current central aisle.\n\nTIMING: 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Fast angular travel during the middle of the whip, strong cubic ease-out in the final 25 degrees; stop the rotation cleanly at the new viewing direction. Reveal the destination already at readable medium distance by 1.85 seconds, with no prolonged approach. After braking: a gentle lateral drift over 20 centimetres at constant distance from the plaque. Do not substitute a push-in or zoom for the pivot. Keep live subtle motion rather than a frozen end frame.\n\nRotate LEFT 90 degrees around a close carved pillar, leaving the reception easel behind screen right. Reveal the host plaque across a SIDE doorway at right angles, already at reading distance. Do not continue flying down a straight aisle or pushing forward toward the plaque. Warm shafts and lamp glints move over the gold frame.\n\nThe final subject, people, physical sign and all exact lettering match the supplied last image. Fixed scenery remains rigid. No crossfade, text morph, duplicate board or foreground/background copies of people.",
+      "video_prompt": "Portrait cinematic storybook wedding film, same animated characters and gilded palace stone. Preserve supplied first-frame content until it is physically hidden by a foreground column; uncover the separately staged final scene. Strong diagonal volumetric sunbeams and deep warm shade, bright champagne-gold title bevels with fine glints. PETALS AND LIGHT: continuous distributed slow-motion drift is present from the first frame, not triggered as a burst when the camera stops. Keep about 12-20 separate visible petals at irregular heights and depths. Petals flutter with independent phase, soft air resistance and a little side-to-side wobble; nearby petals drift roughly one tenth of picture height per second in the settled view, distant ones slower. Camera rotation produces the brief directional streaks; after braking the SAME scattered petals become calmly visible, with no sudden emission, rain sheet, confetti explosion or synchronized falling. Bouquets and garlands never detach. Fine dust motes drift inside diagonal volumetric sunrays. Gold edges and jewelry catch moving specular glints; text itself emits no smoke, gold liquid or floor beam.\n\nPRIMARY ACTION: A FULL 90-DEGREE LEFT WHIP-PAN / CAMERA PIVOT INTO THE INNER HOSTS' LAMP HALL AT A RIGHT ANGLE. This is a quarter-turn in camera HEADING, not a forward dolly followed by a tiny steering correction. The optical axis rotates through roughly 90 degrees; architecture sweeps laterally across the entire frame. Keep forward camera travel below half a meter during the main turn. A very close carved pillar sweeps across the lens with strong directional motion blur and depth parallax. The next subject starts OFFSCREEN AT THE SIDE and is discovered around the corner, never far ahead down the current central aisle.\n\nTIMING: 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Fast angular travel during the middle of the whip, strong cubic ease-out in the final 25 degrees; stop the rotation cleanly at the new viewing direction. Reveal the destination already at readable medium distance by 1.85 seconds, with no prolonged approach. After braking: a gentle lateral drift over 20 centimetres at constant distance from the plaque. Do not substitute a push-in or zoom for the pivot. Keep live subtle motion rather than a frozen end frame.\n\nRotate LEFT 90 degrees around a close carved pillar, leaving the reception easel behind screen right. Reveal the host plaque across a SIDE doorway at right angles, already at reading distance. Do not continue flying down a straight aisle or pushing forward toward the plaque. Warm shafts and lamp glints move over the gold frame.\n\nThe final subject, people, physical sign and all exact lettering match the supplied last image. Fixed scenery remains rigid. No crossfade, text morph, duplicate board or foreground/background copies of people.",
+      "video_path": "clip-9.mp4",
+      "final_frame_path": "clip-9-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 8
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 10
+        }
+      },
+      "request_metadata": {
+        "requestId": "e24a4874-b03e-9983-9c14-aef16aa651c5",
+        "status": "done",
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "usage": {
+          "cost_in_usd_ticks": 7200000000
+        },
+        "outputUrl": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-e24a4874-b03e-9983-9c14-aef16aa651c5.mp4"
+      },
+      "selected_take": 1,
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "121"
+          }
+        ],
+        "format": {
+          "duration": "5.042000"
+        }
+      },
+      "actual_input": {
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "aspect_ratio": "9:16",
+        "resolution": "720p",
+        "firstImage": "output/mysore-palace-royal-v1/clip-9-take-1-first.jpg",
+        "lastImage": "output/mysore-palace-royal-v1/clip-9-take-1-last.jpg",
+        "firstImageSha256": "3d8db667cc35a2d45105277f8a91c5c7b666b8b3ec1f62f1ee09b3f3ed243220",
+        "lastImageSha256": "8c007cc9de023123828f7ed86b4308d1c7a86c8dad4105b7d9e339cafea45abd",
+        "keyframes": [],
+        "sourceVideoFramesSent": false
+      },
+      "review_note": "No visual review, testing or retake, as requested.",
+      "timeline": {
+        "start_seconds": 39.333333333333336,
+        "end_seconds": 44.375
+      }
+    },
+    {
+      "index": 10,
+      "from": 10,
+      "to": 11,
+      "duration": 5,
+      "status": "generated-first-take",
+      "camera": "Fast backward corridor departure, between the only couple, then full-body ease-out",
+      "video_prompt_template": "BACKWARD REVEAL OF EXACTLY ONE BRIDE AND ONE GROOM. There are exactly TWO foreground people in the entire shot. Never show a second pair, a duplicate couple, a portrait of the couple, or a reflection containing another couple. The people whose near profiles appear during the camera pass are the SAME physical people who become the full-body ending, not a separate foreground pair.\n\n0.00–0.35s: ease backward from the host plaque. 0.35–1.30s: accelerate BACKWARD down the clear lamp-lined corridor. The host plaque shrinks naturally. The distant corridor is EMPTY of people; no bride or groom is visible anywhere ahead. Close pillars and roof beams rush past with strong parallax. 1.30–1.85s: the camera crosses the gateway and passes backward through the clear gap between the ONLY bride and groom, who are immediately beside the lens. Their very close blurred cheeks and shoulders briefly occupy the left and right edges. Through the middle gap there is ONLY empty architecture, never another couple or couple portrait. A near gateway beam and the blurred shoulders briefly obscure the deep background. 1.85–2.60s: the same two near faces steadily SHRINK in screen size as the camera continues backward. Reveal their torsos, joined hands and full bodies through continuous perspective. No distant pair grows to replace them. Bride stays on the left, groom on the right. They turn naturally a little toward the camera as it clears them. The supplied final image is the composition reached by these exact two people. 2.60–5.00s: decelerate strongly into a slow backward glide, ending at the full-body couple under the gateway. Hold their identity, hair, clothing and garlands, with small warm smiles. Keep the ornate SAVE THE DATE board physically to their right, text exactly '{{save_date_inline}}'. Warm sunrise, fine loose petals and changing gilded highlights. One continuous backward camera move, no full spin, no teleportation, no duplicated people, no montage. Decorative bouquets and signs stay fixed; only small individual petals move.\n\nPETALS AND LIGHT: continuous distributed slow-motion drift is present from the first frame, not triggered as a burst when the camera stops. Keep about 12-20 separate visible petals at irregular heights and depths. Petals flutter with independent phase, soft air resistance and a little side-to-side wobble; nearby petals drift roughly one tenth of picture height per second in the settled view, distant ones slower. Camera rotation produces the brief directional streaks; after braking the SAME scattered petals become calmly visible, with no sudden emission, rain sheet, confetti explosion or synchronized falling. Bouquets and garlands never detach. Fine dust motes drift inside diagonal volumetric sunrays. Gold edges and jewelry catch moving specular glints; text itself emits no smoke, gold liquid or floor beam.\n\nExactly ONE date board is uncovered on the right as the ONLY couple is revealed. It is a single rigid rectangular rosewood board with one gold frame and one easel. Never duplicate its frame, create another date panel behind it, or blend two boards. Strong side sunrays, deep carved shadows and warm gold rim light. The couple are {{bride_name}} and {{groom_name}}. Keep the source identity and clothing.",
+      "video_prompt": "BACKWARD REVEAL OF EXACTLY ONE BRIDE AND ONE GROOM. There are exactly TWO foreground people in the entire shot. Never show a second pair, a duplicate couple, a portrait of the couple, or a reflection containing another couple. The people whose near profiles appear during the camera pass are the SAME physical people who become the full-body ending, not a separate foreground pair.\n\n0.00–0.35s: ease backward from the host plaque. 0.35–1.30s: accelerate BACKWARD down the clear lamp-lined corridor. The host plaque shrinks naturally. The distant corridor is EMPTY of people; no bride or groom is visible anywhere ahead. Close pillars and roof beams rush past with strong parallax. 1.30–1.85s: the camera crosses the gateway and passes backward through the clear gap between the ONLY bride and groom, who are immediately beside the lens. Their very close blurred cheeks and shoulders briefly occupy the left and right edges. Through the middle gap there is ONLY empty architecture, never another couple or couple portrait. A near gateway beam and the blurred shoulders briefly obscure the deep background. 1.85–2.60s: the same two near faces steadily SHRINK in screen size as the camera continues backward. Reveal their torsos, joined hands and full bodies through continuous perspective. No distant pair grows to replace them. Bride stays on the left, groom on the right. They turn naturally a little toward the camera as it clears them. The supplied final image is the composition reached by these exact two people. 2.60–5.00s: decelerate strongly into a slow backward glide, ending at the full-body couple under the gateway. Hold their identity, hair, clothing and garlands, with small warm smiles. Keep the ornate SAVE THE DATE board physically to their right, text exactly 'SAVE THE DATE / 6 & 7 FEBRUARY / 2020'. Warm sunrise, fine loose petals and changing gilded highlights. One continuous backward camera move, no full spin, no teleportation, no duplicated people, no montage. Decorative bouquets and signs stay fixed; only small individual petals move.\n\nPETALS AND LIGHT: continuous distributed slow-motion drift is present from the first frame, not triggered as a burst when the camera stops. Keep about 12-20 separate visible petals at irregular heights and depths. Petals flutter with independent phase, soft air resistance and a little side-to-side wobble; nearby petals drift roughly one tenth of picture height per second in the settled view, distant ones slower. Camera rotation produces the brief directional streaks; after braking the SAME scattered petals become calmly visible, with no sudden emission, rain sheet, confetti explosion or synchronized falling. Bouquets and garlands never detach. Fine dust motes drift inside diagonal volumetric sunrays. Gold edges and jewelry catch moving specular glints; text itself emits no smoke, gold liquid or floor beam.\n\nExactly ONE date board is uncovered on the right as the ONLY couple is revealed. It is a single rigid rectangular rosewood board with one gold frame and one easel. Never duplicate its frame, create another date panel behind it, or blend two boards. Strong side sunrays, deep carved shadows and warm gold rim light. The couple are Supriya and Ashok Kumar. Keep the source identity and clothing.",
+      "video_path": "clip-10.mp4",
+      "final_frame_path": "clip-10-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 9
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 11
+        }
+      },
+      "request_metadata": {
+        "requestId": "468146fd-0907-9bfc-bb1d-e8950fa000db",
+        "status": "done",
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "usage": {
+          "cost_in_usd_ticks": 7200000000
+        },
+        "outputUrl": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-468146fd-0907-9bfc-bb1d-e8950fa000db.mp4"
+      },
+      "selected_take": 1,
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "121"
+          }
+        ],
+        "format": {
+          "duration": "5.042000"
+        }
+      },
+      "actual_input": {
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "aspect_ratio": "9:16",
+        "resolution": "720p",
+        "firstImage": "output/mysore-palace-royal-v1/clip-10-take-1-first.jpg",
+        "lastImage": "output/mysore-palace-royal-v1/clip-10-take-1-last.jpg",
+        "firstImageSha256": "29e8a1c9dedc1e36acf534c0de15cfd8b8b7e6d71a15d5540bf50dcf39af1550",
+        "lastImageSha256": "b5200c31bdf02847b2fe6ffb5ff9ec5c11eb7ac36561167d21d152d06e6b4621",
+        "keyframes": [],
+        "sourceVideoFramesSent": false
+      },
+      "review_note": "No visual review, testing or retake, as requested.",
+      "timeline": {
+        "start_seconds": 44.375,
+        "end_seconds": 49.416666666666664
+      }
+    },
+    {
+      "index": 11,
+      "from": 11,
+      "to": 12,
+      "duration": 5,
+      "status": "generated-first-take",
+      "camera": "Gentle backward glide and slight rise, single-board continuity, forehead touch",
+      "video_prompt_template": "Animate ONLY the supplied first image for five seconds. Preserve this exact scene and its objects. There is exactly ONE bride, ONE groom and ONE date board on its single easel at camera RIGHT. The existing rectangular board, gold frame, all printed date lettering and support form ONE RIGID FIXED OBJECT: keep its silhouette, perspective, text and position consistent with the scene as the camera moves. Never create a replacement board, duplicate panel, overlapping gold border, extra easel or reflected second sign. No independent final composition is requested.\n\nOne gentle continuous BACKWARD camera glide of about one meter with a slight 15-centimeter rise under the existing gateway, no pan and no whip. 0.00-1.25s: couple remains where they stand, softly smiling, bride left and groom right. 1.25-3.25s: they turn their faces a few degrees toward each other, lower their eyes and gently touch foreheads. Their bodies barely turn, feet stay planted, hands remain naturally joined at waist height. Their garlands sway slightly, no new people or costume change. 3.25-5.00s: keep the tender forehead touch while backward motion eases almost to rest. The SAME existing hanging lamp above becomes a little more visible as the view widens. Preserve the same tower, gateway, flower arch, floor decorations and SINGLE right-side board throughout. No objects materialize or morph. Printed copy stays exactly {{save_date_inline}}.\n\nPETALS AND LIGHT: continuous distributed slow-motion drift is present from the first frame, not triggered as a burst when the camera stops. Keep about 12-20 separate visible petals at irregular heights and depths. Petals flutter with independent phase, soft air resistance and a little side-to-side wobble; nearby petals drift roughly one tenth of picture height per second in the settled view, distant ones slower. Camera rotation produces the brief directional streaks; after braking the SAME scattered petals become calmly visible, with no sudden emission, rain sheet, confetti explosion or synchronized falling. Bouquets and garlands never detach. Fine dust motes drift inside diagonal volumetric sunrays. Gold edges and jewelry catch moving specular glints; text itself emits no smoke, gold liquid or floor beam.\n\nThe light keeps its dramatic warm diagonal shafts and luminous rim on the couple, with subtle gilded lamp flicker and gold highlights. The final picture is simply a slightly wider view of the supplied scene, not a new room or recomposed image.",
+      "video_prompt": "Animate ONLY the supplied first image for five seconds. Preserve this exact scene and its objects. There is exactly ONE bride, ONE groom and ONE date board on its single easel at camera RIGHT. The existing rectangular board, gold frame, all printed date lettering and support form ONE RIGID FIXED OBJECT: keep its silhouette, perspective, text and position consistent with the scene as the camera moves. Never create a replacement board, duplicate panel, overlapping gold border, extra easel or reflected second sign. No independent final composition is requested.\n\nOne gentle continuous BACKWARD camera glide of about one meter with a slight 15-centimeter rise under the existing gateway, no pan and no whip. 0.00-1.25s: couple remains where they stand, softly smiling, bride left and groom right. 1.25-3.25s: they turn their faces a few degrees toward each other, lower their eyes and gently touch foreheads. Their bodies barely turn, feet stay planted, hands remain naturally joined at waist height. Their garlands sway slightly, no new people or costume change. 3.25-5.00s: keep the tender forehead touch while backward motion eases almost to rest. The SAME existing hanging lamp above becomes a little more visible as the view widens. Preserve the same tower, gateway, flower arch, floor decorations and SINGLE right-side board throughout. No objects materialize or morph. Printed copy stays exactly SAVE THE DATE / 6 & 7 FEBRUARY / 2020.\n\nPETALS AND LIGHT: continuous distributed slow-motion drift is present from the first frame, not triggered as a burst when the camera stops. Keep about 12-20 separate visible petals at irregular heights and depths. Petals flutter with independent phase, soft air resistance and a little side-to-side wobble; nearby petals drift roughly one tenth of picture height per second in the settled view, distant ones slower. Camera rotation produces the brief directional streaks; after braking the SAME scattered petals become calmly visible, with no sudden emission, rain sheet, confetti explosion or synchronized falling. Bouquets and garlands never detach. Fine dust motes drift inside diagonal volumetric sunrays. Gold edges and jewelry catch moving specular glints; text itself emits no smoke, gold liquid or floor beam.\n\nThe light keeps its dramatic warm diagonal shafts and luminous rim on the couple, with subtle gilded lamp flicker and gold highlights. The final picture is simply a slightly wider view of the supplied scene, not a new room or recomposed image.",
+      "video_path": "clip-11.mp4",
+      "final_frame_path": "clip-11-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 10
+        },
+        "last": null
+      },
+      "request_metadata": {
+        "requestId": "df010ce9-0786-9f01-8d86-cd3770df91d2",
+        "status": "done",
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "usage": {
+          "cost_in_usd_ticks": 7100000000
+        },
+        "outputUrl": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-df010ce9-0786-9f01-8d86-cd3770df91d2.mp4"
+      },
+      "selected_take": 1,
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "121"
+          }
+        ],
+        "format": {
+          "duration": "5.042000"
+        }
+      },
+      "actual_input": {
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "aspect_ratio": "9:16",
+        "resolution": "720p",
+        "firstImage": "output/mysore-palace-royal-v1/clip-11-take-1-first.jpg",
+        "lastImage": null,
+        "firstImageSha256": "a666f67a4cd85920cffd6fd37188b7121cdb3dc22b3784973d05a055ff456365",
+        "lastImageSha256": null,
+        "keyframes": [],
+        "sourceVideoFramesSent": false
+      },
+      "review_note": "No visual review, testing or retake, as requested.",
+      "timeline": {
+        "start_seconds": 49.416666666666664,
+        "end_seconds": 54.458333333333336
+      }
+    }
+  ],
+  "completed_at": "2026-09-29T16:37:22.027Z",
+  "costs": {
+    "scope": "Mysore Palace Royal first version only",
+    "imageRequests": 11,
+    "videoRequests": 11,
+    "xaiCompletedCostUsd": 7.77,
+    "pendingVideos": [],
+    "replicateCostUsd": null,
+    "replicateCostNote": "Provider prediction responses do not include monetary charges."
+  },
+  "review_policy": "No visual review, video tests or retakes performed, as requested."
+}

@@ -1,0 +1,12 @@
+{
+  "model": "grok-imagine-video-1.5",
+  "duration": 5,
+  "aspect_ratio": "9:16",
+  "resolution": "720p",
+  "firstImage": "output/underwater-sea-horror-v1/clip-6-take-1-first.jpg",
+  "lastImage": "output/underwater-sea-horror-v1/clip-6-take-1-last.jpg",
+  "firstImageSha256": "e5a8cc8cd2f919b7bf782af7129f4e555657e35750b8f4904c2ad9bbdf785ed2",
+  "lastImageSha256": "a02befedce6e0aabc6794bc84f34921009126888927bdaac44849230aac931ed",
+  "keyframes": [],
+  "sourceVideoFramesSent": false
+}

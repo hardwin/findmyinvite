@@ -1,0 +1,31 @@
+{
+  "scope": "Road-trip Replicate video iteration; clips 1-2 Seedance, remaining clips Pruna",
+  "imageRequests": 11,
+  "videoRequests": 14,
+  "videoProvider": "replicate",
+  "videoModels": [
+    "bytedance/seedance-2.0",
+    "prunaai/p-video"
+  ],
+  "xaiCompletedCostUsd": 0,
+  "replicateCostUsd": null,
+  "replicateCostNote": "Actual charges are not exposed in prediction responses.",
+  "pendingVideos": [],
+  "failedVideos": [
+    {
+      "file": "clip-3-take-1-request.json",
+      "status": "failed",
+      "error": "Prediction failed: Async prediction failed: ModelError: The input or output was flagged as sensitive. Please try again with different inputs. (E005) (uIJ6l3ruRD)"
+    },
+    {
+      "file": "clip-3-take-2-request.json",
+      "status": "failed",
+      "error": "Prediction failed: Async prediction failed: ModelError: The input or output was flagged as sensitive. Please try again with different inputs. (E005) (uIJ6l3ruRD)"
+    },
+    {
+      "file": "clip-3-take-3-request.json",
+      "status": "failed",
+      "error": "Prediction failed: Async prediction failed: ModelError: The input or output was flagged as sensitive. Please try again with different inputs. (E005) (uIJ6l3ruRD)"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "model": "grok-imagine-video-1.5",
+  "duration": 5,
+  "aspect_ratio": "9:16",
+  "resolution": "720p",
+  "firstImage": "output/temple-full-v1/clip-7-take-1-first.jpg",
+  "lastImage": "output/temple-full-v1/clip-7-take-1-last.jpg",
+  "firstImageSha256": "7768494be1e4168a806d6a96206f8c1cd305fc40820eb1257070025abc83d834",
+  "lastImageSha256": "685f80e5f2d74b6a5e84699334ff5e01657471d8dd558e9122191f2f069b5a25",
+  "keyframes": [],
+  "sourceVideoFramesSent": false
+}

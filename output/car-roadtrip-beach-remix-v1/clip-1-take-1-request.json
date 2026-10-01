@@ -1,0 +1,21 @@
+{
+  "id": "heaqtvcr1xrmt0d0y52tx8w08r",
+  "requestId": "heaqtvcr1xrmt0d0y52tx8w08r",
+  "status": "succeeded",
+  "model": "bytedance/seedance-2.0",
+  "version": "hidden",
+  "metrics": {
+    "model_variant": "non_video_in",
+    "predict_time": 117.728976596,
+    "resolution_target": "720p",
+    "token_output_count": 108900,
+    "total_time": 117.789311793,
+    "video_output_duration_seconds": 5
+  },
+  "error": null,
+  "created_at": "2026-09-30T07:44:25.103Z",
+  "started_at": "2026-09-30T07:44:25.163335197Z",
+  "completed_at": "2026-09-30T07:46:22.892311793Z",
+  "data_removed": false,
+  "outputUrl": "https://replicate.delivery/xezq/qKdB394NFbbVONnp4fAdk2nD4CIR4DHWb77QrrfUZl1OBnSXA/tmpolzyv95a.mp4"
+}

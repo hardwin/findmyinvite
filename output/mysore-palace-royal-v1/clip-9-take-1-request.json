@@ -1,0 +1,10 @@
+{
+  "requestId": "e24a4874-b03e-9983-9c14-aef16aa651c5",
+  "status": "done",
+  "model": "grok-imagine-video-1.5",
+  "duration": 5,
+  "usage": {
+    "cost_in_usd_ticks": 7200000000
+  },
+  "outputUrl": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-e24a4874-b03e-9983-9c14-aef16aa651c5.mp4"
+}

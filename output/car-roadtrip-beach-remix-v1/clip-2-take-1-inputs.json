@@ -1,0 +1,13 @@
+{
+  "model": "bytedance/seedance-2.0",
+  "prompt": "Portrait storybook outdoor wedding, exact supplied identities and anchors. CARS PARKED: fixed tires, doors closed, no driving, braking, rolling, entry or exit. PEOPLE PLANTED: no walking, stepping, approach or departure; only tiny blinks and gestures. MOTIFS/LIGHT: mountain grass seeds and mist beads, coastal bubbles and spray drift independently at 0.1 picture-height/second in settled views, 12-20 small pieces at varied depths; motion blur comes from camera speed, no emitted burst. Strong diagonal shafts, rim light and changing water reflections. Pearl-white/teal lettering with platinum glints stays rigid.\n\nPRIMARY ACTION: LEFT BANK AND FAST LATERAL RIVERSIDE FLIGHT TO A SEPARATE WATERFALL VIEWPOINT. Traverse visible outdoor distance using a fast pullback or forward flight with directional edge blur and strong near/far parallax. Carry the route's changing geography continuously through the frame. Do not substitute an in-place pivot or uniform digital zoom for travel.\n\nTIMING: 0.00-0.25s continue the stage approach; 0.25-1.25s accelerate left over the pool following its curved bank; 1.25-1.65s brake; 1.65-4.00s settle in a tiny counterclockwise arc. Speed peaks over open water and drops decisively beside the invitation rock.\n\nThe stage remains fixed and exits right as the camera pulls back, banks left and traverses the visible pool edge. Keep waterfall silhouette and trail continuously identifiable. Mist stays transparent, never a white wipe. The separate invitation card at the viewpoint grows through approach, never materializes from the stage lettering. Static decor and an empty parked car, where visible. No people moving between locations.\n\nMatch the supplied final scene and exact text. One opaque world throughout: no crossfade, dissolve, fog wipe, fade-to-white, sudden appearance or blended scenery. Travel past persistent terrain with parallax and brake smoothly. People already stand in destination poses; objects never relocate or morph.",
+  "duration": 4,
+  "resolution": "720p",
+  "aspect_ratio": "9:16",
+  "generate_audio": false,
+  "firstImage": "output/car-roadtrip-beach-remix-v1/clip-2-take-1-first.jpg",
+  "lastImage": "output/car-roadtrip-beach-remix-v1/clip-2-take-1-last.jpg",
+  "firstImageSha256": "b4eb01def5c0a82ad989ea7bab20a2e846dc69762a776f8a3588a6f3ca3ef7e9",
+  "lastImageSha256": "b0378c466081be3d88c583452003b01dffd7ce89e7e315f9c9915aa6c0115f5b",
+  "sourceVideoFramesSent": false
+}

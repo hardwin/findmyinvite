@@ -1,0 +1,24 @@
+{
+  "programs": [],
+  "streams": [
+    {
+      "codec_name": "h264",
+      "codec_type": "video",
+      "width": 720,
+      "height": 1280,
+      "r_frame_rate": "24/1",
+      "nb_read_frames": "363"
+    }
+  ],
+  "format": {
+    "duration": "15.125000",
+    "size": "17342878"
+  },
+  "clipCount": 3,
+  "sceneCount": 4,
+  "imageModel": "openai/gpt-image-2.5-flare",
+  "videoModel": "grok-imagine-video-1.5",
+  "audio": "silent",
+  "applicationCodeChanged": false,
+  "videoCostUsd": 2.16
+}

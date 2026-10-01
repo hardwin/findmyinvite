@@ -1,0 +1,15 @@
+{
+  "model": "prunaai/p-video",
+  "prompt": "Portrait storybook outdoor wedding, exact supplied identities and anchors. CARS PARKED: fixed tires, doors closed, no driving, braking, rolling, entry or exit. PEOPLE PLANTED: no walking, stepping, approach or departure; only tiny blinks and gestures. MOTIFS/LIGHT: mountain grass seeds and mist beads, coastal bubbles and spray drift independently at 0.1 picture-height/second in settled views, 12-20 small pieces at varied depths; motion blur comes from camera speed, no emitted burst. Strong diagonal shafts, rim light and changing water reflections. Pearl-white/teal lettering with platinum glints stays rigid.\n\nPRIMARY ACTION: FAST LEFT-BANKING DESCENT ALONG THE VALLEY ROAD ALL THE WAY TO THE DAYLIGHT BEACH. Traverse visible outdoor distance using a fast pullback or forward flight with directional edge blur and strong near/far parallax. Carry the route's changing geography continuously through the frame. Do not substitute an in-place pivot or uniform digital zoom for travel.\n\nTIMING: 0.00-0.30s pull up and away from the family; 0.30-2.10s make a strongly accelerated travel passage down the visible switchbacks; 2.10-2.65s brake over the beach access track; 2.65-5.00s settle with a slight crane down to raised-stage eye height.\n\nShow the valley road, hairpins, river mouth, pale beach and headland continuously in order. Camera-only travel compresses elapsed journey time; nobody drives or walks. No car follows the lens. Couple remain offscreen until the raised ivory stage fills the destination. Reveal the SAME identities already STANDING on its elevated deck in modern ivory suit and gown, hands joined; no clothing morph, floor seating, ritual fire or rug. Preserve stage steps, sail backdrop, dense orchids and acrylic timing panel during braking.\n\nMatch the supplied final scene and exact text. One opaque world throughout: no crossfade, dissolve, fog wipe, fade-to-white, sudden appearance or blended scenery. Travel past persistent terrain with parallax and brake smoothly. People already stand in destination poses; objects never relocate or morph.",
+  "duration": 5,
+  "resolution": "720p",
+  "aspect_ratio": "9:16",
+  "fps": 24,
+  "prompt_upsampling": false,
+  "save_audio": false,
+  "firstImage": "output/car-roadtrip-beach-remix-v1/clip-6-pruna-take-1-first.jpg",
+  "lastImage": "output/car-roadtrip-beach-remix-v1/clip-6-pruna-take-1-last.jpg",
+  "firstImageSha256": "30adabd6196fe682d4a3ec1d7302ecb682c1388a7abfe4c2a8b037e2106a80cf",
+  "lastImageSha256": "25d0598a97eec3cbf179fc912e2945ff306f43ea9e4c1a87b22cb43b37289f59",
+  "sourceVideoFramesSent": false
+}

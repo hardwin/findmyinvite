@@ -1,0 +1,1232 @@
+{
+  "schema_version": "1.1",
+  "iteration": "socialmedia-college-anime-v2",
+  "name": "Tamil College Social Media Love Story",
+  "status": "complete-first-version",
+  "assets_root": "output/socialmedia-college-anime-v2",
+  "locked_baseline": {
+    "path": "master_template_v1.json",
+    "sha256": "d99ecbf7e19c0332a51053bca81070dce7101dceeb416e771d3a312067e182aa",
+    "snapshot": "output/socialmedia-college-anime-v2/locked-master-template-v1.json"
+  },
+  "scene_count": 12,
+  "connecting_clip_count": 11,
+  "models": {
+    "image": {
+      "provider": "replicate",
+      "id": "openai/gpt-image-2.5-flare",
+      "credentials_env": "REPLICATE_API_TOKEN"
+    },
+    "video": {
+      "provider": "xai",
+      "id": "grok-imagine-video-1.5",
+      "credentials_env": "XAI_API_KEY",
+      "resolution": "720p",
+      "aspect_ratio": "9:16",
+      "generate_audio": false
+    }
+  },
+  "parameters": {
+    "invitation_lines": "Sounder & Mohan\nFamily\nWedding Invitation",
+    "groom_title": "Sri.",
+    "groom_name": "Ashok Kumar",
+    "bride_title": "Srmt.",
+    "bride_name": "Supriya",
+    "family_lines": "With the Blessings of\nGroom's Parents\nMr. Sounder Rajan\n& Mrs. Punitha\nBride's Parents\nMr. Mohan Krishna\n& Mrs. Prema",
+    "ceremony_lines": "Wedding Ceremony\n7th February 2020\n8:00 a.m.\nIn the Morning",
+    "venue_lines": "Wedding Venue\nLeela Channaiah\nKalyana Mandapa\nVontikoppal\nMysore",
+    "reception_lines": "Reception - Dinner\n6th February 2020\n7:30 p.m. onwards\nLeela Channaiah\nKalyana Mandapa\nVontikoppal, Mysore",
+    "host_lines": "Invited By\nMr. BalaSubramanian\nMrs. Jeevitha\nBaby. Yazhini & Suhas\nWith Love & Blessings",
+    "save_date_lines": "SAVE THE DATE\n6 & 7 FEBRUARY\n2020",
+    "devotional_line_1": "Om Shree",
+    "devotional_line_2": "Ganeshaya Namah",
+    "save_date_inline": "SAVE THE DATE / 6 & 7 FEBRUARY / 2020",
+    "story_tagline": "From Screen to Soul",
+    "final_message": "From a profile in a classroom to a life in our hands — we found forever."
+  },
+  "copy_assumptions": [
+    "The romance spans one college year; both characters keep the same young-adult identity and age throughout.",
+    "The supplied wedding names, dates, venue and hosts appear separately across dedicated invitation scenes."
+  ],
+  "style": "Portrait 9:16 premium pastel watercolor anime wedding invitation film, soft detailed brush texture and cinematic Indian college realism. Peach sunrise, dusty rose, indigo, sage and ivory palette; strong but delicate shafts through windows, garden foliage, café steam and evening campus lamps. South Indian college locations, each one distinct. Refined ivory editorial serif with a restrained rose-gold glow; exact on-screen words, one text passage per scene, large and legible. No ribbons, no floating cards, no complex light trails, no random UI, no watermark.",
+  "characters": {
+    "groom": "Adult Tamil Indian college student, about 22, warm medium-brown skin, slim adult oval face, soft dark-brown almond eyes, thick eyebrows, short wavy black hair with a neat side part, carefully trimmed moustache and short beard, natural adult proportions. Same face, age, moustache and beard in every scene. Indigo cotton shirt over ivory tee and dark trousers; final scenes use a simple ivory kurta.",
+    "bride": "Adult Tamil Indian college student, about 21, warm medium-brown skin, graceful oval face, dark-brown almond eyes, gently arched brows, small red bindi, long black braid, reserved warm smile. Same face, age, braid and proportions in every scene. Elegant South Indian chudidhar: muted rose kurta, ivory dupatta, teal salwar; final scenes use an ivory-and-rose chudidhar."
+  },
+  "particle_motion": "Location-specific atmosphere only: small chalk dust in classroom, paper motes in library, jasmine petals in garden, coffee steam at café, dry leaves at amphitheatre, distant lamp moths at night, soft sea spray on shore. 8-14 sparse tiny particles at varied depth; drift slowly only while the camera brakes. No confetti storm.",
+  "generation_policy": {
+    "images": "Text-only Flare, one first take per designed frame; no source references.",
+    "video": "xAI Grok Imagine Video 1.5, pinned first and last frames for clips 1-10, final clip uses the prior final frame only.",
+    "automatic_paid_retries": false,
+    "visual_review": true,
+    "retakes": false
+  },
+  "output": {
+    "video": "socialmedia-college-anime-v2-final.mp4",
+    "width": 720,
+    "height": 1280,
+    "fps": 24,
+    "aspect_ratio": "9:16",
+    "audio": "silent",
+    "assembly": "Concatenate clips in order without transition overlays or crossfades.",
+    "actual_duration_seconds": 54.458333333333336,
+    "frame_count": 1307,
+    "sha256": null
+  },
+  "scenes": [
+    {
+      "index": 1,
+      "id": "scene-01",
+      "name": "Campus aerial hook",
+      "status": "generated-first-take",
+      "image_prompt_template": "Portrait 9:16 premium pastel watercolor anime wedding invitation film, soft detailed brush texture and cinematic Indian college realism. Peach sunrise, dusty rose, indigo, sage and ivory palette; strong but delicate shafts through windows, garden foliage, café steam and evening campus lamps. South Indian college locations, each one distinct. Refined ivory editorial serif with a restrained rose-gold glow; exact on-screen words, one text passage per scene, large and legible. No ribbons, no floating cards, no complex light trails, no random UI, no watermark.\nCHARACTERS: Adult Tamil Indian college student, about 22, warm medium-brown skin, slim adult oval face, soft dark-brown almond eyes, thick eyebrows, short wavy black hair with a neat side part, carefully trimmed moustache and short beard, natural adult proportions. Same face, age, moustache and beard in every scene. Indigo cotton shirt over ivory tee and dark trousers; final scenes use a simple ivory kurta. Adult Tamil Indian college student, about 21, warm medium-brown skin, graceful oval face, dark-brown almond eyes, gently arched brows, small red bindi, long black braid, reserved warm smile. Same face, age, braid and proportions in every scene. Elegant South Indian chudidhar: muted rose kurta, ivory dupatta, teal salwar; final scenes use an ivory-and-rose chudidhar.\nSCENE 1: High wide aerial view above a grand red-brick South Indian college campus at peach sunrise: one central clock tower, open quadrangle, mature rain trees, distant city haze and tiny stationary students far below. Ashok is a very small still figure seated at an outdoor classroom terrace desk, indigo shirt visible. Full campus and sky are visible, not a close ground view. Text in the open upper sky: \"From Screen to Soul\".\nLocation-specific atmosphere only: small chalk dust in classroom, paper motes in library, jasmine petals in garden, coffee steam at café, dry leaves at amphitheatre, distant lamp moths at night, soft sea spray on shore. 8-14 sparse tiny particles at varied depth; drift slowly only while the camera brakes. No confetti storm.\nNo ribbon. No complex transition implication. One location only; no other readable text.",
+      "image_prompt": "Portrait 9:16 premium pastel watercolor anime wedding invitation film, soft detailed brush texture and cinematic Indian college realism. Peach sunrise, dusty rose, indigo, sage and ivory palette; strong but delicate shafts through windows, garden foliage, café steam and evening campus lamps. South Indian college locations, each one distinct. Refined ivory editorial serif with a restrained rose-gold glow; exact on-screen words, one text passage per scene, large and legible. No ribbons, no floating cards, no complex light trails, no random UI, no watermark.\nCHARACTERS: Adult Tamil Indian college student, about 22, warm medium-brown skin, slim adult oval face, soft dark-brown almond eyes, thick eyebrows, short wavy black hair with a neat side part, carefully trimmed moustache and short beard, natural adult proportions. Same face, age, moustache and beard in every scene. Indigo cotton shirt over ivory tee and dark trousers; final scenes use a simple ivory kurta. Adult Tamil Indian college student, about 21, warm medium-brown skin, graceful oval face, dark-brown almond eyes, gently arched brows, small red bindi, long black braid, reserved warm smile. Same face, age, braid and proportions in every scene. Elegant South Indian chudidhar: muted rose kurta, ivory dupatta, teal salwar; final scenes use an ivory-and-rose chudidhar.\nSCENE 1: High wide aerial view above a grand red-brick South Indian college campus at peach sunrise: one central clock tower, open quadrangle, mature rain trees, distant city haze and tiny stationary students far below. Ashok is a very small still figure seated at an outdoor classroom terrace desk, indigo shirt visible. Full campus and sky are visible, not a close ground view. Text in the open upper sky: \"From Screen to Soul\".\nLocation-specific atmosphere only: small chalk dust in classroom, paper motes in library, jasmine petals in garden, coffee steam at café, dry leaves at amphitheatre, distant lamp moths at night, soft sea spray on shore. 8-14 sparse tiny particles at varied depth; drift slowly only while the camera brakes. No confetti storm.\nNo ribbon. No complex transition implication. One location only; no other readable text.",
+      "text_fields": [
+        {
+          "role": "story_or_invitation",
+          "text": ""
+        }
+      ],
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-1.jpg",
+      "selected_take": 1,
+      "review_note": "Selected text-only first take; representative frames reviewed, no retake."
+    },
+    {
+      "index": 2,
+      "id": "scene-02",
+      "name": "Quiet classroom scroll",
+      "status": "generated-first-take",
+      "image_prompt_template": "Portrait 9:16 premium pastel watercolor anime wedding invitation film, soft detailed brush texture and cinematic Indian college realism. Peach sunrise, dusty rose, indigo, sage and ivory palette; strong but delicate shafts through windows, garden foliage, café steam and evening campus lamps. South Indian college locations, each one distinct. Refined ivory editorial serif with a restrained rose-gold glow; exact on-screen words, one text passage per scene, large and legible. No ribbons, no floating cards, no complex light trails, no random UI, no watermark.\nCHARACTERS: Adult Tamil Indian college student, about 22, warm medium-brown skin, slim adult oval face, soft dark-brown almond eyes, thick eyebrows, short wavy black hair with a neat side part, carefully trimmed moustache and short beard, natural adult proportions. Same face, age, moustache and beard in every scene. Indigo cotton shirt over ivory tee and dark trousers; final scenes use a simple ivory kurta. Adult Tamil Indian college student, about 21, warm medium-brown skin, graceful oval face, dark-brown almond eyes, gently arched brows, small red bindi, long black braid, reserved warm smile. Same face, age, braid and proportions in every scene. Elegant South Indian chudidhar: muted rose kurta, ivory dupatta, teal salwar; final scenes use an ivory-and-rose chudidhar.\nSCENE 2: Bright sunlit college classroom with tall windows, chalkboard, wooden desks and soft chalk dust. Ashok sits still by a window holding a simple phone; a small unbranded portrait of Supriya is visible on the screen. No fake social UI or extra text. Text on the classroom wall’s clean negative space: \"A quiet scroll. A familiar smile.\"\nLocation-specific atmosphere only: small chalk dust in classroom, paper motes in library, jasmine petals in garden, coffee steam at café, dry leaves at amphitheatre, distant lamp moths at night, soft sea spray on shore. 8-14 sparse tiny particles at varied depth; drift slowly only while the camera brakes. No confetti storm.\nNo ribbon. No complex transition implication. One location only; no other readable text.",
+      "image_prompt": "Portrait 9:16 premium pastel watercolor anime wedding invitation film, soft detailed brush texture and cinematic Indian college realism. Peach sunrise, dusty rose, indigo, sage and ivory palette; strong but delicate shafts through windows, garden foliage, café steam and evening campus lamps. South Indian college locations, each one distinct. Refined ivory editorial serif with a restrained rose-gold glow; exact on-screen words, one text passage per scene, large and legible. No ribbons, no floating cards, no complex light trails, no random UI, no watermark.\nCHARACTERS: Adult Tamil Indian college student, about 22, warm medium-brown skin, slim adult oval face, soft dark-brown almond eyes, thick eyebrows, short wavy black hair with a neat side part, carefully trimmed moustache and short beard, natural adult proportions. Same face, age, moustache and beard in every scene. Indigo cotton shirt over ivory tee and dark trousers; final scenes use a simple ivory kurta. Adult Tamil Indian college student, about 21, warm medium-brown skin, graceful oval face, dark-brown almond eyes, gently arched brows, small red bindi, long black braid, reserved warm smile. Same face, age, braid and proportions in every scene. Elegant South Indian chudidhar: muted rose kurta, ivory dupatta, teal salwar; final scenes use an ivory-and-rose chudidhar.\nSCENE 2: Bright sunlit college classroom with tall windows, chalkboard, wooden desks and soft chalk dust. Ashok sits still by a window holding a simple phone; a small unbranded portrait of Supriya is visible on the screen. No fake social UI or extra text. Text on the classroom wall’s clean negative space: \"A quiet scroll. A familiar smile.\"\nLocation-specific atmosphere only: small chalk dust in classroom, paper motes in library, jasmine petals in garden, coffee steam at café, dry leaves at amphitheatre, distant lamp moths at night, soft sea spray on shore. 8-14 sparse tiny particles at varied depth; drift slowly only while the camera brakes. No confetti storm.\nNo ribbon. No complex transition implication. One location only; no other readable text.",
+      "text_fields": [
+        {
+          "role": "story_or_invitation",
+          "text": ""
+        }
+      ],
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-2.jpg",
+      "selected_take": 1,
+      "review_note": "Selected text-only first take; representative frames reviewed, no retake."
+    },
+    {
+      "index": 3,
+      "name": "Library realization",
+      "status": "generated-first-take",
+      "image_prompt_template": "Portrait 9:16 premium pastel watercolor anime wedding invitation film, soft detailed brush texture and cinematic Indian college realism. Peach sunrise, dusty rose, indigo, sage and ivory palette; strong but delicate shafts through windows, garden foliage, café steam and evening campus lamps. South Indian college locations, each one distinct. Refined ivory editorial serif with a restrained rose-gold glow; exact on-screen words, one text passage per scene, large and legible. No ribbons, no floating cards, no complex light trails, no random UI, no watermark.\nCHARACTERS: Adult Tamil Indian college student, about 22, warm medium-brown skin, slim adult oval face, soft dark-brown almond eyes, thick eyebrows, short wavy black hair with a neat side part, carefully trimmed moustache and short beard, natural adult proportions. Same face, age, moustache and beard in every scene. Indigo cotton shirt over ivory tee and dark trousers; final scenes use a simple ivory kurta. Adult Tamil Indian college student, about 21, warm medium-brown skin, graceful oval face, dark-brown almond eyes, gently arched brows, small red bindi, long black braid, reserved warm smile. Same face, age, braid and proportions in every scene. Elegant South Indian chudidhar: muted rose kurta, ivory dupatta, teal salwar; final scenes use an ivory-and-rose chudidhar.\nSCENE 3: Different location: old college library aisle with tall book shelves, ladder rails, sunbeams and suspended paper motes. Ashok stands still beside a reading table, softly smiling down at the same phone, surrounded by books. Text in a softly lit shelf gap: \"One year. One beautiful hello.\"\nLocation-specific atmosphere only: small chalk dust in classroom, paper motes in library, jasmine petals in garden, coffee steam at café, dry leaves at amphitheatre, distant lamp moths at night, soft sea spray on shore. 8-14 sparse tiny particles at varied depth; drift slowly only while the camera brakes. No confetti storm.\nNo ribbon. No complex transition implication. One location only; no other readable text.",
+      "image_prompt": "Portrait 9:16 premium pastel watercolor anime wedding invitation film, soft detailed brush texture and cinematic Indian college realism. Peach sunrise, dusty rose, indigo, sage and ivory palette; strong but delicate shafts through windows, garden foliage, café steam and evening campus lamps. South Indian college locations, each one distinct. Refined ivory editorial serif with a restrained rose-gold glow; exact on-screen words, one text passage per scene, large and legible. No ribbons, no floating cards, no complex light trails, no random UI, no watermark.\nCHARACTERS: Adult Tamil Indian college student, about 22, warm medium-brown skin, slim adult oval face, soft dark-brown almond eyes, thick eyebrows, short wavy black hair with a neat side part, carefully trimmed moustache and short beard, natural adult proportions. Same face, age, moustache and beard in every scene. Indigo cotton shirt over ivory tee and dark trousers; final scenes use a simple ivory kurta. Adult Tamil Indian college student, about 21, warm medium-brown skin, graceful oval face, dark-brown almond eyes, gently arched brows, small red bindi, long black braid, reserved warm smile. Same face, age, braid and proportions in every scene. Elegant South Indian chudidhar: muted rose kurta, ivory dupatta, teal salwar; final scenes use an ivory-and-rose chudidhar.\nSCENE 3: Different location: old college library aisle with tall book shelves, ladder rails, sunbeams and suspended paper motes. Ashok stands still beside a reading table, softly smiling down at the same phone, surrounded by books. Text in a softly lit shelf gap: \"One year. One beautiful hello.\"\nLocation-specific atmosphere only: small chalk dust in classroom, paper motes in library, jasmine petals in garden, coffee steam at café, dry leaves at amphitheatre, distant lamp moths at night, soft sea spray on shore. 8-14 sparse tiny particles at varied depth; drift slowly only while the camera brakes. No confetti storm.\nNo ribbon. No complex transition implication. One location only; no other readable text.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-3.jpg",
+      "image_request_id": "0jexsa80sdrmr0d0xkvbr894zm",
+      "actual_input_path": "image-3-take-1-input.json",
+      "request_metadata": {
+        "id": "0jexsa80sdrmr0d0xkvbr894zm",
+        "status": "succeeded",
+        "model": "openai/gpt-image-2.5-flare",
+        "imageReferences": 0,
+        "metrics": {
+          "image_output_count": 1,
+          "model_variant": "high",
+          "predict_time": 16.66815079,
+          "resolution_target": "9:16",
+          "total_time": 16.727526078
+        },
+        "error": null,
+        "data_removed": false,
+        "outputUrl": "https://replicate.delivery/xezq/t0VazQlkskLeRCBTrtASHG5jjyLySTgvphqviR4qVzAyqKpLA/tmps7cg_nhs.jpeg"
+      },
+      "text_fields": [
+        {
+          "role": "story_or_invitation",
+          "text": ""
+        }
+      ],
+      "selected_take": 1,
+      "review_note": "Selected text-only first take; representative frames reviewed, no retake."
+    },
+    {
+      "index": 4,
+      "name": "First hello",
+      "status": "generated-first-take",
+      "image_prompt_template": "Portrait 9:16 premium pastel watercolor anime wedding invitation film, soft detailed brush texture and cinematic Indian college realism. Peach sunrise, dusty rose, indigo, sage and ivory palette; strong but delicate shafts through windows, garden foliage, café steam and evening campus lamps. South Indian college locations, each one distinct. Refined ivory editorial serif with a restrained rose-gold glow; exact on-screen words, one text passage per scene, large and legible. No ribbons, no floating cards, no complex light trails, no random UI, no watermark.\nCHARACTERS: Adult Tamil Indian college student, about 22, warm medium-brown skin, slim adult oval face, soft dark-brown almond eyes, thick eyebrows, short wavy black hair with a neat side part, carefully trimmed moustache and short beard, natural adult proportions. Same face, age, moustache and beard in every scene. Indigo cotton shirt over ivory tee and dark trousers; final scenes use a simple ivory kurta. Adult Tamil Indian college student, about 21, warm medium-brown skin, graceful oval face, dark-brown almond eyes, gently arched brows, small red bindi, long black braid, reserved warm smile. Same face, age, braid and proportions in every scene. Elegant South Indian chudidhar: muted rose kurta, ivory dupatta, teal salwar; final scenes use an ivory-and-rose chudidhar.\nSCENE 4: Different location: shaded stone college corridor with arched open bays, blue noticeboard, hanging jasmine pot and afternoon shafts. Ashok and Supriya stand still several steps apart, seeing one another for the first time; no walking. Text appears in a clean beam above them: \"Sri. Ashok Kumar\".\nLocation-specific atmosphere only: small chalk dust in classroom, paper motes in library, jasmine petals in garden, coffee steam at café, dry leaves at amphitheatre, distant lamp moths at night, soft sea spray on shore. 8-14 sparse tiny particles at varied depth; drift slowly only while the camera brakes. No confetti storm.\nNo ribbon. No complex transition implication. One location only; no other readable text.",
+      "image_prompt": "Portrait 9:16 premium pastel watercolor anime wedding invitation film, soft detailed brush texture and cinematic Indian college realism. Peach sunrise, dusty rose, indigo, sage and ivory palette; strong but delicate shafts through windows, garden foliage, café steam and evening campus lamps. South Indian college locations, each one distinct. Refined ivory editorial serif with a restrained rose-gold glow; exact on-screen words, one text passage per scene, large and legible. No ribbons, no floating cards, no complex light trails, no random UI, no watermark.\nCHARACTERS: Adult Tamil Indian college student, about 22, warm medium-brown skin, slim adult oval face, soft dark-brown almond eyes, thick eyebrows, short wavy black hair with a neat side part, carefully trimmed moustache and short beard, natural adult proportions. Same face, age, moustache and beard in every scene. Indigo cotton shirt over ivory tee and dark trousers; final scenes use a simple ivory kurta. Adult Tamil Indian college student, about 21, warm medium-brown skin, graceful oval face, dark-brown almond eyes, gently arched brows, small red bindi, long black braid, reserved warm smile. Same face, age, braid and proportions in every scene. Elegant South Indian chudidhar: muted rose kurta, ivory dupatta, teal salwar; final scenes use an ivory-and-rose chudidhar.\nSCENE 4: Different location: shaded stone college corridor with arched open bays, blue noticeboard, hanging jasmine pot and afternoon shafts. Ashok and Supriya stand still several steps apart, seeing one another for the first time; no walking. Text appears in a clean beam above them: \"Sri. Ashok Kumar\".\nLocation-specific atmosphere only: small chalk dust in classroom, paper motes in library, jasmine petals in garden, coffee steam at café, dry leaves at amphitheatre, distant lamp moths at night, soft sea spray on shore. 8-14 sparse tiny particles at varied depth; drift slowly only while the camera brakes. No confetti storm.\nNo ribbon. No complex transition implication. One location only; no other readable text.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-4.jpg",
+      "image_request_id": "zmdnxzc1qsrmy0d0xkv9fetm94",
+      "actual_input_path": "image-4-take-1-input.json",
+      "request_metadata": {
+        "id": "zmdnxzc1qsrmy0d0xkv9fetm94",
+        "status": "succeeded",
+        "model": "openai/gpt-image-2.5-flare",
+        "imageReferences": 0,
+        "metrics": {
+          "image_output_count": 1,
+          "model_variant": "high",
+          "predict_time": 17.502282364,
+          "resolution_target": "9:16",
+          "total_time": 17.520145592
+        },
+        "error": null,
+        "data_removed": false,
+        "outputUrl": "https://replicate.delivery/xezq/g2vgl9qCndaRINI0k2I9eRy6Mn6y4s7HR0414kmZxucDrKpLA/tmppiyqgxui.jpeg"
+      },
+      "text_fields": [
+        {
+          "role": "story_or_invitation",
+          "text": ""
+        }
+      ],
+      "selected_take": 1,
+      "review_note": "Selected text-only first take; representative frames reviewed, no retake."
+    },
+    {
+      "index": 5,
+      "name": "Her introduction",
+      "status": "generated-first-take",
+      "image_prompt_template": "Portrait 9:16 premium pastel watercolor anime wedding invitation film, soft detailed brush texture and cinematic Indian college realism. Peach sunrise, dusty rose, indigo, sage and ivory palette; strong but delicate shafts through windows, garden foliage, café steam and evening campus lamps. South Indian college locations, each one distinct. Refined ivory editorial serif with a restrained rose-gold glow; exact on-screen words, one text passage per scene, large and legible. No ribbons, no floating cards, no complex light trails, no random UI, no watermark.\nCHARACTERS: Adult Tamil Indian college student, about 22, warm medium-brown skin, slim adult oval face, soft dark-brown almond eyes, thick eyebrows, short wavy black hair with a neat side part, carefully trimmed moustache and short beard, natural adult proportions. Same face, age, moustache and beard in every scene. Indigo cotton shirt over ivory tee and dark trousers; final scenes use a simple ivory kurta. Adult Tamil Indian college student, about 21, warm medium-brown skin, graceful oval face, dark-brown almond eyes, gently arched brows, small red bindi, long black braid, reserved warm smile. Same face, age, braid and proportions in every scene. Elegant South Indian chudidhar: muted rose kurta, ivory dupatta, teal salwar; final scenes use an ivory-and-rose chudidhar.\nSCENE 5: Different location: quiet botanical college garden with a lotus pond, mossy bench and flowering trees. Supriya sits calmly on the bench with book and phone, rose-and-teal chudidhar and ivory dupatta clear. Ashok is not in this frame. Text in open foliage space: \"Srmt. Supriya\".\nLocation-specific atmosphere only: small chalk dust in classroom, paper motes in library, jasmine petals in garden, coffee steam at café, dry leaves at amphitheatre, distant lamp moths at night, soft sea spray on shore. 8-14 sparse tiny particles at varied depth; drift slowly only while the camera brakes. No confetti storm.\nNo ribbon. No complex transition implication. One location only; no other readable text.",
+      "image_prompt": "Portrait 9:16 premium pastel watercolor anime wedding invitation film, soft detailed brush texture and cinematic Indian college realism. Peach sunrise, dusty rose, indigo, sage and ivory palette; strong but delicate shafts through windows, garden foliage, café steam and evening campus lamps. South Indian college locations, each one distinct. Refined ivory editorial serif with a restrained rose-gold glow; exact on-screen words, one text passage per scene, large and legible. No ribbons, no floating cards, no complex light trails, no random UI, no watermark.\nCHARACTERS: Adult Tamil Indian college student, about 22, warm medium-brown skin, slim adult oval face, soft dark-brown almond eyes, thick eyebrows, short wavy black hair with a neat side part, carefully trimmed moustache and short beard, natural adult proportions. Same face, age, moustache and beard in every scene. Indigo cotton shirt over ivory tee and dark trousers; final scenes use a simple ivory kurta. Adult Tamil Indian college student, about 21, warm medium-brown skin, graceful oval face, dark-brown almond eyes, gently arched brows, small red bindi, long black braid, reserved warm smile. Same face, age, braid and proportions in every scene. Elegant South Indian chudidhar: muted rose kurta, ivory dupatta, teal salwar; final scenes use an ivory-and-rose chudidhar.\nSCENE 5: Different location: quiet botanical college garden with a lotus pond, mossy bench and flowering trees. Supriya sits calmly on the bench with book and phone, rose-and-teal chudidhar and ivory dupatta clear. Ashok is not in this frame. Text in open foliage space: \"Srmt. Supriya\".\nLocation-specific atmosphere only: small chalk dust in classroom, paper motes in library, jasmine petals in garden, coffee steam at café, dry leaves at amphitheatre, distant lamp moths at night, soft sea spray on shore. 8-14 sparse tiny particles at varied depth; drift slowly only while the camera brakes. No confetti storm.\nNo ribbon. No complex transition implication. One location only; no other readable text.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-5.jpg",
+      "image_request_id": "ct37gkhzxsrmy0d0xkvvd4ysmc",
+      "actual_input_path": "image-5-take-1-input.json",
+      "request_metadata": {
+        "id": "ct37gkhzxsrmy0d0xkvvd4ysmc",
+        "status": "succeeded",
+        "model": "openai/gpt-image-2.5-flare",
+        "imageReferences": 0,
+        "metrics": {
+          "image_output_count": 1,
+          "model_variant": "high",
+          "predict_time": 19.776931309,
+          "resolution_target": "9:16",
+          "total_time": 19.793163982
+        },
+        "error": null,
+        "data_removed": false,
+        "outputUrl": "https://replicate.delivery/xezq/cWVXC3SOu3LNJ9lWGhZFgW4o6hRCPVVOc1UBuD1FllUuVl0F/tmp5zwkk5jh.jpeg"
+      },
+      "text_fields": [
+        {
+          "role": "story_or_invitation",
+          "text": ""
+        }
+      ],
+      "selected_take": 1,
+      "review_note": "Selected text-only first take; representative frames reviewed, no retake."
+    },
+    {
+      "index": 6,
+      "name": "Café conversation",
+      "status": "generated-first-take",
+      "image_prompt_template": "Portrait 9:16 premium pastel watercolor anime wedding invitation film, soft detailed brush texture and cinematic Indian college realism. Peach sunrise, dusty rose, indigo, sage and ivory palette; strong but delicate shafts through windows, garden foliage, café steam and evening campus lamps. South Indian college locations, each one distinct. Refined ivory editorial serif with a restrained rose-gold glow; exact on-screen words, one text passage per scene, large and legible. No ribbons, no floating cards, no complex light trails, no random UI, no watermark.\nCHARACTERS: Adult Tamil Indian college student, about 22, warm medium-brown skin, slim adult oval face, soft dark-brown almond eyes, thick eyebrows, short wavy black hair with a neat side part, carefully trimmed moustache and short beard, natural adult proportions. Same face, age, moustache and beard in every scene. Indigo cotton shirt over ivory tee and dark trousers; final scenes use a simple ivory kurta. Adult Tamil Indian college student, about 21, warm medium-brown skin, graceful oval face, dark-brown almond eyes, gently arched brows, small red bindi, long black braid, reserved warm smile. Same face, age, braid and proportions in every scene. Elegant South Indian chudidhar: muted rose kurta, ivory dupatta, teal salwar; final scenes use an ivory-and-rose chudidhar.\nSCENE 6: Different location: warm campus café terrace at late afternoon, cane chairs, ceramic coffee cups, soft rising steam, potted areca plants and amber window reflections. The couple sit across one small table, still and smiling naturally, hands resting near notebooks. Text on a painted café wall: \"Every conversation felt like home.\"\nLocation-specific atmosphere only: small chalk dust in classroom, paper motes in library, jasmine petals in garden, coffee steam at café, dry leaves at amphitheatre, distant lamp moths at night, soft sea spray on shore. 8-14 sparse tiny particles at varied depth; drift slowly only while the camera brakes. No confetti storm.\nNo ribbon. No complex transition implication. One location only; no other readable text.",
+      "image_prompt": "Portrait 9:16 premium pastel watercolor anime wedding invitation film, soft detailed brush texture and cinematic Indian college realism. Peach sunrise, dusty rose, indigo, sage and ivory palette; strong but delicate shafts through windows, garden foliage, café steam and evening campus lamps. South Indian college locations, each one distinct. Refined ivory editorial serif with a restrained rose-gold glow; exact on-screen words, one text passage per scene, large and legible. No ribbons, no floating cards, no complex light trails, no random UI, no watermark.\nCHARACTERS: Adult Tamil Indian college student, about 22, warm medium-brown skin, slim adult oval face, soft dark-brown almond eyes, thick eyebrows, short wavy black hair with a neat side part, carefully trimmed moustache and short beard, natural adult proportions. Same face, age, moustache and beard in every scene. Indigo cotton shirt over ivory tee and dark trousers; final scenes use a simple ivory kurta. Adult Tamil Indian college student, about 21, warm medium-brown skin, graceful oval face, dark-brown almond eyes, gently arched brows, small red bindi, long black braid, reserved warm smile. Same face, age, braid and proportions in every scene. Elegant South Indian chudidhar: muted rose kurta, ivory dupatta, teal salwar; final scenes use an ivory-and-rose chudidhar.\nSCENE 6: Different location: warm campus café terrace at late afternoon, cane chairs, ceramic coffee cups, soft rising steam, potted areca plants and amber window reflections. The couple sit across one small table, still and smiling naturally, hands resting near notebooks. Text on a painted café wall: \"Every conversation felt like home.\"\nLocation-specific atmosphere only: small chalk dust in classroom, paper motes in library, jasmine petals in garden, coffee steam at café, dry leaves at amphitheatre, distant lamp moths at night, soft sea spray on shore. 8-14 sparse tiny particles at varied depth; drift slowly only while the camera brakes. No confetti storm.\nNo ribbon. No complex transition implication. One location only; no other readable text.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-6.jpg",
+      "image_request_id": "rjtbrtz8k9rmr0d0xkvttk3s9w",
+      "actual_input_path": "image-6-take-1-input.json",
+      "request_metadata": {
+        "id": "rjtbrtz8k9rmr0d0xkvttk3s9w",
+        "status": "succeeded",
+        "model": "openai/gpt-image-2.5-flare",
+        "imageReferences": 0,
+        "metrics": {
+          "image_output_count": 1,
+          "model_variant": "high",
+          "predict_time": 16.767259932,
+          "resolution_target": "9:16",
+          "total_time": 16.784759774
+        },
+        "error": null,
+        "data_removed": false,
+        "outputUrl": "https://replicate.delivery/xezq/IspfJHYZhpVJCCfCW0qurwiYY48jfFeUKjf1CV9AvssM8qS6C/tmpc_2seg9c.jpeg"
+      },
+      "text_fields": [
+        {
+          "role": "story_or_invitation",
+          "text": ""
+        }
+      ],
+      "selected_take": 1,
+      "review_note": "Selected text-only first take; representative frames reviewed, no retake."
+    },
+    {
+      "index": 7,
+      "name": "Garden promise",
+      "status": "generated-first-take",
+      "image_prompt_template": "Portrait 9:16 premium pastel watercolor anime wedding invitation film, soft detailed brush texture and cinematic Indian college realism. Peach sunrise, dusty rose, indigo, sage and ivory palette; strong but delicate shafts through windows, garden foliage, café steam and evening campus lamps. South Indian college locations, each one distinct. Refined ivory editorial serif with a restrained rose-gold glow; exact on-screen words, one text passage per scene, large and legible. No ribbons, no floating cards, no complex light trails, no random UI, no watermark.\nCHARACTERS: Adult Tamil Indian college student, about 22, warm medium-brown skin, slim adult oval face, soft dark-brown almond eyes, thick eyebrows, short wavy black hair with a neat side part, carefully trimmed moustache and short beard, natural adult proportions. Same face, age, moustache and beard in every scene. Indigo cotton shirt over ivory tee and dark trousers; final scenes use a simple ivory kurta. Adult Tamil Indian college student, about 21, warm medium-brown skin, graceful oval face, dark-brown almond eyes, gently arched brows, small red bindi, long black braid, reserved warm smile. Same face, age, braid and proportions in every scene. Elegant South Indian chudidhar: muted rose kurta, ivory dupatta, teal salwar; final scenes use an ivory-and-rose chudidhar.\nSCENE 7: Different location: open college jasmine garden at sunset with a stone path, low hedge, banyan silhouette and falling scattered jasmine petals. The couple stand still side by side, their hands gently joined; no walking. Text in clear sunset sky: \"Together, we chose forever.\"\nLocation-specific atmosphere only: small chalk dust in classroom, paper motes in library, jasmine petals in garden, coffee steam at café, dry leaves at amphitheatre, distant lamp moths at night, soft sea spray on shore. 8-14 sparse tiny particles at varied depth; drift slowly only while the camera brakes. No confetti storm.\nNo ribbon. No complex transition implication. One location only; no other readable text.",
+      "image_prompt": "Portrait 9:16 premium pastel watercolor anime wedding invitation film, soft detailed brush texture and cinematic Indian college realism. Peach sunrise, dusty rose, indigo, sage and ivory palette; strong but delicate shafts through windows, garden foliage, café steam and evening campus lamps. South Indian college locations, each one distinct. Refined ivory editorial serif with a restrained rose-gold glow; exact on-screen words, one text passage per scene, large and legible. No ribbons, no floating cards, no complex light trails, no random UI, no watermark.\nCHARACTERS: Adult Tamil Indian college student, about 22, warm medium-brown skin, slim adult oval face, soft dark-brown almond eyes, thick eyebrows, short wavy black hair with a neat side part, carefully trimmed moustache and short beard, natural adult proportions. Same face, age, moustache and beard in every scene. Indigo cotton shirt over ivory tee and dark trousers; final scenes use a simple ivory kurta. Adult Tamil Indian college student, about 21, warm medium-brown skin, graceful oval face, dark-brown almond eyes, gently arched brows, small red bindi, long black braid, reserved warm smile. Same face, age, braid and proportions in every scene. Elegant South Indian chudidhar: muted rose kurta, ivory dupatta, teal salwar; final scenes use an ivory-and-rose chudidhar.\nSCENE 7: Different location: open college jasmine garden at sunset with a stone path, low hedge, banyan silhouette and falling scattered jasmine petals. The couple stand still side by side, their hands gently joined; no walking. Text in clear sunset sky: \"Together, we chose forever.\"\nLocation-specific atmosphere only: small chalk dust in classroom, paper motes in library, jasmine petals in garden, coffee steam at café, dry leaves at amphitheatre, distant lamp moths at night, soft sea spray on shore. 8-14 sparse tiny particles at varied depth; drift slowly only while the camera brakes. No confetti storm.\nNo ribbon. No complex transition implication. One location only; no other readable text.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-7.jpg",
+      "image_request_id": "qx21rhj6s1rmy0d0xpev91g7b4",
+      "actual_input_path": "image-7-take-1-input.json",
+      "request_metadata": {
+        "id": "qx21rhj6s1rmy0d0xpev91g7b4",
+        "status": "succeeded",
+        "model": "openai/gpt-image-2.5-flare",
+        "imageReferences": 0,
+        "metrics": {
+          "image_output_count": 1,
+          "model_variant": "high",
+          "predict_time": 19.969138814,
+          "resolution_target": "9:16",
+          "total_time": 20.022104892
+        },
+        "error": null,
+        "data_removed": false,
+        "outputUrl": "https://replicate.delivery/xezq/ZPXSUXShXpJrGd3fXirTlGnR40aaSZ0I9YkBefW7melqDgJdB/tmpv8num2su.jpeg"
+      },
+      "text_fields": [
+        {
+          "role": "story_or_invitation",
+          "text": ""
+        }
+      ],
+      "selected_take": 1,
+      "review_note": "Selected text-only first take; representative frames reviewed, no retake."
+    },
+    {
+      "index": 8,
+      "name": "Amphitheatre invitation",
+      "status": "generated-first-take",
+      "image_prompt_template": "Portrait 9:16 premium pastel watercolor anime wedding invitation film, soft detailed brush texture and cinematic Indian college realism. Peach sunrise, dusty rose, indigo, sage and ivory palette; strong but delicate shafts through windows, garden foliage, café steam and evening campus lamps. South Indian college locations, each one distinct. Refined ivory editorial serif with a restrained rose-gold glow; exact on-screen words, one text passage per scene, large and legible. No ribbons, no floating cards, no complex light trails, no random UI, no watermark.\nCHARACTERS: Adult Tamil Indian college student, about 22, warm medium-brown skin, slim adult oval face, soft dark-brown almond eyes, thick eyebrows, short wavy black hair with a neat side part, carefully trimmed moustache and short beard, natural adult proportions. Same face, age, moustache and beard in every scene. Indigo cotton shirt over ivory tee and dark trousers; final scenes use a simple ivory kurta. Adult Tamil Indian college student, about 21, warm medium-brown skin, graceful oval face, dark-brown almond eyes, gently arched brows, small red bindi, long black braid, reserved warm smile. Same face, age, braid and proportions in every scene. Elegant South Indian chudidhar: muted rose kurta, ivory dupatta, teal salwar; final scenes use an ivory-and-rose chudidhar.\nSCENE 8: Different location: empty open-air campus amphitheatre at blue hour, curved stone seating, small warm practical lamps, projector glow on a single fixed backdrop panel. Couple sit still together on one central step. Text on the illuminated backdrop: \"Sounder & Mohan Family Wedding Invitation\".\nLocation-specific atmosphere only: small chalk dust in classroom, paper motes in library, jasmine petals in garden, coffee steam at café, dry leaves at amphitheatre, distant lamp moths at night, soft sea spray on shore. 8-14 sparse tiny particles at varied depth; drift slowly only while the camera brakes. No confetti storm.\nNo ribbon. No complex transition implication. One location only; no other readable text.",
+      "image_prompt": "Portrait 9:16 premium pastel watercolor anime wedding invitation film, soft detailed brush texture and cinematic Indian college realism. Peach sunrise, dusty rose, indigo, sage and ivory palette; strong but delicate shafts through windows, garden foliage, café steam and evening campus lamps. South Indian college locations, each one distinct. Refined ivory editorial serif with a restrained rose-gold glow; exact on-screen words, one text passage per scene, large and legible. No ribbons, no floating cards, no complex light trails, no random UI, no watermark.\nCHARACTERS: Adult Tamil Indian college student, about 22, warm medium-brown skin, slim adult oval face, soft dark-brown almond eyes, thick eyebrows, short wavy black hair with a neat side part, carefully trimmed moustache and short beard, natural adult proportions. Same face, age, moustache and beard in every scene. Indigo cotton shirt over ivory tee and dark trousers; final scenes use a simple ivory kurta. Adult Tamil Indian college student, about 21, warm medium-brown skin, graceful oval face, dark-brown almond eyes, gently arched brows, small red bindi, long black braid, reserved warm smile. Same face, age, braid and proportions in every scene. Elegant South Indian chudidhar: muted rose kurta, ivory dupatta, teal salwar; final scenes use an ivory-and-rose chudidhar.\nSCENE 8: Different location: empty open-air campus amphitheatre at blue hour, curved stone seating, small warm practical lamps, projector glow on a single fixed backdrop panel. Couple sit still together on one central step. Text on the illuminated backdrop: \"Sounder & Mohan Family Wedding Invitation\".\nLocation-specific atmosphere only: small chalk dust in classroom, paper motes in library, jasmine petals in garden, coffee steam at café, dry leaves at amphitheatre, distant lamp moths at night, soft sea spray on shore. 8-14 sparse tiny particles at varied depth; drift slowly only while the camera brakes. No confetti storm.\nNo ribbon. No complex transition implication. One location only; no other readable text.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-8.jpg",
+      "image_request_id": "6x1na9zx99rmw0d0xper3ch1e4",
+      "actual_input_path": "image-8-take-1-input.json",
+      "request_metadata": {
+        "id": "6x1na9zx99rmw0d0xper3ch1e4",
+        "status": "succeeded",
+        "model": "openai/gpt-image-2.5-flare",
+        "imageReferences": 0,
+        "metrics": {
+          "image_output_count": 1,
+          "model_variant": "high",
+          "predict_time": 18.736296654,
+          "resolution_target": "9:16",
+          "total_time": 18.758454929
+        },
+        "error": null,
+        "data_removed": false,
+        "outputUrl": "https://replicate.delivery/xezq/vVSgVgQeNkX5CCZdw79UPrJRvWHVTffohY2wv9tQcCsPDwkuA/tmp546vs_ig.jpeg"
+      },
+      "text_fields": [
+        {
+          "role": "story_or_invitation",
+          "text": ""
+        }
+      ],
+      "selected_take": 1,
+      "review_note": "Selected text-only first take; representative frames reviewed, no retake."
+    },
+    {
+      "index": 9,
+      "name": "Beach reception",
+      "status": "generated-first-take",
+      "image_prompt_template": "Portrait 9:16 premium pastel watercolor anime wedding invitation film, soft detailed brush texture and cinematic Indian college realism. Peach sunrise, dusty rose, indigo, sage and ivory palette; strong but delicate shafts through windows, garden foliage, café steam and evening campus lamps. South Indian college locations, each one distinct. Refined ivory editorial serif with a restrained rose-gold glow; exact on-screen words, one text passage per scene, large and legible. No ribbons, no floating cards, no complex light trails, no random UI, no watermark.\nCHARACTERS: Adult Tamil Indian college student, about 22, warm medium-brown skin, slim adult oval face, soft dark-brown almond eyes, thick eyebrows, short wavy black hair with a neat side part, carefully trimmed moustache and short beard, natural adult proportions. Same face, age, moustache and beard in every scene. Indigo cotton shirt over ivory tee and dark trousers; final scenes use a simple ivory kurta. Adult Tamil Indian college student, about 21, warm medium-brown skin, graceful oval face, dark-brown almond eyes, gently arched brows, small red bindi, long black braid, reserved warm smile. Same face, age, braid and proportions in every scene. Elegant South Indian chudidhar: muted rose kurta, ivory dupatta, teal salwar; final scenes use an ivory-and-rose chudidhar.\nSCENE 9: Different location: refined South Indian beach reception at late sunset, ivory canopy, jasmine strings, brass lamps, calm shoreline and a single upright reception sign on a teak easel. No duplicate signs. Couple stand still at a respectful distance. Exact sign text: \"Reception - Dinner\\n6th February 2020\\n7:30 p.m. onwards\".\nLocation-specific atmosphere only: small chalk dust in classroom, paper motes in library, jasmine petals in garden, coffee steam at café, dry leaves at amphitheatre, distant lamp moths at night, soft sea spray on shore. 8-14 sparse tiny particles at varied depth; drift slowly only while the camera brakes. No confetti storm.\nNo ribbon. No complex transition implication. One location only; no other readable text.",
+      "image_prompt": "Portrait 9:16 premium pastel watercolor anime wedding invitation film, soft detailed brush texture and cinematic Indian college realism. Peach sunrise, dusty rose, indigo, sage and ivory palette; strong but delicate shafts through windows, garden foliage, café steam and evening campus lamps. South Indian college locations, each one distinct. Refined ivory editorial serif with a restrained rose-gold glow; exact on-screen words, one text passage per scene, large and legible. No ribbons, no floating cards, no complex light trails, no random UI, no watermark.\nCHARACTERS: Adult Tamil Indian college student, about 22, warm medium-brown skin, slim adult oval face, soft dark-brown almond eyes, thick eyebrows, short wavy black hair with a neat side part, carefully trimmed moustache and short beard, natural adult proportions. Same face, age, moustache and beard in every scene. Indigo cotton shirt over ivory tee and dark trousers; final scenes use a simple ivory kurta. Adult Tamil Indian college student, about 21, warm medium-brown skin, graceful oval face, dark-brown almond eyes, gently arched brows, small red bindi, long black braid, reserved warm smile. Same face, age, braid and proportions in every scene. Elegant South Indian chudidhar: muted rose kurta, ivory dupatta, teal salwar; final scenes use an ivory-and-rose chudidhar.\nSCENE 9: Different location: refined South Indian beach reception at late sunset, ivory canopy, jasmine strings, brass lamps, calm shoreline and a single upright reception sign on a teak easel. No duplicate signs. Couple stand still at a respectful distance. Exact sign text: \"Reception - Dinner\\n6th February 2020\\n7:30 p.m. onwards\".\nLocation-specific atmosphere only: small chalk dust in classroom, paper motes in library, jasmine petals in garden, coffee steam at café, dry leaves at amphitheatre, distant lamp moths at night, soft sea spray on shore. 8-14 sparse tiny particles at varied depth; drift slowly only while the camera brakes. No confetti storm.\nNo ribbon. No complex transition implication. One location only; no other readable text.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-9.jpg",
+      "image_request_id": "1e3qqzz3f5rmw0d0xpfanase70",
+      "actual_input_path": "image-9-take-1-input.json",
+      "request_metadata": {
+        "id": "1e3qqzz3f5rmw0d0xpfanase70",
+        "status": "succeeded",
+        "model": "openai/gpt-image-2.5-flare",
+        "imageReferences": 0,
+        "metrics": {
+          "image_output_count": 1,
+          "model_variant": "high",
+          "predict_time": 17.296723852,
+          "resolution_target": "9:16",
+          "total_time": 17.316086218
+        },
+        "error": null,
+        "data_removed": false,
+        "outputUrl": "https://replicate.delivery/xezq/QOH8SeeAkHgol0t77Wfh54Gf0SQtVVm80VOIXEQnNEIHKgJdB/tmprnjqu6lw.jpeg"
+      },
+      "text_fields": [
+        {
+          "role": "story_or_invitation",
+          "text": "Reception - Dinner\\n6th February 2020\\n7:30 p.m. onwards"
+        }
+      ],
+      "selected_take": 1,
+      "review_note": "Selected text-only first take; representative frames reviewed, no retake."
+    },
+    {
+      "index": 10,
+      "name": "Wedding details",
+      "status": "generated-first-take",
+      "image_prompt_template": "Portrait 9:16 premium pastel watercolor anime wedding invitation film, soft detailed brush texture and cinematic Indian college realism. Peach sunrise, dusty rose, indigo, sage and ivory palette; strong but delicate shafts through windows, garden foliage, café steam and evening campus lamps. South Indian college locations, each one distinct. Refined ivory editorial serif with a restrained rose-gold glow; exact on-screen words, one text passage per scene, large and legible. No ribbons, no floating cards, no complex light trails, no random UI, no watermark.\nCHARACTERS: Adult Tamil Indian college student, about 22, warm medium-brown skin, slim adult oval face, soft dark-brown almond eyes, thick eyebrows, short wavy black hair with a neat side part, carefully trimmed moustache and short beard, natural adult proportions. Same face, age, moustache and beard in every scene. Indigo cotton shirt over ivory tee and dark trousers; final scenes use a simple ivory kurta. Adult Tamil Indian college student, about 21, warm medium-brown skin, graceful oval face, dark-brown almond eyes, gently arched brows, small red bindi, long black braid, reserved warm smile. Same face, age, braid and proportions in every scene. Elegant South Indian chudidhar: muted rose kurta, ivory dupatta, teal salwar; final scenes use an ivory-and-rose chudidhar.\nSCENE 10: Different location: dawn beach mandap with a simple ivory linen canopy, marigold-and-jasmine decor, low brass lamps and sea horizon. One fixed invitation board on the side, couple stand still in ivory kurta and ivory-rose chudidhar. Exact board text: \"Wedding Ceremony\\n7th February 2020\\n8:00 a.m.\\nLeela Channaiah Kalyana Mandapa\\nVontikoppal, Mysore\".\nLocation-specific atmosphere only: small chalk dust in classroom, paper motes in library, jasmine petals in garden, coffee steam at café, dry leaves at amphitheatre, distant lamp moths at night, soft sea spray on shore. 8-14 sparse tiny particles at varied depth; drift slowly only while the camera brakes. No confetti storm.\nNo ribbon. No complex transition implication. One location only; no other readable text.",
+      "image_prompt": "Portrait 9:16 premium pastel watercolor anime wedding invitation film, soft detailed brush texture and cinematic Indian college realism. Peach sunrise, dusty rose, indigo, sage and ivory palette; strong but delicate shafts through windows, garden foliage, café steam and evening campus lamps. South Indian college locations, each one distinct. Refined ivory editorial serif with a restrained rose-gold glow; exact on-screen words, one text passage per scene, large and legible. No ribbons, no floating cards, no complex light trails, no random UI, no watermark.\nCHARACTERS: Adult Tamil Indian college student, about 22, warm medium-brown skin, slim adult oval face, soft dark-brown almond eyes, thick eyebrows, short wavy black hair with a neat side part, carefully trimmed moustache and short beard, natural adult proportions. Same face, age, moustache and beard in every scene. Indigo cotton shirt over ivory tee and dark trousers; final scenes use a simple ivory kurta. Adult Tamil Indian college student, about 21, warm medium-brown skin, graceful oval face, dark-brown almond eyes, gently arched brows, small red bindi, long black braid, reserved warm smile. Same face, age, braid and proportions in every scene. Elegant South Indian chudidhar: muted rose kurta, ivory dupatta, teal salwar; final scenes use an ivory-and-rose chudidhar.\nSCENE 10: Different location: dawn beach mandap with a simple ivory linen canopy, marigold-and-jasmine decor, low brass lamps and sea horizon. One fixed invitation board on the side, couple stand still in ivory kurta and ivory-rose chudidhar. Exact board text: \"Wedding Ceremony\\n7th February 2020\\n8:00 a.m.\\nLeela Channaiah Kalyana Mandapa\\nVontikoppal, Mysore\".\nLocation-specific atmosphere only: small chalk dust in classroom, paper motes in library, jasmine petals in garden, coffee steam at café, dry leaves at amphitheatre, distant lamp moths at night, soft sea spray on shore. 8-14 sparse tiny particles at varied depth; drift slowly only while the camera brakes. No confetti storm.\nNo ribbon. No complex transition implication. One location only; no other readable text.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-10.jpg",
+      "image_request_id": "0t2q1s4w4drmr0d0xpfvvtyv3g",
+      "actual_input_path": "image-10-take-1-input.json",
+      "request_metadata": {
+        "id": "0t2q1s4w4drmr0d0xpfvvtyv3g",
+        "status": "succeeded",
+        "model": "openai/gpt-image-2.5-flare",
+        "imageReferences": 0,
+        "metrics": {
+          "image_output_count": 1,
+          "model_variant": "high",
+          "predict_time": 20.581614666,
+          "resolution_target": "9:16",
+          "total_time": 20.600620449
+        },
+        "error": null,
+        "data_removed": false,
+        "outputUrl": "https://replicate.delivery/xezq/EsSdaZkU3s4sIlefvRyGe0eIoQlil1soeEveGRjTTs4A1Am0F/tmplnz7yiq4.jpeg"
+      },
+      "text_fields": [
+        {
+          "role": "story_or_invitation",
+          "text": "Wedding Ceremony\\n7th February 2020\\n8:00 a.m.\\nLeela Channaiah Kalyana Mandapa\\nVontikoppal, Mysore"
+        }
+      ],
+      "selected_take": 1,
+      "review_note": "Selected text-only first take; representative frames reviewed, no retake."
+    },
+    {
+      "index": 11,
+      "name": "Blessings and date",
+      "status": "generated-first-take",
+      "image_prompt_template": "Portrait 9:16 premium pastel watercolor anime wedding invitation film, soft detailed brush texture and cinematic Indian college realism. Peach sunrise, dusty rose, indigo, sage and ivory palette; strong but delicate shafts through windows, garden foliage, café steam and evening campus lamps. South Indian college locations, each one distinct. Refined ivory editorial serif with a restrained rose-gold glow; exact on-screen words, one text passage per scene, large and legible. No ribbons, no floating cards, no complex light trails, no random UI, no watermark.\nCHARACTERS: Adult Tamil Indian college student, about 22, warm medium-brown skin, slim adult oval face, soft dark-brown almond eyes, thick eyebrows, short wavy black hair with a neat side part, carefully trimmed moustache and short beard, natural adult proportions. Same face, age, moustache and beard in every scene. Indigo cotton shirt over ivory tee and dark trousers; final scenes use a simple ivory kurta. Adult Tamil Indian college student, about 21, warm medium-brown skin, graceful oval face, dark-brown almond eyes, gently arched brows, small red bindi, long black braid, reserved warm smile. Same face, age, braid and proportions in every scene. Elegant South Indian chudidhar: muted rose kurta, ivory dupatta, teal salwar; final scenes use an ivory-and-rose chudidhar.\nSCENE 11: Different location: evening terrace overlooking the campus clock tower, warm lamp pools, a single framed save-the-date plaque, no extra board. Couple stand still together in the foreground. Exact plaque text: \"With Love & Blessings\\nMr. BalaSubramanian\\nMrs. Jeevitha\\nBaby. Yazhini & Suhas\\nSAVE THE DATE · 6 & 7 FEBRUARY 2020\".\nLocation-specific atmosphere only: small chalk dust in classroom, paper motes in library, jasmine petals in garden, coffee steam at café, dry leaves at amphitheatre, distant lamp moths at night, soft sea spray on shore. 8-14 sparse tiny particles at varied depth; drift slowly only while the camera brakes. No confetti storm.\nNo ribbon. No complex transition implication. One location only; no other readable text.",
+      "image_prompt": "Portrait 9:16 premium pastel watercolor anime wedding invitation film, soft detailed brush texture and cinematic Indian college realism. Peach sunrise, dusty rose, indigo, sage and ivory palette; strong but delicate shafts through windows, garden foliage, café steam and evening campus lamps. South Indian college locations, each one distinct. Refined ivory editorial serif with a restrained rose-gold glow; exact on-screen words, one text passage per scene, large and legible. No ribbons, no floating cards, no complex light trails, no random UI, no watermark.\nCHARACTERS: Adult Tamil Indian college student, about 22, warm medium-brown skin, slim adult oval face, soft dark-brown almond eyes, thick eyebrows, short wavy black hair with a neat side part, carefully trimmed moustache and short beard, natural adult proportions. Same face, age, moustache and beard in every scene. Indigo cotton shirt over ivory tee and dark trousers; final scenes use a simple ivory kurta. Adult Tamil Indian college student, about 21, warm medium-brown skin, graceful oval face, dark-brown almond eyes, gently arched brows, small red bindi, long black braid, reserved warm smile. Same face, age, braid and proportions in every scene. Elegant South Indian chudidhar: muted rose kurta, ivory dupatta, teal salwar; final scenes use an ivory-and-rose chudidhar.\nSCENE 11: Different location: evening terrace overlooking the campus clock tower, warm lamp pools, a single framed save-the-date plaque, no extra board. Couple stand still together in the foreground. Exact plaque text: \"With Love & Blessings\\nMr. BalaSubramanian\\nMrs. Jeevitha\\nBaby. Yazhini & Suhas\\nSAVE THE DATE · 6 & 7 FEBRUARY 2020\".\nLocation-specific atmosphere only: small chalk dust in classroom, paper motes in library, jasmine petals in garden, coffee steam at café, dry leaves at amphitheatre, distant lamp moths at night, soft sea spray on shore. 8-14 sparse tiny particles at varied depth; drift slowly only while the camera brakes. No confetti storm.\nNo ribbon. No complex transition implication. One location only; no other readable text.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-11.jpg",
+      "image_request_id": "ckxnzzaxpsrmw0d0xpg8t2pej0",
+      "actual_input_path": "image-11-take-1-input.json",
+      "request_metadata": {
+        "id": "ckxnzzaxpsrmw0d0xpg8t2pej0",
+        "status": "succeeded",
+        "model": "openai/gpt-image-2.5-flare",
+        "imageReferences": 0,
+        "metrics": {
+          "image_output_count": 1,
+          "model_variant": "high",
+          "predict_time": 20.758251475,
+          "resolution_target": "9:16",
+          "total_time": 20.774165096
+        },
+        "error": null,
+        "data_removed": false,
+        "outputUrl": "https://replicate.delivery/xezq/G5uBkIWxFT7CM9cvIkUctllH1Ya9sZ51lYevTLNmw1fFEYSXA/tmpdji6fmwd.jpeg"
+      },
+      "text_fields": [
+        {
+          "role": "story_or_invitation",
+          "text": "With Love & Blessings\\nMr. BalaSubramanian\\nMrs. Jeevitha\\nBaby. Yazhini & Suhas\\nSAVE THE DATE · 6 & 7 FEBRUARY 2020"
+        }
+      ],
+      "selected_take": 1,
+      "review_note": "Selected text-only first take; representative frames reviewed, no retake."
+    },
+    {
+      "index": 12,
+      "name": "Forever",
+      "status": "video-derived-first-take",
+      "image_prompt": "Portrait 9:16 premium pastel watercolor anime wedding invitation film, soft detailed brush texture and cinematic Indian college realism. Peach sunrise, dusty rose, indigo, sage and ivory palette; strong but delicate shafts through windows, garden foliage, café steam and evening campus lamps. South Indian college locations, each one distinct. Refined ivory editorial serif with a restrained rose-gold glow; exact on-screen words, one text passage per scene, large and legible. No ribbons, no floating cards, no complex light trails, no random UI, no watermark.\nCHARACTERS: Adult Tamil Indian college student, about 22, warm medium-brown skin, slim adult oval face, soft dark-brown almond eyes, thick eyebrows, short wavy black hair with a neat side part, carefully trimmed moustache and short beard, natural adult proportions. Same face, age, moustache and beard in every scene. Indigo cotton shirt over ivory tee and dark trousers; final scenes use a simple ivory kurta. Adult Tamil Indian college student, about 21, warm medium-brown skin, graceful oval face, dark-brown almond eyes, gently arched brows, small red bindi, long black braid, reserved warm smile. Same face, age, braid and proportions in every scene. Elegant South Indian chudidhar: muted rose kurta, ivory dupatta, teal salwar; final scenes use an ivory-and-rose chudidhar.\nSCENE 12: Intimate final night shoreline portrait. The SAME couple in ivory kurta and ivory-rose chudidhar stand still, foreheads gently touching, joined hands visible; no kiss or walking. Moonlit sea, distant lamps, sparse soft spray. One small plaque at lower right only. Exact text in the open sky: \"From a profile in a classroom to a life in our hands — we found forever.\"\nLocation-specific atmosphere only: small chalk dust in classroom, paper motes in library, jasmine petals in garden, coffee steam at café, dry leaves at amphitheatre, distant lamp moths at night, soft sea spray on shore. 8-14 sparse tiny particles at varied depth; drift slowly only while the camera brakes. No confetti storm.\nNo ribbon. No complex transition implication. One location only; no other readable text.",
+      "image_prompt_template": "Portrait 9:16 premium pastel watercolor anime wedding invitation film, soft detailed brush texture and cinematic Indian college realism. Peach sunrise, dusty rose, indigo, sage and ivory palette; strong but delicate shafts through windows, garden foliage, café steam and evening campus lamps. South Indian college locations, each one distinct. Refined ivory editorial serif with a restrained rose-gold glow; exact on-screen words, one text passage per scene, large and legible. No ribbons, no floating cards, no complex light trails, no random UI, no watermark.\nCHARACTERS: Adult Tamil Indian college student, about 22, warm medium-brown skin, slim adult oval face, soft dark-brown almond eyes, thick eyebrows, short wavy black hair with a neat side part, carefully trimmed moustache and short beard, natural adult proportions. Same face, age, moustache and beard in every scene. Indigo cotton shirt over ivory tee and dark trousers; final scenes use a simple ivory kurta. Adult Tamil Indian college student, about 21, warm medium-brown skin, graceful oval face, dark-brown almond eyes, gently arched brows, small red bindi, long black braid, reserved warm smile. Same face, age, braid and proportions in every scene. Elegant South Indian chudidhar: muted rose kurta, ivory dupatta, teal salwar; final scenes use an ivory-and-rose chudidhar.\nSCENE 12: Intimate final night shoreline portrait. The SAME couple in ivory kurta and ivory-rose chudidhar stand still, foreheads gently touching, joined hands visible; no kiss or walking. Moonlit sea, distant lamps, sparse soft spray. One small plaque at lower right only. Exact text in the open sky: \"From a profile in a classroom to a life in our hands — we found forever.\"\nLocation-specific atmosphere only: small chalk dust in classroom, paper motes in library, jasmine petals in garden, coffee steam at café, dry leaves at amphitheatre, distant lamp moths at night, soft sea spray on shore. 8-14 sparse tiny particles at varied depth; drift slowly only while the camera brakes. No confetti storm.\nNo ribbon. No complex transition implication. One location only; no other readable text.",
+      "image_path": "image-12.jpg",
+      "reason": "Avoid competing independent board/gateway layouts. Keep one date board from scene 11 throughout.",
+      "text_fields": [
+        {
+          "role": "story_or_invitation",
+          "text": ""
+        }
+      ],
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      }
+    }
+  ],
+  "clips": [
+    {
+      "index": 1,
+      "from": 1,
+      "to": 2,
+      "duration": 5,
+      "prompt": "0.00-0.65s: high distant campus and full sky. 0.65-1.85s: accelerate forward and down along the visible quadrangle axis toward the terrace desk. 1.85-2.45s: pass the edge of the terrace canopy, columns whip past frame edges. 2.45-5.00s: level out and brake into a small continued push toward the classroom final frame; campus remains one coherent place.",
+      "id": "clip-01",
+      "status": "generated-first-take",
+      "camera": "Forward-down dive, then continuing slow push",
+      "video_prompt_template": "Portrait 9:16 premium pastel watercolor anime Tamil college romance. Exact FIRST FRAME and exact LAST FRAME are pinned. Preserve the same young adult Tamil couple: Ashok with trimmed moustache and short beard; Supriya with long braid and South Indian chudidhar. Stillness is central: planted feet, only small blinks, breath, eye shifts or hand motion. Location-specific atmosphere only: small chalk dust in classroom, paper motes in library, jasmine petals in garden, coffee steam at café, dry leaves at amphitheatre, distant lamp moths at night, soft sea spray on shore. 8-14 sparse tiny particles at varied depth; drift slowly only while the camera brakes. No confetti storm. Use only the simple master-template pivot or ease-out described below. No forward-backward wandering, no ribbon, no complex transition, no walking, no face duplication, no text duplication, no fade, no morphing. Existing text remains fixed, clear and legible.\n\nSHOT 1 TO 2: 0.00-0.65s: high distant campus and full sky. 0.65-1.85s: accelerate forward and down along the visible quadrangle axis toward the terrace desk. 1.85-2.45s: pass the edge of the terrace canopy, columns whip past frame edges. 2.45-5.00s: level out and brake into a small continued push toward the classroom final frame; campus remains one coherent place. Destination: Bright sunlit college classroom with tall windows, chalkboard, wooden desks and soft chalk dust. Ashok sits still by a window holding a simple phone; a small unbranded portrait of Supriya is visible on the screen. No fake social UI or extra text. Text on the classroom wall’s clean negative space: \"A quiet scroll. A familiar smile.\"",
+      "video_prompt": "Portrait 9:16 premium pastel watercolor anime Tamil college romance. Exact FIRST FRAME and exact LAST FRAME are pinned. Preserve the same young adult Tamil couple: Ashok with trimmed moustache and short beard; Supriya with long braid and South Indian chudidhar. Stillness is central: planted feet, only small blinks, breath, eye shifts or hand motion. Location-specific atmosphere only: small chalk dust in classroom, paper motes in library, jasmine petals in garden, coffee steam at café, dry leaves at amphitheatre, distant lamp moths at night, soft sea spray on shore. 8-14 sparse tiny particles at varied depth; drift slowly only while the camera brakes. No confetti storm. Use only the simple master-template pivot or ease-out described below. No forward-backward wandering, no ribbon, no complex transition, no walking, no face duplication, no text duplication, no fade, no morphing. Existing text remains fixed, clear and legible.\n\nSHOT 1 TO 2: 0.00-0.65s: high distant campus and full sky. 0.65-1.85s: accelerate forward and down along the visible quadrangle axis toward the terrace desk. 1.85-2.45s: pass the edge of the terrace canopy, columns whip past frame edges. 2.45-5.00s: level out and brake into a small continued push toward the classroom final frame; campus remains one coherent place. Destination: Bright sunlit college classroom with tall windows, chalkboard, wooden desks and soft chalk dust. Ashok sits still by a window holding a simple phone; a small unbranded portrait of Supriya is visible on the screen. No fake social UI or extra text. Text on the classroom wall’s clean negative space: \"A quiet scroll. A familiar smile.\"",
+      "video_path": "clip-1.mp4",
+      "final_frame_path": "clip-1-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "scene-image",
+          "scene": 1
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 2
+        },
+        "interior_keyframes": []
+      },
+      "request_metadata": {
+        "requestId": "5bfd394f-781e-96c5-b9d0-471a1e054bdb",
+        "status": "done",
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "usage": {
+          "cost_in_usd_ticks": 7200000000
+        },
+        "outputUrl": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-5bfd394f-781e-96c5-b9d0-471a1e054bdb.mp4"
+      },
+      "selected_take": 1,
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "121"
+          }
+        ],
+        "format": {
+          "duration": "5.042000"
+        }
+      },
+      "actual_input": {
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "aspect_ratio": "9:16",
+        "resolution": "720p",
+        "firstImage": "output/socialmedia-college-anime-v2/clip-1-take-1-first.jpg",
+        "lastImage": "output/socialmedia-college-anime-v2/clip-1-take-1-last.jpg",
+        "firstImageSha256": "b0fb780c78b70bbe89cb42be818cfcd64b719a50714ff57f66e7ea635365d308",
+        "lastImageSha256": "3d3f0e97d3345b944355396eef30e0aa9d4e6b0af202980801eca70b07320d36",
+        "keyframes": [],
+        "sourceVideoFramesSent": false
+      },
+      "review_note": "First take selected; no creative retake.",
+      "timeline": {
+        "start_seconds": 0,
+        "end_seconds": 5.041666666666667
+      }
+    },
+    {
+      "index": 2,
+      "from": 2,
+      "to": 3,
+      "duration": 4,
+      "status": "generated-first-take",
+      "camera": "LEFT 90-degree pivot; tiny counterclockwise arc at constant subject distance",
+      "video_prompt_template": "Portrait 9:16 premium pastel watercolor anime Tamil college romance. Exact FIRST FRAME and exact LAST FRAME are pinned. Preserve the same young adult Tamil couple: Ashok with trimmed moustache and short beard; Supriya with long braid and South Indian chudidhar. Stillness is central: planted feet, only small blinks, breath, eye shifts or hand motion. Location-specific atmosphere only: small chalk dust in classroom, paper motes in library, jasmine petals in garden, coffee steam at café, dry leaves at amphitheatre, distant lamp moths at night, soft sea spray on shore. 8-14 sparse tiny particles at varied depth; drift slowly only while the camera brakes. No confetti storm. Use only the simple master-template pivot or ease-out described below. No forward-backward wandering, no ribbon, no complex transition, no walking, no face duplication, no text duplication, no fade, no morphing. Existing text remains fixed, clear and legible.\n\nSHOT 2 TO 3: Execute a clean LEFT 90-degree pivot from the classroom phone composition into the library’s sunlit shelf aisle. No doorway tunnel, no cut, no dissolve. Keep the phone and Ashok’s identity continuous; settle with a tiny arc at fixed distance. Destination: Different location: old college library aisle with tall book shelves, ladder rails, sunbeams and suspended paper motes. Ashok stands still beside a reading table, softly smiling down at the same phone, surrounded by books. Text in a softly lit shelf gap: \"One year. One beautiful hello.\"",
+      "video_prompt": "Portrait 9:16 premium pastel watercolor anime Tamil college romance. Exact FIRST FRAME and exact LAST FRAME are pinned. Preserve the same young adult Tamil couple: Ashok with trimmed moustache and short beard; Supriya with long braid and South Indian chudidhar. Stillness is central: planted feet, only small blinks, breath, eye shifts or hand motion. Location-specific atmosphere only: small chalk dust in classroom, paper motes in library, jasmine petals in garden, coffee steam at café, dry leaves at amphitheatre, distant lamp moths at night, soft sea spray on shore. 8-14 sparse tiny particles at varied depth; drift slowly only while the camera brakes. No confetti storm. Use only the simple master-template pivot or ease-out described below. No forward-backward wandering, no ribbon, no complex transition, no walking, no face duplication, no text duplication, no fade, no morphing. Existing text remains fixed, clear and legible.\n\nSHOT 2 TO 3: Execute a clean LEFT 90-degree pivot from the classroom phone composition into the library’s sunlit shelf aisle. No doorway tunnel, no cut, no dissolve. Keep the phone and Ashok’s identity continuous; settle with a tiny arc at fixed distance. Destination: Different location: old college library aisle with tall book shelves, ladder rails, sunbeams and suspended paper motes. Ashok stands still beside a reading table, softly smiling down at the same phone, surrounded by books. Text in a softly lit shelf gap: \"One year. One beautiful hello.\"",
+      "video_path": "clip-2.mp4",
+      "final_frame_path": "clip-2-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 1
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 3
+        }
+      },
+      "prompt": "Execute a clean LEFT 90-degree pivot from the classroom phone composition into the library’s sunlit shelf aisle. No doorway tunnel, no cut, no dissolve. Keep the phone and Ashok’s identity continuous; settle with a tiny arc at fixed distance.",
+      "request_metadata": {
+        "requestId": "fc28d42b-4323-96a3-82de-439ce0ae360a",
+        "status": "done",
+        "model": "grok-imagine-video-1.5",
+        "duration": 4,
+        "usage": {
+          "cost_in_usd_ticks": 5800000000
+        },
+        "outputUrl": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-fc28d42b-4323-96a3-82de-439ce0ae360a.mp4"
+      },
+      "selected_take": 1,
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "97"
+          }
+        ],
+        "format": {
+          "duration": "4.042000"
+        }
+      },
+      "actual_input": {
+        "model": "grok-imagine-video-1.5",
+        "duration": 4,
+        "aspect_ratio": "9:16",
+        "resolution": "720p",
+        "firstImage": "output/socialmedia-college-anime-v2/clip-2-take-1-first.jpg",
+        "lastImage": "output/socialmedia-college-anime-v2/clip-2-take-1-last.jpg",
+        "firstImageSha256": "db9dbc830c24919a59cf21afae1e462f29b68dfb6ec393de7d20cf73cc0273b4",
+        "lastImageSha256": "6de04f98253bde4781a5e096769954a853cb60cd7de3863c18ebaaa0026e53b9",
+        "keyframes": [],
+        "sourceVideoFramesSent": false
+      },
+      "review_note": "First take selected; no creative retake.",
+      "timeline": {
+        "start_seconds": 5.041666666666667,
+        "end_seconds": 9.083333333333334
+      }
+    },
+    {
+      "index": 3,
+      "from": 3,
+      "to": 4,
+      "duration": 5,
+      "status": "generated-first-take",
+      "camera": "RIGHT 90-degree pivot; small upward tilt, then quiet lateral drift",
+      "video_prompt_template": "Portrait 9:16 premium pastel watercolor anime Tamil college romance. Exact FIRST FRAME and exact LAST FRAME are pinned. Preserve the same young adult Tamil couple: Ashok with trimmed moustache and short beard; Supriya with long braid and South Indian chudidhar. Stillness is central: planted feet, only small blinks, breath, eye shifts or hand motion. Location-specific atmosphere only: small chalk dust in classroom, paper motes in library, jasmine petals in garden, coffee steam at café, dry leaves at amphitheatre, distant lamp moths at night, soft sea spray on shore. 8-14 sparse tiny particles at varied depth; drift slowly only while the camera brakes. No confetti storm. Use only the simple master-template pivot or ease-out described below. No forward-backward wandering, no ribbon, no complex transition, no walking, no face duplication, no text duplication, no fade, no morphing. Existing text remains fixed, clear and legible.\n\nSHOT 3 TO 4: Execute a clean RIGHT 90-degree pivot around library shelving; a small upward tilt reveals the open corridor first-meeting final frame. Ashok remains still. Ease into the two-person eye-level composition. Destination: Different location: shaded stone college corridor with arched open bays, blue noticeboard, hanging jasmine pot and afternoon shafts. Ashok and Supriya stand still several steps apart, seeing one another for the first time; no walking. Text appears in a clean beam above them: \"Sri. Ashok Kumar\".",
+      "video_prompt": "Portrait 9:16 premium pastel watercolor anime Tamil college romance. Exact FIRST FRAME and exact LAST FRAME are pinned. Preserve the same young adult Tamil couple: Ashok with trimmed moustache and short beard; Supriya with long braid and South Indian chudidhar. Stillness is central: planted feet, only small blinks, breath, eye shifts or hand motion. Location-specific atmosphere only: small chalk dust in classroom, paper motes in library, jasmine petals in garden, coffee steam at café, dry leaves at amphitheatre, distant lamp moths at night, soft sea spray on shore. 8-14 sparse tiny particles at varied depth; drift slowly only while the camera brakes. No confetti storm. Use only the simple master-template pivot or ease-out described below. No forward-backward wandering, no ribbon, no complex transition, no walking, no face duplication, no text duplication, no fade, no morphing. Existing text remains fixed, clear and legible.\n\nSHOT 3 TO 4: Execute a clean RIGHT 90-degree pivot around library shelving; a small upward tilt reveals the open corridor first-meeting final frame. Ashok remains still. Ease into the two-person eye-level composition. Destination: Different location: shaded stone college corridor with arched open bays, blue noticeboard, hanging jasmine pot and afternoon shafts. Ashok and Supriya stand still several steps apart, seeing one another for the first time; no walking. Text appears in a clean beam above them: \"Sri. Ashok Kumar\".",
+      "video_path": "clip-3.mp4",
+      "final_frame_path": "clip-3-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 2
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 4
+        }
+      },
+      "prompt": "Execute a clean RIGHT 90-degree pivot around library shelving; a small upward tilt reveals the open corridor first-meeting final frame. Ashok remains still. Ease into the two-person eye-level composition.",
+      "request_metadata": {
+        "requestId": "bc24d9c6-b100-9782-93aa-cc496c7a10fd",
+        "status": "done",
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "usage": {
+          "cost_in_usd_ticks": 7200000000
+        },
+        "outputUrl": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-bc24d9c6-b100-9782-93aa-cc496c7a10fd.mp4"
+      },
+      "selected_take": 1,
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "121"
+          }
+        ],
+        "format": {
+          "duration": "5.042000"
+        }
+      },
+      "actual_input": {
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "aspect_ratio": "9:16",
+        "resolution": "720p",
+        "firstImage": "output/socialmedia-college-anime-v2/clip-3-take-1-first.jpg",
+        "lastImage": "output/socialmedia-college-anime-v2/clip-3-take-1-last.jpg",
+        "firstImageSha256": "79735e623117216da6f8b58ab0a827a512fd41d4bc94d39f7a95366a8c6c53c7",
+        "lastImageSha256": "00b57cc044bcdba231acd3e2a9278764462c979d0efd6ec54843db4c9d30dee6",
+        "keyframes": [],
+        "sourceVideoFramesSent": false
+      },
+      "review_note": "First take selected; no creative retake.",
+      "timeline": {
+        "start_seconds": 9.083333333333334,
+        "end_seconds": 14.125
+      }
+    },
+    {
+      "index": 4,
+      "from": 4,
+      "to": 5,
+      "duration": 5,
+      "status": "generated-first-take",
+      "camera": "LEFT 90-degree pivot; tiny downward tilt to settle at eye level",
+      "video_prompt_template": "Portrait 9:16 premium pastel watercolor anime Tamil college romance. Exact FIRST FRAME and exact LAST FRAME are pinned. Preserve the same young adult Tamil couple: Ashok with trimmed moustache and short beard; Supriya with long braid and South Indian chudidhar. Stillness is central: planted feet, only small blinks, breath, eye shifts or hand motion. Location-specific atmosphere only: small chalk dust in classroom, paper motes in library, jasmine petals in garden, coffee steam at café, dry leaves at amphitheatre, distant lamp moths at night, soft sea spray on shore. 8-14 sparse tiny particles at varied depth; drift slowly only while the camera brakes. No confetti storm. Use only the simple master-template pivot or ease-out described below. No forward-backward wandering, no ribbon, no complex transition, no walking, no face duplication, no text duplication, no fade, no morphing. Existing text remains fixed, clear and legible.\n\nSHOT 4 TO 5: Execute a clean LEFT 90-degree pivot past the corridor’s jasmine pot and noticeboard into the botanical garden. Tiny downward tilt settles at Supriya’s bench eye level. No walking, no teleport, no fade. Destination: Different location: quiet botanical college garden with a lotus pond, mossy bench and flowering trees. Supriya sits calmly on the bench with book and phone, rose-and-teal chudidhar and ivory dupatta clear. Ashok is not in this frame. Text in open foliage space: \"Srmt. Supriya\".",
+      "video_prompt": "Portrait 9:16 premium pastel watercolor anime Tamil college romance. Exact FIRST FRAME and exact LAST FRAME are pinned. Preserve the same young adult Tamil couple: Ashok with trimmed moustache and short beard; Supriya with long braid and South Indian chudidhar. Stillness is central: planted feet, only small blinks, breath, eye shifts or hand motion. Location-specific atmosphere only: small chalk dust in classroom, paper motes in library, jasmine petals in garden, coffee steam at café, dry leaves at amphitheatre, distant lamp moths at night, soft sea spray on shore. 8-14 sparse tiny particles at varied depth; drift slowly only while the camera brakes. No confetti storm. Use only the simple master-template pivot or ease-out described below. No forward-backward wandering, no ribbon, no complex transition, no walking, no face duplication, no text duplication, no fade, no morphing. Existing text remains fixed, clear and legible.\n\nSHOT 4 TO 5: Execute a clean LEFT 90-degree pivot past the corridor’s jasmine pot and noticeboard into the botanical garden. Tiny downward tilt settles at Supriya’s bench eye level. No walking, no teleport, no fade. Destination: Different location: quiet botanical college garden with a lotus pond, mossy bench and flowering trees. Supriya sits calmly on the bench with book and phone, rose-and-teal chudidhar and ivory dupatta clear. Ashok is not in this frame. Text in open foliage space: \"Srmt. Supriya\".",
+      "video_path": "clip-4.mp4",
+      "final_frame_path": "clip-4-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 3
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 5
+        }
+      },
+      "prompt": "Execute a clean LEFT 90-degree pivot past the corridor’s jasmine pot and noticeboard into the botanical garden. Tiny downward tilt settles at Supriya’s bench eye level. No walking, no teleport, no fade.",
+      "request_metadata": {
+        "requestId": "926923ae-7108-9174-bd63-beba5963ba88",
+        "status": "done",
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "usage": {
+          "cost_in_usd_ticks": 7200000000
+        },
+        "outputUrl": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-926923ae-7108-9174-bd63-beba5963ba88.mp4"
+      },
+      "selected_take": 1,
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "121"
+          }
+        ],
+        "format": {
+          "duration": "5.042000"
+        }
+      },
+      "actual_input": {
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "aspect_ratio": "9:16",
+        "resolution": "720p",
+        "firstImage": "output/socialmedia-college-anime-v2/clip-4-take-1-first.jpg",
+        "lastImage": "output/socialmedia-college-anime-v2/clip-4-take-1-last.jpg",
+        "firstImageSha256": "2c138be316a3ea5d27576bcea9d10028f8cb375c97438502d785ccf03580b5ac",
+        "lastImageSha256": "cb4dceae2359b6dabbf04791920861c7982ae03dc89a7db674219e80f45c1b48",
+        "keyframes": [],
+        "sourceVideoFramesSent": false
+      },
+      "review_note": "First take selected; no creative retake.",
+      "timeline": {
+        "start_seconds": 14.125,
+        "end_seconds": 19.166666666666668
+      }
+    },
+    {
+      "index": 5,
+      "from": 5,
+      "to": 6,
+      "duration": 5,
+      "status": "generated-first-take",
+      "camera": "RIGHT 90-degree pivot; slow eight-degree orbit at constant distance",
+      "video_prompt_template": "Portrait 9:16 premium pastel watercolor anime Tamil college romance. Exact FIRST FRAME and exact LAST FRAME are pinned. Preserve the same young adult Tamil couple: Ashok with trimmed moustache and short beard; Supriya with long braid and South Indian chudidhar. Stillness is central: planted feet, only small blinks, breath, eye shifts or hand motion. Location-specific atmosphere only: small chalk dust in classroom, paper motes in library, jasmine petals in garden, coffee steam at café, dry leaves at amphitheatre, distant lamp moths at night, soft sea spray on shore. 8-14 sparse tiny particles at varied depth; drift slowly only while the camera brakes. No confetti storm. Use only the simple master-template pivot or ease-out described below. No forward-backward wandering, no ribbon, no complex transition, no walking, no face duplication, no text duplication, no fade, no morphing. Existing text remains fixed, clear and legible.\n\nSHOT 5 TO 6: Execute a clean RIGHT 90-degree pivot along garden foliage into the distinct café terrace. Hold constant subject distance with an eight-degree orbit; coffee steam and window reflections are the only active environment. Destination: Different location: warm campus café terrace at late afternoon, cane chairs, ceramic coffee cups, soft rising steam, potted areca plants and amber window reflections. The couple sit across one small table, still and smiling naturally, hands resting near notebooks. Text on a painted café wall: \"Every conversation felt like home.\"",
+      "video_prompt": "Portrait 9:16 premium pastel watercolor anime Tamil college romance. Exact FIRST FRAME and exact LAST FRAME are pinned. Preserve the same young adult Tamil couple: Ashok with trimmed moustache and short beard; Supriya with long braid and South Indian chudidhar. Stillness is central: planted feet, only small blinks, breath, eye shifts or hand motion. Location-specific atmosphere only: small chalk dust in classroom, paper motes in library, jasmine petals in garden, coffee steam at café, dry leaves at amphitheatre, distant lamp moths at night, soft sea spray on shore. 8-14 sparse tiny particles at varied depth; drift slowly only while the camera brakes. No confetti storm. Use only the simple master-template pivot or ease-out described below. No forward-backward wandering, no ribbon, no complex transition, no walking, no face duplication, no text duplication, no fade, no morphing. Existing text remains fixed, clear and legible.\n\nSHOT 5 TO 6: Execute a clean RIGHT 90-degree pivot along garden foliage into the distinct café terrace. Hold constant subject distance with an eight-degree orbit; coffee steam and window reflections are the only active environment. Destination: Different location: warm campus café terrace at late afternoon, cane chairs, ceramic coffee cups, soft rising steam, potted areca plants and amber window reflections. The couple sit across one small table, still and smiling naturally, hands resting near notebooks. Text on a painted café wall: \"Every conversation felt like home.\"",
+      "video_path": "clip-5.mp4",
+      "final_frame_path": "clip-5-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 4
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 6
+        }
+      },
+      "prompt": "Execute a clean RIGHT 90-degree pivot along garden foliage into the distinct café terrace. Hold constant subject distance with an eight-degree orbit; coffee steam and window reflections are the only active environment.",
+      "request_metadata": {
+        "requestId": "56a90765-0b5f-9c9b-ba67-f7161e900f2c",
+        "status": "done",
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "usage": {
+          "cost_in_usd_ticks": 7200000000
+        },
+        "outputUrl": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-56a90765-0b5f-9c9b-ba67-f7161e900f2c.mp4"
+      },
+      "selected_take": 1,
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "121"
+          }
+        ],
+        "format": {
+          "duration": "5.042000"
+        }
+      },
+      "actual_input": {
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "aspect_ratio": "9:16",
+        "resolution": "720p",
+        "firstImage": "output/socialmedia-college-anime-v2/clip-5-take-1-first.jpg",
+        "lastImage": "output/socialmedia-college-anime-v2/clip-5-take-1-last.jpg",
+        "firstImageSha256": "83edf5d932f5e91d1451f2c2db57b76099d696c780e7d3e9f3eb9cb1893e47c0",
+        "lastImageSha256": "e0a328f9579805f7bf10f863b86f37899bd4fc4bab75dec6c2c35beac3edf280",
+        "keyframes": [],
+        "sourceVideoFramesSent": false
+      },
+      "review_note": "First take selected; no creative retake.",
+      "timeline": {
+        "start_seconds": 19.166666666666668,
+        "end_seconds": 24.208333333333332
+      }
+    },
+    {
+      "index": 6,
+      "from": 6,
+      "to": 7,
+      "duration": 5,
+      "status": "generated-first-take",
+      "camera": "LEFT 90-degree pivot; slow slight crane down toward seated eye height",
+      "video_prompt_template": "Portrait 9:16 premium pastel watercolor anime Tamil college romance. Exact FIRST FRAME and exact LAST FRAME are pinned. Preserve the same young adult Tamil couple: Ashok with trimmed moustache and short beard; Supriya with long braid and South Indian chudidhar. Stillness is central: planted feet, only small blinks, breath, eye shifts or hand motion. Location-specific atmosphere only: small chalk dust in classroom, paper motes in library, jasmine petals in garden, coffee steam at café, dry leaves at amphitheatre, distant lamp moths at night, soft sea spray on shore. 8-14 sparse tiny particles at varied depth; drift slowly only while the camera brakes. No confetti storm. Use only the simple master-template pivot or ease-out described below. No forward-backward wandering, no ribbon, no complex transition, no walking, no face duplication, no text duplication, no fade, no morphing. Existing text remains fixed, clear and legible.\n\nSHOT 6 TO 7: Execute a clean LEFT 90-degree pivot from café wall and cups into the open jasmine garden. Slow slight crane down then settle on their joined hands, with minimal forward translation. Destination: Different location: open college jasmine garden at sunset with a stone path, low hedge, banyan silhouette and falling scattered jasmine petals. The couple stand still side by side, their hands gently joined; no walking. Text in clear sunset sky: \"Together, we chose forever.\"",
+      "video_prompt": "Portrait 9:16 premium pastel watercolor anime Tamil college romance. Exact FIRST FRAME and exact LAST FRAME are pinned. Preserve the same young adult Tamil couple: Ashok with trimmed moustache and short beard; Supriya with long braid and South Indian chudidhar. Stillness is central: planted feet, only small blinks, breath, eye shifts or hand motion. Location-specific atmosphere only: small chalk dust in classroom, paper motes in library, jasmine petals in garden, coffee steam at café, dry leaves at amphitheatre, distant lamp moths at night, soft sea spray on shore. 8-14 sparse tiny particles at varied depth; drift slowly only while the camera brakes. No confetti storm. Use only the simple master-template pivot or ease-out described below. No forward-backward wandering, no ribbon, no complex transition, no walking, no face duplication, no text duplication, no fade, no morphing. Existing text remains fixed, clear and legible.\n\nSHOT 6 TO 7: Execute a clean LEFT 90-degree pivot from café wall and cups into the open jasmine garden. Slow slight crane down then settle on their joined hands, with minimal forward translation. Destination: Different location: open college jasmine garden at sunset with a stone path, low hedge, banyan silhouette and falling scattered jasmine petals. The couple stand still side by side, their hands gently joined; no walking. Text in clear sunset sky: \"Together, we chose forever.\"",
+      "video_path": "clip-6.mp4",
+      "final_frame_path": "clip-6-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 5
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 7
+        }
+      },
+      "prompt": "Execute a clean LEFT 90-degree pivot from café wall and cups into the open jasmine garden. Slow slight crane down then settle on their joined hands, with minimal forward translation.",
+      "request_metadata": {
+        "requestId": "f2407f41-bd31-985e-a073-bf1fa56f9a7c",
+        "status": "done",
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "usage": {
+          "cost_in_usd_ticks": 7200000000
+        },
+        "outputUrl": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-f2407f41-bd31-985e-a073-bf1fa56f9a7c.mp4"
+      },
+      "selected_take": 1,
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "121"
+          }
+        ],
+        "format": {
+          "duration": "5.042000"
+        }
+      },
+      "actual_input": {
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "aspect_ratio": "9:16",
+        "resolution": "720p",
+        "firstImage": "output/socialmedia-college-anime-v2/clip-6-take-1-first.jpg",
+        "lastImage": "output/socialmedia-college-anime-v2/clip-6-take-1-last.jpg",
+        "firstImageSha256": "1a6259cf335f9df53ee0ef5a76398a21e957ffc0b91fd286c0ea2a467a1ca676",
+        "lastImageSha256": "5d2e0896f40964358ecb7a0e5ae1a4bbad7216d3a5ace75b6c1b6aeb611ae49b",
+        "keyframes": [],
+        "sourceVideoFramesSent": false
+      },
+      "review_note": "First take selected; no creative retake.",
+      "timeline": {
+        "start_seconds": 24.208333333333332,
+        "end_seconds": 29.25
+      }
+    },
+    {
+      "index": 7,
+      "from": 7,
+      "to": 8,
+      "duration": 5,
+      "status": "generated-first-take",
+      "camera": "RIGHT 90-degree pivot; small upward crane to standing eye height while yaw eases to a stop",
+      "video_prompt_template": "Portrait 9:16 premium pastel watercolor anime Tamil college romance. Exact FIRST FRAME and exact LAST FRAME are pinned. Preserve the same young adult Tamil couple: Ashok with trimmed moustache and short beard; Supriya with long braid and South Indian chudidhar. Stillness is central: planted feet, only small blinks, breath, eye shifts or hand motion. Location-specific atmosphere only: small chalk dust in classroom, paper motes in library, jasmine petals in garden, coffee steam at café, dry leaves at amphitheatre, distant lamp moths at night, soft sea spray on shore. 8-14 sparse tiny particles at varied depth; drift slowly only while the camera brakes. No confetti storm. Use only the simple master-template pivot or ease-out described below. No forward-backward wandering, no ribbon, no complex transition, no walking, no face duplication, no text duplication, no fade, no morphing. Existing text remains fixed, clear and legible.\n\nSHOT 7 TO 8: Execute a clean RIGHT 90-degree pivot around the banyan silhouette into the blue-hour amphitheatre. Small upward crane to seated eye height while yaw eases to a stop. Keep all people still. Destination: Different location: empty open-air campus amphitheatre at blue hour, curved stone seating, small warm practical lamps, projector glow on a single fixed backdrop panel. Couple sit still together on one central step. Text on the illuminated backdrop: \"Sounder & Mohan Family Wedding Invitation\".",
+      "video_prompt": "Portrait 9:16 premium pastel watercolor anime Tamil college romance. Exact FIRST FRAME and exact LAST FRAME are pinned. Preserve the same young adult Tamil couple: Ashok with trimmed moustache and short beard; Supriya with long braid and South Indian chudidhar. Stillness is central: planted feet, only small blinks, breath, eye shifts or hand motion. Location-specific atmosphere only: small chalk dust in classroom, paper motes in library, jasmine petals in garden, coffee steam at café, dry leaves at amphitheatre, distant lamp moths at night, soft sea spray on shore. 8-14 sparse tiny particles at varied depth; drift slowly only while the camera brakes. No confetti storm. Use only the simple master-template pivot or ease-out described below. No forward-backward wandering, no ribbon, no complex transition, no walking, no face duplication, no text duplication, no fade, no morphing. Existing text remains fixed, clear and legible.\n\nSHOT 7 TO 8: Execute a clean RIGHT 90-degree pivot around the banyan silhouette into the blue-hour amphitheatre. Small upward crane to seated eye height while yaw eases to a stop. Keep all people still. Destination: Different location: empty open-air campus amphitheatre at blue hour, curved stone seating, small warm practical lamps, projector glow on a single fixed backdrop panel. Couple sit still together on one central step. Text on the illuminated backdrop: \"Sounder & Mohan Family Wedding Invitation\".",
+      "video_path": "clip-7.mp4",
+      "final_frame_path": "clip-7-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 6
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 8
+        }
+      },
+      "prompt": "Execute a clean RIGHT 90-degree pivot around the banyan silhouette into the blue-hour amphitheatre. Small upward crane to seated eye height while yaw eases to a stop. Keep all people still.",
+      "request_metadata": {
+        "requestId": "91bf3a6e-0c72-9145-b324-60496c2bb71a",
+        "status": "done",
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "usage": {
+          "cost_in_usd_ticks": 7200000000
+        },
+        "outputUrl": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-91bf3a6e-0c72-9145-b324-60496c2bb71a.mp4"
+      },
+      "selected_take": 1,
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "121"
+          }
+        ],
+        "format": {
+          "duration": "5.042000"
+        }
+      },
+      "actual_input": {
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "aspect_ratio": "9:16",
+        "resolution": "720p",
+        "firstImage": "output/socialmedia-college-anime-v2/clip-7-take-1-first.jpg",
+        "lastImage": "output/socialmedia-college-anime-v2/clip-7-take-1-last.jpg",
+        "firstImageSha256": "83b42813138f7035a70404d24ce5cfeccd3543c8127373ff5d7b564df697997e",
+        "lastImageSha256": "f8c9d31858296474f8e5d0544773ae5ce39fe49af2633aff3719a3c280152779",
+        "keyframes": [],
+        "sourceVideoFramesSent": false
+      },
+      "review_note": "First take selected; no creative retake.",
+      "timeline": {
+        "start_seconds": 29.25,
+        "end_seconds": 34.291666666666664
+      }
+    },
+    {
+      "index": 8,
+      "from": 8,
+      "to": 9,
+      "duration": 5,
+      "status": "generated-first-take",
+      "camera": "RIGHT 90-degree pivot; very slow correcting arc at fixed distance",
+      "video_prompt_template": "Portrait 9:16 premium pastel watercolor anime Tamil college romance. Exact FIRST FRAME and exact LAST FRAME are pinned. Preserve the same young adult Tamil couple: Ashok with trimmed moustache and short beard; Supriya with long braid and South Indian chudidhar. Stillness is central: planted feet, only small blinks, breath, eye shifts or hand motion. Location-specific atmosphere only: small chalk dust in classroom, paper motes in library, jasmine petals in garden, coffee steam at café, dry leaves at amphitheatre, distant lamp moths at night, soft sea spray on shore. 8-14 sparse tiny particles at varied depth; drift slowly only while the camera brakes. No confetti storm. Use only the simple master-template pivot or ease-out described below. No forward-backward wandering, no ribbon, no complex transition, no walking, no face duplication, no text duplication, no fade, no morphing. Existing text remains fixed, clear and legible.\n\nSHOT 8 TO 9: Execute a clean RIGHT 90-degree pivot across amphitheatre steps into the late-sunset beach reception. Very slow correcting arc at fixed distance; reveal one physical reception sign only. Destination: Different location: refined South Indian beach reception at late sunset, ivory canopy, jasmine strings, brass lamps, calm shoreline and a single upright reception sign on a teak easel. No duplicate signs. Couple stand still at a respectful distance. Exact sign text: \"Reception - Dinner\\n6th February 2020\\n7:30 p.m. onwards\".",
+      "video_prompt": "Portrait 9:16 premium pastel watercolor anime Tamil college romance. Exact FIRST FRAME and exact LAST FRAME are pinned. Preserve the same young adult Tamil couple: Ashok with trimmed moustache and short beard; Supriya with long braid and South Indian chudidhar. Stillness is central: planted feet, only small blinks, breath, eye shifts or hand motion. Location-specific atmosphere only: small chalk dust in classroom, paper motes in library, jasmine petals in garden, coffee steam at café, dry leaves at amphitheatre, distant lamp moths at night, soft sea spray on shore. 8-14 sparse tiny particles at varied depth; drift slowly only while the camera brakes. No confetti storm. Use only the simple master-template pivot or ease-out described below. No forward-backward wandering, no ribbon, no complex transition, no walking, no face duplication, no text duplication, no fade, no morphing. Existing text remains fixed, clear and legible.\n\nSHOT 8 TO 9: Execute a clean RIGHT 90-degree pivot across amphitheatre steps into the late-sunset beach reception. Very slow correcting arc at fixed distance; reveal one physical reception sign only. Destination: Different location: refined South Indian beach reception at late sunset, ivory canopy, jasmine strings, brass lamps, calm shoreline and a single upright reception sign on a teak easel. No duplicate signs. Couple stand still at a respectful distance. Exact sign text: \"Reception - Dinner\\n6th February 2020\\n7:30 p.m. onwards\".",
+      "video_path": "clip-8.mp4",
+      "final_frame_path": "clip-8-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 7
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 9
+        }
+      },
+      "prompt": "Execute a clean RIGHT 90-degree pivot across amphitheatre steps into the late-sunset beach reception. Very slow correcting arc at fixed distance; reveal one physical reception sign only.",
+      "request_metadata": {
+        "requestId": "74bf9f1f-cac6-9a06-8897-1efc43ec2a4f",
+        "status": "done",
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "usage": {
+          "cost_in_usd_ticks": 7200000000
+        },
+        "outputUrl": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-74bf9f1f-cac6-9a06-8897-1efc43ec2a4f.mp4"
+      },
+      "selected_take": 1,
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "121"
+          }
+        ],
+        "format": {
+          "duration": "5.042000"
+        }
+      },
+      "actual_input": {
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "aspect_ratio": "9:16",
+        "resolution": "720p",
+        "firstImage": "output/socialmedia-college-anime-v2/clip-8-take-1-first.jpg",
+        "lastImage": "output/socialmedia-college-anime-v2/clip-8-take-1-last.jpg",
+        "firstImageSha256": "31e3e6a36989273ea5c0a0ac1ad55ddaece335689ac06e2038d761a588ce7e72",
+        "lastImageSha256": "6afbc9dcd41d48c81b931da5bd9e4219cbeabb707238a214440d3004bab63acc",
+        "keyframes": [],
+        "sourceVideoFramesSent": false
+      },
+      "review_note": "First take selected; no creative retake.",
+      "timeline": {
+        "start_seconds": 34.291666666666664,
+        "end_seconds": 39.333333333333336
+      }
+    },
+    {
+      "index": 9,
+      "from": 9,
+      "to": 10,
+      "duration": 5,
+      "status": "generated-first-take",
+      "camera": "LEFT 90-degree pivot; gentle lateral drift at constant distance from one sign",
+      "video_prompt_template": "Portrait 9:16 premium pastel watercolor anime Tamil college romance. Exact FIRST FRAME and exact LAST FRAME are pinned. Preserve the same young adult Tamil couple: Ashok with trimmed moustache and short beard; Supriya with long braid and South Indian chudidhar. Stillness is central: planted feet, only small blinks, breath, eye shifts or hand motion. Location-specific atmosphere only: small chalk dust in classroom, paper motes in library, jasmine petals in garden, coffee steam at café, dry leaves at amphitheatre, distant lamp moths at night, soft sea spray on shore. 8-14 sparse tiny particles at varied depth; drift slowly only while the camera brakes. No confetti storm. Use only the simple master-template pivot or ease-out described below. No forward-backward wandering, no ribbon, no complex transition, no walking, no face duplication, no text duplication, no fade, no morphing. Existing text remains fixed, clear and legible.\n\nSHOT 9 TO 10: Execute a clean LEFT 90-degree pivot around the reception sign’s teak edge into the dawn beach mandap. Gentle lateral drift at constant distance from the wedding board; text stays rigid and legible. Destination: Different location: dawn beach mandap with a simple ivory linen canopy, marigold-and-jasmine decor, low brass lamps and sea horizon. One fixed invitation board on the side, couple stand still in ivory kurta and ivory-rose chudidhar. Exact board text: \"Wedding Ceremony\\n7th February 2020\\n8:00 a.m.\\nLeela Channaiah Kalyana Mandapa\\nVontikoppal, Mysore\".",
+      "video_prompt": "Portrait 9:16 premium pastel watercolor anime Tamil college romance. Exact FIRST FRAME and exact LAST FRAME are pinned. Preserve the same young adult Tamil couple: Ashok with trimmed moustache and short beard; Supriya with long braid and South Indian chudidhar. Stillness is central: planted feet, only small blinks, breath, eye shifts or hand motion. Location-specific atmosphere only: small chalk dust in classroom, paper motes in library, jasmine petals in garden, coffee steam at café, dry leaves at amphitheatre, distant lamp moths at night, soft sea spray on shore. 8-14 sparse tiny particles at varied depth; drift slowly only while the camera brakes. No confetti storm. Use only the simple master-template pivot or ease-out described below. No forward-backward wandering, no ribbon, no complex transition, no walking, no face duplication, no text duplication, no fade, no morphing. Existing text remains fixed, clear and legible.\n\nSHOT 9 TO 10: Execute a clean LEFT 90-degree pivot around the reception sign’s teak edge into the dawn beach mandap. Gentle lateral drift at constant distance from the wedding board; text stays rigid and legible. Destination: Different location: dawn beach mandap with a simple ivory linen canopy, marigold-and-jasmine decor, low brass lamps and sea horizon. One fixed invitation board on the side, couple stand still in ivory kurta and ivory-rose chudidhar. Exact board text: \"Wedding Ceremony\\n7th February 2020\\n8:00 a.m.\\nLeela Channaiah Kalyana Mandapa\\nVontikoppal, Mysore\".",
+      "video_path": "clip-9.mp4",
+      "final_frame_path": "clip-9-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 8
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 10
+        }
+      },
+      "prompt": "Execute a clean LEFT 90-degree pivot around the reception sign’s teak edge into the dawn beach mandap. Gentle lateral drift at constant distance from the wedding board; text stays rigid and legible.",
+      "request_metadata": {
+        "requestId": "371ec749-04d7-92c6-86eb-d677f7896942",
+        "status": "done",
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "usage": {
+          "cost_in_usd_ticks": 7200000000
+        },
+        "outputUrl": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-371ec749-04d7-92c6-86eb-d677f7896942.mp4"
+      },
+      "selected_take": 1,
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "121"
+          }
+        ],
+        "format": {
+          "duration": "5.042000"
+        }
+      },
+      "actual_input": {
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "aspect_ratio": "9:16",
+        "resolution": "720p",
+        "firstImage": "output/socialmedia-college-anime-v2/clip-9-take-1-first.jpg",
+        "lastImage": "output/socialmedia-college-anime-v2/clip-9-take-1-last.jpg",
+        "firstImageSha256": "a23e95bfa608bb64fe3f075013e22b17890cc159c38ddc8ef437f66b3a8dc0e3",
+        "lastImageSha256": "824f37463281c78c70e35354539313967e868759ed465dc913fd3c288e695127",
+        "keyframes": [],
+        "sourceVideoFramesSent": false
+      },
+      "review_note": "First take selected; no creative retake.",
+      "timeline": {
+        "start_seconds": 39.333333333333336,
+        "end_seconds": 44.375
+      }
+    },
+    {
+      "index": 10,
+      "from": 10,
+      "to": 11,
+      "duration": 5,
+      "status": "generated-first-take",
+      "camera": "Fast backward canopy departure, then full-body ease-out",
+      "video_prompt_template": "Portrait 9:16 premium pastel watercolor anime Tamil college romance. Exact FIRST FRAME and exact LAST FRAME are pinned. Preserve the same young adult Tamil couple: Ashok with trimmed moustache and short beard; Supriya with long braid and South Indian chudidhar. Stillness is central: planted feet, only small blinks, breath, eye shifts or hand motion. Location-specific atmosphere only: small chalk dust in classroom, paper motes in library, jasmine petals in garden, coffee steam at café, dry leaves at amphitheatre, distant lamp moths at night, soft sea spray on shore. 8-14 sparse tiny particles at varied depth; drift slowly only while the camera brakes. No confetti storm. Use only the simple master-template pivot or ease-out described below. No forward-backward wandering, no ribbon, no complex transition, no walking, no face duplication, no text duplication, no fade, no morphing. Existing text remains fixed, clear and legible.\n\nSHOT 10 TO 11: Depart backward through the one dawn canopy opening, then ease out to the evening campus terrace. Never add people or a second plaque; carry the couple’s identities and stillness. Destination: Different location: evening terrace overlooking the campus clock tower, warm lamp pools, a single framed save-the-date plaque, no extra board. Couple stand still together in the foreground. Exact plaque text: \"With Love & Blessings\\nMr. BalaSubramanian\\nMrs. Jeevitha\\nBaby. Yazhini & Suhas\\nSAVE THE DATE · 6 & 7 FEBRUARY 2020\".",
+      "video_prompt": "Portrait 9:16 premium pastel watercolor anime Tamil college romance. Exact FIRST FRAME and exact LAST FRAME are pinned. Preserve the same young adult Tamil couple: Ashok with trimmed moustache and short beard; Supriya with long braid and South Indian chudidhar. Stillness is central: planted feet, only small blinks, breath, eye shifts or hand motion. Location-specific atmosphere only: small chalk dust in classroom, paper motes in library, jasmine petals in garden, coffee steam at café, dry leaves at amphitheatre, distant lamp moths at night, soft sea spray on shore. 8-14 sparse tiny particles at varied depth; drift slowly only while the camera brakes. No confetti storm. Use only the simple master-template pivot or ease-out described below. No forward-backward wandering, no ribbon, no complex transition, no walking, no face duplication, no text duplication, no fade, no morphing. Existing text remains fixed, clear and legible.\n\nSHOT 10 TO 11: Depart backward through the one dawn canopy opening, then ease out to the evening campus terrace. Never add people or a second plaque; carry the couple’s identities and stillness. Destination: Different location: evening terrace overlooking the campus clock tower, warm lamp pools, a single framed save-the-date plaque, no extra board. Couple stand still together in the foreground. Exact plaque text: \"With Love & Blessings\\nMr. BalaSubramanian\\nMrs. Jeevitha\\nBaby. Yazhini & Suhas\\nSAVE THE DATE · 6 & 7 FEBRUARY 2020\".",
+      "video_path": "clip-10.mp4",
+      "final_frame_path": "clip-10-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 9
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 11
+        }
+      },
+      "prompt": "Depart backward through the one dawn canopy opening, then ease out to the evening campus terrace. Never add people or a second plaque; carry the couple’s identities and stillness.",
+      "request_metadata": {
+        "requestId": "b2608a17-d804-9a1f-baf8-94eecf64238e",
+        "status": "done",
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "usage": {
+          "cost_in_usd_ticks": 7200000000
+        },
+        "outputUrl": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-b2608a17-d804-9a1f-baf8-94eecf64238e.mp4"
+      },
+      "selected_take": 1,
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "121"
+          }
+        ],
+        "format": {
+          "duration": "5.042000"
+        }
+      },
+      "actual_input": {
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "aspect_ratio": "9:16",
+        "resolution": "720p",
+        "firstImage": "output/socialmedia-college-anime-v2/clip-10-take-1-first.jpg",
+        "lastImage": "output/socialmedia-college-anime-v2/clip-10-take-1-last.jpg",
+        "firstImageSha256": "d136c1ea5e984fc5c96f9fbce4107d8e90b103df9b84f32aef11006988913499",
+        "lastImageSha256": "4d69bd73c8af1e54680c5bf6b1859c9d7fd8ae16ddc0fb06146b666f50d6eb45",
+        "keyframes": [],
+        "sourceVideoFramesSent": false
+      },
+      "review_note": "First take selected; no creative retake.",
+      "timeline": {
+        "start_seconds": 44.375,
+        "end_seconds": 49.416666666666664
+      }
+    },
+    {
+      "index": 11,
+      "from": 11,
+      "to": 12,
+      "duration": 5,
+      "status": "generated-first-take",
+      "camera": "Gentle backward glide and slight rise, single-plaque continuity",
+      "video_prompt_template": "Portrait 9:16 premium pastel watercolor anime Tamil college romance. Exact FIRST FRAME and exact LAST FRAME are pinned. Preserve the same young adult Tamil couple: Ashok with trimmed moustache and short beard; Supriya with long braid and South Indian chudidhar. Stillness is central: planted feet, only small blinks, breath, eye shifts or hand motion. Location-specific atmosphere only: small chalk dust in classroom, paper motes in library, jasmine petals in garden, coffee steam at café, dry leaves at amphitheatre, distant lamp moths at night, soft sea spray on shore. 8-14 sparse tiny particles at varied depth; drift slowly only while the camera brakes. No confetti storm. Use only the simple master-template pivot or ease-out described below. No forward-backward wandering, no ribbon, no complex transition, no walking, no face duplication, no text duplication, no fade, no morphing. Existing text remains fixed, clear and legible.\n\nSHOT 11 TO 12: Gentle backward glide and slight rise on the same night shoreline. Couple remain nearly still, forehead touch and joined hands; final quote brightens softly, stays fixed and readable. Destination: Intimate final night shoreline portrait. The SAME couple in ivory kurta and ivory-rose chudidhar stand still, foreheads gently touching, joined hands visible; no kiss or walking. Moonlit sea, distant lamps, sparse soft spray. One small plaque at lower right only. Exact text in the open sky: \"From a profile in a classroom to a life in our hands — we found forever.\"",
+      "video_prompt": "Portrait 9:16 premium pastel watercolor anime Tamil college romance. Exact FIRST FRAME and exact LAST FRAME are pinned. Preserve the same young adult Tamil couple: Ashok with trimmed moustache and short beard; Supriya with long braid and South Indian chudidhar. Stillness is central: planted feet, only small blinks, breath, eye shifts or hand motion. Location-specific atmosphere only: small chalk dust in classroom, paper motes in library, jasmine petals in garden, coffee steam at café, dry leaves at amphitheatre, distant lamp moths at night, soft sea spray on shore. 8-14 sparse tiny particles at varied depth; drift slowly only while the camera brakes. No confetti storm. Use only the simple master-template pivot or ease-out described below. No forward-backward wandering, no ribbon, no complex transition, no walking, no face duplication, no text duplication, no fade, no morphing. Existing text remains fixed, clear and legible.\n\nSHOT 11 TO 12: Gentle backward glide and slight rise on the same night shoreline. Couple remain nearly still, forehead touch and joined hands; final quote brightens softly, stays fixed and readable. Destination: Intimate final night shoreline portrait. The SAME couple in ivory kurta and ivory-rose chudidhar stand still, foreheads gently touching, joined hands visible; no kiss or walking. Moonlit sea, distant lamps, sparse soft spray. One small plaque at lower right only. Exact text in the open sky: \"From a profile in a classroom to a life in our hands — we found forever.\"",
+      "video_path": "clip-11.mp4",
+      "final_frame_path": "clip-11-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 10
+        },
+        "last": null
+      },
+      "prompt": "Gentle backward glide and slight rise on the same night shoreline. Couple remain nearly still, forehead touch and joined hands; final quote brightens softly, stays fixed and readable.",
+      "request_metadata": {
+        "requestId": "ac2419c5-93f9-91f9-9f69-3fd002fb2209",
+        "status": "done",
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "usage": {
+          "cost_in_usd_ticks": 7100000000
+        },
+        "outputUrl": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-ac2419c5-93f9-91f9-9f69-3fd002fb2209.mp4"
+      },
+      "selected_take": 1,
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "121"
+          }
+        ],
+        "format": {
+          "duration": "5.042000"
+        }
+      },
+      "actual_input": {
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "aspect_ratio": "9:16",
+        "resolution": "720p",
+        "firstImage": "output/socialmedia-college-anime-v2/clip-11-take-1-first.jpg",
+        "lastImage": null,
+        "firstImageSha256": "cdc22b302d1b63e124915e282bfd46b6ac72cc229c15bb66c075ca5676ee768b",
+        "lastImageSha256": null,
+        "keyframes": [],
+        "sourceVideoFramesSent": false
+      },
+      "review_note": "First take selected; no creative retake.",
+      "timeline": {
+        "start_seconds": 49.416666666666664,
+        "end_seconds": 54.458333333333336
+      }
+    }
+  ],
+  "completed_at": "2026-09-30T20:52:47.021Z",
+  "costs": {
+    "scope": "Social Media College Anime first version only",
+    "imageRequests": 11,
+    "videoRequests": 11,
+    "xaiCompletedCostUsd": 7.77,
+    "pendingVideos": [],
+    "replicateCostUsd": null,
+    "replicateCostNote": "Provider prediction responses do not include monetary charges."
+  },
+  "review_policy": "Representative still frames reviewed; no video retakes."
+}

@@ -1,0 +1,21 @@
+{
+  "id": "3xz2tsqyydrmr0d0y5q9p3byb0",
+  "requestId": "3xz2tsqyydrmr0d0y5q9p3byb0",
+  "status": "succeeded",
+  "model": "prunaai/p-video",
+  "version": "hidden",
+  "metrics": {
+    "model_variant": "base",
+    "predict_time": 8.659686804,
+    "resolution_target": "720p",
+    "total_time": 8.692503314,
+    "video_output_count": 1,
+    "video_output_duration_seconds": 5
+  },
+  "error": null,
+  "created_at": "2026-09-30T08:29:38.419Z",
+  "started_at": "2026-09-30T08:29:38.45181651Z",
+  "completed_at": "2026-09-30T08:29:47.111503314Z",
+  "data_removed": false,
+  "outputUrl": "https://replicate.delivery/xezq/e5AftnqtFcgz3EacPTImpb5qbRTmpici2loaMXA3OQW6pnSXA/bd8bf549-1304-4531-a60a-698f227cec77.mp4"
+}

@@ -1,0 +1,12 @@
+{
+  "requestId": "943e1e42-3d71-9b2c-a9ab-26118852c105",
+  "status": "done",
+  "model": "grok-imagine-video-1.5",
+  "firstImage": "output/temple-prototype/image-1-720.jpg",
+  "lastImage": "output/temple-prototype/image-2-720.jpg",
+  "createdAt": "2026-09-28T17:35:00.126Z",
+  "usage": {
+    "cost_in_usd_ticks": 7200000000
+  },
+  "outputUrl": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-943e1e42-3d71-9b2c-a9ab-26118852c105.mp4"
+}

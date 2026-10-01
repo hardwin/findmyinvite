@@ -1,0 +1,12 @@
+{
+  "model": "grok-imagine-video-1.5",
+  "duration": 5,
+  "aspect_ratio": "9:16",
+  "resolution": "720p",
+  "firstImage": "output/socialmedia-college-anime-v2/clip-7-take-1-first.jpg",
+  "lastImage": "output/socialmedia-college-anime-v2/clip-7-take-1-last.jpg",
+  "firstImageSha256": "83b42813138f7035a70404d24ce5cfeccd3543c8127373ff5d7b564df697997e",
+  "lastImageSha256": "f8c9d31858296474f8e5d0544773ae5ce39fe49af2633aff3719a3c280152779",
+  "keyframes": [],
+  "sourceVideoFramesSent": false
+}

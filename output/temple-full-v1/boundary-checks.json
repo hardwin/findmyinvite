@@ -1,0 +1,42 @@
+[
+  {
+    "join": "1 to 2",
+    "adjacent_decoded_frames_ssim": 0.957801
+  },
+  {
+    "join": "2 to 3",
+    "adjacent_decoded_frames_ssim": 0.958361
+  },
+  {
+    "join": "3 to 4",
+    "adjacent_decoded_frames_ssim": 0.969791
+  },
+  {
+    "join": "4 to 5",
+    "adjacent_decoded_frames_ssim": 0.958888
+  },
+  {
+    "join": "5 to 6",
+    "adjacent_decoded_frames_ssim": 0.942132
+  },
+  {
+    "join": "6 to 7",
+    "adjacent_decoded_frames_ssim": 0.960657
+  },
+  {
+    "join": "7 to 8",
+    "adjacent_decoded_frames_ssim": 0.957434
+  },
+  {
+    "join": "8 to 9",
+    "adjacent_decoded_frames_ssim": 0.965032
+  },
+  {
+    "join": "9 to 10",
+    "adjacent_decoded_frames_ssim": 0.956505
+  },
+  {
+    "join": "10 to 11",
+    "adjacent_decoded_frames_ssim": 0.957786
+  }
+]

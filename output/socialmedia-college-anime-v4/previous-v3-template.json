@@ -1,0 +1,785 @@
+{
+  "schema_version": "1.1",
+  "iteration": "socialmedia-college-anime-v3",
+  "name": "A College Love Story — Ashok & Supriya",
+  "status": "awaiting-opening-image-approval",
+  "assets_root": "output/socialmedia-college-anime-v3",
+  "locked_baseline": {
+    "path": "master_template_v1.json",
+    "sha256": "d99ecbf7e19c0332a51053bca81070dce7101dceeb416e771d3a312067e182aa"
+  },
+  "scene_count": 12,
+  "connecting_clip_count": 11,
+  "models": {
+    "image": {
+      "provider": "replicate",
+      "id": "openai/gpt-image-2.5-flare",
+      "credentials_env": "REPLICATE_API_TOKEN"
+    },
+    "video": {
+      "provider": "xai",
+      "id": "grok-imagine-video-1.5",
+      "credentials_env": "XAI_API_KEY",
+      "resolution": "720p",
+      "generate_audio": false
+    }
+  },
+  "parameters": {
+    "invitation_lines": "Ashok Kumar & Supriya\nWe’re getting married!",
+    "groom_title": "",
+    "groom_name": "Ashok Kumar",
+    "bride_title": "",
+    "bride_name": "Supriya",
+    "family_lines": "Our families\nSounder Rajan & Punitha\nMohan Krishna & Prema",
+    "ceremony_lines": "Join us for the wedding\n7 February 2020 · 8:00 a.m.\nLeela Channaiah Kalyana Mandapa\nVontikoppal, Mysore",
+    "venue_lines": "Wedding Venue\nLeela Channaiah\nKalyana Mandapa\nVontikoppal\nMysore",
+    "reception_lines": "Come celebrate with us\nReception · 6 February 2020\n7:30 p.m.",
+    "host_lines": "Celebrating with\nBalaSubramanian, Jeevitha\nYazhini & Suhas",
+    "save_date_lines": "Save the date\n6 & 7 February 2020",
+    "devotional_line_1": "",
+    "devotional_line_2": "",
+    "save_date_inline": "Save the date · 6 & 7 February 2020",
+    "scene_lines": [
+      "",
+      "He saw her profile.",
+      "They started chatting.",
+      "Then they met on campus.",
+      "Coffee became a regular thing.",
+      "They made time for each other.",
+      "One year later, they decided to get married.",
+      "Ashok Kumar & Supriya\nWe’re getting married!",
+      "Come celebrate with us\nReception · 6 February 2020\n7:30 p.m.",
+      "Join us for the wedding\n7 February 2020 · 8:00 a.m.\nLeela Channaiah Kalyana Mandapa\nVontikoppal, Mysore",
+      "Save the date\n6 & 7 February 2020",
+      "Save the date\n6 & 7 February 2020"
+    ]
+  },
+  "copy_assumptions": [
+    "A one-year college story; no visible ageing.",
+    "All locations remain within one connected campus; event panels contain the supplied real wedding address.",
+    "Outfits change between story scenes behind foreground occlusion; scenes 1-2 and 11-12 preserve clothing for continuous action.",
+    "Plain modern wording; no honorifics or poetic closing line."
+  ],
+  "style": "Vertical 9:16 premium pastel-watercolor illustrated anime romance, softly painted cinematic depth, delicate brush grain, youthful Tamil faces, warm peach light, sage foliage and terracotta college architecture. Rich natural sunshafts, reflective glass, soft shadows and subtle bloom. Contemporary clean serif headlines with restrained warm-white edge glow; small supporting copy in clear modern sans serif. Restrained premium design, no antique scrollwork, gold calligraphy, ribbons, glowing travel trails, picture-in-picture or watermark.",
+  "characters": {
+    "groom": "Ashok Kumar, adult Tamil Indian man aged 22 throughout this one-year story, medium-brown skin, slim oval face, dark almond eyes, thick brows, short side-parted wavy black hair, neat trimmed moustache and short closely trimmed beard. Same youthful face and slender body in every frame; no ageing.",
+    "bride": "Supriya, adult Tamil Indian woman aged 22 throughout this one-year story, medium-brown skin, oval face, dark almond eyes, small maroon bindi, long black braid, same youthful face and natural slender proportions. Stylish chudidhar in every appearance; never a gown or sari."
+  },
+  "particle_motion": "Small location-specific objects gently levitate and rotate at independent phases, with sparse drifting dust; no bursts, trails or ribbons. Continuous slow secondary motion as camera eases down.",
+  "generation_policy": {
+    "images": "Text-only Flare. Generate only opening images 1 and 2 before user approval.",
+    "video": "xAI only. User approval of opening images is required before any new video request.",
+    "approval_status": "pending",
+    "retakes": false
+  },
+  "output": {
+    "video": "socialmedia-college-anime-v3-final.mp4",
+    "width": 720,
+    "height": 1280,
+    "fps": 24,
+    "aspect_ratio": "9:16",
+    "audio": "silent",
+    "assembly": "Concatenate generated clips in order; no transition overlays, global retiming or crossfades.",
+    "actual_duration_seconds": null,
+    "frame_count": null,
+    "sha256": null
+  },
+  "scenes": [
+    {
+      "index": 1,
+      "id": "scene-01",
+      "name": "High campus approach",
+      "status": "awaiting-user-approval",
+      "image_prompt_template": "Vertical 9:16 premium pastel-watercolor illustrated anime romance, softly painted cinematic depth, delicate brush grain, youthful Tamil faces, warm peach light, sage foliage and terracotta college architecture. Rich natural sunshafts, reflective glass, soft shadows and subtle bloom. Contemporary clean serif headlines with restrained warm-white edge glow; small supporting copy in clear modern sans serif. Restrained premium design, no antique scrollwork, gold calligraphy, ribbons, glowing travel trails, picture-in-picture or watermark.\nIDENTITIES: Ashok Kumar, adult Tamil Indian man aged 22 throughout this one-year story, medium-brown skin, slim oval face, dark almond eyes, thick brows, short side-parted wavy black hair, neat trimmed moustache and short closely trimmed beard. Same youthful face and slender body in every frame; no ageing. Supriya, adult Tamil Indian woman aged 22 throughout this one-year story, medium-brown skin, oval face, dark almond eyes, small maroon bindi, long black braid, same youthful face and natural slender proportions. Stylish chudidhar in every appearance; never a gown or sari.\nWARDROBE: Ashok wears a sage-green overshirt, white crew-neck tee, charcoal trousers and white sneakers; black phone and slim steel watch.\nCOMPOSITION: High distant oblique drone view, looking FORWARD toward the main building from above the central approach lawn; horizon and pastel sky fill the upper quarter. Full facade, grounds and tower visible. ONE three-storey red-brick college main building, symmetrical long facade, central square clock tower with a flat terracotta cap, three tall ivory-trimmed ground-floor entrance openings, broad FIVE pale-stone steps, two round terracotta planters flanking those steps. ONE honey-brown slatted wooden bench with black iron legs sits on the paved ground apron immediately LEFT of the steps, parallel to the facade, two metres from the left planter. Bench is outside beside the entrance, never on a rooftop, terrace or balcony. Main entrance behind and to the RIGHT of the bench. A straight paved approach leads from the foreground lawn to the steps. Rain trees stand outside the approach on both sides. The entrance bench is a tiny but identifiable destination at ground level LEFT of the entrance steps. Ashok is already seated ON THAT BENCH with phone, small at this scale. Keep the approach path clear so a camera can fly forward and down directly to him. No bench or person near camera; no foreground rooftop or terrace.\nATMOSPHERE: A few distant rain-tree leaves.\nTEXT: No visible text in the opening aerial.\nSame identity across the one-year story. Text-only generation; do not collage places.",
+      "image_prompt": "Vertical 9:16 premium pastel-watercolor illustrated anime romance, softly painted cinematic depth, delicate brush grain, youthful Tamil faces, warm peach light, sage foliage and terracotta college architecture. Rich natural sunshafts, reflective glass, soft shadows and subtle bloom. Contemporary clean serif headlines with restrained warm-white edge glow; small supporting copy in clear modern sans serif. Restrained premium design, no antique scrollwork, gold calligraphy, ribbons, glowing travel trails, picture-in-picture or watermark.\nIDENTITIES: Ashok Kumar, adult Tamil Indian man aged 22 throughout this one-year story, medium-brown skin, slim oval face, dark almond eyes, thick brows, short side-parted wavy black hair, neat trimmed moustache and short closely trimmed beard. Same youthful face and slender body in every frame; no ageing. Supriya, adult Tamil Indian woman aged 22 throughout this one-year story, medium-brown skin, oval face, dark almond eyes, small maroon bindi, long black braid, same youthful face and natural slender proportions. Stylish chudidhar in every appearance; never a gown or sari.\nWARDROBE: Ashok wears a sage-green overshirt, white crew-neck tee, charcoal trousers and white sneakers; black phone and slim steel watch.\nCOMPOSITION: High distant oblique drone view, looking FORWARD toward the main building from above the central approach lawn; horizon and pastel sky fill the upper quarter. Full facade, grounds and tower visible. ONE three-storey red-brick college main building, symmetrical long facade, central square clock tower with a flat terracotta cap, three tall ivory-trimmed ground-floor entrance openings, broad FIVE pale-stone steps, two round terracotta planters flanking those steps. ONE honey-brown slatted wooden bench with black iron legs sits on the paved ground apron immediately LEFT of the steps, parallel to the facade, two metres from the left planter. Bench is outside beside the entrance, never on a rooftop, terrace or balcony. Main entrance behind and to the RIGHT of the bench. A straight paved approach leads from the foreground lawn to the steps. Rain trees stand outside the approach on both sides. The entrance bench is a tiny but identifiable destination at ground level LEFT of the entrance steps. Ashok is already seated ON THAT BENCH with phone, small at this scale. Keep the approach path clear so a camera can fly forward and down directly to him. No bench or person near camera; no foreground rooftop or terrace.\nATMOSPHERE: A few distant rain-tree leaves.\nTEXT: No visible text in the opening aerial.\nSame identity across the one-year story. Text-only generation; do not collage places.",
+      "text_fields": [],
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-1.jpg",
+      "selected_take": 1,
+      "request_metadata": {
+        "id": "y4qkjd40zdrmw0d0ygjrxxw2mm",
+        "status": "succeeded",
+        "model": "openai/gpt-image-2.5-flare",
+        "imageReferences": 0,
+        "metrics": {
+          "image_output_count": 1,
+          "model_variant": "high",
+          "predict_time": 16.342831456,
+          "resolution_target": "9:16",
+          "total_time": 16.361070302999998
+        },
+        "error": null,
+        "data_removed": false,
+        "outputUrl": "https://replicate.delivery/xezq/YeIwpPFsOMz8TKPuPsevWjbpjdRwt4o5K33m6MvvFzSNxySXA/tmpw7oga434.jpeg"
+      },
+      "review_note": "Opening concept reviewed; independent text-only generations retain minor architecture and bench-spacing differences."
+    },
+    {
+      "index": 2,
+      "id": "scene-02",
+      "name": "Bench beside the entrance",
+      "status": "awaiting-user-approval",
+      "image_prompt_template": "Vertical 9:16 premium pastel-watercolor illustrated anime romance, softly painted cinematic depth, delicate brush grain, youthful Tamil faces, warm peach light, sage foliage and terracotta college architecture. Rich natural sunshafts, reflective glass, soft shadows and subtle bloom. Contemporary clean serif headlines with restrained warm-white edge glow; small supporting copy in clear modern sans serif. Restrained premium design, no antique scrollwork, gold calligraphy, ribbons, glowing travel trails, picture-in-picture or watermark.\nIDENTITIES: Ashok Kumar, adult Tamil Indian man aged 22 throughout this one-year story, medium-brown skin, slim oval face, dark almond eyes, thick brows, short side-parted wavy black hair, neat trimmed moustache and short closely trimmed beard. Same youthful face and slender body in every frame; no ageing. Supriya, adult Tamil Indian woman aged 22 throughout this one-year story, medium-brown skin, oval face, dark almond eyes, small maroon bindi, long black braid, same youthful face and natural slender proportions. Stylish chudidhar in every appearance; never a gown or sari.\nWARDROBE: Ashok wears the EXACT same sage-green overshirt, white crew-neck tee, charcoal trousers and white sneakers; black phone and slim steel watch.\nCOMPOSITION: Eye-level medium-wide frontal view of Ashok seated on the entrance bench, looking DOWN at his black phone, thumb resting on its screen, slight smile. ONE three-storey red-brick college main building, symmetrical long facade, central square clock tower with a flat terracotta cap, three tall ivory-trimmed ground-floor entrance openings, broad FIVE pale-stone steps, two round terracotta planters flanking those steps. ONE honey-brown slatted wooden bench with black iron legs sits on the paved ground apron immediately LEFT of the steps, parallel to the facade, two metres from the left planter. Bench is outside beside the entrance, never on a rooftop, terrace or balcony. Main entrance behind and to the RIGHT of the bench. A straight paved approach leads from the foreground lawn to the steps. Rain trees stand outside the approach on both sides. The wooden bench occupies the lower-left and centre of frame; five steps and two planters remain visible to its RIGHT and behind. The upper tower is outside this low frame; it has not moved. A glimpse of a simple unbranded profile photo of Supriya on the angled phone, no readable app UI. Open negative space above bench left for the short caption. No classroom, desk, roof terrace or other seating.\nATMOSPHERE: Two small rain-tree leaves hover separately near the ground and slowly rotate; sparse dust in sunrays.\nTEXT: \"He saw her profile.\". Only this scene’s words; one clear text area with good line spacing.\nSame identity across the one-year story. Text-only generation; do not collage places.",
+      "image_prompt": "Vertical 9:16 premium pastel-watercolor illustrated anime romance, softly painted cinematic depth, delicate brush grain, youthful Tamil faces, warm peach light, sage foliage and terracotta college architecture. Rich natural sunshafts, reflective glass, soft shadows and subtle bloom. Contemporary clean serif headlines with restrained warm-white edge glow; small supporting copy in clear modern sans serif. Restrained premium design, no antique scrollwork, gold calligraphy, ribbons, glowing travel trails, picture-in-picture or watermark.\nIDENTITIES: Ashok Kumar, adult Tamil Indian man aged 22 throughout this one-year story, medium-brown skin, slim oval face, dark almond eyes, thick brows, short side-parted wavy black hair, neat trimmed moustache and short closely trimmed beard. Same youthful face and slender body in every frame; no ageing. Supriya, adult Tamil Indian woman aged 22 throughout this one-year story, medium-brown skin, oval face, dark almond eyes, small maroon bindi, long black braid, same youthful face and natural slender proportions. Stylish chudidhar in every appearance; never a gown or sari.\nWARDROBE: Ashok wears the EXACT same sage-green overshirt, white crew-neck tee, charcoal trousers and white sneakers; black phone and slim steel watch.\nCOMPOSITION: Eye-level medium-wide frontal view of Ashok seated on the entrance bench, looking DOWN at his black phone, thumb resting on its screen, slight smile. ONE three-storey red-brick college main building, symmetrical long facade, central square clock tower with a flat terracotta cap, three tall ivory-trimmed ground-floor entrance openings, broad FIVE pale-stone steps, two round terracotta planters flanking those steps. ONE honey-brown slatted wooden bench with black iron legs sits on the paved ground apron immediately LEFT of the steps, parallel to the facade, two metres from the left planter. Bench is outside beside the entrance, never on a rooftop, terrace or balcony. Main entrance behind and to the RIGHT of the bench. A straight paved approach leads from the foreground lawn to the steps. Rain trees stand outside the approach on both sides. The wooden bench occupies the lower-left and centre of frame; five steps and two planters remain visible to its RIGHT and behind. The upper tower is outside this low frame; it has not moved. A glimpse of a simple unbranded profile photo of Supriya on the angled phone, no readable app UI. Open negative space above bench left for the short caption. No classroom, desk, roof terrace or other seating.\nATMOSPHERE: Two small rain-tree leaves hover separately near the ground and slowly rotate; sparse dust in sunrays.\nTEXT: \"He saw her profile.\". Only this scene’s words; one clear text area with good line spacing.\nSame identity across the one-year story. Text-only generation; do not collage places.",
+      "text_fields": [
+        {
+          "role": "caption",
+          "text": "He saw her profile."
+        }
+      ],
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-2.jpg",
+      "selected_take": 1,
+      "request_metadata": {
+        "id": "f23jpd6409rmt0d0ygjtdwq5a4",
+        "status": "succeeded",
+        "model": "openai/gpt-image-2.5-flare",
+        "imageReferences": 0,
+        "metrics": {
+          "image_output_count": 1,
+          "model_variant": "high",
+          "predict_time": 17.891539379,
+          "resolution_target": "9:16",
+          "total_time": 17.908424533
+        },
+        "error": null,
+        "data_removed": false,
+        "outputUrl": "https://replicate.delivery/xezq/NslIB2bDqtpgNBVwBVS0bYvaXQR9pQmBrNRFIwYjfDZwYZpLA/tmp0niyahpf.jpeg"
+      },
+      "review_note": "Opening concept reviewed; independent text-only generations retain minor architecture and bench-spacing differences."
+    },
+    {
+      "index": 3,
+      "name": "Library reading corner",
+      "status": "pending",
+      "image_prompt_template": "Vertical 9:16 premium pastel-watercolor illustrated anime romance, softly painted cinematic depth, delicate brush grain, youthful Tamil faces, warm peach light, sage foliage and terracotta college architecture. Rich natural sunshafts, reflective glass, soft shadows and subtle bloom. Contemporary clean serif headlines with restrained warm-white edge glow; small supporting copy in clear modern sans serif. Restrained premium design, no antique scrollwork, gold calligraphy, ribbons, glowing travel trails, picture-in-picture or watermark.\nIDENTITIES: Ashok Kumar, adult Tamil Indian man aged 22 throughout this one-year story, medium-brown skin, slim oval face, dark almond eyes, thick brows, short side-parted wavy black hair, neat trimmed moustache and short closely trimmed beard. Same youthful face and slender body in every frame; no ageing. Supriya, adult Tamil Indian woman aged 22 throughout this one-year story, medium-brown skin, oval face, dark almond eyes, small maroon bindi, long black braid, same youthful face and natural slender proportions. Stylish chudidhar in every appearance; never a gown or sari.\nWARDROBE: Ashok: navy short-sleeve shirt, stone chinos. Supriya: dusty-rose chudidhar, cream dupatta.\nCOMPOSITION: A ground-floor library reading corner immediately LEFT off the main entrance lobby: walnut shelves, large window onto the same approach lawn, reading table. Ashok seated with phone; a separate small message bubble with no readable words implies chatting. A near ivory door jamb is on frame RIGHT, linking back to entrance.\nATMOSPHERE: Two loose unprinted note sheets levitate a few centimetres above a desk corner, slowly tilting; paper dust in sunshafts.\nTEXT: \"They started chatting.\". Only this scene’s words; one clear text area with good line spacing.\nSame identity across the one-year story. Text-only generation; do not collage places.",
+      "image_prompt": "Vertical 9:16 premium pastel-watercolor illustrated anime romance, softly painted cinematic depth, delicate brush grain, youthful Tamil faces, warm peach light, sage foliage and terracotta college architecture. Rich natural sunshafts, reflective glass, soft shadows and subtle bloom. Contemporary clean serif headlines with restrained warm-white edge glow; small supporting copy in clear modern sans serif. Restrained premium design, no antique scrollwork, gold calligraphy, ribbons, glowing travel trails, picture-in-picture or watermark.\nIDENTITIES: Ashok Kumar, adult Tamil Indian man aged 22 throughout this one-year story, medium-brown skin, slim oval face, dark almond eyes, thick brows, short side-parted wavy black hair, neat trimmed moustache and short closely trimmed beard. Same youthful face and slender body in every frame; no ageing. Supriya, adult Tamil Indian woman aged 22 throughout this one-year story, medium-brown skin, oval face, dark almond eyes, small maroon bindi, long black braid, same youthful face and natural slender proportions. Stylish chudidhar in every appearance; never a gown or sari.\nWARDROBE: Ashok: navy short-sleeve shirt, stone chinos. Supriya: dusty-rose chudidhar, cream dupatta.\nCOMPOSITION: A ground-floor library reading corner immediately LEFT off the main entrance lobby: walnut shelves, large window onto the same approach lawn, reading table. Ashok seated with phone; a separate small message bubble with no readable words implies chatting. A near ivory door jamb is on frame RIGHT, linking back to entrance.\nATMOSPHERE: Two loose unprinted note sheets levitate a few centimetres above a desk corner, slowly tilting; paper dust in sunshafts.\nTEXT: \"They started chatting.\". Only this scene’s words; one clear text area with good line spacing.\nSame identity across the one-year story. Text-only generation; do not collage places.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-3.jpg",
+      "image_request_id": "0jexsa80sdrmr0d0xkvbr894zm",
+      "actual_input_path": "image-3-take-1-input.json",
+      "request_metadata": {
+        "id": "0jexsa80sdrmr0d0xkvbr894zm",
+        "status": "succeeded",
+        "model": "openai/gpt-image-2.5-flare",
+        "imageReferences": 0,
+        "metrics": {
+          "image_output_count": 1,
+          "model_variant": "high",
+          "predict_time": 16.66815079,
+          "resolution_target": "9:16",
+          "total_time": 16.727526078
+        },
+        "error": null,
+        "data_removed": false,
+        "outputUrl": "https://replicate.delivery/xezq/t0VazQlkskLeRCBTrtASHG5jjyLySTgvphqviR4qVzAyqKpLA/tmps7cg_nhs.jpeg"
+      },
+      "text_fields": [
+        {
+          "role": "caption",
+          "text": "They started chatting."
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "name": "First meeting in the side corridor",
+      "status": "pending",
+      "image_prompt_template": "Vertical 9:16 premium pastel-watercolor illustrated anime romance, softly painted cinematic depth, delicate brush grain, youthful Tamil faces, warm peach light, sage foliage and terracotta college architecture. Rich natural sunshafts, reflective glass, soft shadows and subtle bloom. Contemporary clean serif headlines with restrained warm-white edge glow; small supporting copy in clear modern sans serif. Restrained premium design, no antique scrollwork, gold calligraphy, ribbons, glowing travel trails, picture-in-picture or watermark.\nIDENTITIES: Ashok Kumar, adult Tamil Indian man aged 22 throughout this one-year story, medium-brown skin, slim oval face, dark almond eyes, thick brows, short side-parted wavy black hair, neat trimmed moustache and short closely trimmed beard. Same youthful face and slender body in every frame; no ageing. Supriya, adult Tamil Indian woman aged 22 throughout this one-year story, medium-brown skin, oval face, dark almond eyes, small maroon bindi, long black braid, same youthful face and natural slender proportions. Stylish chudidhar in every appearance; never a gown or sari.\nWARDROBE: Ashok: charcoal casual shirt, beige trousers. Supriya: powder-blue chudidhar, white dupatta.\nCOMPOSITION: The distinct tiled side corridor immediately RIGHT of the library: rain-tree-lined open bays, blue noticeboard, library door at frame LEFT. The couple stand facing each other, a notebook in her hand, shy smiles, no walking.\nATMOSPHERE: A few dry leaves hover near the open bays, independently drifting.\nTEXT: \"Then they met on campus.\". Only this scene’s words; one clear text area with good line spacing.\nSame identity across the one-year story. Text-only generation; do not collage places.",
+      "image_prompt": "Vertical 9:16 premium pastel-watercolor illustrated anime romance, softly painted cinematic depth, delicate brush grain, youthful Tamil faces, warm peach light, sage foliage and terracotta college architecture. Rich natural sunshafts, reflective glass, soft shadows and subtle bloom. Contemporary clean serif headlines with restrained warm-white edge glow; small supporting copy in clear modern sans serif. Restrained premium design, no antique scrollwork, gold calligraphy, ribbons, glowing travel trails, picture-in-picture or watermark.\nIDENTITIES: Ashok Kumar, adult Tamil Indian man aged 22 throughout this one-year story, medium-brown skin, slim oval face, dark almond eyes, thick brows, short side-parted wavy black hair, neat trimmed moustache and short closely trimmed beard. Same youthful face and slender body in every frame; no ageing. Supriya, adult Tamil Indian woman aged 22 throughout this one-year story, medium-brown skin, oval face, dark almond eyes, small maroon bindi, long black braid, same youthful face and natural slender proportions. Stylish chudidhar in every appearance; never a gown or sari.\nWARDROBE: Ashok: charcoal casual shirt, beige trousers. Supriya: powder-blue chudidhar, white dupatta.\nCOMPOSITION: The distinct tiled side corridor immediately RIGHT of the library: rain-tree-lined open bays, blue noticeboard, library door at frame LEFT. The couple stand facing each other, a notebook in her hand, shy smiles, no walking.\nATMOSPHERE: A few dry leaves hover near the open bays, independently drifting.\nTEXT: \"Then they met on campus.\". Only this scene’s words; one clear text area with good line spacing.\nSame identity across the one-year story. Text-only generation; do not collage places.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-4.jpg",
+      "image_request_id": "zmdnxzc1qsrmy0d0xkv9fetm94",
+      "actual_input_path": "image-4-take-1-input.json",
+      "request_metadata": {
+        "id": "zmdnxzc1qsrmy0d0xkv9fetm94",
+        "status": "succeeded",
+        "model": "openai/gpt-image-2.5-flare",
+        "imageReferences": 0,
+        "metrics": {
+          "image_output_count": 1,
+          "model_variant": "high",
+          "predict_time": 17.502282364,
+          "resolution_target": "9:16",
+          "total_time": 17.520145592
+        },
+        "error": null,
+        "data_removed": false,
+        "outputUrl": "https://replicate.delivery/xezq/g2vgl9qCndaRINI0k2I9eRy6Mn6y4s7HR0414kmZxucDrKpLA/tmppiyqgxui.jpeg"
+      },
+      "text_fields": [
+        {
+          "role": "caption",
+          "text": "Then they met on campus."
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "name": "Campus café patio",
+      "status": "pending",
+      "image_prompt_template": "Vertical 9:16 premium pastel-watercolor illustrated anime romance, softly painted cinematic depth, delicate brush grain, youthful Tamil faces, warm peach light, sage foliage and terracotta college architecture. Rich natural sunshafts, reflective glass, soft shadows and subtle bloom. Contemporary clean serif headlines with restrained warm-white edge glow; small supporting copy in clear modern sans serif. Restrained premium design, no antique scrollwork, gold calligraphy, ribbons, glowing travel trails, picture-in-picture or watermark.\nIDENTITIES: Ashok Kumar, adult Tamil Indian man aged 22 throughout this one-year story, medium-brown skin, slim oval face, dark almond eyes, thick brows, short side-parted wavy black hair, neat trimmed moustache and short closely trimmed beard. Same youthful face and slender body in every frame; no ageing. Supriya, adult Tamil Indian woman aged 22 throughout this one-year story, medium-brown skin, oval face, dark almond eyes, small maroon bindi, long black braid, same youthful face and natural slender proportions. Stylish chudidhar in every appearance; never a gown or sari.\nWARDROBE: Ashok: cream knit polo, dark trousers. Supriya: sage chudidhar, pale peach dupatta.\nCOMPOSITION: Small campus café patio immediately LEFT of the corridor, two coffee cups on one round table, teal café window, potted palms. Couple seated across the table; corridor edge remains at RIGHT.\nATMOSPHERE: Coffee steam curls softly and a single small unprinted paper coaster gently levitates just above the table edge.\nTEXT: \"Coffee became a regular thing.\". Only this scene’s words; one clear text area with good line spacing.\nSame identity across the one-year story. Text-only generation; do not collage places.",
+      "image_prompt": "Vertical 9:16 premium pastel-watercolor illustrated anime romance, softly painted cinematic depth, delicate brush grain, youthful Tamil faces, warm peach light, sage foliage and terracotta college architecture. Rich natural sunshafts, reflective glass, soft shadows and subtle bloom. Contemporary clean serif headlines with restrained warm-white edge glow; small supporting copy in clear modern sans serif. Restrained premium design, no antique scrollwork, gold calligraphy, ribbons, glowing travel trails, picture-in-picture or watermark.\nIDENTITIES: Ashok Kumar, adult Tamil Indian man aged 22 throughout this one-year story, medium-brown skin, slim oval face, dark almond eyes, thick brows, short side-parted wavy black hair, neat trimmed moustache and short closely trimmed beard. Same youthful face and slender body in every frame; no ageing. Supriya, adult Tamil Indian woman aged 22 throughout this one-year story, medium-brown skin, oval face, dark almond eyes, small maroon bindi, long black braid, same youthful face and natural slender proportions. Stylish chudidhar in every appearance; never a gown or sari.\nWARDROBE: Ashok: cream knit polo, dark trousers. Supriya: sage chudidhar, pale peach dupatta.\nCOMPOSITION: Small campus café patio immediately LEFT of the corridor, two coffee cups on one round table, teal café window, potted palms. Couple seated across the table; corridor edge remains at RIGHT.\nATMOSPHERE: Coffee steam curls softly and a single small unprinted paper coaster gently levitates just above the table edge.\nTEXT: \"Coffee became a regular thing.\". Only this scene’s words; one clear text area with good line spacing.\nSame identity across the one-year story. Text-only generation; do not collage places.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-5.jpg",
+      "image_request_id": "ct37gkhzxsrmy0d0xkvvd4ysmc",
+      "actual_input_path": "image-5-take-1-input.json",
+      "request_metadata": {
+        "id": "ct37gkhzxsrmy0d0xkvvd4ysmc",
+        "status": "succeeded",
+        "model": "openai/gpt-image-2.5-flare",
+        "imageReferences": 0,
+        "metrics": {
+          "image_output_count": 1,
+          "model_variant": "high",
+          "predict_time": 19.776931309,
+          "resolution_target": "9:16",
+          "total_time": 19.793163982
+        },
+        "error": null,
+        "data_removed": false,
+        "outputUrl": "https://replicate.delivery/xezq/cWVXC3SOu3LNJ9lWGhZFgW4o6hRCPVVOc1UBuD1FllUuVl0F/tmp5zwkk5jh.jpeg"
+      },
+      "text_fields": [
+        {
+          "role": "caption",
+          "text": "Coffee became a regular thing."
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "name": "Study garden",
+      "status": "pending",
+      "image_prompt_template": "Vertical 9:16 premium pastel-watercolor illustrated anime romance, softly painted cinematic depth, delicate brush grain, youthful Tamil faces, warm peach light, sage foliage and terracotta college architecture. Rich natural sunshafts, reflective glass, soft shadows and subtle bloom. Contemporary clean serif headlines with restrained warm-white edge glow; small supporting copy in clear modern sans serif. Restrained premium design, no antique scrollwork, gold calligraphy, ribbons, glowing travel trails, picture-in-picture or watermark.\nIDENTITIES: Ashok Kumar, adult Tamil Indian man aged 22 throughout this one-year story, medium-brown skin, slim oval face, dark almond eyes, thick brows, short side-parted wavy black hair, neat trimmed moustache and short closely trimmed beard. Same youthful face and slender body in every frame; no ageing. Supriya, adult Tamil Indian woman aged 22 throughout this one-year story, medium-brown skin, oval face, dark almond eyes, small maroon bindi, long black braid, same youthful face and natural slender proportions. Stylish chudidhar in every appearance; never a gown or sari.\nWARDROBE: Ashok: muted rust overshirt, white tee. Supriya: lilac chudidhar, ivory dupatta.\nCOMPOSITION: Distinct walled study garden immediately RIGHT of café, low stone bench, chalk study board with no readable writing, jasmine hedge. Couple seated with different notebooks; café side wall visible at LEFT.\nATMOSPHERE: A few jasmine blossoms hover and drift at separate depths, books stay on bench.\nTEXT: \"They made time for each other.\". Only this scene’s words; one clear text area with good line spacing.\nSame identity across the one-year story. Text-only generation; do not collage places.",
+      "image_prompt": "Vertical 9:16 premium pastel-watercolor illustrated anime romance, softly painted cinematic depth, delicate brush grain, youthful Tamil faces, warm peach light, sage foliage and terracotta college architecture. Rich natural sunshafts, reflective glass, soft shadows and subtle bloom. Contemporary clean serif headlines with restrained warm-white edge glow; small supporting copy in clear modern sans serif. Restrained premium design, no antique scrollwork, gold calligraphy, ribbons, glowing travel trails, picture-in-picture or watermark.\nIDENTITIES: Ashok Kumar, adult Tamil Indian man aged 22 throughout this one-year story, medium-brown skin, slim oval face, dark almond eyes, thick brows, short side-parted wavy black hair, neat trimmed moustache and short closely trimmed beard. Same youthful face and slender body in every frame; no ageing. Supriya, adult Tamil Indian woman aged 22 throughout this one-year story, medium-brown skin, oval face, dark almond eyes, small maroon bindi, long black braid, same youthful face and natural slender proportions. Stylish chudidhar in every appearance; never a gown or sari.\nWARDROBE: Ashok: muted rust overshirt, white tee. Supriya: lilac chudidhar, ivory dupatta.\nCOMPOSITION: Distinct walled study garden immediately RIGHT of café, low stone bench, chalk study board with no readable writing, jasmine hedge. Couple seated with different notebooks; café side wall visible at LEFT.\nATMOSPHERE: A few jasmine blossoms hover and drift at separate depths, books stay on bench.\nTEXT: \"They made time for each other.\". Only this scene’s words; one clear text area with good line spacing.\nSame identity across the one-year story. Text-only generation; do not collage places.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-6.jpg",
+      "image_request_id": "rjtbrtz8k9rmr0d0xkvttk3s9w",
+      "actual_input_path": "image-6-take-1-input.json",
+      "request_metadata": {
+        "id": "rjtbrtz8k9rmr0d0xkvttk3s9w",
+        "status": "succeeded",
+        "model": "openai/gpt-image-2.5-flare",
+        "imageReferences": 0,
+        "metrics": {
+          "image_output_count": 1,
+          "model_variant": "high",
+          "predict_time": 16.767259932,
+          "resolution_target": "9:16",
+          "total_time": 16.784759774
+        },
+        "error": null,
+        "data_removed": false,
+        "outputUrl": "https://replicate.delivery/xezq/IspfJHYZhpVJCCfCW0qurwiYY48jfFeUKjf1CV9AvssM8qS6C/tmpc_2seg9c.jpeg"
+      },
+      "text_fields": [
+        {
+          "role": "caption",
+          "text": "They made time for each other."
+        }
+      ]
+    },
+    {
+      "index": 7,
+      "name": "Covered college walkway",
+      "status": "pending",
+      "image_prompt_template": "Vertical 9:16 premium pastel-watercolor illustrated anime romance, softly painted cinematic depth, delicate brush grain, youthful Tamil faces, warm peach light, sage foliage and terracotta college architecture. Rich natural sunshafts, reflective glass, soft shadows and subtle bloom. Contemporary clean serif headlines with restrained warm-white edge glow; small supporting copy in clear modern sans serif. Restrained premium design, no antique scrollwork, gold calligraphy, ribbons, glowing travel trails, picture-in-picture or watermark.\nIDENTITIES: Ashok Kumar, adult Tamil Indian man aged 22 throughout this one-year story, medium-brown skin, slim oval face, dark almond eyes, thick brows, short side-parted wavy black hair, neat trimmed moustache and short closely trimmed beard. Same youthful face and slender body in every frame; no ageing. Supriya, adult Tamil Indian woman aged 22 throughout this one-year story, medium-brown skin, oval face, dark almond eyes, small maroon bindi, long black braid, same youthful face and natural slender proportions. Stylish chudidhar in every appearance; never a gown or sari.\nWARDROBE: Ashok: pale-blue linen shirt, navy trousers. Supriya: teal chudidhar, blush dupatta.\nCOMPOSITION: Covered walkway immediately LEFT of garden, striped late-afternoon light, bicycles parked against far wall, no moving vehicles. Couple stand close with joined hands. Garden wall remains at RIGHT.\nATMOSPHERE: Two small plane-tree leaves levitate near the walkway edge, slow independent rotation.\nTEXT: \"One year later, they decided to get married.\". Only this scene’s words; one clear text area with good line spacing.\nSame identity across the one-year story. Text-only generation; do not collage places.",
+      "image_prompt": "Vertical 9:16 premium pastel-watercolor illustrated anime romance, softly painted cinematic depth, delicate brush grain, youthful Tamil faces, warm peach light, sage foliage and terracotta college architecture. Rich natural sunshafts, reflective glass, soft shadows and subtle bloom. Contemporary clean serif headlines with restrained warm-white edge glow; small supporting copy in clear modern sans serif. Restrained premium design, no antique scrollwork, gold calligraphy, ribbons, glowing travel trails, picture-in-picture or watermark.\nIDENTITIES: Ashok Kumar, adult Tamil Indian man aged 22 throughout this one-year story, medium-brown skin, slim oval face, dark almond eyes, thick brows, short side-parted wavy black hair, neat trimmed moustache and short closely trimmed beard. Same youthful face and slender body in every frame; no ageing. Supriya, adult Tamil Indian woman aged 22 throughout this one-year story, medium-brown skin, oval face, dark almond eyes, small maroon bindi, long black braid, same youthful face and natural slender proportions. Stylish chudidhar in every appearance; never a gown or sari.\nWARDROBE: Ashok: pale-blue linen shirt, navy trousers. Supriya: teal chudidhar, blush dupatta.\nCOMPOSITION: Covered walkway immediately LEFT of garden, striped late-afternoon light, bicycles parked against far wall, no moving vehicles. Couple stand close with joined hands. Garden wall remains at RIGHT.\nATMOSPHERE: Two small plane-tree leaves levitate near the walkway edge, slow independent rotation.\nTEXT: \"One year later, they decided to get married.\". Only this scene’s words; one clear text area with good line spacing.\nSame identity across the one-year story. Text-only generation; do not collage places.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-7.jpg",
+      "image_request_id": "qx21rhj6s1rmy0d0xpev91g7b4",
+      "actual_input_path": "image-7-take-1-input.json",
+      "request_metadata": {
+        "id": "qx21rhj6s1rmy0d0xpev91g7b4",
+        "status": "succeeded",
+        "model": "openai/gpt-image-2.5-flare",
+        "imageReferences": 0,
+        "metrics": {
+          "image_output_count": 1,
+          "model_variant": "high",
+          "predict_time": 19.969138814,
+          "resolution_target": "9:16",
+          "total_time": 20.022104892
+        },
+        "error": null,
+        "data_removed": false,
+        "outputUrl": "https://replicate.delivery/xezq/ZPXSUXShXpJrGd3fXirTlGnR40aaSZ0I9YkBefW7melqDgJdB/tmpv8num2su.jpeg"
+      },
+      "text_fields": [
+        {
+          "role": "caption",
+          "text": "One year later, they decided to get married."
+        }
+      ]
+    },
+    {
+      "index": 8,
+      "name": "Open-air campus stage",
+      "status": "pending",
+      "image_prompt_template": "Vertical 9:16 premium pastel-watercolor illustrated anime romance, softly painted cinematic depth, delicate brush grain, youthful Tamil faces, warm peach light, sage foliage and terracotta college architecture. Rich natural sunshafts, reflective glass, soft shadows and subtle bloom. Contemporary clean serif headlines with restrained warm-white edge glow; small supporting copy in clear modern sans serif. Restrained premium design, no antique scrollwork, gold calligraphy, ribbons, glowing travel trails, picture-in-picture or watermark.\nIDENTITIES: Ashok Kumar, adult Tamil Indian man aged 22 throughout this one-year story, medium-brown skin, slim oval face, dark almond eyes, thick brows, short side-parted wavy black hair, neat trimmed moustache and short closely trimmed beard. Same youthful face and slender body in every frame; no ageing. Supriya, adult Tamil Indian woman aged 22 throughout this one-year story, medium-brown skin, oval face, dark almond eyes, small maroon bindi, long black braid, same youthful face and natural slender proportions. Stylish chudidhar in every appearance; never a gown or sari.\nWARDROBE: Ashok: olive shirt, stone trousers. Supriya: peach chudidhar, ivory dupatta.\nCOMPOSITION: Open-air amphitheatre immediately RIGHT of walkway; curved seating, one low event stage, single clean announcement panel, same mature trees. Couple stand beside panel, not blocking words. Walkway support is foreground LEFT.\nATMOSPHERE: A few small blank pastel event-paper shapes float slowly around stage edges.\nTEXT: \"Ashok Kumar & Supriya\\nWe’re getting married!\". Only this scene’s words; one clear text area with good line spacing.\nSame identity across the one-year story. Text-only generation; do not collage places.",
+      "image_prompt": "Vertical 9:16 premium pastel-watercolor illustrated anime romance, softly painted cinematic depth, delicate brush grain, youthful Tamil faces, warm peach light, sage foliage and terracotta college architecture. Rich natural sunshafts, reflective glass, soft shadows and subtle bloom. Contemporary clean serif headlines with restrained warm-white edge glow; small supporting copy in clear modern sans serif. Restrained premium design, no antique scrollwork, gold calligraphy, ribbons, glowing travel trails, picture-in-picture or watermark.\nIDENTITIES: Ashok Kumar, adult Tamil Indian man aged 22 throughout this one-year story, medium-brown skin, slim oval face, dark almond eyes, thick brows, short side-parted wavy black hair, neat trimmed moustache and short closely trimmed beard. Same youthful face and slender body in every frame; no ageing. Supriya, adult Tamil Indian woman aged 22 throughout this one-year story, medium-brown skin, oval face, dark almond eyes, small maroon bindi, long black braid, same youthful face and natural slender proportions. Stylish chudidhar in every appearance; never a gown or sari.\nWARDROBE: Ashok: olive shirt, stone trousers. Supriya: peach chudidhar, ivory dupatta.\nCOMPOSITION: Open-air amphitheatre immediately RIGHT of walkway; curved seating, one low event stage, single clean announcement panel, same mature trees. Couple stand beside panel, not blocking words. Walkway support is foreground LEFT.\nATMOSPHERE: A few small blank pastel event-paper shapes float slowly around stage edges.\nTEXT: \"Ashok Kumar & Supriya\\nWe’re getting married!\". Only this scene’s words; one clear text area with good line spacing.\nSame identity across the one-year story. Text-only generation; do not collage places.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-8.jpg",
+      "image_request_id": "6x1na9zx99rmw0d0xper3ch1e4",
+      "actual_input_path": "image-8-take-1-input.json",
+      "request_metadata": {
+        "id": "6x1na9zx99rmw0d0xper3ch1e4",
+        "status": "succeeded",
+        "model": "openai/gpt-image-2.5-flare",
+        "imageReferences": 0,
+        "metrics": {
+          "image_output_count": 1,
+          "model_variant": "high",
+          "predict_time": 18.736296654,
+          "resolution_target": "9:16",
+          "total_time": 18.758454929
+        },
+        "error": null,
+        "data_removed": false,
+        "outputUrl": "https://replicate.delivery/xezq/vVSgVgQeNkX5CCZdw79UPrJRvWHVTffohY2wv9tQcCsPDwkuA/tmp546vs_ig.jpeg"
+      },
+      "text_fields": [
+        {
+          "role": "caption",
+          "text": "Ashok Kumar & Supriya\nWe’re getting married!"
+        }
+      ]
+    },
+    {
+      "index": 9,
+      "name": "Campus evening café event",
+      "status": "pending",
+      "image_prompt_template": "Vertical 9:16 premium pastel-watercolor illustrated anime romance, softly painted cinematic depth, delicate brush grain, youthful Tamil faces, warm peach light, sage foliage and terracotta college architecture. Rich natural sunshafts, reflective glass, soft shadows and subtle bloom. Contemporary clean serif headlines with restrained warm-white edge glow; small supporting copy in clear modern sans serif. Restrained premium design, no antique scrollwork, gold calligraphy, ribbons, glowing travel trails, picture-in-picture or watermark.\nIDENTITIES: Ashok Kumar, adult Tamil Indian man aged 22 throughout this one-year story, medium-brown skin, slim oval face, dark almond eyes, thick brows, short side-parted wavy black hair, neat trimmed moustache and short closely trimmed beard. Same youthful face and slender body in every frame; no ageing. Supriya, adult Tamil Indian woman aged 22 throughout this one-year story, medium-brown skin, oval face, dark almond eyes, small maroon bindi, long black braid, same youthful face and natural slender proportions. Stylish chudidhar in every appearance; never a gown or sari.\nWARDROBE: Ashok: black relaxed shirt, grey chinos. Supriya: maroon chudidhar, pale-gold dupatta.\nCOMPOSITION: Campus evening reception setup immediately RIGHT of amphitheatre: fairy-lit café lawn, tables, linen, flowers, ONE reception panel. Stage side wall remains on LEFT. This is campus event decor, not a beach or distant new venue.\nATMOSPHERE: Small flower petals levitate at different heights around table corners, warm motes in practical lights.\nTEXT: \"Come celebrate with us\\nReception · 6 February 2020\\n7:30 p.m.\". Only this scene’s words; one clear text area with good line spacing.\nSame identity across the one-year story. Text-only generation; do not collage places.",
+      "image_prompt": "Vertical 9:16 premium pastel-watercolor illustrated anime romance, softly painted cinematic depth, delicate brush grain, youthful Tamil faces, warm peach light, sage foliage and terracotta college architecture. Rich natural sunshafts, reflective glass, soft shadows and subtle bloom. Contemporary clean serif headlines with restrained warm-white edge glow; small supporting copy in clear modern sans serif. Restrained premium design, no antique scrollwork, gold calligraphy, ribbons, glowing travel trails, picture-in-picture or watermark.\nIDENTITIES: Ashok Kumar, adult Tamil Indian man aged 22 throughout this one-year story, medium-brown skin, slim oval face, dark almond eyes, thick brows, short side-parted wavy black hair, neat trimmed moustache and short closely trimmed beard. Same youthful face and slender body in every frame; no ageing. Supriya, adult Tamil Indian woman aged 22 throughout this one-year story, medium-brown skin, oval face, dark almond eyes, small maroon bindi, long black braid, same youthful face and natural slender proportions. Stylish chudidhar in every appearance; never a gown or sari.\nWARDROBE: Ashok: black relaxed shirt, grey chinos. Supriya: maroon chudidhar, pale-gold dupatta.\nCOMPOSITION: Campus evening reception setup immediately RIGHT of amphitheatre: fairy-lit café lawn, tables, linen, flowers, ONE reception panel. Stage side wall remains on LEFT. This is campus event decor, not a beach or distant new venue.\nATMOSPHERE: Small flower petals levitate at different heights around table corners, warm motes in practical lights.\nTEXT: \"Come celebrate with us\\nReception · 6 February 2020\\n7:30 p.m.\". Only this scene’s words; one clear text area with good line spacing.\nSame identity across the one-year story. Text-only generation; do not collage places.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-9.jpg",
+      "image_request_id": "1e3qqzz3f5rmw0d0xpfanase70",
+      "actual_input_path": "image-9-take-1-input.json",
+      "request_metadata": {
+        "id": "1e3qqzz3f5rmw0d0xpfanase70",
+        "status": "succeeded",
+        "model": "openai/gpt-image-2.5-flare",
+        "imageReferences": 0,
+        "metrics": {
+          "image_output_count": 1,
+          "model_variant": "high",
+          "predict_time": 17.296723852,
+          "resolution_target": "9:16",
+          "total_time": 17.316086218
+        },
+        "error": null,
+        "data_removed": false,
+        "outputUrl": "https://replicate.delivery/xezq/QOH8SeeAkHgol0t77Wfh54Gf0SQtVVm80VOIXEQnNEIHKgJdB/tmprnjqu6lw.jpeg"
+      },
+      "text_fields": [
+        {
+          "role": "caption",
+          "text": "Come celebrate with us\nReception · 6 February 2020\n7:30 p.m."
+        }
+      ]
+    },
+    {
+      "index": 10,
+      "name": "College alumni garden invitation",
+      "status": "pending",
+      "image_prompt_template": "Vertical 9:16 premium pastel-watercolor illustrated anime romance, softly painted cinematic depth, delicate brush grain, youthful Tamil faces, warm peach light, sage foliage and terracotta college architecture. Rich natural sunshafts, reflective glass, soft shadows and subtle bloom. Contemporary clean serif headlines with restrained warm-white edge glow; small supporting copy in clear modern sans serif. Restrained premium design, no antique scrollwork, gold calligraphy, ribbons, glowing travel trails, picture-in-picture or watermark.\nIDENTITIES: Ashok Kumar, adult Tamil Indian man aged 22 throughout this one-year story, medium-brown skin, slim oval face, dark almond eyes, thick brows, short side-parted wavy black hair, neat trimmed moustache and short closely trimmed beard. Same youthful face and slender body in every frame; no ageing. Supriya, adult Tamil Indian woman aged 22 throughout this one-year story, medium-brown skin, oval face, dark almond eyes, small maroon bindi, long black braid, same youthful face and natural slender proportions. Stylish chudidhar in every appearance; never a gown or sari.\nWARDROBE: Ashok: ivory casual shirt, navy trousers. Supriya: cornflower-blue chudidhar, cream dupatta.\nCOMPOSITION: Alumni garden pavilion immediately LEFT of event lawn: one contemporary invitation panel framed by foliage, simple white flowers and clear glass lamps. Couple stand nearby. Café boundary remains foreground RIGHT. Venue wording on panel is an invitation address; do not change the scenery into the named venue.\nATMOSPHERE: Several small pale leaves drift weightlessly around garden edges; glass catches passing light.\nTEXT: \"Join us for the wedding\\n7 February 2020 · 8:00 a.m.\\nLeela Channaiah Kalyana Mandapa\\nVontikoppal, Mysore\". Only this scene’s words; one clear text area with good line spacing.\nSame identity across the one-year story. Text-only generation; do not collage places.",
+      "image_prompt": "Vertical 9:16 premium pastel-watercolor illustrated anime romance, softly painted cinematic depth, delicate brush grain, youthful Tamil faces, warm peach light, sage foliage and terracotta college architecture. Rich natural sunshafts, reflective glass, soft shadows and subtle bloom. Contemporary clean serif headlines with restrained warm-white edge glow; small supporting copy in clear modern sans serif. Restrained premium design, no antique scrollwork, gold calligraphy, ribbons, glowing travel trails, picture-in-picture or watermark.\nIDENTITIES: Ashok Kumar, adult Tamil Indian man aged 22 throughout this one-year story, medium-brown skin, slim oval face, dark almond eyes, thick brows, short side-parted wavy black hair, neat trimmed moustache and short closely trimmed beard. Same youthful face and slender body in every frame; no ageing. Supriya, adult Tamil Indian woman aged 22 throughout this one-year story, medium-brown skin, oval face, dark almond eyes, small maroon bindi, long black braid, same youthful face and natural slender proportions. Stylish chudidhar in every appearance; never a gown or sari.\nWARDROBE: Ashok: ivory casual shirt, navy trousers. Supriya: cornflower-blue chudidhar, cream dupatta.\nCOMPOSITION: Alumni garden pavilion immediately LEFT of event lawn: one contemporary invitation panel framed by foliage, simple white flowers and clear glass lamps. Couple stand nearby. Café boundary remains foreground RIGHT. Venue wording on panel is an invitation address; do not change the scenery into the named venue.\nATMOSPHERE: Several small pale leaves drift weightlessly around garden edges; glass catches passing light.\nTEXT: \"Join us for the wedding\\n7 February 2020 · 8:00 a.m.\\nLeela Channaiah Kalyana Mandapa\\nVontikoppal, Mysore\". Only this scene’s words; one clear text area with good line spacing.\nSame identity across the one-year story. Text-only generation; do not collage places.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-10.jpg",
+      "image_request_id": "0t2q1s4w4drmr0d0xpfvvtyv3g",
+      "actual_input_path": "image-10-take-1-input.json",
+      "request_metadata": {
+        "id": "0t2q1s4w4drmr0d0xpfvvtyv3g",
+        "status": "succeeded",
+        "model": "openai/gpt-image-2.5-flare",
+        "imageReferences": 0,
+        "metrics": {
+          "image_output_count": 1,
+          "model_variant": "high",
+          "predict_time": 20.581614666,
+          "resolution_target": "9:16",
+          "total_time": 20.600620449
+        },
+        "error": null,
+        "data_removed": false,
+        "outputUrl": "https://replicate.delivery/xezq/EsSdaZkU3s4sIlefvRyGe0eIoQlil1soeEveGRjTTs4A1Am0F/tmplnz7yiq4.jpeg"
+      },
+      "text_fields": [
+        {
+          "role": "caption",
+          "text": "Join us for the wedding\n7 February 2020 · 8:00 a.m.\nLeela Channaiah Kalyana Mandapa\nVontikoppal, Mysore"
+        }
+      ]
+    },
+    {
+      "index": 11,
+      "name": "Campus front lawn date portrait",
+      "status": "pending",
+      "image_prompt_template": "Vertical 9:16 premium pastel-watercolor illustrated anime romance, softly painted cinematic depth, delicate brush grain, youthful Tamil faces, warm peach light, sage foliage and terracotta college architecture. Rich natural sunshafts, reflective glass, soft shadows and subtle bloom. Contemporary clean serif headlines with restrained warm-white edge glow; small supporting copy in clear modern sans serif. Restrained premium design, no antique scrollwork, gold calligraphy, ribbons, glowing travel trails, picture-in-picture or watermark.\nIDENTITIES: Ashok Kumar, adult Tamil Indian man aged 22 throughout this one-year story, medium-brown skin, slim oval face, dark almond eyes, thick brows, short side-parted wavy black hair, neat trimmed moustache and short closely trimmed beard. Same youthful face and slender body in every frame; no ageing. Supriya, adult Tamil Indian woman aged 22 throughout this one-year story, medium-brown skin, oval face, dark almond eyes, small maroon bindi, long black braid, same youthful face and natural slender proportions. Stylish chudidhar in every appearance; never a gown or sari.\nWARDROBE: Ashok: tailored navy blazer, white tee, beige trousers. Supriya: elegant rose chudidhar, ivory dupatta.\nCOMPOSITION: Main college front lawn next to alumni garden, same clock tower softly visible behind. ONE save-the-date panel to the couple’s right. Couple stand shoulder to shoulder, faces and full outfits clear. Warm campus evening; side garden opening behind camera. ONE three-storey red-brick college main building, symmetrical long facade, central square clock tower with a flat terracotta cap, three tall ivory-trimmed ground-floor entrance openings, broad FIVE pale-stone steps, two round terracotta planters flanking those steps. ONE honey-brown slatted wooden bench with black iron legs sits on the paved ground apron immediately LEFT of the steps, parallel to the facade, two metres from the left planter. Bench is outside beside the entrance, never on a rooftop, terrace or balcony. Main entrance behind and to the RIGHT of the bench. A straight paved approach leads from the foreground lawn to the steps. Rain trees stand outside the approach on both sides.\nATMOSPHERE: A few small rain-tree leaves and flower petals levitate slowly in the settled view.\nTEXT: \"Save the date\\n6 & 7 February 2020\". Only this scene’s words; one clear text area with good line spacing.\nSame identity across the one-year story. Text-only generation; do not collage places.",
+      "image_prompt": "Vertical 9:16 premium pastel-watercolor illustrated anime romance, softly painted cinematic depth, delicate brush grain, youthful Tamil faces, warm peach light, sage foliage and terracotta college architecture. Rich natural sunshafts, reflective glass, soft shadows and subtle bloom. Contemporary clean serif headlines with restrained warm-white edge glow; small supporting copy in clear modern sans serif. Restrained premium design, no antique scrollwork, gold calligraphy, ribbons, glowing travel trails, picture-in-picture or watermark.\nIDENTITIES: Ashok Kumar, adult Tamil Indian man aged 22 throughout this one-year story, medium-brown skin, slim oval face, dark almond eyes, thick brows, short side-parted wavy black hair, neat trimmed moustache and short closely trimmed beard. Same youthful face and slender body in every frame; no ageing. Supriya, adult Tamil Indian woman aged 22 throughout this one-year story, medium-brown skin, oval face, dark almond eyes, small maroon bindi, long black braid, same youthful face and natural slender proportions. Stylish chudidhar in every appearance; never a gown or sari.\nWARDROBE: Ashok: tailored navy blazer, white tee, beige trousers. Supriya: elegant rose chudidhar, ivory dupatta.\nCOMPOSITION: Main college front lawn next to alumni garden, same clock tower softly visible behind. ONE save-the-date panel to the couple’s right. Couple stand shoulder to shoulder, faces and full outfits clear. Warm campus evening; side garden opening behind camera. ONE three-storey red-brick college main building, symmetrical long facade, central square clock tower with a flat terracotta cap, three tall ivory-trimmed ground-floor entrance openings, broad FIVE pale-stone steps, two round terracotta planters flanking those steps. ONE honey-brown slatted wooden bench with black iron legs sits on the paved ground apron immediately LEFT of the steps, parallel to the facade, two metres from the left planter. Bench is outside beside the entrance, never on a rooftop, terrace or balcony. Main entrance behind and to the RIGHT of the bench. A straight paved approach leads from the foreground lawn to the steps. Rain trees stand outside the approach on both sides.\nATMOSPHERE: A few small rain-tree leaves and flower petals levitate slowly in the settled view.\nTEXT: \"Save the date\\n6 & 7 February 2020\". Only this scene’s words; one clear text area with good line spacing.\nSame identity across the one-year story. Text-only generation; do not collage places.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-11.jpg",
+      "image_request_id": "ckxnzzaxpsrmw0d0xpg8t2pej0",
+      "actual_input_path": "image-11-take-1-input.json",
+      "request_metadata": {
+        "id": "ckxnzzaxpsrmw0d0xpg8t2pej0",
+        "status": "succeeded",
+        "model": "openai/gpt-image-2.5-flare",
+        "imageReferences": 0,
+        "metrics": {
+          "image_output_count": 1,
+          "model_variant": "high",
+          "predict_time": 20.758251475,
+          "resolution_target": "9:16",
+          "total_time": 20.774165096
+        },
+        "error": null,
+        "data_removed": false,
+        "outputUrl": "https://replicate.delivery/xezq/G5uBkIWxFT7CM9cvIkUctllH1Ya9sZ51lYevTLNmw1fFEYSXA/tmpdji6fmwd.jpeg"
+      },
+      "text_fields": [
+        {
+          "role": "caption",
+          "text": "Save the date\n6 & 7 February 2020"
+        }
+      ]
+    },
+    {
+      "index": 12,
+      "name": "Campus closing portrait",
+      "status": "pending",
+      "image_prompt": "Vertical 9:16 premium pastel-watercolor illustrated anime romance, softly painted cinematic depth, delicate brush grain, youthful Tamil faces, warm peach light, sage foliage and terracotta college architecture. Rich natural sunshafts, reflective glass, soft shadows and subtle bloom. Contemporary clean serif headlines with restrained warm-white edge glow; small supporting copy in clear modern sans serif. Restrained premium design, no antique scrollwork, gold calligraphy, ribbons, glowing travel trails, picture-in-picture or watermark.\nIDENTITIES: Ashok Kumar, adult Tamil Indian man aged 22 throughout this one-year story, medium-brown skin, slim oval face, dark almond eyes, thick brows, short side-parted wavy black hair, neat trimmed moustache and short closely trimmed beard. Same youthful face and slender body in every frame; no ageing. Supriya, adult Tamil Indian woman aged 22 throughout this one-year story, medium-brown skin, oval face, dark almond eyes, small maroon bindi, long black braid, same youthful face and natural slender proportions. Stylish chudidhar in every appearance; never a gown or sari.\nWARDROBE: EXACT same navy blazer, white tee and beige trousers; EXACT same rose chudidhar and ivory dupatta as scene 11, because this is the same continuous moment.\nCOMPOSITION: Exact SAME lawn, couple, clothing, evening lights and ONE date panel as scene 11. Camera gently farther back and slightly higher, couple turn their faces to one another with tiny smiles. Keep the same panel text; no new final quote or board.\nATMOSPHERE: Same scattered leaves and petals, continuous motion, no new burst.\nTEXT: \"Save the date\\n6 & 7 February 2020\". Only this scene’s words; one clear text area with good line spacing.\nSame identity across the one-year story. Text-only generation; do not collage places.",
+      "image_prompt_template": "Vertical 9:16 premium pastel-watercolor illustrated anime romance, softly painted cinematic depth, delicate brush grain, youthful Tamil faces, warm peach light, sage foliage and terracotta college architecture. Rich natural sunshafts, reflective glass, soft shadows and subtle bloom. Contemporary clean serif headlines with restrained warm-white edge glow; small supporting copy in clear modern sans serif. Restrained premium design, no antique scrollwork, gold calligraphy, ribbons, glowing travel trails, picture-in-picture or watermark.\nIDENTITIES: Ashok Kumar, adult Tamil Indian man aged 22 throughout this one-year story, medium-brown skin, slim oval face, dark almond eyes, thick brows, short side-parted wavy black hair, neat trimmed moustache and short closely trimmed beard. Same youthful face and slender body in every frame; no ageing. Supriya, adult Tamil Indian woman aged 22 throughout this one-year story, medium-brown skin, oval face, dark almond eyes, small maroon bindi, long black braid, same youthful face and natural slender proportions. Stylish chudidhar in every appearance; never a gown or sari.\nWARDROBE: EXACT same navy blazer, white tee and beige trousers; EXACT same rose chudidhar and ivory dupatta as scene 11, because this is the same continuous moment.\nCOMPOSITION: Exact SAME lawn, couple, clothing, evening lights and ONE date panel as scene 11. Camera gently farther back and slightly higher, couple turn their faces to one another with tiny smiles. Keep the same panel text; no new final quote or board.\nATMOSPHERE: Same scattered leaves and petals, continuous motion, no new burst.\nTEXT: \"Save the date\\n6 & 7 February 2020\". Only this scene’s words; one clear text area with good line spacing.\nSame identity across the one-year story. Text-only generation; do not collage places.",
+      "image_path": "image-12.jpg",
+      "reason": "Avoid competing independent board/gateway layouts. Keep one date board from scene 11 throughout.",
+      "text_fields": [
+        {
+          "role": "caption",
+          "text": "Save the date\n6 & 7 February 2020"
+        }
+      ],
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      }
+    }
+  ],
+  "clips": [
+    {
+      "index": 1,
+      "from": 1,
+      "to": 2,
+      "duration": 5,
+      "prompt": "HIGH AERIAL HOOK, FAST FORWARD-DOWN DIVE, THEN CONTINUING SLOW PUSH. 0.00-0.65s advance from the high distant campus overview. 0.65-1.85s accelerate forward and down along the visible approach path toward the SAME bench LEFT of the main entrance. The building grows by perspective; never fly into its clock tower. 1.85-2.20s descend toward the paved apron outside the entrance; the bench and seated Ashok remain stationary. 2.20-2.70s level at seated eye height and smoothly brake. 2.70-5.00s continue a visible gentle push, another 10 percent increase in subject scale. End still drifting. Keep the five steps and planters RIGHT of the bench throughout, as in both supplied images. He stays seated looking at phone, in the same sage overshirt. Caption \"He saw her profile.\" is attached to a fixed plane above the bench, revealed only as camera reaches eye level, with a restrained edge glint. No other title.",
+      "id": "clip-01",
+      "status": "awaiting-approval",
+      "camera": "Forward-down dive, then continuing slow push",
+      "video_prompt_template": "Portrait pastel watercolor anime Tamil college film. Preserve supplied first frame until foreground geometry hides it, reveal separately staged destination. Same adult youthful identities, trimmed moustache and beard, chudidhar. Small location-specific objects gently levitate and rotate at independent phases, with sparse drifting dust; no bursts, trails or ribbons. Continuous slow secondary motion as camera eases down. No ribbons, dissolve, text morph, duplicated people or boards.\n\nHIGH AERIAL HOOK, FAST FORWARD-DOWN DIVE, THEN CONTINUING SLOW PUSH. 0.00-0.65s advance from the high distant campus overview. 0.65-1.85s accelerate forward and down along the visible approach path toward the SAME bench LEFT of the main entrance. The building grows by perspective; never fly into its clock tower. 1.85-2.20s descend toward the paved apron outside the entrance; the bench and seated Ashok remain stationary. 2.20-2.70s level at seated eye height and smoothly brake. 2.70-5.00s continue a visible gentle push, another 10 percent increase in subject scale. End still drifting. Keep the five steps and planters RIGHT of the bench throughout, as in both supplied images. He stays seated looking at phone, in the same sage overshirt. Caption \"He saw her profile.\" is attached to a fixed plane above the bench, revealed only as camera reaches eye level, with a restrained edge glint. No other title.\n\nDestination: Eye-level medium-wide frontal view of Ashok seated on the entrance bench, looking DOWN at his black phone, thumb resting on its screen, slight smile. ONE three-storey red-brick college main building, symmetrical long facade, central square clock tower with a flat terracotta cap, three tall ivory-trimmed ground-floor entrance openings, broad FIVE pale-stone steps, two round terracotta planters flanking those steps. ONE honey-brown slatted wooden bench with black iron legs sits on the paved ground apron immediately LEFT of the steps, parallel to the facade, two metres from the left planter. Bench is outside beside the entrance, never on a rooftop, terrace or balcony. Main entrance behind and to the RIGHT of the bench. A straight paved approach leads from the foreground lawn to the steps. Rain trees stand outside the approach on both sides. The wooden bench occupies the lower-left and centre of frame; five steps and two planters remain visible to its RIGHT and behind. The upper tower is outside this low frame; it has not moved. A glimpse of a simple unbranded profile photo of Supriya on the angled phone, no readable app UI. Open negative space above bench left for the short caption. No classroom, desk, roof terrace or other seating. Wardrobe: Ashok wears the EXACT same sage-green overshirt, white crew-neck tee, charcoal trousers and white sneakers; black phone and slim steel watch. Exact text: \"He saw her profile.\". One passage only, fixed and readable after the camera brakes. Match supplied last frame when present.",
+      "video_prompt": "Portrait pastel watercolor anime Tamil college film. Preserve supplied first frame until foreground geometry hides it, reveal separately staged destination. Same adult youthful identities, trimmed moustache and beard, chudidhar. Small location-specific objects gently levitate and rotate at independent phases, with sparse drifting dust; no bursts, trails or ribbons. Continuous slow secondary motion as camera eases down. No ribbons, dissolve, text morph, duplicated people or boards.\n\nHIGH AERIAL HOOK, FAST FORWARD-DOWN DIVE, THEN CONTINUING SLOW PUSH. 0.00-0.65s advance from the high distant campus overview. 0.65-1.85s accelerate forward and down along the visible approach path toward the SAME bench LEFT of the main entrance. The building grows by perspective; never fly into its clock tower. 1.85-2.20s descend toward the paved apron outside the entrance; the bench and seated Ashok remain stationary. 2.20-2.70s level at seated eye height and smoothly brake. 2.70-5.00s continue a visible gentle push, another 10 percent increase in subject scale. End still drifting. Keep the five steps and planters RIGHT of the bench throughout, as in both supplied images. He stays seated looking at phone, in the same sage overshirt. Caption \"He saw her profile.\" is attached to a fixed plane above the bench, revealed only as camera reaches eye level, with a restrained edge glint. No other title.\n\nDestination: Eye-level medium-wide frontal view of Ashok seated on the entrance bench, looking DOWN at his black phone, thumb resting on its screen, slight smile. ONE three-storey red-brick college main building, symmetrical long facade, central square clock tower with a flat terracotta cap, three tall ivory-trimmed ground-floor entrance openings, broad FIVE pale-stone steps, two round terracotta planters flanking those steps. ONE honey-brown slatted wooden bench with black iron legs sits on the paved ground apron immediately LEFT of the steps, parallel to the facade, two metres from the left planter. Bench is outside beside the entrance, never on a rooftop, terrace or balcony. Main entrance behind and to the RIGHT of the bench. A straight paved approach leads from the foreground lawn to the steps. Rain trees stand outside the approach on both sides. The wooden bench occupies the lower-left and centre of frame; five steps and two planters remain visible to its RIGHT and behind. The upper tower is outside this low frame; it has not moved. A glimpse of a simple unbranded profile photo of Supriya on the angled phone, no readable app UI. Open negative space above bench left for the short caption. No classroom, desk, roof terrace or other seating. Wardrobe: Ashok wears the EXACT same sage-green overshirt, white crew-neck tee, charcoal trousers and white sneakers; black phone and slim steel watch. Exact text: \"He saw her profile.\". One passage only, fixed and readable after the camera brakes. Match supplied last frame when present.",
+      "video_path": "clip-1.mp4",
+      "final_frame_path": "clip-1-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "scene-image",
+          "scene": 1
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 2
+        },
+        "interior_keyframes": []
+      }
+    },
+    {
+      "index": 2,
+      "from": 2,
+      "to": 3,
+      "duration": 4,
+      "status": "awaiting-approval",
+      "camera": "LEFT 90-degree pivot; a tiny counterclockwise arc at constant subject distance",
+      "video_prompt_template": "Portrait pastel watercolor anime Tamil college film. Preserve supplied first frame until foreground geometry hides it, reveal separately staged destination. Same adult youthful identities, trimmed moustache and beard, chudidhar. Small location-specific objects gently levitate and rotate at independent phases, with sparse drifting dust; no bursts, trails or ribbons. Continuous slow secondary motion as camera eases down. No ribbons, dissolve, text morph, duplicated people or boards.\n\nPRIMARY ACTION: FULL 90-DEGREE LEFT WHIP-PAN / CAMERA PIVOT into Library reading corner. This is a quarter-turn in heading, not a forward dolly followed by a tiny steering correction. Keep forward travel below half a metre. The close entrance door jamb sweeps across the lens with directional blur and depth parallax; destination starts OFFSCREEN AT THE SIDE, already at readable medium distance. TIMING: 0.00-0.20s anticipate; 0.20-1.20s turn; 1.20-1.60s brake; 1.60-4.00s settle. Fast angular travel mid-turn, strong cubic ease-out in final 25 degrees. After braking:  a tiny counterclockwise arc at constant subject distance. No prolonged approach, push-in substitute or robotic arc. Source text leaves with its own scene; destination text is uncovered behind the foreground edge, never all story captions together. Outfit changes across memories occur only while characters are fully hidden by that foreground edge. Adjacent campus locations remain solid; especially clip 8 reveals the nearby café event lawn to the RIGHT of the stage, not a beach or a disappearing room.\n\nDestination: A ground-floor library reading corner immediately LEFT off the main entrance lobby: walnut shelves, large window onto the same approach lawn, reading table. Ashok seated with phone; a separate small message bubble with no readable words implies chatting. A near ivory door jamb is on frame RIGHT, linking back to entrance. Wardrobe: Ashok: navy short-sleeve shirt, stone chinos. Supriya: dusty-rose chudidhar, cream dupatta. Exact text: \"They started chatting.\". One passage only, fixed and readable after the camera brakes. Match supplied last frame when present.",
+      "video_prompt": "Portrait pastel watercolor anime Tamil college film. Preserve supplied first frame until foreground geometry hides it, reveal separately staged destination. Same adult youthful identities, trimmed moustache and beard, chudidhar. Small location-specific objects gently levitate and rotate at independent phases, with sparse drifting dust; no bursts, trails or ribbons. Continuous slow secondary motion as camera eases down. No ribbons, dissolve, text morph, duplicated people or boards.\n\nPRIMARY ACTION: FULL 90-DEGREE LEFT WHIP-PAN / CAMERA PIVOT into Library reading corner. This is a quarter-turn in heading, not a forward dolly followed by a tiny steering correction. Keep forward travel below half a metre. The close entrance door jamb sweeps across the lens with directional blur and depth parallax; destination starts OFFSCREEN AT THE SIDE, already at readable medium distance. TIMING: 0.00-0.20s anticipate; 0.20-1.20s turn; 1.20-1.60s brake; 1.60-4.00s settle. Fast angular travel mid-turn, strong cubic ease-out in final 25 degrees. After braking:  a tiny counterclockwise arc at constant subject distance. No prolonged approach, push-in substitute or robotic arc. Source text leaves with its own scene; destination text is uncovered behind the foreground edge, never all story captions together. Outfit changes across memories occur only while characters are fully hidden by that foreground edge. Adjacent campus locations remain solid; especially clip 8 reveals the nearby café event lawn to the RIGHT of the stage, not a beach or a disappearing room.\n\nDestination: A ground-floor library reading corner immediately LEFT off the main entrance lobby: walnut shelves, large window onto the same approach lawn, reading table. Ashok seated with phone; a separate small message bubble with no readable words implies chatting. A near ivory door jamb is on frame RIGHT, linking back to entrance. Wardrobe: Ashok: navy short-sleeve shirt, stone chinos. Supriya: dusty-rose chudidhar, cream dupatta. Exact text: \"They started chatting.\". One passage only, fixed and readable after the camera brakes. Match supplied last frame when present.",
+      "video_path": "clip-2.mp4",
+      "final_frame_path": "clip-2-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 1
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 3
+        }
+      },
+      "prompt": "PRIMARY ACTION: FULL 90-DEGREE LEFT WHIP-PAN / CAMERA PIVOT into Library reading corner. This is a quarter-turn in heading, not a forward dolly followed by a tiny steering correction. Keep forward travel below half a metre. The close entrance door jamb sweeps across the lens with directional blur and depth parallax; destination starts OFFSCREEN AT THE SIDE, already at readable medium distance. TIMING: 0.00-0.20s anticipate; 0.20-1.20s turn; 1.20-1.60s brake; 1.60-4.00s settle. Fast angular travel mid-turn, strong cubic ease-out in final 25 degrees. After braking:  a tiny counterclockwise arc at constant subject distance. No prolonged approach, push-in substitute or robotic arc. Source text leaves with its own scene; destination text is uncovered behind the foreground edge, never all story captions together. Outfit changes across memories occur only while characters are fully hidden by that foreground edge. Adjacent campus locations remain solid; especially clip 8 reveals the nearby café event lawn to the RIGHT of the stage, not a beach or a disappearing room."
+    },
+    {
+      "index": 3,
+      "from": 3,
+      "to": 4,
+      "duration": 5,
+      "status": "awaiting-approval",
+      "camera": "RIGHT 90-degree pivot; a small upward tilt, then a quiet lateral drift",
+      "video_prompt_template": "Portrait pastel watercolor anime Tamil college film. Preserve supplied first frame until foreground geometry hides it, reveal separately staged destination. Same adult youthful identities, trimmed moustache and beard, chudidhar. Small location-specific objects gently levitate and rotate at independent phases, with sparse drifting dust; no bursts, trails or ribbons. Continuous slow secondary motion as camera eases down. No ribbons, dissolve, text morph, duplicated people or boards.\n\nPRIMARY ACTION: FULL 90-DEGREE RIGHT WHIP-PAN / CAMERA PIVOT into First meeting in the side corridor. This is a quarter-turn in heading, not a forward dolly followed by a tiny steering correction. Keep forward travel below half a metre. The close library shelf end sweeps across the lens with directional blur and depth parallax; destination starts OFFSCREEN AT THE SIDE, already at readable medium distance. TIMING: 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Fast angular travel mid-turn, strong cubic ease-out in final 25 degrees. After braking:  a small upward tilt, then a quiet lateral drift. No prolonged approach, push-in substitute or robotic arc. Source text leaves with its own scene; destination text is uncovered behind the foreground edge, never all story captions together. Outfit changes across memories occur only while characters are fully hidden by that foreground edge. Adjacent campus locations remain solid; especially clip 8 reveals the nearby café event lawn to the RIGHT of the stage, not a beach or a disappearing room.\n\nDestination: The distinct tiled side corridor immediately RIGHT of the library: rain-tree-lined open bays, blue noticeboard, library door at frame LEFT. The couple stand facing each other, a notebook in her hand, shy smiles, no walking. Wardrobe: Ashok: charcoal casual shirt, beige trousers. Supriya: powder-blue chudidhar, white dupatta. Exact text: \"Then they met on campus.\". One passage only, fixed and readable after the camera brakes. Match supplied last frame when present.",
+      "video_prompt": "Portrait pastel watercolor anime Tamil college film. Preserve supplied first frame until foreground geometry hides it, reveal separately staged destination. Same adult youthful identities, trimmed moustache and beard, chudidhar. Small location-specific objects gently levitate and rotate at independent phases, with sparse drifting dust; no bursts, trails or ribbons. Continuous slow secondary motion as camera eases down. No ribbons, dissolve, text morph, duplicated people or boards.\n\nPRIMARY ACTION: FULL 90-DEGREE RIGHT WHIP-PAN / CAMERA PIVOT into First meeting in the side corridor. This is a quarter-turn in heading, not a forward dolly followed by a tiny steering correction. Keep forward travel below half a metre. The close library shelf end sweeps across the lens with directional blur and depth parallax; destination starts OFFSCREEN AT THE SIDE, already at readable medium distance. TIMING: 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Fast angular travel mid-turn, strong cubic ease-out in final 25 degrees. After braking:  a small upward tilt, then a quiet lateral drift. No prolonged approach, push-in substitute or robotic arc. Source text leaves with its own scene; destination text is uncovered behind the foreground edge, never all story captions together. Outfit changes across memories occur only while characters are fully hidden by that foreground edge. Adjacent campus locations remain solid; especially clip 8 reveals the nearby café event lawn to the RIGHT of the stage, not a beach or a disappearing room.\n\nDestination: The distinct tiled side corridor immediately RIGHT of the library: rain-tree-lined open bays, blue noticeboard, library door at frame LEFT. The couple stand facing each other, a notebook in her hand, shy smiles, no walking. Wardrobe: Ashok: charcoal casual shirt, beige trousers. Supriya: powder-blue chudidhar, white dupatta. Exact text: \"Then they met on campus.\". One passage only, fixed and readable after the camera brakes. Match supplied last frame when present.",
+      "video_path": "clip-3.mp4",
+      "final_frame_path": "clip-3-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 2
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 4
+        }
+      },
+      "prompt": "PRIMARY ACTION: FULL 90-DEGREE RIGHT WHIP-PAN / CAMERA PIVOT into First meeting in the side corridor. This is a quarter-turn in heading, not a forward dolly followed by a tiny steering correction. Keep forward travel below half a metre. The close library shelf end sweeps across the lens with directional blur and depth parallax; destination starts OFFSCREEN AT THE SIDE, already at readable medium distance. TIMING: 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Fast angular travel mid-turn, strong cubic ease-out in final 25 degrees. After braking:  a small upward tilt, then a quiet lateral drift. No prolonged approach, push-in substitute or robotic arc. Source text leaves with its own scene; destination text is uncovered behind the foreground edge, never all story captions together. Outfit changes across memories occur only while characters are fully hidden by that foreground edge. Adjacent campus locations remain solid; especially clip 8 reveals the nearby café event lawn to the RIGHT of the stage, not a beach or a disappearing room."
+    },
+    {
+      "index": 4,
+      "from": 4,
+      "to": 5,
+      "duration": 5,
+      "status": "awaiting-approval",
+      "camera": "LEFT 90-degree pivot; a tiny downward tilt to settle at the bride's eye level",
+      "video_prompt_template": "Portrait pastel watercolor anime Tamil college film. Preserve supplied first frame until foreground geometry hides it, reveal separately staged destination. Same adult youthful identities, trimmed moustache and beard, chudidhar. Small location-specific objects gently levitate and rotate at independent phases, with sparse drifting dust; no bursts, trails or ribbons. Continuous slow secondary motion as camera eases down. No ribbons, dissolve, text morph, duplicated people or boards.\n\nPRIMARY ACTION: FULL 90-DEGREE LEFT WHIP-PAN / CAMERA PIVOT into Campus café patio. This is a quarter-turn in heading, not a forward dolly followed by a tiny steering correction. Keep forward travel below half a metre. The close corridor pier sweeps across the lens with directional blur and depth parallax; destination starts OFFSCREEN AT THE SIDE, already at readable medium distance. TIMING: 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Fast angular travel mid-turn, strong cubic ease-out in final 25 degrees. After braking:  a tiny downward tilt to settle at the bride's eye level. No prolonged approach, push-in substitute or robotic arc. Source text leaves with its own scene; destination text is uncovered behind the foreground edge, never all story captions together. Outfit changes across memories occur only while characters are fully hidden by that foreground edge. Adjacent campus locations remain solid; especially clip 8 reveals the nearby café event lawn to the RIGHT of the stage, not a beach or a disappearing room.\n\nDestination: Small campus café patio immediately LEFT of the corridor, two coffee cups on one round table, teal café window, potted palms. Couple seated across the table; corridor edge remains at RIGHT. Wardrobe: Ashok: cream knit polo, dark trousers. Supriya: sage chudidhar, pale peach dupatta. Exact text: \"Coffee became a regular thing.\". One passage only, fixed and readable after the camera brakes. Match supplied last frame when present.",
+      "video_prompt": "Portrait pastel watercolor anime Tamil college film. Preserve supplied first frame until foreground geometry hides it, reveal separately staged destination. Same adult youthful identities, trimmed moustache and beard, chudidhar. Small location-specific objects gently levitate and rotate at independent phases, with sparse drifting dust; no bursts, trails or ribbons. Continuous slow secondary motion as camera eases down. No ribbons, dissolve, text morph, duplicated people or boards.\n\nPRIMARY ACTION: FULL 90-DEGREE LEFT WHIP-PAN / CAMERA PIVOT into Campus café patio. This is a quarter-turn in heading, not a forward dolly followed by a tiny steering correction. Keep forward travel below half a metre. The close corridor pier sweeps across the lens with directional blur and depth parallax; destination starts OFFSCREEN AT THE SIDE, already at readable medium distance. TIMING: 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Fast angular travel mid-turn, strong cubic ease-out in final 25 degrees. After braking:  a tiny downward tilt to settle at the bride's eye level. No prolonged approach, push-in substitute or robotic arc. Source text leaves with its own scene; destination text is uncovered behind the foreground edge, never all story captions together. Outfit changes across memories occur only while characters are fully hidden by that foreground edge. Adjacent campus locations remain solid; especially clip 8 reveals the nearby café event lawn to the RIGHT of the stage, not a beach or a disappearing room.\n\nDestination: Small campus café patio immediately LEFT of the corridor, two coffee cups on one round table, teal café window, potted palms. Couple seated across the table; corridor edge remains at RIGHT. Wardrobe: Ashok: cream knit polo, dark trousers. Supriya: sage chudidhar, pale peach dupatta. Exact text: \"Coffee became a regular thing.\". One passage only, fixed and readable after the camera brakes. Match supplied last frame when present.",
+      "video_path": "clip-4.mp4",
+      "final_frame_path": "clip-4-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 3
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 5
+        }
+      },
+      "prompt": "PRIMARY ACTION: FULL 90-DEGREE LEFT WHIP-PAN / CAMERA PIVOT into Campus café patio. This is a quarter-turn in heading, not a forward dolly followed by a tiny steering correction. Keep forward travel below half a metre. The close corridor pier sweeps across the lens with directional blur and depth parallax; destination starts OFFSCREEN AT THE SIDE, already at readable medium distance. TIMING: 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Fast angular travel mid-turn, strong cubic ease-out in final 25 degrees. After braking:  a tiny downward tilt to settle at the bride's eye level. No prolonged approach, push-in substitute or robotic arc. Source text leaves with its own scene; destination text is uncovered behind the foreground edge, never all story captions together. Outfit changes across memories occur only while characters are fully hidden by that foreground edge. Adjacent campus locations remain solid; especially clip 8 reveals the nearby café event lawn to the RIGHT of the stage, not a beach or a disappearing room."
+    },
+    {
+      "index": 5,
+      "from": 5,
+      "to": 6,
+      "duration": 5,
+      "status": "awaiting-approval",
+      "camera": "RIGHT 90-degree pivot; a slow eight-degree ORBIT across the plaque's bevel at CONSTANT distance, not a push-in",
+      "video_prompt_template": "Portrait pastel watercolor anime Tamil college film. Preserve supplied first frame until foreground geometry hides it, reveal separately staged destination. Same adult youthful identities, trimmed moustache and beard, chudidhar. Small location-specific objects gently levitate and rotate at independent phases, with sparse drifting dust; no bursts, trails or ribbons. Continuous slow secondary motion as camera eases down. No ribbons, dissolve, text morph, duplicated people or boards.\n\nPRIMARY ACTION: FULL 90-DEGREE RIGHT WHIP-PAN / CAMERA PIVOT into Study garden. This is a quarter-turn in heading, not a forward dolly followed by a tiny steering correction. Keep forward travel below half a metre. The close café window jamb sweeps across the lens with directional blur and depth parallax; destination starts OFFSCREEN AT THE SIDE, already at readable medium distance. TIMING: 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Fast angular travel mid-turn, strong cubic ease-out in final 25 degrees. After braking:  a slow eight-degree ORBIT across the plaque's bevel at CONSTANT distance, not a push-in. No prolonged approach, push-in substitute or robotic arc. Source text leaves with its own scene; destination text is uncovered behind the foreground edge, never all story captions together. Outfit changes across memories occur only while characters are fully hidden by that foreground edge. Adjacent campus locations remain solid; especially clip 8 reveals the nearby café event lawn to the RIGHT of the stage, not a beach or a disappearing room.\n\nDestination: Distinct walled study garden immediately RIGHT of café, low stone bench, chalk study board with no readable writing, jasmine hedge. Couple seated with different notebooks; café side wall visible at LEFT. Wardrobe: Ashok: muted rust overshirt, white tee. Supriya: lilac chudidhar, ivory dupatta. Exact text: \"They made time for each other.\". One passage only, fixed and readable after the camera brakes. Match supplied last frame when present.",
+      "video_prompt": "Portrait pastel watercolor anime Tamil college film. Preserve supplied first frame until foreground geometry hides it, reveal separately staged destination. Same adult youthful identities, trimmed moustache and beard, chudidhar. Small location-specific objects gently levitate and rotate at independent phases, with sparse drifting dust; no bursts, trails or ribbons. Continuous slow secondary motion as camera eases down. No ribbons, dissolve, text morph, duplicated people or boards.\n\nPRIMARY ACTION: FULL 90-DEGREE RIGHT WHIP-PAN / CAMERA PIVOT into Study garden. This is a quarter-turn in heading, not a forward dolly followed by a tiny steering correction. Keep forward travel below half a metre. The close café window jamb sweeps across the lens with directional blur and depth parallax; destination starts OFFSCREEN AT THE SIDE, already at readable medium distance. TIMING: 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Fast angular travel mid-turn, strong cubic ease-out in final 25 degrees. After braking:  a slow eight-degree ORBIT across the plaque's bevel at CONSTANT distance, not a push-in. No prolonged approach, push-in substitute or robotic arc. Source text leaves with its own scene; destination text is uncovered behind the foreground edge, never all story captions together. Outfit changes across memories occur only while characters are fully hidden by that foreground edge. Adjacent campus locations remain solid; especially clip 8 reveals the nearby café event lawn to the RIGHT of the stage, not a beach or a disappearing room.\n\nDestination: Distinct walled study garden immediately RIGHT of café, low stone bench, chalk study board with no readable writing, jasmine hedge. Couple seated with different notebooks; café side wall visible at LEFT. Wardrobe: Ashok: muted rust overshirt, white tee. Supriya: lilac chudidhar, ivory dupatta. Exact text: \"They made time for each other.\". One passage only, fixed and readable after the camera brakes. Match supplied last frame when present.",
+      "video_path": "clip-5.mp4",
+      "final_frame_path": "clip-5-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 4
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 6
+        }
+      },
+      "prompt": "PRIMARY ACTION: FULL 90-DEGREE RIGHT WHIP-PAN / CAMERA PIVOT into Study garden. This is a quarter-turn in heading, not a forward dolly followed by a tiny steering correction. Keep forward travel below half a metre. The close café window jamb sweeps across the lens with directional blur and depth parallax; destination starts OFFSCREEN AT THE SIDE, already at readable medium distance. TIMING: 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Fast angular travel mid-turn, strong cubic ease-out in final 25 degrees. After braking:  a slow eight-degree ORBIT across the plaque's bevel at CONSTANT distance, not a push-in. No prolonged approach, push-in substitute or robotic arc. Source text leaves with its own scene; destination text is uncovered behind the foreground edge, never all story captions together. Outfit changes across memories occur only while characters are fully hidden by that foreground edge. Adjacent campus locations remain solid; especially clip 8 reveals the nearby café event lawn to the RIGHT of the stage, not a beach or a disappearing room."
+    },
+    {
+      "index": 6,
+      "from": 6,
+      "to": 7,
+      "duration": 5,
+      "status": "awaiting-approval",
+      "camera": "LEFT 90-degree pivot; a slow slight crane DOWN toward seated eye height, with almost no forward translation",
+      "video_prompt_template": "Portrait pastel watercolor anime Tamil college film. Preserve supplied first frame until foreground geometry hides it, reveal separately staged destination. Same adult youthful identities, trimmed moustache and beard, chudidhar. Small location-specific objects gently levitate and rotate at independent phases, with sparse drifting dust; no bursts, trails or ribbons. Continuous slow secondary motion as camera eases down. No ribbons, dissolve, text morph, duplicated people or boards.\n\nPRIMARY ACTION: FULL 90-DEGREE LEFT WHIP-PAN / CAMERA PIVOT into Covered college walkway. This is a quarter-turn in heading, not a forward dolly followed by a tiny steering correction. Keep forward travel below half a metre. The close jasmine hedge corner sweeps across the lens with directional blur and depth parallax; destination starts OFFSCREEN AT THE SIDE, already at readable medium distance. TIMING: 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Fast angular travel mid-turn, strong cubic ease-out in final 25 degrees. After braking:  a slow slight crane DOWN toward seated eye height, with almost no forward translation. No prolonged approach, push-in substitute or robotic arc. Source text leaves with its own scene; destination text is uncovered behind the foreground edge, never all story captions together. Outfit changes across memories occur only while characters are fully hidden by that foreground edge. Adjacent campus locations remain solid; especially clip 8 reveals the nearby café event lawn to the RIGHT of the stage, not a beach or a disappearing room.\n\nDestination: Covered walkway immediately LEFT of garden, striped late-afternoon light, bicycles parked against far wall, no moving vehicles. Couple stand close with joined hands. Garden wall remains at RIGHT. Wardrobe: Ashok: pale-blue linen shirt, navy trousers. Supriya: teal chudidhar, blush dupatta. Exact text: \"One year later, they decided to get married.\". One passage only, fixed and readable after the camera brakes. Match supplied last frame when present.",
+      "video_prompt": "Portrait pastel watercolor anime Tamil college film. Preserve supplied first frame until foreground geometry hides it, reveal separately staged destination. Same adult youthful identities, trimmed moustache and beard, chudidhar. Small location-specific objects gently levitate and rotate at independent phases, with sparse drifting dust; no bursts, trails or ribbons. Continuous slow secondary motion as camera eases down. No ribbons, dissolve, text morph, duplicated people or boards.\n\nPRIMARY ACTION: FULL 90-DEGREE LEFT WHIP-PAN / CAMERA PIVOT into Covered college walkway. This is a quarter-turn in heading, not a forward dolly followed by a tiny steering correction. Keep forward travel below half a metre. The close jasmine hedge corner sweeps across the lens with directional blur and depth parallax; destination starts OFFSCREEN AT THE SIDE, already at readable medium distance. TIMING: 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Fast angular travel mid-turn, strong cubic ease-out in final 25 degrees. After braking:  a slow slight crane DOWN toward seated eye height, with almost no forward translation. No prolonged approach, push-in substitute or robotic arc. Source text leaves with its own scene; destination text is uncovered behind the foreground edge, never all story captions together. Outfit changes across memories occur only while characters are fully hidden by that foreground edge. Adjacent campus locations remain solid; especially clip 8 reveals the nearby café event lawn to the RIGHT of the stage, not a beach or a disappearing room.\n\nDestination: Covered walkway immediately LEFT of garden, striped late-afternoon light, bicycles parked against far wall, no moving vehicles. Couple stand close with joined hands. Garden wall remains at RIGHT. Wardrobe: Ashok: pale-blue linen shirt, navy trousers. Supriya: teal chudidhar, blush dupatta. Exact text: \"One year later, they decided to get married.\". One passage only, fixed and readable after the camera brakes. Match supplied last frame when present.",
+      "video_path": "clip-6.mp4",
+      "final_frame_path": "clip-6-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 5
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 7
+        }
+      },
+      "prompt": "PRIMARY ACTION: FULL 90-DEGREE LEFT WHIP-PAN / CAMERA PIVOT into Covered college walkway. This is a quarter-turn in heading, not a forward dolly followed by a tiny steering correction. Keep forward travel below half a metre. The close jasmine hedge corner sweeps across the lens with directional blur and depth parallax; destination starts OFFSCREEN AT THE SIDE, already at readable medium distance. TIMING: 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Fast angular travel mid-turn, strong cubic ease-out in final 25 degrees. After braking:  a slow slight crane DOWN toward seated eye height, with almost no forward translation. No prolonged approach, push-in substitute or robotic arc. Source text leaves with its own scene; destination text is uncovered behind the foreground edge, never all story captions together. Outfit changes across memories occur only while characters are fully hidden by that foreground edge. Adjacent campus locations remain solid; especially clip 8 reveals the nearby café event lawn to the RIGHT of the stage, not a beach or a disappearing room."
+    },
+    {
+      "index": 7,
+      "from": 7,
+      "to": 8,
+      "duration": 5,
+      "status": "awaiting-approval",
+      "camera": "RIGHT 90-degree pivot; a small upward crane to standing eye height while yaw eases to a stop",
+      "video_prompt_template": "Portrait pastel watercolor anime Tamil college film. Preserve supplied first frame until foreground geometry hides it, reveal separately staged destination. Same adult youthful identities, trimmed moustache and beard, chudidhar. Small location-specific objects gently levitate and rotate at independent phases, with sparse drifting dust; no bursts, trails or ribbons. Continuous slow secondary motion as camera eases down. No ribbons, dissolve, text morph, duplicated people or boards.\n\nPRIMARY ACTION: FULL 90-DEGREE RIGHT WHIP-PAN / CAMERA PIVOT into Open-air campus stage. This is a quarter-turn in heading, not a forward dolly followed by a tiny steering correction. Keep forward travel below half a metre. The close walkway support sweeps across the lens with directional blur and depth parallax; destination starts OFFSCREEN AT THE SIDE, already at readable medium distance. TIMING: 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Fast angular travel mid-turn, strong cubic ease-out in final 25 degrees. After braking:  a small upward crane to standing eye height while yaw eases to a stop. No prolonged approach, push-in substitute or robotic arc. Source text leaves with its own scene; destination text is uncovered behind the foreground edge, never all story captions together. Outfit changes across memories occur only while characters are fully hidden by that foreground edge. Adjacent campus locations remain solid; especially clip 8 reveals the nearby café event lawn to the RIGHT of the stage, not a beach or a disappearing room.\n\nDestination: Open-air amphitheatre immediately RIGHT of walkway; curved seating, one low event stage, single clean announcement panel, same mature trees. Couple stand beside panel, not blocking words. Walkway support is foreground LEFT. Wardrobe: Ashok: olive shirt, stone trousers. Supriya: peach chudidhar, ivory dupatta. Exact text: \"Ashok Kumar & Supriya\\nWe’re getting married!\". One passage only, fixed and readable after the camera brakes. Match supplied last frame when present.",
+      "video_prompt": "Portrait pastel watercolor anime Tamil college film. Preserve supplied first frame until foreground geometry hides it, reveal separately staged destination. Same adult youthful identities, trimmed moustache and beard, chudidhar. Small location-specific objects gently levitate and rotate at independent phases, with sparse drifting dust; no bursts, trails or ribbons. Continuous slow secondary motion as camera eases down. No ribbons, dissolve, text morph, duplicated people or boards.\n\nPRIMARY ACTION: FULL 90-DEGREE RIGHT WHIP-PAN / CAMERA PIVOT into Open-air campus stage. This is a quarter-turn in heading, not a forward dolly followed by a tiny steering correction. Keep forward travel below half a metre. The close walkway support sweeps across the lens with directional blur and depth parallax; destination starts OFFSCREEN AT THE SIDE, already at readable medium distance. TIMING: 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Fast angular travel mid-turn, strong cubic ease-out in final 25 degrees. After braking:  a small upward crane to standing eye height while yaw eases to a stop. No prolonged approach, push-in substitute or robotic arc. Source text leaves with its own scene; destination text is uncovered behind the foreground edge, never all story captions together. Outfit changes across memories occur only while characters are fully hidden by that foreground edge. Adjacent campus locations remain solid; especially clip 8 reveals the nearby café event lawn to the RIGHT of the stage, not a beach or a disappearing room.\n\nDestination: Open-air amphitheatre immediately RIGHT of walkway; curved seating, one low event stage, single clean announcement panel, same mature trees. Couple stand beside panel, not blocking words. Walkway support is foreground LEFT. Wardrobe: Ashok: olive shirt, stone trousers. Supriya: peach chudidhar, ivory dupatta. Exact text: \"Ashok Kumar & Supriya\\nWe’re getting married!\". One passage only, fixed and readable after the camera brakes. Match supplied last frame when present.",
+      "video_path": "clip-7.mp4",
+      "final_frame_path": "clip-7-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 6
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 8
+        }
+      },
+      "prompt": "PRIMARY ACTION: FULL 90-DEGREE RIGHT WHIP-PAN / CAMERA PIVOT into Open-air campus stage. This is a quarter-turn in heading, not a forward dolly followed by a tiny steering correction. Keep forward travel below half a metre. The close walkway support sweeps across the lens with directional blur and depth parallax; destination starts OFFSCREEN AT THE SIDE, already at readable medium distance. TIMING: 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Fast angular travel mid-turn, strong cubic ease-out in final 25 degrees. After braking:  a small upward crane to standing eye height while yaw eases to a stop. No prolonged approach, push-in substitute or robotic arc. Source text leaves with its own scene; destination text is uncovered behind the foreground edge, never all story captions together. Outfit changes across memories occur only while characters are fully hidden by that foreground edge. Adjacent campus locations remain solid; especially clip 8 reveals the nearby café event lawn to the RIGHT of the stage, not a beach or a disappearing room."
+    },
+    {
+      "index": 8,
+      "from": 8,
+      "to": 9,
+      "duration": 5,
+      "status": "awaiting-approval",
+      "camera": "RIGHT 90-degree pivot; a very slow leftward correcting arc at fixed distance",
+      "video_prompt_template": "Portrait pastel watercolor anime Tamil college film. Preserve supplied first frame until foreground geometry hides it, reveal separately staged destination. Same adult youthful identities, trimmed moustache and beard, chudidhar. Small location-specific objects gently levitate and rotate at independent phases, with sparse drifting dust; no bursts, trails or ribbons. Continuous slow secondary motion as camera eases down. No ribbons, dissolve, text morph, duplicated people or boards.\n\nPRIMARY ACTION: FULL 90-DEGREE RIGHT WHIP-PAN / CAMERA PIVOT into Campus evening café event. This is a quarter-turn in heading, not a forward dolly followed by a tiny steering correction. Keep forward travel below half a metre. The close stage side wall sweeps across the lens with directional blur and depth parallax; destination starts OFFSCREEN AT THE SIDE, already at readable medium distance. TIMING: 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Fast angular travel mid-turn, strong cubic ease-out in final 25 degrees. After braking:  a very slow leftward correcting arc at fixed distance. No prolonged approach, push-in substitute or robotic arc. Source text leaves with its own scene; destination text is uncovered behind the foreground edge, never all story captions together. Outfit changes across memories occur only while characters are fully hidden by that foreground edge. Adjacent campus locations remain solid; especially clip 8 reveals the nearby café event lawn to the RIGHT of the stage, not a beach or a disappearing room.\n\nDestination: Campus evening reception setup immediately RIGHT of amphitheatre: fairy-lit café lawn, tables, linen, flowers, ONE reception panel. Stage side wall remains on LEFT. This is campus event decor, not a beach or distant new venue. Wardrobe: Ashok: black relaxed shirt, grey chinos. Supriya: maroon chudidhar, pale-gold dupatta. Exact text: \"Come celebrate with us\\nReception · 6 February 2020\\n7:30 p.m.\". One passage only, fixed and readable after the camera brakes. Match supplied last frame when present.",
+      "video_prompt": "Portrait pastel watercolor anime Tamil college film. Preserve supplied first frame until foreground geometry hides it, reveal separately staged destination. Same adult youthful identities, trimmed moustache and beard, chudidhar. Small location-specific objects gently levitate and rotate at independent phases, with sparse drifting dust; no bursts, trails or ribbons. Continuous slow secondary motion as camera eases down. No ribbons, dissolve, text morph, duplicated people or boards.\n\nPRIMARY ACTION: FULL 90-DEGREE RIGHT WHIP-PAN / CAMERA PIVOT into Campus evening café event. This is a quarter-turn in heading, not a forward dolly followed by a tiny steering correction. Keep forward travel below half a metre. The close stage side wall sweeps across the lens with directional blur and depth parallax; destination starts OFFSCREEN AT THE SIDE, already at readable medium distance. TIMING: 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Fast angular travel mid-turn, strong cubic ease-out in final 25 degrees. After braking:  a very slow leftward correcting arc at fixed distance. No prolonged approach, push-in substitute or robotic arc. Source text leaves with its own scene; destination text is uncovered behind the foreground edge, never all story captions together. Outfit changes across memories occur only while characters are fully hidden by that foreground edge. Adjacent campus locations remain solid; especially clip 8 reveals the nearby café event lawn to the RIGHT of the stage, not a beach or a disappearing room.\n\nDestination: Campus evening reception setup immediately RIGHT of amphitheatre: fairy-lit café lawn, tables, linen, flowers, ONE reception panel. Stage side wall remains on LEFT. This is campus event decor, not a beach or distant new venue. Wardrobe: Ashok: black relaxed shirt, grey chinos. Supriya: maroon chudidhar, pale-gold dupatta. Exact text: \"Come celebrate with us\\nReception · 6 February 2020\\n7:30 p.m.\". One passage only, fixed and readable after the camera brakes. Match supplied last frame when present.",
+      "video_path": "clip-8.mp4",
+      "final_frame_path": "clip-8-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 7
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 9
+        }
+      },
+      "prompt": "PRIMARY ACTION: FULL 90-DEGREE RIGHT WHIP-PAN / CAMERA PIVOT into Campus evening café event. This is a quarter-turn in heading, not a forward dolly followed by a tiny steering correction. Keep forward travel below half a metre. The close stage side wall sweeps across the lens with directional blur and depth parallax; destination starts OFFSCREEN AT THE SIDE, already at readable medium distance. TIMING: 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Fast angular travel mid-turn, strong cubic ease-out in final 25 degrees. After braking:  a very slow leftward correcting arc at fixed distance. No prolonged approach, push-in substitute or robotic arc. Source text leaves with its own scene; destination text is uncovered behind the foreground edge, never all story captions together. Outfit changes across memories occur only while characters are fully hidden by that foreground edge. Adjacent campus locations remain solid; especially clip 8 reveals the nearby café event lawn to the RIGHT of the stage, not a beach or a disappearing room."
+    },
+    {
+      "index": 9,
+      "from": 9,
+      "to": 10,
+      "duration": 5,
+      "status": "awaiting-approval",
+      "camera": "LEFT 90-degree pivot; a gentle lateral drift over 20 centimetres at constant distance from the plaque",
+      "video_prompt_template": "Portrait pastel watercolor anime Tamil college film. Preserve supplied first frame until foreground geometry hides it, reveal separately staged destination. Same adult youthful identities, trimmed moustache and beard, chudidhar. Small location-specific objects gently levitate and rotate at independent phases, with sparse drifting dust; no bursts, trails or ribbons. Continuous slow secondary motion as camera eases down. No ribbons, dissolve, text morph, duplicated people or boards.\n\nPRIMARY ACTION: FULL 90-DEGREE LEFT WHIP-PAN / CAMERA PIVOT into College alumni garden invitation. This is a quarter-turn in heading, not a forward dolly followed by a tiny steering correction. Keep forward travel below half a metre. The close café boundary post sweeps across the lens with directional blur and depth parallax; destination starts OFFSCREEN AT THE SIDE, already at readable medium distance. TIMING: 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Fast angular travel mid-turn, strong cubic ease-out in final 25 degrees. After braking:  a gentle lateral drift over 20 centimetres at constant distance from the plaque. No prolonged approach, push-in substitute or robotic arc. Source text leaves with its own scene; destination text is uncovered behind the foreground edge, never all story captions together. Outfit changes across memories occur only while characters are fully hidden by that foreground edge. Adjacent campus locations remain solid; especially clip 8 reveals the nearby café event lawn to the RIGHT of the stage, not a beach or a disappearing room.\n\nDestination: Alumni garden pavilion immediately LEFT of event lawn: one contemporary invitation panel framed by foliage, simple white flowers and clear glass lamps. Couple stand nearby. Café boundary remains foreground RIGHT. Venue wording on panel is an invitation address; do not change the scenery into the named venue. Wardrobe: Ashok: ivory casual shirt, navy trousers. Supriya: cornflower-blue chudidhar, cream dupatta. Exact text: \"Join us for the wedding\\n7 February 2020 · 8:00 a.m.\\nLeela Channaiah Kalyana Mandapa\\nVontikoppal, Mysore\". One passage only, fixed and readable after the camera brakes. Match supplied last frame when present.",
+      "video_prompt": "Portrait pastel watercolor anime Tamil college film. Preserve supplied first frame until foreground geometry hides it, reveal separately staged destination. Same adult youthful identities, trimmed moustache and beard, chudidhar. Small location-specific objects gently levitate and rotate at independent phases, with sparse drifting dust; no bursts, trails or ribbons. Continuous slow secondary motion as camera eases down. No ribbons, dissolve, text morph, duplicated people or boards.\n\nPRIMARY ACTION: FULL 90-DEGREE LEFT WHIP-PAN / CAMERA PIVOT into College alumni garden invitation. This is a quarter-turn in heading, not a forward dolly followed by a tiny steering correction. Keep forward travel below half a metre. The close café boundary post sweeps across the lens with directional blur and depth parallax; destination starts OFFSCREEN AT THE SIDE, already at readable medium distance. TIMING: 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Fast angular travel mid-turn, strong cubic ease-out in final 25 degrees. After braking:  a gentle lateral drift over 20 centimetres at constant distance from the plaque. No prolonged approach, push-in substitute or robotic arc. Source text leaves with its own scene; destination text is uncovered behind the foreground edge, never all story captions together. Outfit changes across memories occur only while characters are fully hidden by that foreground edge. Adjacent campus locations remain solid; especially clip 8 reveals the nearby café event lawn to the RIGHT of the stage, not a beach or a disappearing room.\n\nDestination: Alumni garden pavilion immediately LEFT of event lawn: one contemporary invitation panel framed by foliage, simple white flowers and clear glass lamps. Couple stand nearby. Café boundary remains foreground RIGHT. Venue wording on panel is an invitation address; do not change the scenery into the named venue. Wardrobe: Ashok: ivory casual shirt, navy trousers. Supriya: cornflower-blue chudidhar, cream dupatta. Exact text: \"Join us for the wedding\\n7 February 2020 · 8:00 a.m.\\nLeela Channaiah Kalyana Mandapa\\nVontikoppal, Mysore\". One passage only, fixed and readable after the camera brakes. Match supplied last frame when present.",
+      "video_path": "clip-9.mp4",
+      "final_frame_path": "clip-9-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 8
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 10
+        }
+      },
+      "prompt": "PRIMARY ACTION: FULL 90-DEGREE LEFT WHIP-PAN / CAMERA PIVOT into College alumni garden invitation. This is a quarter-turn in heading, not a forward dolly followed by a tiny steering correction. Keep forward travel below half a metre. The close café boundary post sweeps across the lens with directional blur and depth parallax; destination starts OFFSCREEN AT THE SIDE, already at readable medium distance. TIMING: 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Fast angular travel mid-turn, strong cubic ease-out in final 25 degrees. After braking:  a gentle lateral drift over 20 centimetres at constant distance from the plaque. No prolonged approach, push-in substitute or robotic arc. Source text leaves with its own scene; destination text is uncovered behind the foreground edge, never all story captions together. Outfit changes across memories occur only while characters are fully hidden by that foreground edge. Adjacent campus locations remain solid; especially clip 8 reveals the nearby café event lawn to the RIGHT of the stage, not a beach or a disappearing room."
+    },
+    {
+      "index": 10,
+      "from": 10,
+      "to": 11,
+      "duration": 5,
+      "status": "awaiting-approval",
+      "camera": "Fast backward corridor departure, between the only couple, then full-body ease-out",
+      "video_prompt_template": "Portrait pastel watercolor anime Tamil college film. Preserve supplied first frame until foreground geometry hides it, reveal separately staged destination. Same adult youthful identities, trimmed moustache and beard, chudidhar. Small location-specific objects gently levitate and rotate at independent phases, with sparse drifting dust; no bursts, trails or ribbons. Continuous slow secondary motion as camera eases down. No ribbons, dissolve, text morph, duplicated people or boards.\n\nFast BACKWARD departure from the alumni garden opening into the adjacent front lawn. Camera travels backward between the ONLY couple, then eases to a full-body view on the lawn; reveal one save-the-date panel at their right. Keep the main building stationary behind them. Direction is simple backward travel with a soft stop, no spiral or changing camera axis. New outfits are present from their first reveal; do not morph clothes in view.\n\nDestination: Main college front lawn next to alumni garden, same clock tower softly visible behind. ONE save-the-date panel to the couple’s right. Couple stand shoulder to shoulder, faces and full outfits clear. Warm campus evening; side garden opening behind camera. ONE three-storey red-brick college main building, symmetrical long facade, central square clock tower with a flat terracotta cap, three tall ivory-trimmed ground-floor entrance openings, broad FIVE pale-stone steps, two round terracotta planters flanking those steps. ONE honey-brown slatted wooden bench with black iron legs sits on the paved ground apron immediately LEFT of the steps, parallel to the facade, two metres from the left planter. Bench is outside beside the entrance, never on a rooftop, terrace or balcony. Main entrance behind and to the RIGHT of the bench. A straight paved approach leads from the foreground lawn to the steps. Rain trees stand outside the approach on both sides. Wardrobe: Ashok: tailored navy blazer, white tee, beige trousers. Supriya: elegant rose chudidhar, ivory dupatta. Exact text: \"Save the date\\n6 & 7 February 2020\". One passage only, fixed and readable after the camera brakes. Match supplied last frame when present.",
+      "video_prompt": "Portrait pastel watercolor anime Tamil college film. Preserve supplied first frame until foreground geometry hides it, reveal separately staged destination. Same adult youthful identities, trimmed moustache and beard, chudidhar. Small location-specific objects gently levitate and rotate at independent phases, with sparse drifting dust; no bursts, trails or ribbons. Continuous slow secondary motion as camera eases down. No ribbons, dissolve, text morph, duplicated people or boards.\n\nFast BACKWARD departure from the alumni garden opening into the adjacent front lawn. Camera travels backward between the ONLY couple, then eases to a full-body view on the lawn; reveal one save-the-date panel at their right. Keep the main building stationary behind them. Direction is simple backward travel with a soft stop, no spiral or changing camera axis. New outfits are present from their first reveal; do not morph clothes in view.\n\nDestination: Main college front lawn next to alumni garden, same clock tower softly visible behind. ONE save-the-date panel to the couple’s right. Couple stand shoulder to shoulder, faces and full outfits clear. Warm campus evening; side garden opening behind camera. ONE three-storey red-brick college main building, symmetrical long facade, central square clock tower with a flat terracotta cap, three tall ivory-trimmed ground-floor entrance openings, broad FIVE pale-stone steps, two round terracotta planters flanking those steps. ONE honey-brown slatted wooden bench with black iron legs sits on the paved ground apron immediately LEFT of the steps, parallel to the facade, two metres from the left planter. Bench is outside beside the entrance, never on a rooftop, terrace or balcony. Main entrance behind and to the RIGHT of the bench. A straight paved approach leads from the foreground lawn to the steps. Rain trees stand outside the approach on both sides. Wardrobe: Ashok: tailored navy blazer, white tee, beige trousers. Supriya: elegant rose chudidhar, ivory dupatta. Exact text: \"Save the date\\n6 & 7 February 2020\". One passage only, fixed and readable after the camera brakes. Match supplied last frame when present.",
+      "video_path": "clip-10.mp4",
+      "final_frame_path": "clip-10-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 9
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 11
+        }
+      },
+      "prompt": "Fast BACKWARD departure from the alumni garden opening into the adjacent front lawn. Camera travels backward between the ONLY couple, then eases to a full-body view on the lawn; reveal one save-the-date panel at their right. Keep the main building stationary behind them. Direction is simple backward travel with a soft stop, no spiral or changing camera axis. New outfits are present from their first reveal; do not morph clothes in view."
+    },
+    {
+      "index": 11,
+      "from": 11,
+      "to": 12,
+      "duration": 5,
+      "status": "awaiting-approval",
+      "camera": "Gentle backward glide and slight rise, single-board continuity, forehead touch",
+      "video_prompt_template": "Portrait pastel watercolor anime Tamil college film. Preserve supplied first frame until foreground geometry hides it, reveal separately staged destination. Same adult youthful identities, trimmed moustache and beard, chudidhar. Small location-specific objects gently levitate and rotate at independent phases, with sparse drifting dust; no bursts, trails or ribbons. Continuous slow secondary motion as camera eases down. No ribbons, dissolve, text morph, duplicated people or boards.\n\nGentle BACKWARD glide and slight rise in the EXACT SAME front-lawn scene, same outfits, clock tower, faces and ONE date panel. Couple turn to look at each other and smile with tiny natural movement. Preserve all date text exactly; introduce no new words. Leaves keep gently levitating; continuous subtle life after the camera settles.\n\nDestination: Exact SAME lawn, couple, clothing, evening lights and ONE date panel as scene 11. Camera gently farther back and slightly higher, couple turn their faces to one another with tiny smiles. Keep the same panel text; no new final quote or board. Wardrobe: EXACT same navy blazer, white tee and beige trousers; EXACT same rose chudidhar and ivory dupatta as scene 11, because this is the same continuous moment. Exact text: \"Save the date\\n6 & 7 February 2020\". One passage only, fixed and readable after the camera brakes. Match supplied last frame when present.",
+      "video_prompt": "Portrait pastel watercolor anime Tamil college film. Preserve supplied first frame until foreground geometry hides it, reveal separately staged destination. Same adult youthful identities, trimmed moustache and beard, chudidhar. Small location-specific objects gently levitate and rotate at independent phases, with sparse drifting dust; no bursts, trails or ribbons. Continuous slow secondary motion as camera eases down. No ribbons, dissolve, text morph, duplicated people or boards.\n\nGentle BACKWARD glide and slight rise in the EXACT SAME front-lawn scene, same outfits, clock tower, faces and ONE date panel. Couple turn to look at each other and smile with tiny natural movement. Preserve all date text exactly; introduce no new words. Leaves keep gently levitating; continuous subtle life after the camera settles.\n\nDestination: Exact SAME lawn, couple, clothing, evening lights and ONE date panel as scene 11. Camera gently farther back and slightly higher, couple turn their faces to one another with tiny smiles. Keep the same panel text; no new final quote or board. Wardrobe: EXACT same navy blazer, white tee and beige trousers; EXACT same rose chudidhar and ivory dupatta as scene 11, because this is the same continuous moment. Exact text: \"Save the date\\n6 & 7 February 2020\". One passage only, fixed and readable after the camera brakes. Match supplied last frame when present.",
+      "video_path": "clip-11.mp4",
+      "final_frame_path": "clip-11-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 10
+        },
+        "last": null
+      },
+      "prompt": "Gentle BACKWARD glide and slight rise in the EXACT SAME front-lawn scene, same outfits, clock tower, faces and ONE date panel. Couple turn to look at each other and smile with tiny natural movement. Preserve all date text exactly; introduce no new words. Leaves keep gently levitating; continuous subtle life after the camera settles."
+    }
+  ],
+  "costs": {
+    "imageRequests": 2,
+    "videoRequests": 0,
+    "xaiCompletedCostUsd": 0,
+    "replicateCostUsd": null
+  }
+}

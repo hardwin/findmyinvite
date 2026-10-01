@@ -1,0 +1,125 @@
+{
+  "programs": [],
+  "streams": [
+    {
+      "codec_name": "h264",
+      "codec_type": "video",
+      "width": 720,
+      "height": 1280,
+      "r_frame_rate": "24/1",
+      "nb_read_frames": "1307"
+    }
+  ],
+  "format": {
+    "duration": "54.459000",
+    "size": "59885576"
+  },
+  "scene_count": 12,
+  "clip_count": 11,
+  "expected_frame_count": 1307,
+  "decode_check": "passed",
+  "locked_prefix": {
+    "decoded_frames_compared": 339,
+    "identical": true,
+    "clip_files": [
+      {
+        "clip": 1,
+        "identical": true
+      },
+      {
+        "clip": 2,
+        "identical": true
+      },
+      {
+        "clip": 3,
+        "identical": true
+      }
+    ]
+  },
+  "models": {
+    "image": {
+      "provider": "replicate",
+      "id": "openai/gpt-image-2.5-flare",
+      "credentials_env": "REPLICATE_API_TOKEN"
+    },
+    "video": {
+      "provider": "xai",
+      "id": "grok-imagine-video-1.5",
+      "credentials_env": "XAI_API_KEY",
+      "resolution": "720p"
+    }
+  },
+  "selected_images_text_only": true,
+  "source_video_frames_sent": false,
+  "application_code_changed": false,
+  "retiming": false,
+  "crossfades": false,
+  "final_sha256": "36fac0e392eb57a553656eb0501e33b4cc21282194395fef9e1a51bf7113968d",
+  "costs": {
+    "scope": "New extension only; locked prototype costs excluded",
+    "imageRequests": 12,
+    "videoRequests": 10,
+    "xaiCompletedCostUsd": 7.2,
+    "pendingVideos": [],
+    "replicateCostUsd": null,
+    "replicateCostNote": "Provider prediction responses do not include monetary charges."
+  },
+  "review_limitations": [
+    {
+      "clip": 4,
+      "time_seconds_approx": 15.1,
+      "note": "Brief overlap of departing groom lettering and arriving bride lettering during the fast column wipe."
+    },
+    {
+      "type": "text-only continuity",
+      "note": "The independently generated final couple anchors vary some sign and gateway ornament details. These are generated approximations, not an exact reconstruction or a measured 95 percent visual match."
+    }
+  ],
+  "boundary_checks": [
+    {
+      "join": "1 to 2",
+      "adjacent_decoded_frames_ssim": 0.957801
+    },
+    {
+      "join": "2 to 3",
+      "adjacent_decoded_frames_ssim": 0.958361
+    },
+    {
+      "join": "3 to 4",
+      "adjacent_decoded_frames_ssim": 0.969791
+    },
+    {
+      "join": "4 to 5",
+      "adjacent_decoded_frames_ssim": 0.958888
+    },
+    {
+      "join": "5 to 6",
+      "adjacent_decoded_frames_ssim": 0.942132
+    },
+    {
+      "join": "6 to 7",
+      "adjacent_decoded_frames_ssim": 0.960657
+    },
+    {
+      "join": "7 to 8",
+      "adjacent_decoded_frames_ssim": 0.957434
+    },
+    {
+      "join": "8 to 9",
+      "adjacent_decoded_frames_ssim": 0.965032
+    },
+    {
+      "join": "9 to 10",
+      "adjacent_decoded_frames_ssim": 0.956505
+    },
+    {
+      "join": "10 to 11",
+      "adjacent_decoded_frames_ssim": 0.957786
+    }
+  ],
+  "prompt_audit": {
+    "images_verified": 12,
+    "videos_verified": 11,
+    "all_match_actual_submitted_prompts": true
+  }
+}

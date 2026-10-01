@@ -1,0 +1,101 @@
+{
+  "images": [
+    {
+      "scene": 3,
+      "text_only": true,
+      "exact_prompt": true
+    },
+    {
+      "scene": 4,
+      "text_only": true,
+      "exact_prompt": true
+    },
+    {
+      "scene": 5,
+      "text_only": true,
+      "exact_prompt": true
+    },
+    {
+      "scene": 6,
+      "text_only": true,
+      "exact_prompt": true
+    },
+    {
+      "scene": 7,
+      "text_only": true,
+      "exact_prompt": true
+    },
+    {
+      "scene": 8,
+      "text_only": true,
+      "exact_prompt": true
+    },
+    {
+      "scene": 9,
+      "text_only": true,
+      "exact_prompt": true
+    },
+    {
+      "scene": 10,
+      "text_only": true,
+      "exact_prompt": true
+    },
+    {
+      "scene": 11,
+      "text_only": true,
+      "exact_prompt": true
+    }
+  ],
+  "videos": [
+    {
+      "clip": 2,
+      "exact_prompt": true,
+      "last_frame_provided": true
+    },
+    {
+      "clip": 3,
+      "exact_prompt": true,
+      "last_frame_provided": true
+    },
+    {
+      "clip": 4,
+      "exact_prompt": true,
+      "last_frame_provided": true
+    },
+    {
+      "clip": 5,
+      "exact_prompt": true,
+      "last_frame_provided": true
+    },
+    {
+      "clip": 6,
+      "exact_prompt": true,
+      "last_frame_provided": true
+    },
+    {
+      "clip": 7,
+      "exact_prompt": true,
+      "last_frame_provided": true
+    },
+    {
+      "clip": 8,
+      "exact_prompt": true,
+      "last_frame_provided": true
+    },
+    {
+      "clip": 9,
+      "exact_prompt": true,
+      "last_frame_provided": true
+    },
+    {
+      "clip": 10,
+      "exact_prompt": true,
+      "last_frame_provided": true
+    },
+    {
+      "clip": 11,
+      "exact_prompt": true,
+      "last_frame_provided": false
+    }
+  ]
+}

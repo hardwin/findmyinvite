@@ -1,0 +1,15 @@
+{
+  "model": "prunaai/p-video",
+  "prompt": "Portrait storybook outdoor wedding, exact supplied identities and anchors. CARS PARKED: fixed tires, doors closed, no driving, braking, rolling, entry or exit. PEOPLE PLANTED: no walking, stepping, approach or departure; only tiny blinks and gestures. MOTIFS/LIGHT: mountain grass seeds and mist beads, coastal bubbles and spray drift independently at 0.1 picture-height/second in settled views, 12-20 small pieces at varied depths; motion blur comes from camera speed, no emitted burst. Strong diagonal shafts, rim light and changing water reflections. Pearl-white/teal lettering with platinum glints stays rigid.\n\nPRIMARY ACTION: LEFTWARD OUTDOOR TRAVEL FROM THE RECEPTION DECK TO THE HOSTS' SANDY ARRIVAL PATH. Traverse visible outdoor distance using a fast pullback or forward flight with directional edge blur and strong near/far parallax. Carry the route's changing geography continuously through the frame. Do not substitute an in-place pivot or uniform digital zoom for travel.\n\nTIMING: 0.00-0.30s pull back from the reception easel; 0.30-1.45s bank left and move briskly along the open edge of the deck; 1.45-1.95s brake on the sandy path; 1.95-5.00s settle with a gentle lateral drift over 20 centimetres.\n\nThe reception card recedes right while the camera travels left along the visible deck edge and sand path. Keep moonlit water on the same side and bulbs receding consistently. Hosts and two children ALREADY stand at the welcome spot, fixed feet and hands, small smiles only. No arriving visitors, walking, stepping, gesturing toward a moving group or transferring flowers. The welcome panel and weighted stand stay fixed. Use terrain parallax and transparent sea mist, never a dissolve.\n\nMatch the supplied final scene and exact text. One opaque world throughout: no crossfade, dissolve, fog wipe, fade-to-white, sudden appearance or blended scenery. Travel past persistent terrain with parallax and brake smoothly. People already stand in destination poses; objects never relocate or morph.",
+  "duration": 5,
+  "resolution": "720p",
+  "aspect_ratio": "9:16",
+  "fps": 24,
+  "prompt_upsampling": false,
+  "save_audio": false,
+  "firstImage": "output/car-roadtrip-beach-remix-v1/clip-9-pruna-take-1-first.jpg",
+  "lastImage": "output/car-roadtrip-beach-remix-v1/clip-9-pruna-take-1-last.jpg",
+  "firstImageSha256": "c7d7a4cca2b009f073b7489ff8c3bda3c710518715a9f5850c2530da123bb49a",
+  "lastImageSha256": "7761c1784ca69c5239648275cc8502a811b8b1355081dd81bf1d261b006c9de4",
+  "sourceVideoFramesSent": false
+}

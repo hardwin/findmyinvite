@@ -1,0 +1,8 @@
+{
+  "model": "grok-imagine-video-1.5",
+  "duration": 5,
+  "firstImage": "output/temple-prototype-v3/image-1-720.jpg",
+  "lastImage": "output/temple-prototype-v3/image-2-720.jpg",
+  "keyframes": [],
+  "sourceVideoFramesSent": false
+}

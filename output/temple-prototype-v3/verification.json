@@ -1,0 +1,49 @@
+{
+  "programs": [],
+  "streams": [
+    {
+      "codec_name": "h264",
+      "codec_type": "video",
+      "width": 720,
+      "height": 1280,
+      "r_frame_rate": "24/1",
+      "nb_read_frames": "339"
+    }
+  ],
+  "format": {
+    "duration": "14.125000",
+    "size": "15004652"
+  },
+  "imageModel": "openai/gpt-image-2.5-flare",
+  "videoModel": "grok-imagine-video-1.5",
+  "selectedImages": {
+    "1": "image-1-take-7.jpg",
+    "2": "image-2-take-1.jpg",
+    "3": "../temple-prototype-v2/image-3-take-2.jpg",
+    "4": "../temple-prototype-v2/image-4-take-3.jpg"
+  },
+  "selectedVideoTakes": {
+    "1": 2,
+    "2": 1,
+    "3": 1
+  },
+  "selectedImagesTextOnly": true,
+  "sourceVideoFramesSent": false,
+  "retiming": false,
+  "crossfades": false,
+  "audio": "silent",
+  "decodeCheck": "passed",
+  "currentRunVideoCostUsd": 2.02,
+  "totalV3VideoCostUsd": 2.74,
+  "applicationCodeChanged": false,
+  "boundaryChecks": [
+    {
+      "join": "1 to 2",
+      "adjacentBoundaryFrameSsim": 0.957801
+    },
+    {
+      "join": "2 to 3",
+      "adjacentBoundaryFrameSsim": 0.958361
+    }
+  ]
+}

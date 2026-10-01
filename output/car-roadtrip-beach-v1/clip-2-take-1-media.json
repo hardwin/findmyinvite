@@ -1,0 +1,14 @@
+{
+  "programs": [],
+  "streams": [
+    {
+      "width": 720,
+      "height": 1280,
+      "r_frame_rate": "24/1",
+      "nb_read_frames": "97"
+    }
+  ],
+  "format": {
+    "duration": "4.042000"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "id": "fd6zcdx2hxrmt0d0y59vdwvwyc",
+  "requestId": "fd6zcdx2hxrmt0d0y59vdwvwyc",
+  "status": "failed",
+  "model": "bytedance/seedance-2.0",
+  "version": "hidden",
+  "metrics": {
+    "model_variant": "non_video_in",
+    "predict_time": 3.6204867309999997,
+    "total_time": 3.661725043
+  },
+  "error": "Prediction failed: Async prediction failed: ModelError: The input or output was flagged as sensitive. Please try again with different inputs. (E005) (uIJ6l3ruRD)",
+  "created_at": "2026-09-30T07:59:45.295Z",
+  "started_at": "2026-09-30T07:59:45.336238312Z",
+  "completed_at": "2026-09-30T07:59:48.956725043Z",
+  "data_removed": false
+}

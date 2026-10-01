@@ -1,0 +1,10 @@
+{
+  "imageRequests": 8,
+  "videoRequests": 4,
+  "xaiCompletedCostUsd": 2.74,
+  "pendingVideos": [],
+  "replicateCostUsd": null,
+  "replicateCostNote": "No monetary charge returned for images; one completed edit was excluded.",
+  "currentRunVideoRequests": 3,
+  "currentRunXaiCostUsd": 2.02
+}

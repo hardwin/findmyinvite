@@ -1,0 +1,11 @@
+{
+  "xaiTopUpUsd": 5,
+  "openingTakesSubmitted": 2,
+  "openingCostPerTakeUsd": 0.87,
+  "remainingAuthorizedClips": 2,
+  "estimatedRemainingCostUsd": 1.44,
+  "estimatedContinuationTotalUsd": 3.18,
+  "noMoreRetakes": true,
+  "noMoreImageGeneration": true,
+  "localEditingOnlyAfterRemainingClips": true
+}

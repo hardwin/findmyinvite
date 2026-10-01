@@ -1,0 +1,124 @@
+{
+  "recipe": "temple-prototype-v3-completed",
+  "status": "Complete: selected video takes 1/2, 2/1, 3/1 stitched to temple-prototype-v3.mp4",
+  "imageModel": "openai/gpt-image-2.5-flare",
+  "videoModel": "grok-imagine-video-1.5",
+  "format": {
+    "aspect_ratio": "9:16",
+    "resolution": "720p",
+    "nominalDurationSeconds": 14
+  },
+  "imageGeneration": {
+    "mode": "text-only for every selected image; one rejected image-edit request is documented separately",
+    "input_images": "OMIT entirely",
+    "newImages": 2,
+    "reuseImages": 2,
+    "sourceVideoFramesAllowedAsInputs": false,
+    "quality": "high",
+    "output_format": "jpeg",
+    "number_of_images": 1
+  },
+  "assembly": {
+    "promptComposition": "If an image has fullRequestPromptFile, use only its PROMPT section without prepending other blocks. Otherwise imageStyle + pavilionContinuity + shot prompt. Video = videoBase + clip prompt.",
+    "clip1Start": "V3 image 1",
+    "clip1End": "V3 image 2",
+    "clip2Start": "Actual final decoded frame of selected V3 clip 1",
+    "clip2End": "V2 image-3.jpg",
+    "clip3Start": "Actual final decoded frame of selected V3 clip 2",
+    "clip3End": "V2 image-4.jpg",
+    "interiorKeyframes": [],
+    "oldApproachWaypoint": "Do not reuse V2 approach-waypoint.jpg. It contains the incompatible closed shrine and a separately recognizable small copper idol.",
+    "edit": "Concatenate the three selected generated clips in order. No speed changes, freeze holds, or crossfades. Inspect boundary frames and remove a duplicate only if actually present.",
+    "audio": "Silent motion prototype, as in V2.",
+    "preserve": "Keep every V2 image, clip and final unchanged, including the preferred board-to-groom clip. V3 is a separate candidate."
+  },
+  "imageStyle": "Create one full-bleed portrait 9:16 frame from a premium dimensional storybook South Indian wedding invitation film, solely from this written description. Intricately carved lifelike architecture with the refined illustrative finish of a cinematic animation, rich depth and atmospheric perspective. Honey-beige aged sandstone with dark brown carved recesses; ivory, deep red and antique gold accents. One warm sunrise from camera-left throughout, soft amber bloom with readable highlight detail, long diagonal shadows. Orange marigolds, white jasmine, green mango leaves, brass lamps, polished stone with warm directional reflections. No photographic humans, no watermark, no interface, no frame. Render only the exact text requested for this image. Materials and lighting stay consistent between an aerial view and a close view of the same site.",
+  "pavilionContinuity": "ONE temple complex with ONE dominant nine-tier sandstone gopuram with seven small finials at the far end of its central axis. In front of it is ONE much smaller freestanding square Ganesha mandap, with four carved square corner columns, a shallow stone roof with a low stepped pyramidal cap, a lotus relief on the front roof beam, three shallow front steps, and orange-white garland scallops. All four sides of the pavilion are OPEN BETWEEN THE COLUMNS, including the rear: clear daylight and the distant gopuram are visible through the rear gaps from a frontal low viewpoint. There is no masonry rear wall, inner sanctuary box, door panel, nested doorway, or second shrine inside. A single stationary Ganesha idol stands on the central low square lotus-carved pedestal. Its identity, when close enough to resolve, is warm peach-toned elephant face and hands, an antique-gold high crown, four arms, a trunk curling toward screen-right in frontal view, red and golden-yellow draped cloth, white jasmine and orange marigold garlands; front hand at screen-left raised in blessing, front hand at screen-right holding a bowl. Two brass lamps stand to either side of the pedestal. Keep the roof, corner columns, steps, pedestal and rear opening physically consistent. The tower remains outside beyond the rear columns. The open left side connects directly to the adjacent invitation courtyard bay.",
+  "images": [
+    {
+      "index": 1,
+      "action": "generate",
+      "name": "Distant high aerial hook",
+      "prompt": "A high oblique DRONE establishing shot of a lavishly decorated South Indian temple at sunrise, portrait 9:16. The camera floats about 40 meters ABOVE the courtyard and well BACK from the foreground pavilion, around the height of the main gopuram's upper half. It looks diagonally DOWN across the temple at roughly 20–25 degrees below horizontal with a wide 24 mm lens. A lavender-peach sunrise sky, low sun at left and distant misty palm horizon remain clearly visible in the upper third. The composition must immediately read as a flying drone looking down into a temple compound.\n\nShow broad TOP SURFACES of both long side-colonnade roofs and the small central pavilion roof. See DOWN into the rectangular water tank, over its near parapet, with paving and steps receding away below the camera. People are tiny figures seen from above. The front boundary occupies a narrow foreground strip. The complete tall gopuram stands in the background, with sky around its finials. The small four-column Ganesha pavilion is well below the camera, its roof about one quarter of frame width, with open courtyard separating it from the tower. Its roof partly occludes the tiny seated idol. This is a grand view of the whole courtyard, not a close shrine portrait. Keep the sky and horizon while retaining clear downward perspective; neither an eye-level facade view nor a vertical overhead map.\n\nHoney-beige intricately carved sandstone, one nine-tier gopuram, one small square four-column pavilion with a stepped roof cap, lotus front beam and three steps. All pavilion sides are open, including the rear. A tiny red-yellow, gold-crowned Ganesha occupies its flower-covered pedestal between two lamps; facial details are not resolved from this height. No closed inner sanctuary or back wall.\n\nLavish wedding decoration is distributed across the entire aerial view: three broad tiers of orange-white-red floral swags on the tower, layered garlands and mango leaves along BOTH colonnades, floral trim on the pavilion's outer beam and columns, white kolam and flower rangoli in the side courtyards, rows of brass diyas, petal borders along steps and tank edges, and floating flower bowls on the water. These details stay small in the landscape; never lower or move the camera closer to show them. The central forward-down flight route remains clear. Warm sunrise, long shadows, subtle reflections, atmospheric depth and premium dimensional storybook illustration. No text, watermark or additional shrine.",
+      "fullRequestPromptFile": "opening-drone-prompt.txt",
+      "candidateImage": "image-1-take-7.jpg",
+      "selectedImage": "image-1-take-7.jpg"
+    },
+    {
+      "index": 2,
+      "action": "generate",
+      "name": "Open mandap with dimensional blessing",
+      "prompt": "Eye-level camera inside the SAME small four-column open mandap, facing the seated Ganesha and the distant gopuram beyond the open rear side. Two front columns frame the extreme edges, rear columns are visible farther away, and a shallow carved roof with the lotus beam sits overhead. Daylight remains visible on both sides of the idol, continuing uninterrupted into the exterior courtyard behind it. No solid backdrop or inner doorway. The single Ganesha described in the continuity block is clearly visible, with face, crown, trunk, arms, cloth and garlands intact. Idol and pedestal together occupy approximately 40 percent of image height in the lower middle, with polished foreground floor still visible. Above the crown, a LARGE two-line floating devotional title reads exactly 'Om Shree' / 'Ganeshaya Namah'. Exquisite ornate devotional display lettering with graceful curved serifs, a gently arched first line, elegant varied stroke widths and modest flourishes. The title spans approximately 65-70 percent of frame width, in the upper-middle quarter, separated clearly from the roof beam and the crown. These are freestanding dimensional letters suspended in the open air, with luminous champagne-gold faces, antique-gold beveled edges, subtle amber halos and tiny bright edge glints. Rich gold, not brown engraving. No rectangular nameplate, printed wall text or letters attached to stone. Readable counters and gaps between words, full title inside the frame. Warm sunrise strikes the letters obliquely and reflects softly in the polished stone. Abundant individual white jasmine and orange marigold petals in three depths: softly defocused small near-lens petals at the edges, sharp rotating midground petals and tiny background petals. Keep all lettering and the idol face unobscured. A few delicate incense wisps originate ONLY at a visible low incense bowl beside a lamp; the title emits no smoke. Leave the left-side exit open and visible."
+    },
+    {
+      "index": 3,
+      "action": "reuse",
+      "name": "Approved invitation board",
+      "path": "C:/Users/Z0046EAD/Documents/findmyinvite/output/temple-prototype-v2/image-3.jpg",
+      "reason": "Preserve the successful board styling, sunlight, reflective floor and column layout. No new image request."
+    },
+    {
+      "index": 4,
+      "action": "reuse",
+      "name": "Approved groom and name endpoint",
+      "path": "C:/Users/Z0046EAD/Documents/findmyinvite/output/temple-prototype-v2/image-4.jpg",
+      "reason": "Preserve the successful groom identity, illustration, costume, corridor and calligraphy. Fix smoke and liquid artifacts in video choreography. No new image request."
+    }
+  ],
+  "videoBase": "A single continuous physically motivated cinematic camera move in the same dimensional illustrated South Indian temple. Use the supplied first and final images as visual anchors. Solid fixed architecture with real translation, occlusion, perspective and foreground parallax. Preserve identity, lighting, materials and exact final lettering. A short energetic travel burst with directional edge blur must ease decisively into a slower continuously moving arrival; never distribute the travel uniformly over the duration. In the slower passage, brass highlights and floor reflections shift with camera angle and individual petals rotate independently. Release a denser shower of small white jasmine and orange marigold petals during deceleration, with near, middle and far depth layers. Each visible petal is a single loose curled petal, generally under 3 percent of frame width; no whole flowers, discs or objects covering faces and words. Preserve clear readability. No cuts, crossfades, room dissolves, statue swaps, frozen holds, uniform sideways slides or full orbits. Glowing lettering is solid beveled metal with light on its surface: no liquid gold, dripping strokes, ceiling-to-floor beams, explosive firework bursts or smoke emitted by text. A warm floor reflection is reflected light, not a physical stream connecting the title to the floor. Existing incense, where visible, comes only from a floor-level incense vessel and stays separate from lettering.",
+  "clips": [
+    {
+      "index": 1,
+      "from": 1,
+      "to": 2,
+      "duration": 5,
+      "prompt": "HIGH AERIAL HOOK, FAST FORWARD-DOWN DIVE, THEN A CONTINUING DEVOTIONAL PUSH. 0.00-0.65s: gently advance from the high distant full-complex opening. The tiny existing mandap below the giant tower is the destination. 0.65-1.85s: accelerate hard FORWARD AND DOWN along that axis. The compound, water tank and paving expand with strong parallax; skim over the tank toward the small mandap. Keep the giant tower behind the destination, moving toward the upper edge. The camera never heads into the tower and no replacement temple appears. 1.85-2.20s: descend below the existing mandap roof and pass between its front corner columns above the three steps. The beam passes overhead and the columns whip past the edges in brief directional blur. These are open column bays, not a dark doorway in a closed shrine. The roof initially occludes the idol; the first resolved view of Ganesha reveals the SAME face, crown, trunk, arms, cloth and pedestal as the supplied final image. From the moment the rear side is visible it is already open to the exterior gopuram. No back wall appears or disappears. 2.20-2.70s: level out and smoothly brake without stopping. Reveal the large champagne-gold devotional lettering in the open air above the idol as the camera clears the front beam, its metal catching the changing light. The text reads 'Om Shree' above 'Ganeshaya Namah'; it belongs to a fixed position in the pavilion rather than following the screen. 2.70-5.00s: CONTINUE A VISIBLE SLOW FORWARD PUSH into the final image, approximately another 10 percent increase in idol scale, with column-edge parallax, shifting reflections and rich falling petals. End still moving gently forward, ready to turn left immediately in the next clip. Do not stop on a Ganesha tableau. Keep a single stationary idol throughout and a persistent open view behind it. The title remains large, stable and legible, with restrained traveling edge glints and no smoke, droplets or sweeping light beam. The small distant idol is shaded beneath the existing roof; as the camera descends, warm sunlight reveals the same peach face, gold crown and red-yellow cloth. Preserve its silhouette and garlands, with no statue replacement or material morph. Exterior floral swags and column wraps remain attached to their original surfaces as they pass out of view; never dissolve the decorations."
+    },
+    {
+      "index": 2,
+      "from": 2,
+      "to": 3,
+      "duration": 4,
+      "prompt": "IMMEDIATE SHORT LEFT ARC TO THE NEARBY BOARD. Inherit the gentle forward momentum of the supplied first frame; do not restart with another Ganesha hold. 0.00-0.12s: convert that momentum into a left turn. 0.12-0.80s: a compact energetic LEFTWARD curving move through the already-open left side of the mandap, banking about 4 degrees. Ganesha and the intact floating blessing move toward SCREEN RIGHT together through changing perspective. A very close existing corner column briefly wipes across the lens with directional blur. The camera travels only a few meters into the immediately adjoining courtyard bay; no long flight, wall traversal, extra hall or dissolving idol. Keep the rear opening and pavilion solid while they remain in view. 0.80-1.15s: the invitation board enters from SCREEN LEFT at an oblique angle; counter-steer and ease firmly into its frontal position. 1.15-4.00s: a very slow continued push gives the board's gilded edges and brass lamps the rich traveling sun glints and realistic floor reflections of the previous prototype. Text remains exactly 'Bodha’s Wedding Invitation'. A fresh gust releases many tiny white and orange petals as the camera slows, then they drift and rotate independently at multiple depths. End in the supplied board composition with enough room for a backward release into the groom hall. Preserve the board's ivory face, three-line gold lettering and warm reflected light."
+    },
+    {
+      "index": 3,
+      "from": 3,
+      "to": 4,
+      "duration": 5,
+      "prompt": "BACKWARD RELEASE, RIGHT TURN, AND GOLD-LIGHT NAME REVEAL. Preserve this camera choreography precisely. 0.0-0.65s: accelerate BACKWARD away from the invitation board down the stone aisle; the board recedes in perspective and more ceiling and floor enter the picture. 0.65-1.45s: bank slightly and whip-turn RIGHT about 65 degrees into the pillared groom corridor while still moving backward. Nearby pillars cross fast, the invitation courtyard exits screen left, strong parallax and brief directional blur. 1.45-2.4s: brake into the groom composition. During this turning arrival, a narrow edge-on glint appears within the eventual NAME AREA to the groom's right, around chest height. As the viewing angle changes, fine luminous strokes trace and unfurl into the exact ornate three-dimensional calligraphy 'Chi. Ashok Kumar'. Confine the entire reveal to the bounds of the final lettering and its small underline flourish. The glint is a highlight on beveled letters, not a vertical shaft descending from the ceiling or touching the ground. The reveal uses flowing calligraphic LIGHT along solid metal strokes and changing three-dimensional perspective, not flowing material, a flat fade or a name board. Gold bloom peaks briefly along the strokes and relaxes to glossy beveled gold; complete name readable by 2.4s. A few tiny dry sparkles detach from the finishing flourish, dim and disappear within a few centimeters. They make no plume and never stream to the floor. Preserve a soft warm optical reflection of the title on the stone. The groom is already standing to the left and is uncovered by the moving column, never materializes or walks in. 2.4-5.0s: a gentle sideways arc of just a few degrees plus tiny backward drift gives changing reflections across the completed 3D letters. He gives a restrained natural blink and small smile. A rich shower of white jasmine, orange petals and delicate gold flakes tumbles in layered slow motion as the camera decelerates; lamp flames flicker gently. Keep the air around the name clear: no smoke puff, flare explosion, molten gold, drips, hanging luminous strands or vertical light connection to the floor. End with his full body on the left and the complete luminous gold name on the right."
+    }
+  ],
+  "reviewBeforeVideoSpend": [
+    "Opening must show a high oblique drone view: broad visible roof surfaces, view down into tank and courtyard, small people and partly roof-occluded idol, with sunrise sky and horizon retained. Do not accept a near-ground frontal view or a skyless top-down map.",
+    "Both new images show the same four-column open pavilion, roof shape, steps and garland pattern. No dark enclosed chamber in either image.",
+    "The aerial idol is naturally hidden by the roof, not a separately detailed miniature that can visibly change identity.",
+    "Interior has daylight and exterior gopuram behind the idol from the start; verify no rear wall or nested sanctuary.",
+    "Blessing spelling is exact, visibly ornate and dimensional, large enough to read at phone size, floating clear of stone and face.",
+    "Compare new images with the reused board and groom for palette, sunrise direction and illustration style.",
+    "If an image fails, do not spend xAI credits trying to repair it through motion. Report the mismatch before any further paid image attempt."
+  ],
+  "reviewAfterVideo": [
+    "Inspect the entry around 1.5-3.0s at close frame intervals for idol identity, disappearing structures and wrong destination.",
+    "Opening keeps advancing after deceleration; the second clip departs immediately without another devotional pause.",
+    "Board arrival is substantially complete by approximately 1.15 seconds into clip 2, with pronounced deceleration rather than uniform travel.",
+    "Final clip retains backward release, right turn, groom occlusion reveal, oblique metallic name reveal and changing reflections.",
+    "No name-origin smoke, liquid streams, floor-reaching gold beam or material pooling; stable text and identity at the joins.",
+    "Report visible residual defects honestly; do not claim a measured 95 percent match or assume prompt timing was obeyed."
+  ],
+  "budget": {
+    "paidRequestsMadeForV3": 12,
+    "runCondition": "Authorized by user",
+    "plannedImageRequests": 7,
+    "plannedVideoRequests": 3,
+    "automaticPaidRetakes": 0,
+    "historicalVideoCost": "V2 successful 5-second requests each cost USD 0.72; 6-second requests each cost USD 0.87, per returned usage receipts.",
+    "estimatedVideoAllowanceUsd": 2.25,
+    "estimateCaveat": "Planning allowance based on previous receipts, not a provider quote or guaranteed maximum; two new Flare image requests are separate Replicate spend. Check current billing before dispatch. No extra generations to exhaust the balance.",
+    "polling": "Save each request ID immediately. Poll the existing request; never resubmit on a slow response or ambiguous timeout.",
+    "actualImageRequests": 8,
+    "actualVideoRequests": 4,
+    "actualXaiCostUsd": 2.74,
+    "currentRunXaiCostUsd": 2.02
+  }
+}

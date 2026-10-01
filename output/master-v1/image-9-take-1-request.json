@@ -1,0 +1,16 @@
+{
+  "id": "1e3qqzz3f5rmw0d0xpfanase70",
+  "status": "succeeded",
+  "model": "openai/gpt-image-2.5-flare",
+  "imageReferences": 0,
+  "metrics": {
+    "image_output_count": 1,
+    "model_variant": "high",
+    "predict_time": 17.296723852,
+    "resolution_target": "9:16",
+    "total_time": 17.316086218
+  },
+  "error": null,
+  "data_removed": false,
+  "outputUrl": "https://replicate.delivery/xezq/QOH8SeeAkHgol0t77Wfh54Gf0SQtVVm80VOIXEQnNEIHKgJdB/tmprnjqu6lw.jpeg"
+}

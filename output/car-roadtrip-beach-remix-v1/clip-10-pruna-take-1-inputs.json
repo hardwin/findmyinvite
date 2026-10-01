@@ -1,0 +1,15 @@
+{
+  "model": "prunaai/p-video",
+  "prompt": "BACKWARD REVEAL OF EXACTLY ONE BRIDE AND ONE GROOM ON THE OPEN NIGHT BEACH. Preserve their adult faces, skin tone and proportions. The two near people revealed during the camera pass must be the same two people in the ending, never a second foreground pair or reflected couple. All people have planted feet; no walking or stepping.\n\n0.00-0.35s: ease backward from the hosts' welcome card. 0.35-1.60s: accelerate backward along the visible sandy lantern trail toward the open shoreline. Hosts and shack recede together; waves and the same headland remain consistently on their established sides. Pass real beach distance with strong sand and lantern parallax, no enclosed passage. 1.60-2.10s: pass backward between the ONLY couple standing beside the trail at the waterline. Their near shoulders briefly fill the edges; the gap contains only open sand and sea, never another pair. 2.10-2.85s: the same people steadily shrink in perspective as their full bodies are revealed, bride left and groom right. Both already wear relaxed evening clothes; never change their outfits on camera. 2.85-5.00s: decelerate into a slow backward glide. They hold hands and watch an approaching wave; she keeps her dress hem lightly held and he leans toward her with a smile. Reach the supplied final pose rather than repeating the earlier formal portrait. One fixed dry-sand date board stands to their right, its lettering exactly 'SAVE THE DATE / 6 & 7 FEBRUARY / 2020'. No spin, teleportation or montage.\n\nMOTIFS AND LIGHT: twelve tiny coastal bubbles and fine spray beads drift independently across three depths, slow and unsynchronized. Silk shawl edges flex softly. Strong cyan moonshafts rake through thin sea mist, warm practical pools rim the couple, water reflections move across platinum sign edges. No walking, vehicle motion, opaque fog, fade, dissolving scenery or text smoke. The board stays fixed on dry sand.\n\nExactly ONE dark driftwood date panel with a thin platinum frame and one low easel is revealed on dry sand. It stays beyond the waves, with no second backing sign or reflected duplicate. The couple are Supriya and Ashok Kumar; keep the source identities and evening clothes. No extra people materialize on the shoreline.",
+  "duration": 5,
+  "resolution": "720p",
+  "aspect_ratio": "9:16",
+  "fps": 24,
+  "prompt_upsampling": false,
+  "save_audio": false,
+  "firstImage": "output/car-roadtrip-beach-remix-v1/clip-10-pruna-take-1-first.jpg",
+  "lastImage": "output/car-roadtrip-beach-remix-v1/clip-10-pruna-take-1-last.jpg",
+  "firstImageSha256": "8f818ae6b7e8db1a8e6d702bad2a356fd98ad00eab79b7b276fdd794a539b2d7",
+  "lastImageSha256": "da14e98c37fa61c3b8f63dc706807baa6c9aff4102d127fc6ac144cc57ffbde9",
+  "sourceVideoFramesSent": false
+}

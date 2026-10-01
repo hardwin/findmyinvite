@@ -1,0 +1,488 @@
+{
+  "schema_version": "1.0",
+  "base_template": "master_template_v1.json",
+  "target_template": "",
+  "merge_rule": "Replace listed root fields; shallow-merge scene and clip field overrides selected by numeric object key. Preserve all unspecified base fields, IDs, counts, durations and anchors. Render parameter placeholders after merging. Do not merge an unfilled blank template.",
+  "variables": {
+    "theme": "",
+    "route": {
+      "10": "",
+      "11": "",
+      "12": "",
+      "01": "",
+      "02": "",
+      "03": "",
+      "04": "",
+      "05": "",
+      "06": "",
+      "07": "",
+      "08": "",
+      "09": ""
+    },
+    "identities": {
+      "groom": "",
+      "bride": ""
+    },
+    "wardrobe": {
+      "travel": "",
+      "ceremony": "",
+      "evening": ""
+    },
+    "typography": {
+      "headline": "",
+      "headline_color": "",
+      "body_color": "",
+      "edge_finish": "",
+      "glow": ""
+    },
+    "light": {
+      "day": "",
+      "night": ""
+    },
+    "motifs": {
+      "mountain": "",
+      "waterfall": "",
+      "coast": "",
+      "settled_motion": ""
+    },
+    "motion": {
+      "camera": "",
+      "vehicles": "",
+      "people": "",
+      "transition": ""
+    },
+    "production": {
+      "intro_stage": "",
+      "ceremony": ""
+    },
+    "intro_copy": {
+      "line_1": "",
+      "line_2": ""
+    },
+    "preserve": {
+      "bride": "",
+      "personal_copy": "",
+      "structure": ""
+    },
+    "video_generation": {
+      "provider": "",
+      "model": "",
+      "resolution": "",
+      "aspect_ratio": "",
+      "generate_audio": "",
+      "scope": ""
+    }
+  },
+  "change_objects": {
+    "previous_changes": {
+      "route": "",
+      "spatial_motion": "",
+      "appearance": "",
+      "metadata": "",
+      "copy": ""
+    },
+    "new_changes": {
+      "opening": "",
+      "secular_invitation": "",
+      "stationary_subjects": "",
+      "type_palette": "",
+      "atmosphere": "",
+      "ceremony": "",
+      "continuity": "",
+      "bride": "",
+      "video_provider": ""
+    }
+  },
+  "overrides": {
+    "root": {
+      "iteration": "",
+      "name": "",
+      "status": "",
+      "assets_root": "",
+      "locked_baseline": {
+        "path": "",
+        "sha256": "",
+        "snapshot": "",
+        "policy": ""
+      },
+      "parameters": {
+        "invitation_lines": "",
+        "groom_title": "",
+        "groom_name": "",
+        "bride_title": "",
+        "bride_name": "",
+        "family_lines": "",
+        "ceremony_lines": "",
+        "venue_lines": "",
+        "reception_lines": "",
+        "host_lines": "",
+        "save_date_lines": "",
+        "save_date_inline": "",
+        "invitation_intro_line_1": "",
+        "invitation_intro_line_2": ""
+      },
+      "copy_assumptions": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "style": "",
+      "characters": {
+        "groom": "",
+        "bride": ""
+      },
+      "particle_motion": "",
+      "generation_policy": {
+        "images": "",
+        "video": "",
+        "ending": "",
+        "initial_new_image_requests": "",
+        "initial_new_video_requests": "",
+        "planned_xai_usd": "",
+        "automatic_paid_retries": "",
+        "download_outputs_immediately": "",
+        "visual_review": "",
+        "video_tests": "",
+        "retakes": "",
+        "scope": ""
+      },
+      "output": {
+        "video": "",
+        "width": "",
+        "height": "",
+        "fps": "",
+        "aspect_ratio": "",
+        "audio": "",
+        "assembly": "",
+        "actual_duration_seconds": "",
+        "frame_count": "",
+        "sha256": ""
+      },
+      "completed_at": "",
+      "costs": {
+        "scope": "",
+        "imageRequests": "",
+        "videoRequests": "",
+        "xaiCompletedCostUsd": "",
+        "pendingVideos": [],
+        "replicateCostUsd": "",
+        "replicateCostNote": ""
+      },
+      "verification": {
+        "full_decode": "",
+        "baseline_template_unchanged": "",
+        "opening_clip_unchanged": "",
+        "text_only_new_images": "",
+        "selected_new_videos": "",
+        "final_clip_uses_single_first_frame": "",
+        "application_code_changed": ""
+      },
+      "review_policy": "",
+      "models": {
+        "image": {
+          "provider": "",
+          "id": "",
+          "credentials_env": ""
+        },
+        "video": {
+          "provider": "",
+          "id": "",
+          "credentials_env": "",
+          "resolution": "",
+          "aspect_ratio": "",
+          "generate_audio": ""
+        }
+      }
+    },
+    "scenes": {
+      "1": {
+        "name": "",
+        "status": "",
+        "image_prompt_template": "",
+        "image_prompt": "",
+        "source_metadata": "",
+        "sha256": "",
+        "source_asset": "",
+        "selected_take": "",
+        "review_note": ""
+      },
+      "2": {
+        "name": "",
+        "status": "",
+        "image_prompt_template": "",
+        "image_prompt": "",
+        "text_fields": [
+          "",
+          ""
+        ],
+        "source_metadata": "",
+        "sha256": "",
+        "source_asset": "",
+        "selected_take": "",
+        "review_note": ""
+      },
+      "3": {
+        "name": "",
+        "status": "",
+        "image_prompt_template": "",
+        "image_prompt": "",
+        "image_request_id": "",
+        "selected_take": "",
+        "review_note": "",
+        "sha256": "",
+        "actual_input_path": "",
+        "request_metadata": ""
+      },
+      "4": {
+        "name": "",
+        "status": "",
+        "image_prompt_template": "",
+        "image_prompt": "",
+        "image_request_id": "",
+        "selected_take": "",
+        "review_note": "",
+        "sha256": "",
+        "actual_input_path": "",
+        "request_metadata": ""
+      },
+      "5": {
+        "name": "",
+        "status": "",
+        "image_prompt_template": "",
+        "image_prompt": "",
+        "image_request_id": "",
+        "selected_take": "",
+        "review_note": "",
+        "sha256": "",
+        "actual_input_path": "",
+        "request_metadata": ""
+      },
+      "6": {
+        "name": "",
+        "status": "",
+        "image_prompt_template": "",
+        "image_prompt": "",
+        "image_request_id": "",
+        "selected_take": "",
+        "review_note": "",
+        "sha256": "",
+        "actual_input_path": "",
+        "request_metadata": ""
+      },
+      "7": {
+        "name": "",
+        "status": "",
+        "image_prompt_template": "",
+        "image_prompt": "",
+        "image_request_id": "",
+        "selected_take": "",
+        "review_note": "",
+        "sha256": "",
+        "actual_input_path": "",
+        "request_metadata": ""
+      },
+      "8": {
+        "name": "",
+        "status": "",
+        "image_prompt_template": "",
+        "image_prompt": "",
+        "image_request_id": "",
+        "selected_take": "",
+        "review_note": "",
+        "sha256": "",
+        "actual_input_path": "",
+        "request_metadata": ""
+      },
+      "9": {
+        "name": "",
+        "status": "",
+        "image_prompt_template": "",
+        "image_prompt": "",
+        "image_request_id": "",
+        "selected_take": "",
+        "review_note": "",
+        "sha256": "",
+        "actual_input_path": "",
+        "request_metadata": ""
+      },
+      "10": {
+        "name": "",
+        "status": "",
+        "image_prompt_template": "",
+        "image_prompt": "",
+        "image_request_id": "",
+        "selected_take": "",
+        "review_note": "",
+        "sha256": "",
+        "actual_input_path": "",
+        "request_metadata": ""
+      },
+      "11": {
+        "name": "",
+        "status": "",
+        "image_prompt_template": "",
+        "image_prompt": "",
+        "image_request_id": "",
+        "selected_take": "",
+        "review_note": "",
+        "sha256": "",
+        "actual_input_path": "",
+        "request_metadata": ""
+      },
+      "12": {
+        "name": "",
+        "status": "",
+        "review_note": "",
+        "sha256": ""
+      }
+    },
+    "clips": {
+      "1": {
+        "prompt": "",
+        "status": "",
+        "camera": "",
+        "video_prompt_template": "",
+        "video_prompt": "",
+        "request_metadata": "",
+        "media": "",
+        "timeline": "",
+        "sha256": "",
+        "source_asset": "",
+        "selected_take": "",
+        "actual_input": "",
+        "review_note": ""
+      },
+      "2": {
+        "status": "",
+        "camera": "",
+        "video_prompt_template": "",
+        "video_prompt": "",
+        "request_metadata": "",
+        "selected_take": "",
+        "review_note": "",
+        "media": "",
+        "sha256": "",
+        "timeline": "",
+        "actual_input": ""
+      },
+      "3": {
+        "status": "",
+        "camera": "",
+        "video_prompt_template": "",
+        "video_prompt": "",
+        "request_metadata": "",
+        "selected_take": "",
+        "review_note": "",
+        "media": "",
+        "sha256": "",
+        "timeline": "",
+        "actual_input": ""
+      },
+      "4": {
+        "status": "",
+        "camera": "",
+        "video_prompt_template": "",
+        "video_prompt": "",
+        "request_metadata": "",
+        "selected_take": "",
+        "review_note": "",
+        "media": "",
+        "sha256": "",
+        "timeline": "",
+        "actual_input": ""
+      },
+      "5": {
+        "status": "",
+        "camera": "",
+        "video_prompt_template": "",
+        "video_prompt": "",
+        "request_metadata": "",
+        "selected_take": "",
+        "review_note": "",
+        "media": "",
+        "sha256": "",
+        "timeline": "",
+        "actual_input": ""
+      },
+      "6": {
+        "status": "",
+        "camera": "",
+        "video_prompt_template": "",
+        "video_prompt": "",
+        "request_metadata": "",
+        "selected_take": "",
+        "review_note": "",
+        "media": "",
+        "sha256": "",
+        "timeline": "",
+        "actual_input": ""
+      },
+      "7": {
+        "status": "",
+        "camera": "",
+        "video_prompt_template": "",
+        "video_prompt": "",
+        "request_metadata": "",
+        "selected_take": "",
+        "review_note": "",
+        "media": "",
+        "sha256": "",
+        "timeline": "",
+        "actual_input": ""
+      },
+      "8": {
+        "status": "",
+        "camera": "",
+        "video_prompt_template": "",
+        "video_prompt": "",
+        "request_metadata": "",
+        "selected_take": "",
+        "review_note": "",
+        "media": "",
+        "sha256": "",
+        "timeline": "",
+        "actual_input": ""
+      },
+      "9": {
+        "status": "",
+        "camera": "",
+        "video_prompt_template": "",
+        "video_prompt": "",
+        "request_metadata": "",
+        "selected_take": "",
+        "review_note": "",
+        "media": "",
+        "sha256": "",
+        "timeline": "",
+        "actual_input": ""
+      },
+      "10": {
+        "status": "",
+        "camera": "",
+        "video_prompt_template": "",
+        "video_prompt": "",
+        "request_metadata": "",
+        "selected_take": "",
+        "review_note": "",
+        "media": "",
+        "sha256": "",
+        "timeline": "",
+        "actual_input": ""
+      },
+      "11": {
+        "status": "",
+        "camera": "",
+        "video_prompt_template": "",
+        "video_prompt": "",
+        "request_metadata": "",
+        "selected_take": "",
+        "review_note": "",
+        "media": "",
+        "sha256": "",
+        "timeline": "",
+        "actual_input": ""
+      }
+    }
+  }
+}

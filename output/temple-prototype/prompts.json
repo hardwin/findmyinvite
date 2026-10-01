@@ -1,0 +1,56 @@
+{
+  "recipe": "temple-continuous-prototype-v1",
+  "imageModel": "openai/gpt-image-2.5-flare",
+  "videoModel": "grok-imagine-video-1.5",
+  "aspectRatio": "9:16",
+  "clipDurationSeconds": 5,
+  "imageBase": "Create one full-bleed vertical 9:16 cinematic wedding invitation illustration. The supplied scene reference defines composition and the temple aesthetic; any additional approved image defines consistent architecture, palette and rendering. Recreate the scene as fresh artwork, preserving its visual intent. One grand South Indian temple complex, richly carved sandstone pillars and tiered gopuram towers, antique brass oil lamps, marigold and jasmine garlands, mango-leaf festoons, scattered flower petals and delicate incense smoke. Warm golden sunrise, ivory and honey stone, antique gold and deep red accents. Dimensional digital illustration with softly stylized cartoon-like adults and detailed architectural environments. Strong foreground, middle-ground and background depth. Clear camera passages alongside pillars. Match the reference's refined rendering rather than exaggerated caricature. Render only the specified wording, exactly spelled, with readable spacing and strong contrast. No invented lettering, watermark, playback controls, borders or collage.",
+  "scenes": [
+    {
+      "index": 1,
+      "name": "Aerial temple",
+      "reference": "references/scene-1.jpg",
+      "prompt": "Elevated centered drone view over the entire decorated temple courtyard at sunrise. Monumental gopuram in the upper center, smaller shrine and rectangular water tank below, colonnades on both sides, distant palms, small ritual fires and rising smoke. Strong central approach axis, expansive scale and clear architectural depth. No invitation text. Preserve the reference's composition and golden atmosphere."
+    },
+    {
+      "index": 2,
+      "name": "Ganesha blessing",
+      "reference": "references/scene-2.jpg",
+      "prompt": "Inside a carved stone pavilion, symmetrical view of a richly decorated seated Ganesha idol on a flower-covered pedestal. Two substantial foreground pillars frame the image; the gopuram is visible through the rear opening. Brass lamps, petals and sunbeams. Above the idol clearly render exactly two lines: 'Om Shree' and 'Ganeshaya Namah'. Leave an open passage beside the right foreground pillar. Maintain the same sandstone temple and golden morning atmosphere as the approved aerial image."
+    },
+    {
+      "index": 3,
+      "name": "Invitation title",
+      "reference": "references/scene-3.jpg",
+      "prompt": "An adjacent open temple courtyard viewed between carved pillars. Center an ivory invitation board in a fine gold frame on a low ornamental pedestal, bordered by yellow marigolds and white jasmine. Gopuram behind it, warm sunlight from the side, brass lamps near the floor. Board nearly frontal and fully readable, occupying enough of the lower-middle image for large elegant lettering. Render exactly three lines: 'Bodha\u2019s', 'Wedding', 'Invitation'. An open passage at the right leads to the next pillared corridor."
+    },
+    {
+      "index": 4,
+      "name": "Groom introduction",
+      "reference": "references/scene-4.jpg",
+      "prompt": "A long richly carved stone corridor in the same temple. One adult illustrated Indian groom stands full-length on the left, short neat dark hair, ivory silk dhoti and gold-bordered angavastram, relaxed expression, natural hands. On the right, large elegant luminous gold calligraphy reads exactly 'Chi.' above 'Ashok' above 'Kumar'. Keep lettering separate from the figure and columns. Rows of pillars recede into warm golden haze, garlands decorate the stone, small oil lamps and petals line the floor. Match the reference's softly stylized cartoon-like character and dimensional architecture."
+    }
+  ],
+  "videoBase": "One continuous five-second camera take connecting the supplied exact first image to the supplied exact last image. Maintain a consistent dimensional temple, stable architecture and the same illustration medium. Follow the specified route using foreground stone pillars and doorway edges for natural parallax and motivated occlusion. Travel briskly between locations, then smoothly decelerate into the destination with eased nearly stationary camera motion. Do not dissolve or morph one board, person or room into another. Existing subjects stay grounded. 0.0-0.4s smoothly depart the starting composition; 0.4-2.2s brisk camera travel; 2.2-3.5s progressively decelerate and reveal the destination; 3.5-5.0s retain a readable destination composition with minimal drift and subtle ambient motion. Preserve the destination lettering exactly, without rewriting, stretching or invented characters. Flames flicker, incense smoke rises and a few petals drift without obscuring text. End on the supplied last image without an abrupt snap. No cuts, fades, camera shake, automatic orbit or extra people.",
+  "clips": [
+    {
+      "index": 1,
+      "from": 1,
+      "to": 2,
+      "prompt": "Glide forward and descend along the temple's central courtyard axis. Pass beneath a substantial stone pavilion lintel so its dark foreground briefly conceals the transition into the interior. Level toward the Ganesha pedestal and ease into the symmetrical blessing composition. No flight through solid masonry. The destination text is exactly 'Om Shree Ganeshaya Namah'."
+    },
+    {
+      "index": 2,
+      "from": 2,
+      "to": 3,
+      "prompt": "Track smoothly right around the shrine's foreground pillar, letting the Ganesha idol leave view to the left. Continue into the adjoining open bay as the ivory invitation board is revealed. Ease into its frontal readable composition. The board is already present at its destination, not transformed from the idol. The exact destination wording is 'Bodha\u2019s Wedding Invitation'."
+    },
+    {
+      "index": 3,
+      "from": 3,
+      "to": 4,
+      "prompt": "Pull slightly away from the invitation pedestal, then track right past a close carved pillar into the long corridor. Use the pillar as a natural foreground occlusion. Reveal the groom already standing in his destination position on the left and decelerate until his full figure and gold name on the right are readable. He stays naturally planted with subtle breathing only. The exact destination lettering is 'Chi. Ashok Kumar'. Do not transform the board into the groom."
+    }
+  ],
+  "handoff": "Use the actual final decoded frame of each approved generated clip as the next clip's first image. Target the next approved Flare image. Stitch three complete clips directly, without crossfades or added freeze frames; normalize to 720x1280, 24 fps and strip provider audio."
+}

@@ -1,0 +1,133 @@
+{
+  "image_prompts": [
+    {
+      "scene": 1,
+      "exact": true,
+      "text_only": true,
+      "path": "output/temple-prototype-v3/image-1-take-7-input.json"
+    },
+    {
+      "scene": 2,
+      "exact": true,
+      "text_only": true,
+      "path": "output/temple-prototype-v3/image-2-take-1-input.json"
+    },
+    {
+      "scene": 3,
+      "exact": true,
+      "text_only": true,
+      "path": "output/temple-prototype-v2/image-3-take-2-input.json"
+    },
+    {
+      "scene": 4,
+      "exact": true,
+      "text_only": true,
+      "path": "output/temple-prototype-v2/image-4-take-3-input.json"
+    },
+    {
+      "scene": 5,
+      "exact": true,
+      "text_only": true,
+      "path": "output/temple-full-v1/image-5-take-1-input.json"
+    },
+    {
+      "scene": 6,
+      "exact": true,
+      "text_only": true,
+      "path": "output/temple-full-v1/image-6-take-1-input.json"
+    },
+    {
+      "scene": 7,
+      "exact": true,
+      "text_only": true,
+      "path": "output/temple-full-v1/image-7-take-1-input.json"
+    },
+    {
+      "scene": 8,
+      "exact": true,
+      "text_only": true,
+      "path": "output/temple-full-v1/image-8-take-1-input.json"
+    },
+    {
+      "scene": 9,
+      "exact": true,
+      "text_only": true,
+      "path": "output/temple-full-v1/image-9-take-2-input.json"
+    },
+    {
+      "scene": 10,
+      "exact": true,
+      "text_only": true,
+      "path": "output/temple-full-v1/image-10-take-2-input.json"
+    },
+    {
+      "scene": 11,
+      "exact": true,
+      "text_only": true,
+      "path": "output/temple-full-v1/image-11-take-2-input.json"
+    },
+    {
+      "scene": 12,
+      "exact": true,
+      "text_only": true,
+      "path": "output/temple-full-v1/image-12-take-2-input.json"
+    }
+  ],
+  "video_prompts": [
+    {
+      "clip": 1,
+      "exact": true,
+      "path": "output/temple-prototype-v3/clip-1-take-2-prompt.txt"
+    },
+    {
+      "clip": 2,
+      "exact": true,
+      "path": "output/temple-prototype-v3/clip-2-take-1-prompt.txt"
+    },
+    {
+      "clip": 3,
+      "exact": true,
+      "path": "output/temple-prototype-v3/clip-3-take-1-prompt.txt"
+    },
+    {
+      "clip": 4,
+      "exact": true,
+      "path": "output/temple-full-v1/clip-4-take-1-prompt.txt"
+    },
+    {
+      "clip": 5,
+      "exact": true,
+      "path": "output/temple-full-v1/clip-5-take-2-prompt.txt"
+    },
+    {
+      "clip": 6,
+      "exact": true,
+      "path": "output/temple-full-v1/clip-6-take-1-prompt.txt"
+    },
+    {
+      "clip": 7,
+      "exact": true,
+      "path": "output/temple-full-v1/clip-7-take-1-prompt.txt"
+    },
+    {
+      "clip": 8,
+      "exact": true,
+      "path": "output/temple-full-v1/clip-8-take-1-prompt.txt"
+    },
+    {
+      "clip": 9,
+      "exact": true,
+      "path": "output/temple-full-v1/clip-9-take-1-prompt.txt"
+    },
+    {
+      "clip": 10,
+      "exact": true,
+      "path": "output/temple-full-v1/clip-10-take-2-prompt.txt"
+    },
+    {
+      "clip": 11,
+      "exact": true,
+      "path": "output/temple-full-v1/clip-11-take-1-prompt.txt"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "id": "zg66kec3phrmt0d0xdwrghgkp4",
+  "status": "succeeded",
+  "model": "openai/gpt-image-2.5-flare",
+  "imageReferences": 0,
+  "data_removed": true,
+  "metrics": {
+    "image_output_count": 1,
+    "model_variant": "high",
+    "predict_time": 17.502714418,
+    "resolution_target": "9:16",
+    "total_time": 17.527713213
+  },
+  "output_saved": false,
+  "disposition": "Expired during session gap; recovered with one documented new generation using the same text-only prompt."
+}

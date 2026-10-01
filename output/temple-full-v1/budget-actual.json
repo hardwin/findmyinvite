@@ -1,0 +1,9 @@
+{
+  "scope": "New extension only; locked prototype costs excluded",
+  "imageRequests": 12,
+  "videoRequests": 10,
+  "xaiCompletedCostUsd": 7.2,
+  "pendingVideos": [],
+  "replicateCostUsd": null,
+  "replicateCostNote": "Provider prediction responses do not include monetary charges."
+}

@@ -1,0 +1,12 @@
+{
+  "model": "grok-imagine-video-1.5",
+  "duration": 5,
+  "aspect_ratio": "9:16",
+  "resolution": "720p",
+  "firstImage": "output/car-roadtrip-beach-v1/clip-5-take-1-first.jpg",
+  "lastImage": "output/car-roadtrip-beach-v1/clip-5-take-1-last.jpg",
+  "firstImageSha256": "d0317a7288aca6b25ea7695a9fe8c7fd2bcc660fe5de8dd2ff3346b1b0b0e7ae",
+  "lastImageSha256": "e8dbb153529d9ff27a3013a91be8aa2d6680fcfdf48d111cddcf23500f215746",
+  "keyframes": [],
+  "sourceVideoFramesSent": false
+}

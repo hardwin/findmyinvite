@@ -1,0 +1,1258 @@
+{
+  "schema_version": "1.1",
+  "iteration": "car-roadtrip-beach-remix-v1",
+  "name": "Modern Luxury Mountain-to-Beach Wedding",
+  "status": "complete",
+  "assets_root": "output/car-roadtrip-beach-remix-v1",
+  "locked_baseline": {
+    "path": "master_template_v1.json",
+    "sha256": "d99ecbf7e19c0332a51053bca81070dce7101dceeb416e771d3a312067e182aa",
+    "snapshot": "output/car-roadtrip-beach-remix-v1/locked-master-template-v1.json",
+    "policy": "Base is immutable; apply remix overrides to a new generation directory."
+  },
+  "scene_count": 12,
+  "connecting_clip_count": 11,
+  "models": {
+    "image": {
+      "provider": "replicate",
+      "id": "openai/gpt-image-2.5-flare",
+      "credentials_env": "REPLICATE_API_TOKEN"
+    },
+    "video": {
+      "provider": "replicate",
+      "id": "prunaai/p-video",
+      "credentials_env": "REPLICATE_API_TOKEN",
+      "resolution": "720p",
+      "aspect_ratio": "9:16",
+      "fps": 24,
+      "prompt_upsampling": false,
+      "save_audio": false
+    }
+  },
+  "parameters": {
+    "invitation_lines": "Sounder & Mohan\nFamily\nWedding Invitation",
+    "groom_title": "Sri.",
+    "groom_name": "Ashok Kumar",
+    "bride_title": "Srmt.",
+    "bride_name": "Supriya",
+    "family_lines": "With the Blessings of\nGroom's Parents\nMr. Sounder Rajan\n& Mrs. Punitha\nBride's Parents\nMr. Mohan Krishna\n& Mrs. Prema",
+    "ceremony_lines": "Wedding Ceremony\n7th February 2020\n8:00 a.m.\nIn the Morning",
+    "venue_lines": "Wedding Venue\nLeela Channaiah\nKalyana Mandapa\nVontikoppal\nMysore",
+    "reception_lines": "Reception - Dinner\n6th February 2020\n7:30 p.m. onwards\nLeela Channaiah\nKalyana Mandapa\nVontikoppal, Mysore",
+    "host_lines": "Invited By\nMr. BalaSubramanian\nMrs. Jeevitha\nBaby. Yazhini & Suhas\nWith Love & Blessings",
+    "save_date_lines": "SAVE THE DATE\n6 & 7 FEBRUARY\n2020",
+    "save_date_inline": "SAVE THE DATE / 6 & 7 FEBRUARY / 2020",
+    "invitation_intro_line_1": "you're invited to",
+    "invitation_intro_line_2": "Celebrate our Wedding."
+  },
+  "copy_assumptions": [
+    "Reception uses the same venue as the wedding because no separate reception venue was provided.",
+    "Bride honorific Srmt. is preserved exactly as requested.",
+    "The ceremony date and morning time are 7 February 2020 at 8:00 a.m.; reception is 6 February 2020 at 7:30 p.m.",
+    "All supplied wedding details remain exact; the devotional copy is replaced by the requested secular invitation line. The ceremony uses modern attire and a raised destination-wedding stage."
+  ],
+  "style": "Portrait 9:16 cinematic dimensional storybook-animation, luxury outdoor mountain-to-beach wedding. Preserve adult Indian faces, medium-brown skin and natural proportions. DRAMATIC LIGHT: diagonal volumetric sunshafts through waterfall or sea mist, deep sculpted shade, bright fabric rim light, moving caustic reflections; at night cyan moonbeams balance amber practical pools. Modern coastal typography: elegant editorial serif with restrained handwritten accents, pearl-white headlines, deep ocean-teal body copy, brushed-platinum edges, fine cyan glow; no ornate antique lettering. Distinct natural locations, expensive site-specific decor. Cars are parked, wheels fixed; everyone has planted feet. Only camera, environment and subtle gestures move. Tiny mist beads, windborne grass seeds or coastal bubbles hang at varied depths, never a confetti storm. Text-only image, no watermark or extra words.",
+  "characters": {
+    "groom": "Adult Indian groom, visibly polished storybook 3D animation, warm medium-brown skin, slender adult oval face, large dark-brown almond eyes, thick dark eyebrows, smooth clean-shaven cheeks and chin, swept wavy black hair with a prominent side part and raised quiff, small relaxed smile. No moustache or beard. Natural adult proportions, not a child. Preserve identity and proportions, not one outfit across the journey. Travel: olive jacket, ivory shirt, dark trousers. Ceremony: modern ivory linen suit and white shirt. Evening: ivory linen shirt, sand trousers, bare feet. Feet stay planted; never walk or enter a car.",
+    "bride": "Adult Indian bride, polished storybook animation, warm medium-brown skin, graceful oval face, dark-brown almond eyes, gently arched black brows, small red bindi, reserved smile, center-parted dark hair in a low bun. Same adult face, age, skin tone and body throughout.Travel: teal windbreaker, cream top, maroon skirt and tan shoes. Ceremony: ivory satin gown, short veil, pearl earrings. Evening: maroon dress, cream shawl, bare feet. Keep the approved mountain portrait pose. Feet stay planted; no walking or on-camera wardrobe changes."
+  },
+  "particle_motion": "Portrait storybook outdoor wedding, exact supplied identities and anchors. CARS PARKED: fixed tires, doors closed, no driving, braking, rolling, entry or exit. PEOPLE PLANTED: no walking, stepping, approach or departure; only tiny blinks and gestures. MOTIFS/LIGHT: mountain grass seeds and mist beads, coastal bubbles and spray drift independently at 0.1 picture-height/second in settled views, 12-20 small pieces at varied depths; motion blur comes from camera speed, no emitted burst. Strong diagonal shafts, rim light and changing water reflections. Pearl-white/teal lettering with platinum glints stays rigid.",
+  "generation_policy": {
+    "images": "Text-only Flare; no source or generated reference images.",
+    "video": "Clips 1-2 use completed Seedance outputs. Clips 3-11 use Replicate prunaai/p-video with previous decoded final frame as the next first frame and scene image as last_frame_image except final clip.",
+    "ending": "First-frame-only animation preserves one existing board and the same physical scene. No independent final-frame composition.",
+    "initial_new_image_requests": 11,
+    "initial_new_video_requests": 11,
+    "planned_xai_usd": 0,
+    "automatic_paid_retries": true,
+    "download_outputs_immediately": true,
+    "visual_review": false,
+    "video_tests": false,
+    "retakes": false,
+    "scope": "Pruna continuation at 720p 9:16, 24 fps, silent. Confirmed failed Pruna attempts may be retried with identical inputs, capped at three total attempts per clip.",
+    "blocker": null
+  },
+  "output": {
+    "video": "car-roadtrip-beach-remix-v1-pruna-final.mp4",
+    "width": 720,
+    "height": 1280,
+    "fps": 24,
+    "aspect_ratio": "9:16",
+    "audio": "silent",
+    "assembly": "Concatenate generated clips in order; no transition overlays, global retiming or crossfades.",
+    "actual_duration_seconds": 54.458333333333336,
+    "frame_count": 1307,
+    "sha256": null
+  },
+  "scenes": [
+    {
+      "index": 1,
+      "id": "scene-01",
+      "name": "Mountain-road aerial departure",
+      "status": "generated-first-take",
+      "image_prompt_template": "A high oblique DRONE establishing shot of a luxury mountain-road wedding journey at sunrise, portrait 9:16. Camera about 40 meters ABOVE the roadside overlook, well BACK, 20-25 degrees below horizontal, wide 24 mm lens. Lavender-peach sky and layered misty ridges fill the upper third. Strong diagonal sunshafts cut through waterfall mist; crisp rim-lit grass, deep rock shadows.\n\nONE pale sage-green vintage convertible with tan seats is already PARKED EMPTY in a gravel turnout at lower LEFT. Engine off, all four tires fixed against visible stones, doors shut. No people inside or near it; no logos or plate words. A cream scarf is tied to the passenger headrest. Camera motion alone changes the car's screen position.\n\nThe road descends visibly from this turnout along the SAME left cliff to ONE rectangular ivory wedding stage beside the waterfall pool, already identifiable in the lower-middle distance. Its three staggered ivory sail panels, two asymmetric white-orchid arrangements and broad low steps remain the exact destination throughout the descent. Waterfall stays RIGHT, road LEFT; fixed geography, no different landscape behind a wipe. Show the stage top clearly from this angle, small in the wide landscape.\n\nSunlit mist beads and a few pale grass seeds hang irregularly across near, middle and far depths. The clear flight line leaves the empty car behind and follows the visible road shoulder down to the stage, then levels over the steps. No moving vehicle, people, religious statues or extra stage. Premium animated natural materials and light, no text at this distant scale. The stage is outdoors with open cliffs and sky, never enclosed.",
+      "image_prompt": "A high oblique DRONE establishing shot of a luxury mountain-road wedding journey at sunrise, portrait 9:16. Camera about 40 meters ABOVE the roadside overlook, well BACK, 20-25 degrees below horizontal, wide 24 mm lens. Lavender-peach sky and layered misty ridges fill the upper third. Strong diagonal sunshafts cut through waterfall mist; crisp rim-lit grass, deep rock shadows.\n\nONE pale sage-green vintage convertible with tan seats is already PARKED EMPTY in a gravel turnout at lower LEFT. Engine off, all four tires fixed against visible stones, doors shut. No people inside or near it; no logos or plate words. A cream scarf is tied to the passenger headrest. Camera motion alone changes the car's screen position.\n\nThe road descends visibly from this turnout along the SAME left cliff to ONE rectangular ivory wedding stage beside the waterfall pool, already identifiable in the lower-middle distance. Its three staggered ivory sail panels, two asymmetric white-orchid arrangements and broad low steps remain the exact destination throughout the descent. Waterfall stays RIGHT, road LEFT; fixed geography, no different landscape behind a wipe. Show the stage top clearly from this angle, small in the wide landscape.\n\nSunlit mist beads and a few pale grass seeds hang irregularly across near, middle and far depths. The clear flight line leaves the empty car behind and follows the visible road shoulder down to the stage, then levels over the steps. No moving vehicle, people, religious statues or extra stage. Premium animated natural materials and light, no text at this distant scale. The stage is outdoors with open cliffs and sky, never enclosed.",
+      "text_fields": [],
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-1.jpg",
+      "generation": "text-only",
+      "source_metadata": null,
+      "sha256": null,
+      "source_asset": null,
+      "selected_take": 1,
+      "review_note": "No visual review or retake, as requested."
+    },
+    {
+      "index": 2,
+      "id": "scene-02",
+      "name": "Modern waterfall invitation stage",
+      "status": "generated-first-take",
+      "image_prompt_template": "Portrait 9:16 cinematic dimensional storybook-animation, luxury outdoor mountain-to-beach wedding. Preserve adult Indian faces, medium-brown skin and natural proportions. DRAMATIC LIGHT: diagonal volumetric sunshafts through waterfall or sea mist, deep sculpted shade, bright fabric rim light, moving caustic reflections; at night cyan moonbeams balance amber practical pools. Modern coastal typography: elegant editorial serif with restrained handwritten accents, pearl-white headlines, deep ocean-teal body copy, brushed-platinum edges, fine cyan glow; no ornate antique lettering. Distinct natural locations, expensive site-specific decor. Cars are parked, wheels fixed; everyone has planted feet. Only camera, environment and subtle gestures move. Tiny mist beads, windborne grass seeds or coastal bubbles hang at varied depths, never a confetti storm. Text-only image, no watermark or extra words.\n\nONE dramatic waterfall drops at RIGHT between open granite cliffs into a natural pool. The access road follows the LEFT cliff from the high car turnout to this exact stopping area. ONE raised rectangular ivory wedding stage stands on the dry natural bank beside the water. Three staggered matte-ivory sail panels form an asymmetric decorative backdrop; two grounded sculptural white-orchid and pale-sage arrangements flank wide low steps. Pearl linen plinths and clear glass cylinders add expensive detail. The empty sage convertible stays far above on the turnout, never beside this stage. No religious imagery, statues or people.\n\nSHOT: Eye-level view just above the low steps of the SAME stage already visible from the opening aerial. The stage occupies the lower 40 percent of frame, with water and open cliffs beyond the sail panels. LARGE floating editorial-serif lettering over the center reads exactly '{{invitation_intro_line_1}}' / '{{invitation_intro_line_2}}'. Contemporary elegant proportions, restrained handwritten accent on Wedding, pearl-white faces, ocean-teal edge shadows, platinum highlights and fine cyan glow; full text spans 65-70 percent of width, separated from the panels. Real back-and-side sunshafts through fine waterfall mist, strong shaded contrast and pearly reflected light. Twelve to twenty small mist beads and pale grass seeds distributed at different depths, clear of words. Linen edges lift only slightly; every panel, vase and arrangement stays fixed. Trail to the invitation viewpoint is visible across the pool at left. No car arrival, statue transformation or additional text.",
+      "image_prompt": "Portrait 9:16 cinematic dimensional storybook-animation, luxury outdoor mountain-to-beach wedding. Preserve adult Indian faces, medium-brown skin and natural proportions. DRAMATIC LIGHT: diagonal volumetric sunshafts through waterfall or sea mist, deep sculpted shade, bright fabric rim light, moving caustic reflections; at night cyan moonbeams balance amber practical pools. Modern coastal typography: elegant editorial serif with restrained handwritten accents, pearl-white headlines, deep ocean-teal body copy, brushed-platinum edges, fine cyan glow; no ornate antique lettering. Distinct natural locations, expensive site-specific decor. Cars are parked, wheels fixed; everyone has planted feet. Only camera, environment and subtle gestures move. Tiny mist beads, windborne grass seeds or coastal bubbles hang at varied depths, never a confetti storm. Text-only image, no watermark or extra words.\n\nONE dramatic waterfall drops at RIGHT between open granite cliffs into a natural pool. The access road follows the LEFT cliff from the high car turnout to this exact stopping area. ONE raised rectangular ivory wedding stage stands on the dry natural bank beside the water. Three staggered matte-ivory sail panels form an asymmetric decorative backdrop; two grounded sculptural white-orchid and pale-sage arrangements flank wide low steps. Pearl linen plinths and clear glass cylinders add expensive detail. The empty sage convertible stays far above on the turnout, never beside this stage. No religious imagery, statues or people.\n\nSHOT: Eye-level view just above the low steps of the SAME stage already visible from the opening aerial. The stage occupies the lower 40 percent of frame, with water and open cliffs beyond the sail panels. LARGE floating editorial-serif lettering over the center reads exactly 'you're invited to' / 'Celebrate our Wedding.'. Contemporary elegant proportions, restrained handwritten accent on Wedding, pearl-white faces, ocean-teal edge shadows, platinum highlights and fine cyan glow; full text spans 65-70 percent of width, separated from the panels. Real back-and-side sunshafts through fine waterfall mist, strong shaded contrast and pearly reflected light. Twelve to twenty small mist beads and pale grass seeds distributed at different depths, clear of words. Linen edges lift only slightly; every panel, vase and arrangement stays fixed. Trail to the invitation viewpoint is visible across the pool at left. No car arrival, statue transformation or additional text.",
+      "text_fields": [
+        "invitation_intro_line_1",
+        "invitation_intro_line_2"
+      ],
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-2.jpg",
+      "generation": "text-only",
+      "source_metadata": null,
+      "sha256": null,
+      "source_asset": null,
+      "selected_take": 1,
+      "review_note": "No visual review or retake, as requested."
+    },
+    {
+      "index": 3,
+      "name": "Waterfall-side invitation viewpoint",
+      "status": "generated-first-take",
+      "generation": "text-only",
+      "image_prompt_template": "Portrait 9:16 cinematic dimensional storybook-animation, luxury outdoor mountain-to-beach wedding. Preserve adult Indian faces, medium-brown skin and natural proportions. DRAMATIC LIGHT: diagonal volumetric sunshafts through waterfall or sea mist, deep sculpted shade, bright fabric rim light, moving caustic reflections; at night cyan moonbeams balance amber practical pools. Modern coastal typography: elegant editorial serif with restrained handwritten accents, pearl-white headlines, deep ocean-teal body copy, brushed-platinum edges, fine cyan glow; no ornate antique lettering. Distinct natural locations, expensive site-specific decor. Cars are parked, wheels fixed; everyone has planted feet. Only camera, environment and subtle gestures move. Tiny mist beads, windborne grass seeds or coastal bubbles hang at varied depths, never a confetti storm. Text-only image, no watermark or extra words.\n\nSCENE COMPOSITION:\nEye-level view at a distinct grassy waterfall-side overlook across the pool, reached by following the visible curved riverside trail. ONE ivory invitation card rests upright in a split natural rock on the lower right, filling about 55 percent of frame width, generous margins and sage botanical border. Exact luminous lettering: '{{invitation_lines}}'. Pearl-white editorial heading over deep-teal modern serif body copy; fine platinum highlights. The waterfall is seen diagonally from its side, offset far LEFT, with wet cliff strata and open sky. A thin trail curves behind the rock toward a higher mountain road; the sage car is a tiny distant travel clue there. Uneven grass and a low wildflower patch occupy the opposite foreground; no matching frame on both sides. Warm sunlight catches the card edges and spray. No earlier stage in this new view, no repeated platform or identical composition. The invitation is physically steady, with a few fine water droplets in the background, never rain across the lettering.",
+      "image_prompt": "Portrait 9:16 cinematic dimensional storybook-animation, luxury outdoor mountain-to-beach wedding. Preserve adult Indian faces, medium-brown skin and natural proportions. DRAMATIC LIGHT: diagonal volumetric sunshafts through waterfall or sea mist, deep sculpted shade, bright fabric rim light, moving caustic reflections; at night cyan moonbeams balance amber practical pools. Modern coastal typography: elegant editorial serif with restrained handwritten accents, pearl-white headlines, deep ocean-teal body copy, brushed-platinum edges, fine cyan glow; no ornate antique lettering. Distinct natural locations, expensive site-specific decor. Cars are parked, wheels fixed; everyone has planted feet. Only camera, environment and subtle gestures move. Tiny mist beads, windborne grass seeds or coastal bubbles hang at varied depths, never a confetti storm. Text-only image, no watermark or extra words.\n\nSCENE COMPOSITION:\nEye-level view at a distinct grassy waterfall-side overlook across the pool, reached by following the visible curved riverside trail. ONE ivory invitation card rests upright in a split natural rock on the lower right, filling about 55 percent of frame width, generous margins and sage botanical border. Exact luminous lettering: 'Sounder & Mohan\nFamily\nWedding Invitation'. Pearl-white editorial heading over deep-teal modern serif body copy; fine platinum highlights. The waterfall is seen diagonally from its side, offset far LEFT, with wet cliff strata and open sky. A thin trail curves behind the rock toward a higher mountain road; the sage car is a tiny distant travel clue there. Uneven grass and a low wildflower patch occupy the opposite foreground; no matching frame on both sides. Warm sunlight catches the card edges and spray. No earlier stage in this new view, no repeated platform or identical composition. The invitation is physically steady, with a few fine water droplets in the background, never rain across the lettering.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-3.jpg",
+      "image_request_id": null,
+      "selected_take": 1,
+      "review_note": "No visual review or retake, as requested.",
+      "sha256": null,
+      "actual_input_path": null,
+      "request_metadata": null
+    },
+    {
+      "index": 4,
+      "name": "Groom at mountain-road pullout",
+      "status": "generated-first-take",
+      "generation": "text-only",
+      "image_prompt_template": "Portrait 9:16 cinematic dimensional storybook-animation, luxury outdoor mountain-to-beach wedding. Preserve adult Indian faces, medium-brown skin and natural proportions. DRAMATIC LIGHT: diagonal volumetric sunshafts through waterfall or sea mist, deep sculpted shade, bright fabric rim light, moving caustic reflections; at night cyan moonbeams balance amber practical pools. Modern coastal typography: elegant editorial serif with restrained handwritten accents, pearl-white headlines, deep ocean-teal body copy, brushed-platinum edges, fine cyan glow; no ornate antique lettering. Distinct natural locations, expensive site-specific decor. Cars are parked, wheels fixed; everyone has planted feet. Only camera, environment and subtle gestures move. Tiny mist beads, windborne grass seeds or coastal bubbles hang at varied depths, never a confetti storm. Text-only image, no watermark or extra words.\n\nAdult Indian groom, visibly polished storybook 3D animation, warm medium-brown skin, slender adult oval face, large dark-brown almond eyes, thick dark eyebrows, smooth clean-shaven cheeks and chin, swept wavy black hair with a prominent side part and raised quiff, small relaxed smile. No moustache or beard. Natural adult proportions, not a child. An olive travel jacket over an ivory shirt, dark trousers and tan walking shoes; a fine gold chain. Keep the same face and swept quiff throughout.\n\nSCENE COMPOSITION:\nAt a different mountain-road pullout above the waterfall, the groom stands full-length in the LEFT third, about 62 percent of frame height, feet and quiff inside generous margins. He ALREADY stands outside the empty parked car, feet planted on fixed gravel marks, elbow resting on its CLOSED door, folded unmarked map held still. All tires touch the same stones; no driver or occupant. Never imply arriving, parking or getting out. The car occupies only the lower left; open cliffs and descending switchbacks spread behind him. His travel jacket and shirt move slightly in the breeze. On the RIGHT floats pearl-white editorial lettering, exactly '{{groom_title}}' on a small first line and '{{groom_name}}' on two large graceful lines. Bright beveled edges, mild halos and tiny moving glints, with no physical title support. Dark green pines on a distant slope give text contrast without enclosing the scene. Strong diagonal shafts arrive from upper left through valley mist; backlit grass seeds and tiny pollen motes hang at three depths. The uphill road visibly climbs toward a lone wind-shaped tree at a higher photo spot, establishing the next destination. No bride in this portrait; no extra text on car or map.",
+      "image_prompt": "Portrait 9:16 cinematic dimensional storybook-animation, luxury outdoor mountain-to-beach wedding. Preserve adult Indian faces, medium-brown skin and natural proportions. DRAMATIC LIGHT: diagonal volumetric sunshafts through waterfall or sea mist, deep sculpted shade, bright fabric rim light, moving caustic reflections; at night cyan moonbeams balance amber practical pools. Modern coastal typography: elegant editorial serif with restrained handwritten accents, pearl-white headlines, deep ocean-teal body copy, brushed-platinum edges, fine cyan glow; no ornate antique lettering. Distinct natural locations, expensive site-specific decor. Cars are parked, wheels fixed; everyone has planted feet. Only camera, environment and subtle gestures move. Tiny mist beads, windborne grass seeds or coastal bubbles hang at varied depths, never a confetti storm. Text-only image, no watermark or extra words.\n\nAdult Indian groom, visibly polished storybook 3D animation, warm medium-brown skin, slender adult oval face, large dark-brown almond eyes, thick dark eyebrows, smooth clean-shaven cheeks and chin, swept wavy black hair with a prominent side part and raised quiff, small relaxed smile. No moustache or beard. Natural adult proportions, not a child. An olive travel jacket over an ivory shirt, dark trousers and tan walking shoes; a fine gold chain. Keep the same face and swept quiff throughout.\n\nSCENE COMPOSITION:\nAt a different mountain-road pullout above the waterfall, the groom stands full-length in the LEFT third, about 62 percent of frame height, feet and quiff inside generous margins. He ALREADY stands outside the empty parked car, feet planted on fixed gravel marks, elbow resting on its CLOSED door, folded unmarked map held still. All tires touch the same stones; no driver or occupant. Never imply arriving, parking or getting out. The car occupies only the lower left; open cliffs and descending switchbacks spread behind him. His travel jacket and shirt move slightly in the breeze. On the RIGHT floats pearl-white editorial lettering, exactly 'Sri.' on a small first line and 'Ashok Kumar' on two large graceful lines. Bright beveled edges, mild halos and tiny moving glints, with no physical title support. Dark green pines on a distant slope give text contrast without enclosing the scene. Strong diagonal shafts arrive from upper left through valley mist; backlit grass seeds and tiny pollen motes hang at three depths. The uphill road visibly climbs toward a lone wind-shaped tree at a higher photo spot, establishing the next destination. No bride in this portrait; no extra text on car or map.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-4.jpg",
+      "image_request_id": null,
+      "selected_take": 1,
+      "review_note": "No visual review or retake, as requested.",
+      "sha256": null,
+      "actual_input_path": null,
+      "request_metadata": null
+    },
+    {
+      "index": 5,
+      "name": "Bride at high-altitude photo spot",
+      "status": "generated-first-take",
+      "generation": "text-only",
+      "image_prompt_template": "Portrait 9:16 cinematic dimensional storybook-animation, luxury outdoor mountain-to-beach wedding. Preserve adult Indian faces, medium-brown skin and natural proportions. DRAMATIC LIGHT: diagonal volumetric sunshafts through waterfall or sea mist, deep sculpted shade, bright fabric rim light, moving caustic reflections; at night cyan moonbeams balance amber practical pools. Modern coastal typography: elegant editorial serif with restrained handwritten accents, pearl-white headlines, deep ocean-teal body copy, brushed-platinum edges, fine cyan glow; no ornate antique lettering. Distinct natural locations, expensive site-specific decor. Cars are parked, wheels fixed; everyone has planted feet. Only camera, environment and subtle gestures move. Tiny mist beads, windborne grass seeds or coastal bubbles hang at varied depths, never a confetti storm. Text-only image, no watermark or extra words.\n\nAdult Indian bride, visibly polished storybook 3D animation, warm medium-brown skin, graceful oval face, large dark-brown almond eyes, gently arched black eyebrows, small red bindi, warm reserved smile. Center-parted dark hair in a low bun, small gold jhumka earrings, fine gold necklace and red-and-gold bangles. Natural adult proportions. Preserve her face, skin tone, age and body in every scene. A teal windbreaker over a cream top, maroon ankle-length skirt and tan walking shoes. Hair tied securely; no bridal headdress during the mountain trip.\n\nSCENE COMPOSITION:\nA different high-altitude photo spot well above the pullout. The bride stands full-length in the LEFT third on a safe grassy shoulder, about 62 percent of frame height. She holds a compact unmarked camera near her waist and turns over her shoulder toward the valley, smiling softly as her cream scarf lifts in the wind. A single wind-shaped tree sits off-axis in the distance; layered blue ridges and broad sky occupy the rest. No car in the foreground and no repeated roadside portrait pose. On the RIGHT floats pearl-white editorial lettering: '{{bride_title}}' in small type above '{{bride_name}}' in large flowing strokes, fine bevels, soft halo, crisp counters. Sunlight lights her face and the jacket edge against distant shade. The winding road is visible far below, then curls toward a broad grassy valley viewpoint down-slope on the right. Keep this exact approved pose, clothes and framing. Backlit pale grass seeds hang across three depths; diagonal sunrays trace her scarf and hair. Keep the high viewpoint expansive and unmistakably outdoors.",
+      "image_prompt": "Portrait 9:16 cinematic dimensional storybook-animation, luxury outdoor mountain-to-beach wedding. Preserve adult Indian faces, medium-brown skin and natural proportions. DRAMATIC LIGHT: diagonal volumetric sunshafts through waterfall or sea mist, deep sculpted shade, bright fabric rim light, moving caustic reflections; at night cyan moonbeams balance amber practical pools. Modern coastal typography: elegant editorial serif with restrained handwritten accents, pearl-white headlines, deep ocean-teal body copy, brushed-platinum edges, fine cyan glow; no ornate antique lettering. Distinct natural locations, expensive site-specific decor. Cars are parked, wheels fixed; everyone has planted feet. Only camera, environment and subtle gestures move. Tiny mist beads, windborne grass seeds or coastal bubbles hang at varied depths, never a confetti storm. Text-only image, no watermark or extra words.\n\nAdult Indian bride, visibly polished storybook 3D animation, warm medium-brown skin, graceful oval face, large dark-brown almond eyes, gently arched black eyebrows, small red bindi, warm reserved smile. Center-parted dark hair in a low bun, small gold jhumka earrings, fine gold necklace and red-and-gold bangles. Natural adult proportions. Preserve her face, skin tone, age and body in every scene. A teal windbreaker over a cream top, maroon ankle-length skirt and tan walking shoes. Hair tied securely; no bridal headdress during the mountain trip.\n\nSCENE COMPOSITION:\nA different high-altitude photo spot well above the pullout. The bride stands full-length in the LEFT third on a safe grassy shoulder, about 62 percent of frame height. She holds a compact unmarked camera near her waist and turns over her shoulder toward the valley, smiling softly as her cream scarf lifts in the wind. A single wind-shaped tree sits off-axis in the distance; layered blue ridges and broad sky occupy the rest. No car in the foreground and no repeated roadside portrait pose. On the RIGHT floats pearl-white editorial lettering: 'Srmt.' in small type above 'Supriya' in large flowing strokes, fine bevels, soft halo, crisp counters. Sunlight lights her face and the jacket edge against distant shade. The winding road is visible far below, then curls toward a broad grassy valley viewpoint down-slope on the right. Keep this exact approved pose, clothes and framing. Backlit pale grass seeds hang across three depths; diagonal sunrays trace her scarf and hair. Keep the high viewpoint expansive and unmistakably outdoors.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-5.jpg",
+      "image_request_id": null,
+      "selected_take": 1,
+      "review_note": "No visual review or retake, as requested.",
+      "sha256": null,
+      "actual_input_path": null,
+      "request_metadata": null
+    },
+    {
+      "index": 6,
+      "name": "Valley family blessing and selfie",
+      "status": "generated-first-take",
+      "generation": "text-only",
+      "image_prompt_template": "Portrait 9:16 cinematic dimensional storybook-animation, luxury outdoor mountain-to-beach wedding. Preserve adult Indian faces, medium-brown skin and natural proportions. DRAMATIC LIGHT: diagonal volumetric sunshafts through waterfall or sea mist, deep sculpted shade, bright fabric rim light, moving caustic reflections; at night cyan moonbeams balance amber practical pools. Modern coastal typography: elegant editorial serif with restrained handwritten accents, pearl-white headlines, deep ocean-teal body copy, brushed-platinum edges, fine cyan glow; no ornate antique lettering. Distinct natural locations, expensive site-specific decor. Cars are parked, wheels fixed; everyone has planted feet. Only camera, environment and subtle gestures move. Tiny mist beads, windborne grass seeds or coastal bubbles hang at varied depths, never a confetti storm. Text-only image, no watermark or extra words.\n\nSCENE COMPOSITION:\nLOW three-quarter view across a wide open valley viewpoint, with four parents and the couple sharing a candid blessing and selfie. Groom has medium-brown skin, clean-shaven oval face, swept black quiff, olive jacket and ivory shirt. Bride has medium-brown skin, oval face, dark low bun, red bindi, teal jacket and maroon skirt. Four distinct adult parents in simple travel clothing already stand with planted feet on the LEFT: one parent rests a hand gently on the groom's shoulder while the bride holds a small phone outward for their shared selfie; nobody steps or walks. No duplicate faces or extra couple. On the RIGHT, one ivory folding picnic card lies propped on a blanket over a low rock, tilted 15 degrees, all corners visible. Exact ocean-teal lines with luminous headings: '{{family_lines}}'. Give both parent groups clear spacing. A small grounded wildflower bunch rests below the card. The family are candid secondary figures; the card stays readable. The valley opens broadly behind them, with the same switchback road descending visibly to a sunlit beach and a distant rocky headland. The empty sage car is parked with fixed wheels beside the road; use no enclosing scenery.",
+      "image_prompt": "Portrait 9:16 cinematic dimensional storybook-animation, luxury outdoor mountain-to-beach wedding. Preserve adult Indian faces, medium-brown skin and natural proportions. DRAMATIC LIGHT: diagonal volumetric sunshafts through waterfall or sea mist, deep sculpted shade, bright fabric rim light, moving caustic reflections; at night cyan moonbeams balance amber practical pools. Modern coastal typography: elegant editorial serif with restrained handwritten accents, pearl-white headlines, deep ocean-teal body copy, brushed-platinum edges, fine cyan glow; no ornate antique lettering. Distinct natural locations, expensive site-specific decor. Cars are parked, wheels fixed; everyone has planted feet. Only camera, environment and subtle gestures move. Tiny mist beads, windborne grass seeds or coastal bubbles hang at varied depths, never a confetti storm. Text-only image, no watermark or extra words.\n\nSCENE COMPOSITION:\nLOW three-quarter view across a wide open valley viewpoint, with four parents and the couple sharing a candid blessing and selfie. Groom has medium-brown skin, clean-shaven oval face, swept black quiff, olive jacket and ivory shirt. Bride has medium-brown skin, oval face, dark low bun, red bindi, teal jacket and maroon skirt. Four distinct adult parents in simple travel clothing already stand with planted feet on the LEFT: one parent rests a hand gently on the groom's shoulder while the bride holds a small phone outward for their shared selfie; nobody steps or walks. No duplicate faces or extra couple. On the RIGHT, one ivory folding picnic card lies propped on a blanket over a low rock, tilted 15 degrees, all corners visible. Exact ocean-teal lines with luminous headings: 'With the Blessings of\nGroom's Parents\nMr. Sounder Rajan\n& Mrs. Punitha\nBride's Parents\nMr. Mohan Krishna\n& Mrs. Prema'. Give both parent groups clear spacing. A small grounded wildflower bunch rests below the card. The family are candid secondary figures; the card stays readable. The valley opens broadly behind them, with the same switchback road descending visibly to a sunlit beach and a distant rocky headland. The empty sage car is parked with fixed wheels beside the road; use no enclosing scenery.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-6.jpg",
+      "image_request_id": null,
+      "selected_take": 1,
+      "review_note": "No visual review or retake, as requested.",
+      "sha256": null,
+      "actual_input_path": null,
+      "request_metadata": null
+    },
+    {
+      "index": 7,
+      "name": "Grand raised beach wedding stage",
+      "status": "generated-first-take",
+      "generation": "text-only",
+      "image_prompt_template": "Portrait 9:16 cinematic dimensional storybook-animation, luxury outdoor mountain-to-beach wedding. Preserve adult Indian faces, medium-brown skin and natural proportions. DRAMATIC LIGHT: diagonal volumetric sunshafts through waterfall or sea mist, deep sculpted shade, bright fabric rim light, moving caustic reflections; at night cyan moonbeams balance amber practical pools. Modern coastal typography: elegant editorial serif with restrained handwritten accents, pearl-white headlines, deep ocean-teal body copy, brushed-platinum edges, fine cyan glow; no ornate antique lettering. Distinct natural locations, expensive site-specific decor. Cars are parked, wheels fixed; everyone has planted feet. Only camera, environment and subtle gestures move. Tiny mist beads, windborne grass seeds or coastal bubbles hang at varied depths, never a confetti storm. Text-only image, no watermark or extra words.\n\nAdult Indian groom, visibly polished storybook 3D animation, warm medium-brown skin, slender adult oval face, large dark-brown almond eyes, thick dark eyebrows, smooth clean-shaven cheeks and chin, swept wavy black hair with a prominent side part and raised quiff, small relaxed smile. No moustache or beard. Natural adult proportions, not a child. Modern ivory linen tailored suit, open-collar white shirt, pale sage pocket square, tan loafers. No dhoti or bare chest. Preserve identity and outfit throughout the ceremony.\n\nAdult Indian bride, polished storybook animation, warm medium-brown skin, graceful oval face, dark-brown almond eyes, gently arched black brows, small red bindi, reserved smile, center-parted dark hair in a low bun. Same adult face, age, skin tone and body throughout.Modern ivory satin wedding gown, fitted bodice, flowing skirt and short sheer veil pinned to the same low bun, pearl earrings and a small white orchid bouquet. No sari or traditional ceremonial costume. She stands on the raised platform.\n\nSCENE COMPOSITION:\nTHREE-QUARTER view of a high-production daylight destination wedding on a broad RAISED ivory platform, clearly 60 cm above the sand with two broad steps and a silk-lined edge. The bride and groom stand on the LEFT on the platform, feet planted, hands gently joined, exchanging a tiny smile. No floor seating, rug ceremony, priest or ritual fire. A lavish asymmetric sculptural backdrop of curved ivory fabric sails, layered pearl linens, dense white orchids, pale hydrangeas and sage foliage stands behind them, with intentional gaps showing the sea. Expensive upholstered ivory seats, crystal cylinders, a brushed-platinum console and low orchid islands complete the setup; all firmly grounded. On RIGHT, ONE frosted-acrylic timing panel with deep-teal editorial serif copy and pearl-lit border reads exactly '{{ceremony_lines}}'. Every word is readable. Open ocean horizon and blue sky dominate beyond this single destination setup; do not enclose the beach. Side sunshafts rake through sea mist, bright gown rim and suit texture contrast with cool shade. A few tied silk ribbons flex slowly, twelve small iridescent bubbles and fine spray beads drift independently at varied depths. The rocky headland remains visible to the right, with a coastal footpath leading toward it. No car at this ceremony.",
+      "image_prompt": "Portrait 9:16 cinematic dimensional storybook-animation, luxury outdoor mountain-to-beach wedding. Preserve adult Indian faces, medium-brown skin and natural proportions. DRAMATIC LIGHT: diagonal volumetric sunshafts through waterfall or sea mist, deep sculpted shade, bright fabric rim light, moving caustic reflections; at night cyan moonbeams balance amber practical pools. Modern coastal typography: elegant editorial serif with restrained handwritten accents, pearl-white headlines, deep ocean-teal body copy, brushed-platinum edges, fine cyan glow; no ornate antique lettering. Distinct natural locations, expensive site-specific decor. Cars are parked, wheels fixed; everyone has planted feet. Only camera, environment and subtle gestures move. Tiny mist beads, windborne grass seeds or coastal bubbles hang at varied depths, never a confetti storm. Text-only image, no watermark or extra words.\n\nAdult Indian groom, visibly polished storybook 3D animation, warm medium-brown skin, slender adult oval face, large dark-brown almond eyes, thick dark eyebrows, smooth clean-shaven cheeks and chin, swept wavy black hair with a prominent side part and raised quiff, small relaxed smile. No moustache or beard. Natural adult proportions, not a child. Modern ivory linen tailored suit, open-collar white shirt, pale sage pocket square, tan loafers. No dhoti or bare chest. Preserve identity and outfit throughout the ceremony.\n\nAdult Indian bride, polished storybook animation, warm medium-brown skin, graceful oval face, dark-brown almond eyes, gently arched black brows, small red bindi, reserved smile, center-parted dark hair in a low bun. Same adult face, age, skin tone and body throughout.Modern ivory satin wedding gown, fitted bodice, flowing skirt and short sheer veil pinned to the same low bun, pearl earrings and a small white orchid bouquet. No sari or traditional ceremonial costume. She stands on the raised platform.\n\nSCENE COMPOSITION:\nTHREE-QUARTER view of a high-production daylight destination wedding on a broad RAISED ivory platform, clearly 60 cm above the sand with two broad steps and a silk-lined edge. The bride and groom stand on the LEFT on the platform, feet planted, hands gently joined, exchanging a tiny smile. No floor seating, rug ceremony, priest or ritual fire. A lavish asymmetric sculptural backdrop of curved ivory fabric sails, layered pearl linens, dense white orchids, pale hydrangeas and sage foliage stands behind them, with intentional gaps showing the sea. Expensive upholstered ivory seats, crystal cylinders, a brushed-platinum console and low orchid islands complete the setup; all firmly grounded. On RIGHT, ONE frosted-acrylic timing panel with deep-teal editorial serif copy and pearl-lit border reads exactly 'Wedding Ceremony\n7th February 2020\n8:00 a.m.\nIn the Morning'. Every word is readable. Open ocean horizon and blue sky dominate beyond this single destination setup; do not enclose the beach. Side sunshafts rake through sea mist, bright gown rim and suit texture contrast with cool shade. A few tied silk ribbons flex slowly, twelve small iridescent bubbles and fine spray beads drift independently at varied depths. The rocky headland remains visible to the right, with a coastal footpath leading toward it. No car at this ceremony.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-7.jpg",
+      "image_request_id": null,
+      "selected_take": 1,
+      "review_note": "No visual review or retake, as requested.",
+      "sha256": null,
+      "actual_input_path": null,
+      "request_metadata": null
+    },
+    {
+      "index": 8,
+      "name": "Coastal headland venue details",
+      "status": "generated-first-take",
+      "generation": "text-only",
+      "image_prompt_template": "Portrait 9:16 cinematic dimensional storybook-animation, luxury outdoor mountain-to-beach wedding. Preserve adult Indian faces, medium-brown skin and natural proportions. DRAMATIC LIGHT: diagonal volumetric sunshafts through waterfall or sea mist, deep sculpted shade, bright fabric rim light, moving caustic reflections; at night cyan moonbeams balance amber practical pools. Modern coastal typography: elegant editorial serif with restrained handwritten accents, pearl-white headlines, deep ocean-teal body copy, brushed-platinum edges, fine cyan glow; no ornate antique lettering. Distinct natural locations, expensive site-specific decor. Cars are parked, wheels fixed; everyone has planted feet. Only camera, environment and subtle gestures move. Tiny mist beads, windborne grass seeds or coastal bubbles hang at varied depths, never a confetti storm. Text-only image, no watermark or extra words.\n\nSCENE COMPOSITION:\nEye-level view from a distinct open coastal headland, looking obliquely down at the ceremony beach far below and a separate crescent bay beyond. ONE deep ocean-teal venue panel stands firmly braced among low coastal rocks, centered, filling about 56 percent of frame width and height. Exact large pearl-white editorial serif copy: '{{venue_lines}}'. Generous margins and luminous bevel highlights; preserve the stated venue wording even though the scene is a stylized coastal invitation. Wind-shaped grass fills only the lower LEFT edge; an immense open sea occupies the RIGHT. No couple or repeated ceremony platform. Strong raking afternoon sunshafts cross sea mist; the board catches bright directional reflections. A thin coastal track follows the far shore to ONE small weathered beach shack visible only as a distant unlettered roof at the next bay. This establishes the next stop rather than placing it beside the camera. Sparse sea-spray beads catch diagonal light; a few shells sit naturally at the board base.",
+      "image_prompt": "Portrait 9:16 cinematic dimensional storybook-animation, luxury outdoor mountain-to-beach wedding. Preserve adult Indian faces, medium-brown skin and natural proportions. DRAMATIC LIGHT: diagonal volumetric sunshafts through waterfall or sea mist, deep sculpted shade, bright fabric rim light, moving caustic reflections; at night cyan moonbeams balance amber practical pools. Modern coastal typography: elegant editorial serif with restrained handwritten accents, pearl-white headlines, deep ocean-teal body copy, brushed-platinum edges, fine cyan glow; no ornate antique lettering. Distinct natural locations, expensive site-specific decor. Cars are parked, wheels fixed; everyone has planted feet. Only camera, environment and subtle gestures move. Tiny mist beads, windborne grass seeds or coastal bubbles hang at varied depths, never a confetti storm. Text-only image, no watermark or extra words.\n\nSCENE COMPOSITION:\nEye-level view from a distinct open coastal headland, looking obliquely down at the ceremony beach far below and a separate crescent bay beyond. ONE deep ocean-teal venue panel stands firmly braced among low coastal rocks, centered, filling about 56 percent of frame width and height. Exact large pearl-white editorial serif copy: 'Wedding Venue\nLeela Channaiah\nKalyana Mandapa\nVontikoppal\nMysore'. Generous margins and luminous bevel highlights; preserve the stated venue wording even though the scene is a stylized coastal invitation. Wind-shaped grass fills only the lower LEFT edge; an immense open sea occupies the RIGHT. No couple or repeated ceremony platform. Strong raking afternoon sunshafts cross sea mist; the board catches bright directional reflections. A thin coastal track follows the far shore to ONE small weathered beach shack visible only as a distant unlettered roof at the next bay. This establishes the next stop rather than placing it beside the camera. Sparse sea-spray beads catch diagonal light; a few shells sit naturally at the board base.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-8.jpg",
+      "image_request_id": null,
+      "selected_take": 1,
+      "review_note": "No visual review or retake, as requested.",
+      "sha256": null,
+      "actual_input_path": null,
+      "request_metadata": null
+    },
+    {
+      "index": 9,
+      "name": "Night beach-shack reception outside",
+      "status": "generated-first-take",
+      "generation": "text-only",
+      "image_prompt_template": "Portrait 9:16 cinematic dimensional storybook-animation, luxury outdoor mountain-to-beach wedding. Preserve adult Indian faces, medium-brown skin and natural proportions. DRAMATIC LIGHT: diagonal volumetric sunshafts through waterfall or sea mist, deep sculpted shade, bright fabric rim light, moving caustic reflections; at night cyan moonbeams balance amber practical pools. Modern coastal typography: elegant editorial serif with restrained handwritten accents, pearl-white headlines, deep ocean-teal body copy, brushed-platinum edges, fine cyan glow; no ornate antique lettering. Distinct natural locations, expensive site-specific decor. Cars are parked, wheels fixed; everyone has planted feet. Only camera, environment and subtle gestures move. Tiny mist beads, windborne grass seeds or coastal bubbles hang at varied depths, never a confetti storm. Text-only image, no watermark or extra words.\n\nSCENE COMPOSITION:\nNight reception on an open-air dining deck outside ONE small weathered beach shack in the crescent bay. Never enter its interior. A navy sky, moonlit waves and open sand remain visible across most of the background. Warm festoon bulbs and low jar lanterns light layered pearl linens, crystal place settings and lavish coastal orchid arrangements; no overhead decorative frame. ONE ivory reception card on a simple driftwood easel occupies the central 60 percent of width with frame and legs visible. Exact lettering: '{{reception_lines}}'. Deep-teal letter faces with a luminous pearl-white title and platinum edges, readable against warm ivory. The shack sits partly outside frame LEFT, with weathered boards as a local detail; the sea extends open RIGHT. A few guests sit already in chairs at the far tables, feet fixed, tiny facial gestures only; nobody walks. The distant rocky headland has the same silhouette as the earlier scene. Grounded orchids, shells and silk runners remain fixed. Sparse backlit bubbles and sea-spray beads drift in cyan moonshafts and amber practical light. A sandy arrival path extends to the side where hosts will welcome guests.",
+      "image_prompt": "Portrait 9:16 cinematic dimensional storybook-animation, luxury outdoor mountain-to-beach wedding. Preserve adult Indian faces, medium-brown skin and natural proportions. DRAMATIC LIGHT: diagonal volumetric sunshafts through waterfall or sea mist, deep sculpted shade, bright fabric rim light, moving caustic reflections; at night cyan moonbeams balance amber practical pools. Modern coastal typography: elegant editorial serif with restrained handwritten accents, pearl-white headlines, deep ocean-teal body copy, brushed-platinum edges, fine cyan glow; no ornate antique lettering. Distinct natural locations, expensive site-specific decor. Cars are parked, wheels fixed; everyone has planted feet. Only camera, environment and subtle gestures move. Tiny mist beads, windborne grass seeds or coastal bubbles hang at varied depths, never a confetti storm. Text-only image, no watermark or extra words.\n\nSCENE COMPOSITION:\nNight reception on an open-air dining deck outside ONE small weathered beach shack in the crescent bay. Never enter its interior. A navy sky, moonlit waves and open sand remain visible across most of the background. Warm festoon bulbs and low jar lanterns light layered pearl linens, crystal place settings and lavish coastal orchid arrangements; no overhead decorative frame. ONE ivory reception card on a simple driftwood easel occupies the central 60 percent of width with frame and legs visible. Exact lettering: 'Reception - Dinner\n6th February 2020\n7:30 p.m. onwards\nLeela Channaiah\nKalyana Mandapa\nVontikoppal, Mysore'. Deep-teal letter faces with a luminous pearl-white title and platinum edges, readable against warm ivory. The shack sits partly outside frame LEFT, with weathered boards as a local detail; the sea extends open RIGHT. A few guests sit already in chairs at the far tables, feet fixed, tiny facial gestures only; nobody walks. The distant rocky headland has the same silhouette as the earlier scene. Grounded orchids, shells and silk runners remain fixed. Sparse backlit bubbles and sea-spray beads drift in cyan moonshafts and amber practical light. A sandy arrival path extends to the side where hosts will welcome guests.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-9.jpg",
+      "image_request_id": null,
+      "selected_take": 1,
+      "review_note": "No visual review or retake, as requested.",
+      "sha256": null,
+      "actual_input_path": null,
+      "request_metadata": null
+    },
+    {
+      "index": 10,
+      "name": "Hosts welcome guests on the beach path",
+      "status": "generated-first-take",
+      "generation": "text-only",
+      "image_prompt_template": "Portrait 9:16 cinematic dimensional storybook-animation, luxury outdoor mountain-to-beach wedding. Preserve adult Indian faces, medium-brown skin and natural proportions. DRAMATIC LIGHT: diagonal volumetric sunshafts through waterfall or sea mist, deep sculpted shade, bright fabric rim light, moving caustic reflections; at night cyan moonbeams balance amber practical pools. Modern coastal typography: elegant editorial serif with restrained handwritten accents, pearl-white headlines, deep ocean-teal body copy, brushed-platinum edges, fine cyan glow; no ornate antique lettering. Distinct natural locations, expensive site-specific decor. Cars are parked, wheels fixed; everyone has planted feet. Only camera, environment and subtle gestures move. Tiny mist beads, windborne grass seeds or coastal bubbles hang at varied depths, never a confetti storm. Text-only image, no watermark or extra words.\n\nSCENE COMPOSITION:\nHosts already stand on a fixed dry-sand welcome spot outside the night beach shack, completely stationary from first visibility. Adult man and woman at LEFT with two children beside them; all feet planted, hands resting naturally, only tiny smiles. No arriving, approaching or walking guests. ONE tall ivory welcome panel on a weighted platinum stand at RIGHT fills 60 percent of width and 57 percent of height. Exact deep ocean-teal editorial copy with pearl-lit title: '{{host_lines}}'. White orchids, sage silk and glass lanterns form a luxurious low arrangement beneath the panel without covering words. Eye-level view along the open shoreline; shack and reception bulbs stay distant far LEFT, dark sea and moonlit wet sand spread behind the family. A few already seated guests are small far behind; no crowd motion. Diagonal cyan moonshafts in sea mist, warm amber rim from lanterns, moving reflections on wet sand. Twelve small sea-spray beads and iridescent bubbles drift slowly at different depths. Fixed lantern trail leads toward the couple's later spot. No baskets, improvised picnic setup or repeated symmetrical backdrop.",
+      "image_prompt": "Portrait 9:16 cinematic dimensional storybook-animation, luxury outdoor mountain-to-beach wedding. Preserve adult Indian faces, medium-brown skin and natural proportions. DRAMATIC LIGHT: diagonal volumetric sunshafts through waterfall or sea mist, deep sculpted shade, bright fabric rim light, moving caustic reflections; at night cyan moonbeams balance amber practical pools. Modern coastal typography: elegant editorial serif with restrained handwritten accents, pearl-white headlines, deep ocean-teal body copy, brushed-platinum edges, fine cyan glow; no ornate antique lettering. Distinct natural locations, expensive site-specific decor. Cars are parked, wheels fixed; everyone has planted feet. Only camera, environment and subtle gestures move. Tiny mist beads, windborne grass seeds or coastal bubbles hang at varied depths, never a confetti storm. Text-only image, no watermark or extra words.\n\nSCENE COMPOSITION:\nHosts already stand on a fixed dry-sand welcome spot outside the night beach shack, completely stationary from first visibility. Adult man and woman at LEFT with two children beside them; all feet planted, hands resting naturally, only tiny smiles. No arriving, approaching or walking guests. ONE tall ivory welcome panel on a weighted platinum stand at RIGHT fills 60 percent of width and 57 percent of height. Exact deep ocean-teal editorial copy with pearl-lit title: 'Invited By\nMr. BalaSubramanian\nMrs. Jeevitha\nBaby. Yazhini & Suhas\nWith Love & Blessings'. White orchids, sage silk and glass lanterns form a luxurious low arrangement beneath the panel without covering words. Eye-level view along the open shoreline; shack and reception bulbs stay distant far LEFT, dark sea and moonlit wet sand spread behind the family. A few already seated guests are small far behind; no crowd motion. Diagonal cyan moonshafts in sea mist, warm amber rim from lanterns, moving reflections on wet sand. Twelve small sea-spray beads and iridescent bubbles drift slowly at different depths. Fixed lantern trail leads toward the couple's later spot. No baskets, improvised picnic setup or repeated symmetrical backdrop.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-10.jpg",
+      "image_request_id": null,
+      "selected_take": 1,
+      "review_note": "No visual review or retake, as requested.",
+      "sha256": null,
+      "actual_input_path": null,
+      "request_metadata": null
+    },
+    {
+      "index": 11,
+      "name": "Couple and date board at the waterline",
+      "status": "generated-first-take",
+      "generation": "text-only",
+      "image_prompt_template": "Portrait 9:16 cinematic dimensional storybook-animation, luxury outdoor mountain-to-beach wedding. Preserve adult Indian faces, medium-brown skin and natural proportions. DRAMATIC LIGHT: diagonal volumetric sunshafts through waterfall or sea mist, deep sculpted shade, bright fabric rim light, moving caustic reflections; at night cyan moonbeams balance amber practical pools. Modern coastal typography: elegant editorial serif with restrained handwritten accents, pearl-white headlines, deep ocean-teal body copy, brushed-platinum edges, fine cyan glow; no ornate antique lettering. Distinct natural locations, expensive site-specific decor. Cars are parked, wheels fixed; everyone has planted feet. Only camera, environment and subtle gestures move. Tiny mist beads, windborne grass seeds or coastal bubbles hang at varied depths, never a confetti storm. Text-only image, no watermark or extra words.\n\nAdult Indian groom, visibly polished storybook 3D animation, warm medium-brown skin, slender adult oval face, large dark-brown almond eyes, thick dark eyebrows, smooth clean-shaven cheeks and chin, swept wavy black hair with a prominent side part and raised quiff, small relaxed smile. No moustache or beard. Natural adult proportions, not a child. An ivory linen shirt with sleeves rolled, dark sand-colored trousers, bare feet and a fine gold chain. His face and swept quiff match the mountain and ceremony scenes.\n\nAdult Indian bride, visibly polished storybook 3D animation, warm medium-brown skin, graceful oval face, large dark-brown almond eyes, gently arched black eyebrows, small red bindi, warm reserved smile. Center-parted dark hair in a low bun, small gold jhumka earrings, fine gold necklace and red-and-gold bangles. Natural adult proportions. Preserve her face, skin tone, age and body in every scene. A relaxed maroon evening dress with a light cream shawl and bare feet. Her low bun, bindi and red-and-gold bangles preserve identity; no costume morph.\n\nSCENE COMPOSITION:\nThe same animated couple stand side by side on open wet beach sand at night, bride LEFT of groom, holding hands while looking toward a breaking wave, shown in relaxed three-quarter profiles. Full bodies and bare feet visible, couple about 57 percent of image height in the middle-left 48 percent of width. She lifts the edge of her evening dress clear of the foam with her free hand; he leans lightly toward her, amused. Feet stay planted throughout this quiet seaside pause, not a repeated formal portrait or ceremony pose. Their feet and evening clothes remain grounded and consistent. EXACTLY ONE SAVE THE DATE BOARD: a simple dark driftwood rectangle with a thin platinum frame on ONE low driftwood easel, firmly standing on dry sand at far RIGHT beyond the waterline. Clear space separates it from the groom. Entire board about 24 percent of frame width, tilted no more than 5 degrees. Exact pearl-white editorial text: '{{save_date_lines}}'. No second panel, overlapping border, duplicate stand or reflected second sign. One warm jar lantern sits at its base, already present. No other text. Open navy sky, thin moonlit cloud, sea horizon and foamy water fill the depth. The reception bulbs are tiny distant dots far LEFT, not an enclosing backdrop. Gentle amber light from the lantern balances cool moonlight; moving water reflections stay subtle. A narrow curved tideline leads farther along the shore. Twelve small coastal bubbles and salt-spray beads float at varied depths; all decor stays fixed.",
+      "image_prompt": "Portrait 9:16 cinematic dimensional storybook-animation, luxury outdoor mountain-to-beach wedding. Preserve adult Indian faces, medium-brown skin and natural proportions. DRAMATIC LIGHT: diagonal volumetric sunshafts through waterfall or sea mist, deep sculpted shade, bright fabric rim light, moving caustic reflections; at night cyan moonbeams balance amber practical pools. Modern coastal typography: elegant editorial serif with restrained handwritten accents, pearl-white headlines, deep ocean-teal body copy, brushed-platinum edges, fine cyan glow; no ornate antique lettering. Distinct natural locations, expensive site-specific decor. Cars are parked, wheels fixed; everyone has planted feet. Only camera, environment and subtle gestures move. Tiny mist beads, windborne grass seeds or coastal bubbles hang at varied depths, never a confetti storm. Text-only image, no watermark or extra words.\n\nAdult Indian groom, visibly polished storybook 3D animation, warm medium-brown skin, slender adult oval face, large dark-brown almond eyes, thick dark eyebrows, smooth clean-shaven cheeks and chin, swept wavy black hair with a prominent side part and raised quiff, small relaxed smile. No moustache or beard. Natural adult proportions, not a child. An ivory linen shirt with sleeves rolled, dark sand-colored trousers, bare feet and a fine gold chain. His face and swept quiff match the mountain and ceremony scenes.\n\nAdult Indian bride, visibly polished storybook 3D animation, warm medium-brown skin, graceful oval face, large dark-brown almond eyes, gently arched black eyebrows, small red bindi, warm reserved smile. Center-parted dark hair in a low bun, small gold jhumka earrings, fine gold necklace and red-and-gold bangles. Natural adult proportions. Preserve her face, skin tone, age and body in every scene. A relaxed maroon evening dress with a light cream shawl and bare feet. Her low bun, bindi and red-and-gold bangles preserve identity; no costume morph.\n\nSCENE COMPOSITION:\nThe same animated couple stand side by side on open wet beach sand at night, bride LEFT of groom, holding hands while looking toward a breaking wave, shown in relaxed three-quarter profiles. Full bodies and bare feet visible, couple about 57 percent of image height in the middle-left 48 percent of width. She lifts the edge of her evening dress clear of the foam with her free hand; he leans lightly toward her, amused. Feet stay planted throughout this quiet seaside pause, not a repeated formal portrait or ceremony pose. Their feet and evening clothes remain grounded and consistent. EXACTLY ONE SAVE THE DATE BOARD: a simple dark driftwood rectangle with a thin platinum frame on ONE low driftwood easel, firmly standing on dry sand at far RIGHT beyond the waterline. Clear space separates it from the groom. Entire board about 24 percent of frame width, tilted no more than 5 degrees. Exact pearl-white editorial text: 'SAVE THE DATE\n6 & 7 FEBRUARY\n2020'. No second panel, overlapping border, duplicate stand or reflected second sign. One warm jar lantern sits at its base, already present. No other text. Open navy sky, thin moonlit cloud, sea horizon and foamy water fill the depth. The reception bulbs are tiny distant dots far LEFT, not an enclosing backdrop. Gentle amber light from the lantern balances cool moonlight; moving water reflections stay subtle. A narrow curved tideline leads farther along the shore. Twelve small coastal bubbles and salt-spray beads float at varied depths; all decor stays fixed.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-11.jpg",
+      "image_request_id": null,
+      "selected_take": 1,
+      "review_note": "No visual review or retake, as requested.",
+      "sha256": null,
+      "actual_input_path": null,
+      "request_metadata": null
+    },
+    {
+      "index": 12,
+      "name": "Intimate shoulder-rest on the night shoreline",
+      "status": "video-derived",
+      "generation": "Final decoded frame of clip 11; no new still-image API call",
+      "image_prompt": null,
+      "image_prompt_template": null,
+      "image_path": "image-12.jpg",
+      "reason": "Avoid competing independent board/gateway layouts. Keep one date board from scene 11 throughout.",
+      "review_note": null,
+      "sha256": null
+    }
+  ],
+  "clips": [
+    {
+      "index": 1,
+      "from": 1,
+      "to": 2,
+      "duration": 5,
+      "prompt": "HIGH AERIAL HOOK, FAST FORWARD-DOWN DESCENT TO THE ALREADY VISIBLE WEDDING STAGE. 0.00-0.55s: advance from the high view; the empty sage car remains PARKED at lower left. 0.55-1.85s: accelerate FORWARD AND DOWN along the visible road shoulder, leaving the car behind. The camera never follows a vehicle. Keep the same waterfall at RIGHT, road at LEFT and ivory stage near center; the stage enlarges only through approach. Preserve its three sail panels, two orchid arrangements and low steps from first visibility. 1.85-2.25s: skim toward those steps, camera levels smoothly; no rock or spray curtain covers the whole frame. 2.25-2.70s: brake into a slow push above the stage steps. Pearl-white and ocean-teal lettering resolves on the same physical stage, exactly 'you're invited to' above 'Celebrate our Wedding.'. 2.70-5.00s: continue a gentle forward glide with stage-edge parallax and changing reflected light. Strong diagonal sunrays through mist; tiny backlit spray beads slow perceptually as the camera brakes. No car movement, people, idol, driving, parking action, fade, cut or replacement stage. The title remains rigid, clean and legible.",
+      "id": "clip-01",
+      "status": "generated",
+      "camera": "High aerial forward-down camera-only descent to a fixed visible invitation stage",
+      "video_prompt_template": "Portrait storybook outdoor wedding, exact supplied identities and anchors. CARS PARKED: fixed tires, doors closed, no driving, braking, rolling, entry or exit. PEOPLE PLANTED: no walking, stepping, approach or departure; only tiny blinks and gestures. MOTIFS/LIGHT: mountain grass seeds and mist beads, coastal bubbles and spray drift independently at 0.1 picture-height/second in settled views, 12-20 small pieces at varied depths; motion blur comes from camera speed, no emitted burst. Strong diagonal shafts, rim light and changing water reflections. Pearl-white/teal lettering with platinum glints stays rigid.\n\nEXACT SHOT CHOREOGRAPHY: HIGH AERIAL HOOK, FAST FORWARD-DOWN DESCENT TO THE ALREADY VISIBLE WEDDING STAGE. 0.00-0.55s: advance from the high view; the empty sage car remains PARKED at lower left. 0.55-1.85s: accelerate FORWARD AND DOWN along the visible road shoulder, leaving the car behind. The camera never follows a vehicle. Keep the same waterfall at RIGHT, road at LEFT and ivory stage near center; the stage enlarges only through approach. Preserve its three sail panels, two orchid arrangements and low steps from first visibility. 1.85-2.25s: skim toward those steps, camera levels smoothly; no rock or spray curtain covers the whole frame. 2.25-2.70s: brake into a slow push above the stage steps. Pearl-white and ocean-teal lettering resolves on the same physical stage, exactly '{{invitation_intro_line_1}}' above '{{invitation_intro_line_2}}'. 2.70-5.00s: continue a gentle forward glide with stage-edge parallax and changing reflected light. Strong diagonal sunrays through mist; tiny backlit spray beads slow perceptually as the camera brakes. No car movement, people, idol, driving, parking action, fade, cut or replacement stage. The title remains rigid, clean and legible.",
+      "video_prompt": "Portrait storybook outdoor wedding, exact supplied identities and anchors. CARS PARKED: fixed tires, doors closed, no driving, braking, rolling, entry or exit. PEOPLE PLANTED: no walking, stepping, approach or departure; only tiny blinks and gestures. MOTIFS/LIGHT: mountain grass seeds and mist beads, coastal bubbles and spray drift independently at 0.1 picture-height/second in settled views, 12-20 small pieces at varied depths; motion blur comes from camera speed, no emitted burst. Strong diagonal shafts, rim light and changing water reflections. Pearl-white/teal lettering with platinum glints stays rigid.\n\nEXACT SHOT CHOREOGRAPHY: HIGH AERIAL HOOK, FAST FORWARD-DOWN DESCENT TO THE ALREADY VISIBLE WEDDING STAGE. 0.00-0.55s: advance from the high view; the empty sage car remains PARKED at lower left. 0.55-1.85s: accelerate FORWARD AND DOWN along the visible road shoulder, leaving the car behind. The camera never follows a vehicle. Keep the same waterfall at RIGHT, road at LEFT and ivory stage near center; the stage enlarges only through approach. Preserve its three sail panels, two orchid arrangements and low steps from first visibility. 1.85-2.25s: skim toward those steps, camera levels smoothly; no rock or spray curtain covers the whole frame. 2.25-2.70s: brake into a slow push above the stage steps. Pearl-white and ocean-teal lettering resolves on the same physical stage, exactly 'you're invited to' above 'Celebrate our Wedding.'. 2.70-5.00s: continue a gentle forward glide with stage-edge parallax and changing reflected light. Strong diagonal sunrays through mist; tiny backlit spray beads slow perceptually as the camera brakes. No car movement, people, idol, driving, parking action, fade, cut or replacement stage. The title remains rigid, clean and legible.",
+      "video_path": "clip-1.mp4",
+      "final_frame_path": "clip-1-handoff.jpg",
+      "request_metadata": {
+        "id": "heaqtvcr1xrmt0d0y52tx8w08r",
+        "requestId": "heaqtvcr1xrmt0d0y52tx8w08r",
+        "status": "succeeded",
+        "model": "bytedance/seedance-2.0",
+        "version": "hidden",
+        "metrics": {
+          "model_variant": "non_video_in",
+          "predict_time": 117.728976596,
+          "resolution_target": "720p",
+          "token_output_count": 108900,
+          "total_time": 117.789311793,
+          "video_output_duration_seconds": 5
+        },
+        "error": null,
+        "created_at": "2026-09-30T07:44:25.103Z",
+        "started_at": "2026-09-30T07:44:25.163335197Z",
+        "completed_at": "2026-09-30T07:46:22.892311793Z",
+        "data_removed": false,
+        "outputUrl": "https://replicate.delivery/xezq/qKdB394NFbbVONnp4fAdk2nD4CIR4DHWb77QrrfUZl1OBnSXA/tmpolzyv95a.mp4"
+      },
+      "anchors": {
+        "first": {
+          "strategy": "scene-image",
+          "scene": 1
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 2
+        },
+        "interior_keyframes": []
+      },
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "121"
+          }
+        ],
+        "format": {
+          "duration": "5.042000"
+        }
+      },
+      "timeline": {
+        "start_seconds": 0,
+        "end_seconds": 5.041666666666667
+      },
+      "sha256": null,
+      "source_asset": null,
+      "selected_take": 1,
+      "actual_input": {
+        "model": "bytedance/seedance-2.0",
+        "prompt": "Portrait storybook outdoor wedding, exact supplied identities and anchors. CARS PARKED: fixed tires, doors closed, no driving, braking, rolling, entry or exit. PEOPLE PLANTED: no walking, stepping, approach or departure; only tiny blinks and gestures. MOTIFS/LIGHT: mountain grass seeds and mist beads, coastal bubbles and spray drift independently at 0.1 picture-height/second in settled views, 12-20 small pieces at varied depths; motion blur comes from camera speed, no emitted burst. Strong diagonal shafts, rim light and changing water reflections. Pearl-white/teal lettering with platinum glints stays rigid.\n\nEXACT SHOT CHOREOGRAPHY: HIGH AERIAL HOOK, FAST FORWARD-DOWN DESCENT TO THE ALREADY VISIBLE WEDDING STAGE. 0.00-0.55s: advance from the high view; the empty sage car remains PARKED at lower left. 0.55-1.85s: accelerate FORWARD AND DOWN along the visible road shoulder, leaving the car behind. The camera never follows a vehicle. Keep the same waterfall at RIGHT, road at LEFT and ivory stage near center; the stage enlarges only through approach. Preserve its three sail panels, two orchid arrangements and low steps from first visibility. 1.85-2.25s: skim toward those steps, camera levels smoothly; no rock or spray curtain covers the whole frame. 2.25-2.70s: brake into a slow push above the stage steps. Pearl-white and ocean-teal lettering resolves on the same physical stage, exactly 'you're invited to' above 'Celebrate our Wedding.'. 2.70-5.00s: continue a gentle forward glide with stage-edge parallax and changing reflected light. Strong diagonal sunrays through mist; tiny backlit spray beads slow perceptually as the camera brakes. No car movement, people, idol, driving, parking action, fade, cut or replacement stage. The title remains rigid, clean and legible.",
+        "duration": 5,
+        "resolution": "720p",
+        "aspect_ratio": "9:16",
+        "generate_audio": false,
+        "firstImage": "output/car-roadtrip-beach-remix-v1/clip-1-take-1-first.jpg",
+        "lastImage": "output/car-roadtrip-beach-remix-v1/clip-1-take-1-last.jpg",
+        "firstImageSha256": "10dcf6d86b4791110b43614fc8146648c40c1666fb109ff8abc7bd10f7554ba2",
+        "lastImageSha256": "2212e6217e58dd7eef7faa2231a523e821ffd217b679096aaf748a8806cfc39f",
+        "sourceVideoFramesSent": false
+      },
+      "review_note": "No visual review or creative retake; failed attempts retried with identical inputs, up to three total.",
+      "selected_model": "bytedance/seedance-2.0"
+    },
+    {
+      "index": 2,
+      "from": 2,
+      "to": 3,
+      "duration": 4,
+      "status": "generated",
+      "camera": "Left-banking fast lateral flight across the waterfall pool",
+      "video_prompt_template": "Portrait storybook outdoor wedding, exact supplied identities and anchors. CARS PARKED: fixed tires, doors closed, no driving, braking, rolling, entry or exit. PEOPLE PLANTED: no walking, stepping, approach or departure; only tiny blinks and gestures. MOTIFS/LIGHT: mountain grass seeds and mist beads, coastal bubbles and spray drift independently at 0.1 picture-height/second in settled views, 12-20 small pieces at varied depths; motion blur comes from camera speed, no emitted burst. Strong diagonal shafts, rim light and changing water reflections. Pearl-white/teal lettering with platinum glints stays rigid.\n\nPRIMARY ACTION: LEFT BANK AND FAST LATERAL RIVERSIDE FLIGHT TO A SEPARATE WATERFALL VIEWPOINT. Traverse visible outdoor distance using a fast pullback or forward flight with directional edge blur and strong near/far parallax. Carry the route's changing geography continuously through the frame. Do not substitute an in-place pivot or uniform digital zoom for travel.\n\nTIMING: 0.00-0.25s continue the stage approach; 0.25-1.25s accelerate left over the pool following its curved bank; 1.25-1.65s brake; 1.65-4.00s settle in a tiny counterclockwise arc. Speed peaks over open water and drops decisively beside the invitation rock.\n\nThe stage remains fixed and exits right as the camera pulls back, banks left and traverses the visible pool edge. Keep waterfall silhouette and trail continuously identifiable. Mist stays transparent, never a white wipe. The separate invitation card at the viewpoint grows through approach, never materializes from the stage lettering. Static decor and an empty parked car, where visible. No people moving between locations.\n\nMatch the supplied final scene and exact text. One opaque world throughout: no crossfade, dissolve, fog wipe, fade-to-white, sudden appearance or blended scenery. Travel past persistent terrain with parallax and brake smoothly. People already stand in destination poses; objects never relocate or morph.",
+      "video_prompt": "Portrait storybook outdoor wedding, exact supplied identities and anchors. CARS PARKED: fixed tires, doors closed, no driving, braking, rolling, entry or exit. PEOPLE PLANTED: no walking, stepping, approach or departure; only tiny blinks and gestures. MOTIFS/LIGHT: mountain grass seeds and mist beads, coastal bubbles and spray drift independently at 0.1 picture-height/second in settled views, 12-20 small pieces at varied depths; motion blur comes from camera speed, no emitted burst. Strong diagonal shafts, rim light and changing water reflections. Pearl-white/teal lettering with platinum glints stays rigid.\n\nPRIMARY ACTION: LEFT BANK AND FAST LATERAL RIVERSIDE FLIGHT TO A SEPARATE WATERFALL VIEWPOINT. Traverse visible outdoor distance using a fast pullback or forward flight with directional edge blur and strong near/far parallax. Carry the route's changing geography continuously through the frame. Do not substitute an in-place pivot or uniform digital zoom for travel.\n\nTIMING: 0.00-0.25s continue the stage approach; 0.25-1.25s accelerate left over the pool following its curved bank; 1.25-1.65s brake; 1.65-4.00s settle in a tiny counterclockwise arc. Speed peaks over open water and drops decisively beside the invitation rock.\n\nThe stage remains fixed and exits right as the camera pulls back, banks left and traverses the visible pool edge. Keep waterfall silhouette and trail continuously identifiable. Mist stays transparent, never a white wipe. The separate invitation card at the viewpoint grows through approach, never materializes from the stage lettering. Static decor and an empty parked car, where visible. No people moving between locations.\n\nMatch the supplied final scene and exact text. One opaque world throughout: no crossfade, dissolve, fog wipe, fade-to-white, sudden appearance or blended scenery. Travel past persistent terrain with parallax and brake smoothly. People already stand in destination poses; objects never relocate or morph.",
+      "video_path": "clip-2.mp4",
+      "final_frame_path": "clip-2-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 1
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 3
+        }
+      },
+      "request_metadata": {
+        "id": "wsace9y6exrmt0d0y53te1vxym",
+        "requestId": "wsace9y6exrmt0d0y53te1vxym",
+        "status": "succeeded",
+        "model": "bytedance/seedance-2.0",
+        "version": "hidden",
+        "metrics": {
+          "model_variant": "non_video_in",
+          "predict_time": 146.775833511,
+          "resolution_target": "720p",
+          "token_output_count": 87300,
+          "total_time": 146.833291227,
+          "video_output_duration_seconds": 4
+        },
+        "error": null,
+        "created_at": "2026-09-30T07:46:48.055Z",
+        "started_at": "2026-09-30T07:46:48.112457706Z",
+        "completed_at": "2026-09-30T07:49:14.888291227Z",
+        "data_removed": false,
+        "outputUrl": "https://replicate.delivery/xezq/yy1VKyeILmW6Zin855IF0M7vn972lTbhAooUnOJ67EQ9hTpLA/tmpencxxcp0.mp4"
+      },
+      "selected_take": 1,
+      "review_note": "No visual review or creative retake; failed attempts retried with identical inputs, up to three total.",
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "97"
+          }
+        ],
+        "format": {
+          "duration": "4.042000"
+        }
+      },
+      "sha256": null,
+      "timeline": {
+        "start_seconds": 5.041666666666667,
+        "end_seconds": 9.083333333333334
+      },
+      "actual_input": {
+        "model": "bytedance/seedance-2.0",
+        "prompt": "Portrait storybook outdoor wedding, exact supplied identities and anchors. CARS PARKED: fixed tires, doors closed, no driving, braking, rolling, entry or exit. PEOPLE PLANTED: no walking, stepping, approach or departure; only tiny blinks and gestures. MOTIFS/LIGHT: mountain grass seeds and mist beads, coastal bubbles and spray drift independently at 0.1 picture-height/second in settled views, 12-20 small pieces at varied depths; motion blur comes from camera speed, no emitted burst. Strong diagonal shafts, rim light and changing water reflections. Pearl-white/teal lettering with platinum glints stays rigid.\n\nPRIMARY ACTION: LEFT BANK AND FAST LATERAL RIVERSIDE FLIGHT TO A SEPARATE WATERFALL VIEWPOINT. Traverse visible outdoor distance using a fast pullback or forward flight with directional edge blur and strong near/far parallax. Carry the route's changing geography continuously through the frame. Do not substitute an in-place pivot or uniform digital zoom for travel.\n\nTIMING: 0.00-0.25s continue the stage approach; 0.25-1.25s accelerate left over the pool following its curved bank; 1.25-1.65s brake; 1.65-4.00s settle in a tiny counterclockwise arc. Speed peaks over open water and drops decisively beside the invitation rock.\n\nThe stage remains fixed and exits right as the camera pulls back, banks left and traverses the visible pool edge. Keep waterfall silhouette and trail continuously identifiable. Mist stays transparent, never a white wipe. The separate invitation card at the viewpoint grows through approach, never materializes from the stage lettering. Static decor and an empty parked car, where visible. No people moving between locations.\n\nMatch the supplied final scene and exact text. One opaque world throughout: no crossfade, dissolve, fog wipe, fade-to-white, sudden appearance or blended scenery. Travel past persistent terrain with parallax and brake smoothly. People already stand in destination poses; objects never relocate or morph.",
+        "duration": 4,
+        "resolution": "720p",
+        "aspect_ratio": "9:16",
+        "generate_audio": false,
+        "firstImage": "output/car-roadtrip-beach-remix-v1/clip-2-take-1-first.jpg",
+        "lastImage": "output/car-roadtrip-beach-remix-v1/clip-2-take-1-last.jpg",
+        "firstImageSha256": "b4eb01def5c0a82ad989ea7bab20a2e846dc69762a776f8a3588a6f3ca3ef7e9",
+        "lastImageSha256": "b0378c466081be3d88c583452003b01dffd7ce89e7e315f9c9915aa6c0115f5b",
+        "sourceVideoFramesSent": false
+      },
+      "selected_model": "bytedance/seedance-2.0"
+    },
+    {
+      "index": 3,
+      "from": 3,
+      "to": 4,
+      "duration": 5,
+      "status": "generated",
+      "camera": "Right-banking fast ascent along the mountain road to the groom",
+      "video_prompt_template": "Portrait storybook outdoor wedding, exact supplied identities and anchors. CARS PARKED: fixed tires, doors closed, no driving, braking, rolling, entry or exit. PEOPLE PLANTED: no walking, stepping, approach or departure; only tiny blinks and gestures. MOTIFS/LIGHT: mountain grass seeds and mist beads, coastal bubbles and spray drift independently at 0.1 picture-height/second in settled views, 12-20 small pieces at varied depths; motion blur comes from camera speed, no emitted burst. Strong diagonal shafts, rim light and changing water reflections. Pearl-white/teal lettering with platinum glints stays rigid.\n\nPRIMARY ACTION: FAST RIGHT-BANKING ASCENT ALONG THE MOUNTAIN ROAD TO THE GROOM'S PULLOUT. Traverse visible outdoor distance using a fast pullback or forward flight with directional edge blur and strong near/far parallax. Carry the route's changing geography continuously through the frame. Do not substitute an in-place pivot or uniform digital zoom for travel.\n\nTIMING: 0.00-0.30s pull back from the invitation; 0.30-1.65s accelerate upward and forward along the right-curving road; 1.65-2.20s brake at the pullout; 2.20-5.00s settle with a small upward tilt and quiet lateral drift.\n\nLeave the invitation viewpoint behind at lower left. Follow the visible switchback uphill; road textures stream beneath the camera while the sage car stays anchored to the SAME turnout stones. The groom ALREADY stands OUTSIDE its closed door, map held still, from the first distant view until arrival. Tires never roll; body never brakes; no occupant becomes the groom. He keeps planted feet and a small smile. His name reveals with parallax and platinum glints only after the camera reaches reading distance.\n\nMatch the supplied final scene and exact text. One opaque world throughout: no crossfade, dissolve, fog wipe, fade-to-white, sudden appearance or blended scenery. Travel past persistent terrain with parallax and brake smoothly. People already stand in destination poses; objects never relocate or morph.",
+      "video_prompt": "Portrait storybook outdoor wedding, exact supplied identities and anchors. CARS PARKED: fixed tires, doors closed, no driving, braking, rolling, entry or exit. PEOPLE PLANTED: no walking, stepping, approach or departure; only tiny blinks and gestures. MOTIFS/LIGHT: mountain grass seeds and mist beads, coastal bubbles and spray drift independently at 0.1 picture-height/second in settled views, 12-20 small pieces at varied depths; motion blur comes from camera speed, no emitted burst. Strong diagonal shafts, rim light and changing water reflections. Pearl-white/teal lettering with platinum glints stays rigid.\n\nPRIMARY ACTION: FAST RIGHT-BANKING ASCENT ALONG THE MOUNTAIN ROAD TO THE GROOM'S PULLOUT. Traverse visible outdoor distance using a fast pullback or forward flight with directional edge blur and strong near/far parallax. Carry the route's changing geography continuously through the frame. Do not substitute an in-place pivot or uniform digital zoom for travel.\n\nTIMING: 0.00-0.30s pull back from the invitation; 0.30-1.65s accelerate upward and forward along the right-curving road; 1.65-2.20s brake at the pullout; 2.20-5.00s settle with a small upward tilt and quiet lateral drift.\n\nLeave the invitation viewpoint behind at lower left. Follow the visible switchback uphill; road textures stream beneath the camera while the sage car stays anchored to the SAME turnout stones. The groom ALREADY stands OUTSIDE its closed door, map held still, from the first distant view until arrival. Tires never roll; body never brakes; no occupant becomes the groom. He keeps planted feet and a small smile. His name reveals with parallax and platinum glints only after the camera reaches reading distance.\n\nMatch the supplied final scene and exact text. One opaque world throughout: no crossfade, dissolve, fog wipe, fade-to-white, sudden appearance or blended scenery. Travel past persistent terrain with parallax and brake smoothly. People already stand in destination poses; objects never relocate or morph.",
+      "video_path": "clip-3.mp4",
+      "final_frame_path": "clip-3-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 2
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 4
+        }
+      },
+      "request_metadata": {
+        "id": "1qere1zfk9rmw0d0y5ps42g458",
+        "requestId": "1qere1zfk9rmw0d0y5ps42g458",
+        "status": "succeeded",
+        "model": "prunaai/p-video",
+        "version": "hidden",
+        "metrics": {
+          "model_variant": "base",
+          "predict_time": 9.644987357,
+          "resolution_target": "720p",
+          "total_time": 9.688768379999999,
+          "video_output_count": 1,
+          "video_output_duration_seconds": 5
+        },
+        "error": null,
+        "created_at": "2026-09-30T08:28:28.954Z",
+        "started_at": "2026-09-30T08:28:28.997781024Z",
+        "completed_at": "2026-09-30T08:28:38.64276838Z",
+        "data_removed": false,
+        "outputUrl": "https://replicate.delivery/xezq/a8epfqpXsLpAMUpOHAtGkLbJ9QbfcLQAF3PirAh74zpsRPluA/b40c2e81-8403-4f21-853e-d126f55fd2bb.mp4"
+      },
+      "selected_take": 1,
+      "review_note": "No visual review or creative retake; confirmed failures may receive at most three identical-input attempts.",
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "121"
+          }
+        ],
+        "format": {
+          "duration": "5.042000"
+        }
+      },
+      "sha256": null,
+      "timeline": {
+        "start_seconds": 9.083333333333334,
+        "end_seconds": 14.125
+      },
+      "actual_input": {
+        "model": "prunaai/p-video",
+        "prompt": "Portrait storybook outdoor wedding, exact supplied identities and anchors. CARS PARKED: fixed tires, doors closed, no driving, braking, rolling, entry or exit. PEOPLE PLANTED: no walking, stepping, approach or departure; only tiny blinks and gestures. MOTIFS/LIGHT: mountain grass seeds and mist beads, coastal bubbles and spray drift independently at 0.1 picture-height/second in settled views, 12-20 small pieces at varied depths; motion blur comes from camera speed, no emitted burst. Strong diagonal shafts, rim light and changing water reflections. Pearl-white/teal lettering with platinum glints stays rigid.\n\nPRIMARY ACTION: FAST RIGHT-BANKING ASCENT ALONG THE MOUNTAIN ROAD TO THE GROOM'S PULLOUT. Traverse visible outdoor distance using a fast pullback or forward flight with directional edge blur and strong near/far parallax. Carry the route's changing geography continuously through the frame. Do not substitute an in-place pivot or uniform digital zoom for travel.\n\nTIMING: 0.00-0.30s pull back from the invitation; 0.30-1.65s accelerate upward and forward along the right-curving road; 1.65-2.20s brake at the pullout; 2.20-5.00s settle with a small upward tilt and quiet lateral drift.\n\nLeave the invitation viewpoint behind at lower left. Follow the visible switchback uphill; road textures stream beneath the camera while the sage car stays anchored to the SAME turnout stones. The groom ALREADY stands OUTSIDE its closed door, map held still, from the first distant view until arrival. Tires never roll; body never brakes; no occupant becomes the groom. He keeps planted feet and a small smile. His name reveals with parallax and platinum glints only after the camera reaches reading distance.\n\nMatch the supplied final scene and exact text. One opaque world throughout: no crossfade, dissolve, fog wipe, fade-to-white, sudden appearance or blended scenery. Travel past persistent terrain with parallax and brake smoothly. People already stand in destination poses; objects never relocate or morph.",
+        "duration": 5,
+        "resolution": "720p",
+        "aspect_ratio": "9:16",
+        "fps": 24,
+        "prompt_upsampling": false,
+        "save_audio": false,
+        "firstImage": "output/car-roadtrip-beach-remix-v1/clip-3-pruna-take-1-first.jpg",
+        "lastImage": "output/car-roadtrip-beach-remix-v1/clip-3-pruna-take-1-last.jpg",
+        "firstImageSha256": "6b6440eea5c61bdfdf169baeb111d75abe3f91be1a0172e5fa4b034979f247fd",
+        "lastImageSha256": "4c6491328a4a3a8623046a39a3891d55e5415e77810ec17d06d3805aaeb60d77",
+        "sourceVideoFramesSent": false
+      },
+      "selected_model": "prunaai/p-video"
+    },
+    {
+      "index": 4,
+      "from": 4,
+      "to": 5,
+      "duration": 5,
+      "status": "generated",
+      "camera": "Left-banking pullback and rising flight to the high photo spot",
+      "video_prompt_template": "Portrait storybook outdoor wedding, exact supplied identities and anchors. CARS PARKED: fixed tires, doors closed, no driving, braking, rolling, entry or exit. PEOPLE PLANTED: no walking, stepping, approach or departure; only tiny blinks and gestures. MOTIFS/LIGHT: mountain grass seeds and mist beads, coastal bubbles and spray drift independently at 0.1 picture-height/second in settled views, 12-20 small pieces at varied depths; motion blur comes from camera speed, no emitted burst. Strong diagonal shafts, rim light and changing water reflections. Pearl-white/teal lettering with platinum glints stays rigid.\n\nPRIMARY ACTION: FAST LEFT-BANKING PULLBACK AND RISING FLIGHT TO THE HIGH-ALTITUDE PHOTO SPOT. Traverse visible outdoor distance using a fast pullback or forward flight with directional edge blur and strong near/far parallax. Carry the route's changing geography continuously through the frame. Do not substitute an in-place pivot or uniform digital zoom for travel.\n\nTIMING: 0.00-0.30s retreat from the groom; 0.30-1.60s rise rapidly over the left road bend; 1.60-2.20s brake across the high grassy shoulder; 2.20-5.00s finish with a tiny downward tilt to the bride's eye level.\n\nPreserve the approved bride composition, pose, clothing and mountain backdrop. Pull back from the already stationary groom and car; fly up the left-curving road to the wind-shaped tree. The bride is already planted at the destination, holding her camera; only a tiny head turn and soft scarf motion. Fine grass seeds and mist motes hang in strong angled shafts. Do not animate a walking bride or move the empty car.\n\nMatch the supplied final scene and exact text. One opaque world throughout: no crossfade, dissolve, fog wipe, fade-to-white, sudden appearance or blended scenery. Travel past persistent terrain with parallax and brake smoothly. People already stand in destination poses; objects never relocate or morph.",
+      "video_prompt": "Portrait storybook outdoor wedding, exact supplied identities and anchors. CARS PARKED: fixed tires, doors closed, no driving, braking, rolling, entry or exit. PEOPLE PLANTED: no walking, stepping, approach or departure; only tiny blinks and gestures. MOTIFS/LIGHT: mountain grass seeds and mist beads, coastal bubbles and spray drift independently at 0.1 picture-height/second in settled views, 12-20 small pieces at varied depths; motion blur comes from camera speed, no emitted burst. Strong diagonal shafts, rim light and changing water reflections. Pearl-white/teal lettering with platinum glints stays rigid.\n\nPRIMARY ACTION: FAST LEFT-BANKING PULLBACK AND RISING FLIGHT TO THE HIGH-ALTITUDE PHOTO SPOT. Traverse visible outdoor distance using a fast pullback or forward flight with directional edge blur and strong near/far parallax. Carry the route's changing geography continuously through the frame. Do not substitute an in-place pivot or uniform digital zoom for travel.\n\nTIMING: 0.00-0.30s retreat from the groom; 0.30-1.60s rise rapidly over the left road bend; 1.60-2.20s brake across the high grassy shoulder; 2.20-5.00s finish with a tiny downward tilt to the bride's eye level.\n\nPreserve the approved bride composition, pose, clothing and mountain backdrop. Pull back from the already stationary groom and car; fly up the left-curving road to the wind-shaped tree. The bride is already planted at the destination, holding her camera; only a tiny head turn and soft scarf motion. Fine grass seeds and mist motes hang in strong angled shafts. Do not animate a walking bride or move the empty car.\n\nMatch the supplied final scene and exact text. One opaque world throughout: no crossfade, dissolve, fog wipe, fade-to-white, sudden appearance or blended scenery. Travel past persistent terrain with parallax and brake smoothly. People already stand in destination poses; objects never relocate or morph.",
+      "video_path": "clip-4.mp4",
+      "final_frame_path": "clip-4-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 3
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 5
+        }
+      },
+      "request_metadata": {
+        "id": "v1jmy1jcy1rmt0d0y5q89c0b4g",
+        "requestId": "v1jmy1jcy1rmt0d0y5q89c0b4g",
+        "status": "succeeded",
+        "model": "prunaai/p-video",
+        "version": "hidden",
+        "metrics": {
+          "model_variant": "base",
+          "predict_time": 8.02638884,
+          "resolution_target": "720p",
+          "total_time": 8.062883717,
+          "video_output_count": 1,
+          "video_output_duration_seconds": 5
+        },
+        "error": null,
+        "created_at": "2026-09-30T08:28:52.848Z",
+        "started_at": "2026-09-30T08:28:52.884494867Z",
+        "completed_at": "2026-09-30T08:29:00.910883717Z",
+        "data_removed": false,
+        "outputUrl": "https://replicate.delivery/xezq/eiRwgrMKw3Qfr0khRf0sx5PFrt1twmStVwfREsesPeJOT6p0F/27d8362a-5482-4e0e-b6e6-97d1e373c043.mp4"
+      },
+      "selected_take": 1,
+      "review_note": "No visual review or creative retake; confirmed failures may receive at most three identical-input attempts.",
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "121"
+          }
+        ],
+        "format": {
+          "duration": "5.042000"
+        }
+      },
+      "sha256": null,
+      "timeline": {
+        "start_seconds": 14.125,
+        "end_seconds": 19.166666666666668
+      },
+      "actual_input": {
+        "model": "prunaai/p-video",
+        "prompt": "Portrait storybook outdoor wedding, exact supplied identities and anchors. CARS PARKED: fixed tires, doors closed, no driving, braking, rolling, entry or exit. PEOPLE PLANTED: no walking, stepping, approach or departure; only tiny blinks and gestures. MOTIFS/LIGHT: mountain grass seeds and mist beads, coastal bubbles and spray drift independently at 0.1 picture-height/second in settled views, 12-20 small pieces at varied depths; motion blur comes from camera speed, no emitted burst. Strong diagonal shafts, rim light and changing water reflections. Pearl-white/teal lettering with platinum glints stays rigid.\n\nPRIMARY ACTION: FAST LEFT-BANKING PULLBACK AND RISING FLIGHT TO THE HIGH-ALTITUDE PHOTO SPOT. Traverse visible outdoor distance using a fast pullback or forward flight with directional edge blur and strong near/far parallax. Carry the route's changing geography continuously through the frame. Do not substitute an in-place pivot or uniform digital zoom for travel.\n\nTIMING: 0.00-0.30s retreat from the groom; 0.30-1.60s rise rapidly over the left road bend; 1.60-2.20s brake across the high grassy shoulder; 2.20-5.00s finish with a tiny downward tilt to the bride's eye level.\n\nPreserve the approved bride composition, pose, clothing and mountain backdrop. Pull back from the already stationary groom and car; fly up the left-curving road to the wind-shaped tree. The bride is already planted at the destination, holding her camera; only a tiny head turn and soft scarf motion. Fine grass seeds and mist motes hang in strong angled shafts. Do not animate a walking bride or move the empty car.\n\nMatch the supplied final scene and exact text. One opaque world throughout: no crossfade, dissolve, fog wipe, fade-to-white, sudden appearance or blended scenery. Travel past persistent terrain with parallax and brake smoothly. People already stand in destination poses; objects never relocate or morph.",
+        "duration": 5,
+        "resolution": "720p",
+        "aspect_ratio": "9:16",
+        "fps": 24,
+        "prompt_upsampling": false,
+        "save_audio": false,
+        "firstImage": "output/car-roadtrip-beach-remix-v1/clip-4-pruna-take-1-first.jpg",
+        "lastImage": "output/car-roadtrip-beach-remix-v1/clip-4-pruna-take-1-last.jpg",
+        "firstImageSha256": "0cdebc36d770ace0e1d0c1bcf864724712ff91e9af7b00419227afc63cb0e492",
+        "lastImageSha256": "8a507eac35cf4165c8e4bc7e0dc572a89090d814fe043f119a8e578cdd3885e8",
+        "sourceVideoFramesSent": false
+      },
+      "selected_model": "prunaai/p-video"
+    },
+    {
+      "index": 5,
+      "from": 5,
+      "to": 6,
+      "duration": 5,
+      "status": "generated",
+      "camera": "Rightward down-slope flight to the valley family viewpoint",
+      "video_prompt_template": "Portrait storybook outdoor wedding, exact supplied identities and anchors. CARS PARKED: fixed tires, doors closed, no driving, braking, rolling, entry or exit. PEOPLE PLANTED: no walking, stepping, approach or departure; only tiny blinks and gestures. MOTIFS/LIGHT: mountain grass seeds and mist beads, coastal bubbles and spray drift independently at 0.1 picture-height/second in settled views, 12-20 small pieces at varied depths; motion blur comes from camera speed, no emitted burst. Strong diagonal shafts, rim light and changing water reflections. Pearl-white/teal lettering with platinum glints stays rigid.\n\nPRIMARY ACTION: FAST RIGHTWARD DOWN-SLOPE FLIGHT TO THE FAMILY'S OPEN VALLEY VIEWPOINT. Traverse visible outdoor distance using a fast pullback or forward flight with directional edge blur and strong near/far parallax. Carry the route's changing geography continuously through the frame. Do not substitute an in-place pivot or uniform digital zoom for travel.\n\nTIMING: 0.00-0.30s pull back from the bride; 0.30-1.70s accelerate right and down along the visible access road; 1.70-2.30s brake at the grassy viewpoint; 2.30-5.00s finish in a slow eight-degree arc across the blessing card at constant distance.\n\nTravel down the visible right-sloping road; the high photo spot falls behind and the broad valley opens. The single family group is already arranged at destination, feet planted, phone held steady, a parent's hand resting on the groom's shoulder. No walking, gathering or duplicated bride. Foreground seeds, road texture and distant coastline maintain continuous scale. The blessing card stays rigid and readable.\n\nMatch the supplied final scene and exact text. One opaque world throughout: no crossfade, dissolve, fog wipe, fade-to-white, sudden appearance or blended scenery. Travel past persistent terrain with parallax and brake smoothly. People already stand in destination poses; objects never relocate or morph.",
+      "video_prompt": "Portrait storybook outdoor wedding, exact supplied identities and anchors. CARS PARKED: fixed tires, doors closed, no driving, braking, rolling, entry or exit. PEOPLE PLANTED: no walking, stepping, approach or departure; only tiny blinks and gestures. MOTIFS/LIGHT: mountain grass seeds and mist beads, coastal bubbles and spray drift independently at 0.1 picture-height/second in settled views, 12-20 small pieces at varied depths; motion blur comes from camera speed, no emitted burst. Strong diagonal shafts, rim light and changing water reflections. Pearl-white/teal lettering with platinum glints stays rigid.\n\nPRIMARY ACTION: FAST RIGHTWARD DOWN-SLOPE FLIGHT TO THE FAMILY'S OPEN VALLEY VIEWPOINT. Traverse visible outdoor distance using a fast pullback or forward flight with directional edge blur and strong near/far parallax. Carry the route's changing geography continuously through the frame. Do not substitute an in-place pivot or uniform digital zoom for travel.\n\nTIMING: 0.00-0.30s pull back from the bride; 0.30-1.70s accelerate right and down along the visible access road; 1.70-2.30s brake at the grassy viewpoint; 2.30-5.00s finish in a slow eight-degree arc across the blessing card at constant distance.\n\nTravel down the visible right-sloping road; the high photo spot falls behind and the broad valley opens. The single family group is already arranged at destination, feet planted, phone held steady, a parent's hand resting on the groom's shoulder. No walking, gathering or duplicated bride. Foreground seeds, road texture and distant coastline maintain continuous scale. The blessing card stays rigid and readable.\n\nMatch the supplied final scene and exact text. One opaque world throughout: no crossfade, dissolve, fog wipe, fade-to-white, sudden appearance or blended scenery. Travel past persistent terrain with parallax and brake smoothly. People already stand in destination poses; objects never relocate or morph.",
+      "video_path": "clip-5.mp4",
+      "final_frame_path": "clip-5-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 4
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 6
+        }
+      },
+      "request_metadata": {
+        "id": "pxc6nkd1thrmy0d0y5q9kc45h0",
+        "requestId": "pxc6nkd1thrmy0d0y5q9kc45h0",
+        "status": "succeeded",
+        "model": "prunaai/p-video",
+        "version": "hidden",
+        "metrics": {
+          "model_variant": "base",
+          "predict_time": 6.95547886,
+          "resolution_target": "720p",
+          "total_time": 6.9960327939999996,
+          "video_output_count": 1,
+          "video_output_duration_seconds": 5
+        },
+        "error": null,
+        "created_at": "2026-09-30T08:29:14.58Z",
+        "started_at": "2026-09-30T08:29:14.620553924Z",
+        "completed_at": "2026-09-30T08:29:21.576032794Z",
+        "data_removed": false,
+        "outputUrl": "https://replicate.delivery/xezq/MM0M7wsPCt7JH1DGS9foRH8U1BUmkTEEzgi3S0XP2jww0TpLA/ce9bf896-813a-4819-9e30-443ec3d0f23c.mp4"
+      },
+      "selected_take": 1,
+      "review_note": "No visual review or creative retake; confirmed failures may receive at most three identical-input attempts.",
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "121"
+          }
+        ],
+        "format": {
+          "duration": "5.042000"
+        }
+      },
+      "sha256": null,
+      "timeline": {
+        "start_seconds": 19.166666666666668,
+        "end_seconds": 24.208333333333332
+      },
+      "actual_input": {
+        "model": "prunaai/p-video",
+        "prompt": "Portrait storybook outdoor wedding, exact supplied identities and anchors. CARS PARKED: fixed tires, doors closed, no driving, braking, rolling, entry or exit. PEOPLE PLANTED: no walking, stepping, approach or departure; only tiny blinks and gestures. MOTIFS/LIGHT: mountain grass seeds and mist beads, coastal bubbles and spray drift independently at 0.1 picture-height/second in settled views, 12-20 small pieces at varied depths; motion blur comes from camera speed, no emitted burst. Strong diagonal shafts, rim light and changing water reflections. Pearl-white/teal lettering with platinum glints stays rigid.\n\nPRIMARY ACTION: FAST RIGHTWARD DOWN-SLOPE FLIGHT TO THE FAMILY'S OPEN VALLEY VIEWPOINT. Traverse visible outdoor distance using a fast pullback or forward flight with directional edge blur and strong near/far parallax. Carry the route's changing geography continuously through the frame. Do not substitute an in-place pivot or uniform digital zoom for travel.\n\nTIMING: 0.00-0.30s pull back from the bride; 0.30-1.70s accelerate right and down along the visible access road; 1.70-2.30s brake at the grassy viewpoint; 2.30-5.00s finish in a slow eight-degree arc across the blessing card at constant distance.\n\nTravel down the visible right-sloping road; the high photo spot falls behind and the broad valley opens. The single family group is already arranged at destination, feet planted, phone held steady, a parent's hand resting on the groom's shoulder. No walking, gathering or duplicated bride. Foreground seeds, road texture and distant coastline maintain continuous scale. The blessing card stays rigid and readable.\n\nMatch the supplied final scene and exact text. One opaque world throughout: no crossfade, dissolve, fog wipe, fade-to-white, sudden appearance or blended scenery. Travel past persistent terrain with parallax and brake smoothly. People already stand in destination poses; objects never relocate or morph.",
+        "duration": 5,
+        "resolution": "720p",
+        "aspect_ratio": "9:16",
+        "fps": 24,
+        "prompt_upsampling": false,
+        "save_audio": false,
+        "firstImage": "output/car-roadtrip-beach-remix-v1/clip-5-pruna-take-1-first.jpg",
+        "lastImage": "output/car-roadtrip-beach-remix-v1/clip-5-pruna-take-1-last.jpg",
+        "firstImageSha256": "89c378a0fb25ef72ccdd3d6a426f2592f4d30870ddb5c5d44000023fabd83efb",
+        "lastImageSha256": "f3dc18cbb787e38721606feb9af407768abbec703e225248b7f15e6d6cbd377d",
+        "sourceVideoFramesSent": false
+      },
+      "selected_model": "prunaai/p-video"
+    },
+    {
+      "index": 6,
+      "from": 6,
+      "to": 7,
+      "duration": 5,
+      "status": "generated",
+      "camera": "Fast left-banking camera descent to a raised luxury beach stage; standing couple",
+      "video_prompt_template": "Portrait storybook outdoor wedding, exact supplied identities and anchors. CARS PARKED: fixed tires, doors closed, no driving, braking, rolling, entry or exit. PEOPLE PLANTED: no walking, stepping, approach or departure; only tiny blinks and gestures. MOTIFS/LIGHT: mountain grass seeds and mist beads, coastal bubbles and spray drift independently at 0.1 picture-height/second in settled views, 12-20 small pieces at varied depths; motion blur comes from camera speed, no emitted burst. Strong diagonal shafts, rim light and changing water reflections. Pearl-white/teal lettering with platinum glints stays rigid.\n\nPRIMARY ACTION: FAST LEFT-BANKING DESCENT ALONG THE VALLEY ROAD ALL THE WAY TO THE DAYLIGHT BEACH. Traverse visible outdoor distance using a fast pullback or forward flight with directional edge blur and strong near/far parallax. Carry the route's changing geography continuously through the frame. Do not substitute an in-place pivot or uniform digital zoom for travel.\n\nTIMING: 0.00-0.30s pull up and away from the family; 0.30-2.10s make a strongly accelerated travel passage down the visible switchbacks; 2.10-2.65s brake over the beach access track; 2.65-5.00s settle with a slight crane down to raised-stage eye height.\n\nShow the valley road, hairpins, river mouth, pale beach and headland continuously in order. Camera-only travel compresses elapsed journey time; nobody drives or walks. No car follows the lens. Couple remain offscreen until the raised ivory stage fills the destination. Reveal the SAME identities already STANDING on its elevated deck in modern ivory suit and gown, hands joined; no clothing morph, floor seating, ritual fire or rug. Preserve stage steps, sail backdrop, dense orchids and acrylic timing panel during braking.\n\nMatch the supplied final scene and exact text. One opaque world throughout: no crossfade, dissolve, fog wipe, fade-to-white, sudden appearance or blended scenery. Travel past persistent terrain with parallax and brake smoothly. People already stand in destination poses; objects never relocate or morph.",
+      "video_prompt": "Portrait storybook outdoor wedding, exact supplied identities and anchors. CARS PARKED: fixed tires, doors closed, no driving, braking, rolling, entry or exit. PEOPLE PLANTED: no walking, stepping, approach or departure; only tiny blinks and gestures. MOTIFS/LIGHT: mountain grass seeds and mist beads, coastal bubbles and spray drift independently at 0.1 picture-height/second in settled views, 12-20 small pieces at varied depths; motion blur comes from camera speed, no emitted burst. Strong diagonal shafts, rim light and changing water reflections. Pearl-white/teal lettering with platinum glints stays rigid.\n\nPRIMARY ACTION: FAST LEFT-BANKING DESCENT ALONG THE VALLEY ROAD ALL THE WAY TO THE DAYLIGHT BEACH. Traverse visible outdoor distance using a fast pullback or forward flight with directional edge blur and strong near/far parallax. Carry the route's changing geography continuously through the frame. Do not substitute an in-place pivot or uniform digital zoom for travel.\n\nTIMING: 0.00-0.30s pull up and away from the family; 0.30-2.10s make a strongly accelerated travel passage down the visible switchbacks; 2.10-2.65s brake over the beach access track; 2.65-5.00s settle with a slight crane down to raised-stage eye height.\n\nShow the valley road, hairpins, river mouth, pale beach and headland continuously in order. Camera-only travel compresses elapsed journey time; nobody drives or walks. No car follows the lens. Couple remain offscreen until the raised ivory stage fills the destination. Reveal the SAME identities already STANDING on its elevated deck in modern ivory suit and gown, hands joined; no clothing morph, floor seating, ritual fire or rug. Preserve stage steps, sail backdrop, dense orchids and acrylic timing panel during braking.\n\nMatch the supplied final scene and exact text. One opaque world throughout: no crossfade, dissolve, fog wipe, fade-to-white, sudden appearance or blended scenery. Travel past persistent terrain with parallax and brake smoothly. People already stand in destination poses; objects never relocate or morph.",
+      "video_path": "clip-6.mp4",
+      "final_frame_path": "clip-6-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 5
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 7
+        }
+      },
+      "request_metadata": {
+        "id": "3xz2tsqyydrmr0d0y5q9p3byb0",
+        "requestId": "3xz2tsqyydrmr0d0y5q9p3byb0",
+        "status": "succeeded",
+        "model": "prunaai/p-video",
+        "version": "hidden",
+        "metrics": {
+          "model_variant": "base",
+          "predict_time": 8.659686804,
+          "resolution_target": "720p",
+          "total_time": 8.692503314,
+          "video_output_count": 1,
+          "video_output_duration_seconds": 5
+        },
+        "error": null,
+        "created_at": "2026-09-30T08:29:38.419Z",
+        "started_at": "2026-09-30T08:29:38.45181651Z",
+        "completed_at": "2026-09-30T08:29:47.111503314Z",
+        "data_removed": false,
+        "outputUrl": "https://replicate.delivery/xezq/e5AftnqtFcgz3EacPTImpb5qbRTmpici2loaMXA3OQW6pnSXA/bd8bf549-1304-4531-a60a-698f227cec77.mp4"
+      },
+      "selected_take": 1,
+      "review_note": "No visual review or creative retake; confirmed failures may receive at most three identical-input attempts.",
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "121"
+          }
+        ],
+        "format": {
+          "duration": "5.042000"
+        }
+      },
+      "sha256": null,
+      "timeline": {
+        "start_seconds": 24.208333333333332,
+        "end_seconds": 29.25
+      },
+      "actual_input": {
+        "model": "prunaai/p-video",
+        "prompt": "Portrait storybook outdoor wedding, exact supplied identities and anchors. CARS PARKED: fixed tires, doors closed, no driving, braking, rolling, entry or exit. PEOPLE PLANTED: no walking, stepping, approach or departure; only tiny blinks and gestures. MOTIFS/LIGHT: mountain grass seeds and mist beads, coastal bubbles and spray drift independently at 0.1 picture-height/second in settled views, 12-20 small pieces at varied depths; motion blur comes from camera speed, no emitted burst. Strong diagonal shafts, rim light and changing water reflections. Pearl-white/teal lettering with platinum glints stays rigid.\n\nPRIMARY ACTION: FAST LEFT-BANKING DESCENT ALONG THE VALLEY ROAD ALL THE WAY TO THE DAYLIGHT BEACH. Traverse visible outdoor distance using a fast pullback or forward flight with directional edge blur and strong near/far parallax. Carry the route's changing geography continuously through the frame. Do not substitute an in-place pivot or uniform digital zoom for travel.\n\nTIMING: 0.00-0.30s pull up and away from the family; 0.30-2.10s make a strongly accelerated travel passage down the visible switchbacks; 2.10-2.65s brake over the beach access track; 2.65-5.00s settle with a slight crane down to raised-stage eye height.\n\nShow the valley road, hairpins, river mouth, pale beach and headland continuously in order. Camera-only travel compresses elapsed journey time; nobody drives or walks. No car follows the lens. Couple remain offscreen until the raised ivory stage fills the destination. Reveal the SAME identities already STANDING on its elevated deck in modern ivory suit and gown, hands joined; no clothing morph, floor seating, ritual fire or rug. Preserve stage steps, sail backdrop, dense orchids and acrylic timing panel during braking.\n\nMatch the supplied final scene and exact text. One opaque world throughout: no crossfade, dissolve, fog wipe, fade-to-white, sudden appearance or blended scenery. Travel past persistent terrain with parallax and brake smoothly. People already stand in destination poses; objects never relocate or morph.",
+        "duration": 5,
+        "resolution": "720p",
+        "aspect_ratio": "9:16",
+        "fps": 24,
+        "prompt_upsampling": false,
+        "save_audio": false,
+        "firstImage": "output/car-roadtrip-beach-remix-v1/clip-6-pruna-take-1-first.jpg",
+        "lastImage": "output/car-roadtrip-beach-remix-v1/clip-6-pruna-take-1-last.jpg",
+        "firstImageSha256": "30adabd6196fe682d4a3ec1d7302ecb682c1388a7abfe4c2a8b037e2106a80cf",
+        "lastImageSha256": "25d0598a97eec3cbf179fc912e2945ff306f43ea9e4c1a87b22cb43b37289f59",
+        "sourceVideoFramesSent": false
+      },
+      "selected_model": "prunaai/p-video"
+    },
+    {
+      "index": 7,
+      "from": 7,
+      "to": 8,
+      "duration": 5,
+      "status": "generated",
+      "camera": "Continuous opaque shoreline pullback and headland climb; no fades",
+      "video_prompt_template": "Portrait storybook outdoor wedding, exact supplied identities and anchors. CARS PARKED: fixed tires, doors closed, no driving, braking, rolling, entry or exit. PEOPLE PLANTED: no walking, stepping, approach or departure; only tiny blinks and gestures. MOTIFS/LIGHT: mountain grass seeds and mist beads, coastal bubbles and spray drift independently at 0.1 picture-height/second in settled views, 12-20 small pieces at varied depths; motion blur comes from camera speed, no emitted burst. Strong diagonal shafts, rim light and changing water reflections. Pearl-white/teal lettering with platinum glints stays rigid.\n\nPRIMARY ACTION: FAST RIGHTWARD PULLBACK OVER THE SHORE THEN CLIMB TO THE OPEN COASTAL HEADLAND. Traverse visible outdoor distance using a fast pullback or forward flight with directional edge blur and strong near/far parallax. Carry the route's changing geography continuously through the frame. Do not substitute an in-place pivot or uniform digital zoom for travel.\n\nTIMING: 0.00-0.30s retreat from the beach ceremony; 0.30-1.80s accelerate right along the shoreline and climb the visible rocky promontory; 1.80-2.30s brake; 2.30-5.00s finish with a small upward crane to standing eye height.\n\nThe RAISED ceremony platform recedes left as the camera banks right along the real shoreline toward the visible headland. Hold the same rocky point and sea horizon throughout. Sea, rocks and venue sign are opaque from their first visibility; no crossfade, haze wipe or blend. Follow the path up the rock, letting the pre-existing panel enlarge gradually. At least one coastline landmark remains visible at every moment. No washed-out exposure during braking. Couple stay planted on the distant stage.\n\nMatch the supplied final scene and exact text. One opaque world throughout: no crossfade, dissolve, fog wipe, fade-to-white, sudden appearance or blended scenery. Travel past persistent terrain with parallax and brake smoothly. People already stand in destination poses; objects never relocate or morph.",
+      "video_prompt": "Portrait storybook outdoor wedding, exact supplied identities and anchors. CARS PARKED: fixed tires, doors closed, no driving, braking, rolling, entry or exit. PEOPLE PLANTED: no walking, stepping, approach or departure; only tiny blinks and gestures. MOTIFS/LIGHT: mountain grass seeds and mist beads, coastal bubbles and spray drift independently at 0.1 picture-height/second in settled views, 12-20 small pieces at varied depths; motion blur comes from camera speed, no emitted burst. Strong diagonal shafts, rim light and changing water reflections. Pearl-white/teal lettering with platinum glints stays rigid.\n\nPRIMARY ACTION: FAST RIGHTWARD PULLBACK OVER THE SHORE THEN CLIMB TO THE OPEN COASTAL HEADLAND. Traverse visible outdoor distance using a fast pullback or forward flight with directional edge blur and strong near/far parallax. Carry the route's changing geography continuously through the frame. Do not substitute an in-place pivot or uniform digital zoom for travel.\n\nTIMING: 0.00-0.30s retreat from the beach ceremony; 0.30-1.80s accelerate right along the shoreline and climb the visible rocky promontory; 1.80-2.30s brake; 2.30-5.00s finish with a small upward crane to standing eye height.\n\nThe RAISED ceremony platform recedes left as the camera banks right along the real shoreline toward the visible headland. Hold the same rocky point and sea horizon throughout. Sea, rocks and venue sign are opaque from their first visibility; no crossfade, haze wipe or blend. Follow the path up the rock, letting the pre-existing panel enlarge gradually. At least one coastline landmark remains visible at every moment. No washed-out exposure during braking. Couple stay planted on the distant stage.\n\nMatch the supplied final scene and exact text. One opaque world throughout: no crossfade, dissolve, fog wipe, fade-to-white, sudden appearance or blended scenery. Travel past persistent terrain with parallax and brake smoothly. People already stand in destination poses; objects never relocate or morph.",
+      "video_path": "clip-7.mp4",
+      "final_frame_path": "clip-7-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 6
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 8
+        }
+      },
+      "request_metadata": {
+        "id": "zktkxstyg5rmt0d0y5qrmgca9m",
+        "requestId": "zktkxstyg5rmt0d0y5qrmgca9m",
+        "status": "succeeded",
+        "model": "prunaai/p-video",
+        "version": "hidden",
+        "metrics": {
+          "model_variant": "base",
+          "predict_time": 8.885807747,
+          "resolution_target": "720p",
+          "total_time": 8.929915924,
+          "video_output_count": 1,
+          "video_output_duration_seconds": 5
+        },
+        "error": null,
+        "created_at": "2026-09-30T08:30:02.881Z",
+        "started_at": "2026-09-30T08:30:02.925108167Z",
+        "completed_at": "2026-09-30T08:30:11.810915924Z",
+        "data_removed": false,
+        "outputUrl": "https://replicate.delivery/xezq/sDOas24NzxIDMV3hYtTdne9DkFOURvHlRqmGjNRgj42J1TpLA/453210ae-7afb-4305-a74f-103b75d6239d.mp4"
+      },
+      "selected_take": 1,
+      "review_note": "No visual review or creative retake; confirmed failures may receive at most three identical-input attempts.",
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "121"
+          }
+        ],
+        "format": {
+          "duration": "5.042000"
+        }
+      },
+      "sha256": null,
+      "timeline": {
+        "start_seconds": 29.25,
+        "end_seconds": 34.291666666666664
+      },
+      "actual_input": {
+        "model": "prunaai/p-video",
+        "prompt": "Portrait storybook outdoor wedding, exact supplied identities and anchors. CARS PARKED: fixed tires, doors closed, no driving, braking, rolling, entry or exit. PEOPLE PLANTED: no walking, stepping, approach or departure; only tiny blinks and gestures. MOTIFS/LIGHT: mountain grass seeds and mist beads, coastal bubbles and spray drift independently at 0.1 picture-height/second in settled views, 12-20 small pieces at varied depths; motion blur comes from camera speed, no emitted burst. Strong diagonal shafts, rim light and changing water reflections. Pearl-white/teal lettering with platinum glints stays rigid.\n\nPRIMARY ACTION: FAST RIGHTWARD PULLBACK OVER THE SHORE THEN CLIMB TO THE OPEN COASTAL HEADLAND. Traverse visible outdoor distance using a fast pullback or forward flight with directional edge blur and strong near/far parallax. Carry the route's changing geography continuously through the frame. Do not substitute an in-place pivot or uniform digital zoom for travel.\n\nTIMING: 0.00-0.30s retreat from the beach ceremony; 0.30-1.80s accelerate right along the shoreline and climb the visible rocky promontory; 1.80-2.30s brake; 2.30-5.00s finish with a small upward crane to standing eye height.\n\nThe RAISED ceremony platform recedes left as the camera banks right along the real shoreline toward the visible headland. Hold the same rocky point and sea horizon throughout. Sea, rocks and venue sign are opaque from their first visibility; no crossfade, haze wipe or blend. Follow the path up the rock, letting the pre-existing panel enlarge gradually. At least one coastline landmark remains visible at every moment. No washed-out exposure during braking. Couple stay planted on the distant stage.\n\nMatch the supplied final scene and exact text. One opaque world throughout: no crossfade, dissolve, fog wipe, fade-to-white, sudden appearance or blended scenery. Travel past persistent terrain with parallax and brake smoothly. People already stand in destination poses; objects never relocate or morph.",
+        "duration": 5,
+        "resolution": "720p",
+        "aspect_ratio": "9:16",
+        "fps": 24,
+        "prompt_upsampling": false,
+        "save_audio": false,
+        "firstImage": "output/car-roadtrip-beach-remix-v1/clip-7-pruna-take-1-first.jpg",
+        "lastImage": "output/car-roadtrip-beach-remix-v1/clip-7-pruna-take-1-last.jpg",
+        "firstImageSha256": "239af43cc8bc1dd44d0f529d57fccd62811cafd17179b09047138a31530aaf2e",
+        "lastImageSha256": "a988c4a627c58d874ba8a8fcf78de62d81a449b1bec3181c51b2b5c4e29acea3",
+        "sourceVideoFramesSent": false
+      },
+      "selected_model": "prunaai/p-video"
+    },
+    {
+      "index": 8,
+      "from": 8,
+      "to": 9,
+      "duration": 5,
+      "status": "generated",
+      "camera": "Fast rightward coastal travel time-lapse to night reception",
+      "video_prompt_template": "Portrait storybook outdoor wedding, exact supplied identities and anchors. CARS PARKED: fixed tires, doors closed, no driving, braking, rolling, entry or exit. PEOPLE PLANTED: no walking, stepping, approach or departure; only tiny blinks and gestures. MOTIFS/LIGHT: mountain grass seeds and mist beads, coastal bubbles and spray drift independently at 0.1 picture-height/second in settled views, 12-20 small pieces at varied depths; motion blur comes from camera speed, no emitted burst. Strong diagonal shafts, rim light and changing water reflections. Pearl-white/teal lettering with platinum glints stays rigid.\n\nPRIMARY ACTION: FAST RIGHTWARD COASTAL TRAVEL FROM THE HEADLAND TO THE NIGHT RECEPTION BEACH. Traverse visible outdoor distance using a fast pullback or forward flight with directional edge blur and strong near/far parallax. Carry the route's changing geography continuously through the frame. Do not substitute an in-place pivot or uniform digital zoom for travel.\n\nTIMING: 0.00-0.30s pull back from the venue panel; 0.30-2.25s accelerate along the coast in a continuous travel time-lapse; 2.25-2.75s brake outside the beach shack; 2.75-5.00s settle in a very slow leftward correcting arc.\n\nTrack the visible coastal road around the SAME crescent bay to the shack, keeping the headland continuously recognizable. Camera-only travel time-lapse darkens the sky progressively through sunset and blue hour; no opacity blend between landscapes. Practical lights come on on the already existing deck. Guests are already seated and stationary at arrival; no people approach, leave tables or change clothes on camera. Arrive outside; never fly through the shack.\n\nMatch the supplied final scene and exact text. One opaque world throughout: no crossfade, dissolve, fog wipe, fade-to-white, sudden appearance or blended scenery. Travel past persistent terrain with parallax and brake smoothly. People already stand in destination poses; objects never relocate or morph.",
+      "video_prompt": "Portrait storybook outdoor wedding, exact supplied identities and anchors. CARS PARKED: fixed tires, doors closed, no driving, braking, rolling, entry or exit. PEOPLE PLANTED: no walking, stepping, approach or departure; only tiny blinks and gestures. MOTIFS/LIGHT: mountain grass seeds and mist beads, coastal bubbles and spray drift independently at 0.1 picture-height/second in settled views, 12-20 small pieces at varied depths; motion blur comes from camera speed, no emitted burst. Strong diagonal shafts, rim light and changing water reflections. Pearl-white/teal lettering with platinum glints stays rigid.\n\nPRIMARY ACTION: FAST RIGHTWARD COASTAL TRAVEL FROM THE HEADLAND TO THE NIGHT RECEPTION BEACH. Traverse visible outdoor distance using a fast pullback or forward flight with directional edge blur and strong near/far parallax. Carry the route's changing geography continuously through the frame. Do not substitute an in-place pivot or uniform digital zoom for travel.\n\nTIMING: 0.00-0.30s pull back from the venue panel; 0.30-2.25s accelerate along the coast in a continuous travel time-lapse; 2.25-2.75s brake outside the beach shack; 2.75-5.00s settle in a very slow leftward correcting arc.\n\nTrack the visible coastal road around the SAME crescent bay to the shack, keeping the headland continuously recognizable. Camera-only travel time-lapse darkens the sky progressively through sunset and blue hour; no opacity blend between landscapes. Practical lights come on on the already existing deck. Guests are already seated and stationary at arrival; no people approach, leave tables or change clothes on camera. Arrive outside; never fly through the shack.\n\nMatch the supplied final scene and exact text. One opaque world throughout: no crossfade, dissolve, fog wipe, fade-to-white, sudden appearance or blended scenery. Travel past persistent terrain with parallax and brake smoothly. People already stand in destination poses; objects never relocate or morph.",
+      "video_path": "clip-8.mp4",
+      "final_frame_path": "clip-8-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 7
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 9
+        }
+      },
+      "request_metadata": {
+        "id": "q07gygpbpnrmt0d0y5qs8w2t9w",
+        "requestId": "q07gygpbpnrmt0d0y5qs8w2t9w",
+        "status": "succeeded",
+        "model": "prunaai/p-video",
+        "version": "hidden",
+        "metrics": {
+          "model_variant": "base",
+          "predict_time": 9.513935134,
+          "resolution_target": "720p",
+          "total_time": 9.582141125,
+          "video_output_count": 1,
+          "video_output_duration_seconds": 5
+        },
+        "error": null,
+        "created_at": "2026-09-30T08:30:30.837Z",
+        "started_at": "2026-09-30T08:30:30.905205981Z",
+        "completed_at": "2026-09-30T08:30:40.419141125Z",
+        "data_removed": false,
+        "outputUrl": "https://replicate.delivery/xezq/KxIruV6VgcIpKpz8qbZYBgBIf9v58xkyZefeBkUEcEMAreU6C/eb10929d-179b-4cfa-825c-2928ce4b1915.mp4"
+      },
+      "selected_take": 1,
+      "review_note": "No visual review or creative retake; confirmed failures may receive at most three identical-input attempts.",
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "121"
+          }
+        ],
+        "format": {
+          "duration": "5.042000"
+        }
+      },
+      "sha256": null,
+      "timeline": {
+        "start_seconds": 34.291666666666664,
+        "end_seconds": 39.333333333333336
+      },
+      "actual_input": {
+        "model": "prunaai/p-video",
+        "prompt": "Portrait storybook outdoor wedding, exact supplied identities and anchors. CARS PARKED: fixed tires, doors closed, no driving, braking, rolling, entry or exit. PEOPLE PLANTED: no walking, stepping, approach or departure; only tiny blinks and gestures. MOTIFS/LIGHT: mountain grass seeds and mist beads, coastal bubbles and spray drift independently at 0.1 picture-height/second in settled views, 12-20 small pieces at varied depths; motion blur comes from camera speed, no emitted burst. Strong diagonal shafts, rim light and changing water reflections. Pearl-white/teal lettering with platinum glints stays rigid.\n\nPRIMARY ACTION: FAST RIGHTWARD COASTAL TRAVEL FROM THE HEADLAND TO THE NIGHT RECEPTION BEACH. Traverse visible outdoor distance using a fast pullback or forward flight with directional edge blur and strong near/far parallax. Carry the route's changing geography continuously through the frame. Do not substitute an in-place pivot or uniform digital zoom for travel.\n\nTIMING: 0.00-0.30s pull back from the venue panel; 0.30-2.25s accelerate along the coast in a continuous travel time-lapse; 2.25-2.75s brake outside the beach shack; 2.75-5.00s settle in a very slow leftward correcting arc.\n\nTrack the visible coastal road around the SAME crescent bay to the shack, keeping the headland continuously recognizable. Camera-only travel time-lapse darkens the sky progressively through sunset and blue hour; no opacity blend between landscapes. Practical lights come on on the already existing deck. Guests are already seated and stationary at arrival; no people approach, leave tables or change clothes on camera. Arrive outside; never fly through the shack.\n\nMatch the supplied final scene and exact text. One opaque world throughout: no crossfade, dissolve, fog wipe, fade-to-white, sudden appearance or blended scenery. Travel past persistent terrain with parallax and brake smoothly. People already stand in destination poses; objects never relocate or morph.",
+        "duration": 5,
+        "resolution": "720p",
+        "aspect_ratio": "9:16",
+        "fps": 24,
+        "prompt_upsampling": false,
+        "save_audio": false,
+        "firstImage": "output/car-roadtrip-beach-remix-v1/clip-8-pruna-take-1-first.jpg",
+        "lastImage": "output/car-roadtrip-beach-remix-v1/clip-8-pruna-take-1-last.jpg",
+        "firstImageSha256": "81432fcd19b86e386853050c827179788c6ead5451d139532b224fedc77e9324",
+        "lastImageSha256": "0ed214cdd1aa75d980853ef1c777e66398aaa05a01c2bf0522714f55590d7eaa",
+        "sourceVideoFramesSent": false
+      },
+      "selected_model": "prunaai/p-video"
+    },
+    {
+      "index": 9,
+      "from": 9,
+      "to": 10,
+      "duration": 5,
+      "status": "generated",
+      "camera": "Leftward camera travel to stationary hosts; no walking",
+      "video_prompt_template": "Portrait storybook outdoor wedding, exact supplied identities and anchors. CARS PARKED: fixed tires, doors closed, no driving, braking, rolling, entry or exit. PEOPLE PLANTED: no walking, stepping, approach or departure; only tiny blinks and gestures. MOTIFS/LIGHT: mountain grass seeds and mist beads, coastal bubbles and spray drift independently at 0.1 picture-height/second in settled views, 12-20 small pieces at varied depths; motion blur comes from camera speed, no emitted burst. Strong diagonal shafts, rim light and changing water reflections. Pearl-white/teal lettering with platinum glints stays rigid.\n\nPRIMARY ACTION: LEFTWARD OUTDOOR TRAVEL FROM THE RECEPTION DECK TO THE HOSTS' SANDY ARRIVAL PATH. Traverse visible outdoor distance using a fast pullback or forward flight with directional edge blur and strong near/far parallax. Carry the route's changing geography continuously through the frame. Do not substitute an in-place pivot or uniform digital zoom for travel.\n\nTIMING: 0.00-0.30s pull back from the reception easel; 0.30-1.45s bank left and move briskly along the open edge of the deck; 1.45-1.95s brake on the sandy path; 1.95-5.00s settle with a gentle lateral drift over 20 centimetres.\n\nThe reception card recedes right while the camera travels left along the visible deck edge and sand path. Keep moonlit water on the same side and bulbs receding consistently. Hosts and two children ALREADY stand at the welcome spot, fixed feet and hands, small smiles only. No arriving visitors, walking, stepping, gesturing toward a moving group or transferring flowers. The welcome panel and weighted stand stay fixed. Use terrain parallax and transparent sea mist, never a dissolve.\n\nMatch the supplied final scene and exact text. One opaque world throughout: no crossfade, dissolve, fog wipe, fade-to-white, sudden appearance or blended scenery. Travel past persistent terrain with parallax and brake smoothly. People already stand in destination poses; objects never relocate or morph.",
+      "video_prompt": "Portrait storybook outdoor wedding, exact supplied identities and anchors. CARS PARKED: fixed tires, doors closed, no driving, braking, rolling, entry or exit. PEOPLE PLANTED: no walking, stepping, approach or departure; only tiny blinks and gestures. MOTIFS/LIGHT: mountain grass seeds and mist beads, coastal bubbles and spray drift independently at 0.1 picture-height/second in settled views, 12-20 small pieces at varied depths; motion blur comes from camera speed, no emitted burst. Strong diagonal shafts, rim light and changing water reflections. Pearl-white/teal lettering with platinum glints stays rigid.\n\nPRIMARY ACTION: LEFTWARD OUTDOOR TRAVEL FROM THE RECEPTION DECK TO THE HOSTS' SANDY ARRIVAL PATH. Traverse visible outdoor distance using a fast pullback or forward flight with directional edge blur and strong near/far parallax. Carry the route's changing geography continuously through the frame. Do not substitute an in-place pivot or uniform digital zoom for travel.\n\nTIMING: 0.00-0.30s pull back from the reception easel; 0.30-1.45s bank left and move briskly along the open edge of the deck; 1.45-1.95s brake on the sandy path; 1.95-5.00s settle with a gentle lateral drift over 20 centimetres.\n\nThe reception card recedes right while the camera travels left along the visible deck edge and sand path. Keep moonlit water on the same side and bulbs receding consistently. Hosts and two children ALREADY stand at the welcome spot, fixed feet and hands, small smiles only. No arriving visitors, walking, stepping, gesturing toward a moving group or transferring flowers. The welcome panel and weighted stand stay fixed. Use terrain parallax and transparent sea mist, never a dissolve.\n\nMatch the supplied final scene and exact text. One opaque world throughout: no crossfade, dissolve, fog wipe, fade-to-white, sudden appearance or blended scenery. Travel past persistent terrain with parallax and brake smoothly. People already stand in destination poses; objects never relocate or morph.",
+      "video_path": "clip-9.mp4",
+      "final_frame_path": "clip-9-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 8
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 10
+        }
+      },
+      "request_metadata": {
+        "id": "73vyyr9kvnrmw0d0y5ra07nvqc",
+        "requestId": "73vyyr9kvnrmw0d0y5ra07nvqc",
+        "status": "succeeded",
+        "model": "prunaai/p-video",
+        "version": "hidden",
+        "metrics": {
+          "model_variant": "base",
+          "predict_time": 6.8380271839999995,
+          "resolution_target": "720p",
+          "total_time": 6.914724757,
+          "video_output_count": 1,
+          "video_output_duration_seconds": 5
+        },
+        "error": null,
+        "created_at": "2026-09-30T08:30:57.501Z",
+        "started_at": "2026-09-30T08:30:57.577697573Z",
+        "completed_at": "2026-09-30T08:31:04.415724757Z",
+        "data_removed": false,
+        "outputUrl": "https://replicate.delivery/xezq/cnpmyGNd5dLXLpSLlIwKCVCRYgqVQLvCTeWRYpvluZFk1TpLA/a0d474f8-e790-4ab3-91c9-11e055d14ffc.mp4"
+      },
+      "selected_take": 1,
+      "review_note": "No visual review or creative retake; confirmed failures may receive at most three identical-input attempts.",
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "121"
+          }
+        ],
+        "format": {
+          "duration": "5.042000"
+        }
+      },
+      "sha256": null,
+      "timeline": {
+        "start_seconds": 39.333333333333336,
+        "end_seconds": 44.375
+      },
+      "actual_input": {
+        "model": "prunaai/p-video",
+        "prompt": "Portrait storybook outdoor wedding, exact supplied identities and anchors. CARS PARKED: fixed tires, doors closed, no driving, braking, rolling, entry or exit. PEOPLE PLANTED: no walking, stepping, approach or departure; only tiny blinks and gestures. MOTIFS/LIGHT: mountain grass seeds and mist beads, coastal bubbles and spray drift independently at 0.1 picture-height/second in settled views, 12-20 small pieces at varied depths; motion blur comes from camera speed, no emitted burst. Strong diagonal shafts, rim light and changing water reflections. Pearl-white/teal lettering with platinum glints stays rigid.\n\nPRIMARY ACTION: LEFTWARD OUTDOOR TRAVEL FROM THE RECEPTION DECK TO THE HOSTS' SANDY ARRIVAL PATH. Traverse visible outdoor distance using a fast pullback or forward flight with directional edge blur and strong near/far parallax. Carry the route's changing geography continuously through the frame. Do not substitute an in-place pivot or uniform digital zoom for travel.\n\nTIMING: 0.00-0.30s pull back from the reception easel; 0.30-1.45s bank left and move briskly along the open edge of the deck; 1.45-1.95s brake on the sandy path; 1.95-5.00s settle with a gentle lateral drift over 20 centimetres.\n\nThe reception card recedes right while the camera travels left along the visible deck edge and sand path. Keep moonlit water on the same side and bulbs receding consistently. Hosts and two children ALREADY stand at the welcome spot, fixed feet and hands, small smiles only. No arriving visitors, walking, stepping, gesturing toward a moving group or transferring flowers. The welcome panel and weighted stand stay fixed. Use terrain parallax and transparent sea mist, never a dissolve.\n\nMatch the supplied final scene and exact text. One opaque world throughout: no crossfade, dissolve, fog wipe, fade-to-white, sudden appearance or blended scenery. Travel past persistent terrain with parallax and brake smoothly. People already stand in destination poses; objects never relocate or morph.",
+        "duration": 5,
+        "resolution": "720p",
+        "aspect_ratio": "9:16",
+        "fps": 24,
+        "prompt_upsampling": false,
+        "save_audio": false,
+        "firstImage": "output/car-roadtrip-beach-remix-v1/clip-9-pruna-take-1-first.jpg",
+        "lastImage": "output/car-roadtrip-beach-remix-v1/clip-9-pruna-take-1-last.jpg",
+        "firstImageSha256": "c7d7a4cca2b009f073b7489ff8c3bda3c710518715a9f5850c2530da123bb49a",
+        "lastImageSha256": "7761c1784ca69c5239648275cc8502a811b8b1355081dd81bf1d261b006c9de4",
+        "sourceVideoFramesSent": false
+      },
+      "selected_model": "prunaai/p-video"
+    },
+    {
+      "index": 10,
+      "from": 10,
+      "to": 11,
+      "duration": 5,
+      "status": "generated",
+      "camera": "Fast backward beach travel and reveal of one couple",
+      "video_prompt_template": "BACKWARD REVEAL OF EXACTLY ONE BRIDE AND ONE GROOM ON THE OPEN NIGHT BEACH. Preserve their adult faces, skin tone and proportions. The two near people revealed during the camera pass must be the same two people in the ending, never a second foreground pair or reflected couple. All people have planted feet; no walking or stepping.\n\n0.00-0.35s: ease backward from the hosts' welcome card. 0.35-1.60s: accelerate backward along the visible sandy lantern trail toward the open shoreline. Hosts and shack recede together; waves and the same headland remain consistently on their established sides. Pass real beach distance with strong sand and lantern parallax, no enclosed passage. 1.60-2.10s: pass backward between the ONLY couple standing beside the trail at the waterline. Their near shoulders briefly fill the edges; the gap contains only open sand and sea, never another pair. 2.10-2.85s: the same people steadily shrink in perspective as their full bodies are revealed, bride left and groom right. Both already wear relaxed evening clothes; never change their outfits on camera. 2.85-5.00s: decelerate into a slow backward glide. They hold hands and watch an approaching wave; she keeps her dress hem lightly held and he leans toward her with a smile. Reach the supplied final pose rather than repeating the earlier formal portrait. One fixed dry-sand date board stands to their right, its lettering exactly '{{save_date_inline}}'. No spin, teleportation or montage.\n\nMOTIFS AND LIGHT: twelve tiny coastal bubbles and fine spray beads drift independently across three depths, slow and unsynchronized. Silk shawl edges flex softly. Strong cyan moonshafts rake through thin sea mist, warm practical pools rim the couple, water reflections move across platinum sign edges. No walking, vehicle motion, opaque fog, fade, dissolving scenery or text smoke. The board stays fixed on dry sand.\n\nExactly ONE dark driftwood date panel with a thin platinum frame and one low easel is revealed on dry sand. It stays beyond the waves, with no second backing sign or reflected duplicate. The couple are {{bride_name}} and {{groom_name}}; keep the source identities and evening clothes. No extra people materialize on the shoreline.",
+      "video_prompt": "BACKWARD REVEAL OF EXACTLY ONE BRIDE AND ONE GROOM ON THE OPEN NIGHT BEACH. Preserve their adult faces, skin tone and proportions. The two near people revealed during the camera pass must be the same two people in the ending, never a second foreground pair or reflected couple. All people have planted feet; no walking or stepping.\n\n0.00-0.35s: ease backward from the hosts' welcome card. 0.35-1.60s: accelerate backward along the visible sandy lantern trail toward the open shoreline. Hosts and shack recede together; waves and the same headland remain consistently on their established sides. Pass real beach distance with strong sand and lantern parallax, no enclosed passage. 1.60-2.10s: pass backward between the ONLY couple standing beside the trail at the waterline. Their near shoulders briefly fill the edges; the gap contains only open sand and sea, never another pair. 2.10-2.85s: the same people steadily shrink in perspective as their full bodies are revealed, bride left and groom right. Both already wear relaxed evening clothes; never change their outfits on camera. 2.85-5.00s: decelerate into a slow backward glide. They hold hands and watch an approaching wave; she keeps her dress hem lightly held and he leans toward her with a smile. Reach the supplied final pose rather than repeating the earlier formal portrait. One fixed dry-sand date board stands to their right, its lettering exactly 'SAVE THE DATE / 6 & 7 FEBRUARY / 2020'. No spin, teleportation or montage.\n\nMOTIFS AND LIGHT: twelve tiny coastal bubbles and fine spray beads drift independently across three depths, slow and unsynchronized. Silk shawl edges flex softly. Strong cyan moonshafts rake through thin sea mist, warm practical pools rim the couple, water reflections move across platinum sign edges. No walking, vehicle motion, opaque fog, fade, dissolving scenery or text smoke. The board stays fixed on dry sand.\n\nExactly ONE dark driftwood date panel with a thin platinum frame and one low easel is revealed on dry sand. It stays beyond the waves, with no second backing sign or reflected duplicate. The couple are Supriya and Ashok Kumar; keep the source identities and evening clothes. No extra people materialize on the shoreline.",
+      "video_path": "clip-10.mp4",
+      "final_frame_path": "clip-10-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 9
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 11
+        }
+      },
+      "request_metadata": {
+        "id": "p4b9nfmpznrmw0d0y5r9bxpvng",
+        "requestId": "p4b9nfmpznrmw0d0y5r9bxpvng",
+        "status": "succeeded",
+        "model": "prunaai/p-video",
+        "version": "hidden",
+        "metrics": {
+          "model_variant": "base",
+          "predict_time": 6.85352567,
+          "resolution_target": "720p",
+          "total_time": 6.890798604,
+          "video_output_count": 1,
+          "video_output_duration_seconds": 5
+        },
+        "error": null,
+        "created_at": "2026-09-30T08:31:22.877Z",
+        "started_at": "2026-09-30T08:31:22.914272934Z",
+        "completed_at": "2026-09-30T08:31:29.767798604Z",
+        "data_removed": false,
+        "outputUrl": "https://replicate.delivery/xezq/iOx47hO3StrWHZhDDuRXQ8eT7Qb5w787OEpi3LWfhkMhrnSXA/b8aca95a-0ada-4a69-8a4c-fff2ee09c1aa.mp4"
+      },
+      "selected_take": 1,
+      "review_note": "No visual review or creative retake; confirmed failures may receive at most three identical-input attempts.",
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "121"
+          }
+        ],
+        "format": {
+          "duration": "5.042000"
+        }
+      },
+      "sha256": null,
+      "timeline": {
+        "start_seconds": 44.375,
+        "end_seconds": 49.416666666666664
+      },
+      "actual_input": {
+        "model": "prunaai/p-video",
+        "prompt": "BACKWARD REVEAL OF EXACTLY ONE BRIDE AND ONE GROOM ON THE OPEN NIGHT BEACH. Preserve their adult faces, skin tone and proportions. The two near people revealed during the camera pass must be the same two people in the ending, never a second foreground pair or reflected couple. All people have planted feet; no walking or stepping.\n\n0.00-0.35s: ease backward from the hosts' welcome card. 0.35-1.60s: accelerate backward along the visible sandy lantern trail toward the open shoreline. Hosts and shack recede together; waves and the same headland remain consistently on their established sides. Pass real beach distance with strong sand and lantern parallax, no enclosed passage. 1.60-2.10s: pass backward between the ONLY couple standing beside the trail at the waterline. Their near shoulders briefly fill the edges; the gap contains only open sand and sea, never another pair. 2.10-2.85s: the same people steadily shrink in perspective as their full bodies are revealed, bride left and groom right. Both already wear relaxed evening clothes; never change their outfits on camera. 2.85-5.00s: decelerate into a slow backward glide. They hold hands and watch an approaching wave; she keeps her dress hem lightly held and he leans toward her with a smile. Reach the supplied final pose rather than repeating the earlier formal portrait. One fixed dry-sand date board stands to their right, its lettering exactly 'SAVE THE DATE / 6 & 7 FEBRUARY / 2020'. No spin, teleportation or montage.\n\nMOTIFS AND LIGHT: twelve tiny coastal bubbles and fine spray beads drift independently across three depths, slow and unsynchronized. Silk shawl edges flex softly. Strong cyan moonshafts rake through thin sea mist, warm practical pools rim the couple, water reflections move across platinum sign edges. No walking, vehicle motion, opaque fog, fade, dissolving scenery or text smoke. The board stays fixed on dry sand.\n\nExactly ONE dark driftwood date panel with a thin platinum frame and one low easel is revealed on dry sand. It stays beyond the waves, with no second backing sign or reflected duplicate. The couple are Supriya and Ashok Kumar; keep the source identities and evening clothes. No extra people materialize on the shoreline.",
+        "duration": 5,
+        "resolution": "720p",
+        "aspect_ratio": "9:16",
+        "fps": 24,
+        "prompt_upsampling": false,
+        "save_audio": false,
+        "firstImage": "output/car-roadtrip-beach-remix-v1/clip-10-pruna-take-1-first.jpg",
+        "lastImage": "output/car-roadtrip-beach-remix-v1/clip-10-pruna-take-1-last.jpg",
+        "firstImageSha256": "8f818ae6b7e8db1a8e6d702bad2a356fd98ad00eab79b7b276fdd794a539b2d7",
+        "lastImageSha256": "da14e98c37fa61c3b8f63dc706807baa6c9aff4102d127fc6ac144cc57ffbde9",
+        "sourceVideoFramesSent": false
+      },
+      "selected_model": "prunaai/p-video"
+    },
+    {
+      "index": 11,
+      "from": 11,
+      "to": 12,
+      "duration": 5,
+      "status": "generated",
+      "camera": "Gentle backward shoreline glide and slight rise, intimate shoulder-rest",
+      "video_prompt_template": "Animate ONLY the supplied first image for five seconds. Preserve the same open night shoreline, adult couple, evening clothes, tide and ONE date board on its single low easel at camera RIGHT. The existing panel, platinum border, exact lettering and stand remain one rigid object on dry sand. No new sign, extra couple or changed location. All people have planted feet; no walking or stepping.\n\nOne gentle continuous BACKWARD glide of about one meter with a slight 15-centimeter rise, no whip. 0.00-1.25s: the couple stands where they are, holding hands and watching the small wave drain away. 1.25-3.25s: the bride relaxes her raised dress hem and rests her head softly against the groom's shoulder; he turns toward her and lightly rests his free hand over their joined hands. Feet remain planted, bodies move only a little. This intimate shoulder-rest differs from the ceremony and earlier beach pause; do not turn it into a formal frontal portrait. 3.25-5.00s: hold the quiet gesture as the backward glide eases almost to rest. More moonlit wet sand and open water appear, with the same distant reception lights far left. Keep the single board and its printed copy exactly {{save_date_inline}}. No new objects or wardrobe change.\n\nMOTIFS AND LIGHT: twelve tiny coastal bubbles and fine spray beads drift independently across three depths, slow and unsynchronized. Silk shawl edges flex softly. Strong cyan moonshafts rake through thin sea mist, warm practical pools rim the couple, water reflections move across platinum sign edges. No walking, vehicle motion, opaque fog, fade, dissolving scenery or text smoke. The board stays fixed on dry sand.\n\nThe ending is a slightly wider view of the same open shoreline. No overhead structure, enclosed backdrop or new composition. Preserve identities, warm medium-brown skin and adult proportions while the couple shares this distinct quiet moment.",
+      "video_prompt": "Animate ONLY the supplied first image for five seconds. Preserve the same open night shoreline, adult couple, evening clothes, tide and ONE date board on its single low easel at camera RIGHT. The existing panel, platinum border, exact lettering and stand remain one rigid object on dry sand. No new sign, extra couple or changed location. All people have planted feet; no walking or stepping.\n\nOne gentle continuous BACKWARD glide of about one meter with a slight 15-centimeter rise, no whip. 0.00-1.25s: the couple stands where they are, holding hands and watching the small wave drain away. 1.25-3.25s: the bride relaxes her raised dress hem and rests her head softly against the groom's shoulder; he turns toward her and lightly rests his free hand over their joined hands. Feet remain planted, bodies move only a little. This intimate shoulder-rest differs from the ceremony and earlier beach pause; do not turn it into a formal frontal portrait. 3.25-5.00s: hold the quiet gesture as the backward glide eases almost to rest. More moonlit wet sand and open water appear, with the same distant reception lights far left. Keep the single board and its printed copy exactly SAVE THE DATE / 6 & 7 FEBRUARY / 2020. No new objects or wardrobe change.\n\nMOTIFS AND LIGHT: twelve tiny coastal bubbles and fine spray beads drift independently across three depths, slow and unsynchronized. Silk shawl edges flex softly. Strong cyan moonshafts rake through thin sea mist, warm practical pools rim the couple, water reflections move across platinum sign edges. No walking, vehicle motion, opaque fog, fade, dissolving scenery or text smoke. The board stays fixed on dry sand.\n\nThe ending is a slightly wider view of the same open shoreline. No overhead structure, enclosed backdrop or new composition. Preserve identities, warm medium-brown skin and adult proportions while the couple shares this distinct quiet moment.",
+      "video_path": "clip-11.mp4",
+      "final_frame_path": "clip-11-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 10
+        },
+        "last": null
+      },
+      "request_metadata": {
+        "id": "c1pc12fn2hrmt0d0y5rbpjzy9w",
+        "requestId": "c1pc12fn2hrmt0d0y5rbpjzy9w",
+        "status": "succeeded",
+        "model": "prunaai/p-video",
+        "version": "hidden",
+        "metrics": {
+          "model_variant": "base",
+          "predict_time": 8.70061465,
+          "resolution_target": "720p",
+          "total_time": 8.724079109,
+          "video_output_count": 1,
+          "video_output_duration_seconds": 5
+        },
+        "error": null,
+        "created_at": "2026-09-30T08:31:46.964Z",
+        "started_at": "2026-09-30T08:31:46.987464459Z",
+        "completed_at": "2026-09-30T08:31:55.688079109Z",
+        "data_removed": false,
+        "outputUrl": "https://replicate.delivery/xezq/K2KU1f8pzoyeB0WUCGfTiTRxEAvIqifNv0O6KOnxA4ptveU6C/db53ac55-f51c-4114-859a-ebf1f72b79f8.mp4"
+      },
+      "selected_take": 1,
+      "review_note": "No visual review or creative retake; confirmed failures may receive at most three identical-input attempts.",
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "121"
+          }
+        ],
+        "format": {
+          "duration": "5.042000"
+        }
+      },
+      "sha256": null,
+      "timeline": {
+        "start_seconds": 49.416666666666664,
+        "end_seconds": 54.458333333333336
+      },
+      "actual_input": {
+        "model": "prunaai/p-video",
+        "prompt": "Animate ONLY the supplied first image for five seconds. Preserve the same open night shoreline, adult couple, evening clothes, tide and ONE date board on its single low easel at camera RIGHT. The existing panel, platinum border, exact lettering and stand remain one rigid object on dry sand. No new sign, extra couple or changed location. All people have planted feet; no walking or stepping.\n\nOne gentle continuous BACKWARD glide of about one meter with a slight 15-centimeter rise, no whip. 0.00-1.25s: the couple stands where they are, holding hands and watching the small wave drain away. 1.25-3.25s: the bride relaxes her raised dress hem and rests her head softly against the groom's shoulder; he turns toward her and lightly rests his free hand over their joined hands. Feet remain planted, bodies move only a little. This intimate shoulder-rest differs from the ceremony and earlier beach pause; do not turn it into a formal frontal portrait. 3.25-5.00s: hold the quiet gesture as the backward glide eases almost to rest. More moonlit wet sand and open water appear, with the same distant reception lights far left. Keep the single board and its printed copy exactly SAVE THE DATE / 6 & 7 FEBRUARY / 2020. No new objects or wardrobe change.\n\nMOTIFS AND LIGHT: twelve tiny coastal bubbles and fine spray beads drift independently across three depths, slow and unsynchronized. Silk shawl edges flex softly. Strong cyan moonshafts rake through thin sea mist, warm practical pools rim the couple, water reflections move across platinum sign edges. No walking, vehicle motion, opaque fog, fade, dissolving scenery or text smoke. The board stays fixed on dry sand.\n\nThe ending is a slightly wider view of the same open shoreline. No overhead structure, enclosed backdrop or new composition. Preserve identities, warm medium-brown skin and adult proportions while the couple shares this distinct quiet moment.",
+        "duration": 5,
+        "resolution": "720p",
+        "aspect_ratio": "9:16",
+        "fps": 24,
+        "prompt_upsampling": false,
+        "save_audio": false,
+        "firstImage": "output/car-roadtrip-beach-remix-v1/clip-11-pruna-take-1-first.jpg",
+        "lastImage": null,
+        "firstImageSha256": "ae06b850cd1ce7a195db6529cbf8b53620338ce2d6f3b1f54f91886f6517db3c",
+        "lastImageSha256": null,
+        "sourceVideoFramesSent": false
+      },
+      "selected_model": "prunaai/p-video"
+    }
+  ],
+  "completed_at": "2026-09-30T08:32:08.099Z",
+  "costs": {
+    "scope": "Road-trip Replicate video iteration; clips 1-2 Seedance, remaining clips Pruna",
+    "imageRequests": 11,
+    "videoRequests": 14,
+    "videoProvider": "replicate",
+    "videoModels": [
+      "bytedance/seedance-2.0",
+      "prunaai/p-video"
+    ],
+    "xaiCompletedCostUsd": 0,
+    "replicateCostUsd": null,
+    "replicateCostNote": "Actual charges are not exposed in prediction responses.",
+    "pendingVideos": [],
+    "failedVideos": [
+      {
+        "file": "clip-3-take-1-request.json",
+        "status": "failed",
+        "error": "Prediction failed: Async prediction failed: ModelError: The input or output was flagged as sensitive. Please try again with different inputs. (E005) (uIJ6l3ruRD)"
+      },
+      {
+        "file": "clip-3-take-2-request.json",
+        "status": "failed",
+        "error": "Prediction failed: Async prediction failed: ModelError: The input or output was flagged as sensitive. Please try again with different inputs. (E005) (uIJ6l3ruRD)"
+      },
+      {
+        "file": "clip-3-take-3-request.json",
+        "status": "failed",
+        "error": "Prediction failed: Async prediction failed: ModelError: The input or output was flagged as sensitive. Please try again with different inputs. (E005) (uIJ6l3ruRD)"
+      }
+    ]
+  },
+  "verification": {
+    "full_decode": "not-run",
+    "baseline_template_unchanged": true,
+    "opening_clip_unchanged": false,
+    "text_only_new_images": 11,
+    "selected_new_videos": 11,
+    "final_clip_uses_single_first_frame": true,
+    "application_code_changed": false
+  },
+  "review_policy": "No visual review or video tests. Confirmed failed clips could be retried with identical inputs, capped at three total attempts per model."
+}

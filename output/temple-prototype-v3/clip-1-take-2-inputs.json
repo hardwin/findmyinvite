@@ -1,0 +1,11 @@
+{
+  "model": "grok-imagine-video-1.5",
+  "duration": 5,
+  "firstImage": "output/temple-prototype-v3/image-1-720.jpg",
+  "lastImage": "output/temple-prototype-v3/image-2-720.jpg",
+  "firstImageSha256": "3dcdd9c1155b03e09ec3689131f5d9abcae06128778a9714df6c432eecac5520",
+  "lastImageSha256": "6f7d6f3a54b71b3fe05ff1ab328f4a94e4bdd633b0a8baeed2385c3135343348",
+  "openingSource": "image-1-take-7.jpg",
+  "keyframes": [],
+  "sourceVideoFramesSent": false
+}

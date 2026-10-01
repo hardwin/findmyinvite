@@ -1,0 +1,1266 @@
+{
+  "schema_version": "1.1",
+  "iteration": "socialmedia-college-anime-v1",
+  "name": "Pastel Watercolor College Romance Wedding",
+  "status": "complete-first-version",
+  "assets_root": "output/socialmedia-college-anime-v1",
+  "locked_baseline": {
+    "path": "master_template_v1.json",
+    "sha256": "d99ecbf7e19c0332a51053bca81070dce7101dceeb416e771d3a312067e182aa",
+    "snapshot": "output/socialmedia-college-anime-v1/locked-master-template-v1.json"
+  },
+  "scene_count": 12,
+  "connecting_clip_count": 11,
+  "models": {
+    "image": {
+      "provider": "replicate",
+      "id": "openai/gpt-image-2.5-flare",
+      "credentials_env": "REPLICATE_API_TOKEN"
+    },
+    "video": {
+      "provider": "xai",
+      "id": "grok-imagine-video-1.5",
+      "credentials_env": "XAI_API_KEY",
+      "resolution": "720p",
+      "aspect_ratio": "9:16",
+      "generate_audio": false
+    }
+  },
+  "parameters": {
+    "invitation_lines": "Sounder & Mohan\nFamily\nWedding Invitation",
+    "groom_title": "Sri.",
+    "groom_name": "Ashok Kumar",
+    "bride_title": "Srmt.",
+    "bride_name": "Supriya",
+    "family_lines": "With the Blessings of\nGroom's Parents\nMr. Sounder Rajan\n& Mrs. Punitha\nBride's Parents\nMr. Mohan Krishna\n& Mrs. Prema",
+    "ceremony_lines": "Wedding Ceremony\n7th February 2020\n8:00 a.m.\nIn the Morning",
+    "venue_lines": "Wedding Venue\nLeela Channaiah\nKalyana Mandapa\nVontikoppal\nMysore",
+    "reception_lines": "Reception - Dinner\n6th February 2020\n7:30 p.m. onwards\nLeela Channaiah\nKalyana Mandapa\nVontikoppal, Mysore",
+    "host_lines": "Invited By\nMr. BalaSubramanian\nMrs. Jeevitha\nBaby. Yazhini & Suhas\nWith Love & Blessings",
+    "save_date_lines": "SAVE THE DATE\n6 & 7 FEBRUARY\n2020",
+    "devotional_line_1": "Om Shree",
+    "devotional_line_2": "Ganeshaya Namah",
+    "save_date_inline": "SAVE THE DATE / 6 & 7 FEBRUARY / 2020",
+    "story_tagline": "From Screen to Soul",
+    "final_message": "From a profile in a classroom to a life in our hands — we found forever.",
+    "scene_lines": [
+      "It began between lectures.",
+      "One profile made time pause.",
+      "I stayed for her smile.",
+      "A hello became every day.",
+      "Then we met, at last.",
+      "Conversation felt like coming home.",
+      "Under quiet campus lights...",
+      "From Screen to Soul",
+      "Sri. Ashok Kumar & Srmt. Supriya\nA love worth celebrating",
+      "Reception - Dinner\n6th February 2020 · 7:30 p.m.",
+      "Wedding Ceremony\n7th February 2020 · 8:00 a.m.\nLeela Channaiah Kalyana Mandapa\nVontikoppal, Mysore",
+      "From a profile in a classroom to a life in our hands — we found forever.\nSAVE THE DATE · 6 & 7 FEBRUARY 2020"
+    ]
+  },
+  "copy_assumptions": [
+    "Reception uses the same venue as the wedding because no separate reception venue was provided.",
+    "Bride honorific Srmt. is preserved exactly as requested.",
+    "The ceremony date and morning time are 7 February 2020 at 8:00 a.m.; reception is 6 February 2020 at 7:30 p.m.",
+    "Both families are represented together on the blessing plaque to retain twelve visual scenes.",
+    "Ashok and Supriya are adult university students in the love-story scenes. The supplied wedding dates, venue, and family details are retained in parameters; short story lines carry the on-screen narrative."
+  ],
+  "style": "Portrait 9:16 luxury hand-painted anime film with delicate pastel watercolor paper texture, dimensional but restrained light, expressive adult Indian faces, soft ink edges, nuanced skin tones. Blush pink, powder blue, sage, lavender and ivory with selective champagne foil. Sunbeams through classroom windows, warm campus twilight, luminous sea haze and restrained cinematic bokeh. Quiet emotional stillness, no action spectacle. A turquoise phone case, pressed white daisy and fine blush silk ribbon recur as subtle continuity clues. Typography: elegant airy ivory editorial serif and fine handwritten accents, carefully spaced, clean exact spelling, faint rose-gold glow, readable against calm negative space. No unrelated text, logos, watermarks or random interfaces.",
+  "characters": {
+    "groom": "Ashok Kumar, an adult Indian university student aged about 23, warm medium-brown skin, slender face, soft dark-brown eyes, thick eyebrows, clean-shaven, side-parted wavy black hair. Muted indigo overshirt over an ivory tee, dark trousers, slim silver watch. Later beach scene: tailored ivory linen jacket. Preserve the same face and proportions.",
+    "bride": "Supriya, an adult Indian university student aged about 22, warm medium-brown skin, oval face, dark-brown almond eyes, gently arched brows, small red bindi, center-parted dark hair in a low loose braid, gentle reserved smile. Dusty-rose cardigan, cream blouse, muted teal skirt; later beach scene: pearl-white flowing dress and light shawl. Preserve the same face and proportions."
+  },
+  "particle_motion": "Only sparse watercolor dust, tiny paper-light flecks and drifting pale petals at different depths; 8-12 pieces per calm shot, descending slowly as the camera settles. Small breath, blink, smile or finger motion. Text stays fixed to its physical card, phone or translucent editorial title plane with no morphing.",
+  "generation_policy": {
+    "images": "Text-only Flare for all twelve designed frames, including the exact final quote and date.",
+    "video": "xAI grok-imagine-video-1.5, first-frame continuation and pinned scene-image last frames for all eleven clips.",
+    "automatic_paid_retries": false,
+    "download_outputs_immediately": true,
+    "visual_review": true,
+    "retakes": true,
+    "refinement": "One manual final-clip correction used a newly generated final image to make the exact quote legible."
+  },
+  "output": {
+    "video": "socialmedia-college-anime-v1-final.mp4",
+    "width": 720,
+    "height": 1280,
+    "fps": 24,
+    "aspect_ratio": "9:16",
+    "audio": "silent",
+    "assembly": "Concatenate clips in order without dissolves or transition overlays.",
+    "actual_duration_seconds": 54.458333333333336,
+    "frame_count": 1307,
+    "sha256": "5af808e3e4f07d0a583152ebb949ef55166b86c28cfa7b54f131b6d4bde978f5"
+  },
+  "scenes": [
+    {
+      "index": 1,
+      "id": "scene-01",
+      "name": "The classroom pause",
+      "status": "generated-first-take",
+      "image_prompt_template": "Portrait 9:16 luxury hand-painted anime film with delicate pastel watercolor paper texture, dimensional but restrained light, expressive adult Indian faces, soft ink edges, nuanced skin tones. Blush pink, powder blue, sage, lavender and ivory with selective champagne foil. Sunbeams through classroom windows, warm campus twilight, luminous sea haze and restrained cinematic bokeh. Quiet emotional stillness, no action spectacle. A turquoise phone case, pressed white daisy and fine blush silk ribbon recur as subtle continuity clues. Typography: elegant airy ivory editorial serif and fine handwritten accents, carefully spaced, clean exact spelling, faint rose-gold glow, readable against calm negative space. No unrelated text, logos, watermarks or random interfaces.\nCHARACTERS: Ashok Kumar, an adult Indian university student aged about 23, warm medium-brown skin, slender face, soft dark-brown eyes, thick eyebrows, clean-shaven, side-parted wavy black hair. Muted indigo overshirt over an ivory tee, dark trousers, slim silver watch. Later beach scene: tailored ivory linen jacket. Preserve the same face and proportions. Supriya, an adult Indian university student aged about 22, warm medium-brown skin, oval face, dark-brown almond eyes, gently arched brows, small red bindi, center-parted dark hair in a low loose braid, gentle reserved smile. Dusty-rose cardigan, cream blouse, muted teal skirt; later beach scene: pearl-white flowing dress and light shawl. Preserve the same face and proportions.\nFRAME 1: High-end anime watercolor close medium view of Ashok seated completely still by a broad college classroom window at late afternoon. He holds the turquoise-case phone loosely above a closed notebook; background students are soft, unidentifiable bokeh. A tiny white daisy pressed in the notebook corner. Volumetric amber sun through curtains; open negative space upper left carries the exact title. No visible social app brand or other screen words.\nEXACT ON-SCREEN TEXT: \"It began between lectures.\". No other readable text. Keep text within title-safe area and face-free negative space. One coherent physical place, rich watercolor atmosphere and restrained luxury.",
+      "image_prompt": "Portrait 9:16 luxury hand-painted anime film with delicate pastel watercolor paper texture, dimensional but restrained light, expressive adult Indian faces, soft ink edges, nuanced skin tones. Blush pink, powder blue, sage, lavender and ivory with selective champagne foil. Sunbeams through classroom windows, warm campus twilight, luminous sea haze and restrained cinematic bokeh. Quiet emotional stillness, no action spectacle. A turquoise phone case, pressed white daisy and fine blush silk ribbon recur as subtle continuity clues. Typography: elegant airy ivory editorial serif and fine handwritten accents, carefully spaced, clean exact spelling, faint rose-gold glow, readable against calm negative space. No unrelated text, logos, watermarks or random interfaces.\nCHARACTERS: Ashok Kumar, an adult Indian university student aged about 23, warm medium-brown skin, slender face, soft dark-brown eyes, thick eyebrows, clean-shaven, side-parted wavy black hair. Muted indigo overshirt over an ivory tee, dark trousers, slim silver watch. Later beach scene: tailored ivory linen jacket. Preserve the same face and proportions. Supriya, an adult Indian university student aged about 22, warm medium-brown skin, oval face, dark-brown almond eyes, gently arched brows, small red bindi, center-parted dark hair in a low loose braid, gentle reserved smile. Dusty-rose cardigan, cream blouse, muted teal skirt; later beach scene: pearl-white flowing dress and light shawl. Preserve the same face and proportions.\nFRAME 1: High-end anime watercolor close medium view of Ashok seated completely still by a broad college classroom window at late afternoon. He holds the turquoise-case phone loosely above a closed notebook; background students are soft, unidentifiable bokeh. A tiny white daisy pressed in the notebook corner. Volumetric amber sun through curtains; open negative space upper left carries the exact title. No visible social app brand or other screen words.\nEXACT ON-SCREEN TEXT: \"It began between lectures.\". No other readable text. Keep text within title-safe area and face-free negative space. One coherent physical place, rich watercolor atmosphere and restrained luxury.",
+      "text_fields": [
+        {
+          "role": "story_or_invitation",
+          "text": "It began between lectures."
+        }
+      ],
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-1.jpg",
+      "selected_take": 1,
+      "review_note": "No visual review or retake, as requested."
+    },
+    {
+      "index": 2,
+      "id": "scene-02",
+      "name": "The profile",
+      "status": "generated-first-take",
+      "image_prompt_template": "Portrait 9:16 luxury hand-painted anime film with delicate pastel watercolor paper texture, dimensional but restrained light, expressive adult Indian faces, soft ink edges, nuanced skin tones. Blush pink, powder blue, sage, lavender and ivory with selective champagne foil. Sunbeams through classroom windows, warm campus twilight, luminous sea haze and restrained cinematic bokeh. Quiet emotional stillness, no action spectacle. A turquoise phone case, pressed white daisy and fine blush silk ribbon recur as subtle continuity clues. Typography: elegant airy ivory editorial serif and fine handwritten accents, carefully spaced, clean exact spelling, faint rose-gold glow, readable against calm negative space. No unrelated text, logos, watermarks or random interfaces.\nCHARACTERS: Ashok Kumar, an adult Indian university student aged about 23, warm medium-brown skin, slender face, soft dark-brown eyes, thick eyebrows, clean-shaven, side-parted wavy black hair. Muted indigo overshirt over an ivory tee, dark trousers, slim silver watch. Later beach scene: tailored ivory linen jacket. Preserve the same face and proportions. Supriya, an adult Indian university student aged about 22, warm medium-brown skin, oval face, dark-brown almond eyes, gently arched brows, small red bindi, center-parted dark hair in a low loose braid, gentle reserved smile. Dusty-rose cardigan, cream blouse, muted teal skirt; later beach scene: pearl-white flowing dress and light shawl. Preserve the same face and proportions.\nFRAME 2: Extreme-close three-quarter view of the SAME turquoise-case phone held by Ashok in the SAME sunlit classroom. On screen: a simple unbranded social profile portrait of Supriya, recognizable adult Indian face with dusty-rose cardigan and low braid. Keep UI nearly blank, no fake handles or icons. His fingertips and daisy notebook edge remain visible. Exact title on a translucent blush editorial plane beside the phone, not over her face.\nEXACT ON-SCREEN TEXT: \"One profile made time pause.\". No other readable text. Keep text within title-safe area and face-free negative space. One coherent physical place, rich watercolor atmosphere and restrained luxury.",
+      "image_prompt": "Portrait 9:16 luxury hand-painted anime film with delicate pastel watercolor paper texture, dimensional but restrained light, expressive adult Indian faces, soft ink edges, nuanced skin tones. Blush pink, powder blue, sage, lavender and ivory with selective champagne foil. Sunbeams through classroom windows, warm campus twilight, luminous sea haze and restrained cinematic bokeh. Quiet emotional stillness, no action spectacle. A turquoise phone case, pressed white daisy and fine blush silk ribbon recur as subtle continuity clues. Typography: elegant airy ivory editorial serif and fine handwritten accents, carefully spaced, clean exact spelling, faint rose-gold glow, readable against calm negative space. No unrelated text, logos, watermarks or random interfaces.\nCHARACTERS: Ashok Kumar, an adult Indian university student aged about 23, warm medium-brown skin, slender face, soft dark-brown eyes, thick eyebrows, clean-shaven, side-parted wavy black hair. Muted indigo overshirt over an ivory tee, dark trousers, slim silver watch. Later beach scene: tailored ivory linen jacket. Preserve the same face and proportions. Supriya, an adult Indian university student aged about 22, warm medium-brown skin, oval face, dark-brown almond eyes, gently arched brows, small red bindi, center-parted dark hair in a low loose braid, gentle reserved smile. Dusty-rose cardigan, cream blouse, muted teal skirt; later beach scene: pearl-white flowing dress and light shawl. Preserve the same face and proportions.\nFRAME 2: Extreme-close three-quarter view of the SAME turquoise-case phone held by Ashok in the SAME sunlit classroom. On screen: a simple unbranded social profile portrait of Supriya, recognizable adult Indian face with dusty-rose cardigan and low braid. Keep UI nearly blank, no fake handles or icons. His fingertips and daisy notebook edge remain visible. Exact title on a translucent blush editorial plane beside the phone, not over her face.\nEXACT ON-SCREEN TEXT: \"One profile made time pause.\". No other readable text. Keep text within title-safe area and face-free negative space. One coherent physical place, rich watercolor atmosphere and restrained luxury.",
+      "text_fields": [
+        {
+          "role": "story_or_invitation",
+          "text": "One profile made time pause."
+        }
+      ],
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-2.jpg",
+      "selected_take": 1,
+      "review_note": "No visual review or retake, as requested."
+    },
+    {
+      "index": 3,
+      "name": "His quiet realization",
+      "status": "generated-first-take",
+      "image_prompt_template": "Portrait 9:16 luxury hand-painted anime film with delicate pastel watercolor paper texture, dimensional but restrained light, expressive adult Indian faces, soft ink edges, nuanced skin tones. Blush pink, powder blue, sage, lavender and ivory with selective champagne foil. Sunbeams through classroom windows, warm campus twilight, luminous sea haze and restrained cinematic bokeh. Quiet emotional stillness, no action spectacle. A turquoise phone case, pressed white daisy and fine blush silk ribbon recur as subtle continuity clues. Typography: elegant airy ivory editorial serif and fine handwritten accents, carefully spaced, clean exact spelling, faint rose-gold glow, readable against calm negative space. No unrelated text, logos, watermarks or random interfaces.\nCHARACTERS: Ashok Kumar, an adult Indian university student aged about 23, warm medium-brown skin, slender face, soft dark-brown eyes, thick eyebrows, clean-shaven, side-parted wavy black hair. Muted indigo overshirt over an ivory tee, dark trousers, slim silver watch. Later beach scene: tailored ivory linen jacket. Preserve the same face and proportions. Supriya, an adult Indian university student aged about 22, warm medium-brown skin, oval face, dark-brown almond eyes, gently arched brows, small red bindi, center-parted dark hair in a low loose braid, gentle reserved smile. Dusty-rose cardigan, cream blouse, muted teal skirt; later beach scene: pearl-white flowing dress and light shawl. Preserve the same face and proportions.\nFRAME 3: Close-up of the SAME Ashok still seated in the classroom, phone at lower right, her profile reflected subtly in his eye. His expression shifts to a restrained, genuine smile. Same window light, same indigo overshirt, same turquoise phone case. Exact ivory title floats in calm space left of his face; rose-gold rim glow and delicate dust.\nEXACT ON-SCREEN TEXT: \"I stayed for her smile.\". No other readable text. Keep text within title-safe area and face-free negative space. One coherent physical place, rich watercolor atmosphere and restrained luxury.",
+      "image_prompt": "Portrait 9:16 luxury hand-painted anime film with delicate pastel watercolor paper texture, dimensional but restrained light, expressive adult Indian faces, soft ink edges, nuanced skin tones. Blush pink, powder blue, sage, lavender and ivory with selective champagne foil. Sunbeams through classroom windows, warm campus twilight, luminous sea haze and restrained cinematic bokeh. Quiet emotional stillness, no action spectacle. A turquoise phone case, pressed white daisy and fine blush silk ribbon recur as subtle continuity clues. Typography: elegant airy ivory editorial serif and fine handwritten accents, carefully spaced, clean exact spelling, faint rose-gold glow, readable against calm negative space. No unrelated text, logos, watermarks or random interfaces.\nCHARACTERS: Ashok Kumar, an adult Indian university student aged about 23, warm medium-brown skin, slender face, soft dark-brown eyes, thick eyebrows, clean-shaven, side-parted wavy black hair. Muted indigo overshirt over an ivory tee, dark trousers, slim silver watch. Later beach scene: tailored ivory linen jacket. Preserve the same face and proportions. Supriya, an adult Indian university student aged about 22, warm medium-brown skin, oval face, dark-brown almond eyes, gently arched brows, small red bindi, center-parted dark hair in a low loose braid, gentle reserved smile. Dusty-rose cardigan, cream blouse, muted teal skirt; later beach scene: pearl-white flowing dress and light shawl. Preserve the same face and proportions.\nFRAME 3: Close-up of the SAME Ashok still seated in the classroom, phone at lower right, her profile reflected subtly in his eye. His expression shifts to a restrained, genuine smile. Same window light, same indigo overshirt, same turquoise phone case. Exact ivory title floats in calm space left of his face; rose-gold rim glow and delicate dust.\nEXACT ON-SCREEN TEXT: \"I stayed for her smile.\". No other readable text. Keep text within title-safe area and face-free negative space. One coherent physical place, rich watercolor atmosphere and restrained luxury.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-3.jpg",
+      "image_request_id": "0jexsa80sdrmr0d0xkvbr894zm",
+      "actual_input_path": "image-3-take-1-input.json",
+      "request_metadata": {
+        "id": "0jexsa80sdrmr0d0xkvbr894zm",
+        "status": "succeeded",
+        "model": "openai/gpt-image-2.5-flare",
+        "imageReferences": 0,
+        "metrics": {
+          "image_output_count": 1,
+          "model_variant": "high",
+          "predict_time": 16.66815079,
+          "resolution_target": "9:16",
+          "total_time": 16.727526078
+        },
+        "error": null,
+        "data_removed": false,
+        "outputUrl": "https://replicate.delivery/xezq/t0VazQlkskLeRCBTrtASHG5jjyLySTgvphqviR4qVzAyqKpLA/tmps7cg_nhs.jpeg"
+      },
+      "text_fields": [
+        {
+          "role": "story_or_invitation",
+          "text": "I stayed for her smile."
+        }
+      ],
+      "selected_take": 1,
+      "review_note": "No visual review or retake, as requested."
+    },
+    {
+      "index": 4,
+      "name": "The first message",
+      "status": "generated-first-take",
+      "image_prompt_template": "Portrait 9:16 luxury hand-painted anime film with delicate pastel watercolor paper texture, dimensional but restrained light, expressive adult Indian faces, soft ink edges, nuanced skin tones. Blush pink, powder blue, sage, lavender and ivory with selective champagne foil. Sunbeams through classroom windows, warm campus twilight, luminous sea haze and restrained cinematic bokeh. Quiet emotional stillness, no action spectacle. A turquoise phone case, pressed white daisy and fine blush silk ribbon recur as subtle continuity clues. Typography: elegant airy ivory editorial serif and fine handwritten accents, carefully spaced, clean exact spelling, faint rose-gold glow, readable against calm negative space. No unrelated text, logos, watermarks or random interfaces.\nCHARACTERS: Ashok Kumar, an adult Indian university student aged about 23, warm medium-brown skin, slender face, soft dark-brown eyes, thick eyebrows, clean-shaven, side-parted wavy black hair. Muted indigo overshirt over an ivory tee, dark trousers, slim silver watch. Later beach scene: tailored ivory linen jacket. Preserve the same face and proportions. Supriya, an adult Indian university student aged about 22, warm medium-brown skin, oval face, dark-brown almond eyes, gently arched brows, small red bindi, center-parted dark hair in a low loose braid, gentle reserved smile. Dusty-rose cardigan, cream blouse, muted teal skirt; later beach scene: pearl-white flowing dress and light shawl. Preserve the same face and proportions.\nFRAME 4: Intimate watercolor over-shoulder composition: Ashok at his classroom desk, turquoise phone in hand, one single simple unbranded message bubble carrying the word Hello; Supriya appears as a small clear profile portrait, no duplicate faces. Window and notebook remain the same. The exact narrative title is separate from the phone UI in open space. No fast tapping or flying message bubbles.\nEXACT ON-SCREEN TEXT: \"A hello became every day.\". No other readable text. Keep text within title-safe area and face-free negative space. One coherent physical place, rich watercolor atmosphere and restrained luxury.",
+      "image_prompt": "Portrait 9:16 luxury hand-painted anime film with delicate pastel watercolor paper texture, dimensional but restrained light, expressive adult Indian faces, soft ink edges, nuanced skin tones. Blush pink, powder blue, sage, lavender and ivory with selective champagne foil. Sunbeams through classroom windows, warm campus twilight, luminous sea haze and restrained cinematic bokeh. Quiet emotional stillness, no action spectacle. A turquoise phone case, pressed white daisy and fine blush silk ribbon recur as subtle continuity clues. Typography: elegant airy ivory editorial serif and fine handwritten accents, carefully spaced, clean exact spelling, faint rose-gold glow, readable against calm negative space. No unrelated text, logos, watermarks or random interfaces.\nCHARACTERS: Ashok Kumar, an adult Indian university student aged about 23, warm medium-brown skin, slender face, soft dark-brown eyes, thick eyebrows, clean-shaven, side-parted wavy black hair. Muted indigo overshirt over an ivory tee, dark trousers, slim silver watch. Later beach scene: tailored ivory linen jacket. Preserve the same face and proportions. Supriya, an adult Indian university student aged about 22, warm medium-brown skin, oval face, dark-brown almond eyes, gently arched brows, small red bindi, center-parted dark hair in a low loose braid, gentle reserved smile. Dusty-rose cardigan, cream blouse, muted teal skirt; later beach scene: pearl-white flowing dress and light shawl. Preserve the same face and proportions.\nFRAME 4: Intimate watercolor over-shoulder composition: Ashok at his classroom desk, turquoise phone in hand, one single simple unbranded message bubble carrying the word Hello; Supriya appears as a small clear profile portrait, no duplicate faces. Window and notebook remain the same. The exact narrative title is separate from the phone UI in open space. No fast tapping or flying message bubbles.\nEXACT ON-SCREEN TEXT: \"A hello became every day.\". No other readable text. Keep text within title-safe area and face-free negative space. One coherent physical place, rich watercolor atmosphere and restrained luxury.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-4.jpg",
+      "image_request_id": "zmdnxzc1qsrmy0d0xkv9fetm94",
+      "actual_input_path": "image-4-take-1-input.json",
+      "request_metadata": {
+        "id": "zmdnxzc1qsrmy0d0xkv9fetm94",
+        "status": "succeeded",
+        "model": "openai/gpt-image-2.5-flare",
+        "imageReferences": 0,
+        "metrics": {
+          "image_output_count": 1,
+          "model_variant": "high",
+          "predict_time": 17.502282364,
+          "resolution_target": "9:16",
+          "total_time": 17.520145592
+        },
+        "error": null,
+        "data_removed": false,
+        "outputUrl": "https://replicate.delivery/xezq/g2vgl9qCndaRINI0k2I9eRy6Mn6y4s7HR0414kmZxucDrKpLA/tmppiyqgxui.jpeg"
+      },
+      "text_fields": [
+        {
+          "role": "story_or_invitation",
+          "text": "A hello became every day."
+        }
+      ],
+      "selected_take": 1,
+      "review_note": "No visual review or retake, as requested."
+    },
+    {
+      "index": 5,
+      "name": "First meeting",
+      "status": "generated-first-take",
+      "image_prompt_template": "Portrait 9:16 luxury hand-painted anime film with delicate pastel watercolor paper texture, dimensional but restrained light, expressive adult Indian faces, soft ink edges, nuanced skin tones. Blush pink, powder blue, sage, lavender and ivory with selective champagne foil. Sunbeams through classroom windows, warm campus twilight, luminous sea haze and restrained cinematic bokeh. Quiet emotional stillness, no action spectacle. A turquoise phone case, pressed white daisy and fine blush silk ribbon recur as subtle continuity clues. Typography: elegant airy ivory editorial serif and fine handwritten accents, carefully spaced, clean exact spelling, faint rose-gold glow, readable against calm negative space. No unrelated text, logos, watermarks or random interfaces.\nCHARACTERS: Ashok Kumar, an adult Indian university student aged about 23, warm medium-brown skin, slender face, soft dark-brown eyes, thick eyebrows, clean-shaven, side-parted wavy black hair. Muted indigo overshirt over an ivory tee, dark trousers, slim silver watch. Later beach scene: tailored ivory linen jacket. Preserve the same face and proportions. Supriya, an adult Indian university student aged about 22, warm medium-brown skin, oval face, dark-brown almond eyes, gently arched brows, small red bindi, center-parted dark hair in a low loose braid, gentle reserved smile. Dusty-rose cardigan, cream blouse, muted teal skirt; later beach scene: pearl-white flowing dress and light shawl. Preserve the same face and proportions.\nFRAME 5: Late-afternoon campus corridor immediately outside the classroom. Adult Ashok in indigo overshirt and adult Supriya in dusty-rose cardigan stand a comfortable step apart beside the same window and blue classroom door. Both hold their own stillness and exchange tentative smiles. The turquoise phone remains in his hand, daisy tucked into her notebook; no walking. Soft blush and pale gold shafts; exact title in open upper space.\nEXACT ON-SCREEN TEXT: \"Then we met, at last.\". No other readable text. Keep text within title-safe area and face-free negative space. One coherent physical place, rich watercolor atmosphere and restrained luxury.",
+      "image_prompt": "Portrait 9:16 luxury hand-painted anime film with delicate pastel watercolor paper texture, dimensional but restrained light, expressive adult Indian faces, soft ink edges, nuanced skin tones. Blush pink, powder blue, sage, lavender and ivory with selective champagne foil. Sunbeams through classroom windows, warm campus twilight, luminous sea haze and restrained cinematic bokeh. Quiet emotional stillness, no action spectacle. A turquoise phone case, pressed white daisy and fine blush silk ribbon recur as subtle continuity clues. Typography: elegant airy ivory editorial serif and fine handwritten accents, carefully spaced, clean exact spelling, faint rose-gold glow, readable against calm negative space. No unrelated text, logos, watermarks or random interfaces.\nCHARACTERS: Ashok Kumar, an adult Indian university student aged about 23, warm medium-brown skin, slender face, soft dark-brown eyes, thick eyebrows, clean-shaven, side-parted wavy black hair. Muted indigo overshirt over an ivory tee, dark trousers, slim silver watch. Later beach scene: tailored ivory linen jacket. Preserve the same face and proportions. Supriya, an adult Indian university student aged about 22, warm medium-brown skin, oval face, dark-brown almond eyes, gently arched brows, small red bindi, center-parted dark hair in a low loose braid, gentle reserved smile. Dusty-rose cardigan, cream blouse, muted teal skirt; later beach scene: pearl-white flowing dress and light shawl. Preserve the same face and proportions.\nFRAME 5: Late-afternoon campus corridor immediately outside the classroom. Adult Ashok in indigo overshirt and adult Supriya in dusty-rose cardigan stand a comfortable step apart beside the same window and blue classroom door. Both hold their own stillness and exchange tentative smiles. The turquoise phone remains in his hand, daisy tucked into her notebook; no walking. Soft blush and pale gold shafts; exact title in open upper space.\nEXACT ON-SCREEN TEXT: \"Then we met, at last.\". No other readable text. Keep text within title-safe area and face-free negative space. One coherent physical place, rich watercolor atmosphere and restrained luxury.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-5.jpg",
+      "image_request_id": "ct37gkhzxsrmy0d0xkvvd4ysmc",
+      "actual_input_path": "image-5-take-1-input.json",
+      "request_metadata": {
+        "id": "ct37gkhzxsrmy0d0xkvvd4ysmc",
+        "status": "succeeded",
+        "model": "openai/gpt-image-2.5-flare",
+        "imageReferences": 0,
+        "metrics": {
+          "image_output_count": 1,
+          "model_variant": "high",
+          "predict_time": 19.776931309,
+          "resolution_target": "9:16",
+          "total_time": 19.793163982
+        },
+        "error": null,
+        "data_removed": false,
+        "outputUrl": "https://replicate.delivery/xezq/cWVXC3SOu3LNJ9lWGhZFgW4o6hRCPVVOc1UBuD1FllUuVl0F/tmp5zwkk5jh.jpeg"
+      },
+      "text_fields": [
+        {
+          "role": "story_or_invitation",
+          "text": "Then we met, at last."
+        }
+      ],
+      "selected_take": 1,
+      "review_note": "No visual review or retake, as requested."
+    },
+    {
+      "index": 6,
+      "name": "Conversation",
+      "status": "generated-first-take",
+      "image_prompt_template": "Portrait 9:16 luxury hand-painted anime film with delicate pastel watercolor paper texture, dimensional but restrained light, expressive adult Indian faces, soft ink edges, nuanced skin tones. Blush pink, powder blue, sage, lavender and ivory with selective champagne foil. Sunbeams through classroom windows, warm campus twilight, luminous sea haze and restrained cinematic bokeh. Quiet emotional stillness, no action spectacle. A turquoise phone case, pressed white daisy and fine blush silk ribbon recur as subtle continuity clues. Typography: elegant airy ivory editorial serif and fine handwritten accents, carefully spaced, clean exact spelling, faint rose-gold glow, readable against calm negative space. No unrelated text, logos, watermarks or random interfaces.\nCHARACTERS: Ashok Kumar, an adult Indian university student aged about 23, warm medium-brown skin, slender face, soft dark-brown eyes, thick eyebrows, clean-shaven, side-parted wavy black hair. Muted indigo overshirt over an ivory tee, dark trousers, slim silver watch. Later beach scene: tailored ivory linen jacket. Preserve the same face and proportions. Supriya, an adult Indian university student aged about 22, warm medium-brown skin, oval face, dark-brown almond eyes, gently arched brows, small red bindi, center-parted dark hair in a low loose braid, gentle reserved smile. Dusty-rose cardigan, cream blouse, muted teal skirt; later beach scene: pearl-white flowing dress and light shawl. Preserve the same face and proportions.\nFRAME 6: Quiet campus courtyard bench at golden hour, close two-shot of the SAME couple seated side by side with notebooks on their laps, talking softly. Ashok’s turquoise phone is set on the bench, Supriya’s pressed white daisy rests in her book. Loose watercolor foliage and creamy architecture blur behind; no crowds or movement. Exact title on a pale translucent field near the foliage.\nEXACT ON-SCREEN TEXT: \"Conversation felt like coming home.\". No other readable text. Keep text within title-safe area and face-free negative space. One coherent physical place, rich watercolor atmosphere and restrained luxury.",
+      "image_prompt": "Portrait 9:16 luxury hand-painted anime film with delicate pastel watercolor paper texture, dimensional but restrained light, expressive adult Indian faces, soft ink edges, nuanced skin tones. Blush pink, powder blue, sage, lavender and ivory with selective champagne foil. Sunbeams through classroom windows, warm campus twilight, luminous sea haze and restrained cinematic bokeh. Quiet emotional stillness, no action spectacle. A turquoise phone case, pressed white daisy and fine blush silk ribbon recur as subtle continuity clues. Typography: elegant airy ivory editorial serif and fine handwritten accents, carefully spaced, clean exact spelling, faint rose-gold glow, readable against calm negative space. No unrelated text, logos, watermarks or random interfaces.\nCHARACTERS: Ashok Kumar, an adult Indian university student aged about 23, warm medium-brown skin, slender face, soft dark-brown eyes, thick eyebrows, clean-shaven, side-parted wavy black hair. Muted indigo overshirt over an ivory tee, dark trousers, slim silver watch. Later beach scene: tailored ivory linen jacket. Preserve the same face and proportions. Supriya, an adult Indian university student aged about 22, warm medium-brown skin, oval face, dark-brown almond eyes, gently arched brows, small red bindi, center-parted dark hair in a low loose braid, gentle reserved smile. Dusty-rose cardigan, cream blouse, muted teal skirt; later beach scene: pearl-white flowing dress and light shawl. Preserve the same face and proportions.\nFRAME 6: Quiet campus courtyard bench at golden hour, close two-shot of the SAME couple seated side by side with notebooks on their laps, talking softly. Ashok’s turquoise phone is set on the bench, Supriya’s pressed white daisy rests in her book. Loose watercolor foliage and creamy architecture blur behind; no crowds or movement. Exact title on a pale translucent field near the foliage.\nEXACT ON-SCREEN TEXT: \"Conversation felt like coming home.\". No other readable text. Keep text within title-safe area and face-free negative space. One coherent physical place, rich watercolor atmosphere and restrained luxury.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-6.jpg",
+      "image_request_id": "rjtbrtz8k9rmr0d0xkvttk3s9w",
+      "actual_input_path": "image-6-take-1-input.json",
+      "request_metadata": {
+        "id": "rjtbrtz8k9rmr0d0xkvttk3s9w",
+        "status": "succeeded",
+        "model": "openai/gpt-image-2.5-flare",
+        "imageReferences": 0,
+        "metrics": {
+          "image_output_count": 1,
+          "model_variant": "high",
+          "predict_time": 16.767259932,
+          "resolution_target": "9:16",
+          "total_time": 16.784759774
+        },
+        "error": null,
+        "data_removed": false,
+        "outputUrl": "https://replicate.delivery/xezq/IspfJHYZhpVJCCfCW0qurwiYY48jfFeUKjf1CV9AvssM8qS6C/tmpc_2seg9c.jpeg"
+      },
+      "text_fields": [
+        {
+          "role": "story_or_invitation",
+          "text": "Conversation felt like coming home."
+        }
+      ],
+      "selected_take": 1,
+      "review_note": "No visual review or retake, as requested."
+    },
+    {
+      "index": 7,
+      "name": "Campus twilight",
+      "status": "generated-first-take",
+      "image_prompt_template": "Portrait 9:16 luxury hand-painted anime film with delicate pastel watercolor paper texture, dimensional but restrained light, expressive adult Indian faces, soft ink edges, nuanced skin tones. Blush pink, powder blue, sage, lavender and ivory with selective champagne foil. Sunbeams through classroom windows, warm campus twilight, luminous sea haze and restrained cinematic bokeh. Quiet emotional stillness, no action spectacle. A turquoise phone case, pressed white daisy and fine blush silk ribbon recur as subtle continuity clues. Typography: elegant airy ivory editorial serif and fine handwritten accents, carefully spaced, clean exact spelling, faint rose-gold glow, readable against calm negative space. No unrelated text, logos, watermarks or random interfaces.\nCHARACTERS: Ashok Kumar, an adult Indian university student aged about 23, warm medium-brown skin, slender face, soft dark-brown eyes, thick eyebrows, clean-shaven, side-parted wavy black hair. Muted indigo overshirt over an ivory tee, dark trousers, slim silver watch. Later beach scene: tailored ivory linen jacket. Preserve the same face and proportions. Supriya, an adult Indian university student aged about 22, warm medium-brown skin, oval face, dark-brown almond eyes, gently arched brows, small red bindi, center-parted dark hair in a low loose braid, gentle reserved smile. Dusty-rose cardigan, cream blouse, muted teal skirt; later beach scene: pearl-white flowing dress and light shawl. Preserve the same face and proportions.\nFRAME 7: The SAME couple standing side by side under a campus avenue of trees at early blue hour, warm pin lights scattered deep in the background. They are still, close, no steps or walking; a tiny breeze lifts her loose hair. Same travel clothes, turquoise phone partly visible. Dark lavender sky, soft cyan and amber practical glows; exact line suspended high between branches.\nEXACT ON-SCREEN TEXT: \"Under quiet campus lights...\". No other readable text. Keep text within title-safe area and face-free negative space. One coherent physical place, rich watercolor atmosphere and restrained luxury.",
+      "image_prompt": "Portrait 9:16 luxury hand-painted anime film with delicate pastel watercolor paper texture, dimensional but restrained light, expressive adult Indian faces, soft ink edges, nuanced skin tones. Blush pink, powder blue, sage, lavender and ivory with selective champagne foil. Sunbeams through classroom windows, warm campus twilight, luminous sea haze and restrained cinematic bokeh. Quiet emotional stillness, no action spectacle. A turquoise phone case, pressed white daisy and fine blush silk ribbon recur as subtle continuity clues. Typography: elegant airy ivory editorial serif and fine handwritten accents, carefully spaced, clean exact spelling, faint rose-gold glow, readable against calm negative space. No unrelated text, logos, watermarks or random interfaces.\nCHARACTERS: Ashok Kumar, an adult Indian university student aged about 23, warm medium-brown skin, slender face, soft dark-brown eyes, thick eyebrows, clean-shaven, side-parted wavy black hair. Muted indigo overshirt over an ivory tee, dark trousers, slim silver watch. Later beach scene: tailored ivory linen jacket. Preserve the same face and proportions. Supriya, an adult Indian university student aged about 22, warm medium-brown skin, oval face, dark-brown almond eyes, gently arched brows, small red bindi, center-parted dark hair in a low loose braid, gentle reserved smile. Dusty-rose cardigan, cream blouse, muted teal skirt; later beach scene: pearl-white flowing dress and light shawl. Preserve the same face and proportions.\nFRAME 7: The SAME couple standing side by side under a campus avenue of trees at early blue hour, warm pin lights scattered deep in the background. They are still, close, no steps or walking; a tiny breeze lifts her loose hair. Same travel clothes, turquoise phone partly visible. Dark lavender sky, soft cyan and amber practical glows; exact line suspended high between branches.\nEXACT ON-SCREEN TEXT: \"Under quiet campus lights...\". No other readable text. Keep text within title-safe area and face-free negative space. One coherent physical place, rich watercolor atmosphere and restrained luxury.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-7.jpg",
+      "image_request_id": "qx21rhj6s1rmy0d0xpev91g7b4",
+      "actual_input_path": "image-7-take-1-input.json",
+      "request_metadata": {
+        "id": "qx21rhj6s1rmy0d0xpev91g7b4",
+        "status": "succeeded",
+        "model": "openai/gpt-image-2.5-flare",
+        "imageReferences": 0,
+        "metrics": {
+          "image_output_count": 1,
+          "model_variant": "high",
+          "predict_time": 19.969138814,
+          "resolution_target": "9:16",
+          "total_time": 20.022104892
+        },
+        "error": null,
+        "data_removed": false,
+        "outputUrl": "https://replicate.delivery/xezq/ZPXSUXShXpJrGd3fXirTlGnR40aaSZ0I9YkBefW7melqDgJdB/tmpv8num2su.jpeg"
+      },
+      "text_fields": [
+        {
+          "role": "story_or_invitation",
+          "text": "Under quiet campus lights..."
+        }
+      ],
+      "selected_take": 1,
+      "review_note": "No visual review or retake, as requested."
+    },
+    {
+      "index": 8,
+      "name": "The choice",
+      "status": "generated-first-take",
+      "image_prompt_template": "Portrait 9:16 luxury hand-painted anime film with delicate pastel watercolor paper texture, dimensional but restrained light, expressive adult Indian faces, soft ink edges, nuanced skin tones. Blush pink, powder blue, sage, lavender and ivory with selective champagne foil. Sunbeams through classroom windows, warm campus twilight, luminous sea haze and restrained cinematic bokeh. Quiet emotional stillness, no action spectacle. A turquoise phone case, pressed white daisy and fine blush silk ribbon recur as subtle continuity clues. Typography: elegant airy ivory editorial serif and fine handwritten accents, carefully spaced, clean exact spelling, faint rose-gold glow, readable against calm negative space. No unrelated text, logos, watermarks or random interfaces.\nCHARACTERS: Ashok Kumar, an adult Indian university student aged about 23, warm medium-brown skin, slender face, soft dark-brown eyes, thick eyebrows, clean-shaven, side-parted wavy black hair. Muted indigo overshirt over an ivory tee, dark trousers, slim silver watch. Later beach scene: tailored ivory linen jacket. Preserve the same face and proportions. Supriya, an adult Indian university student aged about 22, warm medium-brown skin, oval face, dark-brown almond eyes, gently arched brows, small red bindi, center-parted dark hair in a low loose braid, gentle reserved smile. Dusty-rose cardigan, cream blouse, muted teal skirt; later beach scene: pearl-white flowing dress and light shawl. Preserve the same face and proportions.\nFRAME 8: Intimate close-up of the SAME couple under the same twilight tree lights; their hands meet for the first time, faces softly visible in profile. A faint blush silk ribbon tied around the daisy notebook marks continuity. Reflected lights become watercolor stars, not magical explosions. Display exact tagline large in elegant ivory serif between their profiles.\nEXACT ON-SCREEN TEXT: \"From Screen to Soul\". No other readable text. Keep text within title-safe area and face-free negative space. One coherent physical place, rich watercolor atmosphere and restrained luxury.",
+      "image_prompt": "Portrait 9:16 luxury hand-painted anime film with delicate pastel watercolor paper texture, dimensional but restrained light, expressive adult Indian faces, soft ink edges, nuanced skin tones. Blush pink, powder blue, sage, lavender and ivory with selective champagne foil. Sunbeams through classroom windows, warm campus twilight, luminous sea haze and restrained cinematic bokeh. Quiet emotional stillness, no action spectacle. A turquoise phone case, pressed white daisy and fine blush silk ribbon recur as subtle continuity clues. Typography: elegant airy ivory editorial serif and fine handwritten accents, carefully spaced, clean exact spelling, faint rose-gold glow, readable against calm negative space. No unrelated text, logos, watermarks or random interfaces.\nCHARACTERS: Ashok Kumar, an adult Indian university student aged about 23, warm medium-brown skin, slender face, soft dark-brown eyes, thick eyebrows, clean-shaven, side-parted wavy black hair. Muted indigo overshirt over an ivory tee, dark trousers, slim silver watch. Later beach scene: tailored ivory linen jacket. Preserve the same face and proportions. Supriya, an adult Indian university student aged about 22, warm medium-brown skin, oval face, dark-brown almond eyes, gently arched brows, small red bindi, center-parted dark hair in a low loose braid, gentle reserved smile. Dusty-rose cardigan, cream blouse, muted teal skirt; later beach scene: pearl-white flowing dress and light shawl. Preserve the same face and proportions.\nFRAME 8: Intimate close-up of the SAME couple under the same twilight tree lights; their hands meet for the first time, faces softly visible in profile. A faint blush silk ribbon tied around the daisy notebook marks continuity. Reflected lights become watercolor stars, not magical explosions. Display exact tagline large in elegant ivory serif between their profiles.\nEXACT ON-SCREEN TEXT: \"From Screen to Soul\". No other readable text. Keep text within title-safe area and face-free negative space. One coherent physical place, rich watercolor atmosphere and restrained luxury.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-8.jpg",
+      "image_request_id": "6x1na9zx99rmw0d0xper3ch1e4",
+      "actual_input_path": "image-8-take-1-input.json",
+      "request_metadata": {
+        "id": "6x1na9zx99rmw0d0xper3ch1e4",
+        "status": "succeeded",
+        "model": "openai/gpt-image-2.5-flare",
+        "imageReferences": 0,
+        "metrics": {
+          "image_output_count": 1,
+          "model_variant": "high",
+          "predict_time": 18.736296654,
+          "resolution_target": "9:16",
+          "total_time": 18.758454929
+        },
+        "error": null,
+        "data_removed": false,
+        "outputUrl": "https://replicate.delivery/xezq/vVSgVgQeNkX5CCZdw79UPrJRvWHVTffohY2wv9tQcCsPDwkuA/tmp546vs_ig.jpeg"
+      },
+      "text_fields": [
+        {
+          "role": "story_or_invitation",
+          "text": "From Screen to Soul"
+        }
+      ],
+      "selected_take": 1,
+      "review_note": "No visual review or retake, as requested."
+    },
+    {
+      "index": 9,
+      "name": "Our names",
+      "status": "generated-first-take",
+      "image_prompt_template": "Portrait 9:16 luxury hand-painted anime film with delicate pastel watercolor paper texture, dimensional but restrained light, expressive adult Indian faces, soft ink edges, nuanced skin tones. Blush pink, powder blue, sage, lavender and ivory with selective champagne foil. Sunbeams through classroom windows, warm campus twilight, luminous sea haze and restrained cinematic bokeh. Quiet emotional stillness, no action spectacle. A turquoise phone case, pressed white daisy and fine blush silk ribbon recur as subtle continuity clues. Typography: elegant airy ivory editorial serif and fine handwritten accents, carefully spaced, clean exact spelling, faint rose-gold glow, readable against calm negative space. No unrelated text, logos, watermarks or random interfaces.\nCHARACTERS: Ashok Kumar, an adult Indian university student aged about 23, warm medium-brown skin, slender face, soft dark-brown eyes, thick eyebrows, clean-shaven, side-parted wavy black hair. Muted indigo overshirt over an ivory tee, dark trousers, slim silver watch. Later beach scene: tailored ivory linen jacket. Preserve the same face and proportions. Supriya, an adult Indian university student aged about 22, warm medium-brown skin, oval face, dark-brown almond eyes, gently arched brows, small red bindi, center-parted dark hair in a low loose braid, gentle reserved smile. Dusty-rose cardigan, cream blouse, muted teal skirt; later beach scene: pearl-white flowing dress and light shawl. Preserve the same face and proportions.\nFRAME 9: The SAME adult couple now on a quiet beach at late sunset, face identities exact; he wears ivory linen jacket, she wears pearl-white dress and light shawl. They stand still by the waterline, hands joined, seen from a flattering close three-quarter angle. The daisy and blush ribbon are tucked at her wrist. Calm sea, pastel apricot-lavender horizon. Exact couple names and short line on a refined floating translucent ivory invitation card, never crossing faces.\nEXACT ON-SCREEN TEXT: \"Sri. Ashok Kumar & Srmt. Supriya\\nA love worth celebrating\". No other readable text. Keep text within title-safe area and face-free negative space. One coherent physical place, rich watercolor atmosphere and restrained luxury.",
+      "image_prompt": "Portrait 9:16 luxury hand-painted anime film with delicate pastel watercolor paper texture, dimensional but restrained light, expressive adult Indian faces, soft ink edges, nuanced skin tones. Blush pink, powder blue, sage, lavender and ivory with selective champagne foil. Sunbeams through classroom windows, warm campus twilight, luminous sea haze and restrained cinematic bokeh. Quiet emotional stillness, no action spectacle. A turquoise phone case, pressed white daisy and fine blush silk ribbon recur as subtle continuity clues. Typography: elegant airy ivory editorial serif and fine handwritten accents, carefully spaced, clean exact spelling, faint rose-gold glow, readable against calm negative space. No unrelated text, logos, watermarks or random interfaces.\nCHARACTERS: Ashok Kumar, an adult Indian university student aged about 23, warm medium-brown skin, slender face, soft dark-brown eyes, thick eyebrows, clean-shaven, side-parted wavy black hair. Muted indigo overshirt over an ivory tee, dark trousers, slim silver watch. Later beach scene: tailored ivory linen jacket. Preserve the same face and proportions. Supriya, an adult Indian university student aged about 22, warm medium-brown skin, oval face, dark-brown almond eyes, gently arched brows, small red bindi, center-parted dark hair in a low loose braid, gentle reserved smile. Dusty-rose cardigan, cream blouse, muted teal skirt; later beach scene: pearl-white flowing dress and light shawl. Preserve the same face and proportions.\nFRAME 9: The SAME adult couple now on a quiet beach at late sunset, face identities exact; he wears ivory linen jacket, she wears pearl-white dress and light shawl. They stand still by the waterline, hands joined, seen from a flattering close three-quarter angle. The daisy and blush ribbon are tucked at her wrist. Calm sea, pastel apricot-lavender horizon. Exact couple names and short line on a refined floating translucent ivory invitation card, never crossing faces.\nEXACT ON-SCREEN TEXT: \"Sri. Ashok Kumar & Srmt. Supriya\\nA love worth celebrating\". No other readable text. Keep text within title-safe area and face-free negative space. One coherent physical place, rich watercolor atmosphere and restrained luxury.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-9.jpg",
+      "image_request_id": "1e3qqzz3f5rmw0d0xpfanase70",
+      "actual_input_path": "image-9-take-1-input.json",
+      "request_metadata": {
+        "id": "1e3qqzz3f5rmw0d0xpfanase70",
+        "status": "succeeded",
+        "model": "openai/gpt-image-2.5-flare",
+        "imageReferences": 0,
+        "metrics": {
+          "image_output_count": 1,
+          "model_variant": "high",
+          "predict_time": 17.296723852,
+          "resolution_target": "9:16",
+          "total_time": 17.316086218
+        },
+        "error": null,
+        "data_removed": false,
+        "outputUrl": "https://replicate.delivery/xezq/QOH8SeeAkHgol0t77Wfh54Gf0SQtVVm80VOIXEQnNEIHKgJdB/tmprnjqu6lw.jpeg"
+      },
+      "text_fields": [
+        {
+          "role": "story_or_invitation",
+          "text": "Sri. Ashok Kumar & Srmt. Supriya\nA love worth celebrating"
+        }
+      ],
+      "selected_take": 1,
+      "review_note": "No visual review or retake, as requested."
+    },
+    {
+      "index": 10,
+      "name": "Reception card",
+      "status": "generated-first-take",
+      "image_prompt_template": "Portrait 9:16 luxury hand-painted anime film with delicate pastel watercolor paper texture, dimensional but restrained light, expressive adult Indian faces, soft ink edges, nuanced skin tones. Blush pink, powder blue, sage, lavender and ivory with selective champagne foil. Sunbeams through classroom windows, warm campus twilight, luminous sea haze and restrained cinematic bokeh. Quiet emotional stillness, no action spectacle. A turquoise phone case, pressed white daisy and fine blush silk ribbon recur as subtle continuity clues. Typography: elegant airy ivory editorial serif and fine handwritten accents, carefully spaced, clean exact spelling, faint rose-gold glow, readable against calm negative space. No unrelated text, logos, watermarks or random interfaces.\nCHARACTERS: Ashok Kumar, an adult Indian university student aged about 23, warm medium-brown skin, slender face, soft dark-brown eyes, thick eyebrows, clean-shaven, side-parted wavy black hair. Muted indigo overshirt over an ivory tee, dark trousers, slim silver watch. Later beach scene: tailored ivory linen jacket. Preserve the same face and proportions. Supriya, an adult Indian university student aged about 22, warm medium-brown skin, oval face, dark-brown almond eyes, gently arched brows, small red bindi, center-parted dark hair in a low loose braid, gentle reserved smile. Dusty-rose cardigan, cream blouse, muted teal skirt; later beach scene: pearl-white flowing dress and light shawl. Preserve the same face and proportions.\nFRAME 10: Same beach shortly after sunset, couple softly visible behind a single elegant ivory invitation card on a low linen-draped table. Warm bistro lights and pale roses line the shore, luxurious but quiet. Exactly the reception copy, large dark slate-blue serif with rose-gold hairline border and good spacing; no additional wording. Same horizon and blush ribbon tied to the card.\nEXACT ON-SCREEN TEXT: \"Reception - Dinner\\n6th February 2020 · 7:30 p.m.\". No other readable text. Keep text within title-safe area and face-free negative space. One coherent physical place, rich watercolor atmosphere and restrained luxury.",
+      "image_prompt": "Portrait 9:16 luxury hand-painted anime film with delicate pastel watercolor paper texture, dimensional but restrained light, expressive adult Indian faces, soft ink edges, nuanced skin tones. Blush pink, powder blue, sage, lavender and ivory with selective champagne foil. Sunbeams through classroom windows, warm campus twilight, luminous sea haze and restrained cinematic bokeh. Quiet emotional stillness, no action spectacle. A turquoise phone case, pressed white daisy and fine blush silk ribbon recur as subtle continuity clues. Typography: elegant airy ivory editorial serif and fine handwritten accents, carefully spaced, clean exact spelling, faint rose-gold glow, readable against calm negative space. No unrelated text, logos, watermarks or random interfaces.\nCHARACTERS: Ashok Kumar, an adult Indian university student aged about 23, warm medium-brown skin, slender face, soft dark-brown eyes, thick eyebrows, clean-shaven, side-parted wavy black hair. Muted indigo overshirt over an ivory tee, dark trousers, slim silver watch. Later beach scene: tailored ivory linen jacket. Preserve the same face and proportions. Supriya, an adult Indian university student aged about 22, warm medium-brown skin, oval face, dark-brown almond eyes, gently arched brows, small red bindi, center-parted dark hair in a low loose braid, gentle reserved smile. Dusty-rose cardigan, cream blouse, muted teal skirt; later beach scene: pearl-white flowing dress and light shawl. Preserve the same face and proportions.\nFRAME 10: Same beach shortly after sunset, couple softly visible behind a single elegant ivory invitation card on a low linen-draped table. Warm bistro lights and pale roses line the shore, luxurious but quiet. Exactly the reception copy, large dark slate-blue serif with rose-gold hairline border and good spacing; no additional wording. Same horizon and blush ribbon tied to the card.\nEXACT ON-SCREEN TEXT: \"Reception - Dinner\\n6th February 2020 · 7:30 p.m.\". No other readable text. Keep text within title-safe area and face-free negative space. One coherent physical place, rich watercolor atmosphere and restrained luxury.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-10.jpg",
+      "image_request_id": "0t2q1s4w4drmr0d0xpfvvtyv3g",
+      "actual_input_path": "image-10-take-1-input.json",
+      "request_metadata": {
+        "id": "0t2q1s4w4drmr0d0xpfvvtyv3g",
+        "status": "succeeded",
+        "model": "openai/gpt-image-2.5-flare",
+        "imageReferences": 0,
+        "metrics": {
+          "image_output_count": 1,
+          "model_variant": "high",
+          "predict_time": 20.581614666,
+          "resolution_target": "9:16",
+          "total_time": 20.600620449
+        },
+        "error": null,
+        "data_removed": false,
+        "outputUrl": "https://replicate.delivery/xezq/EsSdaZkU3s4sIlefvRyGe0eIoQlil1soeEveGRjTTs4A1Am0F/tmplnz7yiq4.jpeg"
+      },
+      "text_fields": [
+        {
+          "role": "story_or_invitation",
+          "text": "Reception - Dinner\n6th February 2020 · 7:30 p.m."
+        }
+      ],
+      "selected_take": 1,
+      "review_note": "No visual review or retake, as requested."
+    },
+    {
+      "index": 11,
+      "name": "Wedding details",
+      "status": "generated-first-take",
+      "image_prompt_template": "Portrait 9:16 luxury hand-painted anime film with delicate pastel watercolor paper texture, dimensional but restrained light, expressive adult Indian faces, soft ink edges, nuanced skin tones. Blush pink, powder blue, sage, lavender and ivory with selective champagne foil. Sunbeams through classroom windows, warm campus twilight, luminous sea haze and restrained cinematic bokeh. Quiet emotional stillness, no action spectacle. A turquoise phone case, pressed white daisy and fine blush silk ribbon recur as subtle continuity clues. Typography: elegant airy ivory editorial serif and fine handwritten accents, carefully spaced, clean exact spelling, faint rose-gold glow, readable against calm negative space. No unrelated text, logos, watermarks or random interfaces.\nCHARACTERS: Ashok Kumar, an adult Indian university student aged about 23, warm medium-brown skin, slender face, soft dark-brown eyes, thick eyebrows, clean-shaven, side-parted wavy black hair. Muted indigo overshirt over an ivory tee, dark trousers, slim silver watch. Later beach scene: tailored ivory linen jacket. Preserve the same face and proportions. Supriya, an adult Indian university student aged about 22, warm medium-brown skin, oval face, dark-brown almond eyes, gently arched brows, small red bindi, center-parted dark hair in a low loose braid, gentle reserved smile. Dusty-rose cardigan, cream blouse, muted teal skirt; later beach scene: pearl-white flowing dress and light shawl. Preserve the same face and proportions.\nFRAME 11: Beach at blue hour, SAME single invitation card turned to a new face on the SAME linen table, no duplicate board. Couple stand still in background near soft sea light. Exactly the wedding date, time and venue copy, centered legible dark slate-blue serif, generous line spacing, pale rose-gold edge. Keep the sea horizon, lights, ribbon and table fixed; no new venue building appears.\nEXACT ON-SCREEN TEXT: \"Wedding Ceremony\\n7th February 2020 · 8:00 a.m.\\nLeela Channaiah Kalyana Mandapa\\nVontikoppal, Mysore\". No other readable text. Keep text within title-safe area and face-free negative space. One coherent physical place, rich watercolor atmosphere and restrained luxury.",
+      "image_prompt": "Portrait 9:16 luxury hand-painted anime film with delicate pastel watercolor paper texture, dimensional but restrained light, expressive adult Indian faces, soft ink edges, nuanced skin tones. Blush pink, powder blue, sage, lavender and ivory with selective champagne foil. Sunbeams through classroom windows, warm campus twilight, luminous sea haze and restrained cinematic bokeh. Quiet emotional stillness, no action spectacle. A turquoise phone case, pressed white daisy and fine blush silk ribbon recur as subtle continuity clues. Typography: elegant airy ivory editorial serif and fine handwritten accents, carefully spaced, clean exact spelling, faint rose-gold glow, readable against calm negative space. No unrelated text, logos, watermarks or random interfaces.\nCHARACTERS: Ashok Kumar, an adult Indian university student aged about 23, warm medium-brown skin, slender face, soft dark-brown eyes, thick eyebrows, clean-shaven, side-parted wavy black hair. Muted indigo overshirt over an ivory tee, dark trousers, slim silver watch. Later beach scene: tailored ivory linen jacket. Preserve the same face and proportions. Supriya, an adult Indian university student aged about 22, warm medium-brown skin, oval face, dark-brown almond eyes, gently arched brows, small red bindi, center-parted dark hair in a low loose braid, gentle reserved smile. Dusty-rose cardigan, cream blouse, muted teal skirt; later beach scene: pearl-white flowing dress and light shawl. Preserve the same face and proportions.\nFRAME 11: Beach at blue hour, SAME single invitation card turned to a new face on the SAME linen table, no duplicate board. Couple stand still in background near soft sea light. Exactly the wedding date, time and venue copy, centered legible dark slate-blue serif, generous line spacing, pale rose-gold edge. Keep the sea horizon, lights, ribbon and table fixed; no new venue building appears.\nEXACT ON-SCREEN TEXT: \"Wedding Ceremony\\n7th February 2020 · 8:00 a.m.\\nLeela Channaiah Kalyana Mandapa\\nVontikoppal, Mysore\". No other readable text. Keep text within title-safe area and face-free negative space. One coherent physical place, rich watercolor atmosphere and restrained luxury.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-11.jpg",
+      "image_request_id": "ckxnzzaxpsrmw0d0xpg8t2pej0",
+      "actual_input_path": "image-11-take-1-input.json",
+      "request_metadata": {
+        "id": "ckxnzzaxpsrmw0d0xpg8t2pej0",
+        "status": "succeeded",
+        "model": "openai/gpt-image-2.5-flare",
+        "imageReferences": 0,
+        "metrics": {
+          "image_output_count": 1,
+          "model_variant": "high",
+          "predict_time": 20.758251475,
+          "resolution_target": "9:16",
+          "total_time": 20.774165096
+        },
+        "error": null,
+        "data_removed": false,
+        "outputUrl": "https://replicate.delivery/xezq/G5uBkIWxFT7CM9cvIkUctllH1Ya9sZ51lYevTLNmw1fFEYSXA/tmpdji6fmwd.jpeg"
+      },
+      "text_fields": [
+        {
+          "role": "story_or_invitation",
+          "text": "Wedding Ceremony\n7th February 2020 · 8:00 a.m.\nLeela Channaiah Kalyana Mandapa\nVontikoppal, Mysore"
+        }
+      ],
+      "selected_take": 1,
+      "review_note": "No visual review or retake, as requested."
+    },
+    {
+      "index": 12,
+      "name": "Forever — final printed card",
+      "status": "generated-final-anchor",
+      "image_prompt": "Portrait 9:16 luxury hand-painted pastel watercolor anime wedding film. The SAME adult Indian Ashok Kumar and Supriya with consistent faces, ivory linen jacket and pearl-white dress are together at the SAME quiet beach at night. They stand very close behind the SAME single ivory invitation card on the SAME linen-draped table. Their heads lean together gently; joined hands are visible beside the card. Daisy, blush silk ribbon, softly blurred sea horizon, tiny distant warm lanterns and a narrow moonbeam. Exactly ONE card; no other boards or signs. The card is face-on and fills the lower central two-thirds with generous blank margins, detailed rose-gold hairline edge and delicate watercolor blossoms. Print these two text groups clearly on its clean face in elegant dark slate-blue editorial serif, no words from the previous wedding-details face: \"From a profile in a classroom\nto a life in our hands —\nwe found forever.\" and, beneath a wide gap, \"SAVE THE DATE\n6 & 7 FEBRUARY 2020\". Preserve the exact words, punctuation, date and order. Both adult faces visible softly above card, emotionally intimate and still. Luxury cinematic lighting, fine drifting paper-light flecks, natural hands, no watermark, no extra text.",
+      "image_prompt_template": "Portrait 9:16 luxury hand-painted pastel watercolor anime wedding film. The SAME adult Indian Ashok Kumar and Supriya with consistent faces, ivory linen jacket and pearl-white dress are together at the SAME quiet beach at night. They stand very close behind the SAME single ivory invitation card on the SAME linen-draped table. Their heads lean together gently; joined hands are visible beside the card. Daisy, blush silk ribbon, softly blurred sea horizon, tiny distant warm lanterns and a narrow moonbeam. Exactly ONE card; no other boards or signs. The card is face-on and fills the lower central two-thirds with generous blank margins, detailed rose-gold hairline edge and delicate watercolor blossoms. Print these two text groups clearly on its clean face in elegant dark slate-blue editorial serif, no words from the previous wedding-details face: \"From a profile in a classroom\nto a life in our hands —\nwe found forever.\" and, beneath a wide gap, \"SAVE THE DATE\n6 & 7 FEBRUARY 2020\". Preserve the exact words, punctuation, date and order. Both adult faces visible softly above card, emotionally intimate and still. Luxury cinematic lighting, fine drifting paper-light flecks, natural hands, no watermark, no extra text.",
+      "image_path": "image-12.jpg",
+      "reason": "Avoid competing independent board/gateway layouts. Keep one date board from scene 11 throughout.",
+      "text_fields": [
+        {
+          "role": "final_message",
+          "text": "From a profile in a classroom to a life in our hands — we found forever."
+        },
+        {
+          "role": "save_date",
+          "text": "SAVE THE DATE · 6 & 7 FEBRUARY 2020"
+        }
+      ],
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "selected_take": 1,
+      "review_note": "Exact final quote verified in Flare first take."
+    }
+  ],
+  "clips": [
+    {
+      "index": 1,
+      "from": 1,
+      "to": 2,
+      "duration": 5,
+      "prompt": "0-1.0s: slow inward glide from window to Ashok. 1.0-3.5s: ease down toward his turquoise phone. 3.5-5.0s: settle into the phone profile anchor; only fingertip movement and drifting dust.",
+      "id": "clip-01",
+      "status": "generated-first-take",
+      "camera": "Slow push from the classroom window toward Ashok and his phone; his finger barely scrolls.",
+      "video_prompt_template": "Portrait 9:16 luxury pastel watercolor anime romance. The FIRST FRAME is the saved exact start; the LAST FRAME is the exact next scene image. Preserve adult Ashok and Supriya identity, wardrobe continuity within location, the turquoise phone, daisy and blush ribbon. Camera moves slowly and intimately, with decisive but soft ease-in and ease-out; no fast action, walking, extra people, morphing faces, duplicate cards or new text. Sparse paper-light flecks drift independently as camera settles. Existing typography stays crisp, fixed and legible.\n\nSHOT 1 TO 2: 0-1.0s: slow inward glide from window to Ashok. 1.0-3.5s: ease down toward his turquoise phone. 3.5-5.0s: settle into the phone profile anchor; only fingertip movement and drifting dust. Transition target: Extreme-close three-quarter view of the SAME turquoise-case phone held by Ashok in the SAME sunlit classroom. On screen: a simple unbranded social profile portrait of Supriya, recognizable adult Indian face with dusty-rose cardigan and low braid. Keep UI nearly blank, no fake handles or icons. His fingertips and daisy notebook edge remain visible. Exact title on a translucent blush editorial plane beside the phone, not over her face. Keep the exact target composition and its text: \"One profile made time pause.\". Source line remains only until leaving its scene. No dissolve, cut or unexplained location switch.",
+      "video_prompt": "Portrait 9:16 luxury pastel watercolor anime romance. The FIRST FRAME is the saved exact start; the LAST FRAME is the exact next scene image. Preserve adult Ashok and Supriya identity, wardrobe continuity within location, the turquoise phone, daisy and blush ribbon. Camera moves slowly and intimately, with decisive but soft ease-in and ease-out; no fast action, walking, extra people, morphing faces, duplicate cards or new text. Sparse paper-light flecks drift independently as camera settles. Existing typography stays crisp, fixed and legible.\n\nSHOT 1 TO 2: 0-1.0s: slow inward glide from window to Ashok. 1.0-3.5s: ease down toward his turquoise phone. 3.5-5.0s: settle into the phone profile anchor; only fingertip movement and drifting dust. Transition target: Extreme-close three-quarter view of the SAME turquoise-case phone held by Ashok in the SAME sunlit classroom. On screen: a simple unbranded social profile portrait of Supriya, recognizable adult Indian face with dusty-rose cardigan and low braid. Keep UI nearly blank, no fake handles or icons. His fingertips and daisy notebook edge remain visible. Exact title on a translucent blush editorial plane beside the phone, not over her face. Keep the exact target composition and its text: \"One profile made time pause.\". Source line remains only until leaving its scene. No dissolve, cut or unexplained location switch.",
+      "video_path": "clip-1.mp4",
+      "final_frame_path": "clip-1-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "scene-image",
+          "scene": 1
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 2
+        },
+        "interior_keyframes": []
+      },
+      "request_metadata": {
+        "requestId": "6cfca7f6-1115-949a-80bd-2499a3b4fc6e",
+        "status": "done",
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "usage": {
+          "cost_in_usd_ticks": 7200000000
+        },
+        "outputUrl": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-6cfca7f6-1115-949a-80bd-2499a3b4fc6e.mp4"
+      },
+      "selected_take": 1,
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "121"
+          }
+        ],
+        "format": {
+          "duration": "5.042000"
+        }
+      },
+      "actual_input": {
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "aspect_ratio": "9:16",
+        "resolution": "720p",
+        "firstImage": "output/socialmedia-college-anime-v1/clip-1-take-1-first.jpg",
+        "lastImage": "output/socialmedia-college-anime-v1/clip-1-take-1-last.jpg",
+        "firstImageSha256": "7f27b69dda6283ddb02f8ebd5b8c266944baf635c53f66751365406321d048b6",
+        "lastImageSha256": "ef206dffdcdff9f84e1b7b8a47939612eb85bc507d5ed9669bc3502b51789c46",
+        "keyframes": [],
+        "sourceVideoFramesSent": false
+      },
+      "review_note": "First take selected; no creative retake.",
+      "timeline": {
+        "start_seconds": 0,
+        "end_seconds": 5.041666666666667
+      }
+    },
+    {
+      "index": 2,
+      "from": 2,
+      "to": 3,
+      "duration": 4,
+      "status": "generated-first-take",
+      "camera": "Gently move through the phone glass, holding her portrait sharp and the classroom soft; microscopic screen reflection travels across the glass.",
+      "video_prompt_template": "Portrait 9:16 luxury pastel watercolor anime romance. The FIRST FRAME is the saved exact start; the LAST FRAME is the exact next scene image. Preserve adult Ashok and Supriya identity, wardrobe continuity within location, the turquoise phone, daisy and blush ribbon. Camera moves slowly and intimately, with decisive but soft ease-in and ease-out; no fast action, walking, extra people, morphing faces, duplicate cards or new text. Sparse paper-light flecks drift independently as camera settles. Existing typography stays crisp, fixed and legible.\n\nSHOT 2 TO 3: 0-1.2s: camera skims left along fixed phone glass. 1.2-2.9s: orbit gently upward with classroom reflections moving across it. 2.9-4.0s: rack focus and draw back to Ashok’s face; no screen or face duplication. Transition target: Close-up of the SAME Ashok still seated in the classroom, phone at lower right, her profile reflected subtly in his eye. His expression shifts to a restrained, genuine smile. Same window light, same indigo overshirt, same turquoise phone case. Exact ivory title floats in calm space left of his face; rose-gold rim glow and delicate dust. Keep the exact target composition and its text: \"I stayed for her smile.\". Source line remains only until leaving its scene. No dissolve, cut or unexplained location switch.",
+      "video_prompt": "Portrait 9:16 luxury pastel watercolor anime romance. The FIRST FRAME is the saved exact start; the LAST FRAME is the exact next scene image. Preserve adult Ashok and Supriya identity, wardrobe continuity within location, the turquoise phone, daisy and blush ribbon. Camera moves slowly and intimately, with decisive but soft ease-in and ease-out; no fast action, walking, extra people, morphing faces, duplicate cards or new text. Sparse paper-light flecks drift independently as camera settles. Existing typography stays crisp, fixed and legible.\n\nSHOT 2 TO 3: 0-1.2s: camera skims left along fixed phone glass. 1.2-2.9s: orbit gently upward with classroom reflections moving across it. 2.9-4.0s: rack focus and draw back to Ashok’s face; no screen or face duplication. Transition target: Close-up of the SAME Ashok still seated in the classroom, phone at lower right, her profile reflected subtly in his eye. His expression shifts to a restrained, genuine smile. Same window light, same indigo overshirt, same turquoise phone case. Exact ivory title floats in calm space left of his face; rose-gold rim glow and delicate dust. Keep the exact target composition and its text: \"I stayed for her smile.\". Source line remains only until leaving its scene. No dissolve, cut or unexplained location switch.",
+      "video_path": "clip-2.mp4",
+      "final_frame_path": "clip-2-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 1
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 3
+        }
+      },
+      "prompt": "0-1.2s: camera skims left along fixed phone glass. 1.2-2.9s: orbit gently upward with classroom reflections moving across it. 2.9-4.0s: rack focus and draw back to Ashok’s face; no screen or face duplication.",
+      "request_metadata": {
+        "requestId": "3c1613b2-6e22-9e56-b632-cd73453b7572",
+        "status": "done",
+        "model": "grok-imagine-video-1.5",
+        "duration": 4,
+        "usage": {
+          "cost_in_usd_ticks": 5800000000
+        },
+        "outputUrl": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-3c1613b2-6e22-9e56-b632-cd73453b7572.mp4"
+      },
+      "selected_take": 1,
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "97"
+          }
+        ],
+        "format": {
+          "duration": "4.042000"
+        }
+      },
+      "actual_input": {
+        "model": "grok-imagine-video-1.5",
+        "duration": 4,
+        "aspect_ratio": "9:16",
+        "resolution": "720p",
+        "firstImage": "output/socialmedia-college-anime-v1/clip-2-take-1-first.jpg",
+        "lastImage": "output/socialmedia-college-anime-v1/clip-2-take-1-last.jpg",
+        "firstImageSha256": "732ea20f5004870731e36c1dc8406d30de3e181e9b631918fd4acd379dcb4c9e",
+        "lastImageSha256": "6a9755dffc75081a3496011f8b9933275a5702cdb2a1e0743bdb0726c81f1d9c",
+        "keyframes": [],
+        "sourceVideoFramesSent": false
+      },
+      "review_note": "First take selected; no creative retake.",
+      "timeline": {
+        "start_seconds": 5.041666666666667,
+        "end_seconds": 9.083333333333334
+      }
+    },
+    {
+      "index": 3,
+      "from": 3,
+      "to": 4,
+      "duration": 5,
+      "status": "generated-first-take",
+      "camera": "Pull focus from the profile reflected in the phone to Ashok’s eyes while the camera slowly arcs right, then settles.",
+      "video_prompt_template": "Portrait 9:16 luxury pastel watercolor anime romance. The FIRST FRAME is the saved exact start; the LAST FRAME is the exact next scene image. Preserve adult Ashok and Supriya identity, wardrobe continuity within location, the turquoise phone, daisy and blush ribbon. Camera moves slowly and intimately, with decisive but soft ease-in and ease-out; no fast action, walking, extra people, morphing faces, duplicate cards or new text. Sparse paper-light flecks drift independently as camera settles. Existing typography stays crisp, fixed and legible.\n\nSHOT 3 TO 4: 0-2.0s: close arc across his eyes. 2.0-3.5s: tilt to his phone and resting thumb. 3.5-5.0s: ease into the first-message composition; no frantic typing. Transition target: Intimate watercolor over-shoulder composition: Ashok at his classroom desk, turquoise phone in hand, one single simple unbranded message bubble carrying the word Hello; Supriya appears as a small clear profile portrait, no duplicate faces. Window and notebook remain the same. The exact narrative title is separate from the phone UI in open space. No fast tapping or flying message bubbles. Keep the exact target composition and its text: \"A hello became every day.\". Source line remains only until leaving its scene. No dissolve, cut or unexplained location switch.",
+      "video_prompt": "Portrait 9:16 luxury pastel watercolor anime romance. The FIRST FRAME is the saved exact start; the LAST FRAME is the exact next scene image. Preserve adult Ashok and Supriya identity, wardrobe continuity within location, the turquoise phone, daisy and blush ribbon. Camera moves slowly and intimately, with decisive but soft ease-in and ease-out; no fast action, walking, extra people, morphing faces, duplicate cards or new text. Sparse paper-light flecks drift independently as camera settles. Existing typography stays crisp, fixed and legible.\n\nSHOT 3 TO 4: 0-2.0s: close arc across his eyes. 2.0-3.5s: tilt to his phone and resting thumb. 3.5-5.0s: ease into the first-message composition; no frantic typing. Transition target: Intimate watercolor over-shoulder composition: Ashok at his classroom desk, turquoise phone in hand, one single simple unbranded message bubble carrying the word Hello; Supriya appears as a small clear profile portrait, no duplicate faces. Window and notebook remain the same. The exact narrative title is separate from the phone UI in open space. No fast tapping or flying message bubbles. Keep the exact target composition and its text: \"A hello became every day.\". Source line remains only until leaving its scene. No dissolve, cut or unexplained location switch.",
+      "video_path": "clip-3.mp4",
+      "final_frame_path": "clip-3-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 2
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 4
+        }
+      },
+      "prompt": "0-2.0s: close arc across his eyes. 2.0-3.5s: tilt to his phone and resting thumb. 3.5-5.0s: ease into the first-message composition; no frantic typing.",
+      "request_metadata": {
+        "requestId": "878fcea1-f574-9c72-90a6-18e968f55b6e",
+        "status": "done",
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "usage": {
+          "cost_in_usd_ticks": 7200000000
+        },
+        "outputUrl": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-878fcea1-f574-9c72-90a6-18e968f55b6e.mp4"
+      },
+      "selected_take": 1,
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "121"
+          }
+        ],
+        "format": {
+          "duration": "5.042000"
+        }
+      },
+      "actual_input": {
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "aspect_ratio": "9:16",
+        "resolution": "720p",
+        "firstImage": "output/socialmedia-college-anime-v1/clip-3-take-1-first.jpg",
+        "lastImage": "output/socialmedia-college-anime-v1/clip-3-take-1-last.jpg",
+        "firstImageSha256": "229fe8dff5b7e75f61f8dffdbe33c2bd02c0ddc465ffa92cc604db72e0d03251",
+        "lastImageSha256": "8ebc28560d93bbfad60c4cece3f496ae0b35a0228836c06a8815b4d782b6e989",
+        "keyframes": [],
+        "sourceVideoFramesSent": false
+      },
+      "review_note": "First take selected; no creative retake.",
+      "timeline": {
+        "start_seconds": 9.083333333333334,
+        "end_seconds": 14.125
+      }
+    },
+    {
+      "index": 4,
+      "from": 4,
+      "to": 5,
+      "duration": 5,
+      "status": "generated-first-take",
+      "camera": "Arc gently around Ashok’s shoulder to the phone; one message appears, then the camera lifts toward the sunlit classroom doorway.",
+      "video_prompt_template": "Portrait 9:16 luxury pastel watercolor anime romance. The FIRST FRAME is the saved exact start; the LAST FRAME is the exact next scene image. Preserve adult Ashok and Supriya identity, wardrobe continuity within location, the turquoise phone, daisy and blush ribbon. Camera moves slowly and intimately, with decisive but soft ease-in and ease-out; no fast action, walking, extra people, morphing faces, duplicate cards or new text. Sparse paper-light flecks drift independently as camera settles. Existing typography stays crisp, fixed and legible.\n\nSHOT 4 TO 5: 0-1.5s: drift beside the one message on the phone. 1.5-3.6s: lift toward the same blue classroom doorway, using real doorway parallax. 3.6-5.0s: settle on the two standing figures in the corridor; no fade or teleport. Transition target: Late-afternoon campus corridor immediately outside the classroom. Adult Ashok in indigo overshirt and adult Supriya in dusty-rose cardigan stand a comfortable step apart beside the same window and blue classroom door. Both hold their own stillness and exchange tentative smiles. The turquoise phone remains in his hand, daisy tucked into her notebook; no walking. Soft blush and pale gold shafts; exact title in open upper space. Keep the exact target composition and its text: \"Then we met, at last.\". Source line remains only until leaving its scene. No dissolve, cut or unexplained location switch.",
+      "video_prompt": "Portrait 9:16 luxury pastel watercolor anime romance. The FIRST FRAME is the saved exact start; the LAST FRAME is the exact next scene image. Preserve adult Ashok and Supriya identity, wardrobe continuity within location, the turquoise phone, daisy and blush ribbon. Camera moves slowly and intimately, with decisive but soft ease-in and ease-out; no fast action, walking, extra people, morphing faces, duplicate cards or new text. Sparse paper-light flecks drift independently as camera settles. Existing typography stays crisp, fixed and legible.\n\nSHOT 4 TO 5: 0-1.5s: drift beside the one message on the phone. 1.5-3.6s: lift toward the same blue classroom doorway, using real doorway parallax. 3.6-5.0s: settle on the two standing figures in the corridor; no fade or teleport. Transition target: Late-afternoon campus corridor immediately outside the classroom. Adult Ashok in indigo overshirt and adult Supriya in dusty-rose cardigan stand a comfortable step apart beside the same window and blue classroom door. Both hold their own stillness and exchange tentative smiles. The turquoise phone remains in his hand, daisy tucked into her notebook; no walking. Soft blush and pale gold shafts; exact title in open upper space. Keep the exact target composition and its text: \"Then we met, at last.\". Source line remains only until leaving its scene. No dissolve, cut or unexplained location switch.",
+      "video_path": "clip-4.mp4",
+      "final_frame_path": "clip-4-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 3
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 5
+        }
+      },
+      "prompt": "0-1.5s: drift beside the one message on the phone. 1.5-3.6s: lift toward the same blue classroom doorway, using real doorway parallax. 3.6-5.0s: settle on the two standing figures in the corridor; no fade or teleport.",
+      "request_metadata": {
+        "requestId": "2a36fa31-dc10-9bff-8b48-1ae896b1d287",
+        "status": "done",
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "usage": {
+          "cost_in_usd_ticks": 7200000000
+        },
+        "outputUrl": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-2a36fa31-dc10-9bff-8b48-1ae896b1d287.mp4"
+      },
+      "selected_take": 1,
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "121"
+          }
+        ],
+        "format": {
+          "duration": "5.042000"
+        }
+      },
+      "actual_input": {
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "aspect_ratio": "9:16",
+        "resolution": "720p",
+        "firstImage": "output/socialmedia-college-anime-v1/clip-4-take-1-first.jpg",
+        "lastImage": "output/socialmedia-college-anime-v1/clip-4-take-1-last.jpg",
+        "firstImageSha256": "7dc66737caa22d327a5da7c4db7da29f45fab4db96f43dca9954100597ddd8ed",
+        "lastImageSha256": "63f275aeb511feb693025001c8ebfb322a5ec30e22c16f2bb75a49084c5c7b1b",
+        "keyframes": [],
+        "sourceVideoFramesSent": false
+      },
+      "review_note": "First take selected; no creative retake.",
+      "timeline": {
+        "start_seconds": 14.125,
+        "end_seconds": 19.166666666666668
+      }
+    },
+    {
+      "index": 5,
+      "from": 5,
+      "to": 6,
+      "duration": 5,
+      "status": "generated-first-take",
+      "camera": "Camera floats out through the classroom doorway into a slow two-person arc; their eyes meet with tiny smiles, feet planted.",
+      "video_prompt_template": "Portrait 9:16 luxury pastel watercolor anime romance. The FIRST FRAME is the saved exact start; the LAST FRAME is the exact next scene image. Preserve adult Ashok and Supriya identity, wardrobe continuity within location, the turquoise phone, daisy and blush ribbon. Camera moves slowly and intimately, with decisive but soft ease-in and ease-out; no fast action, walking, extra people, morphing faces, duplicate cards or new text. Sparse paper-light flecks drift independently as camera settles. Existing typography stays crisp, fixed and legible.\n\nSHOT 5 TO 6: 0-1.4s: float across their quiet eye contact. 1.4-3.6s: curve past the corridor window toward the adjacent courtyard bench. 3.6-5.0s: ease onto the seated conversation, coherent campus geography. Transition target: Quiet campus courtyard bench at golden hour, close two-shot of the SAME couple seated side by side with notebooks on their laps, talking softly. Ashok’s turquoise phone is set on the bench, Supriya’s pressed white daisy rests in her book. Loose watercolor foliage and creamy architecture blur behind; no crowds or movement. Exact title on a pale translucent field near the foliage. Keep the exact target composition and its text: \"Conversation felt like coming home.\". Source line remains only until leaving its scene. No dissolve, cut or unexplained location switch.",
+      "video_prompt": "Portrait 9:16 luxury pastel watercolor anime romance. The FIRST FRAME is the saved exact start; the LAST FRAME is the exact next scene image. Preserve adult Ashok and Supriya identity, wardrobe continuity within location, the turquoise phone, daisy and blush ribbon. Camera moves slowly and intimately, with decisive but soft ease-in and ease-out; no fast action, walking, extra people, morphing faces, duplicate cards or new text. Sparse paper-light flecks drift independently as camera settles. Existing typography stays crisp, fixed and legible.\n\nSHOT 5 TO 6: 0-1.4s: float across their quiet eye contact. 1.4-3.6s: curve past the corridor window toward the adjacent courtyard bench. 3.6-5.0s: ease onto the seated conversation, coherent campus geography. Transition target: Quiet campus courtyard bench at golden hour, close two-shot of the SAME couple seated side by side with notebooks on their laps, talking softly. Ashok’s turquoise phone is set on the bench, Supriya’s pressed white daisy rests in her book. Loose watercolor foliage and creamy architecture blur behind; no crowds or movement. Exact title on a pale translucent field near the foliage. Keep the exact target composition and its text: \"Conversation felt like coming home.\". Source line remains only until leaving its scene. No dissolve, cut or unexplained location switch.",
+      "video_path": "clip-5.mp4",
+      "final_frame_path": "clip-5-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 4
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 6
+        }
+      },
+      "prompt": "0-1.4s: float across their quiet eye contact. 1.4-3.6s: curve past the corridor window toward the adjacent courtyard bench. 3.6-5.0s: ease onto the seated conversation, coherent campus geography.",
+      "request_metadata": {
+        "requestId": "f0950bee-8e38-905c-8e17-f528ae01e026",
+        "status": "done",
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "usage": {
+          "cost_in_usd_ticks": 7200000000
+        },
+        "outputUrl": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-f0950bee-8e38-905c-8e17-f528ae01e026.mp4"
+      },
+      "selected_take": 1,
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "121"
+          }
+        ],
+        "format": {
+          "duration": "5.042000"
+        }
+      },
+      "actual_input": {
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "aspect_ratio": "9:16",
+        "resolution": "720p",
+        "firstImage": "output/socialmedia-college-anime-v1/clip-5-take-1-first.jpg",
+        "lastImage": "output/socialmedia-college-anime-v1/clip-5-take-1-last.jpg",
+        "firstImageSha256": "27f53ec9531fd1ee62198ad7c127a730ce2b5cf7651a1d0df0ad9b33c773b5a8",
+        "lastImageSha256": "8440cc606d17f204361d846d282a817a8ce23f5bdb9d3a6558b086abbd4c80f9",
+        "keyframes": [],
+        "sourceVideoFramesSent": false
+      },
+      "review_note": "First take selected; no creative retake.",
+      "timeline": {
+        "start_seconds": 19.166666666666668,
+        "end_seconds": 24.208333333333332
+      }
+    },
+    {
+      "index": 6,
+      "from": 6,
+      "to": 7,
+      "duration": 5,
+      "status": "generated-first-take",
+      "camera": "Slow 45-degree orbit at bench height, lingering on their hands and faces as a small smile is returned.",
+      "video_prompt_template": "Portrait 9:16 luxury pastel watercolor anime romance. The FIRST FRAME is the saved exact start; the LAST FRAME is the exact next scene image. Preserve adult Ashok and Supriya identity, wardrobe continuity within location, the turquoise phone, daisy and blush ribbon. Camera moves slowly and intimately, with decisive but soft ease-in and ease-out; no fast action, walking, extra people, morphing faces, duplicate cards or new text. Sparse paper-light flecks drift independently as camera settles. Existing typography stays crisp, fixed and legible.\n\nSHOT 6 TO 7: 0-1.6s: close orbit around their seated conversation. 1.6-3.5s: rise past the same tree canopy as sunset deepens naturally. 3.5-5.0s: settle on them still standing under early evening lights; no walking. Transition target: The SAME couple standing side by side under a campus avenue of trees at early blue hour, warm pin lights scattered deep in the background. They are still, close, no steps or walking; a tiny breeze lifts her loose hair. Same travel clothes, turquoise phone partly visible. Dark lavender sky, soft cyan and amber practical glows; exact line suspended high between branches. Keep the exact target composition and its text: \"Under quiet campus lights...\". Source line remains only until leaving its scene. No dissolve, cut or unexplained location switch.",
+      "video_prompt": "Portrait 9:16 luxury pastel watercolor anime romance. The FIRST FRAME is the saved exact start; the LAST FRAME is the exact next scene image. Preserve adult Ashok and Supriya identity, wardrobe continuity within location, the turquoise phone, daisy and blush ribbon. Camera moves slowly and intimately, with decisive but soft ease-in and ease-out; no fast action, walking, extra people, morphing faces, duplicate cards or new text. Sparse paper-light flecks drift independently as camera settles. Existing typography stays crisp, fixed and legible.\n\nSHOT 6 TO 7: 0-1.6s: close orbit around their seated conversation. 1.6-3.5s: rise past the same tree canopy as sunset deepens naturally. 3.5-5.0s: settle on them still standing under early evening lights; no walking. Transition target: The SAME couple standing side by side under a campus avenue of trees at early blue hour, warm pin lights scattered deep in the background. They are still, close, no steps or walking; a tiny breeze lifts her loose hair. Same travel clothes, turquoise phone partly visible. Dark lavender sky, soft cyan and amber practical glows; exact line suspended high between branches. Keep the exact target composition and its text: \"Under quiet campus lights...\". Source line remains only until leaving its scene. No dissolve, cut or unexplained location switch.",
+      "video_path": "clip-6.mp4",
+      "final_frame_path": "clip-6-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 5
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 7
+        }
+      },
+      "prompt": "0-1.6s: close orbit around their seated conversation. 1.6-3.5s: rise past the same tree canopy as sunset deepens naturally. 3.5-5.0s: settle on them still standing under early evening lights; no walking.",
+      "request_metadata": {
+        "requestId": "fb81ff61-69fa-9dc8-a2a0-e43998ffcf9e",
+        "status": "done",
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "usage": {
+          "cost_in_usd_ticks": 7200000000
+        },
+        "outputUrl": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-fb81ff61-69fa-9dc8-a2a0-e43998ffcf9e.mp4"
+      },
+      "selected_take": 1,
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "121"
+          }
+        ],
+        "format": {
+          "duration": "5.042000"
+        }
+      },
+      "actual_input": {
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "aspect_ratio": "9:16",
+        "resolution": "720p",
+        "firstImage": "output/socialmedia-college-anime-v1/clip-6-take-1-first.jpg",
+        "lastImage": "output/socialmedia-college-anime-v1/clip-6-take-1-last.jpg",
+        "firstImageSha256": "2cecede75125550ff0d9535321dc15590a011c7cb4a9dea8a3420c62453b2260",
+        "lastImageSha256": "63f632763760ebdf92900b5b1d7e74908cc451f5e31641a62a0133a80279cd7e",
+        "keyframes": [],
+        "sourceVideoFramesSent": false
+      },
+      "review_note": "First take selected; no creative retake.",
+      "timeline": {
+        "start_seconds": 24.208333333333332,
+        "end_seconds": 29.25
+      }
+    },
+    {
+      "index": 7,
+      "from": 7,
+      "to": 8,
+      "duration": 5,
+      "status": "generated-first-take",
+      "camera": "Glide laterally along the tree avenue, easing nearly to a stop as their hands come close but do not yet touch.",
+      "video_prompt_template": "Portrait 9:16 luxury pastel watercolor anime romance. The FIRST FRAME is the saved exact start; the LAST FRAME is the exact next scene image. Preserve adult Ashok and Supriya identity, wardrobe continuity within location, the turquoise phone, daisy and blush ribbon. Camera moves slowly and intimately, with decisive but soft ease-in and ease-out; no fast action, walking, extra people, morphing faces, duplicate cards or new text. Sparse paper-light flecks drift independently as camera settles. Existing typography stays crisp, fixed and legible.\n\nSHOT 7 TO 8: 0-1.8s: lateral glide along tree lights. 1.8-3.8s: camera dips toward their almost-touching hands. 3.8-5.0s: slowly rise to the held-hand close-up and tagline. Transition target: Intimate close-up of the SAME couple under the same twilight tree lights; their hands meet for the first time, faces softly visible in profile. A faint blush silk ribbon tied around the daisy notebook marks continuity. Reflected lights become watercolor stars, not magical explosions. Display exact tagline large in elegant ivory serif between their profiles. Keep the exact target composition and its text: \"From Screen to Soul\". Source line remains only until leaving its scene. No dissolve, cut or unexplained location switch.",
+      "video_prompt": "Portrait 9:16 luxury pastel watercolor anime romance. The FIRST FRAME is the saved exact start; the LAST FRAME is the exact next scene image. Preserve adult Ashok and Supriya identity, wardrobe continuity within location, the turquoise phone, daisy and blush ribbon. Camera moves slowly and intimately, with decisive but soft ease-in and ease-out; no fast action, walking, extra people, morphing faces, duplicate cards or new text. Sparse paper-light flecks drift independently as camera settles. Existing typography stays crisp, fixed and legible.\n\nSHOT 7 TO 8: 0-1.8s: lateral glide along tree lights. 1.8-3.8s: camera dips toward their almost-touching hands. 3.8-5.0s: slowly rise to the held-hand close-up and tagline. Transition target: Intimate close-up of the SAME couple under the same twilight tree lights; their hands meet for the first time, faces softly visible in profile. A faint blush silk ribbon tied around the daisy notebook marks continuity. Reflected lights become watercolor stars, not magical explosions. Display exact tagline large in elegant ivory serif between their profiles. Keep the exact target composition and its text: \"From Screen to Soul\". Source line remains only until leaving its scene. No dissolve, cut or unexplained location switch.",
+      "video_path": "clip-7.mp4",
+      "final_frame_path": "clip-7-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 6
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 8
+        }
+      },
+      "prompt": "0-1.8s: lateral glide along tree lights. 1.8-3.8s: camera dips toward their almost-touching hands. 3.8-5.0s: slowly rise to the held-hand close-up and tagline.",
+      "request_metadata": {
+        "requestId": "3058e341-34e5-9f56-944c-1357760b746d",
+        "status": "done",
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "usage": {
+          "cost_in_usd_ticks": 7200000000
+        },
+        "outputUrl": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-3058e341-34e5-9f56-944c-1357760b746d.mp4"
+      },
+      "selected_take": 1,
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "121"
+          }
+        ],
+        "format": {
+          "duration": "5.042000"
+        }
+      },
+      "actual_input": {
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "aspect_ratio": "9:16",
+        "resolution": "720p",
+        "firstImage": "output/socialmedia-college-anime-v1/clip-7-take-1-first.jpg",
+        "lastImage": "output/socialmedia-college-anime-v1/clip-7-take-1-last.jpg",
+        "firstImageSha256": "c5400f66cae401e13ea11934457f86a95f9231f2594eed1f6d5ecadd9c486616",
+        "lastImageSha256": "82668afdf14725628954ae5ae2738b93b70f021af4194a6881cc2fbb2d8aa098",
+        "keyframes": [],
+        "sourceVideoFramesSent": false
+      },
+      "review_note": "First take selected; no creative retake.",
+      "timeline": {
+        "start_seconds": 29.25,
+        "end_seconds": 34.291666666666664
+      }
+    },
+    {
+      "index": 8,
+      "from": 8,
+      "to": 9,
+      "duration": 5,
+      "status": "generated-first-take",
+      "camera": "Slowly crane from their hands to their eyes, rotate a gentle quarter turn and settle on the held gaze.",
+      "video_prompt_template": "Portrait 9:16 luxury pastel watercolor anime romance. The FIRST FRAME is the saved exact start; the LAST FRAME is the exact next scene image. Preserve adult Ashok and Supriya identity, wardrobe continuity within location, the turquoise phone, daisy and blush ribbon. Camera moves slowly and intimately, with decisive but soft ease-in and ease-out; no fast action, walking, extra people, morphing faces, duplicate cards or new text. Sparse paper-light flecks drift independently as camera settles. Existing typography stays crisp, fixed and legible.\n\nSHOT 8 TO 9: 0-1.7s: arc across their joined hands and eyes. 1.7-3.5s: the camera travels along a luminous matching ribbon that visually links the campus memory to the shore. 3.5-5.0s: settle on the same couple at the beach sunset; keep identities and hand position continuous, no fade. Transition target: The SAME adult couple now on a quiet beach at late sunset, face identities exact; he wears ivory linen jacket, she wears pearl-white dress and light shawl. They stand still by the waterline, hands joined, seen from a flattering close three-quarter angle. The daisy and blush ribbon are tucked at her wrist. Calm sea, pastel apricot-lavender horizon. Exact couple names and short line on a refined floating translucent ivory invitation card, never crossing faces. Keep the exact target composition and its text: \"Sri. Ashok Kumar & Srmt. Supriya\\nA love worth celebrating\". Source line remains only until leaving its scene. No dissolve, cut or unexplained location switch.",
+      "video_prompt": "Portrait 9:16 luxury pastel watercolor anime romance. The FIRST FRAME is the saved exact start; the LAST FRAME is the exact next scene image. Preserve adult Ashok and Supriya identity, wardrobe continuity within location, the turquoise phone, daisy and blush ribbon. Camera moves slowly and intimately, with decisive but soft ease-in and ease-out; no fast action, walking, extra people, morphing faces, duplicate cards or new text. Sparse paper-light flecks drift independently as camera settles. Existing typography stays crisp, fixed and legible.\n\nSHOT 8 TO 9: 0-1.7s: arc across their joined hands and eyes. 1.7-3.5s: the camera travels along a luminous matching ribbon that visually links the campus memory to the shore. 3.5-5.0s: settle on the same couple at the beach sunset; keep identities and hand position continuous, no fade. Transition target: The SAME adult couple now on a quiet beach at late sunset, face identities exact; he wears ivory linen jacket, she wears pearl-white dress and light shawl. They stand still by the waterline, hands joined, seen from a flattering close three-quarter angle. The daisy and blush ribbon are tucked at her wrist. Calm sea, pastel apricot-lavender horizon. Exact couple names and short line on a refined floating translucent ivory invitation card, never crossing faces. Keep the exact target composition and its text: \"Sri. Ashok Kumar & Srmt. Supriya\\nA love worth celebrating\". Source line remains only until leaving its scene. No dissolve, cut or unexplained location switch.",
+      "video_path": "clip-8.mp4",
+      "final_frame_path": "clip-8-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 7
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 9
+        }
+      },
+      "prompt": "0-1.7s: arc across their joined hands and eyes. 1.7-3.5s: the camera travels along a luminous matching ribbon that visually links the campus memory to the shore. 3.5-5.0s: settle on the same couple at the beach sunset; keep identities and hand position continuous, no fade.",
+      "request_metadata": {
+        "requestId": "18a0d3fd-7d9f-9f2f-b71b-3787e8fd431a",
+        "status": "done",
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "usage": {
+          "cost_in_usd_ticks": 7200000000
+        },
+        "outputUrl": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-18a0d3fd-7d9f-9f2f-b71b-3787e8fd431a.mp4"
+      },
+      "selected_take": 1,
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "121"
+          }
+        ],
+        "format": {
+          "duration": "5.042000"
+        }
+      },
+      "actual_input": {
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "aspect_ratio": "9:16",
+        "resolution": "720p",
+        "firstImage": "output/socialmedia-college-anime-v1/clip-8-take-1-first.jpg",
+        "lastImage": "output/socialmedia-college-anime-v1/clip-8-take-1-last.jpg",
+        "firstImageSha256": "747bbc76595106ff5b56d4013270c8e5a472e285d9797280a6f77247091a17fa",
+        "lastImageSha256": "7344df5b575c84f660daeac4c51e35348578220dd05214eff3e0e278c78c917f",
+        "keyframes": [],
+        "sourceVideoFramesSent": false
+      },
+      "review_note": "First take selected; no creative retake.",
+      "timeline": {
+        "start_seconds": 34.291666666666664,
+        "end_seconds": 39.333333333333336
+      }
+    },
+    {
+      "index": 9,
+      "from": 9,
+      "to": 10,
+      "duration": 5,
+      "status": "generated-first-take",
+      "camera": "Drift out of the held-hand close-up to reveal them and the sea; the camera makes a slow half-circle, soft sunset rim light.",
+      "video_prompt_template": "Portrait 9:16 luxury pastel watercolor anime romance. The FIRST FRAME is the saved exact start; the LAST FRAME is the exact next scene image. Preserve adult Ashok and Supriya identity, wardrobe continuity within location, the turquoise phone, daisy and blush ribbon. Camera moves slowly and intimately, with decisive but soft ease-in and ease-out; no fast action, walking, extra people, morphing faces, duplicate cards or new text. Sparse paper-light flecks drift independently as camera settles. Existing typography stays crisp, fixed and legible.\n\nSHOT 9 TO 10: 0-1.6s: drift away from the couple to the linen invitation table already beside them. 1.6-3.4s: move around its edge, carrying blush ribbon and sea horizon. 3.4-5.0s: settle on the reception face of one card, text rigid. Transition target: Same beach shortly after sunset, couple softly visible behind a single elegant ivory invitation card on a low linen-draped table. Warm bistro lights and pale roses line the shore, luxurious but quiet. Exactly the reception copy, large dark slate-blue serif with rose-gold hairline border and good spacing; no additional wording. Same horizon and blush ribbon tied to the card. Keep the exact target composition and its text: \"Reception - Dinner\\n6th February 2020 · 7:30 p.m.\". Source line remains only until leaving its scene. No dissolve, cut or unexplained location switch.",
+      "video_prompt": "Portrait 9:16 luxury pastel watercolor anime romance. The FIRST FRAME is the saved exact start; the LAST FRAME is the exact next scene image. Preserve adult Ashok and Supriya identity, wardrobe continuity within location, the turquoise phone, daisy and blush ribbon. Camera moves slowly and intimately, with decisive but soft ease-in and ease-out; no fast action, walking, extra people, morphing faces, duplicate cards or new text. Sparse paper-light flecks drift independently as camera settles. Existing typography stays crisp, fixed and legible.\n\nSHOT 9 TO 10: 0-1.6s: drift away from the couple to the linen invitation table already beside them. 1.6-3.4s: move around its edge, carrying blush ribbon and sea horizon. 3.4-5.0s: settle on the reception face of one card, text rigid. Transition target: Same beach shortly after sunset, couple softly visible behind a single elegant ivory invitation card on a low linen-draped table. Warm bistro lights and pale roses line the shore, luxurious but quiet. Exactly the reception copy, large dark slate-blue serif with rose-gold hairline border and good spacing; no additional wording. Same horizon and blush ribbon tied to the card. Keep the exact target composition and its text: \"Reception - Dinner\\n6th February 2020 · 7:30 p.m.\". Source line remains only until leaving its scene. No dissolve, cut or unexplained location switch.",
+      "video_path": "clip-9.mp4",
+      "final_frame_path": "clip-9-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 8
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 10
+        }
+      },
+      "prompt": "0-1.6s: drift away from the couple to the linen invitation table already beside them. 1.6-3.4s: move around its edge, carrying blush ribbon and sea horizon. 3.4-5.0s: settle on the reception face of one card, text rigid.",
+      "request_metadata": {
+        "requestId": "72de6dcc-23d2-963b-8c62-d24e536e6716",
+        "status": "done",
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "usage": {
+          "cost_in_usd_ticks": 7200000000
+        },
+        "outputUrl": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-72de6dcc-23d2-963b-8c62-d24e536e6716.mp4"
+      },
+      "selected_take": 1,
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "121"
+          }
+        ],
+        "format": {
+          "duration": "5.042000"
+        }
+      },
+      "actual_input": {
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "aspect_ratio": "9:16",
+        "resolution": "720p",
+        "firstImage": "output/socialmedia-college-anime-v1/clip-9-take-1-first.jpg",
+        "lastImage": "output/socialmedia-college-anime-v1/clip-9-take-1-last.jpg",
+        "firstImageSha256": "52b89d24f1c74ffa4925dcb70abe2091bfa74091cc16addc8f49eef08559a3d2",
+        "lastImageSha256": "59c431ef6ea91fb69f83f997b734a8cf0cf39211976d66ccc664f7392f036ee5",
+        "keyframes": [],
+        "sourceVideoFramesSent": false
+      },
+      "review_note": "First take selected; no creative retake.",
+      "timeline": {
+        "start_seconds": 39.333333333333336,
+        "end_seconds": 44.375
+      }
+    },
+    {
+      "index": 10,
+      "from": 10,
+      "to": 11,
+      "duration": 5,
+      "status": "generated-first-take",
+      "camera": "Camera follows the blush ribbon across the foreground to the fixed reception card; slow side parallax reveals shore lights.",
+      "video_prompt_template": "Portrait 9:16 luxury pastel watercolor anime romance. The FIRST FRAME is the saved exact start; the LAST FRAME is the exact next scene image. Preserve adult Ashok and Supriya identity, wardrobe continuity within location, the turquoise phone, daisy and blush ribbon. Camera moves slowly and intimately, with decisive but soft ease-in and ease-out; no fast action, walking, extra people, morphing faces, duplicate cards or new text. Sparse paper-light flecks drift independently as camera settles. Existing typography stays crisp, fixed and legible.\n\nSHOT 10 TO 11: 0-1.8s: glide across the reception face. 1.8-3.8s: arc around the physical single card while it turns gently in place; sea horizon and table persist. 3.8-5.0s: settle on the wedding-details face, no dissolve. Transition target: Beach at blue hour, SAME single invitation card turned to a new face on the SAME linen table, no duplicate board. Couple stand still in background near soft sea light. Exactly the wedding date, time and venue copy, centered legible dark slate-blue serif, generous line spacing, pale rose-gold edge. Keep the sea horizon, lights, ribbon and table fixed; no new venue building appears. Keep the exact target composition and its text: \"Wedding Ceremony\\n7th February 2020 · 8:00 a.m.\\nLeela Channaiah Kalyana Mandapa\\nVontikoppal, Mysore\". Source line remains only until leaving its scene. No dissolve, cut or unexplained location switch.",
+      "video_prompt": "Portrait 9:16 luxury pastel watercolor anime romance. The FIRST FRAME is the saved exact start; the LAST FRAME is the exact next scene image. Preserve adult Ashok and Supriya identity, wardrobe continuity within location, the turquoise phone, daisy and blush ribbon. Camera moves slowly and intimately, with decisive but soft ease-in and ease-out; no fast action, walking, extra people, morphing faces, duplicate cards or new text. Sparse paper-light flecks drift independently as camera settles. Existing typography stays crisp, fixed and legible.\n\nSHOT 10 TO 11: 0-1.8s: glide across the reception face. 1.8-3.8s: arc around the physical single card while it turns gently in place; sea horizon and table persist. 3.8-5.0s: settle on the wedding-details face, no dissolve. Transition target: Beach at blue hour, SAME single invitation card turned to a new face on the SAME linen table, no duplicate board. Couple stand still in background near soft sea light. Exactly the wedding date, time and venue copy, centered legible dark slate-blue serif, generous line spacing, pale rose-gold edge. Keep the sea horizon, lights, ribbon and table fixed; no new venue building appears. Keep the exact target composition and its text: \"Wedding Ceremony\\n7th February 2020 · 8:00 a.m.\\nLeela Channaiah Kalyana Mandapa\\nVontikoppal, Mysore\". Source line remains only until leaving its scene. No dissolve, cut or unexplained location switch.",
+      "video_path": "clip-10.mp4",
+      "final_frame_path": "clip-10-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 9
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 11
+        }
+      },
+      "prompt": "0-1.8s: glide across the reception face. 1.8-3.8s: arc around the physical single card while it turns gently in place; sea horizon and table persist. 3.8-5.0s: settle on the wedding-details face, no dissolve.",
+      "request_metadata": {
+        "requestId": "acd9d4cd-247a-9db5-baa5-7f6b3e2b618c",
+        "status": "done",
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "usage": {
+          "cost_in_usd_ticks": 7200000000
+        },
+        "outputUrl": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-acd9d4cd-247a-9db5-baa5-7f6b3e2b618c.mp4"
+      },
+      "selected_take": 1,
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "121"
+          }
+        ],
+        "format": {
+          "duration": "5.042000"
+        }
+      },
+      "actual_input": {
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "aspect_ratio": "9:16",
+        "resolution": "720p",
+        "firstImage": "output/socialmedia-college-anime-v1/clip-10-take-1-first.jpg",
+        "lastImage": "output/socialmedia-college-anime-v1/clip-10-take-1-last.jpg",
+        "firstImageSha256": "673f83fbf3bc13927f5a95c2be71cc3769afa90a68efd74741615ceaf7e4e929",
+        "lastImageSha256": "5f2f5ae15a3ea3789928433fff25ae14c02b69f95b8d7e3ac429b6215e991dfe",
+        "keyframes": [],
+        "sourceVideoFramesSent": false
+      },
+      "review_note": "First take selected; no creative retake.",
+      "timeline": {
+        "start_seconds": 44.375,
+        "end_seconds": 49.416666666666664
+      }
+    },
+    {
+      "index": 11,
+      "from": 11,
+      "to": 12,
+      "duration": 5,
+      "status": "generated",
+      "camera": "Glide around the edge of the single card, revealing its wedding-details face; steady camera, tiny sea reflections.",
+      "video_prompt_template": "Portrait 9:16 luxury watercolor anime wedding. The exact FIRST FRAME is the saved end of clip 10: a single ivory wedding-details card on a beach linen table with the couple behind it. The exact LAST FRAME is the provided image of that same single card on the same table, now showing the final quote. 0-1.5s: camera glides along the card's edge while the couple stay nearly still. 1.5-3.5s: slow half-circle around the one physical card, revealing its reverse printed face; no text melting, new cards, cuts or fades. 3.5-5.0s: settle front-on with the couple's joined hands and soft faces above the card; moonbeam and a few paper-light flecks drift slowly. End exactly on the supplied final frame. Printed quote must read exactly \"From a profile in a classroom to a life in our hands — we found forever.\" followed by \"SAVE THE DATE · 6 & 7 FEBRUARY 2020\". Preserve adult identities, clothing, sea horizon, ribbon, table and calm intimate pacing.",
+      "video_prompt": "Portrait 9:16 luxury watercolor anime wedding. The exact FIRST FRAME is the saved end of clip 10: a single ivory wedding-details card on a beach linen table with the couple behind it. The exact LAST FRAME is the provided image of that same single card on the same table, now showing the final quote. 0-1.5s: camera glides along the card's edge while the couple stay nearly still. 1.5-3.5s: slow half-circle around the one physical card, revealing its reverse printed face; no text melting, new cards, cuts or fades. 3.5-5.0s: settle front-on with the couple's joined hands and soft faces above the card; moonbeam and a few paper-light flecks drift slowly. End exactly on the supplied final frame. Printed quote must read exactly \"From a profile in a classroom to a life in our hands — we found forever.\" followed by \"SAVE THE DATE · 6 & 7 FEBRUARY 2020\". Preserve adult identities, clothing, sea horizon, ribbon, table and calm intimate pacing.",
+      "video_path": "clip-11.mp4",
+      "final_frame_path": "clip-11-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 10
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 12
+        }
+      },
+      "prompt": "0-1.4s: linger on the one details card. 1.4-3.5s: drift past its edge toward the couple, keeping the same shore lights and table. 3.5-5.0s: settle into their intimate night portrait; final words glow softly but never move or morph.",
+      "request_metadata": {
+        "requestId": "b4642ebc-05bb-97d6-bd9b-2ecf09d4d44e",
+        "status": "done",
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "usage": {
+          "cost_in_usd_ticks": 7200000000
+        },
+        "outputUrl": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-b4642ebc-05bb-97d6-bd9b-2ecf09d4d44e.mp4"
+      },
+      "selected_take": 2,
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "121"
+          }
+        ],
+        "format": {
+          "duration": "5.042000"
+        }
+      },
+      "actual_input": {
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "aspect_ratio": "9:16",
+        "resolution": "720p",
+        "firstImage": "output/socialmedia-college-anime-v1/clip-11-take-2-first.jpg",
+        "lastImage": "output/socialmedia-college-anime-v1/clip-11-take-2-last.jpg",
+        "firstImageSha256": "8713c511475a756a811ac5499d2ab173c00937a8da9b96f2e892a168c309ae55",
+        "lastImageSha256": "47938f327f7a3a7c895c87189183200a3650c0c5f95f03d19f2922a795c86784",
+        "keyframes": [],
+        "sourceVideoFramesSent": false
+      },
+      "review_note": "Final quote refined with Flare last-frame anchor and visually checked.",
+      "timeline": {
+        "start_seconds": 49.416666666666664,
+        "end_seconds": 54.458333333333336
+      }
+    }
+  ],
+  "completed_at": "2026-09-30T16:07:44.688Z",
+  "costs": {
+    "scope": "Social Media College Anime completed video including one final-clip correction",
+    "imageRequests": 12,
+    "videoRequests": 12,
+    "xaiCompletedCostUsd": 8.49,
+    "pendingVideos": [],
+    "replicateCostUsd": null,
+    "replicateCostNote": "Provider prediction responses do not include monetary charges."
+  },
+  "review_policy": "Representative stills and final video frames reviewed; one final-clip correction.",
+  "verification": {
+    "representative_stills_reviewed": true,
+    "final_message_frame_reviewed": true,
+    "all_clips_selected": 11,
+    "stitched_video_exists": true
+  }
+}

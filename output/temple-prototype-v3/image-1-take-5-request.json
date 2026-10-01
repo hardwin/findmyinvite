@@ -1,0 +1,19 @@
+{
+  "id": "4x0p38gjf9rmw0d0x60bzrvqer",
+  "status": "succeeded",
+  "model": "openai/gpt-image-2.5-flare",
+  "imageReferences": 1,
+  "sourceImage": "output/temple-prototype-v3/image-1-take-3.jpg",
+  "sourceVideoFramesSent": false,
+  "mode": "edit-own-generated-image",
+  "excludedByUser": true,
+  "exclusionReason": "User requires text-only prompt discovery, not image editing.",
+  "metrics": {
+    "image_output_count": 1,
+    "model_variant": "high",
+    "predict_time": 24.01962983,
+    "resolution_target": "9:16",
+    "total_time": 24.060893542
+  },
+  "outputUrl": "https://replicate.delivery/xezq/t8r0FgM0KubsI9THUpaQMTk0heEkQjHqc8Pg3PgJAl4PlDpLA/tmp3gyhqf45.jpeg"
+}

@@ -1,0 +1,15 @@
+{
+  "model": "prunaai/p-video",
+  "prompt": "Portrait storybook outdoor wedding, exact supplied identities and anchors. CARS PARKED: fixed tires, doors closed, no driving, braking, rolling, entry or exit. PEOPLE PLANTED: no walking, stepping, approach or departure; only tiny blinks and gestures. MOTIFS/LIGHT: mountain grass seeds and mist beads, coastal bubbles and spray drift independently at 0.1 picture-height/second in settled views, 12-20 small pieces at varied depths; motion blur comes from camera speed, no emitted burst. Strong diagonal shafts, rim light and changing water reflections. Pearl-white/teal lettering with platinum glints stays rigid.\n\nPRIMARY ACTION: FAST RIGHTWARD DOWN-SLOPE FLIGHT TO THE FAMILY'S OPEN VALLEY VIEWPOINT. Traverse visible outdoor distance using a fast pullback or forward flight with directional edge blur and strong near/far parallax. Carry the route's changing geography continuously through the frame. Do not substitute an in-place pivot or uniform digital zoom for travel.\n\nTIMING: 0.00-0.30s pull back from the bride; 0.30-1.70s accelerate right and down along the visible access road; 1.70-2.30s brake at the grassy viewpoint; 2.30-5.00s finish in a slow eight-degree arc across the blessing card at constant distance.\n\nTravel down the visible right-sloping road; the high photo spot falls behind and the broad valley opens. The single family group is already arranged at destination, feet planted, phone held steady, a parent's hand resting on the groom's shoulder. No walking, gathering or duplicated bride. Foreground seeds, road texture and distant coastline maintain continuous scale. The blessing card stays rigid and readable.\n\nMatch the supplied final scene and exact text. One opaque world throughout: no crossfade, dissolve, fog wipe, fade-to-white, sudden appearance or blended scenery. Travel past persistent terrain with parallax and brake smoothly. People already stand in destination poses; objects never relocate or morph.",
+  "duration": 5,
+  "resolution": "720p",
+  "aspect_ratio": "9:16",
+  "fps": 24,
+  "prompt_upsampling": false,
+  "save_audio": false,
+  "firstImage": "output/car-roadtrip-beach-remix-v1/clip-5-pruna-take-1-first.jpg",
+  "lastImage": "output/car-roadtrip-beach-remix-v1/clip-5-pruna-take-1-last.jpg",
+  "firstImageSha256": "89c378a0fb25ef72ccdd3d6a426f2592f4d30870ddb5c5d44000023fabd83efb",
+  "lastImageSha256": "f3dc18cbb787e38721606feb9af407768abbec703e225248b7f15e6d6cbd377d",
+  "sourceVideoFramesSent": false
+}

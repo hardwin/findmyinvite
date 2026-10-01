@@ -1,0 +1,11 @@
+{
+  "model": "grok-imagine-video-1.5",
+  "duration": 4,
+  "firstImage": "output/temple-prototype-v3/clip-1-handoff.jpg",
+  "lastImage": "output/temple-prototype-v3/image-3-720.jpg",
+  "firstImageSha256": "d565cb381d261b5c45e7ef4a8dd82d091a1b501983a3bdf4b4496e1c916fcc39",
+  "lastImageSha256": "44456bcc6be001be0fe5301d4ffc7747062c55808b71d94c2e35efc1d40c92b7",
+  "openingSource": null,
+  "keyframes": [],
+  "sourceVideoFramesSent": false
+}

@@ -1,0 +1,13 @@
+{
+  "model": "bytedance/seedance-2.0",
+  "prompt": "Portrait storybook outdoor wedding, exact supplied identities and anchors. CARS PARKED: fixed tires, doors closed, no driving, braking, rolling, entry or exit. PEOPLE PLANTED: no walking, stepping, approach or departure; only tiny blinks and gestures. MOTIFS/LIGHT: mountain grass seeds and mist beads, coastal bubbles and spray drift independently at 0.1 picture-height/second in settled views, 12-20 small pieces at varied depths; motion blur comes from camera speed, no emitted burst. Strong diagonal shafts, rim light and changing water reflections. Pearl-white/teal lettering with platinum glints stays rigid.\n\nPRIMARY ACTION: FAST RIGHT-BANKING ASCENT ALONG THE MOUNTAIN ROAD TO THE GROOM'S PULLOUT. Traverse visible outdoor distance using a fast pullback or forward flight with directional edge blur and strong near/far parallax. Carry the route's changing geography continuously through the frame. Do not substitute an in-place pivot or uniform digital zoom for travel.\n\nTIMING: 0.00-0.30s pull back from the invitation; 0.30-1.65s accelerate upward and forward along the right-curving road; 1.65-2.20s brake at the pullout; 2.20-5.00s settle with a small upward tilt and quiet lateral drift.\n\nLeave the invitation viewpoint behind at lower left. Follow the visible switchback uphill; road textures stream beneath the camera while the sage car stays anchored to the SAME turnout stones. The groom ALREADY stands OUTSIDE its closed door, map held still, from the first distant view until arrival. Tires never roll; body never brakes; no occupant becomes the groom. He keeps planted feet and a small smile. His name reveals with parallax and platinum glints only after the camera reaches reading distance.\n\nMatch the supplied final scene and exact text. One opaque world throughout: no crossfade, dissolve, fog wipe, fade-to-white, sudden appearance or blended scenery. Travel past persistent terrain with parallax and brake smoothly. People already stand in destination poses; objects never relocate or morph.",
+  "duration": 5,
+  "resolution": "720p",
+  "aspect_ratio": "9:16",
+  "generate_audio": false,
+  "firstImage": "output/car-roadtrip-beach-remix-v1/clip-3-take-3-first.jpg",
+  "lastImage": "output/car-roadtrip-beach-remix-v1/clip-3-take-3-last.jpg",
+  "firstImageSha256": "6b6440eea5c61bdfdf169baeb111d75abe3f91be1a0172e5fa4b034979f247fd",
+  "lastImageSha256": "4c6491328a4a3a8623046a39a3891d55e5415e77810ec17d06d3805aaeb60d77",
+  "sourceVideoFramesSent": false
+}

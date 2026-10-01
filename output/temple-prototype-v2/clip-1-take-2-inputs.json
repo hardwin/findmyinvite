@@ -1,0 +1,13 @@
+{
+  "model": "grok-imagine-video-1.5",
+  "duration": 6,
+  "firstImage": "output/temple-prototype-v2/image-1-720.jpg",
+  "lastImage": "output/temple-prototype-v2/image-2-720.jpg",
+  "keyframes": [
+    {
+      "path": "output/temple-prototype-v2/approach-waypoint.jpg",
+      "timestamp_s": 1.6666667
+    }
+  ],
+  "sourceVideoFramesSent": false
+}

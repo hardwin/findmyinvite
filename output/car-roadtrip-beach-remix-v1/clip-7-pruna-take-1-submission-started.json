@@ -1,0 +1,4 @@
+{
+  "at": "2026-09-30T08:30:01.125Z",
+  "note": "No POST retries; recover existing prediction after ambiguous response."
+}

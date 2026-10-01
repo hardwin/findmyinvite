@@ -1,0 +1,12 @@
+{
+  "model": "grok-imagine-video-1.5",
+  "duration": 5,
+  "aspect_ratio": "9:16",
+  "resolution": "720p",
+  "firstImage": "output/master-v1/clip-11-take-1-first.jpg",
+  "lastImage": null,
+  "firstImageSha256": "38577770a882c16c445e6d33c7ee68766bfbc8df3700a5402065d4d22b22b6ca",
+  "lastImageSha256": null,
+  "keyframes": [],
+  "sourceVideoFramesSent": false
+}

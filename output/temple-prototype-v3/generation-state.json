@@ -1,0 +1,136 @@
+{
+  "status": "complete",
+  "imageRequests": 8,
+  "videoRequests": 4,
+  "xaiCostUsd": 2.74,
+  "replicateCostUsd": null,
+  "replicateCostNote": "Prediction results returned elapsed time and image count but no monetary charge.",
+  "imageReviews": [
+    {
+      "scene": 1,
+      "take": 1,
+      "accepted": false,
+      "reason": "Wider full-complex view improves scale, but the camera is still shallow enough to show an apparently empty pavilion. The idol is not naturally roof-occluded as required. Do not use this as a Grok start anchor."
+    },
+    {
+      "scene": 2,
+      "take": 1,
+      "accepted": true,
+      "reason": "Large legible floating gold blessing, clear idol identity and open rear view. Petals are sometimes flower-like; retain as a noted minor limitation instead of buying a retake."
+    },
+    {
+      "scene": 1,
+      "take": 2,
+      "accepted": true,
+      "reason": "Higher steep aerial with complete compound, occupied pavilion base under roof, no separately identifiable distant idol face. Rear wall continuity remains a video review item."
+    },
+    {
+      "scene": 1,
+      "take": 2,
+      "accepted": false,
+      "reviewer": "user",
+      "reason": "Too high and top-down; missing sky and original framing."
+    },
+    {
+      "scene": 1,
+      "take": 3,
+      "accepted": null,
+      "reason": "Sunrise sky and horizon restored; pavilion remains larger/closer than the original. Await user framing review before any additional video spend."
+    },
+    {
+      "scene": 1,
+      "take": 3,
+      "accepted": false,
+      "reviewer": "user",
+      "reason": "Needs camera pulled back and a bit above, preserving sky."
+    },
+    {
+      "scene": 1,
+      "take": 4,
+      "accepted": null,
+      "reason": "Camera pulled back with modest elevation. Sunrise sky/horizon preserved, complete tank visible, smaller occupied pavilion and open rear. Await user framing review."
+    },
+    {
+      "scene": 1,
+      "take": 3,
+      "framingAccepted": true,
+      "reviewer": "user",
+      "reason": "User locked the older closer sunrise view, requesting richer decoration."
+    },
+    {
+      "scene": 1,
+      "take": 4,
+      "accepted": false,
+      "reviewer": "user",
+      "reason": "Prefers previous closer framing."
+    },
+    {
+      "scene": 1,
+      "take": 5,
+      "accepted": false,
+      "excluded": true,
+      "reason": "Image edit was submitted in error; user requires text-only prompt discovery. Finished before cancellation and is excluded from all selections."
+    },
+    {
+      "scene": 1,
+      "take": 6,
+      "accepted": null,
+      "mode": "text-only",
+      "imageInputs": 0,
+      "reason": "Rich garland tiers, colonnade decorations, rangoli, lamps and tank dressing. Open rear maintained. Fresh generation varies geometry: tower is slightly larger and higher in frame than take 3; no exact composition preservation claim."
+    },
+    {
+      "scene": 1,
+      "take": 6,
+      "accepted": false,
+      "reviewer": "user",
+      "reason": "Reads as ground-level frontal view instead of drone view."
+    },
+    {
+      "scene": 1,
+      "take": 7,
+      "accepted": null,
+      "mode": "text-only",
+      "imageInputs": 0,
+      "framingReview": "Elevated oblique drone perspective restored: broad roof surfaces, view down into courtyard and tank, visible sunrise sky/horizon, layered garland and floor decorations.",
+      "continuityReview": "Idol is distant and dark; matching its appearance during approach to the approved close Ganesha still requires video review. Do not claim validated identity continuity."
+    },
+    {
+      "scene": 1,
+      "take": 7,
+      "accepted": true,
+      "reviewer": "user",
+      "reason": "Yes good go ahead"
+    }
+  ],
+  "nextAction": "User reviews completed temple-prototype-v3.mp4; no pending jobs or further paid generation",
+  "authorizedAdditionalAerial": true,
+  "videoCostEstimateUsd": 2.02,
+  "videoCostBasis": {
+    "url": "https://docs.x.ai/developers/pricing",
+    "resolution": "720p",
+    "usdPerSecond": 0.14,
+    "usdPerInputImage": 0.01,
+    "seconds": 14,
+    "totalImageInputs": 6
+  },
+  "videoGenerationHeld": true,
+  "proposedAerial": "image-1-take-7.jpg",
+  "lockedFramingReference": "image-1-take-3.jpg, for local analysis only; do not send to any model",
+  "requiredImageMode": "text-only, omit input_images",
+  "pendingPrompt": "image-1-drone-camera-correction.txt",
+  "lockedOpening": "image-1-take-7.jpg",
+  "selectedImages": {
+    "1": "image-1-take-7.jpg",
+    "2": "image-2-take-1.jpg",
+    "3": "../temple-prototype-v2/image-3.jpg",
+    "4": "../temple-prototype-v2/image-4.jpg"
+  },
+  "selectedVideoTakes": {
+    "1": 2,
+    "2": 1,
+    "3": 1
+  },
+  "currentRunXaiCompletedCostUsd": 2.02,
+  "finalVideo": "temple-prototype-v3.mp4"
+}

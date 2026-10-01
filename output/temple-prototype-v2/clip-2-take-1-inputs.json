@@ -1,0 +1,8 @@
+{
+  "model": "grok-imagine-video-1.5",
+  "duration": 5,
+  "firstImage": "output/temple-prototype-v2/clip-1-handoff.jpg",
+  "lastImage": "output/temple-prototype-v2/image-3-720.jpg",
+  "keyframes": [],
+  "sourceVideoFramesSent": false
+}

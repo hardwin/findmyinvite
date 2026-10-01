@@ -1,0 +1,16 @@
+{
+  "id": "v95e4wyw4hrmt0d0ybx99vd7t0",
+  "status": "succeeded",
+  "model": "openai/gpt-image-2.5-flare",
+  "imageReferences": 0,
+  "metrics": {
+    "image_output_count": 1,
+    "model_variant": "high",
+    "predict_time": 17.474585036,
+    "resolution_target": "9:16",
+    "total_time": 17.515411445
+  },
+  "error": null,
+  "data_removed": false,
+  "outputUrl": "https://replicate.delivery/xezq/fTK3AEbmB12ROKqlfIdmdl1EQRzIs3lt8zQ5WANe7Rw3e3KdB/tmpedu3_j8g.jpeg"
+}

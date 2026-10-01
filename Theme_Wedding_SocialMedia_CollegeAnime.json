@@ -1,0 +1,1082 @@
+{
+  "schema_version": "1.1",
+  "iteration": "socialmedia-college-anime-v8",
+  "name": "Tamil College Love Story — Watercolor Anime",
+  "status": "complete-first-version",
+  "assets_root": "output/socialmedia-college-anime-v8",
+  "locked_baseline": {
+    "path": "master_template_v1.json",
+    "sha256": "d99ecbf7e19c0332a51053bca81070dce7101dceeb416e771d3a312067e182aa"
+  },
+  "scene_count": 12,
+  "connecting_clip_count": 11,
+  "models": {
+    "image": {
+      "provider": "replicate",
+      "id": "openai/gpt-image-2.5-flare",
+      "credentials_env": "REPLICATE_API_TOKEN"
+    },
+    "video": {
+      "provider": "xai",
+      "id": "grok-imagine-video-1.5",
+      "credentials_env": "XAI_API_KEY",
+      "resolution": "720p",
+      "generate_audio": false
+    }
+  },
+  "parameters": {
+    "invitation_lines": "Ashok Kumar & Supriya\nYou’re invited\nReception · 6 February 2026 · 7:30 p.m.\nWedding · 7 February 2026 · 8:00 a.m.\nLeela Channaiah Kalyana Mandapa\nVontikoppal, Mysore",
+    "groom_title": "",
+    "groom_name": "Ashok Kumar",
+    "bride_title": "",
+    "bride_name": "Supriya",
+    "family_lines": "Our families\nSounder Rajan & Punitha\nMohan Krishna & Prema",
+    "ceremony_lines": "Join us for the wedding\n7 February 2026 · 8:00 a.m.\nLeela Channaiah Kalyana Mandapa\nVontikoppal, Mysore",
+    "venue_lines": "Wedding Venue\nLeela Channaiah\nKalyana Mandapa\nVontikoppal\nMysore",
+    "reception_lines": "Come celebrate with us\nReception · 6 February 2026\n7:30 p.m.",
+    "host_lines": "Celebrating with\nBalaSubramanian, Jeevitha\nYazhini & Suhas",
+    "save_date_lines": "Save the date\n6 & 7 February 2026",
+    "devotional_line_1": "",
+    "devotional_line_2": "",
+    "save_date_inline": "Save the date · 6 & 7 February 2026",
+    "scene_lines": [
+      "Tap to Open",
+      "Save The Date",
+      "His final year. My third year.",
+      "Six months of dates after class.",
+      "Basketball. Movie nights. Campus walks.",
+      "And weekends at the beach.",
+      "Then he moved abroad for work.",
+      "Five years apart. We kept choosing us.",
+      "Last year, I nearly gave up. He helped us keep going.",
+      "We told our parents. Now we’re getting married.",
+      "Ashok Kumar & Supriya\nYou’re invited\nReception · 6 February 2026 · 7:30 p.m.\nWedding · 7 February 2026 · 8:00 a.m.\nLeela Channaiah Kalyana Mandapa\nVontikoppal, Mysore",
+      "Ashok Kumar & Supriya\nYou’re invited\nReception · 6 February 2026 · 7:30 p.m.\nWedding · 7 February 2026 · 8:00 a.m.\nLeela Channaiah Kalyana Mandapa\nVontikoppal, Mysore"
+    ],
+    "story_tagline": "Save The Date",
+    "final_message": "You’re invited"
+  },
+  "copy_assumptions": [
+    "Story replaces the previous one-year-only timeline: six months together at college followed by five years of long distance and a difficult final year.",
+    "Phones and social media are removed from every scene. Letters, luggage and printed memories communicate distance.",
+    "Contemporary 2026 art direction; wedding date year updated to 2026, with existing day, month, times, names and venue retained. Five-year relationship history remains unchanged."
+  ],
+  "style": "Portrait 9:16 premium cinematic PASTEL WATERCOLOR ANIME, visibly painted brush washes and fine hand-drawn contours, textured paper, richly layered feature-film composition. Adult Tamil college romance in contemporary 2026 design language. Luminous apricot and blush highlights, deep indigo-teal shadows, lilac reflected light, dramatic diagonal volumetric sunrays, subtle halation, atmospheric depth and soft near-lens bokeh. Stylised painted geometry, never a photoreal architectural render. Contemporary university interiors, fashionable adult characters and scene-specific details. No phones, ribbons, schoolroom furniture, watermark or unrequested words.",
+  "characters": {
+    "groom": "Same adult Tamil Indian couple throughout. Ashok: medium-brown skin, slim oval face, dark almond eyes, textured wavy black crop with low taper, neat trimmed moustache and short shaped beard; consistent recognisable facial features. ",
+    "bride": "Supriya: medium-brown skin, oval face, dark almond eyes, tiny maroon bindi, glossy long black hair in a relaxed low braid with face-framing strands, small contemporary earrings; stylish tailored chudidhar looks. College ages approximately 22 and 21; later mid-to-late twenties after five years apart, same recognisable faces, no exaggerated ageing. Natural adult proportions."
+  },
+  "particle_motion": "Location-specific magical foreground depth: 12 to 18 small independent motifs at varied depths and sizes, with just one or two medium accents. College: blank paper corners, small curled sheets, pencil shavings, tiny leaflets, eraser pieces and pencil fragments; cafe: leaves and a few coffee beans; court: leaves and tiny seed tufts; beach: sea-spray droplets and pale coastal petals; airport: blank ticket slips; home: delicate petals and dust glints. Float only the motifs appropriate to the scene. Slow gentle drift and rotation, distributed asymmetrically in foreground and background, soft depth blur; visible when camera brakes. Never cover faces or text; never detach fixed decor. Motifs belong to their own location, need not match across scenes, never chase the camera. No uniform confetti rain or burst.",
+  "generation_policy": {
+    "images": "Text-only Flare; full iteration authorised.",
+    "video": "xAI full generation authorised by user after revised opening instructions.",
+    "approval_status": "approved",
+    "retakes": false
+  },
+  "output": {
+    "video": "college-love-2026-v8-final.mp4",
+    "width": 720,
+    "height": 1280,
+    "fps": 24,
+    "aspect_ratio": "9:16",
+    "audio": "silent",
+    "assembly": "Concatenate generated clips in order; no transition overlays, global retiming or crossfades.",
+    "actual_duration_seconds": 54.458333333333336,
+    "frame_count": 1307,
+    "sha256": null
+  },
+  "scenes": [
+    {
+      "index": 1,
+      "id": "scene-01",
+      "name": "Tap to Open — symmetrical cinematic university doors",
+      "status": "generated-first-take",
+      "image_prompt_template": "Portrait 9:16 premium cinematic PASTEL WATERCOLOR ANIME, visibly painted brush washes and fine hand-drawn contours, textured paper, richly layered feature-film composition. Adult Tamil college romance in contemporary 2026 design language. Luminous apricot and blush highlights, deep indigo-teal shadows, lilac reflected light, dramatic diagonal volumetric sunrays, subtle halation, atmospheric depth and soft near-lens bokeh. Stylised painted geometry, never a photoreal architectural render. Contemporary university interiors, fashionable adult characters and scene-specific details. No phones, ribbons, schoolroom furniture, watermark or unrequested words.\nSTRAIGHT-ON perfectly centred eye-level view, camera sensor parallel to doors, symmetric one-point perspective, no low angle or oblique angle. One monumental pair of CLOSED matte deep-teal university doors, elegant slim symmetrical vertical bronze inlays and long bronze handles, restrained geometric Art-Deco-inspired detailing interpreted as contemporary 2026 design. Pale blush terrazzo rectangular surround, thin warm recessed edge lights. Flat front-facing facade only; doors dominate 85 percent of frame, tiny margins of surround, no staircase vista or side elevation. Warm diagonal sunshaft on teal, rich indigo shadows and rose-gold reflections; sophisticated painted anime atmosphere. Floating elegantly in front of the central door seam: exact text \"Tap to Open\", stylish ivory editorial lettering with soft peach edge glow, clear and readable, about 40 percent image width. Only these words. NO objects or flying assets in this frame: no books, papers, pencils, leaves, petals or confetti. No humans. Doors fully shut, no interior visible.",
+      "image_prompt": "Portrait 9:16 premium cinematic PASTEL WATERCOLOR ANIME, visibly painted brush washes and fine hand-drawn contours, textured paper, richly layered feature-film composition. Adult Tamil college romance in contemporary 2026 design language. Luminous apricot and blush highlights, deep indigo-teal shadows, lilac reflected light, dramatic diagonal volumetric sunrays, subtle halation, atmospheric depth and soft near-lens bokeh. Stylised painted geometry, never a photoreal architectural render. Contemporary university interiors, fashionable adult characters and scene-specific details. No phones, ribbons, schoolroom furniture, watermark or unrequested words.\nSTRAIGHT-ON perfectly centred eye-level view, camera sensor parallel to doors, symmetric one-point perspective, no low angle or oblique angle. One monumental pair of CLOSED matte deep-teal university doors, elegant slim symmetrical vertical bronze inlays and long bronze handles, restrained geometric Art-Deco-inspired detailing interpreted as contemporary 2026 design. Pale blush terrazzo rectangular surround, thin warm recessed edge lights. Flat front-facing facade only; doors dominate 85 percent of frame, tiny margins of surround, no staircase vista or side elevation. Warm diagonal sunshaft on teal, rich indigo shadows and rose-gold reflections; sophisticated painted anime atmosphere. Floating elegantly in front of the central door seam: exact text \"Tap to Open\", stylish ivory editorial lettering with soft peach edge glow, clear and readable, about 40 percent image width. Only these words. NO objects or flying assets in this frame: no books, papers, pencils, leaves, petals or confetti. No humans. Doors fully shut, no interior visible.",
+      "text_fields": [
+        {
+          "role": "opening-call-to-action",
+          "text": "Tap to Open"
+        }
+      ],
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-1.jpg",
+      "selected_take": 1,
+      "review_note": "Opening still visually inspected; first take selected."
+    },
+    {
+      "index": 2,
+      "id": "scene-02",
+      "name": "Lecture theatre — animated Save The Date destination",
+      "status": "generated-first-take",
+      "image_prompt_template": "Portrait 9:16 premium cinematic PASTEL WATERCOLOR ANIME, visibly painted brush washes and fine hand-drawn contours, textured paper, richly layered feature-film composition. Adult Tamil college romance in contemporary 2026 design language. Luminous apricot and blush highlights, deep indigo-teal shadows, lilac reflected light, dramatic diagonal volumetric sunrays, subtle halation, atmospheric depth and soft near-lens bokeh. Stylised painted geometry, never a photoreal architectural render. Contemporary university interiors, fashionable adult characters and scene-specific details. No phones, ribbons, schoolroom furniture, watermark or unrequested words.\nOn the same straight axis just inside the open doors, cinematic wide adult-scale interior. Vast contemporary UNIVERSITY lecture theatre, nine-metre ceiling with oak acoustic slats and slim linear lights, double-height glazing LEFT, curved tiered teal upholstered adult seats and pale-oak writing desks beside a central aisle, a blank charcoal projection screen and minimalist lectern. Open teal doors with bronze vertical inlays at extreme edges. Apricot light shafts through left glazing, lilac bounce light, deep blue-teal shadows, luminous watercolor haze, cinematic layered depth. Location-specific magical foreground depth: 12 to 18 small independent motifs at varied depths and sizes, with just one or two medium accents. College: blank paper corners, small curled sheets, pencil shavings, tiny leaflets, eraser pieces and pencil fragments; cafe: leaves and a few coffee beans; court: leaves and tiny seed tufts; beach: sea-spray droplets and pale coastal petals; airport: blank ticket slips; home: delicate petals and dust glints. Float only the motifs appropriate to the scene. Slow gentle drift and rotation, distributed asymmetrically in foreground and background, soft depth blur; visible when camera brakes. Never cover faces or text; never detach fixed decor. Motifs belong to their own location, need not match across scenes, never chase the camera. No uniform confetti rain or burst. For this college frame choose 14 small airborne academic motifs spread across distinct depths, plus one medium blank notebook near the lower-left edge; no giant books filling the image. Large elegant ivory editorial title EXACTLY \"Save The Date\", Save The on first line and Date below, peach-lilac edge light, about half image width, centred in free air above the aisle. This is the complete final typography after a word-by-word zoom reveal. Clear stable baselines, no extra text, no people. Emphasise obvious watercolor-anime brushwork, theatrical lighting and suspended tiny details.",
+      "image_prompt": "Portrait 9:16 premium cinematic PASTEL WATERCOLOR ANIME, visibly painted brush washes and fine hand-drawn contours, textured paper, richly layered feature-film composition. Adult Tamil college romance in contemporary 2026 design language. Luminous apricot and blush highlights, deep indigo-teal shadows, lilac reflected light, dramatic diagonal volumetric sunrays, subtle halation, atmospheric depth and soft near-lens bokeh. Stylised painted geometry, never a photoreal architectural render. Contemporary university interiors, fashionable adult characters and scene-specific details. No phones, ribbons, schoolroom furniture, watermark or unrequested words.\nOn the same straight axis just inside the open doors, cinematic wide adult-scale interior. Vast contemporary UNIVERSITY lecture theatre, nine-metre ceiling with oak acoustic slats and slim linear lights, double-height glazing LEFT, curved tiered teal upholstered adult seats and pale-oak writing desks beside a central aisle, a blank charcoal projection screen and minimalist lectern. Open teal doors with bronze vertical inlays at extreme edges. Apricot light shafts through left glazing, lilac bounce light, deep blue-teal shadows, luminous watercolor haze, cinematic layered depth. Location-specific magical foreground depth: 12 to 18 small independent motifs at varied depths and sizes, with just one or two medium accents. College: blank paper corners, small curled sheets, pencil shavings, tiny leaflets, eraser pieces and pencil fragments; cafe: leaves and a few coffee beans; court: leaves and tiny seed tufts; beach: sea-spray droplets and pale coastal petals; airport: blank ticket slips; home: delicate petals and dust glints. Float only the motifs appropriate to the scene. Slow gentle drift and rotation, distributed asymmetrically in foreground and background, soft depth blur; visible when camera brakes. Never cover faces or text; never detach fixed decor. Motifs belong to their own location, need not match across scenes, never chase the camera. No uniform confetti rain or burst. For this college frame choose 14 small airborne academic motifs spread across distinct depths, plus one medium blank notebook near the lower-left edge; no giant books filling the image. Large elegant ivory editorial title EXACTLY \"Save The Date\", Save The on first line and Date below, peach-lilac edge light, about half image width, centred in free air above the aisle. This is the complete final typography after a word-by-word zoom reveal. Clear stable baselines, no extra text, no people. Emphasise obvious watercolor-anime brushwork, theatrical lighting and suspended tiny details.",
+      "text_fields": [
+        {
+          "role": "caption",
+          "text": "Save The Date"
+        }
+      ],
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-2.jpg",
+      "selected_take": 1,
+      "review_note": "Text-only first take selected; no creative retake."
+    },
+    {
+      "index": 3,
+      "name": "Meeting at college",
+      "status": "generated-first-take",
+      "image_prompt_template": "Portrait 9:16 premium cinematic PASTEL WATERCOLOR ANIME, visibly painted brush washes and fine hand-drawn contours, textured paper, richly layered feature-film composition. Adult Tamil college romance in contemporary 2026 design language. Luminous apricot and blush highlights, deep indigo-teal shadows, lilac reflected light, dramatic diagonal volumetric sunrays, subtle halation, atmospheric depth and soft near-lens bokeh. Stylised painted geometry, never a photoreal architectural render. Contemporary university interiors, fashionable adult characters and scene-specific details. No phones, ribbons, schoolroom furniture, watermark or unrequested words.\nSame adult Tamil Indian couple throughout. Ashok: medium-brown skin, slim oval face, dark almond eyes, textured wavy black crop with low taper, neat trimmed moustache and short shaped beard; consistent recognisable facial features. Supriya: medium-brown skin, oval face, dark almond eyes, tiny maroon bindi, glossy long black hair in a relaxed low braid with face-framing strands, small contemporary earrings; stylish tailored chudidhar looks. College ages approximately 22 and 21; later mid-to-late twenties after five years apart, same recognisable faces, no exaggerated ageing. Natural adult proportions.\nCOMPOSITION: College entrance bench at afternoon, the couple meeting beside their notebooks, young Tamil faces and warm smiles. Entrance jamb near right edge provides foreground depth. No phone.\nWARDROBE: Ashok: relaxed sage overshirt, white crewneck tee, charcoal straight-leg trousers, clean sneakers. Supriya: tailored rose chudidhar, light cream dupatta, minimalist flats.\nEXACT TEXT: \"His final year. My third year.\". Only this scene’s text, never the full story. No other readable words. Location-specific magical foreground depth: 12 to 18 small independent motifs at varied depths and sizes, with just one or two medium accents. College: blank paper corners, small curled sheets, pencil shavings, tiny leaflets, eraser pieces and pencil fragments; cafe: leaves and a few coffee beans; court: leaves and tiny seed tufts; beach: sea-spray droplets and pale coastal petals; airport: blank ticket slips; home: delicate petals and dust glints. Float only the motifs appropriate to the scene. Slow gentle drift and rotation, distributed asymmetrically in foreground and background, soft depth blur; visible when camera brakes. Never cover faces or text; never detach fixed decor. Motifs belong to their own location, need not match across scenes, never chase the camera. No uniform confetti rain or burst.",
+      "image_prompt": "Portrait 9:16 premium cinematic PASTEL WATERCOLOR ANIME, visibly painted brush washes and fine hand-drawn contours, textured paper, richly layered feature-film composition. Adult Tamil college romance in contemporary 2026 design language. Luminous apricot and blush highlights, deep indigo-teal shadows, lilac reflected light, dramatic diagonal volumetric sunrays, subtle halation, atmospheric depth and soft near-lens bokeh. Stylised painted geometry, never a photoreal architectural render. Contemporary university interiors, fashionable adult characters and scene-specific details. No phones, ribbons, schoolroom furniture, watermark or unrequested words.\nSame adult Tamil Indian couple throughout. Ashok: medium-brown skin, slim oval face, dark almond eyes, textured wavy black crop with low taper, neat trimmed moustache and short shaped beard; consistent recognisable facial features. Supriya: medium-brown skin, oval face, dark almond eyes, tiny maroon bindi, glossy long black hair in a relaxed low braid with face-framing strands, small contemporary earrings; stylish tailored chudidhar looks. College ages approximately 22 and 21; later mid-to-late twenties after five years apart, same recognisable faces, no exaggerated ageing. Natural adult proportions.\nCOMPOSITION: College entrance bench at afternoon, the couple meeting beside their notebooks, young Tamil faces and warm smiles. Entrance jamb near right edge provides foreground depth. No phone.\nWARDROBE: Ashok: relaxed sage overshirt, white crewneck tee, charcoal straight-leg trousers, clean sneakers. Supriya: tailored rose chudidhar, light cream dupatta, minimalist flats.\nEXACT TEXT: \"His final year. My third year.\". Only this scene’s text, never the full story. No other readable words. Location-specific magical foreground depth: 12 to 18 small independent motifs at varied depths and sizes, with just one or two medium accents. College: blank paper corners, small curled sheets, pencil shavings, tiny leaflets, eraser pieces and pencil fragments; cafe: leaves and a few coffee beans; court: leaves and tiny seed tufts; beach: sea-spray droplets and pale coastal petals; airport: blank ticket slips; home: delicate petals and dust glints. Float only the motifs appropriate to the scene. Slow gentle drift and rotation, distributed asymmetrically in foreground and background, soft depth blur; visible when camera brakes. Never cover faces or text; never detach fixed decor. Motifs belong to their own location, need not match across scenes, never chase the camera. No uniform confetti rain or burst.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-3.jpg",
+      "text_fields": [
+        {
+          "role": "caption",
+          "text": "His final year. My third year."
+        }
+      ],
+      "selected_take": 1,
+      "review_note": "Text-only first take selected; no creative retake."
+    },
+    {
+      "index": 4,
+      "name": "After-class dates",
+      "status": "generated-first-take",
+      "image_prompt_template": "Portrait 9:16 premium cinematic PASTEL WATERCOLOR ANIME, visibly painted brush washes and fine hand-drawn contours, textured paper, richly layered feature-film composition. Adult Tamil college romance in contemporary 2026 design language. Luminous apricot and blush highlights, deep indigo-teal shadows, lilac reflected light, dramatic diagonal volumetric sunrays, subtle halation, atmospheric depth and soft near-lens bokeh. Stylised painted geometry, never a photoreal architectural render. Contemporary university interiors, fashionable adult characters and scene-specific details. No phones, ribbons, schoolroom furniture, watermark or unrequested words.\nSame adult Tamil Indian couple throughout. Ashok: medium-brown skin, slim oval face, dark almond eyes, textured wavy black crop with low taper, neat trimmed moustache and short shaped beard; consistent recognisable facial features. Supriya: medium-brown skin, oval face, dark almond eyes, tiny maroon bindi, glossy long black hair in a relaxed low braid with face-framing strands, small contemporary earrings; stylish tailored chudidhar looks. College ages approximately 22 and 21; later mid-to-late twenties after five years apart, same recognisable faces, no exaggerated ageing. Natural adult proportions.\nCOMPOSITION: Distinct campus café patio, couple seated across one small table with filter coffee and snack plates; bags beneath chairs, no screens. Clean wall space for caption.\nWARDROBE: Ashok: navy knit polo, stone relaxed chinos, clean sneakers. Supriya: modern powder-blue straight-cut chudidhar, sheer white dupatta, simple silver studs.\nEXACT TEXT: \"Six months of dates after class.\". Only this scene’s text, never the full story. No other readable words. Location-specific magical foreground depth: 12 to 18 small independent motifs at varied depths and sizes, with just one or two medium accents. College: blank paper corners, small curled sheets, pencil shavings, tiny leaflets, eraser pieces and pencil fragments; cafe: leaves and a few coffee beans; court: leaves and tiny seed tufts; beach: sea-spray droplets and pale coastal petals; airport: blank ticket slips; home: delicate petals and dust glints. Float only the motifs appropriate to the scene. Slow gentle drift and rotation, distributed asymmetrically in foreground and background, soft depth blur; visible when camera brakes. Never cover faces or text; never detach fixed decor. Motifs belong to their own location, need not match across scenes, never chase the camera. No uniform confetti rain or burst.",
+      "image_prompt": "Portrait 9:16 premium cinematic PASTEL WATERCOLOR ANIME, visibly painted brush washes and fine hand-drawn contours, textured paper, richly layered feature-film composition. Adult Tamil college romance in contemporary 2026 design language. Luminous apricot and blush highlights, deep indigo-teal shadows, lilac reflected light, dramatic diagonal volumetric sunrays, subtle halation, atmospheric depth and soft near-lens bokeh. Stylised painted geometry, never a photoreal architectural render. Contemporary university interiors, fashionable adult characters and scene-specific details. No phones, ribbons, schoolroom furniture, watermark or unrequested words.\nSame adult Tamil Indian couple throughout. Ashok: medium-brown skin, slim oval face, dark almond eyes, textured wavy black crop with low taper, neat trimmed moustache and short shaped beard; consistent recognisable facial features. Supriya: medium-brown skin, oval face, dark almond eyes, tiny maroon bindi, glossy long black hair in a relaxed low braid with face-framing strands, small contemporary earrings; stylish tailored chudidhar looks. College ages approximately 22 and 21; later mid-to-late twenties after five years apart, same recognisable faces, no exaggerated ageing. Natural adult proportions.\nCOMPOSITION: Distinct campus café patio, couple seated across one small table with filter coffee and snack plates; bags beneath chairs, no screens. Clean wall space for caption.\nWARDROBE: Ashok: navy knit polo, stone relaxed chinos, clean sneakers. Supriya: modern powder-blue straight-cut chudidhar, sheer white dupatta, simple silver studs.\nEXACT TEXT: \"Six months of dates after class.\". Only this scene’s text, never the full story. No other readable words. Location-specific magical foreground depth: 12 to 18 small independent motifs at varied depths and sizes, with just one or two medium accents. College: blank paper corners, small curled sheets, pencil shavings, tiny leaflets, eraser pieces and pencil fragments; cafe: leaves and a few coffee beans; court: leaves and tiny seed tufts; beach: sea-spray droplets and pale coastal petals; airport: blank ticket slips; home: delicate petals and dust glints. Float only the motifs appropriate to the scene. Slow gentle drift and rotation, distributed asymmetrically in foreground and background, soft depth blur; visible when camera brakes. Never cover faces or text; never detach fixed decor. Motifs belong to their own location, need not match across scenes, never chase the camera. No uniform confetti rain or burst.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-4.jpg",
+      "text_fields": [
+        {
+          "role": "caption",
+          "text": "Six months of dates after class."
+        }
+      ],
+      "selected_take": 1,
+      "review_note": "Text-only first take selected; no creative retake."
+    },
+    {
+      "index": 5,
+      "name": "What we did together",
+      "status": "generated-first-take",
+      "image_prompt_template": "Portrait 9:16 premium cinematic PASTEL WATERCOLOR ANIME, visibly painted brush washes and fine hand-drawn contours, textured paper, richly layered feature-film composition. Adult Tamil college romance in contemporary 2026 design language. Luminous apricot and blush highlights, deep indigo-teal shadows, lilac reflected light, dramatic diagonal volumetric sunrays, subtle halation, atmospheric depth and soft near-lens bokeh. Stylised painted geometry, never a photoreal architectural render. Contemporary university interiors, fashionable adult characters and scene-specific details. No phones, ribbons, schoolroom furniture, watermark or unrequested words.\nSame adult Tamil Indian couple throughout. Ashok: medium-brown skin, slim oval face, dark almond eyes, textured wavy black crop with low taper, neat trimmed moustache and short shaped beard; consistent recognisable facial features. Supriya: medium-brown skin, oval face, dark almond eyes, tiny maroon bindi, glossy long black hair in a relaxed low braid with face-framing strands, small contemporary earrings; stylish tailored chudidhar looks. College ages approximately 22 and 21; later mid-to-late twenties after five years apart, same recognisable faces, no exaggerated ageing. Natural adult proportions.\nCOMPOSITION: Campus basketball-court edge at blue hour beside the student-film-club entrance and tree-lined walkway. One basketball rests between the seated couple’s feet, two plain cinema tickets on a bench; soft projector glow through a distant window, no readable posters. A single coherent location, not a montage or split screen.\nWARDROBE: Ashok: boxy cream tee, light indigo overshirt, dark straight-leg trousers. Supriya: sport-friendly teal cotton chudidhar, neatly draped ivory dupatta, white sneakers.\nEXACT TEXT: \"Basketball. Movie nights. Campus walks.\". Only this scene’s text, never the full story. No other readable words. Location-specific magical foreground depth: 12 to 18 small independent motifs at varied depths and sizes, with just one or two medium accents. College: blank paper corners, small curled sheets, pencil shavings, tiny leaflets, eraser pieces and pencil fragments; cafe: leaves and a few coffee beans; court: leaves and tiny seed tufts; beach: sea-spray droplets and pale coastal petals; airport: blank ticket slips; home: delicate petals and dust glints. Float only the motifs appropriate to the scene. Slow gentle drift and rotation, distributed asymmetrically in foreground and background, soft depth blur; visible when camera brakes. Never cover faces or text; never detach fixed decor. Motifs belong to their own location, need not match across scenes, never chase the camera. No uniform confetti rain or burst.",
+      "image_prompt": "Portrait 9:16 premium cinematic PASTEL WATERCOLOR ANIME, visibly painted brush washes and fine hand-drawn contours, textured paper, richly layered feature-film composition. Adult Tamil college romance in contemporary 2026 design language. Luminous apricot and blush highlights, deep indigo-teal shadows, lilac reflected light, dramatic diagonal volumetric sunrays, subtle halation, atmospheric depth and soft near-lens bokeh. Stylised painted geometry, never a photoreal architectural render. Contemporary university interiors, fashionable adult characters and scene-specific details. No phones, ribbons, schoolroom furniture, watermark or unrequested words.\nSame adult Tamil Indian couple throughout. Ashok: medium-brown skin, slim oval face, dark almond eyes, textured wavy black crop with low taper, neat trimmed moustache and short shaped beard; consistent recognisable facial features. Supriya: medium-brown skin, oval face, dark almond eyes, tiny maroon bindi, glossy long black hair in a relaxed low braid with face-framing strands, small contemporary earrings; stylish tailored chudidhar looks. College ages approximately 22 and 21; later mid-to-late twenties after five years apart, same recognisable faces, no exaggerated ageing. Natural adult proportions.\nCOMPOSITION: Campus basketball-court edge at blue hour beside the student-film-club entrance and tree-lined walkway. One basketball rests between the seated couple’s feet, two plain cinema tickets on a bench; soft projector glow through a distant window, no readable posters. A single coherent location, not a montage or split screen.\nWARDROBE: Ashok: boxy cream tee, light indigo overshirt, dark straight-leg trousers. Supriya: sport-friendly teal cotton chudidhar, neatly draped ivory dupatta, white sneakers.\nEXACT TEXT: \"Basketball. Movie nights. Campus walks.\". Only this scene’s text, never the full story. No other readable words. Location-specific magical foreground depth: 12 to 18 small independent motifs at varied depths and sizes, with just one or two medium accents. College: blank paper corners, small curled sheets, pencil shavings, tiny leaflets, eraser pieces and pencil fragments; cafe: leaves and a few coffee beans; court: leaves and tiny seed tufts; beach: sea-spray droplets and pale coastal petals; airport: blank ticket slips; home: delicate petals and dust glints. Float only the motifs appropriate to the scene. Slow gentle drift and rotation, distributed asymmetrically in foreground and background, soft depth blur; visible when camera brakes. Never cover faces or text; never detach fixed decor. Motifs belong to their own location, need not match across scenes, never chase the camera. No uniform confetti rain or burst.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-5.jpg",
+      "text_fields": [
+        {
+          "role": "caption",
+          "text": "Basketball. Movie nights. Campus walks."
+        }
+      ],
+      "selected_take": 1,
+      "review_note": "Text-only first take selected; no creative retake."
+    },
+    {
+      "index": 6,
+      "name": "Beach weekends",
+      "status": "generated-first-take",
+      "image_prompt_template": "Portrait 9:16 premium cinematic PASTEL WATERCOLOR ANIME, visibly painted brush washes and fine hand-drawn contours, textured paper, richly layered feature-film composition. Adult Tamil college romance in contemporary 2026 design language. Luminous apricot and blush highlights, deep indigo-teal shadows, lilac reflected light, dramatic diagonal volumetric sunrays, subtle halation, atmospheric depth and soft near-lens bokeh. Stylised painted geometry, never a photoreal architectural render. Contemporary university interiors, fashionable adult characters and scene-specific details. No phones, ribbons, schoolroom furniture, watermark or unrequested words.\nSame adult Tamil Indian couple throughout. Ashok: medium-brown skin, slim oval face, dark almond eyes, textured wavy black crop with low taper, neat trimmed moustache and short shaped beard; consistent recognisable facial features. Supriya: medium-brown skin, oval face, dark almond eyes, tiny maroon bindi, glossy long black hair in a relaxed low braid with face-framing strands, small contemporary earrings; stylish tailored chudidhar looks. College ages approximately 22 and 21; later mid-to-late twenties after five years apart, same recognisable faces, no exaggerated ageing. Natural adult proportions.\nCOMPOSITION: Quiet beach overlook at sunset, couple seated on a low stone seawall, shoes on sand below, shared snack bag. Gentle sea spray, natural eye contact. No walking or animated ball action.\nWARDROBE: Ashok: pale-blue linen shirt, beige trousers. Supriya: lilac chudidhar and pale-peach dupatta.\nEXACT TEXT: \"And weekends at the beach.\". Only this scene’s text, never the full story. No other readable words. Location-specific magical foreground depth: 12 to 18 small independent motifs at varied depths and sizes, with just one or two medium accents. College: blank paper corners, small curled sheets, pencil shavings, tiny leaflets, eraser pieces and pencil fragments; cafe: leaves and a few coffee beans; court: leaves and tiny seed tufts; beach: sea-spray droplets and pale coastal petals; airport: blank ticket slips; home: delicate petals and dust glints. Float only the motifs appropriate to the scene. Slow gentle drift and rotation, distributed asymmetrically in foreground and background, soft depth blur; visible when camera brakes. Never cover faces or text; never detach fixed decor. Motifs belong to their own location, need not match across scenes, never chase the camera. No uniform confetti rain or burst.",
+      "image_prompt": "Portrait 9:16 premium cinematic PASTEL WATERCOLOR ANIME, visibly painted brush washes and fine hand-drawn contours, textured paper, richly layered feature-film composition. Adult Tamil college romance in contemporary 2026 design language. Luminous apricot and blush highlights, deep indigo-teal shadows, lilac reflected light, dramatic diagonal volumetric sunrays, subtle halation, atmospheric depth and soft near-lens bokeh. Stylised painted geometry, never a photoreal architectural render. Contemporary university interiors, fashionable adult characters and scene-specific details. No phones, ribbons, schoolroom furniture, watermark or unrequested words.\nSame adult Tamil Indian couple throughout. Ashok: medium-brown skin, slim oval face, dark almond eyes, textured wavy black crop with low taper, neat trimmed moustache and short shaped beard; consistent recognisable facial features. Supriya: medium-brown skin, oval face, dark almond eyes, tiny maroon bindi, glossy long black hair in a relaxed low braid with face-framing strands, small contemporary earrings; stylish tailored chudidhar looks. College ages approximately 22 and 21; later mid-to-late twenties after five years apart, same recognisable faces, no exaggerated ageing. Natural adult proportions.\nCOMPOSITION: Quiet beach overlook at sunset, couple seated on a low stone seawall, shoes on sand below, shared snack bag. Gentle sea spray, natural eye contact. No walking or animated ball action.\nWARDROBE: Ashok: pale-blue linen shirt, beige trousers. Supriya: lilac chudidhar and pale-peach dupatta.\nEXACT TEXT: \"And weekends at the beach.\". Only this scene’s text, never the full story. No other readable words. Location-specific magical foreground depth: 12 to 18 small independent motifs at varied depths and sizes, with just one or two medium accents. College: blank paper corners, small curled sheets, pencil shavings, tiny leaflets, eraser pieces and pencil fragments; cafe: leaves and a few coffee beans; court: leaves and tiny seed tufts; beach: sea-spray droplets and pale coastal petals; airport: blank ticket slips; home: delicate petals and dust glints. Float only the motifs appropriate to the scene. Slow gentle drift and rotation, distributed asymmetrically in foreground and background, soft depth blur; visible when camera brakes. Never cover faces or text; never detach fixed decor. Motifs belong to their own location, need not match across scenes, never chase the camera. No uniform confetti rain or burst.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-6.jpg",
+      "text_fields": [
+        {
+          "role": "caption",
+          "text": "And weekends at the beach."
+        }
+      ],
+      "selected_take": 1,
+      "review_note": "Text-only first take selected; no creative retake."
+    },
+    {
+      "index": 7,
+      "name": "He leaves for work",
+      "status": "generated-first-take",
+      "image_prompt_template": "Portrait 9:16 premium cinematic PASTEL WATERCOLOR ANIME, visibly painted brush washes and fine hand-drawn contours, textured paper, richly layered feature-film composition. Adult Tamil college romance in contemporary 2026 design language. Luminous apricot and blush highlights, deep indigo-teal shadows, lilac reflected light, dramatic diagonal volumetric sunrays, subtle halation, atmospheric depth and soft near-lens bokeh. Stylised painted geometry, never a photoreal architectural render. Contemporary university interiors, fashionable adult characters and scene-specific details. No phones, ribbons, schoolroom furniture, watermark or unrequested words.\nSame adult Tamil Indian couple throughout. Ashok: medium-brown skin, slim oval face, dark almond eyes, textured wavy black crop with low taper, neat trimmed moustache and short shaped beard; consistent recognisable facial features. Supriya: medium-brown skin, oval face, dark almond eyes, tiny maroon bindi, glossy long black hair in a relaxed low braid with face-framing strands, small contemporary earrings; stylish tailored chudidhar looks. College ages approximately 22 and 21; later mid-to-late twenties after five years apart, same recognisable faces, no exaggerated ageing. Natural adult proportions.\nCOMPOSITION: Airport departure lounge, Ashok beside one stationary suitcase, Supriya next to him holding his hand; plane visible through far window, no airline logo or invented destination. No phone or screens with readable words.\nWARDROBE: Ashok: charcoal travel jacket, ivory shirt. Supriya: muted mustard chudidhar and cream dupatta.\nEXACT TEXT: \"Then he moved abroad for work.\". Only this scene’s text, never the full story. No other readable words. Location-specific magical foreground depth: 12 to 18 small independent motifs at varied depths and sizes, with just one or two medium accents. College: blank paper corners, small curled sheets, pencil shavings, tiny leaflets, eraser pieces and pencil fragments; cafe: leaves and a few coffee beans; court: leaves and tiny seed tufts; beach: sea-spray droplets and pale coastal petals; airport: blank ticket slips; home: delicate petals and dust glints. Float only the motifs appropriate to the scene. Slow gentle drift and rotation, distributed asymmetrically in foreground and background, soft depth blur; visible when camera brakes. Never cover faces or text; never detach fixed decor. Motifs belong to their own location, need not match across scenes, never chase the camera. No uniform confetti rain or burst.",
+      "image_prompt": "Portrait 9:16 premium cinematic PASTEL WATERCOLOR ANIME, visibly painted brush washes and fine hand-drawn contours, textured paper, richly layered feature-film composition. Adult Tamil college romance in contemporary 2026 design language. Luminous apricot and blush highlights, deep indigo-teal shadows, lilac reflected light, dramatic diagonal volumetric sunrays, subtle halation, atmospheric depth and soft near-lens bokeh. Stylised painted geometry, never a photoreal architectural render. Contemporary university interiors, fashionable adult characters and scene-specific details. No phones, ribbons, schoolroom furniture, watermark or unrequested words.\nSame adult Tamil Indian couple throughout. Ashok: medium-brown skin, slim oval face, dark almond eyes, textured wavy black crop with low taper, neat trimmed moustache and short shaped beard; consistent recognisable facial features. Supriya: medium-brown skin, oval face, dark almond eyes, tiny maroon bindi, glossy long black hair in a relaxed low braid with face-framing strands, small contemporary earrings; stylish tailored chudidhar looks. College ages approximately 22 and 21; later mid-to-late twenties after five years apart, same recognisable faces, no exaggerated ageing. Natural adult proportions.\nCOMPOSITION: Airport departure lounge, Ashok beside one stationary suitcase, Supriya next to him holding his hand; plane visible through far window, no airline logo or invented destination. No phone or screens with readable words.\nWARDROBE: Ashok: charcoal travel jacket, ivory shirt. Supriya: muted mustard chudidhar and cream dupatta.\nEXACT TEXT: \"Then he moved abroad for work.\". Only this scene’s text, never the full story. No other readable words. Location-specific magical foreground depth: 12 to 18 small independent motifs at varied depths and sizes, with just one or two medium accents. College: blank paper corners, small curled sheets, pencil shavings, tiny leaflets, eraser pieces and pencil fragments; cafe: leaves and a few coffee beans; court: leaves and tiny seed tufts; beach: sea-spray droplets and pale coastal petals; airport: blank ticket slips; home: delicate petals and dust glints. Float only the motifs appropriate to the scene. Slow gentle drift and rotation, distributed asymmetrically in foreground and background, soft depth blur; visible when camera brakes. Never cover faces or text; never detach fixed decor. Motifs belong to their own location, need not match across scenes, never chase the camera. No uniform confetti rain or burst.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-7.jpg",
+      "text_fields": [
+        {
+          "role": "caption",
+          "text": "Then he moved abroad for work."
+        }
+      ],
+      "selected_take": 1,
+      "review_note": "Text-only first take selected; no creative retake."
+    },
+    {
+      "index": 8,
+      "name": "Five years apart",
+      "status": "generated-first-take",
+      "image_prompt_template": "Portrait 9:16 premium cinematic PASTEL WATERCOLOR ANIME, visibly painted brush washes and fine hand-drawn contours, textured paper, richly layered feature-film composition. Adult Tamil college romance in contemporary 2026 design language. Luminous apricot and blush highlights, deep indigo-teal shadows, lilac reflected light, dramatic diagonal volumetric sunrays, subtle halation, atmospheric depth and soft near-lens bokeh. Stylised painted geometry, never a photoreal architectural render. Contemporary university interiors, fashionable adult characters and scene-specific details. No phones, ribbons, schoolroom furniture, watermark or unrequested words.\nSame adult Tamil Indian couple throughout. Ashok: medium-brown skin, slim oval face, dark almond eyes, textured wavy black crop with low taper, neat trimmed moustache and short shaped beard; consistent recognisable facial features. Supriya: medium-brown skin, oval face, dark almond eyes, tiny maroon bindi, glossy long black hair in a relaxed low braid with face-framing strands, small contemporary earrings; stylish tailored chudidhar looks. College ages approximately 22 and 21; later mid-to-late twenties after five years apart, same recognisable faces, no exaggerated ageing. Natural adult proportions.\nCOMPOSITION: Supriya at a home desk beside an open window at night, keeping handwritten letters in a simple memory box, small framed photo of the same couple at the beach. Envelope postmarks indistinct, no calendar full of dates. One intact quiet room; distance told through letters, not devices or split screen.\nWARDROBE: Supriya: sage chudidhar, rose dupatta. Ashok appears only in the small printed photo, same face.\nEXACT TEXT: \"Five years apart. We kept choosing us.\". Only this scene’s text, never the full story. No other readable words. Location-specific magical foreground depth: 12 to 18 small independent motifs at varied depths and sizes, with just one or two medium accents. College: blank paper corners, small curled sheets, pencil shavings, tiny leaflets, eraser pieces and pencil fragments; cafe: leaves and a few coffee beans; court: leaves and tiny seed tufts; beach: sea-spray droplets and pale coastal petals; airport: blank ticket slips; home: delicate petals and dust glints. Float only the motifs appropriate to the scene. Slow gentle drift and rotation, distributed asymmetrically in foreground and background, soft depth blur; visible when camera brakes. Never cover faces or text; never detach fixed decor. Motifs belong to their own location, need not match across scenes, never chase the camera. No uniform confetti rain or burst.",
+      "image_prompt": "Portrait 9:16 premium cinematic PASTEL WATERCOLOR ANIME, visibly painted brush washes and fine hand-drawn contours, textured paper, richly layered feature-film composition. Adult Tamil college romance in contemporary 2026 design language. Luminous apricot and blush highlights, deep indigo-teal shadows, lilac reflected light, dramatic diagonal volumetric sunrays, subtle halation, atmospheric depth and soft near-lens bokeh. Stylised painted geometry, never a photoreal architectural render. Contemporary university interiors, fashionable adult characters and scene-specific details. No phones, ribbons, schoolroom furniture, watermark or unrequested words.\nSame adult Tamil Indian couple throughout. Ashok: medium-brown skin, slim oval face, dark almond eyes, textured wavy black crop with low taper, neat trimmed moustache and short shaped beard; consistent recognisable facial features. Supriya: medium-brown skin, oval face, dark almond eyes, tiny maroon bindi, glossy long black hair in a relaxed low braid with face-framing strands, small contemporary earrings; stylish tailored chudidhar looks. College ages approximately 22 and 21; later mid-to-late twenties after five years apart, same recognisable faces, no exaggerated ageing. Natural adult proportions.\nCOMPOSITION: Supriya at a home desk beside an open window at night, keeping handwritten letters in a simple memory box, small framed photo of the same couple at the beach. Envelope postmarks indistinct, no calendar full of dates. One intact quiet room; distance told through letters, not devices or split screen.\nWARDROBE: Supriya: sage chudidhar, rose dupatta. Ashok appears only in the small printed photo, same face.\nEXACT TEXT: \"Five years apart. We kept choosing us.\". Only this scene’s text, never the full story. No other readable words. Location-specific magical foreground depth: 12 to 18 small independent motifs at varied depths and sizes, with just one or two medium accents. College: blank paper corners, small curled sheets, pencil shavings, tiny leaflets, eraser pieces and pencil fragments; cafe: leaves and a few coffee beans; court: leaves and tiny seed tufts; beach: sea-spray droplets and pale coastal petals; airport: blank ticket slips; home: delicate petals and dust glints. Float only the motifs appropriate to the scene. Slow gentle drift and rotation, distributed asymmetrically in foreground and background, soft depth blur; visible when camera brakes. Never cover faces or text; never detach fixed decor. Motifs belong to their own location, need not match across scenes, never chase the camera. No uniform confetti rain or burst.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-8.jpg",
+      "text_fields": [
+        {
+          "role": "caption",
+          "text": "Five years apart. We kept choosing us."
+        }
+      ],
+      "selected_take": 1,
+      "review_note": "Text-only first take selected; no creative retake."
+    },
+    {
+      "index": 9,
+      "name": "The difficult year",
+      "status": "generated-first-take",
+      "image_prompt_template": "Portrait 9:16 premium cinematic PASTEL WATERCOLOR ANIME, visibly painted brush washes and fine hand-drawn contours, textured paper, richly layered feature-film composition. Adult Tamil college romance in contemporary 2026 design language. Luminous apricot and blush highlights, deep indigo-teal shadows, lilac reflected light, dramatic diagonal volumetric sunrays, subtle halation, atmospheric depth and soft near-lens bokeh. Stylised painted geometry, never a photoreal architectural render. Contemporary university interiors, fashionable adult characters and scene-specific details. No phones, ribbons, schoolroom furniture, watermark or unrequested words.\nSame adult Tamil Indian couple throughout. Ashok: medium-brown skin, slim oval face, dark almond eyes, textured wavy black crop with low taper, neat trimmed moustache and short shaped beard; consistent recognisable facial features. Supriya: medium-brown skin, oval face, dark almond eyes, tiny maroon bindi, glossy long black hair in a relaxed low braid with face-framing strands, small contemporary earrings; stylish tailored chudidhar looks. College ages approximately 22 and 21; later mid-to-late twenties after five years apart, same recognisable faces, no exaggerated ageing. Natural adult proportions.\nCOMPOSITION: Different setting: quiet rainy veranda, Supriya seated reading one letter, restrained hopeful expression with moist eyes, a cup and small stack of letters beside her. The line about nearly giving up is romantic relationship context. No distressed theatrics. Clear dry wall for caption.\nWARDROBE: Supriya: cornflower-blue chudidhar, ivory dupatta.\nEXACT TEXT: \"Last year, I nearly gave up. He helped us keep going.\". Only this scene’s text, never the full story. No other readable words. Location-specific magical foreground depth: 12 to 18 small independent motifs at varied depths and sizes, with just one or two medium accents. College: blank paper corners, small curled sheets, pencil shavings, tiny leaflets, eraser pieces and pencil fragments; cafe: leaves and a few coffee beans; court: leaves and tiny seed tufts; beach: sea-spray droplets and pale coastal petals; airport: blank ticket slips; home: delicate petals and dust glints. Float only the motifs appropriate to the scene. Slow gentle drift and rotation, distributed asymmetrically in foreground and background, soft depth blur; visible when camera brakes. Never cover faces or text; never detach fixed decor. Motifs belong to their own location, need not match across scenes, never chase the camera. No uniform confetti rain or burst.",
+      "image_prompt": "Portrait 9:16 premium cinematic PASTEL WATERCOLOR ANIME, visibly painted brush washes and fine hand-drawn contours, textured paper, richly layered feature-film composition. Adult Tamil college romance in contemporary 2026 design language. Luminous apricot and blush highlights, deep indigo-teal shadows, lilac reflected light, dramatic diagonal volumetric sunrays, subtle halation, atmospheric depth and soft near-lens bokeh. Stylised painted geometry, never a photoreal architectural render. Contemporary university interiors, fashionable adult characters and scene-specific details. No phones, ribbons, schoolroom furniture, watermark or unrequested words.\nSame adult Tamil Indian couple throughout. Ashok: medium-brown skin, slim oval face, dark almond eyes, textured wavy black crop with low taper, neat trimmed moustache and short shaped beard; consistent recognisable facial features. Supriya: medium-brown skin, oval face, dark almond eyes, tiny maroon bindi, glossy long black hair in a relaxed low braid with face-framing strands, small contemporary earrings; stylish tailored chudidhar looks. College ages approximately 22 and 21; later mid-to-late twenties after five years apart, same recognisable faces, no exaggerated ageing. Natural adult proportions.\nCOMPOSITION: Different setting: quiet rainy veranda, Supriya seated reading one letter, restrained hopeful expression with moist eyes, a cup and small stack of letters beside her. The line about nearly giving up is romantic relationship context. No distressed theatrics. Clear dry wall for caption.\nWARDROBE: Supriya: cornflower-blue chudidhar, ivory dupatta.\nEXACT TEXT: \"Last year, I nearly gave up. He helped us keep going.\". Only this scene’s text, never the full story. No other readable words. Location-specific magical foreground depth: 12 to 18 small independent motifs at varied depths and sizes, with just one or two medium accents. College: blank paper corners, small curled sheets, pencil shavings, tiny leaflets, eraser pieces and pencil fragments; cafe: leaves and a few coffee beans; court: leaves and tiny seed tufts; beach: sea-spray droplets and pale coastal petals; airport: blank ticket slips; home: delicate petals and dust glints. Float only the motifs appropriate to the scene. Slow gentle drift and rotation, distributed asymmetrically in foreground and background, soft depth blur; visible when camera brakes. Never cover faces or text; never detach fixed decor. Motifs belong to their own location, need not match across scenes, never chase the camera. No uniform confetti rain or burst.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-9.jpg",
+      "text_fields": [
+        {
+          "role": "caption",
+          "text": "Last year, I nearly gave up. He helped us keep going."
+        }
+      ],
+      "selected_take": 1,
+      "review_note": "Text-only first take selected; no creative retake."
+    },
+    {
+      "index": 10,
+      "name": "Telling our parents",
+      "status": "generated-first-take",
+      "image_prompt_template": "Portrait 9:16 premium cinematic PASTEL WATERCOLOR ANIME, visibly painted brush washes and fine hand-drawn contours, textured paper, richly layered feature-film composition. Adult Tamil college romance in contemporary 2026 design language. Luminous apricot and blush highlights, deep indigo-teal shadows, lilac reflected light, dramatic diagonal volumetric sunrays, subtle halation, atmospheric depth and soft near-lens bokeh. Stylised painted geometry, never a photoreal architectural render. Contemporary university interiors, fashionable adult characters and scene-specific details. No phones, ribbons, schoolroom furniture, watermark or unrequested words.\nSame adult Tamil Indian couple throughout. Ashok: medium-brown skin, slim oval face, dark almond eyes, textured wavy black crop with low taper, neat trimmed moustache and short shaped beard; consistent recognisable facial features. Supriya: medium-brown skin, oval face, dark almond eyes, tiny maroon bindi, glossy long black hair in a relaxed low braid with face-framing strands, small contemporary earrings; stylish tailored chudidhar looks. College ages approximately 22 and 21; later mid-to-late twenties after five years apart, same recognisable faces, no exaggerated ageing. Natural adult proportions.\nCOMPOSITION: Warm family living room, adult couple sitting together across from their four parents in an intimate relaxed conversation, small smiles, tea cups, no ritual or staged ceremony. All seated; no crowd, no phones. Caption in a clear upper wall region.\nWARDROBE: Ashok: rust linen shirt and dark trousers. Supriya: peach chudidhar and pale-gold dupatta.\nEXACT TEXT: \"We told our parents. Now we’re getting married.\". Only this scene’s text, never the full story. No other readable words. Location-specific magical foreground depth: 12 to 18 small independent motifs at varied depths and sizes, with just one or two medium accents. College: blank paper corners, small curled sheets, pencil shavings, tiny leaflets, eraser pieces and pencil fragments; cafe: leaves and a few coffee beans; court: leaves and tiny seed tufts; beach: sea-spray droplets and pale coastal petals; airport: blank ticket slips; home: delicate petals and dust glints. Float only the motifs appropriate to the scene. Slow gentle drift and rotation, distributed asymmetrically in foreground and background, soft depth blur; visible when camera brakes. Never cover faces or text; never detach fixed decor. Motifs belong to their own location, need not match across scenes, never chase the camera. No uniform confetti rain or burst.",
+      "image_prompt": "Portrait 9:16 premium cinematic PASTEL WATERCOLOR ANIME, visibly painted brush washes and fine hand-drawn contours, textured paper, richly layered feature-film composition. Adult Tamil college romance in contemporary 2026 design language. Luminous apricot and blush highlights, deep indigo-teal shadows, lilac reflected light, dramatic diagonal volumetric sunrays, subtle halation, atmospheric depth and soft near-lens bokeh. Stylised painted geometry, never a photoreal architectural render. Contemporary university interiors, fashionable adult characters and scene-specific details. No phones, ribbons, schoolroom furniture, watermark or unrequested words.\nSame adult Tamil Indian couple throughout. Ashok: medium-brown skin, slim oval face, dark almond eyes, textured wavy black crop with low taper, neat trimmed moustache and short shaped beard; consistent recognisable facial features. Supriya: medium-brown skin, oval face, dark almond eyes, tiny maroon bindi, glossy long black hair in a relaxed low braid with face-framing strands, small contemporary earrings; stylish tailored chudidhar looks. College ages approximately 22 and 21; later mid-to-late twenties after five years apart, same recognisable faces, no exaggerated ageing. Natural adult proportions.\nCOMPOSITION: Warm family living room, adult couple sitting together across from their four parents in an intimate relaxed conversation, small smiles, tea cups, no ritual or staged ceremony. All seated; no crowd, no phones. Caption in a clear upper wall region.\nWARDROBE: Ashok: rust linen shirt and dark trousers. Supriya: peach chudidhar and pale-gold dupatta.\nEXACT TEXT: \"We told our parents. Now we’re getting married.\". Only this scene’s text, never the full story. No other readable words. Location-specific magical foreground depth: 12 to 18 small independent motifs at varied depths and sizes, with just one or two medium accents. College: blank paper corners, small curled sheets, pencil shavings, tiny leaflets, eraser pieces and pencil fragments; cafe: leaves and a few coffee beans; court: leaves and tiny seed tufts; beach: sea-spray droplets and pale coastal petals; airport: blank ticket slips; home: delicate petals and dust glints. Float only the motifs appropriate to the scene. Slow gentle drift and rotation, distributed asymmetrically in foreground and background, soft depth blur; visible when camera brakes. Never cover faces or text; never detach fixed decor. Motifs belong to their own location, need not match across scenes, never chase the camera. No uniform confetti rain or burst.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-10.jpg",
+      "text_fields": [
+        {
+          "role": "caption",
+          "text": "We told our parents. Now we’re getting married."
+        }
+      ],
+      "selected_take": 1,
+      "review_note": "Text-only first take selected; no creative retake."
+    },
+    {
+      "index": 11,
+      "name": "Wedding invitation",
+      "status": "generated-first-take",
+      "image_prompt_template": "Portrait 9:16 premium cinematic PASTEL WATERCOLOR ANIME, visibly painted brush washes and fine hand-drawn contours, textured paper, richly layered feature-film composition. Adult Tamil college romance in contemporary 2026 design language. Luminous apricot and blush highlights, deep indigo-teal shadows, lilac reflected light, dramatic diagonal volumetric sunrays, subtle halation, atmospheric depth and soft near-lens bokeh. Stylised painted geometry, never a photoreal architectural render. Contemporary university interiors, fashionable adult characters and scene-specific details. No phones, ribbons, schoolroom furniture, watermark or unrequested words.\nSame adult Tamil Indian couple throughout. Ashok: medium-brown skin, slim oval face, dark almond eyes, textured wavy black crop with low taper, neat trimmed moustache and short shaped beard; consistent recognisable facial features. Supriya: medium-brown skin, oval face, dark almond eyes, tiny maroon bindi, glossy long black hair in a relaxed low braid with face-framing strands, small contemporary earrings; stylish tailored chudidhar looks. College ages approximately 22 and 21; later mid-to-late twenties after five years apart, same recognisable faces, no exaggerated ageing. Natural adult proportions.\nCOMPOSITION: Modern college-garden celebration lawn, couple standing shoulder to shoulder, one ivory invitation panel at right with beautifully spaced contemporary type, flowers and warm lights. Names largest, You’re invited second, event and venue lines smaller but readable. No other signs.\nWARDROBE: Ashok: navy blazer, white tee, beige trousers. Supriya: elegant rose chudidhar and ivory dupatta.\nEXACT TEXT: \"Ashok Kumar & Supriya\\nYou’re invited\\nReception · 6 February 2026 · 7:30 p.m.\\nWedding · 7 February 2026 · 8:00 a.m.\\nLeela Channaiah Kalyana Mandapa\\nVontikoppal, Mysore\". Only this scene’s text, never the full story. No other readable words. Location-specific magical foreground depth: 12 to 18 small independent motifs at varied depths and sizes, with just one or two medium accents. College: blank paper corners, small curled sheets, pencil shavings, tiny leaflets, eraser pieces and pencil fragments; cafe: leaves and a few coffee beans; court: leaves and tiny seed tufts; beach: sea-spray droplets and pale coastal petals; airport: blank ticket slips; home: delicate petals and dust glints. Float only the motifs appropriate to the scene. Slow gentle drift and rotation, distributed asymmetrically in foreground and background, soft depth blur; visible when camera brakes. Never cover faces or text; never detach fixed decor. Motifs belong to their own location, need not match across scenes, never chase the camera. No uniform confetti rain or burst.",
+      "image_prompt": "Portrait 9:16 premium cinematic PASTEL WATERCOLOR ANIME, visibly painted brush washes and fine hand-drawn contours, textured paper, richly layered feature-film composition. Adult Tamil college romance in contemporary 2026 design language. Luminous apricot and blush highlights, deep indigo-teal shadows, lilac reflected light, dramatic diagonal volumetric sunrays, subtle halation, atmospheric depth and soft near-lens bokeh. Stylised painted geometry, never a photoreal architectural render. Contemporary university interiors, fashionable adult characters and scene-specific details. No phones, ribbons, schoolroom furniture, watermark or unrequested words.\nSame adult Tamil Indian couple throughout. Ashok: medium-brown skin, slim oval face, dark almond eyes, textured wavy black crop with low taper, neat trimmed moustache and short shaped beard; consistent recognisable facial features. Supriya: medium-brown skin, oval face, dark almond eyes, tiny maroon bindi, glossy long black hair in a relaxed low braid with face-framing strands, small contemporary earrings; stylish tailored chudidhar looks. College ages approximately 22 and 21; later mid-to-late twenties after five years apart, same recognisable faces, no exaggerated ageing. Natural adult proportions.\nCOMPOSITION: Modern college-garden celebration lawn, couple standing shoulder to shoulder, one ivory invitation panel at right with beautifully spaced contemporary type, flowers and warm lights. Names largest, You’re invited second, event and venue lines smaller but readable. No other signs.\nWARDROBE: Ashok: navy blazer, white tee, beige trousers. Supriya: elegant rose chudidhar and ivory dupatta.\nEXACT TEXT: \"Ashok Kumar & Supriya\\nYou’re invited\\nReception · 6 February 2026 · 7:30 p.m.\\nWedding · 7 February 2026 · 8:00 a.m.\\nLeela Channaiah Kalyana Mandapa\\nVontikoppal, Mysore\". Only this scene’s text, never the full story. No other readable words. Location-specific magical foreground depth: 12 to 18 small independent motifs at varied depths and sizes, with just one or two medium accents. College: blank paper corners, small curled sheets, pencil shavings, tiny leaflets, eraser pieces and pencil fragments; cafe: leaves and a few coffee beans; court: leaves and tiny seed tufts; beach: sea-spray droplets and pale coastal petals; airport: blank ticket slips; home: delicate petals and dust glints. Float only the motifs appropriate to the scene. Slow gentle drift and rotation, distributed asymmetrically in foreground and background, soft depth blur; visible when camera brakes. Never cover faces or text; never detach fixed decor. Motifs belong to their own location, need not match across scenes, never chase the camera. No uniform confetti rain or burst.",
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      },
+      "image_path": "image-11.jpg",
+      "text_fields": [
+        {
+          "role": "caption",
+          "text": "Ashok Kumar & Supriya\nYou’re invited\nReception · 6 February 2026 · 7:30 p.m.\nWedding · 7 February 2026 · 8:00 a.m.\nLeela Channaiah Kalyana Mandapa\nVontikoppal, Mysore"
+        }
+      ],
+      "selected_take": 1,
+      "review_note": "Text-only first take selected; no creative retake."
+    },
+    {
+      "index": 12,
+      "name": "Together again",
+      "status": "video-derived-first-take",
+      "image_prompt": "Portrait 9:16 premium cinematic PASTEL WATERCOLOR ANIME, visibly painted brush washes and fine hand-drawn contours, textured paper, richly layered feature-film composition. Adult Tamil college romance in contemporary 2026 design language. Luminous apricot and blush highlights, deep indigo-teal shadows, lilac reflected light, dramatic diagonal volumetric sunrays, subtle halation, atmospheric depth and soft near-lens bokeh. Stylised painted geometry, never a photoreal architectural render. Contemporary university interiors, fashionable adult characters and scene-specific details. No phones, ribbons, schoolroom furniture, watermark or unrequested words.\nSame adult Tamil Indian couple throughout. Ashok: medium-brown skin, slim oval face, dark almond eyes, textured wavy black crop with low taper, neat trimmed moustache and short shaped beard; consistent recognisable facial features. Supriya: medium-brown skin, oval face, dark almond eyes, tiny maroon bindi, glossy long black hair in a relaxed low braid with face-framing strands, small contemporary earrings; stylish tailored chudidhar looks. College ages approximately 22 and 21; later mid-to-late twenties after five years apart, same recognisable faces, no exaggerated ageing. Natural adult proportions.\nCOMPOSITION: EXACT same celebration lawn, people, wardrobe, light and ONE invitation panel as scene 11. Camera slightly farther back and higher, couple turn gently to look at one another. Existing lettering unchanged. No new final sentence, board or prop.\nWARDROBE: Same navy blazer and rose chudidhar as scene 11.\nEXACT TEXT: \"Ashok Kumar & Supriya\\nYou’re invited\\nReception · 6 February 2026 · 7:30 p.m.\\nWedding · 7 February 2026 · 8:00 a.m.\\nLeela Channaiah Kalyana Mandapa\\nVontikoppal, Mysore\". Only this scene’s text, never the full story. No other readable words. Location-specific magical foreground depth: 12 to 18 small independent motifs at varied depths and sizes, with just one or two medium accents. College: blank paper corners, small curled sheets, pencil shavings, tiny leaflets, eraser pieces and pencil fragments; cafe: leaves and a few coffee beans; court: leaves and tiny seed tufts; beach: sea-spray droplets and pale coastal petals; airport: blank ticket slips; home: delicate petals and dust glints. Float only the motifs appropriate to the scene. Slow gentle drift and rotation, distributed asymmetrically in foreground and background, soft depth blur; visible when camera brakes. Never cover faces or text; never detach fixed decor. Motifs belong to their own location, need not match across scenes, never chase the camera. No uniform confetti rain or burst.",
+      "image_prompt_template": "Portrait 9:16 premium cinematic PASTEL WATERCOLOR ANIME, visibly painted brush washes and fine hand-drawn contours, textured paper, richly layered feature-film composition. Adult Tamil college romance in contemporary 2026 design language. Luminous apricot and blush highlights, deep indigo-teal shadows, lilac reflected light, dramatic diagonal volumetric sunrays, subtle halation, atmospheric depth and soft near-lens bokeh. Stylised painted geometry, never a photoreal architectural render. Contemporary university interiors, fashionable adult characters and scene-specific details. No phones, ribbons, schoolroom furniture, watermark or unrequested words.\nSame adult Tamil Indian couple throughout. Ashok: medium-brown skin, slim oval face, dark almond eyes, textured wavy black crop with low taper, neat trimmed moustache and short shaped beard; consistent recognisable facial features. Supriya: medium-brown skin, oval face, dark almond eyes, tiny maroon bindi, glossy long black hair in a relaxed low braid with face-framing strands, small contemporary earrings; stylish tailored chudidhar looks. College ages approximately 22 and 21; later mid-to-late twenties after five years apart, same recognisable faces, no exaggerated ageing. Natural adult proportions.\nCOMPOSITION: EXACT same celebration lawn, people, wardrobe, light and ONE invitation panel as scene 11. Camera slightly farther back and higher, couple turn gently to look at one another. Existing lettering unchanged. No new final sentence, board or prop.\nWARDROBE: Same navy blazer and rose chudidhar as scene 11.\nEXACT TEXT: \"Ashok Kumar & Supriya\\nYou’re invited\\nReception · 6 February 2026 · 7:30 p.m.\\nWedding · 7 February 2026 · 8:00 a.m.\\nLeela Channaiah Kalyana Mandapa\\nVontikoppal, Mysore\". Only this scene’s text, never the full story. No other readable words. Location-specific magical foreground depth: 12 to 18 small independent motifs at varied depths and sizes, with just one or two medium accents. College: blank paper corners, small curled sheets, pencil shavings, tiny leaflets, eraser pieces and pencil fragments; cafe: leaves and a few coffee beans; court: leaves and tiny seed tufts; beach: sea-spray droplets and pale coastal petals; airport: blank ticket slips; home: delicate petals and dust glints. Float only the motifs appropriate to the scene. Slow gentle drift and rotation, distributed asymmetrically in foreground and background, soft depth blur; visible when camera brakes. Never cover faces or text; never detach fixed decor. Motifs belong to their own location, need not match across scenes, never chase the camera. No uniform confetti rain or burst.",
+      "image_path": "image-12.jpg",
+      "reason": "Avoid competing independent board/gateway layouts. Keep one date board from scene 11 throughout.",
+      "text_fields": [
+        {
+          "role": "caption",
+          "text": "Ashok Kumar & Supriya\nYou’re invited\nReception · 6 February 2026 · 7:30 p.m.\nWedding · 7 February 2026 · 8:00 a.m.\nLeela Channaiah Kalyana Mandapa\nVontikoppal, Mysore"
+        }
+      ],
+      "image_request": {
+        "quality": "high",
+        "aspect_ratio": "9:16",
+        "output_format": "jpeg",
+        "number_of_images": 1
+      }
+    }
+  ],
+  "clips": [
+    {
+      "index": 1,
+      "from": 1,
+      "to": 2,
+      "duration": 5,
+      "prompt": "0.00-0.30s: straight-on symmetric view of closed aesthetic teal college doors; exact floating Tap to Open already readable; absolutely no foreground props. 0.30-0.55s: Tap to Open contracts softly and disappears completely. 0.35-1.15s: both door leaves open quickly inward on their real hinges, untouched by people. 0.65-1.75s: camera accelerates STRAIGHT through this doorway into the same college lecture theatre; opening doors remain coherent at frame sides. No camera orbit or new portal. 1.60-2.20s: strong cinematic ease-out. 1.65-2.05s Save reveals character by character while smoothly scaling 85 to 100 percent; 2.05-2.35s The follows; 2.35-2.95s Date follows with a soft peach-lilac highlight travelling over its letter edges. Title emerges only inside the hall, not on the closed doors. All letters finish in the exact final anchor layout. 2.95-5.00s: fully readable Save The Date, gentle continued five-percent push, small academic motifs slowly drift at varied depths. Motifs exist inside only and are uncovered naturally on entry, never fly in from the first frame or follow the camera. Rich watercolor-anime lighting and parallax. No other words, duplicated title, morphing architecture, liquid gold, ribbon or dissolve.",
+      "id": "clip-01",
+      "status": "generated-first-take",
+      "camera": "College doors open automatically; fast forward move through entrance, ease out at Save The Date chalkboard",
+      "video_prompt_template": "Portrait 9:16 premium cinematic PASTEL WATERCOLOR ANIME, visibly painted brush washes and fine hand-drawn contours, textured paper, richly layered feature-film composition. Adult Tamil college romance in contemporary 2026 design language. Luminous apricot and blush highlights, deep indigo-teal shadows, lilac reflected light, dramatic diagonal volumetric sunrays, subtle halation, atmospheric depth and soft near-lens bokeh. Stylised painted geometry, never a photoreal architectural render. Contemporary university interiors, fashionable adult characters and scene-specific details. No phones, ribbons, schoolroom furniture, watermark or unrequested words.\n\n0.00-0.30s: straight-on symmetric view of closed aesthetic teal college doors; exact floating Tap to Open already readable; absolutely no foreground props. 0.30-0.55s: Tap to Open contracts softly and disappears completely. 0.35-1.15s: both door leaves open quickly inward on their real hinges, untouched by people. 0.65-1.75s: camera accelerates STRAIGHT through this doorway into the same college lecture theatre; opening doors remain coherent at frame sides. No camera orbit or new portal. 1.60-2.20s: strong cinematic ease-out. 1.65-2.05s Save reveals character by character while smoothly scaling 85 to 100 percent; 2.05-2.35s The follows; 2.35-2.95s Date follows with a soft peach-lilac highlight travelling over its letter edges. Title emerges only inside the hall, not on the closed doors. All letters finish in the exact final anchor layout. 2.95-5.00s: fully readable Save The Date, gentle continued five-percent push, small academic motifs slowly drift at varied depths. Motifs exist inside only and are uncovered naturally on entry, never fly in from the first frame or follow the camera. Rich watercolor-anime lighting and parallax. No other words, duplicated title, morphing architecture, liquid gold, ribbon or dissolve.\n\nDoor design: One monumental pair of CLOSED matte deep-teal university doors, elegant slim symmetrical vertical bronze inlays and long bronze handles, restrained geometric Art-Deco-inspired detailing interpreted as contemporary 2026 design. Pale blush terrazzo rectangular surround, thin warm recessed edge lights. Flat front-facing facade only; doors dominate 85 percent of frame, tiny margins of surround, no staircase vista or side elevation. Warm diagonal sunshaft on teal, rich indigo shadows and rose-gold reflections; sophisticated painted anime atmosphere.\nInterior: Vast contemporary UNIVERSITY lecture theatre, nine-metre ceiling with oak acoustic slats and slim linear lights, double-height glazing LEFT, curved tiered teal upholstered adult seats and pale-oak writing desks beside a central aisle, a blank charcoal projection screen and minimalist lectern. Open teal doors with bronze vertical inlays at extreme edges. Apricot light shafts through left glazing, lilac bounce light, deep blue-teal shadows, luminous watercolor haze, cinematic layered depth.\nLocation-specific magical foreground depth: 12 to 18 small independent motifs at varied depths and sizes, with just one or two medium accents. College: blank paper corners, small curled sheets, pencil shavings, tiny leaflets, eraser pieces and pencil fragments; cafe: leaves and a few coffee beans; court: leaves and tiny seed tufts; beach: sea-spray droplets and pale coastal petals; airport: blank ticket slips; home: delicate petals and dust glints. Float only the motifs appropriate to the scene. Slow gentle drift and rotation, distributed asymmetrically in foreground and background, soft depth blur; visible when camera brakes. Never cover faces or text; never detach fixed decor. Motifs belong to their own location, need not match across scenes, never chase the camera. No uniform confetti rain or burst.",
+      "video_prompt": "Portrait 9:16 premium cinematic PASTEL WATERCOLOR ANIME, visibly painted brush washes and fine hand-drawn contours, textured paper, richly layered feature-film composition. Adult Tamil college romance in contemporary 2026 design language. Luminous apricot and blush highlights, deep indigo-teal shadows, lilac reflected light, dramatic diagonal volumetric sunrays, subtle halation, atmospheric depth and soft near-lens bokeh. Stylised painted geometry, never a photoreal architectural render. Contemporary university interiors, fashionable adult characters and scene-specific details. No phones, ribbons, schoolroom furniture, watermark or unrequested words.\n\n0.00-0.30s: straight-on symmetric view of closed aesthetic teal college doors; exact floating Tap to Open already readable; absolutely no foreground props. 0.30-0.55s: Tap to Open contracts softly and disappears completely. 0.35-1.15s: both door leaves open quickly inward on their real hinges, untouched by people. 0.65-1.75s: camera accelerates STRAIGHT through this doorway into the same college lecture theatre; opening doors remain coherent at frame sides. No camera orbit or new portal. 1.60-2.20s: strong cinematic ease-out. 1.65-2.05s Save reveals character by character while smoothly scaling 85 to 100 percent; 2.05-2.35s The follows; 2.35-2.95s Date follows with a soft peach-lilac highlight travelling over its letter edges. Title emerges only inside the hall, not on the closed doors. All letters finish in the exact final anchor layout. 2.95-5.00s: fully readable Save The Date, gentle continued five-percent push, small academic motifs slowly drift at varied depths. Motifs exist inside only and are uncovered naturally on entry, never fly in from the first frame or follow the camera. Rich watercolor-anime lighting and parallax. No other words, duplicated title, morphing architecture, liquid gold, ribbon or dissolve.\n\nDoor design: One monumental pair of CLOSED matte deep-teal university doors, elegant slim symmetrical vertical bronze inlays and long bronze handles, restrained geometric Art-Deco-inspired detailing interpreted as contemporary 2026 design. Pale blush terrazzo rectangular surround, thin warm recessed edge lights. Flat front-facing facade only; doors dominate 85 percent of frame, tiny margins of surround, no staircase vista or side elevation. Warm diagonal sunshaft on teal, rich indigo shadows and rose-gold reflections; sophisticated painted anime atmosphere.\nInterior: Vast contemporary UNIVERSITY lecture theatre, nine-metre ceiling with oak acoustic slats and slim linear lights, double-height glazing LEFT, curved tiered teal upholstered adult seats and pale-oak writing desks beside a central aisle, a blank charcoal projection screen and minimalist lectern. Open teal doors with bronze vertical inlays at extreme edges. Apricot light shafts through left glazing, lilac bounce light, deep blue-teal shadows, luminous watercolor haze, cinematic layered depth.\nLocation-specific magical foreground depth: 12 to 18 small independent motifs at varied depths and sizes, with just one or two medium accents. College: blank paper corners, small curled sheets, pencil shavings, tiny leaflets, eraser pieces and pencil fragments; cafe: leaves and a few coffee beans; court: leaves and tiny seed tufts; beach: sea-spray droplets and pale coastal petals; airport: blank ticket slips; home: delicate petals and dust glints. Float only the motifs appropriate to the scene. Slow gentle drift and rotation, distributed asymmetrically in foreground and background, soft depth blur; visible when camera brakes. Never cover faces or text; never detach fixed decor. Motifs belong to their own location, need not match across scenes, never chase the camera. No uniform confetti rain or burst.",
+      "video_path": "clip-1.mp4",
+      "final_frame_path": "clip-1-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "scene-image",
+          "scene": 1
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 2
+        },
+        "interior_keyframes": []
+      },
+      "request_metadata": {
+        "requestId": "aae58cb6-89d9-9de7-9825-b0d1f23d1a61",
+        "status": "done",
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "usage": {
+          "cost_in_usd_ticks": 7200000000
+        },
+        "outputUrl": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-aae58cb6-89d9-9de7-9825-b0d1f23d1a61.mp4"
+      },
+      "selected_take": 1,
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "121"
+          }
+        ],
+        "format": {
+          "duration": "5.042000"
+        }
+      },
+      "actual_input": {
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "aspect_ratio": "9:16",
+        "resolution": "720p",
+        "firstImage": "output/socialmedia-college-anime-v8/clip-1-take-1-first.jpg",
+        "lastImage": "output/socialmedia-college-anime-v8/clip-1-take-1-last.jpg",
+        "firstImageSha256": "c07a687c07510063783c5fe60085621c91dfa2c808988357163792f028d32d4e",
+        "lastImageSha256": "d352f875cdf25ba0b935f83cd62a65f12fda9ad0c76b14f0ec5443f1a1536b43",
+        "keyframes": [],
+        "sourceVideoFramesSent": false
+      },
+      "review_note": "First take selected; no creative retake.",
+      "timeline": {
+        "start_seconds": 0,
+        "end_seconds": 5.041666666666667
+      }
+    },
+    {
+      "index": 2,
+      "from": 2,
+      "to": 3,
+      "duration": 4,
+      "status": "generated-first-take",
+      "camera": "LEFT 90-degree pivot; a tiny counterclockwise arc at constant subject distance",
+      "video_prompt_template": "Portrait cinematic pastel-watercolor Tamil love story. Preserve pinned first frame, physically hide outgoing scene before revealing pinned destination. Location-specific magical foreground depth: 12 to 18 small independent motifs at varied depths and sizes, with just one or two medium accents. College: blank paper corners, small curled sheets, pencil shavings, tiny leaflets, eraser pieces and pencil fragments; cafe: leaves and a few coffee beans; court: leaves and tiny seed tufts; beach: sea-spray droplets and pale coastal petals; airport: blank ticket slips; home: delicate petals and dust glints. Float only the motifs appropriate to the scene. Slow gentle drift and rotation, distributed asymmetrically in foreground and background, soft depth blur; visible when camera brakes. Never cover faces or text; never detach fixed decor. Motifs belong to their own location, need not match across scenes, never chase the camera. No uniform confetti rain or burst. No mobile phones, social-media screens, ribbons, dissolve, duplicated people or signs.\n\nFULL 90-DEGREE LEFT camera-heading pivot, not a push-in with minor steering. Destination begins offscreen at the side. Forward translation below half a metre. A close solid door jamb, wall edge or tree trunk sweeps across the lens in directional blur, fully hiding the previous composition before revealing the next story chapter. This is an occlusion-led editorial transition between memories; do not morph one location into another or show both countries sharing one space. 0.00-0.20s anticipate; 0.20-1.20s turn; 1.20-1.60s brake; 1.60-4.00s settle. Strong cubic ease-out in final 25 degrees. After braking:  a tiny counterclockwise arc at constant subject distance. Incoming destination text starts invisible. During camera braking, reveal its exact copy in reading order: characters draw on rapidly within each word, then the next word follows, with a restrained peach light tracing the letter edges. Each newly forming word scales smoothly from 85 to 100 percent on its final baseline with a soft luminous edge trace, then becomes still; no flying alphabet, scrambling, smoke or liquid gold. Complete by 65 percent of clip duration, then keep fully readable through the continuing gentle camera drift. Never reveal all text at once. Outgoing already-complete text stays unchanged until occluded. Outfit change is concealed during complete occlusion. People remain planted, small expressions only.\n\nDestination: College entrance bench at afternoon, the couple meeting beside their notebooks, young Tamil faces and warm smiles. Entrance jamb near right edge provides foreground depth. No phone. Wardrobe: Ashok: relaxed sage overshirt, white crewneck tee, charcoal straight-leg trousers, clean sneakers. Supriya: tailored rose chudidhar, light cream dupatta, minimalist flats. Exact destination copy: \"His final year. My third year.\".",
+      "video_prompt": "Portrait cinematic pastel-watercolor Tamil love story. Preserve pinned first frame, physically hide outgoing scene before revealing pinned destination. Location-specific magical foreground depth: 12 to 18 small independent motifs at varied depths and sizes, with just one or two medium accents. College: blank paper corners, small curled sheets, pencil shavings, tiny leaflets, eraser pieces and pencil fragments; cafe: leaves and a few coffee beans; court: leaves and tiny seed tufts; beach: sea-spray droplets and pale coastal petals; airport: blank ticket slips; home: delicate petals and dust glints. Float only the motifs appropriate to the scene. Slow gentle drift and rotation, distributed asymmetrically in foreground and background, soft depth blur; visible when camera brakes. Never cover faces or text; never detach fixed decor. Motifs belong to their own location, need not match across scenes, never chase the camera. No uniform confetti rain or burst. No mobile phones, social-media screens, ribbons, dissolve, duplicated people or signs.\n\nFULL 90-DEGREE LEFT camera-heading pivot, not a push-in with minor steering. Destination begins offscreen at the side. Forward translation below half a metre. A close solid door jamb, wall edge or tree trunk sweeps across the lens in directional blur, fully hiding the previous composition before revealing the next story chapter. This is an occlusion-led editorial transition between memories; do not morph one location into another or show both countries sharing one space. 0.00-0.20s anticipate; 0.20-1.20s turn; 1.20-1.60s brake; 1.60-4.00s settle. Strong cubic ease-out in final 25 degrees. After braking:  a tiny counterclockwise arc at constant subject distance. Incoming destination text starts invisible. During camera braking, reveal its exact copy in reading order: characters draw on rapidly within each word, then the next word follows, with a restrained peach light tracing the letter edges. Each newly forming word scales smoothly from 85 to 100 percent on its final baseline with a soft luminous edge trace, then becomes still; no flying alphabet, scrambling, smoke or liquid gold. Complete by 65 percent of clip duration, then keep fully readable through the continuing gentle camera drift. Never reveal all text at once. Outgoing already-complete text stays unchanged until occluded. Outfit change is concealed during complete occlusion. People remain planted, small expressions only.\n\nDestination: College entrance bench at afternoon, the couple meeting beside their notebooks, young Tamil faces and warm smiles. Entrance jamb near right edge provides foreground depth. No phone. Wardrobe: Ashok: relaxed sage overshirt, white crewneck tee, charcoal straight-leg trousers, clean sneakers. Supriya: tailored rose chudidhar, light cream dupatta, minimalist flats. Exact destination copy: \"His final year. My third year.\".",
+      "video_path": "clip-2.mp4",
+      "final_frame_path": "clip-2-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 1
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 3
+        }
+      },
+      "prompt": "FULL 90-DEGREE LEFT camera-heading pivot, not a push-in with minor steering. Destination begins offscreen at the side. Forward translation below half a metre. A close solid door jamb, wall edge or tree trunk sweeps across the lens in directional blur, fully hiding the previous composition before revealing the next story chapter. This is an occlusion-led editorial transition between memories; do not morph one location into another or show both countries sharing one space. 0.00-0.20s anticipate; 0.20-1.20s turn; 1.20-1.60s brake; 1.60-4.00s settle. Strong cubic ease-out in final 25 degrees. After braking:  a tiny counterclockwise arc at constant subject distance. Incoming destination text starts invisible. During camera braking, reveal its exact copy in reading order: characters draw on rapidly within each word, then the next word follows, with a restrained peach light tracing the letter edges. Each newly forming word scales smoothly from 85 to 100 percent on its final baseline with a soft luminous edge trace, then becomes still; no flying alphabet, scrambling, smoke or liquid gold. Complete by 65 percent of clip duration, then keep fully readable through the continuing gentle camera drift. Never reveal all text at once. Outgoing already-complete text stays unchanged until occluded. Outfit change is concealed during complete occlusion. People remain planted, small expressions only.",
+      "request_metadata": {
+        "requestId": "d0a816a3-dadb-9b2e-8127-f13730adf239",
+        "status": "done",
+        "model": "grok-imagine-video-1.5",
+        "duration": 4,
+        "usage": {
+          "cost_in_usd_ticks": 5800000000
+        },
+        "outputUrl": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-d0a816a3-dadb-9b2e-8127-f13730adf239.mp4"
+      },
+      "selected_take": 1,
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "97"
+          }
+        ],
+        "format": {
+          "duration": "4.042000"
+        }
+      },
+      "actual_input": {
+        "model": "grok-imagine-video-1.5",
+        "duration": 4,
+        "aspect_ratio": "9:16",
+        "resolution": "720p",
+        "firstImage": "output/socialmedia-college-anime-v8/clip-2-take-1-first.jpg",
+        "lastImage": "output/socialmedia-college-anime-v8/clip-2-take-1-last.jpg",
+        "firstImageSha256": "fa6cfd30a22580f87bd1fb1784a1d9a075eb05e6607e6ad9ab721a0fc5dda4ec",
+        "lastImageSha256": "36eae0d00043ce30d58ea26ea526d3006477408e5978caac1b5a937f7a6dabd3",
+        "keyframes": [],
+        "sourceVideoFramesSent": false
+      },
+      "review_note": "First take selected; no creative retake.",
+      "timeline": {
+        "start_seconds": 5.041666666666667,
+        "end_seconds": 9.083333333333334
+      }
+    },
+    {
+      "index": 3,
+      "from": 3,
+      "to": 4,
+      "duration": 5,
+      "status": "generated-first-take",
+      "camera": "RIGHT 90-degree pivot; a small upward tilt, then a quiet lateral drift",
+      "video_prompt_template": "Portrait cinematic pastel-watercolor Tamil love story. Preserve pinned first frame, physically hide outgoing scene before revealing pinned destination. Location-specific magical foreground depth: 12 to 18 small independent motifs at varied depths and sizes, with just one or two medium accents. College: blank paper corners, small curled sheets, pencil shavings, tiny leaflets, eraser pieces and pencil fragments; cafe: leaves and a few coffee beans; court: leaves and tiny seed tufts; beach: sea-spray droplets and pale coastal petals; airport: blank ticket slips; home: delicate petals and dust glints. Float only the motifs appropriate to the scene. Slow gentle drift and rotation, distributed asymmetrically in foreground and background, soft depth blur; visible when camera brakes. Never cover faces or text; never detach fixed decor. Motifs belong to their own location, need not match across scenes, never chase the camera. No uniform confetti rain or burst. No mobile phones, social-media screens, ribbons, dissolve, duplicated people or signs.\n\nFULL 90-DEGREE RIGHT camera-heading pivot, not a push-in with minor steering. Destination begins offscreen at the side. Forward translation below half a metre. A close solid door jamb, wall edge or tree trunk sweeps across the lens in directional blur, fully hiding the previous composition before revealing the next story chapter. This is an occlusion-led editorial transition between memories; do not morph one location into another or show both countries sharing one space. 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Strong cubic ease-out in final 25 degrees. After braking:  a small upward tilt, then a quiet lateral drift. Incoming destination text starts invisible. During camera braking, reveal its exact copy in reading order: characters draw on rapidly within each word, then the next word follows, with a restrained peach light tracing the letter edges. Each newly forming word scales smoothly from 85 to 100 percent on its final baseline with a soft luminous edge trace, then becomes still; no flying alphabet, scrambling, smoke or liquid gold. Complete by 65 percent of clip duration, then keep fully readable through the continuing gentle camera drift. Never reveal all text at once. Outgoing already-complete text stays unchanged until occluded. Outfit change is concealed during complete occlusion. People remain planted, small expressions only.\n\nDestination: Distinct campus café patio, couple seated across one small table with filter coffee and snack plates; bags beneath chairs, no screens. Clean wall space for caption. Wardrobe: Ashok: navy knit polo, stone relaxed chinos, clean sneakers. Supriya: modern powder-blue straight-cut chudidhar, sheer white dupatta, simple silver studs. Exact destination copy: \"Six months of dates after class.\".",
+      "video_prompt": "Portrait cinematic pastel-watercolor Tamil love story. Preserve pinned first frame, physically hide outgoing scene before revealing pinned destination. Location-specific magical foreground depth: 12 to 18 small independent motifs at varied depths and sizes, with just one or two medium accents. College: blank paper corners, small curled sheets, pencil shavings, tiny leaflets, eraser pieces and pencil fragments; cafe: leaves and a few coffee beans; court: leaves and tiny seed tufts; beach: sea-spray droplets and pale coastal petals; airport: blank ticket slips; home: delicate petals and dust glints. Float only the motifs appropriate to the scene. Slow gentle drift and rotation, distributed asymmetrically in foreground and background, soft depth blur; visible when camera brakes. Never cover faces or text; never detach fixed decor. Motifs belong to their own location, need not match across scenes, never chase the camera. No uniform confetti rain or burst. No mobile phones, social-media screens, ribbons, dissolve, duplicated people or signs.\n\nFULL 90-DEGREE RIGHT camera-heading pivot, not a push-in with minor steering. Destination begins offscreen at the side. Forward translation below half a metre. A close solid door jamb, wall edge or tree trunk sweeps across the lens in directional blur, fully hiding the previous composition before revealing the next story chapter. This is an occlusion-led editorial transition between memories; do not morph one location into another or show both countries sharing one space. 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Strong cubic ease-out in final 25 degrees. After braking:  a small upward tilt, then a quiet lateral drift. Incoming destination text starts invisible. During camera braking, reveal its exact copy in reading order: characters draw on rapidly within each word, then the next word follows, with a restrained peach light tracing the letter edges. Each newly forming word scales smoothly from 85 to 100 percent on its final baseline with a soft luminous edge trace, then becomes still; no flying alphabet, scrambling, smoke or liquid gold. Complete by 65 percent of clip duration, then keep fully readable through the continuing gentle camera drift. Never reveal all text at once. Outgoing already-complete text stays unchanged until occluded. Outfit change is concealed during complete occlusion. People remain planted, small expressions only.\n\nDestination: Distinct campus café patio, couple seated across one small table with filter coffee and snack plates; bags beneath chairs, no screens. Clean wall space for caption. Wardrobe: Ashok: navy knit polo, stone relaxed chinos, clean sneakers. Supriya: modern powder-blue straight-cut chudidhar, sheer white dupatta, simple silver studs. Exact destination copy: \"Six months of dates after class.\".",
+      "video_path": "clip-3.mp4",
+      "final_frame_path": "clip-3-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 2
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 4
+        }
+      },
+      "prompt": "FULL 90-DEGREE RIGHT camera-heading pivot, not a push-in with minor steering. Destination begins offscreen at the side. Forward translation below half a metre. A close solid door jamb, wall edge or tree trunk sweeps across the lens in directional blur, fully hiding the previous composition before revealing the next story chapter. This is an occlusion-led editorial transition between memories; do not morph one location into another or show both countries sharing one space. 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Strong cubic ease-out in final 25 degrees. After braking:  a small upward tilt, then a quiet lateral drift. Incoming destination text starts invisible. During camera braking, reveal its exact copy in reading order: characters draw on rapidly within each word, then the next word follows, with a restrained peach light tracing the letter edges. Each newly forming word scales smoothly from 85 to 100 percent on its final baseline with a soft luminous edge trace, then becomes still; no flying alphabet, scrambling, smoke or liquid gold. Complete by 65 percent of clip duration, then keep fully readable through the continuing gentle camera drift. Never reveal all text at once. Outgoing already-complete text stays unchanged until occluded. Outfit change is concealed during complete occlusion. People remain planted, small expressions only.",
+      "request_metadata": {
+        "requestId": "a2ab5b5c-478c-9e30-91b6-577ad9c59c94",
+        "status": "done",
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "usage": {
+          "cost_in_usd_ticks": 7200000000
+        },
+        "outputUrl": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-a2ab5b5c-478c-9e30-91b6-577ad9c59c94.mp4"
+      },
+      "selected_take": 1,
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "121"
+          }
+        ],
+        "format": {
+          "duration": "5.042000"
+        }
+      },
+      "actual_input": {
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "aspect_ratio": "9:16",
+        "resolution": "720p",
+        "firstImage": "output/socialmedia-college-anime-v8/clip-3-take-1-first.jpg",
+        "lastImage": "output/socialmedia-college-anime-v8/clip-3-take-1-last.jpg",
+        "firstImageSha256": "91ec52d48130e24cc9bfee6127219e0855ee05250eef08a1c75187e160f70a1a",
+        "lastImageSha256": "2e63c6963a48c31a7a826135696779b9fd0cc21dd76262aad4b1b4248891b2a5",
+        "keyframes": [],
+        "sourceVideoFramesSent": false
+      },
+      "review_note": "First take selected; no creative retake.",
+      "timeline": {
+        "start_seconds": 9.083333333333334,
+        "end_seconds": 14.125
+      }
+    },
+    {
+      "index": 4,
+      "from": 4,
+      "to": 5,
+      "duration": 5,
+      "status": "generated-first-take",
+      "camera": "LEFT 90-degree pivot; a tiny downward tilt to settle at the bride's eye level",
+      "video_prompt_template": "Portrait cinematic pastel-watercolor Tamil love story. Preserve pinned first frame, physically hide outgoing scene before revealing pinned destination. Location-specific magical foreground depth: 12 to 18 small independent motifs at varied depths and sizes, with just one or two medium accents. College: blank paper corners, small curled sheets, pencil shavings, tiny leaflets, eraser pieces and pencil fragments; cafe: leaves and a few coffee beans; court: leaves and tiny seed tufts; beach: sea-spray droplets and pale coastal petals; airport: blank ticket slips; home: delicate petals and dust glints. Float only the motifs appropriate to the scene. Slow gentle drift and rotation, distributed asymmetrically in foreground and background, soft depth blur; visible when camera brakes. Never cover faces or text; never detach fixed decor. Motifs belong to their own location, need not match across scenes, never chase the camera. No uniform confetti rain or burst. No mobile phones, social-media screens, ribbons, dissolve, duplicated people or signs.\n\nFULL 90-DEGREE LEFT camera-heading pivot, not a push-in with minor steering. Destination begins offscreen at the side. Forward translation below half a metre. A close solid door jamb, wall edge or tree trunk sweeps across the lens in directional blur, fully hiding the previous composition before revealing the next story chapter. This is an occlusion-led editorial transition between memories; do not morph one location into another or show both countries sharing one space. 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Strong cubic ease-out in final 25 degrees. After braking:  a tiny downward tilt to settle at the bride's eye level. Incoming destination text starts invisible. During camera braking, reveal its exact copy in reading order: characters draw on rapidly within each word, then the next word follows, with a restrained peach light tracing the letter edges. Each newly forming word scales smoothly from 85 to 100 percent on its final baseline with a soft luminous edge trace, then becomes still; no flying alphabet, scrambling, smoke or liquid gold. Complete by 65 percent of clip duration, then keep fully readable through the continuing gentle camera drift. Never reveal all text at once. Outgoing already-complete text stays unchanged until occluded. Outfit change is concealed during complete occlusion. People remain planted, small expressions only.\n\nDestination: Campus basketball-court edge at blue hour beside the student-film-club entrance and tree-lined walkway. One basketball rests between the seated couple’s feet, two plain cinema tickets on a bench; soft projector glow through a distant window, no readable posters. A single coherent location, not a montage or split screen. Wardrobe: Ashok: boxy cream tee, light indigo overshirt, dark straight-leg trousers. Supriya: sport-friendly teal cotton chudidhar, neatly draped ivory dupatta, white sneakers. Exact destination copy: \"Basketball. Movie nights. Campus walks.\".",
+      "video_prompt": "Portrait cinematic pastel-watercolor Tamil love story. Preserve pinned first frame, physically hide outgoing scene before revealing pinned destination. Location-specific magical foreground depth: 12 to 18 small independent motifs at varied depths and sizes, with just one or two medium accents. College: blank paper corners, small curled sheets, pencil shavings, tiny leaflets, eraser pieces and pencil fragments; cafe: leaves and a few coffee beans; court: leaves and tiny seed tufts; beach: sea-spray droplets and pale coastal petals; airport: blank ticket slips; home: delicate petals and dust glints. Float only the motifs appropriate to the scene. Slow gentle drift and rotation, distributed asymmetrically in foreground and background, soft depth blur; visible when camera brakes. Never cover faces or text; never detach fixed decor. Motifs belong to their own location, need not match across scenes, never chase the camera. No uniform confetti rain or burst. No mobile phones, social-media screens, ribbons, dissolve, duplicated people or signs.\n\nFULL 90-DEGREE LEFT camera-heading pivot, not a push-in with minor steering. Destination begins offscreen at the side. Forward translation below half a metre. A close solid door jamb, wall edge or tree trunk sweeps across the lens in directional blur, fully hiding the previous composition before revealing the next story chapter. This is an occlusion-led editorial transition between memories; do not morph one location into another or show both countries sharing one space. 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Strong cubic ease-out in final 25 degrees. After braking:  a tiny downward tilt to settle at the bride's eye level. Incoming destination text starts invisible. During camera braking, reveal its exact copy in reading order: characters draw on rapidly within each word, then the next word follows, with a restrained peach light tracing the letter edges. Each newly forming word scales smoothly from 85 to 100 percent on its final baseline with a soft luminous edge trace, then becomes still; no flying alphabet, scrambling, smoke or liquid gold. Complete by 65 percent of clip duration, then keep fully readable through the continuing gentle camera drift. Never reveal all text at once. Outgoing already-complete text stays unchanged until occluded. Outfit change is concealed during complete occlusion. People remain planted, small expressions only.\n\nDestination: Campus basketball-court edge at blue hour beside the student-film-club entrance and tree-lined walkway. One basketball rests between the seated couple’s feet, two plain cinema tickets on a bench; soft projector glow through a distant window, no readable posters. A single coherent location, not a montage or split screen. Wardrobe: Ashok: boxy cream tee, light indigo overshirt, dark straight-leg trousers. Supriya: sport-friendly teal cotton chudidhar, neatly draped ivory dupatta, white sneakers. Exact destination copy: \"Basketball. Movie nights. Campus walks.\".",
+      "video_path": "clip-4.mp4",
+      "final_frame_path": "clip-4-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 3
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 5
+        }
+      },
+      "prompt": "FULL 90-DEGREE LEFT camera-heading pivot, not a push-in with minor steering. Destination begins offscreen at the side. Forward translation below half a metre. A close solid door jamb, wall edge or tree trunk sweeps across the lens in directional blur, fully hiding the previous composition before revealing the next story chapter. This is an occlusion-led editorial transition between memories; do not morph one location into another or show both countries sharing one space. 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Strong cubic ease-out in final 25 degrees. After braking:  a tiny downward tilt to settle at the bride's eye level. Incoming destination text starts invisible. During camera braking, reveal its exact copy in reading order: characters draw on rapidly within each word, then the next word follows, with a restrained peach light tracing the letter edges. Each newly forming word scales smoothly from 85 to 100 percent on its final baseline with a soft luminous edge trace, then becomes still; no flying alphabet, scrambling, smoke or liquid gold. Complete by 65 percent of clip duration, then keep fully readable through the continuing gentle camera drift. Never reveal all text at once. Outgoing already-complete text stays unchanged until occluded. Outfit change is concealed during complete occlusion. People remain planted, small expressions only.",
+      "request_metadata": {
+        "requestId": "fbc775ca-d76d-9f33-9d24-8dd96070706b",
+        "status": "done",
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "usage": {
+          "cost_in_usd_ticks": 7200000000
+        },
+        "outputUrl": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-fbc775ca-d76d-9f33-9d24-8dd96070706b.mp4"
+      },
+      "selected_take": 1,
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "121"
+          }
+        ],
+        "format": {
+          "duration": "5.042000"
+        }
+      },
+      "actual_input": {
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "aspect_ratio": "9:16",
+        "resolution": "720p",
+        "firstImage": "output/socialmedia-college-anime-v8/clip-4-take-1-first.jpg",
+        "lastImage": "output/socialmedia-college-anime-v8/clip-4-take-1-last.jpg",
+        "firstImageSha256": "80ee871b890129192375b54a5b7ce5717a486516a971abc03f1ef27328fa36eb",
+        "lastImageSha256": "a2ba1673beb9c3a84fead042a267d929099e3acbb98c482cf511ec0f869c4c20",
+        "keyframes": [],
+        "sourceVideoFramesSent": false
+      },
+      "review_note": "First take selected; no creative retake.",
+      "timeline": {
+        "start_seconds": 14.125,
+        "end_seconds": 19.166666666666668
+      }
+    },
+    {
+      "index": 5,
+      "from": 5,
+      "to": 6,
+      "duration": 5,
+      "status": "generated-first-take",
+      "camera": "RIGHT 90-degree pivot; a slow eight-degree ORBIT across the plaque's bevel at CONSTANT distance, not a push-in",
+      "video_prompt_template": "Portrait cinematic pastel-watercolor Tamil love story. Preserve pinned first frame, physically hide outgoing scene before revealing pinned destination. Location-specific magical foreground depth: 12 to 18 small independent motifs at varied depths and sizes, with just one or two medium accents. College: blank paper corners, small curled sheets, pencil shavings, tiny leaflets, eraser pieces and pencil fragments; cafe: leaves and a few coffee beans; court: leaves and tiny seed tufts; beach: sea-spray droplets and pale coastal petals; airport: blank ticket slips; home: delicate petals and dust glints. Float only the motifs appropriate to the scene. Slow gentle drift and rotation, distributed asymmetrically in foreground and background, soft depth blur; visible when camera brakes. Never cover faces or text; never detach fixed decor. Motifs belong to their own location, need not match across scenes, never chase the camera. No uniform confetti rain or burst. No mobile phones, social-media screens, ribbons, dissolve, duplicated people or signs.\n\nFULL 90-DEGREE RIGHT camera-heading pivot, not a push-in with minor steering. Destination begins offscreen at the side. Forward translation below half a metre. A close solid door jamb, wall edge or tree trunk sweeps across the lens in directional blur, fully hiding the previous composition before revealing the next story chapter. This is an occlusion-led editorial transition between memories; do not morph one location into another or show both countries sharing one space. 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Strong cubic ease-out in final 25 degrees. After braking:  a slow eight-degree ORBIT across the plaque's bevel at CONSTANT distance, not a push-in. Incoming destination text starts invisible. During camera braking, reveal its exact copy in reading order: characters draw on rapidly within each word, then the next word follows, with a restrained peach light tracing the letter edges. Each newly forming word scales smoothly from 85 to 100 percent on its final baseline with a soft luminous edge trace, then becomes still; no flying alphabet, scrambling, smoke or liquid gold. Complete by 65 percent of clip duration, then keep fully readable through the continuing gentle camera drift. Never reveal all text at once. Outgoing already-complete text stays unchanged until occluded. Outfit change is concealed during complete occlusion. People remain planted, small expressions only.\n\nDestination: Quiet beach overlook at sunset, couple seated on a low stone seawall, shoes on sand below, shared snack bag. Gentle sea spray, natural eye contact. No walking or animated ball action. Wardrobe: Ashok: pale-blue linen shirt, beige trousers. Supriya: lilac chudidhar and pale-peach dupatta. Exact destination copy: \"And weekends at the beach.\".",
+      "video_prompt": "Portrait cinematic pastel-watercolor Tamil love story. Preserve pinned first frame, physically hide outgoing scene before revealing pinned destination. Location-specific magical foreground depth: 12 to 18 small independent motifs at varied depths and sizes, with just one or two medium accents. College: blank paper corners, small curled sheets, pencil shavings, tiny leaflets, eraser pieces and pencil fragments; cafe: leaves and a few coffee beans; court: leaves and tiny seed tufts; beach: sea-spray droplets and pale coastal petals; airport: blank ticket slips; home: delicate petals and dust glints. Float only the motifs appropriate to the scene. Slow gentle drift and rotation, distributed asymmetrically in foreground and background, soft depth blur; visible when camera brakes. Never cover faces or text; never detach fixed decor. Motifs belong to their own location, need not match across scenes, never chase the camera. No uniform confetti rain or burst. No mobile phones, social-media screens, ribbons, dissolve, duplicated people or signs.\n\nFULL 90-DEGREE RIGHT camera-heading pivot, not a push-in with minor steering. Destination begins offscreen at the side. Forward translation below half a metre. A close solid door jamb, wall edge or tree trunk sweeps across the lens in directional blur, fully hiding the previous composition before revealing the next story chapter. This is an occlusion-led editorial transition between memories; do not morph one location into another or show both countries sharing one space. 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Strong cubic ease-out in final 25 degrees. After braking:  a slow eight-degree ORBIT across the plaque's bevel at CONSTANT distance, not a push-in. Incoming destination text starts invisible. During camera braking, reveal its exact copy in reading order: characters draw on rapidly within each word, then the next word follows, with a restrained peach light tracing the letter edges. Each newly forming word scales smoothly from 85 to 100 percent on its final baseline with a soft luminous edge trace, then becomes still; no flying alphabet, scrambling, smoke or liquid gold. Complete by 65 percent of clip duration, then keep fully readable through the continuing gentle camera drift. Never reveal all text at once. Outgoing already-complete text stays unchanged until occluded. Outfit change is concealed during complete occlusion. People remain planted, small expressions only.\n\nDestination: Quiet beach overlook at sunset, couple seated on a low stone seawall, shoes on sand below, shared snack bag. Gentle sea spray, natural eye contact. No walking or animated ball action. Wardrobe: Ashok: pale-blue linen shirt, beige trousers. Supriya: lilac chudidhar and pale-peach dupatta. Exact destination copy: \"And weekends at the beach.\".",
+      "video_path": "clip-5.mp4",
+      "final_frame_path": "clip-5-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 4
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 6
+        }
+      },
+      "prompt": "FULL 90-DEGREE RIGHT camera-heading pivot, not a push-in with minor steering. Destination begins offscreen at the side. Forward translation below half a metre. A close solid door jamb, wall edge or tree trunk sweeps across the lens in directional blur, fully hiding the previous composition before revealing the next story chapter. This is an occlusion-led editorial transition between memories; do not morph one location into another or show both countries sharing one space. 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Strong cubic ease-out in final 25 degrees. After braking:  a slow eight-degree ORBIT across the plaque's bevel at CONSTANT distance, not a push-in. Incoming destination text starts invisible. During camera braking, reveal its exact copy in reading order: characters draw on rapidly within each word, then the next word follows, with a restrained peach light tracing the letter edges. Each newly forming word scales smoothly from 85 to 100 percent on its final baseline with a soft luminous edge trace, then becomes still; no flying alphabet, scrambling, smoke or liquid gold. Complete by 65 percent of clip duration, then keep fully readable through the continuing gentle camera drift. Never reveal all text at once. Outgoing already-complete text stays unchanged until occluded. Outfit change is concealed during complete occlusion. People remain planted, small expressions only.",
+      "request_metadata": {
+        "requestId": "145157e0-9ea4-9a0c-995d-5ca33b401018",
+        "status": "done",
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "usage": {
+          "cost_in_usd_ticks": 7200000000
+        },
+        "outputUrl": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-145157e0-9ea4-9a0c-995d-5ca33b401018.mp4"
+      },
+      "selected_take": 1,
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "121"
+          }
+        ],
+        "format": {
+          "duration": "5.042000"
+        }
+      },
+      "actual_input": {
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "aspect_ratio": "9:16",
+        "resolution": "720p",
+        "firstImage": "output/socialmedia-college-anime-v8/clip-5-take-1-first.jpg",
+        "lastImage": "output/socialmedia-college-anime-v8/clip-5-take-1-last.jpg",
+        "firstImageSha256": "c68d324452c5a539bca4fa75af7530bdc7b2277855803fd80fe194602e199ffb",
+        "lastImageSha256": "ee3ab1b49e1cdb7937d53f5223bf172f7d54751754f414ecabb9a2f05b04e176",
+        "keyframes": [],
+        "sourceVideoFramesSent": false
+      },
+      "review_note": "First take selected; no creative retake.",
+      "timeline": {
+        "start_seconds": 19.166666666666668,
+        "end_seconds": 24.208333333333332
+      }
+    },
+    {
+      "index": 6,
+      "from": 6,
+      "to": 7,
+      "duration": 5,
+      "status": "generated-first-take",
+      "camera": "LEFT 90-degree pivot; a slow slight crane DOWN toward seated eye height, with almost no forward translation",
+      "video_prompt_template": "Portrait cinematic pastel-watercolor Tamil love story. Preserve pinned first frame, physically hide outgoing scene before revealing pinned destination. Location-specific magical foreground depth: 12 to 18 small independent motifs at varied depths and sizes, with just one or two medium accents. College: blank paper corners, small curled sheets, pencil shavings, tiny leaflets, eraser pieces and pencil fragments; cafe: leaves and a few coffee beans; court: leaves and tiny seed tufts; beach: sea-spray droplets and pale coastal petals; airport: blank ticket slips; home: delicate petals and dust glints. Float only the motifs appropriate to the scene. Slow gentle drift and rotation, distributed asymmetrically in foreground and background, soft depth blur; visible when camera brakes. Never cover faces or text; never detach fixed decor. Motifs belong to their own location, need not match across scenes, never chase the camera. No uniform confetti rain or burst. No mobile phones, social-media screens, ribbons, dissolve, duplicated people or signs.\n\nFULL 90-DEGREE LEFT camera-heading pivot, not a push-in with minor steering. Destination begins offscreen at the side. Forward translation below half a metre. A close solid door jamb, wall edge or tree trunk sweeps across the lens in directional blur, fully hiding the previous composition before revealing the next story chapter. This is an occlusion-led editorial transition between memories; do not morph one location into another or show both countries sharing one space. 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Strong cubic ease-out in final 25 degrees. After braking:  a slow slight crane DOWN toward seated eye height, with almost no forward translation. Incoming destination text starts invisible. During camera braking, reveal its exact copy in reading order: characters draw on rapidly within each word, then the next word follows, with a restrained peach light tracing the letter edges. Each newly forming word scales smoothly from 85 to 100 percent on its final baseline with a soft luminous edge trace, then becomes still; no flying alphabet, scrambling, smoke or liquid gold. Complete by 65 percent of clip duration, then keep fully readable through the continuing gentle camera drift. Never reveal all text at once. Outgoing already-complete text stays unchanged until occluded. Outfit change is concealed during complete occlusion. People remain planted, small expressions only.\n\nDestination: Airport departure lounge, Ashok beside one stationary suitcase, Supriya next to him holding his hand; plane visible through far window, no airline logo or invented destination. No phone or screens with readable words. Wardrobe: Ashok: charcoal travel jacket, ivory shirt. Supriya: muted mustard chudidhar and cream dupatta. Exact destination copy: \"Then he moved abroad for work.\".",
+      "video_prompt": "Portrait cinematic pastel-watercolor Tamil love story. Preserve pinned first frame, physically hide outgoing scene before revealing pinned destination. Location-specific magical foreground depth: 12 to 18 small independent motifs at varied depths and sizes, with just one or two medium accents. College: blank paper corners, small curled sheets, pencil shavings, tiny leaflets, eraser pieces and pencil fragments; cafe: leaves and a few coffee beans; court: leaves and tiny seed tufts; beach: sea-spray droplets and pale coastal petals; airport: blank ticket slips; home: delicate petals and dust glints. Float only the motifs appropriate to the scene. Slow gentle drift and rotation, distributed asymmetrically in foreground and background, soft depth blur; visible when camera brakes. Never cover faces or text; never detach fixed decor. Motifs belong to their own location, need not match across scenes, never chase the camera. No uniform confetti rain or burst. No mobile phones, social-media screens, ribbons, dissolve, duplicated people or signs.\n\nFULL 90-DEGREE LEFT camera-heading pivot, not a push-in with minor steering. Destination begins offscreen at the side. Forward translation below half a metre. A close solid door jamb, wall edge or tree trunk sweeps across the lens in directional blur, fully hiding the previous composition before revealing the next story chapter. This is an occlusion-led editorial transition between memories; do not morph one location into another or show both countries sharing one space. 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Strong cubic ease-out in final 25 degrees. After braking:  a slow slight crane DOWN toward seated eye height, with almost no forward translation. Incoming destination text starts invisible. During camera braking, reveal its exact copy in reading order: characters draw on rapidly within each word, then the next word follows, with a restrained peach light tracing the letter edges. Each newly forming word scales smoothly from 85 to 100 percent on its final baseline with a soft luminous edge trace, then becomes still; no flying alphabet, scrambling, smoke or liquid gold. Complete by 65 percent of clip duration, then keep fully readable through the continuing gentle camera drift. Never reveal all text at once. Outgoing already-complete text stays unchanged until occluded. Outfit change is concealed during complete occlusion. People remain planted, small expressions only.\n\nDestination: Airport departure lounge, Ashok beside one stationary suitcase, Supriya next to him holding his hand; plane visible through far window, no airline logo or invented destination. No phone or screens with readable words. Wardrobe: Ashok: charcoal travel jacket, ivory shirt. Supriya: muted mustard chudidhar and cream dupatta. Exact destination copy: \"Then he moved abroad for work.\".",
+      "video_path": "clip-6.mp4",
+      "final_frame_path": "clip-6-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 5
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 7
+        }
+      },
+      "prompt": "FULL 90-DEGREE LEFT camera-heading pivot, not a push-in with minor steering. Destination begins offscreen at the side. Forward translation below half a metre. A close solid door jamb, wall edge or tree trunk sweeps across the lens in directional blur, fully hiding the previous composition before revealing the next story chapter. This is an occlusion-led editorial transition between memories; do not morph one location into another or show both countries sharing one space. 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Strong cubic ease-out in final 25 degrees. After braking:  a slow slight crane DOWN toward seated eye height, with almost no forward translation. Incoming destination text starts invisible. During camera braking, reveal its exact copy in reading order: characters draw on rapidly within each word, then the next word follows, with a restrained peach light tracing the letter edges. Each newly forming word scales smoothly from 85 to 100 percent on its final baseline with a soft luminous edge trace, then becomes still; no flying alphabet, scrambling, smoke or liquid gold. Complete by 65 percent of clip duration, then keep fully readable through the continuing gentle camera drift. Never reveal all text at once. Outgoing already-complete text stays unchanged until occluded. Outfit change is concealed during complete occlusion. People remain planted, small expressions only.",
+      "request_metadata": {
+        "requestId": "8c053620-495c-9a61-9ce5-ae01827c48c3",
+        "status": "done",
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "usage": {
+          "cost_in_usd_ticks": 7200000000
+        },
+        "outputUrl": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-8c053620-495c-9a61-9ce5-ae01827c48c3.mp4"
+      },
+      "selected_take": 1,
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "121"
+          }
+        ],
+        "format": {
+          "duration": "5.042000"
+        }
+      },
+      "actual_input": {
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "aspect_ratio": "9:16",
+        "resolution": "720p",
+        "firstImage": "output/socialmedia-college-anime-v8/clip-6-take-1-first.jpg",
+        "lastImage": "output/socialmedia-college-anime-v8/clip-6-take-1-last.jpg",
+        "firstImageSha256": "6b662c47620aad267dc1cbdc7c0fc62a2cd57bb24635ea136819941eea9f3b25",
+        "lastImageSha256": "27179bae6f324c54b86d36676184e4e40319476e3e822d960d880a7c8465eb47",
+        "keyframes": [],
+        "sourceVideoFramesSent": false
+      },
+      "review_note": "First take selected; no creative retake.",
+      "timeline": {
+        "start_seconds": 24.208333333333332,
+        "end_seconds": 29.25
+      }
+    },
+    {
+      "index": 7,
+      "from": 7,
+      "to": 8,
+      "duration": 5,
+      "status": "generated-first-take",
+      "camera": "RIGHT 90-degree pivot; a small upward crane to standing eye height while yaw eases to a stop",
+      "video_prompt_template": "Portrait cinematic pastel-watercolor Tamil love story. Preserve pinned first frame, physically hide outgoing scene before revealing pinned destination. Location-specific magical foreground depth: 12 to 18 small independent motifs at varied depths and sizes, with just one or two medium accents. College: blank paper corners, small curled sheets, pencil shavings, tiny leaflets, eraser pieces and pencil fragments; cafe: leaves and a few coffee beans; court: leaves and tiny seed tufts; beach: sea-spray droplets and pale coastal petals; airport: blank ticket slips; home: delicate petals and dust glints. Float only the motifs appropriate to the scene. Slow gentle drift and rotation, distributed asymmetrically in foreground and background, soft depth blur; visible when camera brakes. Never cover faces or text; never detach fixed decor. Motifs belong to their own location, need not match across scenes, never chase the camera. No uniform confetti rain or burst. No mobile phones, social-media screens, ribbons, dissolve, duplicated people or signs.\n\nFULL 90-DEGREE RIGHT camera-heading pivot, not a push-in with minor steering. Destination begins offscreen at the side. Forward translation below half a metre. A close solid door jamb, wall edge or tree trunk sweeps across the lens in directional blur, fully hiding the previous composition before revealing the next story chapter. This is an occlusion-led editorial transition between memories; do not morph one location into another or show both countries sharing one space. 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Strong cubic ease-out in final 25 degrees. After braking:  a small upward crane to standing eye height while yaw eases to a stop. Incoming destination text starts invisible. During camera braking, reveal its exact copy in reading order: characters draw on rapidly within each word, then the next word follows, with a restrained peach light tracing the letter edges. Each newly forming word scales smoothly from 85 to 100 percent on its final baseline with a soft luminous edge trace, then becomes still; no flying alphabet, scrambling, smoke or liquid gold. Complete by 65 percent of clip duration, then keep fully readable through the continuing gentle camera drift. Never reveal all text at once. Outgoing already-complete text stays unchanged until occluded. Outfit change is concealed during complete occlusion. People remain planted, small expressions only.\n\nDestination: Supriya at a home desk beside an open window at night, keeping handwritten letters in a simple memory box, small framed photo of the same couple at the beach. Envelope postmarks indistinct, no calendar full of dates. One intact quiet room; distance told through letters, not devices or split screen. Wardrobe: Supriya: sage chudidhar, rose dupatta. Ashok appears only in the small printed photo, same face. Exact destination copy: \"Five years apart. We kept choosing us.\".",
+      "video_prompt": "Portrait cinematic pastel-watercolor Tamil love story. Preserve pinned first frame, physically hide outgoing scene before revealing pinned destination. Location-specific magical foreground depth: 12 to 18 small independent motifs at varied depths and sizes, with just one or two medium accents. College: blank paper corners, small curled sheets, pencil shavings, tiny leaflets, eraser pieces and pencil fragments; cafe: leaves and a few coffee beans; court: leaves and tiny seed tufts; beach: sea-spray droplets and pale coastal petals; airport: blank ticket slips; home: delicate petals and dust glints. Float only the motifs appropriate to the scene. Slow gentle drift and rotation, distributed asymmetrically in foreground and background, soft depth blur; visible when camera brakes. Never cover faces or text; never detach fixed decor. Motifs belong to their own location, need not match across scenes, never chase the camera. No uniform confetti rain or burst. No mobile phones, social-media screens, ribbons, dissolve, duplicated people or signs.\n\nFULL 90-DEGREE RIGHT camera-heading pivot, not a push-in with minor steering. Destination begins offscreen at the side. Forward translation below half a metre. A close solid door jamb, wall edge or tree trunk sweeps across the lens in directional blur, fully hiding the previous composition before revealing the next story chapter. This is an occlusion-led editorial transition between memories; do not morph one location into another or show both countries sharing one space. 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Strong cubic ease-out in final 25 degrees. After braking:  a small upward crane to standing eye height while yaw eases to a stop. Incoming destination text starts invisible. During camera braking, reveal its exact copy in reading order: characters draw on rapidly within each word, then the next word follows, with a restrained peach light tracing the letter edges. Each newly forming word scales smoothly from 85 to 100 percent on its final baseline with a soft luminous edge trace, then becomes still; no flying alphabet, scrambling, smoke or liquid gold. Complete by 65 percent of clip duration, then keep fully readable through the continuing gentle camera drift. Never reveal all text at once. Outgoing already-complete text stays unchanged until occluded. Outfit change is concealed during complete occlusion. People remain planted, small expressions only.\n\nDestination: Supriya at a home desk beside an open window at night, keeping handwritten letters in a simple memory box, small framed photo of the same couple at the beach. Envelope postmarks indistinct, no calendar full of dates. One intact quiet room; distance told through letters, not devices or split screen. Wardrobe: Supriya: sage chudidhar, rose dupatta. Ashok appears only in the small printed photo, same face. Exact destination copy: \"Five years apart. We kept choosing us.\".",
+      "video_path": "clip-7.mp4",
+      "final_frame_path": "clip-7-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 6
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 8
+        }
+      },
+      "prompt": "FULL 90-DEGREE RIGHT camera-heading pivot, not a push-in with minor steering. Destination begins offscreen at the side. Forward translation below half a metre. A close solid door jamb, wall edge or tree trunk sweeps across the lens in directional blur, fully hiding the previous composition before revealing the next story chapter. This is an occlusion-led editorial transition between memories; do not morph one location into another or show both countries sharing one space. 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Strong cubic ease-out in final 25 degrees. After braking:  a small upward crane to standing eye height while yaw eases to a stop. Incoming destination text starts invisible. During camera braking, reveal its exact copy in reading order: characters draw on rapidly within each word, then the next word follows, with a restrained peach light tracing the letter edges. Each newly forming word scales smoothly from 85 to 100 percent on its final baseline with a soft luminous edge trace, then becomes still; no flying alphabet, scrambling, smoke or liquid gold. Complete by 65 percent of clip duration, then keep fully readable through the continuing gentle camera drift. Never reveal all text at once. Outgoing already-complete text stays unchanged until occluded. Outfit change is concealed during complete occlusion. People remain planted, small expressions only.",
+      "request_metadata": {
+        "requestId": "9176c813-96db-978a-afe1-480df4fb6b6e",
+        "status": "done",
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "usage": {
+          "cost_in_usd_ticks": 7200000000
+        },
+        "outputUrl": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-9176c813-96db-978a-afe1-480df4fb6b6e.mp4"
+      },
+      "selected_take": 1,
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "121"
+          }
+        ],
+        "format": {
+          "duration": "5.042000"
+        }
+      },
+      "actual_input": {
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "aspect_ratio": "9:16",
+        "resolution": "720p",
+        "firstImage": "output/socialmedia-college-anime-v8/clip-7-take-1-first.jpg",
+        "lastImage": "output/socialmedia-college-anime-v8/clip-7-take-1-last.jpg",
+        "firstImageSha256": "0c5c9ee0298a43ab150b352fb2d7a4cc972077a0f962ea351febca3ec5755520",
+        "lastImageSha256": "c9380e946e5b402b7f275f5b8d0042b1c78a72cfd5dc3e4e5f7dae9fca54fa36",
+        "keyframes": [],
+        "sourceVideoFramesSent": false
+      },
+      "review_note": "First take selected; no creative retake.",
+      "timeline": {
+        "start_seconds": 29.25,
+        "end_seconds": 34.291666666666664
+      }
+    },
+    {
+      "index": 8,
+      "from": 8,
+      "to": 9,
+      "duration": 5,
+      "status": "generated-first-take",
+      "camera": "RIGHT 90-degree pivot; a very slow leftward correcting arc at fixed distance",
+      "video_prompt_template": "Portrait cinematic pastel-watercolor Tamil love story. Preserve pinned first frame, physically hide outgoing scene before revealing pinned destination. Location-specific magical foreground depth: 12 to 18 small independent motifs at varied depths and sizes, with just one or two medium accents. College: blank paper corners, small curled sheets, pencil shavings, tiny leaflets, eraser pieces and pencil fragments; cafe: leaves and a few coffee beans; court: leaves and tiny seed tufts; beach: sea-spray droplets and pale coastal petals; airport: blank ticket slips; home: delicate petals and dust glints. Float only the motifs appropriate to the scene. Slow gentle drift and rotation, distributed asymmetrically in foreground and background, soft depth blur; visible when camera brakes. Never cover faces or text; never detach fixed decor. Motifs belong to their own location, need not match across scenes, never chase the camera. No uniform confetti rain or burst. No mobile phones, social-media screens, ribbons, dissolve, duplicated people or signs.\n\nFULL 90-DEGREE RIGHT camera-heading pivot, not a push-in with minor steering. Destination begins offscreen at the side. Forward translation below half a metre. A close solid door jamb, wall edge or tree trunk sweeps across the lens in directional blur, fully hiding the previous composition before revealing the next story chapter. This is an occlusion-led editorial transition between memories; do not morph one location into another or show both countries sharing one space. 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Strong cubic ease-out in final 25 degrees. After braking:  a very slow leftward correcting arc at fixed distance. Incoming destination text starts invisible. During camera braking, reveal its exact copy in reading order: characters draw on rapidly within each word, then the next word follows, with a restrained peach light tracing the letter edges. Each newly forming word scales smoothly from 85 to 100 percent on its final baseline with a soft luminous edge trace, then becomes still; no flying alphabet, scrambling, smoke or liquid gold. Complete by 65 percent of clip duration, then keep fully readable through the continuing gentle camera drift. Never reveal all text at once. Outgoing already-complete text stays unchanged until occluded. Outfit change is concealed during complete occlusion. People remain planted, small expressions only.\n\nDestination: Different setting: quiet rainy veranda, Supriya seated reading one letter, restrained hopeful expression with moist eyes, a cup and small stack of letters beside her. The line about nearly giving up is romantic relationship context. No distressed theatrics. Clear dry wall for caption. Wardrobe: Supriya: cornflower-blue chudidhar, ivory dupatta. Exact destination copy: \"Last year, I nearly gave up. He helped us keep going.\".",
+      "video_prompt": "Portrait cinematic pastel-watercolor Tamil love story. Preserve pinned first frame, physically hide outgoing scene before revealing pinned destination. Location-specific magical foreground depth: 12 to 18 small independent motifs at varied depths and sizes, with just one or two medium accents. College: blank paper corners, small curled sheets, pencil shavings, tiny leaflets, eraser pieces and pencil fragments; cafe: leaves and a few coffee beans; court: leaves and tiny seed tufts; beach: sea-spray droplets and pale coastal petals; airport: blank ticket slips; home: delicate petals and dust glints. Float only the motifs appropriate to the scene. Slow gentle drift and rotation, distributed asymmetrically in foreground and background, soft depth blur; visible when camera brakes. Never cover faces or text; never detach fixed decor. Motifs belong to their own location, need not match across scenes, never chase the camera. No uniform confetti rain or burst. No mobile phones, social-media screens, ribbons, dissolve, duplicated people or signs.\n\nFULL 90-DEGREE RIGHT camera-heading pivot, not a push-in with minor steering. Destination begins offscreen at the side. Forward translation below half a metre. A close solid door jamb, wall edge or tree trunk sweeps across the lens in directional blur, fully hiding the previous composition before revealing the next story chapter. This is an occlusion-led editorial transition between memories; do not morph one location into another or show both countries sharing one space. 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Strong cubic ease-out in final 25 degrees. After braking:  a very slow leftward correcting arc at fixed distance. Incoming destination text starts invisible. During camera braking, reveal its exact copy in reading order: characters draw on rapidly within each word, then the next word follows, with a restrained peach light tracing the letter edges. Each newly forming word scales smoothly from 85 to 100 percent on its final baseline with a soft luminous edge trace, then becomes still; no flying alphabet, scrambling, smoke or liquid gold. Complete by 65 percent of clip duration, then keep fully readable through the continuing gentle camera drift. Never reveal all text at once. Outgoing already-complete text stays unchanged until occluded. Outfit change is concealed during complete occlusion. People remain planted, small expressions only.\n\nDestination: Different setting: quiet rainy veranda, Supriya seated reading one letter, restrained hopeful expression with moist eyes, a cup and small stack of letters beside her. The line about nearly giving up is romantic relationship context. No distressed theatrics. Clear dry wall for caption. Wardrobe: Supriya: cornflower-blue chudidhar, ivory dupatta. Exact destination copy: \"Last year, I nearly gave up. He helped us keep going.\".",
+      "video_path": "clip-8.mp4",
+      "final_frame_path": "clip-8-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 7
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 9
+        }
+      },
+      "prompt": "FULL 90-DEGREE RIGHT camera-heading pivot, not a push-in with minor steering. Destination begins offscreen at the side. Forward translation below half a metre. A close solid door jamb, wall edge or tree trunk sweeps across the lens in directional blur, fully hiding the previous composition before revealing the next story chapter. This is an occlusion-led editorial transition between memories; do not morph one location into another or show both countries sharing one space. 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Strong cubic ease-out in final 25 degrees. After braking:  a very slow leftward correcting arc at fixed distance. Incoming destination text starts invisible. During camera braking, reveal its exact copy in reading order: characters draw on rapidly within each word, then the next word follows, with a restrained peach light tracing the letter edges. Each newly forming word scales smoothly from 85 to 100 percent on its final baseline with a soft luminous edge trace, then becomes still; no flying alphabet, scrambling, smoke or liquid gold. Complete by 65 percent of clip duration, then keep fully readable through the continuing gentle camera drift. Never reveal all text at once. Outgoing already-complete text stays unchanged until occluded. Outfit change is concealed during complete occlusion. People remain planted, small expressions only.",
+      "request_metadata": {
+        "requestId": "bca70673-a025-9298-85e8-35ddfbdde344",
+        "status": "done",
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "usage": {
+          "cost_in_usd_ticks": 7200000000
+        },
+        "outputUrl": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-bca70673-a025-9298-85e8-35ddfbdde344.mp4"
+      },
+      "selected_take": 1,
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "121"
+          }
+        ],
+        "format": {
+          "duration": "5.042000"
+        }
+      },
+      "actual_input": {
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "aspect_ratio": "9:16",
+        "resolution": "720p",
+        "firstImage": "output/socialmedia-college-anime-v8/clip-8-take-1-first.jpg",
+        "lastImage": "output/socialmedia-college-anime-v8/clip-8-take-1-last.jpg",
+        "firstImageSha256": "a1022d682967b241b22df43ce8ab9e57235aa66b3c9a1634c21b5fd04c58601d",
+        "lastImageSha256": "5ed9d1b836789330ac17ea9a81ba1a5cee467a10ccb9c07466572013d51fe6c0",
+        "keyframes": [],
+        "sourceVideoFramesSent": false
+      },
+      "review_note": "First take selected; no creative retake.",
+      "timeline": {
+        "start_seconds": 34.291666666666664,
+        "end_seconds": 39.333333333333336
+      }
+    },
+    {
+      "index": 9,
+      "from": 9,
+      "to": 10,
+      "duration": 5,
+      "status": "generated-first-take",
+      "camera": "LEFT 90-degree pivot; a gentle lateral drift over 20 centimetres at constant distance from the plaque",
+      "video_prompt_template": "Portrait cinematic pastel-watercolor Tamil love story. Preserve pinned first frame, physically hide outgoing scene before revealing pinned destination. Location-specific magical foreground depth: 12 to 18 small independent motifs at varied depths and sizes, with just one or two medium accents. College: blank paper corners, small curled sheets, pencil shavings, tiny leaflets, eraser pieces and pencil fragments; cafe: leaves and a few coffee beans; court: leaves and tiny seed tufts; beach: sea-spray droplets and pale coastal petals; airport: blank ticket slips; home: delicate petals and dust glints. Float only the motifs appropriate to the scene. Slow gentle drift and rotation, distributed asymmetrically in foreground and background, soft depth blur; visible when camera brakes. Never cover faces or text; never detach fixed decor. Motifs belong to their own location, need not match across scenes, never chase the camera. No uniform confetti rain or burst. No mobile phones, social-media screens, ribbons, dissolve, duplicated people or signs.\n\nFULL 90-DEGREE LEFT camera-heading pivot, not a push-in with minor steering. Destination begins offscreen at the side. Forward translation below half a metre. A close solid door jamb, wall edge or tree trunk sweeps across the lens in directional blur, fully hiding the previous composition before revealing the next story chapter. This is an occlusion-led editorial transition between memories; do not morph one location into another or show both countries sharing one space. 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Strong cubic ease-out in final 25 degrees. After braking:  a gentle lateral drift over 20 centimetres at constant distance from the plaque. Incoming destination text starts invisible. During camera braking, reveal its exact copy in reading order: characters draw on rapidly within each word, then the next word follows, with a restrained peach light tracing the letter edges. Each newly forming word scales smoothly from 85 to 100 percent on its final baseline with a soft luminous edge trace, then becomes still; no flying alphabet, scrambling, smoke or liquid gold. Complete by 65 percent of clip duration, then keep fully readable through the continuing gentle camera drift. Never reveal all text at once. Outgoing already-complete text stays unchanged until occluded. Outfit change is concealed during complete occlusion. People remain planted, small expressions only.\n\nDestination: Warm family living room, adult couple sitting together across from their four parents in an intimate relaxed conversation, small smiles, tea cups, no ritual or staged ceremony. All seated; no crowd, no phones. Caption in a clear upper wall region. Wardrobe: Ashok: rust linen shirt and dark trousers. Supriya: peach chudidhar and pale-gold dupatta. Exact destination copy: \"We told our parents. Now we’re getting married.\".",
+      "video_prompt": "Portrait cinematic pastel-watercolor Tamil love story. Preserve pinned first frame, physically hide outgoing scene before revealing pinned destination. Location-specific magical foreground depth: 12 to 18 small independent motifs at varied depths and sizes, with just one or two medium accents. College: blank paper corners, small curled sheets, pencil shavings, tiny leaflets, eraser pieces and pencil fragments; cafe: leaves and a few coffee beans; court: leaves and tiny seed tufts; beach: sea-spray droplets and pale coastal petals; airport: blank ticket slips; home: delicate petals and dust glints. Float only the motifs appropriate to the scene. Slow gentle drift and rotation, distributed asymmetrically in foreground and background, soft depth blur; visible when camera brakes. Never cover faces or text; never detach fixed decor. Motifs belong to their own location, need not match across scenes, never chase the camera. No uniform confetti rain or burst. No mobile phones, social-media screens, ribbons, dissolve, duplicated people or signs.\n\nFULL 90-DEGREE LEFT camera-heading pivot, not a push-in with minor steering. Destination begins offscreen at the side. Forward translation below half a metre. A close solid door jamb, wall edge or tree trunk sweeps across the lens in directional blur, fully hiding the previous composition before revealing the next story chapter. This is an occlusion-led editorial transition between memories; do not morph one location into another or show both countries sharing one space. 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Strong cubic ease-out in final 25 degrees. After braking:  a gentle lateral drift over 20 centimetres at constant distance from the plaque. Incoming destination text starts invisible. During camera braking, reveal its exact copy in reading order: characters draw on rapidly within each word, then the next word follows, with a restrained peach light tracing the letter edges. Each newly forming word scales smoothly from 85 to 100 percent on its final baseline with a soft luminous edge trace, then becomes still; no flying alphabet, scrambling, smoke or liquid gold. Complete by 65 percent of clip duration, then keep fully readable through the continuing gentle camera drift. Never reveal all text at once. Outgoing already-complete text stays unchanged until occluded. Outfit change is concealed during complete occlusion. People remain planted, small expressions only.\n\nDestination: Warm family living room, adult couple sitting together across from their four parents in an intimate relaxed conversation, small smiles, tea cups, no ritual or staged ceremony. All seated; no crowd, no phones. Caption in a clear upper wall region. Wardrobe: Ashok: rust linen shirt and dark trousers. Supriya: peach chudidhar and pale-gold dupatta. Exact destination copy: \"We told our parents. Now we’re getting married.\".",
+      "video_path": "clip-9.mp4",
+      "final_frame_path": "clip-9-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 8
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 10
+        }
+      },
+      "prompt": "FULL 90-DEGREE LEFT camera-heading pivot, not a push-in with minor steering. Destination begins offscreen at the side. Forward translation below half a metre. A close solid door jamb, wall edge or tree trunk sweeps across the lens in directional blur, fully hiding the previous composition before revealing the next story chapter. This is an occlusion-led editorial transition between memories; do not morph one location into another or show both countries sharing one space. 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Strong cubic ease-out in final 25 degrees. After braking:  a gentle lateral drift over 20 centimetres at constant distance from the plaque. Incoming destination text starts invisible. During camera braking, reveal its exact copy in reading order: characters draw on rapidly within each word, then the next word follows, with a restrained peach light tracing the letter edges. Each newly forming word scales smoothly from 85 to 100 percent on its final baseline with a soft luminous edge trace, then becomes still; no flying alphabet, scrambling, smoke or liquid gold. Complete by 65 percent of clip duration, then keep fully readable through the continuing gentle camera drift. Never reveal all text at once. Outgoing already-complete text stays unchanged until occluded. Outfit change is concealed during complete occlusion. People remain planted, small expressions only.",
+      "request_metadata": {
+        "requestId": "59087e93-dce3-9e99-8ef8-f239e5e52bab",
+        "status": "done",
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "usage": {
+          "cost_in_usd_ticks": 7200000000
+        },
+        "outputUrl": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-59087e93-dce3-9e99-8ef8-f239e5e52bab.mp4"
+      },
+      "selected_take": 1,
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "121"
+          }
+        ],
+        "format": {
+          "duration": "5.042000"
+        }
+      },
+      "actual_input": {
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "aspect_ratio": "9:16",
+        "resolution": "720p",
+        "firstImage": "output/socialmedia-college-anime-v8/clip-9-take-1-first.jpg",
+        "lastImage": "output/socialmedia-college-anime-v8/clip-9-take-1-last.jpg",
+        "firstImageSha256": "5bda4a12fa1320b764d42c1e78c41d34742ef66e778d5ca7ceec218a46b90b89",
+        "lastImageSha256": "9d318e8cc14419fd67f44d4f4cf27e067e08f272cabca6f3525ca62f897fe99e",
+        "keyframes": [],
+        "sourceVideoFramesSent": false
+      },
+      "review_note": "First take selected; no creative retake.",
+      "timeline": {
+        "start_seconds": 39.333333333333336,
+        "end_seconds": 44.375
+      }
+    },
+    {
+      "index": 10,
+      "from": 10,
+      "to": 11,
+      "duration": 5,
+      "status": "generated-first-take",
+      "camera": "Fast backward corridor departure, between the only couple, then full-body ease-out",
+      "video_prompt_template": "Portrait cinematic pastel-watercolor Tamil love story. Preserve pinned first frame, physically hide outgoing scene before revealing pinned destination. Location-specific magical foreground depth: 12 to 18 small independent motifs at varied depths and sizes, with just one or two medium accents. College: blank paper corners, small curled sheets, pencil shavings, tiny leaflets, eraser pieces and pencil fragments; cafe: leaves and a few coffee beans; court: leaves and tiny seed tufts; beach: sea-spray droplets and pale coastal petals; airport: blank ticket slips; home: delicate petals and dust glints. Float only the motifs appropriate to the scene. Slow gentle drift and rotation, distributed asymmetrically in foreground and background, soft depth blur; visible when camera brakes. Never cover faces or text; never detach fixed decor. Motifs belong to their own location, need not match across scenes, never chase the camera. No uniform confetti rain or burst. No mobile phones, social-media screens, ribbons, dissolve, duplicated people or signs.\n\nFast straight BACKWARD departure from the family-room doorway, its near jamb briefly fills the lens and hides the editorial change to the celebration lawn. Continue backward between the ONLY couple to reveal a full-body portrait and ONE invitation panel. Strong smooth ease-out; no spiral, dissolve or repeated board. Their new clothing is present on first reveal. Keep invitation readable as camera settles.\n\nDestination: Modern college-garden celebration lawn, couple standing shoulder to shoulder, one ivory invitation panel at right with beautifully spaced contemporary type, flowers and warm lights. Names largest, You’re invited second, event and venue lines smaller but readable. No other signs. Wardrobe: Ashok: navy blazer, white tee, beige trousers. Supriya: elegant rose chudidhar and ivory dupatta. Exact destination copy: \"Ashok Kumar & Supriya\\nYou’re invited\\nReception · 6 February 2026 · 7:30 p.m.\\nWedding · 7 February 2026 · 8:00 a.m.\\nLeela Channaiah Kalyana Mandapa\\nVontikoppal, Mysore\".\nIncoming destination text starts invisible. During camera braking, reveal its exact copy in reading order: characters draw on rapidly within each word, then the next word follows, with a restrained peach light tracing the letter edges. Each newly forming word scales smoothly from 85 to 100 percent on its final baseline with a soft luminous edge trace, then becomes still; no flying alphabet, scrambling, smoke or liquid gold. Complete by 65 percent of clip duration, then keep fully readable through the continuing gentle camera drift. Never reveal all text at once. Outgoing already-complete text stays unchanged until occluded.",
+      "video_prompt": "Portrait cinematic pastel-watercolor Tamil love story. Preserve pinned first frame, physically hide outgoing scene before revealing pinned destination. Location-specific magical foreground depth: 12 to 18 small independent motifs at varied depths and sizes, with just one or two medium accents. College: blank paper corners, small curled sheets, pencil shavings, tiny leaflets, eraser pieces and pencil fragments; cafe: leaves and a few coffee beans; court: leaves and tiny seed tufts; beach: sea-spray droplets and pale coastal petals; airport: blank ticket slips; home: delicate petals and dust glints. Float only the motifs appropriate to the scene. Slow gentle drift and rotation, distributed asymmetrically in foreground and background, soft depth blur; visible when camera brakes. Never cover faces or text; never detach fixed decor. Motifs belong to their own location, need not match across scenes, never chase the camera. No uniform confetti rain or burst. No mobile phones, social-media screens, ribbons, dissolve, duplicated people or signs.\n\nFast straight BACKWARD departure from the family-room doorway, its near jamb briefly fills the lens and hides the editorial change to the celebration lawn. Continue backward between the ONLY couple to reveal a full-body portrait and ONE invitation panel. Strong smooth ease-out; no spiral, dissolve or repeated board. Their new clothing is present on first reveal. Keep invitation readable as camera settles.\n\nDestination: Modern college-garden celebration lawn, couple standing shoulder to shoulder, one ivory invitation panel at right with beautifully spaced contemporary type, flowers and warm lights. Names largest, You’re invited second, event and venue lines smaller but readable. No other signs. Wardrobe: Ashok: navy blazer, white tee, beige trousers. Supriya: elegant rose chudidhar and ivory dupatta. Exact destination copy: \"Ashok Kumar & Supriya\\nYou’re invited\\nReception · 6 February 2026 · 7:30 p.m.\\nWedding · 7 February 2026 · 8:00 a.m.\\nLeela Channaiah Kalyana Mandapa\\nVontikoppal, Mysore\".\nIncoming destination text starts invisible. During camera braking, reveal its exact copy in reading order: characters draw on rapidly within each word, then the next word follows, with a restrained peach light tracing the letter edges. Each newly forming word scales smoothly from 85 to 100 percent on its final baseline with a soft luminous edge trace, then becomes still; no flying alphabet, scrambling, smoke or liquid gold. Complete by 65 percent of clip duration, then keep fully readable through the continuing gentle camera drift. Never reveal all text at once. Outgoing already-complete text stays unchanged until occluded.",
+      "video_path": "clip-10.mp4",
+      "final_frame_path": "clip-10-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 9
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 11
+        }
+      },
+      "prompt": "Fast straight BACKWARD departure from the family-room doorway, its near jamb briefly fills the lens and hides the editorial change to the celebration lawn. Continue backward between the ONLY couple to reveal a full-body portrait and ONE invitation panel. Strong smooth ease-out; no spiral, dissolve or repeated board. Their new clothing is present on first reveal. Keep invitation readable as camera settles.\nIncoming destination text starts invisible. During camera braking, reveal its exact copy in reading order: characters draw on rapidly within each word, then the next word follows, with a restrained peach light tracing the letter edges. Each newly forming word scales smoothly from 85 to 100 percent on its final baseline with a soft luminous edge trace, then becomes still; no flying alphabet, scrambling, smoke or liquid gold. Complete by 65 percent of clip duration, then keep fully readable through the continuing gentle camera drift. Never reveal all text at once. Outgoing already-complete text stays unchanged until occluded.",
+      "request_metadata": {
+        "requestId": "5b877caf-dbd9-90f8-8c32-e4e85dc782ba",
+        "status": "done",
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "usage": {
+          "cost_in_usd_ticks": 7200000000
+        },
+        "outputUrl": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-5b877caf-dbd9-90f8-8c32-e4e85dc782ba.mp4"
+      },
+      "selected_take": 1,
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "121"
+          }
+        ],
+        "format": {
+          "duration": "5.042000"
+        }
+      },
+      "actual_input": {
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "aspect_ratio": "9:16",
+        "resolution": "720p",
+        "firstImage": "output/socialmedia-college-anime-v8/clip-10-take-1-first.jpg",
+        "lastImage": "output/socialmedia-college-anime-v8/clip-10-take-1-last.jpg",
+        "firstImageSha256": "c31517dc7eb195a860c728eb4633ccb05e0546ddadd0c2e676eb6ecfba4b0b64",
+        "lastImageSha256": "22378693ad29a4705ad43f5d8f938cc7f8dd0f0da1ba9e9e06f5f5b2fd1b2aa3",
+        "keyframes": [],
+        "sourceVideoFramesSent": false
+      },
+      "review_note": "First take selected; no creative retake.",
+      "timeline": {
+        "start_seconds": 44.375,
+        "end_seconds": 49.416666666666664
+      }
+    },
+    {
+      "index": 11,
+      "from": 11,
+      "to": 12,
+      "duration": 5,
+      "status": "generated-first-take",
+      "camera": "Gentle backward glide and slight rise, single-board continuity, forehead touch",
+      "video_prompt_template": "Portrait cinematic pastel-watercolor Tamil love story. Preserve pinned first frame, physically hide outgoing scene before revealing pinned destination. Location-specific magical foreground depth: 12 to 18 small independent motifs at varied depths and sizes, with just one or two medium accents. College: blank paper corners, small curled sheets, pencil shavings, tiny leaflets, eraser pieces and pencil fragments; cafe: leaves and a few coffee beans; court: leaves and tiny seed tufts; beach: sea-spray droplets and pale coastal petals; airport: blank ticket slips; home: delicate petals and dust glints. Float only the motifs appropriate to the scene. Slow gentle drift and rotation, distributed asymmetrically in foreground and background, soft depth blur; visible when camera brakes. Never cover faces or text; never detach fixed decor. Motifs belong to their own location, need not match across scenes, never chase the camera. No uniform confetti rain or burst. No mobile phones, social-media screens, ribbons, dissolve, duplicated people or signs.\n\nGentle backward glide and slight rise within the EXACT SAME celebration lawn. Same couple, outfits, single invitation panel and unchanged exact text. They turn to one another with small natural smiles. No extra quote, new sign, camera flip or text replacement.\n\nDestination: EXACT same celebration lawn, people, wardrobe, light and ONE invitation panel as scene 11. Camera slightly farther back and higher, couple turn gently to look at one another. Existing lettering unchanged. No new final sentence, board or prop. Wardrobe: Same navy blazer and rose chudidhar as scene 11. Exact destination copy: \"Ashok Kumar & Supriya\\nYou’re invited\\nReception · 6 February 2026 · 7:30 p.m.\\nWedding · 7 February 2026 · 8:00 a.m.\\nLeela Channaiah Kalyana Mandapa\\nVontikoppal, Mysore\".",
+      "video_prompt": "Portrait cinematic pastel-watercolor Tamil love story. Preserve pinned first frame, physically hide outgoing scene before revealing pinned destination. Location-specific magical foreground depth: 12 to 18 small independent motifs at varied depths and sizes, with just one or two medium accents. College: blank paper corners, small curled sheets, pencil shavings, tiny leaflets, eraser pieces and pencil fragments; cafe: leaves and a few coffee beans; court: leaves and tiny seed tufts; beach: sea-spray droplets and pale coastal petals; airport: blank ticket slips; home: delicate petals and dust glints. Float only the motifs appropriate to the scene. Slow gentle drift and rotation, distributed asymmetrically in foreground and background, soft depth blur; visible when camera brakes. Never cover faces or text; never detach fixed decor. Motifs belong to their own location, need not match across scenes, never chase the camera. No uniform confetti rain or burst. No mobile phones, social-media screens, ribbons, dissolve, duplicated people or signs.\n\nGentle backward glide and slight rise within the EXACT SAME celebration lawn. Same couple, outfits, single invitation panel and unchanged exact text. They turn to one another with small natural smiles. No extra quote, new sign, camera flip or text replacement.\n\nDestination: EXACT same celebration lawn, people, wardrobe, light and ONE invitation panel as scene 11. Camera slightly farther back and higher, couple turn gently to look at one another. Existing lettering unchanged. No new final sentence, board or prop. Wardrobe: Same navy blazer and rose chudidhar as scene 11. Exact destination copy: \"Ashok Kumar & Supriya\\nYou’re invited\\nReception · 6 February 2026 · 7:30 p.m.\\nWedding · 7 February 2026 · 8:00 a.m.\\nLeela Channaiah Kalyana Mandapa\\nVontikoppal, Mysore\".",
+      "video_path": "clip-11.mp4",
+      "final_frame_path": "clip-11-handoff.jpg",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 10
+        },
+        "last": null
+      },
+      "prompt": "Gentle backward glide and slight rise within the EXACT SAME celebration lawn. Same couple, outfits, single invitation panel and unchanged exact text. They turn to one another with small natural smiles. No extra quote, new sign, camera flip or text replacement.",
+      "request_metadata": {
+        "requestId": "3695a14b-a356-98fc-88ff-b620b678ba62",
+        "status": "done",
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "usage": {
+          "cost_in_usd_ticks": 7100000000
+        },
+        "outputUrl": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-3695a14b-a356-98fc-88ff-b620b678ba62.mp4"
+      },
+      "selected_take": 1,
+      "media": {
+        "programs": [],
+        "streams": [
+          {
+            "width": 720,
+            "height": 1280,
+            "r_frame_rate": "24/1",
+            "nb_read_frames": "121"
+          }
+        ],
+        "format": {
+          "duration": "5.042000"
+        }
+      },
+      "actual_input": {
+        "model": "grok-imagine-video-1.5",
+        "duration": 5,
+        "aspect_ratio": "9:16",
+        "resolution": "720p",
+        "firstImage": "output/socialmedia-college-anime-v8/clip-11-take-1-first.jpg",
+        "lastImage": null,
+        "firstImageSha256": "8f744231d7c85ea471cefc281c49459d06c919bd432b292bfec4f9018a4cd12d",
+        "lastImageSha256": null,
+        "keyframes": [],
+        "sourceVideoFramesSent": false
+      },
+      "review_note": "First take selected; no creative retake.",
+      "timeline": {
+        "start_seconds": 49.416666666666664,
+        "end_seconds": 54.458333333333336
+      }
+    }
+  ],
+  "costs": {
+    "scope": "College love 2026 v8 full generation",
+    "imageRequests": 11,
+    "videoRequests": 11,
+    "xaiCompletedCostUsd": 7.77,
+    "pendingVideos": [],
+    "replicateCostUsd": null,
+    "replicateCostNote": "Provider prediction responses do not include monetary charges."
+  },
+  "completed_at": "2026-09-30T22:02:54.220Z",
+  "review_policy": "Opening still inspected; completed video checked for duration and format, no creative retakes."
+}
