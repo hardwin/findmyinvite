@@ -20,6 +20,12 @@ test('share cards escape names and use a public template still, never guest phot
  assert.equal(stillFor('luxury-pink'),'/assets/emerald-hero.jpg');
  assert.equal(stillFor('unknown-design'),STOREFRONT_STILL);
 });
+test('brand share cards use the FindMyInvite logo, never the old couple selfie',async()=>{
+ const res=await request('/api/share?kind=brand');
+ assert.equal(res.code,200);
+ assert.match(String(res.body),/og:image" content="https:\/\/findmyinvite.com\/assets\/findmyinvite-og\.jpg"/);
+ assert.equal(String(res.body).includes('50122aee9f7395c4'),false);
+});
 test('unpublished or unknown slugs fall back to the storefront card',async()=>{
  const oldFetch=global.fetch,oldEnv={...process.env};
  Object.assign(process.env,{SUPABASE_URL:'https://example.supabase.co',SUPABASE_SERVICE_ROLE_KEY:'test',RATE_LIMIT_SECRET:'012345678901234567890123456789012345'});
@@ -27,7 +33,7 @@ test('unpublished or unknown slugs fall back to the storefront card',async()=>{
  try{
   const missing=await request('/api/share?slug=akay-test-1');
   assert.equal(missing.code,200);
-  assert.match(String(missing.body),/og:image" content="https:\/\/findmyinvite.com\/assets\/50122aee9f7395c4\.jpg"/);
+  assert.match(String(missing.body),/og:image" content="https:\/\/findmyinvite.com\/assets\/findmyinvite-og\.jpg"/);
   assert.match(String(missing.body),/FindMyInvite/);
   assert.equal(String(missing.body).includes('akay-test-1'),false);
   const reserved=await request('/api/share?slug=templates');
@@ -58,8 +64,9 @@ test('published invitations get couple names and the matching still',async()=>{
 test('every catalog template has a share still and the storefront HTML advertises one',async()=>{
  for(const id of templates)assert.match(stillFor(id),/^\/assets\/[a-z0-9-]+\.(jpg|png)$/);
  const index=await readFile(new URL('../index.html',import.meta.url),'utf8');
- assert.match(index,/property="og:image" content="https:\/\/findmyinvite.com\/assets\/50122aee9f7395c4\.jpg"/);
- assert.match(index,/name="twitter:image" content="https:\/\/findmyinvite.com\/assets\/50122aee9f7395c4\.jpg"/);
+ assert.match(index,/property="og:image" content="https:\/\/findmyinvite.com\/assets\/findmyinvite-og\.jpg"/);
+ assert.match(index,/name="twitter:image" content="https:\/\/findmyinvite.com\/assets\/findmyinvite-og\.jpg"/);
+ assert.equal(index.includes('/assets/50122aee9f7395c4.jpg'),false);
  const vercel=JSON.parse(await readFile(new URL('../vercel.json',import.meta.url),'utf8'));
  assert.ok(vercel.rewrites.some(rule=>rule.destination==='/api/share?slug=:slug'&&/WhatsApp/.test(rule.has?.[0]?.value||'')));
  const spa=vercel.rewrites.find(rule=>rule.destination==='/index.html');
@@ -117,5 +124,6 @@ test('every catalog template has a share still and the storefront HTML advertise
  const guest=await readFile(new URL('../src/GuestPages.tsx',import.meta.url),'utf8');
  assert.equal(guest.includes('Share on WhatsApp'),true);
  assert.equal(escapeHtml('A & B <C>'),'A &amp; B &lt;C&gt;');
- assert.match(storefrontShare('https://findmyinvite.com'),/og:image" content="https:\/\/findmyinvite.com\/assets\/50122aee9f7395c4\.jpg"/);
+ assert.match(storefrontShare('https://findmyinvite.com'),/og:image" content="https:\/\/findmyinvite.com\/assets\/findmyinvite-og\.jpg"/);
+ assert.equal(storefrontShare('https://findmyinvite.com').includes('50122aee9f7395c4'),false);
 });
