@@ -1,0 +1,21 @@
+{
+  "packet_type": "ORCHESTRATOR_CUE_CONTINUITY",
+  "production_id": "kc-v1-recreate-20261003-003016",
+  "at": "2026-10-03T00:33:12+05:30",
+  "mode": "RECREATE_CLIENT_FILL",
+  "template_sha256": "7d0c8f3060e3c11e2f1b3800661cad30d30602313961c1feeecdf0db9f8d130b",
+  "compiler_receipt": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/packets/TEMPLATE_COMPILER_VALIDATION_RECEIPT.json",
+  "continuity_extract": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/packets/continuity_extract.json",
+  "scenes_prompt_extract": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/packets/scenes_prompt_extract.json",
+  "output_bible": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/continuity/CONTINUITY_BIBLE.json",
+  "couple": "Swaroop & Smiley",
+  "rules": [
+    "Build CONTINUITY_BIBLE from extract only \u2014 not full template.json",
+    "Lock identity/wardrobe/architecture/lighting/palette/typography/object counts for Swaroop & Smiley fill",
+    "Do not rewrite creative prompts",
+    "File READY.json when bible complete",
+    "Spatial Continuity follows after READY (16:9 Ashok gate before IMAGE)"
+  ],
+  "skip_spatial": false,
+  "prior_bible_reference_readonly": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/continuity/CONTINUITY_BIBLE.json"
+}

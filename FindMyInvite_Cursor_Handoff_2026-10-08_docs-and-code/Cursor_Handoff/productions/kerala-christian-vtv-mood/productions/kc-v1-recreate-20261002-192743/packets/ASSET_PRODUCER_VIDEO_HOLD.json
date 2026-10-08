@@ -1,0 +1,9 @@
+{
+  "packet_type": "ASSET_PRODUCER_VIDEO_HOLD",
+  "production_id": "kc-v1-recreate-20261002-192743",
+  "recorded_at": "2026-10-02T19:42:30+05:30",
+  "status": "LIFTED",
+  "lifted_by": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/ORCHESTRATOR_GO_VIDEO.json",
+  "emit_receipt": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/ASSET_PRODUCER_EMIT_VIDEO.json",
+  "dispatch_now": "VID-clip-01"
+}

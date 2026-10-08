@@ -1,0 +1,195 @@
+{
+  "production_id": "kc-v1-recreate-20261007-181228-akhil-sarah",
+  "mode": "RECREATE_CLIENT_FILL",
+  "couple": "Akhil & Sarah",
+  "invitation_order": "groom-first",
+  "phase": "DELIVERED_SPEEDRAMP_REV6",
+  "updated_at": "2026-10-07T21:12:00+05:30",
+  "template_sha256": "cc6a2ba9d841653de4a2e27557ff095443095f31f42f598197a45ecff730f5ab",
+  "source_template_sha256": "bad0d176beb1ad47e3942689f95c4153fb933f3547670a255bb7fc062f46dae4",
+  "qc_policy": "TEXT_SELF_CHECK_STILLS",
+  "continuity": "WAIVED",
+  "stills_status": "APPROVED_BY_ASHOK (via chat, 2026-10-07T20:08+05:30: 'Perfect. Go ahead and generate the speed ramped video and send to telegram'; covers current stills incl. hosts board 'Menezes & Corda Family')",
+  "video_jobs_authorized": true,
+  "clips": "11/11 generated (clip-11 regenerated once; take1 kept as clip-11-take1.mp4)",
+  "paid_image_predictions": 36,
+  "paid_video_generations": 0,
+  "stills": "11/11 (scene-12 = clip-11 last frame, no still)",
+  "telegram": {
+    "chat_id": "2002649357",
+    "album_1_scenes_01_06": [
+      902,
+      903,
+      904,
+      905,
+      906,
+      907
+    ],
+    "album_2_scenes_07_11": [
+      908,
+      909,
+      910,
+      911,
+      912
+    ],
+    "update_scene_07_aisle": 913,
+    "rev2_album_1_scenes_01_06": [
+      925,
+      926,
+      927,
+      928,
+      929,
+      930
+    ],
+    "rev2_album_2_scenes_07_11": [
+      931,
+      932,
+      933,
+      934,
+      935
+    ],
+    "rev3_album_1_scenes_01_06": [
+      936,
+      937,
+      938,
+      939,
+      940,
+      941
+    ],
+    "rev3_album_2_scenes_07_11": [
+      942,
+      943,
+      944,
+      945,
+      946
+    ],
+    "rev4_scene_11_dog": 948,
+    "rev5_scene_11_bigger_dog": 949,
+    "speedramp_final": {
+      "sendVideo": 953,
+      "sendDocument": 954
+    },
+    "rev6_scene_07_no_priest": 957,
+    "speedramp_final_rev6": {
+      "sendVideo": 958,
+      "sendDocument": 959
+    }
+  },
+  "stills_sha256": {
+    "scene-01": "850c374d6d4630bf71d7befa71b796cf098636d51c04d9f4cf07855d8dae3b79",
+    "scene-02": "063d327e1164417c6c590f929ef43c4d5f9ad455af0c5f94bfaa9cb7097b43f8",
+    "scene-03": "0c8ed8016b3fd2559a97056ef54ff116cde53aff1c023d160369f568d3e0dd48",
+    "scene-04": "0cdf4fff2a0dc6d3dd841649c1e9a2097958acb05ff911e3d2a1654447b062bb",
+    "scene-05": "655644924fd30e2d7d3fe500c3686188e1c70988f3c1350c4f4c68f008366936",
+    "scene-06": "c3c61c49c4ab2e0c04b140a1e8d65e1e9d015eb06e25fb24f209cf88ef06a9df",
+    "scene-07": "c87c16ec9e2fa0905e6c0a5551047c6e81a8eaad059b993b94f78a2460c7bca1",
+    "scene-08": "e584587ea2a9a354698d2cfb1f5cd96b1659765f4d679e8ffa41951981f24cc0",
+    "scene-09": "d61f95890267d84cff5b4ee7d15a3240fed7bbc9dcae6b5e27f207d21718211d",
+    "scene-10": "de7057b360ab3cc8e744744700b1e7baed18775cff3d84e389eca992aeb48d87",
+    "scene-11": "cbc9aa5a10443a3d8861e464d51b3b987c9b076aee9646a855be75ff7d399ec0"
+  },
+  "revision": 6,
+  "hosts_line_note": "'Menezes & Corda Family' approved as typed (2026-10-07 20:08)",
+  "scene_11_method": "image-edit of rev4 image-11 raw (input_images = own still only; dog described in text; Ashok's dog photos NOT sent)",
+  "stills_approved_at": "2026-10-07T20:08:00+05:30",
+  "approved_stills_sha256": {
+    "scene-01": "850c374d6d4630bf71d7befa71b796cf098636d51c04d9f4cf07855d8dae3b79",
+    "scene-02": "063d327e1164417c6c590f929ef43c4d5f9ad455af0c5f94bfaa9cb7097b43f8",
+    "scene-03": "0c8ed8016b3fd2559a97056ef54ff116cde53aff1c023d160369f568d3e0dd48",
+    "scene-04": "0cdf4fff2a0dc6d3dd841649c1e9a2097958acb05ff911e3d2a1654447b062bb",
+    "scene-05": "655644924fd30e2d7d3fe500c3686188e1c70988f3c1350c4f4c68f008366936",
+    "scene-06": "c3c61c49c4ab2e0c04b140a1e8d65e1e9d015eb06e25fb24f209cf88ef06a9df",
+    "scene-07": "c87c16ec9e2fa0905e6c0a5551047c6e81a8eaad059b993b94f78a2460c7bca1",
+    "scene-08": "e584587ea2a9a354698d2cfb1f5cd96b1659765f4d679e8ffa41951981f24cc0",
+    "scene-09": "d61f95890267d84cff5b4ee7d15a3240fed7bbc9dcae6b5e27f207d21718211d",
+    "scene-10": "de7057b360ab3cc8e744744700b1e7baed18775cff3d84e389eca992aeb48d87",
+    "scene-11": "cbc9aa5a10443a3d8861e464d51b3b987c9b076aee9646a855be75ff7d399ec0"
+  },
+  "video_clips": {
+    "clip-01": {
+      "request_id": "dbe0df56-f230-950e-bd1f-111c29481dfa",
+      "sha256": "c8cca47ba743238a1ddf4682daf1574c165256a05ee42b22a0e0ba0718cc9434",
+      "status": "generated"
+    },
+    "clip-02": {
+      "request_id": "5db2c4df-7b3f-9383-80b7-18dcf70f2306",
+      "sha256": "0180710f2767f628ccefacef86e67cc0b1513dbea4be211beac09c2ee23d691a",
+      "status": "generated"
+    },
+    "clip-03": {
+      "request_id": "160ee46a-e39e-9708-97d6-0be2ab825436",
+      "sha256": "eeea588703adef2a7f8a4714bd8f88834bf58d9a5e421efc3256d465be5621be",
+      "status": "generated"
+    },
+    "clip-04": {
+      "request_id": "896ffe65-d497-972a-819e-aa2762ad647d",
+      "sha256": "833c85b72e1f435e84364e41d24c90543d8b3f3d4021c120eea2260aef30c6c8",
+      "status": "generated"
+    },
+    "clip-05": {
+      "request_id": "1817451d-814e-95bf-9f85-2418d4169d87",
+      "sha256": "d4ff79db860cc4224c5a718d06add84b87ae5acbab3cbb4af93a291e7232d4b8",
+      "status": "generated"
+    },
+    "clip-06": {
+      "request_id": "35f9a4a7-d309-9f44-8127-1f23a953df41",
+      "sha256": "acb389ea3077c8abee2dd2d0e11547d4d71f1b734faff14ace36c68d651cad3b",
+      "status": "generated"
+    },
+    "clip-07": {
+      "request_id": "248fda25-ebf0-9b7d-a514-e60f59a8273e",
+      "sha256": "9f327e36b9d4c1e06a0523630b065d2753387570a7935b703b3d7c5073813b02",
+      "status": "generated"
+    },
+    "clip-08": {
+      "request_id": "00531534-4a02-93a2-84e9-a55981ee3d1a",
+      "sha256": "d347582dc95b875c1ce1fca19d9480360ac9c38e489e756f20cb30e4ef78310f",
+      "status": "generated"
+    },
+    "clip-09": {
+      "request_id": "b47365c9-74a4-908d-8f57-b5f008cee2c4",
+      "sha256": "ea13b34dc945b0d90edbedc6e2936d98165a2201b55cf9924fbbe30cee784cca",
+      "status": "generated"
+    },
+    "clip-10": {
+      "request_id": "80b55cad-6c60-9ff8-a50f-681191e86928",
+      "sha256": "2854d01edfcc0a1674b25b294a4f0d03389da9185fba83893fa0eceb9589cbf8",
+      "status": "generated"
+    },
+    "clip-11": {
+      "request_id": "73a7c4fd-e846-9d43-8f9b-f0f435bcff08",
+      "sha256": "54b476faa00f053e76ac9607cc7cd98644e90a473e7244836fc3f25908a72d23",
+      "status": "generated"
+    }
+  },
+  "paid_video_submits": 14,
+  "paid_video_submits_note": "11 chain + 1 manual clip-11 regen (take1 floral arch dissolved in final second); no automatic paid retries",
+  "final_video": {
+    "path": "assets/output/kerala-christian-v1/kerala-christian-v1-speedramp-720x1280.mp4",
+    "duration_s": 28.208,
+    "frames": 677,
+    "size": "720x1280",
+    "fps": 24,
+    "bytes": 17799782,
+    "sha256": "e356c0db94ce69124423e10b86e18050514a7928593f4b029a29f94445c2fb72",
+    "previous": "assets/output/kerala-christian-v1/kerala-christian-v1-speedramp-720x1280-rev5-with-priest.mp4"
+  },
+  "scene_12": "clip-11-handoff.jpg (last decoded frame of clip-11 take2)",
+  "rev6": {
+    "request": "Ashok 21:01 IST: 'Remove the pastor, he is looking weird. Regenerate that image and clip and give me the final speedramped video.'",
+    "scene_07": "priest removed via image edit of approved still (scripts/edit_still.py, tag nopriest-e1, 1 paid image call); old still in superseded-rev5-scene07-priest/",
+    "clips_regenerated": [
+      "clip-06",
+      "clip-07"
+    ],
+    "old_takes": [
+      "clip-6-take1.mp4",
+      "clip-7-take1.mp4"
+    ],
+    "paid_this_round": {
+      "image": 1,
+      "video": 2
+    },
+    "template_backup": "packets/template.before-rev6-no-priest-20261007-210226.json"
+  }
+}

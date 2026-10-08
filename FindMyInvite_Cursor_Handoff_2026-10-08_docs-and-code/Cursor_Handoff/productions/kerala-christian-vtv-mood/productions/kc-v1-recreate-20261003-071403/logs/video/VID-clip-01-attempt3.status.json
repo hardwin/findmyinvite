@@ -1,0 +1,44 @@
+{
+  "job_id": "VID-clip-01-attempt3",
+  "clip_id": "clip-01",
+  "attempt": 3,
+  "production_id": "kc-v1-recreate-20261003-071403",
+  "model": "grok-imagine-video-1.5",
+  "resolution": "720p",
+  "aspect_ratio": "9:16",
+  "duration_seconds": 5,
+  "first_frame": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/assets/output/kerala-christian-v1/image-1.jpg",
+  "first_frame_sha256": "461390d47bd79565857244a232818c679ebb342870b097c26c589e59b000f8e8",
+  "last_frame": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/assets/output/kerala-christian-v1/image-2.jpg",
+  "last_frame_sha256": "1c72f2a594a469d52f12e7cf38de4ac2017e9636b74a1b82d7fc6207a8e97ad3",
+  "prompt_source": "template.json clips[0].video_prompt",
+  "prompt_sha256_raw": "d5c33b586fec1fa5476618864a9a67166343c71c425f269b6dc59e5d28930b0f",
+  "prompt_len_raw": 4171,
+  "prompt_len_submitted": 4090,
+  "prompt_sha256_submitted": "060e4d1fb7d0bf0a9c9026530fd6aba565dde7bcb6a4e55f778a3b75f7c4451f",
+  "prompt_truncated": true,
+  "staging_output": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/assets/output/kerala-christian-v1/clip-1-attempt3.mp4",
+  "staging_handoff": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/assets/output/kerala-christian-v1/clip-1-attempt3-handoff.jpg",
+  "paid_submits": 1,
+  "status": "generated_staging",
+  "updated_at": "2026-10-05T10:07:34.485658+05:30",
+  "first_file_id": "file_4e53f791-9140-41c1-823c-b2554ddb3b05",
+  "last_file_id": "file_74b09c99-e877-444c-851f-9c34b7451927",
+  "input_mode": "file_id",
+  "request_id": "cbe8953e-fd2e-963c-b281-c3b399c725b4",
+  "submit_response": {
+    "request_id": "cbe8953e-fd2e-963c-b281-c3b399c725b4"
+  },
+  "video_url": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-cbe8953e-fd2e-963c-b281-c3b399c725b4.mp4",
+  "usage": {
+    "cost_in_usd_ticks": 7200000000
+  },
+  "sha256": "c0acfec229aebeb2edb32bdc79fe3a712bb33fb3523535ecae1a454619f0c7bc",
+  "handoff_sha256": "091e0eff0a2f2280e141ec296348eca0fb937ca59dbfa1ead46c7bd59d0221d4",
+  "technical_probe": {
+    "w": 720,
+    "h": 1280,
+    "fps": "24/1",
+    "duration_s": 5.041667
+  }
+}

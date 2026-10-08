@@ -1,0 +1,49 @@
+FMI CLIENT DETAILS — Template: tamil-engagement-nichayathartham-v1 (நிச்சயதார்த்த அழைப்பிதழ்)
+
+Write every value in Tamil script exactly as it should appear on screen. No English.
+Times: use காலை / மதியம் / மாலை / இரவு … மணி (never AM/PM). Leave optional fields empty to drop them.
+
+groom_name_ta:
+(மணமகன் பெயர் — e.g. மணிராஜ்?)
+
+bride_name_ta:
+(மணமகள் பெயர்)
+
+groom_parents_ta:
+திரு. ________ – திருமதி ________
+
+bride_parents_ta:
+திரு. ________ – திருமதி ________
+
+event_date_ta:
+(e.g. 15 நவம்பர் 2026)
+
+event_weekday_ta:
+(e.g. ஞாயிற்றுக்கிழமை)
+
+tamil_calendar_date_ta (optional):
+(e.g. ஐப்பசி 29)
+
+muhurtham_time_ta:
+காலை __.__ – __.__ மணி
+
+reception_title_ta (optional — விருந்து / மதிய விருந்து / இரவு விருந்து / வரவேற்பு):
+விருந்து
+
+reception_time_ta (optional):
+மதியம் __.__ மணி முதல்
+
+venue_name_ta:
+(மண்டபம் / இல்லம் பெயர்)
+
+venue_address_ta:
+(short address, one line — street, area, town)
+
+deity_line_ta:
+விநாயகர் துணை
+
+host_family_ta:
+இரு வீட்டார்
+
+brand_line_ta (optional):
+ஃபைண்ட் மை இன்வைட்

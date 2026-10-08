@@ -1,0 +1,56 @@
+{
+  "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-1.jpg",
+  "job_id": "IMG-scene-01-order-v2",
+  "scene_id": "scene-01",
+  "continuity_decision": "LOCK",
+  "continuity_clearance": "CLEAR",
+  "qc_gate": "PARALLEL_WITH_QC",
+  "attempt": 2,
+  "order": "V2",
+  "final_paid_attempt": true,
+  "amend_ref": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/continuity/CONTINUITY_AMEND_clip01_order_v2.json",
+  "world_anchor": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1-handoff.jpg",
+  "generation_id": "3j976cpva9rmy0d0z33agwb1f4",
+  "sha256_prefix": "e220fa48eeb09113",
+  "decided_at": "2026-10-02T00:14:15.677135+05:30",
+  "checks": [
+    {
+      "rule": "opening_energy",
+      "expected": "elevated sweeping drone",
+      "observed": "high oblique drone coastal establish",
+      "ok": true
+    },
+    {
+      "rule": "typography_scene01",
+      "expected": "no text",
+      "observed": "none",
+      "ok": true
+    },
+    {
+      "rule": "object_count_bell_tower",
+      "expected": 1,
+      "observed": 1,
+      "ok": true
+    },
+    {
+      "rule": "object_count_porch",
+      "expected": 1,
+      "observed": "1 open pavilion",
+      "ok": true
+    },
+    {
+      "rule": "object_count_floral_cross",
+      "expected": 1,
+      "observed": "1 with twin candles",
+      "ok": true
+    },
+    {
+      "rule": "same_world_spatial",
+      "expected": "open porch pavilion with church+tower BEYOND open rear by water (handoff geography)",
+      "observed": "open floral pavilion distinct; cream church+ONE tower beyond open rear toward water",
+      "ok": true
+    }
+  ],
+  "violations": [],
+  "note": "LOCK attempt-2 ORDER V2 — prior spatial VETO cleared; ready for APPROVED + VIDEO unlock."
+}

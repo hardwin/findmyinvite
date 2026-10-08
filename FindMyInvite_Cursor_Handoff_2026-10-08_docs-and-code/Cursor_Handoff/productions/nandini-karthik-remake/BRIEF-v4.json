@@ -1,0 +1,9 @@
+{
+  "version": "stills-v4",
+  "rules": [
+    "maze L/R camera framings",
+    "NO walking couple",
+    "continuous motion in video"
+  ],
+  "wardrobe": "maroon half-shirt+veshti; green bridal"
+}

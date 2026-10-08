@@ -1,0 +1,22 @@
+{
+  "packet_type": "ORCHESTRATOR_STILLS_COMPLETE",
+  "production_id": "kc-v1-recreate-20261003-003016",
+  "batch": "stills-v1",
+  "at": "2026-10-03T00:46:07+05:30",
+  "status": "COMPLETE_CONTINUITY_WAIVED",
+  "scenes_locked": [
+    "scene-01",
+    "scene-02",
+    "scene-03",
+    "scene-04",
+    "scene-05",
+    "scene-06",
+    "scene-07",
+    "scene-08",
+    "scene-09",
+    "scene-10",
+    "scene-11"
+  ],
+  "waive": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/packets/ORCHESTRATOR_WAIVE_CONTINUITY_STILLS.json",
+  "generated": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/packets/IMAGE_DIRECTOR_GENERATED_STILLS_V1_ATTEMPT1.json"
+}

@@ -1,0 +1,16 @@
+{
+  "packet_type": "ASSET_PRODUCER_CLIP01_ORDER_V2_READY",
+  "production_id": "kc-v1-20261001-230532",
+  "status": "IMAGE_PACKET_READY_VIDEO_HELD",
+  "built_at": "2026-10-02T00:10:11.035197+05:30",
+  "built_by": "Asset Producer",
+  "IMAGE_JOB": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/IMAGE_JOB/scene-01.order-v2.json",
+  "VIDEO_JOB": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/VIDEO_JOB/clip-01.regen.json",
+  "video_status": "HELD_ASHOK_ORDER_V2",
+  "reference_image": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1-handoff.jpg",
+  "notes": [
+    "IMAGE conditioned on clip-1-handoff.jpg; elevated drone; no text; opening_energy",
+    "VIDEO last=clip-1-handoff.jpg (previous-clip-final-decoded-frame); first=new image-1 after APPROVED",
+    "NOT dispatched \u2014 awaiting Orchestrator IMAGE auth"
+  ]
+}

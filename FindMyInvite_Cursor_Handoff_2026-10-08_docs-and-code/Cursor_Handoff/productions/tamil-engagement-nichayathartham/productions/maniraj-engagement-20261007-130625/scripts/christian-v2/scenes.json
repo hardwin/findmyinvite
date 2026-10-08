@@ -1,0 +1,130 @@
+{
+  "s01-aerial": {
+    "og_scene": "scene-01",
+    "title": "Aerial establish — drone over the backwater church",
+    "text": [],
+    "people": false
+  },
+  "s02-blessing": {
+    "og_scene": "scene-02",
+    "title": "Blessing — glowing candle-lantern cross on the waterfront balustrade at dusk, 'With God's Grace / We Invite You' floating above",
+    "text": [
+      "With God's Grace",
+      "We Invite You"
+    ],
+    "people": false
+  },
+  "s03-invitation": {
+    "og_scene": "scene-03",
+    "title": "Invitation — 'The Wedding of / Alex & Anna' floating at the church doorway",
+    "text": [
+      "The Wedding of",
+      "Alex & Anna"
+    ],
+    "people": false
+  },
+  "s04-groom": {
+    "og_scene": "scene-04",
+    "title": "Groom — on the waterfront balustrade, 'Mr. / Alex John' floating",
+    "text": [
+      "Mr.",
+      "Alex John"
+    ],
+    "people": true
+  },
+  "s05-bride": {
+    "og_scene": "scene-05",
+    "title": "Bride — by a stained-glass lancet window in the nave, 'Ms. / Anna Thomas' floating",
+    "text": [
+      "Ms.",
+      "Anna Thomas"
+    ],
+    "people": true
+  },
+  "s06-families": {
+    "og_scene": "scene-06",
+    "title": "Both families' blessing — floating over the ring pillow on the vestry table (top-down)",
+    "text": [
+      "With the Blessings of",
+      "Groom's Parents",
+      "Mr. John Mathew",
+      "& Mrs. Elsy John",
+      "Bride's Parents",
+      "Mr. Thomas George",
+      "& Mrs. Mercy Thomas"
+    ],
+    "people": false
+  },
+  "s07-matrimony": {
+    "og_scene": "scene-07",
+    "title": "Holy Matrimony — couple at the altar, ceremony lines floating",
+    "text": [
+      "Holy Matrimony",
+      "15th February 2025",
+      "10:00 a.m.",
+      "In the Morning"
+    ],
+    "people": true
+  },
+  "s07b-ring-drop": {
+    "og_scene": "ADDED after scene-07",
+    "title": "ADDED: ring drop — the bride's hand drops two gold rings into the groom's palm (no text)",
+    "text": [],
+    "people": true
+  },
+  "s08-venue": {
+    "og_scene": "scene-08",
+    "title": "Venue — floating over the backwater, church facade across the water",
+    "text": [
+      "Wedding Venue",
+      "St. Mary's Forane Church",
+      "Near Alappuzha",
+      "Kerala"
+    ],
+    "people": false
+  },
+  "s09-reception": {
+    "og_scene": "scene-09",
+    "title": "Reception — evening garden with the wedding cake stage, reception lines floating",
+    "text": [
+      "Reception - Dinner",
+      "14th February 2025",
+      "7:00 p.m. onwards",
+      "Parish Hall Garden",
+      "Near Alappuzha, Kerala"
+    ],
+    "people": false
+  },
+  "s10-hosts": {
+    "og_scene": "scene-10",
+    "title": "Hosts — golden-hour garden arch, 'Invited By' lines floating",
+    "text": [
+      "Invited By",
+      "Mr. Kurien Abraham",
+      "Mrs. Lizzy Kurien",
+      "Baby. Nia & Noel",
+      "With Love & Blessings"
+    ],
+    "people": false
+  },
+  "s11-save-date": {
+    "og_scene": "scene-11",
+    "title": "Save the date — couple on the decorated boat jetty, save-the-date lines floating",
+    "text": [
+      "SAVE THE DATE",
+      "14 & 15 FEBRUARY",
+      "2025"
+    ],
+    "people": true
+  },
+  "s12-forehead-touch": {
+    "og_scene": "scene-12",
+    "title": "Forehead touch — same jetty, save-the-date lines still floating (OG end frame)",
+    "text": [
+      "SAVE THE DATE",
+      "14 & 15 FEBRUARY",
+      "2025"
+    ],
+    "people": true
+  }
+}

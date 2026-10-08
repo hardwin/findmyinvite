@@ -1,0 +1,9 @@
+{
+  "status": "CLEAR",
+  "continuity_decision": "LOCK",
+  "scene_id": "scene-01",
+  "job_id": "IMG-scene-01-regen",
+  "packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/continuity_veto/scene-01.regen.json",
+  "decided_at": "2026-10-02T00:07:50.836596+05:30",
+  "next": "Orchestrator may APPROVE scene-01 and GO VIDEO clip-01 regen"
+}

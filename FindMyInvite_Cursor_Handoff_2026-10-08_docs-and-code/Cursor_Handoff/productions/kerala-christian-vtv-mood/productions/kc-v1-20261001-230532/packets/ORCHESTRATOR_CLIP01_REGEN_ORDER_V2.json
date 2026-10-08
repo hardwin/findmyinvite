@@ -1,0 +1,26 @@
+{
+  "packet_type": "ORCHESTRATOR_CLIP01_REGEN_ORDER_V2",
+  "production_id": "kc-v1-20261001-230532",
+  "authorized_at": "2026-10-02T00:08:54.875949+05:30",
+  "source": "Ashok via Process Architect",
+  "supersedes": [
+    "ORCHESTRATOR_CLIP01_REGEN.json free-form first-frame path",
+    "IMG-scene-01-regen freeform APPROVED for video unlock",
+    "ORCHESTRATOR_GO_CLIP01_REGEN_VIDEO.json"
+  ],
+  "order": [
+    "1. Continuity anchor = already-generated last frame of clip-01 \u2192 clip-1-handoff.jpg (delivered v1 final decoded frame). Prefer this over regenerating from image-2 alone.",
+    "2. Regenerate image-01 (first frame) BASED ON that last frame \u2014 same world/identity as the handoff porch blessing, but camera pulled out to brilliant elevated drone establish; loosen compound/architecture lock; wedding-estate energy.",
+    "3. Only then regenerate clip-01 video: first=new image-1.jpg, last=clip-1-handoff.jpg (same last-frame anchor)."
+  ],
+  "paths": {
+    "last_frame_anchor": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1-handoff.jpg",
+    "also_available_scene02_still": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-2.jpg",
+    "first_frame_out": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-1.jpg",
+    "clip_out": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1.mp4",
+    "prior_clip_archive": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1.delivered-v1.mp4",
+    "superseded_freeform_still": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-1.regen-freeform-superseded.jpg"
+  },
+  "video_status": "HELD \u2014 do not dispatch until new image-01 APPROVED",
+  "image_mode": "reference/conditioning on last_frame_anchor required if model supports; otherwise text prompt must explicitly match handoff world (porch blessing identity, cream plaster, floral cross, champagne-gold With God's Grace / We Invite You readable as destination) while first frame itself has NO text and is elevated drone establish"
+}

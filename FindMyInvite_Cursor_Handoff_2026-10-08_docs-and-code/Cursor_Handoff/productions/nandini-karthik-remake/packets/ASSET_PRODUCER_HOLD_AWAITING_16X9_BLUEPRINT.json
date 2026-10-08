@@ -1,0 +1,40 @@
+{
+  "packet_type": "ASSET_PRODUCER_HOLD",
+  "production_id": "nk-v1-20261002-072013",
+  "status": "LIFTED_SPATIAL_V9_APPROVED",
+  "spatial_blueprint_16x9_status": "approved_by_ashok",
+  "orchestrator_hold": "/workspace/fmi-productions/nandini-karthik-remake/packets/ORCHESTRATOR_HOLD_STILLS_VIDEO_AWAITING_16X9_BLUEPRINT.json",
+  "do_not_dispatch": [
+    "VIDEO_JOB",
+    "clips_regen"
+  ],
+  "preserve": {
+    "stills_v5": true,
+    "clips_v5": true,
+    "preview": true,
+    "packets": true
+  },
+  "resume_requires": "spatial_blueprint_16x9_status=approved_by_ashok + Orchestrator GO",
+  "held_at": "2026-10-02T09:36:18.029042+05:30",
+  "blueprint_pending_ashok": "/workspace/fmi-productions/nandini-karthik-remake/continuity/SPATIAL_MAZE_MAP_16x9_v3.jpg",
+  "updated_at": "2026-10-02T10:52:46.595+05:30",
+  "blueprint_version": "v9",
+  "maze_path": "A→B→C→F→E→D",
+  "spatial_delivery": "/workspace/fmi-productions/nandini-karthik-remake/packets/SPATIAL_16X9_BLUEPRINT_DELIVERY_v2.json",
+  "spatial_map_version": "spatial-v9",
+  "note": "IMAGE hold lifted after Ashok spatial-v9 approve + Orchestrator UNLOCK stills-v6. VIDEO remains HELD until stills-v6 approved.",
+  "spatial_map_status": "approved_by_ashok",
+  "blueprint_approved": "/workspace/fmi-productions/nandini-karthik-remake/continuity/SPATIAL_MAZE_MAP_16x9_v9.jpg",
+  "lifted_at": "2026-10-02T10:52:46.595+05:30",
+  "image_jobs_authorized": true,
+  "video_jobs_authorized": false,
+  "batch_authorized": "stills-v6",
+  "emit_receipt": "/workspace/fmi-productions/nandini-karthik-remake/packets/ASSET_PRODUCER_EMIT_STILLS_V6.json",
+  "unlock": "/workspace/fmi-productions/nandini-karthik-remake/packets/ORCHESTRATOR_UNLOCK_IMAGE_stills-v6.json",
+  "auth": "/workspace/fmi-productions/nandini-karthik-remake/packets/ORCHESTRATOR_SPATIAL_APPROVED.json",
+  "production_state": {
+    "stills_v6": "DISPATCH_AUTHORIZED",
+    "video": "HELD",
+    "video_jobs_authorized": false
+  }
+}

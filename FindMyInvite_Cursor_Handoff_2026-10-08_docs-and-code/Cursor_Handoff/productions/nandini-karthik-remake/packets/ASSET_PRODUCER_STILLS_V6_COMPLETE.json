@@ -1,0 +1,43 @@
+{
+  "packet_type": "ASSET_PRODUCER_STILLS_V6_COMPLETE",
+  "production_id": "nk-v1-20261002-072013",
+  "recorded_at": "2026-10-02T11:01:55+05:30",
+  "batch": "stills-v6",
+  "spatial_map_version": "spatial-v9",
+  "spatial_blueprint_16x9_status": "approved_by_ashok",
+  "continuity_status": "COMPLETE",
+  "locked_scenes": [
+    "scene-01",
+    "scene-02",
+    "scene-03",
+    "scene-04",
+    "scene-05",
+    "scene-06"
+  ],
+  "scene_05": {
+    "attempt": 2,
+    "status": "CONTINUITY_LOCK",
+    "generation_id": "zm7k4zcq59rmr0d0zcbsvnx17r",
+    "sha256": "be07e86c141989bbde6c28c64c386a973eb5fbbb2785b20b90077388309969d0",
+    "output": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v6/scene-05.jpg",
+    "archive_a1": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v6/scene-05.attempt1.jpg",
+    "retry_receipt": "/workspace/fmi-productions/nandini-karthik-remake/packets/ASSET_PRODUCER_RETRY_IMG_v6_scene-05_attempt2.json"
+  },
+  "asset_dir": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v6",
+  "sha256": {
+    "scene-01": "56c341267ab6f697210aab1ae71b462824d5d33e3a8648f5bc28cef9410b9b60",
+    "scene-02": "1732ebbb5d7c58ea7640e8290f0c3e5baa251c6c7992f994d5d18d4ee0bcd004",
+    "scene-03": "96291727f5ec206f31117af377ad8de0dfff60cf24dc09fc09a2564baa03b05a",
+    "scene-04": "2dc42b84d9a96f5a4777c96099a1edca36c4b2b0a434950055a0bc180fc05dd3",
+    "scene-05": "be07e86c141989bbde6c28c64c386a973eb5fbbb2785b20b90077388309969d0",
+    "scene-06": "5a765feceae2ece605f985e47265fa5c3f3d2b23429f4a64959596e69d404c99"
+  },
+  "orchestrator_complete": "/workspace/fmi-productions/nandini-karthik-remake/packets/ORCHESTRATOR_STILLS_V6_COMPLETE.json",
+  "emit_receipt": "/workspace/fmi-productions/nandini-karthik-remake/packets/ASSET_PRODUCER_EMIT_STILLS_V6.json",
+  "video_jobs_authorized": false,
+  "video_held": true,
+  "video_hold_reason": "AWAITING_ASHOK_STILLS_APPROVE",
+  "stills_v5_preserved": true,
+  "clips_v5_preserved": true,
+  "note": "Continuity LOCK 01\u201306. No VIDEO_JOB emit until Orchestrator GO after Ashok stills approve."
+}

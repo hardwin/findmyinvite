@@ -1,0 +1,37 @@
+{
+  "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-5.jpg",
+  "job_id": "IMG-scene-05",
+  "scene_id": "scene-05",
+  "continuity_decision": "LOCK",
+  "qc_gate": "PASS",
+  "attempt": 2,
+  "decided_at": "2026-10-01T23:18:51.619913+05:30",
+  "checks": [
+    {
+      "rule": "typography_copy",
+      "expected": "Ms.\\nAnna Thomas (Anna Thomas one line)",
+      "observed": "Ms. small above; Anna Thomas single large line",
+      "ok": true
+    },
+    {
+      "rule": "identity_bride",
+      "expected": "low bun, veil, jasmine, gold cross, ivory lace gown, storybook 3D",
+      "observed": "matches",
+      "ok": true
+    },
+    {
+      "rule": "object_count_bride",
+      "expected": 1,
+      "observed": 1,
+      "ok": true
+    },
+    {
+      "rule": "object_count_boards",
+      "expected": 0,
+      "observed": 0,
+      "ok": true
+    }
+  ],
+  "violations": [],
+  "note": "LOCK attempt-2 — calligraphy line-break defect cleared."
+}

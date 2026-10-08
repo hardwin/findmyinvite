@@ -1,0 +1,46 @@
+{
+  "job_type": "IMAGE_JOB",
+  "job_id": "IMG-v5-scene-01",
+  "production_id": "nk-v1-20261002-072013",
+  "batch": "stills-v5",
+  "scene_id": "scene-01",
+  "facet": "entrance_thicket",
+  "name": "Macro leaves — LEFT of approach",
+  "output_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5/scene-01.jpg",
+  "aspect_ratio": "9:16",
+  "image_prompt": "A full-bleed portrait 9:16 cinematic dimensional storybook wedding invitation still. pastel tropical elegance; cream carved stone; jasmine+lotus; banana leaves; brass urulis + nilavilakku; polished reflective floor; soft warm morning light; cinematic dimensional storybook 9:16. FACET (entrance_thicket): Approach path dense with giant banana leaves; soft cream glow of colonnade beyond gaps. 9:16 storybook. Extreme close banana leaves LEFT of approach; tiny cream colonnade glow RIGHT. NO lake/gopuram/mountains/boat. NO people. NO text. Camera: {\"framing\": \"extreme close among banana leaves\", \"bias\": \"LEFT of approach path\", \"height\": \"eye-among-leaves\", \"look\": \"peek of cream colonnade glow toward RIGHT\", \"lens_feel\": \"tight macro\"}. Visible set pieces: banana leaves, jasmine/dew, soft cream colonnade glow only. Offscreen neighbors — L:deeper thicket; R:entrance_colonnade (next); behind:path origin; ahead:entrance_colonnade. FORBIDDEN (do not show as hero/dominant): misty lake, temple gopuram, mountains, boat, stage, couple, text. Far vista lock: FORBIDDEN as dominant background on every beat. Allowed at most as a tiny distant corner peek in scene-06 only, never hero, never with readable gopuram. Prefer solid stage floral architecture instead. Same venue complex throughout — materials/decor continuous; geography changes by facet only. No watermark. No brand logos. RETRY ATTEMPT 2 (Orchestrator-authorized, defect-targeted only): Regenerate entrance_thicket ONLY: extreme close among giant banana leaves filling most of frame (LEFT of approach); allow only a tiny soft cream colonnade glow peek toward RIGHT through leaf gaps. Remove full pillar arcade, polished aisle floor run, lamp rows, and urulis from frame. Still NO lake/gopuram/mountains/boat, NO people, NO text.",
+  "image_prompt_constraints": "9:16 storybook. Extreme close banana leaves LEFT of approach; tiny cream colonnade glow RIGHT. NO lake/gopuram/mountains/boat. NO people. NO text.",
+  "forbidden_reuse": [
+    "misty lake",
+    "temple gopuram",
+    "mountains",
+    "boat",
+    "stage",
+    "couple",
+    "text"
+  ],
+  "visible_set_pieces": [
+    "banana leaves",
+    "jasmine/dew",
+    "soft cream colonnade glow only"
+  ],
+  "offscreen": {
+    "L": "deeper thicket",
+    "R": "entrance_colonnade (next)",
+    "behind": "path origin",
+    "ahead": "entrance_colonnade"
+  },
+  "camera_pose": {
+    "framing": "extreme close among banana leaves",
+    "bias": "LEFT of approach path",
+    "height": "eye-among-leaves",
+    "look": "peek of cream colonnade glow toward RIGHT",
+    "lens_feel": "tight macro"
+  },
+  "couple": false,
+  "spatial_map_version": "spatial-v2",
+  "authorized_to_dispatch": true,
+  "status": "RETRY_AUTHORIZED",
+  "attempt": 2,
+  "retry_instruction": "Regenerate entrance_thicket ONLY: extreme close among giant banana leaves filling most of frame (LEFT of approach); allow only a tiny soft cream colonnade glow peek toward RIGHT through leaf gaps. Remove full pillar arcade, polished aisle floor run, lamp rows, and urulis from frame. Still NO lake/gopuram/mountains/boat, NO people, NO text."
+}

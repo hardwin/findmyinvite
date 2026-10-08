@@ -1,0 +1,18 @@
+{
+  "scene_id": "scene-05",
+  "attempt": 2,
+  "status": "GENERATED",
+  "generation_id": "zm7k4zcq59rmr0d0zcbsvnx17r",
+  "sha256": "be07e86c141989bbde6c28c64c386a973eb5fbbb2785b20b90077388309969d0",
+  "size_bytes": 322755,
+  "output_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v6/scene-05.jpg",
+  "archived_attempt1_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v6/scene-05.attempt1.jpg",
+  "attempt1_sha256": "c44036de7c6d1c0aeb1011519a1d0d0a58d1edb39f719c26db88da675a203315",
+  "sha_differs_from_attempt1": true,
+  "prompt_sha256": "fc708661e0a513063b7cb058c6d39d7fa15a24092d5333c8d1c0c68035076137",
+  "model": "openai/gpt-image-2.5-flare",
+  "provider": "replicate",
+  "facet": "ceremony_stage_mandap",
+  "spatial_map_version": "spatial-v9",
+  "ts_local": "2026-10-02T11:00:42+0530"
+}

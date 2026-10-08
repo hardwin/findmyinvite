@@ -1,0 +1,31 @@
+{
+  "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-7.jpg",
+  "job_id": "IMG-scene-07",
+  "scene_id": "scene-07",
+  "continuity_decision": "LOCK",
+  "qc_gate": "PASS",
+  "attempt": 2,
+  "decided_at": "2026-10-02T00:08:16.173742+05:30",
+  "checks": [
+    {
+      "rule": "identity_groom_necktie",
+      "expected": "no necktie; open collar (align scene-04)",
+      "observed": "open collar, no necktie",
+      "ok": true
+    },
+    {
+      "rule": "object_count_couple",
+      "expected": "1 groom + 1 bride",
+      "observed": "1+1",
+      "ok": true
+    },
+    {
+      "rule": "copy_ceremony_board",
+      "expected": "Holy Matrimony / 15th February 2025 / 10:00 a.m. / In the Morning",
+      "observed": "exact",
+      "ok": true
+    }
+  ],
+  "violations": [],
+  "note": "LOCK attempt-2 — necktie defect cleared; rest of ceremony hold."
+}

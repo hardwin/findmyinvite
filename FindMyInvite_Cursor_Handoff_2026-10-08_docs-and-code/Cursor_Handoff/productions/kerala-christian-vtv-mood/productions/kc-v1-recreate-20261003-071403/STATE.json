@@ -1,0 +1,43 @@
+{
+  "production_id": "kc-v1-recreate-20261003-071403",
+  "mode": "RECREATE_CLIENT_FILL",
+  "couple": "Theresa & Isaac",
+  "invitation_order": "bride-side",
+  "phase": "CORRECTION_CLIP01_CAMERA",
+  "updated_at": "2026-10-05T10:06:00+05:30",
+  "template_name": "The Wedding of Theresa & Isaac",
+  "template_sha256": "25e89072ce2f2d6c8f94b99183b5656c10c99b6bdb8b6555cbe01b6ac18b032e",
+  "qc_policy": "NO_QC_GENERATE_AND_STITCH",
+  "spatial_gate": "REQUIRED",
+  "spatial_blueprint_16x9_status": "approved_by_ashok",
+  "image_jobs_authorized": true,
+  "video_jobs_authorized": false,
+  "compiler": "PASS",
+  "blocker": null,
+  "continuity": "WAIVED",
+  "continuity_clip_qc": "WAIVED",
+  "visual_qc": "WAIVED",
+  "spatial_map_version": "spatial-v1",
+  "batch": "clips-v1",
+  "stills_status": "COMPLETE_NO_QC",
+  "stitch_authorized": false,
+  "hold": null,
+  "hold_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/ORCHESTRATOR_HOLD_VIDEO.json",
+  "scene_02_retry_authorized": true,
+  "scene_02_attempt": 3,
+  "scene_02_attempt2": "rejected_text_not_readable",
+  "scene_02_status": "approved_by_ashok",
+  "scene_02_sha256": "0bd13d640bcbb86e207d98c46aa94f787198144810b48c0ad131a9d29345caf0",
+  "final": {
+    "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/assets/output/kerala-christian-v1/kerala-christian-v1-final.mp4",
+    "sha256": "e33e2b1d433f70e914b09895d685086ef06318cc122f3f85e1f050b2f9394689",
+    "duration_s": 54.458333,
+    "note": "correction restitch scene-02 new journey and scene-08 3:00 pm Mass"
+  },
+  "correction": "scene-02 attempt 4 and scene-08 attempt 2, then clips 01 02 07 08, restitch",
+  "video_hold_reason": null,
+  "correction_stills": {
+    "scene-02": "image-2.jpg sha256_prefix 1c72f2a594a469d5 attempt 4",
+    "scene-08": "image-8.jpg sha256_prefix 848baf0873d2f811 attempt 2"
+  }
+}

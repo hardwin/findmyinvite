@@ -1,0 +1,14 @@
+{
+  "packet_type": "VIDEO_DIRECTOR_USER_STOP",
+  "production_id": "nk-v1-20261002-072013",
+  "recorded_at": "2026-10-02T09:17:18.225767+05:30",
+  "reason": "Ashok USER STOP \u2014 no regenerates; terminate QC; preserve experiment results",
+  "status": "IDLE_STOPPED",
+  "preserve": [
+    "assets/clips-v5/clip-01.mp4",
+    "assets/handoffs-v5/clip-01-handoff.jpg",
+    "assets/clips-v5/clip-02.attempt1.mp4",
+    "assets/handoffs-v5/clip-02-handoff.attempt1.jpg",
+    "assets/stills-v5/"
+  ]
+}

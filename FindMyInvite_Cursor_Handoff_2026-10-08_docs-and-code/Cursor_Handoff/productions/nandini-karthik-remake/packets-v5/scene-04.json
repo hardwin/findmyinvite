@@ -1,0 +1,45 @@
+{
+  "job_type": "IMAGE_JOB",
+  "job_id": "IMG-v5-scene-04",
+  "production_id": "nk-v1-20261002-072013",
+  "batch": "stills-v5",
+  "scene_id": "scene-04",
+  "facet": "left_side_aisle",
+  "name": "Left aisle segment — STRAIGHT toward stairs",
+  "output_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5/scene-04.jpg",
+  "aspect_ratio": "9:16",
+  "image_prompt": "A full-bleed portrait 9:16 cinematic dimensional storybook wedding invitation still. pastel tropical elegance; cream carved stone; jasmine+lotus; banana leaves; brass urulis + nilavilakku; polished reflective floor; soft warm morning light; cinematic dimensional storybook 9:16. FACET (left_side_aisle): Long left arcade of carved pillars, urulis lining polished aisle, banana leaves along outer wall; depth into aisle NOT open lake. 9:16. Mid LEFT SIDE AISLE looking north; stairs mouth ahead. Empty. Continuous from threshold — same aisle. NO lake/gopuram. NO couple. NO text. Camera: {\"framing\": \"medium along aisle\", \"bias\": \"inside left aisle, looking north\", \"height\": \"eye level\", \"look\": \"aisle vanishing toward stairs mouth (stairs visible ahead as next neighbor)\", \"lens_feel\": \"medium\"}. Visible set pieces: left aisle pillars continuing, urulis, banana leaves, stairs mouth / landing ahead. Offscreen neighbors — L:pond (still off left wall — not entered); R:center aisle through pillar gaps only; behind:threshold/colonnade; ahead:stairs. FORBIDDEN (do not show as hero/dominant): misty lake, gopuram, mountains, boat, teleport onto stage center, couple, text. Far vista lock: FORBIDDEN as dominant background on every beat. Allowed at most as a tiny distant corner peek in scene-06 only, never hero, never with readable gopuram. Prefer solid stage floral architecture instead. Same venue complex throughout — materials/decor continuous; geography changes by facet only. No watermark. No brand logos.",
+  "image_prompt_constraints": "9:16. Mid LEFT SIDE AISLE looking north; stairs mouth ahead. Empty. Continuous from threshold — same aisle. NO lake/gopuram. NO couple. NO text.",
+  "forbidden_reuse": [
+    "misty lake",
+    "gopuram",
+    "mountains",
+    "boat",
+    "teleport onto stage center",
+    "couple",
+    "text"
+  ],
+  "visible_set_pieces": [
+    "left aisle pillars continuing",
+    "urulis",
+    "banana leaves",
+    "stairs mouth / landing ahead"
+  ],
+  "offscreen": {
+    "L": "pond (still off left wall — not entered)",
+    "R": "center aisle through pillar gaps only",
+    "behind": "threshold/colonnade",
+    "ahead": "stairs"
+  },
+  "camera_pose": {
+    "framing": "medium along aisle",
+    "bias": "inside left aisle, looking north",
+    "height": "eye level",
+    "look": "aisle vanishing toward stairs mouth (stairs visible ahead as next neighbor)",
+    "lens_feel": "medium"
+  },
+  "couple": false,
+  "spatial_map_version": "spatial-v2",
+  "authorized_to_dispatch": true,
+  "status": "READY_TO_GENERATE"
+}

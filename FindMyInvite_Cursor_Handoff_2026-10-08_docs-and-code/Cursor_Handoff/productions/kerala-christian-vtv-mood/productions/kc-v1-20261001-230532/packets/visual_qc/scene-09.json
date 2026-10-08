@@ -1,0 +1,16 @@
+{
+  "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-9.jpg",
+  "job_id": "IMG-scene-09",
+  "scene_id": "scene-09",
+  "decision": "PASS",
+  "rationale": "720\u00d71280; evening/blue-hour lamp-lit parish hall garden; ONE reception board on champagne-gold tripod easel; exact reception_lines; jasmine/rose not marigold; no daytime sunrise primary. Reconfirmed PASS.",
+  "violations": [],
+  "retry_instruction": null,
+  "attempt": 1,
+  "technical": {
+    "w": 720,
+    "h": 1280,
+    "ok": true
+  },
+  "decided_at": "2026-10-01T23:14:35.538499+05:30"
+}

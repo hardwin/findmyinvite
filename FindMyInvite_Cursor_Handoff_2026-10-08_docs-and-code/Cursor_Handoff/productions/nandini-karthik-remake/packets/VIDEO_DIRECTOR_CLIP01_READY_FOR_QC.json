@@ -1,0 +1,19 @@
+{
+  "packet_type": "VIDEO_DIRECTOR_CLIP_READY_FOR_QC",
+  "job_id": "VID-v5-clip-01",
+  "clip_id": "clip-01",
+  "production_id": "nk-v1-20261002-072013",
+  "batch": "clips-v5",
+  "attempt": 1,
+  "status": "GENERATED_AWAITING_QC",
+  "output": "/workspace/fmi-productions/nandini-karthik-remake/assets/clips-v5/clip-01.mp4",
+  "handoff": "/workspace/fmi-productions/nandini-karthik-remake/assets/handoffs-v5/clip-01-handoff.jpg",
+  "sha256": "0a8cef4f4a581ec4379b8008e782aa171a3d24b281583f7b254e6748d28deca3",
+  "request_id": "591a80e3-8c78-9140-a73f-545fa61816bd",
+  "duration_sec": 3,
+  "first_frame": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5/scene-01.jpg",
+  "last_frame": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5/scene-02.jpg",
+  "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/VIDEO_JOB/clip-01.v5.json",
+  "finished_at": "2026-10-02T08:50:49.107276+05:30",
+  "note": "Stop for Visual QC. Clips 02-05 remain HELD."
+}

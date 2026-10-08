@@ -1,0 +1,47 @@
+{
+  "job_type": "IMAGE_JOB",
+  "job_id": "IMG-scene-04",
+  "production_id": "icc-v1-20261005-234500",
+  "scene_id": "scene-04",
+  "scene_index": 4,
+  "name": "Bride Anusha looking over her shoulder",
+  "output_path": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/assets/output/image-4.jpg",
+  "prompt_source": "template.json scenes[3].image_prompt (verbatim)",
+  "prompt_sha256": "d8c36a6a7d1875ddd5c23155814b34f24aee0e06d6af1d4324a5c0c92cb070c9",
+  "prompt_chars": 2540,
+  "model": {
+    "id": "openai/gpt-image-2.5-flare",
+    "provider": "replicate",
+    "credentials_env": "REPLICATE_API_TOKEN"
+  },
+  "generation": "text-only",
+  "image_request": {
+    "input_images": [],
+    "aspect_ratio": "9:16",
+    "quality": "high",
+    "output_format": "jpeg"
+  },
+  "width": 720,
+  "height": 1280,
+  "postprocess": "ffmpeg_pad to 720x1280",
+  "auth_packet": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/packets/ORCHESTRATOR_GO_IMAGES.json",
+  "template_sha256": "3a722bd2dc87b669445c7b20411b00886a1a96ab787c448d4f1dcb6ec748d42f",
+  "staging": false,
+  "qc": "NO_QC",
+  "spatial": "WAIVED",
+  "continuity": "WAIVED",
+  "retry_policy": {
+    "paid_predictions": 1,
+    "retry_on_api_failure": 1
+  },
+  "status": "SUPERSEDED",
+  "authorized_to_dispatch": false,
+  "staged_at": "2026-10-05T23:47:21.915868+05:30",
+  "request_id": "sa3tg918dsrmy0d11n4vrsn3xr",
+  "output_sha256": "6b45291c3e5d6057be0563461e7bdfbd0aec600712d008e2a522a1d58f92b07d",
+  "output_size_bytes": 249098,
+  "generated_at": "2026-10-05T23:47:58.243473+05:30",
+  "superseded_by": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/packets/IMAGE_JOB/scene-04-pixar-restyle.json",
+  "superseded_at": "2026-10-06T00:37:15.119069+05:30",
+  "superseded_reason": "FULL PIXAR RESTYLE (template 8ade25af...)"
+}

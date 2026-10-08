@@ -1,0 +1,37 @@
+{
+  "template_sha256": "230ff0ca1b4ba380fbad6eecfc3cf81901942a3ae81c15889512de365d63b916",
+  "original_len": 4331,
+  "original_sha256": "cda018d0d64aee90dd3704f9b85ed5b231023786125a8a4d30cc0fc1747248fa",
+  "trimmed_len": 4069,
+  "trimmed_sha256": "969c3308b93df851ce95edcde3f7c815abc9f0d97dce35e957bf37239f5d6fc2",
+  "removed_chars": 262,
+  "removed_spans": [
+    {
+      "orig_start": 638,
+      "orig_end": 681,
+      "chars": 43,
+      "removed_text": " and individual petals rotate independently",
+      "reason": "petal drift clause (sentence 'In the slower passage...'); candle highlights/reflections part kept",
+      "order": 1
+    },
+    {
+      "orig_start": 683,
+      "orig_end": 817,
+      "chars": 134,
+      "removed_text": "Release a denser shower of small white jasmine and soft pink rose petals during deceleration, with near, middle and far depth layers. ",
+      "reason": "whole sentence: generic petal shower/depth-layer wording",
+      "order": 2
+    },
+    {
+      "orig_start": 3673,
+      "orig_end": 3758,
+      "chars": 85,
+      "removed_text": ", with restrained traveling edge glints and no smoke, droplets or sweeping light beam",
+      "reason": "lettering-style clause (edge glints / emission) from 'The title remains large, stable and legible...'; legibility kept",
+      "order": 3
+    }
+  ],
+  "method": "deletions only; whole sentence or clause; no rewording; truncate_prompt() verified no-op (len<=4096)",
+  "trimmed_text": "A single continuous physically motivated cinematic camera move in the same dimensional illustrated Kerala Catholic church compound near Alappuzha. Use the supplied first and final images as visual anchors. Solid fixed architecture with real translation, occlusion, perspective and foreground parallax. Preserve identity, lighting, materials and exact final lettering. A short energetic travel burst with directional edge blur must ease decisively into a slower continuously moving arrival; never distribute the travel uniformly over the duration. In the slower passage, soft candle highlights and floor reflections shift with camera angle. Each visible petal is a single loose curled petal, generally under 3 percent of frame width; no whole flowers, discs or objects covering faces and words. Preserve clear readability. No cuts, crossfades, room dissolves, object swaps, frozen holds, uniform sideways slides or full orbits. Glowing lettering is solid beveled metal with light on its surface: no liquid gold, dripping strokes, ceiling-to-floor beams, explosive firework bursts or smoke emitted by text. A warm floor reflection is reflected light, not a physical stream connecting the title to the floor. Existing soft candle wisps, where visible, come only from a floor-level candle stand and stay separate from lettering.\n\nEXACT SHOT CHOREOGRAPHY: HIGH AERIAL HOOK, FAST FORWARD-DOWN DIVE, THEN A CONTINUING BLESSING PUSH. 0.00-0.65s: gently advance from the high distant full-compound opening. The tiny existing church porch vestibule below the cream-white bell tower is the destination. 0.65-1.85s: accelerate hard FORWARD AND DOWN along that axis. The compound, reflecting courtyard pool and cream paving expand with strong parallax; skim over the pool toward the small porch. Keep the bell tower behind the destination, moving toward the upper edge. The camera never heads into the tower and no replacement church appears. 1.85-2.20s: descend below the existing porch roof and pass between its front corner columns above the three steps. The beam passes overhead and the columns whip past the edges in brief directional blur. These are open arched bays, not a dark doorway in a closed sanctuary. The roof initially occludes the open pedestal; the first resolved view reveals the SAME empty pedestal and candle stands, and no floral cross, matching the supplied final image. From the moment the rear side is visible it is already open to the exterior bell tower. No back wall appears or disappears. 2.20-2.70s: level out and smoothly brake without stopping. Reveal the large champagne-gold blessing lettering filling the open air above the empty pedestal, and no floral cross, as the camera clears the front beam, its metal catching the changing light. The text reads 'For I know the plans i have for you , declares the lord,' above 'plan to give you hope and a future for starting your new journey - JEREMIAH 29:11'; it belongs to a fixed position in the porch rather than following the screen. 2.70-5.00s: CONTINUE A VISIBLE SLOW FORWARD PUSH into the final image, approximately another 10 percent increase in pedestal scale, with column-edge parallax, shifting reflections and rich falling soft petals. End still moving gently forward, ready to turn left immediately in the next clip. Do not stop on a static tableau. Keep the open interior clear of any floral cross, pedestal, or white stage, with a persistent open view behind the lettering. The title remains large, stable and legible. The small open interior is shaded beneath the existing roof, with no pedestal; as the camera descends, soft sunlight reveals the same empty pedestal and cream plaster. No floral cross. Preserve the pedestal and candle stands, with no object replacement or material morph. Exterior floral swags and column wraps remain attached to their original surfaces as they pass out of view; never dissolve the decorations. NO EXTRA PILLAR: never show a floral cross, pedestal, stand or extra pillar at any moment of the dive; only the porch's existing corner columns pass the edges.",
+  "auth": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/ORCHESTRATOR_SCENE01_NO_CROSS_REGEN.json"
+}

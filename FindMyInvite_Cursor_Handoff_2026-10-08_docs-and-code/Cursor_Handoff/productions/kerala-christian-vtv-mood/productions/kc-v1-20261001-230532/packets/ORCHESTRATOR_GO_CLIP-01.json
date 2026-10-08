@@ -1,0 +1,19 @@
+{
+  "action": "AUTHORIZE_VIDEO_CLIP",
+  "production_id": "kc-v1-20261001-230532",
+  "clip_id": "clip-01",
+  "job_id": "VID-clip-01",
+  "authorized_at": "2026-10-01T23:14:25.318866+05:30",
+  "packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/VIDEO_JOB/clip-01.json",
+  "first_frame": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-1.jpg",
+  "last_frame": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-2.jpg",
+  "duration_seconds": 5,
+  "output": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1.mp4",
+  "rules": [
+    "A\u2192B connection only",
+    "use actual approved scene images",
+    "no self-approve",
+    "max 2 paid attempts",
+    "Visual QC + Continuity after generate"
+  ]
+}

@@ -1,0 +1,149 @@
+{
+  "job_type": "IMAGE_JOB",
+  "job_id": "IMG-scene-07",
+  "production_id": "kc-v1-recreate-20261002-192743",
+  "mode": "RECREATE_IDENTICAL",
+  "status": "CONTINUITY_LOCK",
+  "authorized_to_dispatch": false,
+  "authorization_note": "Orchestrator IMAGE GO RECREATE_IDENTICAL \u2014 locked prompts verbatim; skip_spatial; Visual QC + Continuity veto; max 2 paid attempts; VIDEO not authorized",
+  "scene_id": "scene-07",
+  "scene_index": 7,
+  "name": "Holy Matrimony at the aisle and altar",
+  "generation": "text-only",
+  "required_text": [],
+  "image_prompt": "A full-bleed portrait 9:16 frame of a richly cinematic dimensional storybook-animation Kerala Christian church wedding invitation. Soft romantic late-2000s South Indian cinema mood: dreamy natural light, intimate coastal Kerala atmosphere, gentle teal-and-warm contrast, quiet emotional longing. Soft cream and powder-blue palette with pearl highlights, pale pink florals and cool backwaters haze beyond coconut palms. Cream-white Portuguese-influenced plaster walls, laterite stone accents, arched windows, a modest bell tower and a simple cross. Premium animated adult characters with sculpted expressive faces, never photographic people. DRAMATIC CHIAROSCURO: gentle warm back-and-side sunlight streams diagonally through arched windows and open porch bays, clearly visible soft volumetric god rays cutting through thin coastal atmospheric haze; luminous rim light on ivory silk, lace, pearl and champagne-gold frames against cooler powder-blue shade. Preserve readable highlights, not a flat uniformly bright wash. Very fine dust motes sparkle only inside the sunbeams. Floor is subtly reflective worn cream stone or polished laterite tile, not a mirror. Gold lettering has illuminated beveled edges, warm restrained emissive bloom, luminous hairline flourishes and discrete pinpoint highlights; sharp readable counters. Fixed floral church wedding d\u00e9cor of white jasmine, soft pink roses, baby's breath and green foliage \u2014 not marigold temple swags as primary. Roughly 12 to 20 tiny separate white, soft-pink and cream petals already scattered irregularly through the whole depth volume: a few soft near-lens edge petals, crisp midground petals, tiny distant petals. No confetti cannon, solid flower bunches in the air, symmetrical particle rows or dense shower from one point. All bouquets and garlands are fixed to their supports. Generate only from this text, no reference image. No watermark, interface, duplicate people, extra signs or unintended words.\n\nAdult Kerala Christian groom, visibly polished storybook 3D animation, warm medium-brown skin, slender adult oval face, large dark-brown almond eyes, thick dark eyebrows, smooth clean-shaven cheeks and chin, soft black hair with a gentle side part, quiet reserved smile. No moustache or beard. Natural adult proportions, not a child. Ivory formal suit over a cream shirt with a soft white-and-pale-pink boutonniere. Keep this face, hair, body and outfit consistent in every couple scene.\n\nAdult Kerala Christian bride, visibly polished storybook 3D animation, warm medium-brown skin, graceful oval face, large dark-brown almond eyes, gently arched black eyebrows, soft smile. Dark hair in an elegant low bun with a soft veil and white jasmine accents, delicate gold cross pendant and pearl earrings. Ivory lace-and-silk wedding gown with soft cream undertones. Natural adult proportions and a consistent face, hairstyle, jewelry and gown in every later scene.\n\nSCENE COMPOSITION:\nSeated-eye-level THREE-QUARTER view of the Holy Matrimony ceremony inside the church aisle toward the altar, reached by turning LEFT at a right-angle corner of the cloister. The consistent groom and bride sit on the LEFT half on a soft cream ceremonial cushion near the altar steps, groom left and bride next to him. Both now wear delicate white-and-pale-pink floral garlands over unchanged clothes. Groom gently raises his right hand in a quiet blessing gesture near the bride, bride lowers her eyes and soft-smiles. Soft candlelight and a simple altar cross are low at left, not dominating the foreground. On the RIGHT is ONE independent dark mahogany timing sign in an ornate champagne-gold frame, generously sized and easy to read, exact illuminated gold lettering: 'Holy Matrimony\n15th February 2025\n10:00 a.m.\nIn the Morning'. The background is an intimate cream-plaster altar sanctuary with deep soft shadow and arched windows, NOT a distant straight corridor. Thick white jasmine and baby's breath garlands hang overhead and soft diagonal SUNRAYS from a side arched window rake across the couple, haze and columns; warm candlelight gives subtle secondary highlights. A priest is a small secondary figure far left. Quietly suspended individual petals are distributed at several depths, never a mass burst. All flower arrangements are grounded.",
+  "prompt_sha256": "0750489f335fdba259143d1ec050dddf3430b825a0b7efd4b700c0f922157d40",
+  "prompt_policy": "NEVER_CHANGE_PROMPTS \u2014 byte-identical from template.json",
+  "continuity": {
+    "characters": {
+      "groom": "Adult Kerala Christian groom, visibly polished storybook 3D animation, warm medium-brown skin, slender adult oval face, large dark-brown almond eyes, thick dark eyebrows, smooth clean-shaven cheeks and chin, soft black hair with a gentle side part, quiet reserved smile. No moustache or beard. Natural adult proportions, not a child. Ivory formal suit over a cream shirt with a soft white-and-pale-pink boutonniere. Keep this face, hair, body and outfit consistent in every couple scene.",
+      "bride": "Adult Kerala Christian bride, visibly polished storybook 3D animation, warm medium-brown skin, graceful oval face, large dark-brown almond eyes, gently arched black eyebrows, soft smile. Dark hair in an elegant low bun with a soft veil and white jasmine accents, delicate gold cross pendant and pearl earrings. Ivory lace-and-silk wedding gown with soft cream undertones. Natural adult proportions and a consistent face, hairstyle, jewelry and gown in every later scene."
+    },
+    "style_excerpt": "A full-bleed portrait 9:16 frame of a richly cinematic dimensional storybook-animation Kerala Christian church wedding invitation. Soft romantic late-2000s South Indian cinema mood: dreamy natural light, intimate coastal Kerala atmosphere, gentle teal-and-warm contrast, quiet emotional longing. Soft cream and powder-blue palette with pearl highlights, pale pink florals and cool backwaters haze beyond coconut palms. Cream-white Portuguese-influenced plaster walls, laterite stone accents, arched windows, a modest bell tower and a simple cross. Premium animated adult characters with sculpted expressive faces, never photographic people. DRAMATIC CHIAROSCURO: gentle warm back-and-side sunlight streams diagonally through arched windows and open porch bays, clearly visible soft volumetric god rays cutting through thin coastal atmospheric haze; luminous rim light on ivory silk, lace, pearl and champagne-gold frames against cooler powder-blue shade. Preserve readable highlights, not a flat uniformly bright wash. Very fine dust motes sparkle only inside the sunbeams. Floor is subtly reflective worn cream stone or polished laterite tile, not a mirror. Gold lettering has illuminated beveled ed",
+    "particle_motion": "PETALS AND LIGHT: continuous distributed slow-motion drift is present from the first frame, not triggered as a burst when the camera stops. Keep about 12-20 separate visible petals at irregular heights and depths \u2014 soft white jasmine, pale pink rose and cream petals. Petals flutter with independent phase, soft air resistance and a little side-to-side wobble; nearby petals drift roughly one tenth of picture height per second in the settled view, distant ones slower. Camera rotation produces the brief directional streaks; after braking the SAME scattered petals become calmly visible, with no sudden emission, rain sheet, confetti explosion or synchronized falling. Bouquets and garlands never detach. Fine dust motes drift inside soft diagonal volumetric sunrays through arched windows. Champagne-gold edges, pearl and jewelry catch moving specular glints; text itself emits no smoke, gold liquid or floor beam.",
+    "architecture_notes": [
+      "ONE white Portuguese-influenced Kerala Catholic church compound near Alappuzha backwaters",
+      "cream-white plaster, laterite accents, arched windows, ONE modest bell tower with cross",
+      "ONE small open arched porch vestibule (all sides open including rear)",
+      "side cloister arcade, aisle/altar ceremony, parish hall garden evening reception",
+      "floral: white jasmine, soft pink roses, baby's breath, green foliage \u2014 NOT marigold temple swags as primary"
+    ],
+    "lighting": "ONE warm soft sunrise from camera-left throughout daytime; evening reception separate lamp-lit mood for scene-09; gentle teal-and-warm contrast",
+    "typography": "luminous champagne-gold / antique-gold beveled dimensional lettering; exact customer copy only",
+    "object_count_rules": [
+      "Exactly one invitation title board where a board is specified",
+      "Exactly one SAVE THE DATE board in couple/date scenes",
+      "Exactly one bride and one groom in couple scenes (never duplicates)",
+      "Exactly one floral cross pedestal in porch",
+      "Exactly one modest bell tower"
+    ],
+    "parameters": {
+      "invitation_lines": "The Wedding of\nAlex & Anna",
+      "groom_title": "Mr.",
+      "groom_name": "Alex John",
+      "bride_title": "Ms.",
+      "bride_name": "Anna Thomas",
+      "family_lines": "With the Blessings of\nGroom's Parents\nMr. John Mathew\n& Mrs. Elsy John\nBride's Parents\nMr. Thomas George\n& Mrs. Mercy Thomas",
+      "ceremony_lines": "Holy Matrimony\n15th February 2025\n10:00 a.m.\nIn the Morning",
+      "venue_lines": "Wedding Venue\nSt. Mary's Forane Church\nNear Alappuzha\nKerala",
+      "reception_lines": "Reception - Dinner\n14th February 2025\n7:00 p.m. onwards\nParish Hall Garden\nNear Alappuzha, Kerala",
+      "host_lines": "Invited By\nMr. Kurien Abraham\nMrs. Lizzy Kurien\nBaby. Nia & Noel\nWith Love & Blessings",
+      "save_date_lines": "SAVE THE DATE\n14 & 15 FEBRUARY\n2025",
+      "save_date_inline": "SAVE THE DATE / 14 & 15 FEBRUARY / 2025",
+      "devotional_line_1": "With God's Grace",
+      "devotional_line_2": "We Invite You"
+    },
+    "scene_summary": {
+      "id": "scene-07",
+      "index": 7,
+      "name": "Holy Matrimony at the aisle and altar",
+      "generation": "text-only",
+      "image_path": "image-7.jpg",
+      "text_fields": []
+    },
+    "scene_bible": {
+      "zone": "aisle toward altar (reached turning LEFT at cloister corner)",
+      "characters_present": [
+        "groom",
+        "bride"
+      ],
+      "copy": {
+        "key": "ceremony_lines",
+        "exact": "Holy Matrimony\n15th February 2025\n10:00 a.m.\nIn the Morning",
+        "carrier": "ONE dark mahogany timing sign, ornate champagne-gold frame, RIGHT side"
+      },
+      "lighting": "soft diagonal sunrays from side arched window + subtle candle secondary; seated-eye-level",
+      "camera": "three-quarter; couple LEFT half on cream ceremonial cushion near altar steps \u2014 groom left, bride next; groom quiet blessing gesture",
+      "architecture_must": [
+        "intimate cream-plaster altar sanctuary with deep soft shadow \u2014 NOT distant straight corridor",
+        "simple altar cross low at left",
+        "priest = small secondary far left only"
+      ],
+      "object_counts": {
+        "groom": 1,
+        "bride": 1,
+        "ceremony_board": 1,
+        "priests_secondary": 1
+      },
+      "typography": null,
+      "forbidden": [
+        "duplicate couple",
+        "extra ceremony boards",
+        "corridor vanishing-point altar"
+      ],
+      "particles": null
+    }
+  },
+  "output_filename": "image-7.jpg",
+  "output_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/image-7.jpg",
+  "aspect": "9:16",
+  "width": 720,
+  "height": 1280,
+  "model": {
+    "credentials_env": "REPLICATE_API_TOKEN",
+    "id": "openai/gpt-image-2.5-flare",
+    "provider": "replicate"
+  },
+  "skip_spatial": true,
+  "dependencies": {
+    "blocks": [],
+    "blocked_by": [
+      "template_compiler_PASS",
+      "continuity_bible_ready",
+      "orchestrator_IMAGE_authorize"
+    ]
+  },
+  "context_isolation": {
+    "includes_clip_graph": false,
+    "includes_other_scenes": false,
+    "includes_full_template": false,
+    "rule": "Image agents must not receive clip graphs, unrelated scenes, or full template.json"
+  },
+  "retry_policy": {
+    "automatic_paid_retries": false,
+    "max_paid_attempts": 2
+  },
+  "template_sha256": "bad0d176beb1ad47e3942689f95c4153fb933f3547670a255bb7fc062f46dae4",
+  "continuity_bible_sha256": "8863eca51bbc8b7e1c297ffbfedcfd1580b5bce00e2e56a38fd98e8f82637571",
+  "orchestrator_auth": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/ORCHESTRATOR_GO_IMAGES.json",
+  "staged_at": "2026-10-02T19:32:36+05:30",
+  "authorized_by_orchestrator": true,
+  "authorized_at": "2026-10-02T19:31:35+05:30",
+  "dispatched_at": "2026-10-02T19:32:36+05:30",
+  "dispatch_target": "FMI Image Floor fb72b97b @Image Director",
+  "attempt": 1,
+  "video_jobs_authorized": false,
+  "preserve_prior_production": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532",
+  "source": "template.json (immutable) + continuity_extract.json + CONTINUITY_BIBLE scene subsection",
+  "generation_id": "36x2k123ysrmw0d0zkq9kdrfz8",
+  "output_sha256": "3e428208f2590535a5544d33052a561ff974843ec0ced566ef47b0068a3646ae",
+  "output_size_bytes": 242820,
+  "output_url": "https://replicate.delivery/xezq/erXK9CuPqm2xSifE5e4pvi4Z5obcuiegqGl6z67iDfQ8fr10F/tmp3aeq6qb5.jpeg",
+  "generated_at": "2026-10-02T19:34:47+0530",
+  "generation_attempt": 1,
+  "asset_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/image-7.jpg",
+  "asset_sha256": "3e428208f2590535a5544d33052a561ff974843ec0ced566ef47b0068a3646ae",
+  "generated_noted_at": "2026-10-02T19:37:02+05:30",
+  "immutable": true,
+  "lock_noted_at": "2026-10-02T19:39:12+05:30"
+}

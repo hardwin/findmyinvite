@@ -1,0 +1,474 @@
+{
+  "production_id": "kc-v1-20261001-230532",
+  "name": "The Wedding of Alex & Anna",
+  "iteration": "kerala-christian-v1",
+  "template_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/template.json",
+  "immutable_source_copy": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/state/template.source.json",
+  "brief_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/state/BRIEF.md",
+  "assets_root": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1",
+  "created_at": "2026-10-01T23:05:32.866053+05:30",
+  "state": "CLIP01_ORDER_V2_IMAGE_GEN",
+  "state_history": [
+    {
+      "state": "RECEIVED",
+      "at": "2026-10-01T23:05:32.867382+05:30",
+      "note": "Ashok approved via Video Director"
+    },
+    {
+      "state": "VALIDATING_TEMPLATE",
+      "at": "2026-10-01T23:05:34.768440+05:30",
+      "note": "Handed to Template Compiler on FMI Pre-Production"
+    },
+    {
+      "state": "BUILDING_MANIFEST",
+      "at": "2026-10-01T23:07:49.372463+05:30",
+      "note": "Template Compiler PASS"
+    },
+    {
+      "state": "BUILDING_CONTINUITY_BIBLE",
+      "at": "2026-10-01T23:07:49.372463+05:30",
+      "note": "Cue Continuity Director + Asset Producer fill from manifest"
+    },
+    {
+      "state": "BUILDING_CONTINUITY_BIBLE",
+      "at": "2026-10-01T23:07:55.997023+05:30",
+      "note": "Continuity READY"
+    },
+    {
+      "state": "BUILDING_JOB_PACKETS",
+      "at": "2026-10-01T23:07:55.997023+05:30",
+      "note": "Cue Asset Producer fill IMAGE/VIDEO jobs from manifest+bible"
+    },
+    {
+      "state": "GENERATING_SCENES",
+      "at": "2026-10-01T23:08:14.954108+05:30",
+      "note": "Authorized 11 IMAGE_JOBs parallel dispatch"
+    },
+    {
+      "state": "QC_SCENES",
+      "at": "2026-10-01T23:12:02.961728+05:30",
+      "note": "11/11 images on disk; Image QC batch kicked"
+    },
+    {
+      "state": "GENERATING_CONNECTIONS",
+      "at": "2026-10-01T23:14:25.318866+05:30",
+      "note": "clip-01 GO; scene-01+02 APPROVED"
+    },
+    {
+      "state": "ASSEMBLING",
+      "at": "2026-10-01T23:42:16.486662+05:30",
+      "note": "All 11 clips on disk; video QC waived; scene-12 from clip-11 handoff; cue Assembly Editor"
+    },
+    {
+      "state": "FINAL_QC",
+      "at": "2026-10-01T23:42:52.603307+05:30",
+      "note": "Assembly COMPLETE hard-cut stream-copy; 720x1280@24 54.46s silent; cue Final QC Delivery"
+    },
+    {
+      "state": "DELIVERED",
+      "at": "2026-10-01T23:46:40.599990+05:30",
+      "note": "Final QC PASS; delivered kerala-christian-v1-final.mp4 to Ashok"
+    },
+    {
+      "state": "CLIP01_REGEN",
+      "at": "2026-10-02T00:04:18.188561+05:30",
+      "note": "Ashok via Process Architect: regen clip-01 drone opening; loosen architecture lock; rest of film untouched"
+    },
+    {
+      "state": "CLIP01_REGEN_PACKETS",
+      "at": "2026-10-02T00:05:10.042163+05:30",
+      "note": "Continuity amend READY; Asset Producer rebuild scene-01 + clip-01 packets"
+    },
+    {
+      "state": "CLIP01_REGEN_IMAGE",
+      "at": "2026-10-02T00:05:56.312314+05:30",
+      "note": "Authorized IMG-scene-01-regen; video gated"
+    },
+    {
+      "state": "CLIP01_REGEN_IMAGE_QC",
+      "at": "2026-10-02T00:07:02.291755+05:30",
+      "note": "IMG-scene-01-regen GENERATED attempt1; QC+Continuity cued"
+    },
+    {
+      "state": "CLIP01_REGEN_VIDEO",
+      "at": "2026-10-02T00:07:59.730849+05:30",
+      "note": "scene-01 APPROVED; VID-clip-01-regen authorized"
+    },
+    {
+      "state": "CLIP01_REGEN_ORDER_V2_IMAGE",
+      "at": "2026-10-02T00:08:54.875949+05:30",
+      "note": "Ashok: hold video; rebuild image-01 from clip-1-handoff.jpg then video"
+    },
+    {
+      "state": "CLIP01_ORDER_V2_PACKETS",
+      "at": "2026-10-02T00:09:48.496789+05:30",
+      "note": "Continuity order v2 READY; Asset Producer rebuild image from handoff"
+    },
+    {
+      "state": "CLIP01_ORDER_V2_IMAGE_GEN",
+      "at": "2026-10-02T00:10:22.212768+05:30",
+      "note": "Authorized IMG-scene-01-order-v2; video HELD"
+    }
+  ],
+  "retry_policy": {
+    "automatic_paid_retries": false,
+    "max_paid_image_attempts": 2,
+    "max_paid_video_attempts": 2
+  },
+  "scene_count": 12,
+  "clip_count": 11,
+  "images_to_generate": 11,
+  "next_agent": "Image Director",
+  "channel": "FMI Image Floor",
+  "manifest_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/manifest/production_manifest.json",
+  "continuity_bible_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/continuity/CONTINUITY_BIBLE.json",
+  "jobs": {
+    "image_jobs_dir": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/image_jobs",
+    "video_jobs_dir": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/video_jobs",
+    "index": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/jobs_index.json",
+    "IMAGE_JOB": {
+      "img-scene-01": {
+        "status": "PENDING_AUTHORIZATION",
+        "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/image_jobs/img-scene-01.json"
+      },
+      "img-scene-02": {
+        "status": "PENDING_AUTHORIZATION",
+        "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/image_jobs/img-scene-02.json"
+      },
+      "img-scene-03": {
+        "status": "PENDING_AUTHORIZATION",
+        "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/image_jobs/img-scene-03.json"
+      },
+      "img-scene-04": {
+        "status": "PENDING_AUTHORIZATION",
+        "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/image_jobs/img-scene-04.json"
+      },
+      "img-scene-05": {
+        "status": "PENDING_AUTHORIZATION",
+        "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/image_jobs/img-scene-05.json"
+      },
+      "img-scene-06": {
+        "status": "PENDING_AUTHORIZATION",
+        "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/image_jobs/img-scene-06.json"
+      },
+      "img-scene-07": {
+        "status": "PENDING_AUTHORIZATION",
+        "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/image_jobs/img-scene-07.json"
+      },
+      "img-scene-08": {
+        "status": "PENDING_AUTHORIZATION",
+        "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/image_jobs/img-scene-08.json"
+      },
+      "img-scene-09": {
+        "status": "PENDING_AUTHORIZATION",
+        "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/image_jobs/img-scene-09.json"
+      },
+      "img-scene-10": {
+        "status": "PENDING_AUTHORIZATION",
+        "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/image_jobs/img-scene-10.json"
+      },
+      "img-scene-11": {
+        "status": "PENDING_AUTHORIZATION",
+        "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/image_jobs/img-scene-11.json"
+      }
+    },
+    "VIDEO_JOB": {
+      "vid-clip-01": {
+        "status": "BLOCKED_ON_FRAMES",
+        "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/video_jobs/vid-clip-01.json"
+      },
+      "vid-clip-02": {
+        "status": "BLOCKED_ON_FRAMES",
+        "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/video_jobs/vid-clip-02.json"
+      },
+      "vid-clip-03": {
+        "status": "BLOCKED_ON_FRAMES",
+        "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/video_jobs/vid-clip-03.json"
+      },
+      "vid-clip-04": {
+        "status": "BLOCKED_ON_FRAMES",
+        "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/video_jobs/vid-clip-04.json"
+      },
+      "vid-clip-05": {
+        "status": "BLOCKED_ON_FRAMES",
+        "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/video_jobs/vid-clip-05.json"
+      },
+      "vid-clip-06": {
+        "status": "BLOCKED_ON_FRAMES",
+        "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/video_jobs/vid-clip-06.json"
+      },
+      "vid-clip-07": {
+        "status": "BLOCKED_ON_FRAMES",
+        "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/video_jobs/vid-clip-07.json"
+      },
+      "vid-clip-08": {
+        "status": "BLOCKED_ON_FRAMES",
+        "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/video_jobs/vid-clip-08.json"
+      },
+      "vid-clip-09": {
+        "status": "BLOCKED_ON_FRAMES",
+        "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/video_jobs/vid-clip-09.json"
+      },
+      "vid-clip-10": {
+        "status": "BLOCKED_ON_FRAMES",
+        "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/video_jobs/vid-clip-10.json"
+      },
+      "vid-clip-11": {
+        "status": "BLOCKED_ON_FRAMES",
+        "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/video_jobs/vid-clip-11.json"
+      },
+      "VID-clip-01": {
+        "status": "APPROVED",
+        "approval": "ASHOK_OVERRIDE",
+        "attempt": 1,
+        "skip_visual_qc": true,
+        "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1.mp4",
+        "handoff": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1-handoff.jpg",
+        "sha256": "36d47055aa265a22a95ebd5060402573513e0abc7dca5746d0e9848e16cce670",
+        "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/VIDEO_JOB/clip-01.json",
+        "updated_at": "2026-10-01T23:28:41.742584+05:30"
+      },
+      "VID-clip-02": {
+        "status": "DISPATCHED",
+        "attempt": 1,
+        "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/VIDEO_JOB/clip-02.json",
+        "go_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/ORCHESTRATOR_GO_CLIP-02.json",
+        "first_frame": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1-handoff.jpg",
+        "last_frame": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-3.jpg",
+        "skip_visual_qc": true,
+        "dispatched_at": "2026-10-01T23:28:41.742584+05:30"
+      },
+      "VID-clip-03": {
+        "status": "AUTHORIZED_CHAIN_HOLD",
+        "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/VIDEO_JOB/clip-03.json",
+        "note": "Emit only after prior clip handoff on disk",
+        "updated_at": "2026-10-01T23:28:41.742584+05:30"
+      },
+      "VID-clip-04": {
+        "status": "AUTHORIZED_CHAIN_HOLD",
+        "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/VIDEO_JOB/clip-04.json",
+        "note": "Emit only after prior clip handoff on disk",
+        "updated_at": "2026-10-01T23:28:41.742584+05:30"
+      },
+      "VID-clip-05": {
+        "status": "AUTHORIZED_CHAIN_HOLD",
+        "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/VIDEO_JOB/clip-05.json",
+        "note": "Emit only after prior clip handoff on disk",
+        "updated_at": "2026-10-01T23:28:41.742584+05:30"
+      },
+      "VID-clip-06": {
+        "status": "AUTHORIZED_CHAIN_HOLD",
+        "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/VIDEO_JOB/clip-06.json",
+        "note": "Emit only after prior clip handoff on disk",
+        "updated_at": "2026-10-01T23:28:41.742584+05:30"
+      },
+      "VID-clip-07": {
+        "status": "AUTHORIZED_CHAIN_HOLD",
+        "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/VIDEO_JOB/clip-07.json",
+        "note": "Emit only after prior clip handoff on disk",
+        "updated_at": "2026-10-01T23:28:41.742584+05:30"
+      },
+      "VID-clip-08": {
+        "status": "AUTHORIZED_CHAIN_HOLD",
+        "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/VIDEO_JOB/clip-08.json",
+        "note": "Emit only after prior clip handoff on disk",
+        "updated_at": "2026-10-01T23:28:41.742584+05:30"
+      },
+      "VID-clip-09": {
+        "status": "AUTHORIZED_CHAIN_HOLD",
+        "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/VIDEO_JOB/clip-09.json",
+        "note": "Emit only after prior clip handoff on disk",
+        "updated_at": "2026-10-01T23:28:41.742584+05:30"
+      },
+      "VID-clip-10": {
+        "status": "AUTHORIZED_CHAIN_HOLD",
+        "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/VIDEO_JOB/clip-10.json",
+        "note": "Emit only after prior clip handoff on disk",
+        "updated_at": "2026-10-01T23:28:41.742584+05:30"
+      },
+      "VID-clip-11": {
+        "status": "AUTHORIZED_CHAIN_HOLD",
+        "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/VIDEO_JOB/clip-11.json",
+        "note": "Emit only after prior clip handoff on disk",
+        "updated_at": "2026-10-01T23:28:41.742584+05:30"
+      }
+    }
+  },
+  "blockers": [],
+  "broadcast_at": "2026-10-01T23:06:22.889110+05:30",
+  "note": "clip-02 emitted; 03-11 sequential after handoffs; video QC waived",
+  "roster": {
+    "Template Compiler": "PASS complete",
+    "Continuity Director": "ACTIVE \u2014 veto PASS candidates",
+    "Asset Producer": "HOLD ALL VIDEO \u2014 clip-01 NEEDS_INTERVENTION (2/2); awaiting Ashok via Orchestrator",
+    "Image Director": "BATCH COMPLETE 11/11 \u2014 awaiting QC",
+    "Visual QC Supervisor": "Continue image QC + clip-01 when ready",
+    "FindMyInvite Video Director": "GENERATING clip-01",
+    "Assembly Editor": "PREFLIGHT READY",
+    "Final QC Delivery": "CHECKLIST READY \u2014 await assembly"
+  },
+  "roster_confirmed_at": "2026-10-01T23:07:18.493891+05:30",
+  "asset_producer_update": {
+    "at": "2026-10-01T23:24:38.829262+05:30",
+    "video_hold_all": true,
+    "clip_01": "NEEDS_INTERVENTION"
+  },
+  "assembly_preflight": "READY",
+  "updated_at": "2026-10-02T00:10:22.212768+05:30",
+  "image_dispatch": "DONE",
+  "images_generated": 11,
+  "image_assets": [
+    {
+      "scene": "scene-01",
+      "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-1.jpg",
+      "w": 720,
+      "h": 1280,
+      "bytes": 327575
+    },
+    {
+      "scene": "scene-02",
+      "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-2.jpg",
+      "w": 720,
+      "h": 1280,
+      "bytes": 252230
+    },
+    {
+      "scene": "scene-03",
+      "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-3.jpg",
+      "w": 720,
+      "h": 1280,
+      "bytes": 230209
+    },
+    {
+      "scene": "scene-04",
+      "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-4.jpg",
+      "w": 720,
+      "h": 1280,
+      "bytes": 192980
+    },
+    {
+      "scene": "scene-05",
+      "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-5.jpg",
+      "w": 720,
+      "h": 1280,
+      "bytes": 247716
+    },
+    {
+      "scene": "scene-06",
+      "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-6.jpg",
+      "w": 720,
+      "h": 1280,
+      "bytes": 223459
+    },
+    {
+      "scene": "scene-07",
+      "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-7.jpg",
+      "w": 720,
+      "h": 1280,
+      "bytes": 249767
+    },
+    {
+      "scene": "scene-08",
+      "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-8.jpg",
+      "w": 720,
+      "h": 1280,
+      "bytes": 266501
+    },
+    {
+      "scene": "scene-09",
+      "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-9.jpg",
+      "w": 720,
+      "h": 1280,
+      "bytes": 245658
+    },
+    {
+      "scene": "scene-10",
+      "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-10.jpg",
+      "w": 720,
+      "h": 1280,
+      "bytes": 246222
+    },
+    {
+      "scene": "scene-11",
+      "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-11.jpg",
+      "w": 720,
+      "h": 1280,
+      "bytes": 222038
+    }
+  ],
+  "scene_approvals_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/state/scene_approvals.json",
+  "notes": [
+    {
+      "at": "2026-10-01T23:16:20.611613+05:30",
+      "note": "scene-05+10 attempt2 generated; IMAGE_QC_RETRY_BATCH authorized"
+    },
+    {
+      "at": "2026-10-01T23:17:05.883943+05:30",
+      "note": "Continuity LOCK 03,04,06,08,11 (+01,02,09). VETO 07 \u2192 retry2 authorized. 05+10 still pending QC attempt2. Video QC clip-01 already GO."
+    },
+    {
+      "at": "2026-10-01T23:19:02.447793+05:30",
+      "note": "clip-01 Visual QC RETRY; attempt-2 authorized (motion morph/architecture)"
+    },
+    {
+      "at": "2026-10-01T23:19:12.856150+05:30",
+      "note": "scene-05+10 Continuity LOCK \u2192 APPROVED; only scene-07 open among stills"
+    },
+    {
+      "at": "2026-10-01T23:24:18.704323+05:30",
+      "note": "clip-01 attempt-2 QC RETRY \u2014 NEEDS_INTERVENTION (morph/architecture persists)"
+    },
+    {
+      "at": "2026-10-01T23:27:40.360454+05:30",
+      "note": "Ashok override executed: clip-01 attempt-1 restored; chain 02-11 GO; video QC waived"
+    }
+  ],
+  "ashok_override": {
+    "video_qc_waived": true,
+    "clip_01_approval": "ASHOK_OVERRIDE_attempt-1",
+    "chain_go": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/ORCHESTRATOR_GO_VIDEO_CHAIN_02_11.json",
+    "at": "2026-10-01T23:28:41.742584+05:30"
+  },
+  "active_video_job": "VID-clip-01-regen",
+  "final_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/kerala-christian-v1-final.mp4",
+  "final_sha256": "6df900bbbc5dc3b9222f285f3a2cce8a183644db5cb9668f762dac57264ffe12",
+  "delivered_at": "2026-10-01T23:46:40.599990+05:30",
+  "clip01_regen": {
+    "status": "VIDEO_DISPATCHED",
+    "at": "2026-10-02T00:05:43.121536+05:30",
+    "image_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/IMAGE_JOB/scene-01.regen.json",
+    "video_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/VIDEO_JOB/clip-01.regen.json",
+    "receipt": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/ASSET_PRODUCER_CLIP01_REGEN_READY.json",
+    "awaiting": "Orchestrator authorize + dispatch",
+    "image_job": "IMG-scene-01-regen",
+    "video_status": "GATED_AWAITING_SCENE01_APPROVED",
+    "updated_at": "2026-10-02T00:08:19.561591+05:30",
+    "scene_01": "APPROVED",
+    "video_job": "VID-clip-01-regen"
+  },
+  "clip01_order_v2": {
+    "status": "STOP_LOCKED_NEEDS_INTERVENTION",
+    "image_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/IMAGE_JOB/scene-01.order-v2.json",
+    "video_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/VIDEO_JOB/clip-01.regen.json",
+    "receipt": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/ASSET_PRODUCER_CLIP01_ORDER_V2_READY.json",
+    "at": "2026-10-02T00:10:11.035197+05:30",
+    "scene_01": "APPROVED",
+    "video_job": "VID-clip-01-regen",
+    "updated_at": "2026-10-02T07:13:09.498375+05:30",
+    "clip": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1.mp4",
+    "attempt": 2,
+    "packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/VIDEO_JOB/clip-01.regen.retry-2.json",
+    "paid_used": 2,
+    "paid_max": 2,
+    "reason": "QC RETRY attempt2: mid-shot morph ~1-2s (spatial reset + tower); early text fixed; no Continuity PASS; no auto-retry",
+    "qc_decision": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/logs/video_jobs/QC_clip-01_regen_order-v2_attempt2.json",
+    "escalation_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/ORCHESTRATOR_NEEDS_INTERVENTION_CLIP01_ORDER_V2.json",
+    "stop_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/ORCHESTRATOR_STOP_CLIP01_ORDER_V2.json",
+    "gates": {
+      "generate": false,
+      "assemble": false,
+      "paid_retry": false,
+      "auto_retry": false
+    }
+  }
+}

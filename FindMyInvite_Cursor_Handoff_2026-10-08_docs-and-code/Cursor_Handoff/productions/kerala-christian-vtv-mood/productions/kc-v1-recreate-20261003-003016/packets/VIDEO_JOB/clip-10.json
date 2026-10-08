@@ -1,0 +1,287 @@
+{
+  "job_type": "VIDEO_JOB",
+  "job_id": "VID-clip-10",
+  "clip_id": "clip-10",
+  "clip_index": 10,
+  "production_id": "kc-v1-recreate-20261003-003016",
+  "mode": "RECREATE_CLIENT_FILL",
+  "batch": "clips-v1",
+  "from_scene_index": 10,
+  "to_scene_index": 11,
+  "duration_seconds": 5,
+  "first_frame_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/assets/output/kerala-christian-v1/clip-9-handoff.jpg",
+  "last_frame_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/assets/output/kerala-christian-v1/image-11.jpg",
+  "first_frame_strategy": "previous-clip-final-decoded-frame",
+  "last_frame_strategy": "scene-image",
+  "first_frame_ready": true,
+  "last_frame_ready": true,
+  "motion_prompt": "BACKWARD REVEAL OF EXACTLY ONE BRIDE AND ONE GROOM. There are exactly TWO foreground people in the entire shot. Never show a second pair, a duplicate couple, a portrait of the couple, or a reflection containing another couple. The people whose near profiles appear during the camera pass are the SAME physical people who become the full-body ending, not a separate foreground pair.\n\n0.00\u20130.35s: ease backward from the host plaque. 0.35\u20131.30s: accelerate BACKWARD down the clear lamp-lined side chapel corridor. The host plaque shrinks naturally. The distant corridor is EMPTY of people; no bride or groom is visible anywhere ahead. Close cream pillars and roof beams rush past with strong parallax. 1.30\u20131.85s: the camera crosses the compound gateway and passes backward through the clear gap between the ONLY bride and groom, who are immediately beside the lens. Their very close blurred cheeks and shoulders briefly occupy the left and right edges. Through the middle gap there is ONLY empty architecture, never another couple or couple portrait. A near gateway beam and the blurred shoulders briefly obscure the deep background. 1.85\u20132.60s: the same two near faces steadily SHRINK in screen size as the camera continues backward. Reveal their torsos, joined hands and full bodies through continuous perspective. No distant pair grows to replace them. Bride stays on the left, groom on the right. They turn naturally a little toward the camera as it clears them. The supplied final image is the composition reached by these exact two people. 2.60\u20135.00s: decelerate strongly into a slow backward glide, ending at the full-body couple under the cream-plaster arched gateway. Hold their identity, hair, clothing and garlands, with small soft smiles. Keep the ornate SAVE THE DATE board physically to their right, text exactly 'SAVE THE DATE / 8 October / 2026'. Soft sunrise, fine loose petals and changing soft-lamp highlights. One continuous backward camera move, no full spin, no teleportation, no duplicated people, no montage. Decorative bouquets and signs stay fixed; only small individual petals move.\n\nPETALS AND LIGHT: continuous distributed slow-motion drift is present from the first frame, not triggered as a burst when the camera stops. Keep about 12-20 separate visible petals at irregular heights and depths \u2014 soft white jasmine, pale pink rose and cream petals. Petals flutter with independent phase, soft air resistance and a little side-to-side wobble; nearby petals drift roughly one tenth of picture height per second in the settled view, distant ones slower. Camera rotation produces the brief directional streaks; after braking the SAME scattered petals become calmly visible, with no sudden emission, rain sheet, confetti explosion or synchronized falling. Bouquets and garlands never detach. Fine dust motes drift inside soft diagonal volumetric sunrays through arched windows. Champagne-gold edges, pearl and jewelry catch moving specular glints; text itself emits no smoke, gold liquid or floor beam.\n\nExactly ONE date board is uncovered on the right as the ONLY couple is revealed. It is a single rigid rectangular mahogany board with one gold frame and one easel. Never duplicate its frame, create another date panel behind it, or blend two boards. Soft side sunrays, deep cool plaster shadows and warm gold rim light. The couple are Smiley and Swaroop. Keep the source identity and clothing.",
+  "video_prompt": "BACKWARD REVEAL OF EXACTLY ONE BRIDE AND ONE GROOM. There are exactly TWO foreground people in the entire shot. Never show a second pair, a duplicate couple, a portrait of the couple, or a reflection containing another couple. The people whose near profiles appear during the camera pass are the SAME physical people who become the full-body ending, not a separate foreground pair.\n\n0.00\u20130.35s: ease backward from the host plaque. 0.35\u20131.30s: accelerate BACKWARD down the clear lamp-lined side chapel corridor. The host plaque shrinks naturally. The distant corridor is EMPTY of people; no bride or groom is visible anywhere ahead. Close cream pillars and roof beams rush past with strong parallax. 1.30\u20131.85s: the camera crosses the compound gateway and passes backward through the clear gap between the ONLY bride and groom, who are immediately beside the lens. Their very close blurred cheeks and shoulders briefly occupy the left and right edges. Through the middle gap there is ONLY empty architecture, never another couple or couple portrait. A near gateway beam and the blurred shoulders briefly obscure the deep background. 1.85\u20132.60s: the same two near faces steadily SHRINK in screen size as the camera continues backward. Reveal their torsos, joined hands and full bodies through continuous perspective. No distant pair grows to replace them. Bride stays on the left, groom on the right. They turn naturally a little toward the camera as it clears them. The supplied final image is the composition reached by these exact two people. 2.60\u20135.00s: decelerate strongly into a slow backward glide, ending at the full-body couple under the cream-plaster arched gateway. Hold their identity, hair, clothing and garlands, with small soft smiles. Keep the ornate SAVE THE DATE board physically to their right, text exactly 'SAVE THE DATE / 8 October / 2026'. Soft sunrise, fine loose petals and changing soft-lamp highlights. One continuous backward camera move, no full spin, no teleportation, no duplicated people, no montage. Decorative bouquets and signs stay fixed; only small individual petals move.\n\nPETALS AND LIGHT: continuous distributed slow-motion drift is present from the first frame, not triggered as a burst when the camera stops. Keep about 12-20 separate visible petals at irregular heights and depths \u2014 soft white jasmine, pale pink rose and cream petals. Petals flutter with independent phase, soft air resistance and a little side-to-side wobble; nearby petals drift roughly one tenth of picture height per second in the settled view, distant ones slower. Camera rotation produces the brief directional streaks; after braking the SAME scattered petals become calmly visible, with no sudden emission, rain sheet, confetti explosion or synchronized falling. Bouquets and garlands never detach. Fine dust motes drift inside soft diagonal volumetric sunrays through arched windows. Champagne-gold edges, pearl and jewelry catch moving specular glints; text itself emits no smoke, gold liquid or floor beam.\n\nExactly ONE date board is uncovered on the right as the ONLY couple is revealed. It is a single rigid rectangular mahogany board with one gold frame and one easel. Never duplicate its frame, create another date panel behind it, or blend two boards. Soft side sunrays, deep cool plaster shadows and warm gold rim light. The couple are Smiley and Swaroop. Keep the source identity and clothing.",
+  "prompt_sha256": "69e5c76acdc31b04240fe9f565f50dd86e43b70fae0bef6b11864d9fe82d908f",
+  "prompt_policy": "CLIENT_FILL \u2014 locked video_prompt verbatim; Spatial constraints folded only; do NOT rewrite creative prose",
+  "resolution": "720p",
+  "width": 720,
+  "height": 1280,
+  "fps": 24,
+  "aspect": "9:16",
+  "camera_instruction": "Fast backward corridor departure, between the only couple, then full-body ease-out",
+  "anchors": {
+    "first": {
+      "strategy": "previous-clip-final-decoded-frame",
+      "clip": 9
+    },
+    "last": {
+      "strategy": "scene-image",
+      "scene": 11
+    },
+    "interior_keyframes": []
+  },
+  "continuity_rules_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/continuity/CONTINUITY_BIBLE.json#clip-10",
+  "continuity_clip": {
+    "id": "clip-10",
+    "index": 10,
+    "from_scene": 10,
+    "to_scene": 11,
+    "duration_s": 5,
+    "camera": "Fast backward corridor departure, between the only couple, then full-body ease-out",
+    "first_anchor": {
+      "strategy": "previous_clip_final_decoded_frame",
+      "clip": 9
+    },
+    "last_anchor": {
+      "strategy": "scene-image",
+      "scene": 11
+    },
+    "video_path": "clip-10.mp4",
+    "final_frame_path": "clip-10-handoff.jpg",
+    "continuity_rules": [
+      "Connection shot \u2014 not independent cinema",
+      "Preserve object counts, identity, architecture and locked copy across adjacent facets",
+      "Petals continuous drift; no burst on camera stop",
+      "Continuity clip QC waived from start; do not wait for Continuity LOCK or APPROVED_HANDOFF"
+    ]
+  },
+  "continuity_global": {
+    "characters": {
+      "groom": "Adult Kerala Christian groom, visibly polished storybook 3D animation, warm medium-brown skin, slender adult oval face, large dark-brown almond eyes, thick dark eyebrows, smooth clean-shaven cheeks and chin, soft black hair with a gentle side part, quiet reserved smile. No moustache or beard. Natural adult proportions, not a child. Ivory formal suit over a cream shirt with a soft white-and-pale-pink boutonniere. Keep this face, hair, body and outfit consistent in every couple scene.",
+      "bride": "Adult Kerala Christian bride, visibly polished storybook 3D animation, warm medium-brown skin, graceful oval face, large dark-brown almond eyes, gently arched black eyebrows, soft smile. Dark hair in an elegant low bun with a soft veil and white jasmine accents, delicate gold cross pendant and pearl earrings. Ivory lace-and-silk wedding gown with soft cream undertones. Natural adult proportions and a consistent face, hairstyle, jewelry and gown in every later scene."
+    },
+    "style_excerpt": "A full-bleed portrait 9:16 frame of a richly cinematic dimensional storybook-animation Kerala Christian church wedding invitation. Soft romantic late-2000s South Indian cinema mood: dreamy natural light, intimate coastal Kerala atmosphere, gentle teal-and-warm contrast, quiet emotional longing. Soft cream and powder-blue palette with pearl highlights, pale pink florals and cool backwaters haze beyond coconut palms. Cream-white Portuguese-influenced plaster walls, laterite stone accents, arched windows, a modest bell tower and a simple cross. Premium animated adult characters with sculpted expressive faces, never photographic people. DRAMATIC CHIAROSCURO: gentle warm back-and-side sunlight streams diagonally through arched windows and open porch bays, clearly visible soft volumetric god rays cutting through thin coastal atmospheric haze; luminous rim light on ivory silk, lace, pearl and champagne-gold frames against cooler powder-blue shade. Preserve readable highlights, not a flat uniformly bright wash. Very fine dust motes sparkle only inside the sunbeams. Floor is subtly reflective worn cream stone or polished laterite tile, not a mirror. Gold lettering has illuminated beveled ed",
+    "particle_motion": "PETALS AND LIGHT: continuous distributed slow-motion drift is present from the first frame, not triggered as a burst when the camera stops. Keep about 12-20 separate visible petals at irregular heights and depths \u2014 soft white jasmine, pale pink rose and cream petals. Petals flutter with independent phase, soft air resistance and a little side-to-side wobble; nearby petals drift roughly one tenth of picture height per second in the settled view, distant ones slower. Camera rotation produces the brief directional streaks; after braking the SAME scattered petals become calmly visible, with no sudden emission, rain sheet, confetti explosion or synchronized falling. Bouquets and garlands never detach. Fine dust motes drift inside soft diagonal volumetric sunrays through arched windows. Champagne-gold edges, pearl and jewelry catch moving specular glints; text itself emits no smoke, gold liquid or floor beam.",
+    "lighting": "ONE warm soft sunrise from camera-left throughout daytime; evening reception separate lamp-lit mood for scene-09; gentle teal-and-warm contrast",
+    "typography": "luminous champagne-gold / antique-gold beveled dimensional lettering; exact customer copy only",
+    "architecture": "ONE white Portuguese-influenced Kerala Catholic church compound near Alappuzha backwaters (storybook visual lock; venue TEXT = Venkatadri Gardens / Katheru / Rajahmundry \u2014 not a literal new venue redesign)",
+    "object_count_rules": [
+      "Exactly one invitation title board where a board is specified",
+      "Exactly one SAVE THE DATE board in couple/date scenes",
+      "Exactly one bride and one groom in couple scenes (never duplicates)",
+      "Exactly one floral cross pedestal in porch",
+      "Exactly one modest bell tower",
+      "Exactly one church compound throughout",
+      "Couple scenes: exactly one Swaroop and one Smiley \u2014 never duplicates, clones, or extras"
+    ],
+    "continuity_waived": true,
+    "continuity_gate": "WAIVED"
+  },
+  "clip_summary": {
+    "edge": "J-K",
+    "from_facet": "lamp_lit_side_chapel_corridor",
+    "to_facet": "compound_gateway",
+    "camera": "Fast backward corridor departure, between the only couple, then full-body ease-out"
+  },
+  "output_clip_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/assets/output/kerala-christian-v1/clip-10.mp4",
+  "asset_clip_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/assets/output/kerala-christian-v1/clip-10.mp4",
+  "asset_handoff_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/assets/output/kerala-christian-v1/clip-10-handoff.jpg",
+  "final_frame_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/assets/output/kerala-christian-v1/clip-10-handoff.jpg",
+  "model": {
+    "resolution": "720p",
+    "credentials_env": "XAI_API_KEY",
+    "id": "grok-imagine-video-1.5",
+    "provider": "xai"
+  },
+  "dependencies": [
+    "prior_handoff:VID-clip-9:DECODED_HANDOFF",
+    "start_handoff:/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/assets/output/kerala-christian-v1/clip-9-handoff.jpg",
+    "end_still:/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/assets/output/kerala-christian-v1/image-11.jpg"
+  ],
+  "max_paid_attempts": 2,
+  "attempt": 1,
+  "authorized_by_orchestrator": true,
+  "authorized_to_dispatch": false,
+  "status": "ACCEPTED_AS_IS",
+  "awaiting": null,
+  "unlock_next_on": "decoded_final_frame_of_VID-clip-9",
+  "orchestrator_auth": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/packets/ORCHESTRATOR_GO_VIDEO.json",
+  "asset_producer_auth": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/packets/ORCHESTRATOR_GO_ASSET_PRODUCER_VIDEO.json",
+  "orchestrator_waive": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/packets/ORCHESTRATOR_WAIVE_CONTINUITY_CLIPS.json",
+  "stills_complete_auth": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/packets/ORCHESTRATOR_STILLS_COMPLETE.json",
+  "skip_spatial": false,
+  "spatial_map_version": "spatial-v1",
+  "spatial_map_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/continuity/SPATIAL_MAP.json",
+  "spatial": {
+    "spatial_map_version": "spatial-v1",
+    "edge": "J-K",
+    "clip": "clip-10",
+    "from": {
+      "scene_index": 10,
+      "scene_id": "scene-10",
+      "room": "J",
+      "shot": "S10",
+      "facet": "lamp_lit_side_chapel_corridor",
+      "zone": "lamp-lit side chapel corridor",
+      "camera_pose": {
+        "framing": "frontally at eye height; tall ivory host plaque on gold pedestal atop three shallow steps",
+        "bias": "symmetrical cream arched pillars; shallow shaded space behind plaque",
+        "height": "eye",
+        "look": "frontal into corridor plaque \u2014 open corridor extends back toward camera for departure",
+        "aim": "north into corridor (plaque ahead)",
+        "fov_hint": "corridor frontal",
+        "move_intent": "fast backward corridor departure between couple into gateway K (clip-10)",
+        "lighting": "EVENING EXCEPTION \u2014 lamp-lit corridor (NOT daytime sunrise)"
+      },
+      "visible_set_pieces": [
+        "ONE tall ivory host plaque on ornate gold pedestal",
+        "three shallow steps",
+        "symmetrical cream arched pillars",
+        "hanging soft lamps + white-pink flower swags",
+        "shallow shaded space behind plaque"
+      ]
+    },
+    "to": {
+      "scene_index": 11,
+      "scene_id": "scene-11",
+      "room": "K",
+      "shot": "S11",
+      "facet": "compound_gateway",
+      "zone": "gateway / couple + date board",
+      "camera_pose": {
+        "framing": "single couple + single board; bride LEFT of groom; couple ~57% height middle-left ~48% width",
+        "bias": "SAVE THE DATE board far RIGHT on ONE gold easel; low floral arch + distant tower on axis",
+        "height": "eye",
+        "look": "north through gateway toward courtyard axis + bell tower",
+        "aim": "north along courtyard axis",
+        "fov_hint": "gateway couple establish",
+        "move_intent": "gentle backward glide + slight rise; forehead touch \u2192 scene-12 video-only (clip-11)",
+        "subject_rule": "couple STANDS; camera moves"
+      },
+      "visible_set_pieces": [
+        "bride LEFT of groom STANDING (same wardrobe + garlands)",
+        "Exactly ONE SAVE THE DATE board far RIGHT",
+        "low floral arch",
+        "distant cream-white bell tower on courtyard axis",
+        "one hanging soft lamp on gateway",
+        "soft diagonal sunrise god rays"
+      ],
+      "video_only_same_facet": false
+    },
+    "camera_move_intent": "fast backward corridor departure \u2192 gateway",
+    "forbidden_reuse": [
+      "wrong host names",
+      "duplicate boards",
+      "daytime exterior substitute",
+      "reuse garden I framing as daytime",
+      "people visible",
+      "second plaque",
+      "TWO date boards",
+      "duplicate couple",
+      "extra signs",
+      "reuse corridor J or garden I as gateway substitute",
+      "second tower",
+      "photographic people",
+      "new still for scene-12"
+    ],
+    "visible_set_pieces": {
+      "from": [
+        "ONE tall ivory host plaque on ornate gold pedestal",
+        "three shallow steps",
+        "symmetrical cream arched pillars",
+        "hanging soft lamps + white-pink flower swags",
+        "shallow shaded space behind plaque"
+      ],
+      "to": [
+        "bride LEFT of groom STANDING (same wardrobe + garlands)",
+        "Exactly ONE SAVE THE DATE board far RIGHT",
+        "low floral arch",
+        "distant cream-white bell tower on courtyard axis",
+        "one hanging soft lamp on gateway",
+        "soft diagonal sunrise god rays"
+      ],
+      "relevant_to_motion": [
+        "fast backward corridor departure \u2192 gateway"
+      ]
+    },
+    "offscreen_neighbors": {
+      "from": {
+        "L": "corridor side chapel recesses",
+        "R": "corridor side chapel recesses",
+        "behind": "I parish garden (departure path)",
+        "ahead": "shallow end \u2014 then exit path toward K gateway"
+      },
+      "to": {
+        "L": "west gateway pier / approach garden",
+        "R": "east gateway pier / board side",
+        "behind": "south approach road / camera departure space",
+        "ahead": "courtyard axis toward porch B + tower"
+      }
+    },
+    "next_edge": {
+      "to": "scene-11",
+      "move": "fast backward corridor departure \u2192 gateway",
+      "edge": "J-K",
+      "clip": "clip-10"
+    }
+  },
+  "continuity_waived": true,
+  "continuity_gate": "WAIVED",
+  "waive_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/packets/ORCHESTRATOR_WAIVE_CONTINUITY_CLIPS.json",
+  "fast_path": true,
+  "visual_qc": {
+    "continuity": "WAIVED",
+    "spatial": "FOLDED_SPATIAL_V1",
+    "prompt": "LOCKED_VERBATIM"
+  },
+  "dispatch_target": "Video Director / FMI Video Floor",
+  "dependencies_satisfied": false,
+  "context_isolation": {
+    "includes_full_template": false,
+    "includes_other_clips": false,
+    "includes_unrelated_scenes": false,
+    "rule": "Video Director gets this clip packet plus required frames only; sequential chain via decoded handoff; never full template.json"
+  },
+  "retry_policy": {
+    "automatic_paid_retries": false,
+    "max_paid_attempts": 2
+  },
+  "template_sha256": "7d0c8f3060e3c11e2f1b3800661cad30d30602313961c1feeecdf0db9f8d130b",
+  "continuity_bible_sha256": "c1df9dbd053e8c243f3d7465f7ea64debc2b9d83db1cc98fd59aaa57dc27ada1",
+  "staged_at": "2026-10-03T00:49:23+05:30",
+  "dispatch_target_note": "Parent orchestrator dispatches only VID-clip-01; AP does not dispatch Video Floor",
+  "preserve_prior_productions": [
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532",
+    "/workspace/fmi-productions/nandini-karthik-remake (nk-v1)"
+  ],
+  "source": "template.json clips[].video_prompt (locked verbatim) + ORCHESTRATOR_GO_VIDEO clip_graph + SPATIAL_MAP spatial-v1 + CONTINUITY_BIBLE compact subsections",
+  "orchestrator_recue_auth": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/packets/ORCHESTRATOR_RECUE_VIDEO_EMIT.json",
+  "dispatched_at": "2026-10-03T01:07:39+05:30",
+  "unlocked_from": "VID-clip-09",
+  "unlock_basis": "decoded_handoff_NO_QC_AUTO_DISK_WATCH",
+  "result": {
+    "sha256": "9150ca03419d6f0cf1f5f9ab0a42c0ff16836e0e449848b963e24dace4076dce",
+    "request_id": "6076a51b-9b45-943d-9fe3-32539c13f575",
+    "output_clip_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/assets/output/kerala-christian-v1/clip-10.mp4",
+    "final_frame_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/assets/output/kerala-christian-v1/clip-10-handoff.jpg",
+    "technical_probe": {
+      "w": 720,
+      "h": 1280,
+      "fps": "24/1",
+      "duration_s": 5.041667
+    },
+    "finished_at": "2026-10-03T01:08:52.028752+05:30"
+  },
+  "clip_sha256": "9150ca03419d6f0cf1f5f9ab0a42c0ff16836e0e449848b963e24dace4076dce",
+  "handoff_sha256": "aac44d1e0dc5d98dd2cd1239e189a111ae5ce5a2cfda5c4165825e63f1ce781d",
+  "generated_noted_at": "2026-10-03T01:08:52+05:30",
+  "qc_waived": true,
+  "accepted_at": "2026-10-03T01:10:27+05:30"
+}

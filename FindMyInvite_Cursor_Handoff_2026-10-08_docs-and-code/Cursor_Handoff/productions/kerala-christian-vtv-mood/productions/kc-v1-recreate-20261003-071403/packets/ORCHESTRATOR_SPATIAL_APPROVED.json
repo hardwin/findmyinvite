@@ -1,0 +1,34 @@
+{
+  "packet_type": "ORCHESTRATOR_SPATIAL_APPROVED",
+  "production_id": "kc-v1-recreate-20261003-071403",
+  "recorded_at": "2026-10-03T07:44:12+05:30",
+  "spatial_map_status": "approved_by_ashok",
+  "spatial_blueprint_16x9_status": "approved_by_ashok",
+  "spatial_map_version": "spatial-v1",
+  "blueprint_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/continuity/SPATIAL_SHOT_BOARD_16x9_v1.jpg",
+  "blueprint_svg": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/continuity/SPATIAL_SHOT_BOARD_16x9_v1.svg",
+  "spatial_map_json": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/continuity/SPATIAL_MAP.json",
+  "spatial_map_md": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/continuity/SPATIAL_MAP.md",
+  "approved_via": "Ashok said okay in FMI ReCreate chat (SPATIAL_16X9_ASHOK_APPROVE_SIGNAL_v1)",
+  "signal_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/SPATIAL_16X9_ASHOK_APPROVE_SIGNAL_v1.json",
+  "shot_visit": "S1 A \u2192 S2 B \u2192 S3 C \u2192 S4 E (BRIDE sunlit arch) \u2192 S5 D (GROOM shaded aisle) \u2192 S6 F \u2192 S7 G \u2192 S8 H \u2192 S9 I \u2192 S10 J \u2192 S11 K (S12=K video-only)",
+  "image_jobs_authorized": true,
+  "video_jobs_authorized": false,
+  "current_state": "GENERATING_SCENES",
+  "batch": "stills-v1",
+  "continuity": "WAIVED",
+  "qc_policy": "NO_QC_GENERATE_AND_STITCH",
+  "prompt_policy": "Do not mutate prompts. Fold spatial facet/camera/forbidden_reuse as constraints only.",
+  "orders": [
+    "Asset Producer: fold SPATIAL_MAP spatial-v1 into IMAGE_JOBs scene-01..11; emit to Image Director. No Continuity bible.",
+    "Image Director: generate 11 stills from locked prompts. Bride scene-04 at facet E. Groom scene-05 at facet D. Scene-02 empty pedestal, no floral cross.",
+    "No Visual QC, Continuity QC, or Spatial QC on stills.",
+    "Video Director: VIDEO remains HELD until the 11 stills are on disk and Orchestrator unlocks VIDEO."
+  ],
+  "preserve": [
+    "kc-v1-recreate-20261003-003016 DELIVERED",
+    "kc-v1-recreate-20261002-192743 DELIVERED",
+    "kc-v1-20261001-230532",
+    "nk-v1-20261002-072013 HOLD"
+  ]
+}

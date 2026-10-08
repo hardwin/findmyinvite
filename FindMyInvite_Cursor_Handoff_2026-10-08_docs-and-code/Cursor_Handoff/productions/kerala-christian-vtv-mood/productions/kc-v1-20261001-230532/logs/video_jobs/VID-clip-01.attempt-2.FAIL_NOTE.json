@@ -1,0 +1,6 @@
+{
+  "at": "2026-10-01T23:20:34.547783+05:30",
+  "http_status": 422,
+  "error_class": "payload_deserialize",
+  "summary": "HTTP 422: image field invalid type \u2014 API rejected data:image/jpeg;base64,... string. Use file URL/path upload per provider, not inline data URI in JSON body."
+}

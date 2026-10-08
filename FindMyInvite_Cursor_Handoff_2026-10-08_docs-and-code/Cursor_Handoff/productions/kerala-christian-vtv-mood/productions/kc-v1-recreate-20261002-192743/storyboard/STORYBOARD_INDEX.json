@@ -1,0 +1,101 @@
+{
+  "production_id": "kc-v1-recreate-20261002-192743",
+  "title": "The Wedding of Alex & Anna (recreate)",
+  "updated_at": "2026-10-02T20:09:11.268103+05:30",
+  "status": "complete",
+  "clips_ready": [
+    "clip-1.mp4",
+    "clip-2.mp4",
+    "clip-3.mp4",
+    "clip-4.mp4",
+    "clip-5.mp4",
+    "clip-6.mp4",
+    "clip-7.mp4",
+    "clip-8.mp4",
+    "clip-9.mp4",
+    "clip-10.mp4",
+    "clip-11.mp4"
+  ],
+  "final_film": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/kerala-christian-v1-final.mp4",
+  "final_dl": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/kerala-christian-v1-final-dl.mp4",
+  "items": [
+    {
+      "name": "clip-1.mp4",
+      "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/clip-1.mp4",
+      "bytes": 7237596,
+      "mtime": "2026-10-02T19:54:45.091775+05:30"
+    },
+    {
+      "name": "clip-2.mp4",
+      "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/clip-2.mp4",
+      "bytes": 4762465,
+      "mtime": "2026-10-02T19:57:57.047299+05:30"
+    },
+    {
+      "name": "clip-3.mp4",
+      "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/clip-3.mp4",
+      "bytes": 4063234,
+      "mtime": "2026-10-02T19:59:23.703082+05:30"
+    },
+    {
+      "name": "clip-4.mp4",
+      "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/clip-4.mp4",
+      "bytes": 4010011,
+      "mtime": "2026-10-02T20:00:32.026911+05:30"
+    },
+    {
+      "name": "clip-5.mp4",
+      "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/clip-5.mp4",
+      "bytes": 3450724,
+      "mtime": "2026-10-02T20:01:35.382752+05:30"
+    },
+    {
+      "name": "clip-6.mp4",
+      "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/clip-6.mp4",
+      "bytes": 3930185,
+      "mtime": "2026-10-02T20:02:38.762593+05:30"
+    },
+    {
+      "name": "clip-7.mp4",
+      "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/clip-7.mp4",
+      "bytes": 4986619,
+      "mtime": "2026-10-02T20:03:51.542410+05:30"
+    },
+    {
+      "name": "clip-8.mp4",
+      "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/clip-8.mp4",
+      "bytes": 5225985,
+      "mtime": "2026-10-02T20:05:00.382237+05:30"
+    },
+    {
+      "name": "clip-9.mp4",
+      "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/clip-9.mp4",
+      "bytes": 5005845,
+      "mtime": "2026-10-02T20:06:08.946064+05:30"
+    },
+    {
+      "name": "clip-10.mp4",
+      "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/clip-10.mp4",
+      "bytes": 5469687,
+      "mtime": "2026-10-02T20:07:27.865865+05:30"
+    },
+    {
+      "name": "clip-11.mp4",
+      "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/clip-11.mp4",
+      "bytes": 3728882,
+      "mtime": "2026-10-02T20:08:08.881761+05:30"
+    },
+    {
+      "name": "kerala-christian-v1-final.mp4",
+      "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/kerala-christian-v1-final.mp4",
+      "bytes": 49768319,
+      "mtime": "2026-10-02T20:08:15.769744+05:30"
+    },
+    {
+      "name": "kerala-christian-v1-final-dl.mp4",
+      "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/kerala-christian-v1-final-dl.mp4",
+      "bytes": 11750493,
+      "mtime": "2026-10-02T20:09:10.829605+05:30"
+    }
+  ]
+}

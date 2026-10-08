@@ -1,0 +1,10 @@
+{
+  "packet_type": "VIDEO_DIRECTOR_HOLD_RETRY",
+  "job_id": "VID-v5-clip-02",
+  "attempt_completed": 1,
+  "decision": "RETRY",
+  "defect": "last\u2260scene-03 \u2014 dense floral wall hero instead of left_side_aisle stairs/landing",
+  "qc": "/workspace/fmi-productions/nandini-karthik-remake/logs/video_jobs_v5/QC_clip-02_attempt1.json",
+  "action": "HOLD \u2014 no attempt-2 until Orchestrator authorizes",
+  "recorded_at": "2026-10-02T08:59:58.269944+05:30"
+}

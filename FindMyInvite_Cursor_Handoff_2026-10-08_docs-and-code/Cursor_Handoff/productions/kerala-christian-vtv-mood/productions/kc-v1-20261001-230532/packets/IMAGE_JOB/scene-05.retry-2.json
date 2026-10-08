@@ -1,0 +1,21 @@
+{
+  "job_type": "IMAGE_RETRY",
+  "job_id": "IMG-scene-05",
+  "scene_id": "scene-05",
+  "production_id": "kc-v1-20261001-230532",
+  "attempt": 2,
+  "authorized_by_orchestrator": true,
+  "authorized_at": "2026-10-01T23:15:02.973973+05:30",
+  "base_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/IMAGE_JOB/scene-05.json",
+  "output_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-5.jpg",
+  "retry_instruction": "Keep bride pose/wardrobe/jewelry/archway/lighting/petals. Re-render ONLY floating calligraphy: 'Ms.' small line + 'Anna Thomas' one large line (do not split Anna/Thomas).",
+  "violations": [
+    {
+      "rule": "typography_copy",
+      "expected": "Ms.\\nAnna Thomas (together)",
+      "observed": "Ms./Anna/Thomas three lines"
+    }
+  ],
+  "max_paid_attempts": 2,
+  "note": "Final paid attempt"
+}

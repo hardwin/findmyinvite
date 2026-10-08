@@ -1,0 +1,20 @@
+{
+  "production_id": "mc-v1-20261004-081300",
+  "title": "Mosque courtyard wedding",
+  "phase": "STILLS_ON_DISK",
+  "spatial_blueprint_16x9_status": "approved_by_ashok",
+  "board": "/workspace/fmi-productions/spatial-drafts/muslim-courtyard-board-20261004/continuity/SPATIAL_SHOT_BOARD_16x9_v1.jpg",
+  "board_sha256": "eb4c4a3f342ffd794d16ed1c1f7ca5bcaf192cdf5142063fb93e90fbda445ec0",
+  "map": "/workspace/fmi-productions/spatial-drafts/muslim-courtyard-board-20261004/continuity/SPATIAL_MAP.json",
+  "image_jobs_authorized": true,
+  "video_jobs_authorized": false,
+  "video_hold_reason": "Ashok said stills only",
+  "updated_at": "2026-10-04T08:36:00+05:30",
+  "not": [
+    "Theresa & Isaac",
+    "nk-v1",
+    "Kerala Christian productions"
+  ],
+  "template": "/workspace/fmi-productions/mosque-courtyard-v1/productions/mc-v1-20261004-081300/template.json",
+  "stills": "image-1.jpg through image-11.jpg, 1152x2048, no image-12"
+}

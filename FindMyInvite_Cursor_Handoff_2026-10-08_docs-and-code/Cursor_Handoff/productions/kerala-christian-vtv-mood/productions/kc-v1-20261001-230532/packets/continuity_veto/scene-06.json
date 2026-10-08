@@ -1,0 +1,37 @@
+{
+  "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-6.jpg",
+  "job_id": "IMG-scene-06",
+  "scene_id": "scene-06",
+  "continuity_decision": "LOCK",
+  "qc_gate": "PASS",
+  "attempt": 2,
+  "decided_at": "2026-10-01T23:16:43.044451+05:30",
+  "checks": [
+    {
+      "rule": "object_count_family_plaque",
+      "expected": 1,
+      "observed": 1,
+      "ok": true
+    },
+    {
+      "rule": "object_count_people",
+      "expected": 0,
+      "observed": 0,
+      "ok": true
+    },
+    {
+      "rule": "exact_copy_family_lines",
+      "expected": "Mr. John Mathew / & Mrs. Elsy John and Mr. Thomas George / & Mrs. Mercy Thomas on own lines",
+      "observed": "parent pairs correctly broken with '& Mrs.' on own lines; names exact",
+      "ok": true
+    },
+    {
+      "rule": "architecture",
+      "expected": "west cloister; no centered bell tower; grounded bouquet",
+      "observed": "cloister arcade; bouquet at base; no person",
+      "ok": true
+    }
+  ],
+  "violations": [],
+  "note": "LOCK attempt-2 asset. Prior VETO cleared — '& Mrs.' line breaks now present. Soft note: header may read as single 'With the Blessings of Groom's Parents' line; names/structure sufficient for lock."
+}

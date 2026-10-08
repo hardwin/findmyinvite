@@ -1,0 +1,60 @@
+{
+  "document": "SPATIAL_CLEAR",
+  "production_id": "nk-v1-20261002-072013",
+  "version": "stills-v5",
+  "spatial_map": "spatial-v2",
+  "decision": "CLEAR",
+  "reviewed_at": "2026-10-02T08:44:00+05:30",
+  "author": "Spatial Continuity",
+  "beats": {
+    "scene-01": {
+      "facet_expected": "entrance_thicket",
+      "observed": "banana-leaf macro; soft cream architecture peek",
+      "forbidden_plate": "absent",
+      "ok": true
+    },
+    "scene-02": {
+      "facet_expected": "entrance_colonnade",
+      "observed": "closed colonnade facade with doors; no lake tunnel",
+      "forbidden_plate": "absent",
+      "ok": true
+    },
+    "scene-03": {
+      "facet_expected": "left_side_aisle threshold",
+      "observed": "left aisle arcade toward stairs; no water plate",
+      "forbidden_plate": "absent",
+      "ok": true
+    },
+    "scene-04": {
+      "facet_expected": "left_side_aisle segment",
+      "observed": "deeper aisle toward stairs mouth; empty; adjacent to 03",
+      "forbidden_plate": "absent",
+      "ok": true
+    },
+    "scene-05": {
+      "facet_expected": "stairs",
+      "observed": "stairs looking up; couple standing; floral wall; names",
+      "forbidden_plate": "absent",
+      "ok": true
+    },
+    "scene-06": {
+      "facet_expected": "stage + LEFT pond/photoshoot",
+      "observed": "stairs/stage; decorated lotus pond LEFT; full invite text; no gopuram/hills/boat hero",
+      "forbidden_plate": "absent",
+      "ok": true
+    }
+  },
+  "notes": [
+    "No still reuses stills-v4 misty lake + gopuram + hills + boat as dominant BG.",
+    "03\u219204 are continuous adjacent aisle facets (intentional), not a teleport.",
+    "Stage reached via stairs geography (05\u219206)."
+  ],
+  "assets": [
+    "assets/stills-v5/scene-01.jpg",
+    "assets/stills-v5/scene-02.jpg",
+    "assets/stills-v5/scene-03.jpg",
+    "assets/stills-v5/scene-04.jpg",
+    "assets/stills-v5/scene-05.jpg",
+    "assets/stills-v5/scene-06.jpg"
+  ]
+}

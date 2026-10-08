@@ -1,0 +1,169 @@
+{
+  "job_type": "IMAGE_JOB",
+  "job_id": "IMG-scene-01",
+  "production_id": "kc-v1-recreate-20261003-071403",
+  "mode": "RECREATE_CLIENT_FILL",
+  "batch": "stills-v1",
+  "stills_version": "stills-v1",
+  "status": "GENERATED",
+  "authorized_to_dispatch": false,
+  "authorization_note": "Orchestrator IMAGE GO RECREATE_CLIENT_FILL stills-v1 \u2014 locked image_prompts verbatim from scenes_prompt_extract; spatial constraints folded only; continuity_gate=WAIVED; qc_waived=true (no Continuity, Visual, or Spatial QC); VIDEO not authorized.",
+  "scene_id": "scene-01",
+  "scene_index": 1,
+  "name": "Distant high aerial church establish",
+  "generation": "text-only",
+  "required_text": [],
+  "customer_copy": [],
+  "image_prompt": "A high oblique DRONE establishing shot of a lavishly decorated white Portuguese-influenced Kerala Catholic church compound near the Alappuzha backwaters at soft sunrise, portrait 9:16. The camera floats about 40 meters ABOVE the courtyard and well BACK from the foreground porch, around the height of the modest bell tower's upper half. It looks diagonally DOWN across the church at roughly 20\u201325 degrees below horizontal with a wide 24 mm lens. A lavender-peach and powder-blue sunrise sky, low sun at left and distant misty coconut-palm horizon over hazy backwaters remain clearly visible in the upper third. The composition must immediately read as a flying drone looking down into a coastal church compound.\n\nShow broad TOP SURFACES of both long side-cloister roofs and the small central porch roof. See DOWN into a shallow rectangular reflecting courtyard pool, over its near parapet, with cream paving and steps receding away below the camera. People are tiny figures seen from above. The front boundary occupies a narrow foreground strip. The complete cream-white bell tower with a simple cross stands in the background, with sky around its cupola. The small open arched church porch vestibule is well below the camera, its tiled roof about one quarter of frame width, with open courtyard separating it from the bell tower. Its roof partly occludes the tiny floral cross pedestal within. This is a grand view of the whole church compound, not a close portrait. Keep the sky and horizon while retaining clear downward perspective; neither an eye-level facade view nor a vertical overhead map.\n\nCream-white plaster walls with soft laterite stone accents, arched windows, one modest bell tower topped by a cross, one small open arched porch vestibule with three shallow front steps and floral swags of white jasmine, soft pink roses, baby's breath and green foliage. All porch sides are open between the arches, including the rear. A tiny floral cross arrangement sits on a low pedestal between two soft candle stands; facial details of any figure are not resolved from this height. No closed inner sanctuary or back wall within the porch.\n\nLavish Christian wedding decoration is distributed across the entire aerial view: soft white-and-pale-pink floral swags on the bell tower and cloisters, layered jasmine and greenery along BOTH side arcades, floral trim on the porch arches and columns, delicate petal borders along steps and pool edges, and floating white flower bowls on the water. These details stay small in the landscape; never lower or move the camera closer to show them. The central forward-down flight route remains clear. Soft romantic sunrise, long gentle shadows, subtle reflections, coastal atmospheric depth and premium dimensional storybook illustration. No text, watermark or additional shrine.",
+  "prompt_sha256": "e5d28f2addffe2d562ccb917b2ffd38f732958345ccb9c424cf11d004e392c40",
+  "prompt_policy": "CLIENT_FILL \u2014 locked image_prompt verbatim from scenes_prompt_extract; Spatial constraints folded only; do NOT rewrite creative prose",
+  "image_request": {
+    "quality": "high",
+    "aspect_ratio": "9:16",
+    "output_format": "jpeg",
+    "number_of_images": 1
+  },
+  "continuity_gate": "WAIVED",
+  "qc_waived": true,
+  "continuity_qc": "WAIVED",
+  "visual_qc": "WAIVED",
+  "spatial_qc": "WAIVED",
+  "continuity": {
+    "continuity_gate": "WAIVED",
+    "bible": null,
+    "note": "No Continuity bible. Continuity QC waived."
+  },
+  "spatial_constraints": {
+    "spatial_map_version": "spatial-v1",
+    "source": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/continuity/SPATIAL_MAP.json",
+    "shot": "S1",
+    "facet_id": "A",
+    "room": "A",
+    "facet": "aerial_compound_exterior",
+    "zone": "aerial / compound exterior",
+    "arrival": "start",
+    "turn_from_prior": null,
+    "character_stands": [],
+    "camera_pose": {
+      "framing": "high oblique drone over the ONE compound",
+      "height": "high",
+      "look": "down across porch, nave, courts, one tower, sky and horizon",
+      "aim": "whole compound, north-up plan readable as a place not a map-nadir",
+      "fov_hint": "wide establish",
+      "move_intent": "dive down into the south porch (toward S2); camera moves, nobody walks",
+      "lighting": "sunrise, low sun camera-left"
+    },
+    "visible_set": [
+      "ONE white Portuguese-influenced Kerala Catholic church compound",
+      "ONE modest bell tower (southwest, architectural cross only)",
+      "south gateway, open porch, east side courtyard, nave, west cloister roofs",
+      "north courtyard and east parish garden inside the same wall",
+      "sky and horizon",
+      "title copy: The Wedding of Theresa & Isaac"
+    ],
+    "offscreen_neighbors": {
+      "north": "horizon beyond the north wall \u2014 not another compound",
+      "east": "horizon; parish garden is INSIDE the wall, still in frame",
+      "south": "approach lane outside the gateway, mostly under the camera",
+      "west": "horizon beyond the west cloister",
+      "not_in_frame": "no second church, no lake, no gopuram, no Hyderabad skyline"
+    },
+    "forbidden_reuse": [
+      "second compound",
+      "multiple bell towers",
+      "lake or gopuram plate",
+      "photographic people",
+      "floral cross on the porch",
+      "a second Save the Date board",
+      "Hyderabad geography redesign of the church",
+      "reusing the Swaroop stand assignment (groom on the arch / bride in the aisle)"
+    ],
+    "object_counts": {
+      "bell_tower": 1,
+      "floral_cross": 0,
+      "date_board": 0,
+      "bride": 0,
+      "groom": 0
+    },
+    "text": {
+      "copy": "The Wedding of\nTheresa & Isaac",
+      "carrier": "as resolved prompt"
+    },
+    "next_edge": {
+      "to": "scene-02",
+      "move": "dive down into porch B",
+      "edge": "A-B",
+      "clip": "clip-01"
+    },
+    "board_label": null,
+    "folds_applied": [
+      {
+        "kind": "facet_assignment",
+        "facet_id": "A",
+        "facet": "aerial_compound_exterior",
+        "shot": "S1",
+        "room": "A"
+      }
+    ],
+    "prompt_unmodified": true
+  },
+  "output_filename": "image-1.jpg",
+  "output_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/assets/output/kerala-christian-v1/image-1.jpg",
+  "aspect": "9:16",
+  "width": 720,
+  "height": 1280,
+  "model": {
+    "credentials_env": "REPLICATE_API_TOKEN",
+    "id": "openai/gpt-image-2.5-flare",
+    "provider": "replicate"
+  },
+  "skip_spatial": false,
+  "spatial_map_version": "spatial-v1",
+  "spatial_map_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/continuity/SPATIAL_MAP.json",
+  "spatial_blueprint_16x9_status": "approved_by_ashok",
+  "spatial_approved_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/ORCHESTRATOR_SPATIAL_APPROVED.json",
+  "dependencies": {
+    "blocks": [],
+    "blocked_by": [
+      "template_compiler_PASS",
+      "spatial_map_approved_by_ashok",
+      "orchestrator_IMAGE_authorize",
+      "continuity_WAIVED"
+    ]
+  },
+  "context_isolation": {
+    "includes_clip_graph": false,
+    "includes_other_scenes": false,
+    "includes_full_template": false,
+    "rule": "Image agents must not receive clip graphs, unrelated scenes, or full template.json"
+  },
+  "retry_policy": {
+    "automatic_paid_retries": false,
+    "max_paid_attempts": 2
+  },
+  "max_paid_attempts": 2,
+  "attempt": 1,
+  "template_sha256": "38dd6564a6dbc8ff4545b875bb41dcc984c6afa4b0f6bc6d8aca20a2f1fb0577",
+  "continuity_bible_sha256": null,
+  "orchestrator_auth": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/ORCHESTRATOR_GO_IMAGES.json",
+  "orchestrator_ap_auth": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/ORCHESTRATOR_GO_ASSET_PRODUCER_IMAGES.json",
+  "unlock_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/ORCHESTRATOR_UNLOCK_IMAGE_stills-v1.json",
+  "waive_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/ORCHESTRATOR_WAIVE_CONTINUITY.json",
+  "staged_at": "2026-10-03T07:46:27+05:30",
+  "authorized_by_orchestrator": true,
+  "authorized_at": "2026-10-03T07:44:12+05:30",
+  "dispatched_at": "2026-10-03T07:46:27+05:30",
+  "dispatch_target": "FMI Image Floor @Image Director",
+  "video_jobs_authorized": false,
+  "preserve_prior_productions": [
+    "kc-v1-recreate-20261003-003016",
+    "kc-v1-recreate-20261002-192743",
+    "nk-v1-20261002-072013 HOLD"
+  ],
+  "source": "packets/scenes_prompt_extract.json image_prompt (verbatim) + continuity/SPATIAL_MAP.json constraints folded only; continuity bible NOT included (WAIVED)",
+  "generation_id": "26jfqjphv5rmt0d0zy6v5evtxm",
+  "output_sha256": "461390d47bd79565857244a232818c679ebb342870b097c26c589e59b000f8e8",
+  "output_size_bytes": 315766,
+  "output_url": "https://replicate.delivery/xezq/txTbazWgfdynbiZtmhvU5389gY9mfDygJU6q8tUtJSvrfCnuA/tmpom7htuy9.jpeg",
+  "generated_at": "2026-10-03T07:48:19+0530"
+}

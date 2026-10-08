@@ -1,0 +1,14 @@
+{
+  "packet_type": "ASSET_PRODUCER_CORRECTION_IMAGES",
+  "production_id": "kc-v1-recreate-20261003-071403",
+  "at": "2026-10-03T23:38:31+05:30",
+  "status": "DISPATCHED",
+  "jobs": [
+    "IMG-scene-02-attempt4",
+    "IMG-scene-08-attempt2"
+  ],
+  "video": "HELD",
+  "auth": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/ORCHESTRATOR_CORRECTION_REGEN.json",
+  "template_sha256": "e238424b6502c34bfba380617ea1dc1a8d49b6b1f14401b7740e84812f3a92eb",
+  "note": "Only these two stills. Other stills untouched. Clips held until both new stills land."
+}

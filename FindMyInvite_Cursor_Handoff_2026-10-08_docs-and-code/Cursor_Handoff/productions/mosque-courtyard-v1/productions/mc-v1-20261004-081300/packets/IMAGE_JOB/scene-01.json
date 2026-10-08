@@ -1,0 +1,164 @@
+{
+  "job_type": "IMAGE_JOB",
+  "job_id": "IMG-scene-01",
+  "production_id": "mc-v1-20261004-081300",
+  "mode": "MOSQUE_COURTYARD_STILLS",
+  "batch": "stills-v1",
+  "stills_version": "stills-v1",
+  "status": "STAGED",
+  "authorized_to_dispatch": true,
+  "authorization_note": "Orchestrator IMAGE GO — locked image_prompt verbatim from template.json scenes 01-11; qc not requested; VIDEO HOLD; no scene-12 image job. Authorized by Ashok via Video Director: Approved, Do the stills, fast.",
+  "scene_id": "scene-01",
+  "scene_index": 1,
+  "name": "Distant high aerial courtyard establish",
+  "generation": "text-only",
+  "required_text": [],
+  "customer_copy": [],
+  "image_prompt": "A high oblique DRONE establishing shot of a lavishly decorated cream-and-gold mosque-courtyard wedding compound near hazy backwaters at soft sunrise, portrait 9:16, dimensional storybook illustration. The camera floats about 40 meters ABOVE the courtyard and well BACK from the foreground porch, around the height of the single dome's upper half. It looks diagonally DOWN into the compound at roughly 20–25 degrees below horizontal with a wide 24 mm lens. A lavender-peach and powder-blue sunrise sky, low sun at left and a distant misty coconut-palm horizon over hazy backwaters remain clearly visible in the upper third. Soft romantic late-2000s South Indian cinema mood, cream and powder-blue palette, champagne-gold trim, quiet emotional longing. The composition must immediately read as a flying drone looking down into one coastal courtyard compound.\n\nShow broad TOP SURFACES of both long side-arcade roofs and the small central porch roof. See DOWN into one shallow rectangular reflecting courtyard pool, over its near parapet, with cream paving and steps receding away below the camera. No distinct person is resolved at this height, and nobody is walking. The front boundary occupies a narrow foreground strip. The single cream-and-gold dome stands in the background, with sky around its finial. The small open arched porch is well below the camera, its tiled roof about one quarter of frame width, with the open courtyard and the one pool separating the porch from the dome. This is a grand view of the whole compound, not a close portrait. Keep the sky and horizon while retaining clear downward perspective; neither an eye-level facade view nor a vertical overhead map.\n\nCream and gold plaster arches, laterite stone accents, one dome, one courtyard pool, palms. One small open arched porch with three shallow front steps and floral swags of white jasmine, soft pink roses, baby's breath and green foliage. All porch sides are open between the arches, including the rear. A low table inside the porch holds a small wooden picture frame; its lettering is not readable from this height. There is no on-screen board in this aerial.\n\nLavish wedding decoration is distributed through the entire aerial view: soft white-and-pale-pink floral swags along the dome drum and arcades, layered jasmine and greenery along BOTH side arcades, floral trim on the porch arches and columns, delicate petal borders along steps and pool edges, and floating white flower bowls on the water. These details stay small in the landscape; never lower or move the camera closer to show them. The central forward-down flight route remains clear over the pool toward the porch. Soft romantic sunrise, long gentle shadows, subtle reflections, coastal atmospheric depth, fine dust in the low sun, and premium dimensional storybook illustration. DRAMATIC CHIAROSCURO stays gentle at this scale: warm rim light on gold arch edges against cooler powder-blue shade. No readable text, watermark, interface or second dome. This is one facet of the SAME cream-and-gold mosque-courtyard wedding compound: one dome, one courtyard pool, palms, arched arcades. Any person present holds a still pose. The camera does not walk them.",
+  "prompt_sha256": "fcaf22ece789ce4508a5d46e1530a50352291d5a84b80d606dcc759799516c06",
+  "image_prompt_sha256": "fcaf22ece789ce4508a5d46e1530a50352291d5a84b80d606dcc759799516c06",
+  "prompt_char_count": 3200,
+  "prompt_source_field": "image_prompt",
+  "prompt_policy": "resolved image_prompt verbatim from template.json; do not rewrite; do not use image_prompt_template; spatial constraints are metadata only and must not be folded into the prompt",
+  "image_request": {
+    "quality": "high",
+    "aspect_ratio": "9:16",
+    "output_format": "jpeg",
+    "number_of_images": 1
+  },
+  "continuity_gate": "WAIVED",
+  "qc_waived": true,
+  "qc": "not requested",
+  "continuity_qc": "NOT_REQUESTED",
+  "visual_qc": "NOT_REQUESTED",
+  "spatial_qc": "NOT_REQUESTED",
+  "continuity": {
+    "continuity_gate": "WAIVED",
+    "bible": null,
+    "note": "QC not requested. No continuity bible attached. Do not import Kerala Christian or nk-v1 continuity."
+  },
+  "spatial_constraints": {
+    "spatial_map_version": "spatial-draft-muslim-v1",
+    "source": "/workspace/fmi-productions/spatial-drafts/muslim-courtyard-board-20261004/continuity/SPATIAL_MAP.json",
+    "shot": "S1",
+    "facet_id": "A",
+    "room": "A",
+    "facet": "aerial_compound_exterior",
+    "zone": "aerial_compound_exterior",
+    "arrival": "start",
+    "turn_from_prior": null,
+    "character_stands": [],
+    "camera_pose": {
+      "framing": null,
+      "height": null,
+      "look": null,
+      "aim": null,
+      "fov_hint": null,
+      "move_intent": "forward-down dive",
+      "lighting": null
+    },
+    "visible_set": [
+      "ONE decorated mosque-courtyard wedding compound, cream and gold, arches, one courtyard pool, palms, one dome"
+    ],
+    "offscreen_neighbors": null,
+    "forbidden_reuse": [
+      "church",
+      "cross",
+      "bell tower",
+      "Holy Matrimony",
+      "ivory church gown",
+      "chapel",
+      "parish hall",
+      "altar",
+      "forehead touch",
+      "a second room for scene 12",
+      "a second gateway sign",
+      "a second dome"
+    ],
+    "object_counts": {
+      "bell_tower": 0,
+      "crosses": 0,
+      "bride": 0,
+      "groom": 0
+    },
+    "text": {
+      "copy": null,
+      "carrier": null
+    },
+    "next_edge": {
+      "to": "scene-02",
+      "move": "continue the slow push",
+      "edge": "A-B",
+      "clip": "clip-01"
+    },
+    "board_label": "unchanged — no on-screen board",
+    "folds_applied": [
+      {
+        "kind": "facet_assignment_metadata_only",
+        "facet_id": "A",
+        "facet": "aerial_compound_exterior",
+        "shot": "S1",
+        "room": "A",
+        "prompt_bytes_changed": false
+      }
+    ],
+    "prompt_unmodified": true,
+    "ambiguity": "SPATIAL_MAP.json has no per-beat camera_pose, visible_set inventory, or offscreen_neighbors. Those fields are null or limited to architecture_lock facts. Prompt was not rewritten."
+  },
+  "output_filename": "image-1.jpg",
+  "output_path": "/workspace/fmi-productions/mosque-courtyard-v1/productions/mc-v1-20261004-081300/assets/output/image-1.jpg",
+  "aspect": "9:16",
+  "width": 720,
+  "height": 1280,
+  "model": {
+    "credentials_env": "REPLICATE_API_TOKEN",
+    "id": "openai/gpt-image-2.5-flare",
+    "provider": "replicate"
+  },
+  "skip_spatial": false,
+  "spatial_map_version": "spatial-draft-muslim-v1",
+  "spatial_map_path": "/workspace/fmi-productions/spatial-drafts/muslim-courtyard-board-20261004/continuity/SPATIAL_MAP.json",
+  "spatial_blueprint_16x9_status": "approved_by_ashok",
+  "spatial_approved_packet": "/workspace/fmi-productions/mosque-courtyard-v1/productions/mc-v1-20261004-081300/packets/ORCHESTRATOR_SPATIAL_APPROVED.json",
+  "dependencies": {
+    "blocks": [],
+    "blocked_by": [
+      "spatial_blueprint_16x9_approved_by_ashok",
+      "orchestrator_IMAGE_authorize",
+      "qc_not_requested"
+    ]
+  },
+  "context_isolation": {
+    "includes_clip_graph": false,
+    "includes_other_scenes": false,
+    "includes_full_template": false,
+    "rule": "Image agents must not receive clip graphs, unrelated scenes, or full template.json"
+  },
+  "retry_policy": {
+    "automatic_paid_retries": false,
+    "max_paid_attempts": 2
+  },
+  "max_paid_attempts": 2,
+  "attempt": 1,
+  "template_sha256": "91cf1a574bf936814b24789474fce00f148b8754bbe9aa8b6799f363327cedbb",
+  "continuity_bible_sha256": null,
+  "orchestrator_auth": "/workspace/fmi-productions/mosque-courtyard-v1/productions/mc-v1-20261004-081300/packets/ORCHESTRATOR_GO_IMAGES.json",
+  "orchestrator_ap_auth": null,
+  "unlock_packet": null,
+  "waive_packet": null,
+  "staged_at": "2026-10-04T08:31:55+05:30",
+  "authorized_by_orchestrator": true,
+  "authorized_at": "2026-10-04T08:25:00+05:30",
+  "dispatched_at": null,
+  "dispatch_target": null,
+  "video_jobs_authorized": false,
+  "video": "HOLD",
+  "preserve_prior_productions": [
+    "Theresa & Isaac",
+    "nk-v1",
+    "Kerala Christian productions"
+  ],
+  "source": "template.json image_prompt (verbatim, character-for-character) + spatial map metadata only; prompt not rewritten",
+  "resolved_image_prompt_used": true,
+  "image_prompt_equals_template": true
+}

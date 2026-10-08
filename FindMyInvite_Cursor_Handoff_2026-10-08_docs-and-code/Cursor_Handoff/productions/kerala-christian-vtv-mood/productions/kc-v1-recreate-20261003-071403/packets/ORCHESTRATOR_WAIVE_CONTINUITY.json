@@ -1,0 +1,13 @@
+{
+  "packet_type": "ORCHESTRATOR_WAIVE_CONTINUITY",
+  "production_id": "kc-v1-recreate-20261003-071403",
+  "at": "2026-10-03T07:21:20+05:30",
+  "authority": "Ashok standing rule via FMI ReCreate",
+  "continuity": "WAIVED",
+  "continuity_director": "NOT_WAITED",
+  "qc_policy": "NO_QC_GENERATE_AND_STITCH",
+  "spatial_gate": "STILL_REQUIRED",
+  "image_jobs_authorized": false,
+  "video_jobs_authorized": false,
+  "note": "Continuity checks waived. IMAGE and VIDEO remain held until spatial_blueprint_16x9_status=approved_by_ashok. Prompts not mutated."
+}

@@ -1,0 +1,33 @@
+{
+  "packet_type": "ORCHESTRATOR_UNLOCK_IMAGE",
+  "production_id": "nk-v1-20261002-072013",
+  "at": "2026-10-02T10:51:29+05:30",
+  "spatial_blueprint_16x9_status": "approved_by_ashok",
+  "spatial_map_version": "spatial-v9",
+  "auth": "/workspace/fmi-productions/nandini-karthik-remake/packets/ORCHESTRATOR_SPATIAL_APPROVED.json",
+  "spatial_map": "/workspace/fmi-productions/nandini-karthik-remake/continuity/SPATIAL_MAP.json",
+  "blueprint": "/workspace/fmi-productions/nandini-karthik-remake/continuity/SPATIAL_MAZE_MAP_16x9_v9.jpg",
+  "batch": "stills-v6",
+  "maze_path": [
+    "A",
+    "B",
+    "C",
+    "F",
+    "E",
+    "D"
+  ],
+  "shot_path": [
+    "S1",
+    "S2",
+    "S3",
+    "S4",
+    "S5",
+    "S6"
+  ],
+  "output_dir": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v6",
+  "packets_dir": "/workspace/fmi-productions/nandini-karthik-remake/packets-v6",
+  "image_job_dir": "/workspace/fmi-productions/nandini-karthik-remake/packets/IMAGE_JOB",
+  "video_jobs_authorized": false,
+  "orders_to": "Asset Producer",
+  "note": "Emit 6 IMAGE_JOBs folded from spatial-v9 beats; preserve stills-v5; couple stands S5\u2013S6; forbid lake+gopuram+hills+boat as hero BG."
+}

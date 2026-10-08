@@ -1,0 +1,81 @@
+{
+  "packet_type": "ORCHESTRATOR_CORRECTION_REGEN",
+  "production_id": "kc-v1-recreate-20261003-071403",
+  "authorized_at": "2026-10-03T23:36:00+05:30",
+  "authorized_by": "Ashok via FMI ReCreate",
+  "qc_policy": "NO_QC_GENERATE_AND_STITCH",
+  "continuity": "WAIVED",
+  "still_approval": "DO_NOT_WAIT",
+  "spatial_blueprint_16x9_status": "approved_by_ashok",
+  "scope": "ONLY scene-02, scene-08, clip-01, clip-02, clip-07, clip-08, then restitch. Do not regenerate any other still or clip.",
+  "image_jobs": [
+    "scene-02",
+    "scene-08"
+  ],
+  "image_prompt_source": "Use the resolved image_prompt in template.json. Do NOT use image_prompt_template for scene-08; that template is missing the third board line. Do not rewrite prompts.",
+  "scene_02": {
+    "attempt": 4,
+    "archive_previous": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/assets/output/kerala-christian-v1/archive-delivered-20261003/image-2.jpg",
+    "live_output": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/assets/output/kerala-christian-v1/image-2.jpg",
+    "copy_change": "devotional line now says new journey, not nee journey"
+  },
+  "scene_08": {
+    "attempt": 2,
+    "archive_previous": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/assets/output/kerala-christian-v1/archive-delivered-20261003/image-8.jpg",
+    "live_output": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/assets/output/kerala-christian-v1/image-8.jpg",
+    "copy_change": "venue board third line is 3:00 pm Mass"
+  },
+  "video_hold_until_stills": true,
+  "video_jobs_after_stills": {
+    "parallel_first": [
+      "clip-01",
+      "clip-07"
+    ],
+    "then": {
+      "clip-02": "after clip-01 handoff",
+      "clip-08": "after clip-07 handoff"
+    }
+  },
+  "clip_anchors": {
+    "clip-01": "first scene-01 image-1.jpg unchanged; last new image-2.jpg",
+    "clip-02": "first new clip-1-handoff.jpg; last image-3.jpg unchanged",
+    "clip-07": "first existing clip-6-handoff.jpg unchanged; last new image-8.jpg",
+    "clip-08": "first new clip-7-handoff.jpg; last image-9.jpg unchanged"
+  },
+  "video_prompt_source": "Use resolved video_prompt, not the stale prompt field. Do not rewrite.",
+  "keep_clips": [
+    "clip-03",
+    "clip-04",
+    "clip-05",
+    "clip-06",
+    "clip-09",
+    "clip-10",
+    "clip-11"
+  ],
+  "stitch": {
+    "order": [
+      "clip-1.mp4",
+      "clip-2.mp4",
+      "clip-3.mp4",
+      "clip-4.mp4",
+      "clip-5.mp4",
+      "clip-6.mp4",
+      "clip-7.mp4",
+      "clip-8.mp4",
+      "clip-9.mp4",
+      "clip-10.mp4",
+      "clip-11.mp4"
+    ],
+    "output": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/assets/output/kerala-christian-v1/kerala-christian-v1-final.mp4",
+    "mode": "hard-cut silent",
+    "archive_previous_final": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/assets/output/kerala-christian-v1/archive-delivered-20261003/kerala-christian-v1-final.mp4",
+    "skip_finish": true,
+    "skip_qc": true
+  },
+  "preserve_untouched": [
+    "kc-v1-recreate-20261003-003016",
+    "kc-v1-recreate-20261002-192743",
+    "kc-v1-20261001-230532",
+    "nk-v1"
+  ]
+}

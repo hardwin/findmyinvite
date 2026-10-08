@@ -1,0 +1,50 @@
+{
+  "document": "CONTINUITY_VETO",
+  "production_id": "kc-v1-recreate-20261002-192743",
+  "batch": "clips-attempt2",
+  "mode": "RECREATE_IDENTICAL",
+  "skip_spatial": true,
+  "clip_id": "clip-01",
+  "job": "VID-clip-01",
+  "asset_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/clip-1.mp4",
+  "sha256": "47d70da9165c160d71996ac0abf20b90aea244169cf017791cccb078166883ed",
+  "handoff_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/clip-1-handoff.jpg",
+  "handoff_sha256": "c9e8c3cd8e5e1961e702ebc763fcfa675e9a9a5e69e44a19806d25a83a3004be",
+  "generation_id": "f7a52724-b6d5-909d-9091-b4a08aaa46ed",
+  "request_id": "f7a52724-b6d5-909d-9091-b4a08aaa46ed",
+  "attempt": 2,
+  "max_paid_attempts": 2,
+  "paid_attempts_exhausted": true,
+  "visual_qc": "WAIVED_FLOOR",
+  "decision": "VETO",
+  "approved_handoff": false,
+  "scope": "clip weave / spatial morph (scene-01\u219202) \u2014 a2 re-judge",
+  "expected": {
+    "camera": "Forward-down dive, then continuing slow push",
+    "first": "aerial church compound (image-1)",
+    "last": "open porch + floral cross + With God's Grace / We Invite You (image-2)",
+    "continuity": "same physical compound; continuous connection \u2014 no mid-shot world swap",
+    "petals": "continuous drift from first frame; no burst",
+    "text": "blessing copy already in world as camera settles \u2014 no mid-shot pop"
+  },
+  "observed": {
+    "first_ok": true,
+    "last_settle_content_ok": true,
+    "mid_shot_morph": true,
+    "morph_detail": "Continuous dive OK through ~1.5s (courtyard + pavilion + same large church mass / right bell tower). ~1.5\u21922.0s as camera enters pavilion: large courtyard church mass vanishes; replaced by open-porch plate looking out to smaller distant waterfront church + palms \u2014 same morph class as a1, not a continuous approach (church should grow closer, not shrink into a different plate).",
+    "text_pop": true,
+    "text_detail": "Blessing gold copy materializes as camera enters structure (~1.5\u20132.0s); not continuous from early frames.",
+    "petals": "sudden burst ~3s; sparse/absent early aerial, dense after settle"
+  },
+  "notes": [
+    "Opening aerial + ONE tower family OK; ending porch + floral cross + With God's Grace / We Invite You content OK vs image-2",
+    "FAIL: mid-shot spatial identity break persists on a2 \u2014 not a continuous weave through the same compound",
+    "FAIL: text-pop + petal burst a1 defects not cleared",
+    "NO APPROVED_HANDOFF \u2014 clip-02..11 stay HELD",
+    "Paid attempts exhausted (2/2) \u2014 escalate Orchestrator / Ashok NEEDS_INTERVENTION; no silent a3"
+  ],
+  "a1_veto": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/continuity_veto/clip-01.clips-a1.json",
+  "retry_auth": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/ORCHESTRATOR_RETRY_clip-01_attempt2.json",
+  "escalation": "NEEDS_INTERVENTION",
+  "judged_at": "2026-10-02T19:57:14+05:30"
+}

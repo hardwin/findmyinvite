@@ -1,0 +1,46 @@
+{
+  "document": "CONTINUITY_VETO",
+  "production_id": "nk-v1-20261002-072013",
+  "batch": "stills-v6",
+  "scene_id": "scene-06",
+  "job": "IMG-v6-scene-06",
+  "asset_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v6/scene-06.jpg",
+  "sha256": "5a765feceae2ece605f985e47265fa5c3f3d2b23429f4a64959596e69d404c99",
+  "attempt": 1,
+  "visual_qc": "WAIVED_BY_ORCHESTRATOR_AGENT_UNAVAILABLE",
+  "spatial_map_version": "spatial-v9",
+  "maze_path_slot": "D lotus_pond_photoshoot_terrace",
+  "decision": "LOCK",
+  "continuity_bible": "/workspace/fmi-productions/nandini-karthik-remake/continuity/CONTINUITY_BIBLE.json",
+  "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/IMAGE_JOB/scene-06.v6.json",
+  "judged_at": "2026-10-02T10:59:11+05:30",
+  "judge": "Continuity Director",
+  "scope": "wardrobe/pose/copy + architecture (couple)",
+  "expected": {
+    "room": "D",
+    "facet": "lotus_pond_photoshoot_terrace",
+    "couple": true,
+    "pose": "STANDING",
+    "wardrobe": "same wardrobe_lock",
+    "text": [
+      "Nandini \u2661 Karthik",
+      "22nd February 2027",
+      "9:30 AM onwards",
+      "ITC Grand Chola, Chennai"
+    ],
+    "bg": "pond-forward terrace; not stage mandap; lake+gopuram not dominant"
+  },
+  "observed": {
+    "wardrobe": "maroon half-sleeve+veshti; green saree heavy gold; long jasmine+rose braid \u2014 OK",
+    "pose": "STANDING holding hands \u2014 OK",
+    "text": "full stack present and readable \u2014 OK",
+    "architecture": "pond-forward carved pavilion with lotus pond foreground; banana/jasmine/brass \u2014 materials OK",
+    "distant_bg": "soft blurred temple-like silhouettes through trees \u2014 not dominant hero",
+    "people": 2
+  },
+  "violations": [],
+  "soft_notes": [
+    "Distant temple-like silhouettes soft-blurred \u2014 within scene-06 tiny-peek tolerance; not readable gopuram hero. Keep distinct from S5 (pond-forward)."
+  ],
+  "rationale": "Room D pond terrace couple LOCK: wardrobe/STANDS/copy OK; pond-forward distinct from stage; no dominant lake-gopuram plate."
+}

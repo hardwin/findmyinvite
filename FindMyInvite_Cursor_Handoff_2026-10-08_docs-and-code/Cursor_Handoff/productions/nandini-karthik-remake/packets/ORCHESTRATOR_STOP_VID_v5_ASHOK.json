@@ -1,0 +1,30 @@
+{
+  "packet_type": "ORCHESTRATOR_STOP",
+  "production_id": "nk-v1-20261002-072013",
+  "batch": "clips-v5",
+  "reason": "USER STOP from Ashok \u2014 experiments only; do not mess with results",
+  "stopped_at": "2026-10-02T09:16:23+05:30",
+  "source": "Ashok via FindMyInvite Video Director",
+  "actions": {
+    "terminate_qc": true,
+    "terminate_regenerates": true,
+    "no_continuity_lock": true,
+    "no_clip_unlocks": true,
+    "preserve_existing_assets": true
+  },
+  "frozen_state": {
+    "VID-v5-clip-01": "APPROVED \u2014 preserve assets/clips-v5/clip-01.mp4 + handoffs-v5/clip-01-handoff.jpg",
+    "VID-v5-clip-02": "HALTED \u2014 a1 RETRY archived as clip-02.attempt1.mp4 + clip-02-handoff.attempt1.jpg; a2 aborted; no active clip-02.mp4; do not QC/approve/replace",
+    "VID-v5-clip-03": "HELD",
+    "VID-v5-clip-04": "HELD",
+    "VID-v5-clip-05": "HELD",
+    "stills-v5": "APPROVED \u2014 preserve; no regen"
+  },
+  "preserved_inventory": {
+    "clip-01.mp4": "0a8cef4f4a581ec4379b8008e782aa171a3d24b281583f7b254e6748d28deca3",
+    "clip-01-handoff.jpg": "6f0e9c18ff9ea8767f3bdeee14c3545d27a6471ce8014b97c0f4c9bb840086d2",
+    "clip-02.attempt1.mp4": "3f5a6d3864afd2eb63dc7b11d1e29fef69611f86f853f78cf1ff0185b5fd1482",
+    "clip-02-handoff.attempt1.jpg": "d63452aff6cdf22d1606e2b86ce25de65b1746f9526415dec90db18b9dcd8175"
+  },
+  "resume_requires": "Explicit Ashok reopen (which jobs; whether to resume clip-02 a2 / waive a1 / leave frozen)"
+}

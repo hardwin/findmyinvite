@@ -1,0 +1,9 @@
+{
+  "name": "FMI ReCreate",
+  "description": "FindMyInvite client-fill recreate agent. Collect filled parameters, write them into a template copy, re-resolve placeholders, diff-check, hand off to FMI Orchestrator.",
+  "title": "",
+  "avatarShape": "",
+  "avatarColor": "",
+  "serverId": "7310737",
+  "harness": "temporal"
+}

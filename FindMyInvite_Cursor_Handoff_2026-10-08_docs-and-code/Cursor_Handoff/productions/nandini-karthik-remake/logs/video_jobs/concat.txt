@@ -1,0 +1,5 @@
+file '/workspace/fmi-productions/nandini-karthik-remake/assets/clips/clip-01.mp4'
+file '/workspace/fmi-productions/nandini-karthik-remake/assets/clips/clip-02.mp4'
+file '/workspace/fmi-productions/nandini-karthik-remake/assets/clips/clip-03.mp4'
+file '/workspace/fmi-productions/nandini-karthik-remake/assets/clips/clip-04.mp4'
+file '/workspace/fmi-productions/nandini-karthik-remake/assets/clips/clip-05.mp4'

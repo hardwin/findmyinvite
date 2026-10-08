@@ -1,0 +1,166 @@
+{
+  "packet_type": "ORCHESTRATOR_GO_VIDEO",
+  "production_id": "kc-v1-recreate-20261003-071403",
+  "mode": "RECREATE_CLIENT_FILL",
+  "authorized_at": "2026-10-03T08:56:23+05:30",
+  "action": "AUTHORIZE_VIDEO_DISPATCH",
+  "supersedes": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/ORCHESTRATOR_HOLD_VIDEO.json",
+  "fast_path": true,
+  "continuity_qc": "WAIVED",
+  "visual_qc": "WAIVED",
+  "spatial_qc": "WAIVED",
+  "qc_policy": "NO_QC_GENERATE_AND_STITCH",
+  "stills_status": "COMPLETE_SCENE02_ATTEMPT3_APPROVED",
+  "scene_02_still": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/assets/output/kerala-christian-v1/image-2.jpg",
+  "scene_02_sha256": "0bd13d640bcbb86e207d98c46aa94f787198144810b48c0ad131a9d29345caf0",
+  "scene_02_source": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/assets/output/kerala-christian-v1/image-2-attempt3.jpg",
+  "continuity_bible": null,
+  "spatial_map_json": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/continuity/SPATIAL_MAP.json",
+  "spatial_map_version": "spatial-v1",
+  "spatial_blueprint_16x9_status": "approved_by_ashok",
+  "spatial_scene_02_note": "Empty pedestal withdrawn. Approved still has five stacked lines, no pedestal, soft blur and slight white fade behind the type.",
+  "template_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/template.json",
+  "template_sha256": "25e89072ce2f2d6c8f94b99183b5656c10c99b6bdb8b6555cbe01b6ac18b032e",
+  "assets_root": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/assets/output/kerala-christian-v1",
+  "packets_dir": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/VIDEO_JOB",
+  "clip_count": 11,
+  "jobs": [
+    "VID-clip-01",
+    "VID-clip-02",
+    "VID-clip-03",
+    "VID-clip-04",
+    "VID-clip-05",
+    "VID-clip-06",
+    "VID-clip-07",
+    "VID-clip-08",
+    "VID-clip-09",
+    "VID-clip-10",
+    "VID-clip-11"
+  ],
+  "clip_ids": [
+    "clip-01",
+    "clip-02",
+    "clip-03",
+    "clip-04",
+    "clip-05",
+    "clip-06",
+    "clip-07",
+    "clip-08",
+    "clip-09",
+    "clip-10",
+    "clip-11"
+  ],
+  "clip_graph": [
+    {
+      "id": "clip-01",
+      "index": 1,
+      "from": 1,
+      "to": 2,
+      "duration": 5,
+      "video_path": "clip-1.mp4",
+      "final_frame_path": "clip-1-handoff.jpg"
+    },
+    {
+      "id": "clip-02",
+      "index": 2,
+      "from": 2,
+      "to": 3,
+      "duration": 4,
+      "video_path": "clip-2.mp4",
+      "final_frame_path": "clip-2-handoff.jpg"
+    },
+    {
+      "id": "clip-03",
+      "index": 3,
+      "from": 3,
+      "to": 4,
+      "duration": 5,
+      "video_path": "clip-3.mp4",
+      "final_frame_path": "clip-3-handoff.jpg"
+    },
+    {
+      "id": "clip-04",
+      "index": 4,
+      "from": 4,
+      "to": 5,
+      "duration": 5,
+      "video_path": "clip-4.mp4",
+      "final_frame_path": "clip-4-handoff.jpg"
+    },
+    {
+      "id": "clip-05",
+      "index": 5,
+      "from": 5,
+      "to": 6,
+      "duration": 5,
+      "video_path": "clip-5.mp4",
+      "final_frame_path": "clip-5-handoff.jpg"
+    },
+    {
+      "id": "clip-06",
+      "index": 6,
+      "from": 6,
+      "to": 7,
+      "duration": 5,
+      "video_path": "clip-6.mp4",
+      "final_frame_path": "clip-6-handoff.jpg"
+    },
+    {
+      "id": "clip-07",
+      "index": 7,
+      "from": 7,
+      "to": 8,
+      "duration": 5,
+      "video_path": "clip-7.mp4",
+      "final_frame_path": "clip-7-handoff.jpg"
+    },
+    {
+      "id": "clip-08",
+      "index": 8,
+      "from": 8,
+      "to": 9,
+      "duration": 5,
+      "video_path": "clip-8.mp4",
+      "final_frame_path": "clip-8-handoff.jpg"
+    },
+    {
+      "id": "clip-09",
+      "index": 9,
+      "from": 9,
+      "to": 10,
+      "duration": 5,
+      "video_path": "clip-9.mp4",
+      "final_frame_path": "clip-9-handoff.jpg"
+    },
+    {
+      "id": "clip-10",
+      "index": 10,
+      "from": 10,
+      "to": 11,
+      "duration": 5,
+      "video_path": "clip-10.mp4",
+      "final_frame_path": "clip-10-handoff.jpg"
+    },
+    {
+      "id": "clip-11",
+      "index": 11,
+      "from": 11,
+      "to": 12,
+      "duration": 5,
+      "video_path": "clip-11.mp4",
+      "final_frame_path": "clip-11-handoff.jpg"
+    }
+  ],
+  "prompt_policy": "CLIENT_FILL \u2014 locked video_prompt from the current template verbatim. Do not rewrite. Scene-02 and clip-01 already include the five-line verse, no pedestal, blur and white fade.",
+  "rules": [
+    "Use image-2.jpg (now the approved attempt 3) as the scene-02 anchor. Do not use attempt 1 or attempt 2.",
+    "Emit 11 VIDEO_JOBs clip-01..11 from locked template video_prompt. Do not mutate prompts.",
+    "Dispatch clip-01 now. Auto-unlock clip-02..11 on each decoded handoff. Do not wait for Orchestrator between clips.",
+    "clip-03 reveals the bride (scene-04). clip-04 reveals the groom (scene-05).",
+    "After clip-11 GENERATED, stitch kerala-christian-v1-final.mp4 hard-cut and silent. Skip FMI Finish and Final QC.",
+    "Preserve prior kc recreates + nk-v1 HOLD"
+  ],
+  "video_jobs_authorized": true,
+  "batch": "clips-v1",
+  "final_expected": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/assets/output/kerala-christian-v1/kerala-christian-v1-final.mp4"
+}

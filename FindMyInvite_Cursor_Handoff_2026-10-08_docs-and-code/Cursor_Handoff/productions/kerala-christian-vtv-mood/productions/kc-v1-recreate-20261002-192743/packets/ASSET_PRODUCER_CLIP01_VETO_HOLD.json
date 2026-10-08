@@ -1,0 +1,18 @@
+{
+  "packet_type": "ASSET_PRODUCER_CLIP01_VETO_HOLD",
+  "production_id": "kc-v1-recreate-20261002-192743",
+  "recorded_at": "2026-10-02T19:47:43+05:30",
+  "clip_id": "clip-01",
+  "decision": "CONTINUITY_VETO",
+  "approved_handoff": false,
+  "continuity_veto": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/continuity_veto/clip-01.clips-a1.json",
+  "handoff_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/continuity_veto/clip-01.HANDOFF.json",
+  "clip_02_status": "HELD \u2014 no unlock",
+  "awaiting": "Orchestrator paid attempt-2 auth for VID-clip-01 only",
+  "retry_instruction_preview": "Regenerate VID-clip-01 attempt-2 only. Keep locked video_prompt. FIRST=image-1.jpg LAST=image-2.jpg. Must be ONE continuous forward-down dive then slow push through the SAME white Portuguese-Kerala ch\u2026",
+  "do_not": [
+    "unlock clip-02",
+    "dispatch clip-02",
+    "paid retry without Orchestrator auth"
+  ]
+}

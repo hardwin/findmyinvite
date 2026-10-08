@@ -1,0 +1,41 @@
+{
+  "job_type": "IMAGE_JOB",
+  "job_id": "img-scene-08",
+  "production_id": "kc-v1-20261001-230532",
+  "scene_id": "scene-08",
+  "scene_index": 8,
+  "scene_name": "Venue at the north courtyard corner",
+  "image_prompt": "A full-bleed portrait 9:16 frame of a richly cinematic dimensional storybook-animation Kerala Christian church wedding invitation. Soft romantic late-2000s South Indian cinema mood: dreamy natural light, intimate coastal Kerala atmosphere, gentle teal-and-warm contrast, quiet emotional longing. Soft cream and powder-blue palette with pearl highlights, pale pink florals and cool backwaters haze beyond coconut palms. Cream-white Portuguese-influenced plaster walls, laterite stone accents, arched windows, a modest bell tower and a simple cross. Premium animated adult characters with sculpted expressive faces, never photographic people. DRAMATIC CHIAROSCURO: gentle warm back-and-side sunlight streams diagonally through arched windows and open porch bays, clearly visible soft volumetric god rays cutting through thin coastal atmospheric haze; luminous rim light on ivory silk, lace, pearl and champagne-gold frames against cooler powder-blue shade. Preserve readable highlights, not a flat uniformly bright wash. Very fine dust motes sparkle only inside the sunbeams. Floor is subtly reflective worn cream stone or polished laterite tile, not a mirror. Gold lettering has illuminated beveled edges, warm restrained emissive bloom, luminous hairline flourishes and discrete pinpoint highlights; sharp readable counters. Fixed floral church wedding décor of white jasmine, soft pink roses, baby's breath and green foliage — not marigold temple swags as primary. Roughly 12 to 20 tiny separate white, soft-pink and cream petals already scattered irregularly through the whole depth volume: a few soft near-lens edge petals, crisp midground petals, tiny distant petals. No confetti cannon, solid flower bunches in the air, symmetrical particle rows or dense shower from one point. All bouquets and garlands are fixed to their supports. Generate only from this text, no reference image. No watermark, interface, duplicate people, extra signs or unintended words.\n\nSCENE COMPOSITION:\nEye-level courtyard CORNER view facing an ornate dark-mahogany venue board on a low square gold-trimmed cream stone pedestal. Board is centered, about 56 percent of image width and 56 percent of height. Exact large gold serif copy with gently luminous bevel highlights: 'Wedding Venue\nSt. Mary's Forane Church\nNear Alappuzha\nKerala'. All text readable with generous margins. A CLOSE square cream plaster column frames the extreme RIGHT foreground, side face strongly visible. The architecture behind forms an L-shaped church courtyard: a low decorated church wing stretches across the background and the cream-white bell tower appears only off-axis in the distant LEFT quarter. This is a sideways courtyard view, never a straight forward aisle ending at a central tower. Rich white-and-pale-pink flower swags, fixed soft candle stands, a delicate petal border beneath the board. Soft sunlight cuts diagonally across coastal haze from left, with cool sculpted shade on the near pillar and radiant gold sign edges. Small slow-looking petals distributed at different heights. No foreground couple.",
+  "required_text": [],
+  "continuity_subsection_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/continuity/CONTINUITY_BIBLE.json#scene-08",
+  "output_filename": "image-8.jpg",
+  "output_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-8.jpg",
+  "aspect_ratio": "9:16",
+  "width": 720,
+  "height": 1280,
+  "image_request": {
+    "quality": "high",
+    "aspect_ratio": "9:16",
+    "output_format": "jpeg",
+    "number_of_images": 1
+  },
+  "model": {
+    "credentials_env": "REPLICATE_API_TOKEN",
+    "id": "openai/gpt-image-2.5-flare",
+    "provider": "replicate"
+  },
+  "dependencies": [],
+  "max_paid_attempts": 2,
+  "attempt": 1,
+  "status": "AUTHORIZED_DISPATCHED",
+  "authorized_by_orchestrator": true,
+  "staged_at": "2026-10-01T23:08:07.375872+05:30",
+  "source_extract": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/scenes_prompt_extract.json",
+  "authorized_to_dispatch": true,
+  "authorized_at": "2026-10-01T23:08:35.904391+05:30",
+  "canonical_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/IMAGE_JOB/scene-08.json",
+  "authorization_note": "Orchestrator GO — canonical packets also in IMAGE_JOB/; use either path",
+  "dispatched_at": "2026-10-01T23:08:37.106669+05:30",
+  "dispatch_target": "FMI Image Floor fb72b97b @Image Director",
+  "handoff_packet_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/IMAGE_JOB/scene-08.json"
+}

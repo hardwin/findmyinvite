@@ -1,0 +1,170 @@
+{
+  "job_type": "IMAGE_JOB",
+  "job_id": "IMG-scene-01-regen",
+  "production_id": "kc-v1-20261001-230532",
+  "status": "AUTHORIZED_DISPATCH",
+  "authorized_to_dispatch": true,
+  "regen": true,
+  "regen_of": "IMG-scene-01",
+  "regen_reason": "clip-01 opening: sweeping cinematic drone / wedding-estate; loosen rigid compound plate",
+  "scene_id": "scene-01",
+  "scene_index": 1,
+  "name": "Sweeping cinematic drone wedding-estate establish",
+  "generation": "text-only",
+  "image_prompt": "A sweeping cinematic DRONE establishing shot of a lavishly decorated white Portuguese-influenced Kerala Catholic wedding-estate church compound near the Alappuzha backwaters at soft sunrise, portrait 9:16. Brilliant elevated wedding-estate energy: the camera flies high with strong altitude and parallax across lush coastal compound expanse \u2014 NOT a static eye-level facade plate, NOT a tight locked architecture diagram, NOT a nadir map.\n\nSoft romantic lavender-peach and powder-blue sunrise sky, low sun at camera-left, distant misty coconut-palm horizon over hazy backwaters readable in the upper third. Wide oblique aerial (~24 mm class) looking diagonally down into the estate with romantic coastal scale and depth.\n\nARCHITECTURE \u2014 soft FAMILY resemblance (not a measured floorplan): cream-white plaster with soft laterite accents, arched windows, exactly ONE modest cream-white bell tower topped by a simple cross with sky around the cupola, and exactly ONE small open arched porch vestibule readable in the compound below (all porch sides open including the rear). A tiny floral cross pedestal between two soft candle stands may be partly roof-occluded from height. Courtyard water, gardens, cloister roofs, approach paths and estate depth may vary for lush wedding-estate expanse \u2014 do not freeze rigid pool/cloister geometry.\n\nLavish Christian wedding decoration distributed across the aerial view: soft white-and-pale-pink floral swags, jasmine and greenery along arcades and porch, delicate petal accents \u2014 small in the landscape. People are tiny unresolved figures from height. Premium dimensional storybook illustration, soft romantic sunrise, coastal atmospheric depth. No text, watermark, extra shrine, second bell tower, or second unrelated church.",
+  "required_text": [],
+  "continuity": {
+    "source": "CONTINUITY_BIBLE.json#scenes.scene-01 (amended clip-01 regen)",
+    "amend": "CONTINUITY_AMEND_clip01.json",
+    "scene": {
+      "id": "scene-01",
+      "index": 1,
+      "name": "Sweeping cinematic drone wedding-estate establish",
+      "generate_still": true,
+      "image_path": "image-1.jpg",
+      "zone": "elevated aerial / wedding-estate compound exterior (soft expanse)",
+      "characters": [],
+      "copy": null,
+      "lighting": "soft sunrise; low sun at camera-left; lavender-peach + powder-blue sky",
+      "camera": "High sweeping cinematic drone establish \u2014 elevated wedding-estate energy, strong altitude/parallax, romantic coastal scale. Wide oblique aerial (~24mm class). NOT eye-level facade plate, NOT nadir architecture map, NOT static locked compound diagram.",
+      "opening_energy": {
+        "required": "sweeping cinematic drone / wedding-estate aerial brilliance",
+        "veto_if": [
+          "static compound plate",
+          "eye-level facade lock",
+          "tight measured floorplan/compound diagram",
+          "frozen hold with no aerial expanse"
+        ]
+      },
+      "architecture_family": {
+        "mode": "soft_family_resemblance",
+        "note": "Opening compound is SOFT world identity \u2014 NOT a rigid measured plate. Allow lush wedding-estate expanse and stronger altitude. Do NOT pixel-lock floorplan, pool proportions, or cloister geometry.",
+        "must_suggest": [
+          "cream-white Portuguese-influenced Kerala Catholic plaster + laterite accents",
+          "ONE modest bell tower with cross (sky around cupola preferred)",
+          "ONE small open arched porch vestibule (all sides open including rear) readable in the compound below",
+          "coastal Kerala Catholic church-estate geography \u2014 palms / soft coastal haze optional"
+        ],
+        "may_vary": [
+          "courtyard pool size/shape or presence as secondary landscape",
+          "cloister roof extent and angle",
+          "estate depth, gardens, approach paths, reflecting water scale",
+          "exact tower placement within soft right/background family (still ONE tower)"
+        ]
+      },
+      "architecture_must": [
+        "FAMILY: cream plaster + laterite + arched Kerala Catholic church-estate language",
+        "ONE modest cream-white bell tower + cross",
+        "ONE small open arched porch vestibule (open sides including rear) with tiny floral cross pedestal readable or partly roof-occluded from height",
+        "Elevated sweeping wedding-estate geography \u2014 not a flat facade plate"
+      ],
+      "object_counts": {
+        "bell_tower": 1,
+        "porch_vestibule": 1,
+        "floral_cross_pedestal": 1,
+        "text_boards": 0
+      },
+      "forbidden": [
+        "text/watermark",
+        "close portrait of porch",
+        "closed inner sanctuary in porch",
+        "extra shrine",
+        "multiple bell towers",
+        "second unrelated church mass",
+        "static eye-level facade plate",
+        "tight locked compound map / architecture diagram",
+        "photographic realism (must stay storybook 3D)"
+      ],
+      "particles": "lavish fixed floral d\u00e9cor from height; people tiny unresolved",
+      "amend_note": "2026-10-02 clip-01 regen: loosened rigid compound plate; opening_energy required"
+    },
+    "opening_energy": {
+      "required": "sweeping cinematic drone / wedding-estate aerial brilliance",
+      "veto_if": [
+        "static compound plate",
+        "eye-level facade lock",
+        "tight measured floorplan/compound diagram",
+        "frozen hold with no aerial expanse"
+      ]
+    },
+    "architecture_family": {
+      "mode": "soft_family_resemblance",
+      "note": "Opening compound is SOFT world identity \u2014 NOT a rigid measured plate. Allow lush wedding-estate expanse and stronger altitude. Do NOT pixel-lock floorplan, pool proportions, or cloister geometry.",
+      "must_suggest": [
+        "cream-white Portuguese-influenced Kerala Catholic plaster + laterite accents",
+        "ONE modest bell tower with cross (sky around cupola preferred)",
+        "ONE small open arched porch vestibule (all sides open including rear) readable in the compound below",
+        "coastal Kerala Catholic church-estate geography \u2014 palms / soft coastal haze optional"
+      ],
+      "may_vary": [
+        "courtyard pool size/shape or presence as secondary landscape",
+        "cloister roof extent and angle",
+        "estate depth, gardens, approach paths, reflecting water scale",
+        "exact tower placement within soft right/background family (still ONE tower)"
+      ]
+    },
+    "object_counts": {
+      "bell_tower": 1,
+      "porch_vestibule": 1,
+      "floral_cross_pedestal": 1,
+      "text_boards": 0
+    },
+    "forbidden": [
+      "text/watermark",
+      "close portrait of porch",
+      "closed inner sanctuary in porch",
+      "extra shrine",
+      "multiple bell towers",
+      "second unrelated church mass",
+      "static eye-level facade plate",
+      "tight locked compound map / architecture diagram",
+      "photographic realism (must stay storybook 3D)"
+    ],
+    "lighting": "soft sunrise; low sun at camera-left; lavender-peach + powder-blue sky",
+    "style_excerpt": "A full-bleed portrait 9:16 frame of a richly cinematic dimensional storybook-animation Kerala Christian church wedding invitation. Soft romantic late-2000s South Indian cinema mood: dreamy natural light, intimate coastal Kerala atmosphere, gentle teal-and-warm contrast, quiet emotional longing. Soft cream and powder-blue palette with pearl highlights, pale pink florals and cool backwaters haze beyond coconut palms. Cream-white Portuguese-influenced plaster walls, laterite stone accents, arched w",
+    "parameters_note": "no text on this still \u2014 do not render invitation copy"
+  },
+  "continuity_rules_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/continuity/CONTINUITY_BIBLE.json#scenes.scene-01",
+  "continuity_amend_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/continuity/CONTINUITY_AMEND_clip01.json",
+  "output_filename": "image-1.jpg",
+  "output_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-1.jpg",
+  "archive_prior_as": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-1.pre-clip01-regen.jpg",
+  "aspect": "9:16",
+  "width": 720,
+  "height": 1280,
+  "model": {
+    "credentials_env": "REPLICATE_API_TOKEN",
+    "id": "openai/gpt-image-2.5-flare",
+    "provider": "replicate"
+  },
+  "dependencies": {
+    "blocks": [
+      "VID-clip-01-regen"
+    ],
+    "blocked_by": [
+      "continuity_amend_clip01_READY",
+      "orchestrator_IMAGE_authorize_regen"
+    ]
+  },
+  "context_isolation": {
+    "includes_clip_graph": false,
+    "includes_other_scenes": false,
+    "rule": "Image agents must not receive clip graphs or unrelated scenes"
+  },
+  "retry_policy": {
+    "automatic_paid_retries": false,
+    "max_paid_attempts": 2
+  },
+  "staged_at": "2026-10-02T00:05:43.121536+05:30",
+  "source_packets": [
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/ORCHESTRATOR_CLIP01_REGEN.json",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/ORCHESTRATOR_GO_ASSET_PRODUCER_CLIP01_REGEN.json",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/continuity/CONTINUITY_AMEND_clip01.json"
+  ],
+  "authorized_by_orchestrator": true,
+  "dispatch_rule": "Return to Orchestrator \u2014 do NOT auto-dispatch",
+  "authorized_at": "2026-10-02T00:05:56.312314+05:30",
+  "authorization_note": "Orchestrator GO \u2014 scene-01 regen for clip-01 drone opening; Visual QC + Continuity veto; max 2 paid attempts",
+  "max_paid_attempts": 2,
+  "attempt": 1
+}

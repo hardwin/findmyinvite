@@ -1,0 +1,43 @@
+{
+  "job_type": "IMAGE_QC_RETRY",
+  "production_id": "kc-v1-20261001-230532",
+  "authorized_by": "FMI Orchestrator",
+  "authorized_at": "2026-10-01T23:20:50.067955+05:30",
+  "job_id": "IMG-scene-07",
+  "scene_id": "scene-07",
+  "attempt": 2,
+  "final_paid_attempt": true,
+  "asset_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-7.jpg",
+  "base_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/IMAGE_JOB/scene-07.json",
+  "retry_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/IMAGE_JOB/scene-07.retry-2.json",
+  "focus_checks": [
+    "identity_groom_wardrobe",
+    "object_count_couple",
+    "copy_ceremony_lines",
+    "architecture",
+    "resolution"
+  ],
+  "generation_meta": {
+    "ok": true,
+    "status": {
+      "job": "IMG-scene-07",
+      "scene_id": "scene-07",
+      "status": "GENERATED",
+      "asset_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-7.jpg",
+      "generation_id": "5mw2cmk0mhrmt0d0z2b8najhfw",
+      "prompt_hash": "6827293a7c8c24646cbaebb11d85f9d89688ea8bb2ac6ec9f55df327694575e5",
+      "attempt": 2,
+      "error": null,
+      "output_url": "https://replicate.delivery/xezq/J2qqfT1YnbQlYKsDvp4nyP0XITYl0HyqobiKXAPFppOueETXA/tmpfwi46ca3.jpeg",
+      "model": "openai/gpt-image-2.5-flare",
+      "provider": "replicate",
+      "retry": true,
+      "mode": "edit",
+      "source_image": "https://replicate.delivery/xezq/dbeshKuIw8Qfs0zx5scwKzo59Yl4KutMG2sAFN3EeQD0oJmuA/tmplwht51z3.jpeg",
+      "note": "remove necktie only"
+    }
+  },
+  "decision_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/logs/image_jobs/QC_scene-07_attempt2.json",
+  "on_pass": "Continuity LOCK",
+  "on_retry": "NEEDS_INTERVENTION \u2014 max paid attempts used"
+}

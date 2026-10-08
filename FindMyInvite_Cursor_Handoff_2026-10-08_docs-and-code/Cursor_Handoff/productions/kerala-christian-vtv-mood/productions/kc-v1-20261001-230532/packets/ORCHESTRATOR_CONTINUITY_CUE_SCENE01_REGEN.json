@@ -1,0 +1,9 @@
+{
+  "packet_type": "ORCHESTRATOR_CONTINUITY_CUE_SCENE01_REGEN",
+  "production_id": "kc-v1-20261001-230532",
+  "authorized_at": "2026-10-02T00:07:02.291755+05:30",
+  "asset_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-1.jpg",
+  "amend": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/continuity/CONTINUITY_AMEND_clip01.json",
+  "scope": "scene-01 only",
+  "action": "VETO_OR_CLEAR"
+}

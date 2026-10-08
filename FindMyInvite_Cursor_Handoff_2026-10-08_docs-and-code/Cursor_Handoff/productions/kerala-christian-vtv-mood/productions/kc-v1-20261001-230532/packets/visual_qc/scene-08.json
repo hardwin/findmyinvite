@@ -1,0 +1,16 @@
+{
+  "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-8.jpg",
+  "job_id": "IMG-scene-08",
+  "scene_id": "scene-08",
+  "decision": "PASS",
+  "rationale": "720\u00d71280; ONE venue board on cream pedestal; exact Wedding Venue / St. Mary's Forane Church / Near Alappuzha / Kerala; bell tower off-axis left (not centered aisle); no people; jasmine/rose; soft left sunlight; storybook 3D.",
+  "violations": [],
+  "retry_instruction": null,
+  "attempt": 1,
+  "technical": {
+    "w": 720,
+    "h": 1280,
+    "ok": true
+  },
+  "decided_at": "2026-10-01T23:14:35.538499+05:30"
+}

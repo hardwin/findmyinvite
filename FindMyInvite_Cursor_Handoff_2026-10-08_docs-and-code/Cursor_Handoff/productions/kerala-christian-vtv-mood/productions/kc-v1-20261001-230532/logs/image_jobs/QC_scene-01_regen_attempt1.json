@@ -1,0 +1,28 @@
+{
+  "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-1.jpg",
+  "job_id": "IMG-scene-01-regen",
+  "scene_id": "scene-01",
+  "decision": "PASS",
+  "rationale": "720\times1280 fresh regen. Elevated sweeping drone / wedding-estate aerial with coastal backwaters depth — NOT a static facade or locked compound plate. Object counts: ONE bell tower+cross (right), ONE open floral porch vestibule, floral cross on lawn near porch. Soft cream/terracotta Kerala Catholic family. No text/watermark. Tiny guests OK. Opening_energy requirement met.",
+  "violations": [],
+  "retry_instruction": null,
+  "attempt": 1,
+  "regen": true,
+  "generation_id": "zw19vxegaxrmt0d0z309vyvtdw",
+  "sha256": "df371728282e4fd1ea754f7f100cf2f9db5b25a6119b83db6162c4e4e7c36d51",
+  "technical": {
+    "w": 720,
+    "h": 1280,
+    "ok": true
+  },
+  "checks": {
+    "opening_energy": "PASS",
+    "bell_tower": 1,
+    "porch_vestibule": 1,
+    "floral_cross_pedestal": 1,
+    "text_boards": 0,
+    "architecture_family": "PASS"
+  },
+  "decided_at": "2026-10-02T00:07:41.711686+05:30",
+  "qc_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/ORCHESTRATOR_GO_IMAGE_QC_SCENE01_REGEN.json"
+}

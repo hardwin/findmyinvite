@@ -1,0 +1,38 @@
+{
+  "document": "CONTINUITY_VETO",
+  "production_id": "nk-v1-20261002-072013",
+  "batch": "stills-v5",
+  "scene_id": "scene-04",
+  "job": "IMG-v5-scene-04",
+  "asset_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5/scene-04.jpg",
+  "sha256": "cf73aa9adcb54996e11b0fdfc3c036b62c4349c61147a9461b747ee7be8b29b8",
+  "generation_id": "cm6vtbkmenrmw0d0zabtc5mq40",
+  "attempt": 1,
+  "visual_qc": "PASS",
+  "qc_file": "/workspace/fmi-productions/nandini-karthik-remake/logs/image_jobs/QC_scene-04_stills-v5_attempt1.json",
+  "decision": "LOCK",
+  "scope": "architecture/object (no couple)",
+  "expected": {
+    "facet": "left_side_aisle",
+    "couple": false,
+    "text": false,
+    "locks": [
+      "continuous aisle to stairs mouth",
+      "no couple",
+      "no lake",
+      "no text"
+    ]
+  },
+  "observed": {
+    "architecture": "same left aisle continuing north to cream stairs mouth; carved pillars continuous",
+    "decor": "urulis, lamps, banana leaves, hanging white garlands",
+    "people": 0,
+    "text": false,
+    "lake_plate": false
+  },
+  "violations": [],
+  "rationale": "Matches bible scene-04: continuous aisle geography to stairs; empty; materials lock.",
+  "continuity_bible": "/workspace/fmi-productions/nandini-karthik-remake/continuity/CONTINUITY_BIBLE.json",
+  "judged_at": "2026-10-02T08:42:49+05:30",
+  "judge": "Continuity Director"
+}

@@ -1,0 +1,8 @@
+{
+  "packet_type": "ORCHESTRATOR_PRODUCTION_START",
+  "production_id": "kc-v1-recreate-20261003-003016",
+  "started_at": "2026-10-03T00:30:56+05:30",
+  "mode": "RECREATE_CLIENT_FILL",
+  "couple": "Swaroop & Smiley",
+  "phase": "TEMPLATE_COMPILER"
+}

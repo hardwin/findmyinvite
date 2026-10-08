@@ -1,0 +1,8 @@
+{
+  "fixes_carried": [
+    "scene-01 image_prompt_template = Theresa final verbatim (the prompt that produced the reused image-1, sha b2ea58ba; empty porch, no pedestal/pillar). Not regenerated.",
+    "scene-02: locked structure kept (floral cross + 2-line devotional title via placeholders); 5 'pedestal' phrases removed (cross stands directly on porch floor). Theresa's Jeremiah hard-coded 5-line verse / no-cross / readability-blur text NOT carried.",
+    "clip-01: locked choreography kept; 'pedestal' wording removed (3 sentences); Theresa's NO EXTRA PILLAR line carried, minus its cross/pedestal words since the floral cross stays.",
+    "clip-02: Theresa final text (empty unpeopled porch first-to-last frame; exactly one white bell tower with one cross; no pedestal wording), with 'verse wall' put back to the locked 'floral cross'."
+  ]
+}

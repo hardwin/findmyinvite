@@ -1,0 +1,9 @@
+{
+  "packet_type": "ORCHESTRATOR_CLIP01_ATTEMPT5",
+  "production_id": "kc-v1-recreate-20261003-071403",
+  "authorized_at": "2026-10-05T10:24:00+05:30",
+  "basis": "Ashok 10:17 IST remove pillar/cross and recreate (verified). Attempt 4 failed: pedestal pillar from prompt.",
+  "precondition": "FMI ReCreate confirms clips[0].video_prompt has zero 'pedestal' references (candle stands may stay), choreography intact, <=4080 chars preferred",
+  "authorized": "one paid clip-01 attempt 5: first frame current image-1 (b2ea58ba...), last frame image-2 (1c72f2a5...), video_prompt verbatim; then restitch all 11 hard-cut silent, NO_QC",
+  "if_still_pillar": "do not install; report back before any attempt 6"
+}

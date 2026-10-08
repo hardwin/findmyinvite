@@ -1,0 +1,50 @@
+{
+  "production": "nk-v1-20261002-072013",
+  "batch": "clips-v5",
+  "stills": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5",
+  "spatial_map_version": "spatial-v2",
+  "clips": [
+    {
+      "id": "clip-01",
+      "from": "scene-01",
+      "to": "scene-02",
+      "job_id": "VID-v5-clip-01",
+      "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/VIDEO_JOB/clip-01.v5.json",
+      "status": "READY_TO_GENERATE"
+    },
+    {
+      "id": "clip-02",
+      "from": "scene-02",
+      "to": "scene-03",
+      "job_id": "VID-v5-clip-02",
+      "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/VIDEO_JOB/clip-02.v5.json",
+      "status": "HELD_PENDING_PREVIOUS_HANDOFF"
+    },
+    {
+      "id": "clip-03",
+      "from": "scene-03",
+      "to": "scene-04",
+      "job_id": "VID-v5-clip-03",
+      "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/VIDEO_JOB/clip-03.v5.json",
+      "status": "HELD_PENDING_PREVIOUS_HANDOFF"
+    },
+    {
+      "id": "clip-04",
+      "from": "scene-04",
+      "to": "scene-05",
+      "job_id": "VID-v5-clip-04",
+      "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/VIDEO_JOB/clip-04.v5.json",
+      "status": "HELD_PENDING_PREVIOUS_HANDOFF"
+    },
+    {
+      "id": "clip-05",
+      "from": "scene-05",
+      "to": "scene-06",
+      "job_id": "VID-v5-clip-05",
+      "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/VIDEO_JOB/clip-05.v5.json",
+      "status": "HELD_PENDING_PREVIOUS_HANDOFF"
+    }
+  ],
+  "rule": "Sequential: emit/generate clip-N only after clip-(N-1) APPROVED using actual decoded handoff as first frame when strategy requires.",
+  "updated_at": "2026-10-02T08:49:19.895823+05:30"
+}

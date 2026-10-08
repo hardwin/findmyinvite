@@ -1,0 +1,50 @@
+{
+  "job_id": "VID-clip-01-attempt5",
+  "clip_id": "clip-01",
+  "attempt": 5,
+  "production_id": "kc-v1-recreate-20261003-071403",
+  "auth_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/ORCHESTRATOR_CLIP01_ATTEMPT5.json",
+  "model": "grok-imagine-video-1.5",
+  "resolution": "720p",
+  "aspect_ratio": "9:16",
+  "duration_seconds": 5,
+  "first_frame": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/assets/output/kerala-christian-v1/image-1.jpg",
+  "first_frame_sha256": "b2ea58ba83769197538659f8cdfed64115cd367bd0463da21de302b341fb3b4e",
+  "last_frame": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/assets/output/kerala-christian-v1/image-2.jpg",
+  "last_frame_sha256": "1c72f2a594a469d52f12e7cf38de4ac2017e9636b74a1b82d7fc6207a8e97ad3",
+  "template_sha256": "4e4b499a02be5d5207366d421b256c25842a9318e550c0192aa66a2632347cf2",
+  "prompt_source": "template.json clips[0].video_prompt VERBATIM (no trim)",
+  "prompt_sha256_raw": "92f699a3067b18d5e875878171d8be09382d0949f55cc1d1847955c5d73eb98e",
+  "prompt_len_raw": 4016,
+  "prompt_sha256_trimmed": "92f699a3067b18d5e875878171d8be09382d0949f55cc1d1847955c5d73eb98e",
+  "prompt_len_trimmed": 4016,
+  "prompt_sha256_submitted": "92f699a3067b18d5e875878171d8be09382d0949f55cc1d1847955c5d73eb98e",
+  "prompt_len_submitted": 4016,
+  "sent_equals_trimmed": true,
+  "truncate_prompt_noop": true,
+  "sent_equals_template": true,
+  "staging_output": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/assets/output/kerala-christian-v1/clip-1-attempt5.mp4",
+  "staging_handoff": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/assets/output/kerala-christian-v1/clip-1-attempt5-handoff.jpg",
+  "paid_submits": 1,
+  "status": "generated_staging",
+  "updated_at": "2026-10-05T10:25:25.303173+05:30",
+  "first_file_id": "file_e8fa347f-ab38-4793-874f-c69db357d762",
+  "last_file_id": "file_852d8dff-1674-4e1a-b33a-87d0d4867124",
+  "input_mode": "file_id",
+  "request_id": "94be9826-4f59-900c-896f-dffe4f7913ef",
+  "submit_response": {
+    "request_id": "94be9826-4f59-900c-896f-dffe4f7913ef"
+  },
+  "video_url": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-94be9826-4f59-900c-896f-dffe4f7913ef.mp4",
+  "usage": {
+    "cost_in_usd_ticks": 7200000000
+  },
+  "sha256": "bfbd0162adfe3ee9bdd7230e5de777617c5ff123d9029988618f5b8675113fed",
+  "handoff_sha256": "a14380a036da7f379e198ec14ba89fa051774ef32ca1629701bf58e2bd57aa9d",
+  "technical_probe": {
+    "w": 720,
+    "h": 1280,
+    "fps": "24/1",
+    "duration_s": 5.041667
+  }
+}

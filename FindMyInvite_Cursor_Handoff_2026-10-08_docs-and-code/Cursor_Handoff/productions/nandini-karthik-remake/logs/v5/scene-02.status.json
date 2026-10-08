@@ -1,0 +1,28 @@
+{
+  "ts_local": "2026-10-02T08:40:07+0530",
+  "job_id": "IMG-v5-scene-02",
+  "scene_id": "scene-02",
+  "status": "GENERATED",
+  "attempt": 1,
+  "generation_id": "7k7q8pq5ndrmy0d0zabbnxnryr",
+  "prompt_sha256": "fa265100508f49de548bf6f7d322058636228a9302c4661ae1d758cd59b71e28",
+  "output_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5/scene-02.jpg",
+  "size_bytes": 289063,
+  "sha256": "c09be3132f62a3d50a1b7160c94d72002a3edcb0f52aaea7694e85a516b320e1",
+  "facet": "entrance_colonnade",
+  "spatial_map_version": "spatial-v2",
+  "forbidden_reuse": [
+    "misty lake",
+    "gopuram",
+    "mountains",
+    "boat",
+    "through-arch lake plate",
+    "couple",
+    "text"
+  ],
+  "error": null,
+  "model": "openai/gpt-image-2.5-flare",
+  "provider": "replicate",
+  "input_images_count": 0,
+  "output_url": "https://replicate.delivery/xezq/ax301x13GEbwPpvaoNH0X5lppqLlVydiOMlO0cxb2pjjSz0F/tmpi_ja_txp.jpeg"
+}

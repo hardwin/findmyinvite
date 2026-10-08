@@ -1,0 +1,17 @@
+{
+  "job": "IMG-scene-07",
+  "scene_id": "scene-07",
+  "status": "GENERATED",
+  "asset_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-7.jpg",
+  "generation_id": "5mw2cmk0mhrmt0d0z2b8najhfw",
+  "prompt_hash": "6827293a7c8c24646cbaebb11d85f9d89688ea8bb2ac6ec9f55df327694575e5",
+  "attempt": 2,
+  "error": null,
+  "output_url": "https://replicate.delivery/xezq/J2qqfT1YnbQlYKsDvp4nyP0XITYl0HyqobiKXAPFppOueETXA/tmpfwi46ca3.jpeg",
+  "model": "openai/gpt-image-2.5-flare",
+  "provider": "replicate",
+  "retry": true,
+  "mode": "edit",
+  "source_image": "https://replicate.delivery/xezq/dbeshKuIw8Qfs0zx5scwKzo59Yl4KutMG2sAFN3EeQD0oJmuA/tmplwht51z3.jpeg",
+  "note": "remove necktie only"
+}

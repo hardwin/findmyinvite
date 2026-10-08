@@ -1,0 +1,35 @@
+{
+  "mode": "RECREATE_CLIENT_FILL",
+  "template_name": "kerala-christian-v1",
+  "couple": "Mike Benjamin & Esther",
+  "production_id": "benjamin-20261007-182345",
+  "scope": "STILLS ONLY (no clips until Ashok approves stills)",
+  "template_sha256": "5fe5353e588f66f446e8a6c6c8ac09ff1ab7f6ecfcc587ad64e541580da56d11",
+  "source_template": "/workspace/fmi-productions/kerala-christian-vtv-mood/template.json",
+  "source_template_sha256": "bad0d176beb1ad47e3942689f95c4153fb933f3547670a255bb7fc062f46dae4",
+  "base_rationale": "ORIGINAL template only; pure parameter fill. Scripts copied from kc-v1-recreate-20261007-181228-akhil-sarah for mechanics only.",
+  "adjustments": [
+    "groom_title 'Dr' -> 'Dr.'",
+    "reception year 2026 -> 2027 (typo)"
+  ],
+  "scene_changes": [
+    "scene-07 image prompt: aisle view from behind, couple standing at altar, decorated pews (Ashok request 2026-10-07)"
+  ],
+  "parameters": {
+    "invitation_lines": "The Wedding of\nMike Benjamin & Esther",
+    "groom_title": "Dr.",
+    "groom_name": "Mike Benjamin",
+    "bride_title": "Dr.",
+    "bride_name": "Esther David Dass",
+    "family_lines": "With the Blessings of\nGroom’s Parents\nMr Pakiam & Mrs Christina Samuel\nBride’s Parents\nMr. David Dass\n& Mrs. Arokiamah@Jaya",
+    "ceremony_lines": "Holy Matrimony\n23rd January 2027\n10:00 a.m.\nIn the Morning",
+    "venue_lines": "Wedding Venue\nSt. Katherine Church\nKajang, Selangor",
+    "reception_lines": "Reception - Dinner\n23rd January 2027\n7.30 p.m. onwards\nSunway Clubhouse, Sunway Selangor",
+    "host_lines": "Invited By\nGroom’s & Bride’s Family\nWith Love & Blessings",
+    "save_date_lines": "SAVE THE DATE\n23 JANUARY 2027",
+    "save_date_inline": "SAVE THE DATE / 23 JANUARY 2027",
+    "devotional_line_1": "With God’s Grace",
+    "devotional_line_2": "We Invite You"
+  },
+  "source": "Ashok chat message 2026-10-07 (t1u form)"
+}

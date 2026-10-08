@@ -1,0 +1,12 @@
+{
+  "batch": "clips-v5",
+  "updated_at": "2026-10-02T09:25:03+05:30",
+  "status": "PREVIEW_READY_QC_WAIVED",
+  "VID-v5-clip-01": "APPROVED",
+  "VID-v5-clip-02": "ACCEPTED_AS_IS_QC_WAIVED",
+  "VID-v5-clip-03": "GENERATED_QC_WAIVED",
+  "VID-v5-clip-04": "GENERATED_QC_WAIVED",
+  "VID-v5-clip-05": "GENERATED_QC_WAIVED",
+  "preview": "/workspace/fmi-productions/nandini-karthik-remake/assets/nandini-karthik-v5-preview.mp4",
+  "preview_sha256": "540a932b98ae4ed866db5d8ddb5804fedb3c162a4b5c84e4c41e8f56f683a966"
+}

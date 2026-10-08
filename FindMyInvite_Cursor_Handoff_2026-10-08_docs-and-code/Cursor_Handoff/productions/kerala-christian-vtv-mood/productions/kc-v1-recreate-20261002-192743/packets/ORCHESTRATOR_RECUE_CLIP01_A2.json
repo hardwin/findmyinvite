@@ -1,0 +1,29 @@
+{
+  "packet_type": "ORCHESTRATOR_RECUE_CLIP01_A2",
+  "production_id": "kc-v1-recreate-20261002-192743",
+  "authorized_at": "2026-10-02T19:52:47+05:30",
+  "action": "LIFT_XAI_HOLD_AND_RECUE_A2",
+  "ashok": "credits_restored_confirmed",
+  "prior_hold": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/ORCHESTRATOR_HOLD_XAI_CREDITS.json",
+  "retry_auth": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/ORCHESTRATOR_RETRY_clip-01_attempt2.json",
+  "job": "VID-clip-01",
+  "attempt": 2,
+  "prompt_policy": "NEVER_CHANGE_PROMPTS \u2014 same locked a2 auth / Continuity retry_instruction",
+  "held": [
+    "clip-02",
+    "clip-03",
+    "clip-04",
+    "clip-05",
+    "clip-06",
+    "clip-07",
+    "clip-08",
+    "clip-09",
+    "clip-10",
+    "clip-11"
+  ],
+  "rules": [
+    "authorized_to_dispatch=true for clip-01 a2 only",
+    "follow existing retry_instruction",
+    "stop for Continuity after GENERATED"
+  ]
+}

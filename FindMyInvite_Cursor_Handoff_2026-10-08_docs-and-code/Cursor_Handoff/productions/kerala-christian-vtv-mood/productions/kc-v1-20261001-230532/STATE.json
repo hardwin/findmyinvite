@@ -1,0 +1,30 @@
+{
+  "production_id": "kc-v1-20261001-230532",
+  "phase": "CLIP01_ORDER_V2_STOP_HOLD",
+  "updated_at": "2026-10-02T07:12:50+05:30",
+  "clip01_order_v2": {
+    "image_job": "IMG-scene-01-order-v2",
+    "image_status": "APPROVED",
+    "image_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-1.jpg",
+    "image_sha256": "e220fa48eeb0911325222d18260200361c23036f119dca591509d1aaf7b6290c",
+    "generation_id": "f7c8f330-b3a9-94c8-9af2-bc6c1eebf155",
+    "video_status": "STOP_HOLD_ASHOK",
+    "handoff_anchor": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1-handoff.jpg",
+    "handoff_sha256": "dc477c78c015a1fb7fabbd6c5519fab51d430e65d93f777866274cc5c1fcde61",
+    "attempt": 2,
+    "attempt1_veto": "same_world_spatial",
+    "attempt1_archive": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1.order-v2-attempt1-retry.mp4",
+    "attempt1_sha256": "7127dfed67ddb5898db5886d57984f599e7636f795f696ebd91887cf2726e1d2",
+    "video_go": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/ORCHESTRATOR_GO_CLIP01_REGEN_VIDEO_ORDER_V2.json",
+    "last_frame": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1-handoff.jpg",
+    "last_frame_sha256": "dc477c78c015a1fb7fabbd6c5519fab51d430e65d93f777866274cc5c1fcde61",
+    "clip_sha256": "d26ba28d85f2311a7ea8067dc26d6f13a3e579e3a5836e36ebf80d1293d0d325",
+    "clip_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1.mp4",
+    "attempt1_decision": "RETRY",
+    "paid_exhausted": true,
+    "qc_decision": "RETRY",
+    "assemble": "FORBIDDEN_UNTIL_ASHOK",
+    "auto_retry": false,
+    "needs_intervention": true
+  }
+}

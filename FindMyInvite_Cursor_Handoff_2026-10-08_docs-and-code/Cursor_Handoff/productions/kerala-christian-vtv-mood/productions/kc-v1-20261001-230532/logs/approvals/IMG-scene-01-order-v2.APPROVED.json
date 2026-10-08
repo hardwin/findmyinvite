@@ -1,0 +1,17 @@
+{
+  "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-1.jpg",
+  "job_id": "IMG-scene-01-order-v2",
+  "scene_id": "scene-01",
+  "decision": "APPROVED",
+  "attempt": 2,
+  "order": "V2",
+  "sha256": "e220fa48eeb0911325222d18260200361c23036f119dca591509d1aaf7b6290c",
+  "generation_id": "3j976cpva9rmy0d0z33agwb1f4",
+  "continuity": "LOCK_CLEAR",
+  "continuity_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/continuity/CONTINUITY_CLEAR_scene01_order_v2.json",
+  "continuity_veto_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/continuity_veto/scene-01.order-v2.json",
+  "visual_qc": "PARALLEL \u2014 Continuity LOCK primary gate for ORDER V2; Visual QC file PASS for record / arm video QC",
+  "approved_at": "2026-10-02T00:14:49+05:30",
+  "approved_by": "FMI Orchestrator",
+  "next": "GO VID-clip-01-regen"
+}

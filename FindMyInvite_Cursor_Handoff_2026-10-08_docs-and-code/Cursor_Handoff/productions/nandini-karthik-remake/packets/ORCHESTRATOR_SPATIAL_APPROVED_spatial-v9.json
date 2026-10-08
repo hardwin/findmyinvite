@@ -1,0 +1,30 @@
+{
+  "packet_type": "ORCHESTRATOR_SPATIAL_APPROVED",
+  "production_id": "nk-v1-20261002-072013",
+  "recorded_at": "2026-10-02T10:51:29+05:30",
+  "spatial_map_status": "approved_by_ashok",
+  "spatial_blueprint_16x9_status": "approved_by_ashok",
+  "spatial_map_version": "spatial-v9",
+  "blueprint_path": "/workspace/fmi-productions/nandini-karthik-remake/continuity/SPATIAL_MAZE_MAP_16x9_v9.jpg",
+  "blueprint_svg": "/workspace/fmi-productions/nandini-karthik-remake/continuity/SPATIAL_MAZE_MAP_16x9_v9.svg",
+  "spatial_map_json": "/workspace/fmi-productions/nandini-karthik-remake/continuity/SPATIAL_MAP.json",
+  "approved_via": "Ashok 'Lets try this / Generate' (relayed by Spatial Continuity)",
+  "signal_packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/SPATIAL_16X9_ASHOK_GENERATE_SIGNAL_v9.json",
+  "maze_path": "S1\u2192S2\u2192S3\u2192S4\u2192S5\u2192S6 = A\u2192B\u2192C\u2192F\u2192E\u2192D",
+  "image_jobs_authorized": true,
+  "video_jobs_authorized": false,
+  "current_state": "GENERATING_SCENES",
+  "batch": "stills-v6",
+  "preserve": [
+    "stills-v5",
+    "clips-v5",
+    "nandini-karthik-v5-preview.mp4"
+  ],
+  "orders": [
+    "Asset Producer: fold SPATIAL_MAP spatial-v9 (rooms A\u2013F path A>B>C>F>E>D) into IMAGE_JOBs batch stills-v6; emit to Image Director",
+    "Image Director: generate 6 stills; distinct room per shot; cameras from map; couple STANDS S5\u2013S6; no far-vista hero reuse",
+    "Visual QC + Continuity: judge stills before any VIDEO",
+    "Video Director: VIDEO remains HELD until Ashok approves stills-v6"
+  ],
+  "kc_v1_order_v2": "STOP unchanged"
+}

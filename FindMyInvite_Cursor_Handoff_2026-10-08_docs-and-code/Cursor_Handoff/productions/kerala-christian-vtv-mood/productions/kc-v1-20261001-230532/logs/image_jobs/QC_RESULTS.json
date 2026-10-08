@@ -1,0 +1,236 @@
+{
+  "production_id": "kc-v1-20261001-230532",
+  "job_type": "IMAGE_QC_BATCH",
+  "attempt": 1,
+  "decided_at": "2026-10-01T23:14:35.538499+05:30",
+  "summary": {
+    "PASS": 11,
+    "RETRY": 0
+  },
+  "results": [
+    {
+      "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-1.jpg",
+      "job_id": "IMG-scene-01",
+      "scene_id": "scene-01",
+      "decision": "PASS",
+      "rationale": "720\u00d71280; high oblique aerial of compound; ONE bell tower+cross; open porch vestibule with floral cross; side cloisters; courtyard reflecting pool; soft warm sun camera-left; no text/boards; people small at distance. Matches scene-01 establish. Continuity already LOCK noted.",
+      "violations": [],
+      "retry_instruction": null,
+      "attempt": 1,
+      "technical": {
+        "w": 720,
+        "h": 1280,
+        "ok": true
+      },
+      "decided_at": "2026-10-01T23:14:11.617038+05:30"
+    },
+    {
+      "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-2.jpg",
+      "job_id": "IMG-scene-02",
+      "scene_id": "scene-02",
+      "decision": "PASS",
+      "rationale": "720\u00d71280; open porch, ONE floral cross on pedestal between two candles; freestanding champagne-gold exact 'With God's Grace' / 'We Invite You'; bell tower beyond open rear; sunrise camera-left; jasmine/rose; no nameplate/people/watermark. Reconfirmed PASS.",
+      "violations": [],
+      "retry_instruction": null,
+      "attempt": 1,
+      "technical": {
+        "w": 720,
+        "h": 1280,
+        "ok": true
+      },
+      "decided_at": "2026-10-01T23:14:35.538499+05:30"
+    },
+    {
+      "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-3.jpg",
+      "job_id": "IMG-scene-03",
+      "scene_id": "scene-03",
+      "decision": "PASS",
+      "rationale": "720\u00d71280; ONE ivory invitation board with champagne-gold frame; exact 'The Wedding of' / 'Alex & Anna'; bell tower offset right (not centered tunnel); no altar/people; jasmine/rose; sunrise upper-left; storybook 3D.",
+      "violations": [],
+      "retry_instruction": null,
+      "attempt": 1,
+      "technical": {
+        "w": 720,
+        "h": 1280,
+        "ok": true
+      },
+      "decided_at": "2026-10-01T23:14:35.538499+05:30"
+    },
+    {
+      "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-4.jpg",
+      "job_id": "IMG-scene-04",
+      "scene_id": "scene-04",
+      "decision": "PASS",
+      "rationale": "720\u00d71280; single clean-shaven adult Kerala Christian groom in ivory suit with pale-pink boutonniere; floating champagne-gold 'Mr. Alex John' calligraphy (not a board); shaded side aisle with left arched-window sunrays; no outdoor tower/bride/duplicate; storybook 3D.",
+      "violations": [],
+      "retry_instruction": null,
+      "attempt": 1,
+      "technical": {
+        "w": 720,
+        "h": 1280,
+        "ok": true
+      },
+      "decided_at": "2026-10-01T23:14:35.538499+05:30"
+    },
+    {
+      "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-5.jpg",
+      "job_id": "IMG-scene-05",
+      "scene_id": "scene-05",
+      "decision": "PASS",
+      "rationale": "Attempt 2: calligraphy fixed \u2014 small 'Ms.' above single large line 'Anna Thomas'. Bride identity (veil, jasmine, gold cross, ivory lace), one bride, no board, 720\u00d71280. Hand to Continuity.",
+      "violations": [],
+      "retry_instruction": null,
+      "attempt": 2,
+      "technical": {
+        "w": 720,
+        "h": 1280,
+        "ok": true
+      },
+      "decided_at": "2026-10-01T23:18:23.134930+05:30"
+    },
+    {
+      "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-6.jpg",
+      "job_id": "IMG-scene-06",
+      "scene_id": "scene-06",
+      "decision": "PASS",
+      "rationale": "Continuity revised LOCK on attempt-2 plaque (family_lines OK). Visual QC PASS restored; prior Continuity VETO superseded.",
+      "violations": [],
+      "retry_instruction": null,
+      "attempt": 2,
+      "continuity_lock": true,
+      "technical": {
+        "w": 720,
+        "h": 1280,
+        "ok": true
+      },
+      "decided_at": "2026-10-01T23:17:04.403984+05:30"
+    },
+    {
+      "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-7.jpg",
+      "job_id": "IMG-scene-07",
+      "scene_id": "scene-07",
+      "decision": "PASS",
+      "rationale": "Attempt 2 necktie-only fix verified: groom open collar, no necktie; 1 couple + floral garlands; ceremony board exact Holy Matrimony lines; altar sanctuary; 720\u00d71280. Hand to Continuity.",
+      "violations": [],
+      "retry_instruction": null,
+      "attempt": 2,
+      "final_paid_attempt": true,
+      "focus_checks": {
+        "identity_groom_wardrobe": "PASS \u2014 no necktie",
+        "object_count_couple": "PASS \u2014 1+1",
+        "copy_ceremony_lines": "PASS \u2014 exact",
+        "architecture": "PASS \u2014 altar sanctuary",
+        "resolution": "PASS \u2014 720x1280"
+      },
+      "technical": {
+        "w": 720,
+        "h": 1280,
+        "ok": true
+      },
+      "decided_at": "2026-10-01T23:21:23.295100+05:30"
+    },
+    {
+      "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-8.jpg",
+      "job_id": "IMG-scene-08",
+      "scene_id": "scene-08",
+      "decision": "PASS",
+      "rationale": "720\u00d71280; ONE venue board on cream pedestal; exact Wedding Venue / St. Mary's Forane Church / Near Alappuzha / Kerala; bell tower off-axis left (not centered aisle); no people; jasmine/rose; soft left sunlight; storybook 3D.",
+      "violations": [],
+      "retry_instruction": null,
+      "attempt": 1,
+      "technical": {
+        "w": 720,
+        "h": 1280,
+        "ok": true
+      },
+      "decided_at": "2026-10-01T23:14:35.538499+05:30"
+    },
+    {
+      "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-9.jpg",
+      "job_id": "IMG-scene-09",
+      "scene_id": "scene-09",
+      "decision": "PASS",
+      "rationale": "720\u00d71280; evening/blue-hour lamp-lit parish hall garden; ONE reception board on champagne-gold tripod easel; exact reception_lines; jasmine/rose not marigold; no daytime sunrise primary. Reconfirmed PASS.",
+      "violations": [],
+      "retry_instruction": null,
+      "attempt": 1,
+      "technical": {
+        "w": 720,
+        "h": 1280,
+        "ok": true
+      },
+      "decided_at": "2026-10-01T23:14:35.538499+05:30"
+    },
+    {
+      "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-10.jpg",
+      "job_id": "IMG-scene-10",
+      "scene_id": "scene-10",
+      "decision": "PASS",
+      "rationale": "Attempt 2: lighting fixed \u2014 inner lamp-lit corridor with hanging lanterns (not daytime balcony). ONE hosts plaque; exact host_lines readable; 720\u00d71280. Hand to Continuity.",
+      "violations": [],
+      "retry_instruction": null,
+      "attempt": 2,
+      "technical": {
+        "w": 720,
+        "h": 1280,
+        "ok": true
+      },
+      "decided_at": "2026-10-01T23:18:23.134930+05:30"
+    },
+    {
+      "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-11.jpg",
+      "job_id": "IMG-scene-11",
+      "scene_id": "scene-11",
+      "decision": "PASS",
+      "rationale": "720\u00d71280; exactly ONE couple (clean-shaven groom ivory suit; bride low bun/veil/jasmine/gold cross/pearls/ivory gown) with matching garlands; exactly ONE SAVE THE DATE board with exact 'SAVE THE DATE / 14 & 15 FEBRUARY / 2025'; gateway arch; storybook 3D; no duplicate boards/couple.",
+      "violations": [],
+      "retry_instruction": null,
+      "attempt": 1,
+      "technical": {
+        "w": 720,
+        "h": 1280,
+        "ok": true
+      },
+      "decided_at": "2026-10-01T23:14:35.538499+05:30"
+    }
+  ],
+  "pass_candidates_for_continuity": [
+    "scene-01",
+    "scene-02",
+    "scene-03",
+    "scene-04",
+    "scene-05",
+    "scene-06",
+    "scene-08",
+    "scene-09",
+    "scene-10",
+    "scene-11"
+  ],
+  "retries_for_orchestrator": [],
+  "notes": {
+    "scene-01": "PASS taken from packets/visual_qc/scene-01.json written by parent/orchestrator; not overwritten by Visual QC worker.",
+    "scene-06": "Prior partial RETRY revised to PASS after re-read of image-6.jpg \u2014 family_lines line breaks now correct.",
+    "scene-02_scene-09": "Reconfirmed PASS."
+  },
+  "continuity_batch": {
+    "LOCK": [
+      "scene-01",
+      "scene-02",
+      "scene-03",
+      "scene-04",
+      "scene-06",
+      "scene-08",
+      "scene-09",
+      "scene-11"
+    ],
+    "VETO_OPEN": [
+      "scene-07"
+    ],
+    "NO_LOCK": [
+      "scene-05",
+      "scene-10"
+    ]
+  },
+  "updated_at": "2026-10-01T23:21:23.295100+05:30",
+  "note": "All 11 image Visual QC PASS pending Continuity LOCK on scene-07"
+}

@@ -1,0 +1,21 @@
+{
+  "job": "VID-clip-01-regen",
+  "order": "V2",
+  "clip_id": "clip-01",
+  "status": "generated",
+  "attempt": 2,
+  "final_paid_attempt": true,
+  "regen": true,
+  "self_approved": false,
+  "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1.mp4",
+  "archive_attempt1": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1.order-v2-attempt1-retry.mp4",
+  "locked_last_frame": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1-handoff.jpg",
+  "locked_last_frame_sha256": "dc477c78c015a1fb7fabbd6c5519fab51d430e65d93f777866274cc5c1fcde61",
+  "pending_handoff_extract": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1-handoff.order-v2.attempt2.pending.jpg",
+  "first_frame": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-1.jpg",
+  "generation_id": "f7c8f330-b3a9-94c8-9af2-bc6c1eebf155",
+  "sha256": "d26ba28d85f2311a7ea8067dc26d6f13a3e579e3a5836e36ebf80d1293d0d325",
+  "model": "grok-imagine-video-1.5",
+  "retry_instruction_applied": "Keep first=image-1.jpg and last=LOCKED clip-1-handoff.jpg (do not regen handoff). Regenerate ONLY connection motion: true continuous dive from elevated drone pavilion/church world into open porch columns, then slow push revealing fixed blessing text at the end \u2014 NO early text, NO morph/crossfade soup, NO dual-arch swap. Preserve ONE tower and separate pavilion\u2192church geography throughout.",
+  "updated_at": "2026-10-02T00:21:05.894495+05:30"
+}

@@ -1,0 +1,38 @@
+{
+  "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-11.jpg",
+  "job_id": "IMG-scene-11",
+  "scene_id": "scene-11",
+  "continuity_decision": "LOCK",
+  "qc_gate": "PASS",
+  "attempt": 1,
+  "decided_at": "2026-10-01T23:16:11.156952+05:30",
+  "checks": [
+    {
+      "rule": "object_count_couple",
+      "expected": "exactly 1 groom + 1 bride",
+      "observed": "1+1",
+      "ok": true
+    },
+    {
+      "rule": "object_count_save_the_date_board",
+      "expected": 1,
+      "observed": 1,
+      "ok": true
+    },
+    {
+      "rule": "copy_save_date_lines",
+      "expected": "SAVE THE DATE / 14 & 15 FEBRUARY / 2025",
+      "observed": "exact",
+      "ok": true
+    },
+    {
+      "rule": "hard_veto_duplicate_boards",
+      "expected": "never 2 date boards",
+      "observed": "1 board",
+      "ok": true
+    }
+  ],
+  "violations": [],
+  "note": "LOCK after QC PASS — single couple + single SAVE THE DATE board. Reaffirmed LOCK to Orchestrator.",
+  "reaffirmed_at": "2026-10-01T23:16:43.044451+05:30"
+}

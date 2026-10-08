@@ -1,0 +1,29 @@
+ONE single camera move, 3 seconds, portrait 9:16, Pixar-style 3D animated look. Start exactly on the supplied image and stay in this same scene: the grand brass-studded wooden door of a traditional Tamil engagement home, framed by garlands, with the gold Tamil venue text above it. No cut, no transition.
+
+CAMERA MOVES STRAIGHT FORWARD ONLY, along its own axis toward the door and venue text. The entire scene is frozen; only the camera moves and the focus shifts.
+
+NO PEOPLE APPEAR at any moment: no figures, hands or silhouettes.
+
+CAMERA (motion-control dolly, speed-ramp PUSH-IN): a pure straight dolly-in directly toward the door and the venue text along the camera's viewing axis. NO rotation, NO tilt, NO orbit, NO pan, NO roll, NO arc, NO sideways drift. The camera angle stays fixed and level throughout; it never pulls back and never reverses.
+0.0-1.0s: FAST from the very first frame, a quick push-in toward the venue text, the frame tightening.
+1.0-3.0s: a dramatic speed-ramp deceleration into slow motion: the push-in glides ever more slowly and floats to a gentle stop with the venue text centred and larger in frame. Machine-precise, no shake.
+
+RIGID SCENE: the studded wooden door, the carved wooden frame and ceiling, the venue text, the garlands, the pillars and every object stay perfectly rigid and fixed in place. Nothing turns, tilts, bends, warps or rotates; the door and wall stay flat and frontal. Parallax comes only from depth as the camera moves forward; the foreground garlands at the frame edges slide outward past the lens.
+
+TOTAL STILLNESS: the scene is a frozen moment in time with ZERO movement anywhere. Every marigold and every pink and red rose petal floating in the air is completely frozen mid-air: no falling, no drifting, no fluttering. The rose and jasmine garlands, the banana leaves and the hanging brass lamps do not sway. The lamp flames are frozen with no flicker. The golden sunbeams and haze stay fixed. Petals on the floor stay still. The only changes are the camera moving forward and the focus shift.
+
+FOCUS SHIFT: the clip begins focused on the near foreground rose and marigold garlands at the frame edges, crisp, with the door and venue text soft. As the camera slows, the focus racks onto the venue text, ending razor-sharp on it with the foreground garlands melting into creamy smudged bokeh.
+
+TEXT LOCK: all Tamil text stays exact, sharp, flat and unchanged in every frame, exactly as in the start image:
+இடம்
+அன்னை மணிமேகலை
+திருமண மண்டபம்
+செங்கம்
+Same letters, same shapes, same spacing, same gold colour, same ornamental flourishes. No morphing, flicker, warping, re-lettering or added text anywhere.
+NO DUPLICATION: the word இடம் appears exactly ONCE, only at the top of the text block where it already is in the start image. It is never repeated, cloned, mirrored, echoed or added anywhere else. No new text appears anywhere: the text is exactly these 4 lines and nothing more, in every frame.
+
+EVERYTHING ELSE STILL: the hanging brass lamps, the brass standing lamps, the thavil drum, the nadaswaram, the brass pots, the banana leaves, the kolam on the polished floor and the carved ceiling stay rigid and motionless.
+
+LOOK: preserve the start image exactly: warm golden sunlight streaming from the top left, dark wood, gold, rose pink, red, marigold and green palette, Leica Noctilux 75mm f/1.25 razor-thin depth of field, dreamy smooth falloff. No new objects.
+
+CAMERA MOVES STRAIGHT FORWARD ONLY, no rotation, no tilt, no orbit, no pan, never pulling back. Everything stays frozen and rigid; only the camera moves and the focus racks to the text. இடம் appears exactly once.

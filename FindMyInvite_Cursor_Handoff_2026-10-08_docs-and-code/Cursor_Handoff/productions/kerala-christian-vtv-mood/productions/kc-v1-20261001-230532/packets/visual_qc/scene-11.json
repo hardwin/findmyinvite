@@ -1,0 +1,16 @@
+{
+  "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-11.jpg",
+  "job_id": "IMG-scene-11",
+  "scene_id": "scene-11",
+  "decision": "PASS",
+  "rationale": "720\u00d71280; exactly ONE couple (clean-shaven groom ivory suit; bride low bun/veil/jasmine/gold cross/pearls/ivory gown) with matching garlands; exactly ONE SAVE THE DATE board with exact 'SAVE THE DATE / 14 & 15 FEBRUARY / 2025'; gateway arch; storybook 3D; no duplicate boards/couple.",
+  "violations": [],
+  "retry_instruction": null,
+  "attempt": 1,
+  "technical": {
+    "w": 720,
+    "h": 1280,
+    "ok": true
+  },
+  "decided_at": "2026-10-01T23:14:35.538499+05:30"
+}

@@ -1,0 +1,218 @@
+{
+  "clip-01": {
+    "template_video_prompt_sha256": "570002d8ba204610a0953e39f566811f70d49ad2208cae809ecbf9eeb93a4053",
+    "template_len": 4092,
+    "submitted_prompt": "A single continuous physically motivated cinematic camera move in the same dimensional illustrated Kerala Catholic church compound near Alappuzha. Use the supplied first and final images as visual anchors. Solid fixed architecture with real translation, occlusion, perspective and foreground parallax. Preserve identity, lighting, materials and exact final lettering. A short energetic travel burst with directional edge blur must ease decisively into a slower continuously moving arrival; never distribute the travel uniformly over the duration. In the slower passage, soft candle highlights and floor reflections shift with camera angle. Each visible petal is a single loose curled petal, generally under 3 percent of frame width; no whole flowers, discs or objects covering faces and words. Preserve clear readability. No cuts, crossfades, room dissolves, object swaps, frozen holds, uniform sideways slides or full orbits. Glowing lettering is solid beveled metal with light on its surface: no liquid gold, dripping strokes, ceiling-to-floor beams, explosive firework bursts or smoke emitted by text. A warm floor reflection is reflected light, not a physical stream connecting the title to the floor. Existing soft candle wisps, where visible, come only from a floor-level candle stand and stay separate from lettering.\n\nEXACT SHOT CHOREOGRAPHY: HIGH AERIAL HOOK, FAST FORWARD-DOWN DIVE, THEN A CONTINUING BLESSING PUSH. 0.00-0.65s: gently advance from the high distant full-compound opening. The tiny existing church porch vestibule below the cream-white bell tower is the destination. 0.65-1.85s: accelerate hard FORWARD AND DOWN along that axis. The compound, reflecting courtyard pool and cream paving expand with strong parallax; skim over the pool toward the small porch. Keep the bell tower behind the destination, moving toward the upper edge. The camera never heads into the tower and no replacement church appears. 1.85-2.20s: descend below the existing porch roof and pass between its front corner columns above the three steps. The beam passes overhead and the columns whip past the edges in brief directional blur. These are open arched bays, not a dark doorway in a closed sanctuary. The roof initially occludes the floral cross; the first resolved view reveals the SAME floral cross and candle stands as the supplied final image. From the moment the rear side is visible it is already open to the exterior bell tower. No back wall appears or disappears. 2.20-2.70s: level out and smoothly brake without stopping. Reveal the large champagne-gold blessing lettering in the open air above the floral cross as the camera clears the front beam, its metal catching the changing light. The text reads 'This is the LORD's Doing,' above 'It is Marvelous In Our Eyes. Psalms 118:23'; it belongs to a fixed position in the porch rather than following the screen. 2.70-5.00s: CONTINUE A VISIBLE SLOW FORWARD PUSH into the final image, approximately another 10 percent increase in floral cross scale, with column-edge parallax, shifting reflections and rich falling soft petals. End still moving gently forward, ready to turn left immediately in the next clip. Do not stop on a static tableau. Keep a single stationary floral cross throughout and a persistent open view behind it. The title remains large, stable and legible. Preserve its silhouette and garlands, with no object replacement or material morph. Exterior floral swags and column wraps remain attached to their original surfaces as they pass out of view; never dissolve the decorations. NO EXTRA PILLAR: never show an extra pillar at any moment; only the existing corner columns pass the edges. Whenever the church is visible it has exactly one white bell tower with one cross on top; never a second tower.",
+    "submitted_sha256": "38a2b00f1a737e31ed138ea01575ef8e78736b33449bd56cd89d3e02cfc1f642",
+    "submitted_len": 3776,
+    "edits": [
+      {
+        "op": "delete",
+        "text": " and individual petals rotate independently",
+        "why": "length (<3900); same deletion as Theresa clip-01 attempt-4 trim"
+      },
+      {
+        "op": "delete",
+        "text": "Release a denser shower of small white jasmine and soft pink rose petals during deceleration, with near, middle and far depth layers. ",
+        "why": "length; same as attempt-4 trim"
+      },
+      {
+        "op": "delete",
+        "text": ", with restrained traveling edge glints and no smoke, droplets or sweeping light beam",
+        "why": "length; same as attempt-4 trim"
+      },
+      {
+        "op": "delete",
+        "text": "The small distant floral cross is shaded beneath the existing roof; as the camera descends, soft sunlight reveals the same floral cross and cream plaster. ",
+        "why": "length; redundant with 'The roof initially occludes the floral cross'"
+      },
+      {
+        "op": "replace",
+        "from": "never show an extra pillar or plinth at any moment",
+        "to": "never show an extra pillar at any moment",
+        "why": "plinth is not in start/end frames (do not name absent objects)"
+      },
+      {
+        "op": "append",
+        "text": "Whenever the church is visible it has exactly one white bell tower with one cross on top; never a second tower.",
+        "why": "exactly one bell tower rule"
+      }
+    ]
+  },
+  "clip-02": {
+    "template_video_prompt_sha256": "69cbb3fc1b61880f274f6370e3806af97ce04680b9e7837865a5e0ea5db2192f",
+    "template_len": 3156,
+    "submitted_prompt": "Portrait cinematic storybook wedding film, same animated characters and cream-white church plaster with laterite accents. Preserve supplied first-frame content until it is physically hidden by a foreground column or arch pier; uncover the separately staged final scene. Soft diagonal volumetric sunbeams and cool powder-blue shade, bright champagne-gold title bevels with fine glints. PETALS AND LIGHT: continuous distributed slow-motion drift is present from the first frame, not triggered as a burst when the camera stops. Keep about 12-20 separate visible petals at irregular heights and depths — soft white jasmine, pale pink rose and cream petals. Petals flutter with independent phase, soft air resistance and a little side-to-side wobble; nearby petals drift roughly one tenth of picture height per second in the settled view, distant ones slower. Camera rotation produces the brief directional streaks; after braking the SAME scattered petals become calmly visible, with no sudden emission, rain sheet, confetti explosion or synchronized falling. Bouquets and garlands never detach. Fine dust motes drift inside soft diagonal volumetric sunrays through arched windows. Champagne-gold edges, pearl and jewelry catch moving specular glints; text itself emits no smoke, gold liquid or floor beam.\n\nPRIMARY ACTION: A FULL 90-DEGREE LEFT WHIP-PAN / CAMERA PIVOT INTO THE INVITATION SIDE COURTYARD. This is a quarter-turn in camera HEADING, not a forward dolly followed by a tiny steering correction. The optical axis rotates through roughly 90 degrees; architecture sweeps laterally across the entire frame. Keep forward camera travel below half a meter during the main turn. A very close cream plaster pillar sweeps across the lens with strong directional motion blur and depth parallax. The next subject starts OFFSCREEN AT THE SIDE and is discovered around the corner, never far ahead down the current central aisle.\n\nTIMING: 0.00-0.20s anticipate; 0.20-1.20s turn; 1.20-1.60s brake; 1.60-4.00s settle. Fast angular travel during the middle of the whip, strong cubic ease-out in the final 25 degrees; stop the rotation cleanly at the new viewing direction. Reveal the destination already at readable medium distance by 1.85 seconds, with no prolonged approach. After braking: a tiny counterclockwise arc at constant subject distance. Do not substitute a push-in or zoom for the pivot. Keep live subtle motion rather than a frozen end frame.\n\nThe same floral cross stays intact and stationary until it leaves screen right behind a near pillar. The rear of the open porch stays open. Reveal a separate family invitation board, never transform the floral cross into the sign.\n\nThe final subject, physical sign and all exact lettering match the supplied last image. This connection is an empty, unpeopled decorated porch from first frame to last frame; only architecture, flowers, candles, petals and the family board are visible. The background holds exactly one white bell tower with one cross on top, in the same single position as the supplied last image, throughout the move. Fixed scenery remains rigid. No crossfade, text morph or duplicate board.",
+    "submitted_sha256": "69cbb3fc1b61880f274f6370e3806af97ce04680b9e7837865a5e0ea5db2192f",
+    "submitted_len": 3156,
+    "edits": []
+  },
+  "clip-03": {
+    "template_video_prompt_sha256": "f80fa8bba2e647440534de3fcc8c45220187e75e683373e6604e63f949e85d6e",
+    "template_len": 2855,
+    "submitted_prompt": "Portrait cinematic storybook wedding film, same animated characters and cream-white church plaster with laterite accents. Preserve supplied first-frame content until it is physically hidden by a foreground column or arch pier; uncover the separately staged final scene. Soft diagonal volumetric sunbeams and cool powder-blue shade, bright champagne-gold title bevels with fine glints. PETALS AND LIGHT: continuous distributed slow-motion drift is present from the first frame, not triggered as a burst when the camera stops. Keep about 12-20 separate visible petals at irregular heights and depths — soft white jasmine, pale pink rose and cream petals. Petals flutter with independent phase, soft air resistance and a little side-to-side wobble; nearby petals drift roughly one tenth of picture height per second in the settled view, distant ones slower. Camera rotation produces the brief directional streaks; after braking the SAME scattered petals become calmly visible, with no sudden emission, rain sheet, confetti explosion or synchronized falling. Bouquets and garlands never detach. Fine dust motes drift inside soft diagonal volumetric sunrays through arched windows. Champagne-gold edges, pearl and jewelry catch moving specular glints; text itself emits no smoke, gold liquid or floor beam.\n\nPRIMARY ACTION: A FULL 90-DEGREE RIGHT WHIP-PAN / CAMERA PIVOT INTO THE SHADED GROOM SIDE AISLE. This is a quarter-turn in camera HEADING, not a forward dolly followed by a tiny steering correction. The optical axis rotates through roughly 90 degrees; architecture sweeps laterally across the entire frame. Keep forward camera travel below half a meter during the main turn. A very close cream plaster pillar sweeps across the lens with strong directional motion blur and depth parallax. The next subject starts OFFSCREEN AT THE SIDE and is discovered around the corner, never far ahead down the current central aisle.\n\nTIMING: 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Fast angular travel during the middle of the whip, strong cubic ease-out in the final 25 degrees; stop the rotation cleanly at the new viewing direction. Reveal the destination already at readable medium distance by 1.85 seconds, with no prolonged approach. After braking: a small upward tilt, then a quiet lateral drift. Do not substitute a push-in or zoom for the pivot. Keep live subtle motion rather than a frozen end frame.\n\nInvitation board exits screen left behind a close pillar. Reveal the already-standing groom and luminous name in the side aisle. The title catches fine bright glints on its strokes; no gold liquid or smoke.\n\nThe final subject, people, physical sign and all exact lettering match the supplied last image. Fixed scenery remains rigid. No crossfade, text morph, duplicate board or foreground/background copies of people. Whenever the church is visible it has exactly one white bell tower with one cross on top; never a second tower.",
+    "submitted_sha256": "22b8762ba13dd48d082e90ab37358d4f4d2c401cfdc5fac5e84c62977ec19038",
+    "submitted_len": 2967,
+    "edits": [
+      {
+        "op": "append",
+        "text": "Whenever the church is visible it has exactly one white bell tower with one cross on top; never a second tower.",
+        "why": "exactly one bell tower rule"
+      }
+    ]
+  },
+  "clip-04": {
+    "template_video_prompt_sha256": "8c4aa7135d6e2c3a61181beea2b34631985f49a48e3eb1b0c3b42b67831ad33f",
+    "template_len": 2865,
+    "submitted_prompt": "Portrait cinematic storybook wedding film, same animated characters and cream-white church plaster with laterite accents. Preserve supplied first-frame content until it is physically hidden by a foreground column or arch pier; uncover the separately staged final scene. Soft diagonal volumetric sunbeams and cool powder-blue shade, bright champagne-gold title bevels with fine glints. PETALS AND LIGHT: continuous distributed slow-motion drift is present from the first frame, not triggered as a burst when the camera stops. Keep about 12-20 separate visible petals at irregular heights and depths — soft white jasmine, pale pink rose and cream petals. Petals flutter with independent phase, soft air resistance and a little side-to-side wobble; nearby petals drift roughly one tenth of picture height per second in the settled view, distant ones slower. Camera rotation produces the brief directional streaks; after braking the SAME scattered petals become calmly visible, with no sudden emission, rain sheet, confetti explosion or synchronized falling. Bouquets and garlands never detach. Fine dust motes drift inside soft diagonal volumetric sunrays through arched windows. Champagne-gold edges, pearl and jewelry catch moving specular glints; text itself emits no smoke, gold liquid or floor beam.\n\nPRIMARY ACTION: A FULL 90-DEGREE LEFT WHIP-PAN / CAMERA PIVOT INTO THE BRIDE TRANSVERSE ARCHED PASSAGE. This is a quarter-turn in camera HEADING, not a forward dolly followed by a tiny steering correction. The optical axis rotates through roughly 90 degrees; architecture sweeps laterally across the entire frame. Keep forward camera travel below half a meter during the main turn. A very close cream plaster pillar sweeps across the lens with strong directional motion blur and depth parallax. The next subject starts OFFSCREEN AT THE SIDE and is discovered around the corner, never far ahead down the current central aisle.\n\nTIMING: 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Fast angular travel during the middle of the whip, strong cubic ease-out in the final 25 degrees; stop the rotation cleanly at the new viewing direction. Reveal the destination already at readable medium distance by 1.85 seconds, with no prolonged approach. After braking: a tiny downward tilt to settle at the bride's eye level. Do not substitute a push-in or zoom for the pivot. Keep live subtle motion rather than a frozen end frame.\n\nGroom and his entire name disappear behind the near column BEFORE the bride and her name are revealed; never overlap old and new titles. Fine golden glints run along the bride title as the turn brakes.\n\nThe final subject, people, physical sign and all exact lettering match the supplied last image. Fixed scenery remains rigid. No crossfade, text morph, duplicate board or foreground/background copies of people. Whenever the church is visible it has exactly one white bell tower with one cross on top; never a second tower.",
+    "submitted_sha256": "f69546713eaac0377d600217989e250285bbe0954b33f3579e53f0dfbedabc68",
+    "submitted_len": 2977,
+    "edits": [
+      {
+        "op": "append",
+        "text": "Whenever the church is visible it has exactly one white bell tower with one cross on top; never a second tower.",
+        "why": "exactly one bell tower rule"
+      }
+    ]
+  },
+  "clip-05": {
+    "template_video_prompt_sha256": "218a4bb9226738d27b9e1d7a979ecc0777079b6a1c99f8b46e54936512fe0ed9",
+    "template_len": 3054,
+    "submitted_prompt": "Portrait cinematic storybook wedding film, same animated characters and cream-white church plaster with laterite accents. Preserve supplied first-frame content until it is physically hidden by a foreground column or arch pier; uncover the separately staged final scene. Soft diagonal volumetric sunbeams and cool powder-blue shade, bright champagne-gold title bevels with fine glints. PETALS AND LIGHT: continuous distributed slow-motion drift is present from the first frame, not triggered as a burst when the camera stops. Keep about 12-20 separate visible petals at irregular heights and depths — soft white jasmine, pale pink rose and cream petals. Petals flutter with independent phase, soft air resistance and a little side-to-side wobble; nearby petals drift roughly one tenth of picture height per second in the settled view, distant ones slower. Camera rotation produces the brief directional streaks; after braking the SAME scattered petals become calmly visible, with no sudden emission, rain sheet, confetti explosion or synchronized falling. Bouquets and garlands never detach. Fine dust motes drift inside soft diagonal volumetric sunrays through arched windows. Champagne-gold edges, pearl and jewelry catch moving specular glints; text itself emits no smoke, gold liquid or floor beam.\n\nPRIMARY ACTION: A FULL 90-DEGREE RIGHT WHIP-PAN / CAMERA PIVOT INTO THE FAMILY PLAQUE ON THE PERPENDICULAR WEST CLOISTER ARCADE. This is a quarter-turn in camera HEADING, not a forward dolly followed by a tiny steering correction. The optical axis rotates through roughly 90 degrees; architecture sweeps laterally across the entire frame. Keep forward camera travel below half a meter during the main turn. A very close cream plaster pillar sweeps across the lens with strong directional motion blur and depth parallax. The next subject starts OFFSCREEN AT THE SIDE and is discovered around the corner, never far ahead down the current central aisle.\n\nTIMING: 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Fast angular travel during the middle of the whip, strong cubic ease-out in the final 25 degrees; stop the rotation cleanly at the new viewing direction. Reveal the destination already at readable medium distance by 1.85 seconds, with no prolonged approach. After braking: a slow eight-degree ORBIT across the plaque's bevel at CONSTANT distance, not a push-in. Do not substitute a push-in or zoom for the pivot. Keep live subtle motion rather than a frozen end frame.\n\nPivot RIGHT through a full quarter-turn about a nearby pillar. The plaque is positioned beside the camera's original direction, never straight ahead. The bride exits left. The grounded flower bouquet is already at the plaque base when first revealed and never moves. Finish low and three-quarter, with changed frame-edge reflections.\n\nThe final subject, physical sign and all exact lettering match the supplied last image. The final view has no people. Fixed scenery remains rigid. No crossfade, text morph, duplicate board. Whenever the church is visible it has exactly one white bell tower with one cross on top; never a second tower.",
+    "submitted_sha256": "297bd77b48a619bb58932202fa8a979561c8144715e179577db8980821ac316b",
+    "submitted_len": 3146,
+    "edits": [
+      {
+        "op": "replace",
+        "from": "The final subject, people, physical sign and all exact lettering match the supplied last image.",
+        "to": "The final subject, physical sign and all exact lettering match the supplied last image. The final view has no people.",
+        "why": "end frame has no people; say so explicitly"
+      },
+      {
+        "op": "replace",
+        "from": " or foreground/background copies of people.",
+        "to": ".",
+        "why": "end frame unpeopled"
+      },
+      {
+        "op": "append",
+        "text": "Whenever the church is visible it has exactly one white bell tower with one cross on top; never a second tower.",
+        "why": "exactly one bell tower rule"
+      }
+    ]
+  },
+  "clip-06": {
+    "template_video_prompt_sha256": "a0d8b993ae7c0b912c9189c43ccc6b838e417334007314e937bcf2b0d2b20626",
+    "template_len": 3027,
+    "submitted_prompt": "Portrait cinematic storybook wedding film, same animated characters and cream-white church plaster with laterite accents. Preserve supplied first-frame content until it is physically hidden by a foreground column or arch pier; uncover the separately staged final scene. Soft diagonal volumetric sunbeams and cool powder-blue shade, bright champagne-gold title bevels with fine glints. PETALS AND LIGHT: continuous distributed slow-motion drift is present from the first frame, not triggered as a burst when the camera stops. Keep about 12-20 separate visible petals at irregular heights and depths — soft white jasmine, pale pink rose and cream petals. Petals flutter with independent phase, soft air resistance and a little side-to-side wobble; nearby petals drift roughly one tenth of picture height per second in the settled view, distant ones slower. Camera rotation produces the brief directional streaks; after braking the SAME scattered petals become calmly visible, with no sudden emission, rain sheet, confetti explosion or synchronized falling. Bouquets and garlands never detach. Fine dust motes drift inside soft diagonal volumetric sunrays through arched windows. Champagne-gold edges, pearl and jewelry catch moving specular glints; text itself emits no smoke, gold liquid or floor beam.\n\nPRIMARY ACTION: A FULL 90-DEGREE LEFT WHIP-PAN / CAMERA PIVOT INTO THE HOLY MATRIMONY AISLE AND ALTAR HIDDEN ROUND THE CORNER. This is a quarter-turn in camera HEADING, not a forward dolly followed by a tiny steering correction. The optical axis rotates through roughly 90 degrees; architecture sweeps laterally across the entire frame. Keep forward camera travel below half a meter during the main turn. A very close cream plaster pillar sweeps across the lens with strong directional motion blur and depth parallax. The next subject starts OFFSCREEN AT THE SIDE and is discovered around the corner, never far ahead down the current central aisle.\n\nTIMING: 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Fast angular travel during the middle of the whip, strong cubic ease-out in the final 25 degrees; stop the rotation cleanly at the new viewing direction. Reveal the destination already at readable medium distance by 1.85 seconds, with no prolonged approach. After braking: a slow slight crane DOWN toward seated eye height, with almost no forward translation. Do not substitute a push-in or zoom for the pivot. Keep live subtle motion rather than a frozen end frame.\n\nThe family plaque sweeps screen right and exits. Rotate LEFT about 90 degrees around the pillar to reveal the SIDE sanctuary holding the seated couple. Do not travel forward along an aisle. The ceremony sign is a physically separate sign already in place. Groom's hand makes only a tiny tender blessing motion.\n\nThe final subject, people, physical sign and all exact lettering match the supplied last image. Fixed scenery remains rigid. No crossfade, text morph, duplicate board or foreground/background copies of people.",
+    "submitted_sha256": "a0d8b993ae7c0b912c9189c43ccc6b838e417334007314e937bcf2b0d2b20626",
+    "submitted_len": 3027,
+    "edits": []
+  },
+  "clip-07": {
+    "template_video_prompt_sha256": "08e1891b31a4a174d90cdde501886e785ca4b04cd01ee700991bd49a321d84c2",
+    "template_len": 2963,
+    "submitted_prompt": "Portrait cinematic storybook wedding film, same animated characters and cream-white church plaster with laterite accents. Preserve supplied first-frame content until it is physically hidden by a foreground column or arch pier; uncover the separately staged final scene. Soft diagonal volumetric sunbeams and cool powder-blue shade, bright champagne-gold title bevels with fine glints. PETALS AND LIGHT: continuous distributed slow-motion drift is present from the first frame, not triggered as a burst when the camera stops. Keep about 12-20 separate visible petals at irregular heights and depths — soft white jasmine, pale pink rose and cream petals. Petals flutter with independent phase, soft air resistance and a little side-to-side wobble; nearby petals drift roughly one tenth of picture height per second in the settled view, distant ones slower. Camera rotation produces the brief directional streaks; after braking the SAME scattered petals become calmly visible, with no sudden emission, rain sheet, confetti explosion or synchronized falling. Bouquets and garlands never detach. Fine dust motes drift inside soft diagonal volumetric sunrays through arched windows. Champagne-gold edges, pearl and jewelry catch moving specular glints; text itself emits no smoke, gold liquid or floor beam.\n\nPRIMARY ACTION: A FULL 90-DEGREE RIGHT WHIP-PAN / CAMERA PIVOT INTO THE NORTH COURTYARD VENUE VIEW. This is a quarter-turn in camera HEADING, not a forward dolly followed by a tiny steering correction. The optical axis rotates through roughly 90 degrees; architecture sweeps laterally across the entire frame. Keep forward camera travel below half a meter during the main turn. A very close cream plaster pillar sweeps across the lens with strong directional motion blur and depth parallax. The next subject starts OFFSCREEN AT THE SIDE and is discovered around the corner, never far ahead down the current central aisle.\n\nTIMING: 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Fast angular travel during the middle of the whip, strong cubic ease-out in the final 25 degrees; stop the rotation cleanly at the new viewing direction. Reveal the destination already at readable medium distance by 1.85 seconds, with no prolonged approach. After braking: a small upward crane to standing eye height while yaw eases to a stop. Do not substitute a push-in or zoom for the pivot. Keep live subtle motion rather than a frozen end frame.\n\nThe seated ceremony and its board sweep screen left. Pivot RIGHT 90 degrees about the corner column; the venue board is in the perpendicular courtyard, not further ahead. The bell tower stays off-axis to the left in the new view. No forward flight through the ceremony or a doorway tunnel.\n\nThe final subject, physical sign and all exact lettering match the supplied last image. The final view has no people. Fixed scenery remains rigid. No crossfade, text morph, duplicate board. Whenever the church is visible it has exactly one white bell tower with one cross on top; never a second tower.",
+    "submitted_sha256": "421707dabed9e133627306a96f66631307768ffc6d10bca0ed348f748d9b5114",
+    "submitted_len": 3055,
+    "edits": [
+      {
+        "op": "replace",
+        "from": "The final subject, people, physical sign and all exact lettering match the supplied last image.",
+        "to": "The final subject, physical sign and all exact lettering match the supplied last image. The final view has no people.",
+        "why": "end frame has no people; say so explicitly"
+      },
+      {
+        "op": "replace",
+        "from": " or foreground/background copies of people.",
+        "to": ".",
+        "why": "end frame unpeopled"
+      },
+      {
+        "op": "append",
+        "text": "Whenever the church is visible it has exactly one white bell tower with one cross on top; never a second tower.",
+        "why": "exactly one bell tower rule"
+      }
+    ]
+  },
+  "clip-08": {
+    "template_video_prompt_sha256": "f918e2ffda2a597f9d1813a6962e5c4caaddffe6dcd100c15df3129338ab7ea3",
+    "template_len": 2978,
+    "submitted_prompt": "Portrait cinematic storybook wedding film, same animated characters and cream-white church plaster with laterite accents. Preserve supplied first-frame content until it is physically hidden by a foreground column or arch pier; uncover the separately staged final scene. Soft diagonal volumetric sunbeams and cool powder-blue shade, bright champagne-gold title bevels with fine glints. PETALS AND LIGHT: continuous distributed slow-motion drift is present from the first frame, not triggered as a burst when the camera stops. Keep about 12-20 separate visible petals at irregular heights and depths — soft white jasmine, pale pink rose and cream petals. Petals flutter with independent phase, soft air resistance and a little side-to-side wobble; nearby petals drift roughly one tenth of picture height per second in the settled view, distant ones slower. Camera rotation produces the brief directional streaks; after braking the SAME scattered petals become calmly visible, with no sudden emission, rain sheet, confetti explosion or synchronized falling. Bouquets and garlands never detach. Fine dust motes drift inside soft diagonal volumetric sunrays through arched windows. Champagne-gold edges, pearl and jewelry catch moving specular glints; text itself emits no smoke, gold liquid or floor beam.\n\nPRIMARY ACTION: A FULL 90-DEGREE RIGHT WHIP-PAN / CAMERA PIVOT INTO THE BLUE-HOUR PARISH HALL GARDEN RECEPTION AT THE SIDE. This is a quarter-turn in camera HEADING, not a forward dolly followed by a tiny steering correction. The optical axis rotates through roughly 90 degrees; architecture sweeps laterally across the entire frame. Keep forward camera travel below half a meter during the main turn. A very close cream plaster pillar sweeps across the lens with strong directional motion blur and depth parallax. The next subject starts OFFSCREEN AT THE SIDE and is discovered around the corner, never far ahead down the current central aisle.\n\nTIMING: 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Fast angular travel during the middle of the whip, strong cubic ease-out in the final 25 degrees; stop the rotation cleanly at the new viewing direction. Reveal the destination already at readable medium distance by 1.85 seconds, with no prolonged approach. After braking: a very slow leftward correcting arc at fixed distance. Do not substitute a push-in or zoom for the pivot. Keep live subtle motion rather than a frozen end frame.\n\nRotate RIGHT through the side opening, almost on the spot, to face a completely different wall of the courtyard. A near pillar and cream drape briefly fill the view and conceal the change to evening. No long forward approach to a distant easel. The reception easel is already near when uncovered.\n\nThe final subject, people, physical sign and all exact lettering match the supplied last image. Fixed scenery remains rigid. No crossfade, text morph, duplicate board or foreground/background copies of people. Whenever the church is visible it has exactly one white bell tower with one cross on top; never a second tower.",
+    "submitted_sha256": "c43e21431e9a7a71fa3e9acfed631a21ccfc4d64386a5bf5476914934ca1d175",
+    "submitted_len": 3090,
+    "edits": [
+      {
+        "op": "append",
+        "text": "Whenever the church is visible it has exactly one white bell tower with one cross on top; never a second tower.",
+        "why": "exactly one bell tower rule"
+      }
+    ]
+  },
+  "clip-09": {
+    "template_video_prompt_sha256": "f4d5c076e34e5fb80f0e2de8acfe8b46517710816b6f1d6c3436f7abbcde7170",
+    "template_len": 3045,
+    "submitted_prompt": "Portrait cinematic storybook wedding film, same animated characters and cream-white church plaster with laterite accents. Preserve supplied first-frame content until it is physically hidden by a foreground column or arch pier; uncover the separately staged final scene. Soft diagonal volumetric sunbeams and cool powder-blue shade, bright champagne-gold title bevels with fine glints. PETALS AND LIGHT: continuous distributed slow-motion drift is present from the first frame, not triggered as a burst when the camera stops. Keep about 12-20 separate visible petals at irregular heights and depths — soft white jasmine, pale pink rose and cream petals. Petals flutter with independent phase, soft air resistance and a little side-to-side wobble; nearby petals drift roughly one tenth of picture height per second in the settled view, distant ones slower. Camera rotation produces the brief directional streaks; after braking the SAME scattered petals become calmly visible, with no sudden emission, rain sheet, confetti explosion or synchronized falling. Bouquets and garlands never detach. Fine dust motes drift inside soft diagonal volumetric sunrays through arched windows. Champagne-gold edges, pearl and jewelry catch moving specular glints; text itself emits no smoke, gold liquid or floor beam.\n\nPRIMARY ACTION: A FULL 90-DEGREE LEFT WHIP-PAN / CAMERA PIVOT INTO THE INNER HOSTS' LAMP-LIT SIDE CHAPEL CORRIDOR AT A RIGHT ANGLE. This is a quarter-turn in camera HEADING, not a forward dolly followed by a tiny steering correction. The optical axis rotates through roughly 90 degrees; architecture sweeps laterally across the entire frame. Keep forward camera travel below half a meter during the main turn. A very close cream plaster pillar sweeps across the lens with strong directional motion blur and depth parallax. The next subject starts OFFSCREEN AT THE SIDE and is discovered around the corner, never far ahead down the current central aisle.\n\nTIMING: 0.00-0.30s anticipate; 0.30-1.35s turn; 1.35-1.85s brake; 1.85-5.00s settle. Fast angular travel during the middle of the whip, strong cubic ease-out in the final 25 degrees; stop the rotation cleanly at the new viewing direction. Reveal the destination already at readable medium distance by 1.85 seconds, with no prolonged approach. After braking: a gentle lateral drift over 20 centimetres at constant distance from the plaque. Do not substitute a push-in or zoom for the pivot. Keep live subtle motion rather than a frozen end frame.\n\nRotate LEFT 90 degrees around a close carved pillar, leaving the reception easel behind screen right. Reveal the host plaque across a SIDE doorway at right angles, already at reading distance. Do not continue flying down a straight aisle or pushing forward toward the plaque. Warm shafts and lamp glints move over the gold frame.\n\nThe final subject, physical sign and all exact lettering match the supplied last image. The final view has no people. Fixed scenery remains rigid. No crossfade, text morph, duplicate board. Whenever the church is visible it has exactly one white bell tower with one cross on top; never a second tower.",
+    "submitted_sha256": "d472d92be81183edb010755e352b73126d068d20aec9bb2f06bc519e92ba2f38",
+    "submitted_len": 3137,
+    "edits": [
+      {
+        "op": "replace",
+        "from": "The final subject, people, physical sign and all exact lettering match the supplied last image.",
+        "to": "The final subject, physical sign and all exact lettering match the supplied last image. The final view has no people.",
+        "why": "end frame has no people; say so explicitly"
+      },
+      {
+        "op": "replace",
+        "from": " or foreground/background copies of people.",
+        "to": ".",
+        "why": "end frame unpeopled"
+      },
+      {
+        "op": "append",
+        "text": "Whenever the church is visible it has exactly one white bell tower with one cross on top; never a second tower.",
+        "why": "exactly one bell tower rule"
+      }
+    ]
+  },
+  "clip-10": {
+    "template_video_prompt_sha256": "343e4184a2e7a839b81c275c544d2201a48edc1ccb2804c5299bbb3b553e396b",
+    "template_len": 3451,
+    "submitted_prompt": "BACKWARD REVEAL OF EXACTLY ONE BRIDE AND ONE GROOM. There are exactly TWO foreground people in the entire shot. Never show a second pair or a duplicate couple. The people whose near profiles appear during the camera pass are the SAME physical people who become the full-body ending, not a separate foreground pair.\n\n0.00–0.35s: ease backward from the host plaque. 0.35–1.30s: accelerate BACKWARD down the clear lamp-lined side chapel corridor. The host plaque shrinks naturally. The distant corridor is EMPTY of people; no bride or groom is visible anywhere ahead. Close cream pillars and roof beams rush past with strong parallax. 1.30–1.85s: the camera crosses the compound gateway and passes backward through the clear gap between the ONLY bride and groom, who are immediately beside the lens. Their very close blurred cheeks and shoulders briefly occupy the left and right edges. Through the middle gap there is ONLY empty architecture, never another couple. A near gateway beam and the blurred shoulders briefly obscure the deep background. 1.85–2.60s: the same two near faces steadily SHRINK in screen size as the camera continues backward. Reveal their torsos, joined hands and full bodies through continuous perspective. No distant pair grows to replace them. Bride stays on the left, groom on the right. They turn naturally a little toward the camera as it clears them. The supplied final image is the composition reached by these exact two people. 2.60–5.00s: decelerate strongly into a slow backward glide, ending at the full-body couple under the cream-plaster arched gateway. Hold their identity, hair, clothing and garlands, with small soft smiles. Keep the ornate SAVE THE DATE board physically to their right, text exactly 'SAVE THE DATE / 21 OCTOBER / 2026'. Soft sunrise, fine loose petals and changing soft-lamp highlights. One continuous backward camera move, no full spin, no teleportation, no duplicated people, no montage. Decorative bouquets and signs stay fixed; only small individual petals move.\n\nPETALS AND LIGHT: continuous distributed slow-motion drift is present from the first frame, not triggered as a burst when the camera stops. Keep about 12-20 separate visible petals at irregular heights and depths — soft white jasmine, pale pink rose and cream petals. Petals flutter with independent phase, soft air resistance and a little side-to-side wobble; nearby petals drift roughly one tenth of picture height per second in the settled view, distant ones slower. Camera rotation produces the brief directional streaks; after braking the SAME scattered petals become calmly visible, with no sudden emission, rain sheet, confetti explosion or synchronized falling. Bouquets and garlands never detach. Fine dust motes drift inside soft diagonal volumetric sunrays through arched windows. Champagne-gold edges, pearl and jewelry catch moving specular glints; text itself emits no smoke, gold liquid or floor beam.\n\nExactly ONE date board is uncovered on the right as the ONLY couple is revealed. It is a single rigid rectangular mahogany board with one gold frame and one easel. Never duplicate its frame, create another date panel behind it, or blend two boards. Soft side sunrays, deep cool plaster shadows and warm gold rim light. The couple are Mounika M.B.B.S and Rahul Raju, Software Engineer. Keep the source identity and clothing. Whenever the church is visible it has exactly one white bell tower with one cross on top; never a second tower.",
+    "submitted_sha256": "d0c6340958225ae8700e2d46bac554eaaddd3dfc360f91c19cf6501303315a3b",
+    "submitted_len": 3477,
+    "edits": [
+      {
+        "op": "replace",
+        "from": "Never show a second pair, a duplicate couple, a portrait of the couple, or a reflection containing another couple.",
+        "to": "Never show a second pair or a duplicate couple.",
+        "why": "portrait / reflection objects are not in start/end frames"
+      },
+      {
+        "op": "replace",
+        "from": "never another couple or couple portrait.",
+        "to": "never another couple.",
+        "why": "couple portrait not in frames"
+      },
+      {
+        "op": "append",
+        "text": "Whenever the church is visible it has exactly one white bell tower with one cross on top; never a second tower.",
+        "why": "exactly one bell tower rule"
+      }
+    ]
+  },
+  "clip-11": {
+    "template_video_prompt_sha256": "38349b472cf1763ffd8ca4821e48932e17c48745d090415bec2012377a1e95fa",
+    "template_len": 2634,
+    "submitted_prompt": "Animate ONLY the supplied first image for five seconds. Preserve this exact scene and its objects. There is exactly ONE bride, ONE groom and ONE date board on its single easel at camera RIGHT. The existing rectangular board, gold frame, all printed date lettering and support form ONE RIGID FIXED OBJECT: keep its silhouette, perspective, text and position consistent with the scene as the camera moves. Never create a replacement board, duplicate panel, overlapping gold border, extra easel or reflected second sign. No independent final composition is requested.\n\nOne gentle continuous BACKWARD camera glide of about one meter with a slight 15-centimeter rise under the existing cream-plaster arched gateway, no pan and no whip. 0.00-1.25s: couple remains where they stand, softly smiling, bride left and groom right. 1.25-3.25s: they turn their faces a few degrees toward each other, lower their eyes and gently touch foreheads. Their bodies barely turn, feet stay planted, hands remain naturally joined at waist height. Their garlands sway slightly, no new people or costume change. 3.25-5.00s: keep the tender forehead touch while backward motion eases almost to rest. The SAME existing hanging soft lamp above becomes a little more visible as the view widens. Preserve the same cream-white bell tower, gateway, floral arch, floor decorations and SINGLE right-side board throughout. No objects materialize or morph. Printed copy stays exactly SAVE THE DATE / 21 OCTOBER / 2026.\n\nPETALS AND LIGHT: continuous distributed slow-motion drift is present from the first frame, not triggered as a burst when the camera stops. Keep about 12-20 separate visible petals at irregular heights and depths — soft white jasmine, pale pink rose and cream petals. Petals flutter with independent phase, soft air resistance and a little side-to-side wobble; nearby petals drift roughly one tenth of picture height per second in the settled view, distant ones slower. Camera rotation produces the brief directional streaks; after braking the SAME scattered petals become calmly visible, with no sudden emission, rain sheet, confetti explosion or synchronized falling. Bouquets and garlands never detach. Fine dust motes drift inside soft diagonal volumetric sunrays through arched windows. Champagne-gold edges, pearl and jewelry catch moving specular glints; text itself emits no smoke, gold liquid or floor beam.\n\nThe light keeps its soft warm diagonal shafts and luminous rim on the couple, with subtle lamp flicker and gold highlights. The final picture is simply a slightly wider view of the supplied scene, not a new room or recomposed image. Whenever the church is visible it has exactly one white bell tower with one cross on top; never a second tower.",
+    "submitted_sha256": "47c8904c48317ff659307a291664a6dfbbf45715964c7c11e07f5f947f964459",
+    "submitted_len": 2746,
+    "edits": [
+      {
+        "op": "append",
+        "text": "Whenever the church is visible it has exactly one white bell tower with one cross on top; never a second tower.",
+        "why": "exactly one bell tower rule"
+      }
+    ]
+  }
+}

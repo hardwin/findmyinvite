@@ -1,0 +1,205 @@
+{
+  "job_type": "VIDEO_JOB",
+  "job_id": "VID-clip-01",
+  "production_id": "kc-v1-recreate-20261002-192743",
+  "mode": "RECREATE_IDENTICAL",
+  "clip_id": "clip-01",
+  "clip_index": 1,
+  "from_scene_index": 1,
+  "to_scene_index": 2,
+  "first_frame_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/image-1.jpg",
+  "last_frame_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/image-2.jpg",
+  "first_frame_strategy": "scene-image",
+  "last_frame_strategy": "scene-image",
+  "first_frame_ready": true,
+  "motion_prompt": "A single continuous physically motivated cinematic camera move in the same dimensional illustrated Kerala Catholic church compound near Alappuzha. Use the supplied first and final images as visual anchors. Solid fixed architecture with real translation, occlusion, perspective and foreground parallax. Preserve identity, lighting, materials and exact final lettering. A short energetic travel burst with directional edge blur must ease decisively into a slower continuously moving arrival; never distribute the travel uniformly over the duration. In the slower passage, soft candle highlights and floor reflections shift with camera angle and individual petals rotate independently. Release a denser shower of small white jasmine and soft pink rose petals during deceleration, with near, middle and far depth layers. Each visible petal is a single loose curled petal, generally under 3 percent of frame width; no whole flowers, discs or objects covering faces and words. Preserve clear readability. No cuts, crossfades, room dissolves, object swaps, frozen holds, uniform sideways slides or full orbits. Glowing lettering is solid beveled metal with light on its surface: no liquid gold, dripping strokes, ceiling-to-floor beams, explosive firework bursts or smoke emitted by text. A warm floor reflection is reflected light, not a physical stream connecting the title to the floor. Existing soft candle wisps, where visible, come only from a floor-level candle stand and stay separate from lettering.\n\nEXACT SHOT CHOREOGRAPHY: HIGH AERIAL HOOK, FAST FORWARD-DOWN DIVE, THEN A CONTINUING BLESSING PUSH. 0.00-0.65s: gently advance from the high distant full-compound opening. The tiny existing church porch vestibule below the cream-white bell tower is the destination. 0.65-1.85s: accelerate hard FORWARD AND DOWN along that axis. The compound, reflecting courtyard pool and cream paving expand with strong parallax; skim over the pool toward the small porch. Keep the bell tower behind the destination, moving toward the upper edge. The camera never heads into the tower and no replacement church appears. 1.85-2.20s: descend below the existing porch roof and pass between its front corner columns above the three steps. The beam passes overhead and the columns whip past the edges in brief directional blur. These are open arched bays, not a dark doorway in a closed sanctuary. The roof initially occludes the floral cross pedestal; the first resolved view reveals the SAME floral cross, pedestal and candle stands as the supplied final image. From the moment the rear side is visible it is already open to the exterior bell tower. No back wall appears or disappears. 2.20-2.70s: level out and smoothly brake without stopping. Reveal the large champagne-gold blessing lettering in the open air above the floral cross as the camera clears the front beam, its metal catching the changing light. The text reads 'With God's Grace' above 'We Invite You'; it belongs to a fixed position in the porch rather than following the screen. 2.70-5.00s: CONTINUE A VISIBLE SLOW FORWARD PUSH into the final image, approximately another 10 percent increase in pedestal scale, with column-edge parallax, shifting reflections and rich falling soft petals. End still moving gently forward, ready to turn left immediately in the next clip. Do not stop on a static tableau. Keep a single stationary floral cross throughout and a persistent open view behind it. The title remains large, stable and legible, with restrained traveling edge glints and no smoke, droplets or sweeping light beam. The small distant pedestal is shaded beneath the existing roof; as the camera descends, soft sunlight reveals the same floral cross and cream plaster. Preserve its silhouette and garlands, with no object replacement or material morph. Exterior floral swags and column wraps remain attached to their original surfaces as they pass out of view; never dissolve the decorations.",
+  "video_prompt": "A single continuous physically motivated cinematic camera move in the same dimensional illustrated Kerala Catholic church compound near Alappuzha. Use the supplied first and final images as visual anchors. Solid fixed architecture with real translation, occlusion, perspective and foreground parallax. Preserve identity, lighting, materials and exact final lettering. A short energetic travel burst with directional edge blur must ease decisively into a slower continuously moving arrival; never distribute the travel uniformly over the duration. In the slower passage, soft candle highlights and floor reflections shift with camera angle and individual petals rotate independently. Release a denser shower of small white jasmine and soft pink rose petals during deceleration, with near, middle and far depth layers. Each visible petal is a single loose curled petal, generally under 3 percent of frame width; no whole flowers, discs or objects covering faces and words. Preserve clear readability. No cuts, crossfades, room dissolves, object swaps, frozen holds, uniform sideways slides or full orbits. Glowing lettering is solid beveled metal with light on its surface: no liquid gold, dripping strokes, ceiling-to-floor beams, explosive firework bursts or smoke emitted by text. A warm floor reflection is reflected light, not a physical stream connecting the title to the floor. Existing soft candle wisps, where visible, come only from a floor-level candle stand and stay separate from lettering.\n\nEXACT SHOT CHOREOGRAPHY: HIGH AERIAL HOOK, FAST FORWARD-DOWN DIVE, THEN A CONTINUING BLESSING PUSH. 0.00-0.65s: gently advance from the high distant full-compound opening. The tiny existing church porch vestibule below the cream-white bell tower is the destination. 0.65-1.85s: accelerate hard FORWARD AND DOWN along that axis. The compound, reflecting courtyard pool and cream paving expand with strong parallax; skim over the pool toward the small porch. Keep the bell tower behind the destination, moving toward the upper edge. The camera never heads into the tower and no replacement church appears. 1.85-2.20s: descend below the existing porch roof and pass between its front corner columns above the three steps. The beam passes overhead and the columns whip past the edges in brief directional blur. These are open arched bays, not a dark doorway in a closed sanctuary. The roof initially occludes the floral cross pedestal; the first resolved view reveals the SAME floral cross, pedestal and candle stands as the supplied final image. From the moment the rear side is visible it is already open to the exterior bell tower. No back wall appears or disappears. 2.20-2.70s: level out and smoothly brake without stopping. Reveal the large champagne-gold blessing lettering in the open air above the floral cross as the camera clears the front beam, its metal catching the changing light. The text reads 'With God's Grace' above 'We Invite You'; it belongs to a fixed position in the porch rather than following the screen. 2.70-5.00s: CONTINUE A VISIBLE SLOW FORWARD PUSH into the final image, approximately another 10 percent increase in pedestal scale, with column-edge parallax, shifting reflections and rich falling soft petals. End still moving gently forward, ready to turn left immediately in the next clip. Do not stop on a static tableau. Keep a single stationary floral cross throughout and a persistent open view behind it. The title remains large, stable and legible, with restrained traveling edge glints and no smoke, droplets or sweeping light beam. The small distant pedestal is shaded beneath the existing roof; as the camera descends, soft sunlight reveals the same floral cross and cream plaster. Preserve its silhouette and garlands, with no object replacement or material morph. Exterior floral swags and column wraps remain attached to their original surfaces as they pass out of view; never dissolve the decorations.",
+  "prompt_sha256": "a0d53b61dfc823621e15ff072289ef4ef71c6e75e7f420809d2756a0269f61c8",
+  "prompt_policy": "NEVER_CHANGE_PROMPTS \u2014 locked video_prompt unchanged; follow retry_instruction for defect only",
+  "duration_seconds": 5,
+  "resolution": "720p",
+  "width": 720,
+  "height": 1280,
+  "fps": 24,
+  "aspect": "9:16",
+  "camera_instruction": "Forward-down dive, then continuing slow push",
+  "anchors": {
+    "first": {
+      "strategy": "scene-image",
+      "scene": 1
+    },
+    "last": {
+      "strategy": "scene-image",
+      "scene": 2
+    },
+    "interior_keyframes": []
+  },
+  "continuity_rules_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/continuity/CONTINUITY_BIBLE.json#clip-01",
+  "continuity_clip": {
+    "id": "clip-01",
+    "index": 1,
+    "from_scene": 1,
+    "to_scene": 2,
+    "duration_s": 5,
+    "camera": "Forward-down dive, then continuing slow push",
+    "first_anchor": {
+      "strategy": "scene-image",
+      "scene": 1
+    },
+    "last_anchor": {
+      "strategy": "scene-image",
+      "scene": 2
+    },
+    "video_path": "clip-1.mp4",
+    "final_frame_path": "clip-1-handoff.jpg",
+    "continuity_rules": [
+      "Connection shot \u2014 not independent cinema",
+      "Preserve object counts and identity from adjacent scene subsections",
+      "Petals continuous drift; no burst on camera stop"
+    ]
+  },
+  "continuity_global": {
+    "characters": {
+      "groom": "Adult Kerala Christian groom, visibly polished storybook 3D animation, warm medium-brown skin, slender adult oval face, large dark-brown almond eyes, thick dark eyebrows, smooth clean-shaven cheeks and chin, soft black hair with a gentle side part, quiet reserved smile. No moustache or beard. Natural adult proportions, not a child. Ivory formal suit over a cream shirt with a soft white-and-pale-pink boutonniere. Keep this face, hair, body and outfit consistent in every couple scene.",
+      "bride": "Adult Kerala Christian bride, visibly polished storybook 3D animation, warm medium-brown skin, graceful oval face, large dark-brown almond eyes, gently arched black eyebrows, soft smile. Dark hair in an elegant low bun with a soft veil and white jasmine accents, delicate gold cross pendant and pearl earrings. Ivory lace-and-silk wedding gown with soft cream undertones. Natural adult proportions and a consistent face, hairstyle, jewelry and gown in every later scene."
+    },
+    "style_excerpt": "A full-bleed portrait 9:16 frame of a richly cinematic dimensional storybook-animation Kerala Christian church wedding invitation. Soft romantic late-2000s South Indian cinema mood: dreamy natural light, intimate coastal Kerala atmosphere, gentle teal-and-warm contrast, quiet emotional longing. Soft cream and powder-blue palette with pearl highlights, pale pink florals and cool backwaters haze beyond coconut palms. Cream-white Portuguese-influenced plaster walls, laterite stone accents, arched windows, a modest bell tower and a simple cross. Premium animated adult characters with sculpted expressive faces, never photographic people. DRAMATIC CHIAROSCURO: gentle warm back-and-side sunlight streams diagonally through arched windows and open porch bays, clearly visible soft volumetric god rays cutting through thin coastal atmospheric haze; luminous rim light on ivory silk, lace, pearl and champagne-gold frames against cooler powder-blue shade. Preserve readable highlights, not a flat uniformly bright wash. Very fine dust motes sparkle only inside the sunbeams. Floor is subtly reflective worn cream stone or polished laterite tile, not a mirror. Gold lettering has illuminated beveled ed",
+    "particle_motion": "PETALS AND LIGHT: continuous distributed slow-motion drift is present from the first frame, not triggered as a burst when the camera stops. Keep about 12-20 separate visible petals at irregular heights and depths \u2014 soft white jasmine, pale pink rose and cream petals. Petals flutter with independent phase, soft air resistance and a little side-to-side wobble; nearby petals drift roughly one tenth of picture height per second in the settled view, distant ones slower. Camera rotation produces the brief directional streaks; after braking the SAME scattered petals become calmly visible, with no sudden emission, rain sheet, confetti explosion or synchronized falling. Bouquets and garlands never detach. Fine dust motes drift inside soft diagonal volumetric sunrays through arched windows. Champagne-gold edges, pearl and jewelry catch moving specular glints; text itself emits no smoke, gold liquid or floor beam.",
+    "lighting": "ONE warm soft sunrise from camera-left throughout daytime; evening reception separate lamp-lit mood for scene-09; gentle teal-and-warm contrast",
+    "typography": "luminous champagne-gold / antique-gold beveled dimensional lettering; exact customer copy only",
+    "object_count_rules": [
+      "Exactly one invitation title board where a board is specified",
+      "Exactly one SAVE THE DATE board in couple/date scenes",
+      "Exactly one bride and one groom in couple scenes (never duplicates)",
+      "Exactly one floral cross pedestal in porch",
+      "Exactly one modest bell tower"
+    ]
+  },
+  "clip_summary": {
+    "id": "clip-01",
+    "index": 1,
+    "from": 1,
+    "to": 2,
+    "duration": 5,
+    "camera": "Forward-down dive, then continuing slow push",
+    "anchors": {
+      "first": {
+        "strategy": "scene-image",
+        "scene": 1
+      },
+      "last": {
+        "strategy": "scene-image",
+        "scene": 2
+      },
+      "interior_keyframes": []
+    },
+    "video_path": "clip-1.mp4",
+    "final_frame_path": "clip-1-handoff.jpg"
+  },
+  "output_clip_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/clip-1.mp4",
+  "final_frame_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/clip-1-handoff.jpg",
+  "model": {
+    "credentials_env": "XAI_API_KEY",
+    "id": "grok-imagine-video-1.5",
+    "provider": "xai",
+    "resolution": "720p"
+  },
+  "dependencies": [
+    "img-scene-01:CONTINUITY_LOCK",
+    "img-scene-02:CONTINUITY_LOCK",
+    "orchestrator_VIDEO_authorize"
+  ],
+  "max_paid_attempts": 2,
+  "attempt": 2,
+  "status": "COMPLETE_DELIVERED",
+  "authorized_by_orchestrator": true,
+  "authorized_to_dispatch": false,
+  "authorized_at": "2026-10-02T19:41:51+05:30",
+  "orchestrator_auth": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/ORCHESTRATOR_GO_VIDEO.json",
+  "skip_spatial": true,
+  "visual_qc": "WAIVED_FLOOR \u2014 Continuity judges unless Ashok reopens",
+  "fast_path": true,
+  "context_isolation": {
+    "includes_full_template": false,
+    "rule": "Video Director gets this clip packet + required frames only; sequential chain via handoff"
+  },
+  "retry_policy": {
+    "automatic_paid_retries": false,
+    "max_paid_attempts": 2
+  },
+  "template_sha256": "bad0d176beb1ad47e3942689f95c4153fb933f3547670a255bb7fc062f46dae4",
+  "continuity_bible_sha256": "8863eca51bbc8b7e1c297ffbfedcfd1580b5bce00e2e56a38fd98e8f82637571",
+  "staged_at": "2026-10-02T19:42:30+05:30",
+  "dispatched_at": "2026-10-02T19:53:03+05:30",
+  "dispatch_target": "FMI Video Floor ce8c90ec @FindMyInvite Video Director",
+  "preserve_prior_production": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532",
+  "source": "template.json (immutable) + continuity_extract + CONTINUITY_BIBLE clip subsection",
+  "result": {
+    "attempt": 2,
+    "output_clip_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/clip-1.mp4",
+    "final_frame_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/clip-1-handoff.jpg",
+    "sha256": "47d70da9165c160d71996ac0abf20b90aea244169cf017791cccb078166883ed",
+    "handoff_sha256": "c9e8c3cd8e5e1961e702ebc763fcfa675e9a9a5e69e44a19806d25a83a3004be",
+    "finished_noted_at": "2026-10-02T19:55:27+05:30",
+    "request_id": "f7a52724-b6d5-909d-9091-b4a08aaa46ed"
+  },
+  "generation_id": null,
+  "asset_clip_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/clip-1.mp4",
+  "asset_handoff_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/clip-1-handoff.jpg",
+  "clip_sha256": "47d70da9165c160d71996ac0abf20b90aea244169cf017791cccb078166883ed",
+  "handoff_sha256": "c9e8c3cd8e5e1961e702ebc763fcfa675e9a9a5e69e44a19806d25a83a3004be",
+  "generated_noted_at": "2026-10-02T19:55:27+05:30",
+  "approved_handoff": true,
+  "continuity_veto": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/continuity_veto/clip-01.clips-a1.json",
+  "retry_instruction_pending": "Regenerate VID-clip-01 attempt-2 only. Keep locked video_prompt. FIRST=image-1.jpg LAST=image-2.jpg. Must be ONE continuous forward-down dive then slow push through the SAME white Portuguese-Kerala church compound: reflecting courtyard \u2192 into open porch vestibule with floral cross + candles already in world \u2192 settle on With God's Grace / We Invite You. FORBIDDEN: mid-shot morph that swaps the courtyard church mass for a different waterway/distant-church plate; FORBIDDEN: blessing text popping into existence; FORBIDDEN: sudden petal burst at mid-clip \u2014 petals continuous drift from first frame. Preserve ONE bell tower family and open porch all-sides-open identity.",
+  "awaiting": null,
+  "veto_noted_at": "2026-10-02T19:47:43+05:30",
+  "generation_attempt": 2,
+  "retry_instruction": "Regenerate VID-clip-01 attempt-2 only. Keep locked video_prompt. FIRST=image-1.jpg LAST=image-2.jpg. Must be ONE continuous forward-down dive then slow push through the SAME white Portuguese-Kerala church compound: reflecting courtyard \u2192 into open porch vestibule with floral cross + candles already in world \u2192 settle on With God's Grace / We Invite You. FORBIDDEN: mid-shot morph that swaps the courtyard church mass for a different waterway/distant-church plate; FORBIDDEN: blessing text popping into existence; FORBIDDEN: sudden petal burst at mid-clip \u2014 petals continuous drift from first frame. Preserve ONE bell tower family and open porch all-sides-open identity.",
+  "orchestrator_retry_auth": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/ORCHESTRATOR_RETRY_clip-01_attempt2.json",
+  "archive_a1_clip": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/clip-1.attempt1.mp4",
+  "archive_a1_handoff": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/clip-1-handoff.attempt1.jpg",
+  "authorization_note": "Credits restored \u2014 Orchestrator re-cue a2; Continuity retry_instruction verbatim; locked prompt; clip-02..11 HELD",
+  "retry_authorized_at": "2026-10-02T19:47:36+05:30",
+  "held_downstream": [
+    "clip-02",
+    "clip-03",
+    "clip-04",
+    "clip-05",
+    "clip-06",
+    "clip-07",
+    "clip-08",
+    "clip-09",
+    "clip-10",
+    "clip-11"
+  ],
+  "next_attempt": 2,
+  "orchestrator_retry": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/ORCHESTRATOR_RETRY_clip-01_attempt2.json",
+  "archived_a1": {
+    "video": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/clip-1.attempt1.mp4",
+    "handoff": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/clip-1-handoff.attempt1.jpg"
+  },
+  "last_error": {
+    "phase": "upload",
+    "http_status": 403,
+    "code": "permission-denied",
+    "message": "Your team has either used all available credits or reached its monthly spending limit. To continue making API requests, please purchase more credits or raise your spending limit.",
+    "api": "POST https://api.x.ai/v1/files"
+  },
+  "last_error_at": "2026-10-02T19:48:24.861578+05:30",
+  "hold_xai_credits": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/ORCHESTRATOR_HOLD_XAI_CREDITS.json",
+  "ap_hold_receipt": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/ASSET_PRODUCER_HOLD_XAI_CREDITS.json",
+  "orchestrator_recue": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/ORCHESTRATOR_RECUE_CLIP01_A2.json",
+  "hold_xai_credits_status": "LIFTED",
+  "blocker_cleared": "XAI_CREDITS_RESTORED",
+  "blocker_cleared_at": "2026-10-02T19:53:03+05:30",
+  "video_director_ready": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/VIDEO_DIRECTOR_CLIP01_READY.json",
+  "continuity_gate": "WAIVED_ASHOK",
+  "orchestrator_waive": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/ORCHESTRATOR_WAIVE_CONTINUITY_CLIPS.json",
+  "orchestrator_approved_handoff": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/ORCHESTRATOR_APPROVED_HANDOFF_CLIP01_WAIVED.json",
+  "accepted_at": "2026-10-02T19:56:40+05:30",
+  "continuity_waived": true,
+  "waive_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/ORCHESTRATOR_WAIVE_CONTINUITY_CLIPS.json",
+  "delivered_at": "2026-10-02T20:09:18+05:30",
+  "production_status": "DELIVERED"
+}

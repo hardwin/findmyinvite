@@ -1,0 +1,29 @@
+{
+  "packet_type": "ASSET_PRODUCER_CLIP01_REGEN_READY",
+  "production_id": "kc-v1-20261001-230532",
+  "status": "PACKETS_READY_AWAITING_ORCHESTRATOR_AUTH",
+  "built_at": "2026-10-02T00:05:43.121536+05:30",
+  "built_by": "Asset Producer",
+  "packets": {
+    "IMAGE_JOB": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/IMAGE_JOB/scene-01.regen.json",
+    "VIDEO_JOB": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/VIDEO_JOB/clip-01.regen.json",
+    "mirrors": [
+      "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/image_jobs/img-scene-01-regen.json",
+      "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/video_jobs/vid-clip-01-regen.json"
+    ]
+  },
+  "scope": "scene-01 + clip-01 ONLY",
+  "untouched": [
+    "scene-02..11",
+    "clip-02..11",
+    "models",
+    "customer copy locks"
+  ],
+  "dispatch": "NOT_DISPATCHED \u2014 awaiting Orchestrator authorization",
+  "notes": [
+    "scene-01 prompt retargeted to sweeping cinematic drone / soft architecture family; no text",
+    "clip-01 first=new image-1.jpg after APPROVED; last=LOCKED image-2.jpg",
+    "motion loosened architecture rigidity; keep With God's Grace / We Invite You",
+    "soft cut to existing clip-02 expected per regen brief"
+  ]
+}

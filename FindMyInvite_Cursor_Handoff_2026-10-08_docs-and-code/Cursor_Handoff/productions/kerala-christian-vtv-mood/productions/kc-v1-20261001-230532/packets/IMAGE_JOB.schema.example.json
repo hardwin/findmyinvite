@@ -1,0 +1,32 @@
+{
+  "job_type": "IMAGE_JOB",
+  "job_id": "img-scene-01",
+  "production_id": "kc-v1-20261001-230532",
+  "scene_id": "scene-01",
+  "scene_index": 1,
+  "scene_name": "Distant high aerial church establish",
+  "image_prompt": "<EXACT resolved prompt from scenes_prompt_extract \u2014 do not alter>",
+  "required_text": [],
+  "continuity_subsection_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/continuity/CONTINUITY_BIBLE.json#scene-01",
+  "output_filename": "image-1.jpg",
+  "output_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-1.jpg",
+  "aspect_ratio": "9:16",
+  "width": 720,
+  "height": 1280,
+  "image_request": {
+    "quality": "high",
+    "aspect_ratio": "9:16",
+    "output_format": "jpeg",
+    "number_of_images": 1
+  },
+  "model": {
+    "credentials_env": "REPLICATE_API_TOKEN",
+    "id": "openai/gpt-image-2.5-flare",
+    "provider": "replicate"
+  },
+  "dependencies": [],
+  "max_paid_attempts": 2,
+  "attempt": 1,
+  "status": "PENDING_AUTHORIZATION",
+  "authorized_by_orchestrator": false
+}

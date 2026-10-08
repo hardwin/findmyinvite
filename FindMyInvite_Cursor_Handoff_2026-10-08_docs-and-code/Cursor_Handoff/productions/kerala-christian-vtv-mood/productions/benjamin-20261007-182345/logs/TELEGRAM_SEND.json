@@ -1,0 +1,64 @@
+{
+  "chat_id": "2002649357",
+  "albums": [
+    {
+      "scenes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "http": 200,
+      "ok": true,
+      "message_ids": [
+        914,
+        915,
+        916,
+        917,
+        918,
+        919
+      ],
+      "error": null
+    },
+    {
+      "scenes": [
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "http": 200,
+      "ok": true,
+      "message_ids": [
+        920,
+        921,
+        922,
+        923,
+        924
+      ],
+      "error": null
+    }
+  ],
+  "speedramp_final": {
+    "file": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/benjamin-20261007-182345/assets/output/kerala-christian-v1/kerala-christian-v1-speedramp-1080x1920.mp4",
+    "duration": 28,
+    "sent_at": "2026-10-07T20:36:37+05:30",
+    "sendVideo": {
+      "http": 200,
+      "ok": true,
+      "message_id": 955,
+      "caption": "Mike Benjamin & Esther - Christian wedding invite (speed-ramped final, 1080x1920)",
+      "error": null
+    },
+    "sendDocument": {
+      "http": 200,
+      "ok": true,
+      "message_id": 956,
+      "caption": "Mike Benjamin & Esther - Christian wedding invite (speed-ramped final, 1080x1920) - download copy",
+      "error": null
+    }
+  }
+}

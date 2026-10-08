@@ -1,0 +1,69 @@
+FMI CLIENT DETAILS — Template: kerala-christian-v1
+
+Replace the example text under each field with your real details.
+Keep the same number of lines. Do not change the field names (the lines ending with :).
+
+invitation_lines:
+The Wedding of
+Alex & Anna
+
+groom_title:
+Mr.
+
+groom_name:
+Alex John
+
+bride_title:
+Ms.
+
+bride_name:
+Anna Thomas
+
+family_lines:
+With the Blessings of
+Groom's Parents
+Mr. John Mathew
+& Mrs. Elsy John
+Bride's Parents
+Mr. Thomas George
+& Mrs. Mercy Thomas
+
+ceremony_lines:
+Holy Matrimony
+15th February 2025
+10:00 a.m.
+In the Morning
+
+venue_lines:
+Wedding Venue
+St. Mary's Forane Church
+Near Alappuzha
+Kerala
+
+reception_lines:
+Reception - Dinner
+14th February 2025
+7:00 p.m. onwards
+Parish Hall Garden
+Near Alappuzha, Kerala
+
+host_lines:
+Invited By
+Mr. Kurien Abraham
+Mrs. Lizzy Kurien
+Baby. Nia & Noel
+With Love & Blessings
+
+save_date_lines:
+SAVE THE DATE
+14 & 15 FEBRUARY
+2025
+
+save_date_inline:
+SAVE THE DATE / 14 & 15 FEBRUARY / 2025
+
+devotional_line_1:
+With God's Grace
+
+devotional_line_2:
+We Invite You

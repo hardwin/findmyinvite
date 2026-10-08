@@ -1,0 +1,17 @@
+{
+  "document": "SPATIAL_CLEAR",
+  "asset": "VID-v5-clip-02",
+  "decision": "SUPERSEDED_RETRY",
+  "edge": "entrance_colonnade \u2192 left_side_aisle (STRAIGHT + LEFT)",
+  "forbidden_plate": "absent",
+  "teleport": false,
+  "notes": "Continuous push into left aisle; end matches scene-03 aisle; no lake/gopuram hero.",
+  "path": "/workspace/fmi-productions/nandini-karthik-remake/continuity/spatial_clear/SPATIAL_CLEAR_clip-02.json",
+  "attempt": 1,
+  "amend": {
+    "reason": "Visual QC: last frame \u2260 stills-v5/scene-03; floral-wall hero is stage facet, not left_side_aisle \u2014 adjacency/destination break",
+    "expected_last_facet": "left_side_aisle (scene-03 stairs mouth ahead)",
+    "forbidden_on_last": "stage floral wall as main / destination"
+  },
+  "next": "await attempt-2; CLEAR only if last locks left aisle scene-03"
+}

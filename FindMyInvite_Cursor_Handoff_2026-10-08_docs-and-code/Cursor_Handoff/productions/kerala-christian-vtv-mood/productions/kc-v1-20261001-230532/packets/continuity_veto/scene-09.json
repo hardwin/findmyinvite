@@ -1,0 +1,37 @@
+{
+  "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-9.jpg",
+  "job_id": "IMG-scene-09",
+  "scene_id": "scene-09",
+  "continuity_decision": "LOCK",
+  "qc_gate": "PASS",
+  "checks": [
+    {
+      "rule": "lighting_evening",
+      "expected": "lamp-lit evening parish hall garden",
+      "observed": "blue hour / lanterns / string lights",
+      "ok": true
+    },
+    {
+      "rule": "object_count_reception_board",
+      "expected": 1,
+      "observed": 1,
+      "ok": true
+    },
+    {
+      "rule": "copy_reception_lines",
+      "expected": "Reception - Dinner / 14th February 2025 / 7:00 p.m. onwards / Parish Hall Garden / Near Alappuzha, Kerala",
+      "observed": "exact lines readable",
+      "ok": true
+    },
+    {
+      "rule": "florals",
+      "expected": "jasmine / soft pink roses primary",
+      "observed": "pink roses + white jasmine accents",
+      "ok": true
+    }
+  ],
+  "violations": [],
+  "note": "LOCK after Visual QC PASS. Evening exception correct; one board; exact copy.",
+  "decided_at": "2026-10-01T23:13:13.251743+05:30",
+  "attempt": 1
+}

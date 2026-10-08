@@ -1,0 +1,42 @@
+{
+  "document": "CONTINUITY_VETO",
+  "production_id": "nk-v1-20261002-072013",
+  "batch": "stills-v6",
+  "scene_id": "scene-01",
+  "job": "IMG-v6-scene-01",
+  "asset_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v6/scene-01.jpg",
+  "sha256": "56c341267ab6f697210aab1ae71b462824d5d33e3a8648f5bc28cef9410b9b60",
+  "attempt": 1,
+  "visual_qc": "WAIVED_BY_ORCHESTRATOR_AGENT_UNAVAILABLE",
+  "spatial_map_version": "spatial-v9",
+  "maze_path_slot": "A palm_approach_garden",
+  "decision": "LOCK",
+  "continuity_bible": "/workspace/fmi-productions/nandini-karthik-remake/continuity/CONTINUITY_BIBLE.json",
+  "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/IMAGE_JOB/scene-01.v6.json",
+  "judged_at": "2026-10-02T10:59:11+05:30",
+  "judge": "Continuity Director",
+  "scope": "architecture/materials (empty)",
+  "expected": {
+    "room": "A",
+    "facet": "palm_approach_garden",
+    "couple": false,
+    "text": false,
+    "materials": "cream stone; polished path; tropical foliage; brass lamps",
+    "forbidden": [
+      "lake+gopuram hero",
+      "couple",
+      "text"
+    ]
+  },
+  "observed": {
+    "architecture": "polished cream path to carved arcade; palms beyond; brass stambhas; orange garden beds",
+    "people": 0,
+    "text": false,
+    "lake_gopuram_hero": false
+  },
+  "violations": [],
+  "soft_notes": [
+    "Garden beds lean orange/canna vs banana+jasmine materials emphasis \u2014 not a hard veto"
+  ],
+  "rationale": "Empty Room A approach \u2014 materials/palette continuous, no text/people/lake-gopuram hero. Spatial facet PASS adopted."
+}

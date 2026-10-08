@@ -1,0 +1,18 @@
+{
+  "packet_type": "SPATIAL_16X9_BLUEPRINT_DELIVERY",
+  "version": "v3",
+  "production_id": "nk-v1-20261002-072013",
+  "delivered_at": "2026-10-02T09:52:00+05:30",
+  "author": "Spatial Continuity",
+  "supersedes": [
+    "packets/SPATIAL_16X9_BLUEPRINT_DELIVERY_v2.json",
+    "packets/SPATIAL_16X9_BLUEPRINT_DELIVERY_v1.json"
+  ],
+  "spatial_blueprint_16x9_status": "awaiting_ashok_approval",
+  "approve_artifact": "/workspace/fmi-productions/nandini-karthik-remake/continuity/SPATIAL_MAZE_MAP_16x9_v3.jpg",
+  "kind": "top_view_maze_map",
+  "spatial_map_json": "/workspace/fmi-productions/nandini-karthik-remake/continuity/SPATIAL_MAP.json",
+  "spatial_map_version": "spatial-v5",
+  "path": "A>B>C>F>E>D",
+  "note": "Ashok rejected collage; delivered true top-view maze map v3"
+}

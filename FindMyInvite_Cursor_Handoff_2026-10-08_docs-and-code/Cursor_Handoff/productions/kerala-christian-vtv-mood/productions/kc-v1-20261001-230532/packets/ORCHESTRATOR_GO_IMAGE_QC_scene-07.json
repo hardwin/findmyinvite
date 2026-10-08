@@ -1,0 +1,9 @@
+{
+  "action": "AUTHORIZE_IMAGE_QC",
+  "production_id": "kc-v1-20261001-230532",
+  "scene_id": "scene-07",
+  "attempt": 2,
+  "authorized_at": "2026-10-01T23:20:50.067955+05:30",
+  "batch": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/IMAGE_QC_scene-07_attempt2.json",
+  "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-7.jpg"
+}

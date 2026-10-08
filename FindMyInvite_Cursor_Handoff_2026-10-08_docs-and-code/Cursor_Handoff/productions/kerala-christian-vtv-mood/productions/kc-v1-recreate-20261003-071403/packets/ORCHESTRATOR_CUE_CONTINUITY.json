@@ -1,0 +1,24 @@
+{
+  "packet_type": "ORCHESTRATOR_CUE_CONTINUITY",
+  "production_id": "kc-v1-recreate-20261003-071403",
+  "at": "2026-10-03T07:16:30+05:30",
+  "mode": "RECREATE_CLIENT_FILL",
+  "template_sha256": "38dd6564a6dbc8ff4545b875bb41dcc984c6afa4b0f6bc6d8aca20a2f1fb0577",
+  "compiler_receipt": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/TEMPLATE_COMPILER_VALIDATION_RECEIPT.json",
+  "continuity_extract": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/continuity_extract.json",
+  "scenes_prompt_extract": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/scenes_prompt_extract.json",
+  "output_bible": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/continuity/CONTINUITY_BIBLE.json",
+  "couple": "Theresa & Isaac",
+  "rules": [
+    "Build CONTINUITY_BIBLE from the extracts only \u2014 not full template.json",
+    "Lock identity, wardrobe, architecture, lighting, palette, typography, and object counts for this fill",
+    "scene-02/clip-01: no floral cross",
+    "scene-04 bride, scene-05 groom",
+    "On-screen copy from parameters (17th October 2026, Khairatabad / Khaja mansion). Do not restore February 2025 copy_assumptions",
+    "Do not rewrite creative prompts",
+    "File READY.json when the bible is complete",
+    "Spatial Continuity follows after READY. IMAGE and VIDEO stay HELD until Ashok approves the 16:9 board"
+  ],
+  "skip_spatial": false,
+  "qc_policy": "NO_QC_GENERATE_AND_STITCH after spatial_blueprint_16x9_status=approved_by_ashok"
+}

@@ -1,0 +1,17 @@
+{
+  "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-6.jpg",
+  "job_id": "IMG-scene-06",
+  "scene_id": "scene-06",
+  "decision": "PASS",
+  "rationale": "Continuity revised LOCK on attempt-2 plaque (family_lines OK). Visual QC PASS restored; prior Continuity VETO superseded.",
+  "violations": [],
+  "retry_instruction": null,
+  "attempt": 2,
+  "continuity_lock": true,
+  "technical": {
+    "w": 720,
+    "h": 1280,
+    "ok": true
+  },
+  "decided_at": "2026-10-01T23:17:04.403984+05:30"
+}

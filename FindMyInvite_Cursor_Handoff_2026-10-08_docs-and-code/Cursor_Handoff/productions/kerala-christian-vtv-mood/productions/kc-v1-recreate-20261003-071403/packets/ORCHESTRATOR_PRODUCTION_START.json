@@ -1,0 +1,18 @@
+{
+  "packet_type": "ORCHESTRATOR_PRODUCTION_START",
+  "production_id": "kc-v1-recreate-20261003-071403",
+  "started_at": "2026-10-03T07:15:00+05:30",
+  "mode": "RECREATE_CLIENT_FILL",
+  "couple": "Theresa & Isaac",
+  "invitation_order": "bride-side",
+  "phase": "TEMPLATE_COMPILER",
+  "template_sha256": "38dd6564a6dbc8ff4545b875bb41dcc984c6afa4b0f6bc6d8aca20a2f1fb0577",
+  "qc_policy": "NO_QC_GENERATE_AND_STITCH",
+  "spatial_gate": "REQUIRED",
+  "note": "NO-QC applies after spatial_blueprint_16x9_status=approved_by_ashok. Do not mutate prompts. Preserve prior productions.",
+  "customisations_accepted_as_filled": [
+    "bride-side order: scene-04 bride, scene-05 groom; clip-03 bride, clip-04 groom",
+    "clip-01/scene-02: floral cross removed; devotional verse fills that space",
+    "save_date_inline: 17th October 2026"
+  ]
+}

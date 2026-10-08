@@ -1,0 +1,68 @@
+{
+  "document": "VISUAL_QC_BATCH",
+  "production_id": "nk-v1-20261002-072013",
+  "batch": "stills-v5",
+  "updated_at": "2026-10-02T08:42:13+05:30",
+  "attempt": 1,
+  "summary": {
+    "PASS": [
+      "scene-02",
+      "scene-03",
+      "scene-04",
+      "scene-05"
+    ],
+    "RETRY": [
+      "scene-01",
+      "scene-06"
+    ],
+    "pending_continuity_lock": [
+      "scene-02",
+      "scene-03",
+      "scene-04",
+      "scene-05"
+    ]
+  },
+  "results": [
+    {
+      "scene_id": "scene-01",
+      "decision": "RETRY",
+      "defect": "wrong facet (aisle vs thicket macro)",
+      "qc": "/workspace/fmi-productions/nandini-karthik-remake/logs/image_jobs/QC_scene-01_stills-v5_attempt1.json"
+    },
+    {
+      "scene_id": "scene-02",
+      "decision": "PASS",
+      "qc": "/workspace/fmi-productions/nandini-karthik-remake/logs/image_jobs/QC_scene-02_stills-v5_attempt1.json",
+      "awaiting": "Continuity LOCK"
+    },
+    {
+      "scene_id": "scene-03",
+      "decision": "PASS",
+      "qc": "/workspace/fmi-productions/nandini-karthik-remake/logs/image_jobs/QC_scene-03_stills-v5_attempt1.json",
+      "awaiting": "Continuity LOCK"
+    },
+    {
+      "scene_id": "scene-04",
+      "decision": "PASS",
+      "qc": "/workspace/fmi-productions/nandini-karthik-remake/logs/image_jobs/QC_scene-04_stills-v5_attempt1.json",
+      "awaiting": "Continuity LOCK"
+    },
+    {
+      "scene_id": "scene-05",
+      "decision": "PASS",
+      "qc": "/workspace/fmi-productions/nandini-karthik-remake/logs/image_jobs/QC_scene-05_stills-v5_attempt1.json",
+      "awaiting": "Continuity LOCK (wardrobe priority)"
+    },
+    {
+      "scene_id": "scene-06",
+      "decision": "RETRY",
+      "defect": "invented wrong invite copy",
+      "qc": "/workspace/fmi-productions/nandini-karthik-remake/logs/image_jobs/QC_scene-06_stills-v5_attempt1.json"
+    }
+  ],
+  "orchestrator_actions_needed": [
+    "Authorize paid attempt-2 for IMG-v5-scene-01 with QC retry_instruction (thicket macro)",
+    "Authorize paid attempt-2 for IMG-v5-scene-06 with QC retry_instruction (exact BRIEF invite stack); fold exact copy lines into IMAGE_JOB packet",
+    "Continuity LOCK on PASS candidates 02-05"
+  ]
+}

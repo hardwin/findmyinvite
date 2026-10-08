@@ -1,0 +1,24 @@
+{
+  "packet_type": "ORCHESTRATOR_HOLD_VIDEO",
+  "production_id": "kc-v1-recreate-20261003-071403",
+  "at": "2026-10-03T07:50:46+05:30",
+  "authority": "Ashok via FMI ReCreate",
+  "phase": "HELD",
+  "video_jobs_authorized": false,
+  "image_jobs_authorized": false,
+  "stitch_authorized": false,
+  "stills": "KEEP as stills-v1. Do not regenerate.",
+  "supersedes": [
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/ORCHESTRATOR_GO_VIDEO.json",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/ORCHESTRATOR_GO_ASSET_PRODUCER_VIDEO.json",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/ORCHESTRATOR_AUTO_UNLOCK_CLIP_CHAIN.json",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/ORCHESTRATOR_NO_QC_GENERATE_AND_STITCH.json"
+  ],
+  "orders": [
+    "STOP. Do not start or continue any VIDEO clip.",
+    "Do not dispatch clip-01 or any later clip.",
+    "If a clip is already generating, abort it. Do not stitch.",
+    "Keep stills-v1 as they are.",
+    "Wait for Ashok's next instruction."
+  ]
+}

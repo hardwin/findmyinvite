@@ -1,0 +1,16 @@
+{
+  "packet_type": "ORCHESTRATOR_IMAGE_RETRY_AUTH",
+  "production_id": "nk-v1-20261002-072013",
+  "job": "IMG-v5-scene-06",
+  "scene_id": "scene-06",
+  "attempt": 2,
+  "paid": true,
+  "max_paid_attempts": 2,
+  "authorized_at": "2026-10-02T08:42:38+05:30",
+  "prior_qc": "/workspace/fmi-productions/nandini-karthik-remake/logs/image_jobs/QC_scene-06_stills-v5_attempt1.json",
+  "retry_instruction": "Keep stage_decorations geography (floral stage wall, photoshoot niche LEFT, decorated pond rim LEFT, stairs south readable) and wardrobe/pose locks. Replace ALL on-screen text with EXACT stack only: Nandini \u2661 Karthik / Two hearts, one beautiful beginning / 22nd February 2027 / 9:30 AM onwards / ITC Grand Chola / Chennai, Tamil Nadu / JOIN US as we begin our forever. Magenta names; soft dark brown serif other lines; crisp centered. Remove invented April 2025 / Sri Vara Mahal / 9:23 AM / Together with their families wording. Still NO lake-gopuram-hills-boat hero plate. NO walking. NO bride bun.",
+  "required_text": "Nandini \u2661 Karthik / Two hearts, one beautiful beginning / 22nd February 2027 / 9:30 AM onwards / ITC Grand Chola / Chennai, Tamil Nadu / JOIN US as we begin our forever.",
+  "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/IMAGE_JOB/scene-06.json",
+  "output": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5/scene-06.jpg",
+  "note": "Asset Producer fold done by Orchestrator into IMAGE_JOB; Image Director generate attempt-2"
+}

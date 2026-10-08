@@ -1,0 +1,24 @@
+{
+  "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-7.jpg",
+  "job_id": "IMG-scene-07",
+  "scene_id": "scene-07",
+  "decision": "PASS",
+  "rationale": "Attempt 2 necktie-only fix verified: groom open collar, no necktie; 1 couple + floral garlands; ceremony board exact Holy Matrimony lines; altar sanctuary; 720\u00d71280. Hand to Continuity.",
+  "violations": [],
+  "retry_instruction": null,
+  "attempt": 2,
+  "final_paid_attempt": true,
+  "focus_checks": {
+    "identity_groom_wardrobe": "PASS \u2014 no necktie",
+    "object_count_couple": "PASS \u2014 1+1",
+    "copy_ceremony_lines": "PASS \u2014 exact",
+    "architecture": "PASS \u2014 altar sanctuary",
+    "resolution": "PASS \u2014 720x1280"
+  },
+  "technical": {
+    "w": 720,
+    "h": 1280,
+    "ok": true
+  },
+  "decided_at": "2026-10-01T23:21:23.295100+05:30"
+}

@@ -1,0 +1,13 @@
+{
+  "packet_type": "SPATIAL_16X9_ASHOK_GENERATE_SIGNAL",
+  "version": "v9",
+  "production_id": "nk-v1-20261002-072013",
+  "at": "2026-10-02T10:52:00+05:30",
+  "ashok_message": "Lets try this / Generate",
+  "approve_artifact": "/workspace/fmi-productions/nandini-karthik-remake/continuity/SPATIAL_MAZE_MAP_16x9_v9.jpg",
+  "svg": "/workspace/fmi-productions/nandini-karthik-remake/continuity/SPATIAL_MAZE_MAP_16x9_v9.svg",
+  "spatial_map_version": "spatial-v9",
+  "requested_action": "Orchestrator stamp spatial_blueprint_16x9_status=approved_by_ashok and unlock IMAGE stills-v6 (or next) per maze path A\u2192B\u2192C\u2192F\u2192E\u2192D",
+  "path": "S1\u2192S2\u2192S3\u2192S4\u2192S5\u2192S6 = A\u2192B\u2192C\u2192F\u2192E\u2192D",
+  "from_agent": "Spatial Continuity"
+}

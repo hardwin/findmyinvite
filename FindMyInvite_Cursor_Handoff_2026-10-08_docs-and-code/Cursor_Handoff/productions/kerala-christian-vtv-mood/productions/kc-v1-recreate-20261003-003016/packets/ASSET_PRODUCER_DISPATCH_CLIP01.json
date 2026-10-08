@@ -1,0 +1,26 @@
+{
+  "packet_type": "ASSET_PRODUCER_DISPATCH_CLIP01",
+  "production_id": "kc-v1-recreate-20261003-003016",
+  "at": "2026-10-03T00:49:59+05:30",
+  "job_id": "VID-clip-01",
+  "packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/packets/VIDEO_JOB/clip-01.json",
+  "batch": "clips-v1",
+  "continuity_qc": "WAIVED",
+  "held": [
+    "VID-clip-02",
+    "VID-clip-03",
+    "VID-clip-04",
+    "VID-clip-05",
+    "VID-clip-06",
+    "VID-clip-07",
+    "VID-clip-08",
+    "VID-clip-09",
+    "VID-clip-10",
+    "VID-clip-11"
+  ],
+  "auth": [
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/packets/ORCHESTRATOR_GO_VIDEO.json",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/packets/ORCHESTRATOR_GO_ASSET_PRODUCER_VIDEO.json",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/packets/ORCHESTRATOR_RECUE_VIDEO_EMIT.json"
+  ]
+}

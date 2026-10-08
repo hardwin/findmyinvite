@@ -1,0 +1,22 @@
+{
+  "packet_type": "ORCHESTRATOR_GO_IMAGE_QC_SCENE01_REGEN",
+  "production_id": "kc-v1-20261001-230532",
+  "authorized_at": "2026-10-02T00:07:02.291755+05:30",
+  "job_id": "IMG-scene-01-regen",
+  "attempt": 1,
+  "asset_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-1.jpg",
+  "job_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/IMAGE_JOB/scene-01.regen.json",
+  "continuity_amend": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/continuity/CONTINUITY_AMEND_clip01.json",
+  "generation_id": "zw19vxegaxrmt0d0z309vyvtdw",
+  "prompt_hash": "13299466771ab69483a263902f917d14dd565cc4f43915431df2c46816a24b64",
+  "checks_focus": [
+    "opening_energy: sweeping cinematic drone / wedding-estate REQUIRED",
+    "NOT static facade / compound plate / architecture diagram",
+    "object_count: bell_tower=1, porch_vestibule=1, floral_cross_pedestal=1, text_boards=0",
+    "architecture_family: Kerala Catholic cream/laterite soft resemblance",
+    "no text/watermark",
+    "720x1280 storybook 3D"
+  ],
+  "on_PASS": "Orchestrator unlocks VID-clip-01-regen",
+  "on_RETRY": "defect-targeted retry_instruction only; max 2 paid attempts"
+}

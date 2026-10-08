@@ -1,0 +1,5 @@
+  poll d0b5d748-546f-9007-ad56-80b90baba1a6 status=pending
+  poll d0b5d748-546f-9007-ad56-80b90baba1a6 status=pending
+  poll d0b5d748-546f-9007-ad56-80b90baba1a6 status=pending
+  poll d0b5d748-546f-9007-ad56-80b90baba1a6 status=done
+RESULT {"rid": "d0b5d748-546f-9007-ad56-80b90baba1a6", "probe": {"w": 720, "h": 1280, "fps": "24/1", "nb_frames": "73", "duration_s": 3.041667}, "usage": {"cost_in_usd_ticks": 4300000000}}

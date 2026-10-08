@@ -1,0 +1,34 @@
+{
+  "document": "CONTINUITY_VETO",
+  "production_id": "nk-v1-20261002-072013",
+  "batch": "stills-v5",
+  "scene_id": "scene-05",
+  "job": "IMG-v5-scene-05",
+  "asset_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5/scene-05.jpg",
+  "sha256": "96e2d4423712bb42e2f5731f8e8d8d299ff2c3ea627c3b9bc9320c17a88338df",
+  "generation_id": "fytqcrxrrsrmw0d0zabrvs4cqm",
+  "attempt": 1,
+  "visual_qc": "PASS",
+  "qc_file": "/workspace/fmi-productions/nandini-karthik-remake/logs/image_jobs/QC_scene-05_stills-v5_attempt1.json",
+  "decision": "LOCK",
+  "scope": "wardrobe/identity/pose/copy + architecture",
+  "expected": {
+    "wardrobe": "groom maroon half-sleeve + white gold-border veshti; bride green silk saree + heavy gold; long flowered hair NOT bun",
+    "pose": "STANDING holding hands, feet planted",
+    "copy": "Nandini ♡ Karthik names only optional",
+    "bg": "stage floral wall; no lake/gopuram"
+  },
+  "observed": {
+    "groom": "maroon short-sleeve shirt + white gold-border veshti; standing left",
+    "bride": "rich green silk saree; heavy gold (necklaces, earrings, waist belt, bangles); long braid dense with jasmine — not a bun",
+    "pose": "standing close, holding hands, looking at each other; no walking",
+    "copy": "Nandini ♡ Karthik magenta cursive on lintel — names only",
+    "architecture": "cream stairs looking up; floral wall behind couple; banana leaves frame; brass urns",
+    "lake_plate": false
+  },
+  "violations": [],
+  "rationale": "Wardrobe_lock spatial-v2 MATCH (not BRIEF red). Pose STANDING. Names-only copy OK. Floral stage wall BG OK.",
+  "continuity_bible": "/workspace/fmi-productions/nandini-karthik-remake/continuity/CONTINUITY_BIBLE.json",
+  "judged_at": "2026-10-02T08:42:49+05:30",
+  "judge": "Continuity Director"
+}

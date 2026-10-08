@@ -1,0 +1,8 @@
+{
+  "job_id": "VID-clip-05-v2",
+  "clip_id": "clip-05",
+  "duration": 3,
+  "motion_prompt": "Single continuous cinematic camera move. First+last images are hard anchors. Real translation/parallax; preserve architecture identity. NEVER stop/hold camera. NEVER cut/crossfade. Couple NEVER walks \u2014 standing only when present. NO misty lake+gopuram+hills+boat hero plate. PRIMARY: STRAIGHT onto stage then slight LEFT orbit toward photoshoot/pond; couple STANDING; invite text settles in final.",
+  "output": "/workspace/fmi-productions/nandini-karthik-remake/assets/clips-v2/clip-05.mp4",
+  "handoff": "/workspace/fmi-productions/nandini-karthik-remake/assets/handoffs-v2/clip-05-handoff.jpg"
+}

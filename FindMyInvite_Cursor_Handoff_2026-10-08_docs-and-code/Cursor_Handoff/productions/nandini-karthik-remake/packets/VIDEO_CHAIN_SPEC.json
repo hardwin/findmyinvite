@@ -1,0 +1,47 @@
+{
+  "production": "nk-v1",
+  "stills": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v3",
+  "clips": [
+    {
+      "id": "clip-01",
+      "from": 1,
+      "to": 2,
+      "duration": 3,
+      "camera": "Push forward as banana leaves part toward wide arch establish",
+      "prompt": "A single continuous physically motivated cinematic camera move in the same dimensional tropical South Indian wedding pavilion. Use the supplied first and final images as hard visual anchors. Solid architecture with real translation, occlusion, perspective and foreground parallax. Preserve identity, lighting, materials, wardrobe and exact final lettering when present. Never cut, crossfade, dissolve, morph faces/clothes mid-shot, or swap objects. Soft pink petals drift with depth layers. Keep motion continuous \u2014 no static holds. PRIMARY ACTION: Start buried in banana leaves; push forward as leaves brush past the lens revealing the full cream stone arch and lake beyond. Energetic short travel easing into slower arrival. Empty pavilion \u2014 no people appear. No text."
+    },
+    {
+      "id": "clip-02",
+      "from": 2,
+      "to": 3,
+      "duration": 3,
+      "camera": "Advance from wide exterior to low threshold under arch",
+      "prompt": "A single continuous physically motivated cinematic camera move in the same dimensional tropical South Indian wedding pavilion. Use the supplied first and final images as hard visual anchors. Solid architecture with real translation, occlusion, perspective and foreground parallax. Preserve identity, lighting, materials, wardrobe and exact final lettering when present. Never cut, crossfade, dissolve, morph faces/clothes mid-shot, or swap objects. Soft pink petals drift with depth layers. Keep motion continuous \u2014 no static holds. PRIMARY ACTION: Continuous push from wide exterior establish into the arch threshold, lowering slightly; brass urulis grow larger in foreground; floor perspective strengthens toward the lake. Empty \u2014 no people. No text."
+    },
+    {
+      "id": "clip-03",
+      "from": 3,
+      "to": 4,
+      "duration": 3,
+      "camera": "Enter pavilion; couple resolves into frame mid-shot",
+      "prompt": "A single continuous physically motivated cinematic camera move in the same dimensional tropical South Indian wedding pavilion. Use the supplied first and final images as hard visual anchors. Solid architecture with real translation, occlusion, perspective and foreground parallax. Preserve identity, lighting, materials, wardrobe and exact final lettering when present. Never cut, crossfade, dissolve, morph faces/clothes mid-shot, or swap objects. Soft pink petals drift with depth layers. Keep motion continuous \u2014 no static holds. PRIMARY ACTION: Continue forward into the pavilion; the couple (groom maroon half-shirt + white veshti; bride green bridal saree, flowered hair, heavy gold jewellery) resolves naturally into the mid-frame holding hands \u2014 do not morph costumes mid-clip. No readable text."
+    },
+    {
+      "id": "clip-04",
+      "from": 4,
+      "to": 5,
+      "duration": 3,
+      "camera": "Gentle push + slight orbit; names appear in sky",
+      "prompt": "A single continuous physically motivated cinematic camera move in the same dimensional tropical South Indian wedding pavilion. Use the supplied first and final images as hard visual anchors. Solid architecture with real translation, occlusion, perspective and foreground parallax. Preserve identity, lighting, materials, wardrobe and exact final lettering when present. Never cut, crossfade, dissolve, morph faces/clothes mid-shot, or swap objects. Soft pink petals drift with depth layers. Keep motion continuous \u2014 no static holds. PRIMARY ACTION: Slow push closer with a subtle orbit around the couple; magenta cursive 'Nandini \u2661 Karthik' elegantly settles into the upper sky by the final frame. Preserve wardrobe and faces. No other text."
+    },
+    {
+      "id": "clip-05",
+      "from": 5,
+      "to": 6,
+      "duration": 3,
+      "camera": "Pull back and crane up into full invitation lock",
+      "prompt": "A single continuous physically motivated cinematic camera move in the same dimensional tropical South Indian wedding pavilion. Use the supplied first and final images as hard visual anchors. Solid architecture with real translation, occlusion, perspective and foreground parallax. Preserve identity, lighting, materials, wardrobe and exact final lettering when present. Never cut, crossfade, dissolve, morph faces/clothes mid-shot, or swap objects. Soft pink petals drift with depth layers. Keep motion continuous \u2014 no static holds. PRIMARY ACTION: Smooth pull-back and slight crane-up expanding headroom; full invitation lettering tracks into the sky exactly as in the final image while couple remains lower third. Preserve all text readability by the end."
+    }
+  ],
+  "chain": "sequential_handoff"
+}

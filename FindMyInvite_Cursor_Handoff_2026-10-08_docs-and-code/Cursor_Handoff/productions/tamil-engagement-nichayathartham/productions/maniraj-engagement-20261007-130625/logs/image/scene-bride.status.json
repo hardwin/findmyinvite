@@ -1,0 +1,46 @@
+{
+  "scene_id": "scene-bride",
+  "model": "openai/gpt-image-2.5-flare",
+  "generation": "text-only",
+  "prompt_file": "scripts/still_bride_prompt.txt",
+  "prompt_chars": 7570,
+  "prompt_sha256": "cc9d9f794afbf604be1232b8e8d3711edd68fc23f56afeb8195c17bf3d7a729c",
+  "request_input": {
+    "aspect_ratio": "9:16",
+    "quality": "high",
+    "output_format": "jpeg",
+    "input_images": "OMITTED (text-only)"
+  },
+  "on_screen_text": [
+    "மணமகள்",
+    "திருநிறைச்செல்வி",
+    "கீர்த்தனா"
+  ],
+  "paid_calls": 1,
+  "status": "GENERATED",
+  "ts_local": "2026-10-08T11:50:27.309374+05:30",
+  "request_id": "qsx3ajmtc9rmy0d138nry5pq3w",
+  "output_path": "/workspace/fmi-productions/tamil-engagement-nichayathartham/productions/maniraj-engagement-20261007-130625/assets/output/tamil-engagement-nichayathartham-v1/image-bride.jpg",
+  "raw_path": "/workspace/fmi-productions/tamil-engagement-nichayathartham/productions/maniraj-engagement-20261007-130625/assets/output/tamil-engagement-nichayathartham-v1/raw-image-bride.jpg",
+  "raw_dims": "1152,2048",
+  "output_url": "https://replicate.delivery/xezq/jRQkayS8XMZNHNkDoeL5gbP05cE2SbJWNeDeePWA29L0D6UdB/tmp2ep_5xrt.jpeg",
+  "sha256": "4813eb2a537c9e7eb1fc136343fa9a4427b1ba054d1fe4bb4874432c501a7b59",
+  "metrics": {
+    "image_output_count": 1,
+    "model_variant": "high",
+    "predict_time": 17.843963254,
+    "resolution_target": "9:16",
+    "total_time": 17.882231675
+  },
+  "replicate_created_at": "2026-10-08T06:20:27.618Z",
+  "replicate_completed_at": "2026-10-08T06:20:45.500231675Z",
+  "ts_done": "2026-10-08T11:50:50.937721+05:30",
+  "telegram": {
+    "http": 200,
+    "ok": true,
+    "message_id": 1023,
+    "error": null,
+    "file": "/workspace/fmi-productions/tamil-engagement-nichayathartham/productions/maniraj-engagement-20261007-130625/assets/output/tamil-engagement-nichayathartham-v1/image-bride.jpg",
+    "ts_local": "2026-10-08T11:50:53.347823+05:30"
+  }
+}

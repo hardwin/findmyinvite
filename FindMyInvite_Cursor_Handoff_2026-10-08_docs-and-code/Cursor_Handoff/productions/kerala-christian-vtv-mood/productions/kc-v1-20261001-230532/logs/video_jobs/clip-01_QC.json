@@ -1,0 +1,31 @@
+{
+  "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1.mp4",
+  "job_id": "VID-clip-01",
+  "clip_id": "clip-01",
+  "decision": "RETRY",
+  "rationale": "Opening\u2248image-1 and ending\u2248image-2, but mid-shot is morph/crossfade disguised by heavy zoom blur \u2014 not a continuous 3D forward-down dive. Background architecture identity collapses (main church morphs into centered bell tower). Petals OK; text legible at end; no black frames. Technical 720\u00d71280 ~5s @24fps.",
+  "violations": [
+    {
+      "rule": "continuous_spatial_dive",
+      "expected": "single continuous forward-down dive then slow push with real translation/occlusion/parallax",
+      "observed": "radial-blur morph/crossfade into second image around ~1s \u2014 not continuous 3D travel"
+    },
+    {
+      "rule": "architecture_identity",
+      "expected": "preserve compound spatial identity; porch destination with tower beyond consistent with anchors",
+      "observed": "during transition, main church building morphs into a different centered bell-tower mass"
+    }
+  ],
+  "retry_instruction": "Keep first=image-1 and last=image-2 anchors. Regenerate ONLY the connection motion: true continuous forward-down dive over courtyard/pool into open porch columns, then slow push revealing fixed blessing text \u2014 NO crossfade, NO zoom-blur morph soup, NO architecture swap. Preserve one floral cross and open rear to tower throughout.",
+  "attempt": 1,
+  "technical": {
+    "w": 720,
+    "h": 1280,
+    "fps": 24,
+    "duration_s": 5.04,
+    "ok": true,
+    "has_audio_aac": true,
+    "note": "bible expects silent; aac present \u2014 soft flag for Finish/Final QC"
+  },
+  "decided_at": "2026-10-01T23:18:46.340326+05:30"
+}

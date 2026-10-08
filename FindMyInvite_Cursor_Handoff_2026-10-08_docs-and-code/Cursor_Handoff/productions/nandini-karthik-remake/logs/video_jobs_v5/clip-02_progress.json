@@ -1,0 +1,9 @@
+{
+  "job_id": "VID-v5-clip-02",
+  "clip_id": "clip-02",
+  "started": "2026-10-02T09:14:58.183846+05:30",
+  "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/VIDEO_JOB/clip-02.v5.json",
+  "first_frame": "/workspace/fmi-productions/nandini-karthik-remake/assets/handoffs-v5/clip-01-handoff.jpg",
+  "last_frame": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5/scene-03.jpg",
+  "start_attempt": 2
+}

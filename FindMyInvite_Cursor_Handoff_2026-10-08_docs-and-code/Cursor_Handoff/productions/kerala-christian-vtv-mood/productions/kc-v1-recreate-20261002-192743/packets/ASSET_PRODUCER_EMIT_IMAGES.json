@@ -1,0 +1,133 @@
+{
+  "packet_type": "ASSET_PRODUCER_EMIT_IMAGES",
+  "production_id": "kc-v1-recreate-20261002-192743",
+  "mode": "RECREATE_IDENTICAL",
+  "recorded_at": "2026-10-02T19:32:36+05:30",
+  "auth": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/ORCHESTRATOR_GO_IMAGES.json",
+  "ap_auth": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/ORCHESTRATOR_GO_ASSET_PRODUCER_IMAGES.json",
+  "template_sha256": "bad0d176beb1ad47e3942689f95c4153fb933f3547670a255bb7fc062f46dae4",
+  "continuity_bible_sha256": "8863eca51bbc8b7e1c297ffbfedcfd1580b5bce00e2e56a38fd98e8f82637571",
+  "skip_spatial": true,
+  "job_count": 11,
+  "jobs": [
+    {
+      "job_id": "IMG-scene-01",
+      "scene_id": "scene-01",
+      "name": "Distant high aerial church establish",
+      "packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/IMAGE_JOB/scene-01.json",
+      "output_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/image-1.jpg",
+      "prompt_sha256": "e5d28f2addffe2d562ccb917b2ffd38f732958345ccb9c424cf11d004e392c40",
+      "prompt_len": 2820,
+      "status": "AUTHORIZED_DISPATCHED"
+    },
+    {
+      "job_id": "IMG-scene-02",
+      "scene_id": "scene-02",
+      "name": "Church porch with dimensional blessing",
+      "packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/IMAGE_JOB/scene-02.json",
+      "output_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/image-2.jpg",
+      "prompt_sha256": "d55e0a142b1a395cefc6f5b136b5e2e8de903f4cef9d1bb2c9d484d29e180104",
+      "prompt_len": 3815,
+      "status": "AUTHORIZED_DISPATCHED"
+    },
+    {
+      "job_id": "IMG-scene-03",
+      "scene_id": "scene-03",
+      "name": "Family invitation in the side courtyard",
+      "packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/IMAGE_JOB/scene-03.json",
+      "output_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/image-3.jpg",
+      "prompt_sha256": "1b822dc311e4d991d39a04a4031d283e0f2e1882414f90ee3a1394ce367dc04a",
+      "prompt_len": 3029,
+      "status": "AUTHORIZED_DISPATCHED"
+    },
+    {
+      "job_id": "IMG-scene-04",
+      "scene_id": "scene-04",
+      "name": "Groom in the shaded side aisle",
+      "packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/IMAGE_JOB/scene-04.json",
+      "output_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/image-4.jpg",
+      "prompt_sha256": "35fd6d98c2dcf2e61fd5e3c8ef8c31e47cc6e960e65daae8c474e63744ede048",
+      "prompt_len": 3575,
+      "status": "AUTHORIZED_DISPATCHED"
+    },
+    {
+      "job_id": "IMG-scene-05",
+      "scene_id": "scene-05",
+      "name": "Bride beside the sunlit transverse archway",
+      "packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/IMAGE_JOB/scene-05.json",
+      "output_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/image-5.jpg",
+      "prompt_sha256": "ada4da8239bf4add64c49174c75d76a72c6aa4eb29d473c517945fdd238129db",
+      "prompt_len": 3693,
+      "status": "AUTHORIZED_DISPATCHED"
+    },
+    {
+      "job_id": "IMG-scene-06",
+      "scene_id": "scene-06",
+      "name": "Both families' blessing plaque in the west cloister",
+      "packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/IMAGE_JOB/scene-06.json",
+      "output_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/image-6.jpg",
+      "prompt_sha256": "7e084b4d250787661243701a0fbf6f0be68398f051b0c30fafcbb2c83bde0953",
+      "prompt_len": 3194,
+      "status": "AUTHORIZED_DISPATCHED"
+    },
+    {
+      "job_id": "IMG-scene-07",
+      "scene_id": "scene-07",
+      "name": "Holy Matrimony at the aisle and altar",
+      "packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/IMAGE_JOB/scene-07.json",
+      "output_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/image-7.jpg",
+      "prompt_sha256": "0750489f335fdba259143d1ec050dddf3430b825a0b7efd4b700c0f922157d40",
+      "prompt_len": 4295,
+      "status": "AUTHORIZED_DISPATCHED"
+    },
+    {
+      "job_id": "IMG-scene-08",
+      "scene_id": "scene-08",
+      "name": "Venue at the north courtyard corner",
+      "packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/IMAGE_JOB/scene-08.json",
+      "output_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/image-8.jpg",
+      "prompt_sha256": "c6cb8bd2583a9988e08dce969b5a15f45e6459d4c01c28abf793d147a3f5c511",
+      "prompt_len": 3078,
+      "status": "AUTHORIZED_DISPATCHED"
+    },
+    {
+      "job_id": "IMG-scene-09",
+      "scene_id": "scene-09",
+      "name": "Reception at the evening parish hall garden",
+      "packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/IMAGE_JOB/scene-09.json",
+      "output_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/image-9.jpg",
+      "prompt_sha256": "8e0b77c3c38d4791a71c8068ee29db7dfacfddddf228da5aa94928d0fd612a1a",
+      "prompt_len": 3047,
+      "status": "AUTHORIZED_DISPATCHED"
+    },
+    {
+      "job_id": "IMG-scene-10",
+      "scene_id": "scene-10",
+      "name": "Hosts in the lamp-lit side chapel corridor",
+      "packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/IMAGE_JOB/scene-10.json",
+      "output_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/image-10.jpg",
+      "prompt_sha256": "ab5e16a42228a8b0b5c5fa08fa19414a3c371654f8fbd0367d216b3d9c7415ef",
+      "prompt_len": 3088,
+      "status": "AUTHORIZED_DISPATCHED"
+    },
+    {
+      "job_id": "IMG-scene-11",
+      "scene_id": "scene-11",
+      "name": "Single couple and single date board",
+      "packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/IMAGE_JOB/scene-11.json",
+      "output_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/image-11.jpg",
+      "prompt_sha256": "25e2a6f542756c85a60e132de31af1c433b1c82a526c1936ac7b5384553563d8",
+      "prompt_len": 4616,
+      "status": "AUTHORIZED_DISPATCHED"
+    }
+  ],
+  "scene_12": "SKIP \u2014 not an IMAGE_JOB",
+  "assets_root": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1",
+  "packets_dir": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/IMAGE_JOB",
+  "prompt_policy": "NEVER_CHANGE_PROMPTS \u2014 verbatim from template",
+  "dispatch_target": "FMI Image Floor / Image Director",
+  "video_jobs_authorized": false,
+  "preserve_prior": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532",
+  "nk_v1_held": true,
+  "next": "Image Director attempt-1 generate \u2192 Continuity/QC; VIDEO HELD until Orchestrator GO"
+}

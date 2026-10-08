@@ -1,0 +1,405 @@
+{
+  "packet_type": "ASSET_PRODUCER_EMIT_IMAGES",
+  "production_id": "kc-v1-recreate-20261003-071403",
+  "at": "2026-10-03T07:46:27+05:30",
+  "mode": "RECREATE_CLIENT_FILL",
+  "batch": "stills-v1",
+  "stills_version": "stills-v1",
+  "couple": "Theresa & Isaac",
+  "spatial_blueprint_16x9_status": "approved_by_ashok",
+  "spatial_map_version": "spatial-v1",
+  "job_count": 11,
+  "job_paths": [
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/IMAGE_JOB/scene-01.json",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/IMAGE_JOB/scene-02.json",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/IMAGE_JOB/scene-03.json",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/IMAGE_JOB/scene-04.json",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/IMAGE_JOB/scene-05.json",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/IMAGE_JOB/scene-06.json",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/IMAGE_JOB/scene-07.json",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/IMAGE_JOB/scene-08.json",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/IMAGE_JOB/scene-09.json",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/IMAGE_JOB/scene-10.json",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/IMAGE_JOB/scene-11.json"
+  ],
+  "prompt_sha256": {
+    "scene-01": "e5d28f2addffe2d562ccb917b2ffd38f732958345ccb9c424cf11d004e392c40",
+    "scene-02": "2a73cac1950a95feed3af6971dc3930f018b527b4451cbb9eb0ed0580dd8cb4f",
+    "scene-03": "0b88884254df550b36d50ed8dbdbfd4b0b8fe14325c93723a6d91b65629367e3",
+    "scene-04": "b8c6793a54b43bf48e44736b4bcc8a2f0b609bb19fd6658f87831a2eba8566df",
+    "scene-05": "fc75fca4f37d8f65ba59a6f5390819af5e9b56e2a1b3198a3a6f2eff5d502d25",
+    "scene-06": "f862d8ce1f1d3a073fd6674a7bae482e899d13ccaf5938700730b449e5a59b79",
+    "scene-07": "2770c2d26566a1092c078c68bd9a68a5882a2716891ef2072c6f9abeee09ec80",
+    "scene-08": "f1af9c0aa1e9dcb064d944118abcb00223770448c1f65734b516e2482cee9e37",
+    "scene-09": "8712bf2707bcf1f83166a4a15ea74d80de116bf9de693de4e9ce60b07107ae22",
+    "scene-10": "20ea9b8d93c88046085b11ff32116902b5be167efc949363850e4abc3c29a1ac",
+    "scene-11": "5ddc70a2c06c0e7dad1053992af8e72a4c02bbb33c7ffb1f104f63fe2742d13a"
+  },
+  "jobs": [
+    {
+      "job_id": "IMG-scene-01",
+      "scene_id": "scene-01",
+      "name": "Distant high aerial church establish",
+      "facet_id": "A",
+      "facet": "aerial_compound_exterior",
+      "shot": "S1",
+      "room": "A",
+      "packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/IMAGE_JOB/scene-01.json",
+      "output_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/assets/output/kerala-christian-v1/image-1.jpg",
+      "prompt_sha256": "e5d28f2addffe2d562ccb917b2ffd38f732958345ccb9c424cf11d004e392c40",
+      "prompt_len": 2820,
+      "spatial_folds": [
+        {
+          "kind": "facet_assignment",
+          "facet_id": "A",
+          "facet": "aerial_compound_exterior",
+          "shot": "S1",
+          "room": "A"
+        }
+      ],
+      "status": "DISPATCHED"
+    },
+    {
+      "job_id": "IMG-scene-02",
+      "scene_id": "scene-02",
+      "name": "Church porch with dimensional blessing",
+      "facet_id": "B",
+      "facet": "open_arched_porch_vestibule",
+      "shot": "S2",
+      "room": "B",
+      "packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/IMAGE_JOB/scene-02.json",
+      "output_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/assets/output/kerala-christian-v1/image-2.jpg",
+      "prompt_sha256": "2a73cac1950a95feed3af6971dc3930f018b527b4451cbb9eb0ed0580dd8cb4f",
+      "prompt_len": 4024,
+      "spatial_folds": [
+        {
+          "kind": "facet_assignment",
+          "facet_id": "B",
+          "facet": "open_arched_porch_vestibule",
+          "shot": "S2",
+          "room": "B"
+        },
+        {
+          "kind": "spatial_fact",
+          "from": "continuity/SPATIAL_MAP.json",
+          "fact": [
+            "NO floral cross. Empty low square pedestal. Jeremiah 29:11 blessing title fills that space. Board label: EMPTY PEDESTAL — NO FLORAL CROSS",
+            "EMPTY PEDESTAL — NO FLORAL CROSS",
+            "object_counts.floral_cross=0",
+            "object_counts.pedestal=1"
+          ]
+        }
+      ],
+      "status": "DISPATCHED"
+    },
+    {
+      "job_id": "IMG-scene-03",
+      "scene_id": "scene-03",
+      "name": "Family invitation in the side courtyard",
+      "facet_id": "C",
+      "facet": "side_courtyard_east",
+      "shot": "S3",
+      "room": "C",
+      "packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/IMAGE_JOB/scene-03.json",
+      "output_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/assets/output/kerala-christian-v1/image-3.jpg",
+      "prompt_sha256": "0b88884254df550b36d50ed8dbdbfd4b0b8fe14325c93723a6d91b65629367e3",
+      "prompt_len": 3033,
+      "spatial_folds": [
+        {
+          "kind": "facet_assignment",
+          "facet_id": "C",
+          "facet": "side_courtyard_east",
+          "shot": "S3",
+          "room": "C"
+        }
+      ],
+      "status": "DISPATCHED"
+    },
+    {
+      "job_id": "IMG-scene-04",
+      "scene_id": "scene-04",
+      "name": "Bride beside the sunlit transverse archway",
+      "facet_id": "E",
+      "facet": "sunlit_transverse_archway",
+      "shot": "S4",
+      "room": "E",
+      "packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/IMAGE_JOB/scene-04.json",
+      "output_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/assets/output/kerala-christian-v1/image-4.jpg",
+      "prompt_sha256": "b8c6793a54b43bf48e44736b4bcc8a2f0b609bb19fd6658f87831a2eba8566df",
+      "prompt_len": 3697,
+      "spatial_folds": [
+        {
+          "kind": "facet_assignment",
+          "facet_id": "E",
+          "facet": "sunlit_transverse_archway",
+          "shot": "S4",
+          "room": "E"
+        },
+        {
+          "kind": "spatial_fact",
+          "from": "continuity/SPATIAL_MAP.json",
+          "fact": [
+            "BRIDE stands at sunlit transverse archway facet E (Swaroop had the groom on D / bride on E as S5)",
+            [
+              {
+                "who": "bride",
+                "name": "Ms. M Theresa Luies",
+                "where": "stands at sunlit transverse archway, facet E",
+                "count": 1,
+                "action": "STANDS — camera is at her facet; she is not walked to the aisle"
+              }
+            ]
+          ]
+        }
+      ],
+      "status": "DISPATCHED"
+    },
+    {
+      "job_id": "IMG-scene-05",
+      "scene_id": "scene-05",
+      "name": "Groom in the shaded side aisle",
+      "facet_id": "D",
+      "facet": "shaded_side_aisle",
+      "shot": "S5",
+      "room": "D",
+      "packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/IMAGE_JOB/scene-05.json",
+      "output_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/assets/output/kerala-christian-v1/image-5.jpg",
+      "prompt_sha256": "fc75fca4f37d8f65ba59a6f5390819af5e9b56e2a1b3198a3a6f2eff5d502d25",
+      "prompt_len": 3586,
+      "spatial_folds": [
+        {
+          "kind": "facet_assignment",
+          "facet_id": "D",
+          "facet": "shaded_side_aisle",
+          "shot": "S5",
+          "room": "D"
+        },
+        {
+          "kind": "spatial_fact",
+          "from": "continuity/SPATIAL_MAP.json",
+          "fact": [
+            "GROOM stands at shaded side aisle facet D",
+            [
+              {
+                "who": "groom",
+                "name": "Mr. Isaac Michael Thomas",
+                "where": "stands in the shaded side aisle, facet D",
+                "count": 1,
+                "action": "STANDS — different facet from the bride arch; he is not in the arch"
+              }
+            ]
+          ]
+        }
+      ],
+      "status": "DISPATCHED"
+    },
+    {
+      "job_id": "IMG-scene-06",
+      "scene_id": "scene-06",
+      "name": "Both families' blessing plaque in the west cloister",
+      "facet_id": "F",
+      "facet": "west_cloister",
+      "shot": "S6",
+      "room": "F",
+      "packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/IMAGE_JOB/scene-06.json",
+      "output_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/assets/output/kerala-christian-v1/image-6.jpg",
+      "prompt_sha256": "f862d8ce1f1d3a073fd6674a7bae482e899d13ccaf5938700730b449e5a59b79",
+      "prompt_len": 3190,
+      "spatial_folds": [
+        {
+          "kind": "facet_assignment",
+          "facet_id": "F",
+          "facet": "west_cloister",
+          "shot": "S6",
+          "room": "F"
+        }
+      ],
+      "status": "DISPATCHED"
+    },
+    {
+      "job_id": "IMG-scene-07",
+      "scene_id": "scene-07",
+      "name": "Holy Matrimony at the aisle and altar",
+      "facet_id": "G",
+      "facet": "aisle_and_altar",
+      "shot": "S7",
+      "room": "G",
+      "packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/IMAGE_JOB/scene-07.json",
+      "output_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/assets/output/kerala-christian-v1/image-7.jpg",
+      "prompt_sha256": "2770c2d26566a1092c078c68bd9a68a5882a2716891ef2072c6f9abeee09ec80",
+      "prompt_len": 4277,
+      "spatial_folds": [
+        {
+          "kind": "facet_assignment",
+          "facet_id": "G",
+          "facet": "aisle_and_altar",
+          "shot": "S7",
+          "room": "G"
+        }
+      ],
+      "status": "DISPATCHED"
+    },
+    {
+      "job_id": "IMG-scene-08",
+      "scene_id": "scene-08",
+      "name": "Venue at the north courtyard corner",
+      "facet_id": "H",
+      "facet": "north_courtyard_corner",
+      "shot": "S8",
+      "room": "H",
+      "packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/IMAGE_JOB/scene-08.json",
+      "output_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/assets/output/kerala-christian-v1/image-8.jpg",
+      "prompt_sha256": "f1af9c0aa1e9dcb064d944118abcb00223770448c1f65734b516e2482cee9e37",
+      "prompt_len": 3075,
+      "spatial_folds": [
+        {
+          "kind": "facet_assignment",
+          "facet_id": "H",
+          "facet": "north_courtyard_corner",
+          "shot": "S8",
+          "room": "H"
+        }
+      ],
+      "status": "DISPATCHED"
+    },
+    {
+      "job_id": "IMG-scene-09",
+      "scene_id": "scene-09",
+      "name": "Reception at the evening parish hall garden",
+      "facet_id": "I",
+      "facet": "parish_hall_garden_evening",
+      "shot": "S9",
+      "room": "I",
+      "packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/IMAGE_JOB/scene-09.json",
+      "output_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/assets/output/kerala-christian-v1/image-9.jpg",
+      "prompt_sha256": "8712bf2707bcf1f83166a4a15ea74d80de116bf9de693de4e9ce60b07107ae22",
+      "prompt_len": 3041,
+      "spatial_folds": [
+        {
+          "kind": "facet_assignment",
+          "facet_id": "I",
+          "facet": "parish_hall_garden_evening",
+          "shot": "S9",
+          "room": "I"
+        }
+      ],
+      "status": "DISPATCHED"
+    },
+    {
+      "job_id": "IMG-scene-10",
+      "scene_id": "scene-10",
+      "name": "Hosts in the lamp-lit side chapel corridor",
+      "facet_id": "J",
+      "facet": "lamp_lit_side_chapel_corridor",
+      "shot": "S10",
+      "room": "J",
+      "packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/IMAGE_JOB/scene-10.json",
+      "output_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/assets/output/kerala-christian-v1/image-10.jpg",
+      "prompt_sha256": "20ea9b8d93c88046085b11ff32116902b5be167efc949363850e4abc3c29a1ac",
+      "prompt_len": 3072,
+      "spatial_folds": [
+        {
+          "kind": "facet_assignment",
+          "facet_id": "J",
+          "facet": "lamp_lit_side_chapel_corridor",
+          "shot": "S10",
+          "room": "J"
+        }
+      ],
+      "status": "DISPATCHED"
+    },
+    {
+      "job_id": "IMG-scene-11",
+      "scene_id": "scene-11",
+      "name": "Single couple and single date board",
+      "facet_id": "K",
+      "facet": "gateway",
+      "shot": "S11",
+      "room": "K",
+      "packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/IMAGE_JOB/scene-11.json",
+      "output_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/assets/output/kerala-christian-v1/image-11.jpg",
+      "prompt_sha256": "5ddc70a2c06c0e7dad1053992af8e72a4c02bbb33c7ffb1f104f63fe2742d13a",
+      "prompt_len": 4607,
+      "spatial_folds": [
+        {
+          "kind": "facet_assignment",
+          "facet_id": "K",
+          "facet": "gateway",
+          "shot": "S11",
+          "room": "K"
+        }
+      ],
+      "status": "DISPATCHED"
+    }
+  ],
+  "scene_facet_map": [
+    "scene-01→A(aerial_compound_exterior)",
+    "scene-02→B(open_arched_porch_vestibule)",
+    "scene-03→C(side_courtyard_east)",
+    "scene-04→E(sunlit_transverse_archway)",
+    "scene-05→D(shaded_side_aisle)",
+    "scene-06→F(west_cloister)",
+    "scene-07→G(aisle_and_altar)",
+    "scene-08→H(north_courtyard_corner)",
+    "scene-09→I(parish_hall_garden_evening)",
+    "scene-10→J(lamp_lit_side_chapel_corridor)",
+    "scene-11→K(gateway)"
+  ],
+  "spatial_folds_applied": {
+    "scene-04": "bride at sunlit arch facet E",
+    "scene-05": "groom at shaded aisle facet D",
+    "scene-02": "empty pedestal and zero floral crosses",
+    "facet_ids": {
+      "scene-01": "A",
+      "scene-02": "B",
+      "scene-03": "C",
+      "scene-04": "E",
+      "scene-05": "D",
+      "scene-06": "F",
+      "scene-07": "G",
+      "scene-08": "H",
+      "scene-09": "I",
+      "scene-10": "J",
+      "scene-11": "K"
+    },
+    "facets": {
+      "scene-01": "aerial_compound_exterior",
+      "scene-02": "open_arched_porch_vestibule",
+      "scene-03": "side_courtyard_east",
+      "scene-04": "sunlit_transverse_archway",
+      "scene-05": "shaded_side_aisle",
+      "scene-06": "west_cloister",
+      "scene-07": "aisle_and_altar",
+      "scene-08": "north_courtyard_corner",
+      "scene-09": "parish_hall_garden_evening",
+      "scene-10": "lamp_lit_side_chapel_corridor",
+      "scene-11": "gateway"
+    },
+    "source": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/continuity/SPATIAL_MAP.json",
+    "prompt_strings_unmodified": true
+  },
+  "qc_waived": true,
+  "continuity_gate": "WAIVED",
+  "continuity_qc": "WAIVED",
+  "visual_qc": "WAIVED",
+  "spatial_qc": "WAIVED",
+  "continuity_bible": null,
+  "video_held": true,
+  "video_jobs_authorized": false,
+  "video_dispatched": false,
+  "note": "VIDEO HELD until Orchestrator unlock after 11 stills on disk.",
+  "scene_12": "NOT an IMAGE_JOB",
+  "scene_12_packet": null,
+  "auth_packets": [
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/ORCHESTRATOR_GO_IMAGES.json",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/ORCHESTRATOR_GO_ASSET_PRODUCER_IMAGES.json",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/ORCHESTRATOR_UNLOCK_IMAGE_stills-v1.json",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/ORCHESTRATOR_WAIVE_CONTINUITY.json",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/ORCHESTRATOR_SPATIAL_APPROVED.json"
+  ],
+  "assets_root": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/assets/output/kerala-christian-v1",
+  "dispatch_target": "FMI Image Floor @Image Director",
+  "template_sha256": "38dd6564a6dbc8ff4545b875bb41dcc984c6afa4b0f6bc6d8aca20a2f1fb0577",
+  "prompt_source": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/scenes_prompt_extract.json",
+  "prompt_field": "image_prompt"
+}

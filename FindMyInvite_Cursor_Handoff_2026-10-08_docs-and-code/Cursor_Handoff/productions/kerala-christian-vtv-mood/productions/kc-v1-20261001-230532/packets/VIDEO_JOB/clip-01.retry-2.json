@@ -1,0 +1,38 @@
+{
+  "job_type": "VIDEO_RETRY",
+  "job_id": "VID-clip-01",
+  "clip_id": "clip-01",
+  "production_id": "kc-v1-20261001-230532",
+  "attempt": 2,
+  "authorized_by_orchestrator": true,
+  "authorized_at": "2026-10-01T23:19:02.447793+05:30",
+  "base_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/VIDEO_JOB/clip-01.json",
+  "output_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1.mp4",
+  "first_frame_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-1.jpg",
+  "last_frame_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-2.jpg",
+  "duration_seconds": 5,
+  "resolution": "720p",
+  "model": "grok-imagine-video-1.5",
+  "retry_instruction": "Keep first=image-1 and last=image-2 anchors. Regenerate ONLY the connection motion: true continuous forward-down dive over courtyard/pool into open porch columns, then slow push revealing fixed blessing text \u2014 NO crossfade, NO zoom-blur morph soup, NO architecture swap. Preserve one floral cross and open rear to tower throughout.",
+  "violations": [
+    {
+      "rule": "continuous_spatial_dive",
+      "expected": "single continuous forward-down dive then slow push with real translation/occlusion/parallax",
+      "observed": "radial-blur morph/crossfade into second image around ~1s \u2014 not continuous 3D travel"
+    },
+    {
+      "rule": "architecture_identity",
+      "expected": "preserve compound spatial identity; porch destination with tower beyond consistent with anchors",
+      "observed": "during transition, main church building morphs into a different centered bell-tower mass"
+    }
+  ],
+  "qc_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/visual_qc/clip-01.json",
+  "max_paid_attempts": 2,
+  "note": "Final paid attempt. Prefer silent output if API allows; AAC soft-flag for Finish if unavoidable.",
+  "rules": [
+    "A\u2192B connection only",
+    "use actual approved frames",
+    "no self-approve",
+    "defect-only motion fix"
+  ]
+}

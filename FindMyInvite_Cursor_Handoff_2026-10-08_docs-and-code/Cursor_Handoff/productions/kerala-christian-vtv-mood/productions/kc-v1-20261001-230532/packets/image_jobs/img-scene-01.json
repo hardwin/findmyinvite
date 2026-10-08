@@ -1,0 +1,41 @@
+{
+  "job_type": "IMAGE_JOB",
+  "job_id": "img-scene-01",
+  "production_id": "kc-v1-20261001-230532",
+  "scene_id": "scene-01",
+  "scene_index": 1,
+  "scene_name": "Distant high aerial church establish",
+  "image_prompt": "A high oblique DRONE establishing shot of a lavishly decorated white Portuguese-influenced Kerala Catholic church compound near the Alappuzha backwaters at soft sunrise, portrait 9:16. The camera floats about 40 meters ABOVE the courtyard and well BACK from the foreground porch, around the height of the modest bell tower's upper half. It looks diagonally DOWN across the church at roughly 20–25 degrees below horizontal with a wide 24 mm lens. A lavender-peach and powder-blue sunrise sky, low sun at left and distant misty coconut-palm horizon over hazy backwaters remain clearly visible in the upper third. The composition must immediately read as a flying drone looking down into a coastal church compound.\n\nShow broad TOP SURFACES of both long side-cloister roofs and the small central porch roof. See DOWN into a shallow rectangular reflecting courtyard pool, over its near parapet, with cream paving and steps receding away below the camera. People are tiny figures seen from above. The front boundary occupies a narrow foreground strip. The complete cream-white bell tower with a simple cross stands in the background, with sky around its cupola. The small open arched church porch vestibule is well below the camera, its tiled roof about one quarter of frame width, with open courtyard separating it from the bell tower. Its roof partly occludes the tiny floral cross pedestal within. This is a grand view of the whole church compound, not a close portrait. Keep the sky and horizon while retaining clear downward perspective; neither an eye-level facade view nor a vertical overhead map.\n\nCream-white plaster walls with soft laterite stone accents, arched windows, one modest bell tower topped by a cross, one small open arched porch vestibule with three shallow front steps and floral swags of white jasmine, soft pink roses, baby's breath and green foliage. All porch sides are open between the arches, including the rear. A tiny floral cross arrangement sits on a low pedestal between two soft candle stands; facial details of any figure are not resolved from this height. No closed inner sanctuary or back wall within the porch.\n\nLavish Christian wedding decoration is distributed across the entire aerial view: soft white-and-pale-pink floral swags on the bell tower and cloisters, layered jasmine and greenery along BOTH side arcades, floral trim on the porch arches and columns, delicate petal borders along steps and pool edges, and floating white flower bowls on the water. These details stay small in the landscape; never lower or move the camera closer to show them. The central forward-down flight route remains clear. Soft romantic sunrise, long gentle shadows, subtle reflections, coastal atmospheric depth and premium dimensional storybook illustration. No text, watermark or additional shrine.",
+  "required_text": [],
+  "continuity_subsection_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/continuity/CONTINUITY_BIBLE.json#scene-01",
+  "output_filename": "image-1.jpg",
+  "output_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-1.jpg",
+  "aspect_ratio": "9:16",
+  "width": 720,
+  "height": 1280,
+  "image_request": {
+    "quality": "high",
+    "aspect_ratio": "9:16",
+    "output_format": "jpeg",
+    "number_of_images": 1
+  },
+  "model": {
+    "credentials_env": "REPLICATE_API_TOKEN",
+    "id": "openai/gpt-image-2.5-flare",
+    "provider": "replicate"
+  },
+  "dependencies": [],
+  "max_paid_attempts": 2,
+  "attempt": 1,
+  "status": "AUTHORIZED_DISPATCHED",
+  "authorized_by_orchestrator": true,
+  "staged_at": "2026-10-01T23:08:07.375872+05:30",
+  "source_extract": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/scenes_prompt_extract.json",
+  "authorized_to_dispatch": true,
+  "authorized_at": "2026-10-01T23:08:35.904391+05:30",
+  "canonical_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/IMAGE_JOB/scene-01.json",
+  "authorization_note": "Orchestrator GO — canonical packets also in IMAGE_JOB/; use either path",
+  "dispatched_at": "2026-10-01T23:08:37.106669+05:30",
+  "dispatch_target": "FMI Image Floor fb72b97b @Image Director",
+  "handoff_packet_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/IMAGE_JOB/scene-01.json"
+}

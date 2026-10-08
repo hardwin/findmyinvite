@@ -1,0 +1,19 @@
+{
+  "job": "IMG-scene-01-order-v2",
+  "scene_id": "scene-01",
+  "status": "GENERATED",
+  "asset_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-1.jpg",
+  "generation_id": "3j976cpva9rmy0d0z33agwb1f4",
+  "prompt_hash": "23cfdecfde0d7659a1d5aeae258b0dcd61222298a8f8b3c7fe6f67096deafd3d",
+  "attempt": 2,
+  "error": null,
+  "output_url": "https://replicate.delivery/xezq/onhr2ZTaMpYTEFsV9jb8EjuBCxc2X50g0sG8ibI9eVeFvFTXA/tmpmff8p8se.jpeg",
+  "model": "openai/gpt-image-2.5-flare",
+  "provider": "replicate",
+  "order": "V2",
+  "generation": "reference-conditioned",
+  "reference_image": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1-handoff.jpg",
+  "retry": true,
+  "retry_instruction": "Keep elevated sweeping drone + NO text + ONE tower + floral cross + twin candles + coastal palms/sunrise. Fix ONLY geography: show the open porch vestibule as its own open pavilion (handoff classical column family) with the cream church+bell tower readable BEYOND the open rear by water \u2014 matching clip-1-handoff.jpg world \u2014 not a porch glued as the church facade.",
+  "prior_asset_archived": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-1.order-v2-attempt1-vetoed.jpg"
+}

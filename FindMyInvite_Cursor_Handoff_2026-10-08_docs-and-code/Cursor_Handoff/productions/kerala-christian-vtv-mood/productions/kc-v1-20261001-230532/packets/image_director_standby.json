@@ -1,0 +1,9 @@
+{
+  "job_type": "IMAGE_DIRECTOR_STANDBY",
+  "production_id": "kc-v1-20261001-230532",
+  "immediate_task": "READY for parallel IMAGE_JOBs scene-01..11. Wait for Orchestrator GO + packet paths in Image Floor. Generate exactly per packet.",
+  "packets_dir": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/image_jobs",
+  "assets_root": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1",
+  "max_paid_attempts": 2,
+  "scene_12": "no still generation"
+}

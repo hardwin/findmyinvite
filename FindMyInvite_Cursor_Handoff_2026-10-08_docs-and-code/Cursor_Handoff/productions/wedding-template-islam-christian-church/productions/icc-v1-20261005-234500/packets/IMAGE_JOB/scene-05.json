@@ -1,0 +1,47 @@
+{
+  "job_type": "IMAGE_JOB",
+  "job_id": "IMG-scene-05",
+  "production_id": "icc-v1-20261005-234500",
+  "scene_id": "scene-05",
+  "scene_index": 5,
+  "name": "Join Us \u2014 cafe table and Wedding Venue board",
+  "output_path": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/assets/output/image-5.jpg",
+  "prompt_source": "template.json scenes[4].image_prompt (verbatim)",
+  "prompt_sha256": "7a6ed1a0ffe29069d5455bce46d0159998090a26e930ad12c6800cff5743362a",
+  "prompt_chars": 3031,
+  "model": {
+    "id": "openai/gpt-image-2.5-flare",
+    "provider": "replicate",
+    "credentials_env": "REPLICATE_API_TOKEN"
+  },
+  "generation": "text-only",
+  "image_request": {
+    "input_images": [],
+    "aspect_ratio": "9:16",
+    "quality": "high",
+    "output_format": "jpeg"
+  },
+  "width": 720,
+  "height": 1280,
+  "postprocess": "ffmpeg_pad to 720x1280",
+  "auth_packet": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/packets/ORCHESTRATOR_GO_IMAGES.json",
+  "template_sha256": "3a722bd2dc87b669445c7b20411b00886a1a96ab787c448d4f1dcb6ec748d42f",
+  "staging": false,
+  "qc": "NO_QC",
+  "spatial": "WAIVED",
+  "continuity": "WAIVED",
+  "retry_policy": {
+    "paid_predictions": 1,
+    "retry_on_api_failure": 1
+  },
+  "status": "SUPERSEDED",
+  "authorized_to_dispatch": false,
+  "staged_at": "2026-10-05T23:47:21.915868+05:30",
+  "request_id": "wf34azhgkhrmy0d11n4vdj7py8",
+  "output_sha256": "1ac0893ccd048c9bccd7ee4d6892f463a57331e48d39f5b72bfee18ee73043c0",
+  "output_size_bytes": 291635,
+  "generated_at": "2026-10-05T23:48:01.600851+05:30",
+  "superseded_by": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/packets/IMAGE_JOB/scene-05-pixar-restyle.json",
+  "superseded_at": "2026-10-06T00:37:15.119069+05:30",
+  "superseded_reason": "FULL PIXAR RESTYLE (template 8ade25af...)"
+}

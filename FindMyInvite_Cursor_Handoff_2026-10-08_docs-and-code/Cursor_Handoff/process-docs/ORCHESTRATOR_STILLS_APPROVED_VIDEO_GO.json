@@ -1,0 +1,20 @@
+{
+  "packet_type": "ORCHESTRATOR_STILLS_APPROVED_VIDEO_GO",
+  "production_id": "nk-v1-20261002-072013",
+  "recorded_at": "2026-10-02T08:48:46+05:30",
+  "stills_batch": "stills-v5",
+  "stills_status": "approved_by_ashok",
+  "approved_via": "Ashok approve (relayed by Video Director)",
+  "video_authorized": true,
+  "current_state": "GENERATING_CLIPS",
+  "stills_dir": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5/",
+  "spatial_map": "/workspace/fmi-productions/nandini-karthik-remake/continuity/SPATIAL_MAP.json",
+  "continuity_bible": "/workspace/fmi-productions/nandini-karthik-remake/continuity/CONTINUITY_BIBLE.json",
+  "orders": [
+    "Asset Producer: emit VIDEO_JOBs for continuous adjacent weave clip chain using stills-v5 as frames; fold Spatial Map camera/facet/offscreen; couple STANDS no walk",
+    "Video Director: generate from VIDEO_JOBs only; continuous motion between adjacent facets",
+    "Visual QC + Continuity: judge clips before assemble",
+    "VIDEO HOLD lifted"
+  ],
+  "kc_v1_order_v2": "STOP unchanged"
+}

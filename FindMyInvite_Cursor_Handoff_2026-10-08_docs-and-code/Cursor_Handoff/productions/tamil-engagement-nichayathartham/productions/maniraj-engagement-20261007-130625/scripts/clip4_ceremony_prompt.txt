@@ -1,0 +1,31 @@
+ONE single camera move, 3 seconds, portrait 9:16, Pixar-style 3D animated look. Start exactly on the supplied image and stay in this same scene: the garlanded mandapam corridor of a traditional Tamil engagement home, with the gold Tamil text on the dark carved wooden wall above the cream and gold settee. No cut, no transition.
+
+CAMERA RISES STRAIGHT UP ONLY. Everything in the scene stays exactly as it is; only the camera moves.
+
+NO PEOPLE APPEAR at any moment: no figures, hands or silhouettes. The settee stays empty.
+
+CAMERA (motion-control pedestal / crane-up, speed-ramp RISE): a pure straight vertical rise from the low starting position. The camera translates straight upward in a line, like a crane column lifting. NO rotation, NO tilt, NO orbit, NO pan, NO roll, NO arc, NO zoom, NO sideways drift. The camera angle stays fixed and level from frame 1 to the last frame. It never moves down and never reverses.
+0.0-1.0s: FAST from the very first frame, a quick rise upward, with slight motion blur on the near petals and marigolds as they slide down past the lens.
+1.0-3.0s: a dramatic speed-ramp deceleration into slow motion: the rise glides ever more slowly and floats to a gentle stop at eye level, square-on facing the text, the text centred in frame. Machine-precise, no shake.
+
+RIGID WALL: the carved wooden wall, the text, the pillars, the settee, the red carpet runner and every object stay perfectly rigid and fixed in place. The wall never turns, tilts, bends, warps or rotates like a board; it stays flat and frontal. Parallax comes only from depth: the near foreground petals, marigolds and rose garland slide past faster than the settee and lamps, and those faster than the wall.
+
+FROZEN FLOWERS: every marigold and every pink and red rose petal floating in the air is FROZEN mid-air, completely suspended; they never fall, drift or flutter, they only shift with depth parallax as the camera rises. Petals lying on the carpet and floor stay still. Warm golden sunbeams stream in from the top left through soft glowing haze. The brass lamp flames burn softly.
+
+RACK FOCUS: the clip begins with the near foreground marigolds and petals sharp and the wall soft; as the camera slows, focus racks onto the text, ending razor-sharp on it with the foreground melting into creamy bokeh.
+
+TEXT LOCK: all Tamil text on the wall stays exact, sharp, flat and unchanged in every frame, exactly as in the start image:
+பெரியோர்களின் நல்லாசியுடன்
+நிச்சயதார்த்த விழா
+12 அக்டோபர் 2026
+திங்கட்கிழமை
+முகூர்த்த நேரம்
+மதியம் 12.00 – 1.30 மணி
+அனைவரும் வருக
+Keep முகூர்த்த and திங்கட்கிழமை letter for letter exactly as in the still. Same letters, same shapes, same spacing, same gold colour, same ornamental dividers. No morphing, flicker, warping, re-lettering or added text anywhere.
+
+EVERYTHING ELSE STILL: the hanging rose and jasmine garlands, the hanging brass lamps, the brass standing lamps, the peacock feathers in brass vases, the banana leaves, the white flower pots, the carved ceiling beams and the red carpet runner stay rigid.
+
+LOOK: preserve the start image exactly: warm golden sunlight, dark wood, gold, maroon, rose pink, marigold and green palette, Leica Noctilux 75mm f/1.25 razor-thin depth of field, dreamy smooth falloff. No new objects.
+
+CAMERA RISES STRAIGHT UP ONLY, no rotation, no tilt, no orbit, no pan. The wall, the text and the whole scene stay rigid and static; only the camera moves.

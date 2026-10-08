@@ -1,0 +1,31 @@
+{
+  "packet_type": "ASSET_PRODUCER_HOLD_XAI_CREDITS",
+  "production_id": "kc-v1-recreate-20261002-192743",
+  "held_at": "2026-10-02T19:49:20+05:30",
+  "status": "HELD_XAI_CREDITS_EXHAUSTED",
+  "orchestrator_hold": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/ORCHESTRATOR_HOLD_XAI_CREDITS.json",
+  "job": "VID-clip-01",
+  "attempt": 2,
+  "a2_auth_preserved": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/ORCHESTRATOR_RETRY_clip-01_attempt2.json",
+  "video_job_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/VIDEO_JOB/clip-01.json",
+  "actions": [
+    "No new VIDEO_JOBs emitted",
+    "clip-01 a2 remains RETRY_AUTHORIZED_ATTEMPT_2_BLOCKED_CREDITS \u2014 authorized_to_dispatch=false",
+    "clip-02..11 remain STAGED_HELD_FOR_PRIOR_HANDOFF",
+    "No unpaid/paid retry until Orchestrator re-cue after Ashok restores credits"
+  ],
+  "held": [
+    "clip-01-a2",
+    "clip-02",
+    "clip-03",
+    "clip-04",
+    "clip-05",
+    "clip-06",
+    "clip-07",
+    "clip-08",
+    "clip-09",
+    "clip-10",
+    "clip-11"
+  ],
+  "awaiting": "credits_restored_confirmed_by_ashok + Orchestrator re-cue Video Director on existing a2 auth"
+}

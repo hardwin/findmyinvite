@@ -1,0 +1,180 @@
+{
+  "job_type": "IMAGE_JOB",
+  "job_id": "IMG-scene-02",
+  "production_id": "kc-v1-recreate-20261003-071403",
+  "mode": "RECREATE_CLIENT_FILL",
+  "batch": "stills-v1",
+  "stills_version": "stills-v1",
+  "status": "GENERATED",
+  "authorized_to_dispatch": false,
+  "authorization_note": "Orchestrator IMAGE GO RECREATE_CLIENT_FILL stills-v1 \u2014 locked image_prompts verbatim from scenes_prompt_extract; spatial constraints folded only; continuity_gate=WAIVED; qc_waived=true (no Continuity, Visual, or Spatial QC); VIDEO not authorized.",
+  "scene_id": "scene-02",
+  "scene_index": 2,
+  "name": "Church porch with dimensional blessing",
+  "generation": "text-only",
+  "required_text": [],
+  "customer_copy": [],
+  "image_prompt": "Create one full-bleed portrait 9:16 frame from a premium dimensional storybook Kerala Christian church wedding invitation film, solely from this written description. Soft romantic late-2000s South Indian cinema mood with dreamy natural light and intimate coastal Kerala atmosphere. Cream-white Portuguese-influenced plaster with laterite accents; ivory, pearl, soft powder-blue and champagne-gold accents. One warm soft sunrise from camera-left throughout, gentle amber-cream bloom with readable highlight detail, long soft diagonal shadows and cool teal shade. White jasmine, soft pink roses, baby's breath, green foliage, soft candle stands, polished cream stone with warm directional reflections. No photographic humans, no watermark, no interface, no frame. Render only the exact text requested for this image. Materials and lighting stay consistent between an aerial view and a close view of the same church compound.\n\nONE white Kerala Catholic church compound with ONE modest cream-white bell tower topped by a simple cross at the far end of its central axis, near Alappuzha backwaters haze and coconut palms. In front of it is ONE much smaller freestanding open arched porch vestibule, with four cream plaster corner columns, a shallow tiled roof, soft floral scallops of white jasmine and pale pink roses, and three shallow front steps. All four sides of the porch are OPEN BETWEEN THE ARCHES, including the rear: clear daylight and the distant bell tower are visible through the rear gaps from a frontal low viewpoint. There is no masonry rear wall, inner sanctuary box, door panel, nested doorway, or second shrine inside. No floral cross. The open central low square pedestal between two soft candle stands is clear, and the devotional lettering fills that space. Keep the roof, corner columns, steps, pedestal and rear opening physically consistent. The bell tower remains outside beyond the rear arches. The open left side connects directly to the adjacent invitation courtyard bay.\n\nSHOT: Eye-level camera inside the SAME small open arched porch vestibule, facing the open pedestal and the distant bell tower. No floral cross. beyond the open rear side. Two front columns frame the extreme edges, rear columns are visible farther away, and a shallow roof with floral beam sits overhead. Daylight remains visible on both sides of the pedestal, continuing uninterrupted into the exterior courtyard behind it. No solid backdrop or inner doorway. The devotional lettering and pedestal together occupy approximately 40 percent of image height in the lower middle, with polished foreground floor still visible. In place of any floral cross, a LARGE two-line floating blessing title reads exactly 'For I know the plans i have for you , declares the lord,' / 'plan to give you hope and a future for starting your nee journey - JEREMIAH 29:11'. Exquisite ornate display lettering with graceful curved serifs, a gently arched first line, elegant varied stroke widths and modest flourishes. The title spans approximately 65-70 percent of frame width, in the upper-middle quarter, separated clearly from the roof beam and the pedestal. No floral cross anywhere. These are freestanding dimensional letters suspended in the open air, with luminous champagne-gold faces, antique-gold beveled edges, subtle warm halos and tiny bright edge glints. Rich gold, not brown engraving. No rectangular nameplate, printed wall text or letters attached to plaster. Readable counters and gaps between words, full title inside the frame. Soft sunrise strikes the letters obliquely and reflects softly in the polished cream stone. Abundant individual white jasmine and soft pink rose petals in three depths: softly defocused small near-lens petals at the edges, sharp rotating midground petals and tiny background petals. Keep all lettering unobscured. No floral cross anywhere in the frame. A few delicate soft candle wisps originate ONLY at a visible low candle stand; the title emits no smoke. Leave the left-side exit open and visible.",
+  "prompt_sha256": "2a73cac1950a95feed3af6971dc3930f018b527b4451cbb9eb0ed0580dd8cb4f",
+  "prompt_policy": "CLIENT_FILL \u2014 locked image_prompt verbatim from scenes_prompt_extract; Spatial constraints folded only; do NOT rewrite creative prose",
+  "image_request": {
+    "quality": "high",
+    "aspect_ratio": "9:16",
+    "output_format": "jpeg",
+    "number_of_images": 1
+  },
+  "continuity_gate": "WAIVED",
+  "qc_waived": true,
+  "continuity_qc": "WAIVED",
+  "visual_qc": "WAIVED",
+  "spatial_qc": "WAIVED",
+  "continuity": {
+    "continuity_gate": "WAIVED",
+    "bible": null,
+    "note": "No Continuity bible. Continuity QC waived."
+  },
+  "spatial_constraints": {
+    "spatial_map_version": "spatial-v1",
+    "source": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/continuity/SPATIAL_MAP.json",
+    "shot": "S2",
+    "facet_id": "B",
+    "room": "B",
+    "facet": "open_arched_porch_vestibule",
+    "zone": "open arched porch vestibule \u2014 NO floral cross",
+    "arrival": "dive from aerial into the south porch",
+    "turn_from_prior": "DIVE-DOWN",
+    "character_stands": [],
+    "camera_pose": {
+      "framing": "porch interior toward the empty low square pedestal and the open rear",
+      "height": "eye",
+      "look": "north through the open porch; pedestal low and empty",
+      "aim": "empty pedestal; blessing title occupies the space a floral cross would have used",
+      "fov_hint": "standard porch",
+      "move_intent": "pan east into the side courtyard C",
+      "lighting": "daytime porch"
+    },
+    "visible_set": [
+      "open arched porch vestibule, sides open",
+      "ONE empty low square pedestal \u2014 nothing standing on it",
+      "ZERO floral crosses",
+      "devotional blessing title filling the pedestal's visual space",
+      "Jeremiah 29:11 copy (exact locked lines, including the word nee)"
+    ],
+    "offscreen_neighbors": {
+      "north": "nave / shaded aisle approach, not the subject",
+      "east": "C side courtyard (next facet)",
+      "south": "K gateway just outside",
+      "west": "the one bell tower, glimpsed, not a second tower",
+      "not_in_frame": "any floral cross, candle-cross arrangement, duplicate porch"
+    },
+    "forbidden_reuse": [
+      "second compound",
+      "multiple bell towers",
+      "lake or gopuram plate",
+      "photographic people",
+      "floral cross on the porch",
+      "a second Save the Date board",
+      "Hyderabad geography redesign of the church",
+      "reusing the Swaroop stand assignment (groom on the arch / bride in the aisle)"
+    ],
+    "object_counts": {
+      "floral_cross": 0,
+      "pedestal": 1,
+      "date_board": 0,
+      "bride": 0,
+      "groom": 0
+    },
+    "text": {
+      "copy": "For I know the plans i have for you , declares the lord,\nplan to give you hope and a future for starting your nee journey - JEREMIAH 29:11",
+      "carrier": "large floating blessing title where a floral cross would have been"
+    },
+    "next_edge": {
+      "to": "scene-03",
+      "move": "east pan into side courtyard",
+      "edge": "B-C",
+      "clip": "clip-02"
+    },
+    "board_label": "EMPTY PEDESTAL \u2014 NO FLORAL CROSS",
+    "folds_applied": [
+      {
+        "kind": "facet_assignment",
+        "facet_id": "B",
+        "facet": "open_arched_porch_vestibule",
+        "shot": "S2",
+        "room": "B"
+      },
+      {
+        "kind": "spatial_fact",
+        "from": "continuity/SPATIAL_MAP.json",
+        "fact": [
+          "NO floral cross. Empty low square pedestal. Jeremiah 29:11 blessing title fills that space. Board label: EMPTY PEDESTAL \u2014 NO FLORAL CROSS",
+          "EMPTY PEDESTAL \u2014 NO FLORAL CROSS",
+          "object_counts.floral_cross=0",
+          "object_counts.pedestal=1"
+        ]
+      }
+    ],
+    "prompt_unmodified": true,
+    "empty_pedestal": true,
+    "floral_crosses": 0
+  },
+  "output_filename": "image-2.jpg",
+  "output_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/assets/output/kerala-christian-v1/image-2.jpg",
+  "aspect": "9:16",
+  "width": 720,
+  "height": 1280,
+  "model": {
+    "credentials_env": "REPLICATE_API_TOKEN",
+    "id": "openai/gpt-image-2.5-flare",
+    "provider": "replicate"
+  },
+  "skip_spatial": false,
+  "spatial_map_version": "spatial-v1",
+  "spatial_map_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/continuity/SPATIAL_MAP.json",
+  "spatial_blueprint_16x9_status": "approved_by_ashok",
+  "spatial_approved_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/ORCHESTRATOR_SPATIAL_APPROVED.json",
+  "dependencies": {
+    "blocks": [],
+    "blocked_by": [
+      "template_compiler_PASS",
+      "spatial_map_approved_by_ashok",
+      "orchestrator_IMAGE_authorize",
+      "continuity_WAIVED"
+    ]
+  },
+  "context_isolation": {
+    "includes_clip_graph": false,
+    "includes_other_scenes": false,
+    "includes_full_template": false,
+    "rule": "Image agents must not receive clip graphs, unrelated scenes, or full template.json"
+  },
+  "retry_policy": {
+    "automatic_paid_retries": false,
+    "max_paid_attempts": 2
+  },
+  "max_paid_attempts": 2,
+  "attempt": 1,
+  "template_sha256": "38dd6564a6dbc8ff4545b875bb41dcc984c6afa4b0f6bc6d8aca20a2f1fb0577",
+  "continuity_bible_sha256": null,
+  "orchestrator_auth": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/ORCHESTRATOR_GO_IMAGES.json",
+  "orchestrator_ap_auth": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/ORCHESTRATOR_GO_ASSET_PRODUCER_IMAGES.json",
+  "unlock_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/ORCHESTRATOR_UNLOCK_IMAGE_stills-v1.json",
+  "waive_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/ORCHESTRATOR_WAIVE_CONTINUITY.json",
+  "staged_at": "2026-10-03T07:46:27+05:30",
+  "authorized_by_orchestrator": true,
+  "authorized_at": "2026-10-03T07:44:12+05:30",
+  "dispatched_at": "2026-10-03T07:46:27+05:30",
+  "dispatch_target": "FMI Image Floor @Image Director",
+  "video_jobs_authorized": false,
+  "preserve_prior_productions": [
+    "kc-v1-recreate-20261003-003016",
+    "kc-v1-recreate-20261002-192743",
+    "nk-v1-20261002-072013 HOLD"
+  ],
+  "source": "packets/scenes_prompt_extract.json image_prompt (verbatim) + continuity/SPATIAL_MAP.json constraints folded only; continuity bible NOT included (WAIVED)",
+  "generation_id": "863facphwdrmr0d0zy6rza4qe4",
+  "output_sha256": "6f6f749bd857460355d046ce997442c444f0c16e5a27056b83ca269571f80bf8",
+  "output_size_bytes": 245561,
+  "output_url": "https://replicate.delivery/xezq/rrBwremM85VCHSAt6vehM1EDE95gDa3ijDbkAhvFjiJpfCnuA/tmpbw4161xe.jpeg",
+  "generated_at": "2026-10-03T07:48:18+0530"
+}

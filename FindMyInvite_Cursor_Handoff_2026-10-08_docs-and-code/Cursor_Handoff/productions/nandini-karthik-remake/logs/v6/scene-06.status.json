@@ -1,0 +1,31 @@
+{
+  "ts_local": "2026-10-02T10:56:08+0530",
+  "job_id": "IMG-v6-scene-06",
+  "scene_id": "scene-06",
+  "status": "GENERATED",
+  "attempt": 1,
+  "generation_id": "5f5zeg2wmdrmy0d0zc9vwb9j0m",
+  "prompt_sha256": "cc91f8e2afa8095e992b3ad1c3d774330539bbec08fe67165b29a8896a90270e",
+  "output_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v6/scene-06.jpg",
+  "size_bytes": 328102,
+  "sha256": "5a765feceae2ece605f985e47265fa5c3f3d2b23429f4a64959596e69d404c99",
+  "facet": "lotus_pond_photoshoot_terrace",
+  "spatial_map_version": "spatial-v9",
+  "forbidden_reuse": [
+    "v4 lake-gopuram-hills-boat dominant",
+    "walking",
+    "bride bun",
+    "stage mandap as this room",
+    "misty lake",
+    "temple gopuram",
+    "hills",
+    "mountains",
+    "wooden boat",
+    "lake+gopuram+hills+boat as hero BG"
+  ],
+  "error": null,
+  "model": "openai/gpt-image-2.5-flare",
+  "provider": "replicate",
+  "input_images_count": 1,
+  "output_url": "https://replicate.delivery/xezq/dDQQ69eG9nRMC6RUPHSHMax6TYEpChgtfpu8ysw7V7QvJPTXA/tmpqg7hk5_z.jpeg"
+}

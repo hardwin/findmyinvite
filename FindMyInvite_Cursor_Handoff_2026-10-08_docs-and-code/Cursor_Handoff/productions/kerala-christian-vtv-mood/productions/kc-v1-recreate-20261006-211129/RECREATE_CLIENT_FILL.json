@@ -1,0 +1,133 @@
+{
+  "mode": "RECREATE_CLIENT_FILL",
+  "template_name": "kerala-christian-v1",
+  "couple": "Rahul & Mounika",
+  "production_id": "kc-v1-recreate-20261006-211129",
+  "created_at": "2026-10-06T21:13:36+05:30",
+  "scope": "STILLS ONLY (no clips)",
+  "qc_policy": "NO_QC_GENERATE_AND_STITCH (locked template); continuity/QC skipped",
+  "template_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261006-211129/template.json",
+  "template_sha256": "5796dee2c650fee64a529793bb4a5c46fa03a4255c5da90a3b8ad8dda3f5039b",
+  "source_template": "/workspace/fmi-productions/kerala-christian-vtv-mood/template.json",
+  "source_template_sha256": "bad0d176beb1ad47e3942689f95c4153fb933f3547670a255bb7fc062f46dae4",
+  "fix_reference_production": "kc-v1-recreate-20261003-071403 (Theresa & Isaac, latest approved+delivered) template sha a7d1494e60f50b79aae54dab639557b1e687cb05bd13b5d54fc6f910adc6b584",
+  "base_rationale": "Locked template.json (bad0d176) gives the original structure/order (groom scene-04, bride scene-05, floral cross + 2-line devotional title). Only the generic fixes that ended up in the Theresa & Isaac delivery were layered on; Theresa-specific changes (bride-first swap, Jeremiah verse replacing floral cross, 'nee journey', readability blur) were not carried.",
+  "fixes_carried": [
+    "scene-01 image_prompt_template = Theresa final verbatim (the prompt that produced the reused image-1, sha b2ea58ba; empty porch, no pedestal/pillar). Not regenerated.",
+    "scene-02: locked structure kept (floral cross + 2-line devotional title via placeholders); 5 'pedestal' phrases removed (cross stands directly on porch floor). Theresa's Jeremiah hard-coded 5-line verse / no-cross / readability-blur text NOT carried.",
+    "clip-01: locked choreography kept; 'pedestal' wording removed (3 sentences); Theresa's NO EXTRA PILLAR line carried, minus its cross/pedestal words since the floral cross stays.",
+    "clip-02: Theresa final text (empty unpeopled porch first-to-last frame; exactly one white bell tower with one cross; no pedestal wording), with 'verse wall' put back to the locked 'floral cross'."
+  ],
+  "parameters": {
+    "invitation_lines": "The Wedding of\nRahul & Mounika",
+    "groom_title": "Mr.",
+    "groom_name": "Rahul Raju, Software Engineer",
+    "bride_title": "Dr.",
+    "bride_name": "Mounika M.B.B.S",
+    "family_lines": "With the Blessings of\nGroom's Parents\nMr. Polimetla Suvarna Raju\n& Mrs. Rakshna\nBride's Parents\nSri Pudi Narasimhulu\n& Smt. Sujana",
+    "ceremony_lines": "Holy Matrimony\nWednesday\n21st October 2026\n10:00 AM to 12:00 Noon",
+    "venue_lines": "Wedding Venue\nJesus Centre, Iskon City Road\nNear Hanuman Junction, Nellore\n10:00 AM to 12:00 Noon",
+    "reception_lines": "Lunch\n21st October 2026\nFollows the Holy Matrimony",
+    "host_lines": "Specially Invited By\nDr. Shakeena & Sanhith\nWith Love & Blessings",
+    "save_date_lines": "SAVE THE DATE\n21 OCTOBER\n2026",
+    "save_date_inline": "SAVE THE DATE / 21 OCTOBER / 2026",
+    "devotional_line_1": "This is the LORD's Doing,",
+    "devotional_line_2": "It is Marvelous In Our Eyes. Psalms 118:23"
+  },
+  "invitation_order": "groom-first (locked template order)",
+  "stills": {
+    "scene-01": {
+      "status": "REUSED",
+      "source": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/assets/output/kerala-christian-v1/image-1.jpg",
+      "sha256": "b2ea58ba83769197538659f8cdfed64115cd367bd0463da21de302b341fb3b4e",
+      "client_text": "none (no names/date; aerial, no lettering)"
+    },
+    "scene-02": {
+      "status": "GENERATED_A1",
+      "request_id": "scswe0pdfhrmt0d127gap4rxr8",
+      "sha256": "dc30dcf2b76efece4bc900020684236338739d7fc8e46ee50a27640e26e7949b",
+      "lettering_check": "spelled correctly"
+    },
+    "scene-03": {
+      "status": "GENERATED_A1",
+      "request_id": "0cdxp76de5rmw0d127gbw383g8",
+      "sha256": "40e891e420c7f2dae973c229735229878036ab0e49abbdfb5c24548a5a6e32b4",
+      "lettering_check": "spelled correctly"
+    },
+    "scene-04": {
+      "status": "GENERATED (groom_name Software Engineer, 1 call, no retry)",
+      "request_id": "ta9xkcd1xdrmt0d1289av8ypxw",
+      "sha256": "c5a42fd85b848217f51c7c3209e60e9ed3bab0b27bb4259447af6ec96ae39f8d",
+      "lettering_check": "Mr. / Rahul Raju, / Software Engineer correct at full size",
+      "superseded": [
+        "a1 etkxmgpdfnrmw0d127g97e1f0g (short name \"Rahul Raju\")",
+        "names2 0emm680f5drmr0d127htbegej0 (\"B.Tech,,\" double comma)",
+        "retry1 4fkv52p5d9rmr0d127hrv4yt5r (\"Rahul Raju B.Tech.,\") -> superseded-groom-btech/image-4.jpg"
+      ]
+    },
+    "scene-05": {
+      "status": "GENERATED (degree-name rerun)",
+      "request_id": "yf3fesgf5drmr0d127ht0vg7f8",
+      "sha256": "f578e3c936237f5dc499661c8572f9a49c3a5fc327f39683ab8c7aeb0b659f01",
+      "lettering_check": "Dr. / Mounika M.B.B.S correct",
+      "superseded": [
+        "a1 zd9shypdgxrmr0d127gbbkhxxm (short name \"Mounika\")"
+      ]
+    },
+    "scene-06": {
+      "status": "GENERATED_A1",
+      "request_id": "xdbngwrnexrmy0d127gsnk6zer",
+      "sha256": "23b66ee1f9102cecd2af806641b95fda5c1cd8f79b585991061f6834f58fb681",
+      "lettering_check": "spelled correctly"
+    },
+    "scene-07": {
+      "status": "GENERATED_A1",
+      "request_id": "eyrzagrprdrmy0d127gs3vd8cw",
+      "sha256": "36a8f9583d3762f7c5bfd0e01e9d8abcff8d56b1b80880ed08c9008f59b51aaf",
+      "lettering_check": "spelled correctly"
+    },
+    "scene-08": {
+      "status": "GENERATED_A1",
+      "request_id": "ea7cz00se1rmt0d127gsf7q4d8",
+      "sha256": "28a95e4dfbdeecf59d206eaa5413d57c9f3fe964da4d4d521ed1f74fb955ee64",
+      "lettering_check": "spelled correctly"
+    },
+    "scene-09": {
+      "status": "GENERATED (reception_lines Lunch only, 1 call, no retry)",
+      "request_id": "8a2d4nm7tsrmw0d12n1t6yayfw",
+      "sha256": "707bcec9d426ee4e467c638e0d8317f8097f289b1209747ef6919558c77fbc06",
+      "lettering_check": "Lunch / 21st October 2026 / Follows the Holy Matrimony correct at full size; no 'Reception' lettering",
+      "superseded": [
+        "a1 qave3g114drmy0d127grppkzj4 (\"Reception - Lunch\") -> superseded-reception-lunch/image-9.jpg"
+      ]
+    },
+    "scene-10": {
+      "status": "GENERATED (host_lines Dr. Shakeena & Sanhith, 1 call, no retry)",
+      "request_id": "shjn2acxh5rmt0d129haxggtkw",
+      "sha256": "11117856c6f2d41f7bb340a5e06857843ad1e5f657e4c9bf3ad6bd67f9d78cdc",
+      "lettering_check": "Specially Invited By / Dr. Shakeena & Sanhith / With Love & Blessings correct at full size",
+      "superseded": [
+        "a1 2nm5byk91hrmt0d127gv9vy86g (\"Shakeena & Sanhith\") -> superseded-host-short/image-10.jpg",
+        "host2 nqkdhpwc1hrmt0d127stt889rg (\"Dr. Shakeena Ravali & Sanhith\") -> superseded-host-ravali/image-10.jpg"
+      ]
+    },
+    "scene-11": {
+      "status": "GENERATED_A1",
+      "request_id": "8eydpfvry9rmr0d127gt82e5fg",
+      "sha256": "199251082d281e6ade8fb8b7a77fd7780b3c03484a34b941c4ed361dabd83380",
+      "lettering_check": "spelled correctly"
+    }
+  },
+  "paid_predictions": 17,
+  "unmapped_card_details": [
+    "Groom 'eldest son' / bride 'elder daughter' relationship lines",
+    "Groom's family address 'Sri Ananda Nagar, Nellore'",
+    "Grandparents 'Late Sri Polimetla Prasada Rao – Sarojini'",
+    "Bride's family address 'Gundlapalem, Nellore Rural, Nellore'",
+    "Solemnized by O. Petor Roy (God's Servant, Hebron, Hyderabad)",
+    "Conducted by J. Santhosh (God's Servant, Beracah, Nellore)",
+    "Closing verse 'Therefore, what God has joined together, let no one separate. Matthew 19:6' (no second verse field)",
+    "Groom qualification 'B.Tech.' (replaced by 'Software Engineer' per Ashok)"
+  ],
+  "steering_2026_10_06": "Ashok confirmed exact names: groom 'Rahul Raju B.Tech.,' and bride 'Dr. Mounika M.B.B.S' on name boards; invitation title stays 'Rahul & Mounika'."
+}

@@ -1,0 +1,15 @@
+{
+  "production_id": "kc-v1-recreate-20261002-192743",
+  "status": "READY",
+  "mode": "RECREATE_IDENTICAL",
+  "skip_spatial": true,
+  "updated_at": "2026-10-02T19:30:53.988880+05:30",
+  "continuity_bible_json": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/continuity/CONTINUITY_BIBLE.json",
+  "continuity_bible_md": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/continuity/CONTINUITY_BIBLE.md",
+  "stills_expected": 11,
+  "scene_12": "Final decoded frame of clip 11; no new still API",
+  "image_jobs": "scenes 01\u201311 stills",
+  "clip_count": 11,
+  "scene_count": 12,
+  "template_sha256": "bad0d176beb1ad47e3942689f95c4153fb933f3547670a255bb7fc062f46dae4"
+}

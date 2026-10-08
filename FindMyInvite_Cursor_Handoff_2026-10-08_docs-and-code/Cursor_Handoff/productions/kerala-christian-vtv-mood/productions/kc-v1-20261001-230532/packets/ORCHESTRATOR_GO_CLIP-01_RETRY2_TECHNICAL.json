@@ -1,0 +1,18 @@
+{
+  "action": "REAUTHORIZE_VIDEO_RETRY_TECHNICAL",
+  "production_id": "kc-v1-20261001-230532",
+  "clip_id": "clip-01",
+  "job_id": "VID-clip-01",
+  "attempt": 2,
+  "attempt_slot": "2 (same paid slot \u2014 prior submit produced no asset)",
+  "authorized_at": "2026-10-01T23:20:34.547783+05:30",
+  "packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/VIDEO_JOB/clip-01.retry-2.json",
+  "first_frame": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-1.jpg",
+  "last_frame": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-2.jpg",
+  "output": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1.mp4",
+  "fix": [
+    "Do NOT put data:image/...;base64 inline as the image JSON string if the API expects URL or multipart file",
+    "Pass image-1.jpg and image-2.jpg via the provider's supported image input (HTTPS delivery URL or file upload)",
+    "Same creative retry_instruction \u2014 motion-only continuous dive, no morph"
+  ]
+}

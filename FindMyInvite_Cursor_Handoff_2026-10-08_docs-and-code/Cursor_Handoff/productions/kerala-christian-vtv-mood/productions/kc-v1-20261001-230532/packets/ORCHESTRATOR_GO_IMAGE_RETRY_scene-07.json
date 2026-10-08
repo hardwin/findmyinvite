@@ -1,0 +1,26 @@
+{
+  "action": "AUTHORIZE_IMAGE_RETRY",
+  "production_id": "kc-v1-20261001-230532",
+  "authorized_at": "2026-10-01T23:17:05.883943+05:30",
+  "jobs": [
+    {
+      "job_id": "IMG-scene-07",
+      "scene_id": "scene-07",
+      "attempt": 2,
+      "packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/IMAGE_JOB/scene-07.retry-2.json",
+      "output": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-7.jpg"
+    }
+  ],
+  "not_authorized": [
+    {
+      "scene_id": "scene-06",
+      "reason": "Continuity INDEX shows LOCK on attempt-2 asset \u2014 no further retry; mark APPROVED"
+    }
+  ],
+  "rules": [
+    "defect-only edit",
+    "no self-approve",
+    "max 2 paid attempts",
+    "Visual QC then Continuity after generate"
+  ]
+}

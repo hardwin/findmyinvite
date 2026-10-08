@@ -1,0 +1,40 @@
+{
+  "job_id": "IMG-scene-08-a1",
+  "scene_id": "scene-08",
+  "attempt": "a1",
+  "production_id": "kc-v1-recreate-20261007-181228-akhil-sarah",
+  "model": "openai/gpt-image-2.5-flare",
+  "provider": "replicate",
+  "generation": "text-only",
+  "template_sha256": "1ba7153f288ba58433f94f45623d8cbfe0a21b26092a7f602b5f58ca04d48912",
+  "prompt_source": "template.json scenes[7].image_prompt (verbatim)",
+  "prompt_sha256": "671d42387cf593ceafcea645632aabc7beae2ce423168ed4dabe804ce7f89b16",
+  "prompt_chars": 3069,
+  "request_input": {
+    "aspect_ratio": "9:16",
+    "quality": "high",
+    "output_format": "jpeg",
+    "input_images": "OMITTED (text-only)"
+  },
+  "output_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261007-181228-akhil-sarah/assets/output/kerala-christian-v1/image-8.jpg",
+  "paid_calls": 1,
+  "status": "GENERATED",
+  "ts_local": "2026-10-07T18:13:40.990964+05:30",
+  "request_id": "hgsd456besrmr0d12shss5tx64",
+  "output_url": "https://replicate.delivery/xezq/VBgoYsNEeVRtZSEtgloLKfzoBluMmhBNi1PiU3GEeZW5DeTdB/tmp3o36wbxj.jpeg",
+  "raw_dims": "1152,2048",
+  "raw_sha256": "5d9124746667fb4284d3d872c936bd61521af27aa9fc0267af13685b965b3549",
+  "width": 720,
+  "height": 1280,
+  "sha256": "b188c595b01eec50b0bdf4a2a407b513a4a7f6d8d73a47c74e5f4c52ddd9710d",
+  "size_bytes": 278103,
+  "metrics": {
+    "image_output_count": 1,
+    "model_variant": "high",
+    "predict_time": 18.829096788,
+    "resolution_target": "9:16",
+    "total_time": 18.848708271
+  },
+  "replicate_created_at": "2026-10-07T12:43:21.334Z",
+  "replicate_completed_at": "2026-10-07T12:43:40.182708271Z"
+}

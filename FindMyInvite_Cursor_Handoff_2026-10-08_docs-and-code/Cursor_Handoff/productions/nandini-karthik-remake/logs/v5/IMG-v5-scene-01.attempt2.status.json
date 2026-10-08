@@ -1,0 +1,29 @@
+{
+  "ts_local": "2026-10-02T08:42:09+0530",
+  "job_id": "IMG-v5-scene-01",
+  "scene_id": "scene-01",
+  "status": "GENERATED",
+  "attempt": 2,
+  "generation_id": "5h3ktyxeksrmt0d0zacat03me4",
+  "prompt_sha256": "dec7c599a8d5618fcef9e03286bc994548027e2f3628bed985c456d1331f50b1",
+  "output_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5/scene-01.jpg",
+  "size_bytes": 175412,
+  "sha256": "4630cb371a5e0a4f55ea0e8ec8b1f63c52db03d335edd2c98e774cf5ebd28514",
+  "facet": "entrance_thicket",
+  "spatial_map_version": "spatial-v2",
+  "forbidden_reuse": [
+    "misty lake",
+    "temple gopuram",
+    "mountains",
+    "boat",
+    "stage",
+    "couple",
+    "text"
+  ],
+  "error": null,
+  "model": "openai/gpt-image-2.5-flare",
+  "provider": "replicate",
+  "retry": true,
+  "archive_attempt1": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5/scene-01.attempt1.jpg",
+  "output_url": "https://replicate.delivery/xezq/wN3QHTF61l47MV69JyjBoY7iiddbB3JETcaUe0LhWsKEmmpLA/tmppgxh7x86.jpeg"
+}

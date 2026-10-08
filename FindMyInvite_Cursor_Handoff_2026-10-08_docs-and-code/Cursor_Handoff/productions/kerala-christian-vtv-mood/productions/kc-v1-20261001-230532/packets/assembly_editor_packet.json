@@ -1,0 +1,62 @@
+{
+  "job_type": "ASSEMBLY_PREFLIGHT_THEN_CONCAT",
+  "production_id": "kc-v1-20261001-230532",
+  "status": "PREFLIGHT_NOW",
+  "clip_order": [
+    "clip-1",
+    "clip-2",
+    "clip-3",
+    "clip-4",
+    "clip-5",
+    "clip-6",
+    "clip-7",
+    "clip-8",
+    "clip-9",
+    "clip-10",
+    "clip-11"
+  ],
+  "clip_paths_expected": [
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1.mp4",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-2.mp4",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-3.mp4",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-4.mp4",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-5.mp4",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-6.mp4",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-7.mp4",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-8.mp4",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-9.mp4",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-10.mp4",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-11.mp4"
+  ],
+  "expected_durations_seconds": [
+    5,
+    4,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5
+  ],
+  "expected_total_duration_seconds": 54,
+  "fps": 24,
+  "width": 720,
+  "height": 1280,
+  "aspect_ratio": "9:16",
+  "audio": "silent",
+  "rules": {
+    "no_crossfade": true,
+    "no_transition_overlay": true,
+    "no_global_retiming": true,
+    "no_reorder": true,
+    "no_auto_crop": true,
+    "no_LUT": true
+  },
+  "output_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/kerala-christian-v1-final.mp4",
+  "write_preflight_to": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/manifest/assembly_preflight.json",
+  "start_when": "all 11 clips APPROVED",
+  "continuity": "Do not alter visuals; technical concat only"
+}

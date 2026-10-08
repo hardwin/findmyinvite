@@ -1,0 +1,19 @@
+{
+  "packet_type": "ORCHESTRATOR_CUE_CONTINUITY",
+  "production_id": "kc-v1-recreate-20261002-192743",
+  "at": "2026-10-02T19:29:17+05:30",
+  "mode": "RECREATE_IDENTICAL",
+  "template_sha256": "bad0d176beb1ad47e3942689f95c4153fb933f3547670a255bb7fc062f46dae4",
+  "compiler_receipt": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/TEMPLATE_COMPILER_VALIDATION_RECEIPT.json",
+  "continuity_extract": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/continuity_extract.json",
+  "scenes_prompt_extract": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/scenes_prompt_extract.json",
+  "output_bible": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/continuity/CONTINUITY_BIBLE.json",
+  "rules": [
+    "Build CONTINUITY_BIBLE from Orchestrator extracts only \u2014 do not open full template.json for creative rewrite",
+    "RECREATE_IDENTICAL: same Alex John & Anna Thomas locks as prior kc-v1 bible",
+    "Do NOT invent spatial maze / 16:9 blueprint gate",
+    "After bible READY, reply Orchestrator \u2014 then Asset Producer IMAGE_JOBs"
+  ],
+  "skip_spatial": true,
+  "prior_bible_reference_readonly": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/continuity/CONTINUITY_BIBLE.json"
+}

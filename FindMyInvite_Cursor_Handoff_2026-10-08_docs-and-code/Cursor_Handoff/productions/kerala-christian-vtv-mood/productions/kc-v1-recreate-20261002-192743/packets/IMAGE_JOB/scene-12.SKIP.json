@@ -1,0 +1,7 @@
+{
+  "job_type": "IMAGE_JOB_SKIP",
+  "production_id": "kc-v1-recreate-20261002-192743",
+  "scene_id": "scene-12",
+  "reason": "final decoded frame of clip-11 \u2014 NOT an IMAGE_JOB",
+  "recorded_at": "2026-10-02T19:32:36+05:30"
+}

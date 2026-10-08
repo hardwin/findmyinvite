@@ -1,0 +1,17 @@
+{
+  "packet_type": "ORCHESTRATOR_STOP_CLIP01_ORDER_V2",
+  "production_id": "kc-v1-20261001-230532",
+  "job_id": "VID-clip-01-regen",
+  "order": "V2",
+  "status": "STOP_HOLD",
+  "source": "Ashok via Video Director",
+  "recorded_at": "2026-10-02T07:12:50+05:30",
+  "rules": [
+    "no generate",
+    "no assemble",
+    "no further paid attempts",
+    "NEEDS_INTERVENTION stays open",
+    "do not auto-retry until Ashok says otherwise"
+  ],
+  "prior_escalation": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/ORCHESTRATOR_NEEDS_INTERVENTION_CLIP01_ORDER_V2.json"
+}

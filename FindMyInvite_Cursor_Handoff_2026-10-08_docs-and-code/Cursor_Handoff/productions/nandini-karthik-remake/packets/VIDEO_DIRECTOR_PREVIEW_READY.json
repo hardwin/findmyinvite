@@ -1,0 +1,20 @@
+{
+  "packet_type": "VIDEO_DIRECTOR_PREVIEW_READY",
+  "production_id": "nk-v1-20261002-072013",
+  "batch": "clips-v5",
+  "qc": "waived_by_ashok",
+  "clips": [
+    "clip-01",
+    "clip-02(a1)",
+    "clip-03",
+    "clip-04",
+    "clip-05"
+  ],
+  "preview": "/workspace/fmi-productions/nandini-karthik-remake/assets/nandini-karthik-v5-preview.mp4",
+  "preview_dl": "/workspace/fmi-productions/nandini-karthik-remake/assets/nandini-karthik-v5-preview-dl.mp4",
+  "preview_output": "/workspace/fmi-productions/nandini-karthik-remake/assets/output/clips-v5-preview.mp4",
+  "duration_sec": 16.208333,
+  "sha256_preview": "540a932b98ae4ed866db5d8ddb5804fedb3c162a4b5c84e4c41e8f56f683a966",
+  "sha256_dl": "fd68cc49a7274306efbe051dafd4f1481eb3ad57effeea47044937545fe7b566",
+  "finished_at": "2026-10-02T09:24:44.084516+05:30"
+}

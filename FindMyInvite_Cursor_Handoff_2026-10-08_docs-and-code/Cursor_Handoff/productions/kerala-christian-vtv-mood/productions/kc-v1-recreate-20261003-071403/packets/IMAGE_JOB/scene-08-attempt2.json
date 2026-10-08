@@ -1,0 +1,45 @@
+{
+  "job_type": "IMAGE_JOB",
+  "job_id": "IMG-scene-08-attempt2",
+  "production_id": "kc-v1-recreate-20261003-071403",
+  "mode": "RECREATE_CLIENT_FILL",
+  "batch": "correction-20261003",
+  "scene_id": "scene-08",
+  "scene_index": 8,
+  "name": "Venue at the north courtyard corner",
+  "attempt": 2,
+  "status": "GENERATED",
+  "authorized_to_dispatch": false,
+  "qc_waived": true,
+  "continuity_gate": "WAIVED",
+  "still_approval": "DO_NOT_WAIT",
+  "image_prompt": "A full-bleed portrait 9:16 frame of a richly cinematic dimensional storybook-animation Kerala Christian church wedding invitation. Soft romantic late-2000s South Indian cinema mood: dreamy natural light, intimate coastal Kerala atmosphere, gentle teal-and-warm contrast, quiet emotional longing. Soft cream and powder-blue palette with pearl highlights, pale pink florals and cool backwaters haze beyond coconut palms. Cream-white Portuguese-influenced plaster walls, laterite stone accents, arched windows, a modest bell tower and a simple cross. Premium animated adult characters with sculpted expressive faces, never photographic people. DRAMATIC CHIAROSCURO: gentle warm back-and-side sunlight streams diagonally through arched windows and open porch bays, clearly visible soft volumetric god rays cutting through thin coastal atmospheric haze; luminous rim light on ivory silk, lace, pearl and champagne-gold frames against cooler powder-blue shade. Preserve readable highlights, not a flat uniformly bright wash. Very fine dust motes sparkle only inside the sunbeams. Floor is subtly reflective worn cream stone or polished laterite tile, not a mirror. Gold lettering has illuminated beveled edges, warm restrained emissive bloom, luminous hairline flourishes and discrete pinpoint highlights; sharp readable counters. Fixed floral church wedding décor of white jasmine, soft pink roses, baby's breath and green foliage — not marigold temple swags as primary. Roughly 12 to 20 tiny separate white, soft-pink and cream petals already scattered irregularly through the whole depth volume: a few soft near-lens edge petals, crisp midground petals, tiny distant petals. No confetti cannon, solid flower bunches in the air, symmetrical particle rows or dense shower from one point. All bouquets and garlands are fixed to their supports. Generate only from this text, no reference image. No watermark, interface, duplicate people, extra signs or unintended words.\n\nSCENE COMPOSITION:\nEye-level courtyard CORNER view facing an ornate dark-mahogany venue board on a low square gold-trimmed cream stone pedestal. Board is centered, about 56 percent of image width and 56 percent of height. Exact large gold serif copy with gently luminous bevel highlights: 'Wedding Venue\nOur lady of good health church  Khairatabad\n3:00 pm Mass'. All text readable with generous margins. A CLOSE square cream plaster column frames the extreme RIGHT foreground, side face strongly visible. The architecture behind forms an L-shaped church courtyard: a low decorated church wing stretches across the background and the cream-white bell tower appears only off-axis in the distant LEFT quarter. This is a sideways courtyard view, never a straight forward aisle ending at a central tower. Rich white-and-pale-pink flower swags, fixed soft candle stands, a delicate petal border beneath the board. Soft sunlight cuts diagonally across coastal haze from left, with cool sculpted shade on the near pillar and radiant gold sign edges. Small slow-looking petals distributed at different heights. No foreground couple.",
+  "image_prompt_sha256": "87aea8c750ec82899f3c072b9702ccaa23d07f2e3c59ec5f198f8f564b08a063",
+  "template_sha256": "e238424b6502c34bfba380617ea1dc1a8d49b6b1f14401b7740e84812f3a92eb",
+  "prompt_policy": "verbatim resolved image_prompt from template.json. Do not rewrite. Do not use image_prompt_template.",
+  "output_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/assets/output/kerala-christian-v1/image-8.jpg",
+  "overwrite_live_still": true,
+  "prior_live_sha256_do_not_keep": "819ff1970d38d5d56a2a6ddd4f923faf021570b5105d296dcc6348e4bf8af56b",
+  "do_not_overwrite": [
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/assets/output/kerala-christian-v1/archive-delivered-20261003/image-8.jpg"
+  ],
+  "video": "HELD until both scene-02 attempt 4 and scene-08 attempt 2 are on disk",
+  "scope": "Use image_prompt only. Do NOT use image_prompt_template; it is missing the third board line. Resolved copy includes 3:00 pm Mass. Overwrite image-8.jpg. Do not touch the archive.",
+  "auth": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/ORCHESTRATOR_CORRECTION_REGEN.json",
+  "dispatched_at": "2026-10-03T23:38:31+05:30",
+  "generation": "text-only",
+  "aspect": "9:16",
+  "width": 720,
+  "height": 1280,
+  "model": {
+    "credentials_env": "REPLICATE_API_TOKEN",
+    "id": "openai/gpt-image-2.5-flare",
+    "provider": "replicate"
+  },
+  "context_isolation": {
+    "includes_full_template": false,
+    "rule": "Image agents must not receive full template.json. This packet is the only prompt."
+  },
+  "generation_id": "nfekshbpknrmr0d10bts0pthtm",
+  "output_sha256": "848baf0873d2f81140f033293adddc09fbe4c08d5ed697a455ba1ba404d86167"
+}

@@ -1,0 +1,47 @@
+{
+  "job_type": "IMAGE_JOB",
+  "job_id": "IMG-scene-02",
+  "production_id": "icc-v1-20261005-234500",
+  "scene_id": "scene-02",
+  "scene_index": 2,
+  "name": "The Wedding of Anusha & Rishad \u2014 names board",
+  "output_path": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/assets/output/image-2.jpg",
+  "prompt_source": "template.json scenes[1].image_prompt (verbatim)",
+  "prompt_sha256": "d5a21089948a1b30b0b46d390f40658f5c06d522819bfd484e51647ee223f307",
+  "prompt_chars": 2096,
+  "model": {
+    "id": "openai/gpt-image-2.5-flare",
+    "provider": "replicate",
+    "credentials_env": "REPLICATE_API_TOKEN"
+  },
+  "generation": "text-only",
+  "image_request": {
+    "input_images": [],
+    "aspect_ratio": "9:16",
+    "quality": "high",
+    "output_format": "jpeg"
+  },
+  "width": 720,
+  "height": 1280,
+  "postprocess": "ffmpeg_pad to 720x1280",
+  "auth_packet": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/packets/ORCHESTRATOR_GO_IMAGES.json",
+  "template_sha256": "3a722bd2dc87b669445c7b20411b00886a1a96ab787c448d4f1dcb6ec748d42f",
+  "staging": false,
+  "qc": "NO_QC",
+  "spatial": "WAIVED",
+  "continuity": "WAIVED",
+  "retry_policy": {
+    "paid_predictions": 1,
+    "retry_on_api_failure": 1
+  },
+  "status": "SUPERSEDED",
+  "authorized_to_dispatch": false,
+  "staged_at": "2026-10-05T23:47:21.915868+05:30",
+  "request_id": "eert4n70jnrmr0d11n49xzzc80",
+  "output_sha256": "740984780b41cc17df843947857edf1ed971b163abd72e5f0cd583a18938c736",
+  "output_size_bytes": 309877,
+  "generated_at": "2026-10-05T23:47:40.589028+05:30",
+  "superseded_by": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/packets/IMAGE_JOB/scene-02-pixar-restyle.json",
+  "superseded_at": "2026-10-06T00:37:15.119069+05:30",
+  "superseded_reason": "FULL PIXAR RESTYLE (template 8ade25af...)"
+}

@@ -1,0 +1,45 @@
+{
+  "packet_type": "SPATIAL_FACET_QC",
+  "production_id": "nk-v1-20261002-072013",
+  "spatial_map_version": "spatial-v9",
+  "assets": "assets/stills-v6/",
+  "at": "2026-10-02T11:02:30+05:30",
+  "result": "PASS",
+  "per_shot": {
+    "scene-01": {
+      "room": "A",
+      "status": "PASS",
+      "note": "palm approach / thicket"
+    },
+    "scene-02": {
+      "room": "B",
+      "status": "PASS",
+      "note": "colonnade courtyard + fountain"
+    },
+    "scene-03": {
+      "room": "C",
+      "status": "PASS",
+      "note": "floral arcade toward stairs"
+    },
+    "scene-04": {
+      "room": "F",
+      "status": "PASS",
+      "note": "stair cascade looking UP"
+    },
+    "scene-05": {
+      "room": "E",
+      "status": "FAIL",
+      "defect": "lake/water + distant temple behind mandap; need solid floral rear wall; forbidden lake+gopuram hero BG"
+    },
+    "scene-06": {
+      "room": "D",
+      "status": "PASS_WITH_NOTE",
+      "note": "lotus pond terrace OK; keep distinct from S5 open-water vista"
+    }
+  },
+  "retry_target": "scene-05 only \u2014 solid floral rear wall, no lake/gopuram/hills/boat dominant BG",
+  "version": "stills-v6-a2",
+  "scene-05_attempt2": "PASS \u2014 solid floral rear wall; prior FAIL cleared",
+  "stills_v6": "01\u201306 Spatial facet clear vs spatial-v9",
+  "video": "HELD awaiting Ashok stills approve"
+}

@@ -1,0 +1,25 @@
+{
+  "job_type": "VISUAL_QC_STANDBY",
+  "production_id": "kc-v1-20261001-230532",
+  "floors": [
+    "FMI Image Floor",
+    "FMI Video Floor",
+    "FMI Finish"
+  ],
+  "decision_format": {
+    "asset": "path",
+    "decision": "PASS|RETRY",
+    "severity": "str",
+    "violations": [
+      {
+        "rule": "",
+        "expected": "",
+        "observed": ""
+      }
+    ],
+    "retry_instruction": "target observed defect only"
+  },
+  "max_paid_attempts": 2,
+  "continuity_bible": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/continuity/CONTINUITY_BIBLE.json",
+  "immediate_task": "Confirm ready; QC first IMAGE_JOB the moment Image Director posts asset. Continuity Director also vetoes PASS candidates."
+}

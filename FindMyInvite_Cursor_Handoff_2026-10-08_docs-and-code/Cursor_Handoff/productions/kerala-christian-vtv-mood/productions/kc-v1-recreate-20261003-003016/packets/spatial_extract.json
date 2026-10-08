@@ -1,0 +1,497 @@
+{
+  "document": "SPATIAL_EXTRACT",
+  "production_id": "kc-v1-recreate-20261003-003016",
+  "name": "The Wedding of Swaroop & Smiley",
+  "mode": "RECREATE_CLIENT_FILL",
+  "couple": "Swaroop & Smiley",
+  "template_sha256": "7d0c8f3060e3c11e2f1b3800661cad30d30602313961c1feeecdf0db9f8d130b",
+  "bible_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/continuity/CONTINUITY_BIBLE.json",
+  "bible_sha256": "c1df9dbd053e8c243f3d7465f7ea64debc2b9d83db1cc98fd59aaa57dc27ada1",
+  "aspect_final": {
+    "ratio": "9:16",
+    "width": 720,
+    "height": 1280,
+    "fps": 24,
+    "audio": "silent"
+  },
+  "blueprint_aspect": {
+    "ratio": "16:9",
+    "note": "Spatial blueprint ONLY \u2014 final deliverable remains 9:16"
+  },
+  "identity_lock": {
+    "groom": [
+      "Adult Kerala Christian groom \u2014 storybook 3D animation, never photographic",
+      "Warm medium-brown skin; slender adult oval face; large dark-brown almond eyes",
+      "Thick dark eyebrows; soft black hair with gentle side part",
+      "Clean-shaven \u2014 NO moustache or beard",
+      "Quiet reserved smile; natural adult proportions (not a child)",
+      "Ivory formal suit over cream shirt; soft white-and-pale-pink boutonniere",
+      "Same face, hair, body, outfit in every couple scene"
+    ],
+    "bride": [
+      "Adult Kerala Christian bride \u2014 storybook 3D animation, never photographic",
+      "Warm medium-brown skin; graceful oval face; large dark-brown almond eyes",
+      "Gently arched black eyebrows; soft smile",
+      "Dark hair in elegant low bun with soft veil and white jasmine accents",
+      "Delicate gold cross pendant and pearl earrings",
+      "Ivory lace-and-silk wedding gown with soft cream undertones",
+      "Same face, hairstyle, jewelry, gown in every later scene"
+    ]
+  },
+  "architecture": {
+    "compound": "ONE white Portuguese-influenced Kerala Catholic church compound near Alappuzha backwaters (storybook visual lock; venue TEXT = Venkatadri Gardens / Katheru / Rajahmundry \u2014 not a literal new venue redesign)",
+    "notes": [
+      "ONE white Portuguese-influenced Kerala Catholic church compound near Alappuzha backwaters",
+      "cream-white plaster, laterite accents, arched windows, ONE modest bell tower with cross",
+      "ONE small open arched porch vestibule (all sides open including rear)",
+      "side cloister arcade, aisle/altar ceremony, parish hall garden evening reception",
+      "floral: white jasmine, soft pink roses, baby's breath, green foliage \u2014 NOT marigold temple swags as primary"
+    ],
+    "materials": [
+      "cream-white Portuguese-influenced plaster walls",
+      "laterite stone accents",
+      "arched windows",
+      "subtly reflective worn cream stone or polished laterite tile floor (not a mirror)"
+    ],
+    "forbidden": [
+      "Multiple bell towers",
+      "Marigold temple swags as primary floral",
+      "Second church / compound variation mid-film",
+      "Literal redesign of compound to match Venkatadri Gardens geography \u2014 keep Kerala Christian storybook compound architecture"
+    ],
+    "venue_text_vs_visual": {
+      "copy_venue": "Venkatadri Gardens / Katheru / Rajahmundry (from venue_lines / reception_lines)",
+      "visual_lock": "Same Kerala Christian church compound architecture from extract (ONE tower, ONE porch, Alappuzha-backwaters storybook compound)"
+    }
+  },
+  "palette_and_materials": {
+    "look": "Soft romantic late-2000s South Indian cinema; dreamy natural light; intimate coastal Kerala; quiet emotional longing",
+    "colors": [
+      "soft cream",
+      "powder-blue",
+      "pearl highlights",
+      "pale pink florals",
+      "cool backwaters haze beyond coconut palms",
+      "champagne-gold / antique-gold lettering and frames"
+    ],
+    "character_medium": "Premium animated adult characters with sculpted expressive faces \u2014 never photographic people",
+    "style_excerpt": "A full-bleed portrait 9:16 frame of a richly cinematic dimensional storybook-animation Kerala Christian church wedding invitation. Soft romantic late-2000s South Indian cinema mood: dreamy natural light, intimate coastal Kerala atmosphere, gentle teal-and-warm contrast, quiet emotional longing. Soft cream and powder-blue palette with pearl highlights, pale pink florals and cool backwaters haze beyond coconut palms. Cream-white Portuguese-influenced plaster walls, laterite stone accents, arched windows, a modest bell tower and a simple cross. Premium animated adult characters with sculpted expressive faces, never photographic people. DRAMATIC CHIAROSCURO: gentle warm back-and-side sunlight streams diagonally through arched windows and open porch bays, clearly visible soft volumetric god rays cutting through thin coastal atmospheric haze; luminous rim light on ivory silk, lace, pearl and champagne-gold frames against cooler powder-blue shade. Preserve readable highlights, not a flat uniformly bright wash. Very fine dust motes sparkle only inside the sunbeams. Floor is subtly reflective worn cream stone or polished laterite tile, not a mirror. Gold lettering has illuminated beveled ed"
+  },
+  "lighting": {
+    "daytime_rule": "ONE warm soft sunrise from camera-left throughout daytime; evening reception separate lamp-lit mood for scene-09; gentle teal-and-warm contrast",
+    "god_rays": "Gentle warm back-and-side sunlight streams diagonally through arched windows and open porch bays; soft volumetric god rays through thin coastal haze; luminous rim light on ivory silk, lace, pearl, champagne-gold frames against cooler powder-blue shade",
+    "preserve": "Readable highlights \u2014 not a flat uniformly bright wash",
+    "dust_motes": "Very fine dust motes sparkle ONLY inside the sunbeams",
+    "evening_exception": "scene-09 reception = separate lamp-lit evening mood; scene-10 hosts = lamp-lit side chapel corridor"
+  },
+  "spatial_geography": {
+    "compound_zones": [
+      {
+        "zone": "aerial / compound exterior",
+        "scenes": [
+          "scene-01"
+        ]
+      },
+      {
+        "zone": "open arched porch vestibule (all sides open including rear)",
+        "scenes": [
+          "scene-02"
+        ],
+        "props": [
+          "ONE floral cross pedestal"
+        ]
+      },
+      {
+        "zone": "side courtyard",
+        "scenes": [
+          "scene-03"
+        ]
+      },
+      {
+        "zone": "shaded side aisle",
+        "scenes": [
+          "scene-04"
+        ]
+      },
+      {
+        "zone": "sunlit transverse archway",
+        "scenes": [
+          "scene-05"
+        ]
+      },
+      {
+        "zone": "west cloister",
+        "scenes": [
+          "scene-06"
+        ]
+      },
+      {
+        "zone": "aisle and altar (ceremony)",
+        "scenes": [
+          "scene-07"
+        ]
+      },
+      {
+        "zone": "north courtyard corner",
+        "scenes": [
+          "scene-08"
+        ]
+      },
+      {
+        "zone": "parish hall garden (evening reception)",
+        "scenes": [
+          "scene-09"
+        ]
+      },
+      {
+        "zone": "lamp-lit side chapel corridor",
+        "scenes": [
+          "scene-10"
+        ]
+      },
+      {
+        "zone": "gateway / couple + date board",
+        "scenes": [
+          "scene-11",
+          "scene-12"
+        ]
+      }
+    ],
+    "continuity": "Same physical church compound and material language across all daytime scenes; evening mood only for reception/hosts as specified. Spatial Continuity (16:9 Ashok gate) runs AFTER READY before IMAGE \u2014 skip_spatial=false."
+  },
+  "object_count_rules": [
+    "Exactly one invitation title board where a board is specified",
+    "Exactly one SAVE THE DATE board in couple/date scenes",
+    "Exactly one bride and one groom in couple scenes (never duplicates)",
+    "Exactly one floral cross pedestal in porch",
+    "Exactly one modest bell tower",
+    "Exactly one church compound throughout",
+    "Couple scenes: exactly one Swaroop and one Smiley \u2014 never duplicates, clones, or extras"
+  ],
+  "copy_locked": {
+    "invitation_lines": "The Wedding of\nSwaroop & Smiley",
+    "family_lines": "With the Blessings of\nGroom\u2019s Parents\nMr. Shadrach\n& Mrs. Salomi\nBride\u2019s Parents\nMr. Yesuratnam\n& Mrs. Mani",
+    "ceremony_lines": "Holy Matrimony\n8th october 2026\n10:00 a.m.\nIn the Morning",
+    "venue_lines": "Wedding Venue\nVenkatadri Gardens\nKatheru\nRajahmundry",
+    "reception_lines": "Reception - lunch\n8 October 2026\n12:00 p.m. onwards\nVenkatadri Gardens",
+    "host_lines": "Invited By\nMr. Yesuratnam\nMrs. Mani\nMr. Shadrach\nMrs. Salomi\nRajesh Emmanuel,Pavani and Balu\nWith Love & Blessings",
+    "save_date_lines": "SAVE THE DATE\n8 October\n2026",
+    "save_date_inline": "SAVE THE DATE / 8 October / 2026",
+    "devotional_line_1": "With The Blessings of God Almighty",
+    "devotional_line_2": "We Invite You",
+    "rule": "Exact customer copy only. Never invent, paraphrase, or add film titles / director names / film acronyms."
+  },
+  "scenes": [
+    {
+      "id": "scene-01",
+      "index": 1,
+      "name": "Distant high aerial church establish",
+      "zone": "aerial / whole compound exterior",
+      "characters": [],
+      "copy": null,
+      "lighting": "soft sunrise; low sun at camera-left; lavender-peach + powder-blue sky",
+      "camera": "high oblique drone ~40m above courtyard, ~20\u201325\u00b0 down, wide 24mm; NOT eye-level facade, NOT nadir map",
+      "architecture_must": [
+        "ONE modest cream-white bell tower + cross in background with sky around cupola",
+        "ONE small open arched porch vestibule below camera (tiled roof ~1/4 frame width)",
+        "all porch sides open including rear; tiny floral cross pedestal between two candle stands (partly roof-occluded)",
+        "side cloister roof tops visible; shallow rectangular reflecting courtyard pool"
+      ],
+      "object_counts": {
+        "bell_tower": 1,
+        "porch_vestibule": 1,
+        "floral_cross_pedestal": 1,
+        "text_boards": 0
+      },
+      "generate_still": true
+    },
+    {
+      "id": "scene-02",
+      "index": 2,
+      "name": "Church porch with dimensional blessing",
+      "zone": "inside open arched porch vestibule",
+      "characters": [],
+      "copy": {
+        "lines": [
+          "With The Blessings of God Almighty",
+          "We Invite You"
+        ],
+        "placement": "freestanding dimensional letters above floral cross; ~65\u201370% frame width; upper-middle"
+      },
+      "lighting": "ONE warm soft sunrise from camera-left; oblique on letters; polished cream floor reflections",
+      "camera": "eye-level inside porch facing floral cross + distant bell tower through open rear",
+      "architecture_must": [
+        "SAME freestanding open porch: four cream corner columns, shallow tiled roof, three shallow front steps",
+        "all four sides OPEN between arches including rear \u2014 no masonry rear wall / inner sanctuary / nested doorway",
+        "ONE floral cross on central low square pedestal between two soft candle stands (~40% image height lower middle)",
+        "bell tower outside beyond rear arches; left-side exit to invitation courtyard open"
+      ],
+      "object_counts": {
+        "floral_cross_pedestal": 1,
+        "bell_tower_visible_beyond": 1,
+        "blessing_title": 1,
+        "nameplates": 0
+      },
+      "generate_still": true
+    },
+    {
+      "id": "scene-03",
+      "index": 3,
+      "name": "Family invitation in the side courtyard",
+      "zone": "side courtyard bay beside porch (reached by turning LEFT out of porch)",
+      "characters": [],
+      "copy": {
+        "key": "invitation_lines",
+        "exact": "The Wedding of\nSwaroop & Smiley",
+        "carrier": "ONE ivory invitation board on low champagne-gold plinth; ~55% frame width; soft gold floral border + tiny gold cross emblem"
+      },
+      "lighting": "sunrise shafts from upper-left; camera-left sun rule",
+      "camera": "eye-level into side courtyard; NOT flying forward through porch",
+      "architecture_must": [
+        "garlanded cream pillar extreme left foreground",
+        "courtyard extends diagonally behind board; partial bell tower offset FAR RIGHT \u2014 not centered tunnel behind sign",
+        "no altar/sanctuary visible"
+      ],
+      "object_counts": {
+        "invitation_title_board": 1,
+        "bell_tower": 1,
+        "people": 0
+      },
+      "generate_still": true
+    },
+    {
+      "id": "scene-04",
+      "index": 4,
+      "name": "Groom in the shaded side aisle",
+      "zone": "shaded long cream-plaster side aisle (enclosed; no outdoor tower)",
+      "characters": [
+        "groom"
+      ],
+      "copy": {
+        "exact": "Mr.\nSwaroop",
+        "carrier": "floating champagne-gold calligraphy RIGHT at chest height \u2014 NOT a signboard"
+      },
+      "lighting": "sunrays through high LEFT arched windows; groom rim-lit vs cooler powder-blue shade",
+      "camera": "aisle interior; groom full-length LEFT third ~62% frame height; feet+hair inside margins",
+      "architecture_must": [
+        "arched laterite-trimmed windows",
+        "no outdoor courtyard at vanishing point",
+        "no outdoor tower visible"
+      ],
+      "object_counts": {
+        "groom": 1,
+        "bride": 0,
+        "name_calligraphy": 1,
+        "boards": 0
+      },
+      "generate_still": true
+    },
+    {
+      "id": "scene-05",
+      "index": 5,
+      "name": "Bride beside the sunlit transverse archway",
+      "zone": "sunlit transverse arched passageway at RIGHT ANGLE to groom's aisle",
+      "characters": [
+        "bride"
+      ],
+      "copy": {
+        "exact": "Ms.\nSmiley",
+        "carrier": "floating luminous gold calligraphy RIGHT \u2014 Ms. small above Smiley large"
+      },
+      "lighting": "blazing oblique sunbeams through far-side arched opening; lace/pearl rim glow",
+      "camera": "bride full-length LEFT third ~62% height; hands gently clasped",
+      "architecture_must": [
+        "two foreground cream arched pillars",
+        "beyond: side view across courtyard steps + LOW roofed wing",
+        "only offset small portion of bell tower near FAR LEFT edge \u2014 NOT giant frontal tower behind bride",
+        "family plaque NOT in this view (around right corner outside)"
+      ],
+      "object_counts": {
+        "bride": 1,
+        "groom": 0,
+        "name_calligraphy": 1,
+        "boards": 0
+      },
+      "generate_still": true
+    },
+    {
+      "id": "scene-06",
+      "index": 6,
+      "name": "Both families' blessing plaque in the west cloister",
+      "zone": "west cloister arcade \u2014 NEW viewing direction",
+      "characters": [],
+      "copy": {
+        "key": "family_lines",
+        "exact": "With the Blessings of\nGroom\u2019s Parents\nMr. Shadrach\n& Mrs. Salomi\nBride\u2019s Parents\nMr. Yesuratnam\n& Mrs. Mani",
+        "carrier": "ONE ivory family blessing plaque; champagne-gold frame; ~65% width \u00d7 ~64% height; low three-quarter; plaque plane ~15\u00b0"
+      },
+      "lighting": "sunrise shafts from left across plaque frame; soft shaded cloister ceiling",
+      "camera": "LOW three-quarter; background sideways across cloister columns toward screen-left \u2014 not centered aisle",
+      "architecture_must": [
+        "massive cream plaster pillar beside plaque",
+        "NO bell tower center",
+        "NO person"
+      ],
+      "object_counts": {
+        "family_plaque": 1,
+        "people": 0,
+        "grounded_bouquet_at_plinth": 1
+      },
+      "generate_still": true
+    },
+    {
+      "id": "scene-07",
+      "index": 7,
+      "name": "Holy Matrimony at the aisle and altar",
+      "zone": "aisle toward altar (reached turning LEFT at cloister corner)",
+      "characters": [
+        "groom",
+        "bride"
+      ],
+      "copy": {
+        "key": "ceremony_lines",
+        "exact": "Holy Matrimony\n8th october 2026\n10:00 a.m.\nIn the Morning",
+        "carrier": "ONE dark mahogany timing sign, ornate champagne-gold frame, RIGHT side"
+      },
+      "lighting": "soft diagonal sunrays from side arched window + subtle candle secondary; seated-eye-level",
+      "camera": "three-quarter; couple LEFT half on cream ceremonial cushion near altar steps \u2014 groom left, bride next; groom quiet blessing gesture",
+      "architecture_must": [
+        "intimate cream-plaster altar sanctuary with deep soft shadow \u2014 NOT distant straight corridor",
+        "simple altar cross low at left",
+        "priest = small secondary far left only"
+      ],
+      "object_counts": {
+        "groom": 1,
+        "bride": 1,
+        "ceremony_board": 1,
+        "priests_secondary": 1
+      },
+      "generate_still": true
+    },
+    {
+      "id": "scene-08",
+      "index": 8,
+      "name": "Venue at the north courtyard corner",
+      "zone": "north courtyard corner \u2014 L-shaped sideways courtyard",
+      "characters": [],
+      "copy": {
+        "key": "venue_lines",
+        "exact": "Wedding Venue\nVenkatadri Gardens\nKatheru\nRajahmundry",
+        "carrier": "ONE ornate dark-mahogany venue board on low square gold-trimmed cream pedestal; ~56%\u00d756%"
+      },
+      "lighting": "soft sunlight diagonal from left; cool shade on near pillar",
+      "camera": "eye-level corner view; CLOSE square cream column extreme RIGHT foreground",
+      "architecture_must": [
+        "L-shaped courtyard: low decorated wing across background",
+        "bell tower ONLY off-axis distant LEFT quarter \u2014 never straight aisle ending at central tower",
+        "visual architecture remains Kerala Christian storybook compound (venue TEXT = Venkatadri Gardens / Rajahmundry)"
+      ],
+      "object_counts": {
+        "venue_board": 1,
+        "people": 0,
+        "bell_tower": 1
+      },
+      "generate_still": true
+    },
+    {
+      "id": "scene-09",
+      "index": 9,
+      "name": "Reception at the evening parish hall garden",
+      "zone": "parish hall garden \u2014 EVENING",
+      "characters": [],
+      "copy": {
+        "key": "reception_lines",
+        "exact": "Reception - lunch\n8 October 2026\n12:00 p.m. onwards\nVenkatadri Gardens",
+        "carrier": "ONE ivory reception board on delicate champagne-gold three-legged easel; central ~60% width \u2014 exact reception_lines"
+      },
+      "lighting": "EVENING lamp-lit / warm garden night \u2014 NOT daytime sunrise primary; BLUE HOUR powder-blue sky band",
+      "camera": "garden reception establish; cream near pillar camera LEFT; garden extends sideways RIGHT",
+      "architecture_must": [
+        "parish hall garden beside church compound near Alappuzha; same floral language (jasmine/rose/baby's breath)"
+      ],
+      "object_counts": {
+        "reception_board": 1
+      },
+      "generate_still": true
+    },
+    {
+      "id": "scene-10",
+      "index": 10,
+      "name": "Hosts in the lamp-lit side chapel corridor",
+      "zone": "lamp-lit side chapel corridor",
+      "characters": [],
+      "copy": {
+        "key": "host_lines",
+        "exact": "Invited By\nMr. Yesuratnam\nMrs. Mani\nMr. Shadrach\nMrs. Salomi\nRajesh Emmanuel,Pavani and Balu\nWith Love & Blessings",
+        "carrier": "ONE tall ivory host plaque on low ornate gold pedestal at top of three shallow steps \u2014 exact host_lines"
+      },
+      "lighting": "EVENING EXCEPTION \u2014 lamp-lit corridor (NOT daytime sunrise)",
+      "camera": "frontally at eye height after 90\u00b0 left turn from parish garden",
+      "architecture_must": [
+        "side chapel corridor of same church compound; shallow shaded space behind plaque; open corridor extends back toward camera"
+      ],
+      "object_counts": {
+        "hosts_board": 1
+      },
+      "generate_still": true
+    },
+    {
+      "id": "scene-11",
+      "index": 11,
+      "name": "Single couple and single date board",
+      "zone": "gateway / couple + date board",
+      "characters": [
+        "groom",
+        "bride"
+      ],
+      "copy": {
+        "key": "save_date_lines",
+        "exact": "SAVE THE DATE\n8 October\n2026",
+        "inline": "SAVE THE DATE / 8 October / 2026",
+        "carrier": "Exactly ONE SAVE THE DATE board \u2014 dark-mahogany rectangular plaque, thin ornate gold frame, ONE fixed gold easel, far RIGHT"
+      },
+      "lighting": "daytime sunrise camera-left; soft diagonal sunrise god rays through gateway",
+      "camera": "single couple + single board; bride LEFT of groom; couple ~57% height middle-left ~48% width",
+      "architecture_must": [
+        "same gateway that scene-12 will continue",
+        "low floral arch + distant cream-white bell tower on courtyard axis"
+      ],
+      "object_counts": {
+        "groom": 1,
+        "bride": 1,
+        "save_the_date_board": 1
+      },
+      "generate_still": true
+    },
+    {
+      "id": "scene-12",
+      "index": 12,
+      "name": "Gentle forehead touch beneath the same gateway",
+      "zone": "SAME gateway as scene-11",
+      "characters": [
+        "groom",
+        "bride"
+      ],
+      "copy": {
+        "rule": "Preserve the ONE date board from scene-11 throughout \u2014 no competing independent board/gateway layout"
+      },
+      "lighting": "continuity from clip-11 first-frame-only animation",
+      "camera": "gentle backward glide + slight rise; forehead touch; single-board continuity",
+      "architecture_must": null,
+      "object_counts": {
+        "groom": 1,
+        "bride": 1,
+        "save_the_date_board": 1
+      },
+      "generate_still": false
+    }
+  ],
+  "rules": [
+    "Build from this extract + Continuity bible subsections only \u2014 never full template.json",
+    "ONE 16:9 blueprint image: ordered shot sequence, distinct room/facet per shot (no two same), camera angle/move, character placement, text overlays where needed",
+    "Structured Spatial Map JSON + MD: beat geography, offscreen neighbors, forbidden_reuse, image_prompt_constraints",
+    "Same venue different facets; couple STANDS (camera moves); materials/decor/light/palette continuity",
+    "Do NOT generate final scene stills or video clips",
+    "Hand blueprint via Orchestrator for Ashok iterate/approve; spatial_blueprint_16x9_status must become approved_by_ashok before IMAGE"
+  ]
+}

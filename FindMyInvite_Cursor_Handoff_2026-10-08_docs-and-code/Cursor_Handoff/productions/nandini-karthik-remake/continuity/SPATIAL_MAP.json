@@ -1,0 +1,388 @@
+{
+  "document": "SPATIAL_MAP",
+  "production_id": "nk-v1-20261002-072013",
+  "title": "Nandini ♡ Karthik — vector top-view blueprint (spatial-v9)",
+  "version": "spatial-v9",
+  "replaces": "spatial-v5 decorative map (Ashok: still not a map — gave haunted-house schematic example)",
+  "updated_at": "2026-10-02T10:51:30+05:30",
+  "author": "Spatial Continuity",
+  "blueprint_16x9": {
+    "path": "/workspace/fmi-productions/nandini-karthik-remake/continuity/SPATIAL_MAZE_MAP_16x9_v9.jpg",
+    "svg": "/workspace/fmi-productions/nandini-karthik-remake/continuity/SPATIAL_MAZE_MAP_16x9_v9.svg",
+    "png": "/workspace/fmi-productions/nandini-karthik-remake/continuity/SPATIAL_MAZE_MAP_16x9_v9.png",
+    "kind": "vector_architectural_blueprint",
+    "tool": "matplotlib (SVG+PNG) — not generative AI",
+    "status": "approved_by_ashok",
+    "version": "maze-map-v9",
+    "supersedes": [
+      "/workspace/fmi-productions/nandini-karthik-remake/continuity/SPATIAL_MAZE_MAP_16x9_v8.jpg"
+    ]
+  },
+  "spatial_blueprint_16x9_status": "approved_by_ashok",
+  "spatial_map_status": "approved_by_ashok",
+  "maze_graph": {
+    "layout": "2x3",
+    "rooms": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F"
+    ],
+    "grid": [
+      [
+        "A",
+        "B",
+        "C"
+      ],
+      [
+        "D",
+        "E",
+        "F"
+      ]
+    ],
+    "edges": [
+      "A-B",
+      "B-C",
+      "A-D",
+      "B-E",
+      "C-F",
+      "D-E",
+      "E-F"
+    ],
+    "path": [
+      "A",
+      "B",
+      "C",
+      "F",
+      "E",
+      "D"
+    ],
+    "turns": [
+      "start",
+      "FWD",
+      "RIGHT",
+      "FWD",
+      "LEFT",
+      "PIVOT-PULL"
+    ]
+  },
+  "world": {
+    "name": "Tropical South Indian wedding mantap complex — maze",
+    "continuity_style": "pastel tropical elegance; cream carved stone; jasmine+lotus; banana/palm; brass lamps; soft warm morning light; cinematic storybook 9:16",
+    "same_place_rule": "All six beats ONE venue. Each shot a DISTINCT room (A–F). No vista reuse.",
+    "far_vista_lock": {
+      "hero_plate": "misty lake + temple gopuram + mountains + wooden boat",
+      "rule": "FORBIDDEN as dominant background on every beat."
+    },
+    "facets": {
+      "palm_approach_garden": "Room A — outdoor palm approach garden; tropical path; orange flowers; looking toward colonnade courtyard",
+      "central_colonnade_courtyard": "Room B — central courtyard with fountain; cream colonnades; potted palms; hub connecting A/C/E",
+      "east_floral_arcade": "Room C — east floral arcade aisle; pillars; hanging floral garlands; leads toward stair cascade",
+      "stair_cascade_court": "Room F — stair cascade court; grand stairs with tiered water features / tropical flanks; adjacent to stage E and arcade C",
+      "ceremony_stage_mandap": "Room E — ceremony mandap stage; floral pillars; couple STANDING; adjacent to stairs F, courtyard B, pond D",
+      "lotus_pond_photoshoot_terrace": "Room D — lotus pond photoshoot terrace; rectangular lotus pond; invite text; couple STANDING; adjacent to A and E"
+    },
+    "plan_sketch": "2×3 maze A-B-C / D-E-F. Path A→B(FWD)→C(RIGHT)→F(FWD)→E(LEFT)→D(PIVOT-PULL)."
+  },
+  "wardrobe_lock": {
+    "applies_when": "couple visible (scene-05, scene-06 / rooms E, D)",
+    "groom": "maroon half-sleeve shirt + white gold-border veshti + sandals",
+    "bride": "rich green silk bridal saree; heavy gold jewellery; long bridal hair with jasmine+roses — NOT a bun",
+    "pose": "Couple STANDING still, holding hands, looking at each other. Feet planted.",
+    "motion_rule": "STRICT: NO walking. Camera moves."
+  },
+  "maze_logic": "Every hop = one adjacent graph edge only (L/R/FWD/pivot-pull). Hamiltonian path — no room reuse. No teleport.",
+  "beats": [
+    {
+      "id": "scene-01",
+      "shot": "S1",
+      "room": "A",
+      "name": "Palm approach garden — start",
+      "facet": "palm_approach_garden",
+      "arrival": "start",
+      "turn_from_prior": null,
+      "couple": false,
+      "camera_pose": {
+        "framing": "in A looking toward B",
+        "bias": "path center among palms",
+        "height": "eye",
+        "look": "toward central colonnade courtyard (B)",
+        "move_intent": "FWD into B"
+      },
+      "visible_set": [
+        "palms",
+        "garden path",
+        "orange flowers",
+        "glow of courtyard B ahead"
+      ],
+      "offscreen": {
+        "L": "garden west",
+        "R": "garden east",
+        "behind": "approach origin",
+        "ahead": "B central_colonnade_courtyard"
+      },
+      "next_edge": {
+        "to": "scene-02",
+        "move": "FWD",
+        "edge": "A-B"
+      },
+      "text": null,
+      "forbidden_reuse": [
+        "misty lake+gopuram+hills+boat hero",
+        "stage",
+        "couple",
+        "text",
+        "reuse any other room vista"
+      ],
+      "image_prompt_constraints": "9:16. Room A palm approach garden only. Looking FWD toward courtyard B. Empty. NO lake/gopuram plate. NO couple. NO text."
+    },
+    {
+      "id": "scene-02",
+      "shot": "S2",
+      "room": "B",
+      "name": "Central colonnade courtyard — FWD from A",
+      "facet": "central_colonnade_courtyard",
+      "arrival": "FWD from A",
+      "turn_from_prior": "FWD",
+      "couple": false,
+      "camera_pose": {
+        "framing": "in B at fountain looking toward C",
+        "bias": "courtyard center",
+        "height": "eye-high",
+        "look": "toward east floral arcade C",
+        "move_intent": "RIGHT into C"
+      },
+      "visible_set": [
+        "fountain",
+        "colonnade courtyard",
+        "potted palms",
+        "mouth toward C"
+      ],
+      "offscreen": {
+        "L": "toward D via A-D/B-E graph",
+        "R": "C east arcade",
+        "behind": "A",
+        "ahead": "C"
+      },
+      "next_edge": {
+        "to": "scene-03",
+        "move": "RIGHT",
+        "edge": "B-C"
+      },
+      "text": null,
+      "forbidden_reuse": [
+        "misty lake+gopuram hero",
+        "couple",
+        "text",
+        "A garden as this room",
+        "stage"
+      ],
+      "image_prompt_constraints": "9:16. Room B CENTRAL COLONNADE COURTYARD with fountain. Looking toward C. Empty. Distinct from A/C. NO couple. NO text."
+    },
+    {
+      "id": "scene-03",
+      "shot": "S3",
+      "room": "C",
+      "name": "East floral arcade — RIGHT from B",
+      "facet": "east_floral_arcade",
+      "arrival": "RIGHT from B",
+      "turn_from_prior": "RIGHT",
+      "couple": false,
+      "camera_pose": {
+        "framing": "in C looking toward F",
+        "bias": "arcade center",
+        "height": "eye",
+        "look": "toward stair cascade F (south via C-F)",
+        "move_intent": "FWD into F"
+      },
+      "visible_set": [
+        "east arcade pillars",
+        "floral garlands",
+        "potted plants",
+        "depth toward F"
+      ],
+      "offscreen": {
+        "L": "B courtyard",
+        "R": "outer east wall",
+        "behind": "B",
+        "ahead": "F stair_cascade_court"
+      },
+      "next_edge": {
+        "to": "scene-04",
+        "move": "FWD",
+        "edge": "C-F"
+      },
+      "text": null,
+      "forbidden_reuse": [
+        "misty lake+gopuram",
+        "couple",
+        "text",
+        "left aisle as same as C",
+        "stage"
+      ],
+      "image_prompt_constraints": "9:16. Room C EAST FLORAL ARCADE only. Looking toward stair cascade F. Empty. NO couple. NO text."
+    },
+    {
+      "id": "scene-04",
+      "shot": "S4",
+      "room": "F",
+      "name": "Stair cascade court — FWD from C",
+      "facet": "stair_cascade_court",
+      "arrival": "FWD from C via C-F",
+      "turn_from_prior": "FWD",
+      "couple": false,
+      "camera_pose": {
+        "framing": "on/at stairs looking toward E",
+        "bias": "stair cascade court",
+        "height": "low-mid on stairs",
+        "look": "toward ceremony stage E (LEFT via E-F)",
+        "move_intent": "LEFT into E"
+      },
+      "visible_set": [
+        "grand stairs",
+        "tiered water/cascade flanks",
+        "tropical plants",
+        "mouth toward E"
+      ],
+      "offscreen": {
+        "L": "E stage",
+        "R": "outer",
+        "behind": "C arcade",
+        "ahead": "E"
+      },
+      "next_edge": {
+        "to": "scene-05",
+        "move": "LEFT",
+        "edge": "E-F"
+      },
+      "text": null,
+      "forbidden_reuse": [
+        "misty lake+gopuram",
+        "couple",
+        "text",
+        "reuse C arcade as this room",
+        "pond as this room"
+      ],
+      "image_prompt_constraints": "9:16. Room F STAIR CASCADE COURT — distinct. Looking toward stage E. Empty. NO couple. NO text."
+    },
+    {
+      "id": "scene-05",
+      "shot": "S5",
+      "room": "E",
+      "name": "Ceremony mandap — LEFT from F",
+      "facet": "ceremony_stage_mandap",
+      "arrival": "LEFT from F",
+      "turn_from_prior": "LEFT",
+      "couple": true,
+      "camera_pose": {
+        "framing": "base of stage looking UP",
+        "bias": "centered on mandap",
+        "height": "low",
+        "look": "couple STANDING on mandap",
+        "move_intent": "LEFT / PIVOT toward D pond"
+      },
+      "visible_set": [
+        "mandap stage",
+        "floral pillars",
+        "couple STANDING",
+        "stairs F readable as adjacent"
+      ],
+      "offscreen": {
+        "L": "D pond via D-E",
+        "R": "F stairs",
+        "behind": "toward B via B-E",
+        "ahead": "mandap rear"
+      },
+      "next_edge": {
+        "to": "scene-06",
+        "move": "LEFT / PIVOT-PULL",
+        "edge": "D-E"
+      },
+      "text": {
+        "optional": "Nandini ♡ Karthik",
+        "style": "magenta cursive"
+      },
+      "forbidden_reuse": [
+        "misty lake+gopuram behind couple",
+        "walking",
+        "bride bun",
+        "full invite stack",
+        "pond terrace as this room"
+      ],
+      "image_prompt_constraints": "9:16. Room E CEREMONY STAGE MANDAP. Couple STANDING — maroon half-shirt+veshti; green saree, heavy gold, long flowered hair NOT bun. NO walking. Optional names only. Facet=ceremony_stage_mandap only."
+    },
+    {
+      "id": "scene-06",
+      "shot": "S6",
+      "room": "D",
+      "name": "Lotus pond photoshoot — PIVOT-PULL from E",
+      "facet": "lotus_pond_photoshoot_terrace",
+      "arrival": "LEFT / PIVOT-PULL from E via D-E",
+      "turn_from_prior": "PIVOT-PULL",
+      "couple": true,
+      "camera_pose": {
+        "framing": "orbit/pivot-pull at pond",
+        "bias": "pond terrace with couple",
+        "height": "eye-low",
+        "look": "couple + lotus pond + invite text",
+        "move_intent": "end hold / pull"
+      },
+      "visible_set": [
+        "lotus pond",
+        "couple STANDING",
+        "photoshoot terrace",
+        "invite text stack"
+      ],
+      "offscreen": {
+        "L": "garden",
+        "R": "E stage",
+        "behind": "toward A via A-D",
+        "ahead": "pond depth"
+      },
+      "next_edge": null,
+      "text": {
+        "required_stack": [
+          "Nandini ♡ Karthik",
+          "22nd February 2027",
+          "9:30 AM onwards",
+          "ITC Grand Chola, Chennai"
+        ]
+      },
+      "forbidden_reuse": [
+        "v4 lake-gopuram-hills-boat dominant",
+        "walking",
+        "bride bun",
+        "stage mandap as this room"
+      ],
+      "image_prompt_constraints": "9:16. Room D LOTUS POND PHOTOSHOOT TERRACE — distinct from stage. Couple STANDING same wardrobe. Full invite. NOT misty lake+gopuram plate. Facet=lotus_pond_photoshoot_terrace only."
+    }
+  ],
+  "ashok_revision": {
+    "from": "spatial-v8",
+    "ask": "AI image blurry / lines wrong — use diagram software",
+    "delivered": "matplotlib vector SVG+PNG spatial-v9"
+  },
+  "handoff": {
+    "to_orchestrator": "Route SPATIAL_SHOT_BOARD_16x9_v2.jpg for Ashok iterate. HOLD IMAGE/VIDEO until spatial_blueprint_16x9_status=approved_by_ashok.",
+    "to_asset_producer": "After approve, fold maze facet + turn + forbidden_reuse per beat into IMAGE_JOBs.",
+    "to_image_director": "One room A–F per scene. Distinct vistas. Wardrobe on E/D.",
+    "to_video_director": "Camera path A→B→C→F→E→D matching board turns; couple never walks."
+  },
+  "ashok_approval_signal": {
+    "at": "2026-10-02T10:51:29+05:30",
+    "message": "Lets try this / Generate",
+    "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/SPATIAL_16X9_ASHOK_GENERATE_SIGNAL_v9.json",
+    "stamped_by": "FMI Orchestrator"
+  },
+  "orchestrator_unlock": {
+    "at": "2026-10-02T10:51:30+05:30",
+    "auth": [
+      "packets/ORCHESTRATOR_SPATIAL_APPROVED.json",
+      "packets/ORCHESTRATOR_UNLOCK_IMAGE_stills-v6.json"
+    ],
+    "image": "unlocked stills-v6 path A→B→C→F→E→D",
+    "video": "HELD"
+  }
+}

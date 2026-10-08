@@ -1,0 +1,16 @@
+{
+  "packet_type": "ASSET_PRODUCER_DISK_WATCH_ARMED",
+  "production_id": "kc-v1-recreate-20261003-003016",
+  "at": "2026-10-03T00:59:40+05:30",
+  "signal": "packets/VIDEO_DIRECTOR_CLIPNN_GENERATED.json",
+  "helper": "scripts/ap_auto_unlock_next.py",
+  "routine": "kc-v1-003016-no-qc-video-auto-unlock",
+  "schedule": "every 5 min (58,3,8,\u2026)",
+  "policy": "NO-QC auto-unlock next clip on disk GENERATED; no chat-ping wait; stitch after clip-11",
+  "chain_state": {
+    "01-03": "GENERATED",
+    "04": "DISPATCHED",
+    "05-11": "HELD_AWAITING_HANDOFF"
+  },
+  "next_unlock": "VID-clip-05 on CLIP04_GENERATED"
+}

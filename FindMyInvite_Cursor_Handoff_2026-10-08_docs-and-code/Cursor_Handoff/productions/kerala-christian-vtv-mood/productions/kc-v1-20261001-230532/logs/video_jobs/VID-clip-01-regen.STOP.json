@@ -1,0 +1,13 @@
+{
+  "job": "VID-clip-01-regen",
+  "status": "STOP_HOLD_ASHOK",
+  "at": "2026-10-02T07:12:50+05:30",
+  "rules": [
+    "no generate",
+    "no assemble",
+    "no further paid attempts",
+    "NEEDS_INTERVENTION stays open",
+    "do not auto-retry until Ashok says otherwise"
+  ],
+  "packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/ORCHESTRATOR_STOP_CLIP01_ORDER_V2.json"
+}

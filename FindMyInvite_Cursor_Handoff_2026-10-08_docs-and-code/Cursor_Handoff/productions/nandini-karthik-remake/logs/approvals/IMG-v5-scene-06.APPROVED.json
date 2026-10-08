@@ -1,0 +1,15 @@
+{
+  "packet_type": "ORCHESTRATOR_IMAGE_APPROVED",
+  "production_id": "nk-v1-20261002-072013",
+  "batch": "stills-v5",
+  "job": "IMG-v5-scene-06",
+  "scene_id": "scene-06",
+  "status": "APPROVED",
+  "approved_at": "2026-10-02T08:44:43+05:30",
+  "asset_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5/scene-06.jpg",
+  "sha256": "2579d519dfbab7638e9340ed876cfa4b3116cd98c228366aea26fa21a332f43f",
+  "visual_qc": "/workspace/fmi-productions/nandini-karthik-remake/logs/image_jobs/QC_scene-06_stills-v5_attempt2.json",
+  "continuity": "/workspace/fmi-productions/nandini-karthik-remake/packets/continuity_veto/scene-06.stills-v5.json",
+  "decision": "PASS+LOCK",
+  "attempt": 2
+}

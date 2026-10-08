@@ -1,0 +1,20 @@
+{
+  "job_id": "VID-clip-11",
+  "clip_id": "clip-11",
+  "production_id": "kc-v1-recreate-20261007-181228-akhil-sarah",
+  "model": "grok-imagine-video-1.5",
+  "duration_seconds": 5,
+  "first_frame": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261007-181228-akhil-sarah/assets/output/kerala-christian-v1/clip-10-handoff.jpg",
+  "last_frame": null,
+  "prompt_sha256": "1bac3a2c984dc161f45d29b5445471d93fa7d7186cf97346ff3da122fba4ce59",
+  "prompt_len": 3311,
+  "qc": "POST_GEN_FRAME_CHECK (agent)",
+  "video_prompt": "Animate ONLY the supplied first image for five seconds. Preserve this exact scene and its objects. There is exactly ONE bride, ONE groom, ONE medium-sized fluffy cream-white Indian Spitz dog sitting at their feet and ONE date board on its single easel at camera RIGHT. The existing rectangular board, gold frame, all printed date lettering and support form ONE RIGID FIXED OBJECT: keep its silhouette, perspective, text and position consistent with the scene as the camera moves. Never create a replacement board, duplicate panel, overlapping gold border, extra easel or reflected second sign. No independent final composition is requested.\n\nOne gentle continuous BACKWARD camera glide of about one meter with a slight 15-centimeter rise under the existing cream-plaster arched gateway, no pan and no whip. 0.00-1.25s: couple remains where they stand, softly smiling, bride left and groom right. 1.25-3.25s: they turn their faces a few degrees toward each other, lower their eyes and gently touch foreheads. Their bodies barely turn, feet stay planted, hands remain naturally joined at waist height. Her long wavy hair and veil sway slightly, no new people or costume change. The SAME medium cream-white Indian Spitz (pinkish-brown nose, knee height when sitting) stays sitting upright at their feet, facing slightly toward the camera, the whole time: it pants happily with its tongue out, tilts its head a little and gently sweeps its fluffy plume tail; it never leaves, grows, duplicates or changes breed or color. 3.25-5.00s: keep the tender forehead touch while backward motion eases almost to rest. The SAME existing hanging soft lamp above becomes a little more visible as the view widens. Preserve the same cream-white bell tower, gateway, floral arch, floor decorations, the same dog and SINGLE right-side board throughout. The final frame (scene 12) shows the forehead touch with the cream-white Indian Spitz sitting upright at their feet. No objects materialize or morph. Printed copy stays exactly SAVE THE DATE / 19 DECEMBER / 2026.\n\nPETALS AND LIGHT: continuous distributed slow-motion drift is present from the first frame, not triggered as a burst when the camera stops. Keep about 12-20 separate visible petals at irregular heights and depths — white rose, pale pink rose and cream petals. Petals flutter with independent phase, soft air resistance and a little side-to-side wobble; nearby petals drift roughly one tenth of picture height per second in the settled view, distant ones slower. Camera rotation produces the brief directional streaks; after braking the SAME scattered petals become calmly visible, with no sudden emission, rain sheet, confetti explosion or synchronized falling. Bouquets and floral arrangements never detach. Fine dust motes drift inside soft diagonal volumetric sunrays through arched windows. Champagne-gold edges, pearl and jewelry catch moving specular glints; text itself emits no smoke, gold liquid or floor beam.\n\nThe light keeps its soft warm diagonal shafts and luminous rim on the couple, with subtle lamp flicker and gold highlights. The final picture is simply a slightly wider view of the supplied scene, not a new room or recomposed image. Whenever the church is visible it has exactly one white bell tower with one cross on top; never a second tower.",
+  "edits": [
+    {
+      "op": "append",
+      "text": "Whenever the church is visible it has exactly one white bell tower with one cross on top; never a second tower.",
+      "why": "exactly one bell tower rule"
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "job_type": "IMAGE_JOB",
+  "job_id": "IMG-v5-scene-05",
+  "production_id": "nk-v1-20261002-072013",
+  "batch": "stills-v5",
+  "status": "READY_TO_GENERATE",
+  "authorized_to_dispatch": true,
+  "spatial_map_status": "approved_by_ashok",
+  "spatial_map_version": "spatial-v2",
+  "spatial_map_path": "/workspace/fmi-productions/nandini-karthik-remake/continuity/SPATIAL_MAP.json",
+  "blueprint_path": "/workspace/fmi-productions/nandini-karthik-remake/continuity/MANTAP_BLUEPRINT_TOPVIEW.png",
+  "orchestrator_auth": "/workspace/fmi-productions/nandini-karthik-remake/packets/ORCHESTRATOR_SPATIAL_APPROVED.json",
+  "scene_id": "scene-05",
+  "name": "Stairs — turn RIGHT; couple on stage ahead",
+  "facet": "stairs",
+  "secondary_facets": null,
+  "couple": true,
+  "arrival": "turn RIGHT from left aisle onto stairs",
+  "next_edge": {
+    "to": "scene-06",
+    "move": "STRAIGHT onto stage, then slight LEFT orbit along stage edge toward photoshoot/pond"
+  },
+  "camera_pose": {
+    "framing": "on stairs looking up to stage",
+    "bias": "centered on stair climb",
+    "height": "low-mid on steps",
+    "look": "up to stage platform; couple STANDING on stage ahead",
+    "lens_feel": "medium-wide"
+  },
+  "visible_set_pieces": [
+    "cream stone stairs",
+    "garlanded balustrade",
+    "stage platform ahead",
+    "couple STANDING on stage (wardrobe lock)",
+    "stage floral wall behind couple"
+  ],
+  "offscreen": {
+    "L": "left aisle just left",
+    "R": "right aisle beyond stage apron",
+    "behind": "left aisle south",
+    "ahead": "stage_decorations"
+  },
+  "forbidden_reuse": [
+    "misty lake behind couple",
+    "gopuram",
+    "mountains",
+    "boat",
+    "walking",
+    "bride bun",
+    "full invite stack (names only OK)"
+  ],
+  "image_prompt_constraints": "9:16. Camera ON STAIRS looking up. Couple STANDING on stage ahead — wardrobe lock maroon half-shirt+veshti; green bridal saree, heavy gold, long flowered hair NOT bun. NO walking. Backdrop stage floral wall — NO lake/gopuram. Magenta cursive sky optional: Nandini ♡ Karthik only.",
+  "image_prompt": "A full-bleed portrait 9:16 cinematic dimensional storybook wedding invitation still. pastel tropical elegance; cream carved stone; jasmine+lotus; banana leaves; brass urulis + nilavilakku; polished reflective floor; soft warm morning light; cinematic dimensional storybook 9:16. FACET (stairs): Cream stone steps rising from aisle/center to stage platform; garlanded balustrade; lamps on landings. 9:16. Camera ON STAIRS looking up. Couple STANDING on stage ahead — wardrobe lock maroon half-shirt+veshti; green bridal saree, heavy gold, long flowered hair NOT bun. NO walking. Backdrop stage floral wall — NO lake/gopuram. Magenta cursive sky optional: Nandini ♡ Karthik only. Camera: {\"framing\": \"on stairs looking up to stage\", \"bias\": \"centered on stair climb\", \"height\": \"low-mid on steps\", \"look\": \"up to stage platform; couple STANDING on stage ahead\", \"lens_feel\": \"medium-wide\"}. Visible set pieces: cream stone stairs, garlanded balustrade, stage platform ahead, couple STANDING on stage (wardrobe lock), stage floral wall behind couple. Offscreen neighbors — L:left aisle just left; R:right aisle beyond stage apron; behind:left aisle south; ahead:stage_decorations. FORBIDDEN (do not show as hero/dominant): misty lake behind couple, gopuram, mountains, boat, walking, bride bun, full invite stack (names only OK). Far vista lock: FORBIDDEN as dominant background on every beat. Allowed at most as a tiny distant corner peek in scene-06 only, never hero, never with readable gopuram. Prefer solid stage floral architecture instead. Same venue complex throughout — materials/decor continuous; geography changes by facet only. No watermark. No brand logos. Wardrobe lock: groom=maroon half-sleeve shirt + white gold-border veshti + sandals; bride=rich green silk bridal saree; heavy gold jewellery (necklace layers, jhumkas, maang tikka, oddiyanam, bangles); long bridal hair with jasmine+roses — NOT a bun. Pose: Couple STANDING still in place, holding hands, looking at each other affectionately. Feet planted.. Motion: STRICT: NO walking, NO stepping forward, NO stride. Camera moves around them — they do not walk.",
+  "aspect_ratio": "9:16",
+  "resolution": {
+    "width": 720,
+    "height": 1280
+  },
+  "output_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5/scene-05.jpg",
+  "max_paid_attempts": 2,
+  "attempt": 0,
+  "continuity": {
+    "world_style": "pastel tropical elegance; cream carved stone; jasmine+lotus; banana leaves; brass urulis + nilavilakku; polished reflective floor; soft warm morning light; cinematic dimensional storybook 9:16",
+    "same_place_rule": "All six beats are ONE venue. Style/decor/materials continuous. Background geography MUST change by facet — never reuse one hero vista.",
+    "far_vista_lock": {
+      "hero_plate": "misty lake + temple gopuram + mountains + wooden boat",
+      "rule": "FORBIDDEN as dominant background on every beat. Allowed at most as a tiny distant corner peek in scene-06 only, never hero, never with readable gopuram. Prefer solid stage floral architecture instead."
+    },
+    "wardrobe_lock": {
+      "applies_when": "couple visible (scene-05, scene-06)",
+      "groom": "maroon half-sleeve shirt + white gold-border veshti + sandals",
+      "bride": "rich green silk bridal saree; heavy gold jewellery (necklace layers, jhumkas, maang tikka, oddiyanam, bangles); long bridal hair with jasmine+roses — NOT a bun",
+      "pose": "Couple STANDING still in place, holding hands, looking at each other affectionately. Feet planted.",
+      "motion_rule": "STRICT: NO walking, NO stepping forward, NO stride. Camera moves around them — they do not walk."
+    },
+    "maze_logic": "Continuous polyline through adjacent facets only. Allowed moves between beats: LEFT turn, RIGHT turn, or STRAIGHT along a connected edge. Forbidden: diagonal teleports across center aisle or skipping stairs to reach stage."
+  },
+  "qc_hints": "FAIL any still with stills-v4 lake/gopuram plate as dominant BG; FAIL any implied teleport (stage without prior stairs/aisle geography).",
+  "created_at": "2026-10-02T08:38:01.265720+05:30"
+}

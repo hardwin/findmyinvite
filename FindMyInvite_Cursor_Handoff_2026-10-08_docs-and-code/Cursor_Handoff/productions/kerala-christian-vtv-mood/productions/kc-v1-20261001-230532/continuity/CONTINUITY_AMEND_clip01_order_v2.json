@@ -1,0 +1,181 @@
+{
+  "document": "CONTINUITY_AMEND_clip01_order_v2",
+  "production_id": "kc-v1-20261001-230532",
+  "status": "READY",
+  "amended_at": "2026-10-02T00:09:35.484873+05:30",
+  "supersedes": "CONTINUITY_AMEND_clip01.json freeform first-frame path",
+  "source_packets": [
+    "packets/ORCHESTRATOR_CONTINUITY_AMEND_CLIP01_ORDER_V2.json",
+    "packets/ORCHESTRATOR_CLIP01_REGEN_ORDER_V2.json"
+  ],
+  "last_frame_anchor": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1-handoff.jpg",
+  "locked_destination_world": {
+    "source_frame": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1-handoff.jpg",
+    "zone": "open arched porch vestibule looking out toward church / coastal water",
+    "architecture": {
+      "porch": "classical cream-white fluted columns; open sides including rear; wooden beam overhead with white+pink floral clusters",
+      "floor": "polished light cream stone/marble reflecting warm light",
+      "floral_cross": "ONE large floral cross (white+soft pink flowers) on square cream pedestal, centered in porch",
+      "candles": "TWO tall slender brass/gold candlesticks with white pillar candles in glass hurricane shades flanking the pedestal",
+      "distant_church": "ONE cream-white church with modest bell tower + cross, seen through open rear of porch along a stone path",
+      "landscape": "lush tropical coastal/backwater; palm trees; calm water beyond church; flowering bushes"
+    },
+    "materials_palette": [
+      "cream-white plaster / classical columns",
+      "champagne-gold lettering (last frame only)",
+      "white + soft pink florals (roses/lilies)",
+      "warm golden-hour sunrise light from camera-left / upper-left",
+      "powder-blue / lavender-peach sky haze"
+    ],
+    "lighting": "soft warm golden-hour sunrise from upper-left / camera-left; luminous rim; gentle lens bloom OK; not flat wash",
+    "copy_locked_destination": {
+      "lines": [
+        "With God's Grace",
+        "We Invite You"
+      ],
+      "style": "champagne-gold beveled cursive; lives ONLY on last frame / end of clip — NEVER on scene-01 still"
+    },
+    "particles": "continuous drifting pink+white petals",
+    "medium": "storybook 3D — never photographic"
+  },
+  "scene_01_rules": {
+    "must": "same world as handoff, elevated sweeping drone establish, opening_energy required",
+    "no_text": true,
+    "object_counts": {
+      "bell_tower": 1,
+      "porch_vestibule": 1,
+      "floral_cross_pedestal": 1,
+      "text_boards": 0
+    },
+    "veto_if": [
+      "different world than handoff",
+      "static compound plate / facade lock",
+      "any text on still",
+      "0 or 2+ bell towers / missing porch / missing floral cross"
+    ]
+  },
+  "clip_01_rules": {
+    "first": "new APPROVED image-1.jpg (ORDER V2)",
+    "last": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1-handoff.jpg",
+    "motion": "continuous drone establish → porch blessing; soft family within handoff world"
+  },
+  "do_not_amend": [
+    "scene-02 subsection identity",
+    "handoff blessing copy",
+    "clips 02-11"
+  ],
+  "bible_paths": {
+    "json": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/continuity/CONTINUITY_BIBLE.json",
+    "scene_01": "scenes.scene-01",
+    "clip_01": "clips.clip-01"
+  },
+  "pre_amend_snapshot": {
+    "scene-01": {
+      "id": "scene-01",
+      "index": 1,
+      "name": "Sweeping cinematic drone wedding-estate establish",
+      "generate_still": true,
+      "image_path": "image-1.jpg",
+      "zone": "elevated aerial / wedding-estate compound exterior (soft expanse)",
+      "characters": [],
+      "copy": null,
+      "lighting": "soft sunrise; low sun at camera-left; lavender-peach + powder-blue sky",
+      "camera": "High sweeping cinematic drone establish — elevated wedding-estate energy, strong altitude/parallax, romantic coastal scale. Wide oblique aerial (~24mm class). NOT eye-level facade plate, NOT nadir architecture map, NOT static locked compound diagram.",
+      "opening_energy": {
+        "required": "sweeping cinematic drone / wedding-estate aerial brilliance",
+        "veto_if": [
+          "static compound plate",
+          "eye-level facade lock",
+          "tight measured floorplan/compound diagram",
+          "frozen hold with no aerial expanse"
+        ]
+      },
+      "architecture_family": {
+        "mode": "soft_family_resemblance",
+        "note": "Opening compound is SOFT world identity — NOT a rigid measured plate. Allow lush wedding-estate expanse and stronger altitude. Do NOT pixel-lock floorplan, pool proportions, or cloister geometry.",
+        "must_suggest": [
+          "cream-white Portuguese-influenced Kerala Catholic plaster + laterite accents",
+          "ONE modest bell tower with cross (sky around cupola preferred)",
+          "ONE small open arched porch vestibule (all sides open including rear) readable in the compound below",
+          "coastal Kerala Catholic church-estate geography — palms / soft coastal haze optional"
+        ],
+        "may_vary": [
+          "courtyard pool size/shape or presence as secondary landscape",
+          "cloister roof extent and angle",
+          "estate depth, gardens, approach paths, reflecting water scale",
+          "exact tower placement within soft right/background family (still ONE tower)"
+        ]
+      },
+      "architecture_must": [
+        "FAMILY: cream plaster + laterite + arched Kerala Catholic church-estate language",
+        "ONE modest cream-white bell tower + cross",
+        "ONE small open arched porch vestibule (open sides including rear) with tiny floral cross pedestal readable or partly roof-occluded from height",
+        "Elevated sweeping wedding-estate geography — not a flat facade plate"
+      ],
+      "object_counts": {
+        "bell_tower": 1,
+        "porch_vestibule": 1,
+        "floral_cross_pedestal": 1,
+        "text_boards": 0
+      },
+      "forbidden": [
+        "text/watermark",
+        "close portrait of porch",
+        "closed inner sanctuary in porch",
+        "extra shrine",
+        "multiple bell towers",
+        "second unrelated church mass",
+        "static eye-level facade plate",
+        "tight locked compound map / architecture diagram",
+        "photographic realism (must stay storybook 3D)"
+      ],
+      "particles": "lavish fixed floral décor from height; people tiny unresolved",
+      "amend_note": "2026-10-02 clip-01 regen: loosened rigid compound plate; opening_energy required"
+    },
+    "clip-01": {
+      "id": "clip-01",
+      "index": 1,
+      "from_scene": 1,
+      "to_scene": 2,
+      "duration_s": 5,
+      "camera": "Sweeping elevated cinematic drone establish → elegant continuous forward-down approach into open porch blessing. Prioritize continuous flight energy and wedding-estate brilliance.",
+      "first_anchor": {
+        "strategy": "scene-image",
+        "scene": 1,
+        "note": "Use regenerated image-1.jpg after scene-01 APPROVED"
+      },
+      "last_anchor": {
+        "strategy": "scene-image",
+        "scene": 2,
+        "path_hint": "image-2.jpg",
+        "note": "LOCKED — approved scene-02 still (blessing lettering + porch). Do not regenerate scene-02."
+      },
+      "video_path": "clip-1.mp4",
+      "final_frame_path": "clip-1-handoff.jpg",
+      "opening_energy": {
+        "required": true,
+        "rule": "Cinematic drone / wedding-estate aerial flight energy is REQUIRED. Static compound plate, uniform sideways slide, or frozen architecture hold = Continuity VETO."
+      },
+      "architecture_mode": "soft_family_resemblance_during_flight",
+      "continuity_rules": [
+        "Connection shot from regenerated scene-01 aerial → locked scene-02 porch blessing — not independent cinema",
+        "Soft family resemblance (cream plaster, laterite, ONE modest bell tower, open porch, coastal Kerala Catholic estate) — NOT rigid floorplan preservation mid-flight",
+        "Object counts that still matter: ONE bell tower, ONE porch vestibule, ONE floral cross pedestal; no mid-clip duplicate towers/boards",
+        "Last frame must land on locked scene-02 identity (blessing copy + open porch + floral cross) — scene-02 subsection UNCHANGED",
+        "Prefer continuous sweeping flight / elegant dive-push over architecture-preservation language that freezes the compound",
+        "Petals continuous drift into blessing; no burst on camera stop",
+        "Do NOT invent a second church typology mid-flight; stay inside Kerala Catholic coastal church-estate family"
+      ],
+      "forbidden_motion": [
+        "static facade plate hold",
+        "tight locked compound diagram energy",
+        "uniform sideways slide / frozen hold",
+        "hard cut / obvious crossfade morph soup as primary move (prefer continuous flight)",
+        "landing on a different porch/copy than locked image-2"
+      ],
+      "handoff_note": "New handoff may soft-cut vs existing clip-02 first frame; re-chain 02–11 only if Ashok asks.",
+      "amend_note": "2026-10-02 clip-01 regen: motion + architecture rigidity loosened; scene-02 last anchor locked"
+    }
+  },
+  "ready_for": "Asset Producer — rebuild IMAGE_JOB scene-01 ORDER V2 conditioned on handoff; VIDEO held until APPROVED"
+}

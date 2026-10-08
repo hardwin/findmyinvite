@@ -1,0 +1,19 @@
+{
+  "packet_type": "ORCHESTRATOR_SPATIAL_APPROVAL_GATE",
+  "production_id": "nk-v1-20261002-072013",
+  "recorded_at": "2026-10-02T08:37:29+05:30",
+  "spatial_map_status": "approved_by_ashok",
+  "spatial_map_version": "spatial-v2",
+  "blueprint_path": "/workspace/fmi-productions/nandini-karthik-remake/continuity/MANTAP_BLUEPRINT_TOPVIEW.png",
+  "spatial_map_json": "/workspace/fmi-productions/nandini-karthik-remake/continuity/SPATIAL_MAP.json",
+  "approved_via": "Ashok 'Go ahead' (relayed by Video Director)",
+  "image_jobs_authorized": true,
+  "current_state": "GENERATING_SCENES",
+  "orders": [
+    "Asset Producer: fold SPATIAL_MAP v2 constraints into IMAGE_JOBs (stills-v5); emit to Image Director",
+    "Image Director: generate stills per packets; honor facets + forbidden_reuse",
+    "Visual QC + Continuity: judge stills before video",
+    "Video Director: no VIDEO_JOBs until stills APPROVED; do not self-author stills outside Image Floor packets"
+  ],
+  "kc_v1_order_v2": "STOP unchanged"
+}

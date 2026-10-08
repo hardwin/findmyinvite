@@ -1,0 +1,19 @@
+{
+  "packet_type": "RECREATE_CLIENT_FILL_HANDOFF",
+  "from": "FMI ReCreate",
+  "to": "FMI Orchestrator",
+  "at": "2026-10-03T07:14:10.910640+05:30",
+  "mode": "RECREATE_CLIENT_FILL",
+  "production_id": "kc-v1-recreate-20261003-071403",
+  "template_name": "kerala-christian-v1",
+  "template_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/template.json",
+  "template_sha256": "38dd6564a6dbc8ff4545b875bb41dcc984c6afa4b0f6bc6d8aca20a2f1fb0577",
+  "couple": "Theresa & Isaac (bride-side)",
+  "customisations": [
+    "bride-side: invitation Theresa & Isaac; bride portrait is scene-04, groom is scene-05; clip-03 reveals bride, clip-04 reveals groom",
+    "clip-01 / scene-02: floral cross removed; devotional verse fills that space",
+    "save_date_inline corrected from leftover 14 & 15 February 2025 to 17th October 2026"
+  ],
+  "qc_policy": "NO_QC_GENERATE_AND_STITCH",
+  "requested_action": "Accept and run Template Compiler then image to video to assembly. Do not add QC. Preserve prior productions."
+}

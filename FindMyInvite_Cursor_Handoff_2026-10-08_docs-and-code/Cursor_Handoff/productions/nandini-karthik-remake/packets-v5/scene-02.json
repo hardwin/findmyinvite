@@ -1,0 +1,45 @@
+{
+  "job_type": "IMAGE_JOB",
+  "job_id": "IMG-v5-scene-02",
+  "production_id": "nk-v1-20261002-072013",
+  "batch": "stills-v5",
+  "scene_id": "scene-02",
+  "facet": "entrance_colonnade",
+  "name": "Wide entrance — camera biased RIGHT",
+  "output_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5/scene-02.jpg",
+  "aspect_ratio": "9:16",
+  "image_prompt": "A full-bleed portrait 9:16 cinematic dimensional storybook wedding invitation still. pastel tropical elegance; cream carved stone; jasmine+lotus; banana leaves; brass urulis + nilavilakku; polished reflective floor; soft warm morning light; cinematic dimensional storybook 9:16. FACET (entrance_colonnade): Outer cream-stone floral arches, hanging jasmine-lotus torans, banana leaves at bases; facade reads CLOSED — no through-water. 9:16. Wide ENTRANCE COLONNADE facade; camera RIGHT of path. Closed building face — NO lake tunnel. NO couple. NO text. Camera: {\"framing\": \"wide exterior\", \"bias\": \"RIGHT of center approach\", \"height\": \"eye level\", \"look\": \"entrance colonnade facade (closed — no lake tunnel)\", \"lens_feel\": \"wide\"}. Visible set pieces: colonnade facade, torans, urulis/lamps, banana leaves left edge. Offscreen neighbors — L:thicket just left; R:right wing; behind:approach path; ahead:threshold / center + left aisle mouths. FORBIDDEN (do not show as hero/dominant): misty lake, gopuram, mountains, boat, through-arch lake plate, couple, text. Far vista lock: FORBIDDEN as dominant background on every beat. Allowed at most as a tiny distant corner peek in scene-06 only, never hero, never with readable gopuram. Prefer solid stage floral architecture instead. Same venue complex throughout — materials/decor continuous; geography changes by facet only. No watermark. No brand logos.",
+  "image_prompt_constraints": "9:16. Wide ENTRANCE COLONNADE facade; camera RIGHT of path. Closed building face — NO lake tunnel. NO couple. NO text.",
+  "forbidden_reuse": [
+    "misty lake",
+    "gopuram",
+    "mountains",
+    "boat",
+    "through-arch lake plate",
+    "couple",
+    "text"
+  ],
+  "visible_set_pieces": [
+    "colonnade facade",
+    "torans",
+    "urulis/lamps",
+    "banana leaves left edge"
+  ],
+  "offscreen": {
+    "L": "thicket just left",
+    "R": "right wing",
+    "behind": "approach path",
+    "ahead": "threshold / center + left aisle mouths"
+  },
+  "camera_pose": {
+    "framing": "wide exterior",
+    "bias": "RIGHT of center approach",
+    "height": "eye level",
+    "look": "entrance colonnade facade (closed — no lake tunnel)",
+    "lens_feel": "wide"
+  },
+  "couple": false,
+  "spatial_map_version": "spatial-v2",
+  "authorized_to_dispatch": true,
+  "status": "READY_TO_GENERATE"
+}

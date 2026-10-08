@@ -1,0 +1,22 @@
+{
+  "packet_type": "ORCHESTRATOR_DELIVERY",
+  "production_id": "kc-v1-recreate-20261002-192743",
+  "mode": "RECREATE_IDENTICAL",
+  "delivered_at": "2026-10-02T20:08:54+05:30",
+  "status": "DELIVERED",
+  "continuity_clips": "WAIVED_BY_ASHOK",
+  "skip_spatial": true,
+  "clips_complete": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/VIDEO_DIRECTOR_CLIPS_COMPLETE.json",
+  "final": {
+    "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/kerala-christian-v1-final.mp4",
+    "sha256": "f5773316b737ed1b1be9219c09133547f61ff69ac157050b32864b12b30a7e1c",
+    "duration_seconds": 54.458333,
+    "resolution": "720x1280",
+    "clip_count": 11
+  },
+  "assembly": "Video Director concat accepted as delivery \u2014 Continuity waived; no invented Final QC gate",
+  "preserve": [
+    "kc-v1-20261001-230532",
+    "nk-v1 HELD"
+  ]
+}

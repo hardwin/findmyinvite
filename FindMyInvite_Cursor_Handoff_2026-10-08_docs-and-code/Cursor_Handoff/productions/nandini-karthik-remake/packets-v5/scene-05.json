@@ -1,0 +1,46 @@
+{
+  "job_type": "IMAGE_JOB",
+  "job_id": "IMG-v5-scene-05",
+  "production_id": "nk-v1-20261002-072013",
+  "batch": "stills-v5",
+  "scene_id": "scene-05",
+  "facet": "stairs",
+  "name": "Stairs — turn RIGHT; couple on stage ahead",
+  "output_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5/scene-05.jpg",
+  "aspect_ratio": "9:16",
+  "image_prompt": "A full-bleed portrait 9:16 cinematic dimensional storybook wedding invitation still. pastel tropical elegance; cream carved stone; jasmine+lotus; banana leaves; brass urulis + nilavilakku; polished reflective floor; soft warm morning light; cinematic dimensional storybook 9:16. FACET (stairs): Cream stone steps rising from aisle/center to stage platform; garlanded balustrade; lamps on landings. 9:16. Camera ON STAIRS looking up. Couple STANDING on stage ahead — wardrobe lock maroon half-shirt+veshti; green bridal saree, heavy gold, long flowered hair NOT bun. NO walking. Backdrop stage floral wall — NO lake/gopuram. Magenta cursive sky optional: Nandini ♡ Karthik only. Camera: {\"framing\": \"on stairs looking up to stage\", \"bias\": \"centered on stair climb\", \"height\": \"low-mid on steps\", \"look\": \"up to stage platform; couple STANDING on stage ahead\", \"lens_feel\": \"medium-wide\"}. Visible set pieces: cream stone stairs, garlanded balustrade, stage platform ahead, couple STANDING on stage (wardrobe lock), stage floral wall behind couple. Offscreen neighbors — L:left aisle just left; R:right aisle beyond stage apron; behind:left aisle south; ahead:stage_decorations. FORBIDDEN (do not show as hero/dominant): misty lake behind couple, gopuram, mountains, boat, walking, bride bun, full invite stack (names only OK). Far vista lock: FORBIDDEN as dominant background on every beat. Allowed at most as a tiny distant corner peek in scene-06 only, never hero, never with readable gopuram. Prefer solid stage floral architecture instead. Same venue complex throughout — materials/decor continuous; geography changes by facet only. No watermark. No brand logos. Wardrobe lock: groom=maroon half-sleeve shirt + white gold-border veshti + sandals; bride=rich green silk bridal saree; heavy gold jewellery (necklace layers, jhumkas, maang tikka, oddiyanam, bangles); long bridal hair with jasmine+roses — NOT a bun. Pose: Couple STANDING still in place, holding hands, looking at each other affectionately. Feet planted.. Motion: STRICT: NO walking, NO stepping forward, NO stride. Camera moves around them — they do not walk.",
+  "image_prompt_constraints": "9:16. Camera ON STAIRS looking up. Couple STANDING on stage ahead — wardrobe lock maroon half-shirt+veshti; green bridal saree, heavy gold, long flowered hair NOT bun. NO walking. Backdrop stage floral wall — NO lake/gopuram. Magenta cursive sky optional: Nandini ♡ Karthik only.",
+  "forbidden_reuse": [
+    "misty lake behind couple",
+    "gopuram",
+    "mountains",
+    "boat",
+    "walking",
+    "bride bun",
+    "full invite stack (names only OK)"
+  ],
+  "visible_set_pieces": [
+    "cream stone stairs",
+    "garlanded balustrade",
+    "stage platform ahead",
+    "couple STANDING on stage (wardrobe lock)",
+    "stage floral wall behind couple"
+  ],
+  "offscreen": {
+    "L": "left aisle just left",
+    "R": "right aisle beyond stage apron",
+    "behind": "left aisle south",
+    "ahead": "stage_decorations"
+  },
+  "camera_pose": {
+    "framing": "on stairs looking up to stage",
+    "bias": "centered on stair climb",
+    "height": "low-mid on steps",
+    "look": "up to stage platform; couple STANDING on stage ahead",
+    "lens_feel": "medium-wide"
+  },
+  "couple": true,
+  "spatial_map_version": "spatial-v2",
+  "authorized_to_dispatch": true,
+  "status": "READY_TO_GENERATE"
+}

@@ -1,0 +1,23 @@
+{
+  "round": "rev5-midair-sunlight",
+  "all_scenes": {
+    "scenes": [
+      "scene-01",
+      "scene-02",
+      "scene-03",
+      "scene-04",
+      "scene-05",
+      "scene-07"
+    ],
+    "edits": [
+      [
+        "floating at every depth (large blurred near-lens petals and marigolds as foreground bokeh, crisp ones in the midground, tiny soft ones far in the background) and many more lying scattered on the floor and surfaces;",
+        "floating in MID-AIR at every depth, suspended and drifting as if caught in a slow-motion breeze (large blurred near-lens petals and marigolds hovering as foreground bokeh, crisp ones hanging in the midground air, tiny soft ones drifting far in the background), with only a very few resting on the floor;"
+      ],
+      [
+        "float in the blurred foreground, the midground and the soft background, and many more lie scattered on the floor and surfaces, all clear of the lettering.",
+        "hang suspended in MID-AIR throughout the blurred foreground, the midground and the soft background, drifting at many different heights from near the top of the frame down to just above the ground, with only a handful resting on the floor, all clear of the lettering. SUNLIGHT: warm, clearly visible golden sunlight streams into the scene as strong volumetric sunbeams and god rays slanting diagonally from high above, filling the air with glowing sunlit golden haze and fine dust motes; the floating petals and marigolds catch the light and glow where they cross the beams, and bright warm golden sun highlights and rim light gleam on the brass, carved wood, garlands and leaves, while the Tamil lettering stays crisp and fully legible."
+      ]
+    ]
+  }
+}

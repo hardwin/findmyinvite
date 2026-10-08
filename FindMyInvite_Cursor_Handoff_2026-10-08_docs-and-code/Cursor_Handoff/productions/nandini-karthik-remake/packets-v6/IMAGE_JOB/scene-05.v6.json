@@ -1,0 +1,159 @@
+{
+  "job_type": "IMAGE_JOB",
+  "job_id": "IMG-v6-scene-05",
+  "production_id": "nk-v1-20261002-072013",
+  "batch": "stills-v6",
+  "status": "RETRY_AUTHORIZED_ATTEMPT_2",
+  "authorized_to_dispatch": true,
+  "spatial_map_status": "approved_by_ashok",
+  "spatial_blueprint_16x9_status": "approved_by_ashok",
+  "spatial_map_version": "spatial-v9",
+  "spatial_map_path": "/workspace/fmi-productions/nandini-karthik-remake/continuity/SPATIAL_MAP.json",
+  "blueprint_path": "/workspace/fmi-productions/nandini-karthik-remake/continuity/SPATIAL_MAZE_MAP_16x9_v9.jpg",
+  "orchestrator_auth": "/workspace/fmi-productions/nandini-karthik-remake/packets/ORCHESTRATOR_SPATIAL_APPROVED.json",
+  "orchestrator_unlock": "/workspace/fmi-productions/nandini-karthik-remake/packets/ORCHESTRATOR_UNLOCK_IMAGE_stills-v6.json",
+  "scene_id": "scene-05",
+  "shot": "S5",
+  "room": "E",
+  "name": "Ceremony mandap — LEFT from F",
+  "facet": "ceremony_stage_mandap",
+  "secondary_facets": null,
+  "couple": "STANDS",
+  "arrival": "LEFT from F",
+  "turn_from_prior": "LEFT",
+  "next_edge": {
+    "to": "scene-06",
+    "move": "LEFT / PIVOT-PULL",
+    "edge": "D-E"
+  },
+  "camera_pose": {
+    "framing": "base of stage looking UP",
+    "bias": "centered on mandap",
+    "height": "low",
+    "look": "couple STANDING on mandap",
+    "move_intent": "LEFT / PIVOT toward D pond"
+  },
+  "visible_set": [
+    "mandap stage",
+    "floral pillars",
+    "couple STANDING",
+    "stairs F readable as adjacent"
+  ],
+  "visible_set_pieces": [
+    "mandap stage",
+    "floral pillars",
+    "couple STANDING",
+    "stairs F readable as adjacent"
+  ],
+  "offscreen": {
+    "L": "D pond via D-E",
+    "R": "F stairs",
+    "behind": "toward B via B-E",
+    "ahead": "mandap rear"
+  },
+  "forbidden_reuse": [
+    "misty lake+gopuram behind couple",
+    "walking",
+    "bride bun",
+    "full invite stack",
+    "pond terrace as this room",
+    "misty lake",
+    "temple gopuram",
+    "hills",
+    "mountains",
+    "wooden boat",
+    "lake+gopuram+hills+boat as hero BG",
+    "open water as dominant BG",
+    "lake as hero BG",
+    "distant temple/gopuram",
+    "hills as hero BG",
+    "boat as hero BG"
+  ],
+  "image_prompt_constraints": "9:16. Room E CEREMONY STAGE MANDAP. Couple STANDING — maroon half-shirt+veshti; green saree, heavy gold, long flowered hair NOT bun. NO walking. Optional names only. Facet=ceremony_stage_mandap only.",
+  "image_prompt": "A full-bleed portrait 9:16 cinematic dimensional storybook wedding invitation still. pastel tropical elegance; cream carved stone colonnade/pillars/stairs; polished floor; banana leaves; jasmine+lotus; brass urulis + lamps; palette pastel pinks, soft greens, cream, beige, misty greys, warm diffused morning light; soft warm morning light; cinematic dimensional storybook; cinematic dimensional storybook 9:16. FACET (ceremony_stage_mandap / Room E): Room E — ceremony mandap stage; floral pillars; couple STANDING; adjacent to stairs F, courtyard B, pond D. 9:16. Room E CEREMONY STAGE MANDAP. Couple STANDING — maroon half-shirt+veshti; green saree, heavy gold, long flowered hair NOT bun. NO walking. Optional names only. Facet=ceremony_stage_mandap only. Camera: {\"framing\": \"base of stage looking UP\", \"bias\": \"centered on mandap\", \"height\": \"low\", \"look\": \"couple STANDING on mandap\", \"move_intent\": \"LEFT / PIVOT toward D pond\"}. Visible set pieces: mandap stage, floral pillars, couple STANDING, stairs F readable as adjacent. Offscreen neighbors — L:D pond via D-E; R:F stairs; behind:toward B via B-E; ahead:mandap rear. FORBIDDEN (do not show as hero/dominant): misty lake+gopuram behind couple, walking, bride bun, full invite stack, pond terrace as this room, misty lake, temple gopuram, hills, mountains, wooden boat, lake+gopuram+hills+boat as hero BG. Far vista lock: misty lake + temple gopuram + mountains/hills + wooden boat FORBIDDEN as dominant/hero background on every beat. Same venue complex throughout — materials/decor continuous; geography changes by room/facet only. Distinct room per shot. No watermark. No brand logos. Wardrobe lock: groom=maroon half-sleeve shirt + white gold-border veshti + sandals; bride=rich green silk bridal saree; heavy gold jewellery (necklace layers, jhumkas, maang tikka, oddiyanam, bangles); long bridal hair with jasmine+roses — NOT a bun. Pose: Couple STANDING still in place, holding hands, looking at each other affectionately. Feet planted.. Motion: STRICT: NO walking, NO stepping forward, NO stride. Camera moves around them — they do not walk. Optional text only: Nandini ♡ Karthik (magenta cursive).",
+  "text": {
+    "optional": "Nandini ♡ Karthik",
+    "style": "magenta cursive"
+  },
+  "aspect_ratio": "9:16",
+  "resolution": {
+    "width": 720,
+    "height": 1280
+  },
+  "output_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v6/scene-05.jpg",
+  "max_paid_attempts": 2,
+  "attempt": 2,
+  "continuity": {
+    "world_style": "pastel tropical elegance; cream carved stone colonnade/pillars/stairs; polished floor; banana leaves; jasmine+lotus; brass urulis + lamps; palette pastel pinks, soft greens, cream, beige, misty greys, warm diffused morning light; soft warm morning light; cinematic dimensional storybook; cinematic dimensional storybook 9:16",
+    "palette": "pastel pinks, soft greens, cream, beige, misty greys, warm diffused morning light",
+    "materials": "cream carved stone colonnade/pillars/stairs; polished floor; banana leaves; jasmine+lotus; brass urulis + lamps",
+    "same_place_rule": "All six beats ONE venue. Each shot a DISTINCT room (A–F). No vista reuse.",
+    "far_vista_lock": {
+      "hero_plate": "misty lake + temple gopuram + mountains + wooden boat",
+      "rule": "FORBIDDEN as dominant background on every beat."
+    },
+    "wardrobe_lock": {
+      "authority": "spatial-v2 / ORCHESTRATOR_CONTINUITY_EXTRACT (NOT BRIEF-v2 red shirt)",
+      "applies_when": "couple visible (scene-05, scene-06)",
+      "groom": "maroon half-sleeve shirt + white gold-border veshti + sandals",
+      "bride": "rich green silk bridal saree; heavy gold jewellery (necklace layers, jhumkas, maang tikka, oddiyanam, bangles); long bridal hair with jasmine+roses — NOT a bun",
+      "pose": "Couple STANDING still in place, holding hands, looking at each other affectionately. Feet planted.",
+      "motion_rule": "STRICT: NO walking, NO stepping forward, NO stride. Camera moves around them — they do not walk.",
+      "veto_if": [
+        "groom red shirt or any non-maroon shirt",
+        "bride bun / short hair without long flowered length",
+        "couple walking / mid-stride",
+        "missing heavy gold bridal set on couple beats"
+      ]
+    },
+    "maze_logic": "Every hop = one adjacent graph edge only (L/R/FWD/pivot-pull). Hamiltonian path — no room reuse. No teleport.",
+    "maze_path": [
+      "A",
+      "B",
+      "C",
+      "F",
+      "E",
+      "D"
+    ]
+  },
+  "qc_hints": "FAIL any still with lake/gopuram/hills/boat as hero BG; FAIL room reuse / wrong facet; FAIL couple on scene-01..04; FAIL walking pose or bride bun on couple beats; FAIL non-distinct room backdrop.",
+  "created_at": "2026-10-02T10:52:46.595+05:30",
+  "attempt_note": "stills-v6 attempt 1 — spatial-v9 maze A→B→C→F→E→D",
+  "rollup": "/workspace/fmi-productions/nandini-karthik-remake/logs/v6/STILLS_V6_ROLLUP.json",
+  "updated_at": "2026-10-02T10:59:45.468646+05:30",
+  "continuity_batch": "stills-v6",
+  "veto_reason": "lake/temple BG behind mandap — need solid floral rear wall",
+  "paid_attempts_used": 1,
+  "prior_attempt": {
+    "attempt": 1,
+    "decision": "CONTINUITY_VETO",
+    "veto": "/workspace/fmi-productions/nandini-karthik-remake/packets/continuity_veto/scene-05.stills-v6.json",
+    "asset": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v6/scene-05.jpg",
+    "archive": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v6/archive/scene-05.attempt1.jpg"
+  },
+  "retry": {
+    "authorized_by": "FMI Orchestrator",
+    "auth_packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/ORCHESTRATOR_RETRY_IMG_v6_scene-05_attempt2.json",
+    "target_defects": [
+      "forbidden_reuse_lake_gopuram_hills_boat_hero_bg",
+      "rear_backdrop"
+    ],
+    "retry_instruction": "Regenerate scene-05 only: keep couple wardrobe+STANDING+optional names. Replace rear BG with solid ceremony-stage floral/carved wall — NO open water, NO distant temple/gopuram/hills/boat as dominant background. Facet stays ceremony_stage_mandap (Room E).",
+    "keep": [
+      "couple wardrobe",
+      "STANDING",
+      "optional names",
+      "facet ceremony_stage_mandap",
+      "room E"
+    ],
+    "do_not_touch": [
+      "scene-01",
+      "scene-02",
+      "scene-03",
+      "scene-04",
+      "scene-06"
+    ]
+  },
+  "motion_prompt_addendum": "Regenerate scene-05 only: keep couple wardrobe+STANDING+optional names. Replace rear BG with solid ceremony-stage floral/carved wall — NO open water, NO distant temple/gopuram/hills/boat as dominant background. Facet stays ceremony_stage_mandap (Room E).",
+  "retry_instruction": "Regenerate scene-05 only: keep couple wardrobe+STANDING+optional names. Replace rear BG with solid ceremony-stage floral/carved wall — NO open water, NO distant temple/gopuram/hills/boat as dominant background. Facet stays ceremony_stage_mandap (Room E)."
+}

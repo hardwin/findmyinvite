@@ -1,0 +1,46 @@
+{
+  "scene_id": "scene-groom",
+  "model": "openai/gpt-image-2.5-flare",
+  "generation": "text-only",
+  "prompt_file": "scripts/still_groom_prompt.txt",
+  "prompt_chars": 7508,
+  "prompt_sha256": "1fff88b4bbf92c308f76e588eacd4611612725193552d58d18872bbe2806ef79",
+  "request_input": {
+    "aspect_ratio": "9:16",
+    "quality": "high",
+    "output_format": "jpeg",
+    "input_images": "OMITTED (text-only)"
+  },
+  "on_screen_text": [
+    "மணமகன்",
+    "திருநிறைச்செல்வன்",
+    "மணிராஜ் (எ) ராஜேஷ்"
+  ],
+  "paid_calls": 1,
+  "status": "GENERATED",
+  "ts_local": "2026-10-08T11:50:27.310000+05:30",
+  "request_id": "50q99ewtdnrmy0d138nt5kckaw",
+  "output_path": "/workspace/fmi-productions/tamil-engagement-nichayathartham/productions/maniraj-engagement-20261007-130625/assets/output/tamil-engagement-nichayathartham-v1/image-groom.jpg",
+  "raw_path": "/workspace/fmi-productions/tamil-engagement-nichayathartham/productions/maniraj-engagement-20261007-130625/assets/output/tamil-engagement-nichayathartham-v1/raw-image-groom.jpg",
+  "raw_dims": "1152,2048",
+  "output_url": "https://replicate.delivery/xezq/ENUSWKPjS048Nx3rwiqyOrkrqeKvxPz9ruDfWQxI9WQ8gOVXA/tmps86x4koj.jpeg",
+  "sha256": "11435c5186158b9e69a87df1b0dcfe9692a1c35970bfb2853e7c904319e21927",
+  "metrics": {
+    "image_output_count": 1,
+    "model_variant": "high",
+    "predict_time": 17.103395861,
+    "resolution_target": "9:16",
+    "total_time": 17.141220707
+  },
+  "replicate_created_at": "2026-10-08T06:20:27.629Z",
+  "replicate_completed_at": "2026-10-08T06:20:44.770220707Z",
+  "ts_done": "2026-10-08T11:50:50.927926+05:30",
+  "telegram": {
+    "http": 200,
+    "ok": true,
+    "message_id": 1024,
+    "error": null,
+    "file": "/workspace/fmi-productions/tamil-engagement-nichayathartham/productions/maniraj-engagement-20261007-130625/assets/output/tamil-engagement-nichayathartham-v1/image-groom.jpg",
+    "ts_local": "2026-10-08T11:50:53.556777+05:30"
+  }
+}

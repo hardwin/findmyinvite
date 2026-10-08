@@ -1,0 +1,41 @@
+{
+  "job_type": "FINAL_QC_PREFLIGHT",
+  "production_id": "kc-v1-20261001-230532",
+  "status": "PREFLIGHT_NOW",
+  "expected_shot_order": [
+    "clip-1",
+    "clip-2",
+    "clip-3",
+    "clip-4",
+    "clip-5",
+    "clip-6",
+    "clip-7",
+    "clip-8",
+    "clip-9",
+    "clip-10",
+    "clip-11"
+  ],
+  "assembly_path_expected": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/kerala-christian-v1-final.mp4",
+  "target_duration_seconds": 54,
+  "hard_limits": {
+    "width": 720,
+    "height": 1280,
+    "fps": 24,
+    "audio": "silent",
+    "aspect": "9:16"
+  },
+  "checks": [
+    "full decode",
+    "correct orientation/resolution/fps",
+    "expected duration",
+    "no black/corrupt frames",
+    "no missing/repeated clips",
+    "scene order",
+    "required text appears",
+    "ending correct (forehead touch / first-frame-only)"
+  ],
+  "delivery_after_PASS": "Orchestrator delivers to Ashok; handoff target = user via FMI Orchestrator only",
+  "do_not_reopen": "Upstream FAIL/RETRY stays with Visual QC / generators; Final QC only judges assembled film",
+  "write_checklist_to": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/manifest/final_qc_checklist.json",
+  "continuity_bible": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/continuity/CONTINUITY_BIBLE.json"
+}

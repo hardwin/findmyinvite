@@ -1,0 +1,68 @@
+{
+  "document": "VISUAL_QC",
+  "production_id": "nk-v1-20261002-072013",
+  "batch": "clips-v5",
+  "job_id": "VID-v5-clip-02",
+  "clip_id": "clip-02",
+  "attempt": 1,
+  "asset_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/clips-v5/clip-02.mp4",
+  "handoff_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/handoffs-v5/clip-02-handoff.jpg",
+  "sha256": "3f5a6d3864afd2eb63dc7b11d1e29fef69611f86f853f78cf1ff0185b5fd1482",
+  "request_id": "a55ac1c0-53ca-9c06-a55d-c27a34c0766c",
+  "first_frame_anchor": "/workspace/fmi-productions/nandini-karthik-remake/assets/handoffs-v5/clip-01-handoff.jpg",
+  "last_frame_anchor": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5/scene-03.jpg",
+  "from_facet": "entrance_colonnade",
+  "to_facet": "left_side_aisle",
+  "decision": "RETRY",
+  "rationale": "First frame locks tightly to decoded clip-01 handoff (colonnade). Motion is continuous physical push with parallax \u2014 no morph/hold; empty; no lake/gopuram/boat. FAIL: last frame drifts from stills-v5/scene-03 left_side_aisle (stairs/landing, no stage floral wall as hero) into a denser white floral-wall destination (far-band corr\u22480.46). Forbidden reuse stage floral wall as main observed at clip end.",
+  "violations": [
+    {
+      "rule": "last_frame_match",
+      "expected": "stills-v5/scene-03.jpg \u2014 left_side_aisle arcade depth ending at stairs/landing (no stage floral wall as hero)",
+      "observed": "aisle-like corridor but far end dominated by dense white floral wall/backdrop; weaker last-vs-scene-03 match (mae\u224812.7, corr\u22480.58; far-band corr\u22480.46)"
+    },
+    {
+      "rule": "forbidden_reuse",
+      "expected": "no stage floral wall as main on this beat",
+      "observed": "dense white floral wall as destination hero at end of aisle"
+    }
+  ],
+  "checks_passed": [
+    "first_frame_match clip-01-handoff (decoded)",
+    "continuous_motion_no_morph",
+    "no_static_hold",
+    "empty_no_couple",
+    "no_lake_gopuram_mountains_boat",
+    "no_text",
+    "technical 720x1280 ~3.04s @24fps"
+  ],
+  "retry_instruction": "Keep FIRST = decoded assets/handoffs-v5/clip-01-handoff.jpg (never regenerate). Lock LAST hard to stills-v5/scene-03.jpg: left_side_aisle arcade \u2014 carved pillars + banana between columns + urulis/nilavilakku + polished floor depth INTO aisle ending at stairs/landing WITHOUT a dense stage floral wall as the destination hero. Camera: STRAIGHT into threshold then turn LEFT into left_side_aisle with real translation/occlusion/parallax; continuous motion, no morph/crossfade/hold; empty; no lake/gopuram/boat/text.",
+  "soft_notes": [
+    "AAC audio present \u2014 soft for Finish/Final if bible expects silent"
+  ],
+  "technical": {
+    "w": 720,
+    "h": 1280,
+    "fps": 24,
+    "duration_s": 3.041667,
+    "nb_frames": 73,
+    "ok": true,
+    "has_audio_aac": true
+  },
+  "anchor_similarity": {
+    "first_vs_clip01_handoff_mae": 2.97,
+    "first_vs_clip01_handoff_corr": 0.819,
+    "last_vs_scene03_mae": 12.65,
+    "last_vs_scene03_corr": 0.577,
+    "last_vs_scene03_far_corr": 0.459,
+    "handoff_vs_last_mae": 1.28
+  },
+  "spatial_map_version": "spatial-v2",
+  "continuity_bible": "/workspace/fmi-productions/nandini-karthik-remake/continuity/CONTINUITY_BIBLE.json",
+  "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/VIDEO_JOB/clip-02.v5.json",
+  "paid_attempts_used": 1,
+  "max_paid_attempts": 2,
+  "judged_at": "2026-10-02T08:59:00+05:30",
+  "judge": "Visual QC Supervisor",
+  "handoff": "Orchestrator authorize attempt-2 (defect-targeted). Continuity stand by \u2014 no LOCK on RETRY."
+}

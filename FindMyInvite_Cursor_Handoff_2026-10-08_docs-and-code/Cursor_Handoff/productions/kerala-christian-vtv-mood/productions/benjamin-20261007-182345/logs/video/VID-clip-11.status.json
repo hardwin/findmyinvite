@@ -1,0 +1,45 @@
+{
+  "job_id": "VID-clip-11",
+  "clip_id": "clip-11",
+  "production_id": "benjamin-20261007-182345",
+  "model": "grok-imagine-video-1.5",
+  "resolution": "720p",
+  "aspect_ratio": "9:16",
+  "duration_seconds": 5,
+  "first_frame": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/benjamin-20261007-182345/assets/output/kerala-christian-v1/clip-10-handoff.jpg",
+  "first_frame_sha256": "4b5424b482c71cc152f72d199f633ab9e22ec69ebaa33d402ff0c5df57cbdb31",
+  "last_frame": null,
+  "last_frame_sha256": null,
+  "prompt_source": "packets/VIDEO_PROMPTS_SUBMITTED.json (template resolved video_prompt + logged rule edits)",
+  "prompt_sha256": "c317b41832738e39d3cd9ad67ec9daecf28137fdd172a4546ce71991ba9d9235",
+  "prompt_len": 2744,
+  "qc": "NO_QC",
+  "paid_submits": 1,
+  "attempts": [
+    {
+      "attempt": 1,
+      "http": 200,
+      "first_file_id": "file_342c90c7-d142-44d4-abc2-5222fd0d0a1f",
+      "last_file_id": null,
+      "submitted_at": "2026-10-07T20:32:20+05:30",
+      "request_id": "c48fd133-fdb4-94c3-aa4f-5e90a4d124c7",
+      "final_status": "done"
+    }
+  ],
+  "updated_at": "2026-10-07T20:32:59+05:30",
+  "status": "generated",
+  "request_id": "c48fd133-fdb4-94c3-aa4f-5e90a4d124c7",
+  "sha256": "005936f0b94f9f7828524416668eef10789c514725e6a861926f19577438e0eb",
+  "handoff": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/benjamin-20261007-182345/assets/output/kerala-christian-v1/clip-11-handoff.jpg",
+  "handoff_sha256": "4a736953a61fa47c4b3bc167b7b7406048f433dd02b52ddde656022395423a6d",
+  "video_url": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-c48fd133-fdb4-94c3-aa4f-5e90a4d124c7.mp4",
+  "usage": {
+    "cost_in_usd_ticks": 7100000000
+  },
+  "technical_probe": {
+    "w": 720,
+    "h": 1280,
+    "fps": "24/1",
+    "duration_s": 5.041667
+  }
+}
