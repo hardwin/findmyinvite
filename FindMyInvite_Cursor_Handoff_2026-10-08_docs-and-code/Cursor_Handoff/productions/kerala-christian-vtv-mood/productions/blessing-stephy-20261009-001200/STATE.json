@@ -4,17 +4,17 @@
   "couple": "Blessing & Stephy",
   "invitation_order": "groom-first",
   "phase": "STILLS_AWAITING_ASHOK_APPROVAL",
-  "updated_at": "2026-10-08T18:47:46.821568+00:00",
-  "template_sha256": "49692269a04f2bcabd274e66e8fd6485a694757ea25cadcfe8c97b05b1537cbd",
+  "updated_at": "2026-10-08T18:55:06.904731+00:00",
+  "template_sha256": "c7992e05254d30884ef6c80f6de530c81215ee5116589a78c3261a3af2fcd3bc",
   "source_template_sha256": "bad0d176beb1ad47e3942689f95c4153fb933f3547670a255bb7fc062f46dae4",
   "qc_policy": "TEXT_SELF_CHECK_STILLS",
   "continuity": "WAIVED",
-  "stills_status": "GENERATED a1, text self-check PASS 11/11",
+  "stills_status": "scene-07 replaced (Akhil aisle-from-behind, no priest); text self-check PASS 11/11; awaiting Ashok approval",
   "open_questions": [
     "host_lines default 'Invited By / Groom’s & Bride’s Family / With Love & Blessings' — confirm or replace"
   ],
   "video_jobs_authorized": false,
-  "paid_image_predictions": 11,
+  "paid_image_predictions": 12,
   "paid_video_generations": 0,
   "stills_sha256": {
     "scene-01": "69301ad58988ceb9f9ac11b126d6a3cdd08e31a21ab6ef2431fe6b2a6469b8fb",
@@ -23,10 +23,12 @@
     "scene-04": "0976419aa2ebd54ddee1f3ba0b0fbe13a8e214a84ece55595f542599b8638ac4",
     "scene-05": "6e589acd42759adc3462f811306b7b619b7c10fc533d3346af122008fdc76c40",
     "scene-06": "8d0999085d9ba22c75fccd50eb0f32f8b8458a8068aa488d5a8ed4a92c55e4f2",
-    "scene-07": "3266967b2d0f56a2317eb9d74df88c1fcc2f8ca82614538470ea5e0b16340397",
+    "scene-07": "53c9d7862ee0cef3c37e4fe61db0837af5b606f0e0a7539dfe28cf9bc8ca3063",
     "scene-08": "a6373ec6d07e6cb13c5669b765b4c01cbd1553f3e6f6bc38230e174f2e2f4ca8",
     "scene-09": "d72d0ef1d562c6e9a4dde5019bf877990e040680b64e90dab688ffcee1f6aa3d",
     "scene-10": "2702576f625f2e2ef5edafc7dd18366d8a1cf95170ce2506820608110a4e1566",
     "scene-11": "85b63ea58a9ab2ed3af10286fca8b133dc9b888699c155968aa87b75110215e3"
-  }
+  },
+  "scene_changes": "scene-07 aisle-from-behind, NO priest (Ashok 2026-10-08, per Akhil & Sarah); clip-06/clip-07 aligned + NO PRIEST lines (scripts/edit_scene07_aisle.py); old still in superseded-scene07-priest-seated/",
+  "telegram": "BLOCKED: TELEGRAM_EVENTSBLR_BOT_TOKEN not on this VM; scripts/send_telegram.py ready"
 }
