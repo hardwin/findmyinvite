@@ -1642,6 +1642,7 @@ export default function AssemblyChat({
       <button type="button" className="asm-gpt-pill ghost" onClick={()=>setThemeOpen(v=>!v)}>
        {themeOpen?'Hide Preview':'Show Preview'}
       </button>
+      <a className="asm-gpt-pill ghost" href="/manager/clients">Clients</a>
       <a className="asm-gpt-pill ghost" href="/manager/pipeline">Pipeline</a>
       <button type="button" className="asm-gpt-pill solid" onClick={startNewChat}>New chat</button>
      </div>

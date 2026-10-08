@@ -330,6 +330,7 @@ export default function AssemblyPipeline(){
      <h1 className="pipe-title">Assembly pipeline</h1>
     </div>
     <nav className="pipe-nav">
+     <a className="pipe-ghost" href="/manager/clients">Clients</a>
      <a className="pipe-ghost" href="/manager">New invite</a>
      <button type="button" className="pipe-ghost" disabled={busy} onClick={()=>void loadJobs()}>{busy?'Refreshing…':'Refresh'}</button>
     </nav>
