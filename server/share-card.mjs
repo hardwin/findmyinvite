@@ -1,5 +1,5 @@
 import {invitation} from './core.mjs';
-export const STOREFRONT_STILL='/assets/50122aee9f7395c4.jpg';
+export const STOREFRONT_STILL='/assets/findmyinvite-og.jpg';
 export const TEMPLATE_STILLS={
  'rose-gold-blush-royal':'/assets/50122aee9f7395c4.jpg',
  'royal-majesty':'/assets/5a3bf145f59aa9c7.jpg',
@@ -86,7 +86,9 @@ export function invitationShare(origin,slug,data){
 }
 export async function htmlForShare(req){
  const origin=originFrom(req);
- const slug=new URL(req.url,'https://findmyinvite.com').searchParams.get('slug')||'';
+ const q=new URL(req.url,'https://findmyinvite.com').searchParams;
+ if(q.get('kind')==='brand')return storefrontShare(origin);
+ const slug=q.get('slug')||'';
  if(!slugPattern.test(slug))return storefrontShare(origin);
  try{
   const row=await invitation(slug);
