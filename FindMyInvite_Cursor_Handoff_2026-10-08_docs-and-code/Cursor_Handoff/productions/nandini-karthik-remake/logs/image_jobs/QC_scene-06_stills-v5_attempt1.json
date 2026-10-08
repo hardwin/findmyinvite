@@ -1,0 +1,46 @@
+{
+  "document": "VISUAL_QC",
+  "production_id": "nk-v1-20261002-072013",
+  "batch": "stills-v5",
+  "job": "IMG-v5-scene-06",
+  "scene_id": "scene-06",
+  "facet_expected": "stage_decorations",
+  "asset_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5/scene-06.jpg",
+  "sha256": "6970de0e78026ba0a1a99756edd7dbd4a4fa83d1e5487f29cea8a5702529cfb6",
+  "generation_id": "2qbeqw7zdsrmr0d0zabt56yzjr",
+  "prompt_hash": "4a6e7a7da98cfaaf794c4af42e8079c460f800aac4b273ec2abc1f7f171d331f",
+  "attempt": 1,
+  "decision": "RETRY",
+  "rationale": "Spatial/wardrobe mostly on track (floral stage, photoshoot niche LEFT, lotus pond rim LEFT, stairs readable, maroon/green standing couple, no lake-gopuram hero plate) BUT invite copy is invented and wrong vs Continuity event + BRIEF lock \u2014 wrong date, time, and venue. Do not PASS wrong customer copy.",
+  "violations": [
+    {
+      "rule": "copy_locked.scene-06",
+      "expected": "Exact invite stack: Nandini \u2661 Karthik / Two hearts, one beautiful beginning / 22nd February 2027 / 9:30 AM onwards / ITC Grand Chola / Chennai, Tamil Nadu / JOIN US as we begin our forever.",
+      "observed": "Invented stack: TOGETHER WITH THEIR FAMILIES\u2026 WEDDING CELEBRATION OF Nandini \u2661 Karthik; SATURDAY | 26 | APRIL 2025; MUHURTHAM 9:23 AM ONWARDS; SRI VARA MAHAL / CHENNAI \u2014 conflicts with Continuity event 22nd February 2027 / 9:30 AM onwards / ITC Grand Chola / Chennai, Tamil Nadu"
+    }
+  ],
+  "checks_passed": [
+    "no v4 lake-gopuram-boat-hills as dominant BG",
+    "wardrobe maroon + green + long flowered hair (not bun)",
+    "couple STANDING / holding hands (not walking)",
+    "photoshoot niche LEFT + decorated pond rim LEFT visible",
+    "stairs readable south of couple"
+  ],
+  "soft_notes": [
+    "IMAGE_JOB v5 prompt said 'Full invite text stacked' without pasting the exact lines \u2014 Asset Producer should fold BRIEF scene-06 exact stack into retry packet. Visual QC still FAILS invented wrong event facts."
+  ],
+  "retry_instruction": "Keep stage_decorations geography (floral stage wall, photoshoot niche LEFT, decorated pond rim LEFT, stairs south readable) and wardrobe/pose locks. Replace ALL on-screen text with EXACT stack only: Nandini \u2661 Karthik / Two hearts, one beautiful beginning / 22nd February 2027 / 9:30 AM onwards / ITC Grand Chola / Chennai, Tamil Nadu / JOIN US as we begin our forever. Magenta names; soft dark brown serif other lines; crisp centered. Remove invented April 2025 / Sri Vara Mahal / 9:23 AM / Together with their families wording. Still NO lake-gopuram-hills-boat hero plate. NO walking. NO bride bun.",
+  "expected_copy_lines": [
+    "Nandini \u2661 Karthik",
+    "Two hearts, one beautiful beginning",
+    "22nd February 2027",
+    "9:30 AM onwards",
+    "ITC Grand Chola",
+    "Chennai, Tamil Nadu",
+    "JOIN US as we begin our forever."
+  ],
+  "spatial_map_version": "spatial-v2",
+  "continuity_bible": "/workspace/fmi-productions/nandini-karthik-remake/continuity/CONTINUITY_BIBLE.json",
+  "judged_at": "2026-10-02T08:42:13+05:30",
+  "judge": "Visual QC Supervisor"
+}

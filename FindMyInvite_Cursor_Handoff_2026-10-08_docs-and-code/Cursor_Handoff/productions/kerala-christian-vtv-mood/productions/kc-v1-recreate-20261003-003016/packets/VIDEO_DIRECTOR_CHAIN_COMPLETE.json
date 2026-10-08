@@ -1,0 +1,15 @@
+{
+  "packet_type": "VIDEO_DIRECTOR_CHAIN_COMPLETE",
+  "production_id": "kc-v1-recreate-20261003-003016",
+  "final_mp4": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/assets/output/kerala-christian-v1/kerala-christian-v1-final.mp4",
+  "sha256": "d5f8bb2a51d33614440f7ce973222c0cd490070967b7b389ac45ca4ed6e42ce8",
+  "technical_probe": {
+    "w": 720,
+    "h": 1280,
+    "fps": "24/1",
+    "duration_s": 54.458333
+  },
+  "completed_at": "2026-10-03T01:09:33.985092+05:30",
+  "status": "COMPLETE",
+  "clip_count": 11
+}

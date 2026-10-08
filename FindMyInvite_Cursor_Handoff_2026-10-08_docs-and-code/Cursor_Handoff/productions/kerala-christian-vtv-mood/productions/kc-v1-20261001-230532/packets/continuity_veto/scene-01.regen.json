@@ -1,0 +1,53 @@
+{
+  "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-1.jpg",
+  "job_id": "IMG-scene-01-regen",
+  "scene_id": "scene-01",
+  "continuity_decision": "LOCK",
+  "continuity_clearance": "CLEAR",
+  "qc_gate": "PASS",
+  "attempt": 1,
+  "regen": true,
+  "amend_ref": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/continuity/CONTINUITY_AMEND_clip01.json",
+  "generation_id": "zw19vxegaxrmt0d0z309vyvtdw",
+  "decided_at": "2026-10-02T00:07:50.836596+05:30",
+  "checks": [
+    {
+      "rule": "opening_energy",
+      "expected": "sweeping cinematic drone / wedding-estate aerial",
+      "observed": "elevated sweeping aerial with coastal backwaters depth; not facade plate",
+      "ok": true
+    },
+    {
+      "rule": "object_count_bell_tower",
+      "expected": 1,
+      "observed": 1,
+      "ok": true
+    },
+    {
+      "rule": "object_count_porch",
+      "expected": 1,
+      "observed": 1,
+      "ok": true
+    },
+    {
+      "rule": "object_count_floral_cross",
+      "expected": 1,
+      "observed": 1,
+      "ok": true
+    },
+    {
+      "rule": "typography_scene01",
+      "expected": "no text",
+      "observed": "none",
+      "ok": true
+    },
+    {
+      "rule": "architecture_family",
+      "expected": "cream/laterite Kerala Catholic coastal estate soft family",
+      "observed": "cream + terracotta tile estate; soft family OK under amend",
+      "ok": true
+    }
+  ],
+  "violations": [],
+  "note": "CLEAR/LOCK regen attempt-1 under CONTINUITY_AMEND_clip01 — opening_energy met; scene-02 untouched."
+}

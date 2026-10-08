@@ -1,0 +1,24 @@
+{
+  "production_id": "kc-v1-recreate-20261003-003016",
+  "status": "READY",
+  "mode": "RECREATE_CLIENT_FILL",
+  "skip_spatial": false,
+  "couple": "Swaroop & Smiley",
+  "bible_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/continuity/CONTINUITY_BIBLE.json",
+  "bible_sha256": "c1df9dbd053e8c243f3d7465f7ea64debc2b9d83db1cc98fd59aaa57dc27ada1",
+  "continuity_bible_json": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/continuity/CONTINUITY_BIBLE.json",
+  "continuity_bible_md": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/continuity/CONTINUITY_BIBLE.md",
+  "template_sha256": "7d0c8f3060e3c11e2f1b3800661cad30d30602313961c1feeecdf0db9f8d130b",
+  "stills_expected": 11,
+  "scene_12": "Final decoded frame of clip 11; no new still API",
+  "image_jobs": "scenes 01–11 stills",
+  "clip_count": 11,
+  "scene_count": 12,
+  "next": "Spatial Continuity (16:9 Ashok gate before IMAGE)",
+  "created_at": "2026-10-03T00:34:56.952054+05:30",
+  "prompt_gaps": {
+    "clips_missing_video_prompt": true,
+    "scenes_image_prompt_01_11": true,
+    "scene_12_image_prompt": null
+  }
+}

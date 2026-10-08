@@ -1,0 +1,17 @@
+{
+  "packet_type": "ASSET_PRODUCER_LIFT_VIDEO_HOLD",
+  "production_id": "kc-v1-recreate-20261003-003016",
+  "recorded_at": "2026-10-03T00:49:23+05:30",
+  "status": "VIDEO_HOLD_LIFTED",
+  "hold_lifted": true,
+  "supersedes": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/packets/ASSET_PRODUCER_HOLD_VIDEO.json",
+  "reason": "Orchestrator VIDEO authorization, stills COMPLETE_CONTINUITY_WAIVED, continuity clip QC WAIVED, and RECUE auth received.",
+  "orchestrator_auth": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/packets/ORCHESTRATOR_GO_VIDEO.json",
+  "asset_producer_auth": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/packets/ORCHESTRATOR_GO_ASSET_PRODUCER_VIDEO.json",
+  "orchestrator_recue_video_emit": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/packets/ORCHESTRATOR_RECUE_VIDEO_EMIT.json",
+  "stills_complete_auth": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/packets/ORCHESTRATOR_STILLS_COMPLETE.json",
+  "continuity_waive_auth": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/packets/ORCHESTRATOR_WAIVE_CONTINUITY_CLIPS.json",
+  "batch": "clips-v1",
+  "next": "ASSET_PRODUCER_EMIT_VIDEO.json emitted 11 VIDEO_JOB packets; only VID-clip-01 is dispatch-authorized.",
+  "do_not_dispatch_from_ap": true
+}

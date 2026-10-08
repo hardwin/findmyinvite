@@ -1,0 +1,33 @@
+{
+  "job_id": "VID-clip-04",
+  "clip_id": "clip-04",
+  "production_id": "benjamin-20261007-182345",
+  "model": "grok-imagine-video-1.5",
+  "resolution": "720p",
+  "aspect_ratio": "9:16",
+  "duration_seconds": 5,
+  "first_frame": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/benjamin-20261007-182345/assets/output/kerala-christian-v1/clip-3-handoff.jpg",
+  "first_frame_sha256": "eb60d00dc097447f23a8dbcad18366122a98b0e3e5637146b2936b57aed0dfc5",
+  "last_frame": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/benjamin-20261007-182345/assets/output/kerala-christian-v1/image-5.jpg",
+  "last_frame_sha256": "ba653978a64329c2f693ab11df1e304497f0a61dab09b82c7fec43e9c6348a28",
+  "prompt_source": "packets/VIDEO_PROMPTS_SUBMITTED.json (template resolved video_prompt + logged rule edits)",
+  "prompt_sha256": "f69546713eaac0377d600217989e250285bbe0954b33f3579e53f0dfbedabc68",
+  "prompt_len": 2977,
+  "qc": "NO_QC",
+  "paid_submits": 0,
+  "attempts": [
+    {
+      "attempt": 1,
+      "http": 429,
+      "first_file_id": "file_64df8178-2bb7-4110-b27f-b2278db4101a",
+      "last_file_id": "file_3065a163-3a13-40d9-af3b-91514f76b5d2",
+      "submitted_at": "2026-10-07T20:13:03+05:30",
+      "response": {
+        "code": "Some resource has been exhausted",
+        "error": "The service is temporarily at capacity. Please retry your request shortly."
+      }
+    }
+  ],
+  "updated_at": "2026-10-07T20:13:02+05:30",
+  "status": "failed_submit"
+}

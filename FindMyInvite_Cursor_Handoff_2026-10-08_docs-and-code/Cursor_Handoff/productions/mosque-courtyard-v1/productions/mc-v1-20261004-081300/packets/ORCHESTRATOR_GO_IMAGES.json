@@ -1,0 +1,30 @@
+{
+  "packet_type": "ORCHESTRATOR_GO_IMAGES",
+  "production_id": "mc-v1-20261004-081300",
+  "authorized_at": "2026-10-04T08:25:00+05:30",
+  "authorized_by": "Ashok via Video Director: Approved, Do the stills, fast",
+  "spatial_blueprint_16x9_status": "approved_by_ashok",
+  "template": "/workspace/fmi-productions/mosque-courtyard-v1/productions/mc-v1-20261004-081300/template.json",
+  "image_jobs": [
+    "scene-01",
+    "scene-02",
+    "scene-03",
+    "scene-04",
+    "scene-05",
+    "scene-06",
+    "scene-07",
+    "scene-08",
+    "scene-09",
+    "scene-10",
+    "scene-11"
+  ],
+  "no_image_job": "scene-12",
+  "prompt_source": "resolved image_prompt, verbatim, do not rewrite",
+  "qc": "not requested; generate and return paths",
+  "video": "HOLD",
+  "do_not_touch": [
+    "Theresa & Isaac",
+    "nk-v1",
+    "Kerala Christian productions"
+  ]
+}

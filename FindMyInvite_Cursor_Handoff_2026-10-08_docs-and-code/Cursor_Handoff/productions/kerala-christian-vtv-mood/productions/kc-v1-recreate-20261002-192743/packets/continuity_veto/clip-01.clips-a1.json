@@ -1,0 +1,42 @@
+{
+  "document": "CONTINUITY_VETO",
+  "production_id": "kc-v1-recreate-20261002-192743",
+  "batch": "clips-attempt1",
+  "mode": "RECREATE_IDENTICAL",
+  "skip_spatial": true,
+  "clip_id": "clip-01",
+  "job": "VID-clip-01",
+  "asset_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/clip-1.mp4",
+  "sha256": "164f0302e3b7023fc7e6f0df59a90267272237458693d4b27e323aa6c63c1118",
+  "handoff_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/clip-1-handoff.jpg",
+  "handoff_sha256": "a465235cb7c0a8e2132ee9220fc662c1121c294d7b95871a68fc46d78f3fee85",
+  "generation_id": "28f66842-30c0-9333-a5fb-877382a57036",
+  "attempt": 1,
+  "visual_qc": "WAIVED_FLOOR",
+  "decision": "VETO",
+  "approved_handoff": false,
+  "scope": "clip weave / spatial morph (scene-01\u219202)",
+  "expected": {
+    "camera": "Forward-down dive, then continuing slow push",
+    "first": "aerial church compound (image-1)",
+    "last": "open porch + floral cross + With God's Grace / We Invite You (image-2)",
+    "continuity": "same physical compound; continuous connection \u2014 no mid-shot world swap",
+    "petals": "continuous drift from first frame; no burst"
+  },
+  "observed": {
+    "first_ok": true,
+    "last_settle_ok": true,
+    "mid_shot_morph": true,
+    "morph_detail": "As camera enters pavilion/arch, original courtyard church mass vanishes; replaced by waterway + distant church; courtyard figures vanish; blessing text materializes awkwardly",
+    "petals": "sudden burst ~00:03"
+  },
+  "notes": [
+    "Opening aerial + ONE tower OK; ending porch + floral cross + blessing copy OK",
+    "FAIL: severe mid-shot spatial identity break \u2014 not a continuous weave through the same compound",
+    "NO APPROVED_HANDOFF \u2014 clip-02 stays held"
+  ],
+  "retry_instruction": "Regenerate VID-clip-01 attempt-2 only. Keep locked video_prompt. FIRST=image-1.jpg LAST=image-2.jpg. Must be ONE continuous forward-down dive then slow push through the SAME white Portuguese-Kerala church compound: reflecting courtyard \u2192 into open porch vestibule with floral cross + candles already in world \u2192 settle on With God's Grace / We Invite You. FORBIDDEN: mid-shot morph that swaps the courtyard church mass for a different waterway/distant-church plate; FORBIDDEN: blessing text popping into existence; FORBIDDEN: sudden petal burst at mid-clip \u2014 petals continuous drift from first frame. Preserve ONE bell tower family and open porch all-sides-open identity.",
+  "paid_attempt_next": 2,
+  "max_paid_attempts": 2,
+  "judged_at": "2026-10-02T19:47:14.052214+05:30"
+}

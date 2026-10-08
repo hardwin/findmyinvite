@@ -1,0 +1,41 @@
+{
+  "stills": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5",
+  "clips": [
+    {
+      "id": "clip-01",
+      "from": 1,
+      "to": 2,
+      "duration": 3,
+      "prompt": "Single continuous cinematic camera move. First+last images are hard anchors. Real translation/parallax; preserve architecture identity. NEVER stop/hold camera. NEVER cut/crossfade. Couple NEVER walks \u2014 standing only when present. NO misty lake+gopuram+hills+boat hero plate. PRIMARY: Push through banana leaves into entrance colonnade facade; slight right bias. Empty."
+    },
+    {
+      "id": "clip-02",
+      "from": 2,
+      "to": 3,
+      "duration": 3,
+      "prompt": "Single continuous cinematic camera move. First+last images are hard anchors. Real translation/parallax; preserve architecture identity. NEVER stop/hold camera. NEVER cut/crossfade. Couple NEVER walks \u2014 standing only when present. NO misty lake+gopuram+hills+boat hero plate. PRIMARY: From colonnade threshold turn LEFT into left side aisle; continuous adjacent. Empty."
+    },
+    {
+      "id": "clip-03",
+      "from": 3,
+      "to": 4,
+      "duration": 3,
+      "prompt": "Single continuous cinematic camera move. First+last images are hard anchors. Real translation/parallax; preserve architecture identity. NEVER stop/hold camera. NEVER cut/crossfade. Couple NEVER walks \u2014 standing only when present. NO misty lake+gopuram+hills+boat hero plate. PRIMARY: STRAIGHT along left aisle toward stairs mouth; continuous. Empty."
+    },
+    {
+      "id": "clip-04",
+      "from": 4,
+      "to": 5,
+      "duration": 3,
+      "prompt": "Single continuous cinematic camera move. First+last images are hard anchors. Real translation/parallax; preserve architecture identity. NEVER stop/hold camera. NEVER cut/crossfade. Couple NEVER walks \u2014 standing only when present. NO misty lake+gopuram+hills+boat hero plate. PRIMARY: Approach stairs; turn RIGHT looking up; couple STANDING on stage ahead resolves \u2014 no walking."
+    },
+    {
+      "id": "clip-05",
+      "from": 5,
+      "to": 6,
+      "duration": 3,
+      "prompt": "Single continuous cinematic camera move. First+last images are hard anchors. Real translation/parallax; preserve architecture identity. NEVER stop/hold camera. NEVER cut/crossfade. Couple NEVER walks \u2014 standing only when present. NO misty lake+gopuram+hills+boat hero plate. PRIMARY: STRAIGHT onto stage then slight LEFT orbit toward photoshoot/pond; couple STANDING; invite text settles in final."
+    }
+  ],
+  "version": "v2-spatial"
+}

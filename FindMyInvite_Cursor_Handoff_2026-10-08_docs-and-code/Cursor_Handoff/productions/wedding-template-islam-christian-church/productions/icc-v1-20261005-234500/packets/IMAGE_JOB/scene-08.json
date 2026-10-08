@@ -1,0 +1,47 @@
+{
+  "job_type": "IMAGE_JOB",
+  "job_id": "IMG-scene-08",
+  "production_id": "icc-v1-20261005-234500",
+  "scene_id": "scene-08",
+  "scene_index": 8,
+  "name": "Church Wedding Ceremony board in the aisle",
+  "output_path": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/assets/output/image-8.jpg",
+  "prompt_source": "template.json scenes[7].image_prompt (verbatim)",
+  "prompt_sha256": "aa7e0f207314f06fd3331709351dccab2b9c363f37cdf9e079364d3667c18b59",
+  "prompt_chars": 2022,
+  "model": {
+    "id": "openai/gpt-image-2.5-flare",
+    "provider": "replicate",
+    "credentials_env": "REPLICATE_API_TOKEN"
+  },
+  "generation": "text-only",
+  "image_request": {
+    "input_images": [],
+    "aspect_ratio": "9:16",
+    "quality": "high",
+    "output_format": "jpeg"
+  },
+  "width": 720,
+  "height": 1280,
+  "postprocess": "ffmpeg_pad to 720x1280",
+  "auth_packet": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/packets/ORCHESTRATOR_GO_IMAGES.json",
+  "template_sha256": "3a722bd2dc87b669445c7b20411b00886a1a96ab787c448d4f1dcb6ec748d42f",
+  "staging": false,
+  "qc": "NO_QC",
+  "spatial": "WAIVED",
+  "continuity": "WAIVED",
+  "retry_policy": {
+    "paid_predictions": 1,
+    "retry_on_api_failure": 1
+  },
+  "status": "SUPERSEDED",
+  "authorized_to_dispatch": false,
+  "staged_at": "2026-10-05T23:47:21.915868+05:30",
+  "request_id": "fnexkm3tfhrmt0d11n4r834y44",
+  "output_sha256": "fde1f79882fa0491fdb7058ea78813f1b46780ca3293403ae5e8382ffee2a78a",
+  "output_size_bytes": 301214,
+  "generated_at": "2026-10-05T23:48:20.176509+05:30",
+  "superseded_by": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/packets/IMAGE_JOB/scene-08-pixar-restyle.json",
+  "superseded_at": "2026-10-06T00:37:15.119069+05:30",
+  "superseded_reason": "FULL PIXAR RESTYLE (template 8ade25af...)"
+}

@@ -1,0 +1,811 @@
+{
+  "document": "SPATIAL_MAP",
+  "production_id": "kc-v1-recreate-20261003-003016",
+  "title": "SWAROOP ♡ SMILEY — CHURCH COMPOUND SPATIAL BLUEPRINT spatial-v1",
+  "version": "spatial-v1",
+  "couple": "Swaroop & Smiley",
+  "template_name": "The Wedding of Swaroop & Smiley",
+  "updated_at": "2026-10-03T00:39:02+05:30",
+  "author": "Spatial Continuity",
+  "sources": {
+    "spatial_extract": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/packets/spatial_extract.json",
+    "continuity_bible": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/continuity/CONTINUITY_BIBLE.json",
+    "bible_sha256": "c1df9dbd053e8c243f3d7465f7ea64debc2b9d83db1cc98fd59aaa57dc27ada1",
+    "template_sha256": "7d0c8f3060e3c11e2f1b3800661cad30d30602313961c1feeecdf0db9f8d130b",
+    "rule": "Extract + Continuity bible only — never full template.json"
+  },
+  "blueprint_16x9": {
+    "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/continuity/SPATIAL_SHOT_BOARD_16x9_v1.jpg",
+    "png": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/continuity/SPATIAL_SHOT_BOARD_16x9_v1.png",
+    "svg": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/continuity/SPATIAL_SHOT_BOARD_16x9_v1.svg",
+    "kind": "vector_architectural_blueprint",
+    "tool": "matplotlib (SVG→PNG→JPG) — not generative AI",
+    "aspect": "16:9",
+    "coverage": "scenes 01–11 distinct facets; scene-12 = same gateway as 11 (video-only, noted on board)",
+    "status": "awaiting_ashok_approval",
+    "version": "spatial-v1"
+  },
+  "spatial_blueprint_16x9_status": "awaiting_ashok_approval",
+  "spatial_map_status": "draft_spatial_v1",
+  "architecture_lock": {
+    "compound": "ONE white Portuguese-influenced Kerala Catholic church compound near Alappuzha backwaters",
+    "materials": [
+      "cream-white Portuguese-influenced plaster walls",
+      "laterite stone accents",
+      "arched windows",
+      "subtly reflective worn cream stone or polished laterite tile floor (not a mirror)"
+    ],
+    "locks": [
+      "ONE modest bell tower with cross",
+      "ONE small open arched porch vestibule (all sides open including rear)",
+      "ONE floral cross pedestal in porch",
+      "floral: white jasmine, soft pink roses, baby's breath, green foliage — NOT marigold temple primary"
+    ],
+    "venue_text_vs_visual": {
+      "copy_venue": "Venkatadri Gardens / Katheru / Rajahmundry",
+      "visual_lock": "Same Kerala Christian church compound — venue TEXT is copy only, not redesign"
+    },
+    "forbidden": [
+      "Multiple bell towers",
+      "Marigold temple swags as primary floral",
+      "Second church / compound variation mid-film",
+      "Literal Venkatadri Gardens redesign",
+      "lake/gopuram Hindu temple plate",
+      "photographic people"
+    ]
+  },
+  "maze_graph": {
+    "layout": "church_compound_adjacent_weave",
+    "rooms": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K"
+    ],
+    "labels": {
+      "A": "aerial / compound exterior",
+      "B": "open arched porch vestibule",
+      "C": "side courtyard (LEFT from porch)",
+      "D": "shaded side aisle",
+      "E": "sunlit transverse archway",
+      "F": "west cloister arcade",
+      "G": "aisle and altar (ceremony)",
+      "H": "north courtyard corner",
+      "I": "parish hall garden (evening)",
+      "J": "lamp-lit side chapel corridor",
+      "K": "gateway / couple + date board"
+    },
+    "shots": {
+      "A": "S1",
+      "B": "S2",
+      "C": "S3",
+      "D": "S4",
+      "E": "S5",
+      "F": "S6",
+      "G": "S7",
+      "H": "S8",
+      "I": "S9",
+      "J": "S10",
+      "K": "S11"
+    },
+    "edges": [
+      "A-B",
+      "B-C",
+      "C-D",
+      "D-E",
+      "E-F",
+      "F-G",
+      "G-H",
+      "H-I",
+      "I-J",
+      "J-K",
+      "K-K(scene-12)"
+    ],
+    "path": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K"
+    ],
+    "path_string": "A(aerial)→B(porch)→C(side courtyard LEFT)→D(shaded aisle)→E(transverse arch)→F(west cloister)→G(aisle/altar)→H(north courtyard)→I(parish garden evening)→J(lamp corridor)→K(gateway) [S12=K video-only]",
+    "turns": [
+      "start",
+      "FWD-DOWN",
+      "LEFT 90°",
+      "RIGHT 90°",
+      "LEFT 90°",
+      "RIGHT 90°+orbit",
+      "LEFT 90°",
+      "RIGHT 90°",
+      "RIGHT 90°",
+      "LEFT 90°",
+      "BACKWARD exit",
+      "BACKWARD glide (S12 same facet)"
+    ],
+    "adjacency_notes": [
+      "LEFT from porch B reaches side courtyard C (extract geography)",
+      "D enclosed side aisle — no outdoor tower at VP",
+      "E transverse at RIGHT ANGLE to D",
+      "F west cloister — NEW viewing direction; LEFT at corner into G altar",
+      "H L-shaped north courtyard; I parish garden beside compound; J 90° left from garden",
+      "K gateway on south axis looking north to tower; S12 same K"
+    ]
+  },
+  "world": {
+    "name": "Kerala Christian church compound — Alappuzha-backwaters storybook",
+    "continuity_style": "Soft romantic late-2000s South Indian cinema; cream-white Portuguese plaster; laterite; arched windows; ONE bell tower; jasmine/rose/baby's breath; powder-blue + champagne-gold; storybook 3D animation characters — never photographic",
+    "same_place_rule": "All 11 still beats ONE compound. Each shot a DISTINCT facet (A–K). Couple STANDS on S4(groom), S5(bride), S7(couple), S11(couple); camera moves between facets.",
+    "lighting_lock": "ONE warm soft sunrise from camera-left for daytime; evening lamp-lit only for S9 parish garden + S10 lamp corridor",
+    "facets": {
+      "aerial_compound_exterior": "Room A / S1 — aerial / compound exterior",
+      "open_arched_porch_vestibule": "Room B / S2 — open arched porch vestibule",
+      "side_courtyard_bay": "Room C / S3 — side courtyard (LEFT from porch)",
+      "shaded_side_aisle": "Room D / S4 — shaded side aisle",
+      "sunlit_transverse_archway": "Room E / S5 — sunlit transverse archway",
+      "west_cloister_arcade": "Room F / S6 — west cloister arcade",
+      "aisle_and_altar": "Room G / S7 — aisle and altar (ceremony)",
+      "north_courtyard_corner": "Room H / S8 — north courtyard corner",
+      "parish_hall_garden_evening": "Room I / S9 — parish hall garden (evening)",
+      "lamp_lit_side_chapel_corridor": "Room J / S10 — lamp-lit side chapel corridor",
+      "compound_gateway": "Room K / S11 — gateway / couple + date board"
+    },
+    "plan_sketch": "A(aerial)→B(porch)→C(side courtyard LEFT)→D(shaded aisle)→E(transverse arch)→F(west cloister)→G(aisle/altar)→H(north courtyard)→I(parish garden evening)→J(lamp corridor)→K(gateway) [S12=K video-only]",
+    "scene_12": "SAME gateway facet K as scene-11 — video-only continuation; no still"
+  },
+  "character_lock": {
+    "groom": "Swaroop — adult Kerala Christian groom, storybook 3D, ivory suit, clean-shaven; STANDS S4 alone, S7+S11 with bride",
+    "bride": "Smiley — adult Kerala Christian bride, storybook 3D, ivory lace gown, veil+jasmine+gold cross+pearls; STANDS S5 alone, S7+S11 with groom",
+    "rule": "Exactly one of each in couple scenes; never photographic; camera moves, characters do not teleport across compounds"
+  },
+  "beats": [
+    {
+      "id": "scene-01",
+      "shot": "S1",
+      "room": "A",
+      "name": "Distant high aerial church establish",
+      "zone": "aerial / whole compound exterior",
+      "facet": "aerial_compound_exterior",
+      "arrival": "start",
+      "turn_from_prior": null,
+      "couple": false,
+      "camera_pose": {
+        "framing": "high oblique drone over courtyard looking toward porch + bell tower",
+        "bias": "camera well BACK from porch; tower in background with sky around cupola",
+        "height": "drone ~40m",
+        "look": "diagonally DOWN ~20–25°; wide 24mm; NOT eye-level facade, NOT nadir map",
+        "aim": "north-northeast toward bell tower beyond porch",
+        "fov_hint": "wide 24mm establish",
+        "move_intent": "FWD-DOWN dive into porch (clip-01)"
+      },
+      "visible_set": [
+        "ONE modest cream-white bell tower + cross",
+        "ONE open arched porch vestibule (tiled roof ~1/4 frame)",
+        "side cloister roof tops",
+        "shallow rectangular reflecting courtyard pool",
+        "cream paving + floral swags",
+        "coconut-palm / backwaters haze horizon"
+      ],
+      "offscreen_neighbors": {
+        "L": "west cloister roof / side courtyard west",
+        "R": "east wing / parish garden east",
+        "behind": "south approach / gateway beyond camera",
+        "ahead": "B porch vestibule then tower axis"
+      },
+      "next_edge": {
+        "to": "scene-02",
+        "move": "FWD-DOWN dive + slow push",
+        "edge": "A-B",
+        "clip": "clip-01"
+      },
+      "text": {
+        "copy": null,
+        "note": "no text / watermark"
+      },
+      "forbidden_reuse": [
+        "multiple bell towers",
+        "eye-level facade substitute",
+        "nadir map view",
+        "closed inner sanctuary in porch",
+        "extra shrine",
+        "photographic people",
+        "marigold temple primary",
+        "lake/gopuram Hindu temple plate",
+        "second compound"
+      ],
+      "image_prompt_constraints": "9:16. Facet A aerial_compound_exterior ONLY. High oblique drone ~40m, 20–25° down, 24mm. ONE tower, ONE porch, courtyard pool, cloister roofs. NO text. NO photographic people. NO second compound / lake-gopuram plate / marigold-temple primary."
+    },
+    {
+      "id": "scene-02",
+      "shot": "S2",
+      "room": "B",
+      "name": "Church porch with dimensional blessing",
+      "zone": "inside open arched porch vestibule",
+      "facet": "open_arched_porch_vestibule",
+      "arrival": "dive into porch from aerial",
+      "turn_from_prior": "FWD-DOWN",
+      "couple": false,
+      "camera_pose": {
+        "framing": "eye-level inside porch facing floral cross + distant tower through open rear",
+        "bias": "two front columns frame edges; pedestal lower-middle ~40% height",
+        "height": "eye",
+        "look": "north through open rear arches to bell tower",
+        "aim": "north toward tower axis",
+        "fov_hint": "standard eye-level porch",
+        "move_intent": "LEFT 90° pivot to side courtyard C (clip-02)"
+      },
+      "visible_set": [
+        "four cream corner columns + shallow tiled roof",
+        "all four sides OPEN including rear",
+        "ONE floral cross on low square pedestal between two candle stands",
+        "bell tower beyond rear arches",
+        "polished cream floor reflections",
+        "freestanding dimensional blessing letters"
+      ],
+      "offscreen_neighbors": {
+        "L": "C side courtyard (LEFT exit — next)",
+        "R": "east porch bay / approach",
+        "behind": "south front steps / aerial approach",
+        "ahead": "courtyard pool + bell tower (still outside)"
+      },
+      "next_edge": {
+        "to": "scene-03",
+        "move": "LEFT 90° pivot + tiny CCW arc",
+        "edge": "B-C",
+        "clip": "clip-02"
+      },
+      "text": {
+        "copy": "With The Blessings of God Almighty\nWe Invite You",
+        "carrier": "freestanding dimensional champagne-gold letters above floral cross; ~65–70% width; upper-middle",
+        "note": "exact devotional lines; not wall plaque"
+      },
+      "forbidden_reuse": [
+        "reuse aerial establish framing",
+        "masonry rear wall / nested doorway / inner sanctuary box",
+        "rectangular nameplate",
+        "duplicate crosses",
+        "people",
+        "second porch",
+        "multiple towers"
+      ],
+      "image_prompt_constraints": "9:16. Facet B open_arched_porch_vestibule ONLY. Eye-level facing floral cross + tower through open rear. Exact blessing copy freestanding. ONE floral cross pedestal. Left exit to C visible. NO people. NO closed rear wall."
+    },
+    {
+      "id": "scene-03",
+      "shot": "S3",
+      "room": "C",
+      "name": "Family invitation in the side courtyard",
+      "zone": "side courtyard bay beside porch (reached by turning LEFT out of porch)",
+      "facet": "side_courtyard_bay",
+      "arrival": "LEFT turn from porch",
+      "turn_from_prior": "LEFT 90°",
+      "couple": false,
+      "camera_pose": {
+        "framing": "eye-level into side courtyard; invitation board lower 2/3",
+        "bias": "garlanded cream pillar extreme LEFT foreground; tower offset FAR RIGHT",
+        "height": "eye",
+        "look": "diagonally into courtyard bay (not through porch tunnel)",
+        "aim": "west-northwest into courtyard; tower FR",
+        "fov_hint": "eye-level courtyard",
+        "move_intent": "RIGHT 90° + upward tilt then lateral drift into aisle D (clip-03)"
+      },
+      "visible_set": [
+        "ONE ivory invitation board on champagne-gold plinth",
+        "garlanded cream pillar extreme left",
+        "partial bell tower offset FAR RIGHT",
+        "courtyard paving extending diagonally behind board",
+        "soft candle stands + white-pink florals"
+      ],
+      "offscreen_neighbors": {
+        "L": "west compound wall / later cloister F",
+        "R": "B porch (just left)",
+        "behind": "south compound edge",
+        "ahead": "D shaded side aisle entrance north of bay"
+      },
+      "next_edge": {
+        "to": "scene-04",
+        "move": "RIGHT 90° + up tilt + lateral drift",
+        "edge": "C-D",
+        "clip": "clip-03"
+      },
+      "text": {
+        "copy": "The Wedding of\nSwaroop & Smiley",
+        "key": "invitation_lines",
+        "carrier": "ONE ivory invitation board; ~55% width; soft gold floral border + tiny gold cross"
+      },
+      "forbidden_reuse": [
+        "porch interior / floral cross pedestal as hero",
+        "centered tower tunnel behind sign",
+        "altar/sanctuary visible",
+        "duplicate boards",
+        "people",
+        "reuse aisle D or altar G"
+      ],
+      "image_prompt_constraints": "9:16. Facet C side_courtyard_bay ONLY (LEFT from porch). Exact invitation_lines on ONE board. Tower FAR RIGHT offset — not centered. NO altar. NO people. NO porch-cross as hero."
+    },
+    {
+      "id": "scene-04",
+      "shot": "S4",
+      "room": "D",
+      "name": "Groom in the shaded side aisle",
+      "zone": "shaded long cream-plaster side aisle (enclosed; no outdoor tower)",
+      "facet": "shaded_side_aisle",
+      "arrival": "from side courtyard into enclosed aisle",
+      "turn_from_prior": "RIGHT 90°",
+      "couple": false,
+      "characters": [
+        "groom"
+      ],
+      "camera_pose": {
+        "framing": "aisle interior; groom full-length LEFT third ~62% height",
+        "bias": "near cream columns frame sides; calligraphy RIGHT at chest height",
+        "height": "eye",
+        "look": "along enclosed aisle (no outdoor courtyard at vanishing point)",
+        "aim": "west along aisle; windows on left (south-ish in plan = camera-left sun)",
+        "fov_hint": "aisle portrait",
+        "move_intent": "LEFT 90° pivot + tiny down tilt to bride eye level in E (clip-04)"
+      },
+      "visible_set": [
+        "groom STANDING (ivory suit, clean-shaven, boutonniere)",
+        "arched laterite-trimmed windows (high LEFT)",
+        "cream plaster columns + soft candle stands",
+        "floating champagne-gold 'Mr. / Swaroop' calligraphy RIGHT",
+        "white-pink floral swags"
+      ],
+      "offscreen_neighbors": {
+        "L": "window wall / exterior west",
+        "R": "E transverse archway (right-angle next)",
+        "behind": "C side courtyard south",
+        "ahead": "aisle continues toward cloister / nave junction"
+      },
+      "next_edge": {
+        "to": "scene-05",
+        "move": "LEFT 90° pivot + tiny down tilt",
+        "edge": "D-E",
+        "clip": "clip-04"
+      },
+      "text": {
+        "copy": "Mr.\nSwaroop",
+        "carrier": "floating champagne-gold calligraphy RIGHT at chest height — NOT a signboard"
+      },
+      "forbidden_reuse": [
+        "bride",
+        "outdoor tower visible in aisle",
+        "outdoor courtyard at vanishing point",
+        "invitation board from C",
+        "photographic person",
+        "moustache/beard",
+        "duplicate groom",
+        "reuse transverse E or altar G framing"
+      ],
+      "image_prompt_constraints": "9:16. Facet D shaded_side_aisle ONLY. Groom STANDS LEFT third ~62%h. Exact 'Mr.\\nSwaroop' float RIGHT. NO outdoor tower. NO bride. NO boards. Storybook animation — never photographic."
+    },
+    {
+      "id": "scene-05",
+      "shot": "S5",
+      "room": "E",
+      "name": "Bride beside the sunlit transverse archway",
+      "zone": "sunlit transverse arched passageway at RIGHT ANGLE to groom's aisle",
+      "facet": "sunlit_transverse_archway",
+      "arrival": "RIGHT ANGLE turn from aisle D",
+      "turn_from_prior": "LEFT 90°",
+      "couple": false,
+      "characters": [
+        "bride"
+      ],
+      "camera_pose": {
+        "framing": "bride full-length LEFT third ~62% height; hands gently clasped",
+        "bias": "two foreground cream arched pillars; tower ONLY offset small FAR LEFT",
+        "height": "eye (bride eye level)",
+        "look": "across transverse to courtyard steps + low roofed wing",
+        "aim": "southwest across courtyard side-view",
+        "fov_hint": "passageway portrait",
+        "move_intent": "RIGHT 90° + slow 8° orbit to west cloister plaque F (clip-05)"
+      },
+      "visible_set": [
+        "bride STANDING (ivory lace gown, veil, jasmine, gold cross, pearls)",
+        "two foreground cream arched pillars",
+        "side view across courtyard steps + LOW roofed wing",
+        "offset small portion of bell tower FAR LEFT only",
+        "floating 'Ms. / Smiley' luminous gold calligraphy RIGHT"
+      ],
+      "offscreen_neighbors": {
+        "L": "courtyard / tower axis (small portion visible)",
+        "R": "F west cloister (family plaque around right corner — next)",
+        "behind": "D shaded aisle (just left)",
+        "ahead": "courtyard steps / low wing"
+      },
+      "next_edge": {
+        "to": "scene-06",
+        "move": "RIGHT 90° + slow 8° orbit constant distance",
+        "edge": "E-F",
+        "clip": "clip-05"
+      },
+      "text": {
+        "copy": "Ms.\nSmiley",
+        "carrier": "floating luminous gold calligraphy RIGHT — Ms. small above Smiley large"
+      },
+      "forbidden_reuse": [
+        "groom",
+        "giant frontal bell tower behind bride",
+        "family plaque in this view",
+        "reuse aisle D framing",
+        "duplicate bride",
+        "photographic person",
+        "boards"
+      ],
+      "image_prompt_constraints": "9:16. Facet E sunlit_transverse_archway ONLY (RIGHT ANGLE to D). Bride STANDS LEFT third. Exact 'Ms.\\nSmiley' float RIGHT. Tower FAR LEFT offset ONLY — not frontal giant. NO groom. NO family plaque. Storybook animation."
+    },
+    {
+      "id": "scene-06",
+      "shot": "S6",
+      "room": "F",
+      "name": "Both families' blessing plaque in the west cloister",
+      "zone": "west cloister arcade — NEW viewing direction",
+      "facet": "west_cloister_arcade",
+      "arrival": "orbit into west cloister from transverse",
+      "turn_from_prior": "RIGHT 90° + orbit",
+      "couple": false,
+      "camera_pose": {
+        "framing": "LOW three-quarter; plaque ~65%w × ~64%h; plane ~15°",
+        "bias": "massive cream plaster pillar beside plaque; background sideways to screen-left",
+        "height": "low three-quarter",
+        "look": "sideways across cloister columns toward screen-left — not centered aisle",
+        "aim": "south-southwest along cloister arcade",
+        "fov_hint": "plaque three-quarter",
+        "move_intent": "LEFT 90° + slight crane DOWN to seated eye at altar G (clip-06)"
+      },
+      "visible_set": [
+        "ONE ivory family blessing plaque champagne-gold frame",
+        "massive cream plaster pillar",
+        "rows of arched cloister columns receding horizontally",
+        "grounded white-pink bouquet at plinth",
+        "soft shaded cloister ceiling"
+      ],
+      "offscreen_neighbors": {
+        "L": "cloister continue / compound west wall",
+        "R": "E transverse (behind camera turn)",
+        "behind": "courtyard east of cloister",
+        "ahead": "G aisle/altar via LEFT turn at cloister corner"
+      },
+      "next_edge": {
+        "to": "scene-07",
+        "move": "LEFT 90° + slight crane DOWN; almost no forward",
+        "edge": "F-G",
+        "clip": "clip-06"
+      },
+      "text": {
+        "copy": "With the Blessings of\nGroom’s Parents\nMr. Shadrach\n& Mrs. Salomi\nBride’s Parents\nMr. Yesuratnam\n& Mrs. Mani",
+        "key": "family_lines",
+        "carrier": "ONE ivory family blessing plaque; champagne-gold frame; low three-quarter ~15°"
+      },
+      "forbidden_reuse": [
+        "person in frame",
+        "centered bell tower",
+        "bride/groom",
+        "reuse transverse E or aisle D",
+        "detached floating bouquet as confetti",
+        "duplicate plaques"
+      ],
+      "image_prompt_constraints": "9:16. Facet F west_cloister_arcade ONLY — NEW direction. Exact family_lines on ONE plaque. Sideways columns screen-left. NO person. NO centered tower. NO reuse of E/D."
+    },
+    {
+      "id": "scene-07",
+      "shot": "S7",
+      "room": "G",
+      "name": "Holy Matrimony at the aisle and altar",
+      "zone": "aisle toward altar (reached turning LEFT at cloister corner)",
+      "facet": "aisle_and_altar",
+      "arrival": "LEFT turn at cloister corner into nave",
+      "turn_from_prior": "LEFT 90°",
+      "couple": true,
+      "characters": [
+        "groom",
+        "bride"
+      ],
+      "camera_pose": {
+        "framing": "three-quarter; couple LEFT half on cream ceremonial cushion near altar steps",
+        "bias": "groom left of bride; ceremony board RIGHT; altar sanctuary intimate with soft shadow",
+        "height": "seated-eye-level",
+        "look": "toward intimate cream-plaster altar — NOT distant straight corridor",
+        "aim": "northwest toward altar sanctuary",
+        "fov_hint": "ceremony three-quarter",
+        "move_intent": "RIGHT 90° + small upward crane to standing eye at north courtyard H (clip-07)",
+        "subject_rule": "couple present (STAND / sit on cushion); camera moves — do not teleport couple between facets"
+      },
+      "visible_set": [
+        "groom + bride on cream ceremonial cushion (garlands over unchanged clothes)",
+        "simple altar cross low at left",
+        "ONE dark mahogany ceremony timing sign RIGHT",
+        "intimate cream-plaster altar sanctuary",
+        "priest small secondary far left",
+        "side arched window sunrays"
+      ],
+      "offscreen_neighbors": {
+        "L": "altar / sanctuary west-north",
+        "R": "H north courtyard corner (next)",
+        "behind": "nave south toward courtyard / porch axis",
+        "ahead": "altar wall"
+      },
+      "next_edge": {
+        "to": "scene-08",
+        "move": "RIGHT 90° + up crane to standing eye",
+        "edge": "G-H",
+        "clip": "clip-07"
+      },
+      "text": {
+        "copy": "Holy Matrimony\n8th october 2026\n10:00 a.m.\nIn the Morning",
+        "key": "ceremony_lines",
+        "carrier": "ONE dark mahogany timing sign, ornate champagne-gold frame, RIGHT side"
+      },
+      "forbidden_reuse": [
+        "duplicate couple",
+        "extra ceremony boards",
+        "corridor vanishing-point altar",
+        "reuse cloister F plaque framing",
+        "photographic people",
+        "second altar / second tower"
+      ],
+      "image_prompt_constraints": "9:16. Facet G aisle_and_altar ONLY. Couple on LEFT half cushion near altar. Exact ceremony_lines on ONE board RIGHT. Intimate sanctuary — not long corridor. ONE groom + ONE bride. Storybook animation."
+    },
+    {
+      "id": "scene-08",
+      "shot": "S8",
+      "room": "H",
+      "name": "Venue at the north courtyard corner",
+      "zone": "north courtyard corner — L-shaped sideways courtyard",
+      "facet": "north_courtyard_corner",
+      "arrival": "RIGHT turn from altar into L-courtyard",
+      "turn_from_prior": "RIGHT 90°",
+      "couple": false,
+      "camera_pose": {
+        "framing": "eye-level corner view; venue board centered ~56%×56%",
+        "bias": "CLOSE square cream column extreme RIGHT foreground; tower off-axis distant LEFT quarter",
+        "height": "eye (standing)",
+        "look": "sideways L-shaped courtyard — never straight aisle to central tower",
+        "aim": "southwest across L-courtyard",
+        "fov_hint": "courtyard corner",
+        "move_intent": "RIGHT 90° + slow leftward correcting arc to parish garden I (clip-08)"
+      },
+      "visible_set": [
+        "ONE ornate dark-mahogany venue board on gold-trimmed cream pedestal",
+        "close square cream column extreme RIGHT",
+        "L-shaped courtyard + low decorated wing across background",
+        "bell tower ONLY off-axis distant LEFT quarter",
+        "white-pink flower swags + soft candles"
+      ],
+      "offscreen_neighbors": {
+        "L": "bell tower / nave north (off-axis)",
+        "R": "I parish hall garden (next)",
+        "behind": "G aisle/altar",
+        "ahead": "east courtyard wing"
+      },
+      "next_edge": {
+        "to": "scene-09",
+        "move": "RIGHT 90° + slow leftward correcting arc",
+        "edge": "H-I",
+        "clip": "clip-08"
+      },
+      "text": {
+        "copy": "Wedding Venue\nVenkatadri Gardens\nKatheru\nRajahmundry",
+        "key": "venue_lines",
+        "carrier": "ONE ornate dark-mahogany venue board; ~56%×56%",
+        "note": "venue TEXT only — visual remains Kerala Christian storybook compound (NOT literal Venkatadri redesign)"
+      },
+      "forbidden_reuse": [
+        "foreground couple",
+        "centered tower aisle",
+        "duplicate venue boards",
+        "literal Venkatadri redesign of compound",
+        "reuse altar G or cloister F",
+        "photographic people",
+        "lake/gopuram Hindu temple plate"
+      ],
+      "image_prompt_constraints": "9:16. Facet H north_courtyard_corner ONLY. Exact venue_lines (Venkatadri TEXT). Architecture stays Kerala Christian compound. Tower LEFT off-axis. NO couple. NO centered tower aisle."
+    },
+    {
+      "id": "scene-09",
+      "shot": "S9",
+      "room": "I",
+      "name": "Reception at the evening parish hall garden",
+      "zone": "parish hall garden — EVENING",
+      "facet": "parish_hall_garden_evening",
+      "arrival": "from north courtyard into parish garden",
+      "turn_from_prior": "RIGHT 90°",
+      "couple": false,
+      "camera_pose": {
+        "framing": "garden reception establish; cream near pillar camera LEFT; garden extends sideways RIGHT",
+        "bias": "ivory reception board central ~60% width on champagne-gold easel",
+        "height": "eye",
+        "look": "sideways garden — not long centered runway",
+        "aim": "east-northeast across garden",
+        "fov_hint": "evening garden establish",
+        "move_intent": "LEFT 90° + gentle lateral drift into lamp corridor J (clip-09)",
+        "lighting": "EVENING lamp-lit / blue-hour — NOT daytime sunrise primary"
+      },
+      "visible_set": [
+        "ONE ivory reception board on champagne-gold three-legged easel",
+        "cream near pillar camera LEFT",
+        "warm soft-lamp pools + jasmine/rose garlands",
+        "BLUE HOUR powder-blue sky band upper background",
+        "garden extending sideways RIGHT"
+      ],
+      "offscreen_neighbors": {
+        "L": "church compound / H courtyard",
+        "R": "garden deeper east",
+        "behind": "H north courtyard",
+        "ahead": "J lamp-lit side chapel corridor (90° left next)"
+      },
+      "next_edge": {
+        "to": "scene-10",
+        "move": "LEFT 90° + gentle lateral drift 20cm",
+        "edge": "I-J",
+        "clip": "clip-09"
+      },
+      "text": {
+        "copy": "Reception - lunch\n8 October 2026\n12:00 p.m. onwards\nVenkatadri Gardens",
+        "key": "reception_lines",
+        "carrier": "ONE ivory reception board on delicate champagne-gold three-legged easel; ~60% width"
+      },
+      "forbidden_reuse": [
+        "daytime sunrise god-rays as primary",
+        "duplicate reception boards",
+        "marigold-primary décor",
+        "reuse courtyard H or altar G",
+        "couple as hero",
+        "second compound"
+      ],
+      "image_prompt_constraints": "9:16. Facet I parish_hall_garden_evening ONLY. Evening lamp-lit / blue hour. Exact reception_lines. Same floral language (jasmine/rose/baby's breath). NO daytime sunrise primary. NO couple hero."
+    },
+    {
+      "id": "scene-10",
+      "shot": "S10",
+      "room": "J",
+      "name": "Hosts in the lamp-lit side chapel corridor",
+      "zone": "lamp-lit side chapel corridor",
+      "facet": "lamp_lit_side_chapel_corridor",
+      "arrival": "90° left from parish garden",
+      "turn_from_prior": "LEFT 90°",
+      "couple": false,
+      "camera_pose": {
+        "framing": "frontally at eye height; tall ivory host plaque on gold pedestal atop three shallow steps",
+        "bias": "symmetrical cream arched pillars; shallow shaded space behind plaque",
+        "height": "eye",
+        "look": "frontal into corridor plaque — open corridor extends back toward camera for departure",
+        "aim": "north into corridor (plaque ahead)",
+        "fov_hint": "corridor frontal",
+        "move_intent": "fast backward corridor departure between couple into gateway K (clip-10)",
+        "lighting": "EVENING EXCEPTION — lamp-lit corridor (NOT daytime sunrise)"
+      },
+      "visible_set": [
+        "ONE tall ivory host plaque on ornate gold pedestal",
+        "three shallow steps",
+        "symmetrical cream arched pillars",
+        "hanging soft lamps + white-pink flower swags",
+        "shallow shaded space behind plaque"
+      ],
+      "offscreen_neighbors": {
+        "L": "corridor side chapel recesses",
+        "R": "corridor side chapel recesses",
+        "behind": "I parish garden (departure path)",
+        "ahead": "shallow end — then exit path toward K gateway"
+      },
+      "next_edge": {
+        "to": "scene-11",
+        "move": "fast backward corridor departure → gateway",
+        "edge": "J-K",
+        "clip": "clip-10"
+      },
+      "text": {
+        "copy": "Invited By\nMr. Yesuratnam\nMrs. Mani\nMr. Shadrach\nMrs. Salomi\nRajesh Emmanuel,Pavani and Balu\nWith Love & Blessings",
+        "key": "host_lines",
+        "carrier": "ONE tall ivory host plaque on low ornate gold pedestal — exact host_lines"
+      },
+      "forbidden_reuse": [
+        "wrong host names",
+        "duplicate boards",
+        "daytime exterior substitute",
+        "reuse garden I framing as daytime",
+        "people visible",
+        "second plaque"
+      ],
+      "image_prompt_constraints": "9:16. Facet J lamp_lit_side_chapel_corridor ONLY. Evening lamp-lit. Exact host_lines on ONE plaque. Shallow behind plaque. NO people. NO daytime sunrise substitute."
+    },
+    {
+      "id": "scene-11",
+      "shot": "S11",
+      "room": "K",
+      "name": "Single couple and single date board",
+      "zone": "gateway / couple + date board",
+      "facet": "compound_gateway",
+      "arrival": "backward departure from corridor into gateway",
+      "turn_from_prior": "BACKWARD exit",
+      "couple": true,
+      "characters": [
+        "groom",
+        "bride"
+      ],
+      "camera_pose": {
+        "framing": "single couple + single board; bride LEFT of groom; couple ~57% height middle-left ~48% width",
+        "bias": "SAVE THE DATE board far RIGHT on ONE gold easel; low floral arch + distant tower on axis",
+        "height": "eye",
+        "look": "north through gateway toward courtyard axis + bell tower",
+        "aim": "north along courtyard axis",
+        "fov_hint": "gateway couple establish",
+        "move_intent": "gentle backward glide + slight rise; forehead touch → scene-12 video-only (clip-11)",
+        "subject_rule": "couple STANDS; camera moves"
+      },
+      "visible_set": [
+        "bride LEFT of groom STANDING (same wardrobe + garlands)",
+        "Exactly ONE SAVE THE DATE board far RIGHT",
+        "low floral arch",
+        "distant cream-white bell tower on courtyard axis",
+        "one hanging soft lamp on gateway",
+        "soft diagonal sunrise god rays"
+      ],
+      "offscreen_neighbors": {
+        "L": "west gateway pier / approach garden",
+        "R": "east gateway pier / board side",
+        "behind": "south approach road / camera departure space",
+        "ahead": "courtyard axis toward porch B + tower"
+      },
+      "next_edge": {
+        "to": "scene-12",
+        "move": "gentle backward glide + slight rise; forehead touch",
+        "edge": "K-K (same facet)",
+        "clip": "clip-11",
+        "note": "scene-12 = SAME gateway facet K — video-only continuation; NO new still"
+      },
+      "text": {
+        "copy": "SAVE THE DATE\n8 October\n2026",
+        "inline": "SAVE THE DATE / 8 October / 2026",
+        "key": "save_date_lines",
+        "carrier": "Exactly ONE SAVE THE DATE board — dark-mahogany, thin ornate gold frame, ONE fixed gold easel, far RIGHT"
+      },
+      "forbidden_reuse": [
+        "TWO date boards",
+        "duplicate couple",
+        "extra signs",
+        "reuse corridor J or garden I as gateway substitute",
+        "second tower",
+        "photographic people",
+        "new still for scene-12"
+      ],
+      "image_prompt_constraints": "9:16. Facet K compound_gateway ONLY. Couple STANDS (bride L of groom). Exact ONE save_date board far RIGHT. Tower on courtyard axis behind. Scene-12 continues SAME gateway — no new still / no layout rewrite.",
+      "scene_12_note": "scene-12 is video-only continuation of SAME gateway (facet K); generate_still=false; preserve ONE date board"
+    }
+  ],
+  "forbidden_global": [
+    "multiple towers",
+    "marigold temple primary",
+    "second compound",
+    "lake/gopuram Hindu temple plate",
+    "photographic people",
+    "two shots same room/facet",
+    "final 9:16 stills or video generation at this gate"
+  ],
+  "handoff": {
+    "approve_artifact": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/continuity/SPATIAL_SHOT_BOARD_16x9_v1.jpg",
+    "spatial_map_json": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/continuity/SPATIAL_MAP.json",
+    "spatial_map_md": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/continuity/SPATIAL_MAP.md",
+    "delivery_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/packets/SPATIAL_16X9_BLUEPRINT_DELIVERY_v1.json",
+    "next": "Iterate with Ashok until spatial_blueprint_16x9_status = approved_by_ashok; then IMAGE may unlock"
+  },
+  "ashok_approval_signal": {
+    "required_status": "approved_by_ashok",
+    "current": "awaiting_ashok_approval"
+  }
+}

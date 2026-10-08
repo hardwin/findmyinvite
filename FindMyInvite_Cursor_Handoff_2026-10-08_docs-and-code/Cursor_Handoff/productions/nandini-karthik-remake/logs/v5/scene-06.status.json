@@ -1,0 +1,27 @@
+{
+  "ts_local": "2026-10-02T08:43:15+0530",
+  "job_id": "IMG-v5-scene-06",
+  "scene_id": "scene-06",
+  "status": "GENERATED",
+  "attempt": 2,
+  "generation_id": "njs21ry3r5rmr0d0zacsfjpfr0",
+  "prompt_sha256": "747b72d6e2cd443166b33d660fcbb023ed3c3fddc0f37fa361c7b86f903b1e1c",
+  "output_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5/scene-06.jpg",
+  "size_bytes": 354933,
+  "sha256": "2579d519dfbab7638e9340ed876cfa4b3116cd98c228366aea26fa21a332f43f",
+  "facet": "stage_decorations",
+  "spatial_map_version": "spatial-v2",
+  "forbidden_reuse": [
+    "v4 lake-gopuram-boat-hills as dominant BG",
+    "walking",
+    "bride bun",
+    "teleport camera into pond without stage edge"
+  ],
+  "error": null,
+  "model": "openai/gpt-image-2.5-flare",
+  "provider": "replicate",
+  "retry": true,
+  "archive_attempt1": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5/scene-06.attempt1.jpg",
+  "required_text": "Nandini \u2661 Karthik / Two hearts, one beautiful beginning / 22nd February 2027 / 9:30 AM onwards / ITC Grand Chola / Chennai, Tamil Nadu / JOIN US as we begin our forever.",
+  "output_url": "https://replicate.delivery/xezq/i3SfGJOxHeifIIrvts49She6ED2xuAfba4xaeIjwyYhelmmpLA/tmp0lsv9i6d.jpeg"
+}

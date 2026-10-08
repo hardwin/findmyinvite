@@ -1,0 +1,388 @@
+{
+  "document": "SPATIAL_EXTRACT",
+  "production_id": "kc-v1-recreate-20261003-071403",
+  "name": "The Wedding of Theresa & Isaac",
+  "mode": "RECREATE_CLIENT_FILL",
+  "couple": "Theresa & Isaac (bride-side)",
+  "template_sha256": "38dd6564a6dbc8ff4545b875bb41dcc984c6afa4b0f6bc6d8aca20a2f1fb0577",
+  "bible_path": null,
+  "bible_sha256": null,
+  "continuity": "WAIVED_BY_ASHOK \u2014 Continuity Director not used. Build from this extract only.",
+  "aspect_final": {
+    "ratio": "9:16",
+    "width": 720,
+    "height": 1280,
+    "fps": 24,
+    "audio": "silent"
+  },
+  "blueprint_aspect": {
+    "ratio": "16:9",
+    "note": "Spatial blueprint ONLY \u2014 final deliverable remains 9:16"
+  },
+  "identity_lock": {
+    "bride": "Adult Kerala Christian bride, visibly polished storybook 3D animation, warm medium-brown skin, graceful oval face, large dark-brown almond eyes, gently arched black eyebrows, soft smile. Dark hair in an elegant low bun with a soft veil and white jasmine accents, delicate gold cross pendant and pearl earrings. Ivory lace-and-silk wedding gown with soft cream undertones. Natural adult proportions an",
+    "groom": "Adult Kerala Christian groom, visibly polished storybook 3D animation, warm medium-brown skin, slender adult oval face, large dark-brown almond eyes, thick dark eyebrows, smooth clean-shaven cheeks and chin, soft black hair with a gentle side part, quiet reserved smile. No moustache or beard. Natural adult proportions, not a child. Ivory formal suit over a cream shirt with a soft white-and-pale-pi",
+    "order": "Bride portrait is scene-04. Groom portrait is scene-05. clip-03 reveals bride, clip-04 reveals groom."
+  },
+  "architecture": {
+    "compound": "Visual prompts lock ONE white Portuguese-influenced Kerala Catholic church compound (storybook). On-screen venue TEXT is Our lady of good health church, Khairatabad, and reception at Khaja mansion, Banjara Hills. Do not rewrite prompts to move the building.",
+    "scene_02": "NO floral cross. Empty pedestal. Devotional/blessing title fills that space."
+  },
+  "palette_and_materials": "Follow the resolved storybook church look already in the prompts. Do not invent a new palette.",
+  "lighting": "Daytime sunrise for day scenes. Evening lamps only for reception garden and hosts corridor.",
+  "spatial_geography": {
+    "compound_zones": [
+      {
+        "zone": "aerial / compound exterior",
+        "scenes": [
+          "scene-01"
+        ]
+      },
+      {
+        "zone": "open arched porch vestibule \u2014 NO floral cross",
+        "scenes": [
+          "scene-02"
+        ]
+      },
+      {
+        "zone": "side courtyard",
+        "scenes": [
+          "scene-03"
+        ]
+      },
+      {
+        "zone": "sunlit transverse archway (BRIDE)",
+        "scenes": [
+          "scene-04"
+        ]
+      },
+      {
+        "zone": "shaded side aisle (GROOM)",
+        "scenes": [
+          "scene-05"
+        ]
+      },
+      {
+        "zone": "west cloister",
+        "scenes": [
+          "scene-06"
+        ]
+      },
+      {
+        "zone": "aisle and altar",
+        "scenes": [
+          "scene-07"
+        ]
+      },
+      {
+        "zone": "north courtyard corner",
+        "scenes": [
+          "scene-08"
+        ]
+      },
+      {
+        "zone": "parish hall garden evening",
+        "scenes": [
+          "scene-09"
+        ]
+      },
+      {
+        "zone": "lamp-lit side chapel corridor",
+        "scenes": [
+          "scene-10"
+        ]
+      },
+      {
+        "zone": "gateway",
+        "scenes": [
+          "scene-11",
+          "scene-12"
+        ]
+      }
+    ],
+    "note": "Bride and groom facets are swapped versus the Swaroop map. Do not reuse that map."
+  },
+  "object_count_rules": [
+    "scene-02 and clip-01: zero floral crosses",
+    "one bride, one groom, never duplicates",
+    "one date board on the gateway",
+    "customer copy from parameters only; save the date is 17th October 2026"
+  ],
+  "copy_locked": {
+    "invitation_lines": "The Wedding of\nTheresa & Isaac",
+    "bride_title": "Ms.",
+    "bride_name": "M Theresa Luies",
+    "groom_title": "Mr.",
+    "groom_name": "Isaac Michael Thomas",
+    "family_lines": "With the Blessings of\nBride\u2019s Parents\nMr. Mario Luies\n& Mrs. Helen Mary\nGroom\u2019s parents\nGregory Thomas and Sandra Thomas",
+    "ceremony_lines": "Holy Matrimony\n17th October 2026\n3:00 pm.",
+    "venue_lines": "Wedding Venue\nOur lady of good health church  Khairatabad",
+    "reception_lines": "Reception - Dinner\n17th October 2026\n7:00 p.m. onwards\nKhaja mansion banjarahills road no 1",
+    "host_lines": "Invited By\nSai and Sandra\nRichard and Vasantha\nBaby Venessa and Vernon",
+    "save_date_lines": "SAVE THE DATE\n17th October",
+    "save_date_inline": "SAVE THE DATE / 17th October / 2026",
+    "devotional_line_1": "For I know the plans i have for you , declares the lord,",
+    "devotional_line_2": "plan to give you hope and a future for starting your nee journey - JEREMIAH 29:11"
+  },
+  "scenes": [
+    {
+      "id": "scene-01",
+      "index": 1,
+      "name": "Distant high aerial church establish",
+      "zone": "aerial / compound exterior",
+      "characters": [],
+      "copy": {
+        "exact": "The Wedding of\nTheresa & Isaac",
+        "carrier": "as resolved prompt"
+      },
+      "lighting": "sunrise, low sun camera-left",
+      "camera": "high oblique drone, looking down across the compound",
+      "architecture_must": [
+        "whole compound",
+        "one modest bell tower",
+        "sky and horizon"
+      ],
+      "object_counts": {
+        "bell_tower": 1
+      },
+      "generate_still": true
+    },
+    {
+      "id": "scene-02",
+      "index": 2,
+      "name": "Church porch with dimensional blessing",
+      "zone": "open arched porch vestibule",
+      "characters": [],
+      "copy": {
+        "exact": "For I know the plans i have for you , declares the lord,\nplan to give you hope and a future for starting your nee journey - JEREMIAH 29:11",
+        "carrier": "large floating blessing title where a floral cross would have been"
+      },
+      "lighting": "daytime porch",
+      "camera": "porch interior toward empty pedestal and open rear",
+      "architecture_must": [
+        "open porch",
+        "empty low square pedestal",
+        "NO floral cross"
+      ],
+      "object_counts": {
+        "floral_cross": 0,
+        "pedestal": 1
+      },
+      "generate_still": true
+    },
+    {
+      "id": "scene-03",
+      "index": 3,
+      "name": "Family invitation in the side courtyard",
+      "zone": "side courtyard",
+      "characters": [],
+      "copy": {
+        "exact": "With the Blessings of\nBride\u2019s Parents\nMr. Mario Luies\n& Mrs. Helen Mary\nGroom\u2019s parents\nGregory Thomas and Sandra Thomas",
+        "carrier": "as resolved prompt"
+      },
+      "lighting": "daytime",
+      "camera": "side courtyard, distinct from porch and aisles",
+      "architecture_must": [
+        "side courtyard facet"
+      ],
+      "object_counts": {},
+      "generate_still": true
+    },
+    {
+      "id": "scene-04",
+      "index": 4,
+      "name": "Bride beside the sunlit transverse archway",
+      "zone": "sunlit transverse archway",
+      "characters": [
+        "bride"
+      ],
+      "copy": {
+        "exact": "Ms.\nM Theresa Luies",
+        "carrier": "floating calligraphy"
+      },
+      "lighting": "sunlit archway",
+      "camera": "bride stands; camera at her facet",
+      "architecture_must": [
+        "transverse archway, not the groom aisle"
+      ],
+      "object_counts": {
+        "bride": 1,
+        "groom": 0
+      },
+      "generate_still": true
+    },
+    {
+      "id": "scene-05",
+      "index": 5,
+      "name": "Groom in the shaded side aisle",
+      "zone": "shaded side aisle",
+      "characters": [
+        "groom"
+      ],
+      "copy": {
+        "exact": "Mr.\nIsaac Michael Thomas",
+        "carrier": "floating calligraphy"
+      },
+      "lighting": "shaded aisle",
+      "camera": "groom stands; different facet from the bride archway",
+      "architecture_must": [
+        "shaded side aisle, not the bride archway"
+      ],
+      "object_counts": {
+        "groom": 1,
+        "bride": 0
+      },
+      "generate_still": true
+    },
+    {
+      "id": "scene-06",
+      "index": 6,
+      "name": "Both families' blessing plaque in the west cloister",
+      "zone": "west cloister",
+      "characters": [],
+      "copy": {
+        "exact": "With the Blessings of\nBride\u2019s Parents\nMr. Mario Luies\n& Mrs. Helen Mary\nGroom\u2019s parents\nGregory Thomas and Sandra Thomas",
+        "carrier": "plaque"
+      },
+      "lighting": "daytime cloister",
+      "camera": "west cloister",
+      "architecture_must": [
+        "west cloister"
+      ],
+      "object_counts": {},
+      "generate_still": true
+    },
+    {
+      "id": "scene-07",
+      "index": 7,
+      "name": "Holy Matrimony at the aisle and altar",
+      "zone": "aisle and altar",
+      "characters": [
+        "bride",
+        "groom"
+      ],
+      "copy": {
+        "exact": "Holy Matrimony\n17th October 2026\n3:00 pm.",
+        "carrier": "as resolved prompt"
+      },
+      "lighting": "daytime ceremony",
+      "camera": "aisle toward altar",
+      "architecture_must": [
+        "aisle and altar"
+      ],
+      "object_counts": {
+        "bride": 1,
+        "groom": 1
+      },
+      "generate_still": true
+    },
+    {
+      "id": "scene-08",
+      "index": 8,
+      "name": "Venue at the north courtyard corner",
+      "zone": "north courtyard corner",
+      "characters": [],
+      "copy": {
+        "exact": "Wedding Venue\nOur lady of good health church  Khairatabad",
+        "carrier": "as resolved prompt"
+      },
+      "lighting": "daytime",
+      "camera": "north courtyard corner",
+      "architecture_must": [
+        "north courtyard corner"
+      ],
+      "object_counts": {},
+      "generate_still": true
+    },
+    {
+      "id": "scene-09",
+      "index": 9,
+      "name": "Reception at the evening parish hall garden",
+      "zone": "parish hall garden evening",
+      "characters": [],
+      "copy": {
+        "exact": "Reception - Dinner\n17th October 2026\n7:00 p.m. onwards\nKhaja mansion banjarahills road no 1",
+        "carrier": "as resolved prompt"
+      },
+      "lighting": "evening lamps",
+      "camera": "garden reception facet",
+      "architecture_must": [
+        "evening garden, not daytime porch"
+      ],
+      "object_counts": {},
+      "generate_still": true
+    },
+    {
+      "id": "scene-10",
+      "index": 10,
+      "name": "Hosts in the lamp-lit side chapel corridor",
+      "zone": "lamp-lit side chapel corridor",
+      "characters": [],
+      "copy": {
+        "exact": "Invited By\nSai and Sandra\nRichard and Vasantha\nBaby Venessa and Vernon",
+        "carrier": "as resolved prompt"
+      },
+      "lighting": "lamp-lit night corridor",
+      "camera": "corridor",
+      "architecture_must": [
+        "side chapel corridor"
+      ],
+      "object_counts": {},
+      "generate_still": true
+    },
+    {
+      "id": "scene-11",
+      "index": 11,
+      "name": "Single couple and single date board",
+      "zone": "gateway",
+      "characters": [
+        "bride",
+        "groom"
+      ],
+      "copy": {
+        "exact": "SAVE THE DATE\n17th October\nSAVE THE DATE / 17th October / 2026",
+        "carrier": "one date board"
+      },
+      "lighting": "as resolved prompt",
+      "camera": "gateway, couple standing",
+      "architecture_must": [
+        "one gateway"
+      ],
+      "object_counts": {
+        "bride": 1,
+        "groom": 1,
+        "date_board": 1
+      },
+      "generate_still": true
+    },
+    {
+      "id": "scene-12",
+      "index": 12,
+      "name": "Gentle forehead touch beneath the same gateway",
+      "zone": "same gateway as scene-11",
+      "characters": [
+        "bride",
+        "groom"
+      ],
+      "copy": {},
+      "lighting": "match scene-11",
+      "camera": "same gateway; this is clip-11 final frame, not a new still",
+      "architecture_must": [
+        "same gateway, no new facet"
+      ],
+      "object_counts": {
+        "bride": 1,
+        "groom": 1
+      },
+      "generate_still": false
+    }
+  ],
+  "rules": [
+    "This extract only \u2014 never full template.json. No continuity bible.",
+    "ONE 16:9 blueprint: ordered shots, distinct facet per shot, camera, characters, text where needed",
+    "No two shots the same facet",
+    "Couple STANDS; camera moves",
+    "No final scene stills or video",
+    "Hand via Orchestrator; iterate until Ashok approves"
+  ]
+}

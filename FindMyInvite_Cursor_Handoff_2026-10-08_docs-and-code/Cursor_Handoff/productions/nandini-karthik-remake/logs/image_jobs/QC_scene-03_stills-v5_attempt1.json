@@ -1,0 +1,29 @@
+{
+  "document": "VISUAL_QC",
+  "production_id": "nk-v1-20261002-072013",
+  "batch": "stills-v5",
+  "job": "IMG-v5-scene-03",
+  "scene_id": "scene-03",
+  "facet_expected": "left_side_aisle",
+  "asset_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5/scene-03.jpg",
+  "sha256": "97f005d211e5e09affa64b2839240f28c034008f67be13e8eba0da20575119a5",
+  "generation_id": "4rxacshf4drmr0d0zabtt4819g",
+  "prompt_hash": "b0c51f7d78ce32f8a1c67342bb89482026a428b4fe02c4466f72588f5a8cd9c9",
+  "attempt": 1,
+  "decision": "PASS",
+  "rationale": "Left-side aisle arcade: cream carved pillars, banana wall between columns, urulis + nilavilakku, polished floor depth into aisle; stairs/landing ahead without stage floral wall as hero. No lake/gopuram plate, no couple, no text.",
+  "violations": [],
+  "checks_passed": [
+    "facet left_side_aisle arcade depth",
+    "no lake/gopuram/mountains/boat dominant BG",
+    "no stage floral wall as main",
+    "no couple",
+    "no text",
+    "materials/decor continuous with world"
+  ],
+  "retry_instruction": null,
+  "spatial_map_version": "spatial-v2",
+  "judged_at": "2026-10-02T08:41:37+05:30",
+  "judge": "Visual QC Supervisor",
+  "handoff": "Continuity LOCK/VETO (architecture/object; no couple)"
+}

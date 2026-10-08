@@ -1,0 +1,208 @@
+{
+  "chat_id": "2002649357",
+  "albums": [
+    {
+      "scenes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "http": 200,
+      "ok": true,
+      "message_ids": [
+        902,
+        903,
+        904,
+        905,
+        906,
+        907
+      ],
+      "error": null
+    },
+    {
+      "scenes": [
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "http": 200,
+      "ok": true,
+      "message_ids": [
+        908,
+        909,
+        910,
+        911,
+        912
+      ],
+      "error": null
+    }
+  ],
+  "single_photos": [
+    {
+      "scene": 7,
+      "method": "sendPhoto",
+      "http": 200,
+      "ok": true,
+      "message_id": 913,
+      "replaces": 908,
+      "error": null
+    },
+    {
+      "scene": 11,
+      "method": "sendPhoto",
+      "note": "rev4 dog added",
+      "http": 200,
+      "ok": true,
+      "message_id": 948,
+      "replaces": 946,
+      "error": null
+    },
+    {
+      "scene": 11,
+      "method": "sendPhoto",
+      "note": "rev5 bigger dog",
+      "http": 200,
+      "ok": true,
+      "message_id": 949,
+      "replaces": 948,
+      "error": null
+    },
+    {
+      "scene": 7,
+      "method": "sendPhoto",
+      "note": "rev6 priest removed",
+      "http": 200,
+      "ok": true,
+      "message_id": 957,
+      "replaces": 913,
+      "error": null
+    }
+  ],
+  "rev2_albums": [
+    {
+      "scenes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "http": 200,
+      "ok": true,
+      "message_ids": [
+        925,
+        926,
+        927,
+        928,
+        929,
+        930
+      ],
+      "error": null
+    },
+    {
+      "scenes": [
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "http": 200,
+      "ok": true,
+      "message_ids": [
+        931,
+        932,
+        933,
+        934,
+        935
+      ],
+      "error": null
+    }
+  ],
+  "rev3_albums": [
+    {
+      "scenes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "http": 200,
+      "ok": true,
+      "message_ids": [
+        936,
+        937,
+        938,
+        939,
+        940,
+        941
+      ],
+      "error": null
+    },
+    {
+      "scenes": [
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "http": 200,
+      "ok": true,
+      "message_ids": [
+        942,
+        943,
+        944,
+        945,
+        946
+      ],
+      "error": null
+    }
+  ],
+  "speedramp_final": {
+    "file": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261007-181228-akhil-sarah/assets/output/kerala-christian-v1/kerala-christian-v1-speedramp-720x1280.mp4",
+    "duration": 28,
+    "sent_at": "2026-10-07T20:28:10+05:30",
+    "sendVideo": {
+      "http": 200,
+      "ok": true,
+      "message_id": 953,
+      "caption": "Akhil & Sarah - Speed-ramped wedding video",
+      "error": null
+    },
+    "sendDocument": {
+      "http": 200,
+      "ok": true,
+      "message_id": 954,
+      "caption": "Akhil & Sarah - Speed-ramped wedding video - download copy",
+      "error": null
+    }
+  },
+  "speedramp_final_rev6_no_priest": {
+    "file": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261007-181228-akhil-sarah/assets/output/kerala-christian-v1/kerala-christian-v1-speedramp-720x1280.mp4",
+    "duration": 28,
+    "sent_at": "2026-10-07T21:11:04+05:30",
+    "sendVideo": {
+      "http": 200,
+      "ok": true,
+      "message_id": 958,
+      "caption": "Akhil & Sarah - Speed-ramped wedding video (final, priest removed)",
+      "error": null
+    },
+    "sendDocument": {
+      "http": 200,
+      "ok": true,
+      "message_id": 959,
+      "caption": "Akhil & Sarah - Speed-ramped wedding video (final, priest removed) - download copy",
+      "error": null
+    }
+  }
+}

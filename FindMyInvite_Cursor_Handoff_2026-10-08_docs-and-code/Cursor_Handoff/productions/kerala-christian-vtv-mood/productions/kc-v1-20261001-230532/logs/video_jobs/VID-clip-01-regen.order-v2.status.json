@@ -1,0 +1,21 @@
+{
+  "job": "VID-clip-01-regen",
+  "order": "V2",
+  "clip_id": "clip-01",
+  "status": "generated",
+  "attempt": 1,
+  "regen": true,
+  "self_approved": false,
+  "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1.mp4",
+  "sha256": "7127dfed67ddb5898db5886d57984f599e7636f795f696ebd91887cf2726e1d2",
+  "generation_id": "d8ddc43b-7531-9aa7-8be1-e15b8b30bdc2",
+  "first_frame": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-1.jpg",
+  "first_frame_sha256": "e220fa48eeb0911325222d18260200361c23036f119dca591509d1aaf7b6290c",
+  "locked_last_frame": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1-handoff.jpg",
+  "locked_last_frame_sha256": "dc477c78c015a1fb7fabbd6c5519fab51d430e65d93f777866274cc5c1fcde61",
+  "pending_handoff_extract": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1-handoff.order-v2.pending.jpg",
+  "pending_handoff_sha256": "7db84fe8fb1013af51bd5d585828e22f82296629a4b22dad8feb98cd3367f8c5",
+  "note": "Do NOT promote pending handoff over clip-1-handoff.jpg until QC APPROVED. Post-extract recovered after ffmpeg path fix.",
+  "model": "grok-imagine-video-1.5",
+  "updated_at": "2026-10-02T00:17:17.944429+05:30"
+}

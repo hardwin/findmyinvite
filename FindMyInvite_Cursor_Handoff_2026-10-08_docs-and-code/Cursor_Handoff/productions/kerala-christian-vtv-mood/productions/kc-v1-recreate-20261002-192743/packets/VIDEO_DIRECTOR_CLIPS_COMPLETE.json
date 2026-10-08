@@ -1,0 +1,80 @@
+{
+  "packet_type": "VIDEO_DIRECTOR_CLIPS_COMPLETE",
+  "production_id": "kc-v1-recreate-20261002-192743",
+  "status": "COMPLETE",
+  "continuity_waived": true,
+  "clips": [
+    {
+      "clip": "clip-01",
+      "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/clip-1.mp4",
+      "sha256": "47d70da9165c160d71996ac0abf20b90aea244169cf017791cccb078166883ed",
+      "duration_seconds": 5.041667
+    },
+    {
+      "clip": "clip-02",
+      "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/clip-2.mp4",
+      "sha256": "e2346e33e934c70a1a8e08f9f6e01521f76139c7b1448bcddd1a880a2ca00781",
+      "duration_seconds": 4.041667
+    },
+    {
+      "clip": "clip-03",
+      "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/clip-3.mp4",
+      "sha256": "68e23459daf2d7ffc59ef36fdc5dba09fcb46d8213a702fceca572495c6b7586",
+      "duration_seconds": 5.041667
+    },
+    {
+      "clip": "clip-04",
+      "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/clip-4.mp4",
+      "sha256": "9182c118052477934e6f76400ecdf06a6a06815b6f8e4a7161e7667d38b5a8c8",
+      "duration_seconds": 5.041667
+    },
+    {
+      "clip": "clip-05",
+      "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/clip-5.mp4",
+      "sha256": "c5d3e7dac9ec45d6b3909fc2ec23baa1c43cf5f4883bf576be441287f841314d",
+      "duration_seconds": 5.041667
+    },
+    {
+      "clip": "clip-06",
+      "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/clip-6.mp4",
+      "sha256": "e1455a6573c67b20ce0e5e0b387813f8237f8357bd16081bcaca3ee0fa3df876",
+      "duration_seconds": 5.041667
+    },
+    {
+      "clip": "clip-07",
+      "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/clip-7.mp4",
+      "sha256": "370c9de0672bf7bb278054ac07578694f35b4bf6cbc92a7c67dbe982003f0f9a",
+      "duration_seconds": 5.041667
+    },
+    {
+      "clip": "clip-08",
+      "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/clip-8.mp4",
+      "sha256": "714fb5b48d2e092304e78a2dc8b5f3b6c03507b45a3cf03bfb14ec70bf1c8af7",
+      "duration_seconds": 5.041667
+    },
+    {
+      "clip": "clip-09",
+      "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/clip-9.mp4",
+      "sha256": "2dd65aebda2182a2b1f9a8dd0dcb38061b39c34ff4390ce1369ce24523b51094",
+      "duration_seconds": 5.041667
+    },
+    {
+      "clip": "clip-10",
+      "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/clip-10.mp4",
+      "sha256": "948bc638721fcbf18010231c97184a4d3bc62ad68dc2bf61d689f1236551ae86",
+      "duration_seconds": 5.041667
+    },
+    {
+      "clip": "clip-11",
+      "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/clip-11.mp4",
+      "sha256": "616d6b3bc6d0d11b3936b2cbd3b0321d353bb170ae106ca350474e7d6536336a",
+      "duration_seconds": 5.041667
+    }
+  ],
+  "final": {
+    "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/kerala-christian-v1-final.mp4",
+    "sha256": "f5773316b737ed1b1be9219c09133547f61ff69ac157050b32864b12b30a7e1c",
+    "duration_seconds": 54.458333
+  },
+  "completed_at": "2026-10-02T20:08:23.401750+05:30"
+}

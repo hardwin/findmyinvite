@@ -1,0 +1,29 @@
+{
+  "document": "VISUAL_QC",
+  "production_id": "nk-v1-20261002-072013",
+  "batch": "stills-v5",
+  "job": "IMG-v5-scene-05",
+  "scene_id": "scene-05",
+  "facet_expected": "stairs",
+  "asset_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5/scene-05.jpg",
+  "sha256": "96e2d4423712bb42e2f5731f8e8d8d299ff2c3ea627c3b9bc9320c17a88338df",
+  "generation_id": "fytqcrxrrsrmw0d0zabrvs4cqm",
+  "prompt_hash": "ef8c0c861aeb805bb5adafe03e8b9316a346292a98bee299dd0e6e9dcf2a71b5",
+  "attempt": 1,
+  "decision": "PASS",
+  "rationale": "Camera on cream stairs looking up to couple STANDING on stage ahead. Wardrobe matches spatial-v2 lock: groom maroon half-sleeve + white gold-border veshti; bride green silk saree + heavy gold; long flowered hair (braid/garland) not bun. Holding hands, looking at each other, feet planted \u2014 not walking. Solid floral stage wall BG \u2014 no lake/gopuram plate. Magenta cursive names only 'Nandini \u2661 Karthik' \u2014 not full invite stack.",
+  "violations": [],
+  "checks_passed": [
+    "facet stairs \u2192 stage ahead",
+    "wardrobe maroon + green + long flowered hair",
+    "STANDING / no walking",
+    "stage floral wall BG (no lake plate)",
+    "names-only copy OK",
+    "no gopuram/mountains/boat"
+  ],
+  "retry_instruction": null,
+  "spatial_map_version": "spatial-v2",
+  "judged_at": "2026-10-02T08:41:37+05:30",
+  "judge": "Visual QC Supervisor",
+  "handoff": "Continuity LOCK/VETO priority on wardrobe/identity/pose/jewellery detail"
+}

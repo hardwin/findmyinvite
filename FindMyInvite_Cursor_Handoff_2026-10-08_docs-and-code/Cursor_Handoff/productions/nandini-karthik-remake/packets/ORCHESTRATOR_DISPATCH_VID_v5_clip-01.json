@@ -1,0 +1,20 @@
+{
+  "packet_type": "ORCHESTRATOR_VIDEO_DISPATCH",
+  "production_id": "nk-v1-20261002-072013",
+  "batch": "clips-v5",
+  "authorized_at": "2026-10-02T08:49:31+05:30",
+  "dispatch_now": [
+    "VID-v5-clip-01"
+  ],
+  "held": [
+    "VID-v5-clip-02",
+    "VID-v5-clip-03",
+    "VID-v5-clip-04",
+    "VID-v5-clip-05"
+  ],
+  "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/VIDEO_JOB/clip-01.v5.json",
+  "first_frame": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5/scene-01.jpg",
+  "last_frame": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5/scene-02.jpg",
+  "output": "/workspace/fmi-productions/nandini-karthik-remake/assets/clips-v5/clip-01.mp4",
+  "rule": "After clip-01 QC+Continuity APPROVED, use decoded handoff as next first frame \u2014 never regenerate handoff"
+}

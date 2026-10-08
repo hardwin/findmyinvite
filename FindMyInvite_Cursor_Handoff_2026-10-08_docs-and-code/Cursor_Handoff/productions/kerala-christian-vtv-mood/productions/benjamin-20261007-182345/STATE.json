@@ -1,0 +1,65 @@
+{
+  "production_id": "benjamin-20261007-182345",
+  "mode": "RECREATE_CLIENT_FILL",
+  "couple": "Mike Benjamin & Esther",
+  "invitation_order": "groom-first",
+  "phase": "DELIVERED_SPEEDRAMP_FINAL",
+  "updated_at": "2026-10-07T20:36:55+05:30",
+  "template_sha256": "35298541c5928ce7d6b91bbd078944038721098ac5051d37cdc8493f25669d8b",
+  "source_template_sha256": "bad0d176beb1ad47e3942689f95c4153fb933f3547670a255bb7fc062f46dae4",
+  "qc_policy": "TEXT_SELF_CHECK_STILLS",
+  "continuity": "WAIVED",
+  "stills_status": "APPROVED_BY_ASHOK (scene-08 kept as is)",
+  "scene_changes": "scene-07 aisle-from-behind (Ashok); clip-06/clip-07 prompts aligned (scripts/edit_clips_aisle.py)",
+  "qc_notes": "scene-08: small decorative flourish above final 'e' of 'Venue'; all other text exact",
+  "video_jobs_authorized": true,
+  "clips": "11/11 NO_QC, one generation each",
+  "paid_image_predictions": 11,
+  "paid_video_generations": 11,
+  "stills": "11/11 (scene-12 = clip-11 last frame, no still)",
+  "telegram": {
+    "chat_id": "2002649357",
+    "album_1_scenes_01_06": [
+      914,
+      915,
+      916,
+      917,
+      918,
+      919
+    ],
+    "album_2_scenes_07_11": [
+      920,
+      921,
+      922,
+      923,
+      924
+    ],
+    "speedramp_final_sendVideo": 955,
+    "speedramp_final_sendDocument": 956
+  },
+  "stills_sha256": {
+    "scene-01": "4c430ada6aa801a2083aaf6998ebf96423e50743c33555db6f6ed605cbfde352",
+    "scene-02": "36b5eb18034718a284c8ef6fe3491f75e7d99bfd05d2db44f9c0cc8d4ba24f88",
+    "scene-03": "4b1126af7a51b867e3535382fd0f0731150e3ae9351f538064375d7423c02dc8",
+    "scene-04": "2c74a0fe043e4647a2b65cd2ad8365c78f0f627636826e1e28ba1fceeb6c5bf8",
+    "scene-05": "ba653978a64329c2f693ab11df1e304497f0a61dab09b82c7fec43e9c6348a28",
+    "scene-06": "5338e206f2a359ee651aebb6326d2c60c4d29eb33a06a08f5a24e0530f40490d",
+    "scene-07": "39e71995be0add29b56dae28846f6655f1d2901423f645ba672a5dea802998d0",
+    "scene-08": "41692d6684138cfc136e7f214b88f2d3007bb00696cc3723e72e0cee3781ff9d",
+    "scene-09": "49c9f842e4f72ce995ba62dede5d171e8e047900b43c5790acc5633b6ab435dd",
+    "scene-10": "256461e66a0521cff278a74aad543e4fea2fb4aae2d54b6e4f291312671d5e18",
+    "scene-11": "f48a3a873a680f983b724bd82a12aca3451e97fd1f99c8f59ef5d6b90a6665cf"
+  },
+  "video_notes": "clip-04 first submit rejected HTTP 429 (capacity, unpaid, no job created); resumed chain from clip-04 -> generated on first paid submit",
+  "final_speedramp": {
+    "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/benjamin-20261007-182345/assets/output/kerala-christian-v1/kerala-christian-v1-speedramp-1080x1920.mp4",
+    "sha256": "543ec30c9a29aabbf3cf97a0404c30694e92d827ce8c7c716a70329ab90f2daa",
+    "bytes": 32972457,
+    "duration_s": 28.208333,
+    "frames": 677,
+    "mode": "crf20",
+    "plan": "packets/SPEEDRAMP_PLAN.json",
+    "script": "scripts/build_speedramp.py"
+  },
+  "final_normal_status": "NOT_BUILT (speed-ramp only, same as latest recreate flow)"
+}

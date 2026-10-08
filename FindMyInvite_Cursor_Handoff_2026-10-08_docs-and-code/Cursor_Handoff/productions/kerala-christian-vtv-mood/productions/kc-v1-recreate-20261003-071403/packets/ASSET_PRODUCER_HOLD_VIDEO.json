@@ -1,0 +1,15 @@
+{
+  "packet_type": "ASSET_PRODUCER_HOLD_VIDEO",
+  "production_id": "kc-v1-recreate-20261003-071403",
+  "at": "2026-10-03T07:51:14+05:30",
+  "status": "HELD",
+  "video_jobs_authorized": false,
+  "video_jobs_emitted": false,
+  "clip_01_dispatched": false,
+  "generation_started": false,
+  "stitch": false,
+  "stills": "KEEP stills-v1",
+  "supersedes": "ORCHESTRATOR_GO_VIDEO",
+  "auth": "packets/ORCHESTRATOR_HOLD_VIDEO.json",
+  "note": "Emit aborted before VIDEO_JOB packets were written. Waiting for Orchestrator unlock."
+}

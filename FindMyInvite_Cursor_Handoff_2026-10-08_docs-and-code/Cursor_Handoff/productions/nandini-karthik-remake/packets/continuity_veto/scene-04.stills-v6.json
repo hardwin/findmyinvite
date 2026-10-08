@@ -1,0 +1,33 @@
+{
+  "document": "CONTINUITY_VETO",
+  "production_id": "nk-v1-20261002-072013",
+  "batch": "stills-v6",
+  "scene_id": "scene-04",
+  "job": "IMG-v6-scene-04",
+  "asset_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v6/scene-04.jpg",
+  "sha256": "2dc42b84d9a96f5a4777c96099a1edca36c4b2b0a434950055a0bc180fc05dd3",
+  "attempt": 1,
+  "visual_qc": "WAIVED_BY_ORCHESTRATOR_AGENT_UNAVAILABLE",
+  "spatial_map_version": "spatial-v9",
+  "maze_path_slot": "F stair_cascade_court",
+  "decision": "LOCK",
+  "continuity_bible": "/workspace/fmi-productions/nandini-karthik-remake/continuity/CONTINUITY_BIBLE.json",
+  "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/IMAGE_JOB/scene-04.v6.json",
+  "judged_at": "2026-10-02T10:59:11+05:30",
+  "judge": "Continuity Director",
+  "scope": "architecture/materials (empty)",
+  "expected": {
+    "room": "F",
+    "facet": "stair_cascade_court",
+    "couple": false,
+    "text": false
+  },
+  "observed": {
+    "architecture": "wide cream stair cascade with side water steps; looking toward mandap; brass+lotus+banana framing",
+    "people": 0,
+    "text": false,
+    "lake_gopuram_hero": false
+  },
+  "violations": [],
+  "rationale": "Room F stair cascade court distinct; materials lock; empty; no lake-gopuram hero."
+}

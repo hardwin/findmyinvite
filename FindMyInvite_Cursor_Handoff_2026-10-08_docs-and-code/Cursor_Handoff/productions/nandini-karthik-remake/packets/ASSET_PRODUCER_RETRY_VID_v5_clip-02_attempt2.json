@@ -1,0 +1,20 @@
+{
+  "packet_type": "ASSET_PRODUCER_RETRY_DISPATCH",
+  "production_id": "nk-v1-20261002-072013",
+  "job_id": "VID-v5-clip-02",
+  "attempt": 2,
+  "status": "RETRY_AUTHORIZED_ATTEMPT_2",
+  "qc": "/workspace/fmi-productions/nandini-karthik-remake/logs/video_jobs_v5/QC_clip-02_attempt1.json",
+  "orchestrator_auth": "/workspace/fmi-productions/nandini-karthik-remake/packets/ORCHESTRATOR_RETRY_AUTH_VID_v5_clip-02_attempt2.json",
+  "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/VIDEO_JOB/clip-02.v5.json",
+  "first_frame_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/handoffs-v5/clip-01-handoff.jpg",
+  "first_frame_strategy": "previous-clip-final-decoded-frame",
+  "last_frame_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5/scene-03.jpg",
+  "retry_instruction": "Keep FIRST = decoded assets/handoffs-v5/clip-01-handoff.jpg (never regenerate). Lock LAST hard to stills-v5/scene-03.jpg: left_side_aisle arcade \u2014 carved pillars + banana between columns + urulis/nilavilakku + polished floor depth INTO aisle ending at stairs/landing WITHOUT a dense stage floral wall as the destination hero. Camera: STRAIGHT into threshold then turn LEFT into left_side_aisle with real translation/occlusion/parallax; continuous motion, no morph/crossfade/hold; empty; no lake/gopuram/boat/text.",
+  "held": [
+    "VID-v5-clip-03",
+    "VID-v5-clip-04",
+    "VID-v5-clip-05"
+  ],
+  "updated_at": "2026-10-02T09:08:44.188076+05:30"
+}

@@ -1,0 +1,32 @@
+{
+  "job_id": "VID-clip-10",
+  "clip_id": "clip-10",
+  "production_id": "benjamin-20261007-182345",
+  "model": "grok-imagine-video-1.5",
+  "duration_seconds": 5,
+  "first_frame": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/benjamin-20261007-182345/assets/output/kerala-christian-v1/clip-9-handoff.jpg",
+  "last_frame": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/benjamin-20261007-182345/assets/output/kerala-christian-v1/image-11.jpg",
+  "prompt_sha256": "d43cfffc018d012ed80ca6db2b8c4731cf45f32adecc7bfbb206f44c9530f7d2",
+  "prompt_len": 3461,
+  "qc": "NO_QC",
+  "video_prompt": "BACKWARD REVEAL OF EXACTLY ONE BRIDE AND ONE GROOM. There are exactly TWO foreground people in the entire shot. Never show a second pair or a duplicate couple. The people whose near profiles appear during the camera pass are the SAME physical people who become the full-body ending, not a separate foreground pair.\n\n0.00–0.35s: ease backward from the host plaque. 0.35–1.30s: accelerate BACKWARD down the clear lamp-lined side chapel corridor. The host plaque shrinks naturally. The distant corridor is EMPTY of people; no bride or groom is visible anywhere ahead. Close cream pillars and roof beams rush past with strong parallax. 1.30–1.85s: the camera crosses the compound gateway and passes backward through the clear gap between the ONLY bride and groom, who are immediately beside the lens. Their very close blurred cheeks and shoulders briefly occupy the left and right edges. Through the middle gap there is ONLY empty architecture, never another couple. A near gateway beam and the blurred shoulders briefly obscure the deep background. 1.85–2.60s: the same two near faces steadily SHRINK in screen size as the camera continues backward. Reveal their torsos, joined hands and full bodies through continuous perspective. No distant pair grows to replace them. Bride stays on the left, groom on the right. They turn naturally a little toward the camera as it clears them. The supplied final image is the composition reached by these exact two people. 2.60–5.00s: decelerate strongly into a slow backward glide, ending at the full-body couple under the cream-plaster arched gateway. Hold their identity, hair, clothing and garlands, with small soft smiles. Keep the ornate SAVE THE DATE board physically to their right, text exactly 'SAVE THE DATE / 23 JANUARY 2027'. Soft sunrise, fine loose petals and changing soft-lamp highlights. One continuous backward camera move, no full spin, no teleportation, no duplicated people, no montage. Decorative bouquets and signs stay fixed; only small individual petals move.\n\nPETALS AND LIGHT: continuous distributed slow-motion drift is present from the first frame, not triggered as a burst when the camera stops. Keep about 12-20 separate visible petals at irregular heights and depths — soft white jasmine, pale pink rose and cream petals. Petals flutter with independent phase, soft air resistance and a little side-to-side wobble; nearby petals drift roughly one tenth of picture height per second in the settled view, distant ones slower. Camera rotation produces the brief directional streaks; after braking the SAME scattered petals become calmly visible, with no sudden emission, rain sheet, confetti explosion or synchronized falling. Bouquets and garlands never detach. Fine dust motes drift inside soft diagonal volumetric sunrays through arched windows. Champagne-gold edges, pearl and jewelry catch moving specular glints; text itself emits no smoke, gold liquid or floor beam.\n\nExactly ONE date board is uncovered on the right as the ONLY couple is revealed. It is a single rigid rectangular mahogany board with one gold frame and one easel. Never duplicate its frame, create another date panel behind it, or blend two boards. Soft side sunrays, deep cool plaster shadows and warm gold rim light. The couple are Esther David Dass and Mike Benjamin. Keep the source identity and clothing. Whenever the church is visible it has exactly one white bell tower with one cross on top; never a second tower.",
+  "edits": [
+    {
+      "op": "replace",
+      "from": "Never show a second pair, a duplicate couple, a portrait of the couple, or a reflection containing another couple.",
+      "to": "Never show a second pair or a duplicate couple.",
+      "why": "portrait / reflection objects are not in start/end frames"
+    },
+    {
+      "op": "replace",
+      "from": "never another couple or couple portrait.",
+      "to": "never another couple.",
+      "why": "couple portrait not in frames"
+    },
+    {
+      "op": "append",
+      "text": "Whenever the church is visible it has exactly one white bell tower with one cross on top; never a second tower.",
+      "why": "exactly one bell tower rule"
+    }
+  ]
+}

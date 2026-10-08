@@ -1,0 +1,65 @@
+{
+  "started": "2026-10-02T07:55:51.144850+05:30",
+  "clips": [
+    {
+      "id": "clip-01",
+      "status": "done",
+      "skipped": true,
+      "sha256": "51c8ea4eec31111e3dc95dabec1758b830f497ba3cadc7a159f2b64bfa420e69",
+      "output": "/workspace/fmi-productions/nandini-karthik-remake/assets/clips/clip-01.mp4",
+      "handoff": "/workspace/fmi-productions/nandini-karthik-remake/assets/handoffs/clip-01-handoff.jpg"
+    },
+    {
+      "id": "clip-02",
+      "status": "done",
+      "started": "2026-10-02T07:55:51.151156+05:30",
+      "attempt": 1,
+      "request_id": "7e575ed9-35d3-95e6-b251-184b910e279a",
+      "sha256": "5926688ce6e2505693998d692a0c1873a33072221de5bb4b909a48eb20222236",
+      "duration": 3,
+      "output": "/workspace/fmi-productions/nandini-karthik-remake/assets/clips/clip-02.mp4",
+      "handoff": "/workspace/fmi-productions/nandini-karthik-remake/assets/handoffs/clip-02-handoff.jpg",
+      "finished": "2026-10-02T07:56:36.917318+05:30"
+    },
+    {
+      "id": "clip-03",
+      "status": "done",
+      "started": "2026-10-02T07:56:36.918030+05:30",
+      "attempt": 1,
+      "request_id": "a3a36a4d-1228-9b88-b0dd-ddbc81b76791",
+      "sha256": "eddbfc229cd420614446f6976761f3cc1587ddfabcf182c6f13d2c6fdfa07180",
+      "duration": 3,
+      "output": "/workspace/fmi-productions/nandini-karthik-remake/assets/clips/clip-03.mp4",
+      "handoff": "/workspace/fmi-productions/nandini-karthik-remake/assets/handoffs/clip-03-handoff.jpg",
+      "finished": "2026-10-02T07:57:29.286871+05:30"
+    },
+    {
+      "id": "clip-04",
+      "status": "done",
+      "started": "2026-10-02T07:57:29.287400+05:30",
+      "attempt": 1,
+      "request_id": "e5559dfa-996e-9aa3-97c7-657842e65697",
+      "sha256": "9f6fe53e0ee377972b55856658a6bdca9f4f677af45bf2b4cf8afcd2d95ef366",
+      "duration": 3,
+      "output": "/workspace/fmi-productions/nandini-karthik-remake/assets/clips/clip-04.mp4",
+      "handoff": "/workspace/fmi-productions/nandini-karthik-remake/assets/handoffs/clip-04-handoff.jpg",
+      "finished": "2026-10-02T07:58:27.016655+05:30"
+    },
+    {
+      "id": "clip-05",
+      "status": "done",
+      "started": "2026-10-02T07:58:27.017184+05:30",
+      "attempt": 1,
+      "request_id": "eb94561f-6e3b-91b9-b2cc-abc215a87c99",
+      "sha256": "a8d1172faabfc28bc16cd59ea5c07899a2f13fc2194ffeb707402c7e692e62e4",
+      "duration": 3,
+      "output": "/workspace/fmi-productions/nandini-karthik-remake/assets/clips/clip-05.mp4",
+      "handoff": "/workspace/fmi-productions/nandini-karthik-remake/assets/handoffs/clip-05-handoff.jpg",
+      "finished": "2026-10-02T07:59:17.806513+05:30"
+    }
+  ],
+  "final": "/workspace/fmi-productions/nandini-karthik-remake/assets/nandini-karthik-v1-preview.mp4",
+  "final_sha256": "bc64500cf50973a695b60a761501639d5e67676bfc746a1e414ef29ee72ba1bd",
+  "finished": "2026-10-02T07:59:18.072176+05:30",
+  "status": "complete"
+}

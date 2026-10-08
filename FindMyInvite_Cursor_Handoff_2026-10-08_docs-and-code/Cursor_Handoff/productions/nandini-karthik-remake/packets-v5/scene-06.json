@@ -1,0 +1,83 @@
+{
+  "job_type": "IMAGE_JOB",
+  "job_id": "IMG-v5-scene-06",
+  "production_id": "nk-v1-20261002-072013",
+  "batch": "stills-v5",
+  "status": "RETRY_AUTHORIZED",
+  "authorized_to_dispatch": true,
+  "spatial_map_status": "approved_by_ashok",
+  "spatial_map_version": "spatial-v2",
+  "spatial_map_path": "/workspace/fmi-productions/nandini-karthik-remake/continuity/SPATIAL_MAP.json",
+  "blueprint_path": "/workspace/fmi-productions/nandini-karthik-remake/continuity/MANTAP_BLUEPRINT_TOPVIEW.png",
+  "orchestrator_auth": "/workspace/fmi-productions/nandini-karthik-remake/packets/ORCHESTRATOR_SPATIAL_APPROVED.json",
+  "scene_id": "scene-06",
+  "name": "Stage \u2014 STRAIGHT on; LEFT orbit to pond/photoshoot",
+  "facet": "stage_decorations",
+  "secondary_facets": [
+    "photoshoot_spot",
+    "decorated_pond"
+  ],
+  "couple": true,
+  "arrival": "STRAIGHT from stairs onto stage; LEFT orbit along connected stage edge",
+  "next_edge": null,
+  "camera_pose": {
+    "framing": "on stage, slight LEFT of couple / orbit",
+    "bias": "LEFT of couple toward photoshoot niche",
+    "height": "eye to slight crane",
+    "look": "couple + photoshoot niche and decorated pond rim as adjacent LEFT neighbors (connected edges, not teleport)",
+    "lens_feel": "wider establish"
+  },
+  "visible_set_pieces": [
+    "couple STILL standing on stage",
+    "stage floral decorations",
+    "photoshoot niche LEFT",
+    "decorated pond rim LEFT",
+    "stairs south of stage readable",
+    "both aisle wings if framing allows without inventing lake plate",
+    "full stacked invite text"
+  ],
+  "offscreen": {
+    "L": "deeper pond/garden",
+    "R": "right aisle",
+    "behind": "stairs / center aisle south",
+    "ahead": "floral rear wall"
+  },
+  "forbidden_reuse": [
+    "v4 lake-gopuram-boat-hills as dominant BG",
+    "walking",
+    "bride bun",
+    "teleport camera into pond without stage edge"
+  ],
+  "image_prompt_constraints": "9:16. ON STAGE after arriving via stairs. Couple STANDING (same wardrobe). Camera slight LEFT orbit \u2014 reveal PHOTOSHOOT niche and DECORATED POND rim as adjacent left facets. Stairs south still readable. Full invite text stacked. Architecture hero \u2014 NOT misty lake+gopuram+hills+boat plate. NO walking.",
+  "image_prompt": "A full-bleed portrait 9:16 cinematic dimensional storybook wedding invitation still. pastel tropical elegance; cream carved stone; jasmine+lotus; banana leaves; brass urulis + nilavilakku; polished reflective floor; soft warm morning light; cinematic dimensional storybook 9:16. FACET (stage_decorations): Mandap stage platform \u2014 carved rear pillars, dense hanging jasmine/rose floral wall, brass lamps; SOLID backdrop that blocks far landscape. 9:16. ON STAGE after arriving via stairs. Couple STANDING (same wardrobe). Camera slight LEFT orbit \u2014 reveal PHOTOSHOOT niche and DECORATED POND rim as adjacent left facets. Stairs south still readable. Full invite text stacked. Architecture hero \u2014 NOT misty lake+gopuram+hills+boat plate. NO walking. Camera: {\"framing\": \"on stage, slight LEFT of couple / orbit\", \"bias\": \"LEFT of couple toward photoshoot niche\", \"height\": \"eye to slight crane\", \"look\": \"couple + photoshoot niche and decorated pond rim as adjacent LEFT neighbors (connected edges, not teleport)\", \"lens_feel\": \"wider establish\"}. Visible set pieces: couple STILL standing on stage, stage floral decorations, photoshoot niche LEFT, decorated pond rim LEFT, stairs south of stage readable, both aisle wings if framing allows without inventing lake plate, full stacked invite text. Offscreen neighbors \u2014 L:deeper pond/garden; R:right aisle; behind:stairs / center aisle south; ahead:floral rear wall. FORBIDDEN (do not show as hero/dominant): v4 lake-gopuram-boat-hills as dominant BG, walking, bride bun, teleport camera into pond without stage edge. Far vista lock: FORBIDDEN as dominant background on every beat. Allowed at most as a tiny distant corner peek in scene-06 only, never hero, never with readable gopuram. Prefer solid stage floral architecture instead. Same venue complex throughout \u2014 materials/decor continuous; geography changes by facet only. No watermark. No brand logos. Wardrobe lock: groom=maroon half-sleeve shirt + white gold-border veshti + sandals; bride=rich green silk bridal saree; heavy gold jewellery (necklace layers, jhumkas, maang tikka, oddiyanam, bangles); long bridal hair with jasmine+roses \u2014 NOT a bun. Pose: Couple STANDING still in place, holding hands, looking at each other affectionately. Feet planted.. Motion: STRICT: NO walking, NO stepping forward, NO stride. Camera moves around them \u2014 they do not walk. Secondary adjacent facets visible only via connected edges: photoshoot_spot, decorated_pond. Far vista exception: Tiny soft corner only; never readable gopuram hero plate. EXACT ON-SCREEN TEXT (do not invent): Nandini \u2661 Karthik / Two hearts, one beautiful beginning / 22nd February 2027 / 9:30 AM onwards / ITC Grand Chola / Chennai, Tamil Nadu / JOIN US as we begin our forever. Magenta cursive names; soft dark brown serif other lines; crisp centered. ",
+  "aspect_ratio": "9:16",
+  "resolution": {
+    "width": 720,
+    "height": 1280
+  },
+  "output_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5/scene-06.jpg",
+  "max_paid_attempts": 2,
+  "attempt": 2,
+  "continuity": {
+    "world_style": "pastel tropical elegance; cream carved stone; jasmine+lotus; banana leaves; brass urulis + nilavilakku; polished reflective floor; soft warm morning light; cinematic dimensional storybook 9:16",
+    "same_place_rule": "All six beats are ONE venue. Style/decor/materials continuous. Background geography MUST change by facet \u2014 never reuse one hero vista.",
+    "far_vista_lock": {
+      "hero_plate": "misty lake + temple gopuram + mountains + wooden boat",
+      "rule": "FORBIDDEN as dominant background on every beat. Allowed at most as a tiny distant corner peek in scene-06 only, never hero, never with readable gopuram. Prefer solid stage floral architecture instead."
+    },
+    "wardrobe_lock": {
+      "applies_when": "couple visible (scene-05, scene-06)",
+      "groom": "maroon half-sleeve shirt + white gold-border veshti + sandals",
+      "bride": "rich green silk bridal saree; heavy gold jewellery (necklace layers, jhumkas, maang tikka, oddiyanam, bangles); long bridal hair with jasmine+roses \u2014 NOT a bun",
+      "pose": "Couple STANDING still in place, holding hands, looking at each other affectionately. Feet planted.",
+      "motion_rule": "STRICT: NO walking, NO stepping forward, NO stride. Camera moves around them \u2014 they do not walk."
+    },
+    "maze_logic": "Continuous polyline through adjacent facets only. Allowed moves between beats: LEFT turn, RIGHT turn, or STRAIGHT along a connected edge. Forbidden: diagonal teleports across center aisle or skipping stairs to reach stage."
+  },
+  "qc_hints": "FAIL any still with stills-v4 lake/gopuram plate as dominant BG; FAIL any implied teleport (stage without prior stairs/aisle geography).",
+  "created_at": "2026-10-02T08:38:01.265720+05:30",
+  "far_vista_exception": "Tiny soft corner only; never readable gopuram hero plate.",
+  "required_text": "Nandini \u2661 Karthik / Two hearts, one beautiful beginning / 22nd February 2027 / 9:30 AM onwards / ITC Grand Chola / Chennai, Tamil Nadu / JOIN US as we begin our forever.",
+  "copy_locked": "Nandini \u2661 Karthik / Two hearts, one beautiful beginning / 22nd February 2027 / 9:30 AM onwards / ITC Grand Chola / Chennai, Tamil Nadu / JOIN US as we begin our forever.",
+  "retry_of_attempt": 1
+}

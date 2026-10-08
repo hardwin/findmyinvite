@@ -1,0 +1,16 @@
+{
+  "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-2.jpg",
+  "job_id": "IMG-scene-02",
+  "scene_id": "scene-02",
+  "decision": "PASS",
+  "rationale": "720\u00d71280; open porch, ONE floral cross on pedestal between two candles; freestanding champagne-gold exact 'With God's Grace' / 'We Invite You'; bell tower beyond open rear; sunrise camera-left; jasmine/rose; no nameplate/people/watermark. Reconfirmed PASS.",
+  "violations": [],
+  "retry_instruction": null,
+  "attempt": 1,
+  "technical": {
+    "w": 720,
+    "h": 1280,
+    "ok": true
+  },
+  "decided_at": "2026-10-01T23:14:35.538499+05:30"
+}

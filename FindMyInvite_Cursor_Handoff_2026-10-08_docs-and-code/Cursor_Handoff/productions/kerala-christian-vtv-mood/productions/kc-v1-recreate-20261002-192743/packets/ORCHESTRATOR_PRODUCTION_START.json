@@ -1,0 +1,31 @@
+{
+  "packet_type": "ORCHESTRATOR_PRODUCTION_START",
+  "mode": "RECREATE_IDENTICAL",
+  "production_id": "kc-v1-recreate-20261002-192743",
+  "template_name": "kerala-christian-v1",
+  "template_folder": "kerala-christian-vtv-mood",
+  "template_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/template.json",
+  "template_sha256": "bad0d176beb1ad47e3942689f95c4153fb933f3547670a255bb7fc062f46dae4",
+  "prompt_policy": "NEVER_CHANGE_PROMPTS \u2014 byte-identical to locked template; same Alex John & Anna Thomas parameters",
+  "assets_root": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1",
+  "preserve_prior": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532",
+  "hold_other": "nandini-karthik-remake HELD",
+  "skip": [
+    "SPATIAL_16X9_BLUEPRINT_GATE",
+    "spatial_maze_process",
+    "reinvented_QC_gates"
+  ],
+  "pipeline": [
+    "Template Compiler validate",
+    "Continuity bible from locked template extract",
+    "Asset Producer IMAGE_JOBs (12 scenes) then VIDEO_JOBs (11 clips)",
+    "Image Director \u2192 Continuity/QC as original path",
+    "Video Director continuous weave",
+    "Assembly \u2192 Final QC"
+  ],
+  "scene_count": 12,
+  "clip_count": 11,
+  "authorized_at": "2026-10-02T19:28:24+05:30",
+  "requested_by": "Ashok via Video Director",
+  "current_state": "TEMPLATE_COMPILE"
+}

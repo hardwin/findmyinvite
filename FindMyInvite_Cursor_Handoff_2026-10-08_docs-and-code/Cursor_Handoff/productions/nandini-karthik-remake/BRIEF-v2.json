@@ -1,0 +1,36 @@
+{
+  "production_id": "nk-v1-20261002-072013",
+  "version": "stills-v2",
+  "gate": "IMAGES_ONLY_UNTIL_ASHOK_APPROVES",
+  "wardrobe_lock": {
+    "groom": "red shirt + red pants + black shoes",
+    "bride": "green saree + gold jewels + jasmine gajra"
+  },
+  "camera_plan": "distinct framings: macro outside \u2192 wide exterior \u2192 threshold low \u2192 mid couple \u2192 close orbit+names \u2192 crane-back full text",
+  "scenes": [
+    {
+      "id": "scene-01",
+      "name": "Outside \u2014 banana leaf macro blocking arch"
+    },
+    {
+      "id": "scene-02",
+      "name": "Approach \u2014 leaves clear, wide establish of full arch from outside"
+    },
+    {
+      "id": "scene-03",
+      "name": "Threshold \u2014 low angle just entering under arch, empty aisle"
+    },
+    {
+      "id": "scene-04",
+      "name": "Mid pavilion \u2014 couple medium-wide, eye level"
+    },
+    {
+      "id": "scene-05",
+      "name": "Close couple \u2014 slight orbit, names in sky"
+    },
+    {
+      "id": "scene-06",
+      "name": "Pull-back crane \u2014 full invite lock"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "document": "CONTINUITY_VETO",
+  "production_id": "nk-v1-20261002-072013",
+  "batch": "stills-v5",
+  "scene_id": "scene-01",
+  "job": "IMG-v5-scene-01",
+  "asset_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5/scene-01.jpg",
+  "sha256": "4630cb371a5e0a4f55ea0e8ec8b1f63c52db03d335edd2c98e774cf5ebd28514",
+  "generation_id": "5h3ktyxeksrmt0d0zacat03me4",
+  "attempt": 2,
+  "visual_qc": "PASS",
+  "qc_file": "/workspace/fmi-productions/nandini-karthik-remake/logs/image_jobs/QC_scene-01_stills-v5_attempt2.json",
+  "decision": "LOCK",
+  "scope": "architecture/object (no couple)",
+  "expected": {
+    "facet": "entrance_thicket",
+    "couple": false,
+    "text": false,
+    "locks": [
+      "macro banana leaves",
+      "soft cream colonnade glow only",
+      "no lake",
+      "no people",
+      "no text"
+    ]
+  },
+  "observed": {
+    "architecture": "extreme-close banana-leaf thicket; soft cream carved glow bokeh RIGHT only",
+    "decor": "jasmine/white blossoms + dew on leaves",
+    "people": 0,
+    "text": false,
+    "lake_plate": false,
+    "no_arcade_urulis_lamps": true
+  },
+  "violations": [],
+  "rationale": "Matches bible scene-01: thicket macro, materials/palette soft continuity via cream glow, empty, no text/lake.",
+  "continuity_bible": "/workspace/fmi-productions/nandini-karthik-remake/continuity/CONTINUITY_BIBLE.json",
+  "judged_at": "2026-10-02T08:43:17+05:30",
+  "judge": "Continuity Director"
+}

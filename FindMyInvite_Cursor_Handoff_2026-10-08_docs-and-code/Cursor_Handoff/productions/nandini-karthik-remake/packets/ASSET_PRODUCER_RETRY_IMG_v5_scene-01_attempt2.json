@@ -1,0 +1,24 @@
+{
+  "packet_type": "ASSET_PRODUCER_RETRY_PACKET",
+  "job_id": "IMG-v5-scene-01",
+  "attempt": 2,
+  "recorded_at": "2026-10-02T08:41:35.131439+05:30",
+  "auth": {
+    "packet_type": "ORCHESTRATOR_IMAGE_RETRY_AUTH",
+    "production_id": "nk-v1-20261002-072013",
+    "job": "IMG-v5-scene-01",
+    "scene_id": "scene-01",
+    "attempt": 2,
+    "paid": true,
+    "max_paid_attempts": 2,
+    "authorized_at": "2026-10-02T08:41:12+05:30",
+    "prior_qc": "/workspace/fmi-productions/nandini-karthik-remake/logs/image_jobs/QC_scene-01_stills-v5_attempt1.json",
+    "retry_instruction": "Regenerate entrance_thicket ONLY: extreme close among giant banana leaves filling most of frame (LEFT of approach); allow only a tiny soft cream colonnade glow peek toward RIGHT through leaf gaps. Remove full pillar arcade, polished aisle floor run, lamp rows, and urulis from frame. Still NO lake/gopuram/mountains/boat, NO people, NO text.",
+    "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/IMAGE_JOB/scene-01.json",
+    "output": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5/scene-01.jpg",
+    "archive_prior": "Archive attempt-1 asset before overwrite if Image Director policy requires"
+  },
+  "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/IMAGE_JOB/scene-01.json",
+  "packets_v5": "/workspace/fmi-productions/nandini-karthik-remake/packets-v5/scene-01.json",
+  "archive": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5/scene-01.attempt1-retry.jpg"
+}

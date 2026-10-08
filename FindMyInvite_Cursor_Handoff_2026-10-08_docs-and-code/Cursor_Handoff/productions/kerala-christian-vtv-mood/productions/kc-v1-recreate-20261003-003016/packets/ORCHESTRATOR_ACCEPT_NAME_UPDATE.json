@@ -1,0 +1,8 @@
+{
+  "packet_type": "ORCHESTRATOR_ACCEPT_NAME_UPDATE",
+  "production_id": "kc-v1-recreate-20261003-003016",
+  "at": "2026-10-03T00:32:00+05:30",
+  "template_name": "The Wedding of Swaroop & Smiley",
+  "template_sha256": "7d0c8f3060e3c11e2f1b3800661cad30d30602313961c1feeecdf0db9f8d130b",
+  "ashok": "update everywhere from the form"
+}

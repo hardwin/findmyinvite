@@ -1,0 +1,45 @@
+{
+  "document": "CONTINUITY_VETO",
+  "production_id": "nk-v1-20261002-072013",
+  "batch": "stills-v6",
+  "scene_id": "scene-05",
+  "job": "IMG-v6-scene-05",
+  "asset_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v6/scene-05.jpg",
+  "archive_attempt1": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v6/scene-05.attempt1.jpg",
+  "sha256": "be07e86c141989bbde6c28c64c386a973eb5fbbb2785b20b90077388309969d0",
+  "generation_id": "zm7k4zcq59rmr0d0zcbsvnx17r",
+  "attempt": 2,
+  "visual_qc": "WAIVED_BY_ORCHESTRATOR_AGENT_UNAVAILABLE",
+  "spatial_map_version": "spatial-v9",
+  "maze_path_slot": "E ceremony_stage_mandap",
+  "decision": "LOCK",
+  "scope": "architecture/far_vista + wardrobe/pose (couple)",
+  "expected": {
+    "room": "E",
+    "facet": "ceremony_stage_mandap",
+    "couple": true,
+    "pose": "STANDING holding hands",
+    "wardrobe": "maroon half-sleeve+veshti; green saree heavy gold; long flowered hair NOT bun",
+    "text": "optional Nandini \u2661 Karthik only",
+    "bg": "solid floral/carved rear wall \u2014 NO open water / temple/gopuram/hills/boat hero"
+  },
+  "observed": {
+    "wardrobe": "maroon half-sleeve + white gold-border veshti; green silk saree + heavy gold; long jasmine+lotus braid \u2014 OK",
+    "pose": "STANDING holding hands looking at each other \u2014 OK",
+    "background": "dense white/pink floral rear wall + carved arch \u2014 NO open water, NO distant temple/gopuram hero",
+    "materials": "cream polished stage/stairs; banana leaves; brass urulis+nilavilakku \u2014 OK",
+    "text": "optional names not visible this attempt \u2014 allowed",
+    "people": 2
+  },
+  "violations": [],
+  "soft_notes": [
+    "Optional magenta names absent \u2014 allowed by packet"
+  ],
+  "rationale": "Attempt-2 clears far_vista VETO: solid floral rear wall. Wardrobe/STANDS/materials LOCK. Room E ceremony_stage_mandap.",
+  "prior_decision": "VETO attempt-1 far_vista",
+  "continuity_bible": "/workspace/fmi-productions/nandini-karthik-remake/continuity/CONTINUITY_BIBLE.json",
+  "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/IMAGE_JOB/scene-05.v6.json",
+  "retry_auth": "/workspace/fmi-productions/nandini-karthik-remake/packets/ORCHESTRATOR_RETRY_IMG_v6_scene-05_attempt2.json",
+  "judged_at": "2026-10-02T11:01:28+05:30",
+  "judge": "Continuity Director"
+}

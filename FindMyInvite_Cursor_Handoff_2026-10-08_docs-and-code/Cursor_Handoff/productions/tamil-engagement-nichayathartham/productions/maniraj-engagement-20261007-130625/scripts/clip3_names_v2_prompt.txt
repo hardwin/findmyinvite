@@ -1,0 +1,36 @@
+ONE single camera move, 3 seconds, portrait 9:16, Pixar-style 3D animated look. Start exactly on the supplied image and stay in this same scene: the cream invitation card on a gold plate over banana leaves in a traditional Tamil engagement home. No cut, no transition.
+
+CAMERA MOVES STRAIGHT BACK ONLY, along its own axis, away from the card. The scene stays exactly as it is; only the camera moves and the lettering re-reveals.
+
+NO PEOPLE APPEAR at any moment: no figures, hands or silhouettes.
+
+CAMERA (motion-control dolly, speed-ramp PULL-BACK): a pure straight dolly-out directly away from the card along the camera's viewing axis, at the same high angle as the start image. NO rotation, NO orbit, NO pan, NO tilt, NO roll, NO arc, NO sideways drift. The camera angle stays fixed from frame 1 to the last frame; it never pushes forward and never reverses.
+0.0-1.0s: FAST from the very first frame, a quick pull-back away from the names on the card, the frame widening rapidly.
+1.0-3.0s: a dramatic speed-ramp deceleration into slow motion: the pull-back glides ever more slowly and floats to a gentle stop, revealing the full card, both red velvet ring boxes with their gold rings, the gold plate, the banana leaves and the surrounding flowers. Machine-precise, no shake.
+
+RIGID SCENE: the card, the gold rings, the ring boxes, the gold plate, the banana leaves and the wooden table stay perfectly rigid, flat and static, fixed in place. The card never bends, lifts, tilts, warps or turns. Parallax comes only from depth as the camera moves back.
+
+FROZEN FLOWERS: every marigold and every pink and red rose petal floating in the air is FROZEN mid-air, completely suspended; they never fall, drift or flutter. As the camera slows into slow motion, the stillness of the hanging petals and marigolds is emphasised. Flowers, petals and jasmine strands lying on the leaves and table also stay still. Gentle warm golden sunbeams stream in from the top right with soft haze glowing in the light. The brass lamp flames burn softly.
+
+FOCUS: the focus stays locked on the card, with the foreground petals and marigolds melting into creamy smudged bokeh and the background garlands, wooden railing and lamps soft.
+
+TEXT REVEAL (the only animation on the card): frame 1 shows the card exactly as the start image, lettering present. 0.0-0.3s: all lettering softly dims into a faint warm-gold glow on the cream card, its shapes still faintly visible. 0.3-2.2s: the lines re-reveal ONE LINE AT A TIME, TOP TO BOTTOM: a soft golden ink-glow light sweep glides left to right across each line, and the WHOLE line shimmers back into full crisp gold as the light passes, then the next line below begins. Never typed letter by letter, never scrambled. By 2.2s every line is fully crisp, sharp and readable; held perfectly still to the end.
+
+TEXT LOCK: the lettering always stays printed flat on the card in the same place. Every revealed line is exact, identical to the start image, no new, duplicated, extra or misspelled text:
+திருநிறைச்செல்வன்
+மணிராஜ் (எ) ராஜேஷ்
+திரு. நேரு – திருமதி. சாந்தி
+அவர்களின் மகன்
+திருவண்ணாமலை
+திருநிறைச்செல்வி
+கீர்த்தனா
+திரு. சங்கர் – திருமதி. உஷாராணி
+அவர்களின் மகள்
+மேல்செங்கம்
+Same letters, same shapes, same spacing, same gold colour. No morphing, warping, re-lettering or added text anywhere.
+
+EVERYTHING ELSE STILL: the brass lamps, peacock feathers, maroon silk saree, gold bangles, jasmine strands, background garlands and wooden railing stay rigid.
+
+LOOK: preserve the start image exactly: warm golden sunlight, cream, gold, maroon, marigold and green palette, Leica Noctilux 75mm f/1.25 razor-thin depth of field, dreamy smooth falloff. No new objects.
+
+CAMERA MOVES STRAIGHT BACK ONLY, no rotation, no orbit, no pan, no tilt. Only the camera moves and the lettering re-reveals line by line.

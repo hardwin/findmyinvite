@@ -1,0 +1,37 @@
+{
+  "job_type": "VIDEO_QC",
+  "production_id": "kc-v1-20261001-230532",
+  "authorized_by": "FMI Orchestrator",
+  "authorized_at": "2026-10-01T23:22:50.265568+05:30",
+  "job_id": "VID-clip-01",
+  "clip_id": "clip-01",
+  "attempt": 2,
+  "final_paid_attempt": true,
+  "asset_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1.mp4",
+  "handoff_frame": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1-handoff.jpg",
+  "packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/VIDEO_JOB/clip-01.json",
+  "retry_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/VIDEO_JOB/clip-01.retry-2.json",
+  "first_frame_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-1.jpg",
+  "last_frame_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-2.jpg",
+  "continuity_bible": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/continuity/CONTINUITY_BIBLE.json",
+  "prior_qc": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/visual_qc/clip-01.json",
+  "generation_id": "ffca3683-392c-9eff-b701-7bbcf32be38d",
+  "technical_expected": {
+    "w": 720,
+    "h": 1280,
+    "fps": 24,
+    "duration_s": 5
+  },
+  "focus_checks": [
+    "continuous_spatial_dive",
+    "architecture_identity",
+    "first_frame_match",
+    "last_frame_match",
+    "temporal_stability",
+    "artifacts",
+    "resolution"
+  ],
+  "decision_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/logs/video_jobs/QC_clip-01_attempt2.json",
+  "on_pass": "Continuity LOCK; then unlock clip-02 when scene-03 APPROVED (already is)",
+  "on_retry": "NEEDS_INTERVENTION \u2014 max paid attempts used"
+}

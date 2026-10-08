@@ -1,0 +1,167 @@
+{
+  "document": "CONTINUITY_BIBLE",
+  "production_id": "nk-v1-20261002-072013",
+  "name": "Nandini ♡ Karthik — tropical Sandesha-style remake",
+  "iteration": "stills-v5 / spatial-v2",
+  "created_at": "2026-10-02T08:39:30+05:30",
+  "updated_at": "2026-10-02T08:39:30+05:30",
+  "source": {
+    "orchestrator_extract": "/workspace/fmi-productions/nandini-karthik-remake/packets/ORCHESTRATOR_CONTINUITY_EXTRACT.json",
+    "spatial_map": "/workspace/fmi-productions/nandini-karthik-remake/continuity/SPATIAL_MAP.json",
+    "spatial_map_version": "spatial-v2",
+    "blueprint": "/workspace/fmi-productions/nandini-karthik-remake/continuity/MANTAP_BLUEPRINT_TOPVIEW.png",
+    "authority": [
+      "SPATIAL_MAP spatial-v2 wardrobe_lock supersedes BRIEF-v2 red-shirt wardrobe",
+      "Far vista lake/gopuram/hills/boat forbidden as dominant background",
+      "No full template.json — extract + Spatial Map + IMAGE_JOB packets only"
+    ]
+  },
+  "status": "ACTIVE",
+  "aspect": "9:16",
+  "duty": "Continuity Director owns identity, wardrobe, object counts, architecture materials, lighting, copy, particles, pose locks. Spatial Continuity owns adjacent facets / forbidden_reuse / maze path. Continuity vetoes after Visual QC PASS candidates (wardrobe/identity priority on couple beats).",
+  "identity": {
+    "bride": "Nandini",
+    "groom": "Karthik",
+    "event": {
+      "date": "22nd February 2027",
+      "time": "9:30 AM onwards",
+      "venue": "ITC Grand Chola",
+      "city": "Chennai, Tamil Nadu"
+    }
+  },
+  "wardrobe_lock": {
+    "authority": "spatial-v2 / ORCHESTRATOR_CONTINUITY_EXTRACT (NOT BRIEF-v2 red shirt)",
+    "applies_when": "couple visible (scene-05, scene-06)",
+    "groom": "maroon half-sleeve shirt + white gold-border veshti + sandals",
+    "bride": "rich green silk bridal saree; heavy gold jewellery (necklace layers, jhumkas, maang tikka, oddiyanam, bangles); long bridal hair with jasmine+roses — NOT a bun",
+    "pose": "Couple STANDING still in place, holding hands, looking at each other affectionately. Feet planted.",
+    "motion_rule": "STRICT: NO walking, NO stepping forward, NO stride. Camera moves around them — they do not walk.",
+    "veto_if": [
+      "groom red shirt or any non-maroon shirt",
+      "bride bun / short hair without long flowered length",
+      "couple walking / mid-stride",
+      "missing heavy gold bridal set on couple beats"
+    ]
+  },
+  "pose_lock": "Couple STANDS; camera moves around them",
+  "style": {
+    "notes": "pastel tropical elegance; dimensional cinematic storybook not flat 2D",
+    "palette": "pastel pinks, soft greens, cream, beige, misty greys, warm diffused morning light",
+    "materials": "carved cream-stone, polished reflective floor, brass urulis, banana leaves, jasmine, lotus, nilavilakku"
+  },
+  "architecture": {
+    "venue_type": "Tropical South Indian wedding mantap complex (ONE continuous place)",
+    "same_place_rule": "All six beats are ONE venue. Style/decor/materials continuous. Background geography MUST change by facet — never reuse one hero vista.",
+    "far_vista_lock": {
+      "hero_plate": "misty lake + temple gopuram + mountains + wooden boat",
+      "rule": "FORBIDDEN as dominant background on every beat. Allowed at most as a tiny distant corner peek in scene-06 only, never hero, never with readable gopuram. Prefer solid stage floral architecture instead."
+    },
+    "materials_lock": "cream carved stone colonnade/pillars/stairs; polished floor; banana leaves; jasmine+lotus; brass urulis + lamps"
+  },
+  "lighting": "soft warm morning light; cinematic dimensional storybook",
+  "particles": "dew/jasmine petals soft only where natural; no conflicting particle systems across beats",
+  "copy_locked": {
+    "scene-05": "Magenta cursive sky optional: Nandini ♡ Karthik only (no full invite stack)",
+    "scene-06": "Full stacked invite text (honor IMAGE_JOB packet exact copy — do not invent)",
+    "scene-01_to_04": "NO text"
+  },
+  "object_count_rules": "Honor per-scene Asset Producer IMAGE_JOB packet text/object counts; do not invent. Couple count = 0 on scene-01..04; couple = 2 standing on scene-05..06.",
+  "spatial_geography": {
+    "owner": "Spatial Continuity (reference only in Continuity Bible)",
+    "plan": "thicket → entrance_colonnade → center aisle → stairs → STAGE (couple lock). LEFT = left_side_aisle → decorated_pond → photoshoot_spot. RIGHT = right_side_aisle. Far lake/gopuram behind stage wall (usually occluded).",
+    "maze_logic": "Continuous polyline; LEFT/RIGHT/STRAIGHT adjacent edges only; no teleports",
+    "blueprint": "/workspace/fmi-productions/nandini-karthik-remake/continuity/MANTAP_BLUEPRINT_TOPVIEW.png"
+  },
+  "veto_checklist": [
+    "Wardrobe mismatch vs spatial-v2 lock on scene-05/06",
+    "Bride bun or walking pose",
+    "Couple on scene-01..04",
+    "Lake/gopuram/hills/boat as dominant BG (Spatial/QC primary; Continuity supports)",
+    "Architecture materials break (non-cream carved stone / wrong decor language)",
+    "Lighting time-of-day flip (not soft morning)",
+    "Unauthorized copy / wrong names",
+    "Object count invent (extra people, duplicate couple)"
+  ],
+  "worker_subsections": {
+    "image_floor": "After Visual QC PASS — Continuity LOCK/VETO wardrobe+identity+pose+copy; Spatial Map facets enforced by QC+Spatial",
+    "video_floor": "Same wardrobe/pose locks; couple never walks; camera polyline on blueprint"
+  },
+  "scenes": {
+    "scene-01": {
+      "facet": "entrance_thicket",
+      "couple": false,
+      "text": false,
+      "locks": [
+        "macro banana leaves",
+        "no lake plate",
+        "no people",
+        "no text"
+      ]
+    },
+    "scene-02": {
+      "facet": "entrance_colonnade",
+      "couple": false,
+      "text": false,
+      "locks": [
+        "closed colonnade facade",
+        "no through-arch lake",
+        "no people",
+        "no text"
+      ]
+    },
+    "scene-03": {
+      "facet": "left_side_aisle",
+      "couple": false,
+      "text": false,
+      "locks": [
+        "left aisle arcade depth",
+        "no stage yet",
+        "no lake",
+        "no people",
+        "no text"
+      ]
+    },
+    "scene-04": {
+      "facet": "left_side_aisle",
+      "couple": false,
+      "text": false,
+      "locks": [
+        "aisle continuous to stairs mouth",
+        "no couple",
+        "no lake",
+        "no text"
+      ]
+    },
+    "scene-05": {
+      "facet": "stairs",
+      "couple": true,
+      "text": "names only optional",
+      "locks": [
+        "wardrobe_lock",
+        "STANDING on stage ahead",
+        "stage floral wall BG",
+        "NO walking",
+        "NO bride bun"
+      ]
+    },
+    "scene-06": {
+      "facet": "stage_decorations",
+      "secondary_facets": [
+        "photoshoot_spot",
+        "decorated_pond"
+      ],
+      "couple": true,
+      "text": "full invite stack",
+      "locks": [
+        "same wardrobe_lock",
+        "STANDING",
+        "architecture hero not lake plate",
+        "stairs south readable",
+        "NO walking"
+      ]
+    }
+  },
+  "clips": {
+    "note": "Video Continuity after stills LOCK; couple never walks; camera adjacent-edge only"
+  }
+}

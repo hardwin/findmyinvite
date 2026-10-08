@@ -1,0 +1,14 @@
+{
+  "job_type": "ORCHESTRATOR_GO_IMAGE_QC_RETRY",
+  "production_id": "kc-v1-20261001-230532",
+  "authorized_at": "2026-10-01T23:16:20.611613+05:30",
+  "batch": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/IMAGE_QC_RETRY_BATCH.json",
+  "scenes": [
+    "scene-05",
+    "scene-10"
+  ],
+  "attempt": 2,
+  "max_paid_attempts": 2,
+  "on_pass": "Hand to Continuity Director for LOCK",
+  "on_retry": "NEEDS_INTERVENTION \u2014 no further paid retries without Ashok"
+}

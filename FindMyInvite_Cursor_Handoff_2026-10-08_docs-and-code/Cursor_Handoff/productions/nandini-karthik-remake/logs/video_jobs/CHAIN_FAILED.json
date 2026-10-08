@@ -1,0 +1,12 @@
+{
+  "started": "2026-10-02T07:53:35.861185+05:30",
+  "clips": [
+    {
+      "id": "clip-01",
+      "status": "failed",
+      "started": "2026-10-02T07:53:35.861593+05:30",
+      "error": "e_thread_encoder_init failed\n[vost#0:0/mjpeg @ 0x5587630c5680] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.\n[vf#0:0 @ 0x5587630c5480] Task finished with error code: -22 (Invalid argument)\n[vf#0:0 @ 0x5587630c5480] Terminating thread with return code -22 (Invalid argument)\n[vost#0:0/mjpeg @ 0x5587630c5680] Could not open encoder before EOF\n[vost#0:0/mjpeg @ 0x5587630c5680] Task finished with error code: -22 (Invalid argument)\n[vost#0:0/mjpeg @ 0x5587630c5680] Terminating thread with return code -22 (Invalid argument)\n[out#0/image2 @ 0x558763145480] Nothing was written into output file, because at least one of its streams received no packets.\nframe=    0 fps=0.0 q=0.0 Lsize=       0KiB time=N/A bitrate=N/A speed=N/A    \nConversion failed!\n",
+      "attempt": 2
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "kind": "maze_shot_board_16x9",
+  "path": "A>B>C>F>E>D",
+  "turns": ["start", "FWD", "RIGHT", "FWD", "LEFT", "PIVOT-PULL"],
+  "invite_text": "Nandini ♡ Karthik · 22 Feb 2027 · ITC Grand Chola",
+  "source_asset": "/home/box/agent-data/agents/57f50238-794e-4397-a47d-fdc5c47c6b3e/assets/6c80346ea83d1eb0d918e8c4cc4253ce4de154e48a1ca1ebe7f6f20208bf967c.jpg",
+  "status": "awaiting_ashok_approval",
+  "created": "2026-10-02T09:48+05:30"
+}

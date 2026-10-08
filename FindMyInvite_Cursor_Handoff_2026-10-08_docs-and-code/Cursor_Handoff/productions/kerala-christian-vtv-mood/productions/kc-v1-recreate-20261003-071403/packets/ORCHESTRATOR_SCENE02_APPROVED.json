@@ -1,0 +1,15 @@
+{
+  "packet_type": "ORCHESTRATOR_SCENE02_APPROVED",
+  "production_id": "kc-v1-recreate-20261003-071403",
+  "at": "2026-10-03T08:56:23+05:30",
+  "authority": "Ashok via FMI ReCreate",
+  "attempt": 3,
+  "approved_file": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/assets/output/kerala-christian-v1/image-2-attempt3.jpg",
+  "sha256": "0bd13d640bcbb86e207d98c46aa94f787198144810b48c0ad131a9d29345caf0",
+  "live_still": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/assets/output/kerala-christian-v1/image-2.jpg",
+  "note": "image-2.jpg was replaced with attempt 3 bytes so clip anchors use the approved still. Do not revert to attempt 1 or 2.",
+  "rejected": [
+    "image-2-attempt1.jpg",
+    "image-2-attempt2.jpg"
+  ]
+}

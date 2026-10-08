@@ -1,0 +1,28 @@
+{
+  "production_id": "nk-v1-20261002-072013",
+  "batch": "stills-v5",
+  "updated_at": "2026-10-02T08:48:46+05:30",
+  "scenes": {
+    "scene-01": {
+      "status": "APPROVED"
+    },
+    "scene-02": {
+      "status": "APPROVED"
+    },
+    "scene-03": {
+      "status": "APPROVED"
+    },
+    "scene-04": {
+      "status": "APPROVED"
+    },
+    "scene-05": {
+      "status": "APPROVED"
+    },
+    "scene-06": {
+      "status": "APPROVED"
+    }
+  },
+  "visual_qc_batch": "all six PASS",
+  "status": "STILLS_APPROVED_VIDEO_GO",
+  "video_authorized": true
+}

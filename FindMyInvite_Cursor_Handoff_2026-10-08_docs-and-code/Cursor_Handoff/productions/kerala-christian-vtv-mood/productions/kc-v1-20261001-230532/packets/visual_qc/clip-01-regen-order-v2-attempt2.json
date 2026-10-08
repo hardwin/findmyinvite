@@ -1,0 +1,29 @@
+{
+  "job_type": "VIDEO_QC",
+  "job_id": "VIDEO_QC_clip-01-regen-order-v2-attempt2",
+  "production_id": "kc-v1-20261001-230532",
+  "clip_id": "clip-01",
+  "attempt": 2,
+  "order": "V2",
+  "regen": true,
+  "final_paid_attempt": true,
+  "clip_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1.mp4",
+  "first_frame_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-1.jpg",
+  "last_frame_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1-handoff.jpg",
+  "locked_last_frame": true,
+  "pending_handoff_extract": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1-handoff.order-v2.attempt2.pending.jpg",
+  "do_not_overwrite_locked_handoff": true,
+  "generation_id": "f7c8f330-b3a9-94c8-9af2-bc6c1eebf155",
+  "sha256": "d26ba28d85f2311a7ea8067dc26d6f13a3e579e3a5836e36ebf80d1293d0d325",
+  "judge_focus": [
+    "continuous spatial dive full duration (no morph by ~0.8s)",
+    "NO early blessing text \u2014 text only near end",
+    "opening_energy + first-frame match image-1",
+    "last-frame land on locked clip-1-handoff",
+    "ONE tower; no dual-arch swap"
+  ],
+  "max_paid_attempts": 2,
+  "attempt_used": 2,
+  "status_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/logs/video_jobs/VID-clip-01-regen.order-v2.attempt-2.status.json",
+  "staged_at": "2026-10-02T00:21:05.895314+05:30"
+}

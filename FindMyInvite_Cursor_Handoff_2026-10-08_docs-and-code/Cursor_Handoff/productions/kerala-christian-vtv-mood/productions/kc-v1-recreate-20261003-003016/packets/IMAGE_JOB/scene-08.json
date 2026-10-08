@@ -1,0 +1,208 @@
+{
+  "job_type": "IMAGE_JOB",
+  "job_id": "IMG-scene-08",
+  "production_id": "kc-v1-recreate-20261003-003016",
+  "mode": "RECREATE_CLIENT_FILL",
+  "batch": "stills-v1",
+  "status": "GENERATED",
+  "authorized_to_dispatch": false,
+  "authorization_note": "Orchestrator IMAGE GO RECREATE_CLIENT_FILL stills-v1 \u2014 locked image_prompts verbatim; fold SPATIAL_MAP spatial-v1 facet/camera/forbidden_reuse only; Visual QC + Continuity veto; max 2 paid attempts; VIDEO not authorized",
+  "scene_id": "scene-08",
+  "scene_index": 8,
+  "name": "Venue at the north courtyard corner",
+  "generation": "text-only",
+  "required_text": [],
+  "image_prompt": "A full-bleed portrait 9:16 frame of a richly cinematic dimensional storybook-animation Kerala Christian church wedding invitation. Soft romantic late-2000s South Indian cinema mood: dreamy natural light, intimate coastal Kerala atmosphere, gentle teal-and-warm contrast, quiet emotional longing. Soft cream and powder-blue palette with pearl highlights, pale pink florals and cool backwaters haze beyond coconut palms. Cream-white Portuguese-influenced plaster walls, laterite stone accents, arched windows, a modest bell tower and a simple cross. Premium animated adult characters with sculpted expressive faces, never photographic people. DRAMATIC CHIAROSCURO: gentle warm back-and-side sunlight streams diagonally through arched windows and open porch bays, clearly visible soft volumetric god rays cutting through thin coastal atmospheric haze; luminous rim light on ivory silk, lace, pearl and champagne-gold frames against cooler powder-blue shade. Preserve readable highlights, not a flat uniformly bright wash. Very fine dust motes sparkle only inside the sunbeams. Floor is subtly reflective worn cream stone or polished laterite tile, not a mirror. Gold lettering has illuminated beveled edges, warm restrained emissive bloom, luminous hairline flourishes and discrete pinpoint highlights; sharp readable counters. Fixed floral church wedding d\u00e9cor of white jasmine, soft pink roses, baby's breath and green foliage \u2014 not marigold temple swags as primary. Roughly 12 to 20 tiny separate white, soft-pink and cream petals already scattered irregularly through the whole depth volume: a few soft near-lens edge petals, crisp midground petals, tiny distant petals. No confetti cannon, solid flower bunches in the air, symmetrical particle rows or dense shower from one point. All bouquets and garlands are fixed to their supports. Generate only from this text, no reference image. No watermark, interface, duplicate people, extra signs or unintended words.\n\nSCENE COMPOSITION:\nEye-level courtyard CORNER view facing an ornate dark-mahogany venue board on a low square gold-trimmed cream stone pedestal. Board is centered, about 56 percent of image width and 56 percent of height. Exact large gold serif copy with gently luminous bevel highlights: 'Wedding Venue\nVenkatadri Gardens\nKatheru\nRajahmundry'. All text readable with generous margins. A CLOSE square cream plaster column frames the extreme RIGHT foreground, side face strongly visible. The architecture behind forms an L-shaped church courtyard: a low decorated church wing stretches across the background and the cream-white bell tower appears only off-axis in the distant LEFT quarter. This is a sideways courtyard view, never a straight forward aisle ending at a central tower. Rich white-and-pale-pink flower swags, fixed soft candle stands, a delicate petal border beneath the board. Soft sunlight cuts diagonally across coastal haze from left, with cool sculpted shade on the near pillar and radiant gold sign edges. Small slow-looking petals distributed at different heights. No foreground couple.",
+  "prompt_sha256": "83fed25c4e4a6208b3e06916027f12a512f7675ce1d317c531efd4f20e1d9c0c",
+  "prompt_policy": "CLIENT_FILL \u2014 locked image_prompt verbatim; Spatial constraints folded only; do NOT rewrite creative prose",
+  "continuity": {
+    "characters": {
+      "groom": "Adult Kerala Christian groom, visibly polished storybook 3D animation, warm medium-brown skin, slender adult oval face, large dark-brown almond eyes, thick dark eyebrows, smooth clean-shaven cheeks and chin, soft black hair with a gentle side part, quiet reserved smile. No moustache or beard. Natural adult proportions, not a child. Ivory formal suit over a cream shirt with a soft white-and-pale-pink boutonniere. Keep this face, hair, body and outfit consistent in every couple scene.",
+      "bride": "Adult Kerala Christian bride, visibly polished storybook 3D animation, warm medium-brown skin, graceful oval face, large dark-brown almond eyes, gently arched black eyebrows, soft smile. Dark hair in an elegant low bun with a soft veil and white jasmine accents, delicate gold cross pendant and pearl earrings. Ivory lace-and-silk wedding gown with soft cream undertones. Natural adult proportions and a consistent face, hairstyle, jewelry and gown in every later scene."
+    },
+    "style_excerpt": "A full-bleed portrait 9:16 frame of a richly cinematic dimensional storybook-animation Kerala Christian church wedding invitation. Soft romantic late-2000s South Indian cinema mood: dreamy natural light, intimate coastal Kerala atmosphere, gentle teal-and-warm contrast, quiet emotional longing. Soft cream and powder-blue palette with pearl highlights, pale pink florals and cool backwaters haze beyond coconut palms. Cream-white Portuguese-influenced plaster walls, laterite stone accents, arched windows, a modest bell tower and a simple cross. Premium animated adult characters with sculpted expressive faces, never photographic people. DRAMATIC CHIAROSCURO: gentle warm back-and-side sunlight streams diagonally through arched windows and open porch bays, clearly visible soft volumetric god rays cutting through thin coastal atmospheric haze; luminous rim light on ivory sil\u2026",
+    "particle_motion": "PETALS AND LIGHT: continuous distributed slow-motion drift is present from the first frame, not triggered as a burst when the camera stops. Keep about 12-20 separate visible petals at irregular heights and depths \u2014 soft white jasmine, pale pink rose and cream petals. Petals flutter with independent phase, soft air resistance and a little side-to-side wobble; nearby petals drift roughly one tenth of picture height per second in the settled view, distant ones slower. Camera rotation produces the brief directional streaks; after braking the SAME scattered petals become calmly visible, with no sudden emission, rain sheet, confetti explosion or synchronized falling. Bouquets and garlands never detach. Fine dust motes drift inside soft diagonal volumetric sunrays through arched windows. Champagne-gold edges, pearl and jewelry catch moving specular glints; text itself emits no smoke, gold liquid or floor beam.",
+    "architecture_notes": [
+      "ONE white Portuguese-influenced Kerala Catholic church compound near Alappuzha backwaters",
+      "cream-white plaster, laterite accents, arched windows, ONE modest bell tower with cross",
+      "ONE small open arched porch vestibule (all sides open including rear)",
+      "side cloister arcade, aisle/altar ceremony, parish hall garden evening reception",
+      "floral: white jasmine, soft pink roses, baby's breath, green foliage \u2014 NOT marigold temple swags as primary"
+    ],
+    "lighting": "ONE warm soft sunrise from camera-left throughout daytime; evening reception separate lamp-lit mood for scene-09; gentle teal-and-warm contrast",
+    "typography": "luminous champagne-gold / antique-gold beveled dimensional lettering; exact customer copy only",
+    "object_count_rules": [
+      "Exactly one invitation title board where a board is specified",
+      "Exactly one SAVE THE DATE board in couple/date scenes",
+      "Exactly one bride and one groom in couple scenes (never duplicates)",
+      "Exactly one floral cross pedestal in porch",
+      "Exactly one modest bell tower",
+      "Exactly one church compound throughout",
+      "Couple scenes: exactly one Swaroop and one Smiley \u2014 never duplicates, clones, or extras"
+    ],
+    "parameters": {
+      "invitation_lines": "The Wedding of\nSwaroop & Smiley",
+      "groom_title": "Mr.",
+      "groom_name": "Swaroop",
+      "bride_title": "Ms.",
+      "bride_name": "Smiley",
+      "family_lines": "With the Blessings of\nGroom\u2019s Parents\nMr. Shadrach\n& Mrs. Salomi\nBride\u2019s Parents\nMr. Yesuratnam\n& Mrs. Mani",
+      "ceremony_lines": "Holy Matrimony\n8th october 2026\n10:00 a.m.\nIn the Morning",
+      "venue_lines": "Wedding Venue\nVenkatadri Gardens\nKatheru\nRajahmundry",
+      "reception_lines": "Reception - lunch\n8 October 2026\n12:00 p.m. onwards\nVenkatadri Gardens",
+      "host_lines": "Invited By\nMr. Yesuratnam\nMrs. Mani\nMr. Shadrach\nMrs. Salomi\nRajesh Emmanuel,Pavani and Balu\nWith Love & Blessings",
+      "save_date_lines": "SAVE THE DATE\n8 October\n2026",
+      "save_date_inline": "SAVE THE DATE / 8 October / 2026",
+      "devotional_line_1": "With The Blessings of God Almighty",
+      "devotional_line_2": "We Invite You"
+    },
+    "scene_summary": {
+      "id": "scene-08",
+      "index": 8,
+      "name": "Venue at the north courtyard corner",
+      "generation": "text-only",
+      "image_path": "image-8.jpg",
+      "text_fields": []
+    },
+    "scene_bible": {
+      "zone": "north courtyard corner \u2014 L-shaped sideways courtyard",
+      "characters_present": [],
+      "copy": {
+        "key": "venue_lines",
+        "exact": "Wedding Venue\nVenkatadri Gardens\nKatheru\nRajahmundry",
+        "carrier": "ONE ornate dark-mahogany venue board on low square gold-trimmed cream pedestal; ~56%\u00d756%"
+      },
+      "lighting": "soft sunlight diagonal from left; cool shade on near pillar",
+      "camera": "eye-level corner view; CLOSE square cream column extreme RIGHT foreground",
+      "architecture_must": [
+        "L-shaped courtyard: low decorated wing across background",
+        "bell tower ONLY off-axis distant LEFT quarter \u2014 never straight aisle ending at central tower",
+        "visual architecture remains Kerala Christian storybook compound (venue TEXT = Venkatadri Gardens / Rajahmundry)"
+      ],
+      "object_counts": {
+        "venue_board": 1,
+        "people": 0,
+        "bell_tower": 1
+      },
+      "typography": null,
+      "forbidden": [
+        "foreground couple",
+        "centered tower aisle",
+        "duplicate venue boards",
+        "literal Venkatadri redesign of compound"
+      ],
+      "particles": null
+    }
+  },
+  "spatial": {
+    "spatial_map_version": "spatial-v1",
+    "room": "H",
+    "shot": "S8",
+    "facet": "north_courtyard_corner",
+    "zone": "north courtyard corner \u2014 L-shaped sideways courtyard",
+    "arrival": "RIGHT turn from altar into L-courtyard",
+    "turn_from_prior": "RIGHT 90\u00b0",
+    "couple": false,
+    "camera": {
+      "framing": "eye-level corner view; venue board centered ~56%\u00d756%",
+      "bias": "CLOSE square cream column extreme RIGHT foreground; tower off-axis distant LEFT quarter",
+      "height": "eye (standing)",
+      "look": "sideways L-shaped courtyard \u2014 never straight aisle to central tower",
+      "aim": "southwest across L-courtyard",
+      "fov_hint": "courtyard corner",
+      "move_intent": "RIGHT 90\u00b0 + slow leftward correcting arc to parish garden I (clip-08)"
+    },
+    "visible_set_pieces": [
+      "ONE ornate dark-mahogany venue board on gold-trimmed cream pedestal",
+      "close square cream column extreme RIGHT",
+      "L-shaped courtyard + low decorated wing across background",
+      "bell tower ONLY off-axis distant LEFT quarter",
+      "white-pink flower swags + soft candles"
+    ],
+    "offscreen_neighbors": {
+      "L": "bell tower / nave north (off-axis)",
+      "R": "I parish hall garden (next)",
+      "behind": "G aisle/altar",
+      "ahead": "east courtyard wing"
+    },
+    "forbidden_reuse": [
+      "foreground couple",
+      "centered tower aisle",
+      "duplicate venue boards",
+      "literal Venkatadri redesign of compound",
+      "reuse altar G or cloister F",
+      "photographic people",
+      "lake/gopuram Hindu temple plate"
+    ],
+    "image_prompt_constraints": "9:16. Facet H north_courtyard_corner ONLY. Exact venue_lines (Venkatadri TEXT). Architecture stays Kerala Christian compound. Tower LEFT off-axis. NO couple. NO centered tower aisle.",
+    "next_edge": {
+      "to": "scene-09",
+      "move": "RIGHT 90\u00b0 + slow leftward correcting arc",
+      "edge": "H-I",
+      "clip": "clip-08"
+    },
+    "text": {
+      "copy": "Wedding Venue\nVenkatadri Gardens\nKatheru\nRajahmundry",
+      "key": "venue_lines",
+      "carrier": "ONE ornate dark-mahogany venue board; ~56%\u00d756%",
+      "note": "venue TEXT only \u2014 visual remains Kerala Christian storybook compound (NOT literal Venkatadri redesign)"
+    }
+  },
+  "output_filename": "image-8.jpg",
+  "output_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/assets/output/kerala-christian-v1/image-8.jpg",
+  "aspect": "9:16",
+  "width": 720,
+  "height": 1280,
+  "model": {
+    "credentials_env": "REPLICATE_API_TOKEN",
+    "id": "openai/gpt-image-2.5-flare",
+    "provider": "replicate"
+  },
+  "skip_spatial": false,
+  "spatial_map_version": "spatial-v1",
+  "spatial_map_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/continuity/SPATIAL_MAP.json",
+  "spatial_blueprint_16x9_status": "approved_by_ashok",
+  "spatial_approved_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/packets/ORCHESTRATOR_SPATIAL_APPROVED.json",
+  "dependencies": {
+    "blocks": [],
+    "blocked_by": [
+      "template_compiler_PASS",
+      "continuity_bible_ready",
+      "spatial_map_approved_by_ashok",
+      "orchestrator_IMAGE_authorize"
+    ]
+  },
+  "context_isolation": {
+    "includes_clip_graph": false,
+    "includes_other_scenes": false,
+    "includes_full_template": false,
+    "rule": "Image agents must not receive clip graphs, unrelated scenes, or full template.json"
+  },
+  "retry_policy": {
+    "automatic_paid_retries": false,
+    "max_paid_attempts": 2
+  },
+  "max_paid_attempts": 2,
+  "attempt": 1,
+  "template_sha256": "7d0c8f3060e3c11e2f1b3800661cad30d30602313961c1feeecdf0db9f8d130b",
+  "continuity_bible_sha256": "c1df9dbd053e8c243f3d7465f7ea64debc2b9d83db1cc98fd59aaa57dc27ada1",
+  "orchestrator_auth": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/packets/ORCHESTRATOR_GO_IMAGES.json",
+  "orchestrator_ap_auth": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/packets/ORCHESTRATOR_GO_ASSET_PRODUCER_IMAGES.json",
+  "staged_at": "2026-10-03T00:43:15+05:30",
+  "authorized_by_orchestrator": true,
+  "authorized_at": "2026-10-03T00:41:44+05:30",
+  "dispatched_at": "2026-10-03T00:43:15+05:30",
+  "dispatch_target": "FMI Image Floor @Image Director",
+  "video_jobs_authorized": false,
+  "preserve_prior_productions": [
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532",
+    "/workspace/fmi-productions/nandini-karthik-remake"
+  ],
+  "source": "template.json (immutable locked image_prompt) + CONTINUITY_BIBLE scene subsection + SPATIAL_MAP spatial-v1 beat",
+  "generation_id": "n7kcfe31j5rmt0d0zr5ak2fg7g",
+  "output_sha256": "5bff5481b6800745c3c0bc4d20fb307c63d8de3dc80f67229eff38952f384d09",
+  "output_size_bytes": 254813,
+  "output_url": "https://replicate.delivery/xezq/7vVwOldEv5acKBbDsBT03PhYhsSSh4iWVLLzBrq5xURu020F/tmpok6k92m7.jpeg",
+  "generated_at": "2026-10-03T00:45:06+0530"
+}

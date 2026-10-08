@@ -1,0 +1,19 @@
+{
+  "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-10.jpg",
+  "job_id": "IMG-scene-10",
+  "scene_id": "scene-10",
+  "decision": "PASS",
+  "rationale": "Attempt 2: lighting fixed \u2014 inner lamp-lit corridor with hanging lanterns (not daytime balcony). ONE hosts plaque; exact host_lines readable; 720\u00d71280. Hand to Continuity.",
+  "violations": [],
+  "retry_instruction": null,
+  "attempt": 2,
+  "technical": {
+    "w": 720,
+    "h": 1280,
+    "ok": true
+  },
+  "decided_at": "2026-10-01T23:18:23.134930+05:30",
+  "continuity_lock": true,
+  "orchestrator_path": "APPROVED_pending",
+  "updated_at": "2026-10-01T23:19:09.830989+05:30"
+}

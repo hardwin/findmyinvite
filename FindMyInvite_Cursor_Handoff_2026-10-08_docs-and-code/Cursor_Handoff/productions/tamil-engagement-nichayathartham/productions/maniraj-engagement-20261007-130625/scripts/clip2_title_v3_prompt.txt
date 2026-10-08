@@ -1,0 +1,23 @@
+ONE single camera move, 3 seconds, portrait 9:16, Pixar-style 3D animated look. Start exactly on the supplied image and stay in this same scene: the golden title wall of a Tamil engagement home. No cut, no transition.
+
+CAMERA MOVES IN ONE DIRECTION ONLY: RIGHT TO LEFT. Everything in the scene stays exactly as it is; only the camera moves.
+
+NO PEOPLE APPEAR at any moment: no figures, hands or silhouettes. The gold line-art of joined hands is only a flat drawing on the wall and never moves.
+
+CAMERA (glamour-cam, robotic motion-control arm, Bolt high-speed rig style, speed-ramp ORBIT): in frame 1 the camera is ALREADY positioned at the RIGHT side of the scene. From frame 1 to the last frame it travels in ONE single continuous RIGHT-TO-LEFT arc only, around the title wall, in a constant direction. It never moves right: no initial drift to the right, no wind-up, no pull-back, no reversal, no pause, no hesitation, no change of direction at any moment. A large arc, not a subtle drift.
+0.0-1.0s: FAST from the very first frame, an aggressive whip-speed robotic-arm orbit heading LEFT, covering most of the arc, with motion-blur streaks on the near petals, marigolds and the brass lamp flame as they shoot past the lens.
+1.0-3.0s: still moving LEFT, a dramatic speed-ramp deceleration into slow motion: the orbit glides ever more slowly along a smooth slow-motion curve and floats to a gentle stop exactly square-on, straight and directly facing the title, the title centred and large in frame. Machine-precise path, no shake, no roll, no second move.
+
+FLAT STATIC WALL: ONLY THE CAMERA MOVES. The wall, the main gold title நிச்சயதார்த்த அழைப்பிதழ் and all the lettering stay perfectly fixed, flat and static, printed flush on the wall surface, with no relief, no lifting, no popping out, no extrusion and no movement of any kind. As the camera slows and settles, a single gentle golden light glint sweeps once across the flat lettering from left to right, only a reflection of light on the surface; the letters themselves never move or change shape.
+
+RACK FOCUS: the clip begins focused on the near foreground petals, marigolds and brass lamp with the wall soft; as the camera slows, the focus racks clearly onto the title, ending razor-sharp on the title text with the foreground melting into creamy smudged bokeh.
+
+SLOW-MOTION WORLD: only the camera is fast. Every marigold and every pink and red rose petal floating in the air is FROZEN mid-air, completely suspended; they do not fall or flutter, they only pass the lens with strong parallax. The brass lamp flame in the foreground flickers gently. The peacock feathers in the brass vase sway softly in slow motion, and the jasmine strand hanging from the woven basket stirs gently in slow motion. Warm golden sunbeams stream through the carved wooden window grill on the right, with soft haze glowing in the light.
+
+EVERYTHING ELSE STILL: the ochre-gold wall, the red Ganesha emblem, the gold kolam motifs, the gold line-art, the carved dark wooden table, the woven basket of jasmine, the brass plate and bowl, the brass standing lamps and hanging brass lamp chains, the rose, jasmine and marigold garlands, the banana leaves and the tiled floor stay rigid with real parallax.
+
+TEXT LOCK: all Tamil text stays exact, sharp and unchanged in every frame: உ, ஸ்ரீ ரேணுகாம்பாள் துணை, and the title நிச்சயதார்த்த அழைப்பிதழ். Same letters, same shapes, same spacing, ending perfectly legible. No morphing, flicker, warping, re-lettering or added text anywhere.
+
+LOOK: preserve the start image exactly: warm golden sunlight, ochre, gold, maroon, marigold and green palette, Leica Noctilux 75mm f/1.25 razor-thin depth of field, dreamy smooth falloff. No new objects.
+
+CAMERA MOVES IN ONE DIRECTION ONLY: RIGHT TO LEFT, never reversing. The wall, the text and the whole environment stay static; only the camera moves.

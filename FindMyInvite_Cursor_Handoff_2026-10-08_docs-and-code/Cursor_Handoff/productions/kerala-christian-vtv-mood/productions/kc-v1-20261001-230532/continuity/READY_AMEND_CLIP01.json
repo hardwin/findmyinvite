@@ -1,0 +1,10 @@
+{
+  "status": "READY_FOR_ASSET_PRODUCER",
+  "amend": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/continuity/CONTINUITY_AMEND_clip01.json",
+  "targets": [
+    "scene-01",
+    "clip-01"
+  ],
+  "scene_02_locked": true,
+  "updated_at": "2026-10-02T00:04:56.735715+05:30"
+}

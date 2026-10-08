@@ -1,0 +1,22 @@
+{
+  "job_type": "IMAGE_RETRY",
+  "job_id": "IMG-scene-07",
+  "scene_id": "scene-07",
+  "production_id": "kc-v1-20261001-230532",
+  "attempt": 2,
+  "authorized_by_orchestrator": true,
+  "authorized_at": "2026-10-01T23:17:05.883943+05:30",
+  "base_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/IMAGE_JOB/scene-07.json",
+  "output_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-7.jpg",
+  "retry_instruction": "Keep couple pose, bride, garlands, ceremony board, altar geography, lighting unchanged. Remove ONLY the groom's necktie so collar matches locked ivory-suit/cream-shirt open-collar look from scene-04.",
+  "violations": [
+    {
+      "rule": "identity_groom_wardrobe",
+      "expected": "no necktie \u2014 ivory suit over cream shirt as locked and as scene-04",
+      "observed": "matching cream necktie present"
+    }
+  ],
+  "max_paid_attempts": 2,
+  "note": "Final paid attempt \u2014 Continuity VETO after Visual QC PASS",
+  "continuity_veto_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/continuity_veto/scene-07.json"
+}

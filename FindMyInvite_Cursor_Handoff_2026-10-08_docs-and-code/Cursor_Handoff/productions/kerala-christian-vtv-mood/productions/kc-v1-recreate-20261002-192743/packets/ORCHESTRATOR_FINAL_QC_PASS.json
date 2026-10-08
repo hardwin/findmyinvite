@@ -1,0 +1,16 @@
+{
+  "packet_type": "ORCHESTRATOR_FINAL_QC",
+  "production_id": "kc-v1-recreate-20261002-192743",
+  "at": "2026-10-02T20:09:16+05:30",
+  "decision": "PASS_DELIVERED",
+  "basis": "Ashok RECREATE_IDENTICAL + Continuity clips waived + Assembly verification PASS",
+  "assembly_receipt": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/manifest/assembly_verification.json",
+  "final": {
+    "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/kerala-christian-v1-final.mp4",
+    "sha256": "f5773316b737ed1b1be9219c09133547f61ff69ac157050b32864b12b30a7e1c",
+    "duration_seconds": 54.46,
+    "resolution": "720x1280"
+  },
+  "delivered_to_ashok": true,
+  "delivery_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/ORCHESTRATOR_DELIVERY.json"
+}

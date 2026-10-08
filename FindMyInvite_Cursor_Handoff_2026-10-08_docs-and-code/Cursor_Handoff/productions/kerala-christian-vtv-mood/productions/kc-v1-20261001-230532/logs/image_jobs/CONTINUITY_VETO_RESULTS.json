@@ -1,0 +1,489 @@
+{
+  "updated_at": "2026-10-01T23:18:51.619913+05:30",
+  "summary": {
+    "LOCK": [
+      "scene-01",
+      "scene-02",
+      "scene-03",
+      "scene-04",
+      "scene-05",
+      "scene-06",
+      "scene-08",
+      "scene-09",
+      "scene-10",
+      "scene-11"
+    ],
+    "VETO": [
+      "scene-07"
+    ],
+    "NO_LOCK": []
+  },
+  "results": [
+    {
+      "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-1.jpg",
+      "job_id": "IMG-scene-01",
+      "scene_id": "scene-01",
+      "continuity_decision": "LOCK",
+      "qc_gate": "pending_or_parallel",
+      "checks": [
+        {
+          "rule": "object_count_bell_tower",
+          "expected": 1,
+          "observed": 1,
+          "ok": true
+        },
+        {
+          "rule": "object_count_porch_vestibule",
+          "expected": 1,
+          "observed": 1,
+          "ok": true
+        },
+        {
+          "rule": "object_count_floral_cross_pedestal",
+          "expected": 1,
+          "observed": 1,
+          "ok": true
+        },
+        {
+          "rule": "object_count_text_boards",
+          "expected": 0,
+          "observed": 0,
+          "ok": true
+        },
+        {
+          "rule": "lighting_day",
+          "expected": "warm sunrise camera-left",
+          "observed": "sun low left / golden hour",
+          "ok": true
+        },
+        {
+          "rule": "architecture",
+          "expected": "cream-white Portuguese-Kerala Catholic compound + reflecting courtyard pool + open porch",
+          "observed": "cream compound, pool, open porch pavilion, cloisters, backwaters haze",
+          "ok": true
+        },
+        {
+          "rule": "aspect",
+          "expected": "720x1280",
+          "observed": "720x1280",
+          "ok": true
+        }
+      ],
+      "violations": [],
+      "note": "LOCK. Aerial establish reads as high compound view with one tower, one porch, one floral cross; sunrise left. Soft watch: keep this tower/porch geometry for later scenes.",
+      "decided_at": "2026-10-01T23:13:13.251743+05:30",
+      "attempt": 1
+    },
+    {
+      "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-2.jpg",
+      "job_id": "IMG-scene-02",
+      "scene_id": "scene-02",
+      "continuity_decision": "LOCK",
+      "qc_gate": "PASS",
+      "checks": [
+        {
+          "rule": "copy_devotional",
+          "expected": "With God's Grace / We Invite You",
+          "observed": "With God's Grace / We Invite You (freestanding champagne-gold)",
+          "ok": true
+        },
+        {
+          "rule": "object_count_floral_cross_pedestal",
+          "expected": 1,
+          "observed": 1,
+          "ok": true
+        },
+        {
+          "rule": "object_count_bell_tower_beyond",
+          "expected": 1,
+          "observed": 1,
+          "ok": true
+        },
+        {
+          "rule": "object_count_nameplates",
+          "expected": 0,
+          "observed": 0,
+          "ok": true
+        },
+        {
+          "rule": "architecture_open_rear",
+          "expected": "open porch all sides including rear; tower beyond",
+          "observed": "open framed porch looking through to tower",
+          "ok": true
+        },
+        {
+          "rule": "lighting_day",
+          "expected": "sunrise camera-left",
+          "observed": "sun far left",
+          "ok": true
+        },
+        {
+          "rule": "typography",
+          "expected": "freestanding dimensional gold — not wall plaque",
+          "observed": "floating dimensional gold letters",
+          "ok": true
+        }
+      ],
+      "violations": [],
+      "note": "LOCK after Visual QC PASS. Unblocks clip-01 with scene-01.",
+      "decided_at": "2026-10-01T23:13:13.251743+05:30",
+      "attempt": 1
+    },
+    {
+      "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-3.jpg",
+      "job_id": "IMG-scene-03",
+      "scene_id": "scene-03",
+      "continuity_decision": "LOCK",
+      "qc_gate": "PASS",
+      "attempt": 1,
+      "decided_at": "2026-10-01T23:16:11.156952+05:30",
+      "checks": [
+        {
+          "rule": "object_count_invitation_board",
+          "expected": 1,
+          "observed": 1,
+          "ok": true
+        },
+        {
+          "rule": "copy_invitation_lines",
+          "expected": "The Wedding of\\nAlex & Anna",
+          "observed": "exact",
+          "ok": true
+        },
+        {
+          "rule": "architecture_tower_offset",
+          "expected": "partial bell tower offset right — not centered tunnel",
+          "observed": "tower right background",
+          "ok": true
+        },
+        {
+          "rule": "object_count_people",
+          "expected": 0,
+          "observed": 0,
+          "ok": true
+        }
+      ],
+      "violations": [],
+      "note": "LOCK after QC PASS. Reaffirmed LOCK to Orchestrator.",
+      "reaffirmed_at": "2026-10-01T23:16:43.044451+05:30"
+    },
+    {
+      "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-4.jpg",
+      "job_id": "IMG-scene-04",
+      "scene_id": "scene-04",
+      "continuity_decision": "LOCK",
+      "qc_gate": "PASS",
+      "attempt": 1,
+      "decided_at": "2026-10-01T23:16:11.156952+05:30",
+      "checks": [
+        {
+          "rule": "identity_groom",
+          "expected": "single clean-shaven adult; ivory suit; cream shirt; pale-pink boutonniere; storybook 3D",
+          "observed": "matches",
+          "ok": true
+        },
+        {
+          "rule": "object_count_groom",
+          "expected": 1,
+          "observed": 1,
+          "ok": true
+        },
+        {
+          "rule": "object_count_bride",
+          "expected": 0,
+          "observed": 0,
+          "ok": true
+        },
+        {
+          "rule": "typography_name",
+          "expected": "floating gold calligraphy Mr. / Alex John — not a board",
+          "observed": "floating gold Mr. Alex John",
+          "ok": true
+        },
+        {
+          "rule": "lighting_day",
+          "expected": "sunrays from high LEFT arched windows",
+          "observed": "windows left; god rays",
+          "ok": true
+        },
+        {
+          "rule": "architecture",
+          "expected": "shaded side aisle; no outdoor tower",
+          "observed": "interior aisle; no outdoor tower",
+          "ok": true
+        }
+      ],
+      "violations": [],
+      "note": "LOCK after QC PASS. Reaffirmed LOCK to Orchestrator.",
+      "reaffirmed_at": "2026-10-01T23:16:43.044451+05:30"
+    },
+    {
+      "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-5.jpg",
+      "job_id": "IMG-scene-05",
+      "scene_id": "scene-05",
+      "continuity_decision": "LOCK",
+      "qc_gate": "PASS",
+      "attempt": 2,
+      "decided_at": "2026-10-01T23:18:51.619913+05:30",
+      "checks": [
+        {
+          "rule": "typography_copy",
+          "expected": "Ms.\\nAnna Thomas (Anna Thomas one line)",
+          "observed": "Ms. small above; Anna Thomas single large line",
+          "ok": true
+        },
+        {
+          "rule": "identity_bride",
+          "expected": "low bun, veil, jasmine, gold cross, ivory lace gown, storybook 3D",
+          "observed": "matches",
+          "ok": true
+        },
+        {
+          "rule": "object_count_bride",
+          "expected": 1,
+          "observed": 1,
+          "ok": true
+        },
+        {
+          "rule": "object_count_boards",
+          "expected": 0,
+          "observed": 0,
+          "ok": true
+        }
+      ],
+      "violations": [],
+      "note": "LOCK attempt-2 — calligraphy line-break defect cleared."
+    },
+    {
+      "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-6.jpg",
+      "job_id": "IMG-scene-06",
+      "scene_id": "scene-06",
+      "continuity_decision": "LOCK",
+      "qc_gate": "PASS",
+      "attempt": 2,
+      "decided_at": "2026-10-01T23:16:43.044451+05:30",
+      "checks": [
+        {
+          "rule": "object_count_family_plaque",
+          "expected": 1,
+          "observed": 1,
+          "ok": true
+        },
+        {
+          "rule": "object_count_people",
+          "expected": 0,
+          "observed": 0,
+          "ok": true
+        },
+        {
+          "rule": "exact_copy_family_lines",
+          "expected": "Mr. John Mathew / & Mrs. Elsy John and Mr. Thomas George / & Mrs. Mercy Thomas on own lines",
+          "observed": "parent pairs correctly broken with '& Mrs.' on own lines; names exact",
+          "ok": true
+        },
+        {
+          "rule": "architecture",
+          "expected": "west cloister; no centered bell tower; grounded bouquet",
+          "observed": "cloister arcade; bouquet at base; no person",
+          "ok": true
+        }
+      ],
+      "violations": [],
+      "note": "LOCK attempt-2 asset. Prior VETO cleared — '& Mrs.' line breaks now present. Soft note: header may read as single 'With the Blessings of Groom's Parents' line; names/structure sufficient for lock."
+    },
+    {
+      "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-7.jpg",
+      "job_id": "IMG-scene-07",
+      "scene_id": "scene-07",
+      "continuity_decision": "VETO",
+      "qc_gate": "PASS",
+      "attempt": 1,
+      "decided_at": "2026-10-01T23:16:11.156952+05:30",
+      "checks": [
+        {
+          "rule": "object_count_couple",
+          "expected": "1 groom + 1 bride",
+          "observed": "1+1",
+          "ok": true
+        },
+        {
+          "rule": "object_count_ceremony_board",
+          "expected": 1,
+          "observed": 1,
+          "ok": true
+        },
+        {
+          "rule": "copy_ceremony_lines",
+          "expected": "Holy Matrimony / 15th February 2025 / 10:00 a.m. / In the Morning",
+          "observed": "exact",
+          "ok": true
+        },
+        {
+          "rule": "identity_groom_wardrobe",
+          "expected": "Ivory formal suit over cream shirt with soft boutonniere — no necktie (consistent with locked identity + scene-04 open collar)",
+          "observed": "cream necktie added",
+          "ok": false
+        }
+      ],
+      "violations": [
+        {
+          "rule": "identity_groom_wardrobe",
+          "expected": "no necktie — ivory suit over cream shirt as locked and as scene-04",
+          "observed": "matching cream necktie present"
+        }
+      ],
+      "note": "VETO reaffirmed — image-7.jpg unchanged (still has cream necktie). Waiting for defect-only retry.",
+      "reaffirmed_at": "2026-10-01T23:16:43.044451+05:30"
+    },
+    {
+      "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-8.jpg",
+      "job_id": "IMG-scene-08",
+      "scene_id": "scene-08",
+      "continuity_decision": "LOCK",
+      "qc_gate": "PASS",
+      "attempt": 1,
+      "decided_at": "2026-10-01T23:16:11.156952+05:30",
+      "checks": [
+        {
+          "rule": "object_count_venue_board",
+          "expected": 1,
+          "observed": 1,
+          "ok": true
+        },
+        {
+          "rule": "copy_venue_lines",
+          "expected": "Wedding Venue / St. Mary's Forane Church / Near Alappuzha / Kerala",
+          "observed": "exact",
+          "ok": true
+        },
+        {
+          "rule": "architecture_tower_offset",
+          "expected": "bell tower off-axis left — not centered aisle",
+          "observed": "tower left",
+          "ok": true
+        },
+        {
+          "rule": "object_count_people",
+          "expected": 0,
+          "observed": 0,
+          "ok": true
+        },
+        {
+          "rule": "lighting_day",
+          "expected": "soft sunlight from left",
+          "observed": "directional light from left",
+          "ok": true
+        }
+      ],
+      "violations": [],
+      "note": "LOCK after QC PASS. Reaffirmed LOCK to Orchestrator.",
+      "reaffirmed_at": "2026-10-01T23:16:43.044451+05:30"
+    },
+    {
+      "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-9.jpg",
+      "job_id": "IMG-scene-09",
+      "scene_id": "scene-09",
+      "continuity_decision": "LOCK",
+      "qc_gate": "PASS",
+      "checks": [
+        {
+          "rule": "lighting_evening",
+          "expected": "lamp-lit evening parish hall garden",
+          "observed": "blue hour / lanterns / string lights",
+          "ok": true
+        },
+        {
+          "rule": "object_count_reception_board",
+          "expected": 1,
+          "observed": 1,
+          "ok": true
+        },
+        {
+          "rule": "copy_reception_lines",
+          "expected": "Reception - Dinner / 14th February 2025 / 7:00 p.m. onwards / Parish Hall Garden / Near Alappuzha, Kerala",
+          "observed": "exact lines readable",
+          "ok": true
+        },
+        {
+          "rule": "florals",
+          "expected": "jasmine / soft pink roses primary",
+          "observed": "pink roses + white jasmine accents",
+          "ok": true
+        }
+      ],
+      "violations": [],
+      "note": "LOCK after Visual QC PASS. Evening exception correct; one board; exact copy.",
+      "decided_at": "2026-10-01T23:13:13.251743+05:30",
+      "attempt": 1
+    },
+    {
+      "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-10.jpg",
+      "job_id": "IMG-scene-10",
+      "scene_id": "scene-10",
+      "continuity_decision": "LOCK",
+      "qc_gate": "PASS",
+      "attempt": 2,
+      "decided_at": "2026-10-01T23:18:51.619913+05:30",
+      "checks": [
+        {
+          "rule": "lighting_evening",
+          "expected": "lamp-lit inner side chapel corridor",
+          "observed": "hanging lanterns primary; enclosed corridor; no daytime balcony",
+          "ok": true
+        },
+        {
+          "rule": "object_count_hosts_board",
+          "expected": 1,
+          "observed": 1,
+          "ok": true
+        },
+        {
+          "rule": "copy_host_lines",
+          "expected": "Invited By / Mr. Kurien Abraham / Mrs. Lizzy Kurien / Baby. Nia & Noel / With Love & Blessings",
+          "observed": "exact",
+          "ok": true
+        }
+      ],
+      "violations": [],
+      "note": "LOCK attempt-2 — evening lamp-lit corridor defect cleared."
+    },
+    {
+      "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-11.jpg",
+      "job_id": "IMG-scene-11",
+      "scene_id": "scene-11",
+      "continuity_decision": "LOCK",
+      "qc_gate": "PASS",
+      "attempt": 1,
+      "decided_at": "2026-10-01T23:16:11.156952+05:30",
+      "checks": [
+        {
+          "rule": "object_count_couple",
+          "expected": "exactly 1 groom + 1 bride",
+          "observed": "1+1",
+          "ok": true
+        },
+        {
+          "rule": "object_count_save_the_date_board",
+          "expected": 1,
+          "observed": 1,
+          "ok": true
+        },
+        {
+          "rule": "copy_save_date_lines",
+          "expected": "SAVE THE DATE / 14 & 15 FEBRUARY / 2025",
+          "observed": "exact",
+          "ok": true
+        },
+        {
+          "rule": "hard_veto_duplicate_boards",
+          "expected": "never 2 date boards",
+          "observed": "1 board",
+          "ok": true
+        }
+      ],
+      "violations": [],
+      "note": "LOCK after QC PASS — single couple + single SAVE THE DATE board. Reaffirmed LOCK to Orchestrator.",
+      "reaffirmed_at": "2026-10-01T23:16:43.044451+05:30"
+    }
+  ]
+}

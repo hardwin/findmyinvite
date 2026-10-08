@@ -1,0 +1,85 @@
+{
+  "job_type": "FINAL_QC_FULL_WATCH",
+  "production_id": "kc-v1-20261001-230532",
+  "agent": "Final QC Delivery",
+  "decision": "PASS",
+  "completed_at": "2026-10-01T23:46:27.023847+05:30",
+  "film": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/kerala-christian-v1-final.mp4",
+  "sha256": "6df900bbbc5dc3b9222f285f3a2cce8a183644db5cb9668f762dac57264ffe12",
+  "measured": {
+    "duration_seconds": 54.458333,
+    "frames": 1307,
+    "width": 720,
+    "height": 1280,
+    "fps": "24/1",
+    "video_codec": "h264",
+    "audio_streams": 0,
+    "size_bytes": 49085639
+  },
+  "checks": [
+    {
+      "id": "FULL_DECODE",
+      "decision": "PASS",
+      "evidence": "ffmpeg -v error null decode exit 0, empty stderr"
+    },
+    {
+      "id": "ORIENTATION_RES_FPS",
+      "decision": "PASS",
+      "evidence": "720x1280, 24/1 fps, yuv420p, single video stream, no audio"
+    },
+    {
+      "id": "DURATION",
+      "decision": "PASS",
+      "evidence": "54.458s (= sum of source clips 5.0417\u00d710 + 4.0417); target ~54s; stream-copy, no global retiming"
+    },
+    {
+      "id": "BLACK_CORRUPT",
+      "decision": "PASS",
+      "evidence": "blackdetect: no intervals; freezedetect: none; decode errors: none; first/last not black"
+    },
+    {
+      "id": "NO_MISSING_REPEATED",
+      "decision": "PASS",
+      "evidence": "exactly 11 clips; concat_list clip-1\u2026clip-11; frame-accurate first/last MAD=0 for all segments"
+    },
+    {
+      "id": "SCENE_ORDER",
+      "decision": "PASS",
+      "evidence": "frame-index match clip-1\u202611 into final (1307 frames); hard-cut concat"
+    },
+    {
+      "id": "REQUIRED_TEXT",
+      "decision": "PASS",
+      "evidence": {
+        "With God's Grace / We Invite You": "visible mid clip-1",
+        "The Wedding of / Alex & Anna": "clip-2 handoff",
+        "Mr. Alex John": "clip-3 handoff",
+        "Ms. Anna Thomas": "clip-4 handoff",
+        "family blessings (John Mathew, Elsy John, Thomas George, Mercy Thomas)": "clip-5 handoff + OCR",
+        "Holy Matrimony / 15th February 2025 / 10:00 a.m. / In the Morning": "clip-6 handoff + OCR",
+        "Wedding Venue / St. Mary's Forane Church / Near Alappuzha / Kerala": "clip-7 handoff + OCR",
+        "Reception - Dinner / 14th February 2025 / 7:00 p.m. onwards / Parish Hall Garden / Near Alappuzha, Kerala": "clip-8 handoff + OCR",
+        "Invited By / Kurien Abraham / Lizzy Kurien / Baby. Nia & Noel / With Love & Blessings": "clip-9 handoff",
+        "SAVE THE DATE / 14 & 15 FEBRUARY / 2025": "clip-10/11 handoff"
+      }
+    },
+    {
+      "id": "ENDING",
+      "decision": "PASS",
+      "evidence": "final last frame == clip-11 last == clip-11-handoff (sha match); couple forehead-touch under gateway with SAVE THE DATE board; scene-12 = final decoded frame of clip-11"
+    }
+  ],
+  "delivery": {
+    "action": "Orchestrator may deliver to Ashok",
+    "final_qc_does_not_ship": true,
+    "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/kerala-christian-v1-final.mp4"
+  },
+  "notes": [
+    "Ashok waived per-clip Visual QC; Final QC full-film watch still applied",
+    "Duration delta vs nominal 54.0s is inherent to source clip lengths (+~0.042s each), not retiming"
+  ],
+  "watchVideo_corroboration": {
+    "at": "2026-10-01T23:46:50.388040+05:30",
+    "result": "confirms PASS \u2014 all required text readable; forehead-touch ending; no black/corrupt; ~11 hard-cut clips; 9:16"
+  }
+}

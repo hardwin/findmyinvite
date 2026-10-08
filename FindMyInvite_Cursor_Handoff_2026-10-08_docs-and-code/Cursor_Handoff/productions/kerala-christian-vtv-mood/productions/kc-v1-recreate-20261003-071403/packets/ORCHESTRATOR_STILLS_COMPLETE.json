@@ -1,0 +1,27 @@
+{
+  "packet_type": "ORCHESTRATOR_STILLS_COMPLETE",
+  "production_id": "kc-v1-recreate-20261003-071403",
+  "at": "2026-10-03T07:50:05+05:30",
+  "batch": "stills-v1",
+  "attempt": 1,
+  "status": "COMPLETE_NO_QC",
+  "generated_count": 11,
+  "failed": [],
+  "receipt": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/IMAGE_DIRECTOR_GENERATED_STILLS_V1_ATTEMPT1.json",
+  "verified_on_disk": [
+    "image-1.jpg 720x1280",
+    "image-2.jpg 720x1280",
+    "image-3.jpg 720x1280",
+    "image-4.jpg 720x1280",
+    "image-5.jpg 720x1280",
+    "image-6.jpg 720x1280",
+    "image-7.jpg 720x1280",
+    "image-8.jpg 720x1280",
+    "image-9.jpg 720x1280",
+    "image-10.jpg 720x1280",
+    "image-11.jpg 720x1280"
+  ],
+  "continuity_qc": "WAIVED",
+  "visual_qc": "WAIVED",
+  "spatial_qc": "WAIVED"
+}

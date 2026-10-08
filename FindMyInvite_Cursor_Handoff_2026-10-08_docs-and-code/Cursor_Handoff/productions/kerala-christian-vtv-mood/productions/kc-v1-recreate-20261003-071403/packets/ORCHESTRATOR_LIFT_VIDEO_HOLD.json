@@ -1,0 +1,9 @@
+{
+  "packet_type": "ORCHESTRATOR_LIFT_VIDEO_HOLD",
+  "production_id": "kc-v1-recreate-20261003-071403",
+  "at": "2026-10-03T08:56:23+05:30",
+  "authority": "Ashok via FMI ReCreate",
+  "video_jobs_authorized": true,
+  "stitch_authorized": true,
+  "go_video": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/ORCHESTRATOR_GO_VIDEO.json"
+}

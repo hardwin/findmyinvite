@@ -1,0 +1,78 @@
+{
+  "production_id": "kc-v1-recreate-20261006-211129",
+  "mode": "RECREATE_CLIENT_FILL",
+  "couple": "Rahul & Mounika",
+  "invitation_order": "groom-first",
+  "phase": "DELIVERED_SPEEDRAMP_LUNCH_UPDATE",
+  "updated_at": "2026-10-07T13:08:40+05:30",
+  "template_sha256": "5796dee2c650fee64a529793bb4a5c46fa03a4255c5da90a3b8ad8dda3f5039b",
+  "qc_policy": "NO_QC_GENERATE_AND_STITCH",
+  "continuity": "WAIVED",
+  "visual_qc": "WAIVED",
+  "stills_status": "APPROVED_BY_ASHOK (incl. scene 9 Lunch update)",
+  "video_jobs_authorized": true,
+  "clips": "11/11 (clip-8, clip-9 regenerated for Lunch update) NO_QC",
+  "paid_image_predictions": 17,
+  "telegram": {
+    "chat_id": "2002649357",
+    "album_1_scenes_01_06": [
+      873,
+      874,
+      875,
+      876,
+      877,
+      878
+    ],
+    "album_2_scenes_07_11": [
+      879,
+      880,
+      881,
+      882,
+      883
+    ],
+    "corrections_scenes_04_05": [
+      884,
+      885
+    ],
+    "update_scene_10": 886,
+    "update_scene_04_software_engineer": 887,
+    "update_scene_10_dr_shakeena": 888,
+    "final_sendVideo": 889,
+    "final_sendDocument": 890,
+    "update_scene_09_lunch_only": 891,
+    "speedramp_lunch_sendVideo": 892,
+    "speedramp_lunch_sendDocument": 893
+  },
+  "paid_video_generations": 13,
+  "final_1080_sha256": "0bfd0d0ac011a5833deb87db26575ec4d7e35d72b6bb92e62adeaed99be26943",
+  "final_720_sha256": "bcc19e0883d7cba3c3842575b8598f3275b6ccbab953cdfdb98f735b3ad3ab5e",
+  "scene_09_lunch_only": "image-9.jpg (Lunch / 21st October 2026 / Follows the Holy Matrimony) APPROVED by Ashok. clip-8 + clip-9 regenerated (1 generation each); old clips/handoffs/status in assets/output/kerala-christian-v1/superseded-reception-lunch/. Speed-ramped final rebuilt and delivered; normal-speed final NOT rebuilt (Ashok: 'No need of normal') - kerala-christian-v1-final*.mp4 are stale (old 'Reception - Lunch' board).",
+  "video_regen_lunch": {
+    "clips": [
+      "clip-08",
+      "clip-09"
+    ],
+    "paid_generations": 2,
+    "clip-08": {
+      "request_id": "3326148c-0573-9617-a939-e9bdf3cbae2c",
+      "sha256": "ccda54c9bf536d61ea6f5e14cd9f6b45a5c0346a06197ca36fd0dc78b2fcfc53"
+    },
+    "clip-09": {
+      "request_id": "a3d9f6ad-a2b4-9b29-8448-60c72873a92c",
+      "sha256": "bc15b010829c618f67742cc6991af00d9aa2c06b10363a6db69a00376f33c813"
+    },
+    "script": "scripts/run_video_regen_lunch.py",
+    "log": "logs/video/regen_lunch_run.log"
+  },
+  "final_speedramp": {
+    "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261006-211129/assets/output/kerala-christian-v1/kerala-christian-v1-speedramp-1080x1920.mp4",
+    "sha256": "a4a6d984c10566d5eb43b6a28b5786347a4a3a3f10bf6a24bffc3178bc3c2178",
+    "bytes": 31089622,
+    "duration_s": 28.208333,
+    "frames": 677,
+    "mode": "crf20",
+    "plan": "packets/SPEEDRAMP_PLAN_LUNCH_20261007.json",
+    "script": "scripts/build_speedramp.py"
+  },
+  "final_normal_status": "STALE_NOT_REBUILT (shows old Reception - Lunch board)"
+}

@@ -1,0 +1,32 @@
+{
+  "ts_local": "2026-10-02T10:54:41+0530",
+  "job_id": "IMG-v6-scene-02",
+  "scene_id": "scene-02",
+  "status": "GENERATED",
+  "attempt": 1,
+  "generation_id": "66ak5693ehrmy0d0zc99bx5z7r",
+  "prompt_sha256": "a927094caf6d85d3ba15aad541c7d25612515a64eec1caf940269414b71ab8ae",
+  "output_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v6/scene-02.jpg",
+  "size_bytes": 293712,
+  "sha256": "1732ebbb5d7c58ea7640e8290f0c3e5baa251c6c7992f994d5d18d4ee0bcd004",
+  "facet": "central_colonnade_courtyard",
+  "spatial_map_version": "spatial-v9",
+  "forbidden_reuse": [
+    "misty lake+gopuram hero",
+    "couple",
+    "text",
+    "A garden as this room",
+    "stage",
+    "misty lake",
+    "temple gopuram",
+    "hills",
+    "mountains",
+    "wooden boat",
+    "lake+gopuram+hills+boat as hero BG"
+  ],
+  "error": null,
+  "model": "openai/gpt-image-2.5-flare",
+  "provider": "replicate",
+  "input_images_count": 0,
+  "output_url": "https://replicate.delivery/xezq/pEiTsokfOz07W6ppeWCo4p9edZwkhUhnkmOjoOtxu1fmh8MdB/tmpkzu7bj3g.jpeg"
+}

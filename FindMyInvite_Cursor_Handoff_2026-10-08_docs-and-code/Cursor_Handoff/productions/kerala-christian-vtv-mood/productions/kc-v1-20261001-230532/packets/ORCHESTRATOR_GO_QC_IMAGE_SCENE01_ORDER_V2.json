@@ -1,0 +1,27 @@
+{
+  "packet_type": "ORCHESTRATOR_GO_QC_IMAGE_SCENE01_ORDER_V2",
+  "production_id": "kc-v1-20261001-230532",
+  "authorized_at": "2026-10-02T00:11:13+05:30",
+  "job_id": "IMG-scene-01-order-v2",
+  "scene_id": "scene-01",
+  "attempt": 1,
+  "asset_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-1.jpg",
+  "asset_sha256": "05c928e91ee9e33198300d35d125766cf9d17a16f0d1aac64ea67622e2dc4663",
+  "generation_id": "c4r4b25xkdrmy0d0z32bdfr6y8",
+  "prompt_hash": "f7d34b563d9fb34137acef56fecbf8b89e2f3eafe54cf8907e5be6a19feebb39",
+  "reference_image": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1-handoff.jpg",
+  "reference_sha256": "dc477c78c015a1fb7fabbd6c5519fab51d430e65d93f777866274cc5c1fcde61",
+  "job_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/IMAGE_JOB/scene-01.order-v2.json",
+  "continuity_amend": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/continuity/CONTINUITY_AMEND_clip01_order_v2.json",
+  "qc_checks": [
+    "same-world vs clip-1-handoff (palette, materials, architecture family, lighting)",
+    "opening_energy / elevated drone establish",
+    "NO text / no typography overlays",
+    "object-count restrictions from continuity amend",
+    "720x1280 aspect",
+    "no extra limbs/faces/artifacts"
+  ],
+  "action": "Visual QC PASS|RETRY then Continuity veto/LOCK",
+  "video": "REMAINS_HELD until APPROVED + Orchestrator re-authorize VID-clip-01-regen",
+  "max_paid_attempts": 2
+}

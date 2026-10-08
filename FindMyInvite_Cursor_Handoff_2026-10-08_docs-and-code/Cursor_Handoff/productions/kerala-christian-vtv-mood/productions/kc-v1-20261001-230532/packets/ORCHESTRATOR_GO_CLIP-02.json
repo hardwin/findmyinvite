@@ -1,0 +1,14 @@
+{
+  "action": "AUTHORIZE_VIDEO_CLIP",
+  "production_id": "kc-v1-20261001-230532",
+  "clip_id": "clip-02",
+  "job_id": "VID-clip-02",
+  "authorized_at": "2026-10-01T23:27:56.391535+05:30",
+  "packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/VIDEO_JOB/clip-02.json",
+  "first_frame": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1-handoff.jpg",
+  "last_frame": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-3.jpg",
+  "skip_qc": true,
+  "ashok_override": true,
+  "chain_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/ORCHESTRATOR_GO_VIDEO_CHAIN_02_11.json",
+  "note": "Reconfirmed GO \u2014 first=attempt-1 handoff, last=image-3; then continue 03-11 per chain without QC waits"
+}

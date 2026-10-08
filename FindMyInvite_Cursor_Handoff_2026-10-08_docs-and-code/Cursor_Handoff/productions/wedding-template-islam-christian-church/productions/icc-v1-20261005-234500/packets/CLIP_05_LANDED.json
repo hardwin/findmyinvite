@@ -1,0 +1,36 @@
+{
+  "job_id": "VID-clip-05",
+  "clip_id": "clip-05",
+  "production_id": "icc-v1-20261005-234500",
+  "status": "generated",
+  "output_clip_path": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/assets/output/clip-5.mp4",
+  "generation_id": "2965612c-6d41-93d0-8d91-c5bf265d4fa5",
+  "request_id": "2965612c-6d41-93d0-8d91-c5bf265d4fa5",
+  "sha256": "9e3339a7465386cf753b35f2e04a1f0816e0ec29f51fbd43ed994025e78952dd",
+  "attempt": 1,
+  "qc_skipped": true,
+  "no_qc": true,
+  "model": "grok-imagine-video-1.5",
+  "duration_seconds": 5,
+  "resolution": "720p",
+  "aspect_ratio": "9:16",
+  "first_frame": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/assets/output/image-5.jpg",
+  "last_frame": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/assets/output/image-6.jpg",
+  "first_file_id": "file_ee2f2e9d-0e55-4271-b4f4-648b2343f7c1",
+  "last_file_id": "file_fc97776a-a524-4f1b-a548-09576565d0a9",
+  "video_url": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-2965612c-6d41-93d0-8d91-c5bf265d4fa5.mp4",
+  "usage": {
+    "cost_in_usd_ticks": 7200000000
+  },
+  "technical_probe": {
+    "w": 720,
+    "h": 1280,
+    "fps": "24/1",
+    "nb_frames": "121",
+    "duration_s": 5.041667
+  },
+  "prompt_len": 3652,
+  "prompt_sha256": "7702fffdb314e8b5c6b7b7a71682fee9b13d8f7adb283363c5881dd77e0f261d",
+  "prompt_truncated": false,
+  "updated_at": "2026-10-06T16:45:31.798200+05:30"
+}

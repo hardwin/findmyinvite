@@ -1,0 +1,31 @@
+{
+  "packet_type": "ORCHESTRATOR_GO_QC_CLIP01_REGEN_ORDER_V2",
+  "production_id": "kc-v1-20261001-230532",
+  "authorized_at": "2026-10-02T00:16:47+05:30",
+  "job_id": "VID-clip-01-regen",
+  "attempt": 1,
+  "order": "V2",
+  "asset_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1.mp4",
+  "asset_sha256": "7127dfed67ddb5898db5886d57984f599e7636f795f696ebd91887cf2726e1d2",
+  "first_frame": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-1.jpg",
+  "first_frame_sha256": "e220fa48eeb0911325222d18260200361c23036f119dca591509d1aaf7b6290c",
+  "last_frame": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1-handoff.jpg",
+  "last_frame_sha256": "dc477c78c015a1fb7fabbd6c5519fab51d430e65d93f777866274cc5c1fcde61",
+  "job_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/VIDEO_JOB/clip-01.regen.json",
+  "checks": [
+    "opening_energy / continuous drone flight",
+    "first-frame match vs image-1.jpg",
+    "last-frame land on clip-1-handoff.jpg (decoded frame)",
+    "same-world vs handoff (no architecture swap)",
+    "exact copy With God's Grace / We Invite You on last frame",
+    "no morph soup / cuts",
+    "720x1280 ~5s"
+  ],
+  "action": "Visual QC PASS|RETRY then Continuity veto/LOCK",
+  "after_pass": "Assembly swap clip-1 into final + Final QC + StoryBoard to Process Architect",
+  "generation_id": "d8ddc43b-7531-9aa7-8be1-e15b8b30bdc2",
+  "video_director_qc_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/VIDEO_QC_clip-01-regen-order-v2.json",
+  "pending_handoff_extract": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1-handoff.order-v2.pending.jpg",
+  "do_not_promote_handoff_until_approved": true,
+  "updated_at": "2026-10-02T00:17:25+05:30"
+}

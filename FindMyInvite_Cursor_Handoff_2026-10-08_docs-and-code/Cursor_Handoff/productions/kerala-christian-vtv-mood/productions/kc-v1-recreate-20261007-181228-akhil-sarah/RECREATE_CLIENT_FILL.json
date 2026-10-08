@@ -1,0 +1,32 @@
+{
+  "mode": "RECREATE_CLIENT_FILL",
+  "template_name": "kerala-christian-v1",
+  "couple": "Akhil & Sarah",
+  "production_id": "kc-v1-recreate-20261007-181228-akhil-sarah",
+  "created_at": "2026-10-07T18:12:43+05:30",
+  "scope": "STILLS ONLY (no clips until Ashok approves stills)",
+  "qc_policy": "Text spelling self-check of every still (agent), no continuity/spatial QC",
+  "template_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261007-181228-akhil-sarah/template.json",
+  "template_sha256": "1ba7153f288ba58433f94f45623d8cbfe0a21b26092a7f602b5f58ca04d48912",
+  "source_template": "/workspace/fmi-productions/kerala-christian-vtv-mood/template.json",
+  "source_template_sha256": "bad0d176beb1ad47e3942689f95c4153fb933f3547670a255bb7fc062f46dae4",
+  "base_rationale": "Ashok correction: ORIGINAL template only. Pure parameter fill; no prompt fixes or client edits carried from kc-v1-recreate-20261006-211129 (Rahul & Mounika) or kc-v1-recreate-20261003-071403 (Theresa & Isaac). Only scripts reused for mechanics.",
+  "fixes_carried": [],
+  "parameters": {
+    "invitation_lines": "The Wedding of\nAkhil & Sarah",
+    "groom_title": "Mr.",
+    "groom_name": "Akhil Sharma",
+    "bride_title": "Ms.",
+    "bride_name": "Sarah Corda",
+    "family_lines": "With the Blessings of\nGroom’s Parents\nMrs. Anita and Mr. Rajesh Sharma\nBride’s Parents\nMrs. Sunita and Mr. Sunil Corda",
+    "ceremony_lines": "Holy Matrimony\n19th December 2026\n4:30 p.m.",
+    "venue_lines": "Wedding Venue\nSacred Heart Church\nVashi\nNavi Mumbai",
+    "reception_lines": "Reception - Dinner\n19th December 2026\n7:00 p.m. onwards\nWindflower Banquet\nVashi, Navi Mumbai",
+    "host_lines": "Invited By\nMenezes & Corda Family\nWith Love & Blessings",
+    "save_date_lines": "SAVE THE DATE\n19 DECEMBER\n2026",
+    "save_date_inline": "SAVE THE DATE / 19 DECEMBER / 2026",
+    "devotional_line_1": "With God’s Grace",
+    "devotional_line_2": "We Invite You"
+  },
+  "source": "Ashok chat message 2026-10-07 (t2u form)"
+}

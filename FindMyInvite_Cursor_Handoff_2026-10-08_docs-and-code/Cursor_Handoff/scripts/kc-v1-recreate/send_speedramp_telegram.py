@@ -1,0 +1,22 @@
+#!/usr/bin/env python3
+"""Send ONLY the speed-ramped final (Akhil & Sarah) to Ashok via Eventsblr bot: sendVideo + sendDocument download copy. Token never printed."""
+import json, math, subprocess, requests
+from datetime import datetime
+from pathlib import Path
+R = Path(__file__).resolve().parent.parent
+F = R/"assets/output/kerala-christian-v1/kerala-christian-v1-speedramp-720x1280.mp4"
+TOKEN = Path("/home/box/shared/secrets/telegram-eventsblr.token").read_text().strip()  # never printed
+CHAT = "2002649357"; CAP = "Akhil & Sarah - Speed-ramped wedding video (final, priest removed)"
+DUR = round(float(subprocess.run(["ffprobe","-v","error","-show_entries","format=duration","-of","csv=p=0",str(F)],capture_output=True,text=True).stdout.strip()))
+B = f"https://api.telegram.org/bot{TOKEN}"
+res = {"file": str(F), "duration": DUR, "sent_at": datetime.now().astimezone().isoformat(timespec="seconds")}
+r = requests.post(f"{B}/sendVideo", data={"chat_id": CHAT, "caption": CAP, "width": 720, "height": 1280, "duration": DUR, "supports_streaming": "true"},
+                  files={"video": (F.name, open(F, "rb"), "video/mp4")}, timeout=600)
+j = r.json(); res["sendVideo"] = {"http": r.status_code, "ok": j.get("ok"), "message_id": (j.get("result") or {}).get("message_id"), "caption": CAP, "error": None if j.get("ok") else j.get("description")}
+print(json.dumps(res["sendVideo"]), flush=True)
+r = requests.post(f"{B}/sendDocument", data={"chat_id": CHAT, "caption": CAP + " - download copy", "disable_content_type_detection": "true"},
+                  files={"document": (F.name, open(F, "rb"), "video/mp4")}, timeout=600)
+j = r.json(); res["sendDocument"] = {"http": r.status_code, "ok": j.get("ok"), "message_id": (j.get("result") or {}).get("message_id"), "caption": CAP + " - download copy", "error": None if j.get("ok") else j.get("description")}
+print(json.dumps(res["sendDocument"]), flush=True)
+log = json.loads((R/"logs/TELEGRAM_SEND.json").read_text()); log["speedramp_final_rev6_no_priest"] = res
+(R/"logs/TELEGRAM_SEND.json").write_text(json.dumps(log, indent=2))

@@ -1,0 +1,112 @@
+{
+  "chat_id": "2002649357",
+  "albums": [
+    {
+      "scenes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "http": 200,
+      "ok": true,
+      "message_ids": [
+        873,
+        874,
+        875,
+        876,
+        877,
+        878
+      ],
+      "error": null
+    },
+    {
+      "scenes": [
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "http": 200,
+      "ok": true,
+      "message_ids": [
+        879,
+        880,
+        881,
+        882,
+        883
+      ],
+      "error": null
+    },
+    {
+      "scenes": [
+        4,
+        5
+      ],
+      "note": "corrected degree names",
+      "ok": true,
+      "message_ids": [
+        884,
+        885
+      ]
+    }
+  ],
+  "single_photos": [
+    {
+      "scene": 10,
+      "method": "sendPhoto",
+      "ok": true,
+      "message_id": 886
+    },
+    {
+      "scene": 4,
+      "method": "sendPhoto",
+      "ok": true,
+      "message_id": 887,
+      "replaces": 884
+    },
+    {
+      "scene": 10,
+      "method": "sendPhoto",
+      "ok": true,
+      "message_id": 888,
+      "replaces": 886
+    }
+  ],
+  "final_video": {
+    "sendVideo": {
+      "http": 200,
+      "ok": true,
+      "message_id": 889,
+      "error": null
+    },
+    "sendDocument": {
+      "http": 200,
+      "ok": true,
+      "message_id": 890,
+      "error": null
+    }
+  },
+  "speedramp_final_lunch_update": {
+    "file": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261006-211129/assets/output/kerala-christian-v1/kerala-christian-v1-speedramp-1080x1920.mp4",
+    "duration": 28,
+    "sent_at": "2026-10-07T13:08:24+05:30",
+    "sendVideo": {
+      "http": 200,
+      "ok": true,
+      "message_id": 892,
+      "caption": "Rahul & Mounika - Speed-ramped final (Lunch update)",
+      "error": null
+    },
+    "sendDocument": {
+      "http": 200,
+      "ok": true,
+      "message_id": 893,
+      "caption": "Rahul & Mounika - Speed-ramped final (Lunch update) - download copy",
+      "error": null
+    }
+  }
+}

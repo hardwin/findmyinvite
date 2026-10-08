@@ -1,0 +1,45 @@
+{
+  "job_id": "VID-clip-01",
+  "clip_id": "clip-01",
+  "production_id": "benjamin-20261007-182345",
+  "model": "grok-imagine-video-1.5",
+  "resolution": "720p",
+  "aspect_ratio": "9:16",
+  "duration_seconds": 5,
+  "first_frame": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/benjamin-20261007-182345/assets/output/kerala-christian-v1/image-1.jpg",
+  "first_frame_sha256": "4c430ada6aa801a2083aaf6998ebf96423e50743c33555db6f6ed605cbfde352",
+  "last_frame": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/benjamin-20261007-182345/assets/output/kerala-christian-v1/image-2.jpg",
+  "last_frame_sha256": "36b5eb18034718a284c8ef6fe3491f75e7d99bfd05d2db44f9c0cc8d4ba24f88",
+  "prompt_source": "packets/VIDEO_PROMPTS_SUBMITTED.json (template resolved video_prompt + logged rule edits)",
+  "prompt_sha256": "a509819dca9950fb1183664da9794a9228e40c931f84295c0e6e8fb9cd2975e9",
+  "prompt_len": 3796,
+  "qc": "NO_QC",
+  "paid_submits": 1,
+  "attempts": [
+    {
+      "attempt": 1,
+      "http": 200,
+      "first_file_id": "file_65db6a5c-eda7-4a10-b26d-44b582c1695b",
+      "last_file_id": "file_601c410d-103b-454a-92dc-eae1256e1e8b",
+      "submitted_at": "2026-10-07T20:10:02+05:30",
+      "request_id": "b7ba09a1-6681-9ca0-9ef5-52e8cec698f2",
+      "final_status": "done"
+    }
+  ],
+  "updated_at": "2026-10-07T20:11:02+05:30",
+  "status": "generated",
+  "request_id": "b7ba09a1-6681-9ca0-9ef5-52e8cec698f2",
+  "sha256": "6be09c8946b4678d01a5968f25c4ccc0b660a02d1709496b7ea83372e27102a8",
+  "handoff": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/benjamin-20261007-182345/assets/output/kerala-christian-v1/clip-1-handoff.jpg",
+  "handoff_sha256": "6c9b54a8a7ea85ca47d0b8dab33b49b654324a7a1cca486fd3a04eb35d95621f",
+  "video_url": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-b7ba09a1-6681-9ca0-9ef5-52e8cec698f2.mp4",
+  "usage": {
+    "cost_in_usd_ticks": 7200000000
+  },
+  "technical_probe": {
+    "w": 720,
+    "h": 1280,
+    "fps": "24/1",
+    "duration_s": 5.041667
+  }
+}

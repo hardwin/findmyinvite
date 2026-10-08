@@ -1,0 +1,11 @@
+submitted 4792bab7-5851-909e-8280-d94e176d1ac2 dur 7
+  poll 4792bab7-5851-909e-8280-d94e176d1ac2 status=pending
+  poll 4792bab7-5851-909e-8280-d94e176d1ac2 status=pending
+  poll 4792bab7-5851-909e-8280-d94e176d1ac2 status=pending
+  poll 4792bab7-5851-909e-8280-d94e176d1ac2 status=pending
+  poll 4792bab7-5851-909e-8280-d94e176d1ac2 status=pending
+  poll 4792bab7-5851-909e-8280-d94e176d1ac2 status=pending
+  poll 4792bab7-5851-909e-8280-d94e176d1ac2 status=pending
+  poll 4792bab7-5851-909e-8280-d94e176d1ac2 status=pending
+  poll 4792bab7-5851-909e-8280-d94e176d1ac2 status=done
+RESULT {"rid": "4792bab7-5851-909e-8280-d94e176d1ac2", "dur": 7, "probe": {"w": 720, "h": 1280, "fps": "24/1", "nb_frames": "169", "duration_s": 7.041667}}

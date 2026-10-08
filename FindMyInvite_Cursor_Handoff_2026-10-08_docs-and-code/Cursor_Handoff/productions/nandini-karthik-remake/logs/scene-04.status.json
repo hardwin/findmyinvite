@@ -1,0 +1,17 @@
+{
+  "scene": "04",
+  "scene_id": "scene-04",
+  "job_id": "IMG-v2-scene-04",
+  "status": "GENERATED",
+  "attempt": 1,
+  "model": "openai/gpt-image-2.5-flare",
+  "provider": "replicate",
+  "prompt_sha256": "1ec3727bf3d575b5a4578f1088bd92d39ef3e59ef3d3b3b3115634f2c7974d90",
+  "output_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v2/scene-04.jpg",
+  "asset_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v2/scene-04.jpg",
+  "generation_id": "1jp9kcvyshrmy0d0z9aa19qnqm",
+  "output_url": "https://replicate.delivery/xezq/SZRSeBja8hzHUCTQOFYMSO0eDKUGeu4QbSTzMq1GmLAdMYmuA/tmpfx7jmw41.jpeg",
+  "size_bytes": 284340,
+  "sha256": "d0137f4d2525664bb1b46919aa30b7361fe767bc7b218c290d44873f7212dffb",
+  "input_images_count": 1
+}

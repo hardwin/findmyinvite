@@ -1,0 +1,17 @@
+{
+  "packet_type": "ASSET_PRODUCER_DELIVERY_ACK",
+  "production_id": "kc-v1-recreate-20261003-003016",
+  "couple": "Swaroop & Smiley",
+  "at": "2026-10-03T01:10:27+05:30",
+  "status": "DELIVERED_NO_QC",
+  "clips": "11/11 GENERATED",
+  "qc_policy": "NO_QC_GENERATE_AND_STITCH \u2014 Continuity/Spatial/Visual QC waived",
+  "final_mp4": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/assets/output/kerala-christian-v1/kerala-christian-v1-final.mp4",
+  "final_mp4_sha256": "d5f8bb2a51d33614440f7ce973222c0cd490070967b7b389ac45ca4ed6e42ce8",
+  "final_dl_mp4": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/assets/output/kerala-christian-v1/kerala-christian-v1-final-dl.mp4",
+  "final_dl_mp4_sha256": "7aa776a515c114a5787e652bbaa06a20a092d966ea4b69a409e855ff976287c3",
+  "duration_s": 54.458333,
+  "vd_delivery": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/packets/VIDEO_DIRECTOR_DELIVERY.json",
+  "ap_action": "stand_down \u2014 no further VIDEO_JOBs; leave prior kc recreates + nk-v1 untouched",
+  "next": "Orchestrator / FMI Finish / Assembly as needed"
+}

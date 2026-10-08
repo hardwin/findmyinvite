@@ -1,0 +1,30 @@
+{
+  "packet_type": "ASSET_PRODUCER_VIDEO_USER_STOP",
+  "production_id": "nk-v1-20261002-072013",
+  "batch": "clips-v5",
+  "status": "LIFTED_BY_QC_WAIVE_OVERRIDE",
+  "reason": "Ashok halted regenerates + QC. Do not unlock/dispatch further VIDEO_JOBs until he reopens.",
+  "source": "FindMyInvite Video Director relay of USER STOP",
+  "locked_at": "2026-10-02T09:16:02.247184+05:30",
+  "do_not": [
+    "authorize_dispatch_any_VIDEO_JOB",
+    "unlock_clip_03_04_05",
+    "continue_clip_02_attempt_2_if_not_already_running",
+    "emit_new_VIDEO_JOBs",
+    "assemble"
+  ],
+  "clip_status_at_stop": {
+    "clip_01": "APPROVED",
+    "clip_02": "RETRY_AUTHORIZED_ATTEMPT_2_FROZEN",
+    "clip_03": "HELD",
+    "clip_04": "HELD",
+    "clip_05": "HELD"
+  },
+  "resume_requires": "Ashok reopen + Orchestrator GO",
+  "orchestrator_stop": "/workspace/fmi-productions/nandini-karthik-remake/packets/ORCHESTRATOR_STOP_VID_v5_ASHOK.json",
+  "aligned_with_orchestrator": true,
+  "ack_at": "2026-10-02T09:16:48.605772+05:30",
+  "idle": true,
+  "lifted_at": "2026-10-02T09:22:36.842574+05:30",
+  "lifted_by": "/workspace/fmi-productions/nandini-karthik-remake/packets/ORCHESTRATOR_OVERRIDE_QC_WAIVE_VID_v5.json"
+}

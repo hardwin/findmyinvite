@@ -1,0 +1,14 @@
+{
+  "packet_type": "SPATIAL_16X9_BLUEPRINT_DELIVERY",
+  "version": "spatial-draft-muslim-v1",
+  "status": "approved_by_ashok",
+  "spatial_blueprint_16x9_status": "approved_by_ashok",
+  "approved_at": "2026-10-04T08:10:00+05:30",
+  "stamped_at": "2026-10-04T08:13:00+05:30",
+  "board_jpg": "/workspace/fmi-productions/spatial-drafts/muslim-courtyard-board-20261004/continuity/SPATIAL_SHOT_BOARD_16x9_v1.jpg",
+  "board_sha256": "eb4c4a3f342ffd794d16ed1c1f7ca5bcaf192cdf5142063fb93e90fbda445ec0",
+  "map": "/workspace/fmi-productions/spatial-drafts/muslim-courtyard-board-20261004/continuity/SPATIAL_MAP.json",
+  "stills": "HOLD_UNTIL_TEMPLATE",
+  "video": "HOLD",
+  "note": "Ashok 8:10 IST in Video Director chat: Go ahead and. Drawing unchanged."
+}

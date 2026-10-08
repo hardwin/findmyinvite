@@ -1,0 +1,8 @@
+submitted 1c67405c-9522-9a4f-8bc8-e7e6c6b9439e dur 3
+  poll 1c67405c-9522-9a4f-8bc8-e7e6c6b9439e status=pending
+  poll 1c67405c-9522-9a4f-8bc8-e7e6c6b9439e status=pending
+  poll 1c67405c-9522-9a4f-8bc8-e7e6c6b9439e status=pending
+  poll 1c67405c-9522-9a4f-8bc8-e7e6c6b9439e status=pending
+  poll 1c67405c-9522-9a4f-8bc8-e7e6c6b9439e status=pending
+  poll 1c67405c-9522-9a4f-8bc8-e7e6c6b9439e status=done
+RESULT {"rid": "1c67405c-9522-9a4f-8bc8-e7e6c6b9439e", "dur": 3, "probe": {"w": 720, "h": 1280, "fps": "24/1", "nb_frames": "73", "duration_s": 3.041667}}

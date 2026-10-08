@@ -1,0 +1,40 @@
+{
+  "document": "CONTINUITY_VETO",
+  "production_id": "nk-v1-20261002-072013",
+  "batch": "stills-v5",
+  "scene_id": "scene-03",
+  "job": "IMG-v5-scene-03",
+  "asset_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5/scene-03.jpg",
+  "sha256": "97f005d211e5e09affa64b2839240f28c034008f67be13e8eba0da20575119a5",
+  "generation_id": "4rxacshf4drmr0d0zabtt4819g",
+  "attempt": 1,
+  "visual_qc": "PASS",
+  "qc_file": "/workspace/fmi-productions/nandini-karthik-remake/logs/image_jobs/QC_scene-03_stills-v5_attempt1.json",
+  "decision": "LOCK",
+  "scope": "architecture/object (no couple)",
+  "expected": {
+    "facet": "left_side_aisle",
+    "couple": false,
+    "text": false,
+    "locks": [
+      "aisle arcade",
+      "materials",
+      "no lake",
+      "no people",
+      "no text"
+    ]
+  },
+  "observed": {
+    "architecture": "cream carved left aisle arcade, polished floor depth, banana wall between pillars",
+    "decor": "brass urulis + nilavilakku, hanging jasmine strands",
+    "people": 0,
+    "text": false,
+    "lake_plate": false,
+    "note": "stairs/landing ahead readable; stage floral not hero"
+  },
+  "violations": [],
+  "rationale": "Matches bible scene-03: left aisle depth, materials lock, empty, no text/lake.",
+  "continuity_bible": "/workspace/fmi-productions/nandini-karthik-remake/continuity/CONTINUITY_BIBLE.json",
+  "judged_at": "2026-10-02T08:42:49+05:30",
+  "judge": "Continuity Director"
+}

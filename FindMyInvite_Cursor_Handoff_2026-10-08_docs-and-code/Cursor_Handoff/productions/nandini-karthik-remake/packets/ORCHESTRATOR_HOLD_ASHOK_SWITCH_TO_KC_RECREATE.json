@@ -1,0 +1,23 @@
+{
+  "packet_type": "ORCHESTRATOR_HOLD",
+  "production_id": "nk-v1-20261002-072013",
+  "at": "2026-10-02T19:28:24+05:30",
+  "status": "HELD_BY_ASHOK",
+  "hold": [
+    "IMAGE_JOB",
+    "VIDEO_JOB",
+    "stills_regen",
+    "clips_regen",
+    "Assembly",
+    "Final_QC"
+  ],
+  "preserve": [
+    "assets/stills-v6",
+    "assets/stills-v5",
+    "assets/clips-v5",
+    "assets/nandini-karthik-v5-preview.mp4"
+  ],
+  "reason": "Ashok HOLD via Video Director \u2014 switch to kc-v1 RECREATE_IDENTICAL proof",
+  "stills_v6_status": "Continuity_COMPLETE_awaiting_ashok_stills_approve_PARKED",
+  "active_production": "kc-v1-recreate-20261002-192743"
+}

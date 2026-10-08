@@ -1,0 +1,46 @@
+{
+  "production_id": "icc-v1-20261005-234500",
+  "note": "Paid generation ledger (created 2026-10-07; earlier runs are recorded in packets/*.json receipts)",
+  "entries": [
+    {
+      "at": "2026-10-07T19:14:40+05:30",
+      "change": "Reception Dinner -> Lunch",
+      "asset": "image-8.jpg",
+      "provider": "replicate",
+      "model": "openai/gpt-image-2.5-flare",
+      "prediction_id": "2qmvvgcwjdrmt0d12tdvrpqsj0",
+      "paid_generations": 1,
+      "result": "ok",
+      "sha256": "50e27a5495969a2942130c168cd46d877c409717f18168af4df5d2d9bfd965d0",
+      "telegram_msg": 947
+    },
+    {
+      "at": "2026-10-07T20:00:44.229870+05:30",
+      "change": "Reception Dinner -> Lunch",
+      "asset": "clip-7.mp4",
+      "provider": "xai",
+      "model": "grok-imagine-video-1.5",
+      "request_id": "a8373df0-0b8c-913d-b619-8aea4b14a420",
+      "paid_generations": 1,
+      "result": "ok",
+      "sha256": "245362434639bd9d3e888323ee420950532d874c333cfa6028f5bddf8c27beea",
+      "usage": {
+        "cost_in_usd_ticks": 7200000000
+      }
+    },
+    {
+      "at": "2026-10-07T20:01:49.877930+05:30",
+      "change": "Reception Dinner -> Lunch",
+      "asset": "clip-8.mp4",
+      "provider": "xai",
+      "model": "grok-imagine-video-1.5",
+      "request_id": "a3f8b7d0-a7ed-9b5a-a9f1-fb9a8f81ff9f",
+      "paid_generations": 1,
+      "result": "ok",
+      "sha256": "2dcc6d1d8eef64de6aeb39492cc7391e0edf91f2c691a4b3ae2bea0645f3454e",
+      "usage": {
+        "cost_in_usd_ticks": 7200000000
+      }
+    }
+  ]
+}

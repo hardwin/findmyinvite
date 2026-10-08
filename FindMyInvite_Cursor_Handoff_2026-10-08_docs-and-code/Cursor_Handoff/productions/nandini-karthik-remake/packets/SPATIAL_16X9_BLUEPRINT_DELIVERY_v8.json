@@ -1,0 +1,10 @@
+{
+  "packet_type": "SPATIAL_16X9_BLUEPRINT_DELIVERY",
+  "version": "v8",
+  "production_id": "nk-v1-20261002-072013",
+  "delivered_at": "2026-10-02T10:12:00+05:30",
+  "approve_artifact": "/workspace/fmi-productions/nandini-karthik-remake/continuity/SPATIAL_MAZE_MAP_16x9_v8.jpg",
+  "spatial_map_version": "spatial-v8",
+  "spatial_blueprint_16x9_status": "awaiting_ashok_approval",
+  "note": "Architectural blueprint style per Ashok; cameras aim at subjects/architecture"
+}

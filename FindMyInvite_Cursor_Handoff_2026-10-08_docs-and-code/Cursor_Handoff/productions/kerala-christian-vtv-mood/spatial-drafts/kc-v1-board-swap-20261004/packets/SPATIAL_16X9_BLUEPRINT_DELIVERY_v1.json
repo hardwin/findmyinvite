@@ -1,0 +1,12 @@
+{
+  "packet_type": "SPATIAL_16X9_BLUEPRINT_DELIVERY",
+  "version": "spatial-draft-v1",
+  "status": "STOPPED",
+  "delivered_at": "2026-10-04T07:47:52+05:30",
+  "board_jpg": "/workspace/fmi-productions/kerala-christian-vtv-mood/spatial-drafts/kc-v1-board-swap-20261004/continuity/SPATIAL_SHOT_BOARD_16x9_v1.jpg",
+  "board_sha256": "a58481b6c395f7be6e42e9970ea1ba3450696d14f39a127307a260501f4d8076",
+  "map": "/workspace/fmi-productions/kerala-christian-vtv-mood/spatial-drafts/kc-v1-board-swap-20261004/continuity/SPATIAL_MAP.json",
+  "stills": "HOLD",
+  "video": "HOLD",
+  "stopped_reason": "Ashok asked to convert the whole map to a Muslim theme. Do not use this church board."
+}

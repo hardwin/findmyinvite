@@ -1,0 +1,27 @@
+{
+  "packet_type": "VIDEO_DIRECTOR_CLIP02_READY",
+  "production_id": "kc-v1-recreate-20261002-192743",
+  "clip_id": "clip-02",
+  "job_id": "VID-clip-02",
+  "attempt": 1,
+  "status": "READY_FOR_CONTINUITY",
+  "visual_qc": "WAIVED_FLOOR",
+  "output_clip_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/clip-2.mp4",
+  "final_frame_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/clip-2-handoff.jpg",
+  "handoff_sha256": "5a165b7896cb7741bd3ed1aac9fcfc85c1e633cecb12ce9effc6b35cb54a1242",
+  "clip_sha256": "e2346e33e934c70a1a8e08f9f6e01521f76139c7b1448bcddd1a880a2ca00781",
+  "request_id": "334b9a3a-6270-9a2f-b22c-bb1567855610",
+  "prompt_sha256": "f3c3602b0dcc259d6b72753cc79918f15ff8dab25692e475b37027194923f633",
+  "prompt_sha_match": true,
+  "duration_seconds": 4,
+  "technical_probe": {
+    "w": 720,
+    "h": 1280,
+    "fps": "24/1",
+    "duration_s": 4.041667
+  },
+  "status_json": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/logs/video_jobs/VID-clip-02.status.json",
+  "recorded_at": "2026-10-02T19:57:57.483265+05:30",
+  "next": "Continuity judge clip-02; on APPROVED_HANDOFF AP unlocks clip-03.json (authorized_to_dispatch=true) before Video Director continues",
+  "stop_before_next": true
+}

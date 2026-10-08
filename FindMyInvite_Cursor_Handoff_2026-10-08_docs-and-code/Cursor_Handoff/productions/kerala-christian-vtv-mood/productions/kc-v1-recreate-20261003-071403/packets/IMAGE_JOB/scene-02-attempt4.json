@@ -1,0 +1,48 @@
+{
+  "job_type": "IMAGE_JOB",
+  "job_id": "IMG-scene-02-attempt4",
+  "production_id": "kc-v1-recreate-20261003-071403",
+  "mode": "RECREATE_CLIENT_FILL",
+  "batch": "correction-20261003",
+  "scene_id": "scene-02",
+  "scene_index": 2,
+  "name": "Church porch with dimensional blessing",
+  "attempt": 4,
+  "status": "GENERATED",
+  "authorized_to_dispatch": false,
+  "qc_waived": true,
+  "continuity_gate": "WAIVED",
+  "still_approval": "DO_NOT_WAIT",
+  "image_prompt": "Create one full-bleed portrait 9:16 frame from a premium dimensional storybook Kerala Christian church wedding invitation film, solely from this written description. Soft romantic late-2000s South Indian cinema mood with dreamy natural light and intimate coastal Kerala atmosphere. Cream-white Portuguese-influenced plaster with laterite accents; ivory, pearl, soft powder-blue and champagne-gold accents. One warm soft sunrise from camera-left throughout, gentle amber-cream bloom with readable highlight detail, long soft diagonal shadows and cool teal shade. White jasmine, soft pink roses, baby's breath, green foliage, soft candle stands, polished cream stone with warm directional reflections. No photographic humans, no watermark, no interface, no frame. Render only the exact text requested for this image. Materials and lighting stay consistent between an aerial view and a close view of the same church compound.\n\nONE white Kerala Catholic church compound with ONE modest cream-white bell tower topped by a simple cross at the far end of its central axis, near Alappuzha backwaters haze and coconut palms. In front of it is ONE much smaller freestanding open arched porch vestibule, with four cream plaster corner columns, a shallow tiled roof, soft floral scallops of white jasmine and pale pink roses, and three shallow front steps. All four sides of the porch are OPEN BETWEEN THE ARCHES, including the rear: clear daylight and the distant bell tower are visible through the rear gaps from a frontal low viewpoint. There is no masonry rear wall, inner sanctuary box, door panel, nested doorway, or second shrine inside. No floral cross. There is no pedestal, no white stage, and no plinth. Two soft candle stands remain, and the devotional lettering fills the full open interior between them. Keep the roof, corner columns, steps and rear opening physically consistent. The bell tower remains outside beyond the rear arches. The open left side connects directly to the adjacent invitation courtyard bay.\n\nSHOT: Eye-level camera inside the SAME small open arched porch vestibule, facing the open interior and the distant bell tower. No floral cross. beyond the open rear side. Two front columns frame the extreme edges, rear columns are visible farther away, and a shallow roof with floral beam sits overhead. Daylight remains visible on both sides of the lettering, continuing uninterrupted into the exterior courtyard behind it. No white stage, no square pedestal, no plinth. No solid backdrop or inner doorway. The five lines of devotional lettering fill the full open interior, stacked with clear gaps, occupying most of the height between the roof beam and the steps. In place of any floral cross, a LARGE five-line floating blessing title fills the open interior from near the roof beam down through the floor space where the pedestal used to be, and reads exactly 'For I know the plans i have for you , declares the lord,' / 'plan to give you hope ,' / 'and a future' / 'for starting your new journey' / '- JEREMIAH 29:11'. Exquisite ornate display lettering with graceful curved serifs, a gently arched first line, elegant varied stroke widths and modest flourishes. The title spans approximately 65-70 percent of frame width, stacked through the open interior, not sitting on any stage. No floral cross anywhere. These are freestanding dimensional letters suspended in the open air, with luminous champagne-gold faces, antique-gold beveled edges, subtle warm halos and tiny bright edge glints. Rich gold, not brown engraving. No rectangular nameplate, printed wall text or letters attached to plaster. Readable counters and gaps between words, full title inside the frame. Soft sunrise strikes the letters obliquely and reflects softly in the polished cream stone. Abundant individual white jasmine and soft pink rose petals in three depths: softly defocused small near-lens petals at the edges, sharp rotating midground petals and tiny background petals. Keep all lettering unobscured. No floral cross anywhere in the frame. A few delicate soft candle wisps originate ONLY at a visible low candle stand; the title emits no smoke. Leave the left-side exit open and visible. TEXT READABILITY: the church, palms and courtyard behind the lettering are softly blurred, and a slight translucent white fade sits only behind the stacked blessing lines so the gold type stays sharp and easy to read. Do not blur the lettering.",
+  "image_prompt_sha256": "3c710db86dd5c837949bafa5e1eccbc201daef26646d58c00f2dcd11b8a78903",
+  "template_sha256": "e238424b6502c34bfba380617ea1dc1a8d49b6b1f14401b7740e84812f3a92eb",
+  "prompt_policy": "verbatim resolved image_prompt from template.json. Do not rewrite. Do not use image_prompt_template.",
+  "output_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/assets/output/kerala-christian-v1/image-2.jpg",
+  "overwrite_live_still": true,
+  "prior_live_sha256_do_not_keep": "0bd13d640bcbb86e207d98c46aa94f787198144810b48c0ad131a9d29345caf0",
+  "do_not_overwrite": [
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/assets/output/kerala-christian-v1/archive-delivered-20261003/image-2.jpg",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/assets/output/kerala-christian-v1/image-2-attempt1.jpg",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/assets/output/kerala-christian-v1/image-2-attempt2.jpg",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/assets/output/kerala-christian-v1/image-2-attempt3.jpg"
+  ],
+  "video": "HELD until both scene-02 attempt 4 and scene-08 attempt 2 are on disk",
+  "scope": "Copy change already resolved in image_prompt: new journey, not nee journey. Overwrite image-2.jpg. Do not touch attempt1, attempt2, attempt3, or the archive.",
+  "auth": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/ORCHESTRATOR_CORRECTION_REGEN.json",
+  "dispatched_at": "2026-10-03T23:38:31+05:30",
+  "generation": "text-only",
+  "aspect": "9:16",
+  "width": 720,
+  "height": 1280,
+  "model": {
+    "credentials_env": "REPLICATE_API_TOKEN",
+    "id": "openai/gpt-image-2.5-flare",
+    "provider": "replicate"
+  },
+  "context_isolation": {
+    "includes_full_template": false,
+    "rule": "Image agents must not receive full template.json. This packet is the only prompt."
+  },
+  "generation_id": "vxxx9ebpe1rmy0d10bttpfqw30",
+  "output_sha256": "1c72f2a594a469d52f12e7cf38de4ac2017e9636b74a1b82d7fc6207a8e97ad3"
+}

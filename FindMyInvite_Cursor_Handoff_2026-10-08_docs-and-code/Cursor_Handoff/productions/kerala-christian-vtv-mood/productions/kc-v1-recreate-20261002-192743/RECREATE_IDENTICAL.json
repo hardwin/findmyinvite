@@ -1,0 +1,14 @@
+{
+  "mode": "RECREATE_IDENTICAL",
+  "template_name": "kerala-christian-v1",
+  "template_folder": "kerala-christian-vtv-mood",
+  "source_template": "/workspace/fmi-productions/kerala-christian-vtv-mood/template.json",
+  "source_production_id": "kc-v1-20261001-230532",
+  "new_production_id": "kc-v1-recreate-20261002-192743",
+  "template_sha256": "bad0d176beb1ad47e3942689f95c4153fb933f3547670a255bb7fc062f46dae4",
+  "prompt_policy": "NEVER_CHANGE_PROMPTS \u2014 byte-identical template copy; same Alex & Anna parameters",
+  "assets_root": "assets/output/kerala-christian-v1",
+  "preserve_prior": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532",
+  "hold_other": "nandini-karthik-remake stays HELD",
+  "requested_by": "Ashok via Video Director 2026-10-02"
+}

@@ -1,0 +1,28 @@
+{
+  "job_type": "VIDEO_QC",
+  "job_id": "VIDEO_QC_clip-01-regen-order-v2",
+  "production_id": "kc-v1-20261001-230532",
+  "clip_id": "clip-01",
+  "attempt": 1,
+  "order": "V2",
+  "regen": true,
+  "clip_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1.mp4",
+  "first_frame_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-1.jpg",
+  "last_frame_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1-handoff.jpg",
+  "locked_last_frame": true,
+  "pending_handoff_extract": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1-handoff.order-v2.pending.jpg",
+  "do_not_overwrite_locked_handoff": true,
+  "generation_id": "d8ddc43b-7531-9aa7-8be1-e15b8b30bdc2",
+  "sha256": "7127dfed67ddb5898db5886d57984f599e7636f795f696ebd91887cf2726e1d2",
+  "judge_focus": [
+    "opening_energy: cinematic drone / wedding-estate flight",
+    "first-frame match to APPROVED image-1.jpg",
+    "last-frame land on locked clip-1-handoff.jpg (With God's Grace / We Invite You)",
+    "no morph/crossfade soup as primary move",
+    "ONE bell tower; soft architecture family within handoff world"
+  ],
+  "max_paid_attempts": 2,
+  "attempt_used": 1,
+  "status_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/logs/video_jobs/VID-clip-01-regen.order-v2.status.json",
+  "staged_at": "2026-10-02T00:17:17.944990+05:30"
+}

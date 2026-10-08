@@ -1,0 +1,38 @@
+{
+  "document": "CONTINUITY_VETO",
+  "production_id": "nk-v1-20261002-072013",
+  "batch": "stills-v6",
+  "scene_id": "scene-02",
+  "job": "IMG-v6-scene-02",
+  "asset_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v6/scene-02.jpg",
+  "sha256": "1732ebbb5d7c58ea7640e8290f0c3e5baa251c6c7992f994d5d18d4ee0bcd004",
+  "attempt": 1,
+  "visual_qc": "WAIVED_BY_ORCHESTRATOR_AGENT_UNAVAILABLE",
+  "spatial_map_version": "spatial-v9",
+  "maze_path_slot": "B central_colonnade_courtyard",
+  "decision": "LOCK",
+  "continuity_bible": "/workspace/fmi-productions/nandini-karthik-remake/continuity/CONTINUITY_BIBLE.json",
+  "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/IMAGE_JOB/scene-02.v6.json",
+  "judged_at": "2026-10-02T10:59:11+05:30",
+  "judge": "Continuity Director",
+  "scope": "architecture/materials (empty)",
+  "expected": {
+    "room": "B",
+    "facet": "central_colonnade_courtyard",
+    "couple": false,
+    "text": false,
+    "locks": [
+      "courtyard fountain",
+      "colonnade",
+      "distinct from A/C"
+    ]
+  },
+  "observed": {
+    "architecture": "cream carved colonnade with central lotus fountain; brass urulis+nilavilakku; polished floor",
+    "people": 0,
+    "text": false,
+    "lake_gopuram_hero": false
+  },
+  "violations": [],
+  "rationale": "Room B courtyard+fountain holds materials lock; empty; distinct from A; no lake-gopuram hero."
+}

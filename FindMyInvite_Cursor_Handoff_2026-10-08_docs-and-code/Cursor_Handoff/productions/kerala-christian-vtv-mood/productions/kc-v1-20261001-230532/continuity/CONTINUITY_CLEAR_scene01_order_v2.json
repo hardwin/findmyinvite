@@ -1,0 +1,11 @@
+{
+  "status": "CLEAR",
+  "continuity_decision": "LOCK",
+  "scene_id": "scene-01",
+  "job_id": "IMG-scene-01-order-v2",
+  "attempt": 2,
+  "order": "V2",
+  "packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/continuity_veto/scene-01.order-v2.json",
+  "decided_at": "2026-10-02T00:14:15.677135+05:30",
+  "next": "Orchestrator APPROVED then GO VID-clip-01-regen (first=image-1.jpg, last=clip-1-handoff.jpg)"
+}

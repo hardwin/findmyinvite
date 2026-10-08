@@ -1,0 +1,31 @@
+{
+  "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-1.jpg",
+  "job_id": "IMG-scene-01-order-v2",
+  "scene_id": "scene-01",
+  "decision": "PASS",
+  "rationale": "720×1280 attempt-2. Elevated drone opening_energy OK. Same-world spatial fix holds vs clip-1-handoff: open floral pavilion is distinct; church + ONE bell tower sit beyond open rear toward water (not porch glued as facade). Counts: tower=1, porch=1, floral cross+twin candles. No text. Continuity LOCK already noted.",
+  "violations": [],
+  "retry_instruction": null,
+  "attempt": 2,
+  "final_paid_attempt": true,
+  "order": "V2",
+  "generation_id": "3j976cpva9rmy0d0z33agwb1f4",
+  "sha256": "e220fa48eeb0911325222d18260200361c23036f119dca591509d1aaf7b6290c",
+  "reference_sha256": "dc477c78c015a1fb7fabbd6c5519fab51d430e65d93f777866274cc5c1fcde61",
+  "technical": {
+    "w": 720,
+    "h": 1280,
+    "ok": true
+  },
+  "checks": {
+    "same_world_spatial": "PASS",
+    "opening_energy": "PASS",
+    "bell_tower": 1,
+    "porch_vestibule": 1,
+    "floral_cross_pedestal": 1,
+    "text_boards": 0
+  },
+  "continuity_lock": true,
+  "decided_at": "2026-10-02T00:15:52.055162+05:30",
+  "qc_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/ORCHESTRATOR_GO_QC_IMAGE_SCENE01_ORDER_V2_ATTEMPT2.json"
+}

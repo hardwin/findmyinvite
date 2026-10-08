@@ -1,0 +1,120 @@
+{
+  "packet_type": "ASSEMBLY_VERIFICATION_RECEIPT",
+  "production_id": "kc-v1-recreate-20261002-192743",
+  "written_by": "Assembly Editor",
+  "written_at": "2026-10-02T20:09:04+05:30",
+  "status": "VERIFIED",
+  "source": "VIDEO_DIRECTOR_CLIPS_COMPLETE \u2014 final already concatenated by Video Director; Assembly verified only (no re-concat)",
+  "rules_applied": {
+    "hard_cut": true,
+    "no_crossfade": true,
+    "silent": true,
+    "order": "clip-1\u2026clip-11",
+    "geometry": "720x1280@24"
+  },
+  "clips": [
+    {
+      "clip": "clip-01",
+      "sha_match": true,
+      "w": 720,
+      "h": 1280,
+      "fps": "24/1",
+      "ok": true
+    },
+    {
+      "clip": "clip-02",
+      "sha_match": true,
+      "w": 720,
+      "h": 1280,
+      "fps": "24/1",
+      "ok": true
+    },
+    {
+      "clip": "clip-03",
+      "sha_match": true,
+      "w": 720,
+      "h": 1280,
+      "fps": "24/1",
+      "ok": true
+    },
+    {
+      "clip": "clip-04",
+      "sha_match": true,
+      "w": 720,
+      "h": 1280,
+      "fps": "24/1",
+      "ok": true
+    },
+    {
+      "clip": "clip-05",
+      "sha_match": true,
+      "w": 720,
+      "h": 1280,
+      "fps": "24/1",
+      "ok": true
+    },
+    {
+      "clip": "clip-06",
+      "sha_match": true,
+      "w": 720,
+      "h": 1280,
+      "fps": "24/1",
+      "ok": true
+    },
+    {
+      "clip": "clip-07",
+      "sha_match": true,
+      "w": 720,
+      "h": 1280,
+      "fps": "24/1",
+      "ok": true
+    },
+    {
+      "clip": "clip-08",
+      "sha_match": true,
+      "w": 720,
+      "h": 1280,
+      "fps": "24/1",
+      "ok": true
+    },
+    {
+      "clip": "clip-09",
+      "sha_match": true,
+      "w": 720,
+      "h": 1280,
+      "fps": "24/1",
+      "ok": true
+    },
+    {
+      "clip": "clip-10",
+      "sha_match": true,
+      "w": 720,
+      "h": 1280,
+      "fps": "24/1",
+      "ok": true
+    },
+    {
+      "clip": "clip-11",
+      "sha_match": true,
+      "w": 720,
+      "h": 1280,
+      "fps": "24/1",
+      "ok": true
+    }
+  ],
+  "mismatches": [],
+  "final": {
+    "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/kerala-christian-v1-final.mp4",
+    "sha256": "f5773316b737ed1b1be9219c09133547f61ff69ac157050b32864b12b30a7e1c",
+    "sha_match_packet": true,
+    "width": 720,
+    "height": 1280,
+    "fps": "24/1",
+    "codec": "h264",
+    "pix_fmt": "yuv420p",
+    "duration_seconds": 54.458333,
+    "audio_streams": 0,
+    "size_bytes": 49768319
+  },
+  "next": "Orchestrator owns next gate (Final QC / deliver). Assembly did not deliver to Ashok."
+}

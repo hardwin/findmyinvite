@@ -1,0 +1,38 @@
+{
+  "packet_type": "ORCHESTRATOR_DELIVERY",
+  "production_id": "kc-v1-recreate-20261003-071403",
+  "mode": "RECREATE_CLIENT_FILL",
+  "couple": "Theresa & Isaac",
+  "invitation_order": "bride-side",
+  "template_name": "The Wedding of Theresa & Isaac",
+  "delivered_at": "2026-10-03T10:00:33+05:30",
+  "status": "DELIVERED",
+  "qc_policy": "NO_QC_GENERATE_AND_STITCH",
+  "continuity_stills": "WAIVED",
+  "continuity_clips": "WAIVED",
+  "spatial_blueprint_16x9_status": "approved_by_ashok",
+  "spatial_map_version": "spatial-v1",
+  "template_sha256": "25e89072ce2f2d6c8f94b99183b5656c10c99b6bdb8b6555cbe01b6ac18b032e",
+  "scene_02_status": "approved_by_ashok",
+  "scene_02_attempt": 3,
+  "scene_02_sha256": "0bd13d640bcbb86e207d98c46aa94f787198144810b48c0ad131a9d29345caf0",
+  "asset_producer_ack": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/ASSET_PRODUCER_DELIVERY_ACK.json",
+  "final": {
+    "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/assets/output/kerala-christian-v1/kerala-christian-v1-final.mp4",
+    "sha256": "a7d12db013138679c402fb3739271f6e96d9ffd7e4bf3a89bd147cf80a420753",
+    "duration_seconds": 54.458333,
+    "resolution": "720x1280",
+    "codec": "h264",
+    "audio": null,
+    "size_bytes": 52875493,
+    "clip_count": 11
+  },
+  "assembly": "Asset Producer hard-cut silent stitch of clip-1 through clip-11. QC and Finish skipped.",
+  "verified_by_orchestrator": true,
+  "preserve": [
+    "kc-v1-recreate-20261003-003016",
+    "kc-v1-recreate-20261002-192743",
+    "kc-v1-20261001-230532",
+    "nk-v1 HELD"
+  ]
+}

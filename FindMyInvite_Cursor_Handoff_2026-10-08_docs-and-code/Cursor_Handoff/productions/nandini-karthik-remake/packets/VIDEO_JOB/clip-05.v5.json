@@ -1,0 +1,112 @@
+{
+  "job_type": "VIDEO_JOB",
+  "job_id": "VID-v5-clip-05",
+  "production_id": "nk-v1-20261002-072013",
+  "batch": "clips-v5",
+  "clip_id": "clip-05",
+  "clip_index": 5,
+  "status": "GENERATED_QC_WAIVED",
+  "authorized_to_dispatch": false,
+  "spatial_map_version": "spatial-v2",
+  "stills_batch": "stills-v5",
+  "orchestrator_auth": "/workspace/fmi-productions/nandini-karthik-remake/packets/ORCHESTRATOR_STILLS_APPROVED_VIDEO_GO.json",
+  "from_scene": "scene-05",
+  "to_scene": "scene-06",
+  "from_facet": "stairs",
+  "to_facet": "stage_decorations",
+  "next_edge_move": "STRAIGHT onto stage, then slight LEFT orbit along stage edge toward photoshoot/pond",
+  "duration_sec": 4,
+  "aspect_ratio": "9:16",
+  "resolution": {
+    "width": 720,
+    "height": 1280
+  },
+  "fps": 24,
+  "first_frame_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/handoffs-v5/clip-04-handoff.jpg",
+  "first_frame_still_fallback": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5/scene-05.jpg",
+  "last_frame_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5/scene-06.jpg",
+  "first_frame_strategy": "previous-clip-final-decoded-frame",
+  "last_frame_strategy": "approved-still",
+  "first_frame_note": "After clip-04 APPROVED: use actual decoded handoff; fallback still scene-05.jpg only if Orchestrator waives",
+  "last_frame_note": "APPROVED stills-v5 scene-06.jpg as destination lock",
+  "camera_instruction": "STRAIGHT onto stage, then slight LEFT orbit along stage edge toward photoshoot/pond",
+  "offscreen_start": {
+    "L": "left aisle just left",
+    "R": "right aisle beyond stage apron",
+    "behind": "left aisle south",
+    "ahead": "stage_decorations"
+  },
+  "offscreen_end": {
+    "L": "deeper pond/garden",
+    "R": "right aisle",
+    "behind": "stairs / center aisle south",
+    "ahead": "floral rear wall"
+  },
+  "forbidden_reuse": [
+    "boat",
+    "bride bun",
+    "full invite stack (names only OK)",
+    "gopuram",
+    "misty lake behind couple",
+    "mountains",
+    "teleport camera into pond without stage edge",
+    "v4 lake-gopuram-boat-hills as dominant BG",
+    "walking"
+  ],
+  "continuity_rules": {
+    "bible": "/workspace/fmi-productions/nandini-karthik-remake/continuity/CONTINUITY_BIBLE.json",
+    "spatial_map": "/workspace/fmi-productions/nandini-karthik-remake/continuity/SPATIAL_MAP.json",
+    "blueprint": "/workspace/fmi-productions/nandini-karthik-remake/continuity/MANTAP_BLUEPRINT_TOPVIEW.png",
+    "wardrobe_lock": {
+      "authority": "spatial-v2 / ORCHESTRATOR_CONTINUITY_EXTRACT (NOT BRIEF-v2 red shirt)",
+      "applies_when": "couple visible (scene-05, scene-06)",
+      "groom": "maroon half-sleeve shirt + white gold-border veshti + sandals",
+      "bride": "rich green silk bridal saree; heavy gold jewellery (necklace layers, jhumkas, maang tikka, oddiyanam, bangles); long bridal hair with jasmine+roses — NOT a bun",
+      "pose": "Couple STANDING still in place, holding hands, looking at each other affectionately. Feet planted.",
+      "motion_rule": "STRICT: NO walking, NO stepping forward, NO stride. Camera moves around them — they do not walk.",
+      "veto_if": [
+        "groom red shirt or any non-maroon shirt",
+        "bride bun / short hair without long flowered length",
+        "couple walking / mid-stride",
+        "missing heavy gold bridal set on couple beats"
+      ]
+    },
+    "pose_lock": "Couple STANDS; camera moves around them",
+    "couple_stands_camera_moves": true,
+    "no_walking": true,
+    "maze_logic": "Continuous polyline through adjacent facets only. Allowed moves between beats: LEFT turn, RIGHT turn, or STRAIGHT along a connected edge. Forbidden: diagonal teleports across center aisle or skipping stairs to reach stage.",
+    "far_vista_lock": {
+      "hero_plate": "misty lake + temple gopuram + mountains + wooden boat",
+      "rule": "FORBIDDEN as dominant background on every beat. Allowed at most as a tiny distant corner peek in scene-06 only, never hero, never with readable gopuram. Prefer solid stage floral architecture instead."
+    },
+    "copy_locked": {
+      "scene-05": "Magenta cursive sky optional: Nandini ♡ Karthik only (no full invite stack)",
+      "scene-06": "Full stacked invite text (honor IMAGE_JOB packet exact copy — do not invent)",
+      "scene-01_to_04": "NO text"
+    }
+  },
+  "motion_prompt": "A single continuous physically motivated cinematic camera move through ONE tropical South Indian wedding mantap complex. World: pastel tropical elegance; cream carved stone; jasmine+lotus; banana leaves; brass urulis + nilavilakku; polished reflective floor; soft warm morning light; cinematic dimensional storybook 9:16. Use the supplied FIRST and LAST images as hard visual anchors. Solid architecture with real translation, occlusion, perspective and foreground parallax. Preserve identity, lighting, materials, wardrobe and exact final lettering when present. Never cut, crossfade, dissolve, morph faces/clothes mid-shot, or swap objects. Soft pink petals drift with depth. Keep motion continuous — no static holds. Far vista lock: FORBIDDEN as dominant background on every beat. Allowed at most as a tiny distant corner peek in scene-06 only, never hero, never with readable gopuram. Prefer solid stage floral architecture instead. Maze: Continuous polyline through adjacent facets only. Allowed moves between beats: LEFT turn, RIGHT turn, or STRAIGHT along a connected edge. Forbidden: diagonal teleports across center aisle or skipping stairs to reach stage. Couple NEVER walks — feet planted; camera moves. NO misty lake+gopuram+hills+boat as dominant background. PRIMARY ACTION: Continuous adjacent weave scene-05(stairs) → scene-06(stage_decorations). Move: STRAIGHT onto stage, then slight LEFT orbit along stage edge toward photoshoot/pond. Start camera: {\"framing\": \"on stairs looking up to stage\", \"bias\": \"centered on stair climb\", \"height\": \"low-mid on steps\", \"look\": \"up to stage platform; couple STANDING on stage ahead\", \"lens_feel\": \"medium-wide\"}. Arrive camera: {\"framing\": \"on stage, slight LEFT of couple / orbit\", \"bias\": \"LEFT of couple toward photoshoot niche\", \"height\": \"eye to slight crane\", \"look\": \"couple + photoshoot niche and decorated pond rim as adjacent LEFT neighbors (connected edges, not teleport)\", \"lens_feel\": \"wider establish\"}. Reveal offscreen ahead from start: stage_decorations. Do not teleport; stay on connected edge only. FORBIDDEN throughout: boat, bride bun, full invite stack (names only OK), gopuram, misty lake behind couple, mountains, teleport camera into pond without stage edge, v4 lake-gopuram-boat-hills as dominant BG, walking. Wardrobe lock: groom=maroon half-sleeve shirt + white gold-border veshti + sandals; bride=rich green silk bridal saree; heavy gold jewellery (necklace layers, jhumkas, maang tikka, oddiyanam, bangles); long bridal hair with jasmine+roses — NOT a bun. Pose: Couple STANDING still in place, holding hands, looking at each other affectionately. Feet planted.. STRICT: NO walking, NO stepping forward, NO stride. Camera moves around them — they do not walk.",
+  "output_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/clips-v5/clip-05.mp4",
+  "handoff_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/handoffs-v5/clip-05-handoff.jpg",
+  "depends_on": "VID-v5-clip-04",
+  "max_paid_attempts": 1,
+  "attempt": 1,
+  "created_at": "2026-10-02T08:49:19.895823+05:30",
+  "updated_at": "2026-10-02T09:25:22.048399+05:30",
+  "user_stop": false,
+  "user_stop_packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/ASSET_PRODUCER_VIDEO_USER_STOP.json",
+  "status_before_user_stop": "HELD_PENDING_PREVIOUS_HANDOFF",
+  "hold_reason": null,
+  "ashok_direct": "Generate remaining clips + stitch; skip QC",
+  "qc_waived": true,
+  "skip_visual_qc": true,
+  "no_retries": true,
+  "override": "/workspace/fmi-productions/nandini-karthik-remake/packets/ORCHESTRATOR_OVERRIDE_QC_WAIVE_VID_v5.json",
+  "chain_note": "Generate only after previous clip handoff is written. No QC stop. No retries.",
+  "next_attempt": 1,
+  "result": {
+    "sha256": "1f995ccbd82a2b6325e982cbeb1e60fcf31bfd638482322ca9804e2648da5679",
+    "request_id": "90c57d91-07cf-9f05-a38b-fedd752c8fe9",
+    "finished": "2026-10-02T09:24:15.181193+05:30"
+  }
+}

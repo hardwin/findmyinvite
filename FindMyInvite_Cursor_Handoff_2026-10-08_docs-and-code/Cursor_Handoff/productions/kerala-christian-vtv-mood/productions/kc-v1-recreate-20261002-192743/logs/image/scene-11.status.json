@@ -1,0 +1,22 @@
+{
+  "ts_local": "2026-10-02T19:35:07+0530",
+  "job_id": "IMG-scene-11",
+  "scene_id": "scene-11",
+  "scene_index": 11,
+  "status": "GENERATED",
+  "attempt": 1,
+  "generation_id": "tchqm4mf4xrmw0d0zkqb6nwtd0",
+  "prompt_sha256": "25e2a6f542756c85a60e132de31af1c433b1c82a526c1936ac7b5384553563d8",
+  "output_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/image-11.jpg",
+  "output_url": "https://replicate.delivery/xezq/EmGerRui4fgDJEIKMkZH4cMFGZmWS17X1a7muh700pITwWTXA/tmptp32kxji.jpeg",
+  "size_bytes": 246648,
+  "sha256": "31a7990dafe68c388ed8da3b5cbc6b4fc7b6f8c70bcfc1cf8811f6559823f17e",
+  "width": 720,
+  "height": 1280,
+  "error": null,
+  "model": "openai/gpt-image-2.5-flare",
+  "provider": "replicate",
+  "skip_spatial": true,
+  "generation": "text-only",
+  "technical_retries": 0
+}

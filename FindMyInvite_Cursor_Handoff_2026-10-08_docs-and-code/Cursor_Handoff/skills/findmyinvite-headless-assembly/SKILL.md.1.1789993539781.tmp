@@ -1,0 +1,60 @@
+---
+name: FindMyInvite headless Assembly
+description: >-
+  use this when running FindMyInvite Assembly from chat without the /assembly UI
+  — clone a Premium parent, stage opening/hero, assemble, preview, and hand off
+  Publish
+---
+# FindMyInvite headless Assembly
+
+## When to use
+Ashok wants Assembly **without** opening https://findmyinvite.com/assembly. Drive the pipeline from Grok Bot chat (and the Assembly Board channel).
+
+## Repo
+https://github.com/hardwin/findmyinvite · `main`
+
+## Canonical docs (git)
+- `documents/assembly-publish.md` — assemble → preview → **Publish**
+- `documents/prod-push.md` — push lane (ask twice, never force-push)
+
+## Default parent (standing)
+Always use **`royal-heritage-7`** (Traditional Anime South) unless Ashok overrides for a specific run.
+
+## Roles
+- **Assembly** (coordinator in chat) — take Ashok’s ask, assign Runner / Publisher, report results
+- **Assembly Runner** — local/cloud checkout work: inbox, ffmpeg, `assemblePremium` / `npm run assemble:premium`, dry-run then real assemble
+- **Assembly Publisher** — only after Ashok says **Publish**: apply `supabase/013_assembly_*.sql` to prod `qqvcptjkfcjkwbkookcm`, commit assembly outputs, ask twice, push `main`, verify live demo + Premium tab
+
+## Rules
+1. Parent templates are **read-only**. Opening/hero apply only to the new clone.
+2. Real FS writes need a machine where `fsWritesAllowed()` is true (not Vercel). Prefer CloudAgent on the repo or a machine with ffmpeg + checkout. Set `ASSEMBLY_FS=1` only when appropriate.
+3. Never commit `work/assembly-inbox/*.mp4` or secrets (`.env.local`, service_role).
+4. Success after assemble = preview URL(s) + “tell Ashok / say Publish” — not a file-list dump.
+5. Do **not** Publish until Ashok explicitly says Publish.
+6. Ask twice before `git push` to `main`. Never force-push.
+7. AI generate (optional) needs local `OPENAI_API_KEY` + `REPLICATE_API_TOKEN`. Override model via `ASSEMBLY_PROMPT_MODEL`.
+
+## Headless happy path
+1. Parent defaults to `royal-heritage-7` (confirm override only if Ashok names another).
+2. Stage opening (+ optional hero) into `work/assembly-inbox/` (Ashok upload, URL, or AI generate).
+3. **Dry-run** assemble → show plan (new clone id/name).
+4. **Real assemble** → return local preview `http://127.0.0.1:5173/invite/demo?template={id}` (or CloudAgent artifact/demo notes).
+5. Wait for Ashok preview OK + **Publish**.
+6. Publisher: apply SQL (`published=true`), commit expected files only, ask twice, push, verify `https://findmyinvite.com/invite/demo?template={id}` + Premium gallery.
+
+## Expected Publish commit files
+`public/assets/{id}.*`, `public/assets/catalogue/v1/...`, `src/data.ts`, `server/core.mjs`, `server/share-card.mjs`, `cms/templates.json`, `cms/seed-templates.sql`, `supabase/013_assembly_*.sql`
+
+## CLI cheat sheet
+```
+npm run assemble:premium
+node scripts/assemble-premium.mjs --list-parents
+node scripts/assemble-premium.mjs --list-inbox
+node scripts/assemble-premium.mjs --parent <id> --videos a.mp4,b.mp4 [--dry-run]
+```
+
+## Out of scope
+- Driving the gated web UI as the primary path
+- Auto-push from assemble
+- Writing the git tree from Vercel production
+- Asking Ashok to open the Supabase SQL editor

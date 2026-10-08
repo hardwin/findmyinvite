@@ -1,0 +1,49 @@
+{
+  "packet_type": "ORCHESTRATOR_GO_IMAGES",
+  "production_id": "icc-v1-20261005-234500",
+  "authorized_at": "2026-10-05T23:46:00+05:30",
+  "source": "Ashok via FMI ReCreate (verified transcript ~23:35-23:44 IST): Wedding_template_Islam_Cristian_Church stills first, no QC/continuity/spatial, then HOLD video",
+  "template": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/template.json",
+  "template_sha256": "3a722bd2dc87b669445c7b20411b00886a1a96ab787c448d4f1dcb6ec748d42f",
+  "mode": "NO_QC_GENERATE_AND_STITCH",
+  "spatial": "WAIVED_BY_ASHOK",
+  "continuity": "WAIVED_BY_ASHOK",
+  "jobs": [
+    "scene-01",
+    "scene-02",
+    "scene-03",
+    "scene-04",
+    "scene-05",
+    "scene-06",
+    "scene-07",
+    "scene-08",
+    "scene-09"
+  ],
+  "pipeline": {
+    "model": "openai/gpt-image-2.5-flare",
+    "mode": "text-only",
+    "aspect_ratio": "9:16",
+    "quality": "high",
+    "pad_to": "720x1280",
+    "output_dir": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/assets/output",
+    "filenames": [
+      "image-1.jpg",
+      "image-2.jpg",
+      "image-3.jpg",
+      "image-4.jpg",
+      "image-5.jpg",
+      "image-6.jpg",
+      "image-7.jpg",
+      "image-8.jpg",
+      "image-9.jpg"
+    ]
+  },
+  "prompt_rule": "scenes[N].image_prompt verbatim; no prompt edits",
+  "video": "HOLD until Ashok approves stills via ReCreate",
+  "do_not_touch": [
+    "Theresa & Isaac",
+    "nk-v1",
+    "mosque-courtyard",
+    "other Kerala Christian productions"
+  ]
+}

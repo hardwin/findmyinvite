@@ -1,0 +1,55 @@
+{
+  "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-2.jpg",
+  "job_id": "IMG-scene-02",
+  "scene_id": "scene-02",
+  "continuity_decision": "LOCK",
+  "qc_gate": "PASS",
+  "checks": [
+    {
+      "rule": "copy_devotional",
+      "expected": "With God's Grace / We Invite You",
+      "observed": "With God's Grace / We Invite You (freestanding champagne-gold)",
+      "ok": true
+    },
+    {
+      "rule": "object_count_floral_cross_pedestal",
+      "expected": 1,
+      "observed": 1,
+      "ok": true
+    },
+    {
+      "rule": "object_count_bell_tower_beyond",
+      "expected": 1,
+      "observed": 1,
+      "ok": true
+    },
+    {
+      "rule": "object_count_nameplates",
+      "expected": 0,
+      "observed": 0,
+      "ok": true
+    },
+    {
+      "rule": "architecture_open_rear",
+      "expected": "open porch all sides including rear; tower beyond",
+      "observed": "open framed porch looking through to tower",
+      "ok": true
+    },
+    {
+      "rule": "lighting_day",
+      "expected": "sunrise camera-left",
+      "observed": "sun far left",
+      "ok": true
+    },
+    {
+      "rule": "typography",
+      "expected": "freestanding dimensional gold — not wall plaque",
+      "observed": "floating dimensional gold letters",
+      "ok": true
+    }
+  ],
+  "violations": [],
+  "note": "LOCK after Visual QC PASS. Unblocks clip-01 with scene-01.",
+  "decided_at": "2026-10-01T23:13:13.251743+05:30",
+  "attempt": 1
+}

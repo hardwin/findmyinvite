@@ -1,0 +1,45 @@
+{
+  "document": "CONTINUITY_VETO",
+  "production_id": "nk-v1-20261002-072013",
+  "batch": "stills-v5",
+  "scene_id": "scene-06",
+  "job": "IMG-v5-scene-06",
+  "asset_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5/scene-06.jpg",
+  "sha256": "2579d519dfbab7638e9340ed876cfa4b3116cd98c228366aea26fa21a332f43f",
+  "generation_id": "njs21ry3r5rmr0d0zacsfjpfr0",
+  "attempt": 2,
+  "visual_qc": "PASS",
+  "qc_file": "/workspace/fmi-productions/nandini-karthik-remake/logs/image_jobs/QC_scene-06_stills-v5_attempt2.json",
+  "decision": "LOCK",
+  "scope": "wardrobe/identity/pose/copy + architecture",
+  "expected": {
+    "wardrobe": "maroon half-sleeve + white gold veshti; green silk bridal saree; heavy gold; long flowered hair NOT bun",
+    "pose": "STANDING holding hands",
+    "copy": "Nandini ♡ Karthik / Two hearts… / 22nd February 2027 / 9:30 AM onwards / ITC Grand Chola / Chennai, Tamil Nadu / JOIN US…",
+    "bg": "stage floral architecture; pond rim OK; no lake-gopuram hero"
+  },
+  "observed": {
+    "groom": "maroon short-sleeve + white gold-border veshti; standing",
+    "bride": "green silk saree + heavy gold; long jasmine braid — not bun",
+    "pose": "STANDING holding hands; looking at each other",
+    "copy_facts": [
+      "Nandini ♡ Karthik",
+      "Two hearts, one beautiful beginning",
+      "22nd February 2027",
+      "9:30 AM onwards",
+      "ITC Grand Chola",
+      "Chennai, Tamil Nadu",
+      "JOIN US as we begin our forever."
+    ],
+    "architecture": "cream stage/stairs; floral wall; banana leaves; lotus pond LEFT; soft alcove LEFT",
+    "lake_gopuram_hero": false
+  },
+  "violations": [],
+  "soft_notes": [
+    "Photoshoot niche LEFT softer than attempt-1 — Spatial may note; Continuity does not VETO (wardrobe/copy/identity clear)."
+  ],
+  "rationale": "Wardrobe_lock MATCH. Invite stack facts MATCH locked BRIEF/IMAGE_JOB. STANDING. Architecture hero not lake plate.",
+  "continuity_bible": "/workspace/fmi-productions/nandini-karthik-remake/continuity/CONTINUITY_BIBLE.json",
+  "judged_at": "2026-10-02T08:44:32+05:30",
+  "judge": "Continuity Director"
+}

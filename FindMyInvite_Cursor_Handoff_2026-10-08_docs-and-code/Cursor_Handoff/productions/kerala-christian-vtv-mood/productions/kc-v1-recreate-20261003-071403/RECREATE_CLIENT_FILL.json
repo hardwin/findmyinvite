@@ -1,0 +1,31 @@
+{
+  "mode": "RECREATE_CLIENT_FILL",
+  "template_name": "kerala-christian-v1",
+  "couple": "Theresa & Isaac",
+  "production_id": "kc-v1-recreate-20261003-071403",
+  "template_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/template.json",
+  "template_sha256": "38dd6564a6dbc8ff4545b875bb41dcc984c6afa4b0f6bc6d8aca20a2f1fb0577",
+  "source_template_sha256": "bad0d176beb1ad47e3942689f95c4153fb933f3547670a255bb7fc062f46dae4",
+  "customisations": [
+    "bride-side: invitation Theresa & Isaac; bride portrait is scene-04, groom is scene-05; clip-03 reveals bride, clip-04 reveals groom",
+    "clip-01 / scene-02: floral cross removed; devotional verse fills that space",
+    "save_date_inline corrected from leftover 14 & 15 February 2025 to 17th October 2026"
+  ],
+  "parameters": {
+    "invitation_lines": "The Wedding of\nTheresa & Isaac",
+    "groom_title": "Mr.",
+    "groom_name": "Isaac Michael Thomas",
+    "bride_title": "Ms.",
+    "bride_name": "M Theresa Luies",
+    "family_lines": "With the Blessings of\nBride’s Parents\nMr. Mario Luies\n& Mrs. Helen Mary\nGroom’s parents\nGregory Thomas and Sandra Thomas",
+    "ceremony_lines": "Holy Matrimony\n17th October 2026\n3:00 pm.",
+    "venue_lines": "Wedding Venue\nOur lady of good health church  Khairatabad",
+    "reception_lines": "Reception - Dinner\n17th October 2026\n7:00 p.m. onwards\nKhaja mansion banjarahills road no 1",
+    "host_lines": "Invited By\nSai and Sandra\nRichard and Vasantha\nBaby Venessa and Vernon",
+    "save_date_lines": "SAVE THE DATE\n17th October",
+    "save_date_inline": "SAVE THE DATE / 17th October / 2026",
+    "devotional_line_1": "For I know the plans i have for you , declares the lord,",
+    "devotional_line_2": "plan to give you hope and a future for starting your nee journey - JEREMIAH 29:11"
+  },
+  "problems": []
+}

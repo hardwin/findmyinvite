@@ -1,0 +1,15 @@
+{
+  "packet_type": "VIDEO_DIRECTOR_DELIVERY",
+  "production_id": "kc-v1-recreate-20261003-003016",
+  "couple": "Swaroop & Smiley",
+  "status": "CLIPS_COMPLETE_STITCHED",
+  "qc_policy": "NO_QC_GENERATE_AND_STITCH",
+  "clip_count": 11,
+  "final_mp4": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/assets/output/kerala-christian-v1/kerala-christian-v1-final.mp4",
+  "final_mp4_sha256": "d5f8bb2a51d33614440f7ce973222c0cd490070967b7b389ac45ca4ed6e42ce8",
+  "final_dl_mp4": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/assets/output/kerala-christian-v1/kerala-christian-v1-final-dl.mp4",
+  "final_dl_mp4_sha256": "7aa776a515c114a5787e652bbaa06a20a092d966ea4b69a409e855ff976287c3",
+  "duration_s": 54.458333,
+  "complete_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/packets/VIDEO_DIRECTOR_CLIPS_COMPLETE.json",
+  "delivered_at": "2026-10-03T01:10:09.169873+05:30"
+}

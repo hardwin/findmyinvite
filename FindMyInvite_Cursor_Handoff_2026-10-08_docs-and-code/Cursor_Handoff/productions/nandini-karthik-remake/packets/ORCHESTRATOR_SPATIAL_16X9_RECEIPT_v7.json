@@ -1,0 +1,14 @@
+{
+  "packet_type": "ORCHESTRATOR_SPATIAL_16X9_RECEIPT",
+  "version": "v7",
+  "production_id": "nk-v1-20261002-072013",
+  "received_at": "2026-10-02T10:05:26+05:30",
+  "spatial_blueprint_16x9_status": "awaiting_ashok_approval",
+  "approve_artifact": "/workspace/fmi-productions/nandini-karthik-remake/continuity/SPATIAL_MAZE_MAP_16x9_v7.jpg",
+  "sha256": "63b77fd20fe1b8f6a971878db6403da848ba5960e437bf60c2812d955704bb1f",
+  "spatial_map_version": "spatial-v7",
+  "path": "S1>S2>S3>S4>S5>S6",
+  "delivery_packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/SPATIAL_16X9_BLUEPRINT_DELIVERY_v7.json",
+  "image_jobs_authorized": false,
+  "video_jobs_authorized": false
+}

@@ -1,0 +1,31 @@
+{
+  "document": "VISUAL_QC",
+  "production_id": "nk-v1-20261002-072013",
+  "batch": "stills-v5",
+  "job": "IMG-v5-scene-04",
+  "scene_id": "scene-04",
+  "facet_expected": "left_side_aisle",
+  "asset_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5/scene-04.jpg",
+  "sha256": "cf73aa9adcb54996e11b0fdfc3c036b62c4349c61147a9461b747ee7be8b29b8",
+  "generation_id": "cm6vtbkmenrmw0d0zabtc5mq40",
+  "prompt_hash": "aa5ec90a37e6d738f2d6208d453201dd8a10b2c97112fc0e6b99f1304ff579ad",
+  "attempt": 1,
+  "decision": "PASS",
+  "rationale": "Same left aisle continuing north: pillars, urulis, banana leaves, polished floor; stairs mouth / landing ahead with distant floral architecture \u2014 empty aisle, not teleported onto stage center. No lake/gopuram, no couple, no text.",
+  "violations": [],
+  "checks_passed": [
+    "facet left_side_aisle continuous to stairs mouth",
+    "no teleport onto stage center with couple",
+    "no lake/gopuram dominant BG",
+    "no couple",
+    "no text"
+  ],
+  "soft_notes": [
+    "Distant floral wall at stairs end is acceptable as stairs-mouth geography; Continuity may flag if it reads as stage-center teleport vs aisle approach."
+  ],
+  "retry_instruction": null,
+  "spatial_map_version": "spatial-v2",
+  "judged_at": "2026-10-02T08:41:37+05:30",
+  "judge": "Visual QC Supervisor",
+  "handoff": "Continuity LOCK/VETO"
+}

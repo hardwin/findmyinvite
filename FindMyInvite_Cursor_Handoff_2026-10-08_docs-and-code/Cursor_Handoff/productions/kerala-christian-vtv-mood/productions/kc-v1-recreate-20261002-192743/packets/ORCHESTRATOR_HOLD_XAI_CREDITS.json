@@ -1,0 +1,33 @@
+{
+  "packet_type": "ORCHESTRATOR_HOLD_XAI_CREDITS",
+  "production_id": "kc-v1-recreate-20261002-192743",
+  "held_at": "2026-10-02T19:48:52+05:30",
+  "status": "LIFTED",
+  "job": "VID-clip-01",
+  "attempt": 2,
+  "blocker": "XAI file upload 403 \u2014 team credits / monthly spending limit exhausted",
+  "video_director_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/VIDEO_DIRECTOR_CLIP01_ATTEMPT2_BLOCKED.json",
+  "retry_auth_still_valid": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/ORCHESTRATOR_RETRY_clip-01_attempt2.json",
+  "action_required": "Ashok restore XAI credits or raise monthly spending limit, then Orchestrator re-cue Video Director to run a2 (auth already on file)",
+  "held": [
+    "clip-01-a2",
+    "clip-02",
+    "clip-03",
+    "clip-04",
+    "clip-05",
+    "clip-06",
+    "clip-07",
+    "clip-08",
+    "clip-09",
+    "clip-10",
+    "clip-11"
+  ],
+  "a1_archived": true,
+  "live_clip_cleared": true,
+  "do_not_retry_until": "credits_restored_confirmed_by_ashok",
+  "lifted_at": "2026-10-02T19:52:47+05:30",
+  "lift_reason": "Ashok confirmed credits added",
+  "recue": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/ORCHESTRATOR_RECUE_CLIP01_A2.json",
+  "lifted_noted_by_ap_at": "2026-10-02T19:53:03+05:30",
+  "ap_recue": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/ASSET_PRODUCER_RECUE_CLIP01_A2.json"
+}

@@ -1,0 +1,8 @@
+submitted feef442f-80e6-969f-9e07-e1889403d851 dur 3
+  poll feef442f-80e6-969f-9e07-e1889403d851 status=pending
+  poll feef442f-80e6-969f-9e07-e1889403d851 status=pending
+  poll feef442f-80e6-969f-9e07-e1889403d851 status=pending
+  poll feef442f-80e6-969f-9e07-e1889403d851 status=pending
+  poll feef442f-80e6-969f-9e07-e1889403d851 status=pending
+  poll feef442f-80e6-969f-9e07-e1889403d851 status=done
+RESULT {"rid": "feef442f-80e6-969f-9e07-e1889403d851", "dur": 3, "probe": {"w": 720, "h": 1280, "fps": "24/1", "nb_frames": "73", "duration_s": 3.041667}}

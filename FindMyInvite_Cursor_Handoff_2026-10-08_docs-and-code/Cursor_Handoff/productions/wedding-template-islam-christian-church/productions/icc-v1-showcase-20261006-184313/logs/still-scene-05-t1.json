@@ -1,0 +1,14 @@
+{
+  "scene_id": "scene-05",
+  "take": 1,
+  "model": "openai/gpt-image-2.5-flare",
+  "input_images": [],
+  "text_only": true,
+  "template_sha256": "ba1205f0805985299418db9bf6e301c92cae30cfc967947cd8eb94bb5e520021",
+  "request_id": "wt3mhexdaxrmr0d125crn7x5b8",
+  "status": "GENERATED",
+  "recovered_after_interrupt": true,
+  "raw_sha256": "16f368664558a4427a55919dd0b96fc6c2628aed325bc3cc5457ab98ba1dfe80",
+  "sha256": "ad069dbbb6e28df34819528ed9891c2e0e915617b3433f3611009e5ed8449cac",
+  "finished_at": "2026-10-06T18:45:01.900421+05:30"
+}

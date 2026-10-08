@@ -1,0 +1,16 @@
+{
+  "scene": "scene-04",
+  "path": "/workspace/fmi-productions/mosque-courtyard-v1/productions/mc-v1-20261004-081300/assets/output/image-4.jpg",
+  "request_id": "0h1p36kgxxrmt0d10ket4nd3mg",
+  "status": "succeeded",
+  "success": true,
+  "sha256": "1ad151caa95a79011941e6f6b2bac2281abc04baab8dcf61a590d872591cc86c",
+  "bytes": 380872,
+  "width": 1152,
+  "height": 2048,
+  "prompt_sha256": "d0a7417c0314a07f2446f4df3abc44f3c0977b3e22c0c892b4e95066cb998ada",
+  "prompt_char_count": 3559,
+  "error": null,
+  "http_status": 201,
+  "polls": 0
+}

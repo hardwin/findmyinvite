@@ -1,0 +1,16 @@
+{
+  "packet_type": "ASSET_PRODUCER_HOLD_VIDEO",
+  "production_id": "kc-v1-recreate-20261003-003016",
+  "recorded_at": "2026-10-03T00:43:15+05:30",
+  "status": "VIDEO_HELD",
+  "video_jobs_authorized": false,
+  "reason": "IMAGE stills-v1 authorized only. VIDEO remains HELD until stills LOCK / Ashok stills GO / Orchestrator VIDEO authorize.",
+  "image_emit_receipt": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/packets/ASSET_PRODUCER_EMIT_IMAGES.json",
+  "batch": "stills-v1",
+  "spatial_map_version": "spatial-v1",
+  "orders": [
+    "Do NOT emit VIDEO_JOBs",
+    "Wait for Visual QC + Continuity stills pass + Ashok stills GO",
+    "Scene-12 is video-only continuation of facet K — no IMAGE_JOB"
+  ]
+}

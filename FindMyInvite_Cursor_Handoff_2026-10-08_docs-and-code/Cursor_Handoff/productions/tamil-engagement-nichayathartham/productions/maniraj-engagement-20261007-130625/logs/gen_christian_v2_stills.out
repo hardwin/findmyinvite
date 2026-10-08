@@ -1,0 +1,27 @@
+landed s02-blessing
+landed s03-invitation
+landed s01-aerial
+landed s05-bride
+landed s04-groom
+landed s06-families
+landed s07-matrimony
+landed s07b-ring-drop
+landed s08-venue
+landed s09-reception
+landed s10-hosts
+landed s11-save-date
+landed s12-forehead-touch
+s01-aerial GENERATED dtztm9k1tdrmr0d139v97jcby4 paid 1 tg 1049
+s02-blessing GENERATED qdks3bk1tnrmr0d139v88j2wjc paid 1 tg 1050
+s03-invitation GENERATED awh6ya31thrmw0d139v9st6j8r paid 1 tg 1051
+s04-groom GENERATED n47tk9d8jsrmt0d139v8xqq3dc paid 1 tg 1052
+s05-bride GENERATED 3jwtwadgvxrmt0d139vbs0ycz4 paid 1 tg 1053
+s06-families GENERATED f0swvkxv3xrmt0d139vby94q2w paid 1 tg 1054
+s07-matrimony GENERATED dkvbkt7p0srmr0d139v986e9q4 paid 1 tg 1055
+s07b-ring-drop GENERATED 04y4v37v6drmw0d139vby2bk10 paid 1 tg 1056
+s08-venue GENERATED nnxmqjg60nrmr0d139vt7qaarr paid 1 tg 1057
+s09-reception GENERATED s0xsdx1w71rmt0d139vtwnwqnm paid 1 tg 1058
+s10-hosts GENERATED 8sfr1x215nrmr0d139vvkg8x4g paid 1 tg 1059
+s11-save-date GENERATED fqbbzn2k49rmy0d139vs339e38 paid 1 tg 1060
+s12-forehead-touch GENERATED 31bw8n47yhrmt0d139vs1b1nd4 paid 1 tg 1061
+PAID_TOTAL 13  [{"scenes": ["s01-aerial", "s02-blessing", "s03-invitation", "s04-groom", "s05-bride", "s06-families", "s07-matrimony"], "http": 200, "ok": true, "message_ids": [1049, 1050, 1051, 1052, 1053, 1054, 1055], "error": null, "ts_local": "2026-10-08T13:13:46.669667+05:30"}, {"scenes": ["s07b-ring-drop", "s08-venue", "s09-reception", "s10-hosts", "s11-save-date", "s12-forehead-touch"], "http": 200, "ok": true, "message_ids": [1056, 1057, 1058, 1059, 1060, 1061], "error": null, "ts_local": "2026-10-08T13:13:49.527428+05:30"}]

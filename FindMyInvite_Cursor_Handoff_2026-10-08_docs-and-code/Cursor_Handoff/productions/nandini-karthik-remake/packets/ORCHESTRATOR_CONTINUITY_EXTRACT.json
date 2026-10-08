@@ -1,0 +1,46 @@
+{
+  "packet_type": "ORCHESTRATOR_CONTINUITY_EXTRACT",
+  "production_id": "nk-v1-20261002-072013",
+  "title": "Nandini \u2661 Karthik \u2014 tropical Sandesha-style remake",
+  "recorded_at": "2026-10-02T08:38:41+05:30",
+  "authority_notes": [
+    "SPATIAL_MAP spatial-v2 wardrobe_lock supersedes BRIEF-v2 red-shirt wardrobe",
+    "Far vista lake/gopuram/hills/boat forbidden as dominant background (Spatial Map)",
+    "Do not use full template.json; this extract + Spatial Map + Asset Producer packets only"
+  ],
+  "identity": {
+    "bride": "Nandini",
+    "groom": "Karthik"
+  },
+  "event": {
+    "date": "22nd February 2027",
+    "time": "9:30 AM onwards",
+    "venue": "ITC Grand Chola",
+    "city": "Chennai, Tamil Nadu"
+  },
+  "style": {
+    "notes": "pastel tropical elegance; dimensional cinematic storybook not flat 2D",
+    "palette_hint": "pastel pinks, soft greens, cream, beige, misty greys, warm diffused morning light",
+    "materials_hint": "carved cream-stone, polished floor, brass urulis, banana leaves, jasmine, lotus"
+  },
+  "wardrobe_lock": {
+    "applies_when": "couple visible (scene-05, scene-06)",
+    "groom": "maroon half-sleeve shirt + white gold-border veshti + sandals",
+    "bride": "rich green silk bridal saree; heavy gold jewellery (necklace layers, jhumkas, maang tikka, oddiyanam, bangles); long bridal hair with jasmine+roses \u2014 NOT a bun",
+    "pose": "Couple STANDING still in place, holding hands, looking at each other affectionately. Feet planted.",
+    "motion_rule": "STRICT: NO walking, NO stepping forward, NO stride. Camera moves around them \u2014 they do not walk."
+  },
+  "pose_lock": "Couple STANDS; camera moves around them",
+  "spatial_map_path": "/workspace/fmi-productions/nandini-karthik-remake/continuity/SPATIAL_MAP.json",
+  "blueprint_path": "/workspace/fmi-productions/nandini-karthik-remake/continuity/MANTAP_BLUEPRINT_TOPVIEW.png",
+  "scene_ids": [
+    "scene-01",
+    "scene-02",
+    "scene-03",
+    "scene-04",
+    "scene-05",
+    "scene-06"
+  ],
+  "object_count_notes": "Honor per-scene packet text/object counts from Asset Producer IMAGE_JOBs; do not invent",
+  "requested_output": "CONTINUITY_BIBLE.json + CONTINUITY_BIBLE.md under continuity/"
+}

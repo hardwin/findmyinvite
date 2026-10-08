@@ -1,0 +1,15 @@
+{
+  "packet_type": "ORCHESTRATOR_RECUE_VIDEO_EMIT",
+  "production_id": "kc-v1-recreate-20261003-003016",
+  "at": "2026-10-03T00:48:06+05:30",
+  "reason": "Spatial Continuity accidental StopSubagent all:true cascade \u2014 NOT Ashok STOP. VIDEO_JOB packets never landed.",
+  "auth_unchanged": [
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/packets/ORCHESTRATOR_GO_VIDEO.json",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/packets/ORCHESTRATOR_GO_ASSET_PRODUCER_VIDEO.json",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/packets/ORCHESTRATOR_WAIVE_CONTINUITY_CLIPS.json",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/packets/ORCHESTRATOR_STILLS_COMPLETE.json"
+  ],
+  "orders": "Resume emit 11 VIDEO_JOBs clips-v1; DISPATCH VID-clip-01; unlock 02\u201311 on decoded handoffs. Continuity QC still waived.",
+  "stills_status": "COMPLETE_CONTINUITY_WAIVED",
+  "video_jobs_authorized": true
+}

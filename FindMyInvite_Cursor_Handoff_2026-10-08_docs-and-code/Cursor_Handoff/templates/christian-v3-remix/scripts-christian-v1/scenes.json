@@ -1,0 +1,97 @@
+{
+  "c01-opening": {
+    "title": "Opening — floral cross and church board 'With God's Grace'",
+    "text": [
+      "With God's Grace"
+    ],
+    "people": false
+  },
+  "c02-title": {
+    "title": "Title — 'Wedding Invitation' floating in the church nave",
+    "text": [
+      "Wedding",
+      "Invitation"
+    ],
+    "people": false
+  },
+  "c03-names": {
+    "title": "Names — couple and parents, floating over the altar table",
+    "text": [
+      "Maniraj (Rajesh)",
+      "S/o Mr. Nehru & Mrs. Shanthi,",
+      "Thiruvannamalai",
+      "&",
+      "Keerthana",
+      "D/o Mr. Shankar & Mrs. Usharani,",
+      "Melchengam"
+    ],
+    "people": false
+  },
+  "c04-groom": {
+    "title": "The Groom — portrait with floating name",
+    "text": [
+      "The Groom",
+      "Maniraj (Rajesh)"
+    ],
+    "people": true
+  },
+  "c05-bride": {
+    "title": "The Bride — portrait with floating name",
+    "text": [
+      "The Bride",
+      "Keerthana"
+    ],
+    "people": true
+  },
+  "c06-ring-plate": {
+    "title": "Ring pillow — two gold rings on the altar (no text)",
+    "text": [],
+    "people": false
+  },
+  "c07-ring-drop": {
+    "title": "Ring drop — bride's hand drops two rings into the groom's palm (no text)",
+    "text": [],
+    "people": true
+  },
+  "c08-date": {
+    "title": "Date and time — floating over the church aisle",
+    "text": [
+      "Monday, 12 October 2026",
+      "12:00 PM – 1:30 PM"
+    ],
+    "people": false
+  },
+  "c09-venue": {
+    "title": "Venue — floating over the decorated entrance archway",
+    "text": [
+      "Venue",
+      "Annai Manimegalai Thirumana Mandapam",
+      "Chengam"
+    ],
+    "people": false
+  },
+  "c10-closing-1": {
+    "title": "Closing 1 — 'Your presence is our blessing'",
+    "text": [
+      "Your presence",
+      "is our blessing"
+    ],
+    "people": false
+  },
+  "c11-closing-2": {
+    "title": "Closing 2 — 'With love, from both families'",
+    "text": [
+      "With love,",
+      "from both families"
+    ],
+    "people": false
+  },
+  "c12-finale": {
+    "title": "Grand finale — couple exchanging rings on the decorated stage, MK cake",
+    "text": [
+      "Maniraj & Keerthana (backdrop, out of focus)",
+      "MK (cake monogram, out of focus)"
+    ],
+    "people": true
+  }
+}

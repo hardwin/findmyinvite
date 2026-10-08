@@ -1,0 +1,127 @@
+{
+  "production_id": "nk-v1-20261002-072013",
+  "batch": "stills-v5",
+  "updated_at": "2026-10-02T11:01:28+05:30",
+  "scenes": {
+    "scene-02": {
+      "decision": "LOCK",
+      "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/continuity_veto/scene-02.stills-v5.json",
+      "sha256": "c09be3132f62a3d50a1b7160c94d72002a3edcb0f52aaea7694e85a516b320e1",
+      "at": "2026-10-02T08:41:25+05:30"
+    },
+    "scene-03": {
+      "decision": "LOCK",
+      "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/continuity_veto/scene-03.stills-v5.json",
+      "sha256": "97f005d211e5e09affa64b2839240f28c034008f67be13e8eba0da20575119a5",
+      "at": "2026-10-02T08:42:49+05:30"
+    },
+    "scene-04": {
+      "decision": "LOCK",
+      "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/continuity_veto/scene-04.stills-v5.json",
+      "sha256": "cf73aa9adcb54996e11b0fdfc3c036b62c4349c61147a9461b747ee7be8b29b8",
+      "at": "2026-10-02T08:42:49+05:30"
+    },
+    "scene-05": {
+      "decision": "LOCK",
+      "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/continuity_veto/scene-05.stills-v5.json",
+      "sha256": "96e2d4423712bb42e2f5731f8e8d8d299ff2c3ea627c3b9bc9320c17a88338df",
+      "at": "2026-10-02T08:42:49+05:30"
+    },
+    "scene-01": {
+      "decision": "LOCK",
+      "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/continuity_veto/scene-01.stills-v5.json",
+      "sha256": "4630cb371a5e0a4f55ea0e8ec8b1f63c52db03d335edd2c98e774cf5ebd28514",
+      "attempt": 2,
+      "at": "2026-10-02T08:43:17+05:30"
+    },
+    "scene-06": {
+      "decision": "LOCK",
+      "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/continuity_veto/scene-06.stills-v5.json",
+      "sha256": "2579d519dfbab7638e9340ed876cfa4b3116cd98c228366aea26fa21a332f43f",
+      "attempt": 2,
+      "at": "2026-10-02T08:44:32+05:30"
+    }
+  },
+  "summary": {
+    "scene-02": "LOCK",
+    "scene-03": "LOCK",
+    "scene-04": "LOCK",
+    "scene-05": "LOCK",
+    "scene-01": "LOCK",
+    "scene-06": "LOCK"
+  },
+  "stills_v5_continuity": "COMPLETE \u2014 scenes 01\u201306 LOCK",
+  "locks": [
+    {
+      "asset": "clip-01",
+      "batch": "clips-v5",
+      "job": "VID-v5-clip-01",
+      "decision": "LOCK",
+      "file": "clip-01.clips-v5.json",
+      "sha256": "0a8cef4f4a581ec4379b8008e782aa171a3d24b281583f7b254e6748d28deca3",
+      "judged_at": "2026-10-02T08:53:26+05:30"
+    }
+  ],
+  "clips_v5": {
+    "clip-01": "LOCK"
+  },
+  "stills_v6": {
+    "batch": "stills-v6",
+    "spatial_map_version": "spatial-v9",
+    "updated_at": "2026-10-02T11:01:28+05:30",
+    "scenes": {
+      "scene-01": {
+        "decision": "LOCK",
+        "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/continuity_veto/scene-01.stills-v6.json",
+        "sha256": "56c341267ab6f697210aab1ae71b462824d5d33e3a8648f5bc28cef9410b9b60",
+        "maze_slot": "A palm_approach_garden",
+        "at": "2026-10-02T10:59:11+05:30"
+      },
+      "scene-02": {
+        "decision": "LOCK",
+        "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/continuity_veto/scene-02.stills-v6.json",
+        "sha256": "1732ebbb5d7c58ea7640e8290f0c3e5baa251c6c7992f994d5d18d4ee0bcd004",
+        "maze_slot": "B central_colonnade_courtyard",
+        "at": "2026-10-02T10:59:11+05:30"
+      },
+      "scene-03": {
+        "decision": "LOCK",
+        "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/continuity_veto/scene-03.stills-v6.json",
+        "sha256": "96291727f5ec206f31117af377ad8de0dfff60cf24dc09fc09a2564baa03b05a",
+        "maze_slot": "C east_floral_arcade",
+        "at": "2026-10-02T10:59:11+05:30"
+      },
+      "scene-04": {
+        "decision": "LOCK",
+        "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/continuity_veto/scene-04.stills-v6.json",
+        "sha256": "2dc42b84d9a96f5a4777c96099a1edca36c4b2b0a434950055a0bc180fc05dd3",
+        "maze_slot": "F stair_cascade_court",
+        "at": "2026-10-02T10:59:11+05:30"
+      },
+      "scene-05": {
+        "decision": "LOCK",
+        "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/continuity_veto/scene-05.stills-v6.json",
+        "sha256": "be07e86c141989bbde6c28c64c386a973eb5fbbb2785b20b90077388309969d0",
+        "attempt": 2,
+        "maze_slot": "E ceremony_stage_mandap",
+        "at": "2026-10-02T11:01:28+05:30"
+      },
+      "scene-06": {
+        "decision": "LOCK",
+        "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/continuity_veto/scene-06.stills-v6.json",
+        "sha256": "5a765feceae2ece605f985e47265fa5c3f3d2b23429f4a64959596e69d404c99",
+        "maze_slot": "D lotus_pond_photoshoot_terrace",
+        "at": "2026-10-02T10:59:11+05:30"
+      }
+    },
+    "summary": {
+      "scene-01": "LOCK",
+      "scene-02": "LOCK",
+      "scene-03": "LOCK",
+      "scene-04": "LOCK",
+      "scene-05": "LOCK",
+      "scene-06": "LOCK"
+    },
+    "stills_v6_continuity": "COMPLETE \u2014 scenes 01\u201306 LOCK (scene-05 attempt-2)"
+  }
+}

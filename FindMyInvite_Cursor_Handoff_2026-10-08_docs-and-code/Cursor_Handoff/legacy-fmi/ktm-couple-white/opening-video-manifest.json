@@ -1,0 +1,38 @@
+{
+  "request_id": "fab1a329-4445-9fc0-a4ec-18e495cdc215",
+  "status": "done",
+  "duration": 12,
+  "resolution": "720p",
+  "aspect_ratio": "9:16",
+  "moderation": "ok",
+  "respect_moderation": true,
+  "bytes": 6099485,
+  "approx_cost_usd": 0.96,
+  "pricing_note": "$0.08/s \u00d7 duration (list)",
+  "prior_spend_usd": 0.6,
+  "total_run_spend_usd": 1.56,
+  "budget_usd": 4.0,
+  "remaining_usd": 2.44,
+  "prompt": "Soft cinematic camera move through a modern white 2D anime cafe and magical street entrance. Black and white with pink magenta accents, soft graffiti, neon cafe glow. Start on the empty entrance world with no people. Gently advance and settle so the final frame matches the last_frame: young couple in soft romantic eye contact near a sport cafe-racer motorcycle with black body and bright red trellis frame, glossy black full-face helmets, woman in plain white tee and black track pants with white side stripes, man in white open-collar shirt and light trousers. Smooth continuous motion, invitation-video friendly, no brand logos, no text, no watermarks, no sudden cuts.",
+  "timestamp_ist": "2026-09-22 18:00:55 IST",
+  "model": "grok-imagine-video-1.5",
+  "ffprobe": {
+    "width": 720,
+    "height": 1280,
+    "duration": 12.041667,
+    "video_codec": "h264",
+    "audio_codec": "aac",
+    "has_audio": true,
+    "note": "Crafter will mute if audio present"
+  },
+  "api_usage": {
+    "cost_in_usd_ticks": 17000000000,
+    "ticks_div_1e11": 0.17,
+    "ticks_div_1e10": 1.7
+  },
+  "output_path": "/workspace/ktm-couple-white/opening.mp4",
+  "start_image": "/workspace/ktm-couple-white/opening-first.png",
+  "last_frame": "/workspace/ktm-couple-white/opening-last.png",
+  "run": "KTM couple White",
+  "shot": "opening"
+}

@@ -1,0 +1,12 @@
+{
+  "packet_type": "ORCHESTRATOR_GO_IMAGE_SCENE01_ORDER_V2",
+  "production_id": "kc-v1-20261001-230532",
+  "authorized_at": "2026-10-02T00:10:22.212768+05:30",
+  "job_id": "IMG-scene-01-order-v2",
+  "job_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/IMAGE_JOB/scene-01.order-v2.json",
+  "action": "GENERATE_NOW",
+  "reference_image": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1-handoff.jpg",
+  "output_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-1.jpg",
+  "after": "Visual QC + Continuity. VIDEO stays HELD until APPROVED then Orchestrator re-authorizes VID.",
+  "max_paid_attempts": 2
+}

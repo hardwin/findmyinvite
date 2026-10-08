@@ -1,0 +1,16 @@
+{
+  "packet_type": "ORCHESTRATOR_SPATIAL_16X9_RECEIPT",
+  "version": "v9",
+  "production_id": "nk-v1-20261002-072013",
+  "received_at": "2026-10-02T10:20:14+05:30",
+  "spatial_blueprint_16x9_status": "awaiting_ashok_approval",
+  "approve_artifact": "/workspace/fmi-productions/nandini-karthik-remake/continuity/SPATIAL_MAZE_MAP_16x9_v9.jpg",
+  "svg": "/workspace/fmi-productions/nandini-karthik-remake/continuity/SPATIAL_MAZE_MAP_16x9_v9.svg",
+  "sha256": "4e689cc17fdde6d3d7d6de480d1357853a44d3876ea6e7b41a020e9f7f38e604",
+  "spatial_map_version": "spatial-v9",
+  "tool": "matplotlib vector",
+  "path": "S1>S2>S3>S4>S5>S6",
+  "delivery_packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/SPATIAL_16X9_BLUEPRINT_DELIVERY_v9.json",
+  "image_jobs_authorized": false,
+  "video_jobs_authorized": false
+}

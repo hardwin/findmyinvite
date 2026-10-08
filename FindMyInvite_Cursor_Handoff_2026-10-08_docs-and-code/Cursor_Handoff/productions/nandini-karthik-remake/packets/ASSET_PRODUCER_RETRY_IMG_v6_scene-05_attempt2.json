@@ -1,0 +1,26 @@
+{
+  "packet_type": "ASSET_PRODUCER_RETRY_DISPATCH",
+  "production_id": "nk-v1-20261002-072013",
+  "batch": "stills-v6",
+  "job_id": "IMG-v6-scene-05",
+  "attempt": 2,
+  "status": "CONTINUITY_LOCK",
+  "orchestrator_auth": "/workspace/fmi-productions/nandini-karthik-remake/packets/ORCHESTRATOR_RETRY_IMG_v6_scene-05_attempt2.json",
+  "continuity_veto": "/workspace/fmi-productions/nandini-karthik-remake/packets/continuity_veto/scene-05.stills-v6.json",
+  "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/IMAGE_JOB/scene-05.v6.json",
+  "output": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v6/scene-05.jpg",
+  "retry_instruction": "Regenerate scene-05 only: keep couple wardrobe+STANDING+optional names. Replace rear BG with solid ceremony-stage floral/carved wall \u2014 NO open water, NO distant temple/gopuram/hills/boat as dominant background. Facet stays ceremony_stage_mandap (Room E).",
+  "locked_untouched": [
+    "IMG-v6-scene-01",
+    "IMG-v6-scene-02",
+    "IMG-v6-scene-03",
+    "IMG-v6-scene-04",
+    "IMG-v6-scene-06"
+  ],
+  "video_held": true,
+  "updated_at": "2026-10-02T10:59:45.468646+05:30",
+  "completed_at": "2026-10-02T11:01:55+05:30",
+  "generation_id": "zm7k4zcq59rmr0d0zcbsvnx17r",
+  "sha256": "be07e86c141989bbde6c28c64c386a973eb5fbbb2785b20b90077388309969d0",
+  "continuity": "LOCK"
+}

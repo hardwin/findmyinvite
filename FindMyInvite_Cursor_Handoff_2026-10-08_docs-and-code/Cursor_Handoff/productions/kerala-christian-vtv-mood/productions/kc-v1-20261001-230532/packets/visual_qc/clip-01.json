@@ -1,0 +1,53 @@
+{
+  "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1.mp4",
+  "job_id": "VID-clip-01-regen",
+  "clip_id": "clip-01",
+  "decision": "RETRY",
+  "escalation": "NEEDS_INTERVENTION",
+  "order": "V2",
+  "regen": true,
+  "rationale": "Opening≈APPROVED image-1 (drone pavilion + church/ONE right-side tower; no early text through ~1.5s — prior early-text defect fixed). Ending≈locked handoff (blessing text readable). Mid-shot ~1–2s still morphs: spatial perspective resets (push snaps back under arch) and church tower shifts right→center; pavilion structure morphs. Not a continuous full-duration dive. Tech 720×1280 ~5.04s@24 OK (AAC soft). Locked handoff untouched. Paid attempts exhausted (2/2).",
+  "violations": [
+    {
+      "rule": "continuous_spatial_dive",
+      "expected": "single continuous dive/push full duration with real translation/parallax into open porch",
+      "observed": "mid-shot spatial morph/reset ~1–2s — camera snaps back under arch; not continuous 3D travel"
+    },
+    {
+      "rule": "architecture_identity",
+      "expected": "preserve ONE right-side bell tower + separate pavilion→church geography throughout",
+      "observed": "church tower morphs from right-side to centered; pavilion structure morphs mid-transition"
+    }
+  ],
+  "retry_instruction": "Paid attempts exhausted (2/2). Do not auto-retry. User/Orchestrator intervention required. If authorized attempt 3+: keep first=image-1.jpg and last=LOCKED clip-1-handoff.jpg; regenerate ONLY continuous dive with fixed tower/pavilion geography — no mid-shot spatial reset, no tower relocate, no morph soup. Early text timing was OK on attempt 2 — keep that.",
+  "attempt": 2,
+  "final_paid_attempt": true,
+  "generation_id": "f7c8f330-b3a9-94c8-9af2-bc6c1eebf155",
+  "sha256": "d26ba28d85f2311a7ea8067dc26d6f13a3e579e3a5836e36ebf80d1293d0d325",
+  "first_frame": "image-1.jpg",
+  "last_frame": "clip-1-handoff.jpg",
+  "locked_last_frame": true,
+  "prior_attempt1_defects_status": {
+    "early_blessing_text": "FIXED",
+    "morph": "STILL_FAIL"
+  },
+  "technical": {
+    "w": 720,
+    "h": 1280,
+    "fps": 24,
+    "duration_s": 5.04,
+    "ok": true,
+    "has_audio_aac": true,
+    "note": "bible expects silent; aac present — soft flag for Finish/Final QC"
+  },
+  "checks": {
+    "opening_energy": "PASS",
+    "first_frame_match": "PASS",
+    "last_frame_match": "PASS",
+    "early_text": "PASS",
+    "continuous_spatial_dive": "FAIL",
+    "architecture_identity": "FAIL"
+  },
+  "decided_at": "2026-10-02T00:22:35.362043+05:30",
+  "qc_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/VIDEO_QC_clip-01-regen-order-v2-attempt2.json"
+}

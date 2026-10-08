@@ -1,0 +1,14 @@
+{
+  "packet_type": "ORCHESTRATOR_SPATIAL_16X9_RECEIPT",
+  "production_id": "nk-v1-20261002-072013",
+  "received_at": "2026-10-02T09:39:09+05:30",
+  "spatial_blueprint_16x9_status": "awaiting_ashok_approval",
+  "approve_artifact": "/workspace/fmi-productions/nandini-karthik-remake/continuity/SPATIAL_SHOT_BOARD_16x9_v1.jpg",
+  "sha256": "0c2577dffc92ff541c5b22072d371e375ce1d4a755102637abb6740ff393759f",
+  "spatial_map_version": "spatial-v3",
+  "delivery_packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/SPATIAL_16X9_BLUEPRINT_DELIVERY_v1.json",
+  "awaiting_packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/ORCHESTRATOR_AWAITING_SPATIAL_16X9_APPROVAL.json",
+  "image_jobs_authorized": false,
+  "video_jobs_authorized": false,
+  "ashok_route": "board already in Ashok DM for iterate (same sha as shot-plan-v1 flare)"
+}

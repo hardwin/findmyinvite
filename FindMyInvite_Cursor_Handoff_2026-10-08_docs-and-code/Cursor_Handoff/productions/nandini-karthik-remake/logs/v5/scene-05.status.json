@@ -1,0 +1,28 @@
+{
+  "ts_local": "2026-10-02T08:41:00+0530",
+  "job_id": "IMG-v5-scene-05",
+  "scene_id": "scene-05",
+  "status": "GENERATED",
+  "attempt": 1,
+  "generation_id": "fytqcrxrrsrmw0d0zabrvs4cqm",
+  "prompt_sha256": "ef8c0c861aeb805bb5adafe03e8b9316a346292a98bee299dd0e6e9dcf2a71b5",
+  "output_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5/scene-05.jpg",
+  "size_bytes": 294044,
+  "sha256": "96e2d4423712bb42e2f5731f8e8d8d299ff2c3ea627c3b9bc9320c17a88338df",
+  "facet": "stairs",
+  "spatial_map_version": "spatial-v2",
+  "forbidden_reuse": [
+    "misty lake behind couple",
+    "gopuram",
+    "mountains",
+    "boat",
+    "walking",
+    "bride bun",
+    "full invite stack (names only OK)"
+  ],
+  "error": null,
+  "model": "openai/gpt-image-2.5-flare",
+  "provider": "replicate",
+  "input_images_count": 0,
+  "output_url": "https://replicate.delivery/xezq/fdOSM0VQE9WeP0bglLxUyW4TMsOHD5UbvKeOTebCGPINs0MdB/tmp3y6ahqnb.jpeg"
+}

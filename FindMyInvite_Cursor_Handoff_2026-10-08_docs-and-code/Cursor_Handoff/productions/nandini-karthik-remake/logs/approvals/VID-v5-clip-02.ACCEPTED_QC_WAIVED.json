@@ -1,0 +1,9 @@
+{
+  "job_id": "VID-v5-clip-02",
+  "decision": "ACCEPTED_AS_IS_QC_WAIVED",
+  "authorized_at": "2026-10-02T09:21:42+05:30",
+  "source": "Ashok override ORCHESTRATOR_OVERRIDE_QC_WAIVE_VID_v5",
+  "asset": "/workspace/fmi-productions/nandini-karthik-remake/assets/clips-v5/clip-02.mp4",
+  "sha256": "3f5a6d3864afd2eb63dc7b11d1e29fef69611f86f853f78cf1ff0185b5fd1482",
+  "note": "Prior Visual QC RETRY waived; chain continues from attempt-1 handoff"
+}

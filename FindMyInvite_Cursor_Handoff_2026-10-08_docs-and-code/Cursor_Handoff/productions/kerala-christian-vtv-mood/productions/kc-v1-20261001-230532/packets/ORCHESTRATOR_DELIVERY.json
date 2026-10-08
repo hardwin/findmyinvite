@@ -1,0 +1,23 @@
+{
+  "production_id": "kc-v1-20261001-230532",
+  "name": "The Wedding of Alex & Anna",
+  "iteration": "kerala-christian-v1",
+  "delivered_at": "2026-10-01T23:46:40.599990+05:30",
+  "decision": "PASS",
+  "final_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/kerala-christian-v1-final.mp4",
+  "sha256": "6df900bbbc5dc3b9222f285f3a2cce8a183644db5cb9668f762dac57264ffe12",
+  "report": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/manifest/final_qc_report.json",
+  "specs": {
+    "width": 720,
+    "height": 1280,
+    "fps": 24,
+    "duration_seconds": 54.458,
+    "audio": "silent",
+    "frames": 1307
+  },
+  "notes": [
+    "11 stills APPROVED (Image QC + Continuity)",
+    "clip-01 USER_OVERRIDE attempt-1; clips 02-11 qc_skipped per Ashok",
+    "hard-cut stream-copy assembly; Final QC PASS"
+  ]
+}

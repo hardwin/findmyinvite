@@ -1,0 +1,55 @@
+{
+  "packet_type": "ASSET_PRODUCER_EMIT_STILLS_V5",
+  "production_id": "nk-v1-20261002-072013",
+  "recorded_at": "2026-10-02T08:38:01.265720+05:30",
+  "spatial_map_status": "approved_by_ashok",
+  "spatial_map_version": "spatial-v2",
+  "auth": "/workspace/fmi-productions/nandini-karthik-remake/packets/ORCHESTRATOR_SPATIAL_APPROVED.json",
+  "spatial_map": "/workspace/fmi-productions/nandini-karthik-remake/continuity/SPATIAL_MAP.json",
+  "blueprint": "/workspace/fmi-productions/nandini-karthik-remake/continuity/MANTAP_BLUEPRINT_TOPVIEW.png",
+  "batch": "stills-v5",
+  "job_count": 6,
+  "jobs": [
+    {
+      "job_id": "IMG-v5-scene-01",
+      "scene_id": "scene-01",
+      "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/IMAGE_JOB/scene-01.json",
+      "facet": "entrance_thicket"
+    },
+    {
+      "job_id": "IMG-v5-scene-02",
+      "scene_id": "scene-02",
+      "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/IMAGE_JOB/scene-02.json",
+      "facet": "entrance_colonnade"
+    },
+    {
+      "job_id": "IMG-v5-scene-03",
+      "scene_id": "scene-03",
+      "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/IMAGE_JOB/scene-03.json",
+      "facet": "left_side_aisle"
+    },
+    {
+      "job_id": "IMG-v5-scene-04",
+      "scene_id": "scene-04",
+      "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/IMAGE_JOB/scene-04.json",
+      "facet": "left_side_aisle"
+    },
+    {
+      "job_id": "IMG-v5-scene-05",
+      "scene_id": "scene-05",
+      "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/IMAGE_JOB/scene-05.json",
+      "facet": "stairs"
+    },
+    {
+      "job_id": "IMG-v5-scene-06",
+      "scene_id": "scene-06",
+      "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/IMAGE_JOB/scene-06.json",
+      "facet": "stage_decorations"
+    }
+  ],
+  "image_job_dir": "/workspace/fmi-productions/nandini-karthik-remake/packets/IMAGE_JOB",
+  "packets_v5_dir": "/workspace/fmi-productions/nandini-karthik-remake/packets-v5",
+  "output_dir": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5",
+  "note": "Folded Spatial Map v2 facets/forbidden_reuse/image_prompt_constraints/camera/offscreen per beat. No lake-world paste. Ready for Image Director generate.",
+  "kc_v1_order_v2": "STOP unchanged"
+}

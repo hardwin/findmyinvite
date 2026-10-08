@@ -1,0 +1,63 @@
+{
+  "production_id": "nk-v1-20261002-072013",
+  "title": "Nandini \u2661 Karthik \u2014 tropical Sandesha-style remake",
+  "gate": "IMAGES_ONLY_UNTIL_ASHOK_APPROVES",
+  "source_reference": "15s 2D motion invite; remake as continuous 3D camera in space",
+  "couple": {
+    "bride": "Nandini",
+    "groom": "Karthik"
+  },
+  "event": {
+    "date": "22nd February 2027",
+    "time": "9:30 AM onwards",
+    "venue": "ITC Grand Chola",
+    "city": "Chennai, Tamil Nadu"
+  },
+  "style_notes": "pastel tropical elegance; dimensional cinematic storybook not flat 2D",
+  "scene_count": 6,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "index": 1,
+      "name": "Banana leaves macro open",
+      "text": null,
+      "prompt": "A full-bleed portrait 9:16 cinematic dimensional storybook wedding invitation still. Soft romantic tropical South Indian elegance: pastel pinks, soft greens, cream, beige, misty greys, warm diffused morning light. Lush banana leaves, white jasmine garlands with pink lotus buds, carved cream-stone archway, polished floor, brass uruli bowls of pink lotuses, wooden pedestals, hazy lake, misty mountains, distant temple gopuram, small boat on water. Dimensional depth with real perspective, parallax-ready layers, soft petals in air. NOT flat 2D motion-graphics collage; read as a real camera looking into a built romantic set. No watermark. No brand logos. Extreme close foreground of overlapping giant tropical banana leaves filling the frame, dew and soft morning rim light, tiny gaps beginning to open toward a soft cream glow beyond, camera almost among the leaves. No people. No readable text."
+    },
+    {
+      "id": "scene-02",
+      "index": 2,
+      "name": "Leaves part to arch establish",
+      "text": null,
+      "prompt": "A full-bleed portrait 9:16 cinematic dimensional storybook wedding invitation still. Soft romantic tropical South Indian elegance: pastel pinks, soft greens, cream, beige, misty greys, warm diffused morning light. Lush banana leaves, white jasmine garlands with pink lotus buds, carved cream-stone archway, polished floor, brass uruli bowls of pink lotuses, wooden pedestals, hazy lake, misty mountains, distant temple gopuram, small boat on water. Dimensional depth with real perspective, parallax-ready layers, soft petals in air. NOT flat 2D motion-graphics collage; read as a real camera looking into a built romantic set. No watermark. No brand logos. Banana leaves physically parted at the edges of frame revealing an ornate cream-stone floral archway with hanging jasmine and pink lotus buds. Through the arch: misty lake, mountains, distant temple. Foreground wooden pedestals with brass bowls of pink flowers. Empty center aisle. No couple. No readable text."
+    },
+    {
+      "id": "scene-03",
+      "index": 3,
+      "name": "Under arch push \u2014 tables and lake",
+      "text": null,
+      "prompt": "A full-bleed portrait 9:16 cinematic dimensional storybook wedding invitation still. Soft romantic tropical South Indian elegance: pastel pinks, soft greens, cream, beige, misty greys, warm diffused morning light. Lush banana leaves, white jasmine garlands with pink lotus buds, carved cream-stone archway, polished floor, brass uruli bowls of pink lotuses, wooden pedestals, hazy lake, misty mountains, distant temple gopuram, small boat on water. Dimensional depth with real perspective, parallax-ready layers, soft petals in air. NOT flat 2D motion-graphics collage; read as a real camera looking into a built romantic set. No watermark. No brand logos. Camera already under the floral arch looking out to the misty lake and temple. Near wooden pedestals and brass flower bowls dominate lower third with strong perspective. Soft pink petals drifting. Romantic empty stage waiting for the couple. No people. No readable text."
+    },
+    {
+      "id": "scene-04",
+      "index": 4,
+      "name": "Couple appear under arch",
+      "text": null,
+      "prompt": "A full-bleed portrait 9:16 cinematic dimensional storybook wedding invitation still. Soft romantic tropical South Indian elegance: pastel pinks, soft greens, cream, beige, misty greys, warm diffused morning light. Lush banana leaves, white jasmine garlands with pink lotus buds, carved cream-stone archway, polished floor, brass uruli bowls of pink lotuses, wooden pedestals, hazy lake, misty mountains, distant temple gopuram, small boat on water. Dimensional depth with real perspective, parallax-ready layers, soft petals in air. NOT flat 2D motion-graphics collage; read as a real camera looking into a built romantic set. No watermark. No brand logos. Same tropical arch setting. Young South Indian couple centered under the arch looking affectionately at each other. Bride in pink-and-gold silk saree with floral hair adornment; groom in cream embroidered sherwani. Soft falling petals. No readable text anywhere in frame."
+    },
+    {
+      "id": "scene-05",
+      "index": 5,
+      "name": "Names lock",
+      "text": "Nandini \u2661 Karthik",
+      "prompt": "A full-bleed portrait 9:16 cinematic dimensional storybook wedding invitation still. Soft romantic tropical South Indian elegance: pastel pinks, soft greens, cream, beige, misty greys, warm diffused morning light. Lush banana leaves, white jasmine garlands with pink lotus buds, carved cream-stone archway, polished floor, brass uruli bowls of pink lotuses, wooden pedestals, hazy lake, misty mountains, distant temple gopuram, small boat on water. Dimensional depth with real perspective, parallax-ready layers, soft petals in air. NOT flat 2D motion-graphics collage; read as a real camera looking into a built romantic set. No watermark. No brand logos. Same couple under the arch, same wardrobe and pose continuity. Elegant magenta cursive text in the upper sky area reads exactly: Nandini \u2661 Karthik. No other text. Falling petals. Keep faces clear and readable lettering crisp."
+    },
+    {
+      "id": "scene-06",
+      "index": 6,
+      "name": "Full invitation lock",
+      "text": "Nandini \u2661 Karthik / Two hearts, one beautiful beginning / 22nd February 2027 / 9:30 AM onwards / ITC Grand Chola / Chennai, Tamil Nadu / JOIN US as we begin our forever.",
+      "prompt": "A full-bleed portrait 9:16 cinematic dimensional storybook wedding invitation still. Soft romantic tropical South Indian elegance: pastel pinks, soft greens, cream, beige, misty greys, warm diffused morning light. Lush banana leaves, white jasmine garlands with pink lotus buds, carved cream-stone archway, polished floor, brass uruli bowls of pink lotuses, wooden pedestals, hazy lake, misty mountains, distant temple gopuram, small boat on water. Dimensional depth with real perspective, parallax-ready layers, soft petals in air. NOT flat 2D motion-graphics collage; read as a real camera looking into a built romantic set. No watermark. No brand logos. Final wide invitation composition: couple lower third under the tropical floral arch with lake and temple behind. Upper and mid sky carry elegant invitation lettering stacked exactly as:\nNandini \u2661 Karthik\nTwo hearts, one beautiful beginning\n22nd February 2027\n9:30 AM onwards\nITC Grand Chola\nChennai, Tamil Nadu\nJOIN US as we begin our forever.\nMagenta for names, soft dark brown serif for remaining lines, all crisp and centered. Soft petals. No brand watermark."
+    }
+  ],
+  "video_hold": true
+}

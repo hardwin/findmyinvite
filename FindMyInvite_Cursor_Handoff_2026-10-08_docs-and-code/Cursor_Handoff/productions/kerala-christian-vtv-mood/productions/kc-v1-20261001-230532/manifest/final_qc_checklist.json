@@ -1,0 +1,202 @@
+{
+  "job_type": "FINAL_QC_PREFLIGHT",
+  "production_id": "kc-v1-20261001-230532",
+  "agent": "Final QC Delivery",
+  "status": "PASS",
+  "prepared_at": "2026-10-01T23:07:42.181798+05:30",
+  "source_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/final_qc_packet.json",
+  "continuity_bible": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/continuity/CONTINUITY_BIBLE.json",
+  "assembly_path_expected": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/kerala-christian-v1-final.mp4",
+  "assembly_exists": true,
+  "expected_shot_order": [
+    "clip-1",
+    "clip-2",
+    "clip-3",
+    "clip-4",
+    "clip-5",
+    "clip-6",
+    "clip-7",
+    "clip-8",
+    "clip-9",
+    "clip-10",
+    "clip-11"
+  ],
+  "target_duration_seconds": 54,
+  "duration_tolerance_seconds": 0.15,
+  "hard_limits": {
+    "width": 720,
+    "height": 1280,
+    "fps": 24,
+    "audio": "silent",
+    "aspect": "9:16"
+  },
+  "clip_duration_table": [
+    {
+      "clip": "clip-1",
+      "expected_duration_sec": 5
+    },
+    {
+      "clip": "clip-2",
+      "expected_duration_sec": 4
+    },
+    {
+      "clip": "clip-3",
+      "expected_duration_sec": 5
+    },
+    {
+      "clip": "clip-4",
+      "expected_duration_sec": 5
+    },
+    {
+      "clip": "clip-5",
+      "expected_duration_sec": 5
+    },
+    {
+      "clip": "clip-6",
+      "expected_duration_sec": 5
+    },
+    {
+      "clip": "clip-7",
+      "expected_duration_sec": 5
+    },
+    {
+      "clip": "clip-8",
+      "expected_duration_sec": 5
+    },
+    {
+      "clip": "clip-9",
+      "expected_duration_sec": 5
+    },
+    {
+      "clip": "clip-10",
+      "expected_duration_sec": 5
+    },
+    {
+      "clip": "clip-11",
+      "expected_duration_sec": 5
+    }
+  ],
+  "delivery_after_PASS": "Orchestrator delivers to Ashok; handoff target = user via FMI Orchestrator only",
+  "do_not_reopen": "Upstream FAIL/RETRY stays with Visual QC / generators; Final QC only judges assembled film",
+  "full_watch_gate": "ONLY after assembly file exists at assembly_path_expected",
+  "required_text_locked": {
+    "devotional": "With God's Grace\nWe Invite You",
+    "invitation_lines": "The Wedding of\nAlex & Anna",
+    "family_lines": "With the Blessings of\nGroom's Parents\nMr. John Mathew\n& Mrs. Elsy John\nBride's Parents\nMr. Thomas George\n& Mrs. Mercy Thomas",
+    "ceremony_lines": "Holy Matrimony\n15th February 2025\n10:00 a.m.\nIn the Morning",
+    "venue_lines": "Wedding Venue\nSt. Mary's Forane Church\nNear Alappuzha\nKerala",
+    "reception_lines": "Reception - Dinner\n14th February 2025\n7:00 p.m. onwards\nParish Hall Garden\nNear Alappuzha, Kerala",
+    "host_lines": "Invited By\nMr. Kurien Abraham\nMrs. Lizzy Kurien\nBaby. Nia & Noel\nWith Love & Blessings",
+    "save_date_lines": "SAVE THE DATE\n14 & 15 FEBRUARY\n2025",
+    "rule": "Exact customer copy only. Never invent, paraphrase, or add film titles / director names / film acronyms."
+  },
+  "ending_spec": {
+    "clip": "clip-11",
+    "expected": "Gentle forehead touch beneath the same gateway; scene-12 = final decoded frame of clip-11 (first-frame-only animation / no separate still API in film)",
+    "scene_12_id": "scene-12"
+  },
+  "checks": [
+    {
+      "id": "FULL_DECODE",
+      "packet_label": "full decode",
+      "status": "PASS",
+      "pass_criteria": [
+        "ffprobe succeeds on assembled mp4",
+        "ffmpeg -v error -i FINAL -f null - exits 0 with empty stderr"
+      ]
+    },
+    {
+      "id": "ORIENTATION_RES_FPS",
+      "packet_label": "correct orientation/resolution/fps",
+      "status": "PASS",
+      "pass_criteria": [
+        "width=720 height=1280",
+        "fps=24",
+        "aspect 9:16",
+        "no unexpected rotation/displaymatrix",
+        "audio absent or fully silent"
+      ]
+    },
+    {
+      "id": "DURATION",
+      "packet_label": "expected duration",
+      "status": "PASS",
+      "pass_criteria": [
+        "target ~54s",
+        "tolerance \u00b10.15s unless Orchestrator overrides",
+        "per-clip: clip-1=5s, clip-2=4s, clip-3..clip-11=5s"
+      ]
+    },
+    {
+      "id": "BLACK_CORRUPT",
+      "packet_label": "no black/corrupt frames",
+      "status": "PASS",
+      "pass_criteria": [
+        "blackdetect clean (no solid black intervals \u22651 frame)",
+        "zero decode errors / green-magenta blocks / tearing",
+        "no unintended freezes >0.5s"
+      ]
+    },
+    {
+      "id": "NO_MISSING_REPEATED",
+      "packet_label": "no missing/repeated clips",
+      "status": "PASS",
+      "pass_criteria": [
+        "exactly 11 clips present in assembly",
+        "no duplicates or omissions vs expected_shot_order"
+      ]
+    },
+    {
+      "id": "SCENE_ORDER",
+      "packet_label": "scene order",
+      "status": "PASS",
+      "pass_criteria": [
+        "order is clip-1 \u2192 clip-11 exactly",
+        "hard cuts only; no crossfade/transition overlay/global retiming"
+      ]
+    },
+    {
+      "id": "REQUIRED_TEXT",
+      "packet_label": "required text appears",
+      "status": "PASS",
+      "pass_criteria": [
+        "Exact locked Continuity Bible copy_locked lines appear in their scenes",
+        "Never invent/paraphrase; no film titles/director names/acronyms"
+      ],
+      "copy_ref": "required_text_locked"
+    },
+    {
+      "id": "ENDING",
+      "packet_label": "ending correct (forehead touch / first-frame-only)",
+      "status": "PASS",
+      "pass_criteria": [
+        "clip-11 ends on forehead-touch under gateway",
+        "scene-12 still = final decoded frame of clip-11 only"
+      ]
+    }
+  ],
+  "fail_policy": {
+    "on_any_fail": "FAIL \u2014 do not deliver; report failing check ids + evidence to FMI Orchestrator only",
+    "never": [
+      "ship to anyone except via Orchestrator \u2192 Ashok",
+      "reopen upstream Visual QC FAIL/RETRY",
+      "creatively retime/crossfade to paper over gaps"
+    ]
+  },
+  "blockers_now": [],
+  "next_action": "Idle-ready: when kerala-christian-v1-final.mp4 appears, run all checks and report PASS/FAIL to Orchestrator",
+  "production_state_note": "GENERATING_SCENES (Orchestrator FYI) \u2014 hold full watch until assembly",
+  "ashok_override": {
+    "video_qc": "waived",
+    "assembly_gate": "all 11 clips + scene-12 handoff on disk (no Visual QC wait)",
+    "final_qc": "unchanged \u2014 full watch after kerala-christian-v1-final.mp4"
+  },
+  "completed_at": "2026-10-01T23:46:27.023847+05:30",
+  "report_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/manifest/final_qc_report.json",
+  "ashok_stop": {
+    "packet": "packets/ORCHESTRATOR_STOP_CLIP01_ORDER_V2.json",
+    "status": "STOP_HOLD",
+    "recorded_at": "2026-10-02T07:13:41.158454+05:30",
+    "final_qc_rule": "Do NOT Final-QC any clip-01 ORDER V2 swap/reassembly until Ashok lifts STOP. Delivered kc-v1 final stays as-is."
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "scene_id": "scene-04",
+  "take": 1,
+  "model": "openai/gpt-image-2.5-flare",
+  "input_images": [],
+  "text_only": true,
+  "template_sha256": "ba1205f0805985299418db9bf6e301c92cae30cfc967947cd8eb94bb5e520021",
+  "prompt_sha256": "1b4113571a4a3928dfe2ef145c22b01b12c06e7bf38f2e11592b68616fdc96a1",
+  "started_at": "2026-10-06T18:43:35.796732+05:30",
+  "request_id": "0npra20zp5rmw0d125csv9bk6r",
+  "status": "GENERATED",
+  "raw": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-showcase-20261006-184313/work/scene-04-t1.raw.jpg",
+  "raw_sha256": "00bece3ebea92047afbbfade418f65464ab429f67fb55cc14ae119b5e029a4ad",
+  "sha256": "6d9e88866124547080f30a16c8c114a057519aa316a0a2a7b40a2f2d03f027ef",
+  "output": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-showcase-20261006-184313/assets/output/image-4.jpg",
+  "finished_at": "2026-10-06T18:43:57.007684+05:30"
+}

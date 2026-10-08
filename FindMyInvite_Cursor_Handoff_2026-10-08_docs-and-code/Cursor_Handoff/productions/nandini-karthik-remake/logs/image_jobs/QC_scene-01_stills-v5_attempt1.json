@@ -1,0 +1,48 @@
+{
+  "document": "VISUAL_QC",
+  "production_id": "nk-v1-20261002-072013",
+  "batch": "stills-v5",
+  "job": "IMG-v5-scene-01",
+  "scene_id": "scene-01",
+  "facet_expected": "entrance_thicket",
+  "asset_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5/scene-01.jpg",
+  "sha256": "7af56c04ef3f7ff535f0a3eda0136aec52b00dc570ba18a5871b3a46ee6918c3",
+  "generation_id": "2k1tfmd0vnrmr0d0zabbvyc96m",
+  "prompt_hash": "5418b92d284a93badfb8e40cd7c2d5f3680427ce4542e08debc09cda23f447d3",
+  "attempt": 1,
+  "decision": "RETRY",
+  "rationale": "Passes lake/gopuram FAIL rule and no-people/no-text, but violates Spatial Map entrance_thicket: expected extreme-close banana-leaf macro with only a tiny cream colonnade glow RIGHT; observed full cream colonnade corridor with pillars, polished floor, nilavilakku, and urulis (aisle/colonnade geography that collides with scene-02/03 facets).",
+  "violations": [
+    {
+      "rule": "spatial.facet_framing",
+      "expected": "extreme close among banana leaves LEFT of approach; visible_set = banana leaves + jasmine/dew + soft cream colonnade glow only",
+      "observed": "wide-ish colonnade walkway: receding fluted pillars, polished reflective floor, brass lamps + lotus urulis along aisle; leaves as side dressing not macro hero"
+    },
+    {
+      "rule": "spatial.visible_set_pieces",
+      "expected": [
+        "banana leaves",
+        "jasmine/dew",
+        "soft cream colonnade glow only"
+      ],
+      "observed": [
+        "banana leaves",
+        "full colonnade arcade",
+        "nilavilakku row",
+        "urulis with lotus",
+        "polished aisle floor"
+      ]
+    }
+  ],
+  "checks_passed": [
+    "no misty lake / gopuram / mountains / boat as dominant BG",
+    "no couple",
+    "no text",
+    "cream stone + banana/jasmine/brass decor language consistent with world"
+  ],
+  "retry_instruction": "Regenerate entrance_thicket ONLY: extreme close among giant banana leaves filling most of frame (LEFT of approach); allow only a tiny soft cream colonnade glow peek toward RIGHT through leaf gaps. Remove full pillar arcade, polished aisle floor run, lamp rows, and urulis from frame. Still NO lake/gopuram/mountains/boat, NO people, NO text.",
+  "spatial_map_version": "spatial-v2",
+  "continuity_bible": "/workspace/fmi-productions/nandini-karthik-remake/continuity/CONTINUITY_BIBLE.json",
+  "judged_at": "2026-10-02T08:41:01+05:30",
+  "judge": "Visual QC Supervisor"
+}

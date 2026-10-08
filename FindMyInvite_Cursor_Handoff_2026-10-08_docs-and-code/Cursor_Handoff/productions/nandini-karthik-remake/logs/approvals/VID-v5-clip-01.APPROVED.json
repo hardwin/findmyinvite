@@ -1,0 +1,15 @@
+{
+  "packet_type": "ORCHESTRATOR_VIDEO_APPROVED",
+  "production_id": "nk-v1-20261002-072013",
+  "batch": "clips-v5",
+  "job": "VID-v5-clip-01",
+  "clip_id": "clip-01",
+  "status": "APPROVED",
+  "approved_at": "2026-10-02T08:53:41+05:30",
+  "asset_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/clips-v5/clip-01.mp4",
+  "handoff_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/handoffs-v5/clip-01-handoff.jpg",
+  "sha256": "0a8cef4f4a581ec4379b8008e782aa171a3d24b281583f7b254e6748d28deca3",
+  "visual_qc": "/workspace/fmi-productions/nandini-karthik-remake/logs/video_jobs_v5/QC_clip-01_attempt1.json",
+  "continuity": "/workspace/fmi-productions/nandini-karthik-remake/packets/continuity_veto/clip-01.clips-v5.json",
+  "decision": "PASS+LOCK"
+}

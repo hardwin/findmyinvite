@@ -1,0 +1,9 @@
+{
+  "action": "AUTHORIZE_VIDEO_QC",
+  "production_id": "kc-v1-20261001-230532",
+  "clip_id": "clip-01",
+  "job_id": "VID-clip-01",
+  "authorized_at": "2026-10-01T23:16:30.619081+05:30",
+  "batch": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/VIDEO_QC_clip-01.json",
+  "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1.mp4"
+}

@@ -1,0 +1,220 @@
+{
+  "document": "SPATIAL_MAP",
+  "production_id": null,
+  "title": "Kerala Christian v1 board swap \u2014 Alex & Anna maze, new boards",
+  "version": "spatial-draft-v1",
+  "status": "awaiting_ashok_approval",
+  "spatial_blueprint_16x9_status": "awaiting_ashok_approval",
+  "updated_at": "2026-10-04T07:47:52+05:30",
+  "author": "Spatial Continuity",
+  "not": [
+    "Theresa & Isaac kc-v1-recreate-20261003-071403",
+    "nk-v1 Nandini & Karthik"
+  ],
+  "base": "Kerala Christian church wedding v1. Same compound, cameras, couple stands, and maze. Only the listed boards change.",
+  "couple_unchanged": {
+    "groom": "Mr. Alex John",
+    "bride": "Ms. Anna Thomas"
+  },
+  "architecture_lock": {
+    "compound": "ONE white Portuguese-influenced Kerala Catholic church compound",
+    "bell_towers": 1,
+    "forbidden": [
+      "a second room for scene 12",
+      "a second gateway sign",
+      "Theresa stand swap (bride on the arch before the groom in the aisle)",
+      "Swaroop or Theresa client copy on the new boards",
+      "a second compound or a second bell tower"
+    ]
+  },
+  "maze_graph": {
+    "path": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K"
+    ],
+    "path_string": "A aerial \u2192 B porch \u2192 C courtyard LEFT \u2192 D aisle RIGHT (groom) \u2192 E arch LEFT (bride) \u2192 F cloister RIGHT \u2192 G altar LEFT \u2192 H north court RIGHT \u2192 I garden RIGHT \u2192 J corridor LEFT \u2192 K gateway backward. S12 = K, not a new room.",
+    "turns": [
+      "forward-down dive",
+      "slow push",
+      "LEFT 90",
+      "RIGHT 90",
+      "LEFT 90",
+      "RIGHT 90",
+      "LEFT 90",
+      "RIGHT 90",
+      "RIGHT 90",
+      "LEFT 90",
+      "backward reveal",
+      "same facet, forehead touch"
+    ]
+  },
+  "beats": [
+    {
+      "shot": "S1",
+      "room": "A",
+      "scene_index": 1,
+      "facet": "aerial_compound_exterior",
+      "turn": "forward-down dive",
+      "stands": [],
+      "board": "unchanged \u2014 no on-screen board",
+      "text": null,
+      "still": true
+    },
+    {
+      "shot": "S2",
+      "room": "B",
+      "scene_index": 2,
+      "facet": "open_arched_porch_vestibule",
+      "turn": "continue the slow push",
+      "stands": [],
+      "board": "wooden picture frame on a table (replaces floral cross and With God's Grace)",
+      "text": "Save the Date - [DATE]",
+      "still": true
+    },
+    {
+      "shot": "S3",
+      "room": "C",
+      "scene_index": 3,
+      "facet": "side_courtyard",
+      "turn": "LEFT 90",
+      "stands": [],
+      "board": "hanging wooden-and-iron sign (replaces the wedding board)",
+      "text": "Save The Date - [DATE] - [DAY]",
+      "still": true
+    },
+    {
+      "shot": "S4",
+      "room": "D",
+      "scene_index": 4,
+      "facet": "shaded_side_aisle",
+      "turn": "RIGHT 90",
+      "stands": [
+        "groom"
+      ],
+      "board": "unchanged \u2014 floating name, not a sign",
+      "text": "Mr. Alex John",
+      "still": true
+    },
+    {
+      "shot": "S5",
+      "room": "E",
+      "scene_index": 5,
+      "facet": "sunlit_transverse_arch",
+      "turn": "LEFT 90",
+      "stands": [
+        "bride"
+      ],
+      "board": "unchanged \u2014 floating name, not a sign",
+      "text": "Ms. Anna Thomas",
+      "still": true
+    },
+    {
+      "shot": "S6",
+      "room": "F",
+      "scene_index": 6,
+      "facet": "west_cloister",
+      "turn": "RIGHT 90",
+      "stands": [],
+      "board": "easel card with hands and rings (replaces the parents plaque)",
+      "text": "[GROOM NAME] & [BRIDE NAME] \u2014 Invite you to celebrate their wedding on [DAY], [DATE]",
+      "still": true
+    },
+    {
+      "shot": "S7",
+      "room": "G",
+      "scene_index": 7,
+      "facet": "aisle_and_altar",
+      "turn": "LEFT 90",
+      "stands": [
+        "groom",
+        "bride"
+      ],
+      "board": "unchanged \u2014 Holy Matrimony timing sign",
+      "text": "Holy Matrimony\n15th February 2025\n10:00 a.m.\nIn the Morning",
+      "still": true
+    },
+    {
+      "shot": "S8",
+      "room": "H",
+      "scene_index": 8,
+      "facet": "north_courtyard_corner",
+      "turn": "RIGHT 90",
+      "stands": [],
+      "board": "table card with yellow flowers and candles (replaces the venue board)",
+      "text": "[GROOM NAME] & [BRIDE NAME], Reception at [VENUE], Between [TIME]",
+      "still": true
+    },
+    {
+      "shot": "S9",
+      "room": "I",
+      "scene_index": 9,
+      "facet": "parish_hall_garden_evening",
+      "turn": "RIGHT 90",
+      "stands": [],
+      "board": "framed calligraphy, white roses (replaces the reception board)",
+      "text": "Insha Allah and Bismillah",
+      "still": true,
+      "lighting": "evening"
+    },
+    {
+      "shot": "S10",
+      "room": "J",
+      "scene_index": 10,
+      "facet": "lamp_lit_side_chapel_corridor",
+      "turn": "LEFT 90",
+      "stands": [],
+      "board": "monogram card inside a floral arch (replaces the hosts plaque)",
+      "text": "[GROOM INITIAL] [BRIDE INITIAL]",
+      "still": true,
+      "lighting": "evening"
+    },
+    {
+      "shot": "S11",
+      "room": "K",
+      "scene_index": 11,
+      "facet": "gateway",
+      "turn": "backward reveal",
+      "stands": [
+        "bride",
+        "groom"
+      ],
+      "board": "illuminated hanging sign (replaces the date board)",
+      "text": "Insha Allah",
+      "still": true
+    },
+    {
+      "shot": "S12",
+      "room": "K",
+      "scene_index": 12,
+      "facet": "gateway",
+      "turn": "same gateway, forehead touch",
+      "stands": [
+        "bride",
+        "groom"
+      ],
+      "board": "same hanging sign as S11 \u2014 not a new room, no still",
+      "text": "Insha Allah",
+      "still": false,
+      "video_only_same_facet": true
+    }
+  ],
+  "board": {
+    "png": "/workspace/fmi-productions/kerala-christian-vtv-mood/spatial-drafts/kc-v1-board-swap-20261004/continuity/SPATIAL_SHOT_BOARD_16x9_v1.png",
+    "jpg": "/workspace/fmi-productions/kerala-christian-vtv-mood/spatial-drafts/kc-v1-board-swap-20261004/continuity/SPATIAL_SHOT_BOARD_16x9_v1.jpg",
+    "png_sha256": "007a79612aaca9d83f710e65084de1bb24b8efa89b13879ce00db51e67b417e6",
+    "jpg_sha256": "a58481b6c395f7be6e42e9970ea1ba3450696d14f39a127307a260501f4d8076",
+    "width": 2560,
+    "height": 1440
+  },
+  "stills": "not started",
+  "video": "not started"
+}

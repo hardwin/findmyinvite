@@ -1,0 +1,97 @@
+FMI CLIENT DETAILS — Template: Wedding_template_Islam_Cristian_Church (islam-christian-church-v1)
+
+Replace the example text under each field with your real details.
+Keep the same number of lines. Do not change the field names (the lines ending with :).
+
+tagline_line_1:
+TWO FAITHS
+
+tagline_line_2:
+ONE LOVE
+
+invite_script:
+We Invite You
+
+couple_initials:
+A&R
+
+invitation_of:
+The Wedding of
+
+bride_name:
+Anusha
+
+groom_name:
+Rishad
+
+groom_label:
+Groom:
+
+bride_label:
+Bride:
+
+join_us:
+Join Us
+
+venue_title_line_1:
+Wedding
+
+venue_title_line_2:
+Venue
+
+venue_name:
+St Theresa Church
+
+venue_location:
+Crawford
+
+unite_line_1:
+As
+
+unite_line_2:
+Two Faiths
+
+unite_line_3:
+Unite
+
+bless_forever:
+And Bless Our Forever
+
+reception_title_line_1:
+Reception
+
+reception_title_line_2:
+Dinner
+
+reception_time:
+12:00 PM – 4:00 PM
+
+reception_venue:
+AK Thambiyappa Mahal
+
+reception_location:
+Edamalaiapattipudur
+
+ceremony_title_line_1:
+Church
+
+ceremony_title_line_2:
+Wedding Ceremony
+
+ceremony_time:
+10:15 AM – 11:15 AM
+
+save_line_1:
+Save
+
+save_line_2:
+the
+
+save_line_3:
+Date
+
+save_month:
+NOVEMBER
+
+save_day:
+22

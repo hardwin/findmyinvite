@@ -1,0 +1,284 @@
+{
+  "job_type": "VIDEO_JOB",
+  "job_id": "VID-clip-02",
+  "clip_id": "clip-02",
+  "clip_index": 2,
+  "production_id": "kc-v1-recreate-20261003-003016",
+  "mode": "RECREATE_CLIENT_FILL",
+  "batch": "clips-v1",
+  "from_scene_index": 2,
+  "to_scene_index": 3,
+  "duration_seconds": 4,
+  "first_frame_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/assets/output/kerala-christian-v1/clip-1-handoff.jpg",
+  "last_frame_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/assets/output/kerala-christian-v1/image-3.jpg",
+  "first_frame_strategy": "previous-clip-final-decoded-frame",
+  "last_frame_strategy": "scene-image",
+  "first_frame_ready": true,
+  "last_frame_ready": true,
+  "motion_prompt": "Portrait cinematic storybook wedding film, same animated characters and cream-white church plaster with laterite accents. Preserve supplied first-frame content until it is physically hidden by a foreground column or arch pier; uncover the separately staged final scene. Soft diagonal volumetric sunbeams and cool powder-blue shade, bright champagne-gold title bevels with fine glints. PETALS AND LIGHT: continuous distributed slow-motion drift is present from the first frame, not triggered as a burst when the camera stops. Keep about 12-20 separate visible petals at irregular heights and depths \u2014 soft white jasmine, pale pink rose and cream petals. Petals flutter with independent phase, soft air resistance and a little side-to-side wobble; nearby petals drift roughly one tenth of picture height per second in the settled view, distant ones slower. Camera rotation produces the brief directional streaks; after braking the SAME scattered petals become calmly visible, with no sudden emission, rain sheet, confetti explosion or synchronized falling. Bouquets and garlands never detach. Fine dust motes drift inside soft diagonal volumetric sunrays through arched windows. Champagne-gold edges, pearl and jewelry catch moving specular glints; text itself emits no smoke, gold liquid or floor beam.\n\nPRIMARY ACTION: A FULL 90-DEGREE LEFT WHIP-PAN / CAMERA PIVOT INTO THE INVITATION SIDE COURTYARD. This is a quarter-turn in camera HEADING, not a forward dolly followed by a tiny steering correction. The optical axis rotates through roughly 90 degrees; architecture sweeps laterally across the entire frame. Keep forward camera travel below half a meter during the main turn. A very close cream plaster pillar sweeps across the lens with strong directional motion blur and depth parallax. The next subject starts OFFSCREEN AT THE SIDE and is discovered around the corner, never far ahead down the current central aisle.\n\nTIMING: 0.00-0.20s anticipate; 0.20-1.20s turn; 1.20-1.60s brake; 1.60-4.00s settle. Fast angular travel during the middle of the whip, strong cubic ease-out in the final 25 degrees; stop the rotation cleanly at the new viewing direction. Reveal the destination already at readable medium distance by 1.85 seconds, with no prolonged approach. After braking: a tiny counterclockwise arc at constant subject distance. Do not substitute a push-in or zoom for the pivot. Keep live subtle motion rather than a frozen end frame.\n\nThe same floral cross pedestal stays intact and stationary until it leaves screen right behind a near pillar. The rear of the open porch stays open. Reveal a separate family invitation board, never transform the pedestal into the sign.\n\nThe final subject, people, physical sign and all exact lettering match the supplied last image. Fixed scenery remains rigid. No crossfade, text morph, duplicate board or foreground/background copies of people.",
+  "video_prompt": "Portrait cinematic storybook wedding film, same animated characters and cream-white church plaster with laterite accents. Preserve supplied first-frame content until it is physically hidden by a foreground column or arch pier; uncover the separately staged final scene. Soft diagonal volumetric sunbeams and cool powder-blue shade, bright champagne-gold title bevels with fine glints. PETALS AND LIGHT: continuous distributed slow-motion drift is present from the first frame, not triggered as a burst when the camera stops. Keep about 12-20 separate visible petals at irregular heights and depths \u2014 soft white jasmine, pale pink rose and cream petals. Petals flutter with independent phase, soft air resistance and a little side-to-side wobble; nearby petals drift roughly one tenth of picture height per second in the settled view, distant ones slower. Camera rotation produces the brief directional streaks; after braking the SAME scattered petals become calmly visible, with no sudden emission, rain sheet, confetti explosion or synchronized falling. Bouquets and garlands never detach. Fine dust motes drift inside soft diagonal volumetric sunrays through arched windows. Champagne-gold edges, pearl and jewelry catch moving specular glints; text itself emits no smoke, gold liquid or floor beam.\n\nPRIMARY ACTION: A FULL 90-DEGREE LEFT WHIP-PAN / CAMERA PIVOT INTO THE INVITATION SIDE COURTYARD. This is a quarter-turn in camera HEADING, not a forward dolly followed by a tiny steering correction. The optical axis rotates through roughly 90 degrees; architecture sweeps laterally across the entire frame. Keep forward camera travel below half a meter during the main turn. A very close cream plaster pillar sweeps across the lens with strong directional motion blur and depth parallax. The next subject starts OFFSCREEN AT THE SIDE and is discovered around the corner, never far ahead down the current central aisle.\n\nTIMING: 0.00-0.20s anticipate; 0.20-1.20s turn; 1.20-1.60s brake; 1.60-4.00s settle. Fast angular travel during the middle of the whip, strong cubic ease-out in the final 25 degrees; stop the rotation cleanly at the new viewing direction. Reveal the destination already at readable medium distance by 1.85 seconds, with no prolonged approach. After braking: a tiny counterclockwise arc at constant subject distance. Do not substitute a push-in or zoom for the pivot. Keep live subtle motion rather than a frozen end frame.\n\nThe same floral cross pedestal stays intact and stationary until it leaves screen right behind a near pillar. The rear of the open porch stays open. Reveal a separate family invitation board, never transform the pedestal into the sign.\n\nThe final subject, people, physical sign and all exact lettering match the supplied last image. Fixed scenery remains rigid. No crossfade, text morph, duplicate board or foreground/background copies of people.",
+  "prompt_sha256": "f3c3602b0dcc259d6b72753cc79918f15ff8dab25692e475b37027194923f633",
+  "prompt_policy": "CLIENT_FILL \u2014 locked video_prompt verbatim; Spatial constraints folded only; do NOT rewrite creative prose",
+  "resolution": "720p",
+  "width": 720,
+  "height": 1280,
+  "fps": 24,
+  "aspect": "9:16",
+  "camera_instruction": "LEFT 90-degree pivot; a tiny counterclockwise arc at constant subject distance",
+  "anchors": {
+    "first": {
+      "strategy": "previous-clip-final-decoded-frame",
+      "clip": 1
+    },
+    "last": {
+      "strategy": "scene-image",
+      "scene": 3
+    },
+    "interior_keyframes": []
+  },
+  "continuity_rules_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/continuity/CONTINUITY_BIBLE.json#clip-02",
+  "continuity_clip": {
+    "id": "clip-02",
+    "index": 2,
+    "from_scene": 2,
+    "to_scene": 3,
+    "duration_s": 4,
+    "camera": "LEFT 90-degree pivot; a tiny counterclockwise arc at constant subject distance",
+    "first_anchor": {
+      "strategy": "previous_clip_final_decoded_frame",
+      "clip": 1
+    },
+    "last_anchor": {
+      "strategy": "scene-image",
+      "scene": 3
+    },
+    "video_path": "clip-2.mp4",
+    "final_frame_path": "clip-2-handoff.jpg",
+    "continuity_rules": [
+      "Connection shot \u2014 not independent cinema",
+      "Preserve object counts, identity, architecture and locked copy across adjacent facets",
+      "Petals continuous drift; no burst on camera stop",
+      "Continuity clip QC waived from start; do not wait for Continuity LOCK or APPROVED_HANDOFF"
+    ]
+  },
+  "continuity_global": {
+    "characters": {
+      "groom": "Adult Kerala Christian groom, visibly polished storybook 3D animation, warm medium-brown skin, slender adult oval face, large dark-brown almond eyes, thick dark eyebrows, smooth clean-shaven cheeks and chin, soft black hair with a gentle side part, quiet reserved smile. No moustache or beard. Natural adult proportions, not a child. Ivory formal suit over a cream shirt with a soft white-and-pale-pink boutonniere. Keep this face, hair, body and outfit consistent in every couple scene.",
+      "bride": "Adult Kerala Christian bride, visibly polished storybook 3D animation, warm medium-brown skin, graceful oval face, large dark-brown almond eyes, gently arched black eyebrows, soft smile. Dark hair in an elegant low bun with a soft veil and white jasmine accents, delicate gold cross pendant and pearl earrings. Ivory lace-and-silk wedding gown with soft cream undertones. Natural adult proportions and a consistent face, hairstyle, jewelry and gown in every later scene."
+    },
+    "style_excerpt": "A full-bleed portrait 9:16 frame of a richly cinematic dimensional storybook-animation Kerala Christian church wedding invitation. Soft romantic late-2000s South Indian cinema mood: dreamy natural light, intimate coastal Kerala atmosphere, gentle teal-and-warm contrast, quiet emotional longing. Soft cream and powder-blue palette with pearl highlights, pale pink florals and cool backwaters haze beyond coconut palms. Cream-white Portuguese-influenced plaster walls, laterite stone accents, arched windows, a modest bell tower and a simple cross. Premium animated adult characters with sculpted expressive faces, never photographic people. DRAMATIC CHIAROSCURO: gentle warm back-and-side sunlight streams diagonally through arched windows and open porch bays, clearly visible soft volumetric god rays cutting through thin coastal atmospheric haze; luminous rim light on ivory silk, lace, pearl and champagne-gold frames against cooler powder-blue shade. Preserve readable highlights, not a flat uniformly bright wash. Very fine dust motes sparkle only inside the sunbeams. Floor is subtly reflective worn cream stone or polished laterite tile, not a mirror. Gold lettering has illuminated beveled ed",
+    "particle_motion": "PETALS AND LIGHT: continuous distributed slow-motion drift is present from the first frame, not triggered as a burst when the camera stops. Keep about 12-20 separate visible petals at irregular heights and depths \u2014 soft white jasmine, pale pink rose and cream petals. Petals flutter with independent phase, soft air resistance and a little side-to-side wobble; nearby petals drift roughly one tenth of picture height per second in the settled view, distant ones slower. Camera rotation produces the brief directional streaks; after braking the SAME scattered petals become calmly visible, with no sudden emission, rain sheet, confetti explosion or synchronized falling. Bouquets and garlands never detach. Fine dust motes drift inside soft diagonal volumetric sunrays through arched windows. Champagne-gold edges, pearl and jewelry catch moving specular glints; text itself emits no smoke, gold liquid or floor beam.",
+    "lighting": "ONE warm soft sunrise from camera-left throughout daytime; evening reception separate lamp-lit mood for scene-09; gentle teal-and-warm contrast",
+    "typography": "luminous champagne-gold / antique-gold beveled dimensional lettering; exact customer copy only",
+    "architecture": "ONE white Portuguese-influenced Kerala Catholic church compound near Alappuzha backwaters (storybook visual lock; venue TEXT = Venkatadri Gardens / Katheru / Rajahmundry \u2014 not a literal new venue redesign)",
+    "object_count_rules": [
+      "Exactly one invitation title board where a board is specified",
+      "Exactly one SAVE THE DATE board in couple/date scenes",
+      "Exactly one bride and one groom in couple scenes (never duplicates)",
+      "Exactly one floral cross pedestal in porch",
+      "Exactly one modest bell tower",
+      "Exactly one church compound throughout",
+      "Couple scenes: exactly one Swaroop and one Smiley \u2014 never duplicates, clones, or extras"
+    ],
+    "continuity_waived": true,
+    "continuity_gate": "WAIVED"
+  },
+  "clip_summary": {
+    "edge": "B-C",
+    "from_facet": "open_arched_porch_vestibule",
+    "to_facet": "side_courtyard_bay",
+    "camera": "LEFT 90-degree pivot; a tiny counterclockwise arc at constant subject distance"
+  },
+  "output_clip_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/assets/output/kerala-christian-v1/clip-2.mp4",
+  "asset_clip_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/assets/output/kerala-christian-v1/clip-2.mp4",
+  "asset_handoff_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/assets/output/kerala-christian-v1/clip-2-handoff.jpg",
+  "final_frame_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/assets/output/kerala-christian-v1/clip-2-handoff.jpg",
+  "model": {
+    "resolution": "720p",
+    "credentials_env": "XAI_API_KEY",
+    "id": "grok-imagine-video-1.5",
+    "provider": "xai"
+  },
+  "dependencies": [
+    "prior_handoff:VID-clip-1:DECODED_HANDOFF",
+    "start_handoff:/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/assets/output/kerala-christian-v1/clip-1-handoff.jpg",
+    "end_still:/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/assets/output/kerala-christian-v1/image-3.jpg"
+  ],
+  "max_paid_attempts": 2,
+  "attempt": 1,
+  "authorized_by_orchestrator": true,
+  "authorized_to_dispatch": true,
+  "status": "ACCEPTED_AS_IS",
+  "awaiting": null,
+  "unlock_next_on": "decoded_final_frame_of_VID-clip-1",
+  "orchestrator_auth": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/packets/ORCHESTRATOR_GO_VIDEO.json",
+  "asset_producer_auth": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/packets/ORCHESTRATOR_GO_ASSET_PRODUCER_VIDEO.json",
+  "orchestrator_waive": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/packets/ORCHESTRATOR_WAIVE_CONTINUITY_CLIPS.json",
+  "stills_complete_auth": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/packets/ORCHESTRATOR_STILLS_COMPLETE.json",
+  "skip_spatial": false,
+  "spatial_map_version": "spatial-v1",
+  "spatial_map_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/continuity/SPATIAL_MAP.json",
+  "spatial": {
+    "spatial_map_version": "spatial-v1",
+    "edge": "B-C",
+    "clip": "clip-02",
+    "from": {
+      "scene_index": 2,
+      "scene_id": "scene-02",
+      "room": "B",
+      "shot": "S2",
+      "facet": "open_arched_porch_vestibule",
+      "zone": "inside open arched porch vestibule",
+      "camera_pose": {
+        "framing": "eye-level inside porch facing floral cross + distant tower through open rear",
+        "bias": "two front columns frame edges; pedestal lower-middle ~40% height",
+        "height": "eye",
+        "look": "north through open rear arches to bell tower",
+        "aim": "north toward tower axis",
+        "fov_hint": "standard eye-level porch",
+        "move_intent": "LEFT 90\u00b0 pivot to side courtyard C (clip-02)"
+      },
+      "visible_set_pieces": [
+        "four cream corner columns + shallow tiled roof",
+        "all four sides OPEN including rear",
+        "ONE floral cross on low square pedestal between two candle stands",
+        "bell tower beyond rear arches",
+        "polished cream floor reflections",
+        "freestanding dimensional blessing letters"
+      ]
+    },
+    "to": {
+      "scene_index": 3,
+      "scene_id": "scene-03",
+      "room": "C",
+      "shot": "S3",
+      "facet": "side_courtyard_bay",
+      "zone": "side courtyard bay beside porch (reached by turning LEFT out of porch)",
+      "camera_pose": {
+        "framing": "eye-level into side courtyard; invitation board lower 2/3",
+        "bias": "garlanded cream pillar extreme LEFT foreground; tower offset FAR RIGHT",
+        "height": "eye",
+        "look": "diagonally into courtyard bay (not through porch tunnel)",
+        "aim": "west-northwest into courtyard; tower FR",
+        "fov_hint": "eye-level courtyard",
+        "move_intent": "RIGHT 90\u00b0 + upward tilt then lateral drift into aisle D (clip-03)"
+      },
+      "visible_set_pieces": [
+        "ONE ivory invitation board on champagne-gold plinth",
+        "garlanded cream pillar extreme left",
+        "partial bell tower offset FAR RIGHT",
+        "courtyard paving extending diagonally behind board",
+        "soft candle stands + white-pink florals"
+      ],
+      "video_only_same_facet": false
+    },
+    "camera_move_intent": "LEFT 90\u00b0 pivot + tiny CCW arc",
+    "forbidden_reuse": [
+      "reuse aerial establish framing",
+      "masonry rear wall / nested doorway / inner sanctuary box",
+      "rectangular nameplate",
+      "duplicate crosses",
+      "people",
+      "second porch",
+      "multiple towers",
+      "porch interior / floral cross pedestal as hero",
+      "centered tower tunnel behind sign",
+      "altar/sanctuary visible",
+      "duplicate boards",
+      "reuse aisle D or altar G"
+    ],
+    "visible_set_pieces": {
+      "from": [
+        "four cream corner columns + shallow tiled roof",
+        "all four sides OPEN including rear",
+        "ONE floral cross on low square pedestal between two candle stands",
+        "bell tower beyond rear arches",
+        "polished cream floor reflections",
+        "freestanding dimensional blessing letters"
+      ],
+      "to": [
+        "ONE ivory invitation board on champagne-gold plinth",
+        "garlanded cream pillar extreme left",
+        "partial bell tower offset FAR RIGHT",
+        "courtyard paving extending diagonally behind board",
+        "soft candle stands + white-pink florals"
+      ],
+      "relevant_to_motion": [
+        "LEFT 90\u00b0 pivot + tiny CCW arc"
+      ]
+    },
+    "offscreen_neighbors": {
+      "from": {
+        "L": "C side courtyard (LEFT exit \u2014 next)",
+        "R": "east porch bay / approach",
+        "behind": "south front steps / aerial approach",
+        "ahead": "courtyard pool + bell tower (still outside)"
+      },
+      "to": {
+        "L": "west compound wall / later cloister F",
+        "R": "B porch (just left)",
+        "behind": "south compound edge",
+        "ahead": "D shaded side aisle entrance north of bay"
+      }
+    },
+    "next_edge": {
+      "to": "scene-03",
+      "move": "LEFT 90\u00b0 pivot + tiny CCW arc",
+      "edge": "B-C",
+      "clip": "clip-02"
+    }
+  },
+  "continuity_waived": true,
+  "continuity_gate": "WAIVED",
+  "waive_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/packets/ORCHESTRATOR_WAIVE_CONTINUITY_CLIPS.json",
+  "fast_path": true,
+  "visual_qc": {
+    "continuity": "WAIVED",
+    "spatial": "FOLDED_SPATIAL_V1",
+    "prompt": "LOCKED_VERBATIM"
+  },
+  "dispatch_target": "Video Director / FMI Video Floor",
+  "dependencies_satisfied": false,
+  "context_isolation": {
+    "includes_full_template": false,
+    "includes_other_clips": false,
+    "includes_unrelated_scenes": false,
+    "rule": "Video Director gets this clip packet plus required frames only; sequential chain via decoded handoff; never full template.json"
+  },
+  "retry_policy": {
+    "automatic_paid_retries": false,
+    "max_paid_attempts": 2
+  },
+  "template_sha256": "7d0c8f3060e3c11e2f1b3800661cad30d30602313961c1feeecdf0db9f8d130b",
+  "continuity_bible_sha256": "c1df9dbd053e8c243f3d7465f7ea64debc2b9d83db1cc98fd59aaa57dc27ada1",
+  "staged_at": "2026-10-03T00:49:23+05:30",
+  "dispatch_target_note": "Parent orchestrator dispatches only VID-clip-01; AP does not dispatch Video Floor",
+  "preserve_prior_productions": [
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532",
+    "/workspace/fmi-productions/nandini-karthik-remake (nk-v1)"
+  ],
+  "source": "template.json clips[].video_prompt (locked verbatim) + ORCHESTRATOR_GO_VIDEO clip_graph + SPATIAL_MAP spatial-v1 + CONTINUITY_BIBLE compact subsections",
+  "orchestrator_recue_auth": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/packets/ORCHESTRATOR_RECUE_VIDEO_EMIT.json",
+  "dispatched_at": "2026-10-03T00:59:15+05:30",
+  "unlocked_from": "VID-clip-01",
+  "unlock_basis": "decoded_handoff_NO_QC_AUTO_DISK_WATCH",
+  "result": {
+    "sha256": "cda1aa0d3241abca54cad3aa25b2a8cd1be6c8d820a1ca91a49bc1a997b3860f",
+    "request_id": "d3aa71a8-2809-90b2-a119-09ec45577a61",
+    "output_clip_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/assets/output/kerala-christian-v1/clip-2.mp4",
+    "final_frame_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/assets/output/kerala-christian-v1/clip-2-handoff.jpg",
+    "technical_probe": {
+      "w": 720,
+      "h": 1280,
+      "fps": "24/1",
+      "duration_s": 4.041667
+    },
+    "finished_at": "2026-10-03T00:53:35.814404+05:30"
+  },
+  "clip_sha256": "cda1aa0d3241abca54cad3aa25b2a8cd1be6c8d820a1ca91a49bc1a997b3860f",
+  "handoff_sha256": "c26fcf80f2b3348c7f0d7c6a6c857d3d5d8d738d0d4f0647d33428ca000a1133",
+  "generated_noted_at": "2026-10-03T00:59:30+05:30",
+  "qc_waived": true,
+  "accepted_at": "2026-10-03T01:10:27+05:30"
+}

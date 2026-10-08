@@ -1,0 +1,44 @@
+{
+  "packet_type": "ORCHESTRATOR_RETRY_AUTH",
+  "production_id": "nk-v1-20261002-072013",
+  "batch": "clips-v5",
+  "job_id": "VID-v5-clip-02",
+  "clip_id": "clip-02",
+  "attempt": 2,
+  "max_paid_attempts": 2,
+  "paid_attempts_used_before": 1,
+  "authorized_at": "2026-10-02T09:03:09+05:30",
+  "prior_qc": "/workspace/fmi-productions/nandini-karthik-remake/logs/video_jobs_v5/QC_clip-02_attempt1.json",
+  "prior_decision": "RETRY",
+  "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/VIDEO_JOB/clip-02.v5.json",
+  "first_frame": "/workspace/fmi-productions/nandini-karthik-remake/assets/handoffs-v5/clip-01-handoff.jpg",
+  "first_frame_rule": "previous-clip-final-decoded-frame \u2014 use clip-01-handoff.jpg exactly; never regenerate",
+  "last_frame": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5/scene-03.jpg",
+  "output": "/workspace/fmi-productions/nandini-karthik-remake/assets/clips-v5/clip-02.mp4",
+  "handoff_output": "/workspace/fmi-productions/nandini-karthik-remake/assets/handoffs-v5/clip-02-handoff.jpg",
+  "retry_instruction": "Keep FIRST = decoded assets/handoffs-v5/clip-01-handoff.jpg (never regenerate). Lock LAST hard to stills-v5/scene-03.jpg: left_side_aisle arcade \u2014 carved pillars + banana between columns + urulis/nilavilakku + polished floor depth INTO aisle ending at stairs/landing WITHOUT a dense stage floral wall as the destination hero. Camera: STRAIGHT into threshold then turn LEFT into left_side_aisle with real translation/occlusion/parallax; continuous motion, no morph/crossfade/hold; empty; no lake/gopuram/boat/text.",
+  "violations_targeted": [
+    {
+      "rule": "last_frame_match",
+      "expected": "stills-v5/scene-03.jpg \u2014 left_side_aisle arcade depth ending at stairs/landing (no stage floral wall as hero)",
+      "observed": "aisle-like corridor but far end dominated by dense white floral wall/backdrop; weaker last-vs-scene-03 match (mae\u224812.7, corr\u22480.58; far-band corr\u22480.46)"
+    },
+    {
+      "rule": "forbidden_reuse",
+      "expected": "no stage floral wall as main on this beat",
+      "observed": "dense white floral wall as destination hero at end of aisle"
+    }
+  ],
+  "do_not": [
+    "rewrite motion prompt beyond defect-targeted retry_instruction",
+    "change duration/resolution/aspect",
+    "unlock clip-03..05",
+    "regenerate first frame"
+  ],
+  "held": [
+    "VID-v5-clip-03",
+    "VID-v5-clip-04",
+    "VID-v5-clip-05"
+  ],
+  "instruction": "Video Director: generate attempt-2 following QC retry_instruction ONLY. Stop for Visual QC. Continuity: no LOCK until PASS."
+}

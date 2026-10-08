@@ -1,0 +1,39 @@
+{
+  "packet_type": "ASSET_PRODUCER_RECUE_CLIP01_A2",
+  "production_id": "kc-v1-recreate-20261002-192743",
+  "dispatched_at": "2026-10-02T19:53:03+05:30",
+  "status": "DISPATCHED",
+  "job_id": "VID-clip-01",
+  "attempt": 2,
+  "orchestrator_recue": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/ORCHESTRATOR_RECUE_CLIP01_A2.json",
+  "retry_auth": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/ORCHESTRATOR_RETRY_clip-01_attempt2.json",
+  "hold_lifted": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/ORCHESTRATOR_HOLD_XAI_CREDITS.json",
+  "video_job": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/VIDEO_JOB/clip-01.json",
+  "first_frame": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/image-1.jpg",
+  "last_frame": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/image-2.jpg",
+  "archive_a1": {
+    "video": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/clip-1.attempt1.mp4",
+    "handoff": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/clip-1-handoff.attempt1.jpg"
+  },
+  "retry_instruction": "Regenerate VID-clip-01 attempt-2 only. Keep locked video_prompt. FIRST=image-1.jpg LAST=image-2.jpg. Must be ONE continuous forward-down dive then slow push through the SAME white Portuguese-Kerala church compound: reflecting courtyard \u2192 into open porch vestibule with floral cross + candles already in world \u2192 settle on With God's Grace / We Invite You. FORBIDDEN: mid-shot morph that swaps the courtyard church mass for a different waterway/distant-church plate; FORBIDDEN: blessing text popping into existence; FORBIDDEN: sudden petal burst at mid-clip \u2014 petals continuous drift from first frame. Preserve ONE bell tower family and open porch all-sides-open identity.",
+  "prompt_policy": "locked video_prompt unchanged",
+  "authorized_to_dispatch": true,
+  "downstream_held": [
+    "clip-02",
+    "clip-03",
+    "clip-04",
+    "clip-05",
+    "clip-06",
+    "clip-07",
+    "clip-08",
+    "clip-09",
+    "clip-10",
+    "clip-11"
+  ],
+  "dispatch_target": "FMI Video Floor / Video Director",
+  "rules": [
+    "Same Continuity retry_instruction",
+    "Stop for Continuity after GENERATED",
+    "No unlock clip-02 until APPROVED_HANDOFF"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "document": "CONTINUITY_STAND_DOWN_CLIPS",
+  "production_id": "kc-v1-recreate-20261002-192743",
+  "mode": "RECREATE_IDENTICAL",
+  "authorized_by": "Ashok via FMI Orchestrator",
+  "waive_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/ORCHESTRATOR_WAIVE_CONTINUITY_CLIPS.json",
+  "scope": "all VIDEO clips clip-01..11",
+  "action": "STAND_DOWN",
+  "clip_qc": "WAIVED",
+  "veto_handoff_gate": "WAIVED",
+  "stills": "COMPLETE unchanged (01\u201311 LOCK preserved)",
+  "bible": "CONTINUITY_BIBLE preserved",
+  "prior_clip01_judgments": {
+    "a1": "VETO preserved clip-01.clips-a1.json",
+    "a2": "VETO preserved clip-01.clips-a2.json (historical; gate superseded by waive)"
+  },
+  "clip_01": {
+    "continuity_decision": "SUPERSEDED_BY_ASHOK_WAIVE",
+    "orchestrator_status": "ACCEPTED_AS_IS_CONTINUITY_WAIVED",
+    "approved_handoff": true,
+    "note": "Handoff unlock is Orchestrator/Ashok waive \u2014 not Continuity LOCK"
+  },
+  "rules": [
+    "No further Continuity LOCK/VETO on clips for this recreate",
+    "Do not block AP sequential unlocks or Video Director chain",
+    "Idle unless Orchestrator recalls Continuity for stills or another production"
+  ],
+  "stood_down_at": "2026-10-02T19:57:48+05:30"
+}

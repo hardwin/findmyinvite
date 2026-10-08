@@ -1,0 +1,16 @@
+{
+  "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-3.jpg",
+  "job_id": "IMG-scene-03",
+  "scene_id": "scene-03",
+  "decision": "PASS",
+  "rationale": "720\u00d71280; ONE ivory invitation board with champagne-gold frame; exact 'The Wedding of' / 'Alex & Anna'; bell tower offset right (not centered tunnel); no altar/people; jasmine/rose; sunrise upper-left; storybook 3D.",
+  "violations": [],
+  "retry_instruction": null,
+  "attempt": 1,
+  "technical": {
+    "w": 720,
+    "h": 1280,
+    "ok": true
+  },
+  "decided_at": "2026-10-01T23:14:35.538499+05:30"
+}

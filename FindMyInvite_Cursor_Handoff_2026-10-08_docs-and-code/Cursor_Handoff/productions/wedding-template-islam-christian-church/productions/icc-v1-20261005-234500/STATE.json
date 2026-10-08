@@ -1,0 +1,383 @@
+{
+ "production_id": "icc-v1-20261005-234500",
+ "title": "Wedding_template_Islam_Cristian_Church",
+ "template_id": "islam-christian-church-v1",
+ "template_sha256": "075f842e2659ea88ba303449ad173c428769b42bd9434a0a2538c7fb5674d42c",
+ "phase": "CHUBBY_BRIDE_V5_DELIVERED",
+ "mode": "NO_QC_GENERATE_AND_STITCH",
+ "spatial_waived": true,
+ "spatial_waive_reason": "Ashok SOP via FMI ReCreate 2026-10-05 ~23:44 IST: no QC, no continuity or spatial board; stills straight from image_prompts",
+ "continuity_waived": true,
+ "image_jobs_authorized": true,
+ "video_jobs_authorized": true,
+ "video_hold_reason": null,
+ "scenes": 12,
+ "clips": 11,
+ "updated_at": "2026-10-07T20:04:43.986038+05:30",
+ "not": [
+  "Theresa & Isaac",
+  "nk-v1",
+  "mosque-courtyard",
+  "Kerala Christian productions"
+ ],
+ "template_source": "/workspace/fmi-productions/wedding-template-islam-christian-church/template.json",
+ "assets_root_override": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/assets",
+ "stills": "image-1.jpg through image-12.jpg, 720x1280",
+ "video": "HOLD — client-rev stills await Ashok approval",
+ "image_style": "Pixar-style 3D animated (FULL RESTYLE)",
+ "restyle_note": "FULL PIXAR RESTYLE 2026-10-06T00:37:15.119069+05:30: all 9 stills regenerated text-only from template 8ade25af... (FMI ReCreate relaying Ashok); previous stills archived in assets/output/archive-pre-pixar-restyle/; receipt packets/ASSET_PRODUCER_PIXAR_RESTYLE_DELIVERY.json; NO_QC; video HOLD",
+ "people_restyle_note": "PEOPLE restyle 2026-10-06T00:48:46.541865+05:30: scenes 3,4,5,6,7,9 regenerated text-only from template 62b342dc... (mookuthi, full-figured couple, scene-05 gift boxes); 1,2,8 kept from pixar restyle; archive assets/output/archive-pre-people-restyle/; receipt packets/ASSET_PRODUCER_PEOPLE_RESTYLE_DELIVERY.json; NO_QC; video HOLD",
+ "last_clip": {
+  "job_id": "VID-clip-02",
+  "clip_id": "clip-02",
+  "production_id": "icc-v1-20261005-234500",
+  "status": "generated",
+  "output_clip_path": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/assets/output/clip-2.mp4",
+  "generation_id": "60e0c91f-2f5a-98bb-9a81-a3ca0acedc94",
+  "request_id": "60e0c91f-2f5a-98bb-9a81-a3ca0acedc94",
+  "sha256": "914816a02139c8a90dbaa672cf5fe2f0bc485f8b053bdbcb7a31935724c0f021",
+  "attempt": 1,
+  "qc_skipped": true,
+  "no_qc": true,
+  "model": "grok-imagine-video-1.5",
+  "duration_seconds": 5,
+  "resolution": "720p",
+  "aspect_ratio": "9:16",
+  "first_frame": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/assets/output/image-2.jpg",
+  "last_frame": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/assets/output/image-3.jpg",
+  "first_file_id": "file_11fe855a-2679-4020-877c-07414bf4944b",
+  "last_file_id": "file_bb76d7e3-7e1d-4652-9d48-548adae1d7e8",
+  "video_url": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-60e0c91f-2f5a-98bb-9a81-a3ca0acedc94.mp4",
+  "usage": {
+   "cost_in_usd_ticks": 7200000000
+  },
+  "technical_probe": {
+   "w": 720,
+   "h": 1280,
+   "fps": "24/1",
+   "nb_frames": "121",
+   "duration_s": 5.041667
+  },
+  "prompt_len": 3872,
+  "prompt_sha256": "b0163c8f38790796cb407c58175f56a2d4aa52c864cbb816b86582840c88082a",
+  "prompt_truncated": false,
+  "updated_at": "2026-10-06T07:17:12.730817+05:30"
+ },
+ "final": {
+  "production_id": "icc-v1-20261005-234500",
+  "status": "final_stitched",
+  "final_path": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/assets/output/islam-christian-church-v1-final.mp4",
+  "sha256": "de67cc0714e4fcdbe51689b4d92b8baf7719d8548eae09f2fabff033ae30d4d1",
+  "technical_probe": {
+   "w": 720,
+   "h": 1280,
+   "fps": "24/1",
+   "nb_frames": "1379",
+   "duration_s": 57.458333
+  },
+  "clips": [
+   {
+    "n": 1,
+    "path": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/assets/output/clip-1.mp4",
+    "sha256": "49c1f9e05d743b5bccc7059db79a2bc2787966746cc13b6df8838f933d30bb72"
+   },
+   {
+    "n": 2,
+    "path": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/assets/output/clip-2.mp4",
+    "sha256": "a1ef07c337f9394c6d61102fdc52f41330b8c71e200caaa0ab136eacb23e6897"
+   },
+   {
+    "n": 3,
+    "path": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/assets/output/clip-3.mp4",
+    "sha256": "7c579796c5b7568c0b57c42ab7dbcd37385c2da16fd3f8babc9fa9585ea10c10"
+   },
+   {
+    "n": 4,
+    "path": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/assets/output/clip-4.mp4",
+    "sha256": "ebc57db338b702b51ea263670ed1bd78d8c1bcc05680b6005f16deb7795952dc"
+   },
+   {
+    "n": 5,
+    "path": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/assets/output/clip-5.mp4",
+    "sha256": "9e3339a7465386cf753b35f2e04a1f0816e0ec29f51fbd43ed994025e78952dd"
+   },
+   {
+    "n": 6,
+    "path": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/assets/output/clip-6.mp4",
+    "sha256": "71a65817867e9cd473d7ee547c46effbebb98793fb7b605523cd74d8faab259b"
+   },
+   {
+    "n": 7,
+    "path": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/assets/output/clip-7.mp4",
+    "sha256": "df6514de87a05ecfc06f12c5d9a7b6281b8c65ab80898e0e6b254a2653bae703"
+   },
+   {
+    "n": 8,
+    "path": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/assets/output/clip-8.mp4",
+    "sha256": "01382fb683851d4aec982a61b098e6b9ac2595375ea110c9516430bd9e252cb3"
+   },
+   {
+    "n": 9,
+    "path": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/assets/output/clip-9.mp4",
+    "sha256": "d0fe4f5377af4496c0dda2cbb39a9fd581ae9df02e1d747d4a564ba71c3ff789"
+   },
+   {
+    "n": 10,
+    "path": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/assets/output/clip-10.mp4",
+    "sha256": "e1b41799000c4597192b507e089fa8421f3eb67bd7306b47096908a4798be758"
+   },
+   {
+    "n": 11,
+    "path": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/assets/output/clip-11.mp4",
+    "sha256": "3f12acf6f03e88b85cd0cb452d0351de76a0d03f03fc8dcb00a66a8ec024a0bf"
+   }
+  ],
+  "template_sha256": "075f842e2659ea88ba303449ad173c428769b42bd9434a0a2538c7fb5674d42c",
+  "updated_at": "2026-10-06T16:46:17.527667+05:30",
+  "no_qc": true,
+  "assembly": "hard_cut_silent_720x1280"
+ },
+ "final_video": {
+  "path": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/assets/output/islam-christian-church-v1-final.mp4",
+  "sha256": "fbc85e743b39395a3c329e9e0c0b25c4c292134fe04a27de3ae44ae3fa0e712b",
+  "technical_probe": {
+   "w": 720,
+   "h": 1280,
+   "fps": "24/1",
+   "nb_frames": "1065",
+   "duration_s": 44.375,
+   "codec": "h264",
+   "audio_streams": 0
+  },
+  "assembly": "hard_cut_silent_720x1280",
+  "no_qc": true
+ },
+ "delivery_receipt": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/packets/ASSET_PRODUCER_ICC_DRONE_VIDEO_DELIVERY.json",
+ "stitch_status": "final_stitched",
+ "clip_list": [
+  {
+   "clip_id": "clip-01",
+   "path": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/assets/output/clip-1.mp4",
+   "sha256": "2d40611813835d05af6ece2cd1d72686999edabf710bf3da094310d5a0fd66e7",
+   "source": "NEW (drone phase B)"
+  },
+  {
+   "clip_id": "clip-02",
+   "path": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/assets/output/clip-2.mp4",
+   "sha256": "914816a02139c8a90dbaa672cf5fe2f0bc485f8b053bdbcb7a31935724c0f021",
+   "source": "NEW (drone phase B)"
+  },
+  {
+   "clip_id": "clip-03",
+   "path": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/assets/output/clip-3.mp4",
+   "sha256": "642142a5474b616c6712b53e340ddf191fef94c2a438b78129ff335c1d4d5d40",
+   "source": "kept byte-identical from old clip-2"
+  },
+  {
+   "clip_id": "clip-04",
+   "path": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/assets/output/clip-4.mp4",
+   "sha256": "ce56db5bc5b9b0e92bd23979d0d8c758b552ff8e9be689291b66d8c2ff96998d",
+   "source": "kept byte-identical from old clip-3"
+  },
+  {
+   "clip_id": "clip-05",
+   "path": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/assets/output/clip-5.mp4",
+   "sha256": "8142b362dce8a42b256597da47b89ae866667cbe1259d92e4d963314cdc81edb",
+   "source": "kept byte-identical from old clip-4"
+  },
+  {
+   "clip_id": "clip-06",
+   "path": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/assets/output/clip-6.mp4",
+   "sha256": "9a49c4899354570f10c74c3fa186223261ccb7552ed3be5beb8b61c184e4824c",
+   "source": "kept byte-identical from old clip-5"
+  },
+  {
+   "clip_id": "clip-07",
+   "path": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/assets/output/clip-7.mp4",
+   "sha256": "9ba5a02bfc5cb54e32e2a30b5d28fb664b40c8a4a4c5ae23203f10df31257f05",
+   "source": "kept byte-identical from old clip-6"
+  },
+  {
+   "clip_id": "clip-08",
+   "path": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/assets/output/clip-8.mp4",
+   "sha256": "4e4401fdc911fb13d73a6c112139fcf344d690a3435b31bca588197e61d66231",
+   "source": "kept byte-identical from old clip-7"
+  },
+  {
+   "clip_id": "clip-09",
+   "path": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/assets/output/clip-9.mp4",
+   "sha256": "3f98dafcb88a9cc60fac29fc6c007caeb5a0b8e632b0d2d90de5d7d105f1f995",
+   "source": "kept byte-identical from old clip-8"
+  }
+ ],
+ "drone_note": "Opening drone scene added 2026-10-06: image-1 new, clip-1 & clip-2 new, clips 3-9 reused byte-identical; archive assets/output/archive-pre-drone/",
+ "client_rev_note": "CLIENT REV 2026-10-06: image-1,2,3 mosque(L)+church(R); image-4 Dubai-style mosque behind groom; image-10 church removed; NEW image-11 hand-hold finale + planned clip-10 (10->11). Archive assets/output/archive-pre-client-rev-20261006/; receipt packets/ASSET_PRODUCER_ICC_CLIENT_REV_20261006_STILLS.json; Telegram msgs 829-834. Clips 1-4, 9 and final mp4 are now stale vs stills.",
+ "camera_rev_receipt": "packets/ASSET_PRODUCER_ICC_CAMERA_REV_20261006.json",
+ "camera_rev_finals": {
+  "full_720": {
+   "path": "assets/output/islam-christian-church-v1-final.mp4",
+   "sha256": "933181e93701d0215e1029f80747bca77655b9ecfb10ddf46e45b14e969242b0",
+   "frames": 1379,
+   "duration_s": 57.458333
+  },
+  "full_1080": {
+   "path": "assets/output/islam-christian-church-v1-final-1080x1920.mp4",
+   "sha256": "dd97aa0535de3782ecd2bca8bb812010852f138278b3343cf1bf99b922a01e00",
+   "frames": 1379,
+   "duration_s": 57.458333,
+   "encode": "lanczos, 2-pass 6.2 Mb/s (crf 20 would exceed Telegram 50MB)",
+   "bytes": 44373089
+  },
+  "speedramp_1080": {
+   "path": "assets/output/islam-christian-church-v1-final-speedramp-1080x1920.mp4",
+   "sha256": "cf57638c8741653eb5f805c9f880ec0f4472099476d698cd90ac8b239c5705be",
+   "frames": 718,
+   "duration_s": 29.916667,
+   "bytes": 41673612,
+   "recipe": "explicit frame list (no tpad): clips 1-10 = 20f 1x each end + 14f eased middle (55f); clip-11 = 12f 1x each end + 71f gentle eased middle, peak 2.71x (96f = 4.0s); +24f freeze first frame, +48f hold last frame; crf 20 medium"
+  }
+ },
+ "telegram_camera_rev": {
+  "image12_v1_msg": 835,
+  "image12_v2_msg": 836,
+  "speedramp_msg": 837,
+  "full_length_msg": 838
+ },
+ "chubby_bride_receipt": "packets/ASSET_PRODUCER_ICC_CHUBBY_BRIDE_20261006_STILLS.json",
+ "v5_finals": {
+  "full_720": {
+   "sha256": "de67cc0714e4fcdbe51689b4d92b8baf7719d8548eae09f2fabff033ae30d4d1",
+   "frames": 1379,
+   "duration_s": 57.458333
+  },
+  "speedramp_1080": {
+   "sha256": "82ee77be5d633a18bf87214e85b994c2b3bef82b54dd674c2611f01b1f2e1eb4",
+   "frames": 718,
+   "duration_s": 29.916667,
+   "bytes": 40232682
+  },
+  "full_1080": {
+   "sha256": "d08817a684d6c095bd839921928f7303af59f91d8f83ed91508bc82e01483011",
+   "frames": 1379,
+   "duration_s": 57.458333,
+   "bytes": 44191405
+  }
+ },
+ "telegram_v5": {
+  "speedramp_msg": 846,
+  "full_length_msg": 847
+ },
+ "reception_lunch_20261007": {
+  "stage": "2 of 2 — DELIVERED (clips 7/8 regenerated, finals rebuilt and sent)",
+  "change": "reception_title_line_2 Dinner -> Lunch (board now 'Reception' / 'Lunch' / '12:00 PM – 4:00 PM' / 'AK Thambiyappa Mahal' / 'Edamalaiapattipudur')",
+  "template_sha256": "7a0d592715cca0ce7b635daac48caef5269bb39c7fc6493576aa0622c3b4abb0",
+  "template_backup": "template.before-reception-lunch-20261007-191412.json",
+  "edit_script": "scripts/edit_template_reception_lunch_20261007.py",
+  "image": "assets/output/image-8.jpg",
+  "image_sha256": "50e27a5495969a2942130c168cd46d877c409717f18168af4df5d2d9bfd965d0",
+  "replicate_prediction": "2qmvvgcwjdrmt0d12tdvrpqsj0",
+  "generations": 1,
+  "archive": "assets/output/archive-pre-reception-lunch-20261007/",
+  "telegram_msg": 947,
+  "stale_pending_stage2": [],
+  "still_approved": {
+   "by": "Ashok",
+   "telegram_msg": 947
+  },
+  "stage2": {
+   "receipt": "packets/ASSET_PRODUCER_ICC_RECEPTION_LUNCH_20261007_VIDEO.json",
+   "clips": {
+    "clip-07": {
+     "sha256": "245362434639bd9d3e888323ee420950532d874c333cfa6028f5bddf8c27beea",
+     "request_id": "a8373df0-0b8c-913d-b619-8aea4b14a420",
+     "attempt": 1,
+     "paid_generations": 1,
+     "first_frame": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/assets/output/image-7.jpg",
+     "last_frame": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/assets/output/image-8.jpg",
+     "nb_frames": "121",
+     "usage": {
+      "cost_in_usd_ticks": 7200000000
+     }
+    },
+    "clip-08": {
+     "sha256": "2dcc6d1d8eef64de6aeb39492cc7391e0edf91f2c691a4b3ae2bea0645f3454e",
+     "request_id": "a3f8b7d0-a7ed-9b5a-a9f1-fb9a8f81ff9f",
+     "attempt": 1,
+     "paid_generations": 1,
+     "first_frame": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/assets/output/image-8.jpg",
+     "last_frame": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/assets/output/image-9.jpg",
+     "nb_frames": "121",
+     "usage": {
+      "cost_in_usd_ticks": 7200000000
+     }
+    }
+   },
+   "finals": {
+    "speedramp_1080": {
+     "path": "assets/output/islam-christian-church-v1-final-speedramp-1080x1920.mp4",
+     "sha256": "2a2b7f7ac5ff989b9fcc6e66620debf0b558bb50ad4c0be16d644d3efd136cb8",
+     "frames": 718,
+     "duration_s": 29.916667,
+     "bytes": 40619292,
+     "build": "/workspace/icc_work/final/build_sr.py 11 (frame-list idx identical to v5; only c7/c8 re-extracted); libx264 crf 20 medium, lanczos 1080x1920 setsar=1, yuv420p, -an, +faststart"
+    },
+    "full_1080": {
+     "path": "assets/output/islam-christian-church-v1-final-1080x1920.mp4",
+     "sha256": "ab18dd8a9d6d3e086490b5415d4969e0e6458ec846a865247c72e956433e8597",
+     "frames": 1379,
+     "duration_s": 57.458333,
+     "bytes": 44042964,
+     "build": "concat of clips 1-11 (logs/video_jobs/concat_list.txt) -> lanczos 1080x1920, libx264 medium 2-pass 6200k maxrate 8000k bufsize 12000k, yuv420p, -an, +faststart"
+    },
+    "full_720": {
+     "path": "assets/output/islam-christian-church-v1-final.mp4",
+     "sha256": "b71dd1b47dbe245fecdaac8c1532444947f20448925ab3b673d5fc9c0ad30f27",
+     "frames": 1379,
+     "duration_s": 57.458333,
+     "bytes": 29090800,
+     "build": "run_icc_v1_video_chain.concat_all() (hard-cut silent 720x1280)"
+    }
+   },
+   "telegram": {
+    "speedramp_video_msg": 950,
+    "speedramp_document_msg": 951,
+    "full_length_document_msg": 952
+   },
+   "still_stale": [
+    "Anusha-Rishad-Islam-Christian-Instagram-1080x1920.mp4 (not rebuilt by instruction; shows Dinner board)"
+   ],
+   "completed_at": "2026-10-07T20:04:43.986038+05:30"
+  }
+ },
+ "reception_lunch_finals": {
+  "speedramp_1080": {
+   "path": "assets/output/islam-christian-church-v1-final-speedramp-1080x1920.mp4",
+   "sha256": "2a2b7f7ac5ff989b9fcc6e66620debf0b558bb50ad4c0be16d644d3efd136cb8",
+   "frames": 718,
+   "duration_s": 29.916667,
+   "bytes": 40619292,
+   "build": "/workspace/icc_work/final/build_sr.py 11 (frame-list idx identical to v5; only c7/c8 re-extracted); libx264 crf 20 medium, lanczos 1080x1920 setsar=1, yuv420p, -an, +faststart"
+  },
+  "full_1080": {
+   "path": "assets/output/islam-christian-church-v1-final-1080x1920.mp4",
+   "sha256": "ab18dd8a9d6d3e086490b5415d4969e0e6458ec846a865247c72e956433e8597",
+   "frames": 1379,
+   "duration_s": 57.458333,
+   "bytes": 44042964,
+   "build": "concat of clips 1-11 (logs/video_jobs/concat_list.txt) -> lanczos 1080x1920, libx264 medium 2-pass 6200k maxrate 8000k bufsize 12000k, yuv420p, -an, +faststart"
+  },
+  "full_720": {
+   "path": "assets/output/islam-christian-church-v1-final.mp4",
+   "sha256": "b71dd1b47dbe245fecdaac8c1532444947f20448925ab3b673d5fc9c0ad30f27",
+   "frames": 1379,
+   "duration_s": 57.458333,
+   "bytes": 29090800,
+   "build": "run_icc_v1_video_chain.concat_all() (hard-cut silent 720x1280)"
+  }
+ },
+ "telegram_reception_lunch": {
+  "speedramp_msg": 950,
+  "speedramp_doc_msg": 951,
+  "full_length_msg": 952
+ }
+}

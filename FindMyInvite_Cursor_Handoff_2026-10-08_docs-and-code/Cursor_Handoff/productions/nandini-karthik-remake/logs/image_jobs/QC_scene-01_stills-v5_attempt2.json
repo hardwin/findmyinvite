@@ -1,0 +1,36 @@
+{
+  "document": "VISUAL_QC",
+  "production_id": "nk-v1-20261002-072013",
+  "batch": "stills-v5",
+  "job": "IMG-v5-scene-01",
+  "scene_id": "scene-01",
+  "facet_expected": "entrance_thicket",
+  "asset_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5/scene-01.jpg",
+  "sha256": "4630cb371a5e0a4f55ea0e8ec8b1f63c52db03d335edd2c98e774cf5ebd28514",
+  "generation_id": "5h3ktyxeksrmt0d0zacat03me4",
+  "prompt_hash": "dec7c599a8d5618fcef9e03286bc994548027e2f3628bed985c456d1331f50b1",
+  "attempt": 2,
+  "max_paid_attempts": 2,
+  "decision": "PASS",
+  "rationale": "Retry instruction satisfied: extreme-close banana-leaf thicket fills frame with jasmine/dew; only a soft cream architectural glow on far RIGHT (bokeh). No arcade, aisle floor run, lamps, or urulis. No lake/gopuram/mountains/boat, no people, no text.",
+  "violations": [],
+  "checks_passed": [
+    "retry_instruction: extreme-close thicket macro",
+    "retry_instruction: tiny cream glow RIGHT only",
+    "retry_instruction: no arcade/aisle/lamps/urulis",
+    "no lake/gopuram dominant BG",
+    "no couple / no text",
+    "facet entrance_thicket"
+  ],
+  "prior_attempt": {
+    "attempt": 1,
+    "decision": "RETRY",
+    "qc": "/workspace/fmi-productions/nandini-karthik-remake/logs/image_jobs/QC_scene-01_stills-v5_attempt1.json",
+    "archive": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5/scene-01.attempt1.jpg"
+  },
+  "retry_instruction": null,
+  "spatial_map_version": "spatial-v2",
+  "judged_at": "2026-10-02T08:42:45+05:30",
+  "judge": "Visual QC Supervisor",
+  "handoff": "Continuity Director LOCK/VETO (architecture/object; no couple)"
+}

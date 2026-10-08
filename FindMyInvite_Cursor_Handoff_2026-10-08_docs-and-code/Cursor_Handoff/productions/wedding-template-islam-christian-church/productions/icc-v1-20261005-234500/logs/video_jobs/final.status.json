@@ -1,0 +1,74 @@
+{
+  "production_id": "icc-v1-20261005-234500",
+  "status": "final_stitched",
+  "final_path": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/assets/output/islam-christian-church-v1-final.mp4",
+  "sha256": "b71dd1b47dbe245fecdaac8c1532444947f20448925ab3b673d5fc9c0ad30f27",
+  "technical_probe": {
+    "w": 720,
+    "h": 1280,
+    "fps": "24/1",
+    "nb_frames": "1379",
+    "duration_s": 57.458333
+  },
+  "clips": [
+    {
+      "n": 1,
+      "path": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/assets/output/clip-1.mp4",
+      "sha256": "49c1f9e05d743b5bccc7059db79a2bc2787966746cc13b6df8838f933d30bb72"
+    },
+    {
+      "n": 2,
+      "path": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/assets/output/clip-2.mp4",
+      "sha256": "a1ef07c337f9394c6d61102fdc52f41330b8c71e200caaa0ab136eacb23e6897"
+    },
+    {
+      "n": 3,
+      "path": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/assets/output/clip-3.mp4",
+      "sha256": "7c579796c5b7568c0b57c42ab7dbcd37385c2da16fd3f8babc9fa9585ea10c10"
+    },
+    {
+      "n": 4,
+      "path": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/assets/output/clip-4.mp4",
+      "sha256": "ebc57db338b702b51ea263670ed1bd78d8c1bcc05680b6005f16deb7795952dc"
+    },
+    {
+      "n": 5,
+      "path": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/assets/output/clip-5.mp4",
+      "sha256": "9e3339a7465386cf753b35f2e04a1f0816e0ec29f51fbd43ed994025e78952dd"
+    },
+    {
+      "n": 6,
+      "path": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/assets/output/clip-6.mp4",
+      "sha256": "71a65817867e9cd473d7ee547c46effbebb98793fb7b605523cd74d8faab259b"
+    },
+    {
+      "n": 7,
+      "path": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/assets/output/clip-7.mp4",
+      "sha256": "245362434639bd9d3e888323ee420950532d874c333cfa6028f5bddf8c27beea"
+    },
+    {
+      "n": 8,
+      "path": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/assets/output/clip-8.mp4",
+      "sha256": "2dcc6d1d8eef64de6aeb39492cc7391e0edf91f2c691a4b3ae2bea0645f3454e"
+    },
+    {
+      "n": 9,
+      "path": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/assets/output/clip-9.mp4",
+      "sha256": "d0fe4f5377af4496c0dda2cbb39a9fd581ae9df02e1d747d4a564ba71c3ff789"
+    },
+    {
+      "n": 10,
+      "path": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/assets/output/clip-10.mp4",
+      "sha256": "e1b41799000c4597192b507e089fa8421f3eb67bd7306b47096908a4798be758"
+    },
+    {
+      "n": 11,
+      "path": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/assets/output/clip-11.mp4",
+      "sha256": "3f12acf6f03e88b85cd0cb452d0351de76a0d03f03fc8dcb00a66a8ec024a0bf"
+    }
+  ],
+  "template_sha256": "7a0d592715cca0ce7b635daac48caef5269bb39c7fc6493576aa0622c3b4abb0",
+  "updated_at": "2026-10-07T20:03:11.557621+05:30",
+  "no_qc": true,
+  "assembly": "hard_cut_silent_720x1280"
+}

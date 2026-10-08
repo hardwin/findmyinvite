@@ -1,0 +1,64 @@
+{
+  "packet_type": "ASSET_PRODUCER_EMIT_VIDEO_V5",
+  "production_id": "nk-v1-20261002-072013",
+  "recorded_at": "2026-10-02T08:49:19.895823+05:30",
+  "auth": "/workspace/fmi-productions/nandini-karthik-remake/packets/ORCHESTRATOR_STILLS_APPROVED_VIDEO_GO.json",
+  "stills_batch": "stills-v5",
+  "spatial_map_version": "spatial-v2",
+  "job_count": 5,
+  "jobs": [
+    {
+      "job_id": "VID-v5-clip-01",
+      "clip_id": "clip-01",
+      "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/VIDEO_JOB/clip-01.v5.json",
+      "status": "READY_TO_GENERATE",
+      "from": "scene-01",
+      "to": "scene-02"
+    },
+    {
+      "job_id": "VID-v5-clip-02",
+      "clip_id": "clip-02",
+      "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/VIDEO_JOB/clip-02.v5.json",
+      "status": "HELD_PENDING_PREVIOUS_HANDOFF",
+      "from": "scene-02",
+      "to": "scene-03"
+    },
+    {
+      "job_id": "VID-v5-clip-03",
+      "clip_id": "clip-03",
+      "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/VIDEO_JOB/clip-03.v5.json",
+      "status": "HELD_PENDING_PREVIOUS_HANDOFF",
+      "from": "scene-03",
+      "to": "scene-04"
+    },
+    {
+      "job_id": "VID-v5-clip-04",
+      "clip_id": "clip-04",
+      "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/VIDEO_JOB/clip-04.v5.json",
+      "status": "HELD_PENDING_PREVIOUS_HANDOFF",
+      "from": "scene-04",
+      "to": "scene-05"
+    },
+    {
+      "job_id": "VID-v5-clip-05",
+      "clip_id": "clip-05",
+      "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/VIDEO_JOB/clip-05.v5.json",
+      "status": "HELD_PENDING_PREVIOUS_HANDOFF",
+      "from": "scene-05",
+      "to": "scene-06"
+    }
+  ],
+  "video_job_dir": "/workspace/fmi-productions/nandini-karthik-remake/packets/VIDEO_JOB",
+  "chain_spec": "/workspace/fmi-productions/nandini-karthik-remake/packets/VIDEO_CHAIN_SPEC_v5.json",
+  "dispatch_now": [
+    "VID-v5-clip-01"
+  ],
+  "held": [
+    "VID-v5-clip-02",
+    "VID-v5-clip-03",
+    "VID-v5-clip-04",
+    "VID-v5-clip-05"
+  ],
+  "note": "Folded Spatial Map facet/camera/offscreen/forbidden_reuse + Continuity wardrobe/pose. Couple STANDS. Sequential handoff chain.",
+  "kc_v1_order_v2": "STOP unchanged"
+}

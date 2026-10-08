@@ -1,0 +1,50 @@
+{
+  "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-4.jpg",
+  "job_id": "IMG-scene-04",
+  "scene_id": "scene-04",
+  "continuity_decision": "LOCK",
+  "qc_gate": "PASS",
+  "attempt": 1,
+  "decided_at": "2026-10-01T23:16:11.156952+05:30",
+  "checks": [
+    {
+      "rule": "identity_groom",
+      "expected": "single clean-shaven adult; ivory suit; cream shirt; pale-pink boutonniere; storybook 3D",
+      "observed": "matches",
+      "ok": true
+    },
+    {
+      "rule": "object_count_groom",
+      "expected": 1,
+      "observed": 1,
+      "ok": true
+    },
+    {
+      "rule": "object_count_bride",
+      "expected": 0,
+      "observed": 0,
+      "ok": true
+    },
+    {
+      "rule": "typography_name",
+      "expected": "floating gold calligraphy Mr. / Alex John — not a board",
+      "observed": "floating gold Mr. Alex John",
+      "ok": true
+    },
+    {
+      "rule": "lighting_day",
+      "expected": "sunrays from high LEFT arched windows",
+      "observed": "windows left; god rays",
+      "ok": true
+    },
+    {
+      "rule": "architecture",
+      "expected": "shaded side aisle; no outdoor tower",
+      "observed": "interior aisle; no outdoor tower",
+      "ok": true
+    }
+  ],
+  "violations": [],
+  "note": "LOCK after QC PASS. Reaffirmed LOCK to Orchestrator.",
+  "reaffirmed_at": "2026-10-01T23:16:43.044451+05:30"
+}

@@ -1,0 +1,22 @@
+{
+  "packet_type": "ORCHESTRATOR_GO_CLIP01_REGEN_VIDEO",
+  "production_id": "kc-v1-20261001-230532",
+  "authorized_at": "2026-10-02T00:07:59.730849+05:30",
+  "job_id": "VID-clip-01-regen",
+  "job_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/VIDEO_JOB/clip-01.regen.json",
+  "action": "GENERATE_NOW",
+  "first_frame": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-1.jpg",
+  "last_frame": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-2.jpg",
+  "last_frame_locked": true,
+  "output": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1.mp4",
+  "handoff": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1-handoff.jpg",
+  "archive_prior": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1.delivered-v1.mp4",
+  "duration_seconds": 5,
+  "resolution": "720p",
+  "after_generate": "Visual QC on clip-01 only (opening_energy + last-frame land on image-2 + no morph soup). Continuity veto. Then Assembly swap + Final QC + StoryBoard to Process Architect.",
+  "max_paid_attempts": 2,
+  "gates_cleared": {
+    "scene_01_qc": "PASS",
+    "scene_01_continuity": "LOCK_CLEAR"
+  }
+}

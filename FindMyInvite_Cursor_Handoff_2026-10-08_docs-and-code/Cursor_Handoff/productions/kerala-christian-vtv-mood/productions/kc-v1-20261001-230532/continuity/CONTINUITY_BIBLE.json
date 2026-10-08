@@ -1,0 +1,1028 @@
+{
+  "document": "CONTINUITY_BIBLE",
+  "production_id": "kc-v1-20261001-230532",
+  "name": "The Wedding of Alex & Anna",
+  "iteration": "kerala-christian-v1",
+  "created_at": "2026-10-01T23:07:17.619835+05:30",
+  "updated_at": "2026-10-02T00:09:35.484873+05:30",
+  "source": [
+    "packets/continuity_extract.json",
+    "packets/scenes_prompt_extract.json"
+  ],
+  "status": "ACCEPTED_AMENDED_ORDER_V2",
+  "aspect": {
+    "ratio": "9:16",
+    "width": 720,
+    "height": 1280,
+    "fps": 24,
+    "audio": "silent"
+  },
+  "identity": {
+    "groom": {
+      "title": "Mr.",
+      "name": "Alex John",
+      "locked_description": "Adult Kerala Christian groom, visibly polished storybook 3D animation, warm medium-brown skin, slender adult oval face, large dark-brown almond eyes, thick dark eyebrows, smooth clean-shaven cheeks and chin, soft black hair with a gentle side part, quiet reserved smile. No moustache or beard. Natural adult proportions, not a child. Ivory formal suit over a cream shirt with a soft white-and-pale-pink boutonniere. Keep this face, hair, body and outfit consistent in every couple scene.",
+      "must_remain": [
+        "Adult Kerala Christian groom — storybook 3D animation, never photographic",
+        "Warm medium-brown skin; slender adult oval face; large dark-brown almond eyes",
+        "Thick dark eyebrows; soft black hair with gentle side part",
+        "Clean-shaven — NO moustache or beard",
+        "Quiet reserved smile; natural adult proportions (not a child)",
+        "Ivory formal suit over cream shirt; soft white-and-pale-pink boutonniere",
+        "Same face, hair, body, outfit in every couple scene"
+      ]
+    },
+    "bride": {
+      "title": "Ms.",
+      "name": "Anna Thomas",
+      "locked_description": "Adult Kerala Christian bride, visibly polished storybook 3D animation, warm medium-brown skin, graceful oval face, large dark-brown almond eyes, gently arched black eyebrows, soft smile. Dark hair in an elegant low bun with a soft veil and white jasmine accents, delicate gold cross pendant and pearl earrings. Ivory lace-and-silk wedding gown with soft cream undertones. Natural adult proportions and a consistent face, hairstyle, jewelry and gown in every later scene.",
+      "must_remain": [
+        "Adult Kerala Christian bride — storybook 3D animation, never photographic",
+        "Warm medium-brown skin; graceful oval face; large dark-brown almond eyes",
+        "Gently arched black eyebrows; soft smile",
+        "Dark hair in elegant low bun with soft veil and white jasmine accents",
+        "Delicate gold cross pendant and pearl earrings",
+        "Ivory lace-and-silk wedding gown with soft cream undertones",
+        "Same face, hairstyle, jewelry, gown in every later scene"
+      ]
+    },
+    "family_names_locked": {
+      "groom_parents": "Mr. John Mathew & Mrs. Elsy John",
+      "bride_parents": "Mr. Thomas George & Mrs. Mercy Thomas",
+      "hosts": "Mr. Kurien Abraham, Mrs. Lizzy Kurien, Baby. Nia & Noel"
+    }
+  },
+  "copy_locked": {
+    "invitation_lines": "The Wedding of\nAlex & Anna",
+    "family_lines": "With the Blessings of\nGroom's Parents\nMr. John Mathew\n& Mrs. Elsy John\nBride's Parents\nMr. Thomas George\n& Mrs. Mercy Thomas",
+    "ceremony_lines": "Holy Matrimony\n15th February 2025\n10:00 a.m.\nIn the Morning",
+    "venue_lines": "Wedding Venue\nSt. Mary's Forane Church\nNear Alappuzha\nKerala",
+    "reception_lines": "Reception - Dinner\n14th February 2025\n7:00 p.m. onwards\nParish Hall Garden\nNear Alappuzha, Kerala",
+    "host_lines": "Invited By\nMr. Kurien Abraham\nMrs. Lizzy Kurien\nBaby. Nia & Noel\nWith Love & Blessings",
+    "save_date_lines": "SAVE THE DATE\n14 & 15 FEBRUARY\n2025",
+    "save_date_inline": "SAVE THE DATE / 14 & 15 FEBRUARY / 2025",
+    "devotional_line_1": "With God's Grace",
+    "devotional_line_2": "We Invite You",
+    "rule": "Exact customer copy only. Never invent, paraphrase, or add film titles / director names / film acronyms."
+  },
+  "architecture": {
+    "compound": "ONE white Portuguese-influenced Kerala Catholic church compound near Alappuzha backwaters (St. Mary's Forane Church locality)",
+    "notes": [
+      "ONE white Portuguese-influenced Kerala Catholic church compound near Alappuzha backwaters",
+      "cream-white plaster, laterite accents, arched windows, ONE modest bell tower with cross",
+      "ONE small open arched porch vestibule (all sides open including rear)",
+      "side cloister arcade, aisle/altar ceremony, parish hall garden evening reception",
+      "floral: white jasmine, soft pink roses, baby's breath, green foliage — NOT marigold temple swags as primary"
+    ],
+    "materials": [
+      "cream-white Portuguese-influenced plaster walls",
+      "laterite stone accents",
+      "arched windows",
+      "subtly reflective worn cream stone or polished laterite tile floor (not a mirror)"
+    ],
+    "forbidden": [
+      "Multiple bell towers",
+      "Marigold temple swags as primary floral",
+      "Second church / compound variation mid-film"
+    ]
+  },
+  "palette_and_materials": {
+    "look": "Soft romantic late-2000s South Indian cinema; dreamy natural light; intimate coastal Kerala; quiet emotional longing",
+    "colors": [
+      "soft cream",
+      "powder-blue",
+      "pearl highlights",
+      "pale pink florals",
+      "cool backwaters haze beyond coconut palms",
+      "champagne-gold / antique-gold lettering and frames"
+    ],
+    "character_medium": "Premium animated adult characters with sculpted expressive faces — never photographic people"
+  },
+  "lighting": {
+    "daytime_rule": "ONE warm soft sunrise from camera-left throughout daytime; evening reception separate lamp-lit mood for scene-09; gentle teal-and-warm contrast",
+    "god_rays": "Gentle warm back-and-side sunlight streams diagonally through arched windows and open porch bays; soft volumetric god rays through thin coastal haze; luminous rim light on ivory silk, lace, pearl, champagne-gold frames against cooler powder-blue shade",
+    "preserve": "Readable highlights — not a flat uniformly bright wash",
+    "dust_motes": "Very fine dust motes sparkle ONLY inside the sunbeams",
+    "evening_exception": "scene-09 reception = separate lamp-lit evening mood; scene-10 hosts = lamp-lit side chapel corridor"
+  },
+  "typography": {
+    "style": "luminous champagne-gold / antique-gold beveled dimensional lettering; exact customer copy only",
+    "rule": "luminous champagne-gold / antique-gold beveled dimensional lettering; exact customer copy only",
+    "forbidden": "Text emits no smoke, gold liquid, or floor beam"
+  },
+  "particles": {
+    "rule": "PETALS AND LIGHT: continuous distributed slow-motion drift is present from the first frame, not triggered as a burst when the camera stops. Keep about 12-20 separate visible petals at irregular heights and depths — soft white jasmine, pale pink rose and cream petals. Petals flutter with independent phase, soft air resistance and a little side-to-side wobble; nearby petals drift roughly one tenth of picture height per second in the settled view, distant ones slower. Camera rotation produces the brief directional streaks; after braking the SAME scattered petals become calmly visible, with no sudden emission, rain sheet, confetti explosion or synchronized falling. Bouquets and garlands never detach. Fine dust motes drift inside soft diagonal volumetric sunrays through arched windows. Champagne-gold edges, pearl and jewelry catch moving specular glints; text itself emits no smoke, gold liquid or floor beam.",
+    "petals": "12–20 separate visible petals at irregular heights/depths — soft white jasmine, pale pink rose, cream",
+    "behaviour": "Continuous slow-motion drift from first frame; independent phase; no burst, rain sheet, confetti, or synchronized fall",
+    "bouquets": "Bouquets and garlands never detach"
+  },
+  "object_count_rules": [
+    "Exactly one invitation title board where a board is specified",
+    "Exactly one SAVE THE DATE board in couple/date scenes",
+    "Exactly one bride and one groom in couple scenes (never duplicates)",
+    "Exactly one floral cross pedestal in porch",
+    "Exactly one modest bell tower",
+    "Exactly one church compound throughout",
+    "Couple scenes: exactly one Alex John and one Anna Thomas — never duplicates, clones, or extras"
+  ],
+  "spatial_geography": {
+    "compound_zones": [
+      {
+        "zone": "aerial / compound exterior",
+        "scenes": [
+          "scene-01"
+        ]
+      },
+      {
+        "zone": "open arched porch vestibule (all sides open including rear)",
+        "scenes": [
+          "scene-02"
+        ],
+        "props": [
+          "ONE floral cross pedestal"
+        ]
+      },
+      {
+        "zone": "side courtyard",
+        "scenes": [
+          "scene-03"
+        ]
+      },
+      {
+        "zone": "shaded side aisle",
+        "scenes": [
+          "scene-04"
+        ]
+      },
+      {
+        "zone": "sunlit transverse archway",
+        "scenes": [
+          "scene-05"
+        ]
+      },
+      {
+        "zone": "west cloister",
+        "scenes": [
+          "scene-06"
+        ]
+      },
+      {
+        "zone": "aisle and altar (ceremony)",
+        "scenes": [
+          "scene-07"
+        ]
+      },
+      {
+        "zone": "north courtyard corner",
+        "scenes": [
+          "scene-08"
+        ]
+      },
+      {
+        "zone": "parish hall garden (evening reception)",
+        "scenes": [
+          "scene-09"
+        ]
+      },
+      {
+        "zone": "lamp-lit side chapel corridor",
+        "scenes": [
+          "scene-10"
+        ]
+      },
+      {
+        "zone": "gateway / couple + date board",
+        "scenes": [
+          "scene-11",
+          "scene-12"
+        ]
+      }
+    ],
+    "continuity": "Same physical church compound and material language across all daytime scenes; evening mood only for reception/hosts as specified."
+  },
+  "veto_checklist": [
+    {
+      "rule": "identity_groom",
+      "expected": "Single Alex John matching locked groom description"
+    },
+    {
+      "rule": "identity_bride",
+      "expected": "Single Anna Thomas matching locked bride description"
+    },
+    {
+      "rule": "object_count_boards",
+      "expected": "Exactly one invitation / SAVE THE DATE / named board where specified"
+    },
+    {
+      "rule": "object_count_bell_tower",
+      "expected": "Exactly one modest bell tower with cross"
+    },
+    {
+      "rule": "object_count_floral_cross",
+      "expected": "Exactly one floral cross pedestal in porch"
+    },
+    {
+      "rule": "architecture",
+      "expected": "Same cream-white / laterite / arched Portuguese-Kerala Catholic church"
+    },
+    {
+      "rule": "lighting_day",
+      "expected": "ONE warm soft sunrise from camera-left (daytime)"
+    },
+    {
+      "rule": "lighting_evening",
+      "expected": "Lamp-lit only for scene-09 / scene-10"
+    },
+    {
+      "rule": "typography_copy",
+      "expected": "Exact locked customer lines; champagne-gold beveled lettering"
+    },
+    {
+      "rule": "particles",
+      "expected": "12–20 continuous drifting petals; no burst or detach"
+    },
+    {
+      "rule": "medium",
+      "expected": "Storybook 3D animation characters — never photographic"
+    },
+    {
+      "rule": "aspect",
+      "expected": "9:16 / 720×1280"
+    }
+  ],
+  "worker_subsections": {
+    "Image_Director": "global + scenes[<scene_id>]",
+    "Video_Director": "global + scenes[from/to] + clips[<clip_id>]",
+    "Visual_QC": "global veto_checklist + scenes[<scene_id>] object_counts/copy/forbidden",
+    "Asset_Producer": "scenes keys + clips keys"
+  },
+  "scenes": {
+    "scene-01": {
+      "id": "scene-01",
+      "index": 1,
+      "name": "Same-world elevated drone establish (ORDER V2 from handoff)",
+      "generate_still": true,
+      "image_path": "image-1.jpg",
+      "order_v2": true,
+      "world_anchor": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1-handoff.jpg",
+      "zone": "elevated aerial / same wedding-estate compound as clip-1-handoff world",
+      "characters": [],
+      "copy": null,
+      "lighting": "soft warm golden-hour sunrise from upper-left / camera-left; luminous rim; gentle lens bloom OK; not flat wash",
+      "camera": "Brilliant elevated sweeping cinematic drone establish of the SAME physical estate visible in clip-1-handoff.jpg — pull OUT and UP from the porch blessing world. Wide oblique aerial. Strong altitude/parallax. NOT eye-level porch portrait, NOT nadir map, NOT static facade plate.",
+      "opening_energy": {
+        "required": "sweeping cinematic drone / wedding-estate aerial brilliance",
+        "veto_if": [
+          "static compound plate",
+          "eye-level facade lock",
+          "tight measured floorplan diagram",
+          "frozen hold with no aerial expanse",
+          "different world than handoff (wrong porch/church family)"
+        ]
+      },
+      "same_world_as_handoff": {
+        "required": true,
+        "must_match_identity": [
+          "cream-white classical porch columns family",
+          "ONE floral cross pedestal (may be tiny/partly roof-occluded from height)",
+          "ONE modest cream-white bell tower + cross on the church mass",
+          "open porch vestibule readable in compound below",
+          "coastal/backwater + palms soft geography",
+          "white+pink floral language",
+          "warm sunrise camera-left palette"
+        ],
+        "may_soften": [
+          "exact pool/path proportions",
+          "exact cloister extent",
+          "estate depth and garden layout",
+          "tower placement within soft right/background family (still ONE)"
+        ],
+        "forbidden_divergence": [
+          "unrelated church typology",
+          "terracotta-heavy freeform estate that breaks handoff cream classical porch identity",
+          "missing porch / missing tower / second tower"
+        ]
+      },
+      "architecture_must": [
+        "SAME WORLD as clip-1-handoff.jpg — continuous estate identity",
+        "ONE modest cream-white bell tower + cross",
+        "ONE open porch vestibule (all sides open including rear) with floral cross pedestal",
+        "Elevated sweeping wedding-estate geography — not a flat facade plate"
+      ],
+      "object_counts": {
+        "bell_tower": 1,
+        "porch_vestibule": 1,
+        "floral_cross_pedestal": 1,
+        "text_boards": 0
+      },
+      "forbidden": [
+        "ANY text/lettering/watermark on scene-01 still (blessing copy belongs only on last frame)",
+        "close portrait of porch (that is scene-02 / handoff territory)",
+        "closed inner sanctuary in porch",
+        "extra shrine",
+        "multiple bell towers",
+        "second unrelated church",
+        "static eye-level facade plate",
+        "photographic realism"
+      ],
+      "particles": "lavish floral décor from height; petals optional tiny; people tiny unresolved",
+      "amend_note": "ORDER V2 2026-10-02: first frame derived from locked handoff world, elevated drone"
+    },
+    "scene-02": {
+      "id": "scene-02",
+      "index": 2,
+      "name": "Church porch with dimensional blessing",
+      "generate_still": true,
+      "image_path": "image-2.jpg",
+      "zone": "inside open arched porch vestibule",
+      "characters": [],
+      "copy": {
+        "lines": [
+          "With God's Grace",
+          "We Invite You"
+        ],
+        "placement": "freestanding dimensional letters above floral cross; ~65–70% frame width; upper-middle"
+      },
+      "lighting": "ONE warm soft sunrise from camera-left; oblique on letters; polished cream floor reflections",
+      "camera": "eye-level inside porch facing floral cross + distant bell tower through open rear",
+      "architecture_must": [
+        "SAME freestanding open porch: four cream corner columns, shallow tiled roof, three shallow front steps",
+        "all four sides OPEN between arches including rear — no masonry rear wall / inner sanctuary / nested doorway",
+        "ONE floral cross on central low square pedestal between two soft candle stands (~40% image height lower middle)",
+        "bell tower outside beyond rear arches; left-side exit to invitation courtyard open"
+      ],
+      "object_counts": {
+        "floral_cross_pedestal": 1,
+        "bell_tower_visible_beyond": 1,
+        "blessing_title": 1,
+        "nameplates": 0
+      },
+      "typography": "champagne-gold faces, antique-gold bevels; freestanding — not wall plaque or printed plaster text",
+      "forbidden": [
+        "rectangular nameplate",
+        "title smoke/emission",
+        "solid backdrop behind cross",
+        "duplicate crosses"
+      ],
+      "particles": "abundant jasmine/rose petals in three depths; candle wisps ONLY from visible candle stand"
+    },
+    "scene-03": {
+      "id": "scene-03",
+      "index": 3,
+      "name": "Family invitation in the side courtyard",
+      "generate_still": true,
+      "image_path": "image-3.jpg",
+      "zone": "side courtyard bay beside porch (reached by turning LEFT out of porch)",
+      "characters": [],
+      "copy": {
+        "key": "invitation_lines",
+        "exact": "The Wedding of\nAlex & Anna",
+        "carrier": "ONE ivory invitation board on low champagne-gold plinth; ~55% frame width; soft gold floral border + tiny gold cross emblem"
+      },
+      "lighting": "sunrise shafts from upper-left; camera-left sun rule",
+      "camera": "eye-level into side courtyard; NOT flying forward through porch",
+      "architecture_must": [
+        "garlanded cream pillar extreme left foreground",
+        "courtyard extends diagonally behind board; partial bell tower offset FAR RIGHT — not centered tunnel behind sign",
+        "no altar/sanctuary visible"
+      ],
+      "object_counts": {
+        "invitation_title_board": 1,
+        "bell_tower": 1,
+        "people": 0
+      },
+      "forbidden": [
+        "duplicate boards",
+        "altar visible",
+        "centered tower tunnel behind sign"
+      ]
+    },
+    "scene-04": {
+      "id": "scene-04",
+      "index": 4,
+      "name": "Groom in the shaded side aisle",
+      "generate_still": true,
+      "image_path": "image-4.jpg",
+      "zone": "shaded long cream-plaster side aisle (enclosed; no outdoor tower)",
+      "characters": [
+        "groom"
+      ],
+      "identity_refs": [
+        "identity.groom"
+      ],
+      "copy": {
+        "exact": "Mr.\nAlex John",
+        "carrier": "floating champagne-gold calligraphy RIGHT at chest height — NOT a signboard"
+      },
+      "lighting": "sunrays through high LEFT arched windows; groom rim-lit vs cooler powder-blue shade",
+      "camera": "aisle interior; groom full-length LEFT third ~62% frame height; feet+hair inside margins",
+      "architecture_must": [
+        "arched laterite-trimmed windows",
+        "no outdoor courtyard at vanishing point",
+        "no outdoor tower visible"
+      ],
+      "object_counts": {
+        "groom": 1,
+        "bride": 0,
+        "name_calligraphy": 1,
+        "boards": 0
+      },
+      "forbidden": [
+        "moustache/beard",
+        "duplicate groom",
+        "photographic person",
+        "outdoor tower in aisle"
+      ]
+    },
+    "scene-05": {
+      "id": "scene-05",
+      "index": 5,
+      "name": "Bride beside the sunlit transverse archway",
+      "generate_still": true,
+      "image_path": "image-5.jpg",
+      "zone": "sunlit transverse arched passageway at RIGHT ANGLE to groom's aisle",
+      "characters": [
+        "bride"
+      ],
+      "identity_refs": [
+        "identity.bride"
+      ],
+      "copy": {
+        "exact": "Ms.\nAnna Thomas",
+        "carrier": "floating luminous gold calligraphy RIGHT — Ms. small above Anna Thomas large"
+      },
+      "lighting": "blazing oblique sunbeams through far-side arched opening; lace/pearl rim glow",
+      "camera": "bride full-length LEFT third ~62% height; hands gently clasped",
+      "architecture_must": [
+        "two foreground cream arched pillars",
+        "beyond: side view across courtyard steps + LOW roofed wing",
+        "only offset small portion of bell tower near FAR LEFT edge — NOT giant frontal tower behind bride",
+        "family plaque NOT in this view (around right corner outside)"
+      ],
+      "object_counts": {
+        "bride": 1,
+        "groom": 0,
+        "name_calligraphy": 1,
+        "boards": 0
+      },
+      "forbidden": [
+        "central giant bell tower behind bride",
+        "duplicate bride",
+        "family plaque in frame"
+      ]
+    },
+    "scene-06": {
+      "id": "scene-06",
+      "index": 6,
+      "name": "Both families' blessing plaque in the west cloister",
+      "generate_still": true,
+      "image_path": "image-6.jpg",
+      "zone": "west cloister arcade — NEW viewing direction",
+      "characters": [],
+      "copy": {
+        "key": "family_lines",
+        "exact": "With the Blessings of\nGroom's Parents\nMr. John Mathew\n& Mrs. Elsy John\nBride's Parents\nMr. Thomas George\n& Mrs. Mercy Thomas",
+        "carrier": "ONE ivory family blessing plaque; champagne-gold frame; ~65% width × ~64% height; low three-quarter; plaque plane ~15°"
+      },
+      "lighting": "sunrise shafts from left across plaque frame; soft shaded cloister ceiling",
+      "camera": "LOW three-quarter; background sideways across cloister columns toward screen-left — not centered aisle",
+      "architecture_must": [
+        "massive cream plaster pillar beside plaque",
+        "NO bell tower center",
+        "NO person"
+      ],
+      "object_counts": {
+        "family_plaque": 1,
+        "people": 0,
+        "grounded_bouquet_at_plinth": 1
+      },
+      "forbidden": [
+        "person in frame",
+        "centered bell tower",
+        "detached floating bouquet as confetti"
+      ]
+    },
+    "scene-07": {
+      "id": "scene-07",
+      "index": 7,
+      "name": "Holy Matrimony at the aisle and altar",
+      "generate_still": true,
+      "image_path": "image-7.jpg",
+      "zone": "aisle toward altar (reached turning LEFT at cloister corner)",
+      "characters": [
+        "groom",
+        "bride"
+      ],
+      "identity_refs": [
+        "identity.groom",
+        "identity.bride"
+      ],
+      "wardrobe_add": "both wear delicate white-and-pale-pink floral garlands OVER unchanged clothes",
+      "copy": {
+        "key": "ceremony_lines",
+        "exact": "Holy Matrimony\n15th February 2025\n10:00 a.m.\nIn the Morning",
+        "carrier": "ONE dark mahogany timing sign, ornate champagne-gold frame, RIGHT side"
+      },
+      "lighting": "soft diagonal sunrays from side arched window + subtle candle secondary; seated-eye-level",
+      "camera": "three-quarter; couple LEFT half on cream ceremonial cushion near altar steps — groom left, bride next; groom quiet blessing gesture",
+      "architecture_must": [
+        "intimate cream-plaster altar sanctuary with deep soft shadow — NOT distant straight corridor",
+        "simple altar cross low at left",
+        "priest = small secondary far left only"
+      ],
+      "object_counts": {
+        "groom": 1,
+        "bride": 1,
+        "ceremony_board": 1,
+        "priests_secondary": 1
+      },
+      "forbidden": [
+        "duplicate couple",
+        "extra ceremony boards",
+        "corridor vanishing-point altar"
+      ]
+    },
+    "scene-08": {
+      "id": "scene-08",
+      "index": 8,
+      "name": "Venue at the north courtyard corner",
+      "generate_still": true,
+      "image_path": "image-8.jpg",
+      "zone": "north courtyard corner — L-shaped sideways courtyard",
+      "characters": [],
+      "copy": {
+        "key": "venue_lines",
+        "exact": "Wedding Venue\nSt. Mary's Forane Church\nNear Alappuzha\nKerala",
+        "carrier": "ONE ornate dark-mahogany venue board on low square gold-trimmed cream pedestal; ~56%×56%"
+      },
+      "lighting": "soft sunlight diagonal from left; cool shade on near pillar",
+      "camera": "eye-level corner view; CLOSE square cream column extreme RIGHT foreground",
+      "architecture_must": [
+        "L-shaped courtyard: low decorated wing across background",
+        "bell tower ONLY off-axis distant LEFT quarter — never straight aisle ending at central tower"
+      ],
+      "object_counts": {
+        "venue_board": 1,
+        "people": 0,
+        "bell_tower": 1
+      },
+      "forbidden": [
+        "foreground couple",
+        "centered tower aisle",
+        "duplicate venue boards"
+      ]
+    },
+    "scene-09": {
+      "id": "scene-09",
+      "index": 9,
+      "name": "Reception at the evening parish hall garden",
+      "generate_still": true,
+      "image_path": "image-9.jpg",
+      "zone": "parish hall garden — EVENING",
+      "characters": [],
+      "copy": {
+        "key": "reception_lines",
+        "exact": "Reception - Dinner\n14th February 2025\n7:00 p.m. onwards\nParish Hall Garden\nNear Alappuzha, Kerala",
+        "carrier": "ONE reception dinner board in parish hall garden evening setting — exact reception_lines"
+      },
+      "lighting": "EVENING lamp-lit / warm garden night — NOT daytime sunrise primary",
+      "camera": "garden reception establish per packet",
+      "architecture_must": [
+        "parish hall garden near Alappuzha; same floral language (jasmine/rose/baby's breath)"
+      ],
+      "object_counts": {
+        "reception_board": 1
+      },
+      "forbidden": [
+        "daytime sunrise god-rays as primary",
+        "duplicate reception boards",
+        "marigold-primary décor"
+      ],
+      "note": "Only evening-lit board scene besides hosts corridor mood adjacency",
+      "composition_lock": "An intimate evening parish hall garden beside the church compound near Alappuzha, BLUE HOUR powder-blue sky only in a small upper background band. Warm soft-lamp pools illuminate cream drapes and dense white-jasmine and pale-pink rose garlands; narrow cinematic shafts from warm lights pass through faint coastal haze, preserving deep teal-blue shadows. An ivory reception board on a delicate champagne-gold three-legged easel occupies the central 60 percent of width, all frame and legs visible. Large sharp dark-gold lettering, luminous gold title and frame edges, exact text: 'Reception - Dinner\n14th February 2025\n7:00 p.m. onwards\nParish Hall Garden\nNear Alappuzha, Kerala'. A cream near pillar "
+    },
+    "scene-10": {
+      "id": "scene-10",
+      "index": 10,
+      "name": "Hosts in the lamp-lit side chapel corridor",
+      "generate_still": true,
+      "image_path": "image-10.jpg",
+      "zone": "lamp-lit side chapel corridor",
+      "characters": [],
+      "copy": {
+        "key": "host_lines",
+        "exact": "Invited By\nMr. Kurien Abraham\nMrs. Lizzy Kurien\nBaby. Nia & Noel\nWith Love & Blessings",
+        "carrier": "ONE hosts invitation plaque — exact host_lines"
+      },
+      "lighting": "EVENING EXCEPTION — lamp-lit corridor (NOT daytime sunrise)",
+      "camera": "corridor plaque view",
+      "architecture_must": [
+        "side chapel corridor of same church compound"
+      ],
+      "object_counts": {
+        "hosts_board": 1
+      },
+      "forbidden": [
+        "wrong host names",
+        "duplicate boards",
+        "daytime exterior substitute"
+      ],
+      "composition_lock": "A richly decorated INNER lamp-lit side chapel corridor viewed frontally at eye height after a 90 degree left turn from the parish garden. ONE tall ivory host plaque supported on a low ornate gold pedestal at the top of three shallow steps. The frame is carved champagne gold with tiny soft pink flowers at the corners. Exact large readable gold-brown lettering: 'Invited By\nMr. Kurien Abraham\nMrs. Lizzy Kurien\nBaby. Nia & Noel\nWith Love & Blessings'. Plaque fills 60 percent of frame width and 57 percent of height. Symmetrical close cream arched pillars, numerous small hanging soft lamps and white-pink flower swags, cool recesses and strong warm angled shafts from high side arched openings. The "
+    },
+    "scene-11": {
+      "id": "scene-11",
+      "index": 11,
+      "name": "Single couple and single date board",
+      "generate_still": true,
+      "image_path": "image-11.jpg",
+      "zone": "gateway / couple + date board",
+      "characters": [
+        "groom",
+        "bride"
+      ],
+      "identity_refs": [
+        "identity.groom",
+        "identity.bride"
+      ],
+      "copy": {
+        "key": "save_date_lines",
+        "exact": "SAVE THE DATE\n14 & 15 FEBRUARY\n2025",
+        "inline": "SAVE THE DATE / 14 & 15 FEBRUARY / 2025",
+        "carrier": "Exactly ONE SAVE THE DATE board"
+      },
+      "lighting": "daytime sunrise camera-left unless packet specifies gateway shade",
+      "camera": "single couple + single board composition",
+      "architecture_must": [
+        "same gateway that scene-12 will continue"
+      ],
+      "object_counts": {
+        "groom": 1,
+        "bride": 1,
+        "save_the_date_board": 1
+      },
+      "forbidden": [
+        "TWO date boards",
+        "duplicate couple",
+        "extra signs"
+      ],
+      "hard_veto": "expected 1 SAVE THE DATE board → if 2 REJECT",
+      "composition_lock": "The same animated bride and groom stand close together beneath a wide cream-plaster arched compound gateway in a soft sunrise courtyard near Alappuzha, bride LEFT of groom. Both retain their exact ivory gown, ivory formal suit, soft veil, jasmine accents, gold cross pendant, pearl earrings and white-and-pale-pink wedding garlands. Groom clean-shaven. Full bodies and shoes visible, couple occupies about 57 percent of image height and the middle-left 48 percent of width. They face mostly toward the camera with small soft smiles, their hands gently joined at waist height, calm and affectionate. A low floral arch and the distant cream-white bell tower sit behind them on the courtyard axis. EXACT"
+    },
+    "scene-12": {
+      "id": "scene-12",
+      "index": 12,
+      "name": "Gentle forehead touch beneath the same gateway",
+      "generate_still": false,
+      "image_path": "image-12.jpg",
+      "generation": "Final decoded frame of clip-11; NO new still-image API call",
+      "zone": "SAME gateway as scene-11",
+      "characters": [
+        "groom",
+        "bride"
+      ],
+      "identity_refs": [
+        "identity.groom",
+        "identity.bride"
+      ],
+      "copy": {
+        "rule": "Preserve the ONE date board from scene-11 throughout — no competing independent board/gateway layout"
+      },
+      "lighting": "continuity from clip-11 first-frame-only animation",
+      "camera": "gentle backward glide + slight rise; forehead touch; single-board continuity",
+      "object_counts": {
+        "groom": 1,
+        "bride": 1,
+        "save_the_date_board": 1
+      },
+      "forbidden": [
+        "new still API",
+        "second board appearing",
+        "layout rewrite of gateway"
+      ],
+      "hard_veto": "Any new competing board/gateway layout → REJECT"
+    }
+  },
+  "clips": {
+    "clip-01": {
+      "id": "clip-01",
+      "index": 1,
+      "from_scene": 1,
+      "to_scene": 2,
+      "duration_s": 5,
+      "order_v2": true,
+      "camera": "Continuous cinematic drone: elevated same-world establish → elegant forward-down approach into locked porch blessing (clip-1-handoff identity).",
+      "first_anchor": {
+        "strategy": "scene-image",
+        "scene": 1,
+        "note": "NEW image-1.jpg after ORDER V2 regen APPROVED — must be same world as handoff"
+      },
+      "last_anchor": {
+        "strategy": "delivered_handoff_frame",
+        "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1-handoff.jpg",
+        "also_ok": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-2.jpg",
+        "note": "LOCKED — prefer clip-1-handoff.jpg (delivered clip-01 last frame). Do not loosen porch/blessing identity."
+      },
+      "video_path": "clip-1.mp4",
+      "final_frame_path": "clip-1-handoff.jpg",
+      "opening_energy": {
+        "required": true,
+        "rule": "Cinematic drone wedding-estate energy REQUIRED. Static plate / frozen hold = Continuity VETO."
+      },
+      "continuity_rules": [
+        "First and last share ONE world — soft aerial expanse → porch blessing continuous identity",
+        "Last frame locked to clip-1-handoff.jpg (With God's Grace / We Invite You + floral cross + open porch)",
+        "First frame: NO text; elevated drone establish of that same estate",
+        "Object counts: ONE bell tower, ONE porch, ONE floral cross; no mid-clip duplicates",
+        "Prefer continuous flight over morph soup; soft family mid-flight OK within handoff world",
+        "Petals continuous into blessing; no burst on stop"
+      ],
+      "forbidden_motion": [
+        "static facade plate hold",
+        "hard world swap mid-flight to unrelated typology",
+        "landing on different copy/porch than locked handoff",
+        "uniform sideways slide / frozen hold"
+      ],
+      "amend_note": "ORDER V2: last=clip-1-handoff.jpg; first regenerated from that world"
+    },
+    "clip-02": {
+      "id": "clip-02",
+      "index": 2,
+      "from_scene": 2,
+      "to_scene": 3,
+      "duration_s": 4,
+      "camera": "LEFT 90-degree pivot; a tiny counterclockwise arc at constant subject distance",
+      "first_anchor": {
+        "strategy": "previous-clip-final-decoded-frame",
+        "clip": 1
+      },
+      "last_anchor": {
+        "strategy": "scene-image",
+        "scene": 3
+      },
+      "video_path": "clip-2.mp4",
+      "final_frame_path": "clip-2-handoff.jpg",
+      "continuity_rules": [
+        "Connection shot — not independent cinema",
+        "Preserve object counts and identity from adjacent scene subsections",
+        "Petals continuous drift; no burst on camera stop"
+      ]
+    },
+    "clip-03": {
+      "id": "clip-03",
+      "index": 3,
+      "from_scene": 3,
+      "to_scene": 4,
+      "duration_s": 5,
+      "camera": "RIGHT 90-degree pivot; a small upward tilt, then a quiet lateral drift",
+      "first_anchor": {
+        "strategy": "previous-clip-final-decoded-frame",
+        "clip": 2
+      },
+      "last_anchor": {
+        "strategy": "scene-image",
+        "scene": 4
+      },
+      "video_path": "clip-3.mp4",
+      "final_frame_path": "clip-3-handoff.jpg",
+      "continuity_rules": [
+        "Connection shot — not independent cinema",
+        "Preserve object counts and identity from adjacent scene subsections",
+        "Petals continuous drift; no burst on camera stop"
+      ]
+    },
+    "clip-04": {
+      "id": "clip-04",
+      "index": 4,
+      "from_scene": 4,
+      "to_scene": 5,
+      "duration_s": 5,
+      "camera": "LEFT 90-degree pivot; a tiny downward tilt to settle at the bride's eye level",
+      "first_anchor": {
+        "strategy": "previous-clip-final-decoded-frame",
+        "clip": 3
+      },
+      "last_anchor": {
+        "strategy": "scene-image",
+        "scene": 5
+      },
+      "video_path": "clip-4.mp4",
+      "final_frame_path": "clip-4-handoff.jpg",
+      "continuity_rules": [
+        "Connection shot — not independent cinema",
+        "Preserve object counts and identity from adjacent scene subsections",
+        "Petals continuous drift; no burst on camera stop"
+      ]
+    },
+    "clip-05": {
+      "id": "clip-05",
+      "index": 5,
+      "from_scene": 5,
+      "to_scene": 6,
+      "duration_s": 5,
+      "camera": "RIGHT 90-degree pivot; a slow eight-degree ORBIT across the plaque's bevel at CONSTANT distance, not a push-in",
+      "first_anchor": {
+        "strategy": "previous-clip-final-decoded-frame",
+        "clip": 4
+      },
+      "last_anchor": {
+        "strategy": "scene-image",
+        "scene": 6
+      },
+      "video_path": "clip-5.mp4",
+      "final_frame_path": "clip-5-handoff.jpg",
+      "continuity_rules": [
+        "Connection shot — not independent cinema",
+        "Preserve object counts and identity from adjacent scene subsections",
+        "Petals continuous drift; no burst on camera stop"
+      ]
+    },
+    "clip-06": {
+      "id": "clip-06",
+      "index": 6,
+      "from_scene": 6,
+      "to_scene": 7,
+      "duration_s": 5,
+      "camera": "LEFT 90-degree pivot; a slow slight crane DOWN toward seated eye height, with almost no forward translation",
+      "first_anchor": {
+        "strategy": "previous-clip-final-decoded-frame",
+        "clip": 5
+      },
+      "last_anchor": {
+        "strategy": "scene-image",
+        "scene": 7
+      },
+      "video_path": "clip-6.mp4",
+      "final_frame_path": "clip-6-handoff.jpg",
+      "continuity_rules": [
+        "Connection shot — not independent cinema",
+        "Preserve object counts and identity from adjacent scene subsections",
+        "Petals continuous drift; no burst on camera stop"
+      ]
+    },
+    "clip-07": {
+      "id": "clip-07",
+      "index": 7,
+      "from_scene": 7,
+      "to_scene": 8,
+      "duration_s": 5,
+      "camera": "RIGHT 90-degree pivot; a small upward crane to standing eye height while yaw eases to a stop",
+      "first_anchor": {
+        "strategy": "previous-clip-final-decoded-frame",
+        "clip": 6
+      },
+      "last_anchor": {
+        "strategy": "scene-image",
+        "scene": 8
+      },
+      "video_path": "clip-7.mp4",
+      "final_frame_path": "clip-7-handoff.jpg",
+      "continuity_rules": [
+        "Connection shot — not independent cinema",
+        "Preserve object counts and identity from adjacent scene subsections",
+        "Petals continuous drift; no burst on camera stop"
+      ]
+    },
+    "clip-08": {
+      "id": "clip-08",
+      "index": 8,
+      "from_scene": 8,
+      "to_scene": 9,
+      "duration_s": 5,
+      "camera": "RIGHT 90-degree pivot; a very slow leftward correcting arc at fixed distance",
+      "first_anchor": {
+        "strategy": "previous-clip-final-decoded-frame",
+        "clip": 7
+      },
+      "last_anchor": {
+        "strategy": "scene-image",
+        "scene": 9
+      },
+      "video_path": "clip-8.mp4",
+      "final_frame_path": "clip-8-handoff.jpg",
+      "continuity_rules": [
+        "Connection shot — not independent cinema",
+        "Preserve object counts and identity from adjacent scene subsections",
+        "Petals continuous drift; no burst on camera stop"
+      ]
+    },
+    "clip-09": {
+      "id": "clip-09",
+      "index": 9,
+      "from_scene": 9,
+      "to_scene": 10,
+      "duration_s": 5,
+      "camera": "LEFT 90-degree pivot; a gentle lateral drift over 20 centimetres at constant distance from the plaque",
+      "first_anchor": {
+        "strategy": "previous-clip-final-decoded-frame",
+        "clip": 8
+      },
+      "last_anchor": {
+        "strategy": "scene-image",
+        "scene": 10
+      },
+      "video_path": "clip-9.mp4",
+      "final_frame_path": "clip-9-handoff.jpg",
+      "continuity_rules": [
+        "Connection shot — not independent cinema",
+        "Preserve object counts and identity from adjacent scene subsections",
+        "Petals continuous drift; no burst on camera stop"
+      ]
+    },
+    "clip-10": {
+      "id": "clip-10",
+      "index": 10,
+      "from_scene": 10,
+      "to_scene": 11,
+      "duration_s": 5,
+      "camera": "Fast backward corridor departure, between the only couple, then full-body ease-out",
+      "first_anchor": {
+        "strategy": "previous-clip-final-decoded-frame",
+        "clip": 9
+      },
+      "last_anchor": {
+        "strategy": "scene-image",
+        "scene": 11
+      },
+      "video_path": "clip-10.mp4",
+      "final_frame_path": "clip-10-handoff.jpg",
+      "continuity_rules": [
+        "Connection shot — not independent cinema",
+        "Preserve object counts and identity from adjacent scene subsections",
+        "Petals continuous drift; no burst on camera stop"
+      ]
+    },
+    "clip-11": {
+      "id": "clip-11",
+      "index": 11,
+      "from_scene": 11,
+      "to_scene": 12,
+      "duration_s": 5,
+      "camera": "Gentle backward glide and slight rise, single-board continuity, forehead touch",
+      "first_anchor": {
+        "strategy": "previous-clip-final-decoded-frame",
+        "clip": 10
+      },
+      "last_anchor": null,
+      "video_path": "clip-11.mp4",
+      "final_frame_path": "clip-11-handoff.jpg",
+      "continuity_rules": [
+        "Connection shot — not independent cinema",
+        "Preserve object counts and identity from adjacent scene subsections",
+        "Petals continuous drift; no burst on camera stop"
+      ]
+    }
+  },
+  "accepted_at": "2026-10-01T23:08:36.858557+05:30",
+  "duty": "IMAGE_FLOOR_VETO_SCENE01_ORDER_V2_THEN_VIDEO_CLIP01",
+  "amendments": [
+    {
+      "id": "clip01-regen-20261002",
+      "at": "2026-10-02T00:04:56.735715+05:30",
+      "targets": [
+        "scene-01",
+        "clip-01"
+      ],
+      "source": "packets/ORCHESTRATOR_CONTINUITY_AMEND_CLIP01.json",
+      "summary": "Loosen opening architecture/compound rigidity; require cinematic drone wedding-estate energy; keep scene-02 locked as clip-01 last frame."
+    },
+    {
+      "id": "clip01-order-v2-20261002",
+      "at": "2026-10-02T00:09:35.484873+05:30",
+      "targets": [
+        "scene-01",
+        "clip-01"
+      ],
+      "source": "packets/ORCHESTRATOR_CONTINUITY_AMEND_CLIP01_ORDER_V2.json",
+      "summary": "ORDER V2: scene-01 first frame must be same-world elevated drone establish derived from locked clip-1-handoff.jpg; opening_energy still required; no text on scene-01."
+    }
+  ],
+  "locked_world_from_handoff": {
+    "source_frame": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1-handoff.jpg",
+    "zone": "open arched porch vestibule looking out toward church / coastal water",
+    "architecture": {
+      "porch": "classical cream-white fluted columns; open sides including rear; wooden beam overhead with white+pink floral clusters",
+      "floor": "polished light cream stone/marble reflecting warm light",
+      "floral_cross": "ONE large floral cross (white+soft pink flowers) on square cream pedestal, centered in porch",
+      "candles": "TWO tall slender brass/gold candlesticks with white pillar candles in glass hurricane shades flanking the pedestal",
+      "distant_church": "ONE cream-white church with modest bell tower + cross, seen through open rear of porch along a stone path",
+      "landscape": "lush tropical coastal/backwater; palm trees; calm water beyond church; flowering bushes"
+    },
+    "materials_palette": [
+      "cream-white plaster / classical columns",
+      "champagne-gold lettering (last frame only)",
+      "white + soft pink florals (roses/lilies)",
+      "warm golden-hour sunrise light from camera-left / upper-left",
+      "powder-blue / lavender-peach sky haze"
+    ],
+    "lighting": "soft warm golden-hour sunrise from upper-left / camera-left; luminous rim; gentle lens bloom OK; not flat wash",
+    "copy_locked_destination": {
+      "lines": [
+        "With God's Grace",
+        "We Invite You"
+      ],
+      "style": "champagne-gold beveled cursive; lives ONLY on last frame / end of clip — NEVER on scene-01 still"
+    },
+    "particles": "continuous drifting pink+white petals",
+    "medium": "storybook 3D — never photographic"
+  }
+}

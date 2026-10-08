@@ -1,0 +1,30 @@
+{
+  "document": "VISUAL_QC",
+  "production_id": "nk-v1-20261002-072013",
+  "batch": "stills-v5",
+  "job": "IMG-v5-scene-02",
+  "scene_id": "scene-02",
+  "facet_expected": "entrance_colonnade",
+  "asset_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5/scene-02.jpg",
+  "sha256": "c09be3132f62a3d50a1b7160c94d72002a3edcb0f52aaea7694e85a516b320e1",
+  "generation_id": "7k7q8pq5ndrmy0d0zabbnxnryr",
+  "prompt_hash": "fa265100508f49de548bf6f7d322058636228a9302c4661ae1d758cd59b71e28",
+  "attempt": 1,
+  "decision": "PASS",
+  "rationale": "Closed cream-stone entrance colonnade facade with scalloped arches, jasmine-lotus torans, banana leaves at bases, brass lamps + urulis; solid wooden doors / interior close the view \u2014 no through-arch lake plate. No couple, no text. Facet distinct from lake-hero plate.",
+  "violations": [],
+  "checks_passed": [
+    "facet entrance_colonnade closed facade (no lake tunnel)",
+    "no misty lake / gopuram / mountains / boat dominant BG",
+    "visible_set: colonnade, torans, urulis/lamps, banana leaves",
+    "no couple",
+    "no text",
+    "materials/palette match world lock"
+  ],
+  "retry_instruction": null,
+  "spatial_map_version": "spatial-v2",
+  "continuity_bible": "/workspace/fmi-productions/nandini-karthik-remake/continuity/CONTINUITY_BIBLE.json",
+  "judged_at": "2026-10-02T08:41:01+05:30",
+  "judge": "Visual QC Supervisor",
+  "handoff": "Continuity Director LOCK/VETO next (no couple \u2014 architecture/object locks only)"
+}

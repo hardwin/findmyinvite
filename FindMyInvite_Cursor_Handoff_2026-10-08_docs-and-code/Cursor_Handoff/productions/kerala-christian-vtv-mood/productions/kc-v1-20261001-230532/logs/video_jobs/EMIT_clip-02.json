@@ -1,0 +1,12 @@
+{
+  "action": "EMIT_VIDEO_JOB",
+  "job_id": "VID-clip-02",
+  "clip_id": "clip-02",
+  "packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/VIDEO_JOB/clip-02.json",
+  "go": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/ORCHESTRATOR_GO_CLIP-02.json",
+  "first_frame": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1-handoff.jpg",
+  "last_frame": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-3.jpg",
+  "skip_qc": true,
+  "emitted_at": "2026-10-01T23:28:41.742584+05:30",
+  "emitted_by": "Asset Producer"
+}

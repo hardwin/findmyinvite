@@ -1,0 +1,63 @@
+FMI CLIENT DETAILS — Template: kerala-christian-v1
+Client: Benjamin (Dr. Mike Benjamin & Dr. Esther David Dass)
+Source: Ashok chat message 2026-10-07 (t1u form)
+Adjustments: groom_title 'Dr' -> 'Dr.' (consistency with bride); reception year typed 2026 -> 2027 (typo; wedding is 23 Jan 2027).
+
+invitation_lines:
+The Wedding of
+Mike Benjamin & Esther
+
+groom_title:
+Dr.
+
+groom_name:
+Mike Benjamin
+
+bride_title:
+Dr.
+
+bride_name:
+Esther David Dass
+
+family_lines:
+With the Blessings of
+Groom’s Parents
+Mr Pakiam & Mrs Christina Samuel
+Bride’s Parents
+Mr. David Dass
+& Mrs. Arokiamah@Jaya
+
+ceremony_lines:
+Holy Matrimony
+23rd January 2027
+10:00 a.m.
+In the Morning
+
+venue_lines:
+Wedding Venue
+St. Katherine Church
+Kajang, Selangor
+
+reception_lines:
+Reception - Dinner
+23rd January 2027
+7.30 p.m. onwards
+Sunway Clubhouse, Sunway Selangor
+
+host_lines:
+Invited By
+Groom’s & Bride’s Family
+With Love & Blessings
+
+save_date_lines:
+SAVE THE DATE
+23 JANUARY 2027
+
+save_date_inline:
+SAVE THE DATE / 23 JANUARY 2027
+
+devotional_line_1:
+With God’s Grace
+
+devotional_line_2:
+We Invite You

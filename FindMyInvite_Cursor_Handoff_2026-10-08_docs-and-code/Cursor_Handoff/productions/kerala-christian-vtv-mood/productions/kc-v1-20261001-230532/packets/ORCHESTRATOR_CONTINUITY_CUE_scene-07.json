@@ -1,0 +1,21 @@
+{
+  "job_type": "CONTINUITY_VETO_REQUEST",
+  "production_id": "kc-v1-20261001-230532",
+  "authorized_at": "2026-10-01T23:21:32.633594+05:30",
+  "scenes": [
+    {
+      "scene_id": "scene-07",
+      "attempt": 2,
+      "qc": "PASS",
+      "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-7.jpg",
+      "packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/IMAGE_JOB/scene-07.json",
+      "focus": [
+        "identity_groom_wardrobe",
+        "object_count_couple",
+        "copy_ceremony_lines"
+      ],
+      "prior_veto": "necktie \u2014 expect open collar matching scene-04"
+    }
+  ],
+  "note": "Final image LOCK needed. On LOCK \u2192 Orchestrator marks all 11 stills APPROVED."
+}

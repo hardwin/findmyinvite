@@ -1,0 +1,110 @@
+{
+  "packet_type": "ASSET_PRODUCER_EMIT_STILLS_V6",
+  "production_id": "nk-v1-20261002-072013",
+  "recorded_at": "2026-10-02T10:52:46.595+05:30",
+  "spatial_map_status": "approved_by_ashok",
+  "spatial_blueprint_16x9_status": "approved_by_ashok",
+  "spatial_map_version": "spatial-v9",
+  "auth": "/workspace/fmi-productions/nandini-karthik-remake/packets/ORCHESTRATOR_SPATIAL_APPROVED.json",
+  "unlock": "/workspace/fmi-productions/nandini-karthik-remake/packets/ORCHESTRATOR_UNLOCK_IMAGE_stills-v6.json",
+  "spatial_map": "/workspace/fmi-productions/nandini-karthik-remake/continuity/SPATIAL_MAP.json",
+  "blueprint": "/workspace/fmi-productions/nandini-karthik-remake/continuity/SPATIAL_MAZE_MAP_16x9_v9.jpg",
+  "batch": "stills-v6",
+  "maze_path": [
+    "A",
+    "B",
+    "C",
+    "F",
+    "E",
+    "D"
+  ],
+  "shot_path": [
+    "S1",
+    "S2",
+    "S3",
+    "S4",
+    "S5",
+    "S6"
+  ],
+  "job_count": 6,
+  "jobs": [
+    {
+      "job_id": "IMG-v6-scene-01",
+      "scene_id": "scene-01",
+      "shot": "S1",
+      "room": "A",
+      "facet": "palm_approach_garden",
+      "couple": false,
+      "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/IMAGE_JOB/scene-01.v6.json",
+      "packet_mirror": "/workspace/fmi-productions/nandini-karthik-remake/packets-v6/IMAGE_JOB/scene-01.v6.json",
+      "output_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v6/scene-01.jpg"
+    },
+    {
+      "job_id": "IMG-v6-scene-02",
+      "scene_id": "scene-02",
+      "shot": "S2",
+      "room": "B",
+      "facet": "central_colonnade_courtyard",
+      "couple": false,
+      "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/IMAGE_JOB/scene-02.v6.json",
+      "packet_mirror": "/workspace/fmi-productions/nandini-karthik-remake/packets-v6/IMAGE_JOB/scene-02.v6.json",
+      "output_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v6/scene-02.jpg"
+    },
+    {
+      "job_id": "IMG-v6-scene-03",
+      "scene_id": "scene-03",
+      "shot": "S3",
+      "room": "C",
+      "facet": "east_floral_arcade",
+      "couple": false,
+      "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/IMAGE_JOB/scene-03.v6.json",
+      "packet_mirror": "/workspace/fmi-productions/nandini-karthik-remake/packets-v6/IMAGE_JOB/scene-03.v6.json",
+      "output_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v6/scene-03.jpg"
+    },
+    {
+      "job_id": "IMG-v6-scene-04",
+      "scene_id": "scene-04",
+      "shot": "S4",
+      "room": "F",
+      "facet": "stair_cascade_court",
+      "couple": false,
+      "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/IMAGE_JOB/scene-04.v6.json",
+      "packet_mirror": "/workspace/fmi-productions/nandini-karthik-remake/packets-v6/IMAGE_JOB/scene-04.v6.json",
+      "output_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v6/scene-04.jpg"
+    },
+    {
+      "job_id": "IMG-v6-scene-05",
+      "scene_id": "scene-05",
+      "shot": "S5",
+      "room": "E",
+      "facet": "ceremony_stage_mandap",
+      "couple": "STANDS",
+      "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/IMAGE_JOB/scene-05.v6.json",
+      "packet_mirror": "/workspace/fmi-productions/nandini-karthik-remake/packets-v6/IMAGE_JOB/scene-05.v6.json",
+      "output_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v6/scene-05.jpg"
+    },
+    {
+      "job_id": "IMG-v6-scene-06",
+      "scene_id": "scene-06",
+      "shot": "S6",
+      "room": "D",
+      "facet": "lotus_pond_photoshoot_terrace",
+      "couple": "STANDS",
+      "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/IMAGE_JOB/scene-06.v6.json",
+      "packet_mirror": "/workspace/fmi-productions/nandini-karthik-remake/packets-v6/IMAGE_JOB/scene-06.v6.json",
+      "output_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v6/scene-06.jpg"
+    }
+  ],
+  "image_job_dir": "/workspace/fmi-productions/nandini-karthik-remake/packets/IMAGE_JOB",
+  "packets_v6_dir": "/workspace/fmi-productions/nandini-karthik-remake/packets-v6",
+  "output_dir": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v6",
+  "video_jobs_authorized": false,
+  "preserve": [
+    "stills-v5",
+    "clips-v5",
+    "nandini-karthik-v5-preview.mp4",
+    "packets/IMAGE_JOB/scene-0N.json"
+  ],
+  "note": "Folded Spatial Map spatial-v9 beats (rooms A→B→C→F→E→D) into IMAGE_JOBs batch stills-v6. Canonical packets are scene-0N.v6.json (stills-v5 scene-0N.json untouched). Couple STANDS S5–S6 only. Global forbid lake+gopuram+hills+boat hero BG. Ready for Image Director generate. VIDEO remains HELD.",
+  "kc_v1_order_v2": "STOP unchanged"
+}

@@ -1,0 +1,10 @@
+{
+  "packet_type": "ORCHESTRATOR_ARM_FINAL_QC",
+  "production_id": "kc-v1-20261001-230532",
+  "authorized_at": "2026-10-01T23:42:16.486662+05:30",
+  "status": "WAITING_FOR_ASSEMBLY",
+  "assembly_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/kerala-christian-v1-final.mp4",
+  "checklist": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/manifest/final_qc_checklist.json",
+  "start_when": "kerala-christian-v1-final.mp4 exists and Assembly Editor reports COMPLETE",
+  "delivery": "PASS only \u2192 Orchestrator delivers to Ashok. Never self-deliver."
+}

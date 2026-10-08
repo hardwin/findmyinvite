@@ -1,0 +1,93 @@
+{
+  "production_id": "nk-v1-20261002-072013",
+  "spatial_approval_gate": {
+    "status": "APPROVED",
+    "spatial_map_status": "approved_by_ashok",
+    "spatial_blueprint_16x9_status": "approved_by_ashok",
+    "spatial_map_version": "spatial-v9",
+    "image_jobs_authorized": true,
+    "video_jobs_authorized": false,
+    "updated_at": "2026-10-02T10:52:46.595+05:30"
+  },
+  "stills_v5": {
+    "status": "APPROVED_01_06",
+    "job_count": 6,
+    "receipt": "/workspace/fmi-productions/nandini-karthik-remake/packets/ASSET_PRODUCER_EMIT_STILLS_V5.json",
+    "updated_at": "2026-10-02T08:44:51.341007+05:30",
+    "scene_01": "ATTEMPT2_AWAITING_QC",
+    "scene_02": "CONTINUITY_LOCK",
+    "scene_06": "ATTEMPT2_AWAITING_QC",
+    "note": "Orchestrator folded BRIEF invite stack into scene-06 IMAGE_JOB attempt-2"
+  },
+  "current_state": "GENERATING_SCENES",
+  "video_hold": true,
+  "clips_v5": {
+    "status": "EMITTED",
+    "receipt": "/workspace/fmi-productions/nandini-karthik-remake/packets/ASSET_PRODUCER_EMIT_VIDEO_V5.json",
+    "dispatch_now": "VID-v5-clip-01",
+    "updated_at": "2026-10-02T09:25:22.048399+05:30",
+    "clip_01": "APPROVED_IMMUTABLE",
+    "handoff": "/workspace/fmi-productions/nandini-karthik-remake/assets/handoffs-v5/clip-01-handoff.jpg",
+    "clip_02": "ACCEPTED_AS_IS_QC_WAIVED",
+    "clip_03": "GENERATED_QC_WAIVED",
+    "clip_04": "GENERATED_QC_WAIVED",
+    "clip_05": "GENERATED_QC_WAIVED",
+    "active_job": null,
+    "skip_visual_qc": true,
+    "preview": "READY",
+    "preview_receipt": "/workspace/fmi-productions/nandini-karthik-remake/packets/ASSET_PRODUCER_PREVIEW_RECEIPT_VID_v5.json"
+  },
+  "video_user_stop": false,
+  "video_user_stop_packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/ASSET_PRODUCER_VIDEO_USER_STOP.json",
+  "state": "STILLS_V6_DISPATCH_AUTHORIZED",
+  "updated_at": "2026-10-02T10:59:45.468646+05:30",
+  "orchestrator_stop": "/workspace/fmi-productions/nandini-karthik-remake/packets/ORCHESTRATOR_STOP_VID_v5_ASHOK.json",
+  "idle": false,
+  "qc_waive_override": "/workspace/fmi-productions/nandini-karthik-remake/packets/ORCHESTRATOR_OVERRIDE_QC_WAIVE_VID_v5.json",
+  "spatial_blueprint_16x9_status": "approved_by_ashok",
+  "hold_image_video": false,
+  "hold_packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/ASSET_PRODUCER_HOLD_AWAITING_16X9_BLUEPRINT.json",
+  "orchestrator_hold": "/workspace/fmi-productions/nandini-karthik-remake/packets/ORCHESTRATOR_HOLD_STILLS_VIDEO_AWAITING_16X9_BLUEPRINT.json",
+  "spatial_blueprint_16x9_path": "/workspace/fmi-productions/nandini-karthik-remake/continuity/SPATIAL_MAZE_MAP_16x9_v9.jpg",
+  "spatial_blueprint_16x9_version": "v9",
+  "maze_path": "A\u2192B\u2192C\u2192F\u2192E\u2192D",
+  "spatial_map_version": "spatial-v9",
+  "spatial_delivery": "/workspace/fmi-productions/nandini-karthik-remake/packets/SPATIAL_16X9_BLUEPRINT_DELIVERY_v2.json",
+  "spatial_map_status": "approved_by_ashok",
+  "stills_v6": {
+    "status": "PARTIAL_LOCK_S5_VETO",
+    "job_count": 6,
+    "batch": "stills-v6",
+    "receipt": "/workspace/fmi-productions/nandini-karthik-remake/packets/ASSET_PRODUCER_EMIT_STILLS_V6.json",
+    "image_job_dir": "/workspace/fmi-productions/nandini-karthik-remake/packets/IMAGE_JOB",
+    "packets_v6_dir": "/workspace/fmi-productions/nandini-karthik-remake/packets-v6/IMAGE_JOB",
+    "output_dir": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v6",
+    "maze_path": [
+      "A",
+      "B",
+      "C",
+      "F",
+      "E",
+      "D"
+    ],
+    "attempt": 1,
+    "updated_at": "2026-10-02T10:59:45.468646+05:30",
+    "rollup": "/workspace/fmi-productions/nandini-karthik-remake/logs/v6/STILLS_V6_ROLLUP.json",
+    "locked": [
+      "scene-01",
+      "scene-02",
+      "scene-03",
+      "scene-04",
+      "scene-06"
+    ],
+    "vetoed": [
+      "scene-05"
+    ],
+    "awaiting": "orchestrator_retry_auth_scene-05_attempt_2",
+    "video_hold": true,
+    "scene_05": "RETRY_AUTHORIZED_ATTEMPT_2",
+    "active_job": "IMG-v6-scene-05"
+  },
+  "orchestrator_unlock_image": "/workspace/fmi-productions/nandini-karthik-remake/packets/ORCHESTRATOR_UNLOCK_IMAGE_stills-v6.json",
+  "orchestrator_spatial_approved": "/workspace/fmi-productions/nandini-karthik-remake/packets/ORCHESTRATOR_SPATIAL_APPROVED.json"
+}

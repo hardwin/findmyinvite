@@ -1,0 +1,45 @@
+{
+  "job_id": "VID-clip-05",
+  "clip_id": "clip-05",
+  "production_id": "kc-v1-recreate-20261006-211129",
+  "model": "grok-imagine-video-1.5",
+  "resolution": "720p",
+  "aspect_ratio": "9:16",
+  "duration_seconds": 5,
+  "first_frame": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261006-211129/assets/output/kerala-christian-v1/clip-4-handoff.jpg",
+  "first_frame_sha256": "6e5b103cf8ac5f539916e72033041950139174cc3e13d3e5d0a39c3747dce081",
+  "last_frame": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261006-211129/assets/output/kerala-christian-v1/image-6.jpg",
+  "last_frame_sha256": "23b66ee1f9102cecd2af806641b95fda5c1cd8f79b585991061f6834f58fb681",
+  "prompt_source": "packets/VIDEO_PROMPTS_SUBMITTED.json (template resolved video_prompt + logged rule edits)",
+  "prompt_sha256": "297bd77b48a619bb58932202fa8a979561c8144715e179577db8980821ac316b",
+  "prompt_len": 3146,
+  "qc": "NO_QC",
+  "paid_submits": 1,
+  "attempts": [
+    {
+      "attempt": 1,
+      "http": 200,
+      "first_file_id": "file_63c9fc51-26b4-43b5-a0c5-c05c47aef3a5",
+      "last_file_id": "file_7276fe04-166d-4f69-92c6-52d1563a3510",
+      "submitted_at": "2026-10-07T11:18:07+05:30",
+      "request_id": "d3778956-53c9-9a31-9044-161ccfdb11f7",
+      "final_status": "done"
+    }
+  ],
+  "updated_at": "2026-10-07T11:19:02+05:30",
+  "status": "generated",
+  "request_id": "d3778956-53c9-9a31-9044-161ccfdb11f7",
+  "sha256": "2e4b5a6d9333cd5b7310aec3a7cceb2862f8ffa655255b19ba4acdb27f94dd48",
+  "handoff": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261006-211129/assets/output/kerala-christian-v1/clip-5-handoff.jpg",
+  "handoff_sha256": "4bd1892a2dfa617141ad2b159abb19b5730bbf5351d59bd68fba51920c7be129",
+  "video_url": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-d3778956-53c9-9a31-9044-161ccfdb11f7.mp4",
+  "usage": {
+    "cost_in_usd_ticks": 7200000000
+  },
+  "technical_probe": {
+    "w": 720,
+    "h": 1280,
+    "fps": "24/1",
+    "duration_s": 5.041667
+  }
+}

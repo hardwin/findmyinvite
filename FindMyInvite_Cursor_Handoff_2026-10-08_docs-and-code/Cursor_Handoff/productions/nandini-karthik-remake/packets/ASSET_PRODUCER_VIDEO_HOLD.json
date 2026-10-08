@@ -1,0 +1,16 @@
+{
+  "packet_type": "ASSET_PRODUCER_VIDEO_HOLD",
+  "production_id": "nk-v1-20261002-072013",
+  "recorded_at": "2026-10-02T11:01:55+05:30",
+  "status": "HELD",
+  "reason": "AWAITING_ASHOK_STILLS_APPROVE",
+  "batch_context": "stills-v6 Continuity COMPLETE \u2014 no VIDEO_JOB emit",
+  "stills_batch_ready": "stills-v6",
+  "stills_complete_receipt": "/workspace/fmi-productions/nandini-karthik-remake/packets/ASSET_PRODUCER_STILLS_V6_COMPLETE.json",
+  "do_not_emit_video_until": "Orchestrator GO after Ashok stills approve",
+  "preserve": [
+    "stills-v5",
+    "clips-v5",
+    "v5 preview"
+  ]
+}

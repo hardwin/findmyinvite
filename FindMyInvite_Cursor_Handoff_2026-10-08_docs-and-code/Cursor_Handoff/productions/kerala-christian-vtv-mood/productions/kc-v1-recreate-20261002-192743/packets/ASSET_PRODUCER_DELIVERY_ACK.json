@@ -1,0 +1,22 @@
+{
+  "packet_type": "ASSET_PRODUCER_DELIVERY_ACK",
+  "production_id": "kc-v1-recreate-20261002-192743",
+  "acked_at": "2026-10-02T20:09:18+05:30",
+  "status": "DELIVERED_STAND_DOWN",
+  "orchestrator_delivery": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/ORCHESTRATOR_DELIVERY.json",
+  "clips_complete": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/VIDEO_DIRECTOR_CLIPS_COMPLETE.json",
+  "clip_count": 11,
+  "final": {
+    "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1/kerala-christian-v1-final.mp4",
+    "sha256": "f5773316b737ed1b1be9219c09133547f61ff69ac157050b32864b12b30a7e1c",
+    "duration_seconds": 54.458333,
+    "resolution": "720x1280",
+    "clip_count": 11
+  },
+  "no_further_video_jobs": true,
+  "preserve": [
+    "kc-v1-20261001-230532",
+    "nk-v1 HELD"
+  ],
+  "note": "AP books closed \u2014 all VIDEO_JOBs COMPLETE_DELIVERED; Video Floor stand down"
+}

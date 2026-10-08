@@ -1,0 +1,214 @@
+{
+  "job_type": "IMAGE_JOB",
+  "job_id": "IMG-scene-01-order-v2",
+  "production_id": "kc-v1-20261001-230532",
+  "status": "APPROVED",
+  "authorized_to_dispatch": true,
+  "order": "V2",
+  "supersedes": [
+    "IMG-scene-01-regen",
+    "scene-01.regen.json freeform"
+  ],
+  "scene_id": "scene-01",
+  "scene_index": 1,
+  "name": "ORDER V2 \u2014 handoff-conditioned sweeping drone establish",
+  "generation": "reference-conditioned",
+  "reference_image": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1-handoff.jpg",
+  "reference_role": "last-frame world anchor \u2014 pull camera OUT to elevated drone; match identity",
+  "image_prompt": "REFERENCE-CONDITIONED opening still: pull the camera OUT from the supplied last-frame handoff (open classical cream porch with floral cross, twin gold candlesticks, champagne-gold blessing destination world) into a brilliant elevated sweeping cinematic DRONE establish of the SAME wedding-estate \u2014 portrait 9:16 storybook 3D.\n\nSAME WORLD IDENTITY as the handoff (do not invent a different church): cream-white classical / Portuguese-influenced Kerala Catholic plaster, polished cream stone language below, ONE modest cream bell tower with cross, ONE open porch vestibule (open sides including rear) with ONE floral cross pedestal (white+soft pink) readable or partly roof-occluded from height, lush tropical coastal/backwater palms and calm water, warm golden-hour sunrise from camera-left / upper-left, powder-blue lavender-peach sky haze, continuous pink+white petal d\u00e9cor from height.\n\nCAMERA: high sweeping drone / wedding-estate aerial brilliance with strong altitude and parallax \u2014 NOT an eye-level facade plate, NOT a static compound diagram, NOT a nadir architecture map, NOT a close porch portrait.\n\nSoft architecture loosen for estate expanse is OK (gardens, approach depth, landscape scale) while keeping family resemblance to the handoff porch destination. People tiny unresolved. Premium dimensional illustration.\n\nCRITICAL: NO text, lettering, watermark, or champagne-gold blessing copy on this still \u2014 destination copy 'With God's Grace' / 'We Invite You' belongs only on the last frame / end of clip, never here. No second tower, no second church, no closed sanctuary.",
+  "required_text": [],
+  "continuity": {
+    "source": "CONTINUITY_BIBLE.json#scenes.scene-01 + CONTINUITY_AMEND_clip01_order_v2",
+    "amend": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/continuity/CONTINUITY_AMEND_clip01_order_v2.json",
+    "locked_destination_world": {
+      "source_frame": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1-handoff.jpg",
+      "zone": "open arched porch vestibule looking out toward church / coastal water",
+      "architecture": {
+        "porch": "classical cream-white fluted columns; open sides including rear; wooden beam overhead with white+pink floral clusters",
+        "floor": "polished light cream stone/marble reflecting warm light",
+        "floral_cross": "ONE large floral cross (white+soft pink flowers) on square cream pedestal, centered in porch",
+        "candles": "TWO tall slender brass/gold candlesticks with white pillar candles in glass hurricane shades flanking the pedestal",
+        "distant_church": "ONE cream-white church with modest bell tower + cross, seen through open rear of porch along a stone path",
+        "landscape": "lush tropical coastal/backwater; palm trees; calm water beyond church; flowering bushes"
+      },
+      "materials_palette": [
+        "cream-white plaster / classical columns",
+        "champagne-gold lettering (last frame only)",
+        "white + soft pink florals (roses/lilies)",
+        "warm golden-hour sunrise light from camera-left / upper-left",
+        "powder-blue / lavender-peach sky haze"
+      ],
+      "lighting": "soft warm golden-hour sunrise from upper-left / camera-left; luminous rim; gentle lens bloom OK; not flat wash",
+      "copy_locked_destination": {
+        "lines": [
+          "With God's Grace",
+          "We Invite You"
+        ],
+        "style": "champagne-gold beveled cursive; lives ONLY on last frame / end of clip \u2014 NEVER on scene-01 still"
+      },
+      "particles": "continuous drifting pink+white petals",
+      "medium": "storybook 3D \u2014 never photographic"
+    },
+    "scene_01_rules": {
+      "must": "same world as handoff, elevated sweeping drone establish, opening_energy required",
+      "no_text": true,
+      "object_counts": {
+        "bell_tower": 1,
+        "porch_vestibule": 1,
+        "floral_cross_pedestal": 1,
+        "text_boards": 0
+      },
+      "veto_if": [
+        "different world than handoff",
+        "static compound plate / facade lock",
+        "any text on still",
+        "0 or 2+ bell towers / missing porch / missing floral cross"
+      ]
+    },
+    "scene": {
+      "id": "scene-01",
+      "index": 1,
+      "name": "Same-world elevated drone establish (ORDER V2 from handoff)",
+      "generate_still": true,
+      "image_path": "image-1.jpg",
+      "order_v2": true,
+      "world_anchor": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1-handoff.jpg",
+      "zone": "elevated aerial / same wedding-estate compound as clip-1-handoff world",
+      "characters": [],
+      "copy": null,
+      "lighting": "soft warm golden-hour sunrise from upper-left / camera-left; luminous rim; gentle lens bloom OK; not flat wash",
+      "camera": "Brilliant elevated sweeping cinematic drone establish of the SAME physical estate visible in clip-1-handoff.jpg \u2014 pull OUT and UP from the porch blessing world. Wide oblique aerial. Strong altitude/parallax. NOT eye-level porch portrait, NOT nadir map, NOT static facade plate.",
+      "opening_energy": {
+        "required": "sweeping cinematic drone / wedding-estate aerial brilliance",
+        "veto_if": [
+          "static compound plate",
+          "eye-level facade lock",
+          "tight measured floorplan diagram",
+          "frozen hold with no aerial expanse",
+          "different world than handoff (wrong porch/church family)"
+        ]
+      },
+      "same_world_as_handoff": {
+        "required": true,
+        "must_match_identity": [
+          "cream-white classical porch columns family",
+          "ONE floral cross pedestal (may be tiny/partly roof-occluded from height)",
+          "ONE modest cream-white bell tower + cross on the church mass",
+          "open porch vestibule readable in compound below",
+          "coastal/backwater + palms soft geography",
+          "white+pink floral language",
+          "warm sunrise camera-left palette"
+        ],
+        "may_soften": [
+          "exact pool/path proportions",
+          "exact cloister extent",
+          "estate depth and garden layout",
+          "tower placement within soft right/background family (still ONE)"
+        ],
+        "forbidden_divergence": [
+          "unrelated church typology",
+          "terracotta-heavy freeform estate that breaks handoff cream classical porch identity",
+          "missing porch / missing tower / second tower"
+        ]
+      },
+      "architecture_must": [
+        "SAME WORLD as clip-1-handoff.jpg \u2014 continuous estate identity",
+        "ONE modest cream-white bell tower + cross",
+        "ONE open porch vestibule (all sides open including rear) with floral cross pedestal",
+        "Elevated sweeping wedding-estate geography \u2014 not a flat facade plate"
+      ],
+      "object_counts": {
+        "bell_tower": 1,
+        "porch_vestibule": 1,
+        "floral_cross_pedestal": 1,
+        "text_boards": 0
+      },
+      "forbidden": [
+        "ANY text/lettering/watermark on scene-01 still (blessing copy belongs only on last frame)",
+        "close portrait of porch (that is scene-02 / handoff territory)",
+        "closed inner sanctuary in porch",
+        "extra shrine",
+        "multiple bell towers",
+        "second unrelated church",
+        "static eye-level facade plate",
+        "photographic realism"
+      ],
+      "particles": "lavish floral d\u00e9cor from height; petals optional tiny; people tiny unresolved",
+      "amend_note": "ORDER V2 2026-10-02: first frame derived from locked handoff world, elevated drone"
+    },
+    "opening_energy": {
+      "required": "sweeping cinematic drone / wedding-estate aerial brilliance",
+      "veto_if": [
+        "static compound plate",
+        "eye-level facade lock",
+        "tight measured floorplan diagram",
+        "frozen hold with no aerial expanse",
+        "different world than handoff (wrong porch/church family)"
+      ]
+    },
+    "object_counts": {
+      "bell_tower": 1,
+      "porch_vestibule": 1,
+      "floral_cross_pedestal": 1,
+      "text_boards": 0
+    },
+    "veto_if": [
+      "different world than handoff",
+      "static compound plate / facade lock",
+      "any text on still",
+      "0 or 2+ bell towers / missing porch / missing floral cross"
+    ],
+    "style_excerpt": "A full-bleed portrait 9:16 frame of a richly cinematic dimensional storybook-animation Kerala Christian church wedding invitation. Soft romantic late-2000s South Indian cinema mood: dreamy natural light, intimate coastal Kerala atmosphere, gentle teal-and-warm contrast, quiet emotional longing. Soft cream and powder-blue palette with pearl highlights, pale pink florals and cool backwaters haze beyond coconut palms. Cream-white Portuguese-influenced plaster walls, laterite stone accents, arched w"
+  },
+  "continuity_rules_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/continuity/CONTINUITY_BIBLE.json#scenes.scene-01",
+  "continuity_amend_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/continuity/CONTINUITY_AMEND_clip01_order_v2.json",
+  "output_filename": "image-1.jpg",
+  "output_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-1.jpg",
+  "archive_current_freeform_as": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-1.regen-freeform-superseded.jpg",
+  "aspect": "9:16",
+  "width": 720,
+  "height": 1280,
+  "model": {
+    "credentials_env": "REPLICATE_API_TOKEN",
+    "id": "openai/gpt-image-2.5-flare",
+    "provider": "replicate"
+  },
+  "dependencies": {
+    "blocks": [
+      "VID-clip-01-regen"
+    ],
+    "blocked_by": [
+      "continuity_amend_clip01_order_v2_READY",
+      "orchestrator_IMAGE_authorize_order_v2"
+    ]
+  },
+  "context_isolation": {
+    "includes_clip_graph": false,
+    "includes_other_scenes": false,
+    "rule": "Image agents must not receive clip graphs or unrelated scenes"
+  },
+  "retry_policy": {
+    "automatic_paid_retries": false,
+    "max_paid_attempts": 2
+  },
+  "staged_at": "2026-10-02T00:10:11.035197+05:30",
+  "source_packets": [
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/ORCHESTRATOR_CLIP01_REGEN_ORDER_V2.json",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/ORCHESTRATOR_GO_ASSET_PRODUCER_CLIP01_ORDER_V2.json",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/continuity/CONTINUITY_AMEND_clip01_order_v2.json"
+  ],
+  "authorized_by_orchestrator": true,
+  "dispatch_rule": "Return to Orchestrator \u2014 do NOT auto-dispatch",
+  "authorized_at": "2026-10-02T00:10:22.212768+05:30",
+  "attempt": 2,
+  "max_paid_attempts": 2,
+  "authorization_note": "ORDER V2 \u2014 generate from clip-1-handoff.jpg reference; Visual QC + Continuity; VIDEO remains HELD",
+  "prior_attempt": 1,
+  "prior_generation_id": "c4r4b25xkdrmy0d0z32bdfr6y8",
+  "prior_asset_archived": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-1.order-v2-attempt1-vetoed.jpg",
+  "prior_sha256": "05c928e91ee9e33198300d35d125766cf9d17a16f0d1aac64ea67622e2dc4663",
+  "continuity_veto": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/continuity_veto/scene-01.order-v2.json",
+  "retry_instruction": "Keep elevated sweeping drone + NO text + ONE tower + floral cross + twin candles + coastal palms/sunrise. Fix ONLY geography: show the open porch vestibule as its own open pavilion (handoff classical column family) with the cream church+bell tower readable BEYOND the open rear by water \u2014 matching clip-1-handoff.jpg world \u2014 not a porch glued as the church facade.",
+  "parent_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/IMAGE_JOB/scene-01.order-v2.json",
+  "approved_at": "2026-10-02T00:14:49+05:30"
+}

@@ -1,0 +1,18 @@
+{
+  "packet_type": "ORCHESTRATOR_GO_IMAGE_SCENE01_REGEN",
+  "production_id": "kc-v1-20261001-230532",
+  "authorized_at": "2026-10-02T00:05:56.312314+05:30",
+  "job_id": "IMG-scene-01-regen",
+  "job_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/IMAGE_JOB/scene-01.regen.json",
+  "action": "GENERATE_NOW",
+  "output_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-1.jpg",
+  "after": "Visual QC + Continuity veto on scene-01 only. Do NOT start clip-01 video until Orchestrator authorizes after APPROVED.",
+  "qc_focus": [
+    "opening_energy drone/wedding-estate",
+    "ONE bell tower",
+    "ONE open porch",
+    "no text",
+    "not static facade plate"
+  ],
+  "max_paid_attempts": 2
+}

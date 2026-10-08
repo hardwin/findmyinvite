@@ -1,0 +1,14 @@
+{
+  "packet_type": "RECREATE_CLIENT_FILL_NAME_UPDATE",
+  "from": "FMI ReCreate",
+  "to": "FMI Orchestrator",
+  "at": "2026-10-03T00:31:49.695688+05:30",
+  "production_id": "kc-v1-recreate-20261003-003016",
+  "template_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/template.json",
+  "template_sha256": "7d0c8f3060e3c11e2f1b3800661cad30d30602313961c1feeecdf0db9f8d130b",
+  "change": "Ashok approved: update template.name (and any leftover Alex/Anna labels outside *_template) to Swaroop & Smiley",
+  "old_name": "The Wedding of Alex & Anna",
+  "new_name": "The Wedding of Swaroop & Smiley",
+  "remaining_Alex_Anna_hits": 0,
+  "requested_action": "Re-hash / continue compile with updated template; do not mutate prompts"
+}

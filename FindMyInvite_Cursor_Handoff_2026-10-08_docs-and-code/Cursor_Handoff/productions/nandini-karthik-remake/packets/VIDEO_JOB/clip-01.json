@@ -1,0 +1,92 @@
+{
+  "job_type": "VIDEO_JOB",
+  "job_id": "VID-v5-clip-01",
+  "production_id": "nk-v1-20261002-072013",
+  "batch": "clips-v5",
+  "clip_id": "clip-01",
+  "clip_index": 1,
+  "status": "APPROVED_IMMUTABLE",
+  "authorized_to_dispatch": false,
+  "spatial_map_version": "spatial-v2",
+  "stills_batch": "stills-v5",
+  "orchestrator_auth": "/workspace/fmi-productions/nandini-karthik-remake/packets/ORCHESTRATOR_STILLS_APPROVED_VIDEO_GO.json",
+  "from_scene": "scene-01",
+  "to_scene": "scene-02",
+  "from_facet": "entrance_thicket",
+  "to_facet": "entrance_colonnade",
+  "next_edge_move": "STRAIGHT / slight RIGHT along path to colonnade",
+  "duration_sec": 3,
+  "aspect_ratio": "9:16",
+  "resolution": {
+    "width": 720,
+    "height": 1280
+  },
+  "fps": 24,
+  "first_frame_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5/scene-01.jpg",
+  "first_frame_still_fallback": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5/scene-01.jpg",
+  "last_frame_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5/scene-02.jpg",
+  "first_frame_strategy": "approved-still",
+  "last_frame_strategy": "approved-still",
+  "first_frame_note": "APPROVED stills-v5 scene-01.jpg",
+  "last_frame_note": "APPROVED stills-v5 scene-02.jpg as destination lock",
+  "camera_instruction": "STRAIGHT / slight RIGHT along path to colonnade",
+  "offscreen_start": {
+    "L": "deeper thicket",
+    "R": "entrance_colonnade (next)",
+    "behind": "path origin",
+    "ahead": "entrance_colonnade"
+  },
+  "offscreen_end": {
+    "L": "thicket just left",
+    "R": "right wing",
+    "behind": "approach path",
+    "ahead": "threshold / center + left aisle mouths"
+  },
+  "forbidden_reuse": [
+    "boat",
+    "couple",
+    "gopuram",
+    "misty lake",
+    "mountains",
+    "stage",
+    "temple gopuram",
+    "text",
+    "through-arch lake plate"
+  ],
+  "continuity_rules": {
+    "bible": "/workspace/fmi-productions/nandini-karthik-remake/continuity/CONTINUITY_BIBLE.json",
+    "spatial_map": "/workspace/fmi-productions/nandini-karthik-remake/continuity/SPATIAL_MAP.json",
+    "blueprint": "/workspace/fmi-productions/nandini-karthik-remake/continuity/MANTAP_BLUEPRINT_TOPVIEW.png",
+    "wardrobe_lock": null,
+    "pose_lock": "Couple STANDS; camera moves around them",
+    "couple_stands_camera_moves": true,
+    "no_walking": true,
+    "maze_logic": "Continuous polyline through adjacent facets only. Allowed moves between beats: LEFT turn, RIGHT turn, or STRAIGHT along a connected edge. Forbidden: diagonal teleports across center aisle or skipping stairs to reach stage.",
+    "far_vista_lock": {
+      "hero_plate": "misty lake + temple gopuram + mountains + wooden boat",
+      "rule": "FORBIDDEN as dominant background on every beat. Allowed at most as a tiny distant corner peek in scene-06 only, never hero, never with readable gopuram. Prefer solid stage floral architecture instead."
+    },
+    "copy_locked": {
+      "scene-05": "Magenta cursive sky optional: Nandini ♡ Karthik only (no full invite stack)",
+      "scene-06": "Full stacked invite text (honor IMAGE_JOB packet exact copy — do not invent)",
+      "scene-01_to_04": "NO text"
+    }
+  },
+  "motion_prompt": "A single continuous physically motivated cinematic camera move through ONE tropical South Indian wedding mantap complex. World: pastel tropical elegance; cream carved stone; jasmine+lotus; banana leaves; brass urulis + nilavilakku; polished reflective floor; soft warm morning light; cinematic dimensional storybook 9:16. Use the supplied FIRST and LAST images as hard visual anchors. Solid architecture with real translation, occlusion, perspective and foreground parallax. Preserve identity, lighting, materials, wardrobe and exact final lettering when present. Never cut, crossfade, dissolve, morph faces/clothes mid-shot, or swap objects. Soft pink petals drift with depth. Keep motion continuous — no static holds. Far vista lock: FORBIDDEN as dominant background on every beat. Allowed at most as a tiny distant corner peek in scene-06 only, never hero, never with readable gopuram. Prefer solid stage floral architecture instead. Maze: Continuous polyline through adjacent facets only. Allowed moves between beats: LEFT turn, RIGHT turn, or STRAIGHT along a connected edge. Forbidden: diagonal teleports across center aisle or skipping stairs to reach stage. Couple NEVER walks — feet planted; camera moves. NO misty lake+gopuram+hills+boat as dominant background. PRIMARY ACTION: Continuous adjacent weave scene-01(entrance_thicket) → scene-02(entrance_colonnade). Move: STRAIGHT / slight RIGHT along path to colonnade. Start camera: {\"framing\": \"extreme close among banana leaves\", \"bias\": \"LEFT of approach path\", \"height\": \"eye-among-leaves\", \"look\": \"peek of cream colonnade glow toward RIGHT\", \"lens_feel\": \"tight macro\"}. Arrive camera: {\"framing\": \"wide exterior\", \"bias\": \"RIGHT of center approach\", \"height\": \"eye level\", \"look\": \"entrance colonnade facade (closed — no lake tunnel)\", \"lens_feel\": \"wide\"}. Reveal offscreen ahead from start: entrance_colonnade. Do not teleport; stay on connected edge only. FORBIDDEN throughout: boat, couple, gopuram, misty lake, mountains, stage, temple gopuram, text, through-arch lake plate.",
+  "output_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/clips-v5/clip-01.mp4",
+  "handoff_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/handoffs-v5/clip-01-handoff.jpg",
+  "depends_on": null,
+  "max_paid_attempts": 2,
+  "attempt": 1,
+  "created_at": "2026-10-02T08:49:19.895823+05:30",
+  "result": {
+    "sha256": "0a8cef4f4a581ec4379b8008e782aa171a3d24b281583f7b254e6748d28deca3",
+    "request_id": "591a80e3-8c78-9140-a73f-545fa61816bd",
+    "finished": "2026-10-02T08:50:41.461161+05:30"
+  },
+  "updated_at": "2026-10-02T09:16:02.247184+05:30",
+  "qc": "/workspace/fmi-productions/nandini-karthik-remake/logs/video_jobs_v5/QC_clip-01_attempt1.json",
+  "user_stop": true,
+  "user_stop_packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/ASSET_PRODUCER_VIDEO_USER_STOP.json",
+  "status_before_user_stop": "APPROVED"
+}

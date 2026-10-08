@@ -1,0 +1,30 @@
+{
+  "packet_type": "ASSET_PRODUCER_DELIVERY_ACK",
+  "production_id": "kc-v1-recreate-20261003-071403",
+  "couple": "Theresa & Isaac",
+  "at": "2026-10-03T09:59:59+05:30",
+  "status": "DELIVERED",
+  "stitch": "hard-cut silent",
+  "qc": "waived",
+  "finish": "skipped",
+  "final_mp4": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/assets/output/kerala-christian-v1/kerala-christian-v1-final.mp4",
+  "sha256": "a7d12db013138679c402fb3739271f6e96d9ffd7e4bf3a89bd147cf80a420753",
+  "duration_s": 54.458333,
+  "resolution": "720x1280",
+  "audio": "none",
+  "clips": [
+    "clip-1.mp4",
+    "clip-2.mp4",
+    "clip-3.mp4",
+    "clip-4.mp4",
+    "clip-5.mp4",
+    "clip-6.mp4",
+    "clip-7.mp4",
+    "clip-8.mp4",
+    "clip-9.mp4",
+    "clip-10.mp4",
+    "clip-11.mp4"
+  ],
+  "scene02_still": "image-2.jpg attempt 3 sha 0bd13d640bcbb86e207d98c46aa94f787198144810b48c0ad131a9d29345caf0",
+  "note": "No further VIDEO_JOBs. Auto-unlock routine deleted after this stitch."
+}

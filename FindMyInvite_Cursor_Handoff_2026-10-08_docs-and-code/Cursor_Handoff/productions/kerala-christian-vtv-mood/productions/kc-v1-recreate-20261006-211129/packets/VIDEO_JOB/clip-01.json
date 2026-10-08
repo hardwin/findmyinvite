@@ -1,0 +1,46 @@
+{
+  "job_id": "VID-clip-01",
+  "clip_id": "clip-01",
+  "production_id": "kc-v1-recreate-20261006-211129",
+  "model": "grok-imagine-video-1.5",
+  "duration_seconds": 5,
+  "first_frame": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261006-211129/assets/output/kerala-christian-v1/image-1.jpg",
+  "last_frame": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261006-211129/assets/output/kerala-christian-v1/image-2.jpg",
+  "prompt_sha256": "38a2b00f1a737e31ed138ea01575ef8e78736b33449bd56cd89d3e02cfc1f642",
+  "prompt_len": 3776,
+  "qc": "NO_QC",
+  "video_prompt": "A single continuous physically motivated cinematic camera move in the same dimensional illustrated Kerala Catholic church compound near Alappuzha. Use the supplied first and final images as visual anchors. Solid fixed architecture with real translation, occlusion, perspective and foreground parallax. Preserve identity, lighting, materials and exact final lettering. A short energetic travel burst with directional edge blur must ease decisively into a slower continuously moving arrival; never distribute the travel uniformly over the duration. In the slower passage, soft candle highlights and floor reflections shift with camera angle. Each visible petal is a single loose curled petal, generally under 3 percent of frame width; no whole flowers, discs or objects covering faces and words. Preserve clear readability. No cuts, crossfades, room dissolves, object swaps, frozen holds, uniform sideways slides or full orbits. Glowing lettering is solid beveled metal with light on its surface: no liquid gold, dripping strokes, ceiling-to-floor beams, explosive firework bursts or smoke emitted by text. A warm floor reflection is reflected light, not a physical stream connecting the title to the floor. Existing soft candle wisps, where visible, come only from a floor-level candle stand and stay separate from lettering.\n\nEXACT SHOT CHOREOGRAPHY: HIGH AERIAL HOOK, FAST FORWARD-DOWN DIVE, THEN A CONTINUING BLESSING PUSH. 0.00-0.65s: gently advance from the high distant full-compound opening. The tiny existing church porch vestibule below the cream-white bell tower is the destination. 0.65-1.85s: accelerate hard FORWARD AND DOWN along that axis. The compound, reflecting courtyard pool and cream paving expand with strong parallax; skim over the pool toward the small porch. Keep the bell tower behind the destination, moving toward the upper edge. The camera never heads into the tower and no replacement church appears. 1.85-2.20s: descend below the existing porch roof and pass between its front corner columns above the three steps. The beam passes overhead and the columns whip past the edges in brief directional blur. These are open arched bays, not a dark doorway in a closed sanctuary. The roof initially occludes the floral cross; the first resolved view reveals the SAME floral cross and candle stands as the supplied final image. From the moment the rear side is visible it is already open to the exterior bell tower. No back wall appears or disappears. 2.20-2.70s: level out and smoothly brake without stopping. Reveal the large champagne-gold blessing lettering in the open air above the floral cross as the camera clears the front beam, its metal catching the changing light. The text reads 'This is the LORD's Doing,' above 'It is Marvelous In Our Eyes. Psalms 118:23'; it belongs to a fixed position in the porch rather than following the screen. 2.70-5.00s: CONTINUE A VISIBLE SLOW FORWARD PUSH into the final image, approximately another 10 percent increase in floral cross scale, with column-edge parallax, shifting reflections and rich falling soft petals. End still moving gently forward, ready to turn left immediately in the next clip. Do not stop on a static tableau. Keep a single stationary floral cross throughout and a persistent open view behind it. The title remains large, stable and legible. Preserve its silhouette and garlands, with no object replacement or material morph. Exterior floral swags and column wraps remain attached to their original surfaces as they pass out of view; never dissolve the decorations. NO EXTRA PILLAR: never show an extra pillar at any moment; only the existing corner columns pass the edges. Whenever the church is visible it has exactly one white bell tower with one cross on top; never a second tower.",
+  "edits": [
+    {
+      "op": "delete",
+      "text": " and individual petals rotate independently",
+      "why": "length (<3900); same deletion as Theresa clip-01 attempt-4 trim"
+    },
+    {
+      "op": "delete",
+      "text": "Release a denser shower of small white jasmine and soft pink rose petals during deceleration, with near, middle and far depth layers. ",
+      "why": "length; same as attempt-4 trim"
+    },
+    {
+      "op": "delete",
+      "text": ", with restrained traveling edge glints and no smoke, droplets or sweeping light beam",
+      "why": "length; same as attempt-4 trim"
+    },
+    {
+      "op": "delete",
+      "text": "The small distant floral cross is shaded beneath the existing roof; as the camera descends, soft sunlight reveals the same floral cross and cream plaster. ",
+      "why": "length; redundant with 'The roof initially occludes the floral cross'"
+    },
+    {
+      "op": "replace",
+      "from": "never show an extra pillar or plinth at any moment",
+      "to": "never show an extra pillar at any moment",
+      "why": "plinth is not in start/end frames (do not name absent objects)"
+    },
+    {
+      "op": "append",
+      "text": "Whenever the church is visible it has exactly one white bell tower with one cross on top; never a second tower.",
+      "why": "exactly one bell tower rule"
+    }
+  ]
+}

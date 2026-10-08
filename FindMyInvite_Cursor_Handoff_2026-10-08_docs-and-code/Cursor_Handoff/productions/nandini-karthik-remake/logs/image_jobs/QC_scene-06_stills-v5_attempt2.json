@@ -1,0 +1,49 @@
+{
+  "document": "VISUAL_QC",
+  "production_id": "nk-v1-20261002-072013",
+  "batch": "stills-v5",
+  "job": "IMG-v5-scene-06",
+  "scene_id": "scene-06",
+  "facet_expected": "stage_decorations",
+  "asset_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5/scene-06.jpg",
+  "sha256": "2579d519dfbab7638e9340ed876cfa4b3116cd98c228366aea26fa21a332f43f",
+  "generation_id": "njs21ry3r5rmr0d0zacsfjpfr0",
+  "prompt_hash": "747b72d6e2cd443166b33d660fcbb023ed3c3fddc0f37fa361c7b86f903b1e1c",
+  "attempt": 2,
+  "max_paid_attempts": 2,
+  "decision": "PASS",
+  "rationale": "Retry copy defect fixed: on-screen invite matches locked BRIEF stack (Nandini \u2661 Karthik; Two hearts\u2026; 22nd February 2027; 9:30 AM onwards; ITC Grand Chola; Chennai, Tamil Nadu; JOIN US\u2026). Wardrobe maroon+green, long jasmine hair, STANDING/holding hands. Decorated lotus pond LEFT + cream stage architecture; stairs readable; no lake-gopuram-hills-boat as dominant hero plate. Invented Apr 2025 / Sri Vara Mahal copy gone.",
+  "violations": [],
+  "checks_passed": [
+    "exact invite copy lines present (event facts correct)",
+    "wardrobe maroon + green + long flowered hair",
+    "STANDING / no walking / not bun",
+    "decorated pond rim LEFT",
+    "stairs readable",
+    "no v4 lake-gopuram-boat-hills dominant BG"
+  ],
+  "soft_notes": [
+    "Photoshoot niche LEFT is weaker/less explicit than attempt-1 sofa alcove \u2014 Continuity/Spatial may soft-flag; not a copy FAIL.",
+    "Line stacking may compact date+time onto one line visually \u2014 facts are correct; Continuity owns typography veto if needed."
+  ],
+  "expected_copy_lines": [
+    "Nandini \u2661 Karthik",
+    "Two hearts, one beautiful beginning",
+    "22nd February 2027",
+    "9:30 AM onwards",
+    "ITC Grand Chola",
+    "Chennai, Tamil Nadu",
+    "JOIN US as we begin our forever."
+  ],
+  "prior_attempt": {
+    "attempt": 1,
+    "decision": "RETRY",
+    "qc": "/workspace/fmi-productions/nandini-karthik-remake/logs/image_jobs/QC_scene-06_stills-v5_attempt1.json",
+    "archive": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5/scene-06.attempt1.jpg"
+  },
+  "retry_instruction": null,
+  "spatial_map_version": "spatial-v2",
+  "judged_at": "2026-10-02T08:44:02+05:30",
+  "judge": "Visual QC Supervisor",
+  "handoff": "Continuity Director LOCK/VETO priority on copy + wardrobe"
+}

@@ -1,0 +1,35 @@
+{
+  "job_type": "VIDEO_JOB",
+  "job_id": "vid-clip-01",
+  "production_id": "kc-v1-20261001-230532",
+  "clip_id": "clip-01",
+  "clip_index": 1,
+  "first_frame_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-1.jpg",
+  "last_frame_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-2.jpg",
+  "first_frame_strategy": "scene-image",
+  "last_frame_strategy": "scene-image",
+  "motion_prompt": "<EXACT from clips_prompt_extract \u2014 do not alter>",
+  "duration_seconds": 5,
+  "resolution": "720p",
+  "width": 720,
+  "height": 1280,
+  "fps": 24,
+  "camera_instruction": "<from clip.camera>",
+  "continuity_rules_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/continuity/CONTINUITY_BIBLE.json#clip-01",
+  "output_clip_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1.mp4",
+  "final_frame_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1-final-frame.jpg",
+  "model": {
+    "credentials_env": "XAI_API_KEY",
+    "id": "grok-imagine-video-1.5",
+    "provider": "xai",
+    "resolution": "720p"
+  },
+  "dependencies": [
+    "img-scene-01:APPROVED",
+    "img-scene-02:APPROVED"
+  ],
+  "max_paid_attempts": 2,
+  "attempt": 1,
+  "status": "BLOCKED_ON_FRAMES",
+  "authorized_by_orchestrator": false
+}

@@ -1,0 +1,13 @@
+{
+  "action": "AUTHORIZE_VIDEO_RETRY",
+  "production_id": "kc-v1-20261001-230532",
+  "clip_id": "clip-01",
+  "job_id": "VID-clip-01",
+  "attempt": 2,
+  "authorized_at": "2026-10-01T23:19:02.447793+05:30",
+  "packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/VIDEO_JOB/clip-01.retry-2.json",
+  "first_frame": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-1.jpg",
+  "last_frame": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-2.jpg",
+  "output": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1.mp4",
+  "on_complete": "Visual QC then Continuity; if RETRY again \u2192 NEEDS_INTERVENTION"
+}

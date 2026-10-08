@@ -1,0 +1,97 @@
+{
+  "production_id": "kc-v1-20261001-230532",
+  "updated_at": "2026-10-02T00:08:54.875949+05:30",
+  "scenes": {
+    "scene-02": {
+      "status": "APPROVED",
+      "qc": "PASS",
+      "continuity": "LOCK",
+      "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-2.jpg"
+    },
+    "scene-09": {
+      "status": "APPROVED",
+      "qc": "PASS",
+      "continuity": "LOCK",
+      "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-9.jpg"
+    },
+    "scene-01": {
+      "status": "SUPERSEDED_FOR_ORDER_V2",
+      "job_id": "IMG-scene-01-regen",
+      "attempt": 1,
+      "regen": true,
+      "qc": "PASS",
+      "continuity": "LOCK_CLEAR",
+      "sha256": "df371728282e4fd1ea754f7f100cf2f9db5b25a6119b83db6162c4e4e7c36d51",
+      "generation_id": "zw19vxegaxrmt0d0z309vyvtdw",
+      "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-1.jpg",
+      "approved_at": "2026-10-02T00:07:59.730849+05:30",
+      "note": "Freeform regen PASS retained as archive; new image-01 must be derived from clip-1-handoff.jpg"
+    },
+    "scene-06": {
+      "status": "APPROVED",
+      "qc": "PASS_ATTEMPT_2",
+      "continuity": "LOCK",
+      "attempt": 2,
+      "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-6.jpg",
+      "approved_at": "2026-10-01T23:17:05.883943+05:30"
+    },
+    "scene-05": {
+      "status": "APPROVED",
+      "qc": "PASS_ATTEMPT_2",
+      "continuity": "LOCK",
+      "attempt": 2,
+      "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-5.jpg",
+      "approved_at": "2026-10-01T23:19:12.856150+05:30"
+    },
+    "scene-10": {
+      "status": "APPROVED",
+      "qc": "PASS_ATTEMPT_2",
+      "continuity": "LOCK",
+      "attempt": 2,
+      "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-10.jpg",
+      "approved_at": "2026-10-01T23:19:12.856150+05:30"
+    },
+    "scene-03": {
+      "status": "APPROVED",
+      "qc": "PASS",
+      "continuity": "LOCK",
+      "attempt": 1,
+      "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-3.jpg",
+      "approved_at": "2026-10-01T23:17:05.883943+05:30"
+    },
+    "scene-04": {
+      "status": "APPROVED",
+      "qc": "PASS",
+      "continuity": "LOCK",
+      "attempt": 1,
+      "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-4.jpg",
+      "approved_at": "2026-10-01T23:17:05.883943+05:30"
+    },
+    "scene-07": {
+      "status": "APPROVED",
+      "qc": "PASS_ATTEMPT_2",
+      "continuity": "LOCK_ORCHESTRATOR_OVERRIDE",
+      "attempt": 2,
+      "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-7.jpg",
+      "approved_at": "2026-10-01T23:27:20.575899+05:30",
+      "note": "Ashok video override iteration; Visual QC PASS attempt-2 (necktie removed). Continuity INDEX had stale attempt-1 VETO \u2014 Orchestrator APPROVED for pipeline."
+    },
+    "scene-08": {
+      "status": "APPROVED",
+      "qc": "PASS",
+      "continuity": "LOCK",
+      "attempt": 1,
+      "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-8.jpg",
+      "approved_at": "2026-10-01T23:17:05.883943+05:30"
+    },
+    "scene-11": {
+      "status": "APPROVED",
+      "qc": "PASS",
+      "continuity": "LOCK",
+      "attempt": 1,
+      "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-11.jpg",
+      "approved_at": "2026-10-01T23:17:05.883943+05:30"
+    }
+  },
+  "approved_count": 11
+}

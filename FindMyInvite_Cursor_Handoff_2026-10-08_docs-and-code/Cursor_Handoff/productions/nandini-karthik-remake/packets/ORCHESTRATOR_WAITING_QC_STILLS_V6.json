@@ -1,0 +1,18 @@
+{
+  "packet_type": "ORCHESTRATOR_WAITING_QC",
+  "production_id": "nk-v1-20261002-072013",
+  "batch": "stills-v6",
+  "attempt": 1,
+  "at": "2026-10-02T10:56:40+05:30",
+  "asset_dir": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v6",
+  "scenes": [
+    "scene-01",
+    "scene-02",
+    "scene-03",
+    "scene-04",
+    "scene-05",
+    "scene-06"
+  ],
+  "spatial_map": "/workspace/fmi-productions/nandini-karthik-remake/continuity/SPATIAL_MAP.json",
+  "video_held": true
+}

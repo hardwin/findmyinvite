@@ -1,0 +1,36 @@
+{
+  "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1.mp4",
+  "job_id": "VID-clip-01",
+  "clip_id": "clip-01",
+  "decision": "RETRY",
+  "escalation": "NEEDS_INTERVENTION",
+  "rationale": "Opening\u2248image-1 and ending\u2248image-2 with readable blessing text and OK petals; no black frames. Motion starts as a spatial push but mid-transition uses structural morph: main church + right-side bell tower collapse into a different central-square-tower building. Not a continuous 3D dive preserving architecture identity. Tech 720\u00d71280 ~5s @24fps OK (AAC soft flag).",
+  "violations": [
+    {
+      "rule": "continuous_spatial_dive",
+      "expected": "single continuous forward-down dive then slow push with real translation/occlusion/parallax into open porch",
+      "observed": "begins as spatial push then structural morph/hallucination into porch \u2014 not continuous 3D travel"
+    },
+    {
+      "rule": "architecture_identity",
+      "expected": "preserve compound spatial identity (main church + distinct right-side bell tower) through to porch destination",
+      "observed": "main church and right-side bell tower morph into a completely different building with a central square tower by mid/end transition"
+    }
+  ],
+  "retry_instruction": "Paid attempts exhausted (2/2). Do not auto-retry. User/Orchestrator intervention required. If authorized for attempt 3+: keep image-1/image-2 anchors; regenerate ONLY connection \u2014 true continuous dive over courtyard into open porch columns with fixed architecture identity (no building morph, no crossfade soup).",
+  "attempt": 2,
+  "final_paid_attempt": true,
+  "generation_id": "ffca3683-392c-9eff-b701-7bbcf32be38d",
+  "sha256": "9b460d65d77dcd6926bf45eee6e69cf8c1cf77146f797735766a9fe8815abe9c",
+  "technical": {
+    "w": 720,
+    "h": 1280,
+    "fps": 24,
+    "duration_s": 5.04,
+    "ok": true,
+    "has_audio_aac": true,
+    "note": "bible expects silent; aac present \u2014 soft flag for Finish/Final QC"
+  },
+  "decided_at": "2026-10-01T23:24:06.283735+05:30",
+  "qc_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/VIDEO_QC_clip-01_attempt2.json"
+}

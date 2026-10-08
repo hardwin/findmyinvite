@@ -1,0 +1,30 @@
+{
+  "packet_type": "ORCHESTRATOR_PREVIEW_RECEIPT",
+  "production_id": "nk-v1-20261002-072013",
+  "batch": "clips-v5",
+  "status": "PREVIEW_READY_QC_WAIVED",
+  "received_at": "2026-10-02T09:25:03+05:30",
+  "source_packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/VIDEO_DIRECTOR_PREVIEW_READY.json",
+  "override": "/workspace/fmi-productions/nandini-karthik-remake/packets/ORCHESTRATOR_OVERRIDE_QC_WAIVE_VID_v5.json",
+  "qc": "waived_by_ashok",
+  "clips_sha256": {
+    "clip-01": "0a8cef4f4a581ec4379b8008e782aa171a3d24b281583f7b254e6748d28deca3",
+    "clip-02": "3f5a6d3864afd2eb63dc7b11d1e29fef69611f86f853f78cf1ff0185b5fd1482",
+    "clip-03": "da8df2e909e21ca03616e9584c038b22192ffbe511b75ad91a6cf7bb3dc2c4ac",
+    "clip-04": "b5ce34d4c424c71f6156fe80bc0e304090cbd1d1e69b771108860de969b19ad6",
+    "clip-05": "1f995ccbd82a2b6325e982cbeb1e60fcf31bfd638482322ca9804e2648da5679"
+  },
+  "clip_02_note": "a1 accepted as-is (prior RETRY waived)",
+  "preview": {
+    "path": "/workspace/fmi-productions/nandini-karthik-remake/assets/nandini-karthik-v5-preview.mp4",
+    "sha256": "540a932b98ae4ed866db5d8ddb5804fedb3c162a4b5c84e4c41e8f56f683a966",
+    "duration_sec": 16.208333
+  },
+  "preview_dl": {
+    "path": "/workspace/fmi-productions/nandini-karthik-remake/assets/nandini-karthik-v5-preview-dl.mp4",
+    "sha256": "fd68cc49a7274306efbe051dafd4f1481eb3ad57effeea47044937545fe7b566",
+    "approx_mb": 5.5
+  },
+  "output_alias": "/workspace/fmi-productions/nandini-karthik-remake/assets/output/clips-v5-preview.mp4",
+  "next": "Await Ashok review \u2014 Assembly/Final QC only if Ashok reopens full delivery path"
+}

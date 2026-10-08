@@ -1,0 +1,29 @@
+{
+  "packet_type": "ASSET_PRODUCER_PREVIEW_RECEIPT",
+  "production_id": "nk-v1-20261002-072013",
+  "batch": "clips-v5",
+  "status": "PREVIEW_READY_QC_WAIVED",
+  "override": "/workspace/fmi-productions/nandini-karthik-remake/packets/ORCHESTRATOR_OVERRIDE_QC_WAIVE_VID_v5.json",
+  "orchestrator_receipt": "/workspace/fmi-productions/nandini-karthik-remake/packets/ORCHESTRATOR_PREVIEW_RECEIPT_VID_v5.json",
+  "clips": {
+    "clip-01": "APPROVED",
+    "clip-02": "ACCEPTED_AS_IS_QC_WAIVED",
+    "clip-03": "GENERATED_QC_WAIVED",
+    "clip-04": "GENERATED_QC_WAIVED",
+    "clip-05": "GENERATED_QC_WAIVED"
+  },
+  "preview_paths": {
+    "primary": "/workspace/fmi-productions/nandini-karthik-remake/assets/nandini-karthik-v5-preview.mp4",
+    "download": "/workspace/fmi-productions/nandini-karthik-remake/assets/nandini-karthik-v5-preview-dl.mp4",
+    "output": "/workspace/fmi-productions/nandini-karthik-remake/assets/output/clips-v5-preview.mp4"
+  },
+  "files_present": {
+    "/workspace/fmi-productions/nandini-karthik-remake/assets/clips-v5/clip-05.mp4": true,
+    "/workspace/fmi-productions/nandini-karthik-remake/assets/handoffs-v5/clip-05-handoff.jpg": true,
+    "/workspace/fmi-productions/nandini-karthik-remake/assets/nandini-karthik-v5-preview.mp4": true,
+    "/workspace/fmi-productions/nandini-karthik-remake/assets/nandini-karthik-v5-preview-dl.mp4": true,
+    "/workspace/fmi-productions/nandini-karthik-remake/assets/output/clips-v5-preview.mp4": true
+  },
+  "floor": "IDLE_PENDING_ASHOK_REVIEW",
+  "updated_at": "2026-10-02T09:25:22.048399+05:30"
+}

@@ -1,0 +1,16 @@
+{
+  "production_id": "kc-v1-recreate-20261003-003016",
+  "title": "Swaroop & Smiley",
+  "updated_at": "2026-10-03T01:10:25.790006+05:30",
+  "status": "final_ready",
+  "final_film": {
+    "name": "kerala-christian-v1-final.mp4",
+    "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/assets/output/kerala-christian-v1/kerala-christian-v1-final.mp4",
+    "bytes": 51579852
+  },
+  "final_dl": {
+    "name": "kerala-christian-v1-final-dl.mp4",
+    "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/assets/output/kerala-christian-v1/kerala-christian-v1-final-dl.mp4",
+    "bytes": 11568944
+  }
+}

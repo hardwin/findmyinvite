@@ -1,0 +1,17 @@
+{
+  "packet_type": "ASSET_PRODUCER_HOLD_SPATIAL_APPROVAL_GATE",
+  "production_id": "nk-v1-20261002-072013",
+  "recorded_at": "2026-10-02T08:33:02.203860+05:30",
+  "ack_of": "/workspace/fmi-productions/nandini-karthik-remake/packets/ORCHESTRATOR_SPATIAL_APPROVAL_GATE.json",
+  "spatial_map_status": "awaiting_topview_blueprint_then_ashok_approve",
+  "image_jobs_authorized": false,
+  "gates": {
+    "fold_spatial_map_into_image_packets": false,
+    "emit_image_jobs": false,
+    "dispatch_image_director": false,
+    "require_spatial_map_status": "approved_by_ashok"
+  },
+  "scope": "nk-v1-20261002-072013 and any new production until Orchestrator clears gate",
+  "kc_v1_order_v2": "STOP unchanged",
+  "note": "Standing by for top-view blueprint + Ashok approve; then Orchestrator approved_by_ashok before IMAGE."
+}

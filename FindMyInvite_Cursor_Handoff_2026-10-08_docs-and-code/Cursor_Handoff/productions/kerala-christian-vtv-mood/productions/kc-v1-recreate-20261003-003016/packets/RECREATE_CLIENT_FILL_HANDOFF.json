@@ -1,0 +1,109 @@
+{
+  "packet_type": "RECREATE_CLIENT_FILL_HANDOFF",
+  "from": "FMI ReCreate",
+  "to": "FMI Orchestrator",
+  "at": "2026-10-03T00:30:26.949196+05:30",
+  "mode": "RECREATE_CLIENT_FILL",
+  "production_id": "kc-v1-recreate-20261003-003016",
+  "template_name": "kerala-christian-v1",
+  "template_folder": "kerala-christian-vtv-mood",
+  "template_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/template.json",
+  "template_sha256": "8d6e386d878feea874cb77eb74ddd3e0cb093fcf0a1cf52828b70a37a9fbf572",
+  "source_template_sha256": "bad0d176beb1ad47e3942689f95c4153fb933f3547670a255bb7fc062f46dae4",
+  "couple": "Swaroop & Smiley",
+  "prompt_policy": "parameters only + re-resolve image_prompt/video_prompt from *_template; never mutate style/characters/camera/motion/non-placeholder text",
+  "checks": {
+    "struct_equal_excluding_params_and_resolved_prompts": true,
+    "resolution_ok": true,
+    "resolution_errors": [],
+    "forbidden_fields_untouched": true,
+    "templates_untouched": true,
+    "prompt_field_diffs": [
+      [
+        "scene",
+        "scene-02",
+        "image_prompt",
+        true
+      ],
+      [
+        "scene",
+        "scene-03",
+        "image_prompt",
+        true
+      ],
+      [
+        "scene",
+        "scene-04",
+        "image_prompt",
+        true
+      ],
+      [
+        "scene",
+        "scene-05",
+        "image_prompt",
+        true
+      ],
+      [
+        "scene",
+        "scene-06",
+        "image_prompt",
+        true
+      ],
+      [
+        "scene",
+        "scene-07",
+        "image_prompt",
+        true
+      ],
+      [
+        "scene",
+        "scene-08",
+        "image_prompt",
+        true
+      ],
+      [
+        "scene",
+        "scene-09",
+        "image_prompt",
+        true
+      ],
+      [
+        "scene",
+        "scene-10",
+        "image_prompt",
+        true
+      ],
+      [
+        "scene",
+        "scene-11",
+        "image_prompt",
+        true
+      ],
+      [
+        "clip",
+        "clip-01",
+        "video_prompt",
+        true
+      ],
+      [
+        "clip",
+        "clip-10",
+        "video_prompt",
+        true
+      ],
+      [
+        "clip",
+        "clip-11",
+        "video_prompt",
+        true
+      ]
+    ]
+  },
+  "note": "Top-level template.name still \"The Wedding of Alex & Anna\" (locked non-parameter field). parameters.invitation_lines and all resolved prompts use Swaroop & Smiley. Prior productions preserved.",
+  "assets_root": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/assets/output/kerala-christian-v1",
+  "preserve_prior": [
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743"
+  ],
+  "requested_action": "Accept RECREATE_CLIENT_FILL, run Template Compiler validate, then full image→video→assembly. Do not mutate prompts."
+}

@@ -1,0 +1,281 @@
+{
+  "production_id": "kc-v1-20261001-230532",
+  "task": "ASSEMBLY_PREFLIGHT",
+  "written_by": "Assembly Editor",
+  "written_at": "2026-10-01T23:28:16+05:30",
+  "status": "ASSEMBLED",
+  "assets_root": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1",
+  "output": {
+    "filename": "kerala-christian-v1-final.mp4",
+    "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/kerala-christian-v1-final.mp4",
+    "width": 720,
+    "height": 1280,
+    "fps": 24,
+    "aspect": "9:16",
+    "pixel_format": "yuv420p",
+    "video_codec": "libx264",
+    "video_profile": "high",
+    "video_preset": "medium",
+    "video_crf": 18,
+    "audio": "none",
+    "audio_policy": "silent \u2014 strip/omit all audio; invitation film has no muxed soundtrack",
+    "container": "mp4",
+    "movflags": "+faststart"
+  },
+  "assembly_rules": {
+    "method": "hard-cut concatenate exact order",
+    "no_crossfade": true,
+    "no_transition_overlay": true,
+    "no_global_retiming": true,
+    "no_per_clip_retiming": true,
+    "no_reorder": true,
+    "no_auto_crop": true,
+    "no_scale_unless_mismatch": true,
+    "no_LUT": true,
+    "no_color_grade": true,
+    "audio": "silent"
+  },
+  "clip_order": [
+    "clip-1.mp4",
+    "clip-2.mp4",
+    "clip-3.mp4",
+    "clip-4.mp4",
+    "clip-5.mp4",
+    "clip-6.mp4",
+    "clip-7.mp4",
+    "clip-8.mp4",
+    "clip-9.mp4",
+    "clip-10.mp4",
+    "clip-11.mp4"
+  ],
+  "expected_clip_count": 11,
+  "clip_paths_planned": [
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1.mp4",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-2.mp4",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-3.mp4",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-4.mp4",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-5.mp4",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-6.mp4",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-7.mp4",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-8.mp4",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-9.mp4",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-10.mp4",
+    "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-11.mp4"
+  ],
+  "gate": {
+    "start_when": "all 11 clips present on disk + scene-12 handoff landed (video QC waived per Ashok)",
+    "orchestrator_note": "Start assemble the second last clip is approved \u2014 do not idle; escalate if any clip missing/unapproved when gate fires",
+    "escalate_if": [
+      "any clip-1\u2026clip-11 missing at assemble time",
+      "scene-12 handoff missing when expected",
+      "any clip wrong resolution (not 720\u00d71280) or fps (not 24) that would force retiming/crop \u2014 escalate, do not silently fix",
+      "decode failure / corrupt / zero-duration clip"
+    ],
+    "duration_check": "sum expected 54s; escalate if any clip duration materially diverges from expected_durations_seconds",
+    "visual_qc_required": false
+  },
+  "checklist": [
+    {
+      "id": "C1",
+      "item": "Confirm assets_root exists and is writable",
+      "status": "DONE"
+    },
+    {
+      "id": "C2",
+      "item": "Verify clip-1.mp4 \u2026 clip-11.mp4 all present (exact names, exact order)",
+      "status": "DONE"
+    },
+    {
+      "id": "C3",
+      "item": "Video Visual QC WAIVED (Ashok) \u2014 skip PASS gate; still verify files present + ffprobe OK",
+      "status": "WAIVED"
+    },
+    {
+      "id": "C4",
+      "item": "ffprobe each clip: 720\u00d71280, 24fps, decodable, duration > 0",
+      "status": "DONE"
+    },
+    {
+      "id": "C4b",
+      "item": "Verify durations match 5+4+5+5+5+5+5+5+5+5+5 (=54s total); escalate on material mismatch \u2014 do not retiming-fix",
+      "status": "DONE"
+    },
+    {
+      "id": "C5",
+      "item": "Build ffmpeg concat list in exact clip-1\u2026clip-11 order (no reorder)",
+      "status": "DONE"
+    },
+    {
+      "id": "C6",
+      "item": "Hard-cut concat only \u2014 no crossfade, overlay, retiming, crop, or LUT",
+      "status": "DONE"
+    },
+    {
+      "id": "C7",
+      "item": "Output silent: -an or strip audio; never mux soundtrack",
+      "status": "DONE"
+    },
+    {
+      "id": "C8",
+      "item": "Encode to kerala-christian-v1-final.mp4 (libx264 yuv420p 720\u00d71280 24fps +faststart)",
+      "status": "DONE"
+    },
+    {
+      "id": "C9",
+      "item": "Hand final path to Final QC Delivery for full-film watch; do not deliver to user",
+      "status": "HANDED_TO_FINAL_QC"
+    }
+  ],
+  "ffmpeg_plan": {
+    "strategy": "concat demuxer + stream copy when all inputs match 720x1280@24 yuv420p h264; else re-encode with identical geometry/fps only (no retiming intent \u2014 escalate on mismatch first)",
+    "concat_list_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/manifest/concat_list.txt",
+    "preferred_copy_cmd": "ffmpeg -y -f concat -safe 0 -i concat_list.txt -c copy -an -movflags +faststart kerala-christian-v1-final.mp4",
+    "fallback_reencode_cmd": "ffmpeg -y -f concat -safe 0 -i concat_list.txt -an -c:v libx264 -profile:v high -preset medium -crf 18 -pix_fmt yuv420p -r 24 -s 720x1280 -movflags +faststart kerala-christian-v1-final.mp4",
+    "note": "Prefer -c copy. If any clip codec/params differ, escalate to Orchestrator before fallback re-encode \u2014 do not silently retarget."
+  },
+  "clip_status_snapshot": {
+    "as_of": "2026-10-01T23:42:40+05:30",
+    "clips_on_disk": 11,
+    "clips_approved": "video_qc_waived",
+    "scene_12": "present"
+  },
+  "next_action": "STOP_HOLD \u2014 do not assemble clip-01 ORDER V2 swap until Ashok lifts STOP",
+  "updated_from_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/assembly_editor_packet.json",
+  "job_type": "ASSEMBLY_PREFLIGHT_THEN_CONCAT",
+  "expected_durations_seconds": [
+    5,
+    4,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5
+  ],
+  "expected_total_duration_seconds": 54,
+  "continuity": "Do not alter visuals; technical concat only",
+  "clip_expectations": [
+    {
+      "file": "clip-1.mp4",
+      "duration_seconds": 5,
+      "width": 720,
+      "height": 1280,
+      "fps": 24,
+      "audio": "silent"
+    },
+    {
+      "file": "clip-2.mp4",
+      "duration_seconds": 4,
+      "width": 720,
+      "height": 1280,
+      "fps": 24,
+      "audio": "silent"
+    },
+    {
+      "file": "clip-3.mp4",
+      "duration_seconds": 5,
+      "width": 720,
+      "height": 1280,
+      "fps": 24,
+      "audio": "silent"
+    },
+    {
+      "file": "clip-4.mp4",
+      "duration_seconds": 5,
+      "width": 720,
+      "height": 1280,
+      "fps": 24,
+      "audio": "silent"
+    },
+    {
+      "file": "clip-5.mp4",
+      "duration_seconds": 5,
+      "width": 720,
+      "height": 1280,
+      "fps": 24,
+      "audio": "silent"
+    },
+    {
+      "file": "clip-6.mp4",
+      "duration_seconds": 5,
+      "width": 720,
+      "height": 1280,
+      "fps": 24,
+      "audio": "silent"
+    },
+    {
+      "file": "clip-7.mp4",
+      "duration_seconds": 5,
+      "width": 720,
+      "height": 1280,
+      "fps": 24,
+      "audio": "silent"
+    },
+    {
+      "file": "clip-8.mp4",
+      "duration_seconds": 5,
+      "width": 720,
+      "height": 1280,
+      "fps": 24,
+      "audio": "silent"
+    },
+    {
+      "file": "clip-9.mp4",
+      "duration_seconds": 5,
+      "width": 720,
+      "height": 1280,
+      "fps": 24,
+      "audio": "silent"
+    },
+    {
+      "file": "clip-10.mp4",
+      "duration_seconds": 5,
+      "width": 720,
+      "height": 1280,
+      "fps": 24,
+      "audio": "silent"
+    },
+    {
+      "file": "clip-11.mp4",
+      "duration_seconds": 5,
+      "width": 720,
+      "height": 1280,
+      "fps": 24,
+      "audio": "silent"
+    }
+  ],
+  "ashok_override": {
+    "at": "2026-10-01T23:28:16+05:30",
+    "video_qc": "waived",
+    "note": "clip-02\u219211 generating sequentially; assemble when all 11 clips + scene-12 handoff land \u2014 do not wait for Visual QC PASS on videos"
+  },
+  "assembled_at": "2026-10-01T23:42:40+05:30",
+  "assembly_result": {
+    "output_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/kerala-christian-v1-final.mp4",
+    "method": "ffmpeg concat demuxer + stream copy -an",
+    "width": 720,
+    "height": 1280,
+    "fps": 24,
+    "codec": "h264",
+    "pix_fmt": "yuv420p",
+    "nb_frames": 1307,
+    "duration_seconds": 54.458333,
+    "size_bytes": 49085639,
+    "audio_streams": 0,
+    "params_matched": true,
+    "reencode": false
+  },
+  "ashok_stop_clip01_order_v2": {
+    "status": "STOP_HOLD",
+    "at": "2026-10-02T07:13:20+05:30",
+    "rules": [
+      "no assemble",
+      "no Final-QC of V2 swap",
+      "hold until Ashok lifts STOP"
+    ],
+    "packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/ORCHESTRATOR_STOP_CLIP01_ORDER_V2.json"
+  }
+}

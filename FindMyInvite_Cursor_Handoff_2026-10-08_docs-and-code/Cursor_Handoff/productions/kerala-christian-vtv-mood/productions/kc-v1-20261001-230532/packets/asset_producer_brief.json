@@ -1,0 +1,37 @@
+{
+  "production_id": "kc-v1-20261001-230532",
+  "role": "Asset Producer",
+  "paths": {
+    "template_immutable": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/state/template.source.json",
+    "live_template": "/workspace/fmi-productions/kerala-christian-vtv-mood/template.json",
+    "manifest_expected": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/manifest/production_manifest.json",
+    "continuity_bible_expected": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/continuity/CONTINUITY_BIBLE.json",
+    "scenes_prompt_extract": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/scenes_prompt_extract.json",
+    "clips_prompt_extract": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/clips_prompt_extract.json",
+    "job_skeleton": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/job_skeleton.json",
+    "write_image_jobs_dir": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/image_jobs",
+    "write_video_jobs_dir": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/video_jobs",
+    "assets_root": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1"
+  },
+  "schemas": {
+    "IMAGE_JOB_example": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/IMAGE_JOB.schema.example.json",
+    "VIDEO_JOB_example": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/VIDEO_JOB.schema.example.json"
+  },
+  "constraints": [
+    "Never invent creative info or alter approved prompts/customer copy",
+    "Do not send full template to Image/Video Directors",
+    "Image packets: no clip graphs; Video packets: only needed frames + motion + camera",
+    "scene-12: no IMAGE_JOB",
+    "Stage skeletons NOW; set authorized_by_orchestrator=false until Orchestrator says GO",
+    "Handoff IMAGE_JOBs only via Orchestrator authorization into FMI Image Floor (fb72b97b)",
+    "Handoff VIDEO_JOBs only via Orchestrator authorization into FMI Video Floor (ce8c90ec)",
+    "Respect Continuity Bible subsections once written",
+    "automatic_paid_retries=false; max 2 paid attempts"
+  ],
+  "handoff_format": {
+    "channel_post": "Post job_id list + packet paths in floor channel; @Image Director or @FindMyInvite Video Director",
+    "packet_file": "One JSON file per job in image_jobs/ or video_jobs/",
+    "do_not": "Paste full prompts into chat if file path exists \u2014 point to packet path"
+  },
+  "immediate_task": "Write skeleton IMAGE_JOBs for scene-01..11 and VIDEO_JOBs for clip-01..11 with status PENDING_AUTHORIZATION / BLOCKED_ON_FRAMES. Fill exact prompts from extracts. Do not authorize generation."
+}

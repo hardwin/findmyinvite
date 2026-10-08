@@ -1,0 +1,44 @@
+{
+  "document": "CONTINUITY_VETO",
+  "production_id": "nk-v1-20261002-072013",
+  "batch": "stills-v5",
+  "scene_id": "scene-02",
+  "job": "IMG-v5-scene-02",
+  "asset_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5/scene-02.jpg",
+  "sha256": "c09be3132f62a3d50a1b7160c94d72002a3edcb0f52aaea7694e85a516b320e1",
+  "generation_id": "7k7q8pq5ndrmy0d0zabbnxnryr",
+  "attempt": 1,
+  "visual_qc": "PASS",
+  "qc_file": "/workspace/fmi-productions/nandini-karthik-remake/logs/image_jobs/QC_scene-02_stills-v5_attempt1.json",
+  "decision": "LOCK",
+  "scope": "architecture/object/identity (no couple beat)",
+  "expected": {
+    "facet": "entrance_colonnade",
+    "materials": "cream carved stone; polished floor; banana leaves; jasmine+lotus; brass urulis + lamps",
+    "couple": false,
+    "text": false,
+    "forbidden": [
+      "misty lake",
+      "gopuram",
+      "mountains",
+      "boat",
+      "through-arch lake plate",
+      "couple",
+      "text"
+    ]
+  },
+  "observed": {
+    "architecture": "closed cream colonnade with scalloped arches, carved pillars, solid wooden doors closing view",
+    "decor": "jasmine-lotus torans, banana leaves at pillar bases, brass nilavilakku + urulis with lotuses",
+    "floor": "polished reflective cream marble",
+    "lighting": "soft warm morning directional light",
+    "people": 0,
+    "text": false,
+    "lake_plate": false
+  },
+  "violations": [],
+  "rationale": "Matches CONTINUITY_BIBLE scene-02 locks: closed colonnade facade, materials/palette lock, no people, no text, no through-arch lake.",
+  "continuity_bible": "/workspace/fmi-productions/nandini-karthik-remake/continuity/CONTINUITY_BIBLE.json",
+  "judged_at": "2026-10-02T08:41:25+05:30",
+  "judge": "Continuity Director"
+}

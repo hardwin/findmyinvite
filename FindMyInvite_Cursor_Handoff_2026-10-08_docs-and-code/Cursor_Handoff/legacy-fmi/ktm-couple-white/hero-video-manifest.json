@@ -1,0 +1,66 @@
+{
+  "run": "KTM couple White",
+  "soft_non_ip": true,
+  "budget_usd": 4.0,
+  "reserved_for_opening_xai_usd": 1.5,
+  "stop_threshold_before_opening_usd": 3.5,
+  "approx_spend_before_this_step_usd": 0.1,
+  "hero_still_regen": {
+    "model": "xai/grok-imagine-image",
+    "prediction_id": "4kavhg881nrmy0d0s43tr61bx0",
+    "status": "succeeded",
+    "moderation": "none",
+    "cost_usd": 0.02,
+    "cost_source": "list_price_$0.02_per_output_image",
+    "path": "/workspace/ktm-couple-white/hero.png",
+    "dims": "864x1536",
+    "bytes": 779717,
+    "backup_dark": "/workspace/ktm-couple-white/hero-v1-dark.png",
+    "raw_edit_path": "/workspace/ktm-couple-white/hero-edit-raw.png",
+    "raw_edit_dims": "864x1152",
+    "output_url": "https://replicate.delivery/xezq/VwANPa6gtMoEK1cu7NPbQbLU9n7QyudpbNGqiQ4geN62EBoLA/tmpp1nx2xte.jpg",
+    "qa": "white outfits restored; couple small bottom; empty pale sky"
+  },
+  "hero_video_attempts": [
+    {
+      "prediction_id": "75neecnrxxrmy0d0s43rm55fz0",
+      "status": "failed",
+      "error": "Invalid image format (Replicate files API URL not readable as image by model)",
+      "moderation": false,
+      "cost_usd": 0.0,
+      "note": "not moderation; retried with data URI"
+    },
+    {
+      "prediction_id": "vwpxy7q9dhrmt0d0s43rv7f42m",
+      "model": "xai/grok-imagine-video-1.5",
+      "status": "succeeded",
+      "moderation": false,
+      "respect_moderation": null,
+      "duration_requested": 6,
+      "resolution": "720p",
+      "aspect_ratio": "9:16",
+      "metrics": {
+        "predict_time": 36.998669672,
+        "total_time": 37.018013561,
+        "video_output_duration_seconds": 6.042
+      },
+      "cost_usd": 0.48,
+      "cost_source": "list_price_$0.08_per_sec * 6s (Replicate page / xAI video-1.5)",
+      "output_url": "https://replicate.delivery/xezq/b7k0hZYyWPbzMVUYcNk3X9mXUGbBXFqApFulNftO2yHhFBoLA/tmp_59c82pf.mp4",
+      "path": "/workspace/ktm-couple-white/hero.mp4",
+      "bytes": 1493960,
+      "probe": {
+        "width": 720,
+        "height": 1280,
+        "duration_s": 6.041667,
+        "codec": "h264",
+        "audio": "aac"
+      },
+      "prompt": "Locked static camera. Soft ambient only: gentle neon flicker on cafe sign, tiny floating pink petals or light dust, very subtle wind on clothing. No zoom, no body acting, no walking, couple stays still. Quiet magical street mood."
+    }
+  ],
+  "approx_spend_usd": 0.6,
+  "approx_remaining_usd": 3.4,
+  "budget_gate": "PASS \u2014 projected/actual after hero video ~$0.60 << $3.50 stop threshold; $1.50 reserved for 12s opening",
+  "generated_at_ist": "2026-09-22 17:43:03 IST"
+}

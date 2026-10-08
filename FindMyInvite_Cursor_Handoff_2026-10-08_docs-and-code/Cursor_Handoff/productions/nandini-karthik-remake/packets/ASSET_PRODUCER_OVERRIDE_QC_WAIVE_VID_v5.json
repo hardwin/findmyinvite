@@ -1,0 +1,34 @@
+{
+  "packet_type": "ASSET_PRODUCER_OVERRIDE_QC_WAIVE",
+  "production_id": "nk-v1-20261002-072013",
+  "batch": "clips-v5",
+  "override": "/workspace/fmi-productions/nandini-karthik-remake/packets/ORCHESTRATOR_OVERRIDE_QC_WAIVE_VID_v5.json",
+  "stop_lifted": true,
+  "clip_02": "ACCEPTED_AS_IS_QC_WAIVED",
+  "clip_02_handoff": "/workspace/fmi-productions/nandini-karthik-remake/assets/handoffs-v5/clip-02-handoff.jpg",
+  "clip_02_handoff_sha256": "d63452aff6cdf22d1606e2b86ce25de65b1746f9526415dec90db18b9dcd8175",
+  "dispatch_now": "VID-v5-clip-03",
+  "packet_clip_03": "/workspace/fmi-productions/nandini-karthik-remake/packets/VIDEO_JOB/clip-03.v5.json",
+  "first_clip_03": "/workspace/fmi-productions/nandini-karthik-remake/assets/handoffs-v5/clip-02-handoff.jpg",
+  "last_clip_03": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5/scene-04.jpg",
+  "sequential_next": [
+    {
+      "job": "VID-v5-clip-04",
+      "first": "handoffs-v5/clip-03-handoff.jpg",
+      "last": "stills-v5/scene-05.jpg",
+      "status": "UNLOCKED_AWAITING_PRIOR_HANDOFF"
+    },
+    {
+      "job": "VID-v5-clip-05",
+      "first": "handoffs-v5/clip-04-handoff.jpg",
+      "last": "stills-v5/scene-06.jpg",
+      "status": "UNLOCKED_AWAITING_PRIOR_HANDOFF"
+    }
+  ],
+  "rules": {
+    "skip_visual_qc": true,
+    "no_retries": true,
+    "max_paid_attempts": 1
+  },
+  "updated_at": "2026-10-02T09:22:36.842574+05:30"
+}

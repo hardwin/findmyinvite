@@ -1,0 +1,175 @@
+{
+  "packet_type": "ORCHESTRATOR_GO_VIDEO",
+  "production_id": "kc-v1-recreate-20261002-192743",
+  "mode": "RECREATE_IDENTICAL",
+  "authorized_at": "2026-10-02T19:41:51+05:30",
+  "action": "AUTHORIZE_VIDEO_DISPATCH",
+  "fast_path": true,
+  "stills_status": "COMPLETE",
+  "stills_complete_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/continuity_veto/STILLS_COMPLETE.json",
+  "continuity_bible": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/continuity/CONTINUITY_BIBLE.json",
+  "continuity_bible_sha256": "8863eca51bbc8b7e1c297ffbfedcfd1580b5bce00e2e56a38fd98e8f82637571",
+  "template_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/template.json",
+  "template_sha256": "bad0d176beb1ad47e3942689f95c4153fb933f3547670a255bb7fc062f46dae4",
+  "assets_root": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/assets/output/kerala-christian-v1",
+  "packets_dir": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261002-192743/packets/VIDEO_JOB",
+  "clip_count": 11,
+  "jobs": [
+    "VID-clip-01",
+    "VID-clip-02",
+    "VID-clip-03",
+    "VID-clip-04",
+    "VID-clip-05",
+    "VID-clip-06",
+    "VID-clip-07",
+    "VID-clip-08",
+    "VID-clip-09",
+    "VID-clip-10",
+    "VID-clip-11"
+  ],
+  "clip_ids": [
+    "clip-01",
+    "clip-02",
+    "clip-03",
+    "clip-04",
+    "clip-05",
+    "clip-06",
+    "clip-07",
+    "clip-08",
+    "clip-09",
+    "clip-10",
+    "clip-11"
+  ],
+  "clip_graph": [
+    {
+      "id": "clip-01",
+      "index": 1,
+      "from": 1,
+      "to": 2,
+      "duration": 5,
+      "video_path": "clip-1.mp4",
+      "final_frame_path": "clip-1-handoff.jpg"
+    },
+    {
+      "id": "clip-02",
+      "index": 2,
+      "from": 2,
+      "to": 3,
+      "duration": 4,
+      "video_path": "clip-2.mp4",
+      "final_frame_path": "clip-2-handoff.jpg"
+    },
+    {
+      "id": "clip-03",
+      "index": 3,
+      "from": 3,
+      "to": 4,
+      "duration": 5,
+      "video_path": "clip-3.mp4",
+      "final_frame_path": "clip-3-handoff.jpg"
+    },
+    {
+      "id": "clip-04",
+      "index": 4,
+      "from": 4,
+      "to": 5,
+      "duration": 5,
+      "video_path": "clip-4.mp4",
+      "final_frame_path": "clip-4-handoff.jpg"
+    },
+    {
+      "id": "clip-05",
+      "index": 5,
+      "from": 5,
+      "to": 6,
+      "duration": 5,
+      "video_path": "clip-5.mp4",
+      "final_frame_path": "clip-5-handoff.jpg"
+    },
+    {
+      "id": "clip-06",
+      "index": 6,
+      "from": 6,
+      "to": 7,
+      "duration": 5,
+      "video_path": "clip-6.mp4",
+      "final_frame_path": "clip-6-handoff.jpg"
+    },
+    {
+      "id": "clip-07",
+      "index": 7,
+      "from": 7,
+      "to": 8,
+      "duration": 5,
+      "video_path": "clip-7.mp4",
+      "final_frame_path": "clip-7-handoff.jpg"
+    },
+    {
+      "id": "clip-08",
+      "index": 8,
+      "from": 8,
+      "to": 9,
+      "duration": 5,
+      "video_path": "clip-8.mp4",
+      "final_frame_path": "clip-8-handoff.jpg"
+    },
+    {
+      "id": "clip-09",
+      "index": 9,
+      "from": 9,
+      "to": 10,
+      "duration": 5,
+      "video_path": "clip-9.mp4",
+      "final_frame_path": "clip-9-handoff.jpg"
+    },
+    {
+      "id": "clip-10",
+      "index": 10,
+      "from": 10,
+      "to": 11,
+      "duration": 5,
+      "video_path": "clip-10.mp4",
+      "final_frame_path": "clip-10-handoff.jpg"
+    },
+    {
+      "id": "clip-11",
+      "index": 11,
+      "from": 11,
+      "to": 12,
+      "duration": 5,
+      "video_path": "clip-11.mp4",
+      "final_frame_path": "clip-11-handoff.jpg"
+    }
+  ],
+  "locked_stills": [
+    "image-1.jpg",
+    "image-2.jpg",
+    "image-3.jpg",
+    "image-4.jpg",
+    "image-5.jpg",
+    "image-6.jpg",
+    "image-7.jpg",
+    "image-8.jpg",
+    "image-9.jpg",
+    "image-10.jpg",
+    "image-11.jpg"
+  ],
+  "skip_spatial": true,
+  "prompt_policy": "NEVER_CHANGE_PROMPTS \u2014 use locked video_prompt from template verbatim",
+  "ashok_policy": "RECREATE_IDENTICAL fast path \u2014 no stills-approve pause; Continuity LOCK 01\u201311 done \u2192 VIDEO now",
+  "rules": [
+    "Emit 11 VIDEO_JOBs (clip-01..11) with exact locked video_prompt from template",
+    "Continuous weave \u2014 handoff final frame of clip-N seeds clip-(N+1)",
+    "Context isolation per job where required; Video Director owns chain order",
+    "Output under assets/output/kerala-christian-v1/ per template video_path / final_frame_path",
+    "max 2 paid attempts; no self-approve",
+    "Hand to Video Director after emit",
+    "Continuity standing by for clip QC",
+    "Assembly only after all 11 clips ready",
+    "Preserve prior kc-v1-20261001-230532 untouched; nk-v1 remains HELD",
+    "Do not invent Ashok stills/video approve gates on this recreate"
+  ],
+  "video_jobs_authorized": true,
+  "image_jobs_authorized": true,
+  "visual_qc": "WAIVED_FLOOR \u2014 Continuity judges clips directly unless Ashok reopens Visual QC"
+}

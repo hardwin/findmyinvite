@@ -1,0 +1,166 @@
+{
+  "job_type": "IMAGE_JOB",
+  "job_id": "IMG-scene-10",
+  "production_id": "kc-v1-recreate-20261003-071403",
+  "mode": "RECREATE_CLIENT_FILL",
+  "batch": "stills-v1",
+  "stills_version": "stills-v1",
+  "status": "GENERATED",
+  "authorized_to_dispatch": false,
+  "authorization_note": "Orchestrator IMAGE GO RECREATE_CLIENT_FILL stills-v1 \u2014 locked image_prompts verbatim from scenes_prompt_extract; spatial constraints folded only; continuity_gate=WAIVED; qc_waived=true (no Continuity, Visual, or Spatial QC); VIDEO not authorized.",
+  "scene_id": "scene-10",
+  "scene_index": 10,
+  "name": "Hosts in the lamp-lit side chapel corridor",
+  "generation": "text-only",
+  "required_text": [],
+  "customer_copy": [],
+  "image_prompt": "A full-bleed portrait 9:16 frame of a richly cinematic dimensional storybook-animation Kerala Christian church wedding invitation. Soft romantic late-2000s South Indian cinema mood: dreamy natural light, intimate coastal Kerala atmosphere, gentle teal-and-warm contrast, quiet emotional longing. Soft cream and powder-blue palette with pearl highlights, pale pink florals and cool backwaters haze beyond coconut palms. Cream-white Portuguese-influenced plaster walls, laterite stone accents, arched windows, a modest bell tower and a simple cross. Premium animated adult characters with sculpted expressive faces, never photographic people. DRAMATIC CHIAROSCURO: gentle warm back-and-side sunlight streams diagonally through arched windows and open porch bays, clearly visible soft volumetric god rays cutting through thin coastal atmospheric haze; luminous rim light on ivory silk, lace, pearl and champagne-gold frames against cooler powder-blue shade. Preserve readable highlights, not a flat uniformly bright wash. Very fine dust motes sparkle only inside the sunbeams. Floor is subtly reflective worn cream stone or polished laterite tile, not a mirror. Gold lettering has illuminated beveled edges, warm restrained emissive bloom, luminous hairline flourishes and discrete pinpoint highlights; sharp readable counters. Fixed floral church wedding d\u00e9cor of white jasmine, soft pink roses, baby's breath and green foliage \u2014 not marigold temple swags as primary. Roughly 12 to 20 tiny separate white, soft-pink and cream petals already scattered irregularly through the whole depth volume: a few soft near-lens edge petals, crisp midground petals, tiny distant petals. No confetti cannon, solid flower bunches in the air, symmetrical particle rows or dense shower from one point. All bouquets and garlands are fixed to their supports. Generate only from this text, no reference image. No watermark, interface, duplicate people, extra signs or unintended words.\n\nSCENE COMPOSITION:\nA richly decorated INNER lamp-lit side chapel corridor viewed frontally at eye height after a 90 degree left turn from the parish garden. ONE tall ivory host plaque supported on a low ornate gold pedestal at the top of three shallow steps. The frame is carved champagne gold with tiny soft pink flowers at the corners. Exact large readable gold-brown lettering: 'Invited By\nSai and Sandra\nRichard and Vasantha\nBaby Venessa and Vernon'. Plaque fills 60 percent of frame width and 57 percent of height. Symmetrical close cream arched pillars, numerous small hanging soft lamps and white-pink flower swags, cool recesses and strong warm angled shafts from high side arched openings. The words glow delicately at their gold edges while their faces remain crisp. The space behind the plaque is SHALLOW and shaded, no long visible tunnel behind it. The open corridor extends from the plaque back toward the camera for the backward departure. Petals are sparse, individual and evenly scattered through depth; lamps flicker warmly, petal borders and bouquets stay on the floor. No people visible.",
+  "prompt_sha256": "20ea9b8d93c88046085b11ff32116902b5be167efc949363850e4abc3c29a1ac",
+  "prompt_policy": "CLIENT_FILL \u2014 locked image_prompt verbatim from scenes_prompt_extract; Spatial constraints folded only; do NOT rewrite creative prose",
+  "image_request": {
+    "quality": "high",
+    "aspect_ratio": "9:16",
+    "output_format": "jpeg",
+    "number_of_images": 1
+  },
+  "continuity_gate": "WAIVED",
+  "qc_waived": true,
+  "continuity_qc": "WAIVED",
+  "visual_qc": "WAIVED",
+  "spatial_qc": "WAIVED",
+  "continuity": {
+    "continuity_gate": "WAIVED",
+    "bible": null,
+    "note": "No Continuity bible. Continuity QC waived."
+  },
+  "spatial_constraints": {
+    "spatial_map_version": "spatial-v1",
+    "source": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/continuity/SPATIAL_MAP.json",
+    "shot": "S10",
+    "facet_id": "J",
+    "room": "J",
+    "facet": "lamp_lit_side_chapel_corridor",
+    "zone": "lamp-lit side chapel corridor",
+    "arrival": "south from the evening garden into the east corridor",
+    "turn_from_prior": "SOUTH",
+    "character_stands": [],
+    "camera_pose": {
+      "framing": "lamp-lit side chapel corridor",
+      "height": "eye",
+      "look": "down the corridor, lamps, host lines",
+      "aim": "host copy",
+      "fov_hint": "corridor",
+      "move_intent": "around the east yard and south to the gateway K",
+      "lighting": "lamp-lit night corridor"
+    },
+    "visible_set": [
+      "side chapel corridor",
+      "evening lamps",
+      "host lines",
+      "no couple"
+    ],
+    "offscreen_neighbors": {
+      "north": "I garden",
+      "east": "east wall",
+      "south": "east yard leading toward the gateway",
+      "west": "E sunlit arch (now unlit relative to this night corridor; not the subject)",
+      "not_in_frame": "altar, porch pedestal, date board, photographic hosts"
+    },
+    "forbidden_reuse": [
+      "second compound",
+      "multiple bell towers",
+      "lake or gopuram plate",
+      "photographic people",
+      "floral cross on the porch",
+      "a second Save the Date board",
+      "Hyderabad geography redesign of the church",
+      "reusing the Swaroop stand assignment (groom on the arch / bride in the aisle)"
+    ],
+    "object_counts": {
+      "floral_cross": 0,
+      "date_board": 0,
+      "bride": 0,
+      "groom": 0
+    },
+    "text": {
+      "copy": "Invited By\nSai and Sandra\nRichard and Vasantha\nBaby Venessa and Vernon",
+      "carrier": "as resolved prompt"
+    },
+    "next_edge": {
+      "to": "scene-11",
+      "move": "south-west around to the gateway",
+      "edge": "J-K",
+      "clip": "clip-10"
+    },
+    "board_label": null,
+    "folds_applied": [
+      {
+        "kind": "facet_assignment",
+        "facet_id": "J",
+        "facet": "lamp_lit_side_chapel_corridor",
+        "shot": "S10",
+        "room": "J"
+      }
+    ],
+    "prompt_unmodified": true
+  },
+  "output_filename": "image-10.jpg",
+  "output_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/assets/output/kerala-christian-v1/image-10.jpg",
+  "aspect": "9:16",
+  "width": 720,
+  "height": 1280,
+  "model": {
+    "credentials_env": "REPLICATE_API_TOKEN",
+    "id": "openai/gpt-image-2.5-flare",
+    "provider": "replicate"
+  },
+  "skip_spatial": false,
+  "spatial_map_version": "spatial-v1",
+  "spatial_map_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/continuity/SPATIAL_MAP.json",
+  "spatial_blueprint_16x9_status": "approved_by_ashok",
+  "spatial_approved_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/ORCHESTRATOR_SPATIAL_APPROVED.json",
+  "dependencies": {
+    "blocks": [],
+    "blocked_by": [
+      "template_compiler_PASS",
+      "spatial_map_approved_by_ashok",
+      "orchestrator_IMAGE_authorize",
+      "continuity_WAIVED"
+    ]
+  },
+  "context_isolation": {
+    "includes_clip_graph": false,
+    "includes_other_scenes": false,
+    "includes_full_template": false,
+    "rule": "Image agents must not receive clip graphs, unrelated scenes, or full template.json"
+  },
+  "retry_policy": {
+    "automatic_paid_retries": false,
+    "max_paid_attempts": 2
+  },
+  "max_paid_attempts": 2,
+  "attempt": 1,
+  "template_sha256": "38dd6564a6dbc8ff4545b875bb41dcc984c6afa4b0f6bc6d8aca20a2f1fb0577",
+  "continuity_bible_sha256": null,
+  "orchestrator_auth": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/ORCHESTRATOR_GO_IMAGES.json",
+  "orchestrator_ap_auth": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/ORCHESTRATOR_GO_ASSET_PRODUCER_IMAGES.json",
+  "unlock_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/ORCHESTRATOR_UNLOCK_IMAGE_stills-v1.json",
+  "waive_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/ORCHESTRATOR_WAIVE_CONTINUITY.json",
+  "staged_at": "2026-10-03T07:46:27+05:30",
+  "authorized_by_orchestrator": true,
+  "authorized_at": "2026-10-03T07:44:12+05:30",
+  "dispatched_at": "2026-10-03T07:46:27+05:30",
+  "dispatch_target": "FMI Image Floor @Image Director",
+  "video_jobs_authorized": false,
+  "preserve_prior_productions": [
+    "kc-v1-recreate-20261003-003016",
+    "kc-v1-recreate-20261002-192743",
+    "nk-v1-20261002-072013 HOLD"
+  ],
+  "source": "packets/scenes_prompt_extract.json image_prompt (verbatim) + continuity/SPATIAL_MAP.json constraints folded only; continuity bible NOT included (WAIVED)",
+  "generation_id": "jr7cvwk35nrmy0d0zy7a8w1fym",
+  "output_sha256": "14b8723932b4d67ec66865cce6abe1eac67c095fed397f3e9b86ad59a760ead4",
+  "output_size_bytes": 256116,
+  "output_url": "https://replicate.delivery/xezq/cyiBpvO3TtpIMBETIxuPFMfa9l1e6eJ4DOpqsdNfbFa0AGOdB/tmpklv_a39w.jpeg",
+  "generated_at": "2026-10-03T07:48:53+0530"
+}

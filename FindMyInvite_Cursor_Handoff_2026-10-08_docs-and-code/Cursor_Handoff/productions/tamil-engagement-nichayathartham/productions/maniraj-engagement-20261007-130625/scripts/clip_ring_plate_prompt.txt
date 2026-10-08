@@ -1,0 +1,21 @@
+ONE single camera move, 3 seconds, portrait 9:16, Pixar-style 3D animated look. Start exactly on the supplied image and stay in this same scene: a round brass engagement ring plate on a carved dark wooden table in a traditional Tamil home. No cut, no transition.
+
+CAMERA ORBITS IN ONE DIRECTION ONLY: ALWAYS TRAVELLING TO THE CAMERA'S LEFT around the plate, never reversing. Only the camera moves.
+
+NO PEOPLE APPEAR at any moment: no figures, hands or silhouettes.
+
+CAMERA (motion-control 360-degree ORBIT): one complete 360-degree orbit around the ring plate at the same low three-quarter height as the start image, the camera always aimed at the centre of the plate. It travels continuously to the camera's LEFT around the plate in a perfect circle: fast from the very first frame, constant through the middle, with a slight ease at the very end, finishing exactly back at the starting view, matching the first frame. No reversal, no pause, no tilt change, no roll, no zoom.
+
+SOLID 3D OBJECT, RIGID: the brass plate, the banana leaf, the maroon silk cloth with gold border, the maroon velvet ring box and the engraved brass ring box with their two gold rings, the flowers on the rim, the kumkum and manjal heaps, and the gold topper of two interlocked rings on its stem form one solid three-dimensional arrangement standing fixed on the table. It never moves, spins, turns or wobbles; only the camera circles it. It must NOT look like a flat picture spinning or a board rotating: show true volume, with the sides and back of the boxes, the plate rim and the topper revealed in correct perspective as the camera passes around them.
+
+REAL PARALLAX: the background passes by behind the plate with real depth parallax as the camera circles: the carved dark wooden pillars, the brass standing lamps with small flames, the hanging brass lamps, the hanging rose and jasmine garlands, the banana leaves and the brass vase of peacock feathers sweep past at their true distances, all in soft creamy bokeh. The table edge and near petals sweep past fastest.
+
+FROZEN FLOWERS: every marigold and every pink and red rose petal floating in the air is FROZEN mid-air, completely suspended; they never fall, drift or flutter, they only shift with parallax as the camera circles. Flowers on the plate rim and petals on the table stay still. Warm golden sunbeams glow through soft haze; the lamp flames burn softly.
+
+TEXT LOCK: the topper names stay exactly as in the start image: மணிராஜ் inside the left ring and கீர்த்தனா inside the right ring, in flat matte gold, with the small gold knot between them. When the camera is behind the topper the same names are simply seen from the back, mirror-reversed, which is correct. Never invent, add, duplicate, morph or re-letter any text anywhere. When the camera returns to the start view, both names read exactly as in the first frame, razor-sharp.
+
+FOCUS: the focus stays locked on the topper and rings throughout, razor-sharp, with the background melting into creamy smudged bokeh and the nearest petals as soft foreground bokeh.
+
+LOOK: preserve the start image exactly: warm golden sunlight, brass gold, maroon, marigold orange and yellow, rose red, jasmine white and banana green palette, Leica Noctilux 75mm f/1.25 razor-thin depth of field, dreamy smooth falloff. Same materials, same lighting, no new objects.
+
+CAMERA ORBITS IN ONE DIRECTION ONLY: ALWAYS TO THE CAMERA'S LEFT, one full 360-degree circle back to the starting view. The ring plate stays a rigid solid object; only the camera moves.

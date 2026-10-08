@@ -1,0 +1,31 @@
+{
+  "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-10.jpg",
+  "job_id": "IMG-scene-10",
+  "scene_id": "scene-10",
+  "continuity_decision": "LOCK",
+  "qc_gate": "PASS",
+  "attempt": 2,
+  "decided_at": "2026-10-01T23:18:51.619913+05:30",
+  "checks": [
+    {
+      "rule": "lighting_evening",
+      "expected": "lamp-lit inner side chapel corridor",
+      "observed": "hanging lanterns primary; enclosed corridor; no daytime balcony",
+      "ok": true
+    },
+    {
+      "rule": "object_count_hosts_board",
+      "expected": 1,
+      "observed": 1,
+      "ok": true
+    },
+    {
+      "rule": "copy_host_lines",
+      "expected": "Invited By / Mr. Kurien Abraham / Mrs. Lizzy Kurien / Baby. Nia & Noel / With Love & Blessings",
+      "observed": "exact",
+      "ok": true
+    }
+  ],
+  "violations": [],
+  "note": "LOCK attempt-2 — evening lamp-lit corridor defect cleared."
+}

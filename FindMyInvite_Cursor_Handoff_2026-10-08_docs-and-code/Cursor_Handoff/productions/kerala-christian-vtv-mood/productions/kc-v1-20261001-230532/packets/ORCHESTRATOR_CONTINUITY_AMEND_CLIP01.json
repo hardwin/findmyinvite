@@ -1,0 +1,37 @@
+{
+  "packet_type": "ORCHESTRATOR_CONTINUITY_AMEND_CLIP01",
+  "production_id": "kc-v1-20261001-230532",
+  "authorized_at": "2026-10-02T00:04:18.188561+05:30",
+  "action": "AMEND_SUBSECTIONS_ONLY",
+  "targets": [
+    "scene-01",
+    "clip-01"
+  ],
+  "do_not_amend": [
+    "scene-02",
+    "scene-03",
+    "scene-04",
+    "scene-05",
+    "scene-06",
+    "scene-07",
+    "scene-08",
+    "scene-09",
+    "scene-10",
+    "scene-11",
+    "clips clip-02..clip-11"
+  ],
+  "source_brief": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/ORCHESTRATOR_CLIP01_REGEN.json",
+  "instructions_for_Continuity_Director": {
+    "1": "Produce CONTINUITY_AMEND_clip01.json + update worker_subsections for scene-01 and clip-01 only",
+    "2": "LOOSEN architecture/compound rigidity for the OPENING: soft family resemblance (cream plaster, laterite, one modest bell tower, open porch, coastal Kerala Catholic estate) \u2014 NOT rigid floorplan/compound plate vetoes that force a static facade",
+    "3": "KEEP object counts that still matter: one bell tower, one porch vestibule, one floral cross pedestal; no text on scene-01 still",
+    "4": "KEEP scene-02 subsection UNCHANGED (blessing lettering, porch identity) \u2014 clip-01 last frame stays image-2.jpg",
+    "5": "Add opening_energy rule: sweeping cinematic drone / wedding-estate aerial is REQUIRED; static compound plate is a VETO",
+    "6": "Do not rewrite customer copy; do not invent new locations outside Kerala Catholic coastal church-estate family",
+    "7": "Never send full template.json \u2014 amend from bible + this packet only"
+  },
+  "deliverable_paths": {
+    "amend": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/continuity/CONTINUITY_AMEND_clip01.json",
+    "bible_update_note": "Patch scenes.scene-01 + clips.clip-01 (+ worker_subsections) in CONTINUITY_BIBLE.json; bump updated_at"
+  }
+}

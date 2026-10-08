@@ -1,0 +1,38 @@
+{
+  "packet_type": "ORCHESTRATOR_DELIVERY",
+  "production_id": "kc-v1-recreate-20261003-071403",
+  "delivered_at": "2026-10-03T23:50:00+05:30",
+  "phase": "DELIVERED",
+  "kind": "correction_restitch",
+  "qc_policy": "NO_QC_GENERATE_AND_STITCH",
+  "continuity": "WAIVED",
+  "path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/assets/output/kerala-christian-v1/kerala-christian-v1-final.mp4",
+  "sha256": "e33e2b1d433f70e914b09895d685086ef06318cc122f3f85e1f050b2f9394689",
+  "duration_s": 54.458333,
+  "size_bytes": 52912371,
+  "video": "720x1280 h264 24fps",
+  "audio": null,
+  "replaced_clips": [
+    "clip-1",
+    "clip-2",
+    "clip-7",
+    "clip-8"
+  ],
+  "kept_clips": [
+    "clip-3",
+    "clip-4",
+    "clip-5",
+    "clip-6",
+    "clip-9",
+    "clip-10",
+    "clip-11"
+  ],
+  "copy": {
+    "scene-02": "new journey",
+    "scene-08": "3:00 pm Mass"
+  },
+  "previous_final_archive": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/assets/output/kerala-christian-v1/archive-delivered-20261003/kerala-christian-v1-final.mp4",
+  "previous_final_sha256": "a7d12db013138679c402fb3739271f6e96d9ffd7e4bf3a89bd147cf80a420753",
+  "finish_skipped": true,
+  "final_qc_skipped": true
+}

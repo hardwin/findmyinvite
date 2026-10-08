@@ -1,0 +1,7 @@
+{
+  "packet_type": "ORCHESTRATOR_HOLD_VIDEO_CLIP01_REGEN",
+  "production_id": "kc-v1-20261001-230532",
+  "at": "2026-10-02T00:08:54.875949+05:30",
+  "status": "HELD",
+  "reason": "Ashok order v2: last-frame \u2192 image-01 \u2192 video"
+}

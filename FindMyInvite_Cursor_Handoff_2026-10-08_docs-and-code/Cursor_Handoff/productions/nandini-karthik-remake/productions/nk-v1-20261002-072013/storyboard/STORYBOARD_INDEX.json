@@ -1,0 +1,81 @@
+{
+  "production_id": "nk-v1-20261002-072013",
+  "title": "Nandini \u2661 Karthik",
+  "updated_at": "2026-10-02T08:19:58.113997+05:30",
+  "stills_version": "v4",
+  "status": "stills_approval",
+  "video": "HOLD until Ashok approves stills v4",
+  "wardrobe": "groom maroon half-shirt + veshti; bride green saree; elaborate hair (no bun) + more jewellery",
+  "notes": "maze L/R framings; couple STANDING (no walk)",
+  "stills_ready": [
+    "scene-01.jpg",
+    "scene-02.jpg",
+    "scene-03.jpg",
+    "scene-04.jpg",
+    "scene-05.jpg",
+    "scene-06.jpg"
+  ],
+  "stills_dir": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v4",
+  "items": [
+    {
+      "name": "scene-01.jpg",
+      "path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v4/scene-01.jpg",
+      "bytes": 385947,
+      "mtime": "2026-10-02T08:17:37.481266+05:30",
+      "version": "v4"
+    },
+    {
+      "name": "scene-02.jpg",
+      "path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v4/scene-02.jpg",
+      "bytes": 500209,
+      "mtime": "2026-10-02T08:17:39.677261+05:30",
+      "version": "v4"
+    },
+    {
+      "name": "scene-03.jpg",
+      "path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v4/scene-03.jpg",
+      "bytes": 494505,
+      "mtime": "2026-10-02T08:17:58.813211+05:30",
+      "version": "v4"
+    },
+    {
+      "name": "scene-04.jpg",
+      "path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v4/scene-04.jpg",
+      "bytes": 546071,
+      "mtime": "2026-10-02T08:18:27.925137+05:30",
+      "version": "v4"
+    },
+    {
+      "name": "scene-05.jpg",
+      "path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v4/scene-05.jpg",
+      "bytes": 535800,
+      "mtime": "2026-10-02T08:18:50.101080+05:30",
+      "version": "v4"
+    },
+    {
+      "name": "scene-06.jpg",
+      "path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v4/scene-06.jpg",
+      "bytes": 578532,
+      "mtime": "2026-10-02T08:19:12.793022+05:30",
+      "version": "v4"
+    }
+  ],
+  "preview": {
+    "name": "nandini-karthik-v1-preview.mp4",
+    "path": "/workspace/fmi-productions/nandini-karthik-remake/assets/nandini-karthik-v1-preview.mp4",
+    "bytes": 21451391,
+    "duration_s": 15.2,
+    "mtime": "2026-10-02T07:59:18.036181+05:30"
+  },
+  "preview_poster": {
+    "name": "preview-poster.jpg",
+    "path": "/workspace/fmi-productions/nandini-karthik-remake/productions/nk-v1-20261002-072013/storyboard/preview-poster.jpg",
+    "bytes": 161241
+  },
+  "preview_dl": {
+    "name": "nandini-karthik-v1-preview-dl.mp4",
+    "path": "/workspace/fmi-productions/nandini-karthik-remake/assets/nandini-karthik-v1-preview-dl.mp4",
+    "bytes": 4847302,
+    "mtime": "2026-10-02T08:13:23.513921+05:30"
+  }
+}

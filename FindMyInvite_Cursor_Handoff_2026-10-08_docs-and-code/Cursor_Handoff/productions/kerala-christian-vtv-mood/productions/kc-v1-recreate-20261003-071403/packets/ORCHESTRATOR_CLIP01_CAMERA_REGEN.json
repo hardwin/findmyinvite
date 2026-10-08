@@ -1,0 +1,29 @@
+{
+  "packet_type": "ORCHESTRATOR_CLIP01_CAMERA_REGEN",
+  "production_id": "kc-v1-recreate-20261003-071403",
+  "authorized_at": "2026-10-05T10:06:00+05:30",
+  "source": "Ashok in FMI ReCreate chat 2026-10-05 ~10:02-10:03 IST (verified in transcript): camera move on clip 1 still wrong; 'Regenerate that one clip and give me downloadable video in telegram'",
+  "mode": "NO_QC_GENERATE_AND_STITCH",
+  "regen": [
+    "clip-01 attempt 3"
+  ],
+  "keep_untouched": [
+    "clip-02",
+    "clip-03",
+    "clip-04",
+    "clip-05",
+    "clip-06",
+    "clip-07",
+    "clip-08",
+    "clip-09",
+    "clip-10",
+    "clip-11"
+  ],
+  "first_frame": "assets/output/kerala-christian-v1/image-1.jpg",
+  "last_frame": "assets/output/kerala-christian-v1/image-2.jpg (attempt 4, new journey, sha prefix 1c72f2a594a469d5)",
+  "prompt": "template.json clips[0].video_prompt verbatim (resolved). NOT the stale 'prompt' field. Do not edit prompt text.",
+  "defect_to_fix": "attempt 2 (sha 9d3ab687e99eec4c...) glides at slow uniform speed. Must follow prompt timing: 0-0.65s gentle advance; 0.65-1.85s hard forward-and-down dive over pool; 1.85-2.20s fast pass between porch front columns with directional blur; then clear deceleration into slow push settling on gold verse. No floral cross may appear. Reference move: Swaroop clip-1 in kc-v1-recreate-20261003-003016.",
+  "archive_before_overwrite": "move current clip-1.mp4 and kerala-christian-v1-final.mp4 (sha e33e2b1d...) to assets/output/kerala-christian-v1/archive-delivered-20261005/ before replacing",
+  "restitch": "all 11 clips, hard-cut silent, same spec as e33e2b1d final (720x1280 h264 24fps no audio)",
+  "report": "new final path + sha256 + duration, new clip-1 sha; video_jobs scope limited to clip-01"
+}

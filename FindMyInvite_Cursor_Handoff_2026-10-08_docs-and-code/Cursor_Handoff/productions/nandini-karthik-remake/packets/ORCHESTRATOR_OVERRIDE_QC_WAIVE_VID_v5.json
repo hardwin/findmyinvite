@@ -1,0 +1,50 @@
+{
+  "packet_type": "ORCHESTRATOR_OVERRIDE_QC_WAIVE",
+  "production_id": "nk-v1-20261002-072013",
+  "batch": "clips-v5",
+  "authorized_at": "2026-10-02T09:21:42+05:30",
+  "source": "Ashok via FindMyInvite Video Director",
+  "supersedes": "/workspace/fmi-productions/nandini-karthik-remake/packets/ORCHESTRATOR_STOP_VID_v5_ASHOK.json",
+  "stop_status": "LIFTED_FOR_THIS_OVERRIDE",
+  "rules": {
+    "skip_visual_qc": true,
+    "skip_continuity_lock_on_new_clips": true,
+    "no_retries": true,
+    "max_paid_attempts": 1,
+    "generate_remaining": [
+      "VID-v5-clip-03",
+      "VID-v5-clip-04",
+      "VID-v5-clip-05"
+    ],
+    "stitch_full_preview": true,
+    "preserve_stills_v5": true,
+    "preserve_clip_01": true
+  },
+  "clip_02_disposition": {
+    "status": "ACCEPTED_AS_IS_QC_WAIVED",
+    "asset": "/workspace/fmi-productions/nandini-karthik-remake/assets/clips-v5/clip-02.mp4",
+    "sha256": "3f5a6d3864afd2eb63dc7b11d1e29fef69611f86f853f78cf1ff0185b5fd1482",
+    "note": "Identical to attempt-1 (RETRY floral-wall defect waived by Ashok). Handoff restored for chain.",
+    "handoff": "/workspace/fmi-productions/nandini-karthik-remake/assets/handoffs-v5/clip-02-handoff.jpg",
+    "handoff_sha256": "d63452aff6cdf22d1606e2b86ce25de65b1746f9526415dec90db18b9dcd8175"
+  },
+  "chain": {
+    "clip-03": {
+      "first": "/workspace/fmi-productions/nandini-karthik-remake/assets/handoffs-v5/clip-02-handoff.jpg",
+      "last": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5/scene-04.jpg",
+      "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/VIDEO_JOB/clip-03.v5.json"
+    },
+    "clip-04": {
+      "first": "decoded handoffs-v5/clip-03-handoff.jpg after clip-03 written",
+      "last": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5/scene-05.jpg",
+      "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/VIDEO_JOB/clip-04.v5.json"
+    },
+    "clip-05": {
+      "first": "decoded handoffs-v5/clip-04-handoff.jpg after clip-04 written",
+      "last": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5/scene-06.jpg",
+      "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/VIDEO_JOB/clip-05.v5.json"
+    }
+  },
+  "preview_output_hint": "/workspace/fmi-productions/nandini-karthik-remake/assets/output/clips-v5-preview.mp4",
+  "instruction": "Video Director: generate clip-03\u219204\u219205 sequentially using previous-clip-final-decoded-frame handoffs; no QC stop; no retries; then stitch clip-01..05 into one preview. Asset Producer: unlock held packets under this override only. Continuity/Spatial: stand by \u2014 no LOCK/CLEAR required on 02\u201305 under waive."
+}

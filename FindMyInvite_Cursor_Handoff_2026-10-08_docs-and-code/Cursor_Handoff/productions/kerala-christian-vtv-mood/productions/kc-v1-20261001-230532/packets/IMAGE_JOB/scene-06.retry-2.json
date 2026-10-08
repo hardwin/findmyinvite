@@ -1,0 +1,21 @@
+{
+  "job_type": "IMAGE_RETRY",
+  "job_id": "IMG-scene-06",
+  "scene_id": "scene-06",
+  "production_id": "kc-v1-20261001-230532",
+  "attempt": 2,
+  "authorized_by_orchestrator": true,
+  "authorized_at": "2026-10-01T23:13:46.104016+05:30",
+  "base_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/IMAGE_JOB/scene-06.json",
+  "output_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-6.jpg",
+  "retry_instruction": "Keep plaque, west cloister, pillar, lighting, and grounded bouquet unchanged. Re-render ONLY the plaque lettering to match exact locked family_lines line breaks: With the Blessings of / Groom's Parents / Mr. John Mathew / & Mrs. Elsy John / Bride's Parents / Mr. Thomas George / & Mrs. Mercy Thomas (each on its own line as specified).",
+  "violations": [
+    {
+      "rule": "exact_copy_family_lines",
+      "expected": "With the Blessings of\\nGroom's Parents\\nMr. John Mathew\\n& Mrs. Elsy John\\nBride's Parents\\nMr. Thomas George\\n& Mrs. Mercy Thomas",
+      "observed": "Groom parents on one line 'Mr. John Mathew & Mrs. Elsy John'; bride parents on one line 'Mr. Thomas George & Mrs. Mercy Thomas' \u2014 missing locked line breaks before each '& Mrs.'"
+    }
+  ],
+  "max_paid_attempts": 2,
+  "note": "Final paid attempt \u2014 escalate to USER_ACTION_REQUIRED if still fails"
+}

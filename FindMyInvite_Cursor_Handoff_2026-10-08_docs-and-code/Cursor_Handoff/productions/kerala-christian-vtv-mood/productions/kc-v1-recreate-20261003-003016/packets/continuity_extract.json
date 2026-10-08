@@ -1,0 +1,399 @@
+{
+  "production_id": "kc-v1-recreate-20261003-003016",
+  "name": "The Wedding of Swaroop & Smiley",
+  "iteration": "kerala-christian-v1",
+  "parameters": {
+    "invitation_lines": "The Wedding of\nSwaroop & Smiley",
+    "groom_title": "Mr.",
+    "groom_name": "Swaroop",
+    "bride_title": "Ms.",
+    "bride_name": "Smiley",
+    "family_lines": "With the Blessings of\nGroom\u2019s Parents\nMr. Shadrach\n& Mrs. Salomi\nBride\u2019s Parents\nMr. Yesuratnam\n& Mrs. Mani",
+    "ceremony_lines": "Holy Matrimony\n8th october 2026\n10:00 a.m.\nIn the Morning",
+    "venue_lines": "Wedding Venue\nVenkatadri Gardens\nKatheru\nRajahmundry",
+    "reception_lines": "Reception - lunch\n8 October 2026\n12:00 p.m. onwards\nVenkatadri Gardens",
+    "host_lines": "Invited By\nMr. Yesuratnam\nMrs. Mani\nMr. Shadrach\nMrs. Salomi\nRajesh Emmanuel,Pavani and Balu\nWith Love & Blessings",
+    "save_date_lines": "SAVE THE DATE\n8 October\n2026",
+    "save_date_inline": "SAVE THE DATE / 8 October / 2026",
+    "devotional_line_1": "With The Blessings of God Almighty",
+    "devotional_line_2": "We Invite You"
+  },
+  "characters": {
+    "groom": "Adult Kerala Christian groom, visibly polished storybook 3D animation, warm medium-brown skin, slender adult oval face, large dark-brown almond eyes, thick dark eyebrows, smooth clean-shaven cheeks and chin, soft black hair with a gentle side part, quiet reserved smile. No moustache or beard. Natural adult proportions, not a child. Ivory formal suit over a cream shirt with a soft white-and-pale-pink boutonniere. Keep this face, hair, body and outfit consistent in every couple scene.",
+    "bride": "Adult Kerala Christian bride, visibly polished storybook 3D animation, warm medium-brown skin, graceful oval face, large dark-brown almond eyes, gently arched black eyebrows, soft smile. Dark hair in an elegant low bun with a soft veil and white jasmine accents, delicate gold cross pendant and pearl earrings. Ivory lace-and-silk wedding gown with soft cream undertones. Natural adult proportions and a consistent face, hairstyle, jewelry and gown in every later scene."
+  },
+  "style_excerpt": "A full-bleed portrait 9:16 frame of a richly cinematic dimensional storybook-animation Kerala Christian church wedding invitation. Soft romantic late-2000s South Indian cinema mood: dreamy natural light, intimate coastal Kerala atmosphere, gentle teal-and-warm contrast, quiet emotional longing. Soft cream and powder-blue palette with pearl highlights, pale pink florals and cool backwaters haze beyond coconut palms. Cream-white Portuguese-influenced plaster walls, laterite stone accents, arched windows, a modest bell tower and a simple cross. Premium animated adult characters with sculpted expressive faces, never photographic people. DRAMATIC CHIAROSCURO: gentle warm back-and-side sunlight streams diagonally through arched windows and open porch bays, clearly visible soft volumetric god rays cutting through thin coastal atmospheric haze; luminous rim light on ivory silk, lace, pearl and champagne-gold frames against cooler powder-blue shade. Preserve readable highlights, not a flat uniformly bright wash. Very fine dust motes sparkle only inside the sunbeams. Floor is subtly reflective worn cream stone or polished laterite tile, not a mirror. Gold lettering has illuminated beveled ed",
+  "particle_motion": "PETALS AND LIGHT: continuous distributed slow-motion drift is present from the first frame, not triggered as a burst when the camera stops. Keep about 12-20 separate visible petals at irregular heights and depths \u2014 soft white jasmine, pale pink rose and cream petals. Petals flutter with independent phase, soft air resistance and a little side-to-side wobble; nearby petals drift roughly one tenth of picture height per second in the settled view, distant ones slower. Camera rotation produces the brief directional streaks; after braking the SAME scattered petals become calmly visible, with no sudden emission, rain sheet, confetti explosion or synchronized falling. Bouquets and garlands never detach. Fine dust motes drift inside soft diagonal volumetric sunrays through arched windows. Champagne-gold edges, pearl and jewelry catch moving specular glints; text itself emits no smoke, gold liquid or floor beam.",
+  "architecture_notes": [
+    "ONE white Portuguese-influenced Kerala Catholic church compound near Alappuzha backwaters",
+    "cream-white plaster, laterite accents, arched windows, ONE modest bell tower with cross",
+    "ONE small open arched porch vestibule (all sides open including rear)",
+    "side cloister arcade, aisle/altar ceremony, parish hall garden evening reception",
+    "floral: white jasmine, soft pink roses, baby's breath, green foliage \u2014 NOT marigold temple swags as primary"
+  ],
+  "lighting": "ONE warm soft sunrise from camera-left throughout daytime; evening reception separate lamp-lit mood for scene-09; gentle teal-and-warm contrast",
+  "typography": "luminous champagne-gold / antique-gold beveled dimensional lettering; exact customer copy only",
+  "object_count_rules": [
+    "Exactly one invitation title board where a board is specified",
+    "Exactly one SAVE THE DATE board in couple/date scenes",
+    "Exactly one bride and one groom in couple scenes (never duplicates)",
+    "Exactly one floral cross pedestal in porch",
+    "Exactly one modest bell tower"
+  ],
+  "scene_summaries": [
+    {
+      "id": "scene-01",
+      "index": 1,
+      "name": "Distant high aerial church establish",
+      "generation": "text-only",
+      "image_path": "image-1.jpg",
+      "text_fields": []
+    },
+    {
+      "id": "scene-02",
+      "index": 2,
+      "name": "Church porch with dimensional blessing",
+      "generation": "text-only",
+      "image_path": "image-2.jpg",
+      "text_fields": []
+    },
+    {
+      "id": "scene-03",
+      "index": 3,
+      "name": "Family invitation in the side courtyard",
+      "generation": "text-only",
+      "image_path": "image-3.jpg",
+      "text_fields": []
+    },
+    {
+      "id": "scene-04",
+      "index": 4,
+      "name": "Groom in the shaded side aisle",
+      "generation": "text-only",
+      "image_path": "image-4.jpg",
+      "text_fields": []
+    },
+    {
+      "id": "scene-05",
+      "index": 5,
+      "name": "Bride beside the sunlit transverse archway",
+      "generation": "text-only",
+      "image_path": "image-5.jpg",
+      "text_fields": []
+    },
+    {
+      "id": "scene-06",
+      "index": 6,
+      "name": "Both families' blessing plaque in the west cloister",
+      "generation": "text-only",
+      "image_path": "image-6.jpg",
+      "text_fields": []
+    },
+    {
+      "id": "scene-07",
+      "index": 7,
+      "name": "Holy Matrimony at the aisle and altar",
+      "generation": "text-only",
+      "image_path": "image-7.jpg",
+      "text_fields": []
+    },
+    {
+      "id": "scene-08",
+      "index": 8,
+      "name": "Venue at the north courtyard corner",
+      "generation": "text-only",
+      "image_path": "image-8.jpg",
+      "text_fields": []
+    },
+    {
+      "id": "scene-09",
+      "index": 9,
+      "name": "Reception at the evening parish hall garden",
+      "generation": "text-only",
+      "image_path": "image-9.jpg",
+      "text_fields": []
+    },
+    {
+      "id": "scene-10",
+      "index": 10,
+      "name": "Hosts in the lamp-lit side chapel corridor",
+      "generation": "text-only",
+      "image_path": "image-10.jpg",
+      "text_fields": []
+    },
+    {
+      "id": "scene-11",
+      "index": 11,
+      "name": "Single couple and single date board",
+      "generation": "text-only",
+      "image_path": "image-11.jpg",
+      "text_fields": []
+    },
+    {
+      "id": "scene-12",
+      "index": 12,
+      "name": "Gentle forehead touch beneath the same gateway",
+      "generation": "Final decoded frame of clip 11; no new still-image API call",
+      "image_path": "image-12.jpg",
+      "text_fields": []
+    }
+  ],
+  "clip_summaries": [
+    {
+      "id": "clip-01",
+      "index": 1,
+      "from": 1,
+      "to": 2,
+      "duration": 5,
+      "camera": "Forward-down dive, then continuing slow push",
+      "anchors": {
+        "first": {
+          "strategy": "scene-image",
+          "scene": 1
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 2
+        },
+        "interior_keyframes": []
+      },
+      "video_path": "clip-1.mp4",
+      "final_frame_path": "clip-1-handoff.jpg"
+    },
+    {
+      "id": "clip-02",
+      "index": 2,
+      "from": 2,
+      "to": 3,
+      "duration": 4,
+      "camera": "LEFT 90-degree pivot; a tiny counterclockwise arc at constant subject distance",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 1
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 3
+        }
+      },
+      "video_path": "clip-2.mp4",
+      "final_frame_path": "clip-2-handoff.jpg"
+    },
+    {
+      "id": "clip-03",
+      "index": 3,
+      "from": 3,
+      "to": 4,
+      "duration": 5,
+      "camera": "RIGHT 90-degree pivot; a small upward tilt, then a quiet lateral drift",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 2
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 4
+        }
+      },
+      "video_path": "clip-3.mp4",
+      "final_frame_path": "clip-3-handoff.jpg"
+    },
+    {
+      "id": "clip-04",
+      "index": 4,
+      "from": 4,
+      "to": 5,
+      "duration": 5,
+      "camera": "LEFT 90-degree pivot; a tiny downward tilt to settle at the bride's eye level",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 3
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 5
+        }
+      },
+      "video_path": "clip-4.mp4",
+      "final_frame_path": "clip-4-handoff.jpg"
+    },
+    {
+      "id": "clip-05",
+      "index": 5,
+      "from": 5,
+      "to": 6,
+      "duration": 5,
+      "camera": "RIGHT 90-degree pivot; a slow eight-degree ORBIT across the plaque's bevel at CONSTANT distance, not a push-in",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 4
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 6
+        }
+      },
+      "video_path": "clip-5.mp4",
+      "final_frame_path": "clip-5-handoff.jpg"
+    },
+    {
+      "id": "clip-06",
+      "index": 6,
+      "from": 6,
+      "to": 7,
+      "duration": 5,
+      "camera": "LEFT 90-degree pivot; a slow slight crane DOWN toward seated eye height, with almost no forward translation",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 5
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 7
+        }
+      },
+      "video_path": "clip-6.mp4",
+      "final_frame_path": "clip-6-handoff.jpg"
+    },
+    {
+      "id": "clip-07",
+      "index": 7,
+      "from": 7,
+      "to": 8,
+      "duration": 5,
+      "camera": "RIGHT 90-degree pivot; a small upward crane to standing eye height while yaw eases to a stop",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 6
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 8
+        }
+      },
+      "video_path": "clip-7.mp4",
+      "final_frame_path": "clip-7-handoff.jpg"
+    },
+    {
+      "id": "clip-08",
+      "index": 8,
+      "from": 8,
+      "to": 9,
+      "duration": 5,
+      "camera": "RIGHT 90-degree pivot; a very slow leftward correcting arc at fixed distance",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 7
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 9
+        }
+      },
+      "video_path": "clip-8.mp4",
+      "final_frame_path": "clip-8-handoff.jpg"
+    },
+    {
+      "id": "clip-09",
+      "index": 9,
+      "from": 9,
+      "to": 10,
+      "duration": 5,
+      "camera": "LEFT 90-degree pivot; a gentle lateral drift over 20 centimetres at constant distance from the plaque",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 8
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 10
+        }
+      },
+      "video_path": "clip-9.mp4",
+      "final_frame_path": "clip-9-handoff.jpg"
+    },
+    {
+      "id": "clip-10",
+      "index": 10,
+      "from": 10,
+      "to": 11,
+      "duration": 5,
+      "camera": "Fast backward corridor departure, between the only couple, then full-body ease-out",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 9
+        },
+        "last": {
+          "strategy": "scene-image",
+          "scene": 11
+        }
+      },
+      "video_path": "clip-10.mp4",
+      "final_frame_path": "clip-10-handoff.jpg"
+    },
+    {
+      "id": "clip-11",
+      "index": 11,
+      "from": 11,
+      "to": 12,
+      "duration": 5,
+      "camera": "Gentle backward glide and slight rise, single-board continuity, forehead touch",
+      "anchors": {
+        "first": {
+          "strategy": "previous-clip-final-decoded-frame",
+          "clip": 10
+        },
+        "last": null
+      },
+      "video_path": "clip-11.mp4",
+      "final_frame_path": "clip-11-handoff.jpg"
+    }
+  ],
+  "output": {
+    "actual_duration_seconds": null,
+    "aspect_ratio": "9:16",
+    "assembly": "Concatenate generated clips in order; no transition overlays, global retiming or crossfades.",
+    "audio": "silent",
+    "fps": 24,
+    "frame_count": null,
+    "height": 1280,
+    "sha256": null,
+    "video": "kerala-christian-v1-final.mp4",
+    "width": 720
+  },
+  "models": {
+    "image": {
+      "credentials_env": "REPLICATE_API_TOKEN",
+      "id": "openai/gpt-image-2.5-flare",
+      "provider": "replicate"
+    },
+    "video": {
+      "credentials_env": "XAI_API_KEY",
+      "id": "grok-imagine-video-1.5",
+      "provider": "xai",
+      "resolution": "720p"
+    }
+  },
+  "generation_policy": {
+    "automatic_paid_retries": false,
+    "download_outputs_immediately": true,
+    "ending": "First-frame-only animation preserves one existing board and the same physical scene. No independent final-frame composition.",
+    "images": "Text-only Flare; no source or generated reference images.",
+    "initial_new_image_requests": 12,
+    "initial_new_video_requests": 11,
+    "planned_xai_usd": null,
+    "video": "Grok Imagine only. Prior generated final frame as first anchor; next generated scene image as last anchor, except final clip."
+  },
+  "mode": "RECREATE_IDENTICAL",
+  "source_note": "Extract from byte-identical locked template; prior production_id kc-v1-20261001-230532 extract reused (same template sha)",
+  "copied_at": "2026-10-02T19:29:17+05:30"
+}

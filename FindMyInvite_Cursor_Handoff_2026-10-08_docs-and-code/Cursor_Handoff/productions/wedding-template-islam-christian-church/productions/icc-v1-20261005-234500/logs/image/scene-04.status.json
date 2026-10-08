@@ -1,0 +1,46 @@
+{
+  "scene_id": "scene-04",
+  "job_id": "IMG-scene-04",
+  "production_id": "icc-v1-20261005-234500",
+  "model": "openai/gpt-image-2.5-flare",
+  "provider": "replicate",
+  "generation": "text-only",
+  "auth_packet": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/packets/ORCHESTRATOR_GO_IMAGES.json",
+  "template_sha256": "3a722bd2dc87b669445c7b20411b00886a1a96ab787c448d4f1dcb6ec748d42f",
+  "prompt_sha256": "d8c36a6a7d1875ddd5c23155814b34f24aee0e06d6af1d4324a5c0c92cb070c9",
+  "prompt_chars": 2540,
+  "prompt_truncated": false,
+  "output_path": "/workspace/fmi-productions/wedding-template-islam-christian-church/productions/icc-v1-20261005-234500/assets/output/image-4.jpg",
+  "attempts": [
+    {
+      "tag": "paid-1",
+      "request_id": "sa3tg918dsrmy0d11n4vrsn3xr",
+      "http": 201
+    }
+  ],
+  "polls": 0,
+  "success": true,
+  "status": "GENERATED",
+  "started_at": "2026-10-05T23:47:40.590592+05:30",
+  "request_id": "sa3tg918dsrmy0d11n4vrsn3xr",
+  "generation_id": "sa3tg918dsrmy0d11n4vrsn3xr",
+  "output_url": "https://replicate.delivery/xezq/TUmPbc9YryK0B5pFBulFByjBVhm22AdoAqxknAEqpgW1bG1F/tmp1pk2_0at.jpeg",
+  "raw_dims": "1152,2048",
+  "raw_sha256": "9bef74a1d5824173574e7c7af0aabd80a9460a0cf462544634bffa51cdeae510",
+  "sha256": "6b45291c3e5d6057be0563461e7bdfbd0aec600712d008e2a522a1d58f92b07d",
+  "size_bytes": 249098,
+  "bytes": 249098,
+  "width": 720,
+  "height": 1280,
+  "dims": "720x1280",
+  "metrics": {
+    "image_output_count": 1,
+    "model_variant": "high",
+    "predict_time": 16.845255499,
+    "resolution_target": "9:16",
+    "total_time": 16.860525124
+  },
+  "postprocess": "ffmpeg_pad scale=720:1280:force_original_aspect_ratio=decrease,pad=720:1280:(ow-iw)/2:(oh-ih)/2:color=black -q:v 2",
+  "paid_predictions": 1,
+  "finished_at": "2026-10-05T23:47:58.243473+05:30"
+}

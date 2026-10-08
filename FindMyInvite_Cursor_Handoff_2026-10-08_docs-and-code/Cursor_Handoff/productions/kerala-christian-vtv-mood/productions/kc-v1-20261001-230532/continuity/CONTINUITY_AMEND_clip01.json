@@ -1,0 +1,130 @@
+{
+  "document": "CONTINUITY_AMEND_clip01",
+  "production_id": "kc-v1-20261001-230532",
+  "status": "READY",
+  "amended_at": "2026-10-02T00:04:56.735715+05:30",
+  "source_packets": [
+    "packets/ORCHESTRATOR_CONTINUITY_AMEND_CLIP01.json",
+    "packets/ORCHESTRATOR_CLIP01_REGEN.json"
+  ],
+  "targets_amended": [
+    "scene-01",
+    "clip-01"
+  ],
+  "targets_unchanged": [
+    "scene-02",
+    "scene-03..12",
+    "clip-02..11"
+  ],
+  "changes": {
+    "scene-01": {
+      "loosen": "architecture/compound from rigid plate → soft family resemblance + wedding-estate expanse",
+      "add": "opening_energy REQUIRED (sweeping cinematic drone); static compound plate = VETO",
+      "keep": "object_counts bell_tower=1, porch_vestibule=1, floral_cross_pedestal=1, text_boards=0; no text; sunrise camera-left; storybook 3D 9:16"
+    },
+    "clip-01": {
+      "loosen": "architecture-preservation mid-flight; prioritize continuous cinematic drone choreography",
+      "keep": "last_anchor = locked image-2.jpg / scene-02; duration 5s; one tower / one porch / one floral cross",
+      "add": "opening_energy + forbidden_motion (static plate / frozen hold / sideways slide)"
+    }
+  },
+  "veto_guidance_opening": [
+    {
+      "rule": "opening_energy",
+      "expected": "sweeping cinematic drone wedding-estate aerial",
+      "fail_if": "static compound plate / facade lock / architecture diagram"
+    },
+    {
+      "rule": "object_count_bell_tower",
+      "expected": 1,
+      "fail_if": "0 or 2+"
+    },
+    {
+      "rule": "object_count_porch",
+      "expected": 1,
+      "fail_if": "missing or closed sanctuary"
+    },
+    {
+      "rule": "object_count_floral_cross",
+      "expected": 1,
+      "fail_if": "0 or duplicates"
+    },
+    {
+      "rule": "typography_scene01",
+      "expected": "no text",
+      "fail_if": "any lettering/watermark"
+    },
+    {
+      "rule": "clip01_last_frame",
+      "expected": "lands on locked scene-02 blessing porch",
+      "fail_if": "different copy/porch identity"
+    },
+    {
+      "rule": "architecture_family",
+      "expected": "Kerala Catholic coastal cream/laterite estate family",
+      "fail_if": "unrelated typology / second church invent"
+    }
+  ],
+  "bible_paths": {
+    "json": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/continuity/CONTINUITY_BIBLE.json",
+    "scene_01": "scenes.scene-01",
+    "clip_01": "clips.clip-01"
+  },
+  "pre_amend_snapshot": {
+    "scene-01": {
+      "id": "scene-01",
+      "index": 1,
+      "name": "Distant high aerial church establish",
+      "generate_still": true,
+      "image_path": "image-1.jpg",
+      "zone": "aerial / whole compound exterior",
+      "characters": [],
+      "copy": null,
+      "lighting": "soft sunrise; low sun at camera-left; lavender-peach + powder-blue sky",
+      "camera": "high oblique drone ~40m above courtyard, ~20–25° down, wide 24mm; NOT eye-level facade, NOT nadir map",
+      "architecture_must": [
+        "ONE modest cream-white bell tower + cross in background with sky around cupola",
+        "ONE small open arched porch vestibule below camera (tiled roof ~1/4 frame width)",
+        "all porch sides open including rear; tiny floral cross pedestal between two candle stands (partly roof-occluded)",
+        "side cloister roof tops visible; shallow rectangular reflecting courtyard pool"
+      ],
+      "object_counts": {
+        "bell_tower": 1,
+        "porch_vestibule": 1,
+        "floral_cross_pedestal": 1,
+        "text_boards": 0
+      },
+      "forbidden": [
+        "text/watermark",
+        "close portrait of porch",
+        "closed inner sanctuary in porch",
+        "extra shrine"
+      ],
+      "particles": "lavish fixed floral décor; people tiny unresolved from height"
+    },
+    "clip-01": {
+      "id": "clip-01",
+      "index": 1,
+      "from_scene": 1,
+      "to_scene": 2,
+      "duration_s": 5,
+      "camera": "Forward-down dive, then continuing slow push",
+      "first_anchor": {
+        "strategy": "scene-image",
+        "scene": 1
+      },
+      "last_anchor": {
+        "strategy": "scene-image",
+        "scene": 2
+      },
+      "video_path": "clip-1.mp4",
+      "final_frame_path": "clip-1-handoff.jpg",
+      "continuity_rules": [
+        "Connection shot — not independent cinema",
+        "Preserve object counts and identity from adjacent scene subsections",
+        "Petals continuous drift; no burst on camera stop"
+      ]
+    }
+  },
+  "ready_for": "Asset Producer — rebuild IMAGE_JOB scene-01 + VIDEO_JOB clip-01 per Orchestrator regen packet"
+}

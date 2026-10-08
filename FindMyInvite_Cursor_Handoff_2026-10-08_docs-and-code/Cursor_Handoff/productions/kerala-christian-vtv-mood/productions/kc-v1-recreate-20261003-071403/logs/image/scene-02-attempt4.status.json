@@ -1,0 +1,12 @@
+{
+  "job_id": "IMG-scene-02-attempt4",
+  "production_id": "kc-v1-recreate-20261003-071403",
+  "generation_id": "vxxx9ebpe1rmy0d10bttpfqw30",
+  "sha256": "1c72f2a594a469d52f12e7cf38de4ac2017e9636b74a1b82d7fc6207a8e97ad3",
+  "bytes": 276818,
+  "dims": "720x1280",
+  "prompt_sha256": "3c710db86dd5c837949bafa5e1eccbc201daef26646d58c00f2dcd11b8a78903",
+  "attempt": 4,
+  "status": "GENERATED",
+  "output_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/assets/output/kerala-christian-v1/image-2.jpg"
+}

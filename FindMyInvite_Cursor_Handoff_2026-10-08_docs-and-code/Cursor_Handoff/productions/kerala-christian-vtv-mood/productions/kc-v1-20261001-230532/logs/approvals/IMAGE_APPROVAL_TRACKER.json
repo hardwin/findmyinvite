@@ -1,0 +1,148 @@
+{
+  "production_id": "kc-v1-20261001-230532",
+  "updated_at": "2026-10-01T23:24:38.829262+05:30",
+  "clip01_gate": {
+    "needs": [
+      "scene-01",
+      "scene-02"
+    ],
+    "scene_01_approved": true,
+    "scene_02_approved": true,
+    "both_approved": true,
+    "pinged_orchestrator": true,
+    "pinged_at": "2026-10-01T23:14:21.675356+05:30",
+    "video_hold": false,
+    "note": "Pinged Orchestrator; hold VIDEO until GO clip-01",
+    "orchestrator_go": true,
+    "dispatched_at": "2026-10-01T23:14:40.259782+05:30",
+    "packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/VIDEO_JOB/clip-01.json",
+    "clip_01_approved": false,
+    "video_qc": "RETRY",
+    "attempt": 2,
+    "retry_authorized": true,
+    "retry_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/VIDEO_JOB/clip-01.retry-2.json",
+    "updated_at": "2026-10-01T23:24:38.829262+05:30",
+    "status": "NEEDS_INTERVENTION",
+    "paid_attempts_exhausted": true,
+    "attempts": "2/2",
+    "video_hold_all_clips": true,
+    "qc": "logs/video_jobs/QC_clip-01_attempt2.json"
+  },
+  "scenes": {
+    "scene-01": {
+      "generated": true,
+      "visual_qc": "PASS",
+      "continuity_lock": "LOCK",
+      "approved": true,
+      "continuity_file": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/continuity_veto/scene-01.json",
+      "orchestrator_approved": false,
+      "note": "Continuity LOCK claimed; Orchestrator waiting Visual QC PASS before APPROVED/clip-01 GO"
+    },
+    "scene-02": {
+      "generated": true,
+      "visual_qc": "PASS",
+      "continuity_lock": "LOCK",
+      "approved": true,
+      "continuity_file": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/continuity_veto/scene-02.json",
+      "orchestrator_approved": true
+    },
+    "scene-03": {
+      "generated": true,
+      "visual_qc": "PASS",
+      "continuity_lock": "LOCK",
+      "approved": true,
+      "orchestrator_approved": false
+    },
+    "scene-04": {
+      "generated": true,
+      "visual_qc": "PASS",
+      "continuity_lock": "LOCK",
+      "approved": true,
+      "orchestrator_approved": false
+    },
+    "scene-05": {
+      "generated": true,
+      "visual_qc": "PASS",
+      "continuity_lock": "LOCK",
+      "approved": true,
+      "orchestrator_approved": true
+    },
+    "scene-06": {
+      "generated": true,
+      "visual_qc": "PASS",
+      "continuity_lock": "LOCK",
+      "approved": true,
+      "continuity_file": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/continuity_veto/scene-06.json",
+      "orchestrator_approved": false
+    },
+    "scene-07": {
+      "generated": true,
+      "visual_qc": "RETRY",
+      "continuity_lock": "VETO",
+      "approved": false,
+      "orchestrator_approved": false
+    },
+    "scene-08": {
+      "generated": true,
+      "visual_qc": "PASS",
+      "continuity_lock": "LOCK",
+      "approved": true,
+      "orchestrator_approved": false
+    },
+    "scene-09": {
+      "generated": true,
+      "visual_qc": "PASS",
+      "continuity_lock": "LOCK",
+      "approved": true,
+      "continuity_file": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/continuity_veto/scene-09.json",
+      "orchestrator_approved": true
+    },
+    "scene-10": {
+      "generated": true,
+      "visual_qc": "PASS",
+      "continuity_lock": "LOCK",
+      "approved": true,
+      "orchestrator_approved": true
+    },
+    "scene-11": {
+      "generated": true,
+      "visual_qc": "PASS",
+      "continuity_lock": "LOCK",
+      "approved": true,
+      "orchestrator_approved": false
+    }
+  },
+  "note": "APPROVED only after Visual QC PASS + Continuity lock",
+  "clip02_gate": {
+    "needs": [
+      "clip-01:APPROVED",
+      "scene-03:APPROVED"
+    ],
+    "scene_03_qc": "PASS",
+    "scene_03_continuity": "LOCK",
+    "scene_03_ready": true,
+    "clip_01_approved": false,
+    "both_ready": false,
+    "video_hold": true,
+    "updated_at": "2026-10-01T23:19:30.100279+05:30",
+    "note": "Waiting clip-01 attempt-2 PASS+LOCK; scene-03 already ready"
+  },
+  "approved_scenes": [
+    "scene-01",
+    "scene-02",
+    "scene-03",
+    "scene-04",
+    "scene-05",
+    "scene-06",
+    "scene-08",
+    "scene-09",
+    "scene-10",
+    "scene-11"
+  ],
+  "pending_continuity": [],
+  "video_pipeline": {
+    "status": "HOLD_ALL",
+    "reason": "clip-01 NEEDS_INTERVENTION \u2014 no attempt 3 without Ashok",
+    "updated_at": "2026-10-01T23:24:38.829262+05:30"
+  }
+}

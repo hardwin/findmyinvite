@@ -1,0 +1,21 @@
+{
+  "job_type": "IMAGE_RETRY",
+  "job_id": "IMG-scene-10",
+  "scene_id": "scene-10",
+  "production_id": "kc-v1-20261001-230532",
+  "attempt": 2,
+  "authorized_by_orchestrator": true,
+  "authorized_at": "2026-10-01T23:15:02.973973+05:30",
+  "base_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/IMAGE_JOB/scene-10.json",
+  "output_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-10.jpg",
+  "retry_instruction": "Keep ONE hosts plaque text/frame/pedestal/steps. Re-render ONLY lighting/env: inner lamp-lit evening corridor \u2014 warm hanging lamps primary, deep cool recesses, NO open daytime balcony to bright exterior.",
+  "violations": [
+    {
+      "rule": "lighting_evening",
+      "expected": "lamp-lit inner side chapel evening",
+      "observed": "daytime sunlit balcony to blue sky/water"
+    }
+  ],
+  "max_paid_attempts": 2,
+  "note": "Final paid attempt"
+}

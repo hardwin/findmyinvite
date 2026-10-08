@@ -1,0 +1,56 @@
+{
+  "packet_type": "ORCHESTRATOR_CLIP01_REGEN",
+  "production_id": "kc-v1-20261001-230532",
+  "iteration": "kerala-christian-v1",
+  "requested_via": "Process Architect (Ashok)",
+  "authorized_at": "2026-10-02T00:04:18.188561+05:30",
+  "authorized_by": "FMI Orchestrator",
+  "scope": "clip-01 ONLY \u2014 do not touch clips 02\u201311 stills or motion",
+  "problem": "clip-01 reads as fixed building-compound / locked architecture plate; Ashok likes the rest of the film",
+  "creative_goal": "Brilliant cinematic drone opening \u2014 sweeping, elevated, wedding-estate energy. NOT a static facade/compound plate.",
+  "pipeline_order": [
+    "Continuity Director: amend clip-01 + scene-01 subsections only \u2014 LOOSEN compound/architecture lock for opening",
+    "Asset Producer: rebuild IMAGE_JOB scene-01 (regen) + VIDEO_JOB clip-01",
+    "Image Director \u2192 Visual QC \u2192 Continuity veto (scene-01 only)",
+    "Video Director \u2192 Visual QC (clip-01 only)",
+    "Assembly: swap clip-1.mp4 into final; Final QC full-film; StoryBoard path to Process Architect"
+  ],
+  "locks_keep": {
+    "last_frame": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-2.jpg",
+    "last_frame_note": "KEEP approved scene-02 still as last-frame anchor (blessing text + porch) so end of clip-01 still lands on film language Ashok likes",
+    "copy": [
+      "With God's Grace",
+      "We Invite You"
+    ],
+    "identity_rest_of_film": "do not alter scenes 02\u201311 or clips 02\u201311",
+    "style": "dimensional storybook Kerala Christian wedding; cream/powder-blue; sunrise"
+  },
+  "locks_loosen": {
+    "scene-01_architecture": "Treat compound as soft world identity, not a rigid measured plate. Allow lush wedding-estate expanse, sweeping aerial geography, stronger altitude/parallax, romantic coastal scale. Bell tower / cream plaster / laterite / open porch remain FAMILY RESEMBLANCE \u2014 not pixel-locked floorplan.",
+    "clip-01_motion": "Replace 'solid fixed architecture with real translation' rigidity with cinematic drone choreography: sweeping elevated establish \u2192 elegant forward-down approach into porch blessing. Prioritize brilliance and continuous flight energy over architecture-preservation language that freezes the compound.",
+    "forbidden_still": [
+      "static eye-level facade plate",
+      "tight locked compound map that reads as architecture diagram",
+      "uniform sideways slide / frozen hold"
+    ]
+  },
+  "handoff_risk": "New clip-01 handoff will not pixel-match existing clip-02 first frame; soft cut at join expected. Re-chain 02\u201311 only if Ashok asks.",
+  "retry_policy": {
+    "automatic_paid_retries": false,
+    "max_paid_attempts_per_new_asset": 2
+  },
+  "output_targets": {
+    "scene_01_image": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-1.jpg",
+    "scene_01_archive_current_as": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-1.pre-clip01-regen.jpg",
+    "clip_01": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1.mp4",
+    "clip_01_archive_current_as": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1.delivered-v1.mp4",
+    "clip_01_archive_mp4": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1.delivered-v1.mp4",
+    "handoff": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1-handoff.jpg",
+    "final": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/kerala-christian-v1-final.mp4"
+  },
+  "report_to": [
+    "Ashok via FMI Orchestrator DM",
+    "Process Architect",
+    "StoryBoard Manager"
+  ]
+}

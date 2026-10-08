@@ -1,0 +1,32 @@
+{
+  "job_type": "CONTINUITY_VETO_REQUEST",
+  "production_id": "kc-v1-20261001-230532",
+  "authorized_at": "2026-10-01T23:18:32.902419+05:30",
+  "scenes": [
+    {
+      "scene_id": "scene-05",
+      "attempt": 2,
+      "qc": "PASS",
+      "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-5.jpg",
+      "packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/IMAGE_JOB/scene-05.json",
+      "focus": [
+        "typography_copy",
+        "identity_bride",
+        "object_count"
+      ]
+    },
+    {
+      "scene_id": "scene-10",
+      "attempt": 2,
+      "qc": "PASS",
+      "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-10.jpg",
+      "packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/IMAGE_JOB/scene-10.json",
+      "focus": [
+        "lighting_evening",
+        "object_count_hosts_plaque",
+        "text_accuracy"
+      ]
+    }
+  ],
+  "note": "Visual QC PASS attempt-2. LOCK or VETO with expected vs observed. scene-07 still generating retry."
+}

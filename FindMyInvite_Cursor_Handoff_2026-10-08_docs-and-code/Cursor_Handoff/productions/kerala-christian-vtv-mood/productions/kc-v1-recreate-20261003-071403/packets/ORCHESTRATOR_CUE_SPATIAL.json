@@ -1,0 +1,28 @@
+{
+  "packet_type": "ORCHESTRATOR_CUE_SPATIAL",
+  "production_id": "kc-v1-recreate-20261003-071403",
+  "at": "2026-10-03T07:21:20+05:30",
+  "mode": "RECREATE_CLIENT_FILL",
+  "couple": "Theresa & Isaac",
+  "template_name": "The Wedding of Theresa & Isaac",
+  "template_sha256": "38dd6564a6dbc8ff4545b875bb41dcc984c6afa4b0f6bc6d8aca20a2f1fb0577",
+  "phase": "SPATIAL_MAP",
+  "continuity": "WAIVED",
+  "spatial_extract": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/spatial_extract.json",
+  "process_lock": "/workspace/fmi-productions/ORCHESTRATOR_PROCESS_LOCK_SPATIAL_16X9.json",
+  "outputs_required": {
+    "spatial_map_json": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/continuity/SPATIAL_MAP.json",
+    "spatial_map_md": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/continuity/SPATIAL_MAP.md",
+    "blueprint_16x9_image": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/continuity/SPATIAL_SHOT_BOARD_16x9_v1.jpg",
+    "delivery_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-071403/packets/SPATIAL_16X9_BLUEPRINT_DELIVERY_v1.json"
+  },
+  "spatial_blueprint_16x9_status": "pending",
+  "rules": [
+    "Extract only \u2014 no bible, never full template.json",
+    "Bride facet is scene-04 (sunlit archway). Groom facet is scene-05 (shaded aisle). Do not copy the Swaroop swap.",
+    "scene-02: no floral cross",
+    "ONE 16:9 blueprint plus Spatial Map JSON+MD",
+    "No final stills or video",
+    "Hand via Orchestrator for Ashok to approve"
+  ]
+}

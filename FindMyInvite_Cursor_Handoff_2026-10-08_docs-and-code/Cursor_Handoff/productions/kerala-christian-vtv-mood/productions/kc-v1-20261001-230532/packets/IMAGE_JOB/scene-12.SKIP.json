@@ -1,0 +1,15 @@
+{
+  "job_type": "IMAGE_JOB_SKIP",
+  "production_id": "kc-v1-20261001-230532",
+  "scene_id": "scene-12",
+  "scene_index": 12,
+  "name": "Gentle forehead touch beneath the same gateway",
+  "status": "SKIP_NO_STILL_API",
+  "reason": "Avoid competing independent board/gateway layouts. Keep one date board from scene 11 throughout.",
+  "depends_on": [
+    "clip-11 VIDEO_JOB approved + decode handoff"
+  ],
+  "output_filename": "image-12.jpg",
+  "output_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-12.jpg",
+  "staged_at": "2026-10-01T23:07:25.293407+05:30"
+}

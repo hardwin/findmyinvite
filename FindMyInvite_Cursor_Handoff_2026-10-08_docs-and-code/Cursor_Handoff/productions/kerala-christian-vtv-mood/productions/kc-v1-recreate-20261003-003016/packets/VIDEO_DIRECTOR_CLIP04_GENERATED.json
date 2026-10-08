@@ -1,0 +1,26 @@
+{
+  "packet_type": "VIDEO_DIRECTOR_CLIP04_GENERATED",
+  "production_id": "kc-v1-recreate-20261003-003016",
+  "job_id": "VID-clip-04",
+  "clip_id": "clip-04",
+  "attempt": 1,
+  "status": "GENERATED",
+  "output_clip_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/assets/output/kerala-christian-v1/clip-4.mp4",
+  "handoff_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/assets/output/kerala-christian-v1/clip-4-handoff.jpg",
+  "sha256": {
+    "mp4": "ffaabe03aefc5f63851cf99fe442fd2487a4cc0af2a9830c72b3f970837cb6c4",
+    "handoff": "d28419c8600f04ff1c91456e5ba04a40873ba27870bca3e6f6667162b94c202f"
+  },
+  "request_id": "970e9544-7fa3-98fb-86f0-68d5eb39951b",
+  "prompt_sha256": "8c4aa7135d6e2c3a61181beea2b34631985f49a48e3eb1b0c3b42b67831ad33f",
+  "prompt_sha_match": true,
+  "continuity_qc": "WAIVED",
+  "next_unlock_hint": "clip-05",
+  "duration_s": 5.041667,
+  "requested_duration_s": 5,
+  "model": "grok-imagine-video-1.5",
+  "resolution": "720p",
+  "aspect_ratio": "9:16",
+  "handoff_decode_verified": true,
+  "status_json": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/logs/video_jobs/VID-clip-04.status.json"
+}

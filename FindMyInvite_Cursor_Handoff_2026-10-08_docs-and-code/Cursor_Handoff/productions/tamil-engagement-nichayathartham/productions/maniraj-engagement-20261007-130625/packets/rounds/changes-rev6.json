@@ -1,0 +1,7 @@
+{"round": "rev6-spelling",
+ "edits": {
+  "scene-03": [["small line exactly '{{bride_parents_ta}}',", "slightly larger small line exactly '{{bride_parents_ta}}' (SPELLING CRITICAL: the name உஷாராணி must exactly match this string, letter by letter as Unicode components உ-ஷா-ரா-ணி, i.e. உ + ஷ+ா + ர+ா + ண+ி; no letter added, dropped or substituted),"]],
+  "scene-04": [["line exactly '{{event_weekday_ta}}';", "slightly larger line exactly '{{event_weekday_ta}}' (SPELLING CRITICAL: திங்கட்கிழமை must exactly match this string, letter by letter as Unicode components தி-ங்-க-ட்-கி-ழ-மை, i.e. த+ி + ங+் + க + ட+் + க+ி + ழ + ம+ை, with both pulli dots on ங் and ட்);"],
+               ["small label exactly '{{muhurtham_label_ta}}';", "slightly larger label exactly '{{muhurtham_label_ta}}' (SPELLING CRITICAL: முகூர்த்த must exactly match this string, letter by letter as Unicode components மு-கூ-ர்-த்-த, i.e. ம+ு + க+ூ + ர+் + த+் + த; the second letter is கூ, the standard Tamil glyph for க with the long ூ vowel sign, drawn correctly and not as கு or any other shape);"]],
+  "scene-07": [["line 1 exactly '{{closing_line_1_ta}}',", "line 1, slightly larger, exactly '{{closing_line_1_ta}}' (SPELLING CRITICAL: the last word சூழ must exactly match this string, letter by letter as Unicode components சூ-ழ, i.e. ச+ூ + ழ; the first letter is சூ, the standard Tamil glyph for ச with the long ூ vowel sign, and the second is ழ, not ள or ல),"]]
+ }}

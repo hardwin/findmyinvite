@@ -1,0 +1,17 @@
+{
+  "job_id": "VID-v5-clip-04",
+  "clip_id": "clip-04",
+  "started": "2026-10-02T09:22:15.850331+05:30",
+  "packet": "/workspace/fmi-productions/nandini-karthik-remake/packets/VIDEO_JOB/clip-04.v5.json",
+  "first_frame": "/workspace/fmi-productions/nandini-karthik-remake/assets/handoffs-v5/clip-03-handoff.jpg",
+  "last_frame": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v5/scene-05.jpg",
+  "start_attempt": 1,
+  "status": "done",
+  "attempt": 1,
+  "request_id": "00b005f5-1011-9283-9842-e61a45db5481",
+  "sha256": "b5ce34d4c424c71f6156fe80bc0e304090cbd1d1e69b771108860de969b19ad6",
+  "duration": 3,
+  "output": "/workspace/fmi-productions/nandini-karthik-remake/assets/clips-v5/clip-04.mp4",
+  "handoff": "/workspace/fmi-productions/nandini-karthik-remake/assets/handoffs-v5/clip-04-handoff.jpg",
+  "finished": "2026-10-02T09:23:06.810621+05:30"
+}

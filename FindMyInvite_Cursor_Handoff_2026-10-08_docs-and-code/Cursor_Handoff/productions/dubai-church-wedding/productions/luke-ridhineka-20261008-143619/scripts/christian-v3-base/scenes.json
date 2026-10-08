@@ -1,0 +1,143 @@
+{
+ "s01-aerial": {
+  "og_scene": "scene-01",
+  "title": "Aerial: drone over misty Nilgiri ridges, white church on a tea-estate hillside, eucalyptus/pine avenue, Ooty Lake far below, upright cross on the spire",
+  "text": [],
+  "people": false,
+  "version": "christian-v3"
+ },
+ "s02-blessing": {
+  "og_scene": "scene-02",
+  "title": "Blessing: tall carved white-stone cross with gold inlay on a stepped plinth, lanterns at its base, misty hilltop terrace, balustrade receding, clouds behind",
+  "text": [
+   "With God's Grace",
+   "We Invite You"
+  ],
+  "people": false,
+  "version": "christian-v3"
+ },
+ "s03-invitation": {
+  "og_scene": "scene-03",
+  "title": "Invitation: high angle from the church steps down a long arched nave to an upright altar cross",
+  "text": [
+   "The Wedding of",
+   "Alex & Anna"
+  ],
+  "people": false,
+  "version": "christian-v3"
+ },
+ "s04-groom": {
+  "og_scene": "scene-04",
+  "title": "Groom: long balustrade terrace receding into mist and pines, standing cross on a far plinth",
+  "text": [
+   "Mr.",
+   "Alex John"
+  ],
+  "people": true,
+  "version": "christian-v3"
+ },
+ "s05-bride": {
+  "og_scene": "scene-05",
+  "title": "Bride: long Gothic side hallway by a lancet window, arches receding, upright cross at the far end",
+  "text": [
+   "Ms.",
+   "Anna Thomas"
+  ],
+  "people": true,
+  "version": "christian-v3"
+ },
+ "s06-families": {
+  "og_scene": "scene-06",
+  "title": "Families: ring-pillow vestry table at the end of a long cloister, small gold standing cross",
+  "text": [
+   "With the Blessings of",
+   "Groom's Parents",
+   "Mr. John Mathew",
+   "& Mrs. Elsy John",
+   "Bride's Parents",
+   "Mr. Thomas George",
+   "& Mrs. Mercy Thomas"
+  ],
+  "people": false,
+  "version": "christian-v3"
+ },
+ "s07-matrimony": {
+  "og_scene": "scene-07",
+  "title": "Matrimony: couple at the altar of a very long nave, tall upright altar cross",
+  "text": [
+   "Holy Matrimony",
+   "15th February 2025",
+   "10:00 a.m.",
+   "In the Morning"
+  ],
+  "people": true,
+  "version": "christian-v3"
+ },
+ "s07b-ring-drop": {
+  "og_scene": "ADDED after scene-07",
+  "title": "Ring drop: close hands with a long nave and upright cross in bokeh behind",
+  "text": [],
+  "people": true,
+  "version": "christian-v3"
+ },
+ "s08-venue": {
+  "og_scene": "scene-08",
+  "title": "Venue: long jetty on misty Ooty Lake, white church small on a far hill with upright cross",
+  "text": [
+   "Wedding Venue",
+   "St. Mary's Forane Church",
+   "Near Alappuzha",
+   "Kerala"
+  ],
+  "people": false,
+  "version": "christian-v3"
+ },
+ "s09-reception": {
+  "og_scene": "scene-09",
+  "title": "Reception: misty hill-garden avenue of pines and fairy lights, cake stage, small upright white cross",
+  "text": [
+   "Reception - Dinner",
+   "14th February 2025",
+   "7:00 p.m. onwards",
+   "Parish Hall Garden",
+   "Near Alappuzha, Kerala"
+  ],
+  "people": false,
+  "version": "christian-v3"
+ },
+ "s10-hosts": {
+  "og_scene": "scene-10",
+  "title": "Hosts: series of floral arches receding to the church in the mist, standing cross",
+  "text": [
+   "Invited By",
+   "Mr. Kurien Abraham",
+   "Mrs. Lizzy Kurien",
+   "Baby. Nia & Noel",
+   "With Love & Blessings"
+  ],
+  "people": false,
+  "version": "christian-v3"
+ },
+ "s11-save-date": {
+  "og_scene": "scene-11",
+  "title": "Save the date: couple on a long misty Ooty Lake jetty, church and upright cross on the far hill",
+  "text": [
+   "SAVE THE DATE",
+   "14 & 15 FEBRUARY",
+   "2025"
+  ],
+  "people": true,
+  "version": "christian-v3"
+ },
+ "s12-forehead-touch": {
+  "og_scene": "scene-12",
+  "title": "Forehead touch: same misty Ooty Lake jetty, upright cross on the far hill",
+  "text": [
+   "SAVE THE DATE",
+   "14 & 15 FEBRUARY",
+   "2025"
+  ],
+  "people": true,
+  "version": "christian-v3"
+ }
+}

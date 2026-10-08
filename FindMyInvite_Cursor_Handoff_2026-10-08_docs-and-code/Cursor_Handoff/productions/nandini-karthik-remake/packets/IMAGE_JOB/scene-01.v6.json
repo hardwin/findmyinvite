@@ -1,0 +1,105 @@
+{
+  "job_type": "IMAGE_JOB",
+  "job_id": "IMG-v6-scene-01",
+  "production_id": "nk-v1-20261002-072013",
+  "batch": "stills-v6",
+  "status": "CONTINUITY_LOCKED",
+  "authorized_to_dispatch": false,
+  "spatial_map_status": "approved_by_ashok",
+  "spatial_blueprint_16x9_status": "approved_by_ashok",
+  "spatial_map_version": "spatial-v9",
+  "spatial_map_path": "/workspace/fmi-productions/nandini-karthik-remake/continuity/SPATIAL_MAP.json",
+  "blueprint_path": "/workspace/fmi-productions/nandini-karthik-remake/continuity/SPATIAL_MAZE_MAP_16x9_v9.jpg",
+  "orchestrator_auth": "/workspace/fmi-productions/nandini-karthik-remake/packets/ORCHESTRATOR_SPATIAL_APPROVED.json",
+  "orchestrator_unlock": "/workspace/fmi-productions/nandini-karthik-remake/packets/ORCHESTRATOR_UNLOCK_IMAGE_stills-v6.json",
+  "scene_id": "scene-01",
+  "shot": "S1",
+  "room": "A",
+  "name": "Palm approach garden — start",
+  "facet": "palm_approach_garden",
+  "secondary_facets": null,
+  "couple": false,
+  "arrival": "start",
+  "turn_from_prior": null,
+  "next_edge": {
+    "to": "scene-02",
+    "move": "FWD",
+    "edge": "A-B"
+  },
+  "camera_pose": {
+    "framing": "in A looking toward B",
+    "bias": "path center among palms",
+    "height": "eye",
+    "look": "toward central colonnade courtyard (B)",
+    "move_intent": "FWD into B"
+  },
+  "visible_set": [
+    "palms",
+    "garden path",
+    "orange flowers",
+    "glow of courtyard B ahead"
+  ],
+  "visible_set_pieces": [
+    "palms",
+    "garden path",
+    "orange flowers",
+    "glow of courtyard B ahead"
+  ],
+  "offscreen": {
+    "L": "garden west",
+    "R": "garden east",
+    "behind": "approach origin",
+    "ahead": "B central_colonnade_courtyard"
+  },
+  "forbidden_reuse": [
+    "misty lake+gopuram+hills+boat hero",
+    "stage",
+    "couple",
+    "text",
+    "reuse any other room vista",
+    "misty lake",
+    "temple gopuram",
+    "hills",
+    "mountains",
+    "wooden boat",
+    "lake+gopuram+hills+boat as hero BG"
+  ],
+  "image_prompt_constraints": "9:16. Room A palm approach garden only. Looking FWD toward courtyard B. Empty. NO lake/gopuram plate. NO couple. NO text.",
+  "image_prompt": "A full-bleed portrait 9:16 cinematic dimensional storybook wedding invitation still. pastel tropical elegance; cream carved stone colonnade/pillars/stairs; polished floor; banana leaves; jasmine+lotus; brass urulis + lamps; palette pastel pinks, soft greens, cream, beige, misty greys, warm diffused morning light; soft warm morning light; cinematic dimensional storybook; cinematic dimensional storybook 9:16. FACET (palm_approach_garden / Room A): Room A — outdoor palm approach garden; tropical path; orange flowers; looking toward colonnade courtyard. 9:16. Room A palm approach garden only. Looking FWD toward courtyard B. Empty. NO lake/gopuram plate. NO couple. NO text. Camera: {\"framing\": \"in A looking toward B\", \"bias\": \"path center among palms\", \"height\": \"eye\", \"look\": \"toward central colonnade courtyard (B)\", \"move_intent\": \"FWD into B\"}. Visible set pieces: palms, garden path, orange flowers, glow of courtyard B ahead. Offscreen neighbors — L:garden west; R:garden east; behind:approach origin; ahead:B central_colonnade_courtyard. FORBIDDEN (do not show as hero/dominant): misty lake+gopuram+hills+boat hero, stage, couple, text, reuse any other room vista, misty lake, temple gopuram, hills, mountains, wooden boat, lake+gopuram+hills+boat as hero BG. Far vista lock: misty lake + temple gopuram + mountains/hills + wooden boat FORBIDDEN as dominant/hero background on every beat. Same venue complex throughout — materials/decor continuous; geography changes by room/facet only. Distinct room per shot. No watermark. No brand logos. Empty of people. NO couple. NO text.",
+  "text": null,
+  "aspect_ratio": "9:16",
+  "resolution": {
+    "width": 720,
+    "height": 1280
+  },
+  "output_path": "/workspace/fmi-productions/nandini-karthik-remake/assets/stills-v6/scene-01.jpg",
+  "max_paid_attempts": 2,
+  "attempt": 1,
+  "continuity": {
+    "world_style": "pastel tropical elegance; cream carved stone colonnade/pillars/stairs; polished floor; banana leaves; jasmine+lotus; brass urulis + lamps; palette pastel pinks, soft greens, cream, beige, misty greys, warm diffused morning light; soft warm morning light; cinematic dimensional storybook; cinematic dimensional storybook 9:16",
+    "palette": "pastel pinks, soft greens, cream, beige, misty greys, warm diffused morning light",
+    "materials": "cream carved stone colonnade/pillars/stairs; polished floor; banana leaves; jasmine+lotus; brass urulis + lamps",
+    "same_place_rule": "All six beats ONE venue. Each shot a DISTINCT room (A–F). No vista reuse.",
+    "far_vista_lock": {
+      "hero_plate": "misty lake + temple gopuram + mountains + wooden boat",
+      "rule": "FORBIDDEN as dominant background on every beat."
+    },
+    "wardrobe_lock": null,
+    "maze_logic": "Every hop = one adjacent graph edge only (L/R/FWD/pivot-pull). Hamiltonian path — no room reuse. No teleport.",
+    "maze_path": [
+      "A",
+      "B",
+      "C",
+      "F",
+      "E",
+      "D"
+    ]
+  },
+  "qc_hints": "FAIL any still with lake/gopuram/hills/boat as hero BG; FAIL room reuse / wrong facet; FAIL couple on scene-01..04; FAIL walking pose or bride bun on couple beats; FAIL non-distinct room backdrop.",
+  "created_at": "2026-10-02T10:52:46.595+05:30",
+  "attempt_note": "stills-v6 attempt 1 — spatial-v9 maze A→B→C→F→E→D",
+  "rollup": "/workspace/fmi-productions/nandini-karthik-remake/logs/v6/STILLS_V6_ROLLUP.json",
+  "updated_at": "2026-10-02T10:59:45.468646+05:30",
+  "continuity_batch": "stills-v6",
+  "immutable": true
+}

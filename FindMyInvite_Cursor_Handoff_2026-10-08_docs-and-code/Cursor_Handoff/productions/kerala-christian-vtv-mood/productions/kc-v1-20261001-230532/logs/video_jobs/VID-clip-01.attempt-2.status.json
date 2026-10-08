@@ -1,0 +1,39 @@
+{
+  "job": "VID-clip-01",
+  "clip_id": "clip-01",
+  "status": "GENERATED_AWAITING_QC",
+  "asset": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1.mp4",
+  "handoff_frame": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/clip-1-handoff.jpg",
+  "generation_id": "ffca3683-392c-9eff-b701-7bbcf32be38d",
+  "request_id": "ffca3683-392c-9eff-b701-7bbcf32be38d",
+  "prompt_hash": "9617e23a680b614284eae7d8f5f0f746a6b3a5a05d25cf332d760441a8380212",
+  "attempt": 2,
+  "max_paid_attempts": 2,
+  "model": "grok-imagine-video-1.5",
+  "duration_seconds": 5,
+  "resolution": "720p",
+  "aspect_ratio": "9:16",
+  "first_frame": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-1.jpg",
+  "last_frame": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/assets/output/kerala-christian-v1/image-2.jpg",
+  "first_file_id": "file_6f06d2b1-163d-469c-936f-42c02eb89b21",
+  "last_file_id": "file_a475bd40-9ad3-420c-a5aa-41a4b9eb5700",
+  "sha256": "9b460d65d77dcd6926bf45eee6e69cf8c1cf77146f797735766a9fe8815abe9c",
+  "self_approved": false,
+  "awaiting": "Visual QC",
+  "used_last_frame": true,
+  "input_mode": "file_id",
+  "video_url": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-ffca3683-392c-9eff-b701-7bbcf32be38d.mp4",
+  "usage": {
+    "cost_in_usd_ticks": 7200000000
+  },
+  "technical_probe": {
+    "w": 720,
+    "h": 1280,
+    "fps": "24/1",
+    "duration_s": 5.041667
+  },
+  "qc_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/VIDEO_QC_clip-01.json",
+  "retry_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-20261001-230532/packets/VIDEO_JOB/clip-01.retry-2.json",
+  "note": "Same attempt-2 slot after prior 422; Files API file_id inputs.",
+  "updated_at": "2026-10-01T23:22:28.672546+05:30"
+}

@@ -1,0 +1,30 @@
+{
+  "packet_type": "ORCHESTRATOR_SPATIAL_APPROVED",
+  "production_id": "kc-v1-recreate-20261003-003016",
+  "recorded_at": "2026-10-03T00:41:44+05:30",
+  "spatial_map_status": "approved_by_ashok",
+  "spatial_blueprint_16x9_status": "approved_by_ashok",
+  "spatial_map_version": "spatial-v1",
+  "blueprint_path": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/continuity/SPATIAL_SHOT_BOARD_16x9_v1.jpg",
+  "blueprint_svg": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/continuity/SPATIAL_SHOT_BOARD_16x9_v1.svg",
+  "spatial_map_json": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/continuity/SPATIAL_MAP.json",
+  "spatial_map_md": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/continuity/SPATIAL_MAP.md",
+  "approved_via": "Ashok 'Ok approved' (relayed by Spatial Continuity)",
+  "signal_packet": "/workspace/fmi-productions/kerala-christian-vtv-mood/productions/kc-v1-recreate-20261003-003016/packets/SPATIAL_16X9_ASHOK_APPROVE_SIGNAL_v1.json",
+  "maze_path": "A\u2192B\u2192C\u2192D\u2192E\u2192F\u2192G\u2192H\u2192I\u2192J\u2192K (S12=K video-only)",
+  "image_jobs_authorized": true,
+  "video_jobs_authorized": false,
+  "current_state": "GENERATING_SCENES",
+  "batch": "stills-v1",
+  "orders": [
+    "Asset Producer: fold SPATIAL_MAP spatial-v1 into IMAGE_JOBs scene-01..11; emit to Image Director",
+    "Image Director: generate 11 stills; distinct facet per shot; cameras from map; couple STANDS where map says",
+    "Visual QC + Continuity: judge stills before any VIDEO",
+    "Video Director: VIDEO remains HELD until stills LOCK / Ashok stills GO"
+  ],
+  "preserve": [
+    "kc-v1-recreate-20261002-192743",
+    "kc-v1-20261001-230532",
+    "nk-v1-20261002-072013 HOLD"
+  ]
+}
