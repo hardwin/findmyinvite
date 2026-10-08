@@ -81,7 +81,7 @@
         {
           "type": "header",
           "key": "user-agent",
-          "value": "(?i).*(WhatsApp|facebookexternalhit|Facebot|Instagram|Twitterbot|Slackbot|TelegramBot|LinkedInBot|Discordbot|Pinterest|SkypeUriPreview|Iframely|redditbot|Embedly).*"
+          "value": "(?i).*(WhatsApp|facebookexternalhit|Facebot|Twitterbot|Slackbot|TelegramBot|LinkedInBot|Discordbot|Pinterest|SkypeUriPreview|Iframely|redditbot|Embedly).*"
         }
       ],
       "destination": "/api/share?slug=:slug"
@@ -92,7 +92,7 @@
         {
           "type": "header",
           "key": "user-agent",
-          "value": "(?i).*(WhatsApp|facebookexternalhit|Facebot|Instagram|Twitterbot|Slackbot|TelegramBot|LinkedInBot|Discordbot|Pinterest|SkypeUriPreview|Iframely|redditbot|Embedly).*"
+          "value": "(?i).*(WhatsApp|facebookexternalhit|Facebot|Twitterbot|Slackbot|TelegramBot|LinkedInBot|Discordbot|Pinterest|SkypeUriPreview|Iframely|redditbot|Embedly).*"
         }
       ],
       "destination": "/api/share?kind=brand"

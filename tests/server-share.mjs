@@ -82,6 +82,8 @@ test('every catalog template has a share still and the storefront HTML advertise
  assert.equal(spaPattern.test('/assets/logo.png'),false);
  assert.equal(spaPattern.test('/invitations/haldi'),false);
  assert.ok(vercel.rewrites.some(rule=>rule.source==='/llms.txt'&&rule.destination==='/llm.txt'));
+ const inApp='Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 Instagram 350.0.0.0 (iPhone15,2; iOS 18_0; en_US)';
+ for(const rule of vercel.rewrites.filter(r=>r.destination.startsWith('/api/share')))assert.equal(new RegExp(rule.has[0].value.replace('(?i)',''),'i').test(inApp),false,'in-app browsers are people, not crawlers: '+rule.source);
  const share=vercel.rewrites.find(rule=>rule.destination==='/api/share?slug=:slug');
  assert.equal(share.source,'/:slug([a-z0-9][a-z0-9-]{2,47})');
  for(const headerSource of ['/llm.txt','/llms.txt']){
