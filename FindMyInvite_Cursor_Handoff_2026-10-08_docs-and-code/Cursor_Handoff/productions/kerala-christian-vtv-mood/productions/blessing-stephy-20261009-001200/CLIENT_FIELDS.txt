@@ -1,0 +1,65 @@
+FMI CLIENT DETAILS — Template: kerala-christian-v1
+Client: Blessing & Stephy (Mr. Abi Blessing & Ms. Selsia Stephy)
+Source: Ashok request 2026-10-08
+Adjustments: host_lines not supplied -> Benjamin (7 Oct) default used, pending Ashok confirmation.
+
+invitation_lines:
+The Wedding of
+Blessing & Stephy
+
+groom_title:
+Mr.
+
+groom_name:
+Abi Blessing
+
+bride_title:
+Ms.
+
+bride_name:
+Selsia Stephy
+
+family_lines:
+With the Blessings of
+Groom’s Parents
+Mr. J Mani
+& Mrs. J Rasalammal
+Bride’s Parents
+Mr. A Ravi
+& Mrs. R Hamlet Jaya
+
+ceremony_lines:
+Holy Matrimony
+4th December 2026
+10:00 a.m.
+In the Morning
+
+venue_lines:
+Wedding Venue
+CSI Christ Church,
+Azhagiamandabam.
+
+reception_lines:
+Reception - Dinner
+4th December 2026
+6:00 p.m. onwards
+Csi Community Hall,
+Karumavilai, Karungal.
+
+host_lines:
+Invited By
+Groom’s & Bride’s Family
+With Love & Blessings
+
+save_date_lines:
+SAVE THE DATE
+3rd & 4th December 2026
+
+save_date_inline:
+SAVE THE DATE / 3 & 4th December/ 2026
+
+devotional_line_1:
+With God’s Grace
+
+devotional_line_2:
+We Invite You
