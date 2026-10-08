@@ -1,0 +1,40 @@
+{
+  "job_id": "IMG-scene-08-a1",
+  "scene_id": "scene-08",
+  "attempt": "a1",
+  "production_id": "blessing-stephy-20261009-001200",
+  "model": "openai/gpt-image-2.5-flare",
+  "provider": "replicate",
+  "generation": "text-only",
+  "template_sha256": "49692269a04f2bcabd274e66e8fd6485a694757ea25cadcfe8c97b05b1537cbd",
+  "prompt_source": "template.json scenes[7].image_prompt (verbatim)",
+  "prompt_sha256": "c19d17193a1ba63b5e4a0c04407c66745031d195d696c72accf28f0e4f6a5193",
+  "prompt_chars": 3067,
+  "request_input": {
+    "aspect_ratio": "9:16",
+    "quality": "high",
+    "output_format": "jpeg",
+    "input_images": "OMITTED (text-only)"
+  },
+  "output_path": "/workspace/FindMyInvite_Cursor_Handoff_2026-10-08_docs-and-code/Cursor_Handoff/productions/kerala-christian-vtv-mood/productions/blessing-stephy-20261009-001200/assets/output/kerala-christian-v1/image-8.jpg",
+  "paid_calls": 1,
+  "status": "GENERATED",
+  "ts_local": "2026-10-08T18:44:35.718998+00:00",
+  "request_id": "yjpe3ecmf9rmw0d13ka8ptmv1w",
+  "output_url": "https://replicate.delivery/xezq/uzEJGsrpik6JDBTXFcfTsNgZ3flNXlHrnCr6kp0pROcSaZVXA/tmpezx9nn3q.jpeg",
+  "raw_dims": "1152,2048",
+  "raw_sha256": "11c7640e4a9f586b1098a98d87fbc27770d694bf759c9b6ab0c334e21376bd26",
+  "width": 720,
+  "height": 1280,
+  "sha256": "a6373ec6d07e6cb13c5669b765b4c01cbd1553f3e6f6bc38230e174f2e2f4ca8",
+  "size_bytes": 259798,
+  "metrics": {
+    "image_output_count": 1,
+    "model_variant": "high",
+    "predict_time": 18.719163881,
+    "resolution_target": "9:16",
+    "total_time": 18.742320444
+  },
+  "replicate_created_at": "2026-10-08T18:44:16.122Z",
+  "replicate_completed_at": "2026-10-08T18:44:34.864320444Z"
+}
