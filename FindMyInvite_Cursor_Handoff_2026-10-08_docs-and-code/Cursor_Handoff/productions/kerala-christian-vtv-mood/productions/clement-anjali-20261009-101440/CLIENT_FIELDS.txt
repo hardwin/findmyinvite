@@ -1,0 +1,68 @@
+FMI CLIENT DETAILS — Template: kerala-christian-v1
+Client: Clement & Anjali (Mr. John Clement & Ms. Anjali Pillai)
+Source: Ashok request 2026-10-09
+Adjustments: trailing spaces trimmed; '12th  November' double space collapsed. All other text as typed.
+
+invitation_lines:
+The Wedding of
+Clement & Anjali
+
+groom_title:
+Mr.
+
+groom_name:
+John Clement
+
+bride_title:
+Ms.
+
+bride_name:
+Anjali Pillai
+
+family_lines:
+With the Blessings of
+Groom’s Parents
+Bishop Dr. Sathish K. Kuppurajan
+& Rev. Bharathi Sathish
+Bride’s Parents
+Mr. Anand Pillai
+& Mrs. Powlina Pillai
+
+ceremony_lines:
+Holy Matrimony
+12th November 2026
+6:00 p.m.
+In the evening
+
+venue_lines:
+Wedding Venue
+Star Avenue,
+Bauxite Road, Vaibhav Nagar, Belagavi, Karnataka 590010 (Near Nexa Showroom)
+
+reception_lines:
+Reception - Dinner
+12th November 2026
+On the same day
+After wedding ceremony
+
+host_lines:
+Invited By
+Grace Pillai
+Presi Pillai
+& From Rev.Santosh Gokavi
+House of Praise AG Church
+With Love & Blessings
+
+save_date_lines:
+SAVE THE DATE
+12th November
+2026
+
+save_date_inline:
+SAVE THE DATE / 12th November / 2026
+
+devotional_line_1:
+With God’s Grace
+
+devotional_line_2:
+We Invite You
