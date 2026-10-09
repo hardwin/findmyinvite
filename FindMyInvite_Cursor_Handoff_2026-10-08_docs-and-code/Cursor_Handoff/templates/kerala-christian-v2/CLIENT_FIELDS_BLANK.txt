@@ -1,0 +1,50 @@
+# Kerala Christian v2 — client fill (AE swap)
+# Change these strings (+ cutout paths / music) → same video, new wedding.
+
+invitation_lines=The Wedding of
+{GroomFirst} & {BrideFirst}
+
+groom_title=Mr.
+groom_name=
+bride_title=Ms.
+bride_name=
+
+family_lines=With the Blessings of
+Groom's Parents
+{GroomFather} & {GroomMother}
+Bride's Parents
+{BrideFather} & {BrideMother}
+
+ceremony_lines=Holy Matrimony
+{CeremonyDate}
+{CeremonyTime}
+In the Morning
+
+venue_lines=Wedding Venue
+{ChurchName}
+{ChurchPlace}
+{State}
+
+reception_lines=Reception - Dinner
+{ReceptionDate}
+{ReceptionTime} onwards
+{HallName}
+{HallPlace}
+
+host_lines=Invited By
+{Hosts}
+With Love & Blessings
+
+save_date_lines=SAVE THE DATE
+{SaveDates}
+{SaveYear}
+
+devotional_line_1=With God's Grace
+devotional_line_2=We Invite You
+
+# Optional asset swaps (PNG with transparency, or leave blank to auto-generate storybook cutouts)
+groom_cutout=
+bride_cutout=
+couple_cutout=
+hands_cutout=
+music_url=
