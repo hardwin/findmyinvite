@@ -1,0 +1,33 @@
+{
+  "job_id": "IMG-scene-04-e1",
+  "scene_id": "scene-04",
+  "attempt": "e1",
+  "production_id": "avinash-20261009-150900",
+  "model": "openai/gpt-image-2.5-flare",
+  "provider": "replicate",
+  "generation": "image-edit",
+  "input_image": "assets/output/kerala-christian-v1/image-4.jpg",
+  "input_image_sha256": "9ca0d38b182409cbb8d979462e772fbc9658b36667ddffb23d1c8f0f5042394c",
+  "prompt_file": "packets/edit_prompts/scene-04-e1.txt",
+  "prompt_sha256": "f4572b49c44a76e555b845a6bdbc4d5d7d910a91a07316472792ab5a56bdd4e0",
+  "output_path": "/workspace/FindMyInvite_Cursor_Handoff_2026-10-08_docs-and-code/Cursor_Handoff/productions/kerala-christian-vtv-mood/productions/avinash-20261009-150900/assets/output/kerala-christian-v1/image-4-e1.jpg",
+  "paid_calls": 1,
+  "status": "GENERATED",
+  "ts_local": "2026-10-09T09:49:36.853298+00:00",
+  "file_url": "https://api.replicate.com/v1/files/NTMzZDExNDUtNzlkNS00MjJmLWI2NjgtYzBmYzA2MDZlZDlh.jpg",
+  "request_id": "fr9h3k971hrmw0d1408tp37jw4",
+  "output_url": "https://replicate.delivery/xezq/QAC3OPwNaIJnCRxkfqnez0AEWKodeRpxHLmn1VO9IE4hVNruA/tmp1idht7_9.jpeg",
+  "raw_dims": "1152,2048",
+  "raw_sha256": "f036a3155d3ec25bc55f12fb0b7f457530472ea7ca0254dcc240f98c96f67d1e",
+  "width": 720,
+  "height": 1280,
+  "sha256": "0924fc9ff09dfaad87332eb841203114a9ec7c27d96c98cf7aa763c88e84c354",
+  "size_bytes": 198872,
+  "metrics": {
+    "image_output_count": 1,
+    "model_variant": "high",
+    "predict_time": 19.085258997,
+    "resolution_target": "9:16",
+    "total_time": 19.101043468
+  }
+}
