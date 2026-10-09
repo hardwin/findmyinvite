@@ -3,20 +3,20 @@
   "mode": "RECREATE_CLIENT_FILL",
   "couple": "Clement & Anjali",
   "invitation_order": "groom-first",
-  "phase": "STILLS_SENT_TO_CLIENT_ROUND_1",
-  "updated_at": "2026-10-09T04:55:23.060190+00:00",
-  "template_sha256": "1a7fcd4abefb1613702c1c9e0fa5bdcdb5ecbeb0e61822c47137489a90f69328",
+  "phase": "STILLS_SENT_TO_CLIENT_ROUND_2",
+  "updated_at": "2026-10-09T07:04:47.498031+00:00",
+  "template_sha256": "06a47bf439f4ad3ce0c52187d864019a923f4c1416c161c5ec86c546a5412c7e",
   "source_template_sha256": "bad0d176beb1ad47e3942689f95c4153fb933f3547670a255bb7fc062f46dae4",
   "qc_policy": "TEXT_SELF_CHECK_STILLS",
   "continuity": "WAIVED",
-  "stills_status": "11/11 generated first attempt; text self-check PASS 11/11; scene-07 = Akhil aisle-from-behind, no priest (standing default); awaiting Ashok approval",
+  "stills_status": "Round 1: client approved 10/11; scene-06 change (add 'God'). Round 2: scene-06 v2 'With the Blessings of God' regenerated (1 paid), text self-check PASS; sent.",
   "open_questions": [
     "host_lines 'Rev.Santosh Gokavi' kept as typed (no space after 'Rev.') — confirm",
     "scene-07 ceremony board touches the right frame edge — accept or regenerate scene-07 (1 paid call)"
   ],
   "input_normalization": "trailing spaces trimmed (groom_name, family_lines, venue_lines, reception_lines, host_lines); '12th  November' double space -> single",
   "video_jobs_authorized": false,
-  "paid_image_predictions": 11,
+  "paid_image_predictions": 12,
   "paid_video_generations": 0,
   "stills_sha256": {
     "scene-01": "f37fb30124c47aa65fa5c554490368e1a6743ea9bc537a560df0a80b1a3129bc",
@@ -24,7 +24,7 @@
     "scene-03": "328d60ccb627c2f36a3fdbf398089a7bfa639b168a3c1539b4979e4b4efd8969",
     "scene-04": "48f761e2f3537fa37be56f9b560a02ff8b8cce5eeb3e7393e65c3c2f9af84a59",
     "scene-05": "6171a1a088f6aa38e426dde3d2c56d7bb89bb2932f5c4bb3cc4da04990ae8d6c",
-    "scene-06": "deec8976fc145d8d8788abcfd6ec21de774d751f00077abdc91547cae2b0016d",
+    "scene-06": "567cf9a75de038bacd8145e480423d8e2616a0b0c432610aaf21de29344bb854",
     "scene-07": "72fb606765619b0456ccdcfc79db7ff24bd2a3c9f74005be5f4728b9ca0162b0",
     "scene-08": "d557da16e0d0ad9f3c49fdee1a6b48b641e46f4a30b45139320506650e300074",
     "scene-09": "4b5b52ec46a75c922ddcba9d47ca184929ce166e19ab27ce86b31541d12c6df3",
@@ -36,10 +36,22 @@
   "client_desk": {
     "job_id": "8d6365420483",
     "status": "stills_review",
-    "round": 1,
+    "round": 2,
     "stills_uploaded": 11,
     "proof_url": "https://findmyinvite.com/proof/c2c8b32dfc1a1ef62f430fa459f133367dc5fbc70dd756f5",
     "manager_url": "https://findmyinvite.com/manager/clients",
-    "registered_at": "2026-10-09T04:55:23.060190+00:00"
-  }
+    "registered_at": "2026-10-09T04:55:23.060190+00:00",
+    "scene06_version": 2
+  },
+  "revisions": [
+    {
+      "rev": 1,
+      "ts": "2026-10-09T07:04:47.498031+00:00",
+      "scene": "scene-06",
+      "change": "family_lines line 1 -> 'With the Blessings of God' (client note via /proof)",
+      "script": "scripts/edit_rev1_family_god.py",
+      "paid_images": 1,
+      "superseded": "assets/output/kerala-christian-v1/superseded-rev1-family-god/"
+    }
+  ]
 }
