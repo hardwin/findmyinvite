@@ -1,0 +1,36 @@
+{
+  "job_id": "VID-clip-04",
+  "clip_id": "clip-04",
+  "production_id": "blessing-stephy-20261009-001200",
+  "model": "grok-imagine-video-1.5",
+  "resolution": "720p",
+  "aspect_ratio": "9:16",
+  "duration_seconds": 5,
+  "first_frame": "/workspace/FindMyInvite_Cursor_Handoff_2026-10-08_docs-and-code/Cursor_Handoff/productions/kerala-christian-vtv-mood/productions/blessing-stephy-20261009-001200/assets/output/kerala-christian-v1/clip-3-handoff.jpg",
+  "first_frame_sha256": "902228e396d5d8a0dc28eb8ce75d8cd0688592f93e44ffad7aa39ce156029828",
+  "last_frame": "/workspace/FindMyInvite_Cursor_Handoff_2026-10-08_docs-and-code/Cursor_Handoff/productions/kerala-christian-vtv-mood/productions/blessing-stephy-20261009-001200/assets/output/kerala-christian-v1/image-5.jpg",
+  "last_frame_sha256": "6e589acd42759adc3462f811306b7b619b7c10fc533d3346af122008fdc76c40",
+  "prompt_source": "packets/VIDEO_PROMPTS_SUBMITTED.json (template resolved video_prompt + logged rule edits)",
+  "prompt_sha256": "f69546713eaac0377d600217989e250285bbe0954b33f3579e53f0dfbedabc68",
+  "prompt_len": 2977,
+  "qc": "POST_GEN_FRAME_CHECK (agent)",
+  "paid_submits": 1,
+  "attempts": [
+    {
+      "attempt": 1,
+      "http": 200,
+      "first_file_id": "file_eeedcb31-5311-4e3e-9737-a16caba470c3",
+      "last_file_id": "file_10012c15-5443-417e-b981-0c550cf8bd9f",
+      "submitted_at": "2026-10-09T03:04:01+00:00",
+      "request_id": "bd6fb777-fd8b-9753-b23e-84e0b64dfebb",
+      "final_status": "timeout",
+      "response": {
+        "status": "timeout",
+        "progress": 1
+      }
+    }
+  ],
+  "updated_at": "2026-10-09T03:04:00+00:00",
+  "status": "poll_timeout_no_resubmit",
+  "request_id": "bd6fb777-fd8b-9753-b23e-84e0b64dfebb"
+}

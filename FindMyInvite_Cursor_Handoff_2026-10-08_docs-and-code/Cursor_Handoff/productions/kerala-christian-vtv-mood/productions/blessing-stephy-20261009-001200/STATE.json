@@ -3,19 +3,19 @@
   "mode": "RECREATE_CLIENT_FILL",
   "couple": "Blessing & Stephy",
   "invitation_order": "groom-first",
-  "phase": "STILLS_AWAITING_ASHOK_APPROVAL",
-  "updated_at": "2026-10-08T18:55:06.904731+00:00",
+  "phase": "VIDEO_CHAIN_STOPPED_XAI_CREDITS",
+  "updated_at": "2026-10-09T03:19:50.185889+00:00",
   "template_sha256": "c7992e05254d30884ef6c80f6de530c81215ee5116589a78c3261a3af2fcd3bc",
   "source_template_sha256": "bad0d176beb1ad47e3942689f95c4153fb933f3547670a255bb7fc062f46dae4",
   "qc_policy": "TEXT_SELF_CHECK_STILLS",
   "continuity": "WAIVED",
-  "stills_status": "scene-07 replaced (Akhil aisle-from-behind, no priest); text self-check PASS 11/11; awaiting Ashok approval",
+  "stills_status": "APPROVED by client via /proof (Ashok 2026-10-09)",
   "open_questions": [
     "host_lines default 'Invited By / Groom’s & Bride’s Family / With Love & Blessings' — confirm or replace"
   ],
-  "video_jobs_authorized": false,
+  "video_jobs_authorized": true,
   "paid_image_predictions": 12,
-  "paid_video_generations": 0,
+  "paid_video_generations": 4,
   "stills_sha256": {
     "scene-01": "69301ad58988ceb9f9ac11b126d6a3cdd08e31a21ab6ef2431fe6b2a6469b8fb",
     "scene-02": "fbcdc2301e28464dc11395e53f6b22c5cb8c9e7d680c6b7e42aa698486d2a431",
@@ -30,5 +30,6 @@
     "scene-11": "85b63ea58a9ab2ed3af10286fca8b133dc9b888699c155968aa87b75110215e3"
   },
   "scene_changes": "scene-07 aisle-from-behind, NO priest (Ashok 2026-10-08, per Akhil & Sarah); clip-06/clip-07 aligned + NO PRIEST lines (scripts/edit_scene07_aisle.py); old still in superseded-scene07-priest-seated/",
-  "telegram": "BLOCKED: TELEGRAM_EVENTSBLR_BOT_TOKEN not on this VM; scripts/send_telegram.py ready"
+  "telegram": "BLOCKED: TELEGRAM_EVENTSBLR_BOT_TOKEN not on this VM; scripts/send_telegram.py ready",
+  "video_status": "clip-01..03 generated + frame-checked OK; clip-04 request bd6fb777-fd8b-9753-b23e-84e0b64dfebb poll timed out at 15m, then xAI 403 'used all available credits or reached monthly spending limit'. Recover clip-04 by polling that request id after top-up (no resubmit), then resume: python3 scripts/run_video_chain.py 5 11"
 }
