@@ -1,0 +1,45 @@
+{
+  "job_id": "VID-clip-11",
+  "clip_id": "clip-11",
+  "production_id": "clement-anjali-20261009-101440",
+  "model": "grok-imagine-video-1.5",
+  "resolution": "720p",
+  "aspect_ratio": "9:16",
+  "duration_seconds": 5,
+  "first_frame": "/workspace/FindMyInvite_Cursor_Handoff_2026-10-08_docs-and-code/Cursor_Handoff/productions/kerala-christian-vtv-mood/productions/clement-anjali-20261009-101440/assets/output/kerala-christian-v1/clip-10-handoff.jpg",
+  "first_frame_sha256": "cf4f8bfc097c526a38fc86a91e76aa749d63e1a413cb3a29f8963691db21194a",
+  "last_frame": null,
+  "last_frame_sha256": null,
+  "prompt_source": "packets/VIDEO_PROMPTS_SUBMITTED.json (template resolved video_prompt + logged rule edits)",
+  "prompt_sha256": "00a5f23ae5afec8e18873eab2b6d12642ab6d5293720625b251a95687a13bf50",
+  "prompt_len": 2749,
+  "qc": "POST_GEN_FRAME_CHECK (agent)",
+  "paid_submits": 1,
+  "attempts": [
+    {
+      "attempt": 1,
+      "http": 200,
+      "first_file_id": "file_b993d619-6137-4ff1-8b50-53b9c649d998",
+      "last_file_id": null,
+      "submitted_at": "2026-10-09T07:22:27+00:00",
+      "request_id": "230141b0-d5ed-9c78-aded-393edd2641e5",
+      "final_status": "done"
+    }
+  ],
+  "updated_at": "2026-10-09T07:23:00+00:00",
+  "status": "generated",
+  "request_id": "230141b0-d5ed-9c78-aded-393edd2641e5",
+  "sha256": "9ddffcea415f419ce9966925b2e5c84256083f4139d5cd72081ff2f789ac7944",
+  "handoff": "/workspace/FindMyInvite_Cursor_Handoff_2026-10-08_docs-and-code/Cursor_Handoff/productions/kerala-christian-vtv-mood/productions/clement-anjali-20261009-101440/assets/output/kerala-christian-v1/clip-11-handoff.jpg",
+  "handoff_sha256": "0b19e7ea99b207879089c9cd34a6e2337bd8aeccc38751c4c5714cd81819c99e",
+  "video_url": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-230141b0-d5ed-9c78-aded-393edd2641e5.mp4",
+  "usage": {
+    "cost_in_usd_ticks": 7100000000
+  },
+  "technical_probe": {
+    "w": 720,
+    "h": 1280,
+    "fps": "24/1",
+    "duration_s": 5.041667
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "job_id": "VID-clip-05",
+  "clip_id": "clip-05",
+  "production_id": "clement-anjali-20261009-101440",
+  "model": "grok-imagine-video-1.5",
+  "resolution": "720p",
+  "aspect_ratio": "9:16",
+  "duration_seconds": 5,
+  "first_frame": "/workspace/FindMyInvite_Cursor_Handoff_2026-10-08_docs-and-code/Cursor_Handoff/productions/kerala-christian-vtv-mood/productions/clement-anjali-20261009-101440/assets/output/kerala-christian-v1/clip-4-handoff.jpg",
+  "first_frame_sha256": "dcde0fe5f5cf4057e12e2b3b966c6e283587abc8239fbe5e0adb7b34a51c2975",
+  "last_frame": "/workspace/FindMyInvite_Cursor_Handoff_2026-10-08_docs-and-code/Cursor_Handoff/productions/kerala-christian-vtv-mood/productions/clement-anjali-20261009-101440/assets/output/kerala-christian-v1/image-6.jpg",
+  "last_frame_sha256": "567cf9a75de038bacd8145e480423d8e2616a0b0c432610aaf21de29344bb854",
+  "prompt_source": "packets/VIDEO_PROMPTS_SUBMITTED.json (template resolved video_prompt + logged rule edits)",
+  "prompt_sha256": "297bd77b48a619bb58932202fa8a979561c8144715e179577db8980821ac316b",
+  "prompt_len": 3146,
+  "qc": "POST_GEN_FRAME_CHECK (agent)",
+  "paid_submits": 1,
+  "attempts": [
+    {
+      "attempt": 1,
+      "http": 200,
+      "first_file_id": "file_5afd96db-9b0e-4d41-a780-c6c06050f7f6",
+      "last_file_id": "file_88bc6391-4faa-4cd4-9f23-a49d134431d9",
+      "submitted_at": "2026-10-09T07:15:08+00:00",
+      "request_id": "b05ce7ac-5539-947b-baf2-8336e0427263",
+      "final_status": "done"
+    }
+  ],
+  "updated_at": "2026-10-09T07:16:14+00:00",
+  "status": "generated",
+  "request_id": "b05ce7ac-5539-947b-baf2-8336e0427263",
+  "sha256": "9576760f7655f37c06661ce0702350aa505d46ee7bfd48d1b66d4488e732fd45",
+  "handoff": "/workspace/FindMyInvite_Cursor_Handoff_2026-10-08_docs-and-code/Cursor_Handoff/productions/kerala-christian-vtv-mood/productions/clement-anjali-20261009-101440/assets/output/kerala-christian-v1/clip-5-handoff.jpg",
+  "handoff_sha256": "7e3fb26c015ead7308e596de9dff795c878d5ae02a42433baeafe4c772fa12fe",
+  "video_url": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-b05ce7ac-5539-947b-baf2-8336e0427263.mp4",
+  "usage": {
+    "cost_in_usd_ticks": 7200000000
+  },
+  "technical_probe": {
+    "w": 720,
+    "h": 1280,
+    "fps": "24/1",
+    "duration_s": 5.041667
+  }
+}
