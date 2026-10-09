@@ -1,0 +1,38 @@
+{
+  "production_id": "avinash-20261009-150900",
+  "project": "Avinash",
+  "mode": "RECREATE_CLIENT_FILL",
+  "couple": "Rahul & Praveena",
+  "invitation_order": "groom-first",
+  "phase": "STILLS_AWAITING_ASHOK_APPROVAL",
+  "updated_at": "2026-10-09T09:50:05.605034+00:00",
+  "template_sha256": "a1796f0f5406efccaff51105ddc70c714a660ab1600420b32213d58adc7a99ed",
+  "source_template_sha256": "bad0d176beb1ad47e3942689f95c4153fb933f3547670a255bb7fc062f46dae4",
+  "qc_policy": "TEXT_SELF_CHECK_STILLS",
+  "continuity": "WAIVED",
+  "stills_status": "11/11 generated; text self-check PASS 11/11 after scene-04 edit (a1 rendered 'Rahul' twice in the large name line -> e1 edit, original in superseded-scene04-double-name/); awaiting Ashok approval",
+  "open_questions": [
+    "groom_title typed as 'Mr.Rahul' (renders 'Mr.Rahul' above 'Rahul'); confirm or change to 'Mr.'",
+    "bride_title typed 'Ms. Praveena' but scene-05 rendered small 'Ms.' above 'Praveena' (reads correctly; no edit made)",
+    "host_lines taken from the tail of reception_lines: 'Invited by / Rahul Gurujwada / With Love & Blessings'"
+  ],
+  "video_jobs_authorized": false,
+  "paid_image_predictions": 12,
+  "rate_limited_unpaid_attempts": 10,
+  "paid_video_generations": 0,
+  "stills_sha256": {
+    "scene-01": "77a200efba12f3537456e4d70a8e78ab69fde4f1f314915a6a3294f6fd08bc11",
+    "scene-02": "4c5b4b961747c469476b9a8bb40492c843880b9c483c779564af5e8c2e7201ce",
+    "scene-03": "e7efd1dcba191d07057a0561aa55c0768cc6b28061733643bb9278d05f6daae0",
+    "scene-04": "0924fc9ff09dfaad87332eb841203114a9ec7c27d96c98cf7aa763c88e84c354",
+    "scene-05": "3a1957f4316efcccd9232f034e13a2459f5bbd83c61e5f06b071a8cc13745042",
+    "scene-06": "7cb2dea1a92452ab3c95566b49ab72ba9384d2e04b5012c33afb16f073437232",
+    "scene-07": "be791c8595913f5a7b21949e99600767c1ae3b448ab9e8290ecaf6ddc26c9196",
+    "scene-08": "273ec06f42f8b952cc3951aa35331c5a43258950fb320ec4fe02277009079fdc",
+    "scene-09": "73c8c1106193ac76708e7083aedb7319e5d570611274288217a8188c4d2488ac",
+    "scene-10": "a0a0db3f68f272e59fa6812596b6ba8cfc81bd25f598641394ed2c281b869e3d",
+    "scene-11": "eed1feb8615a4f0ecda562f365f9e3beefcc1df1cf780522fbe7deeaeaf9902d"
+  },
+  "scene_changes": "scene-07 aisle-from-behind, NO priest (standing default, scripts/edit_scene07_aisle.py applied before generation); scene-04 text edit e1",
+  "telegram": "BLOCKED: TELEGRAM_EVENTSBLR_BOT_TOKEN not on this VM; scripts/send_telegram.py ready"
+}
