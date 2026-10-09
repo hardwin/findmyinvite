@@ -3,8 +3,8 @@
   "mode": "RECREATE_CLIENT_FILL",
   "couple": "Clement & Anjali",
   "invitation_order": "groom-first",
-  "phase": "STILLS_AWAITING_ASHOK_APPROVAL",
-  "updated_at": "2026-10-09T04:47:30.860493+00:00",
+  "phase": "STILLS_SENT_TO_CLIENT_ROUND_1",
+  "updated_at": "2026-10-09T04:55:23.060190+00:00",
   "template_sha256": "1a7fcd4abefb1613702c1c9e0fa5bdcdb5ecbeb0e61822c47137489a90f69328",
   "source_template_sha256": "bad0d176beb1ad47e3942689f95c4153fb933f3547670a255bb7fc062f46dae4",
   "qc_policy": "TEXT_SELF_CHECK_STILLS",
@@ -32,5 +32,14 @@
     "scene-11": "719cdcdbc28e8ddb0a313dcc5c145f51c71904705c4de1c1bbfb7c61f446d000"
   },
   "scene_changes": "scene-07 aisle-from-behind, NO priest; clip-06/clip-07 aligned + NO PRIEST lines (scripts/edit_scene07_aisle.py); pre-edit backup in packets/",
-  "telegram": "BLOCKED: TELEGRAM_EVENTSBLR_BOT_TOKEN not on this VM; scripts/send_telegram.py ready"
+  "telegram": "BLOCKED: TELEGRAM_EVENTSBLR_BOT_TOKEN not on this VM; scripts/send_telegram.py ready",
+  "client_desk": {
+    "job_id": "8d6365420483",
+    "status": "stills_review",
+    "round": 1,
+    "stills_uploaded": 11,
+    "proof_url": "https://findmyinvite.com/proof/c2c8b32dfc1a1ef62f430fa459f133367dc5fbc70dd756f5",
+    "manager_url": "https://findmyinvite.com/manager/clients",
+    "registered_at": "2026-10-09T04:55:23.060190+00:00"
+  }
 }
