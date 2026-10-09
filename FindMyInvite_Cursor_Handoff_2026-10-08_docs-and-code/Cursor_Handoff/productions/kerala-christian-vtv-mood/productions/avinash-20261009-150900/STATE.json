@@ -4,8 +4,8 @@
   "mode": "RECREATE_CLIENT_FILL",
   "couple": "Rahul & Praveena",
   "invitation_order": "groom-first",
-  "phase": "STILLS_AWAITING_ASHOK_APPROVAL",
-  "updated_at": "2026-10-09T09:50:05.605034+00:00",
+  "phase": "STILLS_SENT_TO_CLIENT",
+  "updated_at": "2026-10-09T10:03:27.343688+00:00",
   "template_sha256": "a1796f0f5406efccaff51105ddc70c714a660ab1600420b32213d58adc7a99ed",
   "source_template_sha256": "bad0d176beb1ad47e3942689f95c4153fb933f3547670a255bb7fc062f46dae4",
   "qc_policy": "TEXT_SELF_CHECK_STILLS",
@@ -34,5 +34,13 @@
     "scene-11": "eed1feb8615a4f0ecda562f365f9e3beefcc1df1cf780522fbe7deeaeaf9902d"
   },
   "scene_changes": "scene-07 aisle-from-behind, NO priest (standing default, scripts/edit_scene07_aisle.py applied before generation); scene-04 text edit e1",
-  "telegram": "BLOCKED: TELEGRAM_EVENTSBLR_BOT_TOKEN not on this VM; scripts/send_telegram.py ready"
+  "telegram": "BLOCKED: TELEGRAM_EVENTSBLR_BOT_TOKEN not on this VM; scripts/send_telegram.py ready",
+  "client_desk": {
+    "job_id": "03584a621921",
+    "status": "stills_review",
+    "round": 1,
+    "stills_uploaded": 11,
+    "proof_url": "https://findmyinvite.com/proof/bd3e3f27447c0aa55a95906c6ad6c34158b52aa9a027f3e3",
+    "registered_at": "2026-10-09T10:03:27.343701+00:00"
+  }
 }
