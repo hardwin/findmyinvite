@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "note": "Learning loop for WhatsApp sales. Re-run with scripts/regression_chats.py. Checks are outcomes, not exact sentences.",
+  "suites": [
+    {
+      "id": "payment-loop-1",
+      "cases": [
+        {"id": "boy-text-change", "title": "Boy name, text change", "turns": ["Alex", "I am the bride's brother", "Christian Church Wedding", "text change only", "send the payment link"], "checks": {"no_rupee": true, "no_template": true, "no_tool_leak": true, "no_paid_confirm": true, "expect_link": true, "paid_asks_time": false}},
+        {"id": "girl-face", "title": "Girl name, face and outfit", "turns": ["Priya", "for my sister", "the church wedding video", "face and outfit change", "I want to pay"], "checks": {"no_rupee": true, "no_template": true, "no_tool_leak": true, "no_paid_confirm": true, "expect_link": true, "paid_asks_time": false}},
+        {"id": "full-custom", "title": "Full custom, then pay", "turns": ["Rahul", "No i want full custom", "it is for my wedding", "send the payment link"], "checks": {"no_rupee": true, "no_template": true, "no_tool_leak": true, "no_paid_confirm": true, "expect_link": true, "paid_asks_time": false}},
+        {"id": "cannot-decide", "title": "Cannot decide, then text change", "turns": ["Meera", "for my wedding", "I can't decide", "ok text change", "payment link please"], "checks": {"no_rupee": true, "no_template": true, "no_tool_leak": true, "no_paid_confirm": true, "expect_link": true, "paid_asks_time": false}},
+        {"id": "no-then-pay", "title": "No to the reel, then pay", "turns": ["Arjun", "relative of the bride", "no not that video", "text change on the church one", "pay now"], "checks": {"no_rupee": true, "no_template": true, "no_tool_leak": true, "no_paid_confirm": true, "expect_link": true, "paid_asks_time": false}},
+        {"id": "pay-too-early", "title": "Pay too early", "turns": ["Alex", "just send payment"], "checks": {"no_rupee": true, "no_template": true, "no_tool_leak": true, "no_paid_confirm": true, "expect_link": false, "paid_asks_time": false}},
+        {"id": "paid-claim", "title": "Paid claim", "turns": ["Sara", "for my wedding", "Christian Church Wedding", "text change", "send the link", "I paid"], "checks": {"no_rupee": true, "no_template": true, "no_tool_leak": true, "no_paid_confirm": true, "expect_link": true, "paid_asks_time": true}},
+        {"id": "our-pics", "title": "Our pics, then pay", "turns": ["Kabir", "brother of the bride", "church video", "use our pics", "send payment link"], "checks": {"no_rupee": true, "no_template": true, "no_tool_leak": true, "no_paid_confirm": true, "expect_link": true, "paid_asks_time": false}},
+        {"id": "full-custom-twice", "title": "Full custom said twice", "turns": ["Albert", "No i want full custom", "No i want full custom", "for my fiance", "payment link"], "checks": {"no_rupee": true, "no_template": true, "no_tool_leak": true, "no_paid_confirm": true, "expect_link": true, "paid_asks_time": false}},
+        {"id": "straight-offer", "title": "Straight offer to payment", "turns": ["Ananya", "my cousin's wedding", "Christian Church Wedding", "only names and wording", "ok send payment"], "checks": {"no_rupee": true, "no_template": true, "no_tool_leak": true, "no_paid_confirm": true, "expect_link": true, "paid_asks_time": false}}
+      ]
+    },
+    {
+      "id": "payment-loop-2",
+      "cases": [
+        {"id": "friend-wording-checkout", "title": "Friend wedding, wording, checkout", "turns": ["Neha", "my best friend's wedding", "Christian Church Wedding", "only the wording", "checkout"], "checks": {"no_rupee": true, "no_template": true, "no_tool_leak": true, "no_paid_confirm": true, "expect_link": true, "paid_asks_time": false}},
+        {"id": "price-question-then-pay", "title": "Asks the price, then pays", "turns": ["Imran", "for my brother", "the church one", "face change", "how much is it", "ok I want to pay"], "checks": {"no_rupee": true, "no_template": true, "no_tool_leak": true, "no_paid_confirm": true, "expect_link": true, "paid_asks_time": false}},
+        {"id": "undecided-then-link", "title": "Cannot decide, then sends the link", "turns": ["Divya", "for my wedding", "I can't decide", "the church wedding video", "text change", "send me the link"], "checks": {"no_rupee": true, "no_template": true, "no_tool_leak": true, "no_paid_confirm": true, "expect_link": true, "paid_asks_time": false}},
+        {"id": "parents-full-custom", "title": "Full custom for parents", "turns": ["Rohan", "I want a full custom video", "it is for my parents", "send the payment link"], "checks": {"no_rupee": true, "no_template": true, "no_tool_leak": true, "no_paid_confirm": true, "expect_link": true, "paid_asks_time": false}},
+        {"id": "sister-pics-pay", "title": "Sister, our pics, pay", "turns": ["Fatima", "for my sister", "church wedding video", "use our pics", "I want to pay"], "checks": {"no_rupee": true, "no_template": true, "no_tool_leak": true, "no_paid_confirm": true, "expect_link": true, "paid_asks_time": false}},
+        {"id": "link-before-video", "title": "Link before any video", "turns": ["Vikram", "send the payment link"], "checks": {"no_rupee": true, "no_template": true, "no_tool_leak": true, "no_paid_confirm": true, "expect_link": false, "paid_asks_time": false}},
+        {"id": "wording-then-paid", "title": "Wording, link, then I paid", "turns": ["Lata", "for my wedding", "Christian Church Wedding", "names and wording", "send the link", "I paid"], "checks": {"no_rupee": true, "no_template": true, "no_tool_leak": true, "no_paid_confirm": true, "expect_link": true, "paid_asks_time": true}},
+        {"id": "skip-then-church-pay", "title": "Skips the first pitch, then pays", "turns": ["Kiran", "groom's sister", "not that one", "church video with text change", "pay now"], "checks": {"no_rupee": true, "no_template": true, "no_tool_leak": true, "no_paid_confirm": true, "expect_link": true, "paid_asks_time": false}},
+        {"id": "engagement-exclusive", "title": "Engagement, exclusive, payment", "turns": ["Pooja", "my engagement", "Christian Church Wedding", "the exclusive video", "payment link please"], "checks": {"no_rupee": true, "no_template": true, "no_tool_leak": true, "no_paid_confirm": true, "expect_link": true, "paid_asks_time": false}},
+        {"id": "paid-with-no-order", "title": "Says paid before any order", "turns": ["Nikhil", "I have paid"], "checks": {"no_rupee": true, "no_template": true, "no_tool_leak": true, "no_paid_confirm": true, "expect_link": false, "paid_asks_time": true}}
+      ]
+    },
+    {
+      "id": "payment-loop-3",
+      "cases": [
+        {"id": "for-me-collections", "title": "For me, then collections", "turns": ["Alex", "For me", "Yes show", "I like it", "no faces", "pay now"], "checks": {"no_rupee": true, "no_template": true, "no_tool_leak": true, "no_paid_confirm": true, "expect_link": true, "paid_asks_time": false}},
+        {"id": "same-video-faces", "title": "Same video, faces question, then pay", "turns": ["Alex", "for myself", "Yes show", "No custom, same one with my details", "yes", "checkout"], "checks": {"no_rupee": true, "no_template": true, "no_tool_leak": true, "no_paid_confirm": true, "expect_link": true, "paid_asks_time": false}},
+        {"id": "date-before-pay", "title": "Date before payment is not locked", "turns": ["Alex", "for my wedding", "Christian Church Wedding", "text change", "24th nov palai"], "checks": {"no_rupee": true, "no_template": true, "no_tool_leak": true, "no_paid_confirm": true, "expect_link": true, "paid_asks_time": false}}
+      ]
+    },
+    {
+      "id": "payment-loop-4",
+      "cases": [
+        {"id": "price-before-pick", "title": "Price question while still choosing", "turns": ["Alex", "For my wedding", "Yes show", "I like this", "How much"], "checks": {"no_rupee": true, "no_template": true, "no_tool_leak": true, "no_paid_confirm": true, "expect_link": false, "paid_asks_time": false}},
+        {"id": "faces-then-price", "title": "Faces pick quotes 1499 and the link", "turns": ["Alex", "For me", "Yes show", "I like this", "With our faces"], "checks": {"no_rupee": true, "no_template": true, "no_tool_leak": true, "no_paid_confirm": true, "expect_link": true, "paid_asks_time": false}},
+        {"id": "text-then-price", "title": "Text change quotes 999 and the link", "turns": ["Alex", "for my wedding", "Christian Church Wedding", "text change"], "checks": {"no_rupee": true, "no_template": true, "no_tool_leak": true, "no_paid_confirm": true, "expect_link": true, "paid_asks_time": false}}
+      ]
+    }
+  ]
+}

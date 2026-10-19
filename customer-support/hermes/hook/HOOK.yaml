@@ -1,0 +1,5 @@
+name: fmi-customer-intake
+description: Save admitted WhatsApp customer identities to the FMI support database
+events:
+  - gateway:startup
+  - agent:start

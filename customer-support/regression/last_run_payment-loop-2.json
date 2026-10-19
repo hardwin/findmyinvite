@@ -1,0 +1,576 @@
+{
+  "suite": "payment-loop-2",
+  "seconds": 131.0,
+  "results": [
+    {
+      "id": "friend-wording-checkout",
+      "title": "Friend wedding, wording, checkout",
+      "failed": [],
+      "turns": [
+        {
+          "role": "FMI",
+          "text": "Hi\nYour name please?"
+        },
+        {
+          "role": "customer",
+          "text": "Neha",
+          "seconds": 4.2,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "Neha — who is the video for?"
+        },
+        {
+          "role": "customer",
+          "text": "my best friend's wedding",
+          "seconds": 1.5,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "do you want to see our collections to choose from?"
+        },
+        {
+          "role": "customer",
+          "text": "Christian Church Wedding",
+          "seconds": 2.9,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "got you\nsay that again in one line?"
+        },
+        {
+          "role": "customer",
+          "text": "only the wording",
+          "seconds": 1.9,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "text change on your collection is ₹999. here's the link: https://example.invalid/fmi-demo-payment (TEST — cannot accept payment)"
+        },
+        {
+          "role": "customer",
+          "text": "checkout",
+          "seconds": 4.3,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "text change is ₹999\nhttps://example.invalid/fmi-demo-payment (TEST — cannot accept payment)"
+        }
+      ]
+    },
+    {
+      "id": "price-question-then-pay",
+      "title": "Asks the price, then pays",
+      "failed": [],
+      "turns": [
+        {
+          "role": "FMI",
+          "text": "Hi\nYour name please?"
+        },
+        {
+          "role": "customer",
+          "text": "Imran",
+          "seconds": 4.4,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "Imran — who is the video for?"
+        },
+        {
+          "role": "customer",
+          "text": "for my brother",
+          "seconds": 3.1,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "do you want to see our collections to choose from?"
+        },
+        {
+          "role": "customer",
+          "text": "the church one",
+          "seconds": 3.4,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "got you\nsay that again in one line?"
+        },
+        {
+          "role": "customer",
+          "text": "face change",
+          "seconds": 3.3,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "text change with face is ₹1499\nhttps://example.invalid/fmi-demo-payment (TEST — cannot accept payment)"
+        },
+        {
+          "role": "customer",
+          "text": "how much is it",
+          "seconds": 3.3,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "text change with face is ₹1499\nhttps://example.invalid/fmi-demo-payment (TEST — cannot accept payment)"
+        },
+        {
+          "role": "customer",
+          "text": "ok I want to pay",
+          "seconds": 2.1,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "it's 1,499 rupees for the text change with face option. here’s your link: https://example.invalid/fmi-demo-payment (TEST — cannot accept payment) just let me know when you've sent it!"
+        }
+      ]
+    },
+    {
+      "id": "undecided-then-link",
+      "title": "Cannot decide, then sends the link",
+      "failed": [],
+      "turns": [
+        {
+          "role": "FMI",
+          "text": "Hi\nYour name please?"
+        },
+        {
+          "role": "customer",
+          "text": "Divya",
+          "seconds": 4.4,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "Divya — who is the video for?"
+        },
+        {
+          "role": "customer",
+          "text": "for my wedding",
+          "seconds": 1.6,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "do you want to see our collections to choose from?"
+        },
+        {
+          "role": "customer",
+          "text": "I can't decide",
+          "seconds": 2.2,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "oh! if you can't decide, check these from our insta page  \nhttps://www.instagram.com/reel/Dd9nJFRTWpB/  \n\nif you like it and want your details on it, do you want bride and groom actual faces on the video?"
+        },
+        {
+          "role": "customer",
+          "text": "the church wedding video",
+          "seconds": 2.0,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "got you\nsay that again in one line?"
+        },
+        {
+          "role": "customer",
+          "text": "text change",
+          "seconds": 3.3,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "text change is ₹999\nhttps://example.invalid/fmi-demo-payment (TEST — cannot accept payment)"
+        },
+        {
+          "role": "customer",
+          "text": "send me the link",
+          "seconds": 2.0,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "here it is: https://example.invalid/fmi-demo-payment (TEST — cannot accept payment)  \n\nonce you pay, send over your name and wedding date so I can get started."
+        }
+      ]
+    },
+    {
+      "id": "parents-full-custom",
+      "title": "Full custom for parents",
+      "failed": [],
+      "turns": [
+        {
+          "role": "FMI",
+          "text": "Hi\nYour name please?"
+        },
+        {
+          "role": "customer",
+          "text": "Rohan",
+          "seconds": 2.8,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "Rohan — who is the video for?"
+        },
+        {
+          "role": "customer",
+          "text": "I want a full custom video",
+          "seconds": 1.7,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "Got it, Rohan! That’s an exclusive personalized creative invite. \n\nWhat time are you planning to send this out?"
+        },
+        {
+          "role": "customer",
+          "text": "it is for my parents",
+          "seconds": 1.6,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "Cool, so the video is actually for your folks' wedding details but maybe they want something special too?  \n\nJust a quick thing—before we lock that full custom idea in, do you have any ideas on what theme or vibe you're going for? Like colors, outfits, or where it's happening? That helps me nail down exactly how to make yours unique."
+        },
+        {
+          "role": "customer",
+          "text": "send the payment link",
+          "seconds": 3.8,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "full custom price isn't set, so I won't guess a number\nhttps://example.invalid/fmi-demo-payment (TEST — cannot accept payment)"
+        }
+      ]
+    },
+    {
+      "id": "sister-pics-pay",
+      "title": "Sister, our pics, pay",
+      "failed": [],
+      "turns": [
+        {
+          "role": "FMI",
+          "text": "Hi\nYour name please?"
+        },
+        {
+          "role": "customer",
+          "text": "Fatima",
+          "seconds": 3.8,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "Fatima — who is the video for?"
+        },
+        {
+          "role": "customer",
+          "text": "for my sister",
+          "seconds": 1.6,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "do you want to see our collections to choose from?"
+        },
+        {
+          "role": "customer",
+          "text": "church wedding video",
+          "seconds": 2.1,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "https://www.instagram.com/reel/Dd9nJFRTWpB/\n\nThat one has crossed 100k views—super popular.\nDo you want bride and groom actual faces on the video?"
+        },
+        {
+          "role": "customer",
+          "text": "use our pics",
+          "seconds": 2.9,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "text change with face is ₹1499\nhttps://example.invalid/fmi-demo-payment (TEST — cannot accept payment)"
+        },
+        {
+          "role": "customer",
+          "text": "I want to pay",
+          "seconds": 2.8,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "text change with face is ₹1499\nhttps://example.invalid/fmi-demo-payment (TEST — cannot accept payment)"
+        }
+      ]
+    },
+    {
+      "id": "link-before-video",
+      "title": "Link before any video",
+      "failed": [],
+      "turns": [
+        {
+          "role": "FMI",
+          "text": "Hi\nYour name please?"
+        },
+        {
+          "role": "customer",
+          "text": "Vikram",
+          "seconds": 3.9,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "Vikram — who is the video for?"
+        },
+        {
+          "role": "customer",
+          "text": "send the payment link",
+          "seconds": 2.9,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "got you\nsay that again in one line?"
+        }
+      ]
+    },
+    {
+      "id": "wording-then-paid",
+      "title": "Wording, link, then I paid",
+      "failed": [],
+      "turns": [
+        {
+          "role": "FMI",
+          "text": "Hi\nYour name please?"
+        },
+        {
+          "role": "customer",
+          "text": "Lata",
+          "seconds": 4.3,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "Lata — who is the video for?"
+        },
+        {
+          "role": "customer",
+          "text": "for my wedding",
+          "seconds": 1.8,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "do you want to see our collections to choose from?"
+        },
+        {
+          "role": "customer",
+          "text": "Christian Church Wedding",
+          "seconds": 1.9,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "https://www.instagram.com/reel/Dd9nJFRTWpB/\n\ndo you want bride and groom actual faces on the video?"
+        },
+        {
+          "role": "customer",
+          "text": "names and wording",
+          "seconds": 3.0,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "text change is ₹999\nhttps://example.invalid/fmi-demo-payment (TEST — cannot accept payment)"
+        },
+        {
+          "role": "customer",
+          "text": "send the link",
+          "seconds": 1.9,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "Here's your link: https://example.invalid/fmi-demo-payment (TEST - cannot accept payment)"
+        },
+        {
+          "role": "customer",
+          "text": "I paid",
+          "seconds": 1.9,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "awesome! what time did you pay? once we have that, i'll ask for the date and venue to get started."
+        }
+      ]
+    },
+    {
+      "id": "skip-then-church-pay",
+      "title": "Skips the first pitch, then pays",
+      "failed": [],
+      "turns": [
+        {
+          "role": "FMI",
+          "text": "Hi\nYour name please?"
+        },
+        {
+          "role": "customer",
+          "text": "Kiran",
+          "seconds": 3.9,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "Kiran — who is the video for?"
+        },
+        {
+          "role": "customer",
+          "text": "groom's sister",
+          "seconds": 1.7,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "Got it! Do you want to see our collections to choose from?"
+        },
+        {
+          "role": "customer",
+          "text": "not that one",
+          "seconds": 3.1,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "who is the video for?"
+        },
+        {
+          "role": "customer",
+          "text": "church video with text change",
+          "seconds": 3.7,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "text change is ₹999\nhttps://example.invalid/fmi-demo-payment (TEST — cannot accept payment)"
+        },
+        {
+          "role": "customer",
+          "text": "pay now",
+          "seconds": 2.8,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "Just a sec, Kiran! Since you're paying for the Text Change option on that church video, here's your link: https://example.invalid/fmi-demo-payment (TEST — cannot accept payment). \n\nOnce it goes through, just send me the names and date so we can get this ready."
+        }
+      ]
+    },
+    {
+      "id": "engagement-exclusive",
+      "title": "Engagement, exclusive, payment",
+      "failed": [],
+      "turns": [
+        {
+          "role": "FMI",
+          "text": "Hi\nYour name please?"
+        },
+        {
+          "role": "customer",
+          "text": "Pooja",
+          "seconds": 4.9,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "Pooja — who is the video for?"
+        },
+        {
+          "role": "customer",
+          "text": "my engagement",
+          "seconds": 1.8,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "do you want to see our collections to choose from?"
+        },
+        {
+          "role": "customer",
+          "text": "Christian Church Wedding",
+          "seconds": 2.1,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "https://www.instagram.com/reel/Dd9nJFRTWpB/\n\ngot it. do you want bride and groom actual faces on the video?"
+        },
+        {
+          "role": "customer",
+          "text": "the exclusive video",
+          "seconds": 2.5,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "that's our full custom creative invite — totally personalised for your engagement. no fixed price, but once we get that sorted I'll send over a payment link to kick things off. \n\nwhat time did you say it is happening and where are the main shots?"
+        },
+        {
+          "role": "customer",
+          "text": "payment link please",
+          "seconds": 3.9,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "full custom price isn't set, so I won't guess a number\nhttps://example.invalid/fmi-demo-payment (TEST — cannot accept payment)"
+        }
+      ]
+    },
+    {
+      "id": "paid-with-no-order",
+      "title": "Says paid before any order",
+      "failed": [],
+      "turns": [
+        {
+          "role": "FMI",
+          "text": "Hi\nYour name please?"
+        },
+        {
+          "role": "customer",
+          "text": "Nikhil",
+          "seconds": 4.4,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "Nikhil — who is the video for?"
+        },
+        {
+          "role": "customer",
+          "text": "I have paid",
+          "seconds": 1.9,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "That's great news! Just to confirm, what time did you make that payment? I'll get everything sorted from there. 😊"
+        }
+      ]
+    }
+  ]
+}

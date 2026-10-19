@@ -1,0 +1,59 @@
+{
+  "version": 4,
+  "approved_by": "FMI owner",
+  "approved_on": "2026-10-19",
+  "knowledge_home": "hermes/skills/fmi-whatsapp-sales/SKILL.md",
+  "shop_window": {
+    "instagram_page": "https://www.instagram.com/findmyinvite.ai",
+    "lead_with": "highest instagram_views first",
+    "seeded_video": {
+      "id": "church-christian-wedding-v1",
+      "customer_name": "Christian Church Wedding",
+      "instagram_views_floor": 100000,
+      "note": "Crossed 100k views. Showcase this first. Never invent a higher count."
+    }
+  },
+  "customer_language": {
+    "say": "video",
+    "never_say": "template",
+    "internal_name_is_operator_only": true
+  },
+  "offers": {
+    "text_change": {
+      "meaning": "Reselling the listed video with names and wording changed"
+    },
+    "face_outfit_theme": {
+      "meaning": "Face, outfit and theme change on the listed video"
+    },
+    "exclusive": {
+      "meaning": "Creative personalised exclusive video for the bride/groom. High ticket."
+    }
+  },
+  "pricing_authority": {
+    "source": "hermes/skills/fmi-whatsapp-sales/SKILL.md Pricing section",
+    "prices_set": true,
+    "team_confirms_catalog_prices": false,
+    "text_change_inr": 999,
+    "face_outfit_theme_inr": 1499,
+    "exclusive_inr": null,
+    "reply": "Quote ₹999 for text change and ₹1499 for text change with face, only after they pick. Full custom has no price. Do not invent any other amount. Do not say pay first while they are still choosing."
+  },
+  "sales_funnel": {
+    "start": "payment_link",
+    "goal_for_new_customers": "Get their name, match a video, then send the payment link. That payment starts the order funnel.",
+    "do_not_collect_brief_before_payment": true,
+    "do_not_invent_prices": true
+  },
+  "opening": {
+    "ask": "Your name please?",
+    "then_ask_who_for": true,
+    "gender_tool": "A separate model tool classifies the name as boy, girl, or unknown. The reply follows that result. Do not store a name list.",
+    "cannot_decide": "oh! if you can't decide, check these from our insta page"
+  },
+  "photo_personalization": {
+    "meaning": "Requests to add or change to our pics/photos mean replacing the bride and groom throughout the chosen video, in every individual and couple scene.",
+    "scope": "Replace the bride and groom throughout the video in all individual and couple scenes using customer photos",
+    "reply": "We’ll use your photos to replace the bride and groom throughout the video, including individual and couple scenes.",
+    "ask_photo_insertion_clarification": false
+  }
+}

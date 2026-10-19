@@ -1,0 +1,19 @@
+---
+description: FMI WhatsApp customer support and Hermes integration
+globs: customer-support/**,supabase/migrations/*customer_support*
+alwaysApply: false
+---
+
+Read customer-support/AGENTS.md and customer-support/README.md before editing.
+This is the user-authorized local Qwen/Hermes support module, separate from the
+Grok Assembly/ Akay desk. Preserve that desk and existing invitation tables.
+
+Keep runtime code, persona, configuration, installation, tests, and operations
+instructions in the repository. Local ~/.hermes changes alone are not a delivery.
+Never commit secrets, WhatsApp pairing sessions, model weights, real contacts,
+local outbox databases, or private conversation logs. Keep Supabase service keys
+server-only and use the existing FMI project for authorized live setup.
+
+New persona, orchestration, and RAG work should follow the module's extension
+boundaries. Do not claim planned components are implemented. Run the support
+tests and record live verification separately from offline mocked tests.

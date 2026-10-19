@@ -1,0 +1,586 @@
+{
+  "suite": "payment-loop-1",
+  "seconds": 78.1,
+  "results": [
+    {
+      "id": "boy-text-change",
+      "title": "Boy name, text change",
+      "failed": [],
+      "turns": [
+        {
+          "role": "FMI",
+          "text": "Hi\nYour name please?"
+        },
+        {
+          "role": "customer",
+          "text": "Alex",
+          "seconds": 2.4,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "Alex — who is the video for? The bride or her relative?"
+        },
+        {
+          "role": "customer",
+          "text": "I am the bride's brother",
+          "seconds": 1.7,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "Got it, Alex. So this invitation video will be sent to guests by your sister and groomsmen? Just confirming so we can get the vibe right! Did you already pick a specific style from our Instagram page or do you need help choosing one first?"
+        },
+        {
+          "role": "customer",
+          "text": "Christian Church Wedding",
+          "seconds": 1.2,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "That's great, Alex. Our Christian Church Wedding reel has crossed 100k views—super popular for this look: https://www.instagram.com/reel/Dd9nJFRTWpB/\n\nDid you already pick which video style you want to go with?"
+        },
+        {
+          "role": "customer",
+          "text": "text change only",
+          "seconds": 1.2,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "Got it, Alex. We'll update the names and wording on that Christian Church reel so it matches your vibe perfectly. \n\nSince we're customizing this together now: who are we sending this final version to exactly—the guests at the church or just for you to review first?"
+        },
+        {
+          "role": "customer",
+          "text": "send the payment link",
+          "seconds": 1.7,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "Here is the test payment link since prices aren't set yet: https://example.invalid/fmi-demo-payment (TEST — cannot accept payment)\n\nJust let me know once it's done so we can lock in your custom names and wording!"
+        }
+      ]
+    },
+    {
+      "id": "girl-face",
+      "title": "Girl name, face and outfit",
+      "failed": [],
+      "turns": [
+        {
+          "role": "FMI",
+          "text": "Hi\nYour name please?"
+        },
+        {
+          "role": "customer",
+          "text": "Priya",
+          "seconds": 2.4,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "Priya — who is the video for? Did you already pick one from our Instagram page?"
+        },
+        {
+          "role": "customer",
+          "text": "for my sister",
+          "seconds": 1.5,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "Got it, Priya. So this invite is for your sister's wedding! \n\nDid she have a specific style or theme in mind when choosing her dress and decor?"
+        },
+        {
+          "role": "customer",
+          "text": "the church wedding video",
+          "seconds": 1.1,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "https://www.instagram.com/reel/Dd9nJFRTWpB/\n\nThat Christian Church Wedding reel looks perfect for your sister. Want to make it fully custom with just her photos, or do you want the full personalized exclusive video?"
+        },
+        {
+          "role": "customer",
+          "text": "face and outfit change",
+          "seconds": 1.0,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "Got it! Changing face and outfits is a great way to personalize that church wedding look. \n\nSince we're doing the \"exclusive\" option now for your sister's specific details: what date are you thinking of setting this invite for?"
+        },
+        {
+          "role": "customer",
+          "text": "I want to pay",
+          "seconds": 1.5,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "Here’s your payment link: https://example.invalid/fmi-demo-payment (TEST — cannot accept payment) \n\nJust let me know when it’s done! 😊"
+        }
+      ]
+    },
+    {
+      "id": "full-custom",
+      "title": "Full custom, then pay",
+      "failed": [],
+      "turns": [
+        {
+          "role": "FMI",
+          "text": "Hi\nYour name please?"
+        },
+        {
+          "role": "customer",
+          "text": "Rahul",
+          "seconds": 2.7,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "Okay Rahul! So you're making this invite for your sister's wedding then? Did you already pick which video from our Instagram page you'd like to use as the base?"
+        },
+        {
+          "role": "customer",
+          "text": "No i want full custom",
+          "seconds": 1.6,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "Got it, Rahul. That means we'll build a totally unique AI invitation just for her—no videos here. \n\nTo get started on your exclusive personalized video: who exactly is this invite for (the bride or someone else)?"
+        },
+        {
+          "role": "customer",
+          "text": "it is for my wedding",
+          "seconds": 1.3,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "Cool! Since it's for you, Rahul—that means we're building the full custom AI invitation specifically designed just for your big day. \n\nTo nail the vibe: what style are you going for? Is there a specific theme or decor idea in mind (like floral, minimal, traditional) that should be reflected in the video?"
+        },
+        {
+          "role": "customer",
+          "text": "send the payment link",
+          "seconds": 0.9,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "https://example.invalid/fmi-demo-payment (TEST — cannot accept payment)\n\nJust let me know once you've sent it so I can help lock down your date and venue next!"
+        }
+      ]
+    },
+    {
+      "id": "cannot-decide",
+      "title": "Cannot decide, then text change",
+      "failed": [],
+      "turns": [
+        {
+          "role": "FMI",
+          "text": "Hi\nYour name please?"
+        },
+        {
+          "role": "customer",
+          "text": "Meera",
+          "seconds": 2.7,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "Okay Meera! Since it's your name, is this video for you (the bride) or someone else in the family like her brother/sister/father?"
+        },
+        {
+          "role": "customer",
+          "text": "for my wedding",
+          "seconds": 1.8,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "Got it! So we are making a custom invite for your big day. Did you already pick which style of video from our Instagram page that you want to use as a base?\n\nhttps://www.instagram.com/reel/Dd9nJFRTWpB/"
+        },
+        {
+          "role": "customer",
+          "text": "I can't decide",
+          "seconds": 0.8,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "oh! if you can't decide, check these from our insta page — \n\nhttps://www.instagram.com/findmyinvite.ai"
+        },
+        {
+          "role": "customer",
+          "text": "ok text change",
+          "seconds": 0.9,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "Okay Meera. So we'll take that base video and just swap the names and wording to match your story? Got it. Does this sound like what you want before we move forward?"
+        },
+        {
+          "role": "customer",
+          "text": "payment link please",
+          "seconds": 1.4,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "Here is the payment link: https://example.invalid/fmi-demo-payment (TEST — cannot accept payment)"
+        }
+      ]
+    },
+    {
+      "id": "no-then-pay",
+      "title": "No to the reel, then pay",
+      "failed": [],
+      "turns": [
+        {
+          "role": "FMI",
+          "text": "Hi\nYour name please?"
+        },
+        {
+          "role": "customer",
+          "text": "Arjun",
+          "seconds": 2.6,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "Arjun — who is this invitation video for? The bride, the groom, or someone else in the family?"
+        },
+        {
+          "role": "customer",
+          "text": "relative of the bride",
+          "seconds": 1.5,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "Got it. So whose invite are we making exactly then?\n\nDid you already pick a style from our Insta page to start with? https://www.instagram.com/findmyinvite.ai"
+        },
+        {
+          "role": "customer",
+          "text": "no not that video",
+          "seconds": 0.9,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "Oh! If you can't decide, check these from our insta page.\nhttps://www.instagram.com/reel/Dd9nJFRTWpB/"
+        },
+        {
+          "role": "customer",
+          "text": "text change on the church one",
+          "seconds": 1.0,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "Got it — text changes for that Christian Church wedding video? Cool.\n\nWho exactly is this invite meant to reach, Arjun? Just confirming before we lock in your name and wording details."
+        },
+        {
+          "role": "customer",
+          "text": "pay now",
+          "seconds": 1.8,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "Alright! Since you want the custom text change on that church reel:\n\nhttps://example.invalid/fmi-demo-payment (TEST — cannot accept payment)\n\nLet me know once it's done, Arjun! We'll lock in your names and wording right after. 😊"
+        }
+      ]
+    },
+    {
+      "id": "pay-too-early",
+      "title": "Pay too early",
+      "failed": [],
+      "turns": [
+        {
+          "role": "FMI",
+          "text": "Hi\nYour name please?"
+        },
+        {
+          "role": "customer",
+          "text": "Alex",
+          "seconds": 2.9,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "Hey Alex! 👋  \nSince I’m guessing you’re the groom’s side (based on that name), who is this video for — the bride or someone else in her family?  \n\nAnd have you already picked a style from our Instagram page yet? 🎥✨"
+        },
+        {
+          "role": "customer",
+          "text": "just send payment",
+          "seconds": 1.8,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "Alright, Alex! Let's get your exclusive personalized invite video started. \n\nTo make sure I'm sending the right details to your bank account:  \nWhat time did you pay for this order? ⏰💸  \n\n(Once we confirm that, I'll have everything ready!)"
+        }
+      ]
+    },
+    {
+      "id": "paid-claim",
+      "title": "Paid claim",
+      "failed": [],
+      "turns": [
+        {
+          "role": "FMI",
+          "text": "Hi\nYour name please?"
+        },
+        {
+          "role": "customer",
+          "text": "Sara",
+          "seconds": 2.5,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "Sara — who is the video for? Did you already pick one from our Instagram page?"
+        },
+        {
+          "role": "customer",
+          "text": "for my wedding",
+          "seconds": 1.5,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "That's awesome! Which offer are we looking at: just changing names/text on a specific reel, or do you want that full custom exclusive creative video made specifically for your day?"
+        },
+        {
+          "role": "customer",
+          "text": "Christian Church Wedding",
+          "seconds": 1.5,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "Oh cool! That Christian Church Wedding vibe is perfect. \n\nCheck this out from our Insta page — it's already got over 100k views: https://www.instagram.com/reel/Dd9nJFRTWpB/\n\nSo, are you looking to tweak that specific reel (change names/text) or go for the full custom exclusive video with your own pics and outfits?"
+        },
+        {
+          "role": "customer",
+          "text": "text change",
+          "seconds": 1.0,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "Got it. Just swapping the text on that Christian Church Wedding reel is a quick win! \n\nWho should be in those photos—yourself, your partner, or someone else's names we can swap out?"
+        },
+        {
+          "role": "customer",
+          "text": "send the link",
+          "seconds": 1.6,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "https://example.invalid/fmi-demo-payment (TEST — cannot accept payment)\n\nJust let me know when you've clicked that to get started! What time did you manage to pay it by then?"
+        },
+        {
+          "role": "customer",
+          "text": "I paid",
+          "seconds": 1.6,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "Got it. Since the price is still being sorted out, I'll just ask: what time was your payment sent so we can lock in those text details for your Christian Church Wedding video!"
+        }
+      ]
+    },
+    {
+      "id": "our-pics",
+      "title": "Our pics, then pay",
+      "failed": [],
+      "turns": [
+        {
+          "role": "FMI",
+          "text": "Hi\nYour name please?"
+        },
+        {
+          "role": "customer",
+          "text": "Kabir",
+          "seconds": 3.1,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "Kabir — who is the video for?"
+        },
+        {
+          "role": "customer",
+          "text": "brother of the bride",
+          "seconds": 1.7,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "Got it, Kabir! So this invite is for you to send as her brother. Did you already pick a specific wedding theme or style from our Instagram page that you want us to base the AI video on?"
+        },
+        {
+          "role": "customer",
+          "text": "church video",
+          "seconds": 1.0,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "https://www.instagram.com/reel/Dd9nJFRTWpB/\n\nWhich offer do you want for this one? Just text change, face/outfit/theme swap, or go full custom exclusive from scratch?"
+        },
+        {
+          "role": "customer",
+          "text": "use our pics",
+          "seconds": 1.3,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "Got it! So we’ll use your family’s photos to replace the couple in every scene. That makes it a fully personalised video for you and her brother-in-law. \n\nJust confirm when you’ve paid, and I’ll get started on finalising everything with names, date, venue details from our chat once payment is verified."
+        },
+        {
+          "role": "customer",
+          "text": "send payment link",
+          "seconds": 1.8,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "https://example.invalid/fmi-demo-payment (TEST — cannot accept payment)\n\nGot it! Once you've paid, just let me know when the money has gone through so we can lock in your names and date for that custom video."
+        }
+      ]
+    },
+    {
+      "id": "full-custom-twice",
+      "title": "Full custom said twice",
+      "failed": [],
+      "turns": [
+        {
+          "role": "FMI",
+          "text": "Hi\nYour name please?"
+        },
+        {
+          "role": "customer",
+          "text": "Albert",
+          "seconds": 3.3,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "Albert — who is the video for?"
+        },
+        {
+          "role": "customer",
+          "text": "No i want full custom",
+          "seconds": 1.8,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "Got it, Albert! That means we're making your own exclusive personalised video from scratch. No videos here—just pure creativity based on what you tell me about the wedding vibe, outfits, and location. \n\nWhat’s the name of the couple in this story?"
+        },
+        {
+          "role": "customer",
+          "text": "No i want full custom",
+          "seconds": 2.0,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "got it — full custom, we make that from scratch\nwho is the video for?"
+        },
+        {
+          "role": "customer",
+          "text": "for my fiance",
+          "seconds": 0.7,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "cool! so who's getting married here—the bride or the groom in your story?"
+        },
+        {
+          "role": "customer",
+          "text": "payment link",
+          "seconds": 1.8,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "i'll get you a test payment link to start. just need one more detail first: what date is this wedding on? (so i can set it up right). once we have that, here's where things stand for checkout: https://example.invalid/fmi-demo-payment"
+        }
+      ]
+    },
+    {
+      "id": "straight-offer",
+      "title": "Straight offer to payment",
+      "failed": [],
+      "turns": [
+        {
+          "role": "FMI",
+          "text": "Hi\nYour name please?"
+        },
+        {
+          "role": "customer",
+          "text": "Ananya",
+          "seconds": 2.3,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "Ananya — who is the video for?"
+        },
+        {
+          "role": "customer",
+          "text": "my cousin's wedding",
+          "seconds": 1.3,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "Got it, Ananya! Did you already pick a specific video from our Instagram page to start with?"
+        },
+        {
+          "role": "customer",
+          "text": "Christian Church Wedding",
+          "seconds": 1.3,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "That Christian Church Wedding reel looks perfect. Here is the link: https://www.instagram.com/reel/Dd9nJFRTWpB/\n\nNow, which offer do you want for it — just text changes (names/wording), or face/outfit/theme change? Or are you thinking of going full custom/exclusive?"
+        },
+        {
+          "role": "customer",
+          "text": "only names and wording",
+          "seconds": 1.0,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "Got it. Just the names and wording on that reel, Ananya? That works perfectly for a cousin's wedding too.\n\nReady to get this started with payment whenever you're set!"
+        },
+        {
+          "role": "customer",
+          "text": "ok send payment",
+          "seconds": 1.3,
+          "error": ""
+        },
+        {
+          "role": "FMI",
+          "text": "https://example.invalid/fmi-demo-payment (TEST — cannot accept payment)"
+        }
+      ]
+    }
+  ]
+}

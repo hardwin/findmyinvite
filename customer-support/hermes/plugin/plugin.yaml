@@ -1,0 +1,9 @@
+name: fmi-support
+version: 1.9.2
+description: FMI customer-safe replies and support policy
+provides_hooks:
+  - post_gateway_admission
+  - pre_gateway_dispatch
+  - pre_llm_call
+  - transform_llm_output
+  - post_llm_call

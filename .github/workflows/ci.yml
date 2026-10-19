@@ -29,6 +29,11 @@ jobs:
         run: |
           node --input-type=module -e 'import fs from "node:fs"; import path from "node:path"; import ffmpeg from "ffmpeg-static"; import ffprobe from "ffprobe-static"; fs.appendFileSync(process.env.GITHUB_PATH, [path.dirname(ffmpeg), path.dirname(ffprobe.path)].join("\n") + "\n");'
       - run: npm run test:server
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: python -m pip install -r customer-support/requirements-dev.txt
+      - run: npm run test:support
       - run: npm run build
   deploy:
     if: github.ref_name == github.event.repository.default_branch && github.event_name != 'pull_request' && ((github.event_name == 'workflow_dispatch' && inputs.target == 'preview') || vars.ENABLE_PRODUCTION_DEPLOY == 'true')

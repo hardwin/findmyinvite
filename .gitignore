@@ -13,6 +13,14 @@ public/review/
 public/vendor/grapesjs/grapes.min.js
 workspace-grapes*
 
+# Local customer-support runtime and credentials are never source artifacts.
+__pycache__/
+*.pyc
+.venv*/
+customer-support/config/supabase-secrets.json
+customer-support/.runtime/
+supabase/.temp/
+
 work/assembly-inbox/*
 !work/assembly-inbox/.gitkeep
 work/assembly-jobs/

@@ -1,5 +1,12 @@
 # Cursor takeover · read this first
 
+**Customer-support work (2026-10-18):** start with
+[customer-support/README.md](customer-support/README.md) and
+[customer-support/AGENTS.md](customer-support/AGENTS.md). This module uses local
+Hermes + `qwen3.5:4b-hermes` and FMI's existing Supabase project. It is separate
+from the Grok-powered Assembly/ Akay desk described below. Do not change the
+Assembly model or copy local Hermes credentials/session files into GitHub.
+
 **Read [documents/post-handoff-changelog.md](documents/post-handoff-changelog.md) first** — current truth after `v0.9.0` (catalog published, `findmyinvite.com` live, Iteration 1). Then the [production update](docs/handoff/PRODUCTION-UPDATE.md). Serving commit is `6db0d12`. The homepage stays at `/`. `/grand-launch` replay ended 15 September 2026, 03:00 IST. Earlier old-production/9 PM status in this handoff is historical; do not redeploy the old candidate.
 
 **Grand-launch ceremony added after the v0.9.0 tag:** latest `main` includes `/grand-launch`, a three-chapter emerald/gold opening, scratch-to-launch, confetti, Home and full-invitation demo. Read [ceremony instructions](docs/handoff/GRAND-LAUNCH.md) for rehearsal and phone recording. This is presentation only; its button does not deploy or publish the catalog. Include it in the approved v1.0 production build.

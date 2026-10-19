@@ -1,0 +1,41 @@
+model:
+  default: gpt-4.1-mini
+  provider: openai
+  base_url: https://api.openai.com/v1
+agent:
+  reasoning_effort: medium
+  auto_recovery_cycles: 0
+  api_max_retries: 2
+plugins:
+  hook_callback_timeout: 450
+hooks:
+  output_spill:
+    max_chars: 24000
+display:
+  language: en
+  suppress_warning_notifications: true
+  tool_progress: 'off'
+  interim_assistant_messages: false
+  long_running_notifications: false
+  busy_ack_detail: false
+  busy_input_mode: queue
+  background_process_notifications: 'off'
+  show_reasoning: false
+  streaming: false
+  file_mutation_verifier: false
+  turn_completion_explainer: false
+streaming:
+  enabled: false
+# Customer chat gets no shell/filesystem or general-purpose agent tools. Add only
+# scoped support tools when orchestration is implemented.
+platform_toolsets:
+  whatsapp: []
+memory:
+  memory_enabled: false
+  user_profile_enabled: false
+  prefetch_spill_enabled: false
+onboarding:
+  seen:
+    profile_build_offered: true
+    busy_input_prompt: true
+    tool_progress_prompt: true

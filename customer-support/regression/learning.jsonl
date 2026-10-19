@@ -1,0 +1,10 @@
+{"at": "2026-10-19T14:03:38.902322+00:00", "suite": "payment-loop-2", "passed": 10, "total": 10, "failed": []}
+{"at": "2026-10-19T14:05:16.848203+00:00", "suite": "payment-loop-1", "passed": 10, "total": 10, "failed": []}
+{"at": "2026-10-19T14:26:04.513941+00:00", "suite": "payment-loop-1", "passed": 9, "total": 10, "failed": ["full-custom-twice"]}
+{"at": "2026-10-19T14:28:07.933511+00:00", "suite": "payment-loop-1", "passed": 10, "total": 10, "failed": []}
+{"at": "2026-10-19T14:30:07.281951+00:00", "suite": "payment-loop-2", "passed": 10, "total": 10, "failed": []}
+{"at": "2026-10-19T14:30:58.217975+00:00", "suite": "payment-loop-3", "passed": 3, "total": 3, "failed": []}
+{"at": "2026-10-19T14:45:23.022106+00:00", "suite": "payment-loop-4", "passed": 3, "total": 3, "failed": []}
+{"at": "2026-10-19T14:47:05.153870+00:00", "suite": "payment-loop-1", "passed": 10, "total": 10, "failed": []}
+{"at": "2026-10-19T14:49:16.245952+00:00", "suite": "payment-loop-2", "passed": 10, "total": 10, "failed": []}
+{"at": "2026-10-19T14:50:05.552841+00:00", "suite": "payment-loop-3", "passed": 3, "total": 3, "failed": []}

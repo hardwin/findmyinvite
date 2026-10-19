@@ -1,5 +1,10 @@
 # FindMyInvite — v0.9 pre-deployment handoff
 
+**Customer support / Hermes:** [customer-support/README.md](customer-support/README.md)
+documents the WhatsApp → local Qwen/Hermes → existing FMI Supabase integration,
+installation from a fresh clone, tests, and the planned persona/orchestration/RAG boundaries.
+It runs on a persistent support host, independently of the Vite/Vercel website.
+
 **Latest production update:** the homepage and `/grand-launch` are now publicly deployed at `findmyinvite.vercel.app`, including unlimited ceremony replays until 15 September at 3 AM IST. See [PRODUCTION-UPDATE.md](docs/handoff/PRODUCTION-UPDATE.md); it supersedes older deployed-candidate status below. Custom-domain DNS and catalog publication remain outstanding.
 
 **Start with [README_CURSOR.md](README_CURSOR.md) for the mobile/cloud takeover.** The [team documentation index](docs/handoff/index.md) contains 26 separate role documents, architecture, release/rollback procedures, risks and [15 pre-deployment test cases](docs/handoff/PREDEPLOY-15.md).
@@ -40,4 +45,3 @@ See [ITERATION-3.md](ITERATION-3.md) for before/after changes, verification evid
 Online invitations and RSVPs persist to Supabase; browser-local drafts and responses remain a separate legacy path and are not automatically migrated. Guest recovery links permit cross-device management. No accounts, email recovery or payment checkout are implemented. Backend tests use provider mocks; historical real-cloud evidence and its limits are documented in the handoff.
 
 Original reference/media source: https://zareqia.com/. No generated image or video assets were used. Downloaded videos contain embedded source branding; rights and public distribution clearance remain release gates. All 13 seeded template rows remained unpublished at handoff inspection. Historical launch proposals are superseded by the handoff index. No reference traffic, reviews or revenue claims should be represented as FindMyInvite results.
-
