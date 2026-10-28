@@ -49,6 +49,7 @@ export default function Storefront(){
  const {items,loading,error}=useCatalog();
  const q=new URLSearchParams(location.search);
  const aisle=aisleFromQuery();
+ const listAisle:ShopAisle=aisle==='home'?'kind':aisle;
  const productId=q.get('product')||'';
  const [searchOpen,setSearchOpen]=useState(Boolean(q.get('q')));
  const [filters,setFilters]=useState(()=>({
@@ -74,7 +75,7 @@ export default function Storefront(){
  }
  const formHref=(id:string)=>`/form?template=${encodeURIComponent(id)}&type=${encodeURIComponent(filters.type)}&new=1`;
  const productHref=(id:string)=>listingHref({
-  aisle:aisle==='home'?'kind':aisle,
+  aisle:listAisle,
   kind:filters.kind,
   type:filters.type,
   tradition:filters.tradition==='all'?'':filters.tradition,
@@ -158,7 +159,7 @@ export default function Storefront(){
 
  if(product)return <main className="im-shop">
   <header className="im-top im-list-top">
-   <a className="im-back" href={listingHref({aisle:aisle==='home'?'kind':aisle,kind:filters.kind,type:filters.type})} aria-label="Back">‹</a>
+   <a className="im-back" href={listingHref({aisle:listAisle,kind:filters.kind,type:filters.type})} aria-label="Back">‹</a>
    <h1>{product.name}</h1>
    <span className="im-icon" aria-hidden="true"/>
   </header>
@@ -194,13 +195,13 @@ export default function Storefront(){
    <a className="im-back" href="/" aria-label="Categories">‹</a>
    {searchOpen
     ?<input className="im-search" autoFocus value={filters.query} placeholder="Search e-invites" onChange={e=>setFilters({...filters,query:e.target.value})}/>
-    :<h1>{listingTitle(filters,aisle==='home'?'kind':aisle)}</h1>}
+    :<h1>{listingTitle(filters,listAisle)}</h1>}
    <button className="im-icon" type="button" aria-label="Search" onClick={()=>setSearchOpen(true)}><Search size={22} strokeWidth={1.8}/></button>
   </header>
   <div className="im-chips">
    <span>Sort By</span>
    {galleryTiers.map(tier=>
-    <button key={tier} type="button" className={filters.collection===tier?'on':''} onClick={()=>sync({...filters,collection:filters.collection===tier?'all':tier},aisle==='home'?'kind':aisle)}>{galleryTierLabels[tier]}</button>
+    <button key={tier} type="button" className={filters.collection===tier?'on':''} onClick={()=>sync({...filters,collection:filters.collection===tier?'all':tier},listAisle)}>{galleryTierLabels[tier]}</button>
    )}
   </div>
   <div className="im-list-shell">
