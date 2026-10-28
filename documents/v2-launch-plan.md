@@ -105,7 +105,7 @@ Do not start 2.0 coding until Ashok says the train is open (or explicitly greenl
 ### 6. Redesign template look
 **Intent:** Guest invite visual refresh — typography, spacing, section rhythm — without breaking Premium cinematic identity.  
 **Scope:** One parent Premium look (newest Assembly parent) as the redesign pilot, then roll pattern.  
-**Status 2026-10-28:** Storefront first-paint is now the shop (not a landing). Guest-invite visual pilot still pending Ashok on phone.  
+**Status 2026-10-28:** Storefront first-paint is an Instamart-style e-invite shop (Categories → price grid → form → watermark preview → pay → copy link). Guest-invite visual pilot still pending Ashok on phone.  
 **Done:** Ashok accepts redesigned demo of the pilot template on phone.  
 **Open refine:** Full redesign of all Premium vs pilot-first? Recommend **pilot → pattern**.
 
