@@ -105,7 +105,7 @@ Do not start 2.0 coding until Ashok says the train is open (or explicitly greenl
 ### 6. Redesign template look
 **Intent:** Guest invite visual refresh — typography, spacing, section rhythm — without breaking Premium cinematic identity.  
 **Scope:** One parent Premium look (newest Assembly parent) as the redesign pilot, then roll pattern.  
-**Status 2026-10-28:** Storefront first-paint is now the shop (not a landing). Guest-invite visual pilot still pending Ashok on phone.  
+**Status 2026-10-28:** Storefront first-paint is an Instamart-style e-invite shop (Categories → price grid → form → watermark preview → pay → copy link). Guest-invite visual pilot still pending Ashok on phone.  
 **Done:** Ashok accepts redesigned demo of the pilot template on phone.  
 **Open refine:** Full redesign of all Premium vs pilot-first? Recommend **pilot → pattern**.
 
@@ -155,12 +155,13 @@ Do not start 2.0 coding until Ashok says the train is open (or explicitly greenl
 **Scope:** Razorpay Standard Checkout (already researched in historical `LAUNCH-PLAN.md`). Secrets server-only; webhooks idempotent.  
 **Must support SKUs:** Assembly Proceed ₹499 · Classic / Royal list prices · **Face Swap add-on ₹300** (#9).  
 **OSS first:** Razorpay (India default) — not Stripe-first unless Ashok flips.  
-**Status 2026-10-28:** Website Create order → checkout → signature verify → `payments` entitlement is in code. Assembly ₹499 and Face Swap ₹300 SKUs are not charged yet.  
+**Status 2026-10-28:** Website Create order → checkout → signature verify → `payments` entitlement is in code. Create resume skips a second checkout after capture. Assembly ₹499 and Face Swap ₹300 SKUs are not charged yet.  
 **Done:** Test-mode order → verified capture → entitlement row; live ₹1 smoke after Ashok YES.
 
 ### 12. Payment flow + funnel
 **Intent:** Product journeys that charge: Assembly **Proceed (Rs. 499)** + storefront Classic/Royal + **Face Swap ₹300** before publish.  
 **Scope:** Order → checkout → webhook → unlock generate/publish/face-job; recovery if tab closes. Funnel events stay off invitations DB (basic `/akay` only — #14).  
+**Status 2026-10-28:** Website Create recovers a captured payment (resume + webhook) and publishes without a second checkout. Paid Assembly generate and Face Swap upsell are still uncharged.  
 **Done:** Host completes paid Assembly generate, one paid publish, and optional Face Swap upsell without Akay hand-holding.  
 **Depends on:** #11. Prices: Classic ₹1,199 / Royal ₹1,499 / Assembly ₹499 / Face Swap ₹300.
 

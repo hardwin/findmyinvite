@@ -1,4 +1,4 @@
-import {galleryTierFor,type GalleryTier} from './data';
+import {galleryTierFor,galleryTierLabels,type GalleryTier} from './data';
 
 export type ShopKind='website'|'video';
 export type Tradition='christian'|'hindu'|'muslim'|'interfaith';
@@ -16,10 +16,24 @@ export type ShopTemplate={
  video?:string;
 };
 
-export const shopKinds:Array<[ShopKind,string]>=[['website','Wedding Websites'],['video','Wedding Invitation Videos']];
+export const shopKinds:Array<[ShopKind,string]>=[['website','Wedding Websites'],['video','Invitation Videos']];
 export const traditions:Array<[Tradition,string]>=[['christian','Christian'],['hindu','Hindu'],['muslim','Muslim'],['interfaith','Interfaith']];
 export const palettes:Array<[Palette,string]>=[['ivory','Ivory'],['sage','Sage'],['burgundy','Burgundy'],['gold','Gold'],['navy','Navy'],['blush','Blush']];
 export const settings:Array<[Setting,string]>=[['church','Church'],['garden','Garden'],['temple','Temple'],['palace','Palace'],['beach','Beach'],['minimal','Minimal']];
+export const occasionAisles:Array<[string,string]>=[
+ ['wedding','Wedding'],
+ ['engagement','Engagement'],
+ ['wedding-reception','Wedding & Reception'],
+ ['reception','Reception'],
+ ['birthday','Birthday'],
+ ['anniversary','Anniversary'],
+ ['housewarming','Housewarming'],
+ ['baby-shower','Baby shower'],
+ ['party','Party'],
+ ['opening-ceremony','Opening'],
+ ['custom','Custom']
+];
+export type ShopAisle='kind'|'occasion'|'tradition'|'collection'|'setting';
 
 const hinduHint=/temple|sanctuary|sita|kalyanam|ponmaalai|gopuram|mehendi|sangeet|heritage-wedding|royal-temple|tamil ponnu/i;
 const muslimHint=/nikah|moonlit|jaali/i;
@@ -102,7 +116,16 @@ export type ShopFilters={
 };
 
 export function defaultShopFilters(kind:ShopKind='website'):ShopFilters{
- return {kind,tradition:kind==='website'?'christian':'all',collection:'all',palette:'all',setting:'all',type:'wedding',query:''};
+ return {kind,tradition:'all',collection:'all',palette:'all',setting:'all',type:'wedding',query:''};
+}
+
+export function listingTitle(filters:ShopFilters,aisle:ShopAisle|'all'){
+ if(filters.query)return filters.query;
+ if(aisle==='kind')return filters.kind==='video'?'Invitation Videos':'Wedding Websites';
+ if(aisle==='tradition')return (traditions.find(([id])=>id===filters.tradition)||['','All traditions'])[1];
+ if(aisle==='collection')return filters.collection==='all'?'All collections':galleryTierLabels[filters.collection];
+ if(aisle==='setting')return (settings.find(([id])=>id===filters.setting)||['','All settings'])[1];
+ return (occasionAisles.find(([id])=>id===filters.type)||['','E-invites'])[1];
 }
 
 export function filterShop(items:ShopTemplate[],filters:ShopFilters){

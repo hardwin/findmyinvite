@@ -8,6 +8,16 @@ Soul: [akay-soul.md](akay-soul.md) · standing facts: [project-context.md](proje
 
 Read this before `docs/handoff/STATUS.md`. The v0.9.0 handoff is the frozen baseline; this file is the current truth after that tag.
 
+## 2026-10-28 — Instamart-style e-invite shop
+
+- `/` is Categories: shop-by-occasion arches, occasion/tradition/collection/setting tiles, bottom nav. `/templates` is the product grid (image, price, +). Add opens `/form`.
+- Form: selected design, watermarked preview, details, sticky **Proceed to pay**. After capture, copy the live link. Helper essays removed from Form/Create.
+
+## 2026-10-28 — Create payment resume (no second checkout)
+
+- Form/Editor Create now asks `/api/payments?action=resume` before opening Razorpay. A captured payment for that slug (verify or webhook) publishes the page without charging again.
+- Browser remembers the last payment id per slug. Studio publish receives `paymentId` when one exists. Assembly ₹499 and Face Swap ₹300 stay uncharged.
+
 ## 2026-10-28 — Storefront shop + paid Create (Razorpay)
 
 - Homepage is no longer a marketing landing. `/` and `/templates` are the same Etsy-style shop: **Wedding Websites** (default) and **Wedding Invitation Videos**, left filters, Indian Christian UI (groom/bride, church, Holy Matrimony).

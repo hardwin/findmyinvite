@@ -55,7 +55,7 @@ export function verifyCheckoutSignature({orderId,paymentId,signature},env=proces
 }
 
 export function verifyWebhookSignature(rawBody,signature,env=process.env){
- const secret=env.RAZORPAY_WEBHOOK_SECRET;
+ const secret=cleanSecret(env.RAZORPAY_WEBHOOK_SECRET);
  if(!secret)throw new HttpError(503,'Payment notifications are not configured yet.');
  const expected=createHmac('sha256',secret).update(String(rawBody||'')).digest('hex');
  if(!equal(signature,expected))throw new HttpError(400,'Payment notification could not be verified.');
@@ -79,13 +79,17 @@ export async function createRazorpayOrder({amount,currency='INR',receipt,notes},
  return razorpayRequest('orders',{amount:paise,currency,receipt,notes},env);
 }
 
-export async function requireCapturedPayment({slug,paymentId}){
+export async function findCapturedPayment({slug,paymentId}){
  if(!databaseConfigured())throw new HttpError(503,'Publishing is not configured yet.');
  const query=paymentId
   ?'payments?razorpay_payment_id=eq.'+encodeURIComponent(paymentId)+'&status=eq.captured&select=*&limit=1'
   :'payments?slug=eq.'+encodeURIComponent(slug)+'&status=eq.captured&select=*&order=created_at.desc&limit=1';
  const rows=await db(query);
- const row=rows?.[0];
+ return rows?.[0]||null;
+}
+
+export async function requireCapturedPayment({slug,paymentId}){
+ const row=await findCapturedPayment({slug,paymentId});
  if(!row)throw new HttpError(402,'Pay to create this invitation page.');
  if(row.slug&&row.slug!==slug)throw new HttpError(409,'This payment belongs to a different address.');
  return row;
