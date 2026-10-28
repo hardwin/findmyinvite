@@ -6,32 +6,22 @@
 .te-mode-switch{display:flex;border:1px solid #dfe5da;border-radius:9px;padding:3px;background:#f5f7f1}.te-actions .te-mode-switch button{min-height:31px;padding:0 10px;border:0;background:transparent;font-size:11px}.te-actions .te-mode-switch button[aria-pressed=true]{background:#284b3c;color:white}.te-form-panel{overflow:auto;padding:40px max(24px,calc((100% - 780px)/2));background:#faf9f6}.te-form-intro h1{font:38px Georgia;margin:12px 0}.te-form-intro p{color:#748077;line-height:1.6;font-size:13px}.te-form-panel form{display:grid;gap:18px;margin-top:30px}.te-form-panel label{display:grid;gap:8px;font-size:13px;color:#435847}.te-form-panel input,.te-form-panel textarea{font:16px/1.5 Arial;padding:12px;border:1px solid #d8dfd2;border-radius:9px;background:white;width:100%;box-sizing:border-box}.te-form-panel fieldset{border:1px solid #dfe3d6;border-radius:12px;padding:20px;display:grid;gap:18px}.te-form-panel legend{font:21px Georgia;padding:0 8px}.te-form-event{display:grid;gap:12px;padding:15px 0;border-bottom:1px solid #e3e6dd}.te-form-footer{display:flex;gap:12px;flex-wrap:wrap;align-items:center;padding-bottom:35px}.te-form-footer>button:not(.te-publish){border:0;background:none;color:#31553e}.te-form-footer>span{font-size:12px;color:#647360}.te-native{height:100%;overflow:auto;position:relative;isolation:isolate;transform:translateZ(0)}.te-native .invitation-page{height:auto}.te-native .ne-editable{cursor:text;outline:1px dashed #b88b54;outline-offset:3px}.te-native .ne-editable:hover,.te-native .ne-editable:focus{outline:2px solid #b88b54}.te-native .reveal{opacity:1;transform:none}.te-native [data-section]{scroll-margin-top:20px}.te-canvas[hidden]{display:none}.te-choice{position:fixed;inset:0;z-index:200;background:#10291f80;display:grid;place-items:center;padding:20px;backdrop-filter:blur(5px)}.te-choice-card{background:#fffef9;border-radius:22px;padding:30px;width:min(460px,100%);color:#294334}.te-choice-card h2{font:30px Georgia;margin:15px 0}.te-choice-card p{font-size:14px;color:#687568;line-height:1.6}.te-choice-card a{display:block;border:1px solid #d9e0d1;border-radius:12px;padding:18px;margin-top:12px;text-decoration:none;color:inherit}.te-choice-card a:hover{background:#edf2e8}.te-choice-card strong{display:block;font-size:17px;margin-bottom:5px}.te-choice-card span{font-size:12px}.te-choice-card>button{float:right;border:0;background:none;padding:6px;font-size:20px}.card-royal-temple{background-size:cover;background-position:center}.te-actions>button[aria-label="Undo last text edit"]{flex-shrink:0}@media(max-width:700px){.te-header{flex-wrap:wrap;height:auto;padding:8px 10px;gap:6px}.te-shell{grid-template-rows:96px 48px 1fr}.te-logo{font-size:17px}.te-actions{gap:3px}.te-actions>button{padding:0 6px}.te-actions>button span{display:none}.te-mode-switch button{padding:0 7px!important}.te-form-panel{padding:24px 18px}.te-form-intro h1{font-size:30px}}
 
 .te-native-date{position:sticky;top:0;z-index:30;display:flex;justify-content:center;gap:8px;padding:8px;background:#f7f5fa}.te-native-date button{border:1px solid #dfd7ea;border-radius:20px;padding:7px 12px;background:white;font-size:12px}
-.te-form-mode{grid-template-columns:1fr;grid-template-rows:56px 1fr;font-family:system-ui,-apple-system,sans-serif;background:#fff}
-.te-form-mode .te-sections{display:none}
-.te-form-mode .te-header{padding:0 12px;background:#fff}
-.te-form-mode .te-logo{font:700 18px system-ui,sans-serif}
-.te-form-mode .te-save-status,.te-form-mode .te-mode-switch,.te-form-mode .te-actions>button:not(.te-publish){display:none}
-.te-mart{padding:12px 16px 108px;background:#fff;overflow:auto}
-.te-mart-sku{display:flex;gap:12px;align-items:center;margin-bottom:12px}
-.te-mart-sku img{width:64px;height:64px;object-fit:cover;border-radius:12px;background:#eef6fc}
-.te-mart-sku b{display:block;font:700 15px/1.3 system-ui,sans-serif}
-.te-mart-sku strong{display:block;margin-top:4px;font:700 16px system-ui,sans-serif}
-.te-mart-preview{height:min(52svh,420px);overflow:hidden;border-radius:16px;background:#f3f5f8;margin:0 0 16px}
+.te-form-mode{grid-template-columns:1fr;grid-template-rows:1fr;font-family:system-ui,-apple-system,sans-serif;background:#fff;height:100dvh;max-width:430px;margin:0 auto}
+.te-form-mode .te-sections,.te-form-mode .te-header{display:none}
+.te-mart{padding:0 0 132px;background:#fff;overflow:auto}
+.te-mart-preview{height:min(42svh,340px);overflow:hidden;border-radius:16px;background:#f3f5f8;margin:0 16px 16px}
 .te-mart-preview .te-native,.te-mart-preview .invitation-page{transform:scale(.42);transform-origin:top center}
-.te-mart form{display:grid;gap:14px}
+.te-mart form{display:grid;gap:14px;padding:0 16px;margin:0}
 .te-mart label{display:grid;gap:6px;font:600 13px system-ui,sans-serif;color:#374151}
 .te-mart input,.te-mart textarea{font:16px/1.4 system-ui,sans-serif;padding:12px;border:1px solid #e5e7eb;border-radius:10px;background:#fff}
-.te-mart-bar{position:fixed;left:0;right:0;bottom:0;z-index:25;display:flex;align-items:center;gap:12px;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:#fff;border-top:1px solid #eef0f3}
-.te-mart-bar span{font:700 18px system-ui,sans-serif;white-space:nowrap}
-.te-mart-pay{flex:1;border:0;background:#2563eb;color:#fff;border-radius:12px;min-height:48px;padding:0 16px;font:700 16px system-ui,sans-serif}
 .te-pay-sheet{padding:24px 18px 18px;border-radius:20px 20px 0 0;max-width:430px}
-.te-pay-sheet .te-mart-pay{width:100%;margin-top:16px}
+.te-pay-sheet .im-slide{width:100%;margin:16px 0 0}
 .te-design-art img{width:100%;height:100%;object-fit:cover}
 .fmi-wm{position:relative;isolation:isolate}
 .fmi-wm:not(.is-live)::after{content:'PREVIEW';position:absolute;inset:0;z-index:5;pointer-events:none;display:grid;place-items:center;font:800 18px/1 system-ui,sans-serif;letter-spacing:.18em;color:#ffffffd9;text-shadow:0 1px 8px #0008;background:repeating-linear-gradient(-24deg,transparent 0 42px,#00000014 42px 84px)}
 @media(min-width:860px){
- .te-mart-bar,.te-form-mode .te-header{max-width:430px;margin:0 auto}
- .te-form-mode{max-width:430px;margin:0 auto}
+ .te-form-mode,.im-cart-pay{max-width:430px;margin-left:auto;margin-right:auto}
+ .im-cart-pay{left:50%;right:auto;width:430px;transform:translateX(-50%)}
 }
 
 .te-face-swap{margin:18px 0;padding:16px;border:1px solid #e2e6da;border-radius:14px;background:#f7f8f3}
