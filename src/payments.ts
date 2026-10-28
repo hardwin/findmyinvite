@@ -2,6 +2,7 @@ import {readSession} from './auth-session';
 import {skuFor} from './shop';
 
 export type CheckoutOrder={keyId:string;order_id:string;orderId:string;amount:number;currency:string;label:string;slug:string};
+const paymentMemory='findmyinvite-payments-v1';
 
 type RazorpayCheckout={
  open:()=>void;
@@ -44,6 +45,40 @@ export function loadRazorpay():Promise<void>{
  });
 }
 
+function rememberedPayment(slug:string){
+ try{
+  const rows=JSON.parse(localStorage.getItem(paymentMemory)||'{}');
+  const id=rows?.[slug];
+  return typeof id==='string'&&id?id:'';
+ }catch{return '';}
+}
+
+function rememberPayment(slug:string,paymentId:string){
+ if(!slug||!paymentId)return;
+ try{
+  const rows=JSON.parse(localStorage.getItem(paymentMemory)||'{}');
+  const next=rows&&typeof rows==='object'?rows:{};
+  next[slug]=paymentId;
+  localStorage.setItem(paymentMemory,JSON.stringify(next));
+ }catch{/* browser memory is best-effort */}
+}
+
+export async function resumeWebsitePayment(slug:string,paymentId?:string):Promise<{captured:boolean;paymentId:string;slug:string}>{
+ const stored=paymentId||rememberedPayment(slug);
+ const resumed=await payApi<{captured?:boolean;paymentId?:string;slug?:string}>('/api/payments?action=resume',{slug,paymentId:stored||undefined});
+ const id=resumed.paymentId||stored||'';
+ if(resumed.captured&&id)rememberPayment(slug,id);
+ return {captured:Boolean(resumed.captured),paymentId:id,slug:resumed.slug||slug};
+}
+
+export async function ensureWebsitePayment(opts:{slug:string;template:{royal?:boolean;tier?:string;video?:string;[key:string]:unknown};prefillName?:string}):Promise<{paymentId:string;slug:string}>{
+ const resumed=await resumeWebsitePayment(opts.slug);
+ if(resumed.captured)return {paymentId:resumed.paymentId,slug:resumed.slug};
+ const paid=await startWebsiteCheckout(opts);
+ rememberPayment(paid.slug||opts.slug,paid.paymentId);
+ return paid;
+}
+
 export async function startWebsiteCheckout(opts:{slug:string;template:{royal?:boolean;tier?:string;video?:string;[key:string]:unknown};prefillName?:string}):Promise<{paymentId:string;slug:string}>{
  const sku=skuFor(opts.template);
  const order=await payApi<CheckoutOrder>('/api/create-order',{sku,slug:opts.slug});
@@ -73,6 +108,7 @@ export async function startWebsiteCheckout(opts:{slug:string;template:{royal?:bo
       razorpay_payment_id:response.razorpay_payment_id,
       razorpay_signature:response.razorpay_signature
      });
+     rememberPayment(verified.slug||opts.slug,verified.paymentId);
      resolve({paymentId:verified.paymentId,slug:verified.slug});
     }catch(error){reject(error);}
    },

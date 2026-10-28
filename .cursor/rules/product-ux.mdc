@@ -9,7 +9,7 @@ alwaysApply: true
 - Custom code is for FindMyInvite-specific invitation experience, not Mixpanel clones.
 - Keep `/akay` unlinked from public pages if it remains.
 - Do not store analytics events in the guest invitations database.
-- Form/Editor **Create** opens Razorpay with no host sign-in. A browser draft token is enough; the public guest page is created only after a captured payment, then a preview + copy-link dialog. Sign in stays available for My Templates. Forgot password is backlog; do not build it until Ashok asks.
+- Form/Editor **Create** opens Razorpay with no host sign-in. A browser draft token is enough; the public guest page is created only after a captured payment, then a preview + copy-link dialog. If Create is tapped again after a captured payment (tab close, retry), skip a second checkout and publish the page. Sign in stays available for My Templates. Forgot password is backlog; do not build it until Ashok asks.
 - Homepage is the template shop (Etsy-style browse), not a marketing landing. First paint: **Wedding Websites** (default) and **Wedding Invitation Videos**. Left filters. Indian Christian UI (groom/bride, church, Holy Matrimony). Collection filters stay Premium / Elite / Free.
 - Operator Shortlist, Competitors, and Upcoming cards lead with a page preview of the existing http(s) link. Do not make those desks text-only.
 - Gallery collection tabs are Premium, Elite, Free (not Royal/Classics). Premium: Sita Kalyanam, Velicha Poove, Rosu Rosu Rosu, Gold Dream, Ponmaalai. Elite: remaining Royal designs. Free: all Classics. Retired assembly iterations stay off the gallery. The newest Premium clone is always the default Assembly parent.
