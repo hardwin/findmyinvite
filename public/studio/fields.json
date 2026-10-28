@@ -3,7 +3,7 @@
   "fields": [
     {
       "key": "groom",
-      "label": "First partner's name",
+      "label": "Groom's name",
       "section": "hero",
       "type": "text",
       "required": true,
@@ -11,7 +11,7 @@
     },
     {
       "key": "bride",
-      "label": "Second partner's name",
+      "label": "Bride's name",
       "section": "hero",
       "type": "text",
       "required": true,
@@ -43,7 +43,7 @@
     },
     {
       "key": "groomDetails",
-      "label": "First partner & family",
+      "label": "Groom and family",
       "section": "welcome",
       "type": "textarea",
       "required": false,
@@ -51,7 +51,7 @@
     },
     {
       "key": "brideDetails",
-      "label": "Second partner & family",
+      "label": "Bride and family",
       "section": "welcome",
       "type": "textarea",
       "required": false,
@@ -59,7 +59,7 @@
     },
     {
       "key": "venue",
-      "label": "Wedding venue",
+      "label": "Church or reception venue",
       "section": "venue",
       "type": "text",
       "required": true,

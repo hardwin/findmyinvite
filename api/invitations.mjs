@@ -1,5 +1,6 @@
 import {del,head} from '@vercel/blob';
 import {HttpError,promotion,configured,slugValue,tokenHash,verifyToken,validateData,validateRsvp,db,bodyJson,bearer,invitation,rate,respond,fail,method,authUser,hostId,publicData,isManagementToken} from '../server/core.mjs';
+import {requireCapturedPayment} from '../server/payments.mjs';
 async function availableTemplate(id){const rows=await db('template_catalog?id=eq.'+encodeURIComponent(id)+'&published=eq.true&select=id&limit=1');if(!rows.length)throw new HttpError(403,'This design is not currently available for publishing.');}
 const view=row=>({invitation:{...publicData(row.data),id:row.slug},slug:row.slug,published:row.published,expiresAt:row.expires_at,createdAt:row.created_at});
 function withHost(data,host){return host?{...data,_host:host}:data;}
@@ -24,7 +25,6 @@ export default async function handler(req,res){try{
    try{verifyToken(body.managementToken,previous[0].management_hash);}catch{throw new HttpError(409,'This address is already in use.');}
    return respond(res,200,view(previous[0]));
   }
-  if(!promotion().active)throw new HttpError(403,'Free creation is available during the launch offer.');
   await rate(req,'create',10,3600);
   const valid=validateData(body.data,slug);
   await availableTemplate(valid.data.template);
@@ -73,6 +73,7 @@ export default async function handler(req,res){try{
    try{await head('invitations/'+row.id+'/'+slot);}catch{throw new HttpError(400,'A photo is missing. Upload it again before saving.');}
   }
   if(body.published!==undefined&&typeof body.published!=='boolean')throw new HttpError(400,'Invalid publication status.');
+  if(body.published===true&&row.published!==true)await requireCapturedPayment({slug,paymentId:body.paymentId});
   let host=hostId(row.data);
   if(!host&&!isManagementToken(bearer(req))){const user=await authUser(bearer(req));if(user)host=user.id;}
   const rows=await db('invitations?id=eq.'+row.id,{method:'PATCH',headers:{Prefer:'return=representation'},body:{data:withHost(valid.data,host),expires_at:valid.expires_at,published:body.published??row.published,updated_at:new Date().toISOString()}});

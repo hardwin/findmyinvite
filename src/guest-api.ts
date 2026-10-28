@@ -30,15 +30,15 @@ export async function uploadPhotos(data:InviteData,credentials:GuestKey):Promise
  }
  return {...data,photos};
 }
-export async function saveCloud(data:InviteData,slug:string,published:boolean):Promise<GuestKey>{
+export async function saveCloud(data:InviteData,slug:string,published:boolean,paymentId?:string):Promise<GuestKey>{
  const session=readSession();
- if(!session?.access_token)throw new Error('Sign in to save or publish.');
+ if(!session?.access_token)throw new Error('Sign in to save a draft or create.');
  const existing=guestKeys().find(x=>x.slug===slug);
  const credentials=existing||newGuestKey(slug);
  rememberGuest(credentials);
  await api<CloudInvite>('create','',session.access_token,{slug,data:{...data,photos:data.photos.filter(x=>!x.startsWith('data:'))},managementToken:credentials.token});
  const uploaded=await uploadPhotos(data,{slug,token:session.access_token});
- await api('update',slug,session.access_token,{data:uploaded,published});
+ await api('update',slug,session.access_token,{data:uploaded,published,...(paymentId?{paymentId}:{})});
  return credentials;
 }
 export async function publishDraft(data:InviteData,slug:string):Promise<GuestKey>{

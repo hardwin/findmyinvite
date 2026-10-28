@@ -11,6 +11,7 @@ test('guest lifecycle is durable, private, idempotent and template gated',async(
  if(parsed.pathname==='/auth/v1/user'){const header=options.headers?.Authorization||options.headers?.authorization||'';if(header==='Bearer '+jwt)return new Response(JSON.stringify({id:'user-1',email:'host@example.com'}),{status:200});if(header==='Bearer '+otherJwt)return new Response(JSON.stringify({id:'user-2',email:'other@example.com'}),{status:200});return new Response('{}',{status:401});}
  if(path==='rpc/consume_rate_limit')value=true;
  else if(path==='template_catalog')value=available?[{id:'royal-prestige'}]:[];
+ else if(path==='payments'){value=[{id:'pay-1',razorpay_order_id:'order_test',razorpay_payment_id:'pay_test',status:'captured',amount:119900,currency:'INR',sku:'website-royal',slug:'test-couple'}];}
  else if(path==='invitations'){if(method==='GET')value=row?[structuredClone(row)]:[];else if(method==='POST'){if(row)return new Response('{}',{status:409});row={id:'00000000-0000-0000-0000-000000000001',created_at:new Date().toISOString(),...payload};value=[structuredClone(row)];status=201;}else if(method==='PATCH'){row={...row,...payload};value=[structuredClone(row)];}else if(method==='DELETE'){row=null;responses=[];status=204;}}
  else if(path==='responses'){if(method==='POST'){responses.push({id:'response1',created_at:new Date().toISOString(),...payload});status=201;}else value=structuredClone(responses);}
  else throw new Error('Unexpected mock path '+path);return new Response(value===null?null:JSON.stringify(value),{status});};

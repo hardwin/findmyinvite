@@ -2,7 +2,8 @@ import {isSku,liveDesign} from '../server/workspace.mjs';
 import {readFile} from 'node:fs/promises';
 import {randomUUID} from 'node:crypto';
 import {isDeepStrictEqual} from 'node:util';
-import {db,HttpError,bodyJson,respond,fail,method,bearer,tokenHash,verifyToken,rate,slugValue,validateData,promotion,invitation} from '../server/core.mjs';
+import {db,HttpError,bodyJson,respond,fail,method,bearer,tokenHash,verifyToken,rate,slugValue,validateData,invitation} from '../server/core.mjs';
+import {requireCapturedPayment} from '../server/payments.mjs';
 import {sameOrigin} from '../server/studio-auth.mjs';
 import {PILOT_TEMPLATES,HTML_TEMPLATES,EDITOR_TEMPLATES,SECTIONS,draftData,validateTemplate,genericCode} from '../server/studio-policy.mjs';
 import {prepareAgent,continueAgent,workspaceReady,readAgent,stopAgent,closeAgent} from '../server/studio-agent.mjs';
@@ -72,10 +73,10 @@ export default async function handler(req,res){let locked=null;
  await rate(req,'studio-agent',10,3600);const permitted=await db('rpc/consume_rate_limit',{method:'POST',body:{p_key:'studio-global-agent-daily',p_limit:Number(process.env.STUDIO_DAILY_RUN_LIMIT||20),p_seconds:86400}});if(!permitted)throw new HttpError(429,'The team pilot has reached its daily agent allowance. You can still edit details manually.');
  const warm=await ensureWorkspace(p);p=warm.project;const session={id:p.workspace_id};try{await continueAgent(session.id,p,body.message,body.section);p=await update(p,{session_id:session.id,run_started_at:new Date().toISOString(),run_revision:p.revision});}catch(e){await stopAndClose(session.id);await update(p,{workspace_id:null,workspace_revision:null});throw e;}return await finish(res,202,{...view(p),status:'Your invitation is being customized in a private workspace.'});}
  if(action==='publish'){
- if(!promotion().active)throw new HttpError(403,'The free launch publishing offer is not active.');
  const schema=JSON.parse(await readFile(new URL('../public/studio/fields.json',import.meta.url),'utf8'));for(const field of schema.fields.filter(f=>f.required))if(!p.data[field.key]?.trim())throw new HttpError(400,'Complete '+field.label+' in Details before publishing.');
  const slug=slugValue(body.slug),hash=tokenHash(body.managementToken);
  if(p.published_slug&&p.published_slug!==slug)throw new HttpError(409,'A published invitation address cannot change.');
+ if(!p.published_slug)await requireCapturedPayment({slug,paymentId:body.paymentId});
  // Studio publishes only its allowlisted templates; draft ownership is verified above.
  const input={...p.data,template:isSku(p.template_id)?'emerald-noir':p.template_id==='royal-temple'?'emerald-noir':p.template_id,music:['/assets/track1.mp3','/assets/track3.mp3'].includes(p.data.music)?p.data.music:'',photos:p.data.photos.filter(x=>/^\/assets\/[\w.-]+$/.test(x))};
  const valid=validateData(input,slug);valid.data.template=p.template_id;valid.data.studioId=p.id;

@@ -1,0 +1,141 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {createHmac} from 'node:crypto';
+import handler from '../api/payments.mjs';
+import createOrder from '../api/create-order.mjs';
+import verifyPayment from '../api/verify-payment.mjs';
+import {PAYMENT_SKUS,skuValue,assertCheckoutAmount,verifyCheckoutSignature,paymentsConfigured,setRazorpayFactory} from '../server/payments.mjs';
+
+const jwt='eyJhbGciOiJub25lIn0.e30.one';
+async function request(url,options={},fn=handler){
+ const res={headers:{},setHeader(k,v){this.headers[k]=v;},status(n){this.code=n;return this;},json(b){this.body=b;}};
+ await fn({url,method:options.method||'GET',headers:options.headers||{},body:options.body,socket:{remoteAddress:'127.0.0.1'}},res);
+ return res;
+}
+
+function fakeOrders(create){
+ setRazorpayFactory(()=>({orders:{create}}));
+}
+
+test('website and video SKUs are fixed INR amounts',()=>{
+ assert.equal(PAYMENT_SKUS['website-classic'].amount,119900);
+ assert.equal(PAYMENT_SKUS['website-royal'].amount,149900);
+ assert.equal(PAYMENT_SKUS['video-royal'].amount,149900);
+ assert.equal(skuValue('website-classic'),'website-classic');
+ assert.throws(()=>skuValue('free'),{status:400});
+});
+
+test('checkout amount must be at least 100 paise',()=>{
+ assert.equal(assertCheckoutAmount(100),100);
+ assert.throws(()=>assertCheckoutAmount(99),{status:400});
+ assert.throws(()=>assertCheckoutAmount(12.5),{status:400});
+});
+
+test('checkout signatures must match the Razorpay HMAC',()=>{
+ const env={RAZORPAY_KEY_ID:'rzp_test',RAZORPAY_KEY_SECRET:'secret-key'};
+ const orderId='order_1',paymentId='pay_1';
+ const signature=createHmac('sha256',env.RAZORPAY_KEY_SECRET).update(orderId+'|'+paymentId).digest('hex');
+ assert.equal(paymentsConfigured(env),true);
+ verifyCheckoutSignature({orderId,paymentId,signature},env);
+ assert.throws(()=>verifyCheckoutSignature({orderId,paymentId,signature:'deadbeef'},env),{status:400});
+ assert.throws(()=>verifyCheckoutSignature({orderId,paymentId:'',signature},env),{status:400});
+ assert.throws(()=>verifyCheckoutSignature({orderId,paymentId},env),{status:400});
+});
+
+test('payments config hides the secret and reports whether checkout can run',async()=>{
+ const env={...process.env};
+ delete process.env.RAZORPAY_KEY_ID;delete process.env.RAZORPAY_KEY_SECRET;
+ try{
+  const closed=await request('/api/payments?action=config');
+  assert.equal(closed.code,200);assert.equal(closed.body.configured,false);assert.equal(closed.body.keyId,'');
+  process.env.RAZORPAY_KEY_ID='rzp_test_key';process.env.RAZORPAY_KEY_SECRET='secret-key';
+  const open=await request('/api/payments?action=config');
+  assert.equal(open.body.configured,true);assert.equal(open.body.keyId,'rzp_test_key');
+  assert.equal(JSON.stringify(open.body).includes('secret-key'),false);
+ }finally{for(const key of Object.keys(process.env))if(!(key in env))delete process.env[key];Object.assign(process.env,env);}
+});
+
+test('order requires a signed-in host and records a Razorpay order',async t=>{
+ const env={...process.env};
+ Object.assign(process.env,{
+  SUPABASE_URL:'https://pay-test.supabase.co',
+  SUPABASE_SERVICE_ROLE_KEY:'test-service',
+  RATE_LIMIT_SECRET:'test-rate-secret-01234567890123456789',
+  RAZORPAY_KEY_ID:'rzp_test_key',
+  RAZORPAY_KEY_SECRET:'secret-key'
+ });
+ const calls=[];
+ fakeOrders(async body=>{calls.push(body);return {id:'order_test',amount:body.amount,currency:body.currency};});
+ t.mock.method(globalThis,'fetch',async(url,options={})=>{
+  const parsed=new URL(String(url));
+  if(parsed.pathname==='/auth/v1/user')return new Response(JSON.stringify({id:'user-1',email:'host@example.com'}));
+  if(parsed.pathname.endsWith('/rpc/consume_rate_limit'))return new Response('true',{headers:{'Content-Type':'application/json'}});
+  if(parsed.pathname.endsWith('/payments'))return new Response(JSON.stringify([{id:'pay-row',razorpay_order_id:'order_test',status:'created'}]),{status:201});
+  return new Response('[]');
+ });
+ try{
+  assert.equal((await request('/api/payments?action=order',{method:'POST',body:{sku:'website-classic',slug:'aaron-maria'}})).code,401);
+  const created=await request('/api/create-order',{method:'POST',headers:{authorization:'Bearer '+jwt},body:{sku:'website-classic',slug:'aaron-maria'}},createOrder);
+  assert.equal(created.code,201);assert.equal(created.body.order_id,'order_test');assert.equal(created.body.orderId,'order_test');assert.equal(created.body.amount,119900);
+  assert.equal(created.body.keyId,'rzp_test_key');
+  assert.equal(calls[0].amount,119900);
+  const tiny=await request('/api/create-order',{method:'POST',headers:{authorization:'Bearer '+jwt},body:{amount:50,currency:'INR',receipt:'tiny'}},createOrder);
+  assert.equal(tiny.code,400);
+ }finally{setRazorpayFactory();t.mock.restoreAll();for(const key of Object.keys(process.env))if(!(key in env))delete process.env[key];Object.assign(process.env,env);}
+});
+
+test('Razorpay auth failures return 401 and API errors return 500',async t=>{
+ const env={...process.env};
+ Object.assign(process.env,{
+  SUPABASE_URL:'https://pay-test.supabase.co',
+  SUPABASE_SERVICE_ROLE_KEY:'test-service',
+  RATE_LIMIT_SECRET:'test-rate-secret-01234567890123456789',
+  RAZORPAY_KEY_ID:'rzp_test_key',
+  RAZORPAY_KEY_SECRET:'secret-key'
+ });
+ t.mock.method(globalThis,'fetch',async(url)=>{
+  const parsed=new URL(String(url));
+  if(parsed.pathname==='/auth/v1/user')return new Response(JSON.stringify({id:'user-1',email:'host@example.com'}));
+  if(parsed.pathname.endsWith('/rpc/consume_rate_limit'))return new Response('true',{headers:{'Content-Type':'application/json'}});
+  return new Response('[]');
+ });
+ try{
+  fakeOrders(async()=>{const error=new Error('Authentication failed');error.statusCode=401;throw error;});
+  const unauthorized=await request('/api/create-order',{method:'POST',headers:{authorization:'Bearer '+jwt},body:{sku:'website-classic',slug:'aaron-maria'}},createOrder);
+  assert.equal(unauthorized.code,401);
+  fakeOrders(async()=>{const error=new Error('gateway');error.statusCode=502;error.error={description:'Razorpay unavailable'};throw error;});
+  const failed=await request('/api/create-order',{method:'POST',headers:{authorization:'Bearer '+jwt},body:{sku:'website-classic',slug:'aaron-maria'}},createOrder);
+  assert.equal(failed.code,500);
+ }finally{setRazorpayFactory();t.mock.restoreAll();for(const key of Object.keys(process.env))if(!(key in env))delete process.env[key];Object.assign(process.env,env);}
+});
+
+test('verify captures a matching checkout signature',async t=>{
+ const env={...process.env};
+ Object.assign(process.env,{
+  SUPABASE_URL:'https://pay-test.supabase.co',
+  SUPABASE_SERVICE_ROLE_KEY:'test-service',
+  RATE_LIMIT_SECRET:'test-rate-secret-01234567890123456789',
+  RAZORPAY_KEY_ID:'rzp_test_key',
+  RAZORPAY_KEY_SECRET:'secret-key'
+ });
+ const signature=createHmac('sha256','secret-key').update('order_test|pay_test').digest('hex');
+ const writes=[];
+ t.mock.method(globalThis,'fetch',async(url,options={})=>{
+  const parsed=new URL(String(url));
+  if(parsed.pathname==='/auth/v1/user')return new Response(JSON.stringify({id:'user-1',email:'host@example.com'}));
+  if(parsed.pathname.endsWith('/payments')){
+   writes.push({method:options.method||'GET',body:options.body?JSON.parse(options.body):undefined});
+   return new Response(JSON.stringify([{id:'pay-row',razorpay_order_id:'order_test',razorpay_payment_id:'pay_test',status:'captured',slug:'aaron-maria'}]),{status:200});
+  }
+  return new Response('[]');
+ });
+ try{
+  const verified=await request('/api/verify-payment',{method:'POST',headers:{authorization:'Bearer '+jwt},body:{slug:'aaron-maria',sku:'website-classic',razorpay_order_id:'order_test',razorpay_payment_id:'pay_test',razorpay_signature:signature}},verifyPayment);
+  assert.equal(verified.code,200);assert.equal(verified.body.ok,true);assert.equal(verified.body.paymentId,'pay_test');
+  const mismatch=await request('/api/verify-payment',{method:'POST',headers:{authorization:'Bearer '+jwt},body:{slug:'aaron-maria',sku:'website-classic',razorpay_order_id:'order_test',razorpay_payment_id:'pay_test',razorpay_signature:'deadbeef'}},verifyPayment);
+  assert.equal(mismatch.code,400);
+  assert.equal(writes.some(row=>row.body?.status==='captured'&&row.body?.razorpay_signature==='deadbeef'),false);
+  const missing=await request('/api/verify-payment',{method:'POST',headers:{authorization:'Bearer '+jwt},body:{razorpay_order_id:'order_test'}},verifyPayment);
+  assert.equal(missing.code,400);
+ }finally{t.mock.restoreAll();for(const key of Object.keys(process.env))if(!(key in env))delete process.env[key];Object.assign(process.env,env);}
+});

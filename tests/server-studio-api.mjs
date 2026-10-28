@@ -92,6 +92,11 @@ async function harness(t, changes, run, controls={}) {
       return json([row]);
     }
     if(parsed.pathname.endsWith('/studio_versions'))return json([]);
+    if(parsed.pathname.endsWith('/payments')){
+      const slug=(parsed.searchParams.get('slug')||'').replace(/^eq\./,'')||'test-couple';
+      const paymentId=(parsed.searchParams.get('razorpay_payment_id')||'').replace(/^eq\./,'')||'pay_test';
+      return json([{id:'pay-1',razorpay_order_id:'order_test',razorpay_payment_id:paymentId,status:'captured',amount:119900,currency:'INR',sku:'website-classic',slug}]);
+    }
     assert.ok(parsed.pathname.endsWith('/studio_projects'));
     if(method==='GET')return json([row]);
     if(method==='POST'){row={...row,...body};return json([row]);}

@@ -39,6 +39,7 @@
     "parse5": "8.0.0",
     "playwright-core": "^1.49.1",
     "puppeteer-core": "^24.43.1",
+    "razorpay": "^2.9.8",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "recharts": "^3.10.1",

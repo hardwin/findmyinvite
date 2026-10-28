@@ -68,9 +68,10 @@ test('navbar and save/publish copy require accounts; forgot password stays out o
  const modal=await readFile(new URL('../src/AuthModal.tsx',import.meta.url),'utf8');
  assert.equal(modal.toLowerCase().includes('forgot'),false);
  const editor=await readFile(new URL('../src/App.tsx',import.meta.url),'utf8');
- assert.match(editor,/Sign in with email and password to save a draft or publish/);
+ assert.match(editor,/Sign in with email and password to save a draft/);
  assert.match(editor,/Save draft/);
+ assert.match(editor,/Creating…':'Create'/);
  const guestApi=await readFile(new URL('../src/guest-api.ts',import.meta.url),'utf8');
  assert.match(guestApi,/newGuestKey/);
- assert.match(guestApi,/Sign in to save or publish/);
+ assert.match(guestApi,/Sign in to save a draft or create/);
 });

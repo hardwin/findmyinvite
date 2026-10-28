@@ -105,6 +105,7 @@ Do not start 2.0 coding until Ashok says the train is open (or explicitly greenl
 ### 6. Redesign template look
 **Intent:** Guest invite visual refresh — typography, spacing, section rhythm — without breaking Premium cinematic identity.  
 **Scope:** One parent Premium look (newest Assembly parent) as the redesign pilot, then roll pattern.  
+**Status 2026-10-28:** Storefront first-paint is now the shop (not a landing). Guest-invite visual pilot still pending Ashok on phone.  
 **Done:** Ashok accepts redesigned demo of the pilot template on phone.  
 **Open refine:** Full redesign of all Premium vs pilot-first? Recommend **pilot → pattern**.
 
@@ -154,6 +155,7 @@ Do not start 2.0 coding until Ashok says the train is open (or explicitly greenl
 **Scope:** Razorpay Standard Checkout (already researched in historical `LAUNCH-PLAN.md`). Secrets server-only; webhooks idempotent.  
 **Must support SKUs:** Assembly Proceed ₹499 · Classic / Royal list prices · **Face Swap add-on ₹300** (#9).  
 **OSS first:** Razorpay (India default) — not Stripe-first unless Ashok flips.  
+**Status 2026-10-28:** Website Create order → checkout → signature verify → `payments` entitlement is in code. Assembly ₹499 and Face Swap ₹300 SKUs are not charged yet.  
 **Done:** Test-mode order → verified capture → entitlement row; live ₹1 smoke after Ashok YES.
 
 ### 12. Payment flow + funnel
@@ -280,7 +282,8 @@ Prime hero ~1–2s before opening ends; start `hero.play()`; run 400–800ms tra
 | 2026-09-23 | **#9** Face Swap = ₹300 publish add-on; Preview free/pin faces; InstantID replaces pin characters; use swapped image instead of Pinterest image | Ashok |
 | 2026-09-23 | **#9** Same ₹300 = **stills + video** (opening/hero), not stills-only | Ashok |
 | 2026-09-23 | **#14** Keep `/akay` basic; no PostHog revisit for 2.0 | Ashok |
-| | #11 Razorpay confirmed | pending |
+| 2026-10-28 | **#11/#12** Website Create uses Razorpay Standard Checkout; page goes live only after captured payment | Ashok |
+| | #11 live ₹1 smoke + `016_payments.sql` on prod | pending keys/SQL |
 | 2026-09-24 | **#2** Per-template floating motifs + parallax depths + touch-spawn | Ashok A |
 | | #2 motif kit global vs per-template | **A locked** |
 | | #6 pilot-first redesign | pending |
