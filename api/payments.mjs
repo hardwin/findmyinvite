@@ -1,5 +1,5 @@
 import {HttpError,bodyJson,respond,fail,method,authUser,bearer,slugValue,rate,isManagementToken} from '../server/core.mjs';
-import {PAYMENT_SKUS,paymentsConfigured,publicKeyId,skuValue,assertCheckoutAmount,verifyCheckoutSignature,verifyWebhookSignature,createRazorpayOrder,recordPayment,requireCapturedPayment} from '../server/payments.mjs';
+import {PAYMENT_SKUS,paymentsConfigured,publicKeyId,skuValue,assertCheckoutAmount,verifyCheckoutSignature,verifyWebhookSignature,createRazorpayOrder,recordPayment,requireCapturedPayment,findCapturedPayment} from '../server/payments.mjs';
 
 export default async function handler(req,res){
  try{
@@ -34,6 +34,18 @@ export default async function handler(req,res){
     });
    }
    return respond(res,200,{ok:true});
+  }
+  if(action==='resume'){
+   method(req,['POST']);
+   await rate(req,'pay-resume',30,3600);
+   const body=await bodyJson(req);
+   const slug=slugValue(body.slug);
+   const paymentId=typeof body.paymentId==='string'&&body.paymentId?body.paymentId:undefined;
+   let row=paymentId?await findCapturedPayment({slug,paymentId}):null;
+   if(row&&row.slug&&row.slug!==slug)row=null;
+   if(!row)row=await findCapturedPayment({slug});
+   if(!row)return respond(res,200,{captured:false,slug});
+   return respond(res,200,{captured:true,paymentId:row.razorpay_payment_id||'',slug});
   }
   const token=bearer(req);
   const user=token&&!isManagementToken(token)?await authUser(token).catch(()=>null):null;

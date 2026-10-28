@@ -25,14 +25,16 @@ test('Create charges Razorpay before the public page exists',async()=>{
  const payments=await readFile(new URL('../api/payments.mjs',import.meta.url),'utf8');
  const studio=await readFile(new URL('../api/studio.mjs',import.meta.url),'utf8');
  assert.match(editor,/>Create </);
- assert.match(editor,/startWebsiteCheckout/);
+ assert.match(editor,/ensureWebsitePayment/);
  assert.match(editor,/Copy link/);
  assert.match(checkout,/\/api\/create-order/);
  assert.match(checkout,/\/api\/verify-payment/);
+ assert.match(checkout,/\/api\/payments\?action=resume/);
  assert.match(checkout,/payment\.failed/);
  assert.equal(checkout.includes('requestSignIn'),false);
  assert.equal(editor.includes('requestSignIn'),false);
  assert.match(payments,/razorpay/);
+ assert.match(payments,/action==='resume'/);
  assert.match(studio,/requireCapturedPayment/);
  assert.equal(editor.includes('Publish invitation'),false);
 });
