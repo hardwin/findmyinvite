@@ -10,8 +10,9 @@ Read this before `docs/handoff/STATUS.md`. The v0.9.0 handoff is the frozen base
 
 ## 2026-10-28 — Instamart-style e-invite shop
 
-- `/` is Categories: shop-by-occasion arches, occasion/tradition/collection/setting tiles, bottom nav. `/templates` is the product grid (image, price, +). Add opens `/form`.
-- Form: selected design, watermarked preview, details, sticky **Proceed to pay**. After capture, copy the live link. Helper essays removed from Form/Create.
+- Full shop chrome matches Instamart, not the cream Holy Matrimony landing. No gold header on `/`, `/templates`, or `/form`.
+- `/` is Categories: shop-by-store arches, occasion/tradition/collection/setting tiles, bottom nav. `/templates` is the listing (left rail, image, price, +). Image opens the product page (ADD). `+` / ADD opens `/form`.
+- Form is the cart: CART tab, green saved banner, line item, watermarked preview, **Pay using Razorpay**, sticky **Slide to Pay | ₹**. After capture, copy the live link. Helper essays removed from Form/Create.
 
 ## 2026-10-28 — Create payment resume (no second checkout)
 
