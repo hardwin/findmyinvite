@@ -4,17 +4,13 @@ import {createHmac} from 'node:crypto';
 import handler from '../api/payments.mjs';
 import createOrder from '../api/create-order.mjs';
 import verifyPayment from '../api/verify-payment.mjs';
-import {PAYMENT_SKUS,skuValue,assertCheckoutAmount,verifyCheckoutSignature,paymentsConfigured,setRazorpayFactory} from '../server/payments.mjs';
+import {PAYMENT_SKUS,skuValue,assertCheckoutAmount,verifyCheckoutSignature,paymentsConfigured} from '../server/payments.mjs';
 
 const jwt='eyJhbGciOiJub25lIn0.e30.one';
 async function request(url,options={},fn=handler){
  const res={headers:{},setHeader(k,v){this.headers[k]=v;},status(n){this.code=n;return this;},json(b){this.body=b;}};
  await fn({url,method:options.method||'GET',headers:options.headers||{},body:options.body,socket:{remoteAddress:'127.0.0.1'}},res);
  return res;
-}
-
-function fakeOrders(create){
- setRazorpayFactory(()=>({orders:{create}}));
 }
 
 test('website and video SKUs are fixed INR amounts',()=>{
@@ -65,11 +61,12 @@ test('order requires a signed-in host and records a Razorpay order',async t=>{
   RAZORPAY_KEY_SECRET:'secret-key'
  });
  const calls=[];
- fakeOrders(async body=>{calls.push(body);return {id:'order_test',amount:body.amount,currency:body.currency};});
  t.mock.method(globalThis,'fetch',async(url,options={})=>{
   const parsed=new URL(String(url));
+  calls.push({host:parsed.hostname,path:parsed.pathname,method:options.method||'GET',body:options.body?JSON.parse(options.body):undefined});
   if(parsed.pathname==='/auth/v1/user')return new Response(JSON.stringify({id:'user-1',email:'host@example.com'}));
   if(parsed.pathname.endsWith('/rpc/consume_rate_limit'))return new Response('true',{headers:{'Content-Type':'application/json'}});
+  if(parsed.hostname==='api.razorpay.com')return new Response(JSON.stringify({id:'order_test',amount:119900,currency:'INR'}),{status:200});
   if(parsed.pathname.endsWith('/payments'))return new Response(JSON.stringify([{id:'pay-row',razorpay_order_id:'order_test',status:'created'}]),{status:201});
   return new Response('[]');
  });
@@ -78,10 +75,10 @@ test('order requires a signed-in host and records a Razorpay order',async t=>{
   const created=await request('/api/create-order',{method:'POST',headers:{authorization:'Bearer '+jwt},body:{sku:'website-classic',slug:'aaron-maria'}},createOrder);
   assert.equal(created.code,201);assert.equal(created.body.order_id,'order_test');assert.equal(created.body.orderId,'order_test');assert.equal(created.body.amount,119900);
   assert.equal(created.body.keyId,'rzp_test_key');
-  assert.equal(calls[0].amount,119900);
+  assert.ok(calls.some(c=>c.host==='api.razorpay.com'&&c.body?.amount===119900));
   const tiny=await request('/api/create-order',{method:'POST',headers:{authorization:'Bearer '+jwt},body:{amount:50,currency:'INR',receipt:'tiny'}},createOrder);
   assert.equal(tiny.code,400);
- }finally{setRazorpayFactory();t.mock.restoreAll();for(const key of Object.keys(process.env))if(!(key in env))delete process.env[key];Object.assign(process.env,env);}
+ }finally{t.mock.restoreAll();for(const key of Object.keys(process.env))if(!(key in env))delete process.env[key];Object.assign(process.env,env);}
 });
 
 test('Razorpay auth failures return 401 and API errors return 500',async t=>{
@@ -93,20 +90,21 @@ test('Razorpay auth failures return 401 and API errors return 500',async t=>{
   RAZORPAY_KEY_ID:'rzp_test_key',
   RAZORPAY_KEY_SECRET:'secret-key'
  });
+ let razorpayStatus=401;
  t.mock.method(globalThis,'fetch',async(url)=>{
   const parsed=new URL(String(url));
   if(parsed.pathname==='/auth/v1/user')return new Response(JSON.stringify({id:'user-1',email:'host@example.com'}));
   if(parsed.pathname.endsWith('/rpc/consume_rate_limit'))return new Response('true',{headers:{'Content-Type':'application/json'}});
+  if(parsed.hostname==='api.razorpay.com')return new Response(JSON.stringify({error:{description:'Razorpay unavailable'}}),{status:razorpayStatus});
   return new Response('[]');
  });
  try{
-  fakeOrders(async()=>{const error=new Error('Authentication failed');error.statusCode=401;throw error;});
   const unauthorized=await request('/api/create-order',{method:'POST',headers:{authorization:'Bearer '+jwt},body:{sku:'website-classic',slug:'aaron-maria'}},createOrder);
   assert.equal(unauthorized.code,401);
-  fakeOrders(async()=>{const error=new Error('gateway');error.statusCode=502;error.error={description:'Razorpay unavailable'};throw error;});
+  razorpayStatus=502;
   const failed=await request('/api/create-order',{method:'POST',headers:{authorization:'Bearer '+jwt},body:{sku:'website-classic',slug:'aaron-maria'}},createOrder);
   assert.equal(failed.code,500);
- }finally{setRazorpayFactory();t.mock.restoreAll();for(const key of Object.keys(process.env))if(!(key in env))delete process.env[key];Object.assign(process.env,env);}
+ }finally{t.mock.restoreAll();for(const key of Object.keys(process.env))if(!(key in env))delete process.env[key];Object.assign(process.env,env);}
 });
 
 test('verify captures a matching checkout signature',async t=>{

@@ -1,8 +1,5 @@
-import {createRequire} from 'node:module';
 import {createHmac,timingSafeEqual} from 'node:crypto';
 import {db,HttpError,databaseConfigured} from './core.mjs';
-
-const Razorpay=createRequire(import.meta.url)('razorpay');
 
 export const PAYMENT_SKUS={
  'website-classic':{amount:119900,label:'Wedding website'},
@@ -40,15 +37,6 @@ export function razorpayAuth(env=process.env){
  return 'Basic '+Buffer.from(env.RAZORPAY_KEY_ID+':'+env.RAZORPAY_KEY_SECRET).toString('base64');
 }
 
-function defaultClient(env){
- return new Razorpay({key_id:env.RAZORPAY_KEY_ID,key_secret:env.RAZORPAY_KEY_SECRET});
-}
-
-let clientFactory=defaultClient;
-export function setRazorpayFactory(fn){
- clientFactory=typeof fn==='function'?fn:defaultClient;
-}
-
 export function verifyCheckoutSignature({orderId,paymentId,signature},env=process.env){
  if(!paymentsConfigured(env))throw new HttpError(503,'Payments are not configured yet.');
  if(typeof orderId!=='string'||!orderId||typeof paymentId!=='string'||!paymentId||typeof signature!=='string'||!signature)throw new HttpError(400,'Payment confirmation is incomplete.');
@@ -63,22 +51,6 @@ export function verifyWebhookSignature(rawBody,signature,env=process.env){
  if(!equal(signature,expected))throw new HttpError(400,'Payment notification could not be verified.');
 }
 
-function razorpayFailure(error){
- if(error instanceof HttpError)return error;
- const code=Number(error?.statusCode||error?.status||error?.error?.statusCode);
- const description=error?.error?.description||error?.error?.reason||error?.message||'Could not start payment. Please try again.';
- if(code===401)return new HttpError(401,'Razorpay authentication failed.');
- return new HttpError(500,description);
-}
-
-export async function createRazorpayOrder({amount,currency='INR',receipt,notes},env=process.env){
- if(!paymentsConfigured(env))throw new HttpError(503,'Payments are not configured yet.');
- const paise=assertCheckoutAmount(amount);
- try{
-  return await clientFactory(env).orders.create({amount:paise,currency,receipt,notes});
- }catch(error){throw razorpayFailure(error);}
-}
-
 export async function razorpayRequest(path,body,env=process.env){
  const response=await fetch('https://api.razorpay.com/v1/'+path,{
   method:'POST',
@@ -89,6 +61,12 @@ export async function razorpayRequest(path,body,env=process.env){
  if(response.status===401)throw new HttpError(401,'Razorpay authentication failed.');
  if(!response.ok)throw new HttpError(500,value.error?.description||'Could not start payment. Please try again.');
  return value;
+}
+
+export async function createRazorpayOrder({amount,currency='INR',receipt,notes},env=process.env){
+ if(!paymentsConfigured(env))throw new HttpError(503,'Payments are not configured yet.');
+ const paise=assertCheckoutAmount(amount);
+ return razorpayRequest('orders',{amount:paise,currency,receipt,notes},env);
 }
 
 export async function requireCapturedPayment({slug,paymentId}){
