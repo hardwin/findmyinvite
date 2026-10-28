@@ -30,6 +30,8 @@ test('Create charges Razorpay before the public page exists',async()=>{
  assert.match(checkout,/\/api\/create-order/);
  assert.match(checkout,/\/api\/verify-payment/);
  assert.match(checkout,/payment\.failed/);
+ assert.equal(checkout.includes('requestSignIn'),false);
+ assert.equal(editor.includes('requestSignIn'),false);
  assert.match(payments,/razorpay/);
  assert.match(studio,/requireCapturedPayment/);
  assert.equal(editor.includes('Publish invitation'),false);

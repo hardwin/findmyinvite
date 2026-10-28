@@ -51,7 +51,7 @@ test('payments config hides the secret and reports whether checkout can run',asy
  }finally{for(const key of Object.keys(process.env))if(!(key in env))delete process.env[key];Object.assign(process.env,env);}
 });
 
-test('order requires a signed-in host and records a Razorpay order',async t=>{
+test('order records a Razorpay order without a host account',async t=>{
  const env={...process.env};
  Object.assign(process.env,{
   SUPABASE_URL:'https://pay-test.supabase.co',
@@ -71,8 +71,7 @@ test('order requires a signed-in host and records a Razorpay order',async t=>{
   return new Response('[]');
  });
  try{
-  assert.equal((await request('/api/payments?action=order',{method:'POST',body:{sku:'website-classic',slug:'aaron-maria'}})).code,401);
-  const created=await request('/api/create-order',{method:'POST',headers:{authorization:'Bearer '+jwt},body:{sku:'website-classic',slug:'aaron-maria'}},createOrder);
+  const created=await request('/api/create-order',{method:'POST',body:{sku:'website-classic',slug:'aaron-maria'}},createOrder);
   assert.equal(created.code,201);assert.equal(created.body.order_id,'order_test');assert.equal(created.body.orderId,'order_test');assert.equal(created.body.amount,119900);
   assert.equal(created.body.keyId,'rzp_test_key');
   assert.ok(calls.some(c=>c.host==='api.razorpay.com'&&c.body?.amount===119900));

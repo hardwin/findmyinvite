@@ -14,7 +14,7 @@ Read this before `docs/handoff/STATUS.md`. The v0.9.0 handoff is the frozen base
 - Hosts fill the form, then **Create**. Create opens Razorpay Standard Checkout. The public guest page is created only after a captured payment. Success dialog shows a preview iframe and Copy link.
 - New `api/payments.mjs` + `supabase/016_payments.sql`. Secrets: `RAZORPAY_KEY_ID`, `RAZORPAY_KEY_SECRET`, optional `RAZORPAY_WEBHOOK_SECRET`. Public key only may also be `VITE_RAZORPAY_KEY_ID`. Standard Checkout aliases: `POST /api/create-order`, `POST /api/verify-payment`. Prices stay Classic ₹1,199 / Royal ₹1,499. Assembly Proceed ₹499 still has no gateway. Test keys live in gitignored `.env`; copy `.env.example`. Do not commit secrets.
 - `016_payments.sql` must be applied to prod `qqvcptjkfcjkwbkookcm` before live charges work. Live ₹1 smoke waits on Ashok YES after keys + table exist.
-- Standing UX: Create, not Publish, on the host website path. Collection filters remain Premium / Elite / Free.
+- Standing UX: Create, not Publish, on the host website path. Collection filters remain Premium / Elite / Free. Create/Razorpay does not require host sign-in (Ashok 2026-10-28).
 
 ## 2026-09-26 — Visual storyboard collaboration and approval enforcement
 - Chat now develops ideas into 2–6 shots; no forced three-to-five-shot entrance or compulsory door. `propose_storyboard` saves and paints in one action. Revisions anchor to the previous sheet and keep explicit continuity (camera, framing, location, subject placement).

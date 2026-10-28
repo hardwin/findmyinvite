@@ -1,4 +1,4 @@
-import {accessToken,readSession,requestSignIn} from './auth-session';
+import {readSession} from './auth-session';
 import {skuFor} from './shop';
 
 export type CheckoutOrder={keyId:string;order_id:string;orderId:string;amount:number;currency:string;label:string;slug:string};
@@ -20,13 +20,9 @@ function publicKeyId(order?:{keyId?:string}){
 
 async function payApi<T>(path:string,body?:unknown):Promise<T>{
  const session=readSession();
- if(!session?.access_token){
-  requestSignIn('signup');
-  throw new Error('Sign in to create your invitation.');
- }
  const response=await fetch(path,{
   method:body?'POST':'GET',
-  headers:{...(body?{'Content-Type':'application/json'}:{}),Authorization:'Bearer '+session.access_token},
+  headers:{...(body?{'Content-Type':'application/json'}:{}),...(session?.access_token?{Authorization:'Bearer '+session.access_token}:{})},
   body:body?JSON.stringify(body):undefined,
   cache:'no-store'
  });
@@ -49,7 +45,6 @@ export function loadRazorpay():Promise<void>{
 }
 
 export async function startWebsiteCheckout(opts:{slug:string;template:{royal?:boolean;tier?:string;video?:string;[key:string]:unknown};prefillName?:string}):Promise<{paymentId:string;slug:string}>{
- if(!accessToken()){requestSignIn('signup');throw new Error('Sign in to create your invitation.');}
  const sku=skuFor(opts.template);
  const order=await payApi<CheckoutOrder>('/api/create-order',{sku,slug:opts.slug});
  const key=publicKeyId(order);

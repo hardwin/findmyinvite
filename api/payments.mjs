@@ -1,4 +1,4 @@
-import {HttpError,bodyJson,respond,fail,method,authUser,bearer,slugValue,rate} from '../server/core.mjs';
+import {HttpError,bodyJson,respond,fail,method,authUser,bearer,slugValue,rate,isManagementToken} from '../server/core.mjs';
 import {PAYMENT_SKUS,paymentsConfigured,publicKeyId,skuValue,assertCheckoutAmount,verifyCheckoutSignature,verifyWebhookSignature,createRazorpayOrder,recordPayment,requireCapturedPayment} from '../server/payments.mjs';
 
 export default async function handler(req,res){
@@ -35,14 +35,15 @@ export default async function handler(req,res){
    }
    return respond(res,200,{ok:true});
   }
-  const user=await authUser(bearer(req));
-  if(!user)throw new HttpError(401,'Sign in to continue.');
+  const token=bearer(req);
+  const user=token&&!isManagementToken(token)?await authUser(token).catch(()=>null):null;
   if(action==='order'){
    method(req,['POST']);
    if(!paymentsConfigured())throw new HttpError(503,'Payments are not configured yet.');
    await rate(req,'pay',20,3600);
    const body=await bodyJson(req);
-   let amount,currency='INR',receipt,sku=null,slug=null,label='FindMyInvite',notes={host:user.id,kind:'checkout'};
+   const host=user?.id||null;
+   let amount,currency='INR',receipt,sku=null,slug=null,label='FindMyInvite',notes={host,kind:'checkout'};
    if(body.sku){
     sku=skuValue(body.sku);
     slug=slugValue(body.slug);
@@ -50,7 +51,7 @@ export default async function handler(req,res){
     amount=assertCheckoutAmount(plan.amount);
     receipt=String(body.receipt||('fmi-'+slug)).slice(0,40);
     label=plan.label;
-    notes={slug,sku,host:user.id,kind:'website-create'};
+    notes={slug,sku,host,kind:'website-create'};
    }else{
     amount=assertCheckoutAmount(body.amount);
     currency=typeof body.currency==='string'&&body.currency?body.currency:'INR';
@@ -65,7 +66,7 @@ export default async function handler(req,res){
      currency,
      sku,
      slug,
-     host:user.id
+     host
     });
    }
    return respond(res,201,{
@@ -91,7 +92,7 @@ export default async function handler(req,res){
     currency:'INR',
     sku:body.sku||null,
     slug,
-    host:user.id
+    host:user?.id||null
    });
    if(slug)await requireCapturedPayment({slug,paymentId:body.razorpay_payment_id});
    return respond(res,200,{ok:true,paymentId:saved.razorpay_payment_id,slug});
