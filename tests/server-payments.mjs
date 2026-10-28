@@ -44,7 +44,7 @@ test('payments config hides the secret and reports whether checkout can run',asy
  try{
   const closed=await request('/api/payments?action=config');
   assert.equal(closed.code,200);assert.equal(closed.body.configured,false);assert.equal(closed.body.keyId,'');
-  process.env.RAZORPAY_KEY_ID='rzp_test_key';process.env.RAZORPAY_KEY_SECRET='secret-key';
+  process.env.RAZORPAY_KEY_ID=' rzp_test_key ';process.env.RAZORPAY_KEY_SECRET='"secret-key"';
   const open=await request('/api/payments?action=config');
   assert.equal(open.body.configured,true);assert.equal(open.body.keyId,'rzp_test_key');
   assert.equal(JSON.stringify(open.body).includes('secret-key'),false);

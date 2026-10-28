@@ -7,12 +7,21 @@ export const PAYMENT_SKUS={
  'video-royal':{amount:149900,label:'Wedding invitation video'}
 };
 
+function cleanSecret(value){
+ return String(value||'').trim().replace(/^['"]|['"]$/g,'');
+}
+
+export function razorpayCredentials(env=process.env){
+ return {keyId:cleanSecret(env.RAZORPAY_KEY_ID),keySecret:cleanSecret(env.RAZORPAY_KEY_SECRET)};
+}
+
 export function paymentsConfigured(env=process.env){
- return Boolean(env.RAZORPAY_KEY_ID&&env.RAZORPAY_KEY_SECRET);
+ const {keyId,keySecret}=razorpayCredentials(env);
+ return Boolean(keyId&&keySecret);
 }
 
 export function publicKeyId(env=process.env){
- return env.RAZORPAY_KEY_ID||'';
+ return razorpayCredentials(env).keyId;
 }
 
 export function skuValue(value){
@@ -33,14 +42,15 @@ function equal(actual,expected){
 }
 
 export function razorpayAuth(env=process.env){
- if(!paymentsConfigured(env))throw new HttpError(503,'Payments are not configured yet.');
- return 'Basic '+Buffer.from(env.RAZORPAY_KEY_ID+':'+env.RAZORPAY_KEY_SECRET).toString('base64');
+ const {keyId,keySecret}=razorpayCredentials(env);
+ if(!keyId||!keySecret)throw new HttpError(503,'Payments are not configured yet.');
+ return 'Basic '+Buffer.from(keyId+':'+keySecret).toString('base64');
 }
 
 export function verifyCheckoutSignature({orderId,paymentId,signature},env=process.env){
  if(!paymentsConfigured(env))throw new HttpError(503,'Payments are not configured yet.');
  if(typeof orderId!=='string'||!orderId||typeof paymentId!=='string'||!paymentId||typeof signature!=='string'||!signature)throw new HttpError(400,'Payment confirmation is incomplete.');
- const expected=createHmac('sha256',env.RAZORPAY_KEY_SECRET).update(orderId+'|'+paymentId).digest('hex');
+ const expected=createHmac('sha256',razorpayCredentials(env).keySecret).update(orderId+'|'+paymentId).digest('hex');
  if(!equal(signature,expected))throw new HttpError(400,'Payment could not be verified.');
 }
 
