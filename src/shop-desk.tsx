@@ -20,8 +20,7 @@ export default function ShopDeskBar({query=''}:{query?:string}){
  }
  return <header className="im-desk-bar">
   <a className="im-desk-logo" href="/" aria-label="FindMyInvite">
-   <span className="im-desk-mark" aria-hidden="true">F</span>
-   <b>Find<br/>MyInvite</b>
+   <img src="/assets/findmyinvite-logo.jpg" alt="FindMyInvite" width="2158" height="729"/>
   </a>
   <a className="im-desk-loc" href="/templates?aisle=occasion&kind=website&type=wedding">
    <MapPin size={18} strokeWidth={2.2}/>

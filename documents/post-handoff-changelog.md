@@ -8,6 +8,10 @@ Soul: [akay-soul.md](akay-soul.md) · standing facts: [project-context.md](proje
 
 Read this before `docs/handoff/STATUS.md`. The v0.9.0 handoff is the frozen baseline; this file is the current truth after that tag.
 
+## 2026-10-29 — Brand logo file
+
+- Saved Ashok’s findmyinvite wordmark as `public/assets/findmyinvite-logo.jpg` (original JPEG, not regenerated). Desktop shop header, site nav, and footer use that file.
+
 ## 2026-10-29 — Instamart desktop website chrome
 
 - Phone shop stays the Instamart app (Categories, rail, +, Slide to Pay).

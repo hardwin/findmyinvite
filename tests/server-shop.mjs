@@ -17,7 +17,12 @@ test('homepage is the shop, not a marketing landing',async()=>{
  assert.match(shop,/SHOP NOW/);
  assert.match(desk,/im-desk-bar/);
  assert.match(desk,/My Cart/);
+ assert.match(desk,/findmyinvite-logo\.jpg/);
  assert.equal(desk.includes('/akay'),false);
+ const logo=await readFile(new URL('../public/assets/findmyinvite-logo.jpg',import.meta.url));
+ assert.equal(logo[0],0xff);
+ assert.equal(logo[1],0xd8);
+ assert.ok(logo.length>50000);
  assert.match(shop,/im-pdp/);
  assert.match(shop,/im-add/);
  assert.match(shop,/formHref/);
