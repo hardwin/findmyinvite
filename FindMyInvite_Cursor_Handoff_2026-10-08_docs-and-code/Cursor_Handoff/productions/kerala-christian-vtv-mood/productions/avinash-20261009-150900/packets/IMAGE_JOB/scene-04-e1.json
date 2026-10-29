@@ -1,0 +1,11 @@
+{
+  "job_type": "IMAGE_EDIT_JOB",
+  "job_id": "IMG-scene-04-e1",
+  "scene_id": "scene-04",
+  "attempt": "e1",
+  "model": "openai/gpt-image-2.5-flare",
+  "input_image": "assets/output/kerala-christian-v1/image-4.jpg",
+  "input_image_sha256": "9ca0d38b182409cbb8d979462e772fbc9658b36667ddffb23d1c8f0f5042394c",
+  "output_path": "/workspace/FindMyInvite_Cursor_Handoff_2026-10-08_docs-and-code/Cursor_Handoff/productions/kerala-christian-vtv-mood/productions/avinash-20261009-150900/assets/output/kerala-christian-v1/image-4-e1.jpg",
+  "edit_prompt": "Edit this image only minimally. Keep the groom, his pose, face, suit, the church aisle, lighting, flowers, petals, colours and the composition exactly unchanged.\nFix ONLY the floating gold calligraphy title on the right: it must read exactly two lines and nothing else —\na small first line 'Mr.Rahul' and, below it, ONE large luminous champagne-gold calligraphic line 'Rahul' (the name appears only once in the large line).\nRemove the duplicated second large 'Rahul'. Keep the same gold calligraphy style, glow, flourish underline and position, centred in the same area. No other text anywhere."
+}
