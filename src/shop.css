@@ -93,9 +93,8 @@ a.im-cta{color:#fff}
  .im-phone,.im-nav{display:none!important}
  .im-shop{max-width:none;margin:0;padding:0 0 48px;border:0;overflow-x:hidden}
  .im-desk-bar{display:flex;align-items:center;gap:22px;padding:14px 40px;position:sticky;top:0;z-index:40;background:#fff;border-bottom:1px solid #f0f0f0}
- .im-desk-logo{display:flex;align-items:center;gap:10px;flex:0 0 auto}
- .im-desk-mark{width:40px;height:40px;border-radius:10px;background:#e23744;color:#fff;display:grid;place-items:center;font:800 20px/1 system-ui,sans-serif}
- .im-desk-logo b{font:800 13px/1.15 system-ui,sans-serif;letter-spacing:-.02em}
+ .im-desk-logo{display:flex;align-items:center;flex:0 0 auto}
+ .im-desk-logo img{height:52px;width:auto;max-width:280px;object-fit:contain;display:block}
  .im-desk-loc{display:flex;align-items:center;gap:8px;min-width:160px;color:#2563eb}
  .im-desk-loc strong{display:block;font:700 14px system-ui,sans-serif;color:#111}
  .im-desk-loc small{display:block;font:12px system-ui,sans-serif;color:#6b6b6b}
