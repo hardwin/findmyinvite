@@ -12,6 +12,12 @@ test('homepage is the shop, not a marketing landing',async()=>{
  assert.match(shop,/occasionAisles/);
  assert.match(shop,/im-shop/);
  assert.match(shop,/Shop by store/i);
+ const desk=await readFile(new URL('../src/shop-desk.tsx',import.meta.url),'utf8');
+ assert.match(shop,/ShopDeskBar/);
+ assert.match(shop,/SHOP NOW/);
+ assert.match(desk,/im-desk-bar/);
+ assert.match(desk,/My Cart/);
+ assert.equal(desk.includes('/akay'),false);
  assert.match(shop,/im-pdp/);
  assert.match(shop,/im-add/);
  assert.match(shop,/formHref/);
@@ -38,6 +44,7 @@ test('Create charges Razorpay before the public page exists',async()=>{
  assert.match(editor,/fmi-wm/);
  assert.match(editor,/Pay using Razorpay/);
  assert.match(css,/PREVIEW/);
+ assert.match(css,/min-width:960px/);
  assert.match(checkout,/\/api\/create-order/);
  assert.match(checkout,/\/api\/verify-payment/);
  assert.match(checkout,/\/api\/payments\?action=resume/);
