@@ -1,0 +1,125 @@
+{
+  "production_id": "clement-anjali-20261009-101440",
+  "mode": "RECREATE_CLIENT_FILL",
+  "couple": "Clement & Anjali",
+  "invitation_order": "groom-first",
+  "phase": "VIDEO_BUILT_AWAITING_DELIVERY",
+  "updated_at": "2026-10-09T08:44:58.153166+00:00",
+  "template_sha256": "06a47bf439f4ad3ce0c52187d864019a923f4c1416c161c5ec86c546a5412c7e",
+  "source_template_sha256": "bad0d176beb1ad47e3942689f95c4153fb933f3547670a255bb7fc062f46dae4",
+  "qc_policy": "TEXT_SELF_CHECK_STILLS",
+  "continuity": "WAIVED",
+  "stills_status": "Round 1: client approved 10/11; scene-06 change (add 'God'). Round 2: scene-06 v2 'With the Blessings of God' regenerated (1 paid), text self-check PASS; sent.",
+  "open_questions": [
+    "host_lines 'Rev.Santosh Gokavi' kept as typed (no space after 'Rev.') — confirm",
+    "scene-07 ceremony board touches the right frame edge — accept or regenerate scene-07 (1 paid call)"
+  ],
+  "input_normalization": "trailing spaces trimmed (groom_name, family_lines, venue_lines, reception_lines, host_lines); '12th  November' double space -> single",
+  "video_jobs_authorized": true,
+  "paid_image_predictions": 12,
+  "paid_video_generations": 11,
+  "stills_sha256": {
+    "scene-01": "f37fb30124c47aa65fa5c554490368e1a6743ea9bc537a560df0a80b1a3129bc",
+    "scene-02": "22a379b4340b70e266bdc8ff7ca6d5855b12c6b7ecfd7a4875d18801f066fc4d",
+    "scene-03": "328d60ccb627c2f36a3fdbf398089a7bfa639b168a3c1539b4979e4b4efd8969",
+    "scene-04": "48f761e2f3537fa37be56f9b560a02ff8b8cce5eeb3e7393e65c3c2f9af84a59",
+    "scene-05": "6171a1a088f6aa38e426dde3d2c56d7bb89bb2932f5c4bb3cc4da04990ae8d6c",
+    "scene-06": "567cf9a75de038bacd8145e480423d8e2616a0b0c432610aaf21de29344bb854",
+    "scene-07": "72fb606765619b0456ccdcfc79db7ff24bd2a3c9f74005be5f4728b9ca0162b0",
+    "scene-08": "d557da16e0d0ad9f3c49fdee1a6b48b641e46f4a30b45139320506650e300074",
+    "scene-09": "4b5b52ec46a75c922ddcba9d47ca184929ce166e19ab27ce86b31541d12c6df3",
+    "scene-10": "336f58948fd0e115d7c160fd8c6ee45b153c63d3ec18285f0b82bdf1840bd959",
+    "scene-11": "719cdcdbc28e8ddb0a313dcc5c145f51c71904705c4de1c1bbfb7c61f446d000"
+  },
+  "scene_changes": "scene-07 aisle-from-behind, NO priest; clip-06/clip-07 aligned + NO PRIEST lines (scripts/edit_scene07_aisle.py); pre-edit backup in packets/",
+  "telegram": "New bot @fmi_transfer_bot verified (getMe ok). Chat 2002649357 not reachable ('chat not found') until Ashok presses Start; waited 50 min, nothing sent. Run: TELEGRAM_BOT_TOKEN=... python3 scripts/send_speedramp_telegram.py --wait 1800",
+  "client_desk": {
+    "job_id": "8d6365420483",
+    "status": "video",
+    "round": 2,
+    "stills_uploaded": 11,
+    "proof_url": "https://findmyinvite.com/proof/c2c8b32dfc1a1ef62f430fa459f133367dc5fbc70dd756f5",
+    "manager_url": "https://findmyinvite.com/manager/clients",
+    "registered_at": "2026-10-09T04:55:23.060190+00:00",
+    "scene06_version": 2
+  },
+  "revisions": [
+    {
+      "rev": 1,
+      "ts": "2026-10-09T07:04:47.498031+00:00",
+      "scene": "scene-06",
+      "change": "family_lines line 1 -> 'With the Blessings of God' (client note via /proof)",
+      "script": "scripts/edit_rev1_family_god.py",
+      "paid_images": 1,
+      "superseded": "assets/output/kerala-christian-v1/superseded-rev1-family-god/"
+    }
+  ],
+  "approval": "Scene 06 v2 approved by Ashok on chat 2026-10-09 (client had approved 10/11 on /proof); desk set approved -> video",
+  "clips": {
+    "clip-01": {
+      "request_id": "fb482b23-3d0b-9e93-ae17-ed0b0d337096",
+      "sha256": "22e91a05b775ab0d323a321882c36db50dab4015a30e448461787ea7c8a2472a",
+      "paid_submits": 1
+    },
+    "clip-02": {
+      "request_id": "78a0105c-2516-905a-894a-30edd85b30fc",
+      "sha256": "c1c57d55e30b3278b29b81bcf2baa02a3453632e0d8faa76a31a6d91c7821d58",
+      "paid_submits": 1
+    },
+    "clip-03": {
+      "request_id": "3b365710-566f-9f95-b93f-b0589d36022e",
+      "sha256": "512d8161d0fc583e6e0a5f771b71016e64a517072df8d0af053f0ba5fb51e3f0",
+      "paid_submits": 1
+    },
+    "clip-04": {
+      "request_id": "81f903d9-eecc-99a5-8c59-a4a216bd5584",
+      "sha256": "6f815f61a0409dfbd3f1a29cc3555d29ed47f39a076ba9d7a6e9e8f9f3af9897",
+      "paid_submits": 1
+    },
+    "clip-05": {
+      "request_id": "b05ce7ac-5539-947b-baf2-8336e0427263",
+      "sha256": "9576760f7655f37c06661ce0702350aa505d46ee7bfd48d1b66d4488e732fd45",
+      "paid_submits": 1
+    },
+    "clip-06": {
+      "request_id": "a5636e27-8930-99b1-83e2-ff886329ba68",
+      "sha256": "46c52d18816a0cb297da54f02195102bf94dac4d906dfb64cc6d6703c729ae27",
+      "paid_submits": 1
+    },
+    "clip-07": {
+      "request_id": "887c47d2-4bf1-9e12-bcff-b271b9d9c50e",
+      "sha256": "6743ab974e9202193796d181cd9254ad2df9e0ecd2de74397f447160abe7941b",
+      "paid_submits": 1
+    },
+    "clip-08": {
+      "request_id": "298eb016-7fdb-9785-ba6e-e3e0fb52485e",
+      "sha256": "79c22c42778ea7e9efdfc7b8efe92487d111bb44bb1a3777d0a5a8647edf8189",
+      "paid_submits": 1
+    },
+    "clip-09": {
+      "request_id": "c3a64ca3-1a85-9783-9b5f-88dad60655a1",
+      "sha256": "fc8d604fad919f61c09d3c969d2359bebcf519aa975d89b302de6011e16f1936",
+      "paid_submits": 1
+    },
+    "clip-10": {
+      "request_id": "a01c0aab-c12b-91ae-9a5c-05ec26852b27",
+      "sha256": "e41d5bf38899252c2a65aa7427fa0440e8124b03a484a80bcd20a5324d4f5719",
+      "paid_submits": 1
+    },
+    "clip-11": {
+      "request_id": "230141b0-d5ed-9c78-aded-393edd2641e5",
+      "sha256": "9ddffcea415f419ce9966925b2e5c84256083f4139d5cd72081ff2f789ac7944",
+      "paid_submits": 1
+    }
+  },
+  "final_speedramp": {
+    "path": "assets/output/kerala-christian-v1/kerala-christian-v1-speedramp-720x1280.mp4",
+    "sha256": "10fddcb1908a5698be9167a42fafb8444a3b602cbf0b2b7c9fb7dd1a11aad7d8",
+    "bytes": 17266485,
+    "frames": 677,
+    "duration_s": 28.208,
+    "mode": "crf20",
+    "committed_to_git": false
+  },
+  "video_qc": "agent frame check per clip: 11/11 accepted first attempt; one bell tower; no priest in aisle; board text matches stills"
+}
