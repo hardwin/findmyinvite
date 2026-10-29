@@ -8,6 +8,10 @@ Soul: [akay-soul.md](akay-soul.md) · standing facts: [project-context.md](proje
 
 Read this before `docs/handoff/STATUS.md`. The v0.9.0 handoff is the frozen baseline; this file is the current truth after that tag.
 
+## 2026-10-29 — Git path: main only
+
+- Ashok: always work on `main`. No `cursor/*` feature branches for shop/product. Logo branch `cursor/findmyinvite-logo-ca03` deleted after the wordmark landed on main.
+
 ## 2026-10-29 — Brand logo file
 
 - Saved Ashok’s findmyinvite wordmark as `public/assets/findmyinvite-logo.jpg` (original JPEG, not regenerated). Desktop shop header, site nav, and footer use that file.

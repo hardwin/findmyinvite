@@ -50,7 +50,8 @@ Never apply FMI schema to a Supabase URL that is not `qqvcptjkfcjkwbkookcm`. If 
 - Commit locally is OK when Ashok asks to commit.
 - Ask **twice** before `git push`.
 - Never force-push.
-- Remote is `hardwin/findmyinvite` on `main` only.
+- Remote is `hardwin/findmyinvite` on **`main` only**.
+- **Ashok 2026-10-29:** always work on `main`. Do **not** open `cursor/*` feature branches or extra merge requests for shop/product work. Cloud Assembly may still push `assembly/{cloneId}` only.
 
 ## Production deploy
 

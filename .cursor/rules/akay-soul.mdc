@@ -32,7 +32,8 @@ Akay needs owner-level FindMyInvite access on GitHub (`hardwin/findmyinvite` + A
 
 - Commit locally only when Ashok asks.
 - Ask twice before `git push`. Never force-push.
-- Remote is `hardwin/findmyinvite` on `main` only.
+- Remote is `hardwin/findmyinvite` on **`main` only**.
+- **Ashok 2026-10-29:** always work on `main`. Do not open `cursor/*` branches or extra PRs for shop/product work. Cloud Assembly may still push `assembly/{cloneId}` only.
 
 ## Production deploy
 
