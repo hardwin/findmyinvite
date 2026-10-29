@@ -8,6 +8,11 @@ Soul: [akay-soul.md](akay-soul.md) · standing facts: [project-context.md](proje
 
 Read this before `docs/handoff/STATUS.md`. The v0.9.0 handoff is the frozen baseline; this file is the current truth after that tag.
 
+## 2026-10-29 — Instamart desktop website chrome
+
+- Phone shop stays the Instamart app (Categories, rail, +, Slide to Pay).
+- Desktop 960px+ is the Instamart website: logo, occasion, search, Sign in, My Cart, promo SHOP NOW cards, category row, product strips. No 430px phone frame on a laptop.
+
 ## 2026-10-28 — Instamart-style e-invite shop
 
 - Full shop chrome matches Instamart, not the cream Holy Matrimony landing. No gold header on `/`, `/templates`, or `/form`.

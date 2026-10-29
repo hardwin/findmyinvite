@@ -2,6 +2,7 @@ import {useMemo,useState} from 'react';
 import {Search,LayoutGrid,Globe,Clapperboard,ClipboardList} from 'lucide-react';
 import {occasions,galleryTiers,galleryTierLabels,normalizeGalleryCollection,type GalleryTier} from './data';
 import {useCatalog} from './catalog';
+import ShopDeskBar from './shop-desk';
 import {
  defaultShopFilters,filterShop,formatRupees,occasionAisles,settings,shopCard,shopKinds,traditions,listingTitle,
  type ShopAisle,type ShopKind,type Tradition,type Setting,type ShopTemplate
@@ -91,14 +92,70 @@ export default function Storefront(){
   {href:listingHref({aisle:'tradition',kind:'website',tradition:'hindu',type:'wedding'}),label:'Hindu',image:thumb(items,item=>item.tradition==='hindu',3),tone:'mint'},
   {href:listingHref({aisle:'collection',kind:'website',collection:'premium',type:'wedding'}),label:'Premium',image:thumb(items,item=>item.tier==='premium',4),tone:'lilac'}
  ];
+ const deskCats=[
+  ...stores,
+  {href:listingHref({aisle:'collection',kind:'website',collection:'free',type:'wedding'}),label:'Free',image:thumb(items,item=>item.tier==='free',5),tone:'sky'}
+ ];
+ const websites=useMemo(()=>filterShop(items,{...defaultShopFilters('website'),query:''}),[items]);
+ const videos=useMemo(()=>filterShop(items,{...defaultShopFilters('video'),query:''}),[items]);
+ const promos=[
+  {title:'Wedding Websites',text:'Fill names. Pay. Copy the live link.',href:stores[0].href,image:stores[0].image},
+  {title:'Invitation Videos',text:'Church, garden and reception films.',href:stores[1].href,image:stores[1].image},
+  {title:'Premium pages',text:'Cinematic designs. Preview, then pay.',href:stores[4].href,image:stores[4].image}
+ ];
  const navActive=aisle==='home'?'home':filters.kind==='video'?'video':'website';
+ function deskStrip(list:ReturnType<typeof filterShop>){
+  return <div className="im-desk-strip">
+   {list.slice(0,8).map(item=>
+    <article className="im-card" key={item.id}>
+     <div className="im-card-media">
+      <a className="im-card-art" href={productHref(item.id)} aria-label={item.name}>
+       {item.image?<img src={'/assets/'+item.image} alt="" loading="lazy"/>:null}
+      </a>
+      <a className="im-add" href={formHref(item.id)} aria-label={'Add '+item.name}>+</a>
+     </div>
+     <p className="im-price">{formatRupees(item.pricePaise)}</p>
+     <h2>{item.name}</h2>
+    </article>
+   )}
+  </div>;
+ }
 
  if(aisle==='home')return <main className="im-shop">
-  <header className="im-top">
+  <ShopDeskBar query={filters.query}/>
+  <header className="im-top im-phone">
    <h1>Categories</h1>
    <a className="im-icon" href={listingHref({aisle:'kind',kind:'website'})} aria-label="Search"><Search size={22} strokeWidth={1.8}/></a>
   </header>
-  <section className="im-stores">
+  <section className="im-desk-hero" aria-label="Offers">
+   {promos.map(promo=>
+    <a className="im-desk-offer" key={promo.title} href={promo.href} style={promo.image?{backgroundImage:'url('+promo.image+')'}:undefined}>
+     <span>
+      <b>{promo.title}</b>
+      <em>{promo.text}</em>
+      <strong>SHOP NOW</strong>
+     </span>
+    </a>
+   )}
+  </section>
+  <p className="im-desk-dots" aria-hidden="true">1 / 3</p>
+  <nav className="im-desk-cats" aria-label="Shop by store">
+   {deskCats.map(cat=>
+    <a key={cat.label} href={cat.href}>
+     <span className={'im-desk-cat '+cat.tone}>{cat.image?<img src={cat.image} alt=""/>:null}</span>
+     {cat.label}
+    </a>
+   )}
+  </nav>
+  <section className="im-desk-row">
+   <header><h2>Wedding Websites</h2><a href={listingHref({aisle:'kind',kind:'website'})}>See All ›</a></header>
+   {deskStrip(websites)}
+  </section>
+  <section className="im-desk-row">
+   <header><h2>Invitation Videos</h2><a href={listingHref({aisle:'kind',kind:'video'})}>See All ›</a></header>
+   {deskStrip(videos)}
+  </section>
+  <section className="im-stores im-phone">
    <h2>Shop by store</h2>
    <div className="im-stores-row">
     {stores.map(store=>
@@ -109,7 +166,7 @@ export default function Storefront(){
     )}
    </div>
   </section>
-  <section className="im-aisle">
+  <section className="im-aisle im-phone">
    <h2>Occasions</h2>
    <div className="im-tiles">
     {occasionAisles.map(([id,label],i)=>
@@ -120,7 +177,7 @@ export default function Storefront(){
     )}
    </div>
   </section>
-  <section className="im-aisle">
+  <section className="im-aisle im-phone">
    <h2>Traditions</h2>
    <div className="im-tiles">
     {traditions.map(([id,label],i)=>
@@ -131,7 +188,7 @@ export default function Storefront(){
     )}
    </div>
   </section>
-  <section className="im-aisle">
+  <section className="im-aisle im-phone">
    <h2>Collections</h2>
    <div className="im-tiles">
     {galleryTiers.map((tier,i)=>
@@ -142,7 +199,7 @@ export default function Storefront(){
     )}
    </div>
   </section>
-  <section className="im-aisle">
+  <section className="im-aisle im-phone">
    <h2>Settings</h2>
    <div className="im-tiles">
     {settings.map(([id,label],i)=>
@@ -153,12 +210,14 @@ export default function Storefront(){
     )}
    </div>
   </section>
-  <p className="im-banner">E-invites from {formatRupees(119900)}</p>
+  <p className="im-banner im-phone">E-invites from {formatRupees(119900)}</p>
   <ShopNav active="home"/>
  </main>;
 
  if(product)return <main className="im-shop">
-  <header className="im-top im-list-top">
+  <ShopDeskBar query={filters.query}/>
+  <h1 className="im-desk-page">{product.name}</h1>
+  <header className="im-top im-list-top im-phone">
    <a className="im-back" href={listingHref({aisle:listAisle,kind:filters.kind,type:filters.type})} aria-label="Back">‹</a>
    <h1>{product.name}</h1>
    <span className="im-icon" aria-hidden="true"/>
@@ -191,7 +250,9 @@ export default function Storefront(){
   :occasionAisles.map(([id,label],i)=>({id,label,img:pics[i],on:filters.type===id,go:()=>sync({...filters,type:id},'occasion')}));
 
  return <main className="im-shop im-list">
-  <header className="im-top im-list-top">
+  <ShopDeskBar query={filters.query}/>
+  <h1 className="im-desk-page">{listingTitle(filters,listAisle)}</h1>
+  <header className="im-top im-list-top im-phone">
    <a className="im-back" href="/" aria-label="Categories">‹</a>
    {searchOpen
     ?<input className="im-search" autoFocus value={filters.query} placeholder="Search e-invites" onChange={e=>setFilters({...filters,query:e.target.value})}/>
@@ -234,7 +295,7 @@ export default function Storefront(){
     </div>
    </section>
   </div>
-  <p className="im-banner">E-invites from {formatRupees(119900)}</p>
+  <p className="im-banner im-phone">E-invites from {formatRupees(119900)}</p>
   <ShopNav active={navActive}/>
  </main>;
 }
