@@ -1,3 +1,4 @@
+import {DiscoveryHeader} from './Discovery';
 import {useEffect,useRef,useState,type FormEvent} from 'react';
 import {Baby,Cake,CalendarHeart,ChevronDown,Gem,Heart,Home,Landmark,PartyPopper,Search,ShoppingBag,Sparkles,User,Utensils,Wine} from 'lucide-react';
 import AuthModal from './AuthModal';
@@ -18,7 +19,7 @@ const occasionIcons:Record<string,typeof Heart>={
  custom:Sparkles
 };
 
-export default function ShopDeskBar({query='',occasion='wedding'}:{query?:string;occasion?:string}){
+function LegacyShopDeskBar({query='',occasion='wedding'}:{query?:string;occasion?:string}){
  const [q,setQ]=useState(query);
  const [open,setOpen]=useState(false);
  const box=useRef<HTMLDivElement>(null);
@@ -77,3 +78,5 @@ export default function ShopDeskBar({query='',occasion='wedding'}:{query?:string
   {authMode&&<AuthModal mode={authMode} onClose={()=>setAuthMode(null)}/>}
  </header>;
 }
+
+export default function ShopDeskBar(_props:{query?:string;occasion?:string}){return <DiscoveryHeader/>;}

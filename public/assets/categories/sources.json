@@ -1,0 +1,65 @@
+[
+  {
+    "id": "christian",
+    "label": "Christian",
+    "image": "/assets/shop-cat-christian.png",
+    "source": "Existing project transparent version of user-supplied Christian couple",
+    "backgroundImage": "/assets/textures/champagne-silk.jpg",
+    "backgroundColor": "#b7a897",
+    "backgroundBlend": "multiply"
+  },
+  {
+    "id": "hindu",
+    "label": "Hindu",
+    "image": "/assets/categories/kerala-hindu-couple.png",
+    "source": "User-supplied: Kerala Wedding Couple in Traditional Attire.png",
+    "backgroundImage": "/assets/textures/green-fabric.jpg",
+    "backgroundColor": "#215747",
+    "backgroundBlend": "normal"
+  },
+  {
+    "id": "muslim",
+    "label": "Islam",
+    "image": "/assets/categories/indian-muslim-couple.png",
+    "source": "User-supplied: Elegant South Asian Wedding Couple.png",
+    "backgroundImage": "/assets/textures/champagne-silk.jpg",
+    "backgroundColor": "#489b9d",
+    "backgroundBlend": "multiply"
+  },
+  {
+    "id": "pixar",
+    "label": "Pixar 3D",
+    "image": "/assets/shop-cat-pixar.png",
+    "source": "Existing project couple illustration",
+    "backgroundImage": "/assets/textures/paper.jpg",
+    "backgroundColor": "#8eacd6",
+    "backgroundBlend": "multiply"
+  },
+  {
+    "id": "palace",
+    "label": "Royal",
+    "image": "/assets/shop-cat-premium.png",
+    "source": "Existing project couple illustration",
+    "backgroundImage": "/assets/textures/gold-leaf.jpg",
+    "backgroundColor": "#bba15c",
+    "backgroundBlend": "soft-light"
+  },
+  {
+    "id": "toon",
+    "label": "Toon",
+    "image": "/assets/shop-cat-toon.png",
+    "source": "Existing project couple illustration",
+    "backgroundImage": "/assets/textures/paper.jpg",
+    "backgroundColor": "#ce8d61",
+    "backgroundBlend": "multiply"
+  },
+  {
+    "id": "save-the-date",
+    "label": "Save the Date",
+    "image": "/assets/shop-cat-save-the-date.png",
+    "source": "Existing project couple illustration",
+    "backgroundImage": "/assets/textures/paper.jpg",
+    "backgroundColor": "#9b7296",
+    "backgroundBlend": "multiply"
+  }
+]

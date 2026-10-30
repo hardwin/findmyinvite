@@ -1,0 +1,22 @@
+[
+  {
+    "image": "/assets/textures/green-fabric.jpg",
+    "source": "https://unsplash.com/photos/a-close-up-of-a-dark-green-fabric-nKubOgxdh88",
+    "license": "https://unsplash.com/license"
+  },
+  {
+    "image": "/assets/textures/champagne-silk.jpg",
+    "source": "https://unsplash.com/photos/a-close-up-view-of-a-white-fabric-hFvWfVxHlaY",
+    "license": "https://unsplash.com/license"
+  },
+  {
+    "image": "/assets/textures/gold-leaf.jpg",
+    "source": "https://unsplash.com/photos/textured-gold-leaf-surface-shLU6SZfIQY",
+    "license": "https://unsplash.com/license"
+  },
+  {
+    "image": "/assets/textures/paper.jpg",
+    "source": "https://unsplash.com/photos/crumpled-blank-paper-texture-1GuZ9y1qAT8",
+    "license": "https://unsplash.com/license"
+  }
+]
