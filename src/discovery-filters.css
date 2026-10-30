@@ -16,3 +16,9 @@
 @media(max-width:920px){.df-row{flex-wrap:wrap}.df-group,.df-sort{padding:.38rem}}
 @media(max-width:640px){.df-row{gap:.5rem}.df-group{border-radius:16px;gap:.42rem}.di-app button.df-trigger{min-width:103px;font-size:.76rem}.df-sort-icon{display:none}.df-sort .df-trigger{min-width:105px}}
 @media(prefers-reduced-motion:reduce){.di-app button.df-trigger,.df-chevron{transition:none}}
+@media(max-width:640px){
+ .df-row{flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-inline:contain;scrollbar-width:thin;padding:3px 2px 8px}
+ .df-group{flex:0 0 auto;flex-wrap:nowrap}
+ .df-sort{flex:0 0 auto;margin-left:0}
+ .di-app button.df-trigger{flex-shrink:0}
+}

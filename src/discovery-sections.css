@@ -40,3 +40,4 @@
 @media(max-width:640px){.dc-category-scroller{gap:.75rem;margin-inline:-.15rem;padding-inline:.15rem}.dc-category-name{font-size:.82rem}}
 @media(max-width:560px){.dc-promotion{gap:1rem;padding:1.25rem 2.5rem 1.25rem 1rem}.dc-board{flex-basis:96px;height:72px;transform:scale(.86);transform-origin:0}.dc-promotion-actions,.di-app a.dc-promotion-cta{width:100%}}
 @media(prefers-reduced-motion:reduce){.dc-category-thumb,.dc-category-header>a>span,.dc-pinned,.di-app a.dc-promotion-cta{transition:none}}
+@media(max-width:640px){.dc-promotion{display:none}}
