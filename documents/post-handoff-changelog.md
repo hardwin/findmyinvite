@@ -8,6 +8,22 @@ Soul: [akay-soul.md](akay-soul.md) · standing facts: [project-context.md](proje
 
 Read this before `docs/handoff/STATUS.md`. The v0.9.0 handoff is the frozen baseline; this file is the current truth after that tag.
 
+## 2026-10-30 — Homepage is ChungDoi clone
+
+- `/` is `src/ChungHome.tsx` + `src/chung-home.css`: pixel match of https://chungdoi.com/ (pink pills, Montserrat, coverflow, 3-step, FAQ, dark footer). Shop Instamart chrome stays on `/templates`. Pay copy stays Razorpay. Chat float is WhatsApp `916362260992`. No `/akay`.
+
+## 2026-10-30 — Quiet editorial shop chrome
+
+- Desktop shop restyled: paper `#FAF7F4`, ink `#241F1C`, Cormorant Garamond + Jost + IBM Plex Mono. Hairlines, no shadows or gradients. Rhythm light / light / surface / dark / light / accent / dark footer. Why-choose is type, not an icon grid.
+
+## 2026-10-29 — Designer brand on desktop shop
+
+- Palette lock: `#5B1A82` `#C9A6D9` `#FDF7F1` `#FDF7A1` `#E9DDC9` `#8A5F78`. Playfair Display headlines, Montserrat UI, Great Vibes tagline “Your wedding invitation copilot”. Ivory page, purple footer, champagne gold cart/subscribe. Instamart layout kept. Sheet: `documents/brand-guidelines.md`.
+
+## 2026-10-29 — Shop bottom blocks (FMI copy)
+
+- Desktop shop (`960px+`) after product rows: Why choose FindMyInvite, custom invitation (WhatsApp), customer quotes, WhatsApp offers bar, full footer. `src/shop-foot.tsx`. Not a Frazia clone. Offers open `wa.me/916362260992`. No `/akay`. Pay line is Razorpay UPI / cards / net banking. No email warehouse on invitations Supabase.
+
 ## 2026-10-29 — Git path: main only
 
 - Ashok: always work on `main`. No `cursor/*` feature branches for shop/product. Logo branch `cursor/findmyinvite-logo-ca03` deleted after the wordmark landed on main.

@@ -18,11 +18,11 @@ test('operator code stays on the server and is not in the frontend',async()=>{
  assert.equal(passwordOk('0000'),false);
  assert.equal(passwordOk('14140'),false);
  assert.throws(()=>slugValue('akay'));
- const files=['../src/AkayAdmin.tsx','../src/analytics.ts','../src/App.tsx','../src/Home.tsx','../src/Storefront.tsx','../src/shop-desk.tsx','../src/components.tsx','../src/main.tsx'];
+ const files=['../src/AkayAdmin.tsx','../src/analytics.ts','../src/App.tsx','../src/Home.tsx','../src/ChungHome.tsx','../src/Storefront.tsx','../src/shop-desk.tsx','../src/components.tsx','../src/main.tsx'];
  for(const file of files){
   const source=await readFile(new URL(file,import.meta.url),'utf8');
   assert.equal(source.includes(code),false,file+' leaked the operator code');
-  if(file.endsWith('Home.tsx')||file.endsWith('Storefront.tsx')||file.endsWith('shop-desk.tsx')||file.endsWith('components.tsx'))assert.equal(source.includes('/akay'),false,file+' linked the operator page');
+  if(file.endsWith('Home.tsx')||file.endsWith('ChungHome.tsx')||file.endsWith('Storefront.tsx')||file.endsWith('shop-desk.tsx')||file.endsWith('components.tsx'))assert.equal(source.includes('/akay'),false,file+' linked the operator page');
  }
 });
 test('gate cookie is HttpOnly and does not contain the operator code',async()=>{

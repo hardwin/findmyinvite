@@ -290,6 +290,7 @@ test('assembly route is reserved, gated, and unlinked from public pages',async()
  const robots=await readFile(new URL('../public/robots.txt',import.meta.url),'utf8');
  const analytics=await readFile(new URL('../src/analytics.ts',import.meta.url),'utf8');
  const home=await readFile(new URL('../src/Home.tsx',import.meta.url),'utf8');
+ const chung=await readFile(new URL('../src/ChungHome.tsx',import.meta.url),'utf8');
  const shop=await readFile(new URL('../src/Storefront.tsx',import.meta.url),'utf8');
  const vercel=await readFile(new URL('../vercel.json',import.meta.url),'utf8');
  assert.match(core,/'assembly'/);
@@ -297,6 +298,7 @@ test('assembly route is reserved, gated, and unlinked from public pages',async()
  assert.match(robots,/Disallow: \/assembly/);
  assert.match(analytics,/assembly/);
  assert.equal(home.includes('/assembly'),false);
+ assert.equal(chung.includes('/assembly'),false);
  assert.equal(shop.includes('/assembly'),false);
  assert.match(vercel,/\/assembly/);
 });

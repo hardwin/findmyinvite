@@ -17,7 +17,7 @@ export type ShopTemplate={
 };
 
 export const shopKinds:Array<[ShopKind,string]>=[['website','Wedding Websites'],['video','Invitation Videos']];
-export const traditions:Array<[Tradition,string]>=[['christian','Christian'],['hindu','Hindu'],['muslim','Muslim'],['interfaith','Interfaith']];
+export const traditions:Array<[Tradition,string]>=[['christian','Christian'],['hindu','Hindu'],['muslim','Islam'],['interfaith','Interfaith']];
 export const palettes:Array<[Palette,string]>=[['ivory','Ivory'],['sage','Sage'],['burgundy','Burgundy'],['gold','Gold'],['navy','Navy'],['blush','Blush']];
 export const settings:Array<[Setting,string]>=[['church','Church'],['garden','Garden'],['temple','Temple'],['palace','Palace'],['beach','Beach'],['minimal','Minimal']];
 export const occasionAisles:Array<[string,string]>=[

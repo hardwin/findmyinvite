@@ -3,6 +3,7 @@ import {Search,LayoutGrid,Globe,Clapperboard,ClipboardList} from 'lucide-react';
 import {occasions,galleryTiers,galleryTierLabels,normalizeGalleryCollection,type GalleryTier} from './data';
 import {useCatalog} from './catalog';
 import ShopDeskBar from './shop-desk';
+import ShopDeskFoot from './shop-foot';
 import {
  defaultShopFilters,filterShop,formatRupees,occasionAisles,settings,shopCard,shopKinds,traditions,listingTitle,
  type ShopAisle,type ShopKind,type Tradition,type Setting,type ShopTemplate
@@ -28,6 +29,15 @@ function thumb(items:ShopTemplate[],test:(item:ReturnType<typeof shopCard>)=>boo
  const hit=items.map(shopCard).find(test);
  if(hit?.image)return '/assets/'+hit.image;
  return thumbs(items)[fallback]||'';
+}
+
+const featuredIds=['royal-heritage-8','royal-heritage-9','royal-prestige-2','royal-prestige-4','royal-prestige-5'];
+function recency(id:string){
+ const prestige=/royal-prestige-(\d+)/.exec(id);
+ if(prestige)return 300+Number(prestige[1]);
+ const heritage=/royal-heritage-(\d+)/.exec(id);
+ if(heritage)return 200+Number(heritage[1]);
+ return 0;
 }
 
 function listingHref(params:Record<string,string>){
@@ -93,15 +103,35 @@ export default function Storefront(){
   {href:listingHref({aisle:'collection',kind:'website',collection:'premium',type:'wedding'}),label:'Premium',image:thumb(items,item=>item.tier==='premium',4),tone:'lilac'}
  ];
  const deskCats=[
-  ...stores,
-  {href:listingHref({aisle:'collection',kind:'website',collection:'free',type:'wedding'}),label:'Free',image:thumb(items,item=>item.tier==='free',5),tone:'sky'}
+  {label:'Christian',href:listingHref({aisle:'tradition',kind:'website',tradition:'christian',type:'wedding'}),tone:'rose',image:'/assets/shop-cat-christian.png'},
+  {label:'Hindu',href:listingHref({aisle:'tradition',kind:'website',tradition:'hindu',type:'wedding'}),tone:'sky',image:'/assets/shop-cat-hindu.png'},
+  {label:'Islam',href:listingHref({aisle:'tradition',kind:'website',tradition:'muslim',type:'wedding'}),tone:'peach',image:'/assets/shop-cat-islam.png'},
+  {label:'Save the Date',href:listingHref({aisle:'kind',kind:'website',q:'Save the Date'}),tone:'gold',image:'/assets/shop-cat-save-the-date.png'},
+  {label:'Premium',href:listingHref({aisle:'collection',kind:'website',collection:'premium',type:'wedding'}),tone:'pink',image:'/assets/shop-cat-premium.png'},
+  {label:'Toon',href:listingHref({aisle:'kind',kind:'website',q:'Toon'}),tone:'sky',image:'/assets/shop-cat-toon.png'},
+  {label:'Pixar 3D',href:listingHref({aisle:'kind',kind:'website',q:'Pixar'}),tone:'peach',image:'/assets/shop-cat-pixar.png'}
  ];
  const websites=useMemo(()=>filterShop(items,{...defaultShopFilters('website'),query:''}),[items]);
  const videos=useMemo(()=>filterShop(items,{...defaultShopFilters('video'),query:''}),[items]);
+ const bestsellers=useMemo(()=>{
+  const cards=websites.filter(item=>item.image);
+  const picked=featuredIds.map(id=>cards.find(item=>item.id===id)).filter((item):item is typeof cards[number]=>Boolean(item));
+  return [...picked,...cards.filter(item=>!featuredIds.includes(item.id))].slice(0,5);
+ },[websites]);
+ const arrivals=useMemo(()=>{
+  const used=new Set(bestsellers.map(item=>item.id));
+  return websites.filter(item=>item.image&&!used.has(item.id)).sort((a,b)=>{
+   const newA=a.badge==='New'?1:0;
+   const newB=b.badge==='New'?1:0;
+   if(newA!==newB)return newB-newA;
+   return recency(b.id)-recency(a.id);
+  }).slice(0,5);
+ },[websites,bestsellers]);
+ const whatsappHref='https://wa.me/916362260992?text='+encodeURIComponent('Hi, I want a custom video or invitation.');
  const promos=[
-  {title:'Wedding Websites',text:'Fill names. Pay. Copy the live link.',href:stores[0].href,image:stores[0].image},
-  {title:'Invitation Videos',text:'Church, garden and reception films.',href:stores[1].href,image:stores[1].image},
-  {title:'Premium pages',text:'Cinematic designs. Preview, then pay.',href:stores[4].href,image:stores[4].image}
+  {title:'Wedding Websites',text:'Do It Yourself',price:'Rs.199',href:stores[0].href,image:'/assets/shop-promo-wedding-websites.png',cta:'Create Now',diy:true},
+  {title:'e-Invite Videos',text:'Church, garden and reception films.',href:stores[1].href,image:'/assets/shop-promo-invite-videos.png',cta:'SHOP NOW',video:true},
+  {title:'Custom Video/Invitation',text:'Contact Us',href:whatsappHref,image:stores[4].image,cta:'WhatsApp',whatsapp:true}
  ];
  const navActive=aisle==='home'?'home':filters.kind==='video'?'video':'website';
  function deskStrip(list:ReturnType<typeof filterShop>){
@@ -120,41 +150,74 @@ export default function Storefront(){
    )}
   </div>;
  }
+ function featGrid(list:ReturnType<typeof filterShop>){
+  return <div className="im-feat-grid">
+   {list.filter(item=>item.image).slice(0,5).map(item=>{
+    const off=item.pricePaise<149900?Math.round((1-item.pricePaise/149900)*100):0;
+    return <article className="im-feat-card" key={item.id}>
+     <div className="im-feat-media">
+      <a href={productHref(item.id)} aria-label={item.name}>
+       <img src={'/assets/'+item.image} alt="" loading="lazy"/>
+      </a>
+      {off>0?<span className="im-feat-sale">{off}% off</span>:null}
+     </div>
+     <a href={productHref(item.id)}>
+      <h3>{item.name}</h3>
+      <p className="im-feat-price"><b>{formatRupees(item.pricePaise)}</b>{off>0?<s>{formatRupees(149900)}</s>:null}</p>
+     </a>
+    </article>;
+   })}
+  </div>;
+ }
 
  if(aisle==='home')return <main className="im-shop">
-  <ShopDeskBar query={filters.query}/>
+  <ShopDeskBar query={filters.query} occasion={filters.type}/>
   <header className="im-top im-phone">
    <h1>Categories</h1>
    <a className="im-icon" href={listingHref({aisle:'kind',kind:'website'})} aria-label="Search"><Search size={22} strokeWidth={1.8}/></a>
   </header>
   <section className="im-desk-hero" aria-label="Offers">
    {promos.map(promo=>
-    <a className="im-desk-offer" key={promo.title} href={promo.href} style={promo.image?{backgroundImage:'url('+promo.image+')'}:undefined}>
+    <a className={'im-desk-offer'+('diy' in promo&&promo.diy?' im-diy':'')+('video' in promo&&promo.video?' im-vid':'')} key={promo.title} href={promo.href} {...(promo.whatsapp?{target:'_blank',rel:'noopener noreferrer'}:{})}>
+     {promo.image?<img src={promo.image} alt=""/>:null}
+     {'price' in promo&&promo.price?<i className="im-offer-rs">{promo.price}</i>:null}
      <span>
       <b>{promo.title}</b>
       <em>{promo.text}</em>
-      <strong>SHOP NOW</strong>
+      <strong className={promo.whatsapp?'im-wa':undefined}>{promo.cta}</strong>
      </span>
     </a>
    )}
   </section>
-  <p className="im-desk-dots" aria-hidden="true">1 / 3</p>
   <nav className="im-desk-cats" aria-label="Shop by store">
    {deskCats.map(cat=>
-    <a key={cat.label} href={cat.href}>
-     <span className={'im-desk-cat '+cat.tone}>{cat.image?<img src={cat.image} alt=""/>:null}</span>
-     {cat.label}
+    <a className={'im-desk-cat '+cat.tone} key={cat.label} href={cat.href}>
+     {cat.image?<img src={cat.image} alt=""/>:null}
+     <span>
+      <b>{cat.label}</b>
+      <em>Shop now</em>
+     </span>
     </a>
    )}
   </nav>
-  <section className="im-desk-row">
-   <header><h2>Wedding Websites</h2><a href={listingHref({aisle:'kind',kind:'website'})}>See All ›</a></header>
-   {deskStrip(websites)}
-  </section>
-  <section className="im-desk-row">
-   <header><h2>Invitation Videos</h2><a href={listingHref({aisle:'kind',kind:'video'})}>See All ›</a></header>
-   {deskStrip(videos)}
-  </section>
+  {([
+   {eyebrow:'FEATURED COLLECTION',lead:'Best ',ital:'Sellers',href:listingHref({aisle:'collection',kind:'website',collection:'premium',type:'wedding'}),list:bestsellers,band:'im-band-surface'},
+   {eyebrow:'JUST IN',lead:'New ',ital:'Arrivals',href:listingHref({aisle:'kind',kind:'website'}),list:arrivals,band:'im-band-dark'},
+   {lead:'Wedding ',ital:'Websites',href:listingHref({aisle:'kind',kind:'website'}),list:websites,band:'im-band-light'},
+   {lead:'Invitation ',ital:'Videos',href:listingHref({aisle:'kind',kind:'video'}),list:videos,band:'im-band-accent'}
+  ] as const).map(row=>
+   <section className={'im-desk-row im-feat '+row.band} key={row.ital}>
+    <header>
+     <div>
+      {'eyebrow' in row&&row.eyebrow?<p>{row.eyebrow}</p>:null}
+      <h2>{row.lead}<em>{row.ital}</em></h2>
+     </div>
+     <a href={row.href}>View all</a>
+    </header>
+    {featGrid(row.list)}
+   </section>
+  )}
+  <ShopDeskFoot/>
   <section className="im-stores im-phone">
    <h2>Shop by store</h2>
    <div className="im-stores-row">
@@ -215,7 +278,7 @@ export default function Storefront(){
  </main>;
 
  if(product)return <main className="im-shop">
-  <ShopDeskBar query={filters.query}/>
+  <ShopDeskBar query={filters.query} occasion={filters.type}/>
   <h1 className="im-desk-page">{product.name}</h1>
   <header className="im-top im-list-top im-phone">
    <a className="im-back" href={listingHref({aisle:listAisle,kind:filters.kind,type:filters.type})} aria-label="Back">‹</a>
@@ -250,7 +313,7 @@ export default function Storefront(){
   :occasionAisles.map(([id,label],i)=>({id,label,img:pics[i],on:filters.type===id,go:()=>sync({...filters,type:id},'occasion')}));
 
  return <main className="im-shop im-list">
-  <ShopDeskBar query={filters.query}/>
+  <ShopDeskBar query={filters.query} occasion={filters.type}/>
   <h1 className="im-desk-page">{listingTitle(filters,listAisle)}</h1>
   <header className="im-top im-list-top im-phone">
    <a className="im-back" href="/" aria-label="Categories">‹</a>
@@ -296,6 +359,7 @@ export default function Storefront(){
    </section>
   </div>
   <p className="im-banner im-phone">E-invites from {formatRupees(119900)}</p>
+  <ShopDeskFoot/>
   <ShopNav active={navActive}/>
  </main>;
 }
