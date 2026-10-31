@@ -9,3 +9,5 @@ FindMyInvite_Cursor_Handoff_*
 **/secrets
 *.token
 .codex
+output
+template_lab

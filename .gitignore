@@ -39,3 +39,9 @@ work/release-baseline/
 work/release-compare/
 **/secrets/
 *.token
+
+# Historical renders and scratch tools stay local, not in deployment source.
+/output/
+/template_lab/
+/work/*
+!/work/assembly-inbox/

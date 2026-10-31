@@ -5,7 +5,9 @@ await writeFile(new URL('./public/vendor/grapesjs/grapes.min.js',import.meta.url
 import {createServer,build,loadEnv} from 'vite';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
-import {localApi} from './server/local-api.mjs';
+const isBuild=process.argv.includes('--build');
+// Production APIs are packaged by Vercel; only the dev server needs this router.
+const apiPlugins=isBuild?[]:[(await import('./server/local-api.mjs')).localApi()];
 Object.assign(process.env,loadEnv('development',process.cwd(),''));
 const srcRoot=fileURLToPath(new NodeURL('./src',import.meta.url));
 
@@ -22,7 +24,7 @@ function assemblyQuietWatch(){
 }
 
 const config={
- plugins:[react(),tailwindcss(),localApi(),assemblyQuietWatch()],
+ plugins:[react(),tailwindcss(),...apiPlugins,assemblyQuietWatch()],
  configFile:false,
  base:'/',
  appType:'spa',
@@ -51,4 +53,4 @@ const config={
   include:['react','react-dom/client','react/jsx-runtime','lucide-react','three','swiper','recharts','class-variance-authority','clsx','tailwind-merge',"ai","@ai-sdk/react","@ai-sdk/openai"]
  }
 };
-if(process.argv.includes('--build')){await build(config);await rm(new URL('./dist/review',import.meta.url),{recursive:true,force:true});}else{const server=await createServer(config);await server.listen();server.printUrls();}
+if(isBuild){await build(config);await rm(new URL('./dist/review',import.meta.url),{recursive:true,force:true});}else{const server=await createServer(config);await server.listen();server.printUrls();}
