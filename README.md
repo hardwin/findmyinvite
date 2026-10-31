@@ -5,7 +5,21 @@ documents the WhatsApp → local Qwen/Hermes → existing FMI Supabase integrati
 installation from a fresh clone, tests, and the planned persona/orchestration/RAG boundaries.
 It runs on a persistent support host, independently of the Vite/Vercel website.
 
+**Client template recreation:** See [README_TEMPLATES.md](README_TEMPLATES.md) and the [template collection](template-collection/README.md) for the current JSON filenames, themes and reuse instructions.
+
 **Latest production update:** the homepage and `/grand-launch` are now publicly deployed at `findmyinvite.vercel.app`, including unlimited ceremony replays until 15 September at 3 AM IST. See [PRODUCTION-UPDATE.md](docs/handoff/PRODUCTION-UPDATE.md); it supersedes older deployed-candidate status below. Custom-domain DNS and catalog publication remain outstanding.
+
+## Wedding website release — October 2026
+
+The current storefront sells versioned Christian, Kerala Hindu and Muslim wedding websites for ₹199 plus 18% GST (₹234.82 total), with six calendar months of hosting from first publication. `/cms` manages the catalog; `/personalise` and `/template-preview` use the same versioned renderers as published invitations. Older POC designs are inactive and archived in private storage. The historical handoff below predates this release.
+
+Production checkout requires `RAZORPAY_KEY_ID` with an `rzp_live_` prefix, `RAZORPAY_KEY_SECRET`, and `RAZORPAY_WEBHOOK_SECRET`. Configure the matching webhook in Razorpay **Live Mode** at `https://findmyinvite.com/api/payments?action=webhook` with `payment.captured` enabled. Set these only in Vercel Production environment variables and redeploy after changes. Test credentials cannot enable checkout on Vercel production. Non-Vercel production hosts must set `PAYMENT_MODE=live`.
+
+The six `20261030*` Supabase migrations define the CMS, immutable versions, owner-only drafts, publication, tax, renewals and retention. Provision explicit CMS operator roles and the central website offer before checkout. `CRON_SECRET` protects the daily retention job. Never commit credentials, local database backups, source archives or screenshot reports.
+
+Release validation: `npm run build` and `node --test tests/server-payments.mjs tests/server-template-api.mjs tests/server-template-cms.mjs`. The wider historical server suite includes retired POC and assembly fixtures; report its failures separately instead of treating the focused tests as a full end-to-end payment test.
+
+## Historical handoff
 
 **Start with [README_CURSOR.md](README_CURSOR.md) for the mobile/cloud takeover.** The [team documentation index](docs/handoff/index.md) contains 26 separate role documents, architecture, release/rollback procedures, risks and [15 pre-deployment test cases](docs/handoff/PREDEPLOY-15.md).
 

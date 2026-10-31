@@ -5,3 +5,7 @@ dist/review
 .env*
 *.md
 tests
+FindMyInvite_Cursor_Handoff_*
+**/secrets
+*.token
+.codex

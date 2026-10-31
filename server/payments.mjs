@@ -17,7 +17,8 @@ export function razorpayCredentials(env=process.env){
 
 export function paymentsConfigured(env=process.env){
  const {keyId,keySecret}=razorpayCredentials(env);
- return Boolean(keyId&&keySecret);
+ const liveRequired=env.VERCEL_ENV==='production'||env.PAYMENT_MODE==='live';
+ return Boolean(keyId&&keySecret&&(!liveRequired||(keyId.startsWith('rzp_live_')&&cleanSecret(env.RAZORPAY_WEBHOOK_SECRET))));
 }
 
 export function publicKeyId(env=process.env){

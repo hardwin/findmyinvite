@@ -5,6 +5,9 @@ export type Tradition='christian'|'hindu'|'muslim'|'interfaith';
 export type Palette='ivory'|'sage'|'burgundy'|'gold'|'navy'|'blush';
 export type Setting='church'|'garden'|'temple'|'palace'|'beach'|'minimal';
 export type ShopTemplate={
+ templateVersionId?:string;
+ tradition?:Tradition;
+ pricePaise?:number;
  id:string;
  name:string;
  description:string;
@@ -97,10 +100,10 @@ export function shopCard(template:ShopTemplate){
   ...template,
   tier:template.tier||galleryTierFor(template.id,Boolean(template.royal)),
   kind:templateKind(template),
-  tradition:templateTradition(template),
+  tradition:template.tradition||templateTradition(template),
   setting:templateSetting(template),
   palette:templatePalette(template),
-  pricePaise:templatePricePaise(template),
+  pricePaise:template.pricePaise??templatePricePaise(template),
   sku:skuFor(template)
  };
 }

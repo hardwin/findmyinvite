@@ -1,10 +1,14 @@
+import {recordWebsiteFailure} from '../server/template-observability.mjs';
+import handleWebsitePayment,{settleWebsiteOrder} from '../server/template-payments.mjs';
 import {HttpError,bodyJson,respond,fail,method,authUser,bearer,slugValue,rate,isManagementToken} from '../server/core.mjs';
 import {PAYMENT_SKUS,paymentsConfigured,publicKeyId,skuValue,assertCheckoutAmount,verifyCheckoutSignature,verifyWebhookSignature,createRazorpayOrder,recordPayment,requireCapturedPayment,findCapturedPayment} from '../server/payments.mjs';
 
+export const config={api:{bodyParser:false}};
 export default async function handler(req,res){
  try{
   const q=new URL(req.url,'https://findmyinvite.com').searchParams;
   const action=q.get('action')||'config';
+  if(action.startsWith('v2-'))return await handleWebsitePayment(req,res,q);
   if(action==='config'){
    method(req,['GET']);
    return respond(res,200,{
@@ -16,11 +20,12 @@ export default async function handler(req,res){
   }
   if(action==='webhook'){
    method(req,['POST']);
-   const raw=typeof req.body==='string'?req.body:JSON.stringify(req.body||{});
+   let raw;if(typeof req.body==='string'||Buffer.isBuffer(req.body)){raw=req.body.toString();}else{const chunks=[];let size=0;for await(const chunk of req){size+=chunk.length;if(size>1048576)throw new HttpError(413,'Webhook too large.');chunks.push(Buffer.from(chunk));}raw=Buffer.concat(chunks).toString('utf8');}
    verifyWebhookSignature(raw,req.headers['x-razorpay-signature']);
-   const event=typeof req.body==='string'?JSON.parse(req.body):req.body;
+   const event=JSON.parse(raw);
    const entity=event?.payload?.payment?.entity||event?.payload?.order?.entity||{};
    const orderId=entity.order_id||entity.id;
+   if(orderId&&entity.status==='captured'&&await settleWebsiteOrder(orderId,entity.id,entity.notes?.websiteOrderId))return respond(res,200,{ok:true});
    if(orderId&&entity.status==='captured'){
     await recordPayment({
      razorpay_order_id:orderId,
@@ -56,6 +61,7 @@ export default async function handler(req,res){
    const body=await bodyJson(req);
    const host=user?.id||null;
    let amount,currency='INR',receipt,sku=null,slug=null,label='FindMyInvite',notes={host,kind:'checkout'};
+   if(['website-classic','website-royal'].includes(body.sku))throw new HttpError(410,'Use the current wedding website checkout.');
    if(body.sku){
     sku=skuValue(body.sku);
     slug=slugValue(body.slug);
@@ -110,5 +116,5 @@ export default async function handler(req,res){
    return respond(res,200,{ok:true,paymentId:saved.razorpay_payment_id,slug});
   }
   throw new HttpError(404,'Unknown action.');
- }catch(error){fail(res,error);}
+ }catch(error){await recordWebsiteFailure(req,error);fail(res,error);}
 }

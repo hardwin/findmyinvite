@@ -1,19 +1,23 @@
+import {recordWebsiteFailure} from '../server/template-observability.mjs';
+import handleTemplateInvitation from '../server/template-invitations.mjs';
 import {del,head} from '@vercel/blob';
 import {HttpError,promotion,configured,slugValue,tokenHash,verifyToken,validateData,validateRsvp,db,bodyJson,bearer,invitation,rate,respond,fail,method,authUser,hostId,publicData,isManagementToken} from '../server/core.mjs';
 import {requireCapturedPayment} from '../server/payments.mjs';
 async function availableTemplate(id){const rows=await db('template_catalog?id=eq.'+encodeURIComponent(id)+'&published=eq.true&select=id&limit=1');if(!rows.length)throw new HttpError(403,'This design is not currently available for publishing.');}
-const view=row=>({invitation:{...publicData(row.data),id:row.slug},slug:row.slug,published:row.published,expiresAt:row.expires_at,createdAt:row.created_at});
+const view=row=>({templateVersionId:row.template_version_id||undefined,invitation:{...publicData(row.data),id:row.slug},slug:row.slug,published:row.published,expiresAt:row.expires_at,createdAt:row.created_at});
 function withHost(data,host){return host?{...data,_host:host}:data;}
 export default async function handler(req,res){try{
  const q=new URL(req.url,'https://findmyinvite.com').searchParams;const action=q.get('action')||'read';
+ if(action.startsWith('v2-'))return await handleTemplateInvitation(req,res,q);
  if(action==='config'){method(req,['GET']);return respond(res,200,{configured:configured(),serverNow:new Date().toISOString(),promotion:promotion(),prices:{classic:1199,royal:1499},uploadsConfigured:Boolean(process.env.BLOB_READ_WRITE_TOKEN),auth:true});}
  if(action==='mine'){
   method(req,['GET']);
   const user=await authUser(bearer(req));
   if(!user)throw new HttpError(401,'Sign in to continue.');
-  const rows=await db('invitations?data->>_host=eq.'+encodeURIComponent(user.id)+'&select=slug,published,expires_at,created_at,data&order=created_at.desc&limit=50')||[];
+  const rows=await db('invitations?template_version_id=is.null&data->>_host=eq.'+encodeURIComponent(user.id)+'&select=slug,published,expires_at,created_at,data&order=created_at.desc&limit=50')||[];
   return respond(res,200,{invitations:rows.map(view)});
  }
+ if(action==='create')throw new HttpError(410,'POC designs are retired. Choose a current template.');
  if(action==='create'){
   method(req,['POST']);
   const user=await authUser(bearer(req));
@@ -45,12 +49,13 @@ export default async function handler(req,res){try{
  if(action==='read'){method(req,['GET']);return respond(res,200,view(await invitation(slug)));}
  if(action==='rsvp'){
   method(req,['POST']);const row=await invitation(slug);await rate(req,'rsvp',30,3600);await rate(req,'rsvp:'+slug,10,3600);
-  if(!row.data.sections.rsvp)throw new HttpError(403,'Responses are closed.');
+  if(row.template_version_id||!row.data.sections?.rsvp)throw new HttpError(403,'Responses are closed.');
   const valid=validateRsvp(await bodyJson(req));
   await db('responses',{method:'POST',headers:{Prefer:'return=minimal'},body:{invitation_id:row.id,...valid}});
   return respond(res,201,{ok:true});
  }
  const row=await invitation(slug,bearer(req));
+ if(row.template_version_id)throw new HttpError(409,'Use the versioned invitation editor.');
  if(action==='manage'){method(req,['GET']);return respond(res,200,view(row));}
  if(action==='responses'){
   method(req,['GET']);
@@ -86,4 +91,4 @@ export default async function handler(req,res){try{
   return respond(res,200,{ok:true});
  }
  throw new HttpError(404,'Unknown action.');
-}catch(error){fail(res,error);}}
+}catch(error){await recordWebsiteFailure(req,error);fail(res,error);}}

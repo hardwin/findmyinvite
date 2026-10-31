@@ -72,6 +72,7 @@ export default async function handler(req,res){let locked=null;
  if(typeof body.message!=='string'||!body.message.trim()||body.message.length>2000||!SECTIONS.includes(body.section))throw new HttpError(400,'Enter a change for the selected section.');
  await rate(req,'studio-agent',10,3600);const permitted=await db('rpc/consume_rate_limit',{method:'POST',body:{p_key:'studio-global-agent-daily',p_limit:Number(process.env.STUDIO_DAILY_RUN_LIMIT||20),p_seconds:86400}});if(!permitted)throw new HttpError(429,'The team pilot has reached its daily agent allowance. You can still edit details manually.');
  const warm=await ensureWorkspace(p);p=warm.project;const session={id:p.workspace_id};try{await continueAgent(session.id,p,body.message,body.section);p=await update(p,{session_id:session.id,run_started_at:new Date().toISOString(),run_revision:p.revision});}catch(e){await stopAndClose(session.id);await update(p,{workspace_id:null,workspace_revision:null});throw e;}return await finish(res,202,{...view(p),status:'Your invitation is being customized in a private workspace.'});}
+ if(action==='publish')throw new HttpError(410,'POC publishing is retired. Use the current wedding website editor.');
  if(action==='publish'){
  const schema=JSON.parse(await readFile(new URL('../public/studio/fields.json',import.meta.url),'utf8'));for(const field of schema.fields.filter(f=>f.required))if(!p.data[field.key]?.trim())throw new HttpError(400,'Complete '+field.label+' in Details before publishing.');
  const slug=slugValue(body.slug),hash=tokenHash(body.managementToken);

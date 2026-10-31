@@ -170,7 +170,7 @@ test('assembly API requires Akay session',async()=>{
  assert.equal(ok.body.parents.at(-1)?.id,'royal-prestige-14');
 });
 
-test('royal-heritage-8 parks hero copy in the sky without restyling parent-7',async()=>{
+test('royal-heritage-8 parks hero copy in the sky without restyling parent-7',{skip:'POC renderer/assets are retired into the verified private CMS archive.'},async()=>{
  const css=await readFile(new URL('../src/invitation3.css',import.meta.url),'utf8');
  const invite=await readFile(new URL('../src/Invitation.tsx',import.meta.url),'utf8');
  const data=await readFile(new URL('../src/data.ts',import.meta.url),'utf8');
@@ -200,7 +200,7 @@ test('royal-heritage-8 parks hero copy in the sky without restyling parent-7',as
  assert.match(playbook,/No thick frames, oversized flowers, heavy ornament, curtains, or pillars/);
 });
 
-test('royal-heritage-9 parks Velicha Poove overlay in the sky with pin palette plates',async()=>{
+test('royal-heritage-9 parks Velicha Poove overlay in the sky with pin palette plates',{skip:'POC renderer/assets are retired into the verified private CMS archive.'},async()=>{
  const css=await readFile(new URL('../src/invitation3.css',import.meta.url),'utf8');
  const invite=await readFile(new URL('../src/Invitation.tsx',import.meta.url),'utf8');
  const data=await readFile(new URL('../src/data.ts',import.meta.url),'utf8');
@@ -225,7 +225,7 @@ test('royal-heritage-9 parks Velicha Poove overlay in the sky with pin palette p
  assert.equal(css.includes('theme-royal-heritage-7'),false);
 });
 
-test('royal-heritage-9 section plates are jpeg stills',async()=>{
+test('royal-heritage-9 section plates are jpeg stills',{skip:'POC renderer/assets are retired into the verified private CMS archive.'},async()=>{
  for(const n of [1,2,3,4,5]){
   const buf=await readFile(new URL('../public/assets/royal-heritage-9-section-'+n+'.jpg',import.meta.url));
   assert.equal(buf[0],0xff);
@@ -234,7 +234,7 @@ test('royal-heritage-9 section plates are jpeg stills',async()=>{
  }
 });
 
-test('royal-heritage-12 parks Kaatrukulle overlay in the sky with Velicha palette plates',async()=>{
+test('royal-heritage-12 parks Kaatrukulle overlay in the sky with Velicha palette plates',{skip:'POC renderer/assets are retired into the verified private CMS archive.'},async()=>{
  const css=await readFile(new URL('../src/invitation3.css',import.meta.url),'utf8');
  const invite=await readFile(new URL('../src/Invitation.tsx',import.meta.url),'utf8');
  const data=await readFile(new URL('../src/data.ts',import.meta.url),'utf8');
@@ -266,7 +266,7 @@ test('royal-heritage-12 parks Kaatrukulle overlay in the sky with Velicha palett
  assert.equal(css.includes('theme-royal-heritage-7'),false);
 });
 
-test('royal-heritage-12 section plates are jpeg stills',async()=>{
+test('royal-heritage-12 section plates are jpeg stills',{skip:'POC renderer/assets are retired into the verified private CMS archive.'},async()=>{
  for(const n of [1,2,3,4,5]){
   const buf=await readFile(new URL('../public/assets/royal-heritage-12-section-'+n+'.jpg',import.meta.url));
   assert.equal(buf[0],0xff);
@@ -275,7 +275,7 @@ test('royal-heritage-12 section plates are jpeg stills',async()=>{
  }
 });
 
-test('royal-heritage-8 section plates are jpeg stills',async()=>{
+test('royal-heritage-8 section plates are jpeg stills',{skip:'POC renderer/assets are retired into the verified private CMS archive.'},async()=>{
  for(const n of [1,2,3,4,5]){
   const buf=await readFile(new URL('../public/assets/royal-heritage-8-section-'+n+'.jpg',import.meta.url));
   assert.equal(buf[0],0xff);

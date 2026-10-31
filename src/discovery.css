@@ -11,3 +11,9 @@ body.di-site .content-page,body.di-site .editor-shell{background:#fffdf9;color:#
 .di-masonry{columns:6;column-gap:14px}.di-hero h1{font-weight:700}.di-hero>p{max-width:56rem;font-size:1.08rem}.di-trending>div{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding:2px 2px 4px}.di-trending a{flex:none;min-height:48px;padding:6px 16px 6px 6px;gap:10px;white-space:nowrap}.di-trending a>img{width:34px;height:34px;object-fit:cover;object-position:center top;background:#eee9e1;border-radius:50%}.di-trending a>svg{width:34px;height:34px;padding:8px;background:#eee9e1;border-radius:50%}@media(max-width:1312px){.di-masonry{columns:5}}@media(max-width:1012px){.di-masonry{columns:3}}@media(max-width:732px){.di-masonry{columns:2}}@media(max-width:640px){.di-hero>p{max-width:36ch;font-size:.9rem}.di-trending a{min-height:42px}.di-trending a>img{width:30px;height:30px}.di-masonry{column-gap:10px}}
 
 @media(max-width:640px){.di-hero .di-steps,.di-hero>p,.di-hero .di-platforms{display:none}}
+
+/* Fixed slots keep small collections in a single desktop row. */
+.di-masonry{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));columns:auto;gap:14px;align-items:start}
+.di-masonry>.di-pin{margin-bottom:0;min-width:0}
+@media(max-width:1012px){.di-masonry{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:732px){.di-masonry{grid-template-columns:repeat(2,minmax(0,1fr))}}

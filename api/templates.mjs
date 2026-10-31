@@ -1,0 +1,30 @@
+import {get,head} from '@vercel/blob';
+import {Readable} from 'node:stream';
+import {pipeline} from 'node:stream/promises';
+import {HttpError,db,respond,fail,method,bodyJson} from '../server/core.mjs';
+import {operator,catalogVersion,version,safeVersion,audit,rpc,RENDERERS} from '../server/template-cms.mjs';
+import {validateSchema,validateContent,mediaReferences} from '../shared/template-contract.mjs';
+async function templateAssets(content){const ids=mediaReferences(content);if(!ids.length)return;const rows=await db('template_media?id=in.('+ids.join(',')+')&invitation_id=is.null&status=eq.ready&select=id');if(ids.some(id=>!rows.some(r=>r.id===id)))throw new HttpError(400,'Use ready CMS media, not customer uploads.');}
+export default async function handler(req,res){try{
+ const q=new URL(req.url,'https://findmyinvite.com').searchParams,action=q.get('action')||'list';
+ if(action==='public'){method(req,['GET']);const rows=await db('template_catalog?generation=eq.2&isactive=eq.true&published=eq.true&select=id,name,description,tradition,thumbnail,current_version_id,sort_order&order=sort_order.asc');return respond(res,200,{templates:rows,basePaise:19900});}
+ if(action==='version'){method(req,['GET']);return respond(res,200,{version:safeVersion(await catalogVersion(q.get('id')))});}
+ const user=await operator(req);
+ if(action==='archive-info'||action==='archive-part'){
+ method(req,['GET']);const id=q.get('id');if(!/^[a-f0-9-]{36}$/.test(id||''))throw new HttpError(400,'Invalid archive.');const rows=await db('template_archives?id=eq.'+id+'&select=object_path,sha256,verified_at');if(!rows[0]?.verified_at)throw new HttpError(404,'Verified archive unavailable.');const row=rows[0],info=await head(row.object_path);
+ if(action==='archive-info'){await audit(user,'archive.download',id);return respond(res,200,{size:info.size,sha256:row.sha256,filename:row.object_path.split('/').pop()});}
+ const offset=Number(q.get('offset'));if(!Number.isSafeInteger(offset)||offset<0||offset>=info.size)throw new HttpError(400,'Invalid archive offset.');const end=Math.min(offset+3*1048576-1,info.size-1);const blob=await get(row.object_path,{access:'private',headers:{Range:'bytes='+offset+'-'+end}});if(!blob?.stream||!blob.headers.get('content-range')?.startsWith('bytes '+offset+'-'))throw new HttpError(503,'Archive range download unavailable.');res.setHeader('Content-Type','application/octet-stream');res.setHeader('Cache-Control','private, no-store');await pipeline(Readable.fromWeb(blob.stream),res);return;
+ }
+ if(action==='list'){method(req,['GET']);const [templates,versions,archives,invites,audits]=await Promise.all([db('template_catalog?select=*&order=sort_order.asc'),db('template_versions?select=*&order=created_at.desc'),db('template_archives?select=id,template_id,sha256,verified_at,assets_archived:manifest->assetsArchived&order=created_at.desc'),db('invitations?select=id,slug,owner_id,template_version_id,published,first_published_at,expires_at,deleted_at&order=created_at.desc&limit=200'),db('cms_audit?select=*&order=created_at.desc&limit=100')]);return respond(res,200,{templates,versions,archives,invitations:invites,audit:audits});}
+ if(action==='metrics'){method(req,['GET']);return respond(res,200,await rpc('fmi_website_metrics',{}));}
+ if(action==='orders'){method(req,['GET']);return respond(res,200,{orders:await db('website_orders?select=id,invitation_id,purpose,amount,tax_paise,status,razorpay_payment_id,applied_at,created_at&order=created_at.desc&limit=200')});}
+ method(req,['POST']);const body=await bodyJson(req,200000);
+ if(action==='cost'){if(!/^\d{4}-\d{2}-01$/.test(body.month)||!Number.isSafeInteger(body.amountPaise)||body.amountPaise<0||body.amountPaise>100000000||typeof body.note!=='string'||body.note.length>500)throw new HttpError(400,'Invalid cost entry.');await db('website_costs?on_conflict=month',{method:'POST',headers:{Prefer:'resolution=merge-duplicates'},body:{month:body.month,amount_paise:body.amountPaise,note:body.note,updated_by:user.id,updated_at:new Date().toISOString()}});await audit(user,'cost.updated',body.month,{amountPaise:body.amountPaise});return respond(res,200,{ok:true});}
+ if(action==='save'){
+ const {id,name,description,tradition,thumbnail,sort_order}=body;if(!/^[a-z0-9-]{3,80}$/.test(id)||typeof name!=='string'||name.length>150||typeof description!=='string'||description.length>3000||!['christian','hindu','muslim'].includes(tradition)||!Number.isInteger(sort_order)||typeof thumbnail!=='string'||!/^\/assets\/[\w/.-]+$|^\/api\/template-media\?id=[a-f0-9-]{36}$/.test(thumbnail))throw new HttpError(400,'Invalid catalog details.');
+ await templateAssets({thumbnail});await db('template_catalog?on_conflict=id',{method:'POST',headers:{Prefer:'resolution=merge-duplicates'},body:{id,name,description,tradition,thumbnail,sort_order,collection:'classic',generation:2}});await audit(user,'template.metadata',id);return respond(res,200,{ok:true});}
+ if(action==='new-version'){
+ if(!RENDERERS.includes(body.renderer))throw new HttpError(400,'Unsupported renderer.');validateSchema(body.field_schema);const defaults=validateContent(body.field_schema,body.defaults);await templateAssets(defaults);const rows=await db('template_versions',{method:'POST',headers:{Prefer:'return=representation'},body:{template_id:body.template_id,revision:body.revision,renderer:body.renderer,field_schema:body.field_schema,defaults}});await audit(user,'template.version',body.template_id,{version:rows[0].id});return respond(res,201,{version:rows[0]});}
+ if(['approve','publish','rollback','archive'].includes(action)){if(action!=='archive')await version(body.version_id);await rpc('fmi_catalog_release',{p_template:body.template_id,p_version:body.version_id||null,p_actor:user.id,p_action:action});return respond(res,200,{ok:true});}
+ throw new HttpError(404,'Unknown CMS action.');
+ }catch(e){if(res.headersSent){res.destroy();return;}if(!(e instanceof HttpError)&&e.message?.startsWith('Invalid'))e=new HttpError(400,e.message);fail(res,e);}}

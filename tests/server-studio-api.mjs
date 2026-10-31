@@ -199,18 +199,18 @@ test('null restore target cannot silently select original version zero',async t=
   });
 });
 
-test('publishing passes the operation lease and preserves the current revision',async t=>{
+test('retired POC publishing fails before changing the current revision',async t=>{
   await harness(t,{},async({request,row,calls})=>{
     const result=await request('publish',{revision:2,slug:'test-couple',managementToken:token});
-    assert.equal(result.code,200);assert.equal(result.body.publishedSlug,'test-couple');assert.equal(result.body.archivePending,false);
+    assert.equal(result.code,410);assert.match(result.body.error,/retired/);
     assert.equal(row().revision,2);assert.equal(row().lock_until,null);
-    const publish=calls.find(c=>c.url.pathname.endsWith('/rpc/studio_publish'));assert.equal(publish.body.p_data.studioId,id);
+    assert.ok(!calls.some(c=>c.url.pathname.endsWith('/rpc/studio_publish')));
   });
 });
 
 test('published address changes fail before any publication or Git operation',async t=>{
   await harness(t,{published_slug:'existing-couple'},async({request,calls})=>{
-    assert.equal((await request('publish',{revision:2,slug:'new-couple',managementToken:token})).code,409);
+    assert.equal((await request('publish',{revision:2,slug:'new-couple',managementToken:token})).code,410);
     assert.ok(!calls.some(c=>c.url.pathname.endsWith('/rpc/studio_publish')||c.url.hostname==='api.github.com'));
   });
 });
@@ -226,13 +226,13 @@ test('details-only save keeps code SHA but creates an atomic database revision',
   });
 });
 
-test('publishing requires the schema venue and address even when every other field is complete',async t=>{
+test('retired POC publishing cannot be bypassed with incomplete details',async t=>{
   for(const template of ['royal-temple','emerald-noir'])for(const field of ['venue','address'])for(const missing of ['', '   ']){
     const data={...original().data,template,[field]:missing};
     await harness(t,{template_id:template,data},async({request,row,calls})=>{
       const result=await request('publish',{revision:2,slug:'test-couple',managementToken:token});
-      assert.equal(result.code,400,`${template} must reject an empty ${field}`);
-      assert.match(result.body.error,/Complete .* in Details before publishing/);
+      assert.equal(result.code,410);
+      assert.match(result.body.error,/retired/);
       assert.equal(row().revision,2);assert.equal(row().lock_until,null);
       assert.ok(!calls.some(call=>call.url.pathname.endsWith('/rpc/studio_publish')||call.url.hostname==='api.github.com'));
     });
@@ -276,11 +276,11 @@ test('provider failures identify the cause and preserve the saved draft',async t
  }
 });
 
-test('publishing preserves direct Editor wording overrides for guests',async t=>{
+test('retired POC publishing cannot be bypassed with wording overrides',async t=>{
  await harness(t,{data:{...original().data,textOverrides:{'text-0':'WITH THE HEAVENLY BLESSINGS OF'}}},async({request,calls})=>{
-  const result=await request('publish',{revision:2,slug:'editor-text-test',managementToken:token});assert.equal(result.code,200);
+  const result=await request('publish',{revision:2,slug:'editor-text-test',managementToken:token});assert.equal(result.code,410);
   const publication=calls.find(c=>c.url.pathname.endsWith('/rpc/studio_publish'));
-  assert.equal(publication.body.p_data.textOverrides['text-0'],'WITH THE HEAVENLY BLESSINGS OF');
+  assert.equal(publication,undefined);
  });
 });
 

@@ -30,3 +30,12 @@ work/exports/
 public/assets/catalogue/v1/*-walkthrough.mp4
 public/assets/catalogue/v1/*-walkthrough.png
 public/assets/catalogue/v1/*-walkthrough.pdf
+
+# Private handoff packages and local QA/archive artifacts.
+FindMyInvite_Cursor_Handoff_*/
+FindMyInvite_Cursor_Handoff_*.zip
+work/template-cms-v2/
+work/release-baseline/
+work/release-compare/
+**/secrets/
+*.token

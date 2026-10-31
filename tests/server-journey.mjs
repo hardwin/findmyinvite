@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import handler from '../api/invitations.mjs';
-import {templates,bodyJson,configured,validateRsvp} from '../server/core.mjs';
+import {templates,bodyJson,configured,validateRsvp,tokenHash} from '../server/core.mjs';
 const token='ab'.repeat(32),other='cd'.repeat(32),jwt='eyJhbGciOiJub25lIn0.e30.one',otherJwt='eyJhbGciOiJub25lIn0.e30.two';
 const data={template:'royal-prestige',type:'wedding',bride:'Bride',groom:'Groom',date:'2099-12-01',time:'10:00',venue:'Venue',address:'Address',welcome:'Welcome',groomDetails:'',brideDetails:'',dressWomen:'',dressMen:'',transport:'',accommodation:'',gifts:'',music:'/assets/track1.mp3',photos:[],sections:Object.fromEntries(['welcome','scratch','bride','groom','gallery','countdown','timeline','venue','dress','preEvents','transport','accommodation','gifts','rsvp'].map(k=>[k,true])),timeline:[],preEvents:[]};
 async function request(action,{method='GET',body,secret,slug='test-couple'}={}){const res={setHeader(){},status(n){this.code=n;return this;},json(b){this.body=b;}};await handler({url:'/api/invitations?action='+action+'&slug='+slug,method,body,headers:secret?{authorization:'Bearer '+secret}:{},socket:{remoteAddress:'127.0.0.1'}},res);return res;}
@@ -16,12 +16,12 @@ test('guest lifecycle is durable, private, idempotent and template gated',async(
  else if(path==='responses'){if(method==='POST'){responses.push({id:'response1',created_at:new Date().toISOString(),...payload});status=201;}else value=structuredClone(responses);}
  else throw new Error('Unexpected mock path '+path);return new Response(value===null?null:JSON.stringify(value),{status});};
  try{
- const create=()=>request('create',{method:'POST',body:{slug:'test-couple',data,managementToken:token},secret:jwt});
- assert.equal((await request('create',{method:'POST',body:{slug:'test-couple',data,managementToken:token}})).code,401);
- available=false;assert.equal((await create()).code,403);assert.equal(row,null);available=true;
- assert.equal((await create()).code,201);assert.equal(row.published,false);assert.equal(row.data._host,'user-1');assert.equal((await request('read')).code,404);
- const firstId=row.id;assert.equal((await create()).code,200);assert.equal(row.id,firstId);
- assert.equal((await request('create',{method:'POST',body:{slug:'test-couple',data,managementToken:other},secret:otherJwt})).code,409);
+ // New POC sales are closed; existing invitation access remains supported.
+ assert.equal((await request('create',{method:'POST',body:{slug:'test-couple',data,managementToken:token}})).code,410);
+ assert.equal((await request('create',{method:'POST',secret:jwt,body:{slug:'test-couple',data,managementToken:token}})).code,410);
+ assert.equal(row,null);
+ row={id:'00000000-0000-0000-0000-000000000001',slug:'test-couple',data:{...data,_host:'user-1'},management_hash:tokenHash(token),created_at:new Date().toISOString(),expires_at:'2099-01-01T00:00:00Z',published:false};
+ assert.equal((await request('read')).code,404);
  assert.equal((await request('update',{method:'POST',secret:other,body:{data,published:true}})).code,403);
  assert.equal((await request('update',{method:'POST',secret:otherJwt,body:{data,published:true}})).code,403);
  assert.equal((await request('update',{method:'POST',secret:token,body:{data:{...data,photos:['/api/media?slug=test-couple&slot=0']},published:true}})).code,503);

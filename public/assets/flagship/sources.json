@@ -1,0 +1,282 @@
+[
+  {
+    "path": "public/assets/flagship/christian/sky.webp",
+    "source": "https://cinorev.in/john-cathrine/a/sky.webp",
+    "use": "Reference scene artwork in unpublished design draft"
+  },
+  {
+    "path": "public/assets/flagship/christian/church.webp",
+    "source": "https://cinorev.in/john-cathrine/a/church.webp",
+    "use": "Reference scene artwork in unpublished design draft"
+  },
+  {
+    "path": "public/assets/flagship/christian/dove1.webp",
+    "source": "https://cinorev.in/john-cathrine/a/dove1.webp",
+    "use": "Reference scene artwork in unpublished design draft"
+  },
+  {
+    "path": "public/assets/flagship/christian/bell.webp",
+    "source": "https://cinorev.in/john-cathrine/a/bell.webp",
+    "use": "Reference scene artwork in unpublished design draft"
+  },
+  {
+    "path": "public/assets/flagship/christian/dove3.webp",
+    "source": "https://cinorev.in/john-cathrine/a/dove3.webp",
+    "use": "Reference scene artwork in unpublished design draft"
+  },
+  {
+    "path": "public/assets/flagship/christian/dove2.webp",
+    "source": "https://cinorev.in/john-cathrine/a/dove2.webp",
+    "use": "Reference scene artwork in unpublished design draft"
+  },
+  {
+    "path": "public/assets/flagship/christian/palm.webp",
+    "source": "https://cinorev.in/john-cathrine/a/palm.webp",
+    "use": "Reference scene artwork in unpublished design draft"
+  },
+  {
+    "path": "public/assets/flagship/christian/aisle.webp",
+    "source": "https://cinorev.in/john-cathrine/a/aisle.webp",
+    "use": "Reference scene artwork in unpublished design draft"
+  },
+  {
+    "path": "public/assets/flagship/christian/doors.webp",
+    "source": "https://cinorev.in/john-cathrine/a/doors.webp",
+    "use": "Reference scene artwork in unpublished design draft"
+  },
+  {
+    "path": "public/assets/flagship/christian/backdrop.jpg",
+    "source": "https://cinorev.in/john-cathrine/a/backdrop.jpg",
+    "use": "Reference scene artwork in unpublished design draft"
+  },
+  {
+    "path": "public/assets/flagship/christian/paper.webp",
+    "source": "https://cinorev.in/john-cathrine/a/paper.webp",
+    "use": "Reference scene artwork in unpublished design draft"
+  },
+  {
+    "path": "public/assets/flagship/hindu/sky.webp",
+    "source": "https://cinorev.in/karthik-nila/a/sky.webp",
+    "use": "Reference scene artwork in unpublished design draft"
+  },
+  {
+    "path": "public/assets/flagship/hindu/gopuram.webp",
+    "source": "https://cinorev.in/karthik-nila/a/gopuram.webp",
+    "use": "Reference scene artwork in unpublished design draft"
+  },
+  {
+    "path": "public/assets/flagship/hindu/l6.webp",
+    "source": "https://cinorev.in/karthik-nila/a/l6.webp",
+    "use": "Reference scene artwork in unpublished design draft"
+  },
+  {
+    "path": "public/assets/flagship/hindu/petal.webp",
+    "source": "https://cinorev.in/karthik-nila/a/petal.webp",
+    "use": "Reference scene artwork in unpublished design draft"
+  },
+  {
+    "path": "public/assets/flagship/hindu/diya.webp",
+    "source": "https://cinorev.in/karthik-nila/a/diya.webp",
+    "use": "Reference scene artwork in unpublished design draft"
+  },
+  {
+    "path": "public/assets/flagship/hindu/petal2.webp",
+    "source": "https://cinorev.in/karthik-nila/a/petal2.webp",
+    "use": "Reference scene artwork in unpublished design draft"
+  },
+  {
+    "path": "public/assets/flagship/hindu/backdrop.jpg",
+    "source": "https://cinorev.in/karthik-nila/a/backdrop.jpg",
+    "use": "Reference scene artwork in unpublished design draft"
+  },
+  {
+    "path": "public/assets/flagship/hindu/silk.webp",
+    "source": "https://cinorev.in/karthik-nila/a/silk.webp",
+    "use": "Reference scene artwork in unpublished design draft"
+  },
+  {
+    "path": "public/assets/flagship/hindu/l4.webp",
+    "source": "https://cinorev.in/karthik-nila/a/l4.webp",
+    "use": "Reference scene artwork in unpublished design draft"
+  },
+  {
+    "path": "public/assets/flagship/hindu/l3.webp",
+    "source": "https://cinorev.in/karthik-nila/a/l3.webp",
+    "use": "Reference scene artwork in unpublished design draft"
+  },
+  {
+    "path": "public/assets/flagship/hindu/l12.webp",
+    "source": "https://cinorev.in/karthik-nila/a/l12.webp",
+    "use": "Reference scene artwork in unpublished design draft"
+  },
+  {
+    "path": "public/assets/flagship/hindu/l7.webp",
+    "source": "https://cinorev.in/karthik-nila/a/l7.webp",
+    "use": "Reference scene artwork in unpublished design draft"
+  },
+  {
+    "path": "public/assets/flagship/hindu/l2.webp",
+    "source": "https://cinorev.in/karthik-nila/a/l2.webp",
+    "use": "Reference scene artwork in unpublished design draft"
+  },
+  {
+    "path": "public/assets/flagship/hindu/l11.webp",
+    "source": "https://cinorev.in/karthik-nila/a/l11.webp",
+    "use": "Reference scene artwork in unpublished design draft"
+  },
+  {
+    "path": "public/assets/flagship/hindu/l8.webp",
+    "source": "https://cinorev.in/karthik-nila/a/l8.webp",
+    "use": "Reference scene artwork in unpublished design draft"
+  },
+  {
+    "path": "public/assets/flagship/hindu/l10.webp",
+    "source": "https://cinorev.in/karthik-nila/a/l10.webp",
+    "use": "Reference scene artwork in unpublished design draft"
+  },
+  {
+    "path": "public/assets/flagship/hindu/l1.webp",
+    "source": "https://cinorev.in/karthik-nila/a/l1.webp",
+    "use": "Reference scene artwork in unpublished design draft"
+  },
+  {
+    "path": "public/assets/flagship/hindu/l5.webp",
+    "source": "https://cinorev.in/karthik-nila/a/l5.webp",
+    "use": "Reference scene artwork in unpublished design draft"
+  },
+  {
+    "path": "public/assets/flagship/hindu/l9.webp",
+    "source": "https://cinorev.in/karthik-nila/a/l9.webp",
+    "use": "Reference scene artwork in unpublished design draft"
+  },
+  {
+    "path": "public/assets/flagship/muslim/sky.webp",
+    "source": "https://cinorev.in/imran-afrin/a/sky.webp",
+    "use": "Reference scene artwork in unpublished design draft"
+  },
+  {
+    "path": "public/assets/flagship/muslim/skyline.webp",
+    "source": "https://cinorev.in/imran-afrin/a/skyline.webp",
+    "use": "Reference scene artwork in unpublished design draft"
+  },
+  {
+    "path": "public/assets/flagship/muslim/f1.webp",
+    "source": "https://cinorev.in/imran-afrin/a/f1.webp",
+    "use": "Reference scene artwork in unpublished design draft"
+  },
+  {
+    "path": "public/assets/flagship/muslim/courtyard.webp",
+    "source": "https://cinorev.in/imran-afrin/a/courtyard.webp",
+    "use": "Reference scene artwork in unpublished design draft"
+  },
+  {
+    "path": "public/assets/flagship/muslim/jaali.webp",
+    "source": "https://cinorev.in/imran-afrin/a/jaali.webp",
+    "use": "Reference scene artwork in unpublished design draft"
+  },
+  {
+    "path": "public/assets/flagship/muslim/f8.webp",
+    "source": "https://cinorev.in/imran-afrin/a/f8.webp",
+    "use": "Reference scene artwork in unpublished design draft"
+  },
+  {
+    "path": "public/assets/flagship/muslim/moon.webp",
+    "source": "https://cinorev.in/imran-afrin/a/moon.webp",
+    "use": "Reference scene artwork in unpublished design draft"
+  },
+  {
+    "path": "public/assets/flagship/muslim/backdrop.jpg",
+    "source": "https://cinorev.in/imran-afrin/a/backdrop.jpg",
+    "use": "Reference scene artwork in unpublished design draft"
+  },
+  {
+    "path": "public/assets/flagship/muslim/velvet.webp",
+    "source": "https://cinorev.in/imran-afrin/a/velvet.webp",
+    "use": "Reference scene artwork in unpublished design draft"
+  },
+  {
+    "path": "public/assets/flagship/muslim/arch-mask.png",
+    "source": "https://cinorev.in/imran-afrin/a/arch-mask.png",
+    "use": "Reference scene artwork in unpublished design draft"
+  },
+  {
+    "path": "public/assets/flagship/muslim/f4.webp",
+    "source": "https://cinorev.in/imran-afrin/a/f4.webp",
+    "use": "Reference scene artwork in unpublished design draft"
+  },
+  {
+    "path": "public/assets/flagship/muslim/f5.webp",
+    "source": "https://cinorev.in/imran-afrin/a/f5.webp",
+    "use": "Reference scene artwork in unpublished design draft"
+  },
+  {
+    "path": "public/assets/flagship/muslim/f7.webp",
+    "source": "https://cinorev.in/imran-afrin/a/f7.webp",
+    "use": "Reference scene artwork in unpublished design draft"
+  },
+  {
+    "path": "public/assets/flagship/muslim/f2.webp",
+    "source": "https://cinorev.in/imran-afrin/a/f2.webp",
+    "use": "Reference scene artwork in unpublished design draft"
+  },
+  {
+    "path": "public/assets/flagship/muslim/f3.webp",
+    "source": "https://cinorev.in/imran-afrin/a/f3.webp",
+    "use": "Reference scene artwork in unpublished design draft"
+  },
+  {
+    "path": "public/assets/flagship/muslim/f6.webp",
+    "source": "https://cinorev.in/imran-afrin/a/f6.webp",
+    "use": "Reference scene artwork in unpublished design draft"
+  },
+  {
+    "path": "public/assets/flagship/muslim/f9.webp",
+    "source": "https://cinorev.in/imran-afrin/a/f9.webp",
+    "use": "Reference scene artwork in unpublished design draft"
+  },
+  {
+    "path": "public/assets/flagship/christian/glass.webp",
+    "source": "https://cinorev.in/john-cathrine/a/glass.webp",
+    "use": "Christian reference adaptation, supplied reference authorized by user"
+  },
+  {
+    "path": "public/assets/flagship/christian/garland.webp",
+    "source": "https://cinorev.in/john-cathrine/a/garland.webp",
+    "use": "Christian reference adaptation, supplied reference authorized by user"
+  },
+  {
+    "path": "public/assets/flagship/christian/reception.webp",
+    "source": "https://cinorev.in/john-cathrine/a/reception.webp",
+    "use": "Christian reference adaptation, supplied reference authorized by user"
+  },
+  {
+    "path": "public/assets/flagship/christian/rings.webp",
+    "source": "https://cinorev.in/john-cathrine/a/rings.webp",
+    "use": "Christian reference adaptation, supplied reference authorized by user"
+  },
+  {
+    "path": "public/assets/flagship/christian/sunlight.webp",
+    "source": "https://cinorev.in/john-cathrine/a/sunlight.webp",
+    "use": "Christian reference adaptation, supplied reference authorized by user"
+  },
+  {
+    "path": "public/assets/flagship/christian/story1.webp",
+    "source": "https://cinorev.in/john-cathrine/a/story1.webp",
+    "use": "Christian reference adaptation, supplied reference authorized by user"
+  },
+  {
+    "path": "public/assets/flagship/christian/story2.webp",
+    "source": "https://cinorev.in/john-cathrine/a/story2.webp",
+    "use": "Christian reference adaptation, supplied reference authorized by user"
+  },
+  {
+    "path": "public/assets/flagship/christian/story3.webp",
+    "source": "https://cinorev.in/john-cathrine/a/story3.webp",
+    "use": "Christian reference adaptation, supplied reference authorized by user"
+  },
+  {
+    "path": "public/assets/flagship/christian/story4.webp",
+    "source": "https://cinorev.in/john-cathrine/a/story4.webp",
+    "use": "Christian reference adaptation, supplied reference authorized by user"
+  }
+]

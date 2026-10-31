@@ -2,7 +2,7 @@ import type {InviteData} from './Invitation';
 import {accessToken,readSession} from './auth-session';
 
 export type GuestKey={slug:string;token:string};
-export type CloudInvite={invitation:InviteData;slug:string;expiresAt:string;published?:boolean};
+export type CloudInvite={templateVersionId?:string;invitation:InviteData;slug:string;expiresAt:string;published?:boolean};
 const key='findmyinvite-guest-keys-v1';
 export function guestKeys():GuestKey[]{try{const value=JSON.parse(localStorage.getItem(key)||'[]');return Array.isArray(value)?value.filter(x=>typeof x?.slug==='string'&&/^[a-f0-9]{64}$/.test(x?.token)):[]}catch{return []}}
 export function rememberGuest(item:GuestKey){localStorage.setItem(key,JSON.stringify([...guestKeys().filter(x=>x.slug!==item.slug),item]));}

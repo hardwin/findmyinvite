@@ -1,0 +1,20 @@
+{
+  "source": "Screenshots of the actual published revision 2 renderers",
+  "viewport": {
+    "width": 480,
+    "height": 800
+  },
+  "crop": {
+    "x": 0,
+    "y": 0,
+    "width": 464,
+    "height": 800
+  },
+  "scrollY": 520,
+  "templates": [
+    "christian-bells",
+    "kerala-lanterns",
+    "moonlit-nikah"
+  ],
+  "note": "Opening invitation scene after opening the gate where present; no compositing or generated artwork."
+}

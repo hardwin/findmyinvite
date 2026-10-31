@@ -7,6 +7,16 @@ import verifyPayment from '../api/verify-payment.mjs';
 import {PAYMENT_SKUS,skuValue,assertCheckoutAmount,verifyCheckoutSignature,verifyWebhookSignature,paymentsConfigured} from '../server/payments.mjs';
 
 const jwt='eyJhbGciOiJub25lIn0.e30.one';
+test('production checkout requires live credentials and webhook recovery configuration',()=>{
+ const credentials={RAZORPAY_KEY_ID:'rzp_test_fixture',RAZORPAY_KEY_SECRET:'fixture-secret',RAZORPAY_WEBHOOK_SECRET:'fixture-hook'};
+ assert.equal(paymentsConfigured({...credentials,VERCEL_ENV:'preview'}),true);
+ assert.equal(paymentsConfigured({...credentials,VERCEL_ENV:'production'}),false);
+ assert.equal(paymentsConfigured({...credentials,PAYMENT_MODE:'live'}),false);
+ const live={...credentials,VERCEL_ENV:'production',RAZORPAY_KEY_ID:'rzp_live_fixture'};
+ assert.equal(paymentsConfigured(live),true);
+ assert.equal(paymentsConfigured({...live,RAZORPAY_KEY_SECRET:''}),false);
+ assert.equal(paymentsConfigured({...live,RAZORPAY_WEBHOOK_SECRET:''}),false);
+});
 async function request(url,options={},fn=handler){
  const res={headers:{},setHeader(k,v){this.headers[k]=v;},status(n){this.code=n;return this;},json(b){this.body=b;}};
  await fn({url,method:options.method||'GET',headers:options.headers||{},body:options.body,socket:{remoteAddress:'127.0.0.1'}},res);
@@ -55,7 +65,7 @@ test('payments config hides the secret and reports whether checkout can run',asy
  }finally{for(const key of Object.keys(process.env))if(!(key in env))delete process.env[key];Object.assign(process.env,env);}
 });
 
-test('order records a Razorpay order without a host account',async t=>{
+test('retired website checkout is blocked; video checkout still creates orders',async t=>{
  const env={...process.env};
  Object.assign(process.env,{
   SUPABASE_URL:'https://pay-test.supabase.co',
@@ -70,15 +80,17 @@ test('order records a Razorpay order without a host account',async t=>{
   calls.push({host:parsed.hostname,path:parsed.pathname,method:options.method||'GET',body:options.body?JSON.parse(options.body):undefined});
   if(parsed.pathname==='/auth/v1/user')return new Response(JSON.stringify({id:'user-1',email:'host@example.com'}));
   if(parsed.pathname.endsWith('/rpc/consume_rate_limit'))return new Response('true',{headers:{'Content-Type':'application/json'}});
-  if(parsed.hostname==='api.razorpay.com')return new Response(JSON.stringify({id:'order_test',amount:119900,currency:'INR'}),{status:200});
+  if(parsed.hostname==='api.razorpay.com')return new Response(JSON.stringify({id:'order_test',amount:149900,currency:'INR'}),{status:200});
   if(parsed.pathname.endsWith('/payments'))return new Response(JSON.stringify([{id:'pay-row',razorpay_order_id:'order_test',status:'created'}]),{status:201});
   return new Response('[]');
  });
  try{
-  const created=await request('/api/create-order',{method:'POST',body:{sku:'website-classic',slug:'aaron-maria'}},createOrder);
-  assert.equal(created.code,201);assert.equal(created.body.order_id,'order_test');assert.equal(created.body.orderId,'order_test');assert.equal(created.body.amount,119900);
+  const retired=await request('/api/create-order',{method:'POST',body:{sku:'website-classic',slug:'aaron-maria'}},createOrder);
+  assert.equal(retired.code,410);assert.equal(calls.some(c=>c.host==='api.razorpay.com'),false);
+  const created=await request('/api/create-order',{method:'POST',body:{sku:'video-royal',slug:'aaron-maria'}},createOrder);
+  assert.equal(created.code,201);assert.equal(created.body.order_id,'order_test');assert.equal(created.body.orderId,'order_test');assert.equal(created.body.amount,149900);
   assert.equal(created.body.keyId,'rzp_test_key');
-  assert.ok(calls.some(c=>c.host==='api.razorpay.com'&&c.body?.amount===119900));
+  assert.ok(calls.some(c=>c.host==='api.razorpay.com'&&c.body?.amount===149900));
   const tiny=await request('/api/create-order',{method:'POST',headers:{authorization:'Bearer '+jwt},body:{amount:50,currency:'INR',receipt:'tiny'}},createOrder);
   assert.equal(tiny.code,400);
  }finally{t.mock.restoreAll();for(const key of Object.keys(process.env))if(!(key in env))delete process.env[key];Object.assign(process.env,env);}
@@ -102,10 +114,10 @@ test('Razorpay auth failures return 401 and API errors return 500',async t=>{
   return new Response('[]');
  });
  try{
-  const unauthorized=await request('/api/create-order',{method:'POST',headers:{authorization:'Bearer '+jwt},body:{sku:'website-classic',slug:'aaron-maria'}},createOrder);
+  const unauthorized=await request('/api/create-order',{method:'POST',headers:{authorization:'Bearer '+jwt},body:{sku:'video-royal',slug:'aaron-maria'}},createOrder);
   assert.equal(unauthorized.code,401);
   razorpayStatus=502;
-  const failed=await request('/api/create-order',{method:'POST',headers:{authorization:'Bearer '+jwt},body:{sku:'website-classic',slug:'aaron-maria'}},createOrder);
+  const failed=await request('/api/create-order',{method:'POST',headers:{authorization:'Bearer '+jwt},body:{sku:'video-royal',slug:'aaron-maria'}},createOrder);
   assert.equal(failed.code,500);
  }finally{t.mock.restoreAll();for(const key of Object.keys(process.env))if(!(key in env))delete process.env[key];Object.assign(process.env,env);}
 });

@@ -1,4 +1,4 @@
-import {useEffect,useState} from 'react';
+import {lazy,Suspense,useEffect,useState} from 'react';
 import Invitation from './Invitation';
 import {PublishedStudio} from './studio/StudioPreview';
 import type {InviteData} from './Invitation';
@@ -9,11 +9,13 @@ import {invitationShareText,slugShareText,whatsappHref} from './share';
 import {InviteDownloadMenu} from './InviteDownload';
 import {readSession,requestSignIn,accessToken} from './auth-session';
 
+const TemplateGuest=lazy(()=>import('./templates/WebsiteEditor').then(m=>({default:m.TemplateGuest})));
 export function PublicInvitation({slug}:{slug:string}){
  const [result,setResult]=useState<CloudInvite|null>(null),[error,setError]=useState('');
  useEffect(()=>{let active=true;api<CloudInvite>('read',slug).then(x=>{if(active)setResult(x)}).catch(e=>{if(active)setError(e.message)});return()=>{active=false}},[slug]);
  if(error)return <main className="editor-shell"><h1>Invitation unavailable</h1><p>{error}</p><Button href="/">FindMyInvite</Button></main>;
  if(!result)return <main className="editor-shell" role="status">Loading invitation…</main>;
+ if(result.templateVersionId)return <Suspense fallback={<p>Loading invitation…</p>}><TemplateGuest slug={slug}/></Suspense>;
  if((result.invitation as InviteData & {studioId?:string}).studioId)return <PublishedStudio slug={slug}/>;
  return <Invitation cloudData={result.invitation} onRsvp={async fields=>{await api('rsvp',slug,'',fields)}}/>;
 }

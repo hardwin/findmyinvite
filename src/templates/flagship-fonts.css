@@ -1,0 +1,77 @@
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/assets/flagship/fonts/6d37a86241a25d63.woff2) format('truetype');
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/assets/flagship/fonts/1724047c8988ca51.woff2) format('truetype');
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/assets/flagship/fonts/69e7ae35cba23d96.woff2) format('truetype');
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/assets/flagship/fonts/440daf036a35abd6.woff2) format('truetype');
+}
+@font-face {
+  font-family: 'Figtree';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/assets/flagship/fonts/81f3fc9d8d4e307e.woff2) format('truetype');
+}
+@font-face {
+  font-family: 'Figtree';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/assets/flagship/fonts/f8a90c01bc4c31aa.woff2) format('truetype');
+}
+@font-face {
+  font-family: 'Figtree';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/assets/flagship/fonts/b5d3fe714f8283b0.woff2) format('truetype');
+}
+@font-face {
+  font-family: 'Figtree';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/assets/flagship/fonts/88aad0bfccf47bc6.woff2) format('truetype');
+}
+@font-face {
+  font-family: 'Noto Serif Malayalam';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/assets/flagship/fonts/f3bd7d9f65bad43a.woff2) format('truetype');
+}
+@font-face {
+  font-family: 'Noto Serif Malayalam';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/assets/flagship/fonts/795285a8acceb46b.woff2) format('truetype');
+}
+@font-face {
+  font-family: 'Pinyon Script';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/assets/flagship/fonts/3683830e3bb3f1a2.woff2) format('truetype');
+}

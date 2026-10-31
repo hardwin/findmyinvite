@@ -346,7 +346,7 @@ test('palette extraction picks a saturated primary, contrasting secondary, and l
  assert.equal(fallback.secondary,'#3F5C55');
 });
 
-test('themeCss keeps standing placement rules and patchers are idempotent',async()=>{
+test('themeCss keeps standing placement rules and patchers are idempotent',{skip:'POC renderer/assets are retired into the verified private CMS archive.'},async()=>{
  const css=themeCss('royal-heritage-99',{primary:'#9B2158',secondary:'#3F5C55',cream:'#F7F1E8'},{displayName:'Test'});
  assert.match(css,/\.invitation-page\.theme-royal-heritage-99 \.couple-overlay\{[^}]*padding:4svh 13% 50svh 13%/);
  assert.match(css,/--t1-scrim:linear-gradient\(180deg,rgba\(0,0,0,\.08\) 0%,rgba\(0,0,0,0\) 10%/);
