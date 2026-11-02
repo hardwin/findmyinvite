@@ -1,0 +1,191 @@
+{
+  "reference": "https://www.thedigitalyes.com/demo/lace",
+  "notes": "Reference media reused for the requested replication. React renderer and editable schema are native implementation. Additional SVG illustrations were extracted from reference DOM; hotel.svg is a local reconstruction. No reference application JavaScript ships in the renderer.",
+  "assets": [
+    {
+      "name": "tulle-texture-burgundy.webp",
+      "url": "https://plantillalace.thedigitalyes.com/__l5e/assets-v1/c7e4ef86-25a1-4b7b-8e8a-816f0f74a283/tulle-texture-burgundy.webp",
+      "bytes": 32000
+    },
+    {
+      "name": "hero-bg.mp4",
+      "url": "https://plantillalace.thedigitalyes.com/__l5e/assets-v1/a202a22b-4d43-4bff-8257-3d6d4661eb6e/hero-bg.mp4",
+      "bytes": 584229
+    },
+    {
+      "name": "bellagio-2-poster.jpg",
+      "url": "https://plantillalace.thedigitalyes.com/__l5e/assets-v1/1dae52c0-dcb3-4809-bb6d-465290c83bb9/bellagio-2-poster.jpg",
+      "bytes": 393651
+    },
+    {
+      "name": "countdown-bows-ivory.png",
+      "url": "https://plantillalace.thedigitalyes.com/__l5e/assets-v1/012fbe1b-6f89-4376-98b4-7f7c27aee4d9/countdown-bows-ivory.png",
+      "bytes": 377102
+    },
+    {
+      "name": "villa-illustration-thick.svg",
+      "url": "https://plantillalace.thedigitalyes.com/__l5e/assets-v1/049bdf72-7555-48c2-987a-b01a7194ed6b/villa-illustration-thick.svg",
+      "bytes": 108282
+    },
+    {
+      "name": "cocktail-glass-left.png",
+      "url": "https://plantillalace.thedigitalyes.com/__l5e/assets-v1/4e9e033f-66f8-40db-aa10-c66abf5fc8b0/cocktail-glass-left.png",
+      "bytes": 330871
+    },
+    {
+      "name": "banquet-table.png",
+      "url": "https://plantillalace.thedigitalyes.com/__l5e/assets-v1/9ed4086a-4630-44ed-9172-d0cb2ea90e92/banquet-table.png",
+      "bytes": 105372
+    },
+    {
+      "name": "lace-border-white.webp",
+      "url": "https://plantillalace.thedigitalyes.com/__l5e/assets-v1/087d9791-fe00-470f-9b90-429c6eb6ba65/lace-border-white.webp",
+      "bytes": 163278
+    },
+    {
+      "name": "cocktail-glass-right.png",
+      "url": "https://plantillalace.thedigitalyes.com/__l5e/assets-v1/3bf9bbcc-a011-4d33-89dc-15f9bdb29e5c/cocktail-glass-right.png",
+      "bytes": 333504
+    },
+    {
+      "name": "dancing-details.png",
+      "url": "https://plantillalace.thedigitalyes.com/__l5e/assets-v1/3678bf86-8965-45b5-9b2f-04465f0f3330/dancing-details.png",
+      "bytes": 16561
+    },
+    {
+      "name": "welcome-still.png",
+      "url": "https://plantillalace.thedigitalyes.com/__l5e/assets-v1/95f610fc-27ba-4ca6-ba9a-ee08c58eb851/welcome-still.png",
+      "bytes": 515888
+    },
+    {
+      "name": "dancing-still.png",
+      "url": "https://plantillalace.thedigitalyes.com/__l5e/assets-v1/7db0a702-ff9d-41ae-b928-277c5a46ae55/dancing-still.png",
+      "bytes": 413512
+    },
+    {
+      "name": "event-dancing.png",
+      "url": "https://plantillalace.thedigitalyes.com/__l5e/assets-v1/cc627a4c-e0fe-481f-9375-6f71252eec04/event-dancing.png",
+      "bytes": 424765
+    },
+    {
+      "name": "event-welcome.png",
+      "url": "https://plantillalace.thedigitalyes.com/__l5e/assets-v1/92304509-75d5-413a-b6ed-10484037afbf/event-welcome.png",
+      "bytes": 525979
+    },
+    {
+      "name": "event-dinner.png",
+      "url": "https://plantillalace.thedigitalyes.com/__l5e/assets-v1/8e41558c-b4ef-4180-8d38-38f287f27f42/event-dinner.png",
+      "bytes": 363707
+    },
+    {
+      "name": "event-cocktail.png",
+      "url": "https://plantillalace.thedigitalyes.com/__l5e/assets-v1/5087e7ab-e4e7-462d-99e4-9c4bff80b1af/event-cocktail.png",
+      "bytes": 333850
+    },
+    {
+      "name": "pearl-garland-2-base.png",
+      "url": "https://plantillalace.thedigitalyes.com/__l5e/assets-v1/8f395744-9b48-4253-9c4e-41a9025f96f1/pearl-garland-2-base.png",
+      "bytes": 326635
+    },
+    {
+      "name": "event-ceremony.png",
+      "url": "https://plantillalace.thedigitalyes.com/__l5e/assets-v1/0d3bd171-c724-4212-8570-5212c99e8ed5/event-ceremony.png",
+      "bytes": 513298
+    },
+    {
+      "name": "welcome-details.png",
+      "url": "https://plantillalace.thedigitalyes.com/__l5e/assets-v1/9d46dea2-42d0-4612-82b2-3c0412642f87/welcome-details.png",
+      "bytes": 16992
+    },
+    {
+      "name": "pearl-garland-2-strand-0.png",
+      "url": "https://plantillalace.thedigitalyes.com/__l5e/assets-v1/880c02e2-cbce-4808-a78e-6a4430a5c1e1/pearl-garland-2-strand-0.png",
+      "bytes": 90735
+    },
+    {
+      "name": "pearl-garland-2-strand-3.png",
+      "url": "https://plantillalace.thedigitalyes.com/__l5e/assets-v1/c1eeba31-65a7-448b-a167-cc9ef56c40be/pearl-garland-2-strand-3.png",
+      "bytes": 73120
+    },
+    {
+      "name": "pearl-garland-2-strand-1.png",
+      "url": "https://plantillalace.thedigitalyes.com/__l5e/assets-v1/db7f6020-b3a9-4026-896e-6b6b4d6ffd76/pearl-garland-2-strand-1.png",
+      "bytes": 72553
+    },
+    {
+      "name": "pearl-garland-2-strand-2.png",
+      "url": "https://plantillalace.thedigitalyes.com/__l5e/assets-v1/b9693569-8d9a-4029-b535-e76f1fc2b798/pearl-garland-2-strand-2.png",
+      "bytes": 54650
+    },
+    {
+      "name": "pearl-garland-2.webp",
+      "url": "https://plantillalace.thedigitalyes.com/__l5e/assets-v1/fafdbe7d-c9f4-46ee-8c42-82dfcb8386a9/pearl-garland-2.webp",
+      "bytes": 229366
+    },
+    {
+      "name": "pearl-garland-2-strand-4.png",
+      "url": "https://plantillalace.thedigitalyes.com/__l5e/assets-v1/1db6bc1e-2e40-4e40-a48e-a24038e79d69/pearl-garland-2-strand-4.png",
+      "bytes": 90738
+    },
+    {
+      "name": "pearl-strip.png",
+      "url": "https://plantillalace.thedigitalyes.com/__l5e/assets-v1/8ee24c27-f68a-45f4-805d-ea72a22cd861/pearl-strip.png",
+      "bytes": 98353
+    },
+    {
+      "name": "transport-lace-oval.webp",
+      "url": "https://plantillalace.thedigitalyes.com/__l5e/assets-v1/64e8266f-4053-4f37-bf2f-18fc90efd7d3/transport-lace-oval.webp",
+      "bytes": 588806
+    },
+    {
+      "name": "dresscode-couple-new-still.png",
+      "url": "https://plantillalace.thedigitalyes.com/__l5e/assets-v1/257a99aa-b31b-4cde-b1e1-059db2a3c4ed/dresscode-couple-new-still.png",
+      "bytes": 131799
+    },
+    {
+      "name": "dresscode-couple-new-transparent.webp",
+      "url": "https://plantillalace.thedigitalyes.com/__l5e/assets-v1/8247d386-46cc-4f72-8c31-8d40803bdd2c/dresscode-couple-new-transparent.webp",
+      "bytes": 2204264
+    },
+    {
+      "name": "lace-bow-prev.webp",
+      "url": "https://plantillalace.thedigitalyes.com/__l5e/assets-v1/323f2edc-046a-4b73-aeb4-1feb2650c594/lace-bow-prev.webp",
+      "bytes": 541848
+    },
+    {
+      "name": "hotel-ornament.png",
+      "url": "https://plantillalace.thedigitalyes.com/__l5e/assets-v1/1f18c1c1-8a89-4268-b173-ff7e84f8226e/hotel-ornament.png",
+      "bytes": 331049
+    },
+    {
+      "name": "lace-square-white-2.webp",
+      "url": "https://plantillalace.thedigitalyes.com/__l5e/assets-v1/ef04359e-5d81-46e6-bdb5-236c9427d559/lace-square-white-2.webp",
+      "bytes": 205400
+    },
+    {
+      "name": "lace-bow.webp",
+      "url": "https://plantillalace.thedigitalyes.com/__l5e/assets-v1/8e476e71-50b9-4dc9-a0ee-5c4db160bef8/lace-bow.webp",
+      "bytes": 381074
+    },
+    {
+      "name": "balcony-loop.webp",
+      "url": "https://plantillalace.thedigitalyes.com/__l5e/assets-v1/61330f87-d4d3-4783-99cd-f85e93eda557/balcony-loop.webp",
+      "bytes": 1054358
+    },
+    {
+      "name": "lace-corner-swag.webp",
+      "url": "https://plantillalace.thedigitalyes.com/__l5e/assets-v1/8cf4ab83-f10c-4cce-b0b2-3ba81d7257d2/lace-corner-swag.webp",
+      "bytes": 166170
+    },
+    {
+      "name": "hero-still.jpg",
+      "source": "hero-bg.mp4",
+      "derivation": "Frame at 1 second extracted with FFmpeg for reduced-motion poster"
+    },
+    {
+      "name": "opening.mp4",
+      "url": "https://plantillalace.thedigitalyes.com/__l5e/assets-v1/4dbea26a-9713-4652-8484-2da4bbcf5067/bellagio-2-opt.mp4",
+      "bytes": 1998561
+    }
+  ]
+}

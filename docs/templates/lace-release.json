@@ -1,0 +1,76 @@
+{
+  "name": "Lace & Pearls",
+  "date": "2026-10-31",
+  "templateId": "ivory-lace",
+  "renderer": "ivory-lace-v1",
+  "revision": 2,
+  "versionId": "9725dcb9-beb8-492f-a7f3-e3adbfd4fc76",
+  "status": "Release metadata; live approval and publication are managed by the CMS",
+  "reference": "https://www.thedigitalyes.com/demo/lace",
+  "referenceCanvas": "https://plantillalace.thedigitalyes.com/",
+  "qaPreview": "http://127.0.0.1:5173/work/lace/qa.html",
+  "evidenceDirectory": "work/lace/qa",
+  "verification": {
+    "build": "TypeScript and Vite pass",
+    "templateTests": "23 pass",
+    "desktop": "1280 × 720, 35 half-viewport pairs",
+    "mobile": "390 × 844, 24 half-viewport pairs",
+    "editor": "Catalog → Preview → Personalise tested locally against the same stored version, including an edited partner name.",
+    "behaviors": [
+      "Keyboard opening",
+      "Long names",
+      "Malayalam",
+      "Absent optional cover artwork",
+      "Reduced-motion video paused and lace still visible",
+      "RSVP attendance, plus-one and children dietary inputs",
+      "Preview RSVP does not send"
+    ],
+    "notVerified": [
+      "Storefront Preview → Personalise → saved draft → checkout → published guest flow",
+      "Custom media upload and music playback",
+      "Native Safari"
+    ],
+    "opening": "Original MP4 plays on click/Enter; media progress starts hero text with 1.8s remaining and a 2s fade with 1s remaining. Verified automatic handoff, focus and scroll unlock.",
+    "fullServerSuite": {
+      "tests": 285,
+      "passed": 257,
+      "failed": 21,
+      "skipped": 7,
+      "baseline": {
+        "commit": "b3994f0643df56554a6f9a61d9e4870a0268af18",
+        "tests": 283,
+        "passed": 255,
+        "failed": 21,
+        "skipped": 7
+      },
+      "conclusion": "Same 21 failing test names on unchanged production baseline; no new failures.",
+      "logs": "work/lace/full-tests.tap and work/lace/baseline-tests.tap"
+    }
+  },
+  "differences": [
+    "Original five-second reference opening video with baked B&A seal; editable names appear in the invitation after the video",
+    "Beatrice/Alexander persona, original demo wording, no sample bank details or promised hotel booking rates",
+    "FindMyInvite credit and WhatsApp RSVP handoff",
+    "Customer-uploaded optional music; no reference soundtrack",
+    "Banquet artwork is static; reference has subtle displacement",
+    "Countdown uses the selected time and explicit UTC offset",
+    "Hotel frame reconstructed as scalable SVG",
+    "Text wrapping changes total height: final desktop local 12322 vs reference 12367 px; mobile local 9735 vs reference 9689 px",
+    "Infinite animations are not phase synchronized; screenshots do not certify pixel equivalence"
+  ],
+  "releaseProcedure": [
+    "Deploy this renderer and all Lace assets to the intended site",
+    "Run scripts/release-lace.mjs --publish --site=https://deployed-site --actor=operator-uuid, or approve/publish through CMS",
+    "Exercise the actual storefront, saved draft, checkout and guest version binding before calling the release verified"
+  ],
+  "updated": "2026-11-02",
+  "localCatalog": {
+    "library": "http://127.0.0.1:5173/templates",
+    "product": "http://127.0.0.1:5173/templates?product=ivory-lace",
+    "registry": "work/local-template-catalog/releases.json",
+    "command": "node --use-system-ca scripts/publish-local-template.mjs 9725dcb9-beb8-492f-a7f3-e3adbfd4fc76",
+    "scope": "Read-only selection of the actual CMS version in the development router. Production APIs and shared approval unchanged. Saving/checkout disabled for local-only releases."
+  },
+  "customerPreview": "/template-preview?version=9725dcb9-beb8-492f-a7f3-e3adbfd4fc76",
+  "personalise": "/personalise?version=9725dcb9-beb8-492f-a7f3-e3adbfd4fc76"
+}

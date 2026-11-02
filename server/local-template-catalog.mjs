@@ -1,0 +1,41 @@
+// Imported only by the Vite development router, never by deployed API handlers.
+// Local releases select real immutable CMS versions; there are no renderer/default overrides.
+import {readFile} from 'node:fs/promises';
+import {db,respond,fail} from './core.mjs';
+import {version,safeVersion} from './template-cms.mjs';
+
+export const localReleaseFile=new URL('../work/local-template-catalog/releases.json',import.meta.url);
+export async function readLocalReleaseIds(file=localReleaseFile){
+ let data;
+ try{data=JSON.parse(await readFile(file,'utf8'));}catch(error){if(error.code==='ENOENT')return [];throw error;}
+ if(!Array.isArray(data.versionIds)||data.versionIds.some(id=>typeof id!=='string'||!/^[a-f0-9-]{36}$/.test(id)))throw Error('Invalid local catalog release registry.');
+ return [...new Set(data.versionIds)];
+}
+
+export async function localTemplateCatalog(req,res,{readIds=readLocalReleaseIds,readVersion=version,query=db}={}){
+ const url=new URL(req.url,'http://localhost');
+ if(req.method!=='GET'||url.pathname!=='/api/templates')return false;
+ const action=url.searchParams.get('action');
+ if(!['public','version'].includes(action))return false;
+ try{
+  const ids=await readIds();
+  if(!ids.length)return false;
+  if(action==='version'){
+   const id=url.searchParams.get('id');
+   if(!ids.includes(id))return false;
+   respond(res,200,{version:{...safeVersion(await readVersion(id)),localPreview:true}});
+   return true;
+  }
+  const rows=await query('template_catalog?generation=eq.2&isactive=eq.true&published=eq.true&select=id,name,description,tradition,thumbnail,current_version_id,sort_order&order=sort_order.asc');
+  const releases=await Promise.all(ids.map(async id=>{
+   const v=await readVersion(id);
+   const [catalog]=await query('template_catalog?id=eq.'+encodeURIComponent(v.template_id)+'&select=id,name,description,tradition,thumbnail,sort_order');
+   if(!catalog)throw Error('Local release catalog entry is missing.');
+   return {...catalog,current_version_id:v.id,localPreview:true};
+  }));
+  const combined=new Map(rows.map(row=>[row.id,row]));
+  for(const row of releases)combined.set(row.id,row);
+  respond(res,200,{templates:[...combined.values()].sort((a,b)=>(a.sort_order??0)-(b.sort_order??0)),basePaise:19900});
+ }catch(error){fail(res,error);}
+ return true;
+}
