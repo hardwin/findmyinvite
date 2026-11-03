@@ -67,9 +67,10 @@ test('navbar and save/publish copy require accounts; forgot password stays out o
  assert.match(header,/<\/nav>\{authMode&&<AuthModal/);
  const modal=await readFile(new URL('../src/AuthModal.tsx',import.meta.url),'utf8');
  assert.equal(modal.toLowerCase().includes('forgot'),false);
- const editor=await readFile(new URL('../src/templates/WebsiteEditor.tsx',import.meta.url),'utf8');
- assert.match(editor,/if\(!readSession\(\)\)\{setSignin\(true\)/);
- assert.match(editor,/Save draft/);
+ const editor=await readFile(new URL('../src/templates/InvitationWizard.tsx',import.meta.url),'utf8');
+ assert.match(editor,/if\(!readSession\(\)\)\{pending\.current=task;setSignin\(true\)/);
+ assert.match(editor,/aria-label="Save"[^>]*onClick=\{\(\)=>withAccount/);
+ assert.match(editor,/review\?withAccount\(publish\)/);
  assert.match(editor,/Pay and publish/);
  const guestApi=await readFile(new URL('../src/guest-api.ts',import.meta.url),'utf8');
  assert.match(guestApi,/newGuestKey/);
