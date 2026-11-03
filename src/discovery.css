@@ -17,3 +17,5 @@ body.di-site .content-page,body.di-site .editor-shell{background:#fffdf9;color:#
 .di-masonry>.di-pin{margin-bottom:0;min-width:0}
 @media(max-width:1012px){.di-masonry{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:732px){.di-masonry{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+.di-live-thumbnail{position:relative;width:100%;aspect-ratio:400/560;overflow:hidden;background:#f5f1eb;pointer-events:none}.di-live-thumbnail iframe{position:absolute;inset:0;width:400px;height:560px;border:0;transform-origin:top left;pointer-events:none}.di-detail-media:has(.di-live-thumbnail){display:block}

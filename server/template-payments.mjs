@@ -1,7 +1,8 @@
+import {templateForm,formContent} from './template-forms.mjs';
 import {INVITATION_BASE_PAISE} from '../shared/pricing.mjs';
 import {HttpError,db,method,respond,bodyJson,rate} from './core.mjs';
 import {customer,owned,requireRecoverable,rpc,websiteOffer,audit} from './template-cms.mjs';
-import {websiteQuote,validateContent} from '../shared/template-contract.mjs';
+import {websiteQuote} from '../shared/template-contract.mjs';
 import {version} from './template-cms.mjs';
 import {createRazorpayOrder,publicKeyId,paymentsConfigured,razorpayAuth,verifyCheckoutSignature} from './payments.mjs';
 export async function settleWebsiteOrder(orderId,paymentId,recoveryId){
@@ -19,7 +20,7 @@ export default async function handle(req,res,q){const action=q.get('action');
  if(action==='v2-order'){
  await rate(req,'website-order',10,3600);if(!paymentsConfigured())throw new HttpError(503,'Checkout is not configured.');let quote;try{quote=await websiteOffer();}catch(e){throw new HttpError(503,e.message);}
  const purpose=b.purpose==='renew'?'renew':'publish';if(purpose==='renew'&&!row.first_published_at||purpose==='publish'&&row.first_published_at)throw new HttpError(409,'Invalid order purpose.');
- const v=await version(row.template_version_id);try{validateContent(v.field_schema,row.draft_content,{complete:true});}catch(e){throw new HttpError(400,e.message);}
+ const v=await version(row.template_version_id);if(purpose==='publish'){const form=await templateForm(v);formContent(form,v,{content:row.draft_content},{complete:true});}
  const active=await db('template_catalog?id=eq.'+encodeURIComponent(v.template_id)+'&isactive=eq.true&select=id');if(!row.first_published_at&&(!active.length||!v.approved_at))throw new HttpError(403,'Template not released.');
  // An existing captured payment must be resumed rather than charged again.
  const existing=await db('website_orders?invitation_id=eq.'+row.id+'&purpose=eq.'+purpose+'&status=eq.captured&applied_at=is.null&select=*&limit=1');if(existing[0])return respond(res,200,{captured:true,id:existing[0].id});

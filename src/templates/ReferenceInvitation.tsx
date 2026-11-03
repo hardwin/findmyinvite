@@ -1,3 +1,5 @@
+import {appendInvitationScript} from '../../shared/invitation-document.mjs';
+import {localisationConfig,localiseInvitationDocument} from './invitation-localisation';
 import {useEffect,useState} from 'react';
 import hindu from './reference-releases/hindu.json';
 import muslim from './reference-releases/muslim.json';
@@ -12,10 +14,10 @@ export default function ReferenceInvitation({version,content,preview=false,reduc
  useEffect(()=>{const ctrl=new AbortController(),urls:string[]=[];setDoc('');setError('');
   async function resolve(value:any):Promise<any>{if(typeof value==='string'&&value.startsWith('/api/')&&preview){const url=URL.createObjectURL(await privateMedia(value,ctrl.signal));urls.push(url);return url;}if(Array.isArray(value))return Promise.all(value.map(resolve));if(value&&typeof value==='object')return Object.fromEntries(await Promise.all(Object.entries(value).map(async([k,v])=>[k,await resolve(v)])));return value;}
   (async()=>{const data=await resolve(content);if(ctrl.signal.aborted)return;const theme=version.renderer==='kerala-kasavu-v2'?'hindu':'muslim',release=theme==='hindu'?hindu:muslim;
-   const search=new URLSearchParams(location.search);if(preview&&!search.has('to'))search.set('to','Your-Family');
-   const config=JSON.stringify({content:data,theme,preview,reduceMotion,search:search.toString(),url:location.href}).replaceAll('<','\\u003c');
-   const code='const FMI='+config+';('+bindReference.toString()+')(FMI);\n'+release.script;
-   setDoc(release.html.replace('</head>','<style>.parents b,.where{white-space:pre-line}img,video{max-width:100%}html[lang=ml] .names,html[lang=ml] .pair,html[lang=ml] h1,html[lang=ml] h2{font-family:"Noto Serif Malayalam",serif;line-height:1.6;overflow-wrap:anywhere}</style></head>').replace('</body>','<script>'+code.replace(/<\/script/gi,'<\\/script')+'</script></body>'));
+   const search=new URLSearchParams(location.search);if(preview&&!search.has('to'))search.set('to',content._catalogPreview?content.previewGuest:'Your-Family');
+   const config=JSON.stringify({content:data,theme,preview,reduceMotion,localisation:localisationConfig(data),search:search.toString(),url:location.href}).replaceAll('<','\\u003c');
+   const code='const FMI='+config+';('+bindReference.toString()+')(FMI);\n'+release.script+';('+localiseInvitationDocument.toString()+')(FMI.localisation);';
+   setDoc(appendInvitationScript(release.html.replace('</head>','<link rel="stylesheet" href="/assets/flagship/invitation-languages.css"><style>.parents b,.where{white-space:pre-line}img,video{max-width:100%}html[lang=ml] .names,html[lang=ml] .pair,html[lang=ml] h1,html[lang=ml] h2{font-family:"Noto Serif Malayalam",serif;line-height:1.6;overflow-wrap:anywhere}</style></head>'),code));
   })().catch(err=>{if(!ctrl.signal.aborted)setError(err.message||'Unable to load invitation media.');});return()=>{ctrl.abort();urls.forEach(URL.revokeObjectURL);};
  },[version.id,version.renderer,content,preview,reduceMotion]);
  if(error)return <p role="alert">{error}</p>;if(!doc)return <p role="status">Preparing your invitation…</p>;

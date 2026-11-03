@@ -22,3 +22,5 @@
  .df-sort{flex:0 0 auto;margin-left:0}
  .di-app button.df-trigger{flex-shrink:0}
 }
+
+@media(max-width:640px){.df-row{flex-wrap:wrap;overflow:visible}.df-group{width:100%;overflow-x:auto}.df-sort{width:100%;justify-content:space-between}.df-sort .df-trigger{max-width:210px}}

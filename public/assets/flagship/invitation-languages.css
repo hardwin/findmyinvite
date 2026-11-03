@@ -1,0 +1,27 @@
+/* Noto Serif fonts: Google Fonts, SIL Open Font License. See indic/*-OFL.txt. */
+@font-face{font-family:'Noto Serif Tamil';font-style:normal;font-weight:100 900;font-display:swap;src:url('/assets/flagship/fonts/indic/ta.ttf') format('truetype')}
+:lang(ta){--invitation-script:'Noto Serif Tamil'}
+:is(.ce-page,.lace-page,html)[lang=ta] :is(h1,h2,h3,h4,p,span,b,small,label,button,input,textarea,select,blockquote,cite,legend,a){font-family:var(--invitation-script),serif!important;letter-spacing:normal!important;line-height:1.6}
+@font-face{font-family:'Noto Serif Telugu';font-style:normal;font-weight:100 900;font-display:swap;src:url('/assets/flagship/fonts/indic/te.ttf') format('truetype')}
+:lang(te){--invitation-script:'Noto Serif Telugu'}
+:is(.ce-page,.lace-page,html)[lang=te] :is(h1,h2,h3,h4,p,span,b,small,label,button,input,textarea,select,blockquote,cite,legend,a){font-family:var(--invitation-script),serif!important;letter-spacing:normal!important;line-height:1.6}
+@font-face{font-family:'Noto Serif Kannada';font-style:normal;font-weight:100 900;font-display:swap;src:url('/assets/flagship/fonts/indic/kn.ttf') format('truetype')}
+:lang(kn){--invitation-script:'Noto Serif Kannada'}
+:is(.ce-page,.lace-page,html)[lang=kn] :is(h1,h2,h3,h4,p,span,b,small,label,button,input,textarea,select,blockquote,cite,legend,a){font-family:var(--invitation-script),serif!important;letter-spacing:normal!important;line-height:1.6}
+@font-face{font-family:'Noto Serif Devanagari';font-style:normal;font-weight:100 900;font-display:swap;src:url('/assets/flagship/fonts/indic/hi.ttf') format('truetype')}
+:lang(hi){--invitation-script:'Noto Serif Devanagari'}
+:is(.ce-page,.lace-page,html)[lang=hi] :is(h1,h2,h3,h4,p,span,b,small,label,button,input,textarea,select,blockquote,cite,legend,a){font-family:var(--invitation-script),serif!important;letter-spacing:normal!important;line-height:1.6}
+.iw-field :is(input,textarea,select),.iw-review{font-family:Inter,'Noto Serif Tamil','Noto Serif Telugu','Noto Serif Kannada','Noto Serif Devanagari',sans-serif}
+:is(.ce-page,.lace-page)[lang]:not([lang=en]):not([lang=ml]) :is(.names,.lace-names){line-height:1.6;letter-spacing:normal}
+
+@font-face{font-family:'Noto Serif Malayalam';font-style:normal;font-weight:400;font-display:swap;src:url('/assets/flagship/fonts/f3bd7d9f65bad43a.woff2')}
+:lang(ml){--invitation-script:'Noto Serif Malayalam'}
+:is(.ce-page,.lace-page,html)[lang=ml] :is(h1,h2,h3,h4,p,span,b,small,label,button,input,textarea,select,blockquote,cite,legend,a){font-family:var(--invitation-script),serif!important;letter-spacing:normal!important;line-height:1.6}
+html[data-fmi-thumbnail]{overflow:hidden!important;scrollbar-width:none}
+
+html[data-fmi-thumbnail] body:has(#gate) #s-sky{--p:0!important}
+html[data-fmi-thumbnail] body:has(#gate) #s-sky .title{opacity:1!important;transform:none!important}
+html[data-fmi-thumbnail] body:has(#gate) #s-sky .flash{display:none!important}
+
+html[data-fmi-thumbnail] body:has(#s-jaali) #s-sky .title{top:18svh!important}
+html[data-fmi-thumbnail] body:has(#gate) #s-sky .names .fmi-name{font-size:42px!important}

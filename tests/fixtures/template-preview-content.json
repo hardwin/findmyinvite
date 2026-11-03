@@ -1,0 +1,687 @@
+[
+  {
+    "template_id": "christian-bells",
+    "defaults": {
+      "date": "2027-02-14",
+      "time": "10:30",
+      "bride": "Anna Thomas",
+      "cover": "/assets/flagship/christian/rings.webp",
+      "groom": "Alex",
+      "story": [
+        {
+          "image": "/assets/flagship/christian/story1.webp",
+          "title": "Where it all began",
+          "caption": "By the sea",
+          "description": "One golden evening by the sea."
+        },
+        {
+          "image": "/assets/flagship/christian/story2.webp",
+          "title": "Rainy-day coffee",
+          "caption": "Filter coffee",
+          "description": "Two cups, and a conversation that never ended."
+        },
+        {
+          "image": "/assets/flagship/christian/story3.webp",
+          "title": "She said yes",
+          "caption": "She said yes",
+          "description": "A promise to share every tomorrow."
+        },
+        {
+          "image": "/assets/flagship/christian/story4.webp",
+          "title": "Engaged",
+          "caption": "Engaged",
+          "description": "Two families, one promise."
+        }
+      ],
+      "verse": "“I have found the one whom my soul loves.”",
+      "events": [
+        {
+          "date": "2027-02-14",
+          "time": "10:30",
+          "image": "/assets/flagship/christian/church.webp",
+          "title": "Holy Matrimony",
+          "venue": "St. Mary’s Church",
+          "address": "Fort Kochi, Kerala"
+        },
+        {
+          "date": "2027-02-14",
+          "note": "Dress code: soft pastels and whites",
+          "time": "18:30",
+          "image": "/assets/flagship/christian/reception.webp",
+          "title": "Reception",
+          "venue": "The Waterfront Hall",
+          "address": "Marine Drive, Kochi, Kerala"
+        }
+      ],
+      "hashtag": "AlexWedsAnna",
+      "welcome": "request the honour of your presence at the marriage of their children",
+      "language": "en",
+      "brideFamily": "Mr. Thomas Joseph\n& Mrs. Rosy Thomas",
+      "groomFamily": "Mr. Mathew Thomas\n& Mrs. Mary Mathew",
+      "closingImage": "/assets/flagship/christian/sunlight.webp",
+      "rsvpDeadline": "2027-01-31",
+      "verseCitation": "Song of Songs 3:4"
+    }
+  },
+  {
+    "template_id": "moonlit-nikah",
+    "defaults": {
+      "date": "2027-04-17",
+      "time": "11:00",
+      "bride": "Ayisha Begum",
+      "cover": "/assets/flagship/muslim/courtyard.webp",
+      "groom": "Abdul",
+      "events": [
+        {
+          "date": "2027-04-17",
+          "time": "11:00",
+          "image": "/assets/flagship/muslim/nikah.webp",
+          "title": "Nikah",
+          "venue": "The Crescent Hall",
+          "address": "Kozhikode, Kerala"
+        },
+        {
+          "date": "2027-04-18",
+          "time": "19:00",
+          "image": "/assets/flagship/muslim/walima.webp",
+          "title": "Walima",
+          "venue": "Kozhikode"
+        }
+      ],
+      "details": [
+        {
+          "title": "Gifts",
+          "description": "Your presence and duas are all we ask for."
+        }
+      ],
+      "hashtag": "AbdulWedsAyisha",
+      "welcome": "With our families, we invite you to join us at our Nikah and keep us in your duas.",
+      "blessing": "In the name of Allah, the Most Gracious, the Most Merciful",
+      "language": "en",
+      "coupleNote": "Alhamdulillah, as we begin our new journey together, we would love to have you beside us. Come share our joy and keep us in your duas.",
+      "brideFamily": "The Begum family",
+      "groomFamily": "Abdul’s family",
+      "closingImage": "/assets/flagship/muslim/ending.webp"
+    }
+  },
+  {
+    "template_id": "kerala-lanterns",
+    "defaults": {
+      "date": "2027-04-25",
+      "time": "09:30",
+      "bride": "Anitha",
+      "cover": "/assets/flagship/hindu/couple.webp",
+      "groom": "Arjun",
+      "events": [
+        {
+          "date": "2027-04-25",
+          "note": "Traditional attire welcome",
+          "time": "09:30",
+          "image": "/assets/flagship/hindu/muhurtham.webp",
+          "title": "Wedding",
+          "venue": "Sree Vadakkunnathan Temple",
+          "address": "Swaraj Round, Thrissur, Kerala"
+        },
+        {
+          "date": "2027-04-25",
+          "time": "18:00",
+          "image": "/assets/flagship/hindu/reception.webp",
+          "title": "Reception",
+          "venue": "Kasavu Convention Hall",
+          "address": "Thrissur, Kerala"
+        }
+      ],
+      "details": [
+        {
+          "title": "Gifts",
+          "description": "Your presence and blessings are our greatest gifts."
+        }
+      ],
+      "hashtag": "ArjunWedsAnitha",
+      "welcome": "Join us as two families come together for a lifetime of love.",
+      "language": "en",
+      "coupleNote": "With the love of our families, we are beginning a new chapter together. Come bless us, share a meal and light a lantern with us.",
+      "invocation": "With the blessings of our families",
+      "brideFamily": "Anitha’s family",
+      "groomFamily": "Arjun’s family",
+      "closingImage": ""
+    }
+  },
+  {
+    "template_id": "ivory-lace",
+    "defaults": {
+      "date": "2027-05-20",
+      "time": "17:00",
+      "bride": "Beatrice",
+      "gifts": "Sharing this day with you is the greatest gift. Your love, laughter and presence are all we ask for.",
+      "groom": "Alexander",
+      "venue": "Villa Aurelia",
+      "events": [
+        {
+          "icon": "welcome",
+          "time": "16:30",
+          "title": "Welcome",
+          "description": "Meet us in the gardens for a welcome drink and a first toast together."
+        },
+        {
+          "icon": "ceremony",
+          "time": "17:00",
+          "title": "Ceremony",
+          "description": "Join us as we exchange our vows, surrounded by our favourite people."
+        },
+        {
+          "icon": "cocktail",
+          "time": "18:00",
+          "title": "Cocktail Hour",
+          "description": "Aperitivo on the terrace, photographs and a golden evening together."
+        },
+        {
+          "icon": "dinner",
+          "time": "20:00",
+          "title": "Dinner",
+          "description": "Dinner under the stars, with heartfelt toasts and plenty of laughter."
+        },
+        {
+          "icon": "dancing",
+          "time": "22:30",
+          "title": "Dancing",
+          "description": "Bring your dancing shoes. The celebration continues until late."
+        }
+      ],
+      "hotels": [
+        {
+          "url": "https://www.google.com/maps/search/?api=1&query=Grand+Hotel+del+Gianicolo+Rome",
+          "name": "Grand Hotel del Gianicolo",
+          "rate": "Contact the hotel for availability",
+          "dates": "19 – 21 May 2027",
+          "parking": "Parking available on site",
+          "description": "An elegant stay among the gardens of the Gianicolo, a short journey from the celebration."
+        },
+        {
+          "url": "https://www.google.com/maps/search/?api=1&query=Donna+Camilla+Savelli+Rome",
+          "name": "Donna Camilla Savelli",
+          "rate": "Contact the hotel for availability",
+          "dates": "19 – 21 May 2027",
+          "parking": "Please check with the hotel",
+          "description": "A historic retreat in Trastevere, with peaceful courtyards and beautiful Roman surroundings."
+        }
+      ],
+      "address": "Rome, Italy",
+      "closing": "We can’t wait to celebrate with you.",
+      "welcome": "request the pleasure of your company as they celebrate their marriage and begin this new chapter surrounded by the people they love most.",
+      "language": "en",
+      "dressCode": "Formal Attire",
+      "dressNote": "We would love you to join us in elegant evening attire.\nDress beautifully, feel comfortable,\nand come ready to celebrate\nwith us.",
+      "pickupUrl": "https://www.google.com/maps/search/?api=1&query=Piazza+della+Repubblica+Rome",
+      "rsvpIntro": "We would love to celebrate with you. Please let us know whether you can join us.",
+      "stayIntro": "For our friends and family travelling from afar, here are two lovely places to stay close to the celebration.",
+      "transport": "A private bus will leave Piazza della Repubblica at 4:00 PM, taking guests to the villa before the ceremony.",
+      "utcOffset": "+02:00",
+      "venueImage": "/assets/flagship/lace/villa-illustration-thick.svg",
+      "arrivalNote": "Please arrive a little early to settle in and enjoy the gardens before the ceremony begins.",
+      "rsvpDeadline": "2027-05-01",
+      "familyHeading": "Together with their families",
+      "locationImage": "/assets/flagship/lace/transport-lace-oval.webp",
+      "scheduleIntro": "A day to celebrate,\nfrom the first hello to the last dance.",
+      "transportIntro": "We want your journey to and from the celebration to be as easy as possible.",
+      "returnTransport": "Return transportation to central Rome will also be provided at the end of the evening.",
+      "venueDescription": "A celebration among historic gardens, overlooking the rooftops of Rome. We look forward to sharing this beautiful place with you."
+    }
+  },
+  {
+    "template_id": "embroidered-garden",
+    "defaults": {
+      "date": "2027-06-12",
+      "time": "17:00",
+      "bride": "Camille",
+      "groom": "Antoine",
+      "venue": "Château de Belvent",
+      "address": "Gevrey-Chambertin, Bourgogne",
+      "language": "en",
+      "recovery": {
+        "time": "12:00",
+        "venue": "Le Comptoir des Halles",
+        "address": "4 Rue Monge, Beaune, Bourgogne, France"
+      },
+      "section1": {
+        "text0": "Bienvenue\nà notre mariage",
+        "text1": "Nous avons tellement hâte de célébrer ce jour magique avec vous, entourés de ceux que nous aimons."
+      },
+      "section3": {
+        "text0": "Together with their families",
+        "text1": "invite you to celebrate their marriage"
+      },
+      "section4": {
+        "text0": "Ceremony\n& Reception",
+        "text1": "Gevrey-Chambertin",
+        "text2": "Bourgogne",
+        "text3": "Ceremony · The Orangery · 5:00 PM",
+        "text4": "Reception · The Wine Cellar · 7:00 PM"
+      },
+      "section5": {
+        "text0": "Dress Code",
+        "text1": "Black Tie",
+        "text2": "The apéritif will be held on the gravel terrace and lawn; guests may wish to consider appropriate footwear."
+      },
+      "section6": {
+        "text0": "Our Story",
+        "text1": "We met in Burgundy, fell in love over long dinners and even longer walks through the vines. Now we are returning to the place where it all began, to begin the rest of our lives together."
+      },
+      "section7": {
+        "text0": "Timeline",
+        "text1": "4:45 PM",
+        "text2": "Guests to arrive at the Orangery",
+        "text3": "5:00 PM",
+        "text4": "Ceremony commences",
+        "text5": "6:00 PM",
+        "text6": "Cocktail hour",
+        "text7": "7:00 PM",
+        "text8": "Reception and dancing",
+        "text9": "11:00 PM",
+        "text10": "Farewell",
+        "text11": "Our ceremony will take place in the Orangery of Château de Belvent. This will be followed by an apéritif in the rose garden, before dinner and dancing in the old wine cellar."
+      },
+      "section8": {
+        "text0": "Recovery Day",
+        "text1": "Join us the day after",
+        "text2": "Le Comptoir des Halles",
+        "text3": "Garden Terrace",
+        "text4": "Sunday | 13 June 2027",
+        "text5": "From 12 PM",
+        "text6": "4 Rue Monge, Beaune",
+        "text7": "Bourgogne, France",
+        "text8": "We will be recovering on the garden terrace of Le Comptoir des Halles in Beaune from 12pm on Sunday, 13 June 2027. All are welcome to join us for a relaxed afternoon of food, wine and reminiscing about the night before. We would love to see you there! Children are welcome to join."
+      },
+      "section9": {
+        "text0": "Gifts",
+        "text1": "Your presence at our wedding is the greatest gift of all. Should you wish to celebrate with a gift, a wishing well will be available at the reception."
+      },
+      "section10": {
+        "text0": "Kindly respond by"
+      },
+      "utcOffset": "+02:00",
+      "rsvpDeadline": "2027-03-31"
+    }
+  },
+  {
+    "template_id": "mother-of-pearl",
+    "defaults": {
+      "date": "2027-05-20",
+      "time": "17:00",
+      "bride": "Cornelia",
+      "groom": "James",
+      "links": {
+        "link0": "https://www.google.com/maps/search/?api=1&query=Villa+Aurelia+Rome+Italy",
+        "link1": "https://www.google.com/maps/search/?api=1&query=Piazza+della+Repubblica+Rome",
+        "link2": "https://www.google.com/maps/search/?api=1&query=Grand+Hotel+del+Gianicolo+Rome",
+        "link3": "https://www.google.com/maps/search/?api=1&query=Donna+Camilla+Savelli+Rome"
+      },
+      "venue": "Villa Aurelia",
+      "address": "Rome, Italy",
+      "language": "en",
+      "section0": {
+        "text0": "Together with",
+        "text1": "their families"
+      },
+      "section1": {
+        "text0": "See you soon!"
+      },
+      "section2": {
+        "text0": "Location",
+        "text1": "Set in one of Rome's most beautiful corners, Villa Aurelia will be the setting for our celebration, surrounded by historic gardens and overlooking the Eternal City.",
+        "text2": "We recommend arriving a little early to settle in and enjoy the surroundings before the celebration begins."
+      },
+      "section3": {
+        "text0": "The",
+        "text1": "Day",
+        "text2": "A day to celebrate,",
+        "text3": "from the first hello to the last dance.",
+        "text4": "4:30",
+        "text5": "Welcome",
+        "text6": "Drinks in the villa gardens.",
+        "text7": "5:00",
+        "text8": "Ceremony",
+        "text9": "We say “I do” at sunset.",
+        "text10": "6:00",
+        "text11": "Cocktail Hour",
+        "text12": "Aperitivo on the terrace.",
+        "text13": "8:00",
+        "text14": "Dinner",
+        "text15": "Dinner under the stars.",
+        "text16": "10:30",
+        "text17": "Dancing",
+        "text18": "Dancing until late."
+      },
+      "section4": {
+        "text0": "Dress Code",
+        "text1": "Formal Attire",
+        "text2": "We'd love for our guests to embrace the occasion with elegant evening attire.",
+        "text3": "Dress beautifully, feel comfortable,",
+        "text4": "and come ready to celebrate",
+        "text5": "with us."
+      },
+      "section5": {
+        "text0": "Transportation",
+        "text1": "We want getting to and from the celebration to be as easy as possible.",
+        "text2": "A private bus will depart at 4:00 PM from Piazza della Repubblica, taking guests directly to Villa Aurelia with plenty of time to settle in before the ceremony.",
+        "text3": "At the end of the evening, return transportation to central Rome will",
+        "text4": "also be provided."
+      },
+      "section6": {
+        "text0": "Where to Stay",
+        "text1": "For those joining us from out of town, we've selected two beautiful places to stay close to Villa Aurelia.",
+        "text2": "Grand Hotel del Gianicolo",
+        "text3": "19 – 21 May 2027",
+        "text4": "Code \"CORNELIA & JAMES\"",
+        "text5": "Parking available on site",
+        "text6": "Just moments from the venue, offering an elegant and convenient stay surrounded by the greenery of the Gianicolo.",
+        "text7": "Donna\nCamilla Savelli",
+        "text8": "19 – 21 May 2027",
+        "text9": "Code \"CORNELIA & JAMES\"",
+        "text10": "Parking available on site",
+        "text11": "A charming historic hotel in Trastevere, combining Roman character with a peaceful and refined atmosphere."
+      },
+      "section7": {
+        "text0": "Wedding",
+        "text1": "Gift",
+        "text2": "Your presence\nis our greatest gift.",
+        "text3": "Should you wish to give a gift, you may do so in cash or by bank transfer."
+      },
+      "section9": {
+        "text0": "We can't wait to celebrate with you.",
+        "text1": "With love,"
+      },
+      "utcOffset": "+02:00",
+      "rsvpDeadline": "2027-05-01"
+    }
+  },
+  {
+    "template_id": "fresco",
+    "defaults": {
+      "date": "2027-07-27",
+      "time": "17:30",
+      "bride": "Diana",
+      "groom": "Richard",
+      "links": {
+        "link0": "https://www.google.com/maps/search/?api=1&query=Son+Bunyola+Bunyola+Mallorca",
+        "link1": "https://www.virginlimitededition.com/son-bunyola/reservations/",
+        "link2": "https://hotelsonborguny.com/en/home/"
+      },
+      "venue": "Son Bunyola",
+      "address": "Mallorca, Spain",
+      "welcome": {
+        "time": "20:00",
+        "venue": "Sa Terrassa",
+        "address": "Son Bunyola, Mallorca"
+      },
+      "language": "en",
+      "section0": {
+        "text0": "WE INVITE YOU TO",
+        "text1": "CELEBRATE OUR WEDDING",
+        "text2": "To be held at",
+        "text3": "Son Bunyola, Mallorca"
+      },
+      "section2": {
+        "text0": "Our Story",
+        "text1": "Some of the best love stories begin unexpectedly, and ours was no different.",
+        "text2": "What started as a chance encounter soon became endless conversations, spontaneous adventures, and countless memories together.",
+        "text3": "Somewhere along the way, we found our favorite place: by each other’s side.",
+        "text4": "And now, we're ready for our greatest adventure yet — a lifetime together."
+      },
+      "section3": {
+        "text0": "The Celebration",
+        "text1": "Ceremony & Dinner",
+        "text2": "Sa Tafona",
+        "text3": "A ceremony in the gardens at sunset behind the Tramuntana, followed by dinner and dancing.",
+        "text4": "5:30 PM"
+      },
+      "section4": {
+        "text0": "The Day",
+        "text1": "Program · Tuesday 27 July",
+        "text2": "Our wedding day, from sunset drinks to the last dance.",
+        "text3": "17:00",
+        "text4": "Guests Arrival & Welcome Drinks",
+        "text5": "17:30",
+        "text6": "Ceremony",
+        "text7": "19:15",
+        "text8": "Cocktail Hour",
+        "text9": "20:30",
+        "text10": "Dinner",
+        "text11": "22:30",
+        "text12": "Cake & Toasts",
+        "text13": "23:00",
+        "text14": "First Dance",
+        "text15": "23:15",
+        "text16": "Dancing under\nthe Stars",
+        "text17": "02:00",
+        "text18": "Goodnight"
+      },
+      "section5": {
+        "text0": "Dress Code",
+        "text1": "Black Tie",
+        "text2": "Under a Mediterranean sky, with the sea as our witness — wear the dress you have dreamed of, and dance until the last star fades.",
+        "text3": "26th July",
+        "text4": "Welcome",
+        "text5": "Soirée",
+        "text6": "Sa Terrassa",
+        "text7": "Join us for an intimate evening of cocktails and Mediterranean views as we begin our celebrations at Son Bunyola."
+      },
+      "section6": {
+        "text0": "Where to Stay",
+        "text1": "Recommended hotels",
+        "text2": "near the venue",
+        "text3": "Exclusive wedding guest rate",
+        "text4": "Hotel & Villas",
+        "text5": "€650",
+        "text6": "per night · double room · breakfast included",
+        "text7": "A special fixed rate of €650 per night has been reserved exclusively for our wedding guests.",
+        "text8": "Finca Son Bunyola, Ctra. C-710, 07191 Banyalbufar",
+        "text9": "Free on-site parking",
+        "text10": "Son Borguny",
+        "text11": "€180",
+        "text12": "per night · double room · breakfast included",
+        "text13": "Carrer Borguny 1, 07191 Banyalbufar",
+        "text14": "Free on-site parking",
+        "text15": "9 km · about 25 min by car"
+      },
+      "section7": {
+        "text0": "Wedding Gift",
+        "text1": "Your presence is our greatest gift.",
+        "text2": "If you wish to honour us with a gift, we kindly prefer monetary contributions."
+      },
+      "utcOffset": "+02:00",
+      "rsvpDeadline": "2027-05-15"
+    }
+  },
+  {
+    "template_id": "stained-glass",
+    "defaults": {
+      "date": "2027-05-23",
+      "time": "17:30",
+      "bride": "Alba",
+      "groom": "Felipe",
+      "links": {
+        "link0": "https://www.google.com/maps/search/?api=1&query=Sant%20Feliu%20de%20Codines%2C%20Barcelona"
+      },
+      "venue": "La Baronia",
+      "address": "Barcelona, Spain",
+      "language": "en",
+      "section0": {
+        "text0": "Together with their families",
+        "text1": "Request the honour of your presence"
+      },
+      "section2": {
+        "text0": "We're so happy to celebrate this day with you.",
+        "text1": "Having you with us means the world.",
+        "text2": "We can't wait to welcome you."
+      },
+      "section3": {
+        "text0": "Welcome",
+        "text1": "Together with their families",
+        "text2": "request the honor of your presence as they",
+        "text3": "exchange vows of marriage.",
+        "text4": "We hope you will join us to celebrate a day full of love, laughter and dancing — it wouldn't be the same without you."
+      },
+      "section4": {
+        "text0": "Ceremony",
+        "text1": "Reception",
+        "text2": "Sant Feliu de Codines",
+        "text3": "Barcelona",
+        "text4": "5:30 PM",
+        "text5": "Carretera de Caldes, km 14,4",
+        "text6": "08182 Sant Feliu de Codines, Barcelona"
+      },
+      "section5": {
+        "text0": "Dress Code",
+        "text1": "Black Tie",
+        "text2": "We kindly ask our guests to wear formal evening attire — a tuxedo or dark suit for gentlemen, and a long or elegant cocktail dress for ladies."
+      },
+      "section6": {
+        "text0": "Program",
+        "text1": "This will be the order",
+        "text2": "of the day",
+        "text3": "Guest Arrival",
+        "text4": "5:00 PM",
+        "text5": "Ceremony",
+        "text6": "5:30 PM",
+        "text7": "Cocktail Hour",
+        "text8": "6:30 PM",
+        "text9": "Dinner",
+        "text10": "8:00 PM",
+        "text11": "First Dance",
+        "text12": "10:00 PM",
+        "text13": "Party",
+        "text14": "10:30 PM"
+      },
+      "section7": {
+        "text0": "Gifts",
+        "text1": "Your presence",
+        "text2": "is the greatest gift",
+        "text3": "If you would like to give us a gift, we have set up an account. Any contribution towards our honeymoon and our new life together is received with immense gratitude."
+      },
+      "section8": {
+        "text0": "Travel",
+        "text1": "Stay",
+        "text2": "We recommend flying into Barcelona–El Prat Airport (BCN, ~45 min).",
+        "text3": "Hotel",
+        "text4": "El Roure Blanc",
+        "text5": "Carrer del Roure 8\n08182 Sant Feliu de Codines, Barcelona",
+        "text6": "May 22 – 24, 2027",
+        "text7": "Double room — €110 per night",
+        "text8": "Suite — €160 per night",
+        "text9": "ALBAFELIPE27",
+        "text10": "Quote this code when booking by phone or email",
+        "text11": "Free private parking for guests\nEV charging points available on site",
+        "text12": "Breakfast included · 10 minutes from La Baronia"
+      },
+      "utcOffset": "+02:00",
+      "rsvpDeadline": "2027-04-23"
+    }
+  },
+  {
+    "template_id": "royal",
+    "defaults": {
+      "date": "2027-09-12",
+      "time": "14:00",
+      "bride": "Andrea",
+      "groom": "Pedro",
+      "links": {
+        "link0": "https://www.google.com/maps/search/?api=1&query=Finca+El+Olivar+Ronda+Malaga+Spain",
+        "link1": "https://www.google.com/maps/search/?api=1&query=Finca+El+Olivar+Ronda+Malaga+Spain",
+        "link4": "https://www.parador.es/es/paradores/parador-de-ronda",
+        "link7": "https://www.cataloniahotels.com/es/hotel/catalonia-ronda",
+        "link10": "https://www.hotelmontelirio.com"
+      },
+      "venue": "Finca El Olivar",
+      "address": "Ronda, Málaga, Spain",
+      "welcome": {
+        "time": "20:00",
+        "venue": "Bodega García Hidalgo",
+        "address": "Ronda, Spain"
+      },
+      "farewell": {
+        "time": "12:00",
+        "venue": "Parador de Ronda",
+        "address": "Ronda, Spain"
+      },
+      "language": "en",
+      "section0": {
+        "text0": "We're getting married"
+      },
+      "section2": {
+        "text0": "Welcome!",
+        "text1": "We warmly invite you to celebrate our wedding day with us in the beautiful town of Ronda, Andalusia. We look forward to sharing this unforgettable moment with our most special people."
+      },
+      "section3": {
+        "text0": "The Venue",
+        "text1": "14:00",
+        "text2": "Camino de los Olivos s/n, Ronda",
+        "text3": "Málaga, 29400 – España"
+      },
+      "section4": {
+        "text0": "Day Programme",
+        "text1": "14:00",
+        "text2": "Arrival",
+        "text3": "14:30",
+        "text4": "Ceremony",
+        "text5": "16:00",
+        "text6": "Cocktails",
+        "text7": "18:00",
+        "text8": "Dinner",
+        "text9": "20:00",
+        "text10": "Cutting the Cake",
+        "text11": "00:00",
+        "text12": "Finish"
+      },
+      "section5": {
+        "text0": "Dress Code",
+        "text1": "Women",
+        "text2": "Cocktail or formal dress",
+        "text3": "Men",
+        "text4": "Dark suit and tie"
+      },
+      "section6": {
+        "text0": "Pre-Wedding Events",
+        "text1": "Come Say Hello...",
+        "text2": "These are informal gatherings, so feel free to join us if you're in the area.",
+        "text3": "Welcome Drinks",
+        "text4": "Friday, September 11th, 2026",
+        "text5": "8:00 PM",
+        "text6": "Bodega García Hidalgo, Ronda",
+        "text7": "Farewell Brunch",
+        "text8": "Sunday, September 13th, 2026",
+        "text9": "12:00 PM",
+        "text10": "Parador de Ronda (terrace)"
+      },
+      "section7": {
+        "text0": "Location & Transportation",
+        "text1": "Finca El Olivar, Camino de los Olivos s/n, 29400 Ronda, Málaga – Spain",
+        "text2": "From Málaga: ~1h 30min via A-357 and A-367\nFrom Seville: ~2h via A-376\nFrom Marbella: ~1h via A-397"
+      },
+      "section8": {
+        "text0": "Accommodation",
+        "text1": "Finca El Olivar does not offer lodging. Here are some recommended options nearby.",
+        "text2": "Parador de Ronda",
+        "text3": "Ronda",
+        "text4": "2 km de la finca",
+        "text5": "Hotel Catalonia Ronda",
+        "text6": "Ronda",
+        "text7": "1.5 km",
+        "text8": "Promo Code: BODA2026",
+        "text9": "Hotel Montelirio",
+        "text10": "Ronda",
+        "text11": "Boutique | Sobre el Tajo",
+        "text12": "For hotels without direct agreements, please mention \"Wedding at Finca El Olivar\" to access preferential rates."
+      },
+      "section9": {
+        "text0": "Gifts",
+        "text1": "Your presence is our greatest gift. If you wish to give us something, please find our bank account information below:"
+      },
+      "section10": {
+        "text0": "Let us know if you can make it"
+      },
+      "utcOffset": "+02:00",
+      "rsvpDeadline": "2027-08-12"
+    }
+  }
+]

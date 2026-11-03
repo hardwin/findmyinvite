@@ -3,7 +3,7 @@ export function bindReference(FMI){
  const c=FMI.content, q=s=>document.querySelector(s), all=s=>[...document.querySelectorAll(s)], names=c.groom+' & '+c.bride;
  const text=(s,v)=>{const el=q(s);if(el)el.textContent=v||'';};
  const image=(s,v)=>{const el=q(s);if(el){if(v){el.src=v;el.alt=names;}else el.remove();}};
- const day=d=>new Date(d+'T12:00:00').toLocaleDateString(c.language==='ml'?'ml-IN':'en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+ const day=d=>new Date(d+'T12:00:00').toLocaleDateString(FMI.localisation?.locale||'en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
  const time=t=>new Date('2027-01-01T'+(t||'00:00')).toLocaleTimeString('en-IN',{hour:'numeric',minute:'2-digit'});
  const old=FMI.theme==='hindu'?['Karthik','Nila']:['Imran','Afrin'];
  const walk=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);let node;
@@ -19,8 +19,9 @@ export function bindReference(FMI){
  }
  text('.parents b:first-child',c.groomFamily);text('.parents b:last-child',c.brideFamily);
  text('.cn .par',c.groomFamily);text('.cn .of',c.brideFamily);text('.cn .req',c.welcome);text('.silk > .lede',c.welcome);
- text('.silk > .lbl',c.invocation);text('.velvet > .lbl',c.blessing);text('.note-txt',c.coupleNote);
+ text('.silk > .lbl',c.invocation);text('.velvet > .lbl',c.blessing);text('.note-txt',c.coupleNote);if(c._form?.authored&&!c._form.note)q('.note-txt')?.closest('section')?.remove();
  text('.on-day',day(c.date));text('.fam',names);text('.tag','#'+(c.hashtag||''));text('#night h2','#'+(c.hashtag||''));
+ if(c._form?.authored){if(!c._form.families)all('.parents,.cn .par,.cn .of').forEach(e=>e.remove());if(!c.hashtag){const tag=q('#night h2');if(tag?.nextElementSibling?.textContent.includes('hashtag'))tag.nextElementSibling.remove();tag?.remove();all('.tag,a[href*="instagram.com"]').forEach(e=>e.remove());}text('.ev-head h2','Our celebrations');}
  image('.couple-art img',c.cover);image('.court img',c.cover);image('.end-art img',c.closingImage);
  const facts=q('.know .tiles');if(facts){const sample=facts.firstElementChild?.cloneNode(true);facts.replaceChildren();for(const d of c.details||[]){const el=sample?.cloneNode(true);if(el){const heading=el.querySelector('h3,b');if(heading)heading.textContent=d.title;const p=el.querySelector('p');if(p)p.textContent=d.description;facts.append(el);}}}if(!c.details?.length)q('.know')?.remove();
  text('.demo',FMI.preview?'Preview only. Your RSVP will not be sent.':'Your reply goes to the family on WhatsApp.');

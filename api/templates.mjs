@@ -1,3 +1,5 @@
+import {templateForm,selectedForm} from '../server/template-forms.mjs';
+import {validateFormDefinition} from '../shared/template-forms.mjs';
 import {INVITATION_BASE_PAISE} from '../shared/pricing.mjs';
 import {get,head} from '@vercel/blob';
 import {Readable} from 'node:stream';
@@ -10,7 +12,9 @@ export default async function handler(req,res){try{
  const q=new URL(req.url,'https://findmyinvite.com').searchParams,action=q.get('action')||'list';
  if(action==='public'){method(req,['GET']);const rows=await db('template_catalog?generation=eq.2&isactive=eq.true&published=eq.true&select=id,name,description,tradition,thumbnail,current_version_id,sort_order&order=sort_order.asc');return respond(res,200,{templates:rows,basePaise:INVITATION_BASE_PAISE});}
  if(action==='version'){method(req,['GET']);return respond(res,200,{version:safeVersion(await catalogVersion(q.get('id')))});}
+ if(action==='editor'){method(req,['GET']);const v=await catalogVersion(q.get('id'));return respond(res,200,{version:safeVersion(v),form:await templateForm(v)});}
  const user=await operator(req);
+ if(action==='get-form'){method(req,['GET']);const v=await version(q.get('id'));const rows=await db('template_forms?template_id=eq.'+encodeURIComponent(v.template_id)+'&select=*');return respond(res,200,{form:selectedForm(rows[0],v.id,true)});}
  if(action==='archive-info'||action==='archive-part'){
  method(req,['GET']);const id=q.get('id');if(!/^[a-f0-9-]{36}$/.test(id||''))throw new HttpError(400,'Invalid archive.');const rows=await db('template_archives?id=eq.'+id+'&select=object_path,sha256,verified_at');if(!rows[0]?.verified_at)throw new HttpError(404,'Verified archive unavailable.');const row=rows[0],info=await head(row.object_path);
  if(action==='archive-info'){await audit(user,'archive.download',id);return respond(res,200,{size:info.size,sha256:row.sha256,filename:row.object_path.split('/').pop()});}
@@ -20,12 +24,13 @@ export default async function handler(req,res){try{
  if(action==='metrics'){method(req,['GET']);return respond(res,200,await rpc('fmi_website_metrics',{}));}
  if(action==='orders'){method(req,['GET']);return respond(res,200,{orders:await db('website_orders?select=id,invitation_id,purpose,amount,tax_paise,status,razorpay_payment_id,applied_at,created_at&order=created_at.desc&limit=200')});}
  method(req,['POST']);const body=await bodyJson(req,200000);
+ if(action==='save-form'){const v=await version(body.versionId);try{validateFormDefinition(body.definition,v.field_schema);}catch(e){throw new HttpError(400,e.message);}const saved=await rpc('fmi_save_template_form',{p_template:v.template_id,p_version:v.id,p_revision:body.revision,p_definition:body.definition,p_actor:user.id});await audit(user,'template.form',v.template_id,{revision:saved.revision});return respond(res,200,{form:saved});}
  if(action==='cost'){if(!/^\d{4}-\d{2}-01$/.test(body.month)||!Number.isSafeInteger(body.amountPaise)||body.amountPaise<0||body.amountPaise>100000000||typeof body.note!=='string'||body.note.length>500)throw new HttpError(400,'Invalid cost entry.');await db('website_costs?on_conflict=month',{method:'POST',headers:{Prefer:'resolution=merge-duplicates'},body:{month:body.month,amount_paise:body.amountPaise,note:body.note,updated_by:user.id,updated_at:new Date().toISOString()}});await audit(user,'cost.updated',body.month,{amountPaise:body.amountPaise});return respond(res,200,{ok:true});}
  if(action==='save'){
  const {id,name,description,tradition,thumbnail,sort_order}=body;if(!/^[a-z0-9-]{3,80}$/.test(id)||typeof name!=='string'||name.length>150||typeof description!=='string'||description.length>3000||!['christian','hindu','muslim'].includes(tradition)||!Number.isInteger(sort_order)||typeof thumbnail!=='string'||!/^\/assets\/[\w/.-]+$|^\/api\/template-media\?id=[a-f0-9-]{36}$/.test(thumbnail))throw new HttpError(400,'Invalid catalog details.');
  await templateAssets({thumbnail});await db('template_catalog?on_conflict=id',{method:'POST',headers:{Prefer:'resolution=merge-duplicates'},body:{id,name,description,tradition,thumbnail,sort_order,collection:'classic',generation:2}});await audit(user,'template.metadata',id);return respond(res,200,{ok:true});}
  if(action==='new-version'){
  if(!RENDERERS.includes(body.renderer))throw new HttpError(400,'Unsupported renderer.');validateSchema(body.field_schema);const defaults=validateContent(body.field_schema,body.defaults);await templateAssets(defaults);const rows=await db('template_versions',{method:'POST',headers:{Prefer:'return=representation'},body:{template_id:body.template_id,revision:body.revision,renderer:body.renderer,field_schema:body.field_schema,defaults}});await audit(user,'template.version',body.template_id,{version:rows[0].id});return respond(res,201,{version:rows[0]});}
- if(['approve','publish','rollback','archive'].includes(action)){if(action!=='archive')await version(body.version_id);await rpc('fmi_catalog_release',{p_template:body.template_id,p_version:body.version_id||null,p_actor:user.id,p_action:action});return respond(res,200,{ok:true});}
+ if(['approve','publish','rollback','archive'].includes(action)){if(action!=='archive'){const v=await version(body.version_id);if(v.template_id!==body.template_id)throw new HttpError(400,'Template mismatch.');if(action==='publish'||action==='rollback'){const form=await templateForm(v,{staged:true});await rpc('fmi_release_with_form',{p_template:body.template_id,p_version:v.id,p_actor:user.id,p_action:action,p_form_revision:form.revision});return respond(res,200,{ok:true});}}await rpc('fmi_catalog_release',{p_template:body.template_id,p_version:body.version_id||null,p_actor:user.id,p_action:action});return respond(res,200,{ok:true});}
  throw new HttpError(404,'Unknown CMS action.');
  }catch(e){if(res.headersSent){res.destroy();return;}if(!(e instanceof HttpError)&&e.message?.startsWith('Invalid'))e=new HttpError(400,e.message);fail(res,e);}}
