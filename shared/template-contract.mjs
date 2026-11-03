@@ -1,3 +1,4 @@
+import {INVITATION_BASE_PAISE} from './pricing.mjs';
 // Shared declarative contract. Never accepts executable HTML, CSS or JavaScript.
 export const FIELD_TYPES=['text','textarea','date','time','number','boolean','select','image','video','audio','url','group','repeater'];
 const keyPattern=/^[a-z][a-zA-Z0-9_]{0,47}$/;
@@ -27,4 +28,4 @@ export function validateContent(schema,input,{complete=false}={}){
 }
 export function mediaReferences(value){const refs=[];function visit(v){if(typeof v==='string'&&v.startsWith('/api/template-media?id='))refs.push(v.slice('/api/template-media?id='.length));else if(Array.isArray(v))v.forEach(visit);else if(v&&typeof v==='object')Object.values(v).forEach(visit);}visit(value);return [...new Set(refs)];}
 export function addCalendarMonths(value,months=6){const date=new Date(value);if(!Number.isFinite(date.getTime()))throw Error('Invalid date');const day=date.getUTCDate();date.setUTCDate(1);date.setUTCMonth(date.getUTCMonth()+months);const last=new Date(Date.UTC(date.getUTCFullYear(),date.getUTCMonth()+1,0)).getUTCDate();date.setUTCDate(Math.min(day,last));return date.toISOString();}
-export function websiteQuote(taxBps){if(taxBps===undefined||taxBps===null||taxBps===''||!/^\d+$/.test(String(taxBps))||Number(taxBps)>10000)throw Error('Checkout awaits confirmed tax configuration.');const base=19900,tax=Math.round(base*Number(taxBps)/10000);return {basePaise:base,taxPaise:tax,taxBps:Number(taxBps),totalPaise:base+tax,currency:'INR',months:6};}
+export function websiteQuote(taxBps){if(taxBps===undefined||taxBps===null||taxBps===''||!/^\d+$/.test(String(taxBps))||Number(taxBps)>10000)throw Error('Checkout awaits confirmed tax configuration.');const base=INVITATION_BASE_PAISE,tax=Math.round(base*Number(taxBps)/10000);return {basePaise:base,taxPaise:tax,taxBps:Number(taxBps),totalPaise:base+tax,currency:'INR',months:6};}

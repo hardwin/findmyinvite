@@ -1,3 +1,4 @@
+import {INVITATION_BASE_PAISE} from '../shared/pricing.mjs';
 import {get,head} from '@vercel/blob';
 import {Readable} from 'node:stream';
 import {pipeline} from 'node:stream/promises';
@@ -7,7 +8,7 @@ import {validateSchema,validateContent,mediaReferences} from '../shared/template
 async function templateAssets(content){const ids=mediaReferences(content);if(!ids.length)return;const rows=await db('template_media?id=in.('+ids.join(',')+')&invitation_id=is.null&status=eq.ready&select=id');if(ids.some(id=>!rows.some(r=>r.id===id)))throw new HttpError(400,'Use ready CMS media, not customer uploads.');}
 export default async function handler(req,res){try{
  const q=new URL(req.url,'https://findmyinvite.com').searchParams,action=q.get('action')||'list';
- if(action==='public'){method(req,['GET']);const rows=await db('template_catalog?generation=eq.2&isactive=eq.true&published=eq.true&select=id,name,description,tradition,thumbnail,current_version_id,sort_order&order=sort_order.asc');return respond(res,200,{templates:rows,basePaise:19900});}
+ if(action==='public'){method(req,['GET']);const rows=await db('template_catalog?generation=eq.2&isactive=eq.true&published=eq.true&select=id,name,description,tradition,thumbnail,current_version_id,sort_order&order=sort_order.asc');return respond(res,200,{templates:rows,basePaise:INVITATION_BASE_PAISE});}
  if(action==='version'){method(req,['GET']);return respond(res,200,{version:safeVersion(await catalogVersion(q.get('id')))});}
  const user=await operator(req);
  if(action==='archive-info'||action==='archive-part'){

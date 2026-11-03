@@ -1,3 +1,4 @@
+import {INVITATION_BASE_PAISE} from '../shared/pricing.mjs';
 import {HttpError,db,method,respond,bodyJson,rate} from './core.mjs';
 import {customer,owned,requireRecoverable,rpc,websiteOffer,audit} from './template-cms.mjs';
 import {websiteQuote,validateContent} from '../shared/template-contract.mjs';
@@ -12,7 +13,7 @@ export async function settleWebsiteOrder(orderId,paymentId,recoveryId){
  const saved=await db('website_orders?id=eq.'+row.id+'&status=neq.refunded',{method:'PATCH',headers:{Prefer:'return=representation'},body:{status:'captured',razorpay_payment_id:p.id,razorpay_order_id:orderId}});if(!saved[0])throw new HttpError(409,'Payment state changed. Contact support.');return saved[0];
 }
 export default async function handle(req,res,q){const action=q.get('action');
- if(action==='v2-config'){method(req,['GET']);let quote=null;try{quote=await websiteOffer();}catch{}const configured=!!quote&&paymentsConfigured();return respond(res,200,{basePaise:19900,quote,configured,message:!quote?'Tax configuration is pending.':!configured?'Checkout is temporarily unavailable. You can still save and preview your invitation.':''});}
+ if(action==='v2-config'){method(req,['GET']);let quote=null;try{quote=await websiteOffer();}catch{}const configured=!!quote&&paymentsConfigured();return respond(res,200,{basePaise:INVITATION_BASE_PAISE,quote,configured,message:!quote?'Tax configuration is pending.':!configured?'Checkout is temporarily unavailable. You can still save and preview your invitation.':''});}
  const user=await customer(req);method(req,['POST']);const b=await bodyJson(req),row=await owned(b.slug,user);requireRecoverable(row);
  if(action==='v2-failure'){const orders=await db('website_orders?id=eq.'+encodeURIComponent(b.orderId)+'&owner_id=eq.'+user.id+'&invitation_id=eq.'+row.id+'&select=id');if(!orders[0])throw new HttpError(404,'Order not found.');await audit(user,'payment.failed',orders[0].id,{operation:'checkout'});return respond(res,200,{ok:true});}
  if(action==='v2-order'){

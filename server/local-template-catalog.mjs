@@ -1,3 +1,4 @@
+import {INVITATION_BASE_PAISE} from '../shared/pricing.mjs';
 // Imported only by the Vite development router, never by deployed API handlers.
 // Local releases select real immutable CMS versions; there are no renderer/default overrides.
 import {readFile} from 'node:fs/promises';
@@ -45,7 +46,7 @@ export async function localTemplateCatalog(req,res,{readIds=readLocalReleaseIds,
   }));
   const combined=new Map(rows.map(row=>[row.id,row]));
   for(const row of releases)combined.set(row.id,row);
-  respond(res,200,{templates:[...combined.values()].sort((a,b)=>(a.sort_order??0)-(b.sort_order??0)),basePaise:19900});
+  respond(res,200,{templates:[...combined.values()].sort((a,b)=>(a.sort_order??0)-(b.sort_order??0)),basePaise:INVITATION_BASE_PAISE});
  }catch(error){fail(res,error);}
  return true;
 }

@@ -1,3 +1,4 @@
+import {INVITATION_BASE_PAISE} from '../shared/pricing.mjs';
 import {galleryTierFor,galleryTierLabels,type GalleryTier} from './data';
 
 export type ShopKind='website'|'video';
@@ -83,7 +84,7 @@ export function templatePalette(template:Pick<ShopTemplate,'id'|'name'>):Palette
 }
 
 export function templatePricePaise(template:{royal?:boolean;tier?:string}):number{
- return template.royal||template.tier==='premium'||template.tier==='elite'?149900:119900;
+ return INVITATION_BASE_PAISE;
 }
 
 export function formatRupees(paise:number){
@@ -92,7 +93,7 @@ export function formatRupees(paise:number){
 
 export function skuFor(template:{royal?:boolean;tier?:string;video?:string}):'website-classic'|'website-royal'|'video-royal'{
  if(templateKind(template)==='video')return 'video-royal';
- return templatePricePaise(template)===119900?'website-classic':'website-royal';
+ return template.royal||template.tier==='premium'||template.tier==='elite'?'website-royal':'website-classic';
 }
 
 export function shopCard(template:ShopTemplate){

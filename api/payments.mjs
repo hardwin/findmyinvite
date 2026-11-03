@@ -1,3 +1,4 @@
+import {INVITATION_BASE_PAISE} from '../shared/pricing.mjs';
 import {recordWebsiteFailure} from '../server/template-observability.mjs';
 import handleWebsitePayment,{settleWebsiteOrder} from '../server/template-payments.mjs';
 import {HttpError,bodyJson,respond,fail,method,authUser,bearer,slugValue,rate,isManagementToken} from '../server/core.mjs';
@@ -14,7 +15,7 @@ export default async function handler(req,res){
    return respond(res,200,{
     configured:paymentsConfigured(),
     keyId:paymentsConfigured()?publicKeyId():'',
-    prices:{classic:1199,royal:1499},
+    prices:{classic:INVITATION_BASE_PAISE/100,royal:INVITATION_BASE_PAISE/100},
     skus:Object.fromEntries(Object.entries(PAYMENT_SKUS).map(([id,sku])=>[id,{amount:sku.amount,label:sku.label}]))
    });
   }

@@ -26,7 +26,7 @@ const needs=[
 const faqs=[
  ['What is an online wedding invitation?','An online wedding invitation is a designed digital page you share as a link. With FindMyInvite you fill the names, pay with Razorpay, then copy the guest page. Family opens it on any phone. No app.'],
  ['How do I create an online wedding invitation?','Choose a template, fill in your names, date and venue, pay, then copy the live link and send it on WhatsApp.'],
- ['How much does it cost?','Wedding websites start at Rs.199. Invitation videos are listed on the shop. The price is shown before Razorpay checkout. The public guest page is created after a captured payment.'],
+ ['How much does it cost?','Wedding websites start at Rs.1. Invitation videos are listed on the shop. The price is shown before Razorpay checkout. The public guest page is created after a captured payment.'],
  ['How do guests receive the invitation?','You get a unique link. Send it on WhatsApp, Messenger or email. Guests tap it. No login.'],
  ['Do I need any design skills?','No. Templates are already designed. You fill the details. No layout, fonts or colours to pick.'],
  ['What information should I prepare?','Couple names, both sets of parents, date, time, venue, and 5–10 photos. That is enough to fill the form.'],

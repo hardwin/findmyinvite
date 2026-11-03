@@ -1,3 +1,4 @@
+import {INVITATION_BASE_PAISE} from '../shared/pricing.mjs';
 import {useMemo,useState} from 'react';
 import {Search,LayoutGrid,Globe,Clapperboard,ClipboardList} from 'lucide-react';
 import {occasions,galleryTiers,galleryTierLabels,normalizeGalleryCollection,type GalleryTier} from './data';
@@ -129,7 +130,7 @@ export default function Storefront(){
  },[websites,bestsellers]);
  const whatsappHref='https://wa.me/916362260992?text='+encodeURIComponent('Hi, I want a custom video or invitation.');
  const promos=[
-  {title:'Wedding Websites',text:'Do It Yourself',price:'Rs.199',href:stores[0].href,image:'/assets/shop-promo-wedding-websites.png',cta:'Create Now',diy:true},
+  {title:'Wedding Websites',text:'Do It Yourself',price:'Rs.1',href:stores[0].href,image:'/assets/shop-promo-wedding-websites.png',cta:'Create Now',diy:true},
   {title:'e-Invite Videos',text:'Church, garden and reception films.',href:stores[1].href,image:'/assets/shop-promo-invite-videos.png',cta:'SHOP NOW',video:true},
   {title:'Custom Video/Invitation',text:'Contact Us',href:whatsappHref,image:stores[4].image,cta:'WhatsApp',whatsapp:true}
  ];
@@ -153,17 +154,15 @@ export default function Storefront(){
  function featGrid(list:ReturnType<typeof filterShop>){
   return <div className="im-feat-grid">
    {list.filter(item=>item.image).slice(0,5).map(item=>{
-    const off=item.pricePaise<149900?Math.round((1-item.pricePaise/149900)*100):0;
     return <article className="im-feat-card" key={item.id}>
      <div className="im-feat-media">
       <a href={productHref(item.id)} aria-label={item.name}>
        <img src={'/assets/'+item.image} alt="" loading="lazy"/>
       </a>
-      {off>0?<span className="im-feat-sale">{off}% off</span>:null}
      </div>
      <a href={productHref(item.id)}>
       <h3>{item.name}</h3>
-      <p className="im-feat-price"><b>{formatRupees(item.pricePaise)}</b>{off>0?<s>{formatRupees(149900)}</s>:null}</p>
+      <p className="im-feat-price"><b>{formatRupees(item.pricePaise)}</b></p>
      </a>
     </article>;
    })}
@@ -273,7 +272,7 @@ export default function Storefront(){
     )}
    </div>
   </section>
-  <p className="im-banner im-phone">E-invites from {formatRupees(119900)}</p>
+  <p className="im-banner im-phone">E-invites from {formatRupees(INVITATION_BASE_PAISE)}</p>
   <ShopNav active="home"/>
  </main>;
 
@@ -358,7 +357,7 @@ export default function Storefront(){
     </div>
    </section>
   </div>
-  <p className="im-banner im-phone">E-invites from {formatRupees(119900)}</p>
+  <p className="im-banner im-phone">E-invites from {formatRupees(INVITATION_BASE_PAISE)}</p>
   <ShopDeskFoot/>
   <ShopNav active={navActive}/>
  </main>;
