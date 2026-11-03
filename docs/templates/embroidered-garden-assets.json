@@ -1,0 +1,930 @@
+{
+  "reference": "https://embroidered-garden-template.thedigitalyes.com/",
+  "downloaded": "2026-11-03",
+  "assets": [
+    {
+      "source": "/__l5e/assets-v1/9bfb91fa-882c-49f9-8728-1037eb466f5c/embroidered-swans-hero-v2.png",
+      "sourceUrl": "https://embroidered-garden-template.thedigitalyes.com/__l5e/assets-v1/9bfb91fa-882c-49f9-8728-1037eb466f5c/embroidered-swans-hero-v2.png",
+      "local": "/assets/flagship/embroidered-garden/b204bfcd-embroidered-swans-hero-v2.png",
+      "bytes": 499330,
+      "sha256": "1a0a79b6511ef2bba832a9269f38de62de4b7d02f94446fa167e1c2cc5cdac76"
+    },
+    {
+      "source": "/__l5e/assets-v1/e684e20a-19ec-4bcf-9a46-21e6f0b70df6/intro-doors.jpg",
+      "sourceUrl": "https://embroidered-garden-template.thedigitalyes.com/__l5e/assets-v1/e684e20a-19ec-4bcf-9a46-21e6f0b70df6/intro-doors.jpg",
+      "local": "/assets/flagship/embroidered-garden/a36528a4-intro-doors.jpg",
+      "bytes": 2128602,
+      "sha256": "d3fc7e4f9c25555d951ecfae72468101326114ce7e9e3601e33c3d8ec457ccde"
+    },
+    {
+      "source": "/assets/countdown-embroidery-frame-0EWM-os9.webp",
+      "sourceUrl": "https://embroidered-garden-template.thedigitalyes.com/assets/countdown-embroidery-frame-0EWM-os9.webp",
+      "local": "/assets/flagship/embroidered-garden/887b79fc-countdown-embroidery-frame-0EWM-os9.webp",
+      "bytes": 375302,
+      "sha256": "1eb1cc0f9954571bb58264b2b0fe61e35ababb2bd5b92f686d73a4caa0dde801"
+    },
+    {
+      "source": "/assets/countdown-pearl-medallion-DJ2mwLBm.webp",
+      "sourceUrl": "https://embroidered-garden-template.thedigitalyes.com/assets/countdown-pearl-medallion-DJ2mwLBm.webp",
+      "local": "/assets/flagship/embroidered-garden/2cff9235-countdown-pearl-medallion-DJ2mwLBm.webp",
+      "bytes": 298150,
+      "sha256": "d72b661a1f77bd5790ac1bb9cbd855bdb24d7ab4927138e2f04a52a022f7920f"
+    },
+    {
+      "source": "/__l5e/assets-v1/0128c2ad-07c7-4520-9f3c-151c7574caa6/intro-doors-open.mp4",
+      "sourceUrl": "https://embroidered-garden-template.thedigitalyes.com/__l5e/assets-v1/0128c2ad-07c7-4520-9f3c-151c7574caa6/intro-doors-open.mp4",
+      "local": "/assets/flagship/embroidered-garden/5a68d5c1-intro-doors-open.mp4",
+      "bytes": 15769596,
+      "sha256": "ad36661be1723ce981608f0be93ed1dbfcc3932722608bccd5361236f4167352"
+    },
+    {
+      "source": "/__l5e/assets-v1/c04aeb2f-edf3-4741-9e24-faf1624adfd5/ceremony-reception-bg-v2.webp",
+      "sourceUrl": "https://embroidered-garden-template.thedigitalyes.com/__l5e/assets-v1/c04aeb2f-edf3-4741-9e24-faf1624adfd5/ceremony-reception-bg-v2.webp",
+      "local": "/assets/flagship/embroidered-garden/3d6d20e1-ceremony-reception-bg-v2.webp",
+      "bytes": 457418,
+      "sha256": "cc7a210f291d7c0961cfac514dd08aca30f8d847026e49c47948cb08dcdd6bda"
+    },
+    {
+      "source": "/__l5e/assets-v1/11e729af-0eea-4ff6-ac2a-947c98c7e0a4/dresscode-hanging-garland-v2.webp",
+      "sourceUrl": "https://embroidered-garden-template.thedigitalyes.com/__l5e/assets-v1/11e729af-0eea-4ff6-ac2a-947c98c7e0a4/dresscode-hanging-garland-v2.webp",
+      "local": "/assets/flagship/embroidered-garden/37f04165-dresscode-hanging-garland-v2.webp",
+      "bytes": 632594,
+      "sha256": "a547cb3a2db9cdbf13eee5f33717d85fb694d7901dae495437a9d36d2159b2f8"
+    },
+    {
+      "source": "/__l5e/assets-v1/41a5663c-57c5-4bce-9d90-7a3eb25dc76d/dress-code-illustration-v2.webp",
+      "sourceUrl": "https://embroidered-garden-template.thedigitalyes.com/__l5e/assets-v1/41a5663c-57c5-4bce-9d90-7a3eb25dc76d/dress-code-illustration-v2.webp",
+      "local": "/assets/flagship/embroidered-garden/ef941190-dress-code-illustration-v2.webp",
+      "bytes": 261074,
+      "sha256": "099d379b39a8f67c06d4acac64f82030eb5824f28f55b4ef253c872ab3335a3c"
+    },
+    {
+      "source": "/__l5e/assets-v1/7a815d1d-3866-406e-b3de-cb7ba0b1d4b5/timeline-pearl-large.png",
+      "sourceUrl": "https://embroidered-garden-template.thedigitalyes.com/__l5e/assets-v1/7a815d1d-3866-406e-b3de-cb7ba0b1d4b5/timeline-pearl-large.png",
+      "local": "/assets/flagship/embroidered-garden/08a2513c-timeline-pearl-large.png",
+      "bytes": 7590,
+      "sha256": "c169a62d6181ee630c4230b16880e1a0488d91c14b662986954fb9945861b91e"
+    },
+    {
+      "source": "/__l5e/assets-v1/2ed0c767-f72d-4937-8482-0c891a17503e/story-frame.png",
+      "sourceUrl": "https://embroidered-garden-template.thedigitalyes.com/__l5e/assets-v1/2ed0c767-f72d-4937-8482-0c891a17503e/story-frame.png",
+      "local": "/assets/flagship/embroidered-garden/c5eb589c-story-frame.png",
+      "bytes": 443758,
+      "sha256": "7e91f75414387b975de3c65ca5fb2e8bc25d064e003466473a759c1a13066e77"
+    },
+    {
+      "source": "/__l5e/assets-v1/f4fda4a2-942e-4dc6-9f70-ea3623432fea/timeline-chapel-v2.png",
+      "sourceUrl": "https://embroidered-garden-template.thedigitalyes.com/__l5e/assets-v1/f4fda4a2-942e-4dc6-9f70-ea3623432fea/timeline-chapel-v2.png",
+      "local": "/assets/flagship/embroidered-garden/a1000553-timeline-chapel-v2.png",
+      "bytes": 178712,
+      "sha256": "8203d0576003a5cb94141f451de33aa146449292fdf63006431d921c71e7df0b"
+    },
+    {
+      "source": "/__l5e/assets-v1/a394d6bc-5793-42fa-9cff-4ffd1b0c6faf/timeline-disco-v2.png",
+      "sourceUrl": "https://embroidered-garden-template.thedigitalyes.com/__l5e/assets-v1/a394d6bc-5793-42fa-9cff-4ffd1b0c6faf/timeline-disco-v2.png",
+      "local": "/assets/flagship/embroidered-garden/c963f801-timeline-disco-v2.png",
+      "bytes": 341938,
+      "sha256": "9d7b0067475976f54a3ae95d91561ec85ae5735e9ade09cc3939c7d1c5484fcd"
+    },
+    {
+      "source": "/__l5e/assets-v1/5a308a46-8e36-48de-9aad-9e7b9893f62a/timeline-champagne-v2.png",
+      "sourceUrl": "https://embroidered-garden-template.thedigitalyes.com/__l5e/assets-v1/5a308a46-8e36-48de-9aad-9e7b9893f62a/timeline-champagne-v2.png",
+      "local": "/assets/flagship/embroidered-garden/12a7c538-timeline-champagne-v2.png",
+      "bytes": 300340,
+      "sha256": "60648faa60a934c03497d022cfb8119443a088f0f2aae3c6e56df02c301d7819"
+    },
+    {
+      "source": "/__l5e/assets-v1/d3b64a49-1d7d-4fa0-8a75-044cfc444af3/timeline-rings-v2.png",
+      "sourceUrl": "https://embroidered-garden-template.thedigitalyes.com/__l5e/assets-v1/d3b64a49-1d7d-4fa0-8a75-044cfc444af3/timeline-rings-v2.png",
+      "local": "/assets/flagship/embroidered-garden/9285b3d8-timeline-rings-v2.png",
+      "bytes": 412698,
+      "sha256": "945e8501d22645e71d36d2c4a7587e24cb22ee74555dbd85fe7ae5846ca3f971"
+    },
+    {
+      "source": "/__l5e/assets-v1/c6fd0481-6567-4e1f-a4de-50bbb9ee6da9/recovery-day-divider.png",
+      "sourceUrl": "https://embroidered-garden-template.thedigitalyes.com/__l5e/assets-v1/c6fd0481-6567-4e1f-a4de-50bbb9ee6da9/recovery-day-divider.png",
+      "local": "/assets/flagship/embroidered-garden/c4c86a81-recovery-day-divider.png",
+      "bytes": 125298,
+      "sha256": "5770c738334dc68f68066ebb95656d812c27b991decfab9472aca23292f6c45d"
+    },
+    {
+      "source": "/__l5e/assets-v1/81a76b75-d276-4193-ac62-995e28215c7c/timeline-cocktail-v2.png",
+      "sourceUrl": "https://embroidered-garden-template.thedigitalyes.com/__l5e/assets-v1/81a76b75-d276-4193-ac62-995e28215c7c/timeline-cocktail-v2.png",
+      "local": "/assets/flagship/embroidered-garden/bf529f86-timeline-cocktail-v2.png",
+      "bytes": 253316,
+      "sha256": "e4e650fcebb341a73cdd20e6ccff717f0f5f360943c5b9e05da0636be3e3a1c7"
+    },
+    {
+      "source": "/__l5e/assets-v1/567dff30-f085-4a6c-9048-8601c69b5a90/recovery-venue-v2.png",
+      "sourceUrl": "https://embroidered-garden-template.thedigitalyes.com/__l5e/assets-v1/567dff30-f085-4a6c-9048-8601c69b5a90/recovery-venue-v2.png",
+      "local": "/assets/flagship/embroidered-garden/d507f6e0-recovery-venue-v2.png",
+      "bytes": 262368,
+      "sha256": "2ee9117218b9c61e6d089b1401ae7e0a8ffdb622571e0703cfb5ed0ed146a313"
+    },
+    {
+      "source": "/__l5e/assets-v1/0f91900d-428c-41f6-97e6-6ddd1d548298/gift-frame-v3.png",
+      "sourceUrl": "https://embroidered-garden-template.thedigitalyes.com/__l5e/assets-v1/0f91900d-428c-41f6-97e6-6ddd1d548298/gift-frame-v3.png",
+      "local": "/assets/flagship/embroidered-garden/559d92ce-gift-frame-v3.png",
+      "bytes": 204580,
+      "sha256": "8a61c08f24ba2567f0b26a03f1ed61d2c2ae9e88c3f87c71ceb82deedb4044a5"
+    },
+    {
+      "source": "https://use.typekit.net/af/00f106/00000000000000007735b2fd/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/00f106/00000000000000007735b2fd/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "local": "/assets/flagship/embroidered-garden/8de2345f-l",
+      "bytes": 33464,
+      "sha256": "50022665e58e3330913d498b843f9b041cf15b1b353ae66ac75ae3fe179fd28e"
+    },
+    {
+      "source": "/__l5e/assets-v1/a2c33b65-67dc-43e4-87df-863f516bfb89/rsvp-envelope-v2.png",
+      "sourceUrl": "https://embroidered-garden-template.thedigitalyes.com/__l5e/assets-v1/a2c33b65-67dc-43e4-87df-863f516bfb89/rsvp-envelope-v2.png",
+      "local": "/assets/flagship/embroidered-garden/b518ebaf-rsvp-envelope-v2.png",
+      "bytes": 258578,
+      "sha256": "e737054cf7ac32e491ec0eaa4907f01d2693e8d91427688a0826f2fb087cb1e4"
+    },
+    {
+      "source": "/__l5e/assets-v1/308afc17-62c7-4107-9d59-7b154511b956/rsvp-topiary.png",
+      "sourceUrl": "https://embroidered-garden-template.thedigitalyes.com/__l5e/assets-v1/308afc17-62c7-4107-9d59-7b154511b956/rsvp-topiary.png",
+      "local": "/assets/flagship/embroidered-garden/6da211cf-rsvp-topiary.png",
+      "bytes": 272170,
+      "sha256": "ea5a139300da3e345787fe0d1c29d9d4116e811f0ee8128cddfd46976576e93a"
+    },
+    {
+      "source": "/__l5e/assets-v1/bb1fa55e-48f8-4d28-a551-07f0b9fbbebc/footer-chateau.png",
+      "sourceUrl": "https://embroidered-garden-template.thedigitalyes.com/__l5e/assets-v1/bb1fa55e-48f8-4d28-a551-07f0b9fbbebc/footer-chateau.png",
+      "local": "/assets/flagship/embroidered-garden/2c76eef1-footer-chateau.png",
+      "bytes": 243248,
+      "sha256": "c47e3cd9e7a2f7248f59710349879a47600f7fab9ff3451e8efd7d1b482dc2ea"
+    },
+    {
+      "source": "https://use.typekit.net/af/00f106/00000000000000007735b2fd/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/00f106/00000000000000007735b2fd/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "local": "/assets/flagship/embroidered-garden/d1ae3309-a",
+      "bytes": 56956,
+      "sha256": "729d014c94706801036a77f6d6330013712a90daa7050f7acc8fe7963fc77540"
+    },
+    {
+      "source": "https://use.typekit.net/af/633665/00000000000000007735b2ff/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/633665/00000000000000007735b2ff/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/612339ec-l",
+      "bytes": 76648,
+      "sha256": "fc43da996968448ad7feaf48bc36dc206fddca0a4ec108f0de53255daf968a40"
+    },
+    {
+      "source": "https://use.typekit.net/af/af2452/00000000000000007735b300/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/af2452/00000000000000007735b300/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "local": "/assets/flagship/embroidered-garden/187dad5f-l",
+      "bytes": 35024,
+      "sha256": "c3cd975f31345212f202e26d04f9913a26548815aa039beaf573090eaff6c010"
+    },
+    {
+      "source": "https://use.typekit.net/af/633665/00000000000000007735b2ff/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/633665/00000000000000007735b2ff/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/7bcd3f7f-a",
+      "bytes": 159180,
+      "sha256": "d5a669213639a29ef76123b576c60c1dfabd1efdcb807fd8ca11da8ee997e420"
+    },
+    {
+      "source": "https://use.typekit.net/af/633665/00000000000000007735b2ff/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/633665/00000000000000007735b2ff/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/7e18ba8c-d",
+      "bytes": 80904,
+      "sha256": "78031b24cbfbba12616550cc636034482a72fc4b7cb0c389e5e8da688ba5b49b"
+    },
+    {
+      "source": "https://use.typekit.net/af/af2452/00000000000000007735b300/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/af2452/00000000000000007735b300/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "local": "/assets/flagship/embroidered-garden/11a9af5b-d",
+      "bytes": 36120,
+      "sha256": "aa79787aedde065a2ecefb4c84ecd0b79d6a1fc33ba8ad40f207cc0dfaada49d"
+    },
+    {
+      "source": "https://use.typekit.net/af/af2452/00000000000000007735b300/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/af2452/00000000000000007735b300/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "local": "/assets/flagship/embroidered-garden/7bee2187-a",
+      "bytes": 57476,
+      "sha256": "9551bb7eca0c903a3ed3efcb07a1078ee3b9e7c48a65f01b3b6347cf7ce954b0"
+    },
+    {
+      "source": "https://use.typekit.net/af/2622bf/00000000000000007735b301/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/2622bf/00000000000000007735b301/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "local": "/assets/flagship/embroidered-garden/82745ee2-l",
+      "bytes": 40844,
+      "sha256": "dcd7f5415c1a1374398c2f42de12f08889fe2042be5be93f1013ba96891f3756"
+    },
+    {
+      "source": "https://use.typekit.net/af/2622bf/00000000000000007735b301/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/2622bf/00000000000000007735b301/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "local": "/assets/flagship/embroidered-garden/6d5f874f-d",
+      "bytes": 42232,
+      "sha256": "671982ad00ecf83390140c990392e142c5d498b779028963035b213d5a8e8229"
+    },
+    {
+      "source": "https://use.typekit.net/af/2622bf/00000000000000007735b301/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/2622bf/00000000000000007735b301/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "local": "/assets/flagship/embroidered-garden/55d2f0f8-a",
+      "bytes": 67304,
+      "sha256": "664377352e192fff5b0bd9e97378a17bd16ed7bc026310874a68b2c42a3f89b8"
+    },
+    {
+      "source": "https://use.typekit.net/af/10c018/00000000000000007735b2f9/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/10c018/00000000000000007735b2f9/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/db2a174d-l",
+      "bytes": 16800,
+      "sha256": "d463934cb4b8403403aa76f7ffc5ea60a78d865cfa74a836d3c4cf838622ef2f"
+    },
+    {
+      "source": "https://use.typekit.net/af/db5877/00000000000000007735b2fa/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/db5877/00000000000000007735b2fa/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/046718ab-l",
+      "bytes": 13360,
+      "sha256": "014d82e91428b765250d795f1ee88686c9f545c5ac1231e488f6f363723a880e"
+    },
+    {
+      "source": "https://use.typekit.net/af/00f106/00000000000000007735b2fd/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/00f106/00000000000000007735b2fd/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "local": "/assets/flagship/embroidered-garden/e21a1fdf-d",
+      "bytes": 34508,
+      "sha256": "13967f1d566900d8dddb9bbc129a2927b0ecb6f95baf65eb074c50b681a6d34f"
+    },
+    {
+      "source": "https://use.typekit.net/af/db5877/00000000000000007735b2fa/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/db5877/00000000000000007735b2fa/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/af553348-a",
+      "bytes": 22184,
+      "sha256": "4ff63e64d7ccbfe20164966c41b3c7768908cae48fa018f03e18c4450eb4affb"
+    },
+    {
+      "source": "https://use.typekit.net/af/82aa84/00000000000000007735b2fb/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/82aa84/00000000000000007735b2fb/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/b0e06a6b-l",
+      "bytes": 17560,
+      "sha256": "686766c6a80def478da6e6b4e32f61cdbf9390947313e2c06f58cdb85aba21ad"
+    },
+    {
+      "source": "https://use.typekit.net/af/10c018/00000000000000007735b2f9/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/10c018/00000000000000007735b2f9/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/0f87fb9d-d",
+      "bytes": 16968,
+      "sha256": "097addf7c6c7c4148c2c7870bd25e948537da65e209307b4b87ee1a9829a5c82"
+    },
+    {
+      "source": "https://use.typekit.net/af/10c018/00000000000000007735b2f9/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/10c018/00000000000000007735b2f9/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/884ad3c3-a",
+      "bytes": 23456,
+      "sha256": "71901863be06c985fd5c3e90884c8a9d14bd62d35be816eb7d4afb9b37c9017c"
+    },
+    {
+      "source": "https://use.typekit.net/af/db5877/00000000000000007735b2fa/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/db5877/00000000000000007735b2fa/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/32ea4b6b-d",
+      "bytes": 13520,
+      "sha256": "9d9bf6fcdb39a4a55ec19ba67c604afb8091e7eca2fc8d3a56dcb93f64ac8ba7"
+    },
+    {
+      "source": "https://use.typekit.net/af/12479b/00000000000000007735b2fc/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/12479b/00000000000000007735b2fc/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/f64d12ef-l",
+      "bytes": 13188,
+      "sha256": "05454615333f5cb95b094d69733aee861dcc0730a55afcffa4216d702cf96b0d"
+    },
+    {
+      "source": "https://use.typekit.net/af/12479b/00000000000000007735b2fc/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/12479b/00000000000000007735b2fc/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/a7e87287-a",
+      "bytes": 21932,
+      "sha256": "aa005c1f99cae2c11aeda4ee46b92d9c8f4d5c9bdef40a35e0296a8312c21718"
+    },
+    {
+      "source": "https://use.typekit.net/af/ac45e2/00000000000000007735b2fe/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/ac45e2/00000000000000007735b2fe/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/6cebc9ce-l",
+      "bytes": 16824,
+      "sha256": "845d3732e33973f141a11e71fa8baea465126db9540d74d96a8e6a2f1489326a"
+    },
+    {
+      "source": "https://use.typekit.net/af/82aa84/00000000000000007735b2fb/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/82aa84/00000000000000007735b2fb/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/71b04124-d",
+      "bytes": 17932,
+      "sha256": "9b9803c8d6f3203f9f4691965889f918655e68c3f85644f2e17eeb6c6fbc0fb7"
+    },
+    {
+      "source": "https://use.typekit.net/af/82aa84/00000000000000007735b2fb/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/82aa84/00000000000000007735b2fb/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/66aee511-a",
+      "bytes": 26636,
+      "sha256": "cda17290408377fe5c1ce5ba10482683a6891414c97f4221569098d48b061e1c"
+    },
+    {
+      "source": "https://use.typekit.net/af/ab6de8/00000000000000007762ff20/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/ab6de8/00000000000000007762ff20/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "local": "/assets/flagship/embroidered-garden/d589b5d3-l",
+      "bytes": 88940,
+      "sha256": "c6770658afdfe67799deb338a4a26dfb897017f94aa42cf1b2a238a091e05c3b"
+    },
+    {
+      "source": "https://use.typekit.net/af/ac45e2/00000000000000007735b2fe/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/ac45e2/00000000000000007735b2fe/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/6879eebd-a",
+      "bytes": 25076,
+      "sha256": "df6341a0728d7a67ee94e895adae01c27cd0ce37d061a5570d7b7a13b490ce65"
+    },
+    {
+      "source": "https://use.typekit.net/af/12479b/00000000000000007735b2fc/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/12479b/00000000000000007735b2fc/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/7e7d9e35-d",
+      "bytes": 13516,
+      "sha256": "5878c6ef98facd230c1b2dfa55ced99a640f1a47c3e5f9cb9d95f82769306510"
+    },
+    {
+      "source": "https://use.typekit.net/af/82b056/00000000000000007762ff1d/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/82b056/00000000000000007762ff1d/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "local": "/assets/flagship/embroidered-garden/e02f5c71-l",
+      "bytes": 45592,
+      "sha256": "945035b3c485f8ac4eb26a3691d3da2f78bf8dcc3eb226e58f07170863c6b339"
+    },
+    {
+      "source": "https://use.typekit.net/af/ac45e2/00000000000000007735b2fe/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/ac45e2/00000000000000007735b2fe/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/e94ed323-d",
+      "bytes": 17148,
+      "sha256": "f0fe3ce7da63bf9edeb08444c16b96dd181960a532b0d79899c2b6d637449abb"
+    },
+    {
+      "source": "https://use.typekit.net/af/ab6de8/00000000000000007762ff20/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/ab6de8/00000000000000007762ff20/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "local": "/assets/flagship/embroidered-garden/f7adce72-a",
+      "bytes": 153096,
+      "sha256": "1facb23ff09df6ec82926f6700d191b43a42727910cf9c92ce1bd8d561f2b987"
+    },
+    {
+      "source": "https://use.typekit.net/af/b36656/00000000000000007762ff21/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/b36656/00000000000000007762ff21/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/4659294e-l",
+      "bytes": 91696,
+      "sha256": "3cfaa2e1e0f22eb8859612c39d2251f70e38199a6ff5a9e433fed8d4dc168df9"
+    },
+    {
+      "source": "https://use.typekit.net/af/ab6de8/00000000000000007762ff20/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/ab6de8/00000000000000007762ff20/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "local": "/assets/flagship/embroidered-garden/c9cfb581-d",
+      "bytes": 95964,
+      "sha256": "a0c940e2c8cdd7d324482e4d1bf506f25290bff8f2c1fd021437d21aa75e5c0e"
+    },
+    {
+      "source": "https://use.typekit.net/af/b36656/00000000000000007762ff21/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/b36656/00000000000000007762ff21/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/424d86f0-a",
+      "bytes": 154720,
+      "sha256": "2c3e4f1b448a5e42f6c0cecb91795fd3ec3230f81d6ca9586f5e92f553ac288b"
+    },
+    {
+      "source": "https://use.typekit.net/af/90f6fc/00000000000000007762ff1f/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/90f6fc/00000000000000007762ff1f/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "local": "/assets/flagship/embroidered-garden/e87f9cad-l",
+      "bytes": 46044,
+      "sha256": "f266659c9c376282721228f79419636ef96e13dd476d06638c4194f6e58a6662"
+    },
+    {
+      "source": "https://use.typekit.net/af/82b056/00000000000000007762ff1d/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/82b056/00000000000000007762ff1d/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "local": "/assets/flagship/embroidered-garden/df7a7349-a",
+      "bytes": 77244,
+      "sha256": "d1303b515dd309c4ea44943c7d66871f120112d145fc8b996ca5abbece12f44b"
+    },
+    {
+      "source": "https://use.typekit.net/af/82b056/00000000000000007762ff1d/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/82b056/00000000000000007762ff1d/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "local": "/assets/flagship/embroidered-garden/a7724b49-d",
+      "bytes": 47116,
+      "sha256": "cee03a019a97b31b4a678ad5137647a2d66eec924d91b519a26a5528d9ba3c4e"
+    },
+    {
+      "source": "https://use.typekit.net/af/90f6fc/00000000000000007762ff1f/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/90f6fc/00000000000000007762ff1f/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "local": "/assets/flagship/embroidered-garden/ed3f4393-d",
+      "bytes": 47340,
+      "sha256": "989e59a483dd73f6a5e5c52de8b0784b6358b3543230c9fdb9ed357d01a923a7"
+    },
+    {
+      "source": "https://use.typekit.net/af/b36656/00000000000000007762ff21/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/b36656/00000000000000007762ff21/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/228aea28-d",
+      "bytes": 98828,
+      "sha256": "72bc7644f0aef69a67469be1ea2150747a7d2ea463a2b4629c44bc2cddbbc649"
+    },
+    {
+      "source": "https://use.typekit.net/af/90f6fc/00000000000000007762ff1f/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/90f6fc/00000000000000007762ff1f/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "local": "/assets/flagship/embroidered-garden/11f5b22b-a",
+      "bytes": 78240,
+      "sha256": "064debf9491286059a8a82c4df859c2659667ffbddc78e695a82fea3cdc320fb"
+    },
+    {
+      "source": "https://use.typekit.net/af/c9b150/00000000000000007735d880/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/c9b150/00000000000000007735d880/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/794c9fd2-l",
+      "bytes": 102104,
+      "sha256": "9d41d9ba1c54d8257635980d12e0a251b2eaf5ecc5f15a3cb91228d30c6aa70b"
+    },
+    {
+      "source": "https://use.typekit.net/af/c9b150/00000000000000007735d880/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/c9b150/00000000000000007735d880/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/80765efa-d",
+      "bytes": 105388,
+      "sha256": "81c6972d6a902b5024cabbaa8d78ee5fb4a5c686ad2b78f1b75b57b51730f063"
+    },
+    {
+      "source": "https://use.typekit.net/af/c003c7/00000000000000007762ff22/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/c003c7/00000000000000007762ff22/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/db8ef780-d",
+      "bytes": 32604,
+      "sha256": "2edfc34509ab203dd6d4a3a2c4360d6b28547c45950a1f92c9b9926edd293ddc"
+    },
+    {
+      "source": "https://use.typekit.net/af/c9b150/00000000000000007735d880/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/c9b150/00000000000000007735d880/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/0bc2d92c-a",
+      "bytes": 139584,
+      "sha256": "77ff45f734ec1e28ea435cef9b12968067fe90f4581861b54b236537af40848d"
+    },
+    {
+      "source": "https://use.typekit.net/af/7aefe0/00000000000000007735d883/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/7aefe0/00000000000000007735d883/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "local": "/assets/flagship/embroidered-garden/c7908abd-l",
+      "bytes": 101904,
+      "sha256": "906f3cadbe7b5d2ea527ea84737e5359da7c2eeb42b00d56b8380d92f42969e0"
+    },
+    {
+      "source": "https://use.typekit.net/af/7aefe0/00000000000000007735d883/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/7aefe0/00000000000000007735d883/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "local": "/assets/flagship/embroidered-garden/092ee6e0-d",
+      "bytes": 103052,
+      "sha256": "fe5d283d322271aa1de757a2a6c9dc627af4eb551d64b00e2a9868fd6e64e253"
+    },
+    {
+      "source": "https://use.typekit.net/af/7aefe0/00000000000000007735d883/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/7aefe0/00000000000000007735d883/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "local": "/assets/flagship/embroidered-garden/22bc1ca9-a",
+      "bytes": 140256,
+      "sha256": "b4482064cdd4e92441f75b11b8165b8d6011f44d92ca6f971ef2ac13ff51f9cb"
+    },
+    {
+      "source": "https://use.typekit.net/af/815b2a/00000000000000007735d887/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/815b2a/00000000000000007735d887/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "local": "/assets/flagship/embroidered-garden/0e2376ce-d",
+      "bytes": 94388,
+      "sha256": "3a4335d2e929ed6435991c0d4d2f2aa3d669bb29f0a38bac35007d4f02a49f02"
+    },
+    {
+      "source": "https://use.typekit.net/af/815b2a/00000000000000007735d887/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/815b2a/00000000000000007735d887/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "local": "/assets/flagship/embroidered-garden/5d340da5-l",
+      "bytes": 92736,
+      "sha256": "fda207884d5c3088cb973c7ba8aeee85c8bfa23bc1372237fad4bcd5a974d4dd"
+    },
+    {
+      "source": "https://use.typekit.net/af/815b2a/00000000000000007735d887/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/815b2a/00000000000000007735d887/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "local": "/assets/flagship/embroidered-garden/d31b491b-a",
+      "bytes": 120972,
+      "sha256": "b6e349be9c0d4c94a336a8558c96225ab5e9a4032abc012dfab14ca192c3d16f"
+    },
+    {
+      "source": "https://use.typekit.net/af/4fb060/00000000000000007735d889/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/4fb060/00000000000000007735d889/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "local": "/assets/flagship/embroidered-garden/1455b869-l",
+      "bytes": 102920,
+      "sha256": "0a5504954b1a2a4af67584f406737b4a3436afc2079a3c5136c2946538c2fb9f"
+    },
+    {
+      "source": "https://use.typekit.net/af/4fb060/00000000000000007735d889/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/4fb060/00000000000000007735d889/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "local": "/assets/flagship/embroidered-garden/b195db5e-d",
+      "bytes": 104708,
+      "sha256": "fa721a104cb8698bf1b77317961a6672cc35151a8e2ba1722bc0c69c3d4d6443"
+    },
+    {
+      "source": "https://use.typekit.net/af/c003c7/00000000000000007762ff22/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/c003c7/00000000000000007762ff22/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/a10450b7-a",
+      "bytes": 46324,
+      "sha256": "4b1003f72d2e2f8c9afe2c504ecf35320bff49153899409fb43c36a0471113bc"
+    },
+    {
+      "source": "https://use.typekit.net/af/c003c7/00000000000000007762ff22/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/c003c7/00000000000000007762ff22/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/b49f7085-l",
+      "bytes": 31672,
+      "sha256": "807f3d1097559bc28bce135317c853f89f76770c7663cb498d6b2eaede70002c"
+    },
+    {
+      "source": "https://use.typekit.net/af/4fb060/00000000000000007735d889/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/4fb060/00000000000000007735d889/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "local": "/assets/flagship/embroidered-garden/ac2ed823-a",
+      "bytes": 141276,
+      "sha256": "e4e1c362639f481a1c16cc04120319b64639238767fcabc246aeeaea2b41eedf"
+    },
+    {
+      "source": "https://use.typekit.net/af/719642/00000000000000007735aa0c/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/719642/00000000000000007735aa0c/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/10dccc1e-l",
+      "bytes": 123512,
+      "sha256": "1a99757d460467d063d3aaf6142a1738a43129052453966de5b75cb9d841617f"
+    },
+    {
+      "source": "https://use.typekit.net/af/14681a/00000000000000007735aa09/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/14681a/00000000000000007735aa09/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/58252674-l",
+      "bytes": 130752,
+      "sha256": "8c31776b0fc9b68cd919ebb6ef4a905550ac27c212c57c1331acb60b442fbcf2"
+    },
+    {
+      "source": "https://use.typekit.net/af/719642/00000000000000007735aa0c/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/719642/00000000000000007735aa0c/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/0bb61d1a-d",
+      "bytes": 139608,
+      "sha256": "c0705f5018fd3bd6de6fe891c155d62dda72b5ead81a0140c2a35332e365a856"
+    },
+    {
+      "source": "https://use.typekit.net/af/d68f2a/00000000000000007735aa08/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/d68f2a/00000000000000007735aa08/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/f0af5be0-l",
+      "bytes": 94012,
+      "sha256": "be2f3c45bb39c33ef1d64ec3556ee8ada22cbc080ac2d8e6925a7ad9bbb68334"
+    },
+    {
+      "source": "https://use.typekit.net/af/14681a/00000000000000007735aa09/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/14681a/00000000000000007735aa09/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/848ad714-d",
+      "bytes": 148804,
+      "sha256": "be9aa32360fab8c85eb8eb47a6f89351a5a9b6fdcd0780fe1d6ac581f5772947"
+    },
+    {
+      "source": "https://use.typekit.net/af/719642/00000000000000007735aa0c/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/719642/00000000000000007735aa0c/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/40d5b2e8-a",
+      "bytes": 205828,
+      "sha256": "097c39868734c45155ec897e99edae7c61d45b5f95e88dd2ed1aacffdaf9794d"
+    },
+    {
+      "source": "https://use.typekit.net/af/4ce9e6/00000000000000007735cf0f/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/4ce9e6/00000000000000007735cf0f/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/8ead14a2-l",
+      "bytes": 172696,
+      "sha256": "effd5de91f5aa91e45d1619940bfa743c4b9c5e25492bb0358e53dfaf404d145"
+    },
+    {
+      "source": "https://use.typekit.net/af/d68f2a/00000000000000007735aa08/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/d68f2a/00000000000000007735aa08/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/21ac0bfa-d",
+      "bytes": 101892,
+      "sha256": "95e9d11eefa4085501c654a51b6947530aa75dc08bbed277843dce99777566d8"
+    },
+    {
+      "source": "https://use.typekit.net/af/14681a/00000000000000007735aa09/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/14681a/00000000000000007735aa09/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/705ee7c0-a",
+      "bytes": 219628,
+      "sha256": "8da044d4afd2a2ce0565cb83e1e8c3908045466c70d69e698c1fa730c41c465e"
+    },
+    {
+      "source": "https://use.typekit.net/af/53bb98/00000000000000007735e736/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/53bb98/00000000000000007735e736/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/897b1868-l",
+      "bytes": 175616,
+      "sha256": "6804e0f4d485b73b23e7ee6a174a6ce02c91fbb1241661ef020dcc376ef6d7d8"
+    },
+    {
+      "source": "https://use.typekit.net/af/4ce9e6/00000000000000007735cf0f/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/4ce9e6/00000000000000007735cf0f/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/2620f48e-d",
+      "bytes": 197916,
+      "sha256": "9fe7bb464d4404df41eaed42ba27021287cee3ac8cbefb783df8fc9b9de204ee"
+    },
+    {
+      "source": "https://use.typekit.net/af/d68f2a/00000000000000007735aa08/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/d68f2a/00000000000000007735aa08/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/9d431350-a",
+      "bytes": 148008,
+      "sha256": "d20477f9e7c268b27abd685cd1777d8c41b2977616585c8c9413e62529c088ac"
+    },
+    {
+      "source": "https://use.typekit.net/af/ed2eb0/00000000000000007735c8e8/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/ed2eb0/00000000000000007735c8e8/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "local": "/assets/flagship/embroidered-garden/942be6d8-l",
+      "bytes": 65764,
+      "sha256": "984b8da5beef0c1a2d2feac801c9501e3e80262b2dc1e4e1a8e7f6ecee863a1c"
+    },
+    {
+      "source": "https://use.typekit.net/af/ed2eb0/00000000000000007735c8e8/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/ed2eb0/00000000000000007735c8e8/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "local": "/assets/flagship/embroidered-garden/f267a2bc-d",
+      "bytes": 68428,
+      "sha256": "7b4194b2cfccb4dad471f7e8987774031326184977455801f29a0591fa43b3d9"
+    },
+    {
+      "source": "https://use.typekit.net/af/4ce9e6/00000000000000007735cf0f/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/4ce9e6/00000000000000007735cf0f/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/d795a430-a",
+      "bytes": 295656,
+      "sha256": "b9068f2a05a677496b532a82aed09448dd35f24e93ce51ada0220d9e3e595d19"
+    },
+    {
+      "source": "https://use.typekit.net/af/9ddaa3/00000000000000007735c8ed/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/9ddaa3/00000000000000007735c8ed/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/1990b5e3-l",
+      "bytes": 62284,
+      "sha256": "8f71314bc5c57d0f2b16002b3f4ea873a6daa3961dc641392b40143a6111f890"
+    },
+    {
+      "source": "https://use.typekit.net/af/9ddaa3/00000000000000007735c8ed/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/9ddaa3/00000000000000007735c8ed/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/f0a0e517-d",
+      "bytes": 65052,
+      "sha256": "c32cf0af57319ceba89abbf23856038044f3ed6746ea218effc57aa189912ca8"
+    },
+    {
+      "source": "https://use.typekit.net/af/9ddaa3/00000000000000007735c8ed/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/9ddaa3/00000000000000007735c8ed/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/2044588c-a",
+      "bytes": 120800,
+      "sha256": "8ce1c17566ea6e4a809fdc2bc28db23ae6b264956c49498f8e9b56a244d8b9ea"
+    },
+    {
+      "source": "https://use.typekit.net/af/53269a/00000000000000007735c8fe/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/53269a/00000000000000007735c8fe/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "local": "/assets/flagship/embroidered-garden/717c319b-l",
+      "bytes": 58132,
+      "sha256": "d9919a9c7615bc87f47930c2d29c383663e65b3f124e997efa975a6c48564b1b"
+    },
+    {
+      "source": "https://use.typekit.net/af/53269a/00000000000000007735c8fe/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/53269a/00000000000000007735c8fe/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "local": "/assets/flagship/embroidered-garden/30b3797e-d",
+      "bytes": 60384,
+      "sha256": "1372a3d4f91145e0f0c1ae229063dea91d750b2e0f638daa3432782604ca033a"
+    },
+    {
+      "source": "https://use.typekit.net/af/53269a/00000000000000007735c8fe/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/53269a/00000000000000007735c8fe/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "local": "/assets/flagship/embroidered-garden/887209d0-a",
+      "bytes": 112816,
+      "sha256": "a7143acebd7f3fb1d06762942e5514c6dc1aad03eaf48a8097afc9da43967dcc"
+    },
+    {
+      "source": "https://use.typekit.net/af/864388/00000000000000007735c903/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/864388/00000000000000007735c903/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "local": "/assets/flagship/embroidered-garden/2f77ae06-l",
+      "bytes": 60200,
+      "sha256": "05bf20bd0d40b6a137d44bcdda13fa352beddd18b2b1c9e92e1c5a7bb41b1b89"
+    },
+    {
+      "source": "https://use.typekit.net/af/864388/00000000000000007735c903/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/864388/00000000000000007735c903/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "local": "/assets/flagship/embroidered-garden/fa8a23c7-d",
+      "bytes": 62612,
+      "sha256": "26ccb4c8c814068208d7798098c6249de4b444bd306d93de0e3cca7df1499eae"
+    },
+    {
+      "source": "https://use.typekit.net/af/53bb98/00000000000000007735e736/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/53bb98/00000000000000007735e736/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/c020b51f-d",
+      "bytes": 197640,
+      "sha256": "ef448684039cd831ace9d2e27ab708252949d148fea5016d0955e8383df95579"
+    },
+    {
+      "source": "https://use.typekit.net/af/bb5552/00000000000000007735c8e9/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/bb5552/00000000000000007735c8e9/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/35d2c046-l",
+      "bytes": 62304,
+      "sha256": "d9d97880f77f6cc4f5afef272ead496163adde33acf11c439e487df32971f936"
+    },
+    {
+      "source": "https://use.typekit.net/af/bb5552/00000000000000007735c8e9/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/bb5552/00000000000000007735c8e9/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/8a20c3f3-d",
+      "bytes": 65120,
+      "sha256": "25c440373061a609d943faa6d1a705e0eadc17d4a6909a5809b7dd435335c6c1"
+    },
+    {
+      "source": "https://use.typekit.net/af/53bb98/00000000000000007735e736/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/53bb98/00000000000000007735e736/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/38a784b6-a",
+      "bytes": 309760,
+      "sha256": "37fac3682b40054dd398a1ac60edfb165c186567657190a9836f7fb2fc376bd9"
+    },
+    {
+      "source": "https://use.typekit.net/af/b425ac/00000000000000007735c8ef/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/b425ac/00000000000000007735c8ef/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "local": "/assets/flagship/embroidered-garden/72b9e4c8-l",
+      "bytes": 65760,
+      "sha256": "2af3c978900d7439a12e995a7edb206993f7947de8dc7ae1bfe2d05eb9858126"
+    },
+    {
+      "source": "https://use.typekit.net/af/b425ac/00000000000000007735c8ef/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/b425ac/00000000000000007735c8ef/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "local": "/assets/flagship/embroidered-garden/20742526-d",
+      "bytes": 68800,
+      "sha256": "c169bc5e39d7ea962a05a472000d94e85d9212c46e0ccee97647df405a4f732e"
+    },
+    {
+      "source": "https://use.typekit.net/af/ed2eb0/00000000000000007735c8e8/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/ed2eb0/00000000000000007735c8e8/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "local": "/assets/flagship/embroidered-garden/604ed009-a",
+      "bytes": 125408,
+      "sha256": "ca68444361d9cf724fb9ceb5301f0852537cd32a309e71ce8309dae311d31b93"
+    },
+    {
+      "source": "https://use.typekit.net/af/8076bd/00000000000000007735c8fc/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/8076bd/00000000000000007735c8fc/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "local": "/assets/flagship/embroidered-garden/712587b4-l",
+      "bytes": 61676,
+      "sha256": "d9e90b23214dbf67e8662545d557628d13af6b00ae5b045ff7d22f04ea610c6a"
+    },
+    {
+      "source": "https://use.typekit.net/af/864388/00000000000000007735c903/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/864388/00000000000000007735c903/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "local": "/assets/flagship/embroidered-garden/f45eb164-a",
+      "bytes": 116672,
+      "sha256": "09f8b86067f78e5ce93935704b6b207f15e61529d4e6c1dd2682741c7b327bef"
+    },
+    {
+      "source": "https://use.typekit.net/af/8076bd/00000000000000007735c8fc/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/8076bd/00000000000000007735c8fc/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "local": "/assets/flagship/embroidered-garden/6c42fcd0-d",
+      "bytes": 64488,
+      "sha256": "d681e88f6a5e8b3222ec47330763e689e62031d2393d4bf324180702cc0a8796"
+    },
+    {
+      "source": "https://use.typekit.net/af/72fcb1/00000000000000007735c900/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/72fcb1/00000000000000007735c900/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "local": "/assets/flagship/embroidered-garden/c78ecb65-l",
+      "bytes": 64904,
+      "sha256": "fd5c1c157cd2562b3ae050c33e91e90d530851545094231bf6c896512c0a0916"
+    },
+    {
+      "source": "https://use.typekit.net/af/72fcb1/00000000000000007735c900/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/72fcb1/00000000000000007735c900/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "local": "/assets/flagship/embroidered-garden/ee93f80c-d",
+      "bytes": 67884,
+      "sha256": "8f6bdf0325cf80e3be78bbdcefe366e1af81efc19ebd00e5f51244130d110791"
+    },
+    {
+      "source": "https://use.typekit.net/af/b425ac/00000000000000007735c8ef/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/b425ac/00000000000000007735c8ef/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "local": "/assets/flagship/embroidered-garden/cbe7570c-a",
+      "bytes": 125392,
+      "sha256": "f158845e384a13d29059a74ca25c3e24645e3c2982794e8a15b9a5fe36052d2b"
+    },
+    {
+      "source": "https://use.typekit.net/af/81b4ab/00000000000000007735c8ec/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/81b4ab/00000000000000007735c8ec/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/abb3def1-l",
+      "bytes": 62672,
+      "sha256": "bfbd0f4f3dff9d3f08d721dadde34e3aed84ca03120f3c838a16c6603e32cc41"
+    },
+    {
+      "source": "https://use.typekit.net/af/81b4ab/00000000000000007735c8ec/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/81b4ab/00000000000000007735c8ec/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/df9e457e-d",
+      "bytes": 65236,
+      "sha256": "86db29a31296b16487bb5b1d5013d59984472a2e3d88e101aa052e88c19d7abb"
+    },
+    {
+      "source": "https://use.typekit.net/af/81b4ab/00000000000000007735c8ec/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/81b4ab/00000000000000007735c8ec/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/41629444-a",
+      "bytes": 120936,
+      "sha256": "ed90dad9d7576da9748d17b450bcb8774e1ac28af79129392420ce132dbe6914"
+    },
+    {
+      "source": "https://use.typekit.net/af/3a7261/00000000000000007735c8f2/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/3a7261/00000000000000007735c8f2/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "local": "/assets/flagship/embroidered-garden/b1aa3442-l",
+      "bytes": 66556,
+      "sha256": "97dc21a7358d96136a43829e04ae74732daf1ae153adf3f45ef388c1c1950900"
+    },
+    {
+      "source": "https://use.typekit.net/af/8076bd/00000000000000007735c8fc/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/8076bd/00000000000000007735c8fc/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "local": "/assets/flagship/embroidered-garden/4a402a6d-a",
+      "bytes": 120156,
+      "sha256": "9f8ecb008df30f80710bf981a717d80dc9af6644f68f7efee5f212cd95d208a0"
+    },
+    {
+      "source": "https://use.typekit.net/af/3a7261/00000000000000007735c8f2/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/3a7261/00000000000000007735c8f2/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "local": "/assets/flagship/embroidered-garden/081cbe2a-d",
+      "bytes": 69012,
+      "sha256": "b855978fe92275a7921e4c696d48f047d53f039d71ec7391a1b3d9e99799ba20"
+    },
+    {
+      "source": "https://use.typekit.net/af/2832b1/00000000000000007735c901/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/2832b1/00000000000000007735c901/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "local": "/assets/flagship/embroidered-garden/da6efdbf-l",
+      "bytes": 62156,
+      "sha256": "8490f28f68c67387956150be68b4965a672198444a5c9ea86e56ef881e23f07b"
+    },
+    {
+      "source": "https://use.typekit.net/af/2832b1/00000000000000007735c901/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/2832b1/00000000000000007735c901/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "local": "/assets/flagship/embroidered-garden/d2b4ff05-d",
+      "bytes": 64772,
+      "sha256": "91eb3c2b91940bb8872a42c59d3bf1896f8f0d7fef6227bff0e50b16f2ddb891"
+    },
+    {
+      "source": "https://use.typekit.net/af/2832b1/00000000000000007735c901/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/2832b1/00000000000000007735c901/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "local": "/assets/flagship/embroidered-garden/ac47b5e1-a",
+      "bytes": 120072,
+      "sha256": "e43c26cd3ec4bbb68be7af3b9770812ee2f1c07dc333cf09894b75e70e587351"
+    },
+    {
+      "source": "https://use.typekit.net/af/c34853/00000000000000007735c904/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/c34853/00000000000000007735c904/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "local": "/assets/flagship/embroidered-garden/806d7cb1-l",
+      "bytes": 65632,
+      "sha256": "700b775ba24162638c70633f0450ab02562bfefef47e2486001d4be6116e1e52"
+    },
+    {
+      "source": "https://use.typekit.net/af/bb5552/00000000000000007735c8e9/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/bb5552/00000000000000007735c8e9/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/e8e0cf68-a",
+      "bytes": 120668,
+      "sha256": "5e514fb388416c62090055775afa3805ac04d3db32bfcdb1c89b8300a35446e1"
+    },
+    {
+      "source": "https://use.typekit.net/af/c34853/00000000000000007735c904/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/c34853/00000000000000007735c904/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "local": "/assets/flagship/embroidered-garden/b5db2e41-d",
+      "bytes": 68156,
+      "sha256": "f99771382d3a11b4bcfce2187a854d60c89b524161cbd2712425a6de0d73bf28"
+    },
+    {
+      "source": "https://use.typekit.net/af/5f2949/00000000000000007735ec1a/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/5f2949/00000000000000007735ec1a/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/f2d74f71-l",
+      "bytes": 29076,
+      "sha256": "b45b5112af2aa50ca95a6a03ccc0d39fab94fc9cffbf9180a6d6f0df1ed2bbfc"
+    },
+    {
+      "source": "https://use.typekit.net/af/3a7261/00000000000000007735c8f2/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/3a7261/00000000000000007735c8f2/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "local": "/assets/flagship/embroidered-garden/f2c59023-a",
+      "bytes": 125716,
+      "sha256": "3a047c149098410f955512f37e14ef92041da047a922e9cfa2614a5399936c26"
+    },
+    {
+      "source": "https://use.typekit.net/af/72fcb1/00000000000000007735c900/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/72fcb1/00000000000000007735c900/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "local": "/assets/flagship/embroidered-garden/c8bda855-a",
+      "bytes": 124856,
+      "sha256": "fee68da67766fb80d0924ff22e1ec6e60abb0e5962058d4136a722eeab956891"
+    },
+    {
+      "source": "https://use.typekit.net/af/5f2949/00000000000000007735ec1a/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/5f2949/00000000000000007735ec1a/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/9765dcf7-a",
+      "bytes": 61984,
+      "sha256": "933acfd498e22e2e50cd2f344e10d77cd42d9779181142c2448f5d235f2debd9"
+    },
+    {
+      "source": "https://use.typekit.net/af/3f3fe9/000000000000000077572fd4/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/3f3fe9/000000000000000077572fd4/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/9ae659be-l",
+      "bytes": 40348,
+      "sha256": "79e04cce64fe3ad09fe83f2de47d1f9e4bb02e0e90de0699b38eb73271ae5b43"
+    },
+    {
+      "source": "https://use.typekit.net/af/5f2949/00000000000000007735ec1a/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/5f2949/00000000000000007735ec1a/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/b2d85e30-d",
+      "bytes": 30392,
+      "sha256": "3c8fcec5721b4b12822c1cc448313cbb8ceb6ede656613fc23da2512b0b0dea8"
+    },
+    {
+      "source": "https://use.typekit.net/af/c34853/00000000000000007735c904/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/c34853/00000000000000007735c904/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "local": "/assets/flagship/embroidered-garden/00176f65-a",
+      "bytes": 124388,
+      "sha256": "2295b7ce849e0cc64464c51ff0d470050af8ec155cdd52af0af2288510d9cf30"
+    },
+    {
+      "source": "https://use.typekit.net/af/3f3fe9/000000000000000077572fd4/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/3f3fe9/000000000000000077572fd4/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/192595d0-d",
+      "bytes": 40928,
+      "sha256": "d04e65101bcc710a54d04b35db4ddf156fe6442504475a88db1f50413b34f58d"
+    },
+    {
+      "source": "https://use.typekit.net/af/3f3fe9/000000000000000077572fd4/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/3f3fe9/000000000000000077572fd4/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/embroidered-garden/beb30694-a",
+      "bytes": 53900,
+      "sha256": "a90538e59dff226296d259663571e6c2f20cc82d64aa35923a2bc3bd313e52be"
+    }
+  ]
+}

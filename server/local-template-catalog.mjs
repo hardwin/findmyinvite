@@ -22,8 +22,18 @@ export async function localTemplateCatalog(req,res,{readIds=readLocalReleaseIds,
   if(!ids.length)return false;
   if(action==='version'){
    const id=url.searchParams.get('id');
-   if(!ids.includes(id))return false;
-   respond(res,200,{version:{...safeVersion(await readVersion(id)),localPreview:true}});
+   if(!/^[a-f0-9-]{36}$/.test(id||''))return false;
+   let selected;
+   if(ids.includes(id))selected=await readVersion(id);
+   else {
+    let requested;
+    try{requested=await readVersion(id);}catch{return false;}
+    if(requested.approved_at)return false;
+    const local=await Promise.all(ids.map(readVersion));
+    selected=local.find(v=>v.template_id===requested.template_id&&v.revision>requested.revision&&!v.approved_at);
+    if(!selected)return false;
+   }
+   respond(res,200,{version:{...safeVersion(selected),localPreview:true}});
    return true;
   }
   const rows=await query('template_catalog?generation=eq.2&isactive=eq.true&published=eq.true&select=id,name,description,tradition,thumbnail,current_version_id,sort_order&order=sort_order.asc');

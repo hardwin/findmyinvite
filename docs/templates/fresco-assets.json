@@ -1,0 +1,545 @@
+{
+  "reference": "https://fresco-template.thedigitalyes.com/",
+  "downloaded": "2026-11-03",
+  "assets": [
+    {
+      "source": "/__l5e/assets-v1/10d9e059-a13e-4455-99a3-e07dceb16339/ramita-capullos.png",
+      "sourceUrl": "https://fresco-template.thedigitalyes.com/__l5e/assets-v1/10d9e059-a13e-4455-99a3-e07dceb16339/ramita-capullos.png",
+      "local": "/assets/flagship/fresco/11b0f5b7-ramita-capullos.png",
+      "bytes": 1499397,
+      "sha256": "8df429e566a04d7ededf31ff90db83e933a8439e7830aab8fe6dad07ea59df8a"
+    },
+    {
+      "source": "/__l5e/assets-v1/89172c20-f8b3-49b8-92c4-6587b23564cc/fresco-hero-original.jpg",
+      "sourceUrl": "https://fresco-template.thedigitalyes.com/__l5e/assets-v1/89172c20-f8b3-49b8-92c4-6587b23564cc/fresco-hero-original.jpg",
+      "local": "/assets/flagship/fresco/e7294aac-fresco-hero-original.jpg",
+      "bytes": 244081,
+      "sha256": "7c9c4c84ff2f028cb4c416548c008e4c68e764d3ce70ed128f4ba4339d04c62c"
+    },
+    {
+      "source": "/__l5e/assets-v1/6b69c57c-57b6-484c-8db9-c783be8b0493/marco-azul-impasto.png",
+      "sourceUrl": "https://fresco-template.thedigitalyes.com/__l5e/assets-v1/6b69c57c-57b6-484c-8db9-c783be8b0493/marco-azul-impasto.png",
+      "local": "/assets/flagship/fresco/9de40975-marco-azul-impasto.png",
+      "bytes": 1913513,
+      "sha256": "1e97cffe1086ac2aa69620e9adc9f107346c41f956f7193cd0a81634d1bb593a"
+    },
+    {
+      "source": "/__l5e/assets-v1/247a73e0-2b7c-40c3-9a13-bb13a0df66d8/hero-video.mp4",
+      "sourceUrl": "https://fresco-template.thedigitalyes.com/__l5e/assets-v1/247a73e0-2b7c-40c3-9a13-bb13a0df66d8/hero-video.mp4",
+      "local": "/assets/flagship/fresco/77968884-hero-video.mp4",
+      "bytes": 5134157,
+      "sha256": "9d67a1c6de330e86e67480364670c55ad2e22ba406814a63ff943097e3aca03e"
+    },
+    {
+      "source": "/__l5e/assets-v1/8df08ac6-36bb-4467-8f71-589d2a644e65/nubes-impasto.png",
+      "sourceUrl": "https://fresco-template.thedigitalyes.com/__l5e/assets-v1/8df08ac6-36bb-4467-8f71-589d2a644e65/nubes-impasto.png",
+      "local": "/assets/flagship/fresco/1f7f59d0-nubes-impasto.png",
+      "bytes": 292358,
+      "sha256": "a7b7ea259afabc5b88812b222627b2154f9f7eb3f2b608d1cdfcf6deda0816f7"
+    },
+    {
+      "source": "/__l5e/assets-v1/7736de9b-ec54-4d61-ae90-f6fd85a994b6/marco-oliva-nuevo-cap.webp",
+      "sourceUrl": "https://fresco-template.thedigitalyes.com/__l5e/assets-v1/7736de9b-ec54-4d61-ae90-f6fd85a994b6/marco-oliva-nuevo-cap.webp",
+      "local": "/assets/flagship/fresco/32b87d1a-marco-oliva-nuevo-cap.webp",
+      "bytes": 9608,
+      "sha256": "84d46aa61dcb469eaab46b398a3d1b6e92205c6ffb3efde329e5b756773e4919"
+    },
+    {
+      "source": "/__l5e/assets-v1/130510f4-9621-4ac2-8978-1c7b4b824730/marco-oliva-nuevo-alto.webp",
+      "sourceUrl": "https://fresco-template.thedigitalyes.com/__l5e/assets-v1/130510f4-9621-4ac2-8978-1c7b4b824730/marco-oliva-nuevo-alto.webp",
+      "local": "/assets/flagship/fresco/8ef5c9c5-marco-oliva-nuevo-alto.webp",
+      "bytes": 444412,
+      "sha256": "c8e959de16380e63fa9b618ec48533ba2a5fa737457c3ee2164b5ca9c6340ee1"
+    },
+    {
+      "source": "/__l5e/assets-v1/f2daee49-cee7-476d-b83e-4b0ff437da31/marco-oliva-nuevo.webp",
+      "sourceUrl": "https://fresco-template.thedigitalyes.com/__l5e/assets-v1/f2daee49-cee7-476d-b83e-4b0ff437da31/marco-oliva-nuevo.webp",
+      "local": "/assets/flagship/fresco/c56c6af3-marco-oliva-nuevo.webp",
+      "bytes": 393722,
+      "sha256": "c6d2e6169da4cd08474e67f43c89af5fdab9c1c041fd8605ef5017bab51386ae"
+    },
+    {
+      "source": "/__l5e/assets-v1/c47adbd2-11e7-4b79-a83b-97274290e563/fuente-jardin-mediterraneo.png",
+      "sourceUrl": "https://fresco-template.thedigitalyes.com/__l5e/assets-v1/c47adbd2-11e7-4b79-a83b-97274290e563/fuente-jardin-mediterraneo.png",
+      "local": "/assets/flagship/fresco/d21a5e6b-fuente-jardin-mediterraneo.png",
+      "bytes": 564756,
+      "sha256": "ac523ea6d6f5e4d9b5778bf7d81df3809ac42f29c7ee5a369f7f2085e21be1cd"
+    },
+    {
+      "source": "/__l5e/assets-v1/c8a7942e-4b02-41e3-97b7-f864651a3326/villa-mediterranea.png",
+      "sourceUrl": "https://fresco-template.thedigitalyes.com/__l5e/assets-v1/c8a7942e-4b02-41e3-97b7-f864651a3326/villa-mediterranea.png",
+      "local": "/assets/flagship/fresco/964b74f0-villa-mediterranea.png",
+      "bytes": 526724,
+      "sha256": "90f7bac0b0255a98a9a3c35ce76f5820f9b85f3ffbab0dbe58ce1cdfc13514e9"
+    },
+    {
+      "source": "/__l5e/assets-v1/1d594a71-ed02-48b7-b27d-84521ec2d351/icono-cavas.png",
+      "sourceUrl": "https://fresco-template.thedigitalyes.com/__l5e/assets-v1/1d594a71-ed02-48b7-b27d-84521ec2d351/icono-cavas.png",
+      "local": "/assets/flagship/fresco/5f1ba436-icono-cavas.png",
+      "bytes": 370388,
+      "sha256": "0da965e5faa98a2fb2581597c69a6b363efdc5634efd3ae912a740f5591a865f"
+    },
+    {
+      "source": "/__l5e/assets-v1/83f59c73-f655-4c34-920b-045811b3679f/icono-arco.png",
+      "sourceUrl": "https://fresco-template.thedigitalyes.com/__l5e/assets-v1/83f59c73-f655-4c34-920b-045811b3679f/icono-arco.png",
+      "local": "/assets/flagship/fresco/fa460b2e-icono-arco.png",
+      "bytes": 365038,
+      "sha256": "633eb64048e19954dd7d556910662637c5daf37cf6d41aed165d361cdfac4ea3"
+    },
+    {
+      "source": "/__l5e/assets-v1/324ecd24-fdca-47fe-be7c-edc21103b289/icono-coctel.png",
+      "sourceUrl": "https://fresco-template.thedigitalyes.com/__l5e/assets-v1/324ecd24-fdca-47fe-be7c-edc21103b289/icono-coctel.png",
+      "local": "/assets/flagship/fresco/fbacaf63-icono-coctel.png",
+      "bytes": 348393,
+      "sha256": "70180fcd39a1e059cd513475dd763cf6b41ac28f14ffa7bf9b73f29c1b4fbe5f"
+    },
+    {
+      "source": "/__l5e/assets-v1/d45e9e1b-edfb-463e-82c2-1f357dff2c6b/icono-cena.png",
+      "sourceUrl": "https://fresco-template.thedigitalyes.com/__l5e/assets-v1/d45e9e1b-edfb-463e-82c2-1f357dff2c6b/icono-cena.png",
+      "local": "/assets/flagship/fresco/341b07a6-icono-cena.png",
+      "bytes": 398862,
+      "sha256": "d87039030a525ff38045040c3d52498894cd54f386f62858a03093e1d112b2c7"
+    },
+    {
+      "source": "/__l5e/assets-v1/aa7948fa-cef0-46da-ad7c-cb4df37ec3c6/baile-nupcial.png",
+      "sourceUrl": "https://fresco-template.thedigitalyes.com/__l5e/assets-v1/aa7948fa-cef0-46da-ad7c-cb4df37ec3c6/baile-nupcial.png",
+      "local": "/assets/flagship/fresco/c4fb213a-baile-nupcial.png",
+      "bytes": 1610424,
+      "sha256": "6bc6884f52325a11061782fa864313eacb2b2235a9de2bcd32e7f5fcc44518dc"
+    },
+    {
+      "source": "/__l5e/assets-v1/c670113f-aa4f-451c-a254-7aee37b32b7b/tarta-boda.png",
+      "sourceUrl": "https://fresco-template.thedigitalyes.com/__l5e/assets-v1/c670113f-aa4f-451c-a254-7aee37b32b7b/tarta-boda.png",
+      "local": "/assets/flagship/fresco/f27953af-tarta-boda.png",
+      "bytes": 277208,
+      "sha256": "22b5f513141f1dcfc52563bb32d41ed026c8819e9cc1abab8cb2dcb17f644a16"
+    },
+    {
+      "source": "/__l5e/assets-v1/13c274ab-24d6-4b87-861f-83d0a7954b5f/icono-discoteca.png",
+      "sourceUrl": "https://fresco-template.thedigitalyes.com/__l5e/assets-v1/13c274ab-24d6-4b87-861f-83d0a7954b5f/icono-discoteca.png",
+      "local": "/assets/flagship/fresco/bd549b60-icono-discoteca.png",
+      "bytes": 343596,
+      "sha256": "89ea6cb7c3ad0232f71ba42cd3439d9eb76c20684dd6f4ebc51e6c32913ab87c"
+    },
+    {
+      "source": "/__l5e/assets-v1/17a7b6e9-3dd9-4956-a263-8aae3e229fb4/cenefa-hojas-1.webp",
+      "sourceUrl": "https://fresco-template.thedigitalyes.com/__l5e/assets-v1/17a7b6e9-3dd9-4956-a263-8aae3e229fb4/cenefa-hojas-1.webp",
+      "local": "/assets/flagship/fresco/3637db06-cenefa-hojas-1.webp",
+      "bytes": 57826,
+      "sha256": "7b1a5ed97c232c5ba545f55bef7dd67953580757217f495a8c89ae25ba2eda9a"
+    },
+    {
+      "source": "/__l5e/assets-v1/12dfc133-5139-4101-8c7e-d7ddd3189920/cenefa-hojas-2.webp",
+      "sourceUrl": "https://fresco-template.thedigitalyes.com/__l5e/assets-v1/12dfc133-5139-4101-8c7e-d7ddd3189920/cenefa-hojas-2.webp",
+      "local": "/assets/flagship/fresco/cc2c7dc2-cenefa-hojas-2.webp",
+      "bytes": 64618,
+      "sha256": "e10933f098a9b0ca809bc8a759786379d20162e739841d27f56c18701180d372"
+    },
+    {
+      "source": "/__l5e/assets-v1/9159be1e-cfde-4bf3-b1c8-a7ad71e4e404/luna-estrellas.png",
+      "sourceUrl": "https://fresco-template.thedigitalyes.com/__l5e/assets-v1/9159be1e-cfde-4bf3-b1c8-a7ad71e4e404/luna-estrellas.png",
+      "local": "/assets/flagship/fresco/e377d123-luna-estrellas.png",
+      "bytes": 214776,
+      "sha256": "ee7dc929c8ec0366da23043c501de71c9efdfc2b5277c708ec314c1e6fe4188e"
+    },
+    {
+      "source": "/__l5e/assets-v1/9e7de5ab-dd8c-4a88-90ed-91866f859438/cenefa-hojas-3.webp",
+      "sourceUrl": "https://fresco-template.thedigitalyes.com/__l5e/assets-v1/9e7de5ab-dd8c-4a88-90ed-91866f859438/cenefa-hojas-3.webp",
+      "local": "/assets/flagship/fresco/e7a709c2-cenefa-hojas-3.webp",
+      "bytes": 45132,
+      "sha256": "eb8dea5ad1aa8a51d8c653dba1d3e797133253caa499a10a85904296d61058d6"
+    },
+    {
+      "source": "/__l5e/assets-v1/66be06fa-1c98-4ce7-98e0-bafdad1eeb15/cenefa-base.webp",
+      "sourceUrl": "https://fresco-template.thedigitalyes.com/__l5e/assets-v1/66be06fa-1c98-4ce7-98e0-bafdad1eeb15/cenefa-base.webp",
+      "local": "/assets/flagship/fresco/11073cee-cenefa-base.webp",
+      "bytes": 451376,
+      "sha256": "1aa0051723ad2ad2b882f277b7392da2ff947d9ef99d1020394d6f057ec7f85f"
+    },
+    {
+      "source": "/__l5e/assets-v1/996b62da-269f-46b8-a0d5-f7bf20353d80/cenefa-hojas-4.webp",
+      "sourceUrl": "https://fresco-template.thedigitalyes.com/__l5e/assets-v1/996b62da-269f-46b8-a0d5-f7bf20353d80/cenefa-hojas-4.webp",
+      "local": "/assets/flagship/fresco/58966584-cenefa-hojas-4.webp",
+      "bytes": 45696,
+      "sha256": "e688851111aac119b04dec12803d0c8593caeb12b33f9696fd68e8466ab825a5"
+    },
+    {
+      "source": "/__l5e/assets-v1/35bf30a7-09e1-461a-bb22-65d00ccca76f/cenefa-hojas-5.webp",
+      "sourceUrl": "https://fresco-template.thedigitalyes.com/__l5e/assets-v1/35bf30a7-09e1-461a-bb22-65d00ccca76f/cenefa-hojas-5.webp",
+      "local": "/assets/flagship/fresco/4e2ee039-cenefa-hojas-5.webp",
+      "bytes": 19624,
+      "sha256": "acfcc20d7406bc2fa5fc5713189d74a9deb7b63370f13dc74fc95286b5d343f9"
+    },
+    {
+      "source": "/__l5e/assets-v1/c430255e-7bdf-4923-bf15-5c956154390d/boda-floral-arco.png",
+      "sourceUrl": "https://fresco-template.thedigitalyes.com/__l5e/assets-v1/c430255e-7bdf-4923-bf15-5c956154390d/boda-floral-arco.png",
+      "local": "/assets/flagship/fresco/4f2f18c2-boda-floral-arco.png",
+      "bytes": 2677079,
+      "sha256": "774a680f662e3957b52add0fd6e7da09edb3d85bfacd94d569092efba793ef59"
+    },
+    {
+      "source": "/__l5e/assets-v1/336a38f3-b0b9-4efe-a3b7-91d98b8b7042/arco-oliva-mask.png",
+      "sourceUrl": "https://fresco-template.thedigitalyes.com/__l5e/assets-v1/336a38f3-b0b9-4efe-a3b7-91d98b8b7042/arco-oliva-mask.png",
+      "local": "/assets/flagship/fresco/139016af-arco-oliva-mask.png",
+      "bytes": 9314,
+      "sha256": "d0dec6bd7e997f6ceac1c4c61c5de7eb6ad7b7ec59c2b920cef3aa8cd92ff574"
+    },
+    {
+      "source": "/__l5e/assets-v1/6d4c1a61-2c50-46a9-a400-47dd6f229381/textura-oliva-ext.png",
+      "sourceUrl": "https://fresco-template.thedigitalyes.com/__l5e/assets-v1/6d4c1a61-2c50-46a9-a400-47dd6f229381/textura-oliva-ext.png",
+      "local": "/assets/flagship/fresco/ecabade7-textura-oliva-ext.png",
+      "bytes": 1891977,
+      "sha256": "791ed8f318bf4da9383e3b89ffaf0ee4085b93579dc6995d89fb15a7e4bf801e"
+    },
+    {
+      "source": "/__l5e/assets-v1/abf9f09d-08b9-4fb0-bfaa-12bbc54e3bcb/marco-arco-oliva-base.png",
+      "sourceUrl": "https://fresco-template.thedigitalyes.com/__l5e/assets-v1/abf9f09d-08b9-4fb0-bfaa-12bbc54e3bcb/marco-arco-oliva-base.png",
+      "local": "/assets/flagship/fresco/3438a380-marco-arco-oliva-base.png",
+      "bytes": 1917103,
+      "sha256": "26afdabed4963c33b8d063b09b57a396e3a42900009191305df034fb630fae18"
+    },
+    {
+      "source": "/__l5e/assets-v1/f30fc0a0-8fe8-4ea2-859a-91dfd78077a2/petalo-2.png",
+      "sourceUrl": "https://fresco-template.thedigitalyes.com/__l5e/assets-v1/f30fc0a0-8fe8-4ea2-859a-91dfd78077a2/petalo-2.png",
+      "local": "/assets/flagship/fresco/fe8f2e02-petalo-2.png",
+      "bytes": 15239,
+      "sha256": "693a673508d259c6e209138005dad55e8c3547e8895ef02689ee51d75bbd4278"
+    },
+    {
+      "source": "/__l5e/assets-v1/a4cb9cc6-b0b7-4d3b-bed6-9ba52b5053ea/guirnalda-arco-rosa.png",
+      "sourceUrl": "https://fresco-template.thedigitalyes.com/__l5e/assets-v1/a4cb9cc6-b0b7-4d3b-bed6-9ba52b5053ea/guirnalda-arco-rosa.png",
+      "local": "/assets/flagship/fresco/cc80d4ed-guirnalda-arco-rosa.png",
+      "bytes": 408968,
+      "sha256": "a4fa845cc2b9061631722d82221d5cb82084168ec0f7250498ed6d34872285f6"
+    },
+    {
+      "source": "/__l5e/assets-v1/6466ade9-8edf-4a2b-913a-dd7e87572cbf/petalo-1.png",
+      "sourceUrl": "https://fresco-template.thedigitalyes.com/__l5e/assets-v1/6466ade9-8edf-4a2b-913a-dd7e87572cbf/petalo-1.png",
+      "local": "/assets/flagship/fresco/f8e8504f-petalo-1.png",
+      "bytes": 19040,
+      "sha256": "936348c8a7d295cbbe566bfb7c1b31790b28cd7b25a2d980f7a377a7d7d2dbaf"
+    },
+    {
+      "source": "/__l5e/assets-v1/48226a6e-75b1-43a7-b429-92a7b7b4f06a/petalo-3.png",
+      "sourceUrl": "https://fresco-template.thedigitalyes.com/__l5e/assets-v1/48226a6e-75b1-43a7-b429-92a7b7b4f06a/petalo-3.png",
+      "local": "/assets/flagship/fresco/4df9cf63-petalo-3.png",
+      "bytes": 19319,
+      "sha256": "0882c0b7254e437aa40853c0d7ba1eab51febda0e3c791345340624fa8b5db70"
+    },
+    {
+      "source": "/__l5e/assets-v1/a416b06c-ce8e-49cc-8154-5ec0ef098b53/petalo-crema.png",
+      "sourceUrl": "https://fresco-template.thedigitalyes.com/__l5e/assets-v1/a416b06c-ce8e-49cc-8154-5ec0ef098b53/petalo-crema.png",
+      "local": "/assets/flagship/fresco/d00ea6bb-petalo-crema.png",
+      "bytes": 72798,
+      "sha256": "550a18419c166e80d439a51887a7e9a6cb3695d01e9b1611a3eae3997f9a8c38"
+    },
+    {
+      "source": "/__l5e/assets-v1/be466532-b573-4d0d-8767-38a4c5a638b0/rama-floral.png",
+      "sourceUrl": "https://fresco-template.thedigitalyes.com/__l5e/assets-v1/be466532-b573-4d0d-8767-38a4c5a638b0/rama-floral.png",
+      "local": "/assets/flagship/fresco/553b8ce0-rama-floral.png",
+      "bytes": 440725,
+      "sha256": "812e10bea4767c0f201ad21dfcbfc981d3031ed1b8c85a5daafd22cdd79b1f93"
+    },
+    {
+      "source": "/__l5e/assets-v1/200f6074-0dd5-424f-8902-fadb7c213c3a/guirnalda-petalos-union.png",
+      "sourceUrl": "https://fresco-template.thedigitalyes.com/__l5e/assets-v1/200f6074-0dd5-424f-8902-fadb7c213c3a/guirnalda-petalos-union.png",
+      "local": "/assets/flagship/fresco/f7baaa9d-guirnalda-petalos-union.png",
+      "bytes": 400976,
+      "sha256": "8631cd44e1f0899346fa3d11d2c1e02f8efefbfac0a14c1c63298f229da3eba8"
+    },
+    {
+      "source": "/__l5e/assets-v1/175541f8-19ec-43b6-b49f-56b2b16c95f1/flor-son-bunyola.png",
+      "sourceUrl": "https://fresco-template.thedigitalyes.com/__l5e/assets-v1/175541f8-19ec-43b6-b49f-56b2b16c95f1/flor-son-bunyola.png",
+      "local": "/assets/flagship/fresco/904eea39-flor-son-bunyola.png",
+      "bytes": 342724,
+      "sha256": "74b9e18eccec435731aefac1445ad081d69de41efb65ba1ddf405743b9de33e4"
+    },
+    {
+      "source": "/__l5e/assets-v1/d743a59d-ed4e-43c8-add2-47a764e39c5a/petalo-azul.png",
+      "sourceUrl": "https://fresco-template.thedigitalyes.com/__l5e/assets-v1/d743a59d-ed4e-43c8-add2-47a764e39c5a/petalo-azul.png",
+      "local": "/assets/flagship/fresco/672843be-petalo-azul.png",
+      "bytes": 66013,
+      "sha256": "903a4292a173db8517bc74f76eee994e99ea55d33c76d30b7852a957f420fa8c"
+    },
+    {
+      "source": "/__l5e/assets-v1/4c697e62-1c67-4c8d-8feb-998bda911008/flor-almendro.png",
+      "sourceUrl": "https://fresco-template.thedigitalyes.com/__l5e/assets-v1/4c697e62-1c67-4c8d-8feb-998bda911008/flor-almendro.png",
+      "local": "/assets/flagship/fresco/388612da-flor-almendro.png",
+      "bytes": 150986,
+      "sha256": "0ecf63c79856e37c7bcab99651dbebf24844d41841f0dd773601b3eb670f1b20"
+    },
+    {
+      "source": "/__l5e/assets-v1/53ed49d0-3ba6-492d-84a1-0c4508e13ac9/flor-blanca.png",
+      "sourceUrl": "https://fresco-template.thedigitalyes.com/__l5e/assets-v1/53ed49d0-3ba6-492d-84a1-0c4508e13ac9/flor-blanca.png",
+      "local": "/assets/flagship/fresco/ec362842-flor-blanca.png",
+      "bytes": 457930,
+      "sha256": "08f6e355e2411e0ffbd08ac5eb0539d04dfd5eb30a5bb7d27fdc0c803c9b9385"
+    },
+    {
+      "source": "/__l5e/assets-v1/ff7e25f6-c6d1-409a-98fe-4d27ec02f403/flor-almendro-grande.png",
+      "sourceUrl": "https://fresco-template.thedigitalyes.com/__l5e/assets-v1/ff7e25f6-c6d1-409a-98fe-4d27ec02f403/flor-almendro-grande.png",
+      "local": "/assets/flagship/fresco/670a6295-flor-almendro-grande.png",
+      "bytes": 382212,
+      "sha256": "807c3599f958d703950ddd17c4939942f6f9489725d03758b8b1b148f980b265"
+    },
+    {
+      "source": "/__l5e/assets-v1/efc6081e-f3d0-465f-9b7a-a296356f1bd1/ventana-mediterranea-flores-v2.png",
+      "sourceUrl": "https://fresco-template.thedigitalyes.com/__l5e/assets-v1/efc6081e-f3d0-465f-9b7a-a296356f1bd1/ventana-mediterranea-flores-v2.png",
+      "local": "/assets/flagship/fresco/95c87fc4-ventana-mediterranea-flores-v2.png",
+      "bytes": 2397314,
+      "sha256": "d9ecf9715d6987e747f8e5db1f28ab0a5db5d13181460506095f10983dc1443b"
+    },
+    {
+      "source": "/__l5e/assets-v1/9386a79a-020e-4ccd-b3e7-f3bd67541767/arco-mediterraneo.png",
+      "sourceUrl": "https://fresco-template.thedigitalyes.com/__l5e/assets-v1/9386a79a-020e-4ccd-b3e7-f3bd67541767/arco-mediterraneo.png",
+      "local": "/assets/flagship/fresco/044d4625-arco-mediterraneo.png",
+      "bytes": 3052033,
+      "sha256": "9e80b412ca499a6df915da0a85be10707b7f827c5d11a2064232ddd4dd60ec14"
+    },
+    {
+      "source": "/assets/envelope-poster-dG0TpNIf.jpg",
+      "sourceUrl": "https://fresco-template.thedigitalyes.com/assets/envelope-poster-dG0TpNIf.jpg",
+      "local": "/assets/flagship/fresco/72955309-envelope-poster-dG0TpNIf.jpg",
+      "bytes": 188704,
+      "sha256": "9a05c8b4375f93e8ded02ece91be5f1c4186a5ea5ca4fe175254a9a49e1573e5"
+    },
+    {
+      "source": "/marco-gifts-anim-alpha.webp",
+      "sourceUrl": "https://fresco-template.thedigitalyes.com/marco-gifts-anim-alpha.webp",
+      "local": "/assets/flagship/fresco/26abba91-marco-gifts-anim-alpha.webp",
+      "bytes": 2762570,
+      "sha256": "7ae6b8f6ed0147cd8e97b5589565b74b35a6566e66e00aaa9b94909ede27743f"
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/anticdidone/v17/RWmPoKKX6u8sp8fIWdnDKqDiqQ.ttf",
+      "sourceUrl": "https://fonts.gstatic.com/s/anticdidone/v17/RWmPoKKX6u8sp8fIWdnDKqDiqQ.ttf",
+      "local": "/assets/flagship/fresco/14e045f8-RWmPoKKX6u8sp8fIWdnDKqDiqQ.ttf",
+      "bytes": 34024,
+      "sha256": "b563a0a50a3cb707a14fae433abf66483820a5e94e6eacf9bc9c0a77716d511e"
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/reeniebeanie/v22/z7NSdR76eDkaJKZJFkkjuvWxbP0.ttf",
+      "sourceUrl": "https://fonts.gstatic.com/s/reeniebeanie/v22/z7NSdR76eDkaJKZJFkkjuvWxbP0.ttf",
+      "local": "/assets/flagship/fresco/6d3763af-z7NSdR76eDkaJKZJFkkjuvWxbP0.ttf",
+      "bytes": 131552,
+      "sha256": "f1fb0e13ec7cf2cc4d66723e70e7adcf1fd81c1b7d9218f0aada5ef7a5af7372"
+    },
+    {
+      "source": "https://use.typekit.net/af/00f106/00000000000000007735b2fd/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/00f106/00000000000000007735b2fd/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "local": "/assets/flagship/fresco/8de2345f-l",
+      "bytes": 33464,
+      "sha256": "50022665e58e3330913d498b843f9b041cf15b1b353ae66ac75ae3fe179fd28e"
+    },
+    {
+      "source": "https://use.typekit.net/af/633665/00000000000000007735b2ff/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/633665/00000000000000007735b2ff/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/fresco/612339ec-l",
+      "bytes": 76648,
+      "sha256": "fc43da996968448ad7feaf48bc36dc206fddca0a4ec108f0de53255daf968a40"
+    },
+    {
+      "source": "/assets/envelope-video-f1CdBR2C.mp4",
+      "sourceUrl": "https://fresco-template.thedigitalyes.com/assets/envelope-video-f1CdBR2C.mp4",
+      "local": "/assets/flagship/fresco/c60fad72-envelope-video-f1CdBR2C.mp4",
+      "bytes": 1443308,
+      "sha256": "19b01772cc8bf2b290d200dcbf5dfe5595a9c0194e948e475f8cc143fcd10a4b"
+    },
+    {
+      "source": "https://use.typekit.net/af/633665/00000000000000007735b2ff/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/633665/00000000000000007735b2ff/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/fresco/7e18ba8c-d",
+      "bytes": 80904,
+      "sha256": "78031b24cbfbba12616550cc636034482a72fc4b7cb0c389e5e8da688ba5b49b"
+    },
+    {
+      "source": "https://use.typekit.net/af/00f106/00000000000000007735b2fd/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/00f106/00000000000000007735b2fd/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "local": "/assets/flagship/fresco/e21a1fdf-d",
+      "bytes": 34508,
+      "sha256": "13967f1d566900d8dddb9bbc129a2927b0ecb6f95baf65eb074c50b681a6d34f"
+    },
+    {
+      "source": "https://use.typekit.net/af/00f106/00000000000000007735b2fd/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/00f106/00000000000000007735b2fd/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "local": "/assets/flagship/fresco/d1ae3309-a",
+      "bytes": 56956,
+      "sha256": "729d014c94706801036a77f6d6330013712a90daa7050f7acc8fe7963fc77540"
+    },
+    {
+      "source": "https://use.typekit.net/af/af2452/00000000000000007735b300/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/af2452/00000000000000007735b300/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "local": "/assets/flagship/fresco/187dad5f-l",
+      "bytes": 35024,
+      "sha256": "c3cd975f31345212f202e26d04f9913a26548815aa039beaf573090eaff6c010"
+    },
+    {
+      "source": "https://use.typekit.net/af/af2452/00000000000000007735b300/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/af2452/00000000000000007735b300/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "local": "/assets/flagship/fresco/11a9af5b-d",
+      "bytes": 36120,
+      "sha256": "aa79787aedde065a2ecefb4c84ecd0b79d6a1fc33ba8ad40f207cc0dfaada49d"
+    },
+    {
+      "source": "https://use.typekit.net/af/af2452/00000000000000007735b300/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/af2452/00000000000000007735b300/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "local": "/assets/flagship/fresco/7bee2187-a",
+      "bytes": 57476,
+      "sha256": "9551bb7eca0c903a3ed3efcb07a1078ee3b9e7c48a65f01b3b6347cf7ce954b0"
+    },
+    {
+      "source": "https://use.typekit.net/af/2622bf/00000000000000007735b301/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/2622bf/00000000000000007735b301/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "local": "/assets/flagship/fresco/82745ee2-l",
+      "bytes": 40844,
+      "sha256": "dcd7f5415c1a1374398c2f42de12f08889fe2042be5be93f1013ba96891f3756"
+    },
+    {
+      "source": "https://use.typekit.net/af/633665/00000000000000007735b2ff/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/633665/00000000000000007735b2ff/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/fresco/7bcd3f7f-a",
+      "bytes": 159180,
+      "sha256": "d5a669213639a29ef76123b576c60c1dfabd1efdcb807fd8ca11da8ee997e420"
+    },
+    {
+      "source": "https://use.typekit.net/af/2622bf/00000000000000007735b301/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/2622bf/00000000000000007735b301/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "local": "/assets/flagship/fresco/6d5f874f-d",
+      "bytes": 42232,
+      "sha256": "671982ad00ecf83390140c990392e142c5d498b779028963035b213d5a8e8229"
+    },
+    {
+      "source": "https://use.typekit.net/af/10c018/00000000000000007735b2f9/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/10c018/00000000000000007735b2f9/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/fresco/db2a174d-l",
+      "bytes": 16800,
+      "sha256": "d463934cb4b8403403aa76f7ffc5ea60a78d865cfa74a836d3c4cf838622ef2f"
+    },
+    {
+      "source": "https://use.typekit.net/af/10c018/00000000000000007735b2f9/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/10c018/00000000000000007735b2f9/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/fresco/0f87fb9d-d",
+      "bytes": 16968,
+      "sha256": "097addf7c6c7c4148c2c7870bd25e948537da65e209307b4b87ee1a9829a5c82"
+    },
+    {
+      "source": "https://use.typekit.net/af/2622bf/00000000000000007735b301/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/2622bf/00000000000000007735b301/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "local": "/assets/flagship/fresco/55d2f0f8-a",
+      "bytes": 67304,
+      "sha256": "664377352e192fff5b0bd9e97378a17bd16ed7bc026310874a68b2c42a3f89b8"
+    },
+    {
+      "source": "https://use.typekit.net/af/10c018/00000000000000007735b2f9/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/10c018/00000000000000007735b2f9/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/fresco/884ad3c3-a",
+      "bytes": 23456,
+      "sha256": "71901863be06c985fd5c3e90884c8a9d14bd62d35be816eb7d4afb9b37c9017c"
+    },
+    {
+      "source": "https://use.typekit.net/af/db5877/00000000000000007735b2fa/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/db5877/00000000000000007735b2fa/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/fresco/046718ab-l",
+      "bytes": 13360,
+      "sha256": "014d82e91428b765250d795f1ee88686c9f545c5ac1231e488f6f363723a880e"
+    },
+    {
+      "source": "https://use.typekit.net/af/db5877/00000000000000007735b2fa/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/db5877/00000000000000007735b2fa/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/fresco/32ea4b6b-d",
+      "bytes": 13520,
+      "sha256": "9d9bf6fcdb39a4a55ec19ba67c604afb8091e7eca2fc8d3a56dcb93f64ac8ba7"
+    },
+    {
+      "source": "https://use.typekit.net/af/db5877/00000000000000007735b2fa/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/db5877/00000000000000007735b2fa/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/fresco/af553348-a",
+      "bytes": 22184,
+      "sha256": "4ff63e64d7ccbfe20164966c41b3c7768908cae48fa018f03e18c4450eb4affb"
+    },
+    {
+      "source": "https://use.typekit.net/af/82aa84/00000000000000007735b2fb/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/82aa84/00000000000000007735b2fb/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/fresco/b0e06a6b-l",
+      "bytes": 17560,
+      "sha256": "686766c6a80def478da6e6b4e32f61cdbf9390947313e2c06f58cdb85aba21ad"
+    },
+    {
+      "source": "https://use.typekit.net/af/12479b/00000000000000007735b2fc/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/12479b/00000000000000007735b2fc/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/fresco/f64d12ef-l",
+      "bytes": 13188,
+      "sha256": "05454615333f5cb95b094d69733aee861dcc0730a55afcffa4216d702cf96b0d"
+    },
+    {
+      "source": "https://use.typekit.net/af/82aa84/00000000000000007735b2fb/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/82aa84/00000000000000007735b2fb/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/fresco/71b04124-d",
+      "bytes": 17932,
+      "sha256": "9b9803c8d6f3203f9f4691965889f918655e68c3f85644f2e17eeb6c6fbc0fb7"
+    },
+    {
+      "source": "https://use.typekit.net/af/82aa84/00000000000000007735b2fb/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/82aa84/00000000000000007735b2fb/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/fresco/66aee511-a",
+      "bytes": 26636,
+      "sha256": "cda17290408377fe5c1ce5ba10482683a6891414c97f4221569098d48b061e1c"
+    },
+    {
+      "source": "https://use.typekit.net/af/12479b/00000000000000007735b2fc/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/12479b/00000000000000007735b2fc/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/fresco/7e7d9e35-d",
+      "bytes": 13516,
+      "sha256": "5878c6ef98facd230c1b2dfa55ced99a640f1a47c3e5f9cb9d95f82769306510"
+    },
+    {
+      "source": "https://use.typekit.net/af/12479b/00000000000000007735b2fc/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/12479b/00000000000000007735b2fc/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/fresco/a7e87287-a",
+      "bytes": 21932,
+      "sha256": "aa005c1f99cae2c11aeda4ee46b92d9c8f4d5c9bdef40a35e0296a8312c21718"
+    },
+    {
+      "source": "https://use.typekit.net/af/ac45e2/00000000000000007735b2fe/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/ac45e2/00000000000000007735b2fe/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/fresco/6cebc9ce-l",
+      "bytes": 16824,
+      "sha256": "845d3732e33973f141a11e71fa8baea465126db9540d74d96a8e6a2f1489326a"
+    },
+    {
+      "source": "https://use.typekit.net/af/ac45e2/00000000000000007735b2fe/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/ac45e2/00000000000000007735b2fe/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/fresco/e94ed323-d",
+      "bytes": 17148,
+      "sha256": "f0fe3ce7da63bf9edeb08444c16b96dd181960a532b0d79899c2b6d637449abb"
+    },
+    {
+      "source": "https://use.typekit.net/af/ac45e2/00000000000000007735b2fe/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/ac45e2/00000000000000007735b2fe/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/fresco/6879eebd-a",
+      "bytes": 25076,
+      "sha256": "df6341a0728d7a67ee94e895adae01c27cd0ce37d061a5570d7b7a13b490ce65"
+    },
+    {
+      "source": "https://use.typekit.net/af/54e388/0000000000000000774f35b3/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/54e388/0000000000000000774f35b3/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/fresco/b2c3956f-l",
+      "bytes": 343384,
+      "sha256": "0b29beb12a2c78b3c1cbba2c961ef18a69dcdad240dbe8868181968fdf4331c9"
+    },
+    {
+      "source": "https://use.typekit.net/af/54e388/0000000000000000774f35b3/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/54e388/0000000000000000774f35b3/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/fresco/d64b3e13-d",
+      "bytes": 376436,
+      "sha256": "1c86feee3ecd33332d5ea5f5f46a5786cdf29b7bd58e3a18e375787a50c99d0f"
+    },
+    {
+      "source": "https://use.typekit.net/af/54e388/0000000000000000774f35b3/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/54e388/0000000000000000774f35b3/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/fresco/cc9a9b75-a",
+      "bytes": 469604,
+      "sha256": "032abb64ed505a21f9619bef5f51e6da4e1a7c99bb9c0ae2c240517d842c93b3"
+    }
+  ]
+}

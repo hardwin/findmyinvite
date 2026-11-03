@@ -6,6 +6,7 @@ import {loadRazorpay} from '../payments';
 import {templateApi,loadTemplateVersion,type TemplateVersion,type SavedInvite,type Content} from './api';
 import {DynamicFields} from './DynamicFields';
 import FlagshipRenderer from './FlagshipRenderer';
+import {DIGITAL_YES_RENDERERS} from './DigitalYesInvitation';
 import './template-cms.css';
 type Quote={taxLabel?:string;basePaise:number;taxPaise:number;totalPaise:number;taxBps:number};
 const rupees=(n:number)=>new Intl.NumberFormat('en-IN',{style:'currency',currency:'INR'}).format(n/100);
@@ -14,7 +15,7 @@ export function TemplatePreview(){
  const [version,setVersion]=useState<TemplateVersion|null>(null),[error,setError]=useState('');
  useEffect(()=>{let active=true;loadTemplateVersion(new URLSearchParams(location.search).get('version')||'').then(v=>{if(active)setVersion(v);}).catch(e=>{if(active)setError(e.message);});return()=>{active=false;};},[]);
  if(!version)return <p role="status">{error||'Loading preview…'}</p>;
- if(['kerala-kasavu-v2','nikah-arches-v2'].includes(version.renderer))return <><FlagshipRenderer version={version} content={version.defaults} preview/><a href="/templates" style={{position:'fixed',right:16,bottom:16,zIndex:110,background:'#fff',borderRadius:24,padding:'10px 16px',font:'13px system-ui',color:'#282529'}}>Return to library</a></>;
+ if(['kerala-kasavu-v2','nikah-arches-v2',...DIGITAL_YES_RENDERERS].includes(version.renderer))return <><FlagshipRenderer version={version} content={version.defaults} preview/><a href="/templates" style={{position:'fixed',right:16,bottom:16,zIndex:110,background:'#fff',borderRadius:24,padding:'10px 16px',font:'13px system-ui',color:'#282529'}}>Return to library</a></>;
  const note=<div className="tc-preview-note">Template preview <a href="/templates">Return to library</a></div>;
  const immersive=['christian-editorial-v2','ivory-lace-v1'].includes(version.renderer);
  return <>{!immersive&&note}<FlagshipRenderer version={version} content={version.defaults} preview/>{immersive&&note}</>;

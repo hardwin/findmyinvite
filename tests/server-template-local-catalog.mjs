@@ -21,3 +21,14 @@ test('local release adapter does not intercept writes, unrelated routes or unsel
  for(const req of [{url:'/api/templates?action=publish',method:'POST'},{url:'/api/invitations?action=v2-create',method:'POST'},{url:'/api/templates?action=version&id=another',method:'GET'},{url:'/api/templates?action=list',method:'GET'}])assert.equal(await localTemplateCatalog(req,response(),deps),false);
  assert.equal(await localTemplateCatalog({url:'/api/templates?action=public',method:'GET'},response(),{...deps,readIds:async()=>[]}),false);
 });
+
+test('old local selection resolves to the same newer stored version without affecting approved or saved invitations',async()=>{
+ const old='11111111-1111-4111-8111-111111111111';
+ const current={...stored,revision:3};
+ const deps={readIds:async()=>[id],readVersion:async value=>value===id?current:{...stored,id:old,revision:2}};
+ const res=response();
+ assert.equal(await localTemplateCatalog({url:'/api/templates?action=version&id='+old,method:'GET'},res,deps),true);
+ assert.equal(res.body.version.id,id);
+ assert.equal(await localTemplateCatalog({url:'/api/templates?action=version&id='+old,method:'GET'},response(),{...deps,readVersion:async value=>value===id?current:{...stored,id:old,revision:2,approved_at:'2026-01-01'}}),false);
+ assert.equal(await localTemplateCatalog({url:'/api/invitations?action=v2-manage&slug=example',method:'GET'},response(),deps),false);
+});

@@ -1,0 +1,3042 @@
+[
+  {
+    "id": "embroidered-garden",
+    "name": "Embroidered Garden",
+    "description": "An embroidered Provençal garden, pearl curtains and a flower-filled château.",
+    "tradition": "christian",
+    "renderer": "embroidered-garden-v1",
+    "revision": 3,
+    "thumbnail": "/assets/flagship/embroidered-garden/a36528a4-intro-doors.jpg",
+    "reference": "https://www.thedigitalyes.com/demo/embroidered-garden",
+    "field_schema": {
+      "version": 1,
+      "maxImages": 8,
+      "fields": [
+        {
+          "key": "language",
+          "label": "Language",
+          "type": "select",
+          "options": [
+            "en",
+            "ml"
+          ],
+          "required": true
+        },
+        {
+          "key": "bride",
+          "label": "First partner name",
+          "type": "text",
+          "maxLength": 250,
+          "required": true
+        },
+        {
+          "key": "groom",
+          "label": "Second partner name",
+          "type": "text",
+          "maxLength": 250,
+          "required": true
+        },
+        {
+          "key": "date",
+          "label": "Wedding date",
+          "type": "date",
+          "required": true
+        },
+        {
+          "key": "time",
+          "label": "Wedding time",
+          "type": "time",
+          "required": true
+        },
+        {
+          "key": "utcOffset",
+          "label": "Wedding time zone",
+          "type": "select",
+          "options": [
+            "+05:30",
+            "+02:00",
+            "+01:00",
+            "+00:00",
+            "-04:00",
+            "-05:00",
+            "+04:00",
+            "+08:00"
+          ],
+          "required": true
+        },
+        {
+          "key": "venue",
+          "label": "Wedding venue",
+          "type": "text",
+          "maxLength": 250
+        },
+        {
+          "key": "address",
+          "label": "Venue city and region",
+          "type": "text",
+          "maxLength": 250
+        },
+        {
+          "key": "recovery",
+          "label": "Recovery Day details",
+          "type": "group",
+          "fields": [
+            {
+              "key": "date",
+              "label": "Date (leave blank to follow wedding date)",
+              "type": "date"
+            },
+            {
+              "key": "time",
+              "label": "Start time",
+              "type": "time"
+            },
+            {
+              "key": "venue",
+              "label": "Venue",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "address",
+              "label": "Address",
+              "type": "text",
+              "maxLength": 250
+            }
+          ]
+        },
+        {
+          "key": "section1",
+          "label": "Welcome",
+          "type": "group",
+          "fields": [
+            {
+              "key": "text0",
+              "label": "Bienvenue\nà notre mariage",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text1",
+              "label": "Nous avons tellement hâte de célébrer ce jour magique avec vou…",
+              "type": "text",
+              "maxLength": 250
+            }
+          ]
+        },
+        {
+          "key": "section3",
+          "label": "Camille Lefèvre",
+          "type": "group",
+          "fields": [
+            {
+              "key": "text0",
+              "label": "Together with their families",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text1",
+              "label": "invite you to celebrate their marriage",
+              "type": "text",
+              "maxLength": 250
+            }
+          ]
+        },
+        {
+          "key": "section4",
+          "label": "Ceremony\n& Reception",
+          "type": "group",
+          "fields": [
+            {
+              "key": "text0",
+              "label": "Ceremony\n& Reception",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text1",
+              "label": "Gevrey-Chambertin",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text2",
+              "label": "Bourgogne",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text3",
+              "label": "Ceremony · The Orangery · 5:00 PM",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text4",
+              "label": "Reception · The Wine Cellar · 7:00 PM",
+              "type": "text",
+              "maxLength": 250
+            }
+          ]
+        },
+        {
+          "key": "section5",
+          "label": "Dress Code",
+          "type": "group",
+          "fields": [
+            {
+              "key": "text0",
+              "label": "Dress Code",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text1",
+              "label": "Black Tie",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text2",
+              "label": "The apéritif will be held on the gravel terrace and lawn; gues…",
+              "type": "textarea",
+              "maxLength": 2000
+            }
+          ]
+        },
+        {
+          "key": "section6",
+          "label": "Our Story",
+          "type": "group",
+          "fields": [
+            {
+              "key": "text0",
+              "label": "Our Story",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text1",
+              "label": "We met in Burgundy, fell in love over long dinners and even lo…",
+              "type": "textarea",
+              "maxLength": 2000
+            }
+          ]
+        },
+        {
+          "key": "section7",
+          "label": "Timeline",
+          "type": "group",
+          "fields": [
+            {
+              "key": "text0",
+              "label": "Timeline",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text1",
+              "label": "4:45 PM",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text2",
+              "label": "Guests to arrive at the Orangery",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text3",
+              "label": "5:00 PM",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text4",
+              "label": "Ceremony commences",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text5",
+              "label": "6:00 PM",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text6",
+              "label": "Cocktail hour",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text7",
+              "label": "7:00 PM",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text8",
+              "label": "Reception and dancing",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text9",
+              "label": "11:00 PM",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text10",
+              "label": "Farewell",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text11",
+              "label": "Our ceremony will take place in the Orangery of Château de Bel…",
+              "type": "textarea",
+              "maxLength": 2000
+            }
+          ]
+        },
+        {
+          "key": "section8",
+          "label": "Recovery Day",
+          "type": "group",
+          "fields": [
+            {
+              "key": "text0",
+              "label": "Recovery Day",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text1",
+              "label": "Join us the day after",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text2",
+              "label": "Le Comptoir des Halles",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text3",
+              "label": "Garden Terrace",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text4",
+              "label": "Sunday | 13 June 2027",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text5",
+              "label": "From 12 PM",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text6",
+              "label": "4 Rue Monge, Beaune",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text7",
+              "label": "Bourgogne, France",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text8",
+              "label": "We will be recovering on the garden terrace of Le Comptoir des…",
+              "type": "textarea",
+              "maxLength": 2000
+            }
+          ]
+        },
+        {
+          "key": "section9",
+          "label": "Gifts",
+          "type": "group",
+          "fields": [
+            {
+              "key": "text0",
+              "label": "Gifts",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text1",
+              "label": "Your presence at our wedding is the greatest gift of all. Shou…",
+              "type": "textarea",
+              "maxLength": 2000
+            }
+          ]
+        },
+        {
+          "key": "section10",
+          "label": "RSVP",
+          "type": "group",
+          "fields": [
+            {
+              "key": "text0",
+              "label": "Kindly respond by",
+              "type": "text",
+              "maxLength": 250
+            }
+          ]
+        },
+        {
+          "key": "giftDetails",
+          "label": "Optional gift details",
+          "type": "textarea",
+          "maxLength": 2000
+        },
+        {
+          "key": "rsvpDeadline",
+          "label": "RSVP deadline",
+          "type": "date"
+        },
+        {
+          "key": "whatsapp",
+          "label": "RSVP WhatsApp number (country code, digits only)",
+          "type": "text",
+          "maxLength": 250
+        },
+        {
+          "key": "cover",
+          "label": "Optional couple photograph",
+          "type": "image"
+        },
+        {
+          "key": "music",
+          "label": "Optional background music",
+          "type": "audio"
+        }
+      ]
+    },
+    "defaults": {
+      "language": "en",
+      "bride": "Camille",
+      "groom": "Antoine",
+      "date": "2027-06-12",
+      "time": "17:00",
+      "utcOffset": "+02:00",
+      "venue": "Château de Belvent",
+      "address": "Gevrey-Chambertin, Bourgogne",
+      "recovery": {
+        "time": "12:00",
+        "venue": "Le Comptoir des Halles",
+        "address": "4 Rue Monge, Beaune, Bourgogne, France"
+      },
+      "section1": {
+        "text0": "Bienvenue\nà notre mariage",
+        "text1": "Nous avons tellement hâte de célébrer ce jour magique avec vous, entourés de ceux que nous aimons."
+      },
+      "section3": {
+        "text0": "Together with their families",
+        "text1": "invite you to celebrate their marriage"
+      },
+      "section4": {
+        "text0": "Ceremony\n& Reception",
+        "text1": "Gevrey-Chambertin",
+        "text2": "Bourgogne",
+        "text3": "Ceremony · The Orangery · 5:00 PM",
+        "text4": "Reception · The Wine Cellar · 7:00 PM"
+      },
+      "section5": {
+        "text0": "Dress Code",
+        "text1": "Black Tie",
+        "text2": "The apéritif will be held on the gravel terrace and lawn; guests may wish to consider appropriate footwear."
+      },
+      "section6": {
+        "text0": "Our Story",
+        "text1": "We met in Burgundy, fell in love over long dinners and even longer walks through the vines. Now we are returning to the place where it all began, to begin the rest of our lives together."
+      },
+      "section7": {
+        "text0": "Timeline",
+        "text1": "4:45 PM",
+        "text2": "Guests to arrive at the Orangery",
+        "text3": "5:00 PM",
+        "text4": "Ceremony commences",
+        "text5": "6:00 PM",
+        "text6": "Cocktail hour",
+        "text7": "7:00 PM",
+        "text8": "Reception and dancing",
+        "text9": "11:00 PM",
+        "text10": "Farewell",
+        "text11": "Our ceremony will take place in the Orangery of Château de Belvent. This will be followed by an apéritif in the rose garden, before dinner and dancing in the old wine cellar."
+      },
+      "section8": {
+        "text0": "Recovery Day",
+        "text1": "Join us the day after",
+        "text2": "Le Comptoir des Halles",
+        "text3": "Garden Terrace",
+        "text4": "Sunday | 13 June 2027",
+        "text5": "From 12 PM",
+        "text6": "4 Rue Monge, Beaune",
+        "text7": "Bourgogne, France",
+        "text8": "We will be recovering on the garden terrace of Le Comptoir des Halles in Beaune from 12pm on Sunday, 13 June 2027. All are welcome to join us for a relaxed afternoon of food, wine and reminiscing about the night before. We would love to see you there! Children are welcome to join."
+      },
+      "section9": {
+        "text0": "Gifts",
+        "text1": "Your presence at our wedding is the greatest gift of all. Should you wish to celebrate with a gift, a wishing well will be available at the reception."
+      },
+      "section10": {
+        "text0": "Kindly respond by"
+      },
+      "rsvpDeadline": "2027-03-31"
+    }
+  },
+  {
+    "id": "mother-of-pearl",
+    "name": "Mother of Pearl",
+    "description": "Pearlescent ginkgo leaves, a golden seal and luminous embossed florals.",
+    "tradition": "christian",
+    "renderer": "mother-of-pearl-v1",
+    "revision": 3,
+    "thumbnail": "/assets/flagship/mother-of-pearl/75c56fd9-envelope-oct-poster.jpg",
+    "reference": "https://www.thedigitalyes.com/demo/mother-of-pearl",
+    "field_schema": {
+      "version": 1,
+      "maxImages": 8,
+      "fields": [
+        {
+          "key": "language",
+          "label": "Language",
+          "type": "select",
+          "options": [
+            "en",
+            "ml"
+          ],
+          "required": true
+        },
+        {
+          "key": "bride",
+          "label": "First partner name",
+          "type": "text",
+          "maxLength": 250,
+          "required": true
+        },
+        {
+          "key": "groom",
+          "label": "Second partner name",
+          "type": "text",
+          "maxLength": 250,
+          "required": true
+        },
+        {
+          "key": "date",
+          "label": "Wedding date",
+          "type": "date",
+          "required": true
+        },
+        {
+          "key": "time",
+          "label": "Wedding time",
+          "type": "time",
+          "required": true
+        },
+        {
+          "key": "utcOffset",
+          "label": "Wedding time zone",
+          "type": "select",
+          "options": [
+            "+05:30",
+            "+02:00",
+            "+01:00",
+            "+00:00",
+            "-04:00",
+            "-05:00",
+            "+04:00",
+            "+08:00"
+          ],
+          "required": true
+        },
+        {
+          "key": "venue",
+          "label": "Wedding venue",
+          "type": "text",
+          "maxLength": 250
+        },
+        {
+          "key": "address",
+          "label": "Venue city and region",
+          "type": "text",
+          "maxLength": 250
+        },
+        {
+          "key": "section0",
+          "label": "Invitation cover",
+          "type": "group",
+          "fields": [
+            {
+              "key": "text0",
+              "label": "Together with",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text1",
+              "label": "their families",
+              "type": "text",
+              "maxLength": 250
+            }
+          ]
+        },
+        {
+          "key": "section1",
+          "label": "Countdown",
+          "type": "group",
+          "fields": [
+            {
+              "key": "text0",
+              "label": "See you soon!",
+              "type": "text",
+              "maxLength": 250
+            }
+          ]
+        },
+        {
+          "key": "section2",
+          "label": "Location",
+          "type": "group",
+          "fields": [
+            {
+              "key": "text0",
+              "label": "Location",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text1",
+              "label": "Set in one of Rome's most beautiful corners, Villa Aurelia wil…",
+              "type": "textarea",
+              "maxLength": 2000
+            },
+            {
+              "key": "text2",
+              "label": "We recommend arriving a little early to settle in and enjoy th…",
+              "type": "textarea",
+              "maxLength": 2000
+            }
+          ]
+        },
+        {
+          "key": "section3",
+          "label": "TheDay",
+          "type": "group",
+          "fields": [
+            {
+              "key": "text0",
+              "label": "The",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text1",
+              "label": "Day",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text2",
+              "label": "A day to celebrate,",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text3",
+              "label": "from the first hello to the last dance.",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text4",
+              "label": "4:30",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text5",
+              "label": "Welcome",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text6",
+              "label": "Drinks in the villa gardens.",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text7",
+              "label": "5:00",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text8",
+              "label": "Ceremony",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text9",
+              "label": "We say “I do” at sunset.",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text10",
+              "label": "6:00",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text11",
+              "label": "Cocktail Hour",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text12",
+              "label": "Aperitivo on the terrace.",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text13",
+              "label": "8:00",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text14",
+              "label": "Dinner",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text15",
+              "label": "Dinner under the stars.",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text16",
+              "label": "10:30",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text17",
+              "label": "Dancing",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text18",
+              "label": "Dancing until late.",
+              "type": "text",
+              "maxLength": 250
+            }
+          ]
+        },
+        {
+          "key": "section4",
+          "label": "Invitation details",
+          "type": "group",
+          "fields": [
+            {
+              "key": "text0",
+              "label": "Dress Code",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text1",
+              "label": "Formal Attire",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text2",
+              "label": "We'd love for our guests to embrace the occasion with elegant …",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text3",
+              "label": "Dress beautifully, feel comfortable,",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text4",
+              "label": "and come ready to celebrate",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text5",
+              "label": "with us.",
+              "type": "text",
+              "maxLength": 250
+            }
+          ]
+        },
+        {
+          "key": "section5",
+          "label": "Transportation",
+          "type": "group",
+          "fields": [
+            {
+              "key": "text0",
+              "label": "Transportation",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text1",
+              "label": "We want getting to and from the celebration to be as easy as p…",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text2",
+              "label": "A private bus will depart at 4:00 PM from Piazza della Repubbl…",
+              "type": "textarea",
+              "maxLength": 2000
+            },
+            {
+              "key": "text3",
+              "label": "At the end of the evening, return transportation to central Ro…",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text4",
+              "label": "also be provided.",
+              "type": "text",
+              "maxLength": 250
+            }
+          ]
+        },
+        {
+          "key": "section6",
+          "label": "Where to Stay",
+          "type": "group",
+          "fields": [
+            {
+              "key": "text0",
+              "label": "Where to Stay",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text1",
+              "label": "For those joining us from out of town, we've selected two beau…",
+              "type": "textarea",
+              "maxLength": 2000
+            },
+            {
+              "key": "text2",
+              "label": "Grand Hotel del Gianicolo",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text3",
+              "label": "19 – 21 May 2027",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text4",
+              "label": "Code \"CORNELIA & JAMES\"",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text5",
+              "label": "Parking available on site",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text6",
+              "label": "Just moments from the venue, offering an elegant and convenien…",
+              "type": "textarea",
+              "maxLength": 2000
+            },
+            {
+              "key": "text7",
+              "label": "Donna\nCamilla Savelli",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text8",
+              "label": "19 – 21 May 2027",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text9",
+              "label": "Code \"CORNELIA & JAMES\"",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text10",
+              "label": "Parking available on site",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text11",
+              "label": "A charming historic hotel in Trastevere, combining Roman chara…",
+              "type": "textarea",
+              "maxLength": 2000
+            }
+          ]
+        },
+        {
+          "key": "section7",
+          "label": "WeddingGift",
+          "type": "group",
+          "fields": [
+            {
+              "key": "text0",
+              "label": "Wedding",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text1",
+              "label": "Gift",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text2",
+              "label": "Your presence\nis our greatest gift.",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text3",
+              "label": "Should you wish to give a gift, you may do so in cash or by ba…",
+              "type": "text",
+              "maxLength": 250
+            }
+          ]
+        },
+        {
+          "key": "section9",
+          "label": "Invitation details",
+          "type": "group",
+          "fields": [
+            {
+              "key": "text0",
+              "label": "We can't wait to celebrate with you.",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text1",
+              "label": "With love,",
+              "type": "text",
+              "maxLength": 250
+            }
+          ]
+        },
+        {
+          "key": "links",
+          "label": "Directions and booking links",
+          "type": "group",
+          "fields": [
+            {
+              "key": "link0",
+              "label": "Get Directions",
+              "type": "url"
+            },
+            {
+              "key": "link1",
+              "label": "View Pick-Up Point",
+              "type": "url"
+            },
+            {
+              "key": "link2",
+              "label": "Book",
+              "type": "url"
+            },
+            {
+              "key": "link3",
+              "label": "Book",
+              "type": "url"
+            }
+          ]
+        },
+        {
+          "key": "giftDetails",
+          "label": "Optional gift details",
+          "type": "textarea",
+          "maxLength": 2000
+        },
+        {
+          "key": "rsvpDeadline",
+          "label": "RSVP deadline",
+          "type": "date"
+        },
+        {
+          "key": "whatsapp",
+          "label": "RSVP WhatsApp number (country code, digits only)",
+          "type": "text",
+          "maxLength": 250
+        },
+        {
+          "key": "cover",
+          "label": "Optional couple photograph",
+          "type": "image"
+        },
+        {
+          "key": "music",
+          "label": "Optional background music",
+          "type": "audio"
+        }
+      ]
+    },
+    "defaults": {
+      "language": "en",
+      "bride": "Cornelia",
+      "groom": "James",
+      "date": "2027-05-20",
+      "time": "17:00",
+      "utcOffset": "+02:00",
+      "venue": "Villa Aurelia",
+      "address": "Rome, Italy",
+      "section0": {
+        "text0": "Together with",
+        "text1": "their families"
+      },
+      "section1": {
+        "text0": "See you soon!"
+      },
+      "section2": {
+        "text0": "Location",
+        "text1": "Set in one of Rome's most beautiful corners, Villa Aurelia will be the setting for our celebration, surrounded by historic gardens and overlooking the Eternal City.",
+        "text2": "We recommend arriving a little early to settle in and enjoy the surroundings before the celebration begins."
+      },
+      "section3": {
+        "text0": "The",
+        "text1": "Day",
+        "text2": "A day to celebrate,",
+        "text3": "from the first hello to the last dance.",
+        "text4": "4:30",
+        "text5": "Welcome",
+        "text6": "Drinks in the villa gardens.",
+        "text7": "5:00",
+        "text8": "Ceremony",
+        "text9": "We say “I do” at sunset.",
+        "text10": "6:00",
+        "text11": "Cocktail Hour",
+        "text12": "Aperitivo on the terrace.",
+        "text13": "8:00",
+        "text14": "Dinner",
+        "text15": "Dinner under the stars.",
+        "text16": "10:30",
+        "text17": "Dancing",
+        "text18": "Dancing until late."
+      },
+      "section4": {
+        "text0": "Dress Code",
+        "text1": "Formal Attire",
+        "text2": "We'd love for our guests to embrace the occasion with elegant evening attire.",
+        "text3": "Dress beautifully, feel comfortable,",
+        "text4": "and come ready to celebrate",
+        "text5": "with us."
+      },
+      "section5": {
+        "text0": "Transportation",
+        "text1": "We want getting to and from the celebration to be as easy as possible.",
+        "text2": "A private bus will depart at 4:00 PM from Piazza della Repubblica, taking guests directly to Villa Aurelia with plenty of time to settle in before the ceremony.",
+        "text3": "At the end of the evening, return transportation to central Rome will",
+        "text4": "also be provided."
+      },
+      "section6": {
+        "text0": "Where to Stay",
+        "text1": "For those joining us from out of town, we've selected two beautiful places to stay close to Villa Aurelia.",
+        "text2": "Grand Hotel del Gianicolo",
+        "text3": "19 – 21 May 2027",
+        "text4": "Code \"CORNELIA & JAMES\"",
+        "text5": "Parking available on site",
+        "text6": "Just moments from the venue, offering an elegant and convenient stay surrounded by the greenery of the Gianicolo.",
+        "text7": "Donna\nCamilla Savelli",
+        "text8": "19 – 21 May 2027",
+        "text9": "Code \"CORNELIA & JAMES\"",
+        "text10": "Parking available on site",
+        "text11": "A charming historic hotel in Trastevere, combining Roman character with a peaceful and refined atmosphere."
+      },
+      "section7": {
+        "text0": "Wedding",
+        "text1": "Gift",
+        "text2": "Your presence\nis our greatest gift.",
+        "text3": "Should you wish to give a gift, you may do so in cash or by bank transfer."
+      },
+      "section9": {
+        "text0": "We can't wait to celebrate with you.",
+        "text1": "With love,"
+      },
+      "links": {
+        "link0": "https://www.google.com/maps/search/?api=1&query=Villa+Aurelia+Rome+Italy",
+        "link1": "https://www.google.com/maps/search/?api=1&query=Piazza+della+Repubblica+Rome",
+        "link2": "https://www.google.com/maps/search/?api=1&query=Grand+Hotel+del+Gianicolo+Rome",
+        "link3": "https://www.google.com/maps/search/?api=1&query=Donna+Camilla+Savelli+Rome"
+      },
+      "rsvpDeadline": "2027-05-01"
+    }
+  },
+  {
+    "id": "fresco",
+    "name": "Fresco",
+    "description": "A Mediterranean villa, olive branches and a linen bow in sun-washed colours.",
+    "tradition": "christian",
+    "renderer": "fresco-v1",
+    "revision": 3,
+    "thumbnail": "/assets/flagship/fresco/72955309-envelope-poster-dG0TpNIf.jpg",
+    "reference": "https://www.thedigitalyes.com/demo/fresco",
+    "field_schema": {
+      "version": 1,
+      "maxImages": 8,
+      "fields": [
+        {
+          "key": "language",
+          "label": "Language",
+          "type": "select",
+          "options": [
+            "en",
+            "ml"
+          ],
+          "required": true
+        },
+        {
+          "key": "bride",
+          "label": "First partner name",
+          "type": "text",
+          "maxLength": 250,
+          "required": true
+        },
+        {
+          "key": "groom",
+          "label": "Second partner name",
+          "type": "text",
+          "maxLength": 250,
+          "required": true
+        },
+        {
+          "key": "date",
+          "label": "Wedding date",
+          "type": "date",
+          "required": true
+        },
+        {
+          "key": "time",
+          "label": "Wedding time",
+          "type": "time",
+          "required": true
+        },
+        {
+          "key": "utcOffset",
+          "label": "Wedding time zone",
+          "type": "select",
+          "options": [
+            "+05:30",
+            "+02:00",
+            "+01:00",
+            "+00:00",
+            "-04:00",
+            "-05:00",
+            "+04:00",
+            "+08:00"
+          ],
+          "required": true
+        },
+        {
+          "key": "venue",
+          "label": "Wedding venue",
+          "type": "text",
+          "maxLength": 250
+        },
+        {
+          "key": "address",
+          "label": "Venue city and region",
+          "type": "text",
+          "maxLength": 250
+        },
+        {
+          "key": "welcome",
+          "label": "Welcome Soirée details",
+          "type": "group",
+          "fields": [
+            {
+              "key": "date",
+              "label": "Date (leave blank to follow wedding date)",
+              "type": "date"
+            },
+            {
+              "key": "time",
+              "label": "Start time",
+              "type": "time"
+            },
+            {
+              "key": "venue",
+              "label": "Venue",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "address",
+              "label": "Address",
+              "type": "text",
+              "maxLength": 250
+            }
+          ]
+        },
+        {
+          "key": "section0",
+          "label": "Diana&Richard",
+          "type": "group",
+          "fields": [
+            {
+              "key": "text0",
+              "label": "WE INVITE YOU TO",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text1",
+              "label": "CELEBRATE OUR WEDDING",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text2",
+              "label": "To be held at",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text3",
+              "label": "Son Bunyola, Mallorca",
+              "type": "text",
+              "maxLength": 250
+            }
+          ]
+        },
+        {
+          "key": "section2",
+          "label": "Our Story",
+          "type": "group",
+          "fields": [
+            {
+              "key": "text0",
+              "label": "Our Story",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text1",
+              "label": "Some of the best love stories begin unexpectedly, and ours was…",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text2",
+              "label": "What started as a chance encounter soon became endless convers…",
+              "type": "textarea",
+              "maxLength": 2000
+            },
+            {
+              "key": "text3",
+              "label": "Somewhere along the way, we found our favorite place: by each …",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text4",
+              "label": "And now, we're ready for our greatest adventure yet — a lifeti…",
+              "type": "text",
+              "maxLength": 250
+            }
+          ]
+        },
+        {
+          "key": "section3",
+          "label": "The Celebration",
+          "type": "group",
+          "fields": [
+            {
+              "key": "text0",
+              "label": "The Celebration",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text1",
+              "label": "Ceremony & Dinner",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text2",
+              "label": "Sa Tafona",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text3",
+              "label": "A ceremony in the gardens at sunset behind the Tramuntana, fol…",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text4",
+              "label": "5:30 PM",
+              "type": "text",
+              "maxLength": 250
+            }
+          ]
+        },
+        {
+          "key": "section4",
+          "label": "The Day",
+          "type": "group",
+          "fields": [
+            {
+              "key": "text0",
+              "label": "The Day",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text1",
+              "label": "Program · Tuesday 27 July",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text2",
+              "label": "Our wedding day, from sunset drinks to the last dance.",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text3",
+              "label": "17:00",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text4",
+              "label": "Guests Arrival & Welcome Drinks",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text5",
+              "label": "17:30",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text6",
+              "label": "Ceremony",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text7",
+              "label": "19:15",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text8",
+              "label": "Cocktail Hour",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text9",
+              "label": "20:30",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text10",
+              "label": "Dinner",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text11",
+              "label": "22:30",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text12",
+              "label": "Cake & Toasts",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text13",
+              "label": "23:00",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text14",
+              "label": "First Dance",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text15",
+              "label": "23:15",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text16",
+              "label": "Dancing under\nthe Stars",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text17",
+              "label": "02:00",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text18",
+              "label": "Goodnight",
+              "type": "text",
+              "maxLength": 250
+            }
+          ]
+        },
+        {
+          "key": "section5",
+          "label": "Dress Code",
+          "type": "group",
+          "fields": [
+            {
+              "key": "text0",
+              "label": "Dress Code",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text1",
+              "label": "Black Tie",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text2",
+              "label": "Under a Mediterranean sky, with the sea as our witness — wear …",
+              "type": "textarea",
+              "maxLength": 2000
+            },
+            {
+              "key": "text3",
+              "label": "26th July",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text4",
+              "label": "Welcome",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text5",
+              "label": "Soirée",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text6",
+              "label": "Sa Terrassa",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text7",
+              "label": "Join us for an intimate evening of cocktails and Mediterranean…",
+              "type": "textarea",
+              "maxLength": 2000
+            }
+          ]
+        },
+        {
+          "key": "section6",
+          "label": "Where to Stay",
+          "type": "group",
+          "fields": [
+            {
+              "key": "text0",
+              "label": "Where to Stay",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text1",
+              "label": "Recommended hotels",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text2",
+              "label": "near the venue",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text3",
+              "label": "Exclusive wedding guest rate",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text4",
+              "label": "Hotel & Villas",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text5",
+              "label": "€650",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text6",
+              "label": "per night · double room · breakfast included",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text7",
+              "label": "A special fixed rate of €650 per night has been reserved exclu…",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text8",
+              "label": "Finca Son Bunyola, Ctra. C-710, 07191 Banyalbufar",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text9",
+              "label": "Free on-site parking",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text10",
+              "label": "Son Borguny",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text11",
+              "label": "€180",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text12",
+              "label": "per night · double room · breakfast included",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text13",
+              "label": "Carrer Borguny 1, 07191 Banyalbufar",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text14",
+              "label": "Free on-site parking",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text15",
+              "label": "9 km · about 25 min by car",
+              "type": "text",
+              "maxLength": 250
+            }
+          ]
+        },
+        {
+          "key": "section7",
+          "label": "Wedding Gift",
+          "type": "group",
+          "fields": [
+            {
+              "key": "text0",
+              "label": "Wedding Gift",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text1",
+              "label": "Your presence is our greatest gift.",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text2",
+              "label": "If you wish to honour us with a gift, we kindly prefer monetar…",
+              "type": "text",
+              "maxLength": 250
+            }
+          ]
+        },
+        {
+          "key": "links",
+          "label": "Directions and booking links",
+          "type": "group",
+          "fields": [
+            {
+              "key": "link0",
+              "label": "View on Map",
+              "type": "url"
+            },
+            {
+              "key": "link1",
+              "label": "Book your stay",
+              "type": "url"
+            },
+            {
+              "key": "link2",
+              "label": "Book your stay",
+              "type": "url"
+            }
+          ]
+        },
+        {
+          "key": "giftDetails",
+          "label": "Optional gift details",
+          "type": "textarea",
+          "maxLength": 2000
+        },
+        {
+          "key": "rsvpDeadline",
+          "label": "RSVP deadline",
+          "type": "date"
+        },
+        {
+          "key": "whatsapp",
+          "label": "RSVP WhatsApp number (country code, digits only)",
+          "type": "text",
+          "maxLength": 250
+        },
+        {
+          "key": "cover",
+          "label": "Optional couple photograph",
+          "type": "image"
+        },
+        {
+          "key": "music",
+          "label": "Optional background music",
+          "type": "audio"
+        }
+      ]
+    },
+    "defaults": {
+      "language": "en",
+      "bride": "Diana",
+      "groom": "Richard",
+      "date": "2027-07-27",
+      "time": "17:30",
+      "utcOffset": "+02:00",
+      "venue": "Son Bunyola",
+      "address": "Mallorca, Spain",
+      "welcome": {
+        "time": "20:00",
+        "venue": "Sa Terrassa",
+        "address": "Son Bunyola, Mallorca"
+      },
+      "section0": {
+        "text0": "WE INVITE YOU TO",
+        "text1": "CELEBRATE OUR WEDDING",
+        "text2": "To be held at",
+        "text3": "Son Bunyola, Mallorca"
+      },
+      "section2": {
+        "text0": "Our Story",
+        "text1": "Some of the best love stories begin unexpectedly, and ours was no different.",
+        "text2": "What started as a chance encounter soon became endless conversations, spontaneous adventures, and countless memories together.",
+        "text3": "Somewhere along the way, we found our favorite place: by each other’s side.",
+        "text4": "And now, we're ready for our greatest adventure yet — a lifetime together."
+      },
+      "section3": {
+        "text0": "The Celebration",
+        "text1": "Ceremony & Dinner",
+        "text2": "Sa Tafona",
+        "text3": "A ceremony in the gardens at sunset behind the Tramuntana, followed by dinner and dancing.",
+        "text4": "5:30 PM"
+      },
+      "section4": {
+        "text0": "The Day",
+        "text1": "Program · Tuesday 27 July",
+        "text2": "Our wedding day, from sunset drinks to the last dance.",
+        "text3": "17:00",
+        "text4": "Guests Arrival & Welcome Drinks",
+        "text5": "17:30",
+        "text6": "Ceremony",
+        "text7": "19:15",
+        "text8": "Cocktail Hour",
+        "text9": "20:30",
+        "text10": "Dinner",
+        "text11": "22:30",
+        "text12": "Cake & Toasts",
+        "text13": "23:00",
+        "text14": "First Dance",
+        "text15": "23:15",
+        "text16": "Dancing under\nthe Stars",
+        "text17": "02:00",
+        "text18": "Goodnight"
+      },
+      "section5": {
+        "text0": "Dress Code",
+        "text1": "Black Tie",
+        "text2": "Under a Mediterranean sky, with the sea as our witness — wear the dress you have dreamed of, and dance until the last star fades.",
+        "text3": "26th July",
+        "text4": "Welcome",
+        "text5": "Soirée",
+        "text6": "Sa Terrassa",
+        "text7": "Join us for an intimate evening of cocktails and Mediterranean views as we begin our celebrations at Son Bunyola."
+      },
+      "section6": {
+        "text0": "Where to Stay",
+        "text1": "Recommended hotels",
+        "text2": "near the venue",
+        "text3": "Exclusive wedding guest rate",
+        "text4": "Hotel & Villas",
+        "text5": "€650",
+        "text6": "per night · double room · breakfast included",
+        "text7": "A special fixed rate of €650 per night has been reserved exclusively for our wedding guests.",
+        "text8": "Finca Son Bunyola, Ctra. C-710, 07191 Banyalbufar",
+        "text9": "Free on-site parking",
+        "text10": "Son Borguny",
+        "text11": "€180",
+        "text12": "per night · double room · breakfast included",
+        "text13": "Carrer Borguny 1, 07191 Banyalbufar",
+        "text14": "Free on-site parking",
+        "text15": "9 km · about 25 min by car"
+      },
+      "section7": {
+        "text0": "Wedding Gift",
+        "text1": "Your presence is our greatest gift.",
+        "text2": "If you wish to honour us with a gift, we kindly prefer monetary contributions."
+      },
+      "links": {
+        "link0": "https://www.google.com/maps/search/?api=1&query=Son+Bunyola+Bunyola+Mallorca",
+        "link1": "https://www.virginlimitededition.com/son-bunyola/reservations/",
+        "link2": "https://hotelsonborguny.com/en/home/"
+      },
+      "rsvpDeadline": "2027-05-15"
+    }
+  },
+  {
+    "id": "stained-glass",
+    "name": "Stained Glass",
+    "description": "Floral stained glass, pearlescent light and a romantic garden celebration.",
+    "tradition": "christian",
+    "renderer": "stained-glass-v1",
+    "revision": 3,
+    "thumbnail": "/assets/flagship/stained-glass/df7d4e2f-intro-closed-c.jpg",
+    "reference": "https://www.thedigitalyes.com/demo/stained-glass",
+    "field_schema": {
+      "version": 1,
+      "maxImages": 8,
+      "fields": [
+        {
+          "key": "language",
+          "label": "Language",
+          "type": "select",
+          "options": [
+            "en",
+            "ml"
+          ],
+          "required": true
+        },
+        {
+          "key": "bride",
+          "label": "First partner name",
+          "type": "text",
+          "maxLength": 250,
+          "required": true
+        },
+        {
+          "key": "groom",
+          "label": "Second partner name",
+          "type": "text",
+          "maxLength": 250,
+          "required": true
+        },
+        {
+          "key": "date",
+          "label": "Wedding date",
+          "type": "date",
+          "required": true
+        },
+        {
+          "key": "time",
+          "label": "Wedding time",
+          "type": "time",
+          "required": true
+        },
+        {
+          "key": "utcOffset",
+          "label": "Wedding time zone",
+          "type": "select",
+          "options": [
+            "+05:30",
+            "+02:00",
+            "+01:00",
+            "+00:00",
+            "-04:00",
+            "-05:00",
+            "+04:00",
+            "+08:00"
+          ],
+          "required": true
+        },
+        {
+          "key": "venue",
+          "label": "Wedding venue",
+          "type": "text",
+          "maxLength": 250
+        },
+        {
+          "key": "address",
+          "label": "Venue city and region",
+          "type": "text",
+          "maxLength": 250
+        },
+        {
+          "key": "section0",
+          "label": "Invitation cover",
+          "type": "group",
+          "fields": [
+            {
+              "key": "text0",
+              "label": "Together with their families",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text1",
+              "label": "Request the honour of your presence",
+              "type": "text",
+              "maxLength": 250
+            }
+          ]
+        },
+        {
+          "key": "section2",
+          "label": "We're so happy to celebrate this day with you.",
+          "type": "group",
+          "fields": [
+            {
+              "key": "text0",
+              "label": "We're so happy to celebrate this day with you.",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text1",
+              "label": "Having you with us means the world.",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text2",
+              "label": "We can't wait to welcome you.",
+              "type": "text",
+              "maxLength": 250
+            }
+          ]
+        },
+        {
+          "key": "section3",
+          "label": "Welcome",
+          "type": "group",
+          "fields": [
+            {
+              "key": "text0",
+              "label": "Welcome",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text1",
+              "label": "Together with their families",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text2",
+              "label": "request the honor of your presence as they",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text3",
+              "label": "exchange vows of marriage.",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text4",
+              "label": "We hope you will join us to celebrate a day full of love, laug…",
+              "type": "textarea",
+              "maxLength": 2000
+            }
+          ]
+        },
+        {
+          "key": "section4",
+          "label": "Ceremony& Reception",
+          "type": "group",
+          "fields": [
+            {
+              "key": "text0",
+              "label": "Ceremony",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text1",
+              "label": "Reception",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text2",
+              "label": "Sant Feliu de Codines",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text3",
+              "label": "Barcelona",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text4",
+              "label": "5:30 PM",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text5",
+              "label": "Carretera de Caldes, km 14,4",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text6",
+              "label": "08182 Sant Feliu de Codines, Barcelona",
+              "type": "text",
+              "maxLength": 250
+            }
+          ]
+        },
+        {
+          "key": "section5",
+          "label": "Dress Code",
+          "type": "group",
+          "fields": [
+            {
+              "key": "text0",
+              "label": "Dress Code",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text1",
+              "label": "Black Tie",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text2",
+              "label": "We kindly ask our guests to wear formal evening attire — a tux…",
+              "type": "textarea",
+              "maxLength": 2000
+            }
+          ]
+        },
+        {
+          "key": "section6",
+          "label": "Invitation details",
+          "type": "group",
+          "fields": [
+            {
+              "key": "text0",
+              "label": "Program",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text1",
+              "label": "This will be the order",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text2",
+              "label": "of the day",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text3",
+              "label": "Guest Arrival",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text4",
+              "label": "5:00 PM",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text5",
+              "label": "Ceremony",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text6",
+              "label": "5:30 PM",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text7",
+              "label": "Cocktail Hour",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text8",
+              "label": "6:30 PM",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text9",
+              "label": "Dinner",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text10",
+              "label": "8:00 PM",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text11",
+              "label": "First Dance",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text12",
+              "label": "10:00 PM",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text13",
+              "label": "Party",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text14",
+              "label": "10:30 PM",
+              "type": "text",
+              "maxLength": 250
+            }
+          ]
+        },
+        {
+          "key": "section7",
+          "label": "Gifts",
+          "type": "group",
+          "fields": [
+            {
+              "key": "text0",
+              "label": "Gifts",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text1",
+              "label": "Your presence",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text2",
+              "label": "is the greatest gift",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text3",
+              "label": "If you would like to give us a gift, we have set up an account…",
+              "type": "textarea",
+              "maxLength": 2000
+            }
+          ]
+        },
+        {
+          "key": "section8",
+          "label": "Travel & Stay",
+          "type": "group",
+          "fields": [
+            {
+              "key": "text0",
+              "label": "Travel",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text1",
+              "label": "Stay",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text2",
+              "label": "We recommend flying into Barcelona–El Prat Airport (BCN, ~45 m…",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text3",
+              "label": "Hotel",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text4",
+              "label": "El Roure Blanc",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text5",
+              "label": "Carrer del Roure 8\n08182 Sant Feliu de Codines, Barcelona",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text6",
+              "label": "May 22 – 24, 2027",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text7",
+              "label": "Double room — €110 per night",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text8",
+              "label": "Suite — €160 per night",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text9",
+              "label": "ALBAFELIPE27",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text10",
+              "label": "Quote this code when booking by phone or email",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text11",
+              "label": "Free private parking for guests\nEV charging points available o…",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text12",
+              "label": "Breakfast included · 10 minutes from La Baronia",
+              "type": "text",
+              "maxLength": 250
+            }
+          ]
+        },
+        {
+          "key": "links",
+          "label": "Directions and booking links",
+          "type": "group",
+          "fields": [
+            {
+              "key": "link0",
+              "label": "Google Maps",
+              "type": "url"
+            }
+          ]
+        },
+        {
+          "key": "giftDetails",
+          "label": "Optional gift details",
+          "type": "textarea",
+          "maxLength": 2000
+        },
+        {
+          "key": "rsvpDeadline",
+          "label": "RSVP deadline",
+          "type": "date"
+        },
+        {
+          "key": "whatsapp",
+          "label": "RSVP WhatsApp number (country code, digits only)",
+          "type": "text",
+          "maxLength": 250
+        },
+        {
+          "key": "cover",
+          "label": "Optional couple photograph",
+          "type": "image"
+        },
+        {
+          "key": "music",
+          "label": "Optional background music",
+          "type": "audio"
+        }
+      ]
+    },
+    "defaults": {
+      "language": "en",
+      "bride": "Alba",
+      "groom": "Felipe",
+      "date": "2027-05-23",
+      "time": "17:30",
+      "utcOffset": "+02:00",
+      "venue": "La Baronia",
+      "address": "Barcelona, Spain",
+      "section0": {
+        "text0": "Together with their families",
+        "text1": "Request the honour of your presence"
+      },
+      "section2": {
+        "text0": "We're so happy to celebrate this day with you.",
+        "text1": "Having you with us means the world.",
+        "text2": "We can't wait to welcome you."
+      },
+      "section3": {
+        "text0": "Welcome",
+        "text1": "Together with their families",
+        "text2": "request the honor of your presence as they",
+        "text3": "exchange vows of marriage.",
+        "text4": "We hope you will join us to celebrate a day full of love, laughter and dancing — it wouldn't be the same without you."
+      },
+      "section4": {
+        "text0": "Ceremony",
+        "text1": "Reception",
+        "text2": "Sant Feliu de Codines",
+        "text3": "Barcelona",
+        "text4": "5:30 PM",
+        "text5": "Carretera de Caldes, km 14,4",
+        "text6": "08182 Sant Feliu de Codines, Barcelona"
+      },
+      "section5": {
+        "text0": "Dress Code",
+        "text1": "Black Tie",
+        "text2": "We kindly ask our guests to wear formal evening attire — a tuxedo or dark suit for gentlemen, and a long or elegant cocktail dress for ladies."
+      },
+      "section6": {
+        "text0": "Program",
+        "text1": "This will be the order",
+        "text2": "of the day",
+        "text3": "Guest Arrival",
+        "text4": "5:00 PM",
+        "text5": "Ceremony",
+        "text6": "5:30 PM",
+        "text7": "Cocktail Hour",
+        "text8": "6:30 PM",
+        "text9": "Dinner",
+        "text10": "8:00 PM",
+        "text11": "First Dance",
+        "text12": "10:00 PM",
+        "text13": "Party",
+        "text14": "10:30 PM"
+      },
+      "section7": {
+        "text0": "Gifts",
+        "text1": "Your presence",
+        "text2": "is the greatest gift",
+        "text3": "If you would like to give us a gift, we have set up an account. Any contribution towards our honeymoon and our new life together is received with immense gratitude."
+      },
+      "section8": {
+        "text0": "Travel",
+        "text1": "Stay",
+        "text2": "We recommend flying into Barcelona–El Prat Airport (BCN, ~45 min).",
+        "text3": "Hotel",
+        "text4": "El Roure Blanc",
+        "text5": "Carrer del Roure 8\n08182 Sant Feliu de Codines, Barcelona",
+        "text6": "May 22 – 24, 2027",
+        "text7": "Double room — €110 per night",
+        "text8": "Suite — €160 per night",
+        "text9": "ALBAFELIPE27",
+        "text10": "Quote this code when booking by phone or email",
+        "text11": "Free private parking for guests\nEV charging points available on site",
+        "text12": "Breakfast included · 10 minutes from La Baronia"
+      },
+      "links": {
+        "link0": "https://www.google.com/maps/search/?api=1&query=Sant%20Feliu%20de%20Codines%2C%20Barcelona"
+      },
+      "rsvpDeadline": "2027-04-23"
+    }
+  },
+  {
+    "id": "royal",
+    "name": "Royal",
+    "description": "An embossed gold seal, ivory paper and refined classical typography.",
+    "tradition": "christian",
+    "renderer": "royal-v1",
+    "revision": 3,
+    "thumbnail": "/assets/flagship/royal/197f9c19-intro-poster-new-BU7qGwfU.jpg",
+    "reference": "https://www.thedigitalyes.com/demo/royal",
+    "field_schema": {
+      "version": 1,
+      "maxImages": 8,
+      "fields": [
+        {
+          "key": "language",
+          "label": "Language",
+          "type": "select",
+          "options": [
+            "en",
+            "ml"
+          ],
+          "required": true
+        },
+        {
+          "key": "bride",
+          "label": "First partner name",
+          "type": "text",
+          "maxLength": 250,
+          "required": true
+        },
+        {
+          "key": "groom",
+          "label": "Second partner name",
+          "type": "text",
+          "maxLength": 250,
+          "required": true
+        },
+        {
+          "key": "date",
+          "label": "Wedding date",
+          "type": "date",
+          "required": true
+        },
+        {
+          "key": "time",
+          "label": "Wedding time",
+          "type": "time",
+          "required": true
+        },
+        {
+          "key": "utcOffset",
+          "label": "Wedding time zone",
+          "type": "select",
+          "options": [
+            "+05:30",
+            "+02:00",
+            "+01:00",
+            "+00:00",
+            "-04:00",
+            "-05:00",
+            "+04:00",
+            "+08:00"
+          ],
+          "required": true
+        },
+        {
+          "key": "venue",
+          "label": "Wedding venue",
+          "type": "text",
+          "maxLength": 250
+        },
+        {
+          "key": "address",
+          "label": "Venue city and region",
+          "type": "text",
+          "maxLength": 250
+        },
+        {
+          "key": "welcome",
+          "label": "Welcome Drinks details",
+          "type": "group",
+          "fields": [
+            {
+              "key": "date",
+              "label": "Date (leave blank to follow wedding date)",
+              "type": "date"
+            },
+            {
+              "key": "time",
+              "label": "Start time",
+              "type": "time"
+            },
+            {
+              "key": "venue",
+              "label": "Venue",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "address",
+              "label": "Address",
+              "type": "text",
+              "maxLength": 250
+            }
+          ]
+        },
+        {
+          "key": "farewell",
+          "label": "Farewell Brunch details",
+          "type": "group",
+          "fields": [
+            {
+              "key": "date",
+              "label": "Date (leave blank to follow wedding date)",
+              "type": "date"
+            },
+            {
+              "key": "time",
+              "label": "Start time",
+              "type": "time"
+            },
+            {
+              "key": "venue",
+              "label": "Venue",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "address",
+              "label": "Address",
+              "type": "text",
+              "maxLength": 250
+            }
+          ]
+        },
+        {
+          "key": "section0",
+          "label": "Invitation cover",
+          "type": "group",
+          "fields": [
+            {
+              "key": "text0",
+              "label": "We're getting married",
+              "type": "text",
+              "maxLength": 250
+            }
+          ]
+        },
+        {
+          "key": "section2",
+          "label": "Welcome!",
+          "type": "group",
+          "fields": [
+            {
+              "key": "text0",
+              "label": "Welcome!",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text1",
+              "label": "We warmly invite you to celebrate our wedding day with us in t…",
+              "type": "textarea",
+              "maxLength": 2000
+            }
+          ]
+        },
+        {
+          "key": "section3",
+          "label": "The Venue",
+          "type": "group",
+          "fields": [
+            {
+              "key": "text0",
+              "label": "The Venue",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text1",
+              "label": "14:00",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text2",
+              "label": "Camino de los Olivos s/n, Ronda",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text3",
+              "label": "Málaga, 29400 – España",
+              "type": "text",
+              "maxLength": 250
+            }
+          ]
+        },
+        {
+          "key": "section4",
+          "label": "Day Programme",
+          "type": "group",
+          "fields": [
+            {
+              "key": "text0",
+              "label": "Day Programme",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text1",
+              "label": "14:00",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text2",
+              "label": "Arrival",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text3",
+              "label": "14:30",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text4",
+              "label": "Ceremony",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text5",
+              "label": "16:00",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text6",
+              "label": "Cocktails",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text7",
+              "label": "18:00",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text8",
+              "label": "Dinner",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text9",
+              "label": "20:00",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text10",
+              "label": "Cutting the Cake",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text11",
+              "label": "00:00",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text12",
+              "label": "Finish",
+              "type": "text",
+              "maxLength": 250
+            }
+          ]
+        },
+        {
+          "key": "section5",
+          "label": "Dress Code",
+          "type": "group",
+          "fields": [
+            {
+              "key": "text0",
+              "label": "Dress Code",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text1",
+              "label": "Women",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text2",
+              "label": "Cocktail or formal dress",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text3",
+              "label": "Men",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text4",
+              "label": "Dark suit and tie",
+              "type": "text",
+              "maxLength": 250
+            }
+          ]
+        },
+        {
+          "key": "section6",
+          "label": "Come Say Hello...",
+          "type": "group",
+          "fields": [
+            {
+              "key": "text0",
+              "label": "Pre-Wedding Events",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text1",
+              "label": "Come Say Hello...",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text2",
+              "label": "These are informal gatherings, so feel free to join us if you'…",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text3",
+              "label": "Welcome Drinks",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text4",
+              "label": "Friday, September 11th, 2026",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text5",
+              "label": "8:00 PM",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text6",
+              "label": "Bodega García Hidalgo, Ronda",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text7",
+              "label": "Farewell Brunch",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text8",
+              "label": "Sunday, September 13th, 2026",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text9",
+              "label": "12:00 PM",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text10",
+              "label": "Parador de Ronda (terrace)",
+              "type": "text",
+              "maxLength": 250
+            }
+          ]
+        },
+        {
+          "key": "section7",
+          "label": "Location & Transportation",
+          "type": "group",
+          "fields": [
+            {
+              "key": "text0",
+              "label": "Location & Transportation",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text1",
+              "label": "Finca El Olivar, Camino de los Olivos s/n, 29400 Ronda, Málaga…",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text2",
+              "label": "From Málaga: ~1h 30min via A-357 and A-367\nFrom Seville: ~2h v…",
+              "type": "text",
+              "maxLength": 250
+            }
+          ]
+        },
+        {
+          "key": "section8",
+          "label": "Accommodation",
+          "type": "group",
+          "fields": [
+            {
+              "key": "text0",
+              "label": "Accommodation",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text1",
+              "label": "Finca El Olivar does not offer lodging. Here are some recommen…",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text2",
+              "label": "Parador de Ronda",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text3",
+              "label": "Ronda",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text4",
+              "label": "2 km de la finca",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text5",
+              "label": "Hotel Catalonia Ronda",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text6",
+              "label": "Ronda",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text7",
+              "label": "1.5 km",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text8",
+              "label": "Promo Code: BODA2026",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text9",
+              "label": "Hotel Montelirio",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text10",
+              "label": "Ronda",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text11",
+              "label": "Boutique | Sobre el Tajo",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text12",
+              "label": "For hotels without direct agreements, please mention \"Wedding …",
+              "type": "textarea",
+              "maxLength": 2000
+            }
+          ]
+        },
+        {
+          "key": "section9",
+          "label": "Gifts",
+          "type": "group",
+          "fields": [
+            {
+              "key": "text0",
+              "label": "Gifts",
+              "type": "text",
+              "maxLength": 250
+            },
+            {
+              "key": "text1",
+              "label": "Your presence is our greatest gift. If you wish to give us som…",
+              "type": "textarea",
+              "maxLength": 2000
+            }
+          ]
+        },
+        {
+          "key": "section10",
+          "label": "RSVP",
+          "type": "group",
+          "fields": [
+            {
+              "key": "text0",
+              "label": "Let us know if you can make it",
+              "type": "text",
+              "maxLength": 250
+            }
+          ]
+        },
+        {
+          "key": "links",
+          "label": "Directions and booking links",
+          "type": "group",
+          "fields": [
+            {
+              "key": "link0",
+              "label": "Open in Maps",
+              "type": "url"
+            },
+            {
+              "key": "link1",
+              "label": "Google Maps",
+              "type": "url"
+            },
+            {
+              "key": "link4",
+              "label": "Visit Website",
+              "type": "url"
+            },
+            {
+              "key": "link7",
+              "label": "Visit Website",
+              "type": "url"
+            },
+            {
+              "key": "link10",
+              "label": "Visit Website",
+              "type": "url"
+            }
+          ]
+        },
+        {
+          "key": "giftDetails",
+          "label": "Optional gift details",
+          "type": "textarea",
+          "maxLength": 2000
+        },
+        {
+          "key": "rsvpDeadline",
+          "label": "RSVP deadline",
+          "type": "date"
+        },
+        {
+          "key": "whatsapp",
+          "label": "RSVP WhatsApp number (country code, digits only)",
+          "type": "text",
+          "maxLength": 250
+        },
+        {
+          "key": "cover",
+          "label": "Optional couple photograph",
+          "type": "image"
+        },
+        {
+          "key": "music",
+          "label": "Optional background music",
+          "type": "audio"
+        }
+      ]
+    },
+    "defaults": {
+      "language": "en",
+      "bride": "Andrea",
+      "groom": "Pedro",
+      "date": "2027-09-12",
+      "time": "14:00",
+      "utcOffset": "+02:00",
+      "venue": "Finca El Olivar",
+      "address": "Ronda, Málaga, Spain",
+      "welcome": {
+        "time": "20:00",
+        "venue": "Bodega García Hidalgo",
+        "address": "Ronda, Spain"
+      },
+      "farewell": {
+        "time": "12:00",
+        "venue": "Parador de Ronda",
+        "address": "Ronda, Spain"
+      },
+      "section0": {
+        "text0": "We're getting married"
+      },
+      "section2": {
+        "text0": "Welcome!",
+        "text1": "We warmly invite you to celebrate our wedding day with us in the beautiful town of Ronda, Andalusia. We look forward to sharing this unforgettable moment with our most special people."
+      },
+      "section3": {
+        "text0": "The Venue",
+        "text1": "14:00",
+        "text2": "Camino de los Olivos s/n, Ronda",
+        "text3": "Málaga, 29400 – España"
+      },
+      "section4": {
+        "text0": "Day Programme",
+        "text1": "14:00",
+        "text2": "Arrival",
+        "text3": "14:30",
+        "text4": "Ceremony",
+        "text5": "16:00",
+        "text6": "Cocktails",
+        "text7": "18:00",
+        "text8": "Dinner",
+        "text9": "20:00",
+        "text10": "Cutting the Cake",
+        "text11": "00:00",
+        "text12": "Finish"
+      },
+      "section5": {
+        "text0": "Dress Code",
+        "text1": "Women",
+        "text2": "Cocktail or formal dress",
+        "text3": "Men",
+        "text4": "Dark suit and tie"
+      },
+      "section6": {
+        "text0": "Pre-Wedding Events",
+        "text1": "Come Say Hello...",
+        "text2": "These are informal gatherings, so feel free to join us if you're in the area.",
+        "text3": "Welcome Drinks",
+        "text4": "Friday, September 11th, 2026",
+        "text5": "8:00 PM",
+        "text6": "Bodega García Hidalgo, Ronda",
+        "text7": "Farewell Brunch",
+        "text8": "Sunday, September 13th, 2026",
+        "text9": "12:00 PM",
+        "text10": "Parador de Ronda (terrace)"
+      },
+      "section7": {
+        "text0": "Location & Transportation",
+        "text1": "Finca El Olivar, Camino de los Olivos s/n, 29400 Ronda, Málaga – Spain",
+        "text2": "From Málaga: ~1h 30min via A-357 and A-367\nFrom Seville: ~2h via A-376\nFrom Marbella: ~1h via A-397"
+      },
+      "section8": {
+        "text0": "Accommodation",
+        "text1": "Finca El Olivar does not offer lodging. Here are some recommended options nearby.",
+        "text2": "Parador de Ronda",
+        "text3": "Ronda",
+        "text4": "2 km de la finca",
+        "text5": "Hotel Catalonia Ronda",
+        "text6": "Ronda",
+        "text7": "1.5 km",
+        "text8": "Promo Code: BODA2026",
+        "text9": "Hotel Montelirio",
+        "text10": "Ronda",
+        "text11": "Boutique | Sobre el Tajo",
+        "text12": "For hotels without direct agreements, please mention \"Wedding at Finca El Olivar\" to access preferential rates."
+      },
+      "section9": {
+        "text0": "Gifts",
+        "text1": "Your presence is our greatest gift. If you wish to give us something, please find our bank account information below:"
+      },
+      "section10": {
+        "text0": "Let us know if you can make it"
+      },
+      "links": {
+        "link0": "https://www.google.com/maps/search/?api=1&query=Finca+El+Olivar+Ronda+Malaga+Spain",
+        "link1": "https://www.google.com/maps/search/?api=1&query=Finca+El+Olivar+Ronda+Malaga+Spain",
+        "link4": "https://www.parador.es/es/paradores/parador-de-ronda",
+        "link7": "https://www.cataloniahotels.com/es/hotel/catalonia-ronda",
+        "link10": "https://www.hotelmontelirio.com"
+      },
+      "rsvpDeadline": "2027-08-12"
+    }
+  }
+]

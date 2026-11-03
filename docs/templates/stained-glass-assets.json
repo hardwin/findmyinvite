@@ -1,0 +1,930 @@
+{
+  "reference": "https://13-15-stainedglass-template.thedigitalyes.com/",
+  "downloaded": "2026-11-03",
+  "assets": [
+    {
+      "source": "/__l5e/assets-v1/b6f39830-5c2c-4ed6-96c1-563237fe0cff/hero-final.webp",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/b6f39830-5c2c-4ed6-96c1-563237fe0cff/hero-final.webp",
+      "local": "/assets/flagship/stained-glass/a60d3454-hero-final.webp",
+      "bytes": 759914,
+      "sha256": "2d0d6a0cd2943059a0797aa99a7cabbe340b881b97279361cd643b63c5d5e02b"
+    },
+    {
+      "source": "/__l5e/assets-v1/5e38fa9f-600c-49bc-b01c-c34e8b3ce55c/hourglass.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/5e38fa9f-600c-49bc-b01c-c34e8b3ce55c/hourglass.png",
+      "local": "/assets/flagship/stained-glass/a320a2e8-hourglass.png",
+      "bytes": 2240501,
+      "sha256": "f1c485a154f1b892907b44bd4aa78ec25410ae8ecb9afa5dbb6dce30f57025f4"
+    },
+    {
+      "source": "/__l5e/assets-v1/df0b0b63-da96-4c61-93c7-f84ff6ae164d/countdown-ornament.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/df0b0b63-da96-4c61-93c7-f84ff6ae164d/countdown-ornament.png",
+      "local": "/assets/flagship/stained-glass/f2fc9852-countdown-ornament.png",
+      "bytes": 646089,
+      "sha256": "7d3f8b2612eed526c99f38266de7d4d8e5b3179167b37c78589b761ba0651bc4"
+    },
+    {
+      "source": "/__l5e/assets-v1/d448b4a5-0e00-496b-8ef1-171273c0802c/countdown-flourish.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/d448b4a5-0e00-496b-8ef1-171273c0802c/countdown-flourish.png",
+      "local": "/assets/flagship/stained-glass/e1d5b159-countdown-flourish.png",
+      "bytes": 46977,
+      "sha256": "8a39d4102c1bf38a5cb6dbecc2bb885af08527dfa173652fe305b6ce6a685ab6"
+    },
+    {
+      "source": "/__l5e/assets-v1/c235e5cb-363c-48c1-861b-aff1257159bb/intro-closed-c.jpg",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/c235e5cb-363c-48c1-861b-aff1257159bb/intro-closed-c.jpg",
+      "local": "/assets/flagship/stained-glass/df7d4e2f-intro-closed-c.jpg",
+      "bytes": 271134,
+      "sha256": "c2fe89c880dbf34ed8aa9a3e95497d1b16fd8fc1aee7996298e27798705e61de"
+    },
+    {
+      "source": "/__l5e/assets-v1/d4b2de74-315c-4a09-91c1-4f8a84daba8a/couple-scratch-inspo.jpeg",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/d4b2de74-315c-4a09-91c1-4f8a84daba8a/couple-scratch-inspo.jpeg",
+      "local": "/assets/flagship/stained-glass/9018c649-couple-scratch-inspo.jpeg",
+      "bytes": 150242,
+      "sha256": "d84aedc49b4e671f4e9d90a88b93989e3423fd8f37c9b4962acd7cdba431ff70"
+    },
+    {
+      "source": "/__l5e/assets-v1/82b12de9-83ab-4c53-ba20-7f4841b2e8d0/stained-glass-frame.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/82b12de9-83ab-4c53-ba20-7f4841b2e8d0/stained-glass-frame.png",
+      "local": "/assets/flagship/stained-glass/135a0ce1-stained-glass-frame.png",
+      "bytes": 648507,
+      "sha256": "cbfc35b2485121cc0132848ebfd0a58ad935d39992cb7639e7e7750c3138819f"
+    },
+    {
+      "source": "/__l5e/assets-v1/2109d9c2-1c10-4d25-a6dd-e9405302c645/dove-left-base.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/2109d9c2-1c10-4d25-a6dd-e9405302c645/dove-left-base.png",
+      "local": "/assets/flagship/stained-glass/14dd9df7-dove-left-base.png",
+      "bytes": 479712,
+      "sha256": "8b593d7b163a30b093797d5e012bd9924dd5b3be31fe6444cf8f6ddc488ff229"
+    },
+    {
+      "source": "/__l5e/assets-v1/afaa8db2-181e-467b-a48d-1ba1285e19e6/intro-doors-c.mp4#t=0.001",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/afaa8db2-181e-467b-a48d-1ba1285e19e6/intro-doors-c.mp4",
+      "local": "/assets/flagship/stained-glass/96181222-intro-doors-c.mp4",
+      "bytes": 4553518,
+      "sha256": "674de8813dbc5fbbe77f9b9e07117a8560c82de607a3f1831210c7ae1ad487ed"
+    },
+    {
+      "source": "/__l5e/assets-v1/a2fde561-71ae-4817-95ad-a916a4ddf2f0/dove-left-leaf8.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/a2fde561-71ae-4817-95ad-a916a4ddf2f0/dove-left-leaf8.png",
+      "local": "/assets/flagship/stained-glass/10dac6c8-dove-left-leaf8.png",
+      "bytes": 8853,
+      "sha256": "915ecc557105ce865ad3dd89135efde9784d345a8c874051f8bf45952e5f7be5"
+    },
+    {
+      "source": "/__l5e/assets-v1/94f00610-5239-460f-9e44-8e37df01f1a9/dove-left-leaf2.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/94f00610-5239-460f-9e44-8e37df01f1a9/dove-left-leaf2.png",
+      "local": "/assets/flagship/stained-glass/7f68eb85-dove-left-leaf2.png",
+      "bytes": 7821,
+      "sha256": "91fe57d0aa3c50c9cd9a09d5038562c4f1bd01d3a663259ef36f8f6ffc20c3b2"
+    },
+    {
+      "source": "/__l5e/assets-v1/737b33ef-2670-43ae-8c5e-5f9a099b4a6b/dove-right-base.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/737b33ef-2670-43ae-8c5e-5f9a099b4a6b/dove-right-base.png",
+      "local": "/assets/flagship/stained-glass/95779b82-dove-right-base.png",
+      "bytes": 421424,
+      "sha256": "2f2feec50541d481b2a7fb2e258d85d7dc0fbf6cb2416a302be87396f48e9a2b"
+    },
+    {
+      "source": "/__l5e/assets-v1/846bb7d5-a871-439f-ae3d-c6bc9547c6bf/dove-left-leaf9.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/846bb7d5-a871-439f-ae3d-c6bc9547c6bf/dove-left-leaf9.png",
+      "local": "/assets/flagship/stained-glass/76ecc394-dove-left-leaf9.png",
+      "bytes": 9712,
+      "sha256": "6b8bd08c9f88b362cf2b450ac2565da946dc891a5b07a922dc71a3c5261b8e93"
+    },
+    {
+      "source": "/__l5e/assets-v1/2f70b66a-4594-4ada-8dd0-3106ecbb9bf2/dove-right-leaf5.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/2f70b66a-4594-4ada-8dd0-3106ecbb9bf2/dove-right-leaf5.png",
+      "local": "/assets/flagship/stained-glass/3521885c-dove-right-leaf5.png",
+      "bytes": 9975,
+      "sha256": "fe5754639b5ecc27801b727773084a3e3eb197e498b8395f0b09e79f881df863"
+    },
+    {
+      "source": "/__l5e/assets-v1/f03f62cf-40e7-4369-b746-30d1266ec024/dove-left-leaf10.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/f03f62cf-40e7-4369-b746-30d1266ec024/dove-left-leaf10.png",
+      "local": "/assets/flagship/stained-glass/a90caf15-dove-left-leaf10.png",
+      "bytes": 7437,
+      "sha256": "df7504a799d497e4e2b14c396eef1b08ba3d9fe6f8906aa013efd0de1b3d6695"
+    },
+    {
+      "source": "/__l5e/assets-v1/0894180e-82ab-4e13-bf02-dfe91cfbf60d/dove-right-leaf3.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/0894180e-82ab-4e13-bf02-dfe91cfbf60d/dove-right-leaf3.png",
+      "local": "/assets/flagship/stained-glass/0f242643-dove-right-leaf3.png",
+      "bytes": 8783,
+      "sha256": "3560d67f904bf10402a2bb19da8fcef7aad8b3e694a479f6a5cc459ca2412a46"
+    },
+    {
+      "source": "/__l5e/assets-v1/79898e31-be4d-475c-a3a6-161b87d422fa/dove-right-leaf4.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/79898e31-be4d-475c-a3a6-161b87d422fa/dove-right-leaf4.png",
+      "local": "/assets/flagship/stained-glass/f98d62df-dove-right-leaf4.png",
+      "bytes": 7620,
+      "sha256": "f130b75d30ec19efadbaf72559f70aefb4c7dc60409a5d75a5a444088149f07b"
+    },
+    {
+      "source": "/__l5e/assets-v1/9a2d201b-ebf2-4ae1-b1bf-96b214b7e517/dove-right-leaf2.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/9a2d201b-ebf2-4ae1-b1bf-96b214b7e517/dove-right-leaf2.png",
+      "local": "/assets/flagship/stained-glass/a36b25d1-dove-right-leaf2.png",
+      "bytes": 8129,
+      "sha256": "8c9c37fd6e746dfcecd8383166ca2137fda2c7e49d9a50c43e64ec22cdaf57d3"
+    },
+    {
+      "source": "/__l5e/assets-v1/d512b0f6-9797-4dde-9eb9-d2cff0b36cd5/venue-frame-glass.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/d512b0f6-9797-4dde-9eb9-d2cff0b36cd5/venue-frame-glass.png",
+      "local": "/assets/flagship/stained-glass/5173ef35-venue-frame-glass.png",
+      "bytes": 1921737,
+      "sha256": "c0eb426f858221f0ebabe2f111b3dbf27f0e78e070323e2cad6f9757aa376de7"
+    },
+    {
+      "source": "/__l5e/assets-v1/c21a33c3-34da-4ce3-a8e2-5c20f8d258b8/venue-palace-ivy-glass.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/c21a33c3-34da-4ce3-a8e2-5c20f8d258b8/venue-palace-ivy-glass.png",
+      "local": "/assets/flagship/stained-glass/5b2c0b47-venue-palace-ivy-glass.png",
+      "bytes": 2372792,
+      "sha256": "a3240894e46769c5900fa6025e6ce128e497ba88f1c714327461fbaafbfca8ef"
+    },
+    {
+      "source": "/__l5e/assets-v1/066b0bb3-b1e1-400f-b6c5-493e637e6ec3/garland-chains.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/066b0bb3-b1e1-400f-b6c5-493e637e6ec3/garland-chains.png",
+      "local": "/assets/flagship/stained-glass/ace9e95a-garland-chains.png",
+      "bytes": 567153,
+      "sha256": "e911ea6d128e0864277d5fbcf2d5aa85e215cf4fa75935807853f4ee3e30c603"
+    },
+    {
+      "source": "/__l5e/assets-v1/5da859fb-ebbf-459c-b575-cc9cece67891/dancing-couple-glass.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/5da859fb-ebbf-459c-b575-cc9cece67891/dancing-couple-glass.png",
+      "local": "/assets/flagship/stained-glass/005175d5-dancing-couple-glass.png",
+      "bytes": 1250373,
+      "sha256": "28c1c28fd6d738bbba6f24507cdb9a12f45e825f9e272eb416fd60fbe0e8ee48"
+    },
+    {
+      "source": "/__l5e/assets-v1/fbf493d4-cff0-4659-81c8-2d5b3205dbcb/garland-pendant-01.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/fbf493d4-cff0-4659-81c8-2d5b3205dbcb/garland-pendant-01.png",
+      "local": "/assets/flagship/stained-glass/9d572109-garland-pendant-01.png",
+      "bytes": 11181,
+      "sha256": "b22ed78e65be48125702d4e85165d752fbeb6604e42543c439ae1c818a169ed9"
+    },
+    {
+      "source": "/__l5e/assets-v1/1a62ace4-c13e-4366-843c-64feaae08608/garland-pendant-03.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/1a62ace4-c13e-4366-843c-64feaae08608/garland-pendant-03.png",
+      "local": "/assets/flagship/stained-glass/5404f250-garland-pendant-03.png",
+      "bytes": 11930,
+      "sha256": "faa82b3de3e58dcad9a3edacff79fcf32a9c256474d0747c96165ae2a0dc5d69"
+    },
+    {
+      "source": "/__l5e/assets-v1/201316fe-29f7-4a4e-9b08-365ae8b1da5f/garland-pendant-02.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/201316fe-29f7-4a4e-9b08-365ae8b1da5f/garland-pendant-02.png",
+      "local": "/assets/flagship/stained-glass/5237f29f-garland-pendant-02.png",
+      "bytes": 10383,
+      "sha256": "1fa64e8b5913f0209c36d3bfd0a5759fb7bdb809967f5e98a00e5b6add650825"
+    },
+    {
+      "source": "/__l5e/assets-v1/31da10f3-2bb2-4e4e-8cd5-276eee6cd6da/garland-pendant-04.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/31da10f3-2bb2-4e4e-8cd5-276eee6cd6da/garland-pendant-04.png",
+      "local": "/assets/flagship/stained-glass/f826579b-garland-pendant-04.png",
+      "bytes": 11376,
+      "sha256": "d37217ad385167a496d335eaca679cef1cbb50fc8522a80698d95d9be7b67fc1"
+    },
+    {
+      "source": "/__l5e/assets-v1/65d3785b-a0a9-43e0-b0d1-82b1c7daefec/garland-pendant-05.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/65d3785b-a0a9-43e0-b0d1-82b1c7daefec/garland-pendant-05.png",
+      "local": "/assets/flagship/stained-glass/94d97611-garland-pendant-05.png",
+      "bytes": 11630,
+      "sha256": "78d1a36ea2ad60e39f3e3c7fee4b47d09cd5afcf0e5ed4d5424fb35b79645d6c"
+    },
+    {
+      "source": "/__l5e/assets-v1/d0b8340d-4dfc-4f4f-9f7e-7df93d251b34/garland-pendant-06.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/d0b8340d-4dfc-4f4f-9f7e-7df93d251b34/garland-pendant-06.png",
+      "local": "/assets/flagship/stained-glass/13773c7f-garland-pendant-06.png",
+      "bytes": 12525,
+      "sha256": "03100d18770e24252f417a94e1bdd72257ff410fdcd75b62ed42245d390b7da7"
+    },
+    {
+      "source": "/__l5e/assets-v1/7adc8740-1440-4f22-b228-c3d591ab1259/garland-pendant-08.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/7adc8740-1440-4f22-b228-c3d591ab1259/garland-pendant-08.png",
+      "local": "/assets/flagship/stained-glass/c56de4c4-garland-pendant-08.png",
+      "bytes": 13571,
+      "sha256": "0d58d9f72e5e70075701091cb624679e623f69db71749eb4f82957a528d79fc3"
+    },
+    {
+      "source": "/__l5e/assets-v1/f01808f3-fe99-47f8-af49-db273b36b05e/garland-pendant-07.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/f01808f3-fe99-47f8-af49-db273b36b05e/garland-pendant-07.png",
+      "local": "/assets/flagship/stained-glass/bc524fb9-garland-pendant-07.png",
+      "bytes": 11721,
+      "sha256": "cbd0898edc26ac7271e230b92f5adbee935fbe6d2d2194d9264ac3b74160f673"
+    },
+    {
+      "source": "/__l5e/assets-v1/e40fcba4-a67a-495b-9daf-2cba36148316/garland-pendant-09.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/e40fcba4-a67a-495b-9daf-2cba36148316/garland-pendant-09.png",
+      "local": "/assets/flagship/stained-glass/24c85782-garland-pendant-09.png",
+      "bytes": 15347,
+      "sha256": "9532be700a0d13d3b3b939b757831b7a057a021aa3930ea5208d685cb7305770"
+    },
+    {
+      "source": "/__l5e/assets-v1/5ebb661c-9fcd-461c-bb28-cf440298f5ba/garland-pendant-12.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/5ebb661c-9fcd-461c-bb28-cf440298f5ba/garland-pendant-12.png",
+      "local": "/assets/flagship/stained-glass/efcc0a78-garland-pendant-12.png",
+      "bytes": 11948,
+      "sha256": "2e6af556de4ca820a7ba9fb7a5c3778201c1ddb6281fc565cc5f65cc58d1bdaa"
+    },
+    {
+      "source": "/__l5e/assets-v1/5ecfa500-b547-47af-97ff-997be32905fc/garland-pendant-11.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/5ecfa500-b547-47af-97ff-997be32905fc/garland-pendant-11.png",
+      "local": "/assets/flagship/stained-glass/af92bd62-garland-pendant-11.png",
+      "bytes": 15727,
+      "sha256": "14e89c9e5b7958445a18adb91b0373f672788c03f6d109934b8ba72eb8c28bb9"
+    },
+    {
+      "source": "/__l5e/assets-v1/e4069cce-f728-46ea-a87e-3a8d66adbdaa/garland-pendant-10.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/e4069cce-f728-46ea-a87e-3a8d66adbdaa/garland-pendant-10.png",
+      "local": "/assets/flagship/stained-glass/2f8dcd6b-garland-pendant-10.png",
+      "bytes": 15106,
+      "sha256": "a972723c2948a7b566aaa7b445dbaefc17433b585ca7e70e00679c090ff167e2"
+    },
+    {
+      "source": "/__l5e/assets-v1/e7e69ef6-3397-4ae9-9761-d330d65b740b/garland-pendant-13.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/e7e69ef6-3397-4ae9-9761-d330d65b740b/garland-pendant-13.png",
+      "local": "/assets/flagship/stained-glass/a67b7c4d-garland-pendant-13.png",
+      "bytes": 11372,
+      "sha256": "bcac9ca0b368f6cbb74a46ac9544d6470f01ee276f574ee48cbc6057cbe6118e"
+    },
+    {
+      "source": "/__l5e/assets-v1/007d6fe3-dc0e-45d4-920f-940f6e415dd8/garland-pendant-14.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/007d6fe3-dc0e-45d4-920f-940f6e415dd8/garland-pendant-14.png",
+      "local": "/assets/flagship/stained-glass/8938169e-garland-pendant-14.png",
+      "bytes": 13316,
+      "sha256": "68be6d34099d8f97285a7e19426265a7ad736de8c895a3a81b3541b1111d7c80"
+    },
+    {
+      "source": "/__l5e/assets-v1/b2c883e1-aaf2-4c0a-92d4-259d683da116/garland-pendant-16.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/b2c883e1-aaf2-4c0a-92d4-259d683da116/garland-pendant-16.png",
+      "local": "/assets/flagship/stained-glass/92a628b3-garland-pendant-16.png",
+      "bytes": 13320,
+      "sha256": "66652c29c7124f17e02a3316e93b42a7ff6f3cb59b3b4b71c8a9d88009dde48a"
+    },
+    {
+      "source": "/__l5e/assets-v1/48dae6f9-d0da-4712-b274-ec1603a98a13/garland-pendant-15.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/48dae6f9-d0da-4712-b274-ec1603a98a13/garland-pendant-15.png",
+      "local": "/assets/flagship/stained-glass/49162675-garland-pendant-15.png",
+      "bytes": 13347,
+      "sha256": "9bc71147ceda317ababefec51577144afbe7ba8cde7caf97d14528469a47717b"
+    },
+    {
+      "source": "/__l5e/assets-v1/24937ef3-1575-41af-946b-f996825322d7/garland-pendant-17.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/24937ef3-1575-41af-946b-f996825322d7/garland-pendant-17.png",
+      "local": "/assets/flagship/stained-glass/35661334-garland-pendant-17.png",
+      "bytes": 12804,
+      "sha256": "810c5bad90fd9b810d1636f61eb3b4448a1d4db05b43b8ba5d4d034de302a33a"
+    },
+    {
+      "source": "/__l5e/assets-v1/0a9e73b1-740a-40f8-9b32-329b53910f18/garland-pendant-18.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/0a9e73b1-740a-40f8-9b32-329b53910f18/garland-pendant-18.png",
+      "local": "/assets/flagship/stained-glass/bbdfd90e-garland-pendant-18.png",
+      "bytes": 12241,
+      "sha256": "448599b2f8fcee0ae69d6fcaefaf223aecd45d17f7a3ab451ff2237e59e1c5a6"
+    },
+    {
+      "source": "/__l5e/assets-v1/259131b2-528e-4ad3-ae14-33cf84f6375b/garland-pendant-21.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/259131b2-528e-4ad3-ae14-33cf84f6375b/garland-pendant-21.png",
+      "local": "/assets/flagship/stained-glass/35293b33-garland-pendant-21.png",
+      "bytes": 12019,
+      "sha256": "cf72bb9da3cf94041e50b9a8ff7224c2d0ca9b76025257bb163ede04812d3e74"
+    },
+    {
+      "source": "/__l5e/assets-v1/d50f1291-a152-4731-ace2-f8bfbd7a02a2/garland-pendant-19.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/d50f1291-a152-4731-ace2-f8bfbd7a02a2/garland-pendant-19.png",
+      "local": "/assets/flagship/stained-glass/85949686-garland-pendant-19.png",
+      "bytes": 14134,
+      "sha256": "f8fea8d13d5120ccfe99bf3347786bb69fa69224703afad3144e002d52a9f754"
+    },
+    {
+      "source": "/__l5e/assets-v1/6704d785-645f-47d1-877b-e9073e22694f/garland-pendant-20.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/6704d785-645f-47d1-877b-e9073e22694f/garland-pendant-20.png",
+      "local": "/assets/flagship/stained-glass/2c0d736d-garland-pendant-20.png",
+      "bytes": 11832,
+      "sha256": "e80d2baba2d396a504804c9488334b8d9163abe5ebe1ebea5f7246f5d8508820"
+    },
+    {
+      "source": "/__l5e/assets-v1/943d3754-fafb-4e35-a00e-06e02e7de90a/garland-pendant-22.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/943d3754-fafb-4e35-a00e-06e02e7de90a/garland-pendant-22.png",
+      "local": "/assets/flagship/stained-glass/01a28032-garland-pendant-22.png",
+      "bytes": 15294,
+      "sha256": "9e00efef84c76d64f2755d2308110104c4531bded45209ba4cb9020d23ce6f68"
+    },
+    {
+      "source": "/__l5e/assets-v1/a2e3b2ee-a16c-4fdb-8518-c45730e1cd92/icon-arrival.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/a2e3b2ee-a16c-4fdb-8518-c45730e1cd92/icon-arrival.png",
+      "local": "/assets/flagship/stained-glass/4054b920-icon-arrival.png",
+      "bytes": 133286,
+      "sha256": "f62cc17bc47560618af58b0e0bd33221c487f94f52bf4fb9bb286da545ee431b"
+    },
+    {
+      "source": "/__l5e/assets-v1/33f06a3c-4e10-441f-9211-73988b89ee27/champagne-pour.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/33f06a3c-4e10-441f-9211-73988b89ee27/champagne-pour.png",
+      "local": "/assets/flagship/stained-glass/b323a29f-champagne-pour.png",
+      "bytes": 389823,
+      "sha256": "aaa199e696bf827db9a9d363b077e663f65bf2ff832e0d63a06b325241665788"
+    },
+    {
+      "source": "/__l5e/assets-v1/b10d96c6-0114-4aad-80d2-fd8d41595639/icon-ceremony.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/b10d96c6-0114-4aad-80d2-fd8d41595639/icon-ceremony.png",
+      "local": "/assets/flagship/stained-glass/39476999-icon-ceremony.png",
+      "bytes": 191888,
+      "sha256": "5b0d3352a84275b683818e0f2fd3491662e081ff8fce82d646485974b14a64fe"
+    },
+    {
+      "source": "/__l5e/assets-v1/c9028aa8-c31e-4baf-ad96-63d473488d8b/icon-cocktail.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/c9028aa8-c31e-4baf-ad96-63d473488d8b/icon-cocktail.png",
+      "local": "/assets/flagship/stained-glass/fa36bf7c-icon-cocktail.png",
+      "bytes": 193687,
+      "sha256": "d004e0ca73ce4b6576cac0c90f7361ebca205cf8d4bf95506c4bde341b531efb"
+    },
+    {
+      "source": "/__l5e/assets-v1/fee7c7e0-677b-4aea-b67c-2fdda3d7d392/icon-first-dance.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/fee7c7e0-677b-4aea-b67c-2fdda3d7d392/icon-first-dance.png",
+      "local": "/assets/flagship/stained-glass/f35e1a50-icon-first-dance.png",
+      "bytes": 156302,
+      "sha256": "f18f08c6d54fa556a31ffa45dc6c639360a49a57fd5714d8d1a0992784875576"
+    },
+    {
+      "source": "/__l5e/assets-v1/a93d7050-30b0-4f1f-9784-4757ac33d5f5/icon-dinner.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/a93d7050-30b0-4f1f-9784-4757ac33d5f5/icon-dinner.png",
+      "local": "/assets/flagship/stained-glass/4e563ba8-icon-dinner.png",
+      "bytes": 218427,
+      "sha256": "67c942673d42641ed560b6ff0526af45dd1d057f1747cc8c924ea01e29a1a131"
+    },
+    {
+      "source": "/__l5e/assets-v1/b67b242e-95ca-45c7-b640-4ac30994fddd/icon-party.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/b67b242e-95ca-45c7-b640-4ac30994fddd/icon-party.png",
+      "local": "/assets/flagship/stained-glass/c913921e-icon-party.png",
+      "bytes": 169984,
+      "sha256": "0c86728f3f2da370a6d4fda54bfec91127ff432555a6eae713517d047a09fcf5"
+    },
+    {
+      "source": "/__l5e/assets-v1/15e5bd20-367f-4411-8ecd-1f16a877d6e8/glass-texture.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/15e5bd20-367f-4411-8ecd-1f16a877d6e8/glass-texture.png",
+      "local": "/assets/flagship/stained-glass/cdd0de90-glass-texture.png",
+      "bytes": 2707259,
+      "sha256": "cf1412cc2f52105e2c1e1da774419964176f8d8daf20a56bd452a37f1d2073f3"
+    },
+    {
+      "source": "/__l5e/assets-v1/3f61ca3f-e953-4d59-9e73-3af664859e35/leaf-01.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/3f61ca3f-e953-4d59-9e73-3af664859e35/leaf-01.png",
+      "local": "/assets/flagship/stained-glass/d80e8729-leaf-01.png",
+      "bytes": 59548,
+      "sha256": "f83cc13f1d723c72badf6fb0408a187798066d544129d091407c3748c530d301"
+    },
+    {
+      "source": "/__l5e/assets-v1/e7a6ee56-5169-4f87-bbc4-39adf7d0d954/leaf-13.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/e7a6ee56-5169-4f87-bbc4-39adf7d0d954/leaf-13.png",
+      "local": "/assets/flagship/stained-glass/15a4cd74-leaf-13.png",
+      "bytes": 69148,
+      "sha256": "ad7ef40897763730ce064699f8f6d28af3d2434b79ccca4b67f1cee0cb3f359d"
+    },
+    {
+      "source": "/__l5e/assets-v1/f66af338-ae72-4629-bc76-6bc5e75d0c18/leaf-09.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/f66af338-ae72-4629-bc76-6bc5e75d0c18/leaf-09.png",
+      "local": "/assets/flagship/stained-glass/2ccdc45d-leaf-09.png",
+      "bytes": 93421,
+      "sha256": "876beb9c8935b931f6d336d12a76c80663e024b8fee5da7db852e95adf763bc9"
+    },
+    {
+      "source": "/__l5e/assets-v1/e0889493-24fe-43e9-942e-ebbfd943b798/leaf-02.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/e0889493-24fe-43e9-942e-ebbfd943b798/leaf-02.png",
+      "local": "/assets/flagship/stained-glass/5d168a1b-leaf-02.png",
+      "bytes": 63202,
+      "sha256": "11656aa8fe2b2dbace9ece3f6bc222950affb7c1316e2927fc93af3dc2a2dbea"
+    },
+    {
+      "source": "/__l5e/assets-v1/f093fe08-0711-4a92-bed9-e85224756102/leaf-10.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/f093fe08-0711-4a92-bed9-e85224756102/leaf-10.png",
+      "local": "/assets/flagship/stained-glass/d380f501-leaf-10.png",
+      "bytes": 75662,
+      "sha256": "beeb40b0bdda3c2e9ebb51f39396a3d9500f86678bf93eb8727d332e3d68c31a"
+    },
+    {
+      "source": "/__l5e/assets-v1/5e863e3a-1335-4232-9ece-42c5fb07abe7/leaf-06.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/5e863e3a-1335-4232-9ece-42c5fb07abe7/leaf-06.png",
+      "local": "/assets/flagship/stained-glass/7c08f890-leaf-06.png",
+      "bytes": 45281,
+      "sha256": "f2e3d7e1f4cc15a38a56458166e541f1c0c25bf873c86189ef16131295c88649"
+    },
+    {
+      "source": "/__l5e/assets-v1/d99e91c4-e721-49f8-8c40-74a2af2c5414/leaf-14.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/d99e91c4-e721-49f8-8c40-74a2af2c5414/leaf-14.png",
+      "local": "/assets/flagship/stained-glass/1ac7fa55-leaf-14.png",
+      "bytes": 75350,
+      "sha256": "7096c279035a26eb5f3a12a5fbcaca1c2a85f07ffb0deadd4a871da56a3b1461"
+    },
+    {
+      "source": "/__l5e/assets-v1/579c8604-0770-4353-9b3d-c7e7add1f5ad/leaf-16.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/579c8604-0770-4353-9b3d-c7e7add1f5ad/leaf-16.png",
+      "local": "/assets/flagship/stained-glass/44df471d-leaf-16.png",
+      "bytes": 84568,
+      "sha256": "2222177e7249f97b0dd62849abf492b452094f9212fee04256ca9bee19835685"
+    },
+    {
+      "source": "/__l5e/assets-v1/0af22aa0-6ba7-4d3d-852d-19260f95ab06/leaf-04.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/0af22aa0-6ba7-4d3d-852d-19260f95ab06/leaf-04.png",
+      "local": "/assets/flagship/stained-glass/c1f1cfed-leaf-04.png",
+      "bytes": 59916,
+      "sha256": "025c783d7a21c90f6a79dadf4b8642f2cb5a6c8becb31ebfcaa6b79dce79f9bf"
+    },
+    {
+      "source": "/__l5e/assets-v1/ee2c9050-f2e8-477b-badb-2f08c55f7498/wedding-car-glass.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/ee2c9050-f2e8-477b-badb-2f08c55f7498/wedding-car-glass.png",
+      "local": "/assets/flagship/stained-glass/1c61513f-wedding-car-glass.png",
+      "bytes": 206576,
+      "sha256": "729f4a51ff9e42ee0e25e88730796ace25c47c7c5e7a41ffefc8ad87c2c4a5f5"
+    },
+    {
+      "source": "/__l5e/assets-v1/3bd9ece2-ae60-463b-bc8c-914f3a48ab55/gift-stained-glass.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/3bd9ece2-ae60-463b-bc8c-914f3a48ab55/gift-stained-glass.png",
+      "local": "/assets/flagship/stained-glass/98ce23a6-gift-stained-glass.png",
+      "bytes": 1400556,
+      "sha256": "59f484a36ecb0b8f06d08832ae432f4889e2b8195d709369f4253d9a49d4afc2"
+    },
+    {
+      "source": "/__l5e/assets-v1/e448cee1-1840-40d3-b107-0de939852d74/gazebo-glass.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/e448cee1-1840-40d3-b107-0de939852d74/gazebo-glass.png",
+      "local": "/assets/flagship/stained-glass/b3d2b447-gazebo-glass.png",
+      "bytes": 2155025,
+      "sha256": "f23a87d623e60e745505c43e170ad5c4e345bc5a9c22b45c6ca4361f3445763d"
+    },
+    {
+      "source": "/__l5e/assets-v1/c8abc496-52e8-4a70-a8de-b01ee2bfea55/gazebo-vines.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/c8abc496-52e8-4a70-a8de-b01ee2bfea55/gazebo-vines.png",
+      "local": "/assets/flagship/stained-glass/27a13cf5-gazebo-vines.png",
+      "bytes": 412306,
+      "sha256": "ca6cb46cdca6bdc91dc860ba4fe18dfcf900adf19b7c5ee20526fea9c995306d"
+    },
+    {
+      "source": "/__l5e/assets-v1/3f7923c2-4199-4e4c-aa34-7b00cd785708/key-main.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/3f7923c2-4199-4e4c-aa34-7b00cd785708/key-main.png",
+      "local": "/assets/flagship/stained-glass/23f1493b-key-main.png",
+      "bytes": 1288438,
+      "sha256": "33138966019103cb7bbdc7ea51b596e8a9718a85bc5a4448d2bec4f3e0dba8c6"
+    },
+    {
+      "source": "/__l5e/assets-v1/a93461bc-f8b0-4f3d-9d0b-800893539670/key-pendant.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/a93461bc-f8b0-4f3d-9d0b-800893539670/key-pendant.png",
+      "local": "/assets/flagship/stained-glass/a3bb7c25-key-pendant.png",
+      "bytes": 187043,
+      "sha256": "cf3148123045709018705527f113027c7849fa5aa868adcfe6dd72d6ac17932f"
+    },
+    {
+      "source": "/__l5e/assets-v1/cbc2483a-31ee-41a8-a65b-8ba6226f031d/rsvp-arch.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/cbc2483a-31ee-41a8-a65b-8ba6226f031d/rsvp-arch.png",
+      "local": "/assets/flagship/stained-glass/89985fbf-rsvp-arch.png",
+      "bytes": 275952,
+      "sha256": "0e0ce239764705c7e8db0cc099f31ab555b2607f7b2c4ea45bb2b9da6d51ce11"
+    },
+    {
+      "source": "/__l5e/assets-v1/839a7bb7-922f-40ce-b7ae-eefa02f33699/leaf-sway-1.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/839a7bb7-922f-40ce-b7ae-eefa02f33699/leaf-sway-1.png",
+      "local": "/assets/flagship/stained-glass/5596d74a-leaf-sway-1.png",
+      "bytes": 42460,
+      "sha256": "dcbfd851ec285bd8bdacce0b208f4192f4f0c57c381a161137898562f8a775d3"
+    },
+    {
+      "source": "/__l5e/assets-v1/a02e6ac4-a767-41e6-8a25-fb6f44fc9c57/leaf-sway-2.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/a02e6ac4-a767-41e6-8a25-fb6f44fc9c57/leaf-sway-2.png",
+      "local": "/assets/flagship/stained-glass/5f7d1642-leaf-sway-2.png",
+      "bytes": 32312,
+      "sha256": "1d16a44ba4543f739a58e8241e200160bdf5482398563c16a7d1e05ad0c8e6f6"
+    },
+    {
+      "source": "/__l5e/assets-v1/228d8cfe-1cf1-4c21-ae32-a7a16df6aad8/leaf-sway-3.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/228d8cfe-1cf1-4c21-ae32-a7a16df6aad8/leaf-sway-3.png",
+      "local": "/assets/flagship/stained-glass/7a1d2003-leaf-sway-3.png",
+      "bytes": 11056,
+      "sha256": "913421ea64fdacb4b7c8404c52662efeaf3f7b836f6df0905e32f405278b7b46"
+    },
+    {
+      "source": "https://use.typekit.net/af/a9e142/00000000000000007735d61f/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/a9e142/00000000000000007735d61f/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/stained-glass/40c99f04-l",
+      "bytes": 26196,
+      "sha256": "2a87463528306fc5faeb232ad71ef4a7ab5eb97526fcf06109b561c69a9140db"
+    },
+    {
+      "source": "https://use.typekit.net/af/aa0b66/00000000000000007735d626/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/aa0b66/00000000000000007735d626/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "local": "/assets/flagship/stained-glass/32340d6c-l",
+      "bytes": 26720,
+      "sha256": "8ff62d48ad5e1e9dbc6c0d9cf0ae89fdc0d17bf85888c7ef41587f4ae274526a"
+    },
+    {
+      "source": "https://use.typekit.net/af/aa0b66/00000000000000007735d626/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/aa0b66/00000000000000007735d626/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "local": "/assets/flagship/stained-glass/145c46c0-d",
+      "bytes": 27488,
+      "sha256": "0f5a235eac92ba7c796e409e5b00b3d93fa1e536e0e6e47e8e7649a7c1977d81"
+    },
+    {
+      "source": "https://use.typekit.net/af/a9e142/00000000000000007735d61f/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/a9e142/00000000000000007735d61f/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/stained-glass/125e17a0-d",
+      "bytes": 27076,
+      "sha256": "328acc1c013e16ef80cb435e8a379bfaead880c6ba93e72eea124dde6f76fa18"
+    },
+    {
+      "source": "https://use.typekit.net/af/aa0b66/00000000000000007735d626/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/aa0b66/00000000000000007735d626/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "local": "/assets/flagship/stained-glass/5c9fa5cf-a",
+      "bytes": 47236,
+      "sha256": "906bbed45f5703ad3495205b85202188493e426c3acee80cad258427ecdc191a"
+    },
+    {
+      "source": "https://use.typekit.net/af/9e97d3/00000000000000007735d62a/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/9e97d3/00000000000000007735d62a/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "local": "/assets/flagship/stained-glass/92cb83b5-l",
+      "bytes": 26360,
+      "sha256": "eeb08dc9c3abedcec8d6fef16d319e25842932c117235144341253c174fa3993"
+    },
+    {
+      "source": "https://use.typekit.net/af/a9e142/00000000000000007735d61f/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/a9e142/00000000000000007735d61f/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/stained-glass/e84ddf47-a",
+      "bytes": 47872,
+      "sha256": "cfb7a3832517eb9bb05930eed5f1b2756310e59bb6406acff806628f39d7a027"
+    },
+    {
+      "source": "https://use.typekit.net/af/9e97d3/00000000000000007735d62a/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/9e97d3/00000000000000007735d62a/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "local": "/assets/flagship/stained-glass/f1b8301d-d",
+      "bytes": 26944,
+      "sha256": "e67a77a9a8307cebeea545de31b7f16ff76abbcca45e7a6ad475a42d0968efa1"
+    },
+    {
+      "source": "https://use.typekit.net/af/2756d5/00000000000000007735d630/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/2756d5/00000000000000007735d630/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "local": "/assets/flagship/stained-glass/0cf03766-l",
+      "bytes": 27156,
+      "sha256": "03000c8476d1f04cfac2d5b05928ba76c001ceda76fdda39b3c31894b0ef4894"
+    },
+    {
+      "source": "/__l5e/assets-v1/6ce6be44-c5ee-4472-b183-eec469d91219/footer-garden-villa.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/6ce6be44-c5ee-4472-b183-eec469d91219/footer-garden-villa.png",
+      "local": "/assets/flagship/stained-glass/63db441e-footer-garden-villa.png",
+      "bytes": 1887706,
+      "sha256": "3c146b15c767d041ece6ef19f5af553bdba357a2cbd2abd57d1bda3de7794b34"
+    },
+    {
+      "source": "https://use.typekit.net/af/0c2360/00000000000000007735a9f9/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/0c2360/00000000000000007735a9f9/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/stained-glass/90205c36-l",
+      "bytes": 107168,
+      "sha256": "9eae93a7b13581336488861da4663493d2d483ca60f1b721bb67559e8d562c14"
+    },
+    {
+      "source": "https://use.typekit.net/af/9e97d3/00000000000000007735d62a/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/9e97d3/00000000000000007735d62a/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "local": "/assets/flagship/stained-glass/0d628c63-a",
+      "bytes": 45228,
+      "sha256": "f7913c49c09864470228fefef69538a69067ae9220585c92d4889b3cf1cf1f76"
+    },
+    {
+      "source": "https://use.typekit.net/af/2756d5/00000000000000007735d630/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/2756d5/00000000000000007735d630/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "local": "/assets/flagship/stained-glass/99e2b56b-d",
+      "bytes": 27652,
+      "sha256": "8774e6b2e47888e600c7ddef97fb58f7ef53d736103afa9b03ce878440656eb3"
+    },
+    {
+      "source": "https://use.typekit.net/af/70b9e4/000000000000000077359fde/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/70b9e4/000000000000000077359fde/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/stained-glass/4aacdbb3-l",
+      "bytes": 33068,
+      "sha256": "58004f547d2ebe0cc3165bea536c9ba2e7c80efbb57d8c06a9cf017294a81c89"
+    },
+    {
+      "source": "https://use.typekit.net/af/2756d5/00000000000000007735d630/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/2756d5/00000000000000007735d630/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "local": "/assets/flagship/stained-glass/679d7afc-a",
+      "bytes": 46888,
+      "sha256": "5be3e4af175ed44b653c3dc7461619c6d6be0cb81b29c2ed243d42494e05db8e"
+    },
+    {
+      "source": "https://use.typekit.net/af/70b9e4/000000000000000077359fde/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/70b9e4/000000000000000077359fde/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/stained-glass/b28a27ac-a",
+      "bytes": 54372,
+      "sha256": "eab82244f8ee76386a41533202aecdd548807a6c2c2b37347b620faac454bec3"
+    },
+    {
+      "source": "https://use.typekit.net/af/f2b9ee/000000000000000077359fdf/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/f2b9ee/000000000000000077359fdf/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "local": "/assets/flagship/stained-glass/e4a50203-l",
+      "bytes": 33336,
+      "sha256": "afb670954b4c1e324514866ac1916a7c58fcd68f1cafe8819be6884669f3e5e3"
+    },
+    {
+      "source": "https://use.typekit.net/af/f2b9ee/000000000000000077359fdf/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/f2b9ee/000000000000000077359fdf/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "local": "/assets/flagship/stained-glass/03404d5b-d",
+      "bytes": 33932,
+      "sha256": "a3f598d011fdee9c5c6153f6ad1c613e63bb3daec9c6a24ffb82a23fa06ebce0"
+    },
+    {
+      "source": "https://use.typekit.net/af/0c2360/00000000000000007735a9f9/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/0c2360/00000000000000007735a9f9/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/stained-glass/e08964eb-d",
+      "bytes": 124780,
+      "sha256": "a4724cc3fc8bfd73076f9d84f6370446b82bd4d9d025f7a571eb64d3be9da9c2"
+    },
+    {
+      "source": "https://use.typekit.net/af/82cdd1/000000000000000077359fe4/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/82cdd1/000000000000000077359fe4/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "local": "/assets/flagship/stained-glass/f6497ba2-l",
+      "bytes": 32840,
+      "sha256": "381aa95eea95b76b43b3f53989214736fdaa07697cc582f37033d227d19ce98d"
+    },
+    {
+      "source": "https://use.typekit.net/af/82cdd1/000000000000000077359fe4/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/82cdd1/000000000000000077359fe4/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "local": "/assets/flagship/stained-glass/f1fc7934-d",
+      "bytes": 33752,
+      "sha256": "fcce3886bd6da4e6bd159b3c3384c333a7e7a5d042a0f42dd2ee82ae25282256"
+    },
+    {
+      "source": "https://use.typekit.net/af/70b9e4/000000000000000077359fde/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/70b9e4/000000000000000077359fde/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/stained-glass/2fc3c371-d",
+      "bytes": 33772,
+      "sha256": "f2250bc5964c53f392f16e72aee18a2892cbe6ff5eff4989d023e0b543d785c2"
+    },
+    {
+      "source": "https://use.typekit.net/af/f2b9ee/000000000000000077359fdf/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/f2b9ee/000000000000000077359fdf/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "local": "/assets/flagship/stained-glass/05ffe4cd-a",
+      "bytes": 52988,
+      "sha256": "c0ddaeb487f3bb5c7ca3893616318d1433daca124a6cfb8b7e69420c02964272"
+    },
+    {
+      "source": "https://use.typekit.net/af/13668d/000000000000000077359fe5/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/13668d/000000000000000077359fe5/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "local": "/assets/flagship/stained-glass/16b8eeb0-l",
+      "bytes": 33064,
+      "sha256": "3a7464ce3ba657cca0b5fc4710f250b8d7dd8049de248301fe41347106d7767e"
+    },
+    {
+      "source": "https://use.typekit.net/af/13668d/000000000000000077359fe5/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/13668d/000000000000000077359fe5/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "local": "/assets/flagship/stained-glass/a4ebe98f-d",
+      "bytes": 33676,
+      "sha256": "4c0ebf098423dcef7c66eeb8f4ff141ef8935feff1671fe18a6b2dc1ac9cdfdb"
+    },
+    {
+      "source": "https://use.typekit.net/af/3f3fe9/000000000000000077572fd4/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/3f3fe9/000000000000000077572fd4/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/stained-glass/9ae659be-l",
+      "bytes": 40348,
+      "sha256": "79e04cce64fe3ad09fe83f2de47d1f9e4bb02e0e90de0699b38eb73271ae5b43"
+    },
+    {
+      "source": "https://use.typekit.net/af/3f3fe9/000000000000000077572fd4/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/3f3fe9/000000000000000077572fd4/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/stained-glass/192595d0-d",
+      "bytes": 40928,
+      "sha256": "d04e65101bcc710a54d04b35db4ddf156fe6442504475a88db1f50413b34f58d"
+    },
+    {
+      "source": "https://use.typekit.net/af/3f3fe9/000000000000000077572fd4/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/3f3fe9/000000000000000077572fd4/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/stained-glass/beb30694-a",
+      "bytes": 53900,
+      "sha256": "a90538e59dff226296d259663571e6c2f20cc82d64aa35923a2bc3bd313e52be"
+    },
+    {
+      "source": "https://use.typekit.net/af/0c2360/00000000000000007735a9f9/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/0c2360/00000000000000007735a9f9/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/stained-glass/86248817-a",
+      "bytes": 377416,
+      "sha256": "e56903661634d64089357f0a584dfa87a8058c2fd34a6c020db2c8e4922f08d4"
+    },
+    {
+      "source": "https://use.typekit.net/af/13668d/000000000000000077359fe5/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/13668d/000000000000000077359fe5/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "local": "/assets/flagship/stained-glass/5aa86c9f-a",
+      "bytes": 53980,
+      "sha256": "b91dacabfd081d101b42a4ee62533da9b5578069c6ec91185bcf9e6dbd534928"
+    },
+    {
+      "source": "https://use.typekit.net/af/82cdd1/000000000000000077359fe4/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/82cdd1/000000000000000077359fe4/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "local": "/assets/flagship/stained-glass/f682b411-a",
+      "bytes": 54680,
+      "sha256": "ec19177610cbfe83c69936ed30186f519952071a967a6de23d054ad9310cf066"
+    },
+    {
+      "source": "https://use.typekit.net/af/45c4c2/0000000000000000775d818f/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/45c4c2/0000000000000000775d818f/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "local": "/assets/flagship/stained-glass/2fa86caf-a",
+      "bytes": 189328,
+      "sha256": "f0c74076291e304183e8cb726bd170031c89966b89686389b48dfbb18d810247"
+    },
+    {
+      "source": "https://use.typekit.net/af/45c4c2/0000000000000000775d818f/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/45c4c2/0000000000000000775d818f/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "local": "/assets/flagship/stained-glass/0464c11c-l",
+      "bytes": 130744,
+      "sha256": "df757c88f7e51fb8584f27e9365f9931910944762d53c7cc7344adc33a9c9c3f"
+    },
+    {
+      "source": "https://use.typekit.net/af/45c4c2/0000000000000000775d818f/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/45c4c2/0000000000000000775d818f/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "local": "/assets/flagship/stained-glass/95c10106-d",
+      "bytes": 137308,
+      "sha256": "6da998fb5c141fe351f3884488406011ff16e1b3ceeb00665071b9d6587d444c"
+    },
+    {
+      "source": "https://use.typekit.net/af/b09f95/0000000000000000775d8193/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/b09f95/0000000000000000775d8193/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/stained-glass/659ac3bd-l",
+      "bytes": 132232,
+      "sha256": "0723736b33e9b1b41a1735bcbbd3f82bb3756e31583a64285e8c6a99b8acc197"
+    },
+    {
+      "source": "https://use.typekit.net/af/dcb59b/0000000000000000775d8191/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/dcb59b/0000000000000000775d8191/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "local": "/assets/flagship/stained-glass/823a4dca-l",
+      "bytes": 128860,
+      "sha256": "f916d02d86881820e881e4566188487f9954a5fe2aac6d7ab30533853c5a629a"
+    },
+    {
+      "source": "https://use.typekit.net/af/b09f95/0000000000000000775d8193/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/b09f95/0000000000000000775d8193/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/stained-glass/6c6ab087-d",
+      "bytes": 139440,
+      "sha256": "394765a3903981a712ea19665c69487a485e1d2321277e293f43d64f26af5243"
+    },
+    {
+      "source": "https://use.typekit.net/af/a9160b/0000000000000000775d8194/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/a9160b/0000000000000000775d8194/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "local": "/assets/flagship/stained-glass/9425c766-l",
+      "bytes": 132532,
+      "sha256": "b8c80b2b9d436ce3af151e9e76120b85a65ced3a753f7c5a0661d3e770f52f22"
+    },
+    {
+      "source": "https://use.typekit.net/af/dcb59b/0000000000000000775d8191/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/dcb59b/0000000000000000775d8191/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "local": "/assets/flagship/stained-glass/2336a7ec-d",
+      "bytes": 135768,
+      "sha256": "65e7fae757c1c03a30ee10607ec46f719b6dbb0eaa4818eb26eab4232d1cea3e"
+    },
+    {
+      "source": "https://use.typekit.net/af/dcb59b/0000000000000000775d8191/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/dcb59b/0000000000000000775d8191/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "local": "/assets/flagship/stained-glass/ce35fc30-a",
+      "bytes": 188020,
+      "sha256": "65bf83afcc6e95209c65d63fd9db9d6fb676de097a7b0e7bf8ed5e6b801e8ec8"
+    },
+    {
+      "source": "https://use.typekit.net/af/b09f95/0000000000000000775d8193/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/b09f95/0000000000000000775d8193/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/stained-glass/75fe411d-a",
+      "bytes": 193508,
+      "sha256": "676a111d1b30679b3f9da20681f624365937f30db16295d49f292c81b9f712d2"
+    },
+    {
+      "source": "https://use.typekit.net/af/a9160b/0000000000000000775d8194/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/a9160b/0000000000000000775d8194/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "local": "/assets/flagship/stained-glass/f7ce2754-d",
+      "bytes": 140664,
+      "sha256": "f72363b2c0fc667b3517bb9eec42ea80da4092ce2057253962ea569f20f0ef63"
+    },
+    {
+      "source": "https://use.typekit.net/af/a9160b/0000000000000000775d8194/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/a9160b/0000000000000000775d8194/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "local": "/assets/flagship/stained-glass/d0dda55e-a",
+      "bytes": 195504,
+      "sha256": "10d246df5f1d8ce3031c49d208da2692ea10901caefbe0c970b979e567f82227"
+    },
+    {
+      "source": "https://use.typekit.net/af/864086/0000000000000000775d8190/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/864086/0000000000000000775d8190/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "local": "/assets/flagship/stained-glass/34b6bec2-l",
+      "bytes": 122044,
+      "sha256": "7174c521a47ae402cad907950d84072a006715e844ecf231f41814cb9e0f6994"
+    },
+    {
+      "source": "https://use.typekit.net/af/864086/0000000000000000775d8190/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/864086/0000000000000000775d8190/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "local": "/assets/flagship/stained-glass/01fe61cb-d",
+      "bytes": 129908,
+      "sha256": "063d0fd6b690a48e644998573542a733d5ed9d272be865fc233e18881a0fd747"
+    },
+    {
+      "source": "https://use.typekit.net/af/157a65/0000000000000000775d8192/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/157a65/0000000000000000775d8192/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "local": "/assets/flagship/stained-glass/7661aa79-l",
+      "bytes": 127380,
+      "sha256": "4f997a11a678ce6bef1102dc5bc243e77f8db3bb4b9256a5d6e40cb61f3ef5d0"
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/ballet/v30/QGYyz_MYZA-HM4NjuGOVnUEXme1I4Xi3C4E.ttf",
+      "sourceUrl": "https://fonts.gstatic.com/s/ballet/v30/QGYyz_MYZA-HM4NjuGOVnUEXme1I4Xi3C4E.ttf",
+      "local": "/assets/flagship/stained-glass/32250f1d-QGYyz_MYZA-HM4NjuGOVnUEXme1I4Xi3C4E.ttf",
+      "bytes": 74360,
+      "sha256": "549163473af24d728d820b2cd14ed4f9b50a6ffce1d3e03edc5d97a2de843ffa"
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd5rDDOjw.ttf",
+      "sourceUrl": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd5rDDOjw.ttf",
+      "local": "/assets/flagship/stained-glass/b1918663-co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd5rDDOjw.ttf",
+      "bytes": 292904,
+      "sha256": "b13a316f34ce9c69f634b729bc733ab21512e823e6f801f1e427ac4be7364979"
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd58jDOjw.ttf",
+      "sourceUrl": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd58jDOjw.ttf",
+      "local": "/assets/flagship/stained-glass/374c6c52-co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd58jDOjw.ttf",
+      "bytes": 293036,
+      "sha256": "0b9a8a33cfaa624d30f70f9b6686da769b319b8c37a55af16e29fef690108bbf"
+    },
+    {
+      "source": "https://use.typekit.net/af/157a65/0000000000000000775d8192/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/157a65/0000000000000000775d8192/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "local": "/assets/flagship/stained-glass/79975770-a",
+      "bytes": 187624,
+      "sha256": "ac0a8004346512d521244d25323fcfb37e45c3a524f160fb8a54e2ddbc8ba7dd"
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd5wDDOjw.ttf",
+      "sourceUrl": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd5wDDOjw.ttf",
+      "local": "/assets/flagship/stained-glass/73152f8d-co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd5wDDOjw.ttf",
+      "bytes": 293244,
+      "sha256": "14efb9443652199ade5bc6ba8637b4084acce40a58368a3808f84f55667e3e90"
+    },
+    {
+      "source": "https://use.typekit.net/af/864086/0000000000000000775d8190/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/864086/0000000000000000775d8190/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "local": "/assets/flagship/stained-glass/59624aa9-a",
+      "bytes": 180252,
+      "sha256": "fe5464accd87709d401f90122d74ec0b485f76032b03186467639cd8029dfc1d"
+    },
+    {
+      "source": "https://use.typekit.net/af/157a65/0000000000000000775d8192/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/157a65/0000000000000000775d8192/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "local": "/assets/flagship/stained-glass/84f00f37-d",
+      "bytes": 135772,
+      "sha256": "65c08bf1da705228bb0ece32b950758a13ee735cf4971f295397fe922be4b492"
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3umX5slCNuHLi8bLeY9MK7whWMhyjypVO7abI26QOD_qE6GnM.ttf",
+      "sourceUrl": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3umX5slCNuHLi8bLeY9MK7whWMhyjypVO7abI26QOD_qE6GnM.ttf",
+      "local": "/assets/flagship/stained-glass/911bf559-co3umX5slCNuHLi8bLeY9MK7whWMhyjypVO7abI26QOD_qE6GnM.ttf",
+      "bytes": 289788,
+      "sha256": "63e313fb9c65b6b2e177222010bbea911bfc5c79bee0fb69f8246fcc4e08c93a"
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd5LDfOjw.ttf",
+      "sourceUrl": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd5LDfOjw.ttf",
+      "local": "/assets/flagship/stained-glass/9872c1a0-co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd5LDfOjw.ttf",
+      "bytes": 293312,
+      "sha256": "8ddad6fd245858b13f48aeb9977c0f2531469571ca6b7a98ef490d7f549ade58"
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd5FTfOjw.ttf",
+      "sourceUrl": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd5FTfOjw.ttf",
+      "local": "/assets/flagship/stained-glass/acfcbeb8-co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd5FTfOjw.ttf",
+      "bytes": 293116,
+      "sha256": "33b46553a852ffd5ee5d7c6301a135c779e1d97d8938cc67be14e4060edb6431"
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3umX5slCNuHLi8bLeY9MK7whWMhyjypVO7abI26QOD_iE9GnM.ttf",
+      "sourceUrl": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3umX5slCNuHLi8bLeY9MK7whWMhyjypVO7abI26QOD_iE9GnM.ttf",
+      "local": "/assets/flagship/stained-glass/705776b6-co3umX5slCNuHLi8bLeY9MK7whWMhyjypVO7abI26QOD_iE9GnM.ttf",
+      "bytes": 290392,
+      "sha256": "69e7ae35cba23d962227b86f99217c250e642e4c6f6104b4f3ec465039e4e2d8"
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3umX5slCNuHLi8bLeY9MK7whWMhyjypVO7abI26QOD_s06GnM.ttf",
+      "sourceUrl": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3umX5slCNuHLi8bLeY9MK7whWMhyjypVO7abI26QOD_s06GnM.ttf",
+      "local": "/assets/flagship/stained-glass/75407d22-co3umX5slCNuHLi8bLeY9MK7whWMhyjypVO7abI26QOD_s06GnM.ttf",
+      "bytes": 290496,
+      "sha256": "1724047c8988ca5155bff667bc48fa52e97d57aabc6b42eebbf986f21a4be20b"
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3umX5slCNuHLi8bLeY9MK7whWMhyjypVO7abI26QOD_hg9GnM.ttf",
+      "sourceUrl": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3umX5slCNuHLi8bLeY9MK7whWMhyjypVO7abI26QOD_hg9GnM.ttf",
+      "local": "/assets/flagship/stained-glass/a9565983-co3umX5slCNuHLi8bLeY9MK7whWMhyjypVO7abI26QOD_hg9GnM.ttf",
+      "bytes": 289992,
+      "sha256": "440daf036a35abd6d2bdfa92b14ab0f150cce690fe6d767ee5cab15a1a10a87f"
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3umX5slCNuHLi8bLeY9MK7whWMhyjypVO7abI26QOD_v86GnM.ttf",
+      "sourceUrl": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3umX5slCNuHLi8bLeY9MK7whWMhyjypVO7abI26QOD_v86GnM.ttf",
+      "local": "/assets/flagship/stained-glass/bb8f3c3b-co3umX5slCNuHLi8bLeY9MK7whWMhyjypVO7abI26QOD_v86GnM.ttf",
+      "bytes": 290236,
+      "sha256": "6d37a86241a25d63f8fe6018b4c083449886b7165c1acb15edd0f574f690ecf7"
+    },
+    {
+      "source": "/__l5e/assets-v1/c3e0503e-b381-492c-bc4c-7eddd42ba10c/gazebo-vines-mask.png",
+      "sourceUrl": "https://13-15-stainedglass-template.thedigitalyes.com/__l5e/assets-v1/c3e0503e-b381-492c-bc4c-7eddd42ba10c/gazebo-vines-mask.png",
+      "local": "/assets/flagship/stained-glass/54efaebf-gazebo-vines-mask.png",
+      "bytes": 41797,
+      "sha256": "553da17d4580c5864f1e2716ac2b375a3d1e494711f06d707b8385d949e581cc"
+    }
+  ]
+}

@@ -1,0 +1,454 @@
+{
+  "reference": "https://premiumelegante.thedigitalyes.com/",
+  "downloaded": "2026-11-03",
+  "assets": [
+    {
+      "source": "/assets/watermark-CS4rvcxG.png",
+      "sourceUrl": "https://premiumelegante.thedigitalyes.com/assets/watermark-CS4rvcxG.png",
+      "local": "/assets/flagship/royal/e6c93f18-watermark-CS4rvcxG.png",
+      "bytes": 367090,
+      "sha256": "a1f29c9e979863432499872cf16f8489f4aa571914a73cc828f3c83f6a96b8af"
+    },
+    {
+      "source": "/assets/intro-poster-new-BU7qGwfU.jpg",
+      "sourceUrl": "https://premiumelegante.thedigitalyes.com/assets/intro-poster-new-BU7qGwfU.jpg",
+      "local": "/assets/flagship/royal/197f9c19-intro-poster-new-BU7qGwfU.jpg",
+      "bytes": 774607,
+      "sha256": "83ec494c8b259ebd9984ab63970b769327ae5e6107ee619a93a2083fad571e8b"
+    },
+    {
+      "source": "/assets/intro-video-new-XmwQeafK.mp4",
+      "sourceUrl": "https://premiumelegante.thedigitalyes.com/assets/intro-video-new-XmwQeafK.mp4",
+      "local": "/assets/flagship/royal/a3dc3cfd-intro-video-new-XmwQeafK.mp4",
+      "bytes": 794685,
+      "sha256": "7a4fc8dc3baa955a5a39005367213b77b50bb1b03fcd1154d5ca2b8ef969c372"
+    },
+    {
+      "source": "/assets/gallery-2-LJ9SqFT7.jpg",
+      "sourceUrl": "https://premiumelegante.thedigitalyes.com/assets/gallery-2-LJ9SqFT7.jpg",
+      "local": "/assets/flagship/royal/64ca4f54-gallery-2-LJ9SqFT7.jpg",
+      "bytes": 67227,
+      "sha256": "bdfc0eb30caacf23e3f596e5889614686ffc3562c3a09d5671140815d75be156"
+    },
+    {
+      "source": "/assets/white-textured-paper-KasY8RAJ.png",
+      "sourceUrl": "https://premiumelegante.thedigitalyes.com/assets/white-textured-paper-KasY8RAJ.png",
+      "local": "/assets/flagship/royal/e8017f02-white-textured-paper-KasY8RAJ.png",
+      "bytes": 1403386,
+      "sha256": "02ea415ce867fe2f5ac91d3d801bef794b0a603607fa9a9a571f25031b276037"
+    },
+    {
+      "source": "/assets/gallery-3-BqTMMcNY.jpg",
+      "sourceUrl": "https://premiumelegante.thedigitalyes.com/assets/gallery-3-BqTMMcNY.jpg",
+      "local": "/assets/flagship/royal/c003b3ac-gallery-3-BqTMMcNY.jpg",
+      "bytes": 94112,
+      "sha256": "0101c9a264186db075c96f615d4fe139a2f35caa32efe423b0301d111012bcec"
+    },
+    {
+      "source": "/assets/gallery-4-D3agzgGx.jpg",
+      "sourceUrl": "https://premiumelegante.thedigitalyes.com/assets/gallery-4-D3agzgGx.jpg",
+      "local": "/assets/flagship/royal/9b8cddc7-gallery-4-D3agzgGx.jpg",
+      "bytes": 83566,
+      "sha256": "4165d92822d28b2d78386d4324c556f91843f906e54babce8a967f2016ec1818"
+    },
+    {
+      "source": "/assets/gallery-5-Ca9X0lht.jpg",
+      "sourceUrl": "https://premiumelegante.thedigitalyes.com/assets/gallery-5-Ca9X0lht.jpg",
+      "local": "/assets/flagship/royal/ebc5d535-gallery-5-Ca9X0lht.jpg",
+      "bytes": 108300,
+      "sha256": "90050c8f29ab1287d11ace72c9645baa156ffb16faf21e33fcae7956d243bd5d"
+    },
+    {
+      "source": "/assets/hero-video-BkP1eoiB.mp4",
+      "sourceUrl": "https://premiumelegante.thedigitalyes.com/assets/hero-video-BkP1eoiB.mp4",
+      "local": "/assets/flagship/royal/56b6c5d6-hero-video-BkP1eoiB.mp4",
+      "bytes": 13033173,
+      "sha256": "1d4c355a259c69a580e00b5e6330f5cc07d8ff76408c0b75619270ab3a189220"
+    },
+    {
+      "source": "/assets/floral-vase-6x28LN74.png",
+      "sourceUrl": "https://premiumelegante.thedigitalyes.com/assets/floral-vase-6x28LN74.png",
+      "local": "/assets/flagship/royal/574ed6a6-floral-vase-6x28LN74.png",
+      "bytes": 355469,
+      "sha256": "daddcdb70f56439d7c347ea291b8bf10e80ae06f0352486a774c4555783f6b91"
+    },
+    {
+      "source": "/assets/gallery-1-CndRyTXZ.jpg",
+      "sourceUrl": "https://premiumelegante.thedigitalyes.com/assets/gallery-1-CndRyTXZ.jpg",
+      "local": "/assets/flagship/royal/b10a2351-gallery-1-CndRyTXZ.jpg",
+      "bytes": 98551,
+      "sha256": "bd59a2579f89b53925e323e22d2b96c317dbc5f441f93ba83f199a1b324f5530"
+    },
+    {
+      "source": "/assets/venue-hedsor-DSq2yQw3.png",
+      "sourceUrl": "https://premiumelegante.thedigitalyes.com/assets/venue-hedsor-DSq2yQw3.png",
+      "local": "/assets/flagship/royal/18fb0917-venue-hedsor-DSq2yQw3.png",
+      "bytes": 680328,
+      "sha256": "f326cb08b2db907b1689d5e0ad2869ace544a7dbf98cf3c79e1f9c6563adc703"
+    },
+    {
+      "source": "/assets/champagne-tower-Or6MBjHQ.png",
+      "sourceUrl": "https://premiumelegante.thedigitalyes.com/assets/champagne-tower-Or6MBjHQ.png",
+      "local": "/assets/flagship/royal/cf5b2e58-champagne-tower-Or6MBjHQ.png",
+      "bytes": 411768,
+      "sha256": "66b99a986c6c2381b725d0cf8d8ba2cb6e93dc8b0dd3d3b9211f518ee2fcfdad"
+    },
+    {
+      "source": "/assets/bow-illustration-DWFdIPv5.png",
+      "sourceUrl": "https://premiumelegante.thedigitalyes.com/assets/bow-illustration-DWFdIPv5.png",
+      "local": "/assets/flagship/royal/79104cb8-bow-illustration-DWFdIPv5.png",
+      "bytes": 101393,
+      "sha256": "c175e58547d31c073b686a6c383df0deb1293e6b5d9357d41c5059c695184e7f"
+    },
+    {
+      "source": "/assets/venue-hedsor-front-COdUzTcT.png",
+      "sourceUrl": "https://premiumelegante.thedigitalyes.com/assets/venue-hedsor-front-COdUzTcT.png",
+      "local": "/assets/flagship/royal/4b7d9d0a-venue-hedsor-front-COdUzTcT.png",
+      "bytes": 512116,
+      "sha256": "a8e46b0e5af223fe4150d0e55aea1dc9d77ac8c4eb5bb3eda4deaeb36593a581"
+    },
+    {
+      "source": "/assets/teacup-illustration-LM5oRWej.png",
+      "sourceUrl": "https://premiumelegante.thedigitalyes.com/assets/teacup-illustration-LM5oRWej.png",
+      "local": "/assets/flagship/royal/d664a1a1-teacup-illustration-LM5oRWej.png",
+      "bytes": 55004,
+      "sha256": "99f4e42420de305d6ea95da07b3c95f8f1caaaae9389a961e13915849535635d"
+    },
+    {
+      "source": "/assets/sunday-lunch-illustration-Dn7RcvEs.png",
+      "sourceUrl": "https://premiumelegante.thedigitalyes.com/assets/sunday-lunch-illustration-Dn7RcvEs.png",
+      "local": "/assets/flagship/royal/fdba1fea-sunday-lunch-illustration-Dn7RcvEs.png",
+      "bytes": 1309999,
+      "sha256": "fe983d3e985f144602dfe6611d1287b0e72fa0806fa6d4f76fccea2073052ba2"
+    },
+    {
+      "source": "/assets/cupid-illustration-BO3_EWaD.png",
+      "sourceUrl": "https://premiumelegante.thedigitalyes.com/assets/cupid-illustration-BO3_EWaD.png",
+      "local": "/assets/flagship/royal/1b2c0f35-cupid-illustration-BO3_EWaD.png",
+      "bytes": 113839,
+      "sha256": "c59745490891ab101ff6904f129ba85a2735f175a512a73662e3afa1a5be2505"
+    },
+    {
+      "source": "/assets/matchbox-illustration-Cje_YC4u.png",
+      "sourceUrl": "https://premiumelegante.thedigitalyes.com/assets/matchbox-illustration-Cje_YC4u.png",
+      "local": "/assets/flagship/royal/c0b206c2-matchbox-illustration-Cje_YC4u.png",
+      "bytes": 145578,
+      "sha256": "0db5330475f5d3ee6e07e8a2a61ba5c67e43948477171f27220999e7ac4cedc4"
+    },
+    {
+      "source": "/assets/locket-illustration-B7vFK6H-.png",
+      "sourceUrl": "https://premiumelegante.thedigitalyes.com/assets/locket-illustration-B7vFK6H-.png",
+      "local": "/assets/flagship/royal/2e682d29-locket-illustration-B7vFK6H-.png",
+      "bytes": 322111,
+      "sha256": "473e62c801e29fb6a572bf43b4f82b54f9c9c891bd26d6237e8720b105d1784d"
+    },
+    {
+      "source": "/assets/gallery-6-KQCB4EG9.jpg",
+      "sourceUrl": "https://premiumelegante.thedigitalyes.com/assets/gallery-6-KQCB4EG9.jpg",
+      "local": "/assets/flagship/royal/489f6d8c-gallery-6-KQCB4EG9.jpg",
+      "bytes": 72777,
+      "sha256": "e0a03950918a63099555f4c4ca9de43554991b6cfcf50c26ba08af36bb76e919"
+    },
+    {
+      "source": "/assets/gallery-7-CHFbVCJd.jpg",
+      "sourceUrl": "https://premiumelegante.thedigitalyes.com/assets/gallery-7-CHFbVCJd.jpg",
+      "local": "/assets/flagship/royal/0e0b4e0b-gallery-7-CHFbVCJd.jpg",
+      "bytes": 139145,
+      "sha256": "1a73f5de5d4b97ee9e9fd638874b748f3839f5e986df8f77816a2a5e13415b2f"
+    },
+    {
+      "source": "/assets/gallery-9-C_h0QLUe.jpg",
+      "sourceUrl": "https://premiumelegante.thedigitalyes.com/assets/gallery-9-C_h0QLUe.jpg",
+      "local": "/assets/flagship/royal/c88264d6-gallery-9-C_h0QLUe.jpg",
+      "bytes": 94472,
+      "sha256": "f05a0e6e4e6c3b737056f8ae860a3e0771b0b42f0478e10f55f690ffa3c99688"
+    },
+    {
+      "source": "/assets/gallery-8-LSBB5t-f.jpg",
+      "sourceUrl": "https://premiumelegante.thedigitalyes.com/assets/gallery-8-LSBB5t-f.jpg",
+      "local": "/assets/flagship/royal/4d65b3c0-gallery-8-LSBB5t-f.jpg",
+      "bytes": 79334,
+      "sha256": "e95827f1958d239e246560eb0b6b00887fbc969081b090b0904f21ab7d65c496"
+    },
+    {
+      "source": "/assets/gallery-10-BbneIAac.jpg",
+      "sourceUrl": "https://premiumelegante.thedigitalyes.com/assets/gallery-10-BbneIAac.jpg",
+      "local": "/assets/flagship/royal/480ad3a3-gallery-10-BbneIAac.jpg",
+      "bytes": 70640,
+      "sha256": "40d975dd4abf3da9510254f5efac65f7eab2fb90c3516747e52974415916bbbc"
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN-XC.ttf",
+      "sourceUrl": "https://fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN-XC.ttf",
+      "local": "/assets/flagship/royal/592c5d8f-RWmMoKWR9v4ksMfaWd_JN-XC.ttf",
+      "bytes": 362736,
+      "sha256": "9d76b8c67f5289c310114c935c5c3831fc3c25bc2bb888a28210c1659d701b9e"
+    },
+    {
+      "source": "/assets/wedding-rings-_6IG5mf0.png",
+      "sourceUrl": "https://premiumelegante.thedigitalyes.com/assets/wedding-rings-_6IG5mf0.png",
+      "local": "/assets/flagship/royal/1033fcb4-wedding-rings-_6IG5mf0.png",
+      "bytes": 62796,
+      "sha256": "929d7ed878d823140c3e5a60bcaf151310a077e6611a5b3fe19b884eb32e1809"
+    },
+    {
+      "source": "/assets/swans-framed-ByH4RE7t.png",
+      "sourceUrl": "https://premiumelegante.thedigitalyes.com/assets/swans-framed-ByH4RE7t.png",
+      "local": "/assets/flagship/royal/40f82f14-swans-framed-ByH4RE7t.png",
+      "bytes": 515308,
+      "sha256": "d5c8eaa86683d61cd0748a6270b2b2179bce66b964ad7f0ea9a702bb95fc92db"
+    },
+    {
+      "source": "https://use.typekit.net/af/c8b00c/00000000000000007735d573/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/c8b00c/00000000000000007735d573/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/royal/09f52eb6-l",
+      "bytes": 118980,
+      "sha256": "522107d9b90a704100c6a93862fe67275133158485ae8047e7f9b23a0c4b11d3"
+    },
+    {
+      "source": "https://use.typekit.net/af/7273b4/00000000000000007735d57c/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/7273b4/00000000000000007735d57c/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "local": "/assets/flagship/royal/89f791f3-l",
+      "bytes": 120664,
+      "sha256": "995ab4bce955a878d25eddf3fb72478f02c78c97e2d0e6ef5e7afbe787913a93"
+    },
+    {
+      "source": "https://use.typekit.net/af/c8b00c/00000000000000007735d573/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/c8b00c/00000000000000007735d573/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/royal/7fa77a7b-d",
+      "bytes": 125588,
+      "sha256": "056ceb8593017a2a6b5fe2a7a77e41bf93b69f179822f9a8cf09e19009d1789a"
+    },
+    {
+      "source": "https://use.typekit.net/af/8d65c5/00000000000000007735e1ee/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/8d65c5/00000000000000007735e1ee/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/royal/b27612d2-l",
+      "bytes": 31368,
+      "sha256": "4dcfe0228c7235b23b623e3c567535cc66b2f9ff14e635de19f5a81f51e2a7ed"
+    },
+    {
+      "source": "https://use.typekit.net/af/7273b4/00000000000000007735d57c/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/7273b4/00000000000000007735d57c/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "local": "/assets/flagship/royal/05ac87ce-d",
+      "bytes": 127524,
+      "sha256": "a134a33b29e3fe04a5a83ecbea09f1b66b009208467ce6e44191f43a9b0ec629"
+    },
+    {
+      "source": "https://use.typekit.net/af/7273b4/00000000000000007735d57c/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/7273b4/00000000000000007735d57c/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "local": "/assets/flagship/royal/0b331c95-a",
+      "bytes": 202048,
+      "sha256": "a7c8bda07c4fed982d133ad0a0b36693ab32e56e1ecc8610661601546b0e1226"
+    },
+    {
+      "source": "https://use.typekit.net/af/e4ac76/0000000000000000775890b7/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/e4ac76/0000000000000000775890b7/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "local": "/assets/flagship/royal/5e0dd605-l",
+      "bytes": 34204,
+      "sha256": "6a336ff5bf0890f77f125ed959ed089fe68d9a8b82bba236d03228134950de2f"
+    },
+    {
+      "source": "https://use.typekit.net/af/8d65c5/00000000000000007735e1ee/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/8d65c5/00000000000000007735e1ee/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/royal/dec653d2-d",
+      "bytes": 32220,
+      "sha256": "71dcc37628b33adc32039d53260d0017d4d72474a02c95007bea83f2f0c924a9"
+    },
+    {
+      "source": "https://use.typekit.net/af/8d65c5/00000000000000007735e1ee/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/8d65c5/00000000000000007735e1ee/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/royal/0e4f4300-a",
+      "bytes": 48476,
+      "sha256": "88ad1a6ee54a35ed33b57e0ddc3deb2b182eed2be88603a2cc4f9b868db2ad83"
+    },
+    {
+      "source": "https://use.typekit.net/af/83955f/0000000000000000775890b9/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/83955f/0000000000000000775890b9/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "local": "/assets/flagship/royal/401135f5-l",
+      "bytes": 36560,
+      "sha256": "a98db1c2c25dbc0d1655961a4be716356a7d6488da9f126e0947e583e4590c33"
+    },
+    {
+      "source": "https://use.typekit.net/af/e4ac76/0000000000000000775890b7/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/e4ac76/0000000000000000775890b7/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "local": "/assets/flagship/royal/07dba939-a",
+      "bytes": 75680,
+      "sha256": "31d29bc69d4d9fb75881a972066a82661ea5fb03fd8cbbe8ea59a35ec9d08f08"
+    },
+    {
+      "source": "https://use.typekit.net/af/e4ac76/0000000000000000775890b7/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/e4ac76/0000000000000000775890b7/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "local": "/assets/flagship/royal/9b1e7eca-d",
+      "bytes": 35420,
+      "sha256": "89c6ea49577f99bdfbf97badd1bacdf68fcaa5de8e268325b2d79a125a63eba6"
+    },
+    {
+      "source": "https://use.typekit.net/af/83955f/0000000000000000775890b9/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/83955f/0000000000000000775890b9/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "local": "/assets/flagship/royal/fcfea7c2-a",
+      "bytes": 74944,
+      "sha256": "67e64be7e947e673abbad1f0c1cfd898f918800f3429a6cec56a5e07656fc71a"
+    },
+    {
+      "source": "https://use.typekit.net/af/83955f/0000000000000000775890b9/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/83955f/0000000000000000775890b9/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "local": "/assets/flagship/royal/69cfcc36-d",
+      "bytes": 38896,
+      "sha256": "2590381b6806947de31041ce047432a909d7c65a690a2b4abfeec84801906bf3"
+    },
+    {
+      "source": "https://use.typekit.net/af/190059/0000000000000000775890bb/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/190059/0000000000000000775890bb/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "local": "/assets/flagship/royal/231fee48-l",
+      "bytes": 37472,
+      "sha256": "d55796ca554190450a1a928e1e83d641f88d115652e745df07572278dae797f8"
+    },
+    {
+      "source": "https://use.typekit.net/af/190059/0000000000000000775890bb/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/190059/0000000000000000775890bb/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "local": "/assets/flagship/royal/2195477d-d",
+      "bytes": 39332,
+      "sha256": "cba6ebd3c15fc30f4087eb88d6dad3881ac68ac4f9d43021bbdda79b57be55e1"
+    },
+    {
+      "source": "https://use.typekit.net/af/190059/0000000000000000775890bb/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/190059/0000000000000000775890bb/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3",
+      "local": "/assets/flagship/royal/491f7db5-a",
+      "bytes": 75452,
+      "sha256": "159e066d1ba27046015d747a387e19d2d3fb86603bbba3a9a9b4a1fca1d683d8"
+    },
+    {
+      "source": "https://use.typekit.net/af/9be9af/00000000000000007735c775/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3",
+      "sourceUrl": "https://use.typekit.net/af/9be9af/00000000000000007735c775/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3",
+      "local": "/assets/flagship/royal/8ffddc93-l",
+      "bytes": 47696,
+      "sha256": "c0305424b00736bd1e0b139d6aeee089e98e2bf95520ab64a90467871189b58f"
+    },
+    {
+      "source": "https://use.typekit.net/af/34a167/00000000000000007735c777/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n5&v=3",
+      "sourceUrl": "https://use.typekit.net/af/34a167/00000000000000007735c777/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n5&v=3",
+      "local": "/assets/flagship/royal/04ee80f4-l",
+      "bytes": 49244,
+      "sha256": "866090be328f23604a733389c6232567a7c5c58a503e6c621c0ade7f8d510447"
+    },
+    {
+      "source": "https://use.typekit.net/af/9be9af/00000000000000007735c775/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3",
+      "sourceUrl": "https://use.typekit.net/af/9be9af/00000000000000007735c775/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3",
+      "local": "/assets/flagship/royal/0aa23d55-a",
+      "bytes": 88148,
+      "sha256": "4d891a4813a67b5f978ce295ad28dceea00c1e919968df9ed86281fab938f189"
+    },
+    {
+      "source": "https://use.typekit.net/af/34a167/00000000000000007735c777/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n5&v=3",
+      "sourceUrl": "https://use.typekit.net/af/34a167/00000000000000007735c777/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n5&v=3",
+      "local": "/assets/flagship/royal/f5cda922-d",
+      "bytes": 50404,
+      "sha256": "ea21c465d727d5e6536a231b3beee8c11b6d60eb92062801c56599c50e1bfbf6"
+    },
+    {
+      "source": "https://use.typekit.net/af/8aadb1/0000000000000000774b9712/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/8aadb1/0000000000000000774b9712/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/royal/009d4848-l",
+      "bytes": 44256,
+      "sha256": "e4695ca0adae5f1f991b2c686a0f3600eee6395c89388d91e67ac2b34cd7fc36"
+    },
+    {
+      "source": "https://use.typekit.net/af/9be9af/00000000000000007735c775/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3",
+      "sourceUrl": "https://use.typekit.net/af/9be9af/00000000000000007735c775/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3",
+      "local": "/assets/flagship/royal/d8187202-d",
+      "bytes": 49192,
+      "sha256": "2b62c6d5031d5927b6008b44f75dd25e4c635c37471de4aacc95f7589e278054"
+    },
+    {
+      "source": "https://use.typekit.net/af/34a167/00000000000000007735c777/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n5&v=3",
+      "sourceUrl": "https://use.typekit.net/af/34a167/00000000000000007735c777/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n5&v=3",
+      "local": "/assets/flagship/royal/7a1a7595-a",
+      "bytes": 88856,
+      "sha256": "c239551a5ab450c6e9178931a8521a12df6fbfdcd0958b8f98a1e3b822392af3"
+    },
+    {
+      "source": "https://use.typekit.net/af/a8c1bc/00000000000000007755955c/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/a8c1bc/00000000000000007755955c/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/royal/e0ca14a0-l",
+      "bytes": 24472,
+      "sha256": "e0e6f8adb820e610039ab0025b6b2f3ae26a988a230edb4b6e0a65f656e16aa0"
+    },
+    {
+      "source": "https://use.typekit.net/af/8aadb1/0000000000000000774b9712/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/8aadb1/0000000000000000774b9712/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/royal/a6f4e37c-d",
+      "bytes": 47760,
+      "sha256": "5be224b3a9c8a332fa734cf991ade37559900fe41135083f4f8d5b9d353e7baa"
+    },
+    {
+      "source": "https://use.typekit.net/af/a8c1bc/00000000000000007755955c/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/a8c1bc/00000000000000007755955c/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/royal/b6cd35c0-d",
+      "bytes": 24628,
+      "sha256": "83f82df6bd42d1d8056fcf6450395d14c8a10cdb59ac30a4709622919fedf793"
+    },
+    {
+      "source": "https://use.typekit.net/af/8091cf/0000000000000000775aaf10/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/8091cf/0000000000000000775aaf10/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/royal/e2b17ee0-l",
+      "bytes": 30128,
+      "sha256": "1da448008ee69c57a8321f63780587cccbf6aa806a4dbf21fcf3204bbcfaf1be"
+    },
+    {
+      "source": "https://use.typekit.net/af/8091cf/0000000000000000775aaf10/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/8091cf/0000000000000000775aaf10/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/royal/c3888aba-d",
+      "bytes": 30840,
+      "sha256": "3f7ed4387c401a4f288c7e66d9401f5400a832577b7ae597f05fc2061d3dd254"
+    },
+    {
+      "source": "https://use.typekit.net/af/8091cf/0000000000000000775aaf10/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/8091cf/0000000000000000775aaf10/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/royal/b25a5136-a",
+      "bytes": 53292,
+      "sha256": "5b5215051d298c4ea75832ac844ba377e1ec2648758bfb9924be6895303f12be"
+    },
+    {
+      "source": "https://use.typekit.net/af/2310b8/0000000000000000775aaf09/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/2310b8/0000000000000000775aaf09/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "local": "/assets/flagship/royal/df077b1a-l",
+      "bytes": 28844,
+      "sha256": "5af8079647e68169800cb925b68a297df040e836cba81afd8e68c694ac716221"
+    },
+    {
+      "source": "https://use.typekit.net/af/8aadb1/0000000000000000774b9712/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/8aadb1/0000000000000000774b9712/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/royal/d89476b2-a",
+      "bytes": 90080,
+      "sha256": "53d85c6744a009a67a432dfa02f911dd92e13c160e8485c6a94f88019cb19f49"
+    },
+    {
+      "source": "https://use.typekit.net/af/a8c1bc/00000000000000007755955c/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/a8c1bc/00000000000000007755955c/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/royal/0794db43-a",
+      "bytes": 33252,
+      "sha256": "508af2e5ffac0b6301cf198b5f0015de1b2d4b79cec838d92dfffdf057e9cd1f"
+    },
+    {
+      "source": "https://use.typekit.net/af/2310b8/0000000000000000775aaf09/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/2310b8/0000000000000000775aaf09/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "local": "/assets/flagship/royal/ead751ab-a",
+      "bytes": 51700,
+      "sha256": "9a8697e55fdd4457499d87211e72f09c323c667f495df00928da1b9a93687fca"
+    },
+    {
+      "source": "https://use.typekit.net/af/2310b8/0000000000000000775aaf09/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "sourceUrl": "https://use.typekit.net/af/2310b8/0000000000000000775aaf09/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "local": "/assets/flagship/royal/022097ca-d",
+      "bytes": 29740,
+      "sha256": "90c22ca4814ad3ed50d3c82ae8f5cbb2565ebc29eca26b402a44123b179e79d9"
+    },
+    {
+      "source": "https://use.typekit.net/af/c8b00c/00000000000000007735d573/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "sourceUrl": "https://use.typekit.net/af/c8b00c/00000000000000007735d573/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "local": "/assets/flagship/royal/d4cf505e-a",
+      "bytes": 199392,
+      "sha256": "4ec3306d45876f2f5e236eb3f0f16b148c278a66a5a2718843ec4e6100eeff3e"
+    }
+  ]
+}

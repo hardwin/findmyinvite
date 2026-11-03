@@ -1,0 +1,291 @@
+{
+  "updated": "2026-11-03",
+  "source": "https://www.thedigitalyes.com",
+  "activeBatch": 1,
+  "releaseScope": "User-approved production release",
+  "items": [
+    {
+      "order": 0,
+      "name": "Lace",
+      "sourceUrl": "https://www.thedigitalyes.com/demo/lace",
+      "status": "production",
+      "batch": 0,
+      "templateId": "ivory-lace",
+      "versionId": "9725dcb9-beb8-492f-a7f3-e3adbfd4fc76",
+      "previewUrl": "https://findmyinvite.com/templates?product=ivory-lace"
+    },
+    {
+      "order": 1,
+      "name": "Embroidered Garden",
+      "sourceUrl": "https://www.thedigitalyes.com/demo/embroidered-garden",
+      "status": "approved-for-production",
+      "batch": 1,
+      "templateId": "embroidered-garden",
+      "versionId": "68482ed2-7518-4ce1-b953-60155303629e",
+      "previewUrl": "http://127.0.0.1:5173/template-preview?version=68482ed2-7518-4ce1-b953-60155303629e",
+      "personaliseUrl": "http://127.0.0.1:5173/personalise?version=68482ed2-7518-4ce1-b953-60155303629e",
+      "productUrl": "http://127.0.0.1:5173/templates?product=embroidered-garden",
+      "remainingWork": "Deploy approved renderer and publish exact revision 3; verify live catalog and personalisation."
+    },
+    {
+      "order": 2,
+      "name": "Mother of Pearl",
+      "sourceUrl": "https://www.thedigitalyes.com/demo/mother-of-pearl",
+      "status": "approved-for-production",
+      "batch": 1,
+      "templateId": "mother-of-pearl",
+      "versionId": "b3d7649e-e1dd-4f6c-91f5-7dd266d13750",
+      "previewUrl": "http://127.0.0.1:5173/template-preview?version=b3d7649e-e1dd-4f6c-91f5-7dd266d13750",
+      "personaliseUrl": "http://127.0.0.1:5173/personalise?version=b3d7649e-e1dd-4f6c-91f5-7dd266d13750",
+      "productUrl": "http://127.0.0.1:5173/templates?product=mother-of-pearl",
+      "remainingWork": "Deploy approved renderer and publish exact revision 3; verify live catalog and personalisation."
+    },
+    {
+      "order": 3,
+      "name": "Fresco",
+      "sourceUrl": "https://www.thedigitalyes.com/demo/fresco",
+      "status": "approved-for-production",
+      "batch": 1,
+      "templateId": "fresco",
+      "versionId": "3dd0d57f-d176-4735-a2dc-870d652dc1a3",
+      "previewUrl": "http://127.0.0.1:5173/template-preview?version=3dd0d57f-d176-4735-a2dc-870d652dc1a3",
+      "personaliseUrl": "http://127.0.0.1:5173/personalise?version=3dd0d57f-d176-4735-a2dc-870d652dc1a3",
+      "productUrl": "http://127.0.0.1:5173/templates?product=fresco",
+      "remainingWork": "Deploy approved renderer and publish exact revision 3; verify live catalog and personalisation."
+    },
+    {
+      "order": 4,
+      "name": "Stained Glass",
+      "sourceUrl": "https://www.thedigitalyes.com/demo/stained-glass",
+      "status": "approved-for-production",
+      "batch": 1,
+      "templateId": "stained-glass",
+      "versionId": "6e8e33b1-757c-4290-9e8f-beef2b2b2582",
+      "previewUrl": "http://127.0.0.1:5173/template-preview?version=6e8e33b1-757c-4290-9e8f-beef2b2b2582",
+      "personaliseUrl": "http://127.0.0.1:5173/personalise?version=6e8e33b1-757c-4290-9e8f-beef2b2b2582",
+      "productUrl": "http://127.0.0.1:5173/templates?product=stained-glass",
+      "remainingWork": "Deploy approved renderer and publish exact revision 3; verify live catalog and personalisation."
+    },
+    {
+      "order": 5,
+      "name": "Royal",
+      "sourceUrl": "https://www.thedigitalyes.com/demo/royal",
+      "status": "approved-for-production",
+      "batch": 1,
+      "templateId": "royal",
+      "versionId": "39de69db-997f-4a52-929c-b1cec215155a",
+      "previewUrl": "http://127.0.0.1:5173/template-preview?version=39de69db-997f-4a52-929c-b1cec215155a",
+      "personaliseUrl": "http://127.0.0.1:5173/personalise?version=39de69db-997f-4a52-929c-b1cec215155a",
+      "productUrl": "http://127.0.0.1:5173/templates?product=royal",
+      "remainingWork": "Deploy approved renderer and publish exact revision 3; verify live catalog and personalisation."
+    },
+    {
+      "order": 6,
+      "name": "Day & Night",
+      "sourceUrl": "https://www.thedigitalyes.com/demo/daynight",
+      "status": "queued",
+      "batch": null
+    },
+    {
+      "order": 7,
+      "name": "La Finca",
+      "sourceUrl": "https://www.thedigitalyes.com/demo/finca",
+      "status": "queued",
+      "batch": null
+    },
+    {
+      "order": 8,
+      "name": "La Maison Dorée",
+      "sourceUrl": "https://www.thedigitalyes.com/demo/maison-doree",
+      "status": "queued",
+      "batch": null
+    },
+    {
+      "order": 9,
+      "name": "Majestic",
+      "sourceUrl": "https://www.thedigitalyes.com/demo/majestic",
+      "status": "queued",
+      "batch": null
+    },
+    {
+      "order": 10,
+      "name": "Teatro",
+      "sourceUrl": "https://www.thedigitalyes.com/demo/teatro",
+      "status": "queued",
+      "batch": null
+    },
+    {
+      "order": 11,
+      "name": "Bella Vista",
+      "sourceUrl": "https://www.thedigitalyes.com/demo/bella-vista",
+      "status": "queued",
+      "batch": null
+    },
+    {
+      "order": 12,
+      "name": "Villa Perlé",
+      "sourceUrl": "https://www.thedigitalyes.com/demo/villa-perle",
+      "status": "queued",
+      "batch": null
+    },
+    {
+      "order": 13,
+      "name": "Cap Blanc",
+      "sourceUrl": "https://www.thedigitalyes.com/demo/cap-blanc",
+      "status": "queued",
+      "batch": null
+    },
+    {
+      "order": 14,
+      "name": "Prestige",
+      "sourceUrl": "https://www.thedigitalyes.com/demo/prestige",
+      "status": "queued",
+      "batch": null
+    },
+    {
+      "order": 15,
+      "name": "Eleganza",
+      "sourceUrl": "https://www.thedigitalyes.com/demo/eleganza",
+      "status": "queued",
+      "batch": null
+    },
+    {
+      "order": 16,
+      "name": "Bellagio",
+      "sourceUrl": "https://www.thedigitalyes.com/demo/bellagio",
+      "status": "queued",
+      "batch": null
+    },
+    {
+      "order": 17,
+      "name": "Secret Garden",
+      "sourceUrl": "https://www.thedigitalyes.com/demo/secret-garden",
+      "status": "queued",
+      "batch": null
+    },
+    {
+      "order": 18,
+      "name": "Odette",
+      "sourceUrl": "https://www.thedigitalyes.com/demo/odette",
+      "status": "queued",
+      "batch": null
+    },
+    {
+      "order": 19,
+      "name": "Papercraft",
+      "sourceUrl": "https://www.thedigitalyes.com/demo/papercraft",
+      "status": "queued",
+      "batch": null
+    },
+    {
+      "order": 20,
+      "name": "Bridgerton",
+      "sourceUrl": "https://www.thedigitalyes.com/demo/bridgerton",
+      "status": "queued",
+      "batch": null
+    },
+    {
+      "order": 21,
+      "name": "Boho",
+      "sourceUrl": "https://www.thedigitalyes.com/demo/boho",
+      "status": "queued",
+      "batch": null
+    },
+    {
+      "order": 22,
+      "name": "Minimal Fun",
+      "sourceUrl": "https://www.thedigitalyes.com/demo/minimal-fun",
+      "status": "queued",
+      "batch": null
+    },
+    {
+      "order": 23,
+      "name": "Beach",
+      "sourceUrl": "https://www.thedigitalyes.com/demo/beach",
+      "status": "queued",
+      "batch": null
+    },
+    {
+      "order": 24,
+      "name": "Africa",
+      "sourceUrl": "https://www.thedigitalyes.com/demo/africa",
+      "status": "queued",
+      "batch": null
+    },
+    {
+      "order": 25,
+      "name": "Rosas",
+      "sourceUrl": "https://www.thedigitalyes.com/demo/rosas",
+      "status": "queued",
+      "batch": null
+    },
+    {
+      "order": 26,
+      "name": "Editorial",
+      "sourceUrl": "https://www.thedigitalyes.com/demo/editorial",
+      "status": "queued",
+      "batch": null
+    },
+    {
+      "order": 27,
+      "name": "Bloom",
+      "sourceUrl": "https://www.thedigitalyes.com/demo/bloom",
+      "status": "queued",
+      "batch": null
+    },
+    {
+      "order": 28,
+      "name": "Dolce Vita",
+      "sourceUrl": "https://www.thedigitalyes.com/demo/dolce-vita",
+      "status": "queued",
+      "batch": null
+    },
+    {
+      "order": 29,
+      "name": "Nautical Edition",
+      "sourceUrl": "https://www.thedigitalyes.com/demo/nautical",
+      "status": "queued",
+      "batch": null
+    },
+    {
+      "order": 30,
+      "name": "Mediterranean",
+      "sourceUrl": "https://www.thedigitalyes.com/demo/mediterranean-edition",
+      "status": "queued",
+      "batch": null
+    },
+    {
+      "order": 31,
+      "name": "Floral",
+      "sourceUrl": "https://www.thedigitalyes.com/demo/floral",
+      "status": "queued",
+      "batch": null
+    },
+    {
+      "order": 32,
+      "name": "Dulce Amor",
+      "sourceUrl": "https://www.thedigitalyes.com/demo/dulce-amor",
+      "status": "queued",
+      "batch": null
+    },
+    {
+      "order": 33,
+      "name": "Minimalista",
+      "sourceUrl": "https://www.thedigitalyes.com/demo/minimal",
+      "status": "queued",
+      "batch": null
+    },
+    {
+      "order": 34,
+      "name": "Aventureros",
+      "sourceUrl": "https://www.thedigitalyes.com/demo/aventureros",
+      "status": "queued",
+      "batch": null
+    }
+  ],
+  "referenceStartingPrice": {
+    "currency": "EUR",
+    "amount": 175,
+    "note": "User-supplied source pricing; not FindMyInvite pricing"
+  }
+}
