@@ -35,3 +35,7 @@ User local review passed; production release is authorized. Native Safari playba
 Customer saving, checkout, publication and public guest-view flows remain for the approved release. No payment or customer invitation was created during this local review.
 
 The preparation scripts consume inspected inputs under ignored `work/digital-yes-batch-1/`. Generated release documents, schemas and asset manifests are repository files. Do not regenerate them from missing or unreviewed inputs. `scripts/stage-digital-yes.mjs` recreates the local registry using the configured database and refuses to overwrite immutable version content.
+
+## Production release — 3 November 2026
+
+All five exact revision-3 records were approved and published together at 16:46:58 UTC after deployment 716fba7 became READY. Live catalog/version APIs, original opening playback and automatic handoff, editor availability, and enabled save/publish controls passed for all five. Live documents and opening assets matched local files. No runtime error/fatal logs were found during the release window. The post-deploy review also moved Stained Glass’s Discover control below the venue on shorter desktop screens. No purchase or guest publication was performed. The local-only overrides were removed so localhost now uses the published catalog.

@@ -25,4 +25,4 @@ body[data-fmi-design="mother-of-pearl"] .fmi-rsvp-fields{max-width:480px;backgro
 [data-fmi-reveal].fmi-visible{opacity:1;transform:none}
 .fmi-reduced *,.fmi-reduced *::before,.fmi-reduced *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
 .fmi-reduced [data-fmi-reveal]{opacity:1;transform:none}
-body[data-fmi-design="stained-glass"].fmi-long-names [data-fmi-scroll]{bottom:6%}body[data-fmi-design="fresco"].fmi-long-names [data-fmi-name]{max-width:84%!important;margin-inline:auto}
+body[data-fmi-design="stained-glass"] [data-fmi-scroll]{bottom:6%}body[data-fmi-design="fresco"].fmi-long-names [data-fmi-name]{max-width:84%!important;margin-inline:auto}
