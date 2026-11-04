@@ -64,6 +64,7 @@ export function templateTradition(template:Pick<ShopTemplate,'id'|'name'>):Tradi
 
 export function templateSetting(template:Pick<ShopTemplate,'id'|'name'>):Setting{
  if(template.id==='theeram')return 'backwater';
+ if(['thiruvarul','kalyana-payanam'].includes(template.id))return 'temple';
  const hay=template.id+' '+template.name;
  if(beachHint.test(hay))return 'beach';
  if(/temple|sanctuary|gopuram/i.test(hay))return 'temple';

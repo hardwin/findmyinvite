@@ -1,0 +1,235 @@
+{
+  "reference": "https://cardsforknots.in/?pinv_tpl_preview=90",
+  "assets": [
+    {
+      "file": "app.js",
+      "url": "https://cardsforknots.in/wp-content/plugins/Advanced-smart-invitation-builder/assets/v2/thiruvarul/app.js",
+      "bytes": 112533
+    },
+    {
+      "file": "fonts/arima-latin-700.woff2",
+      "url": "https://cardsforknots.in/wp-content/plugins/Advanced-smart-invitation-builder/assets/v2/thiruvarul/fonts/arima-latin-700.woff2",
+      "bytes": 17204
+    },
+    {
+      "file": "fonts/arima-tamil-700.woff2",
+      "url": "https://cardsforknots.in/wp-content/plugins/Advanced-smart-invitation-builder/assets/v2/thiruvarul/fonts/arima-tamil-700.woff2",
+      "bytes": 14488
+    },
+    {
+      "file": "fonts/cormorant-garamond-latin-600-italic.woff2",
+      "url": "https://cardsforknots.in/wp-content/plugins/Advanced-smart-invitation-builder/assets/v2/thiruvarul/fonts/cormorant-garamond-latin-600-italic.woff2",
+      "bytes": 23784
+    },
+    {
+      "file": "fonts/cormorant-garamond-latin-600.woff2",
+      "url": "https://cardsforknots.in/wp-content/plugins/Advanced-smart-invitation-builder/assets/v2/thiruvarul/fonts/cormorant-garamond-latin-600.woff2",
+      "bytes": 23396
+    },
+    {
+      "file": "fonts/great-vibes-latin-400.woff2",
+      "url": "https://cardsforknots.in/wp-content/plugins/Advanced-smart-invitation-builder/assets/v2/thiruvarul/fonts/great-vibes-latin-400.woff2",
+      "bytes": 42800
+    },
+    {
+      "file": "fonts/noto-serif-tamil-tamil-600.woff2",
+      "url": "https://cardsforknots.in/wp-content/plugins/Advanced-smart-invitation-builder/assets/v2/thiruvarul/fonts/noto-serif-tamil-tamil-600.woff2",
+      "bytes": 15816
+    },
+    {
+      "file": "i18n.js",
+      "url": "https://cardsforknots.in/wp-content/plugins/Advanced-smart-invitation-builder/assets/v2/thiruvarul/i18n.js",
+      "bytes": 8042
+    },
+    {
+      "file": "img/cut/s_chariot_blink.webp",
+      "url": "https://cardsforknots.in/wp-content/plugins/Advanced-smart-invitation-builder/assets/v2/thiruvarul/img/cut/s_chariot_blink.webp",
+      "bytes": 8008
+    },
+    {
+      "file": "img/cut/s_chariot_faces.json",
+      "url": "https://cardsforknots.in/wp-content/plugins/Advanced-smart-invitation-builder/assets/v2/thiruvarul/img/cut/s_chariot_faces.json",
+      "bytes": 147
+    },
+    {
+      "file": "img/cut/s_chariot.webp",
+      "url": "https://cardsforknots.in/wp-content/plugins/Advanced-smart-invitation-builder/assets/v2/thiruvarul/img/cut/s_chariot.webp",
+      "bytes": 320430
+    },
+    {
+      "file": "img/cut/s_lamp_blink.webp",
+      "url": "https://cardsforknots.in/wp-content/plugins/Advanced-smart-invitation-builder/assets/v2/thiruvarul/img/cut/s_lamp_blink.webp",
+      "bytes": 6592
+    },
+    {
+      "file": "img/cut/s_lamp_faces.json",
+      "url": "https://cardsforknots.in/wp-content/plugins/Advanced-smart-invitation-builder/assets/v2/thiruvarul/img/cut/s_lamp_faces.json",
+      "bytes": 145
+    },
+    {
+      "file": "img/cut/s_lamp.webp",
+      "url": "https://cardsforknots.in/wp-content/plugins/Advanced-smart-invitation-builder/assets/v2/thiruvarul/img/cut/s_lamp.webp",
+      "bytes": 281198
+    },
+    {
+      "file": "img/cut/s_tank_blink.webp",
+      "url": "https://cardsforknots.in/wp-content/plugins/Advanced-smart-invitation-builder/assets/v2/thiruvarul/img/cut/s_tank_blink.webp",
+      "bytes": 12204
+    },
+    {
+      "file": "img/cut/s_tank_faces.json",
+      "url": "https://cardsforknots.in/wp-content/plugins/Advanced-smart-invitation-builder/assets/v2/thiruvarul/img/cut/s_tank_faces.json",
+      "bytes": 133
+    },
+    {
+      "file": "img/cut/s_tank.webp",
+      "url": "https://cardsforknots.in/wp-content/plugins/Advanced-smart-invitation-builder/assets/v2/thiruvarul/img/cut/s_tank.webp",
+      "bytes": 329026
+    },
+    {
+      "file": "img/cut/s_walk_blink.webp",
+      "url": "https://cardsforknots.in/wp-content/plugins/Advanced-smart-invitation-builder/assets/v2/thiruvarul/img/cut/s_walk_blink.webp",
+      "bytes": 6466
+    },
+    {
+      "file": "img/cut/s_walk_faces.json",
+      "url": "https://cardsforknots.in/wp-content/plugins/Advanced-smart-invitation-builder/assets/v2/thiruvarul/img/cut/s_walk_faces.json",
+      "bytes": 144
+    },
+    {
+      "file": "img/cut/s_walk.webp",
+      "url": "https://cardsforknots.in/wp-content/plugins/Advanced-smart-invitation-builder/assets/v2/thiruvarul/img/cut/s_walk.webp",
+      "bytes": 187170
+    },
+    {
+      "file": "img/cut/s_wedding_blink.webp",
+      "url": "https://cardsforknots.in/wp-content/plugins/Advanced-smart-invitation-builder/assets/v2/thiruvarul/img/cut/s_wedding_blink.webp",
+      "bytes": 7942
+    },
+    {
+      "file": "img/cut/s_wedding_faces.json",
+      "url": "https://cardsforknots.in/wp-content/plugins/Advanced-smart-invitation-builder/assets/v2/thiruvarul/img/cut/s_wedding_faces.json",
+      "bytes": 135
+    },
+    {
+      "file": "img/cut/s_wedding.webp",
+      "url": "https://cardsforknots.in/wp-content/plugins/Advanced-smart-invitation-builder/assets/v2/thiruvarul/img/cut/s_wedding.webp",
+      "bytes": 433526
+    },
+    {
+      "file": "img/cut/s_welcome_blink.webp",
+      "url": "https://cardsforknots.in/wp-content/plugins/Advanced-smart-invitation-builder/assets/v2/thiruvarul/img/cut/s_welcome_blink.webp",
+      "bytes": 6740
+    },
+    {
+      "file": "img/cut/s_welcome_faces.json",
+      "url": "https://cardsforknots.in/wp-content/plugins/Advanced-smart-invitation-builder/assets/v2/thiruvarul/img/cut/s_welcome_faces.json",
+      "bytes": 134
+    },
+    {
+      "file": "img/cut/s_welcome.webp",
+      "url": "https://cardsforknots.in/wp-content/plugins/Advanced-smart-invitation-builder/assets/v2/thiruvarul/img/cut/s_welcome.webp",
+      "bytes": 305974
+    },
+    {
+      "file": "img/cut/sizes.js",
+      "url": "https://cardsforknots.in/wp-content/plugins/Advanced-smart-invitation-builder/assets/v2/thiruvarul/img/cut/sizes.js",
+      "bytes": 396
+    },
+    {
+      "file": "img/cut/t_butterfly.webp",
+      "url": "https://cardsforknots.in/wp-content/plugins/Advanced-smart-invitation-builder/assets/v2/thiruvarul/img/cut/t_butterfly.webp",
+      "bytes": 19908
+    },
+    {
+      "file": "img/cut/t_gopuram.webp",
+      "url": "https://cardsforknots.in/wp-content/plugins/Advanced-smart-invitation-builder/assets/v2/thiruvarul/img/cut/t_gopuram.webp",
+      "bytes": 117826
+    },
+    {
+      "file": "img/cut/t_palm.webp",
+      "url": "https://cardsforknots.in/wp-content/plugins/Advanced-smart-invitation-builder/assets/v2/thiruvarul/img/cut/t_palm.webp",
+      "bytes": 135660
+    },
+    {
+      "file": "img/cut/t_peepal.webp",
+      "url": "https://cardsforknots.in/wp-content/plugins/Advanced-smart-invitation-builder/assets/v2/thiruvarul/img/cut/t_peepal.webp",
+      "bytes": 183026
+    },
+    {
+      "file": "img/cut/t_pillars.webp",
+      "url": "https://cardsforknots.in/wp-content/plugins/Advanced-smart-invitation-builder/assets/v2/thiruvarul/img/cut/t_pillars.webp",
+      "bytes": 104440
+    },
+    {
+      "file": "img/cut/t_pots.webp",
+      "url": "https://cardsforknots.in/wp-content/plugins/Advanced-smart-invitation-builder/assets/v2/thiruvarul/img/cut/t_pots.webp",
+      "bytes": 198936
+    },
+    {
+      "file": "img/env/t_far.webp",
+      "url": "https://cardsforknots.in/wp-content/plugins/Advanced-smart-invitation-builder/assets/v2/thiruvarul/img/env/t_far.webp",
+      "bytes": 116876
+    },
+    {
+      "file": "img/env/t_ground.webp",
+      "url": "https://cardsforknots.in/wp-content/plugins/Advanced-smart-invitation-builder/assets/v2/thiruvarul/img/env/t_ground.webp",
+      "bytes": 120434
+    },
+    {
+      "file": "img/env/t_path.webp",
+      "url": "https://cardsforknots.in/wp-content/plugins/Advanced-smart-invitation-builder/assets/v2/thiruvarul/img/env/t_path.webp",
+      "bytes": 120102
+    },
+    {
+      "file": "img/env/t_sky.webp",
+      "url": "https://cardsforknots.in/wp-content/plugins/Advanced-smart-invitation-builder/assets/v2/thiruvarul/img/env/t_sky.webp",
+      "bytes": 28722
+    },
+    {
+      "file": "img/gate/leaf_l.webp",
+      "url": "https://cardsforknots.in/wp-content/plugins/Advanced-smart-invitation-builder/assets/v2/thiruvarul/img/gate/leaf_l.webp",
+      "bytes": 88582
+    },
+    {
+      "file": "img/gate/leaf_r.webp",
+      "url": "https://cardsforknots.in/wp-content/plugins/Advanced-smart-invitation-builder/assets/v2/thiruvarul/img/gate/leaf_r.webp",
+      "bytes": 81678
+    },
+    {
+      "file": "img/gate/wall.webp",
+      "url": "https://cardsforknots.in/wp-content/plugins/Advanced-smart-invitation-builder/assets/v2/thiruvarul/img/gate/wall.webp",
+      "bytes": 126576
+    },
+    {
+      "file": "invite.js",
+      "url": "https://cardsforknots.in/wp-content/plugins/Advanced-smart-invitation-builder/assets/v2/thiruvarul/invite.js",
+      "bytes": 13406
+    },
+    {
+      "file": "og.jpg",
+      "url": "https://cardsforknots.in/wp-content/plugins/Advanced-smart-invitation-builder/assets/v2/thiruvarul/og.jpg",
+      "bytes": 157824
+    },
+    {
+      "file": "style.css",
+      "url": "https://cardsforknots.in/wp-content/plugins/Advanced-smart-invitation-builder/assets/v2/thiruvarul/style.css",
+      "bytes": 30807
+    },
+    {
+      "file": "vendor/three.core.min.js",
+      "url": "https://cardsforknots.in/wp-content/plugins/Advanced-smart-invitation-builder/assets/v2/thiruvarul/vendor/three.core.min.js",
+      "bytes": 380264
+    },
+    {
+      "file": "vendor/three.module.min.js",
+      "url": "https://cardsforknots.in/wp-content/plugins/Advanced-smart-invitation-builder/assets/v2/thiruvarul/vendor/three.module.min.js",
+      "bytes": 355035
+    },
+    {
+      "file": "world.js",
+      "url": "https://cardsforknots.in/wp-content/plugins/Advanced-smart-invitation-builder/assets/v2/thiruvarul/world.js",
+      "bytes": 2149
+    }
+  ]
+}
