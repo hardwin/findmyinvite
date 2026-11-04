@@ -38,12 +38,12 @@ await context.route('**/*',async route=>{
   return route.fulfill({contentType:'image/webp',body:photo});
  }
  if(action==='editor')return ok({version,form});
- if(action==='v2-config')return ok({configured:true,quote:{basePaise:100,taxPaise:18,totalPaise:118,taxLabel:'GST'}});
+ if(action==='v2-config')return ok({configured:true,quote:{basePaise:19900,taxPaise:3582,totalPaise:23482,taxLabel:'GST'}});
  if(action==='google-start'){assert.equal(body.origin,origin);challenge=body.challenge;return ok({url:'https://google.fixture.test/authorize?flow='+body.flow});}
  if(action==='google-exchange'){assert.equal(body.code,'fixture-code');assert.equal(createHash('sha256').update(body.verifier).digest('base64url'),challenge);verified=true;return ok({access_token:'fixture',refresh_token:'fixture-refresh',expires_in:3600,user:{id:'customer',email:'customer@example.com'}});}
  if(action==='v2-create'){assert.ok(verified);invitation={id:'invite',slug:body.slug||'qa-wedding',content:body.content,revision:0,firstPublishedAt:null,published:false,templateVersionId:version.id,formRevision:1,formStepId:body.formStepId};return ok({invitation});}
  if(action==='v2-save'){assert.equal(body.revision,invitation.revision);invitation={...invitation,content:body.content,revision:invitation.revision+1,formStepId:body.formStepId};return ok({invitation});}
- if(action==='v2-order'){assert.ok(uploadComplete);orders++;return ok(orders===1?{id:'order',keyId:'rzp_test_fixture',orderId:'gateway-order',amount:118}:{captured:true,id:'order'});}
+ if(action==='v2-order'){assert.ok(uploadComplete);orders++;return ok(orders===1?{id:'order',keyId:'rzp_test_fixture',orderId:'gateway-order',amount:23482}:{captured:true,id:'order'});}
  if(action==='v2-verify')return ok({id:'order',captured:true});
  if(action==='v2-publish'){if(failPublish){failPublish=false;return bad('Connection interrupted. Retry publishing safely.',503);}invitation={...invitation,published:true,firstPublishedAt:'2026-11-04T00:00:00Z',expiresAt:'2027-05-04T00:00:00Z'};published=structuredClone(invitation.content);return ok({invitation});}
  if(action==='v2-manage')return ok({version,form,invitation});

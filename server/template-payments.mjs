@@ -24,7 +24,7 @@ export default async function handle(req,res,q){const action=q.get('action');
  const active=await db('template_catalog?id=eq.'+encodeURIComponent(v.template_id)+'&isactive=eq.true&select=id');if(!row.first_published_at&&(!active.length||!v.approved_at))throw new HttpError(403,'Template not released.');
  // An existing captured payment must be resumed rather than charged again.
  const existing=await db('website_orders?invitation_id=eq.'+row.id+'&purpose=eq.'+purpose+'&status=eq.captured&applied_at=is.null&select=*&limit=1');if(existing[0])return respond(res,200,{captured:true,id:existing[0].id});
- const reserved=await rpc('fmi_reserve_website_order',{p_invitation:row.id,p_owner:user.id,p_purpose:purpose,p_tax_bps:quote.taxBps});const order=reserved.order;
+ const reserved=await rpc('fmi_reserve_website_order_at_price',{p_invitation:row.id,p_owner:user.id,p_purpose:purpose,p_tax_bps:quote.taxBps,p_base_paise:quote.basePaise});const order=reserved.order;
  if(order.status==='captured')return respond(res,200,{captured:true,id:order.id});
  if(order.razorpay_order_id)return respond(res,200,{id:order.id,keyId:publicKeyId(),orderId:order.razorpay_order_id,amount:order.amount,currency:'INR',quote:{basePaise:order.base_paise,taxBps:order.tax_bps,taxPaise:order.tax_paise,totalPaise:order.amount}});
  if(!reserved.created)throw new HttpError(409,'Your order is being prepared. Retry shortly. If this persists, contact support; do not make a second payment.');

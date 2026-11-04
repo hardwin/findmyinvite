@@ -1,2 +1,2 @@
 // All invitation designs share this base price; GST is added at checkout.
-export const INVITATION_BASE_PAISE=100;
+export const INVITATION_BASE_PAISE=19900;
