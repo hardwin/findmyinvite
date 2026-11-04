@@ -4,7 +4,7 @@ import {galleryTierFor,galleryTierLabels,type GalleryTier} from './data';
 export type ShopKind='website'|'video';
 export type Tradition='christian'|'hindu'|'muslim'|'interfaith';
 export type Palette='ivory'|'sage'|'burgundy'|'gold'|'navy'|'blush';
-export type Setting='church'|'garden'|'temple'|'palace'|'beach'|'minimal';
+export type Setting='backwater'|'church'|'garden'|'temple'|'palace'|'beach'|'minimal';
 export type ShopTemplate={
  templateVersionId?:string;
  tradition?:Tradition;
@@ -23,7 +23,7 @@ export type ShopTemplate={
 export const shopKinds:Array<[ShopKind,string]>=[['website','Wedding Websites'],['video','Invitation Videos']];
 export const traditions:Array<[Tradition,string]>=[['christian','Christian'],['hindu','Hindu'],['muslim','Islam'],['interfaith','Interfaith']];
 export const palettes:Array<[Palette,string]>=[['ivory','Ivory'],['sage','Sage'],['burgundy','Burgundy'],['gold','Gold'],['navy','Navy'],['blush','Blush']];
-export const settings:Array<[Setting,string]>=[['church','Church'],['garden','Garden'],['temple','Temple'],['palace','Palace'],['beach','Beach'],['minimal','Minimal']];
+export const settings:Array<[Setting,string]>=[['backwater','Backwaters'],['church','Church'],['garden','Garden'],['temple','Temple'],['palace','Palace'],['beach','Beach'],['minimal','Minimal']];
 export const occasionAisles:Array<[string,string]>=[
  ['wedding','Wedding'],
  ['engagement','Engagement'],
@@ -63,6 +63,7 @@ export function templateTradition(template:Pick<ShopTemplate,'id'|'name'>):Tradi
 }
 
 export function templateSetting(template:Pick<ShopTemplate,'id'|'name'>):Setting{
+ if(template.id==='theeram')return 'backwater';
  const hay=template.id+' '+template.name;
  if(beachHint.test(hay))return 'beach';
  if(/temple|sanctuary|gopuram/i.test(hay))return 'temple';

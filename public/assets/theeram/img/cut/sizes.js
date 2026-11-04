@@ -1,0 +1,2 @@
+// every cut-out picture's [width, height] (tools/sizes.mjs writes this; app.js lays the palace out with it)
+export const CUT_SIZES = {"k_arch":[583,900],"k_banana":[589,900],"k_bush":[1100,641],"k_butterfly":[256,210],"k_diya":[1100,509],"k_lily":[1100,349],"k_palm":[538,900],"s_houseboat":[1100,639],"s_jetty":[805,1100],"s_mandapam":[1100,1039],"s_nets":[741,1100],"s_vallam":[1100,725],"s_veranda":[1100,1016]};

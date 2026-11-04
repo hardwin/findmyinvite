@@ -1,0 +1,30 @@
+import {compileTemplateForm} from './template-forms.mjs';
+const f=(key,label,type='text',extra={})=>({key,label,type,maxLength:160,...extra});
+const eventFields=[f('date','Date','date'),f('time','Start time','time'),f('end','End time','time'),f('venue','Venue'),f('address','City or address'),f('mapUrl','Directions link','url',{maxLength:400})];
+export const theeramTemplate={id:'theeram',name:'Theeram · Backwater Journey',description:'Open a carved Kerala gate and sail through a three-dimensional backwater celebration. A winding canal, reflective water, swaying palms and a floating blessing lamp.',tradition:'hindu',thumbnail:'/assets/theeram/og.jpg',renderer:'theeram-v1',revision:1,
+ field_schema:{version:1,maxImages:0,fields:[f('bride','First partner'),f('groom','Second partner'),f('language','Invitation language','select',{options:['en','ml','ta','te','kn','hi']}),f('date','Wedding date','date'),f('time','Wedding time','time'),f('end','Wedding end time','time'),f('utcOffset','Time zone','select',{options:['+05:30','+00:00','+01:00','+02:00','+04:00','+08:00','-04:00','-05:00']}),f('venue','Wedding venue'),f('address','Wedding address'),f('mapUrl','Wedding directions','url',{maxLength:400}),f('blessing','Opening blessing','textarea'),f('story','Your story','textarea',{maxLength:600}),f('engagement','Engagement','group',{fields:eventFields}),f('reception','Reception','group',{fields:eventFields}),f('whatsapp','RSVP number'),f('music','Music','audio',{maxLength:400}),f('thanksLine','Closing invitation wording','textarea')]},
+ defaults:{bride:'Sneha',groom:'Rahul',language:'en',date:'2027-03-07',time:'10:30',end:'11:30',utcOffset:'+05:30',venue:'Backwater Pavilion',address:'Alappuzha',blessing:'With the blessings of our families',story:'A college boat race, a borrowed umbrella,\nlong talks by the water every evening,\nand now, the rest of our lives.',engagement:{date:'2027-02-21',time:'16:30',end:'19:00',venue:'At home',address:'Kottayam'},reception:{date:'2027-03-07',time:'18:30',venue:'Backwater Pavilion',address:'Alappuzha'},thanksLine:'Come, float along the backwaters with us',whatsapp:'919000000000'}
+};
+// These questions belong only to the canal journey. No photo section: its people are decorative illustrations.
+const q=(path,label,type='text',extra={})=>({path,label,type,...extra});
+const req=(path,label,type='text',extra={})=>q(path,label,type,{required:true,...extra});
+const toggle=(flag,label)=>q('_form.'+flag,label,'boolean');
+const event=(key,title)=>[toggle(key,'Include '+title),...eventFields.map(field=>q(key+'.'+field.key,field.label,field.type,{when:'_form.'+key,required:['date','time','venue','address'].includes(field.key)}))];
+const step=(id,title,questions,description='')=>({id,title,questions,description});
+export const theeramForm=compileTemplateForm({version:1,name:'Theeram · Backwater Journey',thumbnail:'/assets/theeram/og.jpg',title:'Customise your backwater journey',initialContent:{language:'en',utcOffset:'+05:30',blessing:'With the blessings of our families',thanksLine:'Come, float along the backwaters with us',_form:{authored:true,wishes:true}},steps:[
+ step('couple','Who is sailing into a new life together?',[req('bride','First partner’s name'),req('groom','Second partner’s name'),req('language','Invitation language','select',{options:['en','ml','ta','te','kn','hi']}),q('blessing','Opening family blessing','textarea')]),
+ step('date','When is your wedding?',[req('date','Wedding date','date'),req('time','Wedding start time','time'),q('end','Wedding end time','time'),req('utcOffset','Time zone','select',{options:['+05:30','+00:00','+01:00','+02:00','+04:00','+08:00','-04:00','-05:00']})]),
+ step('venue','Where will the wedding take place?',[req('venue','Venue name'),req('address','City or full address'),q('mapUrl','Directions link','url')],'Your ceremony appears at the lakeside mandapam. Directions and calendar details use this location.'),
+ step('story','Share your story on the water',[toggle('story','Include our story'),req('story','Your story','textarea',{when:'_form.story'})],'Skipping this removes the story boat stop from the journey.'),
+ step('engagement','Will you celebrate an engagement?',event('engagement','an engagement'),'An optional stop at the traditional veranda.'),
+ step('reception','Will there be a reception?',event('reception','a reception'),'An optional houseboat stop, with its own date, time and directions.'),
+ step('replies','Invite your guests to reply',[toggle('rsvp','Include RSVP'),req('whatsapp','WhatsApp number with country code','text',{when:'_form.rsvp',format:'phone'}),q('thanksLine','Closing invitation wording','textarea')]),
+ step('atmosphere','A final blessing and your soundtrack',[toggle('wishes','Let guests float a blessing lamp'),q('music','Background music','audio')],'The floating lamps are counted on each guest’s device. Music is optional.'),
+ step('review','Your backwater journey is ready',[],'Review each detail, preview the complete journey, and choose your invitation address.')
+]},theeramTemplate.field_schema);
+
+export function theeramData(c,{preview=false,url='',guest=''}={}){
+ const authored=c._form?.authored,enabled=k=>!authored||c._form[k]===true;
+ const event=(type,e)=>({type,date:e.date||'',start:e.time||'',end:e.end||'',venue:e.venue||'',place:e.address||'',map:e.mapUrl||[e.venue,e.address].filter(Boolean).join(', ')});
+ return {language:c.language||'en',languages:[c.language||'en'],bride:c.bride||'',groom:c.groom||'',nameOrder:'bride_first',blessing:c.blessing||'',story:enabled('story')?c.story||'':'',events:[...(enabled('engagement')&&c.engagement?.date?[event('engagement',c.engagement)]:[]),event('wedding',c),...(enabled('reception')&&c.reception?.date?[event('reception',c.reception)]:[])],timezone:c.utcOffset||'+05:30',rsvp:enabled('rsvp')?{whatsapp:c.whatsapp||''}:{},wishes:enabled('wishes')?{}:false,music:c.music?{src:c.music}:null,guest,share:{url,image:'/assets/theeram/og.jpg'},headings:{thanksLine:c.thanksLine||''},site:'findmyinvite.com',preview};
+}

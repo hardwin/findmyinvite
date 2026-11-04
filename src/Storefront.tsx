@@ -68,7 +68,7 @@ export default function Storefront(){
   ...defaultShopFilters(kindFromQuery()),
   collection:(q.get('collection')?normalizeGalleryCollection(q.get('collection')):'all') as GalleryTier|'all',
   tradition:(['christian','hindu','muslim','interfaith'].includes(q.get('tradition')||'')?q.get('tradition'):'all') as Tradition|'all',
-  setting:(['church','garden','temple','palace','beach','minimal'].includes(q.get('setting')||'')?q.get('setting'):'all') as Setting|'all',
+  setting:(['backwater','church','garden','temple','palace','beach','minimal'].includes(q.get('setting')||'')?q.get('setting'):'all') as Setting|'all',
   type:occasions.some(([id])=>id===q.get('type'))?q.get('type')!:'wedding',
   query:q.get('q')||''
  }));

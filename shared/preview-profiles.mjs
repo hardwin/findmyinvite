@@ -1,3 +1,4 @@
+import {theeramPreview} from '../public/assets/theeram/languages.js';
 import {previewCopy} from './preview-copy.mjs';
 import {languageLocale,INVITATION_LANGUAGES} from './invitation-languages.mjs';
 import {previewDictionary} from './preview-translations.mjs';
@@ -62,7 +63,7 @@ const maps={
 };
 export function previewContent(version,language){
  if(!INVITATION_LANGUAGES.includes(language))language='en';
- const content=structuredClone(version.defaults);
+ const content=structuredClone(version.defaults);if(version.template_id==='theeram')return theeramPreview(content,language);
  if(language==='en'){content.language='en';content._catalogPreview=true;content.previewGuest='Your Family';if(version.template_id==='embroidered-garden'){content.section1.text0='Welcome to our wedding';content.section1.text1='We cannot wait to celebrate this magical day with the people we love.';}return content;}
  const profile=maps[version.template_id];if(!profile)throw Error('This design has no translated preview.');
  const dict=previewDictionary(language),pair=couples[version.template_id][language];
