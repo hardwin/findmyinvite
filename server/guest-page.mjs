@@ -20,6 +20,7 @@ export async function guestDecision(pathname){
 export async function guestPageNotFound(pathname){return (await guestDecision(pathname)).gate==='404';}
 export function pageHeaders(gate,slug=''){
  const headers={'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer','X-Frame-Options':'DENY',[GATE_HEADER]:gate};
+ if(gate==='skip'&&slug==='template-preview'){headers['X-Frame-Options']='SAMEORIGIN';headers['Content-Security-Policy']="frame-ancestors 'self'";}
  if(gate==='404'||!indexable.has(slug))headers['X-Robots-Tag']='noindex, nofollow';
  return headers;
 }

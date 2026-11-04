@@ -200,10 +200,6 @@
         {
           "key": "Referrer-Policy",
           "value": "no-referrer"
-        },
-        {
-          "key": "X-Frame-Options",
-          "value": "DENY"
         }
       ]
     },
@@ -339,6 +335,28 @@
         {
           "key": "Cache-Control",
           "value": "no-store"
+        }
+      ]
+    },
+    {
+      "source": "/((?!template-preview/?$).*)",
+      "headers": [
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        }
+      ]
+    },
+    {
+      "source": "/template-preview",
+      "headers": [
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "frame-ancestors 'self'"
         }
       ]
     }
