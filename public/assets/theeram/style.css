@@ -345,6 +345,7 @@ body.ind #hint, body.ta #hint { font-size: 10.5px !important; letter-spacing: 0 
 /* one stop at a time (2026-10-13): the Next note dims while the camera travels to a stop (app.js glideBusy) */
 #hint.busy { opacity: .4 !important; pointer-events: none !important; transition: opacity .3s; }
 
+.fmi-thumbnail,.fmi-thumbnail body{overflow:hidden!important;scrollbar-width:none!important}.fmi-thumbnail::-webkit-scrollbar{display:none}
 .fmi-thumbnail #hud,.fmi-thumbnail #hint,.fmi-thumbnail #cur{display:none!important}.fmi-thumbnail #stage{pointer-events:none}
 
 body.hi{--id:"Noto Serif Devanagari";--ib:"Noto Serif Devanagari"}body.te{--id:"Noto Serif Telugu";--ib:"Noto Serif Telugu"}body.kn{--id:"Noto Serif Kannada";--ib:"Noto Serif Kannada"}body.ml{--id:"Noto Serif Malayalam"}
