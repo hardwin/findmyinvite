@@ -60,17 +60,17 @@ test('host id stays off the public invitation DTO and credentials reject short p
  assert.deepEqual(credentials({email:' A@B.com ',password:'password1'}),{email:'a@b.com',password:'password1'});
  assert.equal(sessionFrom({access_token:'jwt',refresh_token:'r',expires_in:9,user:{id:'1',email:'a@b.com'}}).user.id,'1');
 });
-test('navbar and save/publish copy require accounts; forgot password stays out of the UI',async()=>{
+test('navbar exposes returning invitations and payment uses account verification',async()=>{
  const header=await readFile(new URL('../src/components.tsx',import.meta.url),'utf8');
  assert.match(header,/Sign in/);
- assert.match(header,/My Templates/);
+ assert.match(header,/My invitations/);
  assert.match(header,/<\/nav>\{authMode&&<AuthModal/);
  const modal=await readFile(new URL('../src/AuthModal.tsx',import.meta.url),'utf8');
  assert.equal(modal.toLowerCase().includes('forgot'),false);
  const editor=await readFile(new URL('../src/templates/InvitationWizard.tsx',import.meta.url),'utf8');
- assert.match(editor,/if\(!readSession\(\)\)\{pending\.current=task;setSignin\(true\)/);
- assert.match(editor,/aria-label="Save"[^>]*onClick=\{\(\)=>withAccount/);
- assert.match(editor,/review\?withAccount\(publish\)/);
+ assert.match(editor,/pending\.current=task;setSignin\(true\)/);
+ assert.match(editor,/Draft saved on this browser/);
+ assert.match(editor,/check\(\)\&\&withAccount\(publish\)/);
  assert.match(editor,/Pay and publish/);
  const guestApi=await readFile(new URL('../src/guest-api.ts',import.meta.url),'utf8');
  assert.match(guestApi,/newGuestKey/);

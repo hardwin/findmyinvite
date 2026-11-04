@@ -2,6 +2,7 @@ import {lazy,Suspense,useEffect} from 'react';
 import Discovery,{DiscoveryPricing} from './Discovery';
 import ContentPages from './ContentPages';
 import OccasionLanding from './OccasionLanding';
+const AuthCallback=lazy(()=>import('./AuthCallback'));
 const TemplateCMS=lazy(()=>import('./templates/TemplateCMS'));
 const WebsiteEditor=lazy(()=>import('./templates/WebsiteEditor').then(m=>({default:m.WebsiteEditor})));
 const TemplatePreview=lazy(()=>import('./templates/WebsiteEditor').then(m=>({default:m.TemplatePreview})));
@@ -18,7 +19,8 @@ export default function App(){const path=location.pathname.replace(/\/$/,'')||'/
  if(path.startsWith('/manage/')){location.replace('/personalise?slug='+encodeURIComponent(path.split('/')[2]));return null;}
  if(path==='/assembly'||path==='/assembly/pipeline'){location.replace(path.includes('pipeline')?'/manager/pipeline':'/manager');return null;}
  let page;
- if(path==='/cms')page=<TemplateCMS/>;
+ if(path==='/auth/callback')page=<AuthCallback/>;
+ else if(path==='/cms')page=<TemplateCMS/>;
  else if(path==='/personalise')page=<WebsiteEditor/>;
  else if(path==='/template-preview')page=<TemplatePreview/>;
  else if(['/dashboard','/login','/signup','/forgot-password'].includes(path))page=<WebsiteAccount/>;

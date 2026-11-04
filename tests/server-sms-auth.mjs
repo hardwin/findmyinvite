@@ -1,0 +1,17 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import auth from '../api/auth.mjs';
+import {normalisePhone} from '../shared/phone.mjs';
+import {changeWeddingField,ceremonyDefaults} from '../shared/ceremony-defaults.mjs';
+async function request(handler,action,body,headers={}){const res={setHeader(){},status(code){this.code=code;return this;},json(body){this.body=body;}};await handler({url:'/api/auth?action='+action,method:'POST',body,headers,socket:{remoteAddress:'local'}},res);return res;}
+function setup(t,fetch){const old={...process.env};Object.assign(process.env,{SMS_AUTH_ENABLED:'1',SUPABASE_URL:'https://fixture.supabase.co',SUPABASE_SERVICE_ROLE_KEY:'service',SUPABASE_ANON_KEY:'public',RATE_LIMIT_SECRET:'test-012345678901234567890123456789'});t.mock.method(globalThis,'fetch',fetch);t.after(()=>{t.mock.restoreAll();for(const key of Object.keys(process.env))if(!(key in old))delete process.env[key];Object.assign(process.env,old);});}
+test('Indian phone formats canonicalise; foreign numbers and malformed input fail',()=>{for(const p of ['9876543210','+91 98765 43210','919876543210'])assert.equal(normalisePhone(p),'+919876543210');for(const p of ['+14155552671','123','abc','+44 7911 123456'])assert.throws(()=>normalisePhone(p));});
+test('SMS request issues no session; only verified SMS creates a Supabase session',async t=>{
+ const calls=[];setup(t,async(url,o)=>{const body=JSON.parse(o.body);calls.push({url,body,headers:o.headers});if(url.includes('/rpc/'))return new Response('true');if(url.endsWith('/otp'))return Response.json({});assert.equal(body.type,'sms');return body.token==='123456'?Response.json({access_token:'verified',refresh_token:'refresh',expires_in:3600,user:{id:'customer',phone:'919876543210'}}):Response.json({code:'otp_expired'},{status:403});});
+ const sent=await request(auth,'sms-send',{phone:'98765 43210'});assert.equal(sent.code,200);assert.equal(sent.body.access_token,undefined);assert.equal(sent.body.retryAfter,60);
+ const call=calls.find(c=>c.url.endsWith('/otp'));assert.deepEqual(call.body,{phone:'+919876543210',channel:'sms',create_user:true});assert.equal(call.headers.apikey,'public');
+ const wrong=await request(auth,'sms-verify',{phone:'9876543210',token:'000000'});assert.equal(wrong.code,400);assert.equal(wrong.body.access_token,undefined);
+ const verified=await request(auth,'sms-verify',{phone:'9876543210',token:'123456'});assert.equal(verified.body.access_token,'verified');assert.equal(verified.body.user.phone,'919876543210');
+});
+test('rate limits stop SMS before provider contact and never expose the number in rate keys',async t=>{let calls=0;setup(t,async(url,o)=>{calls++;assert.ok(url.includes('/rpc/'));assert.equal(o.body.includes('9876543210'),false);return new Response('false');});const r=await request(auth,'sms-send',{phone:'9876543210'});assert.equal(r.code,429);assert.equal(calls,1);});
+test('ceremony dates and times follow main fields without overwriting custom celebrations',()=>{let content={date:'2027-01-01',time:'12:00',events:[{title:'Wedding'},{date:'2027-01-02',time:'18:00'}]};content=changeWeddingField(content,'date','2027-02-01');content=changeWeddingField(content,'time','14:00');assert.deepEqual(content.events,[{title:'Wedding',date:'2027-02-01',time:'14:00'},{date:'2027-01-02',time:'18:00'}]);assert.deepEqual(ceremonyDefaults(content,[{path:'date'},{path:'time'}]),{date:'2027-02-01',time:'14:00'});});

@@ -11,3 +11,5 @@
 footer .fmi-logo{display:inline-flex;justify-content:center}
 footer .fmi-logo img{height:56px;max-width:280px;margin:0 auto}
 @media(max-width:640px){.site-nav .nav-account{gap:10px}.auth-modal{padding:22px 16px}}
+
+.auth-google{width:100%;min-height:44px;padding:12px 18px;display:flex;align-items:center;justify-content:center;gap:12px;border:1px solid #747775;border-radius:8px;background:#fff;color:#1f1f1f;font:500 14px Arial,sans-serif;cursor:pointer}.auth-google svg{flex-shrink:0}.auth-google:focus-visible,.auth-cancel:focus-visible{outline:3px solid #728bd1;outline-offset:3px}.auth-google:disabled,.auth-cancel:disabled{opacity:.6;cursor:wait}.auth-cancel{display:block;margin:16px auto 0;padding:8px 16px;border:0;background:none;color:#4b5563;cursor:pointer}

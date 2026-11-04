@@ -1,5 +1,7 @@
 import {respond,fail,method,bodyJson,rate,authUser,bearer,HttpError} from '../server/core.mjs';
 import {credentials,sessionFrom,goTrue,authError} from '../server/auth-account.mjs';
+import {phoneAuth} from '../server/phone-auth.mjs';
+import {googleAuth} from '../server/google-auth.mjs';
 
 const emailOk=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -26,6 +28,15 @@ function emailConfirmRequired(env=process.env){
 export default async function handler(req,res){
  try{
   const action=new URL(req.url,'https://findmyinvite.com').searchParams.get('action')||'';
+  if(action==='google-start'||action==='google-exchange'){
+   method(req,['POST']);
+   return respond(res,200,await googleAuth(req,action,await bodyJson(req,4096)));
+  }
+  if(action==='sms-send'||action==='sms-verify'){
+   method(req,['POST']);
+   if(process.env.SMS_AUTH_ENABLED!=='1')throw new HttpError(404,'SMS sign-in is currently unavailable.');
+   return respond(res,200,await phoneAuth(req,action,await bodyJson(req,2048)));
+  }
 
   if(action==='signup'){
    method(req,['POST']);

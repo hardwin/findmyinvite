@@ -15,7 +15,7 @@ export function sessionFrom(token){
   access_token:token.access_token,
   refresh_token:typeof token.refresh_token==='string'?token.refresh_token:'',
   expires_in:Number(token.expires_in)||3600,
-  user:{id:String(user.id||''),email:String(user.email||'')}
+  user:{id:String(user.id||''),email:String(user.email||''),phone:String(user.phone||'')}
  };
 }
 export function goTrue(path,options={}){
