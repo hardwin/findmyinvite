@@ -1,18 +1,19 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import handler from '../api/akay-shortlist.mjs';
+import liveHandler from '../api/akay-shortlist.mjs';
 import analytics from '../api/analytics.mjs';
-import {issueSession} from '../server/akay-gate.mjs';
+import {ownerCookie,ownerHeaders,ownerFixture} from './helpers/owner-fixture.mjs';
+const handler=ownerFixture(liveHandler);
 import {parseListQuery,mapItem,decideStatus} from '../server/akay-shortlist.mjs';
 import {payloadFrom} from '../src/akay-shortlist-payload.mjs';
 const id='11111111-1111-4111-8111-111111111111';
 const other='22222222-2222-4222-8222-222222222222';
 const competitor='33333333-3333-4333-8333-333333333333';
-function cookie(){return 'fmi_akay='+issueSession();}
+function cookie(){return ownerCookie;}
 async function request(url,{method='GET',body,secret=true}={}){
  const res={headers:{},setHeader(k,v){this.headers[k]=v;},status(n){this.code=n;return this;},json(b){this.body=b;}};
- await handler({url,method,body,headers:{cookie:secret?cookie():''},socket:{remoteAddress:'127.0.0.1'}},res);
+ await handler({url,method,body,headers:{...ownerHeaders,cookie:secret?cookie():''},socket:{remoteAddress:'127.0.0.1'}},res);
  return res;
 }
 function row(overrides={}){
@@ -130,13 +131,13 @@ test('approve enqueues once; re-approve is 409; reject leaves queue empty',async
  }
 });
 test('operator desk splits traffic journeys live and shortlist and stays unlinked',async()=>{
- const admin=await readFile(new URL('../src/AkayAdmin.tsx',import.meta.url),'utf8');
- assert.match(admin,/\/akay\/shortlist/);
- assert.match(admin,/\/akay\/journeys/);
- assert.match(admin,/\/akay\/live/);
- assert.match(admin,/\/akay\/competitors/);
- assert.match(admin,/\/akay\/upcoming/);
- assert.equal(admin.includes('Traffic & journeys'),false);
+ const admin=await readFile(new URL('../src/owner/OwnerDashboard.tsx',import.meta.url),'utf8');
+ assert.match(admin,/shortlist:'research'/);
+ assert.match(admin,/journeys:'traffic'/);
+ assert.match(admin,/live:'activity'/);
+ assert.match(admin,/competitors:'search'/);
+ assert.match(admin,/upcoming:'research'/);
+ assert.equal(admin.includes('Traffic & journeys'),true);
  const vite=await readFile(new URL('../run.mjs',import.meta.url),'utf8');
  assert.match(vite,/base:'\/'/);
  const shortlist=await readFile(new URL('../src/AkayShortlist.tsx',import.meta.url),'utf8');
@@ -154,7 +155,7 @@ test('operator desk splits traffic journeys live and shortlist and stays unlinke
  assert.match(shortlist,/AkayPagePreview/);
  assert.match(shortlist,/data\?\.items/);
  assert.equal(shortlist.includes('data.items.length'),false);
- assert.match(admin,/DeskPanel/);
+ assert.match(admin,/Suspense/);
  const app=await readFile(new URL('../src/App.tsx',import.meta.url),'utf8');
  assert.match(app,/path\.startsWith\('\/akay'\)/);
  const home=await readFile(new URL('../src/Home.tsx',import.meta.url),'utf8');

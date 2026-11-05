@@ -27,7 +27,7 @@ export default async function handler(req,res){
    return respond(res,200,await runPulse(forceSlot?{forceSlot}:{}));
   }
 
-  if(!sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
+  if(!await sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
 
   if(action==='list'){
    method(req,['GET']);

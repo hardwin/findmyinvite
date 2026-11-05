@@ -1,0 +1,20 @@
+{
+  "kind": "lead",
+  "dryRun": true,
+  "records": [
+    {
+      "data": {
+        "externalId": "inquiry-001",
+        "contactId": "platform-contact-123",
+        "platform": "Instagram",
+        "account": "findmyinvite",
+        "channel": "dm",
+        "intent": "price",
+        "firstInquiryAt": "2026-11-03T12:00:00Z",
+        "status": "New",
+        "templateId": "lace",
+        "language": "Tamil"
+      }
+    }
+  ]
+}

@@ -1,4 +1,5 @@
-const skip=/^\/(akay|assembly|proof)(\/.*)?$/;
+import {startProductTracking} from './product-analytics';
+const skip=/^\/(akay|assembly|proof|cms|manager|workspace)(\/.*)?$/;
 const uuid=/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 function remember(key:string,store:Storage){
  try{
@@ -15,7 +16,7 @@ function referrerValue(){
  try{const url=new URL(raw);return url.origin+url.pathname}catch{return ''}
 }
 function collect(type:'pageview'|'heartbeat'|'leave',dwell=0){
- if(skip.test(location.pathname)||typeof navigator==='undefined')return;
+ if(skip.test(location.pathname)||typeof navigator==='undefined'||sessionStorage.getItem('fmi-owner-csrf'))return;
  const body=JSON.stringify({
   type,path:location.pathname,dwell,
   referrer:referrerValue(),
@@ -26,6 +27,7 @@ function collect(type:'pageview'|'heartbeat'|'leave',dwell=0){
  fetch('/api/analytics?action=collect',{method:'POST',headers:{'Content-Type':'application/json'},body,keepalive:true}).catch(()=>{});
 }
 export function startAnalytics(){
+ startProductTracking();
  if(skip.test(location.pathname))return;
  let mark=Date.now();
  collect('pageview');

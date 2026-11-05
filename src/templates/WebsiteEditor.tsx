@@ -1,3 +1,4 @@
+import {trackProduct} from '../product-analytics';
 import {previewLanguage} from './preview-language';
 import {previewContent} from '../../shared/preview-profiles.mjs';
 import {previewDictionary} from '../../shared/preview-translations.mjs';
@@ -15,7 +16,7 @@ type Quote={taxLabel?:string;basePaise:number;taxPaise:number;totalPaise:number;
 const rupees=(n:number)=>new Intl.NumberFormat('en-IN',{style:'currency',currency:'INR'}).format(n/100);
 export function TemplatePreview(){
  const [version,setVersion]=useState<TemplateVersion|null>(null),[error,setError]=useState('');
- useEffect(()=>{let active=true;loadTemplateVersion(new URLSearchParams(location.search).get('version')||'').then(v=>{if(active)setVersion(v);}).catch(e=>{if(active)setError(e.message);});return()=>{active=false;};},[]);
+ useEffect(()=>{let active=true;loadTemplateVersion(new URLSearchParams(location.search).get('version')||'').then(v=>{if(active){setVersion(v);if(new URLSearchParams(location.search).get('thumbnail')!=='1')trackProduct('preview',v.template_id,previewLanguage());}}).catch(e=>{if(active)setError(e.message);});return()=>{active=false;};},[]);
  const language=previewLanguage(),thumbnail=new URLSearchParams(location.search).get('thumbnail')==='1';
  const content=useMemo(()=>version?{...previewContent(version,language),_catalogThumbnail:thumbnail}:{},[version,language,thumbnail]);
  const copy=previewDictionary(language),back='/templates?lang='+language;

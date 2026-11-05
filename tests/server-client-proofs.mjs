@@ -1,23 +1,16 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import handler from '../api/client-proof.mjs';
-import {issueSession} from '../server/akay-gate.mjs';
+import liveHandler from '../api/client-proof.mjs';
+import {ownerCookie,ownerHeaders,ownerFixture} from './helpers/owner-fixture.mjs';
+const handler=ownerFixture(liveHandler);
 import {insights,setProofStore} from '../server/client-proofs.mjs';
 import {postgrestMock,memoryStore} from './helpers/postgrest-mock.mjs';
 
 const JPEG='data:image/jpeg;base64,'+Buffer.from([255,216,255,224,0,16,74,70,73,70,0,1,1,0,0,1]).toString('base64');
-const operator='fmi_akay='+issueSession();
+const operator=ownerCookie;
 
-function call(url,{method='GET',body,cookie,auth}={}){
- return new Promise(resolve=>{
-  const res={headers:{},code:200,setHeader(k,v){this.headers[k]=v;},status(n){this.code=n;return this;},json(b){this.body=b;resolve(this);},
-   write(){},end(){resolve(this);},on(){},once(){},emit(){},destroy(){resolve(this);},headersSent:false};
-  const headers={host:'findmyinvite.com','x-forwarded-proto':'https'};
-  if(cookie)headers.cookie=cookie;if(auth)headers.authorization='Bearer '+auth;
-  handler({url,method,body,headers,socket:{remoteAddress:'127.0.0.1'}},res);
- });
-}
+async function call(url,{method='GET',body,cookie,auth}={}){const res={headers:{},code:200,setHeader(k,v){this.headers[k]=v},status(n){this.code=n;return this},json(b){this.body=b},write(){},end(){},on(){},once(){},emit(){},destroy(){},headersSent:false};const headers={...ownerHeaders,'x-forwarded-proto':'https'};if(cookie)headers.cookie=cookie;if(auth)headers.authorization='Bearer '+auth;await handler({url,method,body,headers,socket:{remoteAddress:'127.0.0.1'}},res);return res;}
 
 function setup(){
  const oldFetch=global.fetch,oldEnv={...process.env};

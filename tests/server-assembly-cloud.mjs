@@ -22,11 +22,13 @@ import {
  secretsMatch,
  vercelPreviewUrl
 } from '../server/assembly-jobs.mjs';
-import handler from '../api/assembly.mjs';
+import originalHandler from '../api/assembly.mjs';
+import {ownerFixture,ownerCookie,ownerHeaders} from './helpers/owner-fixture.mjs';
+const handler=ownerFixture(originalHandler);
 import {loadAssemblyWorkerInput} from '../server/assembly-worker-input.mjs';
-import {issueSession} from '../server/akay-gate.mjs';
 
-function cookie(){return 'fmi_akay='+issueSession();}
+
+function cookie(){return ownerCookie;}
 
 function mockRes(){
  const res={statusCode:200,headers:{},body:null};
@@ -40,7 +42,7 @@ async function request(url,opts={}){
  const req={
   method:opts.method||'GET',
   url,
-  headers:{cookie:opts.cookie===undefined?cookie():opts.cookie,...(opts.headers||{})},
+  headers:{...ownerHeaders,cookie:opts.cookie===undefined?cookie():opts.cookie,...(opts.headers||{})},
   body:opts.body
  };
  const res=mockRes();

@@ -1,0 +1,2 @@
+export function reportingDate(order){return order.captured_at||(['captured','refunded'].includes(order.status)?order.applied_at:null)||null;}
+export function relativeOrderTime(value,now=Date.now()){const ms=Date.parse(value);if(!Number.isFinite(ms))return '—';const seconds=Math.max(0,Math.floor((now-ms)/1000));if(seconds<60)return 'Just now';for(const [size,name] of [[31536000,'year'],[2592000,'month'],[86400,'day'],[3600,'hr'],[60,'min']])if(seconds>=size){const n=Math.floor(seconds/size);return n+name+(n===1?'':'s')+' ago';}}

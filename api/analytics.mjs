@@ -1,6 +1,7 @@
 import {db,respond,fail,method,HttpError,bodyJson,rate,configured} from '../server/core.mjs';
 import {passwordOk,issueSession,cookieHeader,sessionOk,wantsSecure} from '../server/akay-gate.mjs';
 import {summarize} from '../server/akay-insights.mjs';
+import {session} from '../server/owner/auth.mjs';
 const uuid=/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 function cleanPath(value){
  if(typeof value!=='string')throw new HttpError(400,'Invalid path.');
@@ -10,7 +11,7 @@ function cleanPath(value){
 }
 function collectBody(body){
  const path=cleanPath(body.path);
- if(path==='/akay'||path.startsWith('/akay/')||path==='/assembly'||path.startsWith('/assembly/'))return null;
+ if(/^\/(akay|cms|manager|workspace|assembly|proof)(\/|$)/.test(path))return null;
  const type=body.type;
  if(!['pageview','heartbeat','leave'].includes(type))throw new HttpError(400,'Unknown event.');
  const dwell=Number(body.dwell||0);
@@ -29,6 +30,7 @@ export default async function handler(req,res){
   const action=new URL(req.url,'https://findmyinvite.com').searchParams.get('action')||'';
   if(action==='collect'){
    method(req,['POST']);
+   if(await session(req))return respond(res,202,{ok:true,excluded:'owner activity'});
    const row=collectBody(await bodyJson(req,4096));
    if(!row)return respond(res,202,{ok:true});
    if(!configured())throw new HttpError(503,'Publishing is not configured yet.');
@@ -51,7 +53,7 @@ export default async function handler(req,res){
   }
   if(action==='insights'){
    method(req,['GET']);
-   if(!sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
+   if(!await sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
    if(!configured())throw new HttpError(503,'Publishing is not configured yet.');
    const days=Math.min(30,Math.max(1,Number(new URL(req.url,'https://findmyinvite.com').searchParams.get('days')||7)||7));
    const since=new Date(Date.now()-days*86400000).toISOString();

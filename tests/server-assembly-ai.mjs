@@ -10,10 +10,12 @@ import {
  HERO_LOOP_PROMPT,
  CINEMATIC_PROMPT_WRITER
 } from '../server/assembly-ai.mjs';
-import handler from '../api/assembly.mjs';
-import {issueSession} from '../server/akay-gate.mjs';
+import originalHandler from '../api/assembly.mjs';
+import {ownerFixture,ownerCookie,ownerHeaders} from './helpers/owner-fixture.mjs';
+const handler=ownerFixture(originalHandler);
 
-function cookie(){return 'fmi_akay='+issueSession();}
+
+function cookie(){return ownerCookie;}
 
 function mockRes(){
  const res={statusCode:200,headers:{},body:null};
@@ -27,7 +29,7 @@ async function request(url,opts={}){
  const req={
   method:opts.method||'GET',
   url,
-  headers:{cookie:opts.cookie===undefined?cookie():opts.cookie,...(opts.headers||{})},
+  headers:{...ownerHeaders,cookie:opts.cookie===undefined?cookie():opts.cookie,...(opts.headers||{})},
   body:opts.body
  };
  const res=mockRes();

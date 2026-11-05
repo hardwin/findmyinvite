@@ -1,0 +1,1444 @@
+FMI / AKAYADMIN - GROK AGENT INTEGRATION HANDBOOK
+Version 1.0 | Prepared 4 November 2026 | Production API
+
+This is a self-contained integration handoff: connection instructions, reporting rules, examples for all seven accepted record kinds, and the complete OpenAPI 3.1 specification. No other file is required to understand the integration. No API key or owner password is included.
+
+1. PURPOSE AND CURRENT BOUNDARY
+
+Send genuine organic business inquiries, competitor/AEO observations, content drafts, and authorized work updates into FMI's owner dashboard. Production dashboard: https://findmyinvite.com/akay
+
+This is a scoped WRITE API. Grok cannot use it to read the private dashboard, list customers/orders/tickets, obtain sales figures, or retrieve current record revisions. The owner must supply any necessary identifiers, existing record payloads, revisions, or exported business data. Do not pretend to have inspected unavailable business data.
+
+There is no arbitrary free-form insight endpoint. Submit dated research through observation records, with facts in evidence and interpretation/recommendations in notes. Organic charts and trends are computed from daily reports and matched lead records. Content recommendations may be submitted as article ideas/briefs/drafts. Do not send unsupported record kinds or invented fields.
+
+2. OWNER CONNECTION CHECKLIST
+
+A. Sign into /akay. Under Team & Agents, add Grok as an Agent.
+B. Under Settings & Connections > External agent keys, choose a name, the Grok agent, and the required permission. For operations, select the assigned projects. Create the key and copy it once into Grok's secure secret settings.
+C. Use separate keys per responsibility. Suggested secret names: FMI_ORGANIC_API_KEY, FMI_RESEARCH_API_KEY, FMI_CONTENT_API_KEY, FMI_TICKETS_API_KEY, FMI_RUNS_API_KEY. These are suggested names in Grok's runtime, not additional FMI settings.
+D. Configure expected organic accounts in Settings using the exact platform/account strings Grok will report. Otherwise account coverage cannot be interpreted reliably.
+E. Supply Grok with the real platform account identifiers and any required FMI resource, project, ticket, benchmark, customer, order or template IDs. Do not guess IDs.
+F. Send dryRun:true first. Inspect every result. After validation, send real collected data with dryRun:false. Verify the first accepted report in Organic Leads and the first observation in Search & Content.
+
+No key is created by this document. Store keys outside prompts and source code. Never use the AkayAdmin password as an API credential. Revoke a compromised key in Settings. No permission permits customer-message sending, financial administration, public article publication, advertising spend, or owner login.
+
+3. ENDPOINT AND AUTHENTICATION
+
+POST https://findmyinvite.com/api/owner?action=ingest
+Authorization: Bearer <OWNER_ISSUED_AGENT_KEY>
+Content-Type: application/json
+
+Use server-to-server HTTPS. Owner cookies are not required. All records in a request share one kind:
+{"kind":"daily","dryRun":true,"records":[...valid records...]}
+
+Accepted kinds / required scope / destination:
+- daily, lead / organic:write / Organic Leads and customer-footprint reporting
+- observation / research:write / Search & Content competitor and AEO records
+- article / content:draft / Search & Content editorial workflow
+- ticket / tickets:write / Existing assigned tickets in Projects & Kanban
+- run, time / runs:write / Team & Agents and Calendar & Time
+
+Limits: 100 records per request, 500,000-byte request body, 300 requests per minute per key. Use small batches. Unknown data fields are rejected. JSON numbers must be numbers, not numeric strings. Timestamps in the examples use ISO 8601 UTC with Z. Monetary cost fields use integer paise: Rs.1.18 = 118. Do not invent costs; omitted cost defaults to zero and is not proof of zero actual spend.
+
+dryRun validates without saving business records. It consumes request allowance and does not reserve identities or guarantee that a later write will pass concurrency checks. All examples below are hypothetical and deliberately use dryRun:true. Replace sample facts and placeholder IDs before any write.
+
+4. DAILY ORGANIC REPORTING RULES
+
+A lead/inquiry means someone asking about invitations, price, availability, personalisation or purchasing. Likes, emojis and casual comments are engagement, not business inquiries.
+
+Send one replacement snapshot per platform/account/business date. Use date YYYY-MM-DD and timezone Asia/Kolkata. Keep platform/account capitalization and spelling stable. Row identity is platform + account + date; sourceReportId is provenance, not a second account total.
+
+sourceRevision starts at 1 and increases only when the report changes. Send the full corrected totals, never an incremental delta. An exact retry with the same revision/payload is idempotent. Older revisions, or changed data at the same revision, are rejected with a conflict. Network retries must preserve the original payload and revision.
+
+commentInquiries + dmInquiries counts inquiries, not necessarily unique people. uniqueInquirers is optional and requires reliable deduplication; it cannot exceed their sum. Do not infer unique people from display names. Account totals and optional per-post breakdowns are separate views; never add them together. Individual lead records enrich daily totals and are never added to them.
+
+Use complete:false for incomplete collection and complete:true only when the stated business day is fully covered. Missing reports mean UNKNOWN, never zero. A complete zero report means no inquiries were found after actual collection. Today's data remains 'so far' until complete. Configure expected accounts so yesterday can be flagged overdue after 10:00 IST.
+
+cutoff is the collection coverage cutoff; collectedAt is when collection completed. cutoff must not exceed collectedAt. collectedAt cannot be more than ten minutes ahead of server time. Future business dates are rejected. 23:59:59 IST is 18:29:59Z on the same calendar day. Do not label a partial day complete.
+
+Optional reach and engagement require measured source data. posts supports at most 500 distinct postId entries; each can contain url, inquiry counts and optional reach. Do not add fields such as campaign, impressions or language to daily reports unless a future contract explicitly supports them.
+
+Trends require complete coverage: compare seven complete calendar days against the preceding seven. Missing coverage is insufficient evidence, not decline. Default attention rules are three complete zero-inquiry days, or at least a 30% seven-day decline when the previous period had at least ten inquiries. Thresholds are owner-configurable. Visits, inquiries and purchases overlap and must never be added into a fabricated total customer count.
+
+5. INDIVIDUAL LEADS
+
+Lead data requires externalId, contactId, platform, account, channel (comment or dm), and firstInquiryAt. Use stable external inquiry identifiers and reliable stable contact identifiers. Keep records distinct unless identifiers or owner-approved merges justify joining them. Do not ingest full DM transcripts by default.
+
+Statuses: New, Responded, Quoted, Won, Lost.
+Intent: invitations, price, availability, personalisation, purchase, other inquiry.
+Optional fields include postUrl, templateId, language, notes, firstResponseAt, customerId, orderId. Link only real known FMI records. A response timestamp must be actual and not precede the inquiry. Conversion and revenue only describe the reliably matched subset, not all reported inquiries. Lace & Pearls currently uses templateId ivory-lace.
+
+6. RESEARCH, AEO AND CONTENT
+
+Observations require name, kind (Competitor or AEO), subject, locale, observedAt and evidence. Provide a sourceUrl whenever possible and explain what it supports. Separate sourced facts from inference and recommended action in notes. Do not claim competitor traffic, revenue, backlinks or market share without an identified source; label estimates.
+
+For AEO, use the exact owner-provided benchmarkId, current benchmarkRevision and question, with matching locale. Supply engine, surface, mentioned and citedUrl based on actual observations. Supported surfaces: Search, Assistant, API experiment, Website. Keep consumer assistant/search observations separate from API experiments. Mention and citation are different; citedUrl is the actual FMI citation, if any. Comparable fixed-benchmark observations support citation-rate reporting, not a universal AI rank.
+
+Observation identity depends on agent + sourceUrl + observedAt. Different observations with the same URL/timestamp can conflict; retain distinct genuine evidence references and real observation timestamps. Do not fabricate timestamps to bypass conflicts. No externalId field exists for observations.
+
+Articles accept Markdown body, name, slug, author, language and status, with optional excerpt, notes, query, cluster, metaDescription and relatedTemplates. Agent status is restricted to Idea, Brief, Draft or Review. Only the owner approves, schedules and publishes. Use original, sourced content; preserve existing article URLs. Stable slug identifies the article within the agent's namespace. Published slugs are immutable. Article drafts do not become public simply because ingestion succeeds.
+
+7. ASSIGNED WORK REPORTING
+
+Ticket updates require an existing assigned ticket ID, current FMI revision, and the full ticket data. The agent cannot create tickets here or reassign them. Both its resource assignment and allowed project must match. Stages: Backlog, Ready, In progress, Review, Blocked, Done. Priorities: Low, Medium, High, Urgent. Use notes/checklist for actual progress; do not claim unperformed work.
+
+Runs require stable externalId, name, resourceId, assigned projectId, status and occurredAt. Run statuses: Running, Complete, Failed, Blocked. Time entries require stable externalId, name, resourceId, assigned projectId, date and minutes (1-1440). Optional cost is integer paise; optional costSourceId supports cost reconciliation. Runs may include resultUrl. Do not report the same incurred cost in multiple records without an appropriate common reconciliation reference.
+
+8. RESPONSES, REVISIONS AND RETRIES
+
+HTTP 200 can contain rejected records. Inspect results individually:
+{"dryRun":false,"receivedAt":"2026-11-04T09:00:00Z","results":[{"index":0,"accepted":true,"id":"FMI_RECORD_ID","revision":1,"reportRevision":1,"duplicate":false}]}
+
+A rejected result includes index, accepted:false, error and status. reportRevision applies to daily reports. FMI revision is the stored record concurrency revision; it is distinct from the daily sourceRevision. Dry runs may not return persisted IDs/revisions.
+
+For a non-daily first write, normally omit id/revision. Persist the returned FMI id/revision and the full canonical payload. To update, send:
+{"kind":"lead","dryRun":false,"records":[{"id":"RETURNED_ID","revision":1,"data":{...FULL_VALID_LEAD_DATA...}}]}
+
+Updates are full records, not patches. Omitted optional/defaulted fields can clear previous data. Preserve the complete intended state. Exact retries deduplicate by stable identity and normalized payload. Do not substitute a different key/agent namespace to evade a conflict. A stale revision requires the owner to provide the current record and revision; this API has no agent read endpoint.
+
+400: correct invalid fields. 401: check missing/invalid key. 403: check permission, revoked key, resource/project restrictions. 409: resolve revision/identity conflict; do not overwrite blindly. 413: split request. 429: honor Retry-After if supplied, otherwise wait at least 60 seconds. 5xx/network timeout: exponential backoff with jitter and the exact original payload/identifiers. Retry only failed or unconfirmed records. Stop repeated failures and report the issue to the owner without exposing secrets.
+
+9. PRACTICAL OPERATING ROUTINE
+
+- Use only sources/accounts the owner authorized Grok to access.
+- Collect real inquiries; submit partial daily snapshots while collection is incomplete, with increasing revisions as totals change.
+- Submit the previous day's complete snapshot before 10:00 IST where practical; send explicit complete zeros only after verified collection.
+- Submit optional detail leads using reliable identifiers; update statuses only when known.
+- Submit dated competitor/AEO evidence against the owner's agreed benchmark. Do not manufacture observations for missing providers.
+- Summarize coverage, measured changes, uncertainty and concrete recommendations. Request owner data for private revenue comparisons that this API cannot read.
+- Submit drafts for owner review; no autonomous publication or spending.
+- Persist successful IDs/revisions in Grok's own integration state and monitor every API result.
+
+FMI ingestion does not schedule Grok or grant social-platform access. Scheduling and authorized source collection must be configured separately in the external Grok runtime.
+
+10. REQUEST EXAMPLES
+
+Each example is schema-validated locally against FMI's current contracts, but placeholder IDs still need owner-supplied assignments. Never submit hypothetical metrics as live business activity.
+
+EXAMPLE: DAILY
+{
+  "kind": "daily",
+  "dryRun": true,
+  "records": [
+    {
+      "sourceReportId": "instagram-findmyinvite-2026-11-03",
+      "sourceRevision": 1,
+      "date": "2026-11-03",
+      "timezone": "Asia/Kolkata",
+      "platform": "Instagram",
+      "account": "findmyinvite",
+      "commentInquiries": 4,
+      "dmInquiries": 6,
+      "uniqueInquirers": 8,
+      "cutoff": "2026-11-03T18:29:59Z",
+      "complete": true,
+      "collectedAt": "2026-11-03T19:00:00Z",
+      "posts": [
+        {
+          "postId": "POST_ID",
+          "url": "https://www.instagram.com/p/POST_ID/",
+          "commentInquiries": 3,
+          "dmInquiries": 2
+        }
+      ]
+    }
+  ]
+}
+
+EXAMPLE: LEAD
+{
+  "kind": "lead",
+  "dryRun": true,
+  "records": [
+    {
+      "data": {
+        "externalId": "inquiry-001",
+        "contactId": "stable-platform-contact-id",
+        "platform": "Instagram",
+        "account": "findmyinvite",
+        "channel": "dm",
+        "intent": "price",
+        "firstInquiryAt": "2026-11-03T12:00:00Z",
+        "status": "New",
+        "templateId": "ivory-lace",
+        "language": "Tamil",
+        "notes": "Asked about invitation pricing."
+      }
+    }
+  ]
+}
+
+EXAMPLE: OBSERVATION
+{
+  "kind": "observation",
+  "dryRun": true,
+  "records": [
+    {
+      "data": {
+        "name": "Competitor pricing observation",
+        "kind": "Competitor",
+        "subject": "Competitor name",
+        "surface": "Website",
+        "locale": "en-IN",
+        "observedAt": "2026-11-03T12:00:00Z",
+        "sourceUrl": "https://competitor.example/pricing",
+        "evidence": "Replace this example with the facts actually observed at the source.",
+        "notes": "Separate observed facts, interpretation, and a recommended next action."
+      }
+    }
+  ]
+}
+
+EXAMPLE: ARTICLE
+{
+  "kind": "article",
+  "dryRun": true,
+  "records": [
+    {
+      "data": {
+        "name": "Choosing a Tamil wedding invitation",
+        "slug": "choosing-a-tamil-wedding-invitation",
+        "body": "# Choosing a Tamil wedding invitation\n\nReplace this sample with a sourced, original draft for owner review.",
+        "author": "Grok",
+        "language": "English",
+        "status": "Draft",
+        "query": "Tamil wedding invitation website",
+        "cluster": "Wedding planning",
+        "metaDescription": "A practical guide to choosing a Tamil wedding invitation website.",
+        "relatedTemplates": [
+          "ivory-lace"
+        ]
+      }
+    }
+  ]
+}
+
+EXAMPLE: RUN
+{
+  "kind": "run",
+  "dryRun": true,
+  "records": [
+    {
+      "data": {
+        "name": "Organic reporting collection",
+        "externalId": "grok-organic-2026-11-03",
+        "resourceId": "OWNER_SUPPLIED_GROK_RESOURCE_ID",
+        "projectId": "OWNER_ASSIGNED_PROJECT_ID",
+        "status": "Complete",
+        "occurredAt": "2026-11-03T19:00:00Z",
+        "notes": "Replace with a factual summary of the completed work."
+      }
+    }
+  ]
+}
+
+EXAMPLE: TIME
+{
+  "kind": "time",
+  "dryRun": true,
+  "records": [
+    {
+      "data": {
+        "name": "Organic reporting collection",
+        "externalId": "grok-time-2026-11-03",
+        "resourceId": "OWNER_SUPPLIED_GROK_RESOURCE_ID",
+        "projectId": "OWNER_ASSIGNED_PROJECT_ID",
+        "date": "2026-11-03",
+        "minutes": 15
+      }
+    }
+  ]
+}
+
+EXAMPLE: TICKET
+{
+  "kind": "ticket",
+  "dryRun": true,
+  "records": [
+    {
+      "id": "OWNER_SUPPLIED_TICKET_ID",
+      "revision": 1,
+      "data": {
+        "name": "Review organic inquiry trend",
+        "status": "In progress",
+        "priority": "Medium",
+        "projectId": "OWNER_ASSIGNED_PROJECT_ID",
+        "assigneeId": "OWNER_SUPPLIED_GROK_RESOURCE_ID",
+        "notes": "Replace with actual progress.",
+        "due": "",
+        "checklist": [
+          {
+            "text": "Check reporting coverage",
+            "done": false
+          }
+        ],
+        "links": []
+      }
+    }
+  ]
+}
+
+11. MINIMAL JAVASCRIPT HTTP CLIENT
+
+Set payload to one of the JSON objects above, replacing sample data. Set the matching key as a secret environment variable. No SDK is required.
+
+const response = await fetch("https://findmyinvite.com/api/owner?action=ingest", {
+  method: "POST",
+  headers: {
+    "Authorization": "Bearer " + process.env.FMI_ORGANIC_API_KEY,
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify(payload)
+});
+const result = await response.json();
+if (!response.ok) throw new Error("FMI request failed: " + response.status + " " + (result.error || ""));
+for (const record of result.results || []) {
+  if (!record.accepted) {
+    // Save this error for retry/correction without logging secrets or private payloads.
+    console.error({index: record.index, status: record.status, error: record.error});
+  } else {
+    // Persist record.id and record.revision in your integration state.
+  }
+}
+
+12. COMPLETE OPENAPI 3.1 SPECIFICATION
+
+The embedded specification below is self-contained. Its schema defines accepted fields and types; the business/concurrency rules above also apply. The live contract URL is https://findmyinvite.com/api/owner?action=contract but requires an authenticated OWNER session, not an agent bearer key. Grok does not need to fetch it because it is included here.
+
+BEGIN OPENAPI JSON
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "FMI external reporting API",
+    "version": "1.0.0",
+    "description": "Owner-issued bearer keys only. Daily snapshots replace account/date totals. Detail records and post breakdowns never increment those totals. dryRun validates without business writes. No scope grants publishing, customer messaging, financial administration or ad spending."
+  },
+  "servers": [
+    {
+      "url": "https://findmyinvite.com",
+      "description": "Production"
+    },
+    {
+      "url": "http://127.0.0.1:5173",
+      "description": "Local development only"
+    }
+  ],
+  "security": [
+    {
+      "agentKey": []
+    }
+  ],
+  "paths": {
+    "/api/owner": {
+      "post": {
+        "operationId": "submitExternalReports",
+        "summary": "Validate or ingest scoped external updates",
+        "parameters": [
+          {
+            "name": "action",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "const": "ingest"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "required": [
+                      "kind",
+                      "records"
+                    ],
+                    "properties": {
+                      "kind": {
+                        "const": "daily"
+                      },
+                      "dryRun": {
+                        "type": "boolean",
+                        "default": false
+                      },
+                      "records": {
+                        "type": "array",
+                        "minItems": 1,
+                        "maxItems": 100,
+                        "items": {
+                          "$ref": "#/components/schemas/daily"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "kind",
+                      "records"
+                    ],
+                    "properties": {
+                      "kind": {
+                        "const": "lead"
+                      },
+                      "dryRun": {
+                        "type": "boolean",
+                        "default": false
+                      },
+                      "records": {
+                        "type": "array",
+                        "minItems": 1,
+                        "maxItems": 100,
+                        "items": {
+                          "type": "object",
+                          "required": [
+                            "data"
+                          ],
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "description": "Ticket ID for ticket updates. For other kinds use the ID returned by FMI, or omit."
+                            },
+                            "revision": {
+                              "type": "integer",
+                              "minimum": 0,
+                              "description": "Last accepted FMI revision for updates; omit for first write or exact retry."
+                            },
+                            "data": {
+                              "$ref": "#/components/schemas/lead"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "kind",
+                      "records"
+                    ],
+                    "properties": {
+                      "kind": {
+                        "const": "observation"
+                      },
+                      "dryRun": {
+                        "type": "boolean",
+                        "default": false
+                      },
+                      "records": {
+                        "type": "array",
+                        "minItems": 1,
+                        "maxItems": 100,
+                        "items": {
+                          "type": "object",
+                          "required": [
+                            "data"
+                          ],
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "description": "Ticket ID for ticket updates. For other kinds use the ID returned by FMI, or omit."
+                            },
+                            "revision": {
+                              "type": "integer",
+                              "minimum": 0,
+                              "description": "Last accepted FMI revision for updates; omit for first write or exact retry."
+                            },
+                            "data": {
+                              "$ref": "#/components/schemas/observation"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "kind",
+                      "records"
+                    ],
+                    "properties": {
+                      "kind": {
+                        "const": "article"
+                      },
+                      "dryRun": {
+                        "type": "boolean",
+                        "default": false
+                      },
+                      "records": {
+                        "type": "array",
+                        "minItems": 1,
+                        "maxItems": 100,
+                        "items": {
+                          "type": "object",
+                          "required": [
+                            "data"
+                          ],
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "description": "Ticket ID for ticket updates. For other kinds use the ID returned by FMI, or omit."
+                            },
+                            "revision": {
+                              "type": "integer",
+                              "minimum": 0,
+                              "description": "Last accepted FMI revision for updates; omit for first write or exact retry."
+                            },
+                            "data": {
+                              "$ref": "#/components/schemas/article"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "kind",
+                      "records"
+                    ],
+                    "properties": {
+                      "kind": {
+                        "const": "ticket"
+                      },
+                      "dryRun": {
+                        "type": "boolean",
+                        "default": false
+                      },
+                      "records": {
+                        "type": "array",
+                        "minItems": 1,
+                        "maxItems": 100,
+                        "items": {
+                          "type": "object",
+                          "required": [
+                            "data"
+                          ],
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "description": "Ticket ID for ticket updates. For other kinds use the ID returned by FMI, or omit."
+                            },
+                            "revision": {
+                              "type": "integer",
+                              "minimum": 0,
+                              "description": "Last accepted FMI revision for updates; omit for first write or exact retry."
+                            },
+                            "data": {
+                              "$ref": "#/components/schemas/ticket"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "kind",
+                      "records"
+                    ],
+                    "properties": {
+                      "kind": {
+                        "const": "run"
+                      },
+                      "dryRun": {
+                        "type": "boolean",
+                        "default": false
+                      },
+                      "records": {
+                        "type": "array",
+                        "minItems": 1,
+                        "maxItems": 100,
+                        "items": {
+                          "type": "object",
+                          "required": [
+                            "data"
+                          ],
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "description": "Ticket ID for ticket updates. For other kinds use the ID returned by FMI, or omit."
+                            },
+                            "revision": {
+                              "type": "integer",
+                              "minimum": 0,
+                              "description": "Last accepted FMI revision for updates; omit for first write or exact retry."
+                            },
+                            "data": {
+                              "$ref": "#/components/schemas/run"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "kind",
+                      "records"
+                    ],
+                    "properties": {
+                      "kind": {
+                        "const": "time"
+                      },
+                      "dryRun": {
+                        "type": "boolean",
+                        "default": false
+                      },
+                      "records": {
+                        "type": "array",
+                        "minItems": 1,
+                        "maxItems": 100,
+                        "items": {
+                          "type": "object",
+                          "required": [
+                            "data"
+                          ],
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "description": "Ticket ID for ticket updates. For other kinds use the ID returned by FMI, or omit."
+                            },
+                            "revision": {
+                              "type": "integer",
+                              "minimum": 0,
+                              "description": "Last accepted FMI revision for updates; omit for first write or exact retry."
+                            },
+                            "data": {
+                              "$ref": "#/components/schemas/time"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              "examples": {
+                "daily": {
+                  "value": {
+                    "kind": "daily",
+                    "dryRun": true,
+                    "records": [
+                      {
+                        "sourceReportId": "instagram-fmi-2026-11-03",
+                        "sourceRevision": 1,
+                        "date": "2026-11-03",
+                        "timezone": "Asia/Kolkata",
+                        "platform": "Instagram",
+                        "account": "findmyinvite",
+                        "commentInquiries": 4,
+                        "dmInquiries": 6,
+                        "uniqueInquirers": 8,
+                        "cutoff": "2026-11-03T18:29:59Z",
+                        "complete": true,
+                        "collectedAt": "2026-11-03T19:00:00Z",
+                        "posts": [
+                          {
+                            "postId": "post-001",
+                            "url": "https://www.instagram.com/p/EXAMPLE/",
+                            "commentInquiries": 3,
+                            "dmInquiries": 2
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                },
+                "lead": {
+                  "value": {
+                    "kind": "lead",
+                    "dryRun": true,
+                    "records": [
+                      {
+                        "data": {
+                          "externalId": "inquiry-001",
+                          "contactId": "platform-contact-123",
+                          "platform": "Instagram",
+                          "account": "findmyinvite",
+                          "channel": "dm",
+                          "intent": "price",
+                          "firstInquiryAt": "2026-11-03T12:00:00Z",
+                          "status": "New",
+                          "templateId": "ivory-lace",
+                          "language": "Tamil"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Inspect every result: a batch can contain rejected records.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "dryRun": {
+                      "type": "boolean"
+                    },
+                    "receivedAt": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "index",
+                          "accepted"
+                        ],
+                        "properties": {
+                          "index": {
+                            "type": "integer"
+                          },
+                          "accepted": {
+                            "type": "boolean"
+                          },
+                          "id": {
+                            "type": "string"
+                          },
+                          "revision": {
+                            "type": "integer"
+                          },
+                          "reportRevision": {
+                            "type": "integer"
+                          },
+                          "duplicate": {
+                            "type": "boolean"
+                          },
+                          "error": {
+                            "type": "string"
+                          },
+                          "status": {
+                            "type": "integer"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid bearer key"
+          },
+          "403": {
+            "description": "Revoked key or insufficient scope"
+          },
+          "413": {
+            "description": "Batch exceeds 500 KB"
+          },
+          "429": {
+            "description": "Rate exceeded: retry after one minute"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "agentKey": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "fmi_<64 hex>",
+        "description": "Separate revocable key per external resource and scope. Operational keys are restricted to assigned project IDs. Scopes: tickets:write, organic:write, research:write, content:draft, runs:write"
+      }
+    },
+    "schemas": {
+      "daily": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "sourceReportId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180
+          },
+          "sourceRevision": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9007199254740991
+          },
+          "date": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          },
+          "timezone": {
+            "type": "string",
+            "const": "Asia/Kolkata"
+          },
+          "platform": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180
+          },
+          "account": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180
+          },
+          "commentInquiries": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1000000000000
+          },
+          "dmInquiries": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1000000000000
+          },
+          "uniqueInquirers": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1000000000000
+          },
+          "reach": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1000000000000
+          },
+          "engagement": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1000000000000
+          },
+          "cutoff": {
+            "type": "string",
+            "format": "date-time",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+          },
+          "complete": {
+            "type": "boolean"
+          },
+          "collectedAt": {
+            "type": "string",
+            "format": "date-time",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+          },
+          "posts": {
+            "default": [],
+            "maxItems": 500,
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "postId": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 180
+                },
+                "url": {
+                  "default": "",
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "format": "uri"
+                    },
+                    {
+                      "type": "string",
+                      "const": ""
+                    }
+                  ]
+                },
+                "commentInquiries": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000000000
+                },
+                "dmInquiries": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000000000
+                },
+                "reach": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000000000
+                }
+              },
+              "required": [
+                "postId",
+                "commentInquiries",
+                "dmInquiries"
+              ]
+            }
+          }
+        },
+        "required": [
+          "sourceReportId",
+          "sourceRevision",
+          "date",
+          "timezone",
+          "platform",
+          "account",
+          "commentInquiries",
+          "dmInquiries",
+          "cutoff",
+          "complete",
+          "collectedAt"
+        ],
+        "additionalProperties": false
+      },
+      "lead": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "externalId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180
+          },
+          "account": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180
+          },
+          "platform": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180
+          },
+          "contactId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180
+          },
+          "channel": {
+            "type": "string",
+            "enum": [
+              "comment",
+              "dm"
+            ]
+          },
+          "intent": {
+            "default": "other inquiry",
+            "type": "string",
+            "enum": [
+              "invitations",
+              "price",
+              "availability",
+              "personalisation",
+              "purchase",
+              "other inquiry"
+            ]
+          },
+          "firstInquiryAt": {
+            "type": "string",
+            "format": "date-time",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+          },
+          "status": {
+            "default": "New",
+            "type": "string",
+            "enum": [
+              "New",
+              "Responded",
+              "Quoted",
+              "Won",
+              "Lost"
+            ]
+          },
+          "postUrl": {
+            "default": "",
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uri"
+              },
+              {
+                "type": "string",
+                "const": ""
+              }
+            ]
+          },
+          "customerId": {
+            "default": "",
+            "type": "string",
+            "maxLength": 4000
+          },
+          "orderId": {
+            "default": "",
+            "type": "string",
+            "maxLength": 4000
+          },
+          "language": {
+            "default": "",
+            "type": "string",
+            "maxLength": 4000
+          },
+          "templateId": {
+            "default": "",
+            "type": "string",
+            "maxLength": 4000
+          },
+          "firstResponseAt": {
+            "type": "string",
+            "format": "date-time",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+          },
+          "notes": {
+            "default": "",
+            "type": "string",
+            "maxLength": 4000
+          }
+        },
+        "required": [
+          "externalId",
+          "account",
+          "platform",
+          "contactId",
+          "channel",
+          "firstInquiryAt"
+        ],
+        "additionalProperties": false
+      },
+      "observation": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180
+          },
+          "notes": {
+            "default": "",
+            "type": "string",
+            "maxLength": 4000
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "Competitor",
+              "AEO"
+            ]
+          },
+          "subject": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180
+          },
+          "question": {
+            "default": "",
+            "type": "string",
+            "maxLength": 4000
+          },
+          "engine": {
+            "default": "",
+            "type": "string",
+            "maxLength": 4000
+          },
+          "surface": {
+            "default": "Website",
+            "type": "string",
+            "enum": [
+              "Search",
+              "Assistant",
+              "API experiment",
+              "Website"
+            ]
+          },
+          "locale": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180
+          },
+          "observedAt": {
+            "type": "string",
+            "format": "date-time",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+          },
+          "sourceUrl": {
+            "default": "",
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uri"
+              },
+              {
+                "type": "string",
+                "const": ""
+              }
+            ]
+          },
+          "citedUrl": {
+            "default": "",
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uri"
+              },
+              {
+                "type": "string",
+                "const": ""
+              }
+            ]
+          },
+          "mentioned": {
+            "default": false,
+            "type": "boolean"
+          },
+          "benchmarkId": {
+            "default": "",
+            "type": "string",
+            "maxLength": 4000
+          },
+          "benchmarkRevision": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991
+          },
+          "evidence": {
+            "type": "string",
+            "maxLength": 4000
+          }
+        },
+        "required": [
+          "name",
+          "kind",
+          "subject",
+          "locale",
+          "observedAt",
+          "evidence"
+        ],
+        "additionalProperties": false
+      },
+      "article": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180
+          },
+          "notes": {
+            "default": "",
+            "type": "string",
+            "maxLength": 4000
+          },
+          "slug": {
+            "type": "string",
+            "maxLength": 120,
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          },
+          "excerpt": {
+            "default": "",
+            "type": "string",
+            "maxLength": 4000
+          },
+          "body": {
+            "type": "string",
+            "maxLength": 100000
+          },
+          "author": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180
+          },
+          "language": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180
+          },
+          "query": {
+            "default": "",
+            "type": "string",
+            "maxLength": 4000
+          },
+          "cluster": {
+            "default": "",
+            "type": "string",
+            "maxLength": 4000
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Idea",
+              "Brief",
+              "Draft",
+              "Review",
+              "Scheduled",
+              "Published",
+              "Refresh"
+            ]
+          },
+          "publishAt": {
+            "type": "string",
+            "format": "date-time",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+          },
+          "metaDescription": {
+            "default": "",
+            "type": "string",
+            "maxLength": 320
+          },
+          "relatedTemplates": {
+            "default": [],
+            "maxItems": 20,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "name",
+          "slug",
+          "body",
+          "author",
+          "language",
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ticket": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180
+          },
+          "notes": {
+            "default": "",
+            "type": "string",
+            "maxLength": 4000
+          },
+          "status": {
+            "default": "Backlog",
+            "type": "string",
+            "enum": [
+              "Backlog",
+              "Ready",
+              "In progress",
+              "Review",
+              "Blocked",
+              "Done"
+            ]
+          },
+          "priority": {
+            "default": "Medium",
+            "type": "string",
+            "enum": [
+              "Low",
+              "Medium",
+              "High",
+              "Urgent"
+            ]
+          },
+          "projectId": {
+            "default": "",
+            "type": "string",
+            "maxLength": 4000
+          },
+          "assigneeId": {
+            "default": "",
+            "type": "string",
+            "maxLength": 4000
+          },
+          "due": {
+            "default": "",
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+              },
+              {
+                "type": "string",
+                "const": ""
+              }
+            ]
+          },
+          "checklist": {
+            "default": [],
+            "maxItems": 50,
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 180
+                },
+                "done": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "text",
+                "done"
+              ]
+            }
+          },
+          "links": {
+            "default": [],
+            "maxItems": 20,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "additionalProperties": false
+      },
+      "run": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180
+          },
+          "notes": {
+            "default": "",
+            "type": "string",
+            "maxLength": 4000
+          },
+          "externalId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180
+          },
+          "resourceId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180
+          },
+          "projectId": {
+            "default": "",
+            "type": "string",
+            "maxLength": 4000
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Running",
+              "Complete",
+              "Failed",
+              "Blocked"
+            ]
+          },
+          "occurredAt": {
+            "type": "string",
+            "format": "date-time",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+          },
+          "cost": {
+            "default": 0,
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1000000000000
+          },
+          "costSourceId": {
+            "default": "",
+            "type": "string",
+            "maxLength": 4000
+          },
+          "resultUrl": {
+            "default": "",
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uri"
+              },
+              {
+                "type": "string",
+                "const": ""
+              }
+            ]
+          }
+        },
+        "required": [
+          "name",
+          "externalId",
+          "resourceId",
+          "status",
+          "occurredAt"
+        ],
+        "additionalProperties": false
+      },
+      "time": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180
+          },
+          "notes": {
+            "default": "",
+            "type": "string",
+            "maxLength": 4000
+          },
+          "externalId": {
+            "default": "",
+            "type": "string",
+            "maxLength": 4000
+          },
+          "resourceId": {
+            "default": "",
+            "type": "string",
+            "maxLength": 4000
+          },
+          "projectId": {
+            "default": "",
+            "type": "string",
+            "maxLength": 4000
+          },
+          "date": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          },
+          "minutes": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1440
+          },
+          "cost": {
+            "default": 0,
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1000000000000
+          },
+          "costSourceId": {
+            "default": "",
+            "type": "string",
+            "maxLength": 4000
+          }
+        },
+        "required": [
+          "name",
+          "date",
+          "minutes"
+        ],
+        "additionalProperties": false
+      }
+    }
+  }
+}
+END OPENAPI JSON

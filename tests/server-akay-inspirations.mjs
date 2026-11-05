@@ -18,15 +18,16 @@ import {
  parseModelJson
 } from '../server/style-pulse.mjs';
 import {parseInspirationListQuery,cleanInspirationId,decideInspirationStatus} from '../server/akay-inspirations.mjs';
-import handler from '../api/akay-inspirations.mjs';
-import {issueSession} from '../server/akay-gate.mjs';
+import liveHandler from '../api/akay-inspirations.mjs';
+import {ownerCookie,ownerHeaders,ownerFixture} from './helpers/owner-fixture.mjs';
+const handler=ownerFixture(liveHandler);
 
-function cookie(){return 'fmi_akay='+issueSession();}
+function cookie(){return ownerCookie;}
 async function request(url,{method='GET',headers={},cron=false}={}){
  const res={headers:{},statusCode:200,body:null,setHeader(k,v){this.headers[k]=v;},status(n){this.statusCode=n;return this;},json(b){this.body=b;return this;}};
  await handler({
   method,url,
-  headers:{
+  headers:{...ownerHeaders,
    ...(cron?{authorization:'Bearer test-cron-secret'}:{cookie:cookie()}),
    ...headers
   }
@@ -115,11 +116,11 @@ test('inspirations API requires session; pulse requires cron; run is session-gat
  const prev=process.env.BLOG_PULSE_CRON_SECRET;
  process.env.BLOG_PULSE_CRON_SECRET='test-cron-secret';
  try{
-  const open=await request('/api/akay-inspirations?action=list',{headers:{cookie:''}});
+  const open=await request('/api/akay-inspirations?action=list',{headers:{...ownerHeaders,cookie:''}});
   assert.equal(open.statusCode,401);
-  const pulseDenied=await request('/api/akay-inspirations?action=pulse',{method:'POST',headers:{cookie:''}});
+  const pulseDenied=await request('/api/akay-inspirations?action=pulse',{method:'POST',headers:{...ownerHeaders,cookie:''}});
   assert.equal(pulseDenied.statusCode,401);
-  const runDenied=await request('/api/akay-inspirations?action=run',{method:'POST',headers:{cookie:''}});
+  const runDenied=await request('/api/akay-inspirations?action=run',{method:'POST',headers:{...ownerHeaders,cookie:''}});
   assert.equal(runDenied.statusCode,401);
   const ui=await readFile(new URL('../src/AkayInspirations.tsx',import.meta.url),'utf8');
   assert.match(ui,/blog_title/);
@@ -133,10 +134,10 @@ test('inspirations API requires session; pulse requires cron; run is session-gat
 });
 
 test('AkayAdmin registers Inspirations; vercel cron is +1 min after blog',async()=>{
- const admin=await readFile(new URL('../src/AkayAdmin.tsx',import.meta.url),'utf8');
+ const admin=await readFile(new URL('../src/owner/OwnerDashboard.tsx',import.meta.url),'utf8');
  assert.match(admin,/inspirations/);
  assert.match(admin,/AkayInspirations/);
- assert.match(admin,/akay\.css/);
+ assert.match(admin,/owner\.css/);
  const vercel=await readFile(new URL('../vercel.json',import.meta.url),'utf8');
  assert.match(vercel,/"31 2 \* \* \*"/);
  const sql=await readFile(new URL('../supabase/012_inspiration_blog_backlink.sql',import.meta.url),'utf8');
