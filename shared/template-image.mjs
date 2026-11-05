@@ -1,6 +1,20 @@
 export const IMAGE_UPLOAD_BYTES=1048576;
 export const IMAGE_SOURCE_BYTES=50*1048576;
 const extensions={'image/jpeg':'jpg','image/png':'png','image/webp':'webp'};
+export const PHOTO_ACCEPT='image/jpeg,image/png,image/webp,image/heic,image/heif,image/heic-sequence,image/heif-sequence,.jpg,.jpeg,.png,.webp,.heic,.heif';
+const heicBrands=new Set(['heic','heix','hevc','hevx','heim','heis','mif1','msf1']);
+
+export async function isHeicPhoto(file){
+ const b=new Uint8Array(await file.slice(0,512).arrayBuffer());
+ const ascii=(start,end)=>String.fromCharCode(...b.slice(start,end));
+ if(ascii(4,8)==='ftyp'){
+  const end=Math.min(new DataView(b.buffer).getUint32(0),b.length),brands=[ascii(8,12)];
+  for(let i=16;i+4<=end;i+=4)brands.push(ascii(i,i+4));
+  if(brands.includes('avif')||brands.includes('avis'))return false;
+  if(brands.some(brand=>heicBrands.has(brand)))return true;
+ }
+ return /^image\/hei[cf](?:-sequence)?$/i.test(file.type)||/\.hei[cf]$/i.test(file.name||'');
+}
 
 // Browser MIME hints (including files staged by older versions) can be wrong.
 async function imageSource(file){
@@ -12,23 +26,39 @@ async function imageSource(file){
  return type===file.type?file:new Blob([file],{type});
 }
 
-async function decodeImage(file,env){
+async function decodeNative(file,env){
  if(env.createImageBitmap){
   try{const bitmap=await env.createImageBitmap(file);return {source:bitmap,width:bitmap.width,height:bitmap.height,dispose:()=>bitmap.close()};}catch{/* Some mobile browsers support more formats through <img>. */}
  }
  const url=env.URL.createObjectURL(file),image=new env.Image();
  try{
-  await new Promise((resolve,reject)=>{image.onload=resolve;image.onerror=()=>reject(Error('This photo could not be opened. Please choose a JPG, PNG or WebP photo. For HEIC photos, export a JPG from Photos and try again.'));image.src=url;});
+  await new Promise((resolve,reject)=>{image.onload=resolve;image.onerror=()=>reject(Error('This photo could not be opened. Please select it again or try another photo.'));image.src=url;});
   return {source:image,width:image.naturalWidth,height:image.naturalHeight,dispose:()=>{image.src='';env.URL.revokeObjectURL(url);}};
  }catch(error){env.URL.revokeObjectURL(url);throw error;}
 }
 
+async function loadHeic(file){return (await import('./template-heic.mjs')).decodeHeic(file);}
+
+async function decodeImage(file,env,convertHeic){
+ try{return await decodeNative(file,env);}catch(error){
+  if(!await isHeicPhoto(file))throw error;
+  // Bound failures (including a worker that cannot start) so the form never stays
+  // disabled indefinitely. Release a bitmap that finishes after the timeout.
+  let expired=false,timer;
+  const conversion=Promise.resolve().then(()=>convertHeic(file)).then(decoded=>{if(expired)decoded.dispose();return decoded;});
+  try{
+   return await Promise.race([conversion,new Promise((resolve,reject)=>{timer=setTimeout(()=>{expired=true;reject(Error('Photo preparation timed out. Please try selecting your photo again.'));},90000);})]);
+  }catch(cause){throw new Error('We could not prepare this iPhone photo. Please try selecting it again. Your other invitation details are still here.',{cause});}
+  finally{clearTimeout(timer);}
+ }
+}
+
 // Keep the original photo on the device; resize and encode only the uploaded copy.
-export async function optimise(file,kind='image',env=globalThis){
+export async function optimise(file,kind='image',env=globalThis,convertHeic=loadHeic){
  if(kind!=='image')return file;
  if(!file.size)throw Error('This photo is empty. Please select it again.');
  if(file.size>IMAGE_SOURCE_BYTES)throw Error('Please choose a photo under 50 MB. Large phone photos are resized automatically.');
- const decoded=await decodeImage(await imageSource(file),env);
+ const decoded=await decodeImage(await imageSource(file),env,convertHeic);
  const canvas=env.document.createElement('canvas');
  try{
   if(!decoded.width||!decoded.height)throw Error('This photo could not be opened. Please choose another photo.');
