@@ -5,7 +5,7 @@ import OccasionLanding from './OccasionLanding';
 const AuthCallback=lazy(()=>import('./AuthCallback'));
 const TemplateCMS=lazy(()=>import('./templates/TemplateCMS'));
 const WebsiteEditor=lazy(()=>import('./templates/WebsiteEditor').then(m=>({default:m.WebsiteEditor})));
-const TemplatePreview=lazy(()=>import('./templates/WebsiteEditor').then(m=>({default:m.TemplatePreview})));
+const TemplatePreview=lazy(()=>import('./templates/TemplatePreview').then(m=>({default:m.TemplatePreview})));
 const TemplateGuest=lazy(()=>import('./templates/WebsiteEditor').then(m=>({default:m.TemplateGuest})));
 const WebsiteAccount=lazy(()=>import('./templates/WebsiteEditor').then(m=>({default:m.WebsiteAccount})));
 const AkayAdmin=lazy(()=>import('./AkayAdmin'));
