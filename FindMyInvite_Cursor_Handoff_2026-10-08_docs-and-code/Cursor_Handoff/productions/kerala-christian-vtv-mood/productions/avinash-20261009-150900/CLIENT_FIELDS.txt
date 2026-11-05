@@ -1,0 +1,69 @@
+FMI CLIENT DETAILS — Template: kerala-christian-v1 (Christian church wedding v1)
+Project: Avinash
+Client: Rahul & Praveena (Mr.Rahul & Ms. Praveena)
+Source: Ashok request 2026-10-09
+Adjustments: host_lines not a separate field in the request -> the trailing "Invited by / Rahul Gurujwada / With Love & Blessings"
+block of reception_lines moved to host_lines (scene-10). Trailing / double spaces trimmed. scene-07 = aisle from behind, no priest (standing default).
+
+invitation_lines:
+The Wedding of
+Rahul & Praveena
+
+groom_title:
+Mr.Rahul
+
+groom_name:
+Rahul
+
+bride_title:
+Ms. Praveena
+
+bride_name:
+Praveena
+
+family_lines:
+With the Blessings of
+Groom’s Parents
+Gurujwada Samadana
+& Late Gurujwada Samrudhi
+Bride’s Parents
+Mr. Anandam
+& Mrs. Pulamma
+
+ceremony_lines:
+Holy Matrimony
+16th October 2026
+11:30 a.m.
+In the Morning
+
+venue_lines:
+Wedding Venue
+The Last Days Ministers
+Pastapur X Road
+Zaheerabad
+
+reception_lines:
+Reception - lunch
+16th October 2026
+1:00 p.m. onwards
+N Convention
+Pastapur X Road
+Zaheerabad
+
+host_lines:
+Invited by
+Rahul Gurujwada
+With Love & Blessings
+
+save_date_lines:
+SAVE THE DATE
+16th October 2026
+
+save_date_inline:
+SAVE THE DATE / 16th October / 2026
+
+devotional_line_1:
+With God’s Grace
+
+devotional_line_2:
+We Invite You
