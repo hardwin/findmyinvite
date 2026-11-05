@@ -11,6 +11,7 @@ import {InvitationLink} from './InvitationLink';
 import {changeWeddingField,ceremonyDefaults} from '../../shared/ceremony-defaults.mjs';
 import {mapLocalMedia,uploadLocalMedia,isLocalMedia} from './local-media';
 import {uploadTemplateMedia} from '../../shared/template-upload.mjs';
+import {optimise} from '../../shared/template-image.mjs';
 import {upload} from '@vercel/blob/client';
 import {templateToken} from './api';
 import {formErrors,formValue,questionVisible} from '../../shared/template-forms.mjs';
@@ -72,7 +73,7 @@ export function WebsiteEditor(){
    history.replaceState(null,'','/personalise?slug='+encodeURIComponent(current.slug));
   }
   const slug=current.slug;
-  const uploaded=await mapLocalMedia(content,id=>uploadLocalMedia(id,slug,(file,kind)=>uploadTemplateMedia({file,kind,slug,optimise:async(f:File)=>f,api:templateApi,upload,token:templateToken})));
+  const uploaded=await mapLocalMedia(content,id=>uploadLocalMedia(id,slug,(file,kind)=>uploadTemplateMedia({file,kind,slug,optimise,api:templateApi,upload,token:templateToken})));
   const result=await templateApi<{invitation:SavedInvite}>('/api/invitations?action=v2-save&slug='+encodeURIComponent(slug),{...common,content:uploaded,revision:current.revision,newSlug:address||slug});
   saved.current=result.invitation;setInvite(result.invitation);setContent(uploaded);setAddress(result.invitation.slug);dirty.current=false;
   const oldKey=storageKey.current;storageKey.current='fmi-form:'+data.version.id+':'+result.invitation.slug;

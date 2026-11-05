@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><title>Phone photo regression checks</title>
+<body><h1>Phone photo regression checks</h1><p>Local-only test page. No customer files or uploads.</p>
+<button id="run">Run browser checks</button><pre id="results" role="status">Ready</pre><div id="preview"></div>
+<script type="module">
+import {optimise,IMAGE_UPLOAD_BYTES} from '/shared/template-image.mjs';
+const output=document.querySelector('#results');
+const check=(ok,message)=>{if(!ok)throw Error(message);};
+const encode=(canvas,type,quality)=>new Promise(resolve=>canvas.toBlob(resolve,type,quality));
+document.querySelector('#run').onclick=async()=>{
+ document.querySelector('#run').disabled=true;output.textContent='Running…';
+ try{
+  const canvas=document.createElement('canvas');canvas.width=4032;canvas.height=3024;
+  const context=canvas.getContext('2d'),pixels=context.createImageData(canvas.width,canvas.height);let seed=42;
+  for(let i=0;i<pixels.data.length;i+=4){seed=(Math.imul(seed,1664525)+1013904223)>>>0;pixels.data[i]=seed&255;pixels.data[i+1]=(seed>>>8)&255;pixels.data[i+2]=(seed>>>16)&255;pixels.data[i+3]=255;}
+  context.putImageData(pixels,0,0);
+  const original=await encode(canvas,'image/png');canvas.width=canvas.height=0;
+  check(original.size>10*1048576,'Fixture must exceed 10 MB');
+  const lines=['Original: '+(original.size/1048576).toFixed(2)+' MB, 4032 × 3024'];
+  const safari={createImageBitmap:globalThis.createImageBitmap.bind(globalThis),URL,Image,document:{createElement:()=>{const c=document.createElement('canvas'),native=c.toBlob.bind(c);c.toBlob=(callback,type,quality)=>native(callback,type==='image/webp'?'image/png':type,quality);return c;}}};
+  for(const [label,env,type] of [['Native browser',globalThis,'image/png'],['Safari encoder fallback',safari,'image/png'],['Old mislabelled draft',safari,'image/webp'],['Missing MIME',globalThis,'']]){
+   const result=await optimise(new File([original],'phone.png',{type}),'image',env);
+   check(result.size<=IMAGE_UPLOAD_BYTES,'Output must fit upload limit');
+   const bytes=new Uint8Array(await result.slice(0,12).arrayBuffer());
+   check(result.type==='image/jpeg'?bytes[0]===255&&bytes[1]===216:result.type==='image/png'?bytes[0]===137:String.fromCharCode(...bytes.slice(8,12))==='WEBP','MIME must match actual bytes');
+   const decoded=await createImageBitmap(result);check(decoded.width===1800&&decoded.height===1350,'Image dimensions/aspect ratio changed');decoded.close();
+   lines.push('PASS '+label+': '+result.type+', '+Math.round(result.size/1024)+' KB');
+   if(label==='Native browser'){const image=new Image();image.src=URL.createObjectURL(result);image.alt='Compressed test photo';image.style.width='240px';document.querySelector('#preview').append(image);}
+  }
+  output.textContent=lines.join('\n')+'\nAll browser checks passed.';
+ }catch(error){output.textContent='FAIL: '+error.message;}
+};
+</script></body></html>
