@@ -1,0 +1,26 @@
+{
+  "project": "Kaatrukulle",
+  "iteration": 1,
+  "role": "hero-video",
+  "prediction_id": "670seqjv4xrmy0d0s7t9h25tn4",
+  "model": "xai/grok-imagine-video-1.5",
+  "router": "replicate",
+  "input_image": "https://replicate.delivery/xezq/Du3eG95zOtXsLiL1HeljvuVAerVIjUoUevCqP01ST3eLcvA6C/tmpm2att6rs.jpg",
+  "duration_s": 6,
+  "resolution": "720p",
+  "aspect_ratio": "9:16",
+  "output_url": "https://replicate.delivery/xezq/m0SfIR3iO8yFQaABuL0pdgxAlSMeqFM6rDifzouAJssV6LguA/tmpa8a0qc4l.mp4",
+  "path": "/workspace/kaatrukulle/hero-video.mp4",
+  "status": "succeeded",
+  "moderated": false,
+  "metrics": {
+    "predict_time": 36.853510703,
+    "total_time": 36.883232321,
+    "video_output_duration_seconds": 6.042
+  },
+  "approx_cost_usd": 0.48,
+  "approx_cost_basis": "$0.08/s \u00d7 6s list",
+  "spend_used_approx_usd": 2.3,
+  "spend_remaining_approx_usd": 1.7,
+  "budget_usd": 4.0
+}
