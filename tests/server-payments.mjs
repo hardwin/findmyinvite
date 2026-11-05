@@ -24,9 +24,9 @@ async function request(url,options={},fn=handler){
 }
 
 test('website and video SKUs are fixed INR amounts',()=>{
- assert.equal(PAYMENT_SKUS['website-classic'].amount,118);
- assert.equal(PAYMENT_SKUS['website-royal'].amount,118);
- assert.equal(PAYMENT_SKUS['video-royal'].amount,118);
+ assert.equal(PAYMENT_SKUS['website-classic'].amount,23482);
+ assert.equal(PAYMENT_SKUS['website-royal'].amount,23482);
+ assert.equal(PAYMENT_SKUS['video-royal'].amount,23482);
  assert.equal(skuValue('website-classic'),'website-classic');
  assert.throws(()=>skuValue('free'),{status:400});
  assert.throws(()=>skuValue('assembly-proceed'),{status:400});
@@ -80,7 +80,7 @@ test('retired website checkout is blocked; video checkout still creates orders',
   calls.push({host:parsed.hostname,path:parsed.pathname,method:options.method||'GET',body:options.body?JSON.parse(options.body):undefined});
   if(parsed.pathname==='/auth/v1/user')return new Response(JSON.stringify({id:'user-1',email:'host@example.com'}));
   if(parsed.pathname.endsWith('/rpc/consume_rate_limit'))return new Response('true',{headers:{'Content-Type':'application/json'}});
-  if(parsed.hostname==='api.razorpay.com')return new Response(JSON.stringify({id:'order_test',amount:118,currency:'INR'}),{status:200});
+  if(parsed.hostname==='api.razorpay.com')return new Response(JSON.stringify({id:'order_test',amount:23482,currency:'INR'}),{status:200});
   if(parsed.pathname.endsWith('/payments'))return new Response(JSON.stringify([{id:'pay-row',razorpay_order_id:'order_test',status:'created'}]),{status:201});
   return new Response('[]');
  });
@@ -88,9 +88,9 @@ test('retired website checkout is blocked; video checkout still creates orders',
   const retired=await request('/api/create-order',{method:'POST',body:{sku:'website-classic',slug:'aaron-maria'}},createOrder);
   assert.equal(retired.code,410);assert.equal(calls.some(c=>c.host==='api.razorpay.com'),false);
   const created=await request('/api/create-order',{method:'POST',body:{sku:'video-royal',slug:'aaron-maria'}},createOrder);
-  assert.equal(created.code,201);assert.equal(created.body.order_id,'order_test');assert.equal(created.body.orderId,'order_test');assert.equal(created.body.amount,118);
+  assert.equal(created.code,201);assert.equal(created.body.order_id,'order_test');assert.equal(created.body.orderId,'order_test');assert.equal(created.body.amount,23482);
   assert.equal(created.body.keyId,'rzp_test_key');
-  assert.ok(calls.some(c=>c.host==='api.razorpay.com'&&c.body?.amount===118));
+  assert.ok(calls.some(c=>c.host==='api.razorpay.com'&&c.body?.amount===23482));
   const tiny=await request('/api/create-order',{method:'POST',headers:{authorization:'Bearer '+jwt},body:{amount:50,currency:'INR',receipt:'tiny'}},createOrder);
   assert.equal(tiny.code,400);
  }finally{t.mock.restoreAll();for(const key of Object.keys(process.env))if(!(key in env))delete process.env[key];Object.assign(process.env,env);}

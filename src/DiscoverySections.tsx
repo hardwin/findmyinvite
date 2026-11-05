@@ -1,3 +1,4 @@
+import posters from './catalog-posters.json';
 import {useState} from 'react';
 import {ArrowRight,X} from 'lucide-react';
 import categoryImages from '../public/assets/categories/sources.json';
@@ -23,7 +24,7 @@ export function BrowseCategories({cards,loading}:{cards:Card[];loading:boolean})
     const href='/templates?'+(isTradition?'tradition=':isIllustration?'q=':'setting=')+encodeURIComponent(query);
     return <a className="dc-category-card" key={category.id} href={href} aria-label={`Browse ${category.label}${loading?'':`, ${count} invitations`}`}>
      <span className="dc-category-thumb" style={{backgroundImage:`url(${category.backgroundImage})`,backgroundColor:category.backgroundColor,backgroundBlendMode:category.backgroundBlend}}>
-      <img src={category.image} alt="" width={640} height={400} decoding="async"/>
+      <img src={category.image} loading="lazy" srcSet={Object.entries((posters as Record<string,Record<string,string>>)[category.image]||{}).map(([w,url])=>url+' '+w+'w').join(',')} sizes="(max-width:600px) 160px, 240px" alt="" width={640} height={400} decoding="async"/>
       <span className="dc-category-count">{loading?'…':count} invitations</span>
      </span>
      <strong className="dc-category-name">{category.label}</strong>

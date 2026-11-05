@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><title>HEIC photo regression checks</title>
+<body><h1>HEIC photo regression checks</h1><p>Select a real HEIC fixture. Conversion stays on this device.</p>
+<label>HEIC test photo <input id="file" type="file" accept=".heic,.heif,image/heic,image/heif"></label>
+<pre id="results" role="status">Ready</pre><div id="preview"></div>
+<script type="module">
+import {optimise,IMAGE_UPLOAD_BYTES} from '/shared/template-image.mjs';
+const output=document.querySelector('#results');
+const check=(ok,message)=>{if(!ok)throw Error(message);};
+// Match an in-app browser that cannot decode HEIC natively and cannot encode WebP.
+const embedded={createImageBitmap:async()=>{throw Error('Native HEIC unavailable');},URL,Image:class{set src(value){if(value)queueMicrotask(()=>this.onerror());}},document:{createElement:()=>{const c=document.createElement('canvas'),native=c.toBlob.bind(c);c.toBlob=(callback,type,quality)=>native(callback,type==='image/webp'?'image/png':type,quality);return c;}}};
+document.querySelector('#file').onchange=async event=>{
+ const original=event.target.files[0];if(!original)return;
+ event.target.disabled=true;output.textContent='Converting HEIC…';
+ try{
+  const lines=['Original: '+original.name+', '+(original.size/1048576).toFixed(2)+' MB'];
+  for(const [label,env,file] of [['Native browser',globalThis,original],['In-app browser fallback',embedded,original],['Missing MIME and extension',embedded,new File([original],'photo',{type:''})],['Generic MIME',embedded,new File([original],'photo',{type:'application/octet-stream'})]]){
+   const started=performance.now(),result=await optimise(file,'image',env);
+   check(result.size>0&&result.size<=IMAGE_UPLOAD_BYTES,'Output must fit upload limit');
+   const bytes=new Uint8Array(await result.slice(0,12).arrayBuffer());
+   check(result.type==='image/jpeg'?bytes[0]===255&&bytes[1]===216:result.type==='image/png'?bytes[0]===137:String.fromCharCode(...bytes.slice(8,12))==='WEBP','MIME must match bytes');
+   const bitmap=await createImageBitmap(result);check(Math.max(bitmap.width,bitmap.height)<=1800,'Photo not resized');
+   lines.push('PASS '+label+': '+result.type+', '+Math.round(result.size/1024)+' KB, '+bitmap.width+' × '+bitmap.height+', '+((performance.now()-started)/1000).toFixed(1)+'s');bitmap.close();
+   output.textContent=lines.join('\n');
+   if(label==='In-app browser fallback'){const img=new Image();img.src=URL.createObjectURL(result);img.alt='Automatically converted HEIC photo';img.style.maxWidth='400px';img.style.maxHeight='400px';document.querySelector('#preview').replaceChildren(img);}
+  }
+  output.textContent+='\nAll HEIC browser checks passed.';
+ }catch(error){output.textContent+='\nFAIL: '+error.message;}
+ finally{event.target.disabled=false;event.target.value='';}
+};
+</script></body></html>

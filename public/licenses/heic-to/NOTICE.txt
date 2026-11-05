@@ -1,0 +1,18 @@
+HEIC photo decoder
+
+This application uses heic-to 1.6.7 by Hopper Gee, under LGPL-3.0-or-later,
+with libheif 1.23.7 and libde265. The decoder is loaded as a separate module
+only when needed. Photos are decoded locally in a browser worker.
+
+Library source and build instructions:
+https://github.com/hoppergee/heic-to/tree/78345a3fcdb4a1d70d513fce2646aeff0127f7ba
+https://www.npmjs.com/package/heic-to/v/1.6.7
+https://github.com/strukturag/libheif/tree/v1.23.7
+https://github.com/strukturag/libde265
+
+The library is used without source modifications. Interface-compatible modified
+versions may replace it. Modification and reverse engineering of the library
+for debugging such modifications are permitted under its licence.
+
+The LGPL and GPL licence texts accompany this notice in LGPL-3.0.txt and
+GPL-3.0.txt. The upstream library includes its component copyright notices.

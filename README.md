@@ -56,6 +56,23 @@ Use Node.js 22. The preview serves the production build; rebuild after source ch
 
 See [ITERATION-3.md](ITERATION-3.md) for before/after changes, verification evidence and remaining work.
 
-Online invitations and RSVPs persist to Supabase; browser-local drafts and responses remain a separate legacy path and are not automatically migrated. Guest recovery links permit cross-device management. No accounts, email recovery or payment checkout are implemented. Backend tests use provider mocks; historical real-cloud evidence and its limits are documented in the handoff.
+Online invitations and RSVPs persist to Supabase. The current website flow supports Supabase accounts and Razorpay checkout; the older browser-local invitation path is not automatically migrated.
+
+## Customer Google login
+
+Customers can personalise, select photos, save on this browser and preview without an account. Google sign-in opens immediately before checkout, using the existing Supabase account service and PKCE. Text answers remain in session storage and selected media in IndexedDB through the redirect. Customers return to their saved review and explicitly click Pay and publish. My invitations provides returning access, editing and share links.
+
+Live setup (Google enabled, client ID/callback and all three application return URLs below verified on 4 November 2026; deployment and a complete Google sign-in remain pending):
+
+1. Create a Google OAuth **Web application** client. Add `https://qqvcptjkfcjkwbkookcm.supabase.co/auth/v1/callback` as its authorized redirect URI.
+2. In Supabase Authentication > Sign In / Providers > Google, enter the client ID and client secret and enable Google. Keep these credentials in provider settings, never browser code.
+3. Add `https://findmyinvite.com/auth/callback**` to Supabase's redirect allowlist, plus the exact local/preview origins used for testing (for example `http://127.0.0.1:5173/auth/callback**`). The suffix allows the per-attempt flow query parameter.
+4. The server uses `SUPABASE_URL`, `SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `RATE_LIMIT_SECRET`, and `SITE_ORIGIN`. Optional comma-separated `AUTH_REDIRECT_ORIGINS` permits explicit additional application origins. Localhost origins are permitted only outside production/Vercel.
+
+See [Supabase Google sign-in setup](https://supabase.com/docs/guides/auth/social-sign-in/auth-google) for Google consent-screen and client configuration. The callback strips the authorization code from its URL, skips analytics and uses no-store/no-referrer headers on Vercel.
+
+SMS authentication is on hold and absent from the customer UI. Its retained API routes return 404 unless `SMS_AUTH_ENABLED=1`; keep the Supabase Phone provider disabled until SMS is deliberately reintroduced. The separate manager email login remains available.
+
+Run focused checks with `node --test tests/server-google-auth.mjs tests/server-sms-auth.mjs tests/server-auth.mjs tests/server-template-forms.mjs tests/server-template-api.mjs tests/server-payments.mjs`. With `npm run dev` running, `node tests/browser-google-journey.mjs` exercises the mobile UI with isolated OAuth, storage and payment fixtures; use `TEST_DESKTOP=1` for desktop and `BROWSER_PATH` if needed. Actual Google sign-in and a real Razorpay transaction require configured provider accounts and remain separate release checks.
 
 Original reference/media source: https://zareqia.com/. No generated image or video assets were used. Downloaded videos contain embedded source branding; rights and public distribution clearance remain release gates. All 13 seeded template rows remained unpublished at handoff inspection. Historical launch proposals are superseded by the handoff index. No reference traffic, reviews or revenue claims should be represented as FindMyInvite results.

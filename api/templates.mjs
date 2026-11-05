@@ -10,7 +10,7 @@ import {validateSchema,validateContent,mediaReferences} from '../shared/template
 async function templateAssets(content){const ids=mediaReferences(content);if(!ids.length)return;const rows=await db('template_media?id=in.('+ids.join(',')+')&invitation_id=is.null&status=eq.ready&select=id');if(ids.some(id=>!rows.some(r=>r.id===id)))throw new HttpError(400,'Use ready CMS media, not customer uploads.');}
 export default async function handler(req,res){try{
  const q=new URL(req.url,'https://findmyinvite.com').searchParams,action=q.get('action')||'list';
- if(action==='public'){method(req,['GET']);const rows=await db('template_catalog?generation=eq.2&isactive=eq.true&published=eq.true&select=id,name,description,tradition,thumbnail,current_version_id,sort_order&order=sort_order.asc');return respond(res,200,{templates:rows,basePaise:INVITATION_BASE_PAISE});}
+ if(action==='public'){method(req,['GET']);const rows=await db('template_catalog?generation=eq.2&isactive=eq.true&published=eq.true&select=id,name,description,tradition,thumbnail,current_version_id,sort_order&order=sort_order.asc');res.setHeader('Cache-Control','public, max-age=0, must-revalidate');res.setHeader('CDN-Cache-Control','public, s-maxage=60');res.setHeader('X-Content-Type-Options','nosniff');return res.status(200).json({templates:rows,basePaise:INVITATION_BASE_PAISE});}
  if(action==='version'){method(req,['GET']);return respond(res,200,{version:safeVersion(await catalogVersion(q.get('id')))});}
  if(action==='editor'){method(req,['GET']);const v=await catalogVersion(q.get('id'));return respond(res,200,{version:safeVersion(v),form:await templateForm(v)});}
  const user=await operator(req);

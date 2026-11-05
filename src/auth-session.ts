@@ -1,4 +1,4 @@
-export type HostSession={access_token:string;refresh_token:string;expires_at:number;user:{id:string;email:string};remember?:boolean};
+export type HostSession={access_token:string;refresh_token:string;expires_at:number;user:{id:string;email:string;phone?:string};remember?:boolean};
 const KEY_LONG='findmyinvite-auth-v1';
 const KEY_SHORT='findmyinvite-auth-session-v1';
 
