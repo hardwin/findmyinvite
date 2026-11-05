@@ -1,0 +1,438 @@
+{
+  "schema_version": "2.0-composite",
+  "iteration": "kerala-christian-v2",
+  "name": "The Wedding of Alex & Anna",
+  "status": "template-spec-ready",
+  "lineage": {
+    "story_parent": "kerala-christian-v1",
+    "motion_reference": "celite-maayapoove-lyrical-template",
+    "motion_reference_url": "https://preview.celite.in/preview/video/video-templates/after-effects/movie-templates/maayapoove-lyrical-template/maayapoove-lyrical-template.mp4",
+    "note": "v1 owns the Christian church world and invitation beats. Maayapoove supplies layered AE economics (bg plates + cutouts + text). Film lyrics and soundtrack are NOT part of the product."
+  },
+  "assets_root": "output/kerala-christian-v2",
+  "pipeline": {
+    "mode": "after-effects-composite",
+    "law": "Master plates + FX loops are generated ONCE. Per wedding: swap text parameters + character cutouts + optional music, then stitch. AI video only when a card cannot be sold with still+parallax.",
+    "per_client_steps": [
+      "resolve parameters into text plates (PNG, transparent)",
+      "generate or face-swap character cutouts (PNG, rembg)",
+      "place cutouts + text onto master plates per timeline",
+      "apply beat-locked reveals from beatmap.json",
+      "mux slotted audio",
+      "export final 9:16 mp4"
+    ],
+    "stitch_tooling": [
+      "ffmpeg (overlay, fade, zoompan, xfade=wipeleft/circleopen for torn-paper sims)",
+      "optional Skia/Canvas for text plates",
+      "optional RemBG / BiRefNet for cutouts"
+    ]
+  },
+  "output": {
+    "video": "kerala-christian-v2-final.mp4",
+    "aspect_ratio": "9:16",
+    "width": 720,
+    "height": 1280,
+    "fps": 24,
+    "duration_seconds": 48.0,
+    "frame_count": 1152,
+    "audio": "slotted",
+    "assembly": "Composite timeline cards in order; torn-paper / whip transitions on section markers; no full-scene AI regenerate per client."
+  },
+  "audio": {
+    "beatmap": "assets/audio/beatmap.json",
+    "beat_guide": "assets/audio/kerala-christian-v2-beat-guide-75bpm.mp3",
+    "tempo_bpm": 75,
+    "time_signature": "4/4",
+    "slot": {
+      "parameter": "music_url",
+      "policy": "Host IG/extract track only (Launch 2.0 #3). Align downbeat to t=0 section marker. Do not ship licensed film audio with the template."
+    },
+    "ducking": {
+      "text_hits": -1.5,
+      "section_transitions": -3.0
+    }
+  },
+  "parameters": {
+    "invitation_lines": "The Wedding of\nAlex & Anna",
+    "groom_title": "Mr.",
+    "groom_name": "Alex John",
+    "bride_title": "Ms.",
+    "bride_name": "Anna Thomas",
+    "family_lines": "With the Blessings of\nGroom's Parents\nMr. John Mathew\n& Mrs. Elsy John\nBride's Parents\nMr. Thomas George\n& Mrs. Mercy Thomas",
+    "ceremony_lines": "Holy Matrimony\n15th February 2025\n10:00 a.m.\nIn the Morning",
+    "venue_lines": "Wedding Venue\nSt. Mary's Forane Church\nNear Alappuzha\nKerala",
+    "reception_lines": "Reception - Dinner\n14th February 2025\n7:00 p.m. onwards\nParish Hall Garden\nNear Alappuzha, Kerala",
+    "host_lines": "Invited By\nMr. Kurien Abraham\nMrs. Lizzy Kurien\nBaby. Nia & Noel\nWith Love & Blessings",
+    "save_date_lines": "SAVE THE DATE\n14 & 15 FEBRUARY\n2025",
+    "save_date_inline": "SAVE THE DATE / 14 & 15 FEBRUARY / 2025",
+    "devotional_line_1": "With God's Grace",
+    "devotional_line_2": "We Invite You",
+    "music_url": null,
+    "groom_cutout": null,
+    "bride_cutout": null,
+    "couple_cutout": null,
+    "hands_cutout": null
+  },
+  "style": {
+    "world": "Same Kerala Catholic coastal church compound as v1: cream-white Portuguese plaster, one bell tower with cross, jasmine + soft pink roses, powder-blue haze, champagne-gold lettering.",
+    "presentation": "Lyrical collage cards on distressed paper / dusty-rose paper. Torn-edge transitions. Dual type: champagne-gold display serif + soft script. Foreground floral PNGs. Slow parallax. Storybook-animation characters as transparent cutouts — never photographic people.",
+    "color_tokens": {
+      "paper_cool": "#D8D4CF",
+      "paper_rose": "#D4A5A8",
+      "display_gold": "#C5A35A",
+      "display_plum": "#5C3A56",
+      "script_sage": "#6F8F78",
+      "script_white": "#F7F4EE",
+      "accent_cyan_panel": "#7EC8C8",
+      "church_watermark": "rgba(255,255,255,0.18)"
+    },
+    "typography": {
+      "display": {
+        "family": "Cinzel Decorative / similar display serif",
+        "weight": 700,
+        "color": "display_gold",
+        "behaviors": ["scale_in_on_beat", "oversized_crop_pan", "opacity_pop"]
+      },
+      "script": {
+        "family": "Great Vibes / soft handwritten script",
+        "weight": 400,
+        "color": "script_sage",
+        "behaviors": ["fade_up", "soft_tracking_in"]
+      }
+    },
+    "particle_motion": "Sparse jasmine/rose petal drift loops (master). Never a confetti cannon. Dust motes only inside god-ray plates when a cinematic bg plate is used."
+  },
+  "characters": {
+    "groom": {
+      "look": "Adult Kerala Christian groom, warm medium-brown skin, clean-shaven, soft black hair with gentle side part, ivory formal suit, soft boutonniere, quiet reserved smile. Storybook animation — not photographic.",
+      "cutout_framing": "waist-up, facing slightly camera-right, transparent bg, 9:16 safe margins"
+    },
+    "bride": {
+      "look": "Adult Kerala Christian bride, warm medium-brown skin, dark hair in elegant low bun with soft veil and white jasmine, ivory lace-and-silk gown, delicate gold cross pendant. Storybook animation — not photographic.",
+      "cutout_framing": "waist-up, facing slightly camera-left, transparent bg, 9:16 safe margins"
+    },
+    "couple": {
+      "look": "Same groom+bride identities, standing together, soft smile, optional garlands for finale cards.",
+      "cutout_framing": "knees-up or waist-up centered pair, transparent bg"
+    },
+    "hands": {
+      "look": "Storybook hands with simple wedding bands, soft hold — optional finale.",
+      "cutout_framing": "centered close-up, transparent bg"
+    }
+  },
+  "master_assets": {
+    "note": "Built once. Reused for every wedding. Paths relative to assets_root/master/.",
+    "backgrounds": [
+      { "id": "bg-paper-cool", "file": "master/bg/paper-cool-loop.mp4", "kind": "loop", "duration_hint_s": 8 },
+      { "id": "bg-paper-rose", "file": "master/bg/paper-rose-loop.mp4", "kind": "loop", "duration_hint_s": 8 },
+      { "id": "bg-church-watermark", "file": "master/bg/church-watermark-9x16.png", "kind": "still" },
+      { "id": "bg-porch-plate", "file": "master/bg/porch-kenburns.mp4", "kind": "plate", "duration_hint_s": 6 },
+      { "id": "bg-aisle-plate", "file": "master/bg/aisle-empty-kenburns.mp4", "kind": "plate", "duration_hint_s": 6 },
+      { "id": "bg-garden-evening", "file": "master/bg/parish-garden-evening-kenburns.mp4", "kind": "plate", "duration_hint_s": 6 },
+      { "id": "bg-finale-sky", "file": "master/bg/finale-parchment-drift.mp4", "kind": "loop", "duration_hint_s": 8 }
+    ],
+    "overlays": [
+      { "id": "fx-torn-top", "file": "master/fx/torn-paper-top.png", "kind": "still" },
+      { "id": "fx-torn-wipe", "file": "master/fx/torn-paper-wipe.mov", "kind": "transition", "has_alpha": true },
+      { "id": "fx-brush-olive", "file": "master/fx/brush-stroke-olive.png", "kind": "still" },
+      { "id": "fx-panel-cyan", "file": "master/fx/torn-panel-cyan.png", "kind": "still" },
+      { "id": "fx-petals-loop", "file": "master/fx/petals-drift-loop.mov", "kind": "loop", "has_alpha": true },
+      { "id": "fg-florals-a", "file": "master/fg/florals-corner-a.png", "kind": "still" },
+      { "id": "fg-florals-b", "file": "master/fg/florals-corner-b.png", "kind": "still" },
+      { "id": "fg-vine", "file": "master/fg/vine-top.png", "kind": "still" }
+    ],
+    "optional_ai_video_masters": [
+      {
+        "id": "hero-aerial-once",
+        "file": "master/hero/aerial-dive-once.mp4",
+        "note": "Generate ONCE with xAI for template marketing. Per-client jobs reuse this plate; they do not regenerate it."
+      }
+    ]
+  },
+  "client_assets": {
+    "note": "Per wedding only.",
+    "required": [
+      { "id": "text-devotional", "from_parameters": ["devotional_line_1", "devotional_line_2"], "renderer": "text_plate" },
+      { "id": "text-invitation", "from_parameters": ["invitation_lines"], "renderer": "text_plate" },
+      { "id": "text-groom", "from_parameters": ["groom_title", "groom_name"], "renderer": "text_plate" },
+      { "id": "text-bride", "from_parameters": ["bride_title", "bride_name"], "renderer": "text_plate" },
+      { "id": "text-family", "from_parameters": ["family_lines"], "renderer": "text_plate" },
+      { "id": "text-ceremony", "from_parameters": ["ceremony_lines"], "renderer": "text_plate" },
+      { "id": "text-venue", "from_parameters": ["venue_lines"], "renderer": "text_plate" },
+      { "id": "text-reception", "from_parameters": ["reception_lines"], "renderer": "text_plate" },
+      { "id": "text-hosts", "from_parameters": ["host_lines"], "renderer": "text_plate" },
+      { "id": "text-save", "from_parameters": ["save_date_lines"], "renderer": "text_plate" },
+      { "id": "cutout-groom", "from_parameters": ["groom_cutout"], "renderer": "character_still_rembg", "fallback_generate": true },
+      { "id": "cutout-bride", "from_parameters": ["bride_cutout"], "renderer": "character_still_rembg", "fallback_generate": true },
+      { "id": "cutout-couple", "from_parameters": ["couple_cutout"], "renderer": "character_still_rembg", "fallback_generate": true }
+    ],
+    "optional": [
+      { "id": "cutout-hands", "from_parameters": ["hands_cutout"], "renderer": "character_still_rembg", "fallback_generate": true },
+      { "id": "music", "from_parameters": ["music_url"], "renderer": "audio_slot" }
+    ]
+  },
+  "cost_model": {
+    "currency": "INR",
+    "fx_usd_inr": 96.88,
+    "v1_reference_blessing_stephy_inr": 902,
+    "master_build_once_inr_estimate": {
+      "bg_plates_and_loops": 800,
+      "floral_fx_png_mov": 400,
+      "optional_hero_aerial_ai_video": 700,
+      "total": 1900
+    },
+    "per_wedding_inr_estimate": {
+      "character_stills_high_x4": 50,
+      "text_plates": 0,
+      "stitch_encode": 0,
+      "typical_total": 50,
+      "with_optional_hero_regenerate": 120,
+      "target_ceiling": 400,
+      "margin_note": "At ₹999 platform credit and ₹50–120 COGS, gross margin is large. At 100 weddings, master ₹1900 ≈ ₹19/job."
+    },
+    "ai_video_policy": {
+      "default_paid_clips_per_wedding": 0,
+      "allowed_exceptions": ["marketing_master_only", "ashok_approved_hero_retry"],
+      "do_not": "Regenerate full 11-clip chain per couple (v1 path)."
+    }
+  },
+  "generation_policy": {
+    "automatic_paid_retries": false,
+    "images": "Per client: text-only stills for character cutouts when no photo provided; rembg to PNG. Masters: one-time plate generation.",
+    "video": "Default none per client. Masters may include one optional hero aerial generated once.",
+    "composite": "ffmpeg layer stitch driven by timeline[].layers + beatmap reveals."
+  },
+  "timeline": [
+    {
+      "id": "card-01-open",
+      "t": [0.0, 4.0],
+      "beat_in": 0.0,
+      "label": "Paper tear open + church watermark",
+      "transition_in": { "type": "torn_paper_wipe", "asset": "fx-torn-wipe", "duration_s": 0.45 },
+      "layers": [
+        { "z": 0, "asset": "bg-paper-cool", "fit": "cover", "motion": { "type": "kenburns", "scale": [1.0, 1.04] } },
+        { "z": 1, "asset": "bg-church-watermark", "opacity": 0.22, "motion": { "type": "drift", "xy": [0, -8] } },
+        { "z": 4, "asset": "fg-florals-a", "anchor": "bottom-left", "loop_anim": "sway" },
+        { "z": 4, "asset": "fg-florals-b", "anchor": "bottom-right", "loop_anim": "sway" },
+        { "z": 5, "asset": "fx-petals-loop", "blend": "screen", "opacity": 0.55 }
+      ],
+      "reveals": [
+        { "at": 0.0, "target": "bg-church-watermark", "anim": "fade_in", "beats": 1 },
+        { "at": 0.8, "target": "fg-florals-a", "anim": "scale_in", "from": 0.9 }
+      ]
+    },
+    {
+      "id": "card-02-blessing",
+      "t": [4.0, 8.0],
+      "beat_in": 4.0,
+      "label": "Devotional title",
+      "transition_in": { "type": "cut_on_beat" },
+      "layers": [
+        { "z": 0, "asset": "bg-paper-cool", "fit": "cover", "motion": { "type": "kenburns", "scale": [1.02, 1.06] } },
+        { "z": 1, "asset": "bg-porch-plate", "opacity": 0.35, "fit": "cover" },
+        { "z": 3, "asset": "text-devotional", "role": "display+script", "layout": "center", "style_preset": "devotional_gold" },
+        { "z": 4, "asset": "fg-vine", "anchor": "top-right", "loop_anim": "sway" },
+        { "z": 5, "asset": "fx-petals-loop", "opacity": 0.45 }
+      ],
+      "reveals": [
+        { "at": 4.0, "target": "text-devotional.line1", "anim": "scale_in_on_beat", "copy": "devotional_line_1" },
+        { "at": 5.6, "target": "text-devotional.line2", "anim": "fade_up", "copy": "devotional_line_2" }
+      ]
+    },
+    {
+      "id": "card-03-invite",
+      "t": [8.0, 12.0],
+      "beat_in": 8.0,
+      "label": "The Wedding of",
+      "transition_in": { "type": "torn_paper_wipe", "asset": "fx-torn-wipe", "duration_s": 0.4 },
+      "layers": [
+        { "z": 0, "asset": "bg-paper-rose", "fit": "cover" },
+        { "z": 1, "asset": "bg-church-watermark", "opacity": 0.2 },
+        { "z": 3, "asset": "text-invitation", "role": "display", "layout": "center", "style_preset": "invite_display" },
+        { "z": 4, "asset": "fg-florals-a", "anchor": "bottom", "loop_anim": "sway" }
+      ],
+      "reveals": [
+        { "at": 8.0, "target": "text-invitation", "anim": "oversized_crop_pan", "copy": "invitation_lines" }
+      ]
+    },
+    {
+      "id": "card-04-groom",
+      "t": [12.0, 16.0],
+      "beat_in": 12.0,
+      "label": "Groom card",
+      "transition_in": { "type": "cut_on_beat" },
+      "layers": [
+        { "z": 0, "asset": "bg-paper-cool", "fit": "cover" },
+        { "z": 1, "asset": "fx-panel-cyan", "anchor": "center", "opacity": 0.85 },
+        { "z": 2, "asset": "cutout-groom", "layout": "left-third", "motion": { "type": "kenburns", "scale": [0.96, 1.02] } },
+        { "z": 3, "asset": "text-groom", "layout": "right-third", "style_preset": "name_stack" },
+        { "z": 4, "asset": "fg-florals-b", "anchor": "bottom-right", "loop_anim": "sway" }
+      ],
+      "reveals": [
+        { "at": 12.0, "target": "cutout-groom", "anim": "scale_in", "from": 0.92 },
+        { "at": 12.8, "target": "text-groom", "anim": "fade_up", "copy": ["groom_title", "groom_name"] }
+      ]
+    },
+    {
+      "id": "card-05-bride",
+      "t": [16.0, 20.0],
+      "beat_in": 16.0,
+      "label": "Bride card",
+      "transition_in": { "type": "cut_on_beat" },
+      "layers": [
+        { "z": 0, "asset": "bg-paper-rose", "fit": "cover" },
+        { "z": 1, "asset": "fx-panel-cyan", "anchor": "center", "opacity": 0.8 },
+        { "z": 2, "asset": "cutout-bride", "layout": "right-third", "motion": { "type": "kenburns", "scale": [0.96, 1.02] } },
+        { "z": 3, "asset": "text-bride", "layout": "left-third", "style_preset": "name_stack" },
+        { "z": 4, "asset": "fg-florals-a", "anchor": "bottom-left", "loop_anim": "sway" }
+      ],
+      "reveals": [
+        { "at": 16.0, "target": "cutout-bride", "anim": "scale_in", "from": 0.92 },
+        { "at": 16.8, "target": "text-bride", "anim": "fade_up", "copy": ["bride_title", "bride_name"] }
+      ]
+    },
+    {
+      "id": "card-06-parents",
+      "t": [20.0, 24.0],
+      "beat_in": 20.0,
+      "label": "Parents blessing",
+      "transition_in": { "type": "torn_paper_wipe", "duration_s": 0.4 },
+      "layers": [
+        { "z": 0, "asset": "bg-paper-rose", "fit": "cover" },
+        { "z": 1, "asset": "bg-church-watermark", "opacity": 0.18 },
+        { "z": 1, "asset": "fx-brush-olive", "anchor": "center-left" },
+        { "z": 3, "asset": "text-family", "layout": "center", "style_preset": "plaque_script_on_brush" },
+        { "z": 4, "asset": "fg-florals-a", "anchor": "bottom", "loop_anim": "sway" }
+      ],
+      "reveals": [
+        { "at": 20.0, "target": "fx-brush-olive", "anim": "wipe_right", "beats": 1 },
+        { "at": 20.8, "target": "text-family", "anim": "fade_up", "copy": "family_lines" }
+      ]
+    },
+    {
+      "id": "card-07-ceremony",
+      "t": [24.0, 28.0],
+      "beat_in": 24.0,
+      "label": "Holy Matrimony",
+      "transition_in": { "type": "cut_on_beat" },
+      "layers": [
+        { "z": 0, "asset": "bg-aisle-plate", "fit": "cover", "motion": { "type": "kenburns", "scale": [1.0, 1.05] } },
+        { "z": 2, "asset": "cutout-couple", "layout": "lower-center", "opacity": 0.0, "note": "hidden by default — aisle plate is empty (no priest); optional soft silhouette fade if Ashok wants faces here" },
+        { "z": 3, "asset": "text-ceremony", "layout": "center", "style_preset": "signboard_gold" },
+        { "z": 5, "asset": "fx-petals-loop", "opacity": 0.4 }
+      ],
+      "reveals": [
+        { "at": 24.0, "target": "text-ceremony", "anim": "scale_in_on_beat", "copy": "ceremony_lines" }
+      ]
+    },
+    {
+      "id": "card-08-venue",
+      "t": [28.0, 32.0],
+      "beat_in": 28.0,
+      "label": "Wedding venue",
+      "transition_in": { "type": "cut_on_beat" },
+      "layers": [
+        { "z": 0, "asset": "bg-porch-plate", "fit": "cover" },
+        { "z": 3, "asset": "text-venue", "layout": "center", "style_preset": "signboard_gold" },
+        { "z": 4, "asset": "fg-florals-b", "anchor": "bottom-right", "loop_anim": "sway" }
+      ],
+      "reveals": [
+        { "at": 28.0, "target": "text-venue", "anim": "fade_up", "copy": "venue_lines" }
+      ]
+    },
+    {
+      "id": "card-09-reception",
+      "t": [32.0, 36.0],
+      "beat_in": 32.0,
+      "label": "Reception",
+      "transition_in": { "type": "whip_blur", "duration_s": 0.35 },
+      "layers": [
+        { "z": 0, "asset": "bg-garden-evening", "fit": "cover" },
+        { "z": 3, "asset": "text-reception", "layout": "center", "style_preset": "signboard_gold" },
+        { "z": 4, "asset": "fg-florals-a", "anchor": "bottom-left", "loop_anim": "sway" }
+      ],
+      "reveals": [
+        { "at": 32.0, "target": "text-reception", "anim": "scale_in_on_beat", "copy": "reception_lines" }
+      ]
+    },
+    {
+      "id": "card-10-hosts",
+      "t": [36.0, 40.0],
+      "beat_in": 36.0,
+      "label": "Invited By",
+      "transition_in": { "type": "torn_paper_wipe", "duration_s": 0.4 },
+      "layers": [
+        { "z": 0, "asset": "bg-paper-cool", "fit": "cover" },
+        { "z": 1, "asset": "fx-brush-olive", "anchor": "center" },
+        { "z": 3, "asset": "text-hosts", "layout": "center", "style_preset": "plaque_script_on_brush" },
+        { "z": 4, "asset": "fg-vine", "anchor": "top", "loop_anim": "sway" }
+      ],
+      "reveals": [
+        { "at": 36.0, "target": "text-hosts", "anim": "fade_up", "copy": "host_lines" }
+      ]
+    },
+    {
+      "id": "card-11-couple-std",
+      "t": [40.0, 44.0],
+      "beat_in": 40.0,
+      "label": "Couple + Save the Date",
+      "transition_in": { "type": "cut_on_beat" },
+      "layers": [
+        { "z": 0, "asset": "bg-paper-rose", "fit": "cover" },
+        { "z": 1, "asset": "bg-church-watermark", "opacity": 0.2 },
+        { "z": 2, "asset": "cutout-couple", "layout": "center", "motion": { "type": "kenburns", "scale": [0.95, 1.03] } },
+        { "z": 3, "asset": "text-save", "layout": "lower-third", "style_preset": "save_date_board" },
+        { "z": 4, "asset": "fg-florals-a", "anchor": "bottom-left", "loop_anim": "sway" },
+        { "z": 4, "asset": "fg-florals-b", "anchor": "bottom-right", "loop_anim": "sway" }
+      ],
+      "reveals": [
+        { "at": 40.0, "target": "cutout-couple", "anim": "scale_in", "from": 0.9 },
+        { "at": 41.6, "target": "text-save", "anim": "scale_in_on_beat", "copy": "save_date_lines" }
+      ]
+    },
+    {
+      "id": "card-12-finale",
+      "t": [44.0, 48.0],
+      "beat_in": 44.0,
+      "label": "Finale hands / cross hold",
+      "transition_in": { "type": "whip_blur", "duration_s": 0.4 },
+      "layers": [
+        { "z": 0, "asset": "bg-finale-sky", "fit": "cover" },
+        { "z": 2, "asset": "cutout-hands", "layout": "center", "fallback_asset": "cutout-couple" },
+        { "z": 3, "asset": "text-invitation", "layout": "upper-third", "opacity": 0.9, "style_preset": "invite_soft" },
+        { "z": 4, "asset": "fg-florals-a", "anchor": "corners", "loop_anim": "sway" },
+        { "z": 5, "asset": "fx-petals-loop", "opacity": 0.5 }
+      ],
+      "reveals": [
+        { "at": 44.0, "target": "cutout-hands", "anim": "fade_in" },
+        { "at": 45.6, "target": "text-invitation", "anim": "fade_up" },
+        { "at": 47.2, "target": "all", "anim": "soft_hold" }
+      ]
+    }
+  ],
+  "scenes": [
+    { "id": "scene-01", "card": "card-01-open", "name": "Open watermark" },
+    { "id": "scene-02", "card": "card-02-blessing", "name": "Devotional" },
+    { "id": "scene-03", "card": "card-03-invite", "name": "Invitation title" },
+    { "id": "scene-04", "card": "card-04-groom", "name": "Groom" },
+    { "id": "scene-05", "card": "card-05-bride", "name": "Bride" },
+    { "id": "scene-06", "card": "card-06-parents", "name": "Parents" },
+    { "id": "scene-07", "card": "card-07-ceremony", "name": "Holy Matrimony", "note": "Empty aisle plate — no priest (v1 standing lock)" },
+    { "id": "scene-08", "card": "card-08-venue", "name": "Venue" },
+    { "id": "scene-09", "card": "card-09-reception", "name": "Reception" },
+    { "id": "scene-10", "card": "card-10-hosts", "name": "Hosts" },
+    { "id": "scene-11", "card": "card-11-couple-std", "name": "Couple + STD" },
+    { "id": "scene-12", "card": "card-12-finale", "name": "Finale" }
+  ],
+  "clips": [],
+  "verification": {
+    "must": [
+      "Changing only parameters.* and client cutout paths yields a new wedding video without regenerating master plates",
+      "Exactly one bell tower whenever church architecture is visible",
+      "No priest on ceremony card",
+      "All invitation lettering readable on mobile 9:16",
+      "No Tamil film lyric strings in product output",
+      "No copyrighted Maayapoove audio in repo or deliverable by default"
+    ]
+  }
+}
