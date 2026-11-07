@@ -47,6 +47,9 @@
       "includeFiles": "public/sitemap.xml"
     },
     "api/share-image.mjs": {
+      "maxDuration": 60
+    },
+    "api/share-render.mjs": {
       "includeFiles": "{public/assets/flagship/{fonts/**,lace/lace-corner-swag.webp,*/*frame*.{png,webp}},node_modules/@sparticuz/chromium/bin/**}",
       "maxDuration": 60,
       "memory": 2048

@@ -60,3 +60,10 @@ test('public image GET and HEAD reject expired and deleted records before access
   await imageHandler({url:'/api/share-image?slug=test-couple',method,headers:{}},res);assert.equal(res.code,404);assert.equal(JSON.stringify(res.body).includes('Ashok'),false);
  }}finally{global.fetch=oldFetch;for(const key of Object.keys(process.env))if(!(key in env))delete process.env[key];Object.assign(process.env,env);}
 });
+test('a missing cached image delegates to the fixed renderer and rechecks publication',async()=>{
+ const oldFetch=global.fetch,env={...process.env};Object.assign(process.env,{SUPABASE_URL:'https://test.invalid',SUPABASE_SERVICE_ROLE_KEY:'test',VERCEL:'1'});delete process.env.BLOB_READ_WRITE_TOKEN;
+ let lookups=0,renders=0;const jpeg=Buffer.from([255,216,255,217]);
+ global.fetch=async url=>{if(String(url).includes('/rest/v1/invitations')){lookups++;return Response.json([row]);}const endpoint=new URL(url);assert.equal(endpoint.origin,'https://findmyinvite.com');assert.equal(endpoint.pathname,'/api/share-render');assert.equal(endpoint.searchParams.get('slug'),row.slug);assert.equal(endpoint.searchParams.get('v'),publishedShare(row).revision);renders++;return new Response(jpeg,{headers:{'Content-Type':'image/jpeg'}});};
+ try{const res={headers:{},setHeader(k,v){this.headers[k]=v;},status(n){this.code=n;return this;},json(body){this.body=body;},end(body){this.body=body;}};await imageHandler({url:'/api/share-image?slug=test-couple',method:'GET',headers:{}},res);assert.equal(res.statusCode,200);assert.deepEqual(res.body,jpeg);assert.equal(renders,1);assert.equal(lookups,2);assert.equal(res.headers['Vercel-CDN-Cache-Control'],'no-store');}
+ finally{global.fetch=oldFetch;for(const key of Object.keys(process.env))if(!(key in env))delete process.env[key];Object.assign(process.env,env);}
+});
