@@ -47,7 +47,7 @@
       "includeFiles": "public/sitemap.xml"
     },
     "api/share-image.mjs": {
-      "includeFiles": "{public/assets/flagship/fonts/**,public/assets/flagship/lace/lace-corner-swag.webp,public/assets/flagship/hindu/frame.webp,public/assets/flagship/embroidered-garden/887b79fc-countdown-embroidery-frame-0EWM-os9.webp,public/assets/flagship/mother-of-pearl/5382660b-hero-frame.png,public/assets/flagship/stained-glass/135a0ce1-stained-glass-frame.png,node_modules/@sparticuz/chromium/bin/**}",
+      "includeFiles": "{public/assets/flagship/{fonts/**,lace/lace-corner-swag.webp,*/*frame*.{png,webp}},node_modules/@sparticuz/chromium/bin/**}",
       "maxDuration": 60,
       "memory": 2048
     }
