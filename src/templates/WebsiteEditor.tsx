@@ -1,3 +1,4 @@
+import InvitationLoading from './InvitationLoading';
 import {InvitationLink} from './InvitationLink';
 
 import {previewLanguage} from './preview-language';
@@ -16,7 +17,7 @@ import './template-cms.css';
 type Quote={taxLabel?:string;basePaise:number;taxPaise:number;totalPaise:number;taxBps:number};
 const rupees=(n:number)=>new Intl.NumberFormat('en-IN',{style:'currency',currency:'INR'}).format(n/100);
 
-export function TemplateGuest({slug}:{slug:string}){const [data,setData]=useState<{content:Content;version:TemplateVersion}|null>(null),[error,setError]=useState('');useEffect(()=>{templateApi<any>('/api/invitations?action=v2-public&slug='+encodeURIComponent(slug)).then(setData).catch(e=>setError(e.message));},[slug]);return data?<FlagshipRenderer {...data}/>:<main className="tc-shell"><h1>{error?'Invitation unavailable':'Loading invitation…'}</h1><p>{error}</p></main>;}
+export function TemplateGuest({slug}:{slug:string}){const [data,setData]=useState<{content:Content;version:TemplateVersion}|null>(null),[error,setError]=useState('');useEffect(()=>{templateApi<any>('/api/invitations?action=v2-public&slug='+encodeURIComponent(slug)).then(setData).catch(e=>setError(e.message));},[slug]);return data?<FlagshipRenderer {...data}/>:error?<main className="tc-shell" role="alert"><h1>Invitation unavailable</h1><p>{error}</p></main>:<InvitationLoading/>;}
 export {WebsiteEditor} from './InvitationWizard';
 export function WebsiteDashboard(){const [items,setItems]=useState<SavedInvite[]>([]),[error,setError]=useState('');useEffect(()=>{templateApi<{invitations:SavedInvite[]}>('/api/invitations?action=v2-mine').then(r=>setItems(r.invitations)).catch(e=>setError(e.message));},[]);return <section className="tc-shell"><h2>Your wedding websites</h2>{error&&<p role="alert">{error}</p>}{!error&&items.length===0&&<p>No wedding websites yet. Choose a design to start a free draft.</p>}{items.map(i=><article className="tc-dashboard-card" key={i.id}><strong>{i.slug}</strong><p>{i.firstPublishedAt&&i.expiresAt&&Date.parse(i.expiresAt)<=Date.now()?'Expired — renew to restore':i.published?'Published':'Draft'}{i.expiresAt?' · expires '+new Date(i.expiresAt).toLocaleDateString('en-IN'):''}</p><a href={'/personalise?slug='+i.slug}>Edit / preview / renew →</a>{i.published&&<InvitationLink slug={i.slug}/>}</article>)}</section>;}
 

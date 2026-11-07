@@ -1,3 +1,4 @@
+import InvitationLoading from './InvitationLoading';
 import {useEffect,useState} from 'react';
 import documentHtml from './theeram/document.html?raw';
 import {theeramData} from '../../shared/theeram-template.mjs';
@@ -14,6 +15,6 @@ export default function TheeramInvitation({version,content,preview=false,reduceM
    setDoc(documentHtml.replace('</head>','<link rel="stylesheet" href="/assets/theeram/fonts.css"></head>').replace('</body>',()=>`<script>${boot}</script><script type="module">import('/assets/theeram/app.js').catch(e=>{console.error('Theeram startup',e);document.querySelector('#tapl').textContent='Unable to load the journey. Please reload.';});</script></body>`));
   })().catch(e=>{if(!ctrl.signal.aborted)setError(e.message);});return()=>{ctrl.abort();urls.forEach(URL.revokeObjectURL);};
  },[content,version.id,preview,reduceMotion]);
- if(error)return <p role="alert">{error}</p>;if(!doc)return <p role="status">Preparing your backwater journey…</p>;
+ if(error)return <p role="alert">{error}</p>;if(!doc)return <InvitationLoading/>;
  return <iframe title="Theeram backwater invitation" data-template-version={version.id} srcDoc={doc} sandbox="allow-scripts allow-forms allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation allow-downloads" style={{display:'block',width:'100%',height:'100svh',border:0}}/>;
 }

@@ -1,3 +1,4 @@
+import InvitationLoading from './templates/InvitationLoading';
 import {lazy,Suspense,useEffect} from 'react';
 import Discovery,{DiscoveryPricing} from './Discovery';
 import ContentPages from './ContentPages';
@@ -18,7 +19,7 @@ export default function App(){const path=location.pathname.replace(/\/$/,'')||'/
  if(['/create','/form','/editor','/studio','/workspace','/grand-launch'].includes(path)||path.startsWith('/invite/')){location.replace(['/studio','/workspace'].includes(path)?'/cms':'/templates');return null;}
  if(path.startsWith('/manage/')){location.replace('/personalise?slug='+encodeURIComponent(path.split('/')[2]));return null;}
  if(path==='/assembly'||path==='/assembly/pipeline'){location.replace(path.includes('pipeline')?'/manager/pipeline':'/manager');return null;}
- let page;
+ let page,invitationPage=path==='/template-preview';
  if(path==='/auth/callback')page=<AuthCallback/>;
  else if(path==='/cms')page=<TemplateCMS/>;
  else if(path==='/personalise')page=<WebsiteEditor/>;
@@ -34,7 +35,7 @@ export default function App(){const path=location.pathname.replace(/\/$/,'')||'/
  else if(['/','/templates','/saved'].includes(path))page=<Discovery/>;
  else if(['/about','/contact','/terms','/privacy-policy','/refund-policy','/shipping-policy','/blog'].includes(path)||path.startsWith('/blog/'))page=<ContentPages/>;
  else if(path.startsWith('/invitations'))page=<OccasionLanding/>;
- else if(/^\/[a-z0-9][a-z0-9-]{2,47}$/.test(path))page=<TemplateGuest slug={path.slice(1)}/>;
+ else if(/^\/[a-z0-9][a-z0-9-]{2,47}$/.test(path)){invitationPage=true;page=<TemplateGuest slug={path.slice(1)}/>;}
  else page=<main><h1>Page not found</h1><a href="/">Return home</a></main>;
- return <Suspense fallback={<main className="tc-shell" role="status">Loading…</main>}>{page}</Suspense>;
+ return <Suspense fallback={invitationPage?<InvitationLoading/>:<main className="tc-shell" role="status">Loading…</main>}>{page}</Suspense>;
 }

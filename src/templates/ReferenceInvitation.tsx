@@ -1,3 +1,4 @@
+import InvitationLoading from './InvitationLoading';
 import {appendInvitationScript} from '../../shared/invitation-document.mjs';
 import {localisationConfig,localiseInvitationDocument} from './invitation-localisation';
 import {useEffect,useState} from 'react';
@@ -20,6 +21,6 @@ export default function ReferenceInvitation({version,content,preview=false,reduc
    setDoc(appendInvitationScript(release.html.replace('</head>','<link rel="stylesheet" href="/assets/flagship/invitation-languages.css"><style>.parents b,.where{white-space:pre-line}img,video{max-width:100%}html[lang=ml] .names,html[lang=ml] .pair,html[lang=ml] h1,html[lang=ml] h2{font-family:"Noto Serif Malayalam",serif;line-height:1.6;overflow-wrap:anywhere}</style></head>'),code));
   })().catch(err=>{if(!ctrl.signal.aborted)setError(err.message||'Unable to load invitation media.');});return()=>{ctrl.abort();urls.forEach(URL.revokeObjectURL);};
  },[version.id,version.renderer,content,preview,reduceMotion]);
- if(error)return <p role="alert">{error}</p>;if(!doc)return <p role="status">Preparing your invitation…</p>;
+ if(error)return <p role="alert">{error}</p>;if(!doc)return <InvitationLoading/>;
  return <iframe title={content.groom+' & '+content.bride+' invitation'} data-template-version={version.id} srcDoc={doc} sandbox="allow-scripts allow-forms allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation" style={{display:'block',width:'100%',height:'100svh',border:0}}/>;
 }
