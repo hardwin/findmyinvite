@@ -1,3 +1,4 @@
+import SharePreview from './SharePreview';
 import {useEffect, useRef, useState, type CSSProperties} from 'react';
 import {ArrowUpRight, Check, Copy, Heart, Pencil, X} from 'lucide-react';
 import {invitationSharing} from '../../shared/invitation-publication.mjs';
@@ -6,6 +7,7 @@ import type {SavedInvite} from './api';
 type Props = {
   invitation: SavedInvite;
   templateName?: string;
+  templateId: string;
   thumbnail?: string;
   totalSteps: number;
   celebrate: boolean;
@@ -23,8 +25,8 @@ const confetti = Array.from({length: 26}, (_, i) => ({
   borderRadius: i % 3 ? '2px' : '50%',
 } as CSSProperties));
 
-export default function InvitationPublished({invitation, templateName, thumbnail, totalSteps, celebrate, updated, onEdit, onClose}: Props) {
-  const {url, names, message, whatsappUrl} = invitationSharing(invitation, location.origin);
+export default function InvitationPublished({invitation, templateId, templateName, thumbnail, totalSteps, celebrate, updated, onEdit, onClose}: Props) {
+  const {url, names, message, whatsappUrl} = invitationSharing(invitation, location.origin,templateId);
   const [copied, setCopied] = useState(false), [copyError, setCopyError] = useState('');
   const title = useRef<HTMLHeadingElement>(null), linkInput = useRef<HTMLInputElement>(null);
   useEffect(() => { title.current?.focus(); }, []);
@@ -55,6 +57,7 @@ export default function InvitationPublished({invitation, templateName, thumbnail
           <a className="iw-view-website" href={url} target="_blank" rel="noopener noreferrer">View your website <ArrowUpRight size={16}/></a>
         </div>
       </div>
+      <SharePreview content={invitation.content} templateId={templateId} publishedSlug={invitation.slug}/>
       <div className="iw-share-link">
         <label htmlFor="published-invitation-link">A little link. A big celebration.</label>
         <div><input ref={linkInput} id="published-invitation-link" value={url} readOnly onFocus={e => e.target.select()}/><button onClick={copyLink} aria-label={copied ? 'Link copied' : 'Copy invitation link'}>{copied ? <Check size={17}/> : <Copy size={17}/>}<span>{copied ? 'Copied!' : 'Copy link'}</span></button></div>

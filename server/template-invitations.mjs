@@ -1,3 +1,4 @@
+import {waitUntil} from '@vercel/functions';
 import {templateForm,formContent} from './template-forms.mjs';
 import {randomBytes} from 'node:crypto';
 import {db,HttpError,method,respond,bodyJson,slugValue,rate} from './core.mjs';
@@ -16,5 +17,5 @@ export default async function handle(req,res,q){const action=q.get('action');
  if(action==='v2-save'){const form=await templateForm(v),content=formContent(form,v,b);await checkMedia(row,content,v.defaults);const nextSlug=b.newSlug?slugValue(b.newSlug):row.slug;if(row.first_published_at&&nextSlug!==row.slug)throw new HttpError(409,'A published invitation address cannot change.');const saved=await rpc('fmi_save_form_draft',{p_slug:row.slug,p_owner:user.id,p_revision:b.revision,p_content:content,p_step:b.formStepId||form.definition.steps[0].id,p_form_revision:form.revision,p_new_slug:nextSlug});return respond(res,200,{invitation:viewV2(saved)});}
  if(action==='v2-publish'||action==='v2-renew'){
  if(action==='v2-publish'){const form=await templateForm(v);formContent(form,v,{content:row.draft_content},{complete:true});await checkMedia(row,row.draft_content,v.defaults);}
- const saved=await rpc('fmi_publish_invitation',{p_slug:row.slug,p_owner:user.id,p_revision:b.revision,p_order:b.orderId||null,p_renew:action==='v2-renew'});return respond(res,200,{invitation:viewV2(saved)});}
+ const saved=await rpc('fmi_publish_invitation',{p_slug:row.slug,p_owner:user.id,p_revision:b.revision,p_order:b.orderId||null,p_renew:action==='v2-renew'});if(process.env.VERCEL_ENV==='production')try{waitUntil(fetch('https://findmyinvite.com/api/share-image?slug='+encodeURIComponent(saved.slug),{signal:AbortSignal.timeout(55000)}).then(async response=>{await response.arrayBuffer();if(!response.ok)console.error('Share card warming failed',saved.id,response.status);}).catch(()=>console.error('Share card warming deferred',saved.id)));}catch{console.error('Share card warming deferred',saved.id);}return respond(res,200,{invitation:viewV2(saved)});}
  throw new HttpError(404,'Unknown invitation action.');}

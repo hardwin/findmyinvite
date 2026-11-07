@@ -6,7 +6,7 @@ import {GATE_HEADER,guestDecision,guestPageNotFound,isGuestInvitationPath,NOT_FO
 import {reserved} from '../server/core.mjs';
 const env={SUPABASE_URL:'https://example.supabase.co',SUPABASE_SERVICE_ROLE_KEY:'test-service',RATE_LIMIT_SECRET:'test-rate-secret-01234567890123456789'};
 const live=[{slug:'test-couple',published:true,expires_at:'2099-01-01T00:00:00Z',data:{}}];
-const spa='<!doctype html><title>SPA</title>';
+const spa='<!doctype html><html><head><title>SPA</title></head><body><div id="root"></div></body></html>';
 async function withDb(rows,fn){
  const oldFetch=global.fetch,oldEnv={...process.env};
  Object.assign(process.env,env);
@@ -103,12 +103,12 @@ test('guest lookup does not require RATE_LIMIT_SECRET',async()=>{
   assert.equal(missing.headers[GATE_HEADER],'404');
  });
 });
-test('SPA catch-all stays after the guest-page rewrite and client still mounts PublicInvitation',async()=>{
+test('SPA catch-all stays after the guest-page rewrite and client still mounts TemplateGuest',async()=>{
  const app=await readFile(new URL('../src/App.tsx',import.meta.url),'utf8');
- assert.match(app,/path\.startsWith\('\/invitations'\)\?<OccasionLanding\/>:\/\^\\\/\[a-z0-9\]\[a-z0-9-\]\{2,47\}\$\/\.test\(path\)\?<PublicInvitation slug=\{path\.slice\(1\)}\/>/);
+ assert.match(app,/<TemplateGuest slug=\{path\.slice\(1\)}/);
  const vercel=JSON.parse(await readFile(new URL('../vercel.json',import.meta.url),'utf8'));
  assert.equal(vercel.proxy,undefined);
- const routes=vercel.rewrites.filter(rule=>!rule.destination.startsWith('/api/owner-blog')&&rule.source!=='/assets/workspace/:id'&&rule.source!=='/llms.txt'&&rule.source!=='/api/face-swap/file.jpg');
+ const routes=vercel.rewrites.filter(rule=>rule.source!=='/proof/:token'&&!rule.destination.startsWith('/api/owner-blog')&&rule.source!=='/assets/workspace/:id'&&rule.source!=='/llms.txt'&&rule.source!=='/api/face-swap/file.jpg');
  assert.equal(vercel.rewrites.find(rule=>rule.source==='/assets/workspace/:id')?.destination,'/api/workspace?action=asset&id=:id');
  assert.equal(vercel.rewrites.find(rule=>rule.source==='/llms.txt')?.destination,'/llm.txt');
  const destinations=routes.map(rule=>rule.destination);

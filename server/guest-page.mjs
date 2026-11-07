@@ -1,6 +1,8 @@
+import {resolveShare} from './share-details.mjs';
+import {injectShareMetadata,invitationMeta,originFrom} from './share-card.mjs';
 import {readFile} from 'node:fs/promises';
 import {join} from 'node:path';
-import {HttpError,invitation,reserved} from './core.mjs';
+import {HttpError,reserved} from './core.mjs';
 const guestPath=/^\/[a-z0-9][a-z0-9-]{2,47}$/;
 const indexable=new Set(['templates','about','contact','blog','terms','privacy-policy','refund-policy','shipping-policy']);
 export const GATE_HEADER='x-fmi-guest-gate';
@@ -11,7 +13,7 @@ export async function guestDecision(pathname){
  const path=normalizePath(pathname);
  if(!isGuestInvitationPath(path))return {gate:'skip',slug:path.slice(1)};
  const slug=path.slice(1);
- try{await invitation(slug);return {gate:'pass',slug};}
+ try{await resolveShare(slug);return {gate:'pass',slug};}
  catch(error){
   if(error instanceof HttpError&&(error.status===404||error.status===400))return {gate:'404',slug};
   return {gate:'open',slug};
@@ -43,7 +45,8 @@ export async function spaIndexHtml(req){
  return response.text();
 }
 export async function writeSpa(req,res,gate,slug){
- const html=await spaIndexHtml(req);
+ let html=await spaIndexHtml(req);
+ if(gate==='pass')html=injectShareMetadata(html,invitationMeta(originFrom(req),slug,await resolveShare(slug)));
  res.statusCode=200;
  applyHeaders(res,pageHeaders(gate,slug));
  if(typeof res.status==='function')res.status(200);

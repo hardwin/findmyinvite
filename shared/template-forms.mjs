@@ -69,6 +69,8 @@ export function validateFormContent(form,schema,input,{complete=false,stepId}={}
  if(stepId&&!form.steps.some(s=>s.id===stepId))throw Error('Invalid form step.');
  const clean=validateContent(formContentSchema(form,schema),input,{complete});
  const flags={authored:true};for(const q of allQuestions(form).filter(q=>q.type==='boolean'&&q.path.startsWith('_form.'))){const value=formValue(input,q.path);if(value!==undefined&&typeof value!=='boolean')throw Error('Invalid section choice.');flags[q.path.slice(6)]=value===true;}
+ if(input._form?.shareArtwork!==undefined&&typeof input._form.shareArtwork!=='boolean')throw Error('Invalid share artwork choice.');
+ flags.shareArtwork=input._form?.shareArtwork===true;
  clean._form=flags;
  if(complete){const errors=formErrors(form,clean);if(Object.keys(errors).length)throw Error(Object.values(errors)[0]);}
  return clean;
