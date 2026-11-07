@@ -88,6 +88,10 @@
   ],
   "rewrites": [
     {
+      "source": "/share-images/:slug/:revision.jpg",
+      "destination": "/api/share-image?slug=:slug&v=:revision"
+    },
+    {
       "source": "/blog",
       "destination": "/api/owner-blog"
     },

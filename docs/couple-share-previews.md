@@ -4,11 +4,11 @@ Guest HTML and `/api/share` resolve the same published snapshot. Current invitat
 
 Each current template has an authored treatment in `shared/share-preview.mjs`. Cards contain names, a localized date and venue. Customer-owned main photos are fitted without cropping; template/demo assets and venue images are never used as couple photos. Older invitations may use their first verified uploaded photo. Missing photos use personalised artwork.
 
-`/api/share-image?slug=…&v=…` is cookie-free and returns a 1200 × 630 JPEG. It checks publication on every request, including HEAD, and again after rendering. Generated images stay in private Blob storage under invitation ID, published revision, design revision and published-content digest. Public responses deliberately use no-store so expired/deleted links cannot continue serving cached personal images through our CDN. Social apps maintain their own caches.
+`/share-images/<slug>/<revision>.jpg` (internally `/api/share-image?slug=…&v=…`) is cookie-free and returns a 1200 × 630 JPEG. It checks publication on every request, including HEAD, and again after rendering. Generated images stay in private Blob storage under invitation ID, published revision, design revision and published-content digest. Public responses require revalidation and Vercel CDN caching is disabled so expired/deleted links cannot continue serving cached personal images through our CDN. Social apps maintain their own caches.
 
 The controlled Chromium document embeds only allowlisted bundled artwork/fonts and invitation-owned verified image bytes. Network requests and page JavaScript are disabled. Photo failures produce an artwork card and a `share.photo_retry_needed` CMS audit event; they retry on the next request. Image-generation/storage errors do not roll back publication or payment.
 
-`_form.shareArtwork` is a validated boolean saved with the invitation. It remains private until publication. Review and completion screens show the matching card and sharing description. WhatsApp copy uses the same details and locale. Account management and guest URL remain unchanged.
+`_form.shareArtwork` is a validated boolean saved with the invitation. It remains private until publication. Review and completion screens show the matching card and sharing description. WhatsApp copy uses the same details and locale, with a publication/design revision query to refresh previously cached text-only previews. Account management and guest URL remain unchanged.
 
 After publication/renewal, a background request warms the card. Existing active invitations are generated on demand, or by:
 

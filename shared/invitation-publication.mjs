@@ -1,4 +1,4 @@
-import {shareDetails} from './share-preview.mjs';
+import {shareDetails,SHARE_DESIGN_REVISION} from './share-preview.mjs';
 // Completion follows confirmed publication, never just a successful checkout callback.
 export function isCurrentPublication(invitation, now = Date.now()) {
   return Boolean(invitation?.published && invitation.firstPublishedAt &&
@@ -16,6 +16,7 @@ export async function publishWebsiteDraft(current, {checkout, publish}) {
 export function invitationSharing(invitation, origin, template='ivory-lace') {
   const url = new URL('/' + encodeURIComponent(invitation.slug), origin).href;
   const info=shareDetails(invitation.content,template),names=info.names;
-  const message=[info.greeting,info.details,url,info.closing+(names?',\n'+names:'')].filter(Boolean).join('\n\n');
+  const shareUrl=url+'?share='+(invitation.publishedRevision||0)+'-'+SHARE_DESIGN_REVISION;
+  const message=[info.greeting,info.details,shareUrl,info.closing+(names?',\n'+names:'')].filter(Boolean).join('\n\n');
   return {url, names, message, whatsappUrl: 'https://wa.me/?text=' + encodeURIComponent(message)};
 }

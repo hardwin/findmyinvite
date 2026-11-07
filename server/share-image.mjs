@@ -48,16 +48,19 @@ export async function buildShareImage(share,{loadPhoto=ownedSharePhoto,render=re
  try{return {bytes:await render(share.details,await loadPhoto(share)),fallback:false};}
  catch(error){if(!sharePhoto(share.content))throw error;console.error('Share photo fallback',share.row.id);const bytes=await render(share.details);await report().catch(()=>{});return {bytes,fallback:true};}
 }
-const pending=new Map();
+const pending=new Map(),imageMemory=new Map();
+function remember(path,bytes){if(imageMemory.size>=32)imageMemory.delete(imageMemory.keys().next().value);imageMemory.set(path,{bytes,until:Date.now()+300000});}
 export async function generatedShareImage(share){
  const path='invitation-share/'+share.row.id+'/'+share.revision+'.jpg';
- let cached;try{cached=await get(path,{access:'private',useCache:false});}catch(error){if(error?.name!=='BlobNotFoundError')console.error('Share cache unavailable',share.row.id);}
- if(cached?.statusCode===200)return blobBytes(cached,2000000);
+ const memory=imageMemory.get(path);if(memory?.until>Date.now())return {bytes:memory.bytes,rendered:false};
+ let cached;try{cached=await get(path,{access:'private',useCache:true});}catch(error){if(error?.name!=='BlobNotFoundError')console.error('Share cache unavailable',share.row.id);}
+ if(cached?.statusCode===200){const bytes=await blobBytes(cached,2000000);remember(path,bytes);return {bytes,rendered:false};}
  if(pending.has(path))return pending.get(path);
  const task=(async()=>{
   const {bytes,fallback}=await buildShareImage(share);
   // Failed photos remain retryable. A storage outage must not hide a rendered card.
   if(!fallback)await put(path,bytes,{access:'private',contentType:'image/jpeg',addRandomSuffix:false,allowOverwrite:true}).catch(()=>console.error('Share cache write deferred',share.row.id));
-  return bytes;
+  if(!fallback)remember(path,bytes);
+  return {bytes,rendered:true};
  })();pending.set(path,task);try{return await task;}finally{pending.delete(path);}
 }

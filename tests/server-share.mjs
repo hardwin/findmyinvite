@@ -53,7 +53,7 @@ test('published invitations get couple names and a revisioned image',async()=>{
   assert.equal(res.code,200);
   assert.equal(res.headers['Content-Type'],'text/html; charset=utf-8');
   assert.match(String(res.body),/og:title" content="Veer &amp; Zara — Wedding Invitation"/);
-  assert.match(String(res.body),/og:image" content="https:\/\/findmyinvite.com\/api\/share-image\?slug=veer-zara[^" ]+"/);
+  assert.match(String(res.body),/og:image" content="https:\/\/findmyinvite.com\/share-images\/veer-zara\/[^" ]+\.jpg"/);
   assert.match(String(res.body),/noindex/);
  }finally{
   global.fetch=oldFetch;
@@ -83,7 +83,7 @@ test('every catalog template has a share still and the storefront HTML advertise
  assert.equal(spaPattern.test('/invitations/haldi'),false);
  assert.ok(vercel.rewrites.some(rule=>rule.source==='/llms.txt'&&rule.destination==='/llm.txt'));
  const inApp='Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 Instagram 350.0.0.0 (iPhone15,2; iOS 18_0; en_US)';
- for(const rule of vercel.rewrites.filter(r=>r.destination.startsWith('/api/share')))assert.equal(new RegExp(rule.has[0].value.replace('(?i)',''),'i').test(inApp),false,'in-app browsers are people, not crawlers: '+rule.source);
+ for(const rule of vercel.rewrites.filter(r=>r.destination.startsWith('/api/share?')))assert.equal(new RegExp(rule.has[0].value.replace('(?i)',''),'i').test(inApp),false,'in-app browsers are people, not crawlers: '+rule.source);
  const share=vercel.rewrites.find(rule=>rule.destination==='/api/share?slug=:slug');
  assert.equal(share.source,'/:slug([a-z0-9][a-z0-9-]{2,47})');
  for(const headerSource of ['/llm.txt','/llms.txt']){

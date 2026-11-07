@@ -12,7 +12,7 @@ export function publishedShare(row,now=Date.now()){
 }
 export async function resolveShare(slug){
  slugValue(slug);
- const rows=await db('invitations?slug=eq.'+encodeURIComponent(slug)+'&select=*&limit=1');
+ const rows=await db('invitations?slug=eq.'+encodeURIComponent(slug)+'&select=id,slug,owner_id,template_version_id,published,published_revision,published_content,data,expires_at,deleted_at,updated_at&limit=1');
  return publishedShare(rows[0]);
 }
-export function shareImageUrl(slug,revision){return '/api/share-image?slug='+encodeURIComponent(slug)+(revision?'&v='+encodeURIComponent(revision):'');}
+export function shareImageUrl(slug,revision){return revision?'/share-images/'+encodeURIComponent(slug)+'/'+encodeURIComponent(revision)+'.jpg':'/api/share-image?slug='+encodeURIComponent(slug);}

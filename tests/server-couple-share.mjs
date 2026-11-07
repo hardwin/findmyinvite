@@ -43,8 +43,8 @@ test('only main uploaded customer photo is selected; artwork choice overrides it
 test('initial HTML replaces storefront metadata, escapes text and has HTTPS large image tags',()=>{
  const share=publishedShare({...row,published_content:{...row.published_content,bride:'A <script> & "B"'}});
  const html=injectShareMetadata('<html><head><title>FMI</title><meta property="og:title" content="FMI"><meta name="twitter:image" content="old"><link rel="canonical" href="old"></head><body><div id="root"></div></body></html>',invitationMeta('https://findmyinvite.com',row.slug,share));
- assert.equal((html.match(/property="og:title"/g)||[]).length,1);assert.equal(html.includes('<script>'),false);assert.equal(html.includes('content="FMI"'),false);assert.match(html,/og:image:width" content="1200/);assert.match(html,/twitter:card" content="summary_large_image/);assert.ok(html.includes('https://findmyinvite.com/api/share-image?slug=test-couple&amp;v='));assert.ok(html.includes('id="root"'));
- assert.equal(shareImageUrl(row.slug,share.revision).includes('v=2-'),true);
+ assert.equal((html.match(/property="og:title"/g)||[]).length,1);assert.equal(html.includes('<script>'),false);assert.equal(html.includes('content="FMI"'),false);assert.match(html,/og:image:width" content="1200/);assert.match(html,/twitter:card" content="summary_large_image/);assert.ok(html.includes('https://findmyinvite.com/share-images/test-couple/'));assert.ok(html.includes('id="root"'));
+ assert.equal(shareImageUrl(row.slug,share.revision).includes('/2-'),true);
 });
 test('foreign, template-owned and non-ready photos cannot render',async()=>{
  const oldFetch=global.fetch,oldUrl=process.env.SUPABASE_URL,oldKey=process.env.SUPABASE_SERVICE_ROLE_KEY;Object.assign(process.env,{SUPABASE_URL:'https://test.invalid',SUPABASE_SERVICE_ROLE_KEY:'test'});
