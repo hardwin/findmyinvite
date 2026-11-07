@@ -38,7 +38,7 @@ export async function renderShareImage(details,photo=''){
   await page.setRequestInterception(true);page.on('request',request=>request.url().startsWith('data:')?request.continue():request.abort());
   await page.setContent(shareCardHtml(details,{font,art,photo}),{waitUntil:'load',timeout:15000});
   // Evaluate only our controlled layout, never customer code.
-  await page.evaluate(async()=>{await document.fonts.ready;await Promise.all([...document.images].map(i=>i.decode()));const heading=document.querySelector('h1');let size=parseFloat(getComputedStyle(heading).fontSize);while(heading.scrollHeight>heading.clientHeight&&size>22){heading.style.fontSize=--size+'px';}});
+  await page.evaluate(async()=>{await document.fonts.ready;await Promise.all([...document.images].map(i=>i.decode()));const heading=document.querySelector('h1');let size=parseFloat(getComputedStyle(heading).fontSize);while(heading.scrollHeight>246&&size>22){heading.style.fontSize=--size+'px';}});
   let bytes=Buffer.from(await page.screenshot({type:'jpeg',quality:82}));
   if(bytes.length>500000)bytes=Buffer.from(await page.screenshot({type:'jpeg',quality:60}));
   return bytes;
