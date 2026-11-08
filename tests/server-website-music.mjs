@@ -1,0 +1,32 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {mkdtempSync} from 'node:fs';
+import {tmpdir} from 'node:os';
+import {join} from 'node:path';
+process.env.FMI_OWNER_LOCAL='1';process.env.FMI_OWNER_DB=join(mkdtempSync(join(tmpdir(),'fmi-music-')),'test.sqlite');
+process.env.SUPABASE_URL='https://example.supabase.co';process.env.SUPABASE_SERVICE_ROLE_KEY='test';
+const {save,get}=await import('../server/owner/store.mjs');
+const {hashToken}=await import('../server/owner/auth.mjs');
+const {musicTrack,musicTracks,templateMusic,validateLibraryMusic,withTemplateMusic,withFormMusic}=await import('../server/website-music.mjs');
+const {validateContent}=await import('../shared/template-contract.mjs');
+const {default:owner}=await import('../api/owner-music.mjs');
+const {default:publicMusic}=await import('../api/music.mjs');
+const token='a'.repeat(64),csrf='music-test-csrf';
+await save('identity','owner',{epoch:1},0);await save('session',hashToken(token),{epoch:1,csrf,expiresAt:'2099-01-01T00:00:00Z'},0);
+async function call(handler,url,{body,authenticated=true,tokenCsrf=csrf,method=body?'POST':'GET'}={}){const res={headers:{},setHeader(k,v){this.headers[k]=v},removeHeader(k){delete this.headers[k]},status(n){this.statusCode=n;return this},json(v){this.data=v},end(v){this.data=v}};const req={url,method,body,headers:{host:'localhost',origin:'http://localhost',...(authenticated?{cookie:'fmi_owner='+token,'x-owner-csrf':tokenCsrf}:{})}};await handler(req,res);return res;}
+test('library is public but owner actions require session and CSRF',async()=>{assert.equal((await call(publicMusic,'/api/music',{authenticated:false})).data.tracks.length,2);assert.equal((await call(owner,'/api/owner-music',{authenticated:false})).statusCode,401);assert.equal((await call(owner,'/api/owner-music?action=reserve',{body:{},tokenCsrf:'wrong'})).statusCode,403)});
+test('many templates can use one track and revision conflicts reject stale writes',async()=>{const old=global.fetch;global.fetch=async()=>new Response(JSON.stringify([{id:'ivory-lace'}]));try{for(const templateId of ['ivory-lace','royal'])assert.equal((await call(owner,'/api/owner-music?action=assign',{body:{templateId,trackId:'heartwarming',revision:0}})).statusCode,200);assert.equal(await templateMusic('ivory-lace'),'/api/music?id=heartwarming');assert.equal(await templateMusic('royal'),'/api/music?id=heartwarming');assert.equal((await call(owner,'/api/owner-music?action=assign',{body:{templateId:'ivory-lace',trackId:'canon-in-d',revision:0}})).statusCode,409)}finally{global.fetch=old}});
+test('archiving removes new selections but retains existing playable links',async()=>{const t=await musicTrack('heartwarming');await save('music-track',t.id,{...t,archived:true},t.revision);assert.equal(await templateMusic('ivory-lace'),'');const r=await call(publicMusic,'/api/music');assert.equal(r.data.tracks.some(t=>t.id==='heartwarming'),false);const stream=await call(publicMusic,'/api/music?id=heartwarming');assert.equal(stream.statusCode,307);await validateLibraryMusic({music:'/api/music?id=heartwarming'});});
+test('only audio fields accept valid library references; unknown or pending tracks fail validation',async()=>{const schema={version:1,fields:[{key:'music',type:'audio',label:'Music'}]};assert.equal(validateContent(schema,{music:'/api/music?id=canon-in-d'}).music,'/api/music?id=canon-in-d');assert.throws(()=>validateContent({...schema,fields:[{key:'music',type:'image',label:'Image'}]},{music:'/api/music?id=canon-in-d'}));assert.throws(()=>validateContent(schema,{music:'/api/music?id=../../secret'}));await assert.rejects(validateLibraryMusic({music:'/api/music?id=missing-track'}));await save('music-track','pending-track',{status:'pending'},0);await assert.rejects(validateLibraryMusic({music:'/api/music?id=pending-track'}));assert.equal((await call(publicMusic,'/api/music?id=pending-track')).statusCode,404)});
+test('public responses omit private upload paths and pending rows',async()=>{const r=await call(owner,'/api/owner-music?action=reserve',{body:{}});assert.equal(r.statusCode,201);const row=await get('music-track',r.data.id);assert.equal(row.status,'pending');const pub=await call(publicMusic,'/api/music');assert.equal(JSON.stringify(pub.data).includes('objectPath'),false);assert.equal(pub.data.tracks.some(t=>t.id===row.id),false)});
+test('default music reaches the version and its authored form without changing stored definitions',async()=>{
+ const version={template_id:'christian-bells',field_schema:{fields:[{key:'music',type:'audio'}]},defaults:{music:''}};
+ const form={definition:{steps:[{questions:[{path:'music',type:'audio'}]}],initialContent:{bride:'',music:''}}};
+ const decorated=await withTemplateMusic(version),selected=withFormMusic(form,decorated);
+ assert.equal(decorated.defaults.music,'/api/music?id=canon-in-d');
+ assert.equal(selected.definition.initialContent.music,decorated.defaults.music);
+ assert.equal(version.defaults.music,'');assert.equal(form.definition.initialContent.music,'');
+ assert.equal(selected.definition.initialContent.bride,'');
+ const silent={template_id:'silent',field_schema:{fields:[]},defaults:{}};
+ assert.equal(await withTemplateMusic(silent),silent);
+});

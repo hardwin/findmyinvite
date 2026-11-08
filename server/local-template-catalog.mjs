@@ -1,4 +1,5 @@
 import {templateForm} from './template-forms.mjs';
+import {withTemplateMusic,withFormMusic} from './website-music.mjs';
 import {INVITATION_BASE_PAISE} from '../shared/pricing.mjs';
 // Imported only by the Vite development router, never by deployed API handlers.
 // Local releases select real immutable CMS versions; there are no renderer/default overrides.
@@ -35,7 +36,8 @@ export async function localTemplateCatalog(req,res,{readIds=readLocalReleaseIds,
     selected=local.find(v=>v.template_id===requested.template_id&&v.revision>requested.revision&&!v.approved_at);
     if(!selected)return false;
    }
-   respond(res,200,{version:{...safeVersion(selected),localPreview:true},...(action==='editor'?{form:await templateForm(selected)}:{})});
+   selected=await withTemplateMusic(selected);
+   respond(res,200,{version:{...safeVersion(selected),localPreview:true},...(action==='editor'?{form:withFormMusic(await templateForm(selected),selected)}:{})});
    return true;
   }
   const rows=await query('template_catalog?generation=eq.2&isactive=eq.true&published=eq.true&select=id,name,description,tradition,thumbnail,current_version_id,sort_order&order=sort_order.asc');
