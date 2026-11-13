@@ -2,13 +2,14 @@ import {fail,method} from '../server/core.mjs';
 import {htmlForShare} from '../server/share-card.mjs';
 export default async function handler(req,res){
  try{
-  method(req,['GET']);
+  method(req,['GET','HEAD']);
   const html=await htmlForShare(req);
+  res.setHeader('Cache-Control','no-store');
   res.setHeader('Content-Type','text/html; charset=utf-8');
   res.setHeader('X-Robots-Tag','noindex, nofollow');
   res.statusCode=200;
   if(typeof res.status==='function')res.status(200);
-  if(typeof res.end==='function')res.end(html);
+  if(typeof res.end==='function')res.end(req.method==='HEAD'?undefined:html);
   else res.json({html});
  }catch(error){fail(res,error)}
 }

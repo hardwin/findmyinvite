@@ -1,0 +1,32 @@
+[
+  {
+    "id": "heartwarming",
+    "title": "Heartwarming",
+    "artist": "Kevin MacLeod",
+    "mood": "Gentle piano",
+    "duration": 131,
+    "asset": "/assets/music-library/heartwarming.mp3",
+    "sourceUrl": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100207",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "credit": "Heartwarming — Kevin MacLeod (incompetech.com). Licensed under CC BY 4.0. Original recording, unchanged.",
+    "status": "ready",
+    "archived": false,
+    "revision": 0
+  },
+  {
+    "id": "canon-in-d",
+    "title": "Canon in D Major",
+    "artist": "Kevin MacLeod",
+    "mood": "Classical ceremony",
+    "duration": 355,
+    "asset": "/assets/music-library/canon-in-d.mp3",
+    "sourceUrl": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100301",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "credit": "Canon in D Major — Kevin MacLeod (incompetech.com). Licensed under CC BY 4.0. Original recording, unchanged.",
+    "status": "ready",
+    "archived": false,
+    "revision": 0
+  }
+]

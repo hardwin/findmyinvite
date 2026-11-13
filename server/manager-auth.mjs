@@ -4,7 +4,7 @@ import {authUser,bearer,HttpError} from './core.mjs';
 
 /** True when Akay cookie or a valid Supabase access token is present. */
 export async function managerOk(req){
- if(sessionOk(req))return {kind:'akay',user:null};
+ if(await sessionOk(req))return {kind:'akay',user:null};
  const token=bearer(req);
  if(!token)return null;
  try{

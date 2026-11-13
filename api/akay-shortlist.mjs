@@ -3,7 +3,7 @@ import {sessionOk} from '../server/akay-gate.mjs';
 import {parseListQuery,cleanId,decideStatus,listCandidates,decideCandidate,bulkDecide} from '../server/akay-shortlist.mjs';
 export default async function handler(req,res){
  try{
-  if(!sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
+  if(!await sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
   const url=new URL(req.url,'https://findmyinvite.com');
   const action=url.searchParams.get('action')||'list';
   if(action==='list'){

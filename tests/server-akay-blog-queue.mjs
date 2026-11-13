@@ -16,15 +16,16 @@ import {
  PULSE_MAX_BATCHES
 } from '../server/south-pulse.mjs';
 import {parseListQuery,cleanId,decideStatus} from '../server/akay-blog-queue.mjs';
-import handler from '../api/akay-blog-queue.mjs';
-import {issueSession} from '../server/akay-gate.mjs';
+import liveHandler from '../api/akay-blog-queue.mjs';
+import {ownerCookie,ownerHeaders,ownerFixture} from './helpers/owner-fixture.mjs';
+const handler=ownerFixture(liveHandler);
 
-function cookie(){return 'fmi_akay='+issueSession();}
+function cookie(){return ownerCookie;}
 async function request(url,{method='GET',headers={},cron=false}={}){
  const res={headers:{},statusCode:200,body:null,setHeader(k,v){this.headers[k]=v;},status(n){this.statusCode=n;return this;},json(b){this.body=b;return this;}};
  await handler({
   method,url,
-  headers:{
+  headers:{...ownerHeaders,
    ...(cron?{authorization:'Bearer test-cron-secret'}:{cookie:cookie()}),
    ...headers
   }
@@ -90,11 +91,11 @@ test('blog queue API requires session; pulse requires cron secret; run is sessio
  const prev=process.env.BLOG_PULSE_CRON_SECRET;
  process.env.BLOG_PULSE_CRON_SECRET='test-cron-secret';
  try{
-  const open=await request('/api/akay-blog-queue?action=list',{headers:{cookie:''}});
+  const open=await request('/api/akay-blog-queue?action=list',{headers:{...ownerHeaders,cookie:''}});
   assert.equal(open.statusCode,401);
-  const pulseDenied=await request('/api/akay-blog-queue?action=pulse',{method:'POST',headers:{cookie:''}});
+  const pulseDenied=await request('/api/akay-blog-queue?action=pulse',{method:'POST',headers:{...ownerHeaders,cookie:''}});
   assert.equal(pulseDenied.statusCode,401);
-  const runDenied=await request('/api/akay-blog-queue?action=run',{method:'POST',headers:{cookie:''}});
+  const runDenied=await request('/api/akay-blog-queue?action=run',{method:'POST',headers:{...ownerHeaders,cookie:''}});
   assert.equal(runDenied.statusCode,401);
   const api=await readFile(new URL('../api/akay-blog-queue.mjs',import.meta.url),'utf8');
   assert.match(api,/action==='run'/);
@@ -110,7 +111,7 @@ test('blog queue API requires session; pulse requires cron secret; run is sessio
 });
 
 test('AkayAdmin registers Blog queue and stays unlinked from public pages',async()=>{
- const admin=await readFile(new URL('../src/AkayAdmin.tsx',import.meta.url),'utf8');
+ const admin=await readFile(new URL('../src/owner/OwnerDashboard.tsx',import.meta.url),'utf8');
  assert.match(admin,/blog-queue/);
  assert.match(admin,/AkayBlogQueue/);
  for(const file of ['Home.tsx','components.tsx']){

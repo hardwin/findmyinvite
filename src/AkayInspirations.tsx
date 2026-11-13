@@ -85,7 +85,7 @@ export default function AkayInspirations(){
   setBusy(status);setError('');setNotice('');
   try{
    const res=await fetch('/api/akay-inspirations?action=decide',{
-    method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},
+    method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json','X-Owner-CSRF':sessionStorage.getItem('fmi-owner-csrf')||''},
     body:JSON.stringify({id,status})
    });
    const body=await res.json().catch(()=>({}));
@@ -101,7 +101,7 @@ export default function AkayInspirations(){
   setBusy('pulse');setError('');setNotice('Running…');
   try{
    const res=await fetch('/api/akay-inspirations?action=run',{
-    method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},
+    method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json','X-Owner-CSRF':sessionStorage.getItem('fmi-owner-csrf')||''},
     body:JSON.stringify({force:true})
    });
    if(res.status===401){location.assign('/akay');return;}

@@ -1,3 +1,4 @@
+import {withTemplateMusic,withFormMusic} from '../server/website-music.mjs';
 import {templateForm,selectedForm} from '../server/template-forms.mjs';
 import {validateFormDefinition} from '../shared/template-forms.mjs';
 import {INVITATION_BASE_PAISE} from '../shared/pricing.mjs';
@@ -11,8 +12,8 @@ async function templateAssets(content){const ids=mediaReferences(content);if(!id
 export default async function handler(req,res){try{
  const q=new URL(req.url,'https://findmyinvite.com').searchParams,action=q.get('action')||'list';
  if(action==='public'){method(req,['GET']);const rows=await db('template_catalog?generation=eq.2&isactive=eq.true&published=eq.true&select=id,name,description,tradition,thumbnail,current_version_id,sort_order&order=sort_order.asc');res.setHeader('Cache-Control','public, max-age=0, must-revalidate');res.setHeader('CDN-Cache-Control','public, s-maxage=60');res.setHeader('X-Content-Type-Options','nosniff');return res.status(200).json({templates:rows,basePaise:INVITATION_BASE_PAISE});}
- if(action==='version'){method(req,['GET']);return respond(res,200,{version:safeVersion(await catalogVersion(q.get('id')))});}
- if(action==='editor'){method(req,['GET']);const v=await catalogVersion(q.get('id'));return respond(res,200,{version:safeVersion(v),form:await templateForm(v)});}
+ if(action==='version'){method(req,['GET']);return respond(res,200,{version:safeVersion(await withTemplateMusic(await catalogVersion(q.get('id'))))});}
+ if(action==='editor'){method(req,['GET']);const v=await withTemplateMusic(await catalogVersion(q.get('id'))),form=await templateForm(v);return respond(res,200,{version:safeVersion(v),form:withFormMusic(form,v)});}
  const user=await operator(req);
  if(action==='get-form'){method(req,['GET']);const v=await version(q.get('id'));const rows=await db('template_forms?template_id=eq.'+encodeURIComponent(v.template_id)+'&select=*');return respond(res,200,{form:selectedForm(rows[0],v.id,true)});}
  if(action==='archive-info'||action==='archive-part'){

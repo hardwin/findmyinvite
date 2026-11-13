@@ -1,9 +1,10 @@
+import {session,requireOwner} from './owner/auth.mjs';
 import {websiteQuote} from '../shared/template-contract.mjs';
 import {HttpError,db,authUser,bearer} from './core.mjs';
 import {CINOREV_RENDERERS} from '../shared/cinorev-renderers.mjs';
 export const RENDERERS=['thiruvarul-v1','kalyana-payanam-v1','theeram-v1','ivory-lace-v1','kerala-kasavu-v2','nikah-arches-v2','christian-editorial-v2','embroidered-garden-v1','mother-of-pearl-v1','fresco-v1','stained-glass-v1','royal-v1',...CINOREV_RENDERERS];
 export async function customer(req){const user=await authUser(bearer(req));if(!user)throw new HttpError(401,'Sign in to continue.');return user;}
-export async function operator(req){const user=await customer(req);const rows=await db('cms_operators?user_id=eq.'+user.id+'&active=eq.true&select=user_id&limit=1');if(!rows.length)throw new HttpError(403,'CMS operator access is required.');return user;}
+export async function operator(req){if(await session(req)){const owner=await requireOwner(req);return {id:owner.actorId};}const user=await customer(req);const rows=await db('cms_operators?user_id=eq.'+user.id+'&active=eq.true&select=user_id&limit=1');if(!rows.length)throw new HttpError(403,'CMS operator access is required.');return user;}
 export async function version(id){if(!/^[a-f0-9-]{36}$/.test(id||''))throw new HttpError(400,'Invalid template version.');const rows=await db('template_versions?id=eq.'+id+'&select=*&limit=1');if(!rows[0]||!RENDERERS.includes(rows[0].renderer))throw new HttpError(404,'Template version unavailable.');return rows[0];}
 export async function owned(slug,user){const rows=await db('invitations?slug=eq.'+encodeURIComponent(slug)+'&select=*,website_orders(status,applied_at)&limit=1');const row=rows[0];if(!row||row.owner_id!==user.id||!row.template_version_id)throw new HttpError(404,'Invitation not found.');return row;}
 export function requireRecoverable(row){if(row.deleted_at||(row.first_published_at?Date.parse(row.expires_at)+90*86400000<=Date.now():Date.parse(row.updated_at)+90*86400000<=Date.now()&&!row.website_orders?.some(o=>o.status==='captured'&&!o.applied_at)))throw new HttpError(410,'The recovery period has ended.');}

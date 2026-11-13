@@ -1,15 +1,16 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import handler from '../api/akay-inventory.mjs';
-import {issueSession} from '../server/akay-gate.mjs';
+import liveHandler from '../api/akay-inventory.mjs';
+import {ownerCookie,ownerHeaders,ownerFixture} from './helpers/owner-fixture.mjs';
+const handler=ownerFixture(liveHandler);
 import {parseCompetitorQuery,parseUpcomingQuery,httpUrl,pagePreview,relationBadge,mapCompetitor,mapUpcoming,upcomingChips,tierNote} from '../server/akay-inventory.mjs';
 const ayozan='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa';
 const riwaaz='bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb';
-function cookie(){return 'fmi_akay='+issueSession();}
+function cookie(){return ownerCookie;}
 async function request(url,{method='GET',secret=true}={}){
  const res={headers:{},setHeader(k,v){this.headers[k]=v;},status(n){this.code=n;return this;},json(b){this.body=b;}};
- await handler({url,method,headers:{cookie:secret?cookie():''},socket:{remoteAddress:'127.0.0.1'}},res);
+ await handler({url,method,headers:{...ownerHeaders,cookie:secret?cookie():''},socket:{remoteAddress:'127.0.0.1'}},res);
  return res;
 }
 test('inventory HTTP URLs stay verified and junk is dropped',()=>{
@@ -111,14 +112,14 @@ test('list competitors joins shortlist counts; upcoming chips stay unfiltered',a
  }
 });
 test('operator desk adds competitors and upcoming without inventing a combined insights page',async()=>{
- const admin=await readFile(new URL('../src/AkayAdmin.tsx',import.meta.url),'utf8');
+ const admin=await readFile(new URL('../src/owner/OwnerDashboard.tsx',import.meta.url),'utf8');
  const api=await readFile(new URL('../api/akay-inventory.mjs',import.meta.url),'utf8');
  const upcoming=await readFile(new URL('../src/AkayUpcoming.tsx',import.meta.url),'utf8');
  const competitors=await readFile(new URL('../src/AkayCompetitors.tsx',import.meta.url),'utf8');
  const preview=await readFile(new URL('../src/AkayPagePreview.tsx',import.meta.url),'utf8');
- assert.match(admin,/\/akay\/competitors/);
- assert.match(admin,/\/akay\/upcoming/);
- assert.equal(admin.includes('Traffic & journeys'),false);
+ assert.match(admin,/competitors:'search'/);
+ assert.match(admin,/upcoming:'research'/);
+ assert.equal(admin.includes('Traffic & journeys'),true);
  assert.equal(upcoming.includes('Approve'),false);
  assert.equal(competitors.includes('Approve'),false);
  assert.match(upcoming,/Ayozan Classic/);

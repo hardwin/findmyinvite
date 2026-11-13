@@ -38,6 +38,21 @@
       "includeFiles": "{public/assets/catalogue/v1/*-walkthrough.*,node_modules/ffmpeg-static/**,node_modules/ffprobe-static/**}",
       "maxDuration": 300,
       "memory": 1024
+    },
+    "api/owner.mjs": {
+      "maxDuration": 800,
+      "includeFiles": "{public/sitemap.xml,docs/owner/grok-openapi.json}"
+    },
+    "api/owner-blog.mjs": {
+      "includeFiles": "public/sitemap.xml"
+    },
+    "api/share-image.mjs": {
+      "maxDuration": 60
+    },
+    "api/share-render.mjs": {
+      "includeFiles": "{public/assets/flagship/{fonts/**,lace/lace-corner-swag.webp,*/*frame*.{png,webp}},node_modules/@sparticuz/chromium/bin/**}",
+      "maxDuration": 60,
+      "memory": 2048
     }
   },
   "crons": [
@@ -68,9 +83,29 @@
     {
       "path": "/api/template-retention",
       "schedule": "10 3 * * *"
+    },
+    {
+      "path": "/api/owner?action=scheduled-sync",
+      "schedule": "15 * * * *"
     }
   ],
   "rewrites": [
+    {
+      "source": "/share-images/:slug/:revision.jpg",
+      "destination": "/api/share-image?slug=:slug&v=:revision"
+    },
+    {
+      "source": "/blog",
+      "destination": "/api/owner-blog"
+    },
+    {
+      "source": "/blog/:slug",
+      "destination": "/api/owner-blog?slug=:slug"
+    },
+    {
+      "source": "/sitemap.xml",
+      "destination": "/api/owner-blog?sitemap=1"
+    },
     {
       "source": "/api/face-swap/file.jpg",
       "destination": "/api/face-swap?action=file"

@@ -22,3 +22,18 @@ body.di-site .content-page,body.di-site .editor-shell{background:#fffdf9;color:#
 .di-preview-card>small{display:block;padding:6px 10px}.di-live-thumbnail>img{position:absolute;inset:0}
 
 .di-preview-controls{display:flex;align-items:center;justify-content:flex-end;gap:6px;padding:10px 8px;background:#fff;min-height:52px;box-sizing:border-box}.di-preview-controls button,.di-preview-controls a{display:inline-flex;align-items:center;justify-content:center;gap:5px;min-height:34px;padding:7px 10px;border-radius:999px;font:600 12px/1 system-ui;text-decoration:none;white-space:nowrap;box-sizing:border-box;cursor:pointer;transition:background .15s,box-shadow .15s}.di-preview-controls button{border:1px solid #182235;background:#182235;color:#fff;box-shadow:0 2px 5px #18223520}.di-preview-controls a{border:1px solid #dce0e6;background:#f8f9fb;color:#182235}.di-preview-controls button:hover{background:#2e3c54}.di-preview-controls a:hover{background:#edf0f5}.di-preview-controls button:focus-visible,.di-preview-controls a:focus-visible{outline:3px solid #c0863e;outline-offset:3px}.di-pin-kind{top:12px;bottom:auto;pointer-events:none}.di-preview-controls svg{flex:none}@media(max-width:600px){.di-preview-controls{padding:8px 6px;gap:5px;min-height:54px}.di-preview-controls button,.di-preview-controls a{min-height:38px;padding:8px 9px;font-size:11px}}
+
+/* Separate preview, product information and the template-specific editor. */
+.di-preview-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;padding:10px}
+.di-preview-controls .di-personalise{grid-column:1/-1;grid-row:1;background:#182235;border-color:#182235;color:#fff}
+.di-preview-controls .di-personalise:hover{background:#2e3c54}
+.di-preview-controls button{background:#f8f9fb;border-color:#dce0e6;color:#182235;box-shadow:none}
+.di-preview-controls button:hover{background:#edf0f5}
+.di-preview-controls button,.di-preview-controls a{min-width:0;min-height:44px;padding:8px;font-size:12px}
+.di-preview-controls:not(:has(.di-details)) button{grid-column:1/-1}
+
+/* Product details use a full-size poster; card controls belong to the catalogue. */
+.di-detail-media{min-width:0;align-self:start;padding:24px}
+.di-detail-preview{display:block;width:min(100%,400px);border-radius:12px;overflow:hidden;box-shadow:0 12px 35px #30271918}
+.di-detail-preview img{display:block;width:100%;height:auto;max-height:none;aspect-ratio:400/560;object-fit:cover}
+@media(max-width:640px){.di-detail-media{padding:16px}.di-detail-preview{width:min(100%,320px)}.di-detail-preview img{max-height:none}}

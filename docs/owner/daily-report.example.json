@@ -1,0 +1,28 @@
+{
+  "kind": "daily",
+  "dryRun": true,
+  "records": [
+    {
+      "sourceReportId": "instagram-fmi-2026-11-03",
+      "sourceRevision": 1,
+      "date": "2026-11-03",
+      "timezone": "Asia/Kolkata",
+      "platform": "Instagram",
+      "account": "findmyinvite",
+      "commentInquiries": 4,
+      "dmInquiries": 6,
+      "uniqueInquirers": 8,
+      "cutoff": "2026-11-03T18:29:59Z",
+      "complete": true,
+      "collectedAt": "2026-11-03T19:00:00Z",
+      "posts": [
+        {
+          "postId": "post-001",
+          "url": "https://www.instagram.com/p/EXAMPLE/",
+          "commentInquiries": 3,
+          "dmInquiries": 2
+        }
+      ]
+    }
+  ]
+}

@@ -25,7 +25,7 @@ export function bindReference(FMI){
  image('.couple-art img',c.cover);image('.court img',c.cover);image('.end-art img',c.closingImage);
  const facts=q('.know .tiles');if(facts){const sample=facts.firstElementChild?.cloneNode(true);facts.replaceChildren();for(const d of c.details||[]){const el=sample?.cloneNode(true);if(el){const heading=el.querySelector('h3,b');if(heading)heading.textContent=d.title;const p=el.querySelector('p');if(p)p.textContent=d.description;facts.append(el);}}}if(!c.details?.length)q('.know')?.remove();
  text('.demo',FMI.preview?'Preview only. Your RSVP will not be sent.':'Your reply goes to the family on WhatsApp.');
- const music=q('#music');if(c.music)music.src=c.music;else{q('#music-btn').style.display='none';q('#gate small').textContent='Tap to open your invitation';}
+ const music=q('#music');if(c.music)music.src=c.music;else{music.removeAttribute('src');music.querySelectorAll('source').forEach(s=>s.remove());q('#music-btn').style.display='none';q('#gate small').textContent='Tap to open your invitation';}
  if(c.rsvpDeadline)text('#rsvp > .lede','Kindly reply by '+day(c.rsvpDeadline));else q('#rsvp > .lede')?.remove();
  const card=q('.ev'),container=card?.parentElement,template=card?.cloneNode(true);container?.replaceChildren();
  const routes=q('.routes');const routeTemplate=routes?.querySelector('a')?.cloneNode(true);routes?.replaceChildren();

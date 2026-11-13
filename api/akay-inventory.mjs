@@ -3,7 +3,7 @@ import {sessionOk} from '../server/akay-gate.mjs';
 import {parseCompetitorQuery,parseUpcomingQuery,listCompetitors,listUpcoming} from '../server/akay-inventory.mjs';
 export default async function handler(req,res){
  try{
-  if(!sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
+  if(!await sessionOk(req))throw new HttpError(401,'Open /akay and enter the access code.');
   method(req,['GET']);
   const url=new URL(req.url,'https://findmyinvite.com');
   const view=url.searchParams.get('view')||'';

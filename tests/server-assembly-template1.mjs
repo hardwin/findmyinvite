@@ -45,10 +45,12 @@ import {
 } from '../server/assembly-template1-theme.mjs';
 import {validateTemplate1Input,slugify,startTemplate1Job,getTemplate1Job,proceedTemplate1Job,hydrateLiveJob} from '../server/assembly-template1.mjs';
 import {listMusicLibrary} from '../server/music-library.mjs';
-import handler from '../api/assembly.mjs';
-import {issueSession} from '../server/akay-gate.mjs';
+import originalHandler from '../api/assembly.mjs';
+import {ownerFixture,ownerCookie,ownerHeaders} from './helpers/owner-fixture.mjs';
+const handler=ownerFixture(originalHandler);
 
-function cookie(){return 'fmi_akay='+issueSession();}
+
+function cookie(){return ownerCookie;}
 function mockRes(){
  const res={statusCode:200,headers:{},body:null};
  res.status=code=>{res.statusCode=code;return res;};
@@ -57,7 +59,7 @@ function mockRes(){
  return res;
 }
 async function request(url,opts={}){
- const req={method:opts.method||'GET',url,headers:{cookie:opts.cookie===undefined?cookie():opts.cookie,...(opts.headers||{})},body:opts.body};
+ const req={method:opts.method||'GET',url,headers:{...ownerHeaders,cookie:opts.cookie===undefined?cookie():opts.cookie,...(opts.headers||{})},body:opts.body};
  const res=mockRes();
  await handler(req,res);
  return res;

@@ -20,7 +20,7 @@ export function validateContent(schema,input,{complete=false}={}){
  if(f.type==='date'&&(!/^\d{4}-\d{2}-\d{2}$/.test(v)||!Number.isFinite(Date.parse(v))||new Date(v).toISOString().slice(0,10)!==v))throw Error('Invalid date.');
  if(f.type==='time'&&!/^([01]\d|2[0-3]):[0-5]\d$/.test(v))throw Error('Invalid time.');
  if(f.type==='url'){try{const url=new URL(v);if(url.protocol!=='https:'||url.username||url.password)throw Error();}catch{throw Error('Links must use HTTPS.');}}
- if(['image','video','audio'].includes(f.type)&&!/^\/api\/template-media\?id=[a-f0-9-]{36}$/.test(v)&&!/^\/assets\/[a-zA-Z0-9/_ .-]+$/.test(v))throw Error('Choose an uploaded media file.');
+ if(['image','video','audio'].includes(f.type)&&!(f.type==='audio'&&/^\/api\/music\?id=[a-z0-9][a-z0-9-]{2,63}$/.test(v))&&!/^\/api\/template-media\?id=[a-f0-9-]{36}$/.test(v)&&!/^\/assets\/[a-zA-Z0-9/_ .-]+$/.test(v))throw Error('Choose an uploaded media file.');
  if(['image','video','audio'].includes(f.type)&&v.split('/').includes('..'))throw Error('Invalid media path.');
  if(f.type==='image')imageCount++;out[f.key]=v.trim();}
  return out;}

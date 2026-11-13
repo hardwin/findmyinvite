@@ -1,3 +1,4 @@
+import {session,requireOwner} from '../server/owner/auth.mjs';
 import {randomUUID} from 'node:crypto';
 import {get,put} from '@vercel/blob';
 import {Readable} from 'node:stream';
@@ -10,10 +11,11 @@ export default async function handler(req,res){try{
  const q=new URL(req.url,'https://findmyinvite.com').searchParams,action=q.get('action')||'list',id=q.get('id');
  if(action==='asset'){method(req,['GET']);if(!/^[a-f0-9-]{36}\.(png|jpg|webp|gif|mp4|webm|mp3|wav|ogg)$/.test(id||''))throw new HttpError(404,'Asset not found.');const blob=await get('workspace/'+id,{access:'private',useCache:true});if(!blob||blob.statusCode!==200)throw new HttpError(404,'Asset not found.');res.setHeader('Content-Type',blob.blob.contentType);res.setHeader('Cache-Control','public, max-age=31536000, immutable');res.setHeader('X-Content-Type-Options','nosniff');res.setHeader('Access-Control-Allow-Origin','*');await pipeline(Readable.fromWeb(blob.stream),res);return;}
  if(action==='public'){method(req,['GET']);return respond(res,200,await liveDesign(id));}
- if(action==='session'){method(req,['GET']);return respond(res,200,{authenticated:workspaceSession(req)});}
+ if(action==='session'){method(req,['GET']);return respond(res,200,{authenticated:!!await session(req)});}
  if(req.method!=='GET')sameOrigin(req);
  if(action==='login'){method(req,['POST']);await rate(req,'workspace-login',10,900);const b=await bodyJson(req,1024);if(!passwordOk(b.password))throw new HttpError(401,'That admin access code is incorrect.');res.setHeader('Set-Cookie',workspaceCookie());return respond(res,200,{ok:true});}
- if(!workspaceSession(req))throw new HttpError(401,'Enter your FMI admin access code to open Workspace.');
+ if(!await session(req))throw new HttpError(401,'Enter your FMI admin access code to open Workspace.');
+ await requireOwner(req);
  if(action==='logout'){method(req,['POST']);res.setHeader('Set-Cookie','fmi_workspace=; Path=/; HttpOnly; SameSite=Strict; Max-Age=0');return respond(res,200,{ok:true});}
  if(action==='list'){method(req,['GET']);return respond(res,200,{designs:await db('workspace_designs?select=id,base_id,name,description,collection,thumbnail,revision,published_revision,updated_at&order=updated_at.desc&limit=200')});}
  if(action==='base'){method(req,['GET']);const html=await baseHtml(id);return respond(res,200,{html,assets:assetList(html)});}

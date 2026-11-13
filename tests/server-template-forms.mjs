@@ -25,6 +25,7 @@ const expected={
 function answer(q){return q.type==='date'?'2028-08-20':q.type==='time'?'18:30':q.type==='select'?q.options[0]:q.format==='phone'?'919876543210':q.type==='repeater'?[Object.fromEntries(q.fields.filter(f=>f.required).map(f=>[f.path,answer(f)]))]:'Our celebration';}
 function completed(form,enabled=false){let c=structuredClone(form.initialContent);for(const q of allQuestions(form)){if(q.type==='boolean')c=setFormValue(c,q.path,enabled);else if(q.required&&(!q.when||enabled))c=setFormValue(c,q.path,answer(q));}return c;}
 for(const version of schemas){const id=version.template_id,form=compileTemplateForm(definitions[id],version.field_schema);
+ test(id+' persists a validated share artwork preference',()=>{const input=completed(form);input._form={...input._form,shareArtwork:true};assert.equal(validateFormContent(form,version.field_schema,input,{complete:true})._form.shareArtwork,true);input._form.shareArtwork='yes';assert.throws(()=>validateFormContent(form,version.field_schema,input),/share artwork/);});
  for(const language of ['ta','te','kn','hi'])test(id+' saves and reopens '+language+' without changing personal text',()=>{
   const content={...completed(form),language,groom:'அருண்',bride:'ಮಾಯಾ'};
   const clean=validateFormContent(form,version.field_schema,content,{complete:true});

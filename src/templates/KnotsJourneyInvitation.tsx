@@ -1,3 +1,4 @@
+import InvitationLoading from './InvitationLoading';
 import {useEffect,useState} from 'react';
 import templeDocument from './thiruvarul/document.html?raw';
 import payanamDocument from './kalyana-payanam/document.html?raw';
@@ -16,6 +17,6 @@ export default function KnotsJourneyInvitation({version,content,preview=false,re
    setDoc((temple?templeDocument:payanamDocument).replace('</head>',`<link rel="stylesheet" href="/assets/${key}/fonts.css"></head>`).replace('</body>',()=>`<script>${boot}</script><script type="module">import('/assets/${key}/app.js').catch(e=>{console.error('Invitation startup',e);document.querySelector('#tapl').textContent='Unable to load the journey. Please reload.';});</script></body>`));
   })().catch(e=>{if(!ctrl.signal.aborted)setError(e.message);});return()=>{ctrl.abort();urls.forEach(URL.revokeObjectURL);};
  },[content,version.id,preview,reduceMotion,key,temple]);
- if(error)return <p role="alert">{error}</p>;if(!doc)return <p role="status">Preparing your invitation…</p>;
+ if(error)return <p role="alert">{error}</p>;if(!doc)return <InvitationLoading/>;
  return <iframe title={temple?'Thiruvarul temple invitation':'Kalyana Payanam wedding invitation'} data-template-version={version.id} srcDoc={doc} sandbox="allow-scripts allow-forms allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation allow-downloads" style={{display:'block',width:'100%',height:'100svh',border:0}}/>;
 }

@@ -70,7 +70,7 @@ export default function AkayShortlist(){
   setBusy(status);setError('');setNotice('');
   try{
    const action=ids.length===1?'decide':'bulk';
-   const res=await fetch('/api/akay-shortlist?action='+action,{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify(ids.length===1?{id:ids[0],status}:{ids,status})});
+   const res=await fetch('/api/akay-shortlist?action='+action,{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json','X-Owner-CSRF':sessionStorage.getItem('fmi-owner-csrf')||''},body:JSON.stringify(ids.length===1?{id:ids[0],status}:{ids,status})});
    const body=await res.json().catch(()=>({}));
    if(!res.ok)throw new Error((body as {error?:string}).error||'Could not save that decision.');
    const failed=Array.isArray((body as {failed?:{reason:string}[]}).failed)?(body as {failed:{reason:string}[]}).failed:[];

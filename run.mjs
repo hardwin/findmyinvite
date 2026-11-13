@@ -6,6 +6,7 @@ import {createServer,build,loadEnv} from 'vite';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 const isBuild=process.argv.includes('--build');
+if(!isBuild&&!process.env.VERCEL)process.env.FMI_OWNER_LOCAL='1';
 // Production APIs are packaged by Vercel; only the dev server needs this router.
 const apiPlugins=isBuild?[]:[(await import('./server/local-api.mjs')).localApi()];
 Object.assign(process.env,loadEnv('development',process.cwd(),''));

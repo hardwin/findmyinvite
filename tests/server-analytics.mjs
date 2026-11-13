@@ -1,10 +1,12 @@
+import {ownerCookie,ownerHeaders,ownerFixture} from './helpers/owner-fixture.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {passwordOk,issueSession,sessionOk,cookieHeader} from '../server/akay-gate.mjs';
 import {summarize} from '../server/akay-insights.mjs';
-import handler from '../api/analytics.mjs';
+import liveHandler from '../api/analytics.mjs';
 import {slugValue} from '../server/core.mjs';
+const handler=ownerFixture(liveHandler);
 const session='11111111-1111-4111-8111-111111111111';
 const visitor='22222222-2222-4222-8222-222222222222';
 const code='1414';
@@ -14,7 +16,7 @@ async function request(url,{method='GET',body,cookie}={}){
  return res;
 }
 test('operator code stays on the server and is not in the frontend',async()=>{
- assert.equal(passwordOk(code),true);
+ assert.equal(passwordOk(code),false);
  assert.equal(passwordOk('0000'),false);
  assert.equal(passwordOk('14140'),false);
  assert.throws(()=>slugValue('akay'));
@@ -25,19 +27,7 @@ test('operator code stays on the server and is not in the frontend',async()=>{
   if(file.endsWith('Home.tsx')||file.endsWith('ChungHome.tsx')||file.endsWith('Storefront.tsx')||file.endsWith('shop-desk.tsx')||file.endsWith('components.tsx'))assert.equal(source.includes('/akay'),false,file+' linked the operator page');
  }
 });
-test('gate cookie is HttpOnly and does not contain the operator code',async()=>{
- const denied=await request('/api/analytics?action=gate',{method:'POST',body:{gate:'0000'}});
- assert.equal(denied.code,401);
- const allowed=await request('/api/analytics?action=gate',{method:'POST',body:{gate:code}});
- assert.equal(allowed.code,200);
- const cookie=String(allowed.headers['Set-Cookie']||'');
- assert.match(cookie,/HttpOnly/);
- assert.equal(cookie.includes(code),false);
- const req={headers:{cookie:'fmi_akay='+cookie.split('=')[1].split(';')[0]}};
- assert.equal(sessionOk(req),true);
- assert.equal(sessionOk({headers:{}}),false);
- assert.equal(cookieHeader(issueSession(),false).includes(code),false);
-});
+test('legacy gate and cookies are rejected',async()=>{const result=await request('/api/analytics?action=gate',{method:'POST',body:{gate:code}});assert.equal(result.code,401);assert.equal(await sessionOk({headers:{cookie:'fmi_akay=legacy'}}),false);assert.equal(await sessionOk({headers:{}}),false);assert.throws(()=>issueSession());});
 test('insights require a valid session; collect validates and skips the operator path',async()=>{
  const originalFetch=global.fetch,env={...process.env};
  Object.assign(process.env,{SUPABASE_URL:'https://example.supabase.co',SUPABASE_SERVICE_ROLE_KEY:'test',RATE_LIMIT_SECRET:'012345678901234567890123456789012345'});
@@ -51,8 +41,7 @@ test('insights require a valid session; collect validates and skips the operator
  };
  try{
   assert.equal((await request('/api/analytics?action=insights')).code,401);
-  const gated=await request('/api/analytics?action=gate',{method:'POST',body:{gate:code}});
-  const cookie=String(gated.headers['Set-Cookie']).split(';')[0];
+  const cookie=ownerCookie;
   const open=await request('/api/analytics?action=insights&days=7',{cookie});
   assert.equal(open.code,200);
   assert.equal(open.body.insights.totals.pageviews,0);
