@@ -11,7 +11,7 @@ export function localisationConfig(content:Record<string,any>){
 // Self-contained: embedded only into audited invitation documents, never stored as form data.
 export function localiseInvitationDocument(config:any,root:Node=document.body){
  if(config.thumbnail){document.documentElement.setAttribute('data-fmi-thumbnail','');const gate=document.getElementById('gate');if(gate)gate.hidden=true;document.body.classList.remove('locked');}
- if(!['ta','te','kn','hi',...(config.catalog?['ml']:[])].includes(config.language))return;
+ if(!['ta','te','kn','hi',...(config.catalog||config.malayalam?['ml']:[])].includes(config.language))return;
  const normalize=(value:string)=>value.trim().replace(/\s+/g,' ').replace(/[’‘]/g,"'").toLowerCase();
  const dictionary=Object.fromEntries(Object.entries(config.translations).map(([k,v])=>[normalize(k),v])) as Record<string,string>,protectedText=new Set(config.protectedText);
  const translate=(value:string)=>{const trimmed=value.trim(),suffix=trimmed.endsWith('*')?' *':'',key=normalize(trimmed.replace(/\s*\*$/,''));if(protectedText.has(key))return value;const translated=dictionary[key];if(translated)return value.replace(trimmed,translated+suffix);if(!config.catalog)return value;

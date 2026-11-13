@@ -50,6 +50,12 @@ const burgundyHint=/burgundy|crimson|legacy|velvet/i;
 const navyHint=/navy|minimal|noir|majesty/i;
 const blushHint=/blush|pink|rose/i;
 const goldHint=/gold|ivory|elegance|temple|sanctuary/i;
+const authoredSettings:Record<string,Setting>={
+ 'midnight-stage':'palace','little-blessing':'garden','noir-and-gold':'beach','golden-hour':'palace',
+ 'pearl-and-sapphire':'palace','royal-crimson':'palace','garden-curtains':'garden','pulli':'beach',
+ 'pattu':'temple','olai':'temple','jasmine-arch':'garden','palace-of-lights':'palace',
+ 'the-ring-box':'garden','home-sweet-home':'minimal','up-and-away':'garden','temple-doors':'temple'
+};
 
 export function templateKind(template:{royal?:boolean;video?:string}):ShopKind{
  return template.royal&&template.video?'video':'website';
@@ -63,6 +69,7 @@ export function templateTradition(template:Pick<ShopTemplate,'id'|'name'>):Tradi
 }
 
 export function templateSetting(template:Pick<ShopTemplate,'id'|'name'>):Setting{
+ if(authoredSettings[template.id])return authoredSettings[template.id];
  if(template.id==='theeram')return 'backwater';
  if(['thiruvarul','kalyana-payanam'].includes(template.id))return 'temple';
  const hay=template.id+' '+template.name;

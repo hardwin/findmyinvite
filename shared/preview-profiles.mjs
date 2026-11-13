@@ -3,6 +3,7 @@ import {theeramPreview} from '../public/assets/theeram/languages.js';
 import {previewCopy} from './preview-copy.mjs';
 import {languageLocale,INVITATION_LANGUAGES} from './invitation-languages.mjs';
 import {previewDictionary} from './preview-translations.mjs';
+import {CINOREV_RENDERERS} from './cinorev-renderers.mjs';
 
 const names=`
 christian-bells|അന്ന തോമസ്|അലക്സ്|அன்னா தாமஸ்|அலெக்ஸ்|అన్నా థామస్|అలెక్స్|ಅನ್ನಾ ಥಾಮಸ್|ಅಲೆಕ್ಸ್|अन्ना थॉमस|एलेक्स
@@ -64,6 +65,7 @@ const maps={
 };
 export function previewContent(version,language){
  if(!INVITATION_LANGUAGES.includes(language))language='en';
+ if(CINOREV_RENDERERS.includes(version.renderer))return {...structuredClone(version.defaults),language,_catalogPreview:true,previewGuest:previewCopy.yourFamily?.[language]||'Your Family'};
  const content=structuredClone(version.defaults);if(["thiruvarul","kalyana-payanam"].includes(version.template_id))return journeyPreview(version.template_id,content,language);if(version.template_id==='theeram')return theeramPreview(content,language);
  if(language==='en'){content.language='en';content._catalogPreview=true;content.previewGuest='Your Family';if(version.template_id==='embroidered-garden'){content.section1.text0='Welcome to our wedding';content.section1.text1='We cannot wait to celebrate this magical day with the people we love.';}return content;}
  const profile=maps[version.template_id];if(!profile)throw Error('This design has no translated preview.');

@@ -1,0 +1,1237 @@
+[
+  {
+    "source": "https://cinorev.in/assets/tpl/midnight-stage-v1.webp",
+    "path": "/assets/cinorev/midnight-stage/poster.webp",
+    "sha256": "2cdcc52d6524818df626a8845290f978461d13ecd29e6e162dfec1e12f1e2dca"
+  },
+  {
+    "source": "https://cinorev.in/assets/tpl/little-blessing-v1.webp",
+    "path": "/assets/cinorev/little-blessing/poster.webp",
+    "sha256": "282680c0104e8b9f262830cdf6ea3cecff9912c39aa993622d619b2be589393e"
+  },
+  {
+    "source": "https://cinorev.in/assets/tpl/noir-and-gold-v1.webp",
+    "path": "/assets/cinorev/noir-and-gold/poster.webp",
+    "sha256": "9929c4744f63253d33e2b71e0bea40152bb4830808a15053ff2e5ee18c170b7f"
+  },
+  {
+    "source": "https://cinorev.in/assets/tpl/golden-hour-v1.webp",
+    "path": "/assets/cinorev/golden-hour/poster.webp",
+    "sha256": "70bc5ac46b09eb3448fd947e959f5a3c4accff97dd022633118a06066c381801"
+  },
+  {
+    "source": "https://cinorev.in/assets/tpl/pearl-and-sapphire-v1.webp",
+    "path": "/assets/cinorev/pearl-and-sapphire/poster.webp",
+    "sha256": "fdf2f0971ec2d347d8ea5c746d40b9edd8c218b79f06da0c5ebdaf32d27cd228"
+  },
+  {
+    "source": "https://cinorev.in/assets/tpl/royal-crimson-v1.webp",
+    "path": "/assets/cinorev/royal-crimson/poster.webp",
+    "sha256": "38f05565e563066feaf43a3ceb9c77c8473f5f1234aa608728075dcde71a0d2c"
+  },
+  {
+    "source": "https://cinorev.in/assets/tpl/pulli-v1.webp",
+    "path": "/assets/cinorev/pulli/poster.webp",
+    "sha256": "dca8de4cf5a6d44eed253592a4ab49b1214f13bc345404767237a5f605d3776e"
+  },
+  {
+    "source": "https://cinorev.in/assets/tpl/garden-curtains-v1.webp",
+    "path": "/assets/cinorev/garden-curtains/poster.webp",
+    "sha256": "b3832ffab44c980221b90a942806833b62c357e4d3191ade3b1fb1ada68877ff"
+  },
+  {
+    "source": "https://cinorev.in/assets/tpl/pattu-v1.webp",
+    "path": "/assets/cinorev/pattu/poster.webp",
+    "sha256": "7cc5ffabddb2543a1d82d2ce871aae7f0b50bdf9e40b064460e2df065020fa8d"
+  },
+  {
+    "source": "https://cinorev.in/assets/tpl/olai-v1.webp",
+    "path": "/assets/cinorev/olai/poster.webp",
+    "sha256": "7836df23d1a2b2d7aa3489f7b3b05dd11dfda0fcadcf091d4a706a7ae7ab9b4d"
+  },
+  {
+    "source": "https://cinorev.in/assets/tpl/jasmine-arch-v1.webp",
+    "path": "/assets/cinorev/jasmine-arch/poster.webp",
+    "sha256": "80620fb82e740d81b27bcc367e4e56010416b961c33cabe404dad19b1ff3d3cf"
+  },
+  {
+    "source": "https://cinorev.in/assets/tpl/palace-of-lights-v1.webp",
+    "path": "/assets/cinorev/palace-of-lights/poster.webp",
+    "sha256": "4f8a416f571c3f01e00f4203da7be72f3bd20f9f0f7495d6cdbb16d05be81fdc"
+  },
+  {
+    "source": "https://cinorev.in/assets/tpl/the-ring-box-v1.webp",
+    "path": "/assets/cinorev/the-ring-box/poster.webp",
+    "sha256": "2494c6c4e0b57f5a80649e99cb64cef48daff9eecb07306c5996ef0861dfed1a"
+  },
+  {
+    "source": "https://cinorev.in/assets/tpl/home-sweet-home-v1.webp",
+    "path": "/assets/cinorev/home-sweet-home/poster.webp",
+    "sha256": "1265b41d29ed9d96dcb32d11fadf6abcd1fd54dfb74523aaf76ad88dc38c22ec"
+  },
+  {
+    "source": "https://cinorev.in/assets/tpl/up-and-away-v1.webp",
+    "path": "/assets/cinorev/up-and-away/poster.webp",
+    "sha256": "196e48545252c7fb8571bc51195a077b6d4aa20fe428d5afcd7df5cfd35b7380"
+  },
+  {
+    "source": "https://cinorev.in/assets/tpl/temple-doors-v1.webp",
+    "path": "/assets/cinorev/temple-doors/poster.webp",
+    "sha256": "ab1a1d3923da344a8501b013882f56fb11586579eb9fee31254de0ddb75e1b92"
+  },
+  {
+    "source": "https://cinorev.in/arhaan-inaya/a/door-l.webp",
+    "path": "/assets/cinorev/garden-curtains/a/door-l.webp",
+    "sha256": "feb753604e25bc6a4d0be517abc0f8afe3c91abd83a5944f8bdf3f425c976e46"
+  },
+  {
+    "source": "https://cinorev.in/arhaan-inaya/a/door-r.webp",
+    "path": "/assets/cinorev/garden-curtains/a/door-r.webp",
+    "sha256": "8c31335c5accccd36c576feae10710c9a903717d7057842c8a1efeca65eb56c5"
+  },
+  {
+    "source": "https://cinorev.in/arhaan-inaya/a/badge-v2.webp",
+    "path": "/assets/cinorev/garden-curtains/a/badge-v2.webp",
+    "sha256": "3af858b94c4acdd325499307e88e5fd430cb81aa42f3eef8ac0d9a11ee1ef914"
+  },
+  {
+    "source": "https://cinorev.in/arhaan-inaya/a/garden-sunset.webp",
+    "path": "/assets/cinorev/garden-curtains/a/garden-sunset.webp",
+    "sha256": "7b1aa09227743677fff34468bf59535e72d5f19e63dffb145b7f03ccc6c993b6"
+  },
+  {
+    "source": "https://cinorev.in/arhaan-inaya/a/garden-left.webp",
+    "path": "/assets/cinorev/garden-curtains/a/garden-left.webp",
+    "sha256": "6b66a4e2d15de0384e1bd133c18a7f89d618fdc62e7ae99bc66d3444476c3e9f"
+  },
+  {
+    "source": "https://cinorev.in/arhaan-inaya/a/garden-right.webp",
+    "path": "/assets/cinorev/garden-curtains/a/garden-right.webp",
+    "sha256": "8d2c41b6c839c340ccf93f0fbbe2167eab4509eba24cef3af5ea4915b389b579"
+  },
+  {
+    "source": "https://cinorev.in/arhaan-inaya/a/cur-l.webp",
+    "path": "/assets/cinorev/garden-curtains/a/cur-l.webp",
+    "sha256": "5f56edce61438d796c60963588806030fe17304d8bb81bea54d5938d79a4b5a4"
+  },
+  {
+    "source": "https://cinorev.in/arhaan-inaya/a/cur-r.webp",
+    "path": "/assets/cinorev/garden-curtains/a/cur-r.webp",
+    "sha256": "d3fef500e4f866b18e22718ce565a743ae4ce867f2b293b8daacf45b2bd0f409"
+  },
+  {
+    "source": "https://cinorev.in/fonts/v1/playfair-display-600.woff2",
+    "path": "/assets/cinorev/shared/e57e4db8ef7de437.woff2",
+    "sha256": "ee017caf9c6c6f4447efe9ac9c13e0e8577ebec39f12c432549d331c609bdff8"
+  },
+  {
+    "source": "https://cinorev.in/fonts/v1/great-vibes-400.woff2",
+    "path": "/assets/cinorev/shared/6f84952872ba72b8.woff2",
+    "sha256": "d96ffe47d051dd4d499683d6e797e76549f7fe1113ec29a520c3421598d761ae"
+  },
+  {
+    "source": "https://cinorev.in/fonts/v1/cormorant-garamond-500i.woff2",
+    "path": "/assets/cinorev/shared/62688fde3d671320.woff2",
+    "sha256": "6ae2ae7f3a70491f7b625a0668526424af081efabae2e58c739760170b3c0c33"
+  },
+  {
+    "source": "https://cinorev.in/fonts/v1/cormorant-garamond-700.woff2",
+    "path": "/assets/cinorev/shared/04cf46886e4673ab.woff2",
+    "sha256": "fd2cb83259329fec7904e14674ec8ed01bc4ebfb4d8f16ab9b085cc4ee3c1eba"
+  },
+  {
+    "source": "https://cinorev.in/fonts/v1/playfair-display-600i.woff2",
+    "path": "/assets/cinorev/shared/4af4d5ec54a9085f.woff2",
+    "sha256": "54abcb881e4b5a7ffbeea099f6611751cd3da67f3be0cbade9d014faa57f0bdb"
+  },
+  {
+    "source": "https://cinorev.in/fonts/v1/amiri-400.woff2",
+    "path": "/assets/cinorev/shared/9f93f12ee76da972.woff2",
+    "sha256": "ed35e7b18f1f1f3536ed14a7e6d1d595e27690975233b94ca660583549649f96"
+  },
+  {
+    "source": "https://cinorev.in/fonts/v1/playfair-display-400.woff2",
+    "path": "/assets/cinorev/shared/cb201c20b0a1b5e1.woff2",
+    "sha256": "7e84f4d243e6eb64e1c000dce8523ef39c9e876b3fb240e0925e65906b7d3609"
+  },
+  {
+    "source": "https://cinorev.in/fonts/v1/playfair-display-500.woff2",
+    "path": "/assets/cinorev/shared/6724a7a7f7b357f1.woff2",
+    "sha256": "e0dca71dcd6f764e64def3ff1acc9f872fc892d812a64fd834ba680d3142e3d7"
+  },
+  {
+    "source": "https://cinorev.in/fonts/v1/playfair-display-700.woff2",
+    "path": "/assets/cinorev/shared/12e5ae3b70d52940.woff2",
+    "sha256": "7766452927f3b825b3eac45660e0dcce2440db732681b58994c96cced760e412"
+  },
+  {
+    "source": "https://cinorev.in/fonts/v1/playfair-display-900.woff2",
+    "path": "/assets/cinorev/shared/1482feda63929113.woff2",
+    "sha256": "a2781c14bb3a2bee76dc011c1f51c64a540fdae31b82d044b79432b4e44e498f"
+  },
+  {
+    "source": "https://cinorev.in/fonts/v1/playfair-display-500i.woff2",
+    "path": "/assets/cinorev/shared/86238ef62621e4b2.woff2",
+    "sha256": "ed77d2f52664238305e4e642836d67e51665ba8fd1bfac811a96f4f2425fd153"
+  },
+  {
+    "source": "https://cinorev.in/fonts/v1/cormorant-garamond-400.woff2",
+    "path": "/assets/cinorev/shared/65c09187737ef88d.woff2",
+    "sha256": "28227f1e3733894974461813ebd86b2d6b4f67adc2894a3401d5786661026b4f"
+  },
+  {
+    "source": "https://cinorev.in/fonts/v1/cormorant-garamond-500.woff2",
+    "path": "/assets/cinorev/shared/b1aa4c1dd7d39d15.woff2",
+    "sha256": "331654442d5768671c98f6c08e419905e216d042764795d2ce2c2438bfc71a00"
+  },
+  {
+    "source": "https://cinorev.in/fonts/v1/cormorant-garamond-600.woff2",
+    "path": "/assets/cinorev/shared/11e923a16c0fe5ad.woff2",
+    "sha256": "898286321918ae79fa24675c99d7ea597c1b42f86a7ba493c71b6d21e3c5a87a"
+  },
+  {
+    "source": "https://cinorev.in/fonts/v1/dancing-script-400.woff2",
+    "path": "/assets/cinorev/shared/45e25867cd394c42.woff2",
+    "sha256": "bfcd4e22b701e4a575a820f96c11998e5a9f6b467ca874c93564a4ef22c58c74"
+  },
+  {
+    "source": "https://cinorev.in/fonts/v1/noto-nastaliq-urdu-400.woff2",
+    "path": "/assets/cinorev/shared/6d94b7f0c722fe93.woff2",
+    "sha256": "81b134904d7383c5a6e112bc7edd6ecf10883eca4776ed3cb29152c865138669"
+  },
+  {
+    "source": "https://cinorev.in/arhaan-inaya/a/valance.webp",
+    "path": "/assets/cinorev/garden-curtains/a/valance.webp",
+    "sha256": "b004d892cd652a79678cc165b82504795a03432153794ec5a866e68e27865a50"
+  },
+  {
+    "source": "https://cinorev.in/arhaan-inaya/a/tieback.webp",
+    "path": "/assets/cinorev/garden-curtains/a/tieback.webp",
+    "sha256": "9df8ac42da19c97b37b28902a5203da78ef36eaa87379bdb5b01b534a6de2544"
+  },
+  {
+    "source": "https://cinorev.in/arhaan-inaya/a/glitter.webp",
+    "path": "/assets/cinorev/garden-curtains/a/glitter.webp",
+    "sha256": "56a80fede7395e752656acb15b7f14659fd894cb7b650b5c9d17593d44cdc028"
+  },
+  {
+    "source": "https://cinorev.in/fonts/v1/noto-naskh-arabic-400.woff2",
+    "path": "/assets/cinorev/shared/750b9afe4d75676c.woff2",
+    "sha256": "940f9b7fccfbca73dd72f65e74d4e064f5d84f72ffca8d1f9ad9efc4634d4d71"
+  },
+  {
+    "source": "https://cinorev.in/arhaan-inaya/a/backdrop-sunset.jpg",
+    "path": "/assets/cinorev/garden-curtains/a/backdrop-sunset.jpg",
+    "sha256": "4a4450d8c01c7b571b297b9e5321913b0ca1761d258276d4254ab164e122fc1d"
+  },
+  {
+    "source": "https://cinorev.in/kabir-myra/a/env-off.webp",
+    "path": "/assets/cinorev/golden-hour/a/env-off.webp",
+    "sha256": "62a0196cd3f8e5664a1c80b8c7ec5874ff941a2913f4081e013ab00564399d74"
+  },
+  {
+    "source": "https://cinorev.in/fonts/v1/tiro-devanagari-hindi-400.woff2",
+    "path": "/assets/cinorev/shared/1346d0c835048387.woff2",
+    "sha256": "510bd86ffedfb902dea0d48233e13bc0b44bac8928ec7a8460392b64f494527e"
+  },
+  {
+    "source": "https://cinorev.in/kabir-myra/a/wall-off-tall.webp",
+    "path": "/assets/cinorev/golden-hour/a/wall-off-tall.webp",
+    "sha256": "da999aa59a6798130d57265f82a2dc64957ab777fec742ab322336a53c1537e9"
+  },
+  {
+    "source": "https://cinorev.in/kabir-myra/a/wall-on-tall.webp",
+    "path": "/assets/cinorev/golden-hour/a/wall-on-tall.webp",
+    "sha256": "2132204d3dd0e70f9dba6df47f195dc8ed5ae8ac4753a22710d984872b360e9b"
+  },
+  {
+    "source": "https://cinorev.in/fonts/v1/cormorant-garamond-400i.woff2",
+    "path": "/assets/cinorev/shared/9f85827e1ddcdee2.woff2",
+    "sha256": "6e94ac82016d0c757fb8a2390d5cedb27b8d3fe137f62d47bff6afc563a0f98b"
+  },
+  {
+    "source": "https://cinorev.in/kabir-myra/a/opening-v3.mp4",
+    "path": "/assets/cinorev/golden-hour/a/opening-v3.mp4",
+    "sha256": "dabb1c41e0d57b80d7e029e4a1fa136451cf90a3f0ee67d4b0c7c9bf2e794bbf"
+  },
+  {
+    "source": "https://cinorev.in/kabir-myra/a/couple.webp",
+    "path": "/assets/cinorev/golden-hour/a/couple.webp",
+    "sha256": "986aa0b1c43c9688563907a9c5286d790a6b85c38bec78562907636104f2f764"
+  },
+  {
+    "source": "https://cinorev.in/kabir-myra/a/venue.webp",
+    "path": "/assets/cinorev/golden-hour/a/venue.webp",
+    "sha256": "9244956e45776dc51871af012ee48e8fd6689572a4f3985e4a1ca2808f761036"
+  },
+  {
+    "source": "https://cinorev.in/hari-kavya/a/key.webp",
+    "path": "/assets/cinorev/home-sweet-home/a/key.webp",
+    "sha256": "ab9b363545beae161a6be1b67567517b0b3d37f1363b82053ca4faf8eef7d45a"
+  },
+  {
+    "source": "https://cinorev.in/hari-kavya/a/sketch.webp",
+    "path": "/assets/cinorev/home-sweet-home/a/sketch.webp",
+    "sha256": "4703db550148f3e1c33b59ef3fa346cb2029950728993137c8b4cbad4a74110b"
+  },
+  {
+    "source": "https://cinorev.in/hari-kavya/a/home.webp",
+    "path": "/assets/cinorev/home-sweet-home/a/home.webp",
+    "sha256": "45feac7fd88d3c964734b0145fb3b86ec57005ab3823496d36d9154d7a182e64"
+  },
+  {
+    "source": "https://cinorev.in/hari-kavya/a/door.webp",
+    "path": "/assets/cinorev/home-sweet-home/a/door.webp",
+    "sha256": "e9aa84e7f0cc4f53b20911d5b4ab33a1e7571323f2c0570bbd54f5f01fa7d80a"
+  },
+  {
+    "source": "https://cinorev.in/hari-kavya/a/family.webp",
+    "path": "/assets/cinorev/home-sweet-home/a/family.webp",
+    "sha256": "1920f647f22585f57ba5a8bbfac6a86d23511697693fd62c71f150b8ed6286a0"
+  },
+  {
+    "source": "https://cinorev.in/hari-kavya/a/door-l.webp",
+    "path": "/assets/cinorev/home-sweet-home/a/door-l.webp",
+    "sha256": "bb8df444a49fed699ecd64f83a42fdcdcc6329d9203862c211be659880f52be8"
+  },
+  {
+    "source": "https://cinorev.in/hari-kavya/a/door-r.webp",
+    "path": "/assets/cinorev/home-sweet-home/a/door-r.webp",
+    "sha256": "5f0b9fdb70d46bc1391bc4257e01e689d5fee9768acf4564e4cb989a3c2dffe1"
+  },
+  {
+    "source": "https://cinorev.in/hari-kavya/a/frame.webp",
+    "path": "/assets/cinorev/home-sweet-home/a/frame.webp",
+    "sha256": "95e896ad98c38034fde31b8b52f56478f3b3955c3a5c75aca3e6edd96e2f6625"
+  },
+  {
+    "source": "https://cinorev.in/hari-kavya/a/milk.webp",
+    "path": "/assets/cinorev/home-sweet-home/a/milk.webp",
+    "sha256": "a9c3b5eeac9610b0f21ce1a9c9cb8eb078b135be57c2b2b78c16f5b66f5fe770"
+  },
+  {
+    "source": "https://cinorev.in/hari-kavya/a/night.webp",
+    "path": "/assets/cinorev/home-sweet-home/a/night.webp",
+    "sha256": "134b5969f8670ed925b3127531eed8924691fed38b6fcbf420f5c465f74a2e80"
+  },
+  {
+    "source": "https://cinorev.in/hari-kavya/a/backdrop.jpg",
+    "path": "/assets/cinorev/home-sweet-home/a/backdrop.jpg",
+    "sha256": "1309f99a8bde5415859ca42308206d4247be191ae5218614d0620c1272d4349e"
+  },
+  {
+    "source": "https://cinorev.in/hari-kavya/a/lamp-off.webp",
+    "path": "/assets/cinorev/home-sweet-home/a/lamp-off.webp",
+    "sha256": "23b23433404bfe462b1a649a3dc9a34ca383f1cf11d35fdf3da246a10a57fb72"
+  },
+  {
+    "source": "https://cinorev.in/hari-kavya/a/fl2.webp",
+    "path": "/assets/cinorev/home-sweet-home/a/fl2.webp",
+    "sha256": "5c89c56aa8c4afe140121a650b530e5eeb2d8f41f39191b13ff1329060186660"
+  },
+  {
+    "source": "https://cinorev.in/hari-kavya/a/fl4.webp",
+    "path": "/assets/cinorev/home-sweet-home/a/fl4.webp",
+    "sha256": "c44dd2d370069661b445c97a564bcccdca1c6c4266e5965fbc1d730fe5b48268"
+  },
+  {
+    "source": "https://cinorev.in/hari-kavya/a/fl1.webp",
+    "path": "/assets/cinorev/home-sweet-home/a/fl1.webp",
+    "sha256": "0a5313d4396ef4d1a719e2fcc3fa99a28252161d968f326c52ce2882a0872cb6"
+  },
+  {
+    "source": "https://cinorev.in/hari-kavya/a/fl5.webp",
+    "path": "/assets/cinorev/home-sweet-home/a/fl5.webp",
+    "sha256": "ca22077835e403c8fd0df5abfa5bac9ca563f2abf22651c12747cdcf70447d6f"
+  },
+  {
+    "source": "https://cinorev.in/nikhil-shreya/a/jasmine.webp",
+    "path": "/assets/cinorev/jasmine-arch/a/jasmine.webp",
+    "sha256": "6b77523886816296ed0b53d28c38c105d138edc6b8012e5d5ba8cb10220796a0"
+  },
+  {
+    "source": "https://cinorev.in/nikhil-shreya/a/arch.webp",
+    "path": "/assets/cinorev/jasmine-arch/a/arch.webp",
+    "sha256": "5d18427d864fdf19bbddebcc5814293dd161c545dcb5cd5082affaf4062edaad"
+  },
+  {
+    "source": "https://cinorev.in/nikhil-shreya/a/ganesha.webp",
+    "path": "/assets/cinorev/jasmine-arch/a/ganesha.webp",
+    "sha256": "d813e8348507db8e59450e19ea5ebaa3d6bdc516a8ee1ac338256c8e175828a0"
+  },
+  {
+    "source": "https://cinorev.in/nikhil-shreya/a/couple.webp",
+    "path": "/assets/cinorev/jasmine-arch/a/couple.webp",
+    "sha256": "d2e3ae97708b33c2f02ab3d6e4040189cd83380fb6b93a596578139e814c8395"
+  },
+  {
+    "source": "https://cinorev.in/nikhil-shreya/a/shadows.webp",
+    "path": "/assets/cinorev/jasmine-arch/a/shadows.webp",
+    "sha256": "5cf180ed392325ed60ee61472de7462700504fbfa6694b55b469d28bb7945e52"
+  },
+  {
+    "source": "https://cinorev.in/nikhil-shreya/a/corridor.webp",
+    "path": "/assets/cinorev/jasmine-arch/a/corridor.webp",
+    "sha256": "e109b3c1b1b988833b5ebe3064f18be7d7f8d563edac0cb656a448f6ad5dcf1c"
+  },
+  {
+    "source": "https://cinorev.in/nikhil-shreya/a/close.webp",
+    "path": "/assets/cinorev/jasmine-arch/a/close.webp",
+    "sha256": "979471205c04644889f021075fc3d1b2641a016e9a452149ef5f45c3f3621142"
+  },
+  {
+    "source": "https://cinorev.in/nikhil-shreya/a/walk.webp",
+    "path": "/assets/cinorev/jasmine-arch/a/walk.webp",
+    "sha256": "446f86fcd1522367f54e332924940f70ed3ff7b942cbf996683f95660d80999f"
+  },
+  {
+    "source": "https://cinorev.in/nikhil-shreya/a/venue.webp",
+    "path": "/assets/cinorev/jasmine-arch/a/venue.webp",
+    "sha256": "47e7fa7d54593c4916e63e61bb60288bb014f46c6ad1285471b3db91d71d2513"
+  },
+  {
+    "source": "https://cinorev.in/nikhil-shreya/a/waterfront.webp",
+    "path": "/assets/cinorev/jasmine-arch/a/waterfront.webp",
+    "sha256": "eed199e58042d075783732527c78346b5857fe73be0662658a89efa86312339f"
+  },
+  {
+    "source": "https://cinorev.in/nikhil-shreya/a/traditional.webp",
+    "path": "/assets/cinorev/jasmine-arch/a/traditional.webp",
+    "sha256": "0262d280fdd947250de065137efa4198064dcb92d0e0b576c78c794068c20480"
+  },
+  {
+    "source": "https://cinorev.in/nikhil-shreya/a/wedding.webp",
+    "path": "/assets/cinorev/jasmine-arch/a/wedding.webp",
+    "sha256": "048e79fb4a543782274c71abb6661b41dcf87dd3254cb7b1a789ebc296abed60"
+  },
+  {
+    "source": "https://cinorev.in/nikhil-shreya/a/backdrop.jpg",
+    "path": "/assets/cinorev/jasmine-arch/a/backdrop.jpg",
+    "sha256": "45a91c683a615b2fbf93368d7070f4b9750c18fb7a70141c95e6228c0cf03d50"
+  },
+  {
+    "source": "https://cinorev.in/varun-riya/a/paper.webp",
+    "path": "/assets/cinorev/little-blessing/a/paper.webp",
+    "sha256": "b0a51cb0c87dde25910492d013f62f2081cb78623617e7f26366361685f3a97e"
+  },
+  {
+    "source": "https://cinorev.in/varun-riya/a/jas-l.webp",
+    "path": "/assets/cinorev/little-blessing/a/jas-l.webp",
+    "sha256": "d7938cec5b0d614589b90fa1ee1d9bf86515338a262b28499febac4d31c9b88d"
+  },
+  {
+    "source": "https://cinorev.in/varun-riya/a/jas-r.webp",
+    "path": "/assets/cinorev/little-blessing/a/jas-r.webp",
+    "sha256": "93fc603c4cef67fc56f5fccbaa5daee48384860c0a9af3b2ddd27c5fdb708c95"
+  },
+  {
+    "source": "https://cinorev.in/varun-riya/a/p1.webp",
+    "path": "/assets/cinorev/little-blessing/a/p1.webp",
+    "sha256": "ec2fc9b97b8bb0a867931a251ae679f7f15ed7d8412315448f69bee2c63289c8"
+  },
+  {
+    "source": "https://cinorev.in/varun-riya/a/lamp.webp",
+    "path": "/assets/cinorev/little-blessing/a/lamp.webp",
+    "sha256": "c5c7dfe297328ac067a6c3762838d6810fb0b89a9e07d2ced5f376a498fe38c2"
+  },
+  {
+    "source": "https://cinorev.in/varun-riya/a/kalash.webp",
+    "path": "/assets/cinorev/little-blessing/a/kalash.webp",
+    "sha256": "b7e06c987cce32a28a770ee863f4a9d0d9de20df06cbe05b6cec84db910b5d2b"
+  },
+  {
+    "source": "https://cinorev.in/varun-riya/a/feet.webp",
+    "path": "/assets/cinorev/little-blessing/a/feet.webp",
+    "sha256": "a29bb3996a7477fc8e5031e5d7a75ae6b9693e28550e8926ea843f7189e7230d"
+  },
+  {
+    "source": "https://cinorev.in/varun-riya/a/p2.webp",
+    "path": "/assets/cinorev/little-blessing/a/p2.webp",
+    "sha256": "1a165ce4f0dc99b2f33ccce547aec68bcaa2f3c516866c357bc0357eb445956b"
+  },
+  {
+    "source": "https://cinorev.in/varun-riya/a/hand.webp",
+    "path": "/assets/cinorev/little-blessing/a/hand.webp",
+    "sha256": "a36ed084520beac174b1815e2848c77a11f919b0ff9a81ba3b9e770c64e83fb6"
+  },
+  {
+    "source": "https://cinorev.in/varun-riya/a/leaf-r.webp",
+    "path": "/assets/cinorev/little-blessing/a/leaf-r.webp",
+    "sha256": "48c40b428fd7567d2b92faf79ddf304add0c16be4cce2ff089fe7a99e9cbf4be"
+  },
+  {
+    "source": "https://cinorev.in/varun-riya/a/bowl.webp",
+    "path": "/assets/cinorev/little-blessing/a/bowl.webp",
+    "sha256": "ff186c4f91241439423ae2236ae776e8891803e7fc75e53e257844f08ba432b5"
+  },
+  {
+    "source": "https://cinorev.in/varun-riya/a/leaf-l.webp",
+    "path": "/assets/cinorev/little-blessing/a/leaf-l.webp",
+    "sha256": "aae472ceb238e5f527463c8506e768755b85c76b2a9ffbb9755694f5ea4c7e07"
+  },
+  {
+    "source": "https://cinorev.in/varun-riya/a/lotus.webp",
+    "path": "/assets/cinorev/little-blessing/a/lotus.webp",
+    "sha256": "3c5ddcfb7986779bc0dc14b22f02aee09b81b2f82607185ed9b9fc7e3c6e41e0"
+  },
+  {
+    "source": "https://cinorev.in/varun-riya/a/p4.webp",
+    "path": "/assets/cinorev/little-blessing/a/p4.webp",
+    "sha256": "b2748260546ca4615a0ab39da01cee55fcfc7fab926a9c3990e0fe53272595dc"
+  },
+  {
+    "source": "https://cinorev.in/varun-riya/a/onesie-g.webp",
+    "path": "/assets/cinorev/little-blessing/a/onesie-g.webp",
+    "sha256": "7822a043caf46671ed37e79d0c30a31966b2cd25f072729834702929bddc0395"
+  },
+  {
+    "source": "https://cinorev.in/varun-riya/a/onesie-b.webp",
+    "path": "/assets/cinorev/little-blessing/a/onesie-b.webp",
+    "sha256": "2bd99f8c3465c5499329feeb30d85a6d6a7ad47bce2d041badee1a5d7b2de2d8"
+  },
+  {
+    "source": "https://cinorev.in/advait-kiara/a/curtain-v2.webp",
+    "path": "/assets/cinorev/midnight-stage/a/curtain-v2.webp",
+    "sha256": "767a16ea941d7ff7031b2cd93439ac82298ca1faa911cf9d26e89e3a554442d4"
+  },
+  {
+    "source": "https://cinorev.in/fonts/v1/playfair-display-400i.woff2",
+    "path": "/assets/cinorev/shared/b9278ed2700bc74c.woff2",
+    "sha256": "7517613cb825e7999aa01fdb843870b3c587dedb9b05cce727dc918b926894e7"
+  },
+  {
+    "source": "https://cinorev.in/advait-kiara/a/frame.webp",
+    "path": "/assets/cinorev/midnight-stage/a/frame.webp",
+    "sha256": "187cc16a1fc595ddb416e9428e4535ace4070e45f2c4cc814dfbc6e3253bdf79"
+  },
+  {
+    "source": "https://cinorev.in/advait-kiara/a/prop0.webp",
+    "path": "/assets/cinorev/midnight-stage/a/prop0.webp",
+    "sha256": "e4df3a36ac8a247da3629ebe431dc21dfc72e932594c0f6da8e78a1b475ebedc"
+  },
+  {
+    "source": "https://cinorev.in/advait-kiara/a/prop2.webp",
+    "path": "/assets/cinorev/midnight-stage/a/prop2.webp",
+    "sha256": "1add9bac6886dfc0c2d36278f79b1a4baa0d3f71531f9b9c8c7fc560b35f3569"
+  },
+  {
+    "source": "https://cinorev.in/advait-kiara/a/prop3.webp",
+    "path": "/assets/cinorev/midnight-stage/a/prop3.webp",
+    "sha256": "6bb588df16520ab3d7a73341d69db46ae754bfa839c8030604c1c4c04b20115b"
+  },
+  {
+    "source": "https://cinorev.in/advait-kiara/a/stage-v2.mp4",
+    "path": "/assets/cinorev/midnight-stage/a/stage-v2.mp4",
+    "sha256": "598b1dc3b5da5a31d8d0dc29d35c26dd9f6511c0e35db77ab7f13cd6007e31b4"
+  },
+  {
+    "source": "https://cinorev.in/advait-kiara/a/stage.webp",
+    "path": "/assets/cinorev/midnight-stage/a/stage.webp",
+    "sha256": "45d01bf7bfc73cdeed356b3d8655864af9218907ab2cb725060e64eea73647a5"
+  },
+  {
+    "source": "https://cinorev.in/advait-kiara/a/end-v2.webp",
+    "path": "/assets/cinorev/midnight-stage/a/end-v2.webp",
+    "sha256": "38da2afaf427cbafa9e21a5a54de45b84f163001d47121cb0f2ef25c592fd49f"
+  },
+  {
+    "source": "https://cinorev.in/advait-kiara/a/prop1.webp",
+    "path": "/assets/cinorev/midnight-stage/a/prop1.webp",
+    "sha256": "2e67a66c52d10b5fad8c53adc3fc354dd7882ccf55f1309db272f3b6baf7cc34"
+  },
+  {
+    "source": "https://cinorev.in/advait-kiara/a/aisle.webp",
+    "path": "/assets/cinorev/midnight-stage/a/aisle.webp",
+    "sha256": "1b4c01a1befbe055757353b2b576d1f02ec19bf081956af3aa378178907b176b"
+  },
+  {
+    "source": "https://cinorev.in/advait-kiara/a/prop5.webp",
+    "path": "/assets/cinorev/midnight-stage/a/prop5.webp",
+    "sha256": "3858b1deeffb4eea616f01ea02d3ade71822366dc903c2b4de1df2959a9e8530"
+  },
+  {
+    "source": "https://cinorev.in/vivaan-anika/a/gate.webp",
+    "path": "/assets/cinorev/noir-and-gold/a/gate.webp",
+    "sha256": "f5559e423681637de7bd561f6f02a4dfc2bf10a1abe2fc70c7043b1754548009"
+  },
+  {
+    "source": "https://cinorev.in/vivaan-anika/a/beach-end-v2.webp",
+    "path": "/assets/cinorev/noir-and-gold/a/beach-end-v2.webp",
+    "sha256": "af427ed92eb980eb55a770524f1acdfc84b2267e3bcc5b564f38e7aa103e28e9"
+  },
+  {
+    "source": "https://cinorev.in/vivaan-anika/a/tag.webp",
+    "path": "/assets/cinorev/noir-and-gold/a/tag.webp",
+    "sha256": "05d3b56d895d9bba6eb9367ca480653f7856faff5819a6f65fb0eb70379399dd"
+  },
+  {
+    "source": "https://cinorev.in/vivaan-anika/a/paper.webp",
+    "path": "/assets/cinorev/noir-and-gold/a/paper.webp",
+    "sha256": "d6c893cf469fde5362f0a054cd61b7523b422336e0176130f346a88f04edb026"
+  },
+  {
+    "source": "https://cinorev.in/vivaan-anika/a/blackcard.webp",
+    "path": "/assets/cinorev/noir-and-gold/a/blackcard.webp",
+    "sha256": "08eeb0457f7e59414e0f05682481d1145f80cc914c8c75603d61236811946cdd"
+  },
+  {
+    "source": "https://cinorev.in/vivaan-anika/a/foil.webp",
+    "path": "/assets/cinorev/noir-and-gold/a/foil.webp",
+    "sha256": "28a0db4e522610ce694f9431c14d2275f37b8b585d2703610eb61c8411faba8a"
+  },
+  {
+    "source": "https://cinorev.in/vivaan-anika/a/tissue.webp",
+    "path": "/assets/cinorev/noir-and-gold/a/tissue.webp",
+    "sha256": "19048835cd8da181886dd7720f10e4bf3cd322d4bf01c212a83ec92e272b9a8e"
+  },
+  {
+    "source": "https://cinorev.in/vivaan-anika/a/seal.webp",
+    "path": "/assets/cinorev/noir-and-gold/a/seal.webp",
+    "sha256": "30950fadf86ebb58d537d9bd685b0e5041382812da586c78878d8aeb94c22479"
+  },
+  {
+    "source": "https://cinorev.in/vivaan-anika/a/velvet.webp",
+    "path": "/assets/cinorev/noir-and-gold/a/velvet.webp",
+    "sha256": "a3428f5514b12f497cc9975d6a110323a68a301b84c7e47ea018ec7932e790f9"
+  },
+  {
+    "source": "https://cinorev.in/vivaan-anika/a/placecard.webp",
+    "path": "/assets/cinorev/noir-and-gold/a/placecard.webp",
+    "sha256": "195037156356ac8c22b91b9ae82edc5dee228bf95a555e92acf940d3e4d11651"
+  },
+  {
+    "source": "https://cinorev.in/vivaan-anika/a/opening-v2.mp4",
+    "path": "/assets/cinorev/noir-and-gold/a/opening-v2.mp4",
+    "sha256": "a47b4895383474eee642c08eccf5a06b544309c4ea870a9519cba2a4efaaef0d"
+  },
+  {
+    "source": "https://cinorev.in/vivaan-anika/a/card.webp",
+    "path": "/assets/cinorev/noir-and-gold/a/card.webp",
+    "sha256": "c24f1d5d9e9653b3c91ac0eb773d2d40109c8668564029add17fea4d539c42d4"
+  },
+  {
+    "source": "https://cinorev.in/vivaan-anika/a/beach-v2.mp4",
+    "path": "/assets/cinorev/noir-and-gold/a/beach-v2.mp4",
+    "sha256": "de149f8b1a34ca39e049ae2bdf2a7842d50928804af8257f2cec0f946d0757dd"
+  },
+  {
+    "source": "https://cinorev.in/vivaan-anika/a/venue.webp",
+    "path": "/assets/cinorev/noir-and-gold/a/venue.webp",
+    "sha256": "93f8092723006d4bee9256fb1aaef36a9f3d877ee3d321abbd66c01ad2efa73d"
+  },
+  {
+    "source": "https://cinorev.in/vivaan-anika/a/open.webp",
+    "path": "/assets/cinorev/noir-and-gold/a/open.webp",
+    "sha256": "d31ac1fcd48023884a63ad12774b08e27e94330fbce383272f2e9fa577b82e5b"
+  },
+  {
+    "source": "https://cinorev.in/vivaan-anika/a/closing.mp4",
+    "path": "/assets/cinorev/noir-and-gold/a/closing.mp4",
+    "sha256": "394d4572d0a5e018deef0ce34651026ac6ac9bea87e0e55ea0f4ff148e269cb1"
+  },
+  {
+    "source": "https://cinorev.in/senthil-abirami/a/plate.webp",
+    "path": "/assets/cinorev/olai/a/plate.webp",
+    "sha256": "b9b878f93ff52386a195f7d3ede898a2f23102b96db83b8b0af9f265c366facb"
+  },
+  {
+    "source": "https://cinorev.in/senthil-abirami/a/leaf.webp",
+    "path": "/assets/cinorev/olai/a/leaf.webp",
+    "sha256": "87a5170229bc1b0546389ac28a350295f5df2dcca3d626b442cead99c791c033"
+  },
+  {
+    "source": "https://cinorev.in/senthil-abirami/a/home.webp",
+    "path": "/assets/cinorev/olai/a/home.webp",
+    "sha256": "0aaaaafced864f9f23fed3c41129b162d1c38dae7fdbbdeb92f1b580eeae0467"
+  },
+  {
+    "source": "https://cinorev.in/senthil-abirami/a/stylus.webp",
+    "path": "/assets/cinorev/olai/a/stylus.webp",
+    "sha256": "5731881e5a765ce55668e0bace3ef661887f7c26bac5602adfbcfd13b0ac0104"
+  },
+  {
+    "source": "https://cinorev.in/senthil-abirami/a/couple.webp",
+    "path": "/assets/cinorev/olai/a/couple.webp",
+    "sha256": "ec26e61b61f7d5c699bbbb9824c994f1bea18572a62332dcca90370ad679e1ab"
+  },
+  {
+    "source": "https://cinorev.in/senthil-abirami/a/thaali.webp",
+    "path": "/assets/cinorev/olai/a/thaali.webp",
+    "sha256": "4909bd45d85bbfa1a0b0e2587ecb81ae5de22e6825d7df97e057015e819781ca"
+  },
+  {
+    "source": "https://cinorev.in/senthil-abirami/a/backdrop.jpg",
+    "path": "/assets/cinorev/olai/a/backdrop.jpg",
+    "sha256": "6c26cdc9759877dd7b8b9a7307cc31142d816696c22855daa869e1c84935637f"
+  },
+  {
+    "source": "https://cinorev.in/senthil-abirami/a/muhurtham.webp",
+    "path": "/assets/cinorev/olai/a/muhurtham.webp",
+    "sha256": "b4775c083a0091d782bcf27b57ba525371d36533e8403d6bbd8a180898aff8bf"
+  },
+  {
+    "source": "https://cinorev.in/senthil-abirami/a/reception.webp",
+    "path": "/assets/cinorev/olai/a/reception.webp",
+    "sha256": "72d1ece5f230c65e2e48c553ada7071612d1d74955cf08e8043a4c99570bc3f3"
+  },
+  {
+    "source": "https://cinorev.in/senthil-abirami/a/blessing.webp",
+    "path": "/assets/cinorev/olai/a/blessing.webp",
+    "sha256": "ce7bac006aaeac41cea8e2a14e756cc4f567a0744e93c9de25a65420cb4dc98d"
+  },
+  {
+    "source": "https://cinorev.in/aarav-meher/a/envelope.webp",
+    "path": "/assets/cinorev/palace-of-lights/a/envelope.webp",
+    "sha256": "42b2d50e4f0e027d9effbc546a2d15032a21982918b2ab8df9b50d1895a9a316"
+  },
+  {
+    "source": "https://cinorev.in/aarav-meher/a/seal.webp",
+    "path": "/assets/cinorev/palace-of-lights/a/seal.webp",
+    "sha256": "b99c98a7f2e04906e76bb252046d8a6d83c8df6fc7f650efba134f279d2d5480"
+  },
+  {
+    "source": "https://cinorev.in/aarav-meher/a/palace.webp",
+    "path": "/assets/cinorev/palace-of-lights/a/palace.webp",
+    "sha256": "599229fcff4f423a8a03353b9e2fc0273a803a41e0055dc4fa8955ca0b6dda74"
+  },
+  {
+    "source": "https://cinorev.in/aarav-meher/a/ganesha.webp",
+    "path": "/assets/cinorev/palace-of-lights/a/ganesha.webp",
+    "sha256": "1057cb9505f67fa860f288e8c5b4fc1bb90c0947d25f6c314d60f4a38326b8a6"
+  },
+  {
+    "source": "https://cinorev.in/aarav-meher/a/map.webp",
+    "path": "/assets/cinorev/palace-of-lights/a/map.webp",
+    "sha256": "05db26e125b982a176ece8b34308645eea0f01d8bcad4c3fe82e623b7c4eb9e1"
+  },
+  {
+    "source": "https://cinorev.in/aarav-meher/a/baraat.webp",
+    "path": "/assets/cinorev/palace-of-lights/a/baraat.webp",
+    "sha256": "b822d3b47b9c795677253d9398ad438e56db30ab0cac337e786a7eab339f85df"
+  },
+  {
+    "source": "https://cinorev.in/aarav-meher/a/paper.webp",
+    "path": "/assets/cinorev/palace-of-lights/a/paper.webp",
+    "sha256": "2448a41b5fb2458d3165f301a7224a5d443a24b393d937b3e84c69b581189278"
+  },
+  {
+    "source": "https://cinorev.in/aarav-meher/a/arch-mask.png",
+    "path": "/assets/cinorev/palace-of-lights/a/arch-mask.png",
+    "sha256": "7df5507cce02e0dcbd9c85096c19ccf660e01ebb83d5f50ab02a81ef2486dd44"
+  },
+  {
+    "source": "https://cinorev.in/aarav-meher/a/shut-l.webp",
+    "path": "/assets/cinorev/palace-of-lights/a/shut-l.webp",
+    "sha256": "8399847ccbd05b439642178f24329d019829f31ab67d657eda85372d023c7f75"
+  },
+  {
+    "source": "https://cinorev.in/aarav-meher/a/shut-r.webp",
+    "path": "/assets/cinorev/palace-of-lights/a/shut-r.webp",
+    "sha256": "3796080d42258a14f5a36ae19d997e9f49c25ea8cfe19b5d26522cb4d2a40476"
+  },
+  {
+    "source": "https://cinorev.in/aarav-meher/a/couple.webp",
+    "path": "/assets/cinorev/palace-of-lights/a/couple.webp",
+    "sha256": "ef402d794708a0e60b7051c37e58762d904dc196a30add9df420a4c051cfc7c6"
+  },
+  {
+    "source": "https://cinorev.in/aarav-meher/a/cocktail.webp",
+    "path": "/assets/cinorev/palace-of-lights/a/cocktail.webp",
+    "sha256": "cb2c1f303848ea43d6136f3c459c91038dc7e8817ce7eedef0f9e0f6d3d29933"
+  },
+  {
+    "source": "https://cinorev.in/aarav-meher/a/jharokha.webp",
+    "path": "/assets/cinorev/palace-of-lights/a/jharokha.webp",
+    "sha256": "a8252883fdc396c1bd6e712b7ddec1dc8f3ac3d7b42fd7e301583c8a5f27447e"
+  },
+  {
+    "source": "https://cinorev.in/aarav-meher/a/shaadi.webp",
+    "path": "/assets/cinorev/palace-of-lights/a/shaadi.webp",
+    "sha256": "202923b51568c0f314b1f9def5d9fa0575d4c22db7e681c93431ee6a3b92841d"
+  },
+  {
+    "source": "https://cinorev.in/aarav-meher/a/reception.webp",
+    "path": "/assets/cinorev/palace-of-lights/a/reception.webp",
+    "sha256": "b2aedf25bf20ed1d1f7283423cbb856d3106b59da882d9e7c68e72e48ca46175"
+  },
+  {
+    "source": "https://cinorev.in/aarav-meher/a/mirror.webp",
+    "path": "/assets/cinorev/palace-of-lights/a/mirror.webp",
+    "sha256": "6c9ba725fc19148e5cc404cf08957f1a570d3070204ce61ad1402f95b5ad7ed5"
+  },
+  {
+    "source": "https://cinorev.in/aarav-meher/a/backdrop.jpg",
+    "path": "/assets/cinorev/palace-of-lights/a/backdrop.jpg",
+    "sha256": "d43bfbb646721147dd2e49e3bd5087bff80f49f1c9cd383b9369b897f9aecee0"
+  },
+  {
+    "source": "https://cinorev.in/aarav-meher/a/mehendi.webp",
+    "path": "/assets/cinorev/palace-of-lights/a/mehendi.webp",
+    "sha256": "60dc3178f59c6a242ecee7e7eb8f6d9dd0c8ebcd75a3c2e0200ee10fa9badcde"
+  },
+  {
+    "source": "https://cinorev.in/aarav-meher/a/sangeet.webp",
+    "path": "/assets/cinorev/palace-of-lights/a/sangeet.webp",
+    "sha256": "56a89bf78785064ddc9831ef9115c87af22d94188631d82d830549c16e5dc663"
+  },
+  {
+    "source": "https://cinorev.in/aarav-meher/a/haldi.webp",
+    "path": "/assets/cinorev/palace-of-lights/a/haldi.webp",
+    "sha256": "6d5b94238336b6b62cec76e7474ecbf44e1b4f18953fe93dc09f14c317553c16"
+  },
+  {
+    "source": "https://cinorev.in/aarav-meher/a/i-sun.webp",
+    "path": "/assets/cinorev/palace-of-lights/a/i-sun.webp",
+    "sha256": "9fa79d35d9ae0599db4bb81ef70f4c358c87f7fd321aaba69e12f57ed6bb24cd"
+  },
+  {
+    "source": "https://cinorev.in/aarav-meher/a/i-outfits.webp",
+    "path": "/assets/cinorev/palace-of-lights/a/i-outfits.webp",
+    "sha256": "9381b9ba080ecd1c122659c2756a337e32ad710c9b1527a127751b26480c35c5"
+  },
+  {
+    "source": "https://cinorev.in/aarav-meher/a/i-suitcase.webp",
+    "path": "/assets/cinorev/palace-of-lights/a/i-suitcase.webp",
+    "sha256": "e2771dd0ae1f6a170705bcbb351abe0093a3e03dd3d58f49b06c47e96932a227"
+  },
+  {
+    "source": "https://cinorev.in/aarav-meher/a/i-car.webp",
+    "path": "/assets/cinorev/palace-of-lights/a/i-car.webp",
+    "sha256": "417ce92c158a11fd3e1ca973d9229207be3fe4c4fbdfd7253158c133283dcba2"
+  },
+  {
+    "source": "https://cinorev.in/aarav-meher/a/i-camera.webp",
+    "path": "/assets/cinorev/palace-of-lights/a/i-camera.webp",
+    "sha256": "bd1e80e81a8b720e9073f54c0c3698988724e50f929a97e5dc4be637fe282463"
+  },
+  {
+    "source": "https://cinorev.in/aarav-meher/a/i-gift.webp",
+    "path": "/assets/cinorev/palace-of-lights/a/i-gift.webp",
+    "sha256": "c1437dcb3639e15d1e8fadcff9a668a6b58d9b66599a6fe633a1c44e00ed524e"
+  },
+  {
+    "source": "https://cinorev.in/pranav-harini/a/couple.webp",
+    "path": "/assets/cinorev/pattu/a/couple.webp",
+    "sha256": "06aff04b6fa04467fa8307d4f34ba2bd6034c2e7a1ee91eb055fc339cd6c5175"
+  },
+  {
+    "source": "https://cinorev.in/pranav-harini/a/band-red.webp",
+    "path": "/assets/cinorev/pattu/a/band-red.webp",
+    "sha256": "87a9a6f8fa1566ea68ab0bdae1e7ce5a117bc3722eb8e7eb2300b8bef5da8a9e"
+  },
+  {
+    "source": "https://cinorev.in/pranav-harini/a/pallu-zari.webp",
+    "path": "/assets/cinorev/pattu/a/pallu-zari.webp",
+    "sha256": "900d3487621d4d5b49f2b4bb99e0a7c20a021ab39be639fe99ff68a710ef9e6b"
+  },
+  {
+    "source": "https://cinorev.in/pranav-harini/a/silk.webp",
+    "path": "/assets/cinorev/pattu/a/silk.webp",
+    "sha256": "37112fa384f765fae2e4df5d178b994d646e123d8ae11a9d6a930f75abc0db45"
+  },
+  {
+    "source": "https://cinorev.in/pranav-harini/a/band-blue.webp",
+    "path": "/assets/cinorev/pattu/a/band-blue.webp",
+    "sha256": "0e50ab16315ae90131b4feaa3024fdf8bed522c538da7bb0ceee239139983cf6"
+  },
+  {
+    "source": "https://cinorev.in/pranav-harini/a/shuttle.webp",
+    "path": "/assets/cinorev/pattu/a/shuttle.webp",
+    "sha256": "c1268df79dce7650a9c604fb64c5f9ce4fbd2dd9c41437a0536d11fdfd81fae5"
+  },
+  {
+    "source": "https://cinorev.in/pranav-harini/a/pallu.webp",
+    "path": "/assets/cinorev/pattu/a/pallu.webp",
+    "sha256": "a1993595158ba89057808972bf30e6e3b84196cbe535d0e106167f78832388f8"
+  },
+  {
+    "source": "https://cinorev.in/pranav-harini/a/band-pink.webp",
+    "path": "/assets/cinorev/pattu/a/band-pink.webp",
+    "sha256": "0dc05b65d977126a495fa8b5e298801a1c90e7b12320e7c685f724a227af1302"
+  },
+  {
+    "source": "https://cinorev.in/pranav-harini/a/counter.webp",
+    "path": "/assets/cinorev/pattu/a/counter.webp",
+    "sha256": "9c38108ff449afc94b794001d44bafce9ebb95f22cc953b0b1f0e86a7e4590a1"
+  },
+  {
+    "source": "https://cinorev.in/pranav-harini/a/garland-b.webp",
+    "path": "/assets/cinorev/pattu/a/garland-b.webp",
+    "sha256": "3042ca1981300ff060ad2d55d8ed5395da31bf3ab7c411866a16898ebba1acfd"
+  },
+  {
+    "source": "https://cinorev.in/pranav-harini/a/garland-a.webp",
+    "path": "/assets/cinorev/pattu/a/garland-a.webp",
+    "sha256": "ba734dee17a150860060438a3bbfbea831302b277adcc86e08d6a4925f2322c8"
+  },
+  {
+    "source": "https://cinorev.in/pranav-harini/a/pink.webp",
+    "path": "/assets/cinorev/pattu/a/pink.webp",
+    "sha256": "7e06fdb8162ed1743ce2fbbf9fee9211e436be4af9d7eb14d18b60655740850b"
+  },
+  {
+    "source": "https://cinorev.in/pranav-harini/a/backdrop.jpg",
+    "path": "/assets/cinorev/pattu/a/backdrop.jpg",
+    "sha256": "97b8b7f11bd927e6897432b40183dc0040206c210e37d3517b9ec6bcc53dcdfa"
+  },
+  {
+    "source": "https://cinorev.in/pranav-harini/a/box.webp",
+    "path": "/assets/cinorev/pattu/a/box.webp",
+    "sha256": "6e6893de91045993a35548046b25df0a13574195c3d34b8a638c970914d84b12"
+  },
+  {
+    "source": "https://cinorev.in/reyansh-aanya/a/envelope-v2.webp",
+    "path": "/assets/cinorev/pearl-and-sapphire/a/envelope-v2.webp",
+    "sha256": "4cf753cada682c1637f994b25567b8d920c5635841209cd2ebf63d9930b59db1"
+  },
+  {
+    "source": "https://cinorev.in/reyansh-aanya/a/card-v2.webp",
+    "path": "/assets/cinorev/pearl-and-sapphire/a/card-v2.webp",
+    "sha256": "1166b8c8758aa0f52e1688c4816718aebf07ec5e5d46b3eff1289102b99e9355"
+  },
+  {
+    "source": "https://cinorev.in/reyansh-aanya/a/drapes.webp",
+    "path": "/assets/cinorev/pearl-and-sapphire/a/drapes.webp",
+    "sha256": "d85a3209448dbb348ba496ca9f2fea15afafc6735b5ad2417860a5fd609ca533"
+  },
+  {
+    "source": "https://cinorev.in/reyansh-aanya/a/pearl.webp",
+    "path": "/assets/cinorev/pearl-and-sapphire/a/pearl.webp",
+    "sha256": "5d9de11a7d68d061c4f46dbf4bb2c2201d7478c330286ea4a29e33c8a70cf32e"
+  },
+  {
+    "source": "https://cinorev.in/reyansh-aanya/a/couple.webp",
+    "path": "/assets/cinorev/pearl-and-sapphire/a/couple.webp",
+    "sha256": "42c72e2e7e92c2ca27cae2f6e06f6ea2481190477b7c94f962600f6ef92edc69"
+  },
+  {
+    "source": "https://cinorev.in/reyansh-aanya/a/opening-v2.mp4",
+    "path": "/assets/cinorev/pearl-and-sapphire/a/opening-v2.mp4",
+    "sha256": "84a3802b865fcb6a1563fb951e13ef492872188569b3b35435dd825d6e893bf7"
+  },
+  {
+    "source": "https://cinorev.in/reyansh-aanya/a/palace.webp",
+    "path": "/assets/cinorev/pearl-and-sapphire/a/palace.webp",
+    "sha256": "53d766a9ee1ebcbfeb394fc13dc396c1da3c53918b1e788661b2434e67214aea"
+  },
+  {
+    "source": "https://cinorev.in/reyansh-aanya/a/dress.webp",
+    "path": "/assets/cinorev/pearl-and-sapphire/a/dress.webp",
+    "sha256": "5e4084e39378706d647044047072ecac355217f7a0c3b8e450d450e8be51abc3"
+  },
+  {
+    "source": "https://cinorev.in/siddharth-kayal/a/floor.webp",
+    "path": "/assets/cinorev/pulli/a/floor.webp",
+    "sha256": "0d6ccb714c522cc4309e4f9c6d5a3615c3796ce91d2aa70c00ce7d7a24de5d4a"
+  },
+  {
+    "source": "https://cinorev.in/siddharth-kayal/a/hand.webp",
+    "path": "/assets/cinorev/pulli/a/hand.webp",
+    "sha256": "7b74aea10121f994aac85bb1a26decb75fd4f9e62640e27455b9c0ed7fd1a4de"
+  },
+  {
+    "source": "https://cinorev.in/siddharth-kayal/a/lamp.webp",
+    "path": "/assets/cinorev/pulli/a/lamp.webp",
+    "sha256": "8ee02122346cfa786d8c5575737031d0aebb9183ba2ccde09ffb9615123a3841"
+  },
+  {
+    "source": "https://cinorev.in/siddharth-kayal/a/couple.webp",
+    "path": "/assets/cinorev/pulli/a/couple.webp",
+    "sha256": "1a3e5b894890cf6f39147d91e7b712fde01c6e98e4c0db3270fdbca77d3931ef"
+  },
+  {
+    "source": "https://cinorev.in/siddharth-kayal/a/mari-o.webp",
+    "path": "/assets/cinorev/pulli/a/mari-o.webp",
+    "sha256": "288466053ce48c4805c770668ed13ea0cabc7e18f939c4e39fb9eb758d3783c8"
+  },
+  {
+    "source": "https://cinorev.in/siddharth-kayal/a/mari-y.webp",
+    "path": "/assets/cinorev/pulli/a/mari-y.webp",
+    "sha256": "b0e5b8d412af57ec8ae726f18b2f108cc7fce53ca37babad6502727807a0196c"
+  },
+  {
+    "source": "https://cinorev.in/siddharth-kayal/a/jas.webp",
+    "path": "/assets/cinorev/pulli/a/jas.webp",
+    "sha256": "e9b4370d28d94b1ab94a7492138a65bc9a5ffa8ab45759c9183971741725a23a"
+  },
+  {
+    "source": "https://cinorev.in/siddharth-kayal/a/buds.webp",
+    "path": "/assets/cinorev/pulli/a/buds.webp",
+    "sha256": "2dfda541fc4adff451abee21002c556bbddd93569941bf14a8201647a477c3ad"
+  },
+  {
+    "source": "https://cinorev.in/siddharth-kayal/a/steps.webp",
+    "path": "/assets/cinorev/pulli/a/steps.webp",
+    "sha256": "2a3f4fdc4fc824c59643ea6af24b0cdd0a117fd0474027c69a92e25864c52eef"
+  },
+  {
+    "source": "https://cinorev.in/siddharth-kayal/a/sunrise.webp",
+    "path": "/assets/cinorev/pulli/a/sunrise.webp",
+    "sha256": "70086d65557371682e0eb6de93607f4f2185cbc97e62b6b067a3741bbfb7193e"
+  },
+  {
+    "source": "https://cinorev.in/siddharth-kayal/a/backdrop.jpg",
+    "path": "/assets/cinorev/pulli/a/backdrop.jpg",
+    "sha256": "a24687024ea2efc3287fde049bdde64dc4a10c082bd2ca7ff03256b63b33647f"
+  },
+  {
+    "source": "https://cinorev.in/siddharth-kayal/a/petals.webp",
+    "path": "/assets/cinorev/pulli/a/petals.webp",
+    "sha256": "f42329d1b2859c66e7bb6e8ae1c2921e77c6f3690968936ba6ab56be2cc05158"
+  },
+  {
+    "source": "https://cinorev.in/siddharth-kayal/a/stars.webp",
+    "path": "/assets/cinorev/pulli/a/stars.webp",
+    "sha256": "a9f1c328aecee8beb8ea9df5d20f16f2d2a780e6548dd876da130c458a5b4282"
+  },
+  {
+    "source": "https://cinorev.in/ayaan-zoya/a/gate.webp",
+    "path": "/assets/cinorev/royal-crimson/a/gate.webp",
+    "sha256": "1987a1c01773da140052910f6c82770cbebc8591f0b3590a35cab7715ae12fb4"
+  },
+  {
+    "source": "https://cinorev.in/ayaan-zoya/a/rings.webp",
+    "path": "/assets/cinorev/royal-crimson/a/rings.webp",
+    "sha256": "15fa8c0fbe7ad52950930149a609cb59a4803af3ddd0b062126975dbd2d729ca"
+  },
+  {
+    "source": "https://cinorev.in/ayaan-zoya/a/panel.webp",
+    "path": "/assets/cinorev/royal-crimson/a/panel.webp",
+    "sha256": "692546f84f2f40ae44f3b3c637083e4ee8149ab9c19b8a4e52ac9fcbf0e39ea2"
+  },
+  {
+    "source": "https://cinorev.in/ayaan-zoya/a/stage.webp",
+    "path": "/assets/cinorev/royal-crimson/a/stage.webp",
+    "sha256": "eab9fc37149f0b2b57e66232c37a871939ef33bae6f282699640b836fa9a40ad"
+  },
+  {
+    "source": "https://cinorev.in/ayaan-zoya/a/band.webp",
+    "path": "/assets/cinorev/royal-crimson/a/band.webp",
+    "sha256": "36ff824c053dff8f5a9d9f9309970cb69ebab55a68d96f2fd82e7d64662a1e42"
+  },
+  {
+    "source": "https://cinorev.in/ayaan-zoya/a/card.webp",
+    "path": "/assets/cinorev/royal-crimson/a/card.webp",
+    "sha256": "5dbf82c41fb6181a94ee893594b4380faa09883f153ce58b0a2844465398ce67"
+  },
+  {
+    "source": "https://cinorev.in/ayaan-zoya/a/card-win.webp",
+    "path": "/assets/cinorev/royal-crimson/a/card-win.webp",
+    "sha256": "63f7c89ac42d5355ba41c98d649585c069088e8b3781c0ae1c79ef3a95a9dcbc"
+  },
+  {
+    "source": "https://cinorev.in/ayaan-zoya/a/backdrop.jpg",
+    "path": "/assets/cinorev/royal-crimson/a/backdrop.jpg",
+    "sha256": "4b709034eb884040315b61c9c70894401579d93190fb2f60e34599be181a390a"
+  },
+  {
+    "source": "https://cinorev.in/assets/g-seated.webp",
+    "path": "/assets/cinorev/shared/aa9764bcb8dcc88c.webp",
+    "sha256": "9a6c7dca6a69f46240cdb66111f4c831c6af739d410c79f4a0bd59d79ee8fc7d"
+  },
+  {
+    "source": "https://cinorev.in/assets/film-poster.webp",
+    "path": "/assets/cinorev/shared/c6c6ed96d973b52a.webp",
+    "sha256": "f34bdc046aa7f757c2022e1ee0751fc82d40eb82e98eb670e212850a4d99f6aa"
+  },
+  {
+    "source": "https://cinorev.in/assets/g-groom.webp",
+    "path": "/assets/cinorev/shared/4b9f8ff8d2633f54.webp",
+    "sha256": "e79adcdce6f2a9b4081990a23d4ee7c153fa77de06481a4ac6957937698414cf"
+  },
+  {
+    "source": "https://cinorev.in/assets/g-mirror.webp",
+    "path": "/assets/cinorev/shared/2bfeb52f4741b03f.webp",
+    "sha256": "a017a8d69a61cd7ec61387e08229fbf5fbbd295d6b4ce0fe105c449b24facf5e"
+  },
+  {
+    "source": "https://cinorev.in/assets/g-gopuram.webp",
+    "path": "/assets/cinorev/shared/a79cc658511a8114.webp",
+    "sha256": "4efea8f6b87f58398dfb97accc9c9db1dfecc4bfb7250f3e1d06f8d2167b62a1"
+  },
+  {
+    "source": "https://cinorev.in/assets/g-firstlook.webp",
+    "path": "/assets/cinorev/shared/25edee9b1d16fb93.webp",
+    "sha256": "b9c5883ba998daf5bead83989b9824cbb122091d7ec884371848b512e1d7d8e2"
+  },
+  {
+    "source": "https://cinorev.in/siva-divya/a/backdrop.jpg",
+    "path": "/assets/cinorev/temple-doors/a/backdrop.jpg",
+    "sha256": "2bf0287204db2d9228336d6e60f3b190699a5389231926b8d839d93be158b68d"
+  },
+  {
+    "source": "https://cinorev.in/films/siva-divya.mp4",
+    "path": "/assets/cinorev/shared/temple-demo-film.mp4",
+    "sha256": "f56ad387e9d1957d1c57e649ab114702b5c1316a09772ba9de24eaf1e336ec80"
+  },
+  {
+    "source": "https://cinorev.in/rohan-ishita/a/box-closed.webp",
+    "path": "/assets/cinorev/the-ring-box/a/box-closed.webp",
+    "sha256": "abc9bf2a7d4f44b31f7b53774e0eb6b2bb52141a5852b22b1692a799326600a8"
+  },
+  {
+    "source": "https://cinorev.in/rohan-ishita/a/hero.webp",
+    "path": "/assets/cinorev/the-ring-box/a/hero.webp",
+    "sha256": "3cfa1da64302cb11c5bc55d31d338dbced2ba2c73e4d38a81d5e1ffe9439104d"
+  },
+  {
+    "source": "https://cinorev.in/rohan-ishita/a/box-open.webp",
+    "path": "/assets/cinorev/the-ring-box/a/box-open.webp",
+    "sha256": "e3610995f2663bf2a168c3378e0a5391ce6fd047b8424e3558ebe5860dc28ecc"
+  },
+  {
+    "source": "https://cinorev.in/rohan-ishita/a/hands.webp",
+    "path": "/assets/cinorev/the-ring-box/a/hands.webp",
+    "sha256": "a39388c8f1126d04415810cf17d03746cc8d746abe2965d4da9e5e938ff88146"
+  },
+  {
+    "source": "https://cinorev.in/rohan-ishita/a/ring.webp",
+    "path": "/assets/cinorev/the-ring-box/a/ring.webp",
+    "sha256": "1a71a5b31644fb98e88a76efa82cb8fd1bbbb8fb6218533b1e658c8388b4ad53"
+  },
+  {
+    "source": "https://cinorev.in/rohan-ishita/a/coffee.webp",
+    "path": "/assets/cinorev/the-ring-box/a/coffee.webp",
+    "sha256": "1024eb3c7ea20835c027944536b8e873eebadda7be79ee541b0bc194c051da2f"
+  },
+  {
+    "source": "https://cinorev.in/rohan-ishita/a/trip.webp",
+    "path": "/assets/cinorev/the-ring-box/a/trip.webp",
+    "sha256": "6bebef9ec58cec0c2722b107825d9cc67e83bef86edc911be569161008f62d7c"
+  },
+  {
+    "source": "https://cinorev.in/rohan-ishita/a/proposal.webp",
+    "path": "/assets/cinorev/the-ring-box/a/proposal.webp",
+    "sha256": "8c50773e76c93a5e1e760c9f7db7b5487ff74814541674b2354ed35cc9638230"
+  },
+  {
+    "source": "https://cinorev.in/rohan-ishita/a/venue.webp",
+    "path": "/assets/cinorev/the-ring-box/a/venue.webp",
+    "sha256": "3cb2ebe4d8902486b74a46000cce5cb720d66fdacfd4e2b4cbd3f38d66760a3e"
+  },
+  {
+    "source": "https://cinorev.in/rohan-ishita/a/backdrop.jpg",
+    "path": "/assets/cinorev/the-ring-box/a/backdrop.jpg",
+    "sha256": "65506d8d09f10b467e1c1f3e06c3cb0e9f04b065ed6e9aed4346e49267c8f9e7"
+  },
+  {
+    "source": "https://cinorev.in/diya-turns-one/a/sky.webp",
+    "path": "/assets/cinorev/up-and-away/a/sky.webp",
+    "sha256": "27716d37c4dcef18b7455955576d23a8330e7365495363daf04d3720bc92f7f5"
+  },
+  {
+    "source": "https://cinorev.in/diya-turns-one/a/box-closed.webp",
+    "path": "/assets/cinorev/up-and-away/a/box-closed.webp",
+    "sha256": "eff083430e1694850bb54275088651743e58cf185dcbf2d68f35843189bf955e"
+  },
+  {
+    "source": "https://cinorev.in/diya-turns-one/a/balloon.webp",
+    "path": "/assets/cinorev/up-and-away/a/balloon.webp",
+    "sha256": "b3fce01cc558bd2e13863b3c4590186f8208065b4c4e1e6832d2ecf6acac4444"
+  },
+  {
+    "source": "https://cinorev.in/diya-turns-one/a/box-open.webp",
+    "path": "/assets/cinorev/up-and-away/a/box-open.webp",
+    "sha256": "6a940349b085b79d7c8f5fbdd10faf009fafea964054b981cb45c72823447a36"
+  },
+  {
+    "source": "https://cinorev.in/diya-turns-one/a/m1.webp",
+    "path": "/assets/cinorev/up-and-away/a/m1.webp",
+    "sha256": "841e017850fdd0af1f9fc6b6d9e374571560325169d05b7413f270c47f2280dc"
+  },
+  {
+    "source": "https://cinorev.in/diya-turns-one/a/bl1.webp",
+    "path": "/assets/cinorev/up-and-away/a/bl1.webp",
+    "sha256": "b58a1cf9e656fcb49b06d6196a36946ebfcc7f26435ea79be21fea0c87a1e6ed"
+  },
+  {
+    "source": "https://cinorev.in/diya-turns-one/a/m2.webp",
+    "path": "/assets/cinorev/up-and-away/a/m2.webp",
+    "sha256": "2a50e7260700c4947c894d9f3a12dc59150dae193400bdad8f1e792f6a080a76"
+  },
+  {
+    "source": "https://cinorev.in/diya-turns-one/a/bl2.webp",
+    "path": "/assets/cinorev/up-and-away/a/bl2.webp",
+    "sha256": "8df15ebf57cba3da39cd34e05d3691fc6a310033633b96fb458ad50b5816ddb4"
+  },
+  {
+    "source": "https://cinorev.in/diya-turns-one/a/m3.webp",
+    "path": "/assets/cinorev/up-and-away/a/m3.webp",
+    "sha256": "f37edfb7ff72c5208389c3c3de281ceb4b11b578c2ef27a8b4c88502c45016d6"
+  },
+  {
+    "source": "https://cinorev.in/diya-turns-one/a/bl3.webp",
+    "path": "/assets/cinorev/up-and-away/a/bl3.webp",
+    "sha256": "d0aab62098705df5768117594cfcca6e2cd5737a2d6da49c359af5d81da0ce0f"
+  },
+  {
+    "source": "https://cinorev.in/diya-turns-one/a/flame.webp",
+    "path": "/assets/cinorev/up-and-away/a/flame.webp",
+    "sha256": "35b2dd145744a1c9ff06f202dc550666ba11e7fa5661bb8e018687805d853cd1"
+  },
+  {
+    "source": "https://cinorev.in/diya-turns-one/a/m4.webp",
+    "path": "/assets/cinorev/up-and-away/a/m4.webp",
+    "sha256": "332abef10ece05eb7589df3079f0e15458335f29f3bd0af1c6ca89330f100bfb"
+  },
+  {
+    "source": "https://cinorev.in/diya-turns-one/a/bl4.webp",
+    "path": "/assets/cinorev/up-and-away/a/bl4.webp",
+    "sha256": "259ed7f223035b3ae357263b893bf32ee6d8cad5b84c24b963b54dba7c4d10d1"
+  },
+  {
+    "source": "https://cinorev.in/diya-turns-one/a/bl7.webp",
+    "path": "/assets/cinorev/up-and-away/a/bl7.webp",
+    "sha256": "75af94d955549ebb2b59e5b074646d8d488f2f5447e284ac0449b8339347ad27"
+  },
+  {
+    "source": "https://cinorev.in/diya-turns-one/a/bl8.webp",
+    "path": "/assets/cinorev/up-and-away/a/bl8.webp",
+    "sha256": "6b186f8358e07b5a5d7b7135e90e236d1259c4a4343493fab61386d48d2af85b"
+  },
+  {
+    "source": "https://cinorev.in/diya-turns-one/a/bl5.webp",
+    "path": "/assets/cinorev/up-and-away/a/bl5.webp",
+    "sha256": "2cad7318250edad7deeb559c0451e34daed7825cf3b016b3a82a8c107be2e393"
+  },
+  {
+    "source": "https://cinorev.in/diya-turns-one/a/bl12.webp",
+    "path": "/assets/cinorev/up-and-away/a/bl12.webp",
+    "sha256": "870d53a5777b4507231be0610dbf680387a241d5dcfd6d49e978e84103160afa"
+  },
+  {
+    "source": "https://cinorev.in/diya-turns-one/a/bl10.webp",
+    "path": "/assets/cinorev/up-and-away/a/bl10.webp",
+    "sha256": "19288e252fb7102755bcc70998376229cfa81c31cdddf4b9364b97e2c1284f7e"
+  },
+  {
+    "source": "https://cinorev.in/diya-turns-one/a/bl6.webp",
+    "path": "/assets/cinorev/up-and-away/a/bl6.webp",
+    "sha256": "12db5dd29a6e7537b84555328d6f8a90942e577ae66210075afeeaf80dc87457"
+  },
+  {
+    "source": "https://cinorev.in/diya-turns-one/a/bl9.webp",
+    "path": "/assets/cinorev/up-and-away/a/bl9.webp",
+    "sha256": "736451ec34b37543018d81842e58406e6016dde3d7c39227a19a141e79450019"
+  },
+  {
+    "source": "https://cinorev.in/diya-turns-one/a/bl11.webp",
+    "path": "/assets/cinorev/up-and-away/a/bl11.webp",
+    "sha256": "52919fd6f325cbdf820cd7a2f935382db4f78302b5ebacbc73db80d231d9a449"
+  },
+  {
+    "source": "https://cinorev.in/diya-turns-one/a/party.webp",
+    "path": "/assets/cinorev/up-and-away/a/party.webp",
+    "sha256": "36f1e853c15e2524597f2dee51b5bc3a43960dcc4b911d7f69a9ddb427d69216"
+  },
+  {
+    "source": "https://cinorev.in/diya-turns-one/a/backdrop.jpg",
+    "path": "/assets/cinorev/up-and-away/a/backdrop.jpg",
+    "sha256": "d199dd6464c7f3a4982dd671ae7d2e7e8576747c80c02f3cb703dd4dbe62be86"
+  },
+  {
+    "source": "https://cinorev.in/diya-turns-one/a/cake-noflame.webp",
+    "path": "/assets/cinorev/up-and-away/a/cake-noflame.webp",
+    "sha256": "6ea14b72579262f222600da267e700f137bf67a4cf87fcbdf38ee0d07cb7b8f8"
+  }
+]
