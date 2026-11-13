@@ -2,7 +2,7 @@
 
 Requested and inventoried on 2026-11-13. Source: https://cinorev.in/templates/.
 
-The reference catalog currently shows 20 entries. The live FindMyInvite library shows 12 designs. Excluding the four entries specified by the user leaves the 16 additions below. Their renderers, locally hosted assets, responsive posters and dedicated forms are implemented. Release verification is in progress; they remain staged and unpublished.
+The reference catalog currently shows 20 entries. The FindMyInvite library originally had 12 designs and now has 28. Excluding the four entries specified by the user leaves the 16 additions below. Their renderers, locally hosted assets, responsive posters and dedicated forms are implemented. The 16 additions are published. Mobile/desktop visual review and dedicated-form verification are complete.
 
 ## Explicit exclusions
 
@@ -44,7 +44,7 @@ The isolated renderer preserves the source opening films, canvas scenes, scroll 
 
 All 16 customer forms have been walked through from their catalog detail pages into edited previews, using long names, independent 2028 event dates and distinct venues. Empty optional sections and sample guest-wall entries are removed. Calendar and map checks caught and corrected secondary RSVP labels and Pattu's dynamically generated directions. Preview replies are intercepted locally; no test WhatsApp messages were sent.
 
-Known intentional differences: FindMyInvite branding and links; editable wording/line lengths; optional soundtrack supplied by the customer; device-local guest predictions and blessings rather than Cinorev's shared counters. Illustration venue maps remain decorative; external directions use the customer's event address. Physical iPhone Safari/Instagram testing is unavailable.
+Known intentional differences: FindMyInvite branding and links; editable wording/line lengths; FindMyInvite managed soundtracks (or a customer upload); device-local guest predictions and blessings rather than Cinorev's shared counters. Illustration venue maps remain decorative; external directions use the customer's event address. Physical iPhone Safari/Instagram testing is unavailable.
 
 Verification evidence is kept in ignored `work/cinorev`: form review snapshots and edited-preview JSON, original mobile/desktop screenshots, offset indexes and labelled pairs. Incomplete or superseded capture sets are not release proof.
 
@@ -58,4 +58,15 @@ Verification evidence is kept in ignored `work/cinorev`: form review snapshots a
 - Keep existing purchased versions and unrelated workspace edits intact.
 - Validate schemas, forms, renderer bindings, build and customer paths before catalog publication. Record actual coverage and remaining differences; physical iPhone verification must not be inferred from desktop browser testing.
 
-Status: implemented and staged; final visual/regression verification and production release pending. Targeted tests: 127/127 passing before the curtain-regression addition. Full server suite: 21 failures also reproduced on the unchanged baseline; no new failing test names. Production build passed; rerun after final renderer changes.
+Release checks: 143 catalog/form/music tests, 3 local-version-resolution tests and 53 media/privacy/language tests pass. The final production build passes. Full server suite: 21 failures also reproduced on the unchanged baseline; no new failing test names. No actual payment or external RSVP message was sent during QA.
+
+Visual review includes all 16 designs at 390×844 and 1280×720, edited previews from every dedicated form, separate event/calendar/map bindings, optional-section removal, uploaded portrait and long Malayalam names. Paired captures retain timing differences in particles/countdowns and content-driven wrapping; they are not a frame-perfect equivalence claim. New design prose is not fully translated into every supported language.
+
+The review corrected a Garden Curtains opening failure, stale secondary date/address labels, Pattu dynamic event directions, srcDoc preview RSVP URL resolution, redundant music controls, and destructive monogram/date text bindings. Fresh affected captures are retained. Physical iPhone Safari/Instagram testing remains unavailable.
+
+
+## Production release — 2026-11-14
+
+Promoted deployment `dpl_2LeNTJF3cYh9dDT5q7gTv4FGmqf5` (code commit `105c952`) to https://findmyinvite.com, then approved and published all 16 exact staged version/form pairs. No existing invitation bindings were migrated. Live public catalog: 28 designs, base price 19900 paise. All 16 public editor responses validate and bind to the matching renderer/version, with `no-store` caching. Browser checks from each live detail page opened all 16 matching previews without broken loaded images. Existing Bells & Blessings preview also passed on the release build.
+
+Local evidence: `work/cinorev/live-api-verification.json`, `live-catalog.json`, `live-renderers.json`, `release-verification.json`, `promotion.txt`, full-resolution captures and labelled comparison sheets. These ignored QA files contain synthetic test content only.
