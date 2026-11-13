@@ -135,6 +135,8 @@ export function startCinorev(config:any, resolveEvents:any){
   }
   if(c.photo){let portrait=one('img[src$="/couple.webp"],img[data-fmi-portrait]') as HTMLImageElement|null;if(!portrait){const section=document.createElement('section');section.className='sec fmi-portrait';section.style.cssText='padding:48px 24px;text-align:center';portrait=document.createElement('img');portrait.style.cssText='display:block;width:min(100%,300px);height:auto;margin:auto;border-radius:8px';section.append(portrait);const intro=one('main > section');intro?.after(section);}if(portrait){portrait.src=c.photo;portrait.alt=pair;}}
   all('audio').forEach(el=>{el.querySelectorAll('source').forEach(s=>s.remove());if(c.music)(el as HTMLAudioElement).src=c.music;else el.removeAttribute('src');});
+  // The storefront owns the managed soundtrack; keep source hooks but hide its empty player.
+  if(!c.music)all('#music-btn,button#music').forEach(el=>el.style.setProperty('display','none','important'));
   all('.tiles,.know').forEach(el=>{const tiles=all('.tile,details',el);if(tiles.length)el.hidden=tiles.every(tile=>tile.hidden);});
   bindEvents();personaliseText(document.body);
  }
