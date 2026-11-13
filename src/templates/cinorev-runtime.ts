@@ -93,9 +93,15 @@ export function startCinorev(config:any, resolveEvents:any){
   const uniqueDates=es.filter((e:any,i:number)=>es.findIndex((x:any)=>x.date===e.date)===i),firstDate=uniqueDates[0],lastDate=uniqueDates[uniqueDates.length-1],place=primary.address.split(',').at(-1)?.trim();
   const dateRange=uniqueDates.length===1?primary.fullDate:firstDate.monthYear===lastDate.monthYear?firstDate.dayNumber+' – '+lastDate.longDate:firstDate.longDate+' – '+lastDate.longDate;
   set('.intro .when',[dateRange,place].filter(Boolean).join('\n'));
-  set('p.fam,p.fams,.famline',c.closing);set('.g-mono,.c-mono,.mono',initials);
+  set('p.fam,p.fams,.famline',c.closing);
+  all('.g-mono,.c-mono,.mono').forEach(el=>{
+   const label=el.querySelector('svg text')||el.querySelector('p')||el;
+   const nodes=Array.from(label.childNodes).filter(n=>n.nodeType===Node.TEXT_NODE&&n.textContent?.trim());
+   if(nodes.length>=2){nodes[0].textContent=initials.split(' & ')[0];nodes[nodes.length-1].textContent=initials.split(' & ')[1]||'';}
+   else if(nodes[0])nodes[0].textContent=initials;
+  });
   set('.venue .vn,.venue-sec h3,.venue .addr',primary.venue);set('.venue .addr,.venue-sec .addr',primary.address);
-  set('.n-d,.hero .date',primary.numeric);if(d.id==='pattu')set('.g-sub',primary.numeric);set('.d-day',primary.dayNumber);set('.d-yr',primary.year);
+  set('.n-d',primary.numeric);if(d.id!=='temple-doors')set('.hero .date',primary.numeric);if(d.id==='pattu')set('.g-sub',primary.numeric);set('.d-day',primary.dayNumber);set('.d-yr',primary.year);
   all('[data-t^="e"]').filter(el=>/^e\d+$/.test(el.dataset.t||'')).forEach(el=>{const n=Number(el.dataset.t!.slice(1));const row=el.closest('li,article,.event,.item');if(row)(row as HTMLElement).hidden=!c.programme?.[n-1];});
   if(d.extras.includes('programme')){const section=one('[data-t="e1"]')?.closest('section');if(section)section.hidden=!c.programme?.length;}
   if(d.extras.includes('letter')){const section=one('[data-t="l1"],.letter')?.closest('section');if(section)section.hidden=!c.letter;}
@@ -126,6 +132,7 @@ export function startCinorev(config:any, resolveEvents:any){
   }
   if(d.id==='temple-doors'){
    set('.seal',initials);
+   const date=one('.hero .date');if(date){date.setAttribute('aria-label',primary.fullDate);set('span:first-child',primary.day.toUpperCase(),date);set('b',primary.dayNumber,date);const month=date.querySelector('span:last-child');if(month)month.replaceChildren(document.createTextNode(primary.month.slice(0,3).toUpperCase()),document.createElement('br'),document.createTextNode(primary.year));}
    all('.person').forEach((el,i)=>{set('b',[c.groom,c.bride][i],el);set('span',[c.groomFamily,c.brideFamily][i],el);});
    const film=one('#film-video') as HTMLVideoElement|null;if(film){film.removeAttribute('src');film.querySelectorAll('source').forEach(el=>el.remove());if(c.film){film.src=c.film;film.load();}else{const sec=one('#film');if(sec)sec.hidden=true;}}
    set('.hero .time',primary.title+' · '+primary.time+' · '+primary.venue);set('#count-note',primary.fullDate+' · '+primary.time);
