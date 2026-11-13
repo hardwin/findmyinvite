@@ -77,6 +77,7 @@ export function startCinorev(config:any, resolveEvents:any){
    const e=eventFor(a.dataset.cal||'');a.setAttribute('href',e.calendar);a.setAttribute('target','_blank');a.setAttribute('rel','noopener noreferrer');
    const card=a.closest('article,.card,.ev-card,.party-card,.ev,.ecard') as HTMLElement|null;if(!card)return;
    set('.c-d,.day,.d',e.fullDate,card);set('.c-t,.t',e.time,card);set('.c-v,.venue',e.venue,card);set('.addr',e.address,card);
+   if(d.id==='up-and-away')set('.dt .day',e.day,card);
    set('.where',[e.venue,e.address].filter(Boolean).join('\n'),card);all('.w',card).forEach((el,i)=>{el.textContent=i===0?[e.venue,e.address].filter(Boolean).join('\n'):e.note;el.dataset.fmiBound='true';});all('.dc,.dress',card).forEach(el=>{el.hidden=!e.dress;});set('.x,.ev-note,.note2',e.note,card);
    const whens=all('.when',card);if(whens[0])whens[0].textContent=e.fullDate;if(whens[1])whens[1].textContent=e.time;
    all('.dm',card).forEach(el=>{el.innerHTML=escape(e.monthYear)+'<span>'+escape(e.time+(c[e.key]?.end?' – '+e.endTime:''))+'</span>';el.dataset.fmiBound='true';});set('.dn,.dd',e.dayNumber,card);set('p.k',e.day,card);
@@ -98,6 +99,7 @@ export function startCinorev(config:any, resolveEvents:any){
   all('[data-t^="e"]').filter(el=>/^e\d+$/.test(el.dataset.t||'')).forEach(el=>{const n=Number(el.dataset.t!.slice(1));const row=el.closest('li,article,.event,.item');if(row)(row as HTMLElement).hidden=!c.programme?.[n-1];});
   if(d.extras.includes('programme')){const section=one('[data-t="e1"]')?.closest('section');if(section)section.hidden=!c.programme?.length;}
   if(d.extras.includes('letter')){const section=one('[data-t="l1"],.letter')?.closest('section');if(section)section.hidden=!c.letter;}
+  if(d.extras.includes('dress')){all('.dress,.wear,section[aria-label="Dress code"]').forEach(el=>{el.hidden=!c.dressCode;});if(!c._catalogPreview)all('.pal,.dress .sw,.wear .sw').forEach(el=>{el.hidden=true;});}
   const deadline=c.rsvpDeadline?'Kindly reply by '+new Date(c.rsvpDeadline+'T12:00:00Z').toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'})+'.':'We would love to celebrate with you.';
   set('#rsvp .lede,#rsvp > .muted,.rsvp-sec > .lede',deadline);
   set('[data-t="groomPar"],[data-t="sOf"]',c.groomFamily);set('[data-t="bridePar"],[data-t="dOf"]',c.brideFamily);
@@ -138,6 +140,9 @@ export function startCinorev(config:any, resolveEvents:any){
  }
  function ready(){
   bindContent();document.documentElement.lang=['en','ml','ta','te','kn','hi'].includes(c.language)?c.language:'en';document.title=pair+' · '+d.occasion;document.documentElement.dataset.fmiReady='true';one('#doors')?.classList.add('ready');
+  // Fixed opening scenes need width and height fitting after the selected script font loads.
+  const fitNames=()=>{if(c.language==='en'&&pair.length<36)return;all('h1,.g-names').forEach(el=>{el.style.fontSize='';el.style.width='100%';el.style.maxWidth='100%';el.style.minWidth='0';el.style.boxSizing='border-box';el.style.overflowWrap='normal';el.style.wordBreak='normal';let size=parseFloat(getComputedStyle(el).fontSize);while(size>22&&(el.scrollWidth>el.clientWidth+1||el.scrollHeight>innerHeight*.4)){size-=1;el.style.fontSize=size+'px';}});};
+  document.fonts?.ready.then(fitNames);addEventListener('resize',fitNames);
   const observer=new MutationObserver(records=>{let eventsAdded=false;for(const r of records){if(r.type==='characterData')personaliseText(r.target);else r.addedNodes.forEach(n=>{personaliseText(n);if(n instanceof Element&&(n.matches('[data-cal]')||n.querySelector('[data-cal]')))eventsAdded=true;});}if(eventsAdded)bindEvents();});observer.observe(document.body,{subtree:true,childList:true,characterData:true});
   all('input[placeholder],textarea[placeholder],img[alt]').forEach(el=>{for(const attr of ['placeholder','alt']){const value=el.getAttribute(attr);if(value)el.setAttribute(attr,copy(value));}});
   // Capture submissions before the original choreography's sample handlers.

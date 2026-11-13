@@ -1,6 +1,6 @@
 import {useEffect,useRef,useState} from 'react';
 import {Volume2,VolumeX} from 'lucide-react';
-import {privateMedia} from './DynamicFields';
+import {privateMedia} from './private-media';
 import {isLocalMedia,localMediaUrl} from './local-media';
 import './invitation-music.css';
 import {claimMusic,watchMusic} from './music-focus';
