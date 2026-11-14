@@ -552,5 +552,111 @@
     "mobileToFreshDesktop": true
   },
   "physicalIPhoneTested": false,
-  "preparedAt": "2026-11-14T21:45:30.142Z"
+  "preparedAt": "2026-11-14T21:45:30.142Z",
+  "stagedCustomerFlow": {
+    "templateId": "film-rajakumari-v1",
+    "proof": {
+      "frames": 720,
+      "width": 720,
+      "height": 1280,
+      "duration": 30,
+      "bytes": 5908917,
+      "resultSha256": "7c18db5621fe000c418a92185a6fb30d03651202355311bc1c47c4f62fb8f91a"
+    },
+    "photoUpload": true,
+    "libraryAudio": true,
+    "promoCheckout": true,
+    "browserDownload": true,
+    "rangeStatus": 206,
+    "anonymousStatus": 401,
+    "errors": [],
+    "checkedAt": "2026-11-14T21:56:58.473Z",
+    "qaAccountAndMediaRemoved": true
+  },
+  "libraryBrowserChecks": [
+    {
+      "engine": "chromium",
+      "search": true,
+      "clear": true,
+      "empty": true,
+      "retry": true,
+      "pricing": true
+    },
+    {
+      "engine": "webkit",
+      "search": true,
+      "clear": true,
+      "empty": true,
+      "retry": true,
+      "pricing": true
+    }
+  ],
+  "sceneSnapshotExpires": false,
+  "stagedPublicCatalog": {
+    "origin": "https://findmyinvite-k7vamjxa9-fmi-ai.vercel.app",
+    "browser": "Chrome for Testing 157.0.8103.78",
+    "templates": 39,
+    "newDesigns": [
+      "film-aranmanai-v1",
+      "film-avalum-v1",
+      "film-bollywood-v1",
+      "film-chettinad-v1",
+      "film-drive-v1",
+      "film-garden-v1",
+      "film-gettimelam-v1",
+      "film-gopuram-v1",
+      "film-hopon-v1",
+      "film-ilavarasi-v1",
+      "film-jannal-v1",
+      "film-kalyana-v1",
+      "film-karaikudi-v1",
+      "film-kerala-v1",
+      "film-kondattam-v1",
+      "film-kovil-v1",
+      "film-kulam-v1",
+      "film-kurinji-v1",
+      "film-malligai-v1",
+      "film-mandapam-v1",
+      "film-oonjal-v1",
+      "film-poonga-v1",
+      "film-rajakumaran-v1",
+      "film-rajakumari-v1",
+      "film-roja-v1",
+      "film-royal-v1",
+      "film-savedate-v1",
+      "film-temple-v1",
+      "film-thamarai-v1",
+      "film-theppam-v1",
+      "film-thottam-v1",
+      "film-tiles-v1",
+      "film-truckart-v1",
+      "film-valli-v1",
+      "film-vector-v1",
+      "film-veedu-v1",
+      "film-velicham-v1",
+      "film-walk-v1"
+    ],
+    "websitePrice": 19900,
+    "videoPrice": 29900,
+    "beforePlayMediaRequests": 0,
+    "playStop": true,
+    "mobileForms": [
+      "drive",
+      "vector",
+      "kurinji",
+      "hopon",
+      "oonjal",
+      "rajakumari"
+    ],
+    "errors": [],
+    "checkedAt": "2026-11-14T22:11:35.314Z"
+  },
+  "controlPlacement": {
+    "viewports": [
+      390,
+      1280
+    ],
+    "minimumTouchTarget": 44,
+    "playStop": true
+  }
 }

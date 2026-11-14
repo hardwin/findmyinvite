@@ -6,7 +6,7 @@ Reference inventory: https://cardsforknots.in/video-invite/ (observed 14 Novembe
 
 ## Release status
 
-Approved for protected staging after export verification. Production remains unchanged pending the staged customer download check. Scene worker: `snap_Ii80lDDzUDxeNmIjhfQNhCeA46Dl`, with no expiry. Configure it only through VIDEO_SCENE_SNAPSHOT_ID; the original VIDEO_RENDER_SNAPSHOT_ID remains unchanged. The per-design evidence and full cloud export results are recorded in `video-collection-verification.json`.
+Approved for production after export, protected catalog and customer-download verification. Scene worker: `snap_Ii80lDDzUDxeNmIjhfQNhCeA46Dl`, with no expiry. Configure it only through VIDEO_SCENE_SNAPSHOT_ID; the original VIDEO_RENDER_SNAPSHOT_ID remains unchanged. The per-design evidence and full cloud export results are recorded in `video-collection-verification.json`.
 
 ## Dedicated forms
 
@@ -70,6 +70,9 @@ Scene-aligned steps reuse the existing floating preview, clear buttons, growing 
 - Full cloud plate, page, alpha-video, nested-3D and uploaded-photo/music representatives passed. The default release proof hashes chapter captures and the exact worker source; the personalised proof hashes each complete locally verified MP4. These are distinct checks, explicitly labelled in each master. All 38 full cloud exports were not run.
 - Short library music repeats through longer scene videos. A cloud test repeated a two-second soundtrack through a 20-second export and measured audible output at second 15. The editor wraps its audio position consistently; the legacy Temple music behavior is unchanged. Latest build and 67 affected server regressions pass.
 - All 38 authenticated drafts saved and reloaded on staging, with anonymous access denied and private responses uncached. A mobile account save restored correctly in a fresh desktop context.
+- The deployed customer flow passed with a private photo upload, complimentary test checkout, an actual cloud render and browser MP4 download. The 30-second output contains the uploaded photo and personalised name, H.264 video at 720×1280/24 fps, and library audio. Range downloads return 206; anonymous access returns 401. No real payment was charged. The QA account, 38 drafts, test order and private media were removed; the worker stopped automatically.
+- The video library has its own search/count and retry state, without the unrelated website filters or a misleading empty website result. Chromium and WebKit checks cover search, clear, no results, catalog retry and responsive pricing. Website pricing stays ₹199; video pricing stays ₹299 total.
+- The final protected catalog exposes 39 entries, including the existing Temple design, and all 38 new configurations are ready. Official Chrome for Testing 157 verifies poster-only browsing, actual MP4 Play/Stop and six mobile renderer/form representatives. The bundled Chromium lacks H.264; bundled Windows WebKit advertised it but rejected playback, so those runners establish UI/retry coverage only. Physical iPhone/Instagram remains unverified. Final video controls retain bottom-right placement and 44-pixel targets, verified at 390 and 1280 pixels.
 - Git attributes preserve immutable asset bytes across Windows/Linux. All 4,139 staged video files match their working-file bytes. Scene workers have their own bounded timeout and an owner lease that outlives it.
 
 ## Reference adaptations and limitations
