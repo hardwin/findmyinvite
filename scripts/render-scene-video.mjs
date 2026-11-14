@@ -35,7 +35,10 @@ export async function renderSceneVideo({master,content,photos={},audioFile,outpu
   const batch=browserBatchFrames??(process.platform==='linux'&&master.kind==='webgl'?120:0);
   if(!Number.isSafeInteger(batch)||batch<0)throw Error('Invalid render batch size.');
   const failures=[],urls=Object.fromEntries(Object.entries(photos).map(([slot,p])=>[slot,{mode:p.mode,url:origin+'/_media/'+slot}]));
-  let page;
+  let page,frameRecoveries=0;
+  // Sample 0.42 ms into a software WebGL frame to avoid exact rasterization
+  // singularities. Frame count, encoded timestamps and scene durations stay fixed.
+  const samplePhase=process.platform==='linux'&&master.kind==='webgl'?0.01:0;
   const startBrowser=async()=>{
   browser=await puppeteer.launch({executablePath:await browserPath(),headless:true,protocolTimeout:120000,env:{...process.env,...(display.display?{DISPLAY:display.display,LIBGL_ALWAYS_SOFTWARE:'1',GALLIUM_DRIVER:'llvmpipe',LP_NUM_THREADS:'8'}:{})},args:['--no-sandbox','--disable-dev-shm-usage','--font-render-hinting=none','--enable-webgl',...graphics,'--ignore-gpu-blocklist']});
   if(process.platform==='linux'){const session=await browser.target().createCDPSession();try{const info=await session.send('SystemInfo.getInfo');if(!/llvmpipe/i.test(info.gpu.auxAttributes.glRenderer||''))throw Error('The scene graphics driver is unavailable.');}finally{await session.detach();}}
@@ -64,13 +67,22 @@ export async function renderSceneVideo({master,content,photos={},audioFile,outpu
    // Lossless review stills; high-quality JPEG transport for the already-lossy
    // H.264 export avoids spending most render time compressing temporary PNGs.
    const format=reviewFrames?'image/png':'image/jpeg';
-   const encoded=await page.evaluate(({frame,format})=>window.videoRender.frame(frame,undefined,undefined,undefined,undefined,true,format),{frame,format}).catch(error=>{throw Error('Frame '+frame+': '+error.message,{cause:error});});
+   const capture=(phase=samplePhase)=>page.evaluate(({frame,format})=>window.videoRender.frame(frame,undefined,undefined,undefined,undefined,true,format),{frame:frame+phase,format});
+   let encoded;
+   try{encoded=await capture();}catch(error){
+    // Retry the same output frame within its exposure, on the same driver.
+    // Never skip/duplicate frames or switch to a visibly different compositor.
+    if(!samplePhase||frameRecoveries>=3||!/Runtime\.callFunctionOn timed out/.test(error.message))throw Error('Frame '+frame+': '+error.message,{cause:error});
+    frameRecoveries++;console.warn('Retrying scene frame '+frame+' after a rasterization timeout.');
+    await closeSceneBrowser(browser);browser=null;await startBrowser();
+    encoded=await capture(0.02).catch(cause=>{throw Error('Frame '+frame+' recovery failed: '+cause.message,{cause});});
+   }
    const bytes=encoded?Buffer.from(encoded,'base64'):Buffer.from(await page.screenshot({type:reviewFrames?'png':'jpeg',...(reviewFrames?{}:{quality:95}),clip:{x:0,y:0,width:720,height:1280},captureBeyondViewport:false}));
    if(failures.length)throw Error(failures[0]);
    if(reviewFrames)await writeFile(join(output,String(frame).padStart(5,'0')+'.png'),bytes);else if(!encoder.stdin.write(bytes))await Promise.race([once(encoder.stdin,'drain'),done.then(()=>{throw Error('Video encoder stopped before the final frame.');})]);
    if(i%24===0)await onProgress(Math.round(5+92*(i+1)/sequence.length));
   }
   if(reviewFrames)return {directory:output};encoder.stdin.end();await done;
-  return {...await verifyVideo(output,{audio:!!audio,output:master.output}),backgroundSha256:master.assets.sceneBundle.sha256};
+  return {...await verifyVideo(output,{audio:!!audio,output:master.output}),backgroundSha256:master.assets.sceneBundle.sha256,samplePhase,frameRecoveries};
  }finally{encoder?.stdin.destroy();encoder?.kill('SIGKILL');await closeSceneBrowser(browser);displayProcess?.kill();if(server){server.closeAllConnections();await new Promise(r=>server.close(r));}await rm(temp,{recursive:true,force:true});}
 }
