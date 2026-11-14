@@ -1,0 +1,161 @@
+{
+  "production": "resolve-only",
+  "iteration": "kerala-christian-v2",
+  "name": "The Wedding of Blessing & Stephy",
+  "duration_seconds": 48.0,
+  "paid_ai_video_clips": 0,
+  "masters_reused": [
+    "bg-paper-cool",
+    "bg-paper-rose",
+    "bg-church-watermark",
+    "bg-porch-plate",
+    "bg-aisle-plate",
+    "bg-garden-evening",
+    "bg-finale-sky",
+    "fx-torn-top",
+    "fx-torn-wipe",
+    "fx-brush-olive",
+    "fx-panel-cyan",
+    "fx-petals-loop",
+    "fg-florals-a",
+    "fg-florals-b",
+    "fg-vine"
+  ],
+  "client_text_plates": [
+    "text-devotional",
+    "text-invitation",
+    "text-groom",
+    "text-bride",
+    "text-family",
+    "text-ceremony",
+    "text-venue",
+    "text-reception",
+    "text-hosts",
+    "text-save"
+  ],
+  "client_cutouts": [
+    "cutout-groom",
+    "cutout-bride",
+    "cutout-couple"
+  ],
+  "cards": [
+    {
+      "id": "card-01-open",
+      "t": [
+        0.0,
+        4.0
+      ],
+      "label": "Paper tear open + church watermark"
+    },
+    {
+      "id": "card-02-blessing",
+      "t": [
+        4.0,
+        8.0
+      ],
+      "label": "Devotional title"
+    },
+    {
+      "id": "card-03-invite",
+      "t": [
+        8.0,
+        12.0
+      ],
+      "label": "The Wedding of"
+    },
+    {
+      "id": "card-04-groom",
+      "t": [
+        12.0,
+        16.0
+      ],
+      "label": "Groom card"
+    },
+    {
+      "id": "card-05-bride",
+      "t": [
+        16.0,
+        20.0
+      ],
+      "label": "Bride card"
+    },
+    {
+      "id": "card-06-parents",
+      "t": [
+        20.0,
+        24.0
+      ],
+      "label": "Parents blessing"
+    },
+    {
+      "id": "card-07-ceremony",
+      "t": [
+        24.0,
+        28.0
+      ],
+      "label": "Holy Matrimony"
+    },
+    {
+      "id": "card-08-venue",
+      "t": [
+        28.0,
+        32.0
+      ],
+      "label": "Wedding venue"
+    },
+    {
+      "id": "card-09-reception",
+      "t": [
+        32.0,
+        36.0
+      ],
+      "label": "Reception"
+    },
+    {
+      "id": "card-10-hosts",
+      "t": [
+        36.0,
+        40.0
+      ],
+      "label": "Invited By"
+    },
+    {
+      "id": "card-11-couple-std",
+      "t": [
+        40.0,
+        44.0
+      ],
+      "label": "Couple + Save the Date"
+    },
+    {
+      "id": "card-12-finale",
+      "t": [
+        44.0,
+        48.0
+      ],
+      "label": "Finale hands / cross hold"
+    }
+  ],
+  "parameters": {
+    "invitation_lines": "The Wedding of\nBlessing & Stephy",
+    "groom_title": "Mr.",
+    "groom_name": "Abi Blessing",
+    "bride_title": "Ms.",
+    "bride_name": "Selsia Stephy",
+    "family_lines": "With the Blessings of\nGroom's Parents\nMr. J Mani & Mrs. J Rajalummal\nBride's Parents\nMr. A Ravi & Mrs. R Hamlet Jaya",
+    "ceremony_lines": "Holy Matrimony\n3rd December 2026\n10:00 a.m.\nIn the Morning",
+    "venue_lines": "Wedding Venue\nCSI Christ Church\nAzhagiamandabam\nKanyakumari",
+    "reception_lines": "Reception - Dinner\n4th December 2026\n6:00 p.m. onwards\nCSI Community Hall\nKarumavilai, Karungal",
+    "host_lines": "Invited By\nGroom's & Bride's Family\nWith Love & Blessings",
+    "save_date_lines": "SAVE THE DATE\n3 & 4 DECEMBER\n2026",
+    "save_date_inline": "SAVE THE DATE / 14 & 15 FEBRUARY / 2025",
+    "devotional_line_1": "With God's Grace",
+    "devotional_line_2": "We Invite You",
+    "music_url": null,
+    "groom_cutout": "client/groom.png",
+    "bride_cutout": "client/bride.png",
+    "couple_cutout": "client/couple.png",
+    "hands_cutout": null
+  },
+  "estimated_inr": 50
+}
