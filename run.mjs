@@ -10,6 +10,7 @@ if(!isBuild&&!process.env.VERCEL)process.env.FMI_OWNER_LOCAL='1';
 // Production APIs are packaged by Vercel; only the dev server needs this router.
 const apiPlugins=isBuild?[]:[(await import('./server/local-api.mjs')).localApi()];
 Object.assign(process.env,loadEnv('development',process.cwd(),''));
+if(!isBuild&&!process.env.VERCEL)process.env.VIDEO_PERSONALISE_ENABLED??='1';
 const srcRoot=fileURLToPath(new NodeURL('./src',import.meta.url));
 
 /** Assembly / Template 1 writes these paths at the end of a job. Suppress Vite full-reload so /assembly keeps the preview card. */
@@ -39,6 +40,7 @@ const config={
  server:{
   host:'127.0.0.1',
   port:5173,
+  strictPort:true,
   // Keep /assembly stable. Do NOT ignore public/assets — Vite then misses files written mid-session and SPA-falls-back HTML for new mp4s.
   watch:{ignored:[
    '**/job_engine/**',

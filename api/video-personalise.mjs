@@ -1,4 +1,6 @@
 import {VIDEO_CATALOG} from '../shared/video-catalog.mjs';
+import {videoDownloadTicket} from '../server/video-download-ticket.mjs';
+import {queueVideoRender} from '../server/video-render-queue.mjs';
 import {handleUpload} from '@vercel/blob/client';
 import {get,head} from '@vercel/blob';
 import {randomUUID} from 'node:crypto';
@@ -20,11 +22,11 @@ const limits={image:1048576,audio:20*1048576};
 export const config={maxDuration:300,memory:1024};
 export function uploadSignature(bytes,type){return matchesMediaType(bytes,type)||type==='audio/wav'&&bytes.toString('ascii',0,4)==='RIFF'&&bytes.toString('ascii',8,12)==='WAVE'||type==='audio/aac'&&bytes[0]===255&&(bytes[1]&246)===240;}
 async function stopCompletedRender(store,job){if(store.local||!job.sandboxId||job.sandboxStoppedAt||!['ready','failed'].includes(job.status))return;try{await stopVideoSandbox(job.sandboxId);const row=await store.read('jobs/'+job.id+'.json');if(row?.value.attempt===job.attempt)await store.save('jobs/'+job.id+'.json',{...row.value,sandboxStoppedAt:new Date().toISOString()},{etag:row.etag});}catch(e){console.error('Video worker cleanup will retry:',job.id,e.message);}}
-export default async function handler(req,res){const store=videoStore(),service=videoService({store,launch:launchVideoRender});try{
+export default async function handler(req,res){const store=videoStore(),service=videoService({store,launch:(job,secret)=>queueVideoRender(job,secret,{launch:launchVideoRender,finish:(...args)=>service.finish(...args),waitUntil})});try{
  const q=new URL(req.url,'https://findmyinvite.com').searchParams,action=q.get('action')||'template';
  if(action==='templates'){
   method(req,['GET']);const results=await Promise.allSettled(['temple-v1','kerala-christian-v1',...VIDEO_CATALOG.map(d=>d.id)].map(async id=>{
-   const c=await videoConfig(process.env,id);if(!c.ready)return null;const base='/assets/video-masters/'+id+'/';return {id,name:c.name,duration:c.master.output.duration,poster:base+(c.master.catalog?.poster||'poster.jpg'),preview:base+(c.master.catalog?.preview||'demo-v1.mp4'),...(c.master.catalog?.posters?{posters:Object.fromEntries(Object.entries(c.master.catalog.posters).map(([w,file])=>[w,base+file]))}:{}),...videoPrice()};
+   const c=await videoConfig(process.env,id);if(!c.ready)return null;const base='/assets/video-masters/'+id+'/';return {id,name:c.name,duration:c.master.output.duration,poster:base+(c.master.catalog?.poster||'poster.jpg'),preview:base+'catalog-preview-v2.mp4',...(c.master.catalog?.posters?{posters:Object.fromEntries(Object.entries(c.master.catalog.posters).map(([w,file])=>[w,base+file]))}:{}),...videoPrice()};
   }));const templates=results.filter(r=>r.status==='fulfilled'&&r.value).map(r=>r.value);
   res.setHeader('Cache-Control','public, max-age=0, must-revalidate, s-maxage=60');res.setHeader('X-Content-Type-Options','nosniff');return res.status(200).json({templates});
  }
@@ -48,6 +50,7 @@ export default async function handler(req,res){const store=videoStore(),service=
  if(action==='cutout'){method(req,['POST']);await rate(req,'video-cutout:'+user.id,12,3600);const m=await service.media(user.id,q.get('id'));if(m.kind!=='image'||m.status!=='ready')throw new HttpError(400,'Photo is not ready.');if(!m.cutoutKey){const output=await prepareVideoPhoto(await store.bytes(m.key)),key=m.durable?'persistent/'+user.id+'/'+m.invitationId+'/'+m.id+'/cutout.png':'cutouts/'+user.id+'/'+m.id+'.png';await store.putBytes(key,output,'image/png');const current=await store.read('media/'+m.id+'.json');await store.save('media/'+m.id+'.json',{...current.value,cutoutKey:key,cutoutSha256:hash(output)},{etag:current.etag});}return respond(res,200,{id:m.id});}
  if(action==='render'){method(req,['POST']);const b=await bodyJson(req,64000),templateId=b.templateId||DEFAULT_VIDEO_ID;await draftService({store}).get(user.id,b.invitationId,{optional:true});const purchase=await videoPaymentService().requireAccess(user.id,b.invitationId,templateId);await rate(req,'video-render:'+user.id,5,3600);await validatePreparedCharacters(user.id,purchase.id,b.content?.photos);const job=await service.start(user.id,b.content,templateId,purchase.id);await db('personalization_drafts?id=eq.'+purchase.id+'&owner_id=eq.'+user.id,{method:'PATCH',body:{last_job_id:job.id}});return respond(res,202,job);}
  if(action==='status'){method(req,['GET']);const job=await service.job(user.id,q.get('id'));waitUntil(stopCompletedRender(store,job));return respond(res,200,publicJob(job));}
+ if(action==='download-ticket'){method(req,['GET']);const j=await service.job(user.id,q.get('id'));if(j.status!=='ready')throw new HttpError(409,'Video is not ready.');return respond(res,200,store.local?{url:null}:{...await videoDownloadTicket(store.prefix+j.resultKey),bytes:j.bytes,sha256:j.resultSha256});}
  if(action==='download'||action==='media'){
   method(req,['GET']);let key,type,size;
   if(action==='download'){const j=await service.job(user.id,q.get('id'));if(j.status!=='ready')throw new HttpError(409,'Video is not ready.');key=j.resultKey;type='video/mp4';size=j.bytes;res.setHeader('Content-Disposition','attachment; filename="'+videoDefinition(j.templateId).filename+'"');}
