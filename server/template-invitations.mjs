@@ -7,6 +7,19 @@ import {customer,owned,version,safeVersion,rpc,requireRecoverable} from './templ
 import {mediaReferences} from '../shared/template-contract.mjs';
 export function viewV2(row){return {id:row.id,slug:row.slug,templateVersionId:row.template_version_id,content:row.draft_content,formStepId:row.form_step_id,formRevision:row.form_revision,revision:row.draft_revision,publishedRevision:row.published_revision,published:row.published,firstPublishedAt:row.first_published_at,expiresAt:row.first_published_at?row.expires_at:null,deletedAt:row.deleted_at};}
 export async function checkMedia(row,content,defaults={}){await validateLibraryMusic(content);const ids=mediaReferences(content);if(!ids.length)return;const media=await db('template_media?id=in.('+ids.join(',')+')&status=eq.ready&select=id,invitation_id');if(ids.some(id=>!media.some(m=>m.id===id&&(m.invitation_id===row.id||(m.invitation_id===null&&mediaReferences(defaults).includes(id))))))throw new HttpError(400,'Some media files are missing or belong to another invitation.');}
+// A released form is immutable in the archive. Save all draft fields in one
+// compare-and-swap, retaining the original renderer binding and conflict checks.
+export async function saveArchivedDraft(row,user,form,b,content,nextSlug){
+ requireRecoverable(row);
+ if(row.owner_id!==user.id||form.template_version_id!==row.template_version_id)throw new HttpError(403,'Invitation unavailable.');
+ if(!Number.isInteger(b.revision)||b.revision!==row.draft_revision)throw new HttpError(409,'Draft changed; reload before saving. Your other saved changes are safe.');
+ if(row.first_published_at&&nextSlug!==row.slug)throw new HttpError(409,'A published invitation address cannot change.');
+ const query=new URLSearchParams({id:'eq.'+row.id,owner_id:'eq.'+user.id,template_version_id:'eq.'+row.template_version_id,draft_revision:'eq.'+b.revision,updated_at:'eq.'+row.updated_at,deleted_at:'is.null',first_published_at:row.first_published_at?'eq.'+row.first_published_at:'is.null'});
+ if(row.first_published_at)query.set('expires_at','gt.'+new Date(Date.now()-90*86400000).toISOString());
+ const [saved]=await db('invitations?'+query,{method:'PATCH',headers:{Prefer:'return=representation'},body:{slug:nextSlug,draft_content:content,form_step_id:b.formStepId||form.definition.steps[0].id,form_revision:form.revision,draft_revision:b.revision+1,updated_at:new Date().toISOString()}});
+ if(!saved)throw new HttpError(409,'Draft changed; reload before saving. Your other saved changes are safe.');
+ return saved;
+}
 export default async function handle(req,res,q){const action=q.get('action');
  if(action==='v2-public'){method(req,['GET']);const slug=slugValue(q.get('slug'));const rows=await db('invitations?slug=eq.'+slug+'&published=eq.true&deleted_at=is.null&expires_at=gt.'+encodeURIComponent(new Date().toISOString())+'&select=template_version_id,published_content');if(!rows[0]?.template_version_id)throw new HttpError(404,'Invitation unavailable.');return respond(res,200,{content:rows[0].published_content,version:safeVersion(await version(rows[0].template_version_id))});}
  const user=await customer(req);
@@ -15,7 +28,7 @@ export default async function handle(req,res,q){const action=q.get('action');
  const row=await owned(slugValue(q.get('slug')),user);requireRecoverable(row);const v=await version(row.template_version_id);
  if(action==='v2-manage'){method(req,['GET']);return respond(res,200,{invitation:viewV2(row),version:safeVersion(v),form:await templateForm(v)});}
  method(req,['POST']);const b=await bodyJson(req,200000);if(!Number.isInteger(b.revision))throw new HttpError(400,'A draft revision is required.');
- if(action==='v2-save'){const form=await templateForm(v),content=formContent(form,v,b);await checkMedia(row,content,v.defaults);const nextSlug=b.newSlug?slugValue(b.newSlug):row.slug;if(row.first_published_at&&nextSlug!==row.slug)throw new HttpError(409,'A published invitation address cannot change.');const saved=await rpc('fmi_save_form_draft',{p_slug:row.slug,p_owner:user.id,p_revision:b.revision,p_content:content,p_step:b.formStepId||form.definition.steps[0].id,p_form_revision:form.revision,p_new_slug:nextSlug});return respond(res,200,{invitation:viewV2(saved)});}
+ if(action==='v2-save'){const form=await templateForm(v),content=formContent(form,v,b);await checkMedia(row,content,v.defaults);const nextSlug=b.newSlug?slugValue(b.newSlug):row.slug;if(row.first_published_at&&nextSlug!==row.slug)throw new HttpError(409,'A published invitation address cannot change.');const saved=form.archived?await saveArchivedDraft(row,user,form,b,content,nextSlug):await rpc('fmi_save_form_draft',{p_slug:row.slug,p_owner:user.id,p_revision:b.revision,p_content:content,p_step:b.formStepId||form.definition.steps[0].id,p_form_revision:form.revision,p_new_slug:nextSlug});return respond(res,200,{invitation:viewV2(saved)});}
  if(action==='v2-publish'||action==='v2-renew'){
  if(action==='v2-publish'){const form=await templateForm(v);formContent(form,v,{content:row.draft_content},{complete:true});await checkMedia(row,row.draft_content,v.defaults);}
  const saved=await rpc('fmi_publish_invitation',{p_slug:row.slug,p_owner:user.id,p_revision:b.revision,p_order:b.orderId||null,p_renew:action==='v2-renew'});if(process.env.VERCEL_ENV==='production')try{waitUntil(fetch('https://findmyinvite.com/api/share-image?slug='+encodeURIComponent(saved.slug),{signal:AbortSignal.timeout(55000)}).then(async response=>{await response.arrayBuffer();if(!response.ok)console.error('Share card warming failed',saved.id,response.status);}).catch(()=>console.error('Share card warming deferred',saved.id)));}catch{console.error('Share card warming deferred',saved.id);}return respond(res,200,{invitation:viewV2(saved)});}

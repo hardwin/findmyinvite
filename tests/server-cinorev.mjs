@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
 import {cinorevTemplates,cinorevDesigns} from '../shared/cinorev-templates.mjs';
-import {CINOREV_RENDERERS} from '../shared/cinorev-renderers.mjs';
+import {ORIGINAL_CINOREV_RENDERERS as CINOREV_RENDERERS} from '../shared/cinorev-renderers.mjs';
 import {resolveCinorevEvents} from '../shared/cinorev-events.mjs';
 import {validateSchema,validateContent} from '../shared/template-contract.mjs';
 import {validateFormDefinition,validateFormContent,allQuestions,setFormValue,formErrors} from '../shared/template-forms.mjs';

@@ -19,6 +19,6 @@ export function TemplatePreview(){
  if(thumbnail)return <><style>{'html,body{overflow:hidden!important;scrollbar-width:none}'}</style><FlagshipRenderer version={version} content={content} preview reduceMotion/></>;
  if(['thiruvarul-v1','kalyana-payanam-v1','theeram-v1','kerala-kasavu-v2','nikah-arches-v2',...DIGITAL_YES_RENDERERS].includes(version.renderer))return <><div data-preview-slot><FlagshipRenderer version={version} content={content} preview/></div><a href={back} style={{position:'fixed',right:16,...(['theeram-v1','thiruvarul-v1','kalyana-payanam-v1'].includes(version.renderer)?{top:4,padding:'6px 10px',font:'11px system-ui'}:{bottom:74,padding:'10px 16px',font:'13px system-ui'}),zIndex:110,background:'#fff',borderRadius:24,color:'#282529'}}>{copy['return to library']||'Return to library'}</a></>;
  const note=<div className="tc-preview-note">{copy['template preview']||'Template preview'} <a href={back}>{copy['return to library']||'Return to library'}</a></div>;
- const immersive=['christian-editorial-v2','ivory-lace-v1'].includes(version.renderer);
+ const immersive=['christian-editorial-v2','christian-editorial-v3','ivory-lace-v1'].includes(version.renderer);
  return <>{!immersive&&note}<div data-preview-slot><FlagshipRenderer version={version} content={content} preview/></div>{immersive&&note}</>;
 }

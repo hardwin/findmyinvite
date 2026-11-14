@@ -1,0 +1,3 @@
+/* Only the v2 document loads this sheet; all text/control colours stay unchanged. */
+.orn{color:#BFA16C}
+.mono::before{content:"";position:absolute;inset:-.25em -.42em;border:1px solid #BFA16C;border-radius:50%;pointer-events:none;opacity:.82}

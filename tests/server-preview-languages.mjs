@@ -22,7 +22,7 @@ for(const language of ['ml','ta','te','kn','hi']){
  for(const version of versions)test(version.template_id+' catalog preview in '+language,()=>{
   const before=structuredClone(version.defaults),content=previewContent(version,language),original=new Map(leaves(version.defaults));
   assert.deepEqual(version.defaults,before,'Original release content must stay immutable');
-  assert.equal(content.language,language);assert.equal(content._catalogPreview,true);assert.ok(content.previewGuest);
+  assert.equal(content.language,language);assert.equal(content._catalogPreview,true);assert.equal(content.previewGuest,'');
   for(const [path,value] of leaves(content)){
    if(typeof value!=='string')continue;
    if(/^(https?:|\/)/.test(value)||/(?:^|\.)(?:date|time|utcOffset|icon)$/.test(path))assert.equal(value,original.get(path),path+' keeps its functional value');

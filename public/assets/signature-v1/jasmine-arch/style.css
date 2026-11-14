@@ -1,0 +1,4 @@
+/* Decorative roles only: preserve the darker gold used for small labels. */
+.orn{color:#BEA16A}
+.thread i{background:linear-gradient(90deg,#BEA16A,var(--wine))}
+.photo-arch{box-shadow:0 0 0 1px #BEA16A,0 22px 40px -22px rgba(110,27,45,.6)}

@@ -1,0 +1,1678 @@
+{
+  "55039403-f51d-4988-b68a-6aca3038932d": {
+    "template_id": "golden-hour",
+    "template_version_id": "55039403-f51d-4988-b68a-6aca3038932d",
+    "revision": 1,
+    "definition": {
+      "name": "Golden Hour",
+      "steps": [
+        {
+          "id": "welcome",
+          "title": "Whose celebration is this?",
+          "questions": [
+            {
+              "path": "groom",
+              "type": "text",
+              "label": "First name",
+              "required": true,
+              "maxLength": 160
+            },
+            {
+              "path": "bride",
+              "type": "text",
+              "label": "Second name",
+              "required": true,
+              "maxLength": 160
+            },
+            {
+              "path": "language",
+              "type": "select",
+              "label": "Invitation language",
+              "options": [
+                "en",
+                "ml",
+                "ta",
+                "te",
+                "kn",
+                "hi"
+              ],
+              "required": true
+            },
+            {
+              "path": "utcOffset",
+              "type": "select",
+              "label": "Time zone",
+              "options": [
+                "+05:30",
+                "+00:00",
+                "+01:00",
+                "+02:00",
+                "+04:00",
+                "+08:00",
+                "-04:00",
+                "-05:00"
+              ],
+              "required": true
+            }
+          ],
+          "description": "Open the rose seal"
+        },
+        {
+          "id": "family",
+          "title": "Your family invitation",
+          "questions": [
+            {
+              "path": "groomFamily",
+              "type": "textarea",
+              "label": "First family or parents",
+              "maxLength": 350
+            },
+            {
+              "path": "brideFamily",
+              "type": "textarea",
+              "label": "Second family or parents",
+              "maxLength": 350
+            },
+            {
+              "path": "closing",
+              "type": "textarea",
+              "label": "Closing wording",
+              "maxLength": 350
+            }
+          ],
+          "description": ""
+        },
+        {
+          "id": "wedding",
+          "title": "Wedding: when and where?",
+          "questions": [
+            {
+              "path": "wedding.date",
+              "type": "date",
+              "label": "Date",
+              "required": true
+            },
+            {
+              "path": "wedding.time",
+              "type": "time",
+              "label": "Start time",
+              "required": true
+            },
+            {
+              "path": "wedding.end",
+              "type": "time",
+              "label": "End time",
+              "required": false
+            },
+            {
+              "path": "wedding.venue",
+              "type": "text",
+              "label": "Venue",
+              "required": true,
+              "maxLength": 160
+            },
+            {
+              "path": "wedding.address",
+              "type": "textarea",
+              "label": "Address",
+              "required": true,
+              "maxLength": 350
+            },
+            {
+              "path": "wedding.mapUrl",
+              "type": "url",
+              "label": "Directions link",
+              "required": false,
+              "maxLength": 500
+            },
+            {
+              "path": "wedding.note",
+              "type": "textarea",
+              "label": "Event note",
+              "required": false,
+              "maxLength": 350
+            },
+            {
+              "path": "wedding.dress",
+              "type": "text",
+              "label": "Dress code",
+              "required": false,
+              "maxLength": 160
+            }
+          ],
+          "description": "These details also update directions and calendar links."
+        },
+        {
+          "id": "programme",
+          "title": "Plan your celebration",
+          "questions": [
+            {
+              "path": "programme",
+              "type": "repeater",
+              "label": "Programme",
+              "fields": [
+                {
+                  "path": "time",
+                  "type": "time",
+                  "label": "Time"
+                },
+                {
+                  "path": "title",
+                  "type": "text",
+                  "label": "Moment",
+                  "maxLength": 160
+                },
+                {
+                  "path": "description",
+                  "type": "textarea",
+                  "label": "Description",
+                  "maxLength": 250
+                }
+              ],
+              "maxItems": 4
+            }
+          ],
+          "description": ""
+        },
+        {
+          "id": "dress",
+          "title": "What should guests wear?",
+          "questions": [
+            {
+              "path": "dressCode",
+              "type": "textarea",
+              "label": "Dress code",
+              "maxLength": 350
+            }
+          ],
+          "description": ""
+        },
+        {
+          "id": "media",
+          "title": "Portrait and music",
+          "questions": [
+            {
+              "path": "photo",
+              "type": "image",
+              "label": "Main portrait"
+            },
+            {
+              "path": "music",
+              "type": "audio",
+              "label": "Background music"
+            }
+          ],
+          "description": "Phone photos, including HEIC, are prepared automatically. Music starts after guest interaction."
+        },
+        {
+          "id": "replies",
+          "title": "How should guests reply?",
+          "questions": [
+            {
+              "path": "rsvpDeadline",
+              "type": "date",
+              "label": "Reply by"
+            },
+            {
+              "path": "whatsapp",
+              "type": "text",
+              "label": "WhatsApp number with country code",
+              "format": "phone",
+              "maxLength": 160
+            }
+          ],
+          "description": ""
+        },
+        {
+          "id": "review",
+          "title": "Review Golden Hour",
+          "questions": [],
+          "description": "Preview every section and check your event dates, media and invitation address."
+        }
+      ],
+      "title": "Create your Golden Hour invitation",
+      "version": 1,
+      "thumbnail": "/assets/cinorev/golden-hour/poster.webp",
+      "initialContent": {
+        "_form": {
+          "authored": true
+        },
+        "language": "en",
+        "utcOffset": "+05:30"
+      }
+    }
+  },
+  "d1e1637a-3df8-4a09-ba36-fb6f26f998b5": {
+    "template_id": "jasmine-arch",
+    "template_version_id": "d1e1637a-3df8-4a09-ba36-fb6f26f998b5",
+    "revision": 1,
+    "definition": {
+      "name": "Jasmine Arch",
+      "steps": [
+        {
+          "id": "welcome",
+          "title": "Whose celebration is this?",
+          "questions": [
+            {
+              "path": "groom",
+              "type": "text",
+              "label": "First name",
+              "required": true,
+              "maxLength": 160
+            },
+            {
+              "path": "bride",
+              "type": "text",
+              "label": "Second name",
+              "required": true,
+              "maxLength": 160
+            },
+            {
+              "path": "language",
+              "type": "select",
+              "label": "Invitation language",
+              "options": [
+                "en",
+                "ml",
+                "ta",
+                "te",
+                "kn",
+                "hi"
+              ],
+              "required": true
+            },
+            {
+              "path": "utcOffset",
+              "type": "select",
+              "label": "Time zone",
+              "options": [
+                "+05:30",
+                "+00:00",
+                "+01:00",
+                "+02:00",
+                "+04:00",
+                "+08:00",
+                "-04:00",
+                "-05:00"
+              ],
+              "required": true
+            }
+          ],
+          "description": "Part the jasmine curtain"
+        },
+        {
+          "id": "family",
+          "title": "Your family invitation",
+          "questions": [
+            {
+              "path": "groomFamily",
+              "type": "textarea",
+              "label": "First family or parents",
+              "maxLength": 350
+            },
+            {
+              "path": "brideFamily",
+              "type": "textarea",
+              "label": "Second family or parents",
+              "maxLength": 350
+            },
+            {
+              "path": "closing",
+              "type": "textarea",
+              "label": "Closing wording",
+              "maxLength": 350
+            }
+          ],
+          "description": ""
+        },
+        {
+          "id": "reception",
+          "title": "Reception: when and where?",
+          "questions": [
+            {
+              "path": "reception.date",
+              "type": "date",
+              "label": "Date",
+              "required": true
+            },
+            {
+              "path": "reception.time",
+              "type": "time",
+              "label": "Start time",
+              "required": true
+            },
+            {
+              "path": "reception.end",
+              "type": "time",
+              "label": "End time",
+              "required": false
+            },
+            {
+              "path": "reception.venue",
+              "type": "text",
+              "label": "Venue",
+              "required": true,
+              "maxLength": 160
+            },
+            {
+              "path": "reception.address",
+              "type": "textarea",
+              "label": "Address",
+              "required": true,
+              "maxLength": 350
+            },
+            {
+              "path": "reception.mapUrl",
+              "type": "url",
+              "label": "Directions link",
+              "required": false,
+              "maxLength": 500
+            },
+            {
+              "path": "reception.note",
+              "type": "textarea",
+              "label": "Event note",
+              "required": false,
+              "maxLength": 350
+            },
+            {
+              "path": "reception.dress",
+              "type": "text",
+              "label": "Dress code",
+              "required": false,
+              "maxLength": 160
+            }
+          ],
+          "description": "These details also update directions and calendar links."
+        },
+        {
+          "id": "muhurtham",
+          "title": "Muhurtham: when and where?",
+          "questions": [
+            {
+              "path": "muhurtham.date",
+              "type": "date",
+              "label": "Date",
+              "required": true
+            },
+            {
+              "path": "muhurtham.time",
+              "type": "time",
+              "label": "Start time",
+              "required": true
+            },
+            {
+              "path": "muhurtham.end",
+              "type": "time",
+              "label": "End time",
+              "required": false
+            },
+            {
+              "path": "muhurtham.venue",
+              "type": "text",
+              "label": "Venue",
+              "required": true,
+              "maxLength": 160
+            },
+            {
+              "path": "muhurtham.address",
+              "type": "textarea",
+              "label": "Address",
+              "required": true,
+              "maxLength": 350
+            },
+            {
+              "path": "muhurtham.mapUrl",
+              "type": "url",
+              "label": "Directions link",
+              "required": false,
+              "maxLength": 500
+            },
+            {
+              "path": "muhurtham.note",
+              "type": "textarea",
+              "label": "Event note",
+              "required": false,
+              "maxLength": 350
+            },
+            {
+              "path": "muhurtham.dress",
+              "type": "text",
+              "label": "Dress code",
+              "required": false,
+              "maxLength": 160
+            }
+          ],
+          "description": "These details also update directions and calendar links."
+        },
+        {
+          "id": "letter",
+          "title": "A letter in your own words",
+          "questions": [
+            {
+              "path": "letter",
+              "type": "textarea",
+              "label": "Your letter to guests",
+              "maxLength": 1400
+            }
+          ],
+          "description": ""
+        },
+        {
+          "id": "gallery",
+          "title": "Your photo album",
+          "questions": [
+            {
+              "path": "gallery",
+              "type": "repeater",
+              "label": "Photo album",
+              "fields": [
+                {
+                  "path": "photo",
+                  "type": "image",
+                  "label": "Photo"
+                },
+                {
+                  "path": "caption",
+                  "type": "text",
+                  "label": "Caption",
+                  "maxLength": 160
+                }
+              ],
+              "maxItems": 5
+            }
+          ],
+          "description": ""
+        },
+        {
+          "id": "media",
+          "title": "Portrait and music",
+          "questions": [
+            {
+              "path": "photo",
+              "type": "image",
+              "label": "Main portrait"
+            },
+            {
+              "path": "music",
+              "type": "audio",
+              "label": "Background music"
+            }
+          ],
+          "description": "Phone photos, including HEIC, are prepared automatically. Music starts after guest interaction."
+        },
+        {
+          "id": "replies",
+          "title": "How should guests reply?",
+          "questions": [
+            {
+              "path": "rsvpDeadline",
+              "type": "date",
+              "label": "Reply by"
+            },
+            {
+              "path": "whatsapp",
+              "type": "text",
+              "label": "WhatsApp number with country code",
+              "format": "phone",
+              "maxLength": 160
+            }
+          ],
+          "description": ""
+        },
+        {
+          "id": "review",
+          "title": "Review Jasmine Arch",
+          "questions": [],
+          "description": "Preview every section and check your event dates, media and invitation address."
+        }
+      ],
+      "title": "Create your Jasmine Arch invitation",
+      "version": 1,
+      "thumbnail": "/assets/cinorev/jasmine-arch/poster.webp",
+      "initialContent": {
+        "_form": {
+          "authored": true
+        },
+        "language": "en",
+        "utcOffset": "+08:00"
+      }
+    }
+  },
+  "5cc03bf2-1132-45ec-99ef-80adbbfaa845": {
+    "template_id": "christian-bells",
+    "template_version_id": "5cc03bf2-1132-45ec-99ef-80adbbfaa845",
+    "revision": 2,
+    "definition": {
+      "name": "Bells & Blessings",
+      "steps": [
+        {
+          "id": "couple",
+          "title": "What are the couple’s names?",
+          "questions": [
+            {
+              "path": "groom",
+              "type": "text",
+              "label": "Groom’s name",
+              "required": true,
+              "maxLength": 250
+            },
+            {
+              "path": "bride",
+              "type": "text",
+              "label": "Bride’s name",
+              "required": true,
+              "maxLength": 250
+            },
+            {
+              "path": "language",
+              "type": "select",
+              "label": "Invitation language",
+              "options": [
+                "en",
+                "ml",
+                "ta",
+                "te",
+                "kn",
+                "hi"
+              ],
+              "required": true
+            },
+            {
+              "path": "_form.families",
+              "type": "boolean",
+              "label": "Add family names"
+            },
+            {
+              "path": "groomFamily",
+              "type": "text",
+              "when": "_form.families",
+              "label": "Groom’s family",
+              "maxLength": 250
+            },
+            {
+              "path": "brideFamily",
+              "type": "text",
+              "when": "_form.families",
+              "label": "Bride’s family",
+              "maxLength": 250
+            }
+          ],
+          "description": ""
+        },
+        {
+          "id": "date",
+          "title": "When is your wedding?",
+          "questions": [
+            {
+              "path": "date",
+              "type": "date",
+              "label": "Wedding date",
+              "required": true
+            },
+            {
+              "path": "time",
+              "type": "time",
+              "label": "Wedding time",
+              "required": true
+            }
+          ],
+          "description": ""
+        },
+        {
+          "id": "ceremonies",
+          "title": "Where will you celebrate?",
+          "questions": [
+            {
+              "path": "events",
+              "type": "repeater",
+              "label": "Ceremony",
+              "fields": [
+                {
+                  "path": "title",
+                  "type": "text",
+                  "label": "Celebration name",
+                  "required": true,
+                  "maxLength": 250
+                },
+                {
+                  "path": "date",
+                  "type": "date",
+                  "label": "Date",
+                  "required": true
+                },
+                {
+                  "path": "time",
+                  "type": "time",
+                  "label": "Time",
+                  "required": true
+                },
+                {
+                  "path": "venue",
+                  "type": "text",
+                  "label": "Venue",
+                  "required": true,
+                  "maxLength": 250
+                },
+                {
+                  "path": "address",
+                  "type": "text",
+                  "label": "Address",
+                  "required": true,
+                  "maxLength": 250
+                },
+                {
+                  "path": "mapUrl",
+                  "type": "url",
+                  "label": "Directions link",
+                  "maxLength": 4000
+                },
+                {
+                  "path": "note",
+                  "type": "textarea",
+                  "label": "Guest note",
+                  "maxLength": 250
+                }
+              ],
+              "maxItems": 6,
+              "required": true
+            }
+          ],
+          "description": "Add your wedding ceremony and any other celebrations."
+        },
+        {
+          "id": "wording",
+          "title": "How would you like to invite your guests?",
+          "questions": [
+            {
+              "path": "welcome",
+              "type": "textarea",
+              "label": "Invitation wording",
+              "maxLength": 2000
+            },
+            {
+              "path": "_form.blessing",
+              "type": "boolean",
+              "label": "Include a verse or blessing"
+            },
+            {
+              "path": "verse",
+              "type": "textarea",
+              "when": "_form.blessing",
+              "label": "Verse or blessing",
+              "maxLength": 4000
+            },
+            {
+              "path": "verseCitation",
+              "type": "text",
+              "when": "_form.blessing",
+              "label": "Citation",
+              "maxLength": 250
+            }
+          ],
+          "description": ""
+        },
+        {
+          "id": "story",
+          "title": "Would you like to share your story?",
+          "questions": [
+            {
+              "path": "_form.story",
+              "type": "boolean",
+              "label": "Share our story"
+            },
+            {
+              "path": "story",
+              "type": "repeater",
+              "when": "_form.story",
+              "label": "Story chapter",
+              "fields": [
+                {
+                  "path": "title",
+                  "type": "text",
+                  "label": "Chapter title",
+                  "required": true,
+                  "maxLength": 250
+                },
+                {
+                  "path": "caption",
+                  "type": "text",
+                  "label": "Photo caption",
+                  "maxLength": 250
+                },
+                {
+                  "path": "description",
+                  "type": "textarea",
+                  "label": "Your story",
+                  "required": true,
+                  "maxLength": 4000
+                },
+                {
+                  "path": "image",
+                  "type": "image",
+                  "label": "Chapter photograph"
+                }
+              ],
+              "maxItems": 4,
+              "required": true
+            }
+          ],
+          "description": ""
+        },
+        {
+          "id": "media",
+          "title": "Add a personal touch",
+          "questions": [
+            {
+              "path": "cover",
+              "type": "image",
+              "label": "Couple photograph"
+            },
+            {
+              "path": "music",
+              "type": "audio",
+              "label": "Background music"
+            },
+            {
+              "path": "closingImage",
+              "type": "image",
+              "label": "Closing photograph"
+            }
+          ],
+          "description": ""
+        },
+        {
+          "id": "rsvp",
+          "title": "How should guests reply?",
+          "questions": [
+            {
+              "help": "Include the country code, for example 919876543210.",
+              "path": "whatsapp",
+              "type": "text",
+              "label": "RSVP WhatsApp number",
+              "format": "phone",
+              "required": true,
+              "maxLength": 250
+            },
+            {
+              "path": "rsvpDeadline",
+              "type": "date",
+              "label": "Reply by"
+            },
+            {
+              "path": "hashtag",
+              "type": "text",
+              "label": "Wedding hashtag",
+              "maxLength": 250
+            }
+          ],
+          "description": ""
+        },
+        {
+          "id": "review",
+          "title": "Your invitation is almost ready",
+          "questions": [],
+          "description": "Review your answers and preview your invitation before publishing."
+        }
+      ],
+      "title": "Customise your invitation",
+      "version": 1,
+      "thumbnail": "/assets/flagship/previews/christian-bells-approved.png",
+      "initialContent": {
+        "_form": {
+          "authored": true
+        },
+        "cover": "/assets/flagship/christian/rings.webp",
+        "story": [],
+        "verse": "I have found the one whom my soul loves.",
+        "events": [
+          {
+            "title": "Holy Matrimony"
+          }
+        ],
+        "welcome": "request the honour of your presence at the marriage of their children",
+        "language": "en",
+        "closingImage": "/assets/flagship/christian/sunlight.webp",
+        "verseCitation": "Song of Songs 3:4"
+      }
+    }
+  },
+  "b14c321b-58ff-4b67-826d-aed5ed89faeb": {
+    "template_id": "golden-hour",
+    "template_version_id": "b14c321b-58ff-4b67-826d-aed5ed89faeb",
+    "revision": 1,
+    "definition": {
+      "name": "Golden Hour",
+      "steps": [
+        {
+          "id": "welcome",
+          "title": "Whose celebration is this?",
+          "questions": [
+            {
+              "path": "groom",
+              "type": "text",
+              "label": "First name",
+              "required": true,
+              "maxLength": 160
+            },
+            {
+              "path": "bride",
+              "type": "text",
+              "label": "Second name",
+              "required": true,
+              "maxLength": 160
+            },
+            {
+              "path": "language",
+              "type": "select",
+              "label": "Invitation language",
+              "options": [
+                "en",
+                "ml",
+                "ta",
+                "te",
+                "kn",
+                "hi"
+              ],
+              "required": true
+            },
+            {
+              "path": "utcOffset",
+              "type": "select",
+              "label": "Time zone",
+              "options": [
+                "+05:30",
+                "+00:00",
+                "+01:00",
+                "+02:00",
+                "+04:00",
+                "+08:00",
+                "-04:00",
+                "-05:00"
+              ],
+              "required": true
+            }
+          ],
+          "description": "Open the rose seal"
+        },
+        {
+          "id": "family",
+          "title": "Your family invitation",
+          "questions": [
+            {
+              "path": "groomFamily",
+              "type": "textarea",
+              "label": "First family or parents",
+              "maxLength": 350
+            },
+            {
+              "path": "brideFamily",
+              "type": "textarea",
+              "label": "Second family or parents",
+              "maxLength": 350
+            },
+            {
+              "path": "closing",
+              "type": "textarea",
+              "label": "Closing wording",
+              "maxLength": 350
+            }
+          ],
+          "description": ""
+        },
+        {
+          "id": "wedding",
+          "title": "Wedding: when and where?",
+          "questions": [
+            {
+              "path": "wedding.date",
+              "type": "date",
+              "label": "Date",
+              "required": true
+            },
+            {
+              "path": "wedding.time",
+              "type": "time",
+              "label": "Start time",
+              "required": true
+            },
+            {
+              "path": "wedding.end",
+              "type": "time",
+              "label": "End time",
+              "required": false
+            },
+            {
+              "path": "wedding.venue",
+              "type": "text",
+              "label": "Venue",
+              "required": true,
+              "maxLength": 160
+            },
+            {
+              "path": "wedding.address",
+              "type": "textarea",
+              "label": "Address",
+              "required": true,
+              "maxLength": 350
+            },
+            {
+              "path": "wedding.mapUrl",
+              "type": "url",
+              "label": "Directions link",
+              "required": false,
+              "maxLength": 500
+            },
+            {
+              "path": "wedding.note",
+              "type": "textarea",
+              "label": "Event note",
+              "required": false,
+              "maxLength": 350
+            },
+            {
+              "path": "wedding.dress",
+              "type": "text",
+              "label": "Dress code",
+              "required": false,
+              "maxLength": 160
+            }
+          ],
+          "description": "These details also update directions and calendar links."
+        },
+        {
+          "id": "programme",
+          "title": "Plan your celebration",
+          "questions": [
+            {
+              "path": "programme",
+              "type": "repeater",
+              "label": "Programme",
+              "fields": [
+                {
+                  "path": "time",
+                  "type": "time",
+                  "label": "Time"
+                },
+                {
+                  "path": "title",
+                  "type": "text",
+                  "label": "Moment",
+                  "maxLength": 160
+                },
+                {
+                  "path": "description",
+                  "type": "textarea",
+                  "label": "Description",
+                  "maxLength": 250
+                }
+              ],
+              "maxItems": 4
+            }
+          ],
+          "description": ""
+        },
+        {
+          "id": "dress",
+          "title": "What should guests wear?",
+          "questions": [
+            {
+              "path": "dressCode",
+              "type": "textarea",
+              "label": "Dress code",
+              "maxLength": 350
+            }
+          ],
+          "description": ""
+        },
+        {
+          "id": "media",
+          "title": "Portrait and music",
+          "questions": [
+            {
+              "path": "photo",
+              "type": "image",
+              "label": "Main portrait"
+            },
+            {
+              "path": "music",
+              "type": "audio",
+              "label": "Background music"
+            }
+          ],
+          "description": "Phone photos, including HEIC, are prepared automatically. Music starts after guest interaction."
+        },
+        {
+          "id": "replies",
+          "title": "How should guests reply?",
+          "questions": [
+            {
+              "path": "rsvpDeadline",
+              "type": "date",
+              "label": "Reply by"
+            },
+            {
+              "path": "whatsapp",
+              "type": "text",
+              "label": "WhatsApp number with country code",
+              "format": "phone",
+              "maxLength": 160
+            }
+          ],
+          "description": ""
+        },
+        {
+          "id": "review",
+          "title": "Review Golden Hour",
+          "questions": [],
+          "description": "Preview every section and check your event dates, media and invitation address."
+        }
+      ],
+      "title": "Create your Golden Hour invitation",
+      "version": 1,
+      "thumbnail": "/assets/signature-v1/golden-hour/poster.webp",
+      "initialContent": {
+        "_form": {
+          "authored": true
+        },
+        "language": "en",
+        "utcOffset": "+05:30"
+      }
+    }
+  },
+  "0d4227e7-3865-4db2-b505-efd3a4323ef0": {
+    "template_id": "jasmine-arch",
+    "template_version_id": "0d4227e7-3865-4db2-b505-efd3a4323ef0",
+    "revision": 1,
+    "definition": {
+      "name": "Jasmine Arch",
+      "steps": [
+        {
+          "id": "welcome",
+          "title": "Whose celebration is this?",
+          "questions": [
+            {
+              "path": "groom",
+              "type": "text",
+              "label": "First name",
+              "required": true,
+              "maxLength": 160
+            },
+            {
+              "path": "bride",
+              "type": "text",
+              "label": "Second name",
+              "required": true,
+              "maxLength": 160
+            },
+            {
+              "path": "language",
+              "type": "select",
+              "label": "Invitation language",
+              "options": [
+                "en",
+                "ml",
+                "ta",
+                "te",
+                "kn",
+                "hi"
+              ],
+              "required": true
+            },
+            {
+              "path": "utcOffset",
+              "type": "select",
+              "label": "Time zone",
+              "options": [
+                "+05:30",
+                "+00:00",
+                "+01:00",
+                "+02:00",
+                "+04:00",
+                "+08:00",
+                "-04:00",
+                "-05:00"
+              ],
+              "required": true
+            }
+          ],
+          "description": "Part the jasmine curtain"
+        },
+        {
+          "id": "family",
+          "title": "Your family invitation",
+          "questions": [
+            {
+              "path": "groomFamily",
+              "type": "textarea",
+              "label": "First family or parents",
+              "maxLength": 350
+            },
+            {
+              "path": "brideFamily",
+              "type": "textarea",
+              "label": "Second family or parents",
+              "maxLength": 350
+            },
+            {
+              "path": "closing",
+              "type": "textarea",
+              "label": "Closing wording",
+              "maxLength": 350
+            }
+          ],
+          "description": ""
+        },
+        {
+          "id": "reception",
+          "title": "Reception: when and where?",
+          "questions": [
+            {
+              "path": "reception.date",
+              "type": "date",
+              "label": "Date",
+              "required": true
+            },
+            {
+              "path": "reception.time",
+              "type": "time",
+              "label": "Start time",
+              "required": true
+            },
+            {
+              "path": "reception.end",
+              "type": "time",
+              "label": "End time",
+              "required": false
+            },
+            {
+              "path": "reception.venue",
+              "type": "text",
+              "label": "Venue",
+              "required": true,
+              "maxLength": 160
+            },
+            {
+              "path": "reception.address",
+              "type": "textarea",
+              "label": "Address",
+              "required": true,
+              "maxLength": 350
+            },
+            {
+              "path": "reception.mapUrl",
+              "type": "url",
+              "label": "Directions link",
+              "required": false,
+              "maxLength": 500
+            },
+            {
+              "path": "reception.note",
+              "type": "textarea",
+              "label": "Event note",
+              "required": false,
+              "maxLength": 350
+            },
+            {
+              "path": "reception.dress",
+              "type": "text",
+              "label": "Dress code",
+              "required": false,
+              "maxLength": 160
+            }
+          ],
+          "description": "These details also update directions and calendar links."
+        },
+        {
+          "id": "muhurtham",
+          "title": "Muhurtham: when and where?",
+          "questions": [
+            {
+              "path": "muhurtham.date",
+              "type": "date",
+              "label": "Date",
+              "required": true
+            },
+            {
+              "path": "muhurtham.time",
+              "type": "time",
+              "label": "Start time",
+              "required": true
+            },
+            {
+              "path": "muhurtham.end",
+              "type": "time",
+              "label": "End time",
+              "required": false
+            },
+            {
+              "path": "muhurtham.venue",
+              "type": "text",
+              "label": "Venue",
+              "required": true,
+              "maxLength": 160
+            },
+            {
+              "path": "muhurtham.address",
+              "type": "textarea",
+              "label": "Address",
+              "required": true,
+              "maxLength": 350
+            },
+            {
+              "path": "muhurtham.mapUrl",
+              "type": "url",
+              "label": "Directions link",
+              "required": false,
+              "maxLength": 500
+            },
+            {
+              "path": "muhurtham.note",
+              "type": "textarea",
+              "label": "Event note",
+              "required": false,
+              "maxLength": 350
+            },
+            {
+              "path": "muhurtham.dress",
+              "type": "text",
+              "label": "Dress code",
+              "required": false,
+              "maxLength": 160
+            }
+          ],
+          "description": "These details also update directions and calendar links."
+        },
+        {
+          "id": "letter",
+          "title": "A letter in your own words",
+          "questions": [
+            {
+              "path": "letter",
+              "type": "textarea",
+              "label": "Your letter to guests",
+              "maxLength": 1400
+            }
+          ],
+          "description": ""
+        },
+        {
+          "id": "gallery",
+          "title": "Your photo album",
+          "questions": [
+            {
+              "path": "gallery",
+              "type": "repeater",
+              "label": "Photo album",
+              "fields": [
+                {
+                  "path": "photo",
+                  "type": "image",
+                  "label": "Photo"
+                },
+                {
+                  "path": "caption",
+                  "type": "text",
+                  "label": "Caption",
+                  "maxLength": 160
+                }
+              ],
+              "maxItems": 5
+            }
+          ],
+          "description": ""
+        },
+        {
+          "id": "media",
+          "title": "Portrait and music",
+          "questions": [
+            {
+              "path": "photo",
+              "type": "image",
+              "label": "Main portrait"
+            },
+            {
+              "path": "music",
+              "type": "audio",
+              "label": "Background music"
+            }
+          ],
+          "description": "Phone photos, including HEIC, are prepared automatically. Music starts after guest interaction."
+        },
+        {
+          "id": "replies",
+          "title": "How should guests reply?",
+          "questions": [
+            {
+              "path": "rsvpDeadline",
+              "type": "date",
+              "label": "Reply by"
+            },
+            {
+              "path": "whatsapp",
+              "type": "text",
+              "label": "WhatsApp number with country code",
+              "format": "phone",
+              "maxLength": 160
+            }
+          ],
+          "description": ""
+        },
+        {
+          "id": "review",
+          "title": "Review Jasmine Arch",
+          "questions": [],
+          "description": "Preview every section and check your event dates, media and invitation address."
+        }
+      ],
+      "title": "Create your Jasmine Arch invitation",
+      "version": 1,
+      "thumbnail": "/assets/signature-v1/jasmine-arch/poster.webp",
+      "initialContent": {
+        "_form": {
+          "authored": true
+        },
+        "language": "en",
+        "utcOffset": "+08:00"
+      }
+    }
+  },
+  "99241622-3a0f-4a9d-b65a-de8beebeb57a": {
+    "template_id": "christian-bells",
+    "template_version_id": "99241622-3a0f-4a9d-b65a-de8beebeb57a",
+    "revision": 1,
+    "definition": {
+      "name": "Bells & Blessings",
+      "steps": [
+        {
+          "id": "couple",
+          "title": "What are the couple’s names?",
+          "questions": [
+            {
+              "path": "groom",
+              "type": "text",
+              "label": "Groom’s name",
+              "required": true,
+              "maxLength": 250
+            },
+            {
+              "path": "bride",
+              "type": "text",
+              "label": "Bride’s name",
+              "required": true,
+              "maxLength": 250
+            },
+            {
+              "path": "language",
+              "type": "select",
+              "label": "Invitation language",
+              "options": [
+                "en",
+                "ml",
+                "ta",
+                "te",
+                "kn",
+                "hi"
+              ],
+              "required": true
+            },
+            {
+              "path": "_form.families",
+              "type": "boolean",
+              "label": "Add family names"
+            },
+            {
+              "path": "groomFamily",
+              "type": "text",
+              "when": "_form.families",
+              "label": "Groom’s family",
+              "maxLength": 250
+            },
+            {
+              "path": "brideFamily",
+              "type": "text",
+              "when": "_form.families",
+              "label": "Bride’s family",
+              "maxLength": 250
+            }
+          ],
+          "description": ""
+        },
+        {
+          "id": "date",
+          "title": "When is your wedding?",
+          "questions": [
+            {
+              "path": "date",
+              "type": "date",
+              "label": "Wedding date",
+              "required": true
+            },
+            {
+              "path": "time",
+              "type": "time",
+              "label": "Wedding time",
+              "required": true
+            }
+          ],
+          "description": ""
+        },
+        {
+          "id": "ceremonies",
+          "title": "Where will you celebrate?",
+          "questions": [
+            {
+              "path": "events",
+              "type": "repeater",
+              "label": "Ceremony",
+              "fields": [
+                {
+                  "path": "title",
+                  "type": "text",
+                  "label": "Celebration name",
+                  "required": true,
+                  "maxLength": 250
+                },
+                {
+                  "path": "date",
+                  "type": "date",
+                  "label": "Date",
+                  "required": true
+                },
+                {
+                  "path": "time",
+                  "type": "time",
+                  "label": "Time",
+                  "required": true
+                },
+                {
+                  "path": "venue",
+                  "type": "text",
+                  "label": "Venue",
+                  "required": true,
+                  "maxLength": 250
+                },
+                {
+                  "path": "address",
+                  "type": "text",
+                  "label": "Address",
+                  "required": true,
+                  "maxLength": 250
+                },
+                {
+                  "path": "mapUrl",
+                  "type": "url",
+                  "label": "Directions link",
+                  "maxLength": 4000
+                },
+                {
+                  "path": "note",
+                  "type": "textarea",
+                  "label": "Guest note",
+                  "maxLength": 250
+                }
+              ],
+              "maxItems": 6,
+              "required": true
+            }
+          ],
+          "description": "Add your wedding ceremony and any other celebrations."
+        },
+        {
+          "id": "wording",
+          "title": "How would you like to invite your guests?",
+          "questions": [
+            {
+              "path": "welcome",
+              "type": "textarea",
+              "label": "Invitation wording",
+              "maxLength": 2000
+            },
+            {
+              "path": "_form.blessing",
+              "type": "boolean",
+              "label": "Include a verse or blessing"
+            },
+            {
+              "path": "verse",
+              "type": "textarea",
+              "when": "_form.blessing",
+              "label": "Verse or blessing",
+              "maxLength": 4000
+            },
+            {
+              "path": "verseCitation",
+              "type": "text",
+              "when": "_form.blessing",
+              "label": "Citation",
+              "maxLength": 250
+            }
+          ],
+          "description": ""
+        },
+        {
+          "id": "story",
+          "title": "Would you like to share your story?",
+          "questions": [
+            {
+              "path": "_form.story",
+              "type": "boolean",
+              "label": "Share our story"
+            },
+            {
+              "path": "story",
+              "type": "repeater",
+              "when": "_form.story",
+              "label": "Story chapter",
+              "fields": [
+                {
+                  "path": "title",
+                  "type": "text",
+                  "label": "Chapter title",
+                  "required": true,
+                  "maxLength": 250
+                },
+                {
+                  "path": "caption",
+                  "type": "text",
+                  "label": "Photo caption",
+                  "maxLength": 250
+                },
+                {
+                  "path": "description",
+                  "type": "textarea",
+                  "label": "Your story",
+                  "required": true,
+                  "maxLength": 4000
+                },
+                {
+                  "path": "image",
+                  "type": "image",
+                  "label": "Chapter photograph"
+                }
+              ],
+              "maxItems": 4,
+              "required": true
+            }
+          ],
+          "description": ""
+        },
+        {
+          "id": "media",
+          "title": "Add a personal touch",
+          "questions": [
+            {
+              "path": "cover",
+              "type": "image",
+              "label": "Couple photograph"
+            },
+            {
+              "path": "music",
+              "type": "audio",
+              "label": "Background music"
+            },
+            {
+              "path": "closingImage",
+              "type": "image",
+              "label": "Closing photograph"
+            }
+          ],
+          "description": ""
+        },
+        {
+          "id": "rsvp",
+          "title": "How should guests reply?",
+          "questions": [
+            {
+              "help": "Include the country code, for example 919876543210.",
+              "path": "whatsapp",
+              "type": "text",
+              "label": "RSVP WhatsApp number",
+              "format": "phone",
+              "required": true,
+              "maxLength": 250
+            },
+            {
+              "path": "rsvpDeadline",
+              "type": "date",
+              "label": "Reply by"
+            },
+            {
+              "path": "hashtag",
+              "type": "text",
+              "label": "Wedding hashtag",
+              "maxLength": 250
+            }
+          ],
+          "description": ""
+        },
+        {
+          "id": "review",
+          "title": "Your invitation is almost ready",
+          "questions": [],
+          "description": "Review your answers and preview your invitation before publishing."
+        }
+      ],
+      "title": "Customise your invitation",
+      "version": 1,
+      "thumbnail": "/assets/signature-v1/christian-bells/poster.webp",
+      "initialContent": {
+        "_form": {
+          "authored": true
+        },
+        "cover": "/assets/flagship/christian/rings.webp",
+        "story": [],
+        "verse": "I have found the one whom my soul loves.",
+        "events": [
+          {
+            "title": "Holy Matrimony"
+          }
+        ],
+        "welcome": "request the honour of your presence at the marriage of their children",
+        "language": "en",
+        "closingImage": "/assets/flagship/christian/sunlight.webp",
+        "verseCitation": "Song of Songs 3:4"
+      }
+    }
+  }
+}

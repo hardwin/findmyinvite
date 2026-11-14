@@ -65,9 +65,9 @@ const maps={
 };
 export function previewContent(version,language){
  if(!INVITATION_LANGUAGES.includes(language))language='en';
- if(CINOREV_RENDERERS.includes(version.renderer))return {...structuredClone(version.defaults),language,_catalogPreview:true,previewGuest:previewCopy.yourFamily?.[language]||'Your Family'};
+ if(CINOREV_RENDERERS.includes(version.renderer))return {...structuredClone(version.defaults),language,_catalogPreview:true,previewGuest:''};
  const content=structuredClone(version.defaults);if(["thiruvarul","kalyana-payanam"].includes(version.template_id))return journeyPreview(version.template_id,content,language);if(version.template_id==='theeram')return theeramPreview(content,language);
- if(language==='en'){content.language='en';content._catalogPreview=true;content.previewGuest='Your Family';if(version.template_id==='embroidered-garden'){content.section1.text0='Welcome to our wedding';content.section1.text1='We cannot wait to celebrate this magical day with the people we love.';}return content;}
+ if(language==='en'){content.language='en';content._catalogPreview=true;content.previewGuest='';if(version.template_id==='embroidered-garden'){content.section1.text0='Welcome to our wedding';content.section1.text1='We cannot wait to celebrate this magical day with the people we love.';}return content;}
  const profile=maps[version.template_id];if(!profile)throw Error('This design has no translated preview.');
  const dict=previewDictionary(language),pair=couples[version.template_id][language];
  const phrase=key=>key==='stayDates'?'19–21 '+new Intl.DateTimeFormat(languageLocale(language),{month:'long',year:'numeric',timeZone:'UTC'}).format(new Date('2027-05-20')):['welcomeDate','farewellDate','recoveryDate'].includes(key)?new Intl.DateTimeFormat(languageLocale(language),{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'}).format(new Date(content[key.replace('Date','')]?.date||content.date)):key==='gatheringHeading'?dict['come say hello']:key==='empty'?'':key==='welcomeHeading'?dict['welcome to our wedding']:key==='locationHeading'?dict.location:previewCopy[key]?.[language];
@@ -81,5 +81,5 @@ export function previewContent(version,language){
   if(/(?:^|\.)(?:icon|language|utcOffset)$/.test(path)||/^(https?:|\/|#|[+\d€])/.test(value))return value;
   return dict[value.trim().replace(/\s+/g,' ').toLowerCase()]||value;
  }
- const result=walk(content);result.previewGuest=previewCopy.yourFamily[language];result.language=language;result._catalogPreview=true;return result;
+ const result=walk(content);result.previewGuest='';result.language=language;result._catalogPreview=true;return result;
 }

@@ -26,6 +26,9 @@ export function startCinorev(config:any, resolveEvents:any,createInteractions:an
  const escape=(v:any)=>String(v??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]!));
  const one=(s:string)=>document.querySelector(s) as HTMLElement|null;
  const all=(s:string,root:ParentNode=document)=>Array.from(root.querySelectorAll(s)) as HTMLElement[];
+ // A preview has no recipient until an explicit guest link is supplied. Keep
+ // the existing space, but never show a captured "Dear Your Family" placeholder.
+ if(preview&&!String(config.guest||'').trim())all('#dear,#g-dear').forEach(el=>{el.style.visibility='hidden';el.setAttribute('aria-hidden','true');});
  const defaultValues=new Set<string>();const defaults=(v:any)=>{if(typeof v==='string')defaultValues.add(v);else if(v&&typeof v==='object')Object.values(v).forEach(defaults);};defaults(release.baseline.defaults||release.baseline.copy);
  const protectedValues=new Set<string>();const protect=(v:any)=>{if(typeof v==='string'&&!defaultValues.has(v))protectedValues.add(v);else if(v&&typeof v==='object')Object.values(v).forEach(protect);};if(!c._catalogPreview)protect(c);
  const authored=(v:any)=>typeof v==='string'&&!protectedValues.has(v)?t(v):String(v??'');
