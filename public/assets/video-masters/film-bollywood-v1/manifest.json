@@ -1,0 +1,90 @@
+{
+  "id": "film-bollywood-v1",
+  "version": 1,
+  "rendererVersion": "scene-film-v1",
+  "sceneDesign": "bollywood",
+  "kind": "webgl",
+  "output": {
+    "width": 720,
+    "height": 1280,
+    "fps": 24,
+    "frames": 1220,
+    "duration": 50.833333333333336
+  },
+  "scenes": [
+    {
+      "id": "title",
+      "name": "Title",
+      "start": 0,
+      "end": 113,
+      "reviewFrame": 77,
+      "layers": []
+    },
+    {
+      "id": "couple",
+      "name": "Couple",
+      "start": 113,
+      "end": 302,
+      "reviewFrame": 245,
+      "layers": []
+    },
+    {
+      "id": "invitation",
+      "name": "Invitation",
+      "start": 302,
+      "end": 468,
+      "reviewFrame": 432,
+      "layers": []
+    },
+    {
+      "id": "shows",
+      "name": "Shows",
+      "start": 468,
+      "end": 799,
+      "reviewFrame": 533,
+      "layers": []
+    },
+    {
+      "id": "wedding",
+      "name": "Wedding",
+      "start": 799,
+      "end": 931,
+      "reviewFrame": 874,
+      "layers": []
+    },
+    {
+      "id": "reception",
+      "name": "Reception",
+      "start": 931,
+      "end": 1039,
+      "reviewFrame": 998,
+      "layers": []
+    },
+    {
+      "id": "thanks",
+      "name": "Thank you",
+      "start": 1039,
+      "end": 1220,
+      "reviewFrame": 1128,
+      "layers": []
+    }
+  ],
+  "assets": {
+    "sceneBundle": {
+      "path": "/assets/video-masters/film-bollywood-v1/asset-index.json",
+      "sha256": "bb11ee7f25701f14acfbbe35eb53f47a19aada2aea755acf43cea91e79f540fc"
+    }
+  },
+  "release": {
+    "approved": false
+  },
+  "catalog": {
+    "poster": "poster.jpg",
+    "posters": {
+      "320": "poster-320-v1.webp",
+      "640": "poster-640-v1.webp",
+      "960": "poster-960-v1.webp"
+    },
+    "preview": "demo-v1.mp4"
+  }
+}

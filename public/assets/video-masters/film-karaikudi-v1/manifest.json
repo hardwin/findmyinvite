@@ -1,0 +1,58 @@
+{
+  "id": "film-karaikudi-v1",
+  "version": 1,
+  "rendererVersion": "scene-film-v1",
+  "sceneDesign": "karaikudi",
+  "kind": "page",
+  "output": {
+    "width": 720,
+    "height": 1280,
+    "fps": 24,
+    "frames": 756,
+    "duration": 31.5
+  },
+  "scenes": [
+    {
+      "id": "title",
+      "name": "Title",
+      "start": 0,
+      "end": 302,
+      "reviewFrame": 101,
+      "layers": []
+    },
+    {
+      "id": "names",
+      "name": "Names",
+      "start": 302,
+      "end": 360,
+      "reviewFrame": 374,
+      "layers": []
+    },
+    {
+      "id": "details",
+      "name": "Details",
+      "start": 360,
+      "end": 756,
+      "reviewFrame": 696,
+      "layers": []
+    }
+  ],
+  "assets": {
+    "sceneBundle": {
+      "path": "/assets/video-masters/film-karaikudi-v1/asset-index.json",
+      "sha256": "10c8dfbcde76697048ab1db070ced179185bbcbaae20109fbd4e33ad48acee85"
+    }
+  },
+  "release": {
+    "approved": false
+  },
+  "catalog": {
+    "poster": "poster.jpg",
+    "posters": {
+      "320": "poster-320-v1.webp",
+      "640": "poster-640-v1.webp",
+      "960": "poster-960-v1.webp"
+    },
+    "preview": "demo-v1.mp4"
+  }
+}

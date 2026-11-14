@@ -1,0 +1,82 @@
+{
+  "id": "film-veedu-v1",
+  "version": 1,
+  "rendererVersion": "scene-film-v1",
+  "sceneDesign": "veedu",
+  "kind": "webgl",
+  "output": {
+    "width": 720,
+    "height": 1280,
+    "fps": 24,
+    "frames": 3192,
+    "duration": 133
+  },
+  "scenes": [
+    {
+      "id": "opening",
+      "name": "Opening",
+      "start": 0,
+      "end": 240,
+      "reviewFrame": 173,
+      "layers": []
+    },
+    {
+      "id": "invitation",
+      "name": "Invitation",
+      "start": 240,
+      "end": 526,
+      "reviewFrame": 470,
+      "layers": []
+    },
+    {
+      "id": "events",
+      "name": "Events",
+      "start": 526,
+      "end": 1994,
+      "reviewFrame": 958,
+      "layers": []
+    },
+    {
+      "id": "wedding",
+      "name": "Wedding",
+      "start": 1994,
+      "end": 2484,
+      "reviewFrame": 2426,
+      "layers": []
+    },
+    {
+      "id": "reception",
+      "name": "Reception",
+      "start": 2484,
+      "end": 2971,
+      "reviewFrame": 2916,
+      "layers": []
+    },
+    {
+      "id": "thanks",
+      "name": "Thank you",
+      "start": 2971,
+      "end": 3192,
+      "reviewFrame": 3139,
+      "layers": []
+    }
+  ],
+  "assets": {
+    "sceneBundle": {
+      "path": "/assets/video-masters/film-veedu-v1/asset-index.json",
+      "sha256": "362dec01d535b3075cca7e5cf8566ae507046e9c36546cc556832a459edc493f"
+    }
+  },
+  "release": {
+    "approved": false
+  },
+  "catalog": {
+    "poster": "poster.jpg",
+    "posters": {
+      "320": "poster-320-v1.webp",
+      "640": "poster-640-v1.webp",
+      "960": "poster-960-v1.webp"
+    },
+    "preview": "demo-v1.mp4"
+  }
+}

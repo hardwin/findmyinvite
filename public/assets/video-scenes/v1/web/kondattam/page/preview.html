@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=1080, height=1920" />
+  <title>Wedding invitation — Kondattam (working name)</title>
+  <style>
+    @font-face { font-family: "Great Vibes"; src: url("assets/fonts/great-vibes-latin-400.woff2") format("woff2"); font-weight: 400; }
+    @font-face { font-family: "Cormorant Garamond"; src: url("assets/fonts/cormorant-garamond-latin-600.woff2") format("woff2"); font-weight: 600; }
+    @font-face { font-family: "Cormorant Garamond"; src: url("assets/fonts/cormorant-garamond-latin-600-italic.woff2") format("woff2"); font-weight: 600; font-style: italic; }
+    @font-face { font-family: "Arima"; src: url("assets/fonts/arima-tamil-700.woff2") format("woff2"); font-weight: 700; unicode-range: U+0964-0965, U+0B82-0BFA, U+200C-200D, U+20B9, U+25CC; }
+    @font-face { font-family: "Arima"; src: url("assets/fonts/arima-latin-700.woff2") format("woff2"); font-weight: 700; unicode-range: U+0000-00FF, U+2000-206F; }
+    @font-face { font-family: "Noto Serif Tamil"; src: url("assets/fonts/noto-serif-tamil-tamil-600.woff2") format("woff2"); font-weight: 600; unicode-range: U+0964-0965, U+0B82-0BFA, U+200C-200D, U+20B9, U+25CC; }
+    :root { --rose: #8c1c3d; --plum: #7a2445; --soft: #8c3a55; --gold: #9a6a2a; --navy: #1f3466; --cream: rgba(255, 246, 238, 0.97); }
+    html, body { margin: 0; background: #f6dcd2; }
+    #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: #f6dcd2; }
+    .scene, .cam { position: absolute; width: 1080px; height: 1920px; }
+    .scene { overflow: hidden; }
+    .lay { position: absolute; display: block; max-width: none; }
+    img.lay { height: auto; }
+    .glow, .backing { border-radius: 50%; }
+    .glow { background: radial-gradient(closest-side, rgba(255, 247, 240, 0.95), rgba(255, 240, 232, 0.55) 55%, rgba(255, 236, 228, 0) 100%); }
+    .glow.white { background: radial-gradient(closest-side, rgba(255, 253, 250, 1), rgba(255, 247, 242, 0.8) 50%, rgba(255, 240, 235, 0) 100%); }
+    .glow.warm { background: radial-gradient(closest-side, rgba(255, 240, 200, 0.85), rgba(255, 226, 200, 0.4) 55%, rgba(255, 220, 200, 0) 100%); }
+    .backing { background: radial-gradient(closest-side, rgba(255, 246, 238, 0.96) 0%, rgba(255, 244, 236, 0.82) 48%, rgba(255, 240, 232, 0) 100%); }
+
+    /* text */
+    .txt { width: max-content; white-space: nowrap; text-align: center; }
+    .txt .ghost { position: absolute; left: 0; top: 0; width: 100%; text-align: center; opacity: 0; color: rgba(140, 28, 61, 0.45); -webkit-text-stroke: 0; text-shadow: none; filter: blur(3px); }
+    .script { font-family: "Great Vibes"; font-weight: 400; color: var(--rose); -webkit-text-stroke: 2.2px var(--rose); paint-order: stroke fill; line-height: 1.12; padding: 0 0.22em;
+      text-shadow: 0 0 18px var(--cream), 0 0 5px var(--cream), 0 5px 12px rgba(110, 25, 50, 0.26); }
+    .script.md { font-size: 92px; } .script.lg { font-size: 128px; } .script.xl { font-size: 150px; } .script.xxl { font-size: 186px; }
+    .label { font-family: "Cormorant Garamond"; font-weight: 600; font-size: 40px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--plum); padding-left: 0.2em;
+      text-shadow: 0 0 12px var(--cream), 0 0 3px var(--cream); }
+    .serif, .serifI { font-family: "Cormorant Garamond"; font-weight: 600; color: var(--plum); text-shadow: 0 0 12px var(--cream), 0 0 3px var(--cream); }
+    .serifI { font-style: italic; color: var(--soft); }
+    .big { font-size: 56px; line-height: 1.2; }
+    .serif.venue { font-size: 46px; white-space: normal; width: 880px; line-height: 1.25; }
+    .serif.venue .vn { display: block; font-size: 1.22em; line-height: 1.15; }   /* em: the text fit shrinks the whole block */
+    .serif.venue .va { display: block; font-size: 0.96em; line-height: 1.25; }
+    .serif.names { font-size: 60px; letter-spacing: 0.02em; }
+
+    /* names: flower photo frame */
+    .framebox { width: 760px; height: 935px; }
+    .framebox .shadow { position: absolute; inset: 14px; box-shadow: 0 34px 60px rgba(110, 40, 60, 0.32); }
+    .paper { position: absolute; inset: 0; background: linear-gradient(160deg, #fffaf3, #f9eee2); filter: url(#deckle); }
+    .photo { position: absolute; left: 30px; top: 30px; width: 700px; height: 875px; overflow: hidden; background: #f3dccf; box-shadow: inset 0 0 0 2px rgba(201, 161, 74, 0.6); }
+
+    /* invitation card */
+    .card { width: 900px; height: 1350px; border-radius: 30px; background: rgba(255, 250, 245, 0.95);
+      box-shadow: 0 26px 64px rgba(120, 40, 60, 0.3), inset 0 0 0 16px rgba(255, 250, 245, 1), inset 0 0 0 18px #c9a14a, inset 0 0 0 24px rgba(255, 250, 245, 1), inset 0 0 0 25px #dcbd70; }
+    .cardcol { position: absolute; inset: 70px 60px 80px; display: flex; flex-direction: column; align-items: center; justify-content: space-evenly; }
+    .ganesha { width: 150px; height: auto; }
+    .iline { text-align: center; max-width: 780px; font-family: "Cormorant Garamond"; font-weight: 600; color: var(--plum); line-height: 1.22; }
+    .iline.caps { font-size: 34px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); padding-left: 0.18em; }
+    .iline.serif { font-size: 50px; text-shadow: none; }
+    .iline.serifI { font-size: 44px; font-style: italic; color: var(--soft); text-shadow: none; }
+    .iline.script { font-family: "Great Vibes"; font-weight: 400; font-size: 132px; line-height: 1.05; color: var(--rose); -webkit-text-stroke: 1.8px var(--rose); paint-order: stroke fill; padding: 0 0.2em; }
+    /* the write-on mask covers the line's box only: tall padding (cancelled by negative margins, so the layout is
+       unchanged) keeps capital swashes (V, P) and tails (g, y) inside it, so nothing is cut while a line writes on */
+    .iline { padding-top: 0.3em; padding-bottom: 0.3em; margin: -0.3em 0; }
+    .iline.script { padding-top: 0.5em; padding-bottom: 0.45em; margin: -0.5em 0 -0.45em; }
+
+    /* lamp */
+    .lampbox { width: 328px; height: 1250px; }
+    .lampimg { position: absolute; left: 0; top: 0; width: 100%; height: auto; }
+    .flame { position: absolute; width: 130px; height: 170px; border-radius: 50%;
+      background: radial-gradient(closest-side, rgba(255, 250, 215, 0.95), rgba(255, 205, 100, 0.55) 45%, rgba(255, 170, 60, 0) 100%); }
+
+    /* calendar + sticky notes */
+    .calpage { width: 900px; padding: 34px 50px 40px; box-sizing: border-box; background: linear-gradient(175deg, #fffbf4, #fbf1e6); border-radius: 12px;
+      box-shadow: 0 26px 60px rgba(120, 40, 60, 0.26); }
+    .calhead { display: flex; align-items: baseline; justify-content: center; gap: 26px; height: 170px; }
+    .calhead .cm { font-family: "Great Vibes"; font-size: 132px; color: var(--rose); -webkit-text-stroke: 1.6px var(--rose); paint-order: stroke fill; }
+    .calhead .cy { font-family: "Cormorant Garamond"; font-weight: 600; font-size: 46px; letter-spacing: 0.2em; color: var(--gold); }
+    .calgrid { position: relative; display: grid; grid-template-columns: repeat(7, 1fr); margin-top: 40px; }
+    .wd { font: 600 32px "Cormorant Garamond"; letter-spacing: 0.1em; color: #b0576f; text-align: center; padding-bottom: 12px; border-bottom: 2px solid #efd0d5; }
+    .cd { font: 600 48px "Cormorant Garamond"; color: var(--plum); text-align: center; height: 118px; line-height: 118px; border-bottom: 1px solid #f2dfe1; }
+    .cd.hit { color: #c4213f; }
+    .ring { position: absolute; width: 200px; height: 160px; }
+    .note { width: 450px; min-height: 450px; padding: 60px 30px 36px; box-sizing: border-box; box-shadow: 0 20px 34px rgba(90, 40, 50, 0.26);
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-align: center; }
+    .note.yellow { background: linear-gradient(170deg, #fcec98, #f5da67); }
+    .note.blue { background: linear-gradient(170deg, #c6e5f5, #a2cfea); }
+    .note .tape { position: absolute; top: -24px; left: 50%; width: 180px; height: 50px; margin-left: -90px; background: rgba(255, 251, 242, 0.62); transform: rotate(-3deg); }
+    .note .nl { font-family: "Great Vibes"; font-size: 92px; line-height: 1.05; color: var(--rose); -webkit-text-stroke: 1.4px var(--rose); paint-order: stroke fill; padding: 0 0.2em; }
+    .note.blue .nl { color: var(--navy); -webkit-text-stroke-color: var(--navy); }
+    .note .nd { font: 600 38px "Cormorant Garamond"; letter-spacing: 0.14em; text-transform: uppercase; color: var(--plum); }
+    .note .nb { font: 600 52px "Cormorant Garamond"; color: var(--plum); line-height: 1.1; }
+    .note .nt { font: italic 600 46px "Cormorant Garamond"; color: var(--soft); }
+    .note .nv { font: 600 42px "Cormorant Garamond"; color: var(--navy); line-height: 1.2; }
+    .note .nv .vn { display: block; font-size: 1.14em; line-height: 1.1; margin-bottom: 6px; }
+    .note .nv .va { display: block; font-size: 0.9em; }
+
+    /* reception */
+    .dusk { background: linear-gradient(180deg, rgba(240, 140, 140, 0.42) 0%, rgba(248, 186, 160, 0.24) 40%, rgba(255, 220, 200, 0) 68%); }
+    .sunin { position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(circle at 45% 40%, #ffe98a, #f8cd45 55%, #f1b934); filter: url(#rough); }
+    .tiles { display: flex; gap: 0.12em; font-size: 64px; }
+    .tile { width: 1.35em; height: 1.6em; border-radius: 0.16em; display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(160deg, #902645, #6b152f); box-shadow: inset 0 -0.06em 0 rgba(60, 10, 25, 0.35), inset 0 0.05em 0 rgba(255, 255, 255, 0.2), 0 0.1em 0.2em rgba(90, 20, 40, 0.32);
+      font-family: "Cormorant Garamond"; font-weight: 600; color: #fcf0e2; }
+    .tile.sp { width: 0.45em; background: none; box-shadow: none; }
+
+    /* draft 3: true perspective planes (engine plane3) and the built sets */
+    .pw { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; perspective: 1600px; perspective-origin: 540px 960px; transform-origin: 540px 960px; pointer-events: none; }
+    /* marble floor, top edge = far: rose aisle runner with gold borders, tile seams, haze at the far end */
+    .floor { background:
+        linear-gradient(90deg, rgba(0,0,0,0) calc(50% - 300px), #d8a34f calc(50% - 300px), #d8a34f calc(50% - 286px), #e07a92 calc(50% - 286px), #cf5d7c calc(50% - 150px), #c9516f 50%, #cf5d7c calc(50% + 150px), #e07a92 calc(50% + 286px), #d8a34f calc(50% + 286px), #d8a34f calc(50% + 300px), rgba(0,0,0,0) calc(50% + 300px)),
+        linear-gradient(180deg, rgba(251,232,224,0.95) 0%, rgba(251,232,224,0) 22%),
+        repeating-linear-gradient(0deg, rgba(196,118,116,0.22) 0 5px, rgba(0,0,0,0) 5px 460px),
+        repeating-linear-gradient(90deg, rgba(196,118,116,0.16) 0 5px, rgba(0,0,0,0) 5px 460px),
+        radial-gradient(ellipse 30% 22% at 50% 6%, rgba(255,250,244,0.9), rgba(255,250,244,0)),
+        linear-gradient(180deg, #fbe4db 0%, #f6d0c5 40%, #eebbb0 100%); }
+    /* owner 2026-10-27: the plain floor a little darker, so the pieces standing on it (and their shadows) read */
+    .floor.plain { background:
+        linear-gradient(180deg, rgba(248,224,215,0.9) 0%, rgba(248,224,215,0) 22%),
+        repeating-linear-gradient(0deg, rgba(180,100,100,0.22) 0 5px, rgba(0,0,0,0) 5px 460px),
+        repeating-linear-gradient(90deg, rgba(180,100,100,0.17) 0 5px, rgba(0,0,0,0) 5px 460px),
+        radial-gradient(ellipse 34% 24% at 50% 8%, rgba(255,246,238,0.75), rgba(255,246,238,0)),
+        linear-gradient(180deg, #f3d3c7 0%, #e9b9ab 40%, #dda193 100%); }
+    /* Tamil (lang "ta", #root.ta): Arima for the display words, Noto Serif Tamil for the rest (Latin digits fall back to
+       Cormorant). Tamil gets no letter-spacing, no uppercase and no fake italic; the gold "&" stays Great Vibes. */
+    #root.ta .script, #root.ta .iline.script, #root.ta .calhead .cm, #root.ta .note .nl { font-family: "Arima", "Great Vibes"; font-weight: 700; -webkit-text-stroke-width: 0.6px; }
+    #root.ta .script.amp { font-family: "Great Vibes"; font-weight: 400; -webkit-text-stroke-width: 2.2px; }
+    #root.ta .script.md { font-size: 64px; } #root.ta .script.lg { font-size: 84px; } #root.ta .script.xl { font-size: 96px; } #root.ta .script.xxl { font-size: 120px; }
+    #root.ta .script.amp { font-size: 92px; }
+    #root.ta .script { line-height: 1.3; }
+    #root.ta .iline.script { font-size: 82px; line-height: 1.25; }
+    #root.ta .calhead .cm { font-size: 84px; }
+    #root.ta .note .nl { font-size: 58px; line-height: 1.3; }
+    #root.ta .label, #root.ta .serif, #root.ta .serifI, #root.ta .iline, #root.ta .note .nd, #root.ta .note .nb, #root.ta .note .nt, #root.ta .note .nv, #root.ta .tile, #root.ta .calhead .cy, #root.ta .wd, #root.ta .cd {
+      font-family: "Noto Serif Tamil", "Cormorant Garamond"; font-style: normal; }
+    #root.ta .label { font-size: 34px; letter-spacing: 0.02em; text-transform: none; padding-left: 0; }
+    #root.ta .iline.caps { font-size: 30px; letter-spacing: 0.02em; text-transform: none; padding-left: 0; }
+    #root.ta .iline.serif { font-size: 38px; } #root.ta .iline.serifI { font-size: 34px; }
+    #root.ta .big { font-size: 44px; line-height: 1.35; }
+    #root.ta .serif.venue { font-size: 36px; line-height: 1.4; }
+    #root.ta .serif.names { font-size: 48px; letter-spacing: 0; }
+    #root.ta .note .nd { font-size: 30px; letter-spacing: 0; text-transform: none; } #root.ta .note .nb { font-size: 44px; } #root.ta .note .nt { font-size: 36px; }
+    #root.ta .note .nv { font-size: 32px; line-height: 1.35; }
+    #root.ta .wd { font-size: 28px; letter-spacing: 0; }
+    #root.ta .tiles { font-size: 52px; } #root.ta .tile { width: 1.7em; }
+    /* soft contact shadow lying on a floor (film.js floorShade) */
+    .fshadow { border-radius: 50%; background: radial-gradient(closest-side, rgba(105, 35, 42, 0.58), rgba(105, 35, 42, 0.3) 50%, rgba(105, 35, 42, 0) 100%); }
+    .water { background:
+        linear-gradient(180deg, rgba(253,240,238,0.95) 0%, rgba(253,240,238,0) 20%),
+        repeating-radial-gradient(ellipse 50% 40% at 50% 62%, rgba(255,255,255,0) 0 70px, rgba(255,246,250,0.35) 74px 80px, rgba(255,255,255,0) 84px 170px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.12) 0 6px, rgba(0,0,0,0) 6px 120px),
+        linear-gradient(180deg, #f6d9e0 0%, #eab9c9 55%, #d998b2 100%); }
+    .ground { background: repeating-linear-gradient(0deg, rgba(160,60,50,0.12) 0 6px, rgba(0,0,0,0) 6px 300px),
+        linear-gradient(180deg, #f3bba6 0%, #e79a88 45%, #d47a68 100%); }
+    .pad { border-radius: 50%; background: radial-gradient(circle at 46% 42%, #a6d38b, #6aa95f 58%, #4f8c4c 100%); box-shadow: inset 0 0 0 7px rgba(55, 105, 55, 0.3);
+      -webkit-mask-image: conic-gradient(from 0deg, #000 0deg 332deg, rgba(0,0,0,0) 334deg 352deg, #000 354deg); mask-image: conic-gradient(from 0deg, #000 0deg 332deg, rgba(0,0,0,0) 334deg 352deg, #000 354deg); }
+    /* every floor, water and ground plane fades out at its far end, so its edge never shows against the backdrop */
+    .floor, .water, .ground { -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,0) 0, #000 16%); mask-image: linear-gradient(180deg, rgba(0,0,0,0) 0, #000 16%); }
+    /* flower bushes: the art runs to its box edges, so both sides feather out (no straight cut beside the aisle) */
+    .bush { -webkit-mask-image: linear-gradient(90deg, rgba(0,0,0,0) 0, #000 14%, #000 86%, rgba(0,0,0,0) 100%); mask-image: linear-gradient(90deg, rgba(0,0,0,0) 0, #000 14%, #000 86%, rgba(0,0,0,0) 100%); }
+    .tallp .pc { position: absolute; left: 0; width: 100%; height: auto; }
+    /* tall curtain (film.js curtain): natural swag + bow on top, the stretched skirt copy below the ribbon tails */
+    .tallc .ct { position: absolute; left: 0; width: 100%; }
+    .tallc .ct.top { top: 0; height: auto; -webkit-mask-image: linear-gradient(180deg, #000 66%, rgba(0,0,0,0) 69%); mask-image: linear-gradient(180deg, #000 66%, rgba(0,0,0,0) 69%); }
+    .tallc .ct.skirt { -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,0) 63%, #000 67%); mask-image: linear-gradient(180deg, rgba(0,0,0,0) 63%, #000 67%); }
+    .tallp .pc.up { -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0) 0, rgba(0,0,0,0) 6%, #000 14%); mask-image: linear-gradient(to top, rgba(0,0,0,0) 0, rgba(0,0,0,0) 6%, #000 14%); }
+    /* the knot picture cut in three along the cloth: veshti band, pallu band (diagonal cuts above the tails), the knot */
+    .kb.left { -webkit-mask-image: linear-gradient(110deg, #000 35%, rgba(0,0,0,0) 40%); mask-image: linear-gradient(110deg, #000 35%, rgba(0,0,0,0) 40%); }
+    .kb.right { -webkit-mask-image: linear-gradient(250deg, #000 33%, rgba(0,0,0,0) 38%); mask-image: linear-gradient(250deg, #000 33%, rgba(0,0,0,0) 38%); }
+    /* the knot with both hanging tails: what the two diagonal band cuts leave */
+    .kb.mid { -webkit-mask-image: linear-gradient(110deg, rgba(0,0,0,0) 34%, #000 39%), linear-gradient(250deg, rgba(0,0,0,0) 32%, #000 37%); -webkit-mask-composite: source-in;
+      mask-image: linear-gradient(110deg, rgba(0,0,0,0) 34%, #000 39%), linear-gradient(250deg, rgba(0,0,0,0) 32%, #000 37%); mask-composite: intersect; }
+    /* envelope (invitation): back with its darker inside, pocket front, flap with the wax seal */
+    .envback { border-radius: 18px; box-shadow: 0 30px 70px rgba(120, 40, 60, 0.3);
+      background: linear-gradient(180deg, #d98b9e 0%, #e7a3b2 34%, #f2bfc8 60%, #f4c6ce 100%); }
+    .envfront svg, .envflap svg { display: block; }
+    .envflap svg { filter: drop-shadow(0 6px 10px rgba(120, 40, 60, 0.18)); }
+    .tem svg { display: block; width: 100%; height: 100%; position: relative; }
+    .tem .gop { position: absolute; display: block; }
+    .hrt { position: absolute; left: 0; top: 0; display: block; }
+    .hph { position: absolute; left: 0; top: 0; width: 520px; height: 480px; overflow: hidden; }
+    .hph img { position: absolute; display: block; max-width: none; }
+    .tem .gop.far { filter: sepia(0.25) saturate(0.75) brightness(1.08) contrast(0.85); opacity: 0.92; }
+
+    /* overlays */
+    .petals { position: absolute; inset: 0; pointer-events: none; z-index: 50; }
+    .petal { position: absolute; left: 0; top: 0; height: auto; }
+    .vignette { position: absolute; inset: 0; z-index: 52; background: radial-gradient(ellipse 78% 62% at 50% 48%, rgba(0, 0, 0, 0) 58%, rgba(120, 40, 70, 0.2) 100%); }
+    .grain { position: absolute; inset: 0; z-index: 53; background: url("assets/img/grain.png"); opacity: 0.2; }
+    .flash { position: absolute; inset: 0; z-index: 60; opacity: 0;
+      background: radial-gradient(ellipse 80% 65% at 50% 45%, #fffef9 0%, #fff7ef 45%, rgba(255, 238, 228, 0.95) 80%, rgba(255, 228, 216, 0.9) 100%); }
+    .leak { position: absolute; left: -200px; top: -300px; width: 760px; height: 2600px; z-index: 61; opacity: 0; filter: blur(40px);
+      background: linear-gradient(90deg, rgba(255, 220, 150, 0), rgba(255, 214, 140, 0.6), rgba(255, 180, 190, 0.4), rgba(255, 220, 150, 0)); }
+    .svgdefs { position: absolute; width: 0; height: 0; }
+    /* magenta edge check (tools/magenta.sh flips MAGENTA on a scratch copy): any exposed background shows magenta */
+    html.magenta, body.magenta, #root.magenta { background: #ff00ff !important; }
+    #root.magenta .flash, #root.magenta .leak, #root.magenta .petals, #root.magenta .grain, #root.magenta .vignette { display: none !important; }
+  </style>
+  <style>/* GENERATED (build-page.mjs): the editor's frame has no HyperFrames runtime to size the root */ html, body, #root { width: 1080px; height: 1920px; }</style>
+  <script>/* GENERATED (build-page.mjs): lite preview switch */
+    if (/[?&]lite=1/.test(location.search)) {
+      document.documentElement.classList.add("lite");
+      const d = Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, "src");
+      Object.defineProperty(HTMLImageElement.prototype, "src", { ...d, set(v) { d.set.call(this, String(v).replace("assets/img/", "assets/img-lite/")); } });
+      // the editor lays the page out at its preview box's size once the film is built (the text fit is done at full size)
+      window.__vinvZoom = (z) => { document.documentElement.style.zoom = String(z); };
+    }
+  </script>
+  <style>/* GENERATED (build-page.mjs): lite = no blur filters, no light leak */
+    html.lite [style*="blur("], html.lite .txt .ghost { filter: none !important; }
+    html.lite .leak { display: none !important; }
+  </style>
+</head>
+<body>
+  <svg class="svgdefs" aria-hidden="true">
+    <filter id="deckle" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="3" seed="7" /><feDisplacementMap in="SourceGraphic" scale="16" /></filter>
+    <filter id="rough" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="0.022" numOctaves="4" seed="3" /><feDisplacementMap in="SourceGraphic" scale="34" /></filter>
+  </svg>
+  <div id="root" data-composition-id="wedding-kondattam" data-start="0" data-width="1080" data-height="1920" data-duration="60" data-no-timeline>
+    <!-- silent design (owner 2026-10-27: "no need of audio"); the DIY's music choice goes under it. Never whoosh/swoosh. -->
+  </div>
+  <script type="module">
+    import { DETAILS as SAMPLE } from "./assets/details.js";
+    // GENERATED (build-page.mjs): the editor's live preview — the details from the parent window (the editor sets
+    // window.__vinvPageDetails before it loads this page), the film's time from the parent through window.__filmAt(t)
+    let DETAILS = SAMPLE;
+    try { if (window.parent && window.parent !== window && window.parent.__vinvPageDetails) DETAILS = window.parent.__vinvPageDetails; } catch { /* another origin */ }
+    import { build, overlays, renderAll, timeline } from "./assets/film.js";
+    window.__FILM__ = true; window.__filmDuration = timeline(DETAILS).DUR;   // GENERATED (build-page.mjs)
+    import { applyStyle, applySizes } from "./style/kondattam-style.js";   // GENERATED (build-page.mjs): the customer's font set + text sizes
+
+    const MAGENTA = false;   // check only: tools/magenta.sh sets this on a scratch copy, never in the project
+    window.__hf = window.__hf || {}; window.__hf.buildReady = window.__hf.buildReady || {};
+    let ov = null, ready = false;
+    function fit(e, maxW, minPx = 20) {
+      let px = parseFloat(getComputedStyle(e).fontSize);
+      while (e.scrollWidth > maxW && px > minPx) { px -= 2; e.style.fontSize = px + "px"; }
+    }
+    window.__hf.buildReady.film = (async () => {
+      const root = document.getElementById("root");
+      await applyStyle(DETAILS.style, DETAILS.lang);   // GENERATED (build-page.mjs): no style / the classic set = the lock's own type
+      if (MAGENTA) for (const e of [document.documentElement, document.body, root]) e.classList.add("magenta");
+      const faces = ['400 120px "Great Vibes"', '600 48px "Cormorant Garamond"', 'italic 600 48px "Cormorant Garamond"'];
+      if (DETAILS.lang === "ta") faces.push('700 60px "Arima"', '600 48px "Noto Serif Tamil"');
+      await Promise.all(faces.map((f) => document.fonts.load(f, DETAILS.lang === "ta" ? "அஆ Aa" : "Aa")));
+      const { sc, words } = build(root, DETAILS);
+      ov = overlays(root);
+      applySizes(root, DETAILS.style);   // GENERATED (build-page.mjs): the parts' text sizes, before the text fit
+      await Promise.all([...root.querySelectorAll("img")].map((i) => (i.complete && i.naturalWidth ? Promise.resolve() : i.decode()).catch(() => console.warn("image failed", i.src))));
+      // text fit, once, with real fonts: single lines shrink to their box; long lines may wrap
+      for (const w of words) {
+        const e = w.e, maxW = w.maxW || 960;
+        if (!w.wrap) { fit(e, maxW); continue; }
+        const px0 = parseFloat(getComputedStyle(e).fontSize); let px = px0;
+        e.style.whiteSpace = "nowrap";
+        while (e.scrollWidth > maxW && px > px0 * 0.84) { px -= 1; e.style.fontSize = px + "px"; }
+        if (e.scrollWidth > maxW) { e.style.whiteSpace = "normal"; e.style.fontSize = Math.round(px0 * 0.92) + "px"; e.style.width = maxW + "px"; }
+      }
+      // venue note: a long hall name shrinks (name + address together) until it takes at most 2 lines, never below
+      // 78 % (a very long name then keeps 3); a name that fits already is left alone
+      for (const n of sc.cal.notes || []) {
+        const nv = n.querySelector(".nv"), vn = nv && nv.querySelector(".vn");
+        if (!vn) continue;
+        const most = 2, r = document.createRange();
+        const lines = () => { r.selectNodeContents(vn); return new Set([...r.getClientRects()].map((q) => Math.round(q.top))).size; };
+        const px0 = parseFloat(getComputedStyle(nv).fontSize); let px = px0;
+        while (lines() > most && px > px0 * 0.78) { px -= 1; nv.style.fontSize = px + "px"; }
+      }
+      // calendar ring centred on the wedding date's cell
+      const c = sc.cal;
+      if (c.target) {
+        const g = c.target.parentElement;
+        c.ring.style.left = (g.offsetLeft + c.target.offsetLeft + c.target.offsetWidth / 2 - 100) + "px";
+        c.ring.style.top = (g.offsetTop + c.target.offsetTop + c.target.offsetHeight / 2 - 80) + "px";
+      }
+      ready = true;
+    })();
+    function renderAt(t) { if (!ready) return; renderAll(t); ov(t); }
+    window.__filmAt = (t) => renderAt(t);   // GENERATED (build-page.mjs): the editor drives the time
+    window.addEventListener("hf-seek", (e) => renderAt(e.detail.time));
+    window.__hf.buildReady.film.then(() => renderAt(window.__hfThreeTime || 0));
+  </script>
+</body>
+</html>

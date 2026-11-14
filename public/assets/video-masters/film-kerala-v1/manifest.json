@@ -1,0 +1,82 @@
+{
+  "id": "film-kerala-v1",
+  "version": 1,
+  "rendererVersion": "scene-film-v1",
+  "sceneDesign": "kerala",
+  "kind": "webgl",
+  "output": {
+    "width": 720,
+    "height": 1280,
+    "fps": 24,
+    "frames": 1220,
+    "duration": 50.833333333333336
+  },
+  "scenes": [
+    {
+      "id": "title",
+      "name": "Title",
+      "start": 0,
+      "end": 122,
+      "reviewFrame": 96,
+      "layers": []
+    },
+    {
+      "id": "couple",
+      "name": "Couple",
+      "start": 122,
+      "end": 559,
+      "reviewFrame": 499,
+      "layers": []
+    },
+    {
+      "id": "invitation",
+      "name": "Invitation",
+      "start": 559,
+      "end": 737,
+      "reviewFrame": 706,
+      "layers": []
+    },
+    {
+      "id": "wedding",
+      "name": "Wedding",
+      "start": 737,
+      "end": 871,
+      "reviewFrame": 840,
+      "layers": []
+    },
+    {
+      "id": "reception",
+      "name": "Reception",
+      "start": 871,
+      "end": 989,
+      "reviewFrame": 955,
+      "layers": []
+    },
+    {
+      "id": "thanks",
+      "name": "Thank you",
+      "start": 989,
+      "end": 1220,
+      "reviewFrame": 1111,
+      "layers": []
+    }
+  ],
+  "assets": {
+    "sceneBundle": {
+      "path": "/assets/video-masters/film-kerala-v1/asset-index.json",
+      "sha256": "da00db1eee7fb293e92b5d976dfa5a7ceaa02dfe8e173594556637711a6df7e1"
+    }
+  },
+  "release": {
+    "approved": false
+  },
+  "catalog": {
+    "poster": "poster.jpg",
+    "posters": {
+      "320": "poster-320-v1.webp",
+      "640": "poster-640-v1.webp",
+      "960": "poster-960-v1.webp"
+    },
+    "preview": "demo-v1.mp4"
+  }
+}

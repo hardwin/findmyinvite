@@ -1,3 +1,4 @@
+import {videoPaymentService} from '../server/video-payments.mjs';
 import {INVITATION_BASE_PAISE} from '../shared/pricing.mjs';
 import {recordWebsiteFailure} from '../server/template-observability.mjs';
 import handleWebsitePayment,{settleWebsiteOrder} from '../server/template-payments.mjs';
@@ -26,6 +27,7 @@ export default async function handler(req,res){
    const event=JSON.parse(raw);
    const entity=event?.payload?.payment?.entity||event?.payload?.order?.entity||{};
    const orderId=entity.order_id||entity.id;
+   if(await videoPaymentService().webhook(event))return respond(res,200,{ok:true});
    if(orderId&&entity.status==='captured'&&await settleWebsiteOrder(orderId,entity.id,entity.notes?.websiteOrderId))return respond(res,200,{ok:true});
    if(orderId&&entity.status==='captured'){
     await recordPayment({

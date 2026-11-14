@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ta">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=1080, height=1920" />
+  <title>Wedding invite — Roja Poonga (working name)</title>
+  <style>
+    /* two fonts (house rule, Tamil page): Arima for titles and names, Noto Serif Tamil for the rest. Both OFL.
+       Digits come from Arima's Latin subset (same family, so still two fonts). */
+    @font-face { font-family: "Arima"; src: url("assets/fonts/arima-tamil-700.woff2") format("woff2"); font-weight: 700; unicode-range: U+0B80-0BFF, U+200C-200D, U+25CC; }
+    @font-face { font-family: "Arima"; src: url("assets/fonts/arima-latin-700.woff2") format("woff2"); font-weight: 700; unicode-range: U+0000-00FF, U+2013-2014; }
+    @font-face { font-family: "Noto Serif Tamil"; src: url("assets/fonts/noto-serif-tamil-tamil-600.woff2") format("woff2"); font-weight: 600; unicode-range: U+0B80-0BFF, U+200C-200D, U+25CC; }
+    /* owner (draft 5): ATM 378 for titles, ATM 344 for subtitles — the owner's own Tamil fonts (already on the site) */
+    @font-face { font-family: "ATM 378"; src: url("assets/fonts/ATM-378.ttf") format("truetype"); }
+    @font-face { font-family: "ATM 344"; src: url("assets/fonts/ATM-344.ttf") format("truetype"); }
+    :root { --ink: #7a1f2b; --ink2: #8f3a2a; }
+    html, body { margin: 0; background: #8fc4ea; }
+    #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: #8fc4ea; }
+    .lay { position: absolute; display: block; max-width: none; }
+    img.lay { height: auto; }
+    .scene { width: 1080px; height: 1920px; overflow: hidden; }
+    .box > img { position: absolute; left: 0; top: 0; width: 100%; height: auto; }
+    /* text sits on cream panels in the world (like the reference): deep maroon, never black, soft light halo */
+    .tx { position: absolute; white-space: nowrap; color: var(--ink); line-height: 1.08; text-align: center;
+      transform: translate(-50%, -50%); text-shadow: 0 0 10px rgba(255, 248, 230, 0.85); }
+    .tx span { display: inline-block; }
+    .disp { font-family: "ATM 378"; font-weight: 400; }
+    .body { font-family: "ATM 344"; font-weight: 400; color: var(--ink2); }
+    .rule { position: absolute; height: 3px; transform: translate(-50%, -50%); background: linear-gradient(90deg, rgba(176, 120, 40, 0), #b0782a 30%, #b0782a 70%, rgba(176, 120, 40, 0)); }
+    .bloom { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; z-index: 50; pointer-events: none;
+      background: radial-gradient(ellipse at 50% 45%, #ffffff 0%, #fff9fb 45%, #fbe9f3 80%, #f3e2f6 100%); }
+    /* eyelid for the blink: drops from the top of the eye opening, dark lash line on its lower edge */
+    .lid { position: absolute; border-radius: 50%; opacity: 0;
+      -webkit-mask-image: radial-gradient(ellipse closest-side, #000 86%, transparent 100%); mask-image: radial-gradient(ellipse closest-side, #000 86%, transparent 100%); }
+    /* closed-eye lash line: rides the lid edge down, rests at 60% (a soft downward curve) */
+    .lash { position: absolute; left: 14%; right: 14%; height: 34%; transform: translateY(-100%); border-bottom: 2.5px solid #3b2218; border-radius: 0 0 50% 50% / 0 0 100% 100%; }
+    .shadow { border-radius: 50%; background: radial-gradient(closest-side, rgba(90, 30, 40, 0.38), rgba(90, 30, 40, 0)); }
+    .petal { width: 26px; height: 16px; border-radius: 60% 40% 60% 40%; background: radial-gradient(circle at 35% 35%, #ffd0e4, #e2588f 75%); }
+    .trail { width: 9px; height: 9px; border-radius: 50%; background: radial-gradient(circle, rgba(255, 233, 160, 0.95), rgba(240, 190, 60, 0) 70%); }
+  </style>
+  <style>/* GENERATED (page-poonga.mjs): the editor's frame has no HyperFrames runtime to size the root */ html, body, #root { width: 1080px; height: 1920px; }</style>
+  <script>/* GENERATED (page-poonga.mjs): lite preview switch */
+    if (/[?&]lite=1/.test(location.search)) {
+      document.documentElement.classList.add("lite");
+      const d = Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, "src");
+      Object.defineProperty(HTMLImageElement.prototype, "src", { ...d, set(v) { d.set.call(this, String(v).replace("assets/img/", "assets/img-lite/")); } });
+      window.__vinvZoom = (z) => { document.documentElement.style.zoom = String(z); };
+    }
+  </script>
+  <style>/* GENERATED (page-poonga.mjs): lite = no blur filters */
+    html.lite [style*="blur("] { filter: none !important; }
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="good-reel-garden-1" data-start="0" data-width="1080" data-height="1920" data-duration="34" data-no-timeline>
+    <!-- silent draft; music later (never whoosh/swoosh) -->
+  </div>
+  <script type="module">
+    import { DETAILS as SAMPLE } from "./assets/details.js";
+    // GENERATED (page-poonga.mjs): the editor's live preview — the details from the parent window (the editor sets
+    // window.__vinvPageDetails before it loads this page), the film's time from the parent through window.__filmAt(t)
+    let DETAILS = SAMPLE;
+    try { if (window.parent && window.parent !== window && window.parent.__vinvPageDetails) DETAILS = window.parent.__vinvPageDetails; } catch { /* another origin */ }
+    window.__FILM__ = true; window.__filmDuration = Number(document.getElementById("root").dataset.duration);
+    import { build } from "./assets/film.js";
+    import { renderAll } from "./assets/engine.js";
+
+    window.__hf = window.__hf || {}; window.__hf.buildReady = window.__hf.buildReady || {};
+    let film = null, ready = false;
+    window.__hf.buildReady.film = (async () => {
+      const root = document.getElementById("root");
+      await Promise.all(['80px "ATM 378"', '48px "ATM 344"'].map((f) => document.fonts.load(f, "திருமண அழைப்பிதழ் 0123456789")));
+      film = build(root, DETAILS);
+      await Promise.all([...document.querySelectorAll("img")].map((i) => (i.complete && i.naturalWidth ? Promise.resolve() : i.decode()).catch(() => console.warn("image failed", i.src))));
+      for (const f of film.fits) f();
+      ready = true;
+    })();
+    function renderAt(t) { if (!ready) return; film.render(t); renderAll(t); }
+    window.__filmAt = (t) => renderAt(t);   // GENERATED (page-poonga.mjs): the editor drives the time
+    window.addEventListener("hf-seek", (e) => renderAt(e.detail.time));
+    window.__hf.buildReady.film.then(() => renderAt(window.__hfThreeTime || 0));
+    window.__renderAt = renderAt;
+  </script>
+</body>
+</html>

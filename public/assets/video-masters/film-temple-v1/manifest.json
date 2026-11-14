@@ -1,0 +1,90 @@
+{
+  "id": "film-temple-v1",
+  "version": 1,
+  "rendererVersion": "scene-film-v1",
+  "sceneDesign": "temple",
+  "kind": "webgl",
+  "output": {
+    "width": 720,
+    "height": 1280,
+    "fps": 24,
+    "frames": 936,
+    "duration": 39
+  },
+  "scenes": [
+    {
+      "id": "title",
+      "name": "Title",
+      "start": 0,
+      "end": 154,
+      "reviewFrame": 101,
+      "layers": []
+    },
+    {
+      "id": "blessing",
+      "name": "Blessing",
+      "start": 154,
+      "end": 293,
+      "reviewFrame": 230,
+      "layers": []
+    },
+    {
+      "id": "couple",
+      "name": "Couple",
+      "start": 293,
+      "end": 446,
+      "reviewFrame": 374,
+      "layers": []
+    },
+    {
+      "id": "date",
+      "name": "Date",
+      "start": 446,
+      "end": 581,
+      "reviewFrame": 528,
+      "layers": []
+    },
+    {
+      "id": "events",
+      "name": "Events",
+      "start": 581,
+      "end": 715,
+      "reviewFrame": 672,
+      "layers": []
+    },
+    {
+      "id": "venue",
+      "name": "Venue",
+      "start": 715,
+      "end": 830,
+      "reviewFrame": 792,
+      "layers": []
+    },
+    {
+      "id": "closing",
+      "name": "Closing",
+      "start": 830,
+      "end": 936,
+      "reviewFrame": 902,
+      "layers": []
+    }
+  ],
+  "assets": {
+    "sceneBundle": {
+      "path": "/assets/video-masters/film-temple-v1/asset-index.json",
+      "sha256": "e4059f9e82e079f4d1413be867b629273a2efd761bb083a5107eae981b56d004"
+    }
+  },
+  "release": {
+    "approved": false
+  },
+  "catalog": {
+    "poster": "poster.jpg",
+    "posters": {
+      "320": "poster-320-v1.webp",
+      "640": "poster-640-v1.webp",
+      "960": "poster-960-v1.webp"
+    },
+    "preview": "demo-v1.mp4"
+  }
+}

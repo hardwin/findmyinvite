@@ -1,0 +1,58 @@
+{
+  "id": "film-drive-v1",
+  "version": 1,
+  "rendererVersion": "scene-film-v1",
+  "sceneDesign": "drive",
+  "kind": "page",
+  "output": {
+    "width": 720,
+    "height": 1280,
+    "fps": 24,
+    "frames": 480,
+    "duration": 20
+  },
+  "scenes": [
+    {
+      "id": "title",
+      "name": "Save the Date",
+      "start": 0,
+      "end": 134,
+      "reviewFrame": 72,
+      "layers": []
+    },
+    {
+      "id": "drive",
+      "name": "The drive",
+      "start": 134,
+      "end": 370,
+      "reviewFrame": 216,
+      "layers": []
+    },
+    {
+      "id": "details",
+      "name": "Date & names",
+      "start": 370,
+      "end": 480,
+      "reviewFrame": 420,
+      "layers": []
+    }
+  ],
+  "assets": {
+    "sceneBundle": {
+      "path": "/assets/video-masters/film-drive-v1/asset-index.json",
+      "sha256": "3224870e137004a313e049e0e5eac5245d9f866a6712c169883c7eaaec722c98"
+    }
+  },
+  "release": {
+    "approved": false
+  },
+  "catalog": {
+    "poster": "poster.jpg",
+    "posters": {
+      "320": "poster-320-v1.webp",
+      "640": "poster-640-v1.webp",
+      "960": "poster-960-v1.webp"
+    },
+    "preview": "demo-v1.mp4"
+  }
+}

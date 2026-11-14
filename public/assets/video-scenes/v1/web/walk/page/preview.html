@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1080, initial-scale=1">
+<!-- Template 12 "Poovanam" (video): the Poovanam web invite walked by a timeline. Built by tools/filmify.py from the frozen
+     web engine; the couple's text is details.js; tools/setduration.mjs writes data-duration for the renderer. -->
+<title>Poovanam · video invite</title>
+<!-- the engine writes the link-preview tags (unused in a film, but it expects them) -->
+<meta name="description" content="" id="m-desc"><meta property="og:title" content="" id="m-ogt"><meta property="og:description" content="" id="m-ogd"><meta property="og:image" content="" id="m-ogi">
+<link rel="stylesheet" href="style-film.css">
+<link rel="stylesheet" href="film.css">
+<script type="importmap">{"imports":{"three":"./vendor/three.module.min.js"}}</script>
+<style>body.film.locked { height: 1920px; }</style>
+</head>
+<body class="locked film">
+<div id="root" data-composition-id="wedding-poovanam-12" data-no-timeline data-width="1080" data-height="1920" data-duration="59.5">
+<div id="phone">
+
+
+<div id="stage">
+  <canvas id="gl" aria-hidden="true"></canvas>
+  <div id="petals" aria-hidden="true"></div>
+
+  <!-- one card per garden stop; data-key is the stop (invite.js decides which stops this couple has; the rest are removed with their cards) -->
+  <main id="ui">
+    <section class="ch" data-key="welcome">
+      <div class="plaque" style="top:6%">
+        <p class="it rise sm" id="helloIntro"></p>
+        <p class="cap split" data-t="brand"></p>
+        <h1 class="script split" data-t="names"></h1>
+        <p class="cap split" data-t="marrying"></p>
+        <p class="big split" data-t="dateShort"></p>
+        <p class="it rise sm" data-t="blessing"></p>
+        <p class="it rise sm" data-t="walkIn"></p>
+      </div>
+    </section>
+    <section class="ch" data-key="story">
+      <div class="plaque" style="top:6%">
+        <p class="cap split" data-t="storyLabel"></p>
+        <p class="it rise story" data-t="story"></p>
+      </div>
+    </section>
+    <section class="ch" data-key="engagement">
+      <div class="plaque" style="top:6%">
+        <p class="cap split" data-t="engLabel"></p>
+        <p class="it rise" data-t="engWhen"></p>
+        <p class="it rise sm" data-t="engWhere"></p>
+      </div>
+    </section>
+    <section class="ch wed" data-key="wedding">
+      <div class="plaque" style="top:5%">
+        <p class="cap split" data-t="wedLabel"></p>
+        <p class="big split" data-t="wedDate"></p>
+        <p class="it rise" data-t="wedTime"></p>
+        <div class="count rise">
+          <div><b id="cd-d">0</b><i data-t="units.0"></i></div><div><b id="cd-h">0</b><i data-t="units.1"></i></div>
+          <div><b id="cd-m">0</b><i data-t="units.2"></i></div><div><b id="cd-s">0</b><i data-t="units.3"></i></div>
+        </div>
+        <p class="it rise sm" data-t="venue"></p>
+      </div>
+    </section>
+    <section class="ch rec" data-key="reception">
+      <div class="plaque" style="top:6%">
+        <p class="cap split" data-t="recLabel"></p>
+        <p class="big split" data-t="recWhen"></p>
+        <p class="it rise" data-t="recWhere"></p>
+      </div>
+    </section>
+    <section class="ch end" data-key="end">
+      <div class="plaque" style="top:6%">
+        <h2 class="script split" data-t="thanks"></h2>
+        <p class="it rise"><span id="helloEnd"></span><span data-t="thanksLine"></span></p>
+      </div>
+      <div class="acts rise">
+        <button id="rsvpBtn" class="primary mag"><span data-t="btn.rsvp"></span></button>
+        <div class="row">
+          <a id="calBtn" class="mag" target="_blank" rel="noopener"><span data-t="btn.cal"></span></a>
+          <a id="mapBtn" class="mag" target="_blank" rel="noopener"><span data-t="btn.map"></span></a>
+        </div>
+        <div class="row">
+          <button id="shareBtn" class="mag"><span data-t="btn.share"></span></button>
+          <button id="cardBtn" class="mag"><span data-t="btn.card"></span></button>
+        </div>
+      </div>
+    </section>
+    <section class="ch wish" data-key="wishes">
+      <div class="plaque" style="top:6%">
+        <p class="cap split" data-t="wishLabel"></p>
+        <p class="it rise" data-t="wishHow"></p>
+        <p class="big rise" id="wishCount"></p>
+      </div>
+    </section>
+  </main>
+  <div id="wishRing" aria-hidden="true"><i></i></div>
+  <div id="hearts" aria-hidden="true"></div>
+
+  <header id="hud">
+    <span class="hl" data-t="brand"></span>
+    <div class="hr">
+      <div class="lang" role="group" aria-label="Language">
+        <button data-lang="en" aria-pressed="true">EN</button><button data-lang="ta" aria-pressed="false">த</button>
+      </div>
+      <button id="music" class="ico" data-a="btn.music" aria-label="Music" aria-pressed="false"><i></i><i></i><i></i><i></i></button>
+    </div>
+    <span class="hb" aria-hidden="true"><b id="hudN">01</b> / <span id="hudTot">06</span> · <span id="hudT"></span></span>
+    <button id="evBtn" class="pill" data-t="btn.events"></button>
+  </header>
+  <div id="rail" aria-hidden="true"><i></i></div>
+  <p id="hint" aria-hidden="true"><span id="hintT"></span></p>
+
+  <!-- the opener: a hanging tag in front of the 3D wrought-iron garden gate (drawn by app.js) -->
+  <button id="doors" data-a="btn.open" aria-label="Open the invitation">
+    <span class="tag">
+      <span class="hello" id="helloCurtain"></span>
+      <span class="script" data-t="names"></span>
+      <span class="num" id="pct">000</span>
+      <span class="cap" id="tapl" data-t="btn.loading"></span>
+    </span>
+  </button>
+</div>
+<div id="spacer"></div>
+<audio id="bgm" loop preload="none" playsinline></audio>   <!-- the song comes from the invitation (music.src) -->
+<div id="cur" aria-hidden="true"><i></i></div>
+
+<div id="scrim" hidden></div>
+<section id="evSheet" class="sheet" hidden role="dialog" aria-modal="true" aria-labelledby="evTitle">
+  <h3 id="evTitle" class="cap" data-t="sheetEvents"></h3>
+  <ol id="evList"></ol>
+  <button class="close" data-t="btn.close"></button>
+</section>
+<section id="rsvpSheet" class="sheet" hidden role="dialog" aria-modal="true" aria-labelledby="rsvpTitle">
+  <h3 id="rsvpTitle" class="script" data-t="rsvp.title"></h3>
+  <label class="field"><span data-t="rsvp.name"></span><input id="rName" maxlength="60" autocomplete="name"></label>
+  <div class="seg" role="radiogroup">
+    <button id="rYes" role="radio" aria-checked="true" data-t="rsvp.yes"></button>
+    <button id="rNo" role="radio" aria-checked="false" data-t="rsvp.no"></button>
+  </div>
+  <div class="yesOnly">
+    <div class="field stepper"><span data-t="rsvp.guests"></span>
+      <div><button id="rMinus" aria-label="−">−</button><b id="rN">2</b><button id="rPlus" aria-label="+">+</button></div>
+    </div>
+    <div class="field"><span data-t="rsvp.which"></span><div id="rWhich" class="chips"></div></div>
+  </div>
+  <a id="rSend" class="primary" target="_blank" rel="noopener"><span data-t="rsvp.send"></span></a>
+  <button class="close" data-t="btn.close"></button>
+</section>
+<p id="toast" role="status"></p>
+
+</div>
+</div>
+<script type="module" src="preview-film.js"></script>
+</body>
+</html>

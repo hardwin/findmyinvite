@@ -1,0 +1,1 @@
+export*from"../scenes/type.js";import{line as t}from"../scenes/type.js";import{fontFor as e,slideSize as n}from"./kit.js";export function line(o,i,r,s={}){const f=t(o,i,r,s),p=s&&s.font?null:e(f.font,f.weight),m=n();return p||1!==m?{...f,...p?{font:p.font,weight:p.weight}:{},k:(f.k||1)*(p&&p.k||1)*m}:f}

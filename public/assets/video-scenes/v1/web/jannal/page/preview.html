@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=1080, height=1920" />
+  <title>Wedding invitation — Jannal (working name)</title>
+  <style>
+    /* draft 4 (owner picked one font per title from checks/fontcmp): Norican for "Save the Date", Satisfy (thickened)
+       for "Wedding Ceremony" and the closing, Oleo Script Bold for the names, Kalam Bold for the small caps, degree
+       lines, Muhurtham and Reception. Every shot still shows at most two fonts. All OFL (fontsource latin). */
+    @font-face { font-family: "Satisfy"; src: url("assets/fonts/satisfy-latin-400.woff2") format("woff2"); font-weight: 400; }
+    @font-face { font-family: "Kalam"; src: url("assets/fonts/kalam-latin-700.woff2") format("woff2"); font-weight: 700; }
+    @font-face { font-family: "Norican"; src: url("assets/fonts/norican-latin-400.woff2") format("woff2"); font-weight: 400; }
+    @font-face { font-family: "Oleo Script"; src: url("assets/fonts/oleo-script-latin-700.woff2") format("woff2"); font-weight: 700; }
+    :root { --gold: #ffd45a; --goldD: #e3a326; --edge: #3d1d06; --maroon: #6a1616; }
+    html, body { margin: 0; background: #2a1a0c; }
+    #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: #2a1a0c; }
+    .scene { position: absolute; width: 1080px; height: 1920px; overflow: hidden; }
+    .cam { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+    .lay { position: absolute; display: block; max-width: none; }
+    img.lay { height: auto; }
+    .card { overflow: visible; }
+    .card > * { position: absolute; }
+    .card img { display: block; max-width: none; }
+    .dim { background: rgba(28, 14, 4, 0.3); }
+    .haze { background: radial-gradient(120% 70% at 30% 20%, rgba(255, 214, 140, 0.32), rgba(255, 200, 120, 0) 60%); mix-blend-mode: screen; }
+    .backdark { border-radius: 50%; background: radial-gradient(closest-side, rgba(36, 16, 4, 0.62), rgba(36, 16, 4, 0.38) 55%, rgba(36, 16, 4, 0) 100%); }
+
+    /* gold script / gold caps: a dark outline-and-halo layer under a gradient gold fill (playbook readability) */
+    .gw { width: max-content; white-space: nowrap; text-align: center; line-height: 1.1; }
+    .gw > span { display: block; }
+    .gw .sh, .gw .ex, .gw .fg { padding: 0 0.25em; }
+    /* draft 4: a darker gold copy a little down-right under the fill, so the letters read embossed like the font sheet */
+    .gw .ex { position: absolute; left: 0; right: 0; top: 0; color: #9a6410; -webkit-text-stroke: 2.2px #9a6410; transform: translate(0.012em, 0.024em); }
+    .gw .sh { position: absolute; left: 0; right: 0; top: 0; color: var(--edge); -webkit-text-stroke: 7px var(--edge); paint-order: stroke fill;
+      text-shadow: 0 6px 16px rgba(26, 10, 2, 0.75), 0 0 26px rgba(26, 10, 2, 0.45); }
+    .gw .fg { position: relative; background: linear-gradient(180deg, #fff6c2 0%, #ffdf6e 38%, #f4b93a 72%, #d98f1c 100%); -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent; -webkit-text-stroke: 2.2px #f6c64a; }
+    .script { font-family: "Satisfy"; font-weight: 400; }
+    .script .fg { -webkit-text-stroke-width: 4.2px; }   /* the reel's heavier brush stroke */
+    .script .sh { -webkit-text-stroke-width: 10px; }
+    .script .ex { -webkit-text-stroke-width: 4.2px; }
+    /* Norican and Oleo Script are heavy already: no thickening */
+    .script.nor { font-family: "Norican"; font-weight: 400; }
+    .script.oleo { font-family: "Oleo Script"; font-weight: 700; }
+    .script.nor .fg, .script.oleo .fg, .script.nor .ex, .script.oleo .ex { -webkit-text-stroke-width: 1.6px; }
+    .script.nor .sh, .script.oleo .sh { -webkit-text-stroke-width: 8px; }
+    .caps { font-family: "Kalam"; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+    .caps .fg { background: linear-gradient(180deg, #fff6c2 0%, #ffe07a 50%, #f6c24a 100%); -webkit-background-clip: text; background-clip: text; }
+    .caps .sh { -webkit-text-stroke-width: 6px; }
+    .caps .fg, .caps .ex { -webkit-text-stroke-width: 0.8px; }
+    .serifg { font-family: "Kalam"; font-weight: 700; letter-spacing: 0.01em; }
+    .serifg .sh { -webkit-text-stroke-width: 6px; }
+    .serifg .fg, .serifg .ex { -webkit-text-stroke-width: 0.6px; }
+
+    /* parchment inside the Muhurtham window */
+    .parch { background:
+      radial-gradient(120% 90% at 50% 45%, rgba(255, 238, 196, 0) 40%, rgba(120, 60, 18, 0.35) 100%),
+      linear-gradient(180deg, #e3bf82 0%, #d6a865 55%, #c48f4e 100%); box-shadow: inset 0 0 40px rgba(90, 44, 10, 0.45); }
+    .parch::after { content: ""; position: absolute; inset: 0; background: url("assets/img/grain.png"); opacity: 0.18; mix-blend-mode: multiply; }
+    .typed { font-family: "Kalam"; font-weight: 700; color: var(--maroon); text-align: center; line-height: 1.32; white-space: normal; }
+    .typed .tl { display: block; white-space: nowrap; }
+    .typed .tl.wrap { white-space: normal; }   /* only the venue lines may wrap; the others shrink the size instead */
+    .typed .tl.head { font-size: 1.2em; letter-spacing: 0.03em; }
+    .typed .tl.vn { font-size: 1.12em; }
+    .typed i { font-style: normal; }
+    .typed i.h { visibility: hidden; }
+
+    /* the portrait inside a window: gold-sepia like a painted relief */
+    .opening { overflow: hidden; background: radial-gradient(90% 70% at 50% 35%, #e9c47e, #b98340 70%, #8a5a26 100%); }
+    .opening .por { position: absolute; }   /* full colour, as approved in drafts 1–2 (the sepia filter there was always overridden) */
+    .opening::after { content: ""; position: absolute; inset: 0; background: radial-gradient(110% 80% at 50% 40%, rgba(255, 230, 170, 0.18), rgba(120, 66, 20, 0.35) 100%); mix-blend-mode: multiply; }
+
+    /* the carved stone name board (draft 5): leans back a little, casts a soft shadow on the couple */
+    .board { position: absolute; transform: perspective(1600px) rotateX(7deg); filter: drop-shadow(0 26px 26px rgba(26, 10, 2, 0.6)) drop-shadow(0 6px 6px rgba(26, 10, 2, 0.35)); }
+    .banner { border-radius: 46% 54% 40% 60% / 60% 40% 60% 40%; background: linear-gradient(100deg, rgba(122, 14, 30, 0) 0%, #7a0e1e 9%, #8e1426 50%, #7a0e1e 91%, rgba(122, 14, 30, 0) 100%); filter: url(#rough); }
+
+    .petals, .fx { position: absolute; inset: 0; pointer-events: none; }
+    .petal, .dust, .bub { position: absolute; left: 0; top: 0; will-change: transform; }
+    .trail { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; pointer-events: none; }
+    .dust { width: 10px; height: 10px; border-radius: 50%; background: radial-gradient(closest-side, #fff6c8, rgba(255, 214, 90, 0.7) 45%, rgba(255, 200, 60, 0)); }
+    .bub { width: 30px; height: 30px; border-radius: 50%; border: 2px solid rgba(255, 246, 210, 0.55); box-shadow: 0 0 8px rgba(255, 236, 180, 0.35); }
+    .darkdip { position: absolute; inset: 0; background: #140a03; opacity: 0; pointer-events: none; }
+    .dipdark { background: #140a03; }
+    /* draft 7: the butterfly's 3D wing rig (film.js bflyRig) */
+    .bfly { overflow: visible; }
+    .bfly .rig { position: absolute; left: 0; top: 0; width: 100%; height: 100%; transform-style: preserve-3d; }
+    .bfly .rig img { position: absolute; top: 0; height: 100%; display: block; max-width: none; backface-visibility: visible; }
+    .bfly .wl { left: 0; width: 50%; transform-origin: 100% 50%; }
+    .bfly .wr { left: 50%; width: 50%; transform-origin: 0 50%; }
+    .bfly .bd { left: 35%; width: 30%; transform: translateZ(1px); }   /* draft 7: the dip lives in the bride and groom shots (under their dip butterfly) */
+    .vignette { position: absolute; inset: 0; background: radial-gradient(130% 80% at 50% 50%, rgba(0, 0, 0, 0) 60%, rgba(30, 12, 2, 0.42) 100%); pointer-events: none; }
+    .grain { position: absolute; inset: 0; background: url("assets/img/grain.png"); opacity: 0.16; mix-blend-mode: overlay; pointer-events: none; }
+    .svgdefs { position: absolute; width: 0; height: 0; }
+    .magenta, .magenta body, .magenta #root { background: #ff00ff !important; }
+  </style>
+  <style>/* GENERATED (build-page.mjs): the editor's frame has no HyperFrames runtime to size the root */ html, body, #root { width: 1080px; height: 1920px; }</style>
+  <script>/* GENERATED (build-page.mjs): lite preview switch */
+    if (/[?&]lite=1/.test(location.search)) {
+      document.documentElement.classList.add("lite");
+      const d = Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, "src");
+      Object.defineProperty(HTMLImageElement.prototype, "src", { ...d, set(v) { d.set.call(this, String(v).replace("assets/img/", "assets/img-lite/")); } });
+      // the editor lays the page out at its preview box's size once the film is built (the text fit is done at full size)
+      window.__vinvZoom = (z) => { document.documentElement.style.zoom = String(z); };
+    }
+  </script>
+  <style>/* GENERATED (build-page.mjs): lite = no blur filters, no light leak */
+    html.lite [style*="blur("], html.lite .txt .ghost { filter: none !important; }
+    html.lite .leak { display: none !important; }
+  </style>
+  <script>/* GENERATED (build-page.mjs): lite trails + decorations as pictures */
+    if (/[?&]lite=1/.test(location.search)) {
+      const gc = HTMLCanvasElement.prototype.getContext, S = 1 / 3;
+      HTMLCanvasElement.prototype.getContext = function (type, opts) {
+        if (type !== "2d" || this.__lite || !this.classList.contains("trail")) return gc.call(this, type, opts);
+        this.__lite = true; this.width = Math.round(this.width * S); this.height = Math.round(this.height * S);
+        const c = gc.call(this, type, opts); c.setTransform(S, 0, 0, S, 0, 0); return c;
+      };
+      const SVGS = {"8e112c33myn":"8e112c33myn","77ebe830f":"77ebe830f","d1fb784030f":"d1fb784030f","41306c6530l":"41306c6530l","77456efd30m":"77456efd30m","9e1d8a3e30j":"9e1d8a3e30j","ca39ea30f":"ca39ea30f","44448ae7utm":"44448ae7utm","6c864d027dz":"6c864d027dz","e4952e7fx7":"e4952e7fx7","8f767a5exe":"8f767a5exe","c7facfd7kc":"c7facfd7kc","a4e7b13catj":"a4e7b13catj","ed62ba76f7m":"ed62ba76f7m","3820db5c31r":"3820db5c31r","fcbf214531k":"fcbf214531k","aa8e4c4431r":"aa8e4c4431r","8a1ec57431q":"8a1ec57431q","3d25339431p":"3d25339431p","e048fbacf17":"e048fbacf17","fdc96e4e31x":"fdc96e4e31x","3b53347e31s":"3b53347e31s","bc0b4f9231r":"bc0b4f9231r","dc6da71731q":"dc6da71731q","8ae3fb6f31s":"8ae3fb6f31s","2a1a62fat5b":"2a1a62fat5b","5b103eee2mz":"5b103eee2mz","9730914e2mw":"9730914e2mw","4e2134c92mv":"4e2134c92mv","11c71b9a5ky":"11c71b9a5ky","da8f7afd5i9":"da8f7afd5i9","7176ee4274h":"7176ee4274h","82316cbd7k2":"82316cbd7k2","3b8160298x0":"3b8160298x0","bafbc9958ue":"bafbc9958ue","59f4940d31q":"59f4940d31q","3d9602ec31m":"3d9602ec31m","5d10942f31g":"5d10942f31g","5a75d212g0p":"5a75d212g0p","f9a5a4281p8":"f9a5a4281p8"}, key = (s) => { let h = 0x811c9dc5; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 0x01000193); } return (h >>> 0).toString(16) + s.length.toString(36); }, d = Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, "src");
+      if (!/[?&]svgscan=1/.test(location.search)) Object.defineProperty(HTMLImageElement.prototype, "src", { ...d, set(v) {
+        const s = String(v), f = s.startsWith("data:image/svg") ? SVGS[key(s)] : null;
+        d.set.call(this, f ? "assets/img-lite/svg/" + f + ".webp" : v);
+      } });
+    }
+  </script>
+</head>
+<body>
+  <svg class="svgdefs" aria-hidden="true">
+    <filter id="rough" x="-10%" y="-20%" width="120%" height="140%"><feTurbulence type="fractalNoise" baseFrequency="0.03 0.09" numOctaves="3" seed="5" /><feDisplacementMap in="SourceGraphic" scale="38" /></filter>
+    <filter id="fluff" x="-20%" y="-20%" width="140%" height="140%"><feTurbulence type="fractalNoise" baseFrequency="0.18" numOctaves="2" seed="11" /><feDisplacementMap in="SourceGraphic" scale="9" /></filter>
+    <filter id="mbx" x="-40%" y="-5%" width="180%" height="110%"><feGaussianBlur stdDeviation="0 0" /></filter>
+  </svg>
+  <div id="root" data-composition-id="wedding-jannal" data-start="0" data-width="1080" data-height="1920" data-duration="44.3" data-no-timeline>
+    <!-- silent design (like templates 19 and 21); never whoosh/swoosh -->
+  </div>
+  <script type="module">
+    import { DETAILS as SAMPLE } from "./assets/details.js";
+    // GENERATED (build-page.mjs): the editor's live preview — the details from the parent window (the editor sets
+    // window.__vinvPageDetails before it loads this page), the film's time from the parent through window.__filmAt(t)
+    let DETAILS = SAMPLE;
+    try { if (window.parent && window.parent !== window && window.parent.__vinvPageDetails) DETAILS = JSON.parse(JSON.stringify(window.parent.__vinvPageDetails)); } catch { /* another origin */ }
+    import { build, overlays, renderAll, timeline } from "./assets/film.js";
+    window.__FILM__ = true; window.__filmDuration = timeline(DETAILS).DUR;   // GENERATED (build-page.mjs)
+    import { applyStyle, applySizes } from "./style/jannal-style.js";   // GENERATED (build-page.mjs): the customer's font set + text sizes
+    import { preparePhotos, fitPhotos } from "./style/jannal-photos.js";   // GENERATED (build-page.mjs): the customer's window photos
+
+    const MAGENTA = false;   // check only: a scratch copy sets this, never the project
+    window.__hf = window.__hf || {}; window.__hf.buildReady = window.__hf.buildReady || {};
+    let ov = null, ready = false;
+    window.__hf.buildReady.film = (async () => {
+      const root = document.getElementById("root");
+      await applyStyle(DETAILS.style, DETAILS.lang);   // GENERATED (build-page.mjs): no style / the classic set = the lock's own type
+      await preparePhotos(DETAILS, { lite: document.documentElement.classList.contains("lite") });   // GENERATED (build-page.mjs): none = the drawn pictures
+      if (MAGENTA) for (const e of [document.documentElement, document.body, root]) e.classList.add("magenta");
+      await Promise.all(['400 120px "Satisfy"', '700 48px "Kalam"', '400 120px "Norican"', '700 120px "Oleo Script"'].map((f) => document.fonts.load(f, "Aa")));
+      const fits = build(root, DETAILS);
+      ov = overlays(root);
+      applySizes(root, DETAILS.style);   // GENERATED (build-page.mjs): the parts' text sizes, before the text fit
+      fitPhotos(root);   // GENERATED (build-page.mjs): a photo fills its window's opening
+      await Promise.all([...root.querySelectorAll("img")].map((i) => (i.complete && i.naturalWidth ? Promise.resolve() : i.decode()).catch(() => console.warn("image failed", i.src))));
+      for (const f of fits) f();   // text fit with real fonts, once
+      ready = true;
+    })();
+    function renderAt(t) { if (!ready) return; renderAll(t); ov(t); }
+    window.__filmAt = (t) => renderAt(t);   // GENERATED (build-page.mjs): the editor drives the time
+    window.addEventListener("hf-seek", (e) => renderAt(e.detail.time));
+    window.__hf.buildReady.film.then(() => renderAt(window.__hfThreeTime || 0));
+  </script>
+</body>
+</html>

@@ -29,6 +29,7 @@ const config={
  configFile:false,
  base:'/',
  appType:'spa',
+ build:{rollupOptions:{input:{main:'index.html',videoRender:'video-render.html'}}},
  resolve:{
   preserveSymlinks:true,
   alias:{'@':srcRoot}

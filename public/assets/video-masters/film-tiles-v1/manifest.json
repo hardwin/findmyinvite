@@ -1,0 +1,82 @@
+{
+  "id": "film-tiles-v1",
+  "version": 1,
+  "rendererVersion": "scene-film-v1",
+  "sceneDesign": "tiles",
+  "kind": "webgl",
+  "output": {
+    "width": 720,
+    "height": 1280,
+    "fps": 24,
+    "frames": 1377,
+    "duration": 57.375
+  },
+  "scenes": [
+    {
+      "id": "title",
+      "name": "Title",
+      "start": 0,
+      "end": 182,
+      "reviewFrame": 101,
+      "layers": []
+    },
+    {
+      "id": "couple",
+      "name": "Couple",
+      "start": 182,
+      "end": 425,
+      "reviewFrame": 389,
+      "layers": []
+    },
+    {
+      "id": "invitation",
+      "name": "Invitation",
+      "start": 425,
+      "end": 655,
+      "reviewFrame": 528,
+      "layers": []
+    },
+    {
+      "id": "wedding",
+      "name": "Wedding",
+      "start": 655,
+      "end": 857,
+      "reviewFrame": 782,
+      "layers": []
+    },
+    {
+      "id": "reception",
+      "name": "Reception",
+      "start": 857,
+      "end": 1092,
+      "reviewFrame": 1037,
+      "layers": []
+    },
+    {
+      "id": "thanks",
+      "name": "Thank you",
+      "start": 1092,
+      "end": 1377,
+      "reviewFrame": 1334,
+      "layers": []
+    }
+  ],
+  "assets": {
+    "sceneBundle": {
+      "path": "/assets/video-masters/film-tiles-v1/asset-index.json",
+      "sha256": "367b6502f9b50d3823ea4c337f772c392639e92138bce36ed06b94e17685adb6"
+    }
+  },
+  "release": {
+    "approved": false
+  },
+  "catalog": {
+    "poster": "poster.jpg",
+    "posters": {
+      "320": "poster-320-v1.webp",
+      "640": "poster-640-v1.webp",
+      "960": "poster-960-v1.webp"
+    },
+    "preview": "demo-v1.mp4"
+  }
+}

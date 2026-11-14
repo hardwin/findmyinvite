@@ -1,0 +1,74 @@
+{
+  "id": "film-mandapam-v1",
+  "version": 1,
+  "rendererVersion": "scene-film-v1",
+  "sceneDesign": "mandapam",
+  "kind": "plate",
+  "output": {
+    "width": 720,
+    "height": 1280,
+    "fps": 24,
+    "frames": 1301,
+    "duration": 54.208333333333336
+  },
+  "scenes": [
+    {
+      "id": "opening",
+      "name": "Opening",
+      "start": 0,
+      "end": 468,
+      "reviewFrame": 408,
+      "layers": []
+    },
+    {
+      "id": "invitation",
+      "name": "Invitation",
+      "start": 468,
+      "end": 737,
+      "reviewFrame": 648,
+      "layers": []
+    },
+    {
+      "id": "reception",
+      "name": "Reception",
+      "start": 737,
+      "end": 905,
+      "reviewFrame": 859,
+      "layers": []
+    },
+    {
+      "id": "wedding",
+      "name": "Wedding",
+      "start": 905,
+      "end": 1130,
+      "reviewFrame": 1075,
+      "layers": []
+    },
+    {
+      "id": "closing",
+      "name": "Closing",
+      "start": 1130,
+      "end": 1301,
+      "reviewFrame": 1229,
+      "layers": []
+    }
+  ],
+  "assets": {
+    "sceneBundle": {
+      "path": "/assets/video-masters/film-mandapam-v1/asset-index.json",
+      "sha256": "aed04cf3cb17096ed89396257f8fa0bd3f29b952c8f07e588e52fabf9656c09f"
+    }
+  },
+  "release": {
+    "approved": false
+  },
+  "catalog": {
+    "poster": "poster.jpg",
+    "posters": {
+      "320": "poster-320-v1.webp",
+      "640": "poster-640-v1.webp",
+      "960": "poster-960-v1.webp"
+    },
+    "preview": "demo-v1.mp4"
+  }
+}

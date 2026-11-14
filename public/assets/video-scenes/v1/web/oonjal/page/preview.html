@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=1080, height=1920" />
+  <title>Keralam × Tamil Nadu save-the-date (working name)</title>
+  <style>
+    /* two fonts (house rule, English page): Great Vibes (script) + Cormorant Garamond. Both OFL. */
+    @font-face { font-family: "Great Vibes"; src: url("assets/fonts/great-vibes-latin-400.woff2") format("woff2"); font-weight: 400; }
+    @font-face { font-family: "Cormorant Garamond"; src: url("assets/fonts/cormorant-garamond-latin-600.woff2") format("woff2"); font-weight: 600; }
+    :root { --ink: #1f3a63; --wine: #7a1f35; }
+    html, body { margin: 0; background: #cfe3f7; }
+    #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: #cfe3f7; }
+    .lay { position: absolute; display: block; max-width: none; }
+    img.lay { height: auto; }
+    .scene { overflow: hidden; }
+    .pw { position: absolute; inset: 0; }
+    /* text pinned to the screen: navy / wine ink (never black), cream halo, cream backing band (light plates) */
+    .txl { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; z-index: 20; pointer-events: none; }
+    .tx { position: absolute; white-space: nowrap; line-height: 1.05; text-align: center; transform: translate(-50%, -50%);
+      font-variant-numeric: lining-nums proportional-nums; font-feature-settings: "lnum" 1, "pnum" 1; }   /* draft 6: no white glow; lining numbers */
+    .tx span { display: inline-block; opacity: 0; transform-origin: 50% 80%; white-space: pre; }
+    .tx span.sup { letter-spacing: 0.01em; font-size: 0.5em; vertical-align: 0.95em; margin-left: 0.04em; margin-right: 0.08em; }
+    .tx .heart { margin-left: 0.1em; vertical-align: -0.02em; }
+    .ink { color: var(--ink); } .wine { color: var(--wine); }
+    .body { font-family: "Cormorant Garamond"; font-weight: 600; letter-spacing: 0.09em; }
+    .big { letter-spacing: 0.06em; }
+    .name { letter-spacing: 0.12em; }
+    .script { font-family: "Great Vibes"; font-weight: 400; letter-spacing: 0; }
+    .backing { position: absolute; opacity: 0; border-radius: 50%;
+      background: radial-gradient(ellipse at center, rgba(255, 251, 240, 0.74) 0%, rgba(255, 251, 240, 0.52) 45%, rgba(255, 251, 240, 0) 72%); }
+    .hrt { position: absolute; width: 70px; height: 64px; transform: translate(-50%, -50%) scale(0); font-size: 80px; line-height: 0; }
+    .bokeh { border-radius: 50%; background: radial-gradient(circle at 45% 40%, rgba(255, 255, 255, 0.85), rgba(235, 242, 255, 0.35) 55%, rgba(255, 255, 255, 0) 72%); }
+    .bokeh.lil { background: radial-gradient(circle at 45% 40%, rgba(245, 232, 255, 0.85), rgba(222, 210, 250, 0.35) 55%, rgba(255, 255, 255, 0) 72%); }
+    .haze { background: radial-gradient(ellipse at center, #ffffff 0%, #f4f7ff 55%, #e6efff 100%); }
+    .petal { width: 26px; height: 16px; border-radius: 60% 40% 60% 40%; }
+    .petal.m { background: radial-gradient(circle at 35% 35%, #ffd27a, #ee8a1e 75%); }
+    .petal.r { background: radial-gradient(circle at 35% 35%, #ffc4d0, #d9506e 75%); }
+    .petal.j { width: 20px; height: 13px; background: radial-gradient(circle at 35% 35%, #ffffff, #f1ecdc 80%); box-shadow: 0 0 1px rgba(160, 150, 120, 0.6); }
+  </style>
+  <style>/* GENERATED (page-poonga.mjs): the editor's frame has no HyperFrames runtime to size the root */ html, body, #root { width: 1080px; height: 1920px; }</style>
+  <script>/* GENERATED (page-poonga.mjs): lite preview switch */
+    if (/[?&]lite=1/.test(location.search)) {
+      document.documentElement.classList.add("lite");
+      const d = Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, "src");
+      Object.defineProperty(HTMLImageElement.prototype, "src", { ...d, set(v) { d.set.call(this, String(v).replace("assets/img/", "assets/img-lite/")); } });
+      window.__vinvZoom = (z) => { document.documentElement.style.zoom = String(z); };
+    }
+  </script>
+  <style>/* GENERATED (page-poonga.mjs): lite = no blur filters */
+    html.lite [style*="blur("] { filter: none !important; }
+    html.lite #film { filter: none !important; }   /* 40 Kalyana: the SVG RGB split (feOffset px) is not zoomed on iPhone Safari, so it smears; off in the lite preview */
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="reel-de8fc1cty9n" data-start="0" data-width="1080" data-height="1920" data-duration="34.48" data-no-timeline>
+    <!-- the reel's own song (owner: "same audio"); mix + SFX: audio/mix.wav once built -->
+  </div>
+  <script type="module">
+    import { DETAILS as SAMPLE } from "./assets/details.js";
+    // GENERATED (page-poonga.mjs): the editor's live preview — the details from the parent window (the editor sets
+    // window.__vinvPageDetails before it loads this page), the film's time from the parent through window.__filmAt(t)
+    let DETAILS = SAMPLE;
+    try { if (window.parent && window.parent !== window && window.parent.__vinvPageDetails) DETAILS = window.parent.__vinvPageDetails; } catch { /* another origin */ }
+    window.__FILM__ = true; window.__filmDuration = Number(document.getElementById("root").dataset.duration);
+    import { build } from "./assets/film.js";
+    import { renderAll } from "./assets/engine.js";
+
+    window.__hf = window.__hf || {}; window.__hf.buildReady = window.__hf.buildReady || {};
+    let film = null, ready = false;
+    window.__hf.buildReady.film = (async () => {
+      const root = document.getElementById("root");
+      await Promise.all(['168px "Great Vibes"', '600 58px "Cormorant Garamond"'].map((f) => document.fonts.load(f, "Save the Date MAPLA FEBRUARY 0123456789 TH")));
+      film = build(root, DETAILS);
+      await Promise.all([...document.querySelectorAll("img")].map((i) => (i.complete && i.naturalWidth ? Promise.resolve() : i.decode()).catch(() => console.warn("image failed", i.src))));
+      for (const f of film.fits) f();
+      ready = true;
+    })();
+    function renderAt(t) { if (!ready) return; film.render(t); renderAll(t); }
+    window.__filmAt = (t) => renderAt(t);   // GENERATED (page-poonga.mjs): the editor drives the time
+    window.addEventListener("hf-seek", (e) => renderAt(e.detail.time));
+    window.__hf.buildReady.film.then(() => renderAt(window.__hfThreeTime || 0));
+    window.__renderAt = renderAt;
+  </script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+{
+  "id": "film-valli-v1",
+  "version": 1,
+  "rendererVersion": "scene-film-v1",
+  "sceneDesign": "valli",
+  "kind": "webgl",
+  "output": {
+    "width": 720,
+    "height": 1280,
+    "fps": 24,
+    "frames": 1474,
+    "duration": 61.416666666666664
+  },
+  "scenes": [
+    {
+      "id": "opening",
+      "name": "Opening",
+      "start": 0,
+      "end": 238,
+      "reviewFrame": 182,
+      "layers": []
+    },
+    {
+      "id": "invitation",
+      "name": "Invitation",
+      "start": 238,
+      "end": 550,
+      "reviewFrame": 502,
+      "layers": []
+    },
+    {
+      "id": "wedding",
+      "name": "Wedding",
+      "start": 550,
+      "end": 958,
+      "reviewFrame": 910,
+      "layers": []
+    },
+    {
+      "id": "reception",
+      "name": "Reception",
+      "start": 958,
+      "end": 1243,
+      "reviewFrame": 1198,
+      "layers": []
+    },
+    {
+      "id": "thanks",
+      "name": "Thank you",
+      "start": 1243,
+      "end": 1474,
+      "reviewFrame": 1414,
+      "layers": []
+    }
+  ],
+  "assets": {
+    "sceneBundle": {
+      "path": "/assets/video-masters/film-valli-v1/asset-index.json",
+      "sha256": "d730f484c3bad7dfa8e8ea2e4fa8f40d09c87a27c9918289f158db235d5258da"
+    }
+  },
+  "release": {
+    "approved": false
+  },
+  "catalog": {
+    "poster": "poster.jpg",
+    "posters": {
+      "320": "poster-320-v1.webp",
+      "640": "poster-640-v1.webp",
+      "960": "poster-960-v1.webp"
+    },
+    "preview": "demo-v1.mp4"
+  }
+}

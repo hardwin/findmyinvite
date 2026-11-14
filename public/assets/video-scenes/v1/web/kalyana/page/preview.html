@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ta">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=1080, height=1920" />
+  <title>Wedding invite — Kalyana Poster (working name)</title>
+  <style>
+    /* two fonts (house rule, Tamil page): ATM 468 poster titles + ATM 344 body (owner's Tamil fonts) */
+    @font-face { font-family: "ATM 468"; src: url("assets/fonts/ATM-468.ttf") format("truetype"); }
+    @font-face { font-family: "ATM 344"; src: url("assets/fonts/ATM-344.ttf") format("truetype"); }
+    html, body { margin: 0; background: #d8b878; }
+    #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: #d8b878; }
+    #film { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; overflow: hidden; filter: url(#rgb); }
+    .lay { position: absolute; display: block; max-width: none; }
+    img.lay { height: auto; }
+    .scene { width: 1080px; height: 1920px; overflow: hidden; }
+    .box > img { position: absolute; left: 0; top: 0; width: 100%; height: auto; }
+    .tx { position: absolute; white-space: nowrap; line-height: 1.1; text-align: center; transform: translate(-50%, -50%);
+      paint-order: stroke fill; }
+    .tx > span { display: inline-block; }
+    .disp { font-family: "ATM 468"; }
+    .body { font-family: "ATM 344"; }
+    .grain { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; z-index: 60; pointer-events: none;
+      mix-blend-mode: overlay; opacity: 0.22; image-rendering: pixelated; }
+    .vig { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; z-index: 59; pointer-events: none;
+      background: radial-gradient(ellipse at 50% 50%, rgba(60, 30, 10, 0) 55%, rgba(60, 30, 10, 0.32) 100%); }
+  </style>
+  <style>/* GENERATED (page-poonga.mjs): the editor's frame has no HyperFrames runtime to size the root */ html, body, #root { width: 1080px; height: 1920px; }</style>
+  <script>/* GENERATED (page-poonga.mjs): lite preview switch */
+    if (/[?&]lite=1/.test(location.search)) {
+      document.documentElement.classList.add("lite");
+      const d = Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, "src");
+      Object.defineProperty(HTMLImageElement.prototype, "src", { ...d, set(v) { d.set.call(this, String(v).replace("assets/img/", "assets/img-lite/")); } });
+      window.__vinvZoom = (z) => { document.documentElement.style.zoom = String(z); };
+    }
+  </script>
+  <style>/* GENERATED (page-poonga.mjs): lite = no blur filters */
+    html.lite [style*="blur("] { filter: none !important; }
+    html.lite #film { filter: none !important; }   /* 40 Kalyana: the SVG RGB split (feOffset px) is not zoomed on iPhone Safari, so it smears; off in the lite preview */
+  </style>
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute">
+    <!-- slight RGB split over the whole film, like the reference's old-print / VHS look -->
+    <filter id="rgb" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+      <feColorMatrix in="SourceGraphic" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="r" />
+      <feOffset in="r" dx="3" dy="0" result="r2" />
+      <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0" result="gb" />
+      <feOffset in="gb" dx="-2" dy="0" result="gb2" />
+      <feBlend in="r2" in2="gb2" mode="screen" />
+    </filter>
+  </svg>
+  <div id="root" data-composition-id="reel-dfw2z1xuv5d" data-start="0" data-width="1080" data-height="1920" data-duration="36" data-no-timeline>
+    <div id="film"></div>
+    <!-- silent draft; music later (never whoosh/swoosh) -->
+  </div>
+  <script type="module">
+    import { preparePhoto } from "./style/kalyana-photo.js";   // GENERATED (page-poonga.mjs): the customer's photo
+    import { DETAILS as SAMPLE } from "./assets/details.js";
+    // GENERATED (page-poonga.mjs): the editor's live preview — the details from the parent window (the editor sets
+    // window.__vinvPageDetails before it loads this page), the film's time from the parent through window.__filmAt(t)
+    let DETAILS = SAMPLE;
+    try { if (window.parent && window.parent !== window && window.parent.__vinvPageDetails) DETAILS = JSON.parse(JSON.stringify(window.parent.__vinvPageDetails)); /* a copy: the photo bake changes it */ } catch { /* another origin */ }
+    window.__FILM__ = true; window.__filmDuration = Number(document.getElementById("root").dataset.duration);
+    import { build } from "./assets/film.js";
+    import { renderAll } from "./assets/engine.js";
+
+    window.__hf = window.__hf || {}; window.__hf.buildReady = window.__hf.buildReady || {};
+    let film = null, ready = false;
+    window.__hf.buildReady.film = (async () => {
+      await Promise.all(['80px "ATM 468"', '48px "ATM 344"'].map((f) => document.fonts.load(f, "திருமண அழைப்பிதழ் ஶ்ரீ 0123456789!")));
+      await preparePhoto(DETAILS);   // GENERATED (page-poonga.mjs)
+      film = build(document.getElementById("root"), document.getElementById("film"), DETAILS);
+      await Promise.all([...document.querySelectorAll("img")].map((i) => (i.complete && i.naturalWidth ? Promise.resolve() : i.decode()).catch(() => console.warn("image failed", i.src))));
+      for (const f of film.fits) f();
+      ready = true;
+    })();
+    function renderAt(t) { if (!ready) return; film.render(t); renderAll(t); }
+    window.__filmAt = (t) => renderAt(t);   // GENERATED (page-poonga.mjs): the editor drives the time
+    window.addEventListener("hf-seek", (e) => renderAt(e.detail.time));
+    window.__hf.buildReady.film.then(() => renderAt(window.__hfThreeTime || 0));
+    window.__renderAt = renderAt;
+  </script>
+</body>
+</html>

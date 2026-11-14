@@ -1,0 +1,66 @@
+{
+  "id": "film-malligai-v1",
+  "version": 1,
+  "rendererVersion": "scene-film-v1",
+  "sceneDesign": "malligai",
+  "kind": "page",
+  "output": {
+    "width": 720,
+    "height": 1280,
+    "fps": 24,
+    "frames": 816,
+    "duration": 34
+  },
+  "scenes": [
+    {
+      "id": "title",
+      "name": "Title",
+      "start": 0,
+      "end": 250,
+      "reviewFrame": 72,
+      "layers": []
+    },
+    {
+      "id": "names",
+      "name": "Names",
+      "start": 250,
+      "end": 461,
+      "reviewFrame": 372,
+      "layers": []
+    },
+    {
+      "id": "events",
+      "name": "Events",
+      "start": 461,
+      "end": 662,
+      "reviewFrame": 600,
+      "layers": []
+    },
+    {
+      "id": "closing",
+      "name": "Closing",
+      "start": 662,
+      "end": 816,
+      "reviewFrame": 804,
+      "layers": []
+    }
+  ],
+  "assets": {
+    "sceneBundle": {
+      "path": "/assets/video-masters/film-malligai-v1/asset-index.json",
+      "sha256": "e4cc499d479dd46a8c14c991d1d85806e487b1b27e6d2d945306298868048338"
+    }
+  },
+  "release": {
+    "approved": false
+  },
+  "catalog": {
+    "poster": "poster.jpg",
+    "posters": {
+      "320": "poster-320-v1.webp",
+      "640": "poster-640-v1.webp",
+      "960": "poster-960-v1.webp"
+    },
+    "preview": "demo-v1.mp4"
+  }
+}

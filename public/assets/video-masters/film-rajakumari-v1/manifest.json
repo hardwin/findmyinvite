@@ -1,0 +1,66 @@
+{
+  "id": "film-rajakumari-v1",
+  "version": 1,
+  "rendererVersion": "scene-film-v1",
+  "sceneDesign": "rajakumari",
+  "kind": "page",
+  "output": {
+    "width": 720,
+    "height": 1280,
+    "fps": 24,
+    "frames": 720,
+    "duration": 30
+  },
+  "scenes": [
+    {
+      "id": "title",
+      "name": "Title",
+      "start": 0,
+      "end": 137,
+      "reviewFrame": 120,
+      "layers": []
+    },
+    {
+      "id": "photo",
+      "name": "Photo & name",
+      "start": 137,
+      "end": 307,
+      "reviewFrame": 259,
+      "layers": []
+    },
+    {
+      "id": "details",
+      "name": "Date & venue",
+      "start": 307,
+      "end": 566,
+      "reviewFrame": 516,
+      "layers": []
+    },
+    {
+      "id": "closing",
+      "name": "R.S.V.P.",
+      "start": 566,
+      "end": 720,
+      "reviewFrame": 653,
+      "layers": []
+    }
+  ],
+  "assets": {
+    "sceneBundle": {
+      "path": "/assets/video-masters/film-rajakumari-v1/asset-index.json",
+      "sha256": "deeaa0e5dce8af839b8707ed8f14ac579d65103f0ae226ad3e895e0073d34e20"
+    }
+  },
+  "release": {
+    "approved": false
+  },
+  "catalog": {
+    "poster": "poster.jpg",
+    "posters": {
+      "320": "poster-320-v1.webp",
+      "640": "poster-640-v1.webp",
+      "960": "poster-960-v1.webp"
+    },
+    "preview": "demo-v1.mp4"
+  }
+}

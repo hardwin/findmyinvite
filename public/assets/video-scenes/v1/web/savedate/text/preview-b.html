@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=1080, height=1920" />
+  <title>Save the date — text</title>
+  <style>
+    @font-face { font-family: "Kaushan Script"; src: url("assets/fonts/kaushan-script-latin-400-normal.woff2") format("woff2"); font-weight: 400; }
+    @font-face { font-family: "Kaushan Script"; src: url("assets/fonts/kaushan-script-latin-ext-400-normal.woff2") format("woff2"); font-weight: 400; unicode-range: U+0100-024F, U+1E00-1EFF; }
+    @font-face { font-family: "Fredoka"; src: url("assets/fonts/fredoka-latin-600-normal.woff2") format("woff2"); font-weight: 600; }
+    @font-face { font-family: "Fredoka"; src: url("assets/fonts/fredoka-latin-ext-600-normal.woff2") format("woff2"); font-weight: 600; unicode-range: U+0100-024F, U+1E00-1EFF; }
+    @font-face { font-family: "Cormorant"; src: url("assets/fonts/cormorant-lnum-latin-600-normal.woff2") format("woff2"); font-weight: 600; }
+    @font-face { font-family: "Cormorant"; src: url("assets/fonts/cormorant-lnum-latin-ext-600-normal.woff2") format("woff2"); font-weight: 600; unicode-range: U+0100-024F, U+1E00-1EFF; }
+    @font-face { font-family: "Cormorant Upright"; src: url("assets/fonts/cormorant-upright-latin-600-normal.woff2") format("woff2"); font-weight: 600; }
+    html, body { margin: 0; background: #000; }
+    #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; }
+    #gl { position: absolute; inset: 0; width: 1080px; height: 1920px; display: block; }
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="save-the-date-text" data-no-timeline data-width="1080" data-height="1920" data-fps="24" data-duration="31.5">
+    <canvas id="gl" width="1080" height="1920"></canvas>
+  </div>
+  <script type="module">
+    import { FACES, SAMPLE_TEXT, buildBlocks, drawAt } from "./assets/std.js";
+    import { DETAILS } from "./assets/details.js";
+    // the editor's live preview hands its details down to this page (plate-preview.js: window.__vinvPageDetails)
+    let D = DETAILS;
+    try { if (window.parent && window.parent !== window && window.parent.__vinvPageDetails) D = window.parent.__vinvPageDetails; } catch { /* another origin */ }
+    import flags from "./assets/flags-b.js";
+    const cv = document.getElementById("gl"), ctx = cv.getContext("2d");
+    const bg = "#" + (flags.textBg ?? 0).toString(16).padStart(6, "0");
+    document.body.style.background = document.getElementById("root").style.background = bg;
+    let blocks = null;
+    window.__hf = window.__hf || {}; window.__hf.buildReady = window.__hf.buildReady || {};
+    window.__hf.buildReady.film = (async () => {
+      await Promise.all(FACES.map((f) => document.fonts.load(f, SAMPLE_TEXT)));
+      blocks = buildBlocks(D);
+      window.__filmDuration = 31.5;
+    })();
+    // flags.textBg < 0: a transparent page (the sample and preview capture the text with its alpha)
+    if (flags.textBg < 0) document.documentElement.style.background = document.body.style.background = document.getElementById("root").style.background = "transparent";
+    function renderAt(t) {
+      if (!blocks) return;
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      if (flags.textBg < 0) ctx.clearRect(0, 0, cv.width, cv.height);
+      else { ctx.fillStyle = bg; ctx.fillRect(0, 0, cv.width, cv.height); }
+      drawAt(ctx, t, blocks, 1);
+    }
+    window.__filmAt = (t) => renderAt(t);
+    window.addEventListener("hf-seek", (e) => renderAt(e.detail.time));
+    window.__hf.buildReady.film.then(() => renderAt(window.__hfThreeTime || 0));
+  </script>
+</body>
+</html>

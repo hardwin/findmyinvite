@@ -1,0 +1,90 @@
+{
+  "id": "film-walk-v1",
+  "version": 1,
+  "rendererVersion": "scene-film-v1",
+  "sceneDesign": "walk",
+  "kind": "page",
+  "output": {
+    "width": 720,
+    "height": 1280,
+    "fps": 24,
+    "frames": 1428,
+    "duration": 59.5
+  },
+  "scenes": [
+    {
+      "id": "gate",
+      "name": "Gate",
+      "start": 0,
+      "end": 163,
+      "reviewFrame": 149,
+      "layers": []
+    },
+    {
+      "id": "welcome",
+      "name": "Welcome",
+      "start": 163,
+      "end": 365,
+      "reviewFrame": 259,
+      "layers": []
+    },
+    {
+      "id": "story",
+      "name": "Our story",
+      "start": 365,
+      "end": 566,
+      "reviewFrame": 461,
+      "layers": []
+    },
+    {
+      "id": "engagement",
+      "name": "Engagement",
+      "start": 566,
+      "end": 768,
+      "reviewFrame": 662,
+      "layers": []
+    },
+    {
+      "id": "wedding",
+      "name": "Wedding",
+      "start": 768,
+      "end": 989,
+      "reviewFrame": 864,
+      "layers": []
+    },
+    {
+      "id": "reception",
+      "name": "Reception",
+      "start": 989,
+      "end": 1195,
+      "reviewFrame": 1085,
+      "layers": []
+    },
+    {
+      "id": "thanks",
+      "name": "Thank you",
+      "start": 1195,
+      "end": 1428,
+      "reviewFrame": 1306,
+      "layers": []
+    }
+  ],
+  "assets": {
+    "sceneBundle": {
+      "path": "/assets/video-masters/film-walk-v1/asset-index.json",
+      "sha256": "1ed53fd428132b3178464a4b12c7d3b109182d622ba892b0c95be73d0b543978"
+    }
+  },
+  "release": {
+    "approved": false
+  },
+  "catalog": {
+    "poster": "poster.jpg",
+    "posters": {
+      "320": "poster-320-v1.webp",
+      "640": "poster-640-v1.webp",
+      "960": "poster-960-v1.webp"
+    },
+    "preview": "demo-v1.mp4"
+  }
+}

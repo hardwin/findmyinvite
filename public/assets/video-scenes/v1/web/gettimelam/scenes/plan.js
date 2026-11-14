@@ -1,0 +1,1 @@
+export const SLIDE={open:18,invite:10,wedding:10,reception:9,thanks:8};const hasReception=e=>!(!e.reception||!e.reception.dateISO&&!e.reception.date);export function plan(e){const n=["open","invite","wedding",...hasReception(e)?["reception"]:[],"thanks"];let t=0;return{slides:n.map((e=>{const n={kind:e,t0:t,t1:t+SLIDE[e]};return t+=SLIDE[e],n})),duration:t}}

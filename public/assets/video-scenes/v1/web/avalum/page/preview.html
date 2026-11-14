@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=1080, height=1920" />
+  <title>Wedding invite — Thoppu (working name)</title>
+  <style>
+    /* two fonts (house rule, English page, owner draft 2): Great Vibes (script: names, last thank-you line) + Cormorant */
+    @font-face { font-family: "Great Vibes"; src: url("assets/fonts/greatvibes-latin.woff2") format("woff2"); }
+    @font-face { font-family: "Cormorant"; src: url("assets/fonts/cormorant-bold-latin.woff2") format("woff2"); font-weight: 700; }
+    @font-face { font-family: "Cormorant"; src: url("assets/fonts/cormorant-regular-latin.woff2") format("woff2"); font-weight: 400; }
+    /* Tamil verse only (owner, draft 10): Thirukkural 45 in ATM 378 */
+    @font-face { font-family: "ATM378"; src: url("assets/fonts/ATM-378.ttf") format("truetype"); }
+    .ta { font-family: "ATM378"; line-height: 1.55; }
+    :root { --ink: #2c5a33; --ink2: #3b6a3c; --name: #7d2b3a; }
+    html, body { margin: 0; background: #bfe0f0; }
+    #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: #bfe0f0; }
+    .lay { position: absolute; display: block; max-width: none; }
+    img.lay { height: auto; }
+    .fade-top { -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 22%); mask-image: linear-gradient(to bottom, transparent 0%, #000 22%); }
+    .spark { border-radius: 50%; background: radial-gradient(circle, rgba(255, 252, 215, 1) 0%, rgba(250, 232, 140, 0.85) 35%, rgba(240, 215, 100, 0) 70%); }
+    /* text: centred on a soft cloud, deep green / maroon (never black), light halo for readability */
+    .card { position: absolute; z-index: 40; }
+    .cardbg { position: absolute; left: -90px; top: -90px; }
+    .cardbg svg { display: block; }
+    .cardtx { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); text-align: center; white-space: nowrap; }
+    .ln { line-height: 1.32; color: var(--ink); text-shadow: 0 0 6px rgba(255, 255, 250, 0.95), 0 0 14px rgba(255, 255, 250, 0.8); }
+    .ln span { display: inline-block; }
+    .disp { font-family: "Great Vibes"; color: var(--name); line-height: 1.25; }
+    .body { font-family: "Cormorant"; font-weight: 700; }
+    .it { font-style: normal; }
+    .caps { letter-spacing: 0.16em; }
+    .place { color: var(--name); }
+    .small { color: var(--ink2); }
+    .heart { display: inline-block; vertical-align: 0.05em; margin: 0 0.14em; }
+    .dot { font-weight: 400; color: #b0823a; margin: 0 0.32em; }
+    .big { font-size: 1.45em; vertical-align: -0.06em; color: var(--name); }
+    .hr { height: 2px; margin: 10px auto; width: 92%; background: linear-gradient(90deg, rgba(60, 100, 60, 0), rgba(60, 100, 60, 0.7) 15%, rgba(60, 100, 60, 0.7) 85%, rgba(60, 100, 60, 0)); }
+    .fade-far { -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 28%); mask-image: linear-gradient(to bottom, transparent 0%, #000 28%); }
+    .fade-bot { -webkit-mask-image: linear-gradient(to top, transparent 0%, #000 9%), linear-gradient(to left, transparent 0%, #000 22%); -webkit-mask-composite: source-in; mask-image: linear-gradient(to top, transparent 0%, #000 9%), linear-gradient(to left, transparent 0%, #000 22%); mask-composite: intersect; }
+    /* draft 4: one flat painting, moved by the camera (zoom + move only) */
+    .paint { position: absolute; left: 0; top: 0; overflow: visible; transform-origin: 0 0; background: #bfe0f0; }
+    .pl { position: absolute; display: block; max-width: none; height: auto; }
+    .groundcut { -webkit-mask-image: linear-gradient(to bottom, transparent 63%, #000 71%); mask-image: linear-gradient(to bottom, transparent 63%, #000 71%); }
+    .paint { background: transparent !important; }
+    .shadow { position: absolute; border-radius: 50%; background: radial-gradient(ellipse, rgba(70, 50, 25, 0.42) 0%, rgba(70, 50, 25, 0.18) 45%, rgba(70, 50, 25, 0) 72%); }
+    .fadeR { -webkit-mask-image: linear-gradient(to left, transparent 0%, #000 20%); mask-image: linear-gradient(to left, transparent 0%, #000 20%); }
+    .specks { position: absolute; inset: 0; z-index: 45; pointer-events: none; }
+    .speck { border-radius: 42% 58% 47% 53% / 55% 45% 58% 42%; background: rgba(240, 246, 146, 0.95); box-shadow: 0 0 5px rgba(242, 246, 150, 0.75); }
+    .glow { border-radius: 50%; background: radial-gradient(circle, rgba(246, 248, 170, 0.75), rgba(246, 248, 170, 0) 70%); }
+    .veil { background: radial-gradient(ellipse at 50% 50%, #86a96c, #628c55); }
+    .grain { position: absolute; inset: 0; z-index: 60; pointer-events: none; opacity: 0.10; mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='360' height='360'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='4'/><feColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.4 0 0 0 0 0.3 0 0 0 1.1 -0.35'/></filter><rect width='100%' height='100%' filter='url(%23g)'/></svg>"); }
+  </style>
+  <style>/* GENERATED (page-poonga.mjs): the editor's frame has no HyperFrames runtime to size the root */ html, body, #root { width: 1080px; height: 1920px; }</style>
+  <script>/* GENERATED (page-poonga.mjs): lite preview switch */
+    if (/[?&]lite=1/.test(location.search)) {
+      document.documentElement.classList.add("lite");
+      const d = Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, "src");
+      Object.defineProperty(HTMLImageElement.prototype, "src", { ...d, set(v) { d.set.call(this, String(v).replace("assets/img/", "assets/img-lite/")); } });
+      window.__vinvZoom = (z) => { document.documentElement.style.zoom = String(z); };
+    }
+  </script>
+  <style>/* GENERATED (page-poonga.mjs): lite = no blur filters */
+    html.lite [style*="blur("] { filter: none !important; }
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="reel-dfuyn19xqsa" data-start="0" data-width="1080" data-height="1920" data-duration="50" data-no-timeline>
+    <!-- silent draft; music later (never whoosh/swoosh) -->
+  </div>
+  <script type="module">
+    import { DETAILS as SAMPLE } from "./assets/details.js";
+    // GENERATED (page-poonga.mjs): the editor's live preview — the details from the parent window (the editor sets
+    // window.__vinvPageDetails before it loads this page), the film's time from the parent through window.__filmAt(t)
+    let DETAILS = SAMPLE;
+    try { if (window.parent && window.parent !== window && window.parent.__vinvPageDetails) DETAILS = window.parent.__vinvPageDetails; } catch { /* another origin */ }
+    window.__FILM__ = true; window.__filmDuration = Number(document.getElementById("root").dataset.duration);
+    import { build } from "./assets/film.js";
+    import { renderAll } from "./assets/engine.js";
+
+    window.__hf = window.__hf || {}; window.__hf.buildReady = window.__hf.buildReady || {};
+    let film = null, ready = false;
+    window.__hf.buildReady.film = (async () => {
+      const root = document.getElementById("root");
+      await Promise.all(['80px "Great Vibes"', '700 48px Cormorant', '400 48px Cormorant', '48px ATM378'].map((f) => document.fonts.load(f, "Arun & Kayal 0123456789 அன்பும் திருக்குறள்")));
+      film = build(root, DETAILS);
+      await Promise.all([...document.querySelectorAll("img")].map((i) => (i.complete && i.naturalWidth ? Promise.resolve() : i.decode()).catch(() => console.warn("image failed", i.src))));
+      for (const f of film.fits) f();
+      ready = true;
+    })();
+    function renderAt(t) { if (!ready) return; film.render(t); renderAll(t); }
+    window.__filmAt = (t) => renderAt(t);   // GENERATED (page-poonga.mjs): the editor drives the time
+    window.addEventListener("hf-seek", (e) => renderAt(e.detail.time));
+    window.__hf.buildReady.film.then(() => renderAt(window.__hfThreeTime || 0));
+    window.__renderAt = renderAt;
+  </script>
+</body>
+</html>

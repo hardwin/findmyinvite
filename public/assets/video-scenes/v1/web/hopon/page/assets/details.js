@@ -1,0 +1,1 @@
+export const DETAILS={lang:"en",quote:["He said, “Hop on.”","She said, “Only if it’s forever.”"],title:["Save","the","Date"],names:"Arun & Kaviya",date:["17 DECEMBER","2026"]};

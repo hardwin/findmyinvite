@@ -1,0 +1,90 @@
+{
+  "id": "film-jannal-v1",
+  "version": 1,
+  "rendererVersion": "scene-film-v1",
+  "sceneDesign": "jannal",
+  "kind": "page",
+  "output": {
+    "width": 720,
+    "height": 1280,
+    "fps": 24,
+    "frames": 1064,
+    "duration": 44.333333333333336
+  },
+  "scenes": [
+    {
+      "id": "opening",
+      "name": "Opening",
+      "start": 0,
+      "end": 102,
+      "reviewFrame": 77,
+      "layers": []
+    },
+    {
+      "id": "bride",
+      "name": "Bride",
+      "start": 102,
+      "end": 202,
+      "reviewFrame": 163,
+      "layers": []
+    },
+    {
+      "id": "groom",
+      "name": "Groom",
+      "start": 202,
+      "end": 305,
+      "reviewFrame": 264,
+      "layers": []
+    },
+    {
+      "id": "names",
+      "name": "Names",
+      "start": 305,
+      "end": 458,
+      "reviewFrame": 396,
+      "layers": []
+    },
+    {
+      "id": "wedding",
+      "name": "Muhurtham",
+      "start": 458,
+      "end": 722,
+      "reviewFrame": 672,
+      "layers": []
+    },
+    {
+      "id": "reception",
+      "name": "Reception",
+      "start": 722,
+      "end": 910,
+      "reviewFrame": 864,
+      "layers": []
+    },
+    {
+      "id": "closing",
+      "name": "Closing",
+      "start": 910,
+      "end": 1064,
+      "reviewFrame": 981,
+      "layers": []
+    }
+  ],
+  "assets": {
+    "sceneBundle": {
+      "path": "/assets/video-masters/film-jannal-v1/asset-index.json",
+      "sha256": "46dc53f7a8dc477d7d5befe88d1a24f2e1ca804847c9002a8a269d77a41fd636"
+    }
+  },
+  "release": {
+    "approved": false
+  },
+  "catalog": {
+    "poster": "poster.jpg",
+    "posters": {
+      "320": "poster-320-v1.webp",
+      "640": "poster-640-v1.webp",
+      "960": "poster-960-v1.webp"
+    },
+    "preview": "demo-v1.mp4"
+  }
+}

@@ -1,0 +1,1 @@
+export const DETAILS={lang:"en",title:["You're invited to a","wedding in Karaikudi"],kicker:"Save the Date",groom:"Arun",bride:"Meena",lines:["Monday, February 15, 2027","Muhurtham · 6.00 – 7.30 am","Sri Meenakshi Mahal, Karaikudi","Reception · February 14 · 6.30 pm onwards","Your presence is our blessing"]};

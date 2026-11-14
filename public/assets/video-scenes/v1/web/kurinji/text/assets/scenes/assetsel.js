@@ -1,0 +1,1 @@
+import s from"./assets3.js";import t from"./assets4.js";export default{...s,...t};

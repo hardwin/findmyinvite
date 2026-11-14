@@ -1,0 +1,23 @@
+/* Template 12 "Poovanam" (video): the web invite's page laid out as a 360 × 640 phone and zoomed 3× to the 1080 × 1920
+   frame (the 3D garden draws at 1080 × 1920 itself: app.film.js renders at pixel ratio 3). The web-only controls are hidden. */
+html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #2a1d33; }
+#root { position: relative; width: 1080px; height: 1920px; overflow: hidden; }
+#phone { position: absolute; left: 0; top: 0; width: 360px; height: 640px; zoom: 3; overflow: hidden; transform: translateZ(0); }
+body.film #stage { left: 0; transform: none; width: 360px; height: 640px; }
+/* no buttons, switches, hints, live countdown or loading counter in a film */
+body.film #hud .hr, body.film #evBtn, body.film #rail, body.film #hint, body.film #cur, body.film .acts,
+body.film .count, body.film #spacer, body.film #wishRing, body.film #toast, body.film #scrim,
+body.film .sheet { display: none !important; }
+/* CSS motion runs on the wall clock, not the film's: off (the few things that moved by CSS are driven per frame by app.film.js) */
+body.film *, body.film *::before, body.film *::after { transition: none !important; animation: none !important; }
+/* web-only wording */
+body.film [data-t="walkIn"] { display: none !important; }
+/* the gate's tag: names, "are getting married", the date (app.film.js) */
+body.film #doors #tapl { margin-top: 4px; }
+body.film #doors #pct { font-size: 15px; letter-spacing: .3em; margin-top: 2px; }
+/* long names on the gate's tag wrap (the web shrinks them to one line, down to 20px, then clips — a film can take two lines) */
+body.film #doors .script { white-space: normal; line-height: 1.12; text-align: center; }
+/* Tamil names: Arima's "&" is a curl a Tamil reader can take for a letter — the ampersand alone comes from Cormorant
+   Garamond italic (unicode-range), the Tamil letters stay Arima */
+@font-face { font-family: "AmpLatin"; src: url("fonts/cormorant-garamond-latin-600-italic.woff2") format("woff2"); font-weight: 100 900; font-style: normal; unicode-range: U+0026; font-display: block; }
+body.film.ta .script { font-family: "AmpLatin", "Arima", sans-serif; }

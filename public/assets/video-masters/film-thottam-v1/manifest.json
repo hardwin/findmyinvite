@@ -1,0 +1,74 @@
+{
+  "id": "film-thottam-v1",
+  "version": 1,
+  "rendererVersion": "scene-film-v1",
+  "sceneDesign": "thottam",
+  "kind": "plate",
+  "output": {
+    "width": 720,
+    "height": 1280,
+    "fps": 24,
+    "frames": 1272,
+    "duration": 53
+  },
+  "scenes": [
+    {
+      "id": "opening",
+      "name": "Opening",
+      "start": 0,
+      "end": 439,
+      "reviewFrame": 396,
+      "layers": []
+    },
+    {
+      "id": "invitation",
+      "name": "Invitation",
+      "start": 439,
+      "end": 708,
+      "reviewFrame": 624,
+      "layers": []
+    },
+    {
+      "id": "reception",
+      "name": "Reception",
+      "start": 708,
+      "end": 876,
+      "reviewFrame": 840,
+      "layers": []
+    },
+    {
+      "id": "wedding",
+      "name": "Wedding",
+      "start": 876,
+      "end": 1102,
+      "reviewFrame": 1056,
+      "layers": []
+    },
+    {
+      "id": "closing",
+      "name": "Closing",
+      "start": 1102,
+      "end": 1272,
+      "reviewFrame": 1200,
+      "layers": []
+    }
+  ],
+  "assets": {
+    "sceneBundle": {
+      "path": "/assets/video-masters/film-thottam-v1/asset-index.json",
+      "sha256": "463d9eca56fbc4331a4f03d68132c6bedf3d7c110658edf7c676a523979f009d"
+    }
+  },
+  "release": {
+    "approved": false
+  },
+  "catalog": {
+    "poster": "poster.jpg",
+    "posters": {
+      "320": "poster-320-v1.webp",
+      "640": "poster-640-v1.webp",
+      "960": "poster-960-v1.webp"
+    },
+    "preview": "demo-v1.mp4"
+  }
+}

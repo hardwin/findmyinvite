@@ -1,0 +1,82 @@
+{
+  "id": "film-garden-v1",
+  "version": 1,
+  "rendererVersion": "scene-film-v1",
+  "sceneDesign": "garden",
+  "kind": "webgl",
+  "output": {
+    "width": 720,
+    "height": 1280,
+    "fps": 24,
+    "frames": 975,
+    "duration": 40.625
+  },
+  "scenes": [
+    {
+      "id": "title",
+      "name": "Title",
+      "start": 0,
+      "end": 139,
+      "reviewFrame": 86,
+      "layers": []
+    },
+    {
+      "id": "couple",
+      "name": "Couple",
+      "start": 139,
+      "end": 317,
+      "reviewFrame": 252,
+      "layers": []
+    },
+    {
+      "id": "invitation",
+      "name": "Invitation",
+      "start": 317,
+      "end": 533,
+      "reviewFrame": 470,
+      "layers": []
+    },
+    {
+      "id": "wedding",
+      "name": "Wedding",
+      "start": 533,
+      "end": 677,
+      "reviewFrame": 629,
+      "layers": []
+    },
+    {
+      "id": "reception",
+      "name": "Reception",
+      "start": 677,
+      "end": 811,
+      "reviewFrame": 768,
+      "layers": []
+    },
+    {
+      "id": "thanks",
+      "name": "Thank you",
+      "start": 811,
+      "end": 975,
+      "reviewFrame": 907,
+      "layers": []
+    }
+  ],
+  "assets": {
+    "sceneBundle": {
+      "path": "/assets/video-masters/film-garden-v1/asset-index.json",
+      "sha256": "6ef2871809313e3a1bb29be10ebc85de75794204cd3d6f261edc268e89e25fe8"
+    }
+  },
+  "release": {
+    "approved": false
+  },
+  "catalog": {
+    "poster": "poster.jpg",
+    "posters": {
+      "320": "poster-320-v1.webp",
+      "640": "poster-640-v1.webp",
+      "960": "poster-960-v1.webp"
+    },
+    "preview": "demo-v1.mp4"
+  }
+}

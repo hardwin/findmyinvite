@@ -1,0 +1,74 @@
+{
+  "id": "film-ilavarasi-v1",
+  "version": 1,
+  "rendererVersion": "scene-film-v1",
+  "sceneDesign": "ilavarasi",
+  "kind": "page",
+  "output": {
+    "width": 720,
+    "height": 1280,
+    "fps": 24,
+    "frames": 996,
+    "duration": 41.5
+  },
+  "scenes": [
+    {
+      "id": "title",
+      "name": "Title",
+      "start": 0,
+      "end": 132,
+      "reviewFrame": 72,
+      "layers": []
+    },
+    {
+      "id": "story",
+      "name": "Once upon a time",
+      "start": 132,
+      "end": 329,
+      "reviewFrame": 259,
+      "layers": []
+    },
+    {
+      "id": "invite",
+      "name": "Invitation",
+      "start": 329,
+      "end": 569,
+      "reviewFrame": 492,
+      "layers": []
+    },
+    {
+      "id": "details",
+      "name": "Date & venue",
+      "start": 569,
+      "end": 809,
+      "reviewFrame": 739,
+      "layers": []
+    },
+    {
+      "id": "rsvp",
+      "name": "RSVP",
+      "start": 809,
+      "end": 996,
+      "reviewFrame": 883,
+      "layers": []
+    }
+  ],
+  "assets": {
+    "sceneBundle": {
+      "path": "/assets/video-masters/film-ilavarasi-v1/asset-index.json",
+      "sha256": "083e0d30e5f3604bb4b48e6c4eb1d2f837cbb52be795431eace97f7ca23e783f"
+    }
+  },
+  "release": {
+    "approved": false
+  },
+  "catalog": {
+    "poster": "poster.jpg",
+    "posters": {
+      "320": "poster-320-v1.webp",
+      "640": "poster-640-v1.webp",
+      "960": "poster-960-v1.webp"
+    },
+    "preview": "demo-v1.mp4"
+  }
+}

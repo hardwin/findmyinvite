@@ -1,0 +1,50 @@
+{
+  "id": "film-hopon-v1",
+  "version": 1,
+  "rendererVersion": "scene-film-v1",
+  "sceneDesign": "hopon",
+  "kind": "page",
+  "output": {
+    "width": 720,
+    "height": 1280,
+    "fps": 24,
+    "frames": 432,
+    "duration": 18
+  },
+  "scenes": [
+    {
+      "id": "quote",
+      "name": "Quote",
+      "start": 0,
+      "end": 240,
+      "reviewFrame": 158,
+      "layers": []
+    },
+    {
+      "id": "wall",
+      "name": "Names & date",
+      "start": 240,
+      "end": 432,
+      "reviewFrame": 312,
+      "layers": []
+    }
+  ],
+  "assets": {
+    "sceneBundle": {
+      "path": "/assets/video-masters/film-hopon-v1/asset-index.json",
+      "sha256": "331cb944f2460fe00ca3f26f1d552b59f2ca61616d540fb18432bd1107bd30fc"
+    }
+  },
+  "release": {
+    "approved": false
+  },
+  "catalog": {
+    "poster": "poster.jpg",
+    "posters": {
+      "320": "poster-320-v1.webp",
+      "640": "poster-640-v1.webp",
+      "960": "poster-960-v1.webp"
+    },
+    "preview": "demo-v1.mp4"
+  }
+}

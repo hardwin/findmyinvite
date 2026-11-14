@@ -1,0 +1,82 @@
+{
+  "id": "film-savedate-v1",
+  "version": 1,
+  "rendererVersion": "scene-film-v1",
+  "sceneDesign": "savedate",
+  "kind": "plate",
+  "output": {
+    "width": 720,
+    "height": 1280,
+    "fps": 24,
+    "frames": 756,
+    "duration": 31.5
+  },
+  "scenes": [
+    {
+      "id": "title",
+      "name": "Save the Date",
+      "start": 0,
+      "end": 120,
+      "reviewFrame": 48,
+      "layers": []
+    },
+    {
+      "id": "couple",
+      "name": "Couple",
+      "start": 120,
+      "end": 254,
+      "reviewFrame": 168,
+      "layers": []
+    },
+    {
+      "id": "bride",
+      "name": "Bride",
+      "start": 254,
+      "end": 374,
+      "reviewFrame": 300,
+      "layers": []
+    },
+    {
+      "id": "groom",
+      "name": "Groom",
+      "start": 374,
+      "end": 487,
+      "reviewFrame": 420,
+      "layers": []
+    },
+    {
+      "id": "when",
+      "name": "Date & time",
+      "start": 487,
+      "end": 614,
+      "reviewFrame": 540,
+      "layers": []
+    },
+    {
+      "id": "venue",
+      "name": "Venue",
+      "start": 614,
+      "end": 756,
+      "reviewFrame": 672,
+      "layers": []
+    }
+  ],
+  "assets": {
+    "sceneBundle": {
+      "path": "/assets/video-masters/film-savedate-v1/asset-index.json",
+      "sha256": "ef8ba574cf0259d8ed357975f994155cce96f7aea09cb87fcc9453aaf308dbc6"
+    }
+  },
+  "release": {
+    "approved": false
+  },
+  "catalog": {
+    "poster": "poster.jpg",
+    "posters": {
+      "320": "poster-320-v1.webp",
+      "640": "poster-640-v1.webp",
+      "960": "poster-960-v1.webp"
+    },
+    "preview": "demo-v1.mp4"
+  }
+}

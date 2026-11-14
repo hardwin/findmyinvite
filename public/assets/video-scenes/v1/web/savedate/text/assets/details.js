@@ -1,0 +1,1 @@
+export const DETAILS={groom:"Rajesh",bride:"Priya",order:"groom_first",groomParents:"Santhanam - Vijaya",brideParents:"Ramesh - Prema",dateLine:"29 September 2026",timeLine:"6:00 am - 7:30 am",venue:"Grand Palace Convention Centre, Chennai."};

@@ -1,0 +1,74 @@
+{
+  "id": "film-kulam-v1",
+  "version": 1,
+  "rendererVersion": "scene-film-v1",
+  "sceneDesign": "kulam",
+  "kind": "page",
+  "output": {
+    "width": 720,
+    "height": 1280,
+    "fps": 24,
+    "frames": 1512,
+    "duration": 63
+  },
+  "scenes": [
+    {
+      "id": "names",
+      "name": "Logo & names",
+      "start": 0,
+      "end": 259,
+      "reviewFrame": 120,
+      "layers": []
+    },
+    {
+      "id": "invite",
+      "name": "Invitation",
+      "start": 259,
+      "end": 557,
+      "reviewFrame": 444,
+      "layers": []
+    },
+    {
+      "id": "date",
+      "name": "Save the Date",
+      "start": 557,
+      "end": 1123,
+      "reviewFrame": 744,
+      "layers": []
+    },
+    {
+      "id": "venue",
+      "name": "Venue",
+      "start": 1123,
+      "end": 1363,
+      "reviewFrame": 1260,
+      "layers": []
+    },
+    {
+      "id": "closing",
+      "name": "Closing",
+      "start": 1363,
+      "end": 1512,
+      "reviewFrame": 1464,
+      "layers": []
+    }
+  ],
+  "assets": {
+    "sceneBundle": {
+      "path": "/assets/video-masters/film-kulam-v1/asset-index.json",
+      "sha256": "4429b59b240689532cdc5ab3e8b117424b369c307264ad032f37ec5f0744a87b"
+    }
+  },
+  "release": {
+    "approved": false
+  },
+  "catalog": {
+    "poster": "poster.jpg",
+    "posters": {
+      "320": "poster-320-v1.webp",
+      "640": "poster-640-v1.webp",
+      "960": "poster-960-v1.webp"
+    },
+    "preview": "demo-v1.mp4"
+  }
+}

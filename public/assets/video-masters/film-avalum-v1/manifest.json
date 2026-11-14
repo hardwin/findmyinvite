@@ -1,0 +1,82 @@
+{
+  "id": "film-avalum-v1",
+  "version": 1,
+  "rendererVersion": "scene-film-v1",
+  "sceneDesign": "avalum",
+  "kind": "page",
+  "output": {
+    "width": 720,
+    "height": 1280,
+    "fps": 24,
+    "frames": 1200,
+    "duration": 50
+  },
+  "scenes": [
+    {
+      "id": "verse",
+      "name": "Kural",
+      "start": 0,
+      "end": 374,
+      "reviewFrame": 120,
+      "layers": []
+    },
+    {
+      "id": "names",
+      "name": "Names",
+      "start": 374,
+      "end": 614,
+      "reviewFrame": 468,
+      "layers": []
+    },
+    {
+      "id": "invite",
+      "name": "Invitation",
+      "start": 614,
+      "end": 778,
+      "reviewFrame": 708,
+      "layers": []
+    },
+    {
+      "id": "date",
+      "name": "Date",
+      "start": 778,
+      "end": 902,
+      "reviewFrame": 854,
+      "layers": []
+    },
+    {
+      "id": "events",
+      "name": "Wedding & reception",
+      "start": 902,
+      "end": 1099,
+      "reviewFrame": 1032,
+      "layers": []
+    },
+    {
+      "id": "thanks",
+      "name": "Thank you",
+      "start": 1099,
+      "end": 1200,
+      "reviewFrame": 1186,
+      "layers": []
+    }
+  ],
+  "assets": {
+    "sceneBundle": {
+      "path": "/assets/video-masters/film-avalum-v1/asset-index.json",
+      "sha256": "ac52a552786d1b4028bb00485ca56ec41e3c2f5737146ce4dc32dea66a1019d6"
+    }
+  },
+  "release": {
+    "approved": false
+  },
+  "catalog": {
+    "poster": "poster.jpg",
+    "posters": {
+      "320": "poster-320-v1.webp",
+      "640": "poster-640-v1.webp",
+      "960": "poster-960-v1.webp"
+    },
+    "preview": "demo-v1.mp4"
+  }
+}

@@ -1,0 +1,1 @@
+export default{textBg:16777215};

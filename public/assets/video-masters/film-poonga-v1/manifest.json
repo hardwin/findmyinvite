@@ -1,0 +1,66 @@
+{
+  "id": "film-poonga-v1",
+  "version": 1,
+  "rendererVersion": "scene-film-v1",
+  "sceneDesign": "poonga",
+  "kind": "page",
+  "output": {
+    "width": 720,
+    "height": 1280,
+    "fps": 24,
+    "frames": 816,
+    "duration": 34
+  },
+  "scenes": [
+    {
+      "id": "title",
+      "name": "Title",
+      "start": 0,
+      "end": 250,
+      "reviewFrame": 72,
+      "layers": []
+    },
+    {
+      "id": "names",
+      "name": "Names",
+      "start": 250,
+      "end": 461,
+      "reviewFrame": 372,
+      "layers": []
+    },
+    {
+      "id": "events",
+      "name": "Events",
+      "start": 461,
+      "end": 662,
+      "reviewFrame": 600,
+      "layers": []
+    },
+    {
+      "id": "closing",
+      "name": "Closing",
+      "start": 662,
+      "end": 816,
+      "reviewFrame": 804,
+      "layers": []
+    }
+  ],
+  "assets": {
+    "sceneBundle": {
+      "path": "/assets/video-masters/film-poonga-v1/asset-index.json",
+      "sha256": "348478ffbe0a2f566723b879b91273a11c4c504e38091d6cca7880d370f397a2"
+    }
+  },
+  "release": {
+    "approved": false
+  },
+  "catalog": {
+    "poster": "poster.jpg",
+    "posters": {
+      "320": "poster-320-v1.webp",
+      "640": "poster-640-v1.webp",
+      "960": "poster-960-v1.webp"
+    },
+    "preview": "demo-v1.mp4"
+  }
+}

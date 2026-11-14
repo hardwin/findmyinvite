@@ -1,0 +1,1 @@
+export const DETAILS={lang:"tanglish",intro:["MAPLA VEETLA OKAY!","FEBRUARY LA","KALYANAM","PONNUKU VETKAM"],brideKicker:["BRIDE"],bride:"MEERA",wonder:["EPPADI IRUPPANO","ENAKKU VARAPORA","PURUSHAN"],groomKicker:["GROOM"],groom:"ARJUN",std:"Save the Date",date:["15","TH"," FEBRUARY, 2027"]};

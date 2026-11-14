@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=1080, height=1920" />
+  <title>Wedding save the date — Thamarai Kulam</title>
+  <style>
+    /* two fonts (house rule): Great Vibes for titles and names, Cormorant Garamond for the rest. Both OFL. */
+    @font-face { font-family: "Great Vibes"; src: url("assets/fonts/great-vibes-latin-400.woff2") format("woff2"); font-weight: 400; }
+    @font-face { font-family: "Cormorant Garamond"; src: url("assets/fonts/cormorant-garamond-latin-600.woff2") format("woff2"); font-weight: 600; }
+    /* owner (draft 4): even-height numbers. Digits only come from the lining-figure Cormorant (same designer and
+       shapes; Cormorant Garamond's own digits are old-style, 1 short and 9 dropping below the line) */
+    @font-face { font-family: "CG Digits"; src: url("assets/fonts/cormorant-lnum-latin-600-normal.woff2") format("woff2"); font-weight: 600; unicode-range: U+0030-0039; }
+    @font-face { font-family: "Cormorant Garamond"; src: url("assets/fonts/cormorant-garamond-latin-600-italic.woff2") format("woff2"); font-weight: 600; font-style: italic; }
+    :root { --ink: #e9f4f5; --halo: rgba(2, 26, 34, 0.78); }
+    html, body { margin: 0; background: #16546c; }
+    #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: #16546c; }
+    .water { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+    .world { position: absolute; left: 0; top: 0; width: 1px; height: 1px; }
+    .lay { position: absolute; display: block; max-width: none; }
+    img.lay { height: auto; }
+    .pad { filter: brightness(0.8) saturate(0.82) drop-shadow(10px 18px 14px rgba(0, 18, 26, 0.62)); }
+    .boat { filter: drop-shadow(18px 26px 18px rgba(0, 22, 30, 0.55)); }
+    .fish { opacity: 0.92; }
+    .back { position: absolute; z-index: 1; border-radius: 50%; background: radial-gradient(closest-side, rgba(2, 28, 38, 0.34), rgba(2, 28, 38, 0.18) 60%, rgba(2, 28, 38, 0) 100%); }
+    .ring { position: absolute; z-index: 2; border-radius: 50%; border: 2px solid rgba(200, 238, 242, 0.55); box-shadow: 0 0 6px rgba(200, 238, 242, 0.25); }
+    .ring.wake { border-width: 3px; }
+    .ring.logo-ring { border-width: 2.5px; }
+    .sprig { z-index: 5; overflow: visible; }
+    .heart { z-index: 5; overflow: visible; filter: drop-shadow(0 0 6px var(--halo)); }
+
+    /* text: pale silver, soft dark halo for readability (playbook), no hard outline (the pin has none) */
+    .tx { position: absolute; z-index: 5; white-space: nowrap; color: var(--ink); line-height: 1.1;
+      text-shadow: 0 2px 6px var(--halo), 0 0 22px rgba(2, 26, 34, 0.55); }
+    .script { font-family: "Great Vibes"; font-weight: 400; }
+    .serif { font-family: "CG Digits", "Cormorant Garamond"; font-weight: 600; letter-spacing: 0.01em; }
+    .s-names { font-size: 118px; }
+    .s-name { font-size: 172px; }
+    .s-with { font-size: 92px; }
+    .s-title { font-size: 136px; }
+    .s-close { font-size: 108px; }
+    .s-body { font-size: 54px; }
+    .s-title2 { font-size: 170px; }
+    .s-sub { font-size: 56px; }
+    .s-month { font-size: 60px; }
+    .s-vtitle { font-size: 120px; }
+    .s-small { font-size: 50px; }
+    .s-caps { font-size: 46px; text-transform: uppercase; letter-spacing: 0.06em; }
+    .s-par { font-size: 50px; }
+    .s-wk { font-size: 48px; }
+    .s-day { font-size: 56px; }
+    /* monogram: double silver ring + two italic caps (Cormorant, the body font: still two fonts) */
+    .cal { position: absolute; left: 0; top: 0; width: 4600px; height: 2200px; z-index: 5; pointer-events: none; }
+    .vrule { z-index: 5; overflow: visible; }
+    .s-addr { font-size: 56px; }
+    .s-hall { font-size: 64px; letter-spacing: 0.02em; }
+    .s-ev { font-size: 48px; letter-spacing: 0.02em; }
+    .mono { position: absolute; z-index: 5; width: 520px; height: 520px; transform: translate(-50%, -50%); }
+    .mono .leaf { left: 8px; top: 8px; width: 504px; height: 504px; filter: brightness(0.68) saturate(0.95) drop-shadow(8px 14px 14px rgba(0, 18, 26, 0.6)); }
+    .mono .frame { left: -40px; top: -40px; width: 600px; height: auto; filter: drop-shadow(0 3px 8px rgba(2, 26, 34, 0.7)); }
+    .mono .ringart { left: 0; top: 0; filter: drop-shadow(0 3px 8px rgba(2, 26, 34, 0.7)); }
+    .mono span { position: absolute; font-family: "Cormorant Garamond"; font-style: italic; font-weight: 600; font-size: 250px; line-height: 1;
+      color: #eef5f6; text-shadow: 0 4px 12px rgba(2, 26, 34, 0.75); }
+    .mono .m1 { left: 178px; top: 212px; }
+    .mono .m2 { left: 345px; top: 318px; }
+  </style>
+  <style>/* GENERATED (build-page.mjs): the editor's frame has no HyperFrames runtime to size the root */ html, body, #root { width: 1080px; height: 1920px; }</style>
+  <script>/* GENERATED (build-page.mjs): lite preview switch */
+    if (/[?&]lite=1/.test(location.search)) {
+      document.documentElement.classList.add("lite");
+      const d = Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, "src");
+      Object.defineProperty(HTMLImageElement.prototype, "src", { ...d, set(v) { d.set.call(this, String(v).replace("assets/img/", "assets/img-lite/")); } });
+      // the editor lays the page out at its preview box's size once the film is built (the text fit is done at full size)
+      window.__vinvZoom = (z) => { document.documentElement.style.zoom = String(z); };
+    }
+  </script>
+  <style>/* GENERATED (build-page.mjs): lite = no blur filters, no light leak */
+    html.lite [style*="blur("], html.lite .txt .ghost { filter: none !important; }
+    html.lite .leak { display: none !important; }
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="wedding-kulam" data-start="0" data-width="1080" data-height="1920" data-duration="63" data-no-timeline>
+    <!-- silent draft; music later (never whoosh/swoosh) -->
+  </div>
+  <script type="module">
+    import { DETAILS as SAMPLE } from "./assets/details.js";
+    // GENERATED (build-page.mjs): the editor's live preview — the details from the parent window (the editor sets
+    // window.__vinvPageDetails before it loads this page), the film's time from the parent through window.__filmAt(t)
+    let DETAILS = SAMPLE;
+    try { if (window.parent && window.parent !== window && window.parent.__vinvPageDetails) DETAILS = window.parent.__vinvPageDetails; } catch { /* another origin */ }
+    window.__FILM__ = true; window.__filmDuration = Number(document.getElementById("root").dataset.duration);
+    import { build } from "./assets/film.js";
+    import { renderAll } from "./assets/engine.js";
+
+    window.__hf = window.__hf || {}; window.__hf.buildReady = window.__hf.buildReady || {};
+    let film = null, ready = false;
+    window.__hf.buildReady.film = (async () => {
+      const root = document.getElementById("root");
+      await Promise.all(['400 120px "Great Vibes"', '600 48px "Cormorant Garamond"', '600 48px "CG Digits"'].map((f) => document.fonts.load(f, "Aa0123456789")));
+      film = build(root, DETAILS);
+      await Promise.all([...document.querySelectorAll("img")].map((i) => (i.complete && i.naturalWidth ? Promise.resolve() : i.decode()).catch(() => console.warn("image failed", i.src))));
+      for (const f of film.fits) f();
+      ready = true;
+    })();
+    function renderAt(t) { if (!ready) return; film.render(t); renderAll(t); }
+    window.__filmAt = (t) => renderAt(t);   // GENERATED (build-page.mjs): the editor drives the time
+    window.addEventListener("hf-seek", (e) => renderAt(e.detail.time));
+    window.__hf.buildReady.film.then(() => renderAt(window.__hfThreeTime || 0));
+    window.__renderAt = renderAt;
+  </script>
+</body>
+</html>

@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=1080, height=1920" />
+  <title>Kutti Ilavarasi — princess storybook birthday invite (working name)</title>
+  <script src="assets/vendor/gsap.min.js"></script>
+  <script src="assets/details.js"></script>
+  <script>/* GENERATED (page-ilavarasi.mjs): the editor's details from the parent window, film time from the parent */
+    try { if (window.parent && window.parent !== window && window.parent.__vinvPageDetails) window.DETAILS = JSON.parse(JSON.stringify(window.parent.__vinvPageDetails)); } catch (e) { /* another origin */ }
+    window.__FILM__ = true; window.__filmDuration = 41.5;
+    window.__hf = window.__hf || {}; window.__hf.buildReady = window.__hf.buildReady || {};
+    window.__hf.buildReady.film = new Promise((res) => { window.__filmReady = res; });
+  </script>
+  <style>
+    @font-face { font-family: "Cormorant Garamond"; src: url("assets/fonts/cormorant-garamond-latin-600-normal.woff2") format("woff2"); font-weight: 600; }
+    @font-face { font-family: "Cormorant Garamond"; src: url("assets/fonts/cormorant-garamond-latin-700-normal.woff2") format("woff2"); font-weight: 700; }
+    @font-face { font-family: "Cormorant Garamond"; src: url("assets/fonts/cormorant-garamond-latin-600-italic.woff2") format("woff2"); font-weight: 600; font-style: italic; }
+    @font-face { font-family: "Great Vibes"; src: url("assets/fonts/great-vibes-latin-400.woff2") format("woff2"); font-weight: 400; }
+    :root { --ink: #6b5a32; --ink2: #7d6a3c; --paper: #f4f0e7; }
+    html, body { margin: 0; background: var(--paper); }
+    :root { --blot: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'><filter id='w' x='-30%' y='-30%' width='160%' height='160%'><feTurbulence type='fractalNoise' baseFrequency='0.022' numOctaves='3' seed='11'/><feDisplacementMap in='SourceGraphic' scale='70'/><feGaussianBlur stdDeviation='5'/></filter><circle cx='200' cy='200' r='120' fill='white' filter='url(%23w)'/></svg>"); }
+    #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--paper); }
+    #book { position: absolute; inset: 0; z-index: 1; }
+    #top { position: absolute; inset: 0; z-index: 50; pointer-events: none; }
+    .page { position: absolute; inset: 0; perspective: 2600px; perspective-origin: 50% 45%; --m: 0px; }
+    .page.swept { --e: -400px;
+      -webkit-mask-image: linear-gradient(105deg, #000 calc(var(--e) - 170px), transparent calc(var(--e) + 170px));
+      mask-image: linear-gradient(105deg, #000 calc(var(--e) - 170px), transparent calc(var(--e) + 170px)); }
+    .wand { position: absolute; left: 0; top: 0; width: 340px; height: 2600px; pointer-events: none; opacity: 0;
+      background: linear-gradient(90deg, rgba(232, 180, 70, 0), rgba(232, 182, 72, 0.22) 28%, rgba(236, 190, 80, 0.55) 43%, rgba(255, 236, 170, 0.95) 50%, rgba(236, 190, 80, 0.55) 57%, rgba(232, 182, 72, 0.22) 72%, rgba(232, 180, 70, 0));
+      filter: blur(4px); }
+    .page.masked { -webkit-mask-image: var(--blot); mask-image: var(--blot); -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+      -webkit-mask-size: var(--m) var(--m); mask-size: var(--m) var(--m);
+      -webkit-mask-position: calc(540px - var(--m) / 2) calc(900px - var(--m) / 2); mask-position: calc(540px - var(--m) / 2) calc(900px - var(--m) / 2); }
+    .wash { position: absolute; inset: 0; background: radial-gradient(closest-side, rgba(222, 170, 192, 0.55), rgba(232, 196, 206, 0.35) 70%, rgba(240, 215, 220, 0.0)); }
+    .front { position: absolute; inset: 0; overflow: hidden; background: var(--paper); }
+    /* paper: cream, faint grain, soft pink watercolour blots */
+    .paper { position: absolute; inset: 0;
+      background:
+        radial-gradient(closest-side, rgba(214, 160, 186, 0.22), rgba(214, 160, 186, 0) 100%) var(--b1x, 70%) var(--b1y, 72%) / 520px 380px no-repeat,
+        radial-gradient(closest-side, rgba(226, 190, 170, 0.20), rgba(226, 190, 170, 0) 100%) var(--b2x, 20%) var(--b2y, 30%) / 460px 300px no-repeat,
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='7'/><feColorMatrix values='0 0 0 0 0.45  0 0 0 0 0.38  0 0 0 0 0.25  0 0 0 0.06 0'/></filter><rect width='300' height='300' filter='url(%23n)'/></svg>"),
+        linear-gradient(#f6f2ea, #f1ece2); }
+    /* 3D page curl: the lifted part is a row of thin strips bent round a cylinder; only their backs (pale sage) show */
+    .curl { position: absolute; inset: 0; transform-style: preserve-3d; display: none; }
+    .strip { position: absolute; left: 0; top: -2px; height: 1924px; transform-origin: 0 50%; transform-style: preserve-3d; }
+    .strip .sb { position: absolute; inset: 0; transform: rotateY(180deg); backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+    .fshade { position: absolute; top: -40px; height: 2000px; width: 220px; left: 0; display: none; z-index: 40;
+      background: linear-gradient(90deg, rgba(70, 60, 35, 0), rgba(70, 60, 35, 0.16) 80%, rgba(70, 60, 35, 0.05)); }
+    .cshadow { position: absolute; top: 0; height: 1920px; width: 170px; left: 0;
+      background: linear-gradient(90deg, rgba(70, 60, 35, 0.30), rgba(70, 60, 35, 0)); display: none; }
+    .lay { position: absolute; display: block; }
+    .lay img { display: block; width: 100%; height: auto; }
+    .mirror img { transform: scaleX(-1); }
+    .t { position: absolute; left: 0; width: 1080px; text-align: center; white-space: nowrap; color: var(--ink);
+      text-shadow: 0 0 12px rgba(246, 242, 234, 0.95), 0 0 3px rgba(246, 242, 234, 0.9); }
+    .t > span { display: inline-block; }
+    .ch { display: inline-block; white-space: pre; }
+    .caps { font-family: "Cormorant Garamond"; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+    .ital { font-family: "Cormorant Garamond"; font-weight: 600; font-style: italic; color: var(--ink2); }
+    .script { font-family: "Great Vibes"; font-weight: 400; color: var(--ink); line-height: 1.25; padding: 0 0.2em; }
+    .name { font-family: "Cormorant Garamond"; font-weight: 700; line-height: 1; letter-spacing: 0.01em; }
+    .gold > span { color: transparent; text-shadow: none; -webkit-background-clip: text; background-clip: text;
+      background-image: linear-gradient(100deg, #a47524 0%, #d9b24e 30%, #f6e39a 45%, #c99a36 60%, #a47524 100%);
+      background-size: 300% 100%; background-position: 0% 0; filter: drop-shadow(0 2px 2px rgba(120, 85, 20, 0.25)); }
+    .ribbon { position: absolute; left: 0; width: 1080px; }
+    .rtext { font-family: "Great Vibes"; fill: #7e3f58; stroke: #7e3f58; stroke-width: 1.4px; paint-order: stroke fill; }
+    .spark { position: absolute; width: 34px; height: 34px; }
+  </style>
+  <style>/* GENERATED (page-ilavarasi.mjs): no HyperFrames runtime in the editor's frame to size the root */ html, body, #root { width: 1080px; height: 1920px; overflow: hidden; }</style>
+  <script>/* GENERATED (page-ilavarasi.mjs): lite preview switch — half-size pictures, the page zoomed to the box */
+    if (/[?&]lite=1/.test(location.search)) {
+      document.documentElement.classList.add("lite");
+      const d = Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, "src");
+      Object.defineProperty(HTMLImageElement.prototype, "src", { ...d, set(v) { d.set.call(this, String(v).replace("assets/img/", "assets/img-lite/")); } });
+      // the editor lays the page out at its preview box's size once the film is built (the text fit is done at full size)
+      window.__vinvZoom = (z) => { document.documentElement.style.zoom = String(z); };
+    }
+  </script>
+</head>
+<body>
+  <div id="root" data-composition-id="cuento" data-start="0" data-width="1080" data-height="1920" data-duration="41.5">
+    <div id="book"></div>
+    <div id="top"></div>
+  </div>
+
+  <script>
+  (() => {
+    const D = window.DETAILS;
+    const W = 1080, H = 1920, DUR = 41.5;
+    const FLIP = 1.5;
+    // page n shows from when page n-1 starts to curl until FLIPAT[n-1] (+FLIP) when it curls away itself
+    const FLIPAT = [3.8, 12.0, 22.0, 32.0, 37.6];
+    const book = document.getElementById("book"), top = document.getElementById("top");
+    const IMG = "assets/img/";
+    const tl = gsap.timeline({ paused: true });
+
+    // seeded random (no Math.random: renders must repeat exactly)
+    let seed = 20261104; const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+
+    const el = (tag, cls, parent, css) => { const e = document.createElement(tag); if (cls) e.className = cls; if (css) Object.assign(e.style, css); parent.appendChild(e); return e; };
+
+    // ---------- 3D page curl ----------
+    const SW = 18, NS = Math.ceil(W / SW);
+    function page(i) {
+      const pg = el("div", "page" + (i > 1 ? " swept" : ""), book, { zIndex: 10 * i });
+      const fr = el("div", "front", pg); const pp = el("div", "paper", fr); const fs = el("div", "fshade", fr);
+      pp.style.setProperty("--b1x", (20 + rnd() * 60) + "%"); pp.style.setProperty("--b1y", (40 + rnd() * 40) + "%");
+      pp.style.setProperty("--b2x", (10 + rnd() * 70) + "%"); pp.style.setProperty("--b2y", (15 + rnd() * 40) + "%");
+      const sh = el("div", "cshadow", pg);
+      const curl = el("div", "curl", pg);
+      const strips = [];
+      for (let k = 0; k < NS; k++) { const s = el("div", "strip", curl, { width: (SW + 1.5) + "px" }); strips.push([s, el("div", "sb", s)]); }
+      const P = { pg, fr, fs, curl, sh, strips, i }; PAGES[i] = P; return P;
+    }
+    // v = 0 flat … 1 gone. Fold line x = f moves right → left; the part right of f wraps round a cylinder of radius R
+    // and lies back over the page (the pale back shows), like a real paper page being turned.
+    function curlAt(P, v) {
+      if (v <= 0) { P.fr.style.clipPath = "none"; P.fs.style.display = "none"; P.curl.style.display = "none"; P.sh.style.display = "none"; P.pg.style.visibility = "visible"; return; }
+      if (v >= 1) { P.pg.style.visibility = "hidden"; return; }
+      P.pg.style.visibility = "visible"; P.curl.style.display = "block"; P.sh.style.display = "block"; P.fs.style.display = "block";
+      const R = 90 + 170 * Math.sin(Math.PI * v);
+      const f = (W + 30) - v * (W + 30 + 2 * R + 80);
+      const reach = f + R * Math.sin(Math.min(Math.PI / 2, Math.max(0, W - f) / R));
+      const tilt = 70 * Math.sin(Math.PI * v);   // fold leans a little, as in the pin
+      P.fr.style.clipPath = `polygon(0 0, ${reach + tilt}px 0, ${reach - tilt}px 100%, 0 100%)`;
+      P.fs.style.left = (reach - 220) + "px"; P.fs.style.opacity = Math.sin(Math.PI * v).toFixed(3);
+      P.sh.style.left = reach + "px"; P.sh.style.opacity = (0.9 * Math.sin(Math.PI * v)).toFixed(3);
+      for (let k = 0; k < NS; k++) {
+        const [s, b] = P.strips[k]; const x0 = k * SW;
+        if (x0 + SW <= f) { s.style.display = "none"; continue; }
+        const d0 = Math.max(0, x0 - f), dm = d0 + SW / 2;
+        let px, pz; const a0 = d0 / R;
+        if (a0 <= Math.PI) { px = f + R * Math.sin(a0); pz = R * (1 - Math.cos(a0)); }
+        else { px = f - (d0 - Math.PI * R); pz = 2 * R; }
+        const th = Math.min(dm / R, Math.PI);
+        if (th < Math.PI / 2 - 0.05) { s.style.display = "none"; continue; }
+        s.style.display = "block";
+        s.style.transform = `translate3d(${px.toFixed(2)}px, 0, ${pz.toFixed(2)}px) rotateY(${(-th * 180 / Math.PI).toFixed(2)}deg) skewY(${(-tilt / H * 57.3 * 1.8).toFixed(3)}deg)`;
+        const far = Math.max(0, d0 - Math.PI * R);
+        const light = (0.80 + 0.20 * (-Math.cos(th))) * (0.93 + 0.07 * Math.min(1, far / 500));
+        b.style.background = `rgb(${Math.round(236 * light)}, ${Math.round(241 * light)}, ${Math.round(226 * light)})`;
+      }
+    }
+    // page change: a soft pink paint wash spreads from the middle, and the next page blooms open inside it
+    const PAGES = [], TRANS = [];
+    function peel(Pold, t) { TRANS.push([Pold.i, t]); }
+    // page change: a glowing gold streak with fairy-dust sparkles sweeps across; the next page appears behind it
+    const SWEEP = 1.7, DIR = [Math.sin(105 * Math.PI / 180), -Math.cos(105 * Math.PI / 180)], PERP = [-DIR[1], DIR[0]], GL = 1540;
+    const edgePt = (e, s) => [540 + (e - GL / 2) * DIR[0] + s * PERP[0], 960 + (e - GL / 2) * DIR[1] + s * PERP[1]];
+    function sweep(n, t) {
+      const P = PAGES[n], e0 = -400, e1 = GL + 400;
+      tl.fromTo(P.pg, { "--e": e0 + "px" }, { "--e": e1 + "px", duration: SWEEP, ease: "sine.inOut" }, t);
+      // the wand: a tall glow line lying on the edge, moving with it
+      const wand = el("div", "wand", book, { zIndex: 10 * n + 2 });
+      const a = edgePt(e0, 0), b = edgePt(e1, 0);
+      tl.fromTo(wand, { x: a[0] - 170, y: a[1] - 1300, rotation: 15 }, { x: b[0] - 170, y: b[1] - 1300, rotation: 15, duration: SWEEP, ease: "sine.inOut" }, t);
+      tl.fromTo(wand, { opacity: 0 }, { opacity: 1, duration: 0.35, ease: "sine.out" }, t);
+      tl.fromTo(wand, { opacity: 1 }, { opacity: 0, duration: 0.35, ease: "sine.in", immediateRender: false }, t + SWEEP - 0.35);
+      // fairy dust: sparkles pop where the edge passes, drift a little and fade
+      const ease = gsap.parseEase("sine.inOut");
+      for (let k = 0; k < 70; k++) {
+        const u = 0.08 + 0.84 * rnd();              // where along the sweep (0..1 of the edge travel)
+        const e = e0 + (e1 - e0) * u, sAlong = -1100 + 2200 * rnd();
+        const [x, y] = edgePt(e, sAlong);
+        if (x < -20 || x > W + 20 || y < -20 || y > H + 20) continue;
+        // time when eased edge reaches u
+        let lo = 0, hi = 1; for (let it = 0; it < 18; it++) { const m = (lo + hi) / 2; if (ease(m) < u) lo = m; else hi = m; }
+        const ts = t + SWEEP * lo, sz = 0.8 + rnd() * 1.1;
+        const sp = spark(book, x - 17, y - 17, sz); sp.style.zIndex = String(10 * n + 3); sp.style.filter = "drop-shadow(0 0 8px rgba(255, 214, 110, 1)) drop-shadow(0 0 3px rgba(255, 245, 210, 1))";
+        tl.fromTo(sp, { opacity: 0, scale: 0.2, rotation: 0, x: 0, y: 0 }, { opacity: 1, scale: 1, rotation: 90, duration: 0.25, ease: "back.out(2)" }, ts);
+        tl.fromTo(sp, { opacity: 1 }, { opacity: 0, x: (rnd() - 0.5) * 60, y: 30 + rnd() * 50, rotation: 180, duration: 0.9, ease: "sine.in", immediateRender: false }, ts + 0.25);
+      }
+      tl.set(PAGES[n - 1].pg, { visibility: "hidden" }, t + SWEEP + 0.1);
+    }
+    function bloom(n, t) {
+      const P = PAGES[n], Pold = PAGES[n - 1];
+      const wash = el("div", "wash page masked", book, { zIndex: 10 * n - 5 });
+      tl.fromTo(wash, { "--m": "0px", opacity: 1 }, { "--m": "4400px", duration: FLIP, ease: "power1.in" }, t);
+      tl.fromTo(wash, { opacity: 1 }, { opacity: 0, duration: 0.5, ease: "sine.out", immediateRender: false }, t + FLIP);
+      tl.fromTo(P.pg, { "--m": "0px" }, { "--m": "4800px", duration: FLIP, ease: "power2.in" }, t + 0.2);
+      tl.fromTo(Pold.fr, { filter: "blur(0px)", opacity: 1 }, { filter: "blur(4px)", opacity: 0.6, duration: FLIP, ease: "sine.in" }, t);
+      tl.set(Pold.pg, { visibility: "hidden" }, t + FLIP + 0.2);
+    }
+    function peelOld(P, t) {
+      const o = { v: 0 };
+      tl.fromTo(o, { v: 0 }, { v: 1, duration: FLIP, ease: "power1.inOut", onUpdate: () => curlAt(P, o.v), onComplete: () => curlAt(P, 1), onReverseComplete: () => curlAt(P, 0) }, t);
+    }
+
+    // ---------- layers ----------
+    function pic(parent, src, x, y, w, opts = {}) {
+      const d = el("div", "lay" + (opts.mirror ? " mirror" : ""), parent, { left: x + "px", top: y + "px", width: w + "px", zIndex: opts.z || 1 });
+      const im = el("img", "", d); im.src = IMG + src + ".png"; im.alt = "";
+      if (opts.origin) d.style.transformOrigin = opts.origin;
+      return d;
+    }
+    // one centred text line, split into letters; shrinks to fit maxW
+    function line(parent, txt, cls, y, size, maxW = 800) {
+      const d = el("div", "t " + cls, parent, { top: y + "px", fontSize: size + "px", zIndex: 5 });
+      const s = el("span", "", d);
+      for (const c of String(txt)) { const ch = el("span", "ch", s); ch.textContent = c; }
+      el("span", "bl", d, { display: "inline-block", width: "0px", height: "0px", verticalAlign: "baseline" });
+      d._fit = maxW; d._txt = String(txt); return d;
+    }
+    function fitAll() {
+      document.querySelectorAll(".t").forEach(d => {
+        const w = d.firstChild.getBoundingClientRect().width;
+        if (w > d._fit) d.style.fontSize = (parseFloat(d.style.fontSize) * d._fit / w).toFixed(1) + "px";
+      });
+    }
+    const cv = document.createElement("canvas").getContext("2d");
+    // visual box of a line = capital height above the baseline (tails of y, g, p and script swashes are ignored,
+    // as a designer spaces type); page px
+    function ink(d) {
+      const cs = getComputedStyle(d);
+      cv.font = `${cs.fontStyle} ${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
+      const cap = cv.measureText("H").actualBoundingBoxAscent;
+      const k = W / book.getBoundingClientRect().width;
+      const base = (d.querySelector(".bl").getBoundingClientRect().top - book.getBoundingClientRect().top) * k;
+      return [base - cap, base];
+    }
+    const STACKS = [];
+    const stack = (lines, y0, y1, gmin = 26, gmax = 74) => STACKS.push({ lines, y0, y1, gmin, gmax });
+    function layoutStacks() {
+      for (const S of STACKS) {
+        const box = S.lines.map(ink), hs = box.map(b => b[1] - b[0]), sum = hs.reduce((a, b) => a + b, 0);
+        const gap = Math.max(S.gmin, Math.min(S.gmax, (S.y1 - S.y0 - sum) / (S.lines.length + 1)));
+        let y = (S.y0 + S.y1) / 2 - (sum + gap * (S.lines.length - 1)) / 2;
+        S.lines.forEach((d, k) => { d.style.top = (parseFloat(d.style.top) + (y - box[k][0])).toFixed(1) + "px"; y += hs[k] + gap; });
+        S.gap = gap;
+      }
+    }
+    const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;");
+    // watercolour ribbon picture with the words on its curve
+    function paintedRibbon(parent, txt, y, w = 740) {
+      const d = el("div", "ribbon", parent, { top: y + "px", zIndex: 4 });
+      const k = "pr" + y, h = Math.round(w * 302 / 1400);
+      d.innerHTML = `<div style="position:relative;width:${w}px;margin:0 auto"><img src="${IMG}ribbon.png" alt="" style="display:block;width:${w}px;height:auto">
+        <svg viewBox="0 0 1400 302" width="${w}" height="${h}" style="position:absolute;left:0;top:0;overflow:visible">
+        <path id="${k}" d="M370 104 Q 700 296 1030 104" fill="none"/>
+        <text class="rtext" font-size="112" text-anchor="middle" dominant-baseline="central"><textPath href="#${k}" startOffset="50%">${esc(txt)}</textPath></text></svg></div>`;
+      return d;
+    }
+    function spark(parent, x, y, s = 1) {
+      const d = el("div", "spark", parent, { left: x + "px", top: y + "px", zIndex: 6 });
+      d.innerHTML = `<svg viewBox="0 0 34 34" width="${34 * s}" height="${34 * s}"><path d="M17 0 C18 12 22 16 34 17 C22 18 18 22 17 34 C16 22 12 18 0 17 C12 16 16 12 17 0Z" fill="#e8c766"/></svg>`;
+      return d;
+    }
+
+    // ---------- motion helpers (seek-safe, finite) ----------
+    const write = (d, t, per = 0.045, dur = 0.55) =>
+      tl.fromTo(d.querySelectorAll(".ch"), { opacity: 0, y: 10, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: dur, stagger: per, ease: "power2.out" }, t);
+    // gold names: same left-to-right write-on, done as a soft wipe (per-letter layers would break the gold fill)
+    const writeGold = (d, t, dur = 1.0) =>
+      tl.fromTo(d, { clipPath: "inset(-20% 100% -20% 0%)", filter: "blur(6px)", opacity: 0.2 }, { clipPath: "inset(-20% 0% -20% 0%)", filter: "blur(0px)", opacity: 1, duration: dur, ease: "power1.out" }, t);
+    const rise = (d, t, from = {}, dur = 1.1) =>
+      tl.fromTo(d, { opacity: 0, y: 60, scale: 0.94, ...from }, { opacity: 1, y: 0, scale: 1, x: 0, rotation: 0, duration: dur, ease: "back.out(1.4)" }, t);
+    const fade = (d, t, dur = 0.8) => tl.fromTo(d, { opacity: 0 }, { opacity: 1, duration: dur, ease: "sine.out" }, t);
+    const up = (d, t, dur = 0.7) => tl.fromTo(d, { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: dur, ease: "power2.out" }, t);
+    function sway(d, a0, a1, deg = 1.6, period = 2.6) {
+      const n = Math.max(1, Math.ceil((a1 - a0) / period));
+      tl.fromTo(d, { rotation: -deg }, { rotation: deg, duration: period, ease: "sine.inOut", yoyo: true, repeat: n }, a0);
+    }
+    function bob(d, a0, a1, dy, period) {
+      tl.fromTo(d, { y: 0 }, { y: dy, duration: period, ease: "sine.inOut", yoyo: true, repeat: Math.ceil((a1 - a0) / period) }, a0);
+    }
+    function drift(d, a0, a1, dx) { tl.fromTo(d, { x: 0 }, { x: dx, duration: a1 - a0, ease: "none" }, a0); }
+    function twinkle(d, a0, a1) {
+      const n = Math.max(1, Math.floor((a1 - a0) / 0.9));
+      tl.fromTo(d, { scale: 0.2, opacity: 0, rotation: 0 }, { scale: 1, opacity: 1, rotation: 45, duration: 0.45, ease: "sine.inOut", yoyo: true, repeat: n }, a0 + rnd() * 0.8);
+    }
+    // butterfly: path of points [t, x, y], wings flap by scaleX
+    function butterfly(parent, pts, w = 90, pink = false) {
+      const d = pic(parent, "butterfly", pts[0][1], pts[0][2], w, { z: 7 });
+      const inner = d.firstChild;
+      if (pink) inner.style.filter = "hue-rotate(-62deg) saturate(1.35) brightness(1.06)";
+      for (let i = 1; i < pts.length; i++)
+        tl.fromTo(d, { x: pts[i - 1][1] - pts[0][1], y: pts[i - 1][2] - pts[0][2] }, { x: pts[i][1] - pts[0][1], y: pts[i][2] - pts[0][2], duration: pts[i][0] - pts[i - 1][0], ease: "sine.inOut", immediateRender: i === 1 }, pts[i - 1][0]);
+      const a0 = pts[0][0], a1 = pts[pts.length - 1][0];
+      tl.fromTo(d, { opacity: 0 }, { opacity: 1, duration: 0.4 }, a0);
+      tl.fromTo(inner, { scaleX: 1 }, { scaleX: 0.25, duration: 0.08, ease: "sine.inOut", yoyo: true, repeat: Math.ceil((a1 - a0) / 0.16) * 2 }, a0);
+      return d;
+    }
+    // side flowers (as in the pin): one cluster on each side edge, at different heights; optional bottom cluster
+    function sides(fr, t0, t1, ly, ry, o = {}) {
+      const l = pic(fr, "side", -40, ly, 270, { z: 3, origin: "0% 50%" });
+      const r = pic(fr, "side", W - 230, ry, 270, { z: 3, mirror: true, origin: "100% 50%" });
+      sway(l, t0, t1, 2.2, 2.9); sway(r, t0 + 0.6, t1, 2.2, 3.2);
+      let b = null;
+      if (o.bottom) { b = pic(fr, "bottom", -30, 1440, 400, { z: 5, origin: "0% 100%" }); sway(b, t0 + 0.3, t1, 1.6, 3.4); }
+      if (o.enter !== false) { rise(l, o.enter ?? t0, { x: -90, y: 0, rotation: -10 }); rise(r, (o.enter ?? t0) + 0.25, { x: 90, y: 0, rotation: 10 }); if (b) rise(b, (o.enter ?? t0) + 0.4, { y: 120 }); }
+      return { l, r, b };
+    }
+    const bushes = fr => pic(fr, "bushes", -60, 1750, 1200, { z: 6 });
+
+    // ---------- top flowers: one layer above every page, they never turn with the pages ----------
+    {
+      const tlc = pic(top, "corner_tl", -40, -40, 600, { z: 1, origin: "0% 0%" });
+      const trc = pic(top, "corner_tr", W - 560, -40, 600, { z: 1, origin: "100% 0%" });
+      sway(tlc.firstChild, 0, DUR, 0.9, 3.6); sway(trc.firstChild, 0.8, DUR, 0.9, 3.9);
+      tlc.firstChild.style.transformOrigin = "0% 0%"; trc.firstChild.style.transformOrigin = "100% 0%";
+      tl.fromTo(tlc, { opacity: 0, scale: 0.35, rotation: -14 }, { opacity: 1, scale: 1, rotation: 0, duration: 1.3, ease: "back.out(1.3)" }, 0);
+      tl.fromTo(trc, { opacity: 0, scale: 0.35, rotation: 14 }, { opacity: 1, scale: 1, rotation: 0, duration: 1.3, ease: "back.out(1.3)" }, 0.2);
+      // owner (draft 7): flowers grow in again on every page: tuck into the corner as the sweep starts, grow back with the new page
+      FLIPAT.forEach(t => {
+        [[tlc, -14, 0], [trc, 14, 0.15]].forEach(([c, r, d]) => {
+          tl.to(c, { opacity: 0, scale: 0.35, rotation: r, duration: 0.5, ease: "sine.in" }, t + d);
+          tl.fromTo(c, { opacity: 0, scale: 0.35, rotation: r }, { opacity: 1, scale: 1, rotation: 0, duration: 1.3, ease: "back.out(1.3)", immediateRender: false }, t + 0.7 + d);
+        });
+      });
+    }
+
+    // ---------- pages ----------
+    function titlePage(i, a0, a1, enter) {
+      const P = page(i), f = P.fr;
+      const S = sides(f, a0, a1, 560, 820, { bottom: true, enter: enter ? a0 + 0.2 : false });
+      bushes(f);
+      const crown = pic(f, "crown", 365, 520, 350, { z: 4, origin: "50% 100%" });
+      const n1 = line(f, D.name1, "name gold", 755, 220, 860);
+      const n2 = D.name2 ? line(f, D.name2, "name gold", 975, 220, 860) : null;
+      const rb = paintedRibbon(f, D.turning, D.name2 ? 1225 : 1010);
+      const sp = [[300, 560], [760, 520], [190, 900], [860, 860], [540, 1420], [200, 680], [880, 1100]].map(([x, y]) => spark(f, x, y, 0.6 + rnd() * 0.6));
+      sp.forEach(s => twinkle(s, a0 + 0.3, a1));
+      [n1, n2].filter(Boolean).forEach(n => tl.fromTo(n.firstChild, { backgroundPosition: "0% 0" }, { backgroundPosition: "100% 0", duration: 2.6, ease: "sine.inOut", yoyo: true, repeat: Math.ceil((a1 - a0) / 2.6) }, a0));
+      bob(crown, a0, a1, -12, 1.4);
+      if (!enter) [n1, n2].filter(Boolean).forEach((n, k) => writeGold(n, 0.15 + k * 0.45));
+      if (enter) { // last page: build in again
+        rise(crown, a0 + 0.3, { y: -60 });
+        [n1, n2].filter(Boolean).forEach((n, k) => writeGold(n, a0 + 0.6 + k * 0.5));
+        tl.fromTo(rb, { opacity: 0, scaleX: 0.3 }, { opacity: 1, scaleX: 1, duration: 0.8, ease: "back.out(1.6)" }, a0 + 1.3);
+      }
+      return P;
+    }
+
+    // P1 — title (frame 0 is already complete: it is the thumbnail)
+    peel(titlePage(1, 0, FLIPAT[0] + FLIP, false), FLIPAT[0]);
+
+    // P2 — once upon a time
+    {
+      const a0 = FLIPAT[0] + 0.3, a1 = FLIPAT[1] + FLIP;
+      const P = page(2), f = P.fr;
+      sides(f, a0, a1, 1000, 1080, { enter: a0 + 1.0 }); bushes(f);
+      const c1 = pic(f, "clouds", 330, 250, 640, { z: 1 }); const c2 = pic(f, "clouds", -180, 1040, 500, { z: 1 });
+      drift(c1, a0, a1, -80); drift(c2, a0, a1, 70); fade(c1, a0, 1.2); fade(c2, a0 + 0.4, 1.2);
+      const pal = pic(f, "palace", (W - 620) / 2, 1230, 620, { z: 2, origin: "50% 100%" });
+      rise(pal, a0 + 0.4, { y: 200, scale: 0.9 }, 1.4);
+      const words = String(D.storyTitle).trim().split(/\s+/), cut = Math.ceil(words.length / 2);
+      const h1 = line(f, words.slice(0, cut).join(" "), "caps", 420, 124);
+      const h2 = line(f, words.slice(cut).join(" "), "caps", 555, 124);
+      const SL = D.story.map((s, k) => line(f, s, "ital", 745 + k * 112, 78));
+      stack([h1, h2, ...SL], 480, 1190, 44, 64);
+      write(h1, a0 + 0.6, 0.07); write(h2, a0 + 1.4, 0.07);
+      SL.forEach((d, k) => write(d, a0 + 2.4 + k * 1.3, 0.04));
+      butterfly(f, [[a0 + 2.0, -120, 1300], [a0 + 3.6, 230, 1160], [a0 + 5.2, 110, 1020], [a0 + 6.8, 300, 1120], [a1, -160, 960]], 96);
+      peel(P, FLIPAT[1]);
+    }
+
+    // P3 — you are invited (crown on the cushion, royal elephant procession)
+    {
+      const a0 = FLIPAT[1] + 0.3, a1 = FLIPAT[2] + FLIP;
+      const P = page(3), f = P.fr;
+      sides(f, a0, a1, 1180, 1060, { enter: a0 + 0.5 }); bushes(f);
+      const pil = pic(f, "pillow", (W - 560) / 2, 300, 560, { z: 4, origin: "50% 100%" });
+      tl.fromTo(pil, { opacity: 0, y: -260 }, { opacity: 1, y: 0, duration: 1.1, ease: "bounce.out" }, a0 + 0.3);
+      const L = [
+        line(f, D.invited, "caps", 690, 64), line(f, D.royal, "ital", 770, 82), line(f, D.honor, "ital", 868, 66),
+        line(f, D.princess, "script", 930, 116),
+        line(f, D.name1, "name", 1065, 176, 860),
+      ];
+      if (D.name2) L.push(line(f, D.name2, "name", 1240, 176, 860));
+      L.push(line(f, D.birthday, "caps", D.name2 ? 1435 : 1260, 66));
+      stack(L, 690, 1480, 44, 60);
+      let t = a0 + 1.1; L.forEach((d, k) => { write(d, t, d.classList.contains("name") ? 0.06 : 0.035); t += k < 3 ? 0.9 : 0.75; });
+      // three elephants walk across the bottom, mother first, two little ones behind
+      [[440, 0, 0], [360, -420, 0.21], [310, -770, 0.13]].forEach(([w, gap, ph]) => {
+        const h = w * 1000 / 1308;
+        const e = pic(f, "elephant", -460 + gap, 1835 - h, w, { z: 5, origin: "50% 100%" });
+        tl.fromTo(e, { x: 0 }, { x: 2550, duration: a1 - a0 - 0.4, ease: "none" }, a0 + 0.4);
+        bob(e.firstChild, a0 + ph, a1, -10, 0.42);
+        tl.fromTo(e, { rotation: -1.2 }, { rotation: 1.2, duration: 0.84, ease: "sine.inOut", yoyo: true, repeat: Math.ceil((a1 - a0) / 0.84) }, a0 + ph);
+      });
+      butterfly(f, [[a0 + 3, 1150, 600], [a0 + 5, 880, 470], [a0 + 7.5, 980, 640], [a1, 1200, 420]], 70, true);
+      peel(P, FLIPAT[2]);
+    }
+
+    // P4 — day, date, time, venue
+    {
+      const a0 = FLIPAT[2] + 0.3, a1 = FLIPAT[3] + FLIP;
+      const P = page(4), f = P.fr;
+      sides(f, a0, a1, 560, 640, { bottom: true, enter: a0 + 0.6 }); bushes(f);
+      const PW = 680, sc = PW / 1322;
+      const pc = pic(f, "palace_cloud", (W - PW) / 2, 290, PW, { z: 4, origin: "50% 80%" });
+      tl.fromTo(pc, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 1.2, ease: "back.out(1.5)" }, a0 + 0.2);
+      bob(pc, a0 + 1.4, a1, -12, 1.8);
+      // the words sit on the painted ribbon of the palace picture (picture coordinates)
+      const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      svg.setAttribute("viewBox", "0 0 1322 1007"); Object.assign(svg.style, { position: "absolute", left: 0, top: 0, width: PW + "px", height: Math.round(1007 * sc) + "px", overflow: "visible" });
+      svg.innerHTML = `<path id="rib4" d="M190 806 Q 655 886 1120 806" fill="none"/><text class="rtext" font-size="96" dominant-baseline="central" style="fill:#6a2c47;stroke:#6a2c47;stroke-width:2.2px" text-anchor="middle"><textPath href="#rib4" startOffset="50%">${esc(D.ribbon)}</textPath></text>`;
+      pc.appendChild(svg);
+      tl.fromTo(svg, { opacity: 0 }, { opacity: 1, duration: 0.8, ease: "sine.out" }, a0 + 1.3);
+      const L = [
+        line(f, D.day, "script", 865, 112), line(f, D.date, "caps", 1000, 94), line(f, D.time, "caps", 1115, 72),
+        line(f, D.venue, "script", 1190, 112), line(f, D.venueNote, "caps", 1345, 44),
+        ...D.address.map((a, k) => line(f, a, "caps", 1420 + k * 64, 48)),
+      ];
+      stack(L, 840, 1700, 40, 58);
+      L.forEach((d, k) => write(d, a0 + 1.6 + k * 0.6, 0.035));
+      butterfly(f, [[a0 + 2.5, 1200, 700], [a0 + 4.5, 930, 600], [a0 + 6.5, 990, 800], [a1, 1200, 560]], 82, true);
+      peel(P, FLIPAT[3]);
+    }
+
+    // P5 — RSVP, palace gate rises at the bottom
+    {
+      const a0 = FLIPAT[3] + 0.3, a1 = FLIPAT[4] + FLIP;
+      const P = page(5), f = P.fr;
+      sides(f, a0, a1, 930, 1000, { enter: a0 + 0.3 });
+      const L = [line(f, D.rsvpLabel, "caps", 640, 74), line(f, D.rsvpName, "script", 730, 140), line(f, D.rsvpPhone, "caps", 960, 92)];
+      stack(L, 470, 1270, 56, 80);
+      L.forEach((d, k) => write(d, a0 + 0.6 + k * 0.9, 0.05));
+      const gate = pic(f, "gate", 40, 1290, 1000, { z: 4, origin: "50% 100%" });
+      rise(gate, a0 + 0.5, { y: 400, scale: 1 }, 1.4);
+      peel(P, FLIPAT[4]);
+    }
+
+    // P6 — title again, holds to the end
+    titlePage(6, FLIPAT[4] + 0.2, DUR, true);
+
+    TRANS.forEach(([i, t]) => sweep(i + 1, t));
+    window.__timelines = window.__timelines || {};
+    const imgs = [...document.images].map(im => Promise.race([new Promise(r => { if (im.complete) r(); else { im.onload = r; im.onerror = r; } }), new Promise(r => setTimeout(r, 4000))]));
+    const faces = ['600 64px "Cormorant Garamond"', '700 64px "Cormorant Garamond"', 'italic 600 64px "Cormorant Garamond"', '400 64px "Great Vibes"'].map(f => document.fonts.load(f));
+    Promise.all([...faces, document.fonts.ready, ...imgs]).then(() => document.fonts.ready).then(() => { fitAll(); layoutStacks(); window.__timelines["cuento"] = tl;
+      window.__filmAt = (t) => tl.seek(t, false); tl.seek(0, false); window.__filmReady(); /* GENERATED (page-ilavarasi.mjs) */ }).catch(e => console.error("boot failed", e));
+  })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ta">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=1080, height=1920" />
+  <title>Wedding invite — Thamarai Arangam (working name)</title>
+  <style>
+    /* two fonts (house rule, Tamil page): the owner's ATM 378 (titles, names) + ATM 344 (everything else) */
+    @font-face { font-family: "ATM 378"; src: url("assets/fonts/ATM-378.ttf") format("truetype"); }
+    @font-face { font-family: "ATM 344"; src: url("assets/fonts/ATM-344.ttf") format("truetype"); }
+    html, body { margin: 0; background: #5e0c12; }
+    #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: #5e0c12; }
+    .lay { position: absolute; display: block; max-width: none; }
+    img.lay { height: auto; }
+    .scene { width: 1080px; height: 1920px; overflow: hidden; }
+    /* text on the maroon wall: cream body, gold display, soft dark halo for readability — never black */
+    .tx { position: absolute; white-space: nowrap; line-height: 1.1; text-align: center; color: #f7e6c4;
+      text-shadow: 0 0 14px rgba(40, 0, 4, 0.75), 0 2px 3px rgba(40, 0, 4, 0.6); }
+    .disp { font-family: "ATM 378"; font-weight: 400; }
+    .body { font-family: "ATM 344"; font-weight: 400; }
+    .gold { background: linear-gradient(180deg, #fff2b8 0%, #f2c75c 45%, #c98f2a 75%, #f6d27a 100%); -webkit-background-clip: text;
+      background-clip: text; color: transparent; text-shadow: none; filter: drop-shadow(0 2px 3px rgba(40, 0, 4, 0.75)) drop-shadow(0 0 12px rgba(40, 0, 4, 0.5)); }
+    .goldsoft { color: #f3cf7a; }
+    .lab { color: #f0c96e; letter-spacing: 0.06em; }
+    .small { color: #f1dcb4; }
+    .crest { color: #e9bd5d; }
+    .rule { position: absolute; height: 2px; background: linear-gradient(90deg, rgba(233, 189, 93, 0), #e9bd5d 30%, #e9bd5d 70%, rgba(233, 189, 93, 0)); }
+    .melt { -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 100%); mask-image: linear-gradient(180deg, #000 55%, transparent 100%); }
+    .mural { -webkit-mask-image: linear-gradient(180deg, #000 50%, rgba(0,0,0,0.5) 75%, transparent 100%); mask-image: linear-gradient(180deg, #000 50%, rgba(0,0,0,0.5) 75%, transparent 100%); }
+    .petal { width: 22px; height: 14px; border-radius: 60% 40% 60% 40%; background: radial-gradient(circle at 35% 35%, #ffd3e4, #e0558c 75%); }
+    .stem { width: 7px; height: 92px; border-radius: 4px; background: linear-gradient(90deg, #3f7d2a, #7fb24a 50%, #3f7d2a); }
+    .glow { width: 70px; height: 90px; border-radius: 50%; background: radial-gradient(closest-side, rgba(255, 220, 130, 0.75), rgba(255, 170, 60, 0.25) 55%, rgba(255, 150, 40, 0)); mix-blend-mode: screen; }
+  </style>
+  <style>/* GENERATED (page-poonga.mjs): the editor's frame has no HyperFrames runtime to size the root */ html, body, #root { width: 1080px; height: 1920px; }</style>
+  <script>/* GENERATED (page-poonga.mjs): lite preview switch */
+    if (/[?&]lite=1/.test(location.search)) {
+      document.documentElement.classList.add("lite");
+      const d = Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, "src");
+      Object.defineProperty(HTMLImageElement.prototype, "src", { ...d, set(v) { d.set.call(this, String(v).replace("assets/img/", "assets/img-lite/")); } });
+      window.__vinvZoom = (z) => { document.documentElement.style.zoom = String(z); };
+    }
+  </script>
+  <style>/* GENERATED (page-poonga.mjs): lite = no blur filters */
+    html.lite [style*="blur("] { filter: none !important; }
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="reel-de9tvb" data-start="0" data-width="1080" data-height="1920" data-duration="33" data-no-timeline>
+    <!-- sound (owner d15): NO music — only a harp sparkle as the petals pass to her palm and a peacock call when it looks up
+         (tools/mix-sfx.sh → assets/audio/sfx.wav; effects are our own ElevenLabs sounds). Never whoosh/swoosh. -->
+  </div>
+  <script type="module">
+    import { DETAILS as SAMPLE } from "./assets/details.js";
+    // GENERATED (page-poonga.mjs): the editor's live preview — the details from the parent window (the editor sets
+    // window.__vinvPageDetails before it loads this page), the film's time from the parent through window.__filmAt(t)
+    let DETAILS = SAMPLE;
+    try { if (window.parent && window.parent !== window && window.parent.__vinvPageDetails) DETAILS = window.parent.__vinvPageDetails; } catch { /* another origin */ }
+    window.__FILM__ = true; window.__filmDuration = Number(document.getElementById("root").dataset.duration);
+    import { build } from "./assets/film.js";
+    import { renderAll } from "./assets/engine.js";
+
+    window.__hf = window.__hf || {}; window.__hf.buildReady = window.__hf.buildReady || {};
+    let film = null, ready = false;
+    window.__hf.buildReady.film = (async () => {
+      const root = document.getElementById("root");
+      await Promise.all(['80px "ATM 378"', '48px "ATM 344"'].map((f) => document.fonts.load(f, "திருமண அழைப்பிதழ் ஶ்ரீ 0123456789")));
+      film = build(root, DETAILS);
+      await Promise.all([...document.querySelectorAll("img")].map((i) => (i.complete && i.naturalWidth ? Promise.resolve() : i.decode()).catch(() => console.warn("image failed", i.src))));
+      for (const f of film.fits) f();
+      ready = true;
+    })();
+    function renderAt(t) { if (!ready) return; film.render(t); renderAll(t); }
+    window.__filmAt = (t) => renderAt(t);   // GENERATED (page-poonga.mjs): the editor drives the time
+    window.addEventListener("hf-seek", (e) => renderAt(e.detail.time));
+    window.__hf.buildReady.film.then(() => renderAt(window.__hfThreeTime || 0));
+    window.__renderAt = renderAt;
+  </script>
+</body>
+</html>

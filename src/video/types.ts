@@ -1,0 +1,4 @@
+export type VideoLayer='background'|'characters'|'boards'|'text'|'petals';
+export type VideoPersonalization=Record<string,any>&{photos:Partial<Record<'groom'|'bride'|'couple',{id:string;mode:'cutout'|'frame'|'prepared';confirmed:boolean}>>;music:{mode:'none'|'library'|'upload';id?:string}};
+export type VideoMasterManifest={id:string;version:number;rendererVersion:string;layerOrder:VideoLayer[];output:{width:number;height:number;fps:number;frames:number;duration:number};assets:Record<string,{path:string;sha256:string|null;kind:string}>;scenes:any[];petals:{asset:string;format:string;opacity:number;playbackRate:number;offset:number;loop:boolean};release:{approved:boolean;[key:string]:any}};
+export type VideoRenderJob={id:string;status:'queued'|'running'|'ready'|'failed';progress:number;error?:string;expiresAt:string;contentRevision:string;download?:string};

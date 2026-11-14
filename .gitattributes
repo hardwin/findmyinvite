@@ -1,0 +1,4 @@
+# Immutable renderer assets are verified byte-for-byte on Windows and Linux.
+# Do not rewrite their line endings while checking out a deployment or snapshot.
+public/assets/video-scenes/** -text
+public/assets/video-masters/** -text

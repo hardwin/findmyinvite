@@ -1,0 +1,1 @@
+export const DETAILS={lang:"en",outfit:"veshti",title:"Save the Date",dateISO:"2027-02-12",intro:["for the wedding","celebration of"],groom:"Arjun",bride:"Meera",venue:"Sri Balaji Kalyana Mandapam"};

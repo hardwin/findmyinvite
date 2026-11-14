@@ -1,0 +1,74 @@
+{
+  "id": "film-gettimelam-v1",
+  "version": 1,
+  "rendererVersion": "scene-film-v1",
+  "sceneDesign": "gettimelam",
+  "kind": "webgl",
+  "output": {
+    "width": 720,
+    "height": 1280,
+    "fps": 24,
+    "frames": 1320,
+    "duration": 55
+  },
+  "scenes": [
+    {
+      "id": "opening",
+      "name": "Opening",
+      "start": 0,
+      "end": 420,
+      "reviewFrame": 300,
+      "layers": []
+    },
+    {
+      "id": "invitation",
+      "name": "Invitation",
+      "start": 420,
+      "end": 660,
+      "reviewFrame": 588,
+      "layers": []
+    },
+    {
+      "id": "wedding",
+      "name": "Wedding",
+      "start": 660,
+      "end": 900,
+      "reviewFrame": 816,
+      "layers": []
+    },
+    {
+      "id": "reception",
+      "name": "Reception",
+      "start": 900,
+      "end": 1114,
+      "reviewFrame": 1044,
+      "layers": []
+    },
+    {
+      "id": "thanks",
+      "name": "Thank you",
+      "start": 1114,
+      "end": 1320,
+      "reviewFrame": 1248,
+      "layers": []
+    }
+  ],
+  "assets": {
+    "sceneBundle": {
+      "path": "/assets/video-masters/film-gettimelam-v1/asset-index.json",
+      "sha256": "32d05d1fcec8fd53d42b4c1534e50c0567c6ef8c084bb1be11083d94c7e6c8ab"
+    }
+  },
+  "release": {
+    "approved": false
+  },
+  "catalog": {
+    "poster": "poster.jpg",
+    "posters": {
+      "320": "poster-320-v1.webp",
+      "640": "poster-640-v1.webp",
+      "960": "poster-960-v1.webp"
+    },
+    "preview": "demo-v1.mp4"
+  }
+}

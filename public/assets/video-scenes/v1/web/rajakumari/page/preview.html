@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=1080, height=1920" />
+  <meta name="details" content="./assets/details.js" />
+  <title>Birthday invitation — Rajakumari</title>
+  <style>
+    /* two fonts (house rule): Great Vibes (script) + Cormorant Garamond (serif, also the gold ONE and 1). OFL. */
+    @font-face { font-family: "Great Vibes"; src: url("assets/fonts/great-vibes-latin-400.woff2") format("woff2"); font-weight: 400; }
+    @font-face { font-family: "Cormorant Garamond"; src: url("assets/fonts/cormorant-garamond-latin-600.woff2") format("woff2"); font-weight: 600; font-style: normal; }
+    @font-face { font-family: "Cormorant Garamond"; src: url("assets/fonts/cormorant-garamond-latin-600-italic.woff2") format("woff2"); font-weight: 600; font-style: italic; }
+    :root { --rose: #c2668b; --roseD: #b9567c; --taupe: #8a6646; --paper: #fbefe9; --rib: #8f5a4a; --glowc: 185, 86, 124; --archsh: 170, 90, 110; --wash: 252, 243, 236; }
+    /* prince (blue) theme: same layout, cool colours */
+    body.prince { --rose: #3f6ea8; --roseD: #2f5a8f; --taupe: #5a6b80; --paper: #eef3f9; --rib: #34557f; --glowc: 50, 90, 150; --archsh: 70, 100, 150; --wash: 238, 243, 249; }
+    html, body { margin: 0; background: var(--paper); }
+    #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--paper); }
+    .lay { position: absolute; display: block; max-width: none; }
+    img.lay { height: auto; }
+    .page { overflow: hidden; background: var(--paper); backface-visibility: hidden; }
+    .creamwash { background: linear-gradient(180deg, rgba(var(--wash), 0.2) 0%, rgb(var(--wash)) 40%, rgb(var(--wash)) 70%, rgba(var(--wash), 0.2) 100%); }
+    .turncv { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; z-index: 6; pointer-events: none; }
+    /* majestic 3D number */
+    .n3d { perspective: 1500px; width: max-content; line-height: 1; font-family: "Cormorant Garamond"; font-weight: 600; font-variant-numeric: lining-nums; font-feature-settings: "lnum" 1; }
+    .n3d .rig { position: relative; transform-style: preserve-3d; }
+    .n3d .ly { white-space: nowrap; padding: 0 0.12em; }
+    .n3d .ly:not(:first-child) { position: absolute; left: 0; top: 0; }
+    .n3d sup { font-size: 0.3em; font-style: italic; vertical-align: 2.1em; margin-left: 0.03em; }
+    .n3d .back { color: #9a6a22; -webkit-text-stroke: 4px #9a6a22; }
+    .n3glow { border-radius: 50%; background: radial-gradient(closest-side, rgba(255, 236, 170, 0.85), rgba(255, 220, 150, 0.35) 45%, rgba(255, 220, 150, 0) 100%); }
+    .n3d .face { background: linear-gradient(172deg, #fff8dc 0%, #f6dc8e 22%, #d9ab4f 48%, #a8762a 66%, #e8c66e 84%, #fff1c0 100%);
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; -webkit-text-stroke: 2px #fff0bf;
+      transform: translateZ(0.5px); filter: drop-shadow(0 0 1px rgba(120, 80, 20, 0.6)); }
+    .n3d .shine { background: linear-gradient(105deg, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0.95) 50%, rgba(255, 255, 255, 0) 60%) 160% 0 / 300% 100% no-repeat;
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; transform: translateZ(1px); }
+    .pshade { background: linear-gradient(100deg, rgba(120, 60, 70, 0) 30%, rgba(120, 60, 70, 0.28) 70%, rgba(255, 255, 255, 0.35) 100%); pointer-events: none; }
+    .pshadow { background: linear-gradient(90deg, rgba(110, 50, 60, 0.45), rgba(110, 50, 60, 0) 55%); pointer-events: none; }
+
+    .tx { width: max-content; white-space: nowrap; text-align: center; line-height: 1.15; padding: 0 0.3em; }
+    /* soft paper glow behind every line so it reads over clouds (light design: no dark outline, see DECISIONS) */
+    /* script capitals (S, F, H, A…) swing far past their letter box: wide padding keeps every swash inside the box,
+       so the write-on mask never cuts one (owner 2026-11-04: the "S" of Sunday) */
+    .script { font-family: "Great Vibes"; font-weight: 400; padding: 0.3em 0.75em; }
+    .serif { font-family: "Cormorant Garamond"; font-weight: 600; letter-spacing: 0.02em; }
+    .rose { color: var(--rose); text-shadow: 0 0 18px rgba(255, 248, 244, 0.95), 0 0 6px rgba(255, 248, 244, 0.9), 0 2px 2px rgba(var(--glowc), 0.25); }
+    .body { color: var(--taupe); text-shadow: 0 0 14px rgba(255, 248, 244, 0.95), 0 0 4px rgba(255, 248, 244, 0.9); }
+    .venue { color: var(--taupe); text-shadow: 0 0 14px rgba(255, 248, 244, 0.95); }
+    .ribbon { color: var(--rib); font-size: 44px; text-shadow: 0 1px 0 rgba(255, 240, 236, 0.7); }
+    /* champagne gold: gradient fill with a thin darker edge */
+    .gold { background: linear-gradient(180deg, #fff3cf 0%, #f1d58e 30%, #d2a752 62%, #b98a3a 82%, #e9cf8c 100%); -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent; -webkit-text-stroke: 1.2px rgba(164, 118, 46, 0.65); filter: drop-shadow(0 3px 6px rgba(150, 100, 40, 0.28)); }
+    .gold > span, .gold > sup { background: inherit; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .onece { font-family: "Cormorant Garamond"; font-weight: 600; letter-spacing: 0.01em; line-height: 1.2; padding-top: 0.25em; }
+    .onece .tail { font-style: italic; font-size: 0.72em; }
+    .crown-o { filter: drop-shadow(0 2px 3px rgba(150, 100, 40, 0.3)); }
+    .gold.script { -webkit-text-stroke-width: 0.8px; }
+    .age { font-family: "Cormorant Garamond"; font-weight: 600; line-height: 1; font-variant-numeric: lining-nums; font-feature-settings: "lnum" 1; }
+    .age sup { font-size: 0.3em; font-style: italic; vertical-align: 1.9em; margin-left: 0.04em; }
+    .arch { border-radius: 270px 270px 18px 18px; overflow: hidden; box-shadow: 0 18px 40px rgba(var(--archsh), 0.28); }
+    .arch .photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+    .arch .archline { position: absolute; inset: 0; border-radius: inherit; border: 10px solid transparent;
+      background: linear-gradient(160deg, #fff1c6, #d6ab5a 40%, #b4873a 60%, #f0d58f) border-box;
+      -webkit-mask: linear-gradient(#000 0 0) padding-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; }
+    .vblock { white-space: normal; line-height: 1.28; padding: 0; text-wrap: balance; }
+    .vblock .vrule { height: 4px; width: 460px; margin: 22px auto 0; }
+    .ribtx svg { display: block; overflow: visible; }
+    .ribt { font-family: "Cormorant Garamond"; font-weight: 600; letter-spacing: 0.02em; fill: var(--rib); }
+    .dots { background: radial-gradient(circle, rgba(120, 110, 100, 0.7) 1.6px, transparent 2px) 0 50% / 12px 4px repeat-x; }
+    .spk { border-radius: 50%; background: radial-gradient(closest-side, #fffbe8, rgba(255, 226, 160, 0.75) 45%, rgba(255, 210, 140, 0)); }
+    .bfly { filter: drop-shadow(0 4px 6px rgba(var(--archsh), 0.25)); }
+    body.prince .bfly { filter: hue-rotate(185deg) saturate(0.85) drop-shadow(0 4px 6px rgba(var(--archsh), 0.25)); }
+    .grain { position: absolute; inset: 0; background: url("assets/img/grain.png"); opacity: 0.06; mix-blend-mode: multiply; pointer-events: none; z-index: 10; }
+    .magenta, .magenta body, .magenta #root { background: #ff00ff !important; }
+  </style>
+  <style>/* GENERATED (build-page.mjs): the editor's frame has no HyperFrames runtime to size the root */ html, body, #root { width: 1080px; height: 1920px; }</style>
+  <script>/* GENERATED (build-page.mjs): lite preview switch */
+    if (/[?&]lite=1/.test(location.search)) {
+      document.documentElement.classList.add("lite");
+      const d = Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, "src");
+      Object.defineProperty(HTMLImageElement.prototype, "src", { ...d, set(v) { d.set.call(this, String(v).replace("assets/img/", "assets/img-lite/")); } });
+      // the editor lays the page out at its preview box's size once the film is built (the text fit is done at full size)
+      window.__vinvZoom = (z) => { document.documentElement.style.zoom = String(z); };
+    }
+  </script>
+  <style>/* GENERATED (build-page.mjs): lite = no blur filters, no light leak */
+    html.lite [style*="blur("], html.lite .txt .ghost { filter: none !important; }
+    html.lite .leak { display: none !important; }
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="birthday-castle" data-start="0" data-width="1080" data-height="1920" data-duration="30" data-no-timeline>
+  </div>
+  <script type="module">
+    import { DETAILS as SAMPLE } from "./assets/details.js";
+    // GENERATED (build-page.mjs): the editor's live preview — the details from the parent window (the editor sets
+    // window.__vinvPageDetails before it loads this page; a copy, the photo bake changes it), the film's time from the parent
+    let DETAILS = SAMPLE;
+    try { if (window.parent && window.parent !== window && window.parent.__vinvPageDetails) DETAILS = JSON.parse(JSON.stringify(window.parent.__vinvPageDetails)); } catch { /* another origin */ }
+    import { build, renderAll } from "./assets/film.js";
+    import { preparePhoto } from "./style/castle-photo.js";
+    window.__FILM__ = true; window.__filmDuration = 30;   // GENERATED (build-page.mjs)
+
+    const MAGENTA = false;   // check only: a scratch copy sets this, never the project
+    window.__hf = window.__hf || {}; window.__hf.buildReady = window.__hf.buildReady || {};
+    let ready = false;
+    window.__hf.buildReady.film = (async () => {
+      const root = document.getElementById("root");
+      await preparePhoto(DETAILS);   // GENERATED (build-page.mjs)
+      if (MAGENTA) for (const e of [document.documentElement, document.body, root]) e.classList.add("magenta");
+      await Promise.all(['400 120px "Great Vibes"', '600 60px "Cormorant Garamond"', 'italic 600 60px "Cormorant Garamond"'].map((f) => document.fonts.load(f, "Aa1")));
+      const fits = build(root, DETAILS);
+      const g = document.createElement("div"); g.className = "grain"; root.appendChild(g);
+      await Promise.all([...root.querySelectorAll("img")].map((i) => (i.complete && i.naturalWidth ? Promise.resolve() : i.decode()).catch(() => console.warn("image failed", i.src))));
+      for (const f of fits) f();
+      ready = true;
+    })();
+    function renderAt(t) { if (!ready) return; renderAll(t); }
+    window.__filmAt = (t) => renderAt(t);   // GENERATED (build-page.mjs): the editor drives the time
+    window.addEventListener("hf-seek", (e) => renderAt(e.detail.time));
+    window.__hf.buildReady.film.then(() => renderAt(window.__hfThreeTime || 0));
+  </script>
+</body>
+</html>

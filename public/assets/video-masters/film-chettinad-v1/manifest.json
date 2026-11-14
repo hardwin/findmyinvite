@@ -1,0 +1,66 @@
+{
+  "id": "film-chettinad-v1",
+  "version": 1,
+  "rendererVersion": "scene-film-v1",
+  "sceneDesign": "chettinad",
+  "kind": "page",
+  "output": {
+    "width": 720,
+    "height": 1280,
+    "fps": 24,
+    "frames": 816,
+    "duration": 34
+  },
+  "scenes": [
+    {
+      "id": "title",
+      "name": "Title",
+      "start": 0,
+      "end": 250,
+      "reviewFrame": 72,
+      "layers": []
+    },
+    {
+      "id": "names",
+      "name": "Names",
+      "start": 250,
+      "end": 461,
+      "reviewFrame": 372,
+      "layers": []
+    },
+    {
+      "id": "events",
+      "name": "Events",
+      "start": 461,
+      "end": 662,
+      "reviewFrame": 600,
+      "layers": []
+    },
+    {
+      "id": "closing",
+      "name": "Closing",
+      "start": 662,
+      "end": 816,
+      "reviewFrame": 804,
+      "layers": []
+    }
+  ],
+  "assets": {
+    "sceneBundle": {
+      "path": "/assets/video-masters/film-chettinad-v1/asset-index.json",
+      "sha256": "6b15f58a8263ab8655bfcddeae37c9834c1277ba19208e65d5c9d318b7fd7a64"
+    }
+  },
+  "release": {
+    "approved": false
+  },
+  "catalog": {
+    "poster": "poster.jpg",
+    "posters": {
+      "320": "poster-320-v1.webp",
+      "640": "poster-640-v1.webp",
+      "960": "poster-960-v1.webp"
+    },
+    "preview": "demo-v1.mp4"
+  }
+}

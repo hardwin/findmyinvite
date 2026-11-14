@@ -1,0 +1,82 @@
+{
+  "id": "film-kondattam-v1",
+  "version": 1,
+  "rendererVersion": "scene-film-v1",
+  "sceneDesign": "kondattam",
+  "kind": "page",
+  "output": {
+    "width": 720,
+    "height": 1280,
+    "fps": 24,
+    "frames": 1440,
+    "duration": 60
+  },
+  "scenes": [
+    {
+      "id": "opening",
+      "name": "Title",
+      "start": 0,
+      "end": 278,
+      "reviewFrame": 62,
+      "layers": []
+    },
+    {
+      "id": "names",
+      "name": "Names",
+      "start": 278,
+      "end": 566,
+      "reviewFrame": 384,
+      "layers": []
+    },
+    {
+      "id": "invitation",
+      "name": "Invitation",
+      "start": 566,
+      "end": 854,
+      "reviewFrame": 797,
+      "layers": []
+    },
+    {
+      "id": "wedding",
+      "name": "Wedding",
+      "start": 854,
+      "end": 1046,
+      "reviewFrame": 1018,
+      "layers": []
+    },
+    {
+      "id": "reception",
+      "name": "Reception",
+      "start": 1046,
+      "end": 1237,
+      "reviewFrame": 1205,
+      "layers": []
+    },
+    {
+      "id": "thanks",
+      "name": "Thank you",
+      "start": 1237,
+      "end": 1440,
+      "reviewFrame": 1364,
+      "layers": []
+    }
+  ],
+  "assets": {
+    "sceneBundle": {
+      "path": "/assets/video-masters/film-kondattam-v1/asset-index.json",
+      "sha256": "a15171a93c9aa4a7ba72cb834988a13fde2b163ba0656256a543c67eaaf0541f"
+    }
+  },
+  "release": {
+    "approved": false
+  },
+  "catalog": {
+    "poster": "poster.jpg",
+    "posters": {
+      "320": "poster-320-v1.webp",
+      "640": "poster-640-v1.webp",
+      "960": "poster-960-v1.webp"
+    },
+    "preview": "demo-v1.mp4"
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "id": "film-oonjal-v1",
+  "version": 1,
+  "rendererVersion": "scene-film-v1",
+  "sceneDesign": "oonjal",
+  "kind": "page",
+  "output": {
+    "width": 720,
+    "height": 1280,
+    "fps": 24,
+    "frames": 828,
+    "duration": 34.5
+  },
+  "scenes": [
+    {
+      "id": "opening",
+      "name": "Opening",
+      "start": 0,
+      "end": 156,
+      "reviewFrame": 144,
+      "layers": []
+    },
+    {
+      "id": "bride",
+      "name": "Bride",
+      "start": 156,
+      "end": 353,
+      "reviewFrame": 252,
+      "layers": []
+    },
+    {
+      "id": "swing",
+      "name": "Swing",
+      "start": 353,
+      "end": 439,
+      "reviewFrame": 427,
+      "layers": []
+    },
+    {
+      "id": "groom",
+      "name": "Groom",
+      "start": 439,
+      "end": 624,
+      "reviewFrame": 540,
+      "layers": []
+    },
+    {
+      "id": "closing",
+      "name": "Save the Date",
+      "start": 624,
+      "end": 828,
+      "reviewFrame": 792,
+      "layers": []
+    }
+  ],
+  "assets": {
+    "sceneBundle": {
+      "path": "/assets/video-masters/film-oonjal-v1/asset-index.json",
+      "sha256": "ed37aee24ae85e576f31532492bac11562129ce631316e06cc0cefe75343f9d1"
+    }
+  },
+  "release": {
+    "approved": false
+  },
+  "catalog": {
+    "poster": "poster.jpg",
+    "posters": {
+      "320": "poster-320-v1.webp",
+      "640": "poster-640-v1.webp",
+      "960": "poster-960-v1.webp"
+    },
+    "preview": "demo-v1.mp4"
+  }
+}

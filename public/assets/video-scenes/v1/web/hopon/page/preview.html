@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="ta">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=1080, height=1920" />
+  <title>Wedding save-the-date — Payanam street (reel De_r6MFzsif), English</title>
+  <style>
+    /* two fonts (house rule): owner's ATM 378 (title, names) + ATM 344 (quote, date) */
+    @font-face { font-family: "ATM 378"; src: url("assets/fonts/ATM-378.ttf") format("truetype"); }
+    @font-face { font-family: "ATM 344"; src: url("assets/fonts/ATM-344.ttf") format("truetype"); }
+    /* English version (owner: "keep it in english"): Great Vibes script + Cormorant Garamond serif, both OFL */
+    @font-face { font-family: "Great Vibes"; src: url("assets/fonts/great-vibes-latin-400.woff2") format("woff2"); }
+    @font-face { font-family: "Cormorant Garamond"; src: url("assets/fonts/cormorant-garamond-latin-600.woff2") format("woff2"); font-weight: 600; }
+    /* bike + temple version (owner 2026-11-08): retro wall paint. Two fonts: Shrikhand (quote, title, names) + Alfa Slab One (date), both OFL */
+    /* owner 2026-11-08: his 1001fonts picks, then "use only two fonts" → Magnolia Script + Effloresce (Halaney dropped) (licences in assets/fonts/licences: OFL / free-commercial demo / public domain)
+       + the Kalyana Poster sticker effect: bold fill, thick dark outline (paint-order stroke), hard cream offset shadow, spring pop */
+    @font-face { font-family: "Magnolia Script"; src: url("assets/fonts/magnolia-script.otf") format("opentype"); }
+    /* owner 2026-11-08 "use similar safe font in preview and DIY": Fraunces (OFL, no reserved name; licences/fraunces-OFL.txt)
+       replaces Klarissa (FFC: font file may not be published). Variable font; SOFT 100 + WONK 1 at 800 = Klarissa's soft 70s curls */
+    @font-face { font-family: "Fraunces"; src: url("assets/fonts/fraunces-var.ttf") format("truetype"); font-weight: 100 900; }
+    :root { --red: #e0442e; --mustard: #f4b62a; --teal: #123f45; --cream: #f3e3bf; --maroon: #7b1420; }
+    .tx.quote { font-family: "Fraunces"; font-weight: 800; font-variation-settings: "SOFT" 100, "WONK" 1, "opsz" 144; letter-spacing: 0.015em; word-spacing: 0.08em; color: #fff3df;
+      text-shadow: 3.5px 0.0px 0 var(--maroon), 3.2px 1.3px 0 var(--maroon), 2.5px 2.5px 0 var(--maroon), 1.3px 3.2px 0 var(--maroon), 0.0px 3.5px 0 var(--maroon), -1.3px 3.2px 0 var(--maroon), -2.5px 2.5px 0 var(--maroon), -3.2px 1.3px 0 var(--maroon), -3.5px 0.0px 0 var(--maroon), -3.2px -1.3px 0 var(--maroon), -2.5px -2.5px 0 var(--maroon), -1.3px -3.2px 0 var(--maroon), -0.0px -3.5px 0 var(--maroon), 1.3px -3.2px 0 var(--maroon), 2.5px -2.5px 0 var(--maroon), 3.2px -1.3px 0 var(--maroon), 5px 6px 0 var(--maroon); }   /* round outline via shadows (stroke spiked) */
+    .paint { position: absolute; white-space: nowrap; transform: translate(-50%, -50%); line-height: 1.15; paint-order: stroke fill;
+      mix-blend-mode: multiply; filter: url(#paint); }
+    /* on the whitewashed ad panel: flat signwriter colours + hard offset shadow, painted on (multiply + light brush wobble) */
+    .p-title { font-family: "Fraunces"; font-weight: 800; font-variation-settings: "SOFT" 100, "WONK" 1, "opsz" 144; text-transform: uppercase; letter-spacing: 0.1em; word-spacing: 0.08em; color: var(--teal);
+      text-shadow: 4px 5px 0 var(--mustard); }   /* teal on cream ring: mustard-on-ochre was weak */
+    .p-names { font-family: "Magnolia Script"; color: var(--red); -webkit-text-stroke: 9px var(--teal); text-shadow: 6px 8px 0 var(--mustard); }
+    .p-date { font-family: "Fraunces"; font-weight: 800; font-variation-settings: "SOFT" 100, "WONK" 1, "opsz" 144; color: var(--maroon); letter-spacing: 0.06em; word-spacing: 0.1em; text-shadow: 4px 5px 0 var(--teal); } 
+    /* sunburst + vintage motifs on the ad panel: painted (multiply + same brush wear), under the lettering */
+    .deco { position: absolute; overflow: visible; mix-blend-mode: multiply; }
+    .deco.sun { opacity: 0.62; filter: url(#paint); }
+    .deco.mot { opacity: 0.95; }
+    .peacock { position: absolute; will-change: filter; }
+    .peacock img { position: absolute; left: 0; top: 0; width: 100%; height: 100%; }
+    /* film look: grain tiles (one per frame, 12 fps) + warm vignette, over everything */
+    .grain { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; z-index: 60; pointer-events: none;
+      mix-blend-mode: overlay; opacity: 0.2; image-rendering: pixelated; }
+    .vig { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; z-index: 59; pointer-events: none;
+      background: radial-gradient(ellipse at 50% 48%, rgba(70, 35, 12, 0) 58%, rgba(70, 35, 12, 0.34) 100%); }
+    .en .disp { font-family: "Great Vibes"; }
+    .en .body { font-family: "Cormorant Garamond"; font-weight: 600; letter-spacing: 0.06em; font-variant-numeric: lining-nums; }
+    :root { --ink: #6e1d2a; --ink2: #7d2e22; --gold: #a8742a; }
+    html, body { margin: 0; background: #e9dcc0; }
+    #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: #e9dcc0; }
+    #plate { position: absolute; z-index: 0; left: -100px; top: -40px; width: 1280px; height: 2000px; object-fit: cover;
+      filter: blur(9px) saturate(1.05); transform-origin: 50% 50%; }
+    #couple { position: absolute; z-index: 2; left: 0; top: 0; } #couple video { position: absolute; left: 0; top: 0; width: 100%; height: 100%; will-change: transform; }
+    #shadow { position: absolute; z-index: 1; width: 880px; height: 70px; border-radius: 50%;
+      background: radial-gradient(closest-side, rgba(60, 35, 20, 0.35), rgba(60, 35, 20, 0)); }
+    /* soft cream backing behind text so it reads on the wall (playbook readability) */
+    .back { display: none; } /* owner: no glow → backings off */
+    .back-old { position: absolute; z-index: 3; left: 50%; transform: translate(-50%, -50%); border-radius: 50%;
+      background: radial-gradient(closest-side, rgba(255, 246, 228, 0.62), rgba(255, 246, 228, 0)); }
+    .tx { position: absolute; z-index: 4; left: 540px; white-space: nowrap; text-align: center; transform: translate(-50%, -50%);
+      color: var(--ink); line-height: 1.1; }   /* owner: no white glow around the text */
+    /* foreground props (temple version): in front of the bike, soft focus */
+    .fg { position: absolute; z-index: 3; filter: blur(3px); will-change: transform; }
+    .tx span { display: inline-block; white-space: pre; }
+    .disp { font-family: "ATM 378"; }
+    .body { font-family: "ATM 344"; color: var(--ink2); }
+    .rule { position: absolute; z-index: 4; left: 540px; height: 3px; transform: translate(-50%, -50%);
+      background: linear-gradient(90deg, rgba(168, 116, 42, 0), var(--gold) 25%, var(--gold) 75%, rgba(168, 116, 42, 0)); }
+    .dia { position: absolute; z-index: 4; left: 540px; width: 16px; height: 16px; background: var(--gold);
+      transform: translate(-50%, -50%) rotate(45deg); }
+  </style>
+  <style>/* GENERATED (page-poonga.mjs): the editor's frame has no HyperFrames runtime to size the root */ html, body, #root { width: 1080px; height: 1920px; }</style>
+  <script>/* GENERATED (page-poonga.mjs): lite preview switch */
+    if (/[?&]lite=1/.test(location.search)) {
+      document.documentElement.classList.add("lite");
+      const d = Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, "src");
+      Object.defineProperty(HTMLImageElement.prototype, "src", { ...d, set(v) { d.set.call(this, String(v).replace("assets/img/", "assets/img-lite/")); } });
+      window.__vinvZoom = (z) => { document.documentElement.style.zoom = String(z); };
+    }
+  </script>
+  <style>/* GENERATED (page-poonga.mjs): lite = no blur filters */
+    html.lite #film { filter: none !important; }   /* 40 Kalyana: the SVG RGB split (feOffset px) is not zoomed on iPhone Safari, so it smears; off in the lite preview */
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="reel-de7peq" data-start="0" data-width="1080" data-height="1920" data-duration="18" data-no-timeline>
+    <svg width="0" height="0" style="position:absolute"><filter id="paint" x="-5%" y="-20%" width="110%" height="140%">
+      <!-- hand-painted wall lettering: wobbly brush edge + dry-brush wear -->
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" seed="3" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="2.5" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="4" seed="11" result="n2"/>
+      <feColorMatrix in="n2" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.0 1.45" result="wear"/>
+      <feComposite in="d" in2="wear" operator="in"/>
+    </filter></svg>
+    <!-- silent draft; music later (never whoosh/swoosh) -->
+    <!-- couple: film.js moves this wrapper; the walk video inside is owned by HyperFrames (no timing on the wrapper) -->
+    <div id="couple"><video id="walk" preload="auto" data-start="0" data-duration="10.2" data-media-start="0" data-track-index="1" muted playsinline></video></div>
+  </div>
+  <script type="module">
+    import { DETAILS as SAMPLE } from "./assets/details.js";
+    // GENERATED (page-poonga.mjs): the editor's live preview — the details from the parent window (the editor sets
+    // window.__vinvPageDetails before it loads this page), the film's time from the parent through window.__filmAt(t)
+    let DETAILS = SAMPLE;
+    try { if (window.parent && window.parent !== window && window.parent.__vinvPageDetails) DETAILS = window.parent.__vinvPageDetails; } catch { /* another origin */ }
+    window.__FILM__ = true; window.__filmDuration = Number(document.getElementById("root").dataset.duration);
+    import { build } from "./assets/film.js";
+    window.__hf = window.__hf || {}; window.__hf.buildReady = window.__hf.buildReady || {};
+    let film = null, ready = false;
+    window.__hf.buildReady.film = (async () => {
+      const root = document.getElementById("root");
+      await Promise.all(['90px "Magnolia Script"', '800 70px "Fraunces"'].map((f) => document.fonts.load(f, "Save Date திருமண நாள் 0123456789")));
+      film = await build(root, DETAILS);
+      ready = true;
+    })();
+    function renderAt(t) { if (ready) film.render(t); }
+    window.__filmAt = (t) => { renderAt(t); if (window.__vinvVideo) window.__vinvVideo(t); };   // GENERATED (page-poonga.mjs): the editor drives the time (+ the clip, cfg.video)
+    window.__filmStill = async (t) => { renderAt(t); await window.__vinvVideoStill?.(t); };
+    window.addEventListener("hf-seek", (e) => renderAt(e.detail.time));
+    window.__hf.buildReady.film.then(() => renderAt(window.__hfThreeTime || 0));
+    window.__renderAt = renderAt;
+  </script>
+  <script>/* GENERATED (page-poonga.mjs cfg.video): the lock's clip, played by the preview itself (no HyperFrames runtime here) */
+  (() => {
+    const v = document.getElementById("walk"), END = 10.2;
+    if (!v) return;
+    const lite = document.documentElement.classList.contains("lite");
+    const mov = !!v.canPlayType('video/quicktime; codecs="hvc1"');   // Safari: HEVC with alpha (it has no VP9 alpha)
+    v.muted = true; v.defaultMuted = true; v.playsInline = true; v.setAttribute("playsinline", ""); v.setAttribute("muted", "");
+    v.src = (lite ? "assets/video-lite/" : "assets/") + "ride" + (mov ? ".mov" : ".webm");
+    let lastT = -1, lastAt = 0, wantT = 0;
+    // iPhone loads no video data (no picture, no seeking) until the clip is played: start it now (muted, so allowed) and
+    // stop it where the editor is once it runs, unless the editor is playing
+    const p = v.play();
+    if (p && p.then) p.then(() => { if (!flowing()) { v.pause(); if (Math.abs(v.currentTime - wantT) > 0.02) v.currentTime = wantT; } }, () => {});
+    const flowing = () => performance.now() - lastAt < 220;
+    window.__vinvVideoStill = async (t) => {
+      lastT = -1; lastAt = 0; wantT = Math.min(Math.max(t, 0), END - 0.04);
+      v.pause();
+      const waitFor = (event, action) => new Promise((resolve, reject) => {
+        const cleanup = () => { clearTimeout(timer); v.removeEventListener(event, done); v.removeEventListener('error', failed); };
+        const done = () => { cleanup(); resolve(); };
+        const failed = () => { cleanup(); reject(new Error('The moving illustration could not load.')); };
+        const timer = setTimeout(failed, 15000);
+        v.addEventListener(event, done, {once:true}); v.addEventListener('error', failed, {once:true});
+        try { action?.(); } catch { failed(); }
+      });
+      if (v.readyState < 2) await waitFor('loadeddata');
+      if (v.seeking || Math.abs(v.currentTime - wantT) > 0.001) await waitFor('seeked', () => { v.currentTime = wantT; });
+    };
+    window.__vinvVideo = (t) => {
+      const now = performance.now(), step = t - lastT, playing = step > 0 && step < 0.3 && now - lastAt < 220;
+      lastT = t; lastAt = now; wantT = Math.min(Math.max(t, 0), END - 0.04);
+      if (t >= END) { if (!v.paused) v.pause(); return; }
+      if (playing) {
+        if (v.paused) v.play().catch(() => {});
+        if (Math.abs(v.currentTime - wantT) > 0.3) v.currentTime = wantT;
+      } else {
+        if (!v.paused) v.pause();
+        if (Math.abs(v.currentTime - wantT) > 0.02) v.currentTime = wantT;
+      }
+    };
+    // the editor stopped calling (paused): stop the clip where the picture is
+    const watch = () => { if (!v.paused && !flowing()) { v.pause(); if (Math.abs(v.currentTime - wantT) > 0.02) v.currentTime = wantT; } requestAnimationFrame(watch); };
+    requestAnimationFrame(watch);
+  })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+{
+  "id": "film-thamarai-v1",
+  "version": 1,
+  "rendererVersion": "scene-film-v1",
+  "sceneDesign": "thamarai",
+  "kind": "page",
+  "output": {
+    "width": 720,
+    "height": 1280,
+    "fps": 24,
+    "frames": 792,
+    "duration": 33
+  },
+  "scenes": [
+    {
+      "id": "title",
+      "name": "Title",
+      "start": 0,
+      "end": 331,
+      "reviewFrame": 264,
+      "layers": []
+    },
+    {
+      "id": "couple",
+      "name": "Couple",
+      "start": 331,
+      "end": 468,
+      "reviewFrame": 418,
+      "layers": []
+    },
+    {
+      "id": "wedding",
+      "name": "Wedding",
+      "start": 468,
+      "end": 605,
+      "reviewFrame": 562,
+      "layers": []
+    },
+    {
+      "id": "reception",
+      "name": "Reception",
+      "start": 605,
+      "end": 698,
+      "reviewFrame": 667,
+      "layers": []
+    },
+    {
+      "id": "regards",
+      "name": "Families",
+      "start": 698,
+      "end": 792,
+      "reviewFrame": 754,
+      "layers": []
+    }
+  ],
+  "assets": {
+    "sceneBundle": {
+      "path": "/assets/video-masters/film-thamarai-v1/asset-index.json",
+      "sha256": "8efcb4855c3eb0be9697d9dfabbe65e3741154f02e6c1d75c4fe2da0f3eca1fa"
+    }
+  },
+  "release": {
+    "approved": false
+  },
+  "catalog": {
+    "poster": "poster.jpg",
+    "posters": {
+      "320": "poster-320-v1.webp",
+      "640": "poster-640-v1.webp",
+      "960": "poster-960-v1.webp"
+    },
+    "preview": "demo-v1.mp4"
+  }
+}

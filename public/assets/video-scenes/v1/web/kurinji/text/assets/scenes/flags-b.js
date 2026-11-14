@@ -1,0 +1,1 @@
+export default{noText:!1,noPlates:!0,plates:[],textOnly:!0,textBg:0};

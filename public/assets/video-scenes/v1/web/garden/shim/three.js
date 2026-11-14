@@ -1,0 +1,1 @@
+export*from"three";import{PlaneGeometry as e}from"three";const t=new Map;export class PlaneGeometry extends e{constructor(...e){const r=4===e.length?e.join(","):null;if(r&&t.has(r))return t.get(r);super(...e),r&&(this.userData.vinvShared=!0,t.set(r,this))}}

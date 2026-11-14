@@ -1,0 +1,74 @@
+{
+  "id": "film-velicham-v1",
+  "version": 1,
+  "rendererVersion": "scene-film-v1",
+  "sceneDesign": "velicham",
+  "kind": "page",
+  "output": {
+    "width": 720,
+    "height": 1280,
+    "fps": 24,
+    "frames": 932,
+    "duration": 38.833333333333336
+  },
+  "scenes": [
+    {
+      "id": "opening",
+      "name": "Gate",
+      "start": 0,
+      "end": 86,
+      "reviewFrame": 38,
+      "layers": []
+    },
+    {
+      "id": "kolam",
+      "name": "Kolam",
+      "start": 86,
+      "end": 302,
+      "reviewFrame": 156,
+      "layers": []
+    },
+    {
+      "id": "invitation",
+      "name": "Doorway",
+      "start": 302,
+      "end": 466,
+      "reviewFrame": 365,
+      "layers": []
+    },
+    {
+      "id": "muhurtham",
+      "name": "Muhurtham",
+      "start": 466,
+      "end": 758,
+      "reviewFrame": 528,
+      "layers": []
+    },
+    {
+      "id": "welcome",
+      "name": "Welcome",
+      "start": 758,
+      "end": 932,
+      "reviewFrame": 854,
+      "layers": []
+    }
+  ],
+  "assets": {
+    "sceneBundle": {
+      "path": "/assets/video-masters/film-velicham-v1/asset-index.json",
+      "sha256": "c4bc5a6f59a328f07b2ea5141698923d439340e73b5bcefd6a017a652d6595a9"
+    }
+  },
+  "release": {
+    "approved": false
+  },
+  "catalog": {
+    "poster": "poster.jpg",
+    "posters": {
+      "320": "poster-320-v1.webp",
+      "640": "poster-640-v1.webp",
+      "960": "poster-960-v1.webp"
+    },
+    "preview": "demo-v1.mp4"
+  }
+}

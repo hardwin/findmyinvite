@@ -1,0 +1,82 @@
+{
+  "id": "film-aranmanai-v1",
+  "version": 1,
+  "rendererVersion": "scene-film-v1",
+  "sceneDesign": "aranmanai",
+  "kind": "webgl",
+  "output": {
+    "width": 720,
+    "height": 1280,
+    "fps": 24,
+    "frames": 2832,
+    "duration": 118
+  },
+  "scenes": [
+    {
+      "id": "opening",
+      "name": "Opening",
+      "start": 0,
+      "end": 300,
+      "reviewFrame": 252,
+      "layers": []
+    },
+    {
+      "id": "invitation",
+      "name": "Invitation",
+      "start": 300,
+      "end": 564,
+      "reviewFrame": 468,
+      "layers": []
+    },
+    {
+      "id": "events",
+      "name": "Events",
+      "start": 564,
+      "end": 1908,
+      "reviewFrame": 648,
+      "layers": []
+    },
+    {
+      "id": "wedding",
+      "name": "Wedding",
+      "start": 1908,
+      "end": 2244,
+      "reviewFrame": 1992,
+      "layers": []
+    },
+    {
+      "id": "reception",
+      "name": "Reception",
+      "start": 2244,
+      "end": 2578,
+      "reviewFrame": 2328,
+      "layers": []
+    },
+    {
+      "id": "thanks",
+      "name": "Thank you",
+      "start": 2578,
+      "end": 2832,
+      "reviewFrame": 2688,
+      "layers": []
+    }
+  ],
+  "assets": {
+    "sceneBundle": {
+      "path": "/assets/video-masters/film-aranmanai-v1/asset-index.json",
+      "sha256": "1d606f118c1c1dc879c6d11ee205aa9ff58fd46cd280a6eb0ddc854f7e6a43cd"
+    }
+  },
+  "release": {
+    "approved": false
+  },
+  "catalog": {
+    "poster": "poster.jpg",
+    "posters": {
+      "320": "poster-320-v1.webp",
+      "640": "poster-640-v1.webp",
+      "960": "poster-960-v1.webp"
+    },
+    "preview": "demo-v1.mp4"
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "id": "film-kurinji-v1",
+  "version": 1,
+  "rendererVersion": "scene-film-v1",
+  "sceneDesign": "kurinji",
+  "kind": "plate",
+  "output": {
+    "width": 720,
+    "height": 1280,
+    "fps": 24,
+    "frames": 1626,
+    "duration": 67.75
+  },
+  "scenes": [
+    {
+      "id": "title",
+      "name": "Title",
+      "start": 0,
+      "end": 420,
+      "reviewFrame": 72,
+      "layers": []
+    },
+    {
+      "id": "couple",
+      "name": "Couple",
+      "start": 420,
+      "end": 708,
+      "reviewFrame": 504,
+      "layers": []
+    },
+    {
+      "id": "invitation",
+      "name": "Invitation",
+      "start": 708,
+      "end": 1044,
+      "reviewFrame": 828,
+      "layers": []
+    },
+    {
+      "id": "wedding",
+      "name": "Wedding",
+      "start": 1044,
+      "end": 1260,
+      "reviewFrame": 1152,
+      "layers": []
+    },
+    {
+      "id": "reception",
+      "name": "Reception",
+      "start": 1260,
+      "end": 1452,
+      "reviewFrame": 1344,
+      "layers": []
+    },
+    {
+      "id": "thanks",
+      "name": "Thank you",
+      "start": 1452,
+      "end": 1626,
+      "reviewFrame": 1536,
+      "layers": []
+    }
+  ],
+  "assets": {
+    "sceneBundle": {
+      "path": "/assets/video-masters/film-kurinji-v1/asset-index.json",
+      "sha256": "bab6743c7c35f04b5d7a306eca8acbf513ff03ea6a54981e9cff65c47a2b2398"
+    }
+  },
+  "release": {
+    "approved": false
+  },
+  "catalog": {
+    "poster": "poster.jpg",
+    "posters": {
+      "320": "poster-320-v1.webp",
+      "640": "poster-640-v1.webp",
+      "960": "poster-960-v1.webp"
+    },
+    "preview": "demo-v1.mp4"
+  }
+}
