@@ -32,17 +32,20 @@ export async function renderSceneVideo({master,content,photos={},audioFile,outpu
   const hosted=await serve(temp,photos);server=hosted.server;const {origin}=hosted;
   const display=await sceneDisplay();displayProcess=display.processHandle;
   const graphics=process.platform==='linux'?['--use-gl=angle','--use-angle=gl','--ozone-platform=x11','--disable-gpu-rasterization','--disable-accelerated-2d-canvas']:['--use-angle=d3d11'];
-  const batch=browserBatchFrames??(process.platform==='linux'&&master.kind==='webgl'?120:0);
+  const software3d=process.platform==='linux'&&(master.kind==='webgl'||master.sceneDesign==='velicham');
+  const batch=browserBatchFrames??(software3d?120:0);
   if(!Number.isSafeInteger(batch)||batch<0)throw Error('Invalid render batch size.');
   const failures=[],urls=Object.fromEntries(Object.entries(photos).map(([slot,p])=>[slot,{mode:p.mode,url:origin+'/_media/'+slot}]));
-  let page,frameRecoveries=0;
-  // Sample 0.42 ms into a software WebGL frame to avoid exact rasterization
-  // singularities. Frame count, encoded timestamps and scene durations stay fixed.
-  const samplePhase=process.platform==='linux'&&master.kind==='webgl'?0.01:0;
+  let page;
   const startBrowser=async()=>{
-  browser=await puppeteer.launch({executablePath:await browserPath(),headless:true,protocolTimeout:120000,env:{...process.env,...(display.display?{DISPLAY:display.display,LIBGL_ALWAYS_SOFTWARE:'1',GALLIUM_DRIVER:'llvmpipe',LP_NUM_THREADS:'8'}:{})},args:['--no-sandbox','--disable-dev-shm-usage','--font-render-hinting=none','--enable-webgl',...graphics,'--ignore-gpu-blocklist']});
+  // Mesa 24's anisotropic sampler stalls on particular texture derivatives.
+  // Standard mipmap filtering keeps exact frame times and avoids that path.
+  browser=await puppeteer.launch({executablePath:await browserPath(),headless:true,protocolTimeout:120000,env:{...process.env,...(display.display?{DISPLAY:display.display,LIBGL_ALWAYS_SOFTWARE:'1',GALLIUM_DRIVER:'llvmpipe',LP_NUM_THREADS:'8',MESA_EXTENSION_OVERRIDE:'-GL_EXT_texture_filter_anisotropic -GL_ARB_texture_filter_anisotropic'}:{})},args:['--no-sandbox','--disable-dev-shm-usage','--font-render-hinting=none','--enable-webgl',...graphics,'--ignore-gpu-blocklist']});
   if(process.platform==='linux'){const session=await browser.target().createCDPSession();try{const info=await session.send('SystemInfo.getInfo');if(!/llvmpipe/i.test(info.gpu.auxAttributes.glRenderer||''))throw Error('The scene graphics driver is unavailable.');}finally{await session.detach();}}
   page=await browser.newPage();page.setDefaultTimeout(90000);await page.setViewport({width:720,height:1280,deviceScaleFactor:1});
+  // Page-based films can own a nested WebGL frame. Set the export profile in
+  // every document before its renderer initializes, not only the outer bridge.
+  if(process.platform==='linux')await page.evaluateOnNewDocument(()=>{globalThis.__fmiSoftwareExport=true;});
   await page.setRequestInterception(true);page.on('request',req=>{if(req.url().startsWith(origin+'/')||/^(data:|blob:)/.test(req.url()))void req.continue();else{failures.push('External request blocked');void req.abort();}});page.on('response',r=>{if(r.status()>=400)failures.push('Missing scene asset: '+new URL(r.url()).pathname);});
   await page.goto(origin+'/video-render.html',{waitUntil:'networkidle0'});await page.waitForFunction(()=>!!window.videoRender);
   await page.evaluate(async({master,content,urls,software})=>window.videoRender.init(master,content,urls,{software}),{master,content,urls,software:process.platform==='linux'});
@@ -67,22 +70,16 @@ export async function renderSceneVideo({master,content,photos={},audioFile,outpu
    // Lossless review stills; high-quality JPEG transport for the already-lossy
    // H.264 export avoids spending most render time compressing temporary PNGs.
    const format=reviewFrames?'image/png':'image/jpeg';
-   const capture=(phase=samplePhase)=>page.evaluate(({frame,format})=>window.videoRender.frame(frame,undefined,undefined,undefined,undefined,true,format),{frame:frame+phase,format});
-   let encoded;
-   try{encoded=await capture();}catch(error){
-    // Retry the same output frame within its exposure, on the same driver.
-    // Never skip/duplicate frames or switch to a visibly different compositor.
-    if(!samplePhase||frameRecoveries>=3||!/Runtime\.callFunctionOn timed out/.test(error.message))throw Error('Frame '+frame+': '+error.message,{cause:error});
-    frameRecoveries++;console.warn('Retrying scene frame '+frame+' after a rasterization timeout.');
-    await closeSceneBrowser(browser);browser=null;await startBrowser();
-    encoded=await capture(0.02).catch(cause=>{throw Error('Frame '+frame+' recovery failed: '+cause.message,{cause});});
-   }
-   const bytes=encoded?Buffer.from(encoded,'base64'):Buffer.from(await page.screenshot({type:reviewFrames?'png':'jpeg',...(reviewFrames?{}:{quality:95}),clip:{x:0,y:0,width:720,height:1280},captureBeyondViewport:false}));
+   let bytes;
+   try{
+    const encoded=await page.evaluate(({frame,format})=>window.videoRender.frame(frame,undefined,undefined,undefined,undefined,true,format),{frame,format});
+    bytes=encoded?Buffer.from(encoded,'base64'):Buffer.from(await page.screenshot({type:reviewFrames?'png':'jpeg',...(reviewFrames?{}:{quality:95}),clip:{x:0,y:0,width:720,height:1280},captureBeyondViewport:false}));
+   }catch(cause){throw Error('Frame '+frame+': '+cause.message,{cause});}
    if(failures.length)throw Error(failures[0]);
    if(reviewFrames)await writeFile(join(output,String(frame).padStart(5,'0')+'.png'),bytes);else if(!encoder.stdin.write(bytes))await Promise.race([once(encoder.stdin,'drain'),done.then(()=>{throw Error('Video encoder stopped before the final frame.');})]);
    if(i%24===0)await onProgress(Math.round(5+92*(i+1)/sequence.length));
   }
   if(reviewFrames)return {directory:output};encoder.stdin.end();await done;
-  return {...await verifyVideo(output,{audio:!!audio,output:master.output}),backgroundSha256:master.assets.sceneBundle.sha256,samplePhase,frameRecoveries};
+  return {...await verifyVideo(output,{audio:!!audio,output:master.output}),backgroundSha256:master.assets.sceneBundle.sha256,graphicsProfile:process.platform==='linux'?'mesa-mipmap-v1':'native'};
  }finally{encoder?.stdin.destroy();encoder?.kill('SIGKILL');await closeSceneBrowser(browser);displayProcess?.kill();if(server){server.closeAllConnections();await new Promise(r=>server.close(r));}await rm(temp,{recursive:true,force:true});}
 }
