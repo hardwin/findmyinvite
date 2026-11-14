@@ -64,6 +64,7 @@ Scene-aligned steps reuse the existing floating preview, clear buttons, growing 
 - All 38 full personalised local MP4 checks passed, including all six designs with photo uploads. Export uses 720×1280, 24 fps H.264; review captures remain PNG, final video transport uses JPEG quality 95 to avoid unnecessary temporary PNG compression.
 - CPU-only SwiftShader is too slow for complex 3D. The Linux candidate uses Mesa/Xvfb with software 2D rasterization and no multisample resolve; interactive previews retain four samples. Six paired reference frames measured SSIM 0.9920–0.9957 with matching geometry and text. Long-lived Linux graphics contexts still stalled in full tests, so new releases remain closed.
 - The candidate recreates the software WebGL browser every 120 frames, seeking by absolute frame while keeping one MP4 encoder/audio timeline. A full local Vector comparison passed all 975 frames (mean SSIM 0.9941, minimum 0.9903), including browser boundaries. Linux verification of this mitigation is pending. Browser and encoder cleanup is bounded and terminates failed subprocesses.
+- All 38 designs also passed chapter captures with the software export profile enabled locally. Streaming video requests aborted when their test page closed are recorded separately from HTTP asset failures; no script errors or HTTP failures occurred.
 - Git attributes preserve immutable asset bytes across Windows/Linux. All 4,139 staged video files match their working-file bytes. Scene workers have their own bounded timeout and an owner lease that outlives it.
 
 ## Reference adaptations and limitations
@@ -75,6 +76,14 @@ Optional Walk face-blink metadata returned errors at the reference; its graceful
 Mapla Veetla Okay's swing photo requires transparent space above the portrait. Uploaded images are fitted to its actual source geometry so faces stay visible; the corrected MP4 was inspected. Still-only form chapters retain the existing step UI and provide a route to the optional photos in Review. No invitation wording was added by these controls.
 
 Production schema inspection confirms the existing video purchase, character and draft tables/RPCs are already present, with RLS enabled and direct customer-role table reads revoked. No production data or schema was changed for this expansion.
+
+## Rebuilding the scene worker
+
+Run `npm run build`, then `node scripts/package-video-scene-worker.mjs`. The offline archive and SHA256 record are written under `work/video-scene-provisioning`; the package includes no environment files, uploads or test fixtures. Seed a separate node24, 8-vCPU sandbox from the existing video snapshot so the pinned FFmpeg, Node packages and music library remain available. Transfer the archive privately and verify its SHA256 before extraction.
+
+Install Xvfb, Mesa GL/EGL and libxkbcommon from the sandbox's official OS repository. Install the pinned Chrome for Testing archive recorded in `bundle.json`, verify its SHA256 and extract it under `/vercel/sandbox/scene-browser`. Set `VIDEO_CHROMIUM_PATH=/vercel/sandbox/scene-browser/chrome-headless-shell-linux64/chrome-headless-shell`. Run `node scripts/video-scene-preflight.mjs` for all chapter stills and `node scripts/video-scene-preflight.mjs --full <design>` for complete export checks. These checks bypass release approval only for offline rendering and never enable checkout.
+
+Before snapshotting, remove provisioning archives, test outputs and QA-only scripts, and stop test processes. Snapshot only a verified candidate. Record its immutable ID separately as `VIDEO_SCENE_SNAPSHOT_ID`; retain the original `VIDEO_RENDER_SNAPSHOT_ID`. Runtime network access is restricted to private Blob operations and loopback. A successful still capture alone is not a release qualification: full Linux exports and staged download checks must pass first.
 
 ## Rollback
 
