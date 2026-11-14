@@ -44,7 +44,7 @@ The isolated renderer preserves the source opening films, canvas scenes, scroll 
 
 All 16 customer forms have been walked through from their catalog detail pages into edited previews, using long names, independent 2028 event dates and distinct venues. Empty optional sections and sample guest-wall entries are removed. Calendar and map checks caught and corrected secondary RSVP labels and Pattu's dynamically generated directions. Preview replies are intercepted locally; no test WhatsApp messages were sent.
 
-Known intentional differences: FindMyInvite branding and links; editable wording/line lengths; FindMyInvite managed soundtracks (or a customer upload); device-local guest predictions and blessings rather than Cinorev's shared counters. Illustration venue maps remain decorative; external directions use the customer's event address. Physical iPhone Safari/Instagram testing is unavailable.
+Known intentional differences: FindMyInvite branding and links; editable wording/line lengths; FindMyInvite managed soundtracks (or a customer upload); FindMyInvite-hosted shared guest predictions and blessings. Illustration venue maps remain decorative; external directions use the customer's event address. Physical iPhone Safari/Instagram testing is unavailable.
 
 Verification evidence is kept in ignored `work/cinorev`: form review snapshots and edited-preview JSON, original mobile/desktop screenshots, offset indexes and labelled pairs. Incomplete or superseded capture sets are not release proof.
 
@@ -60,7 +60,7 @@ Verification evidence is kept in ignored `work/cinorev`: form review snapshots a
 
 Release checks: 143 catalog/form/music tests, 3 local-version-resolution tests and 53 media/privacy/language tests pass. The final production build passes. Full server suite: 21 failures also reproduced on the unchanged baseline; no new failing test names. No actual payment or external RSVP message was sent during QA.
 
-Visual review includes all 16 designs at 390×844 and 1280×720, edited previews from every dedicated form, separate event/calendar/map bindings, optional-section removal, uploaded portrait and long Malayalam names. Paired captures retain timing differences in particles/countdowns and content-driven wrapping; they are not a frame-perfect equivalence claim. New design prose is not fully translated into every supported language.
+Visual review includes all 16 designs at 390×844 and 1280×720, edited previews from every dedicated form, separate event/calendar/map bindings, optional-section removal, uploaded portrait and long Malayalam names. Paired captures retain timing differences in particles/countdowns and content-driven wrapping; they are not a frame-perfect equivalence claim. The 2026-11-14 follow-up adds the design UI, scene prose and dynamic feedback dictionaries for all six supported languages. Customer names, addresses, custom wording and guest messages stay verbatim.
 
 The review corrected a Garden Curtains opening failure, stale secondary date/address labels, Pattu dynamic event directions, srcDoc preview RSVP URL resolution, redundant music controls, and destructive monogram/date text bindings. Fresh affected captures are retained. Physical iPhone Safari/Instagram testing remains unavailable.
 
@@ -70,3 +70,15 @@ The review corrected a Garden Curtains opening failure, stale secondary date/add
 Promoted deployment `dpl_2LeNTJF3cYh9dDT5q7gTv4FGmqf5` (code commit `105c952`) to https://findmyinvite.com, then approved and published all 16 exact staged version/form pairs. No existing invitation bindings were migrated. Live public catalog: 28 designs, base price 19900 paise. All 16 public editor responses validate and bind to the matching renderer/version, with `no-store` caching. Browser checks from each live detail page opened all 16 matching previews without broken loaded images. Existing Bells & Blessings preview also passed on the release build.
 
 Local evidence: `work/cinorev/live-api-verification.json`, `live-catalog.json`, `live-renderers.json`, `release-verification.json`, `promotion.txt`, full-resolution captures and labelled comparison sheets. These ignored QA files contain synthetic test content only.
+
+## Shared guest responses and language follow-up — 2026-11-14
+
+Guest wishes (Up and Away / Olai), the Pulli kolam wall, Little Blessing predictions and Midnight Stage totals now use FindMyInvite's invitation-scoped database API. Published, unexpired invitations only; private records and visitor identifiers are not returned. Writes are rate-limited, responses are uncached, retries reuse request IDs, and one visitor can change a prediction without adding an extra vote. Preview interactions remain local and explicitly labelled. Responses refresh every 20 seconds and on visibility/connection return.
+
+The migration enables RLS and restricts table/RPC access to the server's service role. Database tests check isolation, expired invitations, public-role denial, concurrent visitors and retry deduplication. A delayed GET cannot overwrite a confirmed POST. Failed submissions retain their inputs and show an error rather than a success animation.
+
+Added 652 translated dictionary entries/aliases per Indian language, including design prose, scene controls, validation/status messages, event notes, date labels and dynamic wording. English, Malayalam, Tamil, Telugu, Kannada and Hindi are covered. Default wording translates; customer names, locations, custom wording and guest messages remain verbatim. Rendered guest text uses text nodes, not HTML. No template version bindings or prices were changed.
+
+Verification: 296 targeted tests pass, including all 16 designs × 6 languages in a DOM runtime, plus successful production build. Native Edge browser QA submitted a prediction and birthday wish, verified database persistence and displayed another visitor's response. Independent HTTP visitors verified wishes, kolams, vote changes and retry deduplication against isolated published QA invitations. DOM tests mock layout/canvas/media and are not visual or physical-device tests. Physical iPhone Safari/Instagram hardware is unavailable; no device-specific verification is claimed. Existing database advisory for leaked-password protection is unchanged; the new RLS/no-policy INFO is intentional service-role-only access.
+
+Evidence: ignored `work/guest-interactions` contains API results, DOM audit, build output and regression logs. Production deployment and cleanup are recorded below after release verification.

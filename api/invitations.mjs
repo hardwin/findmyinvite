@@ -1,4 +1,5 @@
 import {INVITATION_BASE_PAISE} from '../shared/pricing.mjs';
+import guestInteractions from '../server/guest-interactions.mjs';
 import {recordWebsiteFailure} from '../server/template-observability.mjs';
 import handleTemplateInvitation from '../server/template-invitations.mjs';
 import {del,head} from '@vercel/blob';
@@ -9,6 +10,7 @@ const view=row=>({templateVersionId:row.template_version_id||undefined,invitatio
 function withHost(data,host){return host?{...data,_host:host}:data;}
 export default async function handler(req,res){try{
  const q=new URL(req.url,'https://findmyinvite.com').searchParams;const action=q.get('action')||'read';
+ if(action==='guest-interactions')return await guestInteractions(req,res,q);
  if(action.startsWith('v2-'))return await handleTemplateInvitation(req,res,q);
  if(action==='config'){method(req,['GET']);return respond(res,200,{configured:configured(),serverNow:new Date().toISOString(),promotion:promotion(),prices:{classic:INVITATION_BASE_PAISE/100,royal:INVITATION_BASE_PAISE/100},uploadsConfigured:Boolean(process.env.BLOB_READ_WRITE_TOKEN),auth:true});}
  if(action==='mine'){

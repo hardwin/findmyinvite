@@ -2,8 +2,9 @@
 export function resolveCinorevEvents(design, content) {
  const zone=/^[+-]\d{2}:\d{2}$/.test(content.utcOffset||'')?content.utcOffset:'+05:30';
  const stamp=value=>new Date(value).toISOString().replace(/[-:]|\.\d{3}/g,'');
- const fmt=(date,options)=>new Intl.DateTimeFormat('en-IN',{...options,timeZone:'UTC'}).format(new Date(date+'T12:00:00Z'));
- const time=value=>new Intl.DateTimeFormat('en-IN',{hour:'numeric',minute:'2-digit',hour12:true,timeZone:'UTC'}).format(new Date('2000-01-01T'+value+':00Z')).toUpperCase();
+ const locale=['ml','ta','te','kn','hi'].includes(content.language)?content.language+'-IN':'en-IN';
+ const fmt=(date,options)=>new Intl.DateTimeFormat(locale,{...options,timeZone:'UTC'}).format(new Date(date+'T12:00:00Z'));
+ const time=value=>new Intl.DateTimeFormat(locale,{hour:'numeric',minute:'2-digit',hour12:true,timeZone:'UTC'}).format(new Date('2000-01-01T'+value+':00Z')).toUpperCase();
  return design.events.map(source=>{
   const v=content[source.key]||{},date=v.date||source.date,start=v.time||source.time,end=v.end||source.end;
   const at=new Date(date+'T'+start+':00'+zone).getTime();let until=new Date(date+'T'+end+':00'+zone).getTime();if(until<=at)until+=86400000;

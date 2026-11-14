@@ -1,12 +1,36 @@
 // This function is serialized into the isolated invitation frame. Keep its dependencies explicit.
-export function startCinorev(config:any, resolveEvents:any){
+export function startCinorev(config:any, resolveEvents:any,createInteractions:any){
  const {content:c,design:d,release,preview,reduceMotion}=config;
- const es=resolveEvents(d,c),primary=es.find((e:any)=>e.key===(d.primary||d.events[0].key))||es[0];
+ const locale=['ml','ta','te','kn','hi'].includes(c.language)?c.language+'-IN':'en-IN';
+ const normalize=(s:string)=>s.trim().replace(/\s+/g,' ').replace(/[’‘]/g,"'").toLowerCase();
+ const t=(s:string):string=>{
+  const direct=config.translations[normalize(s)];if(direct)return direct;
+  if(s.includes('<'))return s.replace(/(^|>)([^<]+)(?=<|$)/g,(_all,a,b)=>a+t(b));
+  if(/\n\s*\n/.test(s))return s.split(/(\n\s*\n)/).map(part=>part.trim()?t(part):part).join('');
+  if(s.includes(' · '))return s.split(' · ').map(t).join(' · ');
+  const sentence=s.match(/^(.+?\. )(.+)$/);if(sentence){const tail=t(sentence[2]);if(tail!==sentence[2])return sentence[1]+tail;}
+  const family=s.match(/^(?:daughter of|Daughter of|D\/o\.) (.+)$/)||s.match(/^(?:son of|Son of|S\/o\.) (.+)$/);
+  if(family){const key=/^(daughter|Daughter|D\/)/.test(s)?'Daughter of %s':'Son of %s';return (config.translations[normalize(key)]||key).replace('%s',family[1]);}
+  for(const [pattern,key] of [[/^With love, (?:the )?(.+) families$/,'With love, the %s families'],[/^The (.+) families$/,'The %s families'],[/^(.+) & Family$/,'%s & Family']] as Array<[RegExp,string]>){const m=s.match(pattern),v=config.translations[normalize(key)];if(m&&v)return v.replace('%s',m[1]);}
+  const dress=s.match(/^Dress: (.+)$/);if(dress)return t('Dress code')+': '+t(dress[1]);
+  const month=s.match(/^(January|February|March|April|May|June|July|August|September|October|November|December) (\d{4})$/i);if(month)return new Date(month[1]+' 1, '+month[2]+' 12:00:00 GMT').toLocaleDateString(locale,{month:'long',year:'numeric',timeZone:'UTC'});
+  if(/ onwards$/.test(s))return t(s.slice(0,-8))+' '+t('onwards');
+  const patterns:Array<[RegExp,string]>=[[/^(.+?) are (?:now )?married\. Thank you for your blessings!$/,'%s are married. Thank you for your blessings!'],[/^Mabrook! (.+?) are engaged\. Thank you for your duas!$/,'Mabrook! %s are engaged. Thank you for your duas!'],[/^Alhamdulillah! (.+?)'s Walima has been celebrated\. Thank you for your duas\.$/,"Alhamdulillah! %s's Walima has been celebrated. Thank you for your duas."],[/^A kolam from (.+)$/,'A kolam from %s'],[/^Dot, row (\d), column (\d)$/,'Dot, row %s, column %n']];
+  for(const [pattern,key] of patterns){const match=s.match(pattern),value=config.translations[normalize(key)];if(match&&value)return value.replace('%s',match[1]).replace('%n',match[2]||'');}
+  const numbers=s.match(/^(\d+) (months|showers? of blessings so far)$/);if(numbers){const label=config.translations[normalize(numbers[2])];if(label)return numbers[1]+' '+label;}
+  return s;
+ };
+ const interactions=createInteractions(config);
+ const es=resolveEvents(d,c).map((e:any)=>({...e,title:t(e.title)})),primary=es.find((e:any)=>e.key===(d.primary||d.events[0].key))||es[0];
  const pair=[c.groom,c.bride].filter(Boolean).join(' & '),phone=String(c.whatsapp||'').replace(/\D/g,'');
  const escape=(v:any)=>String(v??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]!));
  const one=(s:string)=>document.querySelector(s) as HTMLElement|null;
  const all=(s:string,root:ParentNode=document)=>Array.from(root.querySelectorAll(s)) as HTMLElement[];
- const set=(s:string,v:any,root:ParentNode=document)=>all(s,root).forEach(el=>{el.textContent=String(v??'');el.dataset.fmiBound='true';});
+ const defaultValues=new Set<string>();const defaults=(v:any)=>{if(typeof v==='string')defaultValues.add(v);else if(v&&typeof v==='object')Object.values(v).forEach(defaults);};defaults(release.baseline.defaults||release.baseline.copy);
+ const protectedValues=new Set<string>();const protect=(v:any)=>{if(typeof v==='string'&&!defaultValues.has(v))protectedValues.add(v);else if(v&&typeof v==='object')Object.values(v).forEach(protect);};if(!c._catalogPreview)protect(c);
+ const authored=(v:any)=>typeof v==='string'&&!protectedValues.has(v)?t(v):String(v??'');
+ for(const e of es){e.note=authored(e.note);e.dress=authored(e.dress);e.label=e.label.replace(/ · [^·]+$/,' · '+e.title);const url=new URL(e.calendar);url.searchParams.set('text',e.label);url.searchParams.set('details',e.note);e.calendar=url.href;}
+ const set=(s:string,v:any,root:ParentNode=document)=>all(s,root).forEach(el=>{el.textContent=authored(v);el.dataset.fmiBound='true';});
  const eventFor=(key:string)=>es.find((e:any)=>e.key===({wed:'wedding',rec:'reception'} as any)[key]||e.key===key)||primary;
  const initials=[c.groom,c.bride].map(v=>Array.from(String(v||'').trim())[0]||'').join(' & ');
  const sourcePair=[release.baseline.groom,release.baseline.bride];
@@ -24,7 +48,7 @@ export function startCinorev(config:any, resolveEvents:any){
  const copy=(value:any,html=false)=>String(value??'').replace(namePattern,(s:string,index:number,whole:string)=>{const v=replacements.find(([a])=>a===s)?.[1]||'';if(v!==s&&v&&whole.slice(index).startsWith(html?escape(v):v))return s;return html?escape(v):v;});
  const textNodes=new WeakMap<Node,string>();
  function personaliseText(root:Node){
-  const apply=(n:Node)=>{if(n.parentElement?.closest('script,style,textarea,input,[data-fmi-bound],[data-t]'))return;const old=n.textContent||'';if(textNodes.get(n)===old)return;const next=copy(old);if(next!==old){n.textContent=next;textNodes.set(n,next);}};
+  const apply=(n:Node)=>{if(n.parentElement?.closest('script,style,textarea,input,[data-fmi-bound],[data-t],[data-fmi-guest]'))return;const old=n.textContent||'';if(textNodes.get(n)===old)return;const next=copy(protectedValues.has(old)?old:t(old));if(next!==old){n.textContent=next;textNodes.set(n,next);}};
   if(root.nodeType===3)apply(root);else{const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;while(n=walker.nextNode())apply(n);}
  }
  function toast(message:string){let el=one('#fmi-status');if(!el){el=document.createElement('p');el.id='fmi-status';el.setAttribute('role','status');el.style.cssText='position:fixed;bottom:24px;left:5%;width:90%;z-index:99999;padding:16px;border-radius:12px;background:#fff;color:#171717;font:15px system-ui;text-align:center;box-shadow:0 4px 30px #0003';document.body.append(el);}el.textContent=message;el.hidden=false;setTimeout(()=>{if(el)el.hidden=true;},5000);}
@@ -48,8 +72,8 @@ export function startCinorev(config:any, resolveEvents:any){
  all('iframe.map').forEach(el=>{el.removeAttribute('src');el.dataset.src='https://www.google.com/maps?q='+encodeURIComponent(primary.venue+', '+primary.address)+'&output=embed';el.setAttribute('title','Map: '+primary.venue);});
  const authoredText:Record<string,string>={};
  function dictionary(original:any){
-  const en={...original.en};for(const key of Object.keys(en))en[key]=copy(en[key],true);
-  const put=(keys:string[],v:any)=>keys.forEach(k=>{if(k in en){authoredText[k]=String(v??'');en[k]=escape(v).replace(/\n/g,'<br>');}});
+  const en={...original.en};for(const key of Object.keys(en))en[key]=copy(t(en[key]),true);
+  const put=(keys:string[],v:any)=>keys.forEach(k=>{if(k in en){authoredText[k]=authored(v);en[k]=escape(authored(v)).replace(/\n/g,'<br>');}});
   put(['groom','groomFull','n1'],c.groom);put(['bride','brideFull','n2'],c.bride);
   put(['groomPar','sOf'],c.groomFamily);put(['bridePar','dOf'],c.brideFamily);
   put(['couple','names','sign','g0'],pair);put(['fam','famline','family'],c.closing);
@@ -64,11 +88,11 @@ export function startCinorev(config:any, resolveEvents:any){
   if(d.id==='golden-hour'){put(['t6'],'Dress code');put(['p6'],c.dressCode);}
   if(d.id==='pearl-and-sapphire'){put(['t5'],'Dress code');put(['p5'],c.dressCode);put(['t3'],primary.fullDate);}
   if(d.id==='royal-crimson'){put(['p1'],c.blessing);put(['meaning'],c.prayer);put(['when'],primary.day+' · '+primary.time);}
-  const deadline=c.rsvpDeadline?'Kindly reply by '+new Date(c.rsvpDeadline+'T12:00:00Z').toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'})+'.':'We would love to celebrate with you.';
+  const deadline=c.rsvpDeadline?t('Kindly reply by %s.').replace('%s',new Date(c.rsvpDeadline+'T12:00:00Z').toLocaleDateString(locale,{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'})):t('We would love to celebrate with you.');
   for(const key of Object.keys(en))if(/Kindly (let us know|reply by)|favour of a reply.*\d/i.test(original.en[key]))en[key]=escape(deadline);
   const programme=Array.isArray(c.programme)?c.programme:[];
-  for(let i=1;i<=8;i++){const row=programme[i-1],time=/^\d{2}:\d{2}$/.test(row?.time||'')?new Date('2000-01-01T'+row.time+':00Z').toLocaleTimeString('en-IN',{hour:'numeric',minute:'2-digit',hour12:true,timeZone:'UTC'}).toUpperCase():'';put(['e'+i],row?.title||'');put(['e'+i+'n'],row?.description||'');put(['e'+i+'t'],time);}
-  put(['by'],'Invitation website by FindMyInvite');
+  for(let i=1;i<=8;i++){const row=programme[i-1],time=/^\d{2}:\d{2}$/.test(row?.time||'')?new Date('2000-01-01T'+row.time+':00Z').toLocaleTimeString(locale,{hour:'numeric',minute:'2-digit',hour12:true,timeZone:'UTC'}).toUpperCase():'';put(['e'+i],row?.title||'');put(['e'+i+'n'],row?.description||'');put(['e'+i+'t'],time);}
+  put(['by'],t('Invitation website by FindMyInvite'));
   return {...original,en};
  }
  function bindEvents(){
@@ -106,7 +130,7 @@ export function startCinorev(config:any, resolveEvents:any){
   if(d.extras.includes('programme')){const section=one('[data-t="e1"]')?.closest('section');if(section)section.hidden=!c.programme?.length;}
   if(d.extras.includes('letter')){const section=one('[data-t="l1"],.letter')?.closest('section');if(section)section.hidden=!c.letter;}
   if(d.extras.includes('dress')){all('.dress,.wear,section[aria-label="Dress code"]').forEach(el=>{el.hidden=!c.dressCode;});if(!c._catalogPreview)all('.pal,.dress .sw,.wear .sw').forEach(el=>{el.hidden=true;});}
-  const deadline=c.rsvpDeadline?'Kindly reply by '+new Date(c.rsvpDeadline+'T12:00:00Z').toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'})+'.':'We would love to celebrate with you.';
+  const deadline=c.rsvpDeadline?t('Kindly reply by %s.').replace('%s',new Date(c.rsvpDeadline+'T12:00:00Z').toLocaleDateString(locale,{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'})):t('We would love to celebrate with you.');
   set('#rsvp .lede,#rsvp > .muted,.rsvp-sec > .lede',deadline);
   set('[data-t="groomPar"],[data-t="sOf"]',c.groomFamily);set('[data-t="bridePar"],[data-t="dOf"]',c.brideFamily);
   all('input[name="fn"]').forEach((input,i)=>{const e=es[i];if(!e)return;const label=input.closest('label');if(label)set('span',d.id==='temple-doors'?e.title+' · '+e.dayNumber+' '+e.month.slice(0,3):d.id==='home-sweet-home'?e.title+' · '+e.time:e.title,label);(input as HTMLInputElement).value=e.title;});
@@ -120,14 +144,14 @@ export function startCinorev(config:any, resolveEvents:any){
   }
   if(d.id==='royal-crimson'){set('.meaning',c.prayer);set('.addr',primary.address);}
   if(d.id==='jasmine-arch'){set('#gate .g-names + .lbl',primary.numeric+' · '+place);set('.v-top h2',primary.venue);set('.v-top p:not(.lbl)',primary.address);const reception=eventFor('reception');const scratchSection=one('#scratch')?.parentElement;const scratchTail=scratchSection?.querySelector('p[style*="font-style:normal"]');if(scratchTail){scratchTail.textContent=reception.fullDate+' · '+reception.time;scratchTail.setAttribute('data-fmi-bound','true');}all('.ev').forEach((el,i)=>set('.lbl',es[i]?.day||'',el));all('div.fam').forEach((el,i)=>{set('.nm',[c.groom,c.bride][i],el);const p=el.querySelector('p:not(.nm)');if(p)p.textContent=[c.groomFamily,c.brideFamily][i]||'';});const paragraphs=all('.letter .body');paragraphs.forEach((el,i)=>{el.textContent=i===0?c.letter||'':'';});set('.date',primary.numeric);set('.scratch .day',primary.day);set('.scratch .big',primary.longDate);set('.scratch .tm',primary.time);const gallery=one('#stack')?.closest('section') as HTMLElement|null;if(gallery)gallery.hidden=!c.gallery?.length;}
-  if(d.id==='palace-of-lights'){set('#env .card > p:last-child',dateRange);set('.royal .dates b',dateRange);set('.royal .dates span',[primary.venue,primary.address].filter(Boolean).join(' · '));all('input[name="arr"]').forEach((input,i)=>{const dt=new Date(firstDate.date+'T12:00:00Z');dt.setUTCDate(dt.getUTCDate()+i-1);const label=dt.toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'short',year:'numeric',timeZone:'UTC'});(input as HTMLInputElement).value=label;const parent=input.closest('label');if(parent)set('span',label,parent);});set('.meet .note',c.story);set('.royal .gp',c.hosts);set('#s-sky .when',es[0].longDate+' – '+es[es.length-1].longDate);set('#s-sky .title > .lbl','Our families invite you to the wedding of');set('#s-bar .lbl',eventFor('shaadi').fullDate+' · '+eventFor('shaadi').time);const stay=all('.know .tile')[1];if(stay&&c.stay){stay.hidden=false;set('b','Your stay',stay);set('p',c.stay,stay);}}
-  if(d.id==='pulli'){set('#kname > p',primary.numeric+' · '+place);set('#events h2',place?'Join us at '+place:'Join our celebrations');}
+  if(d.id==='palace-of-lights'){set('#env .card > p:last-child',dateRange);set('.royal .dates b',dateRange);set('.royal .dates span',[primary.venue,primary.address].filter(Boolean).join(' · '));all('input[name="arr"]').forEach((input,i)=>{const dt=new Date(firstDate.date+'T12:00:00Z');dt.setUTCDate(dt.getUTCDate()+i-1);const label=dt.toLocaleDateString(locale,{weekday:'short',day:'numeric',month:'short',year:'numeric',timeZone:'UTC'});(input as HTMLInputElement).value=label;const parent=input.closest('label');if(parent)set('span',label,parent);});set('.meet .note',c.story);set('.royal .gp',c.hosts);set('#s-sky .when',es[0].longDate+' – '+es[es.length-1].longDate);set('#s-sky .title > .lbl','Our families invite you to the wedding of');set('#s-bar .lbl',eventFor('shaadi').fullDate+' · '+eventFor('shaadi').time);const stay=all('.know .tile')[1];if(stay&&c.stay){stay.hidden=false;set('b','Your stay',stay);set('p',c.stay,stay);}}
+  if(d.id==='pulli'){set('#kname > p',primary.numeric+' · '+place);set('#events h2',place?t('Join us at %s').replace('%s',place):t('Join our celebrations'));}
   if(d.id==='pattu')set('.plaque > .lbl:last-child',primary.fullDate+' · '+place);
   if(d.id==='the-ring-box'){const stories=String(c.story||'').split(/\n\s*\n/);all('#track .panel').forEach((el,i)=>set('p',stories[i]||'',el));const story=one('#track')?.closest('section');if(story)story.hidden=!c.story;set('.mo',c.weddingAnnouncement);all('.duo small').forEach((el,i)=>{el.textContent=[c.groomFamily,c.brideFamily][i]||'';});set('.intro > .lbl:last-child',primary.fullDate+' · '+primary.venue);const announce=one('.mo')?.closest('section');if(announce)announce.hidden=!c.weddingAnnouncement;}
-  if(d.id==='home-sweet-home'){const hint=one('.invite .hint2');if(hint)hint.hidden=true;set('.invite .fams',pair);set('.with',c.children?'with '+c.children:'');set('.invite .day,#s-plan .when',primary.fullDate);set('.invite .addr > b',primary.venue);set('.invite .addr > p:not(.lbl):not(.hint2)',primary.address);all('.invite .ev').forEach((el,i)=>set('p:not([class])',es[i]?.note||'',el));}
+  if(d.id==='home-sweet-home'){const hint=one('.invite .hint2');if(hint)hint.hidden=true;set('.invite .fams',pair);set('.with',c.children?t('with %s').replace('%s',c.children):'');set('.invite .day,#s-plan .when',primary.fullDate);set('.invite .addr > b',primary.venue);set('.invite .addr > p:not(.lbl):not(.hint2)',primary.address);all('.invite .ev').forEach((el,i)=>set('p:not([class])',es[i]?.note||'',el));}
   if(d.id==='up-and-away'){
-   set('.ribbon b','1');set('.ribbon span','st Birthday');set('.bubble',"Hi! I'm "+(c.childName||'')+", and I'm turning one!");set('.party h2',(c.childName||'')+'’s First Birthday Party');set('#s-sky .when',primary.fullDate);
-   set('.party-card .dt .day',primary.day);set('.party-card .cal small',primary.month);set('.party-card .cal b',primary.dayNumber);set('.party-card .cal span',primary.year);set('.party-card .dt p:not(.day)',primary.time);set('#s-book .lbl',(c.childName||'')+'’s first year');const book=one('#s-book');if(book)book.hidden=!c.milestones?.length;
+   set('.ribbon b',c.language==='en'?'1st':c.age||1);set('.ribbon span',t('Birthday'));set('.bubble',t("Hi! I'm %s, and I'm turning %n!").replace('%s',c.childName||'').replace('%n',String(c.age||1)));set('.party h2',t('%s’s Birthday Party').replace('%s',c.childName||''));set('#s-sky .when',primary.fullDate);
+   set('.party-card .dt .day',primary.day);set('.party-card .cal small',primary.month);set('.party-card .cal b',primary.dayNumber);set('.party-card .cal span',primary.year);set('.party-card .dt p:not(.day)',primary.time);set('#s-book .lbl',t('%s’s first year').replace('%s',c.childName||''));const book=one('#s-book');if(book)book.hidden=!c.milestones?.length;
    all('#s-book figure').forEach((el,i)=>{const v=c.milestones?.[i];el.hidden=!v;if(v){set('figcaption b',v.age,el);set('figcaption span',v.title,el);set('figcaption em',v.description,el);const img=el.querySelector('img');if(img&&v.photo)img.src=v.photo;}});
   }
   if(d.id==='temple-doors'){
@@ -165,13 +189,15 @@ export function startCinorev(config:any, resolveEvents:any){
   },true);
   if(!phone&&!c._catalogPreview)all('form#rsvp,form#rsvp-form').forEach(form=>{const section=form.closest('section');if(section)section.hidden=true;});
   document.addEventListener('click',event=>{const a=(event.target as HTMLElement)?.closest('a');if(!a)return;const href=a.getAttribute('href')||'';if(/wa.me|api.whatsapp.com/.test(href)){event.preventDefault();event.stopImmediatePropagation();open(href);}},true);
-  if(d.id==='little-blessing'){const note=document.createElement('p');note.textContent='Your prediction is saved on this device.';note.className='body';one('#poll')?.append(note);}
  }
  const storage={getItem:(k:string)=>{try{return localStorage.getItem(config.instanceKey+':'+k);}catch{return null;}},setItem:(k:string,v:string)=>{try{localStorage.setItem(config.instanceKey+':'+k,v);}catch{}}};
-  return {target:primary.at,phone,music:c.music||'',maps:primary.maps,search:new URLSearchParams({to:c.previewGuest||config.guest||'',lang:'en'}).toString(),instanceKey:config.instanceKey,reduceMotion,preview,calendar,events,dictionary,copy,open,ready,storage,
+ const translationPattern=new RegExp(namePattern.source,'gi');
+ const translatedKey=(key:string)=>key.replace(translationPattern,s=>replacements.find(([a])=>a.toLowerCase()===s.toLowerCase())?.[1]??s);
+ return {protectedText:[...protectedValues].map(normalize),translate:(value:string)=>protectedValues.has(value)?value:copy(t(value)),translations:Object.fromEntries(Object.entries(config.translations).map(([key,value])=>[normalize(translatedKey(key)),copy(value)])),target:primary.at,phone,music:c.music||'',maps:primary.maps,search:new URLSearchParams({to:c.previewGuest||config.guest||'',lang:'en'}).toString(),instanceKey:config.instanceKey,reduceMotion,preview,calendar,events,dictionary,copy,open,ready,storage,
   gallery:(original:any[])=>c.gallery?.length?c.gallery.map((v:any)=>[escape(v.photo||''),escape(v.caption||''),escape(v.caption||'')]):original.map(row=>['/assets/cinorev/'+d.id+'/a/'+row[0]+'.webp',row[1],row[2]]),
   samples:(original:any[])=>c._catalogPreview?original:[],
-  localResponse:()=>Promise.reject(new Error('This interaction is stored on this device.')),
+  interactions,
+  localResponse:async(_url:string,options:any={})=>{if(options.method==='POST'){const body=JSON.parse(options.body||'{}'),ok=await interactions.save(d.id==='little-blessing'?'poll':'glitter',d.id==='little-blessing'?{vote:body.vote}:{add:body.add});if(!ok)throw Error('Not saved');}else await interactions.read();return {ok:true,status:200,json:async()=>interactions.state};},
   share:()=>navigator.share?navigator.share({title:pair+' · '+d.occasion,url:config.url}):navigator.clipboard.writeText(config.url),
   copyLink:()=>navigator.clipboard.writeText(config.url)};
 }

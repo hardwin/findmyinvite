@@ -4,7 +4,9 @@ import {isLocalMedia,localMediaUrl} from './local-media';
 import {localisationConfig,localiseInvitationDocument} from './invitation-localisation';
 import {resolveCinorevEvents} from '../../shared/cinorev-events.mjs';
 import {startCinorev} from './cinorev-runtime';
+import {createGuestInteractions} from './guest-interactions';
 import {previewDictionary} from '../../shared/preview-translations.mjs';
+import {cinorevDictionary} from '../../shared/cinorev-translations.mjs';
 import type {Content,TemplateVersion} from './api';
 
 export default function CinorevInvitation({version,content,preview=false,reduceMotion=false}:{version:TemplateVersion;content:Content;preview?:boolean;reduceMotion?:boolean}){
@@ -23,10 +25,11 @@ export default function CinorevInvitation({version,content,preview=false,reduceM
    const response=await fetch('/assets/cinorev/'+slug+'/document.json',{signal:ctrl.signal});if(!response.ok)throw Error('Unable to load this invitation. Please try again.');
    const release=await response.json(),data=await resolve(content);if(ctrl.signal.aborted)return;
    const safe=(value:any)=>JSON.stringify(value).replaceAll('<','\\u003c');
-   const config=safe({content:data,design:release.design,release:{baseline:release.baseline},preview,reduceMotion,instanceKey:'fmi:'+version.id+':'+location.pathname,guest:new URLSearchParams(location.search).get('to')||'',url:location.href});
    const language=['en','ml','ta','te','kn','hi'].includes(data.language)?data.language:'en';
    const localisation=localisationConfig(data);
-   const script='const FMI=('+startCinorev.toString()+')('+config+','+resolveCinorevEvents.toString()+');\n'+release.program+'\n('+localiseInvitationDocument.toString()+')('+safe({...localisation,malayalam:true,translations:{...previewDictionary(language),...localisation.translations}})+');';
+   const translations={...previewDictionary(language),...localisation.translations,...cinorevDictionary(language)};
+   const config=safe({content:data,translations,design:release.design,release:{baseline:release.baseline},preview,reduceMotion,instanceKey:'fmi:'+version.id+':'+location.pathname,guest:new URLSearchParams(location.search).get('to')||'',url:location.href});
+   const script='const FMI=('+startCinorev.toString()+')('+config+','+resolveCinorevEvents.toString()+','+createGuestInteractions.toString()+');\n'+release.program+'\n('+localiseInvitationDocument.toString()+')({...'+safe({...localisation,malayalam:true,translations})+',protectedText:FMI.protectedText,translations:FMI.translations,format:FMI.translate});';
    const fonts=(release.fontStylesheets||[]).filter((href:string)=>href.startsWith('https://fonts.googleapis.com/')).map((href:string)=>'<link rel="stylesheet" href="'+href.replaceAll('&','&amp;').replaceAll('"','&quot;')+'">').join('');
    setDoc('<!doctype html><html lang="'+language+'"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/assets/cinorev/fonts.css">'+fonts+'<link rel="stylesheet" href="/assets/cinorev/'+slug+'/design.css"><link rel="stylesheet" href="/assets/flagship/invitation-languages.css"></head><body class="locked">'+release.html+'<script>'+script.replace(/<\/script/gi,'<\\/script')+'</script></body></html>');
   })().catch(e=>{if(!ctrl.signal.aborted)setError(e.message);});
