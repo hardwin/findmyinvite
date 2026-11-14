@@ -63,12 +63,13 @@
 .ce-page .dove.d2 img{animation-delay:-1s}.ce-page .dove.d3 img{animation-delay:-2s}
 @keyframes flyin{from{transform:translate(var(--fx),var(--fy)) scale(.6);opacity:0}to{transform:none;opacity:1}}
 @keyframes bob{50%{transform:translateY(-8%) rotate(-2deg)}}
-.ce-page .title{left:var(--gl);right:var(--gr);top:calc(env(safe-area-inset-top,0px) + 13svh);text-align:center;display:grid;gap:.3svh;justify-items:center;transform:translateY(calc(var(--rise) * -6svh));animation:rise 1.4s ease-out .2s both}
+.ce-page .title{left:var(--gl);right:var(--gr);top:calc(env(safe-area-inset-top,0px) + 13svh);text-align:center;display:grid;gap:clamp(8px,1.4svh,14px);justify-items:center;transform:translateY(calc(var(--rise) * -6svh));animation:rise 1.4s ease-out .2s both}
 @keyframes rise{from{opacity:0;transform:translateY(20px)}}
 .ce-page .dear{padding-inline:.4em;max-width:100%;font-family:var(--f-script);font-size:clamp(1.5rem,6.4vw,2rem);color:var(--rose);line-height:1.2;margin-bottom:.6svh;overflow-wrap:anywhere}
 .ce-page .title .lbl{color:var(--sage-d)}
-.ce-page .names{font-family:var(--f-display);font-weight:600;font-size:clamp(3rem,calc(var(--W) * .145),5.4rem);line-height:.92;color:var(--sage-d);letter-spacing:.01em;text-shadow:0 2px 18px rgba(255,252,240,.9)}
-.ce-page .names .amp{display:block;font-family:"Cormorant Garamond","Cormorant",Georgia,serif;font-style:italic;font-weight:400;font-size:.6em;color:var(--gold);line-height:1.15}
+.ce-page .names{display:grid;gap:clamp(6px,1svh,10px);width:100%;padding-block:.08em .14em;font-family:var(--f-display);font-weight:600;font-size:clamp(3rem,calc(var(--W) * .145),5.4rem);line-height:1.12;color:var(--sage-d);letter-spacing:.01em;text-shadow:0 2px 18px rgba(255,252,240,.9)}
+.ce-page .name{display:block;min-width:0;max-width:18ch;justify-self:center;text-wrap:balance}
+.ce-page .names .amp{display:block;font-family:"Cormorant Garamond","Cormorant",Georgia,serif;font-style:italic;font-weight:400;font-size:.5em;color:var(--gold);line-height:1.15}
 .ce-page .when{font-family:var(--f-ui);font-size:.82rem;letter-spacing:.32em;color:var(--ink-2);font-weight:600;margin-top:1svh;font-variant-numeric:lining-nums}
 .ce-page .hint{left:0;right:0;bottom:calc(env(safe-area-inset-bottom,0px) + 3svh);display:grid;justify-items:center;gap:4px;font-family:var(--f-ui);font-size:.72rem;letter-spacing:.24em;font-weight:600;color:var(--sage-d);opacity:calc(1 - var(--p,0) * 14);z-index:3}
 .ce-page .hint i{width:18px;height:18px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);animation:nudge 1.6s ease-in-out infinite}
