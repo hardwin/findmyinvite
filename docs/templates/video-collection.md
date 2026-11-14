@@ -6,7 +6,7 @@ Reference inventory: https://cardsforknots.in/video-invite/ (observed 14 Novembe
 
 ## Release status
 
-Unpublished. All new master release flags remain false. Production requires a separate VIDEO_SCENE_SNAPSHOT_ID; original VIDEO_RENDER_SNAPSHOT_ID remains unchanged. Do not enable paid downloads until Linux performance and complete output verification pass.
+Approved for protected staging after export verification. Production remains unchanged pending the staged customer download check. Scene worker: `snap_Ii80lDDzUDxeNmIjhfQNhCeA46Dl`, with no expiry. Configure it only through VIDEO_SCENE_SNAPSHOT_ID; the original VIDEO_RENDER_SNAPSHOT_ID remains unchanged. The per-design evidence and full cloud export results are recorded in `video-collection-verification.json`.
 
 ## Dedicated forms
 
@@ -53,7 +53,7 @@ Scene-aligned steps reuse the existing floating preview, clear buttons, growing 
 | Kutti Ilavarasi | film-ilavarasi-v1 | 5 | 23 | None |
 | Puthu Velicham | film-velicham-v1 | 5 | 25 | None |
 
-## Verification so far
+## Verification
 
 - All 38 exact renderer/schema pairs pass opening, chapter-hold and closing frame checks at 720×1280; captures and reports are local under work/video-catalog.
 - 102 relevant server regressions pass. Broad suite: 798 passed, 19 failed, 7 skipped. A clean b5837ae checkout reproduces the same 19 failures.
@@ -66,7 +66,10 @@ Scene-aligned steps reuse the existing floating preview, clear buttons, growing 
 - The candidate recreates the software WebGL browser every 120 frames, seeking by absolute frame while keeping one MP4 encoder/audio timeline. A full local Vector comparison passed all 975 frames (mean SSIM 0.9941, minimum 0.9903), including browser boundaries. Browser and encoder cleanup is bounded and terminates failed subprocesses.
 - All 38 designs also passed chapter captures with the software export profile enabled locally. Streaming video requests aborted when their test page closed are recorded separately from HTTP asset failures; no script errors or HTTP failures occurred.
 - Preview deployment `dpl_Apa5cmDhAYKHpaKq2UVjaodUsKAj` built successfully. All 38 deployed configuration APIs return the correct dedicated forms, remain unreleased, and use no-store caching. Drive, Vector, Kurinji, Hop On, Oonjal and Rajakumari forms initialized successfully at 390×844 without script errors.
-- Mesa's anisotropic texture sampler stalls at specific frames, including Vector 319 and 775. Browser recycling and a small time offset did not reliably solve this. Disabling only the driver's anisotropic extension completed both exact frames immediately. The candidate uses standard mipmap filtering and exact frame times, without a driver switch or timing offset. Paired frame 318 measured SSIM 0.994898 against the previous same-driver capture; frames 318/319 measured 0.958321/0.976597 against D3D11 (higher than the earlier software candidate). Full Vector, longest-design Veedu and nested-3D Velicham exports, plus all 38 chapter checks, are running before approval.
+- Mesa's anisotropic texture sampler stalled at specific frames, including Vector 319 and 775. Browser recycling and a small time offset did not reliably solve this. Disabling only the driver's anisotropic extension completed both exact frames immediately. The verified renderer uses standard mipmap filtering and exact frame times, without a driver switch or timing offset. Paired frame 318 measured SSIM 0.994898 against the previous same-driver capture; frames 318/319 measured 0.958321/0.976597 against D3D11. Full Vector, longest-design Veedu and nested-3D Velicham exports passed in 628, 1,984 and 852 seconds respectively. All 38 final cloud chapter checks passed; inspected opening, chapter and closing captures retain geometry and text. Two animated closing frames varied slightly on repeat capture.
+- Full cloud plate, page, alpha-video, nested-3D and uploaded-photo/music representatives passed. The default release proof hashes chapter captures and the exact worker source; the personalised proof hashes each complete locally verified MP4. These are distinct checks, explicitly labelled in each master. All 38 full cloud exports were not run.
+- Short library music repeats through longer scene videos. A cloud test repeated a two-second soundtrack through a 20-second export and measured audible output at second 15. The editor wraps its audio position consistently; the legacy Temple music behavior is unchanged. Latest build and 67 affected server regressions pass.
+- All 38 authenticated drafts saved and reloaded on staging, with anonymous access denied and private responses uncached. A mobile account save restored correctly in a fresh desktop context.
 - Git attributes preserve immutable asset bytes across Windows/Linux. All 4,139 staged video files match their working-file bytes. Scene workers have their own bounded timeout and an owner lease that outlives it.
 
 ## Reference adaptations and limitations
@@ -85,7 +88,7 @@ Run `npm run build`, then `node scripts/package-video-scene-worker.mjs`. The off
 
 Install Xvfb, Mesa GL/EGL and libxkbcommon from the sandbox's official OS repository. Install the pinned Chrome for Testing archive recorded in `bundle.json`, verify its SHA256 and extract it under `/vercel/sandbox/scene-browser`. Set `VIDEO_CHROMIUM_PATH=/vercel/sandbox/scene-browser/chrome-headless-shell-linux64/chrome-headless-shell`. Run `node scripts/video-scene-preflight.mjs` for all chapter stills and `node scripts/video-scene-preflight.mjs --full <design>` for complete export checks. These checks bypass release approval only for offline rendering and never enable checkout.
 
-Before snapshotting, remove provisioning archives, test outputs and QA-only scripts, and stop test processes. Snapshot only a verified candidate. Record its immutable ID separately as `VIDEO_SCENE_SNAPSHOT_ID`; retain the original `VIDEO_RENDER_SNAPSHOT_ID`. Runtime network access is restricted to private Blob operations and loopback. A successful still capture alone is not a release qualification: full Linux exports and staged download checks must pass first.
+Before snapshotting, remove provisioning archives, test outputs and QA-only scripts, and stop test processes. Snapshot only a verified candidate, explicitly without expiration, and verify the returned metadata. The connector's numeric expiration field rejected zero during this release; the CLI configured the named sandbox's snapshotExpiration to zero before resnapshotting. Record the immutable ID separately as `VIDEO_SCENE_SNAPSHOT_ID`; retain the original `VIDEO_RENDER_SNAPSHOT_ID`. Runtime network access is restricted to private Blob operations and loopback. A successful still capture alone is not a release qualification: full Linux exports and staged download checks must pass first.
 
 ## Rollback
 

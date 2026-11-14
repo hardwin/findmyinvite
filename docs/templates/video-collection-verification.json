@@ -1,0 +1,556 @@
+{
+  "version": 1,
+  "sceneSnapshotId": "snap_Ii80lDDzUDxeNmIjhfQNhCeA46Dl",
+  "excludedReferenceDesign": "thoon",
+  "output": {
+    "width": 720,
+    "height": 1280,
+    "fps": 24
+  },
+  "graphicsProfile": "mesa-mipmap-v1",
+  "pricePaise": 29900,
+  "designs": [
+    {
+      "id": "film-drive-v1",
+      "design": "drive",
+      "assetIndexSha256": "3224870e137004a313e049e0e5eac5245d9f866a6712c169883c7eaaec722c98",
+      "defaultProofSha256": "d268296699adc9e49481821ed9e507523b3ab052098ac9306f8768aff78ad9f8",
+      "personalizedProofSha256": "1045642838108ae248a102510126f76dfbae56e7dd9c41f38f12a2e37f4d82b7",
+      "defaultCaptureCount": 5,
+      "personalizedFrames": 480,
+      "photoSlots": []
+    },
+    {
+      "id": "film-temple-v1",
+      "design": "temple",
+      "assetIndexSha256": "e4059f9e82e079f4d1413be867b629273a2efd761bb083a5107eae981b56d004",
+      "defaultProofSha256": "9d227b4cd4eb7c7f3b9ae3f2aab7b8d279608366bf0d7b7e44f8b08595cf8c5a",
+      "personalizedProofSha256": "e800fd5a7a3608fc952d7278ed753c793748bbb8c79a8ec011d36044471d075a",
+      "defaultCaptureCount": 9,
+      "personalizedFrames": 936,
+      "photoSlots": []
+    },
+    {
+      "id": "film-vector-v1",
+      "design": "vector",
+      "assetIndexSha256": "cc01fb3d67d8654837799db43ca1efd77b3726ebeef95c2383b7f75016d56cb9",
+      "defaultProofSha256": "abd3ba4b998e4b37b3f18ae291c1992ada89bb4bf8fc48b58590926de227b97f",
+      "personalizedProofSha256": "cd815ce844e46809c8476f991ccd63bb4ab15b2174bff93ace0a2cbb4781e016",
+      "defaultCaptureCount": 8,
+      "personalizedFrames": 975,
+      "photoSlots": []
+    },
+    {
+      "id": "film-garden-v1",
+      "design": "garden",
+      "assetIndexSha256": "6ef2871809313e3a1bb29be10ebc85de75794204cd3d6f261edc268e89e25fe8",
+      "defaultProofSha256": "f8ec276210bf8bcd5f432da1428746d202d3bbfe27ee19cafa479a6335190fb6",
+      "personalizedProofSha256": "b97d618df828d603587cb134b182f212c4dd14d72b6506e3b3ec875933ac28d0",
+      "defaultCaptureCount": 8,
+      "personalizedFrames": 975,
+      "photoSlots": []
+    },
+    {
+      "id": "film-tiles-v1",
+      "design": "tiles",
+      "assetIndexSha256": "367b6502f9b50d3823ea4c337f772c392639e92138bce36ed06b94e17685adb6",
+      "defaultProofSha256": "7d8a3c49259ddec105774bca591e8529f065ff2574d055802086e725efbf8754",
+      "personalizedProofSha256": "bca6e263da60b3722b4bd42bd94b69aea008ff877f27239e6ca961cbdc190725",
+      "defaultCaptureCount": 8,
+      "personalizedFrames": 1377,
+      "photoSlots": []
+    },
+    {
+      "id": "film-bollywood-v1",
+      "design": "bollywood",
+      "assetIndexSha256": "bb11ee7f25701f14acfbbe35eb53f47a19aada2aea755acf43cea91e79f540fc",
+      "defaultProofSha256": "914439cba9fcdd0dc03ba5b530dc3bfb8b924ebb3e04378be6104c8664a157e2",
+      "personalizedProofSha256": "a28a6183da2727ccdedbd2546e862d426451b5d4d291ab463e46354d94e7eb52",
+      "defaultCaptureCount": 9,
+      "personalizedFrames": 1220,
+      "photoSlots": []
+    },
+    {
+      "id": "film-truckart-v1",
+      "design": "truckart",
+      "assetIndexSha256": "ffe45004b59ce7af3e7d79853162b27eac21a91550bb0e2fc03a90ae4078b291",
+      "defaultProofSha256": "41faa2c8dac5a8f959de6d9ccd30033147f2d4960d491b81c4e21c190363c15b",
+      "personalizedProofSha256": "021c5757c8d05ae8f5251db5371c5659bcffe32122af46f32f866741b5cc5ee3",
+      "defaultCaptureCount": 9,
+      "personalizedFrames": 1268,
+      "photoSlots": []
+    },
+    {
+      "id": "film-kovil-v1",
+      "design": "kovil",
+      "assetIndexSha256": "58a3fc196299077a74b257506fd0602f0946d400d80818fd2482e8eca8425555",
+      "defaultProofSha256": "08d8c7c109e8d1ecdde44d55a004b3d33c96ca162aed291dd9c691fa767dfc53",
+      "personalizedProofSha256": "121a338137efd829812b0c05f2965c0e4cd61f7e3e564d72c0abf8904f8a0147",
+      "defaultCaptureCount": 8,
+      "personalizedFrames": 980,
+      "photoSlots": []
+    },
+    {
+      "id": "film-royal-v1",
+      "design": "royal",
+      "assetIndexSha256": "ba362ad68c8e4955f1e93f3b5a334252767d670395b8fe46b5edc0cc214bf2b3",
+      "defaultProofSha256": "159d6e18d5efc64231fd3767317463962be69b61b63a29f9631e6b019ba6f08f",
+      "personalizedProofSha256": "0169d7f9be245ddd5ff4dfd75cd4f380e08ef683d1824d3ab37118fc828af3e8",
+      "defaultCaptureCount": 9,
+      "personalizedFrames": 1268,
+      "photoSlots": []
+    },
+    {
+      "id": "film-kerala-v1",
+      "design": "kerala",
+      "assetIndexSha256": "da00db1eee7fb293e92b5d976dfa5a7ceaa02dfe8e173594556637711a6df7e1",
+      "defaultProofSha256": "723bea1acc9d63257ebb04e8a95ae8f5ce9c41f19aeaf75f5742dd44062a9c2b",
+      "personalizedProofSha256": "63813e4b06d7eb58a7eeb856b684f83770d2d66f9bd77c8b6b95c06880eed52c",
+      "defaultCaptureCount": 8,
+      "personalizedFrames": 1220,
+      "photoSlots": []
+    },
+    {
+      "id": "film-veedu-v1",
+      "design": "veedu",
+      "assetIndexSha256": "362dec01d535b3075cca7e5cf8566ae507046e9c36546cc556832a459edc493f",
+      "defaultProofSha256": "d5e00677b5b2150507785b8e0b83d0c10fe795d00ef9c6e160c26bfbb20d7769",
+      "personalizedProofSha256": "911d39651f9195ceb19f709c0d04c9bfde2161ef6b1680567df7d01ab486cf67",
+      "defaultCaptureCount": 8,
+      "personalizedFrames": 3192,
+      "photoSlots": []
+    },
+    {
+      "id": "film-walk-v1",
+      "design": "walk",
+      "assetIndexSha256": "1ed53fd428132b3178464a4b12c7d3b109182d622ba892b0c95be73d0b543978",
+      "defaultProofSha256": "852289f2ca9a86cf90980189e8f934ce3cec473a59610dff1d01e9efb8d21e48",
+      "personalizedProofSha256": "1364f9c247056c22edbc0ea04dd95562ac6e71cac5246a10e672d4bd16939aa8",
+      "defaultCaptureCount": 9,
+      "personalizedFrames": 1428,
+      "photoSlots": []
+    },
+    {
+      "id": "film-kurinji-v1",
+      "design": "kurinji",
+      "assetIndexSha256": "bab6743c7c35f04b5d7a306eca8acbf513ff03ea6a54981e9cff65c47a2b2398",
+      "defaultProofSha256": "fb2d97a7ba2a01b92f3cfa0972f8c8a50213eab02dd55ef0ac7e59f69f5cb255",
+      "personalizedProofSha256": "8c53199877b0ba0e16891e835d7631ab403895f4c2f9230f2c71d5925b0f4177",
+      "defaultCaptureCount": 8,
+      "personalizedFrames": 1626,
+      "photoSlots": []
+    },
+    {
+      "id": "film-valli-v1",
+      "design": "valli",
+      "assetIndexSha256": "d730f484c3bad7dfa8e8ea2e4fa8f40d09c87a27c9918289f158db235d5258da",
+      "defaultProofSha256": "be2892bc23a1309a2434187a34392b1b33277e83946609e155ea53d0f37c1712",
+      "personalizedProofSha256": "51f25c5b990841307c3aa7fc6116d4b1fd702948fb180a97341bc15e2f1d7028",
+      "defaultCaptureCount": 7,
+      "personalizedFrames": 1474,
+      "photoSlots": []
+    },
+    {
+      "id": "film-aranmanai-v1",
+      "design": "aranmanai",
+      "assetIndexSha256": "1d606f118c1c1dc879c6d11ee205aa9ff58fd46cd280a6eb0ddc854f7e6a43cd",
+      "defaultProofSha256": "810b4fdf4c565d30e25903ef001c910a38ff91b7541ecb1cbfc58370075e4b67",
+      "personalizedProofSha256": "2105bb0d0c8271d01a3d105abaa56fa561c6ba89992c8e6f0b450f89efffe4c8",
+      "defaultCaptureCount": 8,
+      "personalizedFrames": 2832,
+      "photoSlots": []
+    },
+    {
+      "id": "film-gettimelam-v1",
+      "design": "gettimelam",
+      "assetIndexSha256": "32d05d1fcec8fd53d42b4c1534e50c0567c6ef8c084bb1be11083d94c7e6c8ab",
+      "defaultProofSha256": "6b0c3d6d6f5905865a4cf4e5389dc87e45f8d47eeffb718c112327a069f947e1",
+      "personalizedProofSha256": "e9a2a0d809293de3410b1610d6981081be0586b3e3b8e4f7ea02dea7563001f7",
+      "defaultCaptureCount": 7,
+      "personalizedFrames": 1320,
+      "photoSlots": []
+    },
+    {
+      "id": "film-kondattam-v1",
+      "design": "kondattam",
+      "assetIndexSha256": "a15171a93c9aa4a7ba72cb834988a13fde2b163ba0656256a543c67eaaf0541f",
+      "defaultProofSha256": "65f28a2c4c1d1e8a7306f45f487ff00ecf66518b0be55b5c94e65bce2ec74cdd",
+      "personalizedProofSha256": "5e786f4da05bfbfdd1a036df4f0acdc6bff4e5e7ccdf39d928af153ccc447f8e",
+      "defaultCaptureCount": 8,
+      "personalizedFrames": 1440,
+      "photoSlots": [
+        "couple"
+      ]
+    },
+    {
+      "id": "film-mandapam-v1",
+      "design": "mandapam",
+      "assetIndexSha256": "aed04cf3cb17096ed89396257f8fa0bd3f29b952c8f07e588e52fabf9656c09f",
+      "defaultProofSha256": "a9f02f17c501581ba9144a4c87bb1bd00be2cee5216063a93e0daf1f4b8d4aab",
+      "personalizedProofSha256": "b8630b40d9a8da8182df7fd5f16f522ae44dd8c3e9e85e54c2e74fab57ec6112",
+      "defaultCaptureCount": 7,
+      "personalizedFrames": 1301,
+      "photoSlots": []
+    },
+    {
+      "id": "film-thottam-v1",
+      "design": "thottam",
+      "assetIndexSha256": "463d9eca56fbc4331a4f03d68132c6bedf3d7c110658edf7c676a523979f009d",
+      "defaultProofSha256": "25fec04ae886b7eb6cf4e27725ad7fca3c1e12f3eaafd70010f770c77092979b",
+      "personalizedProofSha256": "099109e4a46d15c05f9bcfb0a823428180e5e1a18446a4cedb5cad97ecba8b1b",
+      "defaultCaptureCount": 7,
+      "personalizedFrames": 1272,
+      "photoSlots": []
+    },
+    {
+      "id": "film-jannal-v1",
+      "design": "jannal",
+      "assetIndexSha256": "46dc53f7a8dc477d7d5befe88d1a24f2e1ca804847c9002a8a269d77a41fd636",
+      "defaultProofSha256": "6e1e02b08a4ec95b9cc495ed7651dad0054a108e4d663084d1511c4cfeb6f1ef",
+      "personalizedProofSha256": "4571c4a065d4c4a321d269649fd60679ff42dd15fa213743bb9a2e875fe0f267",
+      "defaultCaptureCount": 9,
+      "personalizedFrames": 1064,
+      "photoSlots": [
+        "bride",
+        "groom",
+        "couple"
+      ]
+    },
+    {
+      "id": "film-poonga-v1",
+      "design": "poonga",
+      "assetIndexSha256": "348478ffbe0a2f566723b879b91273a11c4c504e38091d6cca7880d370f397a2",
+      "defaultProofSha256": "7a7e2c87beb3595bac2ce8895cd23880eb93cebb66f0ab8d688c94f820185332",
+      "personalizedProofSha256": "eae12a61938e06e3948c1af24d2aa95913a4d2677ec94b3135e727b4dbf06328",
+      "defaultCaptureCount": 6,
+      "personalizedFrames": 816,
+      "photoSlots": []
+    },
+    {
+      "id": "film-roja-v1",
+      "design": "roja",
+      "assetIndexSha256": "78b5d5b61e6f7a6f72a5e9041b36d1df02483f17593e774277cd9263aa7179b1",
+      "defaultProofSha256": "beed8679b57015f7a4a401216928c4b758b141002fe999455a724b3889920c24",
+      "personalizedProofSha256": "300468826e73cd3f737abad40735021ced480681d464dc59db0e4cfbfa861deb",
+      "defaultCaptureCount": 6,
+      "personalizedFrames": 816,
+      "photoSlots": []
+    },
+    {
+      "id": "film-malligai-v1",
+      "design": "malligai",
+      "assetIndexSha256": "e4cc499d479dd46a8c14c991d1d85806e487b1b27e6d2d945306298868048338",
+      "defaultProofSha256": "34557a70b6d6dd94a7c09edae4355fe005b6d0f6a42b8c39f71b53482ea321d0",
+      "personalizedProofSha256": "d4f96a979b1e31a52832b98c6424ff067372b08ebc220c45641bdca211a150db",
+      "defaultCaptureCount": 6,
+      "personalizedFrames": 816,
+      "photoSlots": []
+    },
+    {
+      "id": "film-gopuram-v1",
+      "design": "gopuram",
+      "assetIndexSha256": "db7ba0cc6a6856e0acc408eb96cb6d43a2b27b36f88fd40e7bfe73f5a92624e7",
+      "defaultProofSha256": "649b1e9975c01f7c4a04623cb66000d176fbbfa9959300ceb15a3fd79e21fdcb",
+      "personalizedProofSha256": "6eafa0ee31632258413d20eb2507cd7ea09cecde9d5d13e8e33679d3d15087b2",
+      "defaultCaptureCount": 6,
+      "personalizedFrames": 816,
+      "photoSlots": []
+    },
+    {
+      "id": "film-theppam-v1",
+      "design": "theppam",
+      "assetIndexSha256": "caaed61fc99a2e67d4a49972444c79a570cf98212d53a3a2ca7ac4586db7225d",
+      "defaultProofSha256": "9f5bf5337af1fdb9975f687077fbfd99225545f34e81d8f6afd2836d01e0cbbf",
+      "personalizedProofSha256": "9852da2c0becb8a77cbfe4057b00c0b85472e78fb8f069bf5d28c5e1ce9aa611",
+      "defaultCaptureCount": 6,
+      "personalizedFrames": 816,
+      "photoSlots": []
+    },
+    {
+      "id": "film-chettinad-v1",
+      "design": "chettinad",
+      "assetIndexSha256": "6b15f58a8263ab8655bfcddeae37c9834c1277ba19208e65d5c9d318b7fd7a64",
+      "defaultProofSha256": "19f4fb8ca7677dfb3ac94870bfaa112d71a9cf6fa223e7501674456a6be33dba",
+      "personalizedProofSha256": "748f72a9743c5c688ab487a45dd4923fede5b36bc14db82d8f979efb32384fe2",
+      "defaultCaptureCount": 6,
+      "personalizedFrames": 816,
+      "photoSlots": []
+    },
+    {
+      "id": "film-kalyana-v1",
+      "design": "kalyana",
+      "assetIndexSha256": "169fd845594ed9d36839ef81800b2283bcafc813e856846b4dcf89e5454921c0",
+      "defaultProofSha256": "caf9364c047bb4c0b7cfea2cf1139a0b25df8afa248a93dae56f507b57de9d61",
+      "personalizedProofSha256": "95f63f021e456ddaeac323ae3fd512f7df4f5437651d00e2405aa5db945b5d5d",
+      "defaultCaptureCount": 8,
+      "personalizedFrames": 864,
+      "photoSlots": [
+        "couple"
+      ]
+    },
+    {
+      "id": "film-avalum-v1",
+      "design": "avalum",
+      "assetIndexSha256": "ac52a552786d1b4028bb00485ca56ec41e3c2f5737146ce4dc32dea66a1019d6",
+      "defaultProofSha256": "5f0931377e5252494caf31637033b14dfbe8cfcafcda154392c1791179807efb",
+      "personalizedProofSha256": "7eeb3cff18070827582382bbd9ea0b28c632544fab8bd3ea9c2d185fa7fb3129",
+      "defaultCaptureCount": 8,
+      "personalizedFrames": 1200,
+      "photoSlots": []
+    },
+    {
+      "id": "film-thamarai-v1",
+      "design": "thamarai",
+      "assetIndexSha256": "8efcb4855c3eb0be9697d9dfabbe65e3741154f02e6c1d75c4fe2da0f3eca1fa",
+      "defaultProofSha256": "520bd2ba56cc25e7ddcf29dfbf58e8cc8572ed54ec7b08b2d23e5f437227ba76",
+      "personalizedProofSha256": "7a55675c666a672dcf99503e698d4de0b74851fc411c84154e5a3c96f97800cb",
+      "defaultCaptureCount": 7,
+      "personalizedFrames": 792,
+      "photoSlots": []
+    },
+    {
+      "id": "film-savedate-v1",
+      "design": "savedate",
+      "assetIndexSha256": "ef8ba574cf0259d8ed357975f994155cce96f7aea09cb87fcc9453aaf308dbc6",
+      "defaultProofSha256": "95f73429b1c3c98b4d7f8b768b99ad6b4a148b93c1b118933c886999866c85d0",
+      "personalizedProofSha256": "9dd248dab683f1aa19e407dd1abc4a871fe26bac04da4fb8b81384d107b73096",
+      "defaultCaptureCount": 8,
+      "personalizedFrames": 756,
+      "photoSlots": []
+    },
+    {
+      "id": "film-kulam-v1",
+      "design": "kulam",
+      "assetIndexSha256": "4429b59b240689532cdc5ab3e8b117424b369c307264ad032f37ec5f0744a87b",
+      "defaultProofSha256": "975fd25c2987bdf01acc1bee07058ddf1b7b1f32fb0d0e1e8114f17678539247",
+      "personalizedProofSha256": "07b62426722eec2014143ebc528347b590a12176f4ec17a1f1bb785e7bdc958d",
+      "defaultCaptureCount": 7,
+      "personalizedFrames": 1512,
+      "photoSlots": []
+    },
+    {
+      "id": "film-karaikudi-v1",
+      "design": "karaikudi",
+      "assetIndexSha256": "10c8dfbcde76697048ab1db070ced179185bbcbaae20109fbd4e33ad48acee85",
+      "defaultProofSha256": "4f844b7b9f070ed89e2be50d61ebed93304a544c8fd16f1787f51358967434b6",
+      "personalizedProofSha256": "06eea6a07a1e1f0f95dc5256f83579ff276af6cef239773381d26d372db42951",
+      "defaultCaptureCount": 5,
+      "personalizedFrames": 756,
+      "photoSlots": []
+    },
+    {
+      "id": "film-hopon-v1",
+      "design": "hopon",
+      "assetIndexSha256": "331cb944f2460fe00ca3f26f1d552b59f2ca61616d540fb18432bd1107bd30fc",
+      "defaultProofSha256": "594c364de19487157dced8c3c4a63168b48a08262d5ed5cdac519e270b366c74",
+      "personalizedProofSha256": "c2a38f1f2494628034f8adef881442b919fcef585a64626bec2c77269b77f711",
+      "defaultCaptureCount": 4,
+      "personalizedFrames": 432,
+      "photoSlots": []
+    },
+    {
+      "id": "film-oonjal-v1",
+      "design": "oonjal",
+      "assetIndexSha256": "ed37aee24ae85e576f31532492bac11562129ce631316e06cc0cefe75343f9d1",
+      "defaultProofSha256": "53403e08c02bc4efa9e1e23fa73c5bbca4a66a49d76a3dfac7095af4bd4828db",
+      "personalizedProofSha256": "fedcf69dccb3ada7c2d79fc989ea22165eaa22a2d04c7e7eb06c55d90bda1fc6",
+      "defaultCaptureCount": 7,
+      "personalizedFrames": 828,
+      "photoSlots": [
+        "bride",
+        "groom",
+        "swing"
+      ]
+    },
+    {
+      "id": "film-rajakumari-v1",
+      "design": "rajakumari",
+      "assetIndexSha256": "deeaa0e5dce8af839b8707ed8f14ac579d65103f0ae226ad3e895e0073d34e20",
+      "defaultProofSha256": "29b1d410174102257ef16601b3d9be7e37543046e57e51a8940ae05b88516605",
+      "personalizedProofSha256": "d2e3e027e9271d8d95d377ee0b822551e4154592518cb428ccef59bfd181bc62",
+      "defaultCaptureCount": 6,
+      "personalizedFrames": 720,
+      "photoSlots": [
+        "child"
+      ]
+    },
+    {
+      "id": "film-rajakumaran-v1",
+      "design": "rajakumaran",
+      "assetIndexSha256": "4bee50c3f0b262fa47e92a88b1f1fce69ab912dcb2be825d06072bf87159f326",
+      "defaultProofSha256": "3196127b5fa9e2f6da5789c02d367418f454948b0b69b1fef7dedfb70116d56a",
+      "personalizedProofSha256": "94e6931634a5674c8ab986ace36c181f74db02121e2bd42609eeda5ebca400d1",
+      "defaultCaptureCount": 6,
+      "personalizedFrames": 720,
+      "photoSlots": [
+        "child"
+      ]
+    },
+    {
+      "id": "film-ilavarasi-v1",
+      "design": "ilavarasi",
+      "assetIndexSha256": "083e0d30e5f3604bb4b48e6c4eb1d2f837cbb52be795431eace97f7ca23e783f",
+      "defaultProofSha256": "32ee2de214ed71a4f55e926413f715cf75f0a5a9f8ea3ffd6e752c1f79e1b0b1",
+      "personalizedProofSha256": "3cf82eec42bff93b8ea1272f6224ab263498957cb1b8c51fd46b9471ce9d46ba",
+      "defaultCaptureCount": 7,
+      "personalizedFrames": 996,
+      "photoSlots": []
+    },
+    {
+      "id": "film-velicham-v1",
+      "design": "velicham",
+      "assetIndexSha256": "c4bc5a6f59a328f07b2ea5141698923d439340e73b5bcefd6a017a652d6595a9",
+      "defaultProofSha256": "486b76ceb0894f7d0eee9dcb82555500c4efff7b91add33a374814d42d6963bb",
+      "personalizedProofSha256": "b9f4545a89d0adbf3750b073130798a8706d01ffb7d91e5cfc6ef677688fc707",
+      "defaultCaptureCount": 7,
+      "personalizedFrames": 932,
+      "photoSlots": []
+    }
+  ],
+  "cloudFullExports": [
+    {
+      "test": "vector",
+      "id": "film-vector-v1",
+      "seconds": 627.597,
+      "result": {
+        "frames": 975,
+        "width": 720,
+        "height": 1280,
+        "duration": 40.625,
+        "bytes": 10168626,
+        "resultSha256": "78d84399725ad279b3061f61ea96c7c9ba3841e094c07dcc661ac99cdc4ae492",
+        "backgroundSha256": "cc01fb3d67d8654837799db43ca1efd77b3726ebeef95c2383b7f75016d56cb9",
+        "samplePhase": 0,
+        "frameRecoveries": 0
+      }
+    },
+    {
+      "test": "veedu",
+      "id": "film-veedu-v1",
+      "seconds": 1983.92,
+      "result": {
+        "frames": 3192,
+        "width": 720,
+        "height": 1280,
+        "duration": 133,
+        "bytes": 63407615,
+        "resultSha256": "6f5e9efe6d4bbe3053050c0cf35ec32c9f6acbaacf54f28a8819a00afa785d39",
+        "backgroundSha256": "362dec01d535b3075cca7e5cf8566ae507046e9c36546cc556832a459edc493f",
+        "samplePhase": 0,
+        "frameRecoveries": 0
+      }
+    },
+    {
+      "test": "velicham",
+      "id": "film-velicham-v1",
+      "seconds": 852.131,
+      "result": {
+        "frames": 932,
+        "width": 720,
+        "height": 1280,
+        "duration": 38.833333333333336,
+        "bytes": 17810800,
+        "resultSha256": "d577b2664aee83c799b315ead71b025f5a7ddadbcdc223d14ed2134cdc0342b4",
+        "backgroundSha256": "c4bc5a6f59a328f07b2ea5141698923d439340e73b5bcefd6a017a652d6595a9",
+        "samplePhase": 0,
+        "frameRecoveries": 0
+      }
+    },
+    {
+      "test": "hopon-audio",
+      "id": "film-hopon-v1",
+      "seconds": 148.053,
+      "result": {
+        "frames": 432,
+        "width": 720,
+        "height": 1280,
+        "duration": 18,
+        "bytes": 21285183,
+        "resultSha256": "d621c90b8c5b67dc1056a73e628c2f1f6aab6baa773bb92123f74260336b3131",
+        "backgroundSha256": "331cb944f2460fe00ca3f26f1d552b59f2ca61616d540fb18432bd1107bd30fc",
+        "graphicsProfile": "mesa-mipmap-v1"
+      }
+    },
+    {
+      "test": "rajakumari-audio",
+      "id": "film-rajakumari-v1",
+      "seconds": 131.207,
+      "result": {
+        "frames": 720,
+        "width": 720,
+        "height": 1280,
+        "duration": 30,
+        "bytes": 5913447,
+        "resultSha256": "8f1e8d56011e1ad1ca88e694ff5f4642a9ba5dbe8c994688846c604c7ffdf2ca",
+        "backgroundSha256": "deeaa0e5dce8af839b8707ed8f14ac579d65103f0ae226ad3e895e0073d34e20",
+        "graphicsProfile": "mesa-mipmap-v1"
+      }
+    },
+    {
+      "test": "walk-audio",
+      "id": "film-walk-v1",
+      "seconds": 519.108,
+      "result": {
+        "frames": 1428,
+        "width": 720,
+        "height": 1280,
+        "duration": 59.5,
+        "bytes": 36895386,
+        "resultSha256": "a9de8168ffa5efc519e1629f2d3ac79edb8b89be4d6d25149dc9717f2ba39c74",
+        "backgroundSha256": "1ed53fd428132b3178464a4b12c7d3b109182d622ba892b0c95be73d0b543978",
+        "graphicsProfile": "mesa-mipmap-v1"
+      }
+    },
+    {
+      "test": "kurinji",
+      "id": "film-kurinji-v1",
+      "seconds": 1336.854,
+      "result": {
+        "frames": 1626,
+        "width": 720,
+        "height": 1280,
+        "duration": 67.75,
+        "bytes": 5440671,
+        "resultSha256": "f45e4aa5286c6f45d7c570bf6018e510400cb914988156c34c34a75fb98c04a4",
+        "backgroundSha256": "bab6743c7c35f04b5d7a306eca8acbf513ff03ea6a54981e9cff65c47a2b2398"
+      }
+    },
+    {
+      "test": "savedate",
+      "id": "film-savedate-v1",
+      "seconds": 94.86,
+      "result": {
+        "frames": 756,
+        "width": 720,
+        "height": 1280,
+        "duration": 31.5,
+        "bytes": 3155833,
+        "resultSha256": "bc7340437c90f9982958196fd5fc64823434cbf97a9fade9a4fb45817b98e574",
+        "backgroundSha256": "ef8ba574cf0259d8ed357975f994155cce96f7aea09cb87fcc9453aaf308dbc6"
+      }
+    },
+    {
+      "test": "drive-loop",
+      "id": "film-drive-v1",
+      "seconds": 111.568,
+      "result": {
+        "frames": 480,
+        "width": 720,
+        "height": 1280,
+        "duration": 20,
+        "bytes": 10673953,
+        "resultSha256": "91c4c08b3370e5bbc19708d8768944186e32deef6cb75149f0fbb2ad754ae96c",
+        "backgroundSha256": "3224870e137004a313e049e0e5eac5245d9f866a6712c169883c7eaaec722c98",
+        "graphicsProfile": "mesa-mipmap-v1"
+      },
+      "audioLoopTailMeanDb": -21.1
+    }
+  ],
+  "stagedDrafts": {
+    "count": 38,
+    "anonymousStatus": 401,
+    "mobileToFreshDesktop": true
+  },
+  "physicalIPhoneTested": false,
+  "preparedAt": "2026-11-14T21:45:30.142Z"
+}

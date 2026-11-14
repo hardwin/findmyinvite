@@ -68,7 +68,19 @@
     }
   },
   "release": {
-    "approved": false
+    "approved": true,
+    "rendererVersion": "scene-film-v1",
+    "proofs": {
+      "default": "65f28a2c4c1d1e8a7306f45f487ff00ecf66518b0be55b5c94e65bce2ec74cdd",
+      "personalized": "5e786f4da05bfbfdd1a036df4f0acdc6bff4e5e7ccdf39d928af153ccc447f8e"
+    },
+    "verification": {
+      "defaultProofKind": "cloud-chapter-captures",
+      "personalizedProofKind": "full-personalized-mp4",
+      "graphicsProfile": "mesa-mipmap-v1",
+      "defaultCaptureCount": 8,
+      "personalizedFrames": 1440
+    }
   },
   "catalog": {
     "poster": "poster.jpg",
