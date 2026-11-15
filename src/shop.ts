@@ -1,10 +1,11 @@
 import {INVITATION_BASE_PAISE} from '../shared/pricing.mjs';
 import {galleryTierFor,galleryTierLabels,type GalleryTier} from './data';
+import {discoveryMetadata,matchesDiscoverySearch} from '../shared/discovery-taxonomy.mjs';
 
 export type ShopKind='website'|'video';
 export type Tradition='christian'|'hindu'|'muslim'|'interfaith';
 export type Palette='ivory'|'sage'|'burgundy'|'gold'|'navy'|'blush';
-export type Setting='backwater'|'church'|'garden'|'temple'|'palace'|'beach'|'minimal';
+export type Setting='backwater'|'church'|'garden'|'temple'|'palace'|'beach'|'minimal'|'courtyard';
 export type ShopTemplate={
  templateVersionId?:string;
  tradition?:Tradition;
@@ -23,7 +24,7 @@ export type ShopTemplate={
 export const shopKinds:Array<[ShopKind,string]>=[['website','Wedding Websites'],['video','Invitation Videos']];
 export const traditions:Array<[Tradition,string]>=[['christian','Christian'],['hindu','Hindu'],['muslim','Islam'],['interfaith','Interfaith']];
 export const palettes:Array<[Palette,string]>=[['ivory','Ivory'],['sage','Sage'],['burgundy','Burgundy'],['gold','Gold'],['navy','Navy'],['blush','Blush']];
-export const settings:Array<[Setting,string]>=[['backwater','Backwaters'],['church','Church'],['garden','Garden'],['temple','Temple'],['palace','Palace'],['beach','Beach'],['minimal','Minimal']];
+export const settings:Array<[Setting,string]>=[['backwater','Backwaters'],['church','Church'],['garden','Garden'],['temple','Temple'],['palace','Palace'],['beach','Beach'],['minimal','Minimal'],['courtyard','Courtyard']];
 export const occasionAisles:Array<[string,string]>=[
  ['wedding','Wedding'],
  ['engagement','Engagement'],
@@ -39,57 +40,20 @@ export const occasionAisles:Array<[string,string]>=[
 ];
 export type ShopAisle='kind'|'occasion'|'tradition'|'collection'|'setting';
 
-const hinduHint=/temple|sanctuary|sita|kalyanam|ponmaalai|gopuram|mehendi|sangeet|heritage-wedding|royal-temple|tamil ponnu/i;
-const muslimHint=/nikah|moonlit|jaali/i;
-const churchHint=/church|grace|crest|ivory|minimal|white forest|nuptial/i;
-const gardenHint=/garden|blush|pink|jasmine|floral|grace/i;
-const beachHint=/beach/i;
-const palaceHint=/palace|royal|prestige|majesty|heritage|legacy/i;
-const sageHint=/sage|grace|forest|emerald/i;
-const burgundyHint=/burgundy|crimson|legacy|velvet/i;
-const navyHint=/navy|minimal|noir|majesty/i;
-const blushHint=/blush|pink|rose/i;
-const goldHint=/gold|ivory|elegance|temple|sanctuary/i;
-const authoredSettings:Record<string,Setting>={
- 'midnight-stage':'palace','little-blessing':'garden','noir-and-gold':'beach','golden-hour':'palace',
- 'pearl-and-sapphire':'palace','royal-crimson':'palace','garden-curtains':'garden','pulli':'beach',
- 'pattu':'temple','olai':'temple','jasmine-arch':'garden','palace-of-lights':'palace',
- 'the-ring-box':'garden','home-sweet-home':'minimal','up-and-away':'garden','temple-doors':'temple'
-};
-
 export function templateKind(template:{royal?:boolean;video?:string}):ShopKind{
  return template.royal&&template.video?'video':'website';
 }
 
-export function templateTradition(template:Pick<ShopTemplate,'id'|'name'>):Tradition{
- const hay=template.id+' '+template.name;
- if(muslimHint.test(hay))return 'muslim';
- if(hinduHint.test(hay))return 'hindu';
- return 'christian';
+export function templateTradition(template:Pick<ShopTemplate,'id'|'name'|'tradition'>):Tradition|''{
+ return discoveryMetadata(template).tradition as Tradition|'';
 }
 
-export function templateSetting(template:Pick<ShopTemplate,'id'|'name'>):Setting{
- if(authoredSettings[template.id])return authoredSettings[template.id];
- if(template.id==='theeram')return 'backwater';
- if(['thiruvarul','kalyana-payanam'].includes(template.id))return 'temple';
- const hay=template.id+' '+template.name;
- if(beachHint.test(hay))return 'beach';
- if(/temple|sanctuary|gopuram/i.test(hay))return 'temple';
- if(churchHint.test(hay)&&!hinduHint.test(hay))return 'church';
- if(gardenHint.test(hay))return 'garden';
- if(/modern-minimal|minimal/i.test(hay))return 'minimal';
- if(palaceHint.test(hay))return 'palace';
- return 'church';
+export function templateSetting(template:Pick<ShopTemplate,'id'|'name'>):Setting|''{
+ return discoveryMetadata(template).setting as Setting|'';
 }
 
-export function templatePalette(template:Pick<ShopTemplate,'id'|'name'>):Palette{
- const hay=template.id+' '+template.name;
- if(sageHint.test(hay))return 'sage';
- if(burgundyHint.test(hay))return 'burgundy';
- if(navyHint.test(hay))return 'navy';
- if(blushHint.test(hay))return 'blush';
- if(goldHint.test(hay))return 'gold';
- return 'ivory';
+export function templatePalette(template:Pick<ShopTemplate,'id'|'name'>):Palette|''{
+ return (discoveryMetadata(template).palettes[0]||'') as Palette|'';
 }
 
 export function templatePricePaise(template:{royal?:boolean;tier?:string}):number{
@@ -145,11 +109,11 @@ export function filterShop(items:ShopTemplate[],filters:ShopFilters){
  const q=filters.query.trim().toLowerCase();
  return items.map(shopCard).filter(item=>{
   if(item.kind!==filters.kind)return false;
-  if(filters.tradition!=='all'&&item.tradition!==filters.tradition)return false;
+  if(filters.tradition!=='all'&&!matchesDiscoverySearch(item,filters.tradition))return false;
   if(filters.collection!=='all'&&item.tier!==filters.collection)return false;
-  if(filters.palette!=='all'&&item.palette!==filters.palette)return false;
-  if(filters.setting!=='all'&&item.setting!==filters.setting)return false;
-  if(q&&!(item.name+' '+item.description).toLowerCase().includes(q))return false;
+  if(filters.palette!=='all'&&!discoveryMetadata(item).palettes.includes(filters.palette))return false;
+  if(filters.setting!=='all'&&!matchesDiscoverySearch(item,filters.setting))return false;
+  if(!matchesDiscoverySearch(item,q))return false;
   return true;
  });
 }

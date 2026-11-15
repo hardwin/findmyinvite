@@ -1,0 +1,100 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {flagshipTemplates} from '../shared/flagship-templates.mjs';
+import {theeramTemplate} from '../shared/theeram-template.mjs';
+import {thiruvarulTemplate} from '../shared/thiruvarul-template.mjs';
+import {payanamTemplate} from '../shared/kalyana-payanam-template.mjs';
+import {cinorevDesigns} from '../shared/cinorev-templates.mjs';
+import {VIDEO_CATALOG} from '../shared/video-catalog.mjs';
+import {discoveryTaxonomy,discoveryMetadata,discoveryHref,matchesDiscoverySearch,matchesVideoSearch} from '../shared/discovery-taxonomy.mjs';
+const json=path=>JSON.parse(readFileSync(new URL(path,import.meta.url),'utf8'));
+// flagshipTemplates also registers Lace & Pearls and the five Digital Yes designs.
+const websites=[...flagshipTemplates,theeramTemplate,thiruvarulTemplate,payanamTemplate,...cinorevDesigns];
+const ids=items=>items.map(item=>item.id).sort();
+const find=query=>ids(websites.filter(item=>matchesDiscoverySearch(item,query)));
+
+test('every authored website has reviewed metadata matching its actual tradition',()=>{
+ assert.equal(websites.length,28);
+ assert.deepEqual(Object.keys(discoveryTaxonomy).sort(),ids(websites));
+ for(const template of websites){
+  const metadata=discoveryMetadata(template);
+  assert.equal(metadata.tradition,template.tradition,template.id);
+  assert.equal(discoveryTaxonomy[template.id].tradition,template.tradition,template.id);
+  assert.ok(metadata.setting,template.id);
+  assert.ok(metadata.palettes.length,template.id);
+  assert.ok(matchesDiscoverySearch(template,template.name),template.name+' must remain searchable');
+ }
+});
+
+test('Church excludes Moonlit Nikah and all other non-church designs',()=>{
+ assert.deepEqual(find('Church'),['christian-bells']);
+ assert.deepEqual(find(' CHURCH '),['christian-bells']);
+ assert.deepEqual(find('Christian church'),['christian-bells']);
+ assert.deepEqual(find('Muslim church'),[]);
+ assert.deepEqual(find('Moonlit Nikah'),['moonlit-nikah']);
+ assert.equal(discoveryMetadata({id:'moonlit-nikah'}).setting,'courtyard');
+ assert.deepEqual(find('Temple'),['kalyana-payanam','kerala-lanterns','olai','pattu','temple-doors','thiruvarul']);
+});
+
+test('religion filters and aliases use catalog tradition rather than decorative words',()=>{
+ for(const tradition of ['christian','hindu','muslim','interfaith'])assert.deepEqual(find(tradition),ids(websites.filter(t=>t.tradition===tradition)));
+ assert.deepEqual(find('Christian'),['christian-bells','embroidered-garden','fresco','ivory-lace','mother-of-pearl','royal','stained-glass']);
+ for(const alias of ['Islam','Islamic','Muslim'])assert.deepEqual(find(alias),['garden-curtains','moonlit-nikah','royal-crimson']);
+ assert.deepEqual(find('Islam garden'),['garden-curtains']);
+ assert.deepEqual(find('Islamic gold'),['moonlit-nikah','royal-crimson']);
+ assert.deepEqual(find('Christian Hindu'),[]);
+});
+
+test('new or unclassified designs never silently become Christian, Church or Ivory',()=>{
+ for(const id of ['new-design','constructor','toString','__proto__']){
+  const unknown={id,name:'Ivory Grace',description:'Church, temple and Islamic decorations'};
+  assert.equal(discoveryMetadata(unknown).tradition,'');
+  assert.equal(discoveryMetadata(unknown).setting,'');
+  assert.deepEqual(discoveryMetadata(unknown).palettes,[]);
+  for(const query of ['church','christian','temple','muslim','ivory'])assert.equal(matchesDiscoverySearch(unknown,query),false);
+ }
+ assert.equal(discoveryMetadata({id:'new-design',tradition:'muslim'}).tradition,'muslim');
+ assert.equal(matchesDiscoverySearch({id:'christian-bells',tradition:'muslim'},'church'),false);
+});
+
+test('style and occasion searches return the reviewed designs even without keywords in their names',()=>{
+ assert.deepEqual(find('Royal'),find('Palace'));
+ assert.deepEqual(find('Pixar 3D'),['kalyana-payanam','theeram','thiruvarul']);
+ assert.deepEqual(find('Toon'),['kalyana-payanam','theeram','thiruvarul']);
+ assert.deepEqual(find('Minimal'),['home-sweet-home','mother-of-pearl']);
+ assert.deepEqual(find('baby-shower'),['little-blessing']);
+ assert.deepEqual(find('Birthday'),['up-and-away']);
+ assert.deepEqual(find('Housewarming'),['home-sweet-home']);
+ assert.deepEqual(find('Engagement'),['garden-curtains','the-ring-box']);
+ assert.deepEqual(find('Blush floral'),['garden-curtains','golden-hour','stained-glass','the-ring-box']);
+ assert.deepEqual(find('flowers'),find('Floral'));
+ assert.deepEqual(find('Theeram · Backwater Journey'),['theeram']);
+ assert.deepEqual(find(''),ids(websites));
+ assert.deepEqual(find('not an existing design'),[]);
+});
+
+test('every category, trending search and footer destination resolves to the same matching set',()=>{
+ const categories=json('../public/assets/categories/sources.json').map(c=>c.id);
+ const trending=json('../public/assets/trending/sources.json').map(c=>c.label);
+ for(const query of [...categories,...trending]){
+  const url=new URL(discoveryHref(query),'https://findmyinvite.com');
+  const q=url.searchParams;
+  assert.equal(url.pathname,'/templates');
+  if(q.get('kind')==='video'){
+   assert.deepEqual(ids(VIDEO_CATALOG.filter(video=>matchesVideoSearch(video,q.get('q')))),['film-drive-v1','film-savedate-v1']);
+  }else{
+   assert.equal(q.get('kind'),'website');
+   const destination=websites.filter(item=>(!q.get('tradition')||matchesDiscoverySearch(item,q.get('tradition')))&&(!q.get('setting')||matchesDiscoverySearch(item,q.get('setting')))&&matchesDiscoverySearch(item,q.get('q')||''));
+   assert.deepEqual(ids(destination),find(query),query);
+   assert.ok(destination.length,query+' should lead to a populated category');
+  }
+ }
+});
+
+test('Save the Date links and counts use actual video designs, not wedding countdown text',()=>{
+ assert.deepEqual(find('Save the Date'),[]);
+ for(const query of ['Save the Date','save-the-date',' SAVE   THE   DATE '])assert.deepEqual(ids(VIDEO_CATALOG.filter(video=>matchesVideoSearch(video,query))),['film-drive-v1','film-savedate-v1']);
+ assert.deepEqual(ids(VIDEO_CATALOG.filter(video=>matchesVideoSearch(video,'Save the Date Drive'))),['film-drive-v1']);
+ assert.equal(matchesVideoSearch({id:'film-tirumanam-v1',name:'Tamil Wedding'},'Tamil'),true);
+});

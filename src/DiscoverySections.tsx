@@ -3,6 +3,8 @@ import {useState} from 'react';
 import {ArrowRight,X} from 'lucide-react';
 import categoryImages from '../public/assets/categories/sources.json';
 import type {shopCard} from './shop';
+import {discoveryHref,matchesDiscoverySearch,matchesVideoSearch} from '../shared/discovery-taxonomy.mjs';
+import {useVideoCatalog} from './video/catalog';
 import './discovery-sections.css';
 
 type Card=ReturnType<typeof shopCard>;
@@ -10,6 +12,7 @@ type Card=ReturnType<typeof shopCard>;
 const PINS_PROMOTION_ENABLED=false;
 
 export function BrowseCategories({cards,loading}:{cards:Card[];loading:boolean}){
+ const videos=useVideoCatalog();
  return <section className="dc-categories" aria-labelledby="dc-category-title">
   <header className="dc-category-header">
    <h2 id="dc-category-title">Browse categories</h2>
@@ -17,17 +20,15 @@ export function BrowseCategories({cards,loading}:{cards:Card[];loading:boolean})
   </header>
   <div className="dc-category-scroller">
    {categoryImages.map(category=>{
-    const isTradition=['christian','hindu','muslim'].includes(category.id);
-    const isIllustration=['pixar','toon','save-the-date'].includes(category.id);
-    const query=category.id==='save-the-date'?'Save the Date':category.id;
-    const count=cards.filter(card=>isIllustration
-     ? [card.name,card.description,card.tradition,card.setting,card.kind].join(' ').toLowerCase().includes(query.toLowerCase())
-     : (isTradition?card.tradition:card.setting)===category.id).length;
-    const href='/templates?'+(isTradition?'tradition=':isIllustration?'q=':'setting=')+encodeURIComponent(query);
-    return <a className="dc-category-card" key={category.id} href={href} aria-label={`Browse ${category.label}${loading?'':`, ${count} invitations`}`}>
+    const isVideo=category.id==='save-the-date';
+    const count=isVideo?videos.entries.filter(video=>matchesVideoSearch(video,category.id)).length:cards.filter(card=>matchesDiscoverySearch(card,category.id)).length;
+    const pending=isVideo?videos.loading:loading;
+    const unavailable=isVideo&&videos.error;
+    const href=discoveryHref(category.id);
+    return <a className="dc-category-card" key={category.id} href={href} aria-label={`Browse ${category.label}${pending||unavailable?'':`, ${count} invitations`}`}>
      <span className="dc-category-thumb" style={{backgroundImage:`url(${category.backgroundImage})`,backgroundColor:category.backgroundColor,backgroundBlendMode:category.backgroundBlend}}>
       <img src={category.image} loading="lazy" srcSet={Object.entries((posters as Record<string,Record<string,string>>)[category.image]||{}).map(([w,url])=>url+' '+w+'w').join(',')} sizes="(max-width:600px) 160px, 240px" alt="" width={640} height={400} decoding="async"/>
-      <span className="dc-category-count">{loading?'…':count} invitations</span>
+      <span className="dc-category-count">{unavailable?'Browse videos':`${pending?'…':count} invitations`}</span>
      </span>
      <strong className="dc-category-name">{category.label}</strong>
     </a>;
