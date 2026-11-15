@@ -81,5 +81,32 @@
         }
       }
     }
+  },
+  "functionPackaging": {
+    "initialDeployment": "dpl_BXehgmEdk9EzNvviJFV6zHDgbuGv",
+    "initialFailure": "Vercel function packaging OOM after successful frontend build",
+    "fix": "Narrow the statically traced asset prefix to public/assets/music-library",
+    "trace": {
+      "before": {
+        "publicFiles": 5909,
+        "bytes": 1822713905,
+        "examples": [
+          "public\\robots.txt",
+          "public\\sitemap.xml",
+          "public\\llm.txt",
+          "public\\studio\\royal-sanctuary.defaults.json"
+        ]
+      },
+      "after": {
+        "publicFiles": 3,
+        "bytes": 14823448,
+        "examples": [
+          "public\\assets\\music-library\\LICENSE.md",
+          "public\\assets\\music-library\\heartwarming.mp3",
+          "public\\assets\\music-library\\canon-in-d.mp3"
+        ]
+      }
+    },
+    "affectedTestsRechecked": 19
   }
 }

@@ -25,7 +25,8 @@ export async function pinVideoLibraryMusic(id,store,{lookup=musicTrack,readAsset
  let bytes;
  if(track.asset){
   if(!/^\/assets\/music-library\/[a-zA-Z0-9][a-zA-Z0-9._/-]*\.(mp3|m4a|ogg)$/.test(track.asset)||track.asset.includes('..'))throw new HttpError(400,'Music is unavailable.');
-  bytes=await readAsset(new URL('../public'+track.asset,import.meta.url));
+  // Keep file tracing inside the music directory instead of globbing all public media.
+  bytes=await readAsset(new URL('../public/assets/music-library/'+track.asset.slice('/assets/music-library/'.length),import.meta.url));
  }else{
   if(!/^website-music\/[a-f0-9-]{36}$/.test(track.objectPath||''))throw new HttpError(400,'Music is unavailable.');
   const result=await blob(track.objectPath,{access:'private'});
