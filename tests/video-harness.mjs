@@ -10,10 +10,10 @@ export const QA_OTHER='33333333-3333-4333-8333-333333333333';
 export const QA_PROMO='VIDEO-E2E-PRIVATE';
 function billingFixture(){const rows=new Map();return async(req,res)=>{
  const url=new URL(req.url,'http://localhost');
- if(url.pathname==='/rest/v1/rpc/fmi_reserve_video_invitation'){
+ if(url.pathname==='/rest/v1/rpc/fmi_reserve_video_invitation_v2'){
   let raw='';for await(const c of req)raw+=c;const b=JSON.parse(raw),old=rows.get(b.p_id);
   if(old&&(old.owner_id!==b.p_owner||old.template_id!==b.p_template)){res.statusCode=409;res.end('{}');return true;}
-  if(!old)rows.set(b.p_id,{id:b.p_id,owner_id:b.p_owner,template_id:b.p_template,status:'pending',total_paise:29900});
+  if(!old)rows.set(b.p_id,{id:b.p_id,owner_id:b.p_owner,template_id:b.p_template,status:'pending',total_paise:58882,base_paise:49900,tax_bps:1800,tax_paise:8982});
   res.end(JSON.stringify([rows.get(b.p_id)]));return true;
  }
  if(url.pathname==='/rest/v1/video_invitation_orders'){

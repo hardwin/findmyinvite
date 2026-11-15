@@ -38,7 +38,7 @@ for(const mobile of [true,false]){
    return fulfill({jobs,allowances:Object.fromEntries(['groom','bride','couple'].map(slot=>[slot,{initialUsed:jobs.some(j=>j.slot===slot),redoUsed:jobs.some(j=>j.slot===slot&&j.kind==='redo')} ])),coupleNeedsUpdate:false});
   }
   if(u.pathname==='/api/video-personalise'){
-   if(a?.startsWith('payment-')){if(a==='payment-status'&&paymentDelay)await new Promise(r=>setTimeout(r,paymentDelay));if(a==='payment-promo')paid=true;return fulfill({unlocked:paid,status:paid?'complimentary':'pending',amount:paid?0:29900,currency:'INR'});}
+   if(a?.startsWith('payment-')){if(a==='payment-status'&&paymentDelay)await new Promise(r=>setTimeout(r,paymentDelay));if(a==='payment-promo')paid=true;return fulfill({unlocked:paid,status:paid?'complimentary':'pending',amount:paid?0:58882,currency:'INR'});}
    if(a==='reserve'){const id=randomUUID();return fulfill({id,pathname:'fixture/'+id});}
    if(a==='local-upload'){if(failUpload){failUpload=false;return fulfill({error:'Upload interrupted'},503);}const bytes=req.postDataBuffer();media.set(u.searchParams.get('id'),{bytes:bytes||assets.groom,type:bytes?req.headers()['content-type']:'image/png'});return fulfill({ok:true});}
    if(a==='media'){const m=media.get(u.searchParams.get('id'));if(!m)return fulfill({error:'Photo not found'},404);return route.fulfill({status:200,contentType:m.type,body:m.bytes});}

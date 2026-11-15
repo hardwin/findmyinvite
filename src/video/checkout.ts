@@ -1,6 +1,6 @@
 import {loadRazorpay} from '../payments';
 import {videoRequest as templateApi} from './request';
-export type VideoPurchase={invitationId?:string;unlocked:boolean;status:string;amount:number;currency:string;discount:number;configured:boolean};
+export type VideoPurchase={invitationId?:string;unlocked:boolean;status:string;amount:number;currency:string;discount:number;configured:boolean;quote?:{basePaise:number;taxBps:number;taxPaise:number;totalPaise:number;taxLabel:string}|null};
 const API='/api/video-personalise?action=payment-';
 export function videoPurchase(invitationId:string,templateId:string){return templateApi<VideoPurchase>(API+'status&invitationId='+encodeURIComponent(invitationId)+'&templateId='+encodeURIComponent(templateId));}
 export function applyVideoPromo(invitationId:string,templateId:string,code:string){return templateApi<VideoPurchase>(API+'promo',{invitationId,templateId,code});}

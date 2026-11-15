@@ -8,7 +8,7 @@ for(const engine of ['webkit','chromium']){
   if(u.pathname==='/api/auth'&&a==='google-exchange')return send({access_token:'test',refresh_token:'test',expires_in:3600,user:{id:owner,email:'test@example.com'}});
   if(u.pathname==='/api/drafts'){if(a==='save'){saved={...b,owner,revision:b.revision+1,updatedAt:new Date().toISOString()};return send({draft:saved});}if(a==='get')return saved?send({draft:saved}):send({error:'Not yet synced'},404);return send({drafts:cards});}
   if(u.pathname==='/api/video-personalise'){
-   if(a==='payment-status')return send({unlocked:true,status:'captured',amount:29900,currency:'INR'});
+   if(a==='payment-status')return send({unlocked:true,status:'captured',amount:58882,currency:'INR'});
    if(a==='download'){const total=12*1048576,[,lo,hi]=/bytes=(\d+)-(\d+)/.exec(req.headers().range),start=+lo,end=Math.min(+hi,total-1);await new Promise(r=>setTimeout(r,start?2200+start/1048576*50:1300));return route.fulfill({status:206,headers:{'Content-Type':'video/mp4','Content-Range':`bytes ${start}-${end}/${total}`},body:Buffer.alloc(end-start+1,42)});}
    return send(config);
   }return send({});

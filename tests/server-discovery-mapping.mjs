@@ -8,6 +8,7 @@ import {payanamTemplate} from '../shared/kalyana-payanam-template.mjs';
 import {cinorevDesigns} from '../shared/cinorev-templates.mjs';
 import {VIDEO_CATALOG} from '../shared/video-catalog.mjs';
 import {discoveryTaxonomy,discoveryMetadata,discoveryHref,matchesDiscoverySearch,matchesVideoSearch} from '../shared/discovery-taxonomy.mjs';
+import {browseCategories} from '../shared/discovery-categories.mjs';
 const json=path=>JSON.parse(readFileSync(new URL(path,import.meta.url),'utf8'));
 // flagshipTemplates also registers Lace & Pearls and the five Digital Yes designs.
 const websites=[...flagshipTemplates,theeramTemplate,thiruvarulTemplate,payanamTemplate,...cinorevDesigns];
@@ -97,4 +98,22 @@ test('Save the Date links and counts use actual video designs, not wedding count
  for(const query of ['Save the Date','save-the-date',' SAVE   THE   DATE '])assert.deepEqual(ids(VIDEO_CATALOG.filter(video=>matchesVideoSearch(video,query))),['film-drive-v1','film-savedate-v1']);
  assert.deepEqual(ids(VIDEO_CATALOG.filter(video=>matchesVideoSearch(video,'Save the Date Drive'))),['film-drive-v1']);
  assert.equal(matchesVideoSearch({id:'film-tirumanam-v1',name:'Tamil Wedding'},'Tamil'),true);
+});
+
+test('homepage categories preserve format and occasion, including empty collections',()=>{
+ for(const category of browseCategories){
+  const url=new URL(discoveryHref(category.query,category.kind),'https://findmyinvite.com');
+  assert.equal(url.searchParams.get('kind'),category.kind,category.label);
+  const entries=category.kind==='video'?VIDEO_CATALOG:websites;
+  const matches=category.kind==='video'?matchesVideoSearch:matchesDiscoverySearch;
+  assert.deepEqual(ids(entries.filter(t=>matches(t,url.searchParams.get('q')||''))),ids(entries.filter(t=>matches(t,category.query))),category.label);
+ }
+ const videoIds=query=>ids(VIDEO_CATALOG.filter(t=>matchesVideoSearch(t,query)));
+ assert.deepEqual(videoIds('Birthday'),['film-ilavarasi-v1','film-rajakumaran-v1','film-rajakumari-v1']);
+ assert.deepEqual(videoIds('Housewarming'),['film-velicham-v1']);
+ assert.deepEqual(videoIds('Engagement'),['film-walk-v1']);
+ assert.equal(videoIds('Wedding').length,34);
+ assert.deepEqual(videoIds('Baby Shower'),[]);
+ assert.deepEqual(videoIds('Ear Piercing'),[]);
+ assert.equal(matchesVideoSearch({id:'unreviewed-video',name:'New design'},'Wedding'),false);
 });

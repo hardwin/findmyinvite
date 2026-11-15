@@ -1,11 +1,12 @@
 import {websiteQuote} from '../shared/template-contract.mjs';
+import {videoQuote} from '../shared/video-pricing.mjs';
 import {createHmac,timingSafeEqual} from 'node:crypto';
 import {db,HttpError,databaseConfigured} from './core.mjs';
 
 export const PAYMENT_SKUS={
  'website-classic':{amount:websiteQuote(1800).totalPaise,label:'Wedding website'},
  'website-royal':{amount:websiteQuote(1800).totalPaise,label:'Wedding website'},
- 'video-royal':{amount:websiteQuote(1800).totalPaise,label:'Wedding invitation video'}
+ 'video-royal':{amount:videoQuote().totalPaise,label:'Wedding invitation video'}
 };
 
 function cleanSecret(value){

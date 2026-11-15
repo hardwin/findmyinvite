@@ -1,7 +1,7 @@
 import {createHash,randomUUID,timingSafeEqual} from 'node:crypto';
 import {db,HttpError} from './core.mjs';
 import {createRazorpayOrder,paymentsConfigured,publicKeyId,razorpayAuth,verifyCheckoutSignature} from './payments.mjs';
-import {VIDEO_PRICE_PAISE,VIDEO_CURRENCY} from '../shared/video-pricing.mjs';
+import {videoQuote,VIDEO_CURRENCY} from '../shared/video-pricing.mjs';
 
 const table='video_invitation_orders';
 const uuid=/^[a-f0-9]{8}-[a-f0-9]{4}-[1-5][a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/i;
@@ -11,9 +11,14 @@ export function validVideoPromo(code,env=process.env){
  const expected=String(env.VIDEO_TEST_PROMO_SHA256||'').trim();
  return typeof code==='string'&&code.trim().length>=8&&code.length<=100&&/^[a-f0-9]{64}$/.test(expected)&&timingSafeEqual(Buffer.from(promoDigest(code),'hex'),Buffer.from(expected,'hex'));
 }
-export function videoPrice(env=process.env){return {amount:VIDEO_PRICE_PAISE,currency:VIDEO_CURRENCY,configured:paymentsConfigured(env)};}
+export function videoPrice(env=process.env){const quote=videoQuote();return {amount:quote.totalPaise,quote,currency:VIDEO_CURRENCY,configured:paymentsConfigured(env)};}
 const unlocked=row=>['captured','complimentary'].includes(row?.status);
-function publicPurchase(row,env){return {...videoPrice(env),invitationId:row?.id,unlocked:unlocked(row),status:row?.status||'pending',discount:row?.status==='complimentary'?VIDEO_PRICE_PAISE:0};}
+function publicPurchase(row,env){
+ const price=videoPrice(env),reserved=row&&(row.razorpay_order_id||unlocked(row));
+ const amount=reserved?row.total_paise:price.amount;
+ const quote=reserved?(row.base_paise!=null?{basePaise:row.base_paise,taxBps:row.tax_bps,taxPaise:row.tax_paise,totalPaise:amount,taxLabel:'GST',currency:VIDEO_CURRENCY}:null):price.quote;
+ return {...price,amount,quote,invitationId:row?.id,unlocked:unlocked(row),status:row?.status||'pending',discount:row?.status==='complimentary'?amount:0};
+}
 
 export function videoPaymentStore(query=db){
  const one=async(path,options)=>(await query(path,options))?.[0]||null;
@@ -21,7 +26,7 @@ export function videoPaymentStore(query=db){
   get:id=>one(table+'?id=eq.'+encodeURIComponent(id)+'&select=*'),
   byOrder:id=>one(table+'?razorpay_order_id=eq.'+encodeURIComponent(id)+'&select=*'),
   byPayment:id=>one(table+'?razorpay_payment_id=eq.'+encodeURIComponent(id)+'&select=*'),
-  reserve:(id,owner,template)=>one('rpc/fmi_reserve_video_invitation',{method:'POST',body:{p_id:id,p_owner:owner,p_template:template}}),
+  reserve:(id,owner,template)=>one('rpc/fmi_reserve_video_invitation_v2',{method:'POST',body:{p_id:id,p_owner:owner,p_template:template}}),
   patch:(id,patch,filter='')=>one(table+'?id=eq.'+encodeURIComponent(id)+filter,{method:'PATCH',headers:{Prefer:'return=representation'},body:patch})
  };
 }
@@ -42,7 +47,7 @@ export function videoPaymentService({store=videoPaymentStore(),env=process.env,n
   if(!row&&uuid.test(recoveryId||''))row=await store.get(recoveryId);
   if(!row)return null;
   const payment=await gateway.get('payments/'+paymentId);
-  if(payment.id!==paymentId||payment.order_id!==orderId||payment.amount!==VIDEO_PRICE_PAISE||payment.currency!==VIDEO_CURRENCY)throw new HttpError(409,'The payment does not match this invitation.');
+  if(payment.id!==paymentId||payment.order_id!==orderId||payment.amount!==row.total_paise||payment.currency!==VIDEO_CURRENCY)throw new HttpError(409,'The payment does not match this invitation.');
   if(row.razorpay_order_id&&row.razorpay_order_id!==orderId||!row.razorpay_order_id&&(payment.notes?.videoInvitationId!==row.id||payment.notes?.checkoutToken!==row.checkout_token||payment.notes?.ownerId!==row.owner_id))throw new HttpError(409,'The payment does not match this invitation.');
   if(row.razorpay_payment_id&&row.razorpay_payment_id!==paymentId)throw new HttpError(409,'A different payment already belongs to this invitation.');
   if(payment.amount_refunded>0||payment.status==='refunded'){
@@ -66,7 +71,7 @@ export function videoPaymentService({store=videoPaymentStore(),env=process.env,n
  async function status(owner,id,template){return publicPurchase(await recover(await owned(owner,id,template)),env);}
  async function requireAccess(owner,id,template){
   const row=await owned(owner,id,template);
-  if(!unlocked(row))throw new HttpError(402,'Pay ₹299 or apply a valid promo code to create this invitation.');
+  if(!unlocked(row))throw new HttpError(402,`Pay ₹${videoQuote().totalPaise/100} including GST, or apply a valid promo code to create this invitation.`);
   return row;
  }
  async function promo(owner,id,template,code){
@@ -83,11 +88,12 @@ export function videoPaymentService({store=videoPaymentStore(),env=process.env,n
   if(!paymentsConfigured(env))throw new HttpError(503,'Checkout is temporarily unavailable. Your draft is saved.');
   if(!row.razorpay_order_id){
    const token=randomUUID(),time=new Date(now()).toISOString(),before=encodeURIComponent(new Date(now()-120000).toISOString());
-   const claimed=await store.patch(row.id,{checkout_token:token,checkout_started_at:time},'&status=eq.pending&razorpay_order_id=is.null&or=(checkout_started_at.is.null,checkout_started_at.lt.'+before+')');
+   const quote=videoQuote();
+   const claimed=await store.patch(row.id,{checkout_token:token,checkout_started_at:time,total_paise:quote.totalPaise,base_paise:quote.basePaise,tax_bps:quote.taxBps,tax_paise:quote.taxPaise},'&status=eq.pending&razorpay_order_id=is.null&or=(checkout_started_at.is.null,checkout_started_at.lt.'+before+')');
    if(!claimed)throw new HttpError(409,'Checkout is already opening. Please wait a moment and try again.');
    // A claim prevents simultaneous tabs creating separate payable orders.
-   const created=await gateway.create({amount:VIDEO_PRICE_PAISE,currency:VIDEO_CURRENCY,receipt:'v-'+token,notes:{kind:'video-personalise',videoInvitationId:row.id,ownerId:owner,checkoutToken:token,templateId:template}});
-   if(!/^order_[A-Za-z0-9]+$/.test(created.id||'')||created.amount!==VIDEO_PRICE_PAISE||created.currency!==VIDEO_CURRENCY)throw new HttpError(503,'Checkout could not be verified. Please retry shortly.');
+   const created=await gateway.create({amount:quote.totalPaise,currency:VIDEO_CURRENCY,receipt:'v-'+token,notes:{kind:'video-personalise',videoInvitationId:row.id,ownerId:owner,checkoutToken:token,templateId:template}});
+   if(!/^order_[A-Za-z0-9]+$/.test(created.id||'')||created.amount!==quote.totalPaise||created.currency!==VIDEO_CURRENCY)throw new HttpError(503,'Checkout could not be verified. Please retry shortly.');
    row=await store.patch(row.id,{razorpay_order_id:created.id},'&checkout_token=eq.'+token)||await owned(owner,id,template);
   }
   return {...publicPurchase(row,env),keyId:publicKeyId(env),orderId:row.razorpay_order_id};

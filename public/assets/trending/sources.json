@@ -1,12 +1,17 @@
 [
   {
-    "label": "Royal",
-    "image": "/assets/shop-cat-premium.png",
+    "label": "Save the Date",
+    "image": "/assets/shop-cat-save-the-date.png",
     "source": "Existing project artwork"
   },
   {
-    "label": "Floral",
-    "image": "/assets/catalogue/v1/royal-heritage-9.webp",
+    "label": "Christian",
+    "image": "/assets/categories/indian-christian-couple.png",
+    "source": "User-supplied couple artwork"
+  },
+  {
+    "label": "Temple",
+    "image": "/assets/royal-sanctuary/0746f651bbbdcaf6.jpg",
     "source": "Existing project artwork"
   },
   {
@@ -15,23 +20,13 @@
     "source": "Existing project artwork"
   },
   {
-    "label": "Garden",
-    "image": "/assets/catalogue/v1/royal-prestige-2.webp",
-    "source": "Existing project artwork"
-  },
-  {
-    "label": "Gold",
-    "image": "/assets/categories/kerala-hindu-couple.png",
-    "source": "User-supplied couple artwork"
-  },
-  {
     "label": "Minimal",
     "image": "/assets/eaaba0b5d7aeba99.jpg",
     "source": "Existing project artwork"
   },
   {
-    "label": "Temple",
-    "image": "/assets/royal-sanctuary/0746f651bbbdcaf6.jpg",
+    "label": "Royal",
+    "image": "/assets/shop-cat-premium.png",
     "source": "Existing project artwork"
   },
   {
@@ -40,8 +35,8 @@
     "source": "Existing project artwork"
   },
   {
-    "label": "Save the Date",
-    "image": "/assets/shop-cat-save-the-date.png",
+    "label": "Floral",
+    "image": "/assets/catalogue/v1/royal-heritage-9.webp",
     "source": "Existing project artwork"
   },
   {
@@ -55,8 +50,13 @@
     "source": "Existing project artwork"
   },
   {
-    "label": "Christian",
-    "image": "/assets/categories/indian-christian-couple.png",
+    "label": "Gold",
+    "image": "/assets/categories/kerala-hindu-couple.png",
     "source": "User-supplied couple artwork"
+  },
+  {
+    "label": "Garden",
+    "image": "/assets/catalogue/v1/royal-prestige-2.webp",
+    "source": "Existing project artwork"
   }
 ]

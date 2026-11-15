@@ -329,3 +329,5 @@ html.vp-editor-open, .vp-editor-open body { overflow: hidden; overscroll-behavio
 
 .vp-pip-controls svg { width: 14px; height: 14px; }
 .vp-form-body:has(:focus) { overflow-anchor: none; }
+
+.vp-price-breakdown{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 16px;margin:0 0 12px;font-size:13px}.vp-price-breakdown strong{font-size:16px}

@@ -14,7 +14,7 @@ export type CharacterReferences=Partial<Record<Slot,Reference>>;
 type Job={id:string;slot:string;kind:string;status:string;approved:boolean;mediaId?:string;error?:string};
 type State={jobs:Job[];allowances:Record<string,{initialUsed:boolean;redoUsed:boolean}>;coupleNeedsUpdate:boolean};
 export type CharacterStatus={ready:boolean;busy:boolean;message?:string};
-type Props={onAction:(action:EditorAction|null)=>void;onStatus:(status:CharacterStatus)=>void;onUnlock:()=>Promise<void>;paymentBusy:boolean;invitationId:string;draftSaved:boolean;references:CharacterReferences;unlocked:boolean;localUploads:boolean;save:()=>Promise<void>;saveReferences:(r:CharacterReferences)=>Promise<void>;approve:(job:Job)=>Promise<void>;preview:(slot:string,id:string)=>Promise<void>};
+type Props={onAction:(action:EditorAction|null)=>void;onStatus:(status:CharacterStatus)=>void;onUnlock:()=>Promise<void>;paymentBusy:boolean;invitationId:string;draftSaved:boolean;references:CharacterReferences;unlocked:boolean;amount:number;localUploads:boolean;save:()=>Promise<void>;saveReferences:(r:CharacterReferences)=>Promise<void>;approve:(job:Job)=>Promise<void>;preview:(slot:string,id:string)=>Promise<void>};
 const API='/api/video-characters',active=['queued','submitting','processing','preparing'],slots:Slot[]=['groom','bride','couple'];
 const labels={groom:'Groom',bride:'Bride',couple:'Couple'};
 function Photo({id,localId,alt}:{id?:string;localId?:string;alt:string}){
@@ -23,7 +23,7 @@ function Photo({id,localId,alt}:{id?:string;localId?:string;alt:string}){
  useEditorIssue('photo-'+(id||localId||alt),error?'This photo is unavailable. Please select it again.':'');
  return url?<img src={url} alt={alt}/>:<ImagePlus aria-label={error?'Select photo again':'Loading photo'} size={24}/>;
 }
-export function CharacterPanel({onAction,onStatus,onUnlock,paymentBusy,invitationId,draftSaved,references,unlocked,localUploads,save,saveReferences,approve,preview}:Props){
+export function CharacterPanel({onAction,onStatus,onUnlock,paymentBusy,invitationId,draftSaved,references,unlocked,amount,localUploads,save,saveReferences,approve,preview}:Props){
  const [state,setState]=useState<State>({jobs:[],allowances:{},coupleNeedsUpdate:false}),[loaded,setLoaded]=useState(false),[busy,setBusy]=useState(false),[message,setMessage]=useState(''),[error,setError]=useState(''),[loadError,setLoadError]=useState(''),[attempt,setAttempt]=useState(0);
  const lock=useRef(false),live=useRef(true),inputs=useRef<Partial<Record<Slot,HTMLInputElement|null>>>({});
  useEffect(()=>{live.current=true;return()=>{live.current=false;};},[]);
@@ -71,7 +71,7 @@ export function CharacterPanel({onAction,onStatus,onUnlock,paymentBusy,invitatio
  else if(error)action={label:'Try again',reason:error,run:()=>{setError('');setAttempt(n=>n+1);}};
  else if(loadError)action={label:'Try again',reason:'Your photos could not load.',run:()=>{setLoadError('');setAttempt(n=>n+1);}};
  else if(!complete&&!referencesReady)action={label:'Add photos',reason:'Add separate photos or one couple photo.',run:focusPhotos};
- else if(!unlocked)action={label:'Pay ₹299',reason:'',run:onUnlock};
+ else if(!unlocked)action={label:`Pay ₹${amount/100}`,reason:'',run:onUnlock};
  else if(!loaded)action={label:'Continue',reason:'Loading your photos…',disabled:draftSaved,run:()=>run(save)};
  else if(failed)action={label:'Retry characters',reason:'The last attempt did not finish.',run:()=>run(async()=>{await request(API+'?action=retry',{id:failed.id});await refresh();},'Retrying your characters…')};
  else if(needed.length)action={label:'Create my characters',reason:'',run:()=>run(async()=>{for(const slot of needed)await submit(slot);},'Starting your characters…')};

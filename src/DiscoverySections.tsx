@@ -4,6 +4,7 @@ import {ArrowRight,X} from 'lucide-react';
 import categoryImages from '../public/assets/categories/sources.json';
 import type {shopCard} from './shop';
 import {discoveryHref,matchesDiscoverySearch,matchesVideoSearch} from '../shared/discovery-taxonomy.mjs';
+import {browseCategories} from '../shared/discovery-categories.mjs';
 import {useVideoCatalog} from './video/catalog';
 import './discovery-sections.css';
 
@@ -19,15 +20,16 @@ export function BrowseCategories({cards,loading}:{cards:Card[];loading:boolean})
    <a href="/templates">All invitations <span aria-hidden="true">↗</span></a>
   </header>
   <div className="dc-category-scroller">
-   {categoryImages.map(category=>{
-    const isVideo=category.id==='save-the-date';
-    const count=isVideo?videos.entries.filter(video=>matchesVideoSearch(video,category.id)).length:cards.filter(card=>matchesDiscoverySearch(card,category.id)).length;
+   {browseCategories.map(category=>{
+    const artwork=categoryImages.find(image=>image.id===category.art)!;
+    const isVideo=category.kind==='video';
+    const count=isVideo?videos.entries.filter(video=>matchesVideoSearch(video,category.query)).length:cards.filter(card=>card.kind==='website'&&matchesDiscoverySearch(card,category.query)).length;
     const pending=isVideo?videos.loading:loading;
     const unavailable=isVideo&&videos.error;
-    const href=discoveryHref(category.id);
+    const href=discoveryHref(category.query,category.kind);
     return <a className="dc-category-card" key={category.id} href={href} aria-label={`Browse ${category.label}${pending||unavailable?'':`, ${count} invitations`}`}>
-     <span className="dc-category-thumb" style={{backgroundImage:`url(${category.backgroundImage})`,backgroundColor:category.backgroundColor,backgroundBlendMode:category.backgroundBlend}}>
-      <img src={category.image} loading="lazy" srcSet={Object.entries((posters as Record<string,Record<string,string>>)[category.image]||{}).map(([w,url])=>url+' '+w+'w').join(',')} sizes="(max-width:600px) 160px, 240px" alt="" width={640} height={400} decoding="async"/>
+     <span className="dc-category-thumb" style={{backgroundImage:`url(${artwork.backgroundImage})`,backgroundColor:artwork.backgroundColor,backgroundBlendMode:artwork.backgroundBlend}}>
+      <img src={artwork.image} loading="lazy" srcSet={Object.entries((posters as Record<string,Record<string,string>>)[artwork.image]||{}).map(([w,url])=>url+' '+w+'w').join(',')} sizes="(max-width:600px) 160px, 240px" alt="" width={640} height={400} decoding="async"/>
       <span className="dc-category-count">{unavailable?'Browse videos':`${pending?'…':count} invitations`}</span>
      </span>
      <strong className="dc-category-name">{category.label}</strong>

@@ -38,6 +38,9 @@ const tagAliases={floral:'floral',flowers:'floral',flower:'floral',pixar:'3d','p
 const paletteNames=new Set(['ivory','sage','burgundy','gold','navy','blush']);
 const occasionAliases={wedding:'wedding',weddings:'wedding',nikah:'nikah',walima:'walima',engagement:'engagement',reception:'reception',birthday:'birthday',housewarming:'housewarming',babyshower:'baby-shower'};
 const saveTheDateIds=new Set(['film-drive-v1','film-savedate-v1']);
+// Reviewed against each video's authored form, rather than guessing from its display name.
+const weddingVideoIds=new Set(['temple-v1','kerala-christian-v1',...'drive temple vector garden tiles bollywood truckart kovil royal kerala veedu walk kurinji valli aranmanai gettimelam kondattam mandapam thottam jannal poonga roja malligai gopuram theppam chettinad kalyana avalum thamarai savedate kulam karaikudi hopon oonjal'.split(' ').map(id=>`film-${id}-v1`)]);
+const birthdayVideoIds=new Set(['film-rajakumari-v1','film-rajakumaran-v1','film-ilavarasi-v1']);
 const lookup=(values,key)=>Object.hasOwn(values,key)?values[key]:undefined;
 
 export function normalizeDiscoverySearch(value=''){
@@ -80,18 +83,22 @@ export function discoverySearchKind(value=''){
  return /^save the date(?: |$)/.test(normalizeDiscoverySearch(value))?'video':'website';
 }
 
-export function discoveryHref(value){
+export function discoveryHref(value,kind=discoverySearchKind(value)){
  const key=normalizeDiscoverySearch(value);
  const params=new URLSearchParams();
- params.set('kind',discoverySearchKind(value));
+ params.set('kind',kind);
  if(lookup(traditionAliases,key))params.set('tradition',lookup(traditionAliases,key));
  else if(lookup(settingAliases,key))params.set('setting',lookup(settingAliases,key));
- else params.set('q',key==='save the date'?'Save the Date':lookup(tagAliases,key)||key);
+ else if(key)params.set('q',key==='save the date'?'Save the Date':lookup(tagAliases,key)||key);
  return '/templates?'+params.toString();
 }
 
 export function matchesVideoSearch(template,query=''){
  const q=normalizeDiscoverySearch(query);
  if(q==='save the date')return saveTheDateIds.has(template.id);
+ if(q==='wedding'||q==='weddings')return weddingVideoIds.has(template.id);
+ if(q==='birthday'||q==='kids birthday')return birthdayVideoIds.has(template.id);
+ if(q==='housewarming')return template.id==='film-velicham-v1';
+ if(q==='engagement')return template.id==='film-walk-v1';
  return !q||normalizeDiscoverySearch(template.name+' '+template.id).includes(q);
 }
