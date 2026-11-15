@@ -15,12 +15,13 @@ export default function CatalogSoundtrack({entry,videoRef,audioRef}:{entry:Video
   audio.volume=video.volume*Math.min(1,time,Math.max(0,(entry.duration-time)/3));
  }
  useEffect(()=>{const audio=audioRef.current,video=videoRef.current;if(!audio||!video)return;
+  if(entry.music&&audio.getAttribute('src')!==entry.music.url)audio.src=entry.music.url;
   const pause=()=>audio.pause();
   const play=()=>{sync();if(!previewMuted()&&(repeat||!Number.isFinite(audio.duration)||video.currentTime<audio.duration))void audio.play().catch(e=>{if(audio.isConnected&&e.name!=='AbortError')setPreviewMuted(true);});};
   const unwatch=watchMusic(audio,()=>video.pause()),timer=setInterval(sync,200);
   video.addEventListener('playing',play);video.addEventListener('pause',pause);video.addEventListener('waiting',pause);video.addEventListener('seeking',sync);
   return()=>{clearInterval(timer);unwatch();video.removeEventListener('playing',play);video.removeEventListener('pause',pause);video.removeEventListener('waiting',pause);video.removeEventListener('seeking',sync);audio.pause();audio.removeAttribute('src');audio.load();};
- },[videoRef,audioRef,repeat,entry.duration]);
+ },[videoRef,audioRef,repeat,entry.duration,entry.music?.url]);
  useEffect(()=>{const audio=audioRef.current,video=videoRef.current;if(!audio||!video)return;if(muted||video.paused)audio.pause();else void audio.play().catch(e=>{if(audio.isConnected&&e.name!=='AbortError')setPreviewMuted(true);});},[muted,audioRef,videoRef]);
  return <audio ref={audioRef} src={entry.music?.url} preload="none" loop={repeat} onLoadedMetadata={sync} onPlay={e=>claimMusic(e.currentTarget)} onError={()=>setPreviewMuted(true)}/>;
 }

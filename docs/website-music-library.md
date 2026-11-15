@@ -23,22 +23,23 @@ rest of the form. Existing custom recordings remain supported.
 
 Video forms use this same picker. A new video draft starts with its assigned
 track; a saved draft retains its own selection, including the older `canon`
-identifier. Catalog videos stay muted until Sound is tapped. Their soundtrack
-starts at the displayed video time, fades in/out like the export, and stops
+identifier. Catalog videos start only after Play or Expand is tapped and honour
+the saved mute preference. Their soundtrack follows the displayed video time,
+fades in/out like the export, and stops
 when the preview is stopped, replaced, hidden or scrolled offscreen. Catalog
-cards mount no audio/video before Play and do not request music before Sound.
+cards mount no audio/video before Play. Muted recordings use preload=none.
+Expanding and closing the fullscreen preview retain the same media elements.
 
 The source audit identified silent backgrounds for Bells & Blessings,
 Theeram and Thiruvarul. Their new default is silence unless the owner explicitly
 assigns a track. Bells & Blessings retains its interactive synthesized bell.
 Stored customer selections are unchanged.
 
-Homepage card previews, product details, full previews and guest invitations
-use the same icon-only music control. Playback is attempted automatically;
-when browser autoplay policy requires a gesture, the first interaction starts
-it. Embedded invitation interactions also unlock the soundtrack. Muting lasts
-for that mounted player, and starting another player in the same page stops
-the earlier one. No native audio timeline is displayed on guest invitations.
+Website players retain their existing music controls and browser gesture
+requirements. Catalog playback remains on demand, and the existing shared mute
+preference is preserved across navigation. Starting another player in the same
+page stops the earlier one. No native audio timeline is displayed on guest
+invitations.
 
 ## Storage and endpoints
 

@@ -1,13 +1,24 @@
 {
   "scope": "Shared licensed music infrastructure; original reference recordings remain unimported",
   "observedAt": "2026-11-15",
-  "tests": 86,
-  "build": "passed before integrating later storefront commits",
+  "tests": 108,
+  "build": "Passed TypeScript and Vite production build after integrating storefront commits",
   "browser": {
     "desktop": true,
     "mobileViewport": "390x844",
     "physicalIPhone": false,
-    "nativeEdge": false
+    "nativeEdge": false,
+    "engine": "Chromium in-app browser",
+    "checks": [
+      "No media before Play",
+      "Selected library track plays with video",
+      "Fullscreen retains playback position",
+      "Mute preference survives reload",
+      "Filter change releases media",
+      "Music-only draft edits persist after reload",
+      "Shared picker fits 390px viewport"
+    ],
+    "offscreen": "Pre-merge cleanup passed; final filtered-card check remained partially in view, so no new offscreen result is claimed"
   },
   "scene": {
     "previousSnapshot": "snap_Ii80lDDzUDxeNmIjhfQNhCeA46Dl",
