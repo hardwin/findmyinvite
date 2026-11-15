@@ -1,7 +1,7 @@
 {
-  "observedAt": "2026-11-15T16:49:56.275Z",
+  "observedAt": "2026-11-15T18:08:32.532Z",
   "scope": "22 Cinorev/Cards for Knots websites, 38 added videos, legacy Temple video",
-  "releaseStatus": "Source identification only. No source recording imported or rights confirmation fabricated.",
+  "releaseStatus": "Original recordings verified and prepared for production; owner manages recording rights outside the application.",
   "websites": [
     {
       "id": "midnight-stage",
@@ -10,7 +10,13 @@
       "observation": "Looping audio element",
       "sourceAudio": "https://cinorev.in/advait-kiara/music.m4a",
       "loop": true,
-      "status": "identified; reuse permission not recorded; not imported"
+      "status": "imported; SHA-256 readback verified",
+      "importedFrom": "https://cinorev.in/advait-kiara/music.m4a",
+      "trackId": "53838672-b62a-4179-95c0-2cc283bd8831",
+      "sha256": "b33b61a84407611b49d4e9f1d1e12706376b52e2b8eaf2741ad9cda868a11bee",
+      "bytes": 478472,
+      "duration": 29.5,
+      "processing": "Original recording, unchanged."
     },
     {
       "id": "little-blessing",
@@ -19,7 +25,13 @@
       "observation": "Looping audio element",
       "sourceAudio": "https://cinorev.in/varun-riya/music.m4a",
       "loop": true,
-      "status": "identified; reuse permission not recorded; not imported"
+      "status": "imported; SHA-256 readback verified",
+      "importedFrom": "https://cinorev.in/varun-riya/music.m4a",
+      "trackId": "03d2700a-f3dc-460b-beac-521a1de24e8d",
+      "sha256": "973875c02298bde13a14a082660e754df6ac88c54acc3c174b884b36b4ccb81e",
+      "bytes": 542677,
+      "duration": 33.3,
+      "processing": "Original recording, unchanged."
     },
     {
       "id": "noir-and-gold",
@@ -28,7 +40,13 @@
       "observation": "Looping audio element",
       "sourceAudio": "https://cinorev.in/vivaan-anika/music.m4a",
       "loop": true,
-      "status": "identified; reuse permission not recorded; not imported"
+      "status": "imported; SHA-256 readback verified",
+      "importedFrom": "https://cinorev.in/vivaan-anika/music.m4a",
+      "trackId": "9ec4e19c-6e5a-42bd-8375-ee0c43df795a",
+      "sha256": "db4ff77f4fbae621e0523a540431613cd5f60533cff76f6bf285f70682ee0dbc",
+      "bytes": 385044,
+      "duration": 23.8,
+      "processing": "Original recording, unchanged."
     },
     {
       "id": "golden-hour",
@@ -37,7 +55,13 @@
       "observation": "Looping audio element",
       "sourceAudio": "https://cinorev.in/kabir-myra/music-v2.m4a",
       "loop": true,
-      "status": "identified; reuse permission not recorded; not imported"
+      "status": "imported; SHA-256 readback verified",
+      "importedFrom": "https://cinorev.in/kabir-myra/music-v2.m4a",
+      "trackId": "61c18490-4290-412b-bd57-4dd1120dbda4",
+      "sha256": "b7c5681b2b2849a306c2f43d8e1d45dddbe67833c440216085615965db588c13",
+      "bytes": 1825800,
+      "duration": 111.9,
+      "processing": "Original recording, unchanged."
     },
     {
       "id": "pearl-and-sapphire",
@@ -46,7 +70,13 @@
       "observation": "Looping audio element",
       "sourceAudio": "https://cinorev.in/reyansh-aanya/music.m4a",
       "loop": true,
-      "status": "identified; reuse permission not recorded; not imported"
+      "status": "imported; SHA-256 readback verified",
+      "importedFrom": "https://cinorev.in/reyansh-aanya/music.m4a",
+      "trackId": "61aceca0-88db-4533-8b55-e3bbb541a37e",
+      "sha256": "47dc08b2a355a24c6ed4159ac0bc2899f05d371170fe276e382490628e86b95e",
+      "bytes": 1708218,
+      "duration": 104.9,
+      "processing": "Original recording, unchanged."
     },
     {
       "id": "royal-crimson",
@@ -55,7 +85,13 @@
       "observation": "Looping audio element",
       "sourceAudio": "https://cinorev.in/ayaan-zoya/music.m4a",
       "loop": true,
-      "status": "identified; reuse permission not recorded; not imported"
+      "status": "imported; SHA-256 readback verified",
+      "importedFrom": "https://cinorev.in/ayaan-zoya/music.m4a",
+      "trackId": "ee7a8f60-bc7a-4717-b997-ed2c1af24381",
+      "sha256": "97c5dbbbbaa6e48293968876dbfa6bde652d52206516129dd90fa4fe5fa7a76a",
+      "bytes": 1552251,
+      "duration": 94.59,
+      "processing": "Original recording, unchanged."
     },
     {
       "id": "garden-curtains",
@@ -64,7 +100,13 @@
       "observation": "Looping audio element",
       "sourceAudio": "https://cinorev.in/arhaan-inaya/music.m4a",
       "loop": true,
-      "status": "identified; reuse permission not recorded; not imported"
+      "status": "imported; SHA-256 readback verified",
+      "importedFrom": "https://cinorev.in/arhaan-inaya/music.m4a",
+      "trackId": "ee7a8f60-bc7a-4717-b997-ed2c1af24381",
+      "sha256": "97c5dbbbbaa6e48293968876dbfa6bde652d52206516129dd90fa4fe5fa7a76a",
+      "bytes": 1552251,
+      "duration": 94.59,
+      "processing": "Original recording, unchanged."
     },
     {
       "id": "pulli",
@@ -73,7 +115,7 @@
       "observation": "Looping audio element",
       "sourceAudio": "https://cinorev.in/siddharth-kayal/music.m4a",
       "loop": true,
-      "status": "identified; reuse permission not recorded; not imported"
+      "status": "Skipped at owner request after source recording retrieval failed"
     },
     {
       "id": "pattu",
@@ -82,7 +124,7 @@
       "observation": "Looping audio element",
       "sourceAudio": "https://cinorev.in/pranav-harini/music.m4a",
       "loop": true,
-      "status": "identified; reuse permission not recorded; not imported"
+      "status": "Skipped at owner request after source recording retrieval failed"
     },
     {
       "id": "olai",
@@ -91,7 +133,7 @@
       "observation": "Looping audio element",
       "sourceAudio": "https://cinorev.in/senthil-abirami/music.m4a",
       "loop": true,
-      "status": "identified; reuse permission not recorded; not imported"
+      "status": "Skipped at owner request after source recording retrieval failed"
     },
     {
       "id": "jasmine-arch",
@@ -100,7 +142,7 @@
       "observation": "Looping audio element",
       "sourceAudio": "https://cinorev.in/nikhil-shreya/music.m4a",
       "loop": true,
-      "status": "identified; reuse permission not recorded; not imported"
+      "status": "Skipped at owner request after source recording retrieval failed"
     },
     {
       "id": "palace-of-lights",
@@ -109,7 +151,7 @@
       "observation": "Looping audio element",
       "sourceAudio": "https://cinorev.in/aarav-meher/music.m4a",
       "loop": true,
-      "status": "identified; reuse permission not recorded; not imported"
+      "status": "Skipped at owner request after source recording retrieval failed"
     },
     {
       "id": "the-ring-box",
@@ -118,7 +160,13 @@
       "observation": "Looping audio element",
       "sourceAudio": "https://cinorev.in/rohan-ishita/music.m4a",
       "loop": true,
-      "status": "identified; reuse permission not recorded; not imported"
+      "status": "imported; SHA-256 readback verified",
+      "importedFrom": "https://cinorev.in/rohan-ishita/music.m4a",
+      "trackId": "fcb1ec19-84a9-4452-854e-e9788b1d823e",
+      "sha256": "36c5bc3501441de6deb35b19ad9e97a00ef8579289bd070055c4dbb8a4e5319a",
+      "bytes": 372541,
+      "duration": 24.98,
+      "processing": "Original recording, unchanged."
     },
     {
       "id": "home-sweet-home",
@@ -127,7 +175,13 @@
       "observation": "Looping audio element",
       "sourceAudio": "https://cinorev.in/hari-kavya/music.m4a",
       "loop": true,
-      "status": "identified; reuse permission not recorded; not imported"
+      "status": "imported; SHA-256 readback verified",
+      "importedFrom": "https://cinorev.in/hari-kavya/music.m4a",
+      "trackId": "4236f632-5a6d-45bb-95fe-799fed4bd9d5",
+      "sha256": "315f55494410fb625f0a4884f67af1d44f85f59807a6c4d7ac06fe7fd3054be4",
+      "bytes": 272880,
+      "duration": 16.76,
+      "processing": "Original recording, unchanged."
     },
     {
       "id": "up-and-away",
@@ -136,7 +190,13 @@
       "observation": "Looping audio element",
       "sourceAudio": "https://cinorev.in/diya-turns-one/music.m4a",
       "loop": true,
-      "status": "identified; reuse permission not recorded; not imported"
+      "status": "imported; SHA-256 readback verified",
+      "importedFrom": "https://cinorev.in/diya-turns-one/music.m4a",
+      "trackId": "f188e981-c8d3-43fe-8aee-313b3c6e9fda",
+      "sha256": "36e4da24837b0926deab3567143142d4af6566ad0423d15c06d57c1ae10c4dc1",
+      "bytes": 184453,
+      "duration": 11.273,
+      "processing": "Original recording, unchanged."
     },
     {
       "id": "temple-doors",
@@ -145,7 +205,13 @@
       "observation": "Looping audio element",
       "sourceAudio": "https://cinorev.in/siva-divya/music.m4a",
       "loop": true,
-      "status": "identified; reuse permission not recorded; not imported"
+      "status": "imported; SHA-256 readback verified",
+      "importedFrom": "https://cinorev.in/siva-divya/music.m4a",
+      "trackId": "4f92f01d-9477-4022-ae94-0495b95f637c",
+      "sha256": "5f1d01a3cb409c1d0a9d2ede55f0d699a587820c388e16ac81f27052dd57f5e5",
+      "bytes": 549724,
+      "duration": 46.485,
+      "processing": "Original recording, unchanged."
     },
     {
       "id": "christian-bells",
@@ -163,7 +229,13 @@
       "observation": "Looping audio element",
       "sourceAudio": "https://cinorev.in/karthik-nila/music.m4a",
       "loop": true,
-      "status": "identified; reuse permission not recorded; not imported"
+      "status": "imported; SHA-256 readback verified",
+      "importedFrom": "https://cinorev.in/karthik-nila/music.m4a",
+      "trackId": "af9e02b9-6428-451d-be29-b5e964287237",
+      "sha256": "b8a87f3520ad14bd04c8065c6d234e47b64fd79182ef8ce6fd8f30ac992d6990",
+      "bytes": 436004,
+      "duration": 26.748,
+      "processing": "Original recording, unchanged."
     },
     {
       "id": "moonlit-nikah",
@@ -172,7 +244,13 @@
       "observation": "Looping audio element",
       "sourceAudio": "https://cinorev.in/imran-afrin/music.m4a",
       "loop": true,
-      "status": "identified; reuse permission not recorded; not imported"
+      "status": "imported; SHA-256 readback verified",
+      "importedFrom": "https://cinorev.in/imran-afrin/music.m4a",
+      "trackId": "cde8f255-1eac-4acd-8f12-bfff2d85f602",
+      "sha256": "246cae72aa5dc9a58d8bf8fa239dc7a6c4868962ab052002f4b87a3cc27f656e",
+      "bytes": 382270,
+      "duration": 23.4,
+      "processing": "Original recording, unchanged."
     },
     {
       "id": "theeram",
@@ -196,7 +274,13 @@
       "startSeconds": 91,
       "loopFromSeconds": 91,
       "observation": "DOM audio and source adapter verified after opening the invitation.",
-      "status": "identified; reuse permission not recorded; not imported"
+      "status": "imported; SHA-256 readback verified",
+      "importedFrom": "https://cardsforknots.in/wp-content/plugins/Advanced-smart-invitation-builder/assets/v2/payanam/audio/kiliye.m4a#t=91",
+      "trackId": "2f96d434-1e2d-4711-a5a3-ee723cd6c36a",
+      "sha256": "0cb7990172b8ae2363e7d15f5e4ef16c231ecbf7cb69160f0043c1cb63bcd310",
+      "bytes": 2948474,
+      "duration": 180.652,
+      "processing": "Original recording trimmed to the reference start at 91 seconds."
     }
   ],
   "videos": [
@@ -208,7 +292,7 @@
       "sampleHasSound": false,
       "sampleUrl": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/shop/drive-film.mp4?v=50bb7185",
       "kind": "silent-sample",
-      "status": "no source sample soundtrack"
+      "status": "No audio stream in downloaded source sample; no original recording assigned"
     },
     {
       "id": "film-temple-v1",
@@ -218,8 +302,14 @@
       "sampleHasSound": true,
       "sampleUrl": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/shop/temple-film.mp4?v=6e572dd2",
       "kind": "sample-soundtrack",
-      "status": "reuse permission not recorded; not imported",
-      "note": "Sample has sound; source manifest audio is null. Separate recording identity unresolved."
+      "status": "imported; SHA-256 readback verified",
+      "note": "Sample has sound; source manifest audio is null. Separate recording identity unresolved.",
+      "importedFrom": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/shop/temple-film.mp4?v=6e572dd2",
+      "trackId": "4294f591-17fa-49ab-bdb5-2c4b4147486f",
+      "sha256": "57561b2c38a5c41fdb151a1bd0c352cbd56db2a5f01e33d40649f86b671be8c6",
+      "bytes": 635128,
+      "duration": 39,
+      "processing": "Original mixed soundtrack extracted from the reference MP4 without re-encoding."
     },
     {
       "id": "film-vector-v1",
@@ -229,8 +319,14 @@
       "sampleHasSound": true,
       "sampleUrl": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/shop/vector-film.mp4?v=42702f62",
       "kind": "sample-soundtrack",
-      "status": "reuse permission not recorded; not imported",
-      "note": "Sample has sound; source manifest audio is null. Separate recording identity unresolved."
+      "status": "imported; SHA-256 readback verified",
+      "note": "Sample has sound; source manifest audio is null. Separate recording identity unresolved.",
+      "importedFrom": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/shop/vector-film.mp4?v=42702f62",
+      "trackId": "dd9f761f-f61f-464f-9067-aef4fec83307",
+      "sha256": "048599b3d5ca020b6769d2cc1a6124e25bd0e7ca27ed8aaca61088f6e1d3bfc1",
+      "bytes": 661979,
+      "duration": 40.6,
+      "processing": "Original mixed soundtrack extracted from the reference MP4 without re-encoding."
     },
     {
       "id": "film-garden-v1",
@@ -240,7 +336,7 @@
       "sampleHasSound": false,
       "sampleUrl": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/shop/garden-film.mp4?v=e0f5539c",
       "kind": "silent-sample",
-      "status": "no source sample soundtrack"
+      "status": "No audio stream in downloaded source sample; no original recording assigned"
     },
     {
       "id": "film-tiles-v1",
@@ -250,9 +346,15 @@
       "sampleHasSound": true,
       "sampleUrl": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/shop/tiles-film.mp4?v=8e4e210c",
       "kind": "timed-music-and-effects",
-      "status": "reuse permission not recorded; not imported",
+      "status": "imported; SHA-256 readback verified",
       "manifest": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/app/febf20c5a0/web/tiles/manifest.json",
-      "note": "Music plus timed sound-effect cues, ducking and gain. A simple loop is not equivalent."
+      "note": "Music plus timed sound-effect cues, ducking and gain. A simple loop is not equivalent.",
+      "importedFrom": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/shop/tiles-film.mp4?v=8e4e210c",
+      "trackId": "6def2b9e-7c73-43a2-9bab-60eec12c2912",
+      "sha256": "c2a20507ffd7b166c2f5f5d3f6cc97cb5e2b987682308e218a68c070ecaaf8fe",
+      "bytes": 951800,
+      "duration": 57.36,
+      "processing": "Original mixed soundtrack extracted from the reference MP4 without re-encoding."
     },
     {
       "id": "film-bollywood-v1",
@@ -262,7 +364,7 @@
       "sampleHasSound": false,
       "sampleUrl": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/shop/bollywood-film.mp4?v=c8a646f2",
       "kind": "silent-sample",
-      "status": "no source sample soundtrack"
+      "status": "No audio stream in downloaded source sample; no original recording assigned"
     },
     {
       "id": "film-truckart-v1",
@@ -272,7 +374,7 @@
       "sampleHasSound": false,
       "sampleUrl": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/shop/truckart-film.mp4?v=21c6cf9d",
       "kind": "silent-sample",
-      "status": "no source sample soundtrack"
+      "status": "No audio stream in downloaded source sample; no original recording assigned"
     },
     {
       "id": "film-kovil-v1",
@@ -282,7 +384,7 @@
       "sampleHasSound": false,
       "sampleUrl": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/shop/kovil-film.mp4?v=fdbf3222",
       "kind": "silent-sample",
-      "status": "no source sample soundtrack"
+      "status": "No audio stream in downloaded source sample; no original recording assigned"
     },
     {
       "id": "film-royal-v1",
@@ -292,7 +394,7 @@
       "sampleHasSound": false,
       "sampleUrl": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/shop/royal-film.mp4?v=700cc65e",
       "kind": "silent-sample",
-      "status": "no source sample soundtrack"
+      "status": "No audio stream in downloaded source sample; no original recording assigned"
     },
     {
       "id": "film-kerala-v1",
@@ -302,7 +404,7 @@
       "sampleHasSound": false,
       "sampleUrl": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/shop/kerala-film.mp4?v=97cb0d03",
       "kind": "silent-sample",
-      "status": "no source sample soundtrack"
+      "status": "No audio stream in downloaded source sample; no original recording assigned"
     },
     {
       "id": "film-veedu-v1",
@@ -312,7 +414,7 @@
       "sampleHasSound": false,
       "sampleUrl": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/shop/veedu-film.mp4?v=0d9cd415",
       "kind": "silent-sample",
-      "status": "no source sample soundtrack"
+      "status": "No audio stream in downloaded source sample; no original recording assigned"
     },
     {
       "id": "film-walk-v1",
@@ -322,7 +424,13 @@
       "sampleHasSound": true,
       "sampleUrl": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/shop/walk-film.mp4?v=27c37944",
       "kind": "music-recording",
-      "status": "reuse permission not recorded; not imported"
+      "status": "imported; SHA-256 readback verified",
+      "importedFrom": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/music/walk.m4a?v=0ad38b8d",
+      "trackId": "c6beca6c-4618-41f8-8b28-d0e32be2550d",
+      "sha256": "0ad38b8d951bd1e9a1cbe27ea10db589d00a3d71bd2d272f09677b3fa1222f49",
+      "bytes": 4399717,
+      "duration": 180,
+      "processing": "Original recording, unchanged."
     },
     {
       "id": "film-kurinji-v1",
@@ -332,7 +440,13 @@
       "sampleHasSound": true,
       "sampleUrl": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/shop/kurinji-film.mp4?v=5157524c",
       "kind": "sample-soundtrack",
-      "status": "reuse permission not recorded; not imported"
+      "status": "imported; SHA-256 readback verified",
+      "importedFrom": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/shop/kurinji-film.mp4?v=5157524c",
+      "trackId": "f898c1b2-8eba-42e8-9874-88f78a94fae5",
+      "sha256": "e62cdcce0a12082d8d8a152bd9f9c53c079720c43e0ad56b19ae0711189cb01c",
+      "bytes": 1127566,
+      "duration": 67.75,
+      "processing": "Original mixed soundtrack extracted from the reference MP4 without re-encoding."
     },
     {
       "id": "film-valli-v1",
@@ -342,7 +456,7 @@
       "sampleHasSound": false,
       "sampleUrl": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/shop/valli-film.mp4?v=ddb1d38f",
       "kind": "silent-sample",
-      "status": "no source sample soundtrack"
+      "status": "No audio stream in downloaded source sample; no original recording assigned"
     },
     {
       "id": "film-aranmanai-v1",
@@ -352,7 +466,7 @@
       "sampleHasSound": false,
       "sampleUrl": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/shop/aranmanai-film.mp4?v=7a66a7e8",
       "kind": "silent-sample",
-      "status": "no source sample soundtrack"
+      "status": "No audio stream in downloaded source sample; no original recording assigned"
     },
     {
       "id": "film-gettimelam-v1",
@@ -362,7 +476,7 @@
       "sampleHasSound": false,
       "sampleUrl": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/shop/gettimelam-film.mp4?v=c9ee127f",
       "kind": "silent-sample",
-      "status": "no source sample soundtrack"
+      "status": "No audio stream in downloaded source sample; no original recording assigned"
     },
     {
       "id": "film-kondattam-v1",
@@ -372,7 +486,7 @@
       "sampleHasSound": false,
       "sampleUrl": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/shop/kondattam-film.mp4?v=9b3f7a06",
       "kind": "silent-sample",
-      "status": "no source sample soundtrack"
+      "status": "No audio stream in downloaded source sample; no original recording assigned"
     },
     {
       "id": "film-mandapam-v1",
@@ -382,7 +496,7 @@
       "sampleHasSound": false,
       "sampleUrl": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/shop/mandapam-film.mp4?v=7fdec91e",
       "kind": "silent-sample",
-      "status": "no source sample soundtrack"
+      "status": "No audio stream in downloaded source sample; no original recording assigned"
     },
     {
       "id": "film-thottam-v1",
@@ -392,7 +506,7 @@
       "sampleHasSound": false,
       "sampleUrl": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/shop/thottam-film.mp4?v=a95a84b9",
       "kind": "silent-sample",
-      "status": "no source sample soundtrack"
+      "status": "No audio stream in downloaded source sample; no original recording assigned"
     },
     {
       "id": "film-jannal-v1",
@@ -402,7 +516,13 @@
       "sampleHasSound": true,
       "sampleUrl": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/shop/jannal-film.mp4?v=82421e23",
       "kind": "music-recording",
-      "status": "reuse permission not recorded; not imported"
+      "status": "imported; SHA-256 readback verified",
+      "importedFrom": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/music/jannal.m4a?v=bc4a0c7d",
+      "trackId": "e74bdf42-a269-4fe4-ab2a-20bea5f9b075",
+      "sha256": "bc4a0c7d0d90ca9ee00fa50d452b4c46205e1e30027895ffad85bd89678d42d8",
+      "bytes": 1081433,
+      "duration": 44.3,
+      "processing": "Original recording, unchanged."
     },
     {
       "id": "film-poonga-v1",
@@ -412,7 +532,7 @@
       "sampleHasSound": false,
       "sampleUrl": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/shop/poonga-film.mp4?v=93617b57",
       "kind": "silent-sample",
-      "status": "no source sample soundtrack"
+      "status": "No audio stream in downloaded source sample; no original recording assigned"
     },
     {
       "id": "film-roja-v1",
@@ -422,7 +542,7 @@
       "sampleHasSound": false,
       "sampleUrl": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/shop/roja-film.mp4?v=a7e63254",
       "kind": "silent-sample",
-      "status": "no source sample soundtrack"
+      "status": "No audio stream in downloaded source sample; no original recording assigned"
     },
     {
       "id": "film-malligai-v1",
@@ -432,7 +552,7 @@
       "sampleHasSound": false,
       "sampleUrl": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/shop/malligai-film.mp4?v=3db13939",
       "kind": "silent-sample",
-      "status": "no source sample soundtrack"
+      "status": "No audio stream in downloaded source sample; no original recording assigned"
     },
     {
       "id": "film-gopuram-v1",
@@ -442,7 +562,7 @@
       "sampleHasSound": false,
       "sampleUrl": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/shop/gopuram-film.mp4?v=db7286c5",
       "kind": "silent-sample",
-      "status": "no source sample soundtrack"
+      "status": "No audio stream in downloaded source sample; no original recording assigned"
     },
     {
       "id": "film-theppam-v1",
@@ -452,7 +572,7 @@
       "sampleHasSound": false,
       "sampleUrl": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/shop/theppam-film.mp4?v=cebc4e68",
       "kind": "silent-sample",
-      "status": "no source sample soundtrack"
+      "status": "No audio stream in downloaded source sample; no original recording assigned"
     },
     {
       "id": "film-chettinad-v1",
@@ -462,7 +582,7 @@
       "sampleHasSound": false,
       "sampleUrl": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/shop/chettinad-film.mp4?v=33c85d85",
       "kind": "silent-sample",
-      "status": "no source sample soundtrack"
+      "status": "No audio stream in downloaded source sample; no original recording assigned"
     },
     {
       "id": "film-kalyana-v1",
@@ -472,7 +592,13 @@
       "sampleHasSound": true,
       "sampleUrl": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/shop/kalyana-film.mp4?v=c9c8cdd9",
       "kind": "music-recording",
-      "status": "reuse permission not recorded; not imported"
+      "status": "imported; SHA-256 readback verified",
+      "importedFrom": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/music/kalyana.m4a?v=ef5c0303",
+      "trackId": "e886acdd-cc27-4e7b-b048-7bd0b44b7a37",
+      "sha256": "ef5c0303410e16b7f2bcd7b5ea121dc9bec75a6f02e5c6602887dd379bc444af",
+      "bytes": 881275,
+      "duration": 36,
+      "processing": "Original recording, unchanged."
     },
     {
       "id": "film-avalum-v1",
@@ -482,7 +608,13 @@
       "sampleHasSound": true,
       "sampleUrl": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/shop/avalum-film.mp4?v=cc5ba814",
       "kind": "music-recording",
-      "status": "reuse permission not recorded; not imported"
+      "status": "imported; SHA-256 readback verified",
+      "importedFrom": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/music/avalum.m4a?v=5e45ac11",
+      "trackId": "8c2272b7-04a3-44d0-a6d6-20f10cf43f97",
+      "sha256": "5e45ac1137419e919aabf038f552aaf1b7e07cb397c3c6d7e2ab3eb828af363c",
+      "bytes": 1220710,
+      "duration": 50,
+      "processing": "Original recording, unchanged."
     },
     {
       "id": "film-thamarai-v1",
@@ -492,7 +624,13 @@
       "sampleHasSound": true,
       "sampleUrl": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/shop/thamarai-film.mp4?v=a1e71f3f",
       "kind": "effects-recording",
-      "status": "reuse permission not recorded; not imported"
+      "status": "imported; SHA-256 readback verified",
+      "importedFrom": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/music/thamarai.m4a?v=f64e603a",
+      "trackId": "3d5b5336-d527-4464-b246-dad40235c0bf",
+      "sha256": "f64e603aceee02b5c3f4507029be91cf1757ad109f163387f7d0094ed77ec96d",
+      "bytes": 113360,
+      "duration": 33,
+      "processing": "Original recording, unchanged."
     },
     {
       "id": "film-savedate-v1",
@@ -502,7 +640,13 @@
       "sampleHasSound": true,
       "sampleUrl": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/shop/savedate-film.mp4?v=81c20fc6",
       "kind": "sample-soundtrack",
-      "status": "reuse permission not recorded; not imported"
+      "status": "imported; SHA-256 readback verified",
+      "importedFrom": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/shop/savedate-film.mp4?v=81c20fc6",
+      "trackId": "902a30af-86c6-408d-876c-34f4981bc8ec",
+      "sha256": "ab4208fa32ee45f2f75c6e5998066358f9786e3e9cf0ad1df75e2cc07ab5166d",
+      "bytes": 516480,
+      "duration": 31.5,
+      "processing": "Original mixed soundtrack extracted from the reference MP4 without re-encoding."
     },
     {
       "id": "film-kulam-v1",
@@ -512,7 +656,13 @@
       "sampleHasSound": true,
       "sampleUrl": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/shop/kulam-film.mp4?v=e6db23ea",
       "kind": "music-recording",
-      "status": "reuse permission not recorded; not imported"
+      "status": "imported; SHA-256 readback verified",
+      "importedFrom": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/music/kulam.m4a?v=487e6053",
+      "trackId": "e7d9e67a-50c8-42a1-8c61-344bcdf2be20",
+      "sha256": "487e605344fd3753543f4ffb7143abf1c6fddf72165562174a254d23b88beed9",
+      "bytes": 1530920,
+      "duration": 62.959583,
+      "processing": "Original recording, unchanged."
     },
     {
       "id": "film-karaikudi-v1",
@@ -522,7 +672,7 @@
       "sampleHasSound": false,
       "sampleUrl": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/shop/karaikudi-film.mp4?v=ae317992",
       "kind": "silent-sample",
-      "status": "no source sample soundtrack"
+      "status": "No audio stream in downloaded source sample; no original recording assigned"
     },
     {
       "id": "film-hopon-v1",
@@ -532,7 +682,13 @@
       "sampleHasSound": true,
       "sampleUrl": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/shop/hopon-film.mp4?v=be915da3",
       "kind": "effects-recording",
-      "status": "reuse permission not recorded; not imported"
+      "status": "imported; SHA-256 readback verified",
+      "importedFrom": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/music/hopon.m4a?v=a528c3d6",
+      "trackId": "84fcdffa-a210-4e85-b97a-e8a21809971f",
+      "sha256": "a528c3d6d04fb9576a3c8308dc37cded4540e270923591268cfa48208fa0dd4f",
+      "bytes": 434997,
+      "duration": 18,
+      "processing": "Original recording, unchanged."
     },
     {
       "id": "film-oonjal-v1",
@@ -542,7 +698,13 @@
       "sampleHasSound": true,
       "sampleUrl": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/shop/oonjal-film.mp4?v=44b7d159",
       "kind": "music-recording",
-      "status": "reuse permission not recorded; not imported"
+      "status": "imported; SHA-256 readback verified",
+      "importedFrom": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/music/oonjal.m4a?v=2d9a3304",
+      "trackId": "3c57fe85-cc2a-48e8-ae42-4f6779efebf4",
+      "sha256": "2d9a33042439267ad06f91ce81ec02b9fe24b492a87f94aec87a2b1bb51e6142",
+      "bytes": 841656,
+      "duration": 34.480188,
+      "processing": "Original recording, unchanged."
     },
     {
       "id": "film-rajakumari-v1",
@@ -552,7 +714,13 @@
       "sampleHasSound": true,
       "sampleUrl": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/shop/rajakumari-film.mp4?v=81bafa4f",
       "kind": "music-recording",
-      "status": "reuse permission not recorded; not imported"
+      "status": "imported; SHA-256 readback verified",
+      "importedFrom": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/music/rajakumari.m4a?v=615ec160",
+      "trackId": "5969eade-83bd-4f25-9c5d-56b7404c92f1",
+      "sha256": "615ec160d7b19909e30afe43220958fc0f98b67991c178da32a5523da1e1eb04",
+      "bytes": 718556,
+      "duration": 30.000021,
+      "processing": "Original recording, unchanged."
     },
     {
       "id": "film-rajakumaran-v1",
@@ -562,7 +730,13 @@
       "sampleHasSound": true,
       "sampleUrl": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/shop/rajakumaran-film.mp4?v=f919bf71",
       "kind": "music-recording",
-      "status": "reuse permission not recorded; not imported"
+      "status": "imported; SHA-256 readback verified",
+      "importedFrom": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/music/rajakumaran.m4a?v=615ec160",
+      "trackId": "5969eade-83bd-4f25-9c5d-56b7404c92f1",
+      "sha256": "615ec160d7b19909e30afe43220958fc0f98b67991c178da32a5523da1e1eb04",
+      "bytes": 718556,
+      "duration": 30.000021,
+      "processing": "Original recording, unchanged."
     },
     {
       "id": "film-ilavarasi-v1",
@@ -572,7 +746,13 @@
       "sampleHasSound": true,
       "sampleUrl": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/shop/ilavarasi-film.mp4?v=5fb555ba",
       "kind": "music-recording",
-      "status": "reuse permission not recorded; not imported"
+      "status": "imported; SHA-256 readback verified",
+      "importedFrom": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/music/ilavarasi.m4a?v=7217eb99",
+      "trackId": "6e7cbbd3-eaae-4602-8b5f-f3c9a16ea81f",
+      "sha256": "7217eb99a51ca9627a4d61cb6c8d38d7fa4c51679e5fa7ce154dadf44ca548e1",
+      "bytes": 1022783,
+      "duration": 41.5,
+      "processing": "Original recording, unchanged."
     },
     {
       "id": "film-velicham-v1",
@@ -582,13 +762,38 @@
       "sampleHasSound": false,
       "sampleUrl": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/shop/velicham-film.mp4?v=5b0f21ce",
       "kind": "silent-sample",
-      "status": "no source sample soundtrack"
+      "status": "No audio stream in downloaded source sample; no original recording assigned"
     },
     {
       "id": "temple-v1",
-      "referenceUrl": null,
-      "status": "legacy source recording not established",
-      "note": "Existing Temple Wedding master is separate from film-temple-v1. No original soundtrack assignment inferred."
+      "referenceUrl": "https://cardsforknots.in/video-invite/thoon/",
+      "status": "imported; SHA-256 readback verified",
+      "importedFrom": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/music/thoon.m4a?v=59b68ada",
+      "trackId": "da80d21d-f44c-446b-a7eb-f5acb363762b",
+      "sha256": "59b68adad61aaad00a2c589e722201a0b3ec9417da4005408e9a9a11866ee293",
+      "bytes": 1074998,
+      "duration": 43.9,
+      "processing": "Original recording, unchanged.",
+      "sourceAudio": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/music/thoon.m4a?v=59b68ada",
+      "title": "Getti Melam — Temple Wedding",
+      "kind": "music-recording"
     }
-  ]
+  ],
+  "importSummary": {
+    "distinctRecordings": 29,
+    "videoAssignments": 17,
+    "websiteAssignments": 14,
+    "sharedLibraryTracks": 31,
+    "bytes": 28852166,
+    "deduplication": "Identical SHA-256 recordings share a library entry."
+  },
+  "rightsHandling": {
+    "authorizedAt": "2026-11-15",
+    "statement": "Owner explicitly instructed import and stated they will handle licences outside the application; no independent licence verification asserted."
+  },
+  "playback": {
+    "libraryLooping": "All video families loop library music, with the existing one-second fade-in and three-second fade-out. Custom uploads retain their previous behavior.",
+    "timedMixes": "Word Tiles uses the original mixed music/effects recording. No claim of retiming source effects to arbitrarily changed optional scenes.",
+    "kalyanaPayanam": "Kiliye is trimmed from the reference 91-second starting point before import; the prepared excerpt loops."
+  }
 }

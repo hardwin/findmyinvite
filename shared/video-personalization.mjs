@@ -78,7 +78,10 @@ export function assertMaster(m,{released=false}={}){
   const definition=catalogVideo(m.id),o=m.output;
   if(!definition||definition.design!==m.sceneDesign||m.version!==1||o?.width!==720||o.height!==1280||o.fps!==24||!Number.isSafeInteger(o.frames)||o.frames<24||o.frames>14400||Math.abs(o.duration-o.frames/o.fps)>0.00001)throw Error('Unsupported scene master.');
   if(!m.scenes?.length||m.scenes.some(s=>!Number.isInteger(s.start)||!Number.isInteger(s.end)||s.end<=s.start||s.end>o.frames))throw Error('Invalid scene timeline.');
-  if(released&&(!m.release?.approved||!['default','personalized'].every(k=>/^[a-f0-9]{64}$/.test(m.release?.proofs?.[k]||''))||m.release.rendererVersion!==m.rendererVersion||!/^\/assets\/video-masters\/film-[a-z]+-v1\/asset-index\.json$/.test(m.assets?.sceneBundle?.path||'')||!/^[a-f0-9]{64}$/.test(m.assets?.sceneBundle?.sha256||'')))throw Error('This template is still being prepared.');
+  const revisedTiles=m.id==='film-tiles-v1'&&m.assetRevision===2&&m.sceneFrame==='/assets/video-scenes/tiles-v2/frame.html';
+  const expectedIndex='/assets/video-masters/'+m.id+'/asset-index'+(revisedTiles?'-v2':'')+'.json';
+  if(m.sceneFrame&&!revisedTiles)throw Error('Unsupported scene frame.');
+  if(released&&(!m.release?.approved||!['default','personalized'].every(k=>/^[a-f0-9]{64}$/.test(m.release?.proofs?.[k]||''))||m.release.rendererVersion!==m.rendererVersion||m.assets?.sceneBundle?.path!==expectedIndex||!/^[a-f0-9]{64}$/.test(m.assets?.sceneBundle?.sha256||'')))throw Error('This template is still being prepared.');
   return m;
  }
  if(![VIDEO_ID,TEMPLE_ID].includes(m?.id)||m.version!==1||JSON.stringify(m.layerOrder)!==JSON.stringify(LAYER_ORDER)||JSON.stringify(m.output)!==JSON.stringify(VIDEO_OUTPUT))throw Error('Unsupported video master.');

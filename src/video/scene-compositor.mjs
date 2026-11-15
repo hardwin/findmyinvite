@@ -9,7 +9,7 @@ export class SceneCompositor {
   const resize=()=>{frame.style.transform=`scale(${this.canvas.getBoundingClientRect().width/720})`;};
   this.observer=new ResizeObserver(resize);this.observer.observe(this.canvas);resize();
   const loaded=new Promise((resolve,reject)=>{frame.onload=resolve;frame.onerror=()=>reject(Error('The invitation could not load.'));});
-  frame.src='/assets/video-scenes/v1/frame.html?design='+encodeURIComponent(master.sceneDesign)+(externalBackground?'&lite=0':'')+(externalBackground&&softwareExport?'&software=1':'');
+  frame.src=(master.sceneFrame||'/assets/video-scenes/v1/frame.html')+'?design='+encodeURIComponent(master.sceneDesign)+(externalBackground?'&lite=0':'')+(externalBackground&&softwareExport?'&software=1':'');
   await loaded;if(this.disposed)return;
   const ready=frame.contentWindow.fmiFilmReady;if(!ready)throw Error('The invitation could not start.');
   this.film=await ready;if(this.disposed){this.film.destroy();return;}

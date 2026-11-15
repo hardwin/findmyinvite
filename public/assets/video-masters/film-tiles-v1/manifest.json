@@ -1,6 +1,7 @@
 {
   "id": "film-tiles-v1",
   "version": 1,
+  "assetRevision": 2,
   "rendererVersion": "scene-film-v1",
   "sceneDesign": "tiles",
   "kind": "webgl",
@@ -63,8 +64,8 @@
   ],
   "assets": {
     "sceneBundle": {
-      "path": "/assets/video-masters/film-tiles-v1/asset-index.json",
-      "sha256": "367b6502f9b50d3823ea4c337f772c392639e92138bce36ed06b94e17685adb6"
+      "path": "/assets/video-masters/film-tiles-v1/asset-index-v2.json",
+      "sha256": "09f1fb5cc66c2d43e23e92dffe87d01016c41e81ab9be970b8f7e7a712cc4539"
     }
   },
   "release": {
@@ -90,5 +91,6 @@
       "960": "poster-960-v1.webp"
     },
     "preview": "demo-v1.mp4"
-  }
+  },
+  "sceneFrame": "/assets/video-scenes/tiles-v2/frame.html"
 }

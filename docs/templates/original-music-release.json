@@ -1,0 +1,891 @@
+{
+  "preparedAt": "2026-11-15T17:49:13.368Z",
+  "status": "qualified for production",
+  "previousAssignments": {
+    "golden-hour": null,
+    "midnight-stage": null,
+    "little-blessing": null,
+    "noir-and-gold": null,
+    "pearl-and-sapphire": null,
+    "royal-crimson": null,
+    "garden-curtains": null,
+    "moonlit-nikah": null,
+    "the-ring-box": null,
+    "home-sweet-home": null,
+    "up-and-away": null,
+    "temple-doors": null,
+    "kerala-lanterns": null,
+    "kalyana-payanam": null,
+    "film-temple-v1": null,
+    "film-vector-v1": null,
+    "film-tiles-v1": null,
+    "film-walk-v1": null,
+    "film-kurinji-v1": null,
+    "film-jannal-v1": null,
+    "film-kalyana-v1": null,
+    "film-avalum-v1": null,
+    "film-thamarai-v1": null,
+    "film-savedate-v1": null,
+    "film-kulam-v1": null,
+    "film-hopon-v1": null,
+    "film-oonjal-v1": null,
+    "film-rajakumari-v1": null,
+    "film-rajakumaran-v1": null,
+    "film-ilavarasi-v1": null,
+    "temple-v1": null
+  },
+  "previousSnapshots": {
+    "temple": "snap_Rj9v3603XNkHOk5WUsRsZPfqeUPx",
+    "scene": "snap_tBMnfjqKGfAfa96fYV94MZHoJVSz"
+  },
+  "tracks": [
+    {
+      "id": "61c18490-4290-412b-bd57-4dd1120dbda4",
+      "title": "Golden Hour · Original",
+      "sha256": "b7c5681b2b2849a306c2f43d8e1d45dddbe67833c440216085615965db588c13",
+      "bytes": 1825800,
+      "duration": 111.9,
+      "origins": [
+        {
+          "templateId": "golden-hour",
+          "name": "Golden Hour",
+          "url": "https://cinorev.in/kabir-myra/music-v2.m4a",
+          "referenceUrl": "https://cinorev.in/kabir-myra/",
+          "processing": "Original recording, unchanged.",
+          "kind": "music-recording"
+        }
+      ]
+    },
+    {
+      "id": "53838672-b62a-4179-95c0-2cc283bd8831",
+      "title": "Midnight Stage · Original",
+      "sha256": "b33b61a84407611b49d4e9f1d1e12706376b52e2b8eaf2741ad9cda868a11bee",
+      "bytes": 478472,
+      "duration": 29.5,
+      "origins": [
+        {
+          "templateId": "midnight-stage",
+          "name": "Midnight Stage",
+          "url": "https://cinorev.in/advait-kiara/music.m4a",
+          "referenceUrl": "https://cinorev.in/advait-kiara/",
+          "processing": "Original recording, unchanged.",
+          "kind": "music-recording"
+        }
+      ]
+    },
+    {
+      "id": "03d2700a-f3dc-460b-beac-521a1de24e8d",
+      "title": "Little Blessing · Original",
+      "sha256": "973875c02298bde13a14a082660e754df6ac88c54acc3c174b884b36b4ccb81e",
+      "bytes": 542677,
+      "duration": 33.3,
+      "origins": [
+        {
+          "templateId": "little-blessing",
+          "name": "Little Blessing",
+          "url": "https://cinorev.in/varun-riya/music.m4a",
+          "referenceUrl": "https://cinorev.in/varun-riya/",
+          "processing": "Original recording, unchanged.",
+          "kind": "music-recording"
+        }
+      ]
+    },
+    {
+      "id": "9ec4e19c-6e5a-42bd-8375-ee0c43df795a",
+      "title": "Noir & Gold · Original",
+      "sha256": "db4ff77f4fbae621e0523a540431613cd5f60533cff76f6bf285f70682ee0dbc",
+      "bytes": 385044,
+      "duration": 23.8,
+      "origins": [
+        {
+          "templateId": "noir-and-gold",
+          "name": "Noir & Gold",
+          "url": "https://cinorev.in/vivaan-anika/music.m4a",
+          "referenceUrl": "https://cinorev.in/vivaan-anika/",
+          "processing": "Original recording, unchanged.",
+          "kind": "music-recording"
+        }
+      ]
+    },
+    {
+      "id": "61aceca0-88db-4533-8b55-e3bbb541a37e",
+      "title": "Pearl & Sapphire · Original",
+      "sha256": "47dc08b2a355a24c6ed4159ac0bc2899f05d371170fe276e382490628e86b95e",
+      "bytes": 1708218,
+      "duration": 104.9,
+      "origins": [
+        {
+          "templateId": "pearl-and-sapphire",
+          "name": "Pearl & Sapphire",
+          "url": "https://cinorev.in/reyansh-aanya/music.m4a",
+          "referenceUrl": "https://cinorev.in/reyansh-aanya/",
+          "processing": "Original recording, unchanged.",
+          "kind": "music-recording"
+        }
+      ]
+    },
+    {
+      "id": "ee7a8f60-bc7a-4717-b997-ed2c1af24381",
+      "title": "Royal Crimson & Garden Curtains · Original",
+      "sha256": "97c5dbbbbaa6e48293968876dbfa6bde652d52206516129dd90fa4fe5fa7a76a",
+      "bytes": 1552251,
+      "duration": 94.59,
+      "origins": [
+        {
+          "templateId": "royal-crimson",
+          "name": "Royal Crimson",
+          "url": "https://cinorev.in/ayaan-zoya/music.m4a",
+          "referenceUrl": "https://cinorev.in/ayaan-zoya/",
+          "processing": "Original recording, unchanged.",
+          "kind": "music-recording"
+        },
+        {
+          "templateId": "garden-curtains",
+          "name": "Garden Curtains",
+          "url": "https://cinorev.in/arhaan-inaya/music.m4a",
+          "referenceUrl": "https://cinorev.in/arhaan-inaya/",
+          "processing": "Original recording, unchanged.",
+          "kind": "music-recording"
+        }
+      ]
+    },
+    {
+      "id": "cde8f255-1eac-4acd-8f12-bfff2d85f602",
+      "title": "Moonlit Nikah · Original",
+      "sha256": "246cae72aa5dc9a58d8bf8fa239dc7a6c4868962ab052002f4b87a3cc27f656e",
+      "bytes": 382270,
+      "duration": 23.4,
+      "origins": [
+        {
+          "templateId": "moonlit-nikah",
+          "name": "Moonlit Nikah",
+          "url": "https://cinorev.in/imran-afrin/music.m4a",
+          "referenceUrl": "https://cinorev.in/imran-afrin/",
+          "processing": "Original recording, unchanged.",
+          "kind": "music-recording"
+        }
+      ]
+    },
+    {
+      "id": "fcb1ec19-84a9-4452-854e-e9788b1d823e",
+      "title": "The Ring Box · Original",
+      "sha256": "36c5bc3501441de6deb35b19ad9e97a00ef8579289bd070055c4dbb8a4e5319a",
+      "bytes": 372541,
+      "duration": 24.98,
+      "origins": [
+        {
+          "templateId": "the-ring-box",
+          "name": "The Ring Box",
+          "url": "https://cinorev.in/rohan-ishita/music.m4a",
+          "referenceUrl": "https://cinorev.in/rohan-ishita/",
+          "processing": "Original recording, unchanged.",
+          "kind": "music-recording"
+        }
+      ]
+    },
+    {
+      "id": "4236f632-5a6d-45bb-95fe-799fed4bd9d5",
+      "title": "Home Sweet Home · Original",
+      "sha256": "315f55494410fb625f0a4884f67af1d44f85f59807a6c4d7ac06fe7fd3054be4",
+      "bytes": 272880,
+      "duration": 16.76,
+      "origins": [
+        {
+          "templateId": "home-sweet-home",
+          "name": "Home Sweet Home",
+          "url": "https://cinorev.in/hari-kavya/music.m4a",
+          "referenceUrl": "https://cinorev.in/hari-kavya/",
+          "processing": "Original recording, unchanged.",
+          "kind": "music-recording"
+        }
+      ]
+    },
+    {
+      "id": "f188e981-c8d3-43fe-8aee-313b3c6e9fda",
+      "title": "Up and Away · Original",
+      "sha256": "36e4da24837b0926deab3567143142d4af6566ad0423d15c06d57c1ae10c4dc1",
+      "bytes": 184453,
+      "duration": 11.273,
+      "origins": [
+        {
+          "templateId": "up-and-away",
+          "name": "Up and Away",
+          "url": "https://cinorev.in/diya-turns-one/music.m4a",
+          "referenceUrl": "https://cinorev.in/diya-turns-one/",
+          "processing": "Original recording, unchanged.",
+          "kind": "music-recording"
+        }
+      ]
+    },
+    {
+      "id": "4f92f01d-9477-4022-ae94-0495b95f637c",
+      "title": "Temple Doors · Original",
+      "sha256": "5f1d01a3cb409c1d0a9d2ede55f0d699a587820c388e16ac81f27052dd57f5e5",
+      "bytes": 549724,
+      "duration": 46.485,
+      "origins": [
+        {
+          "templateId": "temple-doors",
+          "name": "Temple Doors",
+          "url": "https://cinorev.in/siva-divya/music.m4a",
+          "referenceUrl": "https://cinorev.in/siva-divya/",
+          "processing": "Original recording, unchanged.",
+          "kind": "music-recording"
+        }
+      ]
+    },
+    {
+      "id": "af9e02b9-6428-451d-be29-b5e964287237",
+      "title": "Lanterns & Kasavu · Original",
+      "sha256": "b8a87f3520ad14bd04c8065c6d234e47b64fd79182ef8ce6fd8f30ac992d6990",
+      "bytes": 436004,
+      "duration": 26.748,
+      "origins": [
+        {
+          "templateId": "kerala-lanterns",
+          "name": "Lanterns & Kasavu",
+          "url": "https://cinorev.in/karthik-nila/music.m4a",
+          "referenceUrl": "https://cinorev.in/karthik-nila/",
+          "processing": "Original recording, unchanged.",
+          "kind": "music-recording"
+        }
+      ]
+    },
+    {
+      "id": "2f96d434-1e2d-4711-a5a3-ee723cd6c36a",
+      "title": "Kiliye — Kalyana Payanam",
+      "sha256": "0cb7990172b8ae2363e7d15f5e4ef16c231ecbf7cb69160f0043c1cb63bcd310",
+      "bytes": 2948474,
+      "duration": 180.652,
+      "origins": [
+        {
+          "templateId": "kalyana-payanam",
+          "name": "Kalyana Payanam",
+          "url": "https://cardsforknots.in/wp-content/plugins/Advanced-smart-invitation-builder/assets/v2/payanam/audio/kiliye.m4a#t=91",
+          "referenceUrl": "https://cardsforknots.in/?pinv_tpl_preview=88",
+          "processing": "Original recording trimmed to the reference start at 91 seconds.",
+          "kind": "music-recording"
+        }
+      ]
+    },
+    {
+      "id": "4294f591-17fa-49ab-bdb5-2c4b4147486f",
+      "title": "Kalyana Deepam · Original",
+      "sha256": "57561b2c38a5c41fdb151a1bd0c352cbd56db2a5f01e33d40649f86b671be8c6",
+      "bytes": 635128,
+      "duration": 39,
+      "origins": [
+        {
+          "templateId": "film-temple-v1",
+          "name": "Kalyana Deepam",
+          "url": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/shop/temple-film.mp4?v=6e572dd2",
+          "referenceUrl": "https://cardsforknots.in/video-invite/temple/",
+          "processing": "Original mixed soundtrack extracted from the reference MP4 without re-encoding.",
+          "kind": "sample-soundtrack"
+        }
+      ]
+    },
+    {
+      "id": "dd9f761f-f61f-464f-9067-aef4fec83307",
+      "title": "Mangalam · Original",
+      "sha256": "048599b3d5ca020b6769d2cc1a6124e25bd0e7ca27ed8aaca61088f6e1d3bfc1",
+      "bytes": 661979,
+      "duration": 40.6,
+      "origins": [
+        {
+          "templateId": "film-vector-v1",
+          "name": "Mangalam",
+          "url": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/shop/vector-film.mp4?v=42702f62",
+          "referenceUrl": "https://cardsforknots.in/video-invite/vector/",
+          "processing": "Original mixed soundtrack extracted from the reference MP4 without re-encoding.",
+          "kind": "sample-soundtrack"
+        }
+      ]
+    },
+    {
+      "id": "6def2b9e-7c73-43a2-9bab-60eec12c2912",
+      "title": "Word Tiles · Original",
+      "sha256": "c2a20507ffd7b166c2f5f5d3f6cc97cb5e2b987682308e218a68c070ecaaf8fe",
+      "bytes": 951800,
+      "duration": 57.36,
+      "origins": [
+        {
+          "templateId": "film-tiles-v1",
+          "name": "Word Tiles",
+          "url": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/shop/tiles-film.mp4?v=8e4e210c",
+          "referenceUrl": "https://cardsforknots.in/video-invite/tiles/",
+          "processing": "Original mixed soundtrack extracted from the reference MP4 without re-encoding.",
+          "kind": "timed-music-and-effects"
+        }
+      ]
+    },
+    {
+      "id": "c6beca6c-4618-41f8-8b28-d0e32be2550d",
+      "title": "Kiliye — Wisteria Walk",
+      "sha256": "0ad38b8d951bd1e9a1cbe27ea10db589d00a3d71bd2d272f09677b3fa1222f49",
+      "bytes": 4399717,
+      "duration": 180,
+      "origins": [
+        {
+          "templateId": "film-walk-v1",
+          "name": "Wisteria Walk",
+          "url": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/music/walk.m4a?v=0ad38b8d",
+          "referenceUrl": "https://cardsforknots.in/video-invite/walk/",
+          "processing": "Original recording, unchanged.",
+          "kind": "music-recording"
+        }
+      ]
+    },
+    {
+      "id": "f898c1b2-8eba-42e8-9874-88f78a94fae5",
+      "title": "Kurinji · Original",
+      "sha256": "e62cdcce0a12082d8d8a152bd9f9c53c079720c43e0ad56b19ae0711189cb01c",
+      "bytes": 1127566,
+      "duration": 67.75,
+      "origins": [
+        {
+          "templateId": "film-kurinji-v1",
+          "name": "Kurinji",
+          "url": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/shop/kurinji-film.mp4?v=5157524c",
+          "referenceUrl": "https://cardsforknots.in/video-invite/kurinji/",
+          "processing": "Original mixed soundtrack extracted from the reference MP4 without re-encoding.",
+          "kind": "sample-soundtrack"
+        }
+      ]
+    },
+    {
+      "id": "e74bdf42-a269-4fe4-ab2a-20bea5f9b075",
+      "title": "Anbe — Jannal",
+      "sha256": "bc4a0c7d0d90ca9ee00fa50d452b4c46205e1e30027895ffad85bd89678d42d8",
+      "bytes": 1081433,
+      "duration": 44.3,
+      "origins": [
+        {
+          "templateId": "film-jannal-v1",
+          "name": "Jannal",
+          "url": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/music/jannal.m4a?v=bc4a0c7d",
+          "referenceUrl": "https://cardsforknots.in/video-invite/jannal/",
+          "processing": "Original recording, unchanged.",
+          "kind": "music-recording"
+        }
+      ]
+    },
+    {
+      "id": "e886acdd-cc27-4e7b-b048-7bd0b44b7a37",
+      "title": "Kalyana Poster · Original",
+      "sha256": "ef5c0303410e16b7f2bcd7b5ea121dc9bec75a6f02e5c6602887dd379bc444af",
+      "bytes": 881275,
+      "duration": 36,
+      "origins": [
+        {
+          "templateId": "film-kalyana-v1",
+          "name": "Kalyana Poster",
+          "url": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/music/kalyana.m4a?v=ef5c0303",
+          "referenceUrl": "https://cardsforknots.in/video-invite/kalyana/",
+          "processing": "Original recording, unchanged.",
+          "kind": "music-recording"
+        }
+      ]
+    },
+    {
+      "id": "8c2272b7-04a3-44d0-a6d6-20f10cf43f97",
+      "title": "Avalum Nanum · Original",
+      "sha256": "5e45ac1137419e919aabf038f552aaf1b7e07cb397c3c6d7e2ab3eb828af363c",
+      "bytes": 1220710,
+      "duration": 50,
+      "origins": [
+        {
+          "templateId": "film-avalum-v1",
+          "name": "Avalum Nanum",
+          "url": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/music/avalum.m4a?v=5e45ac11",
+          "referenceUrl": "https://cardsforknots.in/video-invite/avalum/",
+          "processing": "Original recording, unchanged.",
+          "kind": "music-recording"
+        }
+      ]
+    },
+    {
+      "id": "3d5b5336-d527-4464-b246-dad40235c0bf",
+      "title": "Sound effects — Thamarai",
+      "sha256": "f64e603aceee02b5c3f4507029be91cf1757ad109f163387f7d0094ed77ec96d",
+      "bytes": 113360,
+      "duration": 33,
+      "origins": [
+        {
+          "templateId": "film-thamarai-v1",
+          "name": "Thamarai",
+          "url": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/music/thamarai.m4a?v=f64e603a",
+          "referenceUrl": "https://cardsforknots.in/video-invite/thamarai/",
+          "processing": "Original recording, unchanged.",
+          "kind": "effects-recording"
+        }
+      ]
+    },
+    {
+      "id": "902a30af-86c6-408d-876c-34f4981bc8ec",
+      "title": "Save the Date · Original",
+      "sha256": "ab4208fa32ee45f2f75c6e5998066358f9786e3e9cf0ad1df75e2cc07ab5166d",
+      "bytes": 516480,
+      "duration": 31.5,
+      "origins": [
+        {
+          "templateId": "film-savedate-v1",
+          "name": "Save the Date",
+          "url": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/shop/savedate-film.mp4?v=81c20fc6",
+          "referenceUrl": "https://cardsforknots.in/video-invite/savedate/",
+          "processing": "Original mixed soundtrack extracted from the reference MP4 without re-encoding.",
+          "kind": "sample-soundtrack"
+        }
+      ]
+    },
+    {
+      "id": "e7d9e67a-50c8-42a1-8c61-344bcdf2be20",
+      "title": "Thamarai Kulam · Original",
+      "sha256": "487e605344fd3753543f4ffb7143abf1c6fddf72165562174a254d23b88beed9",
+      "bytes": 1530920,
+      "duration": 62.959583,
+      "origins": [
+        {
+          "templateId": "film-kulam-v1",
+          "name": "Thamarai Kulam",
+          "url": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/music/kulam.m4a?v=487e6053",
+          "referenceUrl": "https://cardsforknots.in/video-invite/kulam/",
+          "processing": "Original recording, unchanged.",
+          "kind": "music-recording"
+        }
+      ]
+    },
+    {
+      "id": "84fcdffa-a210-4e85-b97a-e8a21809971f",
+      "title": "Sound effects — Hop On",
+      "sha256": "a528c3d6d04fb9576a3c8308dc37cded4540e270923591268cfa48208fa0dd4f",
+      "bytes": 434997,
+      "duration": 18,
+      "origins": [
+        {
+          "templateId": "film-hopon-v1",
+          "name": "Hop On",
+          "url": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/music/hopon.m4a?v=a528c3d6",
+          "referenceUrl": "https://cardsforknots.in/video-invite/hopon/",
+          "processing": "Original recording, unchanged.",
+          "kind": "effects-recording"
+        }
+      ]
+    },
+    {
+      "id": "3c57fe85-cc2a-48e8-ae42-4f6779efebf4",
+      "title": "Mapla Veetla Okay · Original",
+      "sha256": "2d9a33042439267ad06f91ce81ec02b9fe24b492a87f94aec87a2b1bb51e6142",
+      "bytes": 841656,
+      "duration": 34.480188,
+      "origins": [
+        {
+          "templateId": "film-oonjal-v1",
+          "name": "Mapla Veetla Okay",
+          "url": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/music/oonjal.m4a?v=2d9a3304",
+          "referenceUrl": "https://cardsforknots.in/video-invite/oonjal/",
+          "processing": "Original recording, unchanged.",
+          "kind": "music-recording"
+        }
+      ]
+    },
+    {
+      "id": "5969eade-83bd-4f25-9c5d-56b7404c92f1",
+      "title": "Rajakumari & Rajakumaran · Original",
+      "sha256": "615ec160d7b19909e30afe43220958fc0f98b67991c178da32a5523da1e1eb04",
+      "bytes": 718556,
+      "duration": 30.000021,
+      "origins": [
+        {
+          "templateId": "film-rajakumari-v1",
+          "name": "Rajakumari",
+          "url": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/music/rajakumari.m4a?v=615ec160",
+          "referenceUrl": "https://cardsforknots.in/video-invite/rajakumari/",
+          "processing": "Original recording, unchanged.",
+          "kind": "music-recording"
+        },
+        {
+          "templateId": "film-rajakumaran-v1",
+          "name": "Rajakumaran",
+          "url": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/music/rajakumaran.m4a?v=615ec160",
+          "referenceUrl": "https://cardsforknots.in/video-invite/rajakumaran/",
+          "processing": "Original recording, unchanged.",
+          "kind": "music-recording"
+        }
+      ]
+    },
+    {
+      "id": "6e7cbbd3-eaae-4602-8b5f-f3c9a16ea81f",
+      "title": "Kutti Ilavarasi · Original",
+      "sha256": "7217eb99a51ca9627a4d61cb6c8d38d7fa4c51679e5fa7ce154dadf44ca548e1",
+      "bytes": 1022783,
+      "duration": 41.5,
+      "origins": [
+        {
+          "templateId": "film-ilavarasi-v1",
+          "name": "Kutti Ilavarasi",
+          "url": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/music/ilavarasi.m4a?v=7217eb99",
+          "referenceUrl": "https://cardsforknots.in/video-invite/ilavarasi/",
+          "processing": "Original recording, unchanged.",
+          "kind": "music-recording"
+        }
+      ]
+    },
+    {
+      "id": "da80d21d-f44c-446b-a7eb-f5acb363762b",
+      "title": "Getti Melam — Temple Wedding",
+      "sha256": "59b68adad61aaad00a2c589e722201a0b3ec9417da4005408e9a9a11866ee293",
+      "bytes": 1074998,
+      "duration": 43.9,
+      "origins": [
+        {
+          "templateId": "temple-v1",
+          "name": "Temple Wedding",
+          "url": "https://cardsforknots.in/wp-content/plugins/cfk-video-invite/assets/music/thoon.m4a?v=59b68ada",
+          "referenceUrl": "https://cardsforknots.in/video-invite/thoon/",
+          "processing": "Original recording, unchanged.",
+          "kind": "music-recording"
+        }
+      ]
+    }
+  ],
+  "assignments": [
+    {
+      "id": "golden-hour",
+      "trackId": "61c18490-4290-412b-bd57-4dd1120dbda4",
+      "name": "Golden Hour"
+    },
+    {
+      "id": "midnight-stage",
+      "trackId": "53838672-b62a-4179-95c0-2cc283bd8831",
+      "name": "Midnight Stage"
+    },
+    {
+      "id": "little-blessing",
+      "trackId": "03d2700a-f3dc-460b-beac-521a1de24e8d",
+      "name": "Little Blessing"
+    },
+    {
+      "id": "noir-and-gold",
+      "trackId": "9ec4e19c-6e5a-42bd-8375-ee0c43df795a",
+      "name": "Noir & Gold"
+    },
+    {
+      "id": "pearl-and-sapphire",
+      "trackId": "61aceca0-88db-4533-8b55-e3bbb541a37e",
+      "name": "Pearl & Sapphire"
+    },
+    {
+      "id": "royal-crimson",
+      "trackId": "ee7a8f60-bc7a-4717-b997-ed2c1af24381",
+      "name": "Royal Crimson"
+    },
+    {
+      "id": "garden-curtains",
+      "trackId": "ee7a8f60-bc7a-4717-b997-ed2c1af24381",
+      "name": "Garden Curtains"
+    },
+    {
+      "id": "moonlit-nikah",
+      "trackId": "cde8f255-1eac-4acd-8f12-bfff2d85f602",
+      "name": "Moonlit Nikah"
+    },
+    {
+      "id": "the-ring-box",
+      "trackId": "fcb1ec19-84a9-4452-854e-e9788b1d823e",
+      "name": "The Ring Box"
+    },
+    {
+      "id": "home-sweet-home",
+      "trackId": "4236f632-5a6d-45bb-95fe-799fed4bd9d5",
+      "name": "Home Sweet Home"
+    },
+    {
+      "id": "up-and-away",
+      "trackId": "f188e981-c8d3-43fe-8aee-313b3c6e9fda",
+      "name": "Up and Away"
+    },
+    {
+      "id": "temple-doors",
+      "trackId": "4f92f01d-9477-4022-ae94-0495b95f637c",
+      "name": "Temple Doors"
+    },
+    {
+      "id": "kerala-lanterns",
+      "trackId": "af9e02b9-6428-451d-be29-b5e964287237",
+      "name": "Lanterns & Kasavu"
+    },
+    {
+      "id": "kalyana-payanam",
+      "trackId": "2f96d434-1e2d-4711-a5a3-ee723cd6c36a",
+      "name": "Kalyana Payanam"
+    },
+    {
+      "id": "film-temple-v1",
+      "trackId": "4294f591-17fa-49ab-bdb5-2c4b4147486f",
+      "name": "Kalyana Deepam"
+    },
+    {
+      "id": "film-vector-v1",
+      "trackId": "dd9f761f-f61f-464f-9067-aef4fec83307",
+      "name": "Mangalam"
+    },
+    {
+      "id": "film-tiles-v1",
+      "trackId": "6def2b9e-7c73-43a2-9bab-60eec12c2912",
+      "name": "Word Tiles"
+    },
+    {
+      "id": "film-walk-v1",
+      "trackId": "c6beca6c-4618-41f8-8b28-d0e32be2550d",
+      "name": "Wisteria Walk"
+    },
+    {
+      "id": "film-kurinji-v1",
+      "trackId": "f898c1b2-8eba-42e8-9874-88f78a94fae5",
+      "name": "Kurinji"
+    },
+    {
+      "id": "film-jannal-v1",
+      "trackId": "e74bdf42-a269-4fe4-ab2a-20bea5f9b075",
+      "name": "Jannal"
+    },
+    {
+      "id": "film-kalyana-v1",
+      "trackId": "e886acdd-cc27-4e7b-b048-7bd0b44b7a37",
+      "name": "Kalyana Poster"
+    },
+    {
+      "id": "film-avalum-v1",
+      "trackId": "8c2272b7-04a3-44d0-a6d6-20f10cf43f97",
+      "name": "Avalum Nanum"
+    },
+    {
+      "id": "film-thamarai-v1",
+      "trackId": "3d5b5336-d527-4464-b246-dad40235c0bf",
+      "name": "Thamarai"
+    },
+    {
+      "id": "film-savedate-v1",
+      "trackId": "902a30af-86c6-408d-876c-34f4981bc8ec",
+      "name": "Save the Date"
+    },
+    {
+      "id": "film-kulam-v1",
+      "trackId": "e7d9e67a-50c8-42a1-8c61-344bcdf2be20",
+      "name": "Thamarai Kulam"
+    },
+    {
+      "id": "film-hopon-v1",
+      "trackId": "84fcdffa-a210-4e85-b97a-e8a21809971f",
+      "name": "Hop On"
+    },
+    {
+      "id": "film-oonjal-v1",
+      "trackId": "3c57fe85-cc2a-48e8-ae42-4f6779efebf4",
+      "name": "Mapla Veetla Okay"
+    },
+    {
+      "id": "film-rajakumari-v1",
+      "trackId": "5969eade-83bd-4f25-9c5d-56b7404c92f1",
+      "name": "Rajakumari"
+    },
+    {
+      "id": "film-rajakumaran-v1",
+      "trackId": "5969eade-83bd-4f25-9c5d-56b7404c92f1",
+      "name": "Rajakumaran"
+    },
+    {
+      "id": "film-ilavarasi-v1",
+      "trackId": "6e7cbbd3-eaae-4602-8b5f-f3c9a16ea81f",
+      "name": "Kutti Ilavarasi"
+    },
+    {
+      "id": "temple-v1",
+      "trackId": "da80d21d-f44c-446b-a7eb-f5acb363762b",
+      "name": "Temple Wedding"
+    }
+  ],
+  "skippedWebsites": [
+    {
+      "id": "pulli",
+      "name": "Pulli",
+      "referenceUrl": "https://cinorev.in/siddharth-kayal/",
+      "sourceAudio": "https://cinorev.in/siddharth-kayal/music.m4a"
+    },
+    {
+      "id": "pattu",
+      "name": "Pattu",
+      "referenceUrl": "https://cinorev.in/pranav-harini/",
+      "sourceAudio": "https://cinorev.in/pranav-harini/music.m4a"
+    },
+    {
+      "id": "olai",
+      "name": "Olai",
+      "referenceUrl": "https://cinorev.in/senthil-abirami/",
+      "sourceAudio": "https://cinorev.in/senthil-abirami/music.m4a"
+    },
+    {
+      "id": "jasmine-arch",
+      "name": "Jasmine Arch",
+      "referenceUrl": "https://cinorev.in/nikhil-shreya/",
+      "sourceAudio": "https://cinorev.in/nikhil-shreya/music.m4a"
+    },
+    {
+      "id": "palace-of-lights",
+      "name": "Palace of Lights",
+      "referenceUrl": "https://cinorev.in/aarav-meher/",
+      "sourceAudio": "https://cinorev.in/aarav-meher/music.m4a"
+    }
+  ],
+  "silentSourceVideos": [
+    "film-drive-v1",
+    "film-garden-v1",
+    "film-bollywood-v1",
+    "film-truckart-v1",
+    "film-kovil-v1",
+    "film-royal-v1",
+    "film-kerala-v1",
+    "film-veedu-v1",
+    "film-valli-v1",
+    "film-aranmanai-v1",
+    "film-gettimelam-v1",
+    "film-kondattam-v1",
+    "film-mandapam-v1",
+    "film-thottam-v1",
+    "film-poonga-v1",
+    "film-roja-v1",
+    "film-malligai-v1",
+    "film-gopuram-v1",
+    "film-theppam-v1",
+    "film-chettinad-v1",
+    "film-karaikudi-v1",
+    "film-velicham-v1"
+  ],
+  "verification": {
+    "serverTests": 78,
+    "build": "passed",
+    "api": "All 29 original byte ranges, 29 export pins, 17 video defaults and 14 website/dedicated-form pairs passed locally",
+    "browser": {
+      "engine": "Chromium in-app browser",
+      "viewport": "390x844",
+      "physicalIPhone": false,
+      "nativeEdge": false,
+      "checks": [
+        "No media before Play",
+        "Assigned original audio advances with catalog video",
+        "Fullscreen preserves playback position",
+        "Switching cards leaves one video/audio pair",
+        "Search changes release media",
+        "Original track preselected in new form",
+        "Listen and No music work",
+        "Changed music survives draft reload",
+        "No horizontal overflow at 390px",
+        "Word Tiles handles empty names and identical single-letter names"
+      ]
+    },
+    "exports": {
+      "temple": {
+        "result": {
+          "frames": 1296,
+          "width": 720,
+          "height": 1280,
+          "duration": 54,
+          "bytes": 28215972,
+          "resultSha256": "9b8c62d743f1028b6f1bc5313f377aa83c57a4e41f5a27f6c5d011cb6d1bf4e0",
+          "backgroundSha256": "9c523a7b9c8428d01083540a9f9db51c8e138ede5bf3ee800be375dab187c9bb"
+        },
+        "streams": [
+          {
+            "codec": "h264",
+            "type": "video",
+            "duration": "54.000000"
+          },
+          {
+            "codec": "aac",
+            "type": "audio",
+            "duration": "54.000000"
+          }
+        ],
+        "comment": "Original recording, unchanged.",
+        "rms": {
+          "5": 0.12207323436895927,
+          "46": 0.10819409284058423
+        }
+      },
+      "wordTiles": {
+        "result": {
+          "frames": 1377,
+          "width": 720,
+          "height": 1280,
+          "duration": 57.375,
+          "bytes": 18149842,
+          "resultSha256": "99556654013c01d3302be15567fcd696651b1f7974a9268cb20a9623ca72411e",
+          "backgroundSha256": "09f1fb5cc66c2d43e23e92dffe87d01016c41e81ab9be970b8f7e7a712cc4539",
+          "graphicsProfile": "mesa-mipmap-v1"
+        },
+        "streams": [
+          {
+            "codec": "h264",
+            "type": "video",
+            "duration": "57.375000"
+          },
+          {
+            "codec": "aac",
+            "type": "audio",
+            "duration": "57.365000"
+          }
+        ],
+        "comment": "Original mixed soundtrack extracted from the reference MP4 without re-encoding.",
+        "rms": {
+          "5": 0.13394913578998013,
+          "30": 0.1647597744461914,
+          "50": 0.14977668487208157
+        }
+      },
+      "snapshots": {
+        "temple": "snap_SgyS7NdODsft7v8UshRQHbxkqwlr",
+        "scene": "snap_7AOb2QtbW29ARfyoiEvEi3MBXFn3"
+      },
+      "snapshotsExpire": false
+    }
+  },
+  "rollback": {
+    "assignments": "Use owner assignment controls or owner_save to restore previousEffectiveTrackIds. Archive imported tracks to hide them from new selections while retaining saved invitations.",
+    "wordTiles": "Restore film-tiles-v1/manifest-v1.json as manifest.json and the prior scene worker snapshot; original locked assets are retained.",
+    "previousEffectiveTrackIds": {
+      "golden-hour": "heartwarming",
+      "midnight-stage": "heartwarming",
+      "little-blessing": "heartwarming",
+      "noir-and-gold": "heartwarming",
+      "pearl-and-sapphire": "heartwarming",
+      "royal-crimson": "heartwarming",
+      "garden-curtains": "heartwarming",
+      "moonlit-nikah": "heartwarming",
+      "the-ring-box": "heartwarming",
+      "home-sweet-home": "heartwarming",
+      "up-and-away": "heartwarming",
+      "temple-doors": "heartwarming",
+      "kerala-lanterns": "heartwarming",
+      "kalyana-payanam": "heartwarming",
+      "film-temple-v1": "",
+      "film-vector-v1": "",
+      "film-tiles-v1": "",
+      "film-walk-v1": "",
+      "film-kurinji-v1": "",
+      "film-jannal-v1": "",
+      "film-kalyana-v1": "",
+      "film-avalum-v1": "",
+      "film-thamarai-v1": "",
+      "film-savedate-v1": "",
+      "film-kulam-v1": "",
+      "film-hopon-v1": "",
+      "film-oonjal-v1": "",
+      "film-rajakumari-v1": "",
+      "film-rajakumaran-v1": "",
+      "film-ilavarasi-v1": "",
+      "temple-v1": ""
+    }
+  },
+  "productionReceipt": "work/original-audio/import/production-release.json (local deployment and live verification receipt)"
+}

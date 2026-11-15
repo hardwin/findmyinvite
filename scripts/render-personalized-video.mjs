@@ -69,7 +69,7 @@ export async function renderPersonalizedVideo({master,content,photos={},audioFil
    if(content.music.mode!=='none'&&!audio)throw Error('Selected audio asset missing.');
    await mkdir(resolve(output,'..'),{recursive:true});
    const args=['-hide_banner','-loglevel','error','-y','-f','image2pipe','-framerate','24','-i','pipe:0'];
-   if(audio)args.push('-i',audio,'-map','0:v','-map','1:a:0','-af','apad,atrim=0:54,afade=t=in:st=0:d=1,afade=t=out:st=51:d=3','-c:a','aac','-b:a','160k');else args.push('-an');
+   if(audio){if(content.music.mode==='library')args.push('-stream_loop','-1');args.push('-i',audio,'-map','0:v','-map','1:a:0','-af','apad,atrim=0:54,afade=t=in:st=0:d=1,afade=t=out:st=51:d=3','-c:a','aac','-b:a','160k');}else args.push('-an');
    args.push('-c:v','libx264','-preset','fast','-crf','20','-pix_fmt','yuv420p','-r','24','-frames:v','1296','-t','54','-movflags','+faststart');
    if(content.music.mode==='library')args.push('-metadata','comment='+(audioCredit||(MUSIC[content.music.id]?MUSIC[content.music.id].credit+' '+MUSIC[content.music.id].license:'')));
    args.push(output);encoder=spawn(ffmpeg,args,{windowsHide:true,stdio:['pipe','ignore','pipe']});encoder.stderr.on('data',b=>{encoderErrors=(encoderErrors+b).slice(-8000);});done=new Promise((yes,no)=>{encoder.once('error',no);encoder.once('close',code=>code===0?yes():no(Error('Encoding failed: '+encoderErrors)));});done.catch(()=>{});

@@ -11,6 +11,14 @@ test('draft and review titles retain language, name order, birthdays and housewa
  assert.equal(invitationNames(), '');
 });
 const future=content=>Object.fromEntries(Object.entries(content).map(([k,v])=>[k,typeof v==='string'&&/^\d{4}-\d\d-\d\d$/.test(v)?'2027'+v.slice(4):v]));
+test('Word Tiles accepts its locked revision and preserves the previous master',async()=>{
+ const current=JSON.parse(await readFile('public/assets/video-masters/film-tiles-v1/manifest.json'));
+ const previous=JSON.parse(await readFile('public/assets/video-masters/film-tiles-v1/manifest-v1.json'));
+ assert.doesNotThrow(()=>assertMaster(current,{released:true}));
+ assert.doesNotThrow(()=>assertMaster(previous,{released:true}));
+ assert.throws(()=>assertMaster({...current,sceneFrame:'https://example.com/frame.html'},{released:true}),/Unsupported scene frame/);
+ assert.throws(()=>assertMaster({...current,assets:previous.assets},{released:true}),/still being prepared/);
+});
 test('scene downloads require their own worker while the existing Temple worker remains valid',async()=>{
  const raw=JSON.parse(await readFile('public/assets/video-masters/film-drive-v1/manifest.json'));
  const scene={...raw,release:{approved:true,rendererVersion:raw.rendererVersion,proofs:{default:'a'.repeat(64),personalized:'b'.repeat(64)}}};

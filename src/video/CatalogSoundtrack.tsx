@@ -7,7 +7,7 @@ import type {VideoEntry} from './catalog';
 // The parent starts both media elements in the explicit Play gesture. No media is
 // mounted before Play, and preload=none keeps muted recordings off the network.
 export default function CatalogSoundtrack({entry,videoRef,audioRef}:{entry:VideoEntry;videoRef:RefObject<HTMLVideoElement|null>;audioRef:RefObject<HTMLAudioElement|null>}){
- const muted=usePreviewMuted(),repeat=entry.id.startsWith('film-');
+ const muted=usePreviewMuted(),repeat=true;
  function sync(){
   const audio=audioRef.current,video=videoRef.current;if(!audio||!video)return;
   const time=video.currentTime,known=Number.isFinite(audio.duration)&&audio.duration>0,target=repeat&&known?time%audio.duration:time;

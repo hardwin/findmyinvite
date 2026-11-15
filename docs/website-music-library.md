@@ -71,18 +71,30 @@ invitations.
 
 ## Original recording audit
 
-`docs/templates/original-audio-audit.json` records the reference pairing for 22
-websites and 38 added videos, plus the unresolved legacy Temple recording.
-It distinguishes songs, sound effects, timed mixes and silent samples. Kalyana
-Payanam's reference starts Kiliye at 91 seconds and loops from that offset.
+`docs/templates/original-audio-audit.json` records source URLs, checksums and
+processing for the original recordings. `original-music-release.json` records
+the library IDs, assignments, verification and rollback information.
 
-This audit is not an import manifest. No reference recording has been added
-to the ready library: reuse permission has not been recorded. The public
-library still contains the two licensed starter recordings. Do not label a
-fallback as an original song or fabricate upload rights confirmation. Once a
-recording is approved, upload it through the owner workflow, preserve its
-attribution, and assign its template explicitly. Timed mixes/offset playback
-require a separate reviewed implementation before claiming source parity.
+The owner instructed import and stated that they handle recording rights
+outside the application. Imported metadata records that statement; it does
+not assert independent licence verification or attach a starter track's licence.
+
+The release adds 29 distinct recordings and assigns them to 17 videos and 14
+websites. The existing Tamil 3D/Temple video uses the Thoon reference's Getti
+Melam. Exact duplicate recordings share one library entry. Kalyana Payanam's
+Kiliye is prepared from the reference's 91-second start. Word Tiles retains
+the source MP4's mixed soundtrack without re-encoding on import. Optional
+scene changes do not retime the original recorded sound effects.
+
+All 38 added source MP4s were probed. Twenty-two contain no audio stream and
+receive no inferred original song; customers can select any library track.
+Pulli, Pattu, Olai, Jasmine Arch and Palace of Lights were skipped at the
+owner's request after source retrieval failed.
+
+Library tracks loop in every video family, including the legacy Temple
+renderer, with the existing export fades. Customer uploads retain their
+previous behavior. Word Tiles' blank-name guard uses a versioned scene bundle;
+the previous manifest and artwork remain available for rollback.
 
 ## Local review and rollout
 
