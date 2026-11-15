@@ -44,6 +44,11 @@ body.di-site .content-page,body.di-site .editor-shell{background:#fffdf9;color:#
 .di-app .di-use-template:hover{background:#2e3c54}
 .di-app .di-thumbnail-preview{position:absolute;z-index:4;top:50%;left:50%;transform:translate(-50%,-50%);display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:44px;padding:10px 16px;border:1px solid #fff9;border-radius:999px;background:#ffffffa6;backdrop-filter:blur(7px);color:#182235;box-shadow:0 3px 18px #0003;font:650 13px/1 'Hanken Grotesk',Arial,sans-serif;cursor:pointer}
 .di-app .di-thumbnail-preview:hover{background:#ffffffc7;box-shadow:0 4px 20px #0005}
+.di-app .di-preview-loading{pointer-events:none;cursor:default}
+.di-preview-sound{position:absolute;z-index:5;right:10px;bottom:10px;display:grid;place-items:center;width:36px;height:36px;padding:0;border:1px solid #ffffff99;border-radius:50%;background:#ffffffb8;backdrop-filter:blur(7px);color:#182235;box-shadow:0 2px 9px #0002;cursor:pointer}
+.di-preview-sound:hover{background:#ffffffd1}
+.di-preview-sound:focus-visible{outline:3px solid #182235;outline-offset:3px}
+.di-expanded-card .di-video-demo .di-preview-sound{bottom:54px}
 .di-app .di-collection-title{margin:0 0 18px;font:700 28px/1.2 Montserrat,Arial,sans-serif;letter-spacing:-.025em}
 .di-video-collection{margin:40px 0}
 .di-video-collection>header{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:18px}

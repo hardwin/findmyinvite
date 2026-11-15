@@ -78,8 +78,10 @@ try{
   const websitePreview=page.getByRole('button',{name:'Preview Bells & Blessings',exact:true});
   await websitePreview.click();
   await page.waitForFunction(()=>document.querySelector('.di-pin iframe')?.style.opacity==='1');
-  await page.getByRole('button',{name:'Stop preview for Bells & Blessings',exact:true}).click();
-  assert.equal(await page.locator('iframe').count(),0,'Website preview can be stopped');
+  assert.equal(await page.getByRole('button',{name:/Stop preview for/}).count(),0);
+  await page.getByRole('button',{name:'Mute music for Bells & Blessings',exact:true}).click();
+  await page.locator('.di-footer').scrollIntoViewIfNeeded();
+  await page.waitForFunction(()=>!document.querySelector('iframe'));
 
   // Expanded previews use the same details and selection links, then restore page/focus.
   assert.equal(await page.locator('.di-pin-save').count(),0);
@@ -199,7 +201,11 @@ try{
   await firstVideo.getByRole('button',{name:/Play preview/}).click();
   if(canPlayMp4){
    await page.waitForFunction(()=>Array.from(document.querySelectorAll('video')).some(video=>!video.paused&&video.currentTime>0),null,{timeout:45000});
-   await firstVideo.getByRole('button',{name:/Stop preview/}).click();
+   assert.equal(await firstVideo.locator('.di-thumbnail-preview').count(),0);
+   await firstVideo.getByRole('button',{name:/Unmute music/}).click();
+   await firstVideo.getByRole('button',{name:/Mute music/}).click();
+   await page.locator('.di-footer').scrollIntoViewIfNeeded();
+   await page.waitForFunction(()=>!document.querySelector('video'));
   }else{
    await firstVideo.getByRole('button',{name:/Retry preview/}).waitFor();
    assert.match(await firstVideo.getByRole('status').textContent(),/Preview could not load/);

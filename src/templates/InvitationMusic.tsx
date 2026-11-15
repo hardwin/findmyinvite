@@ -5,7 +5,7 @@ import {isLocalMedia,localMediaUrl} from './local-media';
 import './invitation-music.css';
 import {claimMusic,watchMusic} from './music-focus';
 
-export default function InvitationMusic({src,preview=false}:{src:string;preview?:boolean}){
+export default function InvitationMusic({src,preview=false,controls=true}:{src:string;preview?:boolean;controls?:boolean}){
  const audio=useRef<HTMLAudioElement>(null),wanted=useRef(true);
  const [url,setUrl]=useState(preview||isLocalMedia(src)?'':src),[playing,setPlaying]=useState(false);
  const [credit,setCredit]=useState<{title:string;credit:string;licenseUrl:string;sourceUrl:string}|null>(null);
@@ -29,5 +29,5 @@ export default function InvitationMusic({src,preview=false}:{src:string;preview?
   return()=>{stopWatching();observer.disconnect();cleanups.forEach(fn=>fn());document.removeEventListener('visibilitychange',visibility);player.pause();player.removeEventListener('canplay',start);document.removeEventListener('pointerdown',gesture);document.removeEventListener('touchend',gesture);document.removeEventListener('keydown',gesture);};
  },[url,preview]);
  function toggle(){const player=audio.current;if(!player)return;if(!player.paused){wanted.current=false;player.pause();}else{wanted.current=true;void player.play().catch(()=>setPlaying(false));}}
- return <><audio ref={audio} src={url||undefined} loop autoPlay preload="auto" onPlay={e=>{claimMusic(e.currentTarget);setPlaying(true)}} onPause={()=>setPlaying(false)} onError={()=>setPlaying(false)}/><button type="button" className="invitation-sound" aria-label={playing?'Mute music':'Unmute music'} aria-pressed={playing} onClick={toggle}>{playing?<Volume2 size={20} aria-hidden="true"/>:<VolumeX size={20} aria-hidden="true"/>}</button>{credit?.credit&&<details className="invitation-music-credit"><summary aria-label="Music credits">♪</summary><p>{credit.credit} {credit.sourceUrl&&<a href={credit.sourceUrl} target="_blank" rel="noreferrer">Source</a>} {credit.licenseUrl&&<a href={credit.licenseUrl} target="_blank" rel="noreferrer">Licence</a>}</p></details>}</>;
+ return <><audio ref={audio} data-invitation-music src={url||undefined} loop autoPlay preload="auto" onPlay={e=>{claimMusic(e.currentTarget);setPlaying(true)}} onPause={()=>setPlaying(false)} onError={()=>setPlaying(false)}/>{controls&&<button type="button" className="invitation-sound" aria-label={playing?'Mute music':'Unmute music'} aria-pressed={playing} onClick={toggle}>{playing?<Volume2 size={20} aria-hidden="true"/>:<VolumeX size={20} aria-hidden="true"/>}</button>}{credit?.credit&&<details className="invitation-music-credit"><summary aria-label="Music credits">♪</summary><p>{credit.credit} {credit.sourceUrl&&<a href={credit.sourceUrl} target="_blank" rel="noreferrer">Source</a>} {credit.licenseUrl&&<a href={credit.licenseUrl} target="_blank" rel="noreferrer">Licence</a>}</p></details>}</>;
 }
