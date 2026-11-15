@@ -6,6 +6,8 @@ import type {shopCard} from './shop';
 import './discovery-sections.css';
 
 type Card=ReturnType<typeof shopCard>;
+// Temporarily hidden; enable this to restore the homepage promotion.
+const PINS_PROMOTION_ENABLED=false;
 
 export function BrowseCategories({cards,loading}:{cards:Card[];loading:boolean}){
  return <section className="dc-categories" aria-labelledby="dc-category-title">
@@ -46,7 +48,7 @@ function Pushpin(){
 
 export function PinsPromotion(){
  const [dismissed,setDismissed]=useState(false);
- if(dismissed)return null;
+ if(!PINS_PROMOTION_ENABLED||dismissed)return null;
  return <aside className="dc-promotion" aria-label="My Pins">
   <div className="dc-board" aria-hidden="true">
    {['christian','hindu','muslim'].map(id=>{
