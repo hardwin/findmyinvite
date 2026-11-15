@@ -1,9 +1,19 @@
 import test from 'node:test';import assert from 'node:assert/strict';import {createHmac} from 'node:crypto';
 import templates from '../api/templates.mjs';import payments from '../api/payments.mjs';import invitations from '../api/invitations.mjs';import {settleWebsiteOrder} from '../server/template-payments.mjs';
+import previewMedia from '../shared/catalog-preview-media.mjs';
 const user='4744ee35-ed37-4127-b529-a19db8f2132a',version='e68b78a9-550b-4fe0-80ac-176bf045b0ee',order='287f40e8-e72d-42c7-b93b-8ac4d9342f89';
 async function request(fn,url,body,headers={}){const res={headers:{},setHeader(k,v){this.headers[k]=v;},status(n){this.code=n;return this;},json(value){this.body=value;}};await fn({url,method:body===undefined?'GET':'POST',body,headers,socket:{remoteAddress:'local'}},res);return res;}
 function fixture(t,route){const env={...process.env};Object.assign(process.env,{SUPABASE_URL:'https://fixture.supabase.co',SUPABASE_SERVICE_ROLE_KEY:'fixture',RAZORPAY_KEY_ID:'rzp_test_fixture',RAZORPAY_KEY_SECRET:'fixture-secret',RAZORPAY_WEBHOOK_SECRET:'fixture-hook',RATE_LIMIT_SECRET:'test-012345678901234567890123456789'});t.after(()=>{t.mock.restoreAll();for(const k of Object.keys(process.env))if(!(k in env))delete process.env[k];Object.assign(process.env,env);});t.mock.method(globalThis,'fetch',async(url,options={})=>{const u=new URL(url);const value=await route(u,options);return value instanceof Response?value:new Response(JSON.stringify(value??[]));});}
 test('ordinary authenticated customer cannot administer catalog',async t=>{fixture(t,u=>u.pathname==='/auth/v1/user'?{id:user,email:'fixture@example.com'}:[]);const r=await request(templates,'/api/templates?action=list',undefined,{authorization:'Bearer fixture'});assert.equal(r.code,403);});
+
+test('public thumbnails use named demo media only for the matching published version',async t=>{
+ const media=previewMedia.websites['christian-bells'];
+ const rows=[{id:'christian-bells',current_version_id:media.version,thumbnail:'/original.webp'},{id:'kerala-lanterns',current_version_id:'future-release',thumbnail:'/future.webp'},{id:'new-design',current_version_id:version,thumbnail:'/new.webp'}];
+ fixture(t,()=>structuredClone(rows));
+ const r=await request(templates,'/api/templates?action=public');
+ assert.equal(r.code,200);assert.equal(r.body.templates[0].thumbnail,media.poster);
+ assert.deepEqual(r.body.templates.slice(1),rows.slice(1));assert.equal(rows[0].thumbnail,'/original.webp');
+});
 test('GST quote comes from central config and no gateway secret is public',async t=>{fixture(t,u=>u.pathname.endsWith('/website_offer')?[{tax_bps:1800,tax_label:'GST'}]:[]);const r=await request(payments,'/api/payments?action=v2-config');assert.equal(r.code,200);assert.equal(r.body.quote.totalPaise,23482);assert.equal(r.body.quote.taxPaise,3582);assert.equal(r.body.configured,true);assert.equal(JSON.stringify(r.body).includes('fixture-secret'),false);});
 test('absent tax treatment disables checkout',async t=>{fixture(t,()=>[]);const r=await request(payments,'/api/payments?action=v2-config');assert.equal(r.body.configured,false);assert.equal(r.body.quote,null);});
 test('private invitation is not returned to another owner',async t=>{fixture(t,u=>u.pathname==='/auth/v1/user'?{id:user}:u.pathname.endsWith('/invitations')?[{id:'i',owner_id:'other-owner',template_version_id:version}]:[]);const r=await request(invitations,'/api/invitations?action=v2-manage&slug=private-fixture',undefined,{authorization:'Bearer fixture'});assert.equal(r.code,404);});

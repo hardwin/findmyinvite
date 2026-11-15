@@ -4,6 +4,7 @@ import {previewCopy} from './preview-copy.mjs';
 import {languageLocale,INVITATION_LANGUAGES} from './invitation-languages.mjs';
 import {previewDictionary} from './preview-translations.mjs';
 import {CINOREV_RENDERERS} from './cinorev-renderers.mjs';
+import {applyWebsitePreviewNames} from './preview-identities.mjs';
 
 const names=`
 christian-bells|അന്ന തോമസ്|അലക്സ്|அன்னா தாமஸ்|அலெக்ஸ்|అన్నా థామస్|అలెక్స్|ಅನ್ನಾ ಥಾಮಸ್|ಅಲೆಕ್ಸ್|अन्ना थॉमस|एलेक्स
@@ -63,7 +64,7 @@ const maps={
  'stained-glass':{venue:'baronia',address:'barcelona','section0.text1':'invite','section2.text0':'welcome','section2.text1':'gift','section2.text2':'closing','section3.text2':'invite','section3.text3':'empty','section3.text4':'welcome','section4.text2':'barcelona','section4.text3':'empty','section4.text5':'barcelona','section4.text6':'barcelona','section5.text1':'formal','section5.text2':'dressNote','section6.text0':'programme','section6.text1':'schedule','section6.text2':'empty','section6.text3':'arriveEarly','section6.text13':'party','section7.text1':'gift','section7.text2':'empty','section7.text3':'giftMoney','section8.text2':'route','section8.text3':'hotel','section8.text4':'roure','section8.text5':'barcelona','section8.text6':'nextDay','section8.text7':'night110','section8.text8':'night160','section8.text9':'booking','section8.text10':'booking','section8.text11':'parking','section8.text12':'breakfast'},
  'royal':{venue:'olivar',address:'ronda','welcome.venue':'bodega','welcome.address':'ronda','farewell.venue':'parador','farewell.address':'ronda','section2.text1':'welcome','section3.text2':'ronda','section3.text3':'empty','section4.text10':'cake','section5.text1':'women','section5.text2':'formal','section5.text3':'men','section5.text4':'suit','section6.text0':'preWedding','section6.text1':'gatheringHeading','section6.text2':'gathering','section6.text4':'welcomeDate','section6.text6':'bodega','section6.text8':'farewellDate','section6.text10':'parador','section7.text1':'ronda','section7.text2':'route','section8.text1':'stayIntro','section8.text2':'parador','section8.text3':'ronda','section8.text4':'hotelNote','section8.text7':'hotelNote','section8.text5':'catalonia','section8.text6':'ronda','section8.text8':'booking','section8.text9':'montelirio','section8.text10':'ronda','section8.text11':'hotelNote','section8.text12':'booking','section9.text1':'giftMoney','section10.text0':'replyIntro'}
 };
-export function previewContent(version,language){
+function localizedPreviewContent(version,language){
  if(!INVITATION_LANGUAGES.includes(language))language='en';
  if(CINOREV_RENDERERS.includes(version.renderer))return {...structuredClone(version.defaults),language,_catalogPreview:true,previewGuest:''};
  const content=structuredClone(version.defaults);if(["thiruvarul","kalyana-payanam"].includes(version.template_id))return journeyPreview(version.template_id,content,language);if(version.template_id==='theeram')return theeramPreview(content,language);
@@ -83,3 +84,4 @@ export function previewContent(version,language){
  }
  const result=walk(content);result.previewGuest='';result.language=language;result._catalogPreview=true;return result;
 }
+export function previewContent(version,language){return applyWebsitePreviewNames(localizedPreviewContent(version,language),version);}
