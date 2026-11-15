@@ -81,6 +81,43 @@ try{
   await page.getByRole('button',{name:'Stop preview for Bells & Blessings',exact:true}).click();
   assert.equal(await page.locator('iframe').count(),0,'Website preview can be stopped');
 
+  // Expanded previews use the same details and selection links, then restore page/focus.
+  assert.equal(await page.locator('.di-pin-save').count(),0);
+  for(const selector of ['.di-pin','.di-video-card']){
+   const source=page.locator(selector).first();
+   const expand=source.getByRole('button',{name:/^Expand /});
+   await expand.scrollIntoViewIfNeeded();
+   const previous=await page.evaluate(()=>({y:window.scrollY,x:document.querySelector('.di-video-cards').scrollLeft}));
+   const details=await source.locator('.di-card-details').textContent();
+   const href=await source.locator('.di-use-template').getAttribute('href');
+   const translucent=await source.locator('.di-thumbnail-preview').evaluate(el=>({background:getComputedStyle(el).backgroundColor,opacity:getComputedStyle(el).opacity}));
+   assert.match(translucent.background,/rgba\(/);
+   assert.equal(translucent.opacity,'1');
+   await expand.click();
+   const dialog=page.getByRole('dialog');
+   await dialog.waitFor();
+   assert.equal(await dialog.locator('.di-card-details').textContent(),details);
+   assert.equal(await dialog.locator('.di-use-template').getAttribute('href'),href);
+   assert.equal(await dialog.locator('.di-card-expand').count(),0);
+   assert.ok(await dialog.evaluate(el=>{const r=el.getBoundingClientRect();return r.width===innerWidth&&Math.abs(r.height-innerHeight)<1;}));
+   if(selector==='.di-pin')await page.waitForFunction(()=>document.querySelector('[role="dialog"] iframe')?.style.opacity==='1');
+   else{
+    const supported=await page.evaluate(()=>Boolean(document.createElement('video').canPlayType('video/mp4; codecs="avc1.42E01E"')));
+    if(supported)await page.waitForFunction(()=>{const v=document.querySelector('[role="dialog"] video');return v&&!v.paused&&v.currentTime>0;});
+    else await dialog.getByRole('button',{name:/Retry preview/}).waitFor();
+   }
+   assert.ok(await dialog.locator('.di-fullscreen-close').evaluate(el=>{const r=el.getBoundingClientRect();return r.top>=0&&r.bottom<=innerHeight;}),'Close button stays fully visible');
+   await page.screenshot({path:'work/discovery-review/fullscreen-'+width+'-'+(selector==='.di-pin'?'website':'video')+'.png'});
+   await dialog.getByRole('button',{name:'Close fullscreen preview'}).click();
+   await dialog.waitFor({state:'hidden'});
+   await page.waitForFunction(y=>Math.abs(window.scrollY-y)<2,previous.y);
+   assert.equal(await expand.evaluate(el=>document.activeElement===el),true,'Expand trigger regains focus');
+   assert.equal(await page.locator('.di-video-cards').evaluate(el=>el.scrollLeft),previous.x);
+   assert.equal(await page.locator('iframe,video').count(),0,'Closing disposes preview media');
+   await expand.click();await dialog.waitFor();await page.keyboard.press('Escape');await dialog.waitFor({state:'hidden'});
+   await page.waitForFunction(y=>Math.abs(window.scrollY-y)<2,previous.y);
+  }
+
   async function websiteIds(){
    await page.waitForFunction(()=>document.querySelector('.df-controls .df-count')&&!document.querySelector('#di-results')?.textContent.includes('Loading invitations…'));
    return sorted(await page.locator('.di-pin .di-card-details h3 a').evaluateAll(links=>links.map(a=>new URL(a.href).searchParams.get('product'))));
@@ -106,7 +143,9 @@ try{
    }else{
     const expected=sorted(catalog.filter(template=>matchesDiscoverySearch(template,browseCategories.find(c=>c.label===link.label)?.query??link.label)).map(t=>t.id));
     assert.deepEqual(await websiteIds(),expected,link.label+' results');
-    assert.equal(await page.locator('.df-controls .df-count').textContent(),`${expected.length} designs`);
+    const expectedVideos=new URL(link.href,origin).searchParams.get('kind')==='all'?videos.filter(video=>matchesVideoSearch(video,new URL(link.href,origin).searchParams.get('q')||'')):[];
+    if(new URL(link.href,origin).searchParams.get('kind')==='all')assert.deepEqual(await videoNames(),sorted(expectedVideos.map(v=>v.name)),link.label+' video results');
+    assert.equal(await page.locator('.df-controls .df-count').textContent(),`${expected.length+expectedVideos.length} designs`);
     if(link.count)assert.equal(link.count,`${expected.length} invitations`,link.label+' category count');
     for(const price of await page.locator('.di-pin .di-card-price strong').allTextContents())assert.equal(price,'₹199');
    }
@@ -116,8 +155,15 @@ try{
    await page.goto(origin+'/templates?q='+encodeURIComponent(query),{waitUntil:'domcontentloaded'});
    assert.deepEqual(await websiteIds(),expected,query+' legacy URL');
   }
+  await page.goto(origin+'/templates?kind=website&tradition=christian',{waitUntil:'domcontentloaded'});
+  await websiteIds();
+  await page.getByRole('textbox',{name:'Search designs',exact:true}).fill('Temple');
+  await page.getByRole('textbox',{name:'Search designs',exact:true}).press('Enter');
+  assert.deepEqual(await websiteIds(),sorted(catalog.filter(t=>matchesDiscoverySearch(t,'Temple')).map(t=>t.id)));
+  assert.deepEqual(await videoNames(),sorted(videos.filter(t=>matchesVideoSearch(t,'Temple')).map(t=>t.name)));
+  assert.equal(new URL(page.url()).searchParams.has('kind'),false);
   await page.goto(origin+'/templates?q=Save%20the%20Date',{waitUntil:'domcontentloaded'});
-  assert.deepEqual(await videoNames(),['Save the Date','Save the Date Drive']);
+  assert.deepEqual(await videoNames(),['Hop On','Karaikudi','Save the Date','Save the Date Drive']);
 
   await page.goto(origin+'/templates',{waitUntil:'domcontentloaded'});
   assert.equal((await websiteIds()).length,28);
@@ -129,7 +175,8 @@ try{
   await page.getByRole('option',{name:'Courtyard',exact:true}).click();
   await page.waitForFunction(()=>document.querySelectorAll('.di-pin .di-card-details').length===1);
   assert.deepEqual(await websiteIds(),['moonlit-nikah']);
-  await page.getByRole('button',{name:'Pin Moonlit Nikah',exact:true}).click();
+  await page.locator('.di-pin .di-card-details h3 a').click();
+  await page.getByRole('button',{name:'Save to My Pins',exact:true}).click();
   await page.goto(origin+'/saved',{waitUntil:'domcontentloaded'});
   assert.deepEqual(await websiteIds(),['moonlit-nikah']);
   await page.locator('.di-pin .di-card-details h3 a').click();
@@ -146,7 +193,7 @@ try{
   assert.deepEqual(await websiteIds(),['garden-curtains','moonlit-nikah','royal-crimson']);
   await page.getByRole('textbox',{name:'Search designs',exact:true}).fill('Save the Date');
   await page.getByRole('textbox',{name:'Search designs',exact:true}).press('Enter');
-  assert.deepEqual(await videoNames(),['Save the Date','Save the Date Drive']);
+  assert.deepEqual(await videoNames(),['Hop On','Karaikudi','Save the Date','Save the Date Drive']);
   const firstVideo=page.locator('.di-video-card').first();
   const canPlayMp4=await page.evaluate(()=>Boolean(document.createElement('video').canPlayType('video/mp4; codecs="avc1.42E01E"')));
   await firstVideo.getByRole('button',{name:/Play preview/}).click();
@@ -168,7 +215,7 @@ try{
   assert.equal(await page.locator('.dc-category-card').filter({hasText:'Save the Date Video'}).locator('.dc-category-count').textContent(),'Browse videos');
   failed=false;
   await page.getByRole('button',{name:'Retry',exact:true}).click();
-  await page.waitForFunction(()=>Array.from(document.querySelectorAll('.dc-category-card')).find(e=>e.textContent.includes('Save the Date Video'))?.querySelector('.dc-category-count')?.textContent==='2 invitations');
+  await page.waitForFunction(()=>Array.from(document.querySelectorAll('.dc-category-card')).find(e=>e.textContent.includes('Save the Date Video'))?.querySelector('.dc-category-count')?.textContent==='4 invitations');
   await page.waitForFunction(()=>document.querySelectorAll('.di-video-card').length===4);
   assert.deepEqual(errors,[],'No browser exceptions');
   report.push({width,catalog:catalog.length,links:links.length,footerLinks:footer.length,counts:'passed',filters:'passed',search:'passed',pins:'passed',websitePreview:'passed',videoPlayback:canPlayMp4?'passed':'unsupported codec; recovery passed',catalogRetry:'passed'});

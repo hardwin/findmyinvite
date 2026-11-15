@@ -29,7 +29,7 @@ export function BrowseCategories({cards,loading}:{cards:Card[];loading:boolean})
     const href=discoveryHref(category.query,category.kind);
     return <a className="dc-category-card" key={category.id} href={href} aria-label={`Browse ${category.label}${pending||unavailable?'':`, ${count} invitations`}`}>
      <span className="dc-category-thumb" style={{backgroundImage:`url(${artwork.backgroundImage})`,backgroundColor:artwork.backgroundColor,backgroundBlendMode:artwork.backgroundBlend}}>
-      <img src={artwork.image} loading="lazy" srcSet={Object.entries((posters as Record<string,Record<string,string>>)[artwork.image]||{}).map(([w,url])=>url+' '+w+'w').join(',')} sizes="(max-width:600px) 160px, 240px" alt="" width={640} height={400} decoding="async"/>
+      <img src={artwork.image} style={{objectPosition:artwork.objectPosition}} loading="lazy" srcSet={Object.entries((posters as Record<string,Record<string,string>>)[artwork.image]||{}).map(([w,url])=>url+' '+w+'w').join(',')} sizes="(max-width:600px) 160px, 240px" alt={category.label+' artwork'} width={640} height={400} decoding="async"/>
       <span className="dc-category-count">{unavailable?'Browse videos':`${pending?'…':count} invitations`}</span>
      </span>
      <strong className="dc-category-name">{category.label}</strong>

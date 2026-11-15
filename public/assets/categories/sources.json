@@ -6,7 +6,8 @@
     "source": "Existing project transparent version of user-supplied Christian couple",
     "backgroundImage": "/assets/textures/champagne-silk.jpg",
     "backgroundColor": "#b7a897",
-    "backgroundBlend": "multiply"
+    "backgroundBlend": "multiply",
+    "objectPosition": "center top"
   },
   {
     "id": "hindu",
@@ -15,7 +16,8 @@
     "source": "User-supplied: Kerala Wedding Couple in Traditional Attire.png",
     "backgroundImage": "/assets/textures/green-fabric.jpg",
     "backgroundColor": "#215747",
-    "backgroundBlend": "normal"
+    "backgroundBlend": "normal",
+    "objectPosition": "center top"
   },
   {
     "id": "muslim",
@@ -24,7 +26,8 @@
     "source": "User-supplied: Elegant South Asian Wedding Couple.png",
     "backgroundImage": "/assets/textures/champagne-silk.jpg",
     "backgroundColor": "#489b9d",
-    "backgroundBlend": "multiply"
+    "backgroundBlend": "multiply",
+    "objectPosition": "center top"
   },
   {
     "id": "pixar",
@@ -33,7 +36,8 @@
     "source": "Existing project couple illustration",
     "backgroundImage": "/assets/textures/paper.jpg",
     "backgroundColor": "#8eacd6",
-    "backgroundBlend": "multiply"
+    "backgroundBlend": "multiply",
+    "objectPosition": "center top"
   },
   {
     "id": "palace",
@@ -42,7 +46,8 @@
     "source": "Existing project couple illustration",
     "backgroundImage": "/assets/textures/gold-leaf.jpg",
     "backgroundColor": "#bba15c",
-    "backgroundBlend": "soft-light"
+    "backgroundBlend": "soft-light",
+    "objectPosition": "center top"
   },
   {
     "id": "toon",
@@ -51,7 +56,8 @@
     "source": "Existing project couple illustration",
     "backgroundImage": "/assets/textures/paper.jpg",
     "backgroundColor": "#ce8d61",
-    "backgroundBlend": "multiply"
+    "backgroundBlend": "multiply",
+    "objectPosition": "center top"
   },
   {
     "id": "save-the-date",
@@ -60,6 +66,77 @@
     "source": "Existing project couple illustration",
     "backgroundImage": "/assets/textures/paper.jpg",
     "backgroundColor": "#9b7296",
-    "backgroundBlend": "multiply"
+    "backgroundBlend": "multiply",
+    "objectPosition": "center top"
+  },
+  {
+    "id": "date",
+    "label": "date",
+    "image": "/assets/categories/date.svg",
+    "source": "Original occasion illustration",
+    "backgroundImage": "",
+    "backgroundColor": "#f5eee5",
+    "backgroundBlend": "normal",
+    "objectPosition": "center"
+  },
+  {
+    "id": "engagement",
+    "label": "engagement",
+    "image": "/assets/categories/engagement.svg",
+    "source": "Original occasion illustration",
+    "backgroundImage": "",
+    "backgroundColor": "#f5eee5",
+    "backgroundBlend": "normal",
+    "objectPosition": "center"
+  },
+  {
+    "id": "videos",
+    "label": "videos",
+    "image": "/assets/categories/videos.svg",
+    "source": "Original occasion illustration",
+    "backgroundImage": "",
+    "backgroundColor": "#f5eee5",
+    "backgroundBlend": "normal",
+    "objectPosition": "center"
+  },
+  {
+    "id": "birthday",
+    "label": "birthday",
+    "image": "/assets/video-masters/film-rajakumari-v1/poster-640-v1.webp",
+    "source": "Authored invitation poster for this occasion",
+    "backgroundImage": "",
+    "backgroundColor": "#f5eee5",
+    "backgroundBlend": "normal",
+    "objectPosition": "center 22%"
+  },
+  {
+    "id": "housewarming",
+    "label": "housewarming",
+    "image": "/assets/video-masters/film-velicham-v1/poster-640-v1.webp",
+    "source": "Authored invitation poster for this occasion",
+    "backgroundImage": "",
+    "backgroundColor": "#f5eee5",
+    "backgroundBlend": "normal",
+    "objectPosition": "center 80%"
+  },
+  {
+    "id": "baby-shower",
+    "label": "baby-shower",
+    "image": "/assets/categories/baby-shower.svg",
+    "source": "Original occasion illustration",
+    "backgroundImage": "",
+    "backgroundColor": "#f5eee5",
+    "backgroundBlend": "normal",
+    "objectPosition": "center"
+  },
+  {
+    "id": "ear-piercing",
+    "label": "ear-piercing",
+    "image": "/assets/categories/ear-piercing.svg",
+    "source": "Original occasion illustration",
+    "backgroundImage": "",
+    "backgroundColor": "#f5eee5",
+    "backgroundBlend": "normal",
+    "objectPosition": "center"
   }
 ]
