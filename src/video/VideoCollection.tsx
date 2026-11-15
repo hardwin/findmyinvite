@@ -6,34 +6,36 @@ import TemplateCardDetails from '../TemplateCardDetails';
 import TemplatePreviewDialog from '../TemplatePreviewDialog';
 import {useVideoCatalog,type VideoEntry} from './catalog';
 import {filterVideoCatalog} from '../../shared/discovery-taxonomy.mjs';
-function VideoCard({entry,expanded=false}:{entry:VideoEntry;expanded?:boolean}){
+import {previewMuted,setPreviewMuted,usePreviewMuted} from '../preview-sound';
+function VideoCard({entry}:{entry:VideoEntry}){
  const videoRef=useRef<HTMLVideoElement>(null),box=useRef<HTMLElement>(null),[active,setActive]=useState(false),[failed,setFailed]=useState(false),[ready,setReady]=useState(false);
- const [muted,setMuted]=useState(true);
+ const muted=usePreviewMuted();
  const deadline=useRef<ReturnType<typeof setTimeout>|undefined>(undefined);
- useEffect(()=>{if(expanded)setActive(true);},[expanded]);
  const loadingProgress=useCallback(()=>{clearTimeout(deadline.current);deadline.current=setTimeout(()=>{setActive(false);setFailed(true);},45000);},[]);
  const attachVideo=useCallback((node:HTMLVideoElement|null)=>{const old=videoRef.current;if(old&&old!==node){old.pause();old.removeAttribute('src');old.load();}videoRef.current=node;if(node&&node.getAttribute('src')!==entry.preview)node.src=entry.preview;},[entry.preview]);
  useEffect(()=>{if(!active||ready)return;loadingProgress();return()=>clearTimeout(deadline.current);},[active,ready,loadingProgress]);
- useEffect(()=>{const stop=()=>setActive(false),hidden=()=>{if(document.hidden)stop();};const observer=new IntersectionObserver(([e])=>{if(!e.isIntersecting)stop();});observer.observe(box.current!);window.addEventListener('catalog-stop-all',stop);document.addEventListener('visibilitychange',hidden);return()=>{observer.disconnect();window.removeEventListener('catalog-stop-all',stop);document.removeEventListener('visibilitychange',hidden);};},[]);
+ useEffect(()=>{const stop=()=>setActive(false),hidden=()=>{if(document.hidden)stop();};const observer=new IntersectionObserver(([e])=>{const el=box.current;if(!e.isIntersecting&&el&&!el.closest('dialog[open]')){const r=el.getBoundingClientRect();if(r.bottom<=0||r.top>=innerHeight||r.right<=0||r.left>=innerWidth)stop();}});observer.observe(box.current!);window.addEventListener('catalog-stop-all',stop);document.addEventListener('visibilitychange',hidden);return()=>{observer.disconnect();window.removeEventListener('catalog-stop-all',stop);document.removeEventListener('visibilitychange',hidden);};},[]);
+ useEffect(()=>{if(!muted&&videoRef.current?.volume===0)videoRef.current.volume=1;},[muted]);
  const seconds=Math.max(0,Math.round(entry.duration));
  const duration=Math.floor(seconds/60)+':'+String(seconds%60).padStart(2,'0');
  const useHref='/video-personalise?template='+encodeURIComponent(entry.id);
  function startPreview(){
-  window.dispatchEvent(new Event('catalog-stop-all'));setFailed(false);setReady(false);setMuted(true);flushSync(()=>setActive(true));
+  if(active)return;
+  window.dispatchEvent(new Event('catalog-stop-all'));setFailed(false);setReady(false);flushSync(()=>setActive(true));
   const video=videoRef.current;
-  if(video){video.muted=true;void video.play().catch(()=>{if(video.isConnected){setActive(false);setFailed(true);}});}
+  if(video){video.muted=previewMuted();void video.play().catch(()=>{if(video.isConnected){setActive(false);setFailed(true);}});}
  }
  function toggleMusic(){
   const video=videoRef.current;if(!video)return;
-  const next=!muted;video.muted=next;if(!next&&video.volume===0)video.volume=1;setMuted(next);
+  const next=!muted;video.muted=next;if(!next&&video.volume===0)video.volume=1;setPreviewMuted(next);
  }
- return <article className={'di-video-card'+(expanded?' di-expanded-card':'')} ref={box}>
+ return <TemplatePreviewDialog name={entry.name} onExpand={startPreview}>{(expanded,expandControl)=><article className={'di-video-card'+(expanded?' di-expanded-card':'')} ref={box}>
   <div className="di-video-demo">
    <a href={useHref} aria-label={'Use Template: '+entry.name}><img src={entry.poster} srcSet={entry.posters?Object.entries(entry.posters).map(([width,url])=>url+' '+width+'w').join(','):undefined} sizes="(max-width:640px) 78vw, 25vw" width={720} height={1280} loading="lazy" decoding="async" onError={e=>{e.currentTarget.removeAttribute('srcset');if(e.currentTarget.getAttribute('src')!==entry.poster)e.currentTarget.src=entry.poster;}} alt={entry.name}/></a>
-   {active&&<video ref={attachVideo} onProgress={()=>{if(!ready)loadingProgress();}} src={entry.preview} poster={entry.poster} style={{opacity:ready?1:0}} onPlaying={()=>setReady(true)} autoPlay={expanded} controls={expanded} muted={muted} onVolumeChange={e=>setMuted(e.currentTarget.muted||e.currentTarget.volume===0)} loop playsInline preload="auto" aria-label={entry.name+' preview'} onError={()=>{setActive(false);setFailed(true);}}/>}
+   {active&&<video ref={attachVideo} onProgress={()=>{if(!ready)loadingProgress();}} src={entry.preview} poster={entry.poster} style={{opacity:ready?1:0}} onPlaying={()=>setReady(true)} autoPlay controls={expanded} muted={muted} onVolumeChange={e=>{const next=e.currentTarget.muted||e.currentTarget.volume===0;if(next!==previewMuted())setPreviewMuted(next);}} loop playsInline preload="auto" aria-label={entry.name+' preview'} onError={()=>{setActive(false);setFailed(true);}}/>}
    <span className="di-pin-kind"><Video size={14} aria-hidden="true"/>Video</span>
    <span className="di-video-duration" aria-label={'Duration '+duration}>{duration}</span>
-   {!expanded&&<TemplatePreviewDialog name={entry.name}><VideoCard entry={entry} expanded/></TemplatePreviewDialog>}
+   {expandControl}
    {!active&&<button className="di-thumbnail-preview di-video-play" type="button" aria-label={(failed?'Retry preview for ':'Play preview for ')+entry.name} onClick={startPreview}>
     {failed?<RotateCcw size={24}/>:<Play size={24} fill="currentColor"/>}
    </button>}
@@ -42,7 +44,7 @@ function VideoCard({entry,expanded=false}:{entry:VideoEntry;expanded?:boolean}){
   </div>
   <TemplateCardDetails name={entry.name} kind="video" useHref={useHref}/>
   {failed&&<small className="di-card-status" role="status">Preview could not load. Try again or use this template.</small>}
- </article>;
+ </article>}</TemplatePreviewDialog>;
 }
 export default function VideoCollection({limit,query='',tradition='all',setting='all',collection='all',sort='default',onClearQuery}:{limit?:number;query?:string;tradition?:string;setting?:string;collection?:string;sort?:string;onClearQuery?:()=>void}){
  const {entries,loading,error,retry}=useVideoCatalog();

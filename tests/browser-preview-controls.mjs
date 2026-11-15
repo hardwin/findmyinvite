@@ -45,7 +45,7 @@ try{
   let dialog=page.getByRole('dialog');await checkSound(page,dialog,'website');
   await page.screenshot({path:`work/preview-controls/${width}-website-expanded.png`});
   await dialog.getByRole('button',{name:'Close fullscreen preview'}).click();
-  await page.waitForFunction(()=>!document.querySelector('iframe'));
+  assert.equal(await website.locator('iframe').count(),1,'Closing keeps the same website preview');
   const video=page.locator('.di-video-card').first();
   await video.getByRole('button',{name:/Play preview/}).click();
   await checkSound(page,video,'video');
@@ -59,7 +59,7 @@ try{
   await dialog.locator('video').evaluate(el=>{el.muted=true;});
   await dialog.getByRole('button',{name:/Unmute music/}).waitFor();
   await dialog.getByRole('button',{name:'Close fullscreen preview'}).click();
-  await page.waitForFunction(()=>!document.querySelector('video,iframe'));
+  assert.equal(await video.locator('video').count(),1,'Closing keeps the same video preview');
   assert.deepEqual(errors,[]);
   report.push({width,inlineAndExpandedSound:true,centerControlsHidden:true,playbackPreserved:true});
   await page.close();

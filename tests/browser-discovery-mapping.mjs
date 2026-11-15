@@ -100,7 +100,7 @@ try{
    await dialog.waitFor();
    assert.equal(await dialog.locator('.di-card-details').textContent(),details);
    assert.equal(await dialog.locator('.di-use-template').getAttribute('href'),href);
-   assert.equal(await dialog.locator('.di-card-expand').count(),0);
+   assert.equal(await dialog.locator('.di-card-expand').isVisible(),false);
    assert.ok(await dialog.evaluate(el=>{const r=el.getBoundingClientRect();return r.width===innerWidth&&Math.abs(r.height-innerHeight)<1;}));
    if(selector==='.di-pin')await page.waitForFunction(()=>document.querySelector('[role="dialog"] iframe')?.style.opacity==='1');
    else{
@@ -115,7 +115,7 @@ try{
    await page.waitForFunction(y=>Math.abs(window.scrollY-y)<2,previous.y);
    assert.equal(await expand.evaluate(el=>document.activeElement===el),true,'Expand trigger regains focus');
    assert.equal(await page.locator('.di-video-cards').evaluate(el=>el.scrollLeft),previous.x);
-   assert.equal(await page.locator('iframe,video').count(),0,'Closing disposes preview media');
+   if(selector==='.di-pin'||await page.evaluate(()=>Boolean(document.createElement('video').canPlayType('video/mp4; codecs="avc1.42E01E"'))))assert.equal(await source.locator('iframe,video').count(),1,'Closing preserves preview media');
    await expand.click();await dialog.waitFor();await page.keyboard.press('Escape');await dialog.waitFor({state:'hidden'});
    await page.waitForFunction(y=>Math.abs(window.scrollY-y)<2,previous.y);
   }

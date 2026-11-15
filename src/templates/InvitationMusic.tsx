@@ -4,9 +4,11 @@ import {privateMedia} from './private-media';
 import {isLocalMedia,localMediaUrl} from './local-media';
 import './invitation-music.css';
 import {claimMusic,watchMusic} from './music-focus';
+import {setPreviewMuted,usePreviewMuted} from '../preview-sound';
 
 export default function InvitationMusic({src,preview=false,controls=true}:{src:string;preview?:boolean;controls?:boolean}){
  const audio=useRef<HTMLAudioElement>(null),wanted=useRef(true);
+ const muted=usePreviewMuted();
  const [url,setUrl]=useState(preview||isLocalMedia(src)?'':src),[playing,setPlaying]=useState(false);
  const [credit,setCredit]=useState<{title:string;credit:string;licenseUrl:string;sourceUrl:string}|null>(null);
  useEffect(()=>{setCredit(null);if(!src.startsWith('/api/music?'))return;const ctrl=new AbortController();fetch(src+'&info=1',{signal:ctrl.signal}).then(r=>r.ok?r.json():null).then(r=>setCredit(r?.track||null)).catch(()=>{});return()=>ctrl.abort()},[src]);
@@ -28,6 +30,7 @@ export default function InvitationMusic({src,preview=false,controls=true}:{src:s
   const visibility=()=>{if(document.hidden)player.pause();else start()};document.addEventListener('visibilitychange',visibility);
   return()=>{stopWatching();observer.disconnect();cleanups.forEach(fn=>fn());document.removeEventListener('visibilitychange',visibility);player.pause();player.removeEventListener('canplay',start);document.removeEventListener('pointerdown',gesture);document.removeEventListener('touchend',gesture);document.removeEventListener('keydown',gesture);};
  },[url,preview]);
- function toggle(){const player=audio.current;if(!player)return;if(!player.paused){wanted.current=false;player.pause();}else{wanted.current=true;void player.play().catch(()=>setPlaying(false));}}
- return <><audio ref={audio} data-invitation-music src={url||undefined} loop autoPlay preload="auto" onPlay={e=>{claimMusic(e.currentTarget);setPlaying(true)}} onPause={()=>setPlaying(false)} onError={()=>setPlaying(false)}/>{controls&&<button type="button" className="invitation-sound" aria-label={playing?'Mute music':'Unmute music'} aria-pressed={playing} onClick={toggle}>{playing?<Volume2 size={20} aria-hidden="true"/>:<VolumeX size={20} aria-hidden="true"/>}</button>}{credit?.credit&&<details className="invitation-music-credit"><summary aria-label="Music credits">♪</summary><p>{credit.credit} {credit.sourceUrl&&<a href={credit.sourceUrl} target="_blank" rel="noreferrer">Source</a>} {credit.licenseUrl&&<a href={credit.licenseUrl} target="_blank" rel="noreferrer">Licence</a>}</p></details>}</>;
+ function toggle(){const player=audio.current;if(!player)return;if(preview){const next=!muted;player.muted=next;setPreviewMuted(next);if(!next){wanted.current=true;void player.play().catch(()=>setPlaying(false));}}else if(!player.paused){wanted.current=false;player.pause();}else{wanted.current=true;void player.play().catch(()=>setPlaying(false));}}
+ const silent=preview?muted:!playing;
+ return <><audio ref={audio} data-invitation-music src={url||undefined} muted={preview&&muted} loop autoPlay preload="auto" onPlay={e=>{claimMusic(e.currentTarget);setPlaying(true)}} onPause={()=>setPlaying(false)} onError={()=>setPlaying(false)}/>{controls&&<button type="button" className="invitation-sound" aria-label={silent?'Unmute music':'Mute music'} aria-pressed={silent} onClick={toggle}>{silent?<VolumeX size={20} aria-hidden="true"/>:<Volume2 size={20} aria-hidden="true"/>}</button>}{credit?.credit&&<details className="invitation-music-credit"><summary aria-label="Music credits">♪</summary><p>{credit.credit} {credit.sourceUrl&&<a href={credit.sourceUrl} target="_blank" rel="noreferrer">Source</a>} {credit.licenseUrl&&<a href={credit.licenseUrl} target="_blank" rel="noreferrer">Licence</a>}</p></details>}</>;
 }
