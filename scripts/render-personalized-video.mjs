@@ -40,8 +40,8 @@ export async function serve(temp,photos){
  }catch{res.writeHead(404);res.end();}});
  await new Promise(r=>server.listen(0,'127.0.0.1',r));return {server,origin:`http://127.0.0.1:${server.address().port}`};
 }
-export async function renderPersonalizedVideo({master,content,photos={},audioFile,output,reviewFrames,onlyLayer,onProgress=()=>{},requireRelease=true,frameTransport='png'}){
- if(master.rendererVersion==='scene-film-v1'){const {renderSceneVideo}=await import('./render-scene-video.mjs');return renderSceneVideo({master,content,photos,audioFile,output,reviewFrames,onProgress,requireRelease});}
+export async function renderPersonalizedVideo({master,content,photos={},audioFile,audioCredit,output,reviewFrames,onlyLayer,onProgress=()=>{},requireRelease=true,frameTransport='png'}){
+ if(master.rendererVersion==='scene-film-v1'){const {renderSceneVideo}=await import('./render-scene-video.mjs');return renderSceneVideo({master,content,photos,audioFile,audioCredit,output,reviewFrames,onProgress,requireRelease});}
  assertMaster(master,{released:requireRelease});content=normalizeVideoContent(content,{complete:true,templateId:master.id});
  for(const asset of Object.values(master.assets)){const file=inside(join(root,'public'),asset.path.slice(1));const checksum=digest(await readFile(file));if(asset.sha256!==checksum)throw Error('Master asset checksum mismatch: '+asset.path);}
  const temp=await mkdtemp(join(tmpdir(),'fmi-video-'));let browser,server,encoder;
@@ -65,13 +65,13 @@ export async function renderPersonalizedVideo({master,content,photos={},audioFil
   if(!init.ok)throw Object.assign(Error(init.message),{code:init.code,field:init.field});
   let done,encoderErrors='';
   if(!reviewFrames){
-   const audio=audioFile||(content.music.mode==='library'?inside(join(root,'public'),MUSIC[content.music.id].path.slice(1)):null);
-   if(content.music.mode==='upload'&&!audio)throw Error('Selected audio asset missing.');
+   const audio=audioFile||(content.music.mode==='library'&&MUSIC[content.music.id]?inside(join(root,'public'),MUSIC[content.music.id].path.slice(1)):null);
+   if(content.music.mode!=='none'&&!audio)throw Error('Selected audio asset missing.');
    await mkdir(resolve(output,'..'),{recursive:true});
    const args=['-hide_banner','-loglevel','error','-y','-f','image2pipe','-framerate','24','-i','pipe:0'];
    if(audio)args.push('-i',audio,'-map','0:v','-map','1:a:0','-af','apad,atrim=0:54,afade=t=in:st=0:d=1,afade=t=out:st=51:d=3','-c:a','aac','-b:a','160k');else args.push('-an');
    args.push('-c:v','libx264','-preset','fast','-crf','20','-pix_fmt','yuv420p','-r','24','-frames:v','1296','-t','54','-movflags','+faststart');
-   if(content.music.mode==='library')args.push('-metadata','comment='+MUSIC[content.music.id].credit+' '+MUSIC[content.music.id].license);
+   if(content.music.mode==='library')args.push('-metadata','comment='+(audioCredit||(MUSIC[content.music.id]?MUSIC[content.music.id].credit+' '+MUSIC[content.music.id].license:'')));
    args.push(output);encoder=spawn(ffmpeg,args,{windowsHide:true,stdio:['pipe','ignore','pipe']});encoder.stderr.on('data',b=>{encoderErrors=(encoderErrors+b).slice(-8000);});done=new Promise((yes,no)=>{encoder.once('error',no);encoder.once('close',code=>code===0?yes():no(Error('Encoding failed: '+encoderErrors)));});done.catch(()=>{});
   }else await mkdir(output,{recursive:true});
   const frames=reviewFrames||Array.from({length:1296},(_,i)=>i);

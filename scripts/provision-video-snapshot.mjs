@@ -7,9 +7,12 @@ import {assertMaster} from '../shared/video-personalization.mjs';
 const template=process.argv[2]||'temple-v1';if(!['temple-v1','kerala-christian-v1'].includes(template))throw Error('Unsupported template.');
 const master=assertMaster(JSON.parse(await readFile('public/assets/video-masters/'+template+'/manifest.json')),{released:true});
 const files=['scripts/render-personalized-video.mjs','scripts/video-snapshot-preflight.mjs','scripts/video-personalise-worker.mjs','scripts/video-cutout.py','scripts/video-cutout-requirements.txt','server/video-personalise-store.mjs','server/video-personalise.mjs','server/core.mjs','shared/video-personalization.mjs','shared/temple-video.mjs','shared/template-forms.mjs','shared/template-contract.mjs','shared/pricing.mjs','shared/invitation-languages.mjs','dist/video-render.html'];
+// Keep the worker's server imports complete as the shared library evolves.
+// These directories contain source only; credentials and customer media live elsewhere.
+for(const root of ['server','shared'])for(const path of await readdir(root,{recursive:true}))if(/\.(mjs|json)$/.test(path))files.push(join(root,path));
 // The bundled render entry uses only its own transitive chunks, not the main website.
 const html=await readFile('dist/video-render.html','utf8'),pending=[...html.matchAll(/(?:src|href)="(\/assets\/[^\"]+\.js)"/g)].map(m=>'dist'+m[1]),seen=new Set();
-while(pending.length){const path=pending.pop();if(seen.has(path))continue;seen.add(path);files.push(path);const source=await readFile(path,'utf8');for(const match of source.matchAll(/(?:from|import)\s*['"]\.\/([^'"]+\.js)['"]/g))pending.push('dist/assets/'+match[1]);}
+while(pending.length){const path=pending.pop();if(seen.has(path))continue;seen.add(path);files.push(path);const source=await readFile(path,'utf8');for(const match of source.matchAll(/['"]\.\/([^'"]+\.js)['"]/g))pending.push('dist/assets/'+match[1]);}
 for(const a of Object.values(master.assets))files.push('public'+a.path);
 files.push('public/assets/video-masters/'+template+'/manifest.json');
 for(const f of await readdir('public/assets/music-library'))if(f.endsWith('.mp3'))files.push('public/assets/music-library/'+f);

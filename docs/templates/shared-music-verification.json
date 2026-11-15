@@ -1,0 +1,74 @@
+{
+  "scope": "Shared licensed music infrastructure; original reference recordings remain unimported",
+  "observedAt": "2026-11-15",
+  "tests": 86,
+  "build": "passed before integrating later storefront commits",
+  "browser": {
+    "desktop": true,
+    "mobileViewport": "390x844",
+    "physicalIPhone": false,
+    "nativeEdge": false
+  },
+  "scene": {
+    "previousSnapshot": "snap_Ii80lDDzUDxeNmIjhfQNhCeA46Dl",
+    "snapshot": "snap_tBMnfjqKGfAfa96fYV94MZHoJVSz",
+    "expires": false,
+    "templateId": "film-drive-v1",
+    "status": "ready",
+    "frames": 480,
+    "bytes": 10736477,
+    "recordingHash": "a621a943ab940567f4136060e0f1f0637038b8a03c10ff8926f956e1b2ef34e7",
+    "resultHash": "5c5cfac61cdb7711e6d4c2240665bdea900d7d88a0c4501054ed9d9382d9037a",
+    "probe": {
+      "programs": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "codec_type": "video",
+          "duration": "20.000000"
+        },
+        {
+          "codec_name": "aac",
+          "codec_type": "audio",
+          "duration": "20.000000"
+        }
+      ],
+      "format": {
+        "tags": {
+          "comment": "Heartwarming — Kevin MacLeod (incompetech.com). Licensed under CC BY 4.0. Original recording, unchanged. Trimmed and faded for this invitation. https://creativecommons.org/licenses/by/4.0/"
+        }
+      }
+    }
+  },
+  "temple": {
+    "previousSnapshot": "snap_pdM8cQOgSkG3DQ88GUkBDoGNoqxQ",
+    "snapshot": "snap_Rj9v3603XNkHOk5WUsRsZPfqeUPx",
+    "expires": false,
+    "templateId": "temple-v1",
+    "status": "ready",
+    "frames": 1296,
+    "bytes": 28205970,
+    "recordingHash": "a621a943ab940567f4136060e0f1f0637038b8a03c10ff8926f956e1b2ef34e7",
+    "resultHash": "99892286098a6e0fbd3bd0af778fa313fac4ffdddc351851febe24f8e4cb562d",
+    "probe": {
+      "programs": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "codec_type": "video",
+          "duration": "54.000000"
+        },
+        {
+          "codec_name": "aac",
+          "codec_type": "audio",
+          "duration": "54.000000"
+        }
+      ],
+      "format": {
+        "tags": {
+          "comment": "Heartwarming — Kevin MacLeod (incompetech.com). Licensed under CC BY 4.0. Original recording, unchanged. Trimmed and faded for this invitation. https://creativecommons.org/licenses/by/4.0/"
+        }
+      }
+    }
+  }
+}

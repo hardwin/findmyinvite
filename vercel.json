@@ -57,7 +57,7 @@
     "api/video-personalise.mjs": {
       "maxDuration": 300,
       "memory": 1024,
-      "includeFiles": "{public/assets/video-masters/*/manifest.json,public/assets/video-scenes/v1/editor/{details*,common}.js}"
+      "includeFiles": "{public/assets/video-masters/*/manifest.json,public/assets/video-scenes/v1/editor/{details*,common}.js,public/assets/music-library/*}"
     },
     "api/video-characters.mjs": {
       "maxDuration": 300,

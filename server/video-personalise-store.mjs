@@ -24,7 +24,7 @@ export function videoStore(env=process.env){
    let cursor,keys=[];do{const r=await list({prefix:prefix+start,limit:1000,cursor,token:env.BLOB_READ_WRITE_TOKEN});keys.push(...r.blobs.map(b=>b.pathname.slice(prefix.length)));cursor=r.hasMore?r.cursor:undefined;}while(cursor);return keys;
   },
   async expired(now=Date.now()){
-   const persistent=async key=>key.startsWith('persistent/')||key.startsWith('media/')&&(await this.read(key))?.value?.durable===true;
+   const persistent=async key=>key.startsWith('library/')||key.startsWith('persistent/')||key.startsWith('media/')&&(await this.read(key))?.value?.durable===true;
    if(local){for(const key of await this.list()){if(!await persistent(key)&&(await stat(join(root,key))).mtimeMs<now-VIDEO_TTL)await this.remove(key);}return;}
    let cursor;do{const r=await list({prefix,limit:1000,cursor,token:env.BLOB_READ_WRITE_TOKEN});const stale=[];for(const b of r.blobs)if(new Date(b.uploadedAt).getTime()<now-VIDEO_TTL&&!await persistent(b.pathname.slice(prefix.length)))stale.push(b.pathname);if(stale.length)await del(stale,{token:env.BLOB_READ_WRITE_TOKEN});cursor=r.hasMore?r.cursor:undefined;}while(cursor);
   },local,prefix

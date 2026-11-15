@@ -20,7 +20,7 @@ async function closeSceneBrowser(browser){
  let timer;
  try{await Promise.race([browser.close().catch(()=>{}),new Promise(resolve=>{timer=setTimeout(()=>{const child=browser.process();try{if(process.platform==='linux'&&child?.pid)process.kill(-child.pid,'SIGKILL');else child?.kill('SIGKILL');}catch{}resolve();},5000);})]);}finally{clearTimeout(timer);}
 }
-export async function renderSceneVideo({master,content,photos={},audioFile,output,reviewFrames,onProgress=()=>{},requireRelease=true,browserBatchFrames}){
+export async function renderSceneVideo({master,content,photos={},audioFile,audioCredit,output,reviewFrames,onProgress=()=>{},requireRelease=true,browserBatchFrames}){
  assertMaster(master,{released:requireRelease});
  content=normalizeVideoContent(content,{complete:true,templateId:master.id});
  master=await prepareSceneMaster(master,content);
@@ -52,14 +52,14 @@ export async function renderSceneVideo({master,content,photos={},audioFile,outpu
   };
   await startBrowser();
   await onProgress(5);let done;
-  const audio=audioFile||(content.music.mode==='library'?assetPath(MUSIC[content.music.id].path):null),{frames,duration,fps}=master.output;
-  if(content.music.mode==='upload'&&!audio)throw Error('Selected audio asset missing.');
+  const audio=audioFile||(content.music.mode==='library'&&MUSIC[content.music.id]?assetPath(MUSIC[content.music.id].path):null),{frames,duration,fps}=master.output;
+  if(content.music.mode!=='none'&&!audio)throw Error('Selected audio asset missing.');
   if(reviewFrames)await mkdir(output,{recursive:true});else{
    await mkdir(resolve(output,'..'),{recursive:true});
    const args=['-hide_banner','-loglevel','error','-y','-f','image2pipe','-framerate',String(fps),'-i','pipe:0'];
    if(audio){if(content.music.mode==='library')args.push('-stream_loop','-1');args.push('-i',audio,'-map','0:v','-map','1:a:0','-af',`apad,atrim=0:${duration},afade=t=in:st=0:d=1,afade=t=out:st=${Math.max(0,duration-3)}:d=3`,'-c:a','aac','-b:a','160k');}else args.push('-an');
    args.push('-c:v','libx264','-threads','2','-preset','fast','-crf','20','-pix_fmt','yuv420p','-r',String(fps),'-frames:v',String(frames),'-t',String(duration),'-movflags','+faststart');
-   if(content.music.mode==='library')args.push('-metadata','comment='+MUSIC[content.music.id].credit+' '+MUSIC[content.music.id].license);
+   if(content.music.mode==='library')args.push('-metadata','comment='+(audioCredit||(MUSIC[content.music.id]?MUSIC[content.music.id].credit+' '+MUSIC[content.music.id].license:'')));
    args.push('-f','mp4',output);encoder=spawn(process.env.FFMPEG_PATH||ffmpegStatic,args,{windowsHide:true,stdio:['pipe','ignore','pipe']});let errors='';encoder.stderr.on('data',b=>errors=(errors+b).slice(-4000));done=new Promise((yes,no)=>{encoder.once('error',no);encoder.stdin.on('error',no);encoder.once('close',code=>code===0?yes():no(Error('Encoding failed: '+errors)));});done.catch(()=>{});
   }
   const sequence=reviewFrames||Array.from({length:frames},(_,i)=>i);

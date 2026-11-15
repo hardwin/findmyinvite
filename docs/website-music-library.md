@@ -1,12 +1,12 @@
-# Website music library
+# Shared invitation music library
 
 ## Owner workflow
 
 Open `/akay/music` as the owner. Listen to recordings, edit their titles and
 moods, upload MP3/M4A/OGG recordings (up to 20 MB), and select a default for each
-template. Multiple templates may use the same recording. Uploads require a
+website or video template. Multiple templates may use the same recording. Uploads require a
 licence and confirmation that the recording may be hosted and offered for
-customer invitations. Keep required attribution in the credit field.
+customer websites and exported videos. Keep required attribution in the credit field.
 
 Archive hides a track from new selections without breaking existing
 invitations. Restore makes it available again. An archived default is silent
@@ -20,6 +20,18 @@ The authored music question displays the template's selected song, a library
 with Listen and Select controls, No music, and an own-song upload option.
 Choosing library music is available before login and is preserved with the
 rest of the form. Existing custom recordings remain supported.
+
+Video forms use this same picker. A new video draft starts with its assigned
+track; a saved draft retains its own selection, including the older `canon`
+identifier. Catalog videos stay muted until Sound is tapped. Their soundtrack
+starts at the displayed video time, fades in/out like the export, and stops
+when the preview is stopped, replaced, hidden or scrolled offscreen. Catalog
+cards mount no audio/video before Play and do not request music before Sound.
+
+The source audit identified silent backgrounds for Bells & Blessings,
+Theeram and Thiruvarul. Their new default is silence unless the owner explicitly
+assigns a track. Bells & Blessings retains its interactive synthesized bell.
+Stored customer selections are unchanged.
 
 Homepage card previews, product details, full previews and guest invitations
 use the same icon-only music control. Playback is attempted automatically;
@@ -46,6 +58,30 @@ the earlier one. No native audio timeline is displayed on guest invitations.
 - Library references are accepted only by audio fields and verified server-side
   before draft creation, save and publication. Customer-upload ownership checks
   remain in place.
+- Video render submission resolves the chosen ID through the ready library,
+  pins its exact bytes under `video-personalise/library/<id>/<sha256>.audio`,
+  and includes the checksum and credit in the render identity. Private workers
+  verify that checksum before muxing. The output's metadata includes attribution
+  and the trim/fade notice. No customer-supplied URL is fetched by a worker.
+- Both renderer snapshots must include `server/video-music.mjs`, its server/shared
+  dependencies, and the complete static/dynamic import graph of `video-render.html`.
+  The API function includes the licensed seed files for pinning. No database
+  migration is needed.
+
+## Original recording audit
+
+`docs/templates/original-audio-audit.json` records the reference pairing for 22
+websites and 38 added videos, plus the unresolved legacy Temple recording.
+It distinguishes songs, sound effects, timed mixes and silent samples. Kalyana
+Payanam's reference starts Kiliye at 91 seconds and loops from that offset.
+
+This audit is not an import manifest. No reference recording has been added
+to the ready library: reuse permission has not been recorded. The public
+library still contains the two licensed starter recordings. Do not label a
+fallback as an original song or fabricate upload rights confirmation. Once a
+recording is approved, upload it through the owner workflow, preserve its
+attribution, and assign its template explicitly. Timed mixes/offset playback
+require a separate reviewed implementation before claiming source parity.
 
 ## Local review and rollout
 

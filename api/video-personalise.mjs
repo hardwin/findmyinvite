@@ -1,5 +1,6 @@
 import {VIDEO_CATALOG} from '../shared/video-catalog.mjs';
 import previewMedia from '../shared/catalog-preview-media.mjs';
+import {videoMusicCatalog} from '../server/video-music.mjs';
 import {videoDownloadTicket} from '../server/video-download-ticket.mjs';
 import {queueVideoRender} from '../server/video-render-queue.mjs';
 import {handleUpload} from '@vercel/blob/client';
@@ -26,10 +27,10 @@ async function stopCompletedRender(store,job){if(store.local||!job.sandboxId||jo
 export default async function handler(req,res){const store=videoStore(),service=videoService({store,launch:(job,secret)=>queueVideoRender(job,secret,{launch:launchVideoRender,finish:(...args)=>service.finish(...args),waitUntil})});try{
  const q=new URL(req.url,'https://findmyinvite.com').searchParams,action=q.get('action')||'template';
  if(action==='templates'){
-  method(req,['GET']);const results=await Promise.allSettled(['temple-v1','kerala-christian-v1',...VIDEO_CATALOG.map(d=>d.id)].map(async id=>{
-   const c=await videoConfig(process.env,id);if(!c.ready)return null;const base='/assets/video-masters/'+id+'/';return {id,name:c.name,duration:c.master.output.duration,poster:base+(c.master.catalog?.poster||'poster.jpg'),preview:base+'catalog-preview-v2.mp4',...(c.master.catalog?.posters?{posters:Object.fromEntries(Object.entries(c.master.catalog.posters).map(([w,file])=>[w,base+file]))}:{}),...previewMedia.videos[id],...videoPrice()};
+  method(req,['GET']);let musicUnavailable=false;const musicCatalog=await videoMusicCatalog().catch(()=>{musicUnavailable=true;return {tracks:[],assignments:[]};});const results=await Promise.allSettled(['temple-v1','kerala-christian-v1',...VIDEO_CATALOG.map(d=>d.id)].map(async id=>{
+   const c=await videoConfig(process.env,id,musicCatalog);if(!c.ready)return null;const base='/assets/video-masters/'+id+'/';return {id,name:c.name,music:c.defaults.music.mode==='library'?c.musicTracks.find(t=>t.id===c.defaults.music.id):null,duration:c.master.output.duration,poster:base+(c.master.catalog?.poster||'poster.jpg'),preview:base+'catalog-preview-v2.mp4',...(c.master.catalog?.posters?{posters:Object.fromEntries(Object.entries(c.master.catalog.posters).map(([w,file])=>[w,base+file]))}:{}),...previewMedia.videos[id],...videoPrice()};
   }));const templates=results.filter(r=>r.status==='fulfilled'&&r.value).map(r=>r.value);
-  res.setHeader('Cache-Control','public, max-age=0, must-revalidate, s-maxage=60');res.setHeader('X-Content-Type-Options','nosniff');return res.status(200).json({templates});
+  res.setHeader('Cache-Control',musicUnavailable?'no-store':'public, max-age=0, must-revalidate, s-maxage=60');res.setHeader('X-Content-Type-Options','nosniff');return res.status(200).json({templates});
  }
  if(action==='template'){method(req,['GET']);return respond(res,200,{...await videoConfig(process.env,q.get('template')||DEFAULT_VIDEO_ID),price:videoPrice()});}
  if(action==='retention'){method(req,['GET']);if(!process.env.CRON_SECRET||req.headers.authorization!=='Bearer '+process.env.CRON_SECRET)throw new HttpError(401,'Unauthorized');await store.expired();await draftService({store}).cleanupDeleted();return respond(res,200,{ok:true});}

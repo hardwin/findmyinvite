@@ -1,4 +1,5 @@
 import {prepareSceneMaster} from './video-scene-details.mjs';
+import {videoMusicCatalog,videoDefaultMusic,pinVideoLibraryMusic} from './video-music.mjs';
 import {videoRenderLease} from '../shared/video-render-limits.mjs';
 import {readFile} from 'node:fs/promises';
 import {randomUUID,randomBytes,timingSafeEqual} from 'node:crypto';
@@ -6,12 +7,12 @@ import {DEFAULT_VIDEO_ID,videoDefinition,MUSIC,normalizeVideoContent,assertMaste
 import {videoStore,hash,VIDEO_TTL} from './video-personalise-store.mjs';
 import {HttpError} from './core.mjs';
 export async function loadVideoMaster(id=DEFAULT_VIDEO_ID){try{videoDefinition(id);}catch{throw new HttpError(404,'This video template is unavailable.');}return assertMaster(JSON.parse(await readFile(new URL('../public/assets/video-masters/'+id+'/manifest.json',import.meta.url),'utf8')));}
-export async function videoConfig(env=process.env,id=DEFAULT_VIDEO_ID){const master=await loadVideoMaster(id),definition=videoDefinition(id);let ready=false;try{requireVideoRelease(master,env);ready=true;}catch{}return {master,...definition,music:MUSIC,ready,localUploads:env.VIDEO_LOCAL_STORE==='1'&&!env.VERCEL};}
+export async function videoConfig(env=process.env,id=DEFAULT_VIDEO_ID,catalog){const master=await loadVideoMaster(id),definition=videoDefinition(id);let ready=false;try{requireVideoRelease(master,env);ready=true;}catch{}const library=catalog||await videoMusicCatalog();return {master,...definition,defaults:{...definition.defaults,music:videoDefaultMusic(id,library)},music:MUSIC,musicTracks:library.tracks,ready,localUploads:env.VIDEO_LOCAL_STORE==='1'&&!env.VERCEL};}
 export function requireVideoRelease(master,env){try{assertMaster(master,{released:true});}catch{throw new HttpError(503,'This video template is still being prepared.');}if(env.VIDEO_PERSONALISE_ENABLED!=='1')throw new HttpError(503,'This video template is still being prepared.');if(env.VERCEL&&(!(master.rendererVersion==='scene-film-v1'?env.VIDEO_SCENE_SNAPSHOT_ID:env.VIDEO_RENDER_SNAPSHOT_ID)||!env.BLOB_READ_WRITE_TOKEN))throw new HttpError(503,'The private video renderer is not configured yet.');}
 export function ownedRecord(record,owner,now=Date.now()){if(!record||record.owner!==owner)throw new HttpError(404,'File or render not found.');if(Date.parse(record.expiresAt)<=now)throw new HttpError(410,'This file has expired. Please upload or render it again.');return record;}
 export function publicJob(job){return {id:job.id,status:job.status,progress:job.progress,error:job.error,expiresAt:job.expiresAt,contentRevision:job.contentRevision,download:job.status==='ready'?'/api/video-personalise?action=download&id='+job.id:undefined};}
-export function renderDigest(owner,master,content,media){return hash({owner,master:hash(master),renderer:master.rendererVersion||RENDERER_VERSION,content,media:media.map(m=>({id:m.id,slot:m.slot,hash:m.mode==='cutout'?m.cutoutSha256:m.sha256,mode:m.mode})).sort((a,b)=>(a.slot||a.id).localeCompare(b.slot||b.id))});}
-export function videoService({store=videoStore(),env=process.env,now=()=>Date.now(),launch,masterLoader=loadVideoMaster}={}){
+export function renderDigest(owner,master,content,media){return hash({owner,master:hash(master),renderer:master.rendererVersion||RENDERER_VERSION,content,media:media.map(m=>({id:m.id,slot:m.slot,hash:m.mode==='cutout'?m.cutoutSha256:m.sha256,mode:m.mode,...(m.library?{credit:m.credit}:{} )})).sort((a,b)=>(a.slot||a.id).localeCompare(b.slot||b.id))});}
+export function videoService({store=videoStore(),env=process.env,now=()=>Date.now(),launch,masterLoader=loadVideoMaster,libraryMusic=pinVideoLibraryMusic}={}){
  const read=async key=>(await store.read(key))?.value;
  async function media(owner,id){if(!/^[a-f0-9-]{36}$/.test(id||''))throw new HttpError(400,'Invalid media reference.');return ownedRecord(await read('media/'+id+'.json'),owner,now());}
  async function job(owner,id){if(!/^[a-f0-9]{64}$/.test(id||''))throw new HttpError(400,'Invalid render reference.');const j=ownedRecord(await read('jobs/'+id+'.json'),owner,now());return stale(j)?{...j,status:'failed',error:'The render was interrupted. Your details are saved; please retry.'}:j;}
@@ -19,6 +20,7 @@ export function videoService({store=videoStore(),env=process.env,now=()=>Date.no
  async function start(owner,input,templateId=DEFAULT_VIDEO_ID,invitationId){
   let master=await masterLoader(templateId);requireVideoRelease(master,env);let content;try{content=normalizeVideoContent(input,{complete:true,templateId:master.id});}catch(e){throw new HttpError(400,e.message);}try{master=await prepareSceneMaster(master,content);}catch(e){throw new HttpError(400,e.message);}const refs=[];
   for(const [slot,p] of Object.entries(content.photos)){const m=await media(owner,p.id);if(m.kind!=='image'||m.status!=='ready'||p.mode==='cutout'&&!m.cutoutKey||p.mode==='prepared'&&(!m.characterJobId||m.characterSlot!==slot||m.invitationId!==invitationId))throw new HttpError(400,'Prepare and confirm the '+slot+' photo.');refs.push({...m,slot,mode:p.mode});}
+  if(content.music.mode==='library')refs.push(await libraryMusic(content.music.id,store));
   if(content.music.mode==='upload'){const m=await media(owner,content.music.id);if(m.kind!=='audio'||m.status!=='ready')throw new HttpError(400,'Music is not ready.');refs.push(m);}
   const id=renderDigest(owner,master,content,refs),existing=await read('jobs/'+id+'.json');
   if(existing&&Date.parse(existing.expiresAt)>now()&&!stale(existing)&&['ready','running','queued'].includes(existing.status))return publicJob(existing);

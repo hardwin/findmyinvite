@@ -1,4 +1,6 @@
 import {formErrors} from './template-forms.mjs';
+import seeds from './music-seeds.json' with {type:'json'};
+import {validMusicId} from './music-selection.mjs';
 import {TEMPLE_ID,TEMPLE_FORM,TEMPLE_DEFAULTS} from './temple-video.mjs';
 import {catalogVideo} from './video-catalog.mjs';
 
@@ -26,7 +28,8 @@ export function videoDefinition(id=DEFAULT_VIDEO_ID){
  if(id===VIDEO_ID)return {id,form:VIDEO_FORM,defaults:VIDEO_DEFAULTS,name:'Kerala Christian Wedding',collection:'THE KERALA CHRISTIAN COLLECTION',description:'A sunlit church, your favourite people, and words that are entirely yours.',filename:'christian-wedding.mp4'};
  throw Error('This video template is unavailable.');
 }
-export const MUSIC={canon:{path:'/assets/music-library/canon-in-d.mp3',label:'Canon in D',credit:'Canon in D Major — Kevin MacLeod (incompetech.com). CC BY 4.0. Trimmed and faded for this invitation.',license:'https://creativecommons.org/licenses/by/4.0/'},heartwarming:{path:'/assets/music-library/heartwarming.mp3',label:'Heartwarming',credit:'Heartwarming — Kevin MacLeod (incompetech.com). CC BY 4.0. Trimmed and faded for this invitation.',license:'https://creativecommons.org/licenses/by/4.0/'}};
+const seedMusic=Object.fromEntries(seeds.map(t=>[t.id,{path:t.asset,label:t.title,credit:t.credit+' Trimmed and faded for this invitation.',license:t.licenseUrl}]));
+export const MUSIC={...seedMusic,canon:seedMusic['canon-in-d']};
 export function normalizeVideoContent(input,{complete=false,templateId=VIDEO_ID}={}){
  const {form,defaults}=videoDefinition(templateId);
  if(!input||typeof input!=='object'||Array.isArray(input))throw Error('Invalid invitation details.');
@@ -44,7 +47,7 @@ export function normalizeVideoContent(input,{complete=false,templateId=VIDEO_ID}
  const music=input.music||{mode:'none'};
  if(!['none','library','upload'].includes(music.mode))throw Error('Choose music or silence.');
  out.music={mode:music.mode};
- if(music.mode==='library'){if(typeof music.id!=='string'||!Object.hasOwn(MUSIC,music.id))throw Error('Choose an available music track.');out.music.id=music.id;}
+ if(music.mode==='library'){if(!validMusicId(music.id))throw Error('Choose an available music track.');out.music.id=music.id;}
  if(music.mode==='upload'){if(!/^[a-f0-9-]{36}$/.test(music.id||''))throw Error('Choose a song file.');out.music.id=music.id;}
  const errors=formErrors(form,out);
  // Partial drafts may omit required answers, but never accept malformed date/time values.

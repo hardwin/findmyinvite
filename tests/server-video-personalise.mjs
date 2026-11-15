@@ -17,7 +17,7 @@ function fixture(){const rows=new Map();let version=0,time=Date.now(),calls=[];c
 test('drafts allow missing answers; exports require complete valid dates and times',()=>{
  assert.deepEqual(normalizeVideoContent(VIDEO_DEFAULTS),VIDEO_DEFAULTS);
  assert.throws(()=>normalizeVideoContent(VIDEO_DEFAULTS,{complete:true}),/Groom|groom|name/);
- for(const patch of [{weddingDate:'2027-02-30'},{weddingTime:'25:00'},{weddingEnd:'09:00'},{groom:'A'.repeat(81)},{music:{mode:'library',id:'unknown'}}])assert.throws(()=>normalizeVideoContent({...VIDEO_EXAMPLE,...patch},{complete:true}));
+ for(const patch of [{weddingDate:'2027-02-30'},{weddingTime:'25:00'},{weddingEnd:'09:00'},{groom:'A'.repeat(81)},{music:{mode:'library',id:'../invalid'}}])assert.throws(()=>normalizeVideoContent({...VIDEO_EXAMPLE,...patch},{complete:true}));
  assert.equal(normalizeVideoContent({...VIDEO_EXAMPLE,unknown:'ignored'}).unknown,undefined);
 });
 test('dates derive from event data and optional fields do not emit undefined',()=>{const text=videoText({...VIDEO_EXAMPLE,weddingDate:'2028-05-06',receptionDate:'2028-05-06',weddingEnd:'11:00'});assert.match(text.date,/6 May 2028/);assert.equal(text.date.match(/2028/g).length,1);assert.match(text.ceremony,/10:00 a.m. – 11:00 a.m./);assert.doesNotMatch(JSON.stringify(text),/undefined/);});
