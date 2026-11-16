@@ -5,3 +5,19 @@
 .di-search-status { margin: 4px 0 18px; color: var(--di-muted); font-size: 14px; }
 .di-search-more { display: flex; justify-content: center; padding-top: 24px; }
 .di-search-more .di-button { margin: 0; }
+
+/* Keep DOM/search order while filling each column below its previous card.
+   Measured row spans also keep existing cards in place when more are appended. */
+body.di-site .di-masonry.di-search-grid {
+ grid-auto-rows: 1px;
+ grid-auto-flow: dense;
+ row-gap: 0;
+ align-items: start;
+}
+body.di-site .di-search-grid > .di-preview-anchor { align-self: start; }
+@media (max-width: 500px) {
+ body.di-site .di-masonry.di-search-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  justify-content: normal;
+ }
+}

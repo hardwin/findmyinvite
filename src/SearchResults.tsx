@@ -9,6 +9,7 @@ import {shopCard} from './shop';
 import {previewLanguage} from './templates/preview-language';
 import {matchesDiscoverySearch,matchesVideoSearch} from '../shared/discovery-taxonomy.mjs';
 import {interleaveCatalogResults,invitationSearchHref,SEARCH_PAGE_SIZE} from '../shared/catalog-search.mjs';
+import {useSearchMasonry} from './useSearchMasonry';
 import './search-results.css';
 
 export default function SearchResults(){
@@ -23,6 +24,7 @@ export default function SearchResults(){
  const loading=websites.loading||videos.loading;
  const failed=Boolean(websites.error||videos.error);
  const shown=Math.min(limit,results.length);
+ const masonry=useSearchMasonry(shown,loading);
  return <div className="di-app"><DiscoveryHeader/>
   <main id="main-content" className="di-main di-search-results">
    <header className="di-library-head">
@@ -41,7 +43,7 @@ export default function SearchResults(){
    {websites.error&&<p role="alert">Website results could not load. <a href={invitationSearchHref(query,language)}>Try again</a></p>}
    {videos.error&&<p role="alert">Video results could not load. <button type="button" className="di-button di-secondary" onClick={()=>{void videos.retry();}}>Try again</button></p>}
    {!loading&&<>
-    {results.length>0?<div className="di-masonry di-search-grid" role="region" aria-label="Search results">
+    {results.length>0?<div ref={masonry} className="di-masonry di-search-grid" role="region" aria-label="Search results">
      {results.slice(0,limit).map(result=>{
       if(result.kind==='video')return <VideoCard key={'video:'+result.item.id} entry={result.item}/>;
       const card=result.item;
