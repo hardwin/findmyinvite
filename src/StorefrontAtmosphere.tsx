@@ -76,7 +76,7 @@ export default function StorefrontAtmosphere(){
   const touched=new Set<HTMLElement>();
   const seen=new WeakSet<HTMLElement>();
   let observer:IntersectionObserver|null=null,mutation:MutationObserver|null=null;
-  let scrollFrame=0,scanFrame=0;
+  let scrollFrame=0;
 
   function finish(element:HTMLElement){
    if(!touched.has(element))return;
@@ -92,19 +92,25 @@ export default function StorefrontAtmosphere(){
    }
   }
   function scan(){
-   scanFrame=0;
    if(!observer)return;
-   // Containers fade only. Card movement is temporary and never applies to an
-   // ancestor of an open native fullscreen dialog (also guarded in CSS).
    const targets=main!.querySelectorAll<HTMLElement>(':scope > section, .dc-category-card, .di-preview-anchor');
    let cardIndex=0;
    targets.forEach(element=>{
+    // Never animate both a card and its section: nested opacity makes glass
+    // disappear twice and forces the browser to repaint its backdrop.
+    if(element.matches('section')&&element.querySelector('.dc-category-card,.di-preview-anchor')){
+     observer!.unobserve(element);finish(element);return;
+    }
     if(seen.has(element))return;
     seen.add(element);touched.add(element);
     const card=element.matches('.dc-category-card,.di-preview-anchor');
     element.dataset.saMotion=card?'card':'section';
+    const bounds=element.getBoundingClientRect();
+    // Already visible content (including late API results) must never jump
+    // from opaque to faded. Only prepare elements still outside the viewport.
+    if(bounds.top<innerHeight&&bounds.bottom>0&&bounds.left<innerWidth&&bounds.right>0){finish(element);return;}
     element.dataset.saReveal='ready';
-    if(card)element.style.setProperty('--sa-delay',`${(cardIndex++%4)*45}ms`);
+    if(card)element.style.setProperty('--sa-delay',`${(cardIndex++%3)*30}ms`);
     observer!.observe(element);
    });
   }
@@ -120,7 +126,7 @@ export default function StorefrontAtmosphere(){
   function scheduleParallax(){if(!scrollFrame&&!reduced.matches&&!document.hidden)scrollFrame=requestAnimationFrame(updateParallax);}
   function stopMotion(){
    observer?.disconnect();observer=null;mutation?.disconnect();mutation=null;
-   cancelAnimationFrame(scrollFrame);cancelAnimationFrame(scanFrame);scrollFrame=scanFrame=0;
+   cancelAnimationFrame(scrollFrame);scrollFrame=0;
    touched.forEach(finish);
    decoration!.style.removeProperty('--sa-drift');
    decoration!.style.removeProperty('--sa-drift-far');
@@ -139,9 +145,11 @@ export default function StorefrontAtmosphere(){
       if(element.matches(':focus-within')||element.querySelector('dialog[open]'))finish(element);
       else element.dataset.saReveal='entering';
      }
-    },{threshold:.04,rootMargin:'0px 0px -16px 0px'});
+    },{threshold:0,rootMargin:'80px'});
     scan();
-    mutation=new MutationObserver(()=>{if(!scanFrame)scanFrame=requestAnimationFrame(scan);});
+    // Mutation observers run before paint, avoiding a visible frame before
+    // newly loaded, offscreen cards receive their prepared state.
+    mutation=new MutationObserver(scan);
     mutation.observe(main!,{childList:true,subtree:true});
    }
    scheduleParallax();

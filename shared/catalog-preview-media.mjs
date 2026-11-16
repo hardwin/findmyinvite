@@ -83,29 +83,29 @@ export default {
       "version": "39de69db-997f-4a52-929c-b1cec215155a"
     },
     "theeram": {
-      "poster": "/assets/catalog-previews/names-v1/websites/theeram-640.webp",
+      "poster": "/assets/catalog-previews/names-v1/websites/theeram-edge-v2-640.webp",
       "posters": {
-        "320": "/assets/catalog-previews/names-v1/websites/theeram-320.webp",
-        "640": "/assets/catalog-previews/names-v1/websites/theeram-640.webp",
-        "960": "/assets/catalog-previews/names-v1/websites/theeram-960.webp"
+        "320": "/assets/catalog-previews/names-v1/websites/theeram-edge-v2-320.webp",
+        "640": "/assets/catalog-previews/names-v1/websites/theeram-edge-v2-640.webp",
+        "960": "/assets/catalog-previews/names-v1/websites/theeram-edge-v2-960.webp"
       },
       "version": "7b4e0b0d-09e5-4276-828c-6fc5aaff9df9"
     },
     "thiruvarul": {
-      "poster": "/assets/catalog-previews/names-v1/websites/thiruvarul-640.webp",
+      "poster": "/assets/catalog-previews/names-v1/websites/thiruvarul-edge-v2-640.webp",
       "posters": {
-        "320": "/assets/catalog-previews/names-v1/websites/thiruvarul-320.webp",
-        "640": "/assets/catalog-previews/names-v1/websites/thiruvarul-640.webp",
-        "960": "/assets/catalog-previews/names-v1/websites/thiruvarul-960.webp"
+        "320": "/assets/catalog-previews/names-v1/websites/thiruvarul-edge-v2-320.webp",
+        "640": "/assets/catalog-previews/names-v1/websites/thiruvarul-edge-v2-640.webp",
+        "960": "/assets/catalog-previews/names-v1/websites/thiruvarul-edge-v2-960.webp"
       },
       "version": "d49bffd8-970e-419b-b1d0-b73c998edb77"
     },
     "kalyana-payanam": {
-      "poster": "/assets/catalog-previews/names-v1/websites/kalyana-payanam-640.webp",
+      "poster": "/assets/catalog-previews/names-v1/websites/kalyana-payanam-edge-v2-640.webp",
       "posters": {
-        "320": "/assets/catalog-previews/names-v1/websites/kalyana-payanam-320.webp",
-        "640": "/assets/catalog-previews/names-v1/websites/kalyana-payanam-640.webp",
-        "960": "/assets/catalog-previews/names-v1/websites/kalyana-payanam-960.webp"
+        "320": "/assets/catalog-previews/names-v1/websites/kalyana-payanam-edge-v2-320.webp",
+        "640": "/assets/catalog-previews/names-v1/websites/kalyana-payanam-edge-v2-640.webp",
+        "960": "/assets/catalog-previews/names-v1/websites/kalyana-payanam-edge-v2-960.webp"
       },
       "version": "a739b3b9-118c-4564-a5f3-d1f196d1cd99"
     },

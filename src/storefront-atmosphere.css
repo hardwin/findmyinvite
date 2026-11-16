@@ -60,14 +60,16 @@
   transform: translate3d(0, var(--sa-drift-far), 0) rotate(calc(12deg + var(--sa-turn)));
 }
 
-/* Content is visible by default, including before JS and while awaiting the
-   observer. Reveal is a short animation on intersection, not a hidden state. */
+/* Only offscreen elements are prepared by JS. Initial viewport content stays
+   opaque; each reveal runs once, starting just before it enters the viewport. */
 @media (prefers-reduced-motion: no-preference) {
-  [data-sa-motion="section"][data-sa-reveal="entering"] { animation: sa-section-enter 620ms ease-out both; }
-  [data-sa-motion="card"][data-sa-reveal="entering"] { animation: sa-card-enter 680ms cubic-bezier(.2,.65,.25,1) var(--sa-delay, 0ms) both; }
+  [data-sa-reveal="ready"] { opacity: 0; }
+  [data-sa-motion="card"][data-sa-reveal="ready"] { transform: translate3d(0, 12px, 0); }
+  [data-sa-motion="section"][data-sa-reveal="entering"] { animation: sa-section-enter 440ms ease-out both; }
+  [data-sa-motion="card"][data-sa-reveal="entering"] { animation: sa-card-enter 460ms cubic-bezier(.22,.61,.36,1) var(--sa-delay, 0ms) both; }
 }
-@keyframes sa-section-enter { from { opacity: .28; } to { opacity: 1; } }
-@keyframes sa-card-enter { from { opacity: .12; transform: translate3d(0, 16px, 0); } to { opacity: 1; transform: none; } }
+@keyframes sa-section-enter { from { opacity: 0; } to { opacity: 1; } }
+@keyframes sa-card-enter { from { opacity: 0; transform: translate3d(0, 12px, 0); } to { opacity: 1; transform: translate3d(0, 0, 0); } }
 [data-sa-reveal]:focus-within,
 [data-sa-reveal]:has(dialog[open]) { animation: none !important; opacity: 1 !important; transform: none !important; }
 
