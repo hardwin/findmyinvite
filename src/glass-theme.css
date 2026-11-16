@@ -6,11 +6,13 @@
   src: url('/assets/fonts/363014d7c907501d.woff2') format('woff2');
   font-weight: 400 900; font-style: normal; font-display: swap;
 }
-@font-face {
-  font-family: 'FMI UI';
-  src: url('/assets/fonts/discovery/montserrat-latin.woff2') format('woff2');
-  font-weight: 100 900; font-style: normal; font-display: swap;
-}
+/* Static Montserrat weights preserve the brand in engines that ignore the
+   variable font's weight axis. Source: @fontsource/montserrat 5.3.0, SIL OFL. */
+@font-face { font-family: 'FMI UI'; src: url('/assets/fonts/discovery/montserrat-static-400.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'FMI UI'; src: url('/assets/fonts/discovery/montserrat-static-500.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: 'FMI UI'; src: url('/assets/fonts/discovery/montserrat-static-600.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: 'FMI UI'; src: url('/assets/fonts/discovery/montserrat-static-700.woff2') format('woff2'); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: 'FMI UI'; src: url('/assets/fonts/discovery/montserrat-static-800.woff2') format('woff2'); font-weight: 800; font-style: normal; font-display: swap; }
 body.di-site {
   --brand-accent: #9e2d69;
   --brand-wine: #6e1443;
@@ -24,7 +26,7 @@ body.di-site {
   --di-muted: #7e4753;
   --di-border: #9e2d6926;
   --di-red: var(--field-action);
-  --glass-font: 'FMI UI', Montserrat, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --glass-font: 'FMI UI', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --glass-display: 'FMI Display', 'Playfair Display', Georgia, serif;
   --glass-surface: #ffffff70;
   --glass-control: #ffffffcc;
