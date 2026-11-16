@@ -38,7 +38,7 @@ export default function SearchResults(){
     {query&&<a className="di-search-clear" href={invitationSearchHref('',language)}>Clear search</a>}
    </header>
    <div className="di-search-status" role="status" aria-live="polite">
-    {loading?'Loading invitations…':failed?'Some results could not be loaded.':`${results.length} ${results.length===1?'invitation':'invitations'} found · Showing ${shown}`}
+    {loading?'Loading invitations…':failed?'Some results could not be loaded.':`${results.length} ${results.length===1?'invitation':'invitations'} found`}
    </div>
    {websites.error&&<p role="alert">Website results could not load. <a href={invitationSearchHref(query,language)}>Try again</a></p>}
    {videos.error&&<p role="alert">Video results could not load. <button type="button" className="di-button di-secondary" onClick={()=>{void videos.retry();}}>Try again</button></p>}
