@@ -91,6 +91,7 @@ try{
 
    await page.getByRole('textbox',{name:'Search designs',exact:true}).fill('Bells');
    await page.locator('.di-search').getByRole('button').click();
+   await page.waitForURL('**/search?q=Bells');
    await page.waitForFunction(()=>document.querySelectorAll('.di-pin').length===1);
    assert.match(await page.locator('.di-pin .di-card-details').innerText(),/Bells & Blessings/);
    await page.evaluate(()=>window.scrollTo({top:document.documentElement.scrollHeight,behavior:'instant'}));

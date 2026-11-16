@@ -1,0 +1,7 @@
+.di-search-results .di-library-head { padding-bottom: 12px; }
+.di-search-results .di-library-head h1 { overflow-wrap: anywhere; }
+.di-search-results .di-search { margin: 20px auto 0; }
+.di-search-clear { display: inline-block; padding: 10px 12px; min-height: 44px; text-decoration: underline !important; text-underline-offset: 3px; }
+.di-search-status { margin: 4px 0 18px; color: var(--di-muted); font-size: 14px; }
+.di-search-more { display: flex; justify-content: center; padding-top: 24px; }
+.di-search-more .di-button { margin: 0; }

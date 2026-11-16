@@ -1,8 +1,10 @@
 import InvitationLoading from './templates/InvitationLoading';
-import {lazy,Suspense,useEffect} from 'react';
+import {lazy,Suspense,useEffect,useRef} from 'react';
 import Discovery,{DiscoveryPricing} from './Discovery';
 import ContentPages from './ContentPages';
 import OccasionLanding from './OccasionLanding';
+import {invitationSearchHref} from '../shared/catalog-search.mjs';
+const SearchResults=lazy(()=>import('./SearchResults'));
 const VideoPersonalise=lazy(()=>import('./video/VideoPersonalise'));
 const AuthCallback=lazy(()=>import('./AuthCallback'));
 const TemplateCMS=lazy(()=>import('./templates/TemplateCMS'));
@@ -16,7 +18,14 @@ const AssemblyPipeline=lazy(()=>import('./AssemblyPipeline'));
 const ManagerLogin=lazy(()=>import('./ManagerLogin'));
 const ClientDesk=lazy(()=>import('./ClientDesk'));
 const ClientProof=lazy(()=>import('./ClientProof'));
+function SearchRedirect({href}:{href:string}){
+ const navigating=useRef(false);
+ useEffect(()=>{if(!navigating.current){navigating.current=true;location.replace(href);}},[href]);
+ return <main className="tc-shell" role="status">Opening search results…</main>;
+}
 export default function App(){const path=location.pathname.replace(/\/$/,'')||'/';useEffect(()=>{if(!path.startsWith('/proof/'))document.title=(path==='/'?'Find your invitation':path.slice(1).replaceAll('-',' '))+' | FindMyInvite';},[path]);
+ const params=new URLSearchParams(location.search);
+ if(path==='/'&&params.get('q')?.trim())return <SearchRedirect href={invitationSearchHref(params.get('q')!,params.get('lang')||'')}/>;
  if(['/create','/form','/editor','/studio','/workspace','/grand-launch'].includes(path)||path.startsWith('/invite/')){location.replace(['/studio','/workspace'].includes(path)?'/cms':'/templates');return null;}
  if(path.startsWith('/manage/')){location.replace('/personalise?slug='+encodeURIComponent(path.split('/')[2]));return null;}
  if(path==='/assembly'||path==='/assembly/pipeline'){location.replace(path.includes('pipeline')?'/manager/pipeline':'/manager');return null;}
@@ -34,6 +43,7 @@ export default function App(){const path=location.pathname.replace(/\/$/,'')||'/
  else if(path==='/manager')page=<Assembly/>;
  else if(path.startsWith('/akay'))page=<AkayAdmin/>;
  else if(path==='/pricing')page=<DiscoveryPricing/>;
+ else if(path==='/search')page=<SearchResults/>;
  else if(['/','/templates','/saved'].includes(path))page=<Discovery/>;
  else if(['/about','/contact','/terms','/privacy-policy','/refund-policy','/shipping-policy','/blog'].includes(path)||path.startsWith('/blog/'))page=<ContentPages/>;
  else if(path.startsWith('/invitations'))page=<OccasionLanding/>;

@@ -10,5 +10,5 @@ import './iteration2.css';
 
 import './discovery.css';
 import './glass-theme.css';
-const customerPaths=['/video-personalise','/auth/callback','/cms','/personalise','/','/templates','/saved','/pricing','/dashboard','/login','/signup','/forgot-password','/create','/form','/editor','/about','/contact','/terms','/privacy-policy','/refund-policy','/shipping-policy','/blog'];
-if(customerPaths.includes(location.pathname)||location.pathname.startsWith('/blog/')||location.pathname.startsWith('/manage/')||location.pathname.startsWith('/invitations'))document.body.classList.add('di-site');
+const customerPaths=['/video-personalise','/auth/callback','/cms','/personalise','/','/templates','/search','/saved','/pricing','/dashboard','/login','/signup','/forgot-password','/create','/form','/editor','/about','/contact','/terms','/privacy-policy','/refund-policy','/shipping-policy','/blog'];
+if(customerPaths.includes(location.pathname.replace(/\/$/,'')||'/')||location.pathname.startsWith('/blog/')||location.pathname.startsWith('/manage/')||location.pathname.startsWith('/invitations'))document.body.classList.add('di-site');

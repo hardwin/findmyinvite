@@ -8,7 +8,7 @@ import TemplatePreviewDialog from '../TemplatePreviewDialog';
 import {useVideoCatalog,type VideoEntry} from './catalog';
 import {filterVideoCatalog} from '../../shared/discovery-taxonomy.mjs';
 import {previewMuted,setPreviewMuted,usePreviewMuted} from '../preview-sound';
-function VideoCard({entry}:{entry:VideoEntry}){
+export function VideoCard({entry}:{entry:VideoEntry}){
  const videoRef=useRef<HTMLVideoElement>(null),box=useRef<HTMLElement>(null),[active,setActive]=useState(false),[failed,setFailed]=useState(false),[ready,setReady]=useState(false);
  const muted=usePreviewMuted(),audioRef=useRef<HTMLAudioElement>(null);
  const deadline=useRef<ReturnType<typeof setTimeout>|undefined>(undefined);
