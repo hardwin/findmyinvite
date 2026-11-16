@@ -15,7 +15,7 @@ test('FMI identifiers survive ordering/name changes and match exact numeric sear
  assert.deepEqual(identityFields(undefined),{});
 });
 test('registration only inserts missing code-defined videos and preserves edited metadata',async()=>{
- const known=['temple-v1','kerala-christian-v1',...VIDEO_CATALOG.map(v=>v.id)];
+ const known=['temple-v1','kerala-christian-v1','wedding-bells-v1',...VIDEO_CATALOG.map(v=>v.id)];
  let writes=[];const query=async(path,options)=>{if(options){writes.push({path,...options});return null;}return known.slice(1).map(id=>({template_id:id,micro_description:'Admin authored text'}));};
  assert.equal(await registerVideoIdentities(query),1);
  assert.equal(writes.length,1);assert.equal(writes[0].headers.Prefer,'resolution=ignore-duplicates');
@@ -28,7 +28,7 @@ test('all current video definitions have distinct, at most four-word authored de
  const values=Object.values(seeds).flatMap(Object.values);
  assert.equal(new Set(values.map(v=>v.toLowerCase())).size,values.length);
  values.forEach(v=>assert.equal(validateMicroDescription(v),v));
- for(const id of ['temple-v1','kerala-christian-v1',...VIDEO_CATALOG.map(v=>v.id)])assert.ok(seeds.video[id],id);
+ for(const id of ['temple-v1','kerala-christian-v1','wedding-bells-v1',...VIDEO_CATALOG.map(v=>v.id)])assert.ok(seeds.video[id],id);
 });
 test('metadata updates cannot change identifiers and reject invalid descriptions before database access',async()=>{
  let call;const query=async(path,options)=>{call={path,options};return {template_number:7};};

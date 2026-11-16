@@ -13,7 +13,8 @@ export async function videoMusicCatalog(){
 
 export function videoDefaultMusic(id,catalog){
  const assignment=catalog.assignments.find(a=>a.id===id);
- const track=catalog.tracks.find(t=>t.id===assignment?.trackId);
+ const trackId=assignment?assignment.trackId:id==='wedding-bells-v1'?'wedding-bells-original':undefined;
+ const track=catalog.tracks.find(t=>t.id===trackId);
  return track?{mode:'library',id:track.id}:{mode:'none'};
 }
 

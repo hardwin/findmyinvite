@@ -1,0 +1,41 @@
+{
+  "createdAt": "2026-11-16T21:59:11.272Z",
+  "templateId": "wedding-bells-v1",
+  "rendererVersion": "tracked-film-v1",
+  "productionBase": "38e572ea5f90199bd82183482560d65f11f1dd3d",
+  "catalogCode": "FMI#0109",
+  "cloud": {
+    "rendererVersion": "tracked-film-v1",
+    "createdAt": "2026-11-16T21:56:23.319Z",
+    "vcpus": 4,
+    "renders": {
+      "default": {
+        "frames": 832,
+        "width": 720,
+        "height": 1280,
+        "duration": 27.733333333333334,
+        "bytes": 17837784,
+        "resultSha256": "b90ef2e756ca7e09536479645195362d1dab410f59bea7e0ececf4438498c839",
+        "elapsedSeconds": null,
+        "resumedCompletedRender": true,
+        "audioPackets": 600,
+        "audioPacketPayloadHash": "73567762d5a159038d7c24772333dc6f74877572436113191d91dcbed17ab30b"
+      },
+      "personalized": {
+        "frames": 832,
+        "width": 720,
+        "height": 1280,
+        "duration": 27.733333333333334,
+        "bytes": 17834961,
+        "resultSha256": "57bb4b2c9c8bcef09d46d706f2089f02a8fe264b69dde07b4704e0e27a8553a5",
+        "backgroundSha256": "190ea2e43dc44fc6874a50576fefddee34d136d02b79caa105cde582a602d095",
+        "elapsedSeconds": 124.681,
+        "resumedCompletedRender": false,
+        "audioPackets": 600,
+        "audioPacketPayloadHash": "73567762d5a159038d7c24772333dc6f74877572436113191d91dcbed17ab30b"
+      }
+    }
+  },
+  "physicalDevicesVerified": false,
+  "snapshotId": "snap_KGDyxEbWzxKbCRe5OizmnsD9nb3d"
+}

@@ -41,6 +41,7 @@ export async function serve(temp,photos){
  await new Promise(r=>server.listen(0,'127.0.0.1',r));return {server,origin:`http://127.0.0.1:${server.address().port}`};
 }
 export async function renderPersonalizedVideo({master,content,photos={},audioFile,audioCredit,output,reviewFrames,onlyLayer,onProgress=()=>{},requireRelease=true,frameTransport='png'}){
+ if(master.rendererVersion==='tracked-film-v1'){const {renderTrackedVideo}=await import('./render-tracked-video.mjs');return renderTrackedVideo({master,content,photos,audioFile,output,reviewFrames,onProgress,requireRelease});}
  if(master.rendererVersion==='scene-film-v1'){const {renderSceneVideo}=await import('./render-scene-video.mjs');return renderSceneVideo({master,content,photos,audioFile,audioCredit,output,reviewFrames,onProgress,requireRelease});}
  assertMaster(master,{released:requireRelease});content=normalizeVideoContent(content,{complete:true,templateId:master.id});
  for(const asset of Object.values(master.assets)){const file=inside(join(root,'public'),asset.path.slice(1));const checksum=digest(await readFile(file));if(asset.sha256!==checksum)throw Error('Master asset checksum mismatch: '+asset.path);}

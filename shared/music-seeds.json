@@ -1,5 +1,18 @@
 [
   {
+    "id": "wedding-bells-original",
+    "title": "Wedding Bells — original soundtrack",
+    "artist": "FindMyInvite",
+    "mood": "Wedding film",
+    "duration": 27.862,
+    "asset": "/assets/music-library/wedding-bells-original.m4a",
+    "license": "Owner-provided recording",
+    "credit": "Original soundtrack extracted without re-encoding from the Wedding Bells film supplied by the FindMyInvite owner, who confirmed ownership.",
+    "status": "ready",
+    "archived": false,
+    "revision": 0
+  },
+  {
     "id": "heartwarming",
     "title": "Heartwarming",
     "artist": "Kevin MacLeod",

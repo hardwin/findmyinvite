@@ -3,6 +3,7 @@ import seeds from './music-seeds.json' with {type:'json'};
 import {validMusicId} from './music-selection.mjs';
 import {TEMPLE_ID,TEMPLE_FORM,TEMPLE_DEFAULTS} from './temple-video.mjs';
 import {catalogVideo} from './video-catalog.mjs';
+import {WEDDING_BELLS_ID,WEDDING_BELLS_DEFINITION,WEDDING_BELLS_OUTPUT} from './wedding-bells-video.mjs';
 
 export const VIDEO_ID='kerala-christian-v1';
 export const LAYER_ORDER=Object.freeze(['background','characters','boards','text','petals']);
@@ -23,12 +24,13 @@ export const VIDEO_EXAMPLE={...VIDEO_DEFAULTS,groom:'Alex John',bride:'Anna Thom
 export const PHOTO_SLOTS=['groom','bride','couple'];
 export const DEFAULT_VIDEO_ID=TEMPLE_ID;
 export function videoDefinition(id=DEFAULT_VIDEO_ID){
+ if(id===WEDDING_BELLS_ID)return WEDDING_BELLS_DEFINITION;
  const catalog=catalogVideo(id);if(catalog)return catalog;
  if(id===TEMPLE_ID)return {id,form:TEMPLE_FORM,defaults:TEMPLE_DEFAULTS,name:'Temple Wedding',collection:'THE TEMPLE COLLECTION',description:'A golden temple, your favourite people, and words that are entirely yours.',filename:'temple-wedding.mp4'};
  if(id===VIDEO_ID)return {id,form:VIDEO_FORM,defaults:VIDEO_DEFAULTS,name:'Kerala Christian Wedding',collection:'THE KERALA CHRISTIAN COLLECTION',description:'A sunlit church, your favourite people, and words that are entirely yours.',filename:'christian-wedding.mp4'};
  throw Error('This video template is unavailable.');
 }
-const seedMusic=Object.fromEntries(seeds.map(t=>[t.id,{path:t.asset,label:t.title,credit:t.credit+' Trimmed and faded for this invitation.',license:t.licenseUrl}]));
+const seedMusic=Object.fromEntries(seeds.map(t=>[t.id,{path:t.asset,label:t.title,credit:t.credit+(t.id==='wedding-bells-original'?'':' Trimmed and faded for this invitation.'),license:t.licenseUrl}]));
 export const MUSIC={...seedMusic,canon:seedMusic['canon-in-d']};
 export function normalizeVideoContent(input,{complete=false,templateId=VIDEO_ID}={}){
  const {form,defaults}=videoDefinition(templateId);
@@ -42,6 +44,7 @@ export function normalizeVideoContent(input,{complete=false,templateId=VIDEO_ID}
   out[question.path]=v.trim().normalize('NFC');
  }
  out.photos={};
+ if(templateId===WEDDING_BELLS_ID&&Object.keys(input.photos||{}).length)throw Error('Wedding Bells currently preserves the original characters.');
  const catalog=catalogVideo(templateId);
  for(const slot of catalog?catalog.photoSlots.map(p=>p.slot):PHOTO_SLOTS){const p=input.photos?.[slot];if(!p)continue;if(!/^[a-f0-9-]{36}$/.test(p.id||'')||!(catalog?['frame']:['cutout','frame','prepared']).includes(p.mode)||p.confirmed!==true)throw Error('Confirm the '+slot+' photo presentation.');out.photos[slot]={id:p.id,mode:p.mode,confirmed:true};}
  const music=input.music||{mode:'none'};
@@ -74,6 +77,16 @@ export function trackAt(track,frame){
  return {frame,opacity:mix(a.opacity??1,b.opacity??1),corners:a.corners.map((p,i)=>p.map((v,j)=>mix(v,b.corners[i][j])))};
 }
 export function assertMaster(m,{released=false}={}){
+ if(m?.rendererVersion==='tracked-film-v1'){
+  if(m.id!==WEDDING_BELLS_ID||m.version!==1||Object.entries(WEDDING_BELLS_OUTPUT).some(([k,v])=>m.output?.[k]!==v))throw Error('Unsupported tracked film master.');
+  if(m.scenes?.length!==9||m.scenes[0].start!==0||m.scenes.at(-1).end!==832||m.scenes.some((s,i)=>!Number.isInteger(s.start)||!Number.isInteger(s.end)||s.start>=s.end||(i&&s.start!==m.scenes[i-1].end)))throw Error('Invalid tracked film timeline.');
+  if(m.cleanTextRanges!==undefined&&(!Array.isArray(m.cleanTextRanges)||m.cleanTextRanges.some((r,i)=>!Number.isInteger(r.start)||!Number.isInteger(r.end)||r.start<0||r.end>m.output.frames||r.start>=r.end||(i&&r.start<m.cleanTextRanges[i-1].end))))throw Error('Invalid text-free frame range.');
+  for(const id of ['background','restoration','surfaces'])if(!m.assets?.[id])throw Error('Missing tracked film asset.');
+  for(const a of Object.values(m.assets))if(!a.path?.startsWith('/assets/video-masters/'+WEDDING_BELLS_ID+'/')||a.path.includes('..')||!/^[a-f0-9]{64}$/.test(a.sha256||''))throw Error('Invalid tracked film asset.');
+  // Owner-approved public trial: immutable render proofs and a qualified cloud worker.
+  if(released&&(!m.release?.approved||m.release.rendererVersion!==m.rendererVersion||!['default','personalized'].every(k=>/^[a-f0-9]{64}$/.test(m.release?.proofs?.[k]||''))||!m.release.cloudVerified))throw Error('Wedding Bells is still being prepared.');
+  return m;
+ }
  if(m?.rendererVersion==='scene-film-v1'){
   const definition=catalogVideo(m.id),o=m.output;
   if(!definition||definition.design!==m.sceneDesign||m.version!==1||o?.width!==720||o.height!==1280||o.fps!==24||!Number.isSafeInteger(o.frames)||o.frames<24||o.frames>14400||Math.abs(o.duration-o.frames/o.fps)>0.00001)throw Error('Unsupported scene master.');

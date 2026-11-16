@@ -8,6 +8,6 @@ let compositor:any=null;
   if(compositor.film)return compositor.film.snapshot(format);
   // The presentation shader only copies this already-composited canvas. Export
   // its identical pixels directly, avoiding a CPU-to-GPU-to-CPU round trip.
-  return (direct?compositor.surface:document.getElementById('film')).toDataURL('image/png').split(',')[1];
+  return (direct?compositor.surface:document.getElementById('film')).toDataURL(format,0.97).split(',')[1];
  }
 };

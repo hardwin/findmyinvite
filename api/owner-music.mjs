@@ -8,7 +8,7 @@ import {matchesMediaType} from '../server/template-file-validation.mjs';
 import {db,bodyJson,respond,fail,method,HttpError} from '../server/core.mjs';
 import {VIDEO_CATALOG} from '../shared/video-catalog.mjs';
 import {defaultWebsiteMusicId} from '../shared/music-selection.mjs';
-const videoTemplates=[{id:'temple-v1',name:'Temple Wedding'},...VIDEO_CATALOG.map(({id,name})=>({id,name}))].map(t=>({...t,kind:'video',defaultTrackId:''}));
+const videoTemplates=[{id:'temple-v1',name:'Temple Wedding'},{id:'wedding-bells-v1',name:'Wedding Bells'},...VIDEO_CATALOG.map(({id,name})=>({id,name}))].map(t=>({...t,kind:'video',defaultTrackId:''}));
 const types=['audio/mpeg','audio/mp4','audio/ogg'],limit=20*1048576;
 const text=(v,max=160)=>typeof v==='string'?v.trim().slice(0,max):'';
 const link=v=>{if(!v)return '';try{const u=new URL(v);if(u.protocol==='https:'&&!u.username&&!u.password)return u.href;}catch{}throw new HttpError(400,'Use HTTPS source and licence links.');};

@@ -35,6 +35,7 @@ export const discoveryTaxonomy={
 // Reviewed against the authored video posters and supported occasions. These facets
 // let descriptive searches find designs whose titles are in Tamil or use a brand name.
 export const videoDiscoveryTaxonomy={
+ 'wedding-bells-v1':entry('christian','church',['ivory','gold'],['floral','3d','toon']),
  'temple-v1':entry('hindu','temple',['gold','blush'],['floral','3d','toon']),
  'kerala-christian-v1':entry('christian','church',['ivory','gold']),
  'film-drive-v1':entry('hindu','', ['sage'],['3d','toon']),

@@ -7,7 +7,7 @@ import descriptions from '../shared/catalog-descriptions.json' with {type:'json'
 // overwriting of descriptions already edited in the CMS.
 export async function registerVideoIdentities(query=db){
  const existing=await catalogIdentities('video',query),known=new Set(existing.map(row=>row.template_id));
- const missing=['temple-v1','kerala-christian-v1',...VIDEO_CATALOG.map(row=>row.id)].filter(id=>!known.has(id));
+ const missing=['temple-v1','kerala-christian-v1','wedding-bells-v1',...VIDEO_CATALOG.map(row=>row.id)].filter(id=>!known.has(id));
  if(missing.length)await query('catalog_identity?on_conflict=kind,template_id',{method:'POST',headers:{Prefer:'resolution=ignore-duplicates'},body:missing.map(id=>({kind:'video',template_id:id,micro_description:validateMicroDescription(descriptions.video[id])}))});
  return missing.length;
 }
