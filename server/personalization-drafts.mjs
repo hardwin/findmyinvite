@@ -1,3 +1,5 @@
+import {catalogIdentities} from './catalog-identity.mjs';
+import {identityFields} from '../shared/catalog-identity.mjs';
 import {db,HttpError} from './core.mjs';
 import {version} from './template-cms.mjs';
 import {videoInvitationId} from './video-payments.mjs';
@@ -51,8 +53,9 @@ export function draftService({query=db,store=videoStore()}={}){
   const versionIds=[...new Set(items.filter(d=>d.kind==='website').map(d=>d.templateId))];
   const versions=versionIds.length?await query('template_versions?id=in.('+versionIds.join(',')+')&select=id,template_id'):[];
   const catalog=versions.length?await query('template_catalog?id=in.('+[...new Set(versions.map(v=>v.template_id))].map(encodeURIComponent).join(',')+')&select=id,name,thumbnail'):[];
+  const identities=await catalogIdentities(undefined,query);
   const characters=await query('video_character_jobs?owner_id=eq.'+owner+'&status=in.(queued,submitting,processing,preparing,review)&select=invitation_id,status&limit=200');
-  return Promise.all(items.map(async d=>{const p=purchases.find(p=>p.id===d.id),website=websites.find(w=>w.id===d.id||w.slug===d.payload?.slug),meta=catalog.find(c=>c.id===versions.find(v=>v.id===d.templateId)?.template_id);return {...d,characterReview:characters.some(j=>j.invitation_id===d.id),templateName:d.kind==='video'?videoDefinition(d.templateId).name:meta?.name,thumbnail:d.kind==='video'?'/assets/video-masters/'+d.templateId+'/poster.jpg':meta?.thumbnail,job:d.kind==='video'?await jobView(owner,d.lastJobId||d.payload?.job?.id):null,payment:p?.status||(websitePurchases.some(p=>p.invitation_id===website?.id&&p.status==='captured')?'captured':null),published:website?.published||false,expiresAt:website?.first_published_at?website.expires_at:null};}));
+  return Promise.all(items.map(async d=>{const p=purchases.find(p=>p.id===d.id),website=websites.find(w=>w.id===d.id||w.slug===d.payload?.slug),meta=catalog.find(c=>c.id===versions.find(v=>v.id===d.templateId)?.template_id);return {...d,...identityFields(identities.find(r=>r.kind===d.kind&&r.template_id===(d.kind==='video'?d.templateId:meta?.id))),characterReview:characters.some(j=>j.invitation_id===d.id),templateName:d.kind==='video'?videoDefinition(d.templateId).name:meta?.name,thumbnail:d.kind==='video'?'/assets/video-masters/'+d.templateId+'/poster.jpg':meta?.thumbnail,job:d.kind==='video'?await jobView(owner,d.lastJobId||d.payload?.job?.id):null,payment:p?.status||(websitePurchases.some(p=>p.invitation_id===website?.id&&p.status==='captured')?'captured':null),published:website?.published||false,expiresAt:website?.first_published_at?website.expires_at:null};}));
  }
  async function remove(owner,id){
   let row=await get(owner,id,{optional:true,deleted:true});

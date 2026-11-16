@@ -1,6 +1,6 @@
 import {useEffect,useSyncExternalStore} from 'react';
 
-export type VideoEntry={id:string;name:string;poster:string;posters?:Record<string,string>;preview:string;amount:number;duration:number;music?:{id:string;title:string;url:string;credit:string;licenseUrl:string}|null};
+export type VideoEntry={templateCode?:string;microDescription?:string;id:string;name:string;poster:string;posters?:Record<string,string>;preview:string;amount:number;quote?:{basePaise:number};duration:number;music?:{id:string;title:string;url:string;credit:string;licenseUrl:string}|null};
 type Snapshot={entries:VideoEntry[];loading:boolean;error:boolean};
 let snapshot:Snapshot={entries:[],loading:true,error:false};
 let request:Promise<void>|undefined;

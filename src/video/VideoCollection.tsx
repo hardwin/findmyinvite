@@ -1,4 +1,4 @@
-import {useCallback,useEffect,useRef,useState} from 'react';
+import {useCallback,useEffect,useRef,useState,type CSSProperties} from 'react';
 import {flushSync} from 'react-dom';
 import {ArrowRight,LoaderCircle,Play,RotateCcw,Video} from 'lucide-react';
 import PreviewSoundButton from '../PreviewSoundButton';
@@ -32,7 +32,7 @@ function VideoCard({entry}:{entry:VideoEntry}){
   const next=!muted;video.muted=next;if(!next&&video.volume===0)video.volume=1;setPreviewMuted(next);
   const audio=audioRef.current;if(audio){if(next)audio.pause();else if(!video.paused){if(audio.error)audio.load();void audio.play().catch(e=>{if(audio.isConnected&&e.name!=='AbortError')setPreviewMuted(true);});}}
  }
- return <TemplatePreviewDialog name={entry.name} onExpand={startPreview}>{(expanded,expandControl)=><article className={'di-video-card'+(expanded?' di-expanded-card':'')} ref={box}>
+ return <TemplatePreviewDialog name={entry.name} onExpand={startPreview}>{(expanded,expandControl)=><article className={'di-video-card'+(expanded?' di-expanded-card':'')} ref={box} style={{'--di-card-art':`url(${JSON.stringify(entry.poster)})`} as CSSProperties}>
   <div className="di-video-demo">
    <a href={useHref} aria-label={'Use Template: '+entry.name}><img src={entry.poster} srcSet={entry.posters?Object.entries(entry.posters).map(([width,url])=>url+' '+width+'w').join(','):undefined} sizes="(max-width:640px) 78vw, 25vw" width={720} height={1280} loading="lazy" decoding="async" onError={e=>{e.currentTarget.removeAttribute('srcset');if(e.currentTarget.getAttribute('src')!==entry.poster)e.currentTarget.src=entry.poster;}} alt={entry.name}/></a>
    {active&&<video ref={attachVideo} onProgress={()=>{if(!ready)loadingProgress();}} src={entry.preview} poster={entry.poster} style={{opacity:ready?1:0}} onPlaying={()=>setReady(true)} autoPlay controls={expanded} muted={muted} onVolumeChange={e=>{const next=e.currentTarget.muted||e.currentTarget.volume===0;if(next!==previewMuted())setPreviewMuted(next);}} loop playsInline preload="auto" aria-label={entry.name+' preview'} onError={()=>{setActive(false);setFailed(true);}}/>}
@@ -46,8 +46,7 @@ function VideoCard({entry}:{entry:VideoEntry}){
    {active&&!ready&&<span className="di-thumbnail-preview di-video-play di-preview-loading" role="status" aria-label={'Loading preview for '+entry.name}><LoaderCircle size={24} className="di-preview-spinner"/></span>}
    {active&&ready&&<PreviewSoundButton name={entry.name} muted={muted} onClick={toggleMusic}/>}
   </div>
-  <TemplateCardDetails name={entry.name} kind="video" useHref={useHref}/>
-  {entry.music&&<details className="music-library-credits"><summary>Music credits</summary><small>{entry.music.credit} {entry.music.licenseUrl&&<a href={entry.music.licenseUrl} target="_blank" rel="noreferrer">Licence</a>}</small></details>}
+  <TemplateCardDetails name={entry.name} kind="video" useHref={useHref} templateCode={entry.templateCode} microDescription={entry.microDescription} amountPaise={entry.quote?.basePaise}/>
   {failed&&<small className="di-card-status" role="status">Preview could not load. Try again or use this template.</small>}
  </article>}</TemplatePreviewDialog>;
 }

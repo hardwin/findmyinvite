@@ -7,6 +7,8 @@ export type Tradition='christian'|'hindu'|'muslim'|'interfaith';
 export type Palette='ivory'|'sage'|'burgundy'|'gold'|'navy'|'blush';
 export type Setting='backwater'|'church'|'garden'|'temple'|'palace'|'beach'|'minimal'|'courtyard';
 export type ShopTemplate={
+ templateCode?:string;
+ microDescription?:string;
  templateVersionId?:string;
  tradition?:Tradition;
  pricePaise?:number;

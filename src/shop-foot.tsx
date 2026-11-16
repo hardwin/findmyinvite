@@ -85,7 +85,7 @@ export default function ShopDeskFoot(){
   </section>
   <footer className="im-foot">
    <div className="im-foot-brand">
-    <a className="im-foot-logo" href="/" aria-label="FindMyInvite"><img src="/assets/findmyinvite-logo.jpg" alt="FindMyInvite" width="2158" height="729"/></a>
+    <a className="im-foot-logo" href="/" aria-label="FindMyInvite"><img src="/assets/findmyinvite-logo-transparent.png" alt="FindMyInvite" width="2158" height="729"/></a>
     <p className="im-foot-tag">Your wedding invitation copilot</p>
     <p>Digital wedding websites and invite videos. Pay, copy the live link, share with guests.</p>
     <small>© 2026 FindMyInvite. No physical products shipped.</small>

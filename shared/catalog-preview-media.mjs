@@ -110,47 +110,47 @@ export default {
       "version": "a739b3b9-118c-4564-a5f3-d1f196d1cd99"
     },
     "midnight-stage": {
-      "poster": "/assets/catalog-previews/names-v1/websites/midnight-stage-640.webp",
+      "poster": "/assets/catalog-previews/names-v1/websites/midnight-stage-edge-v2-640.webp",
       "posters": {
-        "320": "/assets/catalog-previews/names-v1/websites/midnight-stage-320.webp",
-        "640": "/assets/catalog-previews/names-v1/websites/midnight-stage-640.webp",
-        "960": "/assets/catalog-previews/names-v1/websites/midnight-stage-960.webp"
+        "320": "/assets/catalog-previews/names-v1/websites/midnight-stage-edge-v2-320.webp",
+        "640": "/assets/catalog-previews/names-v1/websites/midnight-stage-edge-v2-640.webp",
+        "960": "/assets/catalog-previews/names-v1/websites/midnight-stage-edge-v2-960.webp"
       },
       "version": "35b0d0e8-7d91-4dbc-9b30-654e1c69e005"
     },
     "little-blessing": {
-      "poster": "/assets/catalog-previews/names-v1/websites/little-blessing-640.webp",
+      "poster": "/assets/catalog-previews/names-v1/websites/little-blessing-edge-v2-640.webp",
       "posters": {
-        "320": "/assets/catalog-previews/names-v1/websites/little-blessing-320.webp",
-        "640": "/assets/catalog-previews/names-v1/websites/little-blessing-640.webp",
-        "960": "/assets/catalog-previews/names-v1/websites/little-blessing-960.webp"
+        "320": "/assets/catalog-previews/names-v1/websites/little-blessing-edge-v2-320.webp",
+        "640": "/assets/catalog-previews/names-v1/websites/little-blessing-edge-v2-640.webp",
+        "960": "/assets/catalog-previews/names-v1/websites/little-blessing-edge-v2-960.webp"
       },
       "version": "6414fe6a-fe96-455c-b978-c9c32167e6bf"
     },
     "noir-and-gold": {
-      "poster": "/assets/catalog-previews/names-v1/websites/noir-and-gold-640.webp",
+      "poster": "/assets/catalog-previews/names-v1/websites/noir-and-gold-edge-v2-640.webp",
       "posters": {
-        "320": "/assets/catalog-previews/names-v1/websites/noir-and-gold-320.webp",
-        "640": "/assets/catalog-previews/names-v1/websites/noir-and-gold-640.webp",
-        "960": "/assets/catalog-previews/names-v1/websites/noir-and-gold-960.webp"
+        "320": "/assets/catalog-previews/names-v1/websites/noir-and-gold-edge-v2-320.webp",
+        "640": "/assets/catalog-previews/names-v1/websites/noir-and-gold-edge-v2-640.webp",
+        "960": "/assets/catalog-previews/names-v1/websites/noir-and-gold-edge-v2-960.webp"
       },
       "version": "c7b272a5-705a-46c7-b3dd-28468451e4d1"
     },
     "golden-hour": {
-      "poster": "/assets/catalog-previews/names-v1/websites/golden-hour-640.webp",
+      "poster": "/assets/catalog-previews/names-v1/websites/golden-hour-edge-v2-640.webp",
       "posters": {
-        "320": "/assets/catalog-previews/names-v1/websites/golden-hour-320.webp",
-        "640": "/assets/catalog-previews/names-v1/websites/golden-hour-640.webp",
-        "960": "/assets/catalog-previews/names-v1/websites/golden-hour-960.webp"
+        "320": "/assets/catalog-previews/names-v1/websites/golden-hour-edge-v2-320.webp",
+        "640": "/assets/catalog-previews/names-v1/websites/golden-hour-edge-v2-640.webp",
+        "960": "/assets/catalog-previews/names-v1/websites/golden-hour-edge-v2-960.webp"
       },
       "version": "b14c321b-58ff-4b67-826d-aed5ed89faeb"
     },
     "pearl-and-sapphire": {
-      "poster": "/assets/catalog-previews/names-v1/websites/pearl-and-sapphire-640.webp",
+      "poster": "/assets/catalog-previews/names-v1/websites/pearl-and-sapphire-edge-v2-640.webp",
       "posters": {
-        "320": "/assets/catalog-previews/names-v1/websites/pearl-and-sapphire-320.webp",
-        "640": "/assets/catalog-previews/names-v1/websites/pearl-and-sapphire-640.webp",
-        "960": "/assets/catalog-previews/names-v1/websites/pearl-and-sapphire-960.webp"
+        "320": "/assets/catalog-previews/names-v1/websites/pearl-and-sapphire-edge-v2-320.webp",
+        "640": "/assets/catalog-previews/names-v1/websites/pearl-and-sapphire-edge-v2-640.webp",
+        "960": "/assets/catalog-previews/names-v1/websites/pearl-and-sapphire-edge-v2-960.webp"
       },
       "version": "03163f7c-eab9-4fc2-a539-c2633e5554a5"
     },

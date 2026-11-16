@@ -56,7 +56,7 @@ export default function ChungHome(){
  return <div className={'cd-home'+(dark?' dark':'')}>
   <header className="cd-nav">
    <a className="cd-logo" href="/" aria-label="FindMyInvite">
-    <img src="/assets/findmyinvite-logo.jpg" alt="FindMyInvite" width="2158" height="729"/>
+    <img src="/assets/findmyinvite-logo-transparent.png" alt="FindMyInvite" width="2158" height="729"/>
    </a>
    <a className="cd-nav-mid" href="/templates">Templates</a>
    <div className="cd-nav-end">

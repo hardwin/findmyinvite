@@ -1,6 +1,6 @@
 import {removeLocalMedia} from '../templates/local-media';
 export type DraftKind='video'|'website';
-export type DraftRecord={id:string;owner:string;kind:DraftKind;templateId:string;templateName?:string;thumbnail?:string;characterReview?:boolean;payload:any;revision:number;updatedAt:string;dirty:boolean;conflict?:boolean;lastJobId?:string;job?:any;payment?:string|null;published?:boolean;expiresAt?:string|null};
+export type DraftRecord={templateCode?:string;microDescription?:string;id:string;owner:string;kind:DraftKind;templateId:string;templateName?:string;thumbnail?:string;characterReview?:boolean;payload:any;revision:number;updatedAt:string;dirty:boolean;conflict?:boolean;lastJobId?:string;job?:any;payment?:string|null;published?:boolean;expiresAt?:string|null};
 const PREFIX='fmi-draft-v1:';
 export function readDraft(id:string):DraftRecord|null{try{return JSON.parse(localStorage.getItem(PREFIX+id)||'null');}catch{return null;}}
 export function writeDraft(d:DraftRecord){localStorage.setItem(PREFIX+d.id,JSON.stringify(d));window.dispatchEvent(new Event('fmi-drafts-changed'));}

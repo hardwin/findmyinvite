@@ -6,6 +6,18 @@ async function request(fn,url,body,headers={}){const res={headers:{},setHeader(k
 function fixture(t,route){const env={...process.env};Object.assign(process.env,{SUPABASE_URL:'https://fixture.supabase.co',SUPABASE_SERVICE_ROLE_KEY:'fixture',RAZORPAY_KEY_ID:'rzp_test_fixture',RAZORPAY_KEY_SECRET:'fixture-secret',RAZORPAY_WEBHOOK_SECRET:'fixture-hook',RATE_LIMIT_SECRET:'test-012345678901234567890123456789'});t.after(()=>{t.mock.restoreAll();for(const k of Object.keys(process.env))if(!(k in env))delete process.env[k];Object.assign(process.env,env);});t.mock.method(globalThis,'fetch',async(url,options={})=>{const u=new URL(url);const value=await route(u,options);return value instanceof Response?value:new Response(JSON.stringify(value??[]));});}
 test('ordinary authenticated customer cannot administer catalog',async t=>{fixture(t,u=>u.pathname==='/auth/v1/user'?{id:user,email:'fixture@example.com'}:[]);const r=await request(templates,'/api/templates?action=list',undefined,{authorization:'Bearer fixture'});assert.equal(r.code,403);});
 
+test('public catalog joins persistent identity metadata without leaking registry fields',async t=>{
+ fixture(t,u=>u.pathname.endsWith('/catalog_identity')?[{kind:'website',template_id:'christian-bells',template_number:1,micro_description:'Opening church doors'}]:[{id:'christian-bells',name:'Bells & Blessings',thumbnail:'/poster.webp',current_version_id:version}]);
+ const result=await request(templates,'/api/templates?action=public');
+ assert.equal(result.code,200);assert.equal(result.body.templates[0].templateCode,'FMI#0001');assert.equal(result.body.templates[0].microDescription,'Opening church doors');assert.equal(result.body.templates[0].template_number,undefined);
+});
+
+test('description writes and registration require operator access',async t=>{
+ let writes=0;fixture(t,(u,options)=>{if(options.method==='POST')writes++;return u.pathname==='/auth/v1/user'?{id:user,email:'fixture@example.com'}:[];});
+ for(const action of ['identity','register-identities']){const result=await request(templates,'/api/templates?action='+action,{kind:'website',templateId:'christian-bells',microDescription:'Edited description'},{authorization:'Bearer fixture'});assert.equal(result.code,403);}
+ assert.equal(writes,0);
+});
+
 test('public thumbnails use named demo media only for the matching published version',async t=>{
  const media=previewMedia.websites['christian-bells'];
  const rows=[{id:'christian-bells',current_version_id:media.version,thumbnail:'/original.webp'},{id:'kerala-lanterns',current_version_id:'future-release',thumbnail:'/future.webp'},{id:'new-design',current_version_id:version,thumbnail:'/new.webp'}];

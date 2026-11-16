@@ -1,5 +1,5 @@
 import {Globe,Heart,Play} from 'lucide-react';
-import {useRef,useState} from 'react';
+import {useRef,useState,type CSSProperties} from 'react';
 import CatalogThumbnail,{type CatalogPreviewHandle} from './templates/CatalogThumbnail';
 import TemplateCardDetails from './TemplateCardDetails';
 import TemplatePreviewDialog from './TemplatePreviewDialog';
@@ -10,7 +10,7 @@ export default function WebsiteCard({card,language,useHref,detailsHref}:Props){
  const preview=useRef<CatalogPreviewHandle>(null);
  const [legacyActive,setLegacyActive]=useState(false);
  const poster=card.image?(/^(https?:|\/)/.test(card.image)?card.image:'/assets/'+card.image):'';
- return <TemplatePreviewDialog name={card.name} onExpand={()=>{if(card.templateVersionId)preview.current?.start();else setLegacyActive(true);}}>{(expanded,expandControl)=><article className={'di-pin'+(expanded?' di-expanded-card':'')}>
+ return <TemplatePreviewDialog name={card.name} onExpand={()=>{if(card.templateVersionId)preview.current?.start();else setLegacyActive(true);}}>{(expanded,expandControl)=><article className={'di-pin'+(expanded?' di-expanded-card':'')} style={{'--di-card-art':poster?`url(${JSON.stringify(poster)})`:'none'} as CSSProperties}>
   <div className="di-pin-media">
    {card.templateVersionId?<CatalogThumbnail controller={preview} version={card.templateVersionId} language={language} name={card.name} poster={poster}/>:<>
     <div className="di-live-thumbnail">{poster?<img src={poster} alt={card.name} loading="lazy"/>:<div className="di-no-image"><Heart size={38}/><span>{card.name}</span></div>}{legacyActive&&<iframe title={card.name+' preview'} src={'/invite/demo?template='+encodeURIComponent(card.id)}/>}</div>
@@ -19,6 +19,6 @@ export default function WebsiteCard({card,language,useHref,detailsHref}:Props){
    <span className="di-pin-kind"><Globe size={14}/> Website</span>
    {expandControl}
   </div>
-  <TemplateCardDetails name={card.name} kind="website" useHref={useHref} detailsHref={detailsHref}/>
+  <TemplateCardDetails name={card.name} kind="website" useHref={useHref} detailsHref={detailsHref} templateCode={card.templateCode} microDescription={card.microDescription} amountPaise={card.pricePaise}/>
  </article>}</TemplatePreviewDialog>;
 }

@@ -98,14 +98,16 @@ export function discoveryMetadata(template){
 }
 
 /** Match catalog facets deliberately, then use free text for names and other descriptive terms.
- * @param {{id:string,name?:string,description?:string,tradition?:string,kind?:string}} template
+ * @param {{id:string,name?:string,description?:string,templateCode?:string,microDescription?:string,tradition?:string,kind?:string}} template
  */
 export function matchesDiscoverySearch(template,query=''){
+ const code=String(query).trim().match(/^fmi[\s#-]*0*(\d+)$/i);
+ if(code)return Number(template.templateCode?.replace(/^FMI#/,''))===Number(code[1]);
  const normalized=normalizeDiscoverySearch(query);
  if(!normalized)return true;
  const terms=normalized.replace(/save the date/g,'savedate').replace(/baby shower/g,'babyshower').replace(/kids birthday/g,'birthday').split(' ');
  const meta=discoveryMetadata(template);
- const text=normalizeDiscoverySearch([template.id,template.name,template.description,template.kind].filter(Boolean).join(' '));
+ const text=normalizeDiscoverySearch([template.id,template.name,template.description,template.templateCode,template.microDescription,template.kind].filter(Boolean).join(' '));
  return terms.every(term=>{
   if(lookup(traditionAliases,term))return meta.tradition===lookup(traditionAliases,term);
   if(lookup(settingAliases,term)){

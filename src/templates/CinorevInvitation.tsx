@@ -34,7 +34,13 @@ export default function CinorevInvitation({version,content,preview=false,reduceM
    const script='const FMI=('+startCinorev.toString()+')('+config+','+resolveCinorevEvents.toString()+','+createGuestInteractions.toString()+');\n'+release.program+'\n('+localiseInvitationDocument.toString()+')({...'+safe({...localisation,malayalam:true,translations})+',protectedText:FMI.protectedText,translations:FMI.translations,format:FMI.translate});';
    const fonts=(release.fontStylesheets||[]).filter((href:string)=>href.startsWith('https://fonts.googleapis.com/')).map((href:string)=>'<link rel="stylesheet" href="'+href.replaceAll('&','&amp;').replaceAll('"','&quot;')+'">').join('');
    const signatureCss=signature?'<link rel="stylesheet" href="'+signature.stylesheet+'">':'';
-   setDoc('<!doctype html><html lang="'+language+'"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/assets/cinorev/fonts.css">'+fonts+'<link rel="stylesheet" href="/assets/cinorev/'+slug+'/design.css"><link rel="stylesheet" href="/assets/flagship/invitation-languages.css">'+signatureCss+'</head><body class="locked">'+release.html+'<script>'+script.replace(/<\/script/gi,'<\\/script')+'</script></body></html>');
+   // The catalogue supplies its own frame. Several invitation designs otherwise
+   // cap their stage at 380px inside our 400px preview, baking sidebars into posters.
+   const catalogFrame=preview&&(data._catalogThumbnail||new URLSearchParams(location.search).get('embedded')==='1');
+   // Keep overlays within the shorter catalogue viewport when their 9:16 artwork covers it.
+   const safeOverlay=slug==='noir-and-gold'?'.g-head{top:max(8.6%,calc((100% - 100svh)/2 + 12px))}':slug==='golden-hour'?'.tap0{top:min(90%,calc((100% + 100svh)/2 - 28px))}':'';
+   const catalogCss=catalogFrame?'<style data-catalog-framing>:root{--W:100vw}'+safeOverlay+'</style>':'';
+   setDoc('<!doctype html><html lang="'+language+'"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/assets/cinorev/fonts.css">'+fonts+'<link rel="stylesheet" href="/assets/cinorev/'+slug+'/design.css"><link rel="stylesheet" href="/assets/flagship/invitation-languages.css">'+signatureCss+catalogCss+'</head><body class="locked">'+release.html+'<script>'+script.replace(/<\/script/gi,'<\\/script')+'</script></body></html>');
   })().catch(e=>{if(!ctrl.signal.aborted)setError(e.message);});
   return()=>{ctrl.abort();urls.forEach(URL.revokeObjectURL);};
  },[version.id,version.renderer,content,preview,reduceMotion]);

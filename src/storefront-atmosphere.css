@@ -1,0 +1,91 @@
+/* A decorative layer behind the storefront. Fixed bounds avoid document overflow;
+   ornaments never capture input, and move only in response to scrolling. */
+.di-app:has(.sa-atmosphere) { isolation: isolate; }
+.di-app:has(.sa-atmosphere) > :is(.di-main, .di-footer) { position: relative; z-index: 1; }
+.sa-atmosphere {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  contain: strict;
+  opacity: .3;
+  --sa-drift: 0px;
+  --sa-drift-far: 0px;
+  --sa-turn: 0deg;
+  --sa-gold: var(--brand-gold, #dfb08e);
+}
+.sa-ornament { position: absolute; display: block; pointer-events: none; }
+.sa-ornament svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.sa-ribbon {
+  width: clamp(180px, 19vw, 295px);
+  aspect-ratio: 5 / 3;
+  opacity: .72;
+  filter: drop-shadow(0 6px 7px #6e144312);
+}
+.sa-ribbon-left {
+  top: 17%;
+  left: -9%;
+  transform: translate3d(0, var(--sa-drift), 0) rotate(calc(37deg + var(--sa-turn)));
+}
+.sa-ribbon-right {
+  top: 8%;
+  right: -8%;
+  transform: translate3d(0, calc(-1 * var(--sa-drift-far)), 0) rotate(calc(-28deg - var(--sa-turn)));
+  opacity: .58;
+}
+.sa-botanical {
+  width: clamp(105px, 10vw, 160px);
+  aspect-ratio: 3 / 5;
+  opacity: .62;
+  filter: drop-shadow(0 4px 5px #6e144312);
+}
+.sa-botanical-left { left: -47px; top: 49%; transform: translate3d(0, calc(-1 * var(--sa-drift-far)), 0) rotate(-18deg); }
+.sa-botanical-right { right: -35px; top: 38%; transform: translate3d(0, var(--sa-drift-far), 0) rotate(169deg); opacity: .47; }
+.sa-heart {
+  left: 1.5%; top: 77%;
+  width: 34px; aspect-ratio: 38 / 41;
+  opacity: .55;
+  filter: blur(.3px) drop-shadow(0 4px 6px #6e144312);
+  transform: translate3d(0, var(--sa-drift), 0) rotate(calc(-13deg + var(--sa-turn)));
+}
+.sa-arc {
+  right: -55px; top: 72%; width: 180px; aspect-ratio: 24 / 13;
+  opacity: .5;
+  transform: translate3d(0, calc(-1 * var(--sa-drift)), 0) rotate(calc(-54deg - var(--sa-turn)));
+}
+.sa-dots {
+  right: 4%; top: 27%; width: 48px; aspect-ratio: 64 / 75;
+  opacity: .7;
+  transform: translate3d(0, var(--sa-drift-far), 0) rotate(calc(12deg + var(--sa-turn)));
+}
+
+/* Content is visible by default, including before JS and while awaiting the
+   observer. Reveal is a short animation on intersection, not a hidden state. */
+@media (prefers-reduced-motion: no-preference) {
+  [data-sa-motion="section"][data-sa-reveal="entering"] { animation: sa-section-enter 620ms ease-out both; }
+  [data-sa-motion="card"][data-sa-reveal="entering"] { animation: sa-card-enter 680ms cubic-bezier(.2,.65,.25,1) var(--sa-delay, 0ms) both; }
+}
+@keyframes sa-section-enter { from { opacity: .28; } to { opacity: 1; } }
+@keyframes sa-card-enter { from { opacity: .12; transform: translate3d(0, 16px, 0); } to { opacity: 1; transform: none; } }
+[data-sa-reveal]:focus-within,
+[data-sa-reveal]:has(dialog[open]) { animation: none !important; opacity: 1 !important; transform: none !important; }
+
+@media (max-width: 920px) {
+  .sa-ribbon { width: 185px; opacity: .45; }
+  .sa-ribbon-left { left: -115px; top: 15%; }
+  .sa-ribbon-right { right: -123px; top: 32%; }
+  .sa-botanical { opacity: .34; width: 105px; }
+  .sa-botanical-left { left: -63px; }
+  .sa-botanical-right { right: -59px; }
+  .sa-heart { left: -7px; width: 24px; opacity: .34; }
+  .sa-arc { right: -83px; width: 150px; opacity: .35; }
+  .sa-dots { right: -8px; top: 16%; width: 36px; opacity: .42; }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-sa-reveal] { animation: none !important; transform: none !important; opacity: 1 !important; }
+  .sa-atmosphere { --sa-drift: 0px !important; --sa-drift-far: 0px !important; --sa-turn: 0deg !important; }
+}
+@media (prefers-reduced-transparency: reduce), (prefers-contrast: more), (forced-colors: active) {
+  .sa-atmosphere { display: none; }
+}

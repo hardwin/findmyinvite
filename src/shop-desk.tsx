@@ -48,7 +48,7 @@ function LegacyShopDeskBar({query='',occasion='wedding'}:{query?:string;occasion
  }
  return <header className="im-desk-bar">
   <a className="im-desk-logo" href="/" aria-label="FindMyInvite">
-   <img src="/assets/findmyinvite-logo.jpg" alt="FindMyInvite" width="2158" height="729"/>
+   <img src="/assets/findmyinvite-logo-transparent.png" alt="FindMyInvite" width="2158" height="729"/>
    <small>Your wedding invitation copilot</small>
   </a>
   <div className="im-desk-loc" ref={box}>

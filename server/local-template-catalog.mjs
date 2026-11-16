@@ -1,3 +1,4 @@
+import {withCatalogIdentity,versionIdentity} from './catalog-identity.mjs';
 import {templateForm} from './template-forms.mjs';
 import {withTemplateMusic,withFormMusic} from './website-music.mjs';
 import {INVITATION_BASE_PAISE} from '../shared/pricing.mjs';
@@ -37,7 +38,7 @@ export async function localTemplateCatalog(req,res,{readIds=readLocalReleaseIds,
     if(!selected)return false;
    }
    selected=await withTemplateMusic(selected);
-   respond(res,200,{version:{...safeVersion(selected),localPreview:true},...(action==='editor'?{form:withFormMusic(await templateForm(selected,{staged:true}),selected)}:{})});
+   respond(res,200,{version:{...await versionIdentity(safeVersion(selected),query),localPreview:true},...(action==='editor'?{form:withFormMusic(await templateForm(selected,{staged:true}),selected)}:{})});
    return true;
   }
   const rows=await query('template_catalog?generation=eq.2&isactive=eq.true&published=eq.true&select=id,name,description,tradition,thumbnail,current_version_id,sort_order&order=sort_order.asc');
@@ -49,7 +50,7 @@ export async function localTemplateCatalog(req,res,{readIds=readLocalReleaseIds,
   }));
   const combined=new Map(rows.map(row=>[row.id,row]));
   for(const row of releases)combined.set(row.id,row);
-  respond(res,200,{templates:[...combined.values()].sort((a,b)=>(a.sort_order??0)-(b.sort_order??0)),basePaise:INVITATION_BASE_PAISE});
+  respond(res,200,{templates:await withCatalogIdentity([...combined.values()].sort((a,b)=>(a.sort_order??0)-(b.sort_order??0)),'website',query),basePaise:INVITATION_BASE_PAISE});
  }catch(error){fail(res,error);}
  return true;
 }

@@ -1,3 +1,5 @@
+import {useCatalog} from '../catalog';
+import {useVideoCatalog} from '../video/catalog';
 import {useEffect,useState} from 'react';
 import {templateApi} from '../templates/api';
 import {readSession,requestSignIn} from '../auth-session';
@@ -9,6 +11,7 @@ import {relativeEdit,editedTime,invitationNames} from '../../shared/draft-displa
 import {videoDefinition} from '../../shared/video-personalization.mjs';
 import './my-invitations.css';
 export default function MyInvitations(){
+ const websites=useCatalog(),videos=useVideoCatalog();
  const [transfers,setTransfers]=useState<Record<string,DownloadProgress>>({}),[cardError,setCardError]=useState<{id:string;message:string}|null>(null),[downloaded,setDownloaded]=useState(''),[now,setNow]=useState(Date.now());
  useEffect(()=>{const timer=setInterval(()=>setNow(Date.now()),60000);return()=>clearInterval(timer);},[]);
  const [owner,setOwner]=useState(readSession()?.user.id||'guest'),[items,setItems]=useState<DraftRecord[]>([]),[filter,setFilter]=useState('all'),[error,setError]=useState(''),[loading,setLoading]=useState(true),[busy,setBusy]=useState('');
@@ -28,10 +31,11 @@ export default function MyInvitations(){
  return <section className="my-invitations">{owner==='guest'&&<p><button onClick={()=>requestSignIn('signin')}>Sign in</button> to see invitations from your account.</p>}<nav aria-label="Invitation types">{['all','website','video'].map(k=><button key={k} aria-pressed={filter===k} onClick={()=>setFilter(k)}>{k==='all'?'All':k==='website'?'Websites':'Videos'}</button>)}</nav>{error&&<p role="alert">{error} <button onClick={()=>void load()}>Retry</button></p>}{loading&&<p role="status">Loading invitations…</p>}{!loading&&!items.length&&<p>No invitations yet. Choose a design to start.</p>}<div className="my-invitation-grid">{items.filter(d=>filter==='all'||d.kind===filter).sort((a,b)=>editedTime(b.updatedAt)-editedTime(a.updatedAt)).map(d=>{
   const names=invitationNames(d.payload?.content)||d.payload?.slug||'Untitled invitation';
   let videoName='Video invitation';try{if(d.kind==='video')videoName=videoDefinition(d.templateId).name;}catch{}
+  const catalog=d.kind==='video'?videos.entries.find(t=>t.id===d.templateId):websites.items.find(t=>t.id===d.templateId||t.templateVersionId===d.templateId);const templateCode=d.templateCode||catalog?.templateCode;
   const rendering=['queued','running'].includes(d.job?.status),ready=d.job?.status==='ready'&&d.job?.download,transfer=transfers[d.id],working=busy===d.id||!!transfer;
   return <article className="my-invitation-card" key={d.id} data-invitation-id={d.id}>
    {(d.thumbnail||d.kind==='video')&&<img src={d.thumbnail||'/assets/video-masters/'+encodeURIComponent(d.templateId)+'/poster.jpg'} alt="" loading="lazy" width={76} height={116}/>}
-   <div className="my-invitation-info"><h2>{names}</h2><p>{d.templateName||(d.kind==='video'?videoName:'Wedding website')}</p><time dateTime={d.updatedAt} title={new Date(d.updatedAt).toLocaleString('en-IN')}>{relativeEdit(d.updatedAt,now)}</time>
+   <div className="my-invitation-info"><h2>{names}</h2><p>{d.templateName||(d.kind==='video'?videoName:'Wedding website')}</p>{templateCode&&<small className="di-template-code">{templateCode}</small>}<time dateTime={d.updatedAt} title={new Date(d.updatedAt).toLocaleString('en-IN')}>{relativeEdit(d.updatedAt,now)}</time>
     {(d.owner==='guest'||d.dirty)&&<small>On this device{d.dirty&&d.owner!=='guest'?' · waiting to sync':''}</small>}
     {d.payload?.missingDetails&&<p>Open on the original device to recover your details.</p>}
     <div className="my-invitation-actions">{ready?<><button className="my-invitation-primary" disabled={working} onClick={()=>void download(d)}><Download size={16}/>Download MP4</button><a className="my-invitation-icon" href={draftHref(d)} aria-label={'Edit '+names} title="Edit invitation"><Pencil size={17}/></a></>:<a className="my-invitation-primary" href={draftHref(d)}>{rendering?'View progress':d.job?.status==='expired'?'Create MP4 again':d.job?.status==='failed'?'Retry video':'Continue editing'}</a>}</div>
