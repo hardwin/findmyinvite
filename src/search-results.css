@@ -15,9 +15,3 @@ body.di-site .di-masonry.di-search-grid {
  align-items: start;
 }
 body.di-site .di-search-grid > .di-preview-anchor { align-self: start; }
-@media (max-width: 500px) {
- body.di-site .di-masonry.di-search-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  justify-content: normal;
- }
-}
