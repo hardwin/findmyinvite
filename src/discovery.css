@@ -53,7 +53,8 @@ body.di-site .content-page,body.di-site .editor-shell{background:#fffdf9;color:#
 .di-video-collection{margin:40px 0}
 .di-video-collection>header{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:18px}
 .di-video-collection>header .di-collection-title{margin:0}
-.di-video-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;align-items:start}
+.di-video-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;align-items:start;scrollbar-width:none}
+.di-video-cards::-webkit-scrollbar{display:none}
 .di-video-featured{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:calc((100% - 48px)/4);overflow-x:auto;overscroll-behavior-inline:contain;scroll-snap-type:x proximity;padding-bottom:12px}
 .di-video-card{min-width:0;scroll-snap-align:start}
 .di-video-demo{position:relative;width:100%;aspect-ratio:9/16;overflow:hidden;background:#eee9e1}
