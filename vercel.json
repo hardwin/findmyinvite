@@ -171,7 +171,7 @@
       "destination": "/llm.txt"
     },
     {
-      "source": "/((?!api/|assets/|review/|robots\\.txt$|sitemap\\.xml$|llm\\.txt$|llms\\.txt$|invitations(?:/.*)?$).*)",
+      "source": "/((?!api/|assets/|review/|favicon\\.ico$|robots\\.txt$|sitemap\\.xml$|llm\\.txt$|llms\\.txt$|invitations(?:/.*)?$).*)",
       "destination": "/index.html"
     }
   ],
