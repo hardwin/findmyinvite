@@ -42,4 +42,16 @@ test('unreviewed likeness candidates are explicitly selected, never made the def
  assert.throws(()=>characterPrompt('groom','single','','unknown-revision'),/Unsupported/);
 });
 
+test('customer polling cannot see or automatically approve a support likeness candidate',async()=>{
+ const owner=randomUUID(),invitation=randomUUID(),id=randomUUID(),old={id:randomUUID(),slot:'groom',status:'approved',approved_current:true,prompt_revision:CHARACTER_PROMPT_REVISION},candidate={id,slot:'groom',status:'review',kind:'initial',approved_current:false,prompt_revision:CHARACTER_PROMPT_CANDIDATE};let approvals=0;
+ const service=characterService({store:{},query:async(path,options)=>{
+  if(path.startsWith('personalization_drafts'))return [{id:invitation,owner_id:owner}];
+  if(path.startsWith('rpc/')){approvals++;return [];}
+  if(path.includes('?id=eq.'))return [{...candidate,invitation_id:invitation,owner_id:owner}];
+  return [old,candidate];
+ }});
+ const listed=await service.list(owner,invitation);assert.deepEqual(listed.jobs.map(j=>j.id),[old.id]);assert.equal(listed.allowances.groom.redoUsed,false);
+ await assert.rejects(service.approve(owner,id,13),/support review/);assert.equal(approvals,0);
+});
+
 test('a delayed worker cannot reacquire a character that has already finished',async()=>{const id=randomUUID(),owner=randomUUID(),invitation=randomUUID();let leaseFilter='';const service=characterService({store:{},provider:{get:()=>{throw Error('Finished work must not be processed again');}},query:async(path,options)=>{if(path.startsWith('personalization_drafts'))return [{id:invitation,owner_id:owner}];if(options?.method==='PATCH'){leaseFilter=path;return [];}return [{id,owner_id:owner,invitation_id:invitation,status:'preparing'}];}});await service.process(id);assert.match(leaseFilter,/status=in\.\(queued,submitting,processing,preparing\)/);});

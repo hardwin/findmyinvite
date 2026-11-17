@@ -5,10 +5,11 @@ import {draftService,draftView} from './personalization-drafts.mjs';
 import {videoStore,hash} from './video-personalise-store.mjs';
 import {videoService,loadVideoMaster} from './video-personalise.mjs';
 import {videoPaymentService} from './video-payments.mjs';
-import {replicateProvider,CHARACTER_MODEL,CHARACTER_PROMPT_REVISION,characterPrompt,characterInput} from './video-character-provider.mjs';
+import {replicateProvider,CHARACTER_MODEL,CHARACTER_PROMPT_REVISION,CHARACTER_PROMPT_CANDIDATE,characterPrompt,characterInput} from './video-character-provider.mjs';
 import {alignCharacter} from './video-character-images.mjs';
 const table='video_character_jobs',active=['queued','submitting','processing','preparing'];
 export const CHARACTER_STALL_MS=10*60*1000;
+export const characterReviewCandidate=j=>j.prompt_revision===CHARACTER_PROMPT_CANDIDATE&&CHARACTER_PROMPT_REVISION!==CHARACTER_PROMPT_CANDIDATE;
 const jsonEqual=(a,b)=>JSON.stringify(Object.entries(a||{}).sort())===JSON.stringify(Object.entries(b||{}).sort());
 const referenceSignature=refs=>refs.map(({sha256,identity})=>({sha256,identity}));
 export function characterJobView(j){return {id:j.id,slot:j.slot,kind:j.kind,status:j.status,approved:j.approved_current,mediaId:j.output_media_id,error:j.error,createdAt:j.created_at,basis:j.basis};}
@@ -17,12 +18,12 @@ export function characterService({query=db,store=videoStore(),provider=replicate
  const patch=(id,body,filter='',progress=true)=>one(table+'?id=eq.'+id+filter,{method:'PATCH',headers:{Prefer:'return=representation'},body:{...body,...(progress?{updated_at:new Date(clock()).toISOString()}:{})}});
  const drafts=draftService({query,store});
  async function owned(owner,id){if(!/^[a-f0-9-]{36}$/.test(id||''))throw new HttpError(404,'Character not found.');const j=await one(table+'?id=eq.'+id+'&owner_id=eq.'+owner);if(!j)throw new HttpError(404,'Character not found.');await drafts.get(owner,j.invitation_id);return j;}
- async function list(owner,id){await drafts.get(owner,id);const jobs=await query(table+'?invitation_id=eq.'+id+'&owner_id=eq.'+owner+'&order=created_at.asc');const basis=Object.fromEntries(jobs.filter(j=>j.approved_current&&j.slot!=='couple').map(j=>[j.slot,j.id]));return {jobs:jobs.map(characterJobView),allowances:Object.fromEntries(['groom','bride','couple'].map(slot=>[slot,{initialUsed:jobs.some(j=>j.slot===slot&&['review','approved'].includes(j.status)),redoUsed:jobs.some(j=>j.slot===slot&&j.kind==='redo'&&['review','approved'].includes(j.status))}])),coupleNeedsUpdate:(()=>{const latest=jobs.filter(j=>j.slot==='couple'&&['review','approved'].includes(j.status)).at(-1);return !!latest&&!jsonEqual(latest.basis,basis);})()};}
+ async function list(owner,id){await drafts.get(owner,id);const jobs=(await query(table+'?invitation_id=eq.'+id+'&owner_id=eq.'+owner+'&order=created_at.asc')).filter(j=>!characterReviewCandidate(j));const basis=Object.fromEntries(jobs.filter(j=>j.approved_current&&j.slot!=='couple').map(j=>[j.slot,j.id]));return {jobs:jobs.map(characterJobView),allowances:Object.fromEntries(['groom','bride','couple'].map(slot=>[slot,{initialUsed:jobs.some(j=>j.slot===slot&&['review','approved'].includes(j.status)),redoUsed:jobs.some(j=>j.slot===slot&&j.kind==='redo'&&['review','approved'].includes(j.status))}])),coupleNeedsUpdate:(()=>{const latest=jobs.filter(j=>j.slot==='couple'&&['review','approved'].includes(j.status)).at(-1);return !!latest&&!jsonEqual(latest.basis,basis);})()};}
  async function original(slot){const m=await loadVideoMaster('temple-v1'),a=m.assets[slot==='couple'?'closing':slot],bytes=await readFile('public'+a.path);if(hash(bytes)!==a.sha256)throw Error('Original character checksum mismatch');return bytes;}
  async function submit(owner,b){
   const d=await drafts.get(owner,b.invitationId);if(d.template_id!=='temple-v1')throw new HttpError(400,'This template does not support matching characters yet.');await videoPaymentService().requireAccess(owner,d.id,d.template_id);
   const slot=b.slot;if(!['groom','bride','couple'].includes(slot))throw new HttpError(400,'Choose a character.');
-  const jobs=await query(table+'?invitation_id=eq.'+d.id+'&owner_id=eq.'+owner+'&order=created_at.desc');let references=[],basis={};
+  const jobs=(await query(table+'?invitation_id=eq.'+d.id+'&owner_id=eq.'+owner+'&order=created_at.desc')).filter(j=>!characterReviewCandidate(j));let references=[],basis={};
   if(slot==='couple'){
    for(const individual of ['groom','bride']){const j=jobs.find(j=>j.slot===individual&&j.approved_current);if(!j)throw new HttpError(409,'Approve the groom and bride first.');basis[individual]=j.id;const media=await videoService({store}).media(owner,j.output_media_id);references.push({id:media.id,sha256:media.sha256,identity:individual});}
   }else{
@@ -82,7 +83,7 @@ export function characterService({query=db,store=videoStore(),provider=replicate
   }catch(e){console.error('Character preparation step failed',id,{stage,name:e.name,providerStatus:e.providerStatus||null});await finish(j.raw_key?{status:'failed',error:'Your generated image is saved, but preparation was interrupted. Retry to finish it; no redo is needed.'}:j.status==='submitting'&&!j.provider_id&&stalled()?{status:'failed',error:'The provider could not confirm this request. Contact support before retrying; no redo was used.'}:stage==='provider'&&e.providerStatus===404?{status:'failed',provider_id:null,error:'The provider result expired. Retry using your saved photos; no redo was used.'}:stalled()||[401,403].includes(e.providerStatus)?{status:'failed',error:'The character service is temporarily unavailable. Your photos and payment are saved. Retry or contact support; no redo was used.'}:{error:'The character service was interrupted. We are checking the existing attempt; your photos and payment are saved.'});}
  }
  async function retry(owner,id){let j=await owned(owner,id);if(j.status!=='failed')return j;if((j.attempts>=3&&!j.raw_key&&!j.provider_id)||/Contact support before retrying/.test(j.error||''))throw new HttpError(409,'Automatic retries are exhausted. Contact support; your redo allowance has not been used.');return patch(id,{status:j.raw_key?'preparing':j.provider_id?'processing':'queued',error:null,lease_id:null,lease_until:null});}
- async function approve(owner,id,revision){await owned(owner,id);const r=await query('rpc/fmi_approve_video_character',{method:'POST',body:{p_owner:owner,p_job:id,p_revision:revision}});return draftView(Array.isArray(r)?r[0]:r);}
+ async function approve(owner,id,revision){const j=await owned(owner,id);if(characterReviewCandidate(j))throw new HttpError(409,'This character is awaiting support review.');const r=await query('rpc/fmi_approve_video_character',{method:'POST',body:{p_owner:owner,p_job:id,p_revision:revision}});return draftView(Array.isArray(r)?r[0]:r);}
  async function recover(){const jobs=await query(table+'?status=in.(queued,submitting,processing,preparing)&order=updated_at.asc&limit=12');for(const j of jobs)await process(j.id);return jobs.length;}
  return {owned,list,submit,process,retry,approve,recover,provider};
 }
