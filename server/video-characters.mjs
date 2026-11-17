@@ -50,7 +50,7 @@ export function characterService({query=db,store=videoStore(),provider=replicate
     if(j.attempts>=3){await finish({status:'failed',error:'Automatic retries are exhausted. Contact support; your photos, payment and redo allowance are saved.'});return;}
     stage='references';
     const images=['data:image/png;base64,'+(await original(j.slot)).toString('base64')];for(const ref of j.reference_data){const m=await videoService({store}).media(j.owner_id,ref.id),bytes=await store.bytes(m.key);if(hash(bytes)!==ref.sha256)throw Error('A saved reference changed.');images.push('data:'+m.contentType+';base64,'+bytes.toString('base64'));}
-    j=await patch(id,{status:'submitting',attempts:j.attempts+1},'&lease_id=eq.'+lease);const input=characterInput(characterPrompt(j.slot,j.reference_data[0]?.identity,j.id+'-'+j.attempts),images);
+    j=await patch(id,{status:'submitting',attempts:j.attempts+1},'&lease_id=eq.'+lease);const input=characterInput(characterPrompt(j.slot,j.reference_data[0]?.identity,j.id+'-'+j.attempts,j.prompt_revision),images);
     stage='submit';try{prediction=await provider.create(input,'https://findmyinvite.com/api/video-characters?action=callback&id='+j.id);}
     catch(e){if(e.providerStatus&&e.providerStatus<500){await finish({status:'failed',error:'Character preparation could not start. No redo was used. Please retry.'});}else await finish({status:'submitting',error:'Confirming the generation request. Your allowance is safe.'});return;}
     j=await patch(id,{provider_id:prediction.id,status:'processing',model_version:typeof prediction.version==='string'?prediction.version:null,error:null},'&lease_id=eq.'+lease);

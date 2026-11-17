@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {randomUUID} from 'node:crypto';
 import {characterService,CHARACTER_STALL_MS} from '../server/video-characters.mjs';
-import {replicateProvider} from '../server/video-character-provider.mjs';
+import {replicateProvider,CHARACTER_PROMPT_CANDIDATE} from '../server/video-character-provider.mjs';
 
 function fixture(overrides={}){
  let now=Date.parse('2026-11-17T13:00:00Z');
@@ -45,6 +45,12 @@ test('saved raw output can finish after Replicate expires, without contacting th
  const f=fixture({status:'preparing',raw_key:'persistent/saved.png',attempts:3});f.files.set(f.row.raw_key,Buffer.from('saved image'));
  const service=f.service({provider:{get:async()=>{throw Error('Expired provider must not be contacted');}}});
  await service.process(f.id);assert.equal(f.row.status,'review');assert.equal(f.row.attempts,3);
+});
+
+test('a candidate job submits its pinned likeness prompt without changing the default for other jobs',async()=>{
+ const f=fixture({status:'queued',provider_id:null,attempts:0,prompt_revision:CHARACTER_PROMPT_CANDIDATE});let prompt;
+ const service=f.service({provider:{create:async input=>{prompt=input.prompt;return {id:'candidate-prediction',status:'processing',output:null};}}});
+ await service.process(f.id);assert.equal(f.row.provider_id,'candidate-prediction');assert.match(prompt,/Preserve the exact face details and face shape/);assert.doesNotMatch(prompt,/large expressive head/);
 });
 
 test('a preparation failure retains raw bytes and retry never regenerates them',async()=>{
