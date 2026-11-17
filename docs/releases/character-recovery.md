@@ -24,3 +24,15 @@ provider-independent raw recovery, retained files after preparation failure,
 ambiguous submission safety, existing payment/ownership/redo SQL invariants, and
 the production build. Customer recovery and live deployment are verified
 separately; test success is not evidence that a customer's images are ready.
+
+Live recovery identified a second cause: successful prediction responses used a
+signed output bucket outside the original `replicate.delivery` allowlist. The
+transfer helper now accepts that exact observed bucket and output path, while
+still rejecting unrelated hosts, credentials in URLs, redirects and unexpected
+ports. Private transfer metadata is saved before attempting a download, allowing
+support to recover an existing prediction without another generation.
+
+My Invitations now takes render status from the account even when the browser
+has unsynced form edits. A recovered ready MP4 therefore remains downloadable;
+the local wording is preserved. The production build and 15 focused checks pass,
+including output-host boundaries and the stale-device download regression.

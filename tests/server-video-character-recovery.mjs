@@ -65,3 +65,11 @@ test('an unconfirmed submission cannot be regenerated just because status lookup
  const service=f.service({provider:{recent:async()=>{throw Object.assign(Error('Unavailable'),{providerStatus:503});}}});
  await service.process(f.id);assert.equal(f.row.status,'failed');await assert.rejects(service.retry(f.owner,f.id),/Contact support/);assert.equal(f.row.attempts,1);
 });
+
+test('authenticated prediction output can use the observed signed gateway bucket, while unrelated hosts stay blocked',async t=>{
+ const host='ai-gateway-outputs.0d37909e38d3e99c29fa2cd343ac421a.r2.cloudflarestorage.com';let fetched=0;
+ t.mock.method(globalThis,'fetch',async(url,options)=>{fetched++;assert.equal(new URL(url).hostname,host);assert.equal(options.redirect,'error');assert.equal(options.headers,undefined);return new Response(Buffer.from('image bytes'));});
+ const provider=replicateProvider();assert.equal((await provider.output('https://'+host+'/provider-outputs/prediction/result.png?signature=private')).toString(),'image bytes');
+ for(const url of ['https://other.r2.cloudflarestorage.com/provider-outputs/image.png','https://'+host+'.evil.test/provider-outputs/image.png','https://'+host+'/other/image.png','http://'+host+'/provider-outputs/image.png','https://user:password@'+host+'/provider-outputs/image.png','https://'+host+':444/provider-outputs/image.png'])await assert.rejects(provider.output(url),/Unrecognized/);
+ assert.equal(fetched,1);
+});
