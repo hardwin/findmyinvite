@@ -38,8 +38,14 @@ part of this release. Account preferences use existing customer-owned Auth metad
 - Mixed search masonry passed at 320, 390, 768 and 1440px. Native Chromium touch
   gestures preserve vertical page scrolling and horizontal banner browsing.
 
-Live deployment verification follows the Git main release. Browser automation
-does not establish physical iPhone or WhatsApp/Instagram application behaviour.
+The initial production release passed live Chromium/WebKit flows for first-visit
+preferences, returning guests, responsive banners, automatic scrolling, Enter-to-search,
+mixed results/load more, video-library infinite loading, details and share previews.
+Three public template share images returned 1200×630 JPEGs below 110KB. Visual
+inspection found a Linux-only missing rupee glyph; bundled Noto Sans currency
+subsets and a platform-font regression check correct that rendering difference.
+Browser automation does not establish physical iPhone or WhatsApp/Instagram
+application behaviour.
 
 ## Rollback
 

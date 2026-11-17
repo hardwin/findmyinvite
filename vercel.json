@@ -4,7 +4,7 @@
   "outputDirectory": "dist",
   "functions": {
     "api/template-share.mjs": {
-      "includeFiles": "{dist/index.html,public/assets/fonts/discovery/montserrat-static-{400,700}.woff2,public/assets/findmyinvite-logo-transparent.png,node_modules/@sparticuz/chromium/bin/**}",
+      "includeFiles": "{dist/index.html,public/assets/fonts/discovery/montserrat-static-{400,700}.woff2,public/assets/fonts/share/noto-sans-rupee-*.ttf,public/assets/findmyinvite-logo-transparent.png,node_modules/@sparticuz/chromium/bin/**}",
       "maxDuration": 60,
       "memory": 2048
     },

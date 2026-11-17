@@ -90,6 +90,7 @@ test('template routing precedes the generic brand crawler rule and bundles rende
  assert.ok(config.rewrites.some(rule=>rule.source==='/template-share-images/:kind/:product/:revision.jpg'));
  assert.match(config.functions['api/template-share.mjs'].includeFiles,/dist\/index.html/);
  assert.match(config.functions['api/template-share.mjs'].includeFiles,/montserrat-static-/);
+ assert.match(config.functions['api/template-share.mjs'].includeFiles,/noto-sans-rupee-\*\.ttf/);
  assert.equal(templateShareImagePath('/templates?product=wedding-bells-v1&kind=video'),'/template-share-images/video/wedding-bells-v1/card-v1.jpg');
 });
 
@@ -105,4 +106,26 @@ test('website prices follow the public catalogue response',async()=>{
  const website={id:'website-v1',name:'Website',thumbnail:row.poster,offerLabel:'Launch Offer',originalPaise:59900};
  const entry=await resolveTemplateShare(params('website-v1','website'),'https://findmyinvite.com',async()=>({templates:[website],basePaise:29900}));
  assert.equal(entry.amountPaise,29900);assert.equal(entry.originalPaise,59900);assert.match(templateShareCardHtml(entry),/₹299/);
+});
+
+test('rupee glyph comes from the bundled font rather than host-system fallback',async()=>{
+ const {chromium}=await import('playwright-core');
+ const browser=await chromium.launch({headless:true});
+ try{
+  const page=await browser.newPage(),assets={};
+  for(const [key,file] of [['regular','montserrat-static-400'],['bold','montserrat-static-700']]){
+   assets[key]='data:font/woff2;base64,'+(await readFile(new URL('../public/assets/fonts/discovery/'+file+'.woff2',import.meta.url))).toString('base64');
+  }
+  for(const [key,weight] of [['currencyRegular',400],['currencyBold',700]])assets[key]='data:font/ttf;base64,'+(await readFile(new URL('../public/assets/fonts/share/noto-sans-rupee-'+weight+'.ttf',import.meta.url))).toString('base64');
+  await page.setContent(templateShareCardHtml(templateShareData(row,'video'),assets));
+  await page.locator('.price,.original').evaluateAll(elements=>elements.forEach(el=>{el.textContent='₹';}));
+  await page.evaluate(()=>document.fonts.ready);
+  const cdp=await page.context().newCDPSession(page);await cdp.send('DOM.enable');await cdp.send('CSS.enable');
+  const {root}=await cdp.send('DOM.getDocument');
+  for(const selector of ['.price','.original']){
+   const {nodeId}=await cdp.send('DOM.querySelector',{nodeId:root.nodeId,selector});
+   const {fonts}=await cdp.send('CSS.getPlatformFontsForNode',{nodeId});
+   assert.ok(fonts.length>0);assert.ok(fonts.every(font=>font.isCustomFont&&/Noto Sans/i.test(font.familyName)),JSON.stringify(fonts));
+  }
+ }finally{await browser.close();}
 });

@@ -6,9 +6,11 @@ export const TEMPLATE_SHARE_DESIGN_VERSION='html-card-v1';
 export function templateShareCardHtml(entry,assets={}){
  const poster=assets.poster||entry.poster,logo=assets.logo||'/assets/findmyinvite-logo-transparent.png';
  const regular=assets.regular||'/assets/fonts/discovery/montserrat-static-400.woff2',bold=assets.bold||'/assets/fonts/discovery/montserrat-static-700.woff2';
+ const currencyRegular=assets.currencyRegular||'/assets/fonts/share/noto-sans-rupee-400.ttf',currencyBold=assets.currencyBold||'/assets/fonts/share/noto-sans-rupee-700.ttf';
  const original=Number.isSafeInteger(entry.originalPaise)&&entry.originalPaise>entry.amountPaise;
  return `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=1200"><title>${escape(entry.name)} preview</title><style>
  @font-face{font-family:FMI;src:url('${escape(regular)}') format('woff2');font-weight:400}@font-face{font-family:FMI;src:url('${escape(bold)}') format('woff2');font-weight:700}
+ @font-face{font-family:FMI;src:url('${escape(currencyRegular)}') format('truetype');font-weight:400;unicode-range:U+20B9}@font-face{font-family:FMI;src:url('${escape(currencyBold)}') format('truetype');font-weight:700;unicode-range:U+20B9}
  *{box-sizing:border-box}html,body{margin:0;width:1200px;height:630px;overflow:hidden;background:#fff;font-family:FMI,Arial,sans-serif;color:#381327}
  .share-card{width:1200px;height:630px;padding:23px;display:grid;grid-template-columns:328px minmax(0,1fr);gap:30px;border:2px solid #efdde5;border-radius:30px;background:linear-gradient(125deg,#fff,#f8e5e5)}
  .art{position:relative;height:580px;overflow:hidden;border-radius:22px;background:#fdf2ed}.art>img{width:100%;height:100%;display:block;object-fit:cover}.play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:72px;height:72px;display:grid;place-items:center;background:#ffffffc4;border:2px solid #fff;border-radius:50%;backdrop-filter:blur(10px)}

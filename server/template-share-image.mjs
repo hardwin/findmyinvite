@@ -12,7 +12,9 @@ async function embeddedAssets(){
  assetsPromise??=Promise.all([
   ['logo','/assets/findmyinvite-logo-transparent.png','image/png'],
   ['regular','/assets/fonts/discovery/montserrat-static-400.woff2','font/woff2'],
-  ['bold','/assets/fonts/discovery/montserrat-static-700.woff2','font/woff2']
+  ['bold','/assets/fonts/discovery/montserrat-static-700.woff2','font/woff2'],
+  ['currencyRegular','/assets/fonts/share/noto-sans-rupee-400.ttf','font/ttf'],
+  ['currencyBold','/assets/fonts/share/noto-sans-rupee-700.ttf','font/ttf']
  ].map(async([key,path,type])=>[key,'data:'+type+';base64,'+(await readFile(join(process.cwd(),'public',path))).toString('base64')])).then(Object.fromEntries).catch(error=>{assetsPromise=undefined;throw error;});
  return assetsPromise;
 }
