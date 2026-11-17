@@ -61,7 +61,7 @@ try{
    if(!url.pathname.startsWith('/api/'))return route.continue();
    const action=url.searchParams.get('action');calls.push(action);
    if(action==='editor')return route.fulfill({json:{version,form}});
-   if(action==='version')return route.fulfill({json:{version}});
+   if(action==='version'||action==='preview')return route.fulfill({json:{version}});
    if(action==='v2-config')return route.fulfill({json:{configured:true,quote:{basePaise:19900,taxPaise:3582,totalPaise:23482}}});
    return route.fulfill({json:{}});
   });

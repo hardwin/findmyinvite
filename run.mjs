@@ -5,6 +5,7 @@ await writeFile(new URL('./public/vendor/grapesjs/grapes.min.js',import.meta.url
 import {createServer,build,loadEnv} from 'vite';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
+import {previewEntry} from './server/preview-entry.mjs';
 const isBuild=process.argv.includes('--build');
 if(!isBuild&&!process.env.VERCEL)process.env.FMI_OWNER_LOCAL='1';
 // Production APIs are packaged by Vercel; only the dev server needs this router.
@@ -26,11 +27,11 @@ function assemblyQuietWatch(){
 }
 
 const config={
- plugins:[react(),tailwindcss(),...apiPlugins,assemblyQuietWatch()],
+ plugins:[previewEntry(),react(),tailwindcss(),...apiPlugins,assemblyQuietWatch()],
  configFile:false,
  base:'/',
  appType:'spa',
- build:{rollupOptions:{input:{main:'index.html',videoRender:'video-render.html'}}},
+ build:{rollupOptions:{input:{main:'index.html',videoRender:'video-render.html',templatePreview:'template-preview.html'}}},
  resolve:{
   preserveSymlinks:true,
   alias:{'@':srcRoot}

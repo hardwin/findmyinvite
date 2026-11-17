@@ -20,11 +20,11 @@ export async function localTemplateCatalog(req,res,{readIds=readLocalReleaseIds,
  const url=new URL(req.url,'http://localhost');
  if(req.method!=='GET'||url.pathname!=='/api/templates')return false;
  const action=url.searchParams.get('action');
- if(!['public','version','editor'].includes(action))return false;
+ if(!['public','version','preview','editor'].includes(action))return false;
  try{
   const ids=await readIds();
   if(!ids.length)return false;
-  if(action==='version'||action==='editor'){
+  if(action==='version'||action==='preview'||action==='editor'){
    const id=url.searchParams.get('id');
    if(!/^[a-f0-9-]{36}$/.test(id||''))return false;
    let selected;
