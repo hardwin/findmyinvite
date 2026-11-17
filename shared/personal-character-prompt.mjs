@@ -1,4 +1,5 @@
-// Candidate only: promote the default after visual likeness approval.
+// Visually approved by the product owner on 2026-11-17. Keep the tested
+// revision identifier for existing job provenance; the prompt is now standard.
 export const PERSONAL_CHARACTER_PROMPT_REVISION='likeness-v1-candidate';
 export function personalCharacterPrompt(slot,identity='single',tracking=''){
  return `Create the personalized ${slot} character using the supplied images. Identity and recognizable likeness take priority over the template's original character design.

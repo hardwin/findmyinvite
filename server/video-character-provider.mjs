@@ -2,11 +2,11 @@ import {personalCharacterPrompt,PERSONAL_CHARACTER_PROMPT_REVISION} from '../sha
 import {createHmac,timingSafeEqual} from 'node:crypto';
 import {HttpError} from './core.mjs';
 export const CHARACTER_MODEL='openai/gpt-image-2.6-flare';
-export const CHARACTER_PROMPT_REVISION='temple-identity-v4';
+export const CHARACTER_PROMPT_REVISION=PERSONAL_CHARACTER_PROMPT_REVISION;
 export {PERSONAL_CHARACTER_PROMPT_REVISION as CHARACTER_PROMPT_CANDIDATE};
 export function characterPrompt(slot,identity='single',tracking='',revision=CHARACTER_PROMPT_REVISION){
  if(revision===PERSONAL_CHARACTER_PROMPT_REVISION)return personalCharacterPrompt(slot,identity,tracking);
- if(revision!==CHARACTER_PROMPT_REVISION)throw Error('Unsupported character prompt revision.');
+ if(revision!=='temple-identity-v4')throw Error('Unsupported character prompt revision.');
  return legacyCharacterPrompt(slot,identity,tracking);
 }
 function legacyCharacterPrompt(slot,identity='single',tracking=''){

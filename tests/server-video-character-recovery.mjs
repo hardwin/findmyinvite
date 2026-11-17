@@ -47,7 +47,7 @@ test('saved raw output can finish after Replicate expires, without contacting th
  await service.process(f.id);assert.equal(f.row.status,'review');assert.equal(f.row.attempts,3);
 });
 
-test('a candidate job submits its pinned likeness prompt without changing the default for other jobs',async()=>{
+test('a job submits the shared likeness prompt recorded in its revision',async()=>{
  const f=fixture({status:'queued',provider_id:null,attempts:0,prompt_revision:CHARACTER_PROMPT_CANDIDATE});let prompt;
  const service=f.service({provider:{create:async input=>{prompt=input.prompt;return {id:'candidate-prediction',status:'processing',output:null};}}});
  await service.process(f.id);assert.equal(f.row.provider_id,'candidate-prediction');assert.match(prompt,/Preserve the exact face details and face shape/);assert.doesNotMatch(prompt,/large expressive head/);
