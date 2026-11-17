@@ -105,14 +105,7 @@ body.di-site .di-pin { display: block; }
 body.di-site .di-pin-media { padding: 0; border: 0; border-radius: 0; }
 body.di-site .di-live-thumbnail > img { display: block; width: 100%; height: 100%; object-fit: cover; }
 body.di-site :is(.di-pin, .di-video-card) .di-card-details { position: relative; isolation: isolate; padding: 12px; background: linear-gradient(125deg, #ffffff47, #ffffff0a); box-shadow: inset 0 1px 0 #ffffffa6; }
-body.di-site .di-card-details::before { content: ''; position: absolute; z-index: -1; inset: 0; background-image: var(--di-card-art, none); background-size: cover; background-position: center 75%; filter: blur(26px) saturate(140%); opacity: .18; pointer-events: none; }
-body.di-site :is(.di-pin, .di-video-card) .di-card-details h3 { min-height: 38px; margin: 0 0 8px; font: 600 14px/19px var(--glass-font); letter-spacing: -.025em; }
-body.di-site :is(.di-pin, .di-video-card) .di-card-purchase { display: flex; flex-direction: column; align-items: stretch; gap: 9px; }
-body.di-site :is(.di-pin, .di-video-card) .di-card-price { flex-direction: row; align-items: baseline; gap: 6px; flex-wrap: wrap; }
-body.di-site :is(.di-pin, .di-video-card) .di-card-price strong { color: var(--di-ink); font-size: 18px; line-height: 24px; font-weight: 650; letter-spacing: -.035em; }
-body.di-site :is(.di-pin, .di-video-card) .di-card-price del { font-size: 12px; color: var(--di-muted); }
-body.di-site .di-app .di-use-template { width: 100%; min-height: 44px; padding: 9px 8px; gap: 6px; font-size: 12px; font-weight: 600; }
-body.di-site .di-use-template svg { width: 16px; height: 16px; }
+body.di-site .di-card-details::before { content: ''; position: absolute; z-index: -1; inset: 0; background-image: var(--di-card-art, none); background-size: cover; background-position: center 75%; filter: blur(26px) saturate(140%); opacity: .08; pointer-events: none; }
 /* Give artwork the space previously occupied by gutters: 60% less spacing. */
 body.di-site :is(.di-masonry, .di-video-cards) { margin-inline: -9.6px; }
 body.di-site .di-masonry { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 4.8px; }
@@ -271,16 +264,32 @@ body.di-site :is(.vp-page, .iw-dialog) :is(button, a, input, textarea, select):f
   body.di-site .di-bottom-nav a[aria-current=page] { outline: 2px solid Highlight; outline-offset: -3px; color: LinkText; }
 }
 
-/* Compact catalogue metadata and consistent price treatment. */
-body.di-site :is(.di-pin, .di-video-card) .di-card-details { padding: 10px; display: grid; gap: 5px; }
-body.di-site :is(.di-pin, .di-video-card) .di-card-details h3 { min-height: 0; min-width: 0; margin: 0; font-size: 14px; line-height: 19px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* The inner track must shrink with the card, including long titles and Share. */
+body.di-site :is(.di-pin, .di-video-card) .di-card-details { container-type: inline-size; width: 100%; min-width: 0; box-sizing: border-box; padding: 10px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; }
+body.di-site .di-card-summary { display: grid; grid-template-columns: minmax(0, 1fr); gap: 4px; min-width: 0; }
+body.di-site .di-card-heading { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: clamp(4px, 2.4cqi, 8px); min-width: 0; }
+body.di-site :is(.di-pin, .di-video-card) .di-card-details h3 { min-height: 0; min-width: 0; margin: 0; color: #381327; font: 700 clamp(14px, 7.8cqi, 20px)/1.25 var(--glass-font); letter-spacing: -.035em; white-space: normal; overflow-wrap: anywhere; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+body.di-site .di-card-heading button.di-template-share { position: relative; gap: 4px; min-height: 30px; padding: 3px clamp(5px, 3cqi, 9px); font-size: clamp(10px, 5.2cqi, 13px); white-space: nowrap; }
+body.di-site .di-card-heading .di-template-share::before { content: ''; position: absolute; inset: -7px 0; }
+body.di-site .di-card-heading .di-template-share svg { flex: none; width: clamp(12px, 6cqi, 16px); height: clamp(12px, 6cqi, 16px); stroke-width: 1.6; }
 body.di-site .di-card-micro { margin: 0; color: var(--di-muted); font-size: 11px; font-weight: 400; line-height: 1.45; }
-body.di-site .di-card-details .di-card-micro { min-height: 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+body.di-site .di-card-details .di-card-micro { min-height: 0; min-width: 0; font-size: clamp(11px, 5.6cqi, 14px); line-height: 1.4; overflow-wrap: anywhere; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 body.di-site .di-template-code { color: var(--di-muted); font: 500 10px/1.4 var(--glass-font); letter-spacing: .035em; font-variant-numeric: tabular-nums; }
-body.di-site :is(.di-pin, .di-video-card) .di-card-purchase { gap: 8px; margin-top: 2px; }
+body.di-site .di-card-details .di-template-code { color: #75666d; font-size: clamp(9px, 4.4cqi, 11px); font-weight: 600; letter-spacing: .06em; overflow-wrap: anywhere; }
+body.di-site :is(.di-pin, .di-video-card) .di-card-purchase { display: grid; grid-template-columns: minmax(0, 1fr); align-items: start; min-width: 0; gap: 10px; margin: 0; padding-top: 10px; border-top: 1px solid #9e2d6914; }
+body.di-site .di-card-details .di-offer-label { display: inline-flex; align-items: center; justify-self: start; gap: 6px; min-width: 0; max-width: 100%; box-sizing: border-box; margin: 0; padding: 5px 8px; border-radius: 7px; background: #9e2d691c; color: var(--brand-wine); font: 600 clamp(10px, 5.6cqi, 14px)/1.25 var(--glass-font); letter-spacing: -.025em; }
+body.di-site .di-card-details .di-offer-label svg { flex: none; width: clamp(14px, 7.2cqi, 18px); height: clamp(14px, 7.2cqi, 18px); stroke-width: 1.6; }
+body.di-site .di-card-details .di-offer-label span { min-width: 0; overflow-wrap: anywhere; }
+body.di-site :is(.di-pin, .di-video-card) .di-card-price { display: block; min-width: 0; }
+body.di-site .di-app .di-use-template { display: flex; justify-content: center; align-items: center; width: 100%; min-width: 0; max-width: 100%; box-sizing: border-box; min-height: 46px; padding: 9px 8px; gap: 6px; font-size: clamp(11px, 6.4cqi, 16px); font-weight: 600; line-height: 1.25; white-space: normal; }
+body.di-site .di-use-template span { min-width: 0; overflow-wrap: anywhere; }
+body.di-site .di-use-template svg { flex: none; width: clamp(14px, 7.2cqi, 18px); height: clamp(14px, 7.2cqi, 18px); stroke-width: 1.6; }
 body.di-site .fmi-price, .fmi-price { display: inline-flex; align-items: center; flex-wrap: wrap; gap: 8px; vertical-align: middle; font-variant-numeric: tabular-nums; }
 body.di-site .fmi-price strong.fmi-price-current, .fmi-price strong.fmi-price-current { display: inline-block; padding: 2px 8px; border-radius: 5px; background: var(--brand-gold, #dfb08e); color: var(--di-ink, #211b1c); font: 750 22px/1.3 var(--glass-font, sans-serif); letter-spacing: -.035em; white-space: nowrap; }
 body.di-site .fmi-price del.fmi-price-original, .fmi-price del.fmi-price-original { font: 500 14px/1.3 var(--glass-font, sans-serif); color: var(--di-muted, #7e4753); text-decoration-color: var(--brand-accent, #9e2d69); text-decoration-thickness: 2px; white-space: nowrap; }
+body.di-site .di-card-details .fmi-price { min-width: 0; max-width: 100%; gap: clamp(6px, 4.4cqi, 11px); }
+body.di-site .di-card-details .fmi-price strong.fmi-price-current { padding: 4px 8px; border-radius: 6px; font-size: clamp(20px, 11.2cqi, 28px); font-weight: 800; line-height: 1.2; }
+body.di-site .di-card-details .fmi-price del.fmi-price-original { font-size: clamp(10px, 5.6cqi, 14px); }
 .tc-identity-list { max-height: 480px; overflow: auto; }
 .tc-identities { margin-block: 24px; }
 .tc-identity-list input { width: 100%; min-width: 160px; }

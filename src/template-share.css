@@ -1,9 +1,6 @@
-.di-template-share{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:36px;padding:7px 11px;border:1px solid #d8d2d6;border-radius:999px;background:#fff;color:#49333e;font-family:inherit;font-size:12px;font-weight:600;line-height:1.2;cursor:pointer}
-.di-template-share:hover{background:#faf1f6;border-color:#9f3b73}
+.di-template-share,.di-app button.di-template-share{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-width:0;max-width:100%;min-height:36px;padding:7px 11px;box-sizing:border-box;border:1px solid #d8d2d6;border-radius:999px;background:#ffffffb3;color:#49333e;font:500 12px/1.2 var(--glass-font,Arial,sans-serif);cursor:pointer}
+.di-template-share:hover,.di-app button.di-template-share:hover{background:#faf1f6;border-color:#9f3b73}
 .di-template-share:focus-visible,.di-share-dialog :focus-visible{outline:2px solid #9f3b73;outline-offset:3px}
-.di-card-heading{display:flex;align-items:start;gap:8px;justify-content:space-between}
-.di-card-heading h3{min-width:0;flex:1}
-.di-card-heading .di-template-share{flex:none}
 .di-offer-label{display:inline-block;width:fit-content;margin:8px 0 2px;padding:5px 9px;border-radius:6px;background:#f4e8ed;color:#773450;font-size:11px;font-weight:700;letter-spacing:.025em}
 .di-share-overlay{position:fixed;inset:0;z-index:1200;background:rgb(28 20 25 / .45);backdrop-filter:blur(3px)}
 .di-share-dialog{position:fixed;z-index:1201;top:50%;left:50%;transform:translate(-50%,-50%);width:min(440px,calc(100vw - 32px));max-height:calc(100dvh - 32px);overflow:auto;box-sizing:border-box;background:#fff;border-radius:22px;padding:28px;color:#28212a;box-shadow:0 24px 80px #23162130;font-family:Arial,sans-serif}
