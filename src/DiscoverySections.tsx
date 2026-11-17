@@ -7,6 +7,7 @@ import {discoveryHref,matchesDiscoverySearch,matchesVideoSearch} from '../shared
 import {browseCategories} from '../shared/discovery-categories.mjs';
 import {useVideoCatalog} from './video/catalog';
 import './discovery-sections.css';
+import HorizontalStrip from './HorizontalStrip';
 
 type Card=ReturnType<typeof shopCard>;
 // Temporarily hidden; enable this to restore the homepage promotion.
@@ -19,7 +20,7 @@ export function BrowseCategories({cards,loading}:{cards:Card[];loading:boolean})
    <h2 id="dc-category-title">Browse categories</h2>
    <a href="/templates">All invitations <span aria-hidden="true">↗</span></a>
   </header>
-  <div className="dc-category-scroller">
+  <HorizontalStrip className="dc-category-scroller">
    {browseCategories.map(category=>{
     const artwork=categoryImages.find(image=>image.id===category.art)!;
     const isVideo=category.kind==='video';
@@ -35,7 +36,7 @@ export function BrowseCategories({cards,loading}:{cards:Card[];loading:boolean})
      <strong className="dc-category-name">{category.label}</strong>
     </a>;
    })}
-  </div>
+  </HorizontalStrip>
  </section>;
 }
 

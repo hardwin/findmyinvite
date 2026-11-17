@@ -6,6 +6,10 @@
 .di-share-dialog{position:fixed;z-index:1201;top:50%;left:50%;transform:translate(-50%,-50%);width:min(440px,calc(100vw - 32px));max-height:calc(100dvh - 32px);overflow:auto;box-sizing:border-box;background:#fff;border-radius:22px;padding:28px;color:#28212a;box-shadow:0 24px 80px #23162130;font-family:Arial,sans-serif}
 .di-share-dialog h2{margin:0 28px 8px 0;font:600 23px/1.25 Georgia,serif}
 .di-share-dialog>p{font-size:14px;line-height:1.5;color:#695e68}
+.di-share-preview{overflow:hidden;min-height:100px;border:1px solid #f0e0e8;border-radius:14px;background:#fff8fa;margin-top:16px;display:grid;place-items:center}
+.di-share-preview img{display:block;width:100%;height:auto}
+.di-share-preview p{margin:0;padding:18px;text-align:center;font-size:13px;color:#7e4753}
+.di-share-save{display:flex;align-items:center;justify-content:center;gap:8px;min-height:44px;border:1px solid #e5d5de;border-radius:999px;color:#9e2d69;text-decoration:none;font-size:13px;font-weight:600}
 .di-share-close{position:absolute;right:12px;top:12px;width:36px;height:36px;display:grid;place-items:center;padding:0;background:transparent;border:0;border-radius:50%;cursor:pointer}
 .di-share-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:22px 0}
 .di-share-options :is(button,a){display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;min-height:84px;padding:10px 4px;border:1px solid #e5dfe3;border-radius:13px;background:#fdfafb;text-decoration:none;color:#773450;font:600 13px Arial,sans-serif;cursor:pointer}
@@ -16,5 +20,4 @@
 .di-share-status{min-height:21px;margin:10px 0 0}
 .di-share-instagram{color:#773450;font-size:14px}
 .di-detail-video .di-video-card{max-width:400px;margin:auto}
-.di-detail-video .di-card-details{display:none}
 .di-detail-copy>.di-template-share{margin:10px 0}

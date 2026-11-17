@@ -15,6 +15,7 @@ for(const engine of [chromium,webkit]){
  try{
   const page=await browser.newPage({viewport:{width:390,height:1000},reducedMotion:'reduce'}),errors=[];
   page.setDefaultTimeout(45000);page.on('pageerror',e=>errors.push(e.message));
+  await page.addInitScript(()=>sessionStorage.setItem('fmi-invitation-preferences-dismissed-v1','1'));
   await page.addInitScript(()=>Object.defineProperty(navigator,'clipboard',{configurable:true,value:{writeText:async text=>{window.__copiedTemplateUrl=text;}}}));
   if(!live)await page.route('**/api/**',route=>{
    const url=new URL(route.request().url());
@@ -40,7 +41,9 @@ for(const engine of [chromium,webkit]){
      if(a.height<44||action.scrollWidth>action.clientWidth+1)failures.push(title+': action label or tap target is clipped');
      const share=detail.querySelector('.di-template-share'),s=share.getBoundingClientRect(),heading=detail.querySelector('h3').getBoundingClientRect();
      if(s.left<heading.right-1)failures.push(title+': share overlaps title');
-     if(share.scrollWidth>share.clientWidth+1||parseFloat(getComputedStyle(share).fontSize)>13.1)failures.push(title+': oversized share label');
+     const shareLabel=share.querySelector('span');
+     // The invisible tap target can extend past the visible button; measure its label instead.
+     if(shareLabel.getClientRects().length&&(shareLabel.getBoundingClientRect().right>s.right+1||parseFloat(getComputedStyle(share).fontSize)>13.1))failures.push(title+': oversized share label');
      const pseudo=getComputedStyle(share,'::before');
      if(s.height-parseFloat(pseudo.top)-parseFloat(pseudo.bottom)<44)failures.push(title+': share tap target is too short');
     }

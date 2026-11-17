@@ -2,6 +2,7 @@ import {respond,fail,method,bodyJson,rate,authUser,bearer,HttpError} from '../se
 import {credentials,sessionFrom,goTrue,authError} from '../server/auth-account.mjs';
 import {phoneAuth} from '../server/phone-auth.mjs';
 import {googleAuth} from '../server/google-auth.mjs';
+import {accountInvitationPreferences} from '../server/invitation-preferences.mjs';
 
 const emailOk=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -28,6 +29,10 @@ function emailConfirmRequired(env=process.env){
 export default async function handler(req,res){
  try{
   const action=new URL(req.url,'https://findmyinvite.com').searchParams.get('action')||'';
+  if(action==='invitation-preferences'){
+   method(req,['GET','PUT']);
+   return respond(res,200,await accountInvitationPreferences(req,req.method==='PUT'?await bodyJson(req,512):undefined));
+  }
   if(action==='google-start'||action==='google-exchange'){
    method(req,['POST']);
    return respond(res,200,await googleAuth(req,action,await bodyJson(req,4096)));

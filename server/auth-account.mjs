@@ -1,4 +1,5 @@
 import {HttpError,configured} from './core.mjs';
+import {normalizeInvitationPreferences} from '../shared/invitation-preferences.mjs';
 const emailPattern=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export function credentials(body){
  const email=String(body?.email||'').trim().toLowerCase();
@@ -15,7 +16,7 @@ export function sessionFrom(token){
   access_token:token.access_token,
   refresh_token:typeof token.refresh_token==='string'?token.refresh_token:'',
   expires_in:Number(token.expires_in)||3600,
-  user:{id:String(user.id||''),email:String(user.email||''),phone:String(user.phone||'')}
+  user:{id:String(user.id||''),email:String(user.email||''),phone:String(user.phone||''),invitationPreferences:normalizeInvitationPreferences(user.user_metadata?.invitation_preferences)}
  };
 }
 export function goTrue(path,options={}){

@@ -8,7 +8,7 @@ import {templateDetailsPath} from '../../shared/template-sharing.mjs';
 export default function VideoTemplateDetails({entry}:{entry:VideoEntry}){
  return <><a className="di-back" href="/templates?kind=video">← Invitation videos</a>
   <section className="di-detail">
-   <div className="di-detail-media di-detail-video"><VideoCard entry={entry}/></div>
+   <div className="di-detail-media di-detail-video"><VideoCard entry={entry} showDetails={false}/></div>
    <div className="di-detail-copy">
     <p className="di-eyebrow">{entry.tier==='premium'?'Premium invitation video':'Invitation video'}</p>
     <h1>{entry.name}</h1><p className="di-template-code">{entry.templateCode}</p>

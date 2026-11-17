@@ -3,6 +3,11 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "functions": {
+    "api/template-share.mjs": {
+      "includeFiles": "{dist/index.html,public/assets/fonts/discovery/montserrat-static-{400,700}.woff2,public/assets/findmyinvite-logo-transparent.png,node_modules/@sparticuz/chromium/bin/**}",
+      "maxDuration": 60,
+      "memory": 2048
+    },
     "api/guest-page.mjs": {
       "includeFiles": "dist/index.html"
     },
@@ -108,6 +113,15 @@
     }
   ],
   "rewrites": [
+    {
+      "source": "/template-share-images/:kind/:product/:revision.jpg",
+      "destination": "/api/template-share?format=image&kind=:kind&product=:product&v=:revision"
+    },
+    {
+      "source": "/templates",
+      "has": [{"type": "query", "key": "product"}],
+      "destination": "/api/template-share"
+    },
     {
       "source": "/share-images/:slug/:revision.jpg",
       "destination": "/api/share-image?slug=:slug&v=:revision"

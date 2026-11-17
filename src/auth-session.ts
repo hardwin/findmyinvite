@@ -1,4 +1,4 @@
-export type HostSession={access_token:string;refresh_token:string;expires_at:number;user:{id:string;email:string;phone?:string};remember?:boolean};
+export type HostSession={access_token:string;refresh_token:string;expires_at:number;user:{id:string;email:string;phone?:string;invitationPreferences?:{language:string;tradition:string}|null};remember?:boolean};
 const KEY_LONG='findmyinvite-auth-v1';
 const KEY_SHORT='findmyinvite-auth-session-v1';
 
@@ -55,6 +55,7 @@ export async function hostAuth(action:'signup'|'signin',email:string,password:st
   expires_at:Date.now()+(Number(value.expires_in)||3600)*1000,
   user:value.user||{id:'',email}
  },opts.remember!==false);
+ await import('./invitation-preferences').then(({syncInvitationPreferences})=>syncInvitationPreferences()).catch(()=>{});
  return value;
 }
 export async function hostRecover(email:string){

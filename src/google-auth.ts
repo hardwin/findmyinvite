@@ -1,5 +1,6 @@
 import {readSession,writeSession} from './auth-session';
 import {authReturnPath} from '../shared/auth-return.mjs';
+import {syncInvitationPreferences} from './invitation-preferences';
 const KEY='fmi-google-flow-v1';
 type GoogleFlow={id:string;verifier:string;returnTo:string;createdAt:number};
 const random=()=>Array.from(crypto.getRandomValues(new Uint8Array(32)),v=>v.toString(16).padStart(2,'0')).join('');
@@ -34,6 +35,9 @@ export function completeGoogleSignIn(){
   const result=await api('google-exchange',{code,verifier:saved.verifier});
   writeSession({access_token:result.access_token,refresh_token:result.refresh_token,expires_at:Date.now()+result.expires_in*1000,user:result.user});
   if(readSession()?.access_token!==result.access_token)throw Error('Your browser could not save your login. Allow browser storage and try again.');
+  // Carry explicit guest choices into the account before returning to an editor.
+  // Keep a failed save pending locally without turning successful login into an error.
+  await syncInvitationPreferences().catch(()=>{});
   sessionStorage.removeItem(KEY);
   return authReturnPath(saved.returnTo);
  })();

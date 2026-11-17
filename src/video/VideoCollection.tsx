@@ -6,10 +6,14 @@ import CatalogSoundtrack from './CatalogSoundtrack';
 import TemplateCardDetails from '../TemplateCardDetails';
 import {templateDetailsPath} from '../../shared/template-sharing.mjs';
 import TemplatePreviewDialog from '../TemplatePreviewDialog';
+import VideoLibraryGrid from './VideoLibraryGrid';
+import HorizontalStrip from '../HorizontalStrip';
 import {useVideoCatalog,type VideoEntry} from './catalog';
+import {useInvitationPreferences} from '../invitation-preferences';
+import {recommendInvitations} from '../../shared/invitation-preferences.mjs';
 import {filterVideoCatalog} from '../../shared/discovery-taxonomy.mjs';
 import {previewMuted,setPreviewMuted,usePreviewMuted} from '../preview-sound';
-export function VideoCard({entry}:{entry:VideoEntry}){
+export function VideoCard({entry,showDetails=true}:{entry:VideoEntry;showDetails?:boolean}){
  const videoRef=useRef<HTMLVideoElement>(null),box=useRef<HTMLElement>(null),[active,setActive]=useState(false),[failed,setFailed]=useState(false),[ready,setReady]=useState(false);
  const muted=usePreviewMuted(),audioRef=useRef<HTMLAudioElement>(null);
  const deadline=useRef<ReturnType<typeof setTimeout>|undefined>(undefined);
@@ -47,28 +51,29 @@ export function VideoCard({entry}:{entry:VideoEntry}){
    {active&&!ready&&<span className="di-thumbnail-preview di-video-play di-preview-loading" role="status" aria-label={'Loading preview for '+entry.name}><LoaderCircle size={24} className="di-preview-spinner"/></span>}
    {active&&ready&&<PreviewSoundButton name={entry.name} muted={muted} onClick={toggleMusic}/>}
   </div>
-  <TemplateCardDetails name={entry.name} kind="video" useHref={useHref} templateCode={entry.templateCode} microDescription={entry.microDescription} detailsHref={templateDetailsPath(entry.id,'video')} amountPaise={entry.quote?.basePaise} originalPaise={entry.originalPaise} offerLabel={entry.offerLabel}/>
+  {showDetails&&<TemplateCardDetails name={entry.name} kind="video" useHref={useHref} templateCode={entry.templateCode} microDescription={entry.microDescription} detailsHref={templateDetailsPath(entry.id,'video')} amountPaise={entry.quote?.basePaise} originalPaise={entry.originalPaise} offerLabel={entry.offerLabel}/>}
   {failed&&<small className="di-card-status" role="status">Preview could not load. Try again or use this template.</small>}
  </article>}</TemplatePreviewDialog>;
 }
-export default function VideoCollection({limit,query='',tradition='all',setting='all',collection='all',sort='default',onClearQuery}:{limit?:number;query?:string;tradition?:string;setting?:string;collection?:string;sort?:string;onClearQuery?:()=>void}){
+export default function VideoCollection({limit,library=false,query='',tradition='all',setting='all',collection='all',sort='default',onClearQuery}:{limit?:number;library?:boolean;query?:string;tradition?:string;setting?:string;collection?:string;sort?:string;onClearQuery?:()=>void}){
  const {entries,loading,error,retry}=useVideoCatalog();
+ const preferences=useInvitationPreferences();
  useEffect(()=>{window.dispatchEvent(new Event('catalog-stop-all'));},[query]);
- const visible:VideoEntry[]=filterVideoCatalog(entries,{query,tradition,setting,collection,sort});
+ const filtered:VideoEntry[]=filterVideoCatalog(entries,{query,tradition,setting,collection,sort});
+ const visible=sort==='default'?recommendInvitations(filtered,preferences):filtered;
  if(limit&&!loading&&!error&&!visible.length)return null;
  const allVideosHref='/templates?'+new URLSearchParams({kind:'video',...(query?{q:query}:{})});
  return <section className="di-video-collection" aria-label="Invitation Videos">
-  <header><h2 className="di-collection-title">Invitation Videos</h2>{!limit&&<a href="/templates?kind=website">Browse websites →</a>}</header>
+  {!library&&<header><h2 className="di-collection-title">Invitation Videos</h2></header>}
   {loading?<p role="status">Loading invitation videos…</p>:error?<p role="alert">The video collection could not load. <button type="button" className="di-button" onClick={()=>{void retry();}}>Retry</button></p>:<>
-   {!limit&&<p className="df-count" role="status">{visible.length} video {visible.length===1?'design':'designs'}</p>}
    {query&&onClearQuery&&<p>Results for “{query}” <button type="button" onClick={onClearQuery}>Clear search</button></p>}
-   {visible.length?<>
-    <div className={'di-video-cards'+(limit?' di-video-featured':'')} role="region" aria-label="Invitation video templates" tabIndex={0}>
+   {visible.length?library?<VideoLibraryGrid key={[query,tradition,setting,collection,sort,preferences?.tradition].join('|')} entries={visible} renderCard={entry=><VideoCard key={entry.id} entry={entry}/>}/>:<>
+    <HorizontalStrip className={'di-video-cards'+(limit?' di-video-featured':'')} role="region" aria-label="Invitation video templates" tabIndex={0}>
      {visible.slice(0,limit).map(e=><VideoCard key={e.id} entry={e}/>)}
      {limit&&<a className="di-video-view-all" href={allVideosHref}><ArrowRight size={28}/><span>View all videos</span></a>}
-    </div>
+    </HorizontalStrip>
     {limit&&<div className="di-collection-more"><a className="di-button di-secondary" href={allVideosHref}>View More <ArrowRight size={16}/></a></div>}
-   </>:<p role="status">No videos match this search. Try another design name.</p>}
+   </>:<p role="status">No videos match these choices. Try another style or collection.</p>}
   </>}
  </section>;
 }
