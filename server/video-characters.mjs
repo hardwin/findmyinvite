@@ -68,7 +68,12 @@ export function characterService({query=db,store=videoStore(),provider=replicate
    if(!j.raw_key&&typeof output!=='string'){await finish(stalled()?{status:'failed',error:'Character creation is taking too long. Retry to check the existing attempt. Your photos and payment are saved; no redo was used.'}:{status:'processing'});return;}
    stage='download';
    let bytes;if(j.raw_key)bytes=await store.bytes(j.raw_key);else{
+    // Keep the provider's output locator privately so support can recover a
+    // completed prediction even if the subsequent transfer is interrupted.
+    // Never include input photos, prompts or provider credentials here.
+    await store.save('persistent/'+j.owner_id+'/'+j.invitation_id+'/characters/'+j.id+'/prediction-'+j.attempts+'.json',{id:prediction.id,status:prediction.status,output,savedAt:new Date(clock()).toISOString()});
     bytes=await provider.output(output);
+    stage='persist';
     const raw='persistent/'+j.owner_id+'/'+j.invitation_id+'/characters/'+j.id+'/provider-'+j.attempts+'.png';await persistBytes(raw,bytes,'image/png');j=await patch(id,{status:'preparing',raw_key:raw},'&lease_id=eq.'+lease);
    }
    stage='prepare';const result=await align(bytes,await original(j.slot)),key='persistent/'+j.owner_id+'/'+j.invitation_id+'/characters/'+j.id+'/prepared.png';await persistBytes(key,result.bytes,'image/png');

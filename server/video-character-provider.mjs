@@ -25,6 +25,6 @@ export function replicateProvider(env=process.env){
   recent:()=>request('predictions'),
   model:()=>request('models/'+CHARACTER_MODEL),
   key:async()=>{if(!signingKey)signingKey=(await request('webhooks/default/secret')).key;return signingKey;},
-  async output(url){const u=new URL(url);if(u.protocol!=='https:'||!/(^|\.)replicate\.delivery$/.test(u.hostname))throw Error('Unrecognized character output host.');const r=await fetch(u,{redirect:'error',signal:AbortSignal.timeout(60000)});if(!r.ok||Number(r.headers.get('content-length'))>20*1048576)throw Error('Character output unavailable.');const bytes=Buffer.from(await r.arrayBuffer());if(bytes.length>20*1048576)throw Error('Character output too large.');return bytes;}
+  async output(url){const u=new URL(url);if(u.protocol!=='https:'||!/(^|\.)replicate\.delivery$/.test(u.hostname)){console.error('Character output host rejected',{protocol:u.protocol,host:u.hostname});throw Error('Unrecognized character output host.');}const r=await fetch(u,{redirect:'error',signal:AbortSignal.timeout(60000)});if(!r.ok||Number(r.headers.get('content-length'))>20*1048576){console.error('Character output transfer rejected',{host:u.hostname,status:r.status,bytes:r.headers.get('content-length')});throw Error('Character output unavailable.');}const bytes=Buffer.from(await r.arrayBuffer());if(bytes.length>20*1048576)throw Error('Character output too large.');return bytes;}
  };
 }

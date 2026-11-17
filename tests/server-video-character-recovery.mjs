@@ -38,6 +38,7 @@ test('ready sync output is persisted immediately even before the provider marks 
  const service=f.service({provider:{create:async()=>({id:'new-prediction',status:'processing',output:['https://replicate.delivery/result.png']}),get:async()=>{throw Error('Must use the returned output');},output:async()=>{downloaded++;return Buffer.from('saved image');}}});
  await service.process(f.id);assert.equal(f.row.status,'review');assert.equal(downloaded,1);assert.ok(f.files.has(f.row.raw_key));
  const stored=f.media.get('media/'+f.id+'.json');assert.equal(stored.durable,true);assert.equal(stored.expiresAt,null);assert.ok(stored.key.startsWith('persistent/'));assert.equal(stored.owner,f.owner);assert.ok(f.files.has(stored.key));
+ const prediction=[...f.media.entries()].find(([key])=>key.endsWith('/prediction-1.json'))?.[1];assert.equal(prediction.id,'new-prediction');assert.equal(prediction.output,'https://replicate.delivery/result.png');assert.equal(prediction.input,undefined);
 });
 
 test('saved raw output can finish after Replicate expires, without contacting the provider',async()=>{
