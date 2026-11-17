@@ -14,13 +14,13 @@ export function verifyCharacterWebhook(raw,headers,key,now=Date.now()){
 }
 let signingKey;
 export function replicateProvider(env=process.env){
- async function request(path,{method='GET',body}={}){
+ async function request(path,{method='GET',body,wait=false}={}){
   if(!env.REPLICATE_API_TOKEN)throw new HttpError(503,'Character preparation is not configured.');
-  const r=await fetch('https://api.replicate.com/v1/'+path,{method,headers:{Authorization:'Bearer '+env.REPLICATE_API_TOKEN,'Content-Type':'application/json'},body:body?JSON.stringify(body):undefined,signal:AbortSignal.timeout(45000)});
+  const r=await fetch('https://api.replicate.com/v1/'+path,{method,headers:{Authorization:'Bearer '+env.REPLICATE_API_TOKEN,'Content-Type':'application/json',...(wait?{Prefer:'wait=60'}:{})},body:body?JSON.stringify(body):undefined,signal:AbortSignal.timeout(wait?75000:45000)});
   if(!r.ok){const detail=await r.json().catch(()=>({}));const e=new HttpError(r.status===429?429:503,'Character preparation is temporarily unavailable. Please retry.');e.providerStatus=r.status;e.providerDiagnostic=JSON.stringify(detail.detail||detail.error||detail.title||'').replace(/data:[^\s"]+/g,'[image]').slice(0,1200);console.error('Replicate request rejected',r.status,e.providerDiagnostic);throw e;}return r.json();
  }
  return {
-  create:(input,webhook)=>request('models/'+CHARACTER_MODEL+'/predictions',{method:'POST',body:{input,...(webhook?{webhook,webhook_events_filter:['completed']}: {})}}),
+  create:(input,webhook)=>request('models/'+CHARACTER_MODEL+'/predictions',{method:'POST',wait:true,body:{input,...(webhook?{webhook,webhook_events_filter:['completed']}: {})}}),
   get:id=>request('predictions/'+encodeURIComponent(id)),
   recent:()=>request('predictions'),
   model:()=>request('models/'+CHARACTER_MODEL),
