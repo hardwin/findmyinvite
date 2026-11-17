@@ -78,11 +78,12 @@ export function trackAt(track,frame){
 }
 export function assertMaster(m,{released=false}={}){
  if(m?.rendererVersion==='tracked-film-v1'){
-  if(m.id!==WEDDING_BELLS_ID||m.version!==1||Object.entries(WEDDING_BELLS_OUTPUT).some(([k,v])=>m.output?.[k]!==v))throw Error('Unsupported tracked film master.');
+  if(m.id!==WEDDING_BELLS_ID||![1,2].includes(m.version)||Object.entries(WEDDING_BELLS_OUTPUT).some(([k,v])=>m.output?.[k]!==v))throw Error('Unsupported tracked film master.');
   if(m.scenes?.length!==9||m.scenes[0].start!==0||m.scenes.at(-1).end!==832||m.scenes.some((s,i)=>!Number.isInteger(s.start)||!Number.isInteger(s.end)||s.start>=s.end||(i&&s.start!==m.scenes[i-1].end)))throw Error('Invalid tracked film timeline.');
   if(m.cleanTextRanges!==undefined&&(!Array.isArray(m.cleanTextRanges)||m.cleanTextRanges.some((r,i)=>!Number.isInteger(r.start)||!Number.isInteger(r.end)||r.start<0||r.end>m.output.frames||r.start>=r.end||(i&&r.start<m.cleanTextRanges[i-1].end))))throw Error('Invalid text-free frame range.');
   for(const id of ['background','restoration','surfaces'])if(!m.assets?.[id])throw Error('Missing tracked film asset.');
   for(const a of Object.values(m.assets))if(!a.path?.startsWith('/assets/video-masters/'+WEDDING_BELLS_ID+'/')||a.path.includes('..')||!/^[a-f0-9]{64}$/.test(a.sha256||''))throw Error('Invalid tracked film asset.');
+  if(m.version===2&&(m.assets.surfaces.path!=='/assets/video-masters/wedding-bells-v1/surfaces-tracked-v1.json'||m.assets.restoration.path!=='/assets/video-masters/wedding-bells-v1/tracked-visibility-v1.mp4'))throw Error('Unsupported tracked film revision.');
   // Owner-approved public trial: immutable render proofs and a qualified cloud worker.
   if(released&&(!m.release?.approved||m.release.rendererVersion!==m.rendererVersion||!['default','personalized'].every(k=>/^[a-f0-9]{64}$/.test(m.release?.proofs?.[k]||''))||!m.release.cloudVerified))throw Error('Wedding Bells is still being prepared.');
   return m;

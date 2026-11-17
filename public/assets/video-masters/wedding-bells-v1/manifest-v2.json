@@ -1,0 +1,196 @@
+{
+  "id": "wedding-bells-v1",
+  "version": 2,
+  "rendererVersion": "tracked-film-v1",
+  "output": {
+    "width": 720,
+    "height": 1280,
+    "fps": 30,
+    "frames": 832,
+    "duration": 27.733333333333334
+  },
+  "layerOrder": [
+    "background",
+    "text"
+  ],
+  "assets": {
+    "background": {
+      "path": "/assets/video-masters/wedding-bells-v1/full-textless-v1.mp4",
+      "kind": "video",
+      "sha256": "190ea2e43dc44fc6874a50576fefddee34d136d02b79caa105cde582a602d095"
+    },
+    "restoration": {
+      "path": "/assets/video-masters/wedding-bells-v1/tracked-visibility-v1.mp4",
+      "kind": "video",
+      "sha256": "59836a039702a2df65de36b5f6fc8ee260cd1a8be1002b2a3d7aa85a4039164c"
+    },
+    "surfaces": {
+      "path": "/assets/video-masters/wedding-bells-v1/surfaces-tracked-v1.json",
+      "kind": "data",
+      "sha256": "4e5788249dfe531fa641e7502a8d9aad97c8ed9d881444c40d452a9639ea3f15"
+    },
+    "audio": {
+      "path": "/assets/video-masters/wedding-bells-v1/original-audio.m4a",
+      "kind": "audio",
+      "sha256": "58f0b2a41df385284cd06addaad84a1032e1da8f140722ad4c1c3eeaab4f0079"
+    },
+    "Tinos-Regular": {
+      "path": "/assets/video-masters/wedding-bells-v1/Tinos-Regular.ttf",
+      "kind": "font",
+      "sha256": "60a0e8ef0c04dd5dd69ffe91025fa2ae5836cbd35600a82ba031977557e2cb61"
+    },
+    "Tinos-Italic": {
+      "path": "/assets/video-masters/wedding-bells-v1/Tinos-Italic.ttf",
+      "kind": "font",
+      "sha256": "5942266ed398b155d7dc23e36833e7ec6be988f2439bdbeb8ef1bede808eaa91"
+    },
+    "BerkshireSwash-Regular": {
+      "path": "/assets/video-masters/wedding-bells-v1/BerkshireSwash-Regular.ttf",
+      "kind": "font",
+      "sha256": "f0c80837dc6f32b89b10894a7e39295db4a00ab697cada682a3f5942c342fe00"
+    },
+    "PinyonScript-Regular": {
+      "path": "/assets/video-masters/wedding-bells-v1/PinyonScript-Regular.ttf",
+      "kind": "font",
+      "sha256": "4aab130a6ed27f8b8117738c84a5602edf9300cdcc0651a9a65bf96f451ac29a"
+    },
+    "GreatVibes-Regular": {
+      "path": "/assets/video-masters/wedding-bells-v1/GreatVibes-Regular.ttf",
+      "kind": "font",
+      "sha256": "ab6a3b002d35c52237a1f416dea63c419023d5c6b3396fdc261994dbc754422c"
+    },
+    "NotoSerifMalayalam": {
+      "path": "/assets/video-masters/wedding-bells-v1/NotoSerifMalayalam.woff2",
+      "kind": "font",
+      "sha256": "201c4862d1edbd73d32afb94ca57ce5a67ad5729f3408bc6b9d5f608505a5375"
+    },
+    "LuxuriousScript-Regular": {
+      "path": "/assets/video-masters/wedding-bells-v1/LuxuriousScript-Regular.ttf",
+      "kind": "font",
+      "sha256": "db1a118a34eb835f7960a09d8be472b65971d7798772842dc3cd37a8641491e9"
+    },
+    "CormorantGaramond-Medium": {
+      "path": "/assets/video-masters/wedding-bells-v1/CormorantGaramond-Medium.ttf",
+      "kind": "font",
+      "sha256": "75e31f09522d06d7c70bb24d1bd927837a587bafd17860d620031cba115905ed"
+    }
+  },
+  "scenes": [
+    {
+      "id": "opening",
+      "name": "Opening",
+      "start": 0,
+      "end": 57,
+      "reviewFrame": 9,
+      "layers": []
+    },
+    {
+      "id": "invitation",
+      "name": "Invitation",
+      "start": 57,
+      "end": 103,
+      "reviewFrame": 75,
+      "layers": []
+    },
+    {
+      "id": "groom",
+      "name": "Groom",
+      "start": 103,
+      "end": 165,
+      "reviewFrame": 132,
+      "layers": []
+    },
+    {
+      "id": "bride",
+      "name": "Bride",
+      "start": 165,
+      "end": 240,
+      "reviewFrame": 186,
+      "layers": []
+    },
+    {
+      "id": "family",
+      "name": "Parents",
+      "start": 240,
+      "end": 395,
+      "reviewFrame": 315,
+      "layers": []
+    },
+    {
+      "id": "venue",
+      "name": "Wedding venue",
+      "start": 395,
+      "end": 491,
+      "reviewFrame": 420,
+      "layers": []
+    },
+    {
+      "id": "reception",
+      "name": "Reception",
+      "start": 491,
+      "end": 594,
+      "reviewFrame": 534,
+      "layers": []
+    },
+    {
+      "id": "hosts",
+      "name": "Inviting families",
+      "start": 594,
+      "end": 727,
+      "reviewFrame": 630,
+      "layers": []
+    },
+    {
+      "id": "closing",
+      "name": "Save the date",
+      "start": 727,
+      "end": 832,
+      "reviewFrame": 780,
+      "layers": []
+    }
+  ],
+  "release": {
+    "approved": true,
+    "status": "owner-approved-public-trial",
+    "rendererVersion": "tracked-film-v1",
+    "cloudVerified": true,
+    "proofs": {
+      "default": "71596b1106a9b759965c595bc947137f83719ba1a99850fed4bb36b849ff2fb5",
+      "personalized": "26c6d575c69814f3afcd1c43a3b3cbe5c6b305bcf1bd322f65e6af12cccddf33"
+    },
+    "approvedAt": "2026-11-17T00:14:44.070Z",
+    "approval": "Owner approved the complete full-tracking comparison and requested production release on 17 November 2026.",
+    "knownLimitations": [
+      "Original moving characters are retained; custom characters are not supported.",
+      "Physical iPhone and Instagram coverage is not verified."
+    ]
+  },
+  "cleanTextRanges": [
+    {
+      "start": 0,
+      "end": 832
+    }
+  ],
+  "trial": {
+    "purpose": "Approved full-film board tracking and rigid floating-title motion; original fonts, lighting and moving characters retained.",
+    "sourceSha256": "cc209e96e91d47e97b29561d563d01a8b53a603bfe8f268ba8798b9395e40330",
+    "baseReplacement": {
+      "start": 0,
+      "end": 832
+    },
+    "cleanupBypass": {
+      "start": 0,
+      "end": 832
+    },
+    "note": "Picture stream copied from the owner file, rebased to zero. Original AAC soundtrack retained separately. Later typography has not been redesigned."
+  },
+  "catalog": {
+    "poster": "poster-tracked-v1.jpg",
+    "preview": "catalog-preview-tracked-v1.mp4",
+    "posters": {
+      "320": "poster-tracked-v1-320.webp",
+      "640": "poster-tracked-v1-640.webp",
+      "960": "poster-tracked-v1-960.webp"
+    }
+  }
+}

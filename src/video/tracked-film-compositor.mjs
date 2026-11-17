@@ -24,7 +24,7 @@ export class TrackedFilmCompositor {
   this.master=master;this.content=content;this.resolveAsset=resolveAsset;this.externalBackground=externalBackground;
   const data=await fetch(resolveAsset(master.assets.surfaces.path)).then(r=>{if(!r.ok)throw Error('The invitation surfaces could not load.');return r.json();});
   if(this.disposed)return;
-  this.data=data;for(const s of data.scenes)s.trackByFrame=new Map(s.track.map(k=>[k.frame,k]));
+  this.data=data;this.motionTracks=new Map(Object.entries(data.motionTracks||{}).map(([id,track])=>[id,new Map(track.rows.map(row=>[row.frame,row.corners]))]));for(const s of data.scenes)s.trackByFrame=new Map(s.track.map(k=>[k.frame,k]));
   await Promise.all(Object.entries(master.assets).filter(([,a])=>a.kind==='font').map(async([id,a])=>{const font=new FontFace('WeddingBells-'+id,`url(${resolveAsset(a.path)})`);await font.load();if(this.disposed)return;document.fonts.add(font);this.fonts.push(font);}));
   const loadMovie=async asset=>{const v=document.createElement('video');this.videos.push(v);v.crossOrigin='anonymous';v.playsInline=true;v.muted=true;v.preload='auto';await new Promise((resolve,reject)=>{v.onloadeddata=resolve;v.onerror=()=>reject(Error('The invitation film could not load.'));v.src=resolveAsset(asset.path);v.load();});return v;};
   if(!externalBackground)[this.video,this.restoration]=await Promise.all([loadMovie(master.assets.background),loadMovie(master.assets.restoration)]);
@@ -84,12 +84,12 @@ export class TrackedFilmCompositor {
   if(this.externalBackground){if(!backgroundUrl||!maskUrl)throw Error('A source frame and restoration frame are required.');[this.baseTexture.image,this.packedTexture.image]=await Promise.all([image(backgroundUrl),image(maskUrl)]);}
   else if(!live||!this.playing)await Promise.all(this.videos.map(v=>seek(v,time)));else if(Math.abs(this.restoration.currentTime-this.video.currentTime)>.06)await seek(this.restoration,this.video.currentTime);
   this.baseTexture.needsUpdate=true;this.packedTexture.needsUpdate=true;
-  for(const l of this.layers){const corners=cornersAt(l.scene,frame),treatment=treatmentAt(this.data,l.scene.id,frame),textCorners=treatment?treatmentCorners(treatment,frame):corners,visibility=weddingBellsLayerVisibility(this.master,frame,l.unchanged);
+  for(const l of this.layers){const corners=cornersAt(l.scene,frame),treatment=treatmentAt(this.data,l.scene.id,frame),motion=this.motionTracks.get(l.scene.id),textCorners=motion?(motion.get(frame)||null):(treatment?treatmentCorners(treatment,frame):corners),visibility=weddingBellsLayerVisibility(this.master,frame,l.unchanged);
    l.restore.visible=!l.ornament&&!!corners&&visibility.restore;l.text.visible=!!textCorners&&(l.ornament?!!treatment:visibility.text);if(!corners&&!textCorners)continue;
    const blur=l.scene.transition?.blur,focus=blur?Math.max(0,Math.min(1,1-interpolate(blur,frame,1)/3)):1;
    const authored=treatment?treatmentVisibility(treatment,frame):{opacity:1,left:-1000,right:2000},u=l.text.material.uniforms;
    u.focus.value=focus*authored.opacity;l.restore.material.uniforms.focus.value=focus*authored.opacity;
-   u.lettering.value=treatment&&l.trialTexture?l.trialTexture:l.texture;u.maskStrength.value=treatment?0:1;u.clipLeft.value=authored.left;u.clipRight.value=authored.right;
+   u.lettering.value=treatment&&l.trialTexture?l.trialTexture:l.texture;u.maskStrength.value=motion?1:(treatment?0:1);u.clipLeft.value=authored.left;u.clipRight.value=authored.right;
    l.restore.material.uniforms.clipLeft.value=authored.left;l.restore.material.uniforms.clipRight.value=authored.right;
    if(corners&&!l.ornament){const [x,y,w,h]=l.field.region,[sw,sh]=l.scene.size,region=[[x/sw,y/sh],[(x+w)/sw,y/sh],[(x+w)/sw,(y+h)/sh],[x/sw,(y+h)/sh]],sourceCorners=region.map(([u,v])=>project(corners,u,v)),planar=!!treatment?.planarTrack&&!!textCorners;l.restore.material.uniforms.restoreWarp.value=planar?1:0;this.place(l.restore,planar?region.map(([u,v])=>project(textCorners,u,v)):sourceCorners,planar?sourceCorners:undefined);}if(textCorners)this.place(l.text,textCorners);
   }

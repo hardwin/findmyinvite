@@ -1,0 +1,132 @@
+{
+  "createdAt": "2026-11-17T00:29:27.551Z",
+  "templateId": "wedding-bells-v1",
+  "masterVersion": 2,
+  "rendererVersion": "tracked-film-v1",
+  "productionBase": "0f65bb48d0417d14a205c7bb78fe7d17a80cbeb1",
+  "previousSnapshotId": "snap_KGDyxEbWzxKbCRe5OizmnsD9nb3d",
+  "catalogCode": "FMI#0109",
+  "assets": {
+    "background": {
+      "path": "/assets/video-masters/wedding-bells-v1/full-textless-v1.mp4",
+      "kind": "video",
+      "sha256": "190ea2e43dc44fc6874a50576fefddee34d136d02b79caa105cde582a602d095"
+    },
+    "restoration": {
+      "path": "/assets/video-masters/wedding-bells-v1/tracked-visibility-v1.mp4",
+      "kind": "video",
+      "sha256": "59836a039702a2df65de36b5f6fc8ee260cd1a8be1002b2a3d7aa85a4039164c"
+    },
+    "surfaces": {
+      "path": "/assets/video-masters/wedding-bells-v1/surfaces-tracked-v1.json",
+      "kind": "data",
+      "sha256": "4e5788249dfe531fa641e7502a8d9aad97c8ed9d881444c40d452a9639ea3f15"
+    },
+    "audio": {
+      "path": "/assets/video-masters/wedding-bells-v1/original-audio.m4a",
+      "kind": "audio",
+      "sha256": "58f0b2a41df385284cd06addaad84a1032e1da8f140722ad4c1c3eeaab4f0079"
+    },
+    "Tinos-Regular": {
+      "path": "/assets/video-masters/wedding-bells-v1/Tinos-Regular.ttf",
+      "kind": "font",
+      "sha256": "60a0e8ef0c04dd5dd69ffe91025fa2ae5836cbd35600a82ba031977557e2cb61"
+    },
+    "Tinos-Italic": {
+      "path": "/assets/video-masters/wedding-bells-v1/Tinos-Italic.ttf",
+      "kind": "font",
+      "sha256": "5942266ed398b155d7dc23e36833e7ec6be988f2439bdbeb8ef1bede808eaa91"
+    },
+    "BerkshireSwash-Regular": {
+      "path": "/assets/video-masters/wedding-bells-v1/BerkshireSwash-Regular.ttf",
+      "kind": "font",
+      "sha256": "f0c80837dc6f32b89b10894a7e39295db4a00ab697cada682a3f5942c342fe00"
+    },
+    "PinyonScript-Regular": {
+      "path": "/assets/video-masters/wedding-bells-v1/PinyonScript-Regular.ttf",
+      "kind": "font",
+      "sha256": "4aab130a6ed27f8b8117738c84a5602edf9300cdcc0651a9a65bf96f451ac29a"
+    },
+    "GreatVibes-Regular": {
+      "path": "/assets/video-masters/wedding-bells-v1/GreatVibes-Regular.ttf",
+      "kind": "font",
+      "sha256": "ab6a3b002d35c52237a1f416dea63c419023d5c6b3396fdc261994dbc754422c"
+    },
+    "NotoSerifMalayalam": {
+      "path": "/assets/video-masters/wedding-bells-v1/NotoSerifMalayalam.woff2",
+      "kind": "font",
+      "sha256": "201c4862d1edbd73d32afb94ca57ce5a67ad5729f3408bc6b9d5f608505a5375"
+    },
+    "LuxuriousScript-Regular": {
+      "path": "/assets/video-masters/wedding-bells-v1/LuxuriousScript-Regular.ttf",
+      "kind": "font",
+      "sha256": "db1a118a34eb835f7960a09d8be472b65971d7798772842dc3cd37a8641491e9"
+    },
+    "CormorantGaramond-Medium": {
+      "path": "/assets/video-masters/wedding-bells-v1/CormorantGaramond-Medium.ttf",
+      "kind": "font",
+      "sha256": "75e31f09522d06d7c70bb24d1bd927837a587bafd17860d620031cba115905ed"
+    }
+  },
+  "catalog": {
+    "poster": "poster-tracked-v1.jpg",
+    "preview": "catalog-preview-tracked-v1.mp4",
+    "posters": {
+      "320": "poster-tracked-v1-320.webp",
+      "640": "poster-tracked-v1-640.webp",
+      "960": "poster-tracked-v1-960.webp"
+    }
+  },
+  "cloud": {
+    "rendererVersion": "tracked-film-v1",
+    "createdAt": "2026-11-17T00:22:16.770Z",
+    "vcpus": 4,
+    "renders": {
+      "default": {
+        "frames": 832,
+        "width": 720,
+        "height": 1280,
+        "duration": 27.733333333333334,
+        "bytes": 17541419,
+        "resultSha256": "71596b1106a9b759965c595bc947137f83719ba1a99850fed4bb36b849ff2fb5",
+        "backgroundSha256": "190ea2e43dc44fc6874a50576fefddee34d136d02b79caa105cde582a602d095",
+        "elapsedSeconds": 116.682,
+        "resumedCompletedRender": false,
+        "audioPackets": 600,
+        "audioPacketPayloadHash": "73567762d5a159038d7c24772333dc6f74877572436113191d91dcbed17ab30b"
+      },
+      "personalized": {
+        "frames": 832,
+        "width": 720,
+        "height": 1280,
+        "duration": 27.733333333333334,
+        "bytes": 17511036,
+        "resultSha256": "26c6d575c69814f3afcd1c43a3b3cbe5c6b305bcf1bd322f65e6af12cccddf33",
+        "backgroundSha256": "190ea2e43dc44fc6874a50576fefddee34d136d02b79caa105cde582a602d095",
+        "elapsedSeconds": 117.725,
+        "resumedCompletedRender": false,
+        "audioPackets": 600,
+        "audioPacketPayloadHash": "73567762d5a159038d7c24772333dc6f74877572436113191d91dcbed17ab30b"
+      }
+    }
+  },
+  "legacy": {
+    "frames": 832,
+    "width": 720,
+    "height": 1280,
+    "duration": 27.733333333333334,
+    "bytes": 17837784,
+    "resultSha256": "b90ef2e756ca7e09536479645195362d1dab410f59bea7e0ececf4438498c839",
+    "backgroundSha256": "190ea2e43dc44fc6874a50576fefddee34d136d02b79caa105cde582a602d095",
+    "elapsedSeconds": 137.058,
+    "exactPreviousProductionMatch": true
+  },
+  "physicalDevicesVerified": false,
+  "snapshotId": "snap_O4C24btuNNogJ8915CWHZ3ZXoF2k",
+  "validation": {
+    "build": "passed",
+    "targetedRegressionTests": 135,
+    "previousProductionExportByteIdentical": true,
+    "browser": "IAB Chromium desktop and 390x844 emulation; physical devices not tested"
+  }
+}

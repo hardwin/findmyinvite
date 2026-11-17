@@ -1,6 +1,6 @@
 {
   "id": "wedding-bells-v1",
-  "version": 1,
+  "version": 2,
   "rendererVersion": "tracked-film-v1",
   "output": {
     "width": 720,
@@ -20,14 +20,14 @@
       "sha256": "190ea2e43dc44fc6874a50576fefddee34d136d02b79caa105cde582a602d095"
     },
     "restoration": {
-      "path": "/assets/video-masters/wedding-bells-v1/restoration-pilot.mp4",
+      "path": "/assets/video-masters/wedding-bells-v1/tracked-visibility-v1.mp4",
       "kind": "video",
-      "sha256": "efb31cb3b91ef39683e0d21afd452d88b99fa2bfae4330ef117329f10ae263d0"
+      "sha256": "59836a039702a2df65de36b5f6fc8ee260cd1a8be1002b2a3d7aa85a4039164c"
     },
     "surfaces": {
-      "path": "/assets/video-masters/wedding-bells-v1/surfaces-full-clean-v4.json",
+      "path": "/assets/video-masters/wedding-bells-v1/surfaces-tracked-v1.json",
       "kind": "data",
-      "sha256": "ba366bd8d5e77d08c0fc60c3401fdba9ca355554ac9b2ff56e8d1774e11eb6ed"
+      "sha256": "4e5788249dfe531fa641e7502a8d9aad97c8ed9d881444c40d452a9639ea3f15"
     },
     "audio": {
       "path": "/assets/video-masters/wedding-bells-v1/original-audio.m4a",
@@ -155,14 +155,13 @@
     "rendererVersion": "tracked-film-v1",
     "cloudVerified": true,
     "proofs": {
-      "default": "b90ef2e756ca7e09536479645195362d1dab410f59bea7e0ececf4438498c839",
-      "personalized": "57bb4b2c9c8bcef09d46d706f2089f02a8fe264b69dde07b4704e0e27a8553a5"
+      "default": "71596b1106a9b759965c595bc947137f83719ba1a99850fed4bb36b849ff2fb5",
+      "personalized": "26c6d575c69814f3afcd1c43a3b3cbe5c6b305bcf1bd322f65e6af12cccddf33"
     },
-    "approvedAt": "2026-11-16T21:59:10.556Z",
-    "approval": "Owner requested production deployment and public testing of the current full-clean-base trial on 2026-11-17.",
+    "approvedAt": "2026-11-17T00:14:44.070Z",
+    "approval": "Owner approved the complete full-tracking comparison and requested production release on 17 November 2026.",
     "knownLimitations": [
       "Original moving characters are retained; custom characters are not supported.",
-      "Owner-approved visual trial, not a claim of exact typography or tracking across every scene.",
       "Physical iPhone and Instagram coverage is not verified."
     ]
   },
@@ -173,7 +172,7 @@
     }
   ],
   "trial": {
-    "purpose": "Owner-supplied fully text-free film across all 832 frames; no background restoration patches. Current first-ten-second motion retained for comparison.",
+    "purpose": "Approved full-film board tracking and rigid floating-title motion; original fonts, lighting and moving characters retained.",
     "sourceSha256": "cc209e96e91d47e97b29561d563d01a8b53a603bfe8f268ba8798b9395e40330",
     "baseReplacement": {
       "start": 0,
@@ -186,11 +185,12 @@
     "note": "Picture stream copied from the owner file, rebased to zero. Original AAC soundtrack retained separately. Later typography has not been redesigned."
   },
   "catalog": {
-    "poster": "poster.jpg",
+    "poster": "poster-tracked-v1.jpg",
+    "preview": "catalog-preview-tracked-v1.mp4",
     "posters": {
-      "320": "poster-clean-v1-320.webp",
-      "640": "poster-clean-v1-640.webp",
-      "960": "poster-clean-v1-960.webp"
+      "320": "poster-tracked-v1-320.webp",
+      "640": "poster-tracked-v1-640.webp",
+      "960": "poster-tracked-v1-960.webp"
     }
   }
 }

@@ -1,3 +1,4 @@
+import {pinWeddingBellsVersion} from '../shared/wedding-bells-version.mjs';
 import {catalogIdentities} from './catalog-identity.mjs';
 import {identityFields} from '../shared/catalog-identity.mjs';
 import {db,HttpError} from './core.mjs';
@@ -30,6 +31,7 @@ export function draftService({query=db,store=videoStore()}={}){
   if(b.kind==='video')videoDefinition(b.templateId);else await version(b.templateId);
   // Raw incomplete form values are recoverable; export/publication still perform full validation.
   const payload=JSON.parse(JSON.stringify(b.payload));delete payload.owner;delete payload.paid;delete payload.unlocked;
+  if(b.kind==='video'&&b.templateId==='wedding-bells-v1'){const existing=await get(owner,id,{optional:true});try{payload.masterVersion=pinWeddingBellsVersion(payload,existing);}catch(e){throw new HttpError(409,e.message);}}
   if(b.kind==='website'&&payload.slug){const website=await one('invitations?slug=eq.'+encodeURIComponent(payload.slug)+'&owner_id=eq.'+owner+'&select=id');if(!website)throw new HttpError(404,'Invitation not found.');}
   const row=await query('rpc/fmi_save_personalization_draft',{method:'POST',body:{p_id:id,p_owner:owner,p_kind:b.kind,p_template:b.templateId,p_payload:payload,p_revision:b.revision}});
   const result=Array.isArray(row)?row[0]:row;
@@ -48,7 +50,7 @@ export function draftService({query=db,store=videoStore()}={}){
   const missing=purchases.filter(p=>!known.has(p.id));
   if(missing.length){
    const restored=new Map();for(const file of await store.list('jobs/')){const j=(await store.read(file))?.value;if(j?.owner===owner&&missing.some(p=>p.id===j.invitationId)){const old=restored.get(j.invitationId);if(!old||j.createdAt>old.createdAt)restored.set(j.invitationId,j);}}
-   for(const p of missing){const j=restored.get(p.id);items.push({id:p.id,kind:'video',templateId:p.template_id,revision:0,payload:j?{content:j.content,step:7,formStepId:'review',formVersion:2,jobContent:JSON.stringify(j.content)}:{missingDetails:true},lastJobId:j?.id,updatedAt:j?.createdAt||p.created_at});}
+   for(const p of missing){const j=restored.get(p.id);items.push({id:p.id,kind:'video',templateId:p.template_id,revision:0,payload:j?{...(p.template_id==='wedding-bells-v1'?{masterVersion:j.master?.version||1}:{}),content:j.content,step:7,formStepId:'review',formVersion:2,jobContent:JSON.stringify(j.content)}:{missingDetails:true},lastJobId:j?.id,updatedAt:j?.createdAt||p.created_at});}
   }
   const versionIds=[...new Set(items.filter(d=>d.kind==='website').map(d=>d.templateId))];
   const versions=versionIds.length?await query('template_versions?id=in.('+versionIds.join(',')+')&select=id,template_id'):[];
