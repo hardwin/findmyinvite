@@ -4,6 +4,7 @@ import {ArrowRight,LoaderCircle,Play,RotateCcw,Video} from 'lucide-react';
 import PreviewSoundButton from '../PreviewSoundButton';
 import CatalogSoundtrack from './CatalogSoundtrack';
 import TemplateCardDetails from '../TemplateCardDetails';
+import {templateDetailsPath} from '../../shared/template-sharing.mjs';
 import TemplatePreviewDialog from '../TemplatePreviewDialog';
 import {useVideoCatalog,type VideoEntry} from './catalog';
 import {filterVideoCatalog} from '../../shared/discovery-taxonomy.mjs';
@@ -25,18 +26,18 @@ export function VideoCard({entry}:{entry:VideoEntry}){
   window.dispatchEvent(new Event('catalog-stop-all'));setFailed(false);setReady(false);flushSync(()=>setActive(true));
   const video=videoRef.current;
   if(video){video.muted=previewMuted();void video.play().catch(()=>{if(video.isConnected){setActive(false);setFailed(true);}});}
-  const audio=audioRef.current;if(audio&&!previewMuted())void audio.play().catch(e=>{if(audio.isConnected&&e.name!=='AbortError')setPreviewMuted(true);});
+  audioRef.current?.dispatchEvent(new Event('fmi-audio-start'));
  }
  function toggleMusic(){
   const video=videoRef.current;if(!video)return;
   const next=!muted;video.muted=next;if(!next&&video.volume===0)video.volume=1;setPreviewMuted(next);
-  const audio=audioRef.current;if(audio){if(next)audio.pause();else if(!video.paused){if(audio.error)audio.load();void audio.play().catch(e=>{if(audio.isConnected&&e.name!=='AbortError')setPreviewMuted(true);});}}
+  const audio=audioRef.current;if(audio){if(next)audio.pause();else if(!video.paused){if(audio.error)audio.load();audio.dispatchEvent(new Event('fmi-audio-start'));}}
  }
  return <TemplatePreviewDialog name={entry.name} onExpand={startPreview}>{(expanded,expandControl)=><article className={'di-video-card'+(expanded?' di-expanded-card':'')} ref={box} style={{'--di-card-art':`url(${JSON.stringify(entry.poster)})`} as CSSProperties}>
   <div className="di-video-demo">
-   <a href={useHref} aria-label={'Use Template: '+entry.name}><img src={entry.poster} srcSet={entry.posters?Object.entries(entry.posters).map(([width,url])=>url+' '+width+'w').join(','):undefined} sizes="(max-width:640px) 78vw, 25vw" width={720} height={1280} loading="lazy" decoding="async" onError={e=>{e.currentTarget.removeAttribute('srcset');if(e.currentTarget.getAttribute('src')!==entry.poster)e.currentTarget.src=entry.poster;}} alt={entry.name}/></a>
-   {active&&<video ref={attachVideo} onProgress={()=>{if(!ready)loadingProgress();}} src={entry.preview} poster={entry.poster} style={{opacity:ready?1:0}} onPlaying={()=>setReady(true)} autoPlay controls={expanded} muted={muted} onVolumeChange={e=>{const next=e.currentTarget.muted||e.currentTarget.volume===0;if(next!==previewMuted())setPreviewMuted(next);}} loop playsInline preload="auto" aria-label={entry.name+' preview'} onError={()=>{setActive(false);setFailed(true);}}/>}
-   {active&&entry.music&&<CatalogSoundtrack entry={entry} videoRef={videoRef} audioRef={audioRef}/>}
+   <a href={templateDetailsPath(entry.id,'video')} aria-label={'Details: '+entry.name}><img src={entry.poster} srcSet={entry.posters?Object.entries(entry.posters).map(([width,url])=>url+' '+width+'w').join(','):undefined} sizes="(max-width:640px) 78vw, 25vw" width={720} height={1280} loading="lazy" decoding="async" onError={e=>{e.currentTarget.removeAttribute('srcset');if(e.currentTarget.getAttribute('src')!==entry.poster)e.currentTarget.src=entry.poster;}} alt={entry.name}/></a>
+   {active&&<video ref={attachVideo} onProgress={()=>{if(!ready)loadingProgress();}} src={entry.preview} poster={entry.poster} style={{opacity:ready?1:0}} onPlaying={()=>setReady(true)} controls={expanded} muted={muted} onVolumeChange={e=>{const next=e.currentTarget.muted||e.currentTarget.volume===0;if(next!==previewMuted())setPreviewMuted(next);}} loop playsInline preload="auto" aria-label={entry.name+' preview'} onError={()=>{setActive(false);setFailed(true);}}/>}
+   {active&&entry.music&&!entry.embeddedMusic&&<CatalogSoundtrack entry={entry} videoRef={videoRef} audioRef={audioRef}/>}
    <span className="di-pin-kind"><Video size={14} aria-hidden="true"/>Video</span>
    <span className="di-video-duration" aria-label={'Duration '+duration}>{duration}</span>
    {expandControl}
@@ -46,7 +47,7 @@ export function VideoCard({entry}:{entry:VideoEntry}){
    {active&&!ready&&<span className="di-thumbnail-preview di-video-play di-preview-loading" role="status" aria-label={'Loading preview for '+entry.name}><LoaderCircle size={24} className="di-preview-spinner"/></span>}
    {active&&ready&&<PreviewSoundButton name={entry.name} muted={muted} onClick={toggleMusic}/>}
   </div>
-  <TemplateCardDetails name={entry.name} kind="video" useHref={useHref} templateCode={entry.templateCode} microDescription={entry.microDescription} amountPaise={entry.quote?.basePaise}/>
+  <TemplateCardDetails name={entry.name} kind="video" useHref={useHref} templateCode={entry.templateCode} microDescription={entry.microDescription} detailsHref={templateDetailsPath(entry.id,'video')} amountPaise={entry.quote?.basePaise} originalPaise={entry.originalPaise} offerLabel={entry.offerLabel}/>
   {failed&&<small className="di-card-status" role="status">Preview could not load. Try again or use this template.</small>}
  </article>}</TemplatePreviewDialog>;
 }

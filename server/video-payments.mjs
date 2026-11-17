@@ -1,7 +1,7 @@
 import {createHash,randomUUID,timingSafeEqual} from 'node:crypto';
 import {db,HttpError} from './core.mjs';
 import {createRazorpayOrder,paymentsConfigured,publicKeyId,razorpayAuth,verifyCheckoutSignature} from './payments.mjs';
-import {videoQuote,VIDEO_CURRENCY} from '../shared/video-pricing.mjs';
+import {videoQuote,videoOffer,VIDEO_CURRENCY} from '../shared/video-pricing.mjs';
 
 const table='video_invitation_orders';
 const uuid=/^[a-f0-9]{8}-[a-f0-9]{4}-[1-5][a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/i;
@@ -11,10 +11,10 @@ export function validVideoPromo(code,env=process.env){
  const expected=String(env.VIDEO_TEST_PROMO_SHA256||'').trim();
  return typeof code==='string'&&code.trim().length>=8&&code.length<=100&&/^[a-f0-9]{64}$/.test(expected)&&timingSafeEqual(Buffer.from(promoDigest(code),'hex'),Buffer.from(expected,'hex'));
 }
-export function videoPrice(env=process.env){const quote=videoQuote();return {amount:quote.totalPaise,quote,currency:VIDEO_CURRENCY,configured:paymentsConfigured(env)};}
+export function videoPrice(env=process.env,templateId){const quote=videoQuote(templateId);return {...videoOffer(templateId),amount:quote.totalPaise,quote,currency:VIDEO_CURRENCY,configured:paymentsConfigured(env)};}
 const unlocked=row=>['captured','complimentary'].includes(row?.status);
-function publicPurchase(row,env){
- const price=videoPrice(env),reserved=row&&(row.razorpay_order_id||unlocked(row));
+function publicPurchase(row,env,templateId){
+ const price=videoPrice(env,row?.template_id||templateId),reserved=row&&(row.razorpay_order_id||unlocked(row));
  const amount=reserved?row.total_paise:price.amount;
  const quote=reserved?(row.base_paise!=null?{basePaise:row.base_paise,taxBps:row.tax_bps,taxPaise:row.tax_paise,totalPaise:amount,taxLabel:'GST',currency:VIDEO_CURRENCY}:null):price.quote;
  return {...price,amount,quote,invitationId:row?.id,unlocked:unlocked(row),status:row?.status||'pending',discount:row?.status==='complimentary'?amount:0};
@@ -26,7 +26,7 @@ export function videoPaymentStore(query=db){
   get:id=>one(table+'?id=eq.'+encodeURIComponent(id)+'&select=*'),
   byOrder:id=>one(table+'?razorpay_order_id=eq.'+encodeURIComponent(id)+'&select=*'),
   byPayment:id=>one(table+'?razorpay_payment_id=eq.'+encodeURIComponent(id)+'&select=*'),
-  reserve:(id,owner,template)=>one('rpc/fmi_reserve_video_invitation_v2',{method:'POST',body:{p_id:id,p_owner:owner,p_template:template}}),
+  reserve:(id,owner,template)=>one('rpc/fmi_reserve_video_invitation_v3',{method:'POST',body:{p_id:id,p_owner:owner,p_template:template}}),
   patch:(id,patch,filter='')=>one(table+'?id=eq.'+encodeURIComponent(id)+filter,{method:'PATCH',headers:{Prefer:'return=representation'},body:patch})
  };
 }
@@ -68,10 +68,10 @@ export function videoPaymentService({store=videoPaymentStore(),env=process.env,n
   }
   return row;
  }
- async function status(owner,id,template){return publicPurchase(await recover(await owned(owner,id,template)),env);}
+ async function status(owner,id,template){return publicPurchase(await recover(await owned(owner,id,template)),env,template);}
  async function requireAccess(owner,id,template){
   const row=await owned(owner,id,template);
-  if(!unlocked(row))throw new HttpError(402,`Pay ₹${videoQuote().totalPaise/100} including GST, or apply a valid promo code to create this invitation.`);
+  if(!unlocked(row))throw new HttpError(402,`Pay ₹${publicPurchase(row,env,template).amount/100} including GST, or apply a valid promo code to create this invitation.`);
   return row;
  }
  async function promo(owner,id,template,code){
@@ -88,7 +88,7 @@ export function videoPaymentService({store=videoPaymentStore(),env=process.env,n
   if(!paymentsConfigured(env))throw new HttpError(503,'Checkout is temporarily unavailable. Your draft is saved.');
   if(!row.razorpay_order_id){
    const token=randomUUID(),time=new Date(now()).toISOString(),before=encodeURIComponent(new Date(now()-120000).toISOString());
-   const quote=videoQuote();
+   const quote=videoQuote(template);
    const claimed=await store.patch(row.id,{checkout_token:token,checkout_started_at:time,total_paise:quote.totalPaise,base_paise:quote.basePaise,tax_bps:quote.taxBps,tax_paise:quote.taxPaise},'&status=eq.pending&razorpay_order_id=is.null&or=(checkout_started_at.is.null,checkout_started_at.lt.'+before+')');
    if(!claimed)throw new HttpError(409,'Checkout is already opening. Please wait a moment and try again.');
    // A claim prevents simultaneous tabs creating separate payable orders.

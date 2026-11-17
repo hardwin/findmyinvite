@@ -141,5 +141,5 @@ export function matchesVideoSearch(template,query=''){
 
 export function filterVideoCatalog(entries,{query='',tradition='all',setting='all',collection='all',sort='default'}={}){
  const visible=entries.filter(entry=>(collection==='all'||entry.tier===collection)&&matchesVideoSearch(entry,query)&&(tradition==='all'||matchesVideoSearch(entry,tradition))&&(setting==='all'||matchesVideoSearch(entry,setting)));
- return sort==='name'?visible.sort((a,b)=>a.name.localeCompare(b.name)):visible;
+ return sort==='name'?visible.sort((a,b)=>a.name.localeCompare(b.name)):sort==='price'?visible.sort((a,b)=>(a.quote?.basePaise??a.amount)-(b.quote?.basePaise??b.amount)):visible.sort((a,b)=>Number(b.id==='wedding-bells-v1')-Number(a.id==='wedding-bells-v1'));
 }

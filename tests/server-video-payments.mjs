@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {createHmac,randomUUID} from 'node:crypto';
 import {readFile} from 'node:fs/promises';
 import {PGlite} from '@electric-sql/pglite';
+import {videoQuote} from '../shared/video-pricing.mjs';
 import {videoPaymentService,videoInvitationId,promoDigest,validVideoPromo} from '../server/video-payments.mjs';
 const owner='owner-a',template='temple-v1',code='PRIVATE-TEST-CODE';
 function fixture(){
@@ -14,7 +15,7 @@ function fixture(){
   async get(id){return copy(rows.get(id));},
   async byOrder(id){return copy([...rows.values()].find(r=>r.razorpay_order_id===id));},
   async byPayment(id){return copy([...rows.values()].find(r=>r.razorpay_payment_id===id));},
-  async reserve(id,user,tid){if(!rows.has(id))rows.set(id,{id,owner_id:user,template_id:tid,status:'pending',total_paise:58882,base_paise:49900,tax_bps:1800,tax_paise:8982});return copy(rows.get(id));},
+  async reserve(id,user,tid){if(!rows.has(id)){const q=videoQuote(tid);rows.set(id,{id,owner_id:user,template_id:tid,status:'pending',total_paise:q.totalPaise,base_paise:q.basePaise,tax_bps:q.taxBps,tax_paise:q.taxPaise});}return copy(rows.get(id));},
   async patch(id,patch,filter=''){
    const r=rows.get(id);if(!r)return null;
    if(filter.includes('status=eq.pending')&&r.status!=='pending'||filter.includes('status=neq.refunded')&&r.status==='refunded'||filter.includes('razorpay_order_id=is.null')&&r.razorpay_order_id)return null;
@@ -60,9 +61,14 @@ test('SQL enforces unique purchases and blocks direct client billing changes',as
   await pg.exec('create role anon; create role authenticated; create role service_role bypassrls; create schema auth; create table auth.users(id uuid primary key);');
   const sql=await readFile(new URL('../supabase/migrations/20261112070852_video_invitation_checkout.sql',import.meta.url),'utf8');await pg.exec(sql);
   await pg.exec(await readFile(new URL('../supabase/migrations/20261115130956_checkout_card_prices.sql',import.meta.url),'utf8'));
+  await pg.exec(await readFile(new URL('../supabase/migrations/20261117011141_wedding_bells_premium_price.sql',import.meta.url),'utf8'));
   const id=randomUUID(),user=randomUUID(),other=randomUUID();await pg.query('insert into auth.users values($1),($2)',[user,other]);
   await pg.exec('set role service_role');
   const next=randomUUID(),priced=(await pg.query('select * from public.fmi_reserve_video_invitation_v2($1,$2,$3)',[next,user,template])).rows[0];
+  const premiumId=randomUUID(),premium=(await pg.query('select * from public.fmi_reserve_video_invitation_v3($1,$2,$3)',[premiumId,user,'wedding-bells-v1'])).rows[0];
+  assert.equal(premium.base_paise,69900);assert.equal(premium.tax_paise,12582);assert.equal(premium.total_paise,82482);
+  await assert.rejects(pg.query("update public.video_invitation_orders set template_id='temple-v1' where id=$1",[premiumId]),/check constraint/);
+  assert.equal((await pg.query('select * from public.fmi_reserve_video_invitation_v3($1,$2,$3)',[next,user,template])).rows[0].total_paise,58882);
   assert.equal(priced.base_paise,49900);assert.equal(priced.tax_bps,1800);assert.equal(priced.tax_paise,8982);assert.equal(priced.total_paise,58882);
   await assert.rejects(pg.query('update public.video_invitation_orders set tax_paise=null where id=$1',[next]),/check constraint/);
   await assert.rejects(pg.query('select * from public.fmi_reserve_video_invitation_v2($1,$2,$3)',[next,other,template]),/unavailable/);
@@ -72,7 +78,7 @@ test('SQL enforces unique purchases and blocks direct client billing changes',as
   await assert.rejects(pg.query("update public.video_invitation_orders set total_paise=1 where id=$1",[id]),/check constraint/);
   await assert.rejects(pg.query("update public.video_invitation_orders set status='captured' where id=$1",[id]),/check constraint/);
   await assert.rejects(pg.query("update public.video_invitation_orders set status='complimentary',unlocked_at=now() where id=$1",[id]),/check constraint/);
-  for(const role of ['anon','authenticated']){await pg.exec('reset role; set role '+role);await assert.rejects(pg.query('select * from public.video_invitation_orders'),/permission denied/);await assert.rejects(pg.query('select * from public.fmi_reserve_video_invitation($1,$2,$3)',[id,user,template]),/permission denied/);await assert.rejects(pg.query('select * from public.fmi_reserve_video_invitation_v2($1,$2,$3)',[next,user,template]),/permission denied/);}
+  for(const role of ['anon','authenticated']){await pg.exec('reset role; set role '+role);await assert.rejects(pg.query('select * from public.fmi_reserve_video_invitation_v3($1,$2,$3)',[premiumId,user,'wedding-bells-v1']),/permission denied/);await assert.rejects(pg.query('select * from public.video_invitation_orders'),/permission denied/);await assert.rejects(pg.query('select * from public.fmi_reserve_video_invitation($1,$2,$3)',[id,user,template]),/permission denied/);await assert.rejects(pg.query('select * from public.fmi_reserve_video_invitation_v2($1,$2,$3)',[next,user,template]),/permission denied/);}
  }finally{await pg.close();}
 });
 test('HTTP render endpoint rejects invented paid flags and unauthenticated requests',async()=>{
@@ -80,4 +86,22 @@ test('HTTP render endpoint rejects invented paid flags and unauthenticated reque
  const {startHarness}=await import('./video-harness.mjs');const harness=await startHarness();
  try{for(const token of ['video-qa-owner','invalid']){const response=await fetch(harness.origin+'/api/video-personalise?action=render',{method:'POST',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify({invitationId:randomUUID(),templateId:template,paid:true,unlocked:true,amount:0,content:{}})});assert.equal(response.status,token==='invalid'?401:402);}}
  finally{await harness.close();for(const key of Object.keys(process.env))if(!(key in before))delete process.env[key];Object.assign(process.env,before);}
+});
+
+test('Wedding Bells advertises and charges ₹699 plus GST, with no change to standard videos',async()=>{
+ const f=fixture(),id=randomUUID(),tid='wedding-bells-v1';
+ assert.equal((await f.service.status(owner,id,tid)).amount,82482);
+ const order=await f.service.order(owner,id,tid);assert.equal(order.amount,82482);assert.equal(order.quote.basePaise,69900);assert.equal(order.quote.taxPaise,12582);assert.equal(f.created[0].amount,82482);
+ const p=f.captured(order,{amount:82482});assert.equal((await f.service.verify(owner,id,tid,f.response(p))).unlocked,true);
+ assert.equal((await f.service.status(owner,randomUUID(),template)).amount,58882);
+});
+test('Wedding Bells keeps an existing gateway order and captured price at ₹499',async()=>{
+ const f=fixture(),id=randomUUID(),tid='wedding-bells-v1';f.rows.set(id,{id,owner_id:owner,template_id:tid,status:'pending',total_paise:58882,base_paise:49900,tax_bps:1800,tax_paise:8982,razorpay_order_id:'order_existing'});
+ const order=await f.service.order(owner,id,tid);assert.equal(order.amount,58882);assert.equal(f.created.length,0);
+ const p=f.captured(order);await f.service.verify(owner,id,tid,f.response(p));assert.equal((await f.service.status(owner,id,tid)).amount,58882);
+});
+test('Wedding Bells updates an unreserved draft price and grants a correctly priced promo',async()=>{
+ const f=fixture(),id=randomUUID(),tid='wedding-bells-v1';f.rows.set(id,{id,owner_id:owner,template_id:tid,status:'pending',total_paise:58882,base_paise:49900,tax_bps:1800,tax_paise:8982});
+ assert.equal((await f.service.order(owner,id,tid)).amount,82482);
+ assert.equal((await f.service.promo(owner,randomUUID(),tid,code)).discount,82482);
 });

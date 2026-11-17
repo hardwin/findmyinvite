@@ -26,7 +26,7 @@ export class TrackedFilmCompositor {
   if(this.disposed)return;
   this.data=data;this.motionTracks=new Map(Object.entries(data.motionTracks||{}).map(([id,track])=>[id,new Map(track.rows.map(row=>[row.frame,row.corners]))]));for(const s of data.scenes)s.trackByFrame=new Map(s.track.map(k=>[k.frame,k]));
   await Promise.all(Object.entries(master.assets).filter(([,a])=>a.kind==='font').map(async([id,a])=>{const font=new FontFace('WeddingBells-'+id,`url(${resolveAsset(a.path)})`);await font.load();if(this.disposed)return;document.fonts.add(font);this.fonts.push(font);}));
-  const loadMovie=async asset=>{const v=document.createElement('video');this.videos.push(v);v.crossOrigin='anonymous';v.playsInline=true;v.muted=true;v.preload='auto';await new Promise((resolve,reject)=>{v.onloadeddata=resolve;v.onerror=()=>reject(Error('The invitation film could not load.'));v.src=resolveAsset(asset.path);v.load();});return v;};
+  const loadMovie=async asset=>{const v=document.createElement('video');this.videos.push(v);v.crossOrigin='anonymous';v.playsInline=true;v.defaultMuted=true;v.muted=true;v.preload='auto';await new Promise((resolve,reject)=>{v.onloadeddata=resolve;v.onerror=()=>reject(Error('The invitation film could not load.'));v.src=resolveAsset(asset.path);v.load();});return v;};
   if(!externalBackground)[this.video,this.restoration]=await Promise.all([loadMovie(master.assets.background),loadMovie(master.assets.restoration)]);
   if(this.disposed){this.disposeMedia();return;}
   this.renderer=new THREE.WebGLRenderer({canvas:this.target,alpha:false,antialias:true,preserveDrawingBuffer:true});this.renderer.setSize(W,H,false);this.renderer.setPixelRatio(1);this.renderer.outputColorSpace=THREE.SRGBColorSpace;
@@ -95,7 +95,16 @@ export class TrackedFilmCompositor {
   }
   this.renderer.render(this.scene,this.camera);
  }
- async setPlayback(playing,frame=0){if(!this.loaded)return;this.playing=false;this.videos.forEach(v=>v.pause());await Promise.all(this.videos.map(v=>seek(v,frame/this.master.output.fps)));if(playing){try{await Promise.all(this.videos.map(v=>v.play()));this.playing=true;}catch(e){this.videos.forEach(v=>v.pause());throw e;}}}
+ async setPlayback(playing,frame=0){
+  if(!this.loaded||this.disposed)return;
+  const revision=this.playbackRevision=(this.playbackRevision||0)+1;
+  this.playing=false;this.videos.forEach(v=>v.pause());
+  if(!playing)return;
+  await Promise.all(this.videos.map(v=>seek(v,frame/this.master.output.fps)));
+  if(this.disposed||revision!==this.playbackRevision)return;
+  try{await Promise.all(this.videos.map(v=>v.play()));if(!this.disposed&&revision===this.playbackRevision)this.playing=true;}
+  catch(e){if(revision===this.playbackRevision){this.videos.forEach(v=>v.pause());throw e;}}
+ }
  validateText(){if(!this.loaded)throw Error('The invitation is not ready.');}
  disposeMedia(){for(const v of this.videos){v.pause();v.removeAttribute('src');v.load();}}
  dispose(){this.disposed=true;this.playing=false;this.disposeMedia();for(const m of this.meshes){m.geometry.dispose();m.material.dispose();}for(const l of this.layers||[]){l.texture.dispose();l.trialTexture?.dispose();}this.baseTexture?.dispose();this.packedTexture?.dispose();for(const f of this.fonts)document.fonts.delete(f);this.renderer?.dispose();}

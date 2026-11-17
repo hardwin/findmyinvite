@@ -39,7 +39,7 @@
 .vp-player>span { flex: 1; min-width: 0; font-size: 13px; font-weight: 600; }
 .vp-player small { display: block; color: var(--vp-muted); margin-top: 3px; font-size: 12px; font-weight: 400; }
 .vp-player label { display: flex; gap: 5px; align-items: center; font-size: 12px; white-space: nowrap; }
-.vp-player button { display: grid; place-items: center; flex-shrink: 0; width: 44px; height: 44px; border: 1px solid var(--vp-border); border-radius: 50%; background: white; color: var(--vp-accent); }
+.vp-player button { padding: 0; display: grid; place-items: center; flex-shrink: 0; width: 44px; height: 44px; border: 1px solid var(--vp-border); border-radius: 50%; background: white; color: var(--vp-accent); }
 .vp-player button:hover:not(:disabled) { background: var(--vp-tint); border-color: var(--vp-accent); }
 .vp-scrub { width: 100%; margin: 0 0 12px; cursor: pointer; }
 .vp-scenes { display: flex; gap: 4px; flex-wrap: wrap; }
@@ -260,7 +260,7 @@
  .vp-action-buttons>.vp-primary { max-width: calc(100% - 65px); }
  .vp-pip-controls { height: auto; }
  .vp-pip-controls button { min-width: 44px; background: transparent; color: white; }
- .vp-preview-expanded .vp-player>button { display: inline-flex; }
+ .vp-preview-expanded .vp-player>button { display: grid; }
 }
 /* One viewport-sized editor; only the fields scroll. Keyboard movement does not
    add spacers to the document or remount the composition canvas. */
