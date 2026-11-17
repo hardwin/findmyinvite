@@ -60,16 +60,17 @@ export function CharacterPanel({onAction,onStatus,onUnlock,paymentBusy,invitatio
  const result=slots.map(latest).find(j=>j?.status==='review'&&!j.approved&&(j.slot!=='couple'||!state.coupleNeedsUpdate));
  const needsCouple=individualsReady&&!running&&(!latest('couple')||state.coupleNeedsUpdate)&&!defaultSlot('couple');
  useEffect(()=>{if(!loaded||!unlocked||busy||error||loadError)return;if(result)void run(async()=>{await approve(result);await refresh();},'Adding your characters…');else if(needsCouple)void run(()=>submit('couple'),'Creating your couple…');},[loaded,unlocked,busy,error,loadError,result?.id,needsCouple]);
- const progress=busy?message:running?'Creating your characters…':result?'Adding your characters…':!loaded&&draftSaved&&!loadError?'Loading photos…':'';
+ const progress=busy?message:loadError?'':result?'Adding your characters…':!loaded&&draftSaved?'Loading photos…':'';
  useEffect(()=>{onStatus({ready:complete,busy,message:progress});},[complete,busy,progress,onStatus]);
  useEffect(()=>()=>onStatus({ready:false,busy:false}),[onStatus]);
  const focusPhotos=()=>{const slot:Slot=references.groom?.id?'bride':'groom';const button=document.getElementById('choose-'+slot);button?.scrollIntoView({block:'center'});button?.focus({preventScroll:true});};
  const failed=state.jobs.find(j=>j.status==='failed'&&!defaultSlot(j.slot as Slot)&&latest(j.slot as Slot)?.id===j.id);
  const needed=(['groom','bride'] as Slot[]).filter(slot=>!defaultSlot(slot)&&!latest(slot));
  let action:EditorAction|null=null;
- if(busy||running||result||paymentBusy)action={label:'Continue',reason:progress||'Checking payment…',disabled:true,run:()=>{}};
+ if(busy||paymentBusy)action={label:'Continue',reason:progress||'Checking payment…',disabled:true,run:()=>{}};
  else if(error)action={label:'Try again',reason:error,run:()=>{setError('');setAttempt(n=>n+1);}};
  else if(loadError)action={label:'Try again',reason:'Your photos could not load.',run:()=>{setLoadError('');setAttempt(n=>n+1);}};
+ else if(running||result)action={label:'Continue',reason:running?'Creating your characters. Your photos and payment are saved.':'Adding your characters…',disabled:true,run:()=>{}};
  else if(!complete&&!referencesReady)action={label:'Add photos',reason:'Add separate photos or one couple photo.',run:focusPhotos};
  else if(!unlocked)action={label:`Pay ₹${amount/100}`,reason:'',run:onUnlock};
  else if(!loaded)action={label:'Continue',reason:'Loading your photos…',disabled:draftSaved,run:()=>run(save)};
@@ -83,6 +84,7 @@ export function CharacterPanel({onAction,onStatus,onUnlock,paymentBusy,invitatio
  useEditorIssue('characters',error||loadError||(failed?.error||''));
  async function remove(slot:Slot){const next={...references,[slot]:{id:'',identity:'single' as const,useDefault:true}};if(slot!=='couple')next.couple={...references.couple,id:references.couple?.id||'',identity:references.couple?.identity||'auto',useDefault:true};await saveReferences(next);}
  return <section className="vp-characters" aria-label="Personal photos">
+  {running&&!loadError&&<p className="vp-photo-hint" role="status">Creating your characters. You can leave this page and return to the same invitation. Your photos and payment are saved.</p>}
   {!complete&&<p className="vp-photo-hint">Add separate photos or one couple photo.</p>}
   <div className="vp-photo-list">{slots.map(slot=>{
    const ref=references[slot],job=latest(slot),ready=job?.approved&&!defaultSlot(slot),source=!!(ref?.id||ref?.localId),pending=source&&!ref?.id;

@@ -123,6 +123,14 @@
       "destination": "/api/template-share"
     },
     {
+      "source": "/template-preview",
+      "destination": "/template-preview.html"
+    },
+    {
+      "source": "/template-preview/",
+      "destination": "/template-preview.html"
+    },
+    {
       "source": "/share-images/:slug/:revision.jpg",
       "destination": "/api/share-image?slug=:slug&v=:revision"
     },

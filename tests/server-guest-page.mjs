@@ -108,7 +108,13 @@ test('SPA catch-all stays after the guest-page rewrite and client still mounts T
  assert.match(app,/<TemplateGuest slug=\{path\.slice\(1\)}/);
  const vercel=JSON.parse(await readFile(new URL('../vercel.json',import.meta.url),'utf8'));
  assert.equal(vercel.proxy,undefined);
- const routes=vercel.rewrites.filter(rule=>!rule.destination.startsWith('/api/template-share')&&!rule.source.startsWith('/share-images/')&&rule.source!=='/proof/:token'&&!rule.destination.startsWith('/api/owner-blog')&&rule.source!=='/assets/workspace/:id'&&rule.source!=='/llms.txt'&&rule.source!=='/api/face-swap/file.jpg');
+ const routes=vercel.rewrites.filter(rule=>['/:slug([a-z0-9][a-z0-9-]{2,47})','/invitations','/invitations/:slug'].includes(rule.source)||rule.destination==='/index.html');
+ const guestIndex=vercel.rewrites.findIndex(rule=>rule.destination==='/api/guest-page?slug=:slug');
+ for(const source of ['/template-preview','/template-preview/']){
+  const index=vercel.rewrites.findIndex(rule=>rule.source===source);
+  assert.ok(index>=0&&index<guestIndex,'Static preview route precedes the dynamic guest gate');
+  assert.equal(vercel.rewrites[index].destination,'/template-preview.html');
+ }
  assert.equal(vercel.rewrites.find(rule=>rule.source==='/assets/workspace/:id')?.destination,'/api/workspace?action=asset&id=:id');
  assert.equal(vercel.rewrites.find(rule=>rule.source==='/llms.txt')?.destination,'/llm.txt');
  const destinations=routes.map(rule=>rule.destination);

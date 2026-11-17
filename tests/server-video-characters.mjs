@@ -1,5 +1,5 @@
 import test from 'node:test';import assert from 'node:assert/strict';import {readFile} from 'node:fs/promises';import {randomUUID,createHmac} from 'node:crypto';import {PGlite} from '@electric-sql/pglite';
-import {verifyCharacterWebhook,characterInput,characterPrompt,CHARACTER_MODEL} from '../server/video-character-provider.mjs';
+import {verifyCharacterWebhook,characterInput,characterPrompt,CHARACTER_MODEL,CHARACTER_PROMPT_REVISION,CHARACTER_PROMPT_CANDIDATE} from '../server/video-character-provider.mjs';
 import {alignCharacter,characterBounds} from '../server/video-character-images.mjs';
 import {characterService} from '../server/video-characters.mjs';
 test('an unapproved couple from an older individual revision offers its included refresh',async()=>{const id=randomUUID(),owner=randomUUID(),jobs=[{id:'g2',slot:'groom',approved_current:true,status:'approved'},{id:'b1',slot:'bride',approved_current:true,status:'approved'},{id:'c1',slot:'couple',approved_current:false,status:'review',basis:{groom:'g1',bride:'b1'}}];const service=characterService({store:{},query:async path=>path.startsWith('personalization_drafts')?[{id,owner_id:owner}]:jobs});assert.equal((await service.list(owner,id)).coupleNeedsUpdate,true);jobs[2].basis.groom='g2';assert.equal((await service.list(owner,id)).coupleNeedsUpdate,false);});
@@ -25,5 +25,33 @@ test('durable SQL enforces purchase, one redo, free failures, independent slots 
 });
 
 test('couple references identify the requested role without a customer left/right question',()=>{assert.match(characterPrompt('groom','auto'),/Identify the groom/);assert.match(characterPrompt('bride','auto'),/Identify the bride/);assert.match(characterPrompt('bride','left'),/person on the left/);assert.match(characterPrompt('couple'),/SECOND image is the approved illustrated groom/);assert.match(characterPrompt('couple'),/THIRD image is the approved illustrated bride/);assert.doesNotMatch(characterPrompt('couple'),/FOURTH/);});
+
+test('customer likeness governs face, hair and proportions instead of the template character',()=>{
+ for(const slot of ['groom','bride','couple']){
+  const prompt=characterPrompt(slot,'single','',CHARACTER_PROMPT_CANDIDATE);
+  assert.ok(prompt.includes('Preserve the exact face details and face shape and facial hairs and hairstyle, Match the body proportion according to the face size and shape'));
+  assert.match(prompt,/Identity and recognizable likeness take priority/);
+  assert.doesNotMatch(prompt,/large expressive head|large rounded eyes|soft rounded facial geometry|Keep its head size|Leave everything below the jaw unchanged|Keep.*hair arrangement/);
+ }
+});
+
+test('the visually approved shared prompt is the default, while historical jobs keep their recorded prompt',()=>{
+ assert.equal(CHARACTER_PROMPT_REVISION,CHARACTER_PROMPT_CANDIDATE);
+ assert.match(characterPrompt('groom','single','','temple-identity-v4'),/large expressive head/);
+ assert.equal(characterPrompt('groom'),characterPrompt('groom','single','',CHARACTER_PROMPT_CANDIDATE));
+ assert.match(characterPrompt('groom','single','',CHARACTER_PROMPT_CANDIDATE),/recognizable likeness take priority/);
+ assert.throws(()=>characterPrompt('groom','single','','unknown-revision'),/Unsupported/);
+});
+
+test('visually approved shared prompt results are available to the existing owner approval flow',async()=>{
+ const owner=randomUUID(),invitation=randomUUID(),id=randomUUID(),old={id:randomUUID(),slot:'groom',status:'approved',approved_current:true,prompt_revision:CHARACTER_PROMPT_REVISION},candidate={id,slot:'groom',status:'review',kind:'initial',approved_current:false,prompt_revision:CHARACTER_PROMPT_CANDIDATE};let approvals=0;
+ const service=characterService({store:{},query:async(path,options)=>{
+  if(path.startsWith('personalization_drafts'))return [{id:invitation,owner_id:owner}];
+  if(path.startsWith('rpc/')){approvals++;return [];}
+  if(path.includes('?id=eq.'))return [{...candidate,invitation_id:invitation,owner_id:owner}];
+  return [old,candidate];
+ }});
+ const listed=await service.list(owner,invitation);assert.deepEqual(listed.jobs.map(j=>j.id),[old.id,id]);assert.equal(listed.allowances.groom.redoUsed,false);
+});
 
 test('a delayed worker cannot reacquire a character that has already finished',async()=>{const id=randomUUID(),owner=randomUUID(),invitation=randomUUID();let leaseFilter='';const service=characterService({store:{},provider:{get:()=>{throw Error('Finished work must not be processed again');}},query:async(path,options)=>{if(path.startsWith('personalization_drafts'))return [{id:invitation,owner_id:owner}];if(options?.method==='PATCH'){leaseFilter=path;return [];}return [{id,owner_id:owner,invitation_id:invitation,status:'preparing'}];}});await service.process(id);assert.match(leaseFilter,/status=in\.\(queued,submitting,processing,preparing\)/);});

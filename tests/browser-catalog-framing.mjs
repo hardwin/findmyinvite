@@ -18,7 +18,7 @@ await context.route('**/*',route=>{
  const url=new URL(route.request().url());
  if(url.origin!==origin)return route.abort();
  if(!url.pathname.startsWith('/api/'))return route.continue();
- if(url.pathname==='/api/templates'&&url.searchParams.get('action')==='version')return route.fulfill({json:{version:versions.find(version=>version.id===url.searchParams.get('id'))}});
+ if(url.pathname==='/api/templates'&&['version','preview'].includes(url.searchParams.get('action')))return route.fulfill({json:{version:versions.find(version=>version.id===url.searchParams.get('id'))}});
  if(url.pathname==='/api/templates'&&url.searchParams.get('action')==='public')return route.fulfill({json:{templates:catalog,basePaise:19900}});
  return route.fulfill({json:{templates:[],drafts:[],invitations:[]}});
 });

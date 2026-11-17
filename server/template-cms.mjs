@@ -15,4 +15,14 @@ export function safeVersion(v){const {id,template_id,renderer,field_schema,defau
 export async function websiteOffer(){const rows=await db('website_offer?id=eq.website&select=tax_bps,tax_label');if(!rows[0])throw new HttpError(503,'Tax configuration is pending.');return {...websiteQuote(rows[0].tax_bps),taxLabel:rows[0].tax_label};}
 
 // Selection links may be superseded; existing invitations still use version(id) exactly.
-export async function catalogVersion(id){if(!/^[a-f0-9-]{36}$/.test(id||''))throw new HttpError(400,'Invalid template version.');const requested=(await db('template_versions?id=eq.'+id+'&select=id,template_id,approved_at&limit=1'))[0];if(!requested?.approved_at)throw new HttpError(404,'Template unavailable.');const catalog=(await db('template_catalog?id=eq.'+encodeURIComponent(requested.template_id)+'&isactive=eq.true&published=eq.true&select=id,current_version_id'))[0];if(!catalog?.current_version_id)throw new HttpError(404,'Template unavailable.');const current=await version(catalog.current_version_id);if(!current.approved_at||current.template_id!==requested.template_id)throw new HttpError(404,'Template unavailable.');return current;}
+export async function catalogVersion(id,query=db){
+ if(!/^[a-f0-9-]{36}$/.test(id||''))throw new HttpError(400,'Invalid template version.');
+ const requested=(await query('template_versions?id=eq.'+id+'&select=*&limit=1'))[0];
+ if(!requested?.approved_at)throw new HttpError(404,'Template unavailable.');
+ const catalog=(await query('template_catalog?id=eq.'+encodeURIComponent(requested.template_id)+'&isactive=eq.true&published=eq.true&select=id,current_version_id'))[0];
+ if(!catalog?.current_version_id)throw new HttpError(404,'Template unavailable.');
+ // The catalogue normally links to the current version, which we already read.
+ const current=catalog.current_version_id===id?requested:(await query('template_versions?id=eq.'+catalog.current_version_id+'&select=*&limit=1'))[0];
+ if(!current?.approved_at||current.template_id!==requested.template_id||!RENDERERS.includes(current.renderer))throw new HttpError(404,'Template unavailable.');
+ return current;
+}

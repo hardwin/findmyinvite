@@ -9,6 +9,7 @@ import {Download,Pencil,Trash2} from 'lucide-react';
 import {TransferProgress} from '../video/TransferProgress';
 import {relativeEdit,editedTime,invitationNames} from '../../shared/draft-display.mjs';
 import {videoDefinition} from '../../shared/video-personalization.mjs';
+import {mergeDraftForList} from '../../shared/draft-reconcile.mjs';
 import './my-invitations.css';
 export default function MyInvitations(){
  const websites=useCatalog(),videos=useVideoCatalog();
@@ -17,7 +18,7 @@ export default function MyInvitations(){
  const [owner,setOwner]=useState(readSession()?.user.id||'guest'),[items,setItems]=useState<DraftRecord[]>([]),[filter,setFilter]=useState('all'),[error,setError]=useState(''),[loading,setLoading]=useState(true),[busy,setBusy]=useState('');
  async function load(){const active=()=>owner===(readSession()?.user.id||'guest');setLoading(true);setError('');try{importLegacyDrafts(owner);const local=localDrafts(owner);setItems(local);if(owner!=='guest'){
   for(const d of local.filter(d=>d.dirty&&!d.conflict)){try{if(!active())return;const r=await templateApi<{draft:DraftRecord}>('/api/drafts?action=save',{id:d.id,kind:d.kind,templateId:d.templateId,payload:d.payload,revision:d.revision});if(!active())return;writeDraft({...r.draft,owner,dirty:false});}catch(e){if(active()){if((e as Error).message==='This invitation has been deleted.')await removeDraft(d.id);else setError((e as Error).message);}}}
-  const listing=await templateApi<{drafts:DraftRecord[];deleted?:string[]}>('/api/drafts');if(!active())return;for(const id of listing.deleted||[])await removeDraft(id);const remote=listing.drafts.map(d=>({...d,owner,dirty:false}));const merged=new Map(remote.map(d=>[d.id,d]));for(const d of localDrafts(owner)){const r=merged.get(d.id);if(!r||d.dirty)merged.set(d.id,{...r,...d});}if(active())setItems([...merged.values()]);
+  const listing=await templateApi<{drafts:DraftRecord[];deleted?:string[]}>('/api/drafts');if(!active())return;for(const id of listing.deleted||[])await removeDraft(id);const remote=listing.drafts.map(d=>({...d,owner,dirty:false}));const merged=new Map(remote.map(d=>[d.id,d]));for(const d of localDrafts(owner)){const r=merged.get(d.id);if(!r||d.dirty)merged.set(d.id,mergeDraftForList(r,d));}if(active())setItems([...merged.values()]);
  }}catch(e){setError((e as Error).message);}finally{if(active())setLoading(false);}}
  useEffect(()=>{const auth=()=>{setItems([]);setOwner(readSession()?.user.id||'guest');};window.addEventListener('fmi-auth-changed',auth);return()=>window.removeEventListener('fmi-auth-changed',auth);},[]);
  useEffect(()=>{void load();},[owner]);
