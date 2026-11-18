@@ -1,0 +1,131 @@
+{
+  "tempo_bpm": 75,
+  "time_signature": "4/4",
+  "duration_seconds": 48,
+  "source_note": "Derived from Maayapoove lyrical template onset density (~150 peaks/min \u2248 8th notes at 75 BPM). Reference audio NOT included (copyright). This beatmap drives text reveals and whip transitions.",
+  "beats": [
+    0.0,
+    0.8,
+    1.6,
+    2.4,
+    3.2,
+    4.0,
+    4.8,
+    5.6,
+    6.4,
+    7.2,
+    8.0,
+    8.8,
+    9.6,
+    10.4,
+    11.2,
+    12.0,
+    12.8,
+    13.6,
+    14.4,
+    15.2,
+    16.0,
+    16.8,
+    17.6,
+    18.4,
+    19.2,
+    20.0,
+    20.8,
+    21.6,
+    22.4,
+    23.2,
+    24.0,
+    24.8,
+    25.6,
+    26.4,
+    27.2,
+    28.0,
+    28.8,
+    29.6,
+    30.4,
+    31.2,
+    32.0,
+    32.8,
+    33.6,
+    34.4,
+    35.2,
+    36.0,
+    36.8,
+    37.6,
+    38.4,
+    39.2,
+    40.0,
+    40.8,
+    41.6,
+    42.4,
+    43.2,
+    44.0,
+    44.8,
+    45.6,
+    46.4,
+    47.2,
+    48.0
+  ],
+  "section_markers": [
+    {
+      "t": 0,
+      "id": "open",
+      "label": "Paper tear open + church watermark"
+    },
+    {
+      "t": 4,
+      "id": "blessing",
+      "label": "Devotional title"
+    },
+    {
+      "t": 8,
+      "id": "invite",
+      "label": "The Wedding of"
+    },
+    {
+      "t": 12,
+      "id": "groom",
+      "label": "Groom card"
+    },
+    {
+      "t": 16,
+      "id": "bride",
+      "label": "Bride card"
+    },
+    {
+      "t": 20,
+      "id": "parents",
+      "label": "Parents blessing"
+    },
+    {
+      "t": 24,
+      "id": "ceremony",
+      "label": "Holy Matrimony"
+    },
+    {
+      "t": 28,
+      "id": "venue",
+      "label": "Church venue"
+    },
+    {
+      "t": 32,
+      "id": "reception",
+      "label": "Reception"
+    },
+    {
+      "t": 36,
+      "id": "hosts",
+      "label": "Invited By"
+    },
+    {
+      "t": 40,
+      "id": "couple",
+      "label": "Couple + Save the Date"
+    },
+    {
+      "t": 44,
+      "id": "finale",
+      "label": "Hands / cross / end card"
+    }
+  ]
+}
