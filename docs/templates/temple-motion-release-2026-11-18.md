@@ -51,6 +51,14 @@ render and decode before enabling v2. The storefront clip also passes full
 decoding. Version binding, legacy assets, renderer behavior, payments/music,
 catalog discovery and sharing checks accompany the release.
 
+The production worker is `snap_IVVPNdzVCoORQTJEHsHBYPKUhx9f`, cloned from the
+fully qualified worker and independently confirmed to have no expiration.
+The connector rejects explicit expiration values because of an overlapping
+schema union. A one-time protected preview build used the project's existing
+OIDC identity and the Sandbox SDK's `snapshot({ expiration: 0 })` instead;
+it created no public API endpoint and changed no production application settings.
+Qualification deployment: `dpl_9tp3wcKc7nofruR6KxtfQcUf5saA`.
+
 Rollback is to the prior production deployment `dpl_AAeEdnYcpimWBLzvkxvSsNqEwwtT`
 (`8db1452677d859e0c17ccfb35f14e59cf3d98c22`). The original worker snapshot
 `snap_SgyS7NdODsft7v8UshRQHbxkqwlr`, v1 master and original media remain intact.

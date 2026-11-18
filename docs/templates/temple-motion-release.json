@@ -3,7 +3,7 @@
   "masterVersion": 2,
   "rendererVersion": "temple-five-layer-v4",
   "approvedReviewCommit": "281b7172",
-  "releaseStatus": "qualified-awaiting-worker-retention-and-deployment",
+  "releaseStatus": "qualified-for-production",
   "appearanceSha256": "94e0ad67cc30f4f9f0e760f0c38919cea344d21e935d7a80c102e95374f3d383",
   "approvedCharacterTrajectoriesSha256": "e8cbdae31d5c6530ed706825fb391fbdb068dee29c1aa2fbc6ce8f0220960657",
   "cloud": {
@@ -51,9 +51,11 @@
   "worker": {
     "candidateSnapshotId": "snap_VERAOkSjJprPD5HpJo5fK4Dbyl9i",
     "candidateExpiresAt": 1797582810053,
-    "productionSnapshotId": null,
+    "productionSnapshotId": "snap_IVVPNdzVCoORQTJEHsHBYPKUhx9f",
     "environmentKey": "VIDEO_TEMPLE_SNAPSHOT_ID",
-    "retentionVerified": false
+    "retentionVerified": true,
+    "expiresAt": null,
+    "qualificationDeploymentId": "dpl_9tp3wcKc7nofruR6KxtfQcUf5saA"
   },
   "verification": {
     "finalVideoRegressionsPassed": 161,
