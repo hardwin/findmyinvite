@@ -1,5 +1,10 @@
 import sharp from 'sharp';
 import {prepareVideoPhoto} from './video-personalise-cloud.mjs';
+export async function coupleIdentityReference(groom,bride){
+ const background={r:0,g:0,b:0,alpha:0};
+ const panels=await Promise.all([groom,bride].map(bytes=>sharp(bytes,{limitInputPixels:16000000}).rotate().resize(720,1280,{fit:'contain',background}).png().toBuffer()));
+ return sharp({create:{width:1440,height:1280,channels:4,background}}).composite(panels.map((input,i)=>({input,left:i*720,top:0}))).png().toBuffer();
+}
 export async function characterBounds(bytes){
  const {data,info}=await sharp(bytes,{limitInputPixels:16000000}).ensureAlpha().raw().toBuffer({resolveWithObject:true});
  let left=info.width,top=info.height,right=-1,bottom=-1,clear=0,solid=0;

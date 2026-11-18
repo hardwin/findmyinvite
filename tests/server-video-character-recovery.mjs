@@ -1,8 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {randomUUID} from 'node:crypto';
+import {readFile} from 'node:fs/promises';
+import sharp from 'sharp';
+import {hash} from '../server/video-personalise-store.mjs';
 import {characterService,CHARACTER_STALL_MS} from '../server/video-characters.mjs';
-import {replicateProvider,CHARACTER_PROMPT_CANDIDATE} from '../server/video-character-provider.mjs';
+import {replicateProvider,CHARACTER_PROMPT_CANDIDATE,CHARACTER_PROMPT_REVISION} from '../server/video-character-provider.mjs';
 
 function fixture(overrides={}){
  let now=Date.parse('2026-11-17T13:00:00Z');
@@ -15,9 +18,28 @@ function fixture(overrides={}){
   if(options?.method==='PATCH')row={...row,...options.body};
   return [{...row}];
  };
- const store={bytes:async key=>{if(!files.has(key))throw Error('Missing saved image');return files.get(key);},putBytes:async(key,bytes)=>files.set(key,bytes),save:async(key,value)=>media.set(key,value)};
- return {id,owner,files,media,get row(){return row;},advance:ms=>now+=ms,service:options=>characterService({query,store,clock:()=>now,align:async bytes=>({bytes,alignment:{verified:true}}),...options})};
+ const store={read:async key=>({value:media.get(key)}),bytes:async key=>{if(!files.has(key))throw Error('Missing saved image');return files.get(key);},putBytes:async(key,bytes)=>files.set(key,bytes),save:async(key,value)=>media.set(key,value)};
+ const reference=(bytes,identity)=>{const id=randomUUID(),key='references/'+id+'.png';files.set(key,bytes);media.set('media/'+id+'.json',{id,key,owner,contentType:'image/png',durable:true,expiresAt:null});row.reference_data.push({id,sha256:hash(bytes),identity});};
+ return {id,owner,files,media,reference,get row(){return row;},advance:ms=>now+=ms,service:options=>characterService({query,store,clock:()=>now,align:async bytes=>({bytes,alignment:{verified:true}}),...options})};
 }
+
+test('new individual requests send the identity first and artwork second with transparent 2:3 output',async()=>{
+ for(const slot of ['groom','bride']){
+  const f=fixture({slot,status:'queued',provider_id:null,attempts:0,prompt_revision:CHARACTER_PROMPT_REVISION,reference_data:[]}),photo=await sharp({create:{width:16,height:24,channels:4,background:'red'}}).png().toBuffer();f.reference(photo,'single');let sent;
+  await f.service({provider:{create:async input=>{sent=input;return {id:'new-'+slot,status:'processing'};}}}).process(f.id);
+  assert.equal(f.row.status,'processing');assert.equal(sent.input_images.length,2);assert.deepEqual(Buffer.from(sent.input_images[0].split(',')[1],'base64'),photo);assert.deepEqual(Buffer.from(sent.input_images[1].split(',')[1],'base64'),await readFile('public/assets/video-masters/temple-v1/'+slot+'.png'));
+  assert.equal(sent.aspect_ratio,'2:3');assert.equal(sent.background,'transparent');assert.equal(sent.output_format,'png');assert.match(sent.prompt,/EDIT PICTURE 2/);assert.ok(sent.prompt.includes('Tracking reference '+f.id+'-1'));
+ }
+});
+
+test('new couple requests combine groom left and bride right as one identity picture, without changing the artwork',async()=>{
+ const f=fixture({slot:'couple',status:'queued',provider_id:null,attempts:0,prompt_revision:CHARACTER_PROMPT_REVISION,reference_data:[]});
+ for(const [identity,background]of [['groom','red'],['bride','blue']])f.reference(await sharp({create:{width:72,height:128,channels:4,background}}).png().toBuffer(),identity);
+ let sent;await f.service({provider:{create:async input=>{sent=input;return {id:'new-couple',status:'processing'};}}}).process(f.id);
+ assert.equal(f.row.status,'processing');assert.equal(sent.input_images.length,2);const combined=Buffer.from(sent.input_images[0].split(',')[1],'base64'),{data,info}=await sharp(combined).ensureAlpha().raw().toBuffer({resolveWithObject:true});assert.equal(info.width,1440);assert.equal(info.height,1280);
+ const pixel=x=>[...data.subarray((640*info.width+x)*4,(640*info.width+x)*4+4)];assert.deepEqual(pixel(360),[255,0,0,255]);assert.deepEqual(pixel(1080),[0,0,255,255]);
+ assert.deepEqual(Buffer.from(sent.input_images[1].split(',')[1],'base64'),await readFile('public/assets/video-masters/temple-v1/closing.png'));assert.match(sent.prompt,/approved groom on the left and approved bride on the right/);assert.equal(sent.aspect_ratio,'2:3');
+});
 
 test('repeated provider outages have a deadline; retries resume the known prediction without another charge',async()=>{
  const f=fixture();let creates=0;const provider={get:async()=>{throw Object.assign(Error('Unavailable'),{providerStatus:503});},create:async()=>creates++};

@@ -2,9 +2,10 @@ import test from 'node:test';import assert from 'node:assert/strict';import {rea
 import {verifyCharacterWebhook,characterInput,characterPrompt,CHARACTER_MODEL,CHARACTER_PROMPT_REVISION,CHARACTER_PROMPT_CANDIDATE} from '../server/video-character-provider.mjs';
 import {alignCharacter,characterBounds} from '../server/video-character-images.mjs';
 import {characterService} from '../server/video-characters.mjs';
+import {PERSONAL_CHARACTER_BASE_PROMPTS} from '../shared/personal-character-prompt.mjs';
 test('an unapproved couple from an older individual revision offers its included refresh',async()=>{const id=randomUUID(),owner=randomUUID(),jobs=[{id:'g2',slot:'groom',approved_current:true,status:'approved'},{id:'b1',slot:'bride',approved_current:true,status:'approved'},{id:'c1',slot:'couple',approved_current:false,status:'review',basis:{groom:'g1',bride:'b1'}}];const service=characterService({store:{},query:async path=>path.startsWith('personalization_drafts')?[{id,owner_id:owner}]:jobs});assert.equal((await service.list(owner,id)).coupleNeedsUpdate,true);jobs[2].basis.groom='g2';assert.equal((await service.list(owner,id)).coupleNeedsUpdate,false);});
 test('Flare inputs request the exact model, transparent canvas and focused edit; forged callbacks fail',()=>{
- assert.equal(CHARACTER_MODEL,'openai/gpt-image-2.6-flare');assert.deepEqual(characterInput('test',['a']).input_images,['a']);assert.equal(characterInput('',[]).background,'transparent');assert.equal(characterInput('',[]).aspect_ratio,'9:16');
+ assert.equal(CHARACTER_MODEL,'openai/gpt-image-2.6-flare');assert.deepEqual(characterInput('test',['a']).input_images,['a']);assert.equal(characterInput('',[]).background,'transparent');assert.equal(characterInput('',[]).aspect_ratio,'2:3');assert.equal(characterInput('',[],'likeness-v1-candidate').aspect_ratio,'9:16');
  const secret=Buffer.from('fixed-test-secret').toString('base64'),raw='{"id":"test"}',timestamp=Math.floor(Date.now()/1000).toString(),headers={'webhook-id':'test','webhook-timestamp':timestamp};headers['webhook-signature']='v1,'+createHmac('sha256',Buffer.from(secret,'base64')).update('test.'+timestamp+'.'+raw).digest('base64');assert.equal(verifyCharacterWebhook(raw,headers,'whsec_'+secret),true);assert.equal(verifyCharacterWebhook(raw+' ',headers,'whsec_'+secret),false);assert.equal(verifyCharacterWebhook(raw,headers,'whsec_'+secret,Date.now()+600000),false);
 });
 test('character alpha, size and feet align to the original template without another cutout fit',async()=>{const b=await readFile('public/assets/video-masters/temple-v1/groom.png'),result=await alignCharacter(b,b,{removeBackground:()=>{throw Error('Should not remove genuine alpha');}});const bounds=await characterBounds(result.bytes);assert.equal(bounds.width,720);assert.equal(bounds.height,1280);assert.ok(bounds.clear>.1);assert.ok(Math.abs(result.alignment.placed.top+result.alignment.placed.height-result.alignment.target.top-result.alignment.target.height)<=2);});
@@ -24,7 +25,7 @@ test('durable SQL enforces purchase, one redo, free failures, independent slots 
  }finally{await pg.close();}
 });
 
-test('couple references identify the requested role without a customer left/right question',()=>{assert.match(characterPrompt('groom','auto'),/Identify the groom/);assert.match(characterPrompt('bride','auto'),/Identify the bride/);assert.match(characterPrompt('bride','left'),/person on the left/);assert.match(characterPrompt('couple'),/SECOND image is the approved illustrated groom/);assert.match(characterPrompt('couple'),/THIRD image is the approved illustrated bride/);assert.doesNotMatch(characterPrompt('couple'),/FOURTH/);});
+test('couple references identify the requested role without a customer left/right question',()=>{assert.match(characterPrompt('groom','auto'),/Identify the groom/);assert.match(characterPrompt('bride','auto'),/Identify the bride/);assert.match(characterPrompt('bride','left'),/person on the left/);assert.match(characterPrompt('couple','groom'),/approved groom on the left and approved bride on the right/);assert.doesNotMatch(characterPrompt('couple'),/THIRD|FOURTH/);});
 
 test('customer likeness governs face, hair and proportions instead of the template character',()=>{
  for(const slot of ['groom','bride','couple']){
@@ -35,10 +36,15 @@ test('customer likeness governs face, hair and proportions instead of the templa
  }
 });
 
-test('the visually approved shared prompt is the default, while historical jobs keep their recorded prompt',()=>{
- assert.equal(CHARACTER_PROMPT_REVISION,CHARACTER_PROMPT_CANDIDATE);
+test('the supplied cartoon face-edit prompts are the default, while historical jobs retain their prompts',()=>{
+ assert.equal(CHARACTER_PROMPT_REVISION,'temple-cartoon-face-edit-v2');
  assert.match(characterPrompt('groom','single','','temple-identity-v4'),/large expressive head/);
- assert.equal(characterPrompt('groom'),characterPrompt('groom','single','',CHARACTER_PROMPT_CANDIDATE));
+ for(const slot of ['groom','bride','couple']){
+  const prompt=characterPrompt(slot);assert.equal(prompt,PERSONAL_CHARACTER_BASE_PROMPTS[slot]);
+  assert.match(prompt,/EDIT PICTURE 2/);assert.match(prompt,/big expressive eyes, smooth simplified features, NOT/);assert.match(prompt,/no shadow, no white outline/);assert.match(prompt,/Portrait 2:3\.$/);
+  assert.doesNotMatch(prompt,/Adapt the neck|subtle contact shadow|9:16/);
+ }
+ assert.match(characterPrompt('bride'),/Keep picture 2's long braid with white jasmine/);assert.match(characterPrompt('bride'),/gold flat sandals/);
  assert.match(characterPrompt('groom','single','',CHARACTER_PROMPT_CANDIDATE),/recognizable likeness take priority/);
  assert.throws(()=>characterPrompt('groom','single','','unknown-revision'),/Unsupported/);
 });
