@@ -64,7 +64,9 @@
     "sharingChecksPassed": 9,
     "productionBuildPassed": true,
     "liveReleaseVerified": false,
-    "physicalIPhoneInstagramVerified": false
+    "physicalIPhoneInstagramVerified": false,
+    "mergedVideoOwnerChecksPassed": 189,
+    "paymentEndpointRetry": "Sandbox blocked loopback; 20 payment checks passed with loopback networking enabled."
   },
   "rollback": {
     "previousSnapshotId": "snap_SgyS7NdODsft7v8UshRQHbxkqwlr",
@@ -135,5 +137,6 @@
       "templateCode": "FMI#0068",
       "microDescription": "Traditional temple wedding film"
     }
-  }
+  },
+  "integratedProductionCommit": "179e7b45e410ecf659e05b5edb8f7cc87fe488a3"
 }
