@@ -1,0 +1,40 @@
+{
+  "project": "Kaatrukulle",
+  "iteration": 1,
+  "role": "opening-video",
+  "router": "xai-api-direct",
+  "endpoint_post": "https://api.x.ai/v1/videos/generations",
+  "endpoint_poll": "https://api.x.ai/v1/videos/{request_id}",
+  "request_id": "69d10bd3-98e9-95c5-814c-3ee6b3f5ea87",
+  "model": "grok-imagine-video-1.5",
+  "duration_s": 12,
+  "aspect_ratio": "9:16",
+  "resolution": "720p",
+  "image": "/workspace/kaatrukulle/opening-first-720.jpg",
+  "last_frame": "/workspace/kaatrukulle/opening-last-720.jpg",
+  "output_url": "https://vidgen.x.ai/xai-vidgen-bucket/xai-video-69d10bd3-98e9-95c5-814c-3ee6b3f5ea87.mp4",
+  "path": "/workspace/kaatrukulle/opening-video.mp4",
+  "dims": [
+    720,
+    1280
+  ],
+  "duration_actual_s": 12.041667,
+  "status": "done",
+  "respect_moderation": true,
+  "moderated": false,
+  "moderation_note": "API returned respect_moderation=true with full 12s playable video (non-black frames); treated as passed/not blanked \u2014 no retry.",
+  "usage": {
+    "cost_in_usd_ticks": 17000000000
+  },
+  "approx_cost_from_ticks_usd": 1.7,
+  "approx_cost_historical_014_per_s_usd": 1.68,
+  "approx_cost_list_008_per_s_usd": 0.96,
+  "spend_breakdown_approx_usd": {
+    "stills_6_images": 0.12,
+    "hero_video_6s": 0.48,
+    "opening_video_ticks": 1.7
+  },
+  "spend_used_approx_usd": 2.3,
+  "spend_remaining_approx_usd": 1.7,
+  "budget_usd": 4.0
+}
