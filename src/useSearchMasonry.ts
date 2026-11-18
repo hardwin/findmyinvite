@@ -2,7 +2,7 @@ import {useLayoutEffect,useRef} from 'react';
 
 // Measure the cards rather than their artwork: descriptions, font loading and
 // fullscreen preview placeholders can all affect the occupied height.
-export function useSearchMasonry(count:number,loading:boolean){
+export function useSearchMasonry(count:number,loading:boolean,itemsKey=''){
  const grid=useRef<HTMLDivElement>(null);
  useLayoutEffect(()=>{
   const element=grid.current;
@@ -24,6 +24,6 @@ export function useSearchMasonry(count:number,loading:boolean){
   cards.forEach(card=>observer.observe(card));
   layout();
   return()=>{cancelAnimationFrame(frame);observer.disconnect();};
- },[count,loading]);
+ },[count,loading,itemsKey]);
  return grid;
 }

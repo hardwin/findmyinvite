@@ -1,0 +1,24 @@
+{
+  "tool": "Built-in image_gen.imagegen",
+  "generated": "2026-11-17",
+  "assets": [
+    {
+      "name": "wedding-bells",
+      "prompt": "Use case: ads-marketing. Asset type: a premium background illustration for a responsive wedding invitation sale banner. Create a single wide landscape raster image, 1536 by 768 pixels, aspect ratio 2:1. Soft ivory and blush studio backdrop, subtle champagne-gold silk folds, beautiful light and airy wedding atmosphere. A small sculptural champagne-gold present with a softly curling satin bow only in the far bottom-right corner, tiny blush flower petals near the edges. Palette strictly ivory #FDF2ED, blush #FCD1CF, champagne #DFB08E, rose #CC759B and tiny wine #6E1443 accents. The left 45 percent MUST be clean open space for an actual phone screenshot that will be overlaid in HTML. The right middle area MUST be clean light space for live dark-wine typography, with decoration confined to edges. Editorial luxury, realistic satin and soft light, restrained depth. No people, no phones, no screens, no products other than the tiny gift, no text, no letters, no price, no logo, no borders, no UI, no watermark. Full-bleed composition, subtle enough for crisp text overlay."
+    },
+    {
+      "name": "wedding-websites",
+      "prompt": "Use case: ads-marketing. Asset type: responsive wedding website promotional banner artwork, no baked-in typography. Create one polished wide landscape raster image 1536 by 768 pixels, aspect ratio 2:1. A refined champagne-metal laptop open at a slight three-quarter angle sits in the LEFT 46 percent, on a soft ivory surface. Its screen shows a beautiful wedding invitation website design: an arch of ivory and soft blush roses, a small tasteful painterly wedding couple far below the arch, clean pale center, a subtle champagne border. The screen should feel like a real elegant invitation but have NO readable text, no gibberish letters. Small ivory-blush floral sprigs frame the extreme lower left corner. The RIGHT 54 percent is spacious near-white ivory with a faint blush glow for live dark-wine title and prices overlaid separately. Premium product photography with realistic warm highlights and delicate soft shadows, detailed botanical artwork on screen. Colors only ivory #FDF2ED, blush #FCD1CF, rose #CC759B, champagne #DFB08E, gold-shadow #C08261 and subtle wine #6E1443. No text, no lettering, no prices, no wordmarks, no watermarks, no outer frame. Full bleed. Laptop fully visible within left safe area; no clutter."
+    },
+    {
+      "name": "celebration-offers",
+      "prompt": "Use case: ads-marketing. Asset type: dark premium wedding celebration offers banner background. Generate one wide landscape raster illustration 1536 by 768 pixels, aspect ratio 2:1. Rich deep wine #6E1443 and raspberry #9E2D69 satin background, softly lit and elegant, restrained luminous texture. On the extreme RIGHT 30 percent, a beautiful dimensional champagne-gold satin ribbon swoops in from the top right into an exquisitely tied bow and small gift box near the bottom right, with just two tiny gold botanical leaves. The LEFT 65 percent must be uniformly deep wine, quiet negative space for live champagne/cream typography and outline icons. Luxury wedding invitation brand, tasteful realistic materials, soft shadow and luminous edge highlights, warm champagne #DFB08E and ivory #FDF2ED only as accents. Full bleed, refined aesthetic, no visual noise. Absolutely no text, letters, numbers, price tags, seals, wordmarks, UI, or watermarks. Do not add a screen or any people."
+    }
+  ],
+  "screenshot": {
+    "name": "Wedding Bells",
+    "route": "http://127.0.0.1:5173/",
+    "poster": "/assets/video-masters/wedding-bells-v1/poster-tracked-v1.jpg",
+    "note": "Actual catalogue card, captured at 390px viewport and 3x device scale; not AI-generated."
+  }
+}

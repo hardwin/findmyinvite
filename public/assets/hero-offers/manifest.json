@@ -1,0 +1,264 @@
+{
+  "wedding-bells": [
+    {
+      "file": "wedding-bells-360.avif",
+      "width": 360,
+      "height": 180,
+      "bytes": 2295
+    },
+    {
+      "file": "wedding-bells-360.webp",
+      "width": 360,
+      "height": 180,
+      "bytes": 2908
+    },
+    {
+      "file": "wedding-bells-480.avif",
+      "width": 480,
+      "height": 240,
+      "bytes": 3176
+    },
+    {
+      "file": "wedding-bells-480.webp",
+      "width": 480,
+      "height": 240,
+      "bytes": 4112
+    },
+    {
+      "file": "wedding-bells-720.avif",
+      "width": 720,
+      "height": 360,
+      "bytes": 5047
+    },
+    {
+      "file": "wedding-bells-720.webp",
+      "width": 720,
+      "height": 360,
+      "bytes": 7340
+    },
+    {
+      "file": "wedding-bells-960.avif",
+      "width": 960,
+      "height": 480,
+      "bytes": 7041
+    },
+    {
+      "file": "wedding-bells-960.webp",
+      "width": 960,
+      "height": 480,
+      "bytes": 10778
+    },
+    {
+      "file": "wedding-bells-1200.avif",
+      "width": 1200,
+      "height": 600,
+      "bytes": 9540
+    },
+    {
+      "file": "wedding-bells-1200.webp",
+      "width": 1200,
+      "height": 600,
+      "bytes": 14818
+    }
+  ],
+  "wedding-websites": [
+    {
+      "file": "wedding-websites-360.avif",
+      "width": 360,
+      "height": 180,
+      "bytes": 3588
+    },
+    {
+      "file": "wedding-websites-360.webp",
+      "width": 360,
+      "height": 180,
+      "bytes": 5886
+    },
+    {
+      "file": "wedding-websites-480.avif",
+      "width": 480,
+      "height": 240,
+      "bytes": 5764
+    },
+    {
+      "file": "wedding-websites-480.webp",
+      "width": 480,
+      "height": 240,
+      "bytes": 9352
+    },
+    {
+      "file": "wedding-websites-720.avif",
+      "width": 720,
+      "height": 360,
+      "bytes": 10673
+    },
+    {
+      "file": "wedding-websites-720.webp",
+      "width": 720,
+      "height": 360,
+      "bytes": 18276
+    },
+    {
+      "file": "wedding-websites-960.avif",
+      "width": 960,
+      "height": 480,
+      "bytes": 16462
+    },
+    {
+      "file": "wedding-websites-960.webp",
+      "width": 960,
+      "height": 480,
+      "bytes": 29172
+    },
+    {
+      "file": "wedding-websites-1200.avif",
+      "width": 1200,
+      "height": 600,
+      "bytes": 23536
+    },
+    {
+      "file": "wedding-websites-1200.webp",
+      "width": 1200,
+      "height": 600,
+      "bytes": 41398
+    }
+  ],
+  "celebration-offers": [
+    {
+      "file": "celebration-offers-360.avif",
+      "width": 360,
+      "height": 180,
+      "bytes": 2764
+    },
+    {
+      "file": "celebration-offers-360.webp",
+      "width": 360,
+      "height": 180,
+      "bytes": 3894
+    },
+    {
+      "file": "celebration-offers-480.avif",
+      "width": 480,
+      "height": 240,
+      "bytes": 3867
+    },
+    {
+      "file": "celebration-offers-480.webp",
+      "width": 480,
+      "height": 240,
+      "bytes": 5458
+    },
+    {
+      "file": "celebration-offers-720.avif",
+      "width": 720,
+      "height": 360,
+      "bytes": 6074
+    },
+    {
+      "file": "celebration-offers-720.webp",
+      "width": 720,
+      "height": 360,
+      "bytes": 9324
+    },
+    {
+      "file": "celebration-offers-960.avif",
+      "width": 960,
+      "height": 480,
+      "bytes": 8763
+    },
+    {
+      "file": "celebration-offers-960.webp",
+      "width": 960,
+      "height": 480,
+      "bytes": 13784
+    },
+    {
+      "file": "celebration-offers-1200.avif",
+      "width": 1200,
+      "height": 600,
+      "bytes": 12091
+    },
+    {
+      "file": "celebration-offers-1200.webp",
+      "width": 1200,
+      "height": 600,
+      "bytes": 18974
+    }
+  ],
+  "wedding-bells-card": [
+    {
+      "file": "wedding-bells-card-180.avif",
+      "width": 180,
+      "height": 501,
+      "bytes": 10024
+    },
+    {
+      "file": "wedding-bells-card-180.webp",
+      "width": 180,
+      "height": 501,
+      "bytes": 16304
+    },
+    {
+      "file": "wedding-bells-card-360.avif",
+      "width": 360,
+      "height": 1002,
+      "bytes": 24926
+    },
+    {
+      "file": "wedding-bells-card-360.webp",
+      "width": 360,
+      "height": 1002,
+      "bytes": 39318
+    },
+    {
+      "file": "wedding-bells-card-540.avif",
+      "width": 540,
+      "height": 1503,
+      "bytes": 40255
+    },
+    {
+      "file": "wedding-bells-card-540.webp",
+      "width": 540,
+      "height": 1503,
+      "bytes": 61348
+    }
+  ],
+  "wedding-bells-preview": [
+    {
+      "file": "wedding-bells-preview-180.avif",
+      "width": 180,
+      "height": 319,
+      "bytes": 7507
+    },
+    {
+      "file": "wedding-bells-preview-180.webp",
+      "width": 180,
+      "height": 319,
+      "bytes": 12460
+    },
+    {
+      "file": "wedding-bells-preview-360.avif",
+      "width": 360,
+      "height": 638,
+      "bytes": 18895
+    },
+    {
+      "file": "wedding-bells-preview-360.webp",
+      "width": 360,
+      "height": 638,
+      "bytes": 30200
+    },
+    {
+      "file": "wedding-bells-preview-540.avif",
+      "width": 540,
+      "height": 957,
+      "bytes": 30786
+    },
+    {
+      "file": "wedding-bells-preview-540.webp",
+      "width": 540,
+      "height": 957,
+      "bytes": 47280
+    }
+  ]
+}

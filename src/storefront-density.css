@@ -1,0 +1,49 @@
+/* Storefront density: 80% of the original 16px UI scale at normal browser zoom.
+   Shared storefront components use rem lengths; other routes keep their normal
+   root size. Viewport units, safe areas, artwork, and measured masonry rows stay
+   in their original coordinate systems. User browser/text zoom remains available. */
+html.di-storefront { font-size: 80%; }
+html.di-storefront body { font-size: 1rem; }
+
+/* SVG attributes are fixed pixels unless a component already supplies a size. */
+:where(html.di-storefront) :where(.di-app, .di-header, .di-footer, .di-preferences-dialog, .di-share-dialog, .auth-modal) svg.lucide {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+/* Preserve the component hierarchy for larger or smaller icons. */
+html.di-storefront :is(.di-pin-kind, .di-video-duration) svg { width: .6875rem; height: .6875rem; }
+html.di-storefront :is(.di-card-expand, .di-preview-sound) svg { width: .9375rem; height: .9375rem; }
+html.di-storefront .di-app .di-thumbnail-preview svg { width: .875rem; height: .875rem; }
+html.di-storefront .di-app .di-video-play svg { width: 1.0625rem; height: 1.0625rem; }
+html.di-storefront :is(.di-search, .di-nav-search) button svg { width: 1.25rem; height: 1.25rem; }
+html.di-storefront .di-offer-motion svg { width: .8125rem; height: .8125rem; }
+html.di-storefront .di-bottom-nav a svg { width: 1.375rem; height: 1.375rem; }
+html.di-storefront .auth-google svg { width: 1.25rem; height: 1.25rem; }
+html.di-storefront .di-card-heading .di-template-share::before { min-height: 36px; }
+
+/* Keep the very small labels legible as the surrounding card becomes denser. */
+html.di-storefront .di-card-details .di-template-code { font-size: max(9px, .6875rem); }
+html.di-storefront .di-card-details .di-card-micro { font-size: clamp(11px, 5.6cqi, .875rem); }
+
+/* Mobile density comes from tighter chrome, not from tiny inputs or targets.
+   Invisible hit areas preserve the compact visual size of icon buttons. */
+@media (max-width: 920px), (pointer: coarse) {
+  html.di-storefront body.di-site :is(.di-use-template, .di-button, .fmi-button, .df-trigger, .df-option, .di-preferences-option, .di-preferences-trigger, .di-share-save, .auth-google, .auth-cancel) { min-height: 44px; }
+  html.di-storefront .di-bottom-nav a { min-height: 44px; font-size: 10px; }
+  html.di-storefront .di-footer :is(section > a, .di-footer-bottom a, .di-footer-bottom button) { min-height: 44px; }
+  html.di-storefront :is(.di-search, .di-nav-search) input,
+  html.di-storefront .di-share-url input { font-size: 16px; }
+  html.di-storefront body.di-site :is(.di-search, .di-nav-search) button { position: relative; }
+  html.di-storefront :is(.di-search button, .di-nav-search button, .di-card-expand, .di-preview-sound, button.di-thumbnail-preview, a.di-thumbnail-preview)::after,
+  html.di-storefront .di-card-heading .di-template-share::before {
+    content: ''; position: absolute; top: 50%; left: 50%; right: auto; bottom: auto;
+    width: max(100%, 44px); height: max(100%, 44px); transform: translate(-50%, -50%); border-radius: inherit;
+  }
+  html.di-storefront :is(.di-preferences-close, .di-share-close, .di-fullscreen-close, .di-offer-motion) { min-width: 44px; min-height: 44px; }
+  html.di-storefront .di-analytics-dialog :is(button, label) { min-height: 44px; }
+  html.di-storefront .di-preferences-trigger strong { font-size: 11px; }
+  html.di-storefront .di-preferences-trigger small { font-size: 10px; }
+  html.di-storefront .di-card-heading .di-template-share svg { width: 14px; height: 14px; }
+  html.di-storefront .di-card-heading button.di-template-share { margin-right: 3px; }
+  html.di-storefront .di-card-expand { top: 10px; right: 10px; }
+}

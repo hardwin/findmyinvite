@@ -6,7 +6,9 @@ import {useVideoCatalog} from './video/catalog';
 import {VideoCard} from './video/VideoCollection';
 import WebsiteCard from './WebsiteCard';
 import {shopCard} from './shop';
-import {previewLanguage} from './templates/preview-language';
+import {usePreviewLanguage} from './templates/preview-language';
+import {useInvitationPreferences} from './invitation-preferences';
+import {recommendInvitations} from '../shared/invitation-preferences.mjs';
 import {matchesDiscoverySearch,matchesVideoSearch} from '../shared/discovery-taxonomy.mjs';
 import {interleaveCatalogResults,invitationSearchHref,SEARCH_PAGE_SIZE} from '../shared/catalog-search.mjs';
 import {useSearchMasonry} from './useSearchMasonry';
@@ -14,17 +16,17 @@ import './search-results.css';
 
 export default function SearchResults(){
  const query=(new URLSearchParams(location.search).get('q')||'').trim();
- const language=previewLanguage();
+ const language=usePreviewLanguage(),preferences=useInvitationPreferences();
  const websites=useCatalog(),videos=useVideoCatalog();
  const [limit,setLimit]=useState(SEARCH_PAGE_SIZE);
  const results=useMemo(()=>interleaveCatalogResults(
-  websites.items.map(shopCard).filter(card=>matchesDiscoverySearch(card,query)),
-  videos.entries.filter(entry=>matchesVideoSearch(entry,query))
- ),[websites.items,videos.entries,query]);
+  recommendInvitations(websites.items.map(shopCard).filter(card=>matchesDiscoverySearch(card,query)),preferences),
+  recommendInvitations(videos.entries.filter(entry=>matchesVideoSearch(entry,query)),preferences)
+ ),[websites.items,videos.entries,query,preferences]);
  const loading=websites.loading||videos.loading;
  const failed=Boolean(websites.error||videos.error);
  const shown=Math.min(limit,results.length);
- const masonry=useSearchMasonry(shown,loading);
+ const masonry=useSearchMasonry(shown,loading,results.slice(0,limit).map(result=>result.kind+':'+result.item.id).join('|'));
  return <div className="di-app"><DiscoveryHeader/>
   <main id="main-content" className="di-main di-search-results">
    <header className="di-library-head">

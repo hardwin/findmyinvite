@@ -6,7 +6,7 @@ import {videoStore,hash} from './video-personalise-store.mjs';
 import {videoService,loadVideoMaster} from './video-personalise.mjs';
 import {videoPaymentService} from './video-payments.mjs';
 import {replicateProvider,CHARACTER_MODEL,CHARACTER_PROMPT_REVISION,characterPrompt,characterInput} from './video-character-provider.mjs';
-import {alignCharacter} from './video-character-images.mjs';
+import {alignCharacter,coupleIdentityReference} from './video-character-images.mjs';
 const table='video_character_jobs',active=['queued','submitting','processing','preparing'];
 export const CHARACTER_STALL_MS=10*60*1000;
 const jsonEqual=(a,b)=>JSON.stringify(Object.entries(a||{}).sort())===JSON.stringify(Object.entries(b||{}).sort());
@@ -49,8 +49,14 @@ export function characterService({query=db,store=videoStore(),provider=replicate
    if(j.status==='queued'){
     if(j.attempts>=3){await finish({status:'failed',error:'Automatic retries are exhausted. Contact support; your photos, payment and redo allowance are saved.'});return;}
     stage='references';
-    const images=['data:image/png;base64,'+(await original(j.slot)).toString('base64')];for(const ref of j.reference_data){const m=await videoService({store}).media(j.owner_id,ref.id),bytes=await store.bytes(m.key);if(hash(bytes)!==ref.sha256)throw Error('A saved reference changed.');images.push('data:'+m.contentType+';base64,'+bytes.toString('base64'));}
-    j=await patch(id,{status:'submitting',attempts:j.attempts+1},'&lease_id=eq.'+lease);const input=characterInput(characterPrompt(j.slot,j.reference_data[0]?.identity,j.id+'-'+j.attempts,j.prompt_revision),images);
+    const template='data:image/png;base64,'+(await original(j.slot)).toString('base64'),refs=[];for(const ref of j.reference_data){const m=await videoService({store}).media(j.owner_id,ref.id),bytes=await store.bytes(m.key);if(hash(bytes)!==ref.sha256)throw Error('A saved reference changed.');refs.push({bytes,url:'data:'+m.contentType+';base64,'+bytes.toString('base64')});}
+    const revision=j.prompt_revision||'temple-identity-v4';let images=[template,...refs.map(ref=>ref.url)];
+    if(revision===CHARACTER_PROMPT_REVISION){
+     if(refs.length!==(j.slot==='couple'?2:1))throw Error('Character identity references are missing.');
+     const identity=j.slot==='couple'?'data:image/png;base64,'+(await coupleIdentityReference(refs[0].bytes,refs[1].bytes)).toString('base64'):refs[0].url;
+     images=[identity,template];
+    }
+    j=await patch(id,{status:'submitting',attempts:j.attempts+1},'&lease_id=eq.'+lease);const input=characterInput(characterPrompt(j.slot,j.reference_data[0]?.identity,j.id+'-'+j.attempts,revision),images,revision);
     stage='submit';try{prediction=await provider.create(input,'https://findmyinvite.com/api/video-characters?action=callback&id='+j.id);}
     catch(e){if(e.providerStatus&&e.providerStatus<500){await finish({status:'failed',error:'Character preparation could not start. No redo was used. Please retry.'});}else await finish({status:'submitting',error:'Confirming the generation request. Your allowance is safe.'});return;}
     j=await patch(id,{provider_id:prediction.id,status:'processing',model_version:typeof prediction.version==='string'?prediction.version:null,error:null},'&lease_id=eq.'+lease);

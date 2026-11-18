@@ -1,13 +1,12 @@
 import * as Select from '@radix-ui/react-select';
-import {Check,ChevronDown,ArrowDownWideNarrow} from 'lucide-react';
-import {traditions,settings} from './shop';
-import {LANGUAGE_LABELS} from '../shared/invitation-languages.mjs';
+import {Check,ChevronDown} from 'lucide-react';
+import {settings} from './shop';
 import './discovery-filters.css';
 
 type Option=readonly [string,string];
-function Filter({label,value,onChange,options,primary=false}:{label:string;value:string;onChange:(value:string)=>void;options:readonly Option[];primary?:boolean}){
+function Filter({label,value,onChange,options}:{label:string;value:string;onChange:(value:string)=>void;options:readonly Option[]}){
  return <Select.Root value={value} onValueChange={onChange}>
-  <Select.Trigger className="df-trigger" data-active={primary||value!=='all'&&value!=='default'} aria-label={label}>
+  <Select.Trigger className="df-trigger" data-active={value!=='all'&&value!=='default'} aria-label={label}>
    <Select.Value/><Select.Icon className="df-chevron"><ChevronDown size={14}/></Select.Icon>
   </Select.Trigger>
   <Select.Portal><Select.Content className="df-popover" position="popper" sideOffset={10} collisionPadding={12}>
@@ -17,13 +16,9 @@ function Filter({label,value,onChange,options,primary=false}:{label:string;value
   </Select.Content></Select.Portal>
  </Select.Root>;
 }
-type Props={kind:string;tradition:string;setting:string;collection:string;sort:string;language:string;count:number;onLanguage:(v:string)=>void;onKind:(v:string)=>void;onTradition:(v:string)=>void;onSetting:(v:string)=>void;onCollection:(v:string)=>void;onSort:(v:string)=>void};
-export function DiscoveryFilters(p:Props){return <div className="df-controls">
- <div className="df-row"><div className="df-group" role="group" aria-label="Filter invitations">
-  <Filter label="Content type" value={p.kind} onChange={p.onKind} primary options={[["all","All content"],["website","Websites"],["video","Videos"]]}/>
-  <Filter label="Tradition" value={p.tradition} onChange={p.onTradition} options={[["all","Tradition"],...traditions]}/>
+type Props={setting:string;collection:string;sort:string;onSetting:(v:string)=>void;onCollection:(v:string)=>void;onSort:(v:string)=>void};
+export function DiscoveryFilters(p:Props){return <div className="df-controls" role="group" aria-label="Filter invitations">
   <Filter label="Style" value={p.setting} onChange={p.onSetting} options={[["all","Style"],...settings]}/>
   <Filter label="Collection" value={p.collection} onChange={p.onCollection} options={[["all","Collection"],["premium","Premium"],["elite","Elite"],["free","Free collection"]]}/>
- </div><div className="df-sort"><Filter label="Preview language" value={p.language} onChange={p.onLanguage} options={Object.entries(LANGUAGE_LABELS)}/><span className="df-sort-icon" aria-hidden="true"><ArrowDownWideNarrow size={18}/></span><Filter label="Sort designs" value={p.sort} onChange={p.onSort} options={[["default","Featured"],["price","Price: low to high"],["name","Name: A–Z"]]}/></div></div>
- <p className="df-count" role="status" aria-live="polite">{p.count} designs</p>
+  <Filter label="Sort designs" value={p.sort} onChange={p.onSort} options={[["default","Featured"],["price","Price: low to high"],["name","Name: A–Z"]]}/>
  </div>;}

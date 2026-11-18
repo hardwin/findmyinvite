@@ -1,9 +1,9 @@
-.di-search-results .di-library-head { padding-bottom: 12px; }
+.di-search-results .di-library-head { padding-bottom: 0.75rem; }
 .di-search-results .di-library-head h1 { overflow-wrap: anywhere; }
-.di-search-results .di-search { margin: 20px auto 0; }
-.di-search-clear { display: inline-block; padding: 10px 12px; min-height: 44px; text-decoration: underline !important; text-underline-offset: 3px; }
-.di-search-status { margin: 4px 0 18px; color: var(--di-muted); font-size: 14px; }
-.di-search-more { display: flex; justify-content: center; padding-top: 24px; }
+.di-search-results .di-search { margin: 1.25rem auto 0; }
+.di-search-clear { display: inline-block; padding: 0.625rem 0.75rem; min-height: 2.75rem; text-decoration: underline !important; text-underline-offset: 0.1875rem; }
+.di-search-status { margin: 0.25rem 0 1.125rem; color: var(--di-muted); font-size: 0.875rem; }
+.di-search-more { display: flex; justify-content: center; padding-top: 1.5rem; }
 .di-search-more .di-button { margin: 0; }
 
 /* Keep DOM/search order while filling each column below its previous card.

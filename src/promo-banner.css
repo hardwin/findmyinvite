@@ -3,11 +3,11 @@ body.di-site .promo-banner {
   z-index: 1;
   display: flex;
   align-items: stretch;
-  min-height: 22px;
+  min-height: 1.375rem;
   background: var(--brand-wine, #6e1443);
   color: #ffffff;
   font-family: var(--glass-font, Montserrat, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
-  font-size: 10.5px;
+  font-size: 0.65625rem;
   font-weight: 500;
   line-height: 1.5;
 }
@@ -16,7 +16,7 @@ body.di-site .promo-banner .promo-banner-link {
   align-items: center;
   flex: 1;
   min-width: 0;
-  min-height: 22px;
+  min-height: 1.375rem;
   overflow: hidden;
   color: inherit;
   text-decoration: none;
@@ -33,16 +33,16 @@ body.di-site .promo-banner-copy {
   flex: 1 0 auto;
   align-items: center;
   justify-content: center;
-  padding-inline: 32px;
+  padding-inline: 2rem;
   white-space: nowrap;
 }
 body.di-site .promo-banner-copy[aria-hidden="true"] { pointer-events: none; }
 body.di-site .promo-banner .promo-banner-toggle {
   display: grid;
   place-items: center;
-  flex: 0 0 32px;
-  width: 32px;
-  min-height: 22px;
+  flex: 0 0 2rem;
+  width: 2rem;
+  min-height: 1.375rem;
   margin: 0;
   padding: 0;
   border: 0;
@@ -52,9 +52,9 @@ body.di-site .promo-banner .promo-banner-toggle {
   color: inherit;
   cursor: pointer;
 }
-body.di-site .promo-banner-toggle svg { display: block; width: 12px; height: 12px; }
+body.di-site .promo-banner-toggle svg { display: block; width: 0.75rem; height: 0.75rem; }
 body.di-site .promo-banner .promo-banner-toggle:hover { background: #ffffff14; }
-body.di-site .promo-banner :is(.promo-banner-link, .promo-banner-toggle):focus-visible { outline: 2px solid #ffffff; outline-offset: -4px; }
+body.di-site .promo-banner :is(.promo-banner-link, .promo-banner-toggle):focus-visible { outline: 0.125rem solid #ffffff; outline-offset: -0.25rem; }
 body.di-site .promo-banner[data-paused="true"] .promo-banner-track,
 body.di-site .promo-banner:hover .promo-banner-track,
 body.di-site .promo-banner:focus-within .promo-banner-track { animation-play-state: paused; }
@@ -62,7 +62,7 @@ body.di-site .promo-banner:focus-within .promo-banner-track { animation-play-sta
 
 @media (prefers-reduced-motion: reduce) {
   body.di-site .promo-banner-track { width: 100%; min-width: 0; animation: none; transform: none; }
-  body.di-site .promo-banner-copy { flex: 1 1 auto; padding: 4px 12px; white-space: normal; text-align: center; }
+  body.di-site .promo-banner-copy { flex: 1 1 auto; padding: 0.25rem 0.75rem; white-space: normal; text-align: center; }
   body.di-site .promo-banner-copy[aria-hidden="true"], body.di-site .promo-banner .promo-banner-toggle { display: none; }
 }
 @media (forced-colors: active) {

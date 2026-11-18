@@ -16,6 +16,7 @@ try{
   const page=await context.newPage(),errors=[];
   page.setDefaultTimeout(10000);
   page.on('pageerror',error=>errors.push(error.message));
+  await page.addInitScript(()=>sessionStorage.setItem('fmi-invitation-preferences-dismissed-v1','1'));
   await context.route('**/*',route=>{
    const url=new URL(route.request().url());
    if(url.origin!==origin)return route.abort();
@@ -55,13 +56,13 @@ try{
    assert.equal(await page.locator('.di-video-card').count(),0);
 
    // Filters are available only after navigating to the catalogue.
-   assert.equal(await page.getByRole('combobox').count(),6);
-   await page.getByRole('combobox',{name:'Tradition',exact:true}).click();
-   await page.getByRole('option',{name:'Hindu',exact:true}).click();
+   assert.equal(await page.getByRole('combobox').count(),3);
+   await page.getByRole('combobox',{name:'Style',exact:true}).click();
+   await page.getByRole('option',{name:'Palace',exact:true}).click();
    await page.waitForFunction(()=>document.querySelectorAll('.di-pin').length===1);
    assert.match(await page.locator('.di-card-details').innerText(),/Royal/);
-   await page.getByRole('combobox',{name:'Tradition',exact:true}).click();
-   await page.getByRole('option',{name:'Tradition',exact:true}).click();
+   await page.getByRole('combobox',{name:'Style',exact:true}).click();
+   await page.getByRole('option',{name:'Style',exact:true}).click();
 
    await page.getByRole('button',{name:'Expand Bells & Blessings',exact:true}).click();
    assert.ok(await page.getByRole('dialog',{name:'Bells & Blessings fullscreen preview'}).isVisible());

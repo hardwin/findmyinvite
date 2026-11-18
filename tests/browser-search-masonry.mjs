@@ -7,6 +7,7 @@ const browser=await engine.launch({headless:true});
 try{
  const page=await browser.newPage({viewport:{width:390,height:900}}),errors=[];
  page.on('pageerror',error=>errors.push(error.message));
+ await page.addInitScript(()=>sessionStorage.setItem('fmi-invitation-preferences-dismissed-v1','1'));
  await page.route('**/template-preview?**',route=>route.fulfill({contentType:'text/html',body:'<!doctype html><html><body>Invitation preview</body></html>'}));
  await page.route('**/api/**',route=>{
   const url=new URL(route.request().url());
