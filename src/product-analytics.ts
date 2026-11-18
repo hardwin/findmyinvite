@@ -8,6 +8,15 @@ function attribution(){
   const stored=JSON.parse(localStorage.getItem('fmi-attribution')||'null');return stored&&Date.parse(stored.at)>Date.now()-30*86400000?stored:undefined;
  }catch{return undefined;}
 }
-export function analyticsContext(){try{let session=sessionStorage.getItem('fmi-sid');if(!session){session=crypto.randomUUID();sessionStorage.setItem('fmi-sid',session);}return {id:crypto.randomUUID(),session,language:'en',device:innerWidth<600?'mobile':innerWidth<1000?'tablet':'desktop',attribution:attribution()};}catch{return undefined;}}
-export function trackProduct(type:EventType,templateId:string,language='en',step?:number){if(location.pathname.startsWith('/akay')||sessionStorage.getItem('fmi-owner-csrf'))return;const context=analyticsContext();if(!context)return;void fetch('/api/owner?action=collect',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...context,type,templateId,language,step}),keepalive:true}).catch(()=>{});}
-export function startProductTracking(){document.addEventListener('click',e=>{const link=(e.target as Element)?.closest<HTMLAnchorElement>('a[href]');if(!link)return;const url=new URL(link.href,location.origin);if(url.origin!==location.origin)return;const version=url.searchParams.get('version'),product=url.searchParams.get('product');if(product)trackProduct('template_selected',product,url.searchParams.get('lang')||'en');if(version&&url.pathname==='/template-preview')trackProduct('template_selected',version,url.searchParams.get('lang')||'en');});}
+export function analyticsContext(){try{if(location.pathname.startsWith('/akay')||sessionStorage.getItem('fmi-owner-csrf'))return;let session=sessionStorage.getItem('fmi-sid');if(!session){session=crypto.randomUUID();sessionStorage.setItem('fmi-sid',session);}return {id:crypto.randomUUID(),session,language:'en',device:innerWidth<600?'mobile':innerWidth<1000?'tablet':'desktop',attribution:attribution()};}catch{return undefined;}}
+export function trackProduct(type:EventType,templateId:string,language='en',step?:number){const context=analyticsContext();if(!context)return;void fetch('/api/owner?action=collect',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...context,type,templateId,language,step}),keepalive:true}).catch(()=>{});}
+export function startProductTracking(){
+ document.addEventListener('click',e=>{
+  const link=(e.target as Element)?.closest<HTMLAnchorElement>('a[href]');if(!link)return;
+  const url=new URL(link.href,location.origin);if(url.origin!==location.origin)return;
+  const version=url.searchParams.get('version'),product=url.searchParams.get('product'),template=url.searchParams.get('template');
+  if(product)trackProduct('template_selected',product,url.searchParams.get('lang')||'en');
+  if(version&&url.pathname==='/template-preview')trackProduct('template_selected',version,url.searchParams.get('lang')||'en');
+  if(template&&url.pathname==='/video-personalise'&&link.closest('.di-video-card'))trackProduct('template_selected',template);
+ });
+}

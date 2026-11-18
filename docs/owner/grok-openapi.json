@@ -440,6 +440,91 @@
             "description": "Rate exceeded: retry after one minute"
           }
         }
+      },
+      "get": {
+        "operationId": "readSalesReport",
+        "summary": "Read captured online sales or named template performance with sales:read",
+        "parameters": [
+          {
+            "name": "action",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "const": "sales-report"
+            }
+          },
+          {
+            "name": "view",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "captures",
+                "templates"
+              ],
+              "default": "captures"
+            }
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "today",
+                "yesterday",
+                "custom"
+              ]
+            },
+            "description": "IST business dates. Today is the default."
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "description": "Required with period=custom."
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "description": "Required with period=custom."
+          },
+          {
+            "name": "days",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 365
+            },
+            "description": "Rolling business days including today. Omit period when using days."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response includes the range, readAt and oldestSourceReadAt. The captures view returns sales with stable orderId, productName, currency, amount, tax, status, reportedAt and dateBasis. Amounts use minor currency units. The templates view returns templates with customer-facing names, recorded journey counts, purchases, renewals and net INR revenue in paise."
+          },
+          "400": {
+            "description": "Invalid date range or view"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Insufficient scope or revoked key"
+          },
+          "503": {
+            "description": "Required source unavailable or stale. Retry the same period."
+          }
+        }
       }
     }
   },
@@ -449,7 +534,7 @@
         "type": "http",
         "scheme": "bearer",
         "bearerFormat": "fmi_<64 hex>",
-        "description": "Separate revocable key per external resource and scope. Operational keys are restricted to assigned project IDs. Scopes: tickets:write, organic:write, research:write, content:draft, runs:write"
+        "description": "Separate revocable key per external resource and scope. Operational keys are restricted to assigned project IDs. Scopes: tickets:write, organic:write, research:write, content:draft, runs:write, sales:read"
       }
     },
     "schemas": {

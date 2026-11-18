@@ -10,6 +10,8 @@ import {get,list,save,audits,audit,isLocal,revisions} from '../server/owner/stor
 import {requireOwner,session,login,cookie,sameOrigin,hashToken,verifyPassword,passwordHash,revokeAll,agent} from '../server/owner/auth.mjs';
 import {schemas,parse,dailySchema,scopes,adImport,searchImport} from '../server/owner/contracts.mjs';
 import {snapshot} from '../server/owner/reporting.mjs';
+import {readOwnerPeriod} from '../shared/owner-period.mjs';
+import {salesReport} from '../server/owner/sales-report.mjs';
 const clean=row=>{const {id,revision,updatedAt,...value}=row;return value;};
 const assert=(test,message,status=400)=>{if(!test)throw new HttpError(status,message);};
 async function write(kind,input,id,revision,actor='owner',dryRun=false){
@@ -19,7 +21,7 @@ async function write(kind,input,id,revision,actor='owner',dryRun=false){
  if(kind==='ticket'){if(data.assigneeId)assert(await get('resource',data.assigneeId),'Assignee unavailable.');if(data.projectId)assert(await get('project',data.projectId),'Project unavailable.');}
  if(kind==='article'){if(id){const history=await revisions(id),published=history.find(r=>r.data.status==='Published');assert(!published||published.data.slug===data.slug,'Published article addresses are preserved.');}assert(!(await list(kind)).some(r=>r.id!==id&&r.slug===data.slug),'An article already uses that address.',409);if(['Published','Scheduled'].includes(data.status))assert(data.body.trim().length>40&&data.excerpt&&data.author,'Add article text, excerpt and author before publishing.');if(data.status==='Scheduled')assert(data.publishAt&&Date.parse(data.publishAt)>Date.now(),'Choose a future publication time.');}
  if(kind==='article'&&data.status==='Published'&&!data.publishAt)data.publishAt=new Date().toISOString();
- if(kind==='order-date'){const {sources}=await import('../server/owner/reporting.mjs');const source=await sources(),order=[...source.orders.rows,...source.legacyPayments.rows].find(o=>o.id===data.orderId);assert(order,'Order unavailable.');assert(data.taxPaise===undefined||data.taxPaise<=order.amount,'GST cannot exceed the original amount.');assert(!(await list('order-date')).some(r=>r.orderId===data.orderId&&r.id!==id),'This order has an existing reconciliation record.',409);}
+ if(kind==='order-date'){const {sources}=await import('../server/owner/reporting.mjs');const source=await sources(true,['orders','legacyPayments','videoOrders']),order=[...source.orders.rows,...source.legacyPayments.rows,...source.videoOrders.rows.map(o=>({...o,amount:o.total_paise}))].find(o=>o.id===data.orderId);assert(order,'Order unavailable.');assert(data.taxPaise===undefined||data.taxPaise<=order.amount,'GST cannot exceed the original amount.');assert(!(await list('order-date')).some(r=>r.orderId===data.orderId&&r.id!==id),'This order has an existing reconciliation record.',409);}
  if(kind==='observation'&&data.benchmarkId){const benchmark=await get('benchmark',data.benchmarkId);assert(benchmark&&benchmark.locale===data.locale,'Choose a benchmark in the same locale.');assert(!data.benchmarkRevision||data.benchmarkRevision===benchmark.revision,'The benchmark changed. Refresh before submitting.',409);assert(!data.question||data.question===benchmark.name,'Observation question must match the benchmark.');data.question=benchmark.name;data.benchmarkRevision=benchmark.revision;}
  if(kind==='comment')assert(await get('ticket',data.ticketId),'Ticket unavailable.');
  if(dryRun)return {valid:true,id};return save(kind,id||randomUUID(),data,revision||0,actor);
@@ -35,11 +37,16 @@ export default async function handler(req,res){try{
  if(action==='oauth-callback'){method(req,['GET']);await finishAuthorization(q);res.statusCode=303;res.setHeader('Location','/akay/settings?connected=1');return res.end();}
  if(action==='scheduled-sync'){method(req,['GET']);assert(process.env.CRON_SECRET&&req.headers.authorization==='Bearer '+process.env.CRON_SECRET,'Scheduler authorization required.',401);const results=[];await promoteScheduled();for(const c of await connectionStatus()){if(c.status==='Configured'&&c.authorized&&(!c.lastSuccess||Date.now()-Date.parse(c.lastSuccess)>(c.provider==='Search Console'?86400000:3600000)))try{results.push(await syncProvider(c.provider,'scheduler'))}catch(e){results.push({provider:c.provider,error:e.message})}}const last=await get('maintenance','audit');if(!last||Date.now()-Date.parse(last.updatedAt)>86400000){await auditSite();await save('maintenance','audit',{done:true},last?.revision||0,'scheduler','seo.scheduled');}return respond(res,200,{results});}
  if(action==='ingest'){method(req,['POST']);return respond(res,200,await ingest(req,await bodyJson(req,500000)));}
+ if(action==='sales-report'){
+  method(req,['GET']);
+  if(req.headers.authorization)await agent(req,'sales:read');else await requireOwner(req);
+  return respond(res,200,await salesReport(q));
+ }
  if(action==='login'){method(req,['POST']);sameOrigin(req);const b=await bodyJson(req,2048);const result=await login(req,b.username,b.password);res.setHeader('Set-Cookie',cookie(result.token));return respond(res,200,{authenticated:true,csrf:result.csrf});}
  if(action==='session'){method(req,['GET']);const s=await session(req);return respond(res,200,{authenticated:!!s,csrf:s?.csrf,username:s?'AkayAdmin':null,local:isLocal()});}
  const owner=await requireOwner(req);
  if(action==='contract'){method(req,['GET']);return respond(res,200,JSON.parse(await readFile(new URL('../docs/owner/grok-openapi.json',import.meta.url),'utf8')));}
- if(action==='snapshot'){method(req,['GET']);const days=Math.min(365,Math.max(1,Number(q.get('days'))||30));return respond(res,200,{...(await snapshot(days,q.get('refresh')==='1')),local:isLocal()});}
+ if(action==='snapshot'){method(req,['GET']);return respond(res,200,{...(await snapshot(readOwnerPeriod(q),q.get('refresh')==='1',q.get('section')||'all',q.get('view')||'Overview')),local:isLocal()});}
  if(action==='list'){method(req,['GET']);assert(schemas[q.get('kind')],'Unknown record type.');const rows=await list(q.get('kind'));const search=(q.get('q')||'').toLowerCase(),filtered=rows.filter(r=>JSON.stringify(r).toLowerCase().includes(search));const offset=Math.max(0,Number(q.get('offset'))||0);return respond(res,200,{items:filtered.slice(offset,offset+50),total:filtered.length});}
  if(action==='public-articles'){method(req,['GET']);return respond(res,200,{articles:await publicArticles()});}
  if(action==='connections'){method(req,['GET']);return respond(res,200,{connections:await connectionStatus()});}

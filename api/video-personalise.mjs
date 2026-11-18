@@ -19,6 +19,7 @@ import {matchesMediaType} from '../server/template-file-validation.mjs';
 import {mediaRange} from '../server/template-media-range.mjs';
 import {videoDefinition,DEFAULT_VIDEO_ID} from '../shared/video-personalization.mjs';
 import {videoPaymentService,videoPrice} from '../server/video-payments.mjs';
+import {recordVideoCheckout} from '../server/owner/events.mjs';
 import {draftService} from '../server/personalization-drafts.mjs';
 import {db} from '../server/core.mjs';
 import {validatePreparedCharacters} from '../server/video-character-access.mjs';
@@ -47,6 +48,7 @@ export default async function handler(req,res){const store=videoStore(),service=
   await rate(req,'video-'+(action==='payment-promo'?'promo':'checkout')+':'+user.id,action==='payment-promo'?10:60,3600);
   await draftService({store}).get(user.id,b.invitationId,{optional:true});const payments=videoPaymentService(),args=[user.id,b.invitationId,templateId];
   const result=action==='payment-status'?await payments.status(...args):action==='payment-order'?await payments.order(...args):action==='payment-promo'?await payments.promo(...args,b.code):await payments.verify(...args,b);
+  if(b.analytics)waitUntil(recordVideoCheckout(req,action,result,b.analytics,templateId).catch(()=>console.warn('Video checkout reporting could not be saved.')));
   return respond(res,200,result);
  }
  if(action==='reserve'){method(req,['POST']);const b=await bodyJson(req);requireVideoRelease(await loadVideoMaster(b.templateId||DEFAULT_VIDEO_ID),process.env);await rate(req,'video-upload:'+user.id,40,3600);if(!types[b.kind])throw new HttpError(400,'Unsupported media type.');const draft=b.invitationId?await draftService({store}).get(user.id,b.invitationId):null;const id=randomUUID(),key=draft?'persistent/'+user.id+'/'+draft.id+'/'+id+'/original':'uploads/'+user.id+'/'+id;await store.save('media/'+id+'.json',{id,owner:user.id,kind:b.kind,key,status:'pending',...(draft?{invitationId:draft.id,durable:true,expiresAt:null}:{expiresAt:new Date(Date.now()+VIDEO_TTL).toISOString()})},{create:true});return respond(res,201,{id,pathname:store.prefix+key});}

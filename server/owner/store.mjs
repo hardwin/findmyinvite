@@ -10,8 +10,8 @@ async function sqlite(){
  if(!local){const {DatabaseSync}=await import('node:sqlite');const path=resolve(process.env.FMI_OWNER_DB||'work/owner/private.sqlite');mkdirSync(dirname(path),{recursive:true});local=new DatabaseSync(path);local.exec(`PRAGMA journal_mode=WAL; PRAGMA busy_timeout=5000; CREATE TABLE IF NOT EXISTS records(kind TEXT NOT NULL,id TEXT NOT NULL,revision INTEGER NOT NULL,data TEXT NOT NULL,updated_at TEXT NOT NULL,PRIMARY KEY(kind,id)); CREATE TABLE IF NOT EXISTS audit(id TEXT PRIMARY KEY,actor TEXT NOT NULL,action TEXT NOT NULL,target TEXT NOT NULL,detail TEXT NOT NULL,at TEXT NOT NULL); CREATE TABLE IF NOT EXISTS revisions(id TEXT,revision INTEGER,data TEXT,at TEXT,PRIMARY KEY(id,revision));`);}
  return local;
 }
-export async function get(kind,id){if(isLocal()){const row=(await sqlite()).prepare('SELECT * FROM records WHERE kind=? AND id=?').get(kind,id);return row?{...JSON.parse(row.data),id:row.id,revision:row.revision,updatedAt:row.updated_at}:null;}const rows=await db('owner_records?kind=eq.'+encodeURIComponent(kind)+'&id=eq.'+encodeURIComponent(id)+'&select=*&limit=1');return rows[0]?{...rows[0].data,id:rows[0].id,revision:rows[0].revision,updatedAt:rows[0].updated_at}:null;}
-export async function list(kind){if(isLocal())return (await sqlite()).prepare('SELECT * FROM records WHERE kind=? ORDER BY updated_at DESC,id').all(kind).map(r=>({...JSON.parse(r.data),id:r.id,revision:r.revision,updatedAt:r.updated_at}));let rows=[];for(let offset=0;;offset+=1000){const batch=await db('owner_records?kind=eq.'+encodeURIComponent(kind)+'&select=*&order=id&limit=1000&offset='+offset);rows.push(...batch.map(r=>({...r.data,id:r.id,revision:r.revision,updatedAt:r.updated_at})));if(batch.length<1000)return rows;}}
+export async function get(kind,id,{signal}={}){if(isLocal()){const row=(await sqlite()).prepare('SELECT * FROM records WHERE kind=? AND id=?').get(kind,id);return row?{...JSON.parse(row.data),id:row.id,revision:row.revision,updatedAt:row.updated_at}:null;}const rows=await db('owner_records?kind=eq.'+encodeURIComponent(kind)+'&id=eq.'+encodeURIComponent(id)+'&select=*&limit=1',{signal});return rows[0]?{...rows[0].data,id:rows[0].id,revision:rows[0].revision,updatedAt:rows[0].updated_at}:null;}
+export async function list(kind,{signal,filter=''}={}){if(isLocal())return (await sqlite()).prepare('SELECT * FROM records WHERE kind=? ORDER BY updated_at DESC,id').all(kind).map(r=>({...JSON.parse(r.data),id:r.id,revision:r.revision,updatedAt:r.updated_at}));let rows=[];for(let offset=0;;offset+=1000){const batch=await db('owner_records?kind=eq.'+encodeURIComponent(kind) + filter +'&select=*&order=id&limit=1000&offset='+offset,{signal});rows.push(...batch.map(r=>({...r.data,id:r.id,revision:r.revision,updatedAt:r.updated_at})));if(batch.length<1000)return rows;}}
 export async function save(kind,id,data,revision=0,actor='owner',action=kind+'.saved'){
  const {id:ignored,revision:r,updatedAt:u,...clean}=data;const at=new Date().toISOString();
  if(!isLocal())return db('rpc/owner_save',{method:'POST',body:{p_kind:kind,p_id:id,p_data:clean,p_revision:revision,p_actor:actor,p_action:action}});
@@ -34,10 +34,26 @@ export function enforceWrite(kind,id,data,read){
 }
 export async function revisions(id){if(isLocal())return (await sqlite()).prepare('SELECT * FROM revisions WHERE id=? ORDER BY revision DESC').all(id).map(r=>({...r,data:JSON.parse(r.data)}));return db('owner_revisions?record_id=eq.'+encodeURIComponent(id)+'&select=revision,data,at&order=revision.desc');}
 export async function audit(actor,action,target,detail={}){const row={id:randomUUID(),actor,action,target,detail,at:new Date().toISOString()};if(isLocal())(await sqlite()).prepare('INSERT INTO audit VALUES(?,?,?,?,?,?)').run(row.id,actor,action,target,JSON.stringify(detail),row.at);else await db('owner_audit',{method:'POST',body:row});return row;}
-export async function audits(){if(isLocal())return (await sqlite()).prepare('SELECT * FROM audit ORDER BY at DESC LIMIT 1000').all().map(r=>({...r,detail:JSON.parse(r.detail)}));return db('owner_audit?select=*&order=at.desc&limit=1000');}
+export async function audits(signal, range, limit = Infinity) {
+ const from = new Date(range.fromMs).toISOString();
+ const until = new Date(Date.parse(range.end+'T00:00:00+05:30')+86400000).toISOString();
+ if(isLocal()){
+  const query = 'SELECT * FROM audit WHERE at>=? AND at<? ORDER BY at DESC,id DESC LIMIT ?';
+  return (await sqlite()).prepare(query).all(from,until,Number.isFinite(limit)?limit:-1).map(r=>({...r,detail:JSON.parse(r.detail)}));
+ }
+ const path = 'owner_audit?select=*&at=gte.'+encodeURIComponent(from)+'&at=lt.'+encodeURIComponent(until)+'&order=at.desc,id.desc';
+ const rows = [];
+ while(rows.length<limit){
+  const size = Math.min(1000,limit-rows.length);
+  const page = await db(path+'&limit='+size+'&offset='+rows.length,{signal});
+  rows.push(...page);
+  if(page.length<size)break;
+ }
+ return rows;
+}
 
 // Persisted display numbers survive sorting, imports, date filters and restarts.
-export async function orderNumbers(ids){
- if(!isLocal())return db('rpc/owner_order_numbers',{method:'POST',body:{p_ids:ids}});
+export async function orderNumbers(ids,signal){
+ if(!isLocal())return db('rpc/owner_order_numbers',{method:'POST',body:{p_ids:ids},signal});
  const s=await sqlite();s.exec('BEGIN IMMEDIATE');try{const rows=s.prepare("SELECT id,data FROM records WHERE kind='order-number'").all(),map=Object.fromEntries(rows.map(r=>[r.id,JSON.parse(r.data).number]));let next=Object.values(map).reduce((n,value)=>Math.max(n,value),0);const insert=s.prepare('INSERT INTO records VALUES(?,?,?,?,?)');for(const id of ids)if(!map[id]){map[id]=++next;insert.run('order-number',id,1,JSON.stringify({number:next}),new Date().toISOString());}s.exec('COMMIT');return map;}catch(e){s.exec('ROLLBACK');throw e;}
 }

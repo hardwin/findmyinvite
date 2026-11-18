@@ -13,10 +13,12 @@ import {useInvitationPreferences} from '../invitation-preferences';
 import {recommendInvitations} from '../../shared/invitation-preferences.mjs';
 import {filterVideoCatalog} from '../../shared/discovery-taxonomy.mjs';
 import {previewMuted,setPreviewMuted,usePreviewMuted} from '../preview-sound';
+import {trackProduct} from '../product-analytics';
 export function VideoCard({entry,showDetails=true}:{entry:VideoEntry;showDetails?:boolean}){
  const videoRef=useRef<HTMLVideoElement>(null),box=useRef<HTMLElement>(null),[active,setActive]=useState(false),[failed,setFailed]=useState(false),[ready,setReady]=useState(false);
  const muted=usePreviewMuted(),audioRef=useRef<HTMLAudioElement>(null);
  const deadline=useRef<ReturnType<typeof setTimeout>|undefined>(undefined);
+ const reportedPlayback=useRef(false);
  const loadingProgress=useCallback(()=>{clearTimeout(deadline.current);deadline.current=setTimeout(()=>{setActive(false);setFailed(true);},45000);},[]);
  const attachVideo=useCallback((node:HTMLVideoElement|null)=>{const old=videoRef.current;if(old&&old!==node){old.pause();old.removeAttribute('src');old.load();}videoRef.current=node;if(node&&node.getAttribute('src')!==entry.preview)node.src=entry.preview;},[entry.preview]);
  useEffect(()=>{if(!active||ready)return;loadingProgress();return()=>clearTimeout(deadline.current);},[active,ready,loadingProgress]);
@@ -27,10 +29,17 @@ export function VideoCard({entry,showDetails=true}:{entry:VideoEntry;showDetails
  const useHref='/video-personalise?template='+encodeURIComponent(entry.id);
  function startPreview(){
   if(active)return;
+  // Choosing an inline catalogue preview is a selection. A shared detail page can be a direct entry.
+  if(showDetails)trackProduct('template_selected',entry.id);
+  reportedPlayback.current=false;
   window.dispatchEvent(new Event('catalog-stop-all'));setFailed(false);setReady(false);flushSync(()=>setActive(true));
   const video=videoRef.current;
   if(video){video.muted=previewMuted();void video.play().catch(()=>{if(video.isConnected){setActive(false);setFailed(true);}});}
   audioRef.current?.dispatchEvent(new Event('fmi-audio-start'));
+ }
+ function playing(){
+  setReady(true);
+  if(!reportedPlayback.current){reportedPlayback.current=true;trackProduct('preview',entry.id);}
  }
  function toggleMusic(){
   const video=videoRef.current;if(!video)return;
@@ -40,7 +49,7 @@ export function VideoCard({entry,showDetails=true}:{entry:VideoEntry;showDetails
  return <TemplatePreviewDialog name={entry.name} onExpand={startPreview}>{(expanded,expandControl)=><article className={'di-video-card'+(expanded?' di-expanded-card':'')} ref={box} style={{'--di-card-art':`url(${JSON.stringify(entry.poster)})`} as CSSProperties}>
   <div className="di-video-demo">
    <a href={templateDetailsPath(entry.id,'video')} aria-label={'Details: '+entry.name}><img src={entry.poster} srcSet={entry.posters?Object.entries(entry.posters).map(([width,url])=>url+' '+width+'w').join(','):undefined} sizes="(max-width:640px) 78vw, 25vw" width={720} height={1280} loading="lazy" decoding="async" onError={e=>{e.currentTarget.removeAttribute('srcset');if(e.currentTarget.getAttribute('src')!==entry.poster)e.currentTarget.src=entry.poster;}} alt={entry.name}/></a>
-   {active&&<video ref={attachVideo} onProgress={()=>{if(!ready)loadingProgress();}} src={entry.preview} poster={entry.poster} style={{opacity:ready?1:0}} onPlaying={()=>setReady(true)} controls={expanded} muted={muted} onVolumeChange={e=>{const next=e.currentTarget.muted||e.currentTarget.volume===0;if(next!==previewMuted())setPreviewMuted(next);}} loop playsInline preload="auto" aria-label={entry.name+' preview'} onError={()=>{setActive(false);setFailed(true);}}/>}
+   {active&&<video ref={attachVideo} onProgress={()=>{if(!ready)loadingProgress();}} src={entry.preview} poster={entry.poster} style={{opacity:ready?1:0}} onPlaying={playing} controls={expanded} muted={muted} onVolumeChange={e=>{const next=e.currentTarget.muted||e.currentTarget.volume===0;if(next!==previewMuted())setPreviewMuted(next);}} loop playsInline preload="auto" aria-label={entry.name+' preview'} onError={()=>{setActive(false);setFailed(true);}}/>}
    {active&&entry.music&&!entry.embeddedMusic&&<CatalogSoundtrack entry={entry} videoRef={videoRef} audioRef={audioRef}/>}
    <span className="di-pin-kind"><Video size={14} aria-hidden="true"/>Video</span>
    <span className="di-video-duration" aria-label={'Duration '+duration}>{duration}</span>

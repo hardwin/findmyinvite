@@ -1,8 +1,6 @@
-import {catalogIdentities,withCatalogIdentity,versionIdentity,saveCatalogDescription,registerVideoIdentities} from '../server/catalog-identity.mjs';
+import {catalogIdentities,withCatalogIdentity,versionIdentity,saveCatalogDescription,registerVideoIdentities,videoNames} from '../server/catalog-identity.mjs';
 import {publicPreviewVersion,respondPreview} from '../server/template-preview.mjs';
 import {identityFields,validateMicroDescription} from '../shared/catalog-identity.mjs';
-import {VIDEO_CATALOG} from '../shared/video-catalog.mjs';
-import {videoDefinition} from '../shared/video-personalization.mjs';
 import {withTemplateMusic,withFormMusic} from '../server/website-music.mjs';
 import previewMedia from '../shared/catalog-preview-media.mjs';
 import {templateForm,selectedForm} from '../server/template-forms.mjs';
@@ -22,7 +20,12 @@ export default async function handler(req,res){try{
  if(action==='version'){method(req,['GET']);return respond(res,200,{version:await versionIdentity(safeVersion(await withTemplateMusic(await catalogVersion(q.get('id')))))});}
  if(action==='editor'){method(req,['GET']);const v=await withTemplateMusic(await catalogVersion(q.get('id'))),form=await templateForm(v);return respond(res,200,{version:await versionIdentity(safeVersion(v)),form:withFormMusic(form,v)});}
  const user=await operator(req);
- if(action==='identities'){method(req,['GET']);const [identities,websites,legacyVideos]=await Promise.all([catalogIdentities(),db('template_catalog?select=id,name'),db('video_templates?select=id,name')]);const names=new Map([...websites.map(t=>['website:'+t.id,t.name]),...legacyVideos.map(t=>['video:'+t.id,t.name])]);for(const id of ['temple-v1','kerala-christian-v1',...VIDEO_CATALOG.map(v=>v.id)])names.set('video:'+id,videoDefinition(id).name);return respond(res,200,{identities:identities.map(row=>({...row,...identityFields(row),name:names.get(row.kind+':'+row.template_id)||row.template_id}))});}
+ if(action==='identities'){
+  method(req,['GET']);
+  const [identities,websites,legacyVideos]=await Promise.all([catalogIdentities(),db('template_catalog?select=id,name'),db('video_templates?select=id,customer_name,name')]);
+  const names={website:new Map(websites.map(t=>[t.id,t.name])),video:videoNames(legacyVideos)};
+  return respond(res,200,{identities:identities.map(row=>({...row,...identityFields(row),name:names[row.kind]?.get(row.template_id)||row.template_id}))});
+ }
  if(action==='get-form'){method(req,['GET']);const v=await version(q.get('id'));const rows=await db('template_forms?template_id=eq.'+encodeURIComponent(v.template_id)+'&select=*');return respond(res,200,{form:selectedForm(rows[0],v.id,true)});}
  if(action==='archive-info'||action==='archive-part'){
  method(req,['GET']);const id=q.get('id');if(!/^[a-f0-9-]{36}$/.test(id||''))throw new HttpError(400,'Invalid archive.');const rows=await db('template_archives?id=eq.'+id+'&select=object_path,sha256,verified_at');if(!rows[0]?.verified_at)throw new HttpError(404,'Verified archive unavailable.');const row=rows[0],info=await head(row.object_path);

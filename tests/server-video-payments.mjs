@@ -2,9 +2,13 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHmac,randomUUID} from 'node:crypto';
 import {readFile} from 'node:fs/promises';
+import {resolve} from 'node:path';
 import {PGlite} from '@electric-sql/pglite';
 import {videoQuote} from '../shared/video-pricing.mjs';
 import {videoPaymentService,videoInvitationId,promoDigest,validVideoPromo} from '../server/video-payments.mjs';
+import {collectEvent,recordVideoCheckout} from '../server/owner/events.mjs';
+import {get,list} from '../server/owner/store.mjs';
+import {orderedFunnel} from '../shared/owner-metrics.mjs';
 const owner='owner-a',template='temple-v1',code='PRIVATE-TEST-CODE';
 function fixture(){
  const rows=new Map(),payments=new Map(),created=[],calls=[];
@@ -104,4 +108,48 @@ test('Wedding Bells updates an unreserved draft price and grants a correctly pri
  const f=fixture(),id=randomUUID(),tid='wedding-bells-v1';f.rows.set(id,{id,owner_id:owner,template_id:tid,status:'pending',total_paise:58882,base_paise:49900,tax_bps:1800,tax_paise:8982});
  assert.equal((await f.service.order(owner,id,tid)).amount,82482);
  assert.equal((await f.service.promo(owner,randomUUID(),tid,code)).discount,82482);
+});
+
+test('paid video sessions reach the ordered funnel only after discovery, with one checkout per attempt',async t=>{
+ const before={...process.env};
+ t.after(()=>{for(const key of Object.keys(process.env))if(!(key in before))delete process.env[key];Object.assign(process.env,before);});
+ process.env.FMI_OWNER_LOCAL='1';process.env.FMI_OWNER_DB=resolve('work/owner-tests/'+randomUUID()+'.sqlite');
+ delete process.env.VERCEL;
+ const f=fixture(),templateId='wedding-bells-v1',orders=[],events=[];
+ const req={headers:{host:'shop.test',origin:'http://shop.test'}};
+ async function buy(discovered){
+  const id=randomUUID(),session=randomUUID(),context={id:randomUUID(),session,device:'mobile',language:'en'};
+  if(discovered)for(const type of ['template_selected','preview','form_start']){
+   const input={...context,id:randomUUID(),type,templateId};await collectEvent(req,input);events.push(await get('product-event',input.id));
+  }
+  const order=await f.service.order(owner,id,templateId);
+  await recordVideoCheckout(req,'payment-order',order,context,templateId);
+  await recordVideoCheckout(req,'payment-order',order,context,templateId);
+  events.push(await get('product-event',context.id));
+  const captured=await f.service.verify(owner,id,templateId,f.response(f.captured(order,{amount:82482})));
+  await recordVideoCheckout(req,'payment-verify',captured,context,templateId);
+  const linked=await get('order-context',id);
+  assert.equal(linked.session,session);assert.equal(linked.confirmed,true);
+  orders.push({id,purpose:'video',analyticsSession:linked.session,status:captured.status,reporting_at:new Date().toISOString()});
+  for(const action of ['payment-order','payment-status','payment-promo']){
+   const retry={...context,id:randomUUID()};await recordVideoCheckout(req,action,captured,retry,templateId);
+   assert.equal(await get('product-event',retry.id),null);
+  }
+ }
+ await buy(true);await buy(false);
+ assert.equal((await list('product-event')).filter(e=>e.type==='checkout').length,2);
+ assert.deepEqual(orderedFunnel(events,orders).map(stage=>stage.sessions),[1,1,1,1,1]);
+ const id=randomUUID(),pending=await f.service.order(owner,id,templateId);
+ const first={id:randomUUID(),session:randomUUID(),device:'mobile'},second={...first,id:randomUUID(),session:randomUUID()};
+ await recordVideoCheckout(req,'payment-order',pending,first,templateId);
+ assert.equal((await get('order-context',id)).session,first.session);
+ await recordVideoCheckout(req,'payment-order',pending,second,templateId);
+ assert.equal((await get('order-context',id)).session,null);
+ const paid=await f.service.verify(owner,id,templateId,f.response(f.captured(pending,{amount:82482})));
+ await recordVideoCheckout(req,'payment-verify',paid,second,templateId);
+ await recordVideoCheckout(req,'payment-order',pending,first,templateId);
+ assert.equal((await get('order-context',id)).session,second.session);
+ const promo=await f.service.promo(owner,randomUUID(),templateId,code);
+ await recordVideoCheckout(req,'payment-order',promo,first,templateId);
+ assert.equal(await get('order-context',promo.invitationId),null);
 });

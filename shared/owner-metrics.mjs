@@ -13,8 +13,9 @@ export function organicTrend(series,preferences={},now=Date.now()){
  const yesterday=series.find(d=>d.date===businessDay(now-86400000));
  return {comparable,current:comparable?a:null,previous:comparable?b:null,change:comparable?a-b:null,percent:comparable&&b?Math.round((a-b)/b*100):null,zeroStreak,zeroAlert:zeroStreak>=(preferences.zeroDays||3),declineAlert:comparable&&b>=10&&(b-a)/b*100>=(preferences.leadDropPercent||30),overdue:hour>=10&&!!yesterday?.expected&&yesterday.status!=='Complete'};
 }
-export function periodFinance(orders,sales,receipts,expenses,start,end){
- const within=date=>date&&businessDay(date)>=start&&businessDay(date)<=end;
+export function periodFinance(orders,sales,receipts,expenses,start,end,untilMs=Infinity){
+ const startMs=Date.parse(start+'T00:00:00+05:30'),endMs=Math.min(Date.parse(end+'T00:00:00+05:30')+86400000,untilMs);
+ const within=date=>{const time=Date.parse(date);return time>=startMs&&time<endMs;};
  const captured=orders.filter(o=>['captured','refunded'].includes(o.status)&&within(o.captured_at||o.reporting_at));
  const refunded=orders.filter(o=>o.status==='refunded'&&within(o.refunded_at));
  const paid=receiptTaxes(sales,receipts).filter(r=>r.date>=start&&r.date<=end);
@@ -28,9 +29,10 @@ export function periodFinance(orders,sales,receipts,expenses,start,end){
 export function orderedFunnel(events,orders){
  const groups=groupRows(events,e=>e.session);const names=['template_selected','preview','form_start','checkout'];const counts=names.map(()=>0);let purchases=0;
  for(const rows of Object.values(groups)){
-  rows.sort((a,b)=>a.at.localeCompare(b.at));let at=0;
-  for(const row of rows){if(row.type===names[at]){counts[at]++;at++;}if(at===4)break;}
-  if(at===4&&orders.some(o=>o.analyticsSession===rows[0].session&&['captured','refunded'].includes(o.status)))purchases++;
+  rows.sort((a,b)=>a.at.localeCompare(b.at));let at=0,checkoutAt;
+  for(const row of rows){if(row.type===names[at]){counts[at]++;at++;}if(at===4){checkoutAt=Date.parse(row.at);break;}}
+  if(at===4&&orders.some(o=>o.analyticsSession===rows[0].session&&['captured','refunded'].includes(o.status)
+   &&Date.parse(o.reporting_at||o.captured_at||o.applied_at)>=checkoutAt))purchases++;
  }
  return [...names.map((stage,i)=>({stage,sessions:counts[i]})),{stage:'purchase_confirmed',sessions:purchases}];
 }

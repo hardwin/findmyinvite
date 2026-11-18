@@ -14,3 +14,14 @@
 .oc-watch.oc-masked .oc-stat strong,.oc-watch.oc-masked .oc-stat-bottom,.oc-watch.oc-masked .oc-goal{visibility:hidden}.oc-watch.oc-masked .oc-stat strong{position:relative}.oc-watch.oc-masked .oc-stat strong:after{content:"••••";position:absolute;left:0;visibility:visible}.oc-goal{display:block;width:100%;padding:18px 22px;text-align:left;border:0;border-top:1px solid #293343;background:transparent}.oc-goal>span{display:flex;justify-content:space-between;gap:12px}.oc-goal small{display:block;color:#99aac3;margin-top:8px}.oc-goal progress{width:100%;height:7px;accent-color:#a89aeb;margin-top:12px}
 
 .oc-clickable-row{cursor:pointer}.oc-clickable-row:hover{background:#242c40}.oc-order-number{position:relative;display:inline-flex;align-items:center;gap:9px;font-variant-numeric:tabular-nums}.oc-copy-id{background:none;border:0;color:#a99deb;padding:5px}.oc-order-id{display:none;position:absolute;bottom:100%;left:0;padding:8px;background:#30394c;border:1px solid #67728a;border-radius:6px;z-index:5;white-space:nowrap;font-size:11px}.oc-order-number:hover .oc-order-id,.oc-order-number:focus-within .oc-order-id{display:block}.oc-product-name{display:flex;flex-direction:column;gap:4px}.oc-product-name small{color:#99aac3;font-size:11px}.oc-sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+.oc-period-picker{position:relative;display:flex;align-items:center;gap:8px}
+.oc-range-form{position:absolute;right:0;top:calc(100% + 6px);z-index:12;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;width:min(320px,calc(100vw - 40px));padding:14px;border:1px solid #354055;border-radius:10px;background:#182132}
+.oc-range-form label{display:grid;gap:4px;font-size:12px}
+.oc-range-form input{width:100%;min-width:0}
+.oc-range-form .oc-error{grid-column:1 / -1}
+.oc-page-heading .oc-reporting-dates{margin-top:6px;color:#d1d9e7}
+.oc-period-comparison{display:flex;align-items:baseline;gap:6px 16px;flex-wrap:wrap;margin:0 0 18px;font-size:13px}
+.oc-period-comparison small{color:#a8b5c8}
+@media(max-width:700px){.oc-range-form{left:0;right:auto}}
+
+.oc-freshness{font-size:.82rem;color:var(--muted,#a6b0c2);margin:0 0 1rem}.oc-freshness details{display:inline-block;margin-inline-start:.5rem;vertical-align:top}.oc-freshness summary{cursor:pointer}.oc-freshness li{margin:.25rem 0}
