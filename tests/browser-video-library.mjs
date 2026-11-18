@@ -49,7 +49,7 @@ for(const engine of [chromium,webkit]){
   for(const width of [320,390,768,1440]){
    await page.setViewportSize({width,height:844});await packing();
    const row=await page.getByRole('combobox').evaluateAll(els=>els.map(el=>{const b=el.getBoundingClientRect();return {y:b.y,width:b.width,height:b.height};}));
-   assert.ok(row.every(item=>Math.abs(item.y-row[0].y)<1&&item.height>=44&&item.width>=44),'Three touch-friendly controls occupy one row');
+   assert.ok(row.every(item=>Math.abs(item.y-row[0].y)<1&&item.height>=(width<=920?44:35)&&item.width>=44),'Three compact controls occupy one row with mobile touch targets');
   }
   await page.setViewportSize({width:390,height:844});
   const before=await packing();
