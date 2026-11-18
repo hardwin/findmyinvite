@@ -18,8 +18,9 @@ Marketing and search have provider authorization, account selection, synchroniza
 
 ## Reporting rules
 
-Sales rows use permanent, server-allocated numeric order numbers across filters and reloads. Full IDs remain available on hover/focus and through Copy. Product names and SKUs come from template/version relationships or the recorded legacy SKU. Relative creation times expose their exact timestamp on hover. Click a row or press Enter/Space to open details.
+The dashboard opens on Today in Asia/Kolkata. Yesterday, rolling periods and custom dates apply to dated activity. Today’s online collections are compared with yesterday through the same time. Each section shows its last successful refresh and identifies sources serving cached data.
 
+Sales rows use permanent order numbers. If numbering is unavailable, the original order ID identifies the row. Open a row for its full timeline. The table displays the reporting activity in IST. For a DIY video, FMI records the unlock time after verifying payment. The design name comes from the storefront definition or the historical video catalogue.
 
 - Money is stored in integer minor units. INR is the default. Other-currency orders and production USD spend remain separate. No exchange rate is invented.
 - Collections, refunds, recorded GST and net sales are distinct. Operating result is an estimate based on recorded costs. Verified capture dates take priority. Older captured website payments with a recorded payment-applied timestamp use that timestamp for dated reporting, labelled “Payment applied to invitation”; the original capture date remains unknown. Orders lacking both timestamps or verified GST remain flagged for reconciliation. Order creation time is never substituted.
@@ -32,6 +33,16 @@ Sales rows use permanent, server-allocated numeric order numbers across filters 
 
 ## Grok integration
 
+### Read captured sales and template performance
+
+In Settings & connections, open **Read captured sales** or **Read named template performance** using the signed-in owner session. For an agent, issue a separate key with only `sales:read` in the existing External agent keys panel. Send it in the `Authorization: Bearer` header.
+
+- `GET /api/owner?action=sales-report&view=captures&period=today` returns online captures with their amount, GST, currency, product name, recorded payment date and date basis. Refunded captures carry their current status.
+- `GET /api/owner?action=sales-report&view=templates&days=7` returns named design performance, including DIY videos. Revenue is in INR paise. Journey counts use recorded sessions.
+- Use `period=yesterday` or `period=custom&from=YYYY-MM-DD&to=YYYY-MM-DD` for other IST business dates. To detect new captures across midnight, poll an overlapping window such as `days=7` and deduplicate by `orderId`. Retry the same window on HTTP 503. Each successful response identifies its oldest contributing source read.
+
+### Submit operational updates
+
 1. Add Grok as an **Agent** in Team & Agents. Create a separate key for the intended scope in Settings. Copy the key once into Grok's secret store.
 2. POST JSON to `/api/owner?action=ingest`, with `Authorization: Bearer <key>` and `Content-Type: application/json`.
 3. First send `dryRun: true`. This validates without saving business data; it still consumes the request rate allowance.
@@ -42,6 +53,7 @@ Schemas: [OpenAPI 3.1](grok-openapi.json), [daily dry-run example](daily-report.
 
 | Scope | Accepted kinds | Restrictions |
 |---|---|---|
+| `sales:read` | Captures and template performance | Read-only reporting via GET |
 | `organic:write` | `daily`, `lead` | Inquiries only; no DM transcripts by default |
 | `research:write` | `observation` | Dated source/evidence; benchmark references must match |
 | `content:draft` | `article` | Idea, Brief, Draft or Review only |

@@ -21,6 +21,7 @@ import {formErrors} from '../../shared/template-forms.mjs';
 import {DynamicFields} from '../templates/DynamicFields';
 import {templateToken} from '../templates/api';
 import {videoRequest as templateApi} from './request';
+import {trackProduct} from '../product-analytics';
 import {readSession} from '../auth-session';
 import {optimise,PHOTO_ACCEPT} from '../../shared/template-image.mjs';
 import {upload} from '@vercel/blob/client';
@@ -59,6 +60,12 @@ function VideoEditor(){
  const photoSlots:{slot:string;label:string;scene?:string}[]=definition?.photoSlots||PHOTO_SLOTS.map(slot=>({slot,label:slot==='couple'?'The two of you':'The '+slot}));
  const [config,setConfig]=useState<{templateCode?:string;microDescription?:string;master:VideoMasterManifest;ready:boolean;localUploads:boolean;musicTracks:{id:string;title:string}[];defaults:Record<string,any>}|null>(null),[content,setContent]=useState<VideoPersonalization>(structuredClone(VIDEO_DEFAULTS) as VideoPersonalization),[step,setStep]=useState(0),[error,setError]=useState(''),[notice,setNotice]=useState(''),[busy,setBusy]=useState(false),[signin,setSignin]=useState(false),[frame,setFrame]=useState(102),[playing,setPlaying]=useState(false),[loop,setLoop]=useState(false),[previewError,setPreviewError]=useState(''),[previewReady,setPreviewReady]=useState(false),[job,setJob]=useState<VideoRenderJob|null>(null),[jobContent,setJobContent]=useState(''),[checked,setChecked]=useState(false),[owner,setOwner]=useState(readSession()?.user.id||'guest'),[photoURLs,setPhotoURLs]=useState<Record<string,{url:string;mode:string}>>({}),[pending,setPending]=useState<Record<string,{id:string;mode:'frame'|'cutout';url:string;originalUrl:string;error?:string;prepared?:boolean;localId?:string}>>({});
  const [invitationId,setInvitationId]=useState(''),[purchase,setPurchase]=useState<VideoPurchase|null>(null),[checkingPayment,setCheckingPayment]=useState(false);
+ const trackedEditor=useRef('');
+ useEffect(()=>{
+  if(!config||!invitationId||trackedEditor.current===invitationId)return;
+  trackedEditor.current=invitationId;
+  trackProduct('form_start',templateId);
+ },[config,invitationId,templateId]);
  const renderRemaining=useRenderEstimate(job);
  const master=useMemo(()=>{if(!config)return null;if(!runtimeRules)return config.master;const fps=config.master.output.fps,frames=Math.ceil(runtimeRules.duration*fps);return {...config.master,output:{...config.master.output,frames,duration:frames/fps},scenes:runtimeRules.chapters.map((c,i)=>({id:c.id,name:c.label,start:i?Math.round(c.loop[0]*fps):0,end:i===runtimeRules.chapters.length-1?frames:Math.round(runtimeRules.chapters[i+1].loop[0]*fps),reviewFrame:Math.min(frames-1,Math.round(c.show*fps))}))};},[config,runtimeRules]);
  const fps=master?.output.fps||24,totalFrames=master?.output.frames||1296,totalSeconds=master?.output.duration||54;

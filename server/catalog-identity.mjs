@@ -1,13 +1,21 @@
 import {db,HttpError} from './core.mjs';
 import {identityFields,validateMicroDescription} from '../shared/catalog-identity.mjs';
 import {VIDEO_CATALOG} from '../shared/video-catalog.mjs';
+import {videoDefinition,DEFAULT_VIDEO_ID,VIDEO_ID} from '../shared/video-personalization.mjs';
+import {WEDDING_BELLS_ID} from '../shared/wedding-bells-video.mjs';
 import descriptions from '../shared/catalog-descriptions.json' with {type:'json'};
 
 // Operator-triggered registration for code-defined videos, with no renumbering or
 // overwriting of descriptions already edited in the CMS.
+const diyIds=[WEDDING_BELLS_ID,DEFAULT_VIDEO_ID,VIDEO_ID,...VIDEO_CATALOG.map(row=>row.id)];
+export function videoNames(legacyRows=[]){
+ const names=new Map(legacyRows.map(row=>[row.id,row.customer_name||row.name]));
+ for(const id of diyIds)names.set(id,videoDefinition(id).name);
+ return names;
+}
 export async function registerVideoIdentities(query=db){
  const existing=await catalogIdentities('video',query),known=new Set(existing.map(row=>row.template_id));
- const missing=['temple-v1','kerala-christian-v1','wedding-bells-v1',...VIDEO_CATALOG.map(row=>row.id)].filter(id=>!known.has(id));
+ const missing=diyIds.filter(id=>!known.has(id));
  if(missing.length)await query('catalog_identity?on_conflict=kind,template_id',{method:'POST',headers:{Prefer:'resolution=ignore-duplicates'},body:missing.map(id=>({kind:'video',template_id:id,micro_description:validateMicroDescription(descriptions.video[id])}))});
  return missing.length;
 }

@@ -1,5 +1,5 @@
 FMI / AKAYADMIN - GROK AGENT INTEGRATION HANDBOOK
-Version 1.0 | Prepared 4 November 2026 | Production API
+Owner API handbook | Updated 18 November 2026
 
 This is a self-contained integration handoff: connection instructions, reporting rules, examples for all seven accepted record kinds, and the complete OpenAPI 3.1 specification. No other file is required to understand the integration. No API key or owner password is included.
 
@@ -7,7 +7,7 @@ This is a self-contained integration handoff: connection instructions, reporting
 
 Send genuine organic business inquiries, competitor/AEO observations, content drafts, and authorized work updates into FMI's owner dashboard. Production dashboard: https://findmyinvite.com/akay
 
-This is a scoped WRITE API. Grok cannot use it to read the private dashboard, list customers/orders/tickets, obtain sales figures, or retrieve current record revisions. The owner must supply any necessary identifiers, existing record payloads, revisions, or exported business data. Do not pretend to have inspected unavailable business data.
+Agent keys have individual permissions. With a dedicated sales:read key, request GET /api/owner?action=sales-report&view=captures&days=7 for new online captures or view=templates for named performance. Use the bearer header. The date range defaults to Today in IST. Each capture has a stable orderId and a reporting date basis. Poll an overlapping range and deduplicate by orderId. Retry the same range on HTTP 503. The owner supplies identifiers and revision information for write workflows.
 
 There is no arbitrary free-form insight endpoint. Submit dated research through observation records, with facts in evidence and interpretation/recommendations in notes. Organic charts and trends are computed from daily reports and matched lead records. Content recommendations may be submitted as article ideas/briefs/drafts. Do not send unsupported record kinds or invented fields.
 
@@ -94,7 +94,7 @@ A rejected result includes index, accepted:false, error and status. reportRevisi
 For a non-daily first write, normally omit id/revision. Persist the returned FMI id/revision and the full canonical payload. To update, send:
 {"kind":"lead","dryRun":false,"records":[{"id":"RETURNED_ID","revision":1,"data":{...FULL_VALID_LEAD_DATA...}}]}
 
-Updates are full records, not patches. Omitted optional/defaulted fields can clear previous data. Preserve the complete intended state. Exact retries deduplicate by stable identity and normalized payload. Do not substitute a different key/agent namespace to evade a conflict. A stale revision requires the owner to provide the current record and revision; this API has no agent read endpoint.
+Updates are full records, not patches. Omitted optional/defaulted fields can clear previous data. Preserve the complete intended state. Exact retries deduplicate by stable identity and normalized payload. Do not substitute a different key/agent namespace to evade a conflict. Ask the owner for the current record and revision when an update conflicts.
 
 400: correct invalid fields. 401: check missing/invalid key. 403: check permission, revoked key, resource/project restrictions. 409: resolve revision/identity conflict; do not overwrite blindly. 413: split request. 429: honor Retry-After if supplied, otherwise wait at least 60 seconds. 5xx/network timeout: exponential backoff with jitter and the exact original payload/identifiers. Retry only failed or unconfirmed records. Stop repeated failures and report the issue to the owner without exposing secrets.
 
@@ -105,7 +105,7 @@ Updates are full records, not patches. Omitted optional/defaulted fields can cle
 - Submit the previous day's complete snapshot before 10:00 IST where practical; send explicit complete zeros only after verified collection.
 - Submit optional detail leads using reliable identifiers; update statuses only when known.
 - Submit dated competitor/AEO evidence against the owner's agreed benchmark. Do not manufacture observations for missing providers.
-- Summarize coverage, measured changes, uncertainty and concrete recommendations. Request owner data for private revenue comparisons that this API cannot read.
+- Summarize coverage, measured changes, uncertainty and concrete recommendations. Use the scoped sales report for recorded online captures and template revenue when the owner has issued a sales:read key.
 - Submit drafts for owner review; no autonomous publication or spending.
 - Persist successful IDs/revisions in Grok's own integration state and monitor every API result.
 
@@ -315,12 +315,12 @@ BEGIN OPENAPI JSON
   },
   "servers": [
     {
-      "url": "https://findmyinvite.com",
-      "description": "Production"
+      "url": "http://127.0.0.1:5173",
+      "description": "Local review"
     },
     {
-      "url": "http://127.0.0.1:5173",
-      "description": "Local development only"
+      "url": "https://findmyinvite.com",
+      "description": "Available only after the reviewed release is deployed"
     }
   ],
   "security": [
@@ -668,7 +668,7 @@ BEGIN OPENAPI JSON
                           "intent": "price",
                           "firstInquiryAt": "2026-11-03T12:00:00Z",
                           "status": "New",
-                          "templateId": "ivory-lace",
+                          "templateId": "lace",
                           "language": "Tamil"
                         }
                       }
@@ -748,6 +748,91 @@ BEGIN OPENAPI JSON
             "description": "Rate exceeded: retry after one minute"
           }
         }
+      },
+      "get": {
+        "operationId": "readSalesReport",
+        "summary": "Read captured online sales or named template performance with sales:read",
+        "parameters": [
+          {
+            "name": "action",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "const": "sales-report"
+            }
+          },
+          {
+            "name": "view",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "captures",
+                "templates"
+              ],
+              "default": "captures"
+            }
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "today",
+                "yesterday",
+                "custom"
+              ]
+            },
+            "description": "IST business dates. Today is the default."
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "description": "Required with period=custom."
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "description": "Required with period=custom."
+          },
+          {
+            "name": "days",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 365
+            },
+            "description": "Rolling business days including today. Omit period when using days."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response includes the range, readAt and oldestSourceReadAt. The captures view returns sales with stable orderId, productName, currency, amount, tax, status, reportedAt and dateBasis. Amounts use minor currency units. The templates view returns templates with customer-facing names, recorded journey counts, purchases, renewals and net INR revenue in paise."
+          },
+          "400": {
+            "description": "Invalid date range or view"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Insufficient scope or revoked key"
+          },
+          "503": {
+            "description": "Required source unavailable or stale. Retry the same period."
+          }
+        }
       }
     }
   },
@@ -757,7 +842,7 @@ BEGIN OPENAPI JSON
         "type": "http",
         "scheme": "bearer",
         "bearerFormat": "fmi_<64 hex>",
-        "description": "Separate revocable key per external resource and scope. Operational keys are restricted to assigned project IDs. Scopes: tickets:write, organic:write, research:write, content:draft, runs:write"
+        "description": "Separate revocable key per external resource and scope. Operational keys are restricted to assigned project IDs. Scopes: tickets:write, organic:write, research:write, content:draft, runs:write, sales:read"
       }
     },
     "schemas": {

@@ -4,8 +4,8 @@ import {Panel,Stat,Trend,DataTable,Empty,Badge} from './ui';
 import {number,type Snapshot,type Row} from './api';
 import Connections from './Connections';
 export default function SearchPerformance({data,reload}:{data:Snapshot;reload:()=>void}){
- const [device,setDevice]=useState(''),[country,setCountry]=useState(''),[brand,setBrand]=useState('all');const cutoff=data.daily[0]?.date||'1900-01-01';
- const days=data.records['search-day'].filter(r=>r.date>=cutoff),terms=data.records.preferences[0]?.brandedTerms||['findmyinvite','find my invite'];
+ const [device,setDevice]=useState(''),[country,setCountry]=useState(''),[brand,setBrand]=useState('all');const cutoff=data.range.start;
+ const days=data.records['search-day'].filter(r=>r.date>=cutoff&&r.date<=data.range.end),terms=data.records.preferences[0]?.brandedTerms||['findmyinvite','find my invite'];
  const all=days.flatMap(d=>d.rows.map((r:Row)=>({...r,date:d.date,complete:d.complete,provenance:d.provenance}))),filtered=all.filter(r=>(!device||r.device===device)&&(!country||r.country===country)&&(brand==='all'||terms.some((t:string)=>r.query.toLowerCase().includes(t.toLowerCase()))===(brand==='branded'))),filteredView=!!(device||country||brand!=='all');
  const chart=days.sort((a,b)=>a.date.localeCompare(b.date)).map(d=>{const rows=filtered.filter(r=>r.date===d.date),clicks=rows.reduce((n,r)=>n+r.clicks,0),impressions=rows.reduce((n,r)=>n+r.impressions,0);return {date:d.date,label:d.date.slice(5),clicks:filteredView?clicks:d.totals?.clicks??null,impressions:filteredView?impressions:d.totals?.impressions??null,position:filteredView?(impressions?rows.reduce((n,r)=>n+r.position*r.impressions,0)/impressions:null):d.totals?.position??null};});
  const clicks=chart.reduce((n,d)=>n+(d.clicks||0),0),impressions=chart.reduce((n,d)=>n+(d.impressions||0),0),position=impressions?chart.reduce((n,d)=>n+(d.position||0)*(d.impressions||0),0)/impressions:null;
