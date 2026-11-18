@@ -1,4 +1,4 @@
-import {weddingBellsNewOrSavedVersion} from '../../shared/wedding-bells-version.mjs';
+import {isVersionedVideo,videoNewOrSavedVersion} from '../../shared/video-master-version.mjs';
 import {videoQuote} from '../../shared/video-pricing.mjs';
 import {createPreviewAudio} from '../../shared/preview-audio.mjs';
 import {useRenderEstimate} from './useRenderEstimate';
@@ -79,7 +79,7 @@ function VideoEditor(){
    for(const [slot,value] of Object.entries(raw?.pending||{})){const p=value as any;setPending(current=>({...current,[slot]:{...p,url:'',originalUrl:''}}));}
   }catch{setError('Some saved details need attention. Your saved draft has been kept.');}
  },[draft.ready,draft.id,draft.owner,config]);
- const draftPayload=()=>({...(templateId==='wedding-bells-v1'?{masterVersion:config?.master.version??weddingBellsNewOrSavedVersion(draft.initial)}:{}),content,step:legacyVideoStep(VIDEO_FORM.steps[step].id),formStepId:VIDEO_FORM.steps[step].id,formVersion:VIDEO_FORM_VERSION,personalPhotosEnabled,photoReferenceMode,job,jobContent,references,pending:Object.fromEntries(Object.entries(pending).map(([k,p])=>[k,{id:p.id,mode:p.mode,localId:p.localId}]))});
+ const draftPayload=()=>({...(isVersionedVideo(templateId)?{masterVersion:config?.master.version??videoNewOrSavedVersion(templateId,draft.initial)}:{}),content,step:legacyVideoStep(VIDEO_FORM.steps[step].id),formStepId:VIDEO_FORM.steps[step].id,formVersion:VIDEO_FORM_VERSION,personalPhotosEnabled,photoReferenceMode,job,jobContent,references,pending:Object.fromEntries(Object.entries(pending).map(([k,p])=>[k,{id:p.id,mode:p.mode,localId:p.localId}]))});
  const payloadRef=useRef(draftPayload());payloadRef.current=draftPayload();
  useEffect(()=>{contentRef.current=activeContent;if(draft.ready&&invitationId===draft.id)draft.update(draftPayload(),touched);},[content,activeContent,personalPhotosEnabled,photoReferenceMode,step,job,jobContent,pending,references,draft.ready,invitationId,touched]);
  async function saveDraft(){setTouched(true);draft.update(payloadRef.current,true);await draft.flush();if(draft.record?.conflict)throw Error('Reload the saved draft before continuing.');}
@@ -95,7 +95,7 @@ function VideoEditor(){
   const resume=()=>void check();void check();window.addEventListener('focus',resume);document.addEventListener('visibilitychange',resume);
   return()=>{active=false;clearTimeout(timer);window.removeEventListener('focus',resume);document.removeEventListener('visibilitychange',resume);};
  },[owner,step,invitationId,draft.ready,templateId]);
- useEffect(()=>{if(!draft.ready||!draft.id)return;let active=true;const version=templateId==='wedding-bells-v1'?'&masterVersion='+weddingBellsNewOrSavedVersion(draft.initial):'';templateApi<any>(API+'?template='+encodeURIComponent(templateId)+version).then(c=>{if(active)setConfig(c);}).catch(e=>{if(active)setError(e.message);});return()=>{active=false;};},[templateId,draft.ready,draft.id]);
+ useEffect(()=>{if(!draft.ready||!draft.id)return;let active=true;const version=isVersionedVideo(templateId)?'&masterVersion='+videoNewOrSavedVersion(templateId,draft.initial):'';templateApi<any>(API+'?template='+encodeURIComponent(templateId)+version).then(c=>{if(active)setConfig(c);}).catch(e=>{if(active)setError(e.message);});return()=>{active=false;};},[templateId,draft.ready,draft.id]);
  useEffect(()=>()=>{urls.current.forEach(URL.revokeObjectURL);},[]);
  const photoKey=JSON.stringify(activeContent.photos);
  useEffect(()=>{let active=true;const created:string[]=[],next:Record<string,{url:string;mode:string}>={};setLoadedPhotoKey('');setPhotoURLs({});setPhotoError('');Promise.all(Object.entries(activeContent.photos||{}).map(async([slot,p])=>{const b=await privateFile(`${API}?action=media&id=${p!.id}${p!.mode==='cutout'?'&cutout=1':''}`);if(!active)return;const url=URL.createObjectURL(b);created.push(url);next[slot]={url,mode:p!.mode};})).then(()=>{if(active){setPhotoURLs(next);setLoadedPhotoKey(photoKey);}}).catch(()=>{if(active){setPhotoError('A selected photo is unavailable. Replace it in Review or switch off Use personal photos.');setPreviewError('A selected photo is unavailable. Open Review to replace it or use the original characters.');}});return()=>{active=false;created.forEach(URL.revokeObjectURL);};},[photoKey,owner]);

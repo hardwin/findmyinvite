@@ -98,7 +98,7 @@ export function assertMaster(m,{released=false}={}){
   if(released&&(!m.release?.approved||!['default','personalized'].every(k=>/^[a-f0-9]{64}$/.test(m.release?.proofs?.[k]||''))||m.release.rendererVersion!==m.rendererVersion||m.assets?.sceneBundle?.path!==expectedIndex||!/^[a-f0-9]{64}$/.test(m.assets?.sceneBundle?.sha256||'')))throw Error('This template is still being prepared.');
   return m;
  }
- if(![VIDEO_ID,TEMPLE_ID].includes(m?.id)||m.version!==1||JSON.stringify(m.layerOrder)!==JSON.stringify(LAYER_ORDER)||JSON.stringify(m.output)!==JSON.stringify(VIDEO_OUTPUT))throw Error('Unsupported video master.');
+ if(![VIDEO_ID,TEMPLE_ID].includes(m?.id)||(m.id===TEMPLE_ID?![1,2].includes(m.version):m.version!==1)||JSON.stringify(m.layerOrder)!==JSON.stringify(LAYER_ORDER)||JSON.stringify(m.output)!==JSON.stringify(VIDEO_OUTPUT))throw Error('Unsupported video master.');
  if(!Array.isArray(m.scenes)||m.scenes.length!==(m.id===TEMPLE_ID?10:12))throw Error('Master scene sequence is incomplete.');
  let end=0;for(const s of m.scenes){if(s.start!==end||!Number.isInteger(s.end)||s.end<=s.start)throw Error('Invalid scene timeline.');end=s.end;for(const layer of s.layers){if(!['characters','boards','text'].includes(layer.type))throw Error('Invalid layer.');for(const k of layer.track||[]){if(!Number.isFinite(k.frame)||!Array.isArray(k.corners)||k.corners.length!==4||k.corners.flat().some(v=>!Number.isFinite(v)))throw Error('Invalid movement track.');}if(!layer.track?.length)throw Error('Missing movement track.');}}
  if(end!==1296)throw Error('Invalid master duration.');

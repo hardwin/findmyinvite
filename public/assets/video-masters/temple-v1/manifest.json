@@ -1,6 +1,6 @@
 {
   "id": "temple-v1",
-  "version": 1,
+  "version": 2,
   "rendererVersion": "temple-five-layer-v4",
   "name": "Temple Wedding",
   "layerOrder": [
@@ -89,9 +89,9 @@
       "kind": "video"
     },
     "motion": {
-      "path": "/assets/video-masters/temple-v1/motion.json",
-      "sha256": "f20c571c34ac6bb1724fb38ac90b7983bca0dcc5f379e45f22335d9163460f98",
-      "kind": "json"
+      "path": "/assets/video-masters/temple-v1/tracked-v2/motion.json",
+      "kind": "json",
+      "sha256": "36779c1209817e3fed027904589afea042a991590d3eae2555f2cd5476dbc5a0"
     },
     "backgroundPreview": {
       "path": "/assets/video-masters/temple-v1/background.webm",
@@ -115,7 +115,7 @@
         "top": 180,
         "width": 600,
         "height": 110,
-        "color": "#863b36",
+        "color": "#7c1b32",
         "outline": true
       },
       {
@@ -127,26 +127,26 @@
         "top": 315,
         "width": 620,
         "height": 110,
-        "color": "#863b36",
+        "color": "#7c1b32",
         "outline": true
       }
     ],
     "invitation": [
       {
         "binding": "invitationHeading",
-        "font": "ATM-344",
+        "font": "ATM-378",
         "max": 34,
         "min": 26,
         "centerX": 416,
         "top": 457,
         "width": 320,
         "height": 60,
-        "color": "#762b2a",
+        "color": "#662427",
         "outline": false
       },
       {
         "binding": "greeting",
-        "font": "ATM-344",
+        "font": "ATM-378",
         "max": 34,
         "min": 26,
         "centerX": 416,
@@ -154,7 +154,7 @@
         "width": 320,
         "height": 205,
         "lineHeight": 75,
-        "color": "#762b2a",
+        "color": "#662427",
         "outline": false
       }
     ],
@@ -168,7 +168,7 @@
         "top": 435,
         "width": 250,
         "height": 48,
-        "color": "#863b36",
+        "color": "#82323b",
         "outline": true
       },
       {
@@ -180,7 +180,7 @@
         "top": 493,
         "width": 280,
         "height": 70,
-        "color": "#863b36",
+        "color": "#82323b",
         "outline": true
       },
       {
@@ -192,7 +192,7 @@
         "top": 574,
         "width": 310,
         "height": 175,
-        "color": "#863b36",
+        "color": "#82323b",
         "outline": true
       }
     ],
@@ -206,7 +206,7 @@
         "top": 149,
         "width": 330,
         "height": 50,
-        "color": "#863b36",
+        "color": "#82323b",
         "outline": true
       },
       {
@@ -218,21 +218,21 @@
         "top": 211,
         "width": 570,
         "height": 115,
-        "color": "#863b36",
+        "color": "#82323b",
         "outline": true
       }
     ],
     "family": [
       {
         "binding": "groomParentsLabel",
-        "font": "ATM-344",
+        "font": "ATM-378",
         "max": 33,
         "min": 26,
         "centerX": 355,
         "top": 415,
         "width": 264,
         "height": 53,
-        "color": "#762b2a",
+        "color": "#6a322c",
         "outline": false
       },
       {
@@ -244,7 +244,7 @@
         "top": 473,
         "width": 264,
         "height": 53,
-        "color": "#762b2a",
+        "color": "#6a322c",
         "outline": false
       },
       {
@@ -256,19 +256,19 @@
         "top": 529,
         "width": 264,
         "height": 53,
-        "color": "#762b2a",
+        "color": "#6a322c",
         "outline": false
       },
       {
         "binding": "brideParentsLabel",
-        "font": "ATM-344",
+        "font": "ATM-378",
         "max": 33,
         "min": 26,
         "centerX": 355,
         "top": 597,
         "width": 264,
         "height": 53,
-        "color": "#762b2a",
+        "color": "#6a322c",
         "outline": false
       },
       {
@@ -280,7 +280,7 @@
         "top": 653,
         "width": 264,
         "height": 53,
-        "color": "#762b2a",
+        "color": "#6a322c",
         "outline": false
       },
       {
@@ -288,11 +288,11 @@
         "font": "ATM-344",
         "max": 33,
         "min": 26,
-        "centerX": 352,
+        "centerX": 340,
         "top": 710,
-        "width": 260,
+        "width": 244,
         "height": 53,
-        "color": "#762b2a",
+        "color": "#6a322c",
         "outline": false
       }
     ],
@@ -474,14 +474,14 @@
     "hosts": [
       {
         "binding": "hostHeading",
-        "font": "ATM-344",
+        "font": "ATM-378",
         "max": 37,
         "min": 26,
         "centerX": 368,
         "top": 432,
         "width": 326,
         "height": 75,
-        "color": "#762b2a",
+        "color": "#70312a",
         "outline": false
       },
       {
@@ -494,7 +494,7 @@
         "width": 326,
         "height": 140,
         "lineHeight": 72,
-        "color": "#762b2a",
+        "color": "#70312a",
         "outline": false
       },
       {
@@ -507,7 +507,7 @@
         "width": 326,
         "height": 140,
         "lineHeight": 72,
-        "color": "#762b2a",
+        "color": "#70312a",
         "outline": false
       }
     ],
@@ -515,25 +515,25 @@
       {
         "binding": "closing1",
         "font": "ATM-378",
-        "max": 50,
+        "max": 64,
         "min": 26,
         "centerX": 360,
-        "top": 210,
-        "width": 420,
-        "height": 46,
-        "color": "#863b36",
+        "top": 195,
+        "width": 560,
+        "height": 70,
+        "color": "#7e2938",
         "outline": true
       },
       {
         "binding": "closing2",
         "font": "ATM-378",
-        "max": 50,
+        "max": 64,
         "min": 26,
         "centerX": 360,
-        "top": 260,
-        "width": 450,
-        "height": 46,
-        "color": "#863b36",
+        "top": 275,
+        "width": 580,
+        "height": 70,
+        "color": "#7e2938",
         "outline": true
       },
       {
@@ -542,10 +542,10 @@
         "max": 36,
         "min": 26,
         "centerX": 360,
-        "top": 309,
-        "width": 310,
-        "height": 40,
-        "color": "#863b36",
+        "top": 353,
+        "width": 360,
+        "height": 50,
+        "color": "#7e2938",
         "outline": true
       }
     ]
@@ -657,24 +657,19 @@
     "approved": true,
     "backgroundReviewed": true,
     "tracksReviewed": true,
-    "userApproval": "Full 54-second video approved before website integration.",
-    "proofs": {
-      "default": "e2a95e450943132ca4174dc7287d6d1c3c9f98125a58d8c36f97340098057db1",
-      "personalized": "f2bb345348dab31c509bf6088bd6909b3673c46224abf272f58db50996f1bcd3",
-      "browserDefault": "ce9039d3229b6d666360fe0901adc14b8fa1e41c6241c2d6e6d9de2627197302"
-    },
+    "sourceReviewCommit": "281b7172",
     "verification": {
       "rendererVersion": "temple-five-layer-v4",
-      "photoModes": [
-        "cutout",
-        "frame",
-        "prepared"
-      ],
-      "frames": 1296,
-      "backgroundSha256": "9c523a7b9c8428d01083540a9f9db51c8e138ede5bf3ee800be375dab187c9bb",
-      "scope": "Complete Linux Sandbox exports: unchanged default composition and approved prepared groom, bride and couple; legacy photo modes retained",
-      "verifiedAt": "2026-11-12T11:39:44.775Z"
-    }
+      "cloudVerified": true,
+      "frames": 1296
+    },
+    "proofs": {
+      "default": "925c19978147f6075ea1a08dbbc960a6b51989c10c975c4f4fb129faf71964d7",
+      "personalized": "7ac0b36126cb969d8e459ee2f1e07480926b390c94a4567ed437c74c6aae42d9"
+    },
+    "knownLimitations": [
+      "Physical iPhone and Instagram coverage is not verified."
+    ]
   },
   "photoSlots": [
     "groom",
@@ -741,5 +736,24 @@
         960
       ]
     }
+  },
+  "textPlanes": {
+    "family": [
+      [
+        1.1673838834732089,
+        0.015282299913133249,
+        -27.34438459175799
+      ],
+      [
+        0.13748232624333734,
+        1.086822919317013,
+        -35.24264205926581
+      ],
+      [
+        0.00022360791116126538,
+        0.000040379003521502,
+        1
+      ]
+    ]
   }
 }

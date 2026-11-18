@@ -1,0 +1,137 @@
+{
+  "templateId": "temple-v1",
+  "masterVersion": 2,
+  "rendererVersion": "temple-five-layer-v4",
+  "approvedReviewCommit": "281b7172",
+  "releaseStatus": "qualified-awaiting-worker-retention-and-deployment",
+  "appearanceSha256": "94e0ad67cc30f4f9f0e760f0c38919cea344d21e935d7a80c102e95374f3d383",
+  "approvedCharacterTrajectoriesSha256": "e8cbdae31d5c6530ed706825fb391fbdb068dee29c1aa2fbc6ce8f0220960657",
+  "cloud": {
+    "renders": {
+      "default": {
+        "frames": 1296,
+        "width": 720,
+        "height": 1280,
+        "duration": 54,
+        "bytes": 28118808,
+        "resultSha256": "925c19978147f6075ea1a08dbbc960a6b51989c10c975c4f4fb129faf71964d7",
+        "backgroundSha256": "9c523a7b9c8428d01083540a9f9db51c8e138ede5bf3ee800be375dab187c9bb",
+        "elapsedSeconds": 604.139
+      },
+      "personalized": {
+        "frames": 1296,
+        "width": 720,
+        "height": 1280,
+        "duration": 54,
+        "bytes": 28124505,
+        "resultSha256": "7ac0b36126cb969d8e459ee2f1e07480926b390c94a4567ed437c74c6aae42d9",
+        "backgroundSha256": "9c523a7b9c8428d01083540a9f9db51c8e138ede5bf3ee800be375dab187c9bb",
+        "elapsedSeconds": 585.654
+      }
+    },
+    "completeDecodePassed": true,
+    "masterVersion": 2,
+    "rendererVersion": "temple-five-layer-v4"
+  },
+  "catalog": {
+    "frames": 1296,
+    "width": 360,
+    "height": 640,
+    "duration": 54,
+    "bytes": 4420875,
+    "resultSha256": "dd90f761e5cd3bd580ed62152dd91f04de910e50616539e8b5c9cc00801d08d2",
+    "posters": {
+      "320": 54442,
+      "640": 141340,
+      "960": 144198
+    },
+    "completeDecodePassed": true,
+    "namedPreviewPreserved": true
+  },
+  "worker": {
+    "candidateSnapshotId": "snap_VERAOkSjJprPD5HpJo5fK4Dbyl9i",
+    "candidateExpiresAt": 1797582810053,
+    "productionSnapshotId": null,
+    "environmentKey": "VIDEO_TEMPLE_SNAPSHOT_ID",
+    "retentionVerified": false
+  },
+  "verification": {
+    "finalVideoRegressionsPassed": 161,
+    "editorPreviewAudioVersionChecksPassed": 25,
+    "catalogDiscoveryChecksPassed": 15,
+    "sharingChecksPassed": 9,
+    "productionBuildPassed": true,
+    "liveReleaseVerified": false,
+    "physicalIPhoneInstagramVerified": false
+  },
+  "rollback": {
+    "previousSnapshotId": "snap_SgyS7NdODsft7v8UshRQHbxkqwlr",
+    "previousProduction": "8db1452677d859e0c17ccfb35f14e59cf3d98c22",
+    "previousMasterSha256": "eacf3c6e7858d804a328f79bfc2b96ebb4ff0458e2eda053118cc9fd9d3837f9",
+    "previousMotion": {
+      "path": "/assets/video-masters/temple-v1/motion.json",
+      "sha256": "f20c571c34ac6bb1724fb38ac90b7983bca0dcc5f379e45f22335d9163460f98",
+      "kind": "json"
+    },
+    "previousCardPreview": "/assets/catalog-previews/names-v1/videos/temple-v1.mp4",
+    "previousPrice": {
+      "basePaise": 49900,
+      "originalPaise": 99900,
+      "offerLabel": "",
+      "tier": "standard",
+      "amount": 58882,
+      "quote": {
+        "basePaise": 49900,
+        "taxBps": 1800,
+        "taxPaise": 8982,
+        "totalPaise": 58882,
+        "taxLabel": "GST",
+        "currency": "INR"
+      },
+      "currency": "INR",
+      "configured": true
+    },
+    "previousCatalogEntry": {
+      "id": "temple-v1",
+      "name": "Temple Wedding",
+      "music": {
+        "id": "da80d21d-f44c-446b-a7eb-f5acb363762b",
+        "title": "Getti Melam — Temple Wedding",
+        "artist": "",
+        "mood": "Original soundtrack",
+        "duration": 43.9,
+        "credit": "Original recording, unchanged.",
+        "license": "Rights managed by FindMyInvite owner",
+        "licenseUrl": "",
+        "sourceUrl": "https://cardsforknots.in/video-invite/thoon/",
+        "url": "/api/music?id=da80d21d-f44c-446b-a7eb-f5acb363762b"
+      },
+      "duration": 54,
+      "poster": "/assets/catalog-previews/names-v1/videos/temple-v1-640.webp",
+      "preview": "/assets/catalog-previews/names-v1/videos/temple-v1.mp4",
+      "posters": {
+        "320": "/assets/catalog-previews/names-v1/videos/temple-v1-320.webp",
+        "640": "/assets/catalog-previews/names-v1/videos/temple-v1-640.webp",
+        "960": "/assets/catalog-previews/names-v1/videos/temple-v1-960.webp"
+      },
+      "embeddedMusic": false,
+      "basePaise": 49900,
+      "originalPaise": 99900,
+      "offerLabel": "",
+      "tier": "standard",
+      "amount": 58882,
+      "quote": {
+        "basePaise": 49900,
+        "taxBps": 1800,
+        "taxPaise": 8982,
+        "totalPaise": 58882,
+        "taxLabel": "GST",
+        "currency": "INR"
+      },
+      "currency": "INR",
+      "configured": true,
+      "templateCode": "FMI#0068",
+      "microDescription": "Traditional temple wedding film"
+    }
+  }
+}
