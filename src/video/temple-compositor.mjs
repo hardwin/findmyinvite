@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import {templeText} from '../../shared/temple-video.mjs';
-import {composeTemplePlane} from '../../shared/temple-plane.mjs';
+import {composeTemplePlane,templeLayerMatrix} from '../../shared/temple-plane.mjs';
 import {createPreviewVideo,seekPreviewVideo,releasePreviewVideo} from './preview-media.mjs';
 
 const W=720,H=1280;
@@ -90,7 +90,7 @@ export class TempleCompositor {
   if(id==='hosts'&&n>=1078||id==='closing'&&n<1095){const m=this.mask.getContext('2d');m.clearRect(0,0,W,H);let edge;if(id==='hosts'){edge=(n/24-44.9)*2600;const g=m.createLinearGradient(edge-70,0,edge,0);g.addColorStop(0,'transparent');g.addColorStop(1,'white');m.fillStyle=g;}else{edge=-1100+(n/24-44.9)*2600;const g=m.createLinearGradient(edge,0,edge+70,0);g.addColorStop(0,'white');g.addColorStop(1,'transparent');m.fillStyle=g;}m.fillRect(0,0,W,H);ctx.drawImage(this.mask,0,0);}
   ctx.restore();
  }
- motionBlur(ctx,id,m,n){const a=this.motion.frames[Math.max(0,n-1)].find(r=>r.asset===id)?.matrix||m,b=this.motion.frames[Math.min(1295,n+1)].find(r=>r.asset===id)?.matrix||m;const amount=Math.abs(point(b,360,800)[0]-point(a,360,800)[0])/4;
+ motionBlur(ctx,id,m,n,text=false){const previous=this.motion.frames[Math.max(0,n-1)].find(r=>r.asset===id),next=this.motion.frames[Math.min(1295,n+1)].find(r=>r.asset===id),a=previous?templeLayerMatrix(previous,text):m,b=next?templeLayerMatrix(next,text):m;const amount=Math.abs(point(b,360,800)[0]-point(a,360,800)[0])/4;
   if(amount<1.5)return;const radius=Math.min(17,Math.max(3,Math.round(amount)|1)),blur=this.blurred.getContext('2d');blur.clearRect(0,0,W,H);blur.drawImage(this.layer,0,0);ctx.clearRect(0,0,W,H);ctx.save();ctx.globalCompositeOperation='lighter';ctx.globalAlpha=1/radius;for(let i=0;i<radius;i++)ctx.drawImage(this.blurred,i-Math.floor(radius/2),0);ctx.restore();
  }
  async render(frame,{backgroundUrl,petalsUrl,maskUrl,onlyLayer,live=false,present=true}={}){
@@ -103,7 +103,7 @@ export class TempleCompositor {
    const source=this.atlasFrame;source.getContext('2d').drawImage(this.video,0,0,1080,1920);
    this.atlasBackground.getContext('2d').drawImage(source,...t.background,0,0,W,H);const p=this.atlasPetals.getContext('2d');p.drawImage(source,...t.petals,0,0,W,H);p.drawImage(source,...t.alpha,W,0,W,H);this.atlasMask.getContext('2d').drawImage(source,...t.mask,0,0,W,H);bg=this.atlasBackground;petals=this.atlasPetals;foreground=this.atlasMask;}else{bg=this.video;petals=this.petalVideo;foreground=this.maskVideo;}}
   if(this.disposed)return;const ctx=this.ctx,l=this.layer.getContext('2d'),safe=this.safety.getContext('2d');ctx.clearRect(0,0,W,H);safe.clearRect(0,0,W,H);if(!onlyLayer||onlyLayer==='background')ctx.drawImage(bg,0,0,W,H);
-  const active=this.motion.frames[frame],draw=(entry,text=false)=>{const {asset:id,matrix:m}=entry;l.clearRect(0,0,W,H);const source=text?this.text[id]:this.characterImages[id]||this.assets[id];if(!source)return;const drawingMatrix=text?composeTemplePlane(m,this.master.textPlanes?.[id]):m;warp(l,source,drawingMatrix,(im,m)=>this.projectiveWarp(im,m));this.motionBlur(l,id,m,frame);this.applyMask(l,id,frame);
+  const active=this.motion.frames[frame],draw=(entry,text=false)=>{const {asset:id}=entry,m=templeLayerMatrix(entry,text);l.clearRect(0,0,W,H);const source=text?this.text[id]:this.characterImages[id]||this.assets[id];if(!source)return;const drawingMatrix=text?composeTemplePlane(m,this.master.textPlanes?.[id]):m;warp(l,source,drawingMatrix,(im,m)=>this.projectiveWarp(im,m));this.motionBlur(l,id,m,frame,text);this.applyMask(l,id,frame);
    if(id==='opening'){l.save();l.globalCompositeOperation='destination-in';l.fillStyle=`rgba(0,0,0,${Math.max(0,Math.min(1,(frame-60)/12,(120-frame)/6))})`;l.fillRect(0,0,W,H);l.restore();}
    if(id==='closing'&&!text){const mask=this.mask.getContext('2d',{willReadFrequently:true});mask.clearRect(0,0,W,H);mask.drawImage(foreground,0,0,W,H);const data=mask.getImageData(0,0,W,H);for(let i=0;i<data.data.length;i+=4)data.data[i+3]=data.data[i];mask.putImageData(data,0,0);l.save();l.globalCompositeOperation='destination-out';l.drawImage(this.mask,0,0);l.restore();}
    ctx.drawImage(this.layer,0,0);if(text){safe.save();safe.filter='blur(15px)';safe.shadowColor='#fff';safe.shadowBlur=20;safe.drawImage(this.layer,0,0);safe.restore();}
