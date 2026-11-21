@@ -2,7 +2,7 @@
 
 Requested 21 November 2026, following free-invitation pricing release `5628de74`.
 
-The initial visibility release kept Wedding Bells public and hid 39 previously available designs. The approved Oonjal release restored `film-oonjal-v1` as **Maapla Veetla Double okay :P**, retaining its free price and saved invitations. The other 38 previously available designs remain hidden. The unreleased Kerala Christian design also remains internal.
+The initial visibility release kept Wedding Bells public and hid 39 previously available designs. The approved Oonjal release restored `film-oonjal-v1` as **Maapla Veetla Double okay :P**, retaining saved invitations. New invitations cost ₹299 plus 18% GST (₹352.82 total). The other 38 previously available designs remain hidden. The unreleased Kerala Christian design also remains internal.
 
 ## Public and existing-customer access
 

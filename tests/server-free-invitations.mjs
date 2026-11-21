@@ -12,11 +12,13 @@ import {templateShareCardHtml} from '../shared/template-share-card.mjs';
 const migration='20261121102618_free_catalog_invitations';
 
 test('source-scoped prices and share previews distinguish free designs from premium',()=>{
- assert.equal(FREE_WEBSITE_IDS.length,22);assert.equal(FREE_VIDEO_IDS.length,40);
+ assert.equal(FREE_WEBSITE_IDS.length,22);assert.equal(FREE_VIDEO_IDS.length,39);
  for(const id of ['ivory-lace','embroidered-garden','mother-of-pearl','fresco','stained-glass','royal','invented'])assert.equal(isFreeWebsite(id),false);
  for(const id of FREE_VIDEO_IDS)assert.equal(videoQuote(id).totalPaise,0);
  assert.equal(isFreeVideo('wedding-bells-v1'),false);assert.equal(isFreeVideo('invented'),false);
  assert.equal(videoQuote('wedding-bells-v1').totalPaise,82482);
+ assert.equal(isFreeVideo('film-oonjal-v1'),false);
+ assert.equal(videoQuote('film-oonjal-v1').totalPaise,35282);
  const entry=templateShareData({id:'moonlit-nikah',name:'Moonlit Nikah',thumbnail:'/assets/poster.webp',basePaise:0},'website',19900);
  assert.equal(entry.amountPaise,0);assert.equal(entry.originalPaise,0);
  assert.match(templateShareMeta(entry,'https://findmyinvite.com').description,/Free/);
@@ -46,6 +48,27 @@ test('database enforces free publication, durable access and historical payment 
  const publish=async(i,o,renew=false,rev=0)=>(await pg.query('select public.fmi_publish_invitation_v2($1,$2,$3,$4,$5) as result',[i.slug,owner,rev,o?.id||null,renew])).rows[0].result;
  const video=async(template='temple-v1')=>{const id=randomUUID();await pg.query("select public.fmi_save_personalization_draft($1,$2,'video',$3,$4,0)",[id,owner,template,JSON.stringify({content:{photos:{}}})]);return id;};
  const reserveVideo=async(id,template='temple-v1',user=owner)=>(await pg.query('select * from public.fmi_reserve_video_invitation_v4($1,$2,$3)',[id,user,template])).rows[0];
+ const oonjal='film-oonjal-v1';
+ const grandfathered=await video(oonjal);
+ await reserveVideo(grandfathered,oonjal);
+ await pg.exec('reset role');
+ await pg.exec(await readFile('supabase/migrations/20261121120452_oonjal_paid_video.sql','utf8'));
+ await pg.exec('set role service_role');
+ await t.test('new Oonjal reservations require ₹299 plus GST and past grants still open',async()=>{
+  const id=await video(oonjal);
+  const row=await reserveVideo(id,oonjal);
+  assert.equal(row.status,'pending');
+  assert.equal(row.free_access,false);
+  assert.deepEqual([row.base_paise,row.tax_paise,row.total_paise],[29900,5382,35282]);
+  assert.equal((await reserveVideo(id,oonjal)).id,id);
+  await assert.rejects(pg.query('update video_invitation_orders set free_access=true where id=$1',[id]),/video_free_access_template/);
+  await assert.rejects(pg.query('update video_invitation_orders set tax_paise=0,total_paise=base_paise where id=$1',[id]),/total_paise_check/);
+  const store={get:async id=>(await pg.query('select * from video_invitation_orders where id=$1',[id])).rows[0],reserve:(id,user,tid)=>reserveVideo(id,tid,user)};
+  const service=videoPaymentService({store,env:{}});
+  await assert.rejects(service.requireAccess(owner,id,oonjal),{status:402,message:/352[.]82/});
+  assert.equal((await service.requireAccess(owner,grandfathered,oonjal)).free_access,true);
+  assert.equal((await service.order(owner,grandfathered,oonjal)).amount,0);
+ });
  await t.test('free website reserves once, publishes, updates and renews without a captured payment',async()=>{
   const i=await web(),o=await reserve(i);assert.equal(o.status,'free');assert.equal(o.amount,0);assert.equal((await reserve(i)).id,o.id);
   const published=await publish(i,o);assert.equal(published.published,true);assert.equal(published.published_content.groom,'Test');assert.equal((await publish(i,o)).expires_at,published.expires_at);

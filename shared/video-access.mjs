@@ -35,7 +35,6 @@ export const FREE_VIDEO_IDS = Object.freeze([
  "film-kulam-v1",
  "film-karaikudi-v1",
  "film-hopon-v1",
- "film-oonjal-v1",
  "film-rajakumari-v1",
  "film-rajakumaran-v1",
  "film-ilavarasi-v1",

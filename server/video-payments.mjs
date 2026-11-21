@@ -13,9 +13,15 @@ export function validVideoPromo(code,env=process.env){
  return typeof code==='string'&&code.trim().length>=8&&code.length<=100&&/^[a-f0-9]{64}$/.test(expected)&&timingSafeEqual(Buffer.from(promoDigest(code),'hex'),Buffer.from(expected,'hex'));
 }
 export function videoPrice(env=process.env,templateId){const quote=videoQuote(templateId);return {...videoOffer(templateId),amount:quote.totalPaise,quote,currency:VIDEO_CURRENCY,configured:isFreeVideo(templateId)||paymentsConfigured(env)};}
-const unlocked=row=>!!row&&(row.free_access===true&&isFreeVideo(row.template_id)||['captured','complimentary'].includes(row.status));
+// Oonjal grants issued before the switch to paid checkout remain valid.
+const hasFreeAccess=row=>row?.free_access===true&&(isFreeVideo(row.template_id)||row.template_id==='film-oonjal-v1');
+const unlocked=row=>!!row&&(hasFreeAccess(row)||['captured','complimentary'].includes(row.status));
 function publicPurchase(row,env,templateId){
  const price=videoPrice(env,row?.template_id||templateId),reserved=row&&!isFreeVideo(row.template_id)&&(row.razorpay_order_id||unlocked(row));
+ if(hasFreeAccess(row)&&!isFreeVideo(row.template_id)){
+  const quote={...price.quote,basePaise:0,taxBps:0,taxPaise:0,totalPaise:0};
+  return {...price,basePaise:0,amount:0,quote,invitationId:row.id,unlocked:true,status:row.status,discount:0};
+ }
  const amount=reserved?row.total_paise:price.amount;
  const quote=reserved?(row.base_paise!=null?{basePaise:row.base_paise,taxBps:row.tax_bps,taxPaise:row.tax_paise,totalPaise:amount,taxLabel:'GST',currency:VIDEO_CURRENCY}:null):price.quote;
  return {...price,amount,quote,invitationId:row?.id,unlocked:unlocked(row),status:row?.status||'pending',discount:row?.status==='complimentary'?amount:0};
@@ -69,7 +75,7 @@ export function videoPaymentService({store=videoPaymentStore(),env=process.env,n
   }
   return row;
  }
- async function status(owner,id,template){const row=await owned(owner,id,template);return publicPurchase(isFreeVideo(template)?row:await recover(row),env,template);}
+ async function status(owner,id,template){const row=await owned(owner,id,template);return publicPurchase(isFreeVideo(template)||hasFreeAccess(row)?row:await recover(row),env,template);}
  async function requireAccess(owner,id,template){
   const row=await owned(owner,id,template,isFreeVideo(template));
   if(!unlocked(row))throw new HttpError(402,`Pay ₹${publicPurchase(row,env,template).amount/100} including GST, or apply a valid promo code to create this invitation.`);
@@ -84,7 +90,7 @@ export function videoPaymentService({store=videoPaymentStore(),env=process.env,n
  }
  async function order(owner,id,template){
   let row=await owned(owner,id,template,true);
-  if(isFreeVideo(template))return publicPurchase(row,env,template);
+  if(isFreeVideo(template)||hasFreeAccess(row))return publicPurchase(row,env,template);
   row=await recover(row);
   if(unlocked(row))return publicPurchase(row,env);
   if(row.status==='refunded')throw new HttpError(409,'Contact support for help with this invitation.');
