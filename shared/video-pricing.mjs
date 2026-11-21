@@ -1,13 +1,14 @@
+import {isFreeVideo} from './video-access.mjs';
 // Base price per saved invitation. GST is added at checkout; edits and retries are included.
-export const VIDEO_PRICE_PAISE = 49900;
+export const VIDEO_PRICE_PAISE = 0;
 export const VIDEO_CURRENCY = 'INR';
 export const VIDEO_GST_BPS = 1800;
 export function videoOffer(templateId){
  return templateId==='wedding-bells-v1'
   ?{basePaise:69900,originalPaise:159900,offerLabel:'Christmas Offer',tier:'premium'}
-  :{basePaise:VIDEO_PRICE_PAISE,originalPaise:99900,offerLabel:'',tier:'standard'};
+  :{basePaise:isFreeVideo(templateId)?0:49900,originalPaise:isFreeVideo(templateId)?0:99900,offerLabel:'',tier:'standard'};
 }
 export function videoQuote(templateId){
  const {basePaise}=videoOffer(templateId),taxPaise=Math.round(basePaise*VIDEO_GST_BPS/10000);
- return {basePaise,taxBps:VIDEO_GST_BPS,taxPaise,totalPaise:basePaise+taxPaise,taxLabel:'GST',currency:VIDEO_CURRENCY};
+ return {basePaise,taxBps:basePaise?VIDEO_GST_BPS:0,taxPaise,totalPaise:basePaise+taxPaise,taxLabel:'GST',currency:VIDEO_CURRENCY};
 }

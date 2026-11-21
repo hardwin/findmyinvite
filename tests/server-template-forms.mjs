@@ -86,6 +86,26 @@ test('foreign or unfinished uploads cannot be saved',async t=>{fixture(t);const 
 test('published addresses cannot change',async t=>{fixture(t,u=>u.pathname.endsWith('/invitations')?[{...row,first_published_at:new Date().toISOString(),expires_at:'2030-01-01'}]:undefined);const r=await request(invitations,'/api/invitations?action=v2-save&slug=form-test',{revision:1,content:row.draft_content,newSlug:'changed-address'});assert.equal(r.code,409);});
 test('incomplete content cannot publish or create a payment order',async t=>{const calls=fixture(t,u=>u.pathname.endsWith('/invitations')?[{...row,draft_content:form.definition.initialContent}]:undefined);const r=await request(invitations,'/api/invitations?action=v2-publish&slug=form-test',{revision:1});assert.equal(r.code,400);assert.ok(!calls.some(c=>c.path.endsWith('/fmi_publish_invitation')));});
 test('payment configuration still quotes 19900 + 3582 paise',async t=>{fixture(t);const r=await request(payments,'/api/payments?action=v2-config',undefined,false);assert.equal(r.body.quote.basePaise,19900);assert.equal(r.body.quote.taxPaise,3582);assert.equal(r.body.quote.totalPaise,23482);});
+
+test('free website configuration works without gateway or tax configuration',async t=>{
+ const calls=fixture(t,()=>{throw Error('Free configuration must not call external services');});delete process.env.RAZORPAY_KEY_ID;delete process.env.RAZORPAY_KEY_SECRET;
+ const r=await request(payments,'/api/payments?action=v2-config&templateId=moonlit-nikah',undefined,false);
+ assert.equal(r.code,200);assert.equal(r.body.configured,true);assert.equal(r.body.quote.totalPaise,0);assert.equal(calls.length,0);
+});
+
+test('free publication and renewal return a free grant without Razorpay, even with forged client prices',async t=>{
+ let renewal=false;
+ const calls=fixture(t,(u,o)=>{
+  if(u.hostname==='api.razorpay.com'||u.pathname.endsWith('/website_offer')||u.pathname.endsWith('/fmi_reserve_website_order_at_price'))throw Error('Free invitations must not enter paid checkout');
+  if(u.pathname.endsWith('/template_versions'))return [{...v,template_id:'moonlit-nikah'}];
+  if(u.pathname.endsWith('/template_forms'))return [{...form,template_id:'moonlit-nikah'}];
+  if(u.pathname.endsWith('/invitations'))return [{...row,first_published_at:renewal?'2026-11-01':null,expires_at:'2030-01-01'}];
+  if(u.pathname.endsWith('/fmi_reserve_free_website_order')){assert.equal(JSON.parse(o.body).p_owner,user);return {created:true,order:{id:'free-order',status:'free',amount:0}};}
+ });
+ delete process.env.RAZORPAY_KEY_ID;delete process.env.RAZORPAY_KEY_SECRET;
+ for(const purpose of ['publish','renew']){renewal=purpose==='renew';const r=await request(payments,'/api/payments?action=v2-order',{slug:row.slug,purpose,amount:99999,templateId:'ivory-lace'});assert.equal(r.code,200);assert.equal(r.body.free,true);assert.equal(r.body.id,'free-order');assert.equal(r.body.quote.totalPaise,0);assert.equal(r.body.keyId,undefined);}
+ assert.equal(calls.filter(c=>c.path.endsWith('/fmi_reserve_free_website_order')).length,2);
+});
 test('upload failure keeps the previous answer and retry returns only verified media',async()=>{let fail=true,reservations=0,completions=0;const options={file:{size:12,type:'audio/mpeg'},kind:'audio',slug:'private-draft',optimise:async f=>f,token:async()=>'refreshed-token',api:async(path,body)=>{if(path.includes('reserve')){assert.equal(body.slug,'private-draft');return {id:++reservations,pathname:'private/file',url:'/api/template-media?id='+reservations};}completions++;},upload:async(path,file,options)=>{assert.equal(options.access,'private');assert.equal(options.headers.Authorization,'Bearer refreshed-token');if(fail)throw Error('Connection lost');}};await assert.rejects(()=>uploadTemplateMedia(options),/Connection lost/);assert.equal(completions,0);fail=false;assert.equal(await uploadTemplateMedia(options),'/api/template-media?id=2');assert.equal(completions,1);});
 test('failed upload verification never becomes a form answer',async()=>{await assert.rejects(()=>uploadTemplateMedia({file:{size:12},kind:'image',slug:'draft',optimise:async f=>f,token:async()=>'token',upload:async()=>{},api:async path=>{if(path.includes('reserve'))return {id:'one',pathname:'private/file',url:'unverified'};throw Error('Media verification failed');}}),/verification failed/);});
 test('publish and renewal order requests both retain the ₹234.82 quote',async t=>{let renewal=false;fixture(t,(u,o)=>{if(u.pathname.endsWith('/invitations'))return [{...row,first_published_at:renewal?'2026-11-01':null,expires_at:'2030-01-01',draft_content:renewal?{}:row.draft_content}];if(u.pathname.endsWith('/fmi_reserve_website_order_at_price')){assert.equal(JSON.parse(o.body).p_base_paise,19900);return {created:true,order:{id:'order-fixture',razorpay_order_id:'rzp_order_fixture',amount:23482,base_paise:19900,tax_bps:1800,tax_paise:3582,status:'created'}};} });for(const purpose of ['publish','renew']){renewal=purpose==='renew';const r=await request(payments,'/api/payments?action=v2-order',{slug:row.slug,purpose});assert.equal(r.code,200);assert.equal(r.body.amount,23482);assert.equal(r.body.quote.totalPaise,23482);}});

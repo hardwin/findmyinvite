@@ -1,3 +1,4 @@
+import {isFreeWebsite,freeWebsiteQuote} from '../shared/catalog-access.mjs';
 import {session,requireOwner} from './owner/auth.mjs';
 import {websiteQuote} from '../shared/template-contract.mjs';
 import {HttpError,db,authUser,bearer} from './core.mjs';
@@ -12,7 +13,7 @@ export async function audit(user,action,target,detail={}){await db('cms_audit',{
 export async function rpc(name,body){return db('rpc/'+name,{method:'POST',body});}
 export function safeVersion(v){const {id,template_id,renderer,field_schema,defaults,revision}=v;return {id,template_id,renderer,field_schema,defaults,revision};}
 
-export async function websiteOffer(){const rows=await db('website_offer?id=eq.website&select=tax_bps,tax_label');if(!rows[0])throw new HttpError(503,'Tax configuration is pending.');return {...websiteQuote(rows[0].tax_bps),taxLabel:rows[0].tax_label};}
+export async function websiteOffer(templateId){if(isFreeWebsite(templateId))return freeWebsiteQuote();const rows=await db('website_offer?id=eq.website&select=tax_bps,tax_label');if(!rows[0])throw new HttpError(503,'Tax configuration is pending.');return {...websiteQuote(rows[0].tax_bps),taxLabel:rows[0].tax_label};}
 
 // Selection links may be superseded; existing invitations still use version(id) exactly.
 export async function catalogVersion(id,query=db){

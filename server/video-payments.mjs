@@ -1,3 +1,4 @@
+import {isFreeVideo} from '../shared/video-access.mjs';
 import {createHash,randomUUID,timingSafeEqual} from 'node:crypto';
 import {db,HttpError} from './core.mjs';
 import {createRazorpayOrder,paymentsConfigured,publicKeyId,razorpayAuth,verifyCheckoutSignature} from './payments.mjs';
@@ -11,10 +12,10 @@ export function validVideoPromo(code,env=process.env){
  const expected=String(env.VIDEO_TEST_PROMO_SHA256||'').trim();
  return typeof code==='string'&&code.trim().length>=8&&code.length<=100&&/^[a-f0-9]{64}$/.test(expected)&&timingSafeEqual(Buffer.from(promoDigest(code),'hex'),Buffer.from(expected,'hex'));
 }
-export function videoPrice(env=process.env,templateId){const quote=videoQuote(templateId);return {...videoOffer(templateId),amount:quote.totalPaise,quote,currency:VIDEO_CURRENCY,configured:paymentsConfigured(env)};}
-const unlocked=row=>['captured','complimentary'].includes(row?.status);
+export function videoPrice(env=process.env,templateId){const quote=videoQuote(templateId);return {...videoOffer(templateId),amount:quote.totalPaise,quote,currency:VIDEO_CURRENCY,configured:isFreeVideo(templateId)||paymentsConfigured(env)};}
+const unlocked=row=>!!row&&(row.free_access===true&&isFreeVideo(row.template_id)||['captured','complimentary'].includes(row.status));
 function publicPurchase(row,env,templateId){
- const price=videoPrice(env,row?.template_id||templateId),reserved=row&&(row.razorpay_order_id||unlocked(row));
+ const price=videoPrice(env,row?.template_id||templateId),reserved=row&&!isFreeVideo(row.template_id)&&(row.razorpay_order_id||unlocked(row));
  const amount=reserved?row.total_paise:price.amount;
  const quote=reserved?(row.base_paise!=null?{basePaise:row.base_paise,taxBps:row.tax_bps,taxPaise:row.tax_paise,totalPaise:amount,taxLabel:'GST',currency:VIDEO_CURRENCY}:null):price.quote;
  return {...price,amount,quote,invitationId:row?.id,unlocked:unlocked(row),status:row?.status||'pending',discount:row?.status==='complimentary'?amount:0};
@@ -26,7 +27,7 @@ export function videoPaymentStore(query=db){
   get:id=>one(table+'?id=eq.'+encodeURIComponent(id)+'&select=*'),
   byOrder:id=>one(table+'?razorpay_order_id=eq.'+encodeURIComponent(id)+'&select=*'),
   byPayment:id=>one(table+'?razorpay_payment_id=eq.'+encodeURIComponent(id)+'&select=*'),
-  reserve:(id,owner,template)=>one('rpc/fmi_reserve_video_invitation_v3',{method:'POST',body:{p_id:id,p_owner:owner,p_template:template}}),
+  reserve:(id,owner,template)=>one('rpc/fmi_reserve_video_invitation_v4',{method:'POST',body:{p_id:id,p_owner:owner,p_template:template}}),
   patch:(id,patch,filter='')=>one(table+'?id=eq.'+encodeURIComponent(id)+filter,{method:'PATCH',headers:{Prefer:'return=representation'},body:patch})
  };
 }
@@ -68,9 +69,9 @@ export function videoPaymentService({store=videoPaymentStore(),env=process.env,n
   }
   return row;
  }
- async function status(owner,id,template){return publicPurchase(await recover(await owned(owner,id,template)),env,template);}
+ async function status(owner,id,template){const row=await owned(owner,id,template);return publicPurchase(isFreeVideo(template)?row:await recover(row),env,template);}
  async function requireAccess(owner,id,template){
-  const row=await owned(owner,id,template);
+  const row=await owned(owner,id,template,isFreeVideo(template));
   if(!unlocked(row))throw new HttpError(402,`Pay ₹${publicPurchase(row,env,template).amount/100} including GST, or apply a valid promo code to create this invitation.`);
   return row;
  }
@@ -82,7 +83,9 @@ export function videoPaymentService({store=videoPaymentStore(),env=process.env,n
   return publicPurchase(row,env);
  }
  async function order(owner,id,template){
-  let row=await recover(await owned(owner,id,template,true));
+  let row=await owned(owner,id,template,true);
+  if(isFreeVideo(template))return publicPurchase(row,env,template);
+  row=await recover(row);
   if(unlocked(row))return publicPurchase(row,env);
   if(row.status==='refunded')throw new HttpError(409,'Contact support for help with this invitation.');
   if(!paymentsConfigured(env))throw new HttpError(503,'Checkout is temporarily unavailable. Your draft is saved.');

@@ -1,7 +1,7 @@
 import {useEffect,useState} from 'react';
 import './promo-banner.css';
 
-const OFFER_TEXT='50% off on all Websites & Videos till 21st December 2026 - Grab Now';
+const OFFER_TEXT='Explore free website & video designs · Wedding Bells Christmas Offer: ₹699 + GST';
 // The offer includes all of 21 December in India, including in tabs left open.
 const OFFER_EXPIRES_AT=Date.parse('2026-12-22T00:00:00+05:30');
 

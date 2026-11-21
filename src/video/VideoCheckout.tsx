@@ -6,7 +6,7 @@ import {videoQuote,videoOffer} from '../../shared/video-pricing.mjs';
 type Props={templateId:string;purchase:VideoPurchase|null;busy:boolean;onApply:(code:string)=>Promise<void>};
 export function VideoCheckout({templateId,purchase,busy,onApply}:Props){
  const [code,setCode]=useState('');
- if(purchase?.unlocked)return null;
+ if(purchase?.unlocked||videoQuote(templateId).totalPaise===0)return null;
  const quote=purchase?purchase.quote:videoQuote(templateId),offer=videoOffer(templateId);
  const money=(paise:number)=>'₹'+(paise/100).toLocaleString('en-IN',{maximumFractionDigits:2});
  return <div className="vp-checkout" aria-label="Payment options">

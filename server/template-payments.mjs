@@ -15,16 +15,19 @@ export async function settleWebsiteOrder(orderId,paymentId,recoveryId){
  const saved=await db('website_orders?id=eq.'+row.id+'&status=neq.refunded',{method:'PATCH',headers:{Prefer:'return=representation'},body:{status:'captured',razorpay_payment_id:p.id,razorpay_order_id:orderId}});if(!saved[0])throw new HttpError(409,'Payment state changed. Contact support.');return saved[0];
 }
 export default async function handle(req,res,q){const action=q.get('action');
- if(action==='v2-config'){method(req,['GET']);let quote=null;try{quote=await websiteOffer();}catch{}const configured=!!quote&&paymentsConfigured();return respond(res,200,{basePaise:INVITATION_BASE_PAISE,quote,configured,message:!quote?'Tax configuration is pending.':!configured?'Checkout is temporarily unavailable. You can still save and preview your invitation.':''});}
+ if(action==='v2-config'){method(req,['GET']);let quote=null;try{quote=await websiteOffer(q.get('templateId'));}catch{}const configured=!!quote&&(quote.totalPaise===0||paymentsConfigured());return respond(res,200,{basePaise:quote?.basePaise??INVITATION_BASE_PAISE,quote,configured,message:!quote?'Tax configuration is pending.':!configured?'Checkout is temporarily unavailable. You can still save and preview your invitation.':''});}
  const user=await customer(req);method(req,['POST']);const b=await bodyJson(req),row=await owned(b.slug,user);requireRecoverable(row);
  if(action==='v2-failure'){const orders=await db('website_orders?id=eq.'+encodeURIComponent(b.orderId)+'&owner_id=eq.'+user.id+'&invitation_id=eq.'+row.id+'&select=id');if(!orders[0])throw new HttpError(404,'Order not found.');await audit(user,'payment.failed',orders[0].id,{operation:'checkout'});return respond(res,200,{ok:true});}
  if(action==='v2-order'){
- await rate(req,'website-order',10,3600);if(!paymentsConfigured())throw new HttpError(503,'Checkout is not configured.');let quote;try{quote=await websiteOffer();}catch(e){throw new HttpError(503,e.message);}
+ await rate(req,'website-order',10,3600);
  const purpose=b.purpose==='renew'?'renew':'publish';if(purpose==='renew'&&!row.first_published_at||purpose==='publish'&&row.first_published_at)throw new HttpError(409,'Invalid order purpose.');
  const v=await version(row.template_version_id);if(purpose==='publish'){const form=await templateForm(v);formContent(form,v,{content:row.draft_content},{complete:true});}
  const active=await db('template_catalog?id=eq.'+encodeURIComponent(v.template_id)+'&isactive=eq.true&select=id');if(!row.first_published_at&&(!active.length||!v.approved_at))throw new HttpError(403,'Template not released.');
  // An existing captured payment must be resumed rather than charged again.
  const existing=await db('website_orders?invitation_id=eq.'+row.id+'&purpose=eq.'+purpose+'&status=eq.captured&applied_at=is.null&select=*&limit=1');if(existing[0])return respond(res,200,{captured:true,id:existing[0].id});
+ let quote;try{quote=await websiteOffer(v.template_id);}catch(e){throw new HttpError(503,e.message);}
+ if(quote.totalPaise===0){const reserved=await rpc('fmi_reserve_free_website_order',{p_invitation:row.id,p_owner:user.id,p_purpose:purpose});return respond(res,200,{id:reserved.order.id,free:reserved.order.status==='free',captured:reserved.order.status==='captured',quote});}
+ if(!paymentsConfigured())throw new HttpError(503,'Checkout is not configured.');
  const reserved=await rpc('fmi_reserve_website_order_at_price',{p_invitation:row.id,p_owner:user.id,p_purpose:purpose,p_tax_bps:quote.taxBps,p_base_paise:quote.basePaise});const order=reserved.order;await attachOrderContext(order.id,b.analytics,v.template_id);
 
  if(order.status==='captured')return respond(res,200,{captured:true,id:order.id});

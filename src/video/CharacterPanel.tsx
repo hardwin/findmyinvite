@@ -67,12 +67,12 @@ export function CharacterPanel({onAction,onStatus,onUnlock,paymentBusy,invitatio
  const failed=state.jobs.find(j=>j.status==='failed'&&!defaultSlot(j.slot as Slot)&&latest(j.slot as Slot)?.id===j.id);
  const needed=(['groom','bride'] as Slot[]).filter(slot=>!defaultSlot(slot)&&!latest(slot));
  let action:EditorAction|null=null;
- if(busy||paymentBusy)action={label:'Continue',reason:progress||'Checking payment…',disabled:true,run:()=>{}};
+ if(busy||paymentBusy)action={label:'Continue',reason:progress||'Checking invitation access…',disabled:true,run:()=>{}};
  else if(error)action={label:'Try again',reason:error,run:()=>{setError('');setAttempt(n=>n+1);}};
  else if(loadError)action={label:'Try again',reason:'Your photos could not load.',run:()=>{setLoadError('');setAttempt(n=>n+1);}};
- else if(running||result)action={label:'Continue',reason:running?'Creating your characters. Your photos and payment are saved.':'Adding your characters…',disabled:true,run:()=>{}};
+ else if(running||result)action={label:'Continue',reason:running?'Creating your characters. Your photos are saved.':'Adding your characters…',disabled:true,run:()=>{}};
  else if(!complete&&!referencesReady)action={label:'Add photos',reason:'Add separate photos or one couple photo.',run:focusPhotos};
- else if(!unlocked)action={label:`Pay ₹${amount/100}`,reason:'',run:onUnlock};
+ else if(!unlocked)action={label:amount===0?'Continue for free':`Pay ₹${amount/100}`,reason:'',run:onUnlock};
  else if(!loaded)action={label:'Continue',reason:'Loading your photos…',disabled:draftSaved,run:()=>run(save)};
  else if(failed)action={label:'Retry characters',reason:'The last attempt did not finish.',run:()=>run(async()=>{await request(API+'?action=retry',{id:failed.id});await refresh();},'Retrying your characters…')};
  else if(needed.length)action={label:'Create my characters',reason:'',run:()=>run(async()=>{for(const slot of needed)await submit(slot);},'Starting your characters…')};

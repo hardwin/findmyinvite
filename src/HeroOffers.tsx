@@ -3,7 +3,7 @@ import {ArrowUpRight,Gift,Monitor,Pause,Play,Search,Video} from 'lucide-react';
 import HorizontalStrip from './HorizontalStrip';
 import TemplatePrice from './TemplatePrice';
 import {videoOffer} from '../shared/video-pricing.mjs';
-import {INVITATION_BASE_PAISE} from '../shared/pricing.mjs';
+
 import {templateDetailsPath} from '../shared/template-sharing.mjs';
 import './hero-offers.css';
 
@@ -105,9 +105,9 @@ export default function HeroOffers({query='',language='en'}:{query?:string;langu
     <Artwork name="wedding-websites"/>
     <div className="di-offer-copy">
      <span className="di-offer-eyebrow">Made by you</span>
-     <h2>DIY Wedding Website</h2>
-     <span className="di-offer-ribbon">Launch Offer</span>
-     <TemplatePrice amountPaise={INVITATION_BASE_PAISE} originalPaise={49900}/>
+     <h2>Free Website Designs</h2>
+     <span className="di-offer-ribbon">No payment required</span>
+     <TemplatePrice amountPaise={0}/>
      <span className="di-offer-link">Explore websites <ArrowUpRight size={15} aria-hidden="true"/></span>
     </div>
    </a>,
@@ -115,9 +115,9 @@ export default function HeroOffers({query='',language='en'}:{query?:string;langu
     <Artwork name="celebration-offers"/>
     <div className="di-offer-copy">
      <span className="di-offer-eyebrow"><Gift size={16} aria-hidden="true"/>Celebrate your way</span>
-     <h2>Celebration Offers</h2>
+     <h2>Your Celebration, Your Style</h2>
      <p className="di-offer-pair"><span><Video size={17} aria-hidden="true"/>Video invitations</span><span><Monitor size={17} aria-hidden="true"/>Wedding websites</span></p>
-     <p className="di-offer-saving"><strong>50%</strong><span>OFF<br/>&amp; more</span></p>
+     <p className="di-offer-saving"><strong>Free</strong><span>&amp; premium<br/>designs</span></p>
      <span className="di-offer-link">Explore offers <ArrowUpRight size={15} aria-hidden="true"/></span>
     </div>
    </a>

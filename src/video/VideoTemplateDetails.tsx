@@ -14,7 +14,7 @@ export default function VideoTemplateDetails({entry}:{entry:VideoEntry}){
     <h1>{entry.name}</h1><p className="di-template-code">{entry.templateCode}</p>
     <p>{entry.microDescription}</p>
     {entry.offerLabel&&<span className="di-offer-label">{entry.offerLabel}</span>}
-    <h2><TemplatePrice amountPaise={entry.quote?.basePaise??entry.amount} originalPaise={entry.originalPaise??99900}/> <small>+ applicable tax</small></h2>
+    <h2><TemplatePrice amountPaise={entry.quote?.basePaise??entry.amount} originalPaise={entry.originalPaise??99900}/> {(entry.quote?.basePaise??entry.amount)>0&&<small>+ applicable tax</small>}</h2>
     <p>Personalise your names and event details, preview your invitation, then download your finished MP4. Edits and updated exports are included.</p>
     <a className="di-button" href={'/video-personalise?template='+encodeURIComponent(entry.id)}>Personalise this invitation <ArrowUpRight size={18}/></a>
     <TemplateShare name={entry.name} detailsHref={templateDetailsPath(entry.id,'video')}/>

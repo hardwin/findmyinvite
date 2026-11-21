@@ -44,9 +44,9 @@ async function publicCatalogue(origin,kind){
 }
 export function templateShareData(row,kind,websiteBasePaise=INVITATION_BASE_PAISE){
  const poster=kind==='video'?row.poster:row.thumbnail;
- const amount=kind==='video'?row.quote?.basePaise:websiteBasePaise;
+ const amount=kind==='video'?row.quote?.basePaise:(row.basePaise??websiteBasePaise);
  if(!publicTemplateAsset(poster)||typeof row.name!=='string'||!Number.isSafeInteger(amount)||amount<0)throw new HttpError(503,'Template preview unavailable.');
- const entry={id:row.id,kind,name:row.name.slice(0,150),poster,artworkRevision:String(row.current_version_id||''),microDescription:String(row.microDescription||'').slice(0,100),templateCode:String(row.templateCode||'').slice(0,20),amountPaise:amount,originalPaise:row.originalPaise??(kind==='website'?49900:undefined),offerLabel:String(row.offerLabel||'').slice(0,50),duration:kind==='video'?Number(row.duration)||0:0};
+ const entry={id:row.id,kind,name:row.name.slice(0,150),poster,artworkRevision:String(row.current_version_id||''),microDescription:String(row.microDescription||'').slice(0,100),templateCode:String(row.templateCode||'').slice(0,20),amountPaise:amount,originalPaise:amount===0?0:row.originalPaise??(kind==='website'?49900:undefined),offerLabel:String(row.offerLabel||'').slice(0,50),duration:kind==='video'?Number(row.duration)||0:0};
  // Only public demo assets from the catalogue; never customer exports or editor URLs.
  if(kind==='video'&&publicTemplateAsset(row.preview)&&row.preview.endsWith('.mp4'))entry.video=row.preview;
  entry.revision=createHash('sha256').update(designRevision+':'+(process.env.VERCEL_GIT_COMMIT_SHA||'')+':'+JSON.stringify(entry)).digest('hex').slice(0,16);
@@ -57,10 +57,10 @@ export async function resolveTemplateShare(params,origin,load=publicCatalogue){
  if(!row)throw new HttpError(404,'Template unavailable.');
  return templateShareData(row,kind,catalog.basePaise??INVITATION_BASE_PAISE);
 }
-export const templateSharePrice=value=>'₹'+(value/100).toLocaleString('en-IN',{maximumFractionDigits:2});
+export const templateSharePrice=value=>value===0?'Free':'₹'+(value/100).toLocaleString('en-IN',{maximumFractionDigits:2});
 export function templateShareMeta(entry,origin){
  const href=templateDetailsPath(entry.id,entry.kind),label=entry.kind==='video'?'Invitation Video':'Wedding Website';
- return {origin,url:'https://findmyinvite.com'+href,title:`${entry.name} · ${label}`,description:[entry.microDescription,`${templateSharePrice(entry.amountPaise)} + applicable tax`,entry.templateCode].filter(Boolean).join(' · '),image:templateShareImagePath(href,entry.revision),noindex:false};
+ return {origin,url:'https://findmyinvite.com'+href,title:`${entry.name} · ${label}`,description:[entry.microDescription,entry.amountPaise===0?'Free · No payment required':`${templateSharePrice(entry.amountPaise)} + applicable tax`,entry.templateCode].filter(Boolean).join(' · '),image:templateShareImagePath(href,entry.revision),noindex:false};
 }
 export function injectTemplateShareMetadata(html,entry,origin){
  let result=injectShareMetadata(html,templateShareMeta(entry,origin));

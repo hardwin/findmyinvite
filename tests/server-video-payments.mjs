@@ -9,7 +9,7 @@ import {videoPaymentService,videoInvitationId,promoDigest,validVideoPromo} from 
 import {collectEvent,recordVideoCheckout} from '../server/owner/events.mjs';
 import {get,list} from '../server/owner/store.mjs';
 import {orderedFunnel} from '../shared/owner-metrics.mjs';
-const owner='owner-a',template='temple-v1',code='PRIVATE-TEST-CODE';
+const owner='owner-a',template='wedding-bells-v1',code='PRIVATE-TEST-CODE';
 function fixture(){
  const rows=new Map(),payments=new Map(),created=[],calls=[];
  const env={RAZORPAY_KEY_ID:'rzp_test_fixture',RAZORPAY_KEY_SECRET:'fixture-secret',VIDEO_TEST_PROMO_SHA256:promoDigest(code)};
@@ -30,11 +30,11 @@ function fixture(){
  };
  const gateway={async create(input){created.push(input);return {id:'order_fixture'+(++sequence),amount:input.amount,currency:input.currency};},async get(path){calls.push(path);if(path.startsWith('payments/'))return copy(payments.get(path.slice(9)));return {items:[...payments.values()].filter(p=>path==='orders/'+p.order_id+'/payments')};}};
  const service=videoPaymentService({store,env,gateway,now:()=>time});
- function captured(order,patch={}){const p={id:'pay_fixture'+(++sequence),order_id:order.orderId,amount:58882,currency:'INR',status:'captured',amount_refunded:0,...patch};payments.set(p.id,p);return p;}
+ function captured(order,patch={}){const p={id:'pay_fixture'+(++sequence),order_id:order.orderId,amount:82482,currency:'INR',status:'captured',amount_refunded:0,...patch};payments.set(p.id,p);return p;}
  const response=p=>({razorpay_order_id:p.order_id,razorpay_payment_id:p.id,razorpay_signature:createHmac('sha256',env.RAZORPAY_KEY_SECRET).update(p.order_id+'|'+p.id).digest('hex')});
  return {rows,payments,created,calls,env,store,gateway,service,captured,response,advance:ms=>time+=ms};
 }
-test('₹499 plus 18% GST is fixed server-side, checkout resumes the same order',async()=>{const f=fixture(),id=randomUUID();const a=await f.service.order(owner,id,template),b=await f.service.order(owner,id,template);assert.equal(a.amount,58882);assert.deepEqual(a.quote,{basePaise:49900,taxBps:1800,taxPaise:8982,totalPaise:58882,taxLabel:'GST',currency:'INR'});assert.equal(a.currency,'INR');assert.equal(a.orderId,b.orderId);assert.equal(f.created.length,1);assert.equal(f.created[0].amount,58882);assert.equal(f.created[0].notes.videoInvitationId,id);});
+test('₹699 plus 18% GST is fixed server-side, checkout resumes the same order',async()=>{const f=fixture(),id=randomUUID();const a=await f.service.order(owner,id,template),b=await f.service.order(owner,id,template);assert.equal(a.amount,82482);assert.deepEqual(a.quote,{basePaise:69900,taxBps:1800,taxPaise:12582,totalPaise:82482,taxLabel:'GST',currency:'INR'});assert.equal(a.currency,'INR');assert.equal(a.orderId,b.orderId);assert.equal(f.created.length,1);assert.equal(f.created[0].amount,82482);assert.equal(f.created[0].notes.videoInvitationId,id);});
 test('an existing ₹299 gateway order still settles at its agreed amount after the price change',async()=>{
  const f=fixture(),id=randomUUID();
  f.rows.set(id,{id,owner_id:owner,template_id:template,status:'pending',total_paise:29900,razorpay_order_id:'order_legacy'});
@@ -46,12 +46,12 @@ test('an existing ₹299 gateway order still settles at its agreed amount after 
 });
 test('a legacy reservation without a gateway order receives the new price and GST breakdown',async()=>{
  const f=fixture(),id=randomUUID();f.rows.set(id,{id,owner_id:owner,template_id:template,status:'pending',total_paise:29900});
- assert.equal((await f.service.status(owner,id,template)).amount,58882);
- const order=await f.service.order(owner,id,template);assert.equal(order.amount,58882);assert.equal(f.rows.get(id).tax_paise,8982);
+ assert.equal((await f.service.status(owner,id,template)).amount,82482);
+ const order=await f.service.order(owner,id,template);assert.equal(order.amount,82482);assert.equal(f.rows.get(id).tax_paise,12582);
 });
 test('concurrent checkouts create at most one payable Razorpay order',async()=>{const f=fixture(),id=randomUUID();const results=await Promise.allSettled([f.service.order(owner,id,template),f.service.order(owner,id,template)]);assert.equal(f.created.length,1);assert.equal(results.filter(r=>r.status==='fulfilled').length,1);});
 test('unpaid and client-invented invitations cannot start renders',async()=>{const f=fixture(),id=randomUUID();await assert.rejects(f.service.requireAccess(owner,id,template),e=>e.status===402);await f.service.order(owner,id,template);await assert.rejects(f.service.requireAccess(owner,id,template),e=>e.status===402);assert.throws(()=>videoInvitationId('../escape'));});
-test('private promo is normalized, grants zero-charge access without contacting gateway',async()=>{const f=fixture(),id=randomUUID();assert.equal(validVideoPromo('guess',f.env),false);assert.equal(validVideoPromo(code,{}),false);assert.equal(validVideoPromo(code,{VIDEO_TEST_PROMO_SHA256:'bad'}),false);await assert.rejects(f.service.promo(owner,id,template,'invalid'),/not valid/);const result=await f.service.promo(owner,id,template,'  '+code.toLowerCase()+' ');assert.equal(result.unlocked,true);assert.equal(result.discount,58882);assert.equal(result.status,'complimentary');assert.equal((await f.service.order(owner,id,template)).unlocked,true);assert.equal(f.calls.length+f.created.length,0);assert.equal(JSON.stringify([...f.rows.values()]).includes(code),false);});
+test('private promo is normalized, grants zero-charge access without contacting gateway',async()=>{const f=fixture(),id=randomUUID();assert.equal(validVideoPromo('guess',f.env),false);assert.equal(validVideoPromo(code,{}),false);assert.equal(validVideoPromo(code,{VIDEO_TEST_PROMO_SHA256:'bad'}),false);await assert.rejects(f.service.promo(owner,id,template,'invalid'),/not valid/);const result=await f.service.promo(owner,id,template,'  '+code.toLowerCase()+' ');assert.equal(result.unlocked,true);assert.equal(result.discount,82482);assert.equal(result.status,'complimentary');assert.equal((await f.service.order(owner,id,template)).unlocked,true);assert.equal(f.calls.length+f.created.length,0);assert.equal(JSON.stringify([...f.rows.values()]).includes(code),false);});
 test('purchase access belongs to one owner, saved invitation and template',async()=>{const f=fixture(),id=randomUUID();await f.service.promo(owner,id,template,code);for(const operation of ['status','order','requireAccess']){await assert.rejects(f.service[operation]('other',id,template),/not found/);await assert.rejects(f.service[operation](owner,id,'other-template'),/not found/);}await assert.rejects(f.service.requireAccess(owner,randomUUID(),template),e=>e.status===402);});
 test('captured payment unlocks once and subsequent edits/retries do not create new orders',async()=>{const f=fixture(),id=randomUUID(),order=await f.service.order(owner,id,template),p=f.captured(order);const result=await f.service.verify(owner,id,template,f.response(p));assert.equal(result.status,'captured');for(let i=0;i<3;i++){await f.service.requireAccess(owner,id,template);assert.equal((await f.service.order(owner,id,template)).unlocked,true);}await f.service.verify(owner,id,template,f.response(p));assert.equal(f.created.length,1);assert.equal(f.rows.get(id).razorpay_payment_id,p.id);});
 test('forged signature and order substitution never unlock access',async()=>{const f=fixture(),id=randomUUID(),order=await f.service.order(owner,id,template),p=f.captured(order);await assert.rejects(f.service.verify(owner,id,template,{...f.response(p),razorpay_signature:'forged'}),/verified/);await assert.rejects(f.service.verify(owner,id,template,{...f.response(p),razorpay_order_id:'order_another'}),/match/);assert.equal(f.rows.get(id).status,'pending');});
@@ -59,7 +59,7 @@ test('server verifies captured state, exact total, currency and gateway order',a
 test('closing browser after captured payment recovers access without a second charge',async()=>{const f=fixture(),id=randomUUID(),order=await f.service.order(owner,id,template);f.captured(order);assert.equal((await f.service.status(owner,id,template)).unlocked,true);assert.equal((await f.service.order(owner,id,template)).unlocked,true);assert.equal(f.created.length,1);});
 test('cancelled unpaid checkout can use promo; already captured checkout stays paid',async()=>{for(const paid of [false,true]){const f=fixture(),id=randomUUID(),order=await f.service.order(owner,id,template);if(paid)f.captured(order);const result=await f.service.promo(owner,id,template,code);assert.equal(result.status,paid?'captured':'complimentary');assert.equal(f.created.length,1);}});
 test('webhook replays are idempotent and recovery requires matching server notes',async()=>{const f=fixture(),id=randomUUID(),order=await f.service.order(owner,id,template),p=f.captured(order,{notes:f.created[0].notes});const event={event:'payment.captured',payload:{payment:{entity:p}}};f.rows.get(id).razorpay_order_id=null;assert.equal(await f.service.webhook(event),true);assert.equal(await f.service.webhook(event),true);assert.equal(f.rows.get(id).status,'captured');const other=randomUUID();await f.store.reserve(other,owner,template);f.rows.get(other).checkout_token='different';await assert.rejects(f.service.settle('order_other',f.captured({orderId:'order_other'},{notes:{videoInvitationId:other,ownerId:owner,checkoutToken:'forged'}}).id,other),/match/);});
-test('refund webhook revokes access and payment notification cannot reinstate it',async()=>{const f=fixture(),id=randomUUID(),order=await f.service.order(owner,id,template),p=f.captured(order);await f.service.verify(owner,id,template,f.response(p));p.amount_refunded=58882;p.status='refunded';f.payments.set(p.id,p);assert.equal(await f.service.webhook({event:'refund.processed',payload:{payment:{entity:{...p,status:'captured'}},refund:{entity:{payment_id:p.id}}}}),true);assert.equal(await f.service.webhook({event:'payment.captured',payload:{payment:{entity:{...p,status:'captured'}}}}),true);await assert.rejects(f.service.requireAccess(owner,id,template),e=>e.status===402);await assert.rejects(f.service.settle(order.orderId,p.id),/refunded/);});
+test('refund webhook revokes access and payment notification cannot reinstate it',async()=>{const f=fixture(),id=randomUUID(),order=await f.service.order(owner,id,template),p=f.captured(order);await f.service.verify(owner,id,template,f.response(p));p.amount_refunded=82482;p.status='refunded';f.payments.set(p.id,p);assert.equal(await f.service.webhook({event:'refund.processed',payload:{payment:{entity:{...p,status:'captured'}},refund:{entity:{payment_id:p.id}}}}),true);assert.equal(await f.service.webhook({event:'payment.captured',payload:{payment:{entity:{...p,status:'captured'}}}}),true);await assert.rejects(f.service.requireAccess(owner,id,template),e=>e.status===402);await assert.rejects(f.service.settle(order.orderId,p.id),/refunded/);});
 test('SQL enforces unique purchases and blocks direct client billing changes',async()=>{
  const pg=new PGlite();try{
   await pg.exec('create role anon; create role authenticated; create role service_role bypassrls; create schema auth; create table auth.users(id uuid primary key);');
@@ -92,17 +92,17 @@ test('HTTP render endpoint rejects invented paid flags and unauthenticated reque
  finally{await harness.close();for(const key of Object.keys(process.env))if(!(key in before))delete process.env[key];Object.assign(process.env,before);}
 });
 
-test('Wedding Bells advertises and charges ₹699 plus GST, with no change to standard videos',async()=>{
+test('Wedding Bells advertises and charges ₹699 plus GST, with free standard videos',async()=>{
  const f=fixture(),id=randomUUID(),tid='wedding-bells-v1';
  assert.equal((await f.service.status(owner,id,tid)).amount,82482);
  const order=await f.service.order(owner,id,tid);assert.equal(order.amount,82482);assert.equal(order.quote.basePaise,69900);assert.equal(order.quote.taxPaise,12582);assert.equal(f.created[0].amount,82482);
  const p=f.captured(order,{amount:82482});assert.equal((await f.service.verify(owner,id,tid,f.response(p))).unlocked,true);
- assert.equal((await f.service.status(owner,randomUUID(),template)).amount,58882);
+ assert.equal((await f.service.status(owner,randomUUID(),'temple-v1')).amount,0);
 });
 test('Wedding Bells keeps an existing gateway order and captured price at ₹499',async()=>{
  const f=fixture(),id=randomUUID(),tid='wedding-bells-v1';f.rows.set(id,{id,owner_id:owner,template_id:tid,status:'pending',total_paise:58882,base_paise:49900,tax_bps:1800,tax_paise:8982,razorpay_order_id:'order_existing'});
  const order=await f.service.order(owner,id,tid);assert.equal(order.amount,58882);assert.equal(f.created.length,0);
- const p=f.captured(order);await f.service.verify(owner,id,tid,f.response(p));assert.equal((await f.service.status(owner,id,tid)).amount,58882);
+ const p=f.captured(order,{amount:58882});await f.service.verify(owner,id,tid,f.response(p));assert.equal((await f.service.status(owner,id,tid)).amount,58882);
 });
 test('Wedding Bells updates an unreserved draft price and grants a correctly priced promo',async()=>{
  const f=fixture(),id=randomUUID(),tid='wedding-bells-v1';f.rows.set(id,{id,owner_id:owner,template_id:tid,status:'pending',total_paise:58882,base_paise:49900,tax_bps:1800,tax_paise:8982});
