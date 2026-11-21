@@ -7,14 +7,18 @@ import {spawnSync} from 'node:child_process';
 import {VIDEO_CATALOG} from '../shared/video-catalog.mjs';
 const directory='work/video-scene-provisioning';
 await fs.mkdir(directory,{recursive:true});
-const files=['public/assets/video-scenes/v1','public/assets/video-scenes/tiles-v2','server','shared',
+const files=['public/assets/video-scenes/v1','public/assets/video-scenes/tiles-v2','public/assets/video-scenes/oonjal-v3','server','shared',
  'scripts/render-personalized-video.mjs','scripts/render-scene-video.mjs',
  'scripts/video-personalise-worker.mjs','scripts/video-scene-preflight.mjs',
  'dist/video-render.html',...VIDEO_CATALOG.flatMap(d=>[
   'public/assets/video-masters/'+d.id+'/manifest.json',
   'public/assets/video-masters/'+d.id+'/asset-index.json']),
  'public/assets/video-masters/film-tiles-v1/asset-index-v2.json',
- 'public/assets/video-masters/film-tiles-v1/manifest-v1.json'];
+ 'public/assets/video-masters/film-tiles-v1/manifest-v1.json',
+ 'public/assets/video-masters/film-oonjal-v1/manifest-v1.json',
+ 'public/assets/music-library/oonjal-original.m4a',
+ 'public/assets/video-masters/film-oonjal-v1/asset-index-v3.json',
+ 'public/assets/video-masters/film-oonjal-v1/manifest-v3.json'];
 for(const name of await fs.readdir('dist/assets'))if(/\.(?:js|css)$/.test(name))files.push('dist/assets/'+name);
 await fs.writeFile(directory+'/files.txt',files.join('\n')+'\n');
 const archive=directory+'/worker.tar.gz';

@@ -1,0 +1,88 @@
+{
+  "id": "film-oonjal-v1",
+  "version": 3,
+  "rendererVersion": "scene-film-v1",
+  "sceneDesign": "oonjal",
+  "kind": "page",
+  "output": {
+    "width": 720,
+    "height": 1280,
+    "fps": 24,
+    "frames": 828,
+    "duration": 34.5
+  },
+  "scenes": [
+    {
+      "id": "opening",
+      "name": "Opening",
+      "start": 0,
+      "end": 156,
+      "reviewFrame": 144,
+      "layers": []
+    },
+    {
+      "id": "bride",
+      "name": "Bride",
+      "start": 156,
+      "end": 353,
+      "reviewFrame": 252,
+      "layers": []
+    },
+    {
+      "id": "swing",
+      "name": "Swing",
+      "start": 353,
+      "end": 439,
+      "reviewFrame": 427,
+      "layers": []
+    },
+    {
+      "id": "groom",
+      "name": "Groom",
+      "start": 439,
+      "end": 624,
+      "reviewFrame": 540,
+      "layers": []
+    },
+    {
+      "id": "closing",
+      "name": "Save the Date",
+      "start": 624,
+      "end": 828,
+      "reviewFrame": 792,
+      "layers": []
+    }
+  ],
+  "assets": {
+    "sceneBundle": {
+      "path": "/assets/video-masters/film-oonjal-v1/asset-index-v3.json",
+      "sha256": "a72d73cce182b8e7cc3d0d6cf9e9d21b72386099f785d13feb0eacc149f8ee02"
+    }
+  },
+  "release": {
+    "approved": true,
+    "rendererVersion": "scene-film-v1",
+    "proofs": {
+      "default": "ae79db1df1cc835314a8f03774ac5cc680701af638d7e3f6e55c53de2a5ddfc4",
+      "personalized": "e7cf09b2c5d2cc9c1da335db7c828ba32fbb95c7974644a6f589fea442bba693"
+    },
+    "verification": {
+      "defaultProofKind": "full-cloud-mp4",
+      "personalizedProofKind": "full-cloud-mp4",
+      "personalizedFrames": 828,
+      "audioPayloadSha256": "fb7a19a337fd2c98fe7222a8a32b54cc1f8b5deb83d5e80d4e42e91f5dba8f28",
+      "snapshotId": "snap_nx2Mb7Q6sjislyNZkMRTAn7WoNwd"
+    },
+    "cloudVerified": true
+  },
+  "sceneFrame": "/assets/video-scenes/oonjal-v3/frame.html",
+  "catalog": {
+    "poster": "../../catalog-previews/oonjal-v3/film-oonjal-v1-640.webp",
+    "posters": {
+      "320": "../../catalog-previews/oonjal-v3/film-oonjal-v1-320.webp",
+      "640": "../../catalog-previews/oonjal-v3/film-oonjal-v1-640.webp",
+      "960": "../../catalog-previews/oonjal-v3/film-oonjal-v1-960.webp"
+    },
+    "preview": "../../catalog-previews/oonjal-v3/film-oonjal-v1.mp4"
+  }
+}

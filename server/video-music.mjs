@@ -2,7 +2,7 @@ import {get as getBlob} from '@vercel/blob';
 import {readFile} from 'node:fs/promises';
 import {musicTrack,musicTracks,publicTrack} from './website-music.mjs';
 import {list} from './owner/store.mjs';
-import {canonicalMusicId} from '../shared/music-selection.mjs';
+import {canonicalMusicId,oonjalRecordingId} from '../shared/music-selection.mjs';
 import {hash} from './video-personalise-store.mjs';
 import {HttpError} from './core.mjs';
 
@@ -11,7 +11,8 @@ export async function videoMusicCatalog(){
  return {tracks:tracks.filter(t=>t.status==='ready'&&!t.archived).map(publicTrack),assignments};
 }
 
-export function videoDefaultMusic(id,catalog){
+export function videoDefaultMusic(id,catalog,masterVersion){
+ if(id==='film-oonjal-v1'&&masterVersion===3)return {mode:'library',id:oonjalRecordingId};
  const assignment=catalog.assignments.find(a=>a.id===id);
  const trackId=assignment?assignment.trackId:id==='wedding-bells-v1'?'wedding-bells-original':undefined;
  const track=catalog.tracks.find(t=>t.id===trackId);

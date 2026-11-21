@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {mkdtempSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
+import seedTracks from '../shared/music-seeds.json' with {type:'json'};
 process.env.FMI_OWNER_LOCAL='1';process.env.FMI_OWNER_DB=join(mkdtempSync(join(tmpdir(),'fmi-music-')),'test.sqlite');
 process.env.SUPABASE_URL='https://example.supabase.co';process.env.SUPABASE_SERVICE_ROLE_KEY='test';
 const {save,get}=await import('../server/owner/store.mjs');
@@ -14,7 +15,12 @@ const {default:publicMusic}=await import('../api/music.mjs');
 const token='a'.repeat(64),csrf='music-test-csrf';
 await save('identity','owner',{epoch:1},0);await save('session',hashToken(token),{epoch:1,csrf,expiresAt:'2099-01-01T00:00:00Z'},0);
 async function call(handler,url,{body,authenticated=true,tokenCsrf=csrf,method=body?'POST':'GET'}={}){const res={headers:{},setHeader(k,v){this.headers[k]=v},removeHeader(k){delete this.headers[k]},status(n){this.statusCode=n;return this},json(v){this.data=v},end(v){this.data=v}};const req={url,method,body,headers:{host:'localhost',origin:'http://localhost',...(authenticated?{cookie:'fmi_owner='+token,'x-owner-csrf':tokenCsrf}:{})}};await handler(req,res);return res;}
-test('library is public but owner actions require session and CSRF',async()=>{assert.equal((await call(publicMusic,'/api/music',{authenticated:false})).data.tracks.length,2);assert.equal((await call(owner,'/api/owner-music',{authenticated:false})).statusCode,401);assert.equal((await call(owner,'/api/owner-music?action=reserve',{body:{},tokenCsrf:'wrong'})).statusCode,403)});
+test('library is public but owner actions require session and CSRF',async()=>{
+ const library=await call(publicMusic,'/api/music',{authenticated:false});
+ assert.deepEqual(library.data.tracks.map(t=>t.id).sort(),seedTracks.filter(t=>t.status==='ready'&&!t.archived).map(t=>t.id).sort());
+ assert.equal((await call(owner,'/api/owner-music',{authenticated:false})).statusCode,401);
+ assert.equal((await call(owner,'/api/owner-music?action=reserve',{body:{},tokenCsrf:'wrong'})).statusCode,403);
+});
 test('many templates can use one track and revision conflicts reject stale writes',async()=>{const old=global.fetch;global.fetch=async()=>new Response(JSON.stringify([{id:'ivory-lace'}]));try{for(const templateId of ['ivory-lace','royal'])assert.equal((await call(owner,'/api/owner-music?action=assign',{body:{templateId,trackId:'heartwarming',revision:0}})).statusCode,200);assert.equal(await templateMusic('ivory-lace'),'/api/music?id=heartwarming');assert.equal(await templateMusic('royal'),'/api/music?id=heartwarming');assert.equal((await call(owner,'/api/owner-music?action=assign',{body:{templateId:'ivory-lace',trackId:'canon-in-d',revision:0}})).statusCode,409)}finally{global.fetch=old}});
 test('owner can assign a library recording to a video without a website catalog row',async()=>{
  const old=global.fetch;global.fetch=async()=>new Response('[]');

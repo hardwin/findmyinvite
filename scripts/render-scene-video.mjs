@@ -6,6 +6,7 @@ import {once} from 'node:events';
 import puppeteer from 'puppeteer-core';
 import ffmpegStatic from 'ffmpeg-static';
 import {assertMaster,normalizeVideoContent,MUSIC} from '../shared/video-personalization.mjs';
+import {usesOriginalOonjalAudio} from '../shared/music-selection.mjs';
 import {prepareSceneMaster} from '../server/video-scene-details.mjs';
 import {browserPath,serve,verifyVideo,digest} from './render-personalized-video.mjs';
 const publicRoot=resolve(import.meta.dirname,'../public');
@@ -22,7 +23,7 @@ async function closeSceneBrowser(browser){
 }
 export async function renderSceneVideo({master,content,photos={},audioFile,audioCredit,output,reviewFrames,onProgress=()=>{},requireRelease=true,browserBatchFrames}){
  assertMaster(master,{released:requireRelease});
- content=normalizeVideoContent(content,{complete:true,templateId:master.id});
+ content=normalizeVideoContent(content,{complete:true,templateId:master.id,masterVersion:master.version});
  master=await prepareSceneMaster(master,content);
  const indexBytes=await readFile(assetPath(master.assets.sceneBundle.path));
  if(digest(indexBytes)!==master.assets.sceneBundle.sha256)throw Error('Scene asset index checksum mismatch.');
@@ -57,9 +58,13 @@ export async function renderSceneVideo({master,content,photos={},audioFile,audio
   if(reviewFrames)await mkdir(output,{recursive:true});else{
    await mkdir(resolve(output,'..'),{recursive:true});
    const args=['-hide_banner','-loglevel','error','-y','-f','image2pipe','-framerate',String(fps),'-i','pipe:0'];
-   if(audio){if(content.music.mode==='library')args.push('-stream_loop','-1');args.push('-i',audio,'-map','0:v','-map','1:a:0','-af',`apad,atrim=0:${duration},afade=t=in:st=0:d=1,afade=t=out:st=${Math.max(0,duration-3)}:d=3`,'-c:a','aac','-b:a','160k');}else args.push('-an');
+   const original=usesOriginalOonjalAudio(master,content.music);
+   if(original){
+    if(digest(await readFile(audio))!=='2d9a33042439267ad06f91ce81ec02b9fe24b492a87f94aec87a2b1bb51e6142')throw Error('The original Oonjal recording does not match this master.');
+    args.push('-i',audio,'-map','0:v','-map','1:a:0','-c:a','copy');
+   }else if(audio){if(content.music.mode==='library')args.push('-stream_loop','-1');args.push('-i',audio,'-map','0:v','-map','1:a:0','-af',`apad,atrim=0:${duration},afade=t=in:st=0:d=1,afade=t=out:st=${Math.max(0,duration-3)}:d=3`,'-c:a','aac','-b:a','160k');}else args.push('-an');
    args.push('-c:v','libx264','-threads','2','-preset','fast','-crf','20','-pix_fmt','yuv420p','-r',String(fps),'-frames:v',String(frames),'-t',String(duration),'-movflags','+faststart');
-   if(content.music.mode==='library')args.push('-metadata','comment='+(audioCredit||(MUSIC[content.music.id]?MUSIC[content.music.id].credit+' '+MUSIC[content.music.id].license:'')));
+   if(content.music.mode==='library')args.push('-metadata','comment='+(original?'Mapla Veetla Okay · Original recording':audioCredit||(MUSIC[content.music.id]?MUSIC[content.music.id].credit+' '+MUSIC[content.music.id].license:'')));
    args.push('-f','mp4',output);encoder=spawn(process.env.FFMPEG_PATH||ffmpegStatic,args,{windowsHide:true,stdio:['pipe','ignore','pipe']});let errors='';encoder.stderr.on('data',b=>errors=(errors+b).slice(-4000));done=new Promise((yes,no)=>{encoder.once('error',no);encoder.stdin.on('error',no);encoder.once('close',code=>code===0?yes():no(Error('Encoding failed: '+errors)));});done.catch(()=>{});
   }
   const sequence=reviewFrames||Array.from({length:frames},(_,i)=>i);

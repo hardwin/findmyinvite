@@ -1,6 +1,6 @@
 import {formErrors} from './template-forms.mjs';
 import seeds from './music-seeds.json' with {type:'json'};
-import {validMusicId} from './music-selection.mjs';
+import {validMusicId,oonjalRecordingId} from './music-selection.mjs';
 import {TEMPLE_ID,TEMPLE_FORM,TEMPLE_DEFAULTS} from './temple-video.mjs';
 import {catalogVideo} from './video-catalog.mjs';
 import {WEDDING_BELLS_ID,WEDDING_BELLS_DEFINITION,WEDDING_BELLS_OUTPUT} from './wedding-bells-video.mjs';
@@ -23,7 +23,15 @@ export const VIDEO_DEFAULTS={blessing1:'With God’s Grace',blessing2:'We Invite
 export const VIDEO_EXAMPLE={...VIDEO_DEFAULTS,groom:'Alex John',bride:'Anna Thomas',groomFather:'John Mathew',groomMother:'Elsy John',brideFather:'Thomas George',brideMother:'Mercy Thomas',weddingDate:'2027-02-15',weddingTime:'10:00',church:'St. Mary’s Forane Church',address:'Alappuzha, Kerala',receptionDate:'2027-02-14',receptionTime:'19:00',receptionVenue:'Parish Hall Garden',receptionAddress:'Alappuzha, Kerala',host1:'Kurien & Lizzy Abraham',host2:'Nia, Noel & family'};
 export const PHOTO_SLOTS=['groom','bride','couple'];
 export const DEFAULT_VIDEO_ID=TEMPLE_ID;
-export function videoDefinition(id=DEFAULT_VIDEO_ID){
+const baseOonjal=catalogVideo('film-oonjal-v1');
+if(!baseOonjal)throw Error('The Oonjal template definition is missing.');
+const editableOonjalFields=['brideEn','groomEn','weddingDate'];
+const fixedRecording={mode:'library',id:oonjalRecordingId};
+const oonjalDetails=source=>({...Object.fromEntries(editableOonjalFields.map(key=>[key,source[key]])),photos:{},music:fixedRecording});
+const designerOonjal={...baseOonjal,photoSlots:[],defaults:oonjalDetails(baseOonjal.defaults),example:oonjalDetails(baseOonjal.example),
+ form:{...baseOonjal.form,steps:baseOonjal.form.steps.map(step=>({...step,questions:step.questions.filter(q=>editableOonjalFields.includes(q.path))})).filter(step=>step.questions.length||step.id==='review')}};
+export function videoDefinition(id=DEFAULT_VIDEO_ID,masterVersion){
+ if(id===designerOonjal.id&&masterVersion===3)return designerOonjal;
  if(id===WEDDING_BELLS_ID)return WEDDING_BELLS_DEFINITION;
  const catalog=catalogVideo(id);if(catalog)return catalog;
  if(id===TEMPLE_ID)return {id,form:TEMPLE_FORM,defaults:TEMPLE_DEFAULTS,name:'Temple Wedding',collection:'THE TEMPLE COLLECTION',description:'A golden temple, your favourite people, and words that are entirely yours.',filename:'temple-wedding.mp4'};
@@ -32,8 +40,9 @@ export function videoDefinition(id=DEFAULT_VIDEO_ID){
 }
 const seedMusic=Object.fromEntries(seeds.map(t=>[t.id,{path:t.asset,label:t.title,credit:t.credit+(t.id==='wedding-bells-original'?'':' Trimmed and faded for this invitation.'),license:t.licenseUrl}]));
 export const MUSIC={...seedMusic,canon:seedMusic['canon-in-d']};
-export function normalizeVideoContent(input,{complete=false,templateId=VIDEO_ID}={}){
- const {form,defaults}=videoDefinition(templateId);
+/** @param {object} input @param {{complete?:boolean,templateId?:string,masterVersion?:number}} options */
+export function normalizeVideoContent(input,{complete=false,templateId=VIDEO_ID,masterVersion}={}){
+ const definition=videoDefinition(templateId,masterVersion),{form,defaults}=definition;
  if(!input||typeof input!=='object'||Array.isArray(input))throw Error('Invalid invitation details.');
  const out={};
  // Form display order may change; retain the content order used by render caches.
@@ -46,8 +55,8 @@ export function normalizeVideoContent(input,{complete=false,templateId=VIDEO_ID}
  out.photos={};
  if(templateId===WEDDING_BELLS_ID&&Object.keys(input.photos||{}).length)throw Error('Wedding Bells currently preserves the original characters.');
  const catalog=catalogVideo(templateId);
- for(const slot of catalog?catalog.photoSlots.map(p=>p.slot):PHOTO_SLOTS){const p=input.photos?.[slot];if(!p)continue;if(!/^[a-f0-9-]{36}$/.test(p.id||'')||!(catalog?['frame']:['cutout','frame','prepared']).includes(p.mode)||p.confirmed!==true)throw Error('Confirm the '+slot+' photo presentation.');out.photos[slot]={id:p.id,mode:p.mode,confirmed:true};}
- const music=input.music||{mode:'none'};
+ for(const slot of catalog?definition.photoSlots.map(p=>p.slot):PHOTO_SLOTS){const p=input.photos?.[slot];if(!p)continue;if(!/^[a-f0-9-]{36}$/.test(p.id||'')||!(catalog?['frame']:['cutout','frame','prepared']).includes(p.mode)||p.confirmed!==true)throw Error('Confirm the '+slot+' photo presentation.');out.photos[slot]={id:p.id,mode:p.mode,confirmed:true};}
+ const music=definition===designerOonjal?fixedRecording:input.music||{mode:'none'};
  if(!['none','library','upload'].includes(music.mode))throw Error('Choose music or silence.');
  out.music={mode:music.mode};
  if(music.mode==='library'){if(!validMusicId(music.id))throw Error('Choose an available music track.');out.music.id=music.id;}
@@ -56,7 +65,7 @@ export function normalizeVideoContent(input,{complete=false,templateId=VIDEO_ID}
  // Partial drafts may omit required answers, but never accept malformed date/time values.
  // Scene designs validate language-dependent required fields in their versioned
  // schema, after this shared type/length/date validation.
- for(const field of form.steps.flatMap(s=>s.questions))if(errors[field.path]&&(complete&&!catalog||out[field.path]))throw Error(errors[field.path]);
+ for(const field of form.steps.flatMap(s=>s.questions))if(errors[field.path]&&(complete&&(!catalog||definition===designerOonjal)||out[field.path]))throw Error(errors[field.path]);
  for(const prefix of ['wedding','reception'])if(out[prefix+'End']&&out[prefix+'End']<=out[prefix+'Time'])throw Error('The '+prefix+' end time must be after its start time.');
  return out;
 }
@@ -90,11 +99,12 @@ export function assertMaster(m,{released=false}={}){
  }
  if(m?.rendererVersion==='scene-film-v1'){
   const definition=catalogVideo(m.id),o=m.output;
-  if(!definition||definition.design!==m.sceneDesign||m.version!==1||o?.width!==720||o.height!==1280||o.fps!==24||!Number.isSafeInteger(o.frames)||o.frames<24||o.frames>14400||Math.abs(o.duration-o.frames/o.fps)>0.00001)throw Error('Unsupported scene master.');
+  const designerPlate=m.id==='film-oonjal-v1'&&m.version===3&&m.sceneFrame==='/assets/video-scenes/oonjal-v3/frame.html'&&o?.frames===828;
+  if(!definition||definition.design!==m.sceneDesign||(m.version!==1&&!designerPlate)||o?.width!==720||o.height!==1280||o.fps!==24||!Number.isSafeInteger(o.frames)||o.frames<24||o.frames>14400||Math.abs(o.duration-o.frames/o.fps)>0.00001)throw Error('Unsupported scene master.');
   if(!m.scenes?.length||m.scenes.some(s=>!Number.isInteger(s.start)||!Number.isInteger(s.end)||s.end<=s.start||s.end>o.frames))throw Error('Invalid scene timeline.');
   const revisedTiles=m.id==='film-tiles-v1'&&m.assetRevision===2&&m.sceneFrame==='/assets/video-scenes/tiles-v2/frame.html';
-  const expectedIndex='/assets/video-masters/'+m.id+'/asset-index'+(revisedTiles?'-v2':'')+'.json';
-  if(m.sceneFrame&&!revisedTiles)throw Error('Unsupported scene frame.');
+  const expectedIndex='/assets/video-masters/'+m.id+'/asset-index'+(designerPlate?'-v3':revisedTiles?'-v2':'')+'.json';
+  if(m.sceneFrame&&!revisedTiles&&!designerPlate)throw Error('Unsupported scene frame.');
   if(released&&(!m.release?.approved||!['default','personalized'].every(k=>/^[a-f0-9]{64}$/.test(m.release?.proofs?.[k]||''))||m.release.rendererVersion!==m.rendererVersion||m.assets?.sceneBundle?.path!==expectedIndex||!/^[a-f0-9]{64}$/.test(m.assets?.sceneBundle?.sha256||'')))throw Error('This template is still being prepared.');
   return m;
  }

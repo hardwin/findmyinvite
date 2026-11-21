@@ -596,12 +596,12 @@ export default {
       "duration": 18
     },
     "film-oonjal-v1": {
-      "preview": "/assets/catalog-previews/names-v1/videos/film-oonjal-v1.mp4",
-      "poster": "/assets/catalog-previews/names-v1/videos/film-oonjal-v1-640.webp",
+      "preview": "/assets/catalog-previews/oonjal-v3/film-oonjal-v1.mp4",
+      "poster": "/assets/catalog-previews/oonjal-v3/film-oonjal-v1-640.webp",
       "posters": {
-        "320": "/assets/catalog-previews/names-v1/videos/film-oonjal-v1-320.webp",
-        "640": "/assets/catalog-previews/names-v1/videos/film-oonjal-v1-640.webp",
-        "960": "/assets/catalog-previews/names-v1/videos/film-oonjal-v1-960.webp"
+        "320": "/assets/catalog-previews/oonjal-v3/film-oonjal-v1-320.webp",
+        "640": "/assets/catalog-previews/oonjal-v3/film-oonjal-v1-640.webp",
+        "960": "/assets/catalog-previews/oonjal-v3/film-oonjal-v1-960.webp"
       },
       "duration": 34.5
     },

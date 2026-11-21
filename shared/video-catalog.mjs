@@ -15514,7 +15514,7 @@ export const VIDEO_CATALOG = [
   {
     "id": "film-oonjal-v1",
     "design": "oonjal",
-    "name": "Mapla Veetla Okay",
+    "name": "Maapla Veetla Double okay :P",
     "collection": "INVITATION VIDEOS",
     "description": "Make every scene your own.",
     "filename": "oonjal-invitation.mp4",

@@ -5,7 +5,9 @@ export async function sceneSchema(id){
 }
 export async function prepareSceneMaster(master,content,{complete=true}={}){
  if(master.rendererVersion!=='scene-film-v1')return master;
- const schema=await sceneSchema(master.id),fields={...content,music:'none',songId:'',songName:'',songStart:'',songSeconds:'',songOk:''};
+ const schema=await sceneSchema(master.id);
+ const fixedWording=master.id==='film-oonjal-v1'&&master.version===3?schema.SAMPLE_FIELDS:{};
+ const fields={...fixedWording,...content,music:'none',songId:'',songName:'',songStart:'',songSeconds:'',songOk:''};
  if(complete){const result=schema.validateFields(fields);const error=Object.entries(result.errors||{}).find(([k])=>!/^photo|^song|^music/.test(k));if(error)throw Object.assign(Error(error[1]),{code:'TEXT_FIT',field:error[0]});}
  const details=schema.buildDetails(fields),duration=schema.durationOf?.(details)||master.output.duration,frames=Math.ceil(duration*24);
  if(!Number.isFinite(duration)||duration<1||duration>600)throw Error('Invalid invitation duration.');
