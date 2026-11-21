@@ -1,4 +1,5 @@
 import {useEffect,useSyncExternalStore} from 'react';
+import {isPublicVideo} from '../../shared/video-visibility.mjs';
 
 export type VideoEntry={embeddedMusic?:boolean;originalPaise?:number;offerLabel?:string;tier?:string;templateCode?:string;microDescription?:string;id:string;name:string;poster:string;posters?:Record<string,string>;preview:string;amount:number;quote?:{basePaise:number};duration:number;music?:{id:string;title:string;url:string;credit:string;licenseUrl:string}|null};
 type Snapshot={entries:VideoEntry[];loading:boolean;error:boolean};
@@ -15,7 +16,7 @@ function load(){
   if(!response.ok)throw Error('Video collection unavailable.');
   const {templates}=await response.json();
   if(!Array.isArray(templates))throw Error('Video collection unavailable.');
-  update({entries:templates,loading:false,error:false});
+  update({entries:templates.filter(entry=>isPublicVideo(entry.id)),loading:false,error:false});
  }).catch(()=>{request=undefined;update({...snapshot,loading:false,error:true});});
  return request;
 }

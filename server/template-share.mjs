@@ -3,6 +3,7 @@ import {HttpError} from './core.mjs';
 import {injectShareMetadata,escapeHtml} from './share-card.mjs';
 import {templateDetailsPath,templateShareImagePath} from '../shared/template-sharing.mjs';
 import {INVITATION_BASE_PAISE} from '../shared/pricing.mjs';
+import {isPublicVideo} from '../shared/video-visibility.mjs';
 import {TEMPLATE_SHARE_DESIGN_VERSION,templateShareCardHtml} from '../shared/template-share-card.mjs';
 
 const catalogues=new Map();
@@ -53,7 +54,9 @@ export function templateShareData(row,kind,websiteBasePaise=INVITATION_BASE_PAIS
  return entry;
 }
 export async function resolveTemplateShare(params,origin,load=publicCatalogue){
- const {id,kind}=templateShareRequest(params),catalog=await load(origin,kind),row=catalog.templates.find(item=>item.id===id);
+ const {id,kind}=templateShareRequest(params);
+ if(kind==='video'&&!isPublicVideo(id))throw new HttpError(404,'Template unavailable.');
+ const catalog=await load(origin,kind),row=catalog.templates.find(item=>item.id===id);
  if(!row)throw new HttpError(404,'Template unavailable.');
  return templateShareData(row,kind,catalog.basePaise??INVITATION_BASE_PAISE);
 }
