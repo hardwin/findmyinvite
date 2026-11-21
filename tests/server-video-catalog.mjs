@@ -27,7 +27,7 @@ test('scene downloads require their own worker while the existing Temple worker 
  assert.doesNotThrow(()=>requireVideoRelease(scene,{...env,VIDEO_SCENE_SNAPSHOT_ID:'new-scene-worker'}));
  const temple=JSON.parse(await readFile('public/assets/video-masters/temple-v1/manifest.json'));
  assert.throws(()=>requireVideoRelease(temple,env),/not configured/);
- assert.doesNotThrow(()=>requireVideoRelease(temple,{...env,VIDEO_TEMPLE_SNAPSHOT_ID:'qualified-temple-v2'}));
+ assert.doesNotThrow(()=>requireVideoRelease(temple,{...env,VIDEO_TEMPLE_V3_SNAPSHOT_ID:'qualified-temple-v3'}));
  assert.throws(()=>normalizeVideoContent({...VIDEO_CATALOG[0].example,title:'<img src=x onerror=alert(1)>'},{templateId:scene.id}),/Check/);
 });
 test('all 38 additional designs have unique scene forms; Tamil 3D remains excluded',async()=>{

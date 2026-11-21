@@ -256,12 +256,12 @@ export default {
   },
   "videos": {
     "temple-v1": {
-      "preview": "/assets/catalog-previews/temple-v2/temple-v1.mp4",
-      "poster": "/assets/catalog-previews/temple-v2/temple-v1-640.webp",
+      "preview": "/assets/catalog-previews/temple-v3/temple-v1.mp4",
+      "poster": "/assets/catalog-previews/temple-v3/temple-v1-640.webp",
       "posters": {
-        "320": "/assets/catalog-previews/temple-v2/temple-v1-320.webp",
-        "640": "/assets/catalog-previews/temple-v2/temple-v1-640.webp",
-        "960": "/assets/catalog-previews/temple-v2/temple-v1-960.webp"
+        "320": "/assets/catalog-previews/temple-v3/temple-v1-320.webp",
+        "640": "/assets/catalog-previews/temple-v3/temple-v1-640.webp",
+        "960": "/assets/catalog-previews/temple-v3/temple-v1-960.webp"
       },
       "duration": 54
     },

@@ -87,7 +87,7 @@ test('HTTP boundaries hide new designs while preserving existing work and operat
    rows.get(draftId).deleted_at=new Date().toISOString();assert.equal((await request(videoHandler,url,'owner')).status,404);
   });
   await t.test('operators can open retained designs directly for customization',async()=>{
-   const r=await request(videoHandler,'/?template='+hidden,'operator');assert.equal(r.status,200);assert.equal(r.body.id,hidden);assert.equal(r.body.master.version,2);
+   const r=await request(videoHandler,'/?template='+hidden,'operator');assert.equal(r.status,200);assert.equal(r.body.id,hidden);assert.equal(r.body.master.version,3);
   });
  }finally{globalThis.fetch=originalFetch;for(const key of Object.keys(process.env))if(!(key in previous))delete process.env[key];Object.assign(process.env,previous);}
 });

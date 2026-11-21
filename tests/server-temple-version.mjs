@@ -6,13 +6,15 @@ import {videoNewOrSavedVersion,videoDraftVersion,videoMasterVersion,pinVideoMast
 import {loadVideoMaster,requireVideoRelease,renderDigest,videoService} from '../server/video-personalise.mjs';
 import {draftService} from '../server/personalization-drafts.mjs';
 import {TEMPLE_DEFAULTS} from '../shared/temple-video.mjs';
-const id='temple-v1',v1=await loadVideoMaster(id,1),v2=await loadVideoMaster(id,2);
-test('new Temple invitations select v2 while existing unversioned drafts remain v1',()=>{
- assert.equal(videoNewOrSavedVersion(id,null),2);
+const id='temple-v1',v1=await loadVideoMaster(id,1),v2=await loadVideoMaster(id,2),v3=await loadVideoMaster(id,3);
+test('new Temple invitations select v3 while existing drafts retain their version',()=>{
+ assert.equal(videoNewOrSavedVersion(id,null),3);
  assert.equal(videoNewOrSavedVersion(id,{content:{groom:'Existing'}}),1);
  assert.equal(videoNewOrSavedVersion(id,{masterVersion:2}),2);
  assert.equal(videoDraftVersion(id,undefined),1);
- for(const value of [0,3,'2',NaN])assert.throws(()=>videoMasterVersion(id,value));
+ assert.equal(videoNewOrSavedVersion(id,{masterVersion:3}),3);
+ assert.equal(pinVideoMasterVersion(id,{content:{}},null),3);
+ for(const value of [0,4,'3',NaN])assert.throws(()=>videoMasterVersion(id,value));
  assert.throws(()=>pinVideoMasterVersion(id,{masterVersion:2},{payload:{content:{}}}),/different/);
  assert.throws(()=>pinVideoMasterVersion(id,{}, {payload:{masterVersion:2}}),/different/);
 });
@@ -26,7 +28,7 @@ test('both Temple versions retain locked source footage and original characters'
  }
  assert.deepEqual(v2.output,v1.output);assert.deepEqual(v2.scenes,v1.scenes);
  assert.notEqual(v2.assets.motion.path,v1.assets.motion.path);
- assert.deepEqual(await loadVideoMaster(id),v2);
+ assert.deepEqual(await loadVideoMaster(id),v3);
  assert.notEqual(renderDigest('owner',v1,{},[]),renderDigest('owner',v2,{},[]));
  const old=JSON.parse(await readFile(new URL('../public'+v1.assets.motion.path,import.meta.url))),current=JSON.parse(await readFile(new URL('../public'+v2.assets.motion.path,import.meta.url)));
  assert.equal(current.frames.length,1296);assert.deepEqual(current.occlusion,old.occlusion);
@@ -34,6 +36,18 @@ test('both Temple versions retain locked source footage and original characters'
  // Preserve those exact paths, rather than reverting to pre-trial production.
  const characters=current.frames.map(entries=>entries.filter(e=>['groom','bride','closing'].includes(e.asset)).map(e=>({asset:e.asset,matrix:e.matrix})));
  assert.equal(createHash('sha256').update(JSON.stringify(characters)).digest('hex'),'e8cbdae31d5c6530ed706825fb391fbdb068dee29c1aa2fbc6ce8f0220960657');
+});
+test('v3 restyles typography and wardrobe while preserving the base plate and every motion track',async()=>{
+ const changed=new Set(['groom','bride','closing']);
+ for(const [key,asset]of Object.entries(v2.assets))if(!changed.has(key))assert.deepEqual(v3.assets[key],asset,key);
+ for(const asset of Object.values(v3.assets))assert.equal(createHash('sha256').update(await readFile(new URL('../public'+asset.path,import.meta.url))).digest('hex'),asset.sha256);
+ for(const key of ['output','scenes','textPlanes','petals','layerOrder'])assert.deepEqual(v3[key],v2[key],key);
+ for(const [scene,blocks]of Object.entries(v3.text)){
+  assert.deepEqual(blocks.map(b=>b.binding),v2.text[scene].map(b=>b.binding));
+  for(const block of blocks){assert.ok(['Arima-700','MuktaMalar-600'].includes(block.font));assert.equal(block.color,scene==='ceremony'?'#FFF0C8':/Label$/.test(block.binding)||['groomTitle','brideTitle','dateShort'].includes(block.binding)?'#77501F':'#124D4B');}
+ }
+ assert.notEqual(renderDigest('owner',v2,{},[]),renderDigest('owner',v3,{},[]));
+ assert.throws(()=>pinVideoMasterVersion(id,{masterVersion:3},{payload:{masterVersion:2}}),/different/);
 });
 test('the Temple draft boundary rejects changing a saved version',async()=>{
  const invitation=randomUUID(),owner=randomUUID();let row=null,writes=0;
@@ -53,12 +67,15 @@ test('Temple render jobs carry their saved master version and require the qualif
  assert.doesNotThrow(()=>requireVideoRelease(v1,env));
  assert.throws(()=>requireVideoRelease(v2,env),/not configured/);
  assert.doesNotThrow(()=>requireVideoRelease(v2,{...env,VIDEO_TEMPLE_SNAPSHOT_ID:'qualified-v2'}));
+ assert.throws(()=>requireVideoRelease(v3,{...env,VIDEO_TEMPLE_SNAPSHOT_ID:'qualified-v2'}),/not configured/);
+ assert.doesNotThrow(()=>requireVideoRelease(v3,{...env,VIDEO_TEMPLE_V3_SNAPSHOT_ID:'qualified-v3'}));
  const jobs=[];
- for(const version of [1,2]){
+ for(const version of [1,2,3]){
   const rows=new Map(),store={async read(k){return rows.get(k)||null;},async save(k,value){rows.set(k,{value,etag:'1'});}};
   const service=videoService({store,env:{VIDEO_PERSONALISE_ENABLED:'1'},masterLoader:async(template,requested)=>{assert.equal(requested,version);return loadVideoMaster(template,requested);},launch:async job=>jobs.push(job)});
   await service.start('owner-'+version,TEMPLE_DEFAULTS,id,randomUUID(),version);
  }
  assert.equal(jobs[0].master.version,1);assert.equal(jobs[1].master.version,2);
  assert.equal(jobs[1].master.assets.motion.path,v2.assets.motion.path);
+ assert.equal(jobs[2].master.version,3);assert.equal(jobs[2].master.assets.groom.path,v3.assets.groom.path);
 });

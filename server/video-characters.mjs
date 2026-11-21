@@ -5,7 +5,8 @@ import {draftService,draftView} from './personalization-drafts.mjs';
 import {videoStore,hash} from './video-personalise-store.mjs';
 import {videoService,loadVideoMaster} from './video-personalise.mjs';
 import {videoPaymentService} from './video-payments.mjs';
-import {replicateProvider,CHARACTER_MODEL,CHARACTER_PROMPT_REVISION,characterPrompt,characterInput} from './video-character-provider.mjs';
+import {replicateProvider,CHARACTER_MODEL,characterPromptRevision,identityFirstCharacterPrompt,characterPrompt,characterInput} from './video-character-provider.mjs';
+import {videoDraftVersion} from '../shared/video-master-version.mjs';
 import {alignCharacter,coupleIdentityReference} from './video-character-images.mjs';
 const table='video_character_jobs',active=['queued','submitting','processing','preparing'];
 export const CHARACTER_STALL_MS=10*60*1000;
@@ -18,7 +19,7 @@ export function characterService({query=db,store=videoStore(),provider=replicate
  const drafts=draftService({query,store});
  async function owned(owner,id){if(!/^[a-f0-9-]{36}$/.test(id||''))throw new HttpError(404,'Character not found.');const j=await one(table+'?id=eq.'+id+'&owner_id=eq.'+owner);if(!j)throw new HttpError(404,'Character not found.');await drafts.get(owner,j.invitation_id);return j;}
  async function list(owner,id){await drafts.get(owner,id);const jobs=await query(table+'?invitation_id=eq.'+id+'&owner_id=eq.'+owner+'&order=created_at.asc');const basis=Object.fromEntries(jobs.filter(j=>j.approved_current&&j.slot!=='couple').map(j=>[j.slot,j.id]));return {jobs:jobs.map(characterJobView),allowances:Object.fromEntries(['groom','bride','couple'].map(slot=>[slot,{initialUsed:jobs.some(j=>j.slot===slot&&['review','approved'].includes(j.status)),redoUsed:jobs.some(j=>j.slot===slot&&j.kind==='redo'&&['review','approved'].includes(j.status))}])),coupleNeedsUpdate:(()=>{const latest=jobs.filter(j=>j.slot==='couple'&&['review','approved'].includes(j.status)).at(-1);return !!latest&&!jsonEqual(latest.basis,basis);})()};}
- async function original(slot){const m=await loadVideoMaster('temple-v1'),a=m.assets[slot==='couple'?'closing':slot],bytes=await readFile('public'+a.path);if(hash(bytes)!==a.sha256)throw Error('Original character checksum mismatch');return bytes;}
+ async function original(slot,draft){const m=await loadVideoMaster('temple-v1',videoDraftVersion('temple-v1',draft.payload)),a=m.assets[slot==='couple'?'closing':slot],bytes=await readFile('public'+a.path);if(hash(bytes)!==a.sha256)throw Error('Original character checksum mismatch');return bytes;}
  async function submit(owner,b){
   const d=await drafts.get(owner,b.invitationId);if(d.template_id!=='temple-v1')throw new HttpError(400,'This template does not support matching characters yet.');await videoPaymentService().requireAccess(owner,d.id,d.template_id);
   const slot=b.slot;if(!['groom','bride','couple'].includes(slot))throw new HttpError(400,'Choose a character.');
@@ -31,14 +32,15 @@ export function characterService({query=db,store=videoStore(),provider=replicate
   }
   const completed=jobs.filter(j=>j.slot===slot&&['review','approved'].includes(j.status));let kind='initial';
   if(completed.length){if(slot==='couple'&&!completed.some(j=>jsonEqual(j.basis,basis)))kind='dependent';else if(b.redo===true)kind='redo';else {const last=slot==='couple'?completed.find(j=>jsonEqual(j.basis,basis)):completed[0];if(slot==='couple'||jsonEqual(referenceSignature(last.reference_data),referenceSignature(references)))return last;throw new HttpError(409,'Use your included redo to change the reference photo.');}}
-  const key=hash({slot,kind,references:referenceSignature(references),basis,model:CHARACTER_MODEL,prompt:CHARACTER_PROMPT_REVISION,original:hash(await original(slot))});
-  const r=await query('rpc/fmi_claim_video_character',{method:'POST',body:{p_owner:owner,p_invitation:d.id,p_slot:slot,p_kind:kind,p_key:key,p_model:CHARACTER_MODEL,p_prompt:CHARACTER_PROMPT_REVISION,p_refs:references,p_basis:basis}});return Array.isArray(r)?r[0]:r;
+  const revision=characterPromptRevision(videoDraftVersion('temple-v1',d.payload));
+  const key=hash({slot,kind,references:referenceSignature(references),basis,model:CHARACTER_MODEL,prompt:revision,original:hash(await original(slot,d))});
+  const r=await query('rpc/fmi_claim_video_character',{method:'POST',body:{p_owner:owner,p_invitation:d.id,p_slot:slot,p_kind:kind,p_key:key,p_model:CHARACTER_MODEL,p_prompt:revision,p_refs:references,p_basis:basis}});return Array.isArray(r)?r[0]:r;
  }
  async function persistBytes(key,bytes,type){try{await store.putBytes(key,bytes,type);}catch(e){const old=await store.bytes(key).catch(()=>null);if(!old||hash(old)!==hash(bytes))throw e;}}
  async function process(id){
   if(!/^[a-f0-9-]{36}$/.test(id||''))return;
   let j=await one(table+'?id=eq.'+id);if(!j||!active.includes(j.status))return;
-  await drafts.get(j.owner_id,j.invitation_id);const lease=randomUUID(),now=new Date(clock()).toISOString();j=await patch(id,{lease_id:lease,lease_until:new Date(clock()+300000).toISOString()},'&status=in.(queued,submitting,processing,preparing)&or=(lease_until.is.null,lease_until.lt.'+encodeURIComponent(now)+')',false);if(!j)return;
+  const draft=await drafts.get(j.owner_id,j.invitation_id);const lease=randomUUID(),now=new Date(clock()).toISOString();j=await patch(id,{lease_id:lease,lease_until:new Date(clock()+300000).toISOString()},'&status=in.(queued,submitting,processing,preparing)&or=(lease_until.is.null,lease_until.lt.'+encodeURIComponent(now)+')',false);if(!j)return;
   // Polling and lease renewal are not progress: otherwise outages reset the
   // deadline every four seconds and leave the customer waiting indefinitely.
   const stalled=()=>clock()-Date.parse(j.updated_at||j.created_at)>=CHARACTER_STALL_MS;
@@ -49,9 +51,9 @@ export function characterService({query=db,store=videoStore(),provider=replicate
    if(j.status==='queued'){
     if(j.attempts>=3){await finish({status:'failed',error:'Automatic retries are exhausted. Contact support; your photos, payment and redo allowance are saved.'});return;}
     stage='references';
-    const template='data:image/png;base64,'+(await original(j.slot)).toString('base64'),refs=[];for(const ref of j.reference_data){const m=await videoService({store}).media(j.owner_id,ref.id),bytes=await store.bytes(m.key);if(hash(bytes)!==ref.sha256)throw Error('A saved reference changed.');refs.push({bytes,url:'data:'+m.contentType+';base64,'+bytes.toString('base64')});}
+    const template='data:image/png;base64,'+(await original(j.slot,draft)).toString('base64'),refs=[];for(const ref of j.reference_data){const m=await videoService({store}).media(j.owner_id,ref.id),bytes=await store.bytes(m.key);if(hash(bytes)!==ref.sha256)throw Error('A saved reference changed.');refs.push({bytes,url:'data:'+m.contentType+';base64,'+bytes.toString('base64')});}
     const revision=j.prompt_revision||'temple-identity-v4';let images=[template,...refs.map(ref=>ref.url)];
-    if(revision===CHARACTER_PROMPT_REVISION){
+    if(identityFirstCharacterPrompt(revision)){
      if(refs.length!==(j.slot==='couple'?2:1))throw Error('Character identity references are missing.');
      const identity=j.slot==='couple'?'data:image/png;base64,'+(await coupleIdentityReference(refs[0].bytes,refs[1].bytes)).toString('base64'):refs[0].url;
      images=[identity,template];
@@ -82,7 +84,7 @@ export function characterService({query=db,store=videoStore(),provider=replicate
     stage='persist';
     const raw='persistent/'+j.owner_id+'/'+j.invitation_id+'/characters/'+j.id+'/provider-'+j.attempts+'.png';await persistBytes(raw,bytes,'image/png');j=await patch(id,{status:'preparing',raw_key:raw},'&lease_id=eq.'+lease);
    }
-   stage='prepare';const result=await align(bytes,await original(j.slot)),key='persistent/'+j.owner_id+'/'+j.invitation_id+'/characters/'+j.id+'/prepared.png';await persistBytes(key,result.bytes,'image/png');
+   stage='prepare';const result=await align(bytes,await original(j.slot,draft)),key='persistent/'+j.owner_id+'/'+j.invitation_id+'/characters/'+j.id+'/prepared.png';await persistBytes(key,result.bytes,'image/png');
    await store.save('media/'+j.id+'.json',{id:j.id,owner:j.owner_id,invitationId:j.invitation_id,kind:'image',status:'ready',key,sha256:hash(result.bytes),contentType:'image/png',bytes:result.bytes.length,durable:true,expiresAt:null,characterJobId:j.id,characterSlot:j.slot,alignment:result.alignment});
    await finish({status:'review',output_media_id:j.id,error:null});
   }catch(e){console.error('Character preparation step failed',id,{stage,name:e.name,providerStatus:e.providerStatus||null});await finish(j.raw_key?{status:'failed',error:'Your generated image is saved, but preparation was interrupted. Retry to finish it; no redo is needed.'}:j.status==='submitting'&&!j.provider_id&&stalled()?{status:'failed',error:'The provider could not confirm this request. Contact support before retrying; no redo was used.'}:stage==='provider'&&e.providerStatus===404?{status:'failed',provider_id:null,error:'The provider result expired. Retry using your saved photos; no redo was used.'}:stalled()||[401,403].includes(e.providerStatus)?{status:'failed',error:'The character service is temporarily unavailable. Your photos and payment are saved. Retry or contact support; no redo was used.'}:{error:'The character service was interrupted. We are checking the existing attempt; your photos and payment are saved.'});}

@@ -1,0 +1,769 @@
+{
+  "id": "temple-v1",
+  "version": 3,
+  "rendererVersion": "temple-five-layer-v4",
+  "name": "Temple Wedding",
+  "layerOrder": [
+    "background",
+    "characters",
+    "boards",
+    "text",
+    "petals"
+  ],
+  "output": {
+    "width": 720,
+    "height": 1280,
+    "fps": 24,
+    "frames": 1296,
+    "duration": 54
+  },
+  "assets": {
+    "background": {
+      "path": "/assets/video-masters/temple-v1/background.mp4",
+      "sha256": "9c523a7b9c8428d01083540a9f9db51c8e138ede5bf3ee800be375dab187c9bb",
+      "kind": "video"
+    },
+    "invitation": {
+      "path": "/assets/video-masters/temple-v1/invitation.png",
+      "sha256": "f4ebb8246ef95d6ad6b6628eacb66bf5f03861b02094f5db5e4256bfce3a7c88",
+      "kind": "image"
+    },
+    "groom": {
+      "kind": "image",
+      "path": "/assets/video-masters/temple-v1/style-v3/groom.png",
+      "sha256": "e2dcbab4eaead3da52516baac2cce79f1c5471a0a210b76d6f97c8c4d75cfdae"
+    },
+    "bride": {
+      "kind": "image",
+      "path": "/assets/video-masters/temple-v1/style-v3/bride.png",
+      "sha256": "62b8716de9754644fdd1e8f568651775aa0f1c7fb2553821a90c1164b08aa2e1"
+    },
+    "family": {
+      "path": "/assets/video-masters/temple-v1/family.png",
+      "sha256": "e5962cc4758d144e7e0e0bfd4745389dba2bcc12f387b3a2f7d7c170e43c4ff7",
+      "kind": "image"
+    },
+    "ceremony": {
+      "path": "/assets/video-masters/temple-v1/ceremony.png",
+      "sha256": "eaba79dac0682e2be91976be1026f6b306d424d3503e19b9b096e48d3495c1f2",
+      "kind": "image"
+    },
+    "venue": {
+      "path": "/assets/video-masters/temple-v1/venue.png",
+      "sha256": "e5962cc4758d144e7e0e0bfd4745389dba2bcc12f387b3a2f7d7c170e43c4ff7",
+      "kind": "image"
+    },
+    "reception": {
+      "path": "/assets/video-masters/temple-v1/reception.png",
+      "sha256": "f6bba94c8a34a8bc610e5131a21f6a99df77f4eec6e74ed61e3c1c4ad283a4ed",
+      "kind": "image"
+    },
+    "hosts": {
+      "path": "/assets/video-masters/temple-v1/hosts.png",
+      "sha256": "f486fb7206392999b31e7a067a5d72a37093fdac5dcfc5cf7402f52b6d05202a",
+      "kind": "image"
+    },
+    "closing": {
+      "kind": "image",
+      "path": "/assets/video-masters/temple-v1/style-v3/closing.png",
+      "sha256": "e17876ca8fa086be466d0fdf1d163ae026c3f662ddc601786c9064c6786bcae7"
+    },
+    "ATM-378": {
+      "path": "/assets/video-masters/temple-v1/ATM-378.ttf",
+      "sha256": "9259d5f12135ed8898c651135a03544697c336482db02b1f0b499c985e0b35ee",
+      "kind": "font"
+    },
+    "ATM-344": {
+      "path": "/assets/video-masters/temple-v1/ATM-344.ttf",
+      "sha256": "95b39b22f9993dd88de564e4bf6b28d60d5ebebddc01ebdf5c69da785904e92b",
+      "kind": "font"
+    },
+    "petals": {
+      "path": "/assets/video-masters/temple-v1/petals-packed.webm",
+      "sha256": "4c69bd67c6d62fbd4685fd53a2f12d95df4903110a11f0ffdd7d0c5186b2d8e4",
+      "kind": "video"
+    },
+    "foregroundMask": {
+      "path": "/assets/video-masters/temple-v1/foreground-mask.webm",
+      "sha256": "b539b8a1c046ba60f919ee69c78e7eb0702d299b140f60902ad3903eb0ff4a85",
+      "kind": "video"
+    },
+    "motion": {
+      "path": "/assets/video-masters/temple-v1/tracked-v2/motion.json",
+      "kind": "json",
+      "sha256": "36779c1209817e3fed027904589afea042a991590d3eae2555f2cd5476dbc5a0"
+    },
+    "backgroundPreview": {
+      "path": "/assets/video-masters/temple-v1/background.webm",
+      "sha256": "51c2b5bfe7b48362f0b0063e16460f87907400d02088feac1b8d40711a6af820",
+      "kind": "video"
+    },
+    "previewAtlas": {
+      "path": "/assets/video-masters/temple-v1/preview-mobile-v1.mp4",
+      "sha256": "274223c4b491948524caf2f6154a418e7b4e177e6618e143397389f0ffeb2a0c",
+      "kind": "video"
+    },
+    "Arima-700": {
+      "kind": "font",
+      "path": "/assets/video-masters/temple-v1/style-v3/Arima-700.ttf",
+      "sha256": "899ce8907688fb9805489aeb1cda0793803cc430c58606e15705027e30145690"
+    },
+    "MuktaMalar-600": {
+      "kind": "font",
+      "path": "/assets/video-masters/temple-v1/style-v3/MuktaMalar-600.ttf",
+      "sha256": "d5503635a3a627f5ee2f338dfbdecec4a4f73f85600dec4d6d4cc195e82af178"
+    }
+  },
+  "text": {
+    "opening": [
+      {
+        "binding": "blessing1",
+        "font": "Arima-700",
+        "max": 112,
+        "min": 26,
+        "centerX": 360,
+        "top": 180,
+        "width": 600,
+        "height": 110,
+        "color": "#124D4B",
+        "outline": true
+      },
+      {
+        "binding": "blessing2",
+        "font": "Arima-700",
+        "max": 112,
+        "min": 26,
+        "centerX": 360,
+        "top": 315,
+        "width": 620,
+        "height": 110,
+        "color": "#124D4B",
+        "outline": true
+      }
+    ],
+    "invitation": [
+      {
+        "binding": "invitationHeading",
+        "font": "Arima-700",
+        "max": 34,
+        "min": 26,
+        "centerX": 416,
+        "top": 457,
+        "width": 320,
+        "height": 66,
+        "color": "#124D4B",
+        "outline": false
+      },
+      {
+        "binding": "greeting",
+        "font": "MuktaMalar-600",
+        "max": 34,
+        "min": 26,
+        "centerX": 416,
+        "top": 532,
+        "width": 320,
+        "height": 205,
+        "lineHeight": 75,
+        "color": "#124D4B",
+        "outline": false
+      }
+    ],
+    "groom": [
+      {
+        "binding": "groomLabel",
+        "font": "MuktaMalar-600",
+        "max": 43,
+        "min": 26,
+        "centerX": 566,
+        "top": 435,
+        "width": 250,
+        "height": 48,
+        "color": "#77501F",
+        "outline": true
+      },
+      {
+        "binding": "groomTitle",
+        "font": "MuktaMalar-600",
+        "max": 55,
+        "min": 26,
+        "centerX": 560,
+        "top": 493,
+        "width": 280,
+        "height": 70,
+        "color": "#77501F",
+        "outline": true
+      },
+      {
+        "binding": "groom",
+        "font": "Arima-700",
+        "max": 92,
+        "min": 26,
+        "centerX": 550,
+        "top": 574,
+        "width": 310,
+        "height": 175,
+        "color": "#124D4B",
+        "outline": true
+      }
+    ],
+    "bride": [
+      {
+        "binding": "brideLabel",
+        "font": "MuktaMalar-600",
+        "max": 45,
+        "min": 26,
+        "centerX": 405,
+        "top": 149,
+        "width": 330,
+        "height": 50,
+        "color": "#77501F",
+        "outline": true
+      },
+      {
+        "binding": "brideName",
+        "font": "Arima-700",
+        "max": 90,
+        "min": 26,
+        "centerX": 405,
+        "top": 211,
+        "width": 570,
+        "height": 115,
+        "color": "#124D4B",
+        "outline": true
+      }
+    ],
+    "family": [
+      {
+        "binding": "groomParentsLabel",
+        "font": "MuktaMalar-600",
+        "max": 33,
+        "min": 26,
+        "centerX": 355,
+        "top": 415,
+        "width": 264,
+        "height": 53,
+        "color": "#77501F",
+        "outline": false
+      },
+      {
+        "binding": "groomFather",
+        "font": "MuktaMalar-600",
+        "max": 33,
+        "min": 26,
+        "centerX": 355,
+        "top": 473,
+        "width": 264,
+        "height": 53,
+        "color": "#124D4B",
+        "outline": false
+      },
+      {
+        "binding": "groomMother",
+        "font": "MuktaMalar-600",
+        "max": 33,
+        "min": 26,
+        "centerX": 355,
+        "top": 529,
+        "width": 264,
+        "height": 53,
+        "color": "#124D4B",
+        "outline": false
+      },
+      {
+        "binding": "brideParentsLabel",
+        "font": "MuktaMalar-600",
+        "max": 33,
+        "min": 26,
+        "centerX": 355,
+        "top": 597,
+        "width": 264,
+        "height": 53,
+        "color": "#77501F",
+        "outline": false
+      },
+      {
+        "binding": "brideFather",
+        "font": "MuktaMalar-600",
+        "max": 33,
+        "min": 26,
+        "centerX": 355,
+        "top": 653,
+        "width": 264,
+        "height": 53,
+        "color": "#124D4B",
+        "outline": false
+      },
+      {
+        "binding": "brideMother",
+        "font": "MuktaMalar-600",
+        "max": 33,
+        "min": 26,
+        "centerX": 340,
+        "top": 710,
+        "width": 258,
+        "height": 53,
+        "color": "#124D4B",
+        "outline": false
+      }
+    ],
+    "ceremony": [
+      {
+        "binding": "ceremonyHeading",
+        "font": "Arima-700",
+        "max": 46,
+        "min": 26,
+        "centerX": 360,
+        "top": 612,
+        "width": 530,
+        "height": 55,
+        "color": "#FFF0C8",
+        "outline": false
+      },
+      {
+        "binding": "weddingDateLabel",
+        "font": "MuktaMalar-600",
+        "max": 30,
+        "min": 26,
+        "centerX": 360,
+        "top": 678,
+        "width": 530,
+        "height": 36,
+        "color": "#FFF0C8",
+        "outline": false
+      },
+      {
+        "binding": "weddingTimeLabel",
+        "font": "MuktaMalar-600",
+        "max": 30,
+        "min": 26,
+        "centerX": 360,
+        "top": 717,
+        "width": 530,
+        "height": 36,
+        "color": "#FFF0C8",
+        "outline": false
+      },
+      {
+        "binding": "weddingVenueLine",
+        "font": "MuktaMalar-600",
+        "max": 30,
+        "min": 26,
+        "centerX": 360,
+        "top": 756,
+        "width": 530,
+        "height": 36,
+        "color": "#FFF0C8",
+        "outline": false
+      },
+      {
+        "binding": "ceremonyAddressLine",
+        "font": "MuktaMalar-600",
+        "max": 30,
+        "min": 26,
+        "centerX": 360,
+        "top": 795,
+        "width": 530,
+        "height": 36,
+        "color": "#FFF0C8",
+        "outline": false
+      }
+    ],
+    "venue": [
+      {
+        "binding": "venueHeading",
+        "font": "Arima-700",
+        "max": 43,
+        "min": 26,
+        "centerX": 355,
+        "top": 419,
+        "width": 266,
+        "height": 68,
+        "color": "#124D4B",
+        "outline": false
+      },
+      {
+        "binding": "church",
+        "font": "MuktaMalar-600",
+        "max": 38,
+        "min": 26,
+        "centerX": 355,
+        "top": 506,
+        "width": 260,
+        "height": 105,
+        "lineHeight": 51,
+        "color": "#124D4B",
+        "outline": false
+      },
+      {
+        "binding": "address",
+        "font": "MuktaMalar-600",
+        "max": 34,
+        "min": 26,
+        "centerX": 355,
+        "top": 627,
+        "width": 260,
+        "height": 59,
+        "color": "#124D4B",
+        "outline": false
+      },
+      {
+        "binding": "weddingDateShort",
+        "font": "MuktaMalar-600",
+        "max": 31,
+        "min": 26,
+        "centerX": 355,
+        "top": 694,
+        "width": 260,
+        "height": 45,
+        "color": "#124D4B",
+        "outline": false
+      }
+    ],
+    "reception": [
+      {
+        "binding": "receptionHeading",
+        "font": "Arima-700",
+        "max": 58,
+        "min": 26,
+        "centerX": 394,
+        "top": 396,
+        "width": 324,
+        "height": 82,
+        "color": "#124D4B",
+        "outline": false
+      },
+      {
+        "binding": "receptionDateLabel",
+        "font": "MuktaMalar-600",
+        "max": 34,
+        "min": 26,
+        "centerX": 394,
+        "top": 496,
+        "width": 326,
+        "height": 62,
+        "color": "#77501F",
+        "outline": false
+      },
+      {
+        "binding": "receptionTimeLabel",
+        "font": "MuktaMalar-600",
+        "max": 34,
+        "min": 26,
+        "centerX": 394,
+        "top": 565,
+        "width": 326,
+        "height": 62,
+        "color": "#77501F",
+        "outline": false
+      },
+      {
+        "binding": "receptionVenue",
+        "font": "MuktaMalar-600",
+        "max": 34,
+        "min": 26,
+        "centerX": 394,
+        "top": 632,
+        "width": 326,
+        "height": 62,
+        "color": "#124D4B",
+        "outline": false
+      },
+      {
+        "binding": "receptionAddress",
+        "font": "MuktaMalar-600",
+        "max": 34,
+        "min": 26,
+        "centerX": 394,
+        "top": 698,
+        "width": 326,
+        "height": 62,
+        "color": "#124D4B",
+        "outline": false
+      }
+    ],
+    "hosts": [
+      {
+        "binding": "hostHeading",
+        "font": "Arima-700",
+        "max": 37,
+        "min": 26,
+        "centerX": 368,
+        "top": 432,
+        "width": 326,
+        "height": 75,
+        "color": "#124D4B",
+        "outline": false
+      },
+      {
+        "binding": "host1",
+        "font": "MuktaMalar-600",
+        "max": 36,
+        "min": 26,
+        "centerX": 368,
+        "top": 520,
+        "width": 326,
+        "height": 140,
+        "lineHeight": 72,
+        "color": "#124D4B",
+        "outline": false
+      },
+      {
+        "binding": "host2",
+        "font": "MuktaMalar-600",
+        "max": 36,
+        "min": 26,
+        "centerX": 368,
+        "top": 672,
+        "width": 326,
+        "height": 140,
+        "lineHeight": 72,
+        "color": "#124D4B",
+        "outline": false
+      }
+    ],
+    "closing": [
+      {
+        "binding": "closing1",
+        "font": "Arima-700",
+        "max": 64,
+        "min": 26,
+        "centerX": 360,
+        "top": 195,
+        "width": 560,
+        "height": 70,
+        "color": "#124D4B",
+        "outline": true
+      },
+      {
+        "binding": "closing2",
+        "font": "Arima-700",
+        "max": 64,
+        "min": 26,
+        "centerX": 360,
+        "top": 275,
+        "width": 580,
+        "height": 70,
+        "color": "#124D4B",
+        "outline": true
+      },
+      {
+        "binding": "weddingDateShort",
+        "font": "MuktaMalar-600",
+        "max": 36,
+        "min": 26,
+        "centerX": 360,
+        "top": 353,
+        "width": 360,
+        "height": 50,
+        "color": "#124D4B",
+        "outline": true
+      }
+    ]
+  },
+  "scenes": [
+    {
+      "id": "opening",
+      "name": "Ganesha & title",
+      "start": 0,
+      "end": 120,
+      "reviewFrame": 102,
+      "layers": []
+    },
+    {
+      "id": "invitation",
+      "name": "Invitation",
+      "start": 120,
+      "end": 216,
+      "reviewFrame": 210,
+      "layers": []
+    },
+    {
+      "id": "groom",
+      "name": "Groom",
+      "start": 216,
+      "end": 336,
+      "reviewFrame": 330,
+      "layers": []
+    },
+    {
+      "id": "bride",
+      "name": "Bride",
+      "start": 336,
+      "end": 456,
+      "reviewFrame": 450,
+      "layers": []
+    },
+    {
+      "id": "family",
+      "name": "Parents",
+      "start": 456,
+      "end": 576,
+      "reviewFrame": 570,
+      "layers": []
+    },
+    {
+      "id": "ceremony",
+      "name": "Ceremony",
+      "start": 576,
+      "end": 696,
+      "reviewFrame": 690,
+      "layers": []
+    },
+    {
+      "id": "venue",
+      "name": "Venue",
+      "start": 696,
+      "end": 816,
+      "reviewFrame": 810,
+      "layers": []
+    },
+    {
+      "id": "reception",
+      "name": "Reception",
+      "start": 816,
+      "end": 936,
+      "reviewFrame": 930,
+      "layers": []
+    },
+    {
+      "id": "hosts",
+      "name": "Inviting families",
+      "start": 936,
+      "end": 1056,
+      "reviewFrame": 1050,
+      "layers": []
+    },
+    {
+      "id": "closing",
+      "name": "Closing",
+      "start": 1056,
+      "end": 1296,
+      "reviewFrame": 1248,
+      "layers": []
+    }
+  ],
+  "petals": {
+    "asset": "petals",
+    "format": "rgb-alpha-side-by-side",
+    "playbackRate": 1,
+    "offset": 0,
+    "opacity": 1,
+    "loop": false,
+    "source": {
+      "source": "https://pixabay.com/videos/rose-petals-petals-falling-257514/",
+      "creator": "pixelstrider",
+      "license": "https://pixabay.com/service/license-summary/",
+      "sourceSha256": "d93235da24a4ddfdcff49548906a1390531a5f8f909354e2dcb1b7d9aa1cfad5",
+      "generated": false,
+      "fps": 24,
+      "frames": 268,
+      "processing": "Black key; retain one fifth of temporally tracked source petals, suppress merged clumps, scale their existing pixels to 38 percent at their original centres, blush grade and subpixel softening. Original source trajectories retained.",
+      "playbackRate": 0.65,
+      "opacity": 0.85,
+      "layout": "Four vertically offset strips with soft edges; text-protection mask."
+    }
+  },
+  "release": {
+    "approved": true,
+    "backgroundReviewed": true,
+    "tracksReviewed": true,
+    "verification": {
+      "rendererVersion": "temple-five-layer-v4",
+      "cloudVerified": true,
+      "frames": 1296
+    },
+    "proofs": {
+      "default": "d6f488d4c3e84d2ba41ac5360fce3e77eaddcf859279d223c746749a482c5acb",
+      "personalized": "3803e5b7df424db7e7ba90a03cf3d60cc6a9dae015cdd75cf6b517ed292283df"
+    },
+    "knownLimitations": [
+      "Physical iPhone and Instagram coverage is not verified.",
+      "Versioned personal-character inputs and prompts were tested with a mock provider; no new customer-photo generation was charged during this release."
+    ]
+  },
+  "photoSlots": [
+    "groom",
+    "bride",
+    "couple"
+  ],
+  "photoFrames": {
+    "groom": [
+      75,
+      760,
+      340,
+      380
+    ],
+    "bride": [
+      145,
+      560,
+      430,
+      500
+    ],
+    "couple": [
+      95,
+      520,
+      530,
+      500
+    ],
+    "jointGroom": [
+      85,
+      680,
+      265,
+      340
+    ],
+    "jointBride": [
+      370,
+      680,
+      265,
+      340
+    ]
+  },
+  "preview": {
+    "atlasAsset": "previewAtlas",
+    "tiles": {
+      "background": [
+        0,
+        0,
+        540,
+        960
+      ],
+      "petals": [
+        540,
+        0,
+        540,
+        960
+      ],
+      "alpha": [
+        0,
+        960,
+        540,
+        960
+      ],
+      "mask": [
+        540,
+        960,
+        540,
+        960
+      ]
+    }
+  },
+  "textPlanes": {
+    "family": [
+      [
+        1.1673838834732089,
+        0.015282299913133249,
+        -27.34438459175799
+      ],
+      [
+        0.13748232624333734,
+        1.086822919317013,
+        -35.24264205926581
+      ],
+      [
+        0.00022360791116126538,
+        0.000040379003521502,
+        1
+      ]
+    ]
+  }
+}

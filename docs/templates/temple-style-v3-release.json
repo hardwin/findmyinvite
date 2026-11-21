@@ -1,0 +1,187 @@
+{
+  "templateId": "temple-v1",
+  "masterVersion": 3,
+  "rendererVersion": "temple-five-layer-v4",
+  "public": false,
+  "releaseStatus": "cloud-qualified",
+  "cloud": {
+    "proofs": {
+      "default": {
+        "frames": 1296,
+        "width": 720,
+        "height": 1280,
+        "duration": 54,
+        "bytes": 28681900,
+        "resultSha256": "d6f488d4c3e84d2ba41ac5360fce3e77eaddcf859279d223c746749a482c5acb",
+        "backgroundSha256": "9c523a7b9c8428d01083540a9f9db51c8e138ede5bf3ee800be375dab187c9bb",
+        "elapsedSeconds": 501.611
+      },
+      "personalized": {
+        "frames": 1296,
+        "width": 720,
+        "height": 1280,
+        "duration": 54,
+        "bytes": 28662773,
+        "resultSha256": "3803e5b7df424db7e7ba90a03cf3d60cc6a9dae015cdd75cf6b517ed292283df",
+        "backgroundSha256": "9c523a7b9c8428d01083540a9f9db51c8e138ede5bf3ee800be375dab187c9bb",
+        "elapsedSeconds": 503.411
+      }
+    },
+    "completeDecodePassed": true,
+    "masterVersion": 3,
+    "rendererVersion": "temple-five-layer-v4"
+  },
+  "appearanceSha256": "67c8b233faf60b2291b9062b7e71798a298108c9db4747a5ab04b2f65dfb131a",
+  "backgroundSha256": "9c523a7b9c8428d01083540a9f9db51c8e138ede5bf3ee800be375dab187c9bb",
+  "motionSha256": "36779c1209817e3fed027904589afea042a991590d3eae2555f2cd5476dbc5a0",
+  "characterArtwork": {
+    "palette": {
+      "ink": "#124D4B",
+      "accent": "#77501F",
+      "light": "#FFF0C8"
+    },
+    "characters": {
+      "groom": {
+        "generatedSha256": "9a9edb19d53ddc123170618b70c73e3490ec50f6109a31e3557bdd33a0bdf632",
+        "originalSha256": "dd163a8c8a415f5ac1f7f2e56f263b1820b014655b73df6dd1049f314b927f2e",
+        "alignment": {
+          "source": {
+            "left": 199,
+            "top": 429,
+            "width": 352,
+            "height": 1154
+          },
+          "target": {
+            "left": 153,
+            "top": 331,
+            "width": 266,
+            "height": 880
+          },
+          "placed": {
+            "left": 153,
+            "top": 339,
+            "width": 266,
+            "height": 872
+          },
+          "width": 720,
+          "height": 1280
+        }
+      },
+      "bride": {
+        "generatedSha256": "5852e9ca39c12e7d7561f37126ef0c4dc24ba8141aac329bda3a2589abed865d",
+        "originalSha256": "e9d90e24b8ad8ffa5cfbbf60542ef45e8abd909a52b1b050b36dc6d0138010ba",
+        "alignment": {
+          "source": {
+            "left": 392,
+            "top": 460,
+            "width": 365,
+            "height": 1163
+          },
+          "target": {
+            "left": 303,
+            "top": 353,
+            "width": 273,
+            "height": 887
+          },
+          "placed": {
+            "left": 303,
+            "top": 370,
+            "width": 273,
+            "height": 870
+          },
+          "width": 720,
+          "height": 1280
+        }
+      },
+      "closing": {
+        "generatedSha256": "bb6e85dba5c6d121a6af6983df68402bcd4e82332f2d02e741b31609ae09f42c",
+        "originalSha256": "ce3cce8993224e919a922b460a0e50a16b6d6e7f52a601161b5a4678a10f2deb",
+        "alignment": {
+          "source": {
+            "left": 145,
+            "top": 421,
+            "width": 634,
+            "height": 1065
+          },
+          "target": {
+            "left": 120,
+            "top": 355,
+            "width": 483,
+            "height": 813
+          },
+          "placed": {
+            "left": 120,
+            "top": 357,
+            "width": 483,
+            "height": 811
+          },
+          "width": 720,
+          "height": 1280
+        }
+      }
+    }
+  },
+  "catalog": {
+    "posters": {
+      "320": {
+        "bytes": 64324,
+        "quality": 84
+      },
+      "640": {
+        "bytes": 148030,
+        "quality": 79
+      },
+      "960": {
+        "bytes": 148916,
+        "quality": 49
+      }
+    },
+    "frames": 1296,
+    "duration": 54,
+    "previewBytes": 5509116,
+    "comparison": "Temple-Wedding-full-comparison.mp4"
+  },
+  "localComparison": {
+    "path": "work/temple-customisation-review/Temple-Wedding-full-comparison.mp4",
+    "sha256": "bc8bcf3f46b2a866e9022ba9cd3de1115bf3beaede4795dbdd9098ef2ff780f9",
+    "duration": 54,
+    "frames": 1296,
+    "sideBySide": "current v2 / restyled v3"
+  },
+  "verification": {
+    "buildPassed": true,
+    "longTamilNames": true,
+    "latinNames": true,
+    "missingOptionalFields": true,
+    "localDraftRestoration": true,
+    "mobileViewport": [
+      390,
+      844
+    ],
+    "desktopViewport": [
+      1280,
+      720
+    ],
+    "physicalIPhoneInstagram": false,
+    "liveAiCharacterGeneration": false,
+    "focusedRegressionsPassed": 129
+  },
+  "rollback": {
+    "previousMaster": "manifest-v2.json",
+    "previousPreview": "/assets/catalog-previews/temple-v2/temple-v1.mp4",
+    "previousDefaultVersion": 2,
+    "preserveSavedV3": true
+  },
+  "worker": {
+    "snapshotId": "snap_2rLKYUoVoTFR7qwBO1E3m7wpGzS2",
+    "environmentKey": "VIDEO_TEMPLE_V3_SNAPSHOT_ID",
+    "expiresAt": null,
+    "retentionVerified": true,
+    "qualificationSnapshot": "snap_wXuNASYsNmwtmVIVNJE570YfXAyO",
+    "reviewArtifactsRetained": true
+  },
+  "previousProduction": {
+    "deploymentId": "dpl_7rEyqU6QfjdbEQnwCTD86tcWzEgy",
+    "commit": "8e069e00e64ffb0aad04fd297b9bf3235f0057cd"
+  }
+}

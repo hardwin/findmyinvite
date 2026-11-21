@@ -1,6 +1,6 @@
 {
   "id": "temple-v1",
-  "version": 2,
+  "version": 3,
   "rendererVersion": "temple-five-layer-v4",
   "name": "Temple Wedding",
   "layerOrder": [
@@ -29,14 +29,14 @@
       "kind": "image"
     },
     "groom": {
-      "path": "/assets/video-masters/temple-v1/groom.png",
-      "sha256": "dd163a8c8a415f5ac1f7f2e56f263b1820b014655b73df6dd1049f314b927f2e",
-      "kind": "image"
+      "kind": "image",
+      "path": "/assets/video-masters/temple-v1/style-v3/groom.png",
+      "sha256": "e2dcbab4eaead3da52516baac2cce79f1c5471a0a210b76d6f97c8c4d75cfdae"
     },
     "bride": {
-      "path": "/assets/video-masters/temple-v1/bride.png",
-      "sha256": "e9d90e24b8ad8ffa5cfbbf60542ef45e8abd909a52b1b050b36dc6d0138010ba",
-      "kind": "image"
+      "kind": "image",
+      "path": "/assets/video-masters/temple-v1/style-v3/bride.png",
+      "sha256": "62b8716de9754644fdd1e8f568651775aa0f1c7fb2553821a90c1164b08aa2e1"
     },
     "family": {
       "path": "/assets/video-masters/temple-v1/family.png",
@@ -64,9 +64,9 @@
       "kind": "image"
     },
     "closing": {
-      "path": "/assets/video-masters/temple-v1/closing.png",
-      "sha256": "ce3cce8993224e919a922b460a0e50a16b6d6e7f52a601161b5a4678a10f2deb",
-      "kind": "image"
+      "kind": "image",
+      "path": "/assets/video-masters/temple-v1/style-v3/closing.png",
+      "sha256": "e17876ca8fa086be466d0fdf1d163ae026c3f662ddc601786c9064c6786bcae7"
     },
     "ATM-378": {
       "path": "/assets/video-masters/temple-v1/ATM-378.ttf",
@@ -102,51 +102,61 @@
       "path": "/assets/video-masters/temple-v1/preview-mobile-v1.mp4",
       "sha256": "274223c4b491948524caf2f6154a418e7b4e177e6618e143397389f0ffeb2a0c",
       "kind": "video"
+    },
+    "Arima-700": {
+      "kind": "font",
+      "path": "/assets/video-masters/temple-v1/style-v3/Arima-700.ttf",
+      "sha256": "899ce8907688fb9805489aeb1cda0793803cc430c58606e15705027e30145690"
+    },
+    "MuktaMalar-600": {
+      "kind": "font",
+      "path": "/assets/video-masters/temple-v1/style-v3/MuktaMalar-600.ttf",
+      "sha256": "d5503635a3a627f5ee2f338dfbdecec4a4f73f85600dec4d6d4cc195e82af178"
     }
   },
   "text": {
     "opening": [
       {
         "binding": "blessing1",
-        "font": "ATM-378",
+        "font": "Arima-700",
         "max": 112,
         "min": 26,
         "centerX": 360,
         "top": 180,
         "width": 600,
         "height": 110,
-        "color": "#7c1b32",
+        "color": "#124D4B",
         "outline": true
       },
       {
         "binding": "blessing2",
-        "font": "ATM-378",
+        "font": "Arima-700",
         "max": 112,
         "min": 26,
         "centerX": 360,
         "top": 315,
         "width": 620,
         "height": 110,
-        "color": "#7c1b32",
+        "color": "#124D4B",
         "outline": true
       }
     ],
     "invitation": [
       {
         "binding": "invitationHeading",
-        "font": "ATM-378",
+        "font": "Arima-700",
         "max": 34,
         "min": 26,
         "centerX": 416,
         "top": 457,
         "width": 320,
-        "height": 60,
-        "color": "#662427",
+        "height": 66,
+        "color": "#124D4B",
         "outline": false
       },
       {
         "binding": "greeting",
-        "font": "ATM-378",
+        "font": "MuktaMalar-600",
         "max": 34,
         "min": 26,
         "centerX": 416,
@@ -154,226 +164,226 @@
         "width": 320,
         "height": 205,
         "lineHeight": 75,
-        "color": "#662427",
+        "color": "#124D4B",
         "outline": false
       }
     ],
     "groom": [
       {
         "binding": "groomLabel",
-        "font": "ATM-344",
+        "font": "MuktaMalar-600",
         "max": 43,
         "min": 26,
         "centerX": 566,
         "top": 435,
         "width": 250,
         "height": 48,
-        "color": "#82323b",
+        "color": "#77501F",
         "outline": true
       },
       {
         "binding": "groomTitle",
-        "font": "ATM-378",
+        "font": "MuktaMalar-600",
         "max": 55,
         "min": 26,
         "centerX": 560,
         "top": 493,
         "width": 280,
         "height": 70,
-        "color": "#82323b",
+        "color": "#77501F",
         "outline": true
       },
       {
         "binding": "groom",
-        "font": "ATM-378",
+        "font": "Arima-700",
         "max": 92,
         "min": 26,
         "centerX": 550,
         "top": 574,
         "width": 310,
         "height": 175,
-        "color": "#82323b",
+        "color": "#124D4B",
         "outline": true
       }
     ],
     "bride": [
       {
         "binding": "brideLabel",
-        "font": "ATM-344",
+        "font": "MuktaMalar-600",
         "max": 45,
         "min": 26,
         "centerX": 405,
         "top": 149,
         "width": 330,
         "height": 50,
-        "color": "#82323b",
+        "color": "#77501F",
         "outline": true
       },
       {
         "binding": "brideName",
-        "font": "ATM-378",
+        "font": "Arima-700",
         "max": 90,
         "min": 26,
         "centerX": 405,
         "top": 211,
         "width": 570,
         "height": 115,
-        "color": "#82323b",
+        "color": "#124D4B",
         "outline": true
       }
     ],
     "family": [
       {
         "binding": "groomParentsLabel",
-        "font": "ATM-378",
+        "font": "MuktaMalar-600",
         "max": 33,
         "min": 26,
         "centerX": 355,
         "top": 415,
         "width": 264,
         "height": 53,
-        "color": "#6a322c",
+        "color": "#77501F",
         "outline": false
       },
       {
         "binding": "groomFather",
-        "font": "ATM-344",
+        "font": "MuktaMalar-600",
         "max": 33,
         "min": 26,
         "centerX": 355,
         "top": 473,
         "width": 264,
         "height": 53,
-        "color": "#6a322c",
+        "color": "#124D4B",
         "outline": false
       },
       {
         "binding": "groomMother",
-        "font": "ATM-344",
+        "font": "MuktaMalar-600",
         "max": 33,
         "min": 26,
         "centerX": 355,
         "top": 529,
         "width": 264,
         "height": 53,
-        "color": "#6a322c",
+        "color": "#124D4B",
         "outline": false
       },
       {
         "binding": "brideParentsLabel",
-        "font": "ATM-378",
+        "font": "MuktaMalar-600",
         "max": 33,
         "min": 26,
         "centerX": 355,
         "top": 597,
         "width": 264,
         "height": 53,
-        "color": "#6a322c",
+        "color": "#77501F",
         "outline": false
       },
       {
         "binding": "brideFather",
-        "font": "ATM-344",
+        "font": "MuktaMalar-600",
         "max": 33,
         "min": 26,
         "centerX": 355,
         "top": 653,
         "width": 264,
         "height": 53,
-        "color": "#6a322c",
+        "color": "#124D4B",
         "outline": false
       },
       {
         "binding": "brideMother",
-        "font": "ATM-344",
+        "font": "MuktaMalar-600",
         "max": 33,
         "min": 26,
         "centerX": 340,
         "top": 710,
-        "width": 244,
+        "width": 258,
         "height": 53,
-        "color": "#6a322c",
+        "color": "#124D4B",
         "outline": false
       }
     ],
     "ceremony": [
       {
         "binding": "ceremonyHeading",
-        "font": "ATM-378",
+        "font": "Arima-700",
         "max": 46,
         "min": 26,
         "centerX": 360,
         "top": 612,
         "width": 530,
         "height": 55,
-        "color": "#fff0c8",
+        "color": "#FFF0C8",
         "outline": false
       },
       {
         "binding": "weddingDateLabel",
-        "font": "ATM-344",
+        "font": "MuktaMalar-600",
         "max": 30,
         "min": 26,
         "centerX": 360,
         "top": 678,
         "width": 530,
         "height": 36,
-        "color": "#fff0c8",
+        "color": "#FFF0C8",
         "outline": false
       },
       {
         "binding": "weddingTimeLabel",
-        "font": "ATM-344",
+        "font": "MuktaMalar-600",
         "max": 30,
         "min": 26,
         "centerX": 360,
         "top": 717,
         "width": 530,
         "height": 36,
-        "color": "#fff0c8",
+        "color": "#FFF0C8",
         "outline": false
       },
       {
         "binding": "weddingVenueLine",
-        "font": "ATM-344",
+        "font": "MuktaMalar-600",
         "max": 30,
         "min": 26,
         "centerX": 360,
         "top": 756,
         "width": 530,
         "height": 36,
-        "color": "#fff0c8",
+        "color": "#FFF0C8",
         "outline": false
       },
       {
         "binding": "ceremonyAddressLine",
-        "font": "ATM-344",
+        "font": "MuktaMalar-600",
         "max": 30,
         "min": 26,
         "centerX": 360,
         "top": 795,
         "width": 530,
         "height": 36,
-        "color": "#fff0c8",
+        "color": "#FFF0C8",
         "outline": false
       }
     ],
     "venue": [
       {
         "binding": "venueHeading",
-        "font": "ATM-378",
+        "font": "Arima-700",
         "max": 43,
         "min": 26,
         "centerX": 355,
         "top": 419,
         "width": 266,
         "height": 68,
-        "color": "#762b2a",
+        "color": "#124D4B",
         "outline": false
       },
       {
         "binding": "church",
-        "font": "ATM-344",
+        "font": "MuktaMalar-600",
         "max": 38,
         "min": 26,
         "centerX": 355,
@@ -381,112 +391,112 @@
         "width": 260,
         "height": 105,
         "lineHeight": 51,
-        "color": "#762b2a",
+        "color": "#124D4B",
         "outline": false
       },
       {
         "binding": "address",
-        "font": "ATM-344",
+        "font": "MuktaMalar-600",
         "max": 34,
         "min": 26,
         "centerX": 355,
         "top": 627,
         "width": 260,
         "height": 59,
-        "color": "#762b2a",
+        "color": "#124D4B",
         "outline": false
       },
       {
         "binding": "weddingDateShort",
-        "font": "ATM-344",
+        "font": "MuktaMalar-600",
         "max": 31,
         "min": 26,
         "centerX": 355,
         "top": 694,
         "width": 260,
         "height": 45,
-        "color": "#762b2a",
+        "color": "#124D4B",
         "outline": false
       }
     ],
     "reception": [
       {
         "binding": "receptionHeading",
-        "font": "ATM-378",
+        "font": "Arima-700",
         "max": 58,
         "min": 26,
         "centerX": 394,
         "top": 396,
         "width": 324,
         "height": 82,
-        "color": "#762b2a",
+        "color": "#124D4B",
         "outline": false
       },
       {
         "binding": "receptionDateLabel",
-        "font": "ATM-344",
+        "font": "MuktaMalar-600",
         "max": 34,
         "min": 26,
         "centerX": 394,
         "top": 496,
         "width": 326,
         "height": 62,
-        "color": "#762b2a",
+        "color": "#77501F",
         "outline": false
       },
       {
         "binding": "receptionTimeLabel",
-        "font": "ATM-344",
+        "font": "MuktaMalar-600",
         "max": 34,
         "min": 26,
         "centerX": 394,
         "top": 565,
         "width": 326,
         "height": 62,
-        "color": "#762b2a",
+        "color": "#77501F",
         "outline": false
       },
       {
         "binding": "receptionVenue",
-        "font": "ATM-344",
+        "font": "MuktaMalar-600",
         "max": 34,
         "min": 26,
         "centerX": 394,
         "top": 632,
         "width": 326,
         "height": 62,
-        "color": "#762b2a",
+        "color": "#124D4B",
         "outline": false
       },
       {
         "binding": "receptionAddress",
-        "font": "ATM-344",
+        "font": "MuktaMalar-600",
         "max": 34,
         "min": 26,
         "centerX": 394,
         "top": 698,
         "width": 326,
         "height": 62,
-        "color": "#762b2a",
+        "color": "#124D4B",
         "outline": false
       }
     ],
     "hosts": [
       {
         "binding": "hostHeading",
-        "font": "ATM-378",
+        "font": "Arima-700",
         "max": 37,
         "min": 26,
         "centerX": 368,
         "top": 432,
         "width": 326,
         "height": 75,
-        "color": "#70312a",
+        "color": "#124D4B",
         "outline": false
       },
       {
         "binding": "host1",
-        "font": "ATM-344",
+        "font": "MuktaMalar-600",
         "max": 36,
         "min": 26,
         "centerX": 368,
@@ -494,12 +504,12 @@
         "width": 326,
         "height": 140,
         "lineHeight": 72,
-        "color": "#70312a",
+        "color": "#124D4B",
         "outline": false
       },
       {
         "binding": "host2",
-        "font": "ATM-344",
+        "font": "MuktaMalar-600",
         "max": 36,
         "min": 26,
         "centerX": 368,
@@ -507,45 +517,45 @@
         "width": 326,
         "height": 140,
         "lineHeight": 72,
-        "color": "#70312a",
+        "color": "#124D4B",
         "outline": false
       }
     ],
     "closing": [
       {
         "binding": "closing1",
-        "font": "ATM-378",
+        "font": "Arima-700",
         "max": 64,
         "min": 26,
         "centerX": 360,
         "top": 195,
         "width": 560,
         "height": 70,
-        "color": "#7e2938",
+        "color": "#124D4B",
         "outline": true
       },
       {
         "binding": "closing2",
-        "font": "ATM-378",
+        "font": "Arima-700",
         "max": 64,
         "min": 26,
         "centerX": 360,
         "top": 275,
         "width": 580,
         "height": 70,
-        "color": "#7e2938",
+        "color": "#124D4B",
         "outline": true
       },
       {
         "binding": "weddingDateShort",
-        "font": "ATM-344",
+        "font": "MuktaMalar-600",
         "max": 36,
         "min": 26,
         "centerX": 360,
         "top": 353,
         "width": 360,
         "height": 50,
-        "color": "#7e2938",
+        "color": "#124D4B",
         "outline": true
       }
     ]
@@ -657,18 +667,18 @@
     "approved": true,
     "backgroundReviewed": true,
     "tracksReviewed": true,
-    "sourceReviewCommit": "281b7172",
     "verification": {
       "rendererVersion": "temple-five-layer-v4",
       "cloudVerified": true,
       "frames": 1296
     },
     "proofs": {
-      "default": "925c19978147f6075ea1a08dbbc960a6b51989c10c975c4f4fb129faf71964d7",
-      "personalized": "7ac0b36126cb969d8e459ee2f1e07480926b390c94a4567ed437c74c6aae42d9"
+      "default": "d6f488d4c3e84d2ba41ac5360fce3e77eaddcf859279d223c746749a482c5acb",
+      "personalized": "3803e5b7df424db7e7ba90a03cf3d60cc6a9dae015cdd75cf6b517ed292283df"
     },
     "knownLimitations": [
-      "Physical iPhone and Instagram coverage is not verified."
+      "Physical iPhone and Instagram coverage is not verified.",
+      "Versioned personal-character inputs and prompts were tested with a mock provider; no new customer-photo generation was charged during this release."
     ]
   },
   "photoSlots": [

@@ -5,15 +5,15 @@ import {readFile} from 'node:fs/promises';
 import sharp from 'sharp';
 import {hash} from '../server/video-personalise-store.mjs';
 import {characterService,CHARACTER_STALL_MS} from '../server/video-characters.mjs';
-import {replicateProvider,CHARACTER_PROMPT_CANDIDATE,CHARACTER_PROMPT_REVISION} from '../server/video-character-provider.mjs';
+import {replicateProvider,CHARACTER_PROMPT_CANDIDATE,CHARACTER_PROMPT_REVISION,characterPromptRevision} from '../server/video-character-provider.mjs';
 
-function fixture(overrides={}){
+function fixture(overrides={},masterVersion){
  let now=Date.parse('2026-11-17T13:00:00Z');
  const owner=randomUUID(),invitation=randomUUID(),id=randomUUID();
  let row={id,owner_id:owner,invitation_id:invitation,slot:'groom',status:'processing',attempts:1,provider_id:'existing-prediction',raw_key:null,reference_data:[],created_at:new Date(now).toISOString(),updated_at:new Date(now).toISOString(),...overrides};
  const files=new Map(),media=new Map();
  const query=async(path,options)=>{
-  if(path.startsWith('personalization_drafts'))return [{id:invitation,owner_id:owner}];
+  if(path.startsWith('personalization_drafts'))return [{id:invitation,owner_id:owner,payload:masterVersion?{masterVersion}:{}}];
   assert.ok(path.startsWith('video_character_jobs?'));
   if(options?.method==='PATCH')row={...row,...options.body};
   return [{...row}];
@@ -29,6 +29,18 @@ test('new individual requests send the identity first and artwork second with tr
   await f.service({provider:{create:async input=>{sent=input;return {id:'new-'+slot,status:'processing'};}}}).process(f.id);
   assert.equal(f.row.status,'processing');assert.equal(sent.input_images.length,2);assert.deepEqual(Buffer.from(sent.input_images[0].split(',')[1],'base64'),photo);assert.deepEqual(Buffer.from(sent.input_images[1].split(',')[1],'base64'),await readFile('public/assets/video-masters/temple-v1/'+slot+'.png'));
   assert.equal(sent.aspect_ratio,'2:3');assert.equal(sent.background,'transparent');assert.equal(sent.output_format,'png');assert.match(sent.prompt,/EDIT PICTURE 2/);assert.ok(sent.prompt.includes('Tracking reference '+f.id+'-1'));
+ }
+});
+
+test('v3 character requests and alignment use the teal artwork; existing versions keep cream outfits',async()=>{
+ for(const version of [1,2,3])for(const slot of ['groom','bride','couple']){
+  const f=fixture({slot,status:'queued',provider_id:null,attempts:0,prompt_revision:characterPromptRevision(version),reference_data:[]},version);
+  const photo=await sharp({create:{width:16,height:24,channels:4,background:'blue'}}).png().toBuffer();
+  f.reference(photo,slot==='couple'?'groom':'single');if(slot==='couple')f.reference(photo,'bride');
+  let sent,aligned;const expected=await readFile('public/assets/video-masters/temple-v1/'+(version===3?'style-v3/':'')+(slot==='couple'?'closing':slot)+'.png');
+  await f.service({provider:{create:async input=>{sent=input;return {id:'sample',status:'succeeded',output:'https://replicate.delivery/sample.png'};},output:async()=>photo},align:async(bytes,reference)=>{aligned=reference;return {bytes,alignment:{verified:true}};}}).process(f.id);
+  assert.equal(f.row.status,'review');assert.deepEqual(Buffer.from(sent.input_images[1].split(',')[1],'base64'),expected);assert.deepEqual(aligned,expected);assert.equal(sent.aspect_ratio,'2:3');
+  if(version===3){assert.match(sent.prompt,/peacock-teal/);assert.doesNotMatch(sent.prompt,/cream silk (shirt|saree)|pink blouse/);}else assert.match(sent.prompt,/cream silk/);
  }
 });
 

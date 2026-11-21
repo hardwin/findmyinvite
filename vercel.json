@@ -67,7 +67,7 @@
     "api/video-characters.mjs": {
       "maxDuration": 300,
       "memory": 1024,
-      "includeFiles": "public/assets/video-masters/temple-v1/{manifest.json,groom.png,bride.png,closing.png}"
+      "includeFiles": "public/assets/video-masters/temple-v1/{manifest*.json,groom.png,bride.png,closing.png,style-v3/{groom,bride,closing}.png}"
     }
   },
   "crons": [
