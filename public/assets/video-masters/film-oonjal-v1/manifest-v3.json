@@ -55,34 +55,23 @@
   ],
   "assets": {
     "sceneBundle": {
-      "path": "/assets/video-masters/film-oonjal-v1/asset-index-v3.json",
-      "sha256": "a72d73cce182b8e7cc3d0d6cf9e9d21b72386099f785d13feb0eacc149f8ee02"
+      "path": "/assets/video-masters/film-oonjal-v1/asset-index-v3-r2.json",
+      "sha256": "3a8461beefe7b97b2fa83a51dd5a59bd7d09a80310e366b525dba844c750e0cf"
     }
   },
   "release": {
-    "approved": true,
-    "rendererVersion": "scene-film-v1",
-    "proofs": {
-      "default": "ae79db1df1cc835314a8f03774ac5cc680701af638d7e3f6e55c53de2a5ddfc4",
-      "personalized": "e7cf09b2c5d2cc9c1da335db7c828ba32fbb95c7974644a6f589fea442bba693"
-    },
-    "verification": {
-      "defaultProofKind": "full-cloud-mp4",
-      "personalizedProofKind": "full-cloud-mp4",
-      "personalizedFrames": 828,
-      "audioPayloadSha256": "fb7a19a337fd2c98fe7222a8a32b54cc1f8b5deb83d5e80d4e42e91f5dba8f28",
-      "snapshotId": "snap_nx2Mb7Q6sjislyNZkMRTAn7WoNwd"
-    },
-    "cloudVerified": true
+    "approved": false,
+    "rendererVersion": "scene-film-v1"
   },
-  "sceneFrame": "/assets/video-scenes/oonjal-v3/frame.html",
+  "sceneFrame": "/assets/video-scenes/oonjal-v3/frame-r2.html",
   "catalog": {
-    "poster": "../../catalog-previews/oonjal-v3/film-oonjal-v1-640.webp",
+    "poster": "../../catalog-previews/oonjal-v3-r2/film-oonjal-v1-640.webp",
     "posters": {
-      "320": "../../catalog-previews/oonjal-v3/film-oonjal-v1-320.webp",
-      "640": "../../catalog-previews/oonjal-v3/film-oonjal-v1-640.webp",
-      "960": "../../catalog-previews/oonjal-v3/film-oonjal-v1-960.webp"
+      "320": "../../catalog-previews/oonjal-v3-r2/film-oonjal-v1-320.webp",
+      "640": "../../catalog-previews/oonjal-v3-r2/film-oonjal-v1-640.webp",
+      "960": "../../catalog-previews/oonjal-v3-r2/film-oonjal-v1-960.webp"
     },
-    "preview": "../../catalog-previews/oonjal-v3/film-oonjal-v1.mp4"
-  }
+    "preview": "../../catalog-previews/oonjal-v3-r2/film-oonjal-v1.mp4"
+  },
+  "assetRevision": 2
 }

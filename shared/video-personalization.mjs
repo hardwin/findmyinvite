@@ -99,11 +99,12 @@ export function assertMaster(m,{released=false}={}){
  }
  if(m?.rendererVersion==='scene-film-v1'){
   const definition=catalogVideo(m.id),o=m.output;
-  const designerPlate=m.id==='film-oonjal-v1'&&m.version===3&&m.sceneFrame==='/assets/video-scenes/oonjal-v3/frame.html'&&o?.frames===828;
+  const correctedOonjal=m.assetRevision===2;
+  const designerPlate=m.id==='film-oonjal-v1'&&m.version===3&&m.sceneFrame===('/assets/video-scenes/oonjal-v3/'+(correctedOonjal?'frame-r2.html':'frame.html'))&&o?.frames===828;
   if(!definition||definition.design!==m.sceneDesign||(m.version!==1&&!designerPlate)||o?.width!==720||o.height!==1280||o.fps!==24||!Number.isSafeInteger(o.frames)||o.frames<24||o.frames>14400||Math.abs(o.duration-o.frames/o.fps)>0.00001)throw Error('Unsupported scene master.');
   if(!m.scenes?.length||m.scenes.some(s=>!Number.isInteger(s.start)||!Number.isInteger(s.end)||s.end<=s.start||s.end>o.frames))throw Error('Invalid scene timeline.');
   const revisedTiles=m.id==='film-tiles-v1'&&m.assetRevision===2&&m.sceneFrame==='/assets/video-scenes/tiles-v2/frame.html';
-  const expectedIndex='/assets/video-masters/'+m.id+'/asset-index'+(designerPlate?'-v3':revisedTiles?'-v2':'')+'.json';
+  const expectedIndex='/assets/video-masters/'+m.id+'/asset-index'+(designerPlate?(correctedOonjal?'-v3-r2':'-v3'):revisedTiles?'-v2':'')+'.json';
   if(m.sceneFrame&&!revisedTiles&&!designerPlate)throw Error('Unsupported scene frame.');
   if(released&&(!m.release?.approved||!['default','personalized'].every(k=>/^[a-f0-9]{64}$/.test(m.release?.proofs?.[k]||''))||m.release.rendererVersion!==m.rendererVersion||m.assets?.sceneBundle?.path!==expectedIndex||!/^[a-f0-9]{64}$/.test(m.assets?.sceneBundle?.sha256||'')))throw Error('This template is still being prepared.');
   return m;

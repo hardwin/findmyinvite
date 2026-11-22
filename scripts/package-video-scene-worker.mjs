@@ -18,6 +18,7 @@ const files=['public/assets/video-scenes/v1','public/assets/video-scenes/tiles-v
  'public/assets/video-masters/film-oonjal-v1/manifest-v1.json',
  'public/assets/music-library/oonjal-original.m4a',
  'public/assets/video-masters/film-oonjal-v1/asset-index-v3.json',
+ 'public/assets/video-masters/film-oonjal-v1/asset-index-v3-r2.json',
  'public/assets/video-masters/film-oonjal-v1/manifest-v3.json'];
 for(const name of await fs.readdir('dist/assets'))if(/\.(?:js|css)$/.test(name))files.push('dist/assets/'+name);
 await fs.writeFile(directory+'/files.txt',files.join('\n')+'\n');
