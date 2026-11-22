@@ -17,6 +17,7 @@ export class SceneCompositor {
  }
  setContent(content){this.content=content;this.pending=Promise.resolve(this.film.setContent(content));this.pending.catch(()=>{});}
  async render(frame,options){if(this.disposed)return;await this.pending;this.rules=await this.film.render(frame,options);}
+ activateMedia(){return this.film?.activateMedia?.();}
  async setPlayback(play,frame){
   if(!this.film?.setPlayback)return;
   await this.film.setPlayback(play,frame);

@@ -125,6 +125,13 @@ window.fmiFilmReady=Promise.resolve({
     return rules;
   },
   setContent,render,
+  async activateMedia(){
+    // Called by the explicit Retry preview tap; unlock restricted mobile decoders
+    // without starting the separate soundtrack or changing the chosen frame.
+    if(video.error)video.load();
+    await video.play();
+    video.pause();
+  },
   async setPlayback(play,frame){
     if(!play){video.pause();return;}
     await seek(Math.max(0,Math.min(827,frame)));
