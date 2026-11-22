@@ -1,9 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {loadPlate,seekPlate} from '../public/assets/video-scenes/oonjal-v3/media-r2.js';
-import {videoRequiresLocalPreview} from '../shared/video-preview-requirement.mjs';
+import {videoRequiresLocalPreview,validateMaaplaDetails} from '../shared/video-preview-requirement.mjs';
 import {normalizeVideoContent,videoDefinition} from '../shared/video-personalization.mjs';
-import {prepareSceneMaster} from '../server/video-scene-details.mjs';
+import {prepareSceneMaster,sceneSchema} from '../server/video-scene-details.mjs';
 import {loadVideoMaster} from '../server/video-personalise.mjs';
 
 class MetadataOnlyVideo extends EventTarget {
@@ -32,6 +32,9 @@ test('Maapla can export without a local decoder while retaining server validatio
  for(const m of [undefined,{id:'film-oonjal-v1',version:1},{id:'film-oonjal-v1',version:3},{id:'temple-v1',version:3,assetRevision:2},{id:'wedding-bells-v1',version:2,assetRevision:2}])assert.equal(videoRequiresLocalPreview(m),true);
  const options={complete:true,templateId:master.id,masterVersion:3};
  const content=normalizeVideoContent({...videoDefinition(master.id,3).example,brideEn:'Mozhi',groomEn:'Arjun',weddingDate:'2027-09-22'},options);
+ const schema=await sceneSchema(master.id);assert.doesNotThrow(()=>validateMaaplaDetails(content,schema));
+ assert.throws(()=>validateMaaplaDetails({...content,weddingDate:'2020-01-01'},schema));
+ assert.throws(()=>validateMaaplaDetails({...content,brideEn:'A name longer than twelve characters'},schema));
  assert.equal((await prepareSceneMaster(master,content)).output.frames,828);
  assert.throws(()=>normalizeVideoContent({...content,brideEn:''},options));
  assert.throws(()=>normalizeVideoContent({...content,weddingDate:'2027-02-30'},options));

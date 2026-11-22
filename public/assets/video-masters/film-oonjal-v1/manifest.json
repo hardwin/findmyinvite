@@ -60,8 +60,21 @@
     }
   },
   "release": {
-    "approved": false,
-    "rendererVersion": "scene-film-v1"
+    "approved": true,
+    "rendererVersion": "scene-film-v1",
+    "proofs": {
+      "default": "cdc0a2527790b6ccbd6737ea3842f0dece40c4b8504cb0c0f14a37f86ed41f11",
+      "personalized": "3b458910877d197cf8aabaf729d9ffba101c03315c8e93f89a3593e23b6cfe38"
+    },
+    "verification": {
+      "defaultProofKind": "full-cloud-mp4",
+      "personalizedProofKind": "full-cloud-mp4",
+      "personalizedFrames": 828,
+      "audioPayloadSha256": "d4774ab33a3040265c5185b8578287e085bcd818fa3524999090fa099e2558a8",
+      "assetRevision": 2,
+      "sourceSha256": "75f98c948d70174f2ae94b1dcd32556d544fb09e6e3a7453e8eb9f4009670e3b"
+    },
+    "cloudVerified": true
   },
   "sceneFrame": "/assets/video-scenes/oonjal-v3/frame-r2.html",
   "catalog": {
