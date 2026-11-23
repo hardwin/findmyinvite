@@ -1,0 +1,58 @@
+{
+  "date": "2026-11-23",
+  "templateId": "film-were-next-v1",
+  "templateCode": "FMI#0110",
+  "name": "We're Next!",
+  "masterVersion": 1,
+  "approvedDesign": "Food twist V3",
+  "basePaise": 29900,
+  "gstBps": 1800,
+  "publicVideos": [
+    "wedding-bells-v1",
+    "film-oonjal-v1",
+    "film-were-next-v1"
+  ],
+  "renderer": {
+    "snapshotId": "snap_iesrJKCZCabOO1L7378wQkNFePvd",
+    "environment": "VIDEO_WERE_NEXT_SNAPSHOT_ID",
+    "sceneBundleSha256": "c7243efb491df463778cafc0eb00d7056714d62dcd89f9b363bc0adff270230f"
+  },
+  "proofs": {
+    "default": {
+      "frames": 300,
+      "width": 720,
+      "height": 1280,
+      "duration": 10,
+      "bytes": 981125,
+      "resultSha256": "41a8576fb8bcc2af56fae717b77575e2e5e051ea58eb5fe83c8059bcc6b195fe",
+      "backgroundSha256": "c7243efb491df463778cafc0eb00d7056714d62dcd89f9b363bc0adff270230f",
+      "graphicsProfile": "mesa-mipmap-v1"
+    },
+    "personalized": {
+      "frames": 300,
+      "width": 720,
+      "height": 1280,
+      "duration": 10,
+      "bytes": 780590,
+      "resultSha256": "d679ab0b656781461d6e5e8545c7c4ea8f1bbc637e60168d083d9f40ba2e7cd7",
+      "backgroundSha256": "c7243efb491df463778cafc0eb00d7056714d62dcd89f9b363bc0adff270230f",
+      "graphicsProfile": "mesa-mipmap-v1"
+    }
+  },
+  "verification": {
+    "tests": 117,
+    "build": "passed",
+    "approvedGeometry": "12 paired frames; fonts, layout and motion retained",
+    "compressedIllustrationsBytes": 1472548,
+    "audioPackets": 219,
+    "audioPayloadSha256": "23996f8f7bb6938ffbf34ac8ecddc099d92b4b5a8e435befd062cc18d76d8656",
+    "browser": "Storefront, details, text/date editing, full preview, guest draft reload, 390x844 CSS viewport",
+    "physicalIphoneInstagram": "Not tested; hardware unavailable",
+    "livePurchase": "Not charged; payment gates covered by regression tests"
+  },
+  "rollback": {
+    "productionDeployment": "dpl_9n37NXHiRoEZi5gEd9VTTJreqtv9",
+    "previousCommit": "2471e3c1ca086fde6c179d5b2cc01dc0bab36b65",
+    "independent": "Remove film-were-next-v1 from PUBLIC_VIDEO_IDS; retain its v1 assets and snapshot for existing saved drafts."
+  }
+}

@@ -44,7 +44,7 @@ export default async function handler(req,res){const store=videoStore(),service=
   await requireVideoVisibility(req,templateId,q.get('invitationId'));
   const requested=q.get('masterVersion');
   const version=isVersionedVideo(templateId)&&(requested||templateId!=='film-oonjal-v1')
-   ?videoMasterVersion(templateId,Number(requested||(templateId==='wedding-bells-v1'?1:3))):undefined;
+   ?videoMasterVersion(templateId,Number(requested||(['wedding-bells-v1','film-were-next-v1'].includes(templateId)?1:3))):undefined;
   const config=await videoConfig(process.env,templateId,undefined,version);
   return respond(res,200,{...(await withCatalogIdentity([config],'video'))[0],price:videoPrice(process.env,templateId)});
  }

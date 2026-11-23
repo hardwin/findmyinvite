@@ -1,0 +1,77 @@
+{
+  "id": "film-were-next-v1",
+  "version": 1,
+  "rendererVersion": "scene-film-v1",
+  "sceneDesign": "were-next",
+  "kind": "page",
+  "output": {
+    "width": 720,
+    "height": 1280,
+    "fps": 30,
+    "frames": 300,
+    "duration": 10
+  },
+  "scenes": [
+    {
+      "id": "opening",
+      "name": "Opening",
+      "start": 0,
+      "end": 150,
+      "reviewFrame": 90,
+      "layers": []
+    },
+    {
+      "id": "reveal",
+      "name": "Your reveal",
+      "start": 150,
+      "end": 192,
+      "reviewFrame": 180,
+      "layers": []
+    },
+    {
+      "id": "date",
+      "name": "Save the date",
+      "start": 192,
+      "end": 300,
+      "reviewFrame": 270,
+      "layers": []
+    }
+  ],
+  "assets": {
+    "sceneBundle": {
+      "path": "/assets/video-masters/film-were-next-v1/asset-index.json",
+      "sha256": "c7243efb491df463778cafc0eb00d7056714d62dcd89f9b363bc0adff270230f"
+    }
+  },
+  "release": {
+    "approved": true,
+    "rendererVersion": "scene-film-v1",
+    "proofs": {
+      "default": "41a8576fb8bcc2af56fae717b77575e2e5e051ea58eb5fe83c8059bcc6b195fe",
+      "personalized": "d679ab0b656781461d6e5e8545c7c4ea8f1bbc637e60168d083d9f40ba2e7cd7"
+    },
+    "cloudVerified": true,
+    "verification": {
+      "defaultProofKind": "full-cloud-mp4",
+      "personalizedProofKind": "full-cloud-mp4",
+      "frames": 300,
+      "audioPackets": 219,
+      "audioPayloadSha256": "23996f8f7bb6938ffbf34ac8ecddc099d92b4b5a8e435befd062cc18d76d8656",
+      "runtimeIllustrationBytes": 1472548,
+      "runtimeComparison": "12 frames; same geometry and motion; WebP quality 95"
+    }
+  },
+  "sceneFrame": "/assets/video-scenes/were-next-v1/frame.html",
+  "source": {
+    "audioSha256": "dad9309ac7b7f57ea7e1d7a4d041defafcd74b2b2989c901ddebf395bb13064d"
+  },
+  "catalog": {
+    "poster": "../../catalog-previews/were-next-v1/poster-640.webp",
+    "posters": {
+      "320": "../../catalog-previews/were-next-v1/poster-320.webp",
+      "640": "../../catalog-previews/were-next-v1/poster-640.webp",
+      "960": "../../catalog-previews/were-next-v1/poster-960.webp"
+    },
+    "preview": "../../catalog-previews/were-next-v1/preview.mp4"
+  }
+}

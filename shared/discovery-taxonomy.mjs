@@ -71,6 +71,7 @@ export const videoDiscoveryTaxonomy={
  'film-kulam-v1':entry('hindu','garden',['navy','sage'],['floral']),
  'film-karaikudi-v1':entry('hindu','courtyard',['sage','ivory']),
  'film-hopon-v1':entry('hindu','courtyard',['gold','blush']),
+ 'film-were-next-v1':entry('','cafe',['coral','ivory','navy'],['modern','food','toon','tamil']),
  'film-oonjal-v1':entry('hindu','courtyard',['sage','gold'],['toon']),
  'film-rajakumari-v1':entry('','palace',['blush','gold'],[],['birthday']),
  'film-rajakumaran-v1':entry('','palace',['ivory','gold'],[],['birthday']),
@@ -83,7 +84,7 @@ const settingAliases={church:'church',temple:'temple',garden:'garden',palace:'pa
 const tagAliases={floral:'floral',flowers:'floral',flower:'floral',pixar:'3d','pixar 3d':'3d','3d':'3d',toon:'toon',cartoon:'toon'};
 const paletteNames=new Set(['ivory','sage','burgundy','gold','navy','blush']);
 const occasionAliases={wedding:'wedding',weddings:'wedding',nikah:'nikah',walima:'walima',engagement:'engagement',reception:'reception',birthday:'birthday',housewarming:'housewarming',babyshower:'baby-shower'};
-const saveTheDateIds=new Set(['film-drive-v1','film-savedate-v1','film-karaikudi-v1','film-hopon-v1']);
+const saveTheDateIds=new Set(['film-drive-v1','film-savedate-v1','film-karaikudi-v1','film-hopon-v1','film-were-next-v1']);
 const lookup=(values,key)=>Object.hasOwn(values,key)?values[key]:undefined;
 
 export function normalizeDiscoverySearch(value=''){

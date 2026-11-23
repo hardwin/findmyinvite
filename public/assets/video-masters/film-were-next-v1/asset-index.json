@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "film-were-next-v1",
+  "files": {
+    "/assets/video-scenes/were-next-v1/clock.mp4": "c7812b8f7bd251289f91b7cc9251231ef405b0e9d29af537467dede88de602c3",
+    "/assets/video-scenes/were-next-v1/clock.webm": "26b008e7d3727ce664fff4fc73b726cfab2bd7e942e68a139af8ba6a8e5f5093",
+    "/assets/video-scenes/were-next-v1/composition.js": "2edd274a13f81b25f7d6a94e896ca29198d124f1543fb175f6300e3a431aa0c6",
+    "/assets/video-scenes/were-next-v1/design.js": "d1967c8caa51f8f871ebcf9251a50ee8c5d3bc9114344caf652910a730ee7da7",
+    "/assets/video-scenes/were-next-v1/film.js": "e530125eaa70e6c37082f27639c1ef0241a16b48fef30097762e46250b6312f9",
+    "/assets/video-scenes/were-next-v1/frame.html": "331fb45686629d70bc7355d274c79c16c39701176fbeb034180a713e0092ad2b",
+    "/assets/video-scenes/were-next-v1/media.js": "d06d593d30eef56642a272dfd60e6580fa645736337767aaebc170306cd07aaa",
+    "/assets/video-scenes/were-next-v1/fonts/dancing-script-latin-700.woff2": "06b326d772e3a68977c10711110f5f38255a007f3775795efbcd3862313b2d22",
+    "/assets/video-scenes/were-next-v1/fonts/DancingScript-OFL.txt": "6f090277c00af96651ce6dbcc38ff1591047a3bffef486e80b6a32e8276a8201",
+    "/assets/video-scenes/were-next-v1/fonts/montserrat-static-500.woff2": "2b53300fb9471520df2f4905847fb7a209879b2029ae893c05c6ee346b1320cd",
+    "/assets/video-scenes/were-next-v1/fonts/montserrat-static-700.woff2": "f9d9e65b15372cebcafc3acd1e664a564c5c4b23278de4d5760de9a13c530371",
+    "/assets/video-scenes/were-next-v1/fonts/montserrat-static-LICENSE.txt": "4373d78db4cae6814ba2815f5c03647683f9e3b13a62a423da807a1b9bcf8625",
+    "/assets/video-scenes/were-next-v1/assets/checker-paper.svg": "80979a711d390852af7e5bc25061fdfdf1b7f45fbcf07d55559d795905bc46e2",
+    "/assets/video-scenes/were-next-v1/assets/couple-opening.webp": "1e95ada1080ffe846ea7c854c58e2740bd03d6ef5a3cc14759c844047a9ec513",
+    "/assets/video-scenes/were-next-v1/assets/couple-reveal.webp": "ccce6704f7546de4c7bd9002eb7072e54f32b622d198d35145df9b97b7b83bee",
+    "/assets/video-scenes/were-next-v1/assets/date-ticket.svg": "6a34143998db1e081664f377700bca1ea60ce50d947ef1fc0f948a47688c2b82",
+    "/assets/video-scenes/v1/editor/details-were-next.js": "f60b06ba24d837e1981ecc0e327727feb82bd944d5ea9f50fedfce91b28de38e"
+  }
+}

@@ -6,9 +6,9 @@ import {once} from 'node:events';
 import puppeteer from 'puppeteer-core';
 import ffmpegStatic from 'ffmpeg-static';
 import {assertMaster,normalizeVideoContent,MUSIC} from '../shared/video-personalization.mjs';
-import {usesOriginalOonjalAudio} from '../shared/music-selection.mjs';
+import {usesOriginalOonjalAudio,usesOriginalWereNextAudio} from '../shared/music-selection.mjs';
 import {prepareSceneMaster} from '../server/video-scene-details.mjs';
-import {browserPath,serve,verifyVideo,digest} from './render-personalized-video.mjs';
+import {browserPath,serve,verifyVideo,digest,command} from './render-personalized-video.mjs';
 const publicRoot=resolve(import.meta.dirname,'../public');
 function assetPath(path){const target=resolve(publicRoot,'.'+path);if(!target.startsWith(publicRoot+sep))throw Error('Invalid scene asset path.');return target;}
 async function sceneDisplay(){
@@ -54,18 +54,24 @@ export async function renderSceneVideo({master,content,photos={},audioFile,audio
   await startBrowser();
   await onProgress(5);let done;
   const audio=audioFile||(content.music.mode==='library'&&MUSIC[content.music.id]?assetPath(MUSIC[content.music.id].path):null),{frames,duration,fps}=master.output;
+  const preserveWereNextRecording=usesOriginalWereNextAudio(master,content.music);
+  if(preserveWereNextRecording&&digest(await readFile(audio))!=='dad9309ac7b7f57ea7e1d7a4d041defafcd74b2b2989c901ddebf395bb13064d')throw Error('The reference recording does not match this master.');
   if(content.music.mode!=='none'&&!audio)throw Error('Selected audio asset missing.');
   if(reviewFrames)await mkdir(output,{recursive:true});else{
    await mkdir(resolve(output,'..'),{recursive:true});
    const args=['-hide_banner','-loglevel','error','-y','-f','image2pipe','-framerate',String(fps),'-i','pipe:0'];
    const original=usesOriginalOonjalAudio(master,content.music);
-   if(original){
+   if(preserveWereNextRecording){
+    // Mux the complete AAC recording after encoding. Image-pipe frame limits
+    // can otherwise terminate audio early; no fade, loop, or second decode.
+    args.push('-an');
+   }else if(original){
     if(digest(await readFile(audio))!=='2d9a33042439267ad06f91ce81ec02b9fe24b492a87f94aec87a2b1bb51e6142')throw Error('The original Oonjal recording does not match this master.');
     args.push('-i',audio,'-map','0:v','-map','1:a:0','-c:a','copy');
    }else if(audio){if(content.music.mode==='library')args.push('-stream_loop','-1');args.push('-i',audio,'-map','0:v','-map','1:a:0','-af',`apad,atrim=0:${duration},afade=t=in:st=0:d=1,afade=t=out:st=${Math.max(0,duration-3)}:d=3`,'-c:a','aac','-b:a','160k');}else args.push('-an');
    args.push('-c:v','libx264','-threads','2','-preset','fast','-crf','20','-pix_fmt','yuv420p','-r',String(fps),'-frames:v',String(frames),'-t',String(duration),'-movflags','+faststart');
    if(content.music.mode==='library')args.push('-metadata','comment='+(original?'Mapla Veetla Okay · Original recording':audioCredit||(MUSIC[content.music.id]?MUSIC[content.music.id].credit+' '+MUSIC[content.music.id].license:'')));
-   args.push('-f','mp4',output);encoder=spawn(process.env.FFMPEG_PATH||ffmpegStatic,args,{windowsHide:true,stdio:['pipe','ignore','pipe']});let errors='';encoder.stderr.on('data',b=>errors=(errors+b).slice(-4000));done=new Promise((yes,no)=>{encoder.once('error',no);encoder.stdin.on('error',no);encoder.once('close',code=>code===0?yes():no(Error('Encoding failed: '+errors)));});done.catch(()=>{});
+   args.push('-f','mp4',preserveWereNextRecording?join(temp,'picture.mp4'):output);encoder=spawn(process.env.FFMPEG_PATH||ffmpegStatic,args,{windowsHide:true,stdio:['pipe','ignore','pipe']});let errors='';encoder.stderr.on('data',b=>errors=(errors+b).slice(-4000));done=new Promise((yes,no)=>{encoder.once('error',no);encoder.stdin.on('error',no);encoder.once('close',code=>code===0?yes():no(Error('Encoding failed: '+errors)));});done.catch(()=>{});
   }
   const sequence=reviewFrames||Array.from({length:frames},(_,i)=>i);
   for(const [i,frame] of sequence.entries()){
@@ -85,6 +91,7 @@ export async function renderSceneVideo({master,content,photos={},audioFile,audio
    if(i%24===0)await onProgress(Math.round(5+92*(i+1)/sequence.length));
   }
   if(reviewFrames)return {directory:output};encoder.stdin.end();await done;
+  if(preserveWereNextRecording)await command(process.env.FFMPEG_PATH||ffmpegStatic,['-hide_banner','-loglevel','error','-y','-i',join(temp,'picture.mp4'),'-i',audio,'-map','0:v:0','-map','1:a:0','-c','copy','-movflags','+faststart',output]);
   return {...await verifyVideo(output,{audio:!!audio,output:master.output}),backgroundSha256:master.assets.sceneBundle.sha256,graphicsProfile:process.platform==='linux'?'mesa-mipmap-v1':'native'};
  }finally{encoder?.stdin.destroy();encoder?.kill('SIGKILL');await closeSceneBrowser(browser);displayProcess?.kill();if(server){server.closeAllConnections();await new Promise(r=>server.close(r));}await rm(temp,{recursive:true,force:true});}
 }

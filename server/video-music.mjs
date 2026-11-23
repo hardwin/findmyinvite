@@ -14,7 +14,7 @@ export async function videoMusicCatalog(){
 export function videoDefaultMusic(id,catalog,masterVersion){
  if(id==='film-oonjal-v1'&&masterVersion===3)return {mode:'library',id:oonjalRecordingId};
  const assignment=catalog.assignments.find(a=>a.id===id);
- const trackId=assignment?assignment.trackId:id==='wedding-bells-v1'?'wedding-bells-original':undefined;
+ const trackId=assignment?assignment.trackId:id==='wedding-bells-v1'?'wedding-bells-original':id==='film-were-next-v1'?'were-next-original':undefined;
  const track=catalog.tracks.find(t=>t.id===trackId);
  return track?{mode:'library',id:track.id}:{mode:'none'};
 }

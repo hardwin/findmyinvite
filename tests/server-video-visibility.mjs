@@ -13,7 +13,7 @@ const deny=async()=>{throw new HttpError(403,'Not an operator.');};
 const anonymous=async()=>{throw new HttpError(401,'Sign in.');};
 
 test('public visibility is explicit and independent of free pricing or renderer approval',async()=>{
- assert.deepEqual(PUBLIC_VIDEO_IDS,['wedding-bells-v1','film-oonjal-v1']);
+ assert.deepEqual(PUBLIC_VIDEO_IDS,['wedding-bells-v1','film-oonjal-v1','film-were-next-v1']);
  for(const id of ['temple-v1','film-drive-v1','kerala-christian-v1','invented'])assert.equal(isPublicVideo(id),false);
  await requireVideoVisibility({},'wedding-bells-v1',null,{authenticate:()=>assert.fail('Public design must not require authentication')});
  await assert.rejects(requireVideoVisibility({},hidden,null,{authenticate:anonymous,authorizeOperator:deny}),{status:404});
@@ -69,7 +69,7 @@ test('HTTP boundaries hide new designs while preserving existing work and operat
   });
   await t.test('full internal catalogue requires an operator and is never publicly cached',async()=>{
    for(const token of [undefined,'owner'])assert.ok([401,403].includes((await request(videoHandler,'/?action=templates&includeHidden=1',token)).status));
-   const r=await request(videoHandler,'/?action=templates&includeHidden=1','operator');assert.equal(r.status,200);assert.equal(r.body.templates.length,40);assert.ok(r.body.templates.some(row=>row.id===hidden));assert.equal(r.headers['cache-control'],'private, no-store');assert.equal(r.headers.vary,'Cookie, Authorization');
+   const r=await request(videoHandler,'/?action=templates&includeHidden=1','operator');assert.equal(r.status,200);assert.equal(r.body.templates.length,41);assert.ok(r.body.templates.some(row=>row.id===hidden));assert.equal(r.headers['cache-control'],'private, no-store');assert.equal(r.headers.vary,'Cookie, Authorization');
   });
   await t.test('ordinary customers cannot create hidden drafts, upload, pay or start a render',async()=>{
    const b={id:draftId,invitationId:draftId,kind:'video',templateId:hidden,revision:0,payload:{content:{}}};

@@ -644,6 +644,16 @@ export default {
         "960": "/assets/catalog-previews/names-v1/videos/film-velicham-v1-960.webp"
       },
       "duration": 38.833333333333336
+    },
+    "film-were-next-v1": {
+      "poster": "/assets/catalog-previews/were-next-v1/poster-640.webp",
+      "posters": {
+        "320": "/assets/catalog-previews/were-next-v1/poster-320.webp",
+        "640": "/assets/catalog-previews/were-next-v1/poster-640.webp",
+        "960": "/assets/catalog-previews/were-next-v1/poster-960.webp"
+      },
+      "preview": "/assets/catalog-previews/were-next-v1/preview.mp4",
+      "version": "1"
     }
   }
 };

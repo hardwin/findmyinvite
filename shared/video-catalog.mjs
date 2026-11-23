@@ -1,4 +1,5 @@
 // Versioned scene/form bindings. Generated from the reviewed reference inventory.
+import {WERE_NEXT_DEFINITION} from './were-next-video.mjs';
 export const VIDEO_CATALOG = [
   {
     "id": "film-drive-v1",
@@ -17015,4 +17016,5 @@ export const VIDEO_CATALOG = [
     "kind": "page"
   }
 ];
+VIDEO_CATALOG.push(WERE_NEXT_DEFINITION);
 export const catalogVideo = id => VIDEO_CATALOG.find(entry => entry.id === id);

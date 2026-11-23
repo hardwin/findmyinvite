@@ -52,5 +52,17 @@
     "status": "ready",
     "archived": false,
     "revision": 0
+  },
+  {
+    "id": "were-next-original",
+    "title": "We're Next! · Original",
+    "mood": "Save the date",
+    "duration": 10.05424,
+    "asset": "/assets/music-library/were-next-original.m4a",
+    "sourceUrl": "https://www.instagram.com/reel/DdqLPTvS8t_/",
+    "credit": "Soundtrack from the supplied reference reel.",
+    "status": "ready",
+    "archived": false,
+    "revision": 0
   }
 ]
