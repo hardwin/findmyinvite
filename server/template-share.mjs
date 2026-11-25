@@ -34,6 +34,7 @@ async function publicCatalogue(origin,kind){
  const key=origin+':'+kind,hit=catalogues.get(key);if(hit&&hit.until>Date.now())return hit.promise;
  const entry={until:Date.now()+30000};
  entry.promise=(async()=>{
+  if(kind==='video'){const {videoPublicCatalog}=await import('./video-public-catalog.mjs');return videoPublicCatalog();}
   const path=kind==='video'?'/api/video-personalise?action=templates':'/api/templates?action=public';
   const response=await fetch(origin+path,{redirect:'error',signal:AbortSignal.timeout(10000)});
   const data=JSON.parse((await readPublicBytes(response,2000000)).toString());

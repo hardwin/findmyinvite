@@ -4,6 +4,7 @@ import {validMusicId,oonjalRecordingId} from './music-selection.mjs';
 import {TEMPLE_ID,TEMPLE_FORM,TEMPLE_DEFAULTS} from './temple-video.mjs';
 import {catalogVideo} from './video-catalog.mjs';
 import {WEDDING_BELLS_ID,WEDDING_BELLS_DEFINITION,WEDDING_BELLS_OUTPUT} from './wedding-bells-video.mjs';
+import {ANBIL_AVAN_ID,ANBIL_AVAN_MUSIC_ID,isAnbilAvanMaster} from './anbil-avan-video.mjs';
 
 export const VIDEO_ID='kerala-christian-v1';
 export const LAYER_ORDER=Object.freeze(['background','characters','boards','text','petals']);
@@ -38,7 +39,7 @@ export function videoDefinition(id=DEFAULT_VIDEO_ID,masterVersion){
  if(id===VIDEO_ID)return {id,form:VIDEO_FORM,defaults:VIDEO_DEFAULTS,name:'Kerala Christian Wedding',collection:'THE KERALA CHRISTIAN COLLECTION',description:'A sunlit church, your favourite people, and words that are entirely yours.',filename:'christian-wedding.mp4'};
  throw Error('This video template is unavailable.');
 }
-const seedMusic=Object.fromEntries(seeds.map(t=>[t.id,{path:t.asset,label:t.title,credit:t.credit+(t.id==='wedding-bells-original'?'':' Trimmed and faded for this invitation.'),license:t.licenseUrl}]));
+const seedMusic=Object.fromEntries(seeds.map(t=>[t.id,{path:t.asset,label:t.title,credit:t.credit+(['wedding-bells-original',ANBIL_AVAN_MUSIC_ID].includes(t.id)?'':' Trimmed and faded for this invitation.'),license:t.licenseUrl}]));
 export const MUSIC={...seedMusic,canon:seedMusic['canon-in-d']};
 /** @param {object} input @param {{complete?:boolean,templateId?:string,masterVersion?:number}} options */
 export function normalizeVideoContent(input,{complete=false,templateId=VIDEO_ID,masterVersion}={}){
@@ -54,9 +55,13 @@ export function normalizeVideoContent(input,{complete=false,templateId=VIDEO_ID,
  }
  out.photos={};
  if(templateId===WEDDING_BELLS_ID&&Object.keys(input.photos||{}).length)throw Error('Wedding Bells currently preserves the original characters.');
- const catalog=catalogVideo(templateId);
- for(const slot of catalog?definition.photoSlots.map(p=>p.slot):PHOTO_SLOTS){const p=input.photos?.[slot];if(!p)continue;if(!/^[a-f0-9-]{36}$/.test(p.id||'')||!(catalog?['frame']:['cutout','frame','prepared']).includes(p.mode)||p.confirmed!==true)throw Error('Confirm the '+slot+' photo presentation.');out.photos[slot]={id:p.id,mode:p.mode,confirmed:true};}
- const music=definition===designerOonjal?fixedRecording:input.music||{mode:'none'};
+ const catalog=catalogVideo(templateId),characterSet=!!definition.characterProfile;
+ // Character-profile designs accept only server-prepared layers, never raw uploads.
+ const modes=characterSet?['prepared']:catalog?['frame']:['cutout','frame','prepared'];
+ for(const slot of catalog?definition.photoSlots.map(p=>p.slot):PHOTO_SLOTS){const p=input.photos?.[slot];if(!p)continue;if(!/^[a-f0-9-]{36}$/.test(p.id||'')||!modes.includes(p.mode)||p.confirmed!==true)throw Error('Confirm the '+slot+' photo presentation.');out.photos[slot]={id:p.id,mode:p.mode,confirmed:true};}
+ // One approved set covers every scene; otherwise the original illustrations remain.
+ if(characterSet&&Object.keys(out.photos).length&&Object.keys(out.photos).length!==definition.photoSlots.length)throw Error('Use every character from one approved set, or the original illustrations.');
+ const music=definition===designerOonjal?fixedRecording:definition.lockedMusic||input.music||{mode:'none'};
  if(!['none','library','upload'].includes(music.mode))throw Error('Choose music or silence.');
  out.music={mode:music.mode};
  if(music.mode==='library'){if(!validMusicId(music.id))throw Error('Choose an available music track.');out.music.id=music.id;}
@@ -102,13 +107,19 @@ export function assertMaster(m,{released=false}={}){
   const correctedOonjal=m.assetRevision===2;
   const wereNext=m.id==='film-were-next-v1'&&m.version===1&&m.sceneFrame==='/assets/video-scenes/were-next-v1/frame.html'&&o?.fps===30&&o.frames===300&&o.duration===10;
   if(m.id==='film-were-next-v1'&&!wereNext)throw Error('Unsupported We\u2019re Next master.');
+  // The layered 2D profile is bound to this approved film's exact timeline.
+  if(m.renderProfile!==undefined&&m.id!==ANBIL_AVAN_ID)throw Error('Unsupported render profile.');
+  const anbilAvan=isAnbilAvanMaster(m);
+  if(m.id===ANBIL_AVAN_ID&&!anbilAvan)throw Error('Unsupported Anbil Avan master.');
   const designerPlate=m.id==='film-oonjal-v1'&&m.version===3&&m.sceneFrame===('/assets/video-scenes/oonjal-v3/'+(correctedOonjal?'frame-r2.html':'frame.html'))&&o?.frames===828;
-  if(!definition||definition.design!==m.sceneDesign||(m.version!==1&&!designerPlate)||o?.width!==720||o.height!==1280||(!wereNext&&o.fps!==24)||!Number.isSafeInteger(o.frames)||o.frames<24||o.frames>14400||Math.abs(o.duration-o.frames/o.fps)>0.00001)throw Error('Unsupported scene master.');
+  if(!definition||definition.design!==m.sceneDesign||(m.version!==1&&!designerPlate)||o?.width!==720||o.height!==1280||(!wereNext&&!anbilAvan&&o.fps!==24)||!Number.isSafeInteger(o.frames)||o.frames<24||o.frames>14400||Math.abs(o.duration-o.frames/o.fps)>0.00001)throw Error('Unsupported scene master.');
   if(!m.scenes?.length||m.scenes.some(s=>!Number.isInteger(s.start)||!Number.isInteger(s.end)||s.end<=s.start||s.end>o.frames))throw Error('Invalid scene timeline.');
   const revisedTiles=m.id==='film-tiles-v1'&&m.assetRevision===2&&m.sceneFrame==='/assets/video-scenes/tiles-v2/frame.html';
   const expectedIndex='/assets/video-masters/'+m.id+'/asset-index'+(designerPlate?(correctedOonjal?'-v3-r2':'-v3'):revisedTiles?'-v2':'')+'.json';
-  if(m.sceneFrame&&!revisedTiles&&!designerPlate&&!wereNext)throw Error('Unsupported scene frame.');
+  if(m.sceneFrame&&!revisedTiles&&!designerPlate&&!wereNext&&!anbilAvan)throw Error('Unsupported scene frame.');
   if(released&&(!m.release?.approved||!['default','personalized'].every(k=>/^[a-f0-9]{64}$/.test(m.release?.proofs?.[k]||''))||m.release.rendererVersion!==m.rendererVersion||m.assets?.sceneBundle?.path!==expectedIndex||!/^[a-f0-9]{64}$/.test(m.assets?.sceneBundle?.sha256||'')))throw Error('This template is still being prepared.');
+  // A new render profile additionally requires a qualified cloud worker proof.
+  if(released&&anbilAvan&&m.release.cloudVerified!==true)throw Error('This template is still being prepared.');
   return m;
  }
  if(![VIDEO_ID,TEMPLE_ID].includes(m?.id)||(m.id===TEMPLE_ID?![1,2,3].includes(m.version):m.version!==1)||JSON.stringify(m.layerOrder)!==JSON.stringify(LAYER_ORDER)||JSON.stringify(m.output)!==JSON.stringify(VIDEO_OUTPUT))throw Error('Unsupported video master.');

@@ -5,6 +5,7 @@ import {db,HttpError} from './core.mjs';
 import {version} from './template-cms.mjs';
 import {videoInvitationId} from './video-payments.mjs';
 import {videoDefinition} from '../shared/video-personalization.mjs';
+import {catalogVideo} from '../shared/video-catalog.mjs';
 import {videoStore,hash} from './video-personalise-store.mjs';
 import {del} from '@vercel/blob';
 const table='personalization_drafts';
@@ -57,7 +58,9 @@ export function draftService({query=db,store=videoStore()}={}){
   const catalog=versions.length?await query('template_catalog?id=in.('+[...new Set(versions.map(v=>v.template_id))].map(encodeURIComponent).join(',')+')&select=id,name,thumbnail'):[];
   const identities=await catalogIdentities(undefined,query);
   const characters=await query('video_character_jobs?owner_id=eq.'+owner+'&status=in.(queued,submitting,processing,preparing,review)&select=invitation_id,status&limit=200');
-  return Promise.all(items.map(async d=>{const p=purchases.find(p=>p.id===d.id),website=websites.find(w=>w.id===d.id||w.slug===d.payload?.slug),meta=catalog.find(c=>c.id===versions.find(v=>v.id===d.templateId)?.template_id);return {...d,...identityFields(identities.find(r=>r.kind===d.kind&&r.template_id===(d.kind==='video'?d.templateId:meta?.id))),characterReview:characters.some(j=>j.invitation_id===d.id),templateName:d.kind==='video'?videoDefinition(d.templateId).name:meta?.name,thumbnail:d.kind==='video'?'/assets/video-masters/'+d.templateId+'/poster.jpg':meta?.thumbnail,job:d.kind==='video'?await jobView(owner,d.lastJobId||d.payload?.job?.id):null,payment:p?.status||(websitePurchases.some(p=>p.invitation_id===website?.id&&p.status==='captured')?'captured':null),published:website?.published||false,expiresAt:website?.first_published_at?website.expires_at:null};}));
+  // Character-set designs only: legacy drafts never query the generalized tables.
+  const characterSets=items.some(d=>d.kind==='video'&&catalogVideo(d.templateId)?.characterProfile)?await query('video_character_sets?owner_id=eq.'+owner+'&status=in.(identities,identity_review,poses,review)&select=invitation_id,status&limit=200'):[];
+  return Promise.all(items.map(async d=>{const p=purchases.find(p=>p.id===d.id),website=websites.find(w=>w.id===d.id||w.slug===d.payload?.slug),meta=catalog.find(c=>c.id===versions.find(v=>v.id===d.templateId)?.template_id);return {...d,...identityFields(identities.find(r=>r.kind===d.kind&&r.template_id===(d.kind==='video'?d.templateId:meta?.id))),characterReview:characters.some(j=>j.invitation_id===d.id)||characterSets.some(s=>s.invitation_id===d.id),templateName:d.kind==='video'?videoDefinition(d.templateId).name:meta?.name,thumbnail:d.kind==='video'?(d.templateId==='film-anbil-avan-v1'?'/assets/catalog-previews/anbil-avan-v1/poster-640.webp':'/assets/video-masters/'+d.templateId+'/poster.jpg'):meta?.thumbnail,job:d.kind==='video'?await jobView(owner,d.lastJobId||d.payload?.job?.id):null,payment:p?.status||(websitePurchases.some(p=>p.invitation_id===website?.id&&p.status==='captured')?'captured':null),published:website?.published||false,expiresAt:website?.first_published_at?website.expires_at:null};}));
  }
  async function remove(owner,id){
   let row=await get(owner,id,{optional:true,deleted:true});
@@ -65,12 +68,15 @@ export function draftService({query=db,store=videoStore()}={}){
   const websitePath='invitations?'+(row.payload.slug?'slug=eq.'+encodeURIComponent(row.payload.slug):'id=eq.'+id)+'&owner_id=eq.'+owner;
   if(row.kind==='video'){
    const active=await query('video_character_jobs?invitation_id=eq.'+id+'&owner_id=eq.'+owner+'&status=in.(queued,submitting,processing,preparing)&select=id&limit=1');if(active.length)throw new HttpError(409,'Wait for character preparation to finish before deleting this invitation.');
+   if(catalogVideo(row.template_id)?.characterProfile&&(await query('video_character_assets?invitation_id=eq.'+id+'&owner_id=eq.'+owner+'&status=in.(queued,submitting,processing,preparing)&select=id&limit=1')).length)throw new HttpError(409,'Wait for character preparation to finish before deleting this invitation.');
    const job=await jobView(owner,row.last_job_id||row.payload?.job?.id);if(job&&['queued','running'].includes(job.status))throw new HttpError(409,'Wait for the active render to finish before deleting this invitation.');
   }else{const w=await one(websitePath+'&select=id,published');if(w?.published)throw new HttpError(409,'Published websites cannot be deleted here.');if(w)await query('invitations?id=eq.'+w.id+'&owner_id=eq.'+owner,{method:'PATCH',body:{deleted_at:new Date().toISOString()}});}
   await query(table+'?id=eq.'+id+'&owner_id=eq.'+owner,{method:'PATCH',body:{deleted_at:new Date().toISOString()}});
   if(row.kind==='website'){const website=await one(websitePath+'&select=id');if(website){const media=await query('template_media?invitation_id=eq.'+website.id+'&select=id,object_path');for(const m of media){if(m.object_path)await del(m.object_path);await query('template_media?id=eq.'+m.id+'&invitation_id=eq.'+website.id,{method:'DELETE'});}}}
   if(row.kind==='video'){
    await query('video_character_jobs?invitation_id=eq.'+id+'&owner_id=eq.'+owner,{method:'DELETE'});
+   // Assets cascade with their set; private files are removed with persistent/<owner>/<id>/.
+   if(catalogVideo(row.template_id)?.characterProfile)await query('video_character_sets?invitation_id=eq.'+id+'&owner_id=eq.'+owner,{method:'DELETE'});
    for(const key of await store.list('persistent/'+owner+'/'+id+'/'))await store.remove(key);
    for(const key of await store.list('media/')){const m=(await store.read(key))?.value;if(m?.owner===owner&&m.invitationId===id){if(m.key)await store.remove(m.key);if(m.cutoutKey)await store.remove(m.cutoutKey);await store.remove(key);}}
    for(const key of await store.list('jobs/')){const j=(await store.read(key))?.value;if(j?.owner===owner&&j.invitationId===id){if(j.resultKey)await store.remove(j.resultKey);await store.remove(key);}}

@@ -93,7 +93,7 @@ test('every category, trending search and footer destination resolves to the sam
 
 test('Save the Date links and counts use actual video designs, not wedding countdown text',()=>{
  assert.deepEqual(find('Save the Date'),[]);
- for(const query of ['Save the Date','save-the-date',' SAVE   THE   DATE '])assert.deepEqual(ids(VIDEO_CATALOG.filter(video=>matchesVideoSearch(video,query))),['film-drive-v1','film-hopon-v1','film-karaikudi-v1','film-savedate-v1']);
+ for(const query of ['Save the Date','save-the-date',' SAVE   THE   DATE '])assert.deepEqual(ids(VIDEO_CATALOG.filter(video=>matchesVideoSearch(video,query))),['film-drive-v1','film-hopon-v1','film-karaikudi-v1','film-savedate-v1','film-were-next-v1']);
  assert.deepEqual(ids(VIDEO_CATALOG.filter(video=>matchesVideoSearch(video,'Save the Date Drive'))),['film-drive-v1']);
  assert.equal(matchesVideoSearch({id:'film-tirumanam-v1',name:'Tamil Wedding'},'Tamil'),true);
 });
@@ -110,7 +110,8 @@ test('homepage categories preserve format and occasion, including empty collecti
  assert.deepEqual(videoIds('Birthday'),['film-ilavarasi-v1','film-rajakumaran-v1','film-rajakumari-v1']);
  assert.deepEqual(videoIds('Housewarming'),['film-velicham-v1']);
  assert.deepEqual(videoIds('Engagement'),['film-walk-v1']);
- assert.equal(videoIds('Wedding').length,34);
+ // 34 legacy designs + We're Next (save the date) + Anbil Avan (wedding and reception).
+ assert.equal(videoIds('Wedding').length,36);
  assert.deepEqual(videoIds('Baby Shower'),[]);
  assert.deepEqual(videoIds('Ear Piercing'),[]);
  assert.equal(matchesVideoSearch({id:'unreviewed-video',name:'New design'},'Wedding'),false);

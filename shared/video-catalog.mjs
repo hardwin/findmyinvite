@@ -1,5 +1,6 @@
 // Versioned scene/form bindings. Generated from the reviewed reference inventory.
 import {WERE_NEXT_DEFINITION} from './were-next-video.mjs';
+import {ANBIL_AVAN_DEFINITION} from './anbil-avan-video.mjs';
 export const VIDEO_CATALOG = [
   {
     "id": "film-drive-v1",
@@ -17017,4 +17018,6 @@ export const VIDEO_CATALOG = [
   }
 ];
 VIDEO_CATALOG.push(WERE_NEXT_DEFINITION);
+// Hidden until qualified: visibility is controlled only by PUBLIC_VIDEO_IDS.
+VIDEO_CATALOG.push(ANBIL_AVAN_DEFINITION);
 export const catalogVideo = id => VIDEO_CATALOG.find(entry => entry.id === id);

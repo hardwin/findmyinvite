@@ -1,0 +1,12 @@
+.vp-character-set .vp-character-identities,.vp-character-set .vp-character-poses{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:20px 0}
+.vp-character-set figure{margin:0;min-width:0;background:rgba(255,255,255,.65);border:1px solid #ead7df;border-radius:16px;overflow:hidden}
+.vp-character-set figure img{display:block;width:100%;height:220px;object-fit:contain;background:#f5ece7}
+.vp-character-set figcaption{padding:10px;font-size:.85em;text-align:center}
+.vp-character-set figcaption button{display:block;margin:8px auto 0;font-size:.8em;text-decoration:underline;background:transparent;border:0;color:inherit;cursor:pointer}
+.vp-character-set .vp-character-poses{grid-template-columns:repeat(3,minmax(0,1fr))}
+.vp-character-set .vp-character-poses img{height:160px}
+.vp-character-set .vp-character-poses figcaption{font-size:.75em;padding:8px 4px}
+@media(max-width:420px){.vp-character-set figure img{height:180px}.vp-character-set .vp-character-poses{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.vp-personal-photos[hidden]{display:none!important}
+.vp-character-choice{border:0;margin:0 0 20px;padding:0;min-width:0}
+.vp-character-choice legend{font-weight:600;margin-bottom:10px}

@@ -1,0 +1,118 @@
+{
+  "id": "film-anbil-avan-v1",
+  "version": 1,
+  "rendererVersion": "scene-film-v1",
+  "renderProfile": "layered-2d-v1",
+  "sceneDesign": "anbil-avan",
+  "kind": "page",
+  "sceneFrame": "/assets/video-scenes/anbil-avan-v1/frame.html",
+  "output": {
+    "width": 720,
+    "height": 1280,
+    "fps": 25,
+    "frames": 876,
+    "duration": 35.04
+  },
+  "scenes": [
+    {
+      "id": "opening",
+      "name": "Opening",
+      "start": 0,
+      "end": 68,
+      "reviewFrame": 48,
+      "layers": []
+    },
+    {
+      "id": "celebration",
+      "name": "Celebration of Love",
+      "start": 68,
+      "end": 152,
+      "reviewFrame": 132,
+      "layers": []
+    },
+    {
+      "id": "meetBride",
+      "name": "Meet our Bride",
+      "start": 152,
+      "end": 236,
+      "reviewFrame": 216,
+      "layers": []
+    },
+    {
+      "id": "bride",
+      "name": "Bride",
+      "start": 236,
+      "end": 303,
+      "reviewFrame": 283,
+      "layers": []
+    },
+    {
+      "id": "meetGroom",
+      "name": "Meet our Groom",
+      "start": 303,
+      "end": 387,
+      "reviewFrame": 367,
+      "layers": []
+    },
+    {
+      "id": "groom",
+      "name": "Groom",
+      "start": 387,
+      "end": 454,
+      "reviewFrame": 434,
+      "layers": []
+    },
+    {
+      "id": "wedding",
+      "name": "Wedding",
+      "start": 454,
+      "end": 606,
+      "reviewFrame": 586,
+      "layers": []
+    },
+    {
+      "id": "reception",
+      "name": "Reception",
+      "start": 606,
+      "end": 758,
+      "reviewFrame": 738,
+      "layers": []
+    },
+    {
+      "id": "invitation",
+      "name": "Invitation",
+      "start": 758,
+      "end": 876,
+      "reviewFrame": 856,
+      "layers": []
+    }
+  ],
+  "assets": {
+    "sceneBundle": {
+      "path": "/assets/video-masters/film-anbil-avan-v1/asset-index.json",
+      "sha256": "ce57f9be7d3448438b0762554145519aae77a5a5ee580092e8821ed531d87869"
+    }
+  },
+  "source": {
+    "approvedVideoSha256": "68d5a5a23acb15b85459357fabf6769c77211f67629f7f8e5fb2e81a663fd173",
+    "audioSha256": "2b44bcb4bde2c8355fc0ac116905b80f36f35934caa633fa50a241b2cb33ffc3"
+  },
+  "release": {
+    "approved": true,
+    "rendererVersion": "scene-film-v1",
+    "cloudVerified": true,
+    "proofs": {
+      "default": "2666ab39c0e60e4a76be8da24757fdfa170f9a93411bb8a67c476c4b6b3d1853",
+      "personalized": "1a0853350fa2707bf9a11aa44cbcba991ff0ce3dadf84e6b8314366ea906b167"
+    }
+  },
+  "catalog": {
+    "poster": "../../catalog-previews/anbil-avan-v1/poster-640.webp",
+    "posters": {
+      "320": "../../catalog-previews/anbil-avan-v1/poster-320.webp",
+      "640": "../../catalog-previews/anbil-avan-v1/poster-640.webp",
+      "960": "../../catalog-previews/anbil-avan-v1/poster-960.webp"
+    },
+    "preview": "../../catalog-previews/anbil-avan-v1/preview.mp4"
+  }
+}

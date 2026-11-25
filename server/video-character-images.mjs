@@ -23,3 +23,41 @@ export async function alignCharacter(bytes,reference,{removeBackground=prepareVi
  const result=await characterBounds(output);if(result.width!==720||result.height!==1280||Math.abs(result.box.top+result.box.height-b.top-b.height)>2)throw Error('Character alignment could not be verified.');
  return {bytes:output,alignment:{source:source.box,target:b,placed:result.box,width:720,height:1280}};
 }
+// Character-set profiles: a rejected generation is a quality failure (retried with a
+// fresh bounded attempt), not a transfer failure.
+const qualityError=message=>Object.assign(Error(message),{code:'CHARACTER_QUALITY'});
+export const toPng=bytes=>sharp(bytes,{limitInputPixels:16000000}).rotate().png().toBuffer();
+// Private browser derivatives keep the exact canvas aspect ratio. Full-resolution
+// prepared PNGs remain the immutable inputs for the exported film.
+export async function characterPreview(bytes){
+ const {width,height}=await sharp(bytes,{limitInputPixels:16000000}).metadata();
+ const gcd=(a,b)=>b?gcd(b,a%b):a,g=gcd(width,height),w=width/g,h=height/g,k=Math.max(1,Math.min(g,Math.floor(Math.min(720/w,1280/h))));
+ return sharp(bytes,{limitInputPixels:16000000}).resize(w*k,h*k).webp({quality:85,alphaQuality:100}).toBuffer();
+}
+/** Alpha-mask agreement (intersection over union) at a small common resolution. */
+export async function silhouetteAgreement(a,b,{width=96,height=120}={}){
+ const mask=async bytes=>(await sharp(bytes,{limitInputPixels:16000000}).ensureAlpha().extractChannel(3).resize(width,height,{fit:'fill'}).raw().toBuffer());
+ const [x,y]=await Promise.all([mask(a),mask(b)]);let inter=0,union=0;
+ for(let i=0;i<x.length;i++){const p=x[i]>32,q=y[i]>32;if(p&&q)inter++;if(p||q)union++;}
+ return union?inter/union:0;
+}
+/** Place a generated pose onto the exact approved canvas: same size, footprint and baseline. */
+export async function alignToReference(bytes,reference,{minSilhouette=.6}={}){
+ const source=await characterBounds(bytes),target=await characterBounds(reference);
+ if(source.clear<.04||source.solid<.02||source.box.width<40||source.box.height<60)throw qualityError('The character did not have a usable transparent outline.');
+ const b=target.box,s=source.box,scale=Math.min(b.width/s.width,b.height/s.height),width=Math.max(1,Math.round(s.width*scale)),height=Math.max(1,Math.round(s.height*scale));
+ const cut=await sharp(bytes,{limitInputPixels:16000000}).ensureAlpha().extract(s).resize(width,height,{kernel:'lanczos3'}).png().toBuffer();
+ const left=Math.round(b.left+(b.width-width)/2),top=b.top+b.height-height;
+ const output=await sharp({create:{width:target.width,height:target.height,channels:4,background:{r:0,g:0,b:0,alpha:0}}}).composite([{input:cut,left,top}]).png().toBuffer();
+ const silhouette=await silhouetteAgreement(output,reference);
+ if(silhouette<minSilhouette)throw qualityError('The character moved away from the approved pose.');
+ return {bytes:output,alignment:{source:s,target:b,placed:{left,top,width,height},width:target.width,height:target.height,silhouette:Math.round(silhouette*10000)/10000}};
+}
+/** Identity references are generation inputs only: decodable, bounded, PNG. */
+export async function normalizeIdentity(bytes){
+ const meta=await sharp(bytes,{limitInputPixels:16000000}).metadata();
+ if(!meta.width||!meta.height||meta.width<128||meta.height<128)throw qualityError('The character reference was not usable.');
+ const output=await sharp(bytes,{limitInputPixels:16000000}).rotate().resize(1024,1536,{fit:'inside',withoutEnlargement:true}).png().toBuffer();
+ const info=await sharp(output).metadata();
+ return {bytes:output,alignment:{width:info.width,height:info.height}};
+}

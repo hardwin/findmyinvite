@@ -43,6 +43,10 @@ export async function renderTemplateShareImage(entry,poster){
 export async function templateShareImage(entry,origin){
  const key=origin+':'+entry.revision,hit=images.get(key);if(hit&&hit.until>Date.now())return hit.promise;
  const promise=(async()=>{
+  // Versioned catalog posters ship with this deployment, even before promotion.
+  const local=entry.poster.startsWith('/assets/catalog-previews/')&&!entry.poster.includes('..')
+   ?await readFile(join(process.cwd(),'public',entry.poster)).catch(()=>null):null;
+  if(local){const task=renderQueue.then(()=>renderTemplateShareImage(entry,local));renderQueue=task.catch(()=>{});return task;}
   const response=await fetch(origin+entry.poster,{redirect:'error',signal:AbortSignal.timeout(10000)});
   if(!/^image\/(jpeg|png|webp|avif)(?:;|$)/i.test(response.headers.get('content-type')||''))throw new HttpError(503,'Template artwork unavailable.');
   const poster=await readPublicBytes(response,8000000);

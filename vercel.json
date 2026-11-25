@@ -4,7 +4,7 @@
   "outputDirectory": "dist",
   "functions": {
     "api/template-share.mjs": {
-      "includeFiles": "{dist/index.html,public/assets/fonts/discovery/montserrat-static-{400,700}.woff2,public/assets/fonts/share/noto-sans-rupee-*.ttf,public/assets/findmyinvite-logo-transparent.png,node_modules/@sparticuz/chromium/bin/**}",
+      "includeFiles": "{dist/index.html,public/assets/{video-masters/*/manifest*.json,catalog-previews/*/*.webp,fonts/{discovery/*,share/*},findmyinvite-logo-transparent.png},node_modules/@sparticuz/chromium/bin/**}",
       "maxDuration": 60,
       "memory": 2048
     },
@@ -62,12 +62,12 @@
     "api/video-personalise.mjs": {
       "maxDuration": 300,
       "memory": 1024,
-      "includeFiles": "{public/assets/video-masters/*/manifest*.json,public/assets/video-scenes/v1/editor/{details*,common}.js,public/assets/music-library/*}"
+      "includeFiles": "{public/assets/video-masters/*/manifest*.json,public/assets/video-scenes/v1/editor/{details*,common}.js,public/assets/video-scenes/anbil-avan-v1/content.js,public/assets/music-library/*}"
     },
     "api/video-characters.mjs": {
       "maxDuration": 300,
       "memory": 1024,
-      "includeFiles": "public/assets/video-masters/temple-v1/{manifest*.json,groom.png,bride.png,closing.png,style-v3/{groom,bride,closing}.png}"
+      "includeFiles": "{public/assets/video-masters/{temple-v1/{manifest*.json,*.png,style-v3/*.png},film-anbil-avan-v1/*.json},public/assets/video-scenes/anbil-avan-v1/{character-poses.json,assets/*_{cutout,print}-*.webp}}"
     }
   },
   "crons": [
@@ -119,7 +119,12 @@
     },
     {
       "source": "/templates",
-      "has": [{"type": "query", "key": "product"}],
+      "has": [
+        {
+          "type": "query",
+          "key": "product"
+        }
+      ],
       "destination": "/api/template-share"
     },
     {

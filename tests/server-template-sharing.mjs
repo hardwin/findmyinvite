@@ -59,10 +59,13 @@ test('generated preview is a small JPEG with the recommended landscape dimension
 
 test('public HTML/image handlers work for crawlers and HEAD without session credentials',async()=>{
  const originalFetch=global.fetch;let port=52701;
+ const keys=['VIDEO_PERSONALISE_ENABLED','SUPABASE_URL','SUPABASE_SERVICE_ROLE_KEY'],saved=Object.fromEntries(keys.map(k=>[k,process.env[k]]));
+ Object.assign(process.env,{VIDEO_PERSONALISE_ENABLED:'1',SUPABASE_URL:'https://database.test',SUPABASE_SERVICE_ROLE_KEY:'TEST-SERVICE-ONLY'});
  global.fetch=async(url,options)=>{
+  const parsed=new URL(url);
+  if(parsed.hostname==='database.test'){assert.equal(options.headers.Authorization,'Bearer TEST-SERVICE-ONLY');return Response.json([]);}
   assert.ok(!options?.headers?.authorization&&!options?.headers?.cookie);
-  const parsed=new URL(url);assert.equal(parsed.hostname,'127.0.0.1');
-  if(parsed.pathname==='/api/video-personalise')return Response.json({templates:[row]});
+  assert.equal(parsed.hostname,'127.0.0.1');
   if(parsed.pathname===row.poster)return new Response(await readFile(new URL('../public'+row.poster,import.meta.url)),{headers:{'Content-Type':'image/jpeg'}});
   throw Error('Unexpected fetch: '+url);
  };
@@ -79,7 +82,7 @@ test('public HTML/image handlers work for crawlers and HEAD without session cred
   const head=await request('/api/template-share?product=wedding-bells-v1&kind=video','HEAD');assert.equal(head.statusCode,200);assert.equal(head.body,undefined);
   const missing=await request('/api/template-share?product=missing-video&kind=video');assert.equal(missing.statusCode,404);assert.equal(missing.headers['Cache-Control'],'no-store');
   const denied=await request('/api/template-share?product=wedding-bells-v1&kind=video','POST');assert.equal(denied.statusCode,405);
- }finally{global.fetch=originalFetch;}
+ }finally{global.fetch=originalFetch;for(const k of keys)if(saved[k]===undefined)delete process.env[k];else process.env[k]=saved[k];}
 });
 
 test('template routing precedes the generic brand crawler rule and bundles renderer assets',async()=>{
@@ -89,8 +92,8 @@ test('template routing precedes the generic brand crawler rule and bundles rende
  assert.ok(page>=0&&page<generic);assert.equal(config.rewrites[page].destination,'/api/template-share');
  assert.ok(config.rewrites.some(rule=>rule.source==='/template-share-images/:kind/:product/:revision.jpg'));
  assert.match(config.functions['api/template-share.mjs'].includeFiles,/dist\/index.html/);
- assert.match(config.functions['api/template-share.mjs'].includeFiles,/montserrat-static-/);
- assert.match(config.functions['api/template-share.mjs'].includeFiles,/noto-sans-rupee-\*\.ttf/);
+ assert.ok(config.functions['api/template-share.mjs'].includeFiles.includes('fonts/{discovery/*,share/*}'));
+ assert.ok(config.functions['api/template-share.mjs'].includeFiles.includes('video-masters/*/manifest*.json'));
  assert.equal(templateShareImagePath('/templates?product=wedding-bells-v1&kind=video'),'/template-share-images/video/wedding-bells-v1/card-v1.jpg');
 });
 

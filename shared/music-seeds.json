@@ -64,5 +64,17 @@
     "status": "ready",
     "archived": false,
     "revision": 0
+  },
+  {
+    "id": "anbil-avan-original",
+    "title": "Anbil Avan · Original",
+    "mood": "Wedding film",
+    "duration": 35.04,
+    "asset": "/assets/music-library/anbil-avan-original.m4a",
+    "license": "Owner-approved film soundtrack",
+    "credit": "Original soundtrack of the owner-approved Anbil Avan film, pre-mixed to its 35.04 second timeline.",
+    "status": "ready",
+    "archived": true,
+    "revision": 0
   }
 ]

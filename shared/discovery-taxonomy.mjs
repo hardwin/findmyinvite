@@ -72,6 +72,7 @@ export const videoDiscoveryTaxonomy={
  'film-karaikudi-v1':entry('hindu','courtyard',['sage','ivory']),
  'film-hopon-v1':entry('hindu','courtyard',['gold','blush']),
  'film-were-next-v1':entry('','cafe',['coral','ivory','navy'],['modern','food','toon','tamil']),
+ 'film-anbil-avan-v1':entry('','garden',['blush','sage','ivory'],['modern','toon','floral'],['wedding','reception']),
  'film-oonjal-v1':entry('hindu','courtyard',['sage','gold'],['toon']),
  'film-rajakumari-v1':entry('','palace',['blush','gold'],[],['birthday']),
  'film-rajakumaran-v1':entry('','palace',['ivory','gold'],[],['birthday']),

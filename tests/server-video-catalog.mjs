@@ -30,12 +30,14 @@ test('scene downloads require their own worker while the existing Temple worker 
  assert.doesNotThrow(()=>requireVideoRelease(temple,{...env,VIDEO_TEMPLE_V3_SNAPSHOT_ID:'qualified-temple-v3'}));
  assert.throws(()=>normalizeVideoContent({...VIDEO_CATALOG[0].example,title:'<img src=x onerror=alert(1)>'},{templateId:scene.id}),/Check/);
 });
-test('all 39 additional designs have unique scene forms; Tamil 3D remains excluded',async()=>{
- assert.equal(VIDEO_CATALOG.length,39);assert.equal(new Set(VIDEO_CATALOG.map(d=>d.id)).size,39);assert.equal(VIDEO_CATALOG.some(d=>d.design==='thoon'),false);
+test('all 40 additional designs have unique scene forms; Tamil 3D remains excluded',async()=>{
+ assert.equal(VIDEO_CATALOG.length,40);assert.equal(new Set(VIDEO_CATALOG.map(d=>d.id)).size,40);assert.equal(VIDEO_CATALOG.some(d=>d.design==='thoon'),false);
  for(const d of VIDEO_CATALOG){assert.equal(videoDefinition(d.id),d);const schema=await sceneSchema(d.id),questions=d.form.steps.flatMap(s=>s.questions),keys=questions.map(q=>q.path);assert.equal(new Set(keys).size,keys.length,d.id+' repeats an editable field');
   const expected=schema.FIELD_KEYS.filter(k=>!/^photo.*(?:Id|Box)$/.test(k)&&!['music','songId','songName','songStart','songSeconds','songOk'].includes(k));assert.deepEqual([...keys].sort(),[...expected].sort(),d.id+' loses a field');
   for(const s of d.form.steps.filter(s=>!['music','review'].includes(s.id)))assert.ok(s.scene,d.id+' has a scene-independent step');
-  assert.deepEqual(d.form.steps.slice(-2).map(s=>s.id),['music','review']);
+  // Designs with a locked approved soundtrack omit the music step; others keep it.
+  if(d.lockedMusic){assert.equal(d.form.steps.at(-1).id,'review');assert.equal(d.form.steps.some(s=>s.id==='music'),false,d.id);}
+  else assert.deepEqual(d.form.steps.slice(-2).map(s=>s.id),['music','review']);
  }
 });
 for(const d of VIDEO_CATALOG)test(d.name+': valid personalized fields, timeline and release isolation',async()=>{

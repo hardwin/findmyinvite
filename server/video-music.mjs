@@ -3,6 +3,7 @@ import {readFile} from 'node:fs/promises';
 import {musicTrack,musicTracks,publicTrack} from './website-music.mjs';
 import {list} from './owner/store.mjs';
 import {canonicalMusicId,oonjalRecordingId} from '../shared/music-selection.mjs';
+import {ANBIL_AVAN_ID,ANBIL_AVAN_MUSIC} from '../shared/anbil-avan-video.mjs';
 import {hash} from './video-personalise-store.mjs';
 import {HttpError} from './core.mjs';
 
@@ -13,6 +14,8 @@ export async function videoMusicCatalog(){
 
 export function videoDefaultMusic(id,catalog,masterVersion){
  if(id==='film-oonjal-v1'&&masterVersion===3)return {mode:'library',id:oonjalRecordingId};
+ // Locked to the approved pre-mixed excerpt; CMS music assignments do not apply.
+ if(id===ANBIL_AVAN_ID)return {...ANBIL_AVAN_MUSIC};
  const assignment=catalog.assignments.find(a=>a.id===id);
  const trackId=assignment?assignment.trackId:id==='wedding-bells-v1'?'wedding-bells-original':id==='film-were-next-v1'?'were-next-original':undefined;
  const track=catalog.tracks.find(t=>t.id===trackId);

@@ -40,9 +40,10 @@ export async function serve(temp,photos){
  }catch{res.writeHead(404);res.end();}});
  await new Promise(r=>server.listen(0,'127.0.0.1',r));return {server,origin:`http://127.0.0.1:${server.address().port}`};
 }
-export async function renderPersonalizedVideo({master,content,photos={},audioFile,audioCredit,output,reviewFrames,onlyLayer,onProgress=()=>{},requireRelease=true,frameTransport='png'}){
+export async function renderPersonalizedVideo({master,content,photos={},audioFile,audioCredit,output,reviewFrames,onlyLayer,onProgress=()=>{},requireRelease=true,frameTransport='png',cache}){
  if(master.rendererVersion==='tracked-film-v1'){const {renderTrackedVideo}=await import('./render-tracked-video.mjs');return renderTrackedVideo({master,content,photos,audioFile,output,reviewFrames,onProgress,requireRelease});}
- if(master.rendererVersion==='scene-film-v1'){const {renderSceneVideo}=await import('./render-scene-video.mjs');return renderSceneVideo({master,content,photos,audioFile,audioCredit,output,reviewFrames,onProgress,requireRelease});}
+ // `cache` ({owner,store}) is only consumed by the layered 2D profile's scene chunks.
+ if(master.rendererVersion==='scene-film-v1'){const {renderSceneVideo}=await import('./render-scene-video.mjs');return renderSceneVideo({master,content,photos,audioFile,audioCredit,output,reviewFrames,onProgress,requireRelease,cache});}
  assertMaster(master,{released:requireRelease});content=normalizeVideoContent(content,{complete:true,templateId:master.id});
  for(const asset of Object.values(master.assets)){const file=inside(join(root,'public'),asset.path.slice(1));const checksum=digest(await readFile(file));if(asset.sha256!==checksum)throw Error('Master asset checksum mismatch: '+asset.path);}
  const temp=await mkdtemp(join(tmpdir(),'fmi-video-'));let browser,server,encoder;

@@ -19,6 +19,8 @@ try{
  await update({status:'running',progress:1});const photos={};let audioFile;
  for(const media of job.media){const cutout=media.mode==='cutout',bytes=await store.bytes(cutout?media.cutoutKey:media.key);if(hash(bytes)!==(cutout?media.cutoutSha256:media.sha256))throw Error('Media checksum mismatch.');const file=join(temp,media.id+(cutout?'.png':media.kind==='audio'?'.audio':'.image'));await writeFile(file,bytes);if(media.slot)photos[media.slot]={file,mode:media.mode};else audioFile=file;}
  const output=join(temp,'invitation.mp4');let lastProgress=-1;
- const proof=await renderPersonalizedVideo({master:job.master,content:job.content,photos,audioFile,audioCredit:job.media.find(m=>m.library)?.credit,output,onProgress:async progress=>{if(progress>=lastProgress+5){lastProgress=progress;await update({status:'running',progress});}}});
+ // Owner-scoped private scene-chunk reuse exists only for the layered 2D profile.
+ const cache=job.master.renderProfile==='layered-2d-v1'?{owner:job.owner,store,worker:true}:undefined;
+ const proof=await renderPersonalizedVideo({master:job.master,content:job.content,photos,audioFile,audioCredit:job.media.find(m=>m.library)?.credit,output,cache,onProgress:async progress=>{if(progress>=lastProgress+5){lastProgress=progress;await update({status:'running',progress});}}});
  const resultKey='results/'+job.owner+'/'+id+'/'+job.attempt+'.mp4';await store.putBytes(resultKey,await readFile(output),'video/mp4');await update({status:'ready',progress:100,resultKey,...proof});
 }catch(e){console.error('Video render failed:',e.message);await update({status:'failed',errorCode:e.code,errorField:e.field,diagnostic:e.message}).catch(()=>{});process.exitCode=1;}finally{await rm(temp,{recursive:true,force:true});if(store.local)await rm(process.argv[2],{force:true});}

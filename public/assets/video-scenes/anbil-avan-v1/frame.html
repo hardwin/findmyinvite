@@ -1,0 +1,15 @@
+<!doctype html><html lang="en"><head><link rel="icon" href="data:,"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Anbil Avan invitation</title><link rel="stylesheet" href="fonts.css"><style>
+html,body{margin:0;background:#111;color:#eee;font:14px 'Segoe UI',sans-serif}
+#viewport{position:relative;overflow:hidden;margin:8px auto}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden;background:#000;transform-origin:0 0}
+.scene{position:absolute;left:0;top:0;width:1080px;height:1920px;overflow:hidden;display:none;transform-origin:50% 50%;isolation:isolate}
+.plane{position:absolute;left:0;top:0;transform-origin:50% 50%;display:block;will-change:transform}
+.missing{position:absolute;left:0;top:0;width:300px;height:300px;border:4px dashed #ff4d4d;color:#ff8080;font:600 22px 'Segoe UI';display:flex;align-items:center;justify-content:center;text-align:center;box-sizing:border-box;transform-origin:50% 50%}
+.tplane{position:absolute;left:0;top:0;transform-origin:50% 50%;white-space:nowrap;line-height:0.98;font-family:'V4Display'}
+.tline{display:block}
+.g{display:inline-block;white-space:pre;opacity:0}
+#ui{display:flex;gap:10px;align-items:center;padding:8px 12px;background:#1d1a17}
+#ui input{flex:1}
+body.render #ui{display:none} body.render #viewport{margin:0}
+
+html,body{margin:0;width:720px;height:1280px;overflow:hidden;background:#000}#viewport{margin:0;width:720px;height:1280px}#stage{transform:scale(0.6666666666666666)}#clock{display:none}</style></head><body><video id="clock" muted playsinline preload="auto"></video><div id="viewport"><div id="stage"></div></div><script src="engine.js"></script><script type="module" src="film.js"></script></body></html>

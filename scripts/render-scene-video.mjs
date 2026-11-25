@@ -21,7 +21,10 @@ async function closeSceneBrowser(browser){
  let timer;
  try{await Promise.race([browser.close().catch(()=>{}),new Promise(resolve=>{timer=setTimeout(()=>{const child=browser.process();try{if(process.platform==='linux'&&child?.pid)process.kill(-child.pid,'SIGKILL');else child?.kill('SIGKILL');}catch{}resolve();},5000);})]);}finally{clearTimeout(timer);}
 }
-export async function renderSceneVideo({master,content,photos={},audioFile,audioCredit,output,reviewFrames,onProgress=()=>{},requireRelease=true,browserBatchFrames}){
+export async function renderSceneVideo({master,content,photos={},audioFile,audioCredit,output,reviewFrames,onProgress=()=>{},requireRelease=true,browserBatchFrames,cache}){
+ // Specialised scene-film profile: same lifecycle/job contract, separate renderer.
+ // Loaded lazily so existing scene films never import it.
+ if(master?.renderProfile==='layered-2d-v1'){const {renderLayeredVideo}=await import('./render-layered-video.mjs');return renderLayeredVideo({master,content,photos,audioFile,output,reviewFrames,onProgress,requireRelease,cache});}
  assertMaster(master,{released:requireRelease});
  content=normalizeVideoContent(content,{complete:true,templateId:master.id,masterVersion:master.version});
  master=await prepareSceneMaster(master,content);
