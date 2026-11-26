@@ -1,4 +1,4 @@
-import {bindMazhavillayeSoundtrack} from '../shared/mazhavillaye-soundtrack.mjs';
+import {ANBIL_AVAN_ID,ANBIL_AVAN_DEFAULT_ART,ANBIL_AVAN_PREVIEW} from '../shared/anbil-avan-video.mjs';
 import {isVersionedVideo,videoMasterVersion} from '../shared/video-master-version.mjs';
 import {prepareSceneMaster} from './video-scene-details.mjs';
 import {videoMusicCatalog,videoDefaultMusic,pinVideoLibraryMusic} from './video-music.mjs';
@@ -8,7 +8,24 @@ import {randomUUID,randomBytes,timingSafeEqual} from 'node:crypto';
 import {DEFAULT_VIDEO_ID,videoDefinition,MUSIC,normalizeVideoContent,assertMaster,RENDERER_VERSION} from '../shared/video-personalization.mjs';
 import {videoStore,hash,VIDEO_TTL} from './video-personalise-store.mjs';
 import {HttpError} from './core.mjs';
-export async function loadVideoMaster(id=DEFAULT_VIDEO_ID,masterVersion){try{videoDefinition(id);}catch{throw new HttpError(404,'This video template is unavailable.');}return bindMazhavillayeSoundtrack(assertMaster(JSON.parse(await readFile(new URL('../public/assets/video-masters/'+id+(isVersionedVideo(id)&&masterVersion!==undefined?'/manifest-v'+videoMasterVersion(id,masterVersion)+'.json':'/manifest.json'),import.meta.url),'utf8'))));}
+export async function loadVideoMaster(id=DEFAULT_VIDEO_ID,masterVersion){
+ try{videoDefinition(id);}catch{throw new HttpError(404,'This video template is unavailable.');}
+ const filename=isVersionedVideo(id)&&masterVersion!==undefined?'manifest-v'+videoMasterVersion(id,masterVersion)+'.json':'manifest.json';
+ const master=assertMaster(JSON.parse(await readFile(new URL('../public/assets/video-masters/'+id+'/'+filename,import.meta.url),'utf8')));
+ if(id!==ANBIL_AVAN_ID)return master;
+ return {...master,defaultCharacterArt:ANBIL_AVAN_DEFAULT_ART,catalog:{...master.catalog,preview:'../..'+ANBIL_AVAN_PREVIEW.slice('/assets'.length)}};
+}
+
+// The existing worker reads prepared layers by slot and verifies each file hash.
+// Pin the studio artwork only when the customer is using the template characters.
+async function pinDefaultCharacter(slot,art,store){
+ const bytes=await readFile(new URL('../public'+art.path,import.meta.url));
+ if(hash(bytes)!==art.sha256)throw Error('The studio character checksum does not match.');
+ const key='library/character-art/'+art.sha256+'.webp';
+ try{await store.putBytes(key,bytes,'image/webp');}
+ catch(error){const existing=await store.bytes(key).catch(()=>null);if(!existing||hash(existing)!==art.sha256)throw error;}
+ return {id:'studio-'+art.sha256,kind:'image',mode:'prepared',slot,key,sha256:art.sha256};
+}
 export async function videoConfig(env=process.env,id=DEFAULT_VIDEO_ID,catalog,masterVersion){const master=await loadVideoMaster(id,masterVersion),definition=videoDefinition(id,master.version);let ready=false;try{requireVideoRelease(master,env);ready=true;}catch{}const library=catalog||await videoMusicCatalog();return {master,...definition,defaults:{...definition.defaults,music:videoDefaultMusic(id,library,master.version)},music:MUSIC,musicTracks:library.tracks,ready,localUploads:env.VIDEO_LOCAL_STORE==='1'&&!env.VERCEL};}
 export function requireVideoRelease(master,env){try{assertMaster(master,{released:true});}catch{throw new HttpError(503,'This video template is still being prepared.');}if(env.VIDEO_PERSONALISE_ENABLED!=='1')throw new HttpError(503,'This video template is still being prepared.');if(env.VERCEL&&(!(master.id==='film-anbil-avan-v1'?env.VIDEO_ANBIL_AVAN_SNAPSHOT_ID:master.id==='film-were-next-v1'?env.VIDEO_WERE_NEXT_SNAPSHOT_ID:master.id==='film-oonjal-v1'&&master.version===3?env.VIDEO_OONJAL_SNAPSHOT_ID:master.id==='temple-v1'&&master.version===3?env.VIDEO_TEMPLE_V3_SNAPSHOT_ID:master.id==='temple-v1'&&master.version===2?env.VIDEO_TEMPLE_SNAPSHOT_ID:master.rendererVersion==='tracked-film-v1'?env.VIDEO_TRACKED_SNAPSHOT_ID:master.rendererVersion==='scene-film-v1'?env.VIDEO_SCENE_SNAPSHOT_ID:env.VIDEO_RENDER_SNAPSHOT_ID)||!env.BLOB_READ_WRITE_TOKEN))throw new HttpError(503,'The private video renderer is not configured yet.');}
 export function ownedRecord(record,owner,now=Date.now()){if(!record||record.owner!==owner)throw new HttpError(404,'File or render not found.');if(Date.parse(record.expiresAt)<=now)throw new HttpError(410,'This file has expired. Please upload or render it again.');return record;}
@@ -25,6 +42,9 @@ export function videoService({store=videoStore(),env=process.env,now=()=>Date.no
   const profile=videoDefinition(master.id,master.version).characterProfile;
   for(const [slot,p] of Object.entries(content.photos)){const m=await media(owner,p.id);if(m.kind!=='image'||m.status!=='ready'||p.mode==='cutout'&&!m.cutoutKey||p.mode==='prepared'&&((profile?m.characterProfile!==profile.id||m.characterMasterVersion!==master.version||!/^[a-f0-9-]{36}$/.test(m.characterSetId||''):!m.characterJobId)||m.characterSlot!==slot||m.invitationId!==invitationId))throw new HttpError(400,'Prepare and confirm the '+slot+' photo.');refs.push({...m,slot,mode:p.mode});}
   if(profile&&new Set(refs.map(r=>r.characterSetId)).size>1)throw new HttpError(409,'Use every character from one approved set.');
+  for(const [slot,art] of Object.entries(master.defaultCharacterArt||{})){
+   if(!content.photos[slot])refs.push(await pinDefaultCharacter(slot,art,store));
+  }
   if(content.music.mode==='library')refs.push(await libraryMusic(content.music.id,store));
   if(content.music.mode==='upload'){const m=await media(owner,content.music.id);if(m.kind!=='audio'||m.status!=='ready')throw new HttpError(400,'Music is not ready.');refs.push(m);}
   const id=renderDigest(owner,master,content,refs),existing=await read('jobs/'+id+'.json');

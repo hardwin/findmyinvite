@@ -1,6 +1,6 @@
 # Layered invitation films
 
-Mazhavillaye (stable ID `film-anbil-avan-v1`) uses a deterministic layered animation render for each personalized export. A baked baseplate cannot preserve text travelling between foreground objects and personalized characters. The public catalog uses a pre-rendered MP4 and responsive posters; it does not run this compositor until the editor opens.
+Anbil Avan (stable ID `film-anbil-avan-v1`) uses a deterministic layered animation render for each personalized export. A baked baseplate cannot preserve text travelling between foreground objects and personalized characters. The public catalog uses a pre-rendered MP4 and responsive posters; it does not run this compositor until the editor opens.
 
 ## Immutable inputs
 
@@ -20,7 +20,7 @@ Each prepared PNG has a small private WebP preview with its exact aspect ratio. 
 
 Rate-limited submissions wait using the lease without spending an attempt. The bounded wait is measured from the current queue window, not the original asset creation time. An explicit retry starts a new window; it never regenerates completed assets.
 
-Text-only edits reuse approved character images and never call an image model. Export verifies the latest approved set, private image bindings and current source-photo references. Paid access is checked server-side. The Mazhavillaye price is ₹299 plus 18% GST: ₹352.82.
+Text-only edits reuse approved character images and never call an image model. Export verifies the latest approved set, private image bindings and current source-photo references. Paid access is checked server-side. The Anbil Avan price is ₹299 plus 18% GST: ₹352.82.
 
 Check measured text readability before checkout and before rendering. Evaluate the final font size after fitting instead of a relative scale threshold: large authored calligraphy can fit a long name comfortably even at a small scale. Keep the approved layout, fitting and typography unchanged.
 
@@ -51,12 +51,18 @@ The staged details/share endpoint resolves this deployment's video catalog direc
 
 Desktop/mobile viewport tests are browser automation, not physical-device coverage. The available automated Chromium cannot decode H.264/AAC; file decoding, audio identity and CDN byte ranges were checked independently. Native Edge playback and physical iPhone/Safari/Instagram playback were not verified for this release.
 
-## Owner-selected name, soundtrack and price — 26 November 2026
+## Previous soundtrack release — 26 November 2026
 
 The owner named this design **Mazhavillaye** and selected the soundtrack from `https://www.instagram.com/p/DgIsjnJSmoF/`. The posted recording, cropped to the unchanged 35.04-second visual timeline and encoded as AAC-LC, is the library track `mazhavillaye-posted-v1`. Its asset SHA-256 is `0734a370ab770114f1a06fc5729e2d2c481456464dba590a19a098bb54bdff61`. This label identifies the posted recording, not a separately verified commercial song title.
 
-`shared/mazhavillaye-soundtrack.mjs` resolves this audio revision over the immutable version-one master. New jobs pin the resolved master and exact private audio bytes. Existing completed jobs keep their recorded inputs. The scene graph, version, asset index, prepared character sets, frame count, typography and motion remain unchanged, so the existing qualified renderer snapshot and visual chunk cache remain valid. The public preview uses a new filename for cache invalidation and copies the original video stream without re-encoding.
+That release resolved this audio revision over the immutable version-one master. New jobs pin the resolved master and exact private audio bytes. Existing completed jobs keep their recorded inputs. The scene graph, version, asset index, prepared character sets, frame count, typography and motion remain unchanged, so the existing qualified renderer snapshot and visual chunk cache remain valid. The public preview uses a new filename for cache invalidation and copies the original video stream without re-encoding.
 
 An actual personalized cloud export using the existing production snapshot passed: the video stream matches the preceding personalized export exactly, while its decoded audio matches both the updated public preview and music-library asset exactly. All 55 focused server/SQL regression checks and the production build passed. Browser form fixtures passed at 390 and 1280 pixels with the new ₹352.82 checkout. Physical iPhone/Instagram audio playback was not tested.
 
 New reservations use ₹299 + ₹53.82 GST. The migration preserves existing issued gateway quotes and historical payment records; it does not alter or cancel an in-progress gateway order.
+
+## Restored Anbil Avan soundtrack
+
+The catalog, details page and dedicated form use **Anbil Avan**. The catalog preview pairs the original 35.04-second mix with the revised Reception scene. New personalized exports pin `anbil-avan-original` and its audio hash from the version-one master. Both recordings remain available to jobs that pinned them. The price is ₹299 plus GST.
+
+Reception uses the approved illustration of the bride resting her hand on the groom’s shoulder. The editor, generator and default-artwork export resolve the same content-addressed layer. A customer’s approved character layers take precedence. The generation request puts each scene’s artwork first and supplies the matching identities in role order.

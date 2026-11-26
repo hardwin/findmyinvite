@@ -1,4 +1,3 @@
-import {MAZHAVILLAYE_SOUNDTRACK} from './mazhavillaye-soundtrack.mjs';
 // Anbil Avan: the owner-approved v8 layered 2D film. It stays hidden from the
 // public catalogue until its release evidence is qualified (see video-visibility).
 // Standalone on purpose: the catalogue, normaliser and version modules import it.
@@ -9,7 +8,7 @@ export const ANBIL_AVAN_DESIGN='anbil-avan';
 export const ANBIL_AVAN_VERSION=1;
 export const ANBIL_AVAN_RENDER_PROFILE='layered-2d-v1';
 export const ANBIL_AVAN_SCENE_FRAME='/assets/video-scenes/anbil-avan-v1/frame.html';
-export const ANBIL_AVAN_MUSIC_ID=MAZHAVILLAYE_SOUNDTRACK.id;
+export const ANBIL_AVAN_MUSIC_ID='anbil-avan-original';
 // The excerpt is already cropped, gain-matched and faded from the approved film.
 // Preview and export must play it once at unity gain: no second fade or loop.
 export const ANBIL_AVAN_MUSIC=freeze({mode:'library',id:ANBIL_AVAN_MUSIC_ID});
@@ -17,6 +16,12 @@ export const ANBIL_AVAN_OUTPUT=freeze({width:720,height:1280,fps:25,frames:876,d
 export const ANBIL_AVAN_CUTS=freeze([0,68,152,236,303,387,454,606,758,876]);
 export const ANBIL_AVAN_SCENES=freeze(['opening','celebration','meetBride','bride','meetGroom','groom','wedding','reception','invitation']);
 export const ANBIL_AVAN_FIELDS=freeze(['bride','groom','weddingDate','weddingTime','weddingVenue','receptionDate','receptionTime','receptionVenue']);
+// A released artwork update uses the renderer's existing prepared layer slot.
+export const ANBIL_AVAN_DEFAULT_ART=freeze({receptionCouple:{
+ path:'/assets/video-scenes/anbil-avan-v1/assets/reception-shoulder_cutout-211864fad1da.webp',
+ sha256:'211864fad1dab6c5e625f27539cf54d2c80d73c16e6f8639d167595ceaafaf16',width:1122,height:1402
+}});
+export const ANBIL_AVAN_PREVIEW='/assets/catalog-previews/anbil-avan-v1/preview-reception-shoulder-v1.mp4';
 // Dates are event-local ISO dates and times are HH:MM, never browser timestamps.
 export const ANBIL_AVAN_EXAMPLE=freeze({bride:'Priya',groom:'Arun',weddingDate:'2026-12-10',weddingTime:'08:00',weddingVenue:'Manipal',receptionDate:'2026-12-09',receptionTime:'18:00',receptionVenue:'Manipal'});
 
@@ -51,9 +56,9 @@ export const posesForIdentity=identity=>ANBIL_AVAN_CHARACTER_PROFILE.poses.filte
 
 const question=(path,label,maxLength,type='text',scene)=>({path,label,type,required:true,maxLength,...(scene?{scene}:{})});
 export const ANBIL_AVAN_DEFINITION=freeze({
- id:ANBIL_AVAN_ID,design:ANBIL_AVAN_DESIGN,name:'Mazhavillaye',collection:'INVITATION VIDEOS',
- description:'Your illustrated love story, with your names, wedding and reception.',filename:'mazhavillaye-invitation.mp4',
- form:{version:1,title:'Personalise Mazhavillaye',steps:[
+ id:ANBIL_AVAN_ID,design:ANBIL_AVAN_DESIGN,name:'Anbil Avan',collection:'INVITATION VIDEOS',
+ description:'Your illustrated love story, with your names, wedding and reception.',filename:'anbil-avan-invitation.mp4',
+ form:{version:1,title:'Personalise Anbil Avan',steps:[
   {id:'couple',title:'The couple',scene:'bride',questions:[question('bride','Bride’s name',32,'text','bride'),question('groom','Groom’s name',32,'text','groom')]},
   {id:'wedding',title:'Wedding',scene:'wedding',questions:[question('weddingDate','Wedding date',10,'date'),question('weddingTime','Wedding starts',5,'time'),question('weddingVenue','Wedding venue',60)]},
   {id:'reception',title:'Reception',scene:'reception',questions:[question('receptionDate','Reception date',10,'date'),question('receptionTime','Reception starts',5,'time'),question('receptionVenue','Reception venue',60)]},
@@ -67,7 +72,7 @@ export const ANBIL_AVAN_DEFINITION=freeze({
  // Nine server-prepared character layers; never raw customer uploads.
  photoSlots:ANBIL_AVAN_CHARACTER_PROFILE.poses.map(({slot,label,scene})=>({slot,label,scene,mode:'prepared'})),
  characterProfile:ANBIL_AVAN_CHARACTER_PROFILE,
- lockedMusic:ANBIL_AVAN_MUSIC,musicLabel:'Mazhavillaye · Instagram soundtrack',
+ lockedMusic:ANBIL_AVAN_MUSIC,musicLabel:'Original Anbil Avan soundtrack',
  duration:ANBIL_AVAN_OUTPUT.duration,kind:'page'
 });
 

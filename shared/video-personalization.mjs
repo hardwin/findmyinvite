@@ -110,7 +110,7 @@ export function assertMaster(m,{released=false}={}){
   // The layered 2D profile is bound to this approved film's exact timeline.
   if(m.renderProfile!==undefined&&m.id!==ANBIL_AVAN_ID)throw Error('Unsupported render profile.');
   const anbilAvan=isAnbilAvanMaster(m);
-  if(m.id===ANBIL_AVAN_ID&&!anbilAvan)throw Error('Unsupported Mazhavillaye master.');
+  if(m.id===ANBIL_AVAN_ID&&!anbilAvan)throw Error('Unsupported Anbil Avan master.');
   const designerPlate=m.id==='film-oonjal-v1'&&m.version===3&&m.sceneFrame===('/assets/video-scenes/oonjal-v3/'+(correctedOonjal?'frame-r2.html':'frame.html'))&&o?.frames===828;
   if(!definition||definition.design!==m.sceneDesign||(m.version!==1&&!designerPlate)||o?.width!==720||o.height!==1280||(!wereNext&&!anbilAvan&&o.fps!==24)||!Number.isSafeInteger(o.frames)||o.frames<24||o.frames>14400||Math.abs(o.duration-o.frames/o.fps)>0.00001)throw Error('Unsupported scene master.');
   if(!m.scenes?.length||m.scenes.some(s=>!Number.isInteger(s.start)||!Number.isInteger(s.end)||s.end<=s.start||s.end>o.frames))throw Error('Invalid scene timeline.');

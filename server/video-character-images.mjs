@@ -41,6 +41,15 @@ export async function silhouetteAgreement(a,b,{width=96,height=120}={}){
  for(let i=0;i<x.length;i++){const p=x[i]>32,q=y[i]>32;if(p&&q)inter++;if(p||q)union++;}
  return union?inter/union:0;
 }
+// In the approved Reception illustration the heads are separated above the raised
+// forearm. In the old over-the-shoulder pose this same window contains a head.
+// Check alpha on the aligned canvas so hair colour and skin tone do not affect it.
+export async function verifyReceptionSilhouette(bytes){
+ const mask=await sharp(bytes).ensureAlpha().extractChannel(3).resize(112,140,{fit:'fill'}).raw().toBuffer();
+ let clear=0,total=0;
+ for(let y=21;y<38;y++)for(let x=46;x<52;x++){if(mask[y*112+x]<48)clear++;total++;}
+ if(clear/total<.5)throw qualityError('The Reception couple must keep their heads apart above the raised arm.');
+}
 /** Place a generated pose onto the exact approved canvas: same size, footprint and baseline. */
 export async function alignToReference(bytes,reference,{minSilhouette=.6}={}){
  const source=await characterBounds(bytes),target=await characterBounds(reference);

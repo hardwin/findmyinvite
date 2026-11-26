@@ -45,6 +45,13 @@ export async function renderLayeredVideo({master,content,photos={},audioFile,out
  content=normalizeVideoContent(content,{complete:true,templateId:master.id,masterVersion:master.version});
  const indexBytes=await readFile(asset(master.assets.sceneBundle.path));if(digest(indexBytes)!==master.assets.sceneBundle.sha256)throw Error('Layered bundle checksum mismatch');
  const index=JSON.parse(indexBytes);for(const [path,sha]of Object.entries(index.files))if(digest(await readFile(asset(path)))!==sha)throw Error('Layered asset checksum mismatch: '+path);
+ photos={...photos};
+ for(const [slot,art] of Object.entries(master.defaultCharacterArt||{})){
+  if(photos[slot])continue;
+  const file=asset(art.path);
+  if(digest(await readFile(file))!==art.sha256)throw Error('Default character checksum mismatch');
+  photos[slot]={mode:'prepared',file};
+ }
  const photoHashes={};for(const [slot,p] of Object.entries(photos))photoHashes[slot]=digest(await readFile(p.file));
  const temp=await mkdtemp(join(tmpdir(),'fmi-layered-')),ff=process.env.FFMPEG_PATH||ffmpegStatic;
  if(warmScenes&&(!cache||!Array.isArray(warmScenes)||warmScenes.some(i=>!Number.isInteger(i)||!master.scenes[i])))throw Error('Invalid layered scene warmup');

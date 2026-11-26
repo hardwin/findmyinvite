@@ -1,3 +1,4 @@
+import {verifyReceptionSilhouette} from '../server/video-character-images.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile,readdir} from 'node:fs/promises';
@@ -11,20 +12,40 @@ import {validatePreparedCharacters,characterSetsEnabled,characterEnabled} from '
 import {alignToReference} from '../server/video-character-images.mjs';
 import {identityPrompt,posePrompt,characterSetInput,CHARACTER_SET_PROMPT_REVISION} from '../shared/anbil-avan-character-prompt.mjs';
 import {CHARACTER_PROMPT_REVISION,characterPrompt} from '../server/video-character-provider.mjs';
-import {ANBIL_AVAN_ID as templateId,ANBIL_AVAN_CHARACTER_PROFILE as profile,ANBIL_AVAN_POSE_SLOTS as slots} from '../shared/anbil-avan-video.mjs';
+import {ANBIL_AVAN_ID as templateId,ANBIL_AVAN_DEFAULT_ART,ANBIL_AVAN_CHARACTER_PROFILE as profile,ANBIL_AVAN_POSE_SLOTS as slots} from '../shared/anbil-avan-video.mjs';
 
 const inventory=JSON.parse(await readFile('public'+profile.inventory,'utf8'));
-const art=slot=>readFile('public'+inventory[slot].path);
+const art=slot=>readFile('public'+(ANBIL_AVAN_DEFAULT_ART[slot]||inventory[slot]).path);
 
 test('2D identity-first prompts are independent of the Temple 3D prompts and keep the photo print',()=>{
  assert.notEqual(CHARACTER_SET_PROMPT_REVISION,CHARACTER_PROMPT_REVISION);
  const identity=identityPrompt('bride','set-1'),couple=posePrompt(profile.poses.find(p=>p.slot==='heartCouple'),'a-1'),print=posePrompt(profile.poses.find(p=>p.slot==='groomPrint'));
  for(const prompt of [identity,couple,print]){assert.match(prompt,/modern painterly 2D illustration/);assert.match(prompt,/no 3D render, no CGI/);assert.match(prompt,/Identity comes first/);assert.match(prompt,/REAL transparent background/);assert.doesNotMatch(prompt,/3D animated movie look|large expressive head|cream silk/);}
  assert.notEqual(identity,characterPrompt('bride'));
- assert.match(couple,/Picture 1 is the approved illustrated identity reference of the bride[\s\S]*Picture 2[\s\S]*groom[\s\S]*EDIT PICTURE 3|EDIT PICTURE 3/);
+ assert.match(couple,/^EDIT PICTURE 1/);
+ assert.match(couple,/Picture 2 is the approved illustrated identity reference of the bride[\s\S]*Picture 3 is the approved illustrated identity reference of the groom/);
  assert.match(couple,/the woman is the bride and the man is the groom/);assert.match(couple,/Keep EVERYTHING else/);assert.match(couple,/Tracking reference a-1/);
- assert.match(print,/hanging photo print: keep the print's border\/frame/);assert.match(print,/EDIT PICTURE 2/);
+ assert.match(print,/hanging photo print: keep the print's border\/frame/);assert.match(print,/EDIT PICTURE 1/);
+ assert.match(posePrompt(profile.poses.find(p=>p.slot==='receptionCouple')),/hand rests on the near shoulder/);
  assert.deepEqual(characterSetInput('p',['a','b']),{prompt:'p',input_images:['a','b'],aspect_ratio:'2:3',quality:'high',complexity:'low',output_format:'png',background:'transparent',number_of_images:1});
+});
+
+test('all nine generation targets match the personalized layers in the public scene graph',async()=>{
+ const base=profile.inventory.slice(0,profile.inventory.lastIndexOf('/')+1);
+ const scenes=JSON.parse(await readFile('public'+base+'scenes.json','utf8'));
+ for(const [i,pose] of profile.poses.entries()){
+  const item=inventory[pose.slot],layer=scenes[i].layers.filter(l=>l.characterSlot===pose.slot);
+  assert.equal(layer.length,1,pose.slot);
+  assert.equal(item.sceneIndex,i);assert.equal(item.layerId,layer[0].id);
+  assert.equal(item.path,base+layer[0].src);assert.equal(hash(await art(pose.slot)),(ANBIL_AVAN_DEFAULT_ART[pose.slot]||item).sha256);
+ }
+});
+
+test('Reception accepts the approved hand-on-shoulder silhouette and rejects the previous leaning pose',async()=>{
+ const current=await art('receptionCouple');
+ const old=await readFile('public'+inventory.receptionCouple.path);
+ await verifyReceptionSilhouette((await alignToReference(current,current)).bytes);
+ await assert.rejects(async()=>verifyReceptionSilhouette((await alignToReference(old,current)).bytes),e=>e.code==='CHARACTER_QUALITY');
 });
 
 test('pose outputs are placed on the exact approved canvas and pose drift is rejected',async()=>{
@@ -98,8 +119,8 @@ function fakeProvider(){
  const calls=[],outputs=new Map();let n=0;const provider={calls,behaviour:()=>'ok',
   async create(input,webhook){n++;calls.push({input,webhook});const id='prediction-'+n,url='https://replicate.delivery/test/'+id+'.png',mode=provider.behaviour(input,n);
    if(mode==='reject')throw Object.assign(Error('Unavailable'),{providerStatus:503});
-   const pose=/^EDIT PICTURE/.test(input.prompt),last=Buffer.from(input.input_images.at(-1).split(',')[1],'base64');
-   outputs.set(url,mode==='drift'?await sharp({create:{width:300,height:300,channels:4,background:'red'}}).png().toBuffer():pose?last:await sharp(Buffer.from(input.input_images[0].split(',')[1],'base64')).resize(640,960).png().toBuffer());
+   const pose=/^EDIT PICTURE/.test(input.prompt),first=Buffer.from(input.input_images[0].split(',')[1],'base64');
+   outputs.set(url,mode==='drift'?await sharp({create:{width:300,height:300,channels:4,background:'red'}}).png().toBuffer():pose?first:await sharp(first).resize(640,960).png().toBuffer());
    return mode==='fail'?{id,status:'failed',output:null}:{id,status:'succeeded',output:url,version:'test-version'};},
   get:async id=>({id,status:'succeeded',output:'https://replicate.delivery/test/'+id+'.png'}),recent:async()=>({results:[]}),
   output:async url=>{if(!outputs.has(url))throw Error('Expired provider output');return outputs.get(url);}};
@@ -138,6 +159,13 @@ test('paid access, two photos -> two identities -> nine aligned poses -> one ato
   assert.equal(f.provider.calls.length,11);set=await f.repo.set(a.id);assert.equal(set.status,'review');
   const poses=(await f.repo.assets(a.id)).filter(x=>x.asset.startsWith('pose:'));assert.deepEqual(poses.map(x=>x.asset.slice(5)).sort(),[...slots].sort());
   for(const pose of profile.poses){const call=f.provider.calls.find(c=>c.input.prompt.includes('"'+pose.label+'"'));assert.equal(call.input.input_images.length,pose.people.length+1,pose.slot);
+   assert.equal(call.input.aspect_ratio,'3:4');
+   const targetBytes=Buffer.from(call.input.input_images[0].split(',')[1],'base64');
+   assert.equal(hash(await sharp(targetBytes).raw().toBuffer()),hash(await sharp(await art(pose.slot)).raw().toBuffer()),pose.slot);
+   for(const [i,person] of pose.people.entries()){
+    const identity=(await f.repo.assets(a.id)).find(row=>row.asset==='identity:'+person);
+    assert.equal(hash(Buffer.from(call.input.input_images[i+1].split(',')[1],'base64')),identity.output_sha256);
+   }
    const asset=poses.find(x=>x.asset==='pose:'+pose.slot),m=f.store.records.get('media/'+asset.id+'.json');
    assert.equal(m.characterSlot,pose.slot);assert.equal(m.characterSetId,a.id);assert.equal(m.characterProfile,profile.id);assert.equal(m.characterMasterVersion,1);assert.equal(m.owner,f.owner);
    assert.deepEqual([m.alignment.width,m.alignment.height],[inventory[pose.slot].width,inventory[pose.slot].height]);assert.ok(m.alignment.silhouette>=.99);

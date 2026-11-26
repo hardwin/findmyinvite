@@ -1,3 +1,4 @@
+import {ANBIL_AVAN_PREVIEW} from './anbil-avan-video.mjs';
 // Generated catalog media; Temple v2 refreshed from the approved full motion release.
 export default {
   "websites": {
@@ -652,7 +653,7 @@ export default {
         "640": "/assets/catalog-previews/anbil-avan-v1/poster-640.webp",
         "960": "/assets/catalog-previews/anbil-avan-v1/poster-960.webp"
       },
-      "preview": "/assets/catalog-previews/anbil-avan-v1/preview-mazhavillaye-v1.mp4",
+      "preview": ANBIL_AVAN_PREVIEW,
       "duration": 35.04,
       "version": "1"
     },

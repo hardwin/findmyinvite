@@ -9,7 +9,7 @@ import {videoStore,hash} from './video-personalise-store.mjs';
 import {videoService,loadVideoMaster} from './video-personalise.mjs';
 import {videoPaymentService} from './video-payments.mjs';
 import {replicateProvider,CHARACTER_MODEL} from './video-character-provider.mjs';
-import {alignToReference,normalizeIdentity,toPng,characterPreview} from './video-character-images.mjs';
+import {alignToReference,normalizeIdentity,toPng,characterPreview,verifyReceptionSilhouette} from './video-character-images.mjs';
 import {catalogVideo} from '../shared/video-catalog.mjs';
 import {videoDraftVersion} from '../shared/video-master-version.mjs';
 import {CHARACTER_SET_PROMPT_REVISION,identityPrompt,posePrompt,characterSetInput} from '../shared/anbil-avan-character-prompt.mjs';
@@ -54,12 +54,14 @@ export function characterSetService({query=db,repo=characterSetRepository(query)
   const profile=catalogVideo(draft?.template_id)?.characterProfile;
   if(draft?.kind!=='video'||!profile)throw new HttpError(400,'This template does not support matching character sets.');
   const version=videoDraftVersion(draft.template_id,draft.payload),master=await masterLoader(draft.template_id,version),bundle=master.assets?.sceneBundle;
-  const key=hash({bundle,inventory:profile.inventory});
+  const key=hash({bundle,inventory:profile.inventory,art:master.defaultCharacterArt});
   if(!inventories.has(key))inventories.set(key,(async()=>{
    const indexBytes=await readAsset(bundle.path);if(hash(indexBytes)!==bundle.sha256)throw Error('Character asset index checksum mismatch.');
    const index=JSON.parse(indexBytes).files||{},raw=await readAsset(profile.inventory),inventory=JSON.parse(raw),poses={};
    if(index[profile.inventory]&&index[profile.inventory]!==hash(raw))throw Error('Character inventory checksum mismatch.');
-   for(const pose of profile.poses){const item=inventory[pose.slot];if(!item?.path?.startsWith('/assets/video-scenes/')||item.path.includes('..')||!/^[a-f0-9]{64}$/.test(item.sha256||'')||index[item.path]!==item.sha256)throw Error('Character pose '+pose.slot+' is not locked.');poses[pose.slot]=item;}
+   for(const pose of profile.poses){const item=inventory[pose.slot];if(!item?.path?.startsWith('/assets/video-scenes/')||item.path.includes('..')||!/^[a-f0-9]{64}$/.test(item.sha256||'')||index[item.path]!==item.sha256)throw Error('Character pose '+pose.slot+' is not locked.');// A replacement is a server-pinned layer override, used by preview and export as well.
+    const override=master.defaultCharacterArt?.[pose.slot];
+    poses[pose.slot]=override?{...item,...override}:item;}
    return poses;
   })());
   const inventory=await inventories.get(key).catch(e=>{inventories.delete(key);throw e;});
@@ -142,10 +144,9 @@ export function characterSetService({query=db,repo=characterSetRepository(query)
    return {images:[dataUrl(bytes,m.contentType),dataUrl((await reference(inventory[profile.identityStyle[person]])).png)],prompt:tracking=>identityPrompt(person,tracking)};
   }
   const pose=profile.poses.find(p=>'pose:'+p.slot===a.asset);if(!pose)throw Error('Unknown character pose.');
-  const assets=await repo.assets(set.id),images=[];
+  const assets=await repo.assets(set.id),images=[dataUrl((await reference(inventory[pose.slot])).png)];
   for(const person of pose.people){const identity=assets.find(x=>x.asset==='identity:'+person&&x.status==='ready');if(!identity)throw Error('Character identity is missing.');const bytes=await store.bytes(identity.output_key);if(hash(bytes)!==identity.output_sha256)throw Error('A saved character changed.');images.push(dataUrl(bytes));}
-  images.push(dataUrl((await reference(inventory[pose.slot])).png));
-  return {images,prompt:tracking=>posePrompt(pose,tracking)};
+  return {images,aspectRatio:'3:4',prompt:tracking=>posePrompt(pose,tracking)};
  }
  async function process(id){
   if(!uuid(id))return;
@@ -168,7 +169,7 @@ export function characterSetService({query=db,repo=characterSetRepository(query)
     stage='references';const request=await inputs(a,set,profile,inventory);
     a=await repo.patchAsset(id,{status:'submitting',attempts:a.attempts+1,updated_at:iso()},'&lease_id=eq.'+lease);if(!a)return;
     stage='submit';
-    try{prediction=await provider.create(characterSetInput(request.prompt(a.id+'-'+a.attempts),request.images),callback+a.id);}
+    try{prediction=await provider.create(characterSetInput(request.prompt(a.id+'-'+a.attempts),request.images,request.aspectRatio),callback+a.id);}
     catch(e){
      if(e.providerStatus===429){
       // A rejected rate-limit request did not create a prediction. Keep its
@@ -200,7 +201,11 @@ export function characterSetService({query=db,repo=characterSetRepository(query)
    }
    stage='prepare';let prepared;
    try{
-    if(a.asset.startsWith('pose:')){const pose=profile.poses.find(p=>'pose:'+p.slot===a.asset);prepared=await align(bytes,(await reference(inventory[pose.slot])).original,{minSilhouette:pose.minSilhouette});}
+    if(a.asset.startsWith('pose:')){
+     const pose=profile.poses.find(p=>'pose:'+p.slot===a.asset);
+     prepared=await align(bytes,(await reference(inventory[pose.slot])).original,{minSilhouette:pose.minSilhouette});
+     if(pose.slot==='receptionCouple')await verifyReceptionSilhouette(prepared.bytes);
+    }
     else prepared=await identityImage(bytes);
    }catch(e){
     if(e.code!=='CHARACTER_QUALITY')throw e;

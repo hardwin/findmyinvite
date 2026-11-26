@@ -13,7 +13,8 @@ export class SceneCompositor {
   await loaded;if(this.disposed)return;
   const ready=frame.contentWindow.fmiFilmReady;if(!ready)throw Error('The invitation could not start.');
   this.film=await ready;if(this.disposed){this.film.destroy();return;}
-  this.rules=await this.film.init(content,photos,externalBackground);this.video=this.film.video;this.loaded=true;
+  const studioPhotos=Object.fromEntries(Object.entries(master.defaultCharacterArt||{}).map(([slot,art])=>[slot,{mode:'prepared',url:art.path}]));
+  this.rules=await this.film.init(content,{...studioPhotos,...photos},externalBackground);this.video=this.film.video;this.loaded=true;
  }
  setContent(content){this.content=content;this.pending=Promise.resolve(this.film.setContent(content));this.pending.catch(()=>{});}
  async render(frame,options){if(this.disposed)return;await this.pending;this.rules=await this.film.render(frame,options);}
