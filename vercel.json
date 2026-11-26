@@ -62,7 +62,7 @@
     "api/video-personalise.mjs": {
       "maxDuration": 300,
       "memory": 1024,
-      "includeFiles": "{public/assets/video-masters/*/{manifest*,asset-index*}.json,public/assets/video-masters/{kerala-christian-v1/{bride,groom}.png,temple-v1/{bride,groom,closing,style-v3/{bride,groom,closing}}.png},public/assets/video-scenes/were-next-v1/assets/couple-*.webp,public/assets/video-scenes/v1/web/{kondattam,jannal,kalyana,oonjal,rajakumari,rajakumaran}/page/assets/img/{couple.png,bride.png,groom.png,c_*.png,baby.jpg,blue/baby.jpg},public/assets/video-scenes/v1/editor/{details*,common}.js,public/assets/video-scenes/anbil-avan-v1/{content.js,assets/reception-shoulder_cutout-*.webp},public/assets/music-library/*}"
+      "includeFiles": "public/assets/{video-masters/{*/*.json,{temple*,kerala*}/**/*.png},video-scenes/{v1/editor/*.js,anbil*/{content.js,assets/reception-shoulder*},were-next*/assets/couple*,v1/web/*/page/assets/img/{c_*,couple,bride,groom,baby,blue/baby}.*},music-library/*}"
     },
     "api/video-characters.mjs": {
       "maxDuration": 300,
