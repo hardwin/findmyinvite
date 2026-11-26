@@ -4,7 +4,7 @@ import {HttpError} from './core.mjs';
 import {hash} from './video-personalise-store.mjs';
 import {replicateProvider} from './video-character-provider.mjs';
 
-export async function photoCutout(store,media,{start=false,provider=replicateProvider(),onStart=async()=>{}}={}){
+export async function photoCutout(store,media,{start=false,provider=replicateProvider(),onStart=async()=>{},createPrediction}={}){
  const recordKey='media/'+media.id+'.json',row=await store.read(recordKey),m=row?.value;
  if(!m||m.owner!==media.owner||m.kind!=='image'||m.status!=='ready')throw new HttpError(400,'Choose a saved photo.');
  if(m.cutoutKey)return {ready:true};
@@ -16,7 +16,7 @@ export async function photoCutout(store,media,{start=false,provider=replicatePro
   try{await store.save(recordKey,{...m,cutoutRequest:job},{etag:row.etag});}catch{return {ready:false};}
   const image='data:'+m.contentType+';base64,'+(await store.bytes(m.key)).toString('base64');
   try{
-   const prediction=await provider.removeBackground(image,callback(m.id,job.attempt));
+   const hook=callback(m.id,job.attempt),prediction=createPrediction?await createPrediction(image,hook):await provider.removeBackground(image,hook);
    await setPrediction(store,recordKey,job.attempt,prediction.id);
   }catch(error){
    if(error.providerStatus&&error.providerStatus<500){
@@ -36,6 +36,8 @@ export async function photoCutout(store,media,{start=false,provider=replicatePro
  const url=Array.isArray(result.output)?result.output[0]:result.output;if(result.status!=='succeeded'||typeof url!=='string')return {ready:false};
  const png=await provider.output(url),image=sharp(png,{limitInputPixels:16000000}),meta=await image.metadata();
  if(meta.format!=='png'||!meta.hasAlpha)throw new HttpError(422,'The photo needs a transparent background. Choose another photo.');
+ const alpha=await image.clone().ensureAlpha().extractChannel(3).resize(96,96,{fit:'fill'}).raw().toBuffer();
+ if(!alpha.some(value=>value>64)||!alpha.some(value=>value<64))throw new HttpError(422,'Choose an image with a visible subject and a clear background.');
  const sha=hash(png),key=m.durable?'persistent/'+m.owner+'/'+m.invitationId+'/'+m.id+'/cutout.png':'cutouts/'+m.owner+'/'+m.id+'.png';
  try{await store.putBytes(key,png,'image/png');}catch(error){if(hash(await store.bytes(key))!==sha)throw error;}
  const latest=await store.read(recordKey);

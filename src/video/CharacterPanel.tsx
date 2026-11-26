@@ -32,7 +32,7 @@ export function CharacterPanel({onAction,onStatus,onUnlock,paymentBusy,invitatio
  const running=state.jobs.some(j=>active.includes(j.status));
  const individualsReady=['groom','bride'].every(slot=>state.jobs.some(j=>j.slot===slot&&j.approved));
  const defaultSlot=(slot:Slot)=>!!references[slot]?.useDefault;
- const complete=loaded&&!loadError&&slots.every(slot=>defaultSlot(slot)||state.jobs.some(j=>j.slot===slot&&j.approved))&&(!state.coupleNeedsUpdate||defaultSlot('couple'));
+ const complete=loaded&&!loadError&&slots.every(slot=>defaultSlot(slot)||latest(slot)?.approved===true)&&(!state.coupleNeedsUpdate||defaultSlot('couple'));
  const referencesReady=['groom','bride'].every(slot=>defaultSlot(slot as Slot)||references[slot as Slot]?.id||references.couple?.id);
  async function refresh(){const next=await request<State>(API+'?invitationId='+invitationId);if(live.current){setState(next);setLoaded(true);setLoadError('');}return next;}
  useEffect(()=>{if(!invitationId||!draftSaved||busy)return;let stopped=false,pending=false;const load=async()=>{if(pending||lock.current)return;pending=true;try{const next=await request<State>(API+'?invitationId='+invitationId);if(!stopped){setState(next);setLoaded(true);setLoadError('');}}catch(e){if(!stopped)setLoadError((e as Error).message);}finally{pending=false;}};void load();const timer=running?setInterval(load,4000):undefined;return()=>{stopped=true;clearInterval(timer);};},[invitationId,draftSaved,running,attempt,busy]);
@@ -54,10 +54,8 @@ export function CharacterPanel({onAction,onStatus,onUnlock,paymentBusy,invitatio
   // Honour old explicit selections; new couple references identify roles from the photo.
   return {id:couple.id,identity:['left','right'].includes(couple.identity)?slot==='groom'?couple.identity:couple.identity==='left'?'right':'left':'auto'};
  }
- async function submit(slot:Slot,redo=false){await save();await request(API+'?action=submit',{invitationId,slot,redo,...(slot==='couple'?{}:{reference:identity(slot)})});await refresh();}
- // A submitted job is the customer's explicit request. Completed results are applied
- // serially, using the existing revision-checked save, then the joint image follows.
- // Resuming a draft also finishes this sequence; merely paying never starts it.
+ async function submit(slot:Slot,redo=false){await save();await request(API+'?action=submit',{invitationId,slot,redo,...(slot==='couple'?{reference:references.couple?.id?references.couple:undefined}:{reference:identity(slot)})});await refresh();}
+ // Each completed illustration waits for the customer's explicit approval.
  const result=slots.map(latest).find(j=>j?.status==='review'&&!j.approved&&(j.slot!=='couple'||!state.coupleNeedsUpdate));
  const needsCouple=individualsReady&&!running&&(!latest('couple')||state.coupleNeedsUpdate)&&!defaultSlot('couple');
 

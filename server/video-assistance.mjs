@@ -7,7 +7,7 @@ import {videoStore} from './video-personalise-store.mjs';
 
 const scopes={
  drafts:{get:'draft',save:'draft'},
- video:{template:'order','assist-status':'self','payment-status':'order',reserve:'order',render:'order',upload:'upload','local-upload':'media',complete:'media',cutout:'media',media:'media',status:'job','delivery-link':'job'},
+ video:{template:'order','assist-status':'self','payment-status':'order',reserve:'order',render:'order',upload:'upload','local-upload':'media',complete:'media',cutout:'media','illustrate-photo':'media',media:'media',status:'job','delivery-link':'job'},
  characters:{capabilities:'self','set-capabilities':'self',list:'order',sets:'order',submit:'order','set-submit':'order',approve:'character',retry:'character','set-approve':'set','set-confirm':'set','set-retry':'set','set-revise':'set'}
 };
 export async function videoActor(req,area,action,{uploadPath,store=videoStore(),query=db,authorize=requireOwner,record=audit}={}){

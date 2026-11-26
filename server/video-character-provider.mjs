@@ -5,11 +5,19 @@ import {createHmac,timingSafeEqual} from 'node:crypto';
 import {HttpError} from './core.mjs';
 export const BACKGROUND_MODEL_VERSION='a029dff38972b5fda4ec5d75d7d1cd25aeff621d2cf4946a41055d7db66b80bc';
 export const CHARACTER_MODEL='openai/gpt-image-2.6-flare';
-export const CHARACTER_PROMPT_REVISION=PERSONAL_CHARACTER_PROMPT_REVISION;
-export const characterPromptRevision=version=>version===3?TEMPLE_V3_CHARACTER_PROMPT_REVISION:CHARACTER_PROMPT_REVISION;
-export const identityFirstCharacterPrompt=revision=>[PERSONAL_CHARACTER_PROMPT_REVISION,TEMPLE_V3_CHARACTER_PROMPT_REVISION].includes(revision);
+export const CHARACTER_PROMPT_REVISION='temple-full-character-v5';
+export const characterPromptRevision=()=>CHARACTER_PROMPT_REVISION;
+export const identityFirstCharacterPrompt=revision=>[CHARACTER_PROMPT_REVISION,PERSONAL_CHARACTER_PROMPT_REVISION,TEMPLE_V3_CHARACTER_PROMPT_REVISION].includes(revision);
 export {LIKENESS_V1_REVISION as CHARACTER_PROMPT_CANDIDATE};
 export function characterPrompt(slot,identity='single',tracking='',revision=CHARACTER_PROMPT_REVISION){
+ if(revision===CHARACTER_PROMPT_REVISION){
+  const person=slot==='couple'?'the two people':identity==='single'?'the '+slot:identity==='auto'?'the '+slot+' from the group photo':'the person on the '+identity+' of the group photo';
+  return [`Draw ${person} as complete full-length illustrated characters, from hair to shoes. Picture 1 supplies the likeness, build, relative proportions, hairstyle, gaze and expression. Picture 2 is the studio scene and supplies the exact illustration style, clothing, fabrics, jewellery, footwear, colours, lighting, crop and scene action.`,
+   identity==='auto'&&slot!=='couple'?'Identify the '+slot+' from the joint photo and draw only that person.':'',
+   'Dress each character solely in their corresponding scene outfit. Completely redraw the body, arms, hands, legs and feet at the natural proportions visible in the customer reference. Fit the whole figure inside the composition.',
+   slot==='couple'?'Picture 1 contains the approved groom on the left and approved bride on the right. Where provided, Picture 3 is the customer’s joint pose reference. Follow their relative height, posture, gaze and interaction within the studio couple composition.':'Use the customer’s head angle and direction of gaze within the studio pose.',
+   'Return a portrait 2:3 PNG with real transparent alpha around every character. No background, text, floor or watermark.',tracking?'Tracking reference '+tracking+'; never draw this reference.':''].filter(Boolean).join('\n\n');
+ }
  if(revision===TEMPLE_V3_CHARACTER_PROMPT_REVISION)return templeV3CharacterPrompt(slot,identity,tracking);
  if(revision===PERSONAL_CHARACTER_PROMPT_REVISION)return personalCharacterPrompt(slot,identity,tracking);
  if(revision===LIKENESS_V1_REVISION)return likenessV1Prompt(slot,identity,tracking);
@@ -38,7 +46,7 @@ export function replicateProvider(env=process.env){
  }
  return {
   removeBackground:(image,webhook)=>request('predictions',{method:'POST',wait:false,body:{version:BACKGROUND_MODEL_VERSION,input:{image,format:'png',background_type:'rgba'},...(webhook?{webhook,webhook_events_filter:['completed']}: {})}}),
-  create:(input,webhook)=>request('models/'+CHARACTER_MODEL+'/predictions',{method:'POST',wait:true,body:{input,...(webhook?{webhook,webhook_events_filter:['completed']}: {})}}),
+  create:(input,webhook,wait=true)=>request('models/'+CHARACTER_MODEL+'/predictions',{method:'POST',wait,body:{input,...(webhook?{webhook,webhook_events_filter:['completed']}: {})}}),
   get:id=>request('predictions/'+encodeURIComponent(id)),
   recent:()=>request('predictions'),
   model:()=>request('models/'+CHARACTER_MODEL),

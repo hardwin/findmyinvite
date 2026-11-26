@@ -28,7 +28,7 @@ test('new individual requests send the identity first and artwork second with tr
   const f=fixture({slot,status:'queued',provider_id:null,attempts:0,prompt_revision:CHARACTER_PROMPT_REVISION,reference_data:[]}),photo=await sharp({create:{width:16,height:24,channels:4,background:'red'}}).png().toBuffer();f.reference(photo,'single');let sent;
   await f.service({provider:{create:async input=>{sent=input;return {id:'new-'+slot,status:'processing'};}}}).process(f.id);
   assert.equal(f.row.status,'processing');assert.equal(sent.input_images.length,2);assert.deepEqual(Buffer.from(sent.input_images[0].split(',')[1],'base64'),photo);assert.deepEqual(Buffer.from(sent.input_images[1].split(',')[1],'base64'),await readFile('public/assets/video-masters/temple-v1/'+slot+'.png'));
-  assert.equal(sent.aspect_ratio,'2:3');assert.equal(sent.background,'transparent');assert.equal(sent.output_format,'png');assert.match(sent.prompt,/EDIT PICTURE 2/);assert.ok(sent.prompt.includes('Tracking reference '+f.id+'-1'));
+  assert.equal(sent.aspect_ratio,'2:3');assert.equal(sent.background,'transparent');assert.equal(sent.output_format,'png');assert.match(sent.prompt,/complete full-length illustrated characters/);assert.ok(sent.prompt.includes('Tracking reference '+f.id+'-1'));
  }
 });
 
@@ -40,7 +40,7 @@ test('v3 character requests and alignment use the teal artwork; existing version
   let sent,aligned;const expected=await readFile('public/assets/video-masters/temple-v1/'+(version===3?'style-v3/':'')+(slot==='couple'?'closing':slot)+'.png');
   await f.service({provider:{create:async input=>{sent=input;return {id:'sample',status:'succeeded',output:'https://replicate.delivery/sample.png'};},output:async()=>photo},align:async(bytes,reference)=>{aligned=reference;return {bytes,alignment:{verified:true}};}}).process(f.id);
   assert.equal(f.row.status,'review');assert.deepEqual(Buffer.from(sent.input_images[1].split(',')[1],'base64'),expected);assert.deepEqual(aligned,expected);assert.equal(sent.aspect_ratio,'2:3');
-  if(version===3){assert.match(sent.prompt,/peacock-teal/);assert.doesNotMatch(sent.prompt,/cream silk (shirt|saree)|pink blouse/);}else assert.match(sent.prompt,/cream silk/);
+  assert.match(sent.prompt,/solely in their corresponding scene outfit/);
  }
 });
 

@@ -38,6 +38,7 @@ try{for(const width of [390,1280,768,800]){
    calls.push(action);
    if(action==='set-submit'){assert.equal(paid,true);set={id:randomUUID(),status:'identity_review',approved:false,photos:body.photos,assets:['bride','groom'].map(p=>({id:randomUUID(),asset:'identity:'+p,status:'ready',mediaId:randomUUID()}))};return reply({set});}
    if(action==='set-confirm'){set.status='review';set.assets.push(...def.characterProfile.poses.map(p=>({id:randomUUID(),asset:'pose:'+p.slot,status:'ready',mediaId:randomUUID()})));return reply({set});}
+   if(action==='set-revise'){assert.equal(body.id,set.id);assert.equal(body.slot,'heartCouple');assert.ok(body.requestId);assert.deepEqual(Object.keys(body.references),[body.mode==='cutout'?'photo':'bride']);set={...set,id:randomUUID(),approved:false,status:'review'};return reply({set});}
    if(action==='set-approve'){set.status='approved';set.approved=true;record={...record,revision:record.revision+1,payload:{...record.payload,personalPhotosEnabled:true,charactersChoice:'personal',content:{...record.payload.content,photos:Object.fromEntries(def.characterProfile.poses.map(p=>[p.slot,{id:set.assets.find(a=>a.asset==='pose:'+p.slot).mediaId,mode:'prepared',confirmed:true}]))}}};return reply({draft:record,set});}
   }
   if(u.pathname==='/api/video-personalise'){
@@ -69,13 +70,23 @@ try{for(const width of [390,1280,768,800]){
  await page.getByRole('button',{name:'Create my characters',exact:true}).click();
  }
  await page.getByRole('button',{name:'Approve faces & create scenes',exact:true}).click();
+ if(width===390){
+  for(const cutout of [false,true]){
+   const scene=page.locator('.vp-character-poses figure').filter({has:page.getByText('Shared heart',{exact:true})});
+   await scene.getByText('Edit this scene',{exact:true}).click();
+   await scene.getByLabel((cutout?'Use my own photo':'Bride reference')+' for Shared heart').setInputFiles({name:'photo.png',mimeType:'image/png',buffer:png});
+   await scene.getByRole('button',{name:cutout?'Remove background and use photo':'Recreate this illustration'}).click();
+   await page.waitForFunction(()=>!document.querySelector('.vp-scene-edit[open]'));
+   assert.ok(!calls.includes('set-approve'));assert.ok(!calls.includes('render'));
+  }
+ }
  await page.getByRole('button',{name:'Approve all illustrations',exact:true}).click();
  await page.getByText('Your matching illustrations are approved.').waitFor({state:'attached'});
  await nav.getByRole('button',{name:/Review & download/}).click();
  await page.locator('#video-confirm').check();
  await page.getByRole('button',{name:'Create my video',exact:true}).waitFor();
  if(assisted){await page.getByRole('button',{name:'Create my video',exact:true}).click();await page.getByRole('button',{name:'Copy download link'}).waitFor();assert.ok(calls.includes('render'));assert.ok(!calls.includes('payment-order'));assert.equal(record.id,invitation);assert.ok(page.url().includes('assist=1'));assert.equal(await page.evaluate(()=>Object.keys(localStorage).some(k=>k.startsWith('fmi-draft-v1:'))),false);assert.deepEqual(errors,[]);console.log('Assisted '+(width===768?'saved-face':'courtesy-redo')+' review, render and delivery passed');await context.close();continue;}
- assert.equal(Object.keys(record.payload.content.photos).length,9);assert.deepEqual(calls.filter(a=>a.startsWith('set-')),['set-submit','set-confirm','set-approve']);
+ assert.equal(Object.keys(record.payload.content.photos).length,9);assert.deepEqual(calls.filter(a=>a.startsWith('set-')),['set-submit','set-confirm',...(width===390?['set-revise','set-revise']:[]),'set-approve']);
  await page.reload();await page.locator('#video-confirm').waitFor();
  await nav.getByRole('button',{name:/The couple/}).click();await page.locator('#video-bride').fill('Kavya');await nav.getByRole('button',{name:/Review & download/}).click();
  assert.deepEqual(calls.filter(a=>a==='set-submit'),['set-submit']);assert.equal(await page.locator('#video-confirm').isChecked(),false);

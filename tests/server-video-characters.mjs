@@ -36,15 +36,16 @@ test('customer likeness governs face, hair and proportions instead of the templa
  }
 });
 
-test('the supplied cartoon face-edit prompts are the default, while historical jobs retain their prompts',()=>{
- assert.equal(CHARACTER_PROMPT_REVISION,'temple-cartoon-face-edit-v2');
+test('new jobs redraw full characters while historical face-edit jobs retain their prompts',()=>{
+ assert.equal(CHARACTER_PROMPT_REVISION,'temple-full-character-v5');
+ assert.match(characterPrompt('groom'),/completely redraw the body/i);assert.match(characterPrompt('couple'),/joint pose reference/);
  assert.match(characterPrompt('groom','single','','temple-identity-v4'),/large expressive head/);
  for(const slot of ['groom','bride','couple']){
-  const prompt=characterPrompt(slot);assert.equal(prompt,PERSONAL_CHARACTER_BASE_PROMPTS[slot]);
+  const prompt=characterPrompt(slot,'single','','temple-cartoon-face-edit-v2');assert.equal(prompt,PERSONAL_CHARACTER_BASE_PROMPTS[slot]);
   assert.match(prompt,/EDIT PICTURE 2/);assert.match(prompt,/big expressive eyes, smooth simplified features, NOT/);assert.match(prompt,/no shadow, no white outline/);assert.match(prompt,/Portrait 2:3\.$/);
   assert.doesNotMatch(prompt,/Adapt the neck|subtle contact shadow|9:16/);
  }
- assert.match(characterPrompt('bride'),/Keep picture 2's long braid with white jasmine/);assert.match(characterPrompt('bride'),/gold flat sandals/);
+ assert.match(characterPrompt('bride','single','','temple-cartoon-face-edit-v2'),/Keep picture 2's long braid with white jasmine/);assert.match(characterPrompt('bride','single','','temple-cartoon-face-edit-v2'),/gold flat sandals/);
  assert.match(characterPrompt('groom','single','',CHARACTER_PROMPT_CANDIDATE),/recognizable likeness take priority/);
  assert.throws(()=>characterPrompt('groom','single','','unknown-revision'),/Unsupported/);
 });

@@ -289,10 +289,16 @@ export function characterSetService({query=db,repo=characterSetRepository(query)
   }
   return draftView(await repo.approve({p_owner:owner,p_set:set.id,p_revision:revision,p_slots:profile.poses.map(p=>p.slot)}));
  }
+ async function resumeAfterCallback(id){
+  await process(id);
+  const asset=await repo.asset(id);if(!asset||asset.status!=='ready')return;
+  const remaining=(await repo.assets(asset.set_id)).filter(a=>a.status==='queued');
+  await Promise.all(remaining.slice(0,2).map(a=>process(a.id)));
+ }
  async function recover(){
   const pending=await repo.pending(3);await Promise.all(pending.map(a=>process(a.id)));
   for(const set of await repo.moving(12)){try{await materialize(set);await advance(set.id);}catch(e){console.error('Character set reconciliation will retry',set.id,e.name);}}
   return pending.length;
  }
- return {list,view,submit,revise,confirm,process,advance,retry,approve,recover,materialize,profileFor,provider};
+ return {list,view,submit,revise,confirm,process,resumeAfterCallback,advance,retry,approve,recover,materialize,profileFor,provider};
 }

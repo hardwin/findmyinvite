@@ -5,7 +5,7 @@ import {draftService,draftView} from './personalization-drafts.mjs';
 import {videoStore,hash} from './video-personalise-store.mjs';
 import {videoService,loadVideoMaster} from './video-personalise.mjs';
 import {videoPaymentService} from './video-payments.mjs';
-import {replicateProvider,CHARACTER_MODEL,characterPromptRevision,identityFirstCharacterPrompt,characterPrompt,characterInput} from './video-character-provider.mjs';
+import {replicateProvider,CHARACTER_MODEL,CHARACTER_PROMPT_REVISION,characterPromptRevision,identityFirstCharacterPrompt,characterPrompt,characterInput} from './video-character-provider.mjs';
 import {videoDraftVersion} from '../shared/video-master-version.mjs';
 import {alignCharacter,coupleIdentityReference} from './video-character-images.mjs';
 const table='video_character_jobs',active=['queued','submitting','processing','preparing'];
@@ -26,6 +26,11 @@ export function characterService({query=db,store=videoStore(),provider=replicate
   const jobs=await query(table+'?invitation_id=eq.'+d.id+'&owner_id=eq.'+owner+'&order=created_at.desc');let references=[],basis={};
   if(slot==='couple'){
    for(const individual of ['groom','bride']){const j=jobs.find(j=>j.slot===individual&&j.approved_current);if(!j)throw new HttpError(409,'Approve the groom and bride first.');basis[individual]=j.id;const media=await videoService({store}).media(owner,j.output_media_id);references.push({id:media.id,sha256:media.sha256,identity:individual});}
+   if(b.reference?.id){
+    await drafts.pinMedia(owner,d.id,b.reference.id);const m=await videoService({store}).media(owner,b.reference.id);
+    if(m.invitationId!==d.id||m.status!=='ready'||m.kind!=='image'||m.characterJobId||m.characterSetId)throw new HttpError(400,'Choose a couple photo from this invitation.');
+    references.push({id:m.id,sha256:m.sha256,identity:'couple'});
+   }
   }else{
    const ref=b.reference;if(!ref||!['single','left','right','auto'].includes(ref.identity))throw new HttpError(400,'Add a photo to continue.');
    await drafts.pinMedia(owner,d.id,ref.id);const m=await videoService({store}).media(owner,ref.id);if(m.kind!=='image'||m.status!=='ready'||m.characterJobId)throw new HttpError(400,'Upload a reference photo first.');references=[{id:m.id,sha256:m.sha256,identity:ref.identity}];
@@ -54,9 +59,9 @@ export function characterService({query=db,store=videoStore(),provider=replicate
     const template='data:image/png;base64,'+(await original(j.slot,draft)).toString('base64'),refs=[];for(const ref of j.reference_data){const m=await videoService({store}).media(j.owner_id,ref.id),bytes=await store.bytes(m.key);if(hash(bytes)!==ref.sha256)throw Error('A saved reference changed.');refs.push({bytes,url:'data:'+m.contentType+';base64,'+bytes.toString('base64')});}
     const revision=j.prompt_revision||'temple-identity-v4';let images=[template,...refs.map(ref=>ref.url)];
     if(identityFirstCharacterPrompt(revision)){
-     if(refs.length!==(j.slot==='couple'?2:1))throw Error('Character identity references are missing.');
+     if(!(j.slot==='couple'&&revision===CHARACTER_PROMPT_REVISION?[2,3].includes(refs.length):refs.length===(j.slot==='couple'?2:1)))throw Error('Character identity references are missing.');
      const identity=j.slot==='couple'?'data:image/png;base64,'+(await coupleIdentityReference(refs[0].bytes,refs[1].bytes)).toString('base64'):refs[0].url;
-     images=[identity,template];
+     images=[identity,template,...(refs[2]?[refs[2].url]:[])];
     }
     j=await patch(id,{status:'submitting',attempts:j.attempts+1},'&lease_id=eq.'+lease);const input=characterInput(characterPrompt(j.slot,j.reference_data[0]?.identity,j.id+'-'+j.attempts,revision),images,revision);
     stage='submit';try{prediction=await provider.create(input,'https://findmyinvite.com/api/video-characters?action=callback&id='+j.id);}

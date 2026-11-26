@@ -35,7 +35,7 @@ export default async function handler(req,res){try{
   const b=JSON.parse(raw);if(typeof b.id!=='string')throw new HttpError(400,'Invalid callback.');
   if(action==='cutout-callback'){const id=q.get('id'),attempt=q.get('attempt');if(!/^[a-f0-9-]{36}$/.test(id||'')||!/^[a-f0-9-]{36}$/.test(attempt||''))throw new HttpError(400,'Invalid callback.');await setPrediction(videoStore(),'media/'+id+'.json',attempt,b.id);return respond(res,200,{ok:true});}
   // Status and image URLs are fetched from Replicate again; never trust callback output data.
-  waitUntil(action==='callback'?service.process(q.get('id')):characterSetService().process(q.get('id')));return respond(res,200,{ok:true});
+  waitUntil(action==='callback'?service.process(q.get('id')):characterSetService().resumeAfterCallback(q.get('id')));return respond(res,200,{ok:true});
  }
  const user=await videoActor(req,'characters',action);
  if(action==='sets'||action.startsWith('set-'))return await characterSets(req,res,q,action,user);
