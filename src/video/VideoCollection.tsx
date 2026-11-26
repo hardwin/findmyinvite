@@ -73,8 +73,8 @@ export function VideoCard({entry,showDetails=true,preview=entry.preview}:{entry:
   }
   progress.current={position,at:performance.now()};setFeedback('none');
   startupHold.current=false;
-  if(holdForOpening){
-   // Unlock sound in the tap handler, but give the first few frames a buffer before the clock runs.
+  if(holdForOpening&&navigator.vendor==='Google Inc.'){
+   // Chromium needs an opening buffer on cellular. WebKit can keep its clock frozen after a zero rate.
    try{video.playbackRate=0;startupHold.current=true;}catch{/* Devices without zero-rate playback start normally. */}
   }else if(video.playbackRate===0)video.playbackRate=1;
   video.muted=previewMuted();
