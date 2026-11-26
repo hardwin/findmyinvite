@@ -53,7 +53,16 @@ test('database enforces free publication, durable access and historical payment 
  await reserveVideo(grandfathered,oonjal);
  await pg.exec('reset role');
  await pg.exec(await readFile('supabase/migrations/20261121120452_oonjal_paid_video.sql','utf8'));
+ await pg.exec(await readFile('supabase/migrations/20261126090535_mazhavillaye_price_299.sql','utf8'));
  await pg.exec('set role service_role');
+ await t.test('Mazhavillaye reserves ₹299 plus GST and preserves historical quotes',async()=>{
+  const id=await video('film-anbil-avan-v1');
+  const row=await reserveVideo(id,'film-anbil-avan-v1');
+  assert.deepEqual([row.base_paise,row.tax_paise,row.total_paise],[29900,5382,35282]);
+  await pg.query('update video_invitation_orders set base_paise=49900,tax_paise=8982,total_paise=58882 where id=$1',[id]);
+  assert.equal((await reserveVideo(id,'film-anbil-avan-v1')).total_paise,58882);
+  await assert.rejects(pg.query('update video_invitation_orders set tax_paise=0,total_paise=base_paise where id=$1',[id]),/total_paise_check/);
+ });
  await t.test('new Oonjal reservations require ₹299 plus GST and past grants still open',async()=>{
   const id=await video(oonjal);
   const row=await reserveVideo(id,oonjal);

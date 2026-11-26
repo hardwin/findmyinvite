@@ -11,7 +11,7 @@ test('staged details resolve the deployed catalog without querying the older liv
  }});
  assert.deepEqual(calls,PUBLIC_VIDEO_IDS);
  const entry=await resolveTemplateShare(new URLSearchParams({kind:'video',product:'film-anbil-avan-v1'}),'https://older-live-catalog.test',async()=>catalog);
- assert.equal(entry.amountPaise,49900);assert.equal(entry.video,'/assets/catalog-previews/anbil-avan-v1/preview.mp4');
+ assert.equal(entry.amountPaise,29900);assert.equal(entry.video,'/assets/catalog-previews/anbil-avan-v1/preview-mazhavillaye-v1.mp4');
  assert.equal(catalog.templates.length,4);assert.equal(catalog.musicUnavailable,false);
 });
 

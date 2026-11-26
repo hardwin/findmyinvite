@@ -34,7 +34,7 @@ try{for(const width of [390,1280]){
    if(action==='media')return route.fulfill({contentType:'image/png',body:png});
    if(action==='reserve')return reply({id:randomUUID(),pathname:'fixture.png'});
    if(action==='local-upload')return reply({ready:true});
-   if(action?.startsWith('payment-')){calls.push(action);if(action==='payment-verify')paid=true;return reply({invitationId:invitation,amount:58882,currency:'INR',quote:{basePaise:49900,taxBps:1800,taxPaise:8982,totalPaise:58882},status:paid?'captured':'pending',unlocked:paid,keyId:'fixture',orderId:'order_fixture'});}
+   if(action?.startsWith('payment-')){calls.push(action);if(action==='payment-verify')paid=true;return reply({invitationId:invitation,amount:35282,currency:'INR',quote:{basePaise:29900,taxBps:1800,taxPaise:5382,totalPaise:35282},status:paid?'captured':'pending',unlocked:paid,keyId:'fixture',orderId:'order_fixture'});}
    return reply(config);
   }
   return route.fulfill({status:204,body:''});
@@ -45,10 +45,10 @@ try{for(const width of [390,1280]){
  for(const person of ['bride','groom']){await page.getByLabel('Upload '+person+' photo').setInputFiles({name:person+'.png',mimeType:'image/png',buffer:png});await page.waitForFunction(person=>document.querySelector('[aria-label="Upload '+person+' photo"]')?.disabled===false,person);}
  const nav=page.getByRole('navigation',{name:'Personalization steps'});
  await nav.getByRole('button',{name:/The couple/}).click();await page.locator('#video-bride').fill('Too wide for this scene');await nav.getByRole('button',{name:/Photos/}).click();
- await page.getByRole('button',{name:'Pay ₹588.82',exact:true}).click();
+ await page.getByRole('button',{name:'Pay ₹352.82',exact:true}).click();
  await page.getByText(/Shorten bride’s name/).first().waitFor();assert.equal(calls.includes('payment-order'),false);
  await page.locator('#video-bride').fill('Priya');await nav.getByRole('button',{name:/Photos/}).click();
- await page.getByRole('button',{name:'Pay ₹588.82',exact:true}).click();
+ await page.getByRole('button',{name:'Pay ₹352.82',exact:true}).click();
  await page.getByRole('button',{name:'Create my characters',exact:true}).click();
  await page.getByRole('button',{name:'Approve faces & create scenes',exact:true}).click();
  await page.getByRole('button',{name:'Approve all illustrations',exact:true}).click();
@@ -60,5 +60,5 @@ try{for(const width of [390,1280]){
  await page.reload();await page.locator('#video-confirm').waitFor();
  await nav.getByRole('button',{name:/The couple/}).click();await page.locator('#video-bride').fill('Kavya');await nav.getByRole('button',{name:/Review & download/}).click();
  assert.deepEqual(calls.filter(a=>a==='set-submit'),['set-submit']);assert.equal(await page.locator('#video-confirm').isChecked(),false);
- assert.deepEqual(errors,[]);console.log(width+'px: two uploads, ₹588.82 checkout, identity review, nine-pose approval, saved resume and text-only edit passed');await context.close();
+ assert.deepEqual(errors,[]);console.log(width+'px: two uploads, ₹352.82 checkout, identity review, nine-pose approval, saved resume and text-only edit passed');await context.close();
 }}finally{await browser.close();}

@@ -29,10 +29,23 @@ const released={...raw,release:{approved:true,rendererVersion:'scene-film-v1',cl
 const uuid=i=>'00000000-0000-4000-8000-'+String(i).padStart(12,'0');
 const allPoses=(prefix=0)=>Object.fromEntries(ANBIL_AVAN_POSE_SLOTS.map((slot,i)=>[slot,{id:uuid(prefix+i),mode:'prepared',confirmed:true}]));
 
-test('Anbil Avan is ₹499 + 18% GST (₹588.82) with no offer; existing prices are unchanged',()=>{
- assert.deepEqual(videoOffer(id),{basePaise:49900,originalPaise:0,offerLabel:'',tier:'premium'});
- assert.deepEqual(videoQuote(id),{basePaise:49900,taxBps:1800,taxPaise:8982,totalPaise:58882,taxLabel:'GST',currency:'INR'});
- assert.equal((videoQuote(id).totalPaise/100).toFixed(2),'588.82');
+test('soundtrack revision changes only audio and preview; approved layers and prior master stay immutable',async()=>{
+ const revised=await loadVideoMaster(id,1);
+ assert.equal(definition.name,'Mazhavillaye');
+ assert.equal(definition.form.title,'Personalise Mazhavillaye');
+ assert.notEqual(revised.source.audioSha256,raw.source.audioSha256);
+ const {audioSha256,soundtrackRevision,...source}=revised.source;
+ const {audioSha256:oldAudio,...oldSource}=raw.source;
+ assert.deepEqual(source,oldSource);
+ assert.deepEqual({...revised,source:raw.source,catalog:raw.catalog},raw);
+ assert.match(revised.catalog.preview,/preview-mazhavillaye-v1\.mp4$/);
+ assert.equal(usesOriginalAnbilAvanAudio(raw,{mode:'library',id:'anbil-avan-original'}),true);
+});
+
+test('Mazhavillaye is ₹299 + 18% GST (₹352.82) with no offer; existing prices are unchanged',()=>{
+ assert.deepEqual(videoOffer(id),{basePaise:29900,originalPaise:0,offerLabel:'',tier:'premium'});
+ assert.deepEqual(videoQuote(id),{basePaise:29900,taxBps:1800,taxPaise:5382,totalPaise:35282,taxLabel:'GST',currency:'INR'});
+ assert.equal((videoQuote(id).totalPaise/100).toFixed(2),'352.82');
  assert.equal(isFreeVideo(id),false);
  assert.deepEqual(videoOffer('wedding-bells-v1'),{basePaise:69900,originalPaise:159900,offerLabel:'Christmas Offer',tier:'premium'});
  for(const old of ['film-oonjal-v1','film-were-next-v1'])assert.deepEqual(videoOffer(old),{basePaise:29900,originalPaise:0,offerLabel:'',tier:'premium'});
@@ -40,7 +53,7 @@ test('Anbil Avan is ₹499 + 18% GST (₹588.82) with no offer; existing prices 
  assert.deepEqual(videoOffer('unlisted-paid-v1'),{basePaise:49900,originalPaise:99900,offerLabel:'',tier:'standard'});
 });
 
-test('public release adds Anbil Avan after the existing three approved designs',()=>{
+test('public release adds Mazhavillaye after the existing three approved designs',()=>{
  assert.deepEqual(PUBLIC_VIDEO_IDS,['wedding-bells-v1','film-oonjal-v1','film-were-next-v1',id]);
  assert.equal(isPublicVideo(id),true);
  assert.equal(catalogVideo(id),definition);assert.equal(videoDefinition(id,1),definition);
@@ -54,9 +67,9 @@ test('public release adds Anbil Avan after the existing three approved designs',
 test('version one is pinned for new and saved drafts',async()=>{
  assert.equal(isVersionedVideo(id),true);
  assert.equal(videoNewOrSavedVersion(id,null),1);assert.equal(videoDraftVersion(id,{}),1);assert.equal(videoMasterVersion(id,1),1);
- assert.throws(()=>videoMasterVersion(id,2),/Anbil Avan version is unavailable/);
+ assert.throws(()=>videoMasterVersion(id,2),/Mazhavillaye version is unavailable/);
  assert.equal(pinVideoMasterVersion(id,{},null),1);assert.equal(pinVideoMasterVersion(id,{masterVersion:1},{payload:{masterVersion:1}}),1);
- assert.throws(()=>pinVideoMasterVersion(id,{masterVersion:2},{payload:{}}),/Anbil Avan/);
+ assert.throws(()=>pinVideoMasterVersion(id,{masterVersion:2},{payload:{}}),/Mazhavillaye/);
  const pinned=await loadVideoMaster(id,1),current=await loadVideoMaster(id);
  for(const m of [pinned,current]){assert.equal(m.version,1);assert.equal(m.renderProfile,'layered-2d-v1');}
 });
@@ -80,9 +93,9 @@ test('dedicated form exposes exactly the eight details; headings, music and nine
 test('normalisation locks the recording, trims text and accepts only one complete prepared set',()=>{
  const example=definition.example,options={complete:true,templateId:id,masterVersion:1};
  const content=normalizeVideoContent({...example,bride:'  Priya ',music:{mode:'library',id:'heartwarming'}},options);
- assert.deepEqual(content.music,{mode:'library',id:'anbil-avan-original'});assert.equal(content.bride,'Priya');
+ assert.deepEqual(content.music,{mode:'library',id:'mazhavillaye-posted-v1'});assert.equal(content.bride,'Priya');
  assert.deepEqual(Object.keys(content),[...ANBIL_AVAN_FIELDS,'photos','music']);
- assert.deepEqual(normalizeVideoContent({...example,music:{mode:'upload',id:uuid(99)}},options).music,{mode:'library',id:'anbil-avan-original'});
+ assert.deepEqual(normalizeVideoContent({...example,music:{mode:'upload',id:uuid(99)}},options).music,{mode:'library',id:'mazhavillaye-posted-v1'});
  const all=allPoses();assert.deepEqual(normalizeVideoContent({...example,photos:all},options).photos,all);
  const {closingCouple,...partial}=all;assert.ok(closingCouple);
  assert.throws(()=>normalizeVideoContent({...example,photos:partial},options),/one approved set/);
@@ -94,7 +107,7 @@ test('normalisation locks the recording, trims text and accepts only one complet
  assert.throws(()=>normalizeVideoContent({...example,receptionTime:'25:00'},options),/valid time/);
  assert.throws(()=>normalizeVideoContent({...example,bride:'<b>Priya</b>'},options),/Check bride/);
  assert.throws(()=>normalizeVideoContent({...example,groom:'A'.repeat(33)},options),/Check groom/);
- const draft=normalizeVideoContent(definition.defaults,{templateId:id});assert.equal(draft.bride,'');assert.deepEqual(draft.music,{mode:'library',id:'anbil-avan-original'});
+ const draft=normalizeVideoContent(definition.defaults,{templateId:id});assert.equal(draft.bride,'');assert.deepEqual(draft.music,{mode:'library',id:'mazhavillaye-posted-v1'});
 });
 
 test('scene preparation keeps the approved cuts and rejects missing or oversized text',async()=>{
@@ -126,22 +139,22 @@ test('downloads require the dedicated layered worker snapshot',()=>{
  assert.throws(()=>requireVideoRelease({...raw,release:{...raw.release,approved:false}},{...env,VIDEO_ANBIL_AVAN_SNAPSHOT_ID:'anbil-avan-worker'}),/still being prepared/);
 });
 
-test('the pre-mixed recording is exact, locked, hidden from other pickers and never refaded or looped',async()=>{
- const music={mode:'library',id:'anbil-avan-original'};
+test('the pre-mixed recording is exact, locked, available in other pickers and never refaded or looped',async()=>{
+ const music={mode:'library',id:'mazhavillaye-posted-v1'};
  assert.equal(usesOriginalAnbilAvanAudio(raw,music),true);
  assert.equal(usesOriginalAnbilAvanAudio({...raw,version:2},music),false);
  assert.equal(usesOriginalAnbilAvanAudio(raw,{mode:'library',id:'heartwarming'}),false);
  assert.equal(usesOriginalWereNextAudio(raw,music),false);assert.equal(usesOriginalOonjalAudio(raw,music),false);
  assert.deepEqual(videoDefaultMusic(id,{assignments:[{id,trackId:'heartwarming'}],tracks:[{id:'heartwarming'}]},1),music);
- assert.equal(MUSIC[music.id].path,'/assets/music-library/anbil-avan-original.m4a');assert.doesNotMatch(MUSIC[music.id].credit,/Trimmed and faded/);
- const seed=seeds.find(t=>t.id===music.id);assert.equal(seed.status,'ready');assert.equal(seed.archived,true);assert.equal(seed.duration,35.04);
- assert.equal(sha(await readFile('public/assets/music-library/anbil-avan-original.m4a')),raw.source.audioSha256);
+ assert.equal(MUSIC[music.id].path,'/assets/music-library/mazhavillaye-posted-v1.m4a');assert.doesNotMatch(MUSIC[music.id].credit,/Trimmed and faded/);
+ const seed=seeds.find(t=>t.id===music.id);assert.equal(seed.status,'ready');assert.equal(seed.archived,false);assert.equal(seed.duration,35.04);
+ assert.equal(sha(await readFile('public/assets/music-library/mazhavillaye-posted-v1.m4a')),(await loadVideoMaster(id)).source.audioSha256);
 });
 
 function renderFixture(){
  const records=new Map(),launched=[];
  const store={read:async key=>records.has(key)?{value:records.get(key),etag:'etag'}:null,save:async(key,value)=>{records.set(key,structuredClone(value));}};
- const service=videoService({store,env:{VIDEO_PERSONALISE_ENABLED:'1'},masterLoader:async()=>released,libraryMusic:async()=>({id:'library-anbil-avan-original',kind:'audio',key:'library/anbil-avan-original/x.audio',sha256:raw.source.audioSha256,library:true,credit:'Original soundtrack'}),launch:async job=>{launched.push(job);}});
+ const service=videoService({store,env:{VIDEO_PERSONALISE_ENABLED:'1'},masterLoader:async()=>released,libraryMusic:async()=>({id:'library-mazhavillaye-posted-v1',kind:'audio',key:'library/mazhavillaye-posted-v1/x.audio',sha256:raw.source.audioSha256,library:true,credit:'Original soundtrack'}),launch:async job=>{launched.push(job);}});
  const add=(owner,invitationId,photos,patch={})=>{for(const [slot,p] of Object.entries(photos))records.set('media/'+p.id+'.json',{id:p.id,owner,invitationId,kind:'image',status:'ready',key:'persistent/'+owner+'/'+invitationId+'/characters/'+slot+'.webp',sha256:hash(slot+p.id),contentType:'image/webp',durable:true,expiresAt:null,characterSetId:uuid(500),characterProfile:'anbil-avan-2d-v1',characterMasterVersion:1,characterSlot:slot,...(typeof patch==='function'?patch(slot):patch)});};
  const unlock=()=>{for(const key of [...records.keys()])if(key.startsWith('locks/'))records.delete(key);};
  return {records,launched,service,add,unlock};
@@ -152,7 +165,7 @@ test('exports bind all nine prepared layers from one owner-scoped set; raw uploa
  const job=await f.service.start(owner,{...definition.example,photos},id,invitation,1);
  assert.equal(job.status,'queued');const record=f.launched[0];
  assert.deepEqual(record.media.filter(m=>m.slot).map(m=>[m.slot,m.mode]),ANBIL_AVAN_POSE_SLOTS.map(slot=>[slot,'prepared']));
- assert.deepEqual(record.content.music,{mode:'library',id:'anbil-avan-original'});assert.equal(record.master.renderProfile,'layered-2d-v1');
+ assert.deepEqual(record.content.music,{mode:'library',id:'mazhavillaye-posted-v1'});assert.equal(record.master.renderProfile,'layered-2d-v1');
  // A text-only edit reuses the same prepared character files and needs no new media.
  f.unlock();await f.service.start(owner,{...definition.example,weddingVenue:'Udupi',photos},id,invitation,1);
  assert.notEqual(f.launched[1].id,record.id);assert.deepEqual(f.launched[1].media.map(m=>m.sha256),record.media.map(m=>m.sha256));

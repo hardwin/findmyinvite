@@ -652,7 +652,7 @@ export default {
         "640": "/assets/catalog-previews/anbil-avan-v1/poster-640.webp",
         "960": "/assets/catalog-previews/anbil-avan-v1/poster-960.webp"
       },
-      "preview": "/assets/catalog-previews/anbil-avan-v1/preview.mp4",
+      "preview": "/assets/catalog-previews/anbil-avan-v1/preview-mazhavillaye-v1.mp4",
       "duration": 35.04,
       "version": "1"
     },

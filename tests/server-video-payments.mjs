@@ -35,8 +35,8 @@ function fixture(){
  return {rows,payments,created,calls,env,store,gateway,service,captured,response,advance:ms=>time+=ms};
 }
 test('₹699 plus 18% GST is fixed server-side, checkout resumes the same order',async()=>{const f=fixture(),id=randomUUID();const a=await f.service.order(owner,id,template),b=await f.service.order(owner,id,template);assert.equal(a.amount,82482);assert.deepEqual(a.quote,{basePaise:69900,taxBps:1800,taxPaise:12582,totalPaise:82482,taxLabel:'GST',currency:'INR'});assert.equal(a.currency,'INR');assert.equal(a.orderId,b.orderId);assert.equal(f.created.length,1);assert.equal(f.created[0].amount,82482);assert.equal(f.created[0].notes.videoInvitationId,id);});
-test('Oonjal sends ₹352.82 to Razorpay and a verified capture unlocks the invitation',async()=>{
- const f=fixture(),id=randomUUID(),tid='film-oonjal-v1';
+for(const tid of ['film-oonjal-v1','film-anbil-avan-v1'])test(tid+' sends ₹352.82 to Razorpay and a verified capture unlocks the invitation',async()=>{
+ const f=fixture(),id=randomUUID();
  const first=await f.service.order(owner,id,tid);
  assert.deepEqual(first.quote,{basePaise:29900,taxBps:1800,taxPaise:5382,totalPaise:35282,taxLabel:'GST',currency:'INR'});
  assert.equal(first.tier,'premium');

@@ -76,5 +76,17 @@
     "status": "ready",
     "archived": true,
     "revision": 0
+  },
+  {
+    "id": "mazhavillaye-posted-v1",
+    "title": "Mazhavillaye · Instagram soundtrack",
+    "mood": "Romantic wedding film",
+    "duration": 35.04,
+    "asset": "/assets/music-library/mazhavillaye-posted-v1.m4a",
+    "sourceUrl": "https://www.instagram.com/p/DgIsjnJSmoF/",
+    "credit": "Audio passage from the FindMyInvite Instagram post selected by the owner.",
+    "status": "ready",
+    "archived": false,
+    "revision": 0
   }
 ]
