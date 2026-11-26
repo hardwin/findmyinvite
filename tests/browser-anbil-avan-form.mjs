@@ -14,6 +14,7 @@ const png=await sharp({create:{width:240,height:320,channels:3,background:'#bd8d
 const browser=await chromium.launch({executablePath:process.env.VIDEO_CHROMIUM_PATH});
 try{for(const width of [390,1280,768,800]){
  const assisted=width===768||width===800;
+ let lostSave=false;
  const context=await browser.newContext({viewport:{width,height:844}}),page=await context.newPage(),owner=randomUUID(),invitation=randomUUID(),errors=[],calls=[];
  let record={id:invitation,owner,kind:'video',templateId:def.id,payload:{masterVersion:1,content:structuredClone(def.example),formStepId:'characters',personalPhotosEnabled:true,references:{}},revision:1,updatedAt:new Date().toISOString()},set=null,paid=false;
  if(assisted){
@@ -31,7 +32,7 @@ try{for(const width of [390,1280,768,800]){
    assert.equal(req.headers()['x-fmi-assist'],invitation);
    if(req.method()==='POST')assert.equal(req.headers()['x-owner-csrf'],'fixture-csrf');
   }
-  if(u.pathname==='/api/drafts'){if(action==='save'){record={...record,...body,owner,revision:record.revision+1,updatedAt:new Date().toISOString()};}return reply({draft:record});}
+  if(u.pathname==='/api/drafts'){if(action==='save'){assert.equal(body.revision,record.revision);record={...record,...body,owner,revision:record.revision+1,updatedAt:new Date().toISOString()};if(width===390&&!lostSave){lostSave=true;return route.abort('timedout');}}return reply({draft:record});}
   if(u.pathname==='/api/video-characters'){
    if(action==='set-capabilities')return reply({enabled:true});
    if(action==='sets')return reply(state());
@@ -86,6 +87,7 @@ try{for(const width of [390,1280,768,800]){
  await page.locator('#video-confirm').check();
  await page.getByRole('button',{name:'Create my video',exact:true}).waitFor();
  if(assisted){await page.getByRole('button',{name:'Create my video',exact:true}).click();await page.getByRole('button',{name:'Copy download link'}).waitFor();assert.ok(calls.includes('render'));assert.ok(!calls.includes('payment-order'));assert.equal(record.id,invitation);assert.ok(page.url().includes('assist=1'));assert.equal(await page.evaluate(()=>Object.keys(localStorage).some(k=>k.startsWith('fmi-draft-v1:'))),false);assert.deepEqual(errors,[]);console.log('Assisted '+(width===768?'saved-face':'courtesy-redo')+' review, render and delivery passed');await context.close();continue;}
+ if(width===390){assert.equal(lostSave,true);assert.equal(await page.getByText('The connection took too long. Please try again.',{exact:true}).count(),0);}
  assert.equal(Object.keys(record.payload.content.photos).length,9);assert.deepEqual(calls.filter(a=>a.startsWith('set-')),['set-submit','set-confirm',...(width===390?['set-revise','set-revise']:[]),'set-approve']);
  await page.reload();await page.locator('#video-confirm').waitFor();
  await nav.getByRole('button',{name:/The couple/}).click();await page.locator('#video-bride').fill('Kavya');await nav.getByRole('button',{name:/Review & download/}).click();

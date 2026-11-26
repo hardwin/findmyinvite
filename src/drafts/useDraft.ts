@@ -30,6 +30,8 @@ export function useDraft(kind:DraftKind,templateId:string){
    const latest=current.current!;const next={...latest,owner,revision:draft.revision,updatedAt:draft.updatedAt,dirty:JSON.stringify(latest.payload)!==JSON.stringify(d.payload)};current.current=next;persist(next);setRecord(next);setStatus(next.dirty?'Saving…':'Saved to your account');setError('');
   }catch(error){if(epoch.current!==e)return;const message=(error as Error).message;const conflict=/another device|draft is unavailable/.test(message);if(current.current){current.current={...current.current,conflict};setRecord(current.current);try{persist(current.current);}catch{}}setStatus(conflict?'Changes need review':'Saved on this device—waiting to sync');setError(interrupted(error)?'Your invitation will sync when the connection returns.':message);}
   })().finally(()=>{flight.current=null;});await flight.current;
+  const latest=current.current;
+  if(e===epoch.current&&latest?.dirty&&!latest.conflict&&latest.revision>d.revision)await sync();
  },[owner,kind]);
  useEffect(()=>{if(!record?.dirty||record.conflict||owner==='guest'||error!=='Your invitation will sync when the connection returns.')return;const t=setTimeout(()=>void sync(),12000);return()=>clearTimeout(t);},[record,error,owner,sync]);
  useEffect(()=>{const changed=()=>setOwner(editorOwner());window.addEventListener('fmi-auth-changed',changed);return()=>window.removeEventListener('fmi-auth-changed',changed);},[]);
