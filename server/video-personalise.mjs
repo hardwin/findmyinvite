@@ -47,7 +47,8 @@ export function videoService({store=videoStore(),env=process.env,now=()=>Date.no
   }
   if(content.music.mode==='library')refs.push(await libraryMusic(content.music.id,store));
   if(content.music.mode==='upload'){const m=await media(owner,content.music.id);if(m.kind!=='audio'||m.status!=='ready')throw new HttpError(400,'Music is not ready.');refs.push(m);}
-  const id=renderDigest(owner,master,content,refs),existing=await read('jobs/'+id+'.json');
+  let id=renderDigest(owner,master,content,refs),existing=await read('jobs/'+id+'.json');
+  if(existing&&existing.invitationId!==invitationId){id=hash({id,invitationId});existing=await read('jobs/'+id+'.json');}
   if(existing&&Date.parse(existing.expiresAt)>now()&&!stale(existing)&&['ready','running','queued'].includes(existing.status))return publicJob(existing);
   const lockKey='locks/'+hash(owner)+'.json',lock=await store.read(lockKey);
   if(lock?.value.until>now())throw new HttpError(409,'Your previous video is still rendering.');

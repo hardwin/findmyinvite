@@ -74,7 +74,7 @@ for(const mobile of [true,false]){
  await page.screenshot({path:dir+'/'+(mobile?'phone':'desktop')+'-default.png'});
  // Default flow can render without even loading the photo workflow.
  await press(page.getByText('Have a promo code?',{exact:true}));await page.locator('#video-promo').fill('FIXTURE');await press(page.getByRole('button',{name:'Apply',exact:true}));await page.locator('.vp-checkout').waitFor({state:'hidden'});
- await choose(page.getByRole('checkbox',{name:'I’ve checked the names, dates and spellings.'}),true);await press(page.getByRole('button',{name:/^Create (my|updated) video$/}));await page.waitForFunction(()=>document.querySelector('.vp-form-footer .vp-primary')?.textContent==='Download MP4');assert.deepEqual(renders[0].content.photos,{});assert.equal(renders[0].content.music.id,'canon');assert.equal(submissions.length,0);
+ await choose(page.getByRole('checkbox',{name:'I’ve checked the names, dates and spellings.'}),true);await press(page.getByRole('button',{name:/^Create (my|updated) video$/}));await page.waitForFunction(()=>document.querySelector('.vp-form-footer .vp-primary')?.textContent==='Download HD MP4');assert.deepEqual(renders[0].content.photos,{});assert.equal(renders[0].content.music.id,'canon');assert.equal(submissions.length,0);
  // All uploads are visible together. Results apply automatically with no approval modal.
  failList=true;await choose(checkbox());await page.locator('.vp-characters').waitFor();await page.locator('.vp-toast').waitFor();
  assert.doesNotMatch(await page.locator('.vp-form').innerText(),/replicate|gpt-image|API 503/i);

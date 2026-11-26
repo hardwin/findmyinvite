@@ -21,7 +21,7 @@ export function forecast(series){const complete=series.slice(-28).filter(s=>s.st
 const definitions={
  identities:'catalog_identity?select=kind,template_id,template_number,micro_description&order=template_number',
  orders:'website_orders?select=id,invitation_id,owner_id,template_version_id,purpose,base_paise,tax_paise,amount,currency,status,applied_at,created_at,captured_at,refunded_at&order=id',
- videoOrders:'video_invitation_orders?select=id,owner_id,template_id,total_paise,base_paise,tax_paise,currency,status,created_at,unlocked_at,refunded_at&order=id',
+ videoOrders:'video_invitation_orders?select=id,owner_id,template_id,free_access,total_paise,base_paise,tax_paise,currency,status,created_at,unlocked_at,refunded_at&order=id',
  videoCatalog:'video_templates?select=id,customer_name,name&order=id',
  legacyPayments:'payments?select=id,host,status,amount,currency,sku,slug,created_at,captured_at,refunded_at,tax_paise&order=id',
  templates:'template_catalog?generation=eq.2&select=id,name,description,thumbnail,published,isactive,current_version_id&order=id',

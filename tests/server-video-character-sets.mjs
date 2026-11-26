@@ -99,6 +99,7 @@ function pgRepo(pg){
  }
  const list=a=>'{'+a.join(',')+'}';
  return {
+  courtesy:async(o,i)=>(await first('select character_courtesy from public.video_invitation_orders where owner_id=$1 and id=$2',[o,i]))?.character_courtesy||[],
   sets:(o,i)=>rows('select * from public.video_character_sets where invitation_id=$1 and owner_id=$2 order by created_at',[i,o]),
   set:id=>first('select * from public.video_character_sets where id=$1',[id]),
   assets:s=>rows('select * from public.video_character_assets where set_id=$1 order by created_at',[s]),
@@ -134,6 +135,7 @@ async function fixture(){
  await pg.exec('create role anon;create role authenticated;create role service_role bypassrls;create schema auth;create table auth.users(id uuid primary key);');
  for(const f of ['20261112070852_video_invitation_checkout','20261112102539_invitation_draft_recovery','20261112104905_video_character_preparation'])await pg.exec(await readFile('supabase/migrations/'+f+'.sql','utf8'));
  await pg.exec(sql);
+ await pg.exec(await readFile('supabase/migrations/20261126181627_video_character_courtesy.sql','utf8'));
  const owner=randomUUID(),other=randomUUID(),invitation=randomUUID();await pg.query('insert into auth.users values($1),($2)',[owner,other]);await pg.exec('set role service_role');
  await pg.query("select public.fmi_save_personalization_draft($1,$2,'video',$3,$4,0)",[invitation,owner,templateId,JSON.stringify({masterVersion:1,content:{bride:'Priya',groom:'Arun',photos:{}},personalPhotosEnabled:true,charactersChoice:'personal'})]);
  const repo=pgRepo(pg),store=memoryStore(),provider=fakeProvider();
@@ -219,6 +221,13 @@ test('a bride photo change uses her one redo, reuses groom-only work and superse
   await assert.rejects(validatePreparedCharacters(f.owner,f.invitation,oldPhotos,f.repo.rest,{templateId,draft:stored}),/changed/);
   await assert.rejects(f.service.submit(f.owner,{invitationId:f.invitation,photos:{...changed,bride:await f.photo('gold')},redo:true}),/redo for this character has been used/);
   const list=await f.service.list(f.owner,f.invitation);assert.deepEqual(list.allowances,{bride:{initialUsed:true,redoUsed:true},groom:{initialUsed:true,redoUsed:false}});assert.equal(list.approved,redo.id);
+  await f.pg.query("update public.video_invitation_orders set character_courtesy=array['bride'] where id=$1",[f.invitation]);
+  assert.equal((await f.service.list(f.owner,f.invitation)).courtesy.bride,true);
+  const courtesy={invitationId:f.invitation,photos:{...changed,bride:await f.photo('gold')},redo:true};
+  const [one,two]=await Promise.all([f.service.submit(f.owner,courtesy),f.service.submit(f.owner,courtesy)]);
+  assert.equal(one.id,two.id);await f.drain();
+  assert.equal((await f.service.list(f.owner,f.invitation)).courtesy.bride,false);
+  await assert.rejects(f.service.submit(f.owner,{...courtesy,photos:{...changed,bride:await f.photo('purple')}}),/included redo/);
   await assert.rejects(f.service.list(f.other,f.invitation),e=>e.status===404);
  }finally{await f.pg.close();}
 });

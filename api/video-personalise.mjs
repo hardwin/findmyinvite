@@ -1,6 +1,7 @@
 import {videoPublicCatalog} from '../server/video-public-catalog.mjs';
 import {isVersionedVideo,videoDraftVersion,videoMasterVersion} from '../shared/video-master-version.mjs';
 import {withCatalogIdentity} from '../server/catalog-identity.mjs';
+import {deliveryLink,deliverVideo} from '../server/video-delivery.mjs';
 import {videoDownloadTicket} from '../server/video-download-ticket.mjs';
 import {queueVideoRender} from '../server/video-render-queue.mjs';
 import {handleUpload} from '@vercel/blob/client';
@@ -8,7 +9,8 @@ import {get,head} from '@vercel/blob';
 import {randomUUID} from 'node:crypto';
 import {waitUntil} from '@vercel/functions';
 import {HttpError,bodyJson,method,respond,fail,rate} from '../server/core.mjs';
-import {customer,operator} from '../server/template-cms.mjs';
+import {videoActor} from '../server/video-assistance.mjs';
+import {operator} from '../server/template-cms.mjs';
 import {DEFAULT_PUBLIC_VIDEO_ID} from '../shared/video-visibility.mjs';
 import {requireVideoVisibility} from '../server/video-visibility.mjs';
 import {videoStore,hash,VIDEO_TTL} from '../server/video-personalise-store.mjs';
@@ -29,6 +31,17 @@ export function uploadSignature(bytes,type){return matchesMediaType(bytes,type)|
 async function stopCompletedRender(store,job){if(store.local||!job.sandboxId||job.sandboxStoppedAt||!['ready','failed'].includes(job.status))return;try{await stopVideoSandbox(job.sandboxId);const row=await store.read('jobs/'+job.id+'.json');if(row?.value.attempt===job.attempt)await store.save('jobs/'+job.id+'.json',{...row.value,sandboxStoppedAt:new Date().toISOString()},{etag:row.etag});}catch(e){console.error('Video worker cleanup will retry:',job.id,e.message);}}
 export default async function handler(req,res){const store=videoStore(),service=videoService({store,launch:(job,secret)=>queueVideoRender(job,secret,{launch:launchVideoRender,finish:(...args)=>service.finish(...args),waitUntil})});try{
  const q=new URL(req.url,'https://findmyinvite.com').searchParams,action=q.get('action')||'template';
+ if(action==='delivery-file'||action==='delivery-check'){
+  method(req,['POST']);let token;
+  if(String(req.headers['content-type']||'').startsWith('application/x-www-form-urlencoded')){
+   if(req.body&&typeof req.body==='object')token=req.body.token;
+   else {let raw=typeof req.body==='string'?req.body:'';if(req.body===undefined)for await(const part of req){raw+=part;if(raw.length>1024)throw new HttpError(413,'Invalid link.');}token=new URLSearchParams(raw).get('token');}
+  }else token=(await bodyJson(req,1024)).token;
+  try{return await deliverVideo(req,res,store,action,token);}catch(error){
+   if(action==='delivery-file'&&error.status===410){res.setHeader('Location','/download/video');res.statusCode=303;return res.end();}
+   throw error;
+  }
+ }
  if(action==='templates'){
   method(req,['GET']);const includeHidden=q.get('includeHidden')==='1';if(includeHidden)await operator(req);
   const {templates,musicUnavailable}=await videoPublicCatalog({includeHidden});
@@ -37,7 +50,7 @@ export default async function handler(req,res){const store=videoStore(),service=
  if(action==='template'){
   method(req,['GET']);
   const templateId=q.get('template')||DEFAULT_PUBLIC_VIDEO_ID;
-  await requireVideoVisibility(req,templateId,q.get('invitationId'));
+  await requireVideoVisibility(req,templateId,q.get('invitationId'),req.headers['x-fmi-assist']?{user:await videoActor(req,'video',action,{store})}:{});
   const requested=q.get('masterVersion');
   const version=isVersionedVideo(templateId)&&(requested||templateId!=='film-oonjal-v1')
    ?videoMasterVersion(templateId,Number(requested||(['wedding-bells-v1','film-were-next-v1','film-anbil-avan-v1'].includes(templateId)?1:3))):undefined;
@@ -46,8 +59,26 @@ export default async function handler(req,res){const store=videoStore(),service=
  }
  if(action==='retention'){method(req,['GET']);if(!process.env.CRON_SECRET||req.headers.authorization!=='Bearer '+process.env.CRON_SECRET)throw new HttpError(401,'Unauthorized');await store.expired();await draftService({store}).cleanupDeleted();return respond(res,200,{ok:true});}
  if(action==='callback'){method(req,['POST']);const b=await bodyJson(req),secret=String(req.headers['x-video-secret']||'');const result=await service.finish(b.id,secret,b);const row=await store.read('jobs/'+b.id+'.json');if(['ready','failed'].includes(result.status)&&row?.value.sandboxId)waitUntil(stopVideoSandbox(row.value.sandboxId).catch(()=>{}));return respond(res,200,result);}
- if(action==='upload'){method(req,['POST']);const body=await bodyJson(req);return respond(res,200,await handleUpload({request:req,body,onBeforeGenerateToken:async pathname=>{const user=await customer(req),m=/^video-personalise\/(?:uploads\/([a-f0-9-]{36})\/([a-f0-9-]{36})|persistent\/([a-f0-9-]{36})\/([a-f0-9-]{36})\/([a-f0-9-]{36})\/original)$/.exec(pathname);if(!m||(m[1]||m[3])!==user.id)throw new HttpError(403,'Upload not reserved.');const record=await service.media(user.id,m[2]||m[5]);if(pathname!==store.prefix+record.key)throw new HttpError(403,'Upload not reserved.');if(record.status!=='pending')throw new HttpError(409,'Upload already completed.');return {allowedContentTypes:types[record.kind],maximumSizeInBytes:limits[record.kind],addRandomSuffix:false,allowOverwrite:false,validUntil:Date.now()+600000};},onUploadCompleted:async()=>{}}));}
- const user=await customer(req);
+ if(action==='upload'){method(req,['POST']);const body=await bodyJson(req);return respond(res,200,await handleUpload({request:req,body,onBeforeGenerateToken:async pathname=>{const user=await videoActor(req,'video',action,{uploadPath:pathname,store}),m=/^video-personalise\/(?:uploads\/([a-f0-9-]{36})\/([a-f0-9-]{36})|persistent\/([a-f0-9-]{36})\/([a-f0-9-]{36})\/([a-f0-9-]{36})\/original)$/.exec(pathname);if(!m||(m[1]||m[3])!==user.id)throw new HttpError(403,'Upload not reserved.');const record=await service.media(user.id,m[2]||m[5]);if(pathname!==store.prefix+record.key)throw new HttpError(403,'Upload not reserved.');if(record.status!=='pending')throw new HttpError(409,'Upload already completed.');return {allowedContentTypes:types[record.kind],maximumSizeInBytes:limits[record.kind],addRandomSuffix:false,allowOverwrite:false,validUntil:Date.now()+600000};},onUploadCompleted:async()=>{}}));}
+ const user=await videoActor(req,'video',action,{store});
+ if(action==='assist-status'){
+  method(req,['GET']);const order=user.assistedOrder;if(!order)throw new HttpError(403,'Owner access is required.');
+  const drafts=draftService({store}),d=await drafts.get(user.id,order.id,{optional:true});
+  const jobId=d?.last_job_id||d?.payload?.job?.id,job=jobId?await drafts.jobView(user.id,jobId):null;
+  let step=d?.payload?.formStepId||'details';
+  if(d?.payload?.charactersChoice==='personal'&&videoDefinition(order.template_id).characterProfile){
+   const [set]=await db('video_character_sets?invitation_id=eq.'+order.id+'&owner_id=eq.'+user.id+'&status=neq.superseded&order=created_at.desc&select=id,status&limit=1');
+   if(set){
+    const labels={identities:'Preparing faces',identity_review:'Faces ready for review',poses:'Preparing scene illustrations',review:'Scenes ready for approval',approved:'Illustrations approved'};
+    step=labels[set.status]||step;
+    if(['identities','poses'].includes(set.status)){
+     const [failed]=await db('video_character_assets?set_id=eq.'+set.id+'&status=eq.failed&select=id&limit=1');
+     if(failed)step='Illustrations need a retry';
+    }
+   }
+  }
+  return respond(res,200,{templateId:order.template_id,step,job});
+ }
  if(['payment-status','payment-order','payment-verify','payment-promo'].includes(action)){
   method(req,action==='payment-status'?['GET']:['POST']);
   const b=action==='payment-status'?Object.fromEntries(q):await bodyJson(req,4000),templateId=b.templateId||DEFAULT_VIDEO_ID;
@@ -65,6 +96,7 @@ export default async function handler(req,res){const store=videoStore(),service=
  if(action==='cutout'){method(req,['POST']);await rate(req,'video-cutout:'+user.id,12,3600);const m=await service.media(user.id,q.get('id'));if(m.kind!=='image'||m.status!=='ready')throw new HttpError(400,'Photo is not ready.');if(!m.cutoutKey){const output=await prepareVideoPhoto(await store.bytes(m.key)),key=m.durable?'persistent/'+user.id+'/'+m.invitationId+'/'+m.id+'/cutout.png':'cutouts/'+user.id+'/'+m.id+'.png';await store.putBytes(key,output,'image/png');const current=await store.read('media/'+m.id+'.json');await store.save('media/'+m.id+'.json',{...current.value,cutoutKey:key,cutoutSha256:hash(output)},{etag:current.etag});}return respond(res,200,{id:m.id});}
  if(action==='render'){method(req,['POST']);const b=await bodyJson(req,64000),templateId=b.templateId||DEFAULT_VIDEO_ID;await requireVideoVisibility(req,templateId,b.invitationId,{user});const savedDraft=await draftService({store}).get(user.id,b.invitationId,{optional:true});if(savedDraft&&savedDraft.template_id!==templateId)throw new HttpError(404,'Invitation not found.');const purchase=await videoPaymentService().requireAccess(user.id,b.invitationId,templateId);await rate(req,'video-render:'+user.id,5,3600);await validatePreparedCharacters(user.id,purchase.id,b.content?.photos,undefined,{templateId,draft:savedDraft});const job=await service.start(user.id,b.content,templateId,purchase.id,isVersionedVideo(templateId)?videoDraftVersion(templateId,savedDraft?.payload):undefined);await db('personalization_drafts?id=eq.'+purchase.id+'&owner_id=eq.'+user.id,{method:'PATCH',body:{last_job_id:job.id}});return respond(res,202,job);}
  if(action==='status'){method(req,['GET']);const job=await service.job(user.id,q.get('id'));waitUntil(stopCompletedRender(store,job));return respond(res,200,publicJob(job));}
+ if(action==='delivery-link'){method(req,['GET']);const job=await service.job(user.id,q.get('id'));return respond(res,200,deliveryLink(job));}
  if(action==='download-ticket'){method(req,['GET']);const j=await service.job(user.id,q.get('id'));if(j.status!=='ready')throw new HttpError(409,'Video is not ready.');return respond(res,200,store.local?{url:null}:{...await videoDownloadTicket(store.prefix+j.resultKey),bytes:j.bytes,sha256:j.resultSha256});}
  if(action==='download'||action==='media'){
   method(req,['GET']);let key,type,size;

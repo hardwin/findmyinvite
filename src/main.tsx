@@ -4,7 +4,7 @@ import App from './App';
 import {startAnalytics} from './analytics';
 import './style.css';
 createRoot(document.getElementById('root')!).render(<React.StrictMode><App/></React.StrictMode>);
-if(location.pathname!=='/auth/callback')startAnalytics();
+if(!['/auth/callback','/download/video'].includes(location.pathname)&&!location.search.includes('assist=1'))startAnalytics();
 import './iteration2.css';
 
 

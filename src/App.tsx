@@ -5,6 +5,7 @@ import ContentPages from './ContentPages';
 import OccasionLanding from './OccasionLanding';
 import {invitationSearchHref} from '../shared/catalog-search.mjs';
 const SearchResults=lazy(()=>import('./SearchResults'));
+const VideoDownloadPage=lazy(()=>import('./video/VideoDelivery'));
 const VideoPersonalise=lazy(()=>import('./video/VideoPersonalise'));
 const AuthCallback=lazy(()=>import('./AuthCallback'));
 const TemplateCMS=lazy(()=>import('./templates/TemplateCMS'));
@@ -30,7 +31,8 @@ export default function App(){const path=location.pathname.replace(/\/$/,'')||'/
  if(path.startsWith('/manage/')){location.replace('/personalise?slug='+encodeURIComponent(path.split('/')[2]));return null;}
  if(path==='/assembly'||path==='/assembly/pipeline'){location.replace(path.includes('pipeline')?'/manager/pipeline':'/manager');return null;}
  let page,invitationPage=path==='/template-preview';
- if(path==='/video-personalise')page=<VideoPersonalise/>;
+ if(path==='/download/video')page=<VideoDownloadPage/>;
+ else if(path==='/video-personalise')page=<VideoPersonalise/>;
  else if(path==='/auth/callback')page=<AuthCallback/>;
  else if(path==='/cms')page=<TemplateCMS/>;
  else if(path==='/personalise')page=<WebsiteEditor/>;

@@ -1,6 +1,6 @@
 import {waitUntil} from '@vercel/functions';
 import {bodyJson,method,respond,fail,rate,HttpError} from '../server/core.mjs';
-import {customer} from '../server/template-cms.mjs';
+import {videoActor} from '../server/video-assistance.mjs';
 import {characterService,characterJobView} from '../server/video-characters.mjs';
 import {characterEnabled,characterSetsEnabled,characterSetsRecoverable} from '../server/video-character-access.mjs';
 import {verifyCharacterWebhook} from '../server/video-character-provider.mjs';
@@ -33,7 +33,7 @@ export default async function handler(req,res){try{
   // Status and image URLs are fetched from Replicate again; never trust callback output data.
   waitUntil(action==='callback'?service.process(q.get('id')):characterSetService().process(q.get('id')));return respond(res,200,{ok:true});
  }
- const user=await customer(req);
+ const user=await videoActor(req,'characters',action);
  if(action==='sets'||action.startsWith('set-'))return await characterSets(req,res,q,action,user);
  if(action==='capabilities'){method(req,['GET']);return respond(res,200,{enabled:characterEnabled(user.id),model:'openai/gpt-image-2.6-flare'});}
  if(!characterEnabled(user.id))throw new HttpError(503,'Matching characters are completing their visual checks. Your original illustrations remain available.');

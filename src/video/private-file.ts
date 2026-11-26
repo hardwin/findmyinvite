@@ -1,3 +1,4 @@
+import {assistHeaders} from './assist';
 import {templateToken} from '../templates/api';
 import {videoRequest} from './request';
 import {downloadPrivateFile} from './private-download.mjs';
@@ -9,5 +10,5 @@ export const privateVideoFile=(url:string,onProgress?:(progress:DownloadProgress
   if(!ticket||ticket.url&&ticket.expiresAt<Date.now()+60000){pending??=videoRequest<Ticket>(url.replace('action=download&','action=download-ticket&')).then(value=>ticket=value).finally(()=>{pending=undefined;});await pending;}
   return ticket?.url?{url:ticket.url,bytes:ticket.bytes,sha256:ticket.sha256}:null;
  }:undefined;
- return downloadPrivateFile(url,{getToken:templateToken,onProgress,resolveDownload});
+ return downloadPrivateFile(url,{getToken:templateToken,fetcher:(input,init)=>fetch(input,{...init,headers:{...init?.headers,...(typeof input==='string'&&input.startsWith('/api/video-personalise?')?assistHeaders():{})}}),onProgress,resolveDownload});
 };

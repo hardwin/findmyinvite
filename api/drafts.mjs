@@ -1,9 +1,9 @@
 import {bodyJson,method,respond,fail,rate} from '../server/core.mjs';
-import {customer} from '../server/template-cms.mjs';
+import {videoActor} from '../server/video-assistance.mjs';
 import {draftService,draftView} from '../server/personalization-drafts.mjs';
 import {requireVideoVisibility} from '../server/video-visibility.mjs';
 export const config={maxDuration:300};
-export default async function handler(req,res){try{const user=await customer(req),q=new URL(req.url,'https://findmyinvite.com').searchParams,action=q.get('action')||'list',service=draftService();
+export default async function handler(req,res){try{const q=new URL(req.url,'https://findmyinvite.com').searchParams,action=q.get('action')||'list',user=await videoActor(req,'drafts',action),service=draftService();
  if(action==='list'){method(req,['GET']);const [drafts,deleted]=await Promise.all([service.list(user.id),service.deleted(user.id)]);return respond(res,200,{drafts,deleted});}
  if(action==='get'){method(req,['GET']);let r=await service.get(user.id,q.get('id'),{optional:true});if(!r){const found=(await service.list(user.id)).find(d=>d.id===q.get('id'));if(found)return respond(res,200,{draft:found});await service.get(user.id,q.get('id'));}return respond(res,200,{draft:{...draftView(r),job:await service.jobView(user.id,r.last_job_id||r.payload?.job?.id)}});}
  method(req,['POST']);const b=await bodyJson(req,200000);await rate(req,'draft-'+user.id,600,3600);

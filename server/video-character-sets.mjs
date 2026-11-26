@@ -30,6 +30,7 @@ export function characterSetRepository(query=db){
  const rpc=async(name,body)=>{const r=await query('rpc/'+name,{method:'POST',body});return Array.isArray(r)?r[0]:r;};
  const patch=(table,id,body,filter='')=>one(table+'?id=eq.'+id+filter,{method:'PATCH',headers:{Prefer:'return=representation'},body});
  return {
+  courtesy:async(owner,invitation)=>(await one('video_invitation_orders?id=eq.'+invitation+'&owner_id=eq.'+owner+'&select=character_courtesy'))?.character_courtesy||[],
   sets:(owner,invitation)=>query('video_character_sets?invitation_id=eq.'+invitation+'&owner_id=eq.'+owner+'&order=created_at.asc'),
   set:id=>one('video_character_sets?id=eq.'+id),
   assets:set=>query('video_character_assets?set_id=eq.'+set+'&order=created_at.asc'),
@@ -80,7 +81,16 @@ export function characterSetService({query=db,repo=characterSetRepository(query)
   const draft=await drafts.get(owner,invitationId),{profile,version}=await profileFor(draft);
   const sets=await repo.sets(owner,draft.id),assets=sets.length?await repo.invitationAssets(owner,draft.id):[];
   const visible=sets.filter(s=>s.status!=='superseded'&&s.profile===profile.id&&s.master_version===version);
-  return {profile:profile.id,masterVersion:version,sets:visible.map(s=>characterSetView(s,assets)),current:visible.filter(s=>OPEN.includes(s.status)).at(-1)?.id||null,approved:visible.find(s=>s.approved_current)?.id||null,
+  const courtesy=sets.length?await repo.courtesy(owner,draft.id):[];
+  const current=visible.find(s=>OPEN.includes(s.status))||visible.find(s=>s.approved_current);
+  const equivalent={};
+  if(current)await Promise.all(profile.identities.map(async person=>{
+   const id=draft.payload?.references?.[person]?.id;
+   if(!uuid(id)||id===current.photos[person]?.id)return;
+   const saved=(await store.read('media/'+id+'.json'))?.value;
+   if(saved?.owner===owner&&saved.invitationId===draft.id&&saved.sha256===current.photos[person].sha256)equivalent[person]=id;
+  }));
+  return {equivalent,courtesy: Object.fromEntries(courtesy.map(p=>[p,generated(assets,p)===2])),profile:profile.id,masterVersion:version,sets:visible.map(s=>characterSetView(s,assets)),current:visible.filter(s=>OPEN.includes(s.status)).at(-1)?.id||null,approved:visible.find(s=>s.approved_current)?.id||null,
    allowances:Object.fromEntries(profile.identities.map(p=>[p,{initialUsed:generated(assets,p)>=1,redoUsed:generated(assets,p)>=2}])),active:assets.filter(a=>ACTIVE.includes(a.status)).map(a=>a.id)};
  }
  // Reused rows share stored bytes but get their own set-bound media record.

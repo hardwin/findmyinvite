@@ -1,6 +1,7 @@
 import {useEditorIssue,type EditorAction} from './editor-ui';
 import {useEffect,useRef,useState} from 'react';
 import {ImagePlus,RefreshCw,Trash2,Eye,Check} from 'lucide-react';
+import {assistHeaders} from './assist';
 import {templateToken} from '../templates/api';
 import {videoRequest as request} from './request';
 import {stageMedia,localMediaFile,localMediaUrl} from '../templates/local-media';
@@ -42,8 +43,8 @@ export function CharacterPanel({onAction,onStatus,onUnlock,paymentBusy,invitatio
  async function transfer(slot:Slot,ref:Reference,next:CharacterReferences){
   if(!ref.localId)throw Error('Select this photo again.');const file=await localMediaFile(ref.localId);await save();
   const reserved=await request<{id:string;pathname:string}>('/api/video-personalise?action=reserve',{kind:'image',templateId:'temple-v1',invitationId}),token=await templateToken();
-  if(localUploads){const response=await fetch('/api/video-personalise?action=local-upload&id='+reserved.id,{method:'POST',headers:{Authorization:'Bearer '+token,'Content-Type':file.type},body:file,signal:AbortSignal.timeout(60000)});if(!response.ok)throw Error('Photo upload failed. Tap retry to try again.');}
-  else{await upload(reserved.pathname,file,{access:'private',handleUploadUrl:'/api/video-personalise?action=upload',headers:{Authorization:'Bearer '+token},abortSignal:AbortSignal.timeout(60000)});await request('/api/video-personalise?action=complete&id='+reserved.id,{});}
+  if(localUploads){const response=await fetch('/api/video-personalise?action=local-upload&id='+reserved.id,{method:'POST',headers:{...assistHeaders(),Authorization:'Bearer '+token,'Content-Type':file.type},body:file,signal:AbortSignal.timeout(60000)});if(!response.ok)throw Error('Photo upload failed. Tap retry to try again.');}
+  else{await upload(reserved.pathname,file,{access:'private',handleUploadUrl:'/api/video-personalise?action=upload',headers:{...assistHeaders(),Authorization:'Bearer '+token},abortSignal:AbortSignal.timeout(60000)});await request('/api/video-personalise?action=complete&id='+reserved.id,{});}
   await saveReferences({...next,[slot]:{...ref,id:reserved.id}});
  }
  async function add(file:File,slot:Slot){const processed=await optimise(file,'image'),localId=await stageMedia(processed,'image'),ref:Reference={id:'',localId,identity:slot==='couple'?'auto':'single'},next={...references,[slot]:ref};await saveReferences(next);await transfer(slot,ref,next);}
