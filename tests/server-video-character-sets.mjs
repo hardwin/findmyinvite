@@ -46,6 +46,9 @@ test('Reception accepts the approved hand-on-shoulder silhouette and rejects the
  const old=await readFile('public'+inventory.receptionCouple.path);
  await verifyReceptionSilhouette((await alignToReference(current,current)).bytes);
  await assert.rejects(async()=>verifyReceptionSilhouette((await alignToReference(old,current)).bytes),e=>e.code==='CHARACTER_QUALITY');
+ const gap=await sharp({create:{width:100,height:100,channels:4,background:'white'}}).png().toBuffer();
+ const missingArm=await sharp(current).composite([{input:gap,left:480,top:505,blend:'dest-out'}]).png().toBuffer();
+ await assert.rejects(verifyReceptionSilhouette(missingArm),e=>e.code==='CHARACTER_QUALITY');
 });
 
 test('pose outputs are placed on the exact approved canvas and pose drift is rejected',async()=>{
