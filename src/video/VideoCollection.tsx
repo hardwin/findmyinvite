@@ -22,6 +22,7 @@ export function VideoCard({entry,showDetails=true,preview=entry.preview}:{entry:
  const [activeSrc,setActiveSrc]=useState<string|null>(null),[failed,setFailed]=useState(false),[ready,setReady]=useState(false);
  const [feedback,setFeedback]=useState<PlaybackFeedback>('none');
  const progress=useRef({position:0,at:0}),playAttempt=useRef(0);
+ const startupHold=useRef(false);
  const muted=usePreviewMuted(),audioRef=useRef<HTMLAudioElement>(null);
  const reportedPlayback=useRef(false);
  const attachVideo=useCallback((node:HTMLVideoElement|null)=>{
@@ -36,6 +37,12 @@ export function VideoCard({entry,showDetails=true,preview=entry.preview}:{entry:
   function checkProgress(){
    if(!video||videoRef.current!==video)return;
    const now=performance.now(),position=video.currentTime;
+   if(startupHold.current){
+    const ahead=video.buffered.length?video.buffered.end(0)-position:0;
+    if(ahead>=2.5||now-progress.current.at>=4500||(!video.buffered.length&&video.readyState===4)){
+     video.playbackRate=1;startupHold.current=false;
+    }
+   }
    if(position!==progress.current.position)progress.current={position,at:now};
    const elapsed=now-progress.current.at;
    if(video.error)setFeedback('retry');
@@ -56,7 +63,7 @@ export function VideoCard({entry,showDetails=true,preview=entry.preview}:{entry:
   if(ready){setFeedback('retry');return;}
   setActiveSrc(null);setFailed(true);
  }
- function playVideo(reload=false){
+ function playVideo(reload=false,holdForOpening=false){
   const video=videoRef.current;if(!video)return;
   const attempt=++playAttempt.current,position=video.currentTime;
   if(reload){
@@ -65,6 +72,11 @@ export function VideoCard({entry,showDetails=true,preview=entry.preview}:{entry:
    if(position>0)video.currentTime=position;
   }
   progress.current={position,at:performance.now()};setFeedback('none');
+  startupHold.current=false;
+  if(holdForOpening){
+   // Unlock sound in the tap handler, but give the first few frames a buffer before the clock runs.
+   try{video.playbackRate=0;startupHold.current=true;}catch{/* Devices without zero-rate playback start normally. */}
+  }else if(video.playbackRate===0)video.playbackRate=1;
   video.muted=previewMuted();
   void video.play().catch((error:DOMException)=>{
    if(videoRef.current!==video||attempt!==playAttempt.current||error.name==='AbortError')return;
@@ -80,7 +92,7 @@ export function VideoCard({entry,showDetails=true,preview=entry.preview}:{entry:
   reportedPlayback.current=false;
   window.dispatchEvent(new Event('catalog-stop-all'));setFailed(false);setReady(false);setFeedback('none');
   flushSync(()=>setActiveSrc(preview));
-  playVideo();
+  playVideo(false,preview===entry.mobilePreview);
  }
  function playing(){
   setReady(true);
