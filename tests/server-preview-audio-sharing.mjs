@@ -26,8 +26,9 @@ test('a pending play promise is not repeated and cannot outlive cleanup',async()
 });
 test('Wedding Bells uses either embedded original audio or a silent film with selected music',()=>{
  const preview='/assets/video-masters/wedding-bells-v1/catalog-preview-tracked-v1.mp4';
- assert.deepEqual(catalogPreviewPlayback('wedding-bells-v1',preview,{id:'wedding-bells-original'}),{preview,embeddedMusic:true});
- for(const music of [null,{id:'different-track'}]){const p=catalogPreviewPlayback('wedding-bells-v1',preview,music);assert.equal(p.embeddedMusic,false);assert.match(p.preview,/silent/);}
+ assert.deepEqual(catalogPreviewPlayback('wedding-bells-v1',preview,{id:'wedding-bells-original'}),{preview,embeddedMusic:true,mobilePreview:'/assets/catalog-previews/mobile-v1/wedding-bells.mp4'});
+ for(const music of [null,{id:'different-track'}]){const p=catalogPreviewPlayback('wedding-bells-v1',preview,music);assert.equal(p.embeddedMusic,false);assert.match(p.preview,/silent/);assert.equal(p.mobilePreview,undefined);}
+ assert.equal(catalogPreviewPlayback('film-anbil-avan-v1','/future-cut.mp4',null).mobilePreview,undefined);
  assert.equal(catalogPreviewPlayback('temple-v1','/silent.mp4',{id:'track'}).embeddedMusic,false);
 });
 test('shared links are public details pages for each kind, never draft or editor routes',()=>{
