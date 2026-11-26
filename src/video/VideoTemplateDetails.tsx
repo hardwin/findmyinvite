@@ -3,9 +3,13 @@ import {VideoCard} from './VideoCollection';
 import type {VideoEntry} from './catalog';
 import TemplatePrice from '../TemplatePrice';
 import TemplateShare from '../TemplateShare';
+import {OfferCountdown,useBlackFridayOffer} from './BlackFridayOffer';
 import {templateDetailsPath} from '../../shared/template-sharing.mjs';
 
 export default function VideoTemplateDetails({entry}:{entry:VideoEntry}){
+ const campaign=useBlackFridayOffer(entry.id);
+ const label=campaign?.offerLabel??entry.offerLabel;
+ const price=campaign?.basePaise??entry.quote?.basePaise??entry.amount;
  return <><a className="di-back" href="/templates?kind=video">← Invitation videos</a>
   <section className="di-detail">
    <div className="di-detail-media di-detail-video"><VideoCard entry={entry} showDetails={false}/></div>
@@ -13,8 +17,9 @@ export default function VideoTemplateDetails({entry}:{entry:VideoEntry}){
     <p className="di-eyebrow">{entry.tier==='premium'?'Premium invitation video':'Invitation video'}</p>
     <h1>{entry.name}</h1><p className="di-template-code">{entry.templateCode}</p>
     <p>{entry.microDescription}</p>
-    {entry.offerLabel&&<span className="di-offer-label">{entry.offerLabel}</span>}
-    <h2><TemplatePrice amountPaise={entry.quote?.basePaise??entry.amount} originalPaise={entry.originalPaise??99900}/> {(entry.quote?.basePaise??entry.amount)>0&&<small>+ applicable tax</small>}</h2>
+    {label&&<span className="di-offer-label">{label}</span>}
+    <OfferCountdown seconds={campaign?.secondsLeft}/>
+    <h2><TemplatePrice amountPaise={price} originalPaise={campaign?.originalPaise??entry.originalPaise??99900}/> {price>0&&<small>+ applicable tax</small>}</h2>
     <p>Personalise your names and event details, preview your invitation, then download your finished MP4. Edits and updated exports are included.</p>
     <a className="di-button" href={'/video-personalise?template='+encodeURIComponent(entry.id)}>Personalise this invitation <ArrowUpRight size={18}/></a>
     <TemplateShare name={entry.name} detailsHref={templateDetailsPath(entry.id,'video')}/>

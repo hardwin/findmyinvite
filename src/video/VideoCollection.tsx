@@ -120,7 +120,7 @@ export function VideoCard({entry,showDetails=true,preview=entry.preview}:{entry:
    </button>}
    {activeSrc&&ready&&<PreviewSoundButton name={entry.name} muted={muted} onClick={toggleMusic}/>}
   </div>
-  {showDetails&&<TemplateCardDetails name={entry.name} kind="video" useHref={useHref} templateCode={entry.templateCode} microDescription={entry.microDescription} detailsHref={templateDetailsPath(entry.id,'video')} amountPaise={entry.quote?.basePaise} originalPaise={entry.originalPaise} offerLabel={entry.offerLabel}/>}
+  {showDetails&&<TemplateCardDetails name={entry.name} kind="video" templateId={entry.id} useHref={useHref} templateCode={entry.templateCode} microDescription={entry.microDescription} detailsHref={templateDetailsPath(entry.id,'video')} amountPaise={entry.quote?.basePaise} originalPaise={entry.originalPaise} offerLabel={entry.offerLabel}/>}
   {failed&&<small className="di-card-status" role="status">Preview could not load. Try again or use this template.</small>}
  </article>}</TemplatePreviewDialog>;
 }

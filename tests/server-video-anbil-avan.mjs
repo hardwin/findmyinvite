@@ -7,7 +7,7 @@ import {catalogVideo,VIDEO_CATALOG} from '../shared/video-catalog.mjs';
 import {videoDefinition,normalizeVideoContent,assertMaster,MUSIC} from '../shared/video-personalization.mjs';
 import {prepareSceneMaster,sceneSchema} from '../server/video-scene-details.mjs';
 import {PUBLIC_VIDEO_IDS,isPublicVideo} from '../shared/video-visibility.mjs';
-import {videoOffer,videoQuote} from '../shared/video-pricing.mjs';
+import {BLACK_FRIDAY_START,BLACK_FRIDAY_END,videoOffer,videoQuote} from '../shared/video-pricing.mjs';
 import {isFreeVideo} from '../shared/video-access.mjs';
 import {isVersionedVideo,videoMasterVersion,videoNewOrSavedVersion,videoDraftVersion,pinVideoMasterVersion} from '../shared/video-master-version.mjs';
 import {usesOriginalAnbilAvanAudio,usesOriginalWereNextAudio,usesOriginalOonjalAudio} from '../shared/music-selection.mjs';
@@ -42,10 +42,15 @@ test('the storefront form and export resolve the original Anbil Avan release',as
 
 });
 
-test('Anbil Avan is ₹299 + 18% GST (₹352.82) with no offer; existing prices are unchanged',()=>{
- assert.deepEqual(videoOffer(id),{basePaise:29900,originalPaise:0,offerLabel:'',tier:'premium'});
- assert.deepEqual(videoQuote(id),{basePaise:29900,taxBps:1800,taxPaise:5382,totalPaise:35282,taxLabel:'GST',currency:'INR'});
- assert.equal((videoQuote(id).totalPaise/100).toFixed(2),'352.82');
+test('only Anbil Avan advertises ₹699 to ₹299 during the fixed 48-hour Black Friday window',()=>{
+ const regular={basePaise:29900,originalPaise:0,offerLabel:'',tier:'premium'};
+ const sale={...regular,originalPaise:69900,offerLabel:'Black Friday offer'};
+ assert.equal(BLACK_FRIDAY_END-BLACK_FRIDAY_START,48*60*60*1000);
+ assert.deepEqual(videoOffer(id,BLACK_FRIDAY_START-1),regular);
+ assert.deepEqual(videoOffer(id,BLACK_FRIDAY_START),sale);
+ assert.deepEqual(videoOffer(id,BLACK_FRIDAY_END-1),sale);
+ assert.deepEqual(videoOffer(id,BLACK_FRIDAY_END),regular);
+ assert.deepEqual(videoQuote(id,BLACK_FRIDAY_START),{basePaise:29900,taxBps:1800,taxPaise:5382,totalPaise:35282,taxLabel:'GST',currency:'INR'});
  assert.equal(isFreeVideo(id),false);
  assert.deepEqual(videoOffer('wedding-bells-v1'),{basePaise:69900,originalPaise:159900,offerLabel:'Christmas Offer',tier:'premium'});
  for(const old of ['film-oonjal-v1','film-were-next-v1'])assert.deepEqual(videoOffer(old),{basePaise:29900,originalPaise:0,offerLabel:'',tier:'premium'});
