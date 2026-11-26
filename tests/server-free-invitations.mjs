@@ -1,11 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {randomUUID} from 'node:crypto';
-import {readFile} from 'node:fs/promises';
+import {readdir,readFile} from 'node:fs/promises';
 import {PGlite} from '@electric-sql/pglite';
 import {FREE_WEBSITE_IDS,isFreeWebsite} from '../shared/catalog-access.mjs';
 import {FREE_VIDEO_IDS,isFreeVideo} from '../shared/video-access.mjs';
-import {videoQuote} from '../shared/video-pricing.mjs';
+import {BLACK_FRIDAY_END,videoQuote} from '../shared/video-pricing.mjs';
 import {videoPaymentService} from '../server/video-payments.mjs';
 import {templateShareData,templateShareMeta} from '../server/template-share.mjs';
 import {templateShareCardHtml} from '../shared/template-share-card.mjs';
@@ -62,6 +62,21 @@ test('database enforces free publication, durable access and historical payment 
   await pg.query('update video_invitation_orders set base_paise=49900,tax_paise=8982,total_paise=58882 where id=$1',[id]);
   assert.equal((await reserveVideo(id,'film-anbil-avan-v1')).total_paise,58882);
   await assert.rejects(pg.query('update video_invitation_orders set tax_paise=0,total_paise=base_paise where id=$1',[id]),/total_paise_check/);
+ });
+ await t.test('Anbil Avan reservations follow the same 48-hour deadline as checkout',async()=>{
+  const migrationFile=(await readdir('supabase/migrations')).find(file=>file.endsWith('_anbil_black_friday_price.sql'));
+  const sql=await readFile('supabase/migrations/'+migrationFile,'utf8');
+  const design='film-anbil-avan-v1',issued=await video(design);
+  for(const when of [BLACK_FRIDAY_END-1,BLACK_FRIDAY_END]){
+   // Advance only the transaction's clock in this isolated database.
+   await pg.exec('reset role');
+   await pg.exec(sql.replace('statement_timestamp()',`timestamptz '${new Date(when).toISOString()}'`));
+   await pg.exec('set role service_role');
+   const row=await reserveVideo(when===BLACK_FRIDAY_END?await video(design):issued,design);
+   assert.equal(row.total_paise,videoQuote(design,when).totalPaise);
+   assert.equal((await reserveVideo(issued,design)).total_paise,35282);
+  }
+  await pg.exec('reset role');await pg.exec(sql);await pg.exec('set role service_role');
  });
  await t.test('new Oonjal reservations require ₹299 plus GST and past grants still open',async()=>{
   const id=await video(oonjal);

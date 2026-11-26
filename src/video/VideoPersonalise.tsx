@@ -31,6 +31,7 @@ import {upload} from '@vercel/blob/client';
 import AuthModal from '../AuthModal';
 import type {VideoMasterManifest,VideoPersonalization,VideoRenderJob,CharacterProfile} from './types';
 import {VideoCheckout} from './VideoCheckout';
+import {useCheckoutPurchase} from './BlackFridayOffer';
 import {CharacterPanel,type CharacterReferences,type CharacterStatus} from './CharacterPanel';
 import {CharacterSetPanel} from './CharacterSetPanel';
 import {checkoutVideo,applyVideoPromo,videoPurchase,type VideoPurchase} from './checkout';
@@ -68,7 +69,8 @@ function VideoEditor(){
  const VIDEO_FORM=useMemo(()=>runtimeRules?{...baseForm,steps:baseForm.steps.map(s=>({...s,questions:s.questions.filter(q=>runtimeRules.visible[q.path]!==false).map(q=>({...q,required:runtimeRules.required.includes(q.path)}))}))}:baseForm,[baseForm,runtimeRules]),VIDEO_DEFAULTS=definition?.defaults||videoDefinition().defaults;
  const photoSlots:{slot:string;label:string;scene?:string}[]=definition?.photoSlots||PHOTO_SLOTS.map(slot=>({slot,label:slot==='couple'?'The two of you':'The '+slot}));
  const [config,setConfig]=useState<{templateCode?:string;microDescription?:string;master:VideoMasterManifest;ready:boolean;localUploads:boolean;musicTracks:{id:string;title:string}[];defaults:Record<string,any>}|null>(null),[content,setContent]=useState<VideoPersonalization>(structuredClone(VIDEO_DEFAULTS) as VideoPersonalization),[step,setStep]=useState(0),[error,setError]=useState(''),[notice,setNotice]=useState(''),[busy,setBusy]=useState(false),[signin,setSignin]=useState(false),[frame,setFrame]=useState(102),[playing,setPlaying]=useState(false),[loop,setLoop]=useState(false),[previewError,setPreviewError]=useState(''),[previewReady,setPreviewReady]=useState(false),[job,setJob]=useState<VideoRenderJob|null>(null),[jobContent,setJobContent]=useState(''),[checked,setChecked]=useState(false),[owner,setOwner]=useState(readSession()?.user.id||'guest'),[photoURLs,setPhotoURLs]=useState<Record<string,{url:string;mode:string}>>({}),[pending,setPending]=useState<Record<string,{id:string;mode:'frame'|'cutout';url:string;originalUrl:string;error?:string;prepared?:boolean;localId?:string}>>({});
- const [invitationId,setInvitationId]=useState(''),[purchase,setPurchase]=useState<VideoPurchase|null>(null),[checkingPayment,setCheckingPayment]=useState(false);
+ const [invitationId,setInvitationId]=useState(''),[savedPurchase,setPurchase]=useState<VideoPurchase|null>(null),[checkingPayment,setCheckingPayment]=useState(false);
+ const purchase=useCheckoutPurchase(templateId,savedPurchase);
  const trackedEditor=useRef('');
  useEffect(()=>{
   if(!config||!invitationId||trackedEditor.current===invitationId)return;

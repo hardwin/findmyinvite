@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {videoPublicCatalog} from '../server/video-public-catalog.mjs';
 import {PUBLIC_VIDEO_IDS} from '../shared/video-visibility.mjs';
+import {videoQuote} from '../shared/video-pricing.mjs';
 import {resolveTemplateShare} from '../server/template-share.mjs';
 
 test('staged details resolve the deployed catalog without querying the older live catalog',async()=>{
@@ -11,7 +12,7 @@ test('staged details resolve the deployed catalog without querying the older liv
  }});
  assert.deepEqual(calls,PUBLIC_VIDEO_IDS);
  const entry=await resolveTemplateShare(new URLSearchParams({kind:'video',product:'film-anbil-avan-v1'}),'https://older-live-catalog.test',async()=>catalog);
- assert.equal(entry.amountPaise,29900);assert.equal(entry.video,'/assets/catalog-previews/anbil-avan-v1/preview-reception-shoulder-v1.mp4');
+ assert.equal(entry.amountPaise,videoQuote('film-anbil-avan-v1').basePaise);assert.equal(entry.video,'/assets/catalog-previews/anbil-avan-v1/preview-reception-shoulder-v1.mp4');
  assert.equal(catalog.templates.length,4);assert.equal(catalog.musicUnavailable,false);
 });
 

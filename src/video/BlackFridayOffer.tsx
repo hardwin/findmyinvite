@@ -1,6 +1,31 @@
-import {useEffect,useState} from 'react';
+import {useEffect,useState,useSyncExternalStore} from 'react';
 import {ANBIL_AVAN_ID} from '../../shared/anbil-avan-video.mjs';
-import {BLACK_FRIDAY_START,BLACK_FRIDAY_END,videoOffer} from '../../shared/video-pricing.mjs';
+import {BLACK_FRIDAY_START,BLACK_FRIDAY_END,videoOffer,videoQuote} from '../../shared/video-pricing.mjs';
+import type {VideoPurchase} from './checkout';
+
+const offerEnded=()=>Date.now()>=BLACK_FRIDAY_END;
+const noSubscription=()=>()=>{};
+function subscribeToExpiry(listener:()=>void){
+ let timeout:number;
+ const refresh=()=>{
+  window.clearTimeout(timeout);
+  if(offerEnded())listener();
+  else timeout=window.setTimeout(refresh,Math.min(BLACK_FRIDAY_END-Date.now(),2147483647));
+ };
+ refresh();
+ document.addEventListener('visibilitychange',refresh);
+ window.addEventListener('pageshow',refresh);
+ return ()=>{window.clearTimeout(timeout);document.removeEventListener('visibilitychange',refresh);window.removeEventListener('pageshow',refresh);};
+}
+
+// Update the form and its Pay button once at expiry, without ticking the video editor every second.
+export function useCheckoutPurchase(templateId:string,purchase:VideoPurchase|null){
+ const isCampaign=templateId===ANBIL_AVAN_ID;
+ const ended=useSyncExternalStore(isCampaign?subscribeToExpiry:noSubscription,offerEnded);
+ if(!isCampaign||!ended||!purchase||purchase.unlocked||purchase.priceLocked!==false)return purchase;
+ const quote=videoQuote(templateId);
+ return {...purchase,quote,amount:quote.totalPaise};
+}
 
 export function useBlackFridayOffer(templateId?:string){
  const [now,setNow]=useState(Date.now);

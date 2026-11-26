@@ -49,7 +49,8 @@ test('only Anbil Avan advertises ₹699 to ₹299 during the fixed 48-hour Black
  assert.deepEqual(videoOffer(id,BLACK_FRIDAY_START-1),regular);
  assert.deepEqual(videoOffer(id,BLACK_FRIDAY_START),sale);
  assert.deepEqual(videoOffer(id,BLACK_FRIDAY_END-1),sale);
- assert.deepEqual(videoOffer(id,BLACK_FRIDAY_END),regular);
+ assert.deepEqual(videoOffer(id,BLACK_FRIDAY_END),{...regular,basePaise:69900});
+ assert.deepEqual(videoQuote(id,BLACK_FRIDAY_END),{basePaise:69900,taxBps:1800,taxPaise:12582,totalPaise:82482,taxLabel:'GST',currency:'INR'});
  assert.deepEqual(videoQuote(id,BLACK_FRIDAY_START),{basePaise:29900,taxBps:1800,taxPaise:5382,totalPaise:35282,taxLabel:'GST',currency:'INR'});
  assert.equal(isFreeVideo(id),false);
  assert.deepEqual(videoOffer('wedding-bells-v1'),{basePaise:69900,originalPaise:159900,offerLabel:'Christmas Offer',tier:'premium'});

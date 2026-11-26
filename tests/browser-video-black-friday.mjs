@@ -11,8 +11,14 @@ const {outputFiles}=await build({
   import {VideoCard} from './src/video/VideoCollection';
   import VideoTemplateDetails from './src/video/VideoTemplateDetails';
   import {VideoCheckout} from './src/video/VideoCheckout';
+  import {useCheckoutPurchase} from './src/video/BlackFridayOffer';
   const entry={id:'film-anbil-avan-v1',name:'Anbil Avan',poster:'/poster.jpg',preview:'/demo.mp4',duration:35,amount:35282,quote:{basePaise:29900},originalPaise:0,offerLabel:''};
-  createRoot(document.querySelector('main')).render(<><VideoCard entry={entry}/><VideoTemplateDetails entry={entry}/><VideoCheckout templateId={entry.id} purchase={null} busy={false} onApply={async()=>{}}/></>);
+  const cached={unlocked:false,priceLocked:false,amount:35282,quote:{basePaise:29900,totalPaise:35282,taxPaise:5382,taxLabel:'GST',taxBps:1800}};
+  function Editor(){
+   const purchase=useCheckoutPurchase(entry.id,cached),issued=useCheckoutPurchase(entry.id,{...cached,priceLocked:true});
+   return <><VideoCheckout templateId={entry.id} purchase={purchase} busy={false} onApply={async()=>{}}/><button>Pay ₹{purchase.amount/100}</button><output data-issued>{issued.amount}</output></>;
+  }
+  createRoot(document.querySelector('main')).render(<><VideoCard entry={entry}/><VideoTemplateDetails entry={entry}/><Editor/></>);
  `},
  bundle:true,write:false,jsx:'automatic',outfile:'fixture.js',external:['/assets/*'],define:{'process.env.NODE_ENV':'"production"'}
 });
@@ -49,6 +55,8 @@ try{
   assert.equal(await page.getByText('Black Friday offer',{exact:true}).count(),0);
   const endPrice=videoOffer('film-anbil-avan-v1',BLACK_FRIDAY_END).basePaise/100;
   assert.equal(await page.getByLabel('Price ₹'+endPrice,{exact:true}).count(),3);
+  assert.equal(await page.getByRole('button',{name:'Pay ₹824.82',exact:true}).count(),1);
+  assert.equal(await page.locator('[data-issued]').textContent(),'35282');
   await context.close();
  }
  console.log('Black Friday card, detail and checkout timers passed across refresh, time zones and expiry.');

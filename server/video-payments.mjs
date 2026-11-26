@@ -12,19 +12,19 @@ export function validVideoPromo(code,env=process.env){
  const expected=String(env.VIDEO_TEST_PROMO_SHA256||'').trim();
  return typeof code==='string'&&code.trim().length>=8&&code.length<=100&&/^[a-f0-9]{64}$/.test(expected)&&timingSafeEqual(Buffer.from(promoDigest(code),'hex'),Buffer.from(expected,'hex'));
 }
-export function videoPrice(env=process.env,templateId){const quote=videoQuote(templateId);return {...videoOffer(templateId),amount:quote.totalPaise,quote,currency:VIDEO_CURRENCY,configured:isFreeVideo(templateId)||paymentsConfigured(env)};}
+export function videoPrice(env=process.env,templateId,at=Date.now()){const quote=videoQuote(templateId,at);return {...videoOffer(templateId,at),amount:quote.totalPaise,quote,currency:VIDEO_CURRENCY,configured:isFreeVideo(templateId)||paymentsConfigured(env)};}
 // Oonjal grants issued before the switch to paid checkout remain valid.
 const hasFreeAccess=row=>row?.free_access===true&&(isFreeVideo(row.template_id)||row.template_id==='film-oonjal-v1');
 const unlocked=row=>!!row&&(hasFreeAccess(row)||['captured','complimentary'].includes(row.status));
-function publicPurchase(row,env,templateId){
- const price=videoPrice(env,row?.template_id||templateId),reserved=row&&!isFreeVideo(row.template_id)&&(row.razorpay_order_id||unlocked(row));
+function purchaseDetails(row,env,templateId,at){
+ const price=videoPrice(env,row?.template_id||templateId,at),reserved=row&&!isFreeVideo(row.template_id)&&(row.razorpay_order_id||unlocked(row));
  if(hasFreeAccess(row)&&!isFreeVideo(row.template_id)){
   const quote={...price.quote,basePaise:0,taxBps:0,taxPaise:0,totalPaise:0};
   return {...price,basePaise:0,amount:0,quote,invitationId:row.id,unlocked:true,status:row.status,discount:0};
  }
  const amount=reserved?row.total_paise:price.amount;
  const quote=reserved?(row.base_paise!=null?{basePaise:row.base_paise,taxBps:row.tax_bps,taxPaise:row.tax_paise,totalPaise:amount,taxLabel:'GST',currency:VIDEO_CURRENCY}:null):price.quote;
- return {...price,amount,quote,invitationId:row?.id,unlocked:unlocked(row),status:row?.status||'pending',discount:row?.status==='complimentary'?amount:0};
+ return {...price,amount,quote,priceLocked:Boolean(reserved),invitationId:row?.id,unlocked:unlocked(row),status:row?.status||'pending',discount:row?.status==='complimentary'?amount:0};
 }
 
 export function videoPaymentStore(query=db){
@@ -43,6 +43,7 @@ async function gatewayGet(path,env){
  return response.json();
 }
 export function videoPaymentService({store=videoPaymentStore(),env=process.env,now=()=>Date.now(),gateway={create:input=>createRazorpayOrder(input,env),get:path=>gatewayGet(path,env)}}={}){
+ const publicPurchase=(row,templateId)=>purchaseDetails(row,env,templateId,now());
  async function owned(owner,id,template,reserve=false){
   id=videoInvitationId(id);const row=reserve?await store.reserve(id,owner,template):await store.get(id);
   if(row&&(row.owner_id!==owner||row.template_id!==template))throw new HttpError(404,'Invitation not found.');
@@ -75,10 +76,10 @@ export function videoPaymentService({store=videoPaymentStore(),env=process.env,n
   }
   return row;
  }
- async function status(owner,id,template){const row=await owned(owner,id,template);return publicPurchase(isFreeVideo(template)||hasFreeAccess(row)?row:await recover(row),env,template);}
+ async function status(owner,id,template){const row=await owned(owner,id,template);return publicPurchase(isFreeVideo(template)||hasFreeAccess(row)?row:await recover(row),template);}
  async function requireAccess(owner,id,template){
   const row=await owned(owner,id,template,isFreeVideo(template));
-  if(!unlocked(row))throw new HttpError(402,`Pay ₹${publicPurchase(row,env,template).amount/100} including GST, or apply a valid promo code to create this invitation.`);
+  if(!unlocked(row))throw new HttpError(402,`Pay ₹${publicPurchase(row,template).amount/100} including GST, or apply a valid promo code to create this invitation.`);
   return row;
  }
  async function promo(owner,id,template,code){
@@ -86,18 +87,18 @@ export function videoPaymentService({store=videoPaymentStore(),env=process.env,n
   let row=await recover(await owned(owner,id,template,true));
   if(row.status==='refunded')throw new HttpError(409,'Contact support for help with this invitation.');
   if(!unlocked(row))row=await store.patch(row.id,{status:'complimentary',promo_sha256:promoDigest(code),unlocked_at:new Date(now()).toISOString()},'&status=eq.pending')||await owned(owner,id,template);
-  return publicPurchase(row,env);
+  return publicPurchase(row);
  }
  async function order(owner,id,template){
   let row=await owned(owner,id,template,true);
-  if(isFreeVideo(template)||hasFreeAccess(row))return publicPurchase(row,env,template);
+  if(isFreeVideo(template)||hasFreeAccess(row))return publicPurchase(row,template);
   row=await recover(row);
-  if(unlocked(row))return publicPurchase(row,env);
+  if(unlocked(row))return publicPurchase(row);
   if(row.status==='refunded')throw new HttpError(409,'Contact support for help with this invitation.');
   if(!paymentsConfigured(env))throw new HttpError(503,'Checkout is temporarily unavailable. Your draft is saved.');
   if(!row.razorpay_order_id){
    const token=randomUUID(),time=new Date(now()).toISOString(),before=encodeURIComponent(new Date(now()-120000).toISOString());
-   const quote=videoQuote(template);
+   const quote=videoQuote(template,now());
    const claimed=await store.patch(row.id,{checkout_token:token,checkout_started_at:time,total_paise:quote.totalPaise,base_paise:quote.basePaise,tax_bps:quote.taxBps,tax_paise:quote.taxPaise},'&status=eq.pending&razorpay_order_id=is.null&or=(checkout_started_at.is.null,checkout_started_at.lt.'+before+')');
    if(!claimed)throw new HttpError(409,'Checkout is already opening. Please wait a moment and try again.');
    // A claim prevents simultaneous tabs creating separate payable orders.
@@ -105,13 +106,13 @@ export function videoPaymentService({store=videoPaymentStore(),env=process.env,n
    if(!/^order_[A-Za-z0-9]+$/.test(created.id||'')||created.amount!==quote.totalPaise||created.currency!==VIDEO_CURRENCY)throw new HttpError(503,'Checkout could not be verified. Please retry shortly.');
    row=await store.patch(row.id,{razorpay_order_id:created.id},'&checkout_token=eq.'+token)||await owned(owner,id,template);
   }
-  return {...publicPurchase(row,env),keyId:publicKeyId(env),orderId:row.razorpay_order_id};
+  return {...publicPurchase(row),keyId:publicKeyId(env),orderId:row.razorpay_order_id};
  }
  async function verify(owner,id,template,response){
   const row=await owned(owner,id,template);
   if(!row?.razorpay_order_id||row.razorpay_order_id!==response.razorpay_order_id)throw new HttpError(400,'Payment does not match your saved invitation.');
   verifyCheckoutSignature({orderId:row.razorpay_order_id,paymentId:response.razorpay_payment_id,signature:response.razorpay_signature},env);
-  return publicPurchase(await settle(row.razorpay_order_id,response.razorpay_payment_id),env);
+  return publicPurchase(await settle(row.razorpay_order_id,response.razorpay_payment_id));
  }
  async function webhook(event){
   const paymentId=event?.payload?.refund?.entity?.payment_id;

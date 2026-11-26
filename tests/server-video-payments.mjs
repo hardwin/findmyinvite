@@ -4,22 +4,22 @@ import {createHmac,randomUUID} from 'node:crypto';
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {PGlite} from '@electric-sql/pglite';
-import {videoQuote} from '../shared/video-pricing.mjs';
+import {BLACK_FRIDAY_START,BLACK_FRIDAY_END,videoQuote} from '../shared/video-pricing.mjs';
 import {videoPaymentService,videoInvitationId,promoDigest,validVideoPromo} from '../server/video-payments.mjs';
 import {collectEvent,recordVideoCheckout} from '../server/owner/events.mjs';
 import {get,list} from '../server/owner/store.mjs';
 import {orderedFunnel} from '../shared/owner-metrics.mjs';
 const owner='owner-a',template='wedding-bells-v1',code='PRIVATE-TEST-CODE';
-function fixture(){
+function fixture(start=BLACK_FRIDAY_START){
  const rows=new Map(),payments=new Map(),created=[],calls=[];
  const env={RAZORPAY_KEY_ID:'rzp_test_fixture',RAZORPAY_KEY_SECRET:'fixture-secret',VIDEO_TEST_PROMO_SHA256:promoDigest(code)};
- let time=Date.now(),sequence=0;
+ let time=start,sequence=0;
  const copy=v=>v?structuredClone(v):null;
  const store={
   async get(id){return copy(rows.get(id));},
   async byOrder(id){return copy([...rows.values()].find(r=>r.razorpay_order_id===id));},
   async byPayment(id){return copy([...rows.values()].find(r=>r.razorpay_payment_id===id));},
-  async reserve(id,user,tid){if(!rows.has(id)){const q=videoQuote(tid);rows.set(id,{id,owner_id:user,template_id:tid,status:'pending',total_paise:q.totalPaise,base_paise:q.basePaise,tax_bps:q.taxBps,tax_paise:q.taxPaise});}return copy(rows.get(id));},
+  async reserve(id,user,tid){if(!rows.has(id)){const q=videoQuote(tid,time);rows.set(id,{id,owner_id:user,template_id:tid,status:'pending',total_paise:q.totalPaise,base_paise:q.basePaise,tax_bps:q.taxBps,tax_paise:q.taxPaise});}return copy(rows.get(id));},
   async patch(id,patch,filter=''){
    const r=rows.get(id);if(!r)return null;
    if(filter.includes('status=eq.pending')&&r.status!=='pending'||filter.includes('status=neq.refunded')&&r.status==='refunded'||filter.includes('razorpay_order_id=is.null')&&r.razorpay_order_id)return null;
@@ -56,6 +56,20 @@ test('an existing ₹299 gateway order still settles at its agreed amount after 
  const p=f.captured(order,{amount:29900});
  assert.equal((await f.service.verify(owner,id,template,f.response(p))).unlocked,true);
  assert.equal((await f.service.order(owner,id,template)).amount,29900);
+});
+test('Anbil Avan switches new checkouts at the exact deadline and honours the issued sale order',async()=>{
+ const f=fixture(BLACK_FRIDAY_END-1),tid='film-anbil-avan-v1',issuedId=randomUUID(),draftId=randomUUID();
+ const issued=await f.service.order(owner,issuedId,tid);
+ await f.store.reserve(draftId,owner,tid);
+ assert.equal(issued.priceLocked,true);
+ assert.equal((await f.service.status(owner,draftId,tid)).priceLocked,false);
+ f.advance(1);
+ assert.equal((await f.service.status(owner,draftId,tid)).amount,82482);
+ assert.equal((await f.service.order(owner,issuedId,tid)).amount,35282);
+ assert.equal((await f.service.order(owner,draftId,tid)).amount,82482);
+ assert.deepEqual(f.created.map(x=>x.amount),[35282,82482]);
+ const captured=f.captured(issued,{amount:35282});
+ assert.equal((await f.service.verify(owner,issuedId,tid,f.response(captured))).unlocked,true);
 });
 test('a legacy reservation without a gateway order receives the new price and GST breakdown',async()=>{
  const f=fixture(),id=randomUUID();f.rows.set(id,{id,owner_id:owner,template_id:template,status:'pending',total_paise:29900});
