@@ -16,6 +16,8 @@ async function validateCharacterSet(owner,invitationId,photos,{templateId,draft,
   return;
  }
  if(draft.payload?.personalPhotosEnabled!==true)throw new HttpError(409,'Choose matching characters from your photos to use them.');
+ const pending=await query('video_character_sets?invitation_id=eq.'+invitationId+'&owner_id=eq.'+owner+'&status=in.(identities,identity_review,poses,review)&select=id&limit=1');
+ if(pending.length)throw new HttpError(409,'Review your new illustrations before creating the video.');
  const [set]=await query('video_character_sets?invitation_id=eq.'+invitationId+'&owner_id=eq.'+owner+'&approved_current=eq.true&select=*');
  if(!set||set.status!=='approved'||set.template_id!==templateId||set.profile!==profile.id||set.master_version!==videoDraftVersion(templateId,draft.payload))throw new HttpError(409,'Approve your matching characters for this invitation before exporting.');
  if(draft.payload.references&&profile.identities.some(person=>draft.payload.references[person]?.id!==set.photos?.[person]?.id))throw new HttpError(409,'Your reference photos changed. Create and approve the matching characters before exporting.');

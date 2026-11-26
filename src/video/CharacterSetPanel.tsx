@@ -1,6 +1,7 @@
 import {useEffect,useRef,useState} from 'react';
 import {ImagePlus,RefreshCw,Check} from 'lucide-react';
 import {upload} from '@vercel/blob/client';
+import {SceneArtControls} from './SceneArtControls';
 import {assistHeaders} from './assist';
 import {templateToken} from '../templates/api';
 import {videoRequest as request} from './request';
@@ -45,13 +46,27 @@ export function CharacterSetPanel(p:Props){
  async function refresh(){const next=await request<State>(API+'?action=sets&invitationId='+p.invitationId);if(live.current){setState(next);setLoaded(true);}return next;}
  useEffect(()=>{let stopped=false,inFlight=false;const load=async()=>{if(inFlight||lock.current)return;inFlight=true;try{const c=await request<{enabled:boolean}>(API+'?action=set-capabilities');if(stopped)return;setEnabled(c.enabled);if(!c.enabled)throw Error('Matching characters are temporarily unavailable. Your photos are saved.');if(latest.current.draftSaved){const next=await request<State>(API+'?action=sets&invitationId='+p.invitationId);if(!stopped){setState(next);setLoaded(true);setError('');}}}catch(e){if(!stopped)setError((e as Error).message);}finally{inFlight=false;}};void load();const timer=running?setInterval(()=>{if(document.visibilityState==='visible')void load();},4500):undefined;const resume=()=>void load();window.addEventListener('focus',resume);return()=>{stopped=true;clearInterval(timer);window.removeEventListener('focus',resume);};},[p.invitationId,p.draftSaved,running,attempt,refsKey]);
  async function run(fn:()=>Promise<unknown>,label='Saving your photos…'){if(lock.current)return;lock.current=true;setBusy(true);setMessage(label);setError('');try{await fn();}catch(e){if(live.current)setError((e as Error).message);}finally{lock.current=false;if(live.current){setBusy(false);setMessage('');}}}
- async function transfer(person:Person,refs:CharacterReferences){const ref=refs[person];if(!ref?.localId)throw Error('Select this photo again.');const file=await localMediaFile(ref.localId);await latest.current.save();const reserved=await request<{id:string;pathname:string}>('/api/video-personalise?action=reserve',{kind:'image',templateId:p.templateId,invitationId:p.invitationId}),token=await templateToken();
+ async function transfer(person:Person,refs:CharacterReferences){const ref=refs[person];if(!ref?.localId)throw Error('Select this photo again.');const file=await localMediaFile(ref.localId);await latest.current.save();const id=await uploadPhoto(file);
+  await latest.current.saveReferences({...refs,[person]:{...ref,id}});
+ }
+ async function uploadPhoto(file:File|Blob){const reserved=await request<{id:string;pathname:string}>('/api/video-personalise?action=reserve',{kind:'image',templateId:p.templateId,invitationId:p.invitationId}),token=await templateToken();
   if(p.localUploads){const r=await fetch('/api/video-personalise?action=local-upload&id='+reserved.id,{method:'POST',headers:{...assistHeaders(),Authorization:'Bearer '+token,'Content-Type':file.type},body:file,signal:AbortSignal.timeout(60000)});if(!r.ok)throw Error('Photo upload failed. Please retry.');}
   else{await upload(reserved.pathname,file,{access:'private',handleUploadUrl:'/api/video-personalise?action=upload',headers:{...assistHeaders(),Authorization:'Bearer '+token},abortSignal:AbortSignal.timeout(60000)});await request('/api/video-personalise?action=complete&id='+reserved.id,{});}
-  await latest.current.saveReferences({...refs,[person]:{...ref,id:reserved.id}});
+  return reserved.id;
  }
  async function add(file:File,person:Person){const processed=await optimise(file,'image'),localId=await stageMedia(processed,'image'),next={...latest.current.references,[person]:{id:'',localId,identity:'single' as const}};await latest.current.saveReferences(next);await transfer(person,next);}
  async function submit(redo=false,regenerate?:Person[]){await latest.current.save();const result=await request<{set:SetView}>(API+'?action=set-submit',{invitationId:p.invitationId,photos:Object.fromEntries(people.map(person=>[person,latest.current.references[person]?.id])),redo,...(regenerate?{regenerate}:{})});if(people.some(person=>result.set.photos[person]!==latest.current.references[person]?.id))await useSaved(result.set);else await refresh();}
+ const reattempt=useRef<{key:string;requestId:string;references:Record<string,string>}|null>(null);
+ async function revise(slot:string,mode:'illustration'|'cutout',files:Record<string,File>={}){
+  if(!selected)return;
+  const key=JSON.stringify([selected.id,slot,mode,Object.entries(files).map(([k,f])=>[k,f.name,f.size,f.lastModified])]);
+  if(reattempt.current?.key!==key)reattempt.current={key,requestId:crypto.randomUUID(),references:{}};
+  const operation=reattempt.current;
+  for(const [name,file] of Object.entries(files)){if(!operation.references[name])operation.references[name]=await uploadPhoto(await optimise(file,'image'));}
+  try{await request(API+'?action=set-revise',{id:selected.id,slot,mode,references:operation.references,requestId:operation.requestId});}
+  finally{await refresh();}
+  reattempt.current=null;
+ }
  const readyAssets=selected?.assets.filter(a=>a.status==='ready')||[];
  const progress=busy?message:running?`Preparing your illustrations · ${readyAssets.length} of ${selected?.status==='identities'?2:11} ready`:'';
  useEffect(()=>{p.onStatus({ready:complete,busy:busy||running,message:progress});},[complete,busy,running,progress,p.onStatus]);
@@ -86,7 +101,7 @@ export function CharacterSetPanel(p:Props){
   {selected&&<>
    {!matches&&savedFaces&&<div><p>These illustrated faces are saved. You can continue with them{exhausted?'':', or use your updated photos'}.</p><button type="button" disabled={busy||running} onClick={()=>void run(()=>useSaved(selected))}>Use saved faces</button></div>}
    <div className="vp-character-identities">{people.map(person=>{const a=selected.assets.find(a=>a.asset==='identity:'+person);return a?.status==='ready'?<figure key={person}><Photo id={a.mediaId} alt={person==='bride'?'Illustrated bride':'Illustrated groom'}/><figcaption>{person==='bride'?'Bride':'Groom'}{!matches&&changed.length>1&&changed.includes(person)&&<button type="button" disabled={busy||running} onClick={()=>void run(async()=>{await latest.current.saveReferences({...latest.current.references,[person]:{id:selected.photos[person],identity:'single'}});await refresh();})}>Use saved {person} face</button>}{matches&&!state.allowances[person]?.redoUsed&&!running&&<button type="button" disabled={busy} onClick={()=>void run(()=>submit(true,[person]),'Creating another illustrated face…')}>Try another · one included</button>}</figcaption></figure>:null;})}</div>
-   {(selected.status==='review'||selected.approved)&&<div className="vp-character-poses">{p.profile.poses.map(pose=>{const a=selected.assets.find(a=>a.asset==='pose:'+pose.slot);return <figure key={pose.slot}><Photo id={a?.mediaId} alt={pose.label}/><figcaption>{pose.label}</figcaption></figure>;})}</div>}
+   {(selected.status==='review'||selected.approved)&&<><button type="button" disabled={busy||running} onClick={()=>void run(()=>revise('all','illustration'),'Starting new scene illustrations…')}>Recreate all scene illustrations</button><div className="vp-character-poses">{p.profile.poses.map(pose=>{const a=selected.assets.find(a=>a.asset==='pose:'+pose.slot);return <figure key={pose.slot}><Photo id={a?.mediaId} alt={pose.label}/><figcaption>{pose.label}</figcaption><SceneArtControls key={selected.id} label={pose.label} people={pose.people} disabled={busy||running} onRevise={(mode,files)=>void run(()=>revise(pose.slot,mode,files),'Preparing your scene…')}/></figure>;})}</div></>}
   </>}
   {complete&&<p className="vp-photo-check"><Check size={18}/>Your matching illustrations are approved.</p>}
  </section>;

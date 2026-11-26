@@ -3,6 +3,7 @@ import {templeV3CharacterPrompt,TEMPLE_V3_CHARACTER_PROMPT_REVISION} from '../sh
 import {personalCharacterPrompt as likenessV1Prompt,PERSONAL_CHARACTER_PROMPT_REVISION as LIKENESS_V1_REVISION} from '../shared/personal-character-prompt-v1.mjs';
 import {createHmac,timingSafeEqual} from 'node:crypto';
 import {HttpError} from './core.mjs';
+export const BACKGROUND_MODEL_VERSION='a029dff38972b5fda4ec5d75d7d1cd25aeff621d2cf4946a41055d7db66b80bc';
 export const CHARACTER_MODEL='openai/gpt-image-2.6-flare';
 export const CHARACTER_PROMPT_REVISION=PERSONAL_CHARACTER_PROMPT_REVISION;
 export const characterPromptRevision=version=>version===3?TEMPLE_V3_CHARACTER_PROMPT_REVISION:CHARACTER_PROMPT_REVISION;
@@ -36,6 +37,7 @@ export function replicateProvider(env=process.env){
   if(!r.ok){const detail=await r.json().catch(()=>({}));const e=new HttpError(r.status===429?429:503,'Character preparation is temporarily unavailable. Please retry.');e.providerStatus=r.status;e.providerDiagnostic=JSON.stringify(detail.detail||detail.error||detail.title||'').replace(/data:[^\s"]+/g,'[image]').slice(0,1200);console.error('Replicate request rejected',r.status,e.providerDiagnostic);throw e;}return r.json();
  }
  return {
+  removeBackground:(image,webhook)=>request('predictions',{method:'POST',wait:false,body:{version:BACKGROUND_MODEL_VERSION,input:{image,format:'png',background_type:'rgba'},...(webhook?{webhook,webhook_events_filter:['completed']}: {})}}),
   create:(input,webhook)=>request('models/'+CHARACTER_MODEL+'/predictions',{method:'POST',wait:true,body:{input,...(webhook?{webhook,webhook_events_filter:['completed']}: {})}}),
   get:id=>request('predictions/'+encodeURIComponent(id)),
   recent:()=>request('predictions'),

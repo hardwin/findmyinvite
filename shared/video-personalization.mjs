@@ -57,7 +57,7 @@ export function normalizeVideoContent(input,{complete=false,templateId=VIDEO_ID,
  if(templateId===WEDDING_BELLS_ID&&Object.keys(input.photos||{}).length)throw Error('Wedding Bells currently preserves the original characters.');
  const catalog=catalogVideo(templateId),characterSet=!!definition.characterProfile;
  // Character-profile designs accept only server-prepared layers, never raw uploads.
- const modes=characterSet?['prepared']:catalog?['frame']:['cutout','frame','prepared'];
+ const modes=characterSet?['prepared']:catalog?['frame','cutout']:['cutout','frame','prepared'];
  for(const slot of catalog?definition.photoSlots.map(p=>p.slot):PHOTO_SLOTS){const p=input.photos?.[slot];if(!p)continue;if(!/^[a-f0-9-]{36}$/.test(p.id||'')||!modes.includes(p.mode)||p.confirmed!==true)throw Error('Confirm the '+slot+' photo presentation.');out.photos[slot]={id:p.id,mode:p.mode,confirmed:true};}
  // One approved set covers every scene; otherwise the original illustrations remain.
  if(characterSet&&Object.keys(out.photos).length&&Object.keys(out.photos).length!==definition.photoSlots.length)throw Error('Use every character from one approved set, or the original illustrations.');

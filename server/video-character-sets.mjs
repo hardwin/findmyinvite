@@ -9,6 +9,7 @@ import {videoStore,hash} from './video-personalise-store.mjs';
 import {videoService,loadVideoMaster} from './video-personalise.mjs';
 import {videoPaymentService} from './video-payments.mjs';
 import {replicateProvider,CHARACTER_MODEL} from './video-character-provider.mjs';
+import {BACKGROUND_MODEL_VERSION} from './video-character-provider.mjs';
 import {alignToReference,normalizeIdentity,toPng,characterPreview,verifyReceptionSilhouette} from './video-character-images.mjs';
 import {catalogVideo} from '../shared/video-catalog.mjs';
 import {videoDraftVersion} from '../shared/video-master-version.mjs';
@@ -40,6 +41,7 @@ export function characterSetRepository(query=db){
   patchSet:(id,body,filter)=>patch('video_character_sets',id,body,filter),
   pending:limit=>query('video_character_assets?status=in.(queued,submitting,processing,preparing)&order=updated_at.asc&limit='+limit),
   moving:limit=>query('video_character_sets?status=in.(identities,poses)&order=updated_at.asc&limit='+limit),
+  revise:body=>rpc('fmi_revise_video_scenes',body),
   claim:body=>rpc('fmi_claim_video_character_set',body),
   confirm:body=>rpc('fmi_confirm_video_character_set',body),
   approve:body=>rpc('fmi_approve_video_character_set',body)
@@ -128,6 +130,32 @@ export function characterSetService({query=db,repo=characterSetRepository(query)
   const set=await repo.claim({p_owner:owner,p_invitation:draft.id,p_template:draft.template_id,p_version:version,p_profile:profile.id,p_prompt:CHARACTER_SET_PROMPT_REVISION,p_model:CHARACTER_MODEL,p_key:key,p_photos:photos,p_regenerate:regenerate,p_redo:b.redo===true,p_identities:identities});
   await materialize(set);return set;
  }
+ async function revise(owner,b){
+  const {set,draft}=await ownedSet(owner,b.id),{profile}=await profileFor(draft);
+  await payments.requireAccess(owner,draft.id,draft.template_id);
+  if(!uuid(b.requestId))throw new HttpError(400,'Choose the scene again.');
+  const slots=b.slot==='all'?profile.poses.map(p=>p.slot):[b.slot];
+  if(!slots.every(slot=>profile.poses.some(p=>p.slot===slot))||!['illustration','cutout'].includes(b.mode)||slots.length>1&&(b.mode==='cutout'||Object.keys(b.references||{}).length))throw new HttpError(400,'Choose a single scene for this image.');
+  const changes={},previous=await repo.assets(set.id);
+  for(const slot of slots){
+   const pose=profile.poses.find(p=>p.slot===slot),refs={};
+   const saved=previous.find(a=>a.asset==='pose:'+slot)?.scene_input;
+   const references={...(slots.length===1&&saved?.mode===b.mode?Object.fromEntries(Object.entries(saved.refs||{}).map(([k,v])=>[k,v.id])):{}),...b.references};
+   if(b.mode==='cutout'&&!references.photo)throw new HttpError(400,'Upload the photo to place in this scene.');
+   for(const [person,id] of Object.entries(references)){
+    if(!(b.mode==='cutout'?person==='photo':(pose.people.includes(person)||person==='couple'&&pose.people.length===2))||!uuid(id))throw new HttpError(400,'Choose a reference for this scene.');
+    await drafts.pinMedia(owner,draft.id,id);
+    const m=await media(owner,id);
+    if(m.invitationId!==draft.id||!m.durable||m.kind!=='image'||m.status!=='ready'||m.characterJobId||m.characterSetId)throw new HttpError(400,'Upload a photo to this invitation first.');
+    refs[person]={id:m.id,sha256:m.sha256};
+   }
+   const input={mode:b.mode,refs},model=b.mode==='cutout'?BACKGROUND_MODEL_VERSION:CHARACTER_MODEL;
+   changes[slot]={input,model,key:hash({set:set.id,slot,input,model,revision:CHARACTER_SET_PROMPT_REVISION,request:b.requestId})};
+  }
+  const key=hash({base:set.id,changes});
+  const candidate=await repo.revise({p_owner:owner,p_set:set.id,p_key:key,p_prompt:CHARACTER_SET_PROMPT_REVISION,p_changes:changes});
+  await materialize(candidate);return candidate;
+ }
  async function confirm(owner,id){
   const {set,draft}=await ownedSet(owner,id),{profile,version,inventory}=await profileFor(draft);
   if(set.profile!==profile.id||set.master_version!==version)throw new HttpError(409,'These characters belong to a different invitation version.');
@@ -136,7 +164,7 @@ export function characterSetService({query=db,repo=characterSetRepository(query)
   const assets=await repo.assets(set.id),identity=Object.fromEntries(profile.identities.map(p=>[p,assets.find(a=>a.asset==='identity:'+p&&a.status==='ready')]));
   if(profile.identities.some(p=>!identity[p]))throw new HttpError(409,'Both characters must be ready before continuing.');
   // A pose depends only on its own people's identity outputs and the approved artwork.
-  const poses=profile.poses.map(pose=>({asset:'pose:'+pose.slot,input_key:hash({profile:profile.id,prompt:CHARACTER_SET_PROMPT_REVISION,model:CHARACTER_MODEL,asset:'pose:'+pose.slot,pose:inventory[pose.slot].sha256,identities:Object.fromEntries(pose.people.map(p=>[p,identity[p].output_sha256]))})}));
+  const poses=profile.poses.map(pose=>({asset:'pose:'+pose.slot,input_key:hash({profile:profile.id,prompt:set.prompt_revision,model:CHARACTER_MODEL,asset:'pose:'+pose.slot,pose:inventory[pose.slot].sha256,identities:Object.fromEntries(pose.people.map(p=>[p,identity[p].output_sha256]))})}));
   const updated=await repo.confirm({p_owner:owner,p_set:set.id,p_model:CHARACTER_MODEL,p_poses:poses});
   await materialize(updated);return updated;
  }
@@ -155,8 +183,14 @@ export function characterSetService({query=db,repo=characterSetRepository(query)
   }
   const pose=profile.poses.find(p=>'pose:'+p.slot===a.asset);if(!pose)throw Error('Unknown character pose.');
   const assets=await repo.assets(set.id),images=[dataUrl((await reference(inventory[pose.slot])).png)];
-  for(const person of pose.people){const identity=assets.find(x=>x.asset==='identity:'+person&&x.status==='ready');if(!identity)throw Error('Character identity is missing.');const bytes=await store.bytes(identity.output_key);if(hash(bytes)!==identity.output_sha256)throw Error('A saved character changed.');images.push(dataUrl(bytes));}
-  return {images,aspectRatio:'3:4',prompt:tracking=>posePrompt(pose,tracking)};
+  const readReference=async ref=>{const m=await media(a.owner_id,ref.id);if(m.invitationId!==a.invitation_id||m.sha256!==ref.sha256)throw Error('Scene reference changed.');const bytes=await store.bytes(m.key);if(hash(bytes)!==ref.sha256)throw Error('Scene reference file changed.');return dataUrl(bytes,m.contentType);};
+  if(a.scene_input?.mode==='cutout')return {cutout:await readReference(a.scene_input.refs.photo)};
+  for(const person of pose.people){
+   if(set.prompt_revision===CHARACTER_SET_PROMPT_REVISION)images.push(await readReference(a.scene_input?.refs?.[person]||set.photos[person]));
+   const identity=assets.find(x=>x.asset==='identity:'+person&&x.status==='ready');if(!identity)throw Error('Character identity is missing.');const bytes=await store.bytes(identity.output_key);if(hash(bytes)!==identity.output_sha256)throw Error('A saved character changed.');images.push(dataUrl(bytes));
+  }
+  if(a.scene_input?.refs?.couple)images.push(await readReference(a.scene_input.refs.couple));
+  return {images,aspectRatio:'3:4',prompt:tracking=>posePrompt(pose,tracking,set.prompt_revision,!!a.scene_input?.refs?.couple)};
  }
  async function process(id){
   if(!uuid(id))return;
@@ -179,7 +213,7 @@ export function characterSetService({query=db,repo=characterSetRepository(query)
     stage='references';const request=await inputs(a,set,profile,inventory);
     a=await repo.patchAsset(id,{status:'submitting',attempts:a.attempts+1,updated_at:iso()},'&lease_id=eq.'+lease);if(!a)return;
     stage='submit';
-    try{prediction=await provider.create(characterSetInput(request.prompt(a.id+'-'+a.attempts),request.images,request.aspectRatio),callback+a.id);}
+    try{prediction=request.cutout?await provider.removeBackground(request.cutout,callback+a.id):await provider.create(characterSetInput(request.prompt(a.id+'-'+a.attempts),request.images,request.aspectRatio),callback+a.id);}
     catch(e){
      if(e.providerStatus===429){
       // A rejected rate-limit request did not create a prediction. Keep its
@@ -192,7 +226,7 @@ export function characterSetService({query=db,repo=characterSetRepository(query)
     }
     a=await repo.patchAsset(id,{provider_id:prediction.id,status:'processing',model_version:typeof prediction.version==='string'?prediction.version:null,error:null,updated_at:iso()},'&lease_id=eq.'+lease);
    }else if(a.status==='submitting'&&!a.provider_id){
-    const recent=await provider.recent();prediction=recent.results?.find(p=>p.input?.prompt?.includes('Tracking reference '+a.id+'-'+a.attempts));
+    const recent=await provider.recent();prediction=recent.results?.find(p=>p.webhook===callback+a.id||p.input?.prompt?.includes('Tracking reference '+a.id+'-'+a.attempts));
     if(!prediction){await finish(stalled()?{status:'failed',error:UNCONFIRMED}:{error:'Waiting for the provider to confirm the request.'});return;}
     a=await repo.patchAsset(id,{provider_id:prediction.id,status:'processing',updated_at:iso()},'&lease_id=eq.'+lease);
    }else if(a.provider_id&&!a.raw_key)prediction=await provider.get(a.provider_id);
@@ -213,8 +247,9 @@ export function characterSetService({query=db,repo=characterSetRepository(query)
    try{
     if(a.asset.startsWith('pose:')){
      const pose=profile.poses.find(p=>'pose:'+p.slot===a.asset);
-     prepared=await align(bytes,(await reference(inventory[pose.slot])).original,{minSilhouette:pose.minSilhouette});
-     if(pose.slot==='receptionCouple')await verifyReceptionSilhouette(prepared.bytes);
+     const original=(await reference(inventory[pose.slot])).original,cutout=a.scene_input?.mode==='cutout';
+     prepared=await align(bytes,original,{minSilhouette:cutout?0:pose.minSilhouette});
+     if(!cutout&&pose.slot==='receptionCouple'&&set.prompt_revision!==CHARACTER_SET_PROMPT_REVISION)await verifyReceptionSilhouette(prepared.bytes);
     }
     else prepared=await identityImage(bytes);
    }catch(e){
@@ -259,5 +294,5 @@ export function characterSetService({query=db,repo=characterSetRepository(query)
   for(const set of await repo.moving(12)){try{await materialize(set);await advance(set.id);}catch(e){console.error('Character set reconciliation will retry',set.id,e.name);}}
   return pending.length;
  }
- return {list,view,submit,confirm,process,advance,retry,approve,recover,materialize,profileFor,provider};
+ return {list,view,submit,revise,confirm,process,advance,retry,approve,recover,materialize,profileFor,provider};
 }

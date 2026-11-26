@@ -60,8 +60,8 @@ export function CharacterPanel({onAction,onStatus,onUnlock,paymentBusy,invitatio
  // Resuming a draft also finishes this sequence; merely paying never starts it.
  const result=slots.map(latest).find(j=>j?.status==='review'&&!j.approved&&(j.slot!=='couple'||!state.coupleNeedsUpdate));
  const needsCouple=individualsReady&&!running&&(!latest('couple')||state.coupleNeedsUpdate)&&!defaultSlot('couple');
- useEffect(()=>{if(!loaded||!unlocked||busy||error||loadError)return;if(result)void run(async()=>{await approve(result);await refresh();},'Adding your characters…');else if(needsCouple)void run(()=>submit('couple'),'Creating your couple…');},[loaded,unlocked,busy,error,loadError,result?.id,needsCouple]);
- const progress=busy?message:loadError?'':result?'Adding your characters…':!loaded&&draftSaved?'Loading photos…':'';
+
+ const progress=busy?message:loadError?'':!loaded&&draftSaved?'Loading photos…':'';
  useEffect(()=>{onStatus({ready:complete,busy,message:progress});},[complete,busy,progress,onStatus]);
  useEffect(()=>()=>onStatus({ready:false,busy:false}),[onStatus]);
  const focusPhotos=()=>{const slot:Slot=references.groom?.id?'bride':'groom';const button=document.getElementById('choose-'+slot);button?.scrollIntoView({block:'center'});button?.focus({preventScroll:true});};
@@ -71,7 +71,9 @@ export function CharacterPanel({onAction,onStatus,onUnlock,paymentBusy,invitatio
  if(busy||paymentBusy)action={label:'Continue',reason:progress||'Checking invitation access…',disabled:true,run:()=>{}};
  else if(error)action={label:'Try again',reason:error,run:()=>{setError('');setAttempt(n=>n+1);}};
  else if(loadError)action={label:'Try again',reason:'Your photos could not load.',run:()=>{setLoadError('');setAttempt(n=>n+1);}};
- else if(running||result)action={label:'Continue',reason:running?'Creating your characters. Your photos are saved.':'Adding your characters…',disabled:true,run:()=>{}};
+ else if(running)action={label:'Creating characters…',reason:'Your photos are saved.',disabled:true,run:()=>{}};
+ else if(result)action={label:'Approve '+result.slot+' illustration',reason:'Check your illustration before continuing.',run:()=>run(async()=>{await approve(result);await refresh();},'Saving your approval…')};
+ else if(needsCouple)action={label:'Create couple illustration',reason:'Use the approved individual illustrations.',run:()=>run(()=>submit('couple'),'Creating your couple…')};
  else if(!complete&&!referencesReady)action={label:'Add photos',reason:'Add separate photos or one couple photo.',run:focusPhotos};
  else if(!unlocked)action={label:amount===0?'Continue for free':`Pay ₹${amount/100}`,reason:'',run:onUnlock};
  else if(!loaded)action={label:'Continue',reason:'Loading your photos…',disabled:draftSaved,run:()=>run(save)};
@@ -92,7 +94,7 @@ export function CharacterPanel({onAction,onStatus,onUnlock,paymentBusy,invitatio
    const label=labels[slot]+' photo',waiting=!!job&&active.includes(job.status),disabled=busy||waiting;
    return <article key={slot} data-character-ready={ready||undefined} className="vp-photo-row" aria-label={label}>
     <input hidden ref={node=>{inputs.current[slot]=node;}} type="file" aria-label={'Upload '+slot+' photo'} accept={PHOTO_ACCEPT} disabled={disabled} onChange={e=>{const f=e.target.files?.[0];if(f)void run(()=>add(f,slot));e.target.value='';}}/>
-    <button type="button" id={'choose-'+slot} className="vp-photo-thumbnail" aria-label={source?'Replace '+slot+' photo':'Add '+slot+' photo'} disabled={disabled} onClick={()=>inputs.current[slot]?.click()}>{ready?<Photo id={job.mediaId} alt={labels[slot]+' character'}/>:source?<Photo id={ref?.id} localId={ref?.localId} alt={label}/>:<ImagePlus size={24}/>}</button>
+    <button type="button" id={'choose-'+slot} className="vp-photo-thumbnail" aria-label={source?'Replace '+slot+' photo':'Add '+slot+' photo'} disabled={disabled} onClick={()=>inputs.current[slot]?.click()}>{(ready||job?.status==='review')?<Photo id={job!.mediaId} alt={labels[slot]+' character'}/>:source?<Photo id={ref?.id} localId={ref?.localId} alt={label}/>:<ImagePlus size={24}/>}</button>
     <div className="vp-photo-label"><strong>{label}</strong><small>{defaultSlot(slot)?slot==='couple'?'Using individual characters':'Original character':ready?'Ready':pending?'Upload incomplete':source?'Photo added':slot==='couple'?'Optional with separate photos':'Add photo'}</small>{ready&&<span className="vp-photo-check"><Check size={14}/>Ready</span>}</div>
     <div className="vp-photo-icons">
      {ready&&<button type="button" aria-label={'Preview '+slot+' character'} title="Preview character" onClick={()=>void run(()=>preview(slot,job.mediaId!),'Loading preview…')}><Eye size={18}/></button>}

@@ -34,13 +34,13 @@ export function draftService({query=db,store=videoStore()}={}){
   const payload=JSON.parse(JSON.stringify(b.payload));delete payload.owner;delete payload.paid;delete payload.unlocked;
   if(b.kind==='video'&&isVersionedVideo(b.templateId)){const existing=await get(owner,id,{optional:true});try{payload.masterVersion=pinVideoMasterVersion(b.templateId,payload,existing);}catch(e){throw new HttpError(409,e.message);}}
   if(b.kind==='website'&&payload.slug){const website=await one('invitations?slug=eq.'+encodeURIComponent(payload.slug)+'&owner_id=eq.'+owner+'&select=id');if(!website)throw new HttpError(404,'Invitation not found.');}
-  const row=await query('rpc/fmi_save_personalization_draft',{method:'POST',body:{p_id:id,p_owner:owner,p_kind:b.kind,p_template:b.templateId,p_payload:payload,p_revision:b.revision}});
-  const result=Array.isArray(row)?row[0]:row;
   if(b.kind==='video'){
    const ids=new Set([...Object.values(payload.content?.photos||{}).map(p=>p?.id),payload.content?.music?.mode==='upload'?payload.content.music.id:null,...Object.values(payload.pending||{}).map(p=>p?.id),...Object.values(payload.references||{}).map(p=>p?.id)].filter(Boolean));
-   for(const mediaId of ids)await pinMedia(owner,id,mediaId);
+   const files=[...ids];
+   for(let start=0;start<files.length;start+=4)await Promise.all(files.slice(start,start+4).map(mediaId=>pinMedia(owner,id,mediaId)));
   }
-  return draftView(result);
+  const row=await query('rpc/fmi_save_personalization_draft',{method:'POST',body:{p_id:id,p_owner:owner,p_kind:b.kind,p_template:b.templateId,p_payload:payload,p_revision:b.revision}});
+  return draftView(Array.isArray(row)?row[0]:row);
  }
  async function jobView(owner,id){if(!id)return null;const j=(await store.read('jobs/'+id+'.json'))?.value;if(j?.owner!==owner)return {id,status:'expired'};return {id,status:Date.parse(j.expiresAt)<=Date.now()?'expired':j.status,progress:j.progress,expiresAt:j.expiresAt,error:j.error,contentRevision:j.contentRevision,download:j.status==='ready'&&Date.parse(j.expiresAt)>Date.now()?'/api/video-personalise?action=download&id='+id:undefined};}
  async function list(owner){

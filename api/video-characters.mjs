@@ -4,6 +4,8 @@ import {videoActor} from '../server/video-assistance.mjs';
 import {characterService,characterJobView} from '../server/video-characters.mjs';
 import {characterEnabled,characterSetsEnabled,characterSetsRecoverable} from '../server/video-character-access.mjs';
 import {verifyCharacterWebhook} from '../server/video-character-provider.mjs';
+import {setPrediction} from '../server/video-photo-cutout.mjs';
+import {videoStore} from '../server/video-personalise-store.mjs';
 import {characterSetService} from '../server/video-character-sets.mjs';
 export const config={maxDuration:300,memory:1024,api:{bodyParser:false}};
 // Layered-template character sets: separate gate, tables and actions (`set*`).
@@ -14,6 +16,7 @@ async function characterSets(req,res,q,action,user){
  if(action==='sets'){method(req,['GET']);const result=await service.list(user.id,q.get('invitationId'));kick(result.active);return respond(res,200,result);}
  method(req,['POST']);const b=await bodyJson(req,12000);
  if(action==='set-submit'){await rate(req,'video-character-set:'+user.id,12,3600);const view=await service.view(await service.submit(user.id,b));kick(queued(view));return respond(res,202,{set:view});}
+ if(action==='set-revise'){await rate(req,'video-character-revision:'+user.id,12,3600);const view=await service.view(await service.revise(user.id,b));kick(queued(view));return respond(res,202,{set:view});}
  if(action==='set-confirm'){await rate(req,'video-character-set:'+user.id,12,3600);const view=await service.view(await service.confirm(user.id,b.id));kick(queued(view));return respond(res,202,{set:view});}
  if(action==='set-retry'){await rate(req,'video-character-set:'+user.id,12,3600);const result=await service.retry(user.id,b.id);kick(result.retried);return respond(res,202,{set:await service.view(result.set)});}
  if(action==='set-approve')return respond(res,200,{draft:await service.approve(user.id,b.id,b.revision)});
@@ -25,11 +28,12 @@ export default async function handler(req,res){try{
   // Isolated: an unavailable character-set table never blocks Temple recovery.
   if(characterSetsRecoverable()){try{assets=await characterSetService().recover();}catch(e){console.error('Character set recovery will retry:',e.name);}}
   return respond(res,200,{processed,...(assets===undefined?{}:{assets})});}
- if(action==='callback'||action==='asset-callback'){
+ if(['callback','asset-callback','cutout-callback'].includes(action)){
   method(req,['POST']);let raw;if(typeof req.body==='string'||Buffer.isBuffer(req.body))raw=req.body.toString();else{const chunks=[];let size=0;for await(const chunk of req){size+=chunk.length;if(size>1000000)throw new HttpError(413,'Callback too large');chunks.push(Buffer.from(chunk));}raw=Buffer.concat(chunks).toString('utf8');}if(Buffer.byteLength(raw)>1000000)throw new HttpError(413,'Callback too large');
   if(!req.headers['webhook-id']||!req.headers['webhook-signature']||Math.abs(Date.now()/1000-Number(req.headers['webhook-timestamp']))>300)throw new HttpError(401,'Invalid callback signature.');
   if(!verifyCharacterWebhook(raw,req.headers,await service.provider.key()))throw new HttpError(401,'Invalid callback signature.');
   const b=JSON.parse(raw);if(typeof b.id!=='string')throw new HttpError(400,'Invalid callback.');
+  if(action==='cutout-callback'){const id=q.get('id'),attempt=q.get('attempt');if(!/^[a-f0-9-]{36}$/.test(id||'')||!/^[a-f0-9-]{36}$/.test(attempt||''))throw new HttpError(400,'Invalid callback.');await setPrediction(videoStore(),'media/'+id+'.json',attempt,b.id);return respond(res,200,{ok:true});}
   // Status and image URLs are fetched from Replicate again; never trust callback output data.
   waitUntil(action==='callback'?service.process(q.get('id')):characterSetService().process(q.get('id')));return respond(res,200,{ok:true});
  }

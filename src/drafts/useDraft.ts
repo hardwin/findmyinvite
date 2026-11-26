@@ -1,23 +1,37 @@
 import {useCallback,useEffect,useRef,useState} from 'react';
 import {assistedOrder} from '../video/assist';
+import {interrupted} from '../video/request';
 import {readSession} from '../auth-session';
 import {templateApi} from '../templates/api';
 import {readDraft,writeDraft,removeDraft,importLegacyDrafts,localDrafts,draftHref,type DraftRecord,type DraftKind} from './storage';
+const samePayload=(a:unknown,b:unknown)=>{
+ const sorted=(_key:string,value:any)=>value&&typeof value==='object'&&!Array.isArray(value)?Object.fromEntries(Object.keys(value).sort().map(k=>[k,value[k]])):value;
+ return JSON.stringify(a,sorted)===JSON.stringify(b,sorted);
+};
 const editorOwner=()=>assistedOrder()?'assist:'+assistedOrder():readSession()?.user.id||'guest';
 const persist=(draft:DraftRecord)=>{if(!assistedOrder())writeDraft(draft);};
 export function useDraft(kind:DraftKind,templateId:string){
  const [owner,setOwner]=useState(editorOwner),[record,setRecord]=useState<DraftRecord|null>(null),[ready,setReady]=useState(false),[status,setStatus]=useState(''),[error,setError]=useState('');
  const current=useRef<DraftRecord|null>(null),initial=useRef<any>(null),timer=useRef<ReturnType<typeof setTimeout>|null>(null),flight=useRef<Promise<void>|null>(null),epoch=useRef(0);
  const sync=useCallback(async():Promise<void>=>{
-  if(flight.current){await flight.current;if(current.current?.dirty&&!current.current.conflict)return sync();return;}
+  if(flight.current){await flight.current;return;}
   const d=current.current;if(!d?.dirty||d.conflict||owner==='guest'||editorOwner()!==owner)return;
   const e=epoch.current;setStatus('Saving…');
   flight.current=(async()=>{try{
-   const {draft}=await templateApi<{draft:DraftRecord}>('/api/drafts?action=save',{id:d.id,kind:d.kind,templateId:d.templateId,payload:d.payload,revision:d.revision},kind==='video'?AbortSignal.timeout(45000):undefined);if(e!==epoch.current)return;
+   let draft:DraftRecord;
+   try{({draft}=await templateApi<{draft:DraftRecord}>('/api/drafts?action=save',{id:d.id,kind:d.kind,templateId:d.templateId,payload:d.payload,revision:d.revision},kind==='video'?AbortSignal.timeout(90000):undefined));}
+   catch(cause){
+    if(!interrupted(cause)&&(cause as {status?:number}).status!==409)throw cause;
+    const {draft:remote}=await templateApi<{draft:DraftRecord}>('/api/drafts?action=get&id='+d.id,undefined,AbortSignal.timeout(25000)).catch(()=>{throw cause;});
+    if(!remote||remote.revision<=d.revision||!samePayload(remote.payload,d.payload))throw cause;
+    draft=remote;
+   }
+   if(e!==epoch.current)return;
    const latest=current.current!;const next={...latest,owner,revision:draft.revision,updatedAt:draft.updatedAt,dirty:JSON.stringify(latest.payload)!==JSON.stringify(d.payload)};current.current=next;persist(next);setRecord(next);setStatus(next.dirty?'Saving…':'Saved to your account');setError('');
-  }catch(error){if(epoch.current!==e)return;const message=(error as Error).message;const conflict=/another device|draft is unavailable/.test(message);if(current.current){current.current={...current.current,conflict};setRecord(current.current);try{persist(current.current);}catch{}}setStatus(conflict?'Changes need review':'Saved on this device—waiting to sync');setError(message);}
+  }catch(error){if(epoch.current!==e)return;const message=(error as Error).message;const conflict=/another device|draft is unavailable/.test(message);if(current.current){current.current={...current.current,conflict};setRecord(current.current);try{persist(current.current);}catch{}}setStatus(conflict?'Changes need review':'Saved on this device—waiting to sync');setError(interrupted(error)?'Your invitation will sync when the connection returns.':message);}
   })().finally(()=>{flight.current=null;});await flight.current;
  },[owner,kind]);
+ useEffect(()=>{if(!record?.dirty||record.conflict||owner==='guest'||error!=='Your invitation will sync when the connection returns.')return;const t=setTimeout(()=>void sync(),12000);return()=>clearTimeout(t);},[record,error,owner,sync]);
  useEffect(()=>{const changed=()=>setOwner(editorOwner());window.addEventListener('fmi-auth-changed',changed);return()=>window.removeEventListener('fmi-auth-changed',changed);},[]);
  useEffect(()=>{let active=true;epoch.current++;setReady(false);setError('');setStatus('');current.current=null;initial.current=null;
   if(!templateId)return;
@@ -25,7 +39,7 @@ export function useDraft(kind:DraftKind,templateId:string){
    if(d&&d.owner!==owner&&d.owner!=='guest')d=null;
    // A legacy template draft is offered through its own stable URL; never overwrite it with a new one.
    if(!requested){const old=localDrafts(owner).filter(x=>x.kind===kind&&x.templateId===templateId).sort((a,b)=>b.updatedAt.localeCompare(a.updatedAt))[0];if(old&&location.search.includes('resume=1'))d=old;}
-   if(requested&&owner!=='guest')try{const response=await templateApi<{draft:DraftRecord}>('/api/drafts?action=get&id='+requested);const remote=response.draft;if(d?.dirty&&d.revision!==remote.revision){if(JSON.stringify(d.payload)!==JSON.stringify(remote.payload)){d={...d,conflict:true};setError('This invitation changed on another device. Your local edits are safe. Reload the saved version before continuing.');}else d={...d,revision:remote.revision,dirty:false};}else if(!d?.dirty)d={...remote,owner,dirty:false};}catch(e){if((e as Error).message==='This invitation has been deleted.'){await removeDraft(requested);throw e;}if(!d)throw e;}
+   if(requested&&owner!=='guest')try{const response=await templateApi<{draft:DraftRecord}>('/api/drafts?action=get&id='+requested);const remote=response.draft;if(d?.dirty&&d.revision!==remote.revision){if(!samePayload(d.payload,remote.payload)){d={...d,conflict:true};setError('This invitation changed on another device. Your local edits are safe. Reload the saved version before continuing.');}else d={...d,revision:remote.revision,dirty:false};}else if(!d?.dirty)d={...remote,owner,dirty:false};}catch(e){if((e as Error).message==='This invitation has been deleted.'){await removeDraft(requested);throw e;}if(!d)throw e;}
    if(requested&&!d)throw Error('This draft is not available on this device. Sign in to its account to continue.');
    if(d&&(d.kind!==kind||d.templateId!==templateId))throw Error('This draft belongs to a different design. Open it from My Invitations.');
    if(!d)d={id:crypto.randomUUID(),owner,kind,templateId,payload:null,revision:0,dirty:false,updatedAt:new Date().toISOString()};

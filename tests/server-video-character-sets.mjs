@@ -20,13 +20,11 @@ const art=slot=>readFile('public'+(ANBIL_AVAN_DEFAULT_ART[slot]||inventory[slot]
 test('2D identity-first prompts are independent of the Temple 3D prompts and keep the photo print',()=>{
  assert.notEqual(CHARACTER_SET_PROMPT_REVISION,CHARACTER_PROMPT_REVISION);
  const identity=identityPrompt('bride','set-1'),couple=posePrompt(profile.poses.find(p=>p.slot==='heartCouple'),'a-1'),print=posePrompt(profile.poses.find(p=>p.slot==='groomPrint'));
- for(const prompt of [identity,couple,print]){assert.match(prompt,/modern painterly 2D illustration/);assert.match(prompt,/no 3D render, no CGI/);assert.match(prompt,/Identity comes first/);assert.match(prompt,/REAL transparent background/);assert.doesNotMatch(prompt,/3D animated movie look|large expressive head|cream silk/);}
+ for(const prompt of [identity,couple,print])assert.match(prompt,/REAL transparent background/);
  assert.notEqual(identity,characterPrompt('bride'));
- assert.match(couple,/^EDIT PICTURE 1/);
- assert.match(couple,/Picture 2 is the approved illustrated identity reference of the bride[\s\S]*Picture 3 is the approved illustrated identity reference of the groom/);
- assert.match(couple,/the woman is the bride and the man is the groom/);assert.match(couple,/Keep EVERYTHING else/);assert.match(couple,/Tracking reference a-1/);
- assert.match(print,/hanging photo print: keep the print's border\/frame/);assert.match(print,/EDIT PICTURE 1/);
- assert.match(posePrompt(profile.poses.find(p=>p.slot==='receptionCouple')),/hand rests on the near shoulder/);
+ assert.match(couple,/complete character layer/);assert.match(couple,/Picture 1 alone supplies every garment/);assert.match(couple,/Picture 2 is the customer photo for the bride/);assert.match(couple,/Picture 4 is the customer photo for the groom/);assert.match(couple,/natural build/);assert.match(couple,/direction of gaze/);
+ assert.match(couple,/Tracking reference a-1/);assert.match(print,/complete hanging print/);
+ assert.match(posePrompt(profile.poses[0],'','anbil-avan-2d-scene-pose-v3'),/^EDIT PICTURE 1/);
  assert.deepEqual(characterSetInput('p',['a','b']),{prompt:'p',input_images:['a','b'],aspect_ratio:'2:3',quality:'high',complexity:'low',output_format:'png',background:'transparent',number_of_images:1});
 });
 
@@ -108,10 +106,12 @@ function pgRepo(pg){
   patchAsset:(id,body,filter)=>patch('video_character_assets',id,body,filter),patchSet:(id,body,filter)=>patch('video_character_sets',id,body,filter),
   pending:n=>rows("select * from public.video_character_assets where status in ('queued','submitting','processing','preparing') order by updated_at limit $1",[n]),
   moving:n=>rows("select * from public.video_character_sets where status in ('identities','poses') order by updated_at limit $1",[n]),
+  revise:b=>call('select * from public.fmi_revise_video_scenes($1,$2,$3,$4,$5::jsonb)',[b.p_owner,b.p_set,b.p_key,b.p_prompt,JSON.stringify(b.p_changes)]),
   claim:b=>call('select * from public.fmi_claim_video_character_set($1,$2,$3,$4,$5,$6,$7,$8,$9::jsonb,$10::text[],$11,$12::jsonb)',[b.p_owner,b.p_invitation,b.p_template,b.p_version,b.p_profile,b.p_prompt,b.p_model,b.p_key,JSON.stringify(b.p_photos),list(b.p_regenerate),b.p_redo,JSON.stringify(b.p_identities)]),
   confirm:b=>call('select * from public.fmi_confirm_video_character_set($1,$2,$3,$4::jsonb)',[b.p_owner,b.p_set,b.p_model,JSON.stringify(b.p_poses)]),
   approve:b=>call('select * from public.fmi_approve_video_character_set($1,$2,$3,$4::text[])',[b.p_owner,b.p_set,b.p_revision,list(b.p_slots)]),
   rest:async path=>{let m;
+   if(path.includes('&status=in.(identities,identity_review,poses,review)')){const q=new URLSearchParams(path.split('?')[1]);return rows("select id from public.video_character_sets where invitation_id=$1 and owner_id=$2 and status in ('identities','identity_review','poses','review') limit 1",[q.get('invitation_id').slice(3),q.get('owner_id').slice(3)]);}
    if((m=/^video_character_sets\?invitation_id=eq\.([a-f0-9-]+)&owner_id=eq\.([a-f0-9-]+)&approved_current=eq\.true&select=\*$/.exec(path)))return rows('select * from public.video_character_sets where invitation_id=$1 and owner_id=$2 and approved_current',[m[1],m[2]]);
    if((m=/^video_character_assets\?set_id=eq\.([a-f0-9-]+)&status=eq\.ready&select=asset,output_media_id$/.exec(path)))return rows("select asset,output_media_id from public.video_character_assets where set_id=$1 and status='ready'",[m[1]]);
    throw Error('Unexpected query '+path);},
@@ -123,7 +123,7 @@ function fakeProvider(){
  const calls=[],outputs=new Map();let n=0;const provider={calls,behaviour:()=>'ok',
   async create(input,webhook){n++;calls.push({input,webhook});const id='prediction-'+n,url='https://replicate.delivery/test/'+id+'.png',mode=provider.behaviour(input,n);
    if(mode==='reject')throw Object.assign(Error('Unavailable'),{providerStatus:503});
-   const pose=/^EDIT PICTURE/.test(input.prompt),first=Buffer.from(input.input_images[0].split(',')[1],'base64');
+   const pose=/^EDIT PICTURE|^Redraw the complete character layer/.test(input.prompt),first=Buffer.from(input.input_images[0].split(',')[1],'base64');
    outputs.set(url,mode==='drift'?await sharp({create:{width:300,height:300,channels:4,background:'red'}}).png().toBuffer():pose?first:await sharp(first).resize(640,960).png().toBuffer());
    return mode==='fail'?{id,status:'failed',output:null}:{id,status:'succeeded',output:url,version:'test-version'};},
   get:async id=>({id,status:'succeeded',output:'https://replicate.delivery/test/'+id+'.png'}),recent:async()=>({results:[]}),
@@ -135,6 +135,7 @@ async function fixture(){
  await pg.exec('create role anon;create role authenticated;create role service_role bypassrls;create schema auth;create table auth.users(id uuid primary key);');
  for(const f of ['20261112070852_video_invitation_checkout','20261112102539_invitation_draft_recovery','20261112104905_video_character_preparation'])await pg.exec(await readFile('supabase/migrations/'+f+'.sql','utf8'));
  await pg.exec(sql);
+ await pg.exec(await readFile('supabase/migrations/20261126193019_video_scene_revisions.sql','utf8'));
  await pg.exec(await readFile('supabase/migrations/20261126181627_video_character_courtesy.sql','utf8'));
  const owner=randomUUID(),other=randomUUID(),invitation=randomUUID();await pg.query('insert into auth.users values($1),($2)',[owner,other]);await pg.exec('set role service_role');
  await pg.query("select public.fmi_save_personalization_draft($1,$2,'video',$3,$4,0)",[invitation,owner,templateId,JSON.stringify({masterVersion:1,content:{bride:'Priya',groom:'Arun',photos:{}},personalPhotosEnabled:true,charactersChoice:'personal'})]);
@@ -163,13 +164,13 @@ test('paid access, two photos -> two identities -> nine aligned poses -> one ato
   await f.service.confirm(f.owner,a.id);await f.service.confirm(f.owner,a.id);await f.drain();
   assert.equal(f.provider.calls.length,11);set=await f.repo.set(a.id);assert.equal(set.status,'review');
   const poses=(await f.repo.assets(a.id)).filter(x=>x.asset.startsWith('pose:'));assert.deepEqual(poses.map(x=>x.asset.slice(5)).sort(),[...slots].sort());
-  for(const pose of profile.poses){const call=f.provider.calls.find(c=>c.input.prompt.includes('"'+pose.label+'"'));assert.equal(call.input.input_images.length,pose.people.length+1,pose.slot);
+  for(const pose of profile.poses){const call=f.provider.calls.find(c=>c.input.prompt.includes('"'+pose.label+'"'));assert.equal(call.input.input_images.length,pose.people.length*2+1,pose.slot);
    assert.equal(call.input.aspect_ratio,'3:4');
    const targetBytes=Buffer.from(call.input.input_images[0].split(',')[1],'base64');
    assert.equal(hash(await sharp(targetBytes).raw().toBuffer()),hash(await sharp(await art(pose.slot)).raw().toBuffer()),pose.slot);
    for(const [i,person] of pose.people.entries()){
     const identity=(await f.repo.assets(a.id)).find(row=>row.asset==='identity:'+person);
-    assert.equal(hash(Buffer.from(call.input.input_images[i+1].split(',')[1],'base64')),identity.output_sha256);
+    assert.equal(hash(Buffer.from(call.input.input_images[i*2+2].split(',')[1],'base64')),identity.output_sha256);
    }
    const asset=poses.find(x=>x.asset==='pose:'+pose.slot),m=f.store.records.get('media/'+asset.id+'.json');
    assert.equal(m.characterSlot,pose.slot);assert.equal(m.characterSetId,a.id);assert.equal(m.characterProfile,profile.id);assert.equal(m.characterMasterVersion,1);assert.equal(m.owner,f.owner);
@@ -194,6 +195,16 @@ test('paid access, two photos -> two identities -> nine aligned poses -> one ato
   await assert.rejects(validatePreparedCharacters(f.other,f.invitation,bound,f.repo.rest,{templateId,draft:stored}),/Approve your matching characters/);
   // Text-only edits never claim or generate: the same photos return the approved set.
   assert.equal((await f.service.submit(f.owner,{invitationId:f.invitation,photos})).id,a.id);assert.equal(f.provider.calls.length,11);
+  const custom=await f.photo('blue'),revision={id:a.id,requestId:randomUUID(),slot:'heartCouple',mode:'illustration',references:{bride:custom}};
+  const revised=await f.service.revise(f.owner,revision);
+  assert.equal((await f.service.revise(f.owner,revision)).id,revised.id);
+  assert.equal((await f.repo.assets(revised.id)).filter(a=>a.status==='queued').length,1);
+  await assert.rejects(validatePreparedCharacters(f.owner,f.invitation,bound,f.repo.rest,{templateId,draft:stored}),/Review your new illustrations/);
+  await f.drain();assert.equal(f.provider.calls.length,12);assert.equal((await f.repo.set(revised.id)).status,'review');
+  assert.equal((await f.repo.set(a.id)).approved_current,true);
+  assert.equal(hash(Buffer.from(f.provider.calls.at(-1).input.input_images[1].split(',')[1],'base64')),f.store.records.get('media/'+custom+'.json').sha256);
+  const all=await f.service.revise(f.owner,{id:revised.id,requestId:randomUUID(),slot:'all',mode:'illustration'});
+  assert.equal((await f.repo.assets(all.id)).filter(a=>a.status==='queued').length,9);
  }finally{await f.pg.close();}
 });
 

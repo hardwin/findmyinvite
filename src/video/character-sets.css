@@ -9,4 +9,9 @@
 @media(max-width:420px){.vp-character-set figure img{height:180px}.vp-character-set .vp-character-poses{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .vp-personal-photos[hidden]{display:none!important}
 .vp-character-choice{border:0;margin:0 0 20px;padding:0;min-width:0}
+.vp-scene-edit{padding:8px;font-size:.85rem}
+.vp-scene-edit summary{cursor:pointer}
+.vp-scene-edit fieldset{min-width:0;border:0;margin:12px 0 0;padding:0}
+.vp-scene-edit label,.vp-scene-edit input,.vp-scene-edit button{display:block;width:100%;margin:8px 0;white-space:normal}
+.vp-character-poses:has(.vp-scene-edit[open]){grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))}
 .vp-character-choice legend{font-weight:600;margin-bottom:10px}

@@ -1,6 +1,6 @@
 // Strict modern painterly 2D prompts for the Anbil Avan character profile.
 // Deliberately independent of the Temple 3D cartoon prompts.
-export const CHARACTER_SET_PROMPT_REVISION='anbil-avan-2d-scene-pose-v3';
+export const CHARACTER_SET_PROMPT_REVISION='anbil-avan-full-character-v4';
 const style='a modern painterly 2D illustration: flat 2D shapes with soft gouache-like texture, gentle hand-painted shading, clean simplified features and the same line quality and colour palette. It must stay clearly 2D: no 3D render, no CGI, no glossy toy or animated-movie look and no photographic skin';
 const likeness='Identity comes first: keep their recognisable face shape, eyes, eyebrows, nose, lips and smile, skin tone, facial hair exactly as they have it, spectacles only if worn on the face, and their hairstyle and hairline';
 const role=person=>person==='bride'?'the bride (the woman)':'the groom (the man)';
@@ -24,7 +24,7 @@ const sceneActing={
  receptionCouple:'The bride on the left stands upright in her coral dress. Her inside arm reaches naturally up and her relaxed hand rests on the near shoulder of the groom in indigo. Her outside arm hangs down. Keep the visible wrist and fingers where they meet his shoulder. They turn gently toward each other, smiling and meeting each other’s eyes. Preserve the open space between their heads.',
  closingCouple:'The bride in rose is in front on the left, with the groom in sage behind her right shoulder. Both smile at the viewer. Preserve their overlapping bodies and the distinct head tilts of this closing portrait.'
 };
-export function posePrompt(pose,tracking=''){
+function legacyPosePrompt(pose,tracking=''){
  const people=pose.people,count=people.length;
  const refs=people.map((person,i)=>`Picture ${i+2} is the approved illustrated identity reference of ${role(person)}.`).join(' ');
  const target='Picture 1';
@@ -37,6 +37,20 @@ export function posePrompt(pose,tracking=''){
   pose.print?`${target} is a hanging photo print: keep the print's border/frame, paper, edges and clip exactly as they are; only the groom's face and hair inside the print change.`:'',
   `Do not add or remove people, props, text or scenery. ${alpha}`,
   tracking?`Tracking reference ${tracking}; never draw this reference.`:''].filter(Boolean).join('\n\n');
+}
+export function posePrompt(pose,tracking='',revision=CHARACTER_SET_PROMPT_REVISION,hasCoupleReference=false){
+ if(revision!==CHARACTER_SET_PROMPT_REVISION)return legacyPosePrompt(pose,tracking);
+ const descriptions=pose.people.map((person,i)=>`Picture ${2+i*2} is the customer photo for the ${person}. Picture ${3+i*2} is their saved illustrated identity for likeness continuity.`);
+ return [
+  `Redraw the complete character layer for "${pose.label}" in the exact painterly 2D style, lighting, crop, and composition of Picture 1. Generate the people from head through every visible part of their body, including their hands and feet when visible.`,
+  ...descriptions,hasCoupleReference?`Picture ${2+pose.people.length*2} is the shared couple reference for their relative height, posture, gaze and interaction.`:'',
+  'Picture 1 alone supplies every garment, cut, neckline, sleeve, drape, print, shoe, piece of jewellery, prop and colour. Dress each person entirely in their corresponding scene outfit. Ignore all clothing and accessories from the reference photos and saved portraits.',
+  'Use the customer photos for each person’s likeness, natural build, head-to-body proportions, skin tone, hair texture, hairline, facial hair and precise direction of gaze. Keep their shoulders, arms and torso anatomically consistent with that build. Use only visible evidence. When the photos show only faces, use natural proportions for the scene.',
+  pose.people.length>1?'Stage the same couple action and screen positions as Picture 1. Where the customer photos show them together, follow their relative proportions, posture, head angles, gaze and interaction within that composition. With separate portraits, follow their individual features and use the scene for relationship cues missing from the photos.':'Follow the scene action, framing and props while using the customer’s head angle and gaze.',
+  pose.print?'Retain the complete hanging print, clip and paper border around the newly drawn character.':'',
+  `Exactly ${pose.people.length} ${pose.people.length===1?'person':'people'} in the supplied scene crop. Keep all visible fabric and hair within the layer. ${alpha}`,
+  tracking?`Tracking reference ${tracking}; never draw this reference.`:''
+ ].filter(Boolean).join('\n\n');
 }
 // Same Replicate transport fields as the existing character provider; portrait canvas.
 export const characterSetInput=(prompt,images,aspectRatio='2:3')=>({prompt,input_images:images,aspect_ratio:aspectRatio,quality:'high',complexity:'low',output_format:'png',background:'transparent',number_of_images:1});
