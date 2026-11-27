@@ -21,6 +21,7 @@ export function SceneUploadCard(p:Props){
  const [sampleHelp,setSampleHelp]=useState(false),[sampleCopied,setSampleCopied]=useState(false);
  const sampleField=useRef<HTMLInputElement>(null);
  const promptBox=useRef<HTMLTextAreaElement>(null),lock=useRef(false);
+ const [saving,setSaving]=useState(false);
  const [personal,setPersonal]=useState(p.checkedId==='choosing-studio'?false:!!p.pending||!!p.selected||p.checkedId==='choosing-upload');
  const uploadId=personal?p.pending?.id:undefined;
  const [roleChecked,setRoleChecked]=useState(!!p.selected&&!p.pending&&p.checkedId===p.selected.id);
@@ -60,16 +61,16 @@ export function SceneUploadCard(p:Props){
  const choice=uploadId&&image?{id:uploadId,mode:'cutout' as const}:undefined;
  const ready=!personal||roleChecked&&(p.pending?!!choice:!!p.selected&&!!p.selectedURL);
  async function next(){
-  if(!ready||lock.current)return;lock.current=true;
-  try{await p.onNext(personal?choice:'studio');}catch{setMessage('Your image selection could not be saved. Tap Next to try again.');}finally{lock.current=false;}
+  if(!ready||lock.current)return;lock.current=true;setSaving(true);
+  try{await p.onNext(personal?choice:'studio');}catch{setMessage('Your image selection could not be saved. Tap Next to try again.');}finally{lock.current=false;setSaving(false);}
  }
  const displayed=image||p.pending?.url||p.selectedURL;
  const Icon=p.subject.includes(' and ')?UsersRound:UserRound;
  function pick(next:boolean){
-  if(next===personal)return;
+  if(next===personal||saving)return;
   setPersonal(next);setRoleChecked(false);setMessage('');p.onPick(next);
  }
- return <article className="vp-scene-upload" aria-label={p.label}>
+ return <article className="vp-scene-upload" aria-label={p.label} aria-busy={saving} inert={saving}>
   <p className="vp-eyebrow">Scene {p.index+1} of {p.count}</p><h3>{p.label}</h3>
   <div className="vp-image-choices" role="group" aria-label={'Choose artwork for '+p.label}>
    <button type="button" aria-pressed={!personal} disabled={p.busy} onClick={()=>pick(false)}>
@@ -96,6 +97,6 @@ export function SceneUploadCard(p:Props){
   <p role="status">{message}</p>
   <div className="vp-scene-tools">{p.index>0&&<button type="button" disabled={p.busy} onClick={p.onBack}>Previous scene</button>}
    {personal&&(failed||p.pending&&!uploadId&&!p.busy)&&<button type="button" disabled={p.busy} onClick={()=>uploadId?setRetry(n=>n+1):void p.onRetryUpload()}>Retry</button>}
-   <button type="button" className="vp-primary" disabled={!ready||personal&&working||p.busy} onClick={()=>void next()}>Next</button></div>
+   <button type="button" className="vp-primary" disabled={!ready||personal&&working||p.busy} onClick={()=>void next()}>{saving?'Saving…':'Next'}</button></div>
  </article>;
 }

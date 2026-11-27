@@ -17,9 +17,11 @@ try{for(const width of [390,768]){
  const assisted=width===768;
  const cutouts=new Map();
  let lostSave=false;
- const context=await browser.newContext({viewport:{width,height:844}}),page=await context.newPage(),owner=randomUUID(),invitation=randomUUID(),errors=[],calls=[];
+ let context=await browser.newContext({viewport:{width,height:844}}),page=await context.newPage();
+ const owner=randomUUID(),invitation=randomUUID(),errors=[],calls=[];
  let record={id:invitation,owner,kind:'video',templateId:def.id,payload:{masterVersion:1,content:structuredClone(def.example),formStepId:'characters',personalPhotosEnabled:true,references:{}},revision:1,updatedAt:new Date().toISOString()},paid=false;
  if(assisted){paid=true;record.payload.references={bride:{id:randomUUID()}};}
+ async function connectPage(){
  page.setDefaultTimeout(15000);page.on('pageerror',e=>errors.push(e.message));
  await page.addInitScript(({owner,assisted})=>{if(assisted)sessionStorage.setItem('fmi-owner-csrf','fixture-csrf');else sessionStorage.setItem('findmyinvite-auth-session-v1',JSON.stringify({access_token:'fixture',expires_at:Date.now()+3600000,user:{id:owner}}));HTMLMediaElement.prototype.play=async function(){this.dispatchEvent(new Event('playing'));};window.Razorpay=class{constructor(o){this.options=o;}open(){void this.options.handler({razorpay_order_id:'order_fixture',razorpay_payment_id:'pay_fixture',razorpay_signature:'fixture'});}};},{owner,assisted});
  await page.route('**/*',async route=>{const req=route.request(),u=new URL(req.url()),action=u.searchParams.get('action'),body=req.method()==='POST'&&req.headers()['content-type']?.includes('json')?req.postDataJSON():{};const reply=json=>route.fulfill({json});
@@ -48,13 +50,21 @@ try{for(const width of [390,768]){
   }
   return route.fulfill({status:204,body:''});
  });
+ }
+ await connectPage();
  await page.goto('https://shop.test/video-personalise?template='+def.id+'&draft='+invitation+(assisted?'&assist=1':''));
  await page.getByRole('article',{name:'Opening couple',exact:true}).waitFor();
- const nav=page.getByRole('navigation',{name:'Personalization steps'});
+ let nav=page.getByRole('navigation',{name:'Personalization steps'});
  for(const [index,scene] of def.photoSlots.entries()){
+  if(index===1||index===3){
+   const resume=page.url(),stored=structuredClone(record.payload);
+   assert.equal(stored.sceneUploadSlot,scene.slot);assert.ok(stored.content.photos.openingCouple.id);
+   await context.close();context=await browser.newContext({viewport:{width,height:844}});page=await context.newPage();await connectPage();
+   await page.goto(resume);nav=page.getByRole('navigation',{name:'Personalization steps'});
+   assert.deepEqual(record.payload.content.photos,stored.content.photos);
+  }
   const card=page.getByRole('article',{name:scene.label,exact:true});
   await card.waitFor();assert.equal(await page.locator('.vp-scene-upload').count(),1);
-  if(index===1){await page.reload();await card.waitFor();}
   if(index===2&&width===390){
    assert.equal(await card.getByRole('button',{name:'Our drawing'}).getAttribute('aria-pressed'),'true');
    await card.getByRole('button',{name:'Next',exact:true}).click();continue;
@@ -92,7 +102,7 @@ try{for(const width of [390,768]){
   await card.getByRole('button',{name:'Next',exact:true}).click();
   assert.equal(calls.includes('payment-order')||calls.includes('render'),false);
  }
- await page.locator('#video-confirm').waitFor();assert.equal(Object.keys(record.payload.content.photos).length,assisted?9:8);assert.equal(Object.keys(record.payload.sceneChecks).length,9);
+ await page.locator('#video-confirm').waitFor();assert.equal(record.payload.formStepId,'review');assert.equal(Object.keys(record.payload.content.photos).length,assisted?9:8);assert.equal(Object.keys(record.payload.sceneChecks).length,9);
  assert.equal(calls.filter(c=>c==='cutout').length,assisted?9:8);assert.equal(calls.includes('generation'),false);
  await page.locator('#video-confirm').check();
  if(!assisted){await page.getByRole('button',{name:/^Pay ₹/}).click();}

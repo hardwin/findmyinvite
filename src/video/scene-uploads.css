@@ -1,5 +1,6 @@
 
 .vp-sample-help input{width:100%;min-width:0;box-sizing:border-box}
+.vp-scene-save{color:var(--vp-muted);font-size:.85rem;margin:0 0 .45rem}
 .vp-upload-intro{margin:0 0 1rem;max-width:44rem;line-height:1.5}
 .vp-scene-upload{margin:0 0 1rem;padding:clamp(.9rem,3vw,1.4rem);border:1px solid #e2d0c1;border-radius:1rem;background:#fff9f1;color:#302532}
 .vp-scene-upload h3{margin:.35rem 0 .9rem;font-weight:700}

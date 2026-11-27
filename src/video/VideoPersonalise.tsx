@@ -103,7 +103,7 @@ function VideoEditor(){
   const savedSlot=raw?.sceneUploadSlot;
   setSceneIndex(Math.max(0,savedSlot&&photoSlots.some(s=>s.slot===savedSlot)?photoSlots.findIndex(s=>s.slot===savedSlot):firstMissing));
   setPhotoError('');setTouched(!!raw);setNotice(raw?.missingDetails?'Your previous details are unavailable here. Open the original device to sync them, or enter them again.':'');
-  try{let next:any=designerPlate&&raw?.content?normalizeVideoContent(raw.content,{templateId,masterVersion:selectedVersion}):raw?.content?{...structuredClone(VIDEO_DEFAULTS),...raw.content}:structuredClone(config.defaults);if(raw?.missingDetails)for(const q of VIDEO_FORM.steps.flatMap(s=>s.questions))next[q.path]='';setContent(next as VideoPersonalization);setStep(VIDEO_FORM.steps.findIndex(s=>s.id===(new URLSearchParams(location.search).get('section')==='photos'?(photoSlots.length?'characters':'review'):videoStepId(raw||{},new URLSearchParams(location.search).get('step'),VIDEO_FORM.steps.map(s=>s.id)))));const j=draft.record?.job||raw?.job;if(j&&j.status!=='expired'&&j.status!=='failed'&&Date.parse(j.expiresAt)>Date.now()){setJob(j);setJobContent(raw?.jobContent||JSON.stringify(next));}
+  try{let next:any=designerPlate&&raw?.content?normalizeVideoContent(raw.content,{templateId,masterVersion:selectedVersion}):raw?.content?{...structuredClone(VIDEO_DEFAULTS),...raw.content}:structuredClone(config.defaults);if(raw?.missingDetails)for(const q of VIDEO_FORM.steps.flatMap(s=>s.questions))next[q.path]='';setContent(next as VideoPersonalization);setStep(VIDEO_FORM.steps.findIndex(s=>s.id===((new URLSearchParams(location.search).get('section')==='photos'||characterProfile&&raw?.photoWorkflow!==SCENE_UPLOAD_WORKFLOW&&raw?.personalPhotosEnabled&&raw?.formStepId==='review'&&!Object.keys(raw?.content?.photos||{}).length&&Object.keys(raw?.references||{}).length)?(photoSlots.length?'characters':'review'):videoStepId(raw||{},new URLSearchParams(location.search).get('step'),VIDEO_FORM.steps.map(s=>s.id)))));const j=draft.record?.job||raw?.job;if(j&&j.status!=='expired'&&j.status!=='failed'&&Date.parse(j.expiresAt)>Date.now()){setJob(j);setJobContent(raw?.jobContent||JSON.stringify(next));}
    for(const [slot,value] of Object.entries(raw?.pending||{})){if(slot!=='__music'&&raw?.photoWorkflow!==SCENE_UPLOAD_WORKFLOW)continue;const p=value as any;setPending(current=>({...current,[slot]:{...p,url:'',originalUrl:''}}));}
   }catch{setError('Some saved details need attention. Your saved draft has been kept.');}
  },[draft.ready,draft.id,draft.owner,config]);
@@ -175,7 +175,11 @@ function VideoEditor(){
   const processed=await localMediaFile(localId),kind=slot?'image':'audio';await draft.flush();const reserved=await templateApi<{id:string;pathname:string}>(API+'?action=reserve',{kind,templateId,invitationId,...(slot?{sceneSlot:slot}:{})});const token=await templateToken();
   if(config?.localUploads){const response=await fetch(API+'?action=local-upload&id='+reserved.id,{method:'POST',headers:{...assistHeaders(),Authorization:'Bearer '+token,'Content-Type':processed.type},body:processed});if(!response.ok)throw Error((await response.json()).error||'Upload failed.');}
   else{await upload(reserved.pathname,processed,{access:'private',handleUploadUrl:API+'?action=upload',headers:{...assistHeaders(),Authorization:'Bearer '+token},multipart:processed.size>4*1048576});await templateApi(API+'?action=complete&id='+reserved.id,{});}
-  if(slot)setPending(p=>({...p,[slot]:{...p[slot],id:reserved.id}}));else{setContent(c=>({...c,music:{mode:'upload',id:reserved.id}}));setPending(p=>{const next={...p};delete next.__music;return next;});}
+  if(slot){
+   const latest=payloadRef.current,next={...latest,pending:{...latest.pending,[slot]:{id:reserved.id,localId,mode:'cutout' as const,optionId:undefined}}};
+   payloadRef.current=next;draft.update(next,true);
+   setPending(p=>({...p,[slot]:{...p[slot],id:reserved.id}}));await draft.flush();
+  }else{setContent(c=>({...c,music:{mode:'upload',id:reserved.id}}));setPending(p=>{const next={...p};delete next.__music;return next;});}
  }
  async function addFile(file:File,slot?:string){if(!requireAccount())return;await run(async()=>{const processed=slot?await optimise(file,'image'):file;if(processed.size>(slot?1:20)*1048576)throw Error('This file is too large. Please choose a smaller file.');const localId=await stageMedia(processed,slot?'image':'audio'),url=await localMediaUrl(localId);setTouched(true);const p={id:'',localId,url,originalUrl:url,mode:'cutout' as const};setPending(current=>({...current,[slot||'__music']:p}));draft.update({...draftPayload(),pending:{...draftPayload().pending,[slot||'__music']:{id:'',localId,mode:'cutout'}}},true);await draft.flush();await uploadStaged(localId,slot);
   if(slot){const scene=master?.scenes.find(s=>s.id===(slot==='couple'?'closing':slot));if(scene){setPlaying(false);setFrame(scene.reviewFrame||scene.start+18);}}
@@ -192,11 +196,12 @@ function VideoEditor(){
   const nextPending={...latest.pending};delete nextPending[slot];
   const checks={...latest.sceneChecks,[slot]:choice==='studio'?'studio':photos[photoKey]!.id};
   const last=sceneIndex===photoSlots.length-1,missing=photoSlots.findIndex(s=>!sceneChoiceReady(photos[s.slot as keyof typeof photos],checks[s.slot])||nextPending[s.slot]);
-  const nextIndex=last?(missing<0?0:missing):sceneIndex+1;
-  const next={...latest,sceneChecks:checks,content:nextContent,pending:nextPending,sceneUploadSlot:photoSlots[nextIndex]?.slot};
+  const finished=last&&missing<0,nextIndex=last?(finished?sceneIndex:missing):sceneIndex+1;
+  const formStepId=finished?'review':'characters';
+  const next={...latest,formStepId,step:legacyVideoStep(formStepId),sceneChecks:checks,content:nextContent,pending:nextPending,sceneUploadSlot:photoSlots[nextIndex].slot};
   draft.update(next,true);await draft.flush();if(draft.getRecord()?.conflict)throw Error('Reload the saved invitation.');
   payloadRef.current=next;setTouched(true);setSceneChecks(checks);setContent(nextContent);setPending(prev=>{const copy={...prev};delete copy[slot];return copy;});setSceneIndex(nextIndex);
-  if(last&&missing<0)move(VIDEO_FORM.steps.findIndex(s=>s.id==='review'));
+  if(finished)move(VIDEO_FORM.steps.findIndex(s=>s.id==='review'));
  }
  function move(index:number){if(index<0||index>=VIDEO_FORM.steps.length)return;if(document.activeElement instanceof HTMLElement)document.activeElement.blur();void draft.flush().catch(()=>{});setError('');setPlaying(false);setStep(index);const stepScene=(VIDEO_FORM.steps[index] as any).scene;const scene=master?.scenes.find(s=>s.id===stepScene)||master?.scenes[0];if(scene)setFrame(scene.reviewFrame??scene.start+18);}
  function selectScene(sceneId:string){const target=master?.scenes.find(s=>s.id===sceneId);if(!target)return;setPlaying(false);setFrame(target.reviewFrame??target.start+18);const index=VIDEO_FORM.steps.findIndex(s=>'scene' in s&&s.scene===sceneId&&s.questions.length>0);if(index>=0&&VIDEO_FORM.steps[step].questions.length>0){setStep(index);setError('');} }
@@ -254,6 +259,7 @@ function VideoEditor(){
  {'shared' in current&&current.shared?.map(item=><div className="vp-shared-detail" key={item.step}><div><small>{item.label}</small><p>{item.fields.map(field=>content[field as keyof VideoPersonalization]).filter(Boolean).join(' · ')||'Not entered yet'}</p></div><button type="button" onClick={()=>move(VIDEO_FORM.steps.findIndex(s=>s.id===item.step))}>Edit<span className="vp-sr-only"> {item.label}</span></button></div>)}
 
  {current.id==='characters'&&photoSlots.length>0&&<section className="vp-personal-photos" id="personal-photos">
+  {owner!=='guest'&&draft.status&&<p className="vp-scene-save" role="status">{draft.status}</p>}
   <p className="vp-upload-intro">Keep the template drawing or add a picture you make in ChatGPT for each scene.</p>
   {personalPhotosEnabled&&(owner==='guest'?<p>Sign in to save each image as you go.</p>:sceneCard&&<SceneUploadCard
    key={[invitationId,sceneCard.slot,pending[sceneCard.slot]?.id,pending[sceneCard.slot]?.localId,content.photos[sceneCard.slot as keyof typeof content.photos]?.id].join('/')}

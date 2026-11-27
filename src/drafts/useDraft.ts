@@ -37,10 +37,15 @@ export function useDraft(kind:DraftKind,templateId:string){
  useEffect(()=>{const changed=()=>setOwner(editorOwner());window.addEventListener('fmi-auth-changed',changed);return()=>window.removeEventListener('fmi-auth-changed',changed);},[]);
  useEffect(()=>{let active=true;epoch.current++;setReady(false);setError('');setStatus('');current.current=null;initial.current=null;
   if(!templateId)return;
-  (async()=>{if(!assistedOrder())importLegacyDrafts(owner);const requested=new URLSearchParams(location.search).get('draft');let d=requested&&!assistedOrder()?readDraft(requested):null;
+  (async()=>{if(!assistedOrder())importLegacyDrafts(owner);const params=new URLSearchParams(location.search);let requested=params.get('draft');let d=requested&&!assistedOrder()?readDraft(requested):null;
    if(d&&d.owner!==owner&&d.owner!=='guest')d=null;
    // A legacy template draft is offered through its own stable URL; never overwrite it with a new one.
-   if(!requested){const old=localDrafts(owner).filter(x=>x.kind===kind&&x.templateId===templateId).sort((a,b)=>b.updatedAt.localeCompare(a.updatedAt))[0];if(old&&location.search.includes('resume=1'))d=old;}
+   if(!requested&&!assistedOrder()&&!params.has('new')){
+    const saved=localDrafts(owner).filter(x=>x.kind===kind&&x.templateId===templateId).sort((a,b)=>b.updatedAt.localeCompare(a.updatedAt));
+    const inPhotos=saved.filter(x=>x.owner===owner&&kind==='video'&&x.payload?.photoWorkflow==='scene-uploads'&&x.payload?.formStepId==='characters'&&x.payload?.sceneUploadSlot&&(Object.keys(x.payload.sceneChecks||{}).length||Object.keys(x.payload.pending||{}).length));
+    d=params.get('resume')==='1'?saved[0]||null:inPhotos.length===1?inPhotos[0]:null;
+    if(d){requested=d.id;history.replaceState(history.state,'',draftHref(d));}
+   }
    if(requested&&owner!=='guest')try{const response=await templateApi<{draft:DraftRecord}>('/api/drafts?action=get&id='+requested);const remote=response.draft;if(d?.dirty&&d.revision!==remote.revision){if(!samePayload(d.payload,remote.payload)){d={...d,conflict:true};setError('This invitation changed on another device. Your local edits are safe. Reload the saved version before continuing.');}else d={...d,revision:remote.revision,dirty:false};}else if(!d?.dirty)d={...remote,owner,dirty:false};}catch(e){if((e as Error).message==='This invitation has been deleted.'){await removeDraft(requested);throw e;}if(!d)throw e;}
    if(requested&&!d)throw Error('This draft is not available on this device. Sign in to its account to continue.');
    if(d&&(d.kind!==kind||d.templateId!==templateId))throw Error('This draft belongs to a different design. Open it from My Invitations.');
