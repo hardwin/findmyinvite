@@ -1,5 +1,5 @@
 import {videoPublicCatalog} from '../server/video-public-catalog.mjs';
-import {isVersionedVideo,videoDraftVersion,videoMasterVersion} from '../shared/video-master-version.mjs';
+import {isVersionedVideo,videoDraftVersion,videoMasterVersion,videoNewOrSavedVersion} from '../shared/video-master-version.mjs';
 import {withCatalogIdentity} from '../server/catalog-identity.mjs';
 import {deliveryLink,deliverVideo} from '../server/video-delivery.mjs';
 import {videoDownloadTicket} from '../server/video-download-ticket.mjs';
@@ -89,10 +89,16 @@ export default async function handler(req,res){const store=videoStore(),service=
   requireVideoRelease(await loadVideoMaster(templateId),process.env);
   await rate(req,'video-'+(action==='payment-promo'?'promo':'checkout')+':'+user.id,action==='payment-promo'?10:60,3600);
   const draft=await draftService({store}).get(user.id,b.invitationId,{optional:true});
-  if(['payment-order','payment-promo'].includes(action)&&draft?.payload?.personalPhotosEnabled){
-   const payload=draft.payload,definition=videoDefinition(templateId,isVersionedVideo(templateId)?videoDraftVersion(templateId,payload):undefined);
-   if((payload.photoWorkflow===SCENE_UPLOAD_WORKFLOW||definition.characterProfile)&&(!uploadedEveryScene(definition,payload.content?.photos,payload.sceneChecks)||Object.keys(payload.pending||{}).some(k=>k!=='__music')))throw new HttpError(409,'Finish uploading and confirming each scene before checkout.');
-   if(payload.photoWorkflow===SCENE_UPLOAD_WORKFLOW){await validatePreparedCharacters(user.id,draft.id,payload.content?.photos,undefined,{templateId,draft});await Promise.all(Object.entries(payload.content?.photos||{}).map(async([slot,p])=>{const m=await service.media(user.id,p.id);if(m.invitationId!==draft.id||m.status!=='ready'||p.mode==='cutout'&&(!m.cutoutKey||m.sceneUpload&&m.sceneUpload.slot!==slot))throw new HttpError(409,'Finish the upload for '+slot+' before checkout.');}));}
+  if(['payment-order','payment-promo'].includes(action)){
+   const payload=draft?.payload,definition=videoDefinition(templateId,isVersionedVideo(templateId)?videoNewOrSavedVersion(templateId,payload):undefined);
+   if(uploadScenes(definition).length){
+    if(draft?.template_id!==templateId||payload?.photoWorkflow!==SCENE_UPLOAD_WORKFLOW||!payload.personalPhotosEnabled||!uploadedEveryScene(definition,payload.content?.photos,payload.sceneChecks)||Object.keys(payload.pending||{}).some(k=>k!=='__music'))throw new HttpError(409,'Finish uploading and confirming each scene before checkout.');
+    await validatePreparedCharacters(user.id,draft.id,payload.content.photos,undefined,{templateId,draft});
+    await Promise.all(Object.entries(payload.content.photos).map(async([slot,p])=>{
+     const m=await service.media(user.id,p.id);
+     if(m.invitationId!==draft.id||m.status!=='ready'||p.mode==='cutout'&&(!m.cutoutKey||m.sceneUpload&&m.sceneUpload.slot!==slot))throw new HttpError(409,'Finish the upload for '+slot+' before checkout.');
+    }));
+   }
   }
   const payments=videoPaymentService(),args=[user.id,b.invitationId,templateId];
   const result=action==='payment-status'?await payments.status(...args):action==='payment-order'?await payments.order(...args):action==='payment-promo'?await payments.promo(...args,b.code):await payments.verify(...args,b);

@@ -46,7 +46,7 @@ try{for(const width of [390,768]){
   return route.fulfill({status:204,body:''});
  });
  await page.goto('https://shop.test/video-personalise?template='+def.id+'&draft='+invitation+(assisted?'&assist=1':''));
- await page.getByRole('radio',{name:'Upload my scene images'}).waitFor();
+ await page.getByRole('article',{name:'Opening couple',exact:true}).waitFor();
  const nav=page.getByRole('navigation',{name:'Personalization steps'});
  for(const [index,scene] of def.photoSlots.entries()){
   const card=page.getByRole('article',{name:scene.label,exact:true});
