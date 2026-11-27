@@ -26,6 +26,7 @@ export function SceneUploadCard(p:Props){
  const fileInput=useRef<HTMLInputElement>(null);
  const promptBox=useRef<HTMLTextAreaElement>(null),lock=useRef(false);
  const [saving,setSaving]=useState(false);
+ const [confirmedId,setConfirmedId]=useState('');
  const [personal,setPersonal]=useState(p.checkedId==='choosing-studio'?false:!!p.pending||!!p.selected||p.checkedId==='choosing-upload');
  const uploadId=personal?p.pending?.id:undefined;
  const resultPanel=useRef<HTMLElement>(null);
@@ -62,6 +63,8 @@ export function SceneUploadCard(p:Props){
   catch{sampleField.current?.focus();sampleField.current?.select();}
  }
  const choice=uploadId&&image?{id:uploadId,mode:'cutout' as const}:undefined;
+ const reviewId=uploadId||p.selected?.id;
+ const confirmed=!!reviewId&&confirmedId===reviewId;
  const resultURL=p.pending?image:p.selectedURL;
  const uploadFailed=!!p.uploadError||!!p.pending&&!uploadId&&!p.busy;
  const loadFailed=!!resultURL&&brokenURL===resultURL||!!p.selected&&!p.pending&&!p.selectedURL&&p.savedPhotoError;
@@ -77,7 +80,7 @@ export function SceneUploadCard(p:Props){
   panel.scrollIntoView({block:'nearest',behavior:'instant'});
  },[stage]);
  async function next(){
-  if(p.busy||personal&&stage!=='review'||lock.current)return;
+  if(p.busy||lock.current||(personal&&(stage!=='review'||!confirmed)))return;
   lock.current=true;setSaving(true);setMessage('');
   try{await p.onNext(personal?choice:'studio');}catch{setMessage('Couldn’t save this scene. Please try again.');}finally{lock.current=false;setSaving(false);}
  }
@@ -85,7 +88,7 @@ export function SceneUploadCard(p:Props){
  const Icon=p.subject.includes(' and ')?UsersRound:UserRound;
  function pick(next:boolean){
   if(next===personal||saving)return;
-  setPersonal(next);setMessage('');p.onClearError();p.onPick(next);
+  setPersonal(next);setConfirmedId('');setMessage('');p.onClearError();p.onPick(next);
  }
  function retryImage(){
   if(uploadFailed){
@@ -121,7 +124,7 @@ export function SceneUploadCard(p:Props){
  return <article className="vp-scene-upload" aria-label={p.label} aria-busy={saving} inert={saving}>
   <input ref={fileInput} className="vp-picker-input" hidden aria-label={'Upload '+p.label} type="file" accept={PHOTO_ACCEPT} disabled={p.busy||saving} onChange={async e=>{
    const input=e.currentTarget,file=input.files?.[0];
-   if(file){setMessage('');try{await p.onUpload(file);}finally{input.value='';}}
+   if(file){setConfirmedId('');setMessage('');try{await p.onUpload(file);}finally{input.value='';}}
   }}/>
   <p className="vp-eyebrow">Scene {p.index+1} of {p.count}</p><h3>{p.label}</h3>
   {hasUpload?<section ref={resultPanel} tabIndex={-1} className="vp-scene-result" aria-label={'Image review for '+p.label}>
@@ -137,7 +140,11 @@ export function SceneUploadCard(p:Props){
    {stage==='review'&&<p className="vp-review-status" role="status"><Check size={18} aria-hidden="true"/>{choice||p.selected?.mode==='cutout'?'Background removed':'Ready to review'}</p>}
    {resultURL&&<div hidden={stage!=='review'}>{artwork}</div>}
    {stage==='review'&&<>
-    <button type="button" className="vp-primary vp-confirm-scene" onClick={()=>void next()}>{saving?'Saving…':'I confirm that the image is correct for this scene, Proceed to next scene image'}</button>
+    <label className="vp-scene-agreement">
+     <input type="checkbox" required checked={confirmed} onChange={e=>setConfirmedId(e.target.checked&&reviewId?reviewId:'')}/>
+     <span>I confirm that the image is correct for this scene.</span>
+    </label>
+    <button type="button" className="vp-primary vp-confirm-scene" disabled={!confirmed||saving} onClick={()=>void next()}>{saving?'Saving…':'Click to Proceed'}</button>
     {message&&<p role="alert">{message}</p>}
    </>}
   </section>:artwork}

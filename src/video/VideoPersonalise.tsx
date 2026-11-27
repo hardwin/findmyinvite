@@ -132,16 +132,32 @@ function VideoEditor(){
  useEffect(()=>{if(!personalPhotosEnabled)return;let live=true;for(const [slot,p] of Object.entries(pending)){if(slot==='__music'||p.url)continue;void(p.id?privateFile(API+'?action=media&id='+p.id):localMediaFile(p.localId!)).then(blob=>{if(!live)return;const url=URL.createObjectURL(blob);urls.current.push(url);setPending(current=>current[slot]?.id===p.id&&current[slot]?.localId===p.localId?{...current,[slot]:{...current[slot],url,originalUrl:url,error:''}}:current);}).catch(()=>{if(live)setPending(current=>current[slot]?{...current,[slot]:{...current[slot],error:'This saved photo is unavailable. Select it again or remove it.'}}:current);});}return()=>{live=false;};},[pendingMediaKey,personalPhotosEnabled,owner]);
  useEffect(()=>{
   if(!config||!canvas.current)return;setPlaying(false);setPreviewReady(false);
-  if(Object.keys(contentRef.current.photos||{}).length&&loadedPhotoKey!==photoKey)return;
+  if(loadedPhotoKey!==photoKey)return;
   let active=true,r:any;setPreviewError('');
-  try{r=createVideoCompositor(canvas.current,config.master);renderer.current=r;}catch{setPreviewError('The preview could not start. Tap Retry preview to try again.');return;}
+  try{r=createVideoCompositor(canvas.current,config.master);}catch{setPreviewError('The preview could not start. Tap Retry preview to try again.');return;}
   const timer=setTimeout(()=>{if(active)setPreviewError('The preview is taking too long to load. Check your connection and tap Retry preview.');},30000);
   const photos={...(personalPhotosEnabled?photoURLs:{})};
   const studio=sceneChecks.couple==='studio'&&(photos.groom||photos.bride)&&studioCoupleLayer(templateId,config.master);
   if(studio&&!photos.couple)photos.couple={url:studio.path,mode:'prepared'};
-  r.load(config.master,contentRef.current,{photos}).then(async()=>{if(active){const displayed=frameRef.current;await r.render(displayed);if(active){acceptRules(r.rules);setRenderedFrame(displayed);if(canvas.current)canvas.current.dataset.renderedFrame=String(displayed);setPreviewError('');setPreviewReady(true);}}}).catch((e:Error)=>{if(active){setPreviewError(e.message);if(r.loaded)setPreviewReady(true);}}).finally(()=>clearTimeout(timer));
+  r.load(config.master,contentRef.current,{photos}).then(async()=>{
+   if(!active)return;
+   // A render effect from the previous scene may still see previewReady=true.
+   // Publish the replacement only once its film and initial frame are ready.
+   if(r.content!==contentRef.current)r.setContent(contentRef.current);
+   const displayed=frameRef.current;
+   await r.render(displayed);
+   if(!active)return;
+   renderer.current=r;
+   acceptRules(r.rules);setRenderedFrame(displayed);
+   if(canvas.current)canvas.current.dataset.renderedFrame=String(displayed);
+   setPreviewError('');setPreviewReady(true);
+  }).catch((e:Error)=>{
+   if(!active)return;
+   setPreviewError(e.message);
+   if(r.loaded){renderer.current=r;setPreviewReady(true);}
+  }).finally(()=>clearTimeout(timer));
   return()=>{active=false;clearTimeout(timer);r.dispose();if(renderer.current===r)renderer.current=null;};
- },[config,photoURLs,visiblePending,personalPhotosEnabled,loadedPhotoKey,photoKey,previewAttempt,sceneChecks.couple]);
+ },[config,photoURLs,personalPhotosEnabled,loadedPhotoKey,photoKey,previewAttempt,sceneChecks.couple]);
  useEffect(()=>{let active=true,objectURL='';setMusicURL('');if(content.music.mode==='library')setMusicURL(libraryMusicUrl(content.music.id));else if(content.music.mode==='upload')privateFile(`${API}?action=media&id=${content.music.id}`).then(blob=>{if(active){objectURL=URL.createObjectURL(blob);setMusicURL(objectURL);}}).catch(e=>{if(active)setError(e.message);});return()=>{active=false;if(objectURL)URL.revokeObjectURL(objectURL);};},[content.music.mode,content.music.id,owner]);
  const audioController=useRef<ReturnType<typeof createPreviewAudio>|null>(null);
  const audioState=useRef({playing,previewReady,previewError});audioState.current={playing,previewReady,previewError};
@@ -170,7 +186,17 @@ function VideoEditor(){
   return()=>{active=false;clearTimeout(timer);window.removeEventListener('online',poll);window.removeEventListener('focus',poll);};
  },[job?.id,job?.status]);
  function requireAccount(){if(!assistedOrder()&&!readSession()){setSignin(true);return false;}return true;}
- async function retryPreview(){const r=renderer.current;setPlaying(false);setPreviewError('');if(!r?.loaded){setPreviewAttempt(n=>n+1);return;}try{r.setContent(contentRef.current);await r.activateMedia?.();await r.render(frameRef.current);setRenderedFrame(frameRef.current);if(canvas.current)canvas.current.dataset.renderedFrame=String(frameRef.current);setPreviewReady(true);}catch(e){setPreviewError((e as Error).message);}}
+ async function retryPreview(){
+  const r=renderer.current;setPlaying(false);setPreviewError('');
+  if(!r?.loaded){setPreviewAttempt(n=>n+1);return;}
+  try{
+   r.setContent(contentRef.current);await r.activateMedia?.();
+   if(renderer.current!==r)return;
+   const displayed=frameRef.current;await r.render(displayed);
+   if(renderer.current!==r)return;
+   setRenderedFrame(displayed);if(canvas.current)canvas.current.dataset.renderedFrame=String(displayed);setPreviewReady(true);
+  }catch(e){if(renderer.current===r)setPreviewError((e as Error).message);}
+ }
  async function togglePlayback(){if(playing){setPlaying(false);return;}const r=renderer.current;if(!r)return;const at=frame===totalFrames-1?0:frame;if(at!==frame){setFrame(at);frameRef.current=at;}try{audioController.current?.start();await r.setPlayback?.(true,at);setPlaying(true);}catch{setPreviewError('Tap Load preview to allow video playback on this device, then press Play.');}}
  async function run(task:()=>Promise<void>,report:(message:string)=>void=setError){if(busy)return;setBusy(true);setError('');try{await task();}catch(e){report((e as Error).message);}finally{setBusy(false);}}
  async function uploadStaged(localId:string,slot?:string){
@@ -233,7 +259,9 @@ function VideoEditor(){
  useEditorIssue('validation',invalidPath?String(fieldErrors[invalidPath]):'',invalidPath?{label:'Fix this field',reason:'',run:()=>revealField(invalidPath)}:undefined);
  useEditorIssue('operation',error);
  useEditorIssue('draft',draft.error,draft.error?{label:draft.record?.conflict?'Reload saved version':'Retry saving',reason:'',run:()=>run(()=>draft.record?.conflict?draft.reload():saveDraft())}:undefined);
- useEditorIssue('preview',previewError,previewError?{label:photoError?'Review photos':'Retry preview',reason:'',run:()=>photoError?openPhotos():retryPreview()}:undefined);
+ const inlineScene=current.id==='characters'&&personalPhotosEnabled&&owner!=='guest'&&!!sceneCard;
+ const previewIssue=inlineScene&&(previewHidden||view.mobile&&!previewExpanded)?'':previewError;
+ useEditorIssue('preview',previewIssue?customerMessage(previewIssue,'The preview could not load. Tap Retry preview to try again.'):'',previewIssue?{label:photoError?'Review photos':'Retry preview',reason:'',run:()=>photoError?openPhotos():retryPreview()}:undefined);
  useEditorIssue('photos',personalPhotosEnabled?photoError||Object.values(visiblePending).find(p=>p.error)?.error||'':'', {label:'Review photos',reason:'',run:openPhotos});
  useEditorIssue('render',job?.status==='failed'?job.error||'Your video could not be completed. Please retry.':'');
  useEditorIssue('notice',notice,undefined,true);
@@ -251,7 +279,6 @@ function VideoEditor(){
   else if(!checked)action={label:'Confirm details',reason:'Check the names, dates and spellings, then tick the confirmation above.',run:()=>{const c=document.getElementById('video-confirm');c?.scrollIntoView({block:'center'});c?.focus({preventScroll:true});}};
   else action={label:(purchase?.unlocked||videoQuote(templateId).totalPaise===0)?(job?.status==='failed'?'Retry video':staleJob&&job?.status==='ready'?'Create updated video':'Create my video'):`Pay ₹${(purchase?.amount??videoQuote(templateId).totalPaise)/100}`,reason:videoQuote(templateId).totalPaise===0?'No payment required. Create your MP4 when you are ready.':purchase?.unlocked?'Your invitation is unlocked. Create your MP4 when you are ready.':'Pay once for this invitation, or apply your promo code above.',run:renderVideo};
  }
- const inlineScene=current.id==='characters'&&personalPhotosEnabled&&owner!=='guest'&&!!sceneCard;
  const progressMessage=inlineScene?'':busy?'Please wait…':current.id==='review'&&job&&['queued','running'].includes(job.status)?'Creating your video…':'';
  if(!definition||!config)return <main className="vp-page"><div className="vp-unavailable"><h1>{!definition||configError||draft.error?'Template unavailable':'Loading your invitation'}</h1><p role="status">{customerMessage(configError||draft.error,'Please wait while your invitation loads.')}</p>{(configError||draft.error)&&<button type="button" onClick={()=>draft.error?location.reload():setConfigAttempt(n=>n+1)}>Retry</button>} <a href="/templates?kind=video">Invitation videos</a>{owner==='guest'&&new URLSearchParams(location.search).has('draft')&&<p><button type="button" onClick={()=>setSignin(true)}>Sign in to open your saved invitation</button></p>}</div>{signin&&<AuthModal onClose={()=>setSignin(false)} returnTo={location.pathname+location.search}/>}</main>;
  return <main className="vp-page vp-editor-shell" style={{top:view.top,left:view.left,width:view.width,height:view.height}}><audio ref={previewAudio} src={musicURL||undefined} preload="metadata" onPlay={e=>claimMusic(e.currentTarget)}/><div className="vp-layout"><FloatingPreview view={view} footerHeight={footerHeight+toastHeight} hidden={previewHidden||inlineScene&&view.mobile&&!previewExpanded} onHide={()=>{setPlaying(false);setPreviewHidden(true);setPreviewExpanded(false);}} expanded={previewExpanded&&!previewHidden} onExpandedChange={expanded=>{if(expanded)setPreviewHidden(false);setPreviewExpanded(expanded);}} playing={playing} ready={previewReady&&!previewError} onPlay={()=>void togglePlayback()}><div className="vp-film"><canvas ref={canvas} width="720" height="1280" aria-label="Personalized invitation video preview"/>{(!previewReady||!playing&&renderedFrame!==frame||previewError)&&<div className="vp-film-message"><Flower2 size={32}/><h2>{previewError?'Check your invitation':'Loading your invitation'}</h2><p>{previewError?customerMessage(previewError,'The preview could not load. Please tap Retry preview.'):'A moment of anticipation…'}</p>{previewError&&<button type="button" className="vp-primary" onClick={retryPreview}>{previewError.includes('Tap Load preview')?'Load preview':'Retry preview'}</button>}</div>}<span className="vp-preview-tag">LIVE PREVIEW</span></div><div className="vp-player"><button onClick={togglePlayback} disabled={!previewReady||!!previewError} aria-label={playing?'Pause preview':'Play full video'}>{playing?<Pause size={18}/>:<Play size={18}/>}</button><span>{scene?'Scene '+(master!.scenes.indexOf(scene)+1)+' · '+scene.name:'Your invitation'}<small>{(frame/fps).toFixed(1)} / {totalSeconds.toFixed(1)} seconds</small></span><label><input type="checkbox" checked={loop} onChange={e=>{setPlaying(false);setLoop(e.target.checked);}}/>Loop scene</label></div><input className="vp-scrub" aria-label="Video position" type="range" min="0" max={totalFrames-1} value={frame} onChange={e=>{setPlaying(false);setFrame(Number(e.target.value));}}/><div className="vp-scenes" aria-label="Jump to a scene">{master?.scenes.map((s,i)=><button key={s.id} aria-label={s.name} aria-pressed={scene?.id===s.id} onClick={()=>selectScene(s.id)}>{i+1}</button>)}</div></FloatingPreview><section className="vp-form" inert={previewExpanded||!draft.ready||invitationId!==draft.id} onFocusCapture={e=>focusField(e.target)} onChangeCapture={()=>setTouched(true)}><header className="vp-step-header">{assistedOrder()&&<div className="vp-assist-banner">Editing for customer · Order {assistedOrder()?.slice(0,8)}</div>}<nav ref={stepNav} aria-label="Personalization steps">{VIDEO_FORM.steps.map((s,i)=><button key={s.id} className={i===step?'active':''} aria-current={i===step?'step':undefined} onClick={()=>move(i)}><span>{i+1}</span>{s.title}</button>)}</nav><div className="vp-step-title"><div><p className="vp-eyebrow">{sceneNumber?'SCENE '+sceneNumber+' OF '+sceneSteps.length:'STEP '+(step+1)+' OF '+VIDEO_FORM.steps.length}</p><h2 ref={heading} tabIndex={-1}>{current.title}</h2>{config?.templateCode&&<p className="di-template-code">{config.templateCode} · {definition.name}</p>}</div>{(previewHidden||inlineScene&&view.mobile&&!previewExpanded)&&<button type="button" className="vp-show-preview" onClick={()=>{setPreviewHidden(false);if(inlineScene&&view.mobile)setPreviewExpanded(true);}}><Eye size={16}/>Show preview</button>}</div></header><div className="vp-form-body">{draft.error&&<p role="alert" className="vp-error">{customerMessage(draft.error,'Your changes are saved on this device. Please retry saving to your account.')} <button onClick={()=>void draft.reload()}>Reload saved version</button></p>}{error&&<p role="alert" className="vp-error">{customerMessage(error)}</p>}{notice&&<p role="status">{customerMessage(notice)}</p>}{config&&!config.ready&&<p className="vp-notice">This invitation is still being prepared. Downloads will be available soon.</p>}

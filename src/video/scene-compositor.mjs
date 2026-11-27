@@ -14,16 +14,18 @@ export class SceneCompositor {
   const ready=frame.contentWindow.fmiFilmReady;if(!ready)throw Error('The invitation could not start.');
   this.film=await ready;if(this.disposed){this.film.destroy();return;}
   const studioPhotos=Object.fromEntries(Object.entries(master.defaultCharacterArt||{}).map(([slot,art])=>[slot,{mode:'prepared',url:art.path}]));
-  this.rules=await this.film.init(content,{...studioPhotos,...photos},externalBackground);this.video=this.film.video;this.loaded=true;
+  this.rules=await this.film.init(content,{...studioPhotos,...photos},externalBackground);
+  if(this.disposed)return;
+  this.video=this.film.video;this.loaded=true;
  }
  setContent(content){this.content=content;this.pending=Promise.resolve(this.film.setContent(content));this.pending.catch(()=>{});}
- async render(frame,options){if(this.disposed)return;await this.pending;this.rules=await this.film.render(frame,options);}
+ async render(frame,options){await this.pending;if(this.disposed)return;this.rules=await this.film.render(frame,options);}
  activateMedia(){return this.film?.activateMedia?.();}
  async setPlayback(play,frame){
-  if(!this.film?.setPlayback)return;
+  if(!this.loaded||!this.film?.setPlayback)return;
   await this.film.setPlayback(play,frame);
-  this.playing=!this.video.paused;
+  if(!this.disposed)this.playing=!this.video.paused;
  }
  validateText(){this.film.validate();}
- dispose(){this.disposed=true;this.observer?.disconnect();this.film?.destroy();this.frame?.remove();this.canvas.style.visibility='';}
+ dispose(){this.disposed=true;this.loaded=false;this.observer?.disconnect();this.film?.destroy();this.frame?.remove();this.canvas.style.visibility='';}
 }

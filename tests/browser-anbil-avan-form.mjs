@@ -13,10 +13,21 @@ import {ANBIL_AVAN_DEFINITION as def} from '../shared/anbil-avan-video.mjs';
 import {uploadReference} from '../shared/scene-uploads.mjs';
 const config=await videoConfig({VIDEO_PERSONALISE_ENABLED:'1'},def.id,{tracks:[],assignments:[]},1);
 config.ready=true;config.localUploads=true;config.templateCode='FMI#0111';
-const bundle=await build({stdin:{loader:'tsx',resolveDir:process.cwd(),contents:`import './src/style.css';import './src/iteration2.css';import './src/discovery.css';import './src/glass-theme.css';import './src/storefront-density.css';import React from 'react';import{createRoot}from'react-dom/client';import Editor from './src/video/VideoPersonalise';createRoot(document.getElementById('app')).render(<Editor/>);`},bundle:true,write:false,platform:'browser',format:'iife',jsx:'automatic',loader:{'.css':'css'},define:{'process.env.NODE_ENV':'"production"'},external:['/assets/*'],outfile:'fixture.js',logLevel:'silent',plugins:[{name:'fixture-compositor',setup(b){b.onResolve({filter:/\/create-compositor\.mjs$/},()=>({path:'compositor',namespace:'fixture'}));b.onLoad({filter:/.*/,namespace:'fixture'},()=>({contents:`export function createVideoCompositor(){return {loaded:true,load:async()=>{},render:async()=>{},setContent(c){this.content=c;},validateText(){if(this.content?.bride==="Too wide for this scene")throw Object.assign(Error("Too wide"),{code:"TEXT_FIT",field:"bride"});},dispose(){}};}`}));}}]});
+const bundle=await build({stdin:{loader:'tsx',resolveDir:process.cwd(),contents:`import './src/style.css';import './src/iteration2.css';import './src/discovery.css';import './src/glass-theme.css';import './src/storefront-density.css';import React from 'react';import{createRoot}from'react-dom/client';import Editor from './src/video/VideoPersonalise';createRoot(document.getElementById('app')).render(<Editor/>);`},bundle:true,write:false,platform:'browser',format:'iife',jsx:'automatic',loader:{'.css':'css'},define:{'process.env.NODE_ENV':'"production"'},external:['/assets/*'],outfile:'fixture.js',logLevel:'silent'});
 const resultPng=await sharp('public'+uploadReference(def,'openingCouple')).resize(240,320,{fit:'inside'}).modulate({saturation:.8}).png().toBuffer();
 const png=await sharp(resultPng).flatten({background:'#f4dfcd'}).png().toBuffer();
-const confirmation='I confirm that the image is correct for this scene, Proceed to next scene image';
+const confirmation='I confirm that the image is correct for this scene.';
+// Use the editor's real iframe compositor. The delayed film makes the gap
+// between mounting the iframe and drawing its first frame observable.
+const filmFixture=`<!doctype html><script>
+ let initialized=false;
+ window.fmiFilmReady=new Promise(resolve=>setTimeout(()=>resolve({
+  init(content,photos){this.photos=photos;initialized=true;},
+  setContent(){},
+  render(){if(!initialized)throw Error('Film was not initialized');document.body.dataset.photoCount=Object.keys(this.photos).filter(k=>this.photos[k].url.startsWith('blob:')).length;},
+  validate(){},destroy(){initialized=false;}
+ }),100));
+</script>`;
 const browser=process.env.FMI_BROWSER==='webkit'?await webkit.launch():await chromium.launch({executablePath:process.env.VIDEO_CHROMIUM_PATH});
 const fixtureDir=await mkdtemp(join(tmpdir(),'fmi-scene-')),uploadFile=join(fixtureDir,'scene.png');
 await writeFile(uploadFile,png);
@@ -37,8 +48,16 @@ try{for(const width of [390,768]){
   if(reloading&&process.env.FMI_BROWSER==='webkit'&&e.message.includes('/api/drafts?action=save due to access control checks.'))return;
   errors.push(e.message);
  });
+ await page.addInitScript(()=>{
+  window.previewFailures=[];
+  new MutationObserver(()=>{
+   const error=document.querySelector('.vp-film-message h2');
+   if(error?.textContent==='Check your invitation')window.previewFailures.push(error.parentElement.textContent);
+  }).observe(document,{childList:true,subtree:true});
+ });
  await page.addInitScript(({owner,assisted})=>{if(assisted)sessionStorage.setItem('fmi-owner-csrf','fixture-csrf');else sessionStorage.setItem('findmyinvite-auth-session-v1',JSON.stringify({access_token:'fixture',expires_at:Date.now()+3600000,user:{id:owner}}));HTMLMediaElement.prototype.play=async function(){this.dispatchEvent(new Event('playing'));};window.Razorpay=class{constructor(o){this.options=o;}open(){void this.options.handler({razorpay_order_id:'order_fixture',razorpay_payment_id:'pay_fixture',razorpay_signature:'fixture'});}};},{owner,assisted});
  await page.route('https://**/*',async route=>{const req=route.request(),u=new URL(req.url()),action=u.searchParams.get('action'),body=req.method()==='POST'&&req.headers()['content-type']?.includes('json')?req.postDataJSON():{};const reply=json=>route.fulfill({json});
+  if(u.pathname===config.master.sceneFrame)return route.fulfill({contentType:'text/html',body:filmFixture});
   if(req.resourceType()==='document')return route.fulfill({contentType:'text/html',body:'<!doctype html><html lang="en" class="di-site"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><link rel="stylesheet" href="/fixture.css"><body class="di-site"><div id="app"></div><script src="/fixture.js"></script></body></html>'});
   if(/^\/assets\/fonts\/[a-z0-9_/.-]+\.woff2$/i.test(u.pathname))return route.fulfill({contentType:'font/woff2',body:await readFile('public'+u.pathname)});
   if(u.pathname.startsWith('/assets/video-scenes/anbil-avan-v1/assets/')&&u.pathname.endsWith('.webp'))return route.fulfill({contentType:'image/webp',body:await readFile('public'+u.pathname)});
@@ -70,6 +89,7 @@ try{for(const width of [390,768]){
  await connectPage();
  await page.goto('https://shop.test/video-personalise?template='+def.id+'&draft='+invitation+(assisted?'&assist=1':''));
  await page.getByRole('article',{name:'Opening couple',exact:true}).waitFor();
+ await page.waitForFunction(()=>document.querySelector('iframe[title="Personalised invitation"]')?.contentDocument?.body?.dataset.photoCount==='0');
  let nav=page.getByRole('navigation',{name:'Personalization steps'});
  for(const [index,scene] of def.photoSlots.entries()){
   if(index===1||index===3){
@@ -114,7 +134,8 @@ try{for(const width of [390,768]){
    await picker.setFiles(uploadFile);
   }
   const review=card.getByRole('region',{name:'Image review for '+scene.label});
-  const confirm=review.getByRole('button',{name:confirmation,exact:true});
+  const agreement=review.getByRole('checkbox',{name:confirmation,exact:true});
+  const confirm=review.getByRole('button',{name:'Click to Proceed',exact:true});
   if(holdFirst){
    await review.getByRole('progressbar',{name:'Uploading your picture…'}).waitFor();
    assert.equal(await card.getByRole('link',{name:'Download style sample'}).isVisible(),false);
@@ -133,6 +154,7 @@ try{for(const width of [390,768]){
    assert.equal(calls.filter(c=>c==='upload').length,1);
   }
   await confirm.waitFor();
+  assert.equal(await agreement.isChecked(),false);assert.equal(await confirm.isEnabled(),false);
   assert.equal(await card.getByRole('link',{name:'Download style sample'}).isVisible(),false);
   if(index===0&&width===390){
    for(const viewport of [{width:320,height:568},{width,height:844}]){
@@ -149,13 +171,22 @@ try{for(const width of [390,768]){
    await card.getByText('Upload instructions',{exact:true}).click();
   }
   if(index===0&&assisted){
+   await agreement.check();assert.equal(await confirm.isEnabled(),true);
    const originalId=record.payload.pending[scene.slot].id;
    const [picker]=await Promise.all([page.waitForEvent('filechooser'),card.getByRole('button',{name:'Replace picture'}).click()]);
    await Promise.all([page.waitForResponse(r=>r.url().includes('action=media')&&r.url().includes('cutout=1')&&!r.url().includes(originalId)),picker.setFiles(uploadFile)]);
    await confirm.waitFor();
    assert.notEqual(record.payload.pending[scene.slot].id,originalId);
+   assert.equal(await agreement.isChecked(),false);assert.equal(await confirm.isEnabled(),false);
   }
+  await agreement.check();assert.equal(await confirm.isEnabled(),true);
+  if(index===0){await agreement.uncheck();assert.equal(await confirm.isEnabled(),false);await agreement.check();}
   await confirm.click();
+  if(index===0){
+   await page.getByRole('article',{name:def.photoSlots[1].label,exact:true}).waitFor();
+   await page.waitForFunction(()=>document.querySelector('iframe[title="Personalised invitation"]')?.contentDocument?.body?.dataset.photoCount==='1');
+   assert.deepEqual(await page.evaluate(()=>window.previewFailures),[]);
+  }
   assert.equal(calls.includes('payment-order')||calls.includes('render'),false);
  }
  await page.locator('#video-confirm').waitFor();assert.equal(record.payload.formStepId,'review');assert.equal(Object.keys(record.payload.content.photos).length,assisted?9:8);assert.equal(Object.keys(record.payload.sceneChecks).length,9);

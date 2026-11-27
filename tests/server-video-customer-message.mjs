@@ -11,3 +11,10 @@ test('video form keeps actionable validation, payment and recovery guidance',()=
  for(const message of ['Please enter the groom name.','This text is too long for its board. Please shorten it before downloading.','The photo has no visible subject. Choose another photo or a frame.','Tap Load preview to start the video on this device.','This invitation changed on another device. Your local edits are safe.','We could not confirm payment yet. Your draft is saved. Use Check payment status before paying again.','Use your included redo to change the reference photo.'])assert.equal(videoCustomerMessage(message),message);
  assert.equal(videoCustomerMessage(undefined,'Try again.'),'Try again.');
 });
+
+test('preview errors from Safari and Chromium use the supplied recovery message',()=>{
+ const retry='The preview could not load. Tap Retry preview to try again.';
+ for(const message of ["undefined is not an object (evaluating 'this.film.render')","Cannot read properties of undefined (reading 'render')"]){
+  assert.equal(videoCustomerMessage(message,retry),retry);
+ }
+});

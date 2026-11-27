@@ -60,10 +60,24 @@
  background:repeating-conic-gradient(#f2ebe7 0 25%,#fff 0 50%) 0/16px 16px;
 }
 .vp-scene-result .vp-image-choices button>span:last-of-type {padding:.4rem .15rem}
+.vp-form .vp-scene-agreement {
+ display:flex;
+ align-items:center;
+ gap:.65rem;
+ min-height:44px;
+ padding:.55rem .7rem;
+ border:1px solid #dcc8d2;
+ border-radius:.6rem;
+ background:#fffaf7;
+ line-height:1.35;
+ cursor:pointer;
+}
+.vp-scene-agreement input {flex:none;width:1.15rem;height:1.15rem;margin:0}
 .vp-form .vp-scene-result .vp-confirm-scene {
- width:100%;
- padding:.7rem 1rem;
- border-radius:.7rem;
+ justify-self:end;
+ min-height:44px;
+ padding:.5rem 1rem;
+ border-radius:1.5rem;
  line-height:1.4;
  text-align:center;
 }
@@ -80,5 +94,5 @@
 }
 @media(max-height:650px) {
  .vp-scene-result {gap:.5rem;padding:.6rem}
- .vp-scene-result .vp-choice-art {height:clamp(4rem,15vh,6rem)}
+ .vp-scene-result .vp-choice-art {height:clamp(4rem,13vh,5rem)}
 }
