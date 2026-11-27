@@ -1,6 +1,7 @@
 // Exercise the actual editor/photo approval UX with deterministic API/provider fixtures.
 // Real generation and rendering have separate production-environment proofs.
 import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
 import {randomUUID} from 'node:crypto';
 import {build} from 'esbuild';
 import {chromium} from 'playwright-core';
@@ -8,8 +9,8 @@ import sharp from 'sharp';
 import {videoConfig} from '../server/video-personalise.mjs';
 import {ANBIL_AVAN_DEFINITION as def} from '../shared/anbil-avan-video.mjs';
 const config=await videoConfig({VIDEO_PERSONALISE_ENABLED:'1'},def.id,{tracks:[],assignments:[]},1);
-config.ready=true;config.localUploads=true;
-const bundle=await build({stdin:{loader:'tsx',resolveDir:process.cwd(),contents:`import React from 'react';import{createRoot}from'react-dom/client';import Editor from './src/video/VideoPersonalise';createRoot(document.getElementById('app')).render(<Editor/>);`},bundle:true,write:false,platform:'browser',format:'iife',jsx:'automatic',loader:{'.css':'css'},define:{'process.env.NODE_ENV':'"production"'},external:['/assets/*'],outfile:'fixture.js',logLevel:'silent',plugins:[{name:'fixture-compositor',setup(b){b.onResolve({filter:/\/create-compositor\.mjs$/},()=>({path:'compositor',namespace:'fixture'}));b.onLoad({filter:/.*/,namespace:'fixture'},()=>({contents:`export function createVideoCompositor(){return {loaded:true,load:async()=>{},render:async()=>{},setContent(c){this.content=c;},validateText(){if(this.content?.bride==="Too wide for this scene")throw Object.assign(Error("Too wide"),{code:"TEXT_FIT",field:"bride"});},dispose(){}};}`}));}}]});
+config.ready=true;config.localUploads=true;config.templateCode='FMI#0111';
+const bundle=await build({stdin:{loader:'tsx',resolveDir:process.cwd(),contents:`import './src/style.css';import './src/iteration2.css';import './src/discovery.css';import './src/glass-theme.css';import './src/storefront-density.css';import React from 'react';import{createRoot}from'react-dom/client';import Editor from './src/video/VideoPersonalise';createRoot(document.getElementById('app')).render(<Editor/>);`},bundle:true,write:false,platform:'browser',format:'iife',jsx:'automatic',loader:{'.css':'css'},define:{'process.env.NODE_ENV':'"production"'},external:['/assets/*'],outfile:'fixture.js',logLevel:'silent',plugins:[{name:'fixture-compositor',setup(b){b.onResolve({filter:/\/create-compositor\.mjs$/},()=>({path:'compositor',namespace:'fixture'}));b.onLoad({filter:/.*/,namespace:'fixture'},()=>({contents:`export function createVideoCompositor(){return {loaded:true,load:async()=>{},render:async()=>{},setContent(c){this.content=c;},validateText(){if(this.content?.bride==="Too wide for this scene")throw Object.assign(Error("Too wide"),{code:"TEXT_FIT",field:"bride"});},dispose(){}};}`}));}}]});
 const png=await sharp({create:{width:240,height:320,channels:3,background:'#bd8d72'}}).png().toBuffer();
 const browser=await chromium.launch({executablePath:process.env.VIDEO_CHROMIUM_PATH});
 try{for(const width of [390,768]){
@@ -23,6 +24,8 @@ try{for(const width of [390,768]){
  await page.addInitScript(({owner,assisted})=>{if(assisted)sessionStorage.setItem('fmi-owner-csrf','fixture-csrf');else sessionStorage.setItem('findmyinvite-auth-session-v1',JSON.stringify({access_token:'fixture',expires_at:Date.now()+3600000,user:{id:owner}}));HTMLMediaElement.prototype.play=async function(){this.dispatchEvent(new Event('playing'));};window.Razorpay=class{constructor(o){this.options=o;}open(){void this.options.handler({razorpay_order_id:'order_fixture',razorpay_payment_id:'pay_fixture',razorpay_signature:'fixture'});}};},{owner,assisted});
  await page.route('**/*',async route=>{const req=route.request(),u=new URL(req.url()),action=u.searchParams.get('action'),body=req.method()==='POST'&&req.headers()['content-type']?.includes('json')?req.postDataJSON():{};const reply=json=>route.fulfill({json});
   if(req.resourceType()==='document')return route.fulfill({contentType:'text/html',body:'<!doctype html><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/fixture.css"><div id="app"></div><script src="/fixture.js"></script>'});
+  if(/^\/assets\/fonts\/[a-z0-9_/.-]+\.woff2$/i.test(u.pathname))return route.fulfill({contentType:'font/woff2',body:await readFile('public'+u.pathname)});
+  if(u.pathname.startsWith('/assets/video-scenes/anbil-avan-v1/assets/')&&u.pathname.endsWith('.webp'))return route.fulfill({contentType:'image/webp',body:await readFile('public'+u.pathname)});
   if(u.pathname==='/fixture.js'||u.pathname==='/fixture.css')return route.fulfill({contentType:u.pathname.endsWith('js')?'application/javascript':'text/css',body:bundle.outputFiles.find(f=>f.path.endsWith(u.pathname.slice(1))).text});
   if(assisted&&['/api/drafts','/api/video-personalise','/api/video-characters'].includes(u.pathname)){
    assert.equal(req.headers()['x-fmi-assist'],invitation);
@@ -51,25 +54,46 @@ try{for(const width of [390,768]){
  for(const [index,scene] of def.photoSlots.entries()){
   const card=page.getByRole('article',{name:scene.label,exact:true});
   await card.waitFor();assert.equal(await page.locator('.vp-scene-upload').count(),1);
-  assert.equal(await card.getByRole('link',{name:'Open ChatGPT'}).getAttribute('href'),'https://chatgpt.com/');
-  await card.getByRole('button',{name:'Copy prompt'}).click();
+  if(index===1){await page.reload();await card.waitFor();}
+  if(index===2&&width===390){
+   assert.equal(await card.getByRole('button',{name:'Our drawing'}).getAttribute('aria-pressed'),'true');
+   await card.getByRole('button',{name:'Next',exact:true}).click();continue;
+  }
+  await card.getByRole('button',{name:'My photo',exact:true}).click();
+  assert.equal(await card.getByRole('link',{name:'ChatGPT',exact:true}).getAttribute('href'),'https://chatgpt.com/');
+  const tiles=await card.locator('.vp-image-choices button').evaluateAll(nodes=>nodes.map(x=>x.getBoundingClientRect().toJSON()));
+  assert.equal(tiles[0].top,tiles[1].top);assert.ok(tiles[1].right<=width);
+  const preview=page.locator('.vp-preview');if(width===390)assert.equal(await preview.isVisible(),false);
+  await card.getByText('Show prompt',{exact:true}).click();
+  assert.match(await card.getByLabel('Scene prompt').inputValue(),/Image 1 is my personal/);
+  await card.getByText('Show prompt',{exact:true}).click();
+  if(process.env.FMI_MOBILE_SCREENSHOT&&width===390&&index===0){
+   await card.locator('.vp-choice-art img').first().evaluate(img=>img.decode());
+   await page.locator('.vp-form-body').evaluate(el=>{el.scrollTop=0;});
+   await page.evaluate(()=>document.fonts.ready);await page.screenshot({path:process.env.FMI_MOBILE_SCREENSHOT});
+   const body=page.locator('.vp-form-body'),extra=await body.evaluate(el=>Math.max(0,el.scrollHeight-el.clientHeight));
+   await page.setViewportSize({width,height:844+extra+4});await page.waitForFunction(()=>{const el=document.querySelector('.vp-form-body');return el.scrollHeight<=el.clientHeight+4;});
+   await page.screenshot({path:process.env.FMI_MOBILE_SCREENSHOT.replace(/\.png$/,'-full.png')});
+   await page.setViewportSize({width,height:844});
+
+  }
+  await card.getByRole('button',{name:'Copy ChatGPT prompt'}).click();
   {
-   if(index===1){await page.reload();await card.waitFor();}
    assert.equal(await card.getByRole('button',{name:'Next',exact:true}).isEnabled(),false);
    if(index===0){
     await nav.getByRole('button',{name:/Review & download/}).click();
-    await page.getByRole('button',{name:'Continue scene uploads',exact:true}).click();await card.waitFor();
+    await page.getByRole('button',{name:'Continue scene choices',exact:true}).click();await card.waitFor();
    }
    await card.getByLabel('Upload '+scene.label,{exact:true}).setInputFiles({name:'scene.png',mimeType:'image/png',buffer:png});
   }
-  await card.getByRole('checkbox',{name:/I confirm this image/}).waitFor();
+  await card.getByRole('checkbox',{name:/I confirm this picture/}).waitFor();
   assert.equal(await card.getByRole('button',{name:'Next',exact:true}).isEnabled(),false);
-  await card.getByRole('checkbox',{name:/I confirm this image/}).check();
+  await card.getByRole('checkbox',{name:/I confirm this picture/}).check();
   await card.getByRole('button',{name:'Next',exact:true}).click();
   assert.equal(calls.includes('payment-order')||calls.includes('render'),false);
  }
- await page.locator('#video-confirm').waitFor();assert.equal(Object.keys(record.payload.content.photos).length,9);
- assert.equal(calls.filter(c=>c==='cutout').length,9);assert.equal(calls.includes('generation'),false);
+ await page.locator('#video-confirm').waitFor();assert.equal(Object.keys(record.payload.content.photos).length,assisted?9:8);assert.equal(Object.keys(record.payload.sceneChecks).length,9);
+ assert.equal(calls.filter(c=>c==='cutout').length,assisted?9:8);assert.equal(calls.includes('generation'),false);
  await page.locator('#video-confirm').check();
  if(!assisted){await page.getByRole('button',{name:/^Pay ₹/}).click();}
  await page.getByRole('button',{name:'Create my video',exact:true}).waitFor();assert.equal(calls.includes('render'),false);

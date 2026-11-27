@@ -176,6 +176,15 @@ test('a default-artwork download pins the same reception file that the form and 
  assert.equal(sha(f.records.get(images[0].key)),sha(await readFile('public'+art.path)));
 });
 
+test('mixed studio and personal scenes reach the pinned renderer with the exact uploaded cutout',async()=>{
+ const owner=uuid(960),invitation=uuid(961),slot='openingCouple',p={id:uuid(962),mode:'cutout',confirmed:true},photos={[slot]:p},f=renderFixture();
+ f.add(owner,invitation,photos,{characterSetId:undefined,sceneUpload:{slot,templateId:id,masterVersion:1},cutoutKey:'finished.png',cutoutSha256:hash('cutout')});
+ const checks=Object.fromEntries(ANBIL_AVAN_POSE_SLOTS.map(s=>[s,s===slot?p.id:'studio']));
+ await f.service.start(owner,{...definition.example,photos},id,invitation,1,checks);
+ const record=f.launched[0];assert.deepEqual(record.editorContent.photos,photos);assert.deepEqual(record.content.photos,{});
+ assert.equal(record.media.find(m=>m.slot===slot).cutoutKey,'finished.png');assert.equal(record.media.find(m=>m.slot==='receptionCouple').sha256,ANBIL_AVAN_DEFAULT_ART.receptionCouple.sha256);
+});
+
 test('exports bind all nine prepared layers from one owner-scoped set; raw uploads never fill a pose',async()=>{
  const owner=uuid(900),invitation=uuid(901),photos=allPoses(),f=renderFixture();f.add(owner,invitation,photos);
  const job=await f.service.start(owner,{...definition.example,photos},id,invitation,1);

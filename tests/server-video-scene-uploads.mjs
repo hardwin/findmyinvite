@@ -12,7 +12,7 @@ const definition=videoDefinition('film-anbil-avan-v1',1);
 test('the role shown in the prompt, review and saved selection belongs to this scene',async()=>{
  const scene=definition.photoSlots.find(s=>s.slot==='umbrellaBride'),names={bride:'Priya',groom:'Arun'};
  const prompt=sceneUploadPrompt(definition,scene,true,names);
- assert.match(prompt,/image 2 is the bride \(Priya\)/);assert.doesNotMatch(prompt,/Arun/);
+ assert.match(prompt,/bride \(Priya\)/);assert.match(prompt,/Image 1 is my personal photo/);assert.match(prompt,/Image 2 is the style sample/);assert.doesNotMatch(prompt,/Arun/);
  const photos=Object.fromEntries(definition.photoSlots.map(s=>[s.slot,{id:randomUUID(),mode:'cutout',confirmed:true}]));
  const checks=Object.fromEntries(Object.entries(photos).map(([k,p])=>[k,p.id]));
  const payload={content:{photos},personalPhotosEnabled:true,sceneChecks:checks,photoWorkflow:'scene-uploads',masterVersion:1};

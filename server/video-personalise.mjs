@@ -1,5 +1,6 @@
 import {ANBIL_AVAN_ID,ANBIL_AVAN_DEFAULT_ART,ANBIL_AVAN_PREVIEW} from '../shared/anbil-avan-video.mjs';
 import {isVersionedVideo,videoMasterVersion} from '../shared/video-master-version.mjs';
+import {studioCoupleLayer} from '../shared/scene-uploads.mjs';
 import {prepareSceneMaster} from './video-scene-details.mjs';
 import {videoMusicCatalog,videoDefaultMusic,pinVideoLibraryMusic} from './video-music.mjs';
 import {videoRenderLease} from '../shared/video-render-limits.mjs';
@@ -21,8 +22,8 @@ export async function loadVideoMaster(id=DEFAULT_VIDEO_ID,masterVersion){
 async function pinDefaultCharacter(slot,art,store){
  const bytes=await readFile(new URL('../public'+art.path,import.meta.url));
  if(hash(bytes)!==art.sha256)throw Error('The studio character checksum does not match.');
- const key='library/character-art/'+art.sha256+'.webp';
- try{await store.putBytes(key,bytes,'image/webp');}
+ const png=art.path.endsWith('.png'),key='library/character-art/'+art.sha256+(png?'.png':'.webp');
+ try{await store.putBytes(key,bytes,png?'image/png':'image/webp');}
  catch(error){const existing=await store.bytes(key).catch(()=>null);if(!existing||hash(existing)!==art.sha256)throw error;}
  return {id:'studio-'+art.sha256,kind:'image',mode:'prepared',slot,key,sha256:art.sha256};
 }
@@ -36,13 +37,15 @@ export function videoService({store=videoStore(),env=process.env,now=()=>Date.no
  async function media(owner,id){if(!/^[a-f0-9-]{36}$/.test(id||''))throw new HttpError(400,'Invalid media reference.');return ownedRecord(await read('media/'+id+'.json'),owner,now());}
  async function job(owner,id){if(!/^[a-f0-9]{64}$/.test(id||''))throw new HttpError(400,'Invalid render reference.');const j=ownedRecord(await read('jobs/'+id+'.json'),owner,now());return stale(j)?{...j,status:'failed',error:'The render was interrupted. Your details are saved; please retry.'}:j;}
  const stale=j=>['queued','running'].includes(j.status)&&now()-Date.parse(j.createdAt)>=videoRenderLease(j.master);
- async function start(owner,input,templateId=DEFAULT_VIDEO_ID,invitationId,masterVersion){
-  let master=await masterLoader(templateId,masterVersion);requireVideoRelease(master,env);let content;try{content=normalizeVideoContent(input,{complete:true,templateId:master.id,masterVersion:master.version});}catch(e){throw new HttpError(400,e.message);}try{master=await prepareSceneMaster(master,content);}catch(e){throw new HttpError(400,e.message);}const refs=[];
+ async function start(owner,input,templateId=DEFAULT_VIDEO_ID,invitationId,masterVersion,sceneChecks){
+  let master=await masterLoader(templateId,masterVersion);requireVideoRelease(master,env);let content;try{content=normalizeVideoContent(input,{complete:true,templateId:master.id,masterVersion:master.version,sceneChecks});}catch(e){throw new HttpError(400,e.message);}try{master=await prepareSceneMaster(master,content);}catch(e){throw new HttpError(400,e.message);}const refs=[];
   // Character-profile designs bind generated layers to one owner-scoped character set.
   const profile=videoDefinition(master.id,master.version).characterProfile;
   for(const [slot,p] of Object.entries(content.photos)){const m=await media(owner,p.id);if(m.kind!=='image'||m.status!=='ready'||p.mode==='cutout'&&!m.cutoutKey||p.mode==='prepared'&&((profile?m.characterProfile!==profile.id||m.characterMasterVersion!==master.version||!/^[a-f0-9-]{36}$/.test(m.characterSetId||''):!m.characterJobId)||m.characterSlot!==slot||m.invitationId!==invitationId))throw new HttpError(400,'Prepare and confirm the '+slot+' photo.');refs.push({...m,slot,mode:p.mode});}
   if(refs.some(r=>r.mode==='cutout'&&(profile||r.sceneUpload)&&(r.invitationId!==invitationId||r.sceneUpload?.slot!==r.slot||r.sceneUpload?.templateId!==master.id||r.sceneUpload?.masterVersion!==master.version)))throw new HttpError(409,'Choose the saved upload for this scene.');
   if(profile&&new Set(refs.filter(r=>r.mode==='prepared').map(r=>r.characterSetId)).size>1)throw new HttpError(409,'Use every character from one approved set.');
+  const studioPair=sceneChecks?.couple==='studio'&&!content.photos.couple&&(content.photos.groom||content.photos.bride)&&studioCoupleLayer(master.id,master);
+  if(studioPair)refs.push(await pinDefaultCharacter('couple',studioPair,store));
   for(const [slot,art] of Object.entries(master.defaultCharacterArt||{})){
    if(!content.photos[slot])refs.push(await pinDefaultCharacter(slot,art,store));
   }
@@ -54,7 +57,10 @@ export function videoService({store=videoStore(),env=process.env,now=()=>Date.no
   const lockKey='locks/'+hash(owner)+'.json',lock=await store.read(lockKey);
   if(lock?.value.until>now())throw new HttpError(409,'Your previous video is still rendering.');
   const attempt=randomUUID();try{await store.save(lockKey,{jobId:id,attempt,until:now()+videoRenderLease(master)},lock?{etag:lock.etag}:{create:true});}catch{throw new HttpError(409,'A render is already starting.');}
-  const secret=randomBytes(32).toString('hex');const record={id,owner,attempt,invitationId,templateId:master.id,master,masterHash:hash(master),content,contentRevision:hash(content),media:refs,secretHash:hash(secret),status:'queued',progress:0,createdAt:new Date(now()).toISOString(),expiresAt:new Date(now()+VIDEO_TTL).toISOString()};
+  // The pinned layered renderer reads cutouts from verified media by slot. Its older
+  // form normalizer accepts an empty photo map or a complete legacy prepared set.
+  const separateLayers=profile&&(Object.values(content.photos).some(p=>p.mode==='cutout')||Object.keys(content.photos).length>0&&Object.keys(content.photos).length<profile.poses.length);
+  const secret=randomBytes(32).toString('hex');const record={id,owner,attempt,invitationId,templateId:master.id,master,masterHash:hash(master),content:separateLayers?{...content,photos:{}}:content,...(separateLayers?{editorContent:content}:{}),contentRevision:hash(content),media:refs,secretHash:hash(secret),status:'queued',progress:0,createdAt:new Date(now()).toISOString(),expiresAt:new Date(now()+VIDEO_TTL).toISOString()};
   try{await store.save('jobs/'+id+'.json',record);if(!launch)throw Error('Video rendering is not configured.');await launch(record,secret);}catch(e){try{await finish(id,secret,{status:'failed'});}catch(cleanup){console.error('Video failed-state update:',cleanup.name);}throw e;}
   return publicJob(record);
  }

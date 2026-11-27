@@ -30,7 +30,7 @@ export async function validatePreparedCharacters(owner,invitationId,photos,query
  if(draft?.payload?.photoWorkflow===SCENE_UPLOAD_WORKFLOW){
   const payload=draft.payload,definition=videoDefinition(templateId,isVersionedVideo(templateId)?videoDraftVersion(templateId,payload):undefined);
   if(payload.personalPhotosEnabled){
-   if(!uploadedEveryScene(definition,photos,payload.sceneChecks)||uploadScenes(definition).some(({slot})=>{const saved=payload.content?.photos?.[slot];return saved?.id!==photos[slot].id||saved?.mode!==photos[slot].mode||!saved?.confirmed;}))throw new HttpError(409,'Review and confirm each scene image first.');
+   if(!uploadedEveryScene(definition,photos,payload.sceneChecks)||uploadScenes(definition).some(({slot})=>{const saved=payload.content?.photos?.[slot];const chosen=photos?.[slot];return saved?.id!==chosen?.id||saved?.mode!==chosen?.mode||!!saved&&!saved.confirmed;}))throw new HttpError(409,'Review and confirm each scene image first.');
    if(definition.characterProfile&&Object.values(photos).some(p=>!['prepared','cutout'].includes(p.mode)))throw new HttpError(409,'Choose a finished scene image.');
   }else if(Object.keys(photos||{}).length)throw new HttpError(409,'Choose personal images to include them in the video.');
   if(definition.characterProfile){

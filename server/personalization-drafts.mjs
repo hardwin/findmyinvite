@@ -51,7 +51,7 @@ export function draftService({query=db,store=videoStore()}={}){
   const missing=purchases.filter(p=>!known.has(p.id));
   if(missing.length){
    const restored=new Map();for(const file of await store.list('jobs/')){const j=(await store.read(file))?.value;if(j?.owner===owner&&missing.some(p=>p.id===j.invitationId)){const old=restored.get(j.invitationId);if(!old||j.createdAt>old.createdAt)restored.set(j.invitationId,j);}}
-   for(const p of missing){const j=restored.get(p.id);items.push({id:p.id,kind:'video',templateId:p.template_id,revision:0,payload:j?{...(isVersionedVideo(p.template_id)?{masterVersion:j.master?.version||1}:{}),content:j.content,step:7,formStepId:'review',formVersion:2,jobContent:JSON.stringify(j.content)}:{missingDetails:true},lastJobId:j?.id,updatedAt:j?.createdAt||p.created_at});}
+   for(const p of missing){const j=restored.get(p.id);items.push({id:p.id,kind:'video',templateId:p.template_id,revision:0,payload:j?{...(isVersionedVideo(p.template_id)?{masterVersion:j.master?.version||1}:{}),content:j.editorContent||j.content,step:7,formStepId:'review',formVersion:2,jobContent:JSON.stringify(j.editorContent||j.content)}:{missingDetails:true},lastJobId:j?.id,updatedAt:j?.createdAt||p.created_at});}
   }
   const versionIds=[...new Set(items.filter(d=>d.kind==='website').map(d=>d.templateId))];
   const versions=versionIds.length?await query('template_versions?id=in.('+versionIds.join(',')+')&select=id,template_id'):[];
