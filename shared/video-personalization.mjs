@@ -56,11 +56,11 @@ export function normalizeVideoContent(input,{complete=false,templateId=VIDEO_ID,
  out.photos={};
  if(templateId===WEDDING_BELLS_ID&&Object.keys(input.photos||{}).length)throw Error('Wedding Bells currently preserves the original characters.');
  const catalog=catalogVideo(templateId),characterSet=!!definition.characterProfile;
- // Character-profile designs accept only server-prepared layers, never raw uploads.
- const modes=characterSet?['prepared']:catalog?['frame','cutout']:['cutout','frame','prepared'];
+ // Character layers come from reviewed legacy sets or transparent scene uploads.
+ const modes=characterSet?['prepared','cutout']:catalog?['frame','cutout']:['cutout','frame','prepared'];
  for(const slot of catalog?definition.photoSlots.map(p=>p.slot):PHOTO_SLOTS){const p=input.photos?.[slot];if(!p)continue;if(!/^[a-f0-9-]{36}$/.test(p.id||'')||!modes.includes(p.mode)||p.confirmed!==true)throw Error('Confirm the '+slot+' photo presentation.');out.photos[slot]={id:p.id,mode:p.mode,confirmed:true};}
  // One approved set covers every scene; otherwise the original illustrations remain.
- if(characterSet&&Object.keys(out.photos).length&&Object.keys(out.photos).length!==definition.photoSlots.length)throw Error('Use every character from one approved set, or the original illustrations.');
+ if(complete&&characterSet&&Object.keys(out.photos).length&&Object.keys(out.photos).length!==definition.photoSlots.length)throw Error('Use every character from one approved set, or the original illustrations.');
  const music=definition===designerOonjal?fixedRecording:definition.lockedMusic||input.music||{mode:'none'};
  if(!['none','library','upload'].includes(music.mode))throw Error('Choose music or silence.');
  out.music={mode:music.mode};

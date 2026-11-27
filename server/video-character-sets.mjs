@@ -48,7 +48,7 @@ export function characterSetRepository(query=db){
  };
 }
 
-export function characterSetService({query=db,repo=characterSetRepository(query),store=videoStore(),provider=replicateProvider(),payments=videoPaymentService(),drafts=draftService({query,store}),clock=()=>Date.now(),masterLoader=loadVideoMaster,readAsset=path=>readFile('public'+path),align=alignToReference,identityImage=normalizeIdentity,callback='https://findmyinvite.com/api/video-characters?action=asset-callback&id='}={}){
+export function characterSetService({allowSubmission=true,query=db,repo=characterSetRepository(query),store=videoStore(),provider=replicateProvider(),payments=videoPaymentService(),drafts=draftService({query,store}),clock=()=>Date.now(),masterLoader=loadVideoMaster,readAsset=path=>readFile('public'+path),align=alignToReference,identityImage=normalizeIdentity,callback='https://findmyinvite.com/api/video-characters?action=asset-callback&id='}={}){
  const iso=()=>new Date(clock()).toISOString();
  const media=(owner,id)=>videoService({store,now:clock}).media(owner,id);
  const inventories=new Map(),references=new Map();
@@ -206,6 +206,7 @@ export function characterSetService({query=db,repo=characterSetRepository(query)
    const {profile,inventory}=await profileFor(draft);if(set.profile!==profile.id)throw Error('Character profile changed.');
    let prediction;stage='provider';
    if(a.status==='queued'){
+    if(!allowSubmission){await finish({status:'failed',error:'Upload your scene image in Photos to continue.'});return;}
     if(a.attempts>=3){await finish({status:'failed',error:EXHAUSTED});return;}
     // Preserve this queue window across rejected submissions. A customer retry
     // starts a fresh window even when the asset itself was created days ago.

@@ -41,7 +41,8 @@ export function videoService({store=videoStore(),env=process.env,now=()=>Date.no
   // Character-profile designs bind generated layers to one owner-scoped character set.
   const profile=videoDefinition(master.id,master.version).characterProfile;
   for(const [slot,p] of Object.entries(content.photos)){const m=await media(owner,p.id);if(m.kind!=='image'||m.status!=='ready'||p.mode==='cutout'&&!m.cutoutKey||p.mode==='prepared'&&((profile?m.characterProfile!==profile.id||m.characterMasterVersion!==master.version||!/^[a-f0-9-]{36}$/.test(m.characterSetId||''):!m.characterJobId)||m.characterSlot!==slot||m.invitationId!==invitationId))throw new HttpError(400,'Prepare and confirm the '+slot+' photo.');refs.push({...m,slot,mode:p.mode});}
-  if(profile&&new Set(refs.map(r=>r.characterSetId)).size>1)throw new HttpError(409,'Use every character from one approved set.');
+  if(refs.some(r=>r.mode==='cutout'&&(profile||r.sceneUpload)&&(r.invitationId!==invitationId||r.sceneUpload?.slot!==r.slot||r.sceneUpload?.templateId!==master.id||r.sceneUpload?.masterVersion!==master.version)))throw new HttpError(409,'Choose the saved upload for this scene.');
+  if(profile&&new Set(refs.filter(r=>r.mode==='prepared').map(r=>r.characterSetId)).size>1)throw new HttpError(409,'Use every character from one approved set.');
   for(const [slot,art] of Object.entries(master.defaultCharacterArt||{})){
    if(!content.photos[slot])refs.push(await pinDefaultCharacter(slot,art,store));
   }

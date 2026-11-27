@@ -1,0 +1,15 @@
+.vp-scene-upload{margin:1rem 0;padding:1rem;border:1px solid #dfced6;border-radius:1rem;background:#fffaf7}
+.vp-scene-upload h3{margin:.3rem 0 .8rem}
+.vp-scene-upload ol{padding-left:1.35rem;line-height:1.5}
+.vp-scene-upload li+li{margin-top:.4rem}
+.vp-scene-reference,.vp-scene-tools{display:flex;align-items:center;flex-wrap:wrap;gap:.75rem}
+.vp-scene-reference>img{width:6rem;height:7rem;object-fit:contain;background:#f3ece7;border-radius:.4rem}
+.vp-scene-upload figure{margin:1rem 0;text-align:center}
+.vp-scene-upload figure img{width:100%;height:clamp(10rem,30vh,19rem);object-fit:contain;background:#f3ece7;border-radius:.5rem}
+.vp-scene-upload figcaption,.vp-scene-upload [role=status]{font-size:.9rem}
+.vp-scene-upload [role=status]:empty{display:none}
+.vp-scene-upload label{display:grid;gap:.4rem;margin:1rem 0}
+.vp-scene-upload label.vp-choice{display:flex;align-items:flex-start;gap:.65rem}
+.vp-scene-upload input,.vp-scene-upload textarea{max-width:100%}
+.vp-scene-tools button,.vp-scene-tools a,.vp-scene-reference a{min-height:44px;display:inline-flex;align-items:center}
+.vp-scene-tools .vp-primary{margin-left:auto}

@@ -16,8 +16,9 @@ import {requireVideoVisibility} from '../server/video-visibility.mjs';
 import {videoStore,hash,VIDEO_TTL} from '../server/video-personalise-store.mjs';
 import {videoConfig,videoService,publicJob,loadVideoMaster,requireVideoRelease} from '../server/video-personalise.mjs';
 import {launchVideoRender,stopVideoSandbox} from '../server/video-personalise-cloud.mjs';
-import {prepareIllustratedPhoto} from '../server/video-scene-photo-option.mjs';
+import {SCENE_UPLOAD_WORKFLOW,uploadScenes,uploadedEveryScene} from '../shared/scene-uploads.mjs';
 import {photoCutout} from '../server/video-photo-cutout.mjs';
+import {validateSceneUpload} from '../server/video-scene-upload.mjs';
 import {matchesMediaType} from '../server/template-file-validation.mjs';
 import {mediaRange} from '../server/template-media-range.mjs';
 import {videoDefinition,DEFAULT_VIDEO_ID} from '../shared/video-personalization.mjs';
@@ -87,23 +88,29 @@ export default async function handler(req,res){const store=videoStore(),service=
   await requireVideoVisibility(req,templateId,b.invitationId,{user});
   requireVideoRelease(await loadVideoMaster(templateId),process.env);
   await rate(req,'video-'+(action==='payment-promo'?'promo':'checkout')+':'+user.id,action==='payment-promo'?10:60,3600);
-  await draftService({store}).get(user.id,b.invitationId,{optional:true});const payments=videoPaymentService(),args=[user.id,b.invitationId,templateId];
+  const draft=await draftService({store}).get(user.id,b.invitationId,{optional:true});
+  if(['payment-order','payment-promo'].includes(action)&&draft?.payload?.personalPhotosEnabled){
+   const payload=draft.payload,definition=videoDefinition(templateId,isVersionedVideo(templateId)?videoDraftVersion(templateId,payload):undefined);
+   if((payload.photoWorkflow===SCENE_UPLOAD_WORKFLOW||definition.characterProfile)&&(!uploadedEveryScene(definition,payload.content?.photos,payload.sceneChecks)||Object.keys(payload.pending||{}).some(k=>k!=='__music')))throw new HttpError(409,'Finish uploading and confirming each scene before checkout.');
+   if(payload.photoWorkflow===SCENE_UPLOAD_WORKFLOW){await validatePreparedCharacters(user.id,draft.id,payload.content?.photos,undefined,{templateId,draft});await Promise.all(Object.entries(payload.content?.photos||{}).map(async([slot,p])=>{const m=await service.media(user.id,p.id);if(m.invitationId!==draft.id||m.status!=='ready'||p.mode==='cutout'&&(!m.cutoutKey||m.sceneUpload&&m.sceneUpload.slot!==slot))throw new HttpError(409,'Finish the upload for '+slot+' before checkout.');}));}
+  }
+  const payments=videoPaymentService(),args=[user.id,b.invitationId,templateId];
   const result=action==='payment-status'?await payments.status(...args):action==='payment-order'?await payments.order(...args):action==='payment-promo'?await payments.promo(...args,b.code):await payments.verify(...args,b);
   if(b.analytics)waitUntil(recordVideoCheckout(req,action,result,b.analytics,templateId).catch(()=>console.warn('Video checkout reporting could not be saved.')));
   return respond(res,200,result);
  }
- if(action==='reserve'){method(req,['POST']);const b=await bodyJson(req);await requireVideoVisibility(req,b.templateId||DEFAULT_VIDEO_ID,b.invitationId,{user});requireVideoRelease(await loadVideoMaster(b.templateId||DEFAULT_VIDEO_ID),process.env);await rate(req,'video-upload:'+user.id,40,3600);if(!types[b.kind])throw new HttpError(400,'Unsupported media type.');const draft=b.invitationId?await draftService({store}).get(user.id,b.invitationId):null;const id=randomUUID(),key=draft?'persistent/'+user.id+'/'+draft.id+'/'+id+'/original':'uploads/'+user.id+'/'+id;await store.save('media/'+id+'.json',{id,owner:user.id,kind:b.kind,key,status:'pending',...(draft?{invitationId:draft.id,durable:true,expiresAt:null}:{expiresAt:new Date(Date.now()+VIDEO_TTL).toISOString()})},{create:true});return respond(res,201,{id,pathname:store.prefix+key});}
+ if(action==='reserve'){method(req,['POST']);const b=await bodyJson(req);await requireVideoVisibility(req,b.templateId||DEFAULT_VIDEO_ID,b.invitationId,{user});requireVideoRelease(await loadVideoMaster(b.templateId||DEFAULT_VIDEO_ID),process.env);await rate(req,'video-upload:'+user.id,40,3600);if(!types[b.kind])throw new HttpError(400,'Unsupported media type.');const draft=b.invitationId?await draftService({store}).get(user.id,b.invitationId):null;let sceneUpload;
+ if(b.sceneSlot){
+  if(b.kind!=='image'||!draft||draft.template_id!==b.templateId)throw new HttpError(400,'Open the invitation before uploading a scene.');
+  const master=await loadVideoMaster(draft.template_id,isVersionedVideo(draft.template_id)?videoDraftVersion(draft.template_id,draft.payload):undefined);
+  if(!uploadScenes(videoDefinition(master.id,master.version)).some(s=>s.slot===b.sceneSlot))throw new HttpError(400,'Choose an editable scene.');
+  sceneUpload={templateId:master.id,masterVersion:master.version,slot:b.sceneSlot};
+ }
+ const id=randomUUID(),key=draft?'persistent/'+user.id+'/'+draft.id+'/'+id+'/original':'uploads/'+user.id+'/'+id;await store.save('media/'+id+'.json',{id,owner:user.id,kind:b.kind,key,status:'pending',...(sceneUpload?{sceneUpload}:{}),...(draft?{invitationId:draft.id,durable:true,expiresAt:null}:{expiresAt:new Date(Date.now()+VIDEO_TTL).toISOString()})},{create:true});return respond(res,201,{id,pathname:store.prefix+key});}
  if(action==='local-upload'){method(req,['POST']);if(!store.local)throw new HttpError(404,'Unknown video action.');const m=await service.media(user.id,q.get('id'));if(m.status!=='pending')throw new HttpError(409,'Upload already completed.');const type=String(req.headers['content-type']||'').split(';')[0];if(!types[m.kind].includes(type))throw new HttpError(400,'Unsupported file type.');const chunks=[];let length=0;for await(const chunk of req){length+=chunk.length;if(length>limits[m.kind])throw new HttpError(413,'File exceeds the upload limit.');chunks.push(chunk);}const bytes=Buffer.concat(chunks);if(bytes.length<12||!uploadSignature(bytes,type))throw new HttpError(400,'The file contents do not match its type.');await store.putBytes(m.key,bytes,type);const current=await store.read('media/'+m.id+'.json');await store.save('media/'+m.id+'.json',{...m,status:'ready',sha256:hash(bytes),contentType:type,bytes:bytes.length},{etag:current.etag});return respond(res,200,{id:m.id});}
  if(action==='complete'){method(req,['POST']);const m=await service.media(user.id,q.get('id'));if(m.status==='ready')return respond(res,200,{id:m.id});const meta=await head(store.prefix+m.key);if(!types[m.kind].includes(meta.contentType)||meta.size>limits[m.kind]||meta.size<12)throw new HttpError(400,'Unsupported file type or size.');const bytes=await store.bytes(m.key);if(!uploadSignature(bytes,meta.contentType))throw new HttpError(400,'The file contents do not match its type.');const current=await store.read('media/'+m.id+'.json');await store.save('media/'+m.id+'.json',{...m,status:'ready',sha256:hash(bytes),contentType:meta.contentType,bytes:bytes.length},{etag:current.etag});return respond(res,200,{id:m.id});}
- if(action==='illustrate-photo'){
-  method(req,['POST']);const b=await bodyJson(req,2000),chosen=await service.media(user.id,q.get('id')),draft=await draftService({store}).get(user.id,chosen.invitationId);
-  if(chosen.sceneOption&&chosen.sceneOption.slot!==b.slot)throw new HttpError(400,'Choose the saved reference for this scene.');
-  const media=chosen.sceneOption?await service.media(user.id,chosen.sceneOption.source):chosen;
-  await videoPaymentService().requireAccess(user.id,draft.id,draft.template_id);
-  const result=await prepareIllustratedPhoto({store,media,draft,slot:b.slot,optionId:b.optionId,onStart:()=>rate(req,'video-scene-illustration:'+user.id,12,3600)});
-  return respond(res,result.ready?200:202,result);
- }
- if(action==='cutout'){method(req,['GET','POST']);const media=await service.media(user.id,q.get('id'));if(media.sceneOption&&req.method==='POST')throw new HttpError(400,'Use the scene illustration option.');const result=await photoCutout(store,media,{start:req.method==='POST',onStart:()=>rate(req,'video-cutout:'+user.id,12,3600)});return respond(res,result.ready?200:202,result);}
+ if(action==='illustrate-photo')throw new HttpError(410,'Reopen Photos to upload your scene image.');
+ if(action==='cutout'){method(req,['GET','POST']);const media=await service.media(user.id,q.get('id'));if(media.sceneOption&&req.method==='POST')throw new HttpError(400,'Use the scene illustration option.');if(media.sceneUpload&&req.method==='POST'&&!media.cutoutKey){const draft=await draftService({store}).get(user.id,media.invitationId);await validateSceneUpload(media,draft,id=>service.media(user.id,id));}const result=await photoCutout(store,media,{start:req.method==='POST',onStart:()=>rate(req,'video-cutout:'+user.id,12,3600)});return respond(res,result.ready?200:202,result);}
  if(action==='render'){method(req,['POST']);const b=await bodyJson(req,64000),templateId=b.templateId||DEFAULT_VIDEO_ID;await requireVideoVisibility(req,templateId,b.invitationId,{user});const savedDraft=await draftService({store}).get(user.id,b.invitationId,{optional:true});if(savedDraft&&savedDraft.template_id!==templateId)throw new HttpError(404,'Invitation not found.');const purchase=await videoPaymentService().requireAccess(user.id,b.invitationId,templateId);await rate(req,'video-render:'+user.id,5,3600);await validatePreparedCharacters(user.id,purchase.id,b.content?.photos,undefined,{templateId,draft:savedDraft});const job=await service.start(user.id,b.content,templateId,purchase.id,isVersionedVideo(templateId)?videoDraftVersion(templateId,savedDraft?.payload):undefined);await db('personalization_drafts?id=eq.'+purchase.id+'&owner_id=eq.'+user.id,{method:'PATCH',body:{last_job_id:job.id}});return respond(res,202,job);}
  if(action==='status'){method(req,['GET']);const job=await service.job(user.id,q.get('id'));waitUntil(stopCompletedRender(store,job));return respond(res,200,publicJob(job));}
  if(action==='delivery-link'){method(req,['GET']);const job=await service.job(user.id,q.get('id'));return respond(res,200,deliveryLink(job));}

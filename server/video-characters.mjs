@@ -13,7 +13,7 @@ export const CHARACTER_STALL_MS=10*60*1000;
 const jsonEqual=(a,b)=>JSON.stringify(Object.entries(a||{}).sort())===JSON.stringify(Object.entries(b||{}).sort());
 const referenceSignature=refs=>refs.map(({sha256,identity})=>({sha256,identity}));
 export function characterJobView(j){return {id:j.id,slot:j.slot,kind:j.kind,status:j.status,approved:j.approved_current,mediaId:j.output_media_id,error:j.error,createdAt:j.created_at,basis:j.basis};}
-export function characterService({query=db,store=videoStore(),provider=replicateProvider(),align=alignCharacter,env=process.env,clock=()=>Date.now()}={}){
+export function characterService({allowSubmission=true,query=db,store=videoStore(),provider=replicateProvider(),align=alignCharacter,env=process.env,clock=()=>Date.now()}={}){
  const one=async(path,options)=>(await query(path,options))?.[0]||null;
  const patch=(id,body,filter='',progress=true)=>one(table+'?id=eq.'+id+filter,{method:'PATCH',headers:{Prefer:'return=representation'},body:{...body,...(progress?{updated_at:new Date(clock()).toISOString()}:{})}});
  const drafts=draftService({query,store});
@@ -54,6 +54,7 @@ export function characterService({query=db,store=videoStore(),provider=replicate
   try{
    let prediction;
    if(j.status==='queued'){
+    if(!allowSubmission){await finish({status:'failed',error:'Upload your scene image in Photos to continue.'});return;}
     if(j.attempts>=3){await finish({status:'failed',error:'Automatic retries are exhausted. Contact support; your photos, payment and redo allowance are saved.'});return;}
     stage='references';
     const template='data:image/png;base64,'+(await original(j.slot,draft)).toString('base64'),refs=[];for(const ref of j.reference_data){const m=await videoService({store}).media(j.owner_id,ref.id),bytes=await store.bytes(m.key);if(hash(bytes)!==ref.sha256)throw Error('A saved reference changed.');refs.push({bytes,url:'data:'+m.contentType+';base64,'+bytes.toString('base64')});}

@@ -62,7 +62,7 @@
     "api/video-personalise.mjs": {
       "maxDuration": 300,
       "memory": 1024,
-      "includeFiles": "public/assets/{video-masters/{*/*.json,{temple*,kerala*}/**/*.png},video-scenes/{v1/editor/*.js,anbil*/{content.js,assets/reception-shoulder*},were-next*/assets/couple*,v1/web/*/page/assets/img/{c_*,couple,bride,groom,baby,blue/baby}.*},music-library/*}"
+      "includeFiles": "public/assets/{video-masters/{*/*.json,{temple*,kerala*}/**/*.png},video-scenes/{v1/editor/*.js,anbil*/{content.js,assets/*_{cutout,print}-*},were-next*/assets/couple*,v1/web/*/page/assets/img/{c_*,couple,bride,groom,baby,blue/baby}.*},music-library/*}"
     },
     "api/video-characters.mjs": {
       "maxDuration": 300,

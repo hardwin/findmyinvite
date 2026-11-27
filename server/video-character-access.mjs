@@ -1,6 +1,8 @@
+import {SCENE_UPLOAD_WORKFLOW,uploadScenes,uploadedEveryScene} from '../shared/scene-uploads.mjs';
+import {videoDefinition} from '../shared/video-personalization.mjs';
 import {db,HttpError} from './core.mjs';
 import {catalogVideo} from '../shared/video-catalog.mjs';
-import {videoDraftVersion} from '../shared/video-master-version.mjs';
+import {videoDraftVersion,isVersionedVideo} from '../shared/video-master-version.mjs';
 export function characterEnabled(owner,env=process.env){return env.VIDEO_CHARACTERS_ENABLED==='1'||String(env.VIDEO_CHARACTER_QA_OWNERS||'').split(',').includes(owner);}
 // Character sets have their own gate: Temple's flag never enables billable generation
 // for a design whose real provider proof has not been qualified. 'qa' = QA owners only.
@@ -25,6 +27,22 @@ async function validateCharacterSet(owner,invitationId,photos,{templateId,draft,
  if(selected.length!==profile.poses.length||profile.poses.some(pose=>{const p=photos[pose.slot];return p?.mode!=='prepared'||!p.id||assets.find(a=>a.asset==='pose:'+pose.slot)?.output_media_id!==p.id;}))throw new HttpError(409,'Your characters changed. Review and approve the latest set before exporting.');
 }
 export async function validatePreparedCharacters(owner,invitationId,photos,query=db,{templateId,draft}={}){
+ if(draft?.payload?.photoWorkflow===SCENE_UPLOAD_WORKFLOW){
+  const payload=draft.payload,definition=videoDefinition(templateId,isVersionedVideo(templateId)?videoDraftVersion(templateId,payload):undefined);
+  if(payload.personalPhotosEnabled){
+   if(!uploadedEveryScene(definition,photos,payload.sceneChecks)||uploadScenes(definition).some(({slot})=>{const saved=payload.content?.photos?.[slot];return saved?.id!==photos[slot].id||saved?.mode!==photos[slot].mode||!saved?.confirmed;}))throw new HttpError(409,'Review and confirm each scene image first.');
+   if(definition.characterProfile&&Object.values(photos).some(p=>!['prepared','cutout'].includes(p.mode)))throw new HttpError(409,'Choose a finished scene image.');
+  }else if(Object.keys(photos||{}).length)throw new HttpError(409,'Choose personal images to include them in the video.');
+  if(definition.characterProfile){
+   const retained=Object.entries(photos||{}).filter(([,p])=>p.mode==='prepared');
+   if(retained.length){
+    const [approved]=await query('video_character_sets?invitation_id=eq.'+invitationId+'&owner_id=eq.'+owner+'&approved_current=eq.true&status=eq.approved&select=id');
+    const assets=approved?await query('video_character_assets?set_id=eq.'+approved.id+'&status=eq.ready&select=asset,output_media_id'):[];
+    if(retained.some(([slot,p])=>!assets.some(a=>a.asset==='pose:'+slot&&a.output_media_id===p.id)))throw new HttpError(409,'Upload the finished image for each scene before continuing.');
+   }
+   return;
+  }
+ }
  const profile=catalogVideo(templateId)?.characterProfile;
  if(profile)return validateCharacterSet(owner,invitationId,photos,{templateId,draft,query,profile});
  const selected=Object.entries(photos||{}).filter(([,p])=>p.mode==='prepared');if(!selected.length)return;

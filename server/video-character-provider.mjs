@@ -45,6 +45,7 @@ export function replicateProvider(env=process.env){
   if(!r.ok){const detail=await r.json().catch(()=>({}));const e=new HttpError(r.status===429?429:503,'Character preparation is temporarily unavailable. Please retry.');e.providerStatus=r.status;e.providerDiagnostic=JSON.stringify(detail.detail||detail.error||detail.title||'').replace(/data:[^\s"]+/g,'[image]').slice(0,1200);console.error('Replicate request rejected',r.status,e.providerDiagnostic);throw e;}return r.json();
  }
  return {
+  sceneBackgroundMask:(image,webhook)=>request('models/'+CHARACTER_MODEL+'/predictions',{method:'POST',body:{input:{input_images:[image],prompt:'Remove only the background. Preserve the exact foreground outline, position, pose, clothing, pixels and canvas framing. Return a transparent PNG at the same aspect ratio.',quality:'low',complexity:'low',aspect_ratio:'auto',output_format:'png',background:'transparent',number_of_images:1},webhook,webhook_events_filter:['completed']}}),
   removeBackground:(image,webhook)=>request('predictions',{method:'POST',wait:false,body:{version:BACKGROUND_MODEL_VERSION,input:{image,format:'png',background_type:'rgba'},...(webhook?{webhook,webhook_events_filter:['completed']}: {})}}),
   create:(input,webhook,wait=true)=>request('models/'+CHARACTER_MODEL+'/predictions',{method:'POST',wait,body:{input,...(webhook?{webhook,webhook_events_filter:['completed']}: {})}}),
   get:id=>request('predictions/'+encodeURIComponent(id)),
